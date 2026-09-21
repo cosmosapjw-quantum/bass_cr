@@ -1,0 +1,129 @@
+{
+  "bgrid_allowed": false,
+  "jobs": {
+    "tdl_imag025_long": {
+      "config": {
+        "absorber_power": 0.125,
+        "absorber_reference_dt": 0.05,
+        "absorber_width": 4.0,
+        "b": 2.0,
+        "backend": "auto",
+        "capture_plane": 30.0,
+        "checkpoint_stride": 100,
+        "dt": 0.05,
+        "energy_keV_per_u": 100.0,
+        "grid": {
+          "dx": 0.4,
+          "xlim": [
+            -30,
+            40
+          ],
+          "ylim": [
+            -30,
+            30
+          ],
+          "zlim": [
+            -30,
+            90
+          ]
+        },
+        "imag_dt": 0.025,
+        "imag_steps": 1200,
+        "initial_state": "imag_time",
+        "project_nmax": 3,
+        "projection_slab_x": 2,
+        "z_start": -30.0,
+        "z_stop": 60.0
+      },
+      "lane": "tdl",
+      "question": "Preparation duration; compare against tdl_imag025.",
+      "scientific_admission": false
+    },
+    "tdl_refined_dx03125": {
+      "config": {
+        "absorber_power": 0.125,
+        "absorber_reference_dt": 0.05,
+        "absorber_width": 4.0,
+        "b": 2.0,
+        "backend": "auto",
+        "capture_plane": 30.0,
+        "checkpoint_stride": 100,
+        "dt": 0.05,
+        "energy_keV_per_u": 100.0,
+        "grid": {
+          "dx": 0.3125,
+          "xlim": [
+            -30,
+            40
+          ],
+          "ylim": [
+            -30,
+            30
+          ],
+          "zlim": [
+            -30,
+            90
+          ]
+        },
+        "imag_dt": 0.025,
+        "imag_steps": 1200,
+        "initial_state": "imag_time",
+        "project_nmax": 3,
+        "projection_slab_x": 2,
+        "z_start": -30.0,
+        "z_stop": 60.0
+      },
+      "lane": "tdl",
+      "question": "Spatial spacing only versus tdl_imag025_long; identical fixed CAP and imaginary-time preparation",
+      "scientific_admission": false
+    },
+    "tdl_refined_dx025": {
+      "config": {
+        "absorber_power": 0.125,
+        "absorber_reference_dt": 0.05,
+        "absorber_width": 4.0,
+        "b": 2.0,
+        "backend": "auto",
+        "capture_plane": 30.0,
+        "checkpoint_stride": 100,
+        "dt": 0.05,
+        "energy_keV_per_u": 100.0,
+        "grid": {
+          "dx": 0.25,
+          "xlim": [
+            -30,
+            40
+          ],
+          "ylim": [
+            -30,
+            30
+          ],
+          "zlim": [
+            -30,
+            90
+          ]
+        },
+        "imag_dt": 0.025,
+        "imag_steps": 1200,
+        "initial_state": "imag_time",
+        "project_nmax": 3,
+        "projection_slab_x": 2,
+        "z_start": -30.0,
+        "z_stop": 60.0
+      },
+      "lane": "tdl",
+      "question": "Spatial spacing only versus tdl_imag025_long; identical fixed CAP and imaginary-time preparation",
+      "scientific_admission": false
+    }
+  },
+  "next_rule": "Inspect results before additional jobs; do not infer all-bound or continuum from finite spans.",
+  "recommended_order": [
+    "tdl_imag025_long",
+    "tdl_refined_dx03125",
+    "tdl_refined_dx025"
+  ],
+  "schema": "R3M11_ONE_ENERGY_SINGLE_B_MATRIX_V1",
+  "threshold_policy": "Retain parent 1% screening; no automatic admission.",
+  "source_matrix": "matrix/MATRIX.json",
+  "derivation": "Copy tdl_imag025_long and change only grid.dx. No grid phase or potential calibration."
+}

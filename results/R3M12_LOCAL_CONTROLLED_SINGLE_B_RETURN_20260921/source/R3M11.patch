@@ -1,0 +1,1071 @@
+diff --git a/cr_repro/r3m11.py b/cr_repro/r3m11.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..0ca11b066e5f0d7ca933b51fb6abcadd938fac04
+--- /dev/null
++++ b/cr_repro/r3m11.py
+@@ -0,0 +1,238 @@
++"""Opt-in R3M11 controls; archived R3M10 runners and observations stay unchanged.
++
++Atomic units are used internally. A finite sampled hydrogen span is not the
++complete spectral bound subspace. Its orthogonal remainder is NOT continuum.
++"""
++from __future__ import annotations
++
++import argparse
++import hashlib
++import json
++import math
++from pathlib import Path
++from typing import Any
++
++import numpy as np
++
++from .backend import asnumpy
++from .grid import GridSpec
++from .hydrogen import orbital, bound_quantum_numbers
++from .tdl import TDLRunner
++from .util import atomic_json, config_hash
++
++
++def positive(value: float, name: str) -> float:
++    value = float(value)
++    if not math.isfinite(value) or value <= 0:
++        raise ValueError(f'{name} must be finite and positive')
++    return value
++
++
++def file_sha(path: Path) -> str:
++    h = hashlib.sha256()
++    with path.open('rb') as f:
++        for block in iter(lambda: f.read(4*1024*1024), b''):
++            h.update(block)
++    return h.hexdigest()
++
++
++def source_digest() -> str:
++    """Bind restart to the numerical source, not a guessed Git branch name."""
++    root = Path(__file__).resolve().parent
++    h = hashlib.sha256()
++    for path in sorted(root.glob('*.py')):
++        h.update(path.name.encode()); h.update(bytes.fromhex(file_sha(path)))
++    return h.hexdigest()
++
++
++def fixed_rate_mask(mask: Any, dt: float, reference_dt: float, xp=np):
++    """M(dt)=M_ref**(dt/dt_ref); keep W=-log(M_ref)/dt_ref fixed.
++
++    For H_eff=H-iW, probability damping is exp(-2 W t). Valid only for
++    0<M_ref<=1. A zero mask would be an infinite CAP and is rejected.
++    """
++    dt=positive(dt,'dt'); reference_dt=positive(reference_dt,'reference_dt')
++    mask=xp.asarray(mask)
++    if bool(asnumpy(xp.any(~xp.isfinite(mask) | (mask <= 0) | (mask > 1)))):
++        raise ValueError('mask must be finite with 0 < mask <= 1')
++    return xp.exp(xp.log(mask)*(dt/reference_dt))
++
++
++def gram_projection(gram, overlaps, norm: float, rcond: float=1e-10) -> dict:
++    """Projection on a full-rank finite span; never silently drop a channel."""
++    G=np.asarray(gram,dtype=complex); c=np.asarray(overlaps,dtype=complex)
++    norm=positive(norm,'wavefunction norm'); rcond=positive(rcond,'rcond')
++    if c.ndim!=1 or c.size==0 or G.shape!=(c.size,c.size):
++        raise ValueError('invalid Gram/overlap shape')
++    if not np.isfinite(G).all() or not np.isfinite(c).all():
++        raise ValueError('nonfinite Gram/overlap')
++    herm=float(np.linalg.norm(G-G.conj().T)/max(np.linalg.norm(G),1e-300))
++    if herm>1e-12: raise ValueError('non-Hermitian Gram matrix')
++    G=(G+G.conj().T)/2
++    eig=np.linalg.eigvalsh(G)
++    if eig[-1]<=0 or eig[0]<=rcond*eig[-1]:
++        raise ValueError('Gram rank loss/ill conditioning; refine the representation')
++    alpha=np.linalg.solve(G,c); p=float(np.vdot(c,alpha).real)
++    if p < -5e-11*norm or p > norm*(1+5e-10):
++        raise ValueError('projector probability outside wavefunction norm')
++    return dict(probability=p,coefficients=alpha,condition_number=float(eig[-1]/eig[0]),
++                eigenvalue_min=float(eig[0]),eigenvalue_max=float(eig[-1]),
++                hermitian_relative_residual=herm)
++
++
++def _state_slab(spec: GridSpec, b: float, v: float, t: float, qns, start: int, stop: int):
++    x,y,z=spec.axes(np)
++    X=x[start:stop,None,None]-b;Y=y[None,:,None];Z=z[None,None,:]-v*t
++    phases=np.exp(1j*v*z[None,None,:]-.5j*v*v*t)
++    cols=[(orbital(n,l,m,X,Y,Z)*phases*np.exp(.5j*t/n**2)).reshape(-1) for n,l,m in qns]
++    return np.column_stack(cols)
++
++
++def projector_audit(psi, spec: GridSpec, b: float, v: float, t: float, *,
++                    nmax: int, capture_plane: float, slab_x: int=2) -> dict:
++    """Three slab passes: Gram/overlaps, nested spans, and exact gap identity.
++
++    Peak basis memory is O(slab_x * ny * nz * nmax**3), not the full
++    wavefunction times all channels. `psi` may be an mmap from an old run.
++    """
++    if isinstance(nmax,bool) or int(nmax)!=nmax or not 1<=nmax<=8:
++        raise ValueError('nmax must be an integer between 1 and 8')
++    if isinstance(slab_x,bool) or int(slab_x)!=slab_x or slab_x<1:
++        raise ValueError('slab_x must be positive integer')
++    if not all(math.isfinite(float(z)) for z in [b,v,t,capture_plane]):
++        raise ValueError('nonfinite geometry')
++    if psi.shape!=spec.shape(): raise ValueError('state/grid shape mismatch')
++    qns=bound_quantum_numbers(nmax);k=len(qns);G=np.zeros((k,k),complex);c=np.zeros(k,complex);norm=0.
++    for i in range(0,spec.shape()[0],slab_x):
++        j=min(i+slab_x,spec.shape()[0]);a=np.asarray(psi[i:j]).reshape(-1)
++        if not np.isfinite(a).all():raise ValueError('nonfinite state')
++        B=_state_slab(spec,b,v,t,qns,i,j)
++        G+=B.conj().T@B*spec.dv;c+=B.conj().T@a*spec.dv
++        norm+=float(np.vdot(a,a).real*spec.dv)
++    projection=gram_projection(G,c,norm);alpha=projection['coefficients'];p=projection['probability']
++    nested={}
++    for n in range(1,nmax+1):
++        ix=[i for i,q in enumerate(qns) if q[0]<=n]
++        nested[str(n)]=gram_projection(G[np.ix_(ix,ix)],c[ix],norm)['probability']
++    z=spec.axes(np)[2];inside_z=z>capture_plane
++    preg=eb=ec=cross=orth=0.
++    for i in range(0,spec.shape()[0],slab_x):
++        j=min(i+slab_x,spec.shape()[0]);shape=(j-i,spec.shape()[1],spec.shape()[2])
++        a=np.asarray(psi[i:j]).reshape(-1);B=_state_slab(spec,b,v,t,qns,i,j)
++        bound=B@alpha;remainder=a-bound;inside=np.broadcast_to(inside_z,shape).reshape(-1)
++        preg+=float(np.vdot(a[inside],a[inside]).real*spec.dv)
++        eb+=float(np.vdot(bound[~inside],bound[~inside]).real*spec.dv)
++        ec+=float(np.vdot(remainder[inside],remainder[inside]).real*spec.dv)
++        cross+=float(2*np.vdot(bound[inside],remainder[inside]).real*spec.dv)
++        orth+=abs(np.vdot(bound,remainder)*spec.dv)
++    delta=preg-p;cap_inside=max(0.,p-eb);bound=eb+ec+2*math.sqrt(cap_inside*ec)
++    return dict(schema='R3M11_FINITE_GRID_SPAN_AUDIT_V1',project_nmax=nmax,
++                quantum_numbers=[list(q) for q in qns],wavefunction_norm=norm,
++                raw_overlap_sum=float(np.vdot(c,c).real),P_span_nmax=p,
++                P_span_by_nmax=nested,P_region=preg,region_minus_span=delta,
++                eps_selected_outside=eb,eps_complement_inside=ec,cross_term=cross,
++                gap_identity_residual=abs(delta-(-eb+ec+cross)),gap_bound=bound,
++                slabwise_orthogonality_bound=orth,
++                Gram_condition=projection['condition_number'],
++                Gram_eigenvalues=[projection['eigenvalue_min'],projection['eigenvalue_max']],
++                Gram_identity_spectral_norm=float(np.linalg.norm(G-np.eye(k),2)),
++                finite_grid_state_norms=[float(a) for a in G.diagonal().real],
++                continuum_probability=None,
++                remainder_semantics='ORTHOGONAL_COMPLEMENT_OF_FINITE_SELECTED_SPAN_NOT_CONTINUUM',
++                physical_all_bound_admitted=False,
++                span_semantics='SAMPLED_ANALYTIC_HYDROGEN_CHANNELS_NOT_EXACT_SPECTRAL_PROJECTOR')
++
++
++class ControlledTDLRunner(TDLRunner):
++    """New opt-in fixed-CAP symmetric propagation; parent remains historical."""
++    def __init__(self,cfg):
++        cfg=dict(cfg)
++        reference=positive(cfg['absorber_reference_dt'],'absorber_reference_dt')
++        positive(cfg['dt'],'dt')
++        if cfg.get('initial_state','imag_time') not in ['imag_time','analytic']:
++            raise ValueError('unknown initial state')
++        cfg['_r3m11_controls']='FIXED_CAP_SYMMETRIC_V1'
++        cfg['_r3m11_source_digest']=source_digest()
++        super().__init__(cfg)
++        self.cap_half=fixed_rate_mask(self.mask,self.dt_actual/2,reference,self.xp)
++
++    def step(self,psi,t_mid):
++        # At fixed discretization: V-iW / 2, T, V-iW / 2.
++        ph=self.xp.exp(-.5j*self.dt_actual*self.Vmid(t_mid))*self.cap_half
++        psi=ph*psi
++        psi=self.xp.fft.ifftn(self.kin*self.xp.fft.fftn(psi))
++        return ph*psi
++
++    def relaxed_initial(self):
++        psi,info=super().relaxed_initial()
++        hp=self.xp.fft.ifftn(.5*self.k2*self.xp.fft.fftn(psi))+self.Vtarget*psi
++        E=float(info['energy_Eh'])
++        residual=float(asnumpy(self.xp.sqrt(self.xp.sum(abs(hp-E*psi)**2)*self.dv)))
++        info.update(stationary_residual_Eh=residual,energy_error_from_infinite_mass_1s_Eh=E+.5,
++                    residual_semantics='DISCRETE_TARGET_HAMILTONIAN_RESIDUAL_NOT_CONTINUUM_ERROR_BOUND')
++        return psi,info
++
++    def analyze(self,psi):
++        result=super().analyze(psi)
++        # Historical rank-one diagnostics are not normalized projectors; retain
++        # those values only under their old names, and give the authoritative
++        # new finite-span decomposition a separately typed field.
++        result['legacy_n1_diagnostics_authority']='HISTORICAL_ONLY_USE_GRAM_AUDIT'
++        result['gram_audit']=projector_audit(asnumpy(psi),self.spec,self.b,self.v,self.tf,
++            nmax=int(self.cfg.get('project_nmax',3)),capture_plane=float(self.cfg.get('capture_plane',30.)),
++            slab_x=int(self.cfg.get('projection_slab_x',2)))
++        result['production_admitted']=False
++        return result
++
++    def run(self,outdir,max_steps=None):
++        out=Path(outdir);seal=out/'r3m11_checkpoint_seal.json'
++        if max_steps is not None and (isinstance(max_steps,bool) or int(max_steps)!=max_steps or max_steps<=0):
++            raise ValueError('max_steps must be a positive integer')
++        if (out/'state.json').exists() or (out/'state.npy').exists():
++            if not seal.is_file():raise ValueError('unsealed/legacy checkpoint: use a fresh output path')
++            s=json.loads(seal.read_text())
++            if s['source_digest']!=source_digest():raise ValueError('checkpoint source changed')
++            for name in ['state.json','state.npy']:
++                if not (out/name).is_file() or file_sha(out/name)!=s['files'][name]:
++                    raise ValueError('checkpoint hash mismatch')
++        result=super().run(out,max_steps=max_steps)
++        atomic_json(seal,dict(schema='R3M11_CHECKPOINT_SEAL_V1',source_digest=source_digest(),
++                    files={name:file_sha(out/name) for name in ['state.json','state.npy']}))
++        return result
++
++
++def audit_saved(run_dir, *, nmax: int=3, slab_x: int=2, expected_state_sha256: str|None=None) -> dict:
++    """Read-only sidecar analysis of completed archived or new state bytes."""
++    root=Path(run_dir);meta=json.loads((root/'state.json').read_text())
++    if int(meta['done'])!=int(meta['nstep']):raise ValueError('incomplete checkpoint')
++    result=json.loads((root/'result.json').read_text());cfg=result['config']
++    if result.get('status')!='completed':raise ValueError('incomplete result')
++    if meta['config_hash']!=config_hash(cfg):raise ValueError('state/result config mismatch')
++    path=root/'state.npy';sha=file_sha(path)
++    if expected_state_sha256 and sha!=expected_state_sha256:raise ValueError('state authority hash mismatch')
++    p=np.load(path,mmap_mode='r',allow_pickle=False);spec=GridSpec.from_dict(cfg['grid'])
++    from .observables import projectile_speed_au
++    v=projectile_speed_au(cfg['energy_keV_per_u'])
++    obs=projector_audit(p,spec,float(cfg['b']),v,float(cfg.get('z_stop',60))/v,
++           nmax=nmax,capture_plane=float(cfg.get('capture_plane',30)),slab_x=slab_x)
++    return dict(schema='R3M11_SAVED_STATE_POSTPROCESS_V1',source_state_sha256=sha,
++                externally_expected_hash_checked=expected_state_sha256 is not None,
++                input_result_sha256=file_sha(root/'result.json'),analysis=obs,
++                dynamics_rerun=False,physical_rate_evaluated=False)
++
++
++def main():
++    p=argparse.ArgumentParser(description=__doc__);sub=p.add_subparsers(dest='cmd',required=True)
++    r=sub.add_parser('run');r.add_argument('--config',required=True);r.add_argument('--out',required=True);r.add_argument('--max-steps',type=int)
++    a=sub.add_parser('audit-saved');a.add_argument('--run',required=True);a.add_argument('--out',required=True);a.add_argument('--nmax',type=int,default=3);a.add_argument('--slab-x',type=int,default=2);a.add_argument('--state-sha256')
++    args=p.parse_args()
++    if args.cmd=='run':
++        out=ControlledTDLRunner(json.loads(Path(args.config).read_text())).run(args.out,args.max_steps)
++    else:
++        target=Path(args.out)
++        if target.exists():raise FileExistsError('refuse to overwrite analysis evidence')
++        out=audit_saved(args.run,nmax=args.nmax,slab_x=args.slab_x,expected_state_sha256=args.state_sha256)
++        atomic_json(target,out)
++    print(json.dumps(out,indent=2,allow_nan=False))
++
++if __name__=='__main__':main()
+diff --git a/cr_repro/r3m11_jobs.py b/cr_repro/r3m11_jobs.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..f2559fb8168419517e7139edaeba879102a45431
+--- /dev/null
++++ b/cr_repro/r3m11_jobs.py
+@@ -0,0 +1,147 @@
++"""Create a bounded single-b run matrix and record one explicitly chosen job.
++
++This program never launches the whole matrix, a b-grid, or another energy.
++Existing numerical source and the historical local return are not rewritten.
++"""
++from __future__ import annotations
++import argparse
++import copy
++import datetime as dt
++import importlib.metadata as metadata
++import json
++import os
++from pathlib import Path
++import platform
++import subprocess
++import sys
++import time
++
++from .r3m11 import file_sha, source_digest, audit_saved
++from .util import atomic_json
++
++
++def build_matrix() -> dict:
++    t=dict(energy_keV_per_u=100.,b=2.,backend='auto',
++        grid=dict(xlim=[-30,40],ylim=[-30,30],zlim=[-30,90],dx=.4),
++        dt=.05,z_start=-30.,z_stop=60.,absorber_width=4.,absorber_power=.125,
++        absorber_reference_dt=.05,initial_state='imag_time',imag_dt=.05,imag_steps=300,
++        project_nmax=3,capture_plane=30.,checkpoint_stride=100,projection_slab_x=2)
++    a=dict(energy_keV_per_u=100.,b=2.,zmax=30.,dt=.05,ns=12,np=8,
++        alpha_min=.001,alpha_max=100.,pmin=.001,pmax=10.,eps_max=5.)
++    jobs={}
++    def add(name,lane,cfg,changes,question):
++        c=copy.deepcopy(cfg)
++        for k,v in changes.items():
++            if k=='dx':c['grid']['dx']=v
++            else:c[k]=v
++        jobs[name]=dict(lane=lane,config=c,question=question,scientific_admission=False)
++    add('tdl_cap_base','tdl',t,{},'New symmetric fixed-CAP reference. Not the historical baseline.')
++    add('tdl_dt025','tdl',t,dict(dt=.025),'Halve physical step with identical CAP function.')
++    add('tdl_dt0125','tdl',t,dict(dt=.0125),'Second step refinement at fixed CAP.')
++    add('tdl_imag025','tdl',t,dict(imag_dt=.025,imag_steps=600),'Imaginary-time step at equal preparation duration.')
++    add('tdl_imag025_long','tdl',t,dict(imag_dt=.025,imag_steps=1200),'Preparation duration; compare against tdl_imag025.')
++    add('tdl_dx03125','tdl',t,dict(dx=.3125),'Grid refinement only at fixed preparation and CAP parameters.')
++    add('tdl_dx025','tdl',t,dict(dx=.25),'Grid refinement only; no outcome-based potential adjustment.')
++    add('tdl_dx020','tdl',t,dict(dx=.2),'Conditional later grid refinement, not automatically executed.')
++    add('tdl_plane25','tdl',t,dict(capture_plane=25.),'Postprocess-only change; prefer reusing saved state rather than propagation.')
++    add('aocc_base','aocc',a,{},'Preserved s+p one-electron AOCC baseline.')
++    add('aocc_dt025','aocc',a,dict(dt=.025),'Production-basis time refinement only.')
++    add('aocc_radial_only','aocc',a,dict(ns=16,np=12),'Radial count only; same exponent endpoints and energy cutoff.')
++    add('aocc_exponent_only','aocc',a,dict(alpha_max=1000.),'s-exponent upper endpoint only; fixed counts.')
++    add('aocc_window_only','aocc',a,dict(eps_max=10.),'Positive pseudostate energy window only; same primitive basis.')
++    return jobs
++
++
++def write_matrix(destination: Path) -> dict:
++    destination=Path(destination)
++    destination.mkdir(parents=True,exist_ok=False)
++    jobs=build_matrix()
++    for name,job in jobs.items():
++        atomic_json(destination/f'{name}.json',job['config'])
++    out=dict(schema='R3M11_ONE_ENERGY_SINGLE_B_MATRIX_V1',jobs=jobs,
++        bgrid_allowed=False,threshold_policy='Retain parent 1% screening; no automatic admission.',
++        recommended_order=['audit saved baseline and dx states first',
++          'tdl_cap_base','tdl_dt025','tdl_dt0125','tdl_imag025','tdl_imag025_long',
++          'tdl_dx03125','tdl_dx025','aocc_base','aocc_dt025','aocc_radial_only','aocc_exponent_only'],
++        next_rule='Inspect results before additional jobs; do not infer all-bound or continuum from finite spans.')
++    atomic_json(destination/'MATRIX.json',out)
++    return out
++
++
++def environment() -> dict:
++    versions={}
++    for name in ['numpy','scipy','pytest','cupy-cuda12x','cupy-cuda13x']:
++        try:versions[name]=metadata.version(name)
++        except metadata.PackageNotFoundError:pass
++    return dict(python=sys.version,executable=sys.executable,platform=platform.platform(),
++                versions=versions,numerical_source_sha256=source_digest(),
++                vendor_gaussian_sha256=file_sha(Path(__file__).resolve().parents[1]/'vendor_w1r/gaussian_cartesian.py'))
++
++
++def run_one(matrix_dir: Path,name: str,out: Path,max_steps: int|None=None) -> dict:
++    matrix_dir=Path(matrix_dir);out=Path(out)
++    matrix=json.loads((matrix_dir/'MATRIX.json').read_text())
++    if name not in matrix['jobs']:raise ValueError('unknown job')
++    job=matrix['jobs'][name];cfg=matrix_dir/f'{name}.json'
++    if json.loads(cfg.read_text())!=job['config']:raise ValueError('config/matrix changed independently')
++    if job['lane']=='aocc' and (out/'result.json').exists():
++        raise FileExistsError('refuse to overwrite completed AOCC run')
++    if job['lane']=='aocc' and max_steps is not None:
++        raise ValueError('AOCC has no verified restart loader; --max-steps applies only to TDL')
++    out.mkdir(parents=True,exist_ok=True)
++    attempt=out/'attempts'/dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S_%fZ')
++    attempt.mkdir(parents=True,exist_ok=False)
++    command=[sys.executable,'-m','cr_repro.r3m11' if job['lane']=='tdl' else 'cr_repro.cli',
++        'run' if job['lane']=='tdl' else 'aocc','--config',str(cfg.resolve()),'--out',str(out.resolve())]
++    if max_steps is not None:command+=['--max-steps',str(max_steps)]
++    atomic_json(attempt/'config.json',job['config']);atomic_json(attempt/'environment.json',environment())
++    tic=time.monotonic()
++    with (attempt/'stdout.log').open('wb') as stdout,(attempt/'stderr.log').open('wb') as stderr:
++        proc=subprocess.run(command,stdout=stdout,stderr=stderr,check=False)
++    receipt=dict(schema='R3M11_LOCAL_ATTEMPT_V1',name=name,lane=job['lane'],command=command,
++        returncode=proc.returncode,seconds=time.monotonic()-tic,source_digest=source_digest(),
++        config_sha256=file_sha(cfg),production_admitted=False,bgrid_allowed=False)
++    for f in ['state.json','state.npy','result.json','r3m11_checkpoint_seal.json']:
++        if (out/f).is_file():receipt.setdefault('output_files',{})[f]=dict(bytes=(out/f).stat().st_size,sha256=file_sha(out/f))
++    atomic_json(attempt/'receipt.json',receipt)
++    if proc.returncode:raise RuntimeError(f'run failed with {proc.returncode}; see {attempt}')
++    return receipt
++
++
++def audit_return(repo: Path,return_root: Path,out: Path,names: list[str]) -> dict:
++    """Use Git-owned external SHA authority; do not trust just the archive filename."""
++    repo=Path(repo);return_root=Path(return_root);out=Path(out)
++    authority=json.loads((repo/'provenance/RELEASE_ASSETS.json').read_text())
++    expected={Path(x['path']).parent.name:x for x in authority['omitted_from_git']}
++    # Different archive wrappers are tolerated, not guessed: require one match.
++    candidates=[return_root] if (return_root/'runs').is_dir() else []
++    if not candidates:
++        candidates=sorted(set(p.parent.parent for p in return_root.rglob('tdl_baseline_retry/state.json')))
++        candidates=[p.parent if p.name=='runs' else p for p in candidates]
++    if len(candidates)!=1:raise ValueError('provide the unique extracted return directory containing runs/')
++    root=candidates[0];out.mkdir(parents=True,exist_ok=False)
++    summary={}
++    for name in names:
++        if name not in expected:raise ValueError(f'no source-owned state hash for {name}')
++        state=root/'runs'/name/'state.npy'
++        if state.stat().st_size!=expected[name]['bytes']:raise ValueError(f'{name}: state size mismatch')
++        result=audit_saved(root/'runs'/name,nmax=3,slab_x=2,expected_state_sha256=expected[name]['sha256'])
++        atomic_json(out/f'{name}_gram.json',result);summary[name]=result['analysis']
++    result=dict(schema='R3M11_POSTPROCESS_RETURN_V1',source_authority_sha256=file_sha(repo/'provenance/RELEASE_ASSETS.json'),
++        source_archive_expected_sha256=authority['archive_sha256'],runs=summary,
++        bgrid_allowed=False,dynamics_rerun=False,physical_rate_evaluated=False)
++    atomic_json(out/'SUMMARY.json',result)
++    return result
++
++
++def main():
++    p=argparse.ArgumentParser(description=__doc__);s=p.add_subparsers(dest='command',required=True)
++    g=s.add_parser('generate');g.add_argument('--out',required=True)
++    r=s.add_parser('run-one');r.add_argument('--matrix',required=True);r.add_argument('--name',required=True);r.add_argument('--out',required=True);r.add_argument('--max-steps',type=int)
++    a=s.add_parser('audit-return');a.add_argument('--repo',default='.');a.add_argument('--return-root',required=True);a.add_argument('--out',required=True);a.add_argument('--names',nargs='+',default=['tdl_baseline_retry','tdl_dx03125'])
++    args=p.parse_args()
++    if args.command=='generate':o=write_matrix(Path(args.out));print(json.dumps(dict(jobs=len(o['jobs']),bgrid_allowed=False)))
++    elif args.command=='run-one':print(json.dumps(run_one(Path(args.matrix),args.name,Path(args.out),args.max_steps),indent=2))
++    else:print(json.dumps(audit_return(Path(args.repo),Path(args.return_root),Path(args.out),args.names),indent=2))
++
++if __name__=='__main__':main()
+diff --git a/docs/r3m11/REPORT_KO.md b/docs/r3m11/REPORT_KO.md
+new file mode 100644
+index 0000000000000000000000000000000000000000..520e85e8094c32c2f352bdc17dbef557634883cf
+--- /dev/null
++++ b/docs/r3m11/REPORT_KO.md
+@@ -0,0 +1,148 @@
++# CR R3M11: 로컬 single-b 반환의 수용과 제어변수 분리
++
++## 판정
++
++`IMPORTED_LOCAL_NO_GO__FIXED_CAP_AND_FINITE_SPAN_CONTROLS_IMPLEMENTED__POSTPROCESS_FIRST__NO_BGRID_OR_PHYSICAL_RATE`
++
++기준 저장소: cosmosapjw-quantum/bass_cr
++입력 main SHA: `77237751bdd2aed5934bf7fc3bc626d631a09058`.
++현재 판단의 원본은 `results/R3M10_LOCAL_RETURN_20260921/report/DECISION.json`이다.
++옛 루트 R3M10_STATUS.json을 현재 판정으로 사용하지 않는다.
++
++## 1. 실제 반환으로 확인한 것
++
++TDL 6개와 AOCC 2개 single-b 실행이 완료되었다는 원본 보고·JSON을 읽었다.
++이는 새로 수행한 실행이 아니라 사용자의 local 결과를 import한 것이다.
++기준은 100 keV/u, b=2 a0이며 old/new 상대 변화는 |variant-baseline|/|baseline|이다.
++
++TDL dx 0.4 -> 0.3125 a0: 10.473968315683176%.
++AOCC supplied baseline -> large: 9.068769566743899%.
++사전에 정한 1% screening을 둘 다 넘으므로 b-grid NO_GO를 수용한다.
++
++TDL dt 변화 0.41323%, 종단 위치 변화 0.12319%, 넓은 상자 변화 0.01457%는
++보존한다. 그러나 dt마다 동일 mask를 한 번 곱했으므로 dt 변화는 흡수 강도까지
++바꾼다. 원 보고서가 이미 이 혼입을 지적했다. 이번 작업은 그 지적을 독립 재발견으로
++세지 않고 실제 제어 코드로 옮긴 것이다.
++
++기준 초기 에너지는 -0.4721060456 Eh, 세밀한 격자는 -0.4813887527 Eh다.
++-0.5 Eh 대비 편차는 각각 5.57879088%, 3.72224946%이다. 이는 진단량이지
++capture probability의 오차 추정식이나 전체 공간 오차 원인의 증명은 아니다.
++
++## 2. 고정 감쇠율과 새 propagation lane
++
++실수 mask 0<M<=1를 step마다 곱하면 V_abs=-iW에 대응하는
++W=-hbar log(M)/dt를 갖는다. 같은 M에서 dt를 반으로 줄이면 W가 두 배다.
++따라서 M_ref와 dt_ref를 먼저 고정하고
++
++M(dt)=exp[log(M_ref) dt/dt_ref]
++
++를 사용해야 같은 흡수 profile을 비교할 수 있다. 실제 코드는 atomic units다.
++새 ControlledTDLRunner는 V-iW의 반 step, kinetic FFT, V-iW의 반 step을
++대칭 배치한다. 시간 의존 V는 midpoint에서 평가한다.
++
++이는 새로운 reference discretization이다. 옛 결과를 새 scheme의 결과로 재명명하지
++않고, 옛 runner도 고치지 않는다. dt_ref=0.05 a.u.는 명시적으로 고정한 새 reference
++parameter이며 옛 dt_actual의 유효 CAP와 정확히 같다고 주장하지 않는다.
++고정 CAP와 Strang 구성이 boundary reflection 또는 Coulomb spatial convergence를
++자동으로 보증하지는 않는다.
++
++## 3. 유한 격자 channel span과 continuum의 구분
++
++격자 적분 가중치 W_g와 sampled orbital 열행렬 B에 대해
++G=B†W_g B, c=B†W_g psi 이다. 실제 유한 span projector의 확률은
++
++P_span=c†G^{-1}c
++
++이다. 단순 sum |c|^2는 G=I일 때만 같다. Wolfram의 정규화된 비직교 두-state
++예에서 naive sum=26/25이지만 올바른 projection은 1이다.
++
++새 후처리는 n=1,2,3의 nested spans, Gram condition/eigenvalues/identity defect,
++raw overlap sum을 동시에 남긴다. singular/ill-conditioned Gram은 몰래 상태를
++삭제하거나 pseudoinverse tolerance를 조절하지 않고 실패한다.
++
++b=Q psi, c_perp=(I-Q)psi, R=공간 영역 projector로 놓고
++p=||b||², eps_b=||(I-R)b||², eps_c=||R c_perp||²라 하면
++
++Delta=<psi|R|psi>-p=-eps_b+eps_c+2 Re<Rb,Rc_perp>,
++|Delta|<=eps_b+eps_c+2 sqrt((p-eps_b)eps_c).
++
++이 식은 정확한 대수식이다. 코드의 부동소수점 평가는 interval certificate가 아니다.
++여기서 c_perp에는 target bound와 미포함 projectile bound 등도 들어간다.
++따라서 continuum_probability는 null이고, eps_c를 continuum contamination으로
++보고하는 것은 금지한다. sampled analytic span도 정확한 continuum-Hamiltonian의
++spectral bound projector와 동일하지 않다.
++
++원 local return의 n=1 supplementary audit는 이미 정규화한 rank-one projector를
++사용했다. 새 코드는 그 원칙을 n<=3까지 확장하며 과거 raw 결과를 덮어쓰지 않는다.
++
++## 4. 다음 실행은 재전파보다 저장 상태 후처리가 먼저
++
++원 repository의 RELEASE_ASSETS.json은 930,236,215-byte 전체 archive와 여섯
++state.npy의 SHA를 제공한다. 이번 환경에서는 이 큰 archive를 내려받지 않았다.
++기존 local archive가 있으므로 Codex는 먼저 그 SHA를 확인하고 baseline과 dx03125의
++state.npy를 slab 방식으로 후처리한다. 원 result/state/config/hash를 대조하고 새 sidecar만
++생성한다. capture_plane run과 baseline의 state SHA가 동일한 것도 원 provenance에
++명시되어 있다. 공간영역 후처리를 위해 propagation을 다시 할 필요가 없다.
++
++그 다음 14-job matrix에서 선택한 한 job만 실행한다. 자동 full-matrix 실행은 없다.
++- TDL: 새 fixed-CAP baseline; dt/.5/.25; 고정 imaginary-time 총길이에서 tau/.5;
++  다음 총길이 연장; dx=.3125,.25,.2를 필요할 때 순서대로 검사한다.
++- AOCC: 기존 single-electron runner를 변경하지 않고 dt, radial count, s-exponent
++  상한, positive-energy cutoff를 각각 분리한 설정을 생성한다.
++
++s+p AOCC의 finite negative-state 합과 d 상태를 포함한 TDL n<=3 합은 같은 truncation이
++아니다. 현재 두 raw total을 cross-lane equality gate로 사용하지 않는다. d 채널을 나중에
++추가한다면 s/d의 겹침까지 처리한 전체 atomic generalized eigensystem이 필요하며
++Cartesian d orbital을 독립 block처럼 덧붙여서는 안 된다.
++
++b=2에서의 안정성은 모든 impact parameter와 b-tail의 인증도 아니다. 여기서는 NO_GO를
++자동으로 해제하지 않는다. 양 lane은 독립적으로 계산할 수 있지만 cross-lane 해석은
++일치한 observable/support와 각자의 내부 안정성을 먼저 요구한다.
++
++## 5. 원본 보존·restart
++
++cr_repro의 기존 10개 .py와 vendor primitive 1개는 remote Git blob identity로 대조했다.
++새 파일만 addition-only patch에 포함한다. full repository clone/전체 tree 인증은 아니다.
++역사적 result, 원 manifest, 실패 로그와 private Nichols code의 부재 상태를 보존한다.
++
++새 runner의 checkpoint seal은 config/source/state/meta를 연결한다. 정상 chunk 완료 후
++resume은 bit-identical 검사를 통과했다. 중단 중 두 파일이 불일치하면 fail-closed하며,
++이를 crash-proof transactional checkpoint라고 부르지 않는다. 원 checkpoint를 새 dynamics에
++resume하지 않는다. source 변경 시에도 새 output path를 사용한다.
++
++## 6. 타 스레드 sync
++
++HOST4 H8 원 ZIP을 Drive에서 raw로 회수했다.
++SHA256: 8d9b3565f278f07f8d1aaa103910725bca6df4ce252247208e7492aff601ebd8.
++2,788,902 bytes; ZIP CRC 및 28/28 payload manifest 일치.
++H8는 BDSCx 1s reference와 PCHIP 재현을 확보했지만 source-owned continuous D102563
++또는 physical UQ로 승격하지 않았다. CR에는 출처/상태만 import한다.
++H8에 보존된 P0 R20은 native N38=38/38이지만 physical P0와 source anomaly가 남는다.
++H-H R5의 method-freeze-only 상태는 numerical authority가 아니다.
++이들을 TDL/AOCC source calibration으로 사용하거나 8% post-hoc margin을 CR gate로 쓰지 않는다.
++
++## 7. 실제 수행한 검증과 미수행 사항
++
++새 controls 17개, job matrix 6개의 RED 실패를 먼저 확인한 뒤 구현했다.
++마지막 bounded suite: 35 PASS, 1 SKIP(CuPy 없음). 기존 local 20/20을 여기서 모두 재실행한
++것이 아니다. 원 AOCC reference-loop를 포함한 전체 suite 시도는 실행 budget timeout을
++만났고 그 로그를 보존했다. 이를 수학/물리 실패로 분류하지 않는다.
++새 controlled CLI와 저장-state sidecar CLI는 작은 격자에서 각각 exit 0이었다.
++production-sized state 후처리, GPU, 100-keV/u production 재전파는 이번에 하지 않았다.
++
++## 8. 온라인 배포 상태
++
++이번 session은 GitHub/Drive/Dropbox 읽기는 성공했지만 push/upload action은 노출되지 않았다.
++직접 git 접속도 DNS 실패했다. 따라서 새 remote push와 새 online dual backup은 NOT_EXECUTED다.
++로컬 전달물의 apply_and_push.py는 기존 authenticated clone에 새 worktree/branch를 만들고
++테스트 후 branch-only push와 remote ref 확인을 수행한다. 기존 rclone remotes를 이용하는
++r3m11_dual_backup.py는 immutable copy와 양쪽 raw SHA readback 후에만 COMPLETE를 기록한다.
++실제로 이 도구들을 local에서 실행하기 전까지 그 성공을 주장하지 않는다.
++
++## 원전·SSOT
++
++- bass_cr commit 77237751bdd2aed5934bf7fc3bc626d631a09058, local return README_KO.md,
++  report/DECISION.json, cr_repro/tdl.py, cr_repro/aocc.py, provenance/RELEASE_ASSETS.json.
++- De Giovannini, Larsen & Rubio, EPJB 88, 56 (2015), DOI 10.1140/epjb/e2015-50808-0,
++  arXiv:1409.1689. SciSpace discovery 후 primary abstract로 흡수 경계의 오차 분류를 확인했다.
++- 위 mask scaling, finite-span projection, gap identity는 이번 직접 유도와 Wolfram 검산이다.
+diff --git a/docs/r3m11/SOURCE_IMPORT.json b/docs/r3m11/SOURCE_IMPORT.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..e069967fc2025a99d1277d2d182f7eeaaa5bc71b
+--- /dev/null
++++ b/docs/r3m11/SOURCE_IMPORT.json
+@@ -0,0 +1,30 @@
++{
++  "schema": "R3M11_SCOPED_IMPORT_V1",
++  "repository": "cosmosapjw-quantum/bass_cr",
++  "base_commit": "77237751bdd2aed5934bf7fc3bc626d631a09058",
++  "authorities": [
++    "results/R3M10_LOCAL_RETURN_20260921/README_KO.md",
++    "results/R3M10_LOCAL_RETURN_20260921/report/DECISION.json",
++    "provenance/RELEASE_ASSETS.json"
++  ],
++  "repository_verification": "11 runtime source files Git-blob matched; not a complete repository clone",
++  "archived_local_return": {
++    "bytes": 930236215,
++    "sha256": "5af567f4be6f5dfd1dc9e7b42f24409a775de7f9bf776c3485303e6c306b9506",
++    "downloaded_here": false,
++    "tag": "r3m11-single-b-20260921"
++  },
++  "host_h8": {
++    "source_sha256": "8d9b3565f278f07f8d1aaa103910725bca6df4ce252247208e7492aff601ebd8",
++    "bytes": 2788902,
++    "drive_id": "1f24ACkvs0GojM7xx7JJWSLMgoSP6z9UW",
++    "dropbox_id": "id:BSpOijBcT10AAAAAADsyfA",
++    "fresh_drive_raw_sha_verified": true,
++    "manifest_payloads_verified": 28,
++    "scientific_rerun": false,
++    "import_scope": "source/status only; no interpolation/model/UQ promotion",
++    "P0_R20": "38/38 native nodes per preserved final; physical P0 open",
++    "HH_R5": "method-freeze-only, no target numerical authority"
++  },
++  "search_scope": "Targeted current CR/host/P0 results, not a full cloud census"
++}
+diff --git a/docs/r3m11/START_CODEX_HANDOFF_PROMPT.md b/docs/r3m11/START_CODEX_HANDOFF_PROMPT.md
+new file mode 100644
+index 0000000000000000000000000000000000000000..b9966588d9bf8268e8396cb9d7e252cf4d152c92
+--- /dev/null
++++ b/docs/r3m11/START_CODEX_HANDOFF_PROMPT.md
+@@ -0,0 +1,149 @@
++# BASS CR R3M11 -> R3M12 local continuation
++
++여기는 BASS **CR** numerical-source 스레드다. 사용자는 repo/백업 쓰기를 승인했다.
++대상 repo는 `https://github.com/cosmosapjw-quantum/bass_cr`이며 이번 입력 정본은
++`77237751bdd2aed5934bf7fc3bc626d631a09058`이다.
++
++이번 턴의 목적은 원 저자 code 회수를 기다리지 않고, 실제 반환된 100 keV/u, b=2 a0
++TDL/AOCC NO_GO 원인을 제어변수별로 분리하는 것이다. Nichols 구현 재현이라고 부르지 않는다.
++
++## 0. 전달물과 적용
++
++먼저 이 패키지의 SHA256SUMS를 검증하고 docs/r3m11/REPORT_KO.md 및
++원 repo의 results/R3M10_LOCAL_RETURN_20260921/README_KO.md와 report/DECISION.json을 읽는다.
++과거 루트 R3M10_STATUS.json을 현재 state로 읽지 않는다.
++
++이번 ChatGPT 세션에서는 remote writer action 부재와 direct Git DNS 실패로
++push/Google Drive/Dropbox upload가 실행되지 않았다. 완료됐다고 가정하지 말 것.
++
++기존 bass_cr clone과 Python scientific environment를 사용하되 원 worktree의 변경을 버리지 않는다.
++전달 패키지 최상위 apply_and_push.py는 새 worktree에 addition-only patch를 적용하고 테스트한다.
++기존 인증과 Git user identity만 사용하고 credential 내용을 출력하지 않는다.
++
++```bash
++python /path/to/packet/apply_and_push.py \
++  --repo /path/to/existing/bass_cr \
++  --worktree /path/to/new/bass_cr-r3m11 \
++  --branch cr/r3m11-fixed-cap-gram-20260921 \
++  --receipt /path/to/new/GIT_PUBLICATION_RECEIPT.json --push
++```
++
++입력 origin/main이 바뀌었으면 이 script는 중지한다. 최신 HEAD와 pinned base의
++scientific/code diff를 검토한 다음 별도 branch에서 명시적으로 rebase해야 한다.
++main에 force push/자동 merge하지 않는다. 기존 remote branch도 덮어쓰지 않는다.
++Git user identity가 없거나 인증이 막혔으면 환경 blocker로 기록하고 scientific work는 가능한 범위에서 계속한다.
++
++설치가 필요한 경우 새 venv에 기존 requirements와 `pip install -e .`를 실행하고 freeze를 보존한다.
++CuPy는 **실제 로컬 CUDA에 맞는 기존 설치**를 우선한다. 이미 실행됐던 cuFFT loader repair
++및 CPU/GPU parity receipt를 참고하되 현 runtime에서도 검증한다. CUDA를 무작정 교체하지 않는다.
++
++## 1. 가장 먼저: 기존 상태를 재전파 없이 후처리
++
++원 930,236,215-byte archive는 사용자 local의
++`/mnt/sn850x2t/R3M11_LOCAL_SINGLE_B_RESULTS_20260921.tar.gz`에 있었고 동일 repo release에 있다.
++로컬 파일부터 확인한다. archive SHA256:
++`5af567f4be6f5dfd1dc9e7b42f24409a775de7f9bf776c3485303e6c306b9506`.
++release tag: `r3m11-single-b-20260921`.
++
++source 권위는 repo provenance/RELEASE_ASSETS.json과 원 archive manifest다.
++원 archive를 검증하고 새 디렉터리에 해제한다. 실행 결과가 존재한다고 추정하지 말고 파일/해시를 확인한다.
++
++```bash
++cd /path/to/new/bass_cr-r3m11
++python -m cr_repro.r3m11_jobs audit-return \
++  --repo . --return-root /path/to/extracted/return \
++  --out /path/to/new/R3M11_POSTPROCESS
++```
++
++이 명령은 baseline과 dx03125 두 개를 기본 대상으로 사용하며 state.npy의 source-owned
++SHA/size, checkpoint completeness, result/config 일치를 검사한다. 새 sidecar만 쓴다.
++`--names tdl_baseline_retry tdl_dt025 tdl_dx03125 tdl_plane25 tdl_z75 tdl_boxwide`로 확장 가능하다.
++원 state 또는 result를 수정하지 않는다. 추가 nmax는 별도 sidecar/새 경로로 계산한다.
++
++반드시 비교할 값: old raw overlap sum, P_span_nmax, P_span_by_nmax, G-I,
++Gram condition/eigenvalues, finite-grid orbital norms, gap identity residual, region-minus-span.
++`eps_complement_inside`는 higher bound/target states도 포함하며 **continuum이 아니다**.
++결과를 physical all-bound cross section으로 승격하지 않는다.
++
++## 2. 검증된 새 제어 코드의 새 baseline
++
++기존 cr_repro/tdl.py는 역사적 그대로이며 cr_repro/r3m11.py가 opt-in 새 lane이다.
++기존 mask는 dt마다 같은 M을 곱하므로 dt를 반으로 줄이면 유효 CAP 강도도 바뀐다.
++새 lane은 M_ref^(dt/dt_ref)를 대칭 potential halves에 배치한다.
++이는 기존 결과의 재해석이 아니라 새로운 propagation이므로 새 baseline을 계산해야 한다.
++옛 checkpoint에서 새 dynamics를 resume하지 않는다.
++
++```bash
++python -m cr_repro.r3m11_jobs generate --out /path/to/new/R3M11_MATRIX
++python -m cr_repro.r3m11_jobs run-one \
++  --matrix /path/to/new/R3M11_MATRIX --name tdl_cap_base \
++  --out /path/to/new/R3M11_RUNS/tdl_cap_base --max-steps 128
++```
++
++동일 command를 다시 호출하면 검증된 completed chunk에서 이어진다.
++완전히 마치려면 --max-steps를 생략한다. 모든 attempt는 stdout/stderr/config/environment/receipt를
++별도 폴더에 남긴다. source/state/meta hash가 틀리면 정상 checkpoint라고 강제 승인하지 않는다.
++interrupted inconsistent checkpoint는 보존하고 새 output directory로 다시 시작한다.
++
++선택 순서: tdl_cap_base -> tdl_dt025 -> 필요시 tdl_dt0125.
++그 다음 tdl_imag025(준비 총시간 동일), tdl_imag025_long(준비시간만 연장).
++초기 target stationary residual과 E+0.5를 별도로 검사한다.
++TDL dx03125, dx025, 필요시 dx020은 같은 CAP/초기 parameter에서 비교한다.
++초기상태 설정을 바꿨으면 해당 refined initial state에서 공간 비교 기준도 일관되게 다시 만든다.
++설정 생성은 14개이나 자동 전체 실행은 금지한다. 결과를 읽으며 한 job씩 진행한다.
++
++목표가 source 일치가 아니라 수치 안정성이라는 점을 유지한다.
++Coulomb potential을 reference sigma에 맞추어 보정하거나 grid phase를 유리한 값으로 선택하지 않는다.
++초기 E error가 capture error와 같다고 추정하지 않는다.
++
++## 3. AOCC는 기존 one-electron 구현 그대로, 변수만 분리
++
++`aocc_base`, `aocc_dt025`, `aocc_radial_only`, `aocc_exponent_only`,
++필요시 `aocc_window_only`를 run-one으로 실행한다. --max-steps는 AOCC에 지원되지 않는다.
++기존 baseline vs large는 radial counts와 s-exponent upper bound를 함께 바꿨다.
++새 matrix는 이를 분리한다. vendor/two-electron W1R physics는 수정하지 않는다.
++
++metric norm만으로 generator의 anti-Hermitian defect나 basis convergence를 승인하지 않는다.
++s+p AOCC와 n<=3 TDL(d 포함)은 동일한 bound truncation이 아니다.
++동일 channel의 비교를 먼저 하며, state resolution이 없는 기존 AOCC aggregate를 같은 n<=3 total로 부르지 않는다.
++d를 추가해야 하는 다음 단계에서는 s/d와 d/d cross overlap을 포함한 전체 atomic generalized
++eigensystem이 필요하다. 단순히 기존 independent s/p groups에 Cartesian d group을 붙이지 않는다.
++
++## 4. 판정·보존
++
++현재 global b-grid NO_GO를 유지한다. parent의 1% screening을 사후 완화하지 않는다.
++한 b에서 안정적이어도 full b support와 tail이 닫힌 것이 아니다.
++50/225 keV/u, integrated sigma, physical gas rate, chemical source evolution, production central,
++P0 covariance, source-owned continuous D102563 승격은 하지 않는다.
++
++두 solver는 독립적으로 계산한다. 서로 같은 숫자가 나오는 방향으로 보정하지 않는다.
++H8에서 가져온 BDSCx/PCHIP 또는 posthoc 8% margin은 calibration target/physical UQ가 아니다.
++
++첫 local session stop: archived-state Gram table + fixed-CAP dt table + initial-state/spatial table
+++ 분리된 AOCC radial/exponent/dt table 또는 정확한 미수행/blocker 상태를 반환한다.
++`R3M12_LOCAL_CONTROLLED_SINGLE_B_RETURN`을 작성하되 NO_GO/진행조건과검증하지 않은 항목을 분리한다.
++
++## 5. Git와 실제 dual backup
++
++code/docs/tests 변경은 전용 branch에 commit/push하고 remote SHA를 다시 조회한다.
++큰 state.npy를 Git history에 직접 넣지 않는다. 완전한 output archive는 명시적인 archive/release
++또는 dual cloud storage로 보존한다. 기존 release/실패 로그는 변경하지 않는다.
++
++현재 이미 인증된 rclone remotes를 찾되 secrets를 출력하지 않는다. 두 provider가 준비돼 있으면:
++
++```bash
++python scripts/r3m11_dual_backup.py --file /path/to/return.tar.gz \
++  --drive-remote ACTUAL_DRIVE_REMOTE: --dropbox-remote ACTUAL_DROPBOX_REMOTE: \
++  --receipt /path/to/new/DUAL_BACKUP_RECEIPT.json
++```
++
++실제 remote 이름은 로컬 설정에서 확인한다. 이 script는 remote를 새로 만들거나
++credentials를 요구하지 않는다. local synced-folder 복사만으로 online backup이라 부르지 않는다.
++양 provider raw readback SHA/size가 일치해야 complete다. 권한/연결이 없으면 BACKUP_PENDING
++상태로 실패를 보존하고, 성공한 한쪽만 완료했다고 보고한다.
++
++반환 archive에는 config/code identity/environment, stdout/stderr/exitcode, checkpoint seal,
++분류된 실패 ledger, 결과표, raw source SHA와 commit/remote SHA를 넣는다.
++그 archive 자체의 해시와 업로드 결과를 적는 detached backup receipt는 archive 밖에 둔다.
++이 CR 대화에 붙일 return prompt에는 발견한 실제 변화, numerical gate, 미수행 작업,
++archive SHA/위치와 다음 최소 작업만 적는다. 전체 과거 대화를 다시 읽을 필요는 없다.
+diff --git a/docs/r3m11/STATUS.json b/docs/r3m11/STATUS.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..6780f4521d083365cd37893728b502a0cdf1a4ed
+--- /dev/null
++++ b/docs/r3m11/STATUS.json
+@@ -0,0 +1,28 @@
++{
++  "schema": "BASS_CR_R3M11_STATUS_V1",
++  "node": "R3M11_IMPORTED_LOCAL_NO_GO_AND_CONTROLLED_DIAGNOSTICS",
++  "base_commit": "77237751bdd2aed5934bf7fc3bc626d631a09058",
++  "base_tree": "62c3286d710ae034eb0fcc575998da8501cc967a",
++  "scientific_verdict": "IMPORTED_LOCAL_NO_GO__FIXED_CAP_AND_FINITE_SPAN_CONTROLS_IMPLEMENTED__POSTPROCESS_FIRST__NO_BGRID_OR_PHYSICAL_RATE",
++  "imported_local_execution_matrix": "8/8 completed upstream",
++  "tdl_relative_spatial_change": 0.10473968315683176,
++  "aocc_relative_basis_change": 0.09068769566743899,
++  "screening_threshold": 0.01,
++  "bgrid_decision": "NO_GO",
++  "new_tests": {
++    "controls": 17,
++    "job_matrix": 6,
++    "targeted_full_count_pass": 35,
++    "targeted_skip": 1,
++    "skip_reason": "CuPy unavailable",
++    "full_upstream_suite_replayed": false
++  },
++  "large_archived_states_downloaded_here": false,
++  "production_propagation_run_here": false,
++  "physical_rate_evaluated": false,
++  "production_central_selected": false,
++  "git_push_executed": false,
++  "dual_online_backup_complete": false,
++  "next_node": "R3M12_LOCAL_CONTROLLED_SINGLE_B_RETURN",
++  "changes": "addition-only; parent source/results/manifests retained"
++}
+diff --git a/scripts/r3m11_dual_backup.py b/scripts/r3m11_dual_backup.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..68a3d150d4da731bac71015b5ddb20bf637cf7e6
+--- /dev/null
++++ b/scripts/r3m11_dual_backup.py
+@@ -0,0 +1,85 @@
++#!/usr/bin/env python3
++"""Create-only upload with existing authorized rclone remotes and raw SHA readback.
++
++No credentials are collected or printed. No remote is configured by this script.
++Both destinations are required. A failed upload/readback is not a dual backup.
++"""
++import argparse
++import datetime
++import hashlib
++import json
++from pathlib import Path
++import shutil
++import subprocess
++import sys
++import tempfile
++
++
++def digest(path):
++    h=hashlib.sha256();n=0
++    with Path(path).open('rb') as f:
++        for b in iter(lambda:f.read(4*1024*1024),b''):
++            h.update(b);n+=len(b)
++    return h.hexdigest(),n
++
++
++def remote_digest(path):
++    with tempfile.TemporaryFile() as errfile:
++        proc=subprocess.Popen(['rclone','cat',path],stdout=subprocess.PIPE,stderr=errfile)
++        h=hashlib.sha256();n=0
++        for b in iter(lambda:proc.stdout.read(4*1024*1024),b''):
++            h.update(b);n+=len(b)
++        code=proc.wait();errfile.seek(0)
++        err=errfile.read().decode(errors='replace')
++    if code:raise RuntimeError(f'remote readback failed ({code}): {err[-1500:]}')
++    return h.hexdigest(),n
++
++
++def main():
++    p=argparse.ArgumentParser(description=__doc__)
++    p.add_argument('--file',required=True);p.add_argument('--drive-remote',required=True)
++    p.add_argument('--dropbox-remote',required=True);p.add_argument('--receipt',required=True)
++    p.add_argument('--folder',default='BASS_DERIVATION_DOSSIERS_20260912')
++    a=p.parse_args();source=Path(a.file).resolve();receipt=Path(a.receipt)
++    if receipt.exists():raise FileExistsError('use a new detached receipt path')
++    if not source.is_file():raise FileNotFoundError(source)
++    if not shutil.which('rclone'):raise RuntimeError('rclone unavailable; no remote mutation performed')
++    for r in [a.drive_remote,a.dropbox_remote]:
++        if ':' not in r or '/' in r.split(':')[0] or not r.split(':')[0]:
++            raise ValueError('provide existing rclone remote:path, never a local synchronized folder')
++    if a.drive_remote==a.dropbox_remote:raise ValueError('two distinct provider destinations required')
++    listing=subprocess.run(['rclone','listremotes','--long'],capture_output=True,text=True)
++    if listing.returncode:raise RuntimeError('cannot verify remote provider types; no upload performed')
++    types={}
++    for line in listing.stdout.splitlines():
++        fields=line.split()
++        if len(fields)>=2:types[fields[0].rstrip(':')]=fields[1]
++    if types.get(a.drive_remote.split(':')[0])!='drive' or types.get(a.dropbox_remote.split(':')[0])!='dropbox':
++        raise ValueError('two raw remotes with verified drive/dropbox types are required; aliases/crypt are not silently treated as independent providers')
++    sha,size=digest(source)
++    result=dict(schema='R3M11_DUAL_RAW_BACKUP_V1',created_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
++        artifact=dict(name=source.name,sha256=sha,bytes=size),providers={},dual_backup_complete=False)
++    for provider,remote in [('google_drive',a.drive_remote),('dropbox',a.dropbox_remote)]:
++        target=remote.rstrip('/')
++        if not target.endswith(':'):target+='/'
++        target+=a.folder.strip('/')+'/'+source.name
++        status=dict(destination=target,status='PENDING')
++        try:
++            # --immutable refuses modification of an existing different file.
++            cp=subprocess.run(['rclone','copyto','--immutable',str(source),target],capture_output=True,text=True)
++            if cp.returncode:raise RuntimeError(f'copyto failed ({cp.returncode}): {cp.stderr[-1500:]}')
++            remote_sha,remote_size=remote_digest(target)
++            if (remote_sha,remote_size)!=(sha,size):raise RuntimeError('remote raw SHA/size mismatch')
++            status.update(status='REMOTE_OBJECT_PRESENT_RAW_READBACK_VERIFIED',sha256=remote_sha,bytes=remote_size,
++                          new_object_creation_claimed=False)
++        except Exception as e:
++            status.update(status='FAILED_OR_UNVERIFIED',error=str(e))
++        result['providers'][provider]=status
++        receipt.parent.mkdir(parents=True,exist_ok=True)
++        receipt.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
++    result['dual_backup_complete']=all(x['status']=='REMOTE_OBJECT_PRESENT_RAW_READBACK_VERIFIED' for x in result['providers'].values())
++    receipt.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
++    print(json.dumps(result,ensure_ascii=False,indent=2))
++    return 0 if result['dual_backup_complete'] else 2
++
++if __name__=='__main__':sys.exit(main())
+diff --git a/scripts/r3m11_verify_manifest.py b/scripts/r3m11_verify_manifest.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..2e99704c2d8d1a461ac78e9744c04acf9c8de7b2
+--- /dev/null
++++ b/scripts/r3m11_verify_manifest.py
+@@ -0,0 +1,22 @@
++#!/usr/bin/env python3
++"""Verify a detached SHA-256 manifest without executing or mutating its payload."""
++import argparse
++import hashlib
++from pathlib import Path
++
++def verify(manifest):
++    manifest=Path(manifest).resolve();root=manifest.parent;count=0
++    for line in manifest.read_text().splitlines():
++        if not line.strip():continue
++        expected,relative=line.split('  ',1);path=(root/relative).resolve()
++        if not path.is_relative_to(root):raise ValueError('manifest path escapes root')
++        h=hashlib.sha256()
++        with path.open('rb') as f:
++            for b in iter(lambda:f.read(4*1024*1024),b''):h.update(b)
++        if h.hexdigest()!=expected:raise ValueError(f'hash mismatch: {relative}')
++        count+=1
++    return count
++
++if __name__=='__main__':
++    p=argparse.ArgumentParser(description=__doc__);p.add_argument('manifest');a=p.parse_args()
++    print(f'{verify(a.manifest)} files SHA-256 verified')
+diff --git a/tests/test_r3m11.py b/tests/test_r3m11.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..3d28ebfb23b797c0d56230fd8aff7d24a38d8ce1
+--- /dev/null
++++ b/tests/test_r3m11.py
+@@ -0,0 +1,111 @@
++"""Bounded R3M11 controls; no physical convergence or rate claims."""
++import importlib
++import importlib.util
++import json
++from pathlib import Path
++import numpy as np
++import pytest
++from cr_repro.tdl import TDLRunner
++
++
++def api():
++    assert importlib.util.find_spec('cr_repro.r3m11') is not None, 'R3M11 controls not implemented'
++    return importlib.import_module('cr_repro.r3m11')
++
++
++def cfg():
++    return dict(energy_keV_per_u=100.,b=2.,backend='numpy',grid=dict(xlim=[-4,4],ylim=[-4,4],zlim=[-4,8],dx=1.),dt=.12,z_start=-3.,z_stop=3.,imag_steps=10,project_nmax=1,capture_plane=1.,absorber_width=1.,absorber_power=.25,absorber_reference_dt=.05,projection_slab_x=2)
++
++
++def test_mask_fixed_time_semigroup():
++    m=np.array([1.,.8,.2]);mod=api()
++    a=mod.fixed_rate_mask(m,.1,.05);b=mod.fixed_rate_mask(m,.05,.05)
++    np.testing.assert_allclose(a,b*b,rtol=1e-15,atol=1e-16)
++    np.testing.assert_allclose(a**10,b**20,rtol=2e-14,atol=1e-16)
++
++
++@pytest.mark.parametrize('dt,ref',[(0.,.05),(.05,0.),(float('nan'),.05),(-.01,.05)])
++def test_mask_invalid_time(dt,ref):
++    with pytest.raises(ValueError):api().fixed_rate_mask(np.array([.5]),dt,ref)
++
++
++def test_nonorthogonal_projector_not_naive_sum():
++    B=np.array([[1.,.2],[0.,np.sqrt(.96)],[0.,0.]])
++    G=B.T@B;c=B.T@np.array([1.,0.,0.]);r=api().gram_projection(G,c,1.)
++    assert float(c@c)>1
++    assert r['probability']==pytest.approx(1.)
++    np.testing.assert_allclose(B@r['coefficients'],[1,0,0],atol=2e-15)
++
++
++def test_complex_projector_basis_invariant():
++    B=np.array([[1,1j],[.3,2.],[0.,1.]],complex);v=np.array([.2,.1j,.5]);A=np.array([[2,1j],[.5,1]],complex)
++    def p(C):return api().gram_projection(C.conj().T@C,C.conj().T@v,float(np.vdot(v,v).real))['probability']
++    assert p(B)==pytest.approx(p(B@A),abs=1e-14)
++
++
++def test_gram_rejects_nonhermitian():
++    with pytest.raises(ValueError):api().gram_projection(np.array([[1,1],[0,1.]]),np.ones(2),1.)
++
++
++def test_gram_rejects_rank_loss():
++    with pytest.raises(ValueError):api().gram_projection(np.ones((2,2)),np.ones(2),1.)
++
++
++def test_gram_rejects_probability_above_norm():
++    with pytest.raises(ValueError):api().gram_projection(np.eye(2),np.ones(2),1.)
++
++
++def test_projector_streaming_matches_dense():
++    mod=api();r=TDLRunner(cfg());p,_=r.relaxed_initial()
++    states=[r._project_state(p,n,l,m,r.tf)[2].ravel() for n,l,m in [(1,0,0),(2,0,0),(2,1,-1),(2,1,0),(2,1,1)]]
++    B=np.stack(states,axis=1);G=B.conj().T@B*r.dv;c=B.conj().T@p.ravel()*r.dv
++    exact=mod.gram_projection(G,c,r.norm(p))['probability']
++    got=mod.projector_audit(p,r.spec,r.b,r.v,r.tf,nmax=2,capture_plane=1.,slab_x=1)
++    assert got['P_span_nmax']==pytest.approx(exact,rel=5e-13)
++    assert got['gap_identity_residual']<1e-12
++    assert abs(got['region_minus_span'])<=got['gap_bound']+1e-12
++    assert got['continuum_probability'] is None
++    assert got['remainder_semantics']=='ORTHOGONAL_COMPLEMENT_OF_FINITE_SELECTED_SPAN_NOT_CONTINUUM'
++
++
++def test_controlled_step_reference_no_absorber():
++    mod=api();c=cfg();c['absorber_width']=0
++    old=TDLRunner(c);new=mod.ControlledTDLRunner(c);p,_=old.relaxed_initial()
++    np.testing.assert_allclose(old.step(p,0.),new.step(p,0.),rtol=0,atol=1e-15)
++
++
++def test_controlled_pure_absorber_no_hidden_dt_change():
++    mod=api();a=mod.ControlledTDLRunner(cfg());b=mod.ControlledTDLRunner(dict(cfg(),dt=.06))
++    for obj in [a,b]:obj.kin=np.ones_like(obj.kin);obj.Vmid=lambda t:0.
++    p=np.ones(a.spec.shape(),complex)
++    pa=a.step(p,0.);pb=b.step(p,0.)
++    # Use each exact dt_actual rather than requested dt.
++    wa=-np.log(np.maximum(abs(pa),1e-300))/a.dt_actual
++    wb=-np.log(np.maximum(abs(pb),1e-300))/b.dt_actual
++    np.testing.assert_allclose(wa,wb,rtol=2e-13,atol=2e-13)
++
++
++def test_controlled_runner_resume(tmp_path):
++    mod=api();c=cfg();r=mod.ControlledTDLRunner(c)
++    first=r.run(tmp_path/'split',max_steps=3);assert first['status']=='checkpoint'
++    final=mod.ControlledTDLRunner(c).run(tmp_path/'split');full=mod.ControlledTDLRunner(c).run(tmp_path/'full')
++    np.testing.assert_array_equal(np.load(tmp_path/'split/state.npy'),np.load(tmp_path/'full/state.npy'))
++    assert 'stationary_residual_Eh' in final['initial']
++    assert final['analysis']['gram_audit']['P_span_nmax']==pytest.approx(full['analysis']['gram_audit']['P_span_nmax'])
++    assert final['analysis']['production_admitted'] is False
++
++
++def test_controlled_resume_rejects_mutation(tmp_path):
++    mod=api();c=cfg();r=mod.ControlledTDLRunner(c);r.run(tmp_path,max_steps=2)
++    p=tmp_path/'state.npy';a=np.load(p);a.flat[0]+=1.;np.save(p,a)
++    with pytest.raises(ValueError,match='checkpoint'):mod.ControlledTDLRunner(c).run(tmp_path)
++
++
++def test_controlled_refuses_legacy_checkpoint(tmp_path):
++    TDLRunner(cfg()).run(tmp_path,max_steps=2)
++    with pytest.raises(ValueError,match='checkpoint'):api().ControlledTDLRunner(cfg()).run(tmp_path)
++
++
++def test_saved_audit_refuses_incomplete(tmp_path):
++    c=cfg();TDLRunner(c).run(tmp_path,max_steps=2)
++    with pytest.raises(ValueError,match='incomplete'):api().audit_saved(tmp_path,nmax=1,slab_x=2)
+diff --git a/tests/test_r3m11_jobs.py b/tests/test_r3m11_jobs.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..2f038a890601bb38f07e5bc80760aa0cbe5263d1
+--- /dev/null
++++ b/tests/test_r3m11_jobs.py
+@@ -0,0 +1,53 @@
++"""No expensive physics jobs are launched by these contract tests."""
++import importlib
++import importlib.util
++from pathlib import Path
++import numpy as np
++from cr_repro.grid import GridSpec
++
++
++def api():
++    assert importlib.util.find_spec('cr_repro.r3m11_jobs'), 'run matrix not implemented'
++    return importlib.import_module('cr_repro.r3m11_jobs')
++
++
++def test_all_jobs_are_one_energy_one_impact_parameter():
++    jobs=api().build_matrix()
++    assert len(jobs)>=10
++    for j in jobs.values():
++        assert j['config']['energy_keV_per_u']==100.
++        assert j['config']['b']==2.
++
++
++def test_dt_control_keeps_cap_and_all_other_inputs():
++    jobs=api().build_matrix();base=jobs['tdl_cap_base']['config'];fine=jobs['tdl_dt025']['config']
++    assert {k:v for k,v in base.items() if k!='dt'}=={k:v for k,v in fine.items() if k!='dt'}
++    assert base['absorber_reference_dt']==fine['absorber_reference_dt']==.05
++
++
++def test_initial_preparation_preserves_total_imaginary_time():
++    jobs=api().build_matrix();a=jobs['tdl_cap_base']['config'];b=jobs['tdl_imag025']['config']
++    assert a['imag_dt']*a['imag_steps']==b['imag_dt']*b['imag_steps']
++    assert b['imag_steps']==2*a['imag_steps']
++
++
++def test_radial_and_exponent_changes_are_separate():
++    jobs=api().build_matrix();base=jobs['aocc_base']['config'];rad=jobs['aocc_radial_only']['config'];exp=jobs['aocc_exponent_only']['config']
++    assert {k:v for k,v in rad.items() if k not in ('ns','np')}=={k:v for k,v in base.items() if k not in ('ns','np')}
++    assert {k:v for k,v in exp.items() if k!='alpha_max'}=={k:v for k,v in base.items() if k!='alpha_max'}
++
++
++def test_grid_refinements_keep_nuclei_off_nodes():
++    for j in api().build_matrix().values():
++        c=j['config']
++        if j['lane']!='tdl':continue
++        spec=GridSpec.from_dict(c['grid']);x,y,z=spec.axes(np)
++        assert min(abs(y))>.49*spec.dx
++        assert c['z_stop']<max(z)-c['absorber_width']
++
++
++def test_matrix_generation_create_only(tmp_path):
++    m=api();m.write_matrix(tmp_path/'matrix')
++    assert (tmp_path/'matrix/MATRIX.json').exists()
++    import pytest
++    with pytest.raises(FileExistsError):m.write_matrix(tmp_path/'matrix')
