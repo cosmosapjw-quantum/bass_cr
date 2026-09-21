@@ -1,0 +1,40 @@
+{
+  "schema": "CR_R3M10_LOCAL_RUN_MATRIX_V1",
+  "order": [
+    {
+      "id": "T0",
+      "cmd": "pytest -q",
+      "gate": "all pass"
+    },
+    {
+      "id": "T1",
+      "cmd": "python -m cr_repro.cli tdl --config configs/tdl_smoke_100kevu_b2.json --out runs/tdl_smoke",
+      "gate": "completes; regression only"
+    },
+    {
+      "id": "A1",
+      "cmd": "python -m cr_repro.cli aocc --config configs/aocc_smoke_100kevu_b2.json --out runs/aocc_smoke",
+      "gate": "norm/anti-Hermitian checks"
+    },
+    {
+      "id": "T2",
+      "cmd": "python -m cr_repro.cli tdl --config configs/tdl_prod_100kevu_b2_baseline.json --out runs/tdl100_b2",
+      "gate": "baseline completes"
+    },
+    {
+      "id": "T3",
+      "cmd": "dt025 + dx03125 + plane25 + z75 + boxwide variants",
+      "gate": "freeze numerical convergence before b-grid"
+    },
+    {
+      "id": "A2",
+      "cmd": "AOCC baseline + basis_large",
+      "gate": "basis convergence"
+    },
+    {
+      "id": "BGRID",
+      "cmd": "generate/run b-grid only after explicit GO",
+      "gate": "NO-GO by default"
+    }
+  ]
+}

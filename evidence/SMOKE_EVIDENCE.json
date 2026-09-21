@@ -1,0 +1,45 @@
+{
+  "schema": "CR_R3M10_SMOKE_EVIDENCE_V1",
+  "claim": "implementation regression evidence only; none of these reduced-box/coarse-basis numbers is a physical cross-section result",
+  "TDL": {
+    "baseline_dx1_dt0p12": {
+      "E0_Eh": -0.3991851401703297,
+      "norm": 0.9977621000830712,
+      "P_bound_n1": 0.001590782622420106,
+      "P_region": 0.020259329411343417
+    },
+    "dt0p06": {
+      "E0_Eh": -0.3991851401703297,
+      "norm": 0.9971696689461502,
+      "P_bound_n1": 0.0016159763232519722,
+      "P_region": 0.020224600742147294,
+      "P_bound_rel_change_vs_baseline": 0.015590389827721441
+    },
+    "dx0p8": {
+      "E0_Eh": -0.42377240664295346,
+      "norm": 0.9963058278219555,
+      "P_bound_n1": 0.0029178451038248446,
+      "P_region": 0.021681498827910827,
+      "P_bound_rel_change_vs_dx1": 0.45480909170441036
+    },
+    "interpretation": "space discretization is clearly not converged in smoke setup; full b-grid is NO-GO before production single-b dx refinement"
+  },
+  "AOCC": {
+    "baseline_ns5_np3_dt0p4": {
+      "norm": 0.9999999999999987,
+      "P_projectile_bound": 0.007652853486163737,
+      "P_target_bound": 0.8868872153922417,
+      "max_antihermitian_defect": 5.537647202911271e-15
+    },
+    "dt0p2": {
+      "norm": 0.9999999999999816,
+      "P_projectile_bound": 0.00766007104553405,
+      "P_target_bound": 0.8868409419744354,
+      "max_antihermitian_defect": 3.289927355319475e-15,
+      "P_projectile_rel_change": 0.0009422313875953558
+    },
+    "basis_ns6_np4_full_trajectory": "TIMEOUT_IN_CURRENT_BOUNDED_RUNTIME__NOT_COMPLETED",
+    "interpretation": "small-basis time stepping is stable; basis completeness remains the next gate"
+  },
+  "global_GO_NO_GO": "NO_GO_FOR_100KEVU_BGRID__GO_FOR_LOCAL_SINGLE_B_REFINEMENT_MATRIX"
+}
