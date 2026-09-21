@@ -1,0 +1,155 @@
+--- original/cr_repro/aocc.py
++++ executed/cr_repro/aocc.py
+@@ -40,7 +40,7 @@
+         for g in self.groups:
+             if g['sl'].start<=a<g['sl'].stop: return g,a-g['sl'].start
+         raise IndexError(a)
+-    def matrix(self,t):
++    def matrix_reference(self,t):
+         O=np.zeros((self.nb,self.nb),complex);H=np.zeros_like(O);D=np.zeros_like(O)
+         for i,(L,a) in enumerate(self.basis):
+             ga,ia=self.atomic_components(a); ca=ga['C'][:,ia]; A=self.center(L,t); ka=self.kvec(L); pha=self.phase(L,t)
+@@ -53,6 +53,30 @@
+                 D0=ca.T@moving_ket_overlap(sha,shb,self.velocity(R))@cb
+                 if R=='P': D0 += (-0.5j*self.v*self.v)*S0
+                 O[i,j]=ph*S0; H[i,j]=ph*H0; D[i,j]=ph*D0
++        return O,H,D
++    def matrix(self,t):
++        # Evaluate each primitive shell pair once, then contract all retained states.
++        # matrix_reference preserves the original per-state loop for parity tests.
++        blocks=[]
++        for label in ('T','P'):
++            for g in self.groups:
++                selected=[(i,a-g['sl'].start) for i,(L,a) in enumerate(self.basis)
++                          if L==label and g['sl'].start<=a<g['sl'].stop]
++                if not selected: continue
++                rows,cols=map(list,zip(*selected))
++                sh=Shell(g['exps'],g['pow'],self.center(label,t),self.kvec(label))
++                blocks.append((label,rows,g['C'][:,cols],sh,self.phase(label,t)))
++        O=np.zeros((self.nb,self.nb),complex);H=np.zeros_like(O);D=np.zeros_like(O)
++        projectile=self.center('P',t)
++        for L,rows,ca,sha,pha in blocks:
++            for R,cols,cb,shb,phb in blocks:
++                ph=np.conj(pha)*phb
++                S0=ca.T@overlap(sha,shb)@cb
++                H0=ca.T@(kinetic(sha,shb)+nuclear(sha,shb,[0,0,0])+nuclear(sha,shb,projectile))@cb
++                D0=ca.T@moving_ket_overlap(sha,shb,self.velocity(R))@cb
++                if R=='P': D0+=(-0.5j*self.v*self.v)*S0
++                ix=np.ix_(rows,cols)
++                O[ix]=ph*S0;H[ix]=ph*H0;D[ix]=ph*D0
+         return O,H,D
+     @staticmethod
+     def metric_factor(O): return np.linalg.cholesky((O+O.conj().T)/2).conj().T
+--- original/configs/tdl_prod_100kevu_b2_z75.json
++++ executed/configs/tdl_prod_100kevu_b2_z75.json
+@@ -13,7 +13,7 @@
+     ],
+     "zlim": [
+       -30,
+-      105
++      105.2
+     ],
+     "dx": 0.4
+   },
+@@ -28,4 +28,4 @@
+   "project_nmax": 3,
+   "capture_plane": 30.0,
+   "checkpoint_stride": 100
+-}+}
+--- original/configs/tdl_prod_100kevu_b2_boxwide.json
++++ executed/configs/tdl_prod_100kevu_b2_boxwide.json
+@@ -4,16 +4,16 @@
+   "backend": "auto",
+   "grid": {
+     "xlim": [
+-      -35,
+-      45
++      -35.2,
++      45.2
+     ],
+     "ylim": [
+-      -35,
+-      35
++      -35.2,
++      35.2
+     ],
+     "zlim": [
+-      -35,
+-      95
++      -35.2,
++      95.2
+     ],
+     "dx": 0.4
+   },
+@@ -28,4 +28,4 @@
+   "project_nmax": 3,
+   "capture_plane": 30.0,
+   "checkpoint_stride": 100
+-}+}
+--- original/tests/test_production_configs.py
++++ executed/tests/test_production_configs.py
+@@ -0,0 +1,21 @@
++"""Regression checks for supplied production-grid construction failures."""
++import json
++from pathlib import Path
++import numpy as np
++import pytest
++from cr_repro.grid import GridSpec
++ROOT=Path(__file__).resolve().parents[1]
++@pytest.mark.parametrize('name',['baseline','dt025','dx03125','plane25','z75','boxwide'])
++def test_production_grid_is_integral_and_avoids_coulomb_nodes(name):
++    cfg=json.loads((ROOT/f'configs/tdl_prod_100kevu_b2_{name}.json').read_text())
++    grid=GridSpec.from_dict(cfg['grid'])
++    x,y,z=grid.axes(np)
++    # Both nuclei move within y=0. A half-step y offset excludes either singularity at any time.
++    assert np.min(np.abs(y)) >= 0.49*grid.dx
++    assert cfg['z_stop'] < cfg['grid']['zlim'][1]-cfg['absorber_width']
++
++def test_plane_and_final_separation_are_varied_independently():
++    load=lambda n:json.loads((ROOT/f'configs/tdl_prod_100kevu_b2_{n}.json').read_text())
++    a,p,z=map(load,['baseline','plane25','z75'])
++    assert p['z_stop']==a['z_stop'] and p['capture_plane']!=a['capture_plane']
++    assert z['capture_plane']==a['capture_plane'] and z['z_stop']!=a['z_stop']
+--- original/tests/test_aocc_batching.py
++++ executed/tests/test_aocc_batching.py
+@@ -0,0 +1,26 @@
++import json
++from pathlib import Path
++import numpy as np
++import pytest
++from cr_repro.aocc import OneElectronAOCC
++ROOT=Path(__file__).resolve().parents[1]
++def config(name):return json.loads((ROOT/f'configs/aocc_{name}_100kevu_b2.json').read_text())
++@pytest.mark.parametrize('time',[-3.5,0.,2.1])
++def test_batched_integrals_match_original_state_loop(time):
++    obj=OneElectronAOCC(config('smoke'))
++    for got,want in zip(obj.matrix(time),obj.matrix_reference(time)):
++        np.testing.assert_allclose(got,want,rtol=1e-11,atol=1e-12)
++
++def test_whole_trajectory_matches_original_dynamics():
++    cfg=config('smoke');old=OneElectronAOCC(cfg);old.matrix=old.matrix_reference
++    ref=old.run();got=OneElectronAOCC(cfg).run()
++    for field in ('P_projectile_bound','P_target_bound','norm'):
++        np.testing.assert_allclose(got[field],ref[field],rtol=1e-10,atol=1e-12)
++
++@pytest.mark.parametrize('basis',['baseline','basis_large'])
++def test_production_basis_matrix_parity(basis):
++    cfg=json.loads((ROOT/f'configs/aocc_prod_100kevu_b2_{basis}.json').read_text())
++    obj=OneElectronAOCC(cfg)
++    for time in [obj.t0,0.0,obj.tf]:
++        for got,want in zip(obj.matrix(time),obj.matrix_reference(time)):
++            np.testing.assert_allclose(got,want,rtol=1e-11,atol=1e-12)
+--- original/tests/test_gpu_runtime.py
++++ executed/tests/test_gpu_runtime.py
+@@ -0,0 +1,11 @@
++import numpy as np
++import pytest
++
++def test_cupy_fft_and_strang_match_numpy(tmp_path):
++    cp=pytest.importorskip('cupy')
++    from cr_repro.tdl import TDLRunner
++    cfg={'energy_keV_per_u':100.,'b':2.,'grid':{'xlim':[-4,4],'ylim':[-4,4],'zlim':[-4,8],'dx':1.},'dt':0.12,'z_start':-3.,'z_stop':3.,'imag_steps':10,'project_nmax':1,'capture_plane':1.,'absorber_width':1.}
++    cpu=TDLRunner(dict(cfg,backend='numpy')).run(tmp_path/'cpu')
++    gpu=TDLRunner(dict(cfg,backend='cupy')).run(tmp_path/'gpu')
++    np.testing.assert_allclose(np.load(tmp_path/'gpu/state.npy'),np.load(tmp_path/'cpu/state.npy'),atol=1e-12,rtol=1e-10)
++    np.testing.assert_allclose(gpu['analysis']['P_bound_truncated_nmax'],cpu['analysis']['P_bound_truncated_nmax'],atol=1e-12,rtol=1e-10)

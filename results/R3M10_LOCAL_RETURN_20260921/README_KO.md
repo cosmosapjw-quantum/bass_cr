@@ -1,0 +1,63 @@
+# R3M10 local return — R3M11 import용 100 keV/u, b=2 a₀ 결과
+
+**100-keV/u b-grid: NO_GO.** 지정한 TDL 6개와 AOCC 2개 실행은 모두 완료됐으나 내부 수렴은 통과하지 못했다.
+
+이 작업은 출판된 물리 문제의 독립적인 paper-based 구현과 결과 감사다. Nichols 비공개 구현의 재현이 아니다. 원본 입력은 `input_package.tar.gz`에 보존했으며, 입력 manifest는 변경 전과 종료 시 모두 검증했다.
+
+## TDL: projectile bound projection (n ≤ 3)
+
+상대 변화 = `abs(variant − baseline) / abs(baseline)`. 1%는 결과를 보기 전에 고정한 선별 기준이며, 통과만으로 점근 수렴이나 all-bound capture를 인정하지 않는다.
+
+| Run | P_bound (n≤3) | 기준 대비 변화 | P_region | 초기 E (Eh) | 최종 norm |
+|---|---:|---:|---:|---:|---:|
+| tdl_baseline_retry | 0.006866222949 | 0.00000% | 0.0243061661 | -0.4721060456 | 0.9795004951 |
+| tdl_dt025 | 0.006894595947 | 0.41323% | 0.02432331318 | -0.4721060456 | 0.9792176862 |
+| tdl_dx03125 | 0.007585388966 | 10.47397% | 0.02564826808 | -0.4813887527 | 0.9784806719 |
+| tdl_plane25 | 0.006866222949 | 0.00000% | 0.03174248874 | -0.4721060456 | 0.9795004951 |
+| tdl_z75 | 0.006874681265 | 0.12319% | 0.02918820692 | -0.4721060456 | 0.9664109110 |
+| tdl_boxwide | 0.006865222667 | 0.01457% | 0.02627645526 | -0.4721060456 | 0.9854914494 |
+
+공간 격자 변화가 주요 blocker다. Capture plane만 30→25 a₀로 바꾼 실행은 bound 확률을 유지하고 region 확률만 바꾼다. z_stop=75 실행은 capture plane=30을 유지했다. dt 변화에서는 매 step 적용되는 흡수 마스크의 유효 강도도 달라지므로 완전히 분리된 시간 이산화 오차 추정으로 확대 해석하지 않는다.
+
+14개 상태의 복소 진폭과 유한 격자 상태 norm은 각 `runs/tdl_*/result.json` 및 `report/tdl_convergence.json`에 있다. n=1 eps_b, eps_c와 estimator-gap bound는 각 `n1_diagnostics.json`에 있다. 이 보충 진단은 유한 격자에서 정규화한 rank-one Gram projector를 사용하며, 원래 n≤3 overlap sum을 바꾸지 않는다. eps_c는 1s 직교 여공간 전체로서 높은 bound state도 포함한다. 모든 보충 gap 부등식의 수치 성립을 확인했다. n>3 completion 및 target/projectile 결합 채널 closure는 평가하지 않았다.
+
+## AOCC: symmetric basis refinement
+
+| Basis | 전체 retained basis | P_projectile_bound | 기준 대비 변화 | Metric norm | 최대 anti-Hermitian defect |
+|---|---:|---:|---:|---:|---:|
+| aocc_baseline | 52 | 0.01017908452 | 0.00000% | 1.000000000000007 | 6.3225e-07 |
+| aocc_basis_large | 72 | 0.009255966797 | 9.06877% | 1.000000000000002 | 1.0103e-05 |
+
+Baseline은 ns=12/np=8, 큰 basis는 ns=16/np=12이며 각 중심에 동일한 bound/pseudostate 구성을 적용했다. 큰 basis는 s exponent 상한도 100→1000으로 바뀌는 공급된 설정이다. 결과는 각 중심의 음에너지 상태에 대한 metric projection이다. Metric norm 보존은 basis convergence가 아니다. 전파기는 generator를 Hermitian화하므로 norm만으로 미세한 metric/integral 결함을 배제할 수 없고, production anti-Hermitian defect를 별도로 남겼다. Production basis의 dt refinement와 더 완전한 대칭 radial/angular/continuum 표현은 아직 필요하다.
+
+내부 수렴을 확보하기 전이므로 TDL/AOCC 간 물리 확률 일치 여부는 판정하지 않았다. AOCC finite-basis 음에너지 합과 TDL n≤3 합의 truncation도 서로 다르다.
+
+## 실행·수정·검증
+
+- 깨끗한 `.venv`에 requirements와 editable package를 설치했다. 설치 로그, pip freeze, Python/library/GPU 정보 및 cuFFT 경로/해시는 `receipts/`에 있다. 각 production 실행은 자체 environment receipt를 갖는다.
+- 원본 테스트 6/6, 설정 회귀 포함 13/13, AOCC batching 검증 포함 19/19, GPU parity 1/1을 통과했다. 최종 전체 suite는 20/20 PASS이며 receipt는 `runs/pytest_final/`에 있다.
+- z75의 상자 상단만 105→105.2 a₀로 바꾸어 정수 cell 수를 확보했다. boxwide는 x=[−35.2,45.2], y=[−35.2,35.2], z=[−35.2,95.2]로 최소 조정해 Coulomb 원점의 격자점 배치를 제거했다. dx·trajectory·capture plane·absorber 설정은 유지했다.
+- AOCC는 중복 shell 적분을 묶어서 계산했다. 원래 per-state loop를 보존하고 분리/충돌 시각의 O/H/D 행렬, 전체 smoke 궤적, 두 production basis에서 일치를 검증했다. Vendor primitive와 전파·metric projector는 변경하지 않았다.
+- 첫 GPU baseline은 cuFFT loader 오류로 물리 전파 전에 실패했다. 기존 라이브러리를 실행별 경로에 연결한 후 CPU/GPU 전체 소형 궤적 parity를 검증하고 동일 baseline을 한 번 재실행했다. 실패 디렉터리는 그대로 있다.
+- `report/changes.patch`에 모든 source/config/test 변경을 제공한다. 저비용 에이전트는 비-Git 전달 패키지의 등록 제한 때문에 실행되지 않았으며, Host가 작업했다. 독립 에이전트 리뷰나 측정된 비용 절감은 주장하지 않는다.
+
+## 자원과 checkpoint
+
+| Run | Wall (s) | Peak host RSS (MiB) | Sampled GPU peak (MiB) |
+|---|---:|---:|---:|
+| tdl_baseline_retry | 29.998 | 1271.9 | 1548 |
+| tdl_dt025 | 42.875 | 1245.7 | 1548 |
+| tdl_dx03125 | 52.650 | 2133.8 | 2910 |
+| tdl_plane25 | 26.778 | 1246.1 | 1548 |
+| tdl_z75 | 32.883 | 1483.6 | 1692 |
+| tdl_boxwide | 63.847 | 1712.7 | 2376 |
+| aocc_baseline | 51.814 | 67.2 | N/A (CPU) |
+| aocc_basis_large | 62.436 | 71.9 | N/A (CPU) |
+
+GPU peak는 2초 간격의 해당 process-group 관측 최대값으로 정확한 하드웨어 high-water mark는 아니다. Wall time은 초기화·전파·기본 projection 분석을 포함한다. 보충 n=1 후처리 시간은 별도로 측정하지 않았다. TDL은 `state.npy/state.json`을 보존했다. AOCC의 `y_checkpoint.npy`는 중간 직교 frame 상태이며 저장 step을 `checkpoint_metadata.json`에 명시했다. 원래 AOCC CLI에는 검증된 restart loader가 없다.
+
+## 반환 및 다음 경계
+
+`report/DECISION.json`, 두 CSV/JSON 수렴표, `report/FAILURE_LEDGER.json`, 모든 run receipt/stdout/stderr/result/checkpoint, 환경 receipt, `MANIFEST.sha256`이 반환 자료다. `sha256sum -c MANIFEST.sha256`으로 실행 결과 묶음을 검증할 수 있다. `.venv` 자체는 배포 archive에서 제외하고 설치 재료와 환경 receipt를 보존했다. 실행은 저장된 절대 경로를 기준으로 한다.
+
+다음 CR node: **R3M11_IMPORT_LOCAL_SINGLE_B_RESULTS_AND_DECIDE_BGRID_GATE**. 현재 결정은 **NO_GO**. 다음 물리 작업은 TDL spatial/initial-state refinement와 AOCC 대칭 pseudostate 완성도·production dt/metric 안정성 점검이다. 이 package에서는 b-grid, tail closure, 적분 cross section, 50/225 keV/u, production central 및 physical rate를 실행하거나 선택하지 않았다.

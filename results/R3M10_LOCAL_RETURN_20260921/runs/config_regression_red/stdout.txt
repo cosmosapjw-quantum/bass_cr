@@ -1,0 +1,54 @@
+....FF.                                                                  [100%]
+=================================== FAILURES ===================================
+________ test_production_grid_is_integral_and_avoids_coulomb_nodes[z75] ________
+
+name = 'z75'
+
+    @pytest.mark.parametrize('name',['baseline','dt025','dx03125','plane25','z75','boxwide'])
+    def test_production_grid_is_integral_and_avoids_coulomb_nodes(name):
+        cfg=json.loads((ROOT/f'configs/tdl_prod_100kevu_b2_{name}.json').read_text())
+        grid=GridSpec.from_dict(cfg['grid'])
+>       x,y,z=grid.axes(np)
+              ^^^^^^^^^^^^^
+
+tests/test_production_configs.py:12: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+cr_repro/grid.py:20: in axes
+    for (lo,hi),n in zip([self.xlim,self.ylim,self.zlim],self.shape()):
+                                                         ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = GridSpec(xlim=(-30.0, 40.0), ylim=(-30.0, 30.0), zlim=(-30.0, 105.0), dx=0.4)
+
+    def shape(self):
+        out=[]
+        for lohi in [self.xlim,self.ylim,self.zlim]:
+            L=lohi[1]-lohi[0]; n=round(L/self.dx)
+>           if abs(n*self.dx-L)>1e-9: raise ValueError('box lengths must be integer multiples of dx for cell-centered grid')
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           ValueError: box lengths must be integer multiples of dx for cell-centered grid
+
+cr_repro/grid.py:15: ValueError
+______ test_production_grid_is_integral_and_avoids_coulomb_nodes[boxwide] ______
+
+name = 'boxwide'
+
+    @pytest.mark.parametrize('name',['baseline','dt025','dx03125','plane25','z75','boxwide'])
+    def test_production_grid_is_integral_and_avoids_coulomb_nodes(name):
+        cfg=json.loads((ROOT/f'configs/tdl_prod_100kevu_b2_{name}.json').read_text())
+        grid=GridSpec.from_dict(cfg['grid'])
+        x,y,z=grid.axes(np)
+        # Both nuclei move within y=0. A half-step y offset excludes either singularity at any time.
+>       assert np.min(np.abs(y)) >= 0.49*grid.dx
+E       AssertionError: assert np.float64(0.0) >= (0.49 * 0.4)
+E        +  where np.float64(0.0) = <function min at 0x7eaec43db570>(array([34.8, 34.4, 34. , 33.6, 33.2, 32.8, 32.4, 32. , 31.6, 31.2, 30.8,\n       30.4, 30. , 29.6, 29.2, 28.8, 28.4, 28....6, 28. , 28.4, 28.8, 29.2, 29.6, 30. , 30.4, 30.8,\n       31.2, 31.6, 32. , 32.4, 32.8, 33.2, 33.6, 34. , 34.4, 34.8]))
+E        +    where <function min at 0x7eaec43db570> = np.min
+E        +    and   array([34.8, 34.4, 34. , 33.6, 33.2, 32.8, 32.4, 32. , 31.6, 31.2, 30.8,\n       30.4, 30. , 29.6, 29.2, 28.8, 28.4, 28....6, 28. , 28.4, 28.8, 29.2, 29.6, 30. , 30.4, 30.8,\n       31.2, 31.6, 32. , 32.4, 32.8, 33.2, 33.6, 34. , 34.4, 34.8]) = <ufunc 'absolute'>(array([-34.8, -34.4, -34. , -33.6, -33.2, -32.8, -32.4, -32. , -31.6,\n       -31.2, -30.8, -30.4, -30. , -29.6, -29.2,... 29.2,  29.6,\n        30. ,  30.4,  30.8,  31.2,  31.6,  32. ,  32.4,  32.8,  33.2,\n        33.6,  34. ,  34.4,  34.8]))
+E        +      where <ufunc 'absolute'> = np.abs
+E        +  and   0.4 = GridSpec(xlim=(-35.0, 45.0), ylim=(-35.0, 35.0), zlim=(-35.0, 95.0), dx=0.4).dx
+
+tests/test_production_configs.py:14: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_production_configs.py::test_production_grid_is_integral_and_avoids_coulomb_nodes[z75]
+FAILED tests/test_production_configs.py::test_production_grid_is_integral_and_avoids_coulomb_nodes[boxwide]
+2 failed, 5 passed in 0.07s

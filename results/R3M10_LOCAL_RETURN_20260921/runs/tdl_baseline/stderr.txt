@@ -1,0 +1,29 @@
+/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/lib/python3.12/site-packages/cuda/pathfinder/_dynamic_libs/search_steps.py:238: UserWarning: Multiple CUDA environment variables are set but differ:
+  CUDA_PATH=/usr/local/cuda-12.8
+  CUDA_HOME=/usr/local/cuda
+Using CUDA_PATH (highest priority).
+  cuda_home = get_cuda_path_or_home()
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/sn850x2t/bass_cr_r3m11_20260921/source/cr_repro/cli.py", line 17, in <module>
+    if __name__=='__main__': main()
+                             ^^^^^^
+  File "/mnt/sn850x2t/bass_cr_r3m11_20260921/source/cr_repro/cli.py", line 13, in main
+    if ns.cmd=='tdl': r=TDLRunner(cfg).run(ns.out,ns.max_steps)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/sn850x2t/bass_cr_r3m11_20260921/source/cr_repro/tdl.py", line 79, in run
+    psi,init=self.relaxed_initial(); done=0
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/sn850x2t/bass_cr_r3m11_20260921/source/cr_repro/tdl.py", line 39, in relaxed_initial
+    psi=vh*psi; psi=self.xp.fft.ifftn(kin*self.xp.fft.fftn(psi)); psi=vh*psi; psi=self.normalize(psi)
+                                          ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/lib/python3.12/site-packages/cupy/fft/_fft.py", line 802, in fftn
+    from cupy.cuda import cufft
+  File "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/lib/python3.12/site-packages/cupy/cuda/__init__.py", line 85, in __getattr__
+    return _importlib.import_module('cupy.cuda.cufft')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ImportError: libcufft.so.11: cannot open shared object file: No such file or directory

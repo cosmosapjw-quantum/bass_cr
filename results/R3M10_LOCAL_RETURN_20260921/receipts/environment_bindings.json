@@ -1,0 +1,14 @@
+{
+  "environment_cpu.json": {
+    "scope": [
+      "pytest_original",
+      "config_regression_red",
+      "pytest_repaired",
+      "tdl_smoke",
+      "aocc_smoke"
+    ],
+    "capture": "post-run environment observation before CuPy finished installing; exact interpreter and package versions retained in install logs"
+  },
+  "per_run_environment.json": "Each subsequent run has its own environment.json; tdl_baseline records failed loader, retry records cuFFT LD_LIBRARY_PATH repair.",
+  "timing": "Wall time includes initialization and analysis; CPU/GPU memory are separately measured; GPU peak is sampled every two seconds, not exact hardware high-water mark."
+}
