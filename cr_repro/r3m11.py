@@ -184,6 +184,14 @@ class ControlledTDLRunner(TDLRunner):
         result['production_admitted']=False
         return result
 
+    def _save_checkpoint(self,out,psi,metadata):
+        super()._save_checkpoint(out,psi,metadata)
+        # Seal each completed stride, not just the end of a whole chunk. An
+        # interruption in a later step must not invalidate an already saved pair.
+        atomic_json(out/'r3m11_checkpoint_seal.json',dict(
+            schema='R3M11_CHECKPOINT_SEAL_V1',source_digest=self.cfg['_r3m11_source_digest'],
+            files={name:file_sha(out/name) for name in ['state.json','state.npy']}))
+
     def run(self,outdir,max_steps=None):
         out=Path(outdir);seal=out/'r3m11_checkpoint_seal.json'
         if max_steps is not None and (isinstance(max_steps,bool) or int(max_steps)!=max_steps or max_steps<=0):
@@ -195,10 +203,7 @@ class ControlledTDLRunner(TDLRunner):
             for name in ['state.json','state.npy']:
                 if not (out/name).is_file() or file_sha(out/name)!=s['files'][name]:
                     raise ValueError('checkpoint hash mismatch')
-        result=super().run(out,max_steps=max_steps)
-        atomic_json(seal,dict(schema='R3M11_CHECKPOINT_SEAL_V1',source_digest=source_digest(),
-                    files={name:file_sha(out/name) for name in ['state.json','state.npy']}))
-        return result
+        return super().run(out,max_steps=max_steps)
 
 
 def audit_saved(run_dir, *, nmax: int=3, slab_x: int=2, expected_state_sha256: str|None=None) -> dict:
