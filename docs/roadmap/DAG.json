@@ -1,0 +1,153 @@
+{
+  "schema": "BASS_CR_RESEARCH_DAG_V1",
+  "stages": [
+    "N0",
+    "N1",
+    "N2",
+    "N3",
+    "N4",
+    "N5"
+  ],
+  "nodes": [
+    {
+      "id": "N0",
+      "input_authority": [
+        "8c7bbfce157f17b85dc9082c62c63c05fef3b294",
+        "docs/CLAIM_POLICY.md",
+        "docs/LITERATURE_AND_METHOD_LOCK.md"
+      ],
+      "observable_scope": "schema/gate semantics/error budget",
+      "executables_or_outputs": [
+        "scripts/r3m15_gate.py",
+        "tests/test_r3m15_gate.py",
+        "docs/r3m15/CLAIM_GATE_ADDENDUM.json",
+        "docs/roadmap/ERROR_BUDGET.json"
+      ],
+      "exit_criterion": "fixed semantics regressions pass; typed undefined/mismatch; budgets preregistered",
+      "failure_branch": "repair exact schema/semantics defect",
+      "status": "COMPLETED_SCHEMA_AND_PLAN_ONLY",
+      "scientific_completion": false
+    },
+    {
+      "id": "N1_TDL",
+      "input_authority": [
+        "N0",
+        "8c7bbfce157f17b85dc9082c62c63c05fef3b294"
+      ],
+      "observable_scope": "100 keV/u single-b finite sampled projectile spans",
+      "executables_or_outputs": [
+        "r3m15 A/B/C at b=2; future separate preparation,h,dt,box/CAP,start/stop ladders"
+      ],
+      "exit_criterion": "each numerical dimension has justified estimate meeting allocated budget and cross checks; current matrix alone insufficient",
+      "failure_branch": "representation decision if h nonconvergent; dt/boundary crosscheck if spatial pattern established",
+      "status": "IN_PROGRESS_R3M15",
+      "scientific_completion": false
+    },
+    {
+      "id": "N1_AOCC",
+      "input_authority": [
+        "N0",
+        "8c7bbfce157f17b85dc9082c62c63c05fef3b294:cr_repro/aocc.py"
+      ],
+      "observable_scope": "100 keV/u single-b s+p aggregate currently; matched bound-channel readout required",
+      "executables_or_outputs": [
+        "future final C/O/eps/channel metadata; radial,exponent,pseudostate,angular,dt ladders"
+      ],
+      "exit_criterion": "separate basis/dt ladders and pre-symmetrization generator/metric identity defects controlled",
+      "failure_branch": "repair channel/metric representation, then isolated ladder; no d validation without implemented d basis",
+      "status": "NOT_RUN",
+      "scientific_completion": false
+    },
+    {
+      "id": "N2",
+      "input_authority": [
+        "N1_TDL",
+        "N1_AOCC"
+      ],
+      "observable_scope": "common 1s/n<=2/n<=3 and all-bound truncation",
+      "executables_or_outputs": [
+        "matched channel projectors and nested-span comparison; justified high-n completion"
+      ],
+      "exit_criterion": "both lanes internally converged on same observable; high-n uncertainty controlled to .15%; no finite complement=continuum",
+      "failure_branch": "reopen missing angular/radial/support or bound tail control",
+      "status": "NOT_RUN",
+      "scientific_completion": false
+    },
+    {
+      "id": "N3",
+      "input_authority": [
+        "N2"
+      ],
+      "observable_scope": "100 keV/u 2pi integral b P_bound db",
+      "executables_or_outputs": [
+        "adaptive b-grid, quadrature estimate, tail extension"
+      ],
+      "exit_criterion": "N2 passes; b quadrature .10% and tail .05% independently demonstrated",
+      "failure_branch": "add justified b panel/tail only under later authorization",
+      "status": "NOT_RUN",
+      "scientific_completion": false
+    },
+    {
+      "id": "N4",
+      "input_authority": [
+        "N3"
+      ],
+      "observable_scope": "independent 50,225 keV/u using frozen 100 keV/u procedure",
+      "executables_or_outputs": [
+        "energy-specific atomic runs and convergence checks"
+      ],
+      "exit_criterion": "energy-specific support and entire budget satisfied; no interpolation from three points",
+      "failure_branch": "reopen energy-specific dimension without silent retuning",
+      "status": "NOT_RUN",
+      "scientific_completion": false
+    },
+    {
+      "id": "N5",
+      "input_authority": [
+        "N4"
+      ],
+      "observable_scope": "atomic dataset release and scoped BASS source handback",
+      "executables_or_outputs": [
+        "atomic dataset, provenance, external comparison, explicit consumer support matrix"
+      ],
+      "exit_criterion": "atomic release gates closed; separate HOST consumer approval only on matching channel/energy/state/host contract",
+      "failure_branch": "retain atomic result without unsupported HOST admission",
+      "status": "NOT_RUN",
+      "scientific_completion": false
+    }
+  ],
+  "edges": [
+    [
+      "N0",
+      "N1_TDL"
+    ],
+    [
+      "N0",
+      "N1_AOCC"
+    ],
+    [
+      "N1_TDL",
+      "N2"
+    ],
+    [
+      "N1_AOCC",
+      "N2"
+    ],
+    [
+      "N2",
+      "N3"
+    ],
+    [
+      "N3",
+      "N4"
+    ],
+    [
+      "N4",
+      "N5"
+    ]
+  ],
+  "HOST_P0_is_atomic_prerequisite": false,
+  "HOST_consumer_admission": "SEPARATE_NOT_AUTHORIZED",
+  "three_energies_are_4_to_81_continuous_1s_source": false,
+  "bgrid_current_admission": "NO_GO"
+}
