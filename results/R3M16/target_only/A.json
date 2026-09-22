@@ -1,0 +1,160 @@
+{
+  "schema": "BASS_CR_R3M16_TARGET_ONLY_HDT_V1",
+  "status": "COMPLETE",
+  "claim_scope": "TARGET_ONLY_DIAGNOSTIC_NOT_CAPTURE_PROBABILITY_ERROR",
+  "projectile_potential_included": false,
+  "CAP_included": false,
+  "cross_grid_state_pair_theorem_used": false,
+  "config_sha256": "6ea679bb02fbbe7a7bcc1ae12abe772e29b5e8579efd1d01ec7447e93da38a63",
+  "prepared_receipt_sha256": "2d16957fe123eba596ec7d5d498a82950bcbfdc920513484f910f0de3d8f2d3b",
+  "state_sha256": "08595a1a42900da0a86f0401d28e98f79c0663524a8222d3c51756223a13ee8e",
+  "collision_result_sha256": "42a76cff7b9dad4354a0c9e059696108ebb37151f7554a0a5b5895849d4666ce",
+  "numerical_source_digest": "581ff84930bb862efafdfec5d39d5b25aebf9297ce7ce45f833a5abe125b2a5b",
+  "instrumentation_sha256": "7f065c63fef5cbb23cf4a6b8ade5c1c1adf56d0839113db3ee4511cf1eb50a35",
+  "runtime_environment": {
+    "python": "3.12.3",
+    "numpy": "2.5.3",
+    "backend": "cupy",
+    "cupy": "14.2.0",
+    "cuda_runtime": 12090,
+    "cuda_driver": 13020,
+    "cuda_device_id": 0,
+    "cuda_device_name": "NVIDIA GeForce RTX 3090"
+  },
+  "grid": {
+    "dx": 0.25,
+    "xlim": [
+      -30,
+      40
+    ],
+    "ylim": [
+      -30,
+      30
+    ],
+    "zlim": [
+      -30,
+      90
+    ]
+  },
+  "initial": {
+    "norm": 0.9999999999999997,
+    "target_energy_Eh": -0.4873474418275817,
+    "stationary_residual_Eh": 0.0013755497501259978,
+    "receipt_stationary_residual_Eh": 0.0013755497501259978
+  },
+  "one_step": [
+    {
+      "level": 0,
+      "requested_dt": 0.05,
+      "actual_dt": 0.04996782580968821,
+      "ray_distance": 0.0034059008136628917,
+      "overlap_abs": 0.9999941999198234,
+      "fidelity": 0.9999883998732884,
+      "norm_first": 0.9999999999999997,
+      "norm_second": 0.9999999999999998,
+      "energy_before_Eh": -0.4873474418275817,
+      "energy_after_Eh": -0.4867136214245479,
+      "energy_drift_Eh": 0.0006338204030338357,
+      "norm_drift": 1.1102230246251565e-16
+    },
+    {
+      "level": 1,
+      "requested_dt": 0.025,
+      "actual_dt": 0.024983912904844106,
+      "ray_distance": 0.0005426263620558019,
+      "overlap_abs": 0.9999998527783154,
+      "fidelity": 0.999999705556653,
+      "norm_first": 0.9999999999999997,
+      "norm_second": 0.9999999999999998,
+      "energy_before_Eh": -0.4873474418275817,
+      "energy_after_Eh": -0.4873300462282337,
+      "energy_drift_Eh": 1.7395599347991286e-05,
+      "norm_drift": 1.1102230246251565e-16
+    },
+    {
+      "level": 2,
+      "requested_dt": 0.0125,
+      "actual_dt": 0.012491956452422053,
+      "ray_distance": 8.425421593508543e-05,
+      "overlap_abs": 0.9999999964506132,
+      "fidelity": 0.9999999929012271,
+      "norm_first": 0.9999999999999997,
+      "norm_second": 0.9999999999999997,
+      "energy_before_Eh": -0.4873474418275817,
+      "energy_after_Eh": -0.48734707343351025,
+      "energy_drift_Eh": 3.683940714704903e-07,
+      "norm_drift": 0.0
+    }
+  ],
+  "one_step_fit": {
+    "model": "d1(dt)=a_h*dt+b_h*dt^3",
+    "a_h": 0.005220509192623126,
+    "b_h": 25.224074523029564,
+    "rank": 2,
+    "singular_values": [
+      0.0572454538140565,
+      4.822432996332047e-05
+    ],
+    "residual_l2": 3.55816432164461e-05,
+    "positive_coefficients_forced": false,
+    "certified_error_law": false
+  },
+  "fixed_horizon": {
+    "T_probe": 1.0,
+    "runs": [
+      {
+        "requested_dt": 0.05,
+        "actual_dt": 0.05,
+        "nstep": 20,
+        "physical_end_time": 1.0,
+        "ray_distance": 0.0043786542060754025,
+        "overlap_abs": 0.999990413693671,
+        "fidelity": 0.999980827479241,
+        "norm_first": 0.9999999999999997,
+        "norm_second": 0.9999999999999987,
+        "energy_before_Eh": -0.4873474418275817,
+        "energy_after_Eh": -0.48604353597309025,
+        "energy_drift_Eh": 0.0013039058544914717,
+        "norm_drift": -9.992007221626409e-16
+      },
+      {
+        "requested_dt": 0.025,
+        "actual_dt": 0.025,
+        "nstep": 40,
+        "physical_end_time": 1.0,
+        "ray_distance": 0.0008408905614504937,
+        "overlap_abs": 0.9999996464515304,
+        "fidelity": 0.9999992929031886,
+        "norm_first": 0.9999999999999997,
+        "norm_second": 0.9999999999999976,
+        "energy_before_Eh": -0.4873474418275817,
+        "energy_after_Eh": -0.48732612030001154,
+        "energy_drift_Eh": 2.1321527570172805e-05,
+        "norm_drift": -2.1094237467877974e-15
+      },
+      {
+        "requested_dt": 0.0125,
+        "actual_dt": 0.0125,
+        "nstep": 80,
+        "physical_end_time": 1.0,
+        "ray_distance": 0.00024347276723413617,
+        "overlap_abs": 0.9999999703605024,
+        "fidelity": 0.9999999407210125,
+        "norm_first": 0.9999999999999997,
+        "norm_second": 0.9999999999999934,
+        "energy_before_Eh": -0.4873474418275817,
+        "energy_after_Eh": -0.48734596948032455,
+        "energy_drift_Eh": 1.472347257169826e-06,
+        "norm_drift": -6.217248937900877e-15
+      }
+    ],
+    "D01": 0.003732331851925839,
+    "D12": 0.0005974960826244083,
+    "empirical_order": {
+      "status": "EMPIRICAL_ORDER",
+      "order": 2.6430761064238966
+    },
+    "clean_second_order_diagnostic": false,
+    "clean_rule": "D01>D12>1e-13 and 1.5<=p_time<=2.5; diagnostic only"
+  }
+}
