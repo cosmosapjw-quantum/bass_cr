@@ -32,12 +32,26 @@ def analyze(root):
           'raw_channel_norms':a['finite_grid_state_norms'],
           'nested_n3_increment':(nested['3']-nested['2'])/nested['3'],
           'Hamiltonian_residual_Eh':prep['initial']['stationary_residual_Eh'],
+          'target_only_diagnostics':prep['target_only'],
           'target_energy_Eh':prep['initial']['energy_Eh'],'actual_dt':r['dt_actual'],
           'CAP':{k:cfg[k] for k in ('absorber_width','absorber_power','absorber_reference_dt')},
           'config_sha256':sha(p/'config.json'),'result_sha256':sha(p/'collision/result.json'),
           'initial_sha256':sha(p/'preparation/initial.npy'),'final_sha256':sha(p/'collision/state.npy'),
           'source_digest':SOURCE,'chunks':complete['chunks'],'restarts':complete['restarts'],
           'binding':witness['status'],'support':json.loads((p/'support.json').read_text())}
+        if rows[job]['support']['state_sha256']!=rows[job]['final_sha256']:
+            raise ValueError('support diagnostic state binding mismatch')
+        # Expose the actual transverse nuclear registration of each cell lattice.
+        # Different b/h fractions can spoil a single smooth h-power error model.
+        h=cfg['grid']['dx'];offsets={}
+        for label,position in [('target',0.),('projectile',cfg['b'])]:
+            delta=[]
+            for axis,pos in [('xlim',position),('ylim',0.)]:
+                lo,hi=cfg['grid'][axis]
+                delta.append(min(abs(lo+(i+.5)*h-pos) for i in range(round((hi-lo)/h))))
+            offsets[label]={'nearest_abs_dx_dy_a0':delta,'offset_in_grid_cells':[v/h for v in delta],
+                            'nearest_transverse_radius_a0':math.hypot(*delta)}
+        rows[job]['nuclear_grid_registration']=offsets
     if any(e!=environments[0] for e in environments):raise ValueError('runtime identity mismatch')
     if len({r['actual_dt'] for r in rows.values()})!=1:raise ValueError('different actual dt')
     metrics={key:observable_change(rows['B'][key],rows['A'][key]) for key in ('P1','P2','P3')}
