@@ -1,0 +1,45 @@
+{
+  "schema": "BASS_CR_R3M14_PREFLIGHT_STATUS_V1",
+  "verdict": "PREFLIGHT_CLOSE__R3M13_IMPORTED__PAIR_TRANSFER_BOUND_RECHECKED__INTERNAL_INITIAL_BYTE_BINDING_REQUIRED_AND_SIDECAR_DESIGNED__ISOLATED_CONTROL_FLOW_FIXTURE_3_PASS__PRODUCTION_R3M14_NOT_RUN__BGRID_NO_GO__R3M12_DRIVE_BACKUP_STILL_1_OF_19",
+  "parent_commit": "d04124e8a1b83f29fd26baa13f11cd68a8f33c15",
+  "checkpoint_repair_parent": "02546302a3d6958ea9fa97488a670672e07be178",
+  "expected_cr_repro_source_digest": "581ff84930bb862efafdfec5d39d5b25aebf9297ce7ce45f833a5abe125b2a5b",
+  "r3m13_import": {
+    "dual_backup_complete": true,
+    "artifact_sha256": "e696f90dc0eb17d69a6fd4419c9bf64f6c2538583c47006c047c2549f2fdf9f1",
+    "artifact_bytes": 2333455,
+    "github_commit": "d04124e8a1b83f29fd26baa13f11cd68a8f33c15"
+  },
+  "wolfram_recheck": {
+    "reduced_residual_orders": [1.9685524496114083, 1.9916490371569149],
+    "scenario_reference_probability": 0.00775827737938,
+    "relative_screen": 0.01,
+    "d_star": 0.00043930987793803503,
+    "reduced_pair_d": 0.00018211061811878535,
+    "reduced_pair_d_over_d_star": 0.4145379543331648,
+    "reduced_conditional_relative_upper": 0.004139342286103662,
+    "production_bound_claimed": false
+  },
+  "new_preflight_finding": "R3M13 separate preparation bytes were not yet byte-bound to the internally recomputed initial state used by a fresh ControlledTDLRunner collision.",
+  "repair_strategy": "OUTSIDE_CR_REPRO_FAIL_CLOSED_INTERNAL_INITIAL_ARRAY_DIGEST_WITNESS",
+  "fixture_validation": {
+    "passed": 3,
+    "scope": "ISOLATED_CONTROL_FLOW_AND_STATE_IDENTITY_ONLY",
+    "real_repo_suite_run": false,
+    "gpu_run": false,
+    "production_run": false,
+    "initial_environment_blocker": "CONTAINER_SCIPY_SPECIAL_IMPORT_MISSING_EVAL_GENLAGUERRE",
+    "blocker_class": "RUNTIME_ENVIRONMENT_IMPORT_BLOCKER"
+  },
+  "r3m12_drive_backup": {
+    "manifest_id": "1XDOKIFQpfOcNFHWpVZ473oMfjfy7Hskj",
+    "complete_chunks": 1,
+    "total_chunks": 19,
+    "status": "BACKUP_PENDING_PARTIAL_NOT_RESTORABLE_FROM_DRIVE_ALONE"
+  },
+  "production_initial_pair_run": false,
+  "production_collision_run": false,
+  "physical_rate_evaluated": false,
+  "bgrid": "NO_GO",
+  "next": "R3M14_PRODUCTION_DX025_INITIAL_PAIR_AND_COLLISION_RETURN"
+}
