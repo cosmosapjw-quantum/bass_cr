@@ -46,10 +46,19 @@ def gpu_memory():
     s=subprocess.check_output(['nvidia-smi','--query-gpu=memory.used,memory.total','--format=csv,noheader,nounits'],text=True)
     used,total=map(int,s.strip().splitlines()[0].split(','));return used,total
 
+def memory_stop_reason(used,total,baseline,budget_bytes):
+    if total-used<1536:return 'RESOURCE_HEADROOM_BREACH'
+    if budget_bytes is not None and max(0,used-baseline)*1024**2>budget_bytes:
+        return 'DECLARED_JOB_MEMORY_BUDGET_BREACH'
+    return None
+
 def command(label,argv,root,*,memory_guard=True,timeout=1800):
     import mlflow
     env=os.environ.copy();env.update(PYTHONDONTWRITEBYTECODE='1',PYTHONPATH=str(REPO),OPENBLAS_NUM_THREADS='1',OMP_NUM_THREADS='1',LD_LIBRARY_PATH='/home/cosmosapjw/cosmo_lab/.venv/lib/python3.12/site-packages/nvidia/cufft/lib')
     start=time.time();peak=0;stop_reason=None
+    baseline=gpu_memory()[0] if memory_guard else 0
+    resource=json.loads((root/'resource.json').read_text()) if (root/'resource.json').exists() else {}
+    budget=resource.get('declared_job_budget_bytes')
     with mlflow.start_span(name=label) as span:
         span.set_inputs({'argv':argv,'cwd':str(REPO)})
         with (root/(label+'.stdout')).open('x') as out,(root/(label+'.stderr')).open('x') as err:
@@ -57,7 +66,7 @@ def command(label,argv,root,*,memory_guard=True,timeout=1800):
             while process.poll() is None:
                 if memory_guard:
                     used,total=gpu_memory();peak=max(peak,used)
-                    if total-used<1536:stop_reason='RESOURCE_HEADROOM_BREACH'
+                    stop_reason=memory_stop_reason(used,total,baseline,budget)
                 if time.time()-start>timeout:stop_reason='BOUNDED_COMMAND_TIMEOUT'
                 if stop_reason:
                     process.terminate()
@@ -67,7 +76,8 @@ def command(label,argv,root,*,memory_guard=True,timeout=1800):
                 time.sleep(2)
             rc=process.wait()
         rec=dict(label=label,argv=argv,returncode=rc,seconds=time.time()-start,
-                 gpu_peak_total_used_mib_sampled=peak,stop_reason=stop_reason,
+                 gpu_peak_total_used_mib_sampled=peak,gpu_baseline_used_mib=baseline,
+                 declared_job_budget_bytes=budget,stop_reason=stop_reason,
                  scientific_interpreter=SCIENCE,trace_id=span.trace_id)
         span.set_outputs(rec)
     mlflow.flush_trace_async_logging()
@@ -88,6 +98,8 @@ def run_job(job,root):
     try:
         command('resource_preflight',[SCIENCE,'scripts/r3m15_resource_probe.py','--config',str(cfg_path),'--out',str(jobroot/'resource.json')],jobroot)
         command('prepare',[SCIENCE,'scripts/r3m13_initial_state_pair.py','prepare','--config',str(cfg_path),'--out',str(jobroot/'preparation')],jobroot)
+        for name in ('initial.npy','receipt.json','attempt.json'):
+            (jobroot/'preparation'/name).chmod(0o444)
         # No state substitution: v2 witness repeats inherited preparation and
         # requires identical typed bytes before the first collision step.
         for chunk in range(1,9):

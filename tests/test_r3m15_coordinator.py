@@ -30,3 +30,8 @@ def test_corrupt_checkpoint_stops(tmp_path):
 def test_seal_source_mismatch_stops(tmp_path):
     (tmp_path/'r3m11_checkpoint_seal.json').write_text(json.dumps({'source_digest':'wrong','files':{}}))
     with pytest.raises(ValueError):mod.verify_seal(tmp_path)
+
+def test_declared_budget_is_separate_from_free_headroom():
+    assert mod.memory_stop_reason(13000,24576,500,10000*1024**2)=='DECLARED_JOB_MEMORY_BUDGET_BREACH'
+    assert mod.memory_stop_reason(24000,24576,500,None)=='RESOURCE_HEADROOM_BREACH'
+    assert mod.memory_stop_reason(6000,24576,500,10000*1024**2) is None
