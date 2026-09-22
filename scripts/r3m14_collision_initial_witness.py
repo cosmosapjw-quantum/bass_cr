@@ -1,9 +1,9 @@
 """R3M14 fail-closed wrapper binding the actual collision initial state to R3M13 prep.
 
 The numerical evolution remains entirely in
-\`\`cr_repro.r3m11.ControlledTDLRunner\`\`.  This sidecar reuses the canonical
+``cr_repro.r3m11.ControlledTDLRunner``.  This sidecar reuses the canonical
 R3M13 preparation loader as the preparation-state SSOT, observes the exact
-state returned by the inherited \`\`relaxed_initial()\`\`, records an identity
+state returned by the inherited ``relaxed_initial()``, records an identity
 witness before the first real-time step, and returns the original state object
 unchanged.
 """
