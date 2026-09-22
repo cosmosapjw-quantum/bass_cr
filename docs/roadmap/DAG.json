@@ -40,13 +40,17 @@
       ],
       "exit_criterion": "each numerical dimension has justified estimate meeting allocated budget and cross checks; current matrix alone insufficient",
       "failure_branch": "representation decision if h nonconvergent; dt/boundary crosscheck if spatial pattern established",
-      "status": "PARTIAL_MATRIX_AND_PREPARATION_DIAGNOSTIC_COMPLETED_SPATIAL_NO_GO",
+      "status": "R3M16_H_DT_MATRIX_COMPLETE_TIME_REFINEMENT_STILL_OPEN",
       "scientific_completion": false,
       "completed_subwork": [
-        "R3M15 A/B/C three witnessed collisions"
+        "R3M15 A/B/C three witnessed collisions",
+        "R3M16 target-only one-step and fixed-horizon A/B dt ladders",
+        "R3M16 witnessed A1/B1 requested-dt=.025 collisions and 2x2 decomposition"
       ],
       "open_subwork": [
-        "spatial 1% screen failed",
+        "h=.20 P3 dt sensitivity 1.8874% exceeds .10% allocation",
+        "dt=.025 P3 spatial gap 2.9528% exceeds .30% allocation",
+        "target-only empirical orders outside preregistered clean second-order range",
         "full preparation/dt/boundary error budget unclosed"
       ]
     },
@@ -158,13 +162,13 @@
   "three_energies_are_4_to_81_continuous_1s_source": false,
   "bgrid_current_admission": "NO_GO",
   "next_canonical_node": {
-    "id": "N1_TDL_COULOMB_FFT_H_DT_REPRESENTATION_DECISION",
-    "trigger": "A/B P3 1.944985% > 1% pair screen and 0.30% planning allocation; empirical order 0.534 and 15.36% extrapolation correction",
-    "located_problem": "h-dependent point-Coulomb/FFT discrete propagation response at fixed real dt; total spatial convergence unresolved",
-    "causal_ceiling": "The separate contributions of spatial Coulomb sampling and finite real-time Strang error are not causally isolated by these three collisions.",
-    "registration_note": "A/B both have half-cell transverse registration; C differs and limits interpretation of the three-point power fit. C registration cannot explain A/B difference.",
-    "next_executable_action": "Under the next bounded authorization, compare fixed-grid target-only finite-time evolution at real dt=.05/.025 with identical preparation/CAP, then a matched collision dt cross-check to choose controlled h-dt scaling versus a changed near-nuclear representation.",
-    "exit_criterion": "Identify whether fixed-dt propagation bias contaminates the h ladder; freeze the selected representation and coupled h/dt protocol before another spatial collision ladder.",
+    "id": "N1_TDL_B_DT0125_SINGLE_COLLISION_TEMPORAL_RESOLUTION",
+    "trigger": "R3M16 h=.20 P3 dt sensitivity 1.8874% and target-only p_time=3.865 outside the clean second-order range",
+    "located_problem": "requested dt=.025 is not yet a resolved full-collision temporal level at h=.20",
+    "causal_ceiling": "The current 2x2 matrix demonstrates material h-dt coupling but cannot yet decide whether residual spatial representation error requires a representation change.",
+    "registration_note": "One h=.20 requested-dt=.0125 collision using the same saved preparation/config family; no automatic finer h.",
+    "next_executable_action": "Measure B1/B2 P1/P2/P3 temporal contraction at fixed h=.20 and apply a preregistered temporal-resolution rule.",
+    "exit_criterion": "Either establish a clean temporal contraction sufficient to re-evaluate the dt=.025 h gap, or return a located propagation/representation blocker without adding h points.",
     "execution_in_this_unit": "NOT_RUN",
     "automatic_finer_grid_allowed": false
   }

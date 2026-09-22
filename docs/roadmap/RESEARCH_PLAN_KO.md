@@ -38,6 +38,15 @@ TDL은 preparation τ/T, 공간 h, real dt, box와 고정 rate CAP, start/stop s
 경험적 single-power 가정의 진단이며 continuum 인증값이 아니다. 단조 수렴이
 확인되지 않으면 실제 원인을 특정한 representation decision으로 이동한다.
 
+R3M16은 A/B에서 target-only dt=.05/.025/.0125 고정-horizon 진단과 A1/B1
+requested dt=.025 충돌을 완료했다. h=.20 P3 dt 효과 1.8874%, dt=.025 h 효과
+2.9528%, interaction 1.0445%로 real-time .10%와 spatial .30% 배분을 모두 닫지
+못했다. target-only p_time은 A 2.643, B 3.865로 단조·resolved이지만 사전 등록한
+clean second-order 범위 밖이다. 따라서 `TIME_REFINEMENT_STILL_OPEN`이며 current
+representation 유지나 변경을 아직 선택하지 않는다. 다음 node는 h=.20에서 같은
+preparation/config family의 requested dt=.0125 full collision 하나로 temporal
+contraction을 검사한다. 그 결과 전에는 더 미세한 h를 자동 실행하지 않는다.
+
 현재 `cr_repro/aocc.py:OneElectronAOCC`는 s와 세 Cartesian p 방향 Gaussian basis를
 두 중심에 대칭으로 사용하고 eps_max cutoff 이하 상태를 유지한다. run()은 음의
 atomic eigenvalue를 가진 모든 s+p projectile 상태의 aggregate만 반환한다.
