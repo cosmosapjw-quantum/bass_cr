@@ -1,9 +1,10 @@
 {
-  "schema": "BASS_CR_R3M14_PREFLIGHT_STATUS_V1",
-  "verdict": "PREFLIGHT_CLOSE__R3M13_IMPORTED__PAIR_TRANSFER_BOUND_RECHECKED__INTERNAL_INITIAL_BYTE_BINDING_REQUIRED_AND_SIDECAR_DESIGNED__ISOLATED_CONTROL_FLOW_FIXTURE_3_PASS__PRODUCTION_R3M14_NOT_RUN__BGRID_NO_GO__R3M12_DRIVE_BACKUP_STILL_1_OF_19",
+  "schema": "BASS_CR_R3M14_PREFLIGHT_STATUS_V2",
+  "verdict": "PREFLIGHT_CLOSE_V2__R3M13_IMPORTED__PAIR_TRANSFER_BOUND_RECHECKED__CANONICAL_R3M13_LOADER_REUSED__ACTUAL_INTERNAL_INITIAL_BYTE_AND_ENVIRONMENT_BINDING_REQUIRED__ISOLATED_CONTROL_FLOW_FIXTURE_6_PASS__PRODUCTION_R3M14_NOT_RUN__BGRID_NO_GO__R3M12_DRIVE_BACKUP_STILL_1_OF_19",
   "parent_commit": "d04124e8a1b83f29fd26baa13f11cd68a8f33c15",
   "checkpoint_repair_parent": "02546302a3d6958ea9fa97488a670672e07be178",
   "expected_cr_repro_source_digest": "581ff84930bb862efafdfec5d39d5b25aebf9297ce7ce45f833a5abe125b2a5b",
+  "r3m13_helper_blob_sha": "d449dcfecfef4cf925cc9ae3e75cc3ce32e89a9b",
   "r3m13_import": {
     "dual_backup_complete": true,
     "artifact_sha256": "e696f90dc0eb17d69a6fd4419c9bf64f6c2538583c47006c047c2549f2fdf9f1",
@@ -20,15 +21,16 @@
     "reduced_conditional_relative_upper": 0.004139342286103662,
     "production_bound_claimed": false
   },
-  "new_preflight_finding": "R3M13 separate preparation bytes were not yet byte-bound to the internally recomputed initial state used by a fresh ControlledTDLRunner collision.",
-  "repair_strategy": "OUTSIDE_CR_REPRO_FAIL_CLOSED_INTERNAL_INITIAL_ARRAY_DIGEST_WITNESS",
+  "new_preflight_finding": "R3M13 pair-tested preparation bytes were not yet byte-bound to the internally recomputed initial state used by a fresh ControlledTDLRunner collision.",
+  "repair_strategy": "REUSE_CANONICAL_R3M13_LOAD_PREPARED_THEN_FAIL_CLOSED_INTERNAL_INITIAL_TYPED_ARRAY_DIGEST_NORM_AND_ENVIRONMENT_WITNESS_OUTSIDE_CR_REPRO",
+  "witness_schema": "BASS_CR_R3M14_INTERNAL_INITIAL_BINDING_V2",
   "fixture_validation": {
-    "passed": 3,
-    "scope": "ISOLATED_CONTROL_FLOW_AND_STATE_IDENTITY_ONLY",
+    "passed": 6,
+    "scope": "ISOLATED_CONTROL_FLOW_STATE_IDENTITY_AND_PROVENANCE_GATES_ONLY",
     "real_repo_suite_run": false,
     "gpu_run": false,
     "production_run": false,
-    "initial_environment_blocker": "CONTAINER_SCIPY_SPECIAL_IMPORT_MISSING_EVAL_GENLAGUERRE",
+    "first_environment_blocker": "CONTAINER_SCIPY_SPECIAL_IMPORT_MISSING_EVAL_GENLAGUERRE",
     "blocker_class": "RUNTIME_ENVIRONMENT_IMPORT_BLOCKER"
   },
   "r3m12_drive_backup": {
