@@ -1,0 +1,103 @@
+{
+  "schema": "BASS_CR_R3M17_FAILURE_LEDGER_V1",
+  "policy": "Preserve first failure and original bytes; later fixes do not turn earlier attempts into PASS.",
+  "events": [
+    {
+      "id": "ENV01",
+      "class": "TEST_ENVIRONMENT",
+      "status": "RESOLVED",
+      "finding": "Primary CPU Python had no pytest. Installed pytest8.4.2 only in scratch test_deps; no production runtime upgrade.",
+      "evidence": [
+        "results/R3M17/aocc/tdd_initial.stderr.log",
+        "results/R3M17/audit/preflight-tests-red.stderr"
+      ]
+    },
+    {
+      "id": "TDD01",
+      "class": "EXPECTED_NEW_IMPLEMENTATION_RED",
+      "status": "RESOLVED",
+      "finding": "New reference/temporal/checkpoint modules and moving-oracle API absent before implementation.",
+      "evidence": [
+        "results/R3M17/reference/red.stdout.log",
+        "results/R3M17/reference/moving_red.stdout.log",
+        "results/R3M17/receipts/temporal_red.stdout",
+        "results/R3M17/checkpoint/tdd_red.stdout"
+      ]
+    },
+    {
+      "id": "AUDIT01",
+      "class": "EXISTING_DIAGNOSTIC_DEFECT",
+      "status": "CORRECTIVE_SUCCESSOR_TESTED_HISTORICAL_BYTES_PRESERVED",
+      "finding": "Legacy fidelity-subtraction ray metric cancels tiny distances; legacy analysis accepts incompatible result metadata.",
+      "evidence": [
+        "results/R3M17/audit/numerical_audit.json",
+        "tests/test_r3m17_reference.py",
+        "tests/test_r3m17_temporal.py"
+      ]
+    },
+    {
+      "id": "AUDIT02",
+      "class": "EXISTING_CHECKPOINT_RECOVERY_GAP",
+      "status": "LOCAL_RETENTION_AND_RESTORE_TESTED",
+      "finding": "Atomic replacement of array before metadata/seal can invalidate live checkpoint and discard previous recoverable state.",
+      "evidence": [
+        "results/R3M17/audit/checkpoint_atomicity.json",
+        "results/R3M17/checkpoint/VALIDATION_V2.json"
+      ]
+    },
+    {
+      "id": "IR01",
+      "class": "INDEPENDENT_REVIEW",
+      "status": "RESOLVED",
+      "finding": "AOCC input bounds missing before matrix allocation.",
+      "evidence": [
+        "results/R3M17/INDEPENDENT_REVIEW.json",
+        "results/R3M17/aocc/bounded_review_fix_receipt.json"
+      ]
+    },
+    {
+      "id": "IR02",
+      "class": "INDEPENDENT_REVIEW",
+      "status": "RESOLVED",
+      "finding": "Two missing witness digest fields compared equal; malformed identities require strict rejection.",
+      "evidence": [
+        "results/R3M17/independent_review/missing_witness_digest_before_fix.json",
+        "results/R3M17/checkpoint/review_regression_red.stdout",
+        "results/R3M17/checkpoint/review_fix_green.stdout"
+      ]
+    },
+    {
+      "id": "IR03",
+      "class": "EXECUTION_PLAN",
+      "status": "RESOLVED",
+      "finding": "Snapshot after every chunk must appear in execution plan as well as prose. V2 plan has 29 mandatory snapshots and explicit storage accounting.",
+      "evidence": [
+        "results/R3M17/B2_PREFLIGHT_PLAN.json",
+        "results/R3M17/B2_PREFLIGHT_PLAN_V2.json",
+        "results/R3M17/receipts/preflight_v2_tests.stdout"
+      ]
+    },
+    {
+      "id": "DIAG01",
+      "class": "EMPIRICAL_DERIVATIVE_RESOLUTION",
+      "status": "PRESERVED_NOT_ERASED",
+      "finding": "Coarse epsilon AOCC derivative diagnostics exceed the selected diagnostic tolerance; finest two pass. This is a resolution ladder, not a failed collision.",
+      "evidence": [
+        "results/R3M17/aocc/smoke_matrices/result.json"
+      ]
+    },
+    {
+      "id": "RECEIPT01",
+      "class": "INCOMPLETE_TEXT_INVENTORY",
+      "status": "JSON_INVENTORY_CONFIRMED",
+      "finding": "Collection-only text inventory ends early despite observed exit0; a JSON collection hook separately records all122 new nodeids. Integrated test execution log is complete; no test rerun needed.",
+      "evidence": [
+        "results/R3M17/receipts/new_test_inventory.stdout",
+        "results/R3M17/receipts/new_test_inventory.json"
+      ]
+    }
+  ],
+  "new_production_collision_runtime_or_structural_failures": 0,
+  "new_production_collisions_executed": 0,
+  "not_claimed": "No failure-free development claim; no production runtime PASS or remote RESTORE evidence."
+}

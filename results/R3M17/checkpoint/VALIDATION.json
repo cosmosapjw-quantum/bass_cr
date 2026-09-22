@@ -1,0 +1,45 @@
+{
+  "scope": "IMPLEMENTATION_RECOVERY_ONLY_TINY_CPU_NO_PRODUCTION_COLLISION",
+  "frozen_numerical_source_digest": "581ff84930bb862efafdfec5d39d5b25aebf9297ce7ce45f833a5abe125b2a5b",
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "backend": "numpy"
+  },
+  "commands": [
+    {
+      "command": "PYTHONPATH=/workspace/scratch/235b855501c6/test_deps:. python -m pytest tests/test_r3m17_checkpoint_guard.py -q",
+      "stage": "RED",
+      "actual_exit_code": 2,
+      "reason": "expected module absent before implementation",
+      "stdout": "tdd_red.stdout",
+      "stderr": "tdd_red.stderr"
+    },
+    {
+      "command": "PYTHONPATH=/workspace/scratch/235b855501c6/test_deps:. python -m pytest tests/test_r3m17_checkpoint_guard.py -q",
+      "stage": "FIRST_GREEN",
+      "actual_exit_code": 0,
+      "passed": 15,
+      "stdout": "targeted_first.stdout",
+      "stderr": "targeted_first.stderr"
+    },
+    {
+      "command": "PYTHONPATH=/workspace/scratch/235b855501c6/test_deps:. python -m pytest tests/test_r3m17_checkpoint_guard.py tests/test_r3m11_checkpoint_interrupt.py tests/test_r3m14_collision_initial_witness.py -q",
+      "stage": "REGRESSION",
+      "actual_exit_code": 0,
+      "stdout": "regression.stdout",
+      "stderr": "regression.stderr"
+    }
+  ],
+  "implementation_sha256": "d7098fba60739937d46d36cad5f6f3b54aef91155a9f1cf6f42bef2bac555a44",
+  "tests_sha256": "ef65b7e99b83cc56e3f0040c07f648c5692b746b4219dbfdd90018de5f73b5ab",
+  "local_restore_scope": "fault-injected tiny CPU checkpoint; original v2 restart tested",
+  "remote_restore_status": "NOT_EVALUATED",
+  "scientific_convergence": "NOT_EVALUATED",
+  "retained_storage_bytes_for_29_B_grids": 29232003712,
+  "production_collision_executed": false,
+  "concurrent_writer_supported": false,
+  "in_place_state_writes_supported": false,
+  "cross_filesystem_restore_supported": false
+}

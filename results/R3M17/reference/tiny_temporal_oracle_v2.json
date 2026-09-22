@@ -1,0 +1,223 @@
+{
+  "schema": "BASS_CR_R3M17_DENSE_TEMPORAL_ORACLE_V1",
+  "status": "COMPLETE",
+  "claim_scope": "SAME_DISCRETE_PERIODIC_HAMILTONIAN_TEMPORAL_IMPLEMENTATION_CHECK",
+  "production_admission": false,
+  "continuum_spatial_validation": false,
+  "projectile_included": false,
+  "CAP_included": false,
+  "atomic_units": true,
+  "grid_shape": [
+    4,
+    4,
+    4
+  ],
+  "spacing_a0": 0.7,
+  "dense_max_points": 512,
+  "estimated_dense_working_bytes": 655360,
+  "numerical_source_digest": "581ff84930bb862efafdfec5d39d5b25aebf9297ce7ce45f833a5abe125b2a5b",
+  "instrumentation_sha256": "185465692b7816a80f6a66b66179c800d4990577a6f2e92ab355289c35a9f767",
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "backend": "numpy",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "cupy_execution": "NOT_EXECUTED",
+    "canonical_gpu_runtime_match": false
+  },
+  "cases": {
+    "cell_centered_coulomb": {
+      "oracle_method": "EXPLICIT_DFT_FULL_H_DENSE_EIGH",
+      "initial": {
+        "energy_Eh": -0.88602386191855,
+        "energy_imaginary_roundoff_Eh": 8.096570368436457e-19,
+        "variance_Eh2": 1.4810997544441696e-28,
+        "stationary_residual_Eh": 1.2170044184160424e-14,
+        "probability_norm": 1.0000000000000016,
+        "normalized_expectation": true
+      },
+      "initial_kind": "EXACT_DISCRETE_GROUND_EIGENSTATE",
+      "initial_state_sha256": "6e31d27376bece39894f4d387ba6d92cc2762a46e6d331c194d5170ef94c5ef6",
+      "Hamiltonian_sha256": "ea86976c2f1464df2c66f09463d8746cc9b59842c000658f0cb64e58a1a84572",
+      "exact_eigenstate_ray_drift": 1.0349930059442552e-15,
+      "runs": [
+        {
+          "requested_dt": 0.05,
+          "actual_dt": 0.05,
+          "nstep": 8,
+          "physical_end_time": 0.4,
+          "ray_error_vs_exact_same_H": 0.0003851355120146464,
+          "norm_drift": 0.0,
+          "energy_drift_Eh": 7.513432482841864e-07,
+          "same_saved_initial_array_sha256": "6e31d27376bece39894f4d387ba6d92cc2762a46e6d331c194d5170ef94c5ef6"
+        },
+        {
+          "requested_dt": 0.025,
+          "actual_dt": 0.025,
+          "nstep": 16,
+          "physical_end_time": 0.4,
+          "ray_error_vs_exact_same_H": 9.619467936437345e-05,
+          "norm_drift": -1.5543122344752192e-15,
+          "energy_drift_Eh": 4.685379673130541e-08,
+          "same_saved_initial_array_sha256": "6e31d27376bece39894f4d387ba6d92cc2762a46e6d331c194d5170ef94c5ef6"
+        },
+        {
+          "requested_dt": 0.0125,
+          "actual_dt": 0.0125,
+          "nstep": 32,
+          "physical_end_time": 0.4,
+          "ray_error_vs_exact_same_H": 2.404310877213644e-05,
+          "norm_drift": -4.551914400963142e-15,
+          "energy_drift_Eh": 2.9267189782800074e-09,
+          "same_saved_initial_array_sha256": "6e31d27376bece39894f4d387ba6d92cc2762a46e6d331c194d5170ef94c5ef6"
+        }
+      ],
+      "empirical_orders_vs_exact": [
+        2.001337150958807,
+        2.0003336506518705
+      ],
+      "order_semantics": "TEMPORAL_ONLY_FIXED_SPATIAL_H_NOT_CAPTURE_ERROR_BOUND"
+    },
+    "smooth_periodic": {
+      "oracle_method": "EXPLICIT_DFT_FULL_H_DENSE_EIGH",
+      "initial": {
+        "energy_Eh": -0.05704976594582983,
+        "energy_imaginary_roundoff_Eh": 9.807164198937768e-19,
+        "variance_Eh2": 3.3087797292104326e-28,
+        "stationary_residual_Eh": 1.8190051482088862e-14,
+        "probability_norm": 0.9999999999999984,
+        "normalized_expectation": true
+      },
+      "initial_kind": "EXACT_DISCRETE_GROUND_EIGENSTATE",
+      "initial_state_sha256": "da325648b01178d2c450177878ddb28f0adfbd7e728e3c8ff44609ae6948acff",
+      "Hamiltonian_sha256": "5d8e5dd61b46cb4d36a10fb48189e0f3bc343004e357540a7bca42f72b08abf7",
+      "exact_eigenstate_ray_drift": 1.1630873017771309e-15,
+      "runs": [
+        {
+          "requested_dt": 0.05,
+          "actual_dt": 0.05,
+          "nstep": 8,
+          "physical_end_time": 0.4,
+          "ray_error_vs_exact_same_H": 0.00019253174491739032,
+          "norm_drift": 2.220446049250313e-16,
+          "energy_drift_Eh": 9.51017172790003e-08,
+          "same_saved_initial_array_sha256": "da325648b01178d2c450177878ddb28f0adfbd7e728e3c8ff44609ae6948acff"
+        },
+        {
+          "requested_dt": 0.025,
+          "actual_dt": 0.025,
+          "nstep": 16,
+          "physical_end_time": 0.4,
+          "ray_error_vs_exact_same_H": 4.812348719685897e-05,
+          "norm_drift": -2.1094237467877974e-15,
+          "energy_drift_Eh": 5.941526361186167e-09,
+          "same_saved_initial_array_sha256": "da325648b01178d2c450177878ddb28f0adfbd7e728e3c8ff44609ae6948acff"
+        },
+        {
+          "requested_dt": 0.0125,
+          "actual_dt": 0.0125,
+          "nstep": 32,
+          "physical_end_time": 0.4,
+          "ray_error_vs_exact_same_H": 1.2030281386222008e-05,
+          "norm_drift": -9.992007221626409e-16,
+          "energy_drift_Eh": 3.7131137053947327e-10,
+          "same_saved_initial_array_sha256": "da325648b01178d2c450177878ddb28f0adfbd7e728e3c8ff44609ae6948acff"
+        }
+      ],
+      "empirical_orders_vs_exact": [
+        2.000283244938282,
+        2.0000708017517113
+      ],
+      "order_semantics": "TEMPORAL_ONLY_FIXED_SPATIAL_H_NOT_CAPTURE_ERROR_BOUND"
+    }
+  },
+  "moving_two_center": {
+    "oracle_method": "EXPLICIT_DFT_KINETIC_PLUS_MOVING_COULOMB_DOP853",
+    "source_under_test": "ControlledTDLRunner.step",
+    "production_collision": false,
+    "continuum_spatial_validation": false,
+    "CAP_included": false,
+    "shape": [
+      4,
+      4,
+      4
+    ],
+    "spacing_a0": 0.7,
+    "energy_keV_per_u": 100.0,
+    "impact_parameter_a0": 0.9,
+    "physical_start_time": -0.2,
+    "physical_end_time": 0.2,
+    "projectile_speed_au": 2.00798106651023,
+    "minimum_projectile_transverse_distance_a0": 0.38078865529319544,
+    "initial": {
+      "energy_Eh": -0.88602386191855,
+      "energy_imaginary_roundoff_Eh": 8.096570368436457e-19,
+      "variance_Eh2": 1.4810997544441696e-28,
+      "stationary_residual_Eh": 1.2170044184160424e-14,
+      "probability_norm": 1.0000000000000016,
+      "normalized_expectation": true
+    },
+    "initial_state_sha256": "cbcc0164a628fda1af3b87ff2fdb78b3546639ea7a9e8c239a27f93ca486c98d",
+    "target_Hamiltonian_sha256": "ea86976c2f1464df2c66f09463d8746cc9b59842c000658f0cb64e58a1a84572",
+    "reference_runs": [
+      {
+        "rtol": 2e-11,
+        "atol": 2e-13,
+        "nfev": 173,
+        "status": 0
+      },
+      {
+        "rtol": 2e-13,
+        "atol": 2e-15,
+        "nfev": 293,
+        "status": 0
+      }
+    ],
+    "oracle_repeat_ray_distance": 1.3270150698233838e-11,
+    "oracle_repeat_unaligned_state_distance": 1.3270179170918764e-11,
+    "oracle_refinement_resolved": true,
+    "oracle_validation_semantics": "TIGHTER_TOLERANCE_REPEAT_EMPIRICAL_NOT_CERTIFIED",
+    "oracle_fine_norm_drift": -4.440892098500626e-16,
+    "runs": [
+      {
+        "requested_dt": 0.05000000000000001,
+        "actual_dt": 0.05,
+        "nstep": 8,
+        "physical_start_time": -0.2,
+        "physical_end_time": 0.2,
+        "ray_error_vs_reference": 0.0011385744975599696,
+        "unaligned_state_error_vs_reference": 0.0011390977670875276,
+        "norm_drift": -2.220446049250313e-16,
+        "same_saved_initial_array_sha256": "cbcc0164a628fda1af3b87ff2fdb78b3546639ea7a9e8c239a27f93ca486c98d"
+      },
+      {
+        "requested_dt": 0.025000000000000005,
+        "actual_dt": 0.025,
+        "nstep": 16,
+        "physical_start_time": -0.2,
+        "physical_end_time": 0.2,
+        "ray_error_vs_reference": 0.00028515397598908145,
+        "unaligned_state_error_vs_reference": 0.0002852859250022911,
+        "norm_drift": -4.440892098500626e-16,
+        "same_saved_initial_array_sha256": "cbcc0164a628fda1af3b87ff2fdb78b3546639ea7a9e8c239a27f93ca486c98d"
+      },
+      {
+        "requested_dt": 0.012500000000000002,
+        "actual_dt": 0.0125,
+        "nstep": 32,
+        "physical_start_time": -0.2,
+        "physical_end_time": 0.2,
+        "ray_error_vs_reference": 7.13205454785071e-05,
+        "unaligned_state_error_vs_reference": 7.135360678115854e-05,
+        "norm_drift": 2.220446049250313e-16,
+        "same_saved_initial_array_sha256": "cbcc0164a628fda1af3b87ff2fdb78b3546639ea7a9e8c239a27f93ca486c98d"
+      }
+    ],
+    "empirical_orders_vs_reference": [
+      1.9974156369998248,
+      1.999351506552713
+    ],
+    "scipy_version": "1.17.0",
+    "numerical_source_digest": "581ff84930bb862efafdfec5d39d5b25aebf9297ce7ce45f833a5abe125b2a5b"
+  }
+}

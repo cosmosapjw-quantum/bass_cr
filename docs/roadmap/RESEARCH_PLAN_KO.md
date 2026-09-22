@@ -104,3 +104,31 @@ NaN/Inf, projector 부적합, binding/source 불일치, checkpoint 손상, 메�
 해당 job을 중지하고 증거를 보존한다. 수치 허용오차 초과나 차수 미정은 scientific
 nonconvergence로 기록한다. tolerance/CAP/box/energy/b를 바꾸어 PASS를 만들지 않는다.
 이번 세 collision 이후의 refinement, b-grid, physical rate, main merge는 실행하지 않는다.
+
+
+## R3M17 보완 — 실제 production admission과 다음 한 계산
+
+정본 R3M16 결과는 보존한다. 외부 원전 및 코드 검토와 작은 격자의 독립 full-H
+reference를 완료했다. `docs/r3m17/REPORT_KO.md`와 `LOCAL_CODEX_HANDOFF.md`가
+후속 진단 계약이다. 이것은 production 또는 N1 완료가 아니다.
+
+- C(h=.3125)의 projectile transverse mesh phase가 A/B와 다르므로 이전 세 h의
+  power-law 해석은 h 변화 외에 translation 오차를 포함한다. C를 버리지 않고 이 한계를
+  기록하며, 차후 spatial protocol에 subcell translation 검사를 넣는다.
+- 정지 target-only apparent order는 moving two-center 시간오차의 admission gate가 아니다.
+  B0/B1/B2의 signed 차분과 실제 dt로 차수를 계산하며 Richardson는 conditional empirical
+  estimate로만 쓴다. pair difference가 목표 안에 드는 것과 잔여오차가 제어된 것은 다르다.
+- B2만 추가해도 dt=.0125의 A2/B2 h-gap은 미측정이다. B2-A1을 spatial gap이라 하지 않는다.
+- 큰 FFT 격자의 full-H exponential/CFE reference는 memory/cost 사전 조사 뒤 별도 수행한다.
+  현재 tiny dense oracle는 최대512점으로 제한되며 큰 GPU CPU fallback은 없다.
+- 이번 AOCC 검사는 18-basis smoke의 독립 moving-metric identity만 검증했다.
+  final C/O, d 채널과 radial/angular/pseudostate ladder는 미구현/미실행 상태로 유지한다.
+- numerical 1% 목표와 물리모델 불확실성을 구분한다. 각 b의 오차를 단면적으로 전파할 때
+  |δσ|≤2π∫b εP(b)db를 사용하고 rare channel에는 사전 등록된 absolute 기준이 필요하다.
+
+다음 canonical node는 `N1_TDL_B_DT0125_SINGLE_COLLISION_TEMPORAL_RESOLUTION`
+하나다. 새로운 full collision 예산은 B2 한 개이며 3586 step/29 chunks(마지막2)다.
+chunk마다 다음 저장 전에 검증된 checkpoint generation을 보존한다. scientific dt
+nonconvergence는 구조적 실패와 구분하며 그 이유만으로 run 수를 늘리지 않는다.
+B2 후 해석과 다음 구체 노드를 반환하고 멈춘다. N1의 모든 차원·N2 고n 채널·N3 b적분·
+N4 다른 에너지·N5 source admission은 기존 계약과 오차배분 그대로 남는다.

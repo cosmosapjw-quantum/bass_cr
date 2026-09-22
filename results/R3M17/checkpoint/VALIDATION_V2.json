@@ -1,0 +1,40 @@
+{
+  "schema": "R3M17_CHECKPOINT_GUARD_VALIDATION_V2",
+  "scope": "IMPLEMENTATION_VERIFIED_TINY_CPU_RECOVERY_ONLY",
+  "source_digest": "581ff84930bb862efafdfec5d39d5b25aebf9297ce7ce45f833a5abe125b2a5b",
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "tests": {
+    "guard": 36,
+    "related_total": 44,
+    "exit_code": 0,
+    "stdout": "review_fix_green.stdout",
+    "stderr": "review_fix_green.stderr"
+  },
+  "review_regression": {
+    "exit_code": 1,
+    "reason": "missing/malformed witness digests and environments were previously accepted",
+    "stdout": "review_regression_red.stdout",
+    "stderr": "review_regression_red.stderr",
+    "repair": "strict typed digests, explicit environment structures/keys, byte bindings and strict boolean flags"
+  },
+  "implementation_sha256": "83ada4d8cfa408e3508900b223e539483efed7d9ed3fa68277c54c92c1430f53",
+  "tests_sha256": "c55c6f54c9bbcf2e008bf8a8ad233519eafafaaf9b43807f8427e8ed7f716d25",
+  "original_failure_and_first_green_retained": true,
+  "production_science_validation": "NOT_EVALUATED",
+  "large_gpu_execution": "NOT_RUN",
+  "remote_restore_status": "NOT_EVALUATED",
+  "generation_semantics": "hardlink state inode; copy small metadata; final manifest marker; no overwrite; no concurrent writer",
+  "storage_budget": {
+    "B_state_bytes": 1008000128,
+    "29_retained_B_states_bytes": 29232003712,
+    "additional_required": "live and temporary states, preparations, final data, filesystem headroom"
+  },
+  "limitations": [
+    "Same filesystem only; EXDEV fails without copying.",
+    "Atomic replacement writes only; in-place mutation of linked state would affect all links.",
+    "Sequential coordinator boundary; no concurrent writer.",
+    "Explicit restore only to a fresh path; no damaged-current-path deletion or repair.",
+    "Local CPU restart test does not verify remote restore or production GPU numerical convergence."
+  ]
+}

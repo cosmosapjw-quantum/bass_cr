@@ -1,0 +1,363 @@
+...............FFFF..FF..FF..FFFFFFF                                     [100%]
+=================================== FAILURES ===================================
+_ test_missing_or_invalid_witness_digest_rejected[None-prepared_array_digest] __
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-13/test_missing_or_invalid_witnes0')
+field = 'prepared_array_digest', replacement = None
+
+    @pytest.mark.parametrize("field", ["prepared_array_digest", "internal_array_digest",
+                                        "prepared_state_file_sha256", "prepared_receipt_sha256"])
+    @pytest.mark.parametrize("replacement", [None, "", "A" * 64, "0" * 63])
+    def test_missing_or_invalid_witness_digest_rejected(tmp_path, field, replacement):
+        run, cfg, *_ = make_bound_checkpoint(tmp_path)
+        witness = json.loads((run / "r3m14_initial_binding.json").read_text())
+        # In particular both missing array digests previously compared as None==None.
+        if field in ("prepared_array_digest", "internal_array_digest"):
+            witness.pop("prepared_array_digest")
+            witness.pop("internal_array_digest")
+        if replacement is None:
+            witness.pop(field, None)
+        else:
+            witness[field] = replacement
+        atomic_json(run / "r3m14_initial_binding.json", witness)
+>       with pytest.raises(ValueError, match="witness.*digest"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_r3m17_checkpoint_guard.py:230: Failed
+_ test_missing_or_invalid_witness_digest_rejected[None-internal_array_digest] __
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-13/test_missing_or_invalid_witnes1')
+field = 'internal_array_digest', replacement = None
+
+    @pytest.mark.parametrize("field", ["prepared_array_digest", "internal_array_digest",
+                                        "prepared_state_file_sha256", "prepared_receipt_sha256"])
+    @pytest.mark.parametrize("replacement", [None, "", "A" * 64, "0" * 63])
+    def test_missing_or_invalid_witness_digest_rejected(tmp_path, field, replacement):
+        run, cfg, *_ = make_bound_checkpoint(tmp_path)
+        witness = json.loads((run / "r3m14_initial_binding.json").read_text())
+        # In particular both missing array digests previously compared as None==None.
+        if field in ("prepared_array_digest", "internal_array_digest"):
+            witness.pop("prepared_array_digest")
+            witness.pop("internal_array_digest")
+        if replacement is None:
+            witness.pop(field, None)
+        else:
+            witness[field] = replacement
+        atomic_json(run / "r3m14_initial_binding.json", witness)
+>       with pytest.raises(ValueError, match="witness.*digest"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_r3m17_checkpoint_guard.py:230: Failed
+_ test_missing_or_invalid_witness_digest_rejected[None-prepared_state_file_sha256] _
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-13/test_missing_or_invalid_witnes2')
+field = 'prepared_state_file_sha256', replacement = None
+
+    @pytest.mark.parametrize("field", ["prepared_array_digest", "internal_array_digest",
+                                        "prepared_state_file_sha256", "prepared_receipt_sha256"])
+    @pytest.mark.parametrize("replacement", [None, "", "A" * 64, "0" * 63])
+    def test_missing_or_invalid_witness_digest_rejected(tmp_path, field, replacement):
+        run, cfg, *_ = make_bound_checkpoint(tmp_path)
+        witness = json.loads((run / "r3m14_initial_binding.json").read_text())
+        # In particular both missing array digests previously compared as None==None.
+        if field in ("prepared_array_digest", "internal_array_digest"):
+            witness.pop("prepared_array_digest")
+            witness.pop("internal_array_digest")
+        if replacement is None:
+            witness.pop(field, None)
+        else:
+            witness[field] = replacement
+        atomic_json(run / "r3m14_initial_binding.json", witness)
+>       with pytest.raises(ValueError, match="witness.*digest"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_r3m17_checkpoint_guard.py:230: Failed
+_ test_missing_or_invalid_witness_digest_rejected[None-prepared_receipt_sha256] _
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-13/test_missing_or_invalid_witnes3')
+field = 'prepared_receipt_sha256', replacement = None
+
+    @pytest.mark.parametrize("field", ["prepared_array_digest", "internal_array_digest",
+                                        "prepared_state_file_sha256", "prepared_receipt_sha256"])
+    @pytest.mark.parametrize("replacement", [None, "", "A" * 64, "0" * 63])
+    def test_missing_or_invalid_witness_digest_rejected(tmp_path, field, replacement):
+        run, cfg, *_ = make_bound_checkpoint(tmp_path)
+        witness = json.loads((run / "r3m14_initial_binding.json").read_text())
+        # In particular both missing array digests previously compared as None==None.
+        if field in ("prepared_array_digest", "internal_array_digest"):
+            witness.pop("prepared_array_digest")
+            witness.pop("internal_array_digest")
+        if replacement is None:
+            witness.pop(field, None)
+        else:
+            witness[field] = replacement
+        atomic_json(run / "r3m14_initial_binding.json", witness)
+>       with pytest.raises(ValueError, match="witness.*digest"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_r3m17_checkpoint_guard.py:230: Failed
+_ test_missing_or_invalid_witness_digest_rejected[-prepared_state_file_sha256] _
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-13/test_missing_or_invalid_witnes6')
+field = 'prepared_state_file_sha256', replacement = ''
+
+    @pytest.mark.parametrize("field", ["prepared_array_digest", "internal_array_digest",
+                                        "prepared_state_file_sha256", "prepared_receipt_sha256"])
+    @pytest.mark.parametrize("replacement", [None, "", "A" * 64, "0" * 63])
+    def test_missing_or_invalid_witness_digest_rejected(tmp_path, field, replacement):
+        run, cfg, *_ = make_bound_checkpoint(tmp_path)
+        witness = json.loads((run / "r3m14_initial_binding.json").read_text())
+        # In particular both missing array digests previously compared as None==None.
+        if field in ("prepared_array_digest", "internal_array_digest"):
+            witness.pop("prepared_array_digest")
+            witness.pop("internal_array_digest")
+        if replacement is None:
+            witness.pop(field, None)
+        else:
+            witness[field] = replacement
+        atomic_json(run / "r3m14_initial_binding.json", witness)
+>       with pytest.raises(ValueError, match="witness.*digest"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_r3m17_checkpoint_guard.py:230: Failed
+__ test_missing_or_invalid_witness_digest_rejected[-prepared_receipt_sha256] ___
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-13/test_missing_or_invalid_witnes7')
+field = 'prepared_receipt_sha256', replacement = ''
+
+    @pytest.mark.parametrize("field", ["prepared_array_digest", "internal_array_digest",
+                                        "prepared_state_file_sha256", "prepared_receipt_sha256"])
+    @pytest.mark.parametrize("replacement", [None, "", "A" * 64, "0" * 63])
+    def test_missing_or_invalid_witness_digest_rejected(tmp_path, field, replacement):
+        run, cfg, *_ = make_bound_checkpoint(tmp_path)
+        witness = json.loads((run / "r3m14_initial_binding.json").read_text())
+        # In particular both missing array digests previously compared as None==None.
+        if field in ("prepared_array_digest", "internal_array_digest"):
+            witness.pop("prepared_array_digest")
+            witness.pop("internal_array_digest")
+        if replacement is None:
+            witness.pop(field, None)
+        else:
+            witness[field] = replacement
+        atomic_json(run / "r3m14_initial_binding.json", witness)
+>       with pytest.raises(ValueError, match="witness.*digest"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_r3m17_checkpoint_guard.py:230: Failed
+_ test_missing_or_invalid_witness_digest_rejected[AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA-prepared_state_file_sha256] _
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-13/test_missing_or_invalid_witnes10')
+field = 'prepared_state_file_sha256'
+replacement = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+
+    @pytest.mark.parametrize("field", ["prepared_array_digest", "internal_array_digest",
+                                        "prepared_state_file_sha256", "prepared_receipt_sha256"])
+    @pytest.mark.parametrize("replacement", [None, "", "A" * 64, "0" * 63])
+    def test_missing_or_invalid_witness_digest_rejected(tmp_path, field, replacement):
+        run, cfg, *_ = make_bound_checkpoint(tmp_path)
+        witness = json.loads((run / "r3m14_initial_binding.json").read_text())
+        # In particular both missing array digests previously compared as None==None.
+        if field in ("prepared_array_digest", "internal_array_digest"):
+            witness.pop("prepared_array_digest")
+            witness.pop("internal_array_digest")
+        if replacement is None:
+            witness.pop(field, None)
+        else:
+            witness[field] = replacement
+        atomic_json(run / "r3m14_initial_binding.json", witness)
+>       with pytest.raises(ValueError, match="witness.*digest"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_r3m17_checkpoint_guard.py:230: Failed
+_ test_missing_or_invalid_witness_digest_rejected[AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA-prepared_receipt_sha256] _
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-13/test_missing_or_invalid_witnes11')
+field = 'prepared_receipt_sha256'
+replacement = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+
+    @pytest.mark.parametrize("field", ["prepared_array_digest", "internal_array_digest",
+                                        "prepared_state_file_sha256", "prepared_receipt_sha256"])
+    @pytest.mark.parametrize("replacement", [None, "", "A" * 64, "0" * 63])
+    def test_missing_or_invalid_witness_digest_rejected(tmp_path, field, replacement):
+        run, cfg, *_ = make_bound_checkpoint(tmp_path)
+        witness = json.loads((run / "r3m14_initial_binding.json").read_text())
+        # In particular both missing array digests previously compared as None==None.
+        if field in ("prepared_array_digest", "internal_array_digest"):
+            witness.pop("prepared_array_digest")
+            witness.pop("internal_array_digest")
+        if replacement is None:
+            witness.pop(field, None)
+        else:
+            witness[field] = replacement
+        atomic_json(run / "r3m14_initial_binding.json", witness)
+>       with pytest.raises(ValueError, match="witness.*digest"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_r3m17_checkpoint_guard.py:230: Failed
+_ test_missing_or_invalid_witness_digest_rejected[000000000000000000000000000000000000000000000000000000000000000-prepared_state_file_sha256] _
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-13/test_missing_or_invalid_witnes14')
+field = 'prepared_state_file_sha256'
+replacement = '000000000000000000000000000000000000000000000000000000000000000'
+
+    @pytest.mark.parametrize("field", ["prepared_array_digest", "internal_array_digest",
+                                        "prepared_state_file_sha256", "prepared_receipt_sha256"])
+    @pytest.mark.parametrize("replacement", [None, "", "A" * 64, "0" * 63])
+    def test_missing_or_invalid_witness_digest_rejected(tmp_path, field, replacement):
+        run, cfg, *_ = make_bound_checkpoint(tmp_path)
+        witness = json.loads((run / "r3m14_initial_binding.json").read_text())
+        # In particular both missing array digests previously compared as None==None.
+        if field in ("prepared_array_digest", "internal_array_digest"):
+            witness.pop("prepared_array_digest")
+            witness.pop("internal_array_digest")
+        if replacement is None:
+            witness.pop(field, None)
+        else:
+            witness[field] = replacement
+        atomic_json(run / "r3m14_initial_binding.json", witness)
+>       with pytest.raises(ValueError, match="witness.*digest"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_r3m17_checkpoint_guard.py:230: Failed
+_ test_missing_or_invalid_witness_digest_rejected[000000000000000000000000000000000000000000000000000000000000000-prepared_receipt_sha256] _
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-13/test_missing_or_invalid_witnes15')
+field = 'prepared_receipt_sha256'
+replacement = '000000000000000000000000000000000000000000000000000000000000000'
+
+    @pytest.mark.parametrize("field", ["prepared_array_digest", "internal_array_digest",
+                                        "prepared_state_file_sha256", "prepared_receipt_sha256"])
+    @pytest.mark.parametrize("replacement", [None, "", "A" * 64, "0" * 63])
+    def test_missing_or_invalid_witness_digest_rejected(tmp_path, field, replacement):
+        run, cfg, *_ = make_bound_checkpoint(tmp_path)
+        witness = json.loads((run / "r3m14_initial_binding.json").read_text())
+        # In particular both missing array digests previously compared as None==None.
+        if field in ("prepared_array_digest", "internal_array_digest"):
+            witness.pop("prepared_array_digest")
+            witness.pop("internal_array_digest")
+        if replacement is None:
+            witness.pop(field, None)
+        else:
+            witness[field] = replacement
+        atomic_json(run / "r3m14_initial_binding.json", witness)
+>       with pytest.raises(ValueError, match="witness.*digest"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_r3m17_checkpoint_guard.py:230: Failed
+__________ test_missing_or_invalid_runtime_environment_rejected[None] __________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-13/test_missing_or_invalid_runtim0')
+runtime = None
+
+    @pytest.mark.parametrize("runtime", [None, {}, "numpy", {"python": "3", "numpy": "2", "backend": "cupy"},
+                                        {"python": None, "numpy": "2", "backend": "numpy"}])
+    def test_missing_or_invalid_runtime_environment_rejected(tmp_path, runtime):
+        run, cfg, *_ = make_bound_checkpoint(tmp_path)
+        for name in ("r3m14_initial_binding.json", "r3m14_witness_run_receipt.json"):
+            evidence = json.loads((run / name).read_text())
+            evidence["runtime_environment"] = runtime
+            atomic_json(run / name, evidence)
+>       with pytest.raises(ValueError, match="witness.*environment"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_r3m17_checkpoint_guard.py:243: Failed
+________ test_missing_or_invalid_runtime_environment_rejected[runtime1] ________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-13/test_missing_or_invalid_runtim1')
+runtime = {}
+
+    @pytest.mark.parametrize("runtime", [None, {}, "numpy", {"python": "3", "numpy": "2", "backend": "cupy"},
+                                        {"python": None, "numpy": "2", "backend": "numpy"}])
+    def test_missing_or_invalid_runtime_environment_rejected(tmp_path, runtime):
+        run, cfg, *_ = make_bound_checkpoint(tmp_path)
+        for name in ("r3m14_initial_binding.json", "r3m14_witness_run_receipt.json"):
+            evidence = json.loads((run / name).read_text())
+            evidence["runtime_environment"] = runtime
+            atomic_json(run / name, evidence)
+>       with pytest.raises(ValueError, match="witness.*environment"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_r3m17_checkpoint_guard.py:243: Failed
+_________ test_missing_or_invalid_runtime_environment_rejected[numpy] __________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-13/test_missing_or_invalid_runtim2')
+runtime = 'numpy'
+
+    @pytest.mark.parametrize("runtime", [None, {}, "numpy", {"python": "3", "numpy": "2", "backend": "cupy"},
+                                        {"python": None, "numpy": "2", "backend": "numpy"}])
+    def test_missing_or_invalid_runtime_environment_rejected(tmp_path, runtime):
+        run, cfg, *_ = make_bound_checkpoint(tmp_path)
+        for name in ("r3m14_initial_binding.json", "r3m14_witness_run_receipt.json"):
+            evidence = json.loads((run / name).read_text())
+            evidence["runtime_environment"] = runtime
+            atomic_json(run / name, evidence)
+>       with pytest.raises(ValueError, match="witness.*environment"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_r3m17_checkpoint_guard.py:243: Failed
+________ test_missing_or_invalid_runtime_environment_rejected[runtime3] ________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-13/test_missing_or_invalid_runtim3')
+runtime = {'backend': 'cupy', 'numpy': '2', 'python': '3'}
+
+    @pytest.mark.parametrize("runtime", [None, {}, "numpy", {"python": "3", "numpy": "2", "backend": "cupy"},
+                                        {"python": None, "numpy": "2", "backend": "numpy"}])
+    def test_missing_or_invalid_runtime_environment_rejected(tmp_path, runtime):
+        run, cfg, *_ = make_bound_checkpoint(tmp_path)
+        for name in ("r3m14_initial_binding.json", "r3m14_witness_run_receipt.json"):
+            evidence = json.loads((run / name).read_text())
+            evidence["runtime_environment"] = runtime
+            atomic_json(run / name, evidence)
+>       with pytest.raises(ValueError, match="witness.*environment"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_r3m17_checkpoint_guard.py:243: Failed
+________ test_missing_or_invalid_runtime_environment_rejected[runtime4] ________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-13/test_missing_or_invalid_runtim4')
+runtime = {'backend': 'numpy', 'numpy': '2', 'python': None}
+
+    @pytest.mark.parametrize("runtime", [None, {}, "numpy", {"python": "3", "numpy": "2", "backend": "cupy"},
+                                        {"python": None, "numpy": "2", "backend": "numpy"}])
+    def test_missing_or_invalid_runtime_environment_rejected(tmp_path, runtime):
+        run, cfg, *_ = make_bound_checkpoint(tmp_path)
+        for name in ("r3m14_initial_binding.json", "r3m14_witness_run_receipt.json"):
+            evidence = json.loads((run / name).read_text())
+            evidence["runtime_environment"] = runtime
+            atomic_json(run / name, evidence)
+>       with pytest.raises(ValueError, match="witness.*environment"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_r3m17_checkpoint_guard.py:243: Failed
+=========================== short test summary info ============================
+FAILED tests/test_r3m17_checkpoint_guard.py::test_missing_or_invalid_witness_digest_rejected[None-prepared_array_digest]
+FAILED tests/test_r3m17_checkpoint_guard.py::test_missing_or_invalid_witness_digest_rejected[None-internal_array_digest]
+FAILED tests/test_r3m17_checkpoint_guard.py::test_missing_or_invalid_witness_digest_rejected[None-prepared_state_file_sha256]
+FAILED tests/test_r3m17_checkpoint_guard.py::test_missing_or_invalid_witness_digest_rejected[None-prepared_receipt_sha256]
+FAILED tests/test_r3m17_checkpoint_guard.py::test_missing_or_invalid_witness_digest_rejected[-prepared_state_file_sha256]
+FAILED tests/test_r3m17_checkpoint_guard.py::test_missing_or_invalid_witness_digest_rejected[-prepared_receipt_sha256]
+FAILED tests/test_r3m17_checkpoint_guard.py::test_missing_or_invalid_witness_digest_rejected[AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA-prepared_state_file_sha256]
+FAILED tests/test_r3m17_checkpoint_guard.py::test_missing_or_invalid_witness_digest_rejected[AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA-prepared_receipt_sha256]
+FAILED tests/test_r3m17_checkpoint_guard.py::test_missing_or_invalid_witness_digest_rejected[000000000000000000000000000000000000000000000000000000000000000-prepared_state_file_sha256]
+FAILED tests/test_r3m17_checkpoint_guard.py::test_missing_or_invalid_witness_digest_rejected[000000000000000000000000000000000000000000000000000000000000000-prepared_receipt_sha256]
+FAILED tests/test_r3m17_checkpoint_guard.py::test_missing_or_invalid_runtime_environment_rejected[None]
+FAILED tests/test_r3m17_checkpoint_guard.py::test_missing_or_invalid_runtime_environment_rejected[runtime1]
+FAILED tests/test_r3m17_checkpoint_guard.py::test_missing_or_invalid_runtime_environment_rejected[numpy]
+FAILED tests/test_r3m17_checkpoint_guard.py::test_missing_or_invalid_runtime_environment_rejected[runtime3]
+FAILED tests/test_r3m17_checkpoint_guard.py::test_missing_or_invalid_runtime_environment_rejected[runtime4]
+15 failed, 21 passed in 2.09s

@@ -1,0 +1,23 @@
+{
+  "schema": "R3M17_INDEPENDENT_REVIEW_FALSIFIER_V1",
+  "observed_utc": "2026-09-22T23:01:07.432940+00:00",
+  "failure_layer": "EVIDENCE_AUTHORITY",
+  "id": "IR02_MISSING_ARRAY_DIGESTS",
+  "target": "scripts/r3m17_checkpoint_guard.py:validate_checkpoint",
+  "target_sha256_at_falsifier": "d7098fba60739937d46d36cad5f6f3b54aef91155a9f1cf6f42bef2bac555a44",
+  "steps": [
+    "Create tiny CPU imag_time prep and a completed one-step chunk through canonical R3M14 v2 witness",
+    "Delete both prepared_array_digest and internal_array_digest keys only from r3m14_initial_binding.json",
+    "Call snapshot_generation with require_witness default true"
+  ],
+  "expected": "ValueError malformed v2 identity",
+  "observed": "PUBLISHED_VERIFIED_LOCAL",
+  "production_gpu_runs": 0,
+  "test_grid_shape": [
+    4,
+    4,
+    6
+  ],
+  "review_role": "independent candidate decision reviewer; not implementation owner",
+  "repair_status": "REPORTED_TO_OWNER_PENDING_FIX"
+}

@@ -1,0 +1,39 @@
+{
+  "schema": "R3M17_AOCC_BOUNDED_REVIEW_FIX_V1",
+  "created_utc": "2026-09-22T23:02:32.071833+00:00",
+  "review_finding": "unbounded constructor allocation and matrix sample counts",
+  "repair": "pre-constructor cap ns+3*np<=32 per center, dense dimension <=64, 1..9 times, 2..8 strictly decreasing positive finite epsilons; invalid count types rejected",
+  "tests": {
+    "exit_code": 0,
+    "passed": 23,
+    "log": "bounded_preflight_tests.stdout.log",
+    "preallocation_rejection_cases": 10
+  },
+  "files": [
+    {
+      "path": "scripts/r3m17_aocc_metric.py",
+      "sha256": "f6e1cd43602693f2405be3db8bff766bf316040e57f6b2c1d6b8bd219641aaf3",
+      "size_bytes": 14177
+    },
+    {
+      "path": "tests/test_r3m17_aocc_metric.py",
+      "sha256": "d7789280845391571cc1e7932dc900bb975cc370fc54d200fa28dbbaf9c7576a",
+      "size_bytes": 6797
+    },
+    {
+      "path": "results/R3M17/aocc/bounded_preflight_tests.stdout.log",
+      "sha256": "fbf639bb9303cc4e540cb3938ce0009af127cee892ec08e9acf103e2ff49d188",
+      "size_bytes": 99
+    },
+    {
+      "path": "results/R3M17/aocc/bounded_preflight_tests.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    }
+  ],
+  "numerical_source_digest_after": "581ff84930bb862efafdfec5d39d5b25aebf9297ce7ce45f833a5abe125b2a5b",
+  "old_smoke_result": "smoke_matrices/result.json",
+  "old_smoke_and_logs_overwritten": false,
+  "new_scientific_trajectory_count": 0,
+  "production_admission": "HOLD"
+}

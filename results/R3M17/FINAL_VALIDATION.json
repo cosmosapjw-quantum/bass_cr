@@ -1,0 +1,53 @@
+{
+  "schema": "BASS_CR_R3M17_FINAL_VALIDATION_V1",
+  "created_utc": "2026-09-22T23:14:15.838483+00:00",
+  "base_commit": "7844bc0d8122070b267ee77c75cb2c9447435155",
+  "status": "PASS_BOUNDED_CPU_SCOPE",
+  "command": "PYTHONPATH=/workspace/scratch/235b855501c6/test_deps:. OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m pytest -p no:cacheprovider -q tests/test_r3m11*.py tests/test_r3m13*.py tests/test_r3m14*.py tests/test_r3m15*.py tests/test_r3m16*.py tests/test_r3m17*.py",
+  "exit_code": 0,
+  "passed": 246,
+  "failed": 0,
+  "new_R3M17_tests": 122,
+  "existing_tests_in_combined_scope": 124,
+  "scope_note": "Prior historical-only invocation reported 122; combined glob additionally includes the two existing R3M11 checkpoint interruption tests. Do not add overlapping invocations.",
+  "elapsed_seconds": 24.74,
+  "stdout": "results/R3M17/receipts/integrated_tests.stdout",
+  "stdout_sha256": "251320664227c89513a596237d5ac1205b663b4fb79018898d532d20388fd06c",
+  "stderr": "results/R3M17/receipts/integrated_tests.stderr",
+  "new_tests_by_file": {
+    "tests/test_r3m17_aocc_metric.py": 23,
+    "tests/test_r3m17_checkpoint_guard.py": 36,
+    "tests/test_r3m17_preflight.py": 16,
+    "tests/test_r3m17_reference.py": 25,
+    "tests/test_r3m17_temporal.py": 22
+  },
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "backend": "CPU NumPy",
+    "pytest": "8.4.2 in external scratch test_deps; scientific environment unchanged"
+  },
+  "frozen_source_digest": "581ff84930bb862efafdfec5d39d5b25aebf9297ce7ce45f833a5abe125b2a5b",
+  "protected_tracked_files_changed": [],
+  "new_full_production_collisions": 0,
+  "GPU_execution": "NOT_RUN",
+  "remote_restore": "NOT_TESTED",
+  "reviewed_file_hashes_rechecked": "ALL_MATCH",
+  "independent_review_sha256": "305c3da1326ec00e27474ece6f97c879706ac5feb3ae2ba2e2b15fc2bda1dcbd",
+  "implementation_files_sha256": {
+    "scripts/r3m17_aocc_metric.py": "f6e1cd43602693f2405be3db8bff766bf316040e57f6b2c1d6b8bd219641aaf3",
+    "scripts/r3m17_checkpoint_guard.py": "83ada4d8cfa408e3508900b223e539483efed7d9ed3fa68277c54c92c1430f53",
+    "scripts/r3m17_preflight.py": "e7d1e5f4bd6acd2a121fcc447eca8bb94741e1bdc7ba290aed303aaa71954fe3",
+    "scripts/r3m17_reference.py": "185465692b7816a80f6a66b66179c800d4990577a6f2e92ab355289c35a9f767",
+    "scripts/r3m17_temporal.py": "ada46047152184ae1f39675c218a013fac35ad7ed8331a8f783b9096903032e0"
+  },
+  "test_files_sha256": {
+    "tests/test_r3m17_aocc_metric.py": "d7789280845391571cc1e7932dc900bb975cc370fc54d200fa28dbbaf9c7576a",
+    "tests/test_r3m17_checkpoint_guard.py": "c55c6f54c9bbcf2e008bf8a8ad233519eafafaaf9b43807f8427e8ed7f716d25",
+    "tests/test_r3m17_preflight.py": "4474f866aa77c8389944383709cccdc820ec95e5599572b110c9ee75623e8eef",
+    "tests/test_r3m17_reference.py": "6935bb15120cc12a5fa55e6a33f6060f75fb4064ed9c68f0f752980dda836800",
+    "tests/test_r3m17_temporal.py": "6cf66fa4c6b4dc10a3b94d33ec334633d8f5c6416a7fac605a70331d43df6f98"
+  }
+}

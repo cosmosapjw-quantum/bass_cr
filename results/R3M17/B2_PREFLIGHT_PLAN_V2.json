@@ -1,0 +1,1408 @@
+{
+  "schema": "BASS_CR_R3M17_B2_METADATA_PREFLIGHT_V2",
+  "status": "PLAN_ONLY_NOT_EXECUTED",
+  "collision_execution_performed": false,
+  "new_collision_budget": 1,
+  "job": "B2",
+  "frozen_authority_commit": "7844bc0d8122070b267ee77c75cb2c9447435155",
+  "numerical_source_digest": "581ff84930bb862efafdfec5d39d5b25aebf9297ce7ce45f833a5abe125b2a5b",
+  "instrumentation_sha256": "e7d1e5f4bd6acd2a121fcc447eca8bb94741e1bdc7ba290aed303aaa71954fe3",
+  "reference_B1_config_sha256": "7a7fc7a4ea484fa65d73d38eeb49b628760a7b4ed144075275988139c0c8ab2c",
+  "config": {
+    "absorber_power": 0.125,
+    "absorber_reference_dt": 0.05,
+    "absorber_width": 4.0,
+    "b": 2.0,
+    "backend": "cupy",
+    "capture_plane": 30.0,
+    "checkpoint_stride": 100,
+    "dt": 0.0125,
+    "energy_keV_per_u": 100.0,
+    "grid": {
+      "dx": 0.2,
+      "xlim": [
+        -30,
+        40
+      ],
+      "ylim": [
+        -30,
+        30
+      ],
+      "zlim": [
+        -30,
+        90
+      ]
+    },
+    "imag_dt": 0.00625,
+    "imag_steps": 4800,
+    "initial_state": "imag_time",
+    "project_nmax": 3,
+    "projection_slab_x": 2,
+    "z_start": -30.0,
+    "z_stop": 60.0
+  },
+  "config_path": "configs/r3m17/B2.json",
+  "config_file_sha256": "b9c00c23b67b06f232898002d5a4bd1a10864808a8afbefbb9599b2b64dfc94c",
+  "config_file_verified": true,
+  "job_root": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923",
+  "job_root_already_exists": false,
+  "command_working_directory": "/workspace/scratch/235b855501c6/bass_cr",
+  "command_environment_required": {
+    "PYTHONPATH": "/workspace/scratch/235b855501c6/bass_cr",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1"
+  },
+  "CUDA_library_path_policy": "reuse and verify the existing R3M16 scientific environment; do not guess or upgrade libraries",
+  "numerical": {
+    "grid_shape": [
+      350,
+      300,
+      600
+    ],
+    "grid_points": 63000000,
+    "requested_dt": 0.0125,
+    "actual_dt": 0.01249892352238994,
+    "nstep": 3586,
+    "physical_horizon_au": 44.821139751290325,
+    "speed_au": 2.00798106651023,
+    "chunk_max_steps": 128,
+    "chunk_count": 29,
+    "last_chunk_steps": 2,
+    "fft_kinetic": {
+      "axis_kmax_au_inverse": [
+        15.707963267948964,
+        15.707963267948966,
+        15.707963267948966
+      ],
+      "axis_parity": [
+        "even",
+        "even",
+        "even"
+      ],
+      "maximum_kinetic_energy_Eh": 370.1101650408509,
+      "maximum_kinetic_phase_radians": 4.625978647704715,
+      "formula": "kmax_i=2*pi*floor(n_i/2)/(n_i*h); Tmax=sum(kmax_i^2)/2",
+      "universal_CFL_stability_limit_claimed": false,
+      "interpretation": "operator-bandwidth diagnostic; no universal state-dependent splitting error or stability certificate"
+    },
+    "target": {
+      "axis_phases": [
+        {
+          "nearest_index": 150,
+          "distance_over_h": 0.5,
+          "distance_a0": 0.1,
+          "cell_center_phase_fraction": 0.5,
+          "coincides_with_cell_center_to_coordinate_roundoff": false,
+          "coordinate_roundoff_tolerance_over_h": 5.329070518200751e-13
+        },
+        {
+          "nearest_index": 150,
+          "distance_over_h": 0.5,
+          "distance_a0": 0.1,
+          "cell_center_phase_fraction": 0.5,
+          "coincides_with_cell_center_to_coordinate_roundoff": false,
+          "coordinate_roundoff_tolerance_over_h": 5.329070518200751e-13
+        },
+        {
+          "nearest_index": 150,
+          "distance_over_h": 0.5,
+          "distance_a0": 0.1,
+          "cell_center_phase_fraction": 0.5,
+          "coincides_with_cell_center_to_coordinate_roundoff": false,
+          "coordinate_roundoff_tolerance_over_h": 5.329070518200751e-13
+        }
+      ],
+      "nearest_sample_radius_a0": 0.17320508075688776
+    },
+    "projectile": {
+      "axis_phases_xy": [
+        {
+          "nearest_index": 160,
+          "distance_over_h": 0.5,
+          "distance_a0": 0.1,
+          "cell_center_phase_fraction": 0.5,
+          "coincides_with_cell_center_to_coordinate_roundoff": false,
+          "coordinate_roundoff_tolerance_over_h": 5.666578317686799e-13
+        },
+        {
+          "nearest_index": 150,
+          "distance_over_h": 0.5,
+          "distance_a0": 0.1,
+          "cell_center_phase_fraction": 0.5,
+          "coincides_with_cell_center_to_coordinate_roundoff": false,
+          "coordinate_roundoff_tolerance_over_h": 5.329070518200751e-13
+        }
+      ],
+      "nearest_transverse_axis_distance_over_h": [
+        0.5,
+        0.5
+      ],
+      "minimum_transverse_distance_a0": 0.1414213562373095,
+      "minimum_transverse_distance_over_h": 0.7071067811865475,
+      "path_contains_z_cell_center": true,
+      "minimum_sample_distance_over_continuous_path_a0": 0.1414213562373095,
+      "displacement_per_step_a0": 0.02509760178471835,
+      "displacement_per_step_over_h": 0.12548800892359174,
+      "steps_per_grid_crossing": 7.968888888888889,
+      "mesh_phase_matches_target_transverse": true,
+      "interpretation": "geometric sampling diagnostics, not a capture-probability error estimate"
+    }
+  },
+  "runtime": {
+    "caller_interpreter": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "caller_metadata": {
+      "python": "3.12.14",
+      "numpy": "2.3.5",
+      "scipy": "1.17.0",
+      "cupy": null,
+      "cuda_runtime": null,
+      "cuda_driver_api": null,
+      "nvidia_driver": null,
+      "device": null
+    },
+    "required_scientific_interpreter": "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+    "required_scientific_interpreter_exists": false,
+    "required_scientific_environment": {
+      "python": "3.12.3",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "cupy": "14.2.0",
+      "cuda_runtime": 12090,
+      "cuda_driver_api": 13020,
+      "nvidia_driver": "595.84",
+      "device": "NVIDIA GeForce RTX 3090"
+    },
+    "caller_comparison_to_required": {
+      "python": "DIFFERS",
+      "numpy": "DIFFERS",
+      "scipy": "DIFFERS",
+      "cupy": "NOT_INSPECTED",
+      "cuda_runtime": "NOT_INSPECTED",
+      "cuda_driver_api": "NOT_INSPECTED",
+      "nvidia_driver": "NOT_INSPECTED",
+      "device": "NOT_INSPECTED"
+    },
+    "science_environment_verified": false,
+    "science_environment_status": "REQUIRES_ACTUAL_RUNTIME_IDENTITY_AND_EXISTING_RESOURCE_PREFLIGHT",
+    "CUDA_imported_or_initialized": false,
+    "cpu_fallback_allowed": false,
+    "package_upgrade_authorized": false
+  },
+  "checkpoint_retention": {
+    "generation_parent": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations",
+    "create_parent_on_same_filesystem_as_collision_before_execution": true,
+    "state_file_bytes_estimate": 1008000128,
+    "retained_generation_count": 29,
+    "retained_state_bytes_estimate": 29232003712,
+    "minimum_free_disk_floor_bytes": 42949672960,
+    "floor_is_sufficient_space_certificate": false,
+    "additional_space_required_for": "live/replacement/prepared arrays, metadata, logs, archives and filesystem overhead; calculate actual total locally"
+  },
+  "prerequisites": {
+    "plan_is_execution_authorization": false,
+    "exact_config_file_must_exist_and_match_plan_before_execution": true,
+    "fresh_output_or_explicit_preserved_failure_reconciliation_required": true,
+    "fresh_B2_preparation_receipt_for_exact_B2_config_required": true,
+    "same_grid_preparation_byte_identity_required": true,
+    "preparation_binding_reference": "historical B1/R3M15 B same-grid saved initial array; compare array dtype/shape/content identity before propagation",
+    "internal_initial_binding": "existing R3M14 v2 witness must PASS; do not substitute states or weaken receipt compatibility",
+    "historical_source_result_state_seal_bytes_immutable": true,
+    "actual_resource_probe_PASS_required": true,
+    "stdout_stderr_separated_and_failures_preserved": true,
+    "no_repeat_after_completed_collision": true,
+    "restart_retention": "preserve a verified complete checkpoint generation before replacing the next; current in-place pair is not transactional"
+  },
+  "command_plan": [
+    {
+      "phase": "resource_preflight",
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m15_resource_probe.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/resource.json"
+      ]
+    },
+    {
+      "phase": "prepare",
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m13_initial_state_pair.py",
+        "prepare",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation"
+      ]
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 1,
+      "maximum_steps_in_chunk": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": false,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk001.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk001.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 1,
+      "expected_completed_steps": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g000128",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 2,
+      "maximum_steps_in_chunk": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": true,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk002.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk002.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 2,
+      "expected_completed_steps": 256,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g000256",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 3,
+      "maximum_steps_in_chunk": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": true,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk003.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk003.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 3,
+      "expected_completed_steps": 384,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g000384",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 4,
+      "maximum_steps_in_chunk": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": true,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk004.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk004.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 4,
+      "expected_completed_steps": 512,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g000512",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 5,
+      "maximum_steps_in_chunk": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": true,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk005.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk005.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 5,
+      "expected_completed_steps": 640,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g000640",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 6,
+      "maximum_steps_in_chunk": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": true,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk006.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk006.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 6,
+      "expected_completed_steps": 768,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g000768",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 7,
+      "maximum_steps_in_chunk": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": true,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk007.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk007.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 7,
+      "expected_completed_steps": 896,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g000896",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 8,
+      "maximum_steps_in_chunk": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": true,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk008.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk008.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 8,
+      "expected_completed_steps": 1024,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g001024",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 9,
+      "maximum_steps_in_chunk": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": true,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk009.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk009.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 9,
+      "expected_completed_steps": 1152,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g001152",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 10,
+      "maximum_steps_in_chunk": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": true,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk010.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk010.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 10,
+      "expected_completed_steps": 1280,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g001280",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 11,
+      "maximum_steps_in_chunk": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": true,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk011.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk011.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 11,
+      "expected_completed_steps": 1408,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g001408",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 12,
+      "maximum_steps_in_chunk": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": true,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk012.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk012.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 12,
+      "expected_completed_steps": 1536,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g001536",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 13,
+      "maximum_steps_in_chunk": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": true,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk013.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk013.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 13,
+      "expected_completed_steps": 1664,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g001664",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 14,
+      "maximum_steps_in_chunk": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": true,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk014.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk014.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 14,
+      "expected_completed_steps": 1792,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g001792",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 15,
+      "maximum_steps_in_chunk": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": true,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk015.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk015.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 15,
+      "expected_completed_steps": 1920,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g001920",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 16,
+      "maximum_steps_in_chunk": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": true,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk016.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk016.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 16,
+      "expected_completed_steps": 2048,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g002048",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 17,
+      "maximum_steps_in_chunk": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": true,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk017.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk017.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 17,
+      "expected_completed_steps": 2176,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g002176",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 18,
+      "maximum_steps_in_chunk": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": true,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk018.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk018.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 18,
+      "expected_completed_steps": 2304,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g002304",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 19,
+      "maximum_steps_in_chunk": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": true,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk019.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk019.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 19,
+      "expected_completed_steps": 2432,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g002432",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 20,
+      "maximum_steps_in_chunk": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": true,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk020.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk020.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 20,
+      "expected_completed_steps": 2560,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g002560",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 21,
+      "maximum_steps_in_chunk": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": true,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk021.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk021.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 21,
+      "expected_completed_steps": 2688,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g002688",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 22,
+      "maximum_steps_in_chunk": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": true,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk022.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk022.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 22,
+      "expected_completed_steps": 2816,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g002816",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 23,
+      "maximum_steps_in_chunk": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": true,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk023.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk023.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 23,
+      "expected_completed_steps": 2944,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g002944",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 24,
+      "maximum_steps_in_chunk": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": true,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk024.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk024.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 24,
+      "expected_completed_steps": 3072,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g003072",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 25,
+      "maximum_steps_in_chunk": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": true,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk025.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk025.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 25,
+      "expected_completed_steps": 3200,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g003200",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 26,
+      "maximum_steps_in_chunk": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": true,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk026.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk026.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 26,
+      "expected_completed_steps": 3328,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g003328",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 27,
+      "maximum_steps_in_chunk": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": true,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk027.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk027.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 27,
+      "expected_completed_steps": 3456,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g003456",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 28,
+      "maximum_steps_in_chunk": 128,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": true,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk028.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk028.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 28,
+      "expected_completed_steps": 3584,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g003584",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    },
+    {
+      "phase": "collision_chunk",
+      "chunk": 29,
+      "maximum_steps_in_chunk": 2,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "configs/r3m17/B2.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--max-steps",
+        "128"
+      ],
+      "must_stop_on_previous_failure": true,
+      "sealed_restart_and_same_runtime_required": true,
+      "stdout_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk029.stdout",
+      "stderr_path": "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision.chunk029.stderr"
+    },
+    {
+      "phase": "checkpoint_snapshot",
+      "chunk": 29,
+      "expected_completed_steps": 3586,
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/workspace/scratch/235b855501c6/bass_cr/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m17_B2_20260923/generations/g003586",
+        "--config",
+        "configs/r3m17/B2.json"
+      ],
+      "must_stop_on_previous_failure": true,
+      "must_finish_before_next_collision_chunk": true,
+      "required_witness": "R3M14_V2_WITH_PREPARED_AND_INTERNAL_ARRAY_DIGESTS"
+    }
+  ],
+  "claim_ceiling": {
+    "temporal_budget_closed": false,
+    "representation_change_authorized": false,
+    "all_bound_admitted": false,
+    "bgrid_admitted": false,
+    "physical_rate_admitted": false
+  }
+}

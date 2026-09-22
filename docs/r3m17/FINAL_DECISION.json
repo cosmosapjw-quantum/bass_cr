@@ -1,0 +1,68 @@
+{
+  "schema": "BASS_CR_R3M17_FINAL_DECISION_V1",
+  "created_utc": "2026-09-22T23:14:15.838483+00:00",
+  "base_scientific_commit": "7844bc0d8122070b267ee77c75cb2c9447435155",
+  "branch": "cr/r3m17-production-readiness-20260923",
+  "research_and_code_delivery": "COMPLETE_BOUNDED_SCOPE",
+  "independent_infrastructure_decision": "PROMOTE_BOUNDED_DIAGNOSTIC_INFRASTRUCTURE_ONLY",
+  "scientific_decision": "TIME_REFINEMENT_STILL_OPEN",
+  "production_admission": "HOLD",
+  "representation_change_authorized": false,
+  "finer_h_authorized": false,
+  "new_production_collisions_executed": 0,
+  "B2_status": "NOT_RUN",
+  "implemented_sidecars": [
+    "scripts/r3m17_aocc_metric.py",
+    "scripts/r3m17_checkpoint_guard.py",
+    "scripts/r3m17_preflight.py",
+    "scripts/r3m17_reference.py",
+    "scripts/r3m17_temporal.py"
+  ],
+  "tests": {
+    "passed": 246,
+    "new_R3M17": 122,
+    "existing_in_combined_scope": 124,
+    "exit_code": 0,
+    "receipt": "results/R3M17/FINAL_VALIDATION.json"
+  },
+  "scientific_evidence": {
+    "tiny_static_Coulomb_observed_orders": [
+      2.00133715,
+      2.00033365
+    ],
+    "tiny_moving_two_center_observed_orders": [
+      1.99741564,
+      1.99935151
+    ],
+    "claim": "same discrete H_h temporal implementation only; not production or continuum accuracy",
+    "AOCC": "PASS_LOCAL_METRIC_IDENTITY_ONLY"
+  },
+  "protected": {
+    "main_modified": false,
+    "cr_repro_changed": false,
+    "R3M15_bytes_changed": false,
+    "R3M16_bytes_changed": false,
+    "numerical_source_digest": "581ff84930bb862efafdfec5d39d5b25aebf9297ce7ce45f833a5abe125b2a5b"
+  },
+  "next_canonical_node": "N1_TDL_B_DT0125_SINGLE_COLLISION_TEMPORAL_RESOLUTION",
+  "next_node": {
+    "config": "configs/r3m17/B2.json",
+    "config_sha256": "b9c00c23b67b06f232898002d5a4bd1a10864808a8afbefbb9599b2b64dfc94c",
+    "h": 0.2,
+    "requested_dt": 0.0125,
+    "expected_nstep": 3586,
+    "full_collision_budget": 1,
+    "handoff": "docs/r3m17/LOCAL_CODEX_HANDOFF.md",
+    "plan": "results/R3M17/B2_PREFLIGHT_PLAN_V2.json",
+    "exit_ceiling": "EMPIRICAL_TEMPORAL_CANDIDATE_REQUIRES_CROSSCHECK; never certified budget closure"
+  },
+  "independent_review": "results/R3M17/INDEPENDENT_REVIEW.json",
+  "failure_ledger": "results/R3M17/FAILURE_LEDGER.json",
+  "publication_receipt": "docs/r3m17/DELIVERY_RECEIPT.json",
+  "limitations": [
+    "CPU-only runtime verified here; canonical GPU interpreter untouched",
+    "External solver source/API inspected, not built or reproduced",
+    "A2 absent; spatial gap at dt=.0125 remains NOT_MEASURED",
+    "Remote restore not tested; local checkpoint restore is a different claim"
+  ]
+}
