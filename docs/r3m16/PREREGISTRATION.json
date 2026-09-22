@@ -1,0 +1,39 @@
+{
+  "schema": "BASS_CR_R3M16_PREREGISTRATION_V1",
+  "work_unit": "N1_TDL_COULOMB_FFT_H_DT_REPRESENTATION_DECISION",
+  "parent_commit": "65c456b61bab6a5665a0ab5d7ee63a00976ee03e",
+  "numerical_source_digest": "581ff84930bb862efafdfec5d39d5b25aebf9297ce7ce45f833a5abe125b2a5b",
+  "analytic_hypothesis": {
+    "operators": "T=-1/2 Laplacian, V=-1/r",
+    "away_from_origin": "[V,[T,V]] psi=|grad V|^2 psi=r^-4 psi",
+    "cutoff_norm_squared_scaling": "approximately (4/5) a^-5 for hydrogen 1s",
+    "cell_centered_diagnostic_scaling": "commutator norm approximately h^-5/2",
+    "claim": "DIAGNOSTIC_HYPOTHESIS_NOT_CERTIFIED_FULL_COLLISION_ERROR_LAW",
+    "refined_B_to_A_ray_defect_ratio_observed": 1.69666,
+    "simple_h_minus_5_over_2_ratio": 1.74693,
+    "agreement_is_proof": false
+  },
+  "target_only": {
+    "states": ["R3M15_A_MAIN", "R3M15_B_MAIN", "R3M15_B_PREPARATION_REFINEMENT"],
+    "one_step_requested_dt": [0.05, 0.025, 0.0125],
+    "one_step_actual_rule": "R3M15 collision dt_actual divided by 1,2,4",
+    "fixed_horizon_T_probe": 1.0,
+    "fixed_horizon_requested_dt": [0.05, 0.025, 0.0125],
+    "clean_second_order_rule": "D01>D12>1e-13 and 1.5<=p_time<=2.5; diagnostic only",
+    "projectile_potential": false,
+    "CAP": false,
+    "capture_error_bound": false
+  },
+  "new_full_collisions": ["A1", "B1"],
+  "new_full_collision_count_max": 2,
+  "full_collision_requested_dt": 0.025,
+  "full_collision_actual_dt": "runner-derived integer-step closure",
+  "chunk_max_steps": 128,
+  "gpu_jobs_sequential": true,
+  "decision_thresholds": {"real_time_relative": 0.001, "spatial_relative": 0.003, "pair_screen_relative": 0.01},
+  "relative_denominators": {"h_dt05": "abs(B0)", "h_dt025": "abs(B1)", "t_h025": "abs(A1)", "t_h020": "abs(B1)", "interaction": "abs(B1)"},
+  "forbidden": ["cross-grid state-pair theorem", "soft-core replacement", "finer h", "dt=.0125 full collision", "b-grid", "50/225", "physical rate", "large AOCC", "main merge", "force push"],
+  "global_spatial_convergence": "NO_GO",
+  "all_bound_completion": "OPEN",
+  "bgrid": "NO_GO"
+}
