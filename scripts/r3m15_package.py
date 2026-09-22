@@ -12,7 +12,7 @@ def sha(path):
 
 def package(root,stage):
     repo=root/'worktree';dest=root/'packages'/stage;dest.mkdir(parents=True,exist_ok=False)
-    if stage in ('A','B','C'):
+    if stage in ('A','B','C','B_preparation_refinement'):
         if not (root/stage/'COMPLETE.json').is_file():raise ValueError('only completed job packages')
         shutil.copytree(root/stage,dest/stage)
     elif stage not in ('PREREGISTRATION','FINAL'):raise ValueError('unknown stage')
