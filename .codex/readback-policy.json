@@ -1,0 +1,66 @@
+{
+  "schema": "BASS_CR_READBACK_POLICY_V1",
+  "effective_date": "2026-09-22",
+  "scope": "cosmosapjw-quantum/bass_cr project harness; all agents, worktrees, handoffs and future mutations",
+  "readback_policy": {
+    "default": "selective",
+    "default_tier": "R1",
+    "tiers": {
+      "R0": "provider success only; explicitly temporary/low-risk",
+      "R1": "provider success + remote ID/ref + available size/hash metadata",
+      "R2": "API/remote metadata + manifest cross-check; canonical checkpoint",
+      "R3": "actual download/readback + byte/hash verification; recovery/release/audit"
+    },
+    "github": {
+      "post_push_readback": false,
+      "verify_remote_ref": true,
+      "verify_commit_sha": true,
+      "verify_tree_sha": "optional"
+    },
+    "artifact_upload": {
+      "immediate_download_readback": false,
+      "require": [
+        "provider_success_receipt",
+        "remote_object_id",
+        "size_if_available",
+        "sha256_if_available"
+      ]
+    },
+    "large_artifacts": {
+      "download_for_verification": false,
+      "retain_local_source_until_receipt": true
+    },
+    "force_readback_when": [
+      "canonical_release",
+      "destructive_or_overwrite_mutation",
+      "restore_or_recovery",
+      "runtime_interruption_recovery",
+      "provider_reports_checksum_or_size_mismatch",
+      "provenance_conflict",
+      "authority_change",
+      "external_or_untrusted_import",
+      "user_explicitly_requests_readback"
+    ],
+    "manual_override": {
+      "enable_readback": true
+    },
+    "manual_override_semantics": "Explicit opt-in is supported, not globally enabled. Record the reason for this operation.",
+    "precedence": "R3 triggers and explicit per-operation override take precedence over default no-readback; otherwise canonical checkpoint uses R2, ordinary operations R1.",
+    "receipt_fields": [
+      "verification_tier",
+      "verification_reason",
+      "provider_success_receipt",
+      "remote_object_id_or_ref",
+      "expected_commit_sha_if_git",
+      "observed_commit_sha_if_git",
+      "local_size_if_artifact",
+      "local_sha256_if_artifact",
+      "remote_size_if_available",
+      "remote_hash_algorithm_if_available",
+      "remote_hash_if_available",
+      "manifest_cross_check_if_R2",
+      "readback_performed",
+      "readback_result_if_R3"
+    ]
+  }
+}
