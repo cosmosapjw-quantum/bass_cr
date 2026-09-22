@@ -1,71 +1,180 @@
-import importlib.util, json
+import importlib.util
+import json
 from pathlib import Path
+
 import numpy as np
 import pytest
-from cr_repro.backend import asnumpy
+
 from cr_repro.r3m11 import ControlledTDLRunner, file_sha, source_digest
 from cr_repro.util import atomic_json, atomic_npy
 
-P = Path(__file__).resolve().parents[1] / "scripts/r3m14_collision_initial_witness.py"
-spec = importlib.util.spec_from_file_location("witness", P)
-m = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(m)
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def load_module(name, path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+r3m13 = load_module("r3m13_fixture", ROOT / "scripts/r3m13_initial_state_pair.py")
+witness = load_module("r3m14_witness", ROOT / "scripts/r3m14_collision_initial_witness.py")
+
 
 def cfg():
-    return dict(energy_keV_per_u=100., b=2., backend="numpy", dt=.05,
-      grid=dict(xlim=[-2,2], ylim=[-2,2], zlim=[-2,4], dx=1.),
-      z_start=-1., z_stop=1., absorber_width=1., absorber_power=.125,
-      absorber_reference_dt=.05, project_nmax=1, capture_plane=1.,
-      checkpoint_stride=1, initial_state="imag_time", imag_dt=.025, imag_steps=2)
+    return dict(
+        energy_keV_per_u=100.0,
+        b=2.0,
+        backend="numpy",
+        dt=0.05,
+        grid=dict(xlim=[-2, 2], ylim=[-2, 2], zlim=[-2, 4], dx=1.0),
+        z_start=-1.0,
+        z_stop=1.0,
+        absorber_width=1.0,
+        absorber_power=0.125,
+        absorber_reference_dt=0.05,
+        project_nmax=1,
+        capture_plane=1.0,
+        checkpoint_stride=1,
+        initial_state="imag_time",
+        imag_dt=0.025,
+        imag_steps=2,
+    )
 
-def make_prepared(root, c):
-    r = ControlledTDLRunner(c)
-    psi, info = r.relaxed_initial()
-    root.mkdir()
-    atomic_npy(root / "initial.npy", asnumpy(psi))
-    rec = dict(schema="BASS_CR_R3M13_PREPARATION_V1", status="COMPLETE",
-      config=c, shape=list(psi.shape), dv=r.dv, source_digest=source_digest(),
-      initial_state_sha256=file_sha(root / "initial.npy"), initial=info,
-      environment=dict(backend=r.backend))
-    atomic_json(root / "receipt.json", rec)
-    return rec
+
+def pin_current_source():
+    """Fixture helper may be reconstructed; production branch should equal the pin."""
+    actual = source_digest()
+    witness.EXPECTED_SOURCE_DIGEST = actual
+    r3m13.EXPECTED_SOURCE_DIGEST = actual
+    return actual
+
+
+def prepare(root, config):
+    return r3m13.prepare(config, root)
+
 
 def test_witness_does_not_change_one_step(tmp_path):
-    c = cfg(); prep = tmp_path / "prep"; make_prepared(prep, c)
-    cp = tmp_path / "c.json"; cp.write_text(json.dumps(c))
-    actual = source_digest(); m.EXPECTED_SOURCE_DIGEST = actual
-    plain = tmp_path / "plain"; bound = tmp_path / "bound"
-    ControlledTDLRunner(c).run(plain, max_steps=1)
-    m.run_bound(cp, prep, bound, 1, expected_source_digest=actual)
-    np.testing.assert_array_equal(np.load(plain / "state.npy"), np.load(bound / "state.npy"))
-    w = json.loads((bound / "r3m14_initial_binding.json").read_text())
-    assert w["status"] == "PASS_BYTE_IDENTICAL_INTERNAL_INITIAL_TO_PREPARED"
-    assert w["numerical_state_substituted"] is False
-    assert w["backend_match"] is True
+    config = cfg()
+    actual = pin_current_source()
+    prepared = tmp_path / "prep"
+    prepare(prepared, config)
+    config_path = tmp_path / "config.json"
+    config_path.write_text(json.dumps(config))
+
+    plain = tmp_path / "plain"
+    bound = tmp_path / "bound"
+    ControlledTDLRunner(config).run(plain, max_steps=1)
+    witness.run_bound(
+        config_path, prepared, bound, 1, expected_source_digest=actual
+    )
+
+    np.testing.assert_array_equal(
+        np.load(plain / "state.npy"), np.load(bound / "state.npy")
+    )
+    binding = json.loads((bound / "r3m14_initial_binding.json").read_text())
+    assert binding["schema"] == "BASS_CR_R3M14_INTERNAL_INITIAL_BINDING_V2"
+    assert binding["status"] == "PASS_BYTE_IDENTICAL_INTERNAL_INITIAL_TO_PREPARED"
+    assert binding["numerical_state_substituted"] is False
+    assert binding["numerical_state_renormalized"] is False
+    assert binding["environment_match"] is True
+    assert binding["norm_match"] is True
     assert json.loads((bound / "state.json").read_text())["done"] == 1
 
-def test_resume_requires_same_prepared_bytes(tmp_path):
-    c = cfg(); prep = tmp_path / "prep"; make_prepared(prep, c)
-    cp = tmp_path / "c.json"; cp.write_text(json.dumps(c))
-    actual = source_digest(); m.EXPECTED_SOURCE_DIGEST = actual
-    out = tmp_path / "run"; m.run_bound(cp, prep, out, 1, expected_source_digest=actual)
-    a = np.load(prep / "initial.npy").copy(); a.flat[0] += 1e-12
-    atomic_npy(prep / "initial.npy", a)
-    with pytest.raises(ValueError, match="file hash"):
-        m.run_bound(cp, prep, out, 1, expected_source_digest=actual)
 
-def test_mismatched_prepared_initial_fails_before_propagation(tmp_path):
-    c = cfg(); prep = tmp_path / "prep"; make_prepared(prep, c)
-    cp = tmp_path / "c.json"; cp.write_text(json.dumps(c))
-    actual = source_digest(); m.EXPECTED_SOURCE_DIGEST = actual
-    a = np.roll(np.load(prep / "initial.npy").copy(), 1, axis=0)
-    atomic_npy(prep / "initial.npy", a)
-    rec = json.loads((prep / "receipt.json").read_text())
-    rec["initial_state_sha256"] = file_sha(prep / "initial.npy")
-    atomic_json(prep / "receipt.json", rec)
+def test_resume_requires_same_prepared_bytes(tmp_path):
+    config = cfg()
+    actual = pin_current_source()
+    prepared = tmp_path / "prep"
+    prepare(prepared, config)
+    config_path = tmp_path / "config.json"
+    config_path.write_text(json.dumps(config))
+    out = tmp_path / "run"
+
+    witness.run_bound(config_path, prepared, out, 1, expected_source_digest=actual)
+    state = np.load(prepared / "initial.npy").copy()
+    state.flat[0] += 1e-12
+    atomic_npy(prepared / "initial.npy", state)
+
+    with pytest.raises(ValueError, match="hash mismatch"):
+        witness.run_bound(config_path, prepared, out, 1, expected_source_digest=actual)
+
+
+def test_mismatched_rehashed_prepared_initial_fails_before_propagation(tmp_path):
+    config = cfg()
+    actual = pin_current_source()
+    prepared = tmp_path / "prep"
+    prepare(prepared, config)
+    config_path = tmp_path / "config.json"
+    config_path.write_text(json.dumps(config))
+
+    # Keep the fixture preparation self-consistent at the file-hash level while
+    # changing its numerical array. The R3M14 identity witness must catch this.
+    state = np.roll(np.load(prepared / "initial.npy").copy(), 1, axis=0)
+    atomic_npy(prepared / "initial.npy", state)
+    receipt = json.loads((prepared / "receipt.json").read_text())
+    receipt["initial_state_sha256"] = file_sha(prepared / "initial.npy")
+    atomic_json(prepared / "receipt.json", receipt)
+
     out = tmp_path / "run"
     with pytest.raises(ValueError, match="not byte-identical"):
-        m.run_bound(cp, prep, out, 1, expected_source_digest=actual)
+        witness.run_bound(config_path, prepared, out, 1, expected_source_digest=actual)
     assert not (out / "state.json").exists()
-    w = json.loads((out / "r3m14_initial_binding.json").read_text())
-    assert w["status"] == "FAIL_INTERNAL_INITIAL_NOT_IDENTICAL"
+    binding = json.loads((out / "r3m14_initial_binding.json").read_text())
+    assert binding["status"] == "FAIL_INTERNAL_INITIAL_NOT_IDENTICAL"
+
+
+def test_canonical_config_identity_is_fail_closed(tmp_path):
+    config = cfg()
+    actual = pin_current_source()
+    prepared = tmp_path / "prep"
+    prepare(prepared, config)
+
+    altered = dict(config)
+    # bool is numerically equal to 1 in Python, so this catches accidental use
+    # of ordinary dict equality as an identity proof.
+    altered["capture_plane"] = True
+    config_path = tmp_path / "altered.json"
+    config_path.write_text(json.dumps(altered))
+
+    with pytest.raises(ValueError, match="canonical config"):
+        witness.run_bound(
+            config_path, prepared, tmp_path / "run", 1, expected_source_digest=actual
+        )
+
+
+def test_helper_script_hash_is_bound(tmp_path):
+    config = cfg()
+    actual = pin_current_source()
+    prepared = tmp_path / "prep"
+    prepare(prepared, config)
+    receipt = json.loads((prepared / "receipt.json").read_text())
+    receipt["script_sha256"] = "0" * 64
+    atomic_json(prepared / "receipt.json", receipt)
+    config_path = tmp_path / "config.json"
+    config_path.write_text(json.dumps(config))
+
+    with pytest.raises(ValueError, match="helper script hash"):
+        witness.run_bound(
+            config_path, prepared, tmp_path / "run", 1, expected_source_digest=actual
+        )
+
+
+def test_preparation_environment_mismatch_fails_before_propagation(tmp_path):
+    config = cfg()
+    actual = pin_current_source()
+    prepared = tmp_path / "prep"
+    prepare(prepared, config)
+    receipt = json.loads((prepared / "receipt.json").read_text())
+    receipt["environment"]["numpy"] = "deliberately-different"
+    atomic_json(prepared / "receipt.json", receipt)
+    config_path = tmp_path / "config.json"
+    config_path.write_text(json.dumps(config))
+
+    out = tmp_path / "run"
+    with pytest.raises(ValueError, match="environment-bound"):
+        witness.run_bound(config_path, prepared, out, 1, expected_source_digest=actual)
+    assert not (out / "state.json").exists()
+    binding = json.loads((out / "r3m14_initial_binding.json").read_text())
+    assert binding["environment_match"] is False
