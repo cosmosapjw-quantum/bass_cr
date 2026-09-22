@@ -1,45 +1,57 @@
 {
-  "schema": "BASS_CR_R3M14_DUAL_BACKUP_AND_PUBLICATION_RECEIPT_V1",
+  "schema": "BASS_CR_R3M14_DUAL_BACKUP_AND_PUBLICATION_RECEIPT_V2",
   "artifact": {
-    "name": "BASS_CR_R3M14_PREFLIGHT_TRANSFER_20260922_v1.zip",
-    "bytes": 16074,
-    "sha256": "275b793d566fe50a56f3af0326284f5b20e5d78cfa006a4aaf7be6466d669d0d",
+    "name": "BASS_CR_R3M14_PREFLIGHT_TRANSFER_20260922_v2.zip",
+    "bytes": 20655,
+    "sha256": "f5e555c9c16a529566112dc829c0386be10b4ca3847b7bec3c0016131f11f944",
     "zip_crc": "PASS",
-    "members": 9
+    "members": 13,
+    "fixture_only_r3m13_helper_included": false,
+    "cr_repro_files_included": false
   },
   "google_drive": {
     "status": "UPLOAD_SUCCESS_RAW_READBACK_VERIFIED",
-    "id": "1kYsZFHtoYuvtr2qAZzMAfpi7Ap-jYjts",
+    "id": "1qPJEflF-V5TKn-a9X_rJ3aDQfvtcRbNP",
     "parent_id": "1pkohlay5eIfFJsBwPZ_yn2jIZONZjesI",
-    "bytes": 16074,
-    "raw_readback_sha256": "275b793d566fe50a56f3af0326284f5b20e5d78cfa006a4aaf7be6466d669d0d"
+    "bytes": 20655,
+    "raw_readback_sha256": "f5e555c9c16a529566112dc829c0386be10b4ca3847b7bec3c0016131f11f944"
   },
   "dropbox": {
     "status": "UPLOAD_SUCCESS_PROVIDER_CONTENT_HASH_VERIFIED",
-    "id": "id:BSpOijBcT10AAAAAADs-2w",
-    "path": "/BASS_DERIVATION_DOSSIERS_20260912/BASS_CR_R3M14_PREFLIGHT_TRANSFER_20260922_v1.zip",
-    "bytes": 16074,
-    "content_hash": "1f3eb319eb2bd458e59be39231f72b71744ee622ed487498244f589674c15a3c",
-    "locally_recomputed_content_hash": "1f3eb319eb2bd458e59be39231f72b71744ee622ed487498244f589674c15a3c"
+    "id": "id:BSpOijBcT10AAAAAADtAig",
+    "path": "/BASS_DERIVATION_DOSSIERS_20260912/BASS_CR_R3M14_PREFLIGHT_TRANSFER_20260922_v2.zip",
+    "bytes": 20655,
+    "content_hash": "20a801a6e2af7cf27464ef854a22425d97f1ada17033d0c4f0ec13e21051431d",
+    "locally_recomputed_content_hash": "20a801a6e2af7cf27464ef854a22425d97f1ada17033d0c4f0ec13e21051431d"
   },
   "dual_backup_complete": true,
-  "dual_backup_scope": "R3M14_PREFLIGHT_TRANSFER_ONLY",
+  "dual_backup_scope": "R3M14_PREFLIGHT_TRANSFER_V2_ONLY",
+  "supersedes_as_latest": "BASS_CR_R3M14_PREFLIGHT_TRANSFER_20260922_v1.zip",
+  "v1_preserved_as_historical_snapshot": true,
   "github": {
     "repository": "cosmosapjw-quantum/bass_cr",
     "branch": "cr/r3m14-initial-binding-preflight-20260922",
-    "pre_receipt_commit": "974a9d3e9ab3f87e3db729e99d91facefc6c5a13",
+    "pre_receipt_head": "274cdae8b4f13ffa905686237db972a868901a6e",
+    "parent_authority": "d04124e8a1b83f29fd26baa13f11cd68a8f33c15",
     "main": "77237751bdd2aed5934bf7fc3bc626d631a09058",
     "published_blobs": {
-      "scripts/r3m14_collision_initial_witness.py": "cdf01c349322dda3ca19abf578f6196280909faf",
-      "tests/test_r3m14_collision_initial_witness.py": "8f9809d05d861b62d2ec55d33ba0d2550304d302",
-      "docs/r3m14/STATUS.json": "c4f09c9048f514f13270a5c64832c0de0ddc0eec",
-      "docs/r3m14/START_LOCAL_HANDOFF.md": "dbd291b205f301b6d014e31e79d9c4d2afb0fefc",
-      "docs/r3m14/PREFLIGHT_KO.md": "1b033f7b1c4e73720cf956db1258e65a36a4ee8a"
-    }
+      "scripts/r3m14_collision_initial_witness.py": "382b8fcb39ff36cf8e885869a69ca60c42c92026",
+      "tests/test_r3m14_collision_initial_witness.py": "0a2792ecebd9bc7d628b9318847989f560688b27",
+      "docs/r3m14/STATUS.json": "dc98b17c103219e030df578f5a1d8cca0605ec11",
+      "docs/r3m14/START_LOCAL_HANDOFF.md": "860d4292afd900377faf7757471f2c2f4a89ab17",
+      "docs/r3m14/PREFLIGHT_KO.md": "e207ba8c64fce36c58542befd66847540debf2a3",
+      "scripts/r3m13_initial_state_pair.py": "d449dcfecfef4cf925cc9ae3e75cc3ce32e89a9b",
+      "cr_repro/r3m11.py": "253d1959541393f0990e0f33eae844751a96c4bb",
+      "cr_repro/tdl.py": "f4184a9018e323e19e51d1d1c50fd3bc552cf51a"
+    },
+    "numerical_source_mutated": false,
+    "main_mutated": false
   },
   "validation": {
-    "isolated_fixture_tests_passed": 3,
+    "isolated_fixture_tests_passed": 6,
+    "scope": "ISOLATED_CONTROL_FLOW_STATE_IDENTITY_AND_PROVENANCE_GATES_ONLY",
     "real_repo_suite_run": false,
+    "github_actions_runs": 0,
     "gpu_run": false,
     "production_initial_pair_run": false,
     "production_collision_run": false,
@@ -52,5 +64,6 @@
     "complete_chunks": 1,
     "total_chunks": 19,
     "status": "BACKUP_PENDING_PARTIAL_NOT_RESTORABLE_FROM_DRIVE_ALONE"
-  }
+  },
+  "next": "R3M14_PRODUCTION_DX025_INITIAL_PAIR_AND_COLLISION_RETURN"
 }
