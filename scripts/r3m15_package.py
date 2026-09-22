@@ -16,7 +16,10 @@ def package(root,stage):
         if not (root/stage/'COMPLETE.json').is_file():raise ValueError('only completed job packages')
         shutil.copytree(root/stage,dest/stage)
     elif stage not in ('PREREGISTRATION','FINAL'):raise ValueError('unknown stage')
-    for name in ['cr_repro','vendor_w1r','configs/r3m15','scripts','tests','docs/r3m15','docs/roadmap']:
+    source_paths = ['cr_repro','vendor_w1r','configs/r3m15','scripts','tests','docs/r3m15','docs/roadmap']
+    if stage == 'FINAL':
+        source_paths.append('results/R3M15')
+    for name in source_paths:
         shutil.copytree(repo/name,dest/'source'/name,ignore=shutil.ignore_patterns('__pycache__','.pytest_cache'))
     for name in ['pyproject.toml','requirements.txt']:
         shutil.copy2(repo/name,dest/'source'/name)
