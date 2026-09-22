@@ -61,3 +61,16 @@ def spatial_order(coarse, middle, fine, *, comparable=True):
         return dict(out,status='NONCONTRACTING_DIFFERENCES')
     return dict(observed_order=order,extrapolated=fine+(fine-middle)/(1.25**order-1),
                 certified=False,status='EMPIRICAL_SINGLE_POWER_ONLY')
+
+def minimum_relative_change_over_interval(reference, lower, upper):
+    """Min |candidate-reference|/candidate on a positive probability interval.
+
+    The interval's provenance/theorem is external. This is scalar comparison,
+    not a theorem about initial states on different grids.
+    """
+    for value in (reference,lower,upper):_probability(value)
+    if lower>upper:raise ValueError('reversed probability interval')
+    if lower==0:return None  # Undefined denominator is never an automatic PASS.
+    if reference<lower:return (lower-reference)/lower
+    if reference>upper:return (reference-upper)/upper
+    return 0.

@@ -81,3 +81,8 @@ def test_nonmonotone_order_is_not_forced():
     out=gate.spatial_order(.01+.3125**2,.01+.25**2,.01+.20**2)
     assert out['observed_order'] == pytest.approx(2)
     assert out['extrapolated'] == pytest.approx(.01)
+
+@pytest.mark.parametrize('ref,lower,upper,expected',[(.2,.3,.4,1/3),(.3,.2,.4,0),(.5,.2,.4,.25),(.1,0,.2,None)])
+def test_scalar_interval_minimum_with_candidate_denominator(ref,lower,upper,expected):
+    actual=gate.minimum_relative_change_over_interval(ref,lower,upper)
+    assert actual is None if expected is None else actual == pytest.approx(expected)
