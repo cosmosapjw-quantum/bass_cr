@@ -109,20 +109,22 @@ def command(label, argv, jobroot, *, timeout=7200, memory_guard=True):
         raise RuntimeError(f"{label}: exit={returncode}; {stop_reason}")
 
 
-def run_target_only(root):
-    target = root / "target_only"
+def run_target_only(root, attempt_label):
+    if attempt_label not in ("initial", "retry1"):
+        raise ValueError("only initial and retry1 target-only attempts are registered")
+    target = root / ("target_only" if attempt_label == "initial" else "target_only_retry1")
     assert_fresh_job(target); target.mkdir(); (target / "receipts").mkdir()
     cases = {
         "A": (REPO / "configs/r3m15/A.json", R3M15_ROOT / "A/preparation", R3M15_ROOT / "A/collision/result.json"),
         "B": (REPO / "configs/r3m15/B.json", R3M15_ROOT / "B/preparation", R3M15_ROOT / "B/collision/result.json"),
-        "B_refined": (REPO / "configs/r3m15/B.json", R3M15_ROOT / "B_preparation_refinement/preparation", R3M15_ROOT / "B/collision/result.json"),
+        "B_refined": (REPO / "configs/r3m15/B_preparation_only.json", R3M15_ROOT / "B_preparation_refinement/preparation", R3M15_ROOT / "B/collision/result.json"),
     }
     try:
         for case, (config, prepared, result) in cases.items():
             argv = [SCIENCE, "scripts/r3m16_target_only_hdt.py", "--config", str(config),
                      "--prepared", str(prepared), "--collision-result", str(result),
                      "--out", str(target / (case + ".json")), "--horizon", "1.0"]
-            if case == "B_refined": argv.append("--one-step-only")
+            if case == "B_refined": argv.extend(["--one-step-only", "--preparation-only-control"])
             command("target_only_" + case, argv, target)
         summaries = {case: json.loads((target / (case + ".json")).read_text()) for case in cases}
         if any(summaries[case]["status"] != "COMPLETE" or summaries[case]["fixed_horizon"]["empirical_order"]["status"] in {"INVALID", "NONMONOTONE", "UNRESOLVED"} for case in ("A", "B")):
@@ -175,10 +177,33 @@ def run_collision(job, root):
         raise
 
 
+def reconcile_target_only(root):
+    target = root / "target_only_retry1"
+    if (target / "RECONCILED_COMPLETE.json").exists():
+        raise FileExistsError("preserve existing reconciliation receipt")
+    values = {name: json.loads((target / f"{name}.json").read_text()) for name in ("A", "B", "B_refined")}
+    for name in ("A", "B"):
+        order = values[name]["fixed_horizon"]["empirical_order"]
+        if values[name]["status"] != "COMPLETE" or order["status"] != "EMPIRICAL_ORDER":
+            raise ValueError("main target-only ladder is not resolved")
+    if (values["B_refined"]["status"] != "COMPLETE" or values["B_refined"]["fixed_horizon"] is not None
+            or values["B_refined"]["preparation_only_control"] is not True):
+        raise ValueError("B refined one-step control is invalid")
+    write_new(target / "RECONCILED_COMPLETE.json", {
+        "status": "COMPLETE_AFTER_PRESERVED_FAILURE_RECONCILIATION",
+        "cases": {name: {"sha256": sha(target / f"{name}.json"), "status": values[name]["status"]} for name in values},
+        "initial_failure_preserved": str(root / "target_only/FAILURE.json"),
+        "retry_partial_failure_preserved": str(target / "FAILURE.json"),
+        "repair_scope": "exact config authority for historical runner enrichment and preparation-only control",
+        "collision_execution_authorized_by_this_receipt": False,
+    })
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--phase", choices=["target-only", "collision"], required=True)
+    parser.add_argument("--phase", choices=["target-only", "reconcile-target-only", "collision"], required=True)
     parser.add_argument("--job", choices=list(JOBS))
+    parser.add_argument("--attempt-label", choices=["initial", "retry1"], default="initial")
     parser.add_argument("--root", type=Path, required=True)
     args = parser.parse_args(); root = args.root.resolve(); root.mkdir(exist_ok=True)
     import mlflow
@@ -187,10 +212,15 @@ def main():
     with (root / "gpu.lock").open("a+") as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         if args.phase == "target-only":
-            run_target_only(root)
+            run_target_only(root, args.attempt_label)
+        elif args.phase == "reconcile-target-only":
+            reconcile_target_only(root)
         else:
             if not args.job: raise ValueError("--job is required for collision")
-            if not (root / "target_only/COMPLETE.json").is_file(): raise ValueError("target-only diagnostics must complete first")
+            complete = root / "target_only/COMPLETE.json"
+            retry_complete = root / "target_only_retry1/COMPLETE.json"
+            reconciled = root / "target_only_retry1/RECONCILED_COMPLETE.json"
+            if not (complete.is_file() or retry_complete.is_file() or reconciled.is_file()): raise ValueError("target-only diagnostics must complete first")
             if args.job == "B1" and not (root / "A1/COMPLETE.json").is_file(): raise ValueError("A1 must complete first")
             run_collision(args.job, root)
 

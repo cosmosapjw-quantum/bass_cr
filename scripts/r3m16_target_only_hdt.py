@@ -155,13 +155,27 @@ def _load_prepared(prepared: Path, config: dict):
     return path, host, receipt
 
 
+def validate_collision_config(raw: dict, enriched: dict, preparation_only_control: bool = False) -> None:
+    expected = dict(raw, _r3m11_controls="FIXED_CAP_SYMMETRIC_V1",
+                    _r3m11_source_digest=SOURCE)
+    if preparation_only_control:
+        expected["imag_dt"] = enriched.get("imag_dt")
+        expected["imag_steps"] = enriched.get("imag_steps")
+        if enriched != expected:
+            raise ValueError("collision result is not the exact real-time authority for preparation control")
+    elif enriched != expected:
+        raise ValueError("collision result is not the exact enriched preparation config authority")
+
+
 def run_diagnostics(config_path: Path, prepared: Path, collision_result: Path,
-                    output: Path, horizon: float = 1.0, one_step_only: bool = False) -> dict:
+                    output: Path, horizon: float = 1.0, one_step_only: bool = False,
+                    preparation_only_control: bool = False) -> dict:
     config = json.loads(Path(config_path).read_text())
     state_path, host, receipt = _load_prepared(Path(prepared), config)
     collision = json.loads(Path(collision_result).read_text())
-    if collision["config"] != config or collision["status"] != "completed":
-        raise ValueError("collision result is not the exact preparation config authority")
+    validate_collision_config(config, collision["config"], preparation_only_control)
+    if collision["status"] != "completed":
+        raise ValueError("collision result is not completed")
     dt0 = float(collision["dt_actual"])
     runner = ControlledTDLRunner(config)
     if list(host.shape) != list(runner.spec.shape()):
@@ -208,6 +222,7 @@ def run_diagnostics(config_path: Path, prepared: Path, collision_result: Path,
         "claim_scope": "TARGET_ONLY_DIAGNOSTIC_NOT_CAPTURE_PROBABILITY_ERROR",
         "projectile_potential_included": False, "CAP_included": False,
         "cross_grid_state_pair_theorem_used": False,
+        "preparation_only_control": preparation_only_control,
         "config_sha256": sha(Path(config_path)), "prepared_receipt_sha256": sha(Path(prepared) / "receipt.json"),
         "state_sha256": sha(state_path), "collision_result_sha256": sha(Path(collision_result)),
         "numerical_source_digest": source_digest(), "instrumentation_sha256": sha(Path(__file__)),
@@ -230,10 +245,11 @@ def main():
     parser.add_argument("--out", required=True, type=Path)
     parser.add_argument("--horizon", type=float, default=1.0)
     parser.add_argument("--one-step-only", action="store_true")
+    parser.add_argument("--preparation-only-control", action="store_true")
     args = parser.parse_args()
     try:
         result = run_diagnostics(args.config, args.prepared, args.collision_result, args.out,
-                                 args.horizon, args.one_step_only)
+                                 args.horizon, args.one_step_only, args.preparation_only_control)
     except BaseException as exc:
         failure = args.out.with_name(args.out.stem + ".failure.json")
         if not failure.exists():

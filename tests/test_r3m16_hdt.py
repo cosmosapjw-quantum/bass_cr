@@ -79,6 +79,27 @@ def test_step_record_separates_requested_and_actual_dt():
     assert record["requested_dt"] != record["actual_dt"]
 
 
+def test_historical_collision_config_allows_only_exact_runner_enrichment():
+    raw = small_cfg()
+    enriched = dict(raw, _r3m11_controls="FIXED_CAP_SYMMETRIC_V1",
+                    _r3m11_source_digest=MOD.SOURCE)
+    MOD.validate_collision_config(raw, enriched)
+    enriched["dt"] = 0.025
+    with pytest.raises(ValueError, match="collision result"):
+        MOD.validate_collision_config(raw, enriched)
+
+
+def test_preparation_control_reuses_only_matching_real_time_authority():
+    refined = small_cfg(); refined.update(imag_dt=0.0125, imag_steps=4)
+    main = small_cfg(); main.update(imag_dt=0.025, imag_steps=2)
+    collision = dict(main, _r3m11_controls="FIXED_CAP_SYMMETRIC_V1",
+                     _r3m11_source_digest=MOD.SOURCE)
+    MOD.validate_collision_config(refined, collision, preparation_only_control=True)
+    collision["grid"] = dict(collision["grid"], dx=0.5)
+    with pytest.raises(ValueError, match="real-time authority"):
+        MOD.validate_collision_config(refined, collision, preparation_only_control=True)
+
+
 def test_temporal_order_not_forced_for_nonmonotone_or_unresolved_data():
     assert MOD.empirical_order(1e-3, 2e-3)["status"] == "NONMONOTONE"
     assert MOD.empirical_order(0.0, 0.0)["status"] == "UNRESOLVED"
@@ -99,4 +120,3 @@ def test_historical_r3m15_files_remain_byte_identical():
     for rel in paths:
         old = subprocess.check_output(["git", "show", f"{base}:{rel}"], cwd=ROOT)
         assert (ROOT / rel).read_bytes() == old, rel
-
