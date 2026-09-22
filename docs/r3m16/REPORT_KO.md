@@ -100,3 +100,15 @@ admission이 아니다.
 preparation/config family에서 requested dt=.0125 충돌 하나만 사전 등록해 B1/B2
 temporal contraction을 검사한다. 그 전에는 더 미세한 h를 실행하거나 representation을
 교체하지 않는다.
+
+## 백업과 게시
+
+A1/B1 archive는 각각 970,324,374 / 1,907,840,011 bytes이고 로컬에서 141개 member를
+모두 stream-hash 검증했다. Dropbox archive object ID는
+`id:BSpOijBcT10AAAAAADtwXA` / `id:BSpOijBcT10AAAAAADtwgQ`이며 provider content hash를
+로컬에서 독립 계산해 일치시켰다. Google Drive는 29/29 및 57/57 ordered parts와 remote
+manifest `1fYkFGWzrav29SkFH2FjimWyFrq4dwG_B` /
+`1pJVtwyUEE7B-gIkSCyqHseTHxkNm4K7y`를 기록했다. 두 stage 모두
+`DUAL_UPLOAD_VERIFIED_R2`다. selective policy에 따라 raw remote content download는
+반복하지 않았고 restore는 `RESTORE_NOT_TESTED`다. 기존 R3M15 provider 객체와 별도
+R3M12 Drive 1/19 상태는 변경하지 않았다.
