@@ -1,3 +1,5 @@
+import json
+
 import pytest
 
 from scripts import r3m23_cross_window as cross
@@ -36,3 +38,12 @@ def test_strang_scale_gate_fails_closed_without_full_substep_repeat():
     assert not cross.assess_window(distances, False)[2]
     distances["inner_16_repeat"] = threshold
     assert not cross.assess_window(distances, True)[2]
+
+
+def test_execution_contract_hashes_match_frozen_inputs_and_sources():
+    contract = json.loads(cross.CONTRACT.read_text())
+    assert contract["input_guard_sha256"] == cross._sha(cross.OUT / "INPUT_GUARD.json")
+    assert contract["selection_sha256"] == cross._sha(cross.SELECTION)
+    assert contract["strict_cpu_oracle_sha256"] == cross._sha(cross.STRICT_CPU)
+    for name, digest in contract["source_sha256"].items():
+        assert digest == cross._sha(cross.ROOT / name)

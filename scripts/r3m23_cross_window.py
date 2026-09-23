@@ -26,6 +26,7 @@ SELECTION = ROOT / "results/R3M20_N1/windows/SELECTION.json"
 CONFIG = ROOT / "configs/r3m17/B2.json"
 STRICT_CPU = ROOT / "results/R3M22/CPU_ORACLE_STRICT.json"
 PRIOR = ROOT / "results/R3M22/GPU_RESULT.json"
+CONTRACT = ROOT / "docs/r3m23/EXECUTION_CONTRACT.json"
 MAX_FFT = 4000
 MAX_GPU_WALL = 7200
 MAX_WINDOW_WALL = 1800
@@ -325,6 +326,13 @@ def run():
         selection = json.loads(SELECTION.read_text())
         strict = json.loads(STRICT_CPU.read_text())
         prior = json.loads(PRIOR.read_text())
+        contract = json.loads(CONTRACT.read_text())
+        if (contract["input_guard_sha256"] != _sha(OUT / "INPUT_GUARD.json") or
+                contract["selection_sha256"] != _sha(SELECTION) or
+                contract["strict_cpu_oracle_sha256"] != _sha(STRICT_CPU) or
+                any(_sha(ROOT / name) != digest
+                    for name, digest in contract["source_sha256"].items())):
+            raise ValueError("R3M23 execution contract hashes changed")
         if (guard["status"] != "PASS_LOCAL_GENERATION_IDENTITY" or
                 guard["selection_sha256"] != _sha(SELECTION) or
                 guard["config_sha256"] != _sha(CONFIG) or
