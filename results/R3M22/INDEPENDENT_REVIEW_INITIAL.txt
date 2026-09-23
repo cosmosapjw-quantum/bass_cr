@@ -1,6 +1,6 @@
 Reviewed clean branch `cr/r3m22-inner-action-reference-20260923`, HEAD `f3c0445726fdb6c8e77b9eab51c321a5bdde03ea`: three commits and 37 added files beyond `d87c2924b659394885d16796fd8fe9a34f45d39f`. Historical files remain unchanged. No files modified, GPU jobs run, or workers spawned.
 
-1. **MAJOR — CPU PASS does not establish the inherited finest-error inner-resolution requirement.**  
+1. **MAJOR — CPU PASS does not establish the inherited finest-error inner-resolution requirement.**
    [r3m22_cpu_oracle.py:86](/mnt/sn850x2t/bass_cr_r3m19_n1_20260923/worktree/scripts/r3m22_cpu_oracle.py:86) uses `0.01 × outer_4_to_8`, whereas [the R3M19 handoff:45](/mnt/sn850x2t/bass_cr_r3m19_n1_20260923/worktree/docs/r3m19/LOCAL_CODEX_HANDOFF.md:45) specifies the smallest compared error. The saved action repeats also test n8, leaving n32 inner sensitivity unmeasured.
 
    I independently repeated **n32** on CPU with the original settings, tighter tolerance, and doubled action substeps. All four cases exceeded 1% of their saved finest ODE error:
@@ -11,7 +11,7 @@ Reviewed clean branch `cr/r3m22-inner-action-reference-20260923`, HEAD `f3c04457
 
    **Claim impact:** the independent DOP853 reference is sufficiently stable, and fourth-order convergence is evident. The broader coarse-scale CPU gate passes, but an unqualified claim that the inherited tiny inner-resolution prerequisite passed is unsupported.
 
-2. **MINOR — wall ceilings are checked before matvecs, without terminal enforcement.**  
+2. **MINOR — wall ceilings are checked before matvecs, without terminal enforcement.**
    [Budget.tick():63](/mnt/sn850x2t/bass_cr_r3m19_n1_20260923/worktree/scripts/r3m22_gpu_reference.py:63) checks elapsed time only before the next matvec. The [final acceptance predicate:239](/mnt/sn850x2t/bass_cr_r3m19_n1_20260923/worktree/scripts/r3m22_gpu_reference.py:239) has no elapsed-time condition. A last action or subsequent host work can cross the deadline and still produce `REFERENCE_RESOLVED…`. A CPU-only clock fixture confirmed that a tick at `1799.99 s` permits subsequent elapsed time beyond `1800 s` without detection unless another tick occurs.
 
    **Claim impact:** this does not invalidate the recorded `650.404 s` job and `648.279 s` window. It prevents treating these guards as guaranteed end-to-end hard caps.
