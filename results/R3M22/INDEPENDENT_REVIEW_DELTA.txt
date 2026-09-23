@@ -1,0 +1,10 @@
+**Disposition: prior MAJOR closed for the strict CPU gate at `413df51`; two MINORs remain.**
+
+All four cases—moving64 CAP off/on, reverse64 CAP on, and rect96 CAP on—passed fresh CPU verification. The threshold is genuinely 1% of the minimum n4/8/16/32 DOP853 error, with n32 tighter-inner and substep repeats; no cherry-picked denominator. The largest required repeat was below 1.53% of its threshold.
+
+- **MINOR, new — [test_r3m22_inner_action.py:43](/mnt/sn850x2t/bass_cr_r3m19_n1_20260923/worktree/tests/test_r3m22_inner_action.py:43):** `np.isclose` retains default `atol=1e-8`. An in-memory mutation restoring the wrong coarse threshold (`2.105e-9` versus `5.314e-13`) still passes the new test. Use `atol=0` and explicitly reject the coarse denominator. This weakens regression protection but does not invalidate the current numerical result.
+- **MINOR, retained — [REPORT_KO.md:9](/mnt/sn850x2t/bass_cr_r3m19_n1_20260923/worktree/docs/r3m22/REPORT_KO.md:9):** The terminal wall-cap enforcement gap remains accurately disclosed; measured compliance is not presented as guaranteed enforcement.
+
+**Supportable claim:** The four tiny discrete-H cases pass the repaired strict CPU gate **after GPU execution**. This does not retroactively validate the original pre-GPU prerequisite, as [FINAL_DECISION.json:21](/mnt/sn850x2t/bass_cr_r3m19_n1_20260923/worktree/docs/r3m22/FINAL_DECISION.json:21) explicitly records. The incoming-window result remains empirical at the prior signal scale; time refinement stays open, production `HOLD`, and b-grid `NO_GO`.
+
+Five scoped tests passed; the saved full-suite log records 361 passes. No files modified, GPU jobs run, or workers spawned.

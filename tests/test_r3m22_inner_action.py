@@ -40,7 +40,11 @@ def test_tiny_oracle_strict_gate_uses_finest_ode_error_and_n32_repeats():
     result = cpu_oracle_case((4, 4, 4), True, 1, strict=True)
     finest = min(result["methods"][str(n)]["error_to_ode"] for n in (4, 8, 16, 32))
     assert result["gate_semantics"] == "ONE_PERCENT_OF_MINIMUM_ERROR_TO_INDEPENDENT_ODE_N32_REPEATS"
-    assert np.isclose(result["one_percent_threshold"], .01 * finest, rtol=1e-14)
+    assert np.isclose(result["one_percent_threshold"], .01 * finest,
+                      rtol=1e-14, atol=0)
+    assert not np.isclose(result["one_percent_threshold"],
+                          .01 * result["distances"]["outer_4_to_8"],
+                          rtol=1e-14, atol=0)
     assert result["oracle_resolved_at_one_percent"]
     assert result["distances"]["inner_32_repeat"] < result["one_percent_threshold"]
     assert result["distances"]["substep_32_repeat"] < result["one_percent_threshold"]
