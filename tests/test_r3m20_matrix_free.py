@@ -11,6 +11,7 @@ from scripts.r3m19_fullh_diagnostic import (
     make_model, projectile_integral,
 )
 from scripts.r3m20_matrix_free import MatrixFreeFullH, arnoldi_expm_action
+from scripts.r3m20_short_window import ProductionBufferedStep
 
 
 def tiny_config(shape=(4, 4, 4), cap=True, b=.9):
@@ -80,6 +81,10 @@ def test_cf4_uses_two_full_nonhermitian_actions():
     assert np.linalg.norm(got.ravel()-want)<2e-11
     assert len(info["actions"])==2
     assert all(action["converged"] for action in info["actions"])
+    scaled,scaled_info=mf.step(psi,t,dt,method="cf4",tol=1e-12,
+                               max_basis=12,action_substeps=4)
+    assert np.linalg.norm(scaled.ravel()-want)<2e-11
+    assert scaled_info["action_substeps"]==4 and len(scaled_info["actions"])==8
 
 
 def test_moving_cap_cf4_outer_and_oracle_refinement_are_separate():
@@ -118,3 +123,32 @@ def test_action_limits_reject_before_large_allocation():
         arnoldi_expm_action(lambda x:A@x,psi,.1,tol=0,max_basis=4)
     with pytest.raises(ValueError):
         arnoldi_expm_action(lambda x:A@x,psi,.1,tol=1e-12,max_basis=0)
+
+
+def test_production_buffer_sidecar_matches_frozen_step_on_tiny_grid():
+    runner=ControlledTDLRunner(tiny_config((4,4,4),True))
+    rng=np.random.default_rng(20)
+    state=(rng.normal(size=runner.spec.shape())+1j*rng.normal(size=runner.spec.shape())).astype(complex)
+    candidate=ProductionBufferedStep(runner)
+    frozen=runner.step(state.copy(),.13)
+    buffered=candidate.step(state.copy(),.13)
+    assert np.linalg.norm(frozen-buffered)/np.linalg.norm(frozen)<5e-13
+
+
+def test_actual_gpu_matrix_free_action_matches_cpu():
+    cp=pytest.importorskip("cupy",reason="CuPy/GPU unavailable")
+    try:
+        if cp.cuda.runtime.getDeviceCount()<1:
+            pytest.skip("No CUDA device")
+        gpu_runner=ControlledTDLRunner(dict(tiny_config((2,2,4),True),backend="cupy"))
+        cpu_runner=ControlledTDLRunner(tiny_config((2,2,4),True))
+        state=np.arange(16,dtype=np.float64).reshape(2,2,4).astype(complex)+.2j
+        state/=np.linalg.norm(state)
+        gpu=MatrixFreeFullH(gpu_runner)
+        cpu=MatrixFreeFullH(cpu_runner)
+        got,gi=gpu.step(cp.asarray(state),-.04,.03,method="cf4",tol=1e-12,max_basis=16)
+        want,ci=cpu.step(state,-.04,.03,method="cf4",tol=1e-12,max_basis=16)
+        assert np.linalg.norm(cp.asnumpy(got)-want)<2e-11
+        assert gi["total_fft_matvec"]<=32 and ci["total_fft_matvec"]<=32
+    except (ImportError,cp.cuda.runtime.CUDARuntimeError) as exc:
+        pytest.skip(f"CUDA runtime/FFT unavailable: {exc}")

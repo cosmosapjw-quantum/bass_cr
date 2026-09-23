@@ -1,0 +1,27 @@
+........................................................................ [ 20%]
+........................................................................ [ 40%]
+........................................................................ [ 61%]
+.......................F................................................ [ 81%]
+..................................................................       [100%]
+=================================== FAILURES ===================================
+_______________________ test_cli_create_only_and_bounded _______________________
+
+tmp_path = PosixPath('/tmp/pytest-of-cosmosapjw/pytest-1/test_cli_create_only_and_bound0')
+
+    def test_cli_create_only_and_bounded(tmp_path):
+        output = tmp_path / "oracle.json"
+        argv = [sys.executable, str(ROOT/"scripts/r3m17_reference.py"), "--out", str(output), "--shape", "2", "2", "2"]
+        result = subprocess.run(argv, cwd=ROOT, text=True, capture_output=True)
+>       assert result.returncode == 0, result.stderr
+E       AssertionError: Traceback (most recent call last):
+E           File "/mnt/sn850x2t/bass_cr_r3m19_n1_20260923/worktree/scripts/r3m17_reference.py", line 19, in <module>
+E             from cr_repro.r3m11 import ControlledTDLRunner, source_digest
+E         ModuleNotFoundError: No module named 'cr_repro.r3m11'
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python', '/mnt/sn850x2t/bass_cr_r3m19_n1_202609...m cr_repro.r3m11 import ControlledTDLRunner, source_digest\nModuleNotFoundError: No module named \'cr_repro.r3m11\'\n').returncode
+
+tests/test_r3m17_reference.py:127: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_r3m17_reference.py::test_cli_create_only_and_bounded - Asse...
+1 failed, 353 passed in 53.87s

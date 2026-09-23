@@ -1,0 +1,37 @@
+{
+  "schema": "BASS_CR_R3M20_N1_INDEPENDENT_REVIEW_V1",
+  "reviewer": "independent Codex subagent, gpt-5.6-terra/high",
+  "client_marker": "cl_697de5ff7628a71c150367f8d3da2c9d",
+  "review_mode": "read-only static source and evidence review, client bound to original checkout with explicit separate source path",
+  "reviewed_branch_base_head": "cb9bea658ead4ab57a8b7d2ecaca529b5b0a5057",
+  "reviewed_base_parent": "83dc465443f8b4fdf7c720304118207cc5267dfc",
+  "reviewed_uncommitted_source_digest_match_preflight": true,
+  "p0": [],
+  "p1_at_review_time": [
+    {
+      "type": "release_provenance",
+      "finding": "Reviewed new scripts and evidence were untracked, so the then-current Git HEAD did not bind their bytes.",
+      "resolution_required": "Commit reviewed bytes to the dedicated branch and verify exact remote HEAD before claiming source-bound publication."
+    },
+    {
+      "type": "test_infrastructure",
+      "finding": "Repository-root pytest -q collected archived historical tests with duplicate module names; exit 2.",
+      "resolution": "Preserve failure. Corrected scoped tests/ invocation with full Python path passed 354; do not claim repository-root command pass."
+    }
+  ],
+  "semantic_findings": [
+    "Periodic FFT kinetic and target/projectile potentials match frozen source.",
+    "CAP generator term is -W and non-Hermitian Arnoldi uses twice reorthogonalization.",
+    "CF4 has two full generator actions, without Strang substitution.",
+    "Tiny dense/ODE tests cover CAP, signs, rectangular grid, generator and CF4 order.",
+    "Incoming checkpoint guard is local identity validation, not remote restore.",
+    "First window is within recorded wall and FFT matvec limits and remains conditional."
+  ],
+  "review_limits": [
+    "No independent checkpoint rehash or production numerical reproduction.",
+    "No GPU propagation rerun.",
+    "Reviewer observed earlier focused-test receipt; final 354-test run was completed afterward by host."
+  ],
+  "scientific_ceiling": "TIME_REFINEMENT_STILL_OPEN; production reference CF4 dt/2 is not independently resolved",
+  "first_review_registration_blocker": "CLIENT_WORKTREE_MISMATCH; preserved as lifecycle evidence, not numerical failure"
+}

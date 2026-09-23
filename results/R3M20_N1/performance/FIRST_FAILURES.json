@@ -23,5 +23,31 @@
   "unresolved_scientific_failures": [
     "R3M18 TIME_REFINEMENT_STILL_OPEN",
     "R3M19 refined h=.20 CF4 oracle resolution FAIL"
+  ],
+  "subsequent_preserved_failures": [
+    {
+      "stage": "initial GPU target test",
+      "failure": "first GPU test skipped while libcublas.so.12 was unavailable on loader path",
+      "raw_capture": "results/R3M20_N1/tiny/matrix_free_test.*",
+      "resolution": "exposed existing installed CUDA 12 cublas path and reran; later 20 GPU-including tests passed without skip"
+    },
+    {
+      "stage": "tiny oracle first receipt",
+      "failure": "inner tolerance repeat exceeded one percent of smallest CF4 error in initial tiny receipt",
+      "raw_capture": "results/R3M20_N1/tiny/MATRIX_FREE_TINY.json",
+      "resolution": "strengthened inner tolerance without changing registered one-percent rule; final v3 four cases resolved"
+    },
+    {
+      "stage": "repository-root integrated pytest",
+      "failure": "duplicate archived test module collection; exit 2",
+      "raw_capture": "results/R3M20_N1/integrated_tests.*",
+      "resolution": "scoped tests directory; root command remains failed"
+    },
+    {
+      "stage": "first scoped integrated pytest",
+      "failure": "subprocess import path omission; one failed test",
+      "raw_capture": "results/R3M20_N1/tests_dir.*",
+      "resolution": "corrected PYTHONPATH, 354 passed in tests_dir_corrected.*"
+    }
   ]
 }
