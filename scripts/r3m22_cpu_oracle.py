@@ -16,7 +16,7 @@ from scripts.r3m19_fullh_diagnostic import generator as dense_generator, make_mo
 from scripts.r3m22_inner_action import BoundedMatrixFreeFullH
 
 
-def case(shape, cap_on, velocity_sign):
+def case(shape, cap_on, velocity_sign, *, strict=False):
     spacing = .7
     limits = [[-n * spacing / 2, n * spacing / 2] for n in shape]
     cfg = dict(energy_keV_per_u=100., b=.9, backend="numpy", dt=.025,
@@ -73,23 +73,32 @@ def case(shape, cap_on, velocity_sign):
                           fft_matvecs=sum(r["total_fft_matvec"] for r in rows),
                           wall_seconds=time.perf_counter()-start)
     states={};rows={}
+    global_budget=1e-14 if strict else 1e-11
     for n in (4,8,16,32):
-        states[str(n)],rows[str(n)]=propagate(n,4,1e-11)
-    divided,rows["8_sub8"]=propagate(8,8,1e-11)
-    tighter,rows["8_tight"]=propagate(8,4,1e-12)
+        states[str(n)],rows[str(n)]=propagate(n,4,global_budget)
+    repeat_n=32 if strict else 8
+    divided,rows[f"{repeat_n}_sub8"]=propagate(repeat_n,8,global_budget)
+    tighter,rows[f"{repeat_n}_tight"]=propagate(repeat_n,4,global_budget/10)
     distances=dict(reference_repeat=dist(coarse,reference),
                    outer_4_to_8=dist(states["4"],states["8"]),
                    outer_8_to_16=dist(states["8"],states["16"]),
                    outer_16_to_32=dist(states["16"],states["32"]),
-                   substep_8_repeat=dist(states["8"],divided),
-                   inner_8_repeat=dist(states["8"],tighter))
-    threshold=.01*distances["outer_4_to_8"]
-    resolved=bool(all(distances[k]<threshold for k in
-                      ("reference_repeat","outer_16_to_32","substep_8_repeat","inner_8_repeat")))
+                   **{f"substep_{repeat_n}_repeat":dist(states[str(repeat_n)],divided),
+                      f"inner_{repeat_n}_repeat":dist(states[str(repeat_n)],tighter)})
+    comparison_scale=(min(rows[str(n)]["error_to_ode"] for n in (4,8,16,32))
+                      if strict else distances["outer_4_to_8"])
+    threshold=.01*comparison_scale
+    required=("reference_repeat",f"substep_{repeat_n}_repeat",f"inner_{repeat_n}_repeat")
+    if not strict:
+        required+=("outer_16_to_32",)
+    resolved=bool(all(distances[k]<threshold for k in required))
     return dict(shape=list(shape),cap_on=cap_on,velocity_sign=velocity_sign,
                 source="SAME_PERIODIC_DISCRETE_H_WITH_INDEPENDENT_DENSE_DOP853",
                 reference_coarse=coarse_info,reference_fine=ref_info,
                 distances=distances,one_percent_threshold=threshold,
+                comparison_error_scale=comparison_scale,
+                gate_semantics=("ONE_PERCENT_OF_MINIMUM_ERROR_TO_INDEPENDENT_ODE_N32_REPEATS"
+                                if strict else "HISTORICAL_COARSE_4_TO_8_GATE_NOT_HANDOFF_MINIMUM"),
                 oracle_resolved_at_one_percent=resolved,methods=rows,
                 production_admission=False)
 
@@ -97,14 +106,17 @@ def case(shape, cap_on, velocity_sign):
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out",type=Path,required=True)
+    parser.add_argument("--strict",action="store_true",
+                        help="fixed minimum-error n32 repeat closeout; preserves old receipt")
     args=parser.parse_args()
     cases={}
     for name,shape,cap,sign in (("moving64_cap_off",(4,4,4),False,1),
                                 ("moving64_cap_on",(4,4,4),True,1),
                                 ("reverse64_cap_on",(4,4,4),True,-1),
                                 ("rect96_cap_on",(4,4,6),True,1)):
-        cases[name]=case(shape,cap,sign)
-    result=dict(schema="BASS_CR_R3M22_CPU_ORACLE_V1",cases=cases,
+        cases[name]=case(shape,cap,sign,strict=args.strict)
+    result=dict(schema=("BASS_CR_R3M22_CPU_ORACLE_STRICT_V1" if args.strict
+                        else "BASS_CR_R3M22_CPU_ORACLE_V1"),cases=cases,
                 all_oracle_resolved=all(v["oracle_resolved_at_one_percent"] for v in cases.values()),
                 reference_semantics="TINY_DISCRETE_H_ONLY_NO_CONTINUUM_OR_PRODUCTION_ADMISSION")
     with args.out.open("x") as stream:

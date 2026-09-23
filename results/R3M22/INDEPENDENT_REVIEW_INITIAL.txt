@@ -1,0 +1,37 @@
+Reviewed clean branch `cr/r3m22-inner-action-reference-20260923`, HEAD `f3c0445726fdb6c8e77b9eab51c321a5bdde03ea`: three commits and 37 added files beyond `d87c2924b659394885d16796fd8fe9a34f45d39f`. Historical files remain unchanged. No files modified, GPU jobs run, or workers spawned.
+
+1. **MAJOR — CPU PASS does not establish the inherited finest-error inner-resolution requirement.**  
+   [r3m22_cpu_oracle.py:86](/mnt/sn850x2t/bass_cr_r3m19_n1_20260923/worktree/scripts/r3m22_cpu_oracle.py:86) uses `0.01 × outer_4_to_8`, whereas [the R3M19 handoff:45](/mnt/sn850x2t/bass_cr_r3m19_n1_20260923/worktree/docs/r3m19/LOCAL_CODEX_HANDOFF.md:45) specifies the smallest compared error. The saved action repeats also test n8, leaving n32 inner sensitivity unmeasured.
+
+   I independently repeated **n32** on CPU with the original settings, tighter tolerance, and doubled action substeps. All four cases exceeded 1% of their saved finest ODE error:
+   - Tighter-inner differences: **4.80–8.58×** that threshold.
+   - Substep differences: **4.50–8.05×** that threshold.
+
+   For CAP-off, the saved finest error is `6.138560233815469e−11`; its 1% threshold is `6.138560233815469e−13`. Measured n32 inner/substep differences were `3.994809223353664e−12` and `3.745519634975661e−12`. See [CPU_ORACLE.json:25](/mnt/sn850x2t/bass_cr_r3m19_n1_20260923/worktree/results/R3M22/CPU_ORACLE.json:25).
+
+   **Claim impact:** the independent DOP853 reference is sufficiently stable, and fourth-order convergence is evident. The broader coarse-scale CPU gate passes, but an unqualified claim that the inherited tiny inner-resolution prerequisite passed is unsupported.
+
+2. **MINOR — wall ceilings are checked before matvecs, without terminal enforcement.**  
+   [Budget.tick():63](/mnt/sn850x2t/bass_cr_r3m19_n1_20260923/worktree/scripts/r3m22_gpu_reference.py:63) checks elapsed time only before the next matvec. The [final acceptance predicate:239](/mnt/sn850x2t/bass_cr_r3m19_n1_20260923/worktree/scripts/r3m22_gpu_reference.py:239) has no elapsed-time condition. A last action or subsequent host work can cross the deadline and still produce `REFERENCE_RESOLVED…`. A CPU-only clock fixture confirmed that a tick at `1799.99 s` permits subsequent elapsed time beyond `1800 s` without detection unless another tick occurs.
+
+   **Claim impact:** this does not invalidate the recorded `650.404 s` job and `648.279 s` window. It prevents treating these guards as guaranteed end-to-end hard caps.
+
+The recorded GPU comparisons support the narrower **empirical incoming-window consistency claim at the prior signal scale**. Independently recalculated from [GPU_RESULT.json:41](/mnt/sn850x2t/bass_cr_r3m19_n1_20260923/worktree/results/R3M22/GPU_RESULT.json:41):
+
+| Comparison | Distance | Prior threshold fraction |
+|---|---:|---:|
+| n16→n32 | `4.457098127159628e−15` | 0.211842 |
+| n16 inner repeat | `2.374648101135429e−15` | 0.112865 |
+| n8 substep repeat | `4.367118816175666e−15` | 0.207566 |
+
+The prior threshold is `2.103970853068276e−14`. Against the **new self-scaled threshold**, `4.010650817710975e−15`, both outer and substep comparisons fail—by factors **1.111315** and **1.088880**. `self_scaled_one_percent: UNRESOLVED` is correct.
+
+Other independently checked support:
+
+- The theorem applies **in exact arithmetic**: each stage has Hermitian part `−W≤0`, despite the negative CF4 coefficient; scaling and physical-L2 conversion are correct. Summing local bounds is justified by contractivity. This supplies no floating-point certificate. [Theorem 1](https://link.springer.com/article/10.1007/s10543-019-00771-6).
+- Checkpoint SHA, source hashes, receipt chain, initial time and four-dt horizon match. Prior failures remain preserved.
+- Matvec accounting reconciles exactly: **3 preflight + 104 calibration + 2720 ladder = 2827**, below the planned 3843 and cap 4000. Recorded memory samples exceed the reserves.
+- Four action tests and all four CPU cases reran successfully under their implemented gates. The archived 360-test result was not independently rerun.
+- Timing supports individual synchronized propagation measurements; no equal-accuracy cross-method speedup or full-collision timing is established.
+
+**Disposition:** retain the GPU measurements and their limited prior-scale interpretation, but withhold an unqualified “all scientific prerequisites passed.” Production `HOLD`, `TIME_REFINEMENT_STILL_OPEN`, and b-grid `NO_GO` remain appropriate.

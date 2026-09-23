@@ -3,6 +3,7 @@ import pytest
 from scipy.linalg import expm
 
 from scripts.r3m22_inner_action import bounded_arnoldi_action
+from scripts.r3m22_cpu_oracle import case as cpu_oracle_case
 
 
 @pytest.mark.parametrize("seed", [21, 47, 83])
@@ -33,3 +34,13 @@ def test_insufficient_basis_fails_closed_even_with_finite_action():
         bounded_arnoldi_action(lambda x: generator @ x, initial, .3,
                                physical_scale=1., physical_budget=1e-18,
                                max_basis=1)
+
+
+def test_tiny_oracle_strict_gate_uses_finest_ode_error_and_n32_repeats():
+    result = cpu_oracle_case((4, 4, 4), True, 1, strict=True)
+    finest = min(result["methods"][str(n)]["error_to_ode"] for n in (4, 8, 16, 32))
+    assert result["gate_semantics"] == "ONE_PERCENT_OF_MINIMUM_ERROR_TO_INDEPENDENT_ODE_N32_REPEATS"
+    assert np.isclose(result["one_percent_threshold"], .01 * finest, rtol=1e-14)
+    assert result["oracle_resolved_at_one_percent"]
+    assert result["distances"]["inner_32_repeat"] < result["one_percent_threshold"]
+    assert result["distances"]["substep_32_repeat"] < result["one_percent_threshold"]
