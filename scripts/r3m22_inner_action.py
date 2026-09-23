@@ -62,14 +62,14 @@ def bounded_arnoldi_action(op, psi, dt, *, physical_scale, physical_budget,
         e1 = np.zeros(m, dtype=np.complex128)
         e1[0] = 1
         coefficients = expm(small) @ e1
-        result = xp.zeros_like(state)
-        for k, coefficient in enumerate(coefficients):
-            result += (beta * coefficient) * basis[k]
         gamma = math.prod(float(hessenberg[k + 1, k].real) for k in range(m - 1))
         upper = float(beta * physical_scale * hnext * gamma / math.factorial(m))
         if not math.isfinite(upper):
             raise FloatingPointError("nonfinite contractive action bound")
         if upper <= physical_budget:
+            result = xp.zeros_like(state)
+            for k, coefficient in enumerate(coefficients):
+                result += (beta * coefficient) * basis[k]
             if not bool(xp.all(xp.isfinite(result)).item()):
                 raise FloatingPointError("nonfinite Arnoldi action")
             return result, dict(converged=True, basis_dimension=m, matvec_count=m,
