@@ -132,3 +132,23 @@ chunk마다 다음 저장 전에 검증된 checkpoint generation을 보존한다
 nonconvergence는 구조적 실패와 구분하며 그 이유만으로 run 수를 늘리지 않는다.
 B2 후 해석과 다음 구체 노드를 반환하고 멈춘다. N1의 모든 차원·N2 고n 채널·N3 b적분·
 N4 다른 에너지·N5 source admission은 기존 계약과 오차배분 그대로 남는다.
+
+## R3M18 결과 — B2 완료와 다음 시간표현 진단
+
+R3M18은 frozen h=.20 family에서 requested dt=.0125 B2 하나를 완료했다. 실제 dt는
+0.01249892352238994이고 3586 steps를 29 chunks로 실행했다. fresh preparation 초기 배열은
+B0/B1과 byte-identical이며 v2 witness가 실제 내부 initial을 binding했다. 각 chunk 뒤 다음
+chunk 전에 immutable generation을 게시했고 첫 실패·retry·restore는 없었다.
+
+B1→B2 상대 변화는 P1 0.27869%, P2 0.25913%, P3 0.25656%로 real-time .10%
+pair screen을 모두 넘었다. 실제 dt를 쓴 관측차수는 2.878–2.957로 contraction은 있으나
+사전 등록 clean second-order 범위 1.5–2.5 밖이다. single-power Richardson 조건부 fine
+remainder는 0.0402–0.0412%이지만 세 점 자체가 모델 잔여를 독립 검증하지 못하므로
+certified bound나 budget closure가 아니다. 판정은 `TIME_REFINEMENT_STILL_OPEN`이다.
+
+A2가 없으므로 dt=.0125 spatial gap은 `NOT_MEASURED`다. 다음 canonical node는
+`N1_TDL_MOVING_TWO_CENTER_FULL_H_TEMPORAL_REFERENCE_DIAGNOSTIC`이다. 작은 고정 grid의
+동일한 움직이는 두 중심 discrete `H_h(t)-iW`에 대해 non-Hermitian-capable full-H
+exponential-action reference를 독립 수렴시키고 현재 split propagation과 공통 horizon에서
+비교한다. 이 진단이 시간표본화/splitting error를 분리하기 전에는 새 production collision,
+finer h 또는 representation 변경을 승인하지 않는다.

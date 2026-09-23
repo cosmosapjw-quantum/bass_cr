@@ -1,0 +1,36 @@
+{
+  "schema": "BASS_CR_R3M18_SCIENTIFIC_VALIDATION_V1",
+  "items": {
+    "units_and_fixed_horizon": {
+      "status": "PASS",
+      "evidence": "100 keV/u atomic-unit trajectory; B0/B1/B2 actual dt values close the same z=-30 to 60 horizon."
+    },
+    "initial_condition_binding": {
+      "status": "PASS",
+      "evidence": "B2 initial SHA256 equals B0/B1 and the R3M14 v2 internal witness binds source/config/runtime/array bytes."
+    },
+    "norm_and_CAP": {
+      "status": "PASS_DIAGNOSTIC_ONLY",
+      "evidence": "Finite positive final norm, CAP-layer support recorded, no tail-bound interpretation."
+    },
+    "projector_rank_and_nesting": {
+      "status": "PASS",
+      "evidence": "Gram rank 14/14, condition 1.000192629763871, finite nested P1<=P2<=P3."
+    },
+    "temporal_convergence_allocation": {
+      "status": "CONCERN",
+      "evidence": "All B1-to-B2 pair changes exceed 0.10% and observed orders are outside the clean registered range."
+    },
+    "spatial_convergence_at_dt0125": {
+      "status": "NOT_TESTED",
+      "evidence": "A2 was not authorized or run."
+    },
+    "all_bound_completion": {
+      "status": "NOT_TESTED",
+      "evidence": "Only finite sampled n<=3 spans were evaluated."
+    }
+  },
+  "decision": "TIME_REFINEMENT_STILL_OPEN",
+  "scientific_promotion": "HOLD",
+  "claim_ceiling_respected": true
+}
