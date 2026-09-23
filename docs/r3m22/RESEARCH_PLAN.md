@@ -1,0 +1,33 @@
+# R3M22 frozen numerical diagnosis plan (2026-09-23)
+
+Question: Why does the same incoming B2 four-dt CF4 window lose reference resolution when the outer count rises to 32, and can a bounded independent inner-action calibration make its outer error measurable?
+
+Input authority: R3M21 exact HEAD `d87c2924b659394885d16796fd8fe9a34f45d39f`; its `CF4_OUTER_LADDER.json` is first-failure evidence. Preserve the R3M19 refined-h oracle FAIL, R3M20 conditional reference, and R3M21 1% FAIL. Same 63M-point production h/box/CAP/energy/b, same incoming g000384 state and four-B2-dt horizon. No new collision, preparation, finer h, representation change, other checkpoint, projection or checkpoint write.
+
+Hypotheses, predictions, falsifiers:
+
+- H1 inner Arnoldi truncation accumulates: at fixed outer timestep, tighter per-action tolerance or greater basis changes the endpoint by a scale comparable to R3M21 drift; once controlled, n16→n32 shrinks. Falsified if independent action comparisons are stable while the outer anomaly persists.
+- H2 changing action substeps introduces a separate numerical error: at fixed outer timestep and tighter action accuracy, 4 versus 8 substeps differs appreciably. Falsified if the difference falls below 1% of the outer 4→reference signal.
+- H3 outer CF4/time-ordering itself remains unresolved: with inner action and substep repeats below the 1% gate, n16→n32 still fails its expected refinement. Falsified by a resolved outer ladder.
+
+Predeclared methods:
+
+- M1 confirmatory: inspect frozen implementation and version-matched primary numerical-analysis sources for exponential-action residual and accumulated error. Use one symbolic check of the 4th-order CF4 coefficients/order conditions if helpful. External text informs hypotheses only; local tests decide this implementation.
+- M2 confirmatory: dense independent CPU tiny H with CAP and moving potential; measure action error versus `scipy.linalg.expm` at fixed generator and compare full CF4 4/8/16/32 ladder versus DOP853 under tightened inner settings. Include speed-sign/CAP variants only within ≤512 points and ≤20,000 RHS per oracle.
+- M3 exploratory: one production GPU job may start with allocation probe and fixed-state one-action basis/tolerance calibration, all matvecs counted. Continue to the four-dt outer ladder only if measured inner/substep repeat is below 1% of the pre-existing R3M20 CF4 4→8 raw signal `2.103970853068276e-12`, or record exact blocker.
+- M4 confirmatory, conditional on M3: from the identical checkpoint, compare fixed-accuracy CF4 n=8/16/32 and one fixed-outer inner repeat. Use raw same-horizon distance. The reference may be called resolved only if inner repeat, action-substep repeat, and n16→n32 difference are each <1% of the pre-existing fixed signal and observed outer convergence is consistent; otherwise HOLD.
+
+Hard limits for this new work unit: one GPU propagation job, total GPU wall≤7,200 s, window≤1,800 s, total FFT matvec≤4,000 including preflight/calibration, GPU free≥2 GiB and host available≥8 GiB; no automatic retry. Allocation/work forecast must precede full-window propagation. Source, tests, exact command, environment, first failure, raw results, and omitted methods are retained. A fresh independent reviewer must be stronger than GPT-6 Sol high; review is separate from scientific admission.
+
+Stopping rules: stop the large run at a failed input/resource/tiny/inner gate or first budget/NaN failure; preserve the first result. At most one repair-closeout round and one independent-review round. New exploratory probes do not expand confirmatory acceptance. Final outcome is resolved-at-this-error-scale or evidence-bound HOLD, with one next canonical node. No whole-collision or physical-rate claim.
+
+Evidence log (append-only after this line):
+
+- E1, 2026-09-23: `results/R3M21/CF4_OUTER_LADDER.json` at parent `d87c2924…`; exact old 4/8 endpoint hashes reproduced, 16→32 raw `4.2760932402361476e−11`, fixed-8-step substep change `2.0653821525023145e−12`, inner-16 tolerance repeat `0`. H1/H2 remain live; no cause yet.
+- E2, 2026-09-23: SciSpace paper search plus primary [Jawecki–Auzinger–Koch BIT article](https://link.springer.com/article/10.1007/s10543-019-00771-6), Theorem 1; nonexpansive Krylov bound stated under exact arithmetic. Author repository [Al-Mohy–Higham](https://eprints.maths.manchester.ac.uk/1591/) supplies a distinct Taylor alternative. Content fingerprints: DOI `10.1007/s10543-019-00771-6` and `10.1137/S1064827510384419` (Al-Mohy–Higham article DOI; verify before reuse). Claim: a true local analytic bound may be available for the dissipative CF4 stages.
+- E3, 2026-09-23: lazy Wolfram exact result `{1/2,1,1/12,5/12,{{0,0},{0,0}}}` for the four coefficient identities and `A+A†+2W` in a symbolic 2×2 Hermitian example. This supports stage dissipativity algebra, not actual FFT implementation accuracy.
+- E4, 2026-09-23: first reviewer registration with only `gpt-6-astra/xhigh` capability returned `NO_SUPPORTED_WORKER_WITHIN_DECLARED_COST_SCOPE`; adding explicit `owner_selected_model/effort` and existing owner-evidence file registered review profile `gpt-6-astra/xhigh`, launch `cl_c7ab7ed46c3b770240b96941f185a3a8`. Review has not yet run.
+- E5, 2026-09-23: corrected an unverified DOI typed in E2. The primary [SIAM journal record](https://epubs.siam.org/doi/10.1137/100788860) gives the Al-Mohy–Higham 2011 article DOI as `10.1137/100788860`; the E2 parenthetical DOI is wrong and must not be cited.
+- E6, 2026-09-23: `results/R3M22/CPU_ORACLE.json` and raw stdout/exit 0. Four 64/96-point moving full-H CAP/velocity cases passed the predeclared 1% tiny gate against independently repeated dense DOP853. This is small-grid evidence, not production resolution.
+- E7, 2026-09-23: `results/R3M22/EXPECTED_RED.*` records missing candidate module before implementation; `TARGET_GREEN.*` records 4 passed against independent dense `expm`; `TESTS_ALL.*` records 360 passed, 0 skipped with correct interpreter/library paths.
+- E8, 2026-09-23: CodeRabbit CLI `review --agent -t uncommitted` exit 0 returned `review_skipped` because all new files were untracked. This is not a review or 0-issue claim; retry on a committed diff. Raw NDJSON retained in `results/R3M22/CODERABBIT_INITIAL_SKIPPED.ndjson`.
