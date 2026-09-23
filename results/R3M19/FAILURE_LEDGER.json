@@ -1,0 +1,72 @@
+{
+  "schema": "R3M19_FAILURE_LEDGER_V1",
+  "failure_semantics": "Expected TDD red, numerical resolution, code review, provider search and runtime absence are distinct; original logs retained.",
+  "entries": [
+    {
+      "kind": "TDD_EXPECTED_RED",
+      "lane": "fullH",
+      "evidence": "results/R3M19/fullh/red.stdout.log",
+      "status": "REPAIRED_WITH_NEW_MODULE_AND_TESTS"
+    },
+    {
+      "kind": "TDD_EXPECTED_RED",
+      "lane": "temporal",
+      "evidence": "results/R3M19/temporal/red.stdout.log",
+      "status": "REPAIRED_WITH_NEW_MODULE_AND_TESTS"
+    },
+    {
+      "kind": "TDD_EXPECTED_RED",
+      "lane": "performance",
+      "evidence": "results/R3M19/performance/tdd_red.stdout",
+      "status": "REPAIRED_WITH_NEW_MODULE_AND_TESTS"
+    },
+    {
+      "kind": "REPRODUCED_CONTRACT_DEFECT",
+      "lane": "outer_coordinator",
+      "initial_result": "13 failed, 1 passed",
+      "evidence": "results/R3M19/coordinator/first_red.stdout",
+      "status": "CANONICAL_EXECUTION_PLAN_VALIDATION_REPAIRED",
+      "historical_B2_misexecution_inferred": false
+    },
+    {
+      "kind": "METADATA_CORRECTION",
+      "lane": "fullH",
+      "evidence": [
+        "results/R3M19/fullh/fullh_64pt_suite_v1.json",
+        "results/R3M19/fullh/fullh_64pt_suite_v2.json"
+      ],
+      "reason": "CAP_uniform_in_space metadata derived from actual W rather than assumed; original retained",
+      "status": "v2_CANONICAL"
+    },
+    {
+      "kind": "NUMERICAL_ORACLE_RESOLUTION",
+      "lane": "refined_h020_CF4",
+      "evidence": "results/R3M19/fullh/fullh_rect128_h020_refined_v1.json",
+      "status": "6_CASES_UNRESOLVED_RETAINED_NO_TOLERANCE_RELAXATION"
+    },
+    {
+      "kind": "INDEPENDENT_REVIEW_FINDING",
+      "id": "IR19_01",
+      "status": "REPAIRED_GPU_COUNTERS_OUTSIDE_TIMED_REGION",
+      "evidence": "results/R3M19/INDEPENDENT_REVIEW.json"
+    },
+    {
+      "kind": "REVIEW_RECORD_PROVENANCE",
+      "status": "BEFORE_FIX_SHA_NOT_CAPTURED_CORRECTION_RETAINED",
+      "evidence": "results/R3M19/independent_review/IR19_01_provenance_correction.json"
+    },
+    {
+      "kind": "HOST_CAPABILITY",
+      "lane": "actual_GPU_test",
+      "status": "SKIPPED_CUPY_UNAVAILABLE_NO_FALLBACK"
+    },
+    {
+      "kind": "PROVIDER_SEARCH_SCHEMA",
+      "status": "SIMPLIFIED_TITLE_QUERY_AND_PROVIDER_NAMESPACE_SUCCEEDED",
+      "evidence": "docs/r3m19/CROSS_THREAD_REVIEW_KO.md",
+      "interpretation": "initial filter binding/invalid path not evidence of absent sources"
+    }
+  ],
+  "production_runtime_failures": 0,
+  "production_execution_count": 0
+}

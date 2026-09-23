@@ -1,0 +1,417 @@
+FFFFFFFFFFFFF.                                                           [100%]
+=================================== FAILURES ===================================
+____ test_mutated_execution_plan_rejected_before_launch[arbitrary_command] _____
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-23/test_mutated_execution_plan_re0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe73c961b80>
+change = 'arbitrary_command'
+
+    @pytest.mark.parametrize('change', [
+        'arbitrary_command', 'interpreter', 'prepared_path', 'out_path',
+        'command_config', 'max_steps', 'unwitnessed', 'frontier',
+        'working_directory', 'environment', 'missing_prerequisite', 'plan_schema',
+    ])
+    def test_mutated_execution_plan_rejected_before_launch(tmp_path, monkeypatch, change):
+        root, config, plan = fixture(tmp_path, monkeypatch)
+        plan = copy.deepcopy(plan)
+        chunk, snapshot = plan['command_plan'][2:4]
+        if change == 'arbitrary_command': chunk['argv'] = ['UNEXPECTED_COMMAND']
+        elif change == 'interpreter': chunk['argv'][0] = '/other/python'
+        elif change == 'prepared_path': chunk['argv'][chunk['argv'].index('--prepared')+1] = '/other/prep'
+        elif change == 'out_path': chunk['argv'][chunk['argv'].index('--out')+1] = '/other/run'
+        elif change == 'command_config': chunk['argv'][chunk['argv'].index('--config')+1] = '/other/config'
+        elif change == 'max_steps': chunk['argv'][-1] = '256'
+        elif change == 'unwitnessed': snapshot['argv'].append('--allow-unwitnessed')
+        elif change == 'frontier': snapshot['expected_completed_steps'] = 256
+        elif change == 'working_directory': plan['command_working_directory'] = '/other/repo'
+        elif change == 'environment': plan['command_environment_required']['PYTHONPATH'] = '/other/repo'
+        elif change == 'missing_prerequisite': plan['prerequisites']['same_grid_preparation_byte_identity_required'] = False
+        elif change == 'plan_schema': plan['schema'] = 'UNKNOWN'
+>       with pytest.raises(ValueError, match='execution plan'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_r3m19_execution_contract.py:47: Failed
+_______ test_mutated_execution_plan_rejected_before_launch[interpreter] ________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-23/test_mutated_execution_plan_re1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe73c9675c0>
+change = 'interpreter'
+
+    @pytest.mark.parametrize('change', [
+        'arbitrary_command', 'interpreter', 'prepared_path', 'out_path',
+        'command_config', 'max_steps', 'unwitnessed', 'frontier',
+        'working_directory', 'environment', 'missing_prerequisite', 'plan_schema',
+    ])
+    def test_mutated_execution_plan_rejected_before_launch(tmp_path, monkeypatch, change):
+        root, config, plan = fixture(tmp_path, monkeypatch)
+        plan = copy.deepcopy(plan)
+        chunk, snapshot = plan['command_plan'][2:4]
+        if change == 'arbitrary_command': chunk['argv'] = ['UNEXPECTED_COMMAND']
+        elif change == 'interpreter': chunk['argv'][0] = '/other/python'
+        elif change == 'prepared_path': chunk['argv'][chunk['argv'].index('--prepared')+1] = '/other/prep'
+        elif change == 'out_path': chunk['argv'][chunk['argv'].index('--out')+1] = '/other/run'
+        elif change == 'command_config': chunk['argv'][chunk['argv'].index('--config')+1] = '/other/config'
+        elif change == 'max_steps': chunk['argv'][-1] = '256'
+        elif change == 'unwitnessed': snapshot['argv'].append('--allow-unwitnessed')
+        elif change == 'frontier': snapshot['expected_completed_steps'] = 256
+        elif change == 'working_directory': plan['command_working_directory'] = '/other/repo'
+        elif change == 'environment': plan['command_environment_required']['PYTHONPATH'] = '/other/repo'
+        elif change == 'missing_prerequisite': plan['prerequisites']['same_grid_preparation_byte_identity_required'] = False
+        elif change == 'plan_schema': plan['schema'] = 'UNKNOWN'
+>       with pytest.raises(ValueError, match='execution plan'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_r3m19_execution_contract.py:47: Failed
+______ test_mutated_execution_plan_rejected_before_launch[prepared_path] _______
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-23/test_mutated_execution_plan_re2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe73c967260>
+change = 'prepared_path'
+
+    @pytest.mark.parametrize('change', [
+        'arbitrary_command', 'interpreter', 'prepared_path', 'out_path',
+        'command_config', 'max_steps', 'unwitnessed', 'frontier',
+        'working_directory', 'environment', 'missing_prerequisite', 'plan_schema',
+    ])
+    def test_mutated_execution_plan_rejected_before_launch(tmp_path, monkeypatch, change):
+        root, config, plan = fixture(tmp_path, monkeypatch)
+        plan = copy.deepcopy(plan)
+        chunk, snapshot = plan['command_plan'][2:4]
+        if change == 'arbitrary_command': chunk['argv'] = ['UNEXPECTED_COMMAND']
+        elif change == 'interpreter': chunk['argv'][0] = '/other/python'
+        elif change == 'prepared_path': chunk['argv'][chunk['argv'].index('--prepared')+1] = '/other/prep'
+        elif change == 'out_path': chunk['argv'][chunk['argv'].index('--out')+1] = '/other/run'
+        elif change == 'command_config': chunk['argv'][chunk['argv'].index('--config')+1] = '/other/config'
+        elif change == 'max_steps': chunk['argv'][-1] = '256'
+        elif change == 'unwitnessed': snapshot['argv'].append('--allow-unwitnessed')
+        elif change == 'frontier': snapshot['expected_completed_steps'] = 256
+        elif change == 'working_directory': plan['command_working_directory'] = '/other/repo'
+        elif change == 'environment': plan['command_environment_required']['PYTHONPATH'] = '/other/repo'
+        elif change == 'missing_prerequisite': plan['prerequisites']['same_grid_preparation_byte_identity_required'] = False
+        elif change == 'plan_schema': plan['schema'] = 'UNKNOWN'
+>       with pytest.raises(ValueError, match='execution plan'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_r3m19_execution_contract.py:47: Failed
+_________ test_mutated_execution_plan_rejected_before_launch[out_path] _________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-23/test_mutated_execution_plan_re3')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe73c969c40>
+change = 'out_path'
+
+    @pytest.mark.parametrize('change', [
+        'arbitrary_command', 'interpreter', 'prepared_path', 'out_path',
+        'command_config', 'max_steps', 'unwitnessed', 'frontier',
+        'working_directory', 'environment', 'missing_prerequisite', 'plan_schema',
+    ])
+    def test_mutated_execution_plan_rejected_before_launch(tmp_path, monkeypatch, change):
+        root, config, plan = fixture(tmp_path, monkeypatch)
+        plan = copy.deepcopy(plan)
+        chunk, snapshot = plan['command_plan'][2:4]
+        if change == 'arbitrary_command': chunk['argv'] = ['UNEXPECTED_COMMAND']
+        elif change == 'interpreter': chunk['argv'][0] = '/other/python'
+        elif change == 'prepared_path': chunk['argv'][chunk['argv'].index('--prepared')+1] = '/other/prep'
+        elif change == 'out_path': chunk['argv'][chunk['argv'].index('--out')+1] = '/other/run'
+        elif change == 'command_config': chunk['argv'][chunk['argv'].index('--config')+1] = '/other/config'
+        elif change == 'max_steps': chunk['argv'][-1] = '256'
+        elif change == 'unwitnessed': snapshot['argv'].append('--allow-unwitnessed')
+        elif change == 'frontier': snapshot['expected_completed_steps'] = 256
+        elif change == 'working_directory': plan['command_working_directory'] = '/other/repo'
+        elif change == 'environment': plan['command_environment_required']['PYTHONPATH'] = '/other/repo'
+        elif change == 'missing_prerequisite': plan['prerequisites']['same_grid_preparation_byte_identity_required'] = False
+        elif change == 'plan_schema': plan['schema'] = 'UNKNOWN'
+>       with pytest.raises(ValueError, match='execution plan'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_r3m19_execution_contract.py:47: Failed
+______ test_mutated_execution_plan_rejected_before_launch[command_config] ______
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-23/test_mutated_execution_plan_re4')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe73c96a9c0>
+change = 'command_config'
+
+    @pytest.mark.parametrize('change', [
+        'arbitrary_command', 'interpreter', 'prepared_path', 'out_path',
+        'command_config', 'max_steps', 'unwitnessed', 'frontier',
+        'working_directory', 'environment', 'missing_prerequisite', 'plan_schema',
+    ])
+    def test_mutated_execution_plan_rejected_before_launch(tmp_path, monkeypatch, change):
+        root, config, plan = fixture(tmp_path, monkeypatch)
+        plan = copy.deepcopy(plan)
+        chunk, snapshot = plan['command_plan'][2:4]
+        if change == 'arbitrary_command': chunk['argv'] = ['UNEXPECTED_COMMAND']
+        elif change == 'interpreter': chunk['argv'][0] = '/other/python'
+        elif change == 'prepared_path': chunk['argv'][chunk['argv'].index('--prepared')+1] = '/other/prep'
+        elif change == 'out_path': chunk['argv'][chunk['argv'].index('--out')+1] = '/other/run'
+        elif change == 'command_config': chunk['argv'][chunk['argv'].index('--config')+1] = '/other/config'
+        elif change == 'max_steps': chunk['argv'][-1] = '256'
+        elif change == 'unwitnessed': snapshot['argv'].append('--allow-unwitnessed')
+        elif change == 'frontier': snapshot['expected_completed_steps'] = 256
+        elif change == 'working_directory': plan['command_working_directory'] = '/other/repo'
+        elif change == 'environment': plan['command_environment_required']['PYTHONPATH'] = '/other/repo'
+        elif change == 'missing_prerequisite': plan['prerequisites']['same_grid_preparation_byte_identity_required'] = False
+        elif change == 'plan_schema': plan['schema'] = 'UNKNOWN'
+>       with pytest.raises(ValueError, match='execution plan'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_r3m19_execution_contract.py:47: Failed
+________ test_mutated_execution_plan_rejected_before_launch[max_steps] _________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-23/test_mutated_execution_plan_re5')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe73c968c80>
+change = 'max_steps'
+
+    @pytest.mark.parametrize('change', [
+        'arbitrary_command', 'interpreter', 'prepared_path', 'out_path',
+        'command_config', 'max_steps', 'unwitnessed', 'frontier',
+        'working_directory', 'environment', 'missing_prerequisite', 'plan_schema',
+    ])
+    def test_mutated_execution_plan_rejected_before_launch(tmp_path, monkeypatch, change):
+        root, config, plan = fixture(tmp_path, monkeypatch)
+        plan = copy.deepcopy(plan)
+        chunk, snapshot = plan['command_plan'][2:4]
+        if change == 'arbitrary_command': chunk['argv'] = ['UNEXPECTED_COMMAND']
+        elif change == 'interpreter': chunk['argv'][0] = '/other/python'
+        elif change == 'prepared_path': chunk['argv'][chunk['argv'].index('--prepared')+1] = '/other/prep'
+        elif change == 'out_path': chunk['argv'][chunk['argv'].index('--out')+1] = '/other/run'
+        elif change == 'command_config': chunk['argv'][chunk['argv'].index('--config')+1] = '/other/config'
+        elif change == 'max_steps': chunk['argv'][-1] = '256'
+        elif change == 'unwitnessed': snapshot['argv'].append('--allow-unwitnessed')
+        elif change == 'frontier': snapshot['expected_completed_steps'] = 256
+        elif change == 'working_directory': plan['command_working_directory'] = '/other/repo'
+        elif change == 'environment': plan['command_environment_required']['PYTHONPATH'] = '/other/repo'
+        elif change == 'missing_prerequisite': plan['prerequisites']['same_grid_preparation_byte_identity_required'] = False
+        elif change == 'plan_schema': plan['schema'] = 'UNKNOWN'
+>       with pytest.raises(ValueError, match='execution plan'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_r3m19_execution_contract.py:47: Failed
+_______ test_mutated_execution_plan_rejected_before_launch[unwitnessed] ________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-23/test_mutated_execution_plan_re6')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe73c96a1e0>
+change = 'unwitnessed'
+
+    @pytest.mark.parametrize('change', [
+        'arbitrary_command', 'interpreter', 'prepared_path', 'out_path',
+        'command_config', 'max_steps', 'unwitnessed', 'frontier',
+        'working_directory', 'environment', 'missing_prerequisite', 'plan_schema',
+    ])
+    def test_mutated_execution_plan_rejected_before_launch(tmp_path, monkeypatch, change):
+        root, config, plan = fixture(tmp_path, monkeypatch)
+        plan = copy.deepcopy(plan)
+        chunk, snapshot = plan['command_plan'][2:4]
+        if change == 'arbitrary_command': chunk['argv'] = ['UNEXPECTED_COMMAND']
+        elif change == 'interpreter': chunk['argv'][0] = '/other/python'
+        elif change == 'prepared_path': chunk['argv'][chunk['argv'].index('--prepared')+1] = '/other/prep'
+        elif change == 'out_path': chunk['argv'][chunk['argv'].index('--out')+1] = '/other/run'
+        elif change == 'command_config': chunk['argv'][chunk['argv'].index('--config')+1] = '/other/config'
+        elif change == 'max_steps': chunk['argv'][-1] = '256'
+        elif change == 'unwitnessed': snapshot['argv'].append('--allow-unwitnessed')
+        elif change == 'frontier': snapshot['expected_completed_steps'] = 256
+        elif change == 'working_directory': plan['command_working_directory'] = '/other/repo'
+        elif change == 'environment': plan['command_environment_required']['PYTHONPATH'] = '/other/repo'
+        elif change == 'missing_prerequisite': plan['prerequisites']['same_grid_preparation_byte_identity_required'] = False
+        elif change == 'plan_schema': plan['schema'] = 'UNKNOWN'
+>       with pytest.raises(ValueError, match='execution plan'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_r3m19_execution_contract.py:47: Failed
+_________ test_mutated_execution_plan_rejected_before_launch[frontier] _________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-23/test_mutated_execution_plan_re7')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe73c96dfd0>
+change = 'frontier'
+
+    @pytest.mark.parametrize('change', [
+        'arbitrary_command', 'interpreter', 'prepared_path', 'out_path',
+        'command_config', 'max_steps', 'unwitnessed', 'frontier',
+        'working_directory', 'environment', 'missing_prerequisite', 'plan_schema',
+    ])
+    def test_mutated_execution_plan_rejected_before_launch(tmp_path, monkeypatch, change):
+        root, config, plan = fixture(tmp_path, monkeypatch)
+        plan = copy.deepcopy(plan)
+        chunk, snapshot = plan['command_plan'][2:4]
+        if change == 'arbitrary_command': chunk['argv'] = ['UNEXPECTED_COMMAND']
+        elif change == 'interpreter': chunk['argv'][0] = '/other/python'
+        elif change == 'prepared_path': chunk['argv'][chunk['argv'].index('--prepared')+1] = '/other/prep'
+        elif change == 'out_path': chunk['argv'][chunk['argv'].index('--out')+1] = '/other/run'
+        elif change == 'command_config': chunk['argv'][chunk['argv'].index('--config')+1] = '/other/config'
+        elif change == 'max_steps': chunk['argv'][-1] = '256'
+        elif change == 'unwitnessed': snapshot['argv'].append('--allow-unwitnessed')
+        elif change == 'frontier': snapshot['expected_completed_steps'] = 256
+        elif change == 'working_directory': plan['command_working_directory'] = '/other/repo'
+        elif change == 'environment': plan['command_environment_required']['PYTHONPATH'] = '/other/repo'
+        elif change == 'missing_prerequisite': plan['prerequisites']['same_grid_preparation_byte_identity_required'] = False
+        elif change == 'plan_schema': plan['schema'] = 'UNKNOWN'
+>       with pytest.raises(ValueError, match='execution plan'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_r3m19_execution_contract.py:47: Failed
+____ test_mutated_execution_plan_rejected_before_launch[working_directory] _____
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-23/test_mutated_execution_plan_re8')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe73c96f080>
+change = 'working_directory'
+
+    @pytest.mark.parametrize('change', [
+        'arbitrary_command', 'interpreter', 'prepared_path', 'out_path',
+        'command_config', 'max_steps', 'unwitnessed', 'frontier',
+        'working_directory', 'environment', 'missing_prerequisite', 'plan_schema',
+    ])
+    def test_mutated_execution_plan_rejected_before_launch(tmp_path, monkeypatch, change):
+        root, config, plan = fixture(tmp_path, monkeypatch)
+        plan = copy.deepcopy(plan)
+        chunk, snapshot = plan['command_plan'][2:4]
+        if change == 'arbitrary_command': chunk['argv'] = ['UNEXPECTED_COMMAND']
+        elif change == 'interpreter': chunk['argv'][0] = '/other/python'
+        elif change == 'prepared_path': chunk['argv'][chunk['argv'].index('--prepared')+1] = '/other/prep'
+        elif change == 'out_path': chunk['argv'][chunk['argv'].index('--out')+1] = '/other/run'
+        elif change == 'command_config': chunk['argv'][chunk['argv'].index('--config')+1] = '/other/config'
+        elif change == 'max_steps': chunk['argv'][-1] = '256'
+        elif change == 'unwitnessed': snapshot['argv'].append('--allow-unwitnessed')
+        elif change == 'frontier': snapshot['expected_completed_steps'] = 256
+        elif change == 'working_directory': plan['command_working_directory'] = '/other/repo'
+        elif change == 'environment': plan['command_environment_required']['PYTHONPATH'] = '/other/repo'
+        elif change == 'missing_prerequisite': plan['prerequisites']['same_grid_preparation_byte_identity_required'] = False
+        elif change == 'plan_schema': plan['schema'] = 'UNKNOWN'
+>       with pytest.raises(ValueError, match='execution plan'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_r3m19_execution_contract.py:47: Failed
+_______ test_mutated_execution_plan_rejected_before_launch[environment] ________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-23/test_mutated_execution_plan_re9')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe73c96d6d0>
+change = 'environment'
+
+    @pytest.mark.parametrize('change', [
+        'arbitrary_command', 'interpreter', 'prepared_path', 'out_path',
+        'command_config', 'max_steps', 'unwitnessed', 'frontier',
+        'working_directory', 'environment', 'missing_prerequisite', 'plan_schema',
+    ])
+    def test_mutated_execution_plan_rejected_before_launch(tmp_path, monkeypatch, change):
+        root, config, plan = fixture(tmp_path, monkeypatch)
+        plan = copy.deepcopy(plan)
+        chunk, snapshot = plan['command_plan'][2:4]
+        if change == 'arbitrary_command': chunk['argv'] = ['UNEXPECTED_COMMAND']
+        elif change == 'interpreter': chunk['argv'][0] = '/other/python'
+        elif change == 'prepared_path': chunk['argv'][chunk['argv'].index('--prepared')+1] = '/other/prep'
+        elif change == 'out_path': chunk['argv'][chunk['argv'].index('--out')+1] = '/other/run'
+        elif change == 'command_config': chunk['argv'][chunk['argv'].index('--config')+1] = '/other/config'
+        elif change == 'max_steps': chunk['argv'][-1] = '256'
+        elif change == 'unwitnessed': snapshot['argv'].append('--allow-unwitnessed')
+        elif change == 'frontier': snapshot['expected_completed_steps'] = 256
+        elif change == 'working_directory': plan['command_working_directory'] = '/other/repo'
+        elif change == 'environment': plan['command_environment_required']['PYTHONPATH'] = '/other/repo'
+        elif change == 'missing_prerequisite': plan['prerequisites']['same_grid_preparation_byte_identity_required'] = False
+        elif change == 'plan_schema': plan['schema'] = 'UNKNOWN'
+>       with pytest.raises(ValueError, match='execution plan'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_r3m19_execution_contract.py:47: Failed
+___ test_mutated_execution_plan_rejected_before_launch[missing_prerequisite] ___
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-23/test_mutated_execution_plan_re10')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe73c96ffe0>
+change = 'missing_prerequisite'
+
+    @pytest.mark.parametrize('change', [
+        'arbitrary_command', 'interpreter', 'prepared_path', 'out_path',
+        'command_config', 'max_steps', 'unwitnessed', 'frontier',
+        'working_directory', 'environment', 'missing_prerequisite', 'plan_schema',
+    ])
+    def test_mutated_execution_plan_rejected_before_launch(tmp_path, monkeypatch, change):
+        root, config, plan = fixture(tmp_path, monkeypatch)
+        plan = copy.deepcopy(plan)
+        chunk, snapshot = plan['command_plan'][2:4]
+        if change == 'arbitrary_command': chunk['argv'] = ['UNEXPECTED_COMMAND']
+        elif change == 'interpreter': chunk['argv'][0] = '/other/python'
+        elif change == 'prepared_path': chunk['argv'][chunk['argv'].index('--prepared')+1] = '/other/prep'
+        elif change == 'out_path': chunk['argv'][chunk['argv'].index('--out')+1] = '/other/run'
+        elif change == 'command_config': chunk['argv'][chunk['argv'].index('--config')+1] = '/other/config'
+        elif change == 'max_steps': chunk['argv'][-1] = '256'
+        elif change == 'unwitnessed': snapshot['argv'].append('--allow-unwitnessed')
+        elif change == 'frontier': snapshot['expected_completed_steps'] = 256
+        elif change == 'working_directory': plan['command_working_directory'] = '/other/repo'
+        elif change == 'environment': plan['command_environment_required']['PYTHONPATH'] = '/other/repo'
+        elif change == 'missing_prerequisite': plan['prerequisites']['same_grid_preparation_byte_identity_required'] = False
+        elif change == 'plan_schema': plan['schema'] = 'UNKNOWN'
+>       with pytest.raises(ValueError, match='execution plan'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_r3m19_execution_contract.py:47: Failed
+_______ test_mutated_execution_plan_rejected_before_launch[plan_schema] ________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-23/test_mutated_execution_plan_re11')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe73c7f66f0>
+change = 'plan_schema'
+
+    @pytest.mark.parametrize('change', [
+        'arbitrary_command', 'interpreter', 'prepared_path', 'out_path',
+        'command_config', 'max_steps', 'unwitnessed', 'frontier',
+        'working_directory', 'environment', 'missing_prerequisite', 'plan_schema',
+    ])
+    def test_mutated_execution_plan_rejected_before_launch(tmp_path, monkeypatch, change):
+        root, config, plan = fixture(tmp_path, monkeypatch)
+        plan = copy.deepcopy(plan)
+        chunk, snapshot = plan['command_plan'][2:4]
+        if change == 'arbitrary_command': chunk['argv'] = ['UNEXPECTED_COMMAND']
+        elif change == 'interpreter': chunk['argv'][0] = '/other/python'
+        elif change == 'prepared_path': chunk['argv'][chunk['argv'].index('--prepared')+1] = '/other/prep'
+        elif change == 'out_path': chunk['argv'][chunk['argv'].index('--out')+1] = '/other/run'
+        elif change == 'command_config': chunk['argv'][chunk['argv'].index('--config')+1] = '/other/config'
+        elif change == 'max_steps': chunk['argv'][-1] = '256'
+        elif change == 'unwitnessed': snapshot['argv'].append('--allow-unwitnessed')
+        elif change == 'frontier': snapshot['expected_completed_steps'] = 256
+        elif change == 'working_directory': plan['command_working_directory'] = '/other/repo'
+        elif change == 'environment': plan['command_environment_required']['PYTHONPATH'] = '/other/repo'
+        elif change == 'missing_prerequisite': plan['prerequisites']['same_grid_preparation_byte_identity_required'] = False
+        elif change == 'plan_schema': plan['schema'] = 'UNKNOWN'
+>       with pytest.raises(ValueError, match='execution plan'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_r3m19_execution_contract.py:47: Failed
+______________ test_consistently_changed_config_is_not_frozen_b2 _______________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-23/test_consistently_changed_conf0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe73c7f5d90>
+
+    def test_consistently_changed_config_is_not_frozen_b2(tmp_path, monkeypatch):
+        root, _, plan = fixture(tmp_path, monkeypatch)
+        cfg = dict(plan['config'], b=3.0)
+        config = tmp_path / 'changed.json'
+        config.write_text(json.dumps(cfg))
+        plan['config'] = cfg
+>       with pytest.raises(ValueError, match='B2 config family'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests/test_r3m19_execution_contract.py:57: Failed
+=========================== short test summary info ============================
+FAILED tests/test_r3m19_execution_contract.py::test_mutated_execution_plan_rejected_before_launch[arbitrary_command]
+FAILED tests/test_r3m19_execution_contract.py::test_mutated_execution_plan_rejected_before_launch[interpreter]
+FAILED tests/test_r3m19_execution_contract.py::test_mutated_execution_plan_rejected_before_launch[prepared_path]
+FAILED tests/test_r3m19_execution_contract.py::test_mutated_execution_plan_rejected_before_launch[out_path]
+FAILED tests/test_r3m19_execution_contract.py::test_mutated_execution_plan_rejected_before_launch[command_config]
+FAILED tests/test_r3m19_execution_contract.py::test_mutated_execution_plan_rejected_before_launch[max_steps]
+FAILED tests/test_r3m19_execution_contract.py::test_mutated_execution_plan_rejected_before_launch[unwitnessed]
+FAILED tests/test_r3m19_execution_contract.py::test_mutated_execution_plan_rejected_before_launch[frontier]
+FAILED tests/test_r3m19_execution_contract.py::test_mutated_execution_plan_rejected_before_launch[working_directory]
+FAILED tests/test_r3m19_execution_contract.py::test_mutated_execution_plan_rejected_before_launch[environment]
+FAILED tests/test_r3m19_execution_contract.py::test_mutated_execution_plan_rejected_before_launch[missing_prerequisite]
+FAILED tests/test_r3m19_execution_contract.py::test_mutated_execution_plan_rejected_before_launch[plan_schema]
+FAILED tests/test_r3m19_execution_contract.py::test_consistently_changed_config_is_not_frozen_b2
+13 failed, 1 passed in 1.10s

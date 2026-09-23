@@ -1,0 +1,145 @@
+{
+  "schema": "R3M19_PERFORMANCE_FINDINGS_V1",
+  "evidence_status": "IMPLEMENTATION_VERIFIED_AND_CPU_MICROBENCHMARK_MEASURED",
+  "source_digest": "581ff84930bb862efafdfec5d39d5b25aebf9297ce7ce45f833a5abe125b2a5b",
+  "script_sha256": "1c87fe433e63d2ce18361195d842e7a32a6ada11d9726bb2c8156eb5c1a2cc02",
+  "test_sha256": "7ac3a24da5bf8f6356552a7c17b5ed494ac9198dec6a175d6730e643a4727f97",
+  "cpu_results": [
+    {
+      "run": "cpu_native",
+      "result_path": "results/R3M19/performance/cpu_native/RESULT.json",
+      "result_sha256": "9fbd3dbd1a11f900e4a91232c3c59095c59c54faa2fe36a467ae453e3860561f",
+      "candidate": "buffer_reuse",
+      "workers": 1,
+      "median_reference_seconds": 0.47266239799864707,
+      "median_candidate_seconds": 0.3005029649975768,
+      "reference_seconds_range": [
+        0.3915587259980384,
+        0.5081814879995363
+      ],
+      "candidate_seconds_range": [
+        0.2666721300010977,
+        0.3354278950027947
+      ],
+      "measured_speed_ratio": 1.5729042740142631,
+      "relative_state_error": 6.2752401309046e-16,
+      "norm_relative_difference": 0.0,
+      "cpu_model": [
+        "Intel(R) Xeon(R) Platinum 8272CL CPU @ 2.60GHz"
+      ],
+      "python": "3.12.14",
+      "numpy": "2.3.5",
+      "scipy_candidate_version": null,
+      "current_hardware_not_users_workstation": true
+    },
+    {
+      "run": "cpu_scipy_w1",
+      "result_path": "results/R3M19/performance/cpu_scipy_w1/RESULT.json",
+      "result_sha256": "9805c61f4eb391a6f9db5742c280f967fb95cb8722793715a68ef2e26464872b",
+      "candidate": "scipy_fft_workers",
+      "workers": 1,
+      "median_reference_seconds": 0.41731501599861076,
+      "median_candidate_seconds": 0.21217341800002032,
+      "reference_seconds_range": [
+        0.3869840599982126,
+        0.48163219100024435
+      ],
+      "candidate_seconds_range": [
+        0.203614516001835,
+        0.22648270499848877
+      ],
+      "measured_speed_ratio": 1.9668581480766398,
+      "relative_state_error": 1.0328685439028702e-15,
+      "norm_relative_difference": 0.0,
+      "cpu_model": [
+        "Intel(R) Xeon(R) Platinum 8272CL CPU @ 2.60GHz"
+      ],
+      "python": "3.12.14",
+      "numpy": "2.3.5",
+      "scipy_candidate_version": "1.17.0",
+      "current_hardware_not_users_workstation": true
+    },
+    {
+      "run": "cpu_scipy_w4",
+      "result_path": "results/R3M19/performance/cpu_scipy_w4/RESULT.json",
+      "result_sha256": "96f56c4b703902a532d7f67176f28bd20e3e99b1c400950454a0ac42b61cdd74",
+      "candidate": "scipy_fft_workers",
+      "workers": 4,
+      "median_reference_seconds": 0.4300986229973205,
+      "median_candidate_seconds": 0.14315908000207855,
+      "reference_seconds_range": [
+        0.38948167499984265,
+        0.5130322749973857
+      ],
+      "candidate_seconds_range": [
+        0.1315745819993026,
+        0.15377187600097386
+      ],
+      "measured_speed_ratio": 3.004340507015523,
+      "relative_state_error": 1.0328685439028702e-15,
+      "norm_relative_difference": 0.0,
+      "cpu_model": [
+        "Intel(R) Xeon(R) Platinum 8272CL CPU @ 2.60GHz"
+      ],
+      "python": "3.12.14",
+      "numpy": "2.3.5",
+      "scipy_candidate_version": "1.17.0",
+      "current_hardware_not_users_workstation": true
+    }
+  ],
+  "benchmark_scope": {
+    "shape": [
+      64,
+      64,
+      96
+    ],
+    "points": 393216,
+    "steps": 4,
+    "warmups_per_algorithm": 2,
+    "timed_repeats_per_algorithm": 5,
+    "timing_excludes": [
+      "initial state copy/reset",
+      "runner/preallocation setup",
+      "accuracy validation",
+      "host-device transfers",
+      "checkpoint hashing/write",
+      "projection",
+      "backup"
+    ],
+    "precision": "complex128",
+    "max_measured_relative_state_error": 1.0328685439028702e-15
+  },
+  "tests": {
+    "passed": 19,
+    "skipped": 1,
+    "skip_reason": "CuPy not installed; no GPU execution or GPU speed measurement",
+    "stdout": "final_tests.stdout",
+    "stderr": "final_tests.stderr",
+    "exit_code": 0
+  },
+  "failure_history": [
+    {
+      "stage": "TDD_RED",
+      "exit_code": 2,
+      "reason": "new sidecar absent before implementation",
+      "stdout": "tdd_red.stdout",
+      "stderr": "tdd_red.stderr"
+    },
+    {
+      "stage": "REVIEW_FINDING_RESOLVED",
+      "reason": "GPU memory probes moved outside CUDA event timing; fake-event instrumentation-scope regression passes; real GPU still not run"
+    }
+  ],
+  "historical_R3M18": {
+    "preparation_seconds": 423.1415630589472,
+    "retained_checkpoint_state_bytes": 29232003712,
+    "collision_fft_projection_checkpoint_phase_timings": "NOT_AVAILABLE_IN_REPOSITORY_SUMMARIES",
+    "actual_bottleneck": "UNMEASURED"
+  },
+  "scientific_admission": false,
+  "production_admission": false,
+  "production_grid_speedup": "NOT_EVALUATED_DO_NOT_EXTRAPOLATE",
+  "gpu_correctness_and_speed": "NOT_RUN",
+  "checkpoint_policy_changed": false,
+  "frozen_source_modified": false
+}

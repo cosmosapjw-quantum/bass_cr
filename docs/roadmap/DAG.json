@@ -40,7 +40,7 @@
       ],
       "exit_criterion": "each numerical dimension has justified estimate meeting allocated budget and cross checks; current matrix alone insufficient",
       "failure_branch": "representation decision if h nonconvergent; dt/boundary crosscheck if spatial pattern established",
-      "status": "R3M18_B2_COMPLETE_TIME_REFINEMENT_STILL_OPEN",
+      "status": "R3M19_BOUNDED_FULL_H_DIAGNOSIS_COMPLETE_TIME_REFINEMENT_STILL_OPEN",
       "scientific_completion": false,
       "completed_subwork": [
         "R3M15 A/B/C three witnessed collisions",
@@ -49,7 +49,10 @@
         "R3M17 tiny same-H dense and moving-two-center ODE temporal references; no production collision",
         "R3M17 exact-config temporal analyzer and immutable checkpoint-generation sidecars",
         "R3M18 witnessed B2 requested-dt=.0125 collision: 3586 steps, 29 sequential immutable generations",
-        "R3M18 B0/B1/B2 actual-dt signed temporal contraction and conditional empirical extrapolation"
+        "R3M18 B0/B1/B2 actual-dt signed temporal contraction and conditional empirical extrapolation",
+        "R3M19 actual-dt model nonidentifiability and norm/shell reanalysis",
+        "R3M19 tiny same-H full generator, independent nonautonomous ODE, raw-vector decomposition and CF4 diagnostics",
+        "R3M19 canonical outer execution-plan repair and accuracy-matched CPU performance candidates"
       ],
       "open_subwork": [
         "h=.20 P3 dt sensitivity 1.8874% exceeds .10% allocation",
@@ -59,7 +62,9 @@
         "C/A/B projectile mesh phase differs; grid translation sensitivity unmeasured",
         "B1-to-B2 pair changes remain 0.2566% to 0.2787%, above the .10% real-time allocation",
         "B0/B1/B2 observed orders 2.878 to 2.957 are outside the preregistered clean 1.5 to 2.5 range",
-        "A2 NOT_RUN; dt=.0125 same-dt A2/B2 spatial comparison is NOT_MEASURED"
+        "A2 NOT_RUN; dt=.0125 same-dt A2/B2 spatial comparison is NOT_MEASURED",
+        "R3M19 refined h=.20 tiny CF4 reference-resolution criterion not met; production-h/geometry/state short-window reference not yet run",
+        "Actual user CPU/RAM inventory and GPU performance candidate parity/work-precision not measured"
       ]
     },
     {
@@ -178,24 +183,50 @@
   "three_energies_are_4_to_81_continuous_1s_source": false,
   "bgrid_current_admission": "NO_GO",
   "next_canonical_node": {
-    "id": "N1_TDL_MOVING_TWO_CENTER_FULL_H_TEMPORAL_REFERENCE_DIAGNOSTIC",
-    "trigger": "R3M18 B1-to-B2 P1/P2/P3 changes are 0.2566% to 0.2787% and observed orders 2.878 to 2.957 lie outside the clean second-order range, while three-point conditional remainders are not independently certified.",
-    "located_problem": "The production same-grid temporal ladder contracts but requested dt=.0125 does not satisfy the preregistered pair/order gate; the split and moving-center time-sampling contributions remain unresolved.",
-    "causal_ceiling": "B2 establishes empirical temporal contraction only and does not decide the point-Coulomb spatial representation or certify the real-time budget.",
-    "registration_note": "Use a bounded small grid and the same discrete moving two-center H_h(t)-iW. The independent reference must support non-Hermitian exponential action; no large-grid CPU fallback, new production collision, tolerance change, or representation mutation.",
-    "next_executable_action": "Compare the current split propagator with an independently converged full-H nonautonomous exponential-action reference at an exactly common horizon and report state/observable error versus actual dt.",
-    "exit_criterion": "The reference error decomposition resolves whether time sampling/splitting is in a controlled regime or identifies a concrete temporal propagator blocker; it remains diagnostic and cannot close spatial, all-bound, or production gates.",
-    "execution_in_this_unit": "NOT_RUN_NEXT_NODE_ONLY",
-    "automatic_finer_grid_allowed": false,
-    "executable_contract": "docs/r3m17/LOCAL_CODEX_HANDOFF.md",
-    "input_authority": [
-      "7844bc0d8122070b267ee77c75cb2c9447435155",
-      "docs/r3m18/FINAL_DECISION.json",
-      "results/R3M18/B_TEMPORAL_ANALYSIS.json"
-    ],
+    "id": "N1_TDL_PRODUCTION_H_SHORT_WINDOW_GPU_REFERENCE_AND_WORK_PRECISION",
     "status": "PREREGISTERED_NOT_RUN",
+    "input_authority": [
+      "3d033eb08a0efd99257470f0fa27214f569b427a",
+      "docs/r3m19/FINAL_DECISION.json",
+      "results/R3M19/fullh/fullh_64pt_suite_v2.json",
+      "results/R3M19/performance/SUMMARY.json"
+    ],
+    "trigger": "Tiny same-H decomposition is implemented; R3M18 production time budget and actual GPU work-precision remain unresolved.",
+    "next_executable_action": "Publish existing small raw B2 evidence; inventory local hardware and bounded GPU parity; implement and tiny-oracle validate non-Hermitian matrix-free full-H action; only after resource/accuracy gates compare at most three immutable B2 checkpoint windows.",
+    "executable_contract": "docs/r3m19/LOCAL_CODEX_HANDOFF.md",
+    "exit_criterion": "Same production H_h/CAP/checkpoint short-window temporal attribution and measured accuracy-matched work, or exact inner-error/resource blocker. No global temporal/physical certificate.",
     "scientific_completion": false,
-    "failure_branch": "repair the bounded reference implementation if structurally invalid; if the reference itself is infeasible under declared memory/cost, return an exact resource/design blocker without another production collision"
+    "new_full_collisions_allowed": 0,
+    "max_short_windows": 3,
+    "max_horizon_per_window_in_B2_steps": 4,
+    "max_gpu_wall_seconds": 7200,
+    "max_total_fft_matvec": 4000,
+    "automatic_finer_grid_allowed": false,
+    "production_admission": "HOLD",
+    "failure_branch": "Preserve first failure; stop large execution on parity/inner-reference/resource failure; no CPU fallback, tolerance relaxation or additional collision."
   },
-  "production_admission": "HOLD"
+  "production_admission": "HOLD",
+  "completed_diagnostic_nodes": [
+    {
+      "id": "N1_TDL_MOVING_TWO_CENTER_FULL_H_TEMPORAL_REFERENCE_DIAGNOSTIC",
+      "trigger": "R3M18 B1-to-B2 P1/P2/P3 changes are 0.2566% to 0.2787% and observed orders 2.878 to 2.957 lie outside the clean second-order range, while three-point conditional remainders are not independently certified.",
+      "located_problem": "The production same-grid temporal ladder contracts but requested dt=.0125 does not satisfy the preregistered pair/order gate; the split and moving-center time-sampling contributions remain unresolved.",
+      "causal_ceiling": "B2 establishes empirical temporal contraction only and does not decide the point-Coulomb spatial representation or certify the real-time budget.",
+      "registration_note": "Use a bounded small grid and the same discrete moving two-center H_h(t)-iW. The independent reference must support non-Hermitian exponential action; no large-grid CPU fallback, new production collision, tolerance change, or representation mutation.",
+      "next_executable_action": "Compare the current split propagator with an independently converged full-H nonautonomous exponential-action reference at an exactly common horizon and report state/observable error versus actual dt.",
+      "exit_criterion": "The reference error decomposition resolves whether time sampling/splitting is in a controlled regime or identifies a concrete temporal propagator blocker; it remains diagnostic and cannot close spatial, all-bound, or production gates.",
+      "execution_in_this_unit": "6_REFERENCE_RESOLVED_64_POINT_CASES_AND_128_POINT_STIFFNESS_DIAGNOSTICS",
+      "automatic_finer_grid_allowed": false,
+      "executable_contract": "docs/r3m17/LOCAL_CODEX_HANDOFF.md",
+      "input_authority": [
+        "7844bc0d8122070b267ee77c75cb2c9447435155",
+        "docs/r3m18/FINAL_DECISION.json",
+        "results/R3M18/B_TEMPORAL_ANALYSIS.json"
+      ],
+      "status": "R3M19_BOUNDED_DIAGNOSTIC_COMPLETE",
+      "scientific_completion": false,
+      "failure_branch": "repair the bounded reference implementation if structurally invalid; if the reference itself is infeasible under declared memory/cost, return an exact resource/design blocker without another production collision",
+      "completion_evidence": "docs/r3m19/REPORT_KO.md"
+    }
+  ]
 }

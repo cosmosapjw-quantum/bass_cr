@@ -1,0 +1,92 @@
+{
+  "blas_threads": 1,
+  "config": {
+    "absorber_power": 0.125,
+    "absorber_reference_dt": 0.05,
+    "absorber_width": 1.0,
+    "b": 2.0,
+    "backend": "numpy",
+    "capture_plane": 1.0,
+    "checkpoint_stride": 128,
+    "dt": 0.0125,
+    "energy_keV_per_u": 100.0,
+    "grid": {
+      "dx": 0.5,
+      "xlim": [
+        -16.0,
+        16.0
+      ],
+      "ylim": [
+        -16.0,
+        16.0
+      ],
+      "zlim": [
+        -24.0,
+        24.0
+      ]
+    },
+    "initial_state": "analytic",
+    "project_nmax": 1,
+    "z_start": -2.0,
+    "z_stop": 2.0
+  },
+  "config_sha256": "4862d487ff7132520df9b3892cb32da50eaaffe296baf8713c667ca78a33f793",
+  "estimated_working_bytes": 167772160,
+  "inventory": {
+    "cpu": {
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "affinity_logical_count": 9,
+      "model_names": [
+        "Intel(R) Xeon(R) Platinum 8272CL CPU @ 2.60GHz"
+      ],
+      "physical_cores_in_affinity": 9,
+      "quota_logical_capacity": 8.0
+    },
+    "gpu": {
+      "status": "NOT_PROBED"
+    },
+    "memory": {
+      "available_bytes": 16248463360,
+      "cgroup_current_bytes": 5226373120,
+      "cgroup_max_bytes": 21474836480,
+      "host_total_bytes": 23109894144
+    },
+    "numpy": "2.3.5",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "python": "3.12.14",
+    "schema": "BASS_CR_R3M19_HARDWARE_INVENTORY_V1"
+  },
+  "memory_estimate_is_peak_guarantee": false,
+  "numpy_fft_worker_control": false,
+  "points": 393216,
+  "production_admitted": false,
+  "request": {
+    "backend": "numpy",
+    "candidate": "scipy_fft_workers",
+    "fft_workers": 4,
+    "max_seconds": 30.0,
+    "max_working_bytes": 536870912,
+    "repeats": 5,
+    "shape": [
+      64,
+      64,
+      96
+    ],
+    "steps": 4
+  },
+  "schema": "BASS_CR_R3M19_BOUNDED_PERFORMANCE_V1",
+  "status": "PLAN_ONLY_NOT_EXECUTED",
+  "total_bounded_step_calls": 56,
+  "warmup_repeats": 2,
+  "worker_cap": 8
+}

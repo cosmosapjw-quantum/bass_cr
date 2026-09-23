@@ -1,0 +1,59 @@
+{
+  "schema": "R3M19_VALIDATION_V1",
+  "base_commit": "3d033eb08a0efd99257470f0fa27214f569b427a",
+  "frozen_numerical_source_digest": "581ff84930bb862efafdfec5d39d5b25aebf9297ce7ce45f833a5abe125b2a5b",
+  "historical_scientific_results_unchanged": true,
+  "historical_config_bytes_unchanged": true,
+  "modified_historical_instrumentation": [
+    "scripts/r3m18_b2_execute.py"
+  ],
+  "tests": {
+    "command": "PYTHONPATH=/workspace/scratch/235b855501c6/test_deps:. OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m pytest -p no:cacheprovider tests/test_r3m1[1-9]*",
+    "passed": 323,
+    "skipped": 1,
+    "failed": 0,
+    "exit_code": 0,
+    "elapsed_seconds": 15.61,
+    "skip": "actual CuPy/GPU unavailable",
+    "stdout": "results/R3M19/integrated_tests.stdout",
+    "stderr": "results/R3M19/integrated_tests.stderr",
+    "R3M19_new_passed": 73
+  },
+  "new_full_collisions": 0,
+  "new_production_preparations": 0,
+  "production_arrays_downloaded": false,
+  "GPU_executed": false,
+  "test_runtime": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "pytest": "8.4.2",
+    "production_runtime_changed": false
+  },
+  "fullh_cases": {
+    "canonical_64pt": {
+      "count": 6,
+      "reference_resolved": 6
+    },
+    "coarse_h020_128pt": {
+      "count": 6,
+      "reference_resolved": 6
+    },
+    "refined_h020_128pt": {
+      "count": 6,
+      "reference_resolved": 0,
+      "interpretation": "PROVISIONAL_FINE_CF4_ORACLE_RESOLUTION_NOT_MET"
+    }
+  },
+  "performance": "results/R3M19/performance/SUMMARY.json",
+  "code_hashes": {
+    "scripts/r3m18_b2_execute.py": "70e8fd37b0d0a491412bcc3a2696daa342c328f63ca7718bb2197a90a899b0b5",
+    "scripts/r3m19_fullh_diagnostic.py": "438fbdfb5330093290fd66aae766ad66ad5e0ab9fa0f0f751415c6b706bc95a6",
+    "scripts/r3m19_performance.py": "1c87fe433e63d2ce18361195d842e7a32a6ada11d9726bb2c8156eb5c1a2cc02",
+    "scripts/r3m19_temporal_models.py": "cc1e06e67835f637f92eb6e2ce56af96a96ac04b2a788eb5accdbd78e86ef948",
+    "tests/test_r3m19_execution_contract.py": "09312984d3287cd87a309692ca9964c07e260a436de48bc0574ab7fa1aa5c890",
+    "tests/test_r3m19_fullh_diagnostic.py": "1676c3355ee2b3a2adef47c80385751d900870277359bd2897d039811928796c",
+    "tests/test_r3m19_performance.py": "7ac3a24da5bf8f6356552a7c17b5ed494ac9198dec6a175d6730e643a4727f97",
+    "tests/test_r3m19_temporal_models.py": "7c12106944697af4b8e26f4c3fdee79872f34bd40107e16e8432ff93b3b890e5"
+  }
+}

@@ -17,7 +17,9 @@ if str(ROOT) not in sys.path:
 from cr_repro.r3m11 import source_digest
 from scripts import r3m16_coordinator as supervisor
 from scripts import r3m17_checkpoint_guard as guard
-from scripts.r3m17_preflight import FROZEN_SOURCE
+from scripts.r3m17_preflight import (
+    FROZEN_SOURCE, SCIENCE_PYTHON, build_preflight, validate_b2_config,
+)
 
 # Kept local to this outer coordinator so it cannot be mistaken for numerical
 # source authority. The same value is pinned by r3m17_temporal.py.
@@ -44,6 +46,10 @@ def write_new(path: Path, value: dict) -> None:
 
 def validate_inputs(root: Path, config: Path, plan: dict) -> tuple[dict, list[dict]]:
     cfg = read_json(config)
+    # R3M19 repair: equality between two supplied inputs does not establish the
+    # frozen B2 family, nor authorize the executable argv carried in the plan.
+    # Rebuild only metadata here; never launch an interpreter or allocate a grid.
+    validate_b2_config(cfg)
     if source_digest() != FROZEN_SOURCE:
         raise ValueError("frozen numerical source digest mismatch")
     if plan.get("job") != "B2" or plan.get("status") != "PLAN_ONLY_NOT_EXECUTED":
@@ -52,6 +58,21 @@ def validate_inputs(root: Path, config: Path, plan: dict) -> tuple[dict, list[di
         raise ValueError("preflight/config/chunk identity mismatch")
     if plan["numerical"].get("nstep") != 3586:
         raise ValueError("unexpected B2 step count")
+    expected = build_preflight(cfg, config_path=config, job_root=root,
+                               scientific_python=SCIENCE_PYTHON)
+    for key in (
+        'schema', 'frozen_authority_commit', 'numerical_source_digest',
+        'instrumentation_sha256', 'reference_B1_config_sha256',
+        'config_path', 'config_file_sha256', 'job_root',
+        'command_working_directory', 'command_environment_required',
+        'prerequisites', 'checkpoint_retention', 'command_plan',
+    ):
+        # JSON comparison also distinguishes booleans from numeric lookalikes.
+        if json.dumps(plan.get(key), sort_keys=True, allow_nan=False) != json.dumps(
+                expected[key], sort_keys=True, allow_nan=False):
+            raise ValueError(f'canonical B2 execution plan mismatch: {key}')
+    if plan.get('runtime', {}).get('required_scientific_interpreter') != SCIENCE_PYTHON:
+        raise ValueError('canonical B2 execution plan interpreter mismatch')
     if sha(root / "preparation/initial.npy") != CANONICAL_INITIAL_SHA256:
         raise ValueError("B2 preparation is not byte-identical to canonical B")
     receipt = read_json(root / "preparation/receipt.json")

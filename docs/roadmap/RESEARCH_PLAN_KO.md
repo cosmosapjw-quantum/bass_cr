@@ -152,3 +152,27 @@ A2가 없으므로 dt=.0125 spatial gap은 `NOT_MEASURED`다. 다음 canonical n
 exponential-action reference를 독립 수렴시키고 현재 split propagation과 공통 horizon에서
 비교한다. 이 진단이 시간표본화/splitting error를 분리하기 전에는 새 production collision,
 finer h 또는 representation 변경을 승인하지 않는다.
+
+
+## R3M19 — full-H 오차 분리와 성능 후보
+
+R3M18의 작은 원본 요약과 actual dt를 재분석했고, 세 점 외삽이 잔여오차를
+인증하지 못함을 수치/대수적으로 확인했다. 64점 moving two-center full-H
+midpoint/정확 평균/CF4와 독립 DOP853 6사례는 등록 reference-repeat 기준을
+충족했다. h=.20 직사각형 tiny stiffness probe의 refined CF4 6사례는 그
+기준을 충족하지 못해 잠정 진단으로 보존한다. 생산 격자/초기상태의 기준해는
+아직 없다. TIME_REFINEMENT_STILL_OPEN, all-bound OPEN, b-grid NO_GO다.
+
+outer 실행 coordinator의 canonical config/argv/path 검증 결함을 수정했다.
+수치 cr_repro 소스와 역사 결과 bytes는 유지했다. buffer reuse와 명시적
+CPU FFT worker 후보가 웹 CPU microbenchmark에서 1.57/1.97/3.00배를
+보였지만 사용자 CPU/GPU 또는 전체 collision 속도는 미측정이다.
+
+현재 canonical node는 N1_TDL_PRODUCTION_H_SHORT_WINDOW_GPU_REFERENCE_AND_WORK_PRECISION
+하나다. docs/r3m19/LOCAL_CODEX_HANDOFF.md의 로컬 hardware inventory, 작은
+GPU parity, tiny oracle로 검증한 matrix-free 비Hermitian full-H action,
+자원 preflight를 순서대로 수행한다. 통과할 때만 보존 B2 checkpoint 최대
+세 구간, 각 4 B2-step 이하를 비교한다. 총 GPU 2시간/4000 FFT matvec
+상한이다. 신규 full collision/preparation/finer h 예산은 0이다. 다음
+production propagator 선택은 같은 정확도에서 측정한 비용을 근거로 하며
+현재 성능 후보를 frozen production에 자동 적용하지 않는다.
