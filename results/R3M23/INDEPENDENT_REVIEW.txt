@@ -1,0 +1,33 @@
+**No BLOCKER or MAJOR finding for the recorded Strang-scale result. One MINOR operational issue remains.** Reviewed `bd6cd9c183967e4319162c6023074162a3259d81` → `a95b8ad30343835177f757439637692096fac612`, including the untracked report and R3M23 outputs.
+
+- **MINOR — repeated invocation reaches GPU preflight before rejecting existing outputs.** At [r3m23_cross_window.py:346](/mnt/sn850x2t/bass_cr_r3m19_n1_20260923/worktree/scripts/r3m23_cross_window.py:346), `allocation_preflight()` runs before the create-only receipt write at line 363. Reinvoking the completed job can therefore perform another CUDA allocation probe and three full-H matvecs before failing on existing `PREFLIGHT.json`. That work falls outside the frozen one-job allowance and the sealed 3,795 count. I reproduced the control flow with a CPU-only sentinel and suppressed writes. Reject existing run outputs before preflight. **This does not invalidate the saved single-run measurements.**
+
+The repaired contract-hash guard is present and passes. I independently verified both approximately 1 GB checkpoint files against their manifests, seals, selection, and witness receipts; checked source/configuration identities; and confirmed the inherited numerical dependencies remain byte-identical to the input HEAD.
+
+The independently recalculated gates match [GPU_RESULT.json:60](/mnt/sn850x2t/bass_cr_r3m19_n1_20260923/worktree/results/R3M23/GPU_RESULT.json:60) and [GPU_RESULT.json:222](/mnt/sn850x2t/bass_cr_r3m19_n1_20260923/worktree/results/R3M23/GPU_RESULT.json:222):
+
+| Window | Minimum Strang–CF4 distance | 1% threshold | CF4 n8→16 | Percentage of scale |
+|---|---:|---:|---:|---:|
+| closest | 1.795672140e−5 | 1.795672140e−7 | 7.410351608e−9 | 0.04126784% |
+| outgoing | 1.500675973e−5 | 1.500675973e−7 | 2.065116478e−9 | 0.01376124% |
+
+Both inner and substep repeats pass. Maximum calibration distances are `6.368411693e−16` and `6.870857473e−16`, below `2.103970853e−14`.
+
+Accounting also reconciles:
+
+- Required worst case: `3 + 2 × (160 + 34 + 1600) = 3591`.
+- Actual: `3 + 1978 + 1814 = 3795`, leaving **205**.
+- These are kinetic **FFT pairs**, equivalent to 7,590 individual 3-D transforms.
+- Optional-work reservations were **3903** and **3987**, both within 4000.
+- Recorded wall times: **477.537 s**, **423.551 s**, and **903.058 s total**, within their caps. Recorded memory checks satisfy their reserves; they are sampled checks, not continuous high-water measurements.
+
+The inner-bound interpretation is sound within its stated scope. Each CF4 stage has Hermitian part `−W/2 ≤ 0`; negative potential quadrature weight does not reverse the fixed CAP. The physical `√dv` scaling and subdivision of the inner budget are consistent with the nonexpansive Arnoldi bound. That bound excludes floating-point error. [Jawecki–Auzinger–Koch, Theorem 3.1](https://arxiv.org/html/1809.03369#S3)
+
+For closest, tightening produces identical hashes, basis sizes, and bounds. Its zero repeat distance demonstrates an unchanged numerical result, not zero error; the separate substep comparison supplies additional empirical evidence.
+
+**Admissible claim:** On the two specified identical-start B2 restarts, each spanning `0.04999569408955976` au under the frozen discrete Hamiltonian/CAP, the measured CF4 refinement and inner-action repeats satisfy the predefined 1% **Strang-comparison-scale** gate.
+
+The report correctly withholds equal-accuracy wall-time advantage and production speedup. The self-scaled CF4 reference, independent production reference, time convergence, full-collision/channel accuracy, and inherited spatial/CAP/preparation/all-bound/b-integration gates remain unresolved. Production **HOLD**, prior failures, and b-grid **NO_GO** are preserved. The accuracy-first next node in [REPORT_KO.md:20](/mnt/sn850x2t/bass_cr_r3m19_n1_20260923/worktree/docs/r3m23/REPORT_KO.md:20) is appropriate.
+
+Fresh focused tests: **4 passed**. The preserved external log records **365 passed**, alongside both earlier environment failures. Raw endpoint arrays are not retained, so I independently recalculated scalar gates/accounting and audited the distance implementation without regenerating endpoint distances. No files were modified; no GPU work, publication, or agents were used.
+
