@@ -8,3 +8,7 @@
 - Gordon, Jirauschek, Kärtner, PRA 73 042505 (2006): Coulomb-singularity-aware discretization literature. This package instead uses a cell-centered uniform lattice so neither nucleus is forced onto a node for the frozen b-grid; this is an independent discretization, not a reproduction of their ABC method.
 
 TDL propagation here is a second-order Strang split operator with FFT kinetic step and a cosine mask absorber. It is deliberately an independently auditable implementation, not a claim about the private Nichols propagator.
+
+## R3M26 current authority (2026-09-24)
+
+The historical sources above remain comparison/method provenance. Production is now defined by the explicit internally consistent model and validated numerical implementation, not exact paper reproduction. The derivation, additional primary sources and applicability limits are in `r3m26/MODEL_FOUNDATION_KO.md`. The canonical controlled runner uses a fixed-rate CAP with symmetric half steps; the historical base runner's per-step post-mask is not the current time-refinement authority. Frozen `cr_repro/*.py` remains unchanged in R3M26.

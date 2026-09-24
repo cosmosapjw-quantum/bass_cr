@@ -1,0 +1,70 @@
+......F.                                                                 [100%]
+=================================== FAILURES ===================================
+________________ test_run_claim_ceiling_and_create_only_output _________________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-3/test_run_claim_ceiling_and_cre0')
+
+    def test_run_claim_ceiling_and_create_only_output(tmp_path):
+        out = MOD.run_foundation_checks()
+        assert out['algebra_checks_passed'] is True
+        assert out['production_admitted'] is False
+        assert out['production_global_error_evaluated'] is False
+        assert out['evidence_scope'] == 'SYNTHETIC_SMALL_MATRIX_ALGEBRA_ONLY'
+        path = tmp_path / 'result.json'
+>       MOD.write_new(path, out)
+
+tests/test_r3m26_foundation.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/r3m26_foundation.py:217: in write_new
+    text = json.dumps(result, indent=2, allow_nan=False) + '\n'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py:238: in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/encoder.py:202: in encode
+    chunks = list(chunks)
+             ^^^^^^^^^^^^
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/encoder.py:432: in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/encoder.py:406: in _iterencode_dict
+    yield from chunks
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/encoder.py:326: in _iterencode_list
+    yield from chunks
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/encoder.py:406: in _iterencode_dict
+    yield from chunks
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/encoder.py:406: in _iterencode_dict
+    yield from chunks
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/encoder.py:439: in _iterencode
+    o = _default(o)
+        ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <json.encoder.JSONEncoder object at 0x7ff5b04ebd10>, o = np.True_
+
+    def default(self, o):
+        """Implement this method in a subclass such that it returns
+        a serializable object for ``o``, or calls the base implementation
+        (to raise a ``TypeError``).
+    
+        For example, to support arbitrary iterators, you could
+        implement default like this::
+    
+            def default(self, o):
+                try:
+                    iterable = iter(o)
+                except TypeError:
+                    pass
+                else:
+                    return list(iterable)
+                # Let the base class default method raise the TypeError
+                return super().default(o)
+    
+        """
+>       raise TypeError(f'Object of type {o.__class__.__name__} '
+                        f'is not JSON serializable')
+E       TypeError: Object of type bool is not JSON serializable
+
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/encoder.py:180: TypeError
+=========================== short test summary info ============================
+FAILED tests/test_r3m26_foundation.py::test_run_claim_ceiling_and_create_only_output
+1 failed, 7 passed in 1.16s

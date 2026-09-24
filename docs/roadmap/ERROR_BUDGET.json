@@ -1,5 +1,5 @@
 {
-  "schema": "R3M15_ERROR_BUDGET_V1",
+  "schema": "R3M26_ERROR_BUDGET_V2",
   "status": "PREREGISTERED_TARGET_NOT_ACHIEVED",
   "target_relative_total": 0.01,
   "allocation_relative": {
@@ -11,7 +11,7 @@
     "b_quadrature": 0.001,
     "b_tail": 0.0005
   },
-  "combination": "Conservative sum of justified bounds only; empirical estimates are separate, correlated effects require cross-check. No RSS independence assumed.",
+  "combination": "Conservative L1 sum of admitted estimates/bounds for the same typed observable. Cross effects must be measured and included exactly once. No RSS/independence assumption. Missing components remain unknown, never zero.",
   "historical_decision_changed": false,
   "pair_screen_relative": 0.01,
   "pair_screens_do_not_establish_total_error": true,
@@ -32,5 +32,60 @@
     "real_time_budget": "OPEN",
     "reason": "All pair screens exceed allocation and observed orders are outside the preregistered clean range; conditional single-power estimates are not certified bounds.",
     "aggregate_total_budget": "OPEN"
-  }
+  },
+  "historical_combination_policy_R3M15": "Conservative sum of justified bounds only; empirical estimates are separate, correlated effects require cross-check. No RSS independence assumed.",
+  "policy_authority": "2026-09-24 user: internally consistent model and faithful numerics; exact paper reproduction is not the production gate",
+  "evidence_routes": {
+    "model_conditional_validation": "Preregistered conservative empirical estimates checked against held-out refinement/reference evidence; explicitly noncertified. Full component support required.",
+    "optional_formal_certification": "Rigorous component bounds including stability/roundoff and all necessary cross effects. Not a mandatory prerequisite for model-conditional numerical production."
+  },
+  "prospective_policy_only": true,
+  "profiles": {
+    "SELECTED_SPANS_SINGLE_B": {
+      "relative_total": 0.007,
+      "components": [
+        "preparation",
+        "spatial",
+        "real_time",
+        "box_CAP_finite_time"
+      ],
+      "final_all_bound_goal_satisfied": false
+    },
+    "ALL_BOUND_SINGLE_B": {
+      "relative_total": 0.0085,
+      "components": [
+        "preparation",
+        "spatial",
+        "real_time",
+        "box_CAP_finite_time",
+        "bound_channel_truncation"
+      ],
+      "cross_section_goal_satisfied": false
+    },
+    "ALL_BOUND_CROSS_SECTION": {
+      "relative_total": 0.01,
+      "components": [
+        "preparation",
+        "spatial",
+        "real_time",
+        "box_CAP_finite_time",
+        "bound_channel_truncation",
+        "b_quadrature",
+        "b_tail"
+      ]
+    }
+  },
+  "cross_effect_policy": "h_dt is required, separate additive or included within a spatial envelope with explicit evidence. Coupling allowance does not enlarge the inherited total target; other discovered cross effects must also be included in affected full-component envelopes.",
+  "current_status_R3M26": {
+    "time": "OPEN_B3_NOT_RUN",
+    "space": "OPEN",
+    "preparation": "OPEN",
+    "boundary": "OPEN",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "global_time_certification": "NOT_EVALUATED",
+    "production": "HOLD",
+    "ledger": "results/R3M26/budget/CURRENT_SELECTED_P3_EVALUATION_V2.json"
+  },
+  "temporal_rule": "docs/r3m26/NUMERICAL_STRATEGY_KO.md; scripts/r3m26_temporal.py; immutable pre-B3 forecast artifact"
 }

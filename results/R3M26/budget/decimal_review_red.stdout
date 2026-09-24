@@ -1,0 +1,25 @@
+..............F.                                                         [100%]
+=================================== FAILURES ===================================
+_______ test_json_decimal_boundary_preserved_before_fraction_conversion ________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-2/test_json_decimal_boundary_pre0')
+
+    def test_json_decimal_boundary_preserved_before_fraction_conversion(tmp_path):
+        ledger = synthetic(evidence="CERTIFIED_BOUND")
+        ledger["components"]["real_time"]["absolute_error"] = .00001
+        raw = json.dumps(ledger).replace('"absolute_error": 1e-05',
+                                        '"absolute_error": 0.00001000000000000000001')
+        assert raw != json.dumps(ledger)
+        path = tmp_path / "strict_decimal.json"
+        path.write_text(raw)
+        result = budget.evaluate_ledger(budget.load_json(path))
+>       assert result["status"] == "NUMERICAL_BUDGET_EXCEEDED"
+E       AssertionError: assert 'NUMERICAL_BU...L_CONDITIONAL' == 'NUMERICAL_BUDGET_EXCEEDED'
+E         
+E         - NUMERICAL_BUDGET_EXCEEDED
+E         + NUMERICAL_BUDGET_SATISFIED_MODEL_CONDITIONAL
+
+tests/test_r3m26_budget.py:160: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_r3m26_budget.py::test_json_decimal_boundary_preserved_before_fraction_conversion
+1 failed, 15 passed in 0.23s

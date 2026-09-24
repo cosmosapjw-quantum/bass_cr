@@ -1,0 +1,33 @@
+{
+  "authoritative_new_outputs": [
+    "CURRENT_SELECTED_P3_EVALUATION_V2.json",
+    "SYNTHETIC_NOT_REAL_VALIDATED_ESTIMATE_EVALUATION_V2.json",
+    "SYNTHETIC_NOT_REAL_CERTIFIED_BOUND_EVALUATION_V2.json"
+  ],
+  "certified_real_bound": null,
+  "historical_logs_and_outputs_preserved": true,
+  "independent_review_bug": {
+    "failure": "JSON decimal lexeme 0.00001000000000000000001 rounded tofloat1e-5 beforeFraction; false withinbudget and underreported certifiedsumby1e-23",
+    "regression_green_exit_code": 0,
+    "regression_red_exit_code": 1,
+    "regression_red_stdout": "decimal_review_red.stdout",
+    "repair": "JSON parse_float=Decimal; exact rational admission before display; exact numeric identity/errors also returned",
+    "reproduced": true
+  },
+  "production_admitted": false,
+  "python": "3.12.14",
+  "real_scientific_status": "NUMERICAL_BUDGET_OPEN",
+  "runner_or_fullcollision_executed": false,
+  "schema": "R3M26_BUDGET_VALIDATION_V2",
+  "source_files": {
+    "scripts/r3m26_budget.py": "07a828203db3569f950ae54dba4541b048ae9f07b5f922cdcc9ec494ff82ff43",
+    "tests/test_r3m26_budget.py": "03124448bede83231a700ebf2e2048d1ef655c74f1d9ee43821f44a53bd27983"
+  },
+  "supersedes_current_evaluator_version": "VALIDATION.json",
+  "tests": {
+    "actual_exit_code": 0,
+    "passed": 16,
+    "stderr": "decimal_review_green.stderr",
+    "stdout": "decimal_review_green.stdout"
+  }
+}

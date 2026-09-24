@@ -1,5 +1,32 @@
 # 독립 H+ + H(1s) bound capture 연구계획
 
+## R3M26 현재 실행 계획 — 2026-09-24
+
+이 절과 `DAG.json`의 R3M26 frontier가 현재 계획이다. 아래 R3M15–R3M19 절은 당시의 등록·판정 기록으로 보존하며, 거기에 적힌 '다음 node'를 현재 실행 지시로 사용하지 않는다. 현재 입력은 R3M25 exact `90d6cbad25e4bc49e9563f8721fdc408761b31c7`다.
+
+production 목표를 **명시한 원자 모형의 내적 일관성과 수치적 충실도**로 확정한다. 특정 논문의 private data·그림 값 일치를 필수 조건으로 삼지 않는다. 원래 50/100/225 keV/u all-bound 단면적 목표는 유지한다. n≤3 단일-b 검증은 중간 산출물이다. 이론 정초는 `../r3m26/MODEL_FOUNDATION_KO.md`, 수치 전략은 `../r3m26/NUMERICAL_STRATEGY_KO.md`에 있다.
+
+엄밀한 전역 오차 인증과 검증된 보수적 경험 추정을 구분한다. 후자도 사전 등록·새 refinement에 대한 예측 확인·모형 민감도·교차효과 검사가 있으면 model-conditional numerical budget을 닫을 수 있다. 경험 추정을 certified bound라고 부르지 않는다. 기존 총1%, 시간.10%, 공간.30% 및 나머지 배분은 유지한다. `ERROR_BUDGET.json`과 `scripts/r3m26_budget.py`가 서로 다른 관측량·범위·단위와 누락 오차를 섞지 않도록 검사한다.
+
+| 순서 | 실제 해결할 문제 | 종료 조건과 후속 분기 |
+|---|---|---|
+| 0 완료 | 모델/단위/ETF/Gram/CAP/출력 정의와 증거 유형 고정 | 이론 문서 및 독립 검토. 문헌을 계속 추가해야만 다음 단계가 되는 구조를 종료 |
+| 1 다음 한 node | 기존 Strang B3, h=.20, requested dt=.00625 | B0–B3 actual-dt 평가. sign/contraction, pair≤.10%, 등록 `U_time=2 max(E_model,D_hold)`≤.10%를 P1/P2/P3 모두 만족하면 이 fixed-h 시간 차원을 닫음. p∈[1.5,2.5]는 진단. factor2는 사전 설계값이며 엄밀상한/신뢰확률 아님 |
+| 2 | 지배적인 공간 오차와 h–dt 결합 | 시간검증 뒤 같은 시간정확도·종점·상태정의의 spatial ladder 및 subcell translation. 기존 A1/B1 차이와 interaction을 포함해 .30% envelope 확인. h 변화만으로 해결되는지 한 번 판별한 후 필요한 경우에만 Coulomb/FFT 표현 대안 선택 |
+| 3 | preparation·finite-start/stop·CAP/box | atom τ/T residual과 실제 관측량 민감도, common endpoint, CAP/box 영향으로 각각 .15% 추정. boundary/high-n support 상호작용 포함. pass한 차원을 이유 없이 반복하지 않음 |
+| 4 | all-bound completion | 지원되는 n-ladder와 새 shell/tail 검증 또는 정당한 대안 projector 중 하나를 완성, .15% 충족. n=3 complement를 continuum이라 부르지 않음. 전체 AOCC solver 완성은 선택 비교 lane |
+| 5 | b 적분과 tail | N1/N2 통과 뒤 .10% quadrature와 .05% tail. 각 b의 절대 오차를 2π∫b εP db로 전파. b=2 증거를 전체 b에 일반화하지 않음 |
+| 6 | 에너지 확장·원자 데이터 release | 100 keV/u에서 고정한 절차를 50/225에 적용해 에너지별 지원 범위 검증. 하나의 최종 독립 판정. 실제 HOST 소비는 별도 계약 |
+
+정확히 하나의 다음 canonical node는 `N1_TDL_PRODUCTION_H_B3_FULL_COLLISION_CONTRACT_AND_TIME_REFINEMENT`다. R3M25 실제 t=0 국소 CF4 PASS를 재사용하며 같은 목적의 새 국소-reference node를 열지 않는다. B3 관측 전 frozen forecast를 고정했고, 새 데이터는 한 번의 full collision에서 얻는다. 통과하면 spatial 단계로 이동한다. 예측과 양립하는 근소한 실패면 후속 계약에서 최대 한 refinement를 검토하고, 부호/예측/모형 간 불일치면 맹목적인 B4 대신 원인 판별로 분기한다. B3 결과를 본 뒤 이번 임계값을 수정하지 않는다.
+
+현재 웹 작업은 B3·preparation·finer h·representation 변경을 실행하지 않았다. 실제 GPU 실행은 `../r3m26/LOCAL_CODEX_HANDOFF.md`의 후속 계약에서 source/config/environment/initial identity와 자원 한도를 고정한 뒤 진행한다. 기존 R3M14 witness는 full config 일치를 요구하므로 B2 preparation 영수증을 dt만 바꾸어 재사용하지 않는다. 새 B3 preparation의 같은 초기 배열 SHA를 확인한다.
+
+성능 목표는 정확도와 복구 가능성을 유지한 전체 wall time 감소다. 실제 Ryzen5900X/약96GiB RAM/RTX3090 자료를 사용한다. CPU4-worker 소규모 FFT는 실제 약2.09배였으나 GPU buffer reuse는 거의1배였고 63M-grid speed는 미측정이다. 이 때문에 B3 중 propagator·precision·FFT backend를 바꾸지 않는다. GPU 전파, 제한된 CPU 검증/해시, RAM host staging을 배치하며 메모리와 I/O 비용을 따로 기록한다. 자세한 근거는 `../r3m26/PERFORMANCE_AND_CODE_REVIEW_KO.md`다.
+
+아래는 역사 기록이다.
+
+
 목표는 50, 100, 225 keV/u의 독립적인 bound capture 계산이다. Nichols 원 코드의
 byte/code reproduction을 주장하지 않는다. 이 계획의 작성은 과학 단계 완료가 아니다.
 기준 반환 authority는 `8c7bbfce157f17b85dc9082c62c63c05fef3b294`, numerical source

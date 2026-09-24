@@ -1,0 +1,154 @@
+{
+  "schema": "R3M26_FOUNDATION_VALIDATION_V1",
+  "scope": "Synthetic small-matrix algebra and implementation checks only; no production accuracy admission",
+  "production_admitted": false,
+  "production_global_error_evaluated": false,
+  "final_result": "results/R3M26/foundation/RESULT_FINAL.json",
+  "final_test_count": 9,
+  "final_test_status": "PASSED",
+  "commands": [
+    {
+      "name": "TEST_RED",
+      "argv": "python -m pytest -q tests/test_r3m26_foundation.py",
+      "exit_code": 1,
+      "classification": "RUNTIME_ENVIRONMENT",
+      "finding": "Default runtime has no pytest; this is not a scientific or TDD-red result."
+    },
+    {
+      "name": "TEST_1",
+      "argv": "PYTHONPATH=../test_deps:. python -m pytest -p no:cacheprovider -q tests/test_r3m26_foundation.py",
+      "exit_code": 1,
+      "classification": "IMPLEMENTATION",
+      "finding": "7 passed, 1 failed: NumPy bool result was not JSON serializable."
+    },
+    {
+      "name": "RUN_1",
+      "argv": "python scripts/r3m26_foundation.py --output results/R3M26/foundation/RESULT.json",
+      "exit_code": 1,
+      "classification": "IMPLEMENTATION",
+      "finding": "Same NumPy bool JSON issue; no output JSON was created."
+    },
+    {
+      "name": "TEST_2",
+      "argv": "PYTHONPATH=../test_deps:. python -m pytest -p no:cacheprovider -q tests/test_r3m26_foundation.py",
+      "exit_code": 0,
+      "finding": "9 passed after explicit builtin-bool conversion and counterexample tests."
+    },
+    {
+      "name": "RUN_2",
+      "argv": "python scripts/r3m26_foundation.py --output results/R3M26/foundation/RESULT.json",
+      "exit_code": 0,
+      "finding": "Successful preliminary source; preserved unchanged."
+    },
+    {
+      "name": "TEST_FINAL",
+      "argv": "PYTHONPATH=../test_deps:. python -m pytest -p no:cacheprovider -q tests/test_r3m26_foundation.py",
+      "exit_code": 0,
+      "finding": "9 passed after making CLI aggregate enforce dissipativity/non-normality assumptions too."
+    },
+    {
+      "name": "RUN_FINAL",
+      "argv": "python scripts/r3m26_foundation.py --output results/R3M26/foundation/RESULT_FINAL.json",
+      "exit_code": 0,
+      "finding": "Final source, create-only output, algebra checks passed."
+    }
+  ],
+  "documentation_copy_initial_failure": {
+    "classification": "IMPLEMENTATION",
+    "exit_code": 1,
+    "exception": "FileNotFoundError: r3m26_numerical_strategy.md",
+    "cause": "Path('.').parent was used before resolving cwd; no document or evidence file created.",
+    "repair": "Use Path.cwd() to resolve the repository parent; create-only copy then succeeded."
+  },
+  "independent_review": {
+    "reviewer": "foundation_review",
+    "role": "Independent derivation and read-only code review",
+    "finding": "No blocking mathematical or implementation issues. Optional CLI assumption aggregation improvement implemented.",
+    "modified_files": false
+  },
+  "reference_independence": [
+    "SciPy matrix exponential versus closed-form triangular exponential.",
+    "Gaussian quadrature convolution versus analytic forcing endpoint.",
+    "Adjoint quadrature integral versus analytic endpoint identity.",
+    "Weighted Gram solve versus whitened QR projector geometry."
+  ],
+  "sources": {
+    "scripts/r3m26_foundation.py": "3f4a371e061622f86b71dbee7e3ea94f5bdf395492f4096d8f0af8a909e14897",
+    "tests/test_r3m26_foundation.py": "9af4d9b88a77822e5ed6b6341a291fbed34a005292ef8e6e4e7abed50ad0c966",
+    "docs/r3m26/NUMERICAL_STRATEGY_KO.md": "d907b2af767444d1c4f3625bfd1da3421f05ed18415515513b3af09bf5df9741"
+  },
+  "artifacts": {
+    "HYPOTHETICAL_B3_ILLUSTRATION.json": {
+      "sha256": "caf22e6b3836d7911fe4d75b8ea32b45097e40c9e278387ae64d9bc6029a4cfc",
+      "bytes": 2731
+    },
+    "RESULT.json": {
+      "sha256": "e92a0bdf24418198e4565fce5c848248a14046e6104d545d763f63edc7e96f88",
+      "bytes": 5130
+    },
+    "RESULT_FINAL.json": {
+      "sha256": "71fc551d5800182d381f7576b3d3f6929b25fd0af2b04edeff4286b9d323bbc7",
+      "bytes": 5130
+    },
+    "RUN_1.stderr": {
+      "sha256": "8f55cdb3e0052643cb1854a461e7bfeed8fecddb6d45b530db76f1fc79bfacbf",
+      "bytes": 2103
+    },
+    "RUN_1.stdout": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "RUN_2.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "RUN_2.stdout": {
+      "sha256": "eca21f066e02cf5aa17e52e519544d8342461b3363a518e4071435a7029f20c0",
+      "bytes": 112
+    },
+    "RUN_FINAL.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "RUN_FINAL.stdout": {
+      "sha256": "e2a1c926c8555ebcfcd74c3eea3ca7320e86b27bd7105343d4f7830297265b48",
+      "bytes": 118
+    },
+    "SCALAR_INPUT_AUDIT.json": {
+      "sha256": "e130f609c8947716ee543f61bfbcf15d92c3f28c667198dd7a9f3cae413150c8",
+      "bytes": 2792
+    },
+    "TEST_1.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "TEST_1.stdout": {
+      "sha256": "a907a385df6b10538ee08e425b5525a023a1e2023aef8e3853ea9008fecb48c2",
+      "bytes": 3541
+    },
+    "TEST_2.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "TEST_2.stdout": {
+      "sha256": "8f32d67a8f7a3a16dc817c2fe6968947418ac3b82ac6eac71b474dd994701c59",
+      "bytes": 98
+    },
+    "TEST_FINAL.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "TEST_FINAL.stdout": {
+      "sha256": "fbf3ce380adbd56d9b6606ae9d3638dcc5d2e8ba927e872f602b406b7fcde062",
+      "bytes": 98
+    },
+    "TEST_RED.stderr": {
+      "sha256": "51f5550d86043279227c92b72199d4ee1f66d30623405f70c98442058ffe76c7",
+      "bytes": 97
+    },
+    "TEST_RED.stdout": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  }
+}
