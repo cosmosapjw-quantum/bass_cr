@@ -42,3 +42,5 @@ TDD 최초 RED(import 실패)를 그대로 보존했고 전용 시험은 최종 
 다음 canonical node는 `N1_TDL_PRODUCTION_H_SPATIAL_H_DT_BUDGET` 하나다. 같은 물리적 horizon과 충분히 작은 actual dt에서 h=.25/.20의 spatial .30% 및 projectile subcell translation을 판별하고 h-dt 상호작용을 한 번만 계상하는 실행 계약을 먼저 만든다. R3M27에서는 B4, finer h, representation 변경, 새 b-grid/physical rate, main merge를 수행하지 않았다.
 
 상위 노력의 독립 read-only 검토(`results/R3M27/INDEPENDENT_REVIEW.md`)는 지정 범위에 PASS를 주고 차단 결함은 찾지 않았다. 검토자가 발견한 roadmap provenance MINOR는 frozen R3M26 commit의 파일 SHA와 갱신된 R3M27 working-tree 파일 SHA를 별도로 명시하여 닫았다(`results/R3M27/INDEPENDENT_REVIEW_CLOSEOUT.json`). 수정 전 ledger 두 버전을 보존했고 세 typed 평가의 수치 JSON은 동일하다. 독립 검토 역시 endpoint 전파·Gram projection의 독립 재계산을 주장하지 않는다.
+
+최종 작은 bundle(55,289B, local SHA `c15388cb9237737dcb0f2249890e1c1fdd5f986a6b04701e2ed52ecc433e21a2`)은 final state **메타데이터**, raw result, witness, 57번째 manifest, 계약·분석·감사·코드·보고서 24개 파일과 내부 manifest를 담는다. state.npy 배열은 포함하지 않았다. Dropbox와 Drive 각각의 업로드 응답 및 ID·크기 metadata R1 일치를 `results/R3M27/delivery/DUAL_BACKUP_RECEIPT.json`에 기록했다. 제공자 checksum이 없어 원격 byte SHA 동일성은 미검증이다. `UPLOAD_VERIFIED != RESTORE_VERIFIED`이며 raw readback NOT_RUN, restore RESTORE_NOT_TESTED다.
