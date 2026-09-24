@@ -1,0 +1,18 @@
+{
+  "exception_type": "MemoryError",
+  "message": "GPU/host reserve lost",
+  "minimum_sampled_gpu_free_bytes": 1143472128,
+  "minimum_sampled_host_available_bytes": 79800426496,
+  "production_admission": false,
+  "resource_limited": true,
+  "schema": "BASS_CR_R3M25_FIRST_FAILURE_V1",
+  "scientific_nonconvergence": "UNDETERMINED",
+  "stage": "GPU_PREFLIGHT",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m25_event_window.py\", line 406, in run\n    result = _gpu(plan,out,pinned,progress)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m25_event_window.py\", line 267, in _gpu\n    _resources(cp, budget, minimum)\n  File \"/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m25_event_window.py\", line 191, in _resources\n    raise MemoryError('GPU/host reserve lost')\nMemoryError: GPU/host reserve lost\n",
+  "work_at_failure": {
+    "fft_semantics": "TWO_TRANSFORMS_PER_FOURIER_KINETIC_APPLICATION",
+    "fft_transforms": 2,
+    "kinetic_matvecs": 1,
+    "wall_seconds": 0.859291660002782
+  }
+}

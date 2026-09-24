@@ -1,0 +1,40 @@
+**Pre-GPU verdict: HOLD for two MAJOR resource-guard issues. No numerical BLOCKER demonstrated.** One review round completed; no files changed, GPU work, workers, checkpoint copying, or publication.
+
+1. **MAJOR — host reserve is unchecked after endpoint allocation.**  
+   [Driver lines 206–211](/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m25_event_window.py:206) check resources **before** `cp.asnumpy(current)` allocates another approximately 1 GB endpoint. After the final endpoint, assessment and completion have no further memory check. An in-memory CPU probe reproduced a successful return with host availability below 8 GiB.  
+   **Fix:** check/reserve host capacity before each endpoint transfer, sample immediately afterward, and check before terminal success. Record minimum host availability alongside GPU availability. Add a coordinator regression for reserve loss during transfer. This is a resource-control defect, not numerical nonconvergence.
+
+2. **MAJOR — the wall limits are cooperative checks, not hard deadlines.**  
+   [Budget lines 46–62](/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m24_gpu.py:46) detect expiration only when called; they cannot interrupt an overlong operation or synchronization. Additionally, [driver lines 236–242](/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m25_event_window.py:236) initialize CUDA inventory before starting the total timer, while lines 359–365 snapshot time before cleanup.  
+   **Fix:** start the attempt deadline before GPU initialization, retain it through cleanup, and enforce the frozen 3600/1800-second deadlines with a watchdog if they must be hard elapsed-time ceilings. Keep synchronized boundary checks. The **3000-matvec cap itself is enforced before scheduling additional kinetic work**.
+
+3. **MINOR — first-failure evidence loses consumed-work accounting.**  
+   [Driver lines 394–404](/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m25_event_window.py:394) preserve the exception and traceback but omit count, elapsed time, and completed comparison identifiers. The injected cap failure correctly produced resource-limited evidence and no completion marker.  
+   **Fix:** retain the budget outside `_gpu` and include its snapshot and precise stage in `FIRST_FAILURE.json`, without replacing the original exception.
+
+The scientific wiring checks out statically:
+
+- **Geometry:** exactly 42 B2 steps, `g001152 → step1194`; interval `[-0.016665231363186095, 0.033330462726373966]` au brackets zero. Runner and selection timestep/time origin match exactly.
+- **State:** warmup is labeled derived, with a digest; CF4 and Strang receive copies of the same warmed state.
+- **Operator/norm:** inherited CF4 applies the full non-Hermitian generator with fixed CAP; distances use raw physical L2, including `sqrt(dv)`.
+- **Comparisons:** n4/8/16/32, n8 sub2→sub4, and changed-work tightening are wired. Unchanged tightening is explicitly non-independent.
+- **Preregistration:** denominator is `d4_8`; order floor is `max(100 × repeat_floor, 128ε × physical_norm)`. Strang scaling remains separate.
+- **Provenance/output:** original generation enters through `bind_generation`; outputs are create-only and an existing output directory is rejected. Frozen numerical-source digest and selection/config binding matched.
+
+The actual worst-case count is:
+
+| Component | FFT pairs |
+|---|---:|
+| Probe + warmup + Strang/parity | 79 |
+| Two calibrations | 120 |
+| CF4 n4/8/16/32 | 2400 |
+| n8/sub4 repeat | 640 |
+| n16 tightening | 640 |
+| **Total** | **3879** |
+
+Skipping unchanged tightening leaves **3239**. Neither guarantees completion under **3000**. Preserve that reservation: exhaustion is resource limitation, and higher authorization requires a **new execution reservation**, not an edited cap or omitted comparison.
+
+I independently reproduced **9 passing CPU tests**; the reported **431-test suite** was not rerun. My initial injected-failure fixture omitted `generation`; that was a **review-fixture bug**, corrected in memory—not an implementation or numerical defect.
+
+**Admissible pre-run ceiling:** source-reviewed, CPU-tested experimental implementation only. No R3M25 convergence, fourth-order, or reference-quality result is established. Production remains **HOLD**, b-grid **NO_GO**. HEAD remains the specified parent and R3M25 is uncommitted, so the commit-before-freeze guard appropriately remains unsatisfied.
+

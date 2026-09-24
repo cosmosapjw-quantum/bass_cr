@@ -1,0 +1,23 @@
+..F.....                                                                 [100%]
+=================================== FAILURES ===================================
+_________ test_fourth_order_self_scaled_reference_and_distinct_scales __________
+
+    def test_fourth_order_self_scaled_reference_and_distinct_scales():
+        result = assess(dict(d4_8=1.6e-6, d8_16=1e-7, d16_32=6.25e-9,
+                             substep_repeat=1e-9, tight_repeat=1e-9,
+                             strang_scale=2e-5, physical_norm=1.0,
+                             substep_independence='CHANGED_WORK',
+                             tightening_status='EXECUTED',
+                             tightening_independence='CHANGED_WORK'))
+        assert result['self_scaled_reference'] == 'PASS_LOCAL_SELF_SCALED'
+        assert result['reference_for_strang'] == 'PASS_LOCAL_STRANG_SCALE'
+>       assert result['order_characterization'] == 'PASS_LOCAL_FOURTH_ORDER_COMPATIBLE'
+E       AssertionError: assert 'UNRESOLVED_FP_FLOOR' == 'PASS_LOCAL_F...ER_COMPATIBLE'
+E         
+E         - PASS_LOCAL_FOURTH_ORDER_COMPATIBLE
+E         + UNRESOLVED_FP_FLOOR
+
+tests/test_r3m25_event_window.py:33: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_r3m25_event_window.py::test_fourth_order_self_scaled_reference_and_distinct_scales
+1 failed, 7 passed in 0.09s
