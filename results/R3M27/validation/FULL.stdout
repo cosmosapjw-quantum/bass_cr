@@ -1,0 +1,122 @@
+..........F............................................................. [ 14%]
+........................................................................ [ 29%]
+........................................................................ [ 44%]
+........................................................................ [ 59%]
+.................................F.............................s........ [ 74%]
+........................................................................ [ 89%]
+....................................................                     [100%]
+=================================== FAILURES ===================================
+_____________________ test_cupy_fft_and_strang_match_numpy _____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-cosmosapjw/pytest-32/test_cupy_fft_and_strang_match0')
+
+    def test_cupy_fft_and_strang_match_numpy(tmp_path):
+        cp=pytest.importorskip('cupy')
+        from cr_repro.tdl import TDLRunner
+        cfg={'energy_keV_per_u':100.,'b':2.,'grid':{'xlim':[-4,4],'ylim':[-4,4],'zlim':[-4,8],'dx':1.},'dt':0.12,'z_start':-3.,'z_stop':3.,'imag_steps':10,'project_nmax':1,'capture_plane':1.,'absorber_width':1.}
+        cpu=TDLRunner(dict(cfg,backend='numpy')).run(tmp_path/'cpu')
+>       gpu=TDLRunner(dict(cfg,backend='cupy')).run(tmp_path/'gpu')
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_gpu_runtime.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+cr_repro/tdl.py:83: in run
+    psi,init=self.relaxed_initial(); done=0
+             ^^^^^^^^^^^^^^^^^^^^^^
+cr_repro/tdl.py:39: in relaxed_initial
+    psi=vh*psi; psi=self.xp.fft.ifftn(kin*self.xp.fft.fftn(psi)); psi=vh*psi; psi=self.normalize(psi)
+                                          ^^^^^^^^^^^^^^^^^^^^^
+/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/lib/python3.12/site-packages/cupy/fft/_fft.py:802: in fftn
+    from cupy.cuda import cufft
+/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/lib/python3.12/site-packages/cupy/cuda/__init__.py:85: in __getattr__
+    return _importlib.import_module('cupy.cuda.cufft')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'cupy.cuda.cufft', package = None
+
+    def import_module(name, package=None):
+        """Import a module.
+    
+        The 'package' argument is required when performing a relative import. It
+        specifies the package to use as the anchor point from which to resolve the
+        relative import to an absolute import.
+    
+        """
+        level = 0
+        if name.startswith('.'):
+            if not package:
+                raise TypeError("the 'package' argument is required to perform a "
+                                f"relative import for {name!r}")
+            for character in name:
+                if character != '.':
+                    break
+                level += 1
+>       return _bootstrap._gcd_import(name[level:], package, level)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ImportError: libcufft.so.11: cannot open shared object file: No such file or directory
+
+/usr/lib/python3.12/importlib/__init__.py:90: ImportError
+_________________________ test_gpu_candidate_optional __________________________
+
+    def test_gpu_candidate_optional():
+        cp = pytest.importorskip("cupy", reason="CuPy/GPU unavailable; GPU performance unverified")
+        try:
+            if cp.cuda.runtime.getDeviceCount() < 1:
+                pytest.skip("No CUDA device; GPU performance unverified")
+        except cp.cuda.runtime.CUDARuntimeError:
+            pytest.skip("CUDA runtime/device unavailable; GPU performance unverified")
+        selected = perf.plan_benchmark(perf.hardware_inventory(include_gpu=True),
+                                       shape=(8, 8, 8), backend="cupy", steps=2, repeats=2)
+>       result = perf.benchmark(selected)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r3m19_performance.py:148: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/r3m19_performance.py:301: in benchmark
+    initial, _ = runner.relaxed_initial()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+cr_repro/r3m11.py:167: in relaxed_initial
+    psi,info=super().relaxed_initial()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+cr_repro/tdl.py:34: in relaxed_initial
+    if mode=='analytic': return psi,{'mode':'analytic','energy_Eh':self.target_energy(psi),'steps':0}
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^
+cr_repro/tdl.py:27: in target_energy
+    pk=self.xp.fft.fftn(psi); Tpsi=self.xp.fft.ifftn(0.5*self.k2*pk)
+       ^^^^^^^^^^^^^^^^^^^^^
+/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/lib/python3.12/site-packages/cupy/fft/_fft.py:802: in fftn
+    from cupy.cuda import cufft
+/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/lib/python3.12/site-packages/cupy/cuda/__init__.py:85: in __getattr__
+    return _importlib.import_module('cupy.cuda.cufft')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'cupy.cuda.cufft', package = None
+
+    def import_module(name, package=None):
+        """Import a module.
+    
+        The 'package' argument is required when performing a relative import. It
+        specifies the package to use as the anchor point from which to resolve the
+        relative import to an absolute import.
+    
+        """
+        level = 0
+        if name.startswith('.'):
+            if not package:
+                raise TypeError("the 'package' argument is required to perform a "
+                                f"relative import for {name!r}")
+            for character in name:
+                if character != '.':
+                    break
+                level += 1
+>       return _bootstrap._gcd_import(name[level:], package, level)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ImportError: libcufft.so.11: cannot open shared object file: No such file or directory
+
+/usr/lib/python3.12/importlib/__init__.py:90: ImportError
+=========================== short test summary info ============================
+FAILED tests/test_gpu_runtime.py::test_cupy_fft_and_strang_match_numpy - Impo...
+FAILED tests/test_r3m19_performance.py::test_gpu_candidate_optional - ImportE...
+2 failed, 481 passed, 1 skipped in 50.54s

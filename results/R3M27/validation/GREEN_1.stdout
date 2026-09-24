@@ -1,0 +1,40 @@
+.F.                                                                      [100%]
+=================================== FAILURES ===================================
+________________ test_canonical_commands_and_mutation_rejected _________________
+
+tmp_path = PosixPath('/tmp/pytest-of-cosmosapjw/pytest-30/test_canonical_commands_and_mu0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x74560df0b830>
+
+    def test_canonical_commands_and_mutation_rejected(tmp_path, monkeypatch):
+        cfg_path = b3.ROOT / 'configs/r3m27/B3.json'
+        monkeypatch.setattr(b3, 'runtime_identity', lambda: {'fixture': 'runtime'})
+>       plan = b3.build_plan(cfg_path, tmp_path / 'B3')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r3m27_b3_execute.py:25: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+config = PosixPath('/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m27/B3.json')
+root = PosixPath('/tmp/pytest-of-cosmosapjw/pytest-30/test_canonical_commands_and_mu0/B3')
+
+    def build_plan(config: Path, root: Path) -> dict:
+        config, root = Path(config).absolute(), Path(root).absolute()
+        if config != CONFIG or not root.is_absolute() or root == ROOT or ROOT in root.parents:
+            raise ValueError('canonical B3 config and external output root required')
+        cfg = read(config)
+        validate_b3_config(cfg)
+        if sha(FORECAST_PATH) != FORECAST or sha(B2_RESULT_PATH) != B2_RESULT:
+            raise ValueError('frozen forecast or B2 raw result bytes changed')
+        frozen = read(FORECAST_PATH)
+        payload = json.dumps(frozen['payload'], sort_keys=True, separators=(',', ':'), allow_nan=False)
+        if frozen.get('payload_sha256') != FORECAST_PAYLOAD or hashlib.sha256(payload.encode()).hexdigest() != FORECAST_PAYLOAD:
+            raise ValueError('frozen forecast payload changed')
+        head = git('rev-parse', 'HEAD')
+        if git('merge-base', PARENT, head) != PARENT or head == PARENT:
+>           raise ValueError('B3 coordinator must be committed on descendant branch')
+E           ValueError: B3 coordinator must be committed on descendant branch
+
+scripts/r3m27_b3_execute.py:171: ValueError
+=========================== short test summary info ============================
+FAILED tests/test_r3m27_b3_execute.py::test_canonical_commands_and_mutation_rejected
+1 failed, 2 passed in 0.26s

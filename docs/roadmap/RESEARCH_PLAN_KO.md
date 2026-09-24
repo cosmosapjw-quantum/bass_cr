@@ -203,3 +203,23 @@ GPU parity, tiny oracle로 검증한 matrix-free 비Hermitian full-H action,
 상한이다. 신규 full collision/preparation/finer h 예산은 0이다. 다음
 production propagator 선택은 같은 정확도에서 측정한 비용을 근거로 하며
 현재 성능 후보를 frozen production에 자동 적용하지 않는다.
+
+## R3M27 — B3 실측 시간 추정 완료, 다음은 공간·h_dt
+
+R3M26 사전 예측을 수정하지 않고 exact B3 preparation 1회와 witnessed 7172-step
+full collision 1회를 실행했다. 57개 immutable generation을 모두 보존하고 해시로
+재검증했다. B1→B2와 B2→B3의 fine increment는 P1–P3 모두 같은 부호로
+수축한다. B3 중앙값 기준 pair와 경험적 `U_time=2 max(E_model,D_hold)`가
+세 채널 모두 .10% 이내여서
+`TEMPORAL_ESTIMATE_VALIDATED_FOR_FIXED_H_SELECTED_SPANS`다. 이는
+비인증 경험 추정이며 production PASS나 전체 N1 완료가 아니다.
+
+다음 canonical node는 `N1_TDL_PRODUCTION_H_SPATIAL_H_DT_BUDGET` 하나다.
+새 실험 전에 같은 물리적 horizon과 실제 dt에서 h=.25/.20 공간 차이를
+어떻게 측정할지, projectile subcell translation 및 h-dt 상호작용을
+어떻게 한 번만 계상할지 사전 등록한다. 기존 dt=.025 P3 h 차이 약
+2.9528%와 h-dt interaction 약 1.0445%는 .30% 공간 배분을
+닫지 못한다. 자원·판별력 계약 전에는 새 finer-h collision을 시작하지
+않는다. 공간 다음에는 preparation, box/CAP/finite-time, all-bound,
+b-quadrature/tail, 50/225 keV/u 순서로 동일 모형의 numerical budget을
+닫는다. 현재 production HOLD, all-bound OPEN, b-grid NO_GO다.
