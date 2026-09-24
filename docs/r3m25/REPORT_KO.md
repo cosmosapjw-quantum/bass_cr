@@ -26,6 +26,8 @@ Self-scaled 1% 한계는 `1.528013292750591e-9`; `d16,32`와 독립 반복 차�
 
 최종 수정 후 R3M25 전용 시험 14 PASS, 전체 `tests` 436 PASS, compileall/CLI PASS, CUDA import/runtime PASS였다. `HOST_VALIDATION_2.json`에서 exit/contract/result/manifest seal, 입력·warmup binding, geometry, 작업량, reserve, 실제 독립성, 국소 수학 gate와 production hold 등 25개 독립 read-only check가 모두 PASS다. `ATTEMPT_2/RESULT.json`, `MANIFEST.json`, `COMPLETED.json`의 create-only 봉인을 확인했고 실패 영수증은 없다. 원본 첫 실패 영수증은 별도로 남아 있다.
 
+게시 commit `3495713b449e9f0290878c78247114bf03e51c7d`에 대한 별도 `gpt-6-astra`/`xhigh` 읽기 전용 결과 검토는 현재 범위의 BLOCKER/MAJOR를 찾지 않았다. 62개 frozen source hash와 봉인 연결, scalar gate, n8 반복의 실제 작업 변경(288→512 matvec), t=0 geometry 및 첫 실패를 포함한 총 2,524 matvec를 확인했다. 검토자는 endpoint 배열 재계산, 연속 자원 측정, GPU 재실행 또는 원격 게시 검증을 하지 않았다. 원문은 `results/R3M25/INDEPENDENT_RESULT_REVIEW.txt`에 보존한다.
+
 ## 다음 canonical node
 
 `N1_TDL_PRODUCTION_H_B3_FULL_COLLISION_CONTRACT_AND_TIME_REFINEMENT` 하나다. B3는 이번 작업에서 실행하지 않았다. 같은 h/box/CAP/target/projector/preparation bytes에서 B2 actual dt의 절반과 7,172 step을 쓰는 새 계약을 먼저 고정해야 한다. B2→B3 channel pair, 4-point temporal model, leave-one-out 일치성 및 독립 reference/defect evidence를 함께 평가한다. 예측 P1/P2/P3 `0.0060884835814/0.0075857897381/0.0080882888941`은 acceptance target이 아니다.
