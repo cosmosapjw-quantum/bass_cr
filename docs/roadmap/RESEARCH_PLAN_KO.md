@@ -1,8 +1,14 @@
 # 독립 H+ + H(1s) bound capture 연구계획
 
-## R3M26 현재 실행 계획 — 2026-09-24
+## R3M28 현재 frontier — 2026-09-24
 
-이 절과 `DAG.json`의 R3M26 frontier가 현재 계획이다. 아래 R3M15–R3M19 절은 당시의 등록·판정 기록으로 보존하며, 거기에 적힌 '다음 node'를 현재 실행 지시로 사용하지 않는다. 현재 입력은 R3M25 exact `90d6cbad25e4bc49e9563f8721fdc408761b31c7`다.
+R3M27은 고정 h=.20 selected spans의 시간 추정을 검증했다. R3M28은 같은 실제 dt와 물리 horizon의 A3/B3 비교를 한 건 실행했다. 세 채널 raw 공간 pair 차이 3.03–3.29%가 사전 0.30% screen을 초과해 `SPATIAL_PAIR_SCREEN_NO_GO`다. 이는 continuum 공간오차 하한이나 전체 오차 추정이 아니다. 보고서와 typed ledger는 [R3M28 보고서](../r3m28/REPORT_KO.md) 및 `ERROR_BUDGET.json`에 있다.
+
+다음 canonical node는 `N1_TDL_PRODUCTION_H_SPATIAL_DISCRETIZATION_DISCRIMINATOR` **하나**다. point-Coulomb 공간 이산화와 projectile subcell phase의 영향을 사전 등록한 소규모 독립 진단으로 구분하고 다음 한 가지 공간 전략을 선택한다. A3/B3 반복, 자동 finer h, 새 full collision, representation 변경은 이 계획 갱신에 포함되지 않는다. Production HOLD, all-bound OPEN, b-grid NO_GO이며 준비/경계/최종시간도 OPEN이다.
+
+## R3M26 당시 실행 계획 — 2026-09-24
+
+이 절은 당시의 등록·판정 기록으로 보존한다. 아래 R3M15–R3M27 절에 적힌 '다음 node'는 현재 실행 지시가 아니다. 당시 입력은 R3M25 exact `90d6cbad25e4bc49e9563f8721fdc408761b31c7`였다.
 
 production 목표를 **명시한 원자 모형의 내적 일관성과 수치적 충실도**로 확정한다. 특정 논문의 private data·그림 값 일치를 필수 조건으로 삼지 않는다. 원래 50/100/225 keV/u all-bound 단면적 목표는 유지한다. n≤3 단일-b 검증은 중간 산출물이다. 이론 정초는 `../r3m26/MODEL_FOUNDATION_KO.md`, 수치 전략은 `../r3m26/NUMERICAL_STRATEGY_KO.md`에 있다.
 

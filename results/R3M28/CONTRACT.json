@@ -1,0 +1,2155 @@
+{
+  "automatic_retry": false,
+  "canonical_node": "N1_TDL_PRODUCTION_H_SPATIAL_H_DT_BUDGET",
+  "commands": [
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m15_resource_probe.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/resource.json"
+      ],
+      "phase": "resource"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m13_initial_state_pair.py",
+        "prepare",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation"
+      ],
+      "phase": "prepare"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 1,
+      "done": 128,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g000128",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 1,
+      "done": 128,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 2,
+      "done": 256,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g000256",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 2,
+      "done": 256,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 3,
+      "done": 384,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g000384",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 3,
+      "done": 384,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 4,
+      "done": 512,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g000512",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 4,
+      "done": 512,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 5,
+      "done": 640,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g000640",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 5,
+      "done": 640,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 6,
+      "done": 768,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g000768",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 6,
+      "done": 768,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 7,
+      "done": 896,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g000896",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 7,
+      "done": 896,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 8,
+      "done": 1024,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g001024",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 8,
+      "done": 1024,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 9,
+      "done": 1152,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g001152",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 9,
+      "done": 1152,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 10,
+      "done": 1280,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g001280",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 10,
+      "done": 1280,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 11,
+      "done": 1408,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g001408",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 11,
+      "done": 1408,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 12,
+      "done": 1536,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g001536",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 12,
+      "done": 1536,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 13,
+      "done": 1664,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g001664",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 13,
+      "done": 1664,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 14,
+      "done": 1792,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g001792",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 14,
+      "done": 1792,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 15,
+      "done": 1920,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g001920",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 15,
+      "done": 1920,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 16,
+      "done": 2048,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g002048",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 16,
+      "done": 2048,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 17,
+      "done": 2176,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g002176",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 17,
+      "done": 2176,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 18,
+      "done": 2304,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g002304",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 18,
+      "done": 2304,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 19,
+      "done": 2432,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g002432",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 19,
+      "done": 2432,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 20,
+      "done": 2560,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g002560",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 20,
+      "done": 2560,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 21,
+      "done": 2688,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g002688",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 21,
+      "done": 2688,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 22,
+      "done": 2816,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g002816",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 22,
+      "done": 2816,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 23,
+      "done": 2944,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g002944",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 23,
+      "done": 2944,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 24,
+      "done": 3072,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g003072",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 24,
+      "done": 3072,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 25,
+      "done": 3200,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g003200",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 25,
+      "done": 3200,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 26,
+      "done": 3328,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g003328",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 26,
+      "done": 3328,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 27,
+      "done": 3456,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g003456",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 27,
+      "done": 3456,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 28,
+      "done": 3584,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g003584",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 28,
+      "done": 3584,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 29,
+      "done": 3712,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g003712",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 29,
+      "done": 3712,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 30,
+      "done": 3840,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g003840",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 30,
+      "done": 3840,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 31,
+      "done": 3968,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g003968",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 31,
+      "done": 3968,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 32,
+      "done": 4096,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g004096",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 32,
+      "done": 4096,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 33,
+      "done": 4224,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g004224",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 33,
+      "done": 4224,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 34,
+      "done": 4352,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g004352",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 34,
+      "done": 4352,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 35,
+      "done": 4480,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g004480",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 35,
+      "done": 4480,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 36,
+      "done": 4608,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g004608",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 36,
+      "done": 4608,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 37,
+      "done": 4736,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g004736",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 37,
+      "done": 4736,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 38,
+      "done": 4864,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g004864",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 38,
+      "done": 4864,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 39,
+      "done": 4992,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g004992",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 39,
+      "done": 4992,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 40,
+      "done": 5120,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g005120",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 40,
+      "done": 5120,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 41,
+      "done": 5248,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g005248",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 41,
+      "done": 5248,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 42,
+      "done": 5376,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g005376",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 42,
+      "done": 5376,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 43,
+      "done": 5504,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g005504",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 43,
+      "done": 5504,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 44,
+      "done": 5632,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g005632",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 44,
+      "done": 5632,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 45,
+      "done": 5760,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g005760",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 45,
+      "done": 5760,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 46,
+      "done": 5888,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g005888",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 46,
+      "done": 5888,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 47,
+      "done": 6016,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g006016",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 47,
+      "done": 6016,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 48,
+      "done": 6144,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g006144",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 48,
+      "done": 6144,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 49,
+      "done": 6272,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g006272",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 49,
+      "done": 6272,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 50,
+      "done": 6400,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g006400",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 50,
+      "done": 6400,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 51,
+      "done": 6528,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g006528",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 51,
+      "done": 6528,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 52,
+      "done": 6656,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g006656",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 52,
+      "done": 6656,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 53,
+      "done": 6784,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g006784",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 53,
+      "done": 6784,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 54,
+      "done": 6912,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g006912",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 54,
+      "done": 6912,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 55,
+      "done": 7040,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g007040",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 55,
+      "done": 7040,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 56,
+      "done": 7168,
+      "phase": "collision",
+      "steps": 128
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g007168",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 56,
+      "done": 7168,
+      "phase": "snapshot"
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m14_collision_initial_witness.py",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+        "--prepared",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/preparation",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--max-steps",
+        "128"
+      ],
+      "chunk": 57,
+      "done": 7172,
+      "phase": "collision",
+      "steps": 4
+    },
+    {
+      "argv": [
+        "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_checkpoint_guard.py",
+        "snapshot",
+        "--run",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/collision",
+        "--out",
+        "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3/generations/g007172",
+        "--config",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json"
+      ],
+      "chunk": 57,
+      "done": 7172,
+      "phase": "snapshot"
+    }
+  ],
+  "config": {
+    "absorber_power": 0.125,
+    "absorber_reference_dt": 0.05,
+    "absorber_width": 4.0,
+    "b": 2.0,
+    "backend": "cupy",
+    "capture_plane": 30.0,
+    "checkpoint_stride": 100,
+    "dt": 0.00625,
+    "energy_keV_per_u": 100.0,
+    "grid": {
+      "dx": 0.25,
+      "xlim": [
+        -30,
+        40
+      ],
+      "ylim": [
+        -30,
+        30
+      ],
+      "zlim": [
+        -30,
+        90
+      ]
+    },
+    "imag_dt": 0.00625,
+    "imag_steps": 4800,
+    "initial_state": "imag_time",
+    "project_nmax": 3,
+    "projection_slab_x": 2,
+    "z_start": -30.0,
+    "z_stop": 60.0
+  },
+  "config_path": "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/configs/r3m28/A3.json",
+  "config_sha256": "4239726545da4b715f1e325420b8ed704e84cd3810f5fd1912a48a99cbac55c1",
+  "design_sha256": "eb8157a58cf9f5765af91af328c207f7921cc19cf3f16fc90067538e66372bc6",
+  "exact_preparation_limit": 1,
+  "h_dt_raw_interaction_counted_as_error_estimate": false,
+  "hypothesis": "One same-horizon A3 point discriminates the spatial .30% pair screen and raw h-dt interaction.",
+  "input_hashes": {
+    "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/results/R3M16/collisions/A1_result.json": "c2f19c93020f11e9e56e1045f733201de826043aaf6928a74a7871d154e0c775",
+    "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/results/R3M16/collisions/B1_result.json": "ae4f70261f866a601a51a80c5d00a1fde1394644c3808558e91519bbf124f11f",
+    "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/results/R3M27/B3_TEMPORAL_EVALUATION.json": "8ead001d4a0cb45f92f82ae9722ad96b420dff80b1325d29124f39eaeb7529dc",
+    "/mnt/sn850x2t/bass_cr_r3m16_20260922/A1/preparation/initial.npy": "08595a1a42900da0a86f0401d28e98f79c0663524a8222d3c51756223a13ee8e"
+  },
+  "new_full_collision_limit": 1,
+  "numerical": {
+    "actual_dt": 0.00624946176119497,
+    "chunk_count": 57,
+    "chunk_max_steps": 128,
+    "fft_kinetic": {
+      "axis_kmax_au_inverse": [
+        12.566370614359172,
+        12.56637061435917,
+        12.56637061435917
+      ],
+      "axis_parity": [
+        "even",
+        "even",
+        "even"
+      ],
+      "formula": "kmax_i=2*pi*floor(n_i/2)/(n_i*h); Tmax=sum(kmax_i^2)/2",
+      "interpretation": "operator-bandwidth diagnostic; no universal state-dependent splitting error or stability certificate",
+      "maximum_kinetic_energy_Eh": 236.87050562614453,
+      "maximum_kinetic_phase_radians": 1.4803131672655083,
+      "universal_CFL_stability_limit_claimed": false
+    },
+    "grid_points": 32256000,
+    "grid_shape": [
+      280,
+      240,
+      480
+    ],
+    "last_chunk_steps": 4,
+    "nstep": 7172,
+    "physical_horizon_au": 44.821139751290325,
+    "projectile": {
+      "axis_phases_xy": [
+        {
+          "cell_center_phase_fraction": 0.5,
+          "coincides_with_cell_center_to_coordinate_roundoff": false,
+          "coordinate_roundoff_tolerance_over_h": 4.5297099404706387e-13,
+          "distance_a0": 0.125,
+          "distance_over_h": 0.5,
+          "nearest_index": 128
+        },
+        {
+          "cell_center_phase_fraction": 0.5,
+          "coincides_with_cell_center_to_coordinate_roundoff": false,
+          "coordinate_roundoff_tolerance_over_h": 4.263256414560601e-13,
+          "distance_a0": 0.125,
+          "distance_over_h": 0.5,
+          "nearest_index": 120
+        }
+      ],
+      "displacement_per_step_a0": 0.012548800892359175,
+      "displacement_per_step_over_h": 0.0501952035694367,
+      "interpretation": "geometric sampling diagnostics, not a capture-probability error estimate",
+      "mesh_phase_matches_target_transverse": true,
+      "minimum_sample_distance_over_continuous_path_a0": 0.1767766952966369,
+      "minimum_transverse_distance_a0": 0.1767766952966369,
+      "minimum_transverse_distance_over_h": 0.7071067811865476,
+      "nearest_transverse_axis_distance_over_h": [
+        0.5,
+        0.5
+      ],
+      "path_contains_z_cell_center": true,
+      "steps_per_grid_crossing": 19.92222222222222
+    },
+    "requested_dt": 0.00625,
+    "speed_au": 2.00798106651023,
+    "target": {
+      "axis_phases": [
+        {
+          "cell_center_phase_fraction": 0.5,
+          "coincides_with_cell_center_to_coordinate_roundoff": false,
+          "coordinate_roundoff_tolerance_over_h": 4.263256414560601e-13,
+          "distance_a0": 0.125,
+          "distance_over_h": 0.5,
+          "nearest_index": 120
+        },
+        {
+          "cell_center_phase_fraction": 0.5,
+          "coincides_with_cell_center_to_coordinate_roundoff": false,
+          "coordinate_roundoff_tolerance_over_h": 4.263256414560601e-13,
+          "distance_a0": 0.125,
+          "distance_over_h": 0.5,
+          "nearest_index": 120
+        },
+        {
+          "cell_center_phase_fraction": 0.5,
+          "coincides_with_cell_center_to_coordinate_roundoff": false,
+          "coordinate_roundoff_tolerance_over_h": 4.263256414560601e-13,
+          "distance_a0": 0.125,
+          "distance_over_h": 0.5,
+          "nearest_index": 120
+        }
+      ],
+      "nearest_sample_radius_a0": 0.21650635094610965
+    }
+  },
+  "output_root": "/mnt/sn850x2t/bass_cr_r3m28_20260924/A3",
+  "pair_screen_is_validated_error_estimate": false,
+  "parent_commit": "1ff87bf27a18fd0acfe8cffe788ae07deac7650a",
+  "production_admission": false,
+  "resource_caps": {
+    "base_plan_disk_required_free_bytes": 85899345920,
+    "command_seconds_cap": {
+      "collision": 3600,
+      "prepare": 3600,
+      "resource": 600,
+      "snapshot": 1800
+    },
+    "cpu_workers": 1,
+    "disk_remaining_floor_bytes": 107374182400,
+    "generation_state_bytes": 29417479296,
+    "gpu_free_reserve_bytes": 2147483648,
+    "host_available_reserve_bytes": 8589934592,
+    "max_total_seconds": 14400,
+    "retained_generations": 57,
+    "state_bytes": 516096128
+  },
+  "runtime": {
+    "cuda_driver_api": 13020,
+    "cuda_runtime": 12090,
+    "cupy": "14.2.0",
+    "device": "NVIDIA GeForce RTX 3090",
+    "executable": "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+    "numpy": "2.5.3",
+    "python": "3.12.3",
+    "scipy": "1.18.1"
+  },
+  "schema": "BASS_CR_R3M28_A3_CONTRACT_V1",
+  "source_commit": "bbcb31b2a4e50e397ac2e5b8cb9d029ef1f5111a",
+  "source_digest": "581ff84930bb862efafdfec5d39d5b25aebf9297ce7ce45f833a5abe125b2a5b",
+  "source_hashes": {
+    "configs/r3m28/A3.json": "4239726545da4b715f1e325420b8ed704e84cd3810f5fd1912a48a99cbac55c1",
+    "scripts/r3m13_initial_state_pair.py": "6e5dab152ec89a3145268d349b4cb0dd5dcec6b8566f0ac5a746e258317a3535",
+    "scripts/r3m14_collision_initial_witness.py": "f4137f1e2c7562e532e812481673cd9bad4877a69e93b84bbfae9b769fa22e92",
+    "scripts/r3m15_resource_probe.py": "61a35e602a4e5df563ea1b32f9f682f6156b52bd1bd3f047d69e792556df338f",
+    "scripts/r3m17_checkpoint_guard.py": "83ada4d8cfa408e3508900b223e539483efed7d9ed3fa68277c54c92c1430f53",
+    "scripts/r3m27_b3_execute.py": "3c62fd6e876cdb683a97a699001761465a4feb1460f8ecdea1967dd6ea81684d",
+    "scripts/r3m28_execute.py": "cbeba6dd6129f0b0ece0eae29c680e2e4821fce5dc53af43b180c27affd93230",
+    "scripts/r3m28_spatial.py": "790e68568d712e42303e1e9cb12f13f2a4d5e1c4c2fdf4304c2879e4da68df1d",
+    "tests/test_r3m28_execute.py": "0265f4bb2c4b12024d060763ba0ca0a2cb22f09c59794551b409b7e8914ada4b",
+    "tests/test_r3m28_spatial.py": "8fe8a99d405f5d6ca31438931f3ba87496be61ad6b6e0700ee3d83dd61df57d8"
+  },
+  "spatial_pair_screen_relative": 0.003
+}

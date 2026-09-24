@@ -1,0 +1,195 @@
+........................................................................ [ 14%]
+........................................................................ [ 29%]
+........................................................................ [ 43%]
+.......................F................................................ [ 58%]
+............................F..F.FF..................................... [ 73%]
+........................................................................ [ 87%]
+...........................................................              [100%]
+=================================== FAILURES ===================================
+_______________________ test_cli_create_only_and_bounded _______________________
+
+tmp_path = PosixPath('/tmp/pytest-of-cosmosapjw/pytest-38/test_cli_create_only_and_bound0')
+
+    def test_cli_create_only_and_bounded(tmp_path):
+        output = tmp_path / "oracle.json"
+        argv = [sys.executable, str(ROOT/"scripts/r3m17_reference.py"), "--out", str(output), "--shape", "2", "2", "2"]
+        result = subprocess.run(argv, cwd=ROOT, text=True, capture_output=True)
+>       assert result.returncode == 0, result.stderr
+E       AssertionError: Traceback (most recent call last):
+E           File "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m17_reference.py", line 19, in <module>
+E             from cr_repro.r3m11 import ControlledTDLRunner, source_digest
+E         ModuleNotFoundError: No module named 'cr_repro.r3m11'
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python', '/home/cosmosapjw/Dropbox/bianchi/BASS...m cr_repro.r3m11 import ControlledTDLRunner, source_digest\nModuleNotFoundError: No module named \'cr_repro.r3m11\'\n').returncode
+
+tests/test_r3m17_reference.py:127: AssertionError
+___________ test_timing_and_accuracy_report_do_not_admit_production ____________
+
+    def test_timing_and_accuracy_report_do_not_admit_production():
+        selected = plan(steps=2, repeats=2)
+>       result = perf.benchmark(selected)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r3m19_performance.py:84: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = {'schema': 'BASS_CR_R3M19_BOUNDED_PERFORMANCE_V1', 'status': 'PLAN_ONLY_NOT_EXECUTED', 'inventory': {'cpu': {'affinity...OT_PROBED'}}, 'request': {'shape': [8, 10, 12], 'backend': 'numpy', 'candidate': 'buffer_reuse', 'steps': 2, ...}, ...}
+
+    def benchmark(plan):
+        """Execute a validated bounded plan; no `.run()` or checkpoint writer call."""
+        expected = plan_benchmark(plan["inventory"], **plan["request"])
+        if expected != plan:
+            raise ValueError("plan identity/configuration changed")
+        if source_digest() != FROZEN_SOURCE:
+            raise ValueError("frozen numerical source mismatch")
+        request = plan["request"]
+        gpu = request["backend"] == "cupy"
+        actual_inventory = hardware_inventory(include_gpu=gpu)
+        plan_benchmark(actual_inventory, **request)  # Recheck current resource availability before runner allocation.
+        cp = importlib.import_module("cupy") if gpu else None
+        from contextlib import nullcontext
+>       from threadpoolctl import threadpool_info, threadpool_limits
+E       ModuleNotFoundError: No module named 'threadpoolctl'
+
+scripts/r3m19_performance.py:286: ModuleNotFoundError
+__________ test_output_is_exclusive_and_failure_evidence_is_retained ___________
+
+tmp_path = PosixPath('/tmp/pytest-of-cosmosapjw/pytest-38/test_output_is_exclusive_and_f0')
+
+    def test_output_is_exclusive_and_failure_evidence_is_retained(tmp_path):
+        out = tmp_path / "run"
+>       perf.execute_benchmark(plan(steps=1, repeats=1), out)
+
+tests/test_r3m19_performance.py:118: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/r3m19_performance.py:381: in execute_benchmark
+    result = benchmark(plan)
+             ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = {'schema': 'BASS_CR_R3M19_BOUNDED_PERFORMANCE_V1', 'status': 'PLAN_ONLY_NOT_EXECUTED', 'inventory': {'cpu': {'affinity...OT_PROBED'}}, 'request': {'shape': [8, 10, 12], 'backend': 'numpy', 'candidate': 'buffer_reuse', 'steps': 1, ...}, ...}
+
+    def benchmark(plan):
+        """Execute a validated bounded plan; no `.run()` or checkpoint writer call."""
+        expected = plan_benchmark(plan["inventory"], **plan["request"])
+        if expected != plan:
+            raise ValueError("plan identity/configuration changed")
+        if source_digest() != FROZEN_SOURCE:
+            raise ValueError("frozen numerical source mismatch")
+        request = plan["request"]
+        gpu = request["backend"] == "cupy"
+        actual_inventory = hardware_inventory(include_gpu=gpu)
+        plan_benchmark(actual_inventory, **request)  # Recheck current resource availability before runner allocation.
+        cp = importlib.import_module("cupy") if gpu else None
+        from contextlib import nullcontext
+>       from threadpoolctl import threadpool_info, threadpool_limits
+E       ModuleNotFoundError: No module named 'threadpoolctl'
+
+scripts/r3m19_performance.py:286: ModuleNotFoundError
+_________________________ test_gpu_candidate_optional __________________________
+
+    def test_gpu_candidate_optional():
+        cp = pytest.importorskip("cupy", reason="CuPy/GPU unavailable; GPU performance unverified")
+        try:
+            if cp.cuda.runtime.getDeviceCount() < 1:
+                pytest.skip("No CUDA device; GPU performance unverified")
+        except cp.cuda.runtime.CUDARuntimeError:
+            pytest.skip("CUDA runtime/device unavailable; GPU performance unverified")
+        selected = perf.plan_benchmark(perf.hardware_inventory(include_gpu=True),
+                                       shape=(8, 8, 8), backend="cupy", steps=2, repeats=2)
+>       result = perf.benchmark(selected)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r3m19_performance.py:148: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = {'schema': 'BASS_CR_R3M19_BOUNDED_PERFORMANCE_V1', 'status': 'PLAN_ONLY_NOT_EXECUTED', 'inventory': {'schema': 'BASS_C...libc2.39', ...}, 'request': {'shape': [8, 8, 8], 'backend': 'cupy', 'candidate': 'buffer_reuse', 'steps': 2, ...}, ...}
+
+    def benchmark(plan):
+        """Execute a validated bounded plan; no `.run()` or checkpoint writer call."""
+        expected = plan_benchmark(plan["inventory"], **plan["request"])
+        if expected != plan:
+            raise ValueError("plan identity/configuration changed")
+        if source_digest() != FROZEN_SOURCE:
+            raise ValueError("frozen numerical source mismatch")
+        request = plan["request"]
+        gpu = request["backend"] == "cupy"
+        actual_inventory = hardware_inventory(include_gpu=gpu)
+        plan_benchmark(actual_inventory, **request)  # Recheck current resource availability before runner allocation.
+        cp = importlib.import_module("cupy") if gpu else None
+        from contextlib import nullcontext
+>       from threadpoolctl import threadpool_info, threadpool_limits
+E       ModuleNotFoundError: No module named 'threadpoolctl'
+
+scripts/r3m19_performance.py:286: ModuleNotFoundError
+____________ test_gpu_monitors_stay_outside_event_timed_trajectory _____________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7baa4c7dc8f0>
+
+    def test_gpu_monitors_stay_outside_event_timed_trajectory(monkeypatch):
+        """Fake event boundary tests instrumentation scope, not GPU execution/speed."""
+        inv = inventory()
+        inv["gpu"] = dict(status="AVAILABLE", device_free_bytes=8 * 1024**3,
+                          pool_reserved_bytes=0)
+        selected = perf.plan_benchmark(inv, shape=(8, 8, 8), backend="cupy", steps=3, repeats=2)
+        event_state = {"timed": False, "created": 0, "counter_calls": 0}
+    
+        class Event:
+            def __init__(self):
+                self.start = event_state["created"] % 2 == 0
+                event_state["created"] += 1
+            def record(self):
+                event_state["timed"] = self.start
+            def synchronize(self):
+                pass
+    
+        fake_cp = SimpleNamespace(asnumpy=np.asarray,
+            cuda=SimpleNamespace(Event=Event, get_elapsed_time=lambda *args: 1.,
+                                 get_current_stream=lambda: SimpleNamespace(synchronize=lambda: None)))
+        original_import = perf.importlib.import_module
+        monkeypatch.setattr(perf.importlib, "import_module",
+                            lambda name: fake_cp if name == "cupy" else original_import(name))
+        monkeypatch.setattr(perf, "hardware_inventory", lambda **kwargs: inv)
+        monkeypatch.setattr(perf, "ControlledTDLRunner",
+                            lambda cfg: ControlledTDLRunner(dict(cfg, backend="numpy")))
+        monkeypatch.setattr(perf, "_gpu_limits", lambda *args: nullcontext())
+    
+        def counters(cp):
+            assert not event_state["timed"], "memory monitoring contaminated CUDA event interval"
+            event_state["counter_calls"] += 1
+            return dict(device_free_bytes=8 * 1024**3)
+    
+        monkeypatch.setattr(perf, "_gpu_counters", counters)
+>       result = perf.benchmark(selected)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r3m19_performance.py:187: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+plan = {'schema': 'BASS_CR_R3M19_BOUNDED_PERFORMANCE_V1', 'status': 'PLAN_ONLY_NOT_EXECUTED', 'inventory': {'cpu': {'affinity...ved_bytes': 0}}, 'request': {'shape': [8, 8, 8], 'backend': 'cupy', 'candidate': 'buffer_reuse', 'steps': 3, ...}, ...}
+
+    def benchmark(plan):
+        """Execute a validated bounded plan; no `.run()` or checkpoint writer call."""
+        expected = plan_benchmark(plan["inventory"], **plan["request"])
+        if expected != plan:
+            raise ValueError("plan identity/configuration changed")
+        if source_digest() != FROZEN_SOURCE:
+            raise ValueError("frozen numerical source mismatch")
+        request = plan["request"]
+        gpu = request["backend"] == "cupy"
+        actual_inventory = hardware_inventory(include_gpu=gpu)
+        plan_benchmark(actual_inventory, **request)  # Recheck current resource availability before runner allocation.
+        cp = importlib.import_module("cupy") if gpu else None
+        from contextlib import nullcontext
+>       from threadpoolctl import threadpool_info, threadpool_limits
+E       ModuleNotFoundError: No module named 'threadpoolctl'
+
+scripts/r3m19_performance.py:286: ModuleNotFoundError
+=========================== short test summary info ============================
+FAILED tests/test_r3m17_reference.py::test_cli_create_only_and_bounded - Asse...
+FAILED tests/test_r3m19_performance.py::test_timing_and_accuracy_report_do_not_admit_production
+FAILED tests/test_r3m19_performance.py::test_output_is_exclusive_and_failure_evidence_is_retained
+FAILED tests/test_r3m19_performance.py::test_gpu_candidate_optional - ModuleN...
+FAILED tests/test_r3m19_performance.py::test_gpu_monitors_stay_outside_event_timed_trajectory
+5 failed, 486 passed in 58.02s

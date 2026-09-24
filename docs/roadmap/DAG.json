@@ -1,5 +1,5 @@
 {
-  "schema": "BASS_CR_RESEARCH_DAG_V2_R3M27",
+  "schema": "BASS_CR_RESEARCH_DAG_V2_R3M28",
   "stages": [
     "N0",
     "N1",
@@ -44,7 +44,7 @@
       ],
       "exit_criterion": "Declared finite-span model observable satisfies preparation, spatial, real-time, box/CAP/finite-time budgets by admitted conservative estimates or optional rigorous bounds, including h_dt interaction and independent implementation evidence.",
       "failure_branch": "Use one preregistered discriminating experiment for the failed dimension; do not add unrelated local audits or automatically refine indefinitely.",
-      "status": "R3M27_FIXED_H_SELECTED_SPANS_TEMPORAL_ESTIMATE_VALIDATED_OTHER_N1_BUDGETS_OPEN",
+      "status": "R3M28_SPATIAL_PAIR_SCREEN_NO_GO_TIME_FIXED_H_SELECTED_SPANS_VALIDATED_OTHER_BUDGETS_OPEN",
       "scientific_completion": false,
       "completed_subwork": [
         "R3M15 A/B/C three witnessed collisions",
@@ -61,7 +61,8 @@
         "R3M21-R3M24 production full-H reference infrastructure, resource and audit guards; historical failures preserved",
         "R3M25 actual t=0 four-B2-step local CF4/reference pass: 2523 matvec, 5046 FFT, 585.053 s; no global time certificate",
         "R3M26 dimensional model/ETF/projector/CAP derivation; model-based production criteria and prospective held-out B3 estimator",
-        "R3M27 exact B3 requested-dt=.00625: one preparation, one witnessed 7172-step collision, 57 immutable generations, frozen held-out temporal estimator PASS for P1-P3; noncertified, fixed-h selected spans only"
+        "R3M27 exact B3 requested-dt=.00625: one preparation, one witnessed 7172-step collision, 57 immutable generations, frozen held-out temporal estimator PASS for P1-P3; noncertified, fixed-h selected spans only",
+        "R3M28 one exact A3 h=.25 dt=.00625 witnessed collision, 57 immutable generations; matched B3 fine-horizon raw pair P1-P3 3.03-3.29%, preregistered spatial .30% screen NO_GO; raw h-dt interaction measured but unadmitted"
       ],
       "open_subwork": [
         "Spatial .30% budget open; old dt=.025 P3 h gap 2.9528%, h_dt interaction 1.0445%; fine-dt spatial gap unmeasured",
@@ -264,27 +265,25 @@
     ]
   ],
   "next_canonical_node": {
-    "id": "N1_TDL_PRODUCTION_H_SPATIAL_H_DT_BUDGET",
+    "id": "N1_TDL_PRODUCTION_H_SPATIAL_DISCRETIZATION_DISCRIMINATOR",
     "status": "READY_FOR_BOUNDED_CONTRACT_NOT_RUN",
     "input_authority": [
-      "docs/r3m27/REPORT_KO.md",
-      "results/R3M27/B3_TEMPORAL_EVALUATION.json",
-      "results/R3M27/CURRENT_SELECTED_P3_EVALUATION.json",
-      "results/R3M16/COLLISION_MATRIX.json",
-      "docs/r3m26/SCIENTIFIC_CONTRACT.md"
+      "docs/r3m28/REPORT_KO.md",
+      "results/R3M28/SPATIAL_EVALUATION.json",
+      "results/R3M28/FULL_GENERATION_AUDIT.json",
+      "results/R3M28/CURRENT_SELECTED_P3_BUDGET_EVALUATION.json"
     ],
-    "trigger": "R3M27 fixed-h selected-span P1-P3 temporal estimate validated within .10%; spatial .30% and h_dt interaction remain open.",
-    "next_executable_action": "Pre-register same-physical-horizon h=.25/.20 comparison at adequately refined actual dt, including projectile subcell translation sensitivity and h_dt accounting once. Bound resource and discriminating power before any new full collision; do not run it in R3M27.",
-    "exit_criterion": "Evidence supports a conservative full spatial .30% estimate for the same selected-span quantity, with h_dt counted exactly once, or records a quantified NO_GO. Preparation and CAP/box/final-time remain separate later nodes.",
-    "new_full_collisions_allowed_in_R3M27": 0,
+    "trigger": "A3/B3 actual-dt matched raw spatial gaps are 3.03-3.29%, above the preregistered .30% necessary pair screen; time remains validated only at fixed h selected spans.",
+    "next_executable_action": "Preregister one bounded discriminator of point-Coulomb spatial discretization and projectile subcell translation using independent tiny/local reference and retained checkpoints; select one spatial strategy based on measured cause, without repeating A3/B3 or auto-running finer h.",
+    "exit_criterion": "Identify a falsifiable spatial-error mechanism and one next production-relevant strategy, or record a resource/numerical blocker; do not infer continuum bound from two grids.",
+    "automatic_full_collision_allowed": false,
     "automatic_finer_h_allowed": false,
     "automatic_representation_change_allowed": false,
-    "automatic_B4_allowed": false,
     "production_admission": "HOLD",
     "all_bound": "OPEN",
     "b_grid": "NO_GO"
   },
-  "current_authority": "docs/r3m27/REPORT_KO.md",
+  "current_authority": "docs/r3m28/REPORT_KO.md",
   "literature_exact_match_required": false,
   "formal_global_certificate_required_for_model_conditional_release": false
 }
