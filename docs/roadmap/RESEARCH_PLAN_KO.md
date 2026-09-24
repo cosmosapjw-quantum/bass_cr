@@ -1,6 +1,12 @@
 # 독립 H+ + H(1s) bound capture 연구계획
 
-## R3M28 현재 frontier — 2026-09-24
+## R3M29 현재 frontier — 2026-09-24
+
+R3M29는 새 충돌 없이 point-Coulomb 특이 cell의 점값과 독립적 체적평균, 실제 7172개 projectile subcell phase의 분포를 검사했다. 국소 점값 bias는 0.91–2.97%이고 두 격자 phase histogram의 총변동거리는 약 0.00056이다. 이는 R3M28 3% 최종 확률 차이의 원인이나 공간오차 상한을 증명하지 않는다. [R3M29 보고서](../r3m29/REPORT_KO.md)에 근거해 cell-averaged Coulomb을 짧은 동일-h 검증 후보로만 선택했다.
+
+다음 canonical node는 `N1_TDL_PRODUCTION_H_CELL_AVERAGED_COULOMB_SAME_H_SHORT_WINDOW_VALIDATION` **하나**다. Frozen production source를 바꾸지 않는 opt-in 후보를 작은 독립 기준으로 검증하고, 보존 B3 state의 최대 한 짧은 창에서 accuracy-matched endpoint와 실측 비용을 비교한다. 새 full collision·preparation·finer h·B4를 자동 실행하지 않는다. 공간 0.30% budget은 OPEN, production HOLD, all-bound OPEN, b-grid NO_GO다.
+
+## R3M28 당시 frontier — 2026-09-24
 
 R3M27은 고정 h=.20 selected spans의 시간 추정을 검증했다. R3M28은 같은 실제 dt와 물리 horizon의 A3/B3 비교를 한 건 실행했다. 세 채널 raw 공간 pair 차이 3.03–3.29%가 사전 0.30% screen을 초과해 `SPATIAL_PAIR_SCREEN_NO_GO`다. 이는 continuum 공간오차 하한이나 전체 오차 추정이 아니다. 보고서와 typed ledger는 [R3M28 보고서](../r3m28/REPORT_KO.md) 및 `ERROR_BUDGET.json`에 있다.
 

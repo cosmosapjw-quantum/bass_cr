@@ -1,0 +1,28 @@
+**Astra/xhigh independent review completed: no BLOCKER or MAJOR findings; two MINOR findings.**
+
+1. **“Actual” phase histograms use reconstructed arithmetic.** [r3m29_coulomb_cell.py:80](/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m29_coulomb_cell.py:80) differs from frozen TDL’s floating-point evaluation order. Replaying `v*(t0+(j+.5)*dt_actual)` changes these zero-indexed bins:
+   - h=.25, bins 0/31: **228/224 → 227/225**
+   - h=.20, bins 7/8: **224/226 → 225/225**
+
+   Both retain 7172 samples; total variation remains **4/7172 ≈ 0.000557724484105**, so the decision is unchanged. Minimal correction: label existing counts “reconstructed linear-trajectory occupancy,” or preserve them and issue corrected counts using frozen arithmetic.
+
+2. **Residual integrand is incorrectly called smooth.** [REPORT_KO.md:7](/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/docs/r3m29/REPORT_KO.md:7): analytic z integration leaves an **integrable logarithmic corner singularity**. Replace “매끄러운 2차원 적분” with “적분가능한 로그 모서리 특이점이 남는 2차원 적분.”
+
+An inherited documentation inconsistency remains at [DAG.json:69](/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/docs/roadmap/DAG.json:69): “fine-dt spatial gap unmeasured” predates this candidate but contradicts R3M28. Minimal correction: state that the raw gap was measured while the spatial error estimate remains OPEN.
+
+**The local cell bias does not establish an explanation for the 3.03–3.29% capture gap.** No reviewed sentence violates that boundary. Exactly one next canonical node remains; production is HOLD, with no production representation change or full-collision authorization.
+
+The formula, midpoint and \(h^{-1}\) scaling agree with independent divergence-theorem and direct 3-D integration checks within **2.7×10⁻¹⁵**. Three read-only tests passed; the file-writing mutation test was skipped.
+
+Identity checks passed: all six frozen inputs match HEAD `8656736dd1b45b748b0669f4a7dafdb71787e032`; numerical-source digest and raw A3/B3 result hashes match. Current code reproduces `RESULT_V2` except timing. V1→V2 changes only timing and the alignment field. DESIGN’s local timestamp precedes both results.
+
+Reviewed SHA256 identities:
+
+```text
+script     fede8efd61cffa3249a3a863cc3294893f5af82f063d86594b179bcf963032dd
+RESULT     7a9fef9ad52faa07afd61f098b1a9b5e61d15d5c86a3f452e8a1ea7c39eec551
+RESULT_V2  2fed3bde2712a4b33b7c825d923739aefb06da0714fcc08ae389c8b4e59f5132
+```
+
+All eight reviewed files remained unchanged. No GPU or full collision ran.
+
