@@ -231,12 +231,118 @@ def _cf4(mf, cp, state, spec, n: int, substeps: int, inner: float,
     return host, row
 
 
+def _probe_with_released_split_buffers(cp, runner, mf, state, budget: Budget,
+                                       minimum: dict, probe_time: float) -> list[float]:
+    """Reserve full-H basis only after retiring unused split-step arrays.
+
+    The event warmup gets a fresh runner after this probe, so its kinetic phase,
+    mask and half-CAP arrays are available without coexisting with held basis.
+    """
+    del runner.kin, runner.mask, runner.cap_half
+    cp.get_default_memory_pool().free_all_blocks()
+    held = []
+    samples = []
+    try:
+        for _ in range(MAX_BASIS + 1 + 4):
+            held.append(cp.empty_like(state))
+        _resources(cp, budget, minimum)
+        for _ in range(3):
+            before = time.monotonic()
+            acted = mf.generator_matvec(state, probe_time)
+            cp.cuda.get_current_stream().synchronize()
+            samples.append(time.monotonic() - before)
+            del acted
+            _resources(cp, budget, minimum)
+        return samples
+    finally:
+        held.clear()
+        cp.get_default_memory_pool().free_all_blocks()
+
+
+def _guarded_host_transfer(cp, state, budget: Budget, minimum: dict):
+    _resources(cp,budget,minimum,upcoming_host_bytes=int(state.nbytes))
+    mark = time.perf_counter()
+    host = cp.asnumpy(state)
+    elapsed = time.perf_counter()-mark
+    _resources(cp,budget,minimum)
+    return host, elapsed
+
+
+def _guarded_strang_ladder(runner, mf, state, t0, horizon,
+                           budget: Budget, minimum: dict):
+    """Frozen R3M23 Strang/parity schedule with guards at all six transfers."""
+    import cupy as cp
+    from .r3m19_performance import accuracy_metrics
+    from .r3m20_short_window import ProductionBufferedStep
+    from .r3m23_cross_window import _endpoint
+    endpoints, rows, parity = {}, {}, {}
+    dt = horizon / 4
+    candidate = ProductionBufferedStep(runner)
+    mark = time.perf_counter()
+    budget.tick()
+    frozen_one = runner.step(state.copy(), t0 + .5 * dt)
+    budget.tick()
+    buffered_one = candidate.step(state.copy(), t0 + .5 * dt)
+    cp.cuda.get_current_stream().synchronize()
+    one_a, _ = _guarded_host_transfer(cp, frozen_one, budget, minimum)
+    one_b, _ = _guarded_host_transfer(cp, buffered_one, budget, minimum)
+    parity['one_step'] = accuracy_metrics(one_a, one_b)
+    parity['one_step_wall_seconds_including_transfers'] = time.perf_counter() - mark
+    del frozen_one, buffered_one, one_a, one_b
+    if parity['one_step']['status'] != 'PASS_SAME_DISCRETIZATION_PARITY':
+        raise ValueError('frozen/buffer one-step parity failed')
+    for n in (4, 8, 16):
+        step_dt = horizon / n
+        current = state.copy()
+        before = budget.count
+        mark = time.perf_counter()
+        if n == 4:
+            for j in range(n):
+                budget.tick()
+                current = runner.step(current, t0 + (j + .5) * step_dt)
+        else:
+            kinetic_phase = cp.exp(-.5j * step_dt * runner.k2)
+            cap_half = cp.exp(-.5 * step_dt * mf.W)
+            for j in range(n):
+                budget.tick()
+                phase = cp.exp(-.5j * step_dt * runner.Vmid(
+                    t0 + (j + .5) * step_dt)) * cap_half
+                current = phase * current
+                current = cp.fft.ifftn(kinetic_phase * cp.fft.fftn(current))
+                current = phase * current
+            del kinetic_phase, cap_half
+        cp.cuda.get_current_stream().synchronize()
+        wall = time.perf_counter() - mark
+        host, transfer = _guarded_host_transfer(cp, current, budget, minimum)
+        budget.check()
+        endpoints[f'S{n}'] = host
+        rows[f'S{n}'] = _endpoint(host, wall, transfer, runner.dv,
+                                 fft_matvecs=budget.count - before)
+        del current
+    current = state.copy()
+    before = budget.count
+    mark = time.perf_counter()
+    for j in range(4):
+        budget.tick()
+        current = candidate.step(current, t0 + (j + .5) * dt)
+    cp.cuda.get_current_stream().synchronize()
+    wall = time.perf_counter() - mark
+    buffered, transfer = _guarded_host_transfer(cp, current, budget, minimum)
+    rows['B4'] = _endpoint(buffered, wall, transfer, runner.dv,
+                           fft_matvecs=budget.count - before)
+    parity['four_step'] = accuracy_metrics(endpoints['S4'], buffered)
+    del candidate, current, buffered
+    budget.check()
+    if parity['four_step']['status'] != 'PASS_SAME_DISCRETIZATION_PARITY':
+        raise ValueError('frozen/buffer four-step parity failed')
+    return endpoints, rows, parity
+
+
 def _gpu(plan: dict, out: Path, pinned, progress: dict) -> dict:
     import cupy as cp
     from cr_repro.r3m11 import ControlledTDLRunner
     from .r3m19_performance import hardware_inventory
     from .r3m22_inner_action import BoundedMatrixFreeFullH
-    from .r3m23_cross_window import _strang_ladder
     inventory = hardware_inventory(include_gpu=True)
     modeled = 20 * int(pinned.array.nbytes)
     if (inventory['gpu'].get('status') != 'AVAILABLE' or
@@ -246,26 +352,19 @@ def _gpu(plan: dict, out: Path, pinned, progress: dict) -> dict:
     budget = Budget(plan['limits'])
     minimum = {'gpu': [], 'host': []}
     progress.update(budget=budget, minimum=minimum, stage='GPU_PREFLIGHT')
-    runner = ControlledTDLRunner(plan['config'])
-    if not math.isclose(runner.dt_actual, plan['generation']['actual_dt_au'],
+    probe_runner = ControlledTDLRunner(plan['config'])
+    if not math.isclose(probe_runner.dt_actual, plan['generation']['actual_dt_au'],
                         rel_tol=0, abs_tol=1e-14):
         raise ValueError('runner/selected actual timestep mismatch')
-    mf = BoundedMatrixFreeFullH(runner)
-    mf.matvec_monitor = budget.tick
-    state = cp.asarray(pinned.array)
+    probe_mf = BoundedMatrixFreeFullH(probe_runner)
+    probe_mf.matvec_monitor = budget.tick
+    probe_state = cp.asarray(pinned.array)
     cp.cuda.get_current_stream().synchronize()
     pinned.assert_current()
-    held = [cp.empty_like(state) for _ in range(MAX_BASIS+1+4)]
-    _resources(cp, budget, minimum)
-    probe_seconds = []
-    for _ in range(3):
-        before = time.monotonic()
-        acted = mf.generator_matvec(state, plan['generation']['actual_start_time_au'])
-        cp.cuda.get_current_stream().synchronize()
-        probe_seconds.append(time.monotonic()-before)
-        del acted
-        _resources(cp, budget, minimum)
-    held.clear()
+    probe_seconds = _probe_with_released_split_buffers(
+        cp, probe_runner, probe_mf, probe_state, budget, minimum,
+        plan['generation']['actual_start_time_au'])
+    del probe_state, probe_mf, probe_runner
     cp.get_default_memory_pool().free_all_blocks()
     publish_json(out/'PREFLIGHT.json', dict(status='PASS', probe_matvecs=3,
         probe_seconds=probe_seconds, inventory=inventory,
@@ -274,6 +373,17 @@ def _gpu(plan: dict, out: Path, pinned, progress: dict) -> dict:
         required_worst_matvecs=plan['required_worst_matvecs'],
         cap=LIMITS['kinetic_matvecs'],
         worst_case_can_fit_cap=plan['required_worst_matvecs'] <= LIMITS['kinetic_matvecs']))
+    progress['stage'] = 'WARMUP_RUNNER_SETUP'
+    runner = ControlledTDLRunner(plan['config'])
+    if not math.isclose(runner.dt_actual, plan['generation']['actual_dt_au'],
+                        rel_tol=0, abs_tol=1e-14):
+        raise ValueError('fresh warmup runner/selected timestep mismatch')
+    mf = BoundedMatrixFreeFullH(runner)
+    mf.matvec_monitor = budget.tick
+    state = cp.asarray(pinned.array)
+    cp.cuda.get_current_stream().synchronize()
+    pinned.assert_current()
+    _resources(cp, budget, minimum)
     geometry = plan['event']
     progress['stage'] = 'DERIVED_WARMUP'
     start = plan['generation']['done']
@@ -310,8 +420,8 @@ def _gpu(plan: dict, out: Path, pinned, progress: dict) -> dict:
     event_spec = dict(plan['generation'], actual_start_time_au=geometry['t0'],
                       horizon_au=geometry['horizon_au'],
                       expected_state_npy_sha256=warmup_sha)
-    strang, strang_rows, parity = _strang_ladder(
-        runner, mf, state, geometry['t0'], geometry['horizon_au'], budget)
+    strang, strang_rows, parity = _guarded_strang_ladder(
+        runner, mf, state, geometry['t0'], geometry['horizon_au'], budget, minimum)
     del runner.kin, runner.mask, runner.cap_half
     cp.get_default_memory_pool().free_all_blocks()
     _resources(cp, budget, minimum)

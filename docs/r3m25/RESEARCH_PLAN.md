@@ -53,3 +53,29 @@ contract SHA. Outputs are create-only: contract, preflight, warmup receipt,
 result/manifest or first failure. No B3 full collision, preparation, finer h,
 projection, checkpoint write, main merge or production admission in this work
 unit. B3 requires a subsequent new contract even if this local gate succeeds.
+
+## Fresh preflight-residency repair contract
+
+The first SHA-frozen attempt stopped at GPU preflight after one matvec:
+`minimum_gpu_free_bytes=1143472128 < 2 GiB`. No warmup or event comparison ran.
+Its `ATTEMPT/FIRST_FAILURE.json` and contract remain immutable. The cause was
+simultaneous retention of the Strang runner's kinetic phase/mask/half-CAP arrays
+and fifteen held basis-sized probe arrays. This is a resource-layout failure,
+not a convergence observation.
+
+The successor preflight retires those three split-step arrays before allocating
+held full-H probe arrays, as R3M24's proven probe already does. After all three
+probe matvecs, it releases that probe runner and state, creates a fresh runner,
+then performs the same 42-step warmup and frozen comparisons. The extra setup
+does not change the Hamiltonian, CAP, state bytes, timestep, observable, method,
+precision, or acceptance thresholds. A CPU regression asserts the arrays are
+absent before held-basis allocation. Run at most one new fresh attempt with a
+new source commit and contract SHA; never reuse or overwrite `ATTEMPT`.
+
+Pre-run independent review also found that the inherited Strang/parity helper
+checks the host reserve only after six large endpoint transfers. The successor
+copies its exact operation schedule into a local guarded helper, checking the
+next endpoint's bytes before each transfer and sampling host/GPU reserve
+immediately afterward. A CPU regression counts all 34 kinetic pairs and six
+guarded transfers. Another checks that the probe runner is released before
+constructing the warmup runner. The historical helper remains untouched.
