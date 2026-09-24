@@ -1,0 +1,25 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+________ test_retained_array_view_cannot_become_dangling_after_context _________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-5/test_retained_array_view_canno0')
+
+    def test_retained_array_view_cannot_become_dangling_after_context(tmp_path):
+        import subprocess
+        spec=generation(tmp_path)
+        script=('import json; from scripts.r3m24_guard import bind_generation\n'
+                f'spec=json.loads({json.dumps(json.dumps(spec))})\n'
+                'with bind_generation(spec) as pinned:\n    retained=pinned.array\n'
+                'assert retained[0,0,0] == 0\nprint(repr(retained.shape))\n')
+        proc=subprocess.run([sys.executable,'-c',script],capture_output=True,text=True)
+>       assert proc.returncode==0, f'mmap lifetime subprocess exited {proc.returncode}: {proc.stderr}'
+E       AssertionError: mmap lifetime subprocess exited -11: 
+E       assert -11 == 0
+E        +  where -11 = CompletedProcess(args=['/opt/pyvenv/bin/python', '-c', 'import json; from scripts.r3m24_guard import bind_generation\n...ained=pinned.array\nassert retained[0,0,0] == 0\nprint(repr(retained.shape))\n'], returncode=-11, stdout='', stderr='').returncode
+
+tests/test_r3m24_safe_execution.py:420: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_r3m24_safe_execution.py::test_retained_array_view_cannot_become_dangling_after_context - AssertionError: mmap lifetime subprocess exited -11: 
+assert -11 == 0
+ +  where -11 = CompletedProcess(args=['/opt/pyvenv/bin/python', '-c', 'import json; from scripts.r3m24_guard import bind_generation\n...ained=pinned.array\nassert retained[0,0,0] == 0\nprint(repr(retained.shape))\n'], returncode=-11, stdout='', stderr='').returncode
+1 failed in 0.63s
