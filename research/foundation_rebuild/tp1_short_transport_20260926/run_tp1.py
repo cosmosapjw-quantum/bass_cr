@@ -14,6 +14,10 @@ import zipfile
 
 HERE=Path(__file__).resolve().parent
 REPO=HERE.parents[2]
+FND_SRC=REPO/'research/foundation_rebuild/src'
+REPAIR=REPO/'research/foundation_rebuild/reaudit_20260925/repair'
+FULL=REPO/'research/foundation_rebuild/full_operator_20260926'
+sys.path[:0]=[str(HERE),str(FULL),str(REPAIR),str(FND_SRC),str(REPO)]
 
 
 def sha(path):
