@@ -1,0 +1,89 @@
+{
+  "schema": "BASS_FND_FULL_OPERATOR_RETURN_V1",
+  "status": "FULL_STATIC_OPERATOR_VALIDATION_PASS",
+  "scope": "NEW_TESTS_AND_FULL_STATIC_18_CHANNEL_Z_MINUS12",
+  "production_admission": "HOLD",
+  "all_bound": "OPEN",
+  "b_grid": "NO_GO",
+  "capture_execution_allowed": false,
+  "capture_run_performed": false,
+  "original_cross_ladder_rerun": false,
+  "gpu_run": false,
+  "historical_test_suite_rerun": false,
+  "steps": [
+    {
+      "name": "new_tests",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "/mnt/data/FND_FULL_OPERATOR_20260926/package/tests",
+        "--junitxml=/mnt/data/FND_FULL_OPERATOR_20260926/evidence/FINAL_VALIDATION/tests.xml"
+      ],
+      "returncode": 0,
+      "counts": {
+        "tests": 23,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  ],
+  "execution_head": null,
+  "execution_tree": null,
+  "source_layout": "recovered_reference",
+  "cross_directory": "/mnt/data/FND_FULL_OPERATOR_20260926/upstream/analysis/E04_P24",
+  "cross_identity": "ac5be87464bf1d8b613f2807806363524290b11c7092da70e50a33c090b3c9b4",
+  "environment": {
+    "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "threads": {
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1"
+    }
+  },
+  "full_static": {
+    "channel_count": 18,
+    "z_a0": -12.0,
+    "cross_reintegrated": false,
+    "same_center_order12_to20": {
+      "S": 1.8879878133092303e-16,
+      "H": 2.3352538733998924e-16,
+      "D": 1.9272289996725337e-16
+    },
+    "diagnostics": {
+      "S_hermiticity_relative": 8.790634400894224e-18,
+      "H_hermiticity_relative": 9.992692249499765e-18,
+      "metric_min": 0.9950691391139435,
+      "metric_max": 1.0049308608860532,
+      "metric_ratio": 0.9901866664106478,
+      "same_center": {
+        "T": {
+          "A_skew_absolute_max": 1.5241713098207273e-14,
+          "boost_cancellation_absolute": 5.887846720064156e-17,
+          "D_skew_absolute": 0.0
+        },
+        "P": {
+          "A_skew_absolute_max": 1.5241713098207273e-14,
+          "boost_cancellation_absolute": 1.3197531009345857e-14,
+          "D_skew_absolute": 2.639226028957652e-14
+        }
+      }
+    },
+    "norms": {
+      "S": 4.2426496755987975,
+      "H": 5.687131903035336,
+      "D": 6.115070603423463
+    },
+    "failed_screens": []
+  },
+  "next_scope": "bounded time-dependent operator/transport design; no capture authorized by this report",
+  "evidence_note": "Fresh validation in recovered selected-dependency layout, not GitHub CI. No original cross ladder was repeated; small new dynamic consistency tests did compute small-basis cross matrices.",
+  "base_commit": "f472e8f379d0e08f4e4a834f04040e3089c4f3f3",
+  "test_stdout": "23 passed in 15.61s"
+}
