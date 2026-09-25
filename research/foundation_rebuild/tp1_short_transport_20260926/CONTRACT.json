@@ -1,0 +1,40 @@
+{
+  "schema": "BASS_FND_TP1_SHORT_WINDOW_METRIC_TRANSPORT_CONTRACT_V1",
+  "work_unit": "FND_TP1_SHORT_WINDOW_METRIC_TRANSPORT_V1",
+  "upstream_commit": "0e916c16a4da09f0122317b8c793f7e75cd1b118",
+  "energy_keV_per_u": 100.0,
+  "b_a0": 2.0,
+  "z_initial_a0": -12.0,
+  "z_final_a0": -10.0,
+  "diagnostic_z_a0": [-12.0, -11.0, -10.0],
+  "epsilon_z_a0": 0.0001,
+  "radial_spec": {
+    "radius": 64.0,
+    "elements": 40,
+    "degree": 4,
+    "lmax": 1,
+    "bound_nmax": 2,
+    "positive_per_l": 1,
+    "positive_emax": 2.0,
+    "quad_order": 12,
+    "grading": 2.0
+  },
+  "same_center_order": 20,
+  "cross_order": 24,
+  "candidate_step_counts": [8, 16, 32, 64],
+  "reference_solver": {"method": "DOP853", "rtol": 1e-10, "atol": 1e-12},
+  "screens": {
+    "operator_hermiticity_relative_max": 1e-11,
+    "metric_min_ratio": 1e-8,
+    "metric_derivative_relative_max": 1e-6,
+    "reference_norm_drift_max": 1e-8,
+    "candidate_norm_drift_max": 1e-8,
+    "candidate_reference_metric_distance_max": 1e-6,
+    "candidate_32_to_64_metric_distance_max": 1e-6
+  },
+  "capture_execution_allowed": false,
+  "production_admission": "HOLD",
+  "all_bound": "OPEN",
+  "b_grid": "NO_GO",
+  "original_capture_gap_resolved": false
+}
