@@ -1,0 +1,57 @@
+name: Read-only forensic source snapshot
+on:
+  push:
+    branches: ['audit/fnd-d5a-forensic-20260925']
+    paths: ['.github/workflows/forensic-source-snapshot.yml']
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Export exact backed-up source without running project code
+        env:
+          SOURCE_REPO: ${{ github.repository }}
+          SOURCE_SHA: 8b7fef411ebca8dcdbfb45de542690c821fd7826
+        run: |
+          set -euo pipefail
+          mkdir source forensic
+          cd source
+          git init
+          git remote add origin "https://github.com/${SOURCE_REPO}.git"
+          git fetch origin '+refs/heads/*:refs/remotes/origin/*'
+          git checkout --detach "$SOURCE_SHA"
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+          git archive --format=tar.gz --output=../forensic/source.tar.gz HEAD
+          git bundle create ../forensic/history.bundle --all
+          git fsck --full --no-dangling > ../forensic/git-fsck.txt 2>&1
+          git show-ref > ../forensic/refs.txt
+          git log --all --format='%H%x09%T%x09%P%x09%aI%x09%s' > ../forensic/history.tsv
+          git ls-tree -rl HEAD > ../forensic/tracked-tree.txt
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib, subprocess
+          root=pathlib.Path.cwd()
+          paths=subprocess.check_output(['git','ls-files','-z']).split(b'\0')
+          rows=[]
+          for raw in paths:
+              if not raw: continue
+              rel=os.fsdecode(raw); p=root/rel
+              b=p.read_bytes()
+              rows.append({'path':rel,'size':len(b),'sha256':hashlib.sha256(b).hexdigest(),'git_blob_sha1':hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest()})
+          out=root.parent/'forensic'
+          (out/'SOURCE_INVENTORY.json').write_text(json.dumps(rows,indent=2)+'\n')
+          receipt={'scope':'READ_ONLY_SOURCE_EXPORT_NO_PROJECT_CODE_EXECUTED','source_commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'source_tree':subprocess.check_output(['git','rev-parse','HEAD^{tree}'],text=True).strip(),'tracked_files':len(rows),'tracked_bytes':sum(r['size'] for r in rows),'scientific_runs':0,'tests_run':False,'production_admission':'HOLD','files':{}}
+          for p in sorted(out.iterdir()):
+              if p.is_file():
+                  b=p.read_bytes(); receipt['files'][p.name]={'size':len(b),'sha256':hashlib.sha256(b).hexdigest()}
+          (out/'EXPORT_RECEIPT.json').write_text(json.dumps(receipt,indent=2)+'\n')
+          print(json.dumps({k:v for k,v in receipt.items() if k!='files'},indent=2))
+          PY
+      - name: Preserve complete source and provenance
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bass-cr-forensic-8b7fef4
+          path: forensic/
+          retention-days: 30
+          if-no-files-found: error
