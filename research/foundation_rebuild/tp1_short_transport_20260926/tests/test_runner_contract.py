@@ -81,3 +81,19 @@ def test_source_manifest_mismatch_blocks_before_science(tmp_path):
     bad.write_text(json.dumps({'files':{'CONTRACT.json':'0'*64}}))
     with pytest.raises(ValueError,match='source mismatch'):
         run_tp1.verify_sources(manifest_path=bad,dependency_path=None)
+
+
+def test_runner_bootstraps_repo_import_paths_outside_pytest_conftest(tmp_path):
+    import os, subprocess, sys
+    runner=Path(__file__).resolve().parents[1]/'run_tp1.py'
+    code=(
+        "import runpy; "
+        + "runpy.run_path(%r, run_name='tp1_bootstrap_probe'); " % str(runner)
+        + "import bass_foundations, full_operator, aligned_cross; print('TP1_BOOTSTRAP_OK')"
+    )
+    env=dict(os.environ)
+    env.pop('PYTHONPATH',None)
+    proc=subprocess.run([sys.executable,'-I','-c',code],cwd=tmp_path,env=env,
+                        text=True,capture_output=True)
+    assert proc.returncode==0, proc.stderr
+    assert 'TP1_BOOTSTRAP_OK' in proc.stdout
