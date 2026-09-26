@@ -23,6 +23,7 @@ def phase_split_edges(edges, separation, longitudinal_velocity, max_phase=24.):
         n=max(1,math.ceil(coefficient*(b*b-a*a)/max_phase))
         if n>4096 or len(answer)+n>8192:
             raise ValueError('phase subdivision resource cap exceeded')
+        # Keep each original endpoint exactly, not sqrt(b*b).
         inner=np.sqrt(np.linspace(a*a,b*b,n+1)[1:-1])
         answer.extend(inner.tolist());answer.append(float(b))
     return np.asarray(answer)
