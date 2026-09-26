@@ -1,0 +1,47 @@
+{
+  "schema": "BASS_TP2A_REFERENCE_QUALIFIED_IMPLEMENTATION_EVIDENCE_V1",
+  "status": "IMPLEMENTED_UNIT_VERIFIED_CONFIRMATORY_PENDING_LOCAL_RUN",
+  "upstream_commit": "f88199d639341036c12d82c8289cb93b5e9410d8",
+  "diagnosed_failure": {
+    "z_a0": -4.0,
+    "old_reference_order": 32,
+    "old_reference_connection_residual": 0.0005286887136540545,
+    "candidate_connection_residual": 1.6260941132862831e-09,
+    "old_candidate_reference_raw_max": 4.9916427721369974e-05,
+    "classification": "REFERENCE32_UNDERRESOLVED_NOT_CANDIDATE_REGRESSION"
+  },
+  "audit_crosscheck": {
+    "plain40_connection": 5.300614076080945e-09,
+    "plain48_connection": 1.6283296457954564e-09,
+    "plain40_to48_raw_max": 3.262380568002753e-10,
+    "phase24_to48_raw_max": 3.5875318346726825e-15
+  },
+  "reference_policy": {
+    "orders": [
+      32,
+      40,
+      48,
+      56,
+      64
+    ],
+    "requires_two_consecutive_own_screen_passes": true,
+    "raw_cross_relative_max": 1e-09,
+    "connection_relative_max": 1e-06
+  },
+  "tdd": {
+    "red_cycles": 4,
+    "focused_green_tests": 5
+  },
+  "fresh_sidecar_tests": {
+    "passed": 18,
+    "failed": 0,
+    "skipped": 0
+  },
+  "confirmatory_18_channel_run_performed": false,
+  "capture_execution_allowed": false,
+  "production_admission": "HOLD",
+  "all_bound": "OPEN",
+  "b_grid": "NO_GO",
+  "original_capture_gap_resolved": false,
+  "parallel_policy": "q32+q40 first reference batch = 6 tasks; later orders = 3 tasks as needed; candidate only after reference qualification"
+}
