@@ -56,3 +56,17 @@ def test_exact_alias_to_qualified_reference_is_marked_not_independent():
     assert got['status']=='GEOMETRY_QUALIFIED'
     assert got['candidate_reference_alias'] is True
     assert got['candidate_vs_reference']['evidence_relation']=='ALIASED_SAME_NUMERICAL_TASK_NOT_INDEPENDENT_CROSSCHECK'
+
+
+def test_resolution_plan_is_owned_by_tp2b_not_upstream_runtime():
+    assert not hasattr(pa.qr,'resolution_plan')
+    contract={
+      'reference_orders':[32,40],
+      'candidate_orders':[24,32],
+      'reference_resolutions':[{'order':32,'subdivisions':1},{'order':40,'subdivisions':2}],
+      'candidate_resolutions':[{'order':24,'subdivisions':1},{'order':32,'subdivisions':2}]
+    }
+    assert pa.resolution_plan(contract,'reference')==[
+      {'order':32,'subdivisions':1},{'order':40,'subdivisions':2}]
+    assert pa.resolution_plan(contract,'candidate')==[
+      {'order':24,'subdivisions':1},{'order':32,'subdivisions':2}]
