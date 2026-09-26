@@ -47,7 +47,7 @@ def verify_sources():
 def role_specs(z,contract):
     out=[];eps=float(contract['epsilon_z_a0'])
     for family in ('reference','candidate'):
-        for rule in qr.resolution_plan(contract,family):
+        for rule in pa.resolution_plan(contract,family):
             for dz in (-eps,0.,eps):out.append({'family':family,'order':rule['order'],'integration_subdivisions':rule['subdivisions'],'z_center_a0':float(z),'dz_a0':float(dz)})
     return out
 
