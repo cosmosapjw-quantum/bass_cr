@@ -2,7 +2,7 @@
 """Reference-qualified derivative-aware TP2A geometry qualification.
 
 Each geometry first qualifies a finite plain-Gauss reference ladder. Only after
-the reference converges is phase-aware order24 judged against it. Reference
+the reference converges is the finite phase-aware candidate ladder assessed. Reference
 exhaustion is a separate blocker, never a candidate failure. No capture, GPU,
 tolerance tuning, epsilon tuning, or basis mutation exists here.
 """
@@ -24,7 +24,8 @@ def write_json(path,value):
 
 def build_parser():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--out',required=True);p.add_argument('--native-build',required=True)
-    p.add_argument('--workers',type=int);p.add_argument('--expected-commit');p.add_argument('--resume-from')
+    p.add_argument('--workers',type=int);p.add_argument('--expected-commit')
+    group=p.add_mutually_exclusive_group();group.add_argument('--resume-from');group.add_argument('--import-from')
     return p
 
 def resource_limits():
@@ -33,7 +34,8 @@ def resource_limits():
 
 def geometry_task_specs(z,contract,context=None):
     """All possible task identities for one geometry; execution stays staged."""
-    items=candidate_task_specs(z,contract,context)
+    items=[]
+    for order in contract.get('candidate_orders',[24]):items.extend(candidate_task_specs(z,contract,context,order))
     for order in contract['reference_orders']:
         items.extend(reference_task_specs(z,order,contract,context))
     return items
@@ -49,16 +51,19 @@ def reference_task_specs(z,order,contract,context=None):
     return items
 
 
-def candidate_task_specs(z,contract,context=None):
+def candidate_task_specs(z,contract,context=None,order=24):
+    if order not in contract.get('candidate_orders',[24]):raise ValueError('candidate order outside frozen ladder')
     eps=float(contract['epsilon_z_a0']);items=[]
+    method='phase24' if order==24 else 'candidate'
     for dz in (-eps,0.,eps):
-        row={'method':'phase24','reference_order':None,'z_center_a0':float(z),'dz_a0':float(dz)}
-        if context is not None:row['task_id']=qr.task_identity('phase24',z,dz,context)
+        row={'method':method,'reference_order':None,'z_center_a0':float(z),'dz_a0':float(dz)}
+        if order!=24:row['candidate_order']=int(order)
+        if context is not None:row['task_id']=qr.task_identity(method,z,dz,context,candidate_order=row.get('candidate_order'))
         items.append(row)
     return items
 
 
-def execute_geometry_policy(z,contract,epsilon_t,ensure_rows):
+def execute_geometry_policy(z,contract,epsilon_t,ensure_rows,progress=None):
     orders=list(contract['reference_orders'])
     if len(orders)<2:raise ValueError('reference ladder requires at least two orders')
     reference_rows=[]
@@ -74,10 +79,25 @@ def execute_geometry_policy(z,contract,epsilon_t,ensure_rows):
     if reference_receipt['status']=='REFERENCE_QUALIFIED':
         q=reference_receipt['qualified_order']
         selected=[r for r in reference_rows if r.get('reference_order')==q]
-        candidate_rows=ensure_rows(candidate_task_specs(z,contract))
-        result=qr.qualify_candidate_against_reference(z,candidate_rows,selected,epsilon_t,contract,q)
-        result['reference_qualification']=reference_receipt
-        return result
+        attempts=[]
+        if progress:progress(event='reference_qualified',z_a0=z,order=q)
+        for candidate_order in contract.get('candidate_orders',[24]):
+            candidate_rows=ensure_rows(candidate_task_specs(z,contract,order=candidate_order))
+            result=qr.qualify_candidate_against_reference(z,candidate_rows,selected,epsilon_t,contract,q,candidate_order)
+            attempts.append({'candidate_order':candidate_order,'candidate':result['candidate'],
+                'candidate_vs_reference':result['candidate_vs_reference'],'failed_screens':result['failed_screens']})
+            if progress:progress(event='candidate_assessed',z_a0=z,order=candidate_order,
+                connection=result['candidate']['connection_relative'],
+                raw_difference=result['candidate_vs_reference']['max_raw_cross_relative_difference'],
+                failed_screens=result['failed_screens'])
+            if not result['failed_screens']:
+                result['reference_qualification']=reference_receipt
+                result['candidate_attempts']=attempts
+                return result
+        return {'status':'CANDIDATE_CONVERGENCE_UNRESOLVED','z_a0':float(z),
+            'qualified_reference_order':q,'qualified_candidate_order':None,
+            'reference_qualification':reference_receipt,'candidate_attempts':attempts,
+            'failed_screens':['candidate finite quadrature budget exhausted'],'capture_execution_allowed':False}
     return {'status':'REFERENCE_CONVERGENCE_UNRESOLVED','z_a0':float(z),
             'qualified_reference_order':None,'reference_qualification':reference_receipt,
             'failed_screens':['reference convergence unresolved'],
@@ -89,6 +109,8 @@ def sequence_geometries(z_samples,execute):
         row=execute(float(z));rows.append(row)
         if row.get('status')=='REFERENCE_CONVERGENCE_UNRESOLVED':
             first={'kind':'reference','z_a0':float(z),'failed_screens':list(row.get('failed_screens',[]))};break
+        if row.get('status')=='CANDIDATE_CONVERGENCE_UNRESOLVED':
+            first={'kind':'candidate','z_a0':float(z),'failed_screens':list(row.get('failed_screens',[]))};break
         if row.get('failed_screens'):
             first={'kind':'numerical','z_a0':float(z),'failed_screens':list(row['failed_screens'])};break
     return rows,first
@@ -115,9 +137,10 @@ def main(argv=None):
     a=build_parser().parse_args(argv);out=Path(a.out).resolve();archive=out.with_name(out.name+'_RETURN.zip')
     if out.exists() or archive.exists():build_parser().error('output exists; nothing overwritten')
     out.mkdir(parents=True);start=time.monotonic();phase='preflight';rc=0
-    report={'schema':'BASS_TP2A_FULL_GEOMETRY_RETURN_V1','status':'IN_PROGRESS','scope':'NINE_REMAINING_GEOMETRIES_DERIVATIVE_AWARE_ONLY',
+    report={'schema':'BASS_TP2A_RESOLUTION_QUALIFIED_RETURN_V2','status':'IN_PROGRESS','scope':'NINE_REMAINING_GEOMETRIES_DERIVATIVE_AWARE_ONLY',
         'capture_execution_allowed':False,'production_admission':'HOLD','all_bound':'OPEN','b_grid':'NO_GO','original_capture_gap_resolved':False,
-        'gpu_run':False,'propagation_run':False,'completed_geometry':[]}
+        'gpu_run':False,'propagation_run':False,'completed_geometry':[],
+        'new_operator_evaluations':0,'reused_task_reads':0}
     def emit(**row):
         row={'elapsed_seconds':time.monotonic()-start,**row}
         with (out/'PROGRESS.jsonl').open('a') as f:f.write(json.dumps(row,separators=(',',':'))+'\n');f.flush();os.fsync(f.fileno())
@@ -136,7 +159,14 @@ def main(argv=None):
         limits=resource_limits();workers=a.workers if a.workers is not None else limits['default_workers']
         if workers<1 or workers>limits['max_safe_workers']:raise ValueError('workers exceeds detected CPU/memory safety budget')
         config=dict(contract);config['speed']=projectile_speed_au(contract['energy_keV_per_u'])
-        if a.resume_from:
+        previous_import=None
+        if a.import_from:
+            from verified_import import validate_previous_run
+            grant=json.loads((HERE/'IMPORT_GRANT.json').read_text())
+            previous_import,bank,basis_record=validate_previous_run(a.import_from,grant,native['library_sha256'],contract)
+            source=Path(previous_import['source'])
+            for name in ('BASIS.json','BASIS.npz'):qr._atomic_file(out/name,lambda f,name=name:f.write((source/name).read_bytes()))
+        elif a.resume_from:
             source=Path(a.resume_from).resolve();bank,basis_record=load_bank(source)
             for name in ('BASIS.json','BASIS.npz'):qr._atomic_file(out/name,lambda f,name=name:f.write((source/name).read_bytes()))
         else:
@@ -148,12 +178,28 @@ def main(argv=None):
             previous=json.loads((Path(a.resume_from)/'INTAKE.json').read_text())
             if previous['context']!=context:raise ValueError('resume context differs; no automatic cache migration')
             restored=qr.restore_tasks(a.resume_from,out,context_id,allowed)
-        report.update(execution_head=head,execution_tree=tree,workers=workers,resources=limits,native_build=native,restored_tasks=restored)
+        imported=0
+        if previous_import is not None:
+            from verified_import import import_tasks
+            imported=import_tasks(previous_import,out,context)['count']
+            emit(event='previous_tasks_imported',count=imported,source=str(a.import_from),old_failure_preserved=True)
+        report.update(execution_head=head,execution_tree=tree,workers=workers,resources=limits,native_build=native,
+            restored_tasks=restored,imported_tasks=imported,old_failure_preserved=True)
         write_json(out/'INTAKE.json',{'context':context,'context_id':context_id,'report':report})
         phase='new_tests';env=dict(os.environ,PYTEST_DISABLE_PLUGIN_AUTOLOAD='1');cmd=[sys.executable,'-m','pytest','-q','-p','no:cacheprovider',str(HERE/'tests'),'--junitxml='+str(out/'tests.xml')]
-        emit(event='tests_start');p=subprocess.run(cmd,stdout=(out/'tests.stdout').open('x'),stderr=(out/'tests.stderr').open('x'),env=env,timeout=180)
-        if p.returncode:raise RuntimeError('new sidecar tests failed')
-        emit(event='tests_complete',returncode=p.returncode)
+        env['BASS_TEST_NATIVE_BUILD']=native_dir
+        emit(event='tests_start')
+        with (out/'tests.stdout').open('x') as so,(out/'tests.stderr').open('x') as se:
+            p=subprocess.run(cmd,stdout=so,stderr=se,env=env,timeout=180)
+        import xml.etree.ElementTree as ET
+        counts={key:0 for key in ('tests','failures','errors','skipped')}
+        if (out/'tests.xml').exists():
+            for suite in ET.parse(out/'tests.xml').getroot().iter('testsuite'):
+                for key in counts:counts[key]+=int(suite.attrib.get(key,0))
+        report['new_tests']={'returncode':p.returncode,'counts':counts}
+        if p.returncode or not counts['tests'] or any(counts[k] for k in ('failures','errors','skipped')):
+            raise RuntimeError('sidecar tests failed or were skipped')
+        emit(event='tests_complete',returncode=p.returncode,counts=counts)
         phase='geometry_scan';ctx=mp.get_context('spawn')
         with cf.ProcessPoolExecutor(max_workers=workers,mp_context=ctx,initializer=qr.worker_init,initargs=(config,bank,native_dir,context_id,str(out))) as pool:
             def execute_geometry(z):
@@ -162,13 +208,14 @@ def main(argv=None):
                     for item in specs_without_ids:
                         row=dict(item)
                         row['task_id']=qr.task_identity(row['method'],z,row['dz_a0'],context,
-                            reference_order=row.get('reference_order'))
+                            reference_order=row.get('reference_order'),candidate_order=row.get('candidate_order'))
                         specs.append(row)
                     missing=[]
                     for spec in specs:
                         try:
                             qr.load_task(out,spec['task_id'],context_id)
-                            emit(event='task_reused',z_a0=z,method=spec['method'],reference_order=spec.get('reference_order'),dz_a0=spec['dz_a0'])
+                            report['reused_task_reads']+=1
+                            emit(event='task_reused',z_a0=z,method=spec['method'],reference_order=spec.get('reference_order'),candidate_order=spec.get('candidate_order'),dz_a0=spec['dz_a0'])
                         except FileNotFoundError:
                             missing.append(spec)
                     if missing:
@@ -179,20 +226,23 @@ def main(argv=None):
                         if time.monotonic()-last>=5:
                             emit(event='heartbeat',z_a0=z,pending_tasks=len(futures));last=time.monotonic()
                         for f in done:
-                            spec=futures.pop(f);res=f.result();emit(event='task_complete',z_a0=z,method=spec['method'],reference_order=spec.get('reference_order'),dz_a0=spec['dz_a0'],reused=res['reused'],wall_seconds=res['wall_seconds'])
+                            spec=futures.pop(f);res=f.result()
+                            if not res['reused']:report['new_operator_evaluations']+=1
+                            emit(event='task_complete',z_a0=z,method=spec['method'],reference_order=spec.get('reference_order'),candidate_order=spec.get('candidate_order'),dz_a0=spec['dz_a0'],reused=res['reused'],wall_seconds=res['wall_seconds'])
                     return [qr.task_row(out,s['task_id'],context_id) for s in specs]
                 emit(event='geometry_start',z_a0=z,workers=workers,reference_orders=contract['reference_orders'])
-                receipt=execute_geometry_policy(z,contract,contract['epsilon_z_a0']/config['speed'],ensure_rows)
+                receipt=execute_geometry_policy(z,contract,contract['epsilon_z_a0']/config['speed'],ensure_rows,emit)
                 write_json(out/'geometry'/f"z_{z:+05.1f}.json",receipt)
+                report['completed_geometry'].append(receipt)
                 emit(event='geometry_complete',z_a0=z,status=receipt['status'],qualified_reference_order=receipt.get('qualified_reference_order'),failed_screens=receipt.get('failed_screens',[]))
                 return receipt
             rows,first=sequence_geometries(contract['z_samples_a0'],execute_geometry)
         report['completed_geometry']=rows
         if first:
             report['first_failure']=first;rc=2
-            report['status']='REFERENCE_CONVERGENCE_UNRESOLVED' if first['kind']=='reference' else 'NUMERICAL_SCREEN_FAILED'
+            report['status']={'reference':'REFERENCE_CONVERGENCE_UNRESOLVED','candidate':'CANDIDATE_CONVERGENCE_UNRESOLVED'}.get(first['kind'],'NUMERICAL_SCREEN_FAILED')
         elif len(rows)!=len(contract['z_samples_a0']):raise RuntimeError('missing declared geometry results')
-        else:report['status']='TP2A_REFERENCE_QUALIFIED_FULL_GEOMETRY_PASS'
+        else:report['status']='TP2A_RESOLUTION_QUALIFIED_FULL_GEOMETRY_PASS'
     except BaseException as e:
         rc=130 if isinstance(e,KeyboardInterrupt) else 3;report['status']='INTERRUPTED' if rc==130 else ('IDENTITY_OR_INPUT_BLOCKED' if isinstance(e,(ValueError,FileNotFoundError)) else 'EXECUTION_OR_ENVIRONMENT_BLOCKED')
         report['first_failure']={'phase':phase,'type':type(e).__name__,'message':str(e)};(out/'failure.traceback.txt').write_text(traceback.format_exc())

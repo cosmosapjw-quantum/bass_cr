@@ -1,47 +1,58 @@
 {
-  "schema": "BASS_TP2A_REFERENCE_QUALIFIED_IMPLEMENTATION_EVIDENCE_V1",
-  "status": "IMPLEMENTED_UNIT_VERIFIED_CONFIRMATORY_PENDING_LOCAL_RUN",
-  "upstream_commit": "f88199d639341036c12d82c8289cb93b5e9410d8",
-  "diagnosed_failure": {
-    "z_a0": -4.0,
-    "old_reference_order": 32,
-    "old_reference_connection_residual": 0.0005286887136540545,
-    "candidate_connection_residual": 1.6260941132862831e-09,
-    "old_candidate_reference_raw_max": 4.9916427721369974e-05,
-    "classification": "REFERENCE32_UNDERRESOLVED_NOT_CANDIDATE_REGRESSION"
-  },
-  "audit_crosscheck": {
-    "plain40_connection": 5.300614076080945e-09,
-    "plain48_connection": 1.6283296457954564e-09,
-    "plain40_to48_raw_max": 3.262380568002753e-10,
-    "phase24_to48_raw_max": 3.5875318346726825e-15
-  },
-  "reference_policy": {
-    "orders": [
-      32,
-      40,
-      48,
-      56,
-      64
-    ],
-    "requires_two_consecutive_own_screen_passes": true,
-    "raw_cross_relative_max": 1e-09,
-    "connection_relative_max": 1e-06
-  },
-  "tdd": {
-    "red_cycles": 4,
-    "focused_green_tests": 5
-  },
-  "fresh_sidecar_tests": {
-    "passed": 18,
-    "failed": 0,
+  "schema": "BASS_TP2A_RESOLUTION_QUALIFIED_IMPLEMENTATION_V2",
+  "status": "IMPLEMENTATION_VERIFIED_FULL_GEOMETRY_CONFIRMATORY_PENDING",
+  "upstream_commit": "3499e9f73527dfb5e76299205b9e864e89ebf248",
+  "sidecar_tests": {
+    "passed": 32,
+    "failures": 0,
+    "errors": 0,
     "skipped": 0
   },
-  "confirmatory_18_channel_run_performed": false,
+  "tdd": "candidate p-refinement behavior observed assertion RED then GREEN; remaining tests are additional regression/integration coverage",
+  "real_small_basis_spawn": "two-worker reference and candidate integration, checkpoint byte roundtrip and reused task verified",
+  "exact_import_tests": "old failed status retained, archive/report/context/binary/basis/task identity enforced, byte-identical matrix reuse",
+  "scientific_replay": "same current policy functions on stored real 18-channel z=-2 matrices with q56/q64 reference pair: q24 fails, q32 qualifies; no new integration during replay",
+  "science": {
+    "plain56": {
+      "connection_relative": 7.101658283146026e-09,
+      "raw_max_relative_vs_plain64": 2.1291505254851356e-10
+    },
+    "plain64": {
+      "connection_relative": 1.561950701291872e-09,
+      "raw_max_relative_vs_plain64": 0.0
+    },
+    "phase24": {
+      "connection_relative": 4.998688274777567e-07,
+      "raw_max_relative_vs_plain64": 1.2094522344017245e-08
+    },
+    "phase32": {
+      "connection_relative": 1.5655019641845933e-09,
+      "raw_max_relative_vs_plain64": 5.124913118202205e-15
+    },
+    "split12": {
+      "connection_relative": 1.5635994004123453e-09,
+      "raw_max_relative_vs_plain64": 4.789472157695199e-15
+    }
+  },
+  "counterfactual": {
+    "raw_relative_differences": {
+      "S_tp": 2.0528257688056463e-15,
+      "S_pt": 2.0779574470712324e-15,
+      "H_tp": 5.099692636706483e-15,
+      "H_pt": 5.094608291894287e-15,
+      "D_tp": 3.534559611621284e-15,
+      "D_pt": 0.0
+    },
+    "scope": "not physical straight-line trajectory; fixed snapshot; same longitudinal ETF; transverse relative velocity removed"
+  },
+  "full_nine_geometry_confirmatory_performed": false,
+  "environment": {
+    "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41"
+  },
   "capture_execution_allowed": false,
   "production_admission": "HOLD",
   "all_bound": "OPEN",
   "b_grid": "NO_GO",
-  "original_capture_gap_resolved": false,
-  "parallel_policy": "q32+q40 first reference batch = 6 tasks; later orders = 3 tasks as needed; candidate only after reference qualification"
+  "original_capture_gap_resolved": false
 }

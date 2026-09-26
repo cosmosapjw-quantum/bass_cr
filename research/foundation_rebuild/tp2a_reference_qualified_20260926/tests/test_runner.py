@@ -16,11 +16,12 @@ def test_help_exposes_only_fixed_execution_controls(tmp_path):
 def test_declared_task_specs_cover_candidate_and_frozen_reference_ladder():
     c=json.loads((HERE/'CONTRACT.json').read_text())
     specs=runner.geometry_task_specs(-4.,c)
-    assert len(specs)==3*(1+len(c['reference_orders']))
+    assert len(specs)==3*(len(c['candidate_orders'])+len(c['reference_orders']))
     assert [(x['method'],x.get('reference_order'),x['dz_a0']) for x in specs[:3]]==[
         ('phase24',None,-1e-4),('phase24',None,0.),('phase24',None,1e-4)]
-    assert [(x['method'],x.get('reference_order')) for x in specs[3:6]]==[('reference',32)]*3
+    assert [(x['method'],x.get('reference_order')) for x in specs[3*len(c['candidate_orders']):3*len(c['candidate_orders'])+3]]==[('reference',32)]*3
     assert [(x['method'],x.get('reference_order')) for x in specs[-3:]]==[('reference',64)]*3
+    assert [x['candidate_order'] for x in specs[3:6]]==[32]*3
 
 
 def test_sequence_stops_before_submitting_later_geometry_after_first_failure():

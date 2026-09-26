@@ -13,15 +13,22 @@ def sha(path):
 def _digest(value):
     return hashlib.sha256(json.dumps(value,sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest()
 
-def task_identity(method,z_center,dz,context,reference_order=None):
-    if method not in ('phase24','reference'):raise ValueError('unknown fixed method')
+def task_identity(method,z_center,dz,context,reference_order=None,candidate_order=None):
+    if method not in ('phase24','candidate','reference'):raise ValueError('unknown fixed method')
     vals=np.asarray([z_center,dz],float)
     if not np.isfinite(vals).all():raise ValueError('finite geometry required')
     if method=='reference':
         if isinstance(reference_order,bool) or not isinstance(reference_order,int):raise ValueError('reference order required')
     elif reference_order is not None:raise ValueError('phase24 has no reference order')
-    return _digest({'method':method,'reference_order':reference_order,'z_center_hex':float(z_center).hex(),
-                    'dz_hex':float(dz).hex(),'context':context})[:32]
+    record={'method':method,'reference_order':reference_order,'z_center_hex':float(z_center).hex(),
+            'dz_hex':float(dz).hex(),'context':context}
+    if method=='candidate':
+        if isinstance(candidate_order,bool) or not isinstance(candidate_order,int) or not 24<=candidate_order<=64:
+            raise ValueError('candidate order outside supported range')
+        record['candidate_order']=candidate_order
+    elif candidate_order is not None:
+        raise ValueError('candidate order is only valid for candidate method')
+    return _digest(record)[:32]
 
 def _atomic_file(path,writer):
     path=Path(path);path.parent.mkdir(parents=True,exist_ok=True)
@@ -73,7 +80,9 @@ def load_task(directory,task_id,context_id):
 
 def _relative(a,b):
     d=float(np.linalg.norm(a-b));n=float(np.linalg.norm(b))
-    return d/n if n else (0. if d==0 else float('inf'))
+    if not np.isfinite([d,n]).all():raise ValueError('nonfinite raw matrix norm')
+    if n==0 and d!=0:raise ValueError('nonzero raw block against structurally zero reference')
+    return d/n if n else 0.
 
 def _row_arrays(row):
     if 'full' in row:return row['full'],row['cross']
@@ -118,6 +127,13 @@ def _connection_receipt(subset,epsilon_t,screens):
     subset=sorted(subset,key=lambda r:r['dz_a0'])
     if len(subset)!=3 or [r['dz_a0'] for r in subset][1]!=0.:
         raise ValueError('three-point stencil required')
+    offsets=[float(r['dz_a0']) for r in subset]
+    if not np.isfinite(offsets).all() or offsets[0]>=0 or offsets[2]!=-offsets[0]:
+        raise ValueError('symmetric nonduplicate stencil required')
+    for r in subset:
+        full,cross=_row_arrays(r)
+        if any(not np.isfinite(a).all() for a in list(full.values())+list(cross.values())):
+            raise ValueError('nonfinite operator evidence')
     minus,center,plus=subset
     fm,_=_row_arrays(minus);fc,_=_row_arrays(center);fp,_=_row_arrays(plus)
     fd=(fp['S']-fm['S'])/(2*epsilon_t);direct=fc['D']+fc['D'].conj().T
@@ -125,6 +141,7 @@ def _connection_receipt(subset,epsilon_t,screens):
     residual=float(np.linalg.norm(fd-direct)/den)
     diag=center['diagnostics']
     herm=max(diag['S_hermiticity_relative'],diag['H_hermiticity_relative'])
+    if not np.isfinite([residual,herm,diag['metric_ratio']]).all():raise ValueError('nonfinite diagnostics')
     return {'connection_relative':residual,
             'connection_pass':residual<=screens['connection_relative_max'],
             'hermiticity_relative_max':herm,
@@ -178,22 +195,23 @@ def qualify_reference_ladder(rows,epsilon_t,contract):
             'candidate_evaluated':False}
 
 
-def qualify_candidate_against_reference(z_center,candidate_rows,reference_rows,epsilon_t,contract,qualified_order):
+def qualify_candidate_against_reference(z_center,candidate_rows,reference_rows,epsilon_t,contract,qualified_order,candidate_order=24):
     screens=contract['screens']
     candidate=_connection_receipt(candidate_rows,epsilon_t,screens)
     reference=_connection_receipt(reference_rows,epsilon_t,screens)
     diff,detail=_stencil_cross_relative_max(candidate_rows,reference_rows)
     failures=[]
-    if not candidate['connection_pass']:failures.append('phase24 connection')
-    if not candidate['hermiticity_pass']:failures.append('phase24 Hermiticity')
-    if not candidate['metric_pass']:failures.append('phase24 metric ratio')
+    if not candidate['connection_pass']:failures.append(f'phase{candidate_order} connection')
+    if not candidate['hermiticity_pass']:failures.append(f'phase{candidate_order} Hermiticity')
+    if not candidate['metric_pass']:failures.append(f'phase{candidate_order} metric ratio')
     # A qualified reference is an input contract here; if it no longer passes,
     # refuse to reinterpret the candidate comparison.
     if not (reference['connection_pass'] and reference['hermiticity_pass'] and reference['metric_pass']):
         raise ValueError('qualified reference failed its own operator screens')
-    if diff>screens['raw_cross_relative_max']:failures.append('phase24/qualified-reference raw cross parity')
+    if diff>screens['raw_cross_relative_max']:failures.append(f'phase{candidate_order}/qualified-reference raw cross parity')
     return {'status':('GEOMETRY_QUALIFIED' if not failures else 'NUMERICAL_SCREEN_FAILED'),
             'z_a0':float(z_center),'qualified_reference_order':int(qualified_order),
+            'qualified_candidate_order':int(candidate_order),
             'candidate':candidate,'reference':reference,
             'candidate_vs_reference':{'max_raw_cross_relative_difference':diff,
                                       'raw_cross_relative_differences':detail},
@@ -229,7 +247,7 @@ def worker_task(spec):
     from full_operator import _bind_cross,assemble_full
     from fast_cross import fast_cross as reference_cross
     from fast_cross_phase import fast_cross as phase_cross
-    s=_STATE;cfg=s['config'];z=float(spec['z_center_a0']);dz=float(spec['dz_a0']);method=spec['method'];tid=spec['task_id'];reference_order=spec.get('reference_order')
+    s=_STATE;cfg=s['config'];z=float(spec['z_center_a0']);dz=float(spec['dz_a0']);method=spec['method'];tid=spec['task_id'];reference_order=spec.get('reference_order');candidate_order=spec.get('candidate_order')
     try:
         receipt,arrays=load_task(s['out'],tid,s['context_id'])
         return {'task_id':tid,'reused':True,'wall_seconds':0.,'pid':os.getpid(),'receipt':receipt}
@@ -239,6 +257,10 @@ def worker_task(spec):
     if method=='phase24':
         raw=phase_cross(s['trajectory'],s['channels'],s['bank'][0].edges,t,order=cfg['phase_order'],
             evaluator=s['evaluator'],phase_budget=cfg['phase_budget_rad'])
+    elif method=='candidate':
+        if candidate_order not in cfg['candidate_orders']:raise ValueError('candidate order outside frozen ladder')
+        raw=phase_cross(s['trajectory'],s['channels'],s['bank'][0].edges,t,order=candidate_order,
+            evaluator=s['evaluator'],phase_budget=cfg['phase_budget_rad'])
     elif method=='reference':
         if reference_order not in cfg['reference_orders']:raise ValueError('reference order outside frozen ladder')
         raw=reference_cross(s['trajectory'],s['channels'],s['bank'][0].edges,t,order=reference_order,evaluator=s['evaluator'])
@@ -247,7 +269,7 @@ def worker_task(spec):
     full=assemble_full(s['trajectory'],s['channels'],t,same_order=cfg['same_center_order'],cross=snap)
     payload={'full':{k:np.asarray(full[k]) for k in FULL_KEYS},'cross':{k:np.asarray(raw[k]) for k in CROSS_KEYS},'diagnostics':full['diagnostics']}
     result={'schema':'BASS_TP2A_FULL_GEOMETRY_TASK_V1','task_id':tid,'context_id':s['context_id'],'method':method,
-        'z_center_a0':z,'dz_a0':dz,'reference_order':reference_order,'time_ta':t,'channel_count':len(s['channels']),
+        'z_center_a0':z,'dz_a0':dz,'reference_order':reference_order,'candidate_order':candidate_order,'time_ta':t,'channel_count':len(s['channels']),
         'diagnostics':full['diagnostics'],'metadata':raw['metadata'],'wall_seconds':time.perf_counter()-tic,'pid':os.getpid(),
         'capture_execution_allowed':False}
     receipt=save_task(s['out'],result,payload)
@@ -255,6 +277,6 @@ def worker_task(spec):
 
 def task_row(directory,task_id,context_id):
     receipt,arrays=load_task(directory,task_id,context_id)
-    return {'method':receipt['method'],'reference_order':receipt.get('reference_order'),'z_center_a0':receipt['z_center_a0'],'dz_a0':receipt['dz_a0'],
+    return {'method':receipt['method'],'reference_order':receipt.get('reference_order'),'candidate_order':receipt.get('candidate_order'),'z_center_a0':receipt['z_center_a0'],'dz_a0':receipt['dz_a0'],
         'diagnostics':receipt['diagnostics'],'metadata':receipt['metadata'],
         'full':{k:arrays[k] for k in FULL_KEYS},'cross':{k:arrays[k] for k in CROSS_KEYS}}
