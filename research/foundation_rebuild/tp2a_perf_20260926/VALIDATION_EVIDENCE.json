@@ -1,0 +1,284 @@
+{
+  "schema": "BASS_TP2A_PERFORMANCE_EVIDENCE_V1",
+  "upstream_commit": "a6be0e70db55bb60e493e102d04c64d67101da45",
+  "development_layout": "restored scientific dependencies, exact 7 SHA256 pins verified against published package; not GitHub CI",
+  "timing_scope": "same-host, single-thread, same 18-channel basis/order24/z=-12, one unprofiled timed run per backend",
+  "benchmarks": [
+    {
+      "backend": "original",
+      "wall_seconds": 104.64032518500005,
+      "cpu_seconds": 104.60529225100001,
+      "rss_KiB": 150076,
+      "parity": {
+        "S_tp": {
+          "absolute": 0.0,
+          "relative": 0.0
+        },
+        "S_pt": {
+          "absolute": 0.0,
+          "relative": 0.0
+        },
+        "H_tp": {
+          "absolute": 0.0,
+          "relative": 0.0
+        },
+        "H_pt": {
+          "absolute": 0.0,
+          "relative": 0.0
+        },
+        "D_tp": {
+          "absolute": 0.0,
+          "relative": 0.0
+        },
+        "D_pt": {
+          "absolute": 0.0,
+          "relative": 0.0
+        }
+      }
+    },
+    {
+      "backend": "numpy",
+      "wall_seconds": 21.863341354,
+      "cpu_seconds": 21.853975223000006,
+      "rss_KiB": 172280,
+      "parity": {
+        "S_tp": {
+          "absolute": 4.187440401262922e-17,
+          "relative": 6.780897286298809e-15
+        },
+        "S_pt": {
+          "absolute": 3.9043589091278826e-17,
+          "relative": 6.322491592634256e-15
+        },
+        "H_tp": {
+          "absolute": 7.698237543410874e-17,
+          "relative": 9.29189650022732e-15
+        },
+        "H_pt": {
+          "absolute": 7.5940018207907e-17,
+          "relative": 9.166082306945888e-15
+        },
+        "D_tp": {
+          "absolute": 5.168779669136201e-17,
+          "relative": 6.154350700598808e-15
+        },
+        "D_pt": {
+          "absolute": 0.0,
+          "relative": 0.0
+        }
+      }
+    },
+    {
+      "backend": "native",
+      "wall_seconds": 14.815196657000001,
+      "cpu_seconds": 14.813918467000008,
+      "rss_KiB": 172280,
+      "parity": {
+        "S_tp": {
+          "absolute": 4.187440401262922e-17,
+          "relative": 6.780897286298809e-15
+        },
+        "S_pt": {
+          "absolute": 3.9043589091278826e-17,
+          "relative": 6.322491592634256e-15
+        },
+        "H_tp": {
+          "absolute": 7.698237543410874e-17,
+          "relative": 9.29189650022732e-15
+        },
+        "H_pt": {
+          "absolute": 7.5940018207907e-17,
+          "relative": 9.166082306945888e-15
+        },
+        "D_tp": {
+          "absolute": 5.168779669136201e-17,
+          "relative": 6.154350700598808e-15
+        },
+        "D_pt": {
+          "absolute": 0.0,
+          "relative": 0.0
+        }
+      }
+    }
+  ],
+  "original_over_numpy": 4.786108559104376,
+  "original_over_native": 7.063039904742592,
+  "native_over_numpy_speedup": 1.4757375052237214,
+  "parallel": {
+    "workers": 3,
+    "jobs": 3,
+    "wall_seconds_including_spawn": 22.343621561999953,
+    "sum_cpu_seconds": 55.309516853,
+    "all_jobs_same_source_and_frozen_basis": true,
+    "all_matrices_bit_equal_to_serial": true,
+    "max_relative_error_vs_serial": 0.0,
+    "jobs_metadata": [
+      {
+        "backend": "native",
+        "wall_seconds": 15.285289126999942,
+        "cpu_seconds": 15.278758579,
+        "peak_rss_KiB": 171496,
+        "pid": 1428
+      },
+      {
+        "backend": "native",
+        "wall_seconds": 20.168678425000053,
+        "cpu_seconds": 20.136963829,
+        "peak_rss_KiB": 172760,
+        "pid": 1432
+      },
+      {
+        "backend": "native",
+        "wall_seconds": 19.907010319999927,
+        "cpu_seconds": 19.893794444999997,
+        "peak_rss_KiB": 172860,
+        "pid": 1431
+      }
+    ]
+  },
+  "new_tests": {
+    "passed": 32,
+    "failures": 0,
+    "skipped": 0,
+    "output": "32 passed in 9.90s"
+  },
+  "tdd_scope": "one hot-path behavior test observed RED then GREEN; other tests are recorded additional regression tests, not retroactively labelled RED/GREEN",
+  "scan_result": {
+    "status": "NUMERICAL_SCREEN_FAILED",
+    "completed_geometries": 4,
+    "first_failure": {
+      "kind": "numerical",
+      "z_a0": -6.0,
+      "failed_screens": [
+        "metric connection"
+      ]
+    },
+    "geometry_rows": [
+      {
+        "z_a0": -12.0,
+        "metric_connection_relative": 2.1500508706734946e-09,
+        "failed_screens": []
+      },
+      {
+        "z_a0": -10.0,
+        "metric_connection_relative": 1.977302391204957e-09,
+        "failed_screens": []
+      },
+      {
+        "z_a0": -8.0,
+        "metric_connection_relative": 2.100843387116237e-08,
+        "failed_screens": []
+      },
+      {
+        "z_a0": -6.0,
+        "metric_connection_relative": 0.0002401921967602956,
+        "failed_screens": [
+          "metric connection"
+        ]
+      }
+    ],
+    "full_13_geometry_pass": false,
+    "frozen_screen": 1e-06,
+    "contract_not_relaxed": true
+  },
+  "original_failure_countercheck": {
+    "purpose": "distinguish numerical scan failure from optimization regression at fixed order24",
+    "z_a0": -6.0,
+    "original_connection_residual": 0.00024019219670454517,
+    "optimized_connection_residual": 0.0002401921967602956,
+    "screen": 1e-06,
+    "raw_parity": [
+      {
+        "time_hex": "-0x1.7e7ae7dcc7a17p+1",
+        "original_wall": 118.34382737100009,
+        "original_cpu": 118.317188281,
+        "delta": {
+          "S": {
+            "absolute": 1.9554384480289772e-16,
+            "relative": 4.608750099795228e-17
+          },
+          "H": {
+            "absolute": 4.2364124323719046e-16,
+            "relative": 7.566518235809447e-17
+          },
+          "D": {
+            "absolute": 2.0088965662924706e-16,
+            "relative": 3.285017585944291e-17
+          }
+        },
+        "cross_relative": {
+          "S": 4.220369755062692e-15,
+          "H": 5.4696649842553994e-15,
+          "D": 3.5294925722817293e-15
+        }
+      },
+      {
+        "time_hex": "-0x1.7e7946195fe4cp+1",
+        "original_wall": 76.28929630900006,
+        "original_cpu": 76.257149613,
+        "delta": {
+          "S": {
+            "absolute": 1.9520749206466445e-16,
+            "relative": 4.600822628774899e-17
+          },
+          "H": {
+            "absolute": 3.551224649123491e-16,
+            "relative": 6.342729042984376e-17
+          },
+          "D": {
+            "absolute": 1.579755670152247e-16,
+            "relative": 2.5832714506575935e-17
+          }
+        },
+        "cross_relative": {
+          "S": 4.3201871034772344e-15,
+          "H": 4.583402683238196e-15,
+          "D": 2.775454240978953e-15
+        }
+      },
+      {
+        "time_hex": "-0x1.7e77a455f8281p+1",
+        "original_wall": 119.65006859999994,
+        "original_cpu": 119.63550654800001,
+        "delta": {
+          "S": {
+            "absolute": 1.4703151791515863e-16,
+            "relative": 3.465368699594636e-17
+          },
+          "H": {
+            "absolute": 5.54520328937111e-16,
+            "relative": 9.904114398805953e-17
+          },
+          "D": {
+            "absolute": 2.2768396544032575e-16,
+            "relative": 3.72316743386207e-17
+          }
+        },
+        "cross_relative": {
+          "S": 3.4122208462272012e-15,
+          "H": 7.024172823390139e-15,
+          "D": 4.000055782015608e-15
+        }
+      }
+    ],
+    "parallel_seconds": 121.870298628,
+    "sum_cpu_seconds": 314.209844442,
+    "classification": "ORIGINAL_OPERATOR_SAME_FAILURE_NOT_NEW_OPTIMIZER_ERROR",
+    "capture_execution_allowed": false
+  },
+  "environment": {
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "os": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "cpu_model": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "affinity_cpus": 5,
+    "cpu_quota": "400000 100000",
+    "memory_quota_bytes": "4294967296"
+  },
+  "capture_execution_allowed": false,
+  "production_admission": "HOLD",
+  "all_bound": "OPEN",
+  "b_grid": "NO_GO",
+  "original_capture_gap_resolved": false
+}
