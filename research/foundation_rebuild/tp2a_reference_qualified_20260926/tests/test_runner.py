@@ -56,6 +56,7 @@ def test_reference_policy_runs_candidate_only_after_reference_is_qualified():
         calls.append([(s['method'],s.get('reference_order')) for s in specs])
         rows=[]
         for s in specs:
+            # q32 fails, q40/q48 pass and converge; candidate passes.
             good = not (s['method']=='reference' and s['reference_order']==32)
             order=s.get('reference_order')
             shift=5e-5 if order==32 else (3e-10 if order==40 else 0.)

@@ -37,8 +37,7 @@ def _atomic_file(path,writer):
         if os.path.exists(tmp):os.unlink(tmp)
 
 def _write_json(path,value):
-    data=(json.dumps(value,indent=2,allow_nan=False)+'
-').encode()
+    data=(json.dumps(value,indent=2,allow_nan=False)+'\n').encode()
     _atomic_file(path,lambda f:f.write(data))
 
 def _flatten(payload):

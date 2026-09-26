@@ -120,8 +120,7 @@ def main(argv=None):
         'gpu_run':False,'propagation_run':False,'completed_geometry':[]}
     def emit(**row):
         row={'elapsed_seconds':time.monotonic()-start,**row}
-        with (out/'PROGRESS.jsonl').open('a') as f:f.write(json.dumps(row,separators=(',',':'))+'
-');f.flush();os.fsync(f.fileno())
+        with (out/'PROGRESS.jsonl').open('a') as f:f.write(json.dumps(row,separators=(',',':'))+'\n');f.flush();os.fsync(f.fileno())
         print(json.dumps(row),flush=True)
     emit(event='run_start',out=str(out))
     try:

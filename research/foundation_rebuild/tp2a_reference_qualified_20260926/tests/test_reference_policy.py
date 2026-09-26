@@ -16,7 +16,9 @@ def _row(method, order, dz, *, connection_good=True, cross_shift=0.0):
 
 def test_reference_ladder_skips_unconverged_q32_and_qualifies_q48():
     rows=[]
+    # q32 fails its own connection and is far from q40.
     for dz in (-1e-4,0.,1e-4): rows.append(_row('reference',32,dz,connection_good=False,cross_shift=5e-5))
+    # q40 and q48 both pass connection and agree under raw-cross screen.
     for dz in (-1e-4,0.,1e-4): rows.append(_row('reference',40,dz,connection_good=True,cross_shift=3e-10))
     for dz in (-1e-4,0.,1e-4): rows.append(_row('reference',48,dz,connection_good=True,cross_shift=0.0))
     contract={'screens':{'connection_relative_max':1e-6,'raw_cross_relative_max':1e-9,

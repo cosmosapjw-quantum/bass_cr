@@ -50,6 +50,7 @@ def test_geometry_receipt_calculates_connection_parity_and_screens():
     for method,offset in [('phase24',0.),('reference32',1e-12)]:
         for dz,ss in [(-1e-4,-1.),(0.,0.),(1e-4,1.)]:
             p=_payload(1.)
+            # Sdot = [[0,.1], [.1,0]]; D+Ddag = same.
             p['full']['S']=np.array([[1.,.1+ss*eps_t*.1],[.1+ss*eps_t*.1,1.]],complex)
             p['full']['D']=np.array([[0.,.05],[.05,0.]],complex)
             for k in p['cross']: p['cross'][k]=p['cross'][k]+offset
