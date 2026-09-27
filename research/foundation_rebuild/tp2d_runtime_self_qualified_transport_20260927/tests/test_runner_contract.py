@@ -69,6 +69,7 @@ def test_run_cli_success_keeps_claim_ceiling_and_runtime_qualification_flags(mon
     out=tmp_path/'run';pred=tmp_path/'pred.json';arc=tmp_path/'pred.zip'
     pred.write_text('{}');arc.write_bytes(b'x')
     monkeypatch.setattr(run_tp2d,'git_identity',lambda:('head','tree'))
+    monkeypatch.setattr(run_tp2d,'verify_ancestry',lambda *a: None)
     monkeypatch.setattr(run_tp2d,'verify_sources',lambda: {'self':'ok'})
     monkeypatch.setattr(run_tp2d,'verify_predecessor',lambda *a: {'status':C['predecessor_status'],'return_report_sha256':'a','return_archive_sha256':'b'})
     monkeypatch.setattr(run_tp2d,'run_new_tests',lambda out: {'tests':16,'failures':0,'errors':0,'skipped':0,'returncode':0,'command':['pytest']})
@@ -96,6 +97,7 @@ def test_run_cli_new_test_failure_is_not_scientific_failure(monkeypatch,tmp_path
     out=tmp_path/'run';pred=tmp_path/'pred.json';arc=tmp_path/'pred.zip'
     pred.write_text('{}');arc.write_bytes(b'x')
     monkeypatch.setattr(run_tp2d,'git_identity',lambda:('head','tree'))
+    monkeypatch.setattr(run_tp2d,'verify_ancestry',lambda *a: None)
     monkeypatch.setattr(run_tp2d,'verify_sources',lambda: {'self':'ok'})
     monkeypatch.setattr(run_tp2d,'verify_predecessor',lambda *a: {'status':C['predecessor_status']})
     monkeypatch.setattr(run_tp2d,'run_new_tests',lambda out: {'tests':16,'failures':1,'errors':0,'skipped':0,'returncode':1,'command':['pytest']})
