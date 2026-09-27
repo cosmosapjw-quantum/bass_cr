@@ -1,8 +1,11 @@
 import json
+import sys
 from pathlib import Path
 
 HERE=Path(__file__).resolve().parents[1]
 C=json.loads((HERE/'CONTRACT.json').read_text())
+sys.path.insert(0,str(HERE))
+import run_negative_tail_qualification as runner
 
 
 def test_exact_missing_negative_tail_and_full13_partition():
@@ -47,3 +50,14 @@ def test_predecessor_hashes_are_exact_sha256():
     assert len(C['predecessor_return_archive_sha256'])==64
     int(C['predecessor_return_report_sha256'],16)
     int(C['predecessor_return_archive_sha256'],16)
+
+
+def test_tp2b_selected_evidence_relation_uses_nested_schema():
+    row={
+        'candidate_reference_alias':False,
+        'candidate_vs_reference':{
+            'evidence_relation':'INDEPENDENT_NUMERICAL_TASK_COMPARISON'
+        }
+    }
+    assert runner.predecessor_selected_relation(row)=='INDEPENDENT_NUMERICAL_TASK_COMPARISON'
+    assert 'evidence_relation' not in row
