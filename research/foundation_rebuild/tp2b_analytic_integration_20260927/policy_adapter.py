@@ -41,7 +41,7 @@ def _qualify_reference_resolutions(rows, epsilon_t, contract):
     receipts={};attempted=[];previous=None;qualified_order=None;qualified_subdivisions=None
     for rule in plan:
         q,h=rule['order'],rule['subdivisions']
-        subset=[r for r in rows if r.get('family')=='reference' and r.get('reference_order')==q and r.get('integration_subdivisions',1)==h]
+        subset=[r for r in rows if r.get('method')=='reference' and r.get('reference_order')==q and r.get('integration_subdivisions',1)==h]
         if len(subset)!=3:break
         rec=qr._connection_receipt(subset,epsilon_t,screens)
         attempted.append({'order':q,'subdivisions':h})
