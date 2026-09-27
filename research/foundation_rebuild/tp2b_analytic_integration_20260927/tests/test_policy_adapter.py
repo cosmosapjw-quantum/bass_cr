@@ -58,8 +58,10 @@ def test_exact_alias_to_qualified_reference_is_marked_not_independent():
     assert got['candidate_vs_reference']['evidence_relation']=='ALIASED_SAME_NUMERICAL_TASK_NOT_INDEPENDENT_CROSSCHECK'
 
 
-def test_resolution_plan_is_owned_by_tp2b_not_upstream_runtime():
-    assert not hasattr(pa.qr,'resolution_plan')
+def test_resolution_plan_is_owned_by_tp2b_not_upstream_runtime(monkeypatch):
+    def forbidden(*args,**kwargs):
+        raise AssertionError('upstream resolution_plan must not be called')
+    monkeypatch.setattr(pa.qr,'resolution_plan',forbidden,raising=False)
     contract={
       'reference_orders':[32,40],
       'candidate_orders':[24,32],
