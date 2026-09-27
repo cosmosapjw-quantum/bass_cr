@@ -87,7 +87,8 @@ def verify_predecessor(report_path,archive_path,contract):
             raise ValueError('predecessor contains unqualified geometry')
         if row.get('candidate_reference_alias'):
             raise ValueError('predecessor selected candidate/reference pair was aliased')
-        if row.get('evidence_relation')!='INDEPENDENT_NUMERICAL_TASK_COMPARISON':
+        relation=row.get('candidate_vs_reference',{}).get('evidence_relation')
+        if relation!='INDEPENDENT_NUMERICAL_TASK_COMPARISON':
             raise ValueError('predecessor selected comparison was not independent')
     ceilings={
         'capture_execution_allowed':False,
