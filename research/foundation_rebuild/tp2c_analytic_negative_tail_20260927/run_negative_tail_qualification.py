@@ -64,6 +64,11 @@ def verify_own_sources():
     }
 
 
+def predecessor_selected_relation(row):
+    """Return the selected candidate/reference evidence relation in TP2B schema."""
+    return row.get('candidate_vs_reference',{}).get('evidence_relation')
+
+
 def verify_predecessor(report_path,archive_path,contract):
     report_path=Path(report_path).resolve();archive_path=Path(archive_path).resolve()
     if sha(report_path)!=contract['predecessor_return_report_sha256']:
@@ -87,7 +92,7 @@ def verify_predecessor(report_path,archive_path,contract):
             raise ValueError('predecessor contains unqualified geometry')
         if row.get('candidate_reference_alias'):
             raise ValueError('predecessor selected candidate/reference pair was aliased')
-        relation=row.get('candidate_vs_reference',{}).get('evidence_relation')
+        relation=predecessor_selected_relation(row)
         if relation!='INDEPENDENT_NUMERICAL_TASK_COMPARISON':
             raise ValueError('predecessor selected comparison was not independent')
     ceilings={
