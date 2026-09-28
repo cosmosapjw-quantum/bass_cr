@@ -1,0 +1,41 @@
+name: One-shot TP2D archive import
+
+on:
+  push:
+    branches:
+      - research/fnd-ncloud-c64g3-codex-handoff-20260928
+    paths:
+      - .github/workflows/ncloud-tp2d-artifact-import-20260928.yml
+
+permissions:
+  contents: write
+
+jobs:
+  import-archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+      - name: Fetch exact archive and commit it
+        shell: bash
+        env:
+          SOURCE_URL: "https://uc479a109bbb60020367a66b91c8.dl.dropboxusercontent.com/cd/0/get/DI-4ZjxloGcsP-ffp__ZsG9X1Q4GRsJx3cS9_-af7fQ8o2ncHGRgLAWHkJqg_Hon7z30c5WUqZ27auPoDEOhQ4SSpeZ3-yluDlSUCVJf9Io5w6AW5Bvep3GvNo2pG5RxhApAnfq6cwtBVzvyofLLMD6x7PBR3doCT0ZUyGh4kPNU7g/file?c_luid=2afe63b0"
+          EXPECTED_SHA256: "630a80208331b7b37c02a77eae7435f6317d07439a4ea34b11885455fe53fa35"
+          EXPECTED_BYTES: "31849212"
+          DEST: "research/foundation_rebuild/ncloud_c64g3_20260928/artifacts/tp2d_runtime_self_qualified_20260927T074944Z_RETURN.zip"
+        run: |
+          set -euo pipefail
+          mkdir -p "$(dirname "$DEST")"
+          curl --fail --location --silent --show-error --retry 2 --retry-delay 2             --output "$DEST" "$SOURCE_URL"
+          printf '%s  %s\n' "$EXPECTED_SHA256" "$DEST" | sha256sum -c -
+          test "$(stat -c %s "$DEST")" = "$EXPECTED_BYTES"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$DEST"
+          git rm ".github/workflows/ncloud-tp2d-artifact-import-20260928.yml"
+          git commit -m "data(ncloud): add exact TP2D return archive"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
