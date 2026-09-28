@@ -1,0 +1,31 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+________ test_timeout_before_first_submit_still_writes_partial_receipts ________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-95/test_timeout_before_first_subm0')
+
+    def test_timeout_before_first_submit_still_writes_partial_receipts(tmp_path):
+        store = TaskStore(tmp_path / 'run', CONTEXT)
+        def timeout_progress(row):
+            raise TimeoutError('synthetic before submit')
+>       status = execute_precompute(tasks(), store, result, 1, progress=timeout_progress,
+            executor_factory=lambda workers, **kwargs: ThreadPoolExecutor(max_workers=workers))
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_runner_contract.py:120:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/run_f1_r2_parallel.py:140: in execute_precompute
+    emit('precompute_started')
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/run_f1_r2_parallel.py:132: in emit
+    progress(row)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+row = {'completed': 0, 'elapsed_seconds': 0.00012692300151684321, 'failed': 0, 'mem_available_bytes': 131576827904, ...}
+
+    def timeout_progress(row):
+>       raise TimeoutError('synthetic before submit')
+E       TimeoutError: synthetic before submit
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_runner_contract.py:119: TimeoutError
+=========================== short test summary info ============================
+FAILED research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_runner_contract.py::test_timeout_before_first_submit_still_writes_partial_receipts
+1 failed, 9 deselected in 0.22s
