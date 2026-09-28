@@ -1,14 +1,15 @@
 {
-  "schema": "BASS_NCLOUD_F1_STATUS_V2",
-  "status": "F0_DURABLE_CLOSED_F1_IMPLEMENTATION_READY_EXECUTION_NOT_AUTHORIZED",
+  "schema": "BASS_NCLOUD_F1_STATUS_V3",
+  "status": "F1_RUN_AUTHORIZED_READY_PENDING_EXECUTION",
   "date": "2026-09-28",
   "upstream_f0_commit": "609508ea136019d75a8e6af46f29740e18f6f061",
   "f0_status": "F0_DURABLE_CLOSED",
   "implementation_authorized": true,
-  "scientific_execution_authorized": false,
+  "scientific_execution_authorized": true,
   "runtime_budget": {
-    "max_wall_seconds": null,
-    "spending_limit_krw": null
+    "max_wall_seconds": 7200,
+    "spending_limit_krw": 8000,
+    "prepaid_host_approved": false
   },
   "representative_queries": 15,
   "selected_resolution_classes": [
@@ -20,7 +21,7 @@
     "q56_h2",
     "q64_h2"
   ],
-  "next_document": "F1_CODEX_HANDOFF_KO.md",
+  "next_document": "F1_NCP_RUN_HANDOFF_KO.md",
   "claim_ceiling": {
     "capture_execution_allowed": false,
     "production_admission": "HOLD",
@@ -30,5 +31,19 @@
     "continuous_global_supremum_bound": false
   },
   "f0_durable_closure": "research/foundation_rebuild/ncloud_c64g3_20260928/F0_DURABLE_CLOSURE.json",
-  "f0_artifact_import_complete": true
+  "f0_artifact_import_complete": true,
+  "run_authorization": "research/foundation_rebuild/ncloud_f1_engine_admission_20260928/RUN_AUTHORIZATION_20260928.json",
+  "storage_approval": "research/foundation_rebuild/ncloud_f1_engine_admission_20260928/F1_STORAGE_APPROVAL.json",
+  "execution_handoff": "research/foundation_rebuild/ncloud_f1_engine_admission_20260928/F1_NCP_RUN_HANDOFF_KO.md",
+  "frozen_implementation": {
+    "commit": "8236887dd8869de57522d5c87a48972f287969fe",
+    "tree": "d114060c6dc6bdc1aa10fc6d9ffe9de19da99fae"
+  },
+  "workspace": {
+    "root": "/root/.local/state/bass_f1",
+    "storage_class": "CB1",
+    "provisioned_gb": 100,
+    "block_device": "/dev/vda",
+    "observed_filesystem": "/dev/vda2 ext4 mounted at /"
+  }
 }
