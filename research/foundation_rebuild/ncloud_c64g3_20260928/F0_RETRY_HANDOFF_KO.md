@@ -71,16 +71,54 @@ git -C "$REPO" show "$PLAN_REF:$BASE/RETURN_CONTRACT.json"
 
 Do not search Downloads, Dropbox, or Google Drive for F0 inputs. The branch now contains them.
 
-## 2. Materialize exact Git blobs into a fresh staging directory
+## 2. Select an isolated F0 workspace and materialize exact Git blobs
 
-Cloud-first workspace is `/data/bass`. If that path is not an already mounted and approved work
-volume, do not format or mount anything. Return `CLOUD_WORKSPACE_NOT_READY`.
+`/data/bass` is preferred on an already prepared NAVER Cloud host, but it is **not a scientific
+prerequisite for F0**. F0 performs zero spatial operator evaluations and may run in an isolated
+home-directory workspace when no approved data volume is mounted.
+
+Workspace selection order:
+
+1. If the operator explicitly set `BASS_F0_ROOT`, require that its parent is writable and use it.
+2. Else, if `/data/bass` already exists, is writable, and `findmnt -T /data/bass` resolves it,
+   use `/data/bass` with `WORKSPACE_CLASS=NAVERCLOUD_DATA_VOLUME`.
+3. Else use `$HOME/.local/state/bass_f0` with `WORKSPACE_CLASS=LOCAL_HOME_FALLBACK`.
+
+Do not format, mount, chmod/chown system paths, use sudo, or create `/data/bass` merely to satisfy
+this handoff. A home fallback is expected and valid for cache-only F0. Before continuing, require
+at least 1 GiB available on the selected filesystem. Record the selected path, filesystem, available
+bytes and workspace class in the F0 handoff receipt.
 
 ```bash
-ROOT=/data/bass
-findmnt -T "$ROOT" || findmnt -T /data
-
 STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
+
+if test -n "${BASS_F0_ROOT:-}"; then
+  ROOT="$BASS_F0_ROOT"
+  WORKSPACE_CLASS="EXPLICIT_F0_ROOT"
+elif test -d /data/bass && test -w /data/bass && findmnt -T /data/bass >/dev/null 2>&1; then
+  ROOT=/data/bass
+  WORKSPACE_CLASS="NAVERCLOUD_DATA_VOLUME"
+else
+  ROOT="$HOME/.local/state/bass_f0"
+  WORKSPACE_CLASS="LOCAL_HOME_FALLBACK"
+fi
+
+mkdir -p "$ROOT"
+test -w "$ROOT" || {
+  echo "F0_WORKSPACE_NOT_WRITABLE: $ROOT"
+  exit 3
+}
+
+AVAILABLE_KB="$(df -Pk "$ROOT" | awk 'NR==2 {print $4}')"
+test "${AVAILABLE_KB:-0}" -ge 1048576 || {
+  echo "F0_WORKSPACE_INSUFFICIENT_SPACE: $ROOT available_kb=$AVAILABLE_KB"
+  exit 3
+}
+
+WORKSPACE_FS="$(findmnt -T "$ROOT" -no SOURCE,FSTYPE,TARGET 2>/dev/null || true)"
+printf 'F0_ROOT=%s\nWORKSPACE_CLASS=%s\nWORKSPACE_FS=%s\nAVAILABLE_KB=%s\n' \
+  "$ROOT" "$WORKSPACE_CLASS" "$WORKSPACE_FS" "$AVAILABLE_KB"
+
 STAGE="$ROOT/inputs/f0_repo_$STAMP"
 CODE="$ROOT/code/f0_repo_$STAMP"
 ENV="$ROOT/env/tp2e_f0_$STAMP"
@@ -246,6 +284,7 @@ sha256sum "$OUT/RETURN_REPORT.json" "$OUT"_RETURN.zip "$HOSTREC"
 ```
 
 Create `F0_RETURN_HANDOFF.json` following `RETURN_CONTRACT.json`. Include:
+- selected `ROOT`, `WORKSPACE_CLASS`, filesystem identity and available-space check;
 - actual fetched plan branch HEAD/tree and `634f6fd3a2ff9b8dec94b104f693136b84accdab` ancestry result;
 - source worktree HEAD/tree without modifying that worktree;
 - exact GitHub input SHA/size values;
