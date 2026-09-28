@@ -1,0 +1,31 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+_____ test_authorized_bad_archive_stops_before_build_and_never_claims_pass _____
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-65/test_authorized_bad_archive_st0')
+
+    def test_authorized_bad_archive_stops_before_build_and_never_claims_pass(tmp_path):
+        from types import SimpleNamespace
+        from research.foundation_rebuild.ncloud_f1_engine_admission_20260928.runtime.run_f1_engine_admission import execute_authorized
+        bad_archive = tmp_path / 'bad_archive.zip'
+        bad_archive.write_bytes(b'wrong archive')
+        out = tmp_path / 'execution'
+        approved = {'max_wall_seconds': 60, 'spending_limit_krw': 0}
+>       rc = execute_authorized(SimpleNamespace(archive=str(bad_archive)), out, 'a' * 40, 'b' * 40, approved)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: execute_authorized() takes 4 positional arguments but 5 were given
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py:93: TypeError
+______________________ test_infinite_cost_budget_rejected ______________________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-65/test_infinite_cost_budget_reje0')
+
+    def test_infinite_cost_budget_rejected(tmp_path):
+>       with pytest.raises(Exception, match='F1_EXECUTION_NOT_AUTHORIZED'):
+E       Failed: DID NOT RAISE <class 'Exception'>
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py:102: Failed
+=========================== short test summary info ============================
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py::test_authorized_bad_archive_stops_before_build_and_never_claims_pass
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py::test_infinite_cost_budget_rejected
+2 failed, 14 deselected in 0.07s

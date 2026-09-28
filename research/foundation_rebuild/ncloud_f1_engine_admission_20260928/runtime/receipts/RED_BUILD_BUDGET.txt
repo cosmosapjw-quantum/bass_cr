@@ -1,0 +1,20 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+__________________ test_build_passes_wall_timeout_to_compiler __________________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-69/test_build_passes_wall_timeout0')
+
+    def test_build_passes_wall_timeout_to_compiler(tmp_path):
+        source = tmp_path / 'moment_kernel.cpp'
+        source.write_text('source')
+        limits = []
+        def compiler(argv, **kwargs):
+            limits.append(kwargs.get('timeout'))
+            return fake_compiler(argv, **kwargs)
+>       build_engine(source, tmp_path / 'engine', contract(source), run=compiler, timeout_seconds=19)
+E       TypeError: build_engine() got an unexpected keyword argument 'timeout_seconds'
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_cloud_engine.py:106: TypeError
+=========================== short test summary info ============================
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_cloud_engine.py::test_build_passes_wall_timeout_to_compiler
+1 failed, 12 deselected in 0.06s
