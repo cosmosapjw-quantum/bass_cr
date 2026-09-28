@@ -1,6 +1,6 @@
 {
-  "schema": "BASS_NCLOUD_CODEX_PLAN_STATUS_V2",
-  "status": "F0_RETRY_READY_REPO_CONTAINED_INPUTS_NATIVE_IMPLEMENTATION_PENDING",
+  "schema": "BASS_NCLOUD_CODEX_PLAN_STATUS_V3",
+  "status": "F0_RETRY_READY_WORKSPACE_FALLBACK_ENABLED_NATIVE_IMPLEMENTATION_PENDING",
   "date": "2026-09-28",
   "change_kind": "DATA_RECOVERY_PLUS_F0_RETRY_HANDOFF",
   "active_codex_role": "BASS_NCLOUD_F0_RETRY_EXECUTOR",
@@ -8,7 +8,7 @@
   "source_commit": "c954d68fdc86527453765a563b3a025351163ed9",
   "plan_branch": "research/fnd-ncloud-c64g3-codex-handoff-20260928",
   "stage_status": {
-    "F0": "REPO_INPUTS_COMPLETE_READY_FOR_CACHE_ONLY_RETRY",
+    "F0": "REPO_INPUTS_COMPLETE_CACHE_ONLY_RETRY_WORKSPACE_FALLBACK_ENABLED",
     "F1": "DESIGN_COMPLETE_IMPLEMENTATION_PENDING",
     "F2": "DESIGN_COMPLETE_IMPLEMENTATION_PENDING",
     "F3": "DESIGN_COMPLETE_IMPLEMENTATION_PENDING"
@@ -42,5 +42,15 @@
   },
   "historical_tp2d_status": "TEMPORAL_REFINEMENT_UNRESOLVED",
   "historical_records_immutable": true,
-  "next_document": "F0_RETRY_HANDOFF_KO.md"
+  "next_document": "F0_RETRY_HANDOFF_KO.md",
+  "f0_workspace_policy": {
+    "data_volume_required": false,
+    "preferred": "/data/bass",
+    "fallback": "$HOME/.local/state/bass_f0",
+    "fallback_is_cloud_benchmark": false
+  },
+  "previous_blockers": [
+    "F0_INITIAL_INPUTS_AND_ENVIRONMENT_MISSING",
+    "F0_RETRY_CLOUD_WORKSPACE_NOT_READY_HANDOFF_OVERCONSTRAINT"
+  ]
 }
