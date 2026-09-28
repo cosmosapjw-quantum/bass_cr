@@ -1,0 +1,98 @@
+{
+  "schema": "BASS_NCLOUD_F1_R2_IMPLEMENTATION_AUDIT_V1",
+  "audited_at": "2026-09-28",
+  "status": "PASS_FOR_BOUNDED_FIRST_PARALLEL_EXECUTION",
+  "implementation_commit": "f1d69165c6d1e799d9474db23166cb665880576f",
+  "implementation_tree": "5842046d6bf9d4865566dad28a3fec5b22235f41",
+  "parent_commit": "42690cfae499661aa79f95d86fad7a0ca0980745",
+  "commit_message": "feat(f1-r2): implement exact parallel admission orchestration",
+  "scope_audit": {
+    "ahead_by": 1,
+    "behind_by": 0,
+    "existing_scientific_source_modified": 0,
+    "changes_limited_to": "research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/",
+    "source_manifest_entries": 25,
+    "source_manifest_remote_blob_size_matches": 25,
+    "source_manifest_mismatches": 0
+  },
+  "implementation_evidence": {
+    "focused_tests": {
+      "tests": 30,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "py_compile_files": 13,
+    "py_compile_pass": true,
+    "cli_help_pass": true,
+    "serial_timeout_evidence_verified": true,
+    "serial_parallel_equivalence_verified": true,
+    "resource_policy_verified": true,
+    "resume_store_verified": true,
+    "scientific_execution_performed": false,
+    "authorization_created": false
+  },
+  "code_audit": {
+    "concurrency": {
+      "multiprocessing_start_method": "spawn",
+      "preferred_workers": 60,
+      "required_affinity_minimum": 64,
+      "reserve_vcpu": 4,
+      "worker_internal_threads": 1,
+      "worker_initializer_loads_engine_basis_evaluator_once": true,
+      "parent_only_durable_writer": true
+    },
+    "task_plan": {
+      "representative_specs": 165,
+      "metric_specs": 165,
+      "maximum_unique_before_dedup": 330,
+      "exact_time_hex_identity": true,
+      "fuzzy_time_reuse": false,
+      "consumer_role_excluded_from_numerical_identity": true
+    },
+    "task_store": {
+      "create_only_atomic": true,
+      "payload_sha256": true,
+      "receipt_digest": true,
+      "fsync_semantics": true,
+      "exact_context_resume_to_fresh_output": true,
+      "scientific_failure_migration_blocked": true
+    },
+    "reducer": {
+      "existing_f1_run_admission_reused": true,
+      "cache_only_evaluator": true,
+      "native_fallback_on_cache_miss": false,
+      "selection_policy_changed": false,
+      "parity_thresholds_changed": false,
+      "metric_thresholds_changed": false
+    },
+    "authorization_firewall": {
+      "old_f1_authorization_rejected": true,
+      "exact_r2_commit_tree_required": true,
+      "positive_wall_budget_required": true,
+      "cost_or_prepaid_gate_required": true
+    }
+  },
+  "limitations": [
+    "Serial/parallel equivalence is demonstrated with synthetic evaluators and cache semantics; a full 60-process native BASS execution has not yet run.",
+    "The contract requires >=64 visible affinity CPUs and >=120,000,000,000 bytes MemTotal; a container/cgroup exposing fewer CPUs or memory will fail closed even if the VM product is nominally 64-vCPU/128-GB.",
+    "Worker RSS is not used to pre-cap the pool below 60; runtime MemAvailable is checked before new task submission and work fails closed below 5 GiB. The first real 60-process run therefore remains a bounded resource experiment as well as a scientific admission.",
+    "On interruption, persisted exact tasks are recoverable, but in-flight tasks may be terminated and recomputed on a later exact-context resume."
+  ],
+  "previous_timeout": {
+    "run_id": "20260928T064313Z",
+    "classification": "ORCHESTRATION_SERIALISM_NOT_SCIENTIFIC_FAILURE",
+    "exit_code": 124,
+    "wall_seconds": 7200,
+    "scientific_status": "NOT_REPORTED"
+  },
+  "next_gate": "EXPLICIT_R2_RUN_AUTHORIZATION_WITH_NEW_IMPLEMENTATION_COMMIT_TREE_AND_BOUNDED_WALL_COST",
+  "claim_ceiling": {
+    "capture_execution_allowed": false,
+    "production_admission": "HOLD",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "original_capture_gap_resolved": false,
+    "continuous_global_supremum_bound": false
+  }
+}
