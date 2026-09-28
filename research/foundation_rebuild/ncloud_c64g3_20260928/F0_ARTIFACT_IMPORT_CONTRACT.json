@@ -1,0 +1,55 @@
+{
+  "schema": "BASS_NCLOUD_F0_ARTIFACT_IMPORT_CONTRACT_V1",
+  "purpose": "Before F1 implementation claims depend on F0, import and byte-verify the completed F0 artifacts from the execution host.",
+  "source_paths": [
+    {
+      "role": "return_report",
+      "path": "/root/.local/state/bass_f0/runs/tp2e_cache_20260928T045058Z/RETURN_REPORT.json",
+      "sha256": "a074daa3a5c3a87939c52d41984a78ca5059e932ac9f07983bee2e78b6f22986",
+      "bytes": 6336,
+      "required": true
+    },
+    {
+      "role": "return_archive",
+      "path": "/root/.local/state/bass_f0/runs/tp2e_cache_20260928T045058Z_RETURN.zip",
+      "sha256": "fd5e5a7543dd60ba2711ff5189324c116c8c9a1595c8c106744f2cf1aad0a440",
+      "bytes": 11426,
+      "required": true
+    },
+    {
+      "role": "f0_return_handoff",
+      "path": "/root/.local/state/bass_f0/receipts/f0_20260928T045058Z/F0_RETURN_HANDOFF.json",
+      "required": true
+    },
+    {
+      "role": "environment_receipt",
+      "path": "/root/.local/state/bass_f0/receipts/f0_20260928T045058Z/ENVIRONMENT_RECEIPT.json",
+      "required": true
+    },
+    {
+      "role": "host_receipt",
+      "path": "/root/.local/state/bass_f0/receipts/HOST_F0_20260928T045058Z.json",
+      "required": true
+    },
+    {
+      "role": "run_log",
+      "path": "/root/.local/state/bass_f0/receipts/F0_RUN_20260928T045058Z.log",
+      "required": false
+    },
+    {
+      "role": "sha256sums",
+      "path": "/root/.local/state/bass_f0/receipts/f0_20260928T045058Z/SHA256SUMS.txt",
+      "required": false
+    }
+  ],
+  "destination_root": "research/foundation_rebuild/ncloud_c64g3_20260928/f0_evidence/",
+  "requirements": [
+    "Never synthesize missing receipt content from the screenshot or summary.",
+    "Verify supplied SHA/size before staging the report and archive.",
+    "Inspect the RETURN ZIP integrity and its internal manifest if present.",
+    "Record the actual Git blob identity after commit.",
+    "Preserve the original execution paths as provenance strings only.",
+    "Do not overwrite or delete the host files."
+  ],
+  "status_before_import": "USER_REPORTED_EXECUTION_PENDING_ARTIFACT_IMPORT"
+}
