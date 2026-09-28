@@ -1,6 +1,6 @@
 # NAVER Cloud c64-g3: 승인 계획, 복구된 입력, Codex F0 retry
 
-상태: **F0_RETRY_READY_REPO_CONTAINED_INPUTS_NATIVE_IMPLEMENTATION_PENDING**.
+상태: **F0_RETRY_READY_WORKSPACE_FALLBACK_ENABLED_NATIVE_IMPLEMENTATION_PENDING**.
 
 초기 F0 handoff는 설계 ZIP, TP2D 전체 RETURN ZIP, 승인 환경을 외부에서 찾지 못해
 `STOP_F0_BLOCKED`로 종료됐다. 그 run은 그대로 보존한다. 이후 사용자가 전체 TP2D RETURN ZIP을
@@ -44,3 +44,11 @@ F1-F3는 여전히 구현·비용 승인 전이다.
 `capture=false`, `production=HOLD`, `all_bound=OPEN`, `b_grid=NO_GO`,
 `original_capture_gap_resolved=false`, `continuous_global_supremum_bound=false`.
 원 TP2D `TEMPORAL_REFINEMENT_UNRESOLVED`는 변경하지 않는다.
+
+## F0 workspace
+
+`/data/bass`는 준비된 cloud data volume이 있을 때 우선 사용하지만 F0의 필수조건이 아니다.
+F0는 새 spatial 계산이 0회이므로, `/data/bass`가 없으면
+`$HOME/.local/state/bass_f0`의 격리 workspace를 사용한다. 이 경우 결과 receipt에는
+`WORKSPACE_CLASS=LOCAL_HOME_FALLBACK`을 기록하고 cloud throughput evidence로 해석하지 않는다.
+F1–F3 native 단계는 별도 data-volume/resource/budget gate가 계속 필요하다.
