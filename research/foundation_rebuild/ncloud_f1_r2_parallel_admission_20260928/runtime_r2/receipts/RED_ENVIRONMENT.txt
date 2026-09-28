@@ -1,0 +1,41 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+__________________ test_numeric_environment_rejects_pin_drift __________________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-98/test_numeric_environment_rejec0')
+
+    def test_numeric_environment_rejects_pin_drift(tmp_path):
+        from research.foundation_rebuild.ncloud_f1_r2_parallel_admission_20260928.runtime_r2.run_f1_r2_parallel import verify_numeric_environment
+        pins = tmp_path / 'requirements-tested.txt'
+        pins.write_text('numpy==0.0.0\nscipy==1.17.0\npytest==9.0.2\nmpmath==1.3.0\n')
+        with pytest.raises(Exception, match='R2_ENVIRONMENT_BLOCKED'):
+>           verify_numeric_environment(pins)
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_runner_contract.py:91:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+requirements_path = PosixPath('/tmp/pytest-of-root/pytest-98/test_numeric_environment_rejec0/requirements-tested.txt')
+
+    def verify_numeric_environment(requirements_path):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/run_f1_r2_parallel.py:89: NotImplementedError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-98/test_numeric_environment_rejec0')
+
+    def test_numeric_environment_rejects_pin_drift(tmp_path):
+        from research.foundation_rebuild.ncloud_f1_r2_parallel_admission_20260928.runtime_r2.run_f1_r2_parallel import verify_numeric_environment
+        pins = tmp_path / 'requirements-tested.txt'
+        pins.write_text('numpy==0.0.0\nscipy==1.17.0\npytest==9.0.2\nmpmath==1.3.0\n')
+>       with pytest.raises(Exception, match='R2_ENVIRONMENT_BLOCKED'):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'R2_ENVIRONMENT_BLOCKED'
+E         Actual message: ''
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_runner_contract.py:90: AssertionError
+=========================== short test summary info ============================
+FAILED research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_runner_contract.py::test_numeric_environment_rejects_pin_drift
+1 failed, 10 deselected in 0.27s

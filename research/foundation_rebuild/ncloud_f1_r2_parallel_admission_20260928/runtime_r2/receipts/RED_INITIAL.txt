@@ -1,0 +1,477 @@
+FFFFFFFFFFFFFFFFFFFFFF                                                   [100%]
+=================================== FAILURES ===================================
+________________ test_exact_cache_hit_and_nearby_time_hard_miss ________________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-85/test_exact_cache_hit_and_nearb0')
+
+    def test_exact_cache_hit_and_nearby_time_hard_miss(tmp_path):
+>       store = TaskStore(tmp_path / 'run', CONTEXT)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_cache_evaluator.py:14:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <research.foundation_rebuild.ncloud_f1_r2_parallel_admission_20260928.runtime_r2.task_store.TaskStore object at 0x70708d6c0bc0>
+directory = PosixPath('/tmp/pytest-of-root/pytest-85/test_exact_cache_hit_and_nearb0/run')
+context = {'contract_sha256': 'cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc', 'engine_identity_sha256': 'eee...eeeeeeeeeeeeeeeeeeee', 'historical_archive_sha256': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}
+
+    def __init__(self, directory, context):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/task_store.py:3: NotImplementedError
+_____ test_serial_reducer_equals_precomputed_cache_for_out_of_order_tasks ______
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-85/test_serial_reducer_equals_pre0')
+
+    def test_serial_reducer_equals_precomputed_cache_for_out_of_order_tasks(tmp_path):
+        evidence = Evidence()
+        scientific = contract()
+        reps = {'query_count': 1, 'queries': [evidence.representative]}
+>       plan = plan_tasks(reps, scientific, 1.0, CONTEXT['engine_identity_sha256'], CONTEXT['historical_archive_sha256'])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_parallel_equivalence.py:51:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+representatives = {'queries': [{'query_id': 'exact-query', 'selected_resolution': {'order': 40, 'subdivisions': 1}, 'time_hex': '0x0.0p+0'}], 'query_count': 1}
+f1_contract = {'parity_policy': {'compare_selected_full_arrays': ['S', 'H', 'D'], 'epsilon_z_a0': 0.0001, 'metric_connection_sentine...e_resolutions': [{'order': 32, 'subdivisions': 1}, {'order': 40, 'subdivisions': 1}, {'order': 48, 'subdivisions': 1}]}
+speed = 1.0
+engine_identity_sha256 = 'eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
+archive_sha256 = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+
+    def plan_tasks(representatives, f1_contract, speed, engine_identity_sha256, archive_sha256):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/task_plan.py:8: NotImplementedError
+______________ test_affinity_64_uses_60_workers_and_reserves_four ______________
+
+    def test_affinity_64_uses_60_workers_and_reserves_four():
+>       assert select_workers(64, 128_000_000_000, 330) == 60
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_resources.py:8:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+affinity_count = 64, mem_total_bytes = 128000000000, remaining_tasks = 330
+
+    def select_workers(affinity_count, mem_total_bytes, remaining_tasks):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/resources.py:2: NotImplementedError
+______________ test_under_64_affinity_or_under_memory_gate_blocks ______________
+
+    def test_under_64_affinity_or_under_memory_gate_blocks():
+        with pytest.raises(Exception, match='R2_HOST_MISMATCH'):
+>           select_workers(63, 128_000_000_000, 330)
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_resources.py:14:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+affinity_count = 63, mem_total_bytes = 128000000000, remaining_tasks = 330
+
+    def select_workers(affinity_count, mem_total_bytes, remaining_tasks):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/resources.py:2: NotImplementedError
+
+During handling of the above exception, another exception occurred:
+
+    def test_under_64_affinity_or_under_memory_gate_blocks():
+>       with pytest.raises(Exception, match='R2_HOST_MISMATCH'):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'R2_HOST_MISMATCH'
+E         Actual message: ''
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_resources.py:13: AssertionError
+____________ test_worker_thread_policy_is_one_and_dynamic_disabled _____________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x70708a9e3530>
+
+    def test_worker_thread_policy_is_one_and_dynamic_disabled(monkeypatch):
+        for key in ('OMP_NUM_THREADS', 'OPENBLAS_NUM_THREADS', 'MKL_NUM_THREADS', 'NUMEXPR_NUM_THREADS'):
+            monkeypatch.setenv(key, '8')
+>       result = enforce_thread_policy()
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_resources.py:22:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def enforce_thread_policy():
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/resources.py:5: NotImplementedError
+________________ test_old_f1_authorization_cannot_authorize_r2 _________________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-85/test_old_f1_authorization_cann0')
+
+    def test_old_f1_authorization_cannot_authorize_r2(tmp_path):
+        old = {'schema': 'BASS_NCLOUD_F1_RUN_AUTHORIZATION_V1',
+               'implementation_commit': '8236887dd8869de57522d5c87a48972f287969fe',
+               'implementation_tree': 'd114060c6dc6bdc1aa10fc6d9ffe9de19da99fae',
+               'native_admission_allowed': True, 'max_wall_seconds': 7200, 'spending_limit_krw': 8000}
+        path = tmp_path / 'old_synthetic_auth.json'
+        path.write_text(json.dumps(old))
+        with pytest.raises(Exception, match='R2_EXECUTION_NOT_AUTHORIZED'):
+>           check_authorization(path, 'r' * 40, 't' * 40)
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_runner_contract.py:38:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = PosixPath('/tmp/pytest-of-root/pytest-85/test_old_f1_authorization_cann0/old_synthetic_auth.json')
+head = 'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'
+tree = 'tttttttttttttttttttttttttttttttttttttttt'
+
+    def check_authorization(path, head, tree):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/run_f1_r2_parallel.py:2: NotImplementedError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-85/test_old_f1_authorization_cann0')
+
+    def test_old_f1_authorization_cannot_authorize_r2(tmp_path):
+        old = {'schema': 'BASS_NCLOUD_F1_RUN_AUTHORIZATION_V1',
+               'implementation_commit': '8236887dd8869de57522d5c87a48972f287969fe',
+               'implementation_tree': 'd114060c6dc6bdc1aa10fc6d9ffe9de19da99fae',
+               'native_admission_allowed': True, 'max_wall_seconds': 7200, 'spending_limit_krw': 8000}
+        path = tmp_path / 'old_synthetic_auth.json'
+        path.write_text(json.dumps(old))
+>       with pytest.raises(Exception, match='R2_EXECUTION_NOT_AUTHORIZED'):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'R2_EXECUTION_NOT_AUTHORIZED'
+E         Actual message: ''
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_runner_contract.py:37: AssertionError
+______________________ test_output_collision_fails_closed ______________________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-85/test_output_collision_fails_cl0')
+
+    def test_output_collision_fails_closed(tmp_path):
+        out = tmp_path / 'existing'
+        out.mkdir()
+        (out / 'marker').write_bytes(b'original')
+>       assert main(['--out', str(out)]) != 0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_runner_contract.py:45:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+argv = ['--out', '/tmp/pytest-of-root/pytest-85/test_output_collision_fails_cl0/existing']
+
+    def main(argv=None):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/run_f1_r2_parallel.py:8: NotImplementedError
+_____________________ test_cli_help_without_authorization ______________________
+
+    def test_cli_help_without_authorization():
+        script = Path(__file__).resolve().parents[1] / 'run_f1_r2_parallel.py'
+        proc = subprocess.run([sys.executable, str(script), '--help'], capture_output=True, text=True)
+>       assert proc.returncode == 0 and '--authorization' in proc.stdout
+E       AssertionError: assert (0 == 0 and '--authorization' in '')
+E        +  where 0 = CompletedProcess(args=['/root/.local/state/bass_f0/env/tp2e_f0_20260928T045058Z/bin/python', '/root/.local/state/bass_...oud_f1_r2_parallel_admission_20260928/runtime_r2/run_f1_r2_parallel.py', '--help'], returncode=0, stdout='', stderr='').returncode
+E        +  and   '' = CompletedProcess(args=['/root/.local/state/bass_f0/env/tp2e_f0_20260928T045058Z/bin/python', '/root/.local/state/bass_...oud_f1_r2_parallel_admission_20260928/runtime_r2/run_f1_r2_parallel.py', '--help'], returncode=0, stdout='', stderr='').stdout
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_runner_contract.py:52: AssertionError
+_ test_timeout_or_interrupt_keeps_first_task_and_writes_partial_receipts[error0] _
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-85/test_timeout_or_interrupt_keep0')
+error = TimeoutError('budget exhausted')
+
+    @pytest.mark.parametrize('error', [TimeoutError('budget exhausted'), KeyboardInterrupt()])
+    def test_timeout_or_interrupt_keeps_first_task_and_writes_partial_receipts(tmp_path, error):
+>       store = TaskStore(tmp_path / 'run', CONTEXT)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_runner_contract.py:57:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <research.foundation_rebuild.ncloud_f1_r2_parallel_admission_20260928.runtime_r2.task_store.TaskStore object at 0x70708a9e39e0>
+directory = PosixPath('/tmp/pytest-of-root/pytest-85/test_timeout_or_interrupt_keep0/run')
+context = {'contract_sha256': 'cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc', 'engine_identity_sha256': 'eee...eeeeeeeeeeeeeeeeeeee', 'historical_archive_sha256': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}
+
+    def __init__(self, directory, context):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/task_store.py:3: NotImplementedError
+_ test_timeout_or_interrupt_keeps_first_task_and_writes_partial_receipts[error1] _
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-85/test_timeout_or_interrupt_keep1')
+error = KeyboardInterrupt()
+
+    @pytest.mark.parametrize('error', [TimeoutError('budget exhausted'), KeyboardInterrupt()])
+    def test_timeout_or_interrupt_keeps_first_task_and_writes_partial_receipts(tmp_path, error):
+>       store = TaskStore(tmp_path / 'run', CONTEXT)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_runner_contract.py:57:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <research.foundation_rebuild.ncloud_f1_r2_parallel_admission_20260928.runtime_r2.task_store.TaskStore object at 0x706feaccc0b0>
+directory = PosixPath('/tmp/pytest-of-root/pytest-85/test_timeout_or_interrupt_keep1/run')
+context = {'contract_sha256': 'cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc', 'engine_identity_sha256': 'eee...eeeeeeeeeeeeeeeeeeee', 'historical_archive_sha256': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}
+
+    def __init__(self, directory, context):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/task_store.py:3: NotImplementedError
+__________ test_representative_task_count_165_and_exact_deduplication __________
+
+    def test_representative_task_count_165_and_exact_deduplication():
+        reps, contract = contracts()
+>       plan = plan_tasks(reps, contract, 2.0, 'e' * 64, reps['source_archive_sha256'])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_task_plan.py:17:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+representatives = {'derivation': 'DERIVED_FROM_BYTE_VERIFIED_TP2D_RETURN_ARCHIVE', 'historical_selected_resolution_histogram': {'q40_h1'...b2afc3b0dc4159ae9d48d74b', 'selected_resolution': {'order': 56, 'subdivisions': 1}, ...}, ...], 'query_count': 15, ...}
+f1_contract = {'basis_policy': {'exact_bytes_required': True, 'recompute_atomic_bank_allowed': False, 'source': 'BASIS.json and BASI....}, 'execution_budget': {'max_wall_seconds': None, 'native_execution_allowed': False, 'spending_limit_krw': None}, ...}
+speed = 2.0
+engine_identity_sha256 = 'eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
+archive_sha256 = '630a80208331b7b37c02a77eae7435f6317d07439a4ea34b11885455fe53fa35'
+
+    def plan_tasks(representatives, f1_contract, speed, engine_identity_sha256, archive_sha256):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/task_plan.py:8: NotImplementedError
+__________________ test_metric_times_match_old_f1_float_order __________________
+
+    def test_metric_times_match_old_f1_float_order():
+        _, contract = contracts()
+>       triples = metric_times(2.0, contract)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_task_plan.py:26:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+speed = 2.0
+f1_contract = {'basis_policy': {'exact_bytes_required': True, 'recompute_atomic_bank_allowed': False, 'source': 'BASIS.json and BASI....}, 'execution_budget': {'max_wall_seconds': None, 'native_execution_allowed': False, 'spending_limit_krw': None}, ...}
+
+    def metric_times(speed, f1_contract):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/task_plan.py:5: NotImplementedError
+______ test_task_identity_uses_numeric_context_and_ignores_consumer_role _______
+
+    def test_task_identity_uses_numeric_context_and_ignores_consumer_role():
+        context = {'engine_identity_sha256': 'e' * 64, 'historical_archive_sha256': 'a' * 64}
+>       baseline = task_id(context, '0x0.0p+0', 40, 1, consumer='representative')
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_task_plan.py:34:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+context = {'engine_identity_sha256': 'eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', 'historical_archive_sha256': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}
+time_hex = '0x0.0p+0', order = 40, subdivisions = 1, sector = 'full'
+consumer = 'representative'
+
+    def task_id(context, time_hex, order, subdivisions, sector='full', consumer=None):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/task_plan.py:2: NotImplementedError
+__________ test_plan_order_independent_of_representative_input_order ___________
+
+    def test_plan_order_independent_of_representative_input_order():
+        reps, contract = contracts()
+>       first = plan_tasks(reps, contract, 2.0, 'e' * 64, reps['source_archive_sha256'])
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_task_plan.py:45:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+representatives = {'derivation': 'DERIVED_FROM_BYTE_VERIFIED_TP2D_RETURN_ARCHIVE', 'historical_selected_resolution_histogram': {'q40_h1'...b2afc3b0dc4159ae9d48d74b', 'selected_resolution': {'order': 56, 'subdivisions': 1}, ...}, ...], 'query_count': 15, ...}
+f1_contract = {'basis_policy': {'exact_bytes_required': True, 'recompute_atomic_bank_allowed': False, 'source': 'BASIS.json and BASI....}, 'execution_budget': {'max_wall_seconds': None, 'native_execution_allowed': False, 'spending_limit_krw': None}, ...}
+speed = 2.0
+engine_identity_sha256 = 'eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
+archive_sha256 = '630a80208331b7b37c02a77eae7435f6317d07439a4ea34b11885455fe53fa35'
+
+    def plan_tasks(representatives, f1_contract, speed, engine_identity_sha256, archive_sha256):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/task_plan.py:8: NotImplementedError
+___ test_persist_receipt_pins_payload_context_shape_dtype_and_is_create_only ___
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-85/test_persist_receipt_pins_payl0')
+
+    def test_persist_receipt_pins_payload_context_shape_dtype_and_is_create_only(tmp_path):
+>       store = TaskStore(tmp_path / 'run', CONTEXT)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_task_store.py:26:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <research.foundation_rebuild.ncloud_f1_r2_parallel_admission_20260928.runtime_r2.task_store.TaskStore object at 0x706fead52840>
+directory = PosixPath('/tmp/pytest-of-root/pytest-85/test_persist_receipt_pins_payl0/run')
+context = {'contract_sha256': 'cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc', 'engine_identity_sha256': 'eee...eeeeeeeeeeeeeeeeeeee', 'historical_archive_sha256': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}
+
+    def __init__(self, directory, context):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/task_store.py:3: NotImplementedError
+_______ test_payload_receipt_or_missing_member_tamper_rejected[payload] ________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-85/test_payload_receipt_or_missin0')
+which = 'payload'
+
+    @pytest.mark.parametrize('which', ['payload', 'receipt', 'missing_pair'])
+    def test_payload_receipt_or_missing_member_tamper_rejected(tmp_path, which):
+>       store = TaskStore(tmp_path / 'run', CONTEXT)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_task_store.py:42:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <research.foundation_rebuild.ncloud_f1_r2_parallel_admission_20260928.runtime_r2.task_store.TaskStore object at 0x706fead521e0>
+directory = PosixPath('/tmp/pytest-of-root/pytest-85/test_payload_receipt_or_missin0/run')
+context = {'contract_sha256': 'cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc', 'engine_identity_sha256': 'eee...eeeeeeeeeeeeeeeeeeee', 'historical_archive_sha256': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}
+
+    def __init__(self, directory, context):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/task_store.py:3: NotImplementedError
+_______ test_payload_receipt_or_missing_member_tamper_rejected[receipt] ________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-85/test_payload_receipt_or_missin1')
+which = 'receipt'
+
+    @pytest.mark.parametrize('which', ['payload', 'receipt', 'missing_pair'])
+    def test_payload_receipt_or_missing_member_tamper_rejected(tmp_path, which):
+>       store = TaskStore(tmp_path / 'run', CONTEXT)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_task_store.py:42:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <research.foundation_rebuild.ncloud_f1_r2_parallel_admission_20260928.runtime_r2.task_store.TaskStore object at 0x706fead525a0>
+directory = PosixPath('/tmp/pytest-of-root/pytest-85/test_payload_receipt_or_missin1/run')
+context = {'contract_sha256': 'cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc', 'engine_identity_sha256': 'eee...eeeeeeeeeeeeeeeeeeee', 'historical_archive_sha256': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}
+
+    def __init__(self, directory, context):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/task_store.py:3: NotImplementedError
+_____ test_payload_receipt_or_missing_member_tamper_rejected[missing_pair] _____
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-85/test_payload_receipt_or_missin2')
+which = 'missing_pair'
+
+    @pytest.mark.parametrize('which', ['payload', 'receipt', 'missing_pair'])
+    def test_payload_receipt_or_missing_member_tamper_rejected(tmp_path, which):
+>       store = TaskStore(tmp_path / 'run', CONTEXT)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_task_store.py:42:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <research.foundation_rebuild.ncloud_f1_r2_parallel_admission_20260928.runtime_r2.task_store.TaskStore object at 0x706fead52f60>
+directory = PosixPath('/tmp/pytest-of-root/pytest-85/test_payload_receipt_or_missin2/run')
+context = {'contract_sha256': 'cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc', 'engine_identity_sha256': 'eee...eeeeeeeeeeeeeeeeeeee', 'historical_archive_sha256': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}
+
+    def __init__(self, directory, context):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/task_store.py:3: NotImplementedError
+________ test_exact_context_resume_to_fresh_output_preserves_old_bytes _________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-85/test_exact_context_resume_to_f0')
+
+    def test_exact_context_resume_to_fresh_output_preserves_old_bytes(tmp_path):
+>       old = TaskStore(tmp_path / 'old', CONTEXT)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_task_store.py:59:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <research.foundation_rebuild.ncloud_f1_r2_parallel_admission_20260928.runtime_r2.task_store.TaskStore object at 0x706fead53e90>
+directory = PosixPath('/tmp/pytest-of-root/pytest-85/test_exact_context_resume_to_f0/old')
+context = {'contract_sha256': 'cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc', 'engine_identity_sha256': 'eee...eeeeeeeeeeeeeeeeeeee', 'historical_archive_sha256': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}
+
+    def __init__(self, directory, context):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/task_store.py:3: NotImplementedError
+______________ test_resume_rejects_context_or_scientific_failure _______________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-85/test_resume_rejects_context_or0')
+
+    def test_resume_rejects_context_or_scientific_failure(tmp_path):
+>       old = TaskStore(tmp_path / 'old', CONTEXT)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_task_store.py:70:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <research.foundation_rebuild.ncloud_f1_r2_parallel_admission_20260928.runtime_r2.task_store.TaskStore object at 0x706feaccfb60>
+directory = PosixPath('/tmp/pytest-of-root/pytest-85/test_resume_rejects_context_or0/old')
+context = {'contract_sha256': 'cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc', 'engine_identity_sha256': 'eee...eeeeeeeeeeeeeeeeeeee', 'historical_archive_sha256': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}
+
+    def __init__(self, directory, context):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/task_store.py:3: NotImplementedError
+_____________ test_initializer_binds_once_and_task_uses_exact_hex ______________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x706feaccdd00>
+
+    def test_initializer_binds_once_and_task_uses_exact_hex(monkeypatch):
+        observed = []
+        def factory(*args):
+            observed.append('init')
+            return lambda t, q, h: ({'S_tp': np.array([[t]])}, {'S': np.array([[q + h]])})
+>       worker.initialize_worker('repo', 'build', 'basis', {}, evaluator_factory=factory)
+E       TypeError: initialize_worker() got an unexpected keyword argument 'evaluator_factory'
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_worker.py:12: TypeError
+__________________ test_nonfinite_worker_result_fails_closed ___________________
+
+    def test_nonfinite_worker_result_fails_closed():
+>       worker.initialize_worker('repo', 'build', 'basis', {},
+            evaluator_factory=lambda *args: lambda t, q, h: ({'S_tp': np.array([[np.nan]])}, {'S': np.eye(1)}))
+E       TypeError: initialize_worker() got an unexpected keyword argument 'evaluator_factory'
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_worker.py:20: TypeError
+=========================== short test summary info ============================
+FAILED research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_cache_evaluator.py::test_exact_cache_hit_and_nearby_time_hard_miss
+FAILED research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_parallel_equivalence.py::test_serial_reducer_equals_precomputed_cache_for_out_of_order_tasks
+FAILED research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_resources.py::test_affinity_64_uses_60_workers_and_reserves_four
+FAILED research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_resources.py::test_under_64_affinity_or_under_memory_gate_blocks
+FAILED research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_resources.py::test_worker_thread_policy_is_one_and_dynamic_disabled
+FAILED research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_runner_contract.py::test_old_f1_authorization_cannot_authorize_r2
+FAILED research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_runner_contract.py::test_output_collision_fails_closed
+FAILED research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_runner_contract.py::test_cli_help_without_authorization
+FAILED research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_runner_contract.py::test_timeout_or_interrupt_keeps_first_task_and_writes_partial_receipts[error0]
+FAILED research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_runner_contract.py::test_timeout_or_interrupt_keeps_first_task_and_writes_partial_receipts[error1]
+FAILED research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_task_plan.py::test_representative_task_count_165_and_exact_deduplication
+FAILED research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_task_plan.py::test_metric_times_match_old_f1_float_order
+FAILED research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_task_plan.py::test_task_identity_uses_numeric_context_and_ignores_consumer_role
+FAILED research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_task_plan.py::test_plan_order_independent_of_representative_input_order
+FAILED research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_task_store.py::test_persist_receipt_pins_payload_context_shape_dtype_and_is_create_only
+FAILED research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_task_store.py::test_payload_receipt_or_missing_member_tamper_rejected[payload]
+FAILED research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_task_store.py::test_payload_receipt_or_missing_member_tamper_rejected[receipt]
+FAILED research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_task_store.py::test_payload_receipt_or_missing_member_tamper_rejected[missing_pair]
+FAILED research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_task_store.py::test_exact_context_resume_to_fresh_output_preserves_old_bytes
+FAILED research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_task_store.py::test_resume_rejects_context_or_scientific_failure
+FAILED research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_worker.py::test_initializer_binds_once_and_task_uses_exact_hex
+FAILED research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_worker.py::test_nonfinite_worker_result_fails_closed
+22 failed in 0.47s
