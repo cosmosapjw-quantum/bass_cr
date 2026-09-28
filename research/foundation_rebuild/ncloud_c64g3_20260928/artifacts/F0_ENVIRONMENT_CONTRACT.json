@@ -1,5 +1,5 @@
 {
-  "schema": "BASS_NCLOUD_F0_ENVIRONMENT_CONTRACT_V1",
+  "schema": "BASS_NCLOUD_F0_ENVIRONMENT_CONTRACT_V2",
   "scope": "F0_CACHE_ONLY_M4_ONLY",
   "decision_date": "2026-09-28",
   "historical_tp2d_python_minor": "NOT_RECORDED_IN_TP2D_RETURN_ARCHIVE",
@@ -49,5 +49,16 @@
     "b_grid": "NO_GO",
     "original_capture_gap_resolved": false,
     "continuous_global_supremum_bound": false
+  },
+  "f0_workspace_policy": {
+    "preferred_cloud_root": "/data/bass",
+    "explicit_override_env": "BASS_F0_ROOT",
+    "local_fallback_root": "$HOME/.local/state/bass_f0",
+    "minimum_available_bytes": 1073741824,
+    "data_volume_required_for_f0": false,
+    "data_volume_required_for_native_f1_f2_f3": true,
+    "system_mount_mutation_authorized": false,
+    "sudo_for_workspace_authorized": false,
+    "local_fallback_semantics": "Valid only for cache-only F0. Record WORKSPACE_CLASS=LOCAL_HOME_FALLBACK and do not promote the result to cloud-throughput evidence."
   }
 }
