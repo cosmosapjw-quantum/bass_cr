@@ -29,3 +29,13 @@ instructions, not a shell-wide interception of manually executed commands.
 Keep b-grid NO_GO and existing scientific claim ceilings. Verification policy
 changes do not authorize new physics runs, 50/225 keV/u, integrated cross sections,
 physical rates, main-branch merges or changes to global runtime policy.
+
+## Code ownership and cloud handoff (owner instruction, 2026-09-28)
+
+Follow [docs/CHATGPT_CODEX_DIVISION_OF_LABOR_KO.md](docs/CHATGPT_CODEX_DIVISION_OF_LABOR_KO.md).
+ChatGPT is the primary implementation/repair/test/packaging worker. Deliver tested
+code and exact source identity before handing work to cloud Codex. Cloud Codex
+performs focused review, necessary in-scope repairs, approved execution and evidence
+return; do not make it reimplement delivered features or restart completed work.
+Unchanged prior suites are not rerun. Changed code/environment receives targeted
+checks. Preserve separate scientific, runtime, publication and authority gates.
