@@ -14,6 +14,7 @@ import hashlib
 import json
 import os
 import shutil
+import signal
 import subprocess
 import sys
 import tempfile
@@ -37,6 +38,10 @@ TP2D = FND / 'tp2d_runtime_self_qualified_transport_20260927'
 for p in (HERE, TP2D, ANALYTIC, PERF, TP1, FND_SRC, FULL, REPAIR, REPO):
     if str(p) not in sys.path:
         sys.path.insert(0, str(p))
+
+from execution_admission import (strict_json, check_request, check_native_build,
+    consume_authorization, EvaluationLedger, interrupted, ARCHIVE_SHA256)
+
 
 CLAIM_CEILING = {
     'capture_execution_allowed': False,
@@ -93,7 +98,7 @@ def git_identity():
 
 
 def verify_pinned_dependencies() -> dict:
-    manifest = json.loads((HERE / 'PINNED_DEPENDENCIES.json').read_text())
+    manifest = strict_json(HERE / 'PINNED_DEPENDENCIES.json')
     actual = {}
     for rel, expected in manifest['files'].items():
         p = REPO / rel
@@ -119,7 +124,7 @@ def validate_query_store(source: Path, context_id: str) -> dict:
         npz = qdir / (qid + '.npz')
         if not npz.is_file():
             raise ValueError('resume query payload missing: ' + qid)
-        rec = json.loads(jp.read_text())
+        rec = strict_json(jp)
         if rec.get('schema') != 'BASS_TP2D_QUALIFIED_RUNTIME_QUERY_V1':
             raise ValueError('bad resume query schema: ' + qid)
         if rec.get('query_id') != qid or rec.get('context_id') != context_id:
@@ -128,7 +133,17 @@ def validate_query_store(source: Path, context_id: str) -> dict:
             raise ValueError('unqualified stored runtime query: ' + qid)
         if sha256_path(npz) != rec.get('payload_sha256'):
             raise ValueError('resume query payload hash mismatch: ' + qid)
-        maxdiff = max(maxdiff, float(rec['qualification']['max_raw_cross_relative_difference']))
+        diff = float(rec['qualification']['max_raw_cross_relative_difference'])
+        if not np.isfinite(diff) or not 0 <= diff <= 1e-9:
+            raise ValueError('stored raw-cross qualification fails frozen screen: ' + qid)
+        time_hex = rec.get('time_hex')
+        if not isinstance(time_hex, str) or not np.isfinite(float.fromhex(time_hex)):
+            raise ValueError('stored query time invalid: ' + qid)
+        expected_qid = digest({'schema':'BASS_TP2D_RUNTIME_QUERY_V1',
+                               'context_id':context_id,'time_hex':time_hex})
+        if expected_qid != qid:
+            raise ValueError('stored query time/id mismatch: ' + qid)
+        maxdiff = max(maxdiff, diff)
     npz_count = len(list(qdir.glob('*.npz')))
     if npz_count != len(rows):
         raise ValueError('resume query json/npz count mismatch')
@@ -141,10 +156,16 @@ def load_candidate(source: Path, nstep: int):
     npz = source / f'CANDIDATE_N{nstep}.npz'
     if not jp.is_file() or not npz.is_file():
         raise ValueError(f'resume archive lacks CANDIDATE_N{nstep}')
-    rec = json.loads(jp.read_text())
+    rec = strict_json(jp)
     if int(rec.get('nstep', -1)) != int(nstep):
         raise ValueError('previous candidate nstep mismatch')
     with np.load(npz, allow_pickle=False) as f:
+        if (f['initial_state'].shape != (18,) or f['final_state'].shape != (18,)
+            or f['norm_history'].shape != (int(nstep)+1,)
+            or not all(np.isfinite(f[k]).all() for k in ('initial_state','final_state','norm_history'))):
+            raise ValueError('previous candidate shape/finiteness mismatch')
+        if not np.isfinite([rec['dt'],rec['max_norm_drift'],rec['max_generator_defect']]).all():
+            raise ValueError('nonfinite previous candidate receipt')
         return CandidateResult(
             True,
             int(nstep),
@@ -164,21 +185,23 @@ def validate_source(source: Path, previous_nstep: int, next_nstep: int) -> dict:
     for rel in required:
         if not (source / rel).is_file():
             raise ValueError('resume archive missing required file: ' + rel)
-    report = json.loads((source / 'RETURN_REPORT.json').read_text())
+    report = strict_json(source / 'RETURN_REPORT.json')
     if report.get('status') not in ALLOWED_SOURCE_STATUSES:
         raise ValueError('resume status is not an unresolved temporal-continuation source')
     for key, value in CLAIM_CEILING.items():
         if report.get(key) != value:
             raise ValueError('resume claim ceiling mismatch: ' + key)
-    sc = json.loads((source / 'SCIENCE_CONTEXT.json').read_text())
+    sc = strict_json(source / 'SCIENCE_CONTEXT.json')
     context = sc.get('context'); context_id = sc.get('context_id')
     if not isinstance(context, dict) or digest(context) != context_id:
         raise ValueError('SCIENCE_CONTEXT identity mismatch')
     contract = context['contract']
     if contract.get('candidate_step_counts') != [24, 48, 96, 192, 384]:
         raise ValueError('unexpected frozen historical candidate ladder')
-    if next_nstep <= previous_nstep or next_nstep != 2 * previous_nstep:
-        raise ValueError('continuation must be exactly one doubling rung')
+    if (previous_nstep, next_nstep) != (384, 768):
+        raise ValueError('this admission is only N384 -> N768; no other rung authorized')
+    if context_id != 'bb2a6d2cb7b598441e44294ae9d9499e983f6bfebe9ec4dcfdbc29b9ac7f1cda':
+        raise ValueError('historical numerical context differs from N768 admission')
     budget = int(contract['max_unique_runtime_queries'])
     # run_candidate accesses t0, one midpoint per step, and tf.  Even with no
     # restored hits, one isolated continuation rung therefore needs <= N+2.
@@ -186,16 +209,34 @@ def validate_source(source: Path, previous_nstep: int, next_nstep: int) -> dict:
     if per_run_upper_bound > budget:
         raise ValueError('single-rung continuation exceeds frozen per-run query budget')
     screens = contract['screens']
-    metric_rows = json.loads((source / 'METRIC_CONNECTION.json').read_text())
+    metric_rows = strict_json(source / 'METRIC_CONNECTION.json')
     if len(metric_rows) != len(contract['metric_sentinel_z_a0']) or any(float(x['relative_residual']) > float(screens['metric_derivative_relative_max']) for x in metric_rows):
         raise ValueError('inherited metric sentinel evidence does not pass frozen screen')
-    rr = json.loads((source / 'REFERENCE_RECEIPT.json').read_text())
+    rr = strict_json(source / 'REFERENCE_RECEIPT.json')
     if rr.get('method') != contract['reference_solver']['method'] or float(rr['rtol']) != float(contract['reference_solver']['rtol']) or float(rr['atol']) != float(contract['reference_solver']['atol']):
         raise ValueError('inherited reference solver identity mismatch')
     if float(rr['max_norm_drift']) > float(screens['reference_norm_drift_max']):
         raise ValueError('inherited reference norm drift fails frozen screen')
     prev = load_candidate(source, previous_nstep)
+    from cr_repro.observables import projectile_speed_au
+    expected_dt = ((contract['z_final_a0'] - contract['z_initial_a0']) /
+                   projectile_speed_au(contract['energy_keV_per_u']) / previous_nstep)
+    if not np.isclose(prev.dt, expected_dt, rtol=8*np.finfo(float).eps, atol=0):
+        raise ValueError('previous candidate dt differs from frozen window/nstep')
+    basis = strict_json(source / 'BASIS.json')
+    if (digest({k:v for k,v in basis.items() if k != 'identity'}) != basis.get('identity')
+        or sha256_path(source/'BASIS.npz') != basis.get('matrix_sha256')
+        or basis.get('identity') != context['physics_identity']['basis_identity']):
+        raise ValueError('basis provenance mismatch')
+    with np.load(source/'REFERENCE_STATES.npz', allow_pickle=False) as ref:
+        if (ref['final_state'].shape != (18,) or ref['initial_state'].shape != (18,)
+            or not all(np.isfinite(ref[k]).all() for k in ref.files)):
+            raise ValueError('reference state shape/finiteness mismatch')
+        if not np.allclose(ref['initial_state'], prev.initial_state, rtol=0, atol=1e-14):
+            raise ValueError('candidate/reference initial states differ')
     store = validate_query_store(source, context_id)
+    if store['qualified_query_count'] != 1279:
+        raise ValueError('N768 admission requires original 1279-query store')
     return {
         'report_status': report['status'],
         'context_id': context_id,
@@ -212,10 +253,19 @@ def extract_validated_archive(archive: Path, expected_sha256: str, destination: 
     archive = Path(archive).resolve()
     if not archive.is_file():
         raise ValueError('resume archive not found')
+    if expected_sha256 != ARCHIVE_SHA256:
+        raise ValueError('archive authorization is restricted to frozen N384 source')
     got = sha256_path(archive)
     if got != expected_sha256:
         raise ValueError('resume archive sha256 mismatch')
     with zipfile.ZipFile(archive) as zf:
+        names = zf.namelist()
+        if len(names) != len(set(names)):
+            raise ValueError('duplicate archive member')
+        for item in zf.infolist():
+            rel = Path(item.filename)
+            if rel.is_absolute() or '..' in rel.parts or '\\' in item.filename or ((item.external_attr >> 16) & 0o170000) == 0o120000:
+                raise ValueError('unsafe archive member: ' + item.filename)
         bad = zf.testzip()
         if bad is not None:
             raise ValueError('resume archive CRC failure: ' + bad)
@@ -224,6 +274,8 @@ def extract_validated_archive(archive: Path, expected_sha256: str, destination: 
 
 
 def execute_science(source: Path, out: Path, source_info: dict, analytic_build: Path, next_nstep: int) -> dict:
+    # Check bytes against the frozen contract BEFORE the constructor can dlopen.
+    native_check = check_native_build(analytic_build, source_info['contract'], ANALYTIC/'moment_kernel.cpp')
     from bass_foundations.two_center import Trajectory, symmetric_channels
     from cr_repro.observables import projectile_speed_au
     from exact_cross import MomentKernel
@@ -243,6 +295,9 @@ def execute_science(source: Path, out: Path, source_info: dict, analytic_build: 
     v = projectile_speed_au(contract['energy_keV_per_u'])
     trajectory = Trajectory(((0.,0.,0.),(contract['b_a0'],0.,0.)),((0.,0.,0.),(0.,0.,v)))
 
+    admission = source_info['execution_admission']
+    consume_authorization(out, admission)
+    write_new(out/'NATIVE_PRELOAD_CHECK.json', native_check)
     kernel = MomentKernel(str(Path(analytic_build).resolve()))
     analytic = kernel.receipt
     if analytic.get('source_sha256') != contract['analytic_source_sha256']:
@@ -259,7 +314,9 @@ def execute_science(source: Path, out: Path, source_info: dict, analytic_build: 
     for rel in (f'CANDIDATE_N{prev_n}.json', f'CANDIDATE_N{prev_n}.npz'):
         copy_new(source/rel, out/rel)
 
-    evaluator = AnalyticEvaluator(assemble, trajectory=trajectory, channels=channels, kernel=kernel)
+    evaluator = EvaluationLedger(
+        AnalyticEvaluator(assemble, trajectory=trajectory, channels=channels, kernel=kernel), out)
+
     provider = ResolutionQualifiedProvider(
         evaluate=evaluator,
         resolutions=contract['runtime_reference_resolutions'],
@@ -294,6 +351,7 @@ def execute_science(source: Path, out: Path, source_info: dict, analytic_build: 
         'candidate': crec,
         'pair': pair,
         'provider_audit': audit,
+        'raw_attempts_including_failed': evaluator.attempts,
         'source_store_qualified_queries': source_info['query_store']['qualified_query_count'],
         'restored_store_files': restored,
         'all_restored_source_queries_individually_qualified': True,
@@ -325,6 +383,7 @@ def build_parser():
     p.add_argument('--next-nstep', required=True, type=int)
     p.add_argument('--analytic-build')
     p.add_argument('--expected-commit')
+    p.add_argument('--expected-tree')
     p.add_argument('--preflight-only', action='store_true')
     return p
 
@@ -349,9 +408,16 @@ def run_cli(argv=None) -> int:
         'full_window_transport_qualified':False,
     }
     code = 0
+    previous_handlers = {}
     try:
         if args.expected_commit and head != args.expected_commit:
             raise ValueError('execution commit identity mismatch')
+        if not args.preflight_only:
+            admission = check_request(args, REPO, head, tree)
+            write_new(out/'EXECUTION_ADMISSION.json', admission)
+            for sig in (signal.SIGTERM, signal.SIGALRM):
+                previous_handlers[sig] = signal.signal(sig, interrupted)
+            signal.alarm(admission['max_wall_seconds'])
         deps = verify_pinned_dependencies()
         with tempfile.TemporaryDirectory(prefix='bass_r4c_resume_') as td:
             source = Path(td)
@@ -373,7 +439,10 @@ def run_cli(argv=None) -> int:
             if args.preflight_only:
                 report['status'] = 'R4C_PREFLIGHT_PASS'
             else:
+                info['execution_admission'] = admission
                 science = execute_science(source, out, info, Path(args.analytic_build), args.next_nstep)
+                if not science['all_queries_accessed_this_run_qualified']:
+                    raise ValueError('operator qualification ledger incomplete')
                 report['temporal_continuation'] = science
                 if science['pair']['qualified']:
                     report['status'] = 'TP2D_TEMPORAL_CONTINUATION_PASS'
@@ -385,6 +454,11 @@ def run_cli(argv=None) -> int:
         report['status'] = 'R4C_BLOCKED'
         report['first_failure'] = {'type': type(e).__name__, 'message': str(e)}
         (out/'failure.traceback.txt').write_text(traceback.format_exc())
+    finally:
+        if previous_handlers:
+            signal.alarm(0)
+            for sig, handler in previous_handlers.items():
+                signal.signal(sig, handler)
     report['wall_seconds'] = time.monotonic() - t0
     final_archive = finish(out, report)
     print(json.dumps({'status':report['status'],'report':str(out/'RETURN_REPORT.json'),
