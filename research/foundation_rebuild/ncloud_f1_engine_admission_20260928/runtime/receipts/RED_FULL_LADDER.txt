@@ -1,0 +1,23 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+____________ test_exact_selected_and_all_historical_raw_arrays_pass ____________
+
+    def test_exact_selected_and_all_historical_raw_arrays_pass():
+        calls = []
+        def counted(t, q, h):
+            calls.append((q, h))
+            return evaluator(t, q, h)
+        result = admit_query(evidence(), counted, policy())
+        assert result['status'] == 'PASS' and result['selected_resolution'] == {'order': 40, 'subdivisions': 1}
+        assert len(result['raw_comparisons']) == 12
+        assert len(result['full_comparisons']) == 3
+>       assert calls == [(32, 1), (40, 1), (48, 1)]
+E       assert [(32, 1), (40, 1)] == [(32, 1), (40, 1), (48, 1)]
+E
+E         Right contains one more item: (48, 1)
+E         Use -v to get more diff
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_engine_admission.py:47: AssertionError
+=========================== short test summary info ============================
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_engine_admission.py::test_exact_selected_and_all_historical_raw_arrays_pass
+1 failed, 7 deselected in 0.18s
