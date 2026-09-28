@@ -1,0 +1,42 @@
+name: One-shot c64-g3 support artifact import
+
+on:
+  push:
+    branches:
+      - research/fnd-ncloud-c64g3-codex-handoff-20260928
+    paths:
+      - .github/workflows/ncloud-support-artifact-import-20260928.yml
+
+permissions:
+  contents: write
+
+jobs:
+  import-artifacts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+      - name: Fetch exact support archives and commit
+        shell: bash
+        env:
+          REDESIGN_URL: "https://uc3424bfb44e80113ffd66db6dfd.dl.dropboxusercontent.com/cd/0/get/DI95mkkTW9Db8Rcmd34mnhl5dri_EWI_ueKuajh8ODNts1aFDNwA1k805ouEyx5-1qzn31Omr5iSMkPzwGFP_EU94GBiWR1TZEMR1rhCt8aQqCv9-Zv9vUBEICa9UEHdxcCTb52vxl_sMtgAyPjmLGy_A-bdo0c9ZOK3a2jWEAxLlw/file?c_luid=2afe63b0"
+          TP2E_URL: "https://uc124f28252850cdea3404689a71.dl.dropboxusercontent.com/cd/0/get/DI_02AJLqgX0jrxNS_Kwc1heNkedgcEje65f3gRN-QFm9aOrYFE3Znx5QA4aWbbTN4HmAbJUdYTKwySCH0EHMPV1NU58m8HwfJ5CcoVEUiJcz_90AIe-duJMiGQkjjKHhd-G7SQChgyJjxXeLTxQ79kuXReRQoSlK5M1WAAqHsqIpQ/file?c_luid=2afe63b0"
+          DIR: "research/foundation_rebuild/ncloud_c64g3_20260928/artifacts"
+        run: |
+          set -euo pipefail
+          mkdir -p "$DIR"
+          curl --fail --location --silent --show-error --retry 2 --retry-delay 2             --output "$DIR/BASS_NCLOUD_C64G3_REDESIGN_20260928.zip" "$REDESIGN_URL"
+          curl --fail --location --silent --show-error --retry 2 --retry-delay 2             --output "$DIR/BASS_TP2E_RESEARCH_20260928.zip" "$TP2E_URL"
+          printf '%s  %s\n'             "2c0600f742490ab89b63ff7810f8655a7cd9f43631669db13d08abf4b2c6a1df" "$DIR/BASS_NCLOUD_C64G3_REDESIGN_20260928.zip"             "0f7af63b234b8ae527ac1c1ba42c28a9cf89b39f79da329d2b73d8aa2896c7b0" "$DIR/BASS_TP2E_RESEARCH_20260928.zip" | sha256sum -c -
+          test "$(stat -c %s "$DIR/BASS_NCLOUD_C64G3_REDESIGN_20260928.zip")" = "120706"
+          test "$(stat -c %s "$DIR/BASS_TP2E_RESEARCH_20260928.zip")" = "87436"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$DIR/BASS_NCLOUD_C64G3_REDESIGN_20260928.zip" "$DIR/BASS_TP2E_RESEARCH_20260928.zip"
+          git rm ".github/workflows/ncloud-support-artifact-import-20260928.yml"
+          git commit -m "data(ncloud): add exact design and TP2E archives"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
