@@ -1,0 +1,51 @@
+name: Publish already-tested exact R3 source bytes
+'on':
+  push:
+    branches:
+      - backup/r3-exact-source-transfer-20260928
+    paths:
+      - .github/r3-source-transfer/**
+      - .github/workflows/r3-exact-source-transfer.yml
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Verify source payload and non-force publish
+        shell: bash
+        env:
+          GIT_AUTHOR_NAME: ChatGPT
+          GIT_AUTHOR_EMAIL: codex@openai.com
+          GIT_COMMITTER_NAME: ChatGPT
+          GIT_COMMITTER_EMAIL: codex@openai.com
+          GIT_AUTHOR_DATE: '2026-09-28T13:00:00+00:00'
+          GIT_COMMITTER_DATE: '2026-09-28T13:00:00+00:00'
+        run: |
+          set -euo pipefail
+          BASE=6f4be73104d791011137659fe08c71b6e354aaf3
+          EXPECTED_HEAD=ae22511993fda12b61be9ff13c62c34a95e689aa
+          EXPECTED_TREE=3a398953d285949e94128590abcaefef32fc6b38
+          TARGET=impl/ncp-r3-cache-audit-20260928
+          OBSERVED="$(git ls-remote origin "refs/heads/$TARGET" | cut -f1)"
+          if test "$OBSERVED" = "$EXPECTED_HEAD"; then
+            echo "ALREADY_PUBLISHED_EXACT_HEAD=$OBSERVED"
+            exit 0
+          fi
+          test -z "$OBSERVED" || { echo TARGET_BRANCH_ALREADY_EXISTS; exit 3; }
+          cat .github/r3-source-transfer/part.0{0,1,2,3,4,5} > "$RUNNER_TEMP/r3.patch.xz"
+          printf '%s  %s\n' c15c29f10eb0a7e648a1ac83febcb0f7c2231a31f323e8f473dd856f6fafe604 "$RUNNER_TEMP/r3.patch.xz" | sha256sum -c -
+          xz --decompress --stdout "$RUNNER_TEMP/r3.patch.xz" > "$RUNNER_TEMP/r3.patch"
+          printf '%s  %s\n' c87cf1d501fa2eed2a1c5b980ecfd32065af370597d388d06ee39f849b9ffc64 "$RUNNER_TEMP/r3.patch" | sha256sum -c -
+          git checkout --detach "$BASE"
+          git apply --index --whitespace=nowarn "$RUNNER_TEMP/r3.patch"
+          test "$(git write-tree)" = "$EXPECTED_TREE" || { echo STAGED_TREE_MISMATCH; exit 3; }
+          git commit -m 'feat(r3): deliver cache-only reuse and metric audit with cloud review handoff'
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD" || { echo COMMIT_IDENTITY_MISMATCH; exit 3; }
+          git push origin "HEAD:refs/heads/$TARGET"
+          test "$(git ls-remote origin "refs/heads/$TARGET" | cut -f1)" = "$EXPECTED_HEAD"
+          printf 'R3_EXACT_SOURCE_PUBLISHED\nHEAD=%s\nTREE=%s\nNATIVE_EVALUATIONS=0\n' "$EXPECTED_HEAD" "$EXPECTED_TREE"
