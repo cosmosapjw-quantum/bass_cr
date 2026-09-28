@@ -1,14 +1,10 @@
 name: Build BASS CR NCloud F1 dual-backup package
-
-on:
+'on':
   push:
     branches:
       - backup/bass-cr-ncloud-f1-dual-20260928T073802Z
     paths:
       - .github/workflows/ncloud-f1-dual-backup-package-20260928.yml
-
-permissions:
-  contents: read
 
 jobs:
   package:
@@ -19,121 +15,8 @@ jobs:
         with:
           ref: ${{ github.ref_name }}
           fetch-depth: 1
-
-      - name: Build durable checkpoint
-        shell: bash
-        run: |
-          set -euo pipefail
-          NAME="BASS_CR_NCLOUD_F1_DUAL_CHECKPOINT_20260928T073802Z"
-          ROOT="$RUNNER_TEMP/$NAME"
-          PAY="$ROOT/payload"
-          mkdir -p "$PAY"
-
-          python3 - <<'PY'
-          import hashlib, json, os, shutil
-          from pathlib import Path
-
-          repo=Path.cwd()
-          name="BASS_CR_NCLOUD_F1_DUAL_CHECKPOINT_20260928T073802Z"
-          root=Path(os.environ["RUNNER_TEMP"])/name
-          pay=root/"payload"
-
-          def cp(rel):
-              src=repo/rel
-              dst=pay/rel
-              if src.is_dir():
-                  shutil.copytree(src,dst,dirs_exist_ok=True)
-              else:
-                  dst.parent.mkdir(parents=True,exist_ok=True)
-                  shutil.copy2(src,dst)
-
-          # Current NCP/F1 state + evidence/artifacts.
-          cp("research/foundation_rebuild/ncloud_c64g3_20260928")
-          cp("research/foundation_rebuild/ncloud_f1_engine_admission_20260928")
-          cp("docs/plans/2026-09-28-bass-ncloud-c64g3-codex.md")
-          cp("docs/plans/2026-09-28-bass-ncloud-f1-engine-admission.md")
-          cp("AGENTS.md")
-          cp("docs/READBACK_POLICY.md")
-
-          # Frozen scientific source closure required by F1.
-          pins=json.loads((repo/"research/foundation_rebuild/ncloud_f1_engine_admission_20260928/SOURCE_PINS.json").read_text())
-          dep=pins["inherited_dependency_pins"]
-          cp(dep["path"])
-          depdoc=json.loads((repo/dep["path"]).read_text())
-          for row in depdoc.get("files",[]):
-              cp(row["path"])
-          for row in pins.get("additional_pins",[]):
-              cp(row["path"])
-
-          state={
-            "schema":"BASS_CR_NCLOUD_F1_DUAL_CHECKPOINT_STATE_V1",
-            "created_utc":"2026-09-28T07:38:02Z",
-            "repository":"cosmosapjw-quantum/bass_cr",
-            "source_control_branch":"research/fnd-ncloud-f1-engine-admission-20260928",
-            "source_control_head":"7f2608e0f6fad516ec4e6d9a42a13d40f26e9d16",
-            "source_control_tree":"8b60018a13befc1fabc99b0ac0619560d3d866a8",
-            "frozen_f1_implementation_commit":"8236887dd8869de57522d5c87a48972f287969fe",
-            "frozen_f1_implementation_tree":"d114060c6dc6bdc1aa10fc6d9ffe9de19da99fae",
-            "f0_status":"F0_DURABLE_CLOSED",
-            "f0_scientific_status":"TP2E_CACHE_ONLY_M4_COMPARISON_PASS",
-            "f1_status":"F1_RUN_AUTHORIZED_READY_PENDING_EXECUTION",
-            "authorization":{"max_wall_seconds":7200,"spending_limit_krw":8000},
-            "storage":{"class":"CB1","provisioned_gb":100,"block_device":"/dev/vda","observed_filesystem":"/dev/vda2 ext4"},
-            "claim_ceiling":{"capture_execution_allowed":False,"production_admission":"HOLD","all_bound":"OPEN","b_grid":"NO_GO","original_capture_gap_resolved":False,"continuous_global_supremum_bound":False},
-            "backup_scope":"NCP/F0/F1 sidecars, binary inputs/evidence, implementation receipts, authorization, and frozen scientific dependency closure"
-          }
-          (pay/"BACKUP_STATE.json").write_text(json.dumps(state,indent=2)+"\n")
-
-          restore="""# Restore notes
-
-This checkpoint is a source/evidence snapshot for BASS CR NCloud F0/F1 work.
-
-Authoritative control identity at packaging:
-- branch: research/fnd-ncloud-f1-engine-admission-20260928
-- HEAD: 7f2608e0f6fad516ec4e6d9a42a13d40f26e9d16
-- tree: 8b60018a13befc1fabc99b0ac0619560d3d866a8
-
-Frozen executable F1 implementation:
-- commit: 8236887dd8869de57522d5c87a48972f287969fe
-- tree: d114060c6dc6bdc1aa10fc6d9ffe9de19da99fae
-
-The archive contains the relevant NCP/F1 sidecars, F0 durable evidence, TP2D/TP2E input archives,
-active F1 authorization, and the scientific dependency closure pinned by SOURCE_PINS.json.
-
-After restore, verify FILE_MANIFEST.json before use. This backup does not promote any claim beyond
-the preserved claim ceiling and does not imply F1 scientific execution has occurred.
-"""
-          (pay/"README_RESTORE.md").write_text(restore)
-
-          rows={}
-          for p in sorted(pay.rglob("*")):
-              if p.is_file():
-                  b=p.read_bytes()
-                  rows[str(p.relative_to(pay))]={"bytes":len(b),"sha256":hashlib.sha256(b).hexdigest()}
-          (pay/"FILE_MANIFEST.json").write_text(json.dumps({"schema":"BASS_CR_NCLOUD_F1_FILE_MANIFEST_V1","files":rows},indent=2)+"\n")
-          PY
-
-          cd "$ROOT"
-          zip -q -r -9 "$NAME.zip" payload
-          SHA="$(sha256sum "$NAME.zip" | awk '{print $1}')"
-          BYTES="$(stat -c %s "$NAME.zip")"
-          FILES="$(find payload -type f | wc -l)"
-          printf '%s  %s\n' "$SHA" "$NAME.zip" > "$NAME.zip.sha256"
-          python3 - <<PY
-          import json
-          from pathlib import Path
-          Path("BACKUP_ARTIFACT.json").write_text(json.dumps({
-            "schema":"BASS_CR_NCLOUD_F1_BACKUP_ARTIFACT_V1",
-            "file_name":"$NAME.zip",
-            "bytes":int("$BYTES"),
-            "sha256":"$SHA",
-            "payload_file_count":int("$FILES"),
-            "source_control_head":"7f2608e0f6fad516ec4e6d9a42a13d40f26e9d16",
-            "source_control_tree":"8b60018a13befc1fabc99b0ac0619560d3d866a8"
-          },indent=2)+"\n")
-          PY
-          unzip -t "$NAME.zip" >/dev/null
-
+      - name: Build checkpoint
+        run: python3 .github/scripts/build_ncloud_f1_backup.py
       - uses: actions/upload-artifact@v4
         with:
           name: BASS_CR_NCLOUD_F1_DUAL_CHECKPOINT_20260928T073802Z
