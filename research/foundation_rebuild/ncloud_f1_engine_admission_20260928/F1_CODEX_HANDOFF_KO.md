@@ -58,8 +58,10 @@ F1 worktree도 사용자 파일을 자동 삭제하지 않는다.
 AGENTS.md
 docs/READBACK_POLICY.md
 research/foundation_rebuild/ncloud_c64g3_20260928/AGENTS.md
-research/foundation_rebuild/ncloud_c64g3_20260928/F0_REPORTED_RESULT_20260928.json
-research/foundation_rebuild/ncloud_c64g3_20260928/F0_ARTIFACT_IMPORT_CONTRACT.json
+research/foundation_rebuild/ncloud_c64g3_20260928/F0_DURABLE_CLOSURE.json
+research/foundation_rebuild/ncloud_c64g3_20260928/f0_evidence/20260928T045058Z/EVIDENCE_MANIFEST.json
+research/foundation_rebuild/ncloud_c64g3_20260928/f0_evidence/20260928T045058Z/RETURN_REPORT.json
+research/foundation_rebuild/ncloud_c64g3_20260928/f0_evidence/20260928T045058Z/F0_RETURN_HANDOFF.json
 research/foundation_rebuild/ncloud_f1_engine_admission_20260928/F1_CONTRACT.json
 research/foundation_rebuild/ncloud_f1_engine_admission_20260928/F1_REPRESENTATIVE_QUERIES.json
 research/foundation_rebuild/ncloud_f1_engine_admission_20260928/SOURCE_PINS.json
@@ -70,59 +72,42 @@ research/foundation_rebuild/ncloud_f1_engine_admission_20260928/F1_RETURN_CONTRA
 충돌 시 F1_CONTRACT와 이 handoff가 F1 구현 범위에 대해 우선한다.
 scientific source semantics와 historical evidence는 변경하지 않는다.
 
-## 2. Phase A: 실제 F0 artifacts import
+## 2. Phase A: durable F0 evidence verify
 
-F0 실행 host에 아래 파일이 있으면 먼저 import한다.
+F0 artifacts는 이미 이 branch에 게시되어 있다. host path에서 다시 import하거나 동일 파일을
+중복 commit하지 않는다.
 
-```text
-/root/.local/state/bass_f0/runs/tp2e_cache_20260928T045058Z/RETURN_REPORT.json
-/root/.local/state/bass_f0/runs/tp2e_cache_20260928T045058Z_RETURN.zip
-/root/.local/state/bass_f0/receipts/f0_20260928T045058Z/F0_RETURN_HANDOFF.json
-/root/.local/state/bass_f0/receipts/f0_20260928T045058Z/ENVIRONMENT_RECEIPT.json
-/root/.local/state/bass_f0/receipts/HOST_F0_20260928T045058Z.json
-```
-
-optional:
-```text
-/root/.local/state/bass_f0/receipts/F0_RUN_20260928T045058Z.log
-/root/.local/state/bass_f0/receipts/f0_20260928T045058Z/SHA256SUMS.txt
-```
-
-RETURN report/archive는 반드시 먼저 확인한다.
+Authoritative evidence:
 
 ```text
-RETURN_REPORT.json
-bytes  = 6336
-sha256 = a074daa3a5c3a87939c52d41984a78ca5059e932ac9f07983bee2e78b6f22986
-
-RETURN ZIP
-bytes  = 11426
-sha256 = fd5e5a7543dd60ba2711ff5189324c116c8c9a1595c8c106744f2cf1aad0a440
+research/foundation_rebuild/ncloud_c64g3_20260928/F0_DURABLE_CLOSURE.json
+research/foundation_rebuild/ncloud_c64g3_20260928/f0_evidence/20260928T045058Z/EVIDENCE_MANIFEST.json
+research/foundation_rebuild/ncloud_c64g3_20260928/f0_evidence/20260928T045058Z/RETURN_REPORT.json
+research/foundation_rebuild/ncloud_c64g3_20260928/f0_evidence/20260928T045058Z/F0_RETURN_HANDOFF.json
+research/foundation_rebuild/ncloud_c64g3_20260928/f0_evidence/20260928T045058Z/ENVIRONMENT_RECEIPT.json
+research/foundation_rebuild/ncloud_c64g3_20260928/f0_evidence/20260928T045058Z/HOST_F0_20260928T045058Z.json
+research/foundation_rebuild/ncloud_c64g3_20260928/f0_evidence/20260928T045058Z/SANITIZATION.json
+research/foundation_rebuild/ncloud_c64g3_20260928/f0_evidence/20260928T045058Z/tp2e_cache_20260928T045058Z_RETURN.zip
 ```
 
-ZIP은 `ZipFile.testzip()`, member inventory, internal manifest가 있으면 hash/size까지 확인한다.
-다른 required receipt는 실제 bytes의 SHA/size를 계산한다.
+검사:
 
-destination:
+- `F0_DURABLE_CLOSURE.status == F0_DURABLE_CLOSED`.
+- scientific status는 `TP2E_CACHE_ONLY_M4_COMPARISON_PASS`.
+- handoff status는 `STOP_F0_COMPLETE`.
+- fresh tests 32/32, failure/error/skip 0.
+- historical N384 replay metric distance `2.713539056469168e-16 <= 1e-10`.
+- M4 selected N96.
+- new spatial operator evaluations = 0.
+- reference_reintegrated = false.
+- original TP2D `TEMPORAL_REFINEMENT_UNRESOLVED` 보존.
+- claim ceiling unchanged.
 
-```text
-research/foundation_rebuild/ncloud_c64g3_20260928/f0_evidence/
-```
+publication tier는 R1이며 RETURN ZIP remote full-redownload restore verification은 수행하지 않았다.
+이를 `RESTORE_VERIFIED`로 승격하지 않는다.
 
-`F0_EVIDENCE_MANIFEST.json`을 만들고 source path, size, SHA256, Git destination을 기록한다.
-원 host 파일은 수정·삭제하지 않는다.
-
-required report/archive 또는 required receipts가 없으면 내용을 합성하지 않는다.
-그 경우 implementation은 계속할 수 있지만 최종 상태는
-`F1_IMPLEMENTATION_COMPLETE_F0_IMPORT_PENDING`이고 실제 F1 execution은 계속 금지된다.
-
-import가 성공하면 별도 commit:
-
-```text
-data(ncloud): import verified F0 result artifacts
-```
-
-commit 후 remote F1 branch에 push한다.
+이 검사가 실패하면 `F1_IMPLEMENTATION_BLOCKED`로 중단한다. F0를 재실행하거나
+host path에서 다른 evidence를 자동 탐색하지 않는다.
 
 ## 3. TDD 구현
 
@@ -314,19 +299,13 @@ R1 verify:
 
 `F1_RETURN_CONTRACT.json`에 맞춘 summary를 출력한다.
 
-정상 구현 완료 + F0 import 완료:
+정상 구현 완료 + durable F0 evidence verification 완료:
 
 ```text
 F1_IMPLEMENTATION_COMPLETE_EXECUTION_NOT_RUN
 ```
 
-구현 완료 + F0 import 미완:
-
-```text
-F1_IMPLEMENTATION_COMPLETE_F0_IMPORT_PENDING
-```
-
-implementation blocker:
+durable F0 evidence verification 또는 implementation blocker:
 
 ```text
 F1_IMPLEMENTATION_BLOCKED
