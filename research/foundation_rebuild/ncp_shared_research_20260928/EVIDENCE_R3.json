@@ -1,0 +1,27 @@
+{
+  "schema":"NCP_R3_SCOPED_RESEARCH_EVIDENCE_V1",
+  "local_checks":{"passed":8,"failed":0,"python":"3.13.5","numpy":"2.3.5","script":"tools/verify_followup.py","native_evaluations":0,"cloud_runs":0},
+  "checks":[
+    {"name":"moving_metric_identity","passed":true,"matrix_error_norm":2.604129025083621e-16},
+    {"name":"Hermitian_H_cancels","passed":true,"matrix_error_norm":2.604129025083621e-16},
+    {"name":"nonHermitian_H_extra_term","passed":true,"matrix_error_norm":2.604129025083621e-16},
+    {"name":"algebraic_pass_does_not_certify_actual_derivative","passed":true},
+    {"name":"skew_projection_Duhamel_bound","passed":true,"operator_difference":0.2172160209824665,"bound":0.23367805995674323},
+    {"name":"skew_projection_bound_sharp_example","passed":true},
+    {"name":"early_rejection_order","passed":true,"cost_ab":2.6,"cost_ba":4.2},
+    {"name":"postpass_metric_demand_union","passed":true,"prefix_union":201,"full_union":297}
+  ],
+  "wolfram":{
+    "first_trial":{"moving_metric_identity_zero":false,"classification":"SYMBOLIC_DOMAIN_SETUP","reason":"Conjugate[t] differentiated before real-time simplification","retained":true},
+    "corrected_trial":{"moving_metric_identity_zero":true,"matrix_difference":[[0,0],[0,0]],"correction":"Simplify S under real t before differentiation"},
+    "early_rejection_cost_difference":"cA*pB-cB*pA",
+    "scope":"exact noncommuting 2x2 algebra; no native BASS run"
+  },
+  "prior_validation":{"tests":16,"reexecuted":false,"reason":"unchanged earlier research packet; source CRC and 44 manifest identities checked instead"},
+  "new_native_evaluations":0,
+  "new_cloud_runs":0,
+  "actual_NCP_performance_improvement_measured":false,
+  "review_type":"OWNER_SELF_REVIEW",
+  "independent_review_performed":false,
+  "production_admission":"HOLD"
+}
