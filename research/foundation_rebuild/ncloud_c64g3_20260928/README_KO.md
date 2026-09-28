@@ -1,33 +1,46 @@
-# NAVER Cloud c64-g3: 승인된 계획과 Codex F0 인계
+# NAVER Cloud c64-g3: 승인 계획, 복구된 입력, Codex F0 retry
 
-상태: **PLAN_APPROVED_F0_HANDOFF_READY_NATIVE_IMPLEMENTATION_PENDING**.
-이 커밋은 계획·인계 문서만 추가한다. 기존 물리 코드, 원 TP2D 실패 결과,
-원 TP2E 패키지, 기존 AGENTS.md와 readback policy는 수정하지 않는다.
+상태: **F0_RETRY_READY_REPO_CONTAINED_INPUTS_NATIVE_IMPLEMENTATION_PENDING**.
 
-## 읽는 순서
+초기 F0 handoff는 설계 ZIP, TP2D 전체 RETURN ZIP, 승인 환경을 외부에서 찾지 못해
+`STOP_F0_BLOCKED`로 종료됐다. 그 run은 그대로 보존한다. 이후 사용자가 전체 TP2D RETURN ZIP을
+직접 제공했고, byte/hash/ZIP/내부 manifest를 검증한 뒤 필요한 세 ZIP과 환경 provenance를
+이 branch에 게시했다.
 
-1. 저장소 루트 AGENTS.md 및 docs/READBACK_POLICY.md.
-2. 이 디렉터리의 AGENTS.md, ARTIFACTS.json, STATUS.json.
-3. IMPLEMENTATION_PLAN_KO.md: 승인된 전체 F0–F3 계획과 현재 실행 경계.
-4. CODEX_HANDOFF_KO.md: 이번 첫 Codex 실행 지시.
-5. 원 설계 ZIP의 REDESIGN_KO.md, MIGRATION_RUNBOOK_KO.md,
-   IMPLEMENTATION_PLAN_KO.md. ZIP identity는 ARTIFACTS.json이 고정한다.
+## 이번에 사용할 문서
 
-원 설계 ZIP과 TP2E ZIP은 이 Git 커밋에 포함하지 않았다. 이미 제공한 파일을
-로컬 Downloads 또는 /data/bass/inputs에서 찾아 hash를 확인한다.
-원 TP2D 전체 RETURN ZIP도 별도 입력이다. 요약 JSON은 실행 입력의 대체물이 아니다.
+1. 저장소 루트 `AGENTS.md`, `docs/READBACK_POLICY.md`.
+2. 이 디렉터리의 `AGENTS.md`, `ARTIFACTS.json`, `STATUS.json`.
+3. **`F0_RETRY_HANDOFF_KO.md`**: 현재 Codex retry 지시. 이것이 최초
+   `CODEX_HANDOFF_KO.md`보다 F0 입력 위치와 환경 admission에 대해 우선한다.
+4. `IMPLEMENTATION_PLAN_KO.md`: F0-F3 장기 계획.
+5. `DUAL_BACKUP_AUDIT.json`: Dropbox/Google Drive 조사와 복구 기록.
 
-## 이번 인계의 범위
+## GitHub에 포함된 F0 입력
 
-Codex는 우선 F0의 고정 패키지 실행·로그 반환 담당이다. source 자동 수정,
-테스트를 통과시키기 위한 patch, dependency 자동 업그레이드, 실패 재시도,
-새 native 계산과 F1–F3 구현을 이번 F0 인계에서 수행하지 않는다.
-F1–F3는 계획에 명세됐지만 아직 존재하는 실행기로 취급하지 않는다.
+`artifacts/`에 다음 exact bytes가 들어 있다.
 
-cache-only M4 비교가 통과하면 그 결과를 반환하고 종료한다.
-실패하면 first blocker와 완성된 부분 결과를 보존하고 종료한다.
-원 TP2D TEMPORAL_REFINEMENT_UNRESOLVED를 PASS로 덮지 않는다.
+- `tp2d_runtime_self_qualified_20260927T074944Z_RETURN.zip`
+  - SHA-256 `630a80208331b7b37c02a77eae7435f6317d07439a4ea34b11885455fe53fa35`
+  - 31,849,212 bytes, 1,279 runtime query pairs.
+- `BASS_NCLOUD_C64G3_REDESIGN_20260928.zip`
+  - SHA-256 `2c0600f742490ab89b63ff7810f8655a7cd9f43631669db13d08abf4b2c6a1df`.
+- `BASS_TP2E_RESEARCH_20260928.zip`
+  - SHA-256 `0f7af63b234b8ae527ac1c1ba42c28a9cf89b39f79da329d2b73d8aa2896c7b0`.
+- `requirements-tested.txt`, `HISTORICAL_ANALYTIC_BUILD.json`,
+  `F0_ENVIRONMENT_CONTRACT.json`, `TP2D_RETURN_AUDIT.json`.
 
-cloud VM 생성·SSH target·환경설치·과금 budget은 계획 승인만으로 만들어지지 않는다.
-기존에 준비·승인된 호스트와 환경에서만 실행한다. main merge/force push,
-기존 worktree 정리, credentials 게시, 서버·볼륨 삭제를 금지한다.
+따라서 F0 retry를 위해 Downloads, Dropbox, Google Drive에서 추가 파일을 찾지 않는다.
+현재 source checkout을 바꾸지 않고 `git show <plan-ref>:<path>`로 별도 staging에
+materialize할 수 있다.
+
+## 범위
+
+F0는 cache-only M4 한 번뿐이다. 새 spatial operator 평가와 새 DOP853 solve는 0회다.
+F0 실패 후 자동 patch/retry/native compile/F1-F3로 전환하지 않는다.
+F1-F3는 여전히 구현·비용 승인 전이다.
+
+항상 유지:
+`capture=false`, `production=HOLD`, `all_bound=OPEN`, `b_grid=NO_GO`,
+`original_capture_gap_resolved=false`, `continuous_global_supremum_bound=false`.
+원 TP2D `TEMPORAL_REFINEMENT_UNRESOLVED`는 변경하지 않는다.
