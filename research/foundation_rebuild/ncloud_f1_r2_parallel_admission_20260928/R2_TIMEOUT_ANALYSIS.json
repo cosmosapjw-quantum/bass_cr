@@ -1,0 +1,61 @@
+{
+  "schema": "BASS_NCLOUD_F1_R2_TIMEOUT_ANALYSIS_V1",
+  "source_run": {
+    "evidence_commit": "477fef8ede26af74e0cf7a91762ea4ec54ae1527",
+    "evidence_tree": "fde6e14bcdcb4fd329bc3169d3402aff1be22081",
+    "run_id": "20260928T064313Z",
+    "exit_code": 124,
+    "wall_seconds": 7200,
+    "scientific_status": "NOT_REPORTED",
+    "return_report_present": false,
+    "missing_scientific_outputs": [
+      "RETURN_REPORT.json",
+      "ENGINE_ADMISSION.json",
+      "REPRESENTATIVE_PARITY.json",
+      "METRIC_CONNECTION_PARITY.json"
+    ]
+  },
+  "completed_before_timeout": {
+    "focused_tests": {
+      "tests": 48,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "engine_build": true,
+    "engine_loaded": true,
+    "progress_last_phase": "engine_loaded",
+    "engine_loaded_elapsed_seconds": 3.434567853999397,
+    "library_sha256": "966146f0ca713251f8b73999b4d89595cf1820a8c2d36f5c6290387b70c68035",
+    "historical_library_sha256": "966146f0ca713251f8b73999b4d89595cf1820a8c2d36f5c6290387b70c68035"
+  },
+  "observed_host": {
+    "cpu_model": "Intel(R) Xeon(R) Gold 5220 CPU @ 2.20GHz",
+    "configured_vcpu": 64,
+    "configured_memory_gb": 128,
+    "blas": "OpenBLAS 0.3.30 USE64BITINT DYNAMIC_ARCH NO_AFFINITY Haswell MAX_THREADS=64",
+    "runtime_thread_policy": {
+      "OMP_NUM_THREADS": 1,
+      "OPENBLAS_NUM_THREADS": 1,
+      "MKL_NUM_THREADS": 1,
+      "NUMEXPR_NUM_THREADS": 1
+    },
+    "user_observation": "htop showed approximately one active vCPU during the expensive phase"
+  },
+  "code_path_analysis": {
+    "representative_query_count": 15,
+    "frozen_resolution_count": 11,
+    "representative_resolution_evaluations": 165,
+    "current_run_admission_semantics": "Python list comprehension calls admit_query sequentially for all 15 representatives.",
+    "current_admit_query_semantics": "Each query walks the finite resolution ladder sequentially, then evaluates the remaining frozen ladder sequentially.",
+    "metric_sentinels": "Five z sentinels are processed sequentially; each uses three provider.at calls.",
+    "concurrency_in_current_expensive_path": 1,
+    "classification": "ORCHESTRATION_SERIALISM_NOT_SCIENTIFIC_FAILURE"
+  },
+  "claim_policy": {
+    "timeout_does_not_imply_parity_failure": true,
+    "timeout_does_not_imply_engine_failure": true,
+    "f1_engine_admission_pass": false,
+    "original_tp2d_status": "TEMPORAL_REFINEMENT_UNRESOLVED"
+  }
+}
