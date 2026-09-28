@@ -1,0 +1,41 @@
+name: Package exact NCP R3 source snapshot
+'on':
+  push:
+    branches:
+      - backup/ncp-shared-r3-e36c939-20260928
+    paths:
+      - .github/workflows/ncp-r3-snapshot.yml
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Build exact source bundle only
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC=e36c939224292359515758fc360f60cc39f162ff
+          TREE=ed87b1369b34be950a1748f7024d4f533bd265ed
+          test "$(git rev-parse "$SRC^{tree}")" = "$TREE"
+          DEST="$RUNNER_TEMP/NCP_R3_GIT_SNAPSHOT"
+          mkdir -p "$DEST"
+          git update-ref refs/backup/ncp_shared_r3 "$SRC"
+          git bundle create "$DEST/bass_cr.bundle" refs/backup/ncp_shared_r3
+          git bundle verify "$DEST/bass_cr.bundle" > "$DEST/BUNDLE_VERIFY.txt" 2>&1
+          git bundle list-heads "$DEST/bass_cr.bundle" > "$DEST/BUNDLE_HEADS.txt"
+          git ls-tree -r -l "$SRC" > "$DEST/GIT_TREE.txt"
+          printf '{"schema":"NCP_R3_SOURCE_SNAPSHOT_V1","commit":"%s","tree":"%s","native_evaluations":0,"science_reexecuted":false}\n' "$SRC" "$TREE" > "$DEST/SNAPSHOT.json"
+          (cd "$DEST" && sha256sum bass_cr.bundle BUNDLE_VERIFY.txt BUNDLE_HEADS.txt GIT_TREE.txt SNAPSHOT.json > SHA256SUMS.txt)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: NCP_R3_e36c939_SOURCE_BUNDLE
+          path: ${{ runner.temp }}/NCP_R3_GIT_SNAPSHOT/
+          if-no-files-found: error
+          retention-days: 7
