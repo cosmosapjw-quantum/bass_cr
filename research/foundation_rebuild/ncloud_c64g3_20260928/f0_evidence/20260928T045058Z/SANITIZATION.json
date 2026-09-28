@@ -1,0 +1,60 @@
+{
+  "schema": "BASS_NCLOUD_F0_SANITIZATION_V1",
+  "stage": "F0",
+  "run_id": "20260928T045058Z",
+  "source_files_unchanged": true,
+  "removed_fields": {
+    "HOST_F0_20260928T045058Z.json": [
+      {
+        "field": "host.cgroup.checked_directories",
+        "reason": "host service scope path is unnecessary for F0 numerical reproducibility"
+      },
+      {
+        "field": "host.lscpu",
+        "reason": "raw host command output is unnecessary for F0 numerical reproducibility"
+      },
+      {
+        "field": "host.numa",
+        "reason": "raw host command output is unnecessary for F0 numerical reproducibility"
+      },
+      {
+        "field": "host.filesystem",
+        "reason": "raw host command output is unnecessary for F0 numerical reproducibility"
+      }
+    ],
+    "ENVIRONMENT_RECEIPT.json": [
+      {
+        "field": "python_executable",
+        "reason": "absolute interpreter path is unnecessary; Python version and exact package pins remain"
+      },
+      {
+        "field": "requirements_file.path",
+        "reason": "local receipt path is unnecessary; SHA256 and byte size remain"
+      },
+      {
+        "field": "pip_freeze.path",
+        "reason": "local receipt path is unnecessary; SHA256 and byte size remain"
+      },
+      {
+        "field": "pip_install_log.path",
+        "reason": "local receipt path is unnecessary; SHA256 and byte size remain"
+      },
+      {
+        "field": "pip_check_log.path",
+        "reason": "local receipt path is unnecessary; SHA256 and byte size remain"
+      },
+      {
+        "field": "blas_receipt.path",
+        "reason": "local receipt path is unnecessary; SHA256 and byte size remain"
+      }
+    ]
+  },
+  "scientific_values_changed": false,
+  "raw_files_with_no_removal": [
+    "RETURN_REPORT.json",
+    "tp2e_cache_20260928T045058Z_RETURN.zip",
+    "F0_RETURN_HANDOFF.json",
+    "F0_RUN_20260928T045058Z.log",
+    "SHA256SUMS.txt"
+  ]
+}

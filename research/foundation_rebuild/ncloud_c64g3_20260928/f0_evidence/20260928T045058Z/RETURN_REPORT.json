@@ -1,0 +1,175 @@
+{
+  "schema": "TP2E_OFFLINE_RESEARCH_RETURN_V1",
+  "status": "TP2E_CACHE_ONLY_M4_COMPARISON_PASS",
+  "original_tp2d_status": "TEMPORAL_REFINEMENT_UNRESOLVED",
+  "capture_execution_allowed": false,
+  "production_admission": "HOLD",
+  "all_bound": "OPEN",
+  "b_grid": "NO_GO",
+  "original_capture_gap_resolved": false,
+  "continuous_trajectory_error_bound": false,
+  "continuous_global_supremum_bound": false,
+  "operator_interpolation_used": false,
+  "new_operator_evaluations": 0,
+  "reference_reintegrated": false,
+  "new_method_temporal_comparison_qualified": true,
+  "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+  "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.39",
+  "source_manifest_sha256": "619dab68e1dfe9476dfcb5282875b40f4730b8aff5058045a581da8aedcd02c8",
+  "experiment_contract": {
+    "schema": "TP2E_CACHE_ONLY_M4_EXPERIMENT_V1",
+    "classification": "POST_TP2D_EXPLORATORY_METHOD_COMPARISON",
+    "method": "M4_QMQ",
+    "step_counts": [
+      24,
+      48,
+      96,
+      192
+    ],
+    "generator_definition": "UNCHANGED_TP1_CHOLESKY_METRIC_FRAME",
+    "time_node_policy": "EXACT_LEGACY_N_AND_2N_BINARY64_MIDPOINTS",
+    "historical_replay_metric_distance_max": 1e-10,
+    "generator_and_omega_skewness_max": 1e-11,
+    "reference_metric_distance_max": 1e-06,
+    "adjacent_refinement_metric_distance_max": 1e-06,
+    "norm_drift_max": 1e-08,
+    "new_operator_evaluations_allowed": 0,
+    "reference_reintegration_allowed": false,
+    "operator_interpolation_allowed": false,
+    "nearest_time_substitution_allowed": false,
+    "runtime_threshold_tuning_allowed": false,
+    "previous_fail_promotion_allowed": false,
+    "continuous_global_supremum_bound": false,
+    "capture_execution_allowed": false,
+    "production_admission": "HOLD",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO"
+  },
+  "new_tests": {
+    "tests": 32,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "returncode": 0,
+    "command": [
+      "/root/.local/state/bass_f0/env/tp2e_f0_20260928T045058Z/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "/root/.local/state/bass_f0/code/f0_repo_20260928T045058Z/BASS_TP2E_RESEARCH_20260928/tests",
+      "--junitxml=/root/.local/state/bass_f0/runs/tp2e_cache_20260928T045058Z/tests.xml"
+    ]
+  },
+  "source_audit": {
+    "original_status": "TEMPORAL_REFINEMENT_UNRESOLVED",
+    "archive_sha256": "630a80208331b7b37c02a77eae7435f6317d07439a4ea34b11885455fe53fa35",
+    "report_sha256": "528d54f3c373a13c4e21b354721d978670e1317b7fcf6bc92f63df51ea138b7d",
+    "manifest_entries_verified": 2585,
+    "selected_operator_payloads_revalidated": 1279,
+    "raw_cross_attempts_revalidated": 4442,
+    "all_saved_selected_queries_revalidated": true,
+    "resolution_histogram": {
+      "q56_h1": 117,
+      "q56_h2": 72,
+      "q40_h1": 638,
+      "q48_h1": 172,
+      "q48_h2": 119,
+      "q64_h1": 108,
+      "q64_h2": 53
+    },
+    "max_selected_cross_difference_recomputed": 9.991816484228157e-10,
+    "new_operator_evaluations": 0,
+    "lower_full_diagnostics": "ARCHIVE_MANIFEST_BOUND_NOT_FRESH_FULL_MATRIX_RECOMPUTATION",
+    "continuous_global_supremum_bound": false,
+    "selected_matrix_bytes": 19891008
+  },
+  "comparison": {
+    "status": "TP2E_CACHE_ONLY_M4_COMPARISON_PASS",
+    "new_method_temporal_comparison_qualified": true,
+    "selected_nstep": 96,
+    "reference_reuse": {
+      "receipt": {
+        "method": "DOP853",
+        "rtol": 1e-10,
+        "atol": 1e-12,
+        "nfev": 557,
+        "max_norm_drift": 4.259903541026233e-11,
+        "unique_runtime_queries_after": 535,
+        "raw_operator_evaluations_after": 1996
+      },
+      "metric_norm_drift_recomputed": 4.259903541026233e-11,
+      "evidence_relation": "REUSED_PINNED_DOP853_RUN_NOT_NEW_REFERENCE_SOLVE"
+    },
+    "historical_replay": {
+      "nstep": 384,
+      "stored_vs_replayed_metric_distance": 2.713539056469168e-16,
+      "replayed_reference_distance": 2.634560877264409e-06,
+      "new_operator_evaluations": 0,
+      "replay_gate": 1e-10,
+      "passed": true
+    },
+    "candidates": [
+      {
+        "nstep": 24,
+        "dt": 0.49801266390322585,
+        "reference_metric_distance": 1.166749540162974e-05,
+        "max_norm_drift": 9.992007221626409e-16,
+        "max_generator_defect": 4.1000460472429836e-16,
+        "max_omega_defect": 2.622235850630965e-16,
+        "matrix_only_wall_seconds": 0.028517247000309,
+        "new_operator_evaluations": 0
+      },
+      {
+        "nstep": 48,
+        "dt": 0.24900633195161292,
+        "reference_metric_distance": 7.561643049511109e-07,
+        "max_norm_drift": 2.4424906541753444e-15,
+        "max_generator_defect": 3.8063057776212845e-16,
+        "max_omega_defect": 2.9226390242239835e-16,
+        "matrix_only_wall_seconds": 0.043648998999742616,
+        "new_operator_evaluations": 0
+      },
+      {
+        "nstep": 96,
+        "dt": 0.12450316597580646,
+        "reference_metric_distance": 4.7710684562492857e-08,
+        "max_norm_drift": 2.4424906541753444e-15,
+        "max_generator_defect": 4.1279128416351134e-16,
+        "max_omega_defect": 4.1950464239351853e-16,
+        "matrix_only_wall_seconds": 0.08586960400043608,
+        "new_operator_evaluations": 0
+      }
+    ],
+    "pairs": [
+      {
+        "previous_nstep": 24,
+        "selected_nstep": 48,
+        "candidate_reference_metric_distance": 7.561643049511109e-07,
+        "candidate_refinement_metric_distance": 1.0911552127968687e-05,
+        "qualified": false,
+        "reference_gate": 1e-06,
+        "refinement_gate": 1e-06,
+        "norm_gate": 1e-08,
+        "evidence_relation": "NEW_TEMPORAL_METHOD_SAME_PINNED_OPERATOR_CACHE_AND_REFERENCE"
+      },
+      {
+        "previous_nstep": 48,
+        "selected_nstep": 96,
+        "candidate_reference_metric_distance": 4.7710684562492857e-08,
+        "candidate_refinement_metric_distance": 7.084548671698796e-07,
+        "qualified": true,
+        "reference_gate": 1e-06,
+        "refinement_gate": 1e-06,
+        "norm_gate": 1e-08,
+        "evidence_relation": "NEW_TEMPORAL_METHOD_SAME_PINNED_OPERATOR_CACHE_AND_REFERENCE"
+      }
+    ],
+    "exact_cached_nodes_required": 744,
+    "cache_lookup_count": 910,
+    "new_operator_evaluations": 0,
+    "reference_reintegrated": false
+  },
+  "wall_seconds": 8.505728606000048
+}
