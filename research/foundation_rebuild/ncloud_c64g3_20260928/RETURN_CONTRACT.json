@@ -1,0 +1,53 @@
+{
+  "schema": "BASS_NCLOUD_F0_RETURN_CONTRACT_V1",
+  "kind": "REPORTING_CONTRACT_NOT_EXECUTION_EVIDENCE",
+  "output_name": "F0_RETURN_HANDOFF.json",
+  "required_fields": [
+    "status",
+    "plan_commit",
+    "plan_tree",
+    "source_worktree_commit",
+    "source_worktree_tree",
+    "host_kind",
+    "input_identities",
+    "package_identities",
+    "environment_receipt",
+    "f0_return_report",
+    "f0_return_archive",
+    "f0_exit_code",
+    "new_tests",
+    "completed_work",
+    "first_blocker",
+    "next_allowed_action",
+    "publication_or_backup_receipts",
+    "claim_ceiling"
+  ],
+  "allowed_handoff_statuses": [
+    "STOP_F0_COMPLETE",
+    "STOP_F0_BLOCKED",
+    "STOP_F0_SCIENTIFIC_UNRESOLVED",
+    "DUPLICATE_F0_NOT_RERUN"
+  ],
+  "field_semantics": {
+    "status": "Handoff status; keep original scientific RETURN_REPORT status unchanged in f0_return_report.",
+    "input_identities": "Each available path, bytes, SHA256 and verified/missing state. Do not invent unknown sizes.",
+    "host_kind": "Record actual local/NAVERCLOUD/other/unknown; do not infer from requested instance name.",
+    "new_tests": "Actual command/exit/count and whether inherited or executed in this environment.",
+    "first_blocker": "Null only when no blocker; preserve exception, phase, relevant log path without exposing secrets.",
+    "next_allowed_action": "On F0 complete return result and stop. Native continuation needs separate implementation and run gates.",
+    "publication_or_backup_receipts": "Empty when not performed. Do not equate local synchronized directory with provider ACK.",
+    "operator_admission": "When not evaluated, use NOT_EVALUATED, not a fabricated boolean PASS or scientific FAIL."
+  },
+  "required_runtime_assertions": {
+    "new_spatial_operator_evaluations": 0,
+    "reference_reintegrated": false
+  },
+  "claim_ceiling": {
+    "capture_execution_allowed": false,
+    "production_admission": "HOLD",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "original_capture_gap_resolved": false,
+    "continuous_global_supremum_bound": false
+  }
+}
