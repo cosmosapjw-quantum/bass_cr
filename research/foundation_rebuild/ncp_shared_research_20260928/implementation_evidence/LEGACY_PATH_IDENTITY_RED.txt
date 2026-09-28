@@ -1,0 +1,36 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+__________ test_legacy_output_path_must_not_change_numerical_identity __________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-0/test_legacy_output_path_must_n0')
+
+    def test_legacy_output_path_must_not_change_numerical_identity(tmp_path):
+        spec=importlib.util.spec_from_file_location('legacy_builder',F1/'runtime/native/cloud_engine.py')
+        old=importlib.util.module_from_spec(spec);spec.loader.exec_module(old)
+        contract=json.loads((F1/'F1_CONTRACT.json').read_text())
+        def fake(argv,**_):
+            if '--version' in argv:return SimpleNamespace(returncode=0,stdout='fixture g++',stderr='')
+            Path(argv[-1]).write_bytes(b'SAME_SYNTHETIC_LIBRARY_NO_NATIVE_COMPILER')
+            return SimpleNamespace(returncode=0,stdout='',stderr='')
+        source=ROOT/contract['build_policy']['source_path']
+        old.build_engine(source,tmp_path/'one',contract,run=fake,compiler='/synthetic/g++')
+        old.build_engine(source,tmp_path/'two',contract,run=fake,compiler='/synthetic/g++')
+        a=json.loads((tmp_path/'one/ENGINE_IDENTITY.json').read_text())
+        b=json.loads((tmp_path/'two/ENGINE_IDENTITY.json').read_text())
+        assert a['source_sha256']==b['source_sha256'] and a['library_sha256']==b['library_sha256']
+        assert a['numeric']==b['numeric']
+>       assert a['identity_sha256']==b['identity_sha256'], 'Legacy identity depends on output path despite identical numerical inputs'
+E       AssertionError: Legacy identity depends on output path despite identical numerical inputs
+E       assert '96ad5fc7e9fb...5dc5d72939668' == '2fab946d6f69...cbe0f01ddabd1'
+E         
+E         - 2fab946d6f6996a07633a857d5898ca258e32f0861362b9fca4cbe0f01ddabd1
+E         + 96ad5fc7e9fbffa0ca2a7182002d8272b04fe4cbc6be085695e5dc5d72939668
+
+mnt/data/bass_cr_r3_impl_20260928/recovery/test_legacy_identity_red.py:24: AssertionError
+=========================== short test summary info ============================
+FAILED mnt/data/bass_cr_r3_impl_20260928/recovery/test_legacy_identity_red.py::test_legacy_output_path_must_not_change_numerical_identity - AssertionError: Legacy identity depends on output path despite identical numerical inputs
+assert '96ad5fc7e9fb...5dc5d72939668' == '2fab946d6f69...cbe0f01ddabd1'
+  
+  - 2fab946d6f6996a07633a857d5898ca258e32f0861362b9fca4cbe0f01ddabd1
+  + 96ad5fc7e9fbffa0ca2a7182002d8272b04fe4cbc6be085695e5dc5d72939668
+1 failed in 0.13s
