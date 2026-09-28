@@ -1,0 +1,36 @@
+{
+  "schema": "BASS_NCLOUD_F1_STORAGE_APPROVAL_V1",
+  "status": "APPROVED_FOR_F1_NATIVE_ADMISSION",
+  "approval_date": "2026-09-28",
+  "scope": "F1_ONLY",
+  "user_statement": {
+    "ncp_storage_class": "CB1",
+    "provisioned_capacity_gb": 100,
+    "block_device": "/dev/vda",
+    "role": "existing default storage"
+  },
+  "observed_f0_host_evidence": {
+    "filesystem_source": "/dev/vda2",
+    "fstype": "ext4",
+    "mount_target": "/",
+    "available_bytes_at_f0_return": 91396534272,
+    "evidence_path": "research/foundation_rebuild/ncloud_c64g3_20260928/f0_evidence/20260928T045058Z/F0_RETURN_HANDOFF.json"
+  },
+  "approved_workspace": {
+    "root": "/root/.local/state/bass_f1",
+    "requires_new_mount": false,
+    "requires_format": false,
+    "requires_sudo": false,
+    "requires_new_volume": false,
+    "minimum_free_bytes": 5368709120
+  },
+  "interpretation": "The existing CB1 root block storage is explicitly approved as the F1 native-admission work volume. The generic preference for /data/bass does not require a separate volume for F1.",
+  "not_authorized_for": [
+    "F2 worker-scaling by implication",
+    "F3 production-scale transport by implication",
+    "disk reformat",
+    "mount-table mutation",
+    "new volume creation"
+  ],
+  "secrets_or_instance_identifiers_included": false
+}
