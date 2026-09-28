@@ -16,9 +16,15 @@ branch를 fetch하고 별도 detached worktree를 만들어 그 안에서만 구
 authoritative handoff:
 research/foundation_rebuild/ncloud_f1_engine_admission_20260928/F1_CODEX_HANDOFF_KO.md
 
-먼저 F0 execution host의 실제 artifacts가 남아 있으면
-F0_ARTIFACT_IMPORT_CONTRACT.json에 따라 f0_evidence/로 import하고 exact hash를 검증해.
-없으면 합성하지 말고 F0 import pending으로 남기되 F1 code 구현은 계속해.
+F0 execution evidence는 이미 target branch에 durable publication돼 있다.
+다음 파일을 먼저 검증해:
+research/foundation_rebuild/ncloud_c64g3_20260928/F0_DURABLE_CLOSURE.json
+research/foundation_rebuild/ncloud_c64g3_20260928/f0_evidence/20260928T045058Z/EVIDENCE_MANIFEST.json
+research/foundation_rebuild/ncloud_c64g3_20260928/f0_evidence/20260928T045058Z/RETURN_REPORT.json
+research/foundation_rebuild/ncloud_c64g3_20260928/f0_evidence/20260928T045058Z/F0_RETURN_HANDOFF.json
+
+host path에서 F0 artifacts를 다시 import하거나 F0를 재실행하지 마.
+durable evidence가 contract와 불일치하면 F1_IMPLEMENTATION_BLOCKED로 중단해.
 
 그 다음 TDD로 다음을 구현해:
 - runtime/native/archive_evidence.py
@@ -53,7 +59,6 @@ runner는 RUN_AUTHORIZATION.json 없이는 실제 native science를 시작하지
 
 완료 시 F1_RETURN_CONTRACT.json에 따라
 F1_IMPLEMENTATION_COMPLETE_EXECUTION_NOT_RUN,
-F1_IMPLEMENTATION_COMPLETE_F0_IMPORT_PENDING,
 F1_IMPLEMENTATION_BLOCKED
 중 정확히 하나를 반환해.
 
