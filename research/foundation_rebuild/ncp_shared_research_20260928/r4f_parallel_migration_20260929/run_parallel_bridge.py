@@ -58,6 +58,13 @@ def _write(path: Path, value) -> None:
     serial.write_new(path, value)
 
 
+def _authorization_ids(parent_id: str, prior_id: str, fresh_id: str) -> None:
+    ids = (parent_id, prior_id, fresh_id)
+    if any(not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]{15,95}', value)
+           for value in ids) or len(set(ids)) != 3:
+        raise PermissionError('three distinct parent, prior, and fresh authorization IDs required')
+
+
 def _identity(args) -> dict:
     if os.environ.get('ALLOW_NEW_NATIVE_R4F') != 'YES_I_AUTHORIZE_MIGRATION':
         raise PermissionError('R4F_NATIVE_MIGRATION_NOT_AUTHORIZED')
@@ -76,10 +83,14 @@ def _identity(args) -> dict:
         raise ValueError('all four thread limits must be one before Python starts')
     if args.expected_resume_sha256 != ARCHIVE_SHA256:
         raise ValueError('original source archive identity mismatch')
-    if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]{15,95}', args.authorization_id):
-        raise PermissionError('explicit new migration authorization ID required')
-    if args.authorization_id == args.parent_authorization_id:
-        raise PermissionError('parent authorization ID cannot be reused')
+    _authorization_ids(args.parent_authorization_id,
+                       args.prior_migration_authorization_id, args.authorization_id)
+    for value in (args.expected_stop_receipt_sha256,
+                  args.expected_prior_admission_sha256,
+                  args.expected_prior_return_sha256,
+                  args.expected_prior_archive_sha256):
+        if not re.fullmatch(r'[0-9a-f]{64}', value):
+            raise ValueError('exact prior evidence SHA256 required')
     if args.parity_count != 2 or not 1 <= args.workers <= 8 or not 4 <= args.pilot_queries <= 8:
         raise ValueError('migration worker/parity/pilot bounds exceeded')
     cpus = [int(x) for x in args.cpus.split(',')]
@@ -94,7 +105,14 @@ def _identity(args) -> dict:
             'base_serial_commit':PARENT_COMMIT,'base_serial_tree':PARENT_TREE,
             'original_archive_sha256':ARCHIVE_SHA256,
             'authorization_id':args.authorization_id,
+            'fresh_migration_authorization_id':args.authorization_id,
             'parent_authorization_id':args.parent_authorization_id,
+            'prior_migration_authorization_id':args.prior_migration_authorization_id,
+            'stop_receipt_sha256':args.expected_stop_receipt_sha256,
+            'prior_migration_out':str(Path(args.prior_migration_out).resolve()),
+            'prior_admission_sha256':args.expected_prior_admission_sha256,
+            'prior_return_sha256':args.expected_prior_return_sha256,
+            'prior_archive_sha256':args.expected_prior_archive_sha256,
             'deadline_unix':args.deadline_unix,'workers':args.workers,
             'pilot_queries':args.pilot_queries,'parity_count':2,
             'cpus':cpus,'worker_ram_bytes':args.worker_ram_bytes,
@@ -106,8 +124,15 @@ def _identity(args) -> dict:
             'threads':{k:os.environ[k] for k in THREAD_KEYS}}
 
 
-def _parent_receipt(parent_out: Path, parent_id: str, migration_id: str,
-                    stop_receipt: Path, deadline: float) -> dict:
+def _parent_receipt(parent_out: Path, parent_id: str, prior_id: str,
+                    fresh_id: str, stop_receipt: Path, prior_out: Path,
+                    expected_hashes: dict, deadline: float) -> dict:
+    _authorization_ids(parent_id, prior_id, fresh_id)
+    parent_out = Path(parent_out).resolve()
+    prior_out = Path(prior_out).resolve()
+    stop_receipt = Path(stop_receipt)
+    if _sha(stop_receipt) != expected_hashes['stop_receipt']:
+        raise ValueError('STOP_RECEIPT SHA256 mismatch')
     admission = strict_json(parent_out/'EXECUTION_ADMISSION.json')
     consumed = strict_json(parent_out/'AUTHORIZATION_CONSUMED.json')
     stopped = strict_json(stop_receipt)
@@ -120,11 +145,40 @@ def _parent_receipt(parent_out: Path, parent_id: str, migration_id: str,
         or Path(consumed.get('out','')).resolve() != parent_out.resolve()
         or stopped.get('python_pid') != consumed.get('pid')
         or stopped.get('parent_authorization_id') != parent_id
-        or stopped.get('migration_authorization_id') != migration_id
+        or stopped.get('migration_authorization_id') != prior_id
         or stopped.get('child_exited') is not True
         or stopped.get('supervisor_exited') is not True
         or stopped.get('classification') != 'PLANNED_SERIAL_TO_PARALLEL_MIGRATION'):
         raise ValueError('stopped parent lineage is incomplete')
+    parent_report = parent_out/'RETURN_REPORT.json'
+    if (_sha(parent_report) != stopped.get('parent_report_sha256')
+        or strict_json(parent_report).get('first_failure',{}).get('type') != 'InterruptedError'):
+        raise ValueError('stopped parent report mismatch')
+    old_admission_path = prior_out/'EXECUTION_ADMISSION.json'
+    old_return_path = prior_out/'RETURN_REPORT.json'
+    old_archive_path = prior_out.with_name(prior_out.name+'_RETURN.zip')
+    for path, key in ((old_admission_path,'prior_admission'),
+                      (old_return_path,'prior_return'),
+                      (old_archive_path,'prior_archive')):
+        if _sha(path) != expected_hashes[key]:
+            raise ValueError('failed migration evidence SHA256 mismatch: '+key)
+    old_admission = strict_json(old_admission_path)
+    old_return = strict_json(old_return_path)
+    if (old_admission.get('authorization_id') != prior_id
+        or old_admission.get('parent_authorization_id') != parent_id
+        or old_admission.get('base_serial_commit') != PARENT_COMMIT
+        or old_admission.get('base_serial_tree') != PARENT_TREE
+        or old_admission.get('original_archive_sha256') != ARCHIVE_SHA256
+        or old_admission.get('global_raw_attempt_cap') != MAX_RAW_ATTEMPTS
+        or old_return.get('execution_head') != old_admission.get('execution_commit')
+        or old_return.get('execution_tree') != old_admission.get('execution_tree')
+        or old_return.get('status') != 'R4F_MIGRATION_BLOCKED'
+        or old_return.get('first_failure',{}).get('type') != 'AttributeError'
+        or 'restore_query_store' not in old_return.get('first_failure',{}).get('message','')
+        or _sha(prior_out/'STOP_RECEIPT.json') != expected_hashes['stop_receipt']
+        or (prior_out/'worker_tasks').exists()
+        or (prior_out/'NATIVE_PARITY_AUDIT.json').exists()):
+        raise ValueError('failed migration lineage or zero-native scope mismatch')
     started_file=parent_out.parent/'START_UTC.txt'
     started_unix=datetime.fromisoformat(started_file.read_text().strip().replace('Z','+00:00')).timestamp()
     if deadline > started_unix + admission['max_wall_seconds']:
@@ -138,10 +192,19 @@ def _parent_receipt(parent_out: Path, parent_id: str, migration_id: str,
     for line in raw_path.read_text().splitlines():
         row = json.loads(line)
         if row.get('event') == 'attempt_started': starts += 1
-    return {'schema':'BASS_R4F_PARENT_LINEAGE_V1',
-            'authorization_id':parent_id,'admission_sha256':_sha(parent_out/'EXECUTION_ADMISSION.json'),
+    return {'schema':'BASS_R4F_PARENT_LINEAGE_V2',
+            'authorization_id':parent_id,
+            'parent_authorization_id':parent_id,
+            'prior_migration_authorization_id':prior_id,
+            'fresh_migration_authorization_id':fresh_id,
+            'admission_sha256':_sha(parent_out/'EXECUTION_ADMISSION.json'),
             'consumed_sha256':_sha(parent_out/'AUTHORIZATION_CONSUMED.json'),
+            'parent_return_sha256':_sha(parent_report),
             'stop_receipt_sha256':_sha(stop_receipt),
+            'prior_admission_sha256':_sha(old_admission_path),
+            'prior_return_sha256':_sha(old_return_path),
+            'prior_archive_sha256':_sha(old_archive_path),
+            'prior_migration_out':str(prior_out),
             'parent_raw_attempts':starts,
             'parent_started_unix':started_unix,
             'parent_deadline_unix':started_unix+admission['max_wall_seconds'],
@@ -246,8 +309,15 @@ def _science(args, out: Path, admission: dict) -> dict:
     from transport_policy import assess_temporal_pair
 
     parent_out = Path(args.parent_out).resolve()
-    lineage = _parent_receipt(parent_out,args.parent_authorization_id,args.authorization_id,
-                              Path(args.stop_receipt),args.deadline_unix)
+    lineage = _parent_receipt(
+        parent_out,args.parent_authorization_id,
+        args.prior_migration_authorization_id,args.authorization_id,
+        Path(args.stop_receipt),Path(args.prior_migration_out),{
+            'stop_receipt':args.expected_stop_receipt_sha256,
+            'prior_admission':args.expected_prior_admission_sha256,
+            'prior_return':args.expected_prior_return_sha256,
+            'prior_archive':args.expected_prior_archive_sha256},
+        args.deadline_unix)
     _write(out/'PARENT_LINEAGE.json',lineage)
     serial.copy_new(Path(args.stop_receipt),out/'STOP_RECEIPT.json')
     loss=Path(args.stop_receipt).with_name(Path(args.stop_receipt).stem+'_LOSS_LEDGER.json')
@@ -422,6 +492,12 @@ def parse_args(argv=None):
     p.add_argument('--parent-out',required=True)
     p.add_argument('--stop-receipt',required=True)
     p.add_argument('--parent-authorization-id',required=True)
+    p.add_argument('--prior-migration-authorization-id',required=True)
+    p.add_argument('--prior-migration-out',required=True)
+    p.add_argument('--expected-stop-receipt-sha256',required=True)
+    p.add_argument('--expected-prior-admission-sha256',required=True)
+    p.add_argument('--expected-prior-return-sha256',required=True)
+    p.add_argument('--expected-prior-archive-sha256',required=True)
     p.add_argument('--authorization-id',required=True)
     p.add_argument('--expected-commit',required=True)
     p.add_argument('--expected-tree',required=True)

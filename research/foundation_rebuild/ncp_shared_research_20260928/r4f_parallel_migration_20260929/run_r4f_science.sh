@@ -11,6 +11,12 @@ HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 : "${PARENT_OUT:?stopped parent output required}"
 : "${STOP_RECEIPT:?exact parent stop receipt required}"
 : "${PARENT_AUTH_ID:?consumed parent authorization ID required}"
+: "${PRIOR_R4F_AUTH_ID:?failed migration authorization ID required}"
+: "${PRIOR_R4F_OUT:?failed migration output required}"
+: "${EXPECTED_STOP_RECEIPT_SHA256:?immutable stop receipt SHA256 required}"
+: "${EXPECTED_PRIOR_ADMISSION_SHA256:?failed admission SHA256 required}"
+: "${EXPECTED_PRIOR_RETURN_SHA256:?failed return SHA256 required}"
+: "${EXPECTED_PRIOR_ARCHIVE_SHA256:?failed archive SHA256 required}"
 : "${R4F_AUTHORIZATION_ID:?new user-approved migration authorization ID required}"
 : "${R4F_DEADLINE_UNIX:?approved original-envelope deadline required}"
 : "${R4F_TERMINATION_GRACE_SECONDS:?approved termination grace required}"
@@ -30,6 +36,12 @@ exec "$BASS_R4F_PYTHON" -I -B "$HERE/supervise.py" \
   --expected-resume-sha256 "$EXPECTED_RESUME_SHA256" \
   --parent-out "$PARENT_OUT" --stop-receipt "$STOP_RECEIPT" \
   --parent-authorization-id "$PARENT_AUTH_ID" \
+  --prior-migration-authorization-id "$PRIOR_R4F_AUTH_ID" \
+  --prior-migration-out "$PRIOR_R4F_OUT" \
+  --expected-stop-receipt-sha256 "$EXPECTED_STOP_RECEIPT_SHA256" \
+  --expected-prior-admission-sha256 "$EXPECTED_PRIOR_ADMISSION_SHA256" \
+  --expected-prior-return-sha256 "$EXPECTED_PRIOR_RETURN_SHA256" \
+  --expected-prior-archive-sha256 "$EXPECTED_PRIOR_ARCHIVE_SHA256" \
   --authorization-id "$R4F_AUTHORIZATION_ID" \
   --expected-commit "$EXPECTED_COMMIT" --expected-tree "$EXPECTED_TREE" \
   --analytic-build "$ANALYTIC_BUILD" \
