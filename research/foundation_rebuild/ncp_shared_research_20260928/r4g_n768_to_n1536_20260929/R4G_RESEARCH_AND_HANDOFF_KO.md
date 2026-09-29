@@ -127,3 +127,22 @@ bytes=179388
 SHA256=a1f182153bd7cf293ea14e8e0bbf82cfe713d2793a350a89e62e9becc038f3e9
 Drive object=18JsiHyhXWEEcAbdHnIKYvkNRu2u_xlNF
 내용: 한국어 보고서, 상세Codex prompt, machine-generated SOURCE_PINS,1538행query plan, ANALYSIS, 검산Python/Wolfram 및 원source receipts. 새production runner는 포함하지 않는다. 별도delivery receipt가 provider acknowledgement를 기록한다.
+
+## 8. Adaptive worker scaling addendum (2026-09-29)
+
+N768의 8-worker 상한은 최초 production 병렬 migration의 안전/검증 envelope였으며 물리적 또는 NCP hardware 한계가 아니다. N1536 successor 준비에서는 기존 N768 exact commit을 변경하지 않고 별도 successor-scoped policy를 추가한다.
+
+- policy code: `adaptive_workers.py`
+- machine contract: `ADAPTIVE_WORKER_POLICY.json`
+- focused tests: `tests/test_adaptive_workers.py`
+- updated handoff: `CODEX_HANDOFF_N1536_ADAPTIVE_WORKERS_KO.md`
+
+기본 scaling stage는 `8 -> 16 -> 32`, hard max는 32다. 각 worker 내부의 OMP/OpenBLAS/MKL/NumExpr thread 수는 계속 1로 유지한다. 64-worker stage는 현재 준비 범위 밖이다.
+
+성능 측정을 위해 별도 benchmark query를 재계산하지 않는다. missing 1536개 중 서로 겹치지 않는 useful query를 결정론적으로 stratified sampling하여 8-worker stage에 8개, 16-worker stage에 16개, 32-worker stage에 32개를 배정한다. 성공 결과는 모두 canonical cache에 남기므로 세 stage 전체를 수행해도 scientific missing count는 그대로 1536이며 pilot 뒤에는 1480개만 남는다.
+
+stage 비교 지표는 실제 `queries/second`이며 실패가 없는 stage만 후보로 둔다. 최고 throughput stage를 나머지 fill에 사용하고 exact tie에서는 worker가 적은 stage를 선택한다. 이 scheduling rule은 승인된 CPU/RAM/raw/wall/cost scope를 확대하지 않는다.
+
+resource admission은 live CPU affinity와 shared-host RAM을 다시 읽어야 한다. planning value는 worker당 1 GiB이며 32-worker stage는 worker pool에 32 GiB envelope가 필요하다. 다른 BASS 작업의 자원을 침범하거나 64-vCPU 전체를 자동으로 점유한다고 가정하지 않는다.
+
+이 addendum 자체는 native authorization이 아니다. 새 N1536 runner가 adaptive policy를 실제 admission/pool lifecycle에 통합하고 non-native integration smoke를 통과한 뒤 `N1536_ADAPTIVE_IMPLEMENTATION_READY__NATIVE_AUTHORIZATION_PENDING`에서 멈춘다.
