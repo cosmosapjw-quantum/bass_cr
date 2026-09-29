@@ -148,23 +148,25 @@ def _parent_receipt(parent_out: Path, parent_id: str, migration_id: str,
 
 
 def _freeze_parent(parent_out: Path, destination: Path) -> dict:
+    root=parent_out.parent
     files = {}
-    for p in sorted(parent_out.rglob('*')):
+    for p in sorted(root.rglob('*')):
         if p.is_file():
-            rel = str(p.relative_to(parent_out))
+            rel = str(p.relative_to(root))
             files[rel] = {'bytes':p.stat().st_size,'sha256':_sha(p)}
     result = {'schema':'BASS_R4F_FROZEN_PARENT_MANIFEST_V1',
-              'parent_out':str(parent_out.resolve()),'files':files}
+              'parent_run_root':str(root.resolve()),'files':files}
     _write(destination, result)
     return result
 
 
 def _assert_frozen(parent_out: Path, manifest: dict) -> None:
-    current={str(p.relative_to(parent_out)) for p in parent_out.rglob('*') if p.is_file()}
+    root=parent_out.parent
+    current={str(p.relative_to(root)) for p in root.rglob('*') if p.is_file()}
     if current != set(manifest['files']):
         raise ValueError('parent file membership changed after freeze')
     for rel, record in manifest['files'].items():
-        path = parent_out/rel
+        path = root/rel
         if not path.is_file() or path.stat().st_size != record['bytes'] or _sha(path) != record['sha256']:
             raise ValueError('parent changed after freeze: ' + rel)
 
