@@ -21,7 +21,8 @@ def _sha(data: bytes) -> str:
 
 def verify(archive: Path, python: Path, receipt_path: Path) -> dict:
     archive = Path(archive).resolve()
-    python = Path(python).resolve()
+    # Keep the venv entry point: resolving its symlink may select system Python.
+    python = Path(os.path.abspath(os.path.expanduser(python)))
     receipt_path = Path(receipt_path).resolve()
     if receipt_path.exists() or not archive.is_file() or not python.is_file():
         raise ValueError("create-only receipt, existing ZIP and Python required")
