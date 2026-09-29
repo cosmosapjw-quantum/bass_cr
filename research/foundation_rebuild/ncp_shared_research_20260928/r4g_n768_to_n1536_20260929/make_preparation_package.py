@@ -20,7 +20,7 @@ for directory in (HERE, R4C):
 from adaptive_workers import build_useful_pilot_plan
 from successor import (CONTEXT_ID, NATIVE_BUILD_SHA256, NATIVE_LIBRARY_SHA256,
                        NATIVE_SOURCE_SHA256, PREDECESSOR_SHA256, plan_n1536, plan_receipts,
-                       required_missing, validate_predecessor)
+                       pilot_authority_fields, required_missing, validate_predecessor)
 import continue_temporal as serial
 from cr_repro.observables import projectile_speed_au
 from execution_admission import check_native_build
@@ -146,6 +146,7 @@ def create_package(predecessor: Path, build: Path, out: Path) -> dict:
                 "useful_pilot_plan_sha256": serial.sha256_path(out / "USEFUL_PILOT_PLAN.json")}
         _put(out / "SOURCE_PINS.json", pins)
         policy = json.loads((HERE / "ADAPTIVE_WORKER_POLICY.json").read_text())
+        pilot_fields = pilot_authority_fields(policy, pilot)
         template = {"schema": "BASS_R4G_N1536_FUTURE_AUTHORIZATION_TEMPLATE_V1",
                     "status": "NATIVE_AUTHORIZATION_PENDING",
                     "execution_commit": head, "execution_tree": tree,
@@ -154,11 +155,14 @@ def create_package(predecessor: Path, build: Path, out: Path) -> dict:
                     "source_pins_sha256": serial.sha256_path(out / "SOURCE_PINS.json"),
                     "query_plan_sha256": pins["query_plan_sha256"],
                     "useful_pilot_plan_sha256": pins["useful_pilot_plan_sha256"],
-                    "worker_stages": policy["stages"],
+                    **pilot_fields,
                     "hard_max_workers": policy["hard_max_workers"],
                     "per_worker_ram_bytes": policy["worker_ram_bytes"],
                     "minimum_total_worker_ram_cap_bytes": policy["maximum_stage_worker_ram_bytes"],
-                    "approved_cpu_list": "USER_APPROVAL_REQUIRED",
+                    "total_worker_ram_cap_bytes": policy["maximum_stage_worker_ram_bytes"],
+                    "minimum_live_available_bytes": policy["maximum_stage_worker_ram_bytes"] + (4 << 30),
+                    "approved_cpu_list": "LIVE_CENSUS_AND_USER_APPROVAL_REQUIRED",
+                    "cpu_order_semantics": "FIRST_8_THEN_FIRST_16_THEN_FIRST_32",
                     "fresh_authorization_id": "USER_APPROVAL_REQUIRED",
                     "incremental_raw_attempt_cap_proposal": 16896,
                     "optional_parity": "NOT_INCLUDED_REQUIRES_SEPARATE_JUSTIFICATION",
@@ -166,6 +170,10 @@ def create_package(predecessor: Path, build: Path, out: Path) -> dict:
                     "wall_seconds": "USER_APPROVAL_REQUIRED",
                     "termination_grace_seconds": "USER_APPROVAL_REQUIRED",
                     "cost_scope": "USER_APPROVAL_REQUIRED",
+                    "recommended_wall_seconds": 28800,
+                    "recommended_termination_grace_seconds": 60,
+                    "suggested_cost_ceiling_krw_including_vat": 40000,
+                    "suggested_host_scope": "ONE_EXISTING_HIGH_CPU_G3_HOST_NO_NEW_VM_OR_RESIZE",
                     "no_native_authorization_conferred": True}
         _put(out / "FUTURE_AUTHORIZATION_TEMPLATE.json", template)
         closure = sorted(set(PACKAGE_FILES) | set(EXTRA_SOURCE_CLOSURE)
@@ -183,7 +191,7 @@ def create_package(predecessor: Path, build: Path, out: Path) -> dict:
                   "r4g_n768_to_n1536_20260929/tests"],
               "run_from": "EXTRACTED_PACKAGE_ROOT",
               "historical_test_fixture_sha256": TEST_FIXTURE_SHA256,
-              "expected_passed": 61,
+              "expected_passed": 62,
               "external_repository_source_required": False,
               "native_science_authorized": False})
         files = {}

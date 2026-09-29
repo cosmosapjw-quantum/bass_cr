@@ -1,4 +1,5 @@
 from concurrent.futures import ThreadPoolExecutor
+import json
 from pathlib import Path
 from types import SimpleNamespace
 import os
@@ -56,6 +57,50 @@ def test_successor_admission_has_native_authorization_gate(monkeypatch):
     monkeypatch.delenv("ALLOW_NEW_NATIVE_R4G", raising=False)
     with pytest.raises(PermissionError, match="N1536_NATIVE_NOT_AUTHORIZED"):
         s.admission_scope(SimpleNamespace())
+
+
+def test_pilot_authority_matches_policy_and_exact_plan(monkeypatch, tmp_path):
+    policy = json.loads((HERE / "ADAPTIVE_WORKER_POLICY.json").read_text())
+    ids = [f"missing-{i}" for i in range(1536)]
+    stages, remainder = build_useful_pilot_plan(ids)
+    pilot = {"stages": [{"workers": x.workers, "query_ids": list(x.query_ids)}
+                        for x in stages], "remaining_ids": list(remainder)}
+    expected = {"worker_stages": [8, 16, 32],
+                "pilot_query_counts": [16, 32, 64],
+                "pilot_query_total": 112,
+                "post_pilot_remaining": 1424}
+    assert s.pilot_authority_fields(policy, pilot) == expected
+    assert expected["worker_stages"] == policy["stages"]
+    assert expected["pilot_query_counts"] == [len(x["query_ids"]) for x in pilot["stages"]]
+    bad_pilot = {**pilot, "stages": [dict(row) for row in pilot["stages"]]}
+    bad_pilot["stages"][1]["query_ids"] = bad_pilot["stages"][1]["query_ids"][:-1]
+    with pytest.raises(ValueError, match="plan mismatch"):
+        s.pilot_authority_fields(policy, bad_pilot)
+
+    monkeypatch.setenv("ALLOW_NEW_NATIVE_R4G", "YES_I_AUTHORIZE_N1536")
+    for key in s.THREAD_KEYS:
+        monkeypatch.setenv(key, "1")
+    monkeypatch.setattr(s.serial, "git_identity", lambda: ("a" * 40, "b" * 40))
+    monkeypatch.setattr(s.subprocess, "check_output", lambda *a, **k: "")
+    monkeypatch.setattr(s.os, "sched_getaffinity", lambda _: set(range(32)))
+    monkeypatch.setattr(s, "live_resource_census", lambda *a: {"synthetic": True})
+    monkeypatch.setattr(s, "sys", SimpleNamespace(flags=SimpleNamespace(isolated=1),
+                     version_info=(3, 11), version="synthetic"))
+    args = SimpleNamespace(
+        expected_commit="a" * 40, expected_tree="b" * 40,
+        out=tmp_path / "out", authorization_id="R4G-N1536-SYNTHETIC-ADMISSION",
+        expected_predecessor_sha256=s.PREDECESSOR_SHA256,
+        expected_source_pins_sha256="c" * 64,
+        expected_query_plan_sha256="d" * 64,
+        expected_useful_pilot_plan_sha256="e" * 64,
+        stages="8,16,32", hard_max_workers=32,
+        cpus=",".join(map(str, range(32))), worker_ram_bytes=1 << 30,
+        total_worker_ram_cap_bytes=32 << 30, global_raw_attempt_cap=16896,
+        deadline_unix=time.time() + 60, max_wall_seconds=120,
+        cost_scope="synthetic non-native scope")
+    admission = s.admission_scope(args)
+    assert {key: admission[key] for key in expected} == expected
+    assert "pilot_queries" not in admission
 
 
 def test_cache_only_miss_has_no_evaluator_boundary(tmp_path):

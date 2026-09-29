@@ -182,6 +182,28 @@ def plan_receipts(required, missing, stages, remainder, head: str, tree: str):
     return plan, pilot
 
 
+def pilot_authority_fields(policy: dict, pilot: dict | None = None) -> dict:
+    """Bind admission and the future template to the useful pilot plan."""
+    workers = list(policy["stages"])
+    counts = [n * policy["pilot_queries_per_worker"] for n in workers]
+    total = sum(counts)
+    remaining = MISSING_COUNT - total
+    if (tuple(workers) != DEFAULT_STAGES or counts != [16, 32, 64]
+        or total != 112 or remaining != 1424
+        or policy["stage_useful_query_counts"] != counts
+        or policy["stage_useful_queries_total"] != total
+        or policy["post_pilot_remaining_queries"] != remaining):
+        raise ValueError("adaptive pilot authority policy mismatch")
+    if pilot is not None and (
+        [row["workers"] for row in pilot["stages"]] != workers
+        or [len(row["query_ids"]) for row in pilot["stages"]] != counts
+        or len(pilot["remaining_ids"]) != remaining
+    ):
+        raise ValueError("adaptive pilot authority plan mismatch")
+    return {"worker_stages": workers, "pilot_query_counts": counts,
+            "pilot_query_total": total, "post_pilot_remaining": remaining}
+
+
 def live_resource_census(cpus: list[int], workers: int, worker_ram_bytes: int) -> dict:
     """Fail closed before a stage if affinity, free RAM, or competing BASS work changes."""
     allowed = os.sched_getaffinity(0)
@@ -285,6 +307,7 @@ def admission_scope(args) -> dict:
         or not args.cost_scope.strip()):
         raise ValueError("explicit live deadline and cost scope required")
     census = live_resource_census(cpus, 8, args.worker_ram_bytes)
+    pilot_fields = pilot_authority_fields(json.loads((HERE / "ADAPTIVE_WORKER_POLICY.json").read_text()))
     return {"schema": "BASS_R4G_N1536_ADMISSION_V1",
             "execution_commit": head, "execution_tree": tree,
             "predecessor_commit": PREDECESSOR_COMMIT, "predecessor_tree": PREDECESSOR_TREE,
@@ -294,7 +317,7 @@ def admission_scope(args) -> dict:
             "query_plan_sha256": args.expected_query_plan_sha256,
             "useful_pilot_plan_sha256": args.expected_useful_pilot_plan_sha256,
             "authorization_id": args.authorization_id, "worker_policy": scope,
-            "selected_stage": None, "pilot_queries": [8, 16, 32],
+            "selected_stage": None, **pilot_fields,
             "global_raw_attempt_cap": args.global_raw_attempt_cap,
             "deadline_unix": args.deadline_unix, "cost_scope": args.cost_scope,
             "max_wall_seconds": args.max_wall_seconds,

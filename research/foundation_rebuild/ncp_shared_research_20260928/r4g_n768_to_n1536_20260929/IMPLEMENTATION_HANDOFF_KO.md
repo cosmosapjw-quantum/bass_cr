@@ -15,6 +15,8 @@
 
 Pilot 8/16/32는 missing ID를 결정론적으로 층화하여 16/32/64개 배정한다. 112개 모두 유용한 scientific query이며 성공 pair는 canonical cache에 create-only 게시한다. 모든 stage가 성공하면 1424개가 fill에 남는다. stage throughput에는 pool 시작·종료 시간을 포함한다. receipt에는 query별 시간, selected-resolution 분포, raw/query, worker/coordinator RSS와 실패를 기록한다. 건강한 stage 중 실제 queries/sec 최대를 선택하고 동률은 적은 worker를 선택한다. 상위 stage의 시작 전 자원 거부 시 그 stage와 이후 pilot ID를 누락 작업으로 되돌리고 하위 건강한 stage로 fill한다. 계산 중 worker 또는 operator 실패는 global budget을 취소하고 부분 증거를 보존하며 중단한다.
 
+Admission과 미래 승인 템플릿은 `worker_stages=[8,16,32]`, `pilot_query_counts=[16,32,64]`, `pilot_query_total=112`, `post_pilot_remaining=1424`를 별개 필드로 기록한다. 이전의 의미가 혼동되는 `pilot_queries=[8,16,32]` 필드는 제거했다. 승인 템플릿 생성 시 실제 useful pilot plan과 정책의 수가 다르면 거부한다.
+
 각 stage 전에 affinity, cgroup CPU quota, /proc/meminfo와 cgroup RAM, 다른 BASS 프로세스의 CPU 중복을 검사한다. worker는 spawn이며 각 1 GiB 주소 공간과 1 numerical thread를 유지한다. global raw reservation은 기존 durable GlobalBudget을 공유한다. 새 rung useful 최대는 1536×11=16896 raw이며 별도 parity 22 raw는 이 구현의 자동 실행 범위에 포함하지 않았다.
 
 필수 1538 pair가 모두 검증된 후에만 원래 initial state에서 run_candidate(...,1536)를 strict cache-only provider로 수행한다. native operator call이 0이 아니면 차단한다. candidate와 pair 증거를 먼저 저장한 다음 frozen temporal screens, reference norm, operator qualification, triangle consistency를 분류한다. N1536의 dual distance PASS는 유효한 결과다. production은 계속 HOLD다.
@@ -23,7 +25,7 @@ Pilot 8/16/32는 missing ID를 결정론적으로 층화하여 16/32/64개 배�
 
 준비 worktree에서 실행:
 
-1. /root/.local/state/bass_f0/env/tp2e_f0_20260928T045058Z/bin/python -B -m pytest -q -p no:cacheprovider research/foundation_rebuild/ncp_shared_research_20260928/r4f_parallel_migration_20260929/tests research/foundation_rebuild/ncp_shared_research_20260928/r4g_n768_to_n1536_20260929/tests → 61 passed, 0 failed, 0 skipped.
+1. /root/.local/state/bass_f0/env/tp2e_f0_20260928T045058Z/bin/python -B -m pytest -q -p no:cacheprovider research/foundation_rebuild/ncp_shared_research_20260928/r4f_parallel_migration_20260929/tests research/foundation_rebuild/ncp_shared_research_20260928/r4g_n768_to_n1536_20260929/tests → 62 passed, 0 failed, 0 skipped.
 2. 실제 A2 ZIP에 대해 successor.validate_predecessor와 plan_n1536/required_missing 비 native preflight → canonical pairs 2047, required 1538, inherited exact hits 2, missing 1536, union 3583.
 3. serial.verify_pinned_dependencies() → 19/19 SHA 일치. check_native_build on frozen F1 engine → source 90913155c0cfa80962d1cb00bb1b7ec0443170917c25913ac5e359979738ab30, library 966146f0ca713251f8b73999b4d89595cf1820a8c2d36f5c6290387b70c68035, BUILD 180a74d3acf2588d3b8c7944effe4709a4fd4f6241cb4df736cd8f0c94430af1, native_loaded_by_check=false.
 4. launcher→parser identity trap은 잘못된 commit을 주입하여 native load 및 nonce 소비 전에 거부됨을 확인한다. 이것은 synthetic test이며 native parity가 아니다.

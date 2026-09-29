@@ -55,6 +55,20 @@ def verify(archive: Path, python: Path, receipt_path: Path) -> dict:
         instructions = json.loads((root / "REPLAY_INSTRUCTIONS.json").read_text())
         if instructions["external_repository_source_required"] is not False:
             raise ValueError("package claims external source dependency")
+        policy = json.loads((root / CORE / "ADAPTIVE_WORKER_POLICY.json").read_text())
+        pilot = json.loads((root / "USEFUL_PILOT_PLAN.json").read_text())
+        template = json.loads((root / "FUTURE_AUTHORIZATION_TEMPLATE.json").read_text())
+        expected_pilot = {"worker_stages": [8, 16, 32],
+                          "pilot_query_counts": [16, 32, 64],
+                          "pilot_query_total": 112,
+                          "post_pilot_remaining": 1424}
+        if ({key: template.get(key) for key in expected_pilot} != expected_pilot
+            or policy["stages"] != expected_pilot["worker_stages"]
+            or [len(stage["query_ids"]) for stage in pilot["stages"]]
+                != expected_pilot["pilot_query_counts"]
+            or len(pilot["remaining_ids"]) != expected_pilot["post_pilot_remaining"]
+            or "pilot_queries" in template):
+            raise ValueError("portable pilot authority/template mismatch")
         compile_cmd = [str(python), "-B", "-m", "py_compile"] + [
             str(root / CORE / name) for name in (
                 "adaptive_workers.py", "successor.py", "run_n1536.py",
@@ -92,6 +106,7 @@ def verify(archive: Path, python: Path, receipt_path: Path) -> dict:
                   "package_sha256": _sha(archive.read_bytes()),
                   "package_bytes": archive.stat().st_size,
                   "zip_crc": "PASS", "manifest_verified_files": len(manifest),
+                  "pilot_authority_template_verified": True,
                   "py_compile_command": compile_cmd,
                   "py_compile_exit": compiled.returncode,
                   "source_imports_relative_to_extracted_root": imported.stdout.strip(),
