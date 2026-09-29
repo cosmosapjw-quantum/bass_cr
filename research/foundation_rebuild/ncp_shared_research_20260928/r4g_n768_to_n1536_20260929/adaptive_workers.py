@@ -27,6 +27,7 @@ class StageObservation:
     wall_seconds: float
     failed_queries: int = 0
     peak_rss_bytes: int | None = None
+    resource_valid: bool = True
 
     @property
     def queries_per_second(self) -> float:
@@ -132,7 +133,9 @@ def summarize_scaling(observations: Sequence[StageObservation]) -> tuple[dict, .
     if not observations:
         raise ValueError("at least one scaling observation required")
     rows = []
-    baseline = observations[0]
+    baseline = next((obs for obs in observations if obs.failed_queries == 0 and obs.resource_valid), None)
+    if baseline is None:
+        raise ValueError("no healthy worker stage observation")
     base_qps = baseline.queries_per_second
     base_workers = baseline.workers
     for obs in observations:
@@ -150,6 +153,7 @@ def summarize_scaling(observations: Sequence[StageObservation]) -> tuple[dict, .
             "speedup_vs_first_stage": speedup,
             "parallel_efficiency_vs_first_stage": efficiency,
             "peak_rss_bytes": obs.peak_rss_bytes,
+            "resource_valid": obs.resource_valid,
         })
     return tuple(rows)
 
@@ -159,7 +163,7 @@ def fastest_healthy_stage(observations: Sequence[StageObservation]) -> int:
 
     This is a scheduling decision only.  It does not extend CPU/RAM/authorization scope.
     """
-    healthy = [obs for obs in observations if obs.failed_queries == 0]
+    healthy = [obs for obs in observations if obs.failed_queries == 0 and obs.resource_valid]
     if not healthy:
         raise ValueError("no healthy worker stage observation")
     ranked = sorted(healthy, key=lambda obs: (-obs.queries_per_second, obs.workers))
