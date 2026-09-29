@@ -34,6 +34,7 @@ from parallel_bridge import (CacheOnlyProvider, GlobalBudget, InvalidPair,
                              plan_queries, publish_pair, select_missing,
                              validate_pair)
 from worker_runtime import compute_query, initialize_worker
+from qualified_provider import restore_query_store
 
 PARENT_COMMIT = '4c2c0be5171c74a52b4a6e96b04c33fa00c62481'
 PARENT_TREE = '2e1a3175a7d20cf9c0218fb15f07f72d4afcb425'
@@ -279,7 +280,9 @@ def _science(args, out: Path, admission: dict) -> dict:
         if len({x.query_id for x in required}&base_ids)!=2:
             raise ValueError('required/base exact-hit count mismatch')
         canonical=out/'runtime_queries'
-        serial.restore_query_store(source,out,context_id)
+        restored = restore_query_store(source,out,context_id)
+        if restored != info['query_store']['qualified_query_count']:
+            raise ValueError('restored original query count mismatch')
         bridge=import_parent_extra(parent_out/'runtime_queries',source/'runtime_queries',
                                    canonical,required,context_id,contract)
         quarantine=out/'parent_quarantine'
