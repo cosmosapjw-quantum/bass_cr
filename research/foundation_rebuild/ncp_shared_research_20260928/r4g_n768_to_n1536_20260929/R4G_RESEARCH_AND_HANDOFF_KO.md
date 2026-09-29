@@ -146,3 +146,7 @@ stage 비교 지표는 실제 `queries/second`이며 실패가 없는 stage만 �
 resource admission은 live CPU affinity와 shared-host RAM을 다시 읽어야 한다. planning value는 worker당 1 GiB이며 32-worker stage는 worker pool에 32 GiB envelope가 필요하다. 다른 BASS 작업의 자원을 침범하거나 64-vCPU 전체를 자동으로 점유한다고 가정하지 않는다.
 
 이 addendum 자체는 native authorization이 아니다. 새 N1536 runner가 adaptive policy를 실제 admission/pool lifecycle에 통합하고 non-native integration smoke를 통과한 뒤 `N1536_ADAPTIVE_IMPLEMENTATION_READY__NATIVE_AUTHORIZATION_PENDING`에서 멈춘다.
+
+## 9. 2026-09-29 비 native hardening 정정
+
+위 8/16/32개, 총 56개 pilot은 첫 구현의 역사적 계약이다. 고정 pool/native-worker 시작 비용이 한 scheduling wave의 throughput을 왜곡할 수 있어, 후속 hardening 계약은 worker당 유용 query 2개로 수정됐다. 현행 pilot은 8-worker 16개, 16-worker 32개, 32-worker 64개이며 총 112개다. 전부 missing 1536개에 포함되고 세 stage 성공 후 1424개가 남는다. 8→16→32 및 hard max32, ordered qualification, query lattice, useful raw 상한 16896은 그대로다. 최신 CODEX_HANDOFF_N1536_ADAPTIVE_WORKERS_KO.md와 ADAPTIVE_WORKER_POLICY.json을 실행 준비 기준으로 사용한다.

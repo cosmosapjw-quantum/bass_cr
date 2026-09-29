@@ -49,7 +49,12 @@ def _signal(signum, frame):
 
 
 def _worker_with_rss(item):
+    start = time.monotonic()
     receipt = compute_query(item)
+    query = serial.strict_json(Path(receipt["task_dir"]) / "runtime_queries" /
+                               (item.query_id + ".json"))
+    receipt["selected_resolution"] = query["qualification"]["selected_resolution"]
+    receipt["task_wall_seconds"] = time.monotonic() - start
     receipt["worker_peak_rss_bytes"] = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024
     return receipt
 
@@ -63,6 +68,8 @@ def _run_stage(items, *, source, args, contract, budget, out, canonical, workers
     start_used = budget.used()
     start = time.monotonic()
     ctx = multiprocessing.get_context("spawn")
+    publish_failures = 0
+    published_receipts = {}
     try:
         with ProcessPoolExecutor(max_workers=workers, mp_context=ctx,
                                  initializer=initialize_worker,
@@ -70,10 +77,19 @@ def _run_stage(items, *, source, args, contract, budget, out, canonical, workers
                                            str(budget.root), str(out / "worker_tasks"),
                                            cpus, args.worker_ram_bytes)) as pool:
             def on_result(item, receipt):
+                nonlocal publish_failures
                 if receipt["query_id"] != item.query_id or not 2 <= receipt["raw_attempts"] <= len(contract["runtime_reference_resolutions"]):
                     raise ValueError("worker receipt identity or ladder bound mismatch")
-                publish_pair(Path(receipt["task_dir"]) / "runtime_queries",
-                             canonical, item, CONTEXT_ID, contract)
+                if (not math.isfinite(receipt["task_wall_seconds"])
+                    or receipt["task_wall_seconds"] <= 0):
+                    raise ValueError("worker task wall time invalid")
+                try:
+                    publish_pair(Path(receipt["task_dir"]) / "runtime_queries",
+                                 canonical, item, CONTEXT_ID, contract)
+                    published_receipts[item.query_id] = receipt
+                except BaseException:
+                    publish_failures += 1
+                    raise
             receipts = dispatch_bounded(items, pool, _worker_with_rss, on_result,
                                         max_inflight=workers, deadline_unix=args.deadline_unix,
                                         cancelled=lambda: _STOP)
@@ -82,25 +98,64 @@ def _run_stage(items, *, source, args, contract, budget, out, canonical, workers
             budget.cancel(type(exc).__name__ + ": " + str(exc))
         except FileExistsError:
             pass
+        completed = [x.query_id for x in items
+                     if (canonical / (x.query_id + ".json")).is_file()
+                     and (canonical / (x.query_id + ".npz")).is_file()]
+        failures = [x.query_id for x in items
+                    if (out / "worker_tasks" / x.query_id / "TASK_FAILURE.json").is_file()]
+        elapsed = time.monotonic() - start
+        histogram = {}
+        for receipt in published_receipts.values():
+            rule = receipt["selected_resolution"]
+            key = f"q{rule['order']}_h{rule['subdivisions']}"
+            histogram[key] = histogram.get(key, 0) + 1
         serial.write_new(out / ("STAGE_" + str(workers) + "_FAILURE.json"),
-                         {"workers": workers, "query_ids": [x.query_id for x in items],
-                          "completed_pair_ids": [x.query_id for x in items
-                              if (canonical / (x.query_id + ".json")).is_file()
-                              and (canonical / (x.query_id + ".npz")).is_file()],
+                         {"schema": "BASS_R4G_USEFUL_STAGE_FAILURE_V1",
+                          "workers": workers, "cpus": cpus,
+                          "resource_census": census,
+                          "query_ids": [x.query_id for x in items],
+                          "completed_query_ids": completed, "completed_query_count": len(completed),
+                          "failed_query_ids": failures, "failed_query_count": len(failures),
+                          "wall_seconds": elapsed,
+                          "queries_per_second": len(completed) / elapsed if elapsed > 0 else None,
                           "raw_attempts_consumed": budget.used() - start_used,
+                          "raw_attempts_per_completed_query": (
+                              (budget.used() - start_used) / len(completed) if completed else None),
+                          "selected_resolution_histogram": histogram,
+                          "per_query_task_wall_seconds":
+                              {qid: receipt["task_wall_seconds"]
+                               for qid, receipt in published_receipts.items()},
+                          "peak_worker_rss_bytes":
+                              max((r["worker_peak_rss_bytes"]
+                                   for r in published_receipts.values()), default=None),
+                          "coordinator_peak_rss_bytes":
+                              resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024,
+                          "filesystem_publish_failures": publish_failures,
                           "failure_type": type(exc).__name__, "failure": str(exc)})
         raise
     elapsed = time.monotonic() - start
+    histogram = {}
+    task_wall = {}
+    for item, receipt in receipts.items():
+        rule = receipt["selected_resolution"]
+        key = f"q{rule['order']}_h{rule['subdivisions']}"
+        histogram[key] = histogram.get(key, 0) + 1
+        task_wall[item.query_id] = receipt["task_wall_seconds"]
     return {"schema": "BASS_R4G_USEFUL_STAGE_V1", "workers": workers,
             "cpus": cpus, "resource_census": census,
             "query_ids": [x.query_id for x in items],
             "completed_query_ids": [x.query_id for x in receipts],
-            "failed_query_ids": [], "wall_seconds": elapsed,
+            "completed_query_count": len(receipts),
+            "failed_query_ids": [], "failed_query_count": 0,
+            "wall_seconds": elapsed,
             "queries_per_second": len(receipts) / elapsed,
+            "raw_attempts_per_completed_query": (budget.used() - start_used) / len(receipts),
+            "selected_resolution_histogram": histogram,
+            "per_query_task_wall_seconds": task_wall,
             "peak_worker_rss_bytes": max((r["worker_peak_rss_bytes"] for r in receipts.values()), default=None),
             "coordinator_peak_rss_bytes": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024,
             "raw_attempts_consumed": budget.used() - start_used,
-            "filesystem_publish_failures": 0}
+            "filesystem_publish_failures": publish_failures}
 
 
 def _science(args, out, admission):
@@ -149,7 +204,7 @@ def _science(args, out, admission):
         present = {p.stem for p in qdir.glob("*.json")}
         missing = required_missing(required, present)
         stages, remainder = build_useful_pilot_plan([q.query_id for q in missing])
-        if [len(s.query_ids) for s in stages] != [8, 16, 32] or len(remainder) != 1480:
+        if [len(s.query_ids) for s in stages] != [16, 32, 64] or len(remainder) != 1424:
             raise ValueError("adaptive useful pilot partition mismatch")
         by_id = {q.query_id: q for q in missing}
         plan, pilot = plan_receipts(required, missing, stages, remainder,
@@ -196,8 +251,20 @@ def _science(args, out, admission):
                     raise
                 record = {"schema": "BASS_R4G_USEFUL_STAGE_V1",
                           "workers": stage.workers, "query_ids": list(stage.query_ids),
+                          "cpus": [int(x) for x in args.cpus.split(",")][:stage.workers],
+                          "resource_census": {"rejected": str(exc)},
                           "resource_valid": False, "failure": str(exc),
-                          "completed_query_ids": [], "failed_query_ids": []}
+                          "completed_query_ids": [], "completed_query_count": 0,
+                          "failed_query_ids": [], "failed_query_count": 0,
+                          "wall_seconds": None, "queries_per_second": None,
+                          "raw_attempts_consumed": 0,
+                          "raw_attempts_per_completed_query": None,
+                          "selected_resolution_histogram": {},
+                          "per_query_task_wall_seconds": {},
+                          "peak_worker_rss_bytes": None,
+                          "coordinator_peak_rss_bytes":
+                              resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024,
+                          "filesystem_publish_failures": 0}
                 # A higher resource stage is unavailable: preserve all unstarted
                 # pilot IDs for the best healthy lower stage, without duplication.
                 unstarted = [qid for later in stages[stage_index:]
@@ -209,9 +276,20 @@ def _science(args, out, admission):
                 for later in stages[stage_index + 1:]:
                     skipped = {"schema": "BASS_R4G_USEFUL_STAGE_V1",
                                "workers": later.workers, "query_ids": list(later.query_ids),
+                               "cpus": [int(x) for x in args.cpus.split(",")][:later.workers],
+                               "resource_census": {"not_started": True},
                                "resource_valid": False,
                                "failure": "NOT_STARTED_AFTER_LOWER_STAGE_RESOURCE_REJECTION",
-                               "completed_query_ids": [], "failed_query_ids": []}
+                               "completed_query_ids": [], "completed_query_count": 0,
+                               "failed_query_ids": [], "failed_query_count": 0,
+                               "wall_seconds": None, "queries_per_second": None,
+                               "raw_attempts_consumed": 0,
+                               "raw_attempts_per_completed_query": None,
+                               "selected_resolution_histogram": {},
+                               "per_query_task_wall_seconds": {},
+                               "peak_worker_rss_bytes": None,
+                               "coordinator_peak_rss_bytes": None,
+                               "filesystem_publish_failures": 0}
                     stage_records.append(skipped)
                     serial.write_new(out / ("STAGE_" + str(later.workers) + ".json"), skipped)
                 break

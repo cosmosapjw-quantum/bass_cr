@@ -40,8 +40,8 @@ def test_n1536_exact_traversal_and_active_union_counts():
     stages, remainder = build_useful_pilot_plan([q.query_id for q in missing])
     plan, pilot = s.plan_receipts(required, missing, stages, remainder, "a" * 40, "b" * 40)
     assert plan["active_required_count"] == 1538
-    assert [len(row["query_ids"]) for row in pilot["stages"]] == [8, 16, 32]
-    assert len(pilot["remaining_ids"]) == 1480
+    assert [len(row["query_ids"]) for row in pilot["stages"]] == [16, 32, 64]
+    assert len(pilot["remaining_ids"]) == 1424
 
 
 def test_predecessor_hash_rejected_before_extraction(tmp_path):
@@ -159,7 +159,9 @@ def test_stage_pool_boundary_retains_unique_useful_queries_without_native(monkey
     monkeypatch.setattr(runner, "live_resource_census", lambda *args: {"cpus": list(range(8))})
     monkeypatch.setattr(runner, "_worker_with_rss",
                         lambda item: {"query_id": item.query_id, "raw_attempts": 2,
-                                      "task_dir": str(tmp_path), "worker_peak_rss_bytes": 1024})
+                                      "task_dir": str(tmp_path), "worker_peak_rss_bytes": 1024,
+                                      "task_wall_seconds": 0.5,
+                                      "selected_resolution": {"order": 8, "subdivisions": 4}})
     monkeypatch.setattr(runner, "publish_pair",
                         lambda source, destination, item, context, contract: published.append(item.query_id))
     rec = runner._run_stage(items, source=tmp_path, args=_stage_args(tmp_path),
@@ -169,6 +171,25 @@ def test_stage_pool_boundary_retains_unique_useful_queries_without_native(monkey
     assert len(published) == len(set(published)) == 8
     assert set(published) == {x.query_id for x in items}
     assert rec["workers"] == 8 and rec["queries_per_second"] > 0
+    assert rec["completed_query_count"] == 8 and rec["failed_query_count"] == 0
+    assert rec["raw_attempts_per_completed_query"] == 0
+    assert rec["selected_resolution_histogram"] == {"q8_h4": 8}
+    assert len(rec["per_query_task_wall_seconds"]) == 8
+
+
+def test_worker_telemetry_wrapper_reads_selected_rule_without_native(monkeypatch, tmp_path):
+    item = PlannedQuery("synthetic-q", "0x0.0p+0", 0, "0x1.0p-4")
+    query_dir = tmp_path / "runtime_queries"
+    query_dir.mkdir()
+    (query_dir / "synthetic-q.json").write_text(
+        '{"qualification":{"selected_resolution":{"order":9,"subdivisions":8}}}')
+    monkeypatch.setattr(runner, "compute_query",
+                        lambda q: {"query_id": q.query_id, "task_dir": str(tmp_path),
+                                   "raw_attempts": 3})
+    rec = runner._worker_with_rss(item)
+    assert rec["selected_resolution"] == {"order": 9, "subdivisions": 8}
+    assert rec["task_wall_seconds"] > 0
+    assert rec["worker_peak_rss_bytes"] > 0
 
 
 def test_stage_failure_cancels_budget_and_preserves_failure_receipt(monkeypatch, tmp_path):

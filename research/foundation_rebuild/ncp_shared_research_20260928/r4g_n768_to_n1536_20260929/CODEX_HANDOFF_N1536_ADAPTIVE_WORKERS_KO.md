@@ -91,16 +91,16 @@ other active BASS jobs and memory before admitting the stage.
 Use `adaptive_workers.build_useful_pilot_plan` to allocate **disjoint scientific
 missing queries**, not benchmark-only duplicates:
 
-- 8-worker stage: 8 useful queries
-- 16-worker stage: 16 useful queries
-- 32-worker stage: 32 useful queries
+- 8-worker stage: 16 useful queries
+- 16-worker stage: 32 useful queries
+- 32-worker stage: 64 useful queries
 
-Total useful pilot work = 56 queries. All successful pilot query pairs are committed to
+Total useful pilot work = 112 queries. All successful pilot query pairs are committed to
 the canonical cache and count toward the 1536 missing midpoint queries. After all three
-pilot stages, 1480 missing midpoint queries remain.
+pilot stages, 1424 missing midpoint queries remain.
 
 Pilot IDs must be selected deterministically and stratified across the then-remaining
-query-ID order, without replacement. Do not use the first 56 consecutive times and do
+query-ID order, without replacement. Do not use the first 112 consecutive times and do
 not randomize.
 
 For every stage record at minimum:
@@ -147,7 +147,7 @@ If a new two-query parity check is explicitly required and authorized, add at mo
 
 `incremental max = 16918`
 
-The 56 useful pilot queries are already included in the 1536 and are not additional
+The 112 useful pilot queries are already included in the 1536 and are not additional
 raw/query budget.
 
 Historical N768 lifetime raw usage 2528 remains history only. Do not reset or merge the
@@ -172,7 +172,7 @@ return receipts.
 
 The existing helper tests currently cover:
 - 8/16/32 default useful plan;
-- unique/disjoint 56-query pilot with 1480 remainder;
+- unique/disjoint 112-query pilot with 1424 remainder;
 - deterministic stratified domain coverage;
 - custom stage sizes;
 - hard cap and monotonic-stage validation;

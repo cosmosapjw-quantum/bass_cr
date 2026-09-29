@@ -12,6 +12,7 @@ from typing import Iterable, Sequence
 DEFAULT_STAGES = (8, 16, 32)
 HARD_MAX_WORKERS = 32
 DEFAULT_WORKER_RAM_BYTES = 1 << 30
+DEFAULT_PILOT_QUERIES_PER_WORKER = 2
 
 
 @dataclass(frozen=True)
@@ -65,7 +66,7 @@ def build_useful_pilot_plan(
     missing_query_ids: Sequence[str],
     *,
     stages: Iterable[int] = DEFAULT_STAGES,
-    queries_per_worker: int = 1,
+    queries_per_worker: int = DEFAULT_PILOT_QUERIES_PER_WORKER,
     hard_max: int = HARD_MAX_WORKERS,
 ) -> tuple[tuple[PilotStage, ...], tuple[str, ...]]:
     """Assign disjoint, retained useful queries to scaling stages.

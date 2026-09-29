@@ -1,4 +1,5 @@
 from pathlib import Path
+import json
 import sys
 
 HERE = Path(__file__).resolve().parents[1]
@@ -24,12 +25,17 @@ def qids(n):
 def test_default_plan_is_8_16_32_and_retains_every_query_once():
     stages, remainder = build_useful_pilot_plan(qids(1536))
     assert [s.workers for s in stages] == [8, 16, 32]
-    assert [len(s.query_ids) for s in stages] == [8, 16, 32]
-    assert len(remainder) == 1480
+    assert [len(s.query_ids) for s in stages] == [16, 32, 64]
+    assert len(remainder) == 1424
     used = [q for s in stages for q in s.query_ids]
-    assert len(set(used)) == 56
+    assert len(set(used)) == 112
     assert set(used).isdisjoint(remainder)
     assert set(used) | set(remainder) == set(qids(1536))
+    policy = json.loads((HERE / "ADAPTIVE_WORKER_POLICY.json").read_text())
+    assert policy["pilot_queries_per_worker"] == 2
+    assert policy["stage_useful_query_counts"] == [16, 32, 64]
+    assert policy["stage_useful_queries_total"] == 112
+    assert policy["post_pilot_remaining_queries"] == 1424
 
 
 def test_stratified_plan_samples_domain_not_just_prefix():

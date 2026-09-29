@@ -26,6 +26,10 @@ from cr_repro.observables import projectile_speed_au
 from execution_admission import check_native_build
 
 REPO = serial.REPO
+TEST_FIXTURE_ARCHIVE = (
+    "research/foundation_rebuild/ncloud_c64g3_20260928/artifacts/"
+    "tp2d_runtime_self_qualified_20260927T074944Z_RETURN.zip")
+TEST_FIXTURE_SHA256 = "630a80208331b7b37c02a77eae7435f6317d07439a4ea34b11885455fe53fa35"
 PACKAGE_FILES = (
     "AGENTS.md",
     "docs/READBACK_POLICY.md",
@@ -48,6 +52,8 @@ PACKAGE_FILES = (
     "research/foundation_rebuild/ncp_shared_research_20260928/r4g_n768_to_n1536_20260929/"
     "make_preparation_package.py",
     "research/foundation_rebuild/ncp_shared_research_20260928/r4g_n768_to_n1536_20260929/"
+    "verify_preparation_package.py",
+    "research/foundation_rebuild/ncp_shared_research_20260928/r4g_n768_to_n1536_20260929/"
     "IMPLEMENTATION_HANDOFF_KO.md",
     "research/foundation_rebuild/ncp_shared_research_20260928/r4g_n768_to_n1536_20260929/"
     "tests/test_adaptive_workers.py",
@@ -69,6 +75,22 @@ PACKAGE_FILES = (
     "transport_policy.py",
     "research/foundation_rebuild/tp1_short_transport_20260926/metric_transport.py",
 )
+EXTRA_SOURCE_CLOSURE = (
+    "cr_repro/__init__.py",
+    "research/foundation_rebuild/src/bass_foundations/__init__.py",
+    "research/foundation_rebuild/src/bass_foundations/kernels.py",
+    "research/foundation_rebuild/tp2a_perf_20260926/paths.py",
+    "research/foundation_rebuild/ncp_shared_research_20260928/r4f_parallel_migration_20260929/"
+    "run_parallel_bridge.py",
+    "research/foundation_rebuild/ncp_shared_research_20260928/r4f_parallel_migration_20260929/"
+    "controlled_stop.py",
+    "research/foundation_rebuild/ncp_shared_research_20260928/r4f_parallel_migration_20260929/"
+    "supervise.py",
+    "research/foundation_rebuild/ncp_shared_research_20260928/r4f_parallel_migration_20260929/"
+    "run_r4f_science.sh",
+)
+R4F_TESTS = tuple(str(p.relative_to(REPO)) for p in
+                  sorted((HERE.parent / "r4f_parallel_migration_20260929" / "tests").glob("test_*.py")))
 
 
 def _put(path: Path, value: dict):
@@ -96,6 +118,8 @@ def create_package(predecessor: Path, build: Path, out: Path) -> dict:
             or native["build_receipt_sha256"] != NATIVE_BUILD_SHA256):
             raise ValueError("frozen native source/library/BUILD hash mismatch")
         dependency = serial.verify_pinned_dependencies()
+        if serial.sha256_path(REPO / TEST_FIXTURE_ARCHIVE) != TEST_FIXTURE_SHA256:
+            raise ValueError("portable focused-test fixture archive SHA256 mismatch")
         contract = prior["contract"]
         v = projectile_speed_au(contract["energy_keV_per_u"])
         required = plan_n1536(CONTEXT_ID, contract["z_initial_a0"] / v,
@@ -144,8 +168,24 @@ def create_package(predecessor: Path, build: Path, out: Path) -> dict:
                     "cost_scope": "USER_APPROVAL_REQUIRED",
                     "no_native_authorization_conferred": True}
         _put(out / "FUTURE_AUTHORIZATION_TEMPLATE.json", template)
-        for rel in PACKAGE_FILES:
+        closure = sorted(set(PACKAGE_FILES) | set(EXTRA_SOURCE_CLOSURE)
+                         | {TEST_FIXTURE_ARCHIVE}
+                         | set(R4F_TESTS) | set(dependency["manifest"]["files"]))
+        for rel in closure:
             serial.copy_new(REPO / rel, out / rel)
+        _put(out / "REPLAY_INSTRUCTIONS.json",
+             {"schema": "BASS_R4G_PORTABLE_NON_NATIVE_REPLAY_V1",
+              "test_command": [
+                  "python", "-B", "-m", "pytest", "-q", "-p", "no:cacheprovider",
+                  "research/foundation_rebuild/ncp_shared_research_20260928/"
+                  "r4f_parallel_migration_20260929/tests",
+                  "research/foundation_rebuild/ncp_shared_research_20260928/"
+                  "r4g_n768_to_n1536_20260929/tests"],
+              "run_from": "EXTRACTED_PACKAGE_ROOT",
+              "historical_test_fixture_sha256": TEST_FIXTURE_SHA256,
+              "expected_passed": 61,
+              "external_repository_source_required": False,
+              "native_science_authorized": False})
         files = {}
         for p in sorted(out.rglob("*")):
             if p.is_file():
