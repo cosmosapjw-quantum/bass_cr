@@ -7,8 +7,15 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
+import sys
 import tempfile
 import zipfile
+
+HERE = Path(__file__).resolve().parent
+R4C = HERE.parent / "r4c_temporal_continuation"
+for directory in (HERE, R4C):
+    if str(directory) not in sys.path:
+        sys.path.insert(0, str(directory))
 
 from adaptive_workers import build_useful_pilot_plan
 from successor import (CONTEXT_ID, NATIVE_BUILD_SHA256, NATIVE_LIBRARY_SHA256,
@@ -18,7 +25,6 @@ import continue_temporal as serial
 from cr_repro.observables import projectile_speed_au
 from execution_admission import check_native_build
 
-HERE = Path(__file__).resolve().parent
 REPO = serial.REPO
 PACKAGE_FILES = (
     "AGENTS.md",

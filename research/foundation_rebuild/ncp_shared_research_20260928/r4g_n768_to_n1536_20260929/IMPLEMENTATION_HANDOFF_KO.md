@@ -23,7 +23,7 @@ Pilot 8/16/32는 missing ID를 결정론적으로 층화하여 8/16/32개 배정
 
 준비 worktree에서 실행:
 
-1. /root/.local/state/bass_f0/env/tp2e_f0_20260928T045058Z/bin/python -B -m pytest -q -p no:cacheprovider research/foundation_rebuild/ncp_shared_research_20260928/r4f_parallel_migration_20260929/tests research/foundation_rebuild/ncp_shared_research_20260928/r4g_n768_to_n1536_20260929/tests → 59 passed, 0 failed, 0 skipped.
+1. /root/.local/state/bass_f0/env/tp2e_f0_20260928T045058Z/bin/python -B -m pytest -q -p no:cacheprovider research/foundation_rebuild/ncp_shared_research_20260928/r4f_parallel_migration_20260929/tests research/foundation_rebuild/ncp_shared_research_20260928/r4g_n768_to_n1536_20260929/tests → 60 passed, 0 failed, 0 skipped.
 2. 실제 A2 ZIP에 대해 successor.validate_predecessor와 plan_n1536/required_missing 비 native preflight → canonical pairs 2047, required 1538, inherited exact hits 2, missing 1536, union 3583.
 3. serial.verify_pinned_dependencies() → 19/19 SHA 일치. check_native_build on frozen F1 engine → source 90913155c0cfa80962d1cb00bb1b7ec0443170917c25913ac5e359979738ab30, library 966146f0ca713251f8b73999b4d89595cf1820a8c2d36f5c6290387b70c68035, BUILD 180a74d3acf2588d3b8c7944effe4709a4fd4f6241cb4df736cd8f0c94430af1, native_loaded_by_check=false.
 4. launcher→parser identity trap은 잘못된 commit을 주입하여 native load 및 nonce 소비 전에 거부됨을 확인한다. 이것은 synthetic test이며 native parity가 아니다.

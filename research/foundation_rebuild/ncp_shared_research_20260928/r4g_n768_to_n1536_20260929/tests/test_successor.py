@@ -249,3 +249,11 @@ def test_launcher_to_parser_identity_trap_before_native_or_nonce(tmp_path):
     assert not out.exists()
     assert not (Path.home() / ".local/state/bass_r4g/authorizations" /
                 "R4G-N1536-SYNTHETIC-TRAP.json").exists()
+
+
+def test_isolated_preparation_packager_import_smoke():
+    script = HERE / "make_preparation_package.py"
+    result = subprocess.run([sys.executable, "-I", "-B", str(script), "--help"],
+                            capture_output=True, text=True, timeout=15)
+    assert result.returncode == 0
+    assert "--predecessor-archive" in result.stdout
