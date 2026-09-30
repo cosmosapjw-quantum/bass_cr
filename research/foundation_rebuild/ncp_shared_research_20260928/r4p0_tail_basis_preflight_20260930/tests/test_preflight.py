@@ -154,7 +154,11 @@ def test_clean_commit_package_preserves_receipts(inputs,tmp_path,monkeypatch):
     import make_preparation_package as maker
     import verify_preparation_package as verifier
     root=tmp_path/'repo';root.mkdir()
-    source=root/'prep';shutil.copytree(p.HERE,source,ignore=shutil.ignore_patterns('__pycache__'))
+    # A portable tree also has generated package payload and compile artifacts;
+    # the clean source fixture must contain only source/contracts/receipts.
+    source=root/'prep';shutil.copytree(p.HERE,source,ignore=shutil.ignore_patterns(
+        '__pycache__','inputs','SOURCE_PINS.json','MANIFEST.json',
+        'FUTURE_AUTHORIZATION_TEMPLATE.json','compile_*.pyc'))
     subprocess.run(['git','init','-q',str(root)],check=True)
     subprocess.run(['git','-C',str(root),'add','prep'],check=True)
     subprocess.run(['git','-C',str(root),'-c','user.name=Preparation Test','-c','user.email=preparation@example.invalid','commit','-qm','fixture'],check=True)

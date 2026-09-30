@@ -77,5 +77,14 @@
   "final_focused_passed": 40,
   "final_focused_failed": 0,
   "final_focused_skipped": 0,
-  "roundoff_note": "R4O probability one-ULP reference discrepancy explicitly preserved; observed order uses propagated probability roundoff interval; receipt temporal orders retained with printed approximations differing by max 1.75e-12; no science screen changed."
+  "roundoff_note": "R4O probability one-ULP reference discrepancy explicitly preserved; observed order uses propagated probability roundoff interval; receipt temporal orders retained with printed approximations differing by max 1.75e-12; no science screen changed.",
+  "package_replay_regression": {
+    "check": "portable extracted-tree packaging regression",
+    "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /root/.local/state/bass_f0/env/tp2e_f0_20260928T045058Z/bin/python -B research/foundation_rebuild/ncp_shared_research_20260928/r4p0_tail_basis_preflight_20260930/verify_preparation_package.py /root/.local/state/bass_r4p0/packages/R4P0_PREP_b2c9bc5_20260930.zip --expected-sha256 443b0751c2239ee722290b8504aa1ace6b124bc00d4d74bcb9c3636b10d6b60a",
+    "exit_code": 1,
+    "decisive_output": "1 failed, 39 passed in 0.34s; FileExistsError at fixtures.mkdir(): bundled inputs copied into temporary source fixture",
+    "log_sha256": "73167c9d896590df498256e98d95eb82e428b74cd64dd971cc48c592a5c9d518",
+    "classification": "TEST_FIXTURE_EXTRACTION_SCOPE_BUG",
+    "repair": "exclude generated package input/pin/manifest/compile roots from temporary Git source fixture; preserved failed package unchanged"
+  }
 }
