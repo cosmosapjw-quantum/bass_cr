@@ -1,0 +1,100 @@
+name: B0 targeted author-copy acquisition only
+on:
+  push:
+    branches: [archive/b0-literature-sources-20261001-a1]
+    paths: ['.github/workflows/b0-source-acquisition-rescue.yml']
+permissions:
+  contents: read
+jobs:
+  acquire-author-copies:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Fetch exact prior public acquisition helpers
+        run: |
+          set -euo pipefail
+          URL="https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/10ac3a8fe7d83d16a77add226cf312b67233ff9c/archives/b0-literature-20261001"
+          curl --fail --silent --show-error --location --max-time 30 "$URL/acquire_public_sources.py" -o acquire_public_sources.py
+          curl --fail --silent --show-error --location --max-time 30 "$URL/transport-public.pem" -o transport-public.pem
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          b=Path('acquire_public_sources.py').read_bytes()
+          assert hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest()=='e8fc7b9d5b3f9b0a761913a0ea36988873c63e18'
+          compile(b,'acquire_public_sources.py','exec')
+          PY
+      - name: Retrieve identified author copies and repository candidates
+        run: |
+          python3 -B - <<'PY'
+          import concurrent.futures as cf
+          import hashlib, json, re, subprocess, urllib.parse, zipfile
+          from pathlib import Path
+          from acquire_public_sources import ROOT, ATTEMPTS, fetch, save, pdf_links, get_json
+          DIRECT=[
+           ('HochbruckLubich1997','https://na.math.kit.edu/download/papers/exp.pdf'),
+           ('LiEtAl2011','https://people.maths.ox.ac.uk/nakatsukasa/publishedpdf/pub5.pdf'),
+           ('LiEtAlErratum2013','https://people.maths.ox.ac.uk/nakatsukasa/lint2011erratum.pdf')]
+          LANDINGS=[
+           ('ThorsonDelos1978','https://scholarworks.wm.edu/aspubs/1788'),
+           ('ThorsonDelos1978','https://scholarworks.wm.edu/aspubs/1802'),
+           ('BrayStelbovics1992PRL','https://researchrepository.murdoch.edu.au/id/eprint/35782/'),
+           ('BrayStelbovics1992PRA','https://researchrepository.murdoch.edu.au/id/eprint/35781/'),
+           ('Errea1998','https://hal.science/hal-01566050'),
+           ('Errea1998','https://oskar-bordeaux.fr/handle/20.500.12278/119199'),
+           ('Kato1976','https://cds.cern.ch/record/101545'),
+           ('Kato1976','https://cds.cern.ch/record/408827'),
+           ('Yafaev2000','https://cds.cern.ch/record/1691405')]
+          def direct(row):
+              sid,url=row
+              data,rec=fetch(url,'literature/'+sid+'/author_copy.pdf','pdf')
+              return {'source_id':sid,'acquired':data is not None,'file':rec}
+          def landing(pair):
+              idx,row=pair
+              sid,url=row
+              prefix='literature/'+sid+'/candidate_'+str(idx)+'/'
+              data,rec=fetch(url,prefix+'landing.html')
+              found=[]
+              if data:
+                  links=pdf_links(data.decode('utf-8','replace'),rec['final_url'])
+                  for j,link in enumerate(dict.fromkeys(links)):
+                      if j>=3: break
+                      b,r=fetch(link,prefix+'linked_'+str(j)+'.pdf','pdf')
+                      if b:found.append(r)
+              return {'source_id':sid,'landing':rec,'candidate_pdfs':found,'identity_review_required':True}
+          with cf.ThreadPoolExecutor(max_workers=4) as pool:
+              direct_results=list(pool.map(direct,DIRECT))
+              landing_results=list(pool.map(landing,enumerate(LANDINGS)))
+          # Retry only two failed bibliographic requests, not the scientific code.
+          for sid,doi in [('ThorsonDelos1978','10.1103/PhysRevA.18.117'),('Martinazzo2020','10.1103/PhysRevLett.124.150601')]:
+              get_json('https://api.crossref.org/works/'+urllib.parse.quote(doi,safe=''),'literature/'+sid+'/crossref.json')
+          fetch('https://people.maths.ox.ac.uk/nakatsukasa/research.htm','provenance/author_link_page.html')
+          fetch('https://na.math.kit.edu/bibtexbrowser.php?bib=db%2Fpublications.bib&key=10.1137-S0036142995280572','provenance/kit_link_page.html')
+          fetch('https://docs.scipy.org/doc/scipy-1.17.0/reference/generated/scipy.linalg.eigh.html','documentation/SciPy_1_17_0_eigh.html')
+          fetch('https://www.netlib.org/utk/people/JackDongarra/etemplates/node134.html','documentation/Netlib_candidate_node134.html')
+          fetch('https://api.hal.science/search/?q=halId_s:hal-01566050&fl=title_s,doiId_s,fileMain_s,files_s,authFullName_s,licence_s&wt=json','literature/Errea1998/hal_metadata.json','json')
+          h=ROOT/'literature/Errea1998/hal_metadata.json'
+          if h.exists():
+              for d in json.loads(h.read_text()).get('response',{}).get('docs',[]):
+                  u=d.get('fileMain_s')
+                  if u: fetch(u,'literature/Errea1998/hal_main.pdf','pdf')
+          save('ACQUISITION_RESCUE.json',json.dumps({'direct':direct_results,'landings':landing_results,'attempts':ATTEMPTS,'scientific_calculations':0,'downloaded_code_execution':0},indent=2).encode())
+          manifest=[{'path':str(p.relative_to(ROOT)),'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for p in sorted(ROOT.rglob('*')) if p.is_file()]
+          save('MANIFEST.json',json.dumps(manifest,indent=2).encode())
+          with zipfile.ZipFile('payload.zip','x',zipfile.ZIP_DEFLATED) as z:
+              for p in sorted(ROOT.rglob('*')):
+                  if p.is_file():z.write(p,str(p.relative_to(ROOT)))
+          Path('sealed').mkdir()
+          subprocess.run(['openssl','cms','-encrypt','-binary','-aes-256-cbc','-in','payload.zip','-out','sealed/payload.cms','-outform','DER','transport-public.pem'],check=True)
+          receipt={'payload_bytes':Path('payload.zip').stat().st_size,'payload_sha256':hashlib.sha256(Path('payload.zip').read_bytes()).hexdigest(),'sealed_sha256':hashlib.sha256(Path('sealed/payload.cms').read_bytes()).hexdigest(),'files':len(manifest),'scientific_calculations':0}
+          Path('sealed/TRANSPORT_RECEIPT.json').write_text(json.dumps(receipt,indent=2))
+          print(json.dumps(receipt))
+          PY
+      - name: Publish encrypted transfer only
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: b0-literature-encrypted-transfer-20261001-a2
+          path: sealed/
+          retention-days: 3
+          compression-level: 0
+          if-no-files-found: error
+          overwrite: false
