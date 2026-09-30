@@ -31,18 +31,25 @@ def main(argv=None):
         if child.poll() is None or _exists(pgid):termination=_terminate_group(pgid,grace)
         status=child.wait()
         if _exists(pgid):termination=_terminate_group(pgid,grace)
+        descendants_exited=not _exists(pgid)
+        teardown_failed=not descendants_exited or not termination['group_exited']
         receipt={'schema':'BASS_R4P0_STATIC_DEDICATED_GROUP_SUPERVISOR_V1','child_pid':child.pid,'process_group':pgid,
                  'started_unix':started,'ended_unix':time.time(),'deadline_unix':deadline,'approved_deadline_unix':proposal['deadline_unix'],
                  'grace_seconds':grace,'deadline_reached':timed_out,'external_stop_requested':stop,
                  'first_failure_seen':failure_seen,'child_exit_status':status,'termination':termination,
-                 'descendants_exited':not _exists(pgid),'proposal_sha256':sha(a.proposal)}
+                 'descendants_exited':descendants_exited,'proposal_sha256':sha(a.proposal),
+                 'failure_type':'OWN_POOL_TEARDOWN_INCOMPLETE' if teardown_failed else None,
+                 'effective_status':'R4P0_B0_STATIC_EXECUTION_BLOCKED' if teardown_failed else 'CHILD_STATUS_PRESERVED'}
+        if teardown_failed and out.is_dir() and not (out/'FIRST_FAILURE.json').exists():
+            write_new(out/'FIRST_FAILURE.json',{'type':'OWN_POOL_TEARDOWN_INCOMPLETE','process_group':pgid,
+                                               'descendants_exited':descendants_exited,'termination':termination})
         # SIGTERM/deadline may interrupt before the child records a failure.
         if out.is_dir() and not (out/'RETURN_REPORT.json').exists():
             write_new(out/'RETURN_REPORT.json',{'status':'R4P0_B0_STATIC_EXECUTION_INTERRUPTED','candidate_created':False,'deadline_reached':timed_out,'external_stop_requested':stop})
         write_new(out.with_name(out.name+'_SUPERVISOR.json'),receipt)
         archive=_package(out,receipt)
         if archive:write_new(out.with_name(out.name+'_ARCHIVE_RECEIPT.json'),archive)
-        return status if not timed_out and not stop and not failure_seen else 124 if timed_out else 2
+        return status if not timed_out and not stop and not failure_seen and not teardown_failed else 124 if timed_out else 2
     finally:
         signal.signal(signal.SIGTERM,oldterm);signal.signal(signal.SIGINT,oldint)
 

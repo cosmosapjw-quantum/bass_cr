@@ -55,3 +55,33 @@ def test_supervisor_first_failure_terminates_only_dedicated_group(tmp_path,monke
     assert rc==2 and ('terminate',987654,60) in calls
     assert not (out/'AUTHORIZATION_CONSUMED.json').exists()
     assert json.loads((tmp_path/'out_SUPERVISOR.json').read_text())['first_failure_seen']
+
+def test_supervisor_lingering_own_group_is_hard_failure(tmp_path,monkeypatch):
+    import supervise_tail as v
+    out=tmp_path/'out';out.mkdir()
+    child_report=b'{"status":"R4P0_B0_EIGHT_STATIC_SNAPSHOTS_COMPLETE__TAIL_GATE_UNRESOLVED"}'
+    (out/'RETURN_REPORT.json').write_bytes(child_report)
+    proposal={'out_path':str(out),'deadline_unix':s.time.time()+30,'wall_seconds':30,'termination_grace_seconds':60}
+    path=tmp_path/'proposal.json';path.write_text(json.dumps(proposal));calls=[]
+    class Child:
+        pid=987654
+        def poll(self):return 0
+        def wait(self):return 0
+    monkeypatch.setenv('ALLOW_NEW_NATIVE_R4P0',s.APPROVAL)
+    monkeypatch.setattr(v,'request',lambda *a,**k:None)
+    monkeypatch.setattr(v.subprocess,'Popen',lambda *a,**k:Child())
+    monkeypatch.setattr(v,'_exists',lambda pgid:True)
+    def terminate(pgid,grace):
+        calls.append(pgid)
+        return {'term_sent':True,'kill_sent':True,'group_exited':False}
+    monkeypatch.setattr(v,'_terminate_group',terminate)
+    monkeypatch.setattr(v,'_package',lambda *a:None)
+    rc=v.main(['--proposal',str(path),'--source-pins','x','--inputs','x','--build','x','--out',str(out),'--approved-proposal-sha256',s.sha(path)])
+    assert rc==2
+    receipt=json.loads((tmp_path/'out_SUPERVISOR.json').read_text())
+    assert receipt['failure_type']=='OWN_POOL_TEARDOWN_INCOMPLETE'
+    assert receipt['effective_status']=='R4P0_B0_STATIC_EXECUTION_BLOCKED'
+    assert receipt['descendants_exited'] is False
+    assert json.loads((out/'FIRST_FAILURE.json').read_text())['type']=='OWN_POOL_TEARDOWN_INCOMPLETE'
+    assert (out/'RETURN_REPORT.json').read_bytes()==child_report
+    assert set(calls)=={987654} and not (out/'AUTHORIZATION_CONSUMED.json').exists()
