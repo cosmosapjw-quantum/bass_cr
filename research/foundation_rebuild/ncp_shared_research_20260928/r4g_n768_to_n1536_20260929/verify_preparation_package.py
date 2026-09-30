@@ -100,6 +100,8 @@ def verify(archive: Path, python: Path, receipt_path: Path) -> dict:
             "ncp_shared_research_20260928/r4c_temporal_continuation'));"
             "sys.path.insert(0,str(r/'research/foundation_rebuild/"
             "ncp_shared_research_20260928/r4g_n768_to_n1536_20260929'));"
+            "sys.path.insert(0,str(r/'research/foundation_rebuild/"
+            "ncp_shared_research_20260928/r4f_parallel_migration_20260929'));"
             "import continue_temporal,metric_transport,reference_transport,cr_repro.observables,a1_salvage,resource_census;"
             "m=(continue_temporal,metric_transport,reference_transport,cr_repro.observables,a1_salvage,resource_census);"
             "assert all(pathlib.Path(x.__file__).resolve().is_relative_to(r) for x in m);"
