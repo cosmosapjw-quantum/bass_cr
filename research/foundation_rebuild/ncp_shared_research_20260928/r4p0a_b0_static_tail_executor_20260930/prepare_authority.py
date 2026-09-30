@@ -47,6 +47,7 @@ def create(inputs,build,destination,python_path):
           'source_files':{n:sha(REPO/n) for n in sources},'native':native,
           'runtime_inputs':BINDING['runtime_inputs'],'basis_identity':BINDING['basis_identity'],
           'binding_inputs_sha256':sha(HERE/'BINDING_INPUTS.json'),
+          'resource_policy_sha256':sha(HERE/'RESOURCE_POLICY.json'),
           'query_plan_sha256':sha(HERE/'BOUND_B0_TAIL_QUERY_PLAN.json'),
           'research_archive_sha256':BINDING['research_archive_sha256'],'a3_archive_sha256':BINDING['a3_archive_sha256'],
           'new_native_operator_evaluations':0,'new_authorization_consumed':0}
@@ -63,7 +64,8 @@ def create(inputs,build,destination,python_path):
     proposal={'schema':'BASS_R4P0_B0_STATIC_AUTHORIZATION_PROPOSAL_V1','status':'USER_APPROVAL_REQUIRED',
               'execution_commit':head,'execution_tree':tree,
               'source_pins_sha256':sha(destination/'SOURCE_PINS.json'),'query_plan_sha256':pins['query_plan_sha256'],
-              'binding_inputs_sha256':pins['binding_inputs_sha256'],'runtime_inputs':pins['runtime_inputs'],'native':native,
+              'binding_inputs_sha256':pins['binding_inputs_sha256'],'resource_policy_sha256':pins['resource_policy_sha256'],
+              'runtime_inputs':pins['runtime_inputs'],'native':native,
               'basis_identity':BINDING['basis_identity'],'context_id':plan['context_id'],
               'research_archive_sha256':BINDING['research_archive_sha256'],'a3_archive_sha256':BINDING['a3_archive_sha256'],
               'basis':'B0','channels':18,'energy_keV_per_u':100,'b_a0':2,'signed_z_a0':[r['z_a0'] for r in plan['queries']],

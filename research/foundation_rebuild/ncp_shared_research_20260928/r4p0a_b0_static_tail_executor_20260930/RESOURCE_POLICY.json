@@ -1,0 +1,28 @@
+{
+  "schema": "BASS_R4P0_STATIC_RESOURCE_POLICY_V1",
+  "policy": "COOPERATIVE_SHARED_HOST",
+  "preferred_workers": 4,
+  "maximum_workers": 8,
+  "minimum_workers": 1,
+  "numerical_threads": 1,
+  "worker_ram_bytes": 1073741824,
+  "minimum_available_memory_rule": "(workers + 4) * 2**30",
+  "global_raw_attempt_cap": 88,
+  "operator_query_count": 8,
+  "parent_raw_attempts": 0,
+  "peer_processes_and_affinity_overlap": "TELEMETRY_ONLY",
+  "mutate_other_jobs": false,
+  "automatic_scaling": false,
+  "automatic_retry": false,
+  "native_authorization_required": true,
+  "hard_blockers": [
+    "CPU_OUTSIDE_ALLOWED_AFFINITY",
+    "INSUFFICIENT_FINITE_CGROUP_QUOTA",
+    "INSUFFICIENT_RAM",
+    "OWN_POOL_TEARDOWN_INCOMPLETE",
+    "SOURCE_NATIVE_IDENTITY_MISMATCH",
+    "RAW_BUDGET_EXHAUSTED",
+    "DEADLINE_OR_TIMEOUT"
+  ],
+  "live_host_binding": "REQUIRED_ON_NCP_BEFORE_USER_APPROVAL; portable template is not live resource evidence"
+}

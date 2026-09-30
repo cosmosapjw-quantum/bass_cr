@@ -1,0 +1,50 @@
+{
+  "schema": "BASS_R4P0_CONTINUATION_FOCUSED_VERIFICATION_V1",
+  "base_commit": "923f77de3028cd618509cc6553aea2f3d4044bf2",
+  "baseline_fresh_extraction": {
+    "passed": 64,
+    "failed": 0,
+    "skipped": 0,
+    "manifest_files": 88
+  },
+  "red": {
+    "passed": 8,
+    "failed": 11,
+    "exit": 1
+  },
+  "green": {
+    "passed": 83,
+    "failed": 0,
+    "skipped": 0,
+    "exit": 0
+  },
+  "guarded_green": {
+    "passed": 83,
+    "failed": 0,
+    "skipped": 0,
+    "exit": 0
+  },
+  "command": "R4P0A_RUNTIME_INPUTS=<package>/runtime_inputs R4P0A_NATIVE_BUILD=<package>/native_build OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 python -B -m pytest -q -p no:cacheprovider <SIDE>/tests",
+  "native_operator_evaluations": 0,
+  "new_authorization_consumed": 0,
+  "independent_review_performed": false,
+  "logs": {
+    "successor_fresh_replay.json": {
+      "bytes": 812,
+      "sha256": "a06f6b0772aba30ee250f8c5bd63e4dc3df1b54310f7024a9a504a124073c35e"
+    },
+    "RED_final_scope.txt": {
+      "bytes": 20230,
+      "sha256": "c64c2c83772b2f4568fc3cccf86f4b381d722393f9f7e684c0a416259eea4d7b"
+    },
+    "GREEN_focused.txt": {
+      "bytes": 179,
+      "sha256": "8238c7a39e6c639a4b15b69a142fc7bd7456ad88d0509bd810f340ec5ea60c75"
+    },
+    "GREEN_guarded_replay.txt": {
+      "bytes": 179,
+      "sha256": "640220adf741a1fb46da7c537a5a99bc83500f5cc0a7623df7fc30e9dcb77436"
+    }
+  },
+  "fresh_final_package_replay": "MUST_BE_RECORDED_IN_DELIVERY_RECEIPT_AFTER_PUBLICATION"
+}

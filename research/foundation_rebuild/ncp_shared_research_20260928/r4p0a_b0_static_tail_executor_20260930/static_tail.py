@@ -20,6 +20,9 @@ def write_new(path,obj):
     path=Path(path);path.parent.mkdir(parents=True,exist_ok=True)
     with path.open('x') as f:
         json.dump(obj,f,indent=2,allow_nan=False);f.write('\n');f.flush();os.fsync(f.fileno())
+    fd=os.open(path.parent,os.O_RDONLY)
+    try:os.fsync(fd)
+    finally:os.close(fd)
 
 def binding_plan():
     f=HERE/'fixtures/R4P0'
@@ -84,6 +87,16 @@ def verify_inputs(inputs,build):
         raise ValueError('frozen B0 channels/coefficient bank mismatch')
     return contract,plan,native
 
+def verify_static_budget(budget,max_inflight):
+    # R4F GlobalBudget is intentionally generic; this binding is exactly B0/88.
+    seed=budget.seed
+    if (type(max_inflight) is not int or not 1<=max_inflight<=8
+        or type(seed.get('maximum')) is not int or seed['maximum']!=88
+        or type(seed.get('parent_raw_attempts')) is not int or seed['parent_raw_attempts']!=0
+        or strict_json(budget.root/'SEED.json')!=seed):
+        raise ValueError('static-tail budget/worker scope mismatch')
+
+
 def execute_plan(plan,out,budget,executor,compute,max_inflight):
     items=exact_items(plan);out=Path(out);out.mkdir(parents=True,exist_ok=True)
     contract=strict_json(HERE/'fixtures/R4P0/inputs/SCIENCE_CONTEXT.json')['context']['contract']
@@ -97,12 +110,19 @@ def execute_plan(plan,out,budget,executor,compute,max_inflight):
         with np.load(out/'runtime_queries'/(item.query_id+'.npz'),allow_pickle=False) as f:
             matrices=[np.array(f['selected__'+k]) for k in ('S','H','D')]
         diag=snapshot_diagnostics(*matrices,by_id[item.query_id])
-        diag.update(P_selected_at_this_tail_sample=None,Sdot_source='ASSUMED_KINEMATIC_IDENTITY_D_PLUS_D_DAGGER',
+        diag.update(P_selected_at_this_tail_sample=None,
+                    P_selected_status='unavailable_without_state',Pdot_status='unavailable_without_state',Sdot_source='ASSUMED_KINEMATIC_IDENTITY_D_PLUS_D_DAGGER',
                     qualification=strict_json(out/'runtime_queries'/(item.query_id+'.json'))['qualification'],
                     raw_attempts=rec['raw_attempts'])
         write_new(out/'diagnostics'/(item.query_id+'.json'),diag)
         records[item.query_id]=rec;worker_pids.add(value['worker_pid'])
     try:
+        verify_static_budget(budget,max_inflight)
+        # Refuse known publication conflicts BEFORE spending another reservation.
+        if (any((out/n).exists() for n in ('FIRST_FAILURE.json','PROVIDER_AUDIT.json'))
+            or any((out/n).is_symlink() or ((out/n).exists() and any((out/n).iterdir()))
+                   for n in ('runtime_queries','diagnostics'))):
+            raise FileExistsError('static-tail create-only publication already exists')
         dispatch_bounded(items,executor,compute,commit,max_inflight=max_inflight,
             deadline_unix=budget.seed['deadline_unix'],cancelled=lambda:(budget.root/'CANCELLED.json').exists())
         actual_json={x.stem for x in (out/'runtime_queries').glob('*.json')}
@@ -141,6 +161,8 @@ def request(proposal_path,pins_path,inputs,build,out,*,approved_sha,pool_factory
         # Validate proposal shape and identity, without treating this as approval.
         validate_scope(proposal,authority,approved=True,unused=not nonce_path.exists())
     else:validate_scope(proposal,authority,approved=approved,unused=not nonce_path.exists())
+    if proposal.get('resource_policy_sha256')!=sha(HERE/'RESOURCE_POLICY.json'):
+        raise ValueError('approved resource policy pin mismatch')
     bound=binding_plan()
     fixed={'runtime_inputs':BINDING['runtime_inputs'],'basis_identity':BINDING['basis_identity'],
            'research_archive_sha256':BINDING['research_archive_sha256'],'a3_archive_sha256':BINDING['a3_archive_sha256'],
