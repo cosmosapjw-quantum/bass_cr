@@ -1,0 +1,56 @@
+name: B0 selective fulltext completeness supplement v2
+on:
+  push:
+    branches: ['archive/b0-literature-sources-20261001-a1']
+    paths:
+      - '.github/workflows/b0-fulltext-recovery-v2-supplement.yml'
+      - 'archives/b0-literature-20261001/fulltext-recovery-v2/acquire_supplement.py'
+      - 'archives/b0-literature-20261001/fulltext-recovery-v2/supplement_spec.json'
+permissions:
+  contents: read
+jobs:
+  public-document-acquisition:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Fetch only pinned collector, missing-target metadata, and public certificate
+        shell: bash
+        env:
+          SOURCE_BASE: https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/archives/b0-literature-20261001/fulltext-recovery-v2
+        run: |
+          set -euo pipefail
+          for source_name in acquire_missing_fulltexts.py acquire_supplement.py supplement_spec.json transport-public.pem; do
+            curl --fail --silent --show-error --location "$SOURCE_BASE/$source_name" --output "$source_name"
+          done
+          sha256sum --check <<'SOURCE_HASHES'
+          7123c96c2cd58291cba08e3755b9afe5da8220cd6057acbec4e4e6918deb3242  acquire_missing_fulltexts.py
+          61a3e550eb9806383db4a03f86470a28eea018ba7d9633cdb5d4fbd8b2b66b99  acquire_supplement.py
+          3eec6ed4cbfa5c416841f718feffe2d1e866d2b402a51680ea787b0f3a0076eb  supplement_spec.json
+          b45d523d37ff4ab075c7a3e1eb29b7517ccbf51e8eed02d20140d804243c54e2  transport-public.pem
+          SOURCE_HASHES
+      - name: Acquire only newly identified missing links and chapter dependencies
+        run: python acquire_supplement.py
+      - name: Seal private full texts and prepare transport receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir sealed
+          openssl cms -encrypt -binary -aes-256-cbc -in recovery_payload.zip -out sealed/recovery_payload.cms -outform DER transport-public.pem
+          python - <<'PY_RECEIPT'
+          import datetime, hashlib, json, pathlib
+          summary = json.loads(pathlib.Path('payload_supplement/ACQUISITION_SUPPLEMENT.json').read_text())
+          receipt = {'created_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(), 'target_count': 4, 'scientific_calculations': 0, 'native_authorization_consumption': 0, 'transport': 'CMS AES-256-CBC RSA3072', 'artifact_retention_days': 1, 'attempts': len(summary['attempts']), 'public_plaintext_fulltext_uploads': 0}
+          for key, path in [('payload', 'recovery_payload.zip'), ('encrypted', 'sealed/recovery_payload.cms')]:
+              data = pathlib.Path(path).read_bytes()
+              receipt[key] = {'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}
+          pathlib.Path('sealed/TRANSPORT_RECEIPT.json').write_text(json.dumps(receipt, indent=2)+'\n')
+          PY_RECEIPT
+      - name: Upload encrypted transport only
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: b0-fulltext-encrypted-recovery-20261001-v2-a2
+          path: sealed/
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error
+          overwrite: false
