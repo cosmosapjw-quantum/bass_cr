@@ -1,0 +1,81 @@
+{
+  "schema": "BASS_R4P0_NON_NATIVE_VERIFICATION_V1",
+  "non_native": true,
+  "native_operator_calls": 0,
+  "authorization_nonce_consumed": false,
+  "checks": [
+    {
+      "event": "INITIAL_READ_ONLY_REPRODUCTION",
+      "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 python -B - (read pinned ZIP and solve Gram projector)",
+      "exit_code": 0,
+      "output": {
+        "P_reference": 0.009653432376161852,
+        "P_N768": 0.009653417329471998,
+        "P_N1536": 0.009653428615023815,
+        "observed_order": 2.000204980660592,
+        "reference_roundoff_from_R4O": 1.734723475976807e-18
+      }
+    },
+    {
+      "check": "RED_TESTS.txt",
+      "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 R4P0_INPUT_DIR=/root/.local/state/bass_r4p0/evidence/inputs /root/.local/state/bass_f0/env/tp2e_f0_20260928T045058Z/bin/python -B -m pytest -q -p no:cacheprovider research/foundation_rebuild/ncp_shared_research_20260928/r4p0_tail_basis_preflight_20260930/tests",
+      "exit_code": 1,
+      "decisive_output": "24 failed in 0.39s",
+      "log_sha256": "0bb13cb2cbfeaa5826787fe16e2e90d019f9bd6d21d86e549a0e9e1543bf6edb"
+    },
+    {
+      "check": "GREEN_TESTS.txt",
+      "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 R4P0_INPUT_DIR=/root/.local/state/bass_r4p0/evidence/inputs /root/.local/state/bass_f0/env/tp2e_f0_20260928T045058Z/bin/python -B -m pytest -q -p no:cacheprovider research/foundation_rebuild/ncp_shared_research_20260928/r4p0_tail_basis_preflight_20260930/tests",
+      "exit_code": 1,
+      "decisive_output": "2 failed, 22 passed in 0.25s",
+      "log_sha256": "d3ef4f7d412a139fe9cdb896eb58f43945ad36c53b46837d08dc189afa5b322c"
+    },
+    {
+      "check": "CLI_RED_TESTS.txt",
+      "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 R4P0_INPUT_DIR=/root/.local/state/bass_r4p0/evidence/inputs /root/.local/state/bass_f0/env/tp2e_f0_20260928T045058Z/bin/python -B -m pytest -q -p no:cacheprovider research/foundation_rebuild/ncp_shared_research_20260928/r4p0_tail_basis_preflight_20260930/tests",
+      "exit_code": 1,
+      "decisive_output": "6 failed, 24 passed in 0.28s",
+      "log_sha256": "c9831bd9f9f2f3356cb359e7bf8591ff870ceac3e2fd0fb6495447e70a2e6c16"
+    },
+    {
+      "check": "CLI_GREEN_TESTS.txt",
+      "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 R4P0_INPUT_DIR=/root/.local/state/bass_r4p0/evidence/inputs /root/.local/state/bass_f0/env/tp2e_f0_20260928T045058Z/bin/python -B -m pytest -q -p no:cacheprovider research/foundation_rebuild/ncp_shared_research_20260928/r4p0_tail_basis_preflight_20260930/tests",
+      "exit_code": 0,
+      "decisive_output": "30 passed in 0.24s",
+      "log_sha256": "dd662b76eb38c0d930f3da911be9db6b3ab567f86b724a38c302e03008d82b7d"
+    },
+    {
+      "check": "FOCUSED_TESTS.txt",
+      "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 R4P0_INPUT_DIR=/root/.local/state/bass_r4p0/evidence/inputs /root/.local/state/bass_f0/env/tp2e_f0_20260928T045058Z/bin/python -B -m pytest -q -p no:cacheprovider research/foundation_rebuild/ncp_shared_research_20260928/r4p0_tail_basis_preflight_20260930/tests",
+      "exit_code": 0,
+      "decisive_output": "34 passed in 0.27s",
+      "log_sha256": "28e0bf7bda0f2584337dc33adf153458ed9935b490e154ad1903447d1a9838ca"
+    },
+    {
+      "check": "PACKAGE_RED_TESTS.txt",
+      "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 R4P0_INPUT_DIR=/root/.local/state/bass_r4p0/evidence/inputs /root/.local/state/bass_f0/env/tp2e_f0_20260928T045058Z/bin/python -B -m pytest -q -p no:cacheprovider research/foundation_rebuild/ncp_shared_research_20260928/r4p0_tail_basis_preflight_20260930/tests",
+      "exit_code": 1,
+      "decisive_output": "1 failed, 34 passed in 0.37s",
+      "log_sha256": "2c5bfe8bde74df1d0c7122c656d6b2cea4ce20e4c1cc949c07f2f66ec7e58737"
+    },
+    {
+      "check": "PACKAGE_GREEN_TESTS.txt",
+      "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 R4P0_INPUT_DIR=/root/.local/state/bass_r4p0/evidence/inputs /root/.local/state/bass_f0/env/tp2e_f0_20260928T045058Z/bin/python -B -m pytest -q -p no:cacheprovider research/foundation_rebuild/ncp_shared_research_20260928/r4p0_tail_basis_preflight_20260930/tests",
+      "exit_code": 0,
+      "decisive_output": "35 passed in 0.37s",
+      "log_sha256": "e6293fb57ca544ea9e6c7a3dd195f6692d53ceda2b850632f9d38d0c2a4791ca"
+    },
+    {
+      "check": "FINAL_FOCUSED_TESTS.txt",
+      "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 R4P0_INPUT_DIR=/root/.local/state/bass_r4p0/evidence/inputs /root/.local/state/bass_f0/env/tp2e_f0_20260928T045058Z/bin/python -B -m pytest -q -p no:cacheprovider research/foundation_rebuild/ncp_shared_research_20260928/r4p0_tail_basis_preflight_20260930/tests",
+      "exit_code": 0,
+      "decisive_output": "40 passed in 0.37s",
+      "log_sha256": "273730f43a03bd9e288483aa2d8de0ce8c4ac0f535f5eb7c2f8c9d97be21d772"
+    }
+  ],
+  "fresh_package_replay": "REQUIRED_AFTER_FINAL_CLEAN_COMMIT",
+  "final_focused_passed": 40,
+  "final_focused_failed": 0,
+  "final_focused_skipped": 0,
+  "roundoff_note": "R4O probability one-ULP reference discrepancy explicitly preserved; observed order uses propagated probability roundoff interval; receipt temporal orders retained with printed approximations differing by max 1.75e-12; no science screen changed."
+}
