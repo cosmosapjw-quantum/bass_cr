@@ -1,0 +1,42 @@
+name: B0 public literature and source acquisition only
+on:
+  push:
+    branches:
+      - archive/b0-literature-sources-20261001-a1
+    paths:
+      - '.github/workflows/b0-source-acquisition.yml'
+permissions:
+  contents: read
+jobs:
+  acquire-public-sources:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Fetch and verify exact download-only collector
+        shell: bash
+        run: |
+          set -euo pipefail
+          URL="https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${GITHUB_SHA}/archives/b0-literature-20261001"
+          curl --fail --silent --show-error --location --max-time 30 "$URL/acquire_public_sources.py" -o acquire_public_sources.py
+          curl --fail --silent --show-error --location --max-time 30 "$URL/transport-public.pem" -o transport-public.pem
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          b=Path('acquire_public_sources.py').read_bytes()
+          actual=hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest()
+          assert actual=='e8fc7b9d5b3f9b0a761913a0ea36988873c63e18', actual
+          compile(b, 'acquire_public_sources.py', 'exec')
+          PY
+      - name: Acquire public materials and encrypt before transfer
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -B acquire_public_sources.py
+      - name: Publish encrypted transfer only
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: b0-literature-encrypted-transfer-20261001-a1
+          path: sealed/
+          retention-days: 3
+          compression-level: 0
+          if-no-files-found: error
+          overwrite: false
