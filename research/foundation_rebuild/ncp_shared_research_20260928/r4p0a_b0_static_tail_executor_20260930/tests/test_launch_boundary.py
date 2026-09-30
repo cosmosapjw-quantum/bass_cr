@@ -4,6 +4,13 @@ import pytest
 import static_tail as s
 from bootstrap_tail import HERE,REPO
 
+def test_python_environment_path_preserves_venv_symlink(tmp_path):
+    import prepare_authority as a
+    target=tmp_path/'system-python';target.write_text('not executed')
+    venv=tmp_path/'venv/bin/python';venv.parent.mkdir(parents=True);venv.symlink_to(target)
+    assert a.python_environment_path(venv)==str(venv)
+    assert a.python_environment_path(venv)!=str(venv.resolve())
+
 def test_exact_verified_bank_native_preflight_crosses_no_load(monkeypatch):
     calls=[]
     def trap(*a,**k):calls.append(a);raise AssertionError('native load crossed')

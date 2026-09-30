@@ -151,7 +151,7 @@ def request(proposal_path,pins_path,inputs,build,out,*,approved_sha,pool_factory
            'parent_raw_attempts':0,'automatic_worker_scaling':False}
     if any(proposal.get(k)!=v for k,v in fixed.items()):raise ValueError('approved scientific/input scope mismatch')
     if any(proposal.get('native',{}).get(k)!=v for k,v in BINDING['native'].items()):raise ValueError('approved native pin mismatch')
-    if str(Path(sys.executable).resolve())!=proposal.get('python_path'):raise ValueError('approved Python executable mismatch')
+    if os.path.abspath(sys.executable)!=proposal.get('python_path'):raise ValueError('approved Python executable mismatch')
     for key,path in [('source_pins_path',pins_path),('runtime_inputs_path',inputs),('native_build_path',build)]:
         if str(Path(path).resolve())!=proposal.get(key):raise ValueError('approved local path mismatch: '+key)
     if not preflight_only and str(out.resolve())!=proposal.get('out_path'):raise ValueError('approved output path mismatch')

@@ -11,8 +11,13 @@ def copy_new(source,target):
     target=Path(target);target.parent.mkdir(parents=True,exist_ok=True)
     with target.open('xb') as f:f.write(Path(source).read_bytes())
 
+def python_environment_path(path):
+    # Resolving a venv's executable symlink loses the environment selection.
+    return os.path.abspath(path)
 
 def create(inputs,build,destination,python_path):
+    if python_environment_path(python_path)!=python_environment_path(sys.executable):
+        raise ValueError('package must be prepared with the proposed Python environment')
     destination=Path(destination).resolve();inputs=Path(inputs).resolve();build=Path(build).resolve()
     if destination.exists() or destination.with_suffix('.zip').exists():raise FileExistsError('create-only authority package')
     if subprocess.check_output(['git','-C',str(REPO),'status','--porcelain'],text=True):raise ValueError('clean exact commit required')
@@ -76,7 +81,7 @@ def create(inputs,build,destination,python_path):
               'external_cost_control':'USER_OR_PROVIDER_ENFORCEMENT_REQUIRED; no billing API or monetary cap enforcement is included in this code',
               'cost_limit_enforced_by_code':False,'source_pins_path':str(destination/'SOURCE_PINS.json'),
               'runtime_inputs_path':str(destination/'runtime_inputs'),'native_build_path':str(destination/'native_build'),
-              'out_path':str(out),'python_path':str(Path(python_path).resolve()),
+              'out_path':str(out),'python_path':python_environment_path(python_path),
               'launcher':'bash run_b0_tail_science.sh OUT','launcher_git_mode':'100644',
               'live_census_sha256':sha(destination/'LIVE_RESOURCE_CENSUS.json'),'claim_ceiling':BINDING['claim_ceiling'],
               'new_native_operator_evaluations':0,'new_authorization_consumed':0}
