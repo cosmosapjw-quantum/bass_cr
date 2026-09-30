@@ -83,16 +83,28 @@ def test_pilot_authority_matches_policy_and_exact_plan(monkeypatch, tmp_path):
     monkeypatch.setattr(s.serial, "git_identity", lambda: ("a" * 40, "b" * 40))
     monkeypatch.setattr(s.subprocess, "check_output", lambda *a, **k: "")
     monkeypatch.setattr(s.os, "sched_getaffinity", lambda _: set(range(32)))
-    monkeypatch.setattr(s, "live_resource_census", lambda *a: {"synthetic": True})
+    monkeypatch.setattr(s, "live_resource_census", lambda *a, **k: {"synthetic": True})
+    nonce = tmp_path / ".local/state/bass_r4g/authorizations/R4G-N1536-ADAPTIVE-20260930-A1.json"
+    nonce.parent.mkdir(parents=True)
+    nonce.write_text("synthetic consumed nonce")
+    original_sha = s.serial.sha256_path
+    monkeypatch.setattr(Path, "home", classmethod(lambda cls: tmp_path))
+    monkeypatch.setattr(s.serial, "sha256_path",
+                        lambda p: s.A1_CONSUMED_SHA256 if Path(p) == nonce else original_sha(p))
     monkeypatch.setattr(s, "sys", SimpleNamespace(flags=SimpleNamespace(isolated=1),
                      version_info=(3, 11), version="synthetic"))
     args = SimpleNamespace(
         expected_commit="a" * 40, expected_tree="b" * 40,
         out=tmp_path / "out", authorization_id="R4G-N1536-SYNTHETIC-ADMISSION",
         expected_predecessor_sha256=s.PREDECESSOR_SHA256,
+        prior_authorization_id=s.A1_AUTH,
+        expected_prior_partial_sha256=s.A1_ARCHIVE_SHA256,
         expected_source_pins_sha256="c" * 64,
         expected_query_plan_sha256="d" * 64,
         expected_useful_pilot_plan_sha256="e" * 64,
+        expected_resume_plan_sha256="f" * 64,
+        expected_salvage_manifest_sha256="1" * 64,
+        expected_pilot_continuation_plan_sha256="2" * 64,
         stages="8,16,32", hard_max_workers=32,
         cpus=",".join(map(str, range(32))), worker_ram_bytes=1 << 30,
         total_worker_ram_cap_bytes=32 << 30, global_raw_attempt_cap=16896,
@@ -141,37 +153,21 @@ def test_resource_invalid_stage_excluded_and_first_healthy_is_baseline():
     assert summary[1]["speedup_vs_first_stage"] == 1.0
 
 
-def test_live_cpu_quota_and_ram_admission(monkeypatch):
-    original_read = Path.read_text
-    original_iter = Path.iterdir
-    original_is_file = Path.is_file
-    state = {"quota": "1600000 100000", "memory": "64000000000"}
-    def read_text(path, *args, **kwargs):
-        key = str(path)
-        if key == "/proc/meminfo":
-            return "MemAvailable: 100000000 kB\n"
-        if key == "/sys/fs/cgroup/cpu.max":
-            return state["quota"]
-        if key == "/sys/fs/cgroup/memory.max":
-            return state["memory"]
-        if key == "/sys/fs/cgroup/memory.current":
-            return "0"
-        return original_read(path, *args, **kwargs)
-    monkeypatch.setattr(Path, "read_text", read_text)
-    monkeypatch.setattr(Path, "is_file",
-                        lambda path: True if str(path) in (
-                            "/sys/fs/cgroup/cpu.max", "/sys/fs/cgroup/memory.max",
-                            "/sys/fs/cgroup/memory.current") else original_is_file(path))
-    monkeypatch.setattr(Path, "iterdir",
-                        lambda path: iter(()) if str(path) == "/proc" else original_iter(path))
-    monkeypatch.setattr(s.os, "sched_getaffinity", lambda pid: set(range(32)))
-    assert s.live_resource_census(list(range(32)), 16, 1 << 30)["cpu_quota_cores"] == 16
-    with pytest.raises(ValueError, match="CPU quota"):
-        s.live_resource_census(list(range(32)), 32, 1 << 30)
-    state["quota"] = "max 100000"
-    state["memory"] = str(16 << 30)
-    with pytest.raises(ValueError, match="RAM"):
-        s.live_resource_census(list(range(32)), 16, 1 << 30)
+def test_live_cpu_quota_and_ram_admission(tmp_path):
+    procroot = tmp_path / "proc";procroot.mkdir()
+    args = {"proc_root": procroot, "affinity_lookup": lambda pid: set(range(32)),
+            "self_pid": 99999, "run_pgid": 99999, "allowed": set(range(32))}
+    assert s.live_resource_census(list(range(32)), 16, 1 << 30,
+        receipt_path=tmp_path / "ok.json", mem_available_bytes=64 << 30,
+        quota_cores=16, **args)["quota_cores"] == 16
+    with pytest.raises(ValueError, match="LIVE_CPU_QUOTA_INVALID"):
+        s.live_resource_census(list(range(32)), 32, 1 << 30,
+            receipt_path=tmp_path / "quota.json", mem_available_bytes=64 << 30,
+            quota_cores=16, **args)
+    with pytest.raises(ValueError, match="LIVE_RAM_SCOPE_INVALID"):
+        s.live_resource_census(list(range(32)), 16, 1 << 30,
+            receipt_path=tmp_path / "ram.json", mem_available_bytes=16 << 30,
+            quota_cores=None, **args)
 
 
 class _Budget:
@@ -201,7 +197,9 @@ def test_stage_pool_boundary_retains_unique_useful_queries_without_native(monkey
     published = []
     monkeypatch.setattr(runner, "ProcessPoolExecutor", _NonNativePool)
     monkeypatch.setattr(runner, "initialize_worker", lambda *args: None)
-    monkeypatch.setattr(runner, "live_resource_census", lambda *args: {"cpus": list(range(8))})
+    monkeypatch.setattr(runner, "live_resource_census", lambda *args, **kwargs: {"cpus": list(range(8))})
+    monkeypatch.setattr(runner, "verify_prior_pool_teardown", lambda *args, **kwargs: {})
+    monkeypatch.setattr(runner.serial, "sha256_path", lambda path: "synthetic")
     monkeypatch.setattr(runner, "_worker_with_rss",
                         lambda item: {"query_id": item.query_id, "raw_attempts": 2,
                                       "task_dir": str(tmp_path), "worker_peak_rss_bytes": 1024,
@@ -242,7 +240,7 @@ def test_stage_failure_cancels_budget_and_preserves_failure_receipt(monkeypatch,
     budget = _Budget()
     monkeypatch.setattr(runner, "ProcessPoolExecutor", _NonNativePool)
     monkeypatch.setattr(runner, "initialize_worker", lambda *args: None)
-    monkeypatch.setattr(runner, "live_resource_census", lambda *args: {"cpus": [0]})
+    monkeypatch.setattr(runner, "live_resource_census", lambda *args, **kwargs: {"cpus": [0]})
     def fail(_):
         raise RuntimeError("synthetic worker failure")
     monkeypatch.setattr(runner, "_worker_with_rss", fail)
@@ -265,10 +263,16 @@ def test_launcher_parser_native_trap_smoke(tmp_path):
     parsed = runner.parse_args([
         "--out", str(tmp_path / "out"), "--predecessor-archive", "/unused.zip",
         "--expected-predecessor-sha256", s.PREDECESSOR_SHA256,
+        "--prior-partial-archive", "/unused-A1.zip",
+        "--expected-prior-partial-sha256", s.A1_ARCHIVE_SHA256,
+        "--prior-authorization-id", s.A1_AUTH,
         "--source-pins", "/unused-source-pins.json",
         "--expected-source-pins-sha256", "a" * 64,
         "--expected-query-plan-sha256", "b" * 64,
         "--expected-useful-pilot-plan-sha256", "c" * 64,
+        "--expected-resume-plan-sha256", "d" * 64,
+        "--expected-salvage-manifest-sha256", "e" * 64,
+        "--expected-pilot-continuation-plan-sha256", "f" * 64,
         "--authorization-id", "R4G-N1536-FUTURE-A1",
         "--expected-commit", "a" * 40, "--expected-tree", "b" * 40,
         "--analytic-build", "/unused", "--deadline-unix", "9999999999",
@@ -288,10 +292,16 @@ def test_launcher_to_parser_identity_trap_before_native_or_nonce(tmp_path):
         "BASS_R4G_PYTHON": sys.executable,
         "PREDECESSOR_ARCHIVE": "/not-opened.zip",
         "EXPECTED_PREDECESSOR_SHA256": s.PREDECESSOR_SHA256,
+        "PRIOR_PARTIAL_ARCHIVE": "/not-opened-A1.zip",
+        "EXPECTED_PRIOR_PARTIAL_SHA256": s.A1_ARCHIVE_SHA256,
+        "PRIOR_AUTHORIZATION_ID": s.A1_AUTH,
         "SOURCE_PINS": "/not-opened-source-pins.json",
         "EXPECTED_SOURCE_PINS_SHA256": "a" * 64,
         "EXPECTED_QUERY_PLAN_SHA256": "b" * 64,
         "EXPECTED_USEFUL_PILOT_PLAN_SHA256": "c" * 64,
+        "EXPECTED_RESUME_PLAN_SHA256": "d" * 64,
+        "EXPECTED_SALVAGE_MANIFEST_SHA256": "e" * 64,
+        "EXPECTED_PILOT_CONTINUATION_PLAN_SHA256": "f" * 64,
         "R4G_AUTHORIZATION_ID": "R4G-N1536-SYNTHETIC-TRAP",
         "EXPECTED_COMMIT": "0" * 40,
         "EXPECTED_TREE": "0" * 40,

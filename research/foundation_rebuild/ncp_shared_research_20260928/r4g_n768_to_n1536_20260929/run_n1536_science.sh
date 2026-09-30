@@ -5,10 +5,16 @@ HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 : "${BASS_R4G_PYTHON:?prepared absolute Python path required}"
 : "${PREDECESSOR_ARCHIVE:?completed N768 ZIP required}"
 : "${EXPECTED_PREDECESSOR_SHA256:?completed N768 ZIP SHA256 required}"
+: "${PRIOR_PARTIAL_ARCHIVE:?A1 partial ZIP required}"
+: "${EXPECTED_PRIOR_PARTIAL_SHA256:?A1 partial ZIP SHA256 required}"
+: "${PRIOR_AUTHORIZATION_ID:?consumed A1 authorization required}"
 : "${SOURCE_PINS:?verified source-pins file required}"
 : "${EXPECTED_SOURCE_PINS_SHA256:?source-pins SHA256 required}"
 : "${EXPECTED_QUERY_PLAN_SHA256:?exact query-plan SHA256 required}"
 : "${EXPECTED_USEFUL_PILOT_PLAN_SHA256:?useful pilot-plan SHA256 required}"
+: "${EXPECTED_RESUME_PLAN_SHA256:?resume query-plan SHA256 required}"
+: "${EXPECTED_SALVAGE_MANIFEST_SHA256:?A1 salvage manifest SHA256 required}"
+: "${EXPECTED_PILOT_CONTINUATION_PLAN_SHA256:?pilot continuation SHA256 required}"
 : "${R4G_AUTHORIZATION_ID:?fresh N1536 authorization required}"
 : "${EXPECTED_COMMIT:?exact N1536 execution commit required}"
 : "${EXPECTED_TREE:?exact N1536 execution tree required}"
@@ -33,10 +39,16 @@ exec "$BASS_R4G_PYTHON" -I -B "$HERE/supervise_n1536.py" \
   "$BASS_R4G_PYTHON" -I -B "$HERE/run_n1536.py" \
   --out "$OUT" --predecessor-archive "$PREDECESSOR_ARCHIVE" \
   --expected-predecessor-sha256 "$EXPECTED_PREDECESSOR_SHA256" \
+  --prior-partial-archive "$PRIOR_PARTIAL_ARCHIVE" \
+  --expected-prior-partial-sha256 "$EXPECTED_PRIOR_PARTIAL_SHA256" \
+  --prior-authorization-id "$PRIOR_AUTHORIZATION_ID" \
   --source-pins "$SOURCE_PINS" \
   --expected-source-pins-sha256 "$EXPECTED_SOURCE_PINS_SHA256" \
   --expected-query-plan-sha256 "$EXPECTED_QUERY_PLAN_SHA256" \
   --expected-useful-pilot-plan-sha256 "$EXPECTED_USEFUL_PILOT_PLAN_SHA256" \
+  --expected-resume-plan-sha256 "$EXPECTED_RESUME_PLAN_SHA256" \
+  --expected-salvage-manifest-sha256 "$EXPECTED_SALVAGE_MANIFEST_SHA256" \
+  --expected-pilot-continuation-plan-sha256 "$EXPECTED_PILOT_CONTINUATION_PLAN_SHA256" \
   --authorization-id "$R4G_AUTHORIZATION_ID" \
   --expected-commit "$EXPECTED_COMMIT" --expected-tree "$EXPECTED_TREE" \
   --analytic-build "$ANALYTIC_BUILD" \

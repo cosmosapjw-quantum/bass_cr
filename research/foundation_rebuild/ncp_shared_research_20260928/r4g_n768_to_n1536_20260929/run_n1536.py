@@ -36,6 +36,11 @@ from successor import (CONTEXT_ID, D768_REFERENCE_DISTANCE, MISSING_COUNT, PREDE
                        REQUIRED_COUNT, UNION_COUNT, admission_scope,
                        live_resource_census, plan_n1536, plan_receipts, required_missing,
                        validate_predecessor)
+from resource_census import (ExternalResourceOverlap, OwnPoolTeardownIncomplete,
+                             verify_prior_pool_teardown)
+from a1_salvage import (A1_ARCHIVE_SHA256, A1_AUTH, A1_RAW_ATTEMPTS,
+                        A1_STAGE8_SHA256, A1_CONSUMED_SHA256,
+                        resume_receipts, validate_a1_partial)
 from worker_runtime import compute_query, initialize_worker
 from execution_admission import check_native_build
 
@@ -59,12 +64,15 @@ def _worker_with_rss(item):
     return receipt
 
 
-def _run_stage(items, *, source, args, contract, budget, out, canonical, workers):
+def _run_stage(items, *, source, args, contract, budget, out, canonical, workers,
+               stage_label=None):
     """Bounded spawn pool; completed pairs are published create-only before next dispatch."""
     if not items:
         raise ValueError("empty useful stage")
+    stage_label = stage_label or "STAGE_" + str(workers)
     cpus = [int(x) for x in args.cpus.split(",")][:workers]
-    census = live_resource_census(cpus, workers, args.worker_ram_bytes)
+    census = live_resource_census(cpus, workers, args.worker_ram_bytes,
+        receipt_path=out / ("RESOURCE_CENSUS_" + stage_label + ".json"))
     start_used = budget.used()
     start = time.monotonic()
     ctx = multiprocessing.get_context("spawn")
@@ -93,6 +101,9 @@ def _run_stage(items, *, source, args, contract, budget, out, canonical, workers
             receipts = dispatch_bounded(items, pool, _worker_with_rss, on_result,
                                         max_inflight=workers, deadline_unix=args.deadline_unix,
                                         cancelled=lambda: _STOP)
+        worker_pids = {r["worker_pid"] for r in receipts.values() if "worker_pid" in r}
+        teardown = verify_prior_pool_teardown(worker_pids, run_pgid=os.getpgrp(),
+            receipt_path=out / ("POOL_TEARDOWN_" + stage_label + ".json"))
     except BaseException as exc:
         try:
             budget.cancel(type(exc).__name__ + ": " + str(exc))
@@ -143,6 +154,9 @@ def _run_stage(items, *, source, args, contract, budget, out, canonical, workers
         task_wall[item.query_id] = receipt["task_wall_seconds"]
     return {"schema": "BASS_R4G_USEFUL_STAGE_V1", "workers": workers,
             "cpus": cpus, "resource_census": census,
+            "worker_pids": sorted(worker_pids),
+            "pool_teardown_sha256": serial.sha256_path(
+                out / ("POOL_TEARDOWN_" + stage_label + ".json")),
             "query_ids": [x.query_id for x in items],
             "completed_query_ids": [x.query_id for x in receipts],
             "completed_query_count": len(receipts),
@@ -165,6 +179,7 @@ def _science(args, out, admission):
 
     with tempfile.TemporaryDirectory(prefix="bass_r4g_predecessor_") as tmp:
         source = Path(tmp) / "source"
+        a1_source = Path(tmp) / "a1_partial"
         prior = validate_predecessor(Path(args.predecessor_archive),
                                      args.expected_predecessor_sha256, source)
         contract = prior["contract"]
@@ -189,6 +204,12 @@ def _science(args, out, admission):
             or pins.get("predecessor_report_sha256") != prior["report_sha256"]
             or pins.get("predecessor_admission_sha256") != prior["admission_sha256"]
             or pins.get("native") != native
+            or pins.get("a1_partial_archive_sha256") != A1_ARCHIVE_SHA256
+            or pins.get("a1_stage8_sha256") != A1_STAGE8_SHA256
+            or pins.get("a1_consumed_nonce_sha256") != A1_CONSUMED_SHA256
+            or pins.get("a1_salvage_manifest_sha256") != args.expected_salvage_manifest_sha256
+            or pins.get("resume_plan_sha256") != args.expected_resume_plan_sha256
+            or pins.get("pilot_continuation_plan_sha256") != args.expected_pilot_continuation_plan_sha256
             or pins.get("pinned_dependency_manifest_sha256") !=
                serial.sha256_path(serial.HERE / "PINNED_DEPENDENCIES.json")):
             raise ValueError("approved source-pins content mismatch")
@@ -216,10 +237,34 @@ def _science(args, out, admission):
             or pins.get("query_plan_sha256") != args.expected_query_plan_sha256
             or pins.get("useful_pilot_plan_sha256") != args.expected_useful_pilot_plan_sha256):
             raise ValueError("approved exact query/pilot plan hash mismatch")
+        salvage = validate_a1_partial(Path(args.prior_partial_archive),
+            args.expected_prior_partial_sha256, a1_source, source, contract,
+            required, pilot, CONTEXT_ID)
+        resume_plan, continuation = resume_receipts(required, missing, pilot, salvage,
+            admission["execution_commit"], admission["execution_tree"])
+        serial.write_new(out / "A1_SALVAGE_MANIFEST.json", salvage)
+        serial.write_new(out / "N1536_RESUME_QUERY_PLAN.json", resume_plan)
+        serial.write_new(out / "PILOT_CONTINUATION_PLAN.json", continuation)
+        if (serial.sha256_path(out / "A1_SALVAGE_MANIFEST.json") != args.expected_salvage_manifest_sha256
+            or serial.sha256_path(out / "N1536_RESUME_QUERY_PLAN.json") != args.expected_resume_plan_sha256
+            or serial.sha256_path(out / "PILOT_CONTINUATION_PLAN.json") != args.expected_pilot_continuation_plan_sha256):
+            raise ValueError("approved A1 salvage/resume/continuation SHA256 mismatch")
         restored = restore_query_store(source, out, CONTEXT_ID)
         if restored != 2047:
             raise ValueError("predecessor cache restoration count mismatch")
         canonical = out / "runtime_queries"
+        imported = [publish_pair(a1_source / "runtime_queries", canonical,
+                    by_id[qid], CONTEXT_ID, contract) for qid in salvage["imported_ids"]]
+        if (len(imported) != 16 or len(list(canonical.glob("*.json"))) != 2063
+            or len(list(canonical.glob("*.npz"))) != 2063):
+            raise ValueError("A1 byte-preserving import coverage mismatch")
+        serial.write_new(out / "A1_IMPORT_RECEIPT.json",
+            {"schema": "BASS_R4K_A1_IMPORT_RECEIPT_V1",
+             "a1_salvage_manifest_sha256": serial.sha256_path(out / "A1_SALVAGE_MANIFEST.json"),
+             "a1_stage8_sha256": salvage["a1_stage8_sha256"],
+             "imported_records": imported, "imported_pairs": 16,
+             "canonical_pairs_after_import": 2063, "new_native_calls": 0})
+        serial.copy_new(a1_source / "STAGE_8.json", out / "STAGE_8.json")
         for rel in ("BASIS.json", "BASIS.npz", "SCIENCE_CONTEXT.json",
                     "REFERENCE_STATES.npz", "REFERENCE_RECEIPT.json",
                     "METRIC_CONNECTION.json", "CANDIDATE_N768.json", "CANDIDATE_N768.npz"):
@@ -233,21 +278,26 @@ def _science(args, out, admission):
                     "query_plan_sha256": serial.sha256_path(out / "REQUIRED_MISSING_QUERY_PLAN.json")}
         serial.write_new(authroot / (args.authorization_id + ".json"), consumed)
         serial.write_new(out / "AUTHORIZATION_CONSUMED.json", consumed)
-        budget = GlobalBudget.create(out / "global_budget", parent_attempts=0,
+        budget = GlobalBudget.create(out / "global_budget", parent_attempts=A1_RAW_ATTEMPTS,
                                      maximum=args.global_raw_attempt_cap,
                                      deadline_unix=args.deadline_unix)
         (out / "worker_tasks").mkdir()
-        observations = []
-        stage_records = []
-        for stage_index, stage in enumerate(stages):
+        historical_stage8 = serial.strict_json(out / "STAGE_8.json")
+        observations = [StageObservation(8, 16, historical_stage8["wall_seconds"], 0,
+                                        historical_stage8["peak_worker_rss_bytes"], True)]
+        stage_records = [historical_stage8]
+        for stage_index, stage in enumerate(stages[1:], start=1):
             try:
                 record = _run_stage([by_id[qid] for qid in stage.query_ids],
                                     source=source, args=args, contract=contract,
                                     budget=budget, out=out, canonical=canonical,
-                                    workers=stage.workers)
+                                    workers=stage.workers,
+                                    stage_label="PILOT_" + str(stage.workers))
             except ValueError as exc:
                 # A pre-dispatch live resource rejection may exclude a higher stage.
-                if "live " not in str(exc) and "competing BASS" not in str(exc):
+                if not str(exc).startswith(("LIVE_CPU_AFFINITY_INVALID",
+                                           "LIVE_CPU_QUOTA_INVALID",
+                                           "LIVE_RAM_SCOPE_INVALID")):
                     raise
                 record = {"schema": "BASS_R4G_USEFUL_STAGE_V1",
                           "workers": stage.workers, "query_ids": list(stage.query_ids),
@@ -314,7 +364,8 @@ def _science(args, out, admission):
         if remainder:
             fill = _run_stage([by_id[qid] for qid in remainder],
                               source=source, args=args, contract=contract,
-                              budget=budget, out=out, canonical=canonical, workers=selected)
+                              budget=budget, out=out, canonical=canonical, workers=selected,
+                              stage_label="FILL_" + str(selected))
             serial.write_new(out / "FILL_STAGE.json", fill)
         for q in required:
             validate_pair(canonical, q, CONTEXT_ID, contract)
@@ -377,8 +428,12 @@ def _science(args, out, admission):
 def parse_args(argv=None):
     p = argparse.ArgumentParser(description=__doc__)
     for name in ("out", "predecessor-archive", "expected-predecessor-sha256",
+                 "prior-partial-archive", "expected-prior-partial-sha256",
+                 "prior-authorization-id",
                  "source-pins", "expected-source-pins-sha256",
                  "expected-query-plan-sha256", "expected-useful-pilot-plan-sha256",
+                 "expected-resume-plan-sha256", "expected-salvage-manifest-sha256",
+                 "expected-pilot-continuation-plan-sha256",
                  "authorization-id", "expected-commit", "expected-tree",
                  "analytic-build", "stages", "cpus", "cost-scope"):
         p.add_argument("--" + name, required=True)

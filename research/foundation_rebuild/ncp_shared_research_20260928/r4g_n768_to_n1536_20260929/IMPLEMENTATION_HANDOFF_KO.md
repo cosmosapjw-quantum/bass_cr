@@ -1,39 +1,31 @@
-# N1536 adaptive successor implementation handoff
+# R4K N1536 A1 부분 결과 보존 및 자원 센서스 수정
 
-상태: N1536_ADAPTIVE_IMPLEMENTATION_READY__NATIVE_AUTHORIZATION_PENDING.
-이 커밋은 비 native 실행기 준비다. N1536 operator, parity, pilot, replay는 실행하지 않았다.
+상태: `R4K_A2_RESUME_IMPLEMENTATION_READY__LIVE_CENSUS_AND_FRESH_AUTHORIZATION_PENDING`.
+이 커밋은 A2 재개 준비만 한다. 새 native operator 계산, parity, pilot, 전파를 수행하지 않았다.
 
-## 불변 입력과 구현 경계
+## A1에서 확인된 사실
 
-- 완료된 A2 ZIP SHA256: dd8b3b185ce7c31a16b85d929291ef38d3d8ad666992e5bc1a9e03789e4384f3.
-- 이전 실행 commit/tree: 11100b35f78ec26100ea732971bb4ce0f9925719 / 05976e386c0a39591247d69c32c8cb28fa3f2a97.
-- 원 context: bb2a6d2cb7b598441e44294ae9d9499e983f6bfebe9ec4dcfdbc29b9ac7f1cda.
-- 원 native source/library/BUILD hash는 successor.py에 고정하고, 각 worker는 기존 worker_runtime.initialize_worker에서 dlopen 전에 재검사한다.
-- 새 N1536 경로는 run_n1536_science.sh → supervise_n1536.py → run_n1536.py다. R4F N768 실행기는 변경하지 않았다.
+- A1 실행 commit/tree: `830b2849741f70078ac7bc779ee40c3f249c3fab` / `922c976e5bb3aa8f6a87d96d482ea5b28e82eaf0`.
+- A1 부분 ZIP SHA256: `82a8997ad57ad2a7dee70bce67bd0c5b2871df0ca4f23f04362bfb7f8e9b5b7e`, 크기 51269880 byte.
+- 완료된 N768 선행 ZIP SHA256: `dd8b3b185ce7c31a16b85d929291ef38d3d8ad666992e5bc1a9e03789e4384f3`.
+- A1 선행 pair 2047개와 완료된 stage8 midpoint pair 16개를 합쳐 canonical pair 2063개다. Stage8은 8 workers, 16/16 query, 193.6389812209818초, 0.08262799101251579 query/s, raw 54회, worker 실패 0건이다.
+- Stage16은 dispatch 0으로 중단됐고 stage32와 fill은 시작되지 않았다. 당시 겹친 PID/PGID/cmdline/affinity가 보존되지 않았으므로 원인은 `RESOURCE_CENSUS_EVIDENCE_INSUFFICIENT`다. 외부 작업과 같은 실행의 종료 지연 중 어느 쪽인지 단정하지 않는다.
+- A1 nonce는 소비됐다. A2는 새 승인 ID가 필요하다.
 
-완료 A2 ZIP의 manifest 모든 구성원 SHA256/size/CRC와 2047 query pair의 identity, payload, ordered qualification을 확인한 후에만 재사용한다. N1536 planner는 원 run_candidate 순서의 binary64 연산으로 required 1538개, exact inherited 2개, missing 1536개, eventual union 3583개를 구성한다. active query count 1538은 frozen per-run cap 2048 이하다.
+## 복구 경계
 
-Pilot 8/16/32는 missing ID를 결정론적으로 층화하여 16/32/64개 배정한다. 112개 모두 유용한 scientific query이며 성공 pair는 canonical cache에 create-only 게시한다. 모든 stage가 성공하면 1424개가 fill에 남는다. stage throughput에는 pool 시작·종료 시간을 포함한다. receipt에는 query별 시간, selected-resolution 분포, raw/query, worker/coordinator RSS와 실패를 기록한다. 건강한 stage 중 실제 queries/sec 최대를 선택하고 동률은 적은 worker를 선택한다. 상위 stage의 시작 전 자원 거부 시 그 stage와 이후 pilot ID를 누락 작업으로 되돌리고 하위 건강한 stage로 fill한다. 계산 중 worker 또는 operator 실패는 global budget을 취소하고 부분 증거를 보존하며 중단한다.
+`a1_salvage.py`는 A1 ZIP SHA/크기/CRC와 manifest 전 항목, commit/tree/nonce, 최초 실패와 supervisor 종료, stage 기록, 2063개의 JSON+NPZ 쌍, 16개 query ID와 ordered qualification을 검사한다. 선행 2047개 pair는 선행 ZIP과 byte 단위로 비교한다. 승인된 A1 16개 pair만 create-only로 가져오고 stage8 receipt를 byte 그대로 보존한다. 무결하지 않은 pair, orphan, 예상 밖의 ID 또는 충돌은 거부한다.
 
-Admission과 미래 승인 템플릿은 `worker_stages=[8,16,32]`, `pilot_query_counts=[16,32,64]`, `pilot_query_total=112`, `post_pilot_remaining=1424`를 별개 필드로 기록한다. 이전의 의미가 혼동되는 `pilot_queries=[8,16,32]` 필드는 제거했다. 승인 템플릿 생성 시 실제 useful pilot plan과 정책의 수가 다르면 거부한다.
+재개 단계는 stage8을 재실행하지 않는다. A1의 측정치를 첫 건강한 stage로 사용하고 원래 pilot plan의 stage16 32개, stage32 64개를 계산한다. 성공한 pilot query는 모두 canonical cache에 남긴다. 남은 midpoint는 1520개다. 누적 raw budget은 `GlobalBudget(parent_attempts=54, maximum=16896)`으로 시작하며, 남은 엄격한 최대는 16720회, 생애 최대는 16774회, 여유는 122회다. Stage16/32가 자원 부족으로 시작 전 거부된 경우에만 낮은 건강한 stage로 넘어간다. 외부 BASS CPU 겹침, 이전 풀의 잔존 worker, worker/native/operator 실패는 중단 조건이다.
 
-각 stage 전에 affinity, cgroup CPU quota, /proc/meminfo와 cgroup RAM, 다른 BASS 프로세스의 CPU 중복을 검사한다. worker는 spawn이며 각 1 GiB 주소 공간과 1 numerical thread를 유지한다. global raw reservation은 기존 durable GlobalBudget을 공유한다. 새 rung useful 최대는 1536×11=16896 raw이며 별도 parity 22 raw는 이 구현의 자동 실행 범위에 포함하지 않았다.
+`resource_census.py`는 후보 PID/PPID/PGID/SID/state, 제한·마스킹된 cmdline, affinity, cgroup, 요청 CPU 교집합과 `SELF/ANCESTOR/SAME_RUN_PROCESS_GROUP/EXTERNAL` 소유 분류를 예외 전에 create-only receipt에 남긴다. 완료된 풀의 task receipt PID가 사라졌는지 짧게 확인하고 동일 실행 process group에 남은 spawn worker도 검사한다. 환경변수나 credential 값은 읽지 않는다.
 
-필수 1538 pair가 모두 검증된 후에만 원래 initial state에서 run_candidate(...,1536)를 strict cache-only provider로 수행한다. native operator call이 0이 아니면 차단한다. candidate와 pair 증거를 먼저 저장한 다음 frozen temporal screens, reference norm, operator qualification, triangle consistency를 분류한다. N1536의 dual distance PASS는 유효한 결과다. production은 계속 HOLD다.
+N1536 required query 1538개, inherited exact hit 2개, 전체 새 midpoint 1536개, 최종 union 3583개, frozen operator ladder와 temporal screen은 그대로다. 필수 query가 모두 검증된 후에만 원래 initial state로 strict cache-only replay를 진행한다. replay native call은 0이어야 한다.
 
-## 비 native 검증
+## 검증 및 다음 승인
 
-준비 worktree에서 실행:
+준비 ZIP은 clean exact commit에서 선행/A1 ZIP, native source/library/BUILD, 고정 numerical dependency를 확인한 후 source pins, A1 salvage manifest, resume query plan, pilot continuation plan, 미래 승인 템플릿을 기계적으로 생성한다. 패키지는 선행과 A1 ZIP fixture를 포함하며 추출된 독립 트리에서 비 native focused suite를 다시 실행한다. 실제 검증 명령과 결과는 별도 검증 receipt에 기록한다.
 
-1. /root/.local/state/bass_f0/env/tp2e_f0_20260928T045058Z/bin/python -B -m pytest -q -p no:cacheprovider research/foundation_rebuild/ncp_shared_research_20260928/r4f_parallel_migration_20260929/tests research/foundation_rebuild/ncp_shared_research_20260928/r4g_n768_to_n1536_20260929/tests → 62 passed, 0 failed, 0 skipped.
-2. 실제 A2 ZIP에 대해 successor.validate_predecessor와 plan_n1536/required_missing 비 native preflight → canonical pairs 2047, required 1538, inherited exact hits 2, missing 1536, union 3583.
-3. serial.verify_pinned_dependencies() → 19/19 SHA 일치. check_native_build on frozen F1 engine → source 90913155c0cfa80962d1cb00bb1b7ec0443170917c25913ac5e359979738ab30, library 966146f0ca713251f8b73999b4d89595cf1820a8c2d36f5c6290387b70c68035, BUILD 180a74d3acf2588d3b8c7944effe4709a4fd4f6241cb4df736cd8f0c94430af1, native_loaded_by_check=false.
-4. launcher→parser identity trap은 잘못된 commit을 주입하여 native load 및 nonce 소비 전에 거부됨을 확인한다. 이것은 synthetic test이며 native parity가 아니다.
+패키지 생성과 read-only live census는 native 권한을 부여하지 않는다. A2에는 새 commit/tree, 새 authorization ID, 정확한 32 CPU 순서, 새 절대 deadline, 누적 raw 16896, A1+A2 합산 KRW 40000 비용 범위의 명시적 승인이 필요하다. 다른 BASS 작업과 CPU가 겹치거나 메모리가 부족하면 승인 요청 대신 자원 차단을 보고한다.
 
-## 후속 승인
-
-make_preparation_package.py는 clean exact commit에서 실제 predecessor ZIP과 frozen native BUILD를 검증한 뒤 SOURCE_PINS.json, query plan, useful pilot plan, SHA 및 미래 승인 템플릿을 기계적으로 생성한다. 템플릿의 CPU 목록, fresh authorization ID, deadline/wall, grace, cost는 사용자 승인 전까지 placeholder다. 이 준비 단계는 native 권한을 부여하지 않는다.
-
-추후 승인 없이 launcher를 실행하지 않는다. 새 승인에는 exact commit/tree, 입력 ZIP/query-plan/pilot-plan hash, 8/16/32 stage와 최대32, CPU/RAM, global raw cap, wall/deadline, cost, 필요 시 별도 parity scope가 들어가야 한다.
-
-N3072, 새 nonce/retry, threshold 변경, reference 재실행, capture, all-bound, b-grid는 범위 밖이다.
+N3072, 자동 재시도, 새 nonce 우회, threshold 변경, reference 재실행, capture, all-bound, b-grid 및 VM 변경은 범위 밖이다. `capture=false`, `production=HOLD`, `all_bound=OPEN`, `b_grid=NO_GO`, `original_capture_gap_resolved=false`, `continuous_global_supremum_bound=false`, `continuous_trajectory_error_bound=false`를 유지한다.

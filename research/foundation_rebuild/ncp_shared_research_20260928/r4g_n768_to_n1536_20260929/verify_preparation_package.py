@@ -57,7 +57,16 @@ def verify(archive: Path, python: Path, receipt_path: Path) -> dict:
             raise ValueError("package claims external source dependency")
         policy = json.loads((root / CORE / "ADAPTIVE_WORKER_POLICY.json").read_text())
         pilot = json.loads((root / "USEFUL_PILOT_PLAN.json").read_text())
+        continuation = json.loads((root / "PILOT_CONTINUATION_PLAN.json").read_text())
+        resume = json.loads((root / "N1536_RESUME_QUERY_PLAN.json").read_text())
         template = json.loads((root / "FUTURE_AUTHORIZATION_TEMPLATE.json").read_text())
+        a1_fixture = root / "artifacts/R4G_A1_PARTIAL_RETURN.zip"
+        predecessor_fixture = root / "artifacts/R4F_A2_PREDECESSOR_RETURN.zip"
+        if (_sha(a1_fixture.read_bytes()) != instructions["a1_partial_fixture_sha256"]
+            or _sha(predecessor_fixture.read_bytes()) != instructions["predecessor_fixture_sha256"]):
+            raise ValueError("portable A1/predecessor fixture SHA256 mismatch")
+        env["BASS_R4K_A1_ARCHIVE"] = str(a1_fixture)
+        env["BASS_R4K_PREDECESSOR_ARCHIVE"] = str(predecessor_fixture)
         expected_pilot = {"worker_stages": [8, 16, 32],
                           "pilot_query_counts": [16, 32, 64],
                           "pilot_query_total": 112,
@@ -67,11 +76,18 @@ def verify(archive: Path, python: Path, receipt_path: Path) -> dict:
             or [len(stage["query_ids"]) for stage in pilot["stages"]]
                 != expected_pilot["pilot_query_counts"]
             or len(pilot["remaining_ids"]) != expected_pilot["post_pilot_remaining"]
-            or "pilot_queries" in template):
+            or "pilot_queries" in template
+            or len(continuation["new_stages"]) != 2
+            or [x["workers"] for x in continuation["new_stages"]] != [16, 32]
+            or resume["remaining_midpoint_count"] != 1520
+            or resume["a1_raw_attempts"] != 54
+            or template["lifetime_raw_attempt_cap"] != 16896
+            or template["prior_a1_raw_attempts"] != 54):
             raise ValueError("portable pilot authority/template mismatch")
         compile_cmd = [str(python), "-B", "-m", "py_compile"] + [
             str(root / CORE / name) for name in (
                 "adaptive_workers.py", "successor.py", "run_n1536.py",
+                "a1_salvage.py", "resource_census.py",
                 "supervise_n1536.py", "make_preparation_package.py")]
         compiled = subprocess.run(compile_cmd, cwd=root, env=env, text=True,
                                   capture_output=True, timeout=30)
@@ -82,8 +98,10 @@ def verify(archive: Path, python: Path, receipt_path: Path) -> dict:
             "r=pathlib.Path.cwd().resolve();"
             "sys.path.insert(0,str(r/'research/foundation_rebuild/"
             "ncp_shared_research_20260928/r4c_temporal_continuation'));"
-            "import continue_temporal,metric_transport,reference_transport,cr_repro.observables;"
-            "m=(continue_temporal,metric_transport,reference_transport,cr_repro.observables);"
+            "sys.path.insert(0,str(r/'research/foundation_rebuild/"
+            "ncp_shared_research_20260928/r4g_n768_to_n1536_20260929'));"
+            "import continue_temporal,metric_transport,reference_transport,cr_repro.observables,a1_salvage,resource_census;"
+            "m=(continue_temporal,metric_transport,reference_transport,cr_repro.observables,a1_salvage,resource_census);"
             "assert all(pathlib.Path(x.__file__).resolve().is_relative_to(r) for x in m);"
             "print([str(pathlib.Path(x.__file__).resolve().relative_to(r)) for x in m])"
         )
@@ -107,6 +125,8 @@ def verify(archive: Path, python: Path, receipt_path: Path) -> dict:
                   "package_bytes": archive.stat().st_size,
                   "zip_crc": "PASS", "manifest_verified_files": len(manifest),
                   "pilot_authority_template_verified": True,
+                  "a1_partial_fixture_sha256_verified": True,
+                  "predecessor_fixture_sha256_verified": True,
                   "py_compile_command": compile_cmd,
                   "py_compile_exit": compiled.returncode,
                   "source_imports_relative_to_extracted_root": imported.stdout.strip(),

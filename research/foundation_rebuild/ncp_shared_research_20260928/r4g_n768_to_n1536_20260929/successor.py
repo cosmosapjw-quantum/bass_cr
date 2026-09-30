@@ -25,6 +25,8 @@ import continue_temporal as serial
 from adaptive_workers import DEFAULT_STAGES, validate_resource_scope
 from parallel_bridge import PlannedQuery, query_id, validate_pair
 from execution_admission import strict_json
+from resource_census import live_resource_census
+from a1_salvage import A1_ARCHIVE_SHA256, A1_AUTH, A1_CONSUMED_SHA256
 
 PREDECESSOR_SHA256 = "dd8b3b185ce7c31a16b85d929291ef38d3d8ad666992e5bc1a9e03789e4384f3"
 PREDECESSOR_COMMIT = "11100b35f78ec26100ea732971bb4ce0f9925719"
@@ -204,65 +206,6 @@ def pilot_authority_fields(policy: dict, pilot: dict | None = None) -> dict:
             "pilot_query_total": total, "post_pilot_remaining": remaining}
 
 
-def live_resource_census(cpus: list[int], workers: int, worker_ram_bytes: int) -> dict:
-    """Fail closed before a stage if affinity, free RAM, or competing BASS work changes."""
-    allowed = os.sched_getaffinity(0)
-    requested = set(cpus[:workers])
-    if len(requested) != workers or not requested.issubset(allowed):
-        raise ValueError("live CPU affinity no longer admits worker stage")
-    cpu_max = Path("/sys/fs/cgroup/cpu.max")
-    quota_cores = None
-    if cpu_max.is_file():
-        quota, period = cpu_max.read_text().split()[:2]
-        if quota != "max":
-            quota_cores = int(quota) / int(period)
-            if quota_cores < workers:
-                raise ValueError("live CPU quota below worker stage")
-    meminfo = (Path("/proc/meminfo").read_text())
-    match = re.search(r"^MemAvailable:\s+(\d+) kB$", meminfo, re.M)
-    if not match:
-        raise ValueError("live free RAM unavailable")
-    available = int(match.group(1)) * 1024
-    cgroup_max = Path("/sys/fs/cgroup/memory.max")
-    cgroup_current = Path("/sys/fs/cgroup/memory.current")
-    if cgroup_max.is_file() and cgroup_current.is_file():
-        limit = cgroup_max.read_text().strip()
-        if limit != "max":
-            available = min(available, max(0, int(limit) - int(cgroup_current.read_text().strip())))
-    need = workers * worker_ram_bytes + (4 << 30)
-    if available < need:
-        raise ValueError("live free RAM below worker envelope plus coordinator reserve")
-    competing = []
-    ancestors = {os.getpid()}
-    parent = os.getppid()
-    while parent > 1 and parent not in ancestors:
-        ancestors.add(parent)
-        try:
-            stat = (Path("/proc") / str(parent) / "stat").read_text().rsplit(")", 1)[1].split()
-            parent = int(stat[1])
-        except (OSError, IndexError, ValueError):
-            break
-    for proc in Path("/proc").iterdir():
-        if not proc.name.isdigit() or int(proc.name) in ancestors:
-            continue
-        try:
-            command = (proc / "cmdline").read_bytes().replace(b"\0", b" ").decode(errors="replace")
-            if not re.search(r"(BASS_HE|WU088_HH|bass_cr)", command, re.I):
-                continue
-            if not re.search(r"(python|worker|science|runtime)", command, re.I):
-                continue
-            other = os.sched_getaffinity(int(proc.name))
-            if requested & other:
-                competing.append({"pid": int(proc.name), "cmdline": command[:300]})
-        except (OSError, ProcessLookupError):
-            continue
-    if competing:
-        raise ValueError("competing BASS workload overlaps approved worker CPUs")
-    return {"cpus": sorted(requested), "affinity": sorted(allowed),
-            "cpu_quota_cores": quota_cores,
-            "mem_available_bytes": available, "required_available_bytes": need,
-            "competing_bass_processes": competing, "checked_unix": time.time()}
-
 
 def admission_scope(args) -> dict:
     if os.environ.get("ALLOW_NEW_NATIVE_R4G") != "YES_I_AUTHORIZE_N1536":
@@ -281,12 +224,21 @@ def admission_scope(args) -> dict:
     if any(os.environ.get(k) != "1" for k in THREAD_KEYS):
         raise ValueError("one numerical thread per worker required")
     if (not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]{15,95}", args.authorization_id)
-        or args.authorization_id == PREDECESSOR_AUTH):
+        or args.authorization_id in (PREDECESSOR_AUTH, A1_AUTH)):
         raise ValueError("unique explicit N1536 authorization ID required")
+    if (args.prior_authorization_id != A1_AUTH
+        or args.expected_prior_partial_sha256 != A1_ARCHIVE_SHA256):
+        raise ValueError("exact A1 partial authorization/archive lineage required")
+    old_nonce = Path.home() / ".local/state/bass_r4g/authorizations" / (A1_AUTH + ".json")
+    if not old_nonce.is_file() or serial.sha256_path(old_nonce) != A1_CONSUMED_SHA256:
+        raise ValueError("A1 consumed authorization nonce identity mismatch")
     if args.expected_predecessor_sha256 != PREDECESSOR_SHA256:
         raise ValueError("predecessor SHA pin mismatch")
     for value in (args.expected_source_pins_sha256, args.expected_query_plan_sha256,
-                  args.expected_useful_pilot_plan_sha256):
+                  args.expected_useful_pilot_plan_sha256,
+                  args.expected_resume_plan_sha256,
+                  args.expected_salvage_manifest_sha256,
+                  args.expected_pilot_continuation_plan_sha256):
         if not re.fullmatch(r"[0-9a-f]{64}", value):
             raise ValueError("exact source/query/pilot SHA256 required")
     stages = tuple(int(x) for x in args.stages.split(","))
@@ -299,25 +251,35 @@ def admission_scope(args) -> dict:
         hard_max=args.hard_max_workers)
     if not set(cpus).issubset(os.sched_getaffinity(0)):
         raise ValueError("approved CPU scope outside live affinity")
-    if args.worker_ram_bytes != 1 << 30 or args.global_raw_attempt_cap < 1 or args.global_raw_attempt_cap > 16896:
+    if args.worker_ram_bytes != 1 << 30 or args.global_raw_attempt_cap != 16896:
         raise ValueError("RAM/raw contract outside prepared scope")
     now = time.time()
     if (not math.isfinite(args.deadline_unix) or now >= args.deadline_unix
         or args.max_wall_seconds < 1 or args.deadline_unix > now + args.max_wall_seconds + 1
         or not args.cost_scope.strip()):
         raise ValueError("explicit live deadline and cost scope required")
-    census = live_resource_census(cpus, 8, args.worker_ram_bytes)
+    census = live_resource_census(cpus, 8, args.worker_ram_bytes,
+        receipt_path=Path(args.out).resolve().with_name(Path(args.out).name +
+                                                      "_INITIAL_RESOURCE_CENSUS.json"))
     pilot_fields = pilot_authority_fields(json.loads((HERE / "ADAPTIVE_WORKER_POLICY.json").read_text()))
     return {"schema": "BASS_R4G_N1536_ADMISSION_V1",
             "execution_commit": head, "execution_tree": tree,
             "predecessor_commit": PREDECESSOR_COMMIT, "predecessor_tree": PREDECESSOR_TREE,
             "predecessor_authorization_id": PREDECESSOR_AUTH,
+            "prior_failed_authorization_id": A1_AUTH,
+            "prior_partial_archive_sha256": A1_ARCHIVE_SHA256,
+            "prior_consumed_nonce_sha256": A1_CONSUMED_SHA256,
             "predecessor_archive_sha256": PREDECESSOR_SHA256,
             "source_pins_sha256": args.expected_source_pins_sha256,
             "query_plan_sha256": args.expected_query_plan_sha256,
             "useful_pilot_plan_sha256": args.expected_useful_pilot_plan_sha256,
+            "resume_plan_sha256": args.expected_resume_plan_sha256,
+            "salvage_manifest_sha256": args.expected_salvage_manifest_sha256,
+            "pilot_continuation_plan_sha256": args.expected_pilot_continuation_plan_sha256,
             "authorization_id": args.authorization_id, "worker_policy": scope,
             "selected_stage": None, **pilot_fields,
+            "prior_raw_attempts": 54, "remaining_midpoint_ids": 1520,
+            "strict_lifetime_worst_raw": 16774, "strict_lifetime_raw_margin": 122,
             "global_raw_attempt_cap": args.global_raw_attempt_cap,
             "deadline_unix": args.deadline_unix, "cost_scope": args.cost_scope,
             "max_wall_seconds": args.max_wall_seconds,
