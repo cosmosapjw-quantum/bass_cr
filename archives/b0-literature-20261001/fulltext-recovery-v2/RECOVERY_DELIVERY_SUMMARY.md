@@ -12,7 +12,7 @@ The private merged ZIP preserves all224 original members. It contains all source
 
 Local ZIP CRC, fresh extraction, all manifest hashes, DB integrity/foreign keys, every catalog path/byte/hash, valid PDF signatures/page counts, duplicate PDF hashes (none), DOI/version consistency and31-entry BibTeX parsing passed. Two create-only private backups were acknowledged and ID/name/size verified at UPLOAD_VERIFIED_R1. R1 is not restore verification. Copyright/public-access rights do not imply public redistribution; no full texts are committed here. Actions transport was CMS encrypted, retention1day.
 
-See RECOVERY_SUMMARY_PUBLIC.json for artifact SHA256/bytes and complete counts; the status CSV lists the18 outcomes, and the version-relations CSV/BibTeX retain canonical identifiers. The private DELIVERY_RECEIPT sidecar records remote IDs/revision and this final metadata commit.
+See RECOVERY_SUMMARY_PUBLIC.json for artifact SHA256/bytes and complete counts; the status CSV lists the18 outcomes, and the version-relations CSV/BibTeX retain canonical identifiers. The final response records remote IDs/revision and this metadata commit. The core ZIP and both R1 acknowledgments were completed before the executor became unavailable. A separate final delivery-receipt file could not be written; the final independent delivery pass is inconclusive because its read-only executor also hung. The earlier independent local-stage confirmation and completed primary ZIP/R1 checks remain valid. Standalone file persistence was requested but its outcome could not be confirmed; no duplicate write was attempted.
 
 Scientific calculations=0; native authorization consumption=0; claim ceilings unchanged.
 capture=false; production=HOLD; all_bound=OPEN; b_grid=NO_GO.
