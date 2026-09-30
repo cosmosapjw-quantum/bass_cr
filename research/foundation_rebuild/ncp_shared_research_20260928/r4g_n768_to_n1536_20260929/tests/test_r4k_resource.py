@@ -88,3 +88,49 @@ def test_unreceipted_same_group_spawn_worker_blocks_and_preserves_evidence(tmp_p
             settle_seconds=0,proc_root=root,affinity_lookup=lambda pid:mapping[pid])
     data=json.loads(receipt.read_text())
     assert [r["pid"] for r in data["unreceipted_same_group_workers"]]==[21]
+
+
+def test_cooperative_peer_overlap_is_advisory_with_durable_pressure(tmp_path, monkeypatch):
+    root=tmp_path/"proc";root.mkdir();mapping={0:set(range(32))}
+    proc(root,10,1,99,99,"python bass_cr coordinator",range(32),mapping)
+    proc(root,30,1,100,100,"python BASS_HE external --token secret-value",range(32),mapping)
+    monkeypatch.setattr("os.kill",lambda *a,**k: (_ for _ in ()).throw(AssertionError("kill")))
+    monkeypatch.setattr("os.sched_setaffinity",lambda *a,**k: (_ for _ in ()).throw(AssertionError("repin")))
+    first="cpu  100 0 100 800 0 0 0 0\ncpu0 10 0 10 80 0 0 0 0\ncpu1 10 0 10 80 0 0 0 0\n"
+    second="cpu  120 0 120 860 0 0 0 0\ncpu0 12 0 13 85 0 0 0 0\ncpu1 13 0 12 85 0 0 0 0\n"
+    samples=iter((first,second))
+    receipt=tmp_path/"shared.json"
+    data=live_resource_census([0,1],2,1<<30,receipt_path=receipt,
+        proc_root=root,affinity_lookup=lambda pid:mapping[pid],self_pid=10,
+        run_pgid=99,allowed=set(range(32)),mem_available_bytes=50<<30,
+        quota_cores=32,sharing_policy="COOPERATIVE_SHARED_HOST",
+        proc_stat_reader=lambda:next(samples),sample_interval=0.01,
+        sleep_fn=lambda _:None)
+    assert data["status"]=="PASS_SHARED_HOST_PEERS_PRESENT"
+    assert data["external_offender_pids"]==[30]
+    assert data["candidate_processes"][-1]["ownership"]=="EXTERNAL"
+    pressure=data["cpu_pressure"]
+    assert pressure["per_cpu_busy_fraction"]=={"0":0.5,"1":0.5}
+    assert pressure["approved_cpu_mean_busy"]==0.5
+    assert pressure["approved_cpu_median_busy"]==0.5
+    assert pressure["approved_cpu_max_busy"]==0.5
+    assert pressure["sample_interval_seconds"]>=0
+    assert json.loads(receipt.read_text())==data
+    assert "secret-value" not in receipt.read_text()
+
+
+def test_cooperative_mode_keeps_cpu_quota_and_ram_hard_gates(tmp_path):
+    root=tmp_path/"proc";root.mkdir();mapping={0:set(range(32))}
+    proc(root,10,1,99,99,"python bass_cr coordinator",range(32),mapping)
+    proc(root,30,1,100,100,"python BASS_HE external",range(32),mapping)
+    kwargs=dict(proc_root=root,affinity_lookup=lambda pid:mapping[pid],self_pid=10,
+                run_pgid=99,sharing_policy="COOPERATIVE_SHARED_HOST",sample_interval=0)
+    with pytest.raises(ValueError,match="LIVE_CPU_AFFINITY_INVALID"):
+        live_resource_census([0,1],2,1<<30,receipt_path=tmp_path/"affinity.json",
+            allowed={0},mem_available_bytes=50<<30,quota_cores=32,**kwargs)
+    with pytest.raises(ValueError,match="LIVE_CPU_QUOTA_INVALID"):
+        live_resource_census([0,1],2,1<<30,receipt_path=tmp_path/"quota.json",
+            allowed=set(range(32)),mem_available_bytes=50<<30,quota_cores=1,**kwargs)
+    with pytest.raises(ValueError,match="LIVE_RAM_SCOPE_INVALID"):
+        live_resource_census([0,1],2,1<<30,receipt_path=tmp_path/"ram.json",
+            allowed=set(range(32)),mem_available_bytes=1<<30,quota_cores=32,**kwargs)

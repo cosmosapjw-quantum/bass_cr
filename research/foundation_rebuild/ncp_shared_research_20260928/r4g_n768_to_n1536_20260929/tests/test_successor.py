@@ -195,9 +195,13 @@ def _stage_args(tmp_path):
 def test_stage_pool_boundary_retains_unique_useful_queries_without_native(monkeypatch, tmp_path):
     items = [PlannedQuery(f"q{i}", "0x0.0p+0", i, "0x1.0p-4") for i in range(8)]
     published = []
+    census_modes = []
     monkeypatch.setattr(runner, "ProcessPoolExecutor", _NonNativePool)
     monkeypatch.setattr(runner, "initialize_worker", lambda *args: None)
-    monkeypatch.setattr(runner, "live_resource_census", lambda *args, **kwargs: {"cpus": list(range(8))})
+    def census(*args, **kwargs):
+        census_modes.append(kwargs.get("sharing_policy"))
+        return {"cpus": list(range(8))}
+    monkeypatch.setattr(runner, "live_resource_census", census)
     monkeypatch.setattr(runner, "verify_prior_pool_teardown", lambda *args, **kwargs: {})
     monkeypatch.setattr(runner.serial, "sha256_path", lambda path: "synthetic")
     monkeypatch.setattr(runner, "_worker_with_rss",
@@ -207,7 +211,9 @@ def test_stage_pool_boundary_retains_unique_useful_queries_without_native(monkey
                                       "selected_resolution": {"order": 8, "subdivisions": 4}})
     monkeypatch.setattr(runner, "publish_pair",
                         lambda source, destination, item, context, contract: published.append(item.query_id))
-    rec = runner._run_stage(items, source=tmp_path, args=_stage_args(tmp_path),
+    stage_args = _stage_args(tmp_path)
+    stage_args.resource_sharing_policy = "COOPERATIVE_SHARED_HOST"
+    rec = runner._run_stage(items, source=tmp_path, args=stage_args,
                             contract={"runtime_reference_resolutions": [{}, {}]},
                             budget=_Budget(), out=tmp_path, canonical=tmp_path,
                             workers=8)
@@ -218,6 +224,7 @@ def test_stage_pool_boundary_retains_unique_useful_queries_without_native(monkey
     assert rec["raw_attempts_per_completed_query"] == 0
     assert rec["selected_resolution_histogram"] == {"q8_h4": 8}
     assert len(rec["per_query_task_wall_seconds"]) == 8
+    assert census_modes == ["COOPERATIVE_SHARED_HOST"]
 
 
 def test_worker_telemetry_wrapper_reads_selected_rule_without_native(monkeypatch, tmp_path):

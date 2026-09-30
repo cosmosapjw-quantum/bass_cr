@@ -72,7 +72,8 @@ def _run_stage(items, *, source, args, contract, budget, out, canonical, workers
     stage_label = stage_label or "STAGE_" + str(workers)
     cpus = [int(x) for x in args.cpus.split(",")][:workers]
     census = live_resource_census(cpus, workers, args.worker_ram_bytes,
-        receipt_path=out / ("RESOURCE_CENSUS_" + stage_label + ".json"))
+        receipt_path=out / ("RESOURCE_CENSUS_" + stage_label + ".json"),
+        sharing_policy=getattr(args, "resource_sharing_policy", "EXCLUSIVE"))
     start_used = budget.used()
     start = time.monotonic()
     ctx = multiprocessing.get_context("spawn")

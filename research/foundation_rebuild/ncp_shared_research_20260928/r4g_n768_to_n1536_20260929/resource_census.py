@@ -2,9 +2,11 @@
 from __future__ import annotations
 
 import json
+import math
 import os
 from pathlib import Path
 import re
+import statistics
 import time
 
 
@@ -38,6 +40,9 @@ def _identity(pid: int, *, proc_root: Path, affinity_lookup) -> dict | None:
         cg = (root / "cgroup").read_text().strip()
         return {"pid": pid, "ppid": int(fields[1]), "pgid": int(fields[2]),
                 "sid": int(fields[3]), "state": fields[0],
+                "cpu_time_ticks": (int(fields[11]) + int(fields[12])
+                                   if len(fields) > 12 else None),
+                "start_time_ticks": int(fields[19]) if len(fields) > 19 else None,
                 "cmdline": cmd[:300], "cmdline_truncated": len(cmd) > 300,
                 "bass_candidate": bool(re.search(r"BASS_HE|WU088_HH|bass_cr", raw_cmd, re.I)
                                        and re.search(r"python|worker|science|runtime", raw_cmd, re.I)),
@@ -94,15 +99,76 @@ def collect_bass_candidates(requested: set[int], *, proc_root: Path = Path("/pro
     return sorted(rows, key=lambda x: x["pid"])
 
 
+def _cpu_rows(raw: str) -> dict[int, tuple[int, int]]:
+    rows = {}
+    for line in raw.splitlines():
+        parts = line.split()
+        if not parts or not re.fullmatch(r"cpu\d+", parts[0]):
+            continue
+        values = [int(x) for x in parts[1:9]]
+        if len(values) < 5:
+            continue
+        rows[int(parts[0][3:])] = (sum(values), values[3] + values[4])
+    return rows
+
+
+def _pressure(requested: set[int], peers: list[dict], *, proc_root: Path,
+              affinity_lookup, proc_stat_reader, sleep_fn, sample_interval: float) -> dict:
+    if not 0 <= sample_interval <= 1 or not math.isfinite(sample_interval):
+        raise ValueError("bounded CPU-pressure sample interval required")
+    before = _cpu_rows(proc_stat_reader())
+    start = time.monotonic()
+    peer_before = {r["pid"]: r for r in peers}
+    sleep_fn(sample_interval)
+    elapsed = time.monotonic() - start
+    after = _cpu_rows(proc_stat_reader())
+    busy = {}
+    for cpu in sorted(requested):
+        if cpu not in before or cpu not in after:
+            raise ValueError("CPU-pressure sample missing approved CPU")
+        total = after[cpu][0] - before[cpu][0]
+        idle = after[cpu][1] - before[cpu][1]
+        if total < 0 or idle < 0 or idle > total:
+            raise ValueError("CPU-pressure counters invalid")
+        busy[str(cpu)] = (total - idle) / total if total else 0.0
+    values = list(busy.values())
+    peer_deltas = {}
+    for pid, first in peer_before.items():
+        second = _identity(pid, proc_root=proc_root, affinity_lookup=affinity_lookup)
+        if (second is not None and first["cpu_time_ticks"] is not None
+            and second["cpu_time_ticks"] is not None
+            and first["start_time_ticks"] == second["start_time_ticks"]
+            and second["cpu_time_ticks"] >= first["cpu_time_ticks"]):
+            peer_deltas[str(pid)] = ((second["cpu_time_ticks"] - first["cpu_time_ticks"])
+                                     / os.sysconf("SC_CLK_TCK"))
+    try:
+        load_average = list(os.getloadavg())
+    except OSError:
+        load_average = None
+    return {"per_cpu_busy_fraction": busy,
+            "approved_cpu_mean_busy": statistics.mean(values) if values else None,
+            "approved_cpu_median_busy": statistics.median(values) if values else None,
+            "approved_cpu_max_busy": max(values) if values else None,
+            "external_peer_cpu_time_delta_seconds": peer_deltas,
+            "sample_interval_seconds": elapsed, "load_average": load_average}
+
+
 def live_resource_census(cpus: list[int], workers: int, worker_ram_bytes: int,
                          *, receipt_path: Path, proc_root: Path = Path("/proc"),
                          affinity_lookup=None, self_pid: int | None = None,
                          run_pgid: int | None = None,
                          allowed: set[int] | None = None,
                          mem_available_bytes: int | None = None,
-                         quota_cores: float | None = None) -> dict:
+                         quota_cores: float | None = None,
+                         sharing_policy: str = "EXCLUSIVE",
+                         proc_stat_reader=None, sleep_fn=None,
+                         sample_interval: float = 0.2) -> dict:
     """Persist the whole process census before reporting an overlap or limit failure."""
     affinity_lookup = affinity_lookup or os.sched_getaffinity
+    if sharing_policy not in ("EXCLUSIVE", "COOPERATIVE_SHARED_HOST"):
+        raise ValueError("unknown resource sharing policy")
+    proc_stat_reader = proc_stat_reader or (lambda: Path("/proc/stat").read_text())
+    sleep_fn = sleep_fn or time.sleep
     requested = set(cpus[:workers])
     allowed = set(affinity_lookup(0)) if allowed is None else set(allowed)
     if mem_available_bytes is None:
@@ -133,6 +199,9 @@ def live_resource_census(cpus: list[int], workers: int, worker_ram_bytes: int,
         affinity_lookup=affinity_lookup, self_pid=self_pid, run_pgid=run_pgid)
     offenders = [r for r in candidates if r["ownership"] == "EXTERNAL"
                  and r["requested_cpu_intersection"] and r["state"] not in ("Z", "X")]
+    pressure = _pressure(requested, offenders, proc_root=proc_root,
+        affinity_lookup=affinity_lookup, proc_stat_reader=proc_stat_reader,
+        sleep_fn=sleep_fn, sample_interval=sample_interval)
     need = workers * worker_ram_bytes + (4 << 30)
     reason = None
     if len(requested) != workers or not requested.issubset(allowed):
@@ -141,7 +210,7 @@ def live_resource_census(cpus: list[int], workers: int, worker_ram_bytes: int,
         reason = "LIVE_CPU_QUOTA_INVALID"
     elif mem_available_bytes < need:
         reason = "LIVE_RAM_SCOPE_INVALID"
-    elif offenders:
+    elif offenders and sharing_policy == "EXCLUSIVE":
         reason = "EXTERNAL_BASS_CPU_OVERLAP"
     receipt = {"schema": "BASS_R4K_STRUCTURED_RESOURCE_CENSUS_V1",
                "requested_cpus": sorted(requested), "allowed_affinity": sorted(allowed),
@@ -149,10 +218,14 @@ def live_resource_census(cpus: list[int], workers: int, worker_ram_bytes: int,
                "quota_cores": quota_cores, "mem_available_bytes": mem_available_bytes,
                "required_available_bytes": need, "candidate_processes": candidates,
                "external_offender_pids": [r["pid"] for r in offenders],
-               "status": "PASS" if reason is None else reason,
+               "external_peer_pids": [r["pid"] for r in offenders],
+               "resource_sharing_policy": sharing_policy,
+               "cpu_pressure": pressure,
+               "status": (reason or ("PASS_SHARED_HOST_PEERS_PRESENT"
+                   if offenders and sharing_policy == "COOPERATIVE_SHARED_HOST" else "PASS")),
                "checked_unix": time.time()}
     _write_new(receipt_path, receipt)
-    if offenders:
+    if offenders and sharing_policy == "EXCLUSIVE":
         raise ExternalResourceOverlap("EXTERNAL_BASS_CPU_OVERLAP: " +
             ",".join(map(str, receipt["external_offender_pids"])) +
             "; evidence=" + str(receipt_path))
