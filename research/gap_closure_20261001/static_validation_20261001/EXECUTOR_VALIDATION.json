@@ -1,0 +1,122 @@
+{
+  "schema": "BASS_G02_G03_EXECUTOR_VALIDATION_V1",
+  "status": "IMPLEMENTATION_VERIFIED_NONNATIVE_ONLY",
+  "tests": [
+    {
+      "command": "python -B -m unittest discover -s research/gap_closure_20261001/static_validation_20261001/executor -p 'test_*.py' -v",
+      "exit_code": 0,
+      "tests_run": 17,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    {
+      "command": "python -B -m unittest discover -s research/gap_closure_20261001/static_validation_20261001 -p test_static_validation.py -v",
+      "exit_code": 0,
+      "tests_run": 8,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    }
+  ],
+  "TDD_red_evidence": [
+    {
+      "module": "fd_executor",
+      "observed_failure": "ModuleNotFoundError before new executor existed",
+      "exit_code": 1
+    },
+    {
+      "module": "g03_rate_postprocess/full G03 producer",
+      "observed_failure": "Full synthetic producer failed at missing g03_rate_postprocess import before implementation",
+      "exit_code": 1
+    }
+  ],
+  "runtime": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  },
+  "synthetic_end_to_end": {
+    "G02": "66 synthetic new qualified queries +6 actual historical saved centers;132 synthetic raw reservations;72-coordinate manifest;FD diagnostic does not close physicalG02",
+    "G03": "2 synthetic signed48 queries;4 synthetic raw reservations;per-level reconstruction/rho/eigenspectrum/residual/projector/holdout return passes"
+  },
+  "strict_guard_coverage": [
+    "cross-gap and legacy authorization rejected",
+    "exact fresh proposal digest/env gate",
+    "unused nonce",
+    "source hash drift",
+    "exact immutable plan",
+    "CPU/RAM/thread/query/raw/wall scope",
+    "unknown worker query rejected",
+    "create-only canonical output",
+    "first failure cancels remaining dispatch",
+    "actual restored native-byte/bank validation under CDLL trap"
+  ],
+  "source_closure_checks": [
+    {
+      "adapter": "fd_executor",
+      "source_files_checked": 83,
+      "sha_validation": "PASS"
+    },
+    {
+      "adapter": "g03_executor",
+      "source_files_checked": 70,
+      "sha_validation": "PASS"
+    }
+  ],
+  "external_native_host_execution": "NOT_PERFORMED",
+  "new_native_calls": 0,
+  "new_external_runs": 0,
+  "authorization_consumed": 0,
+  "remaining_blocker": {
+    "class": "RESOURCE_POLICY_BLOCKER",
+    "minimum_action": "On exact published clean commit, prepare live unapproved proposal with frozen inputs/native build; obtain fresh exact authorization, then matching supervisor executes only its own scope."
+  },
+  "scope_contracts": {
+    "G02": {
+      "new_queries": 66,
+      "reused_queries": 6,
+      "max_raw_attempts": 726,
+      "plan_sha256": "6644827b9cbde65a5a27f8d2229ed9dc99caf9022c70e2c8663a43dfda0b1c7c"
+    },
+    "G03": {
+      "new_queries": 2,
+      "reused_queries": 0,
+      "max_raw_attempts": 22,
+      "plan_sha256": "479ca3efdbbacfdc698b29a9c4eeef2597e5979b2960e14a594cad7f96bb01b4",
+      "max_workers": 2,
+      "max_wall_seconds": 900
+    }
+  },
+  "files_sha256": {
+    "executor/G03_RESOURCE_POLICY.json": "c8b2e7a046aab3f5400fbcf4a96ed0a2c93a6399d2ddf1e6b6bfb92978027209",
+    "executor/G03_SCIENCE_CONTRACT.json": "479ca3efdbbacfdc698b29a9c4eeef2597e5979b2960e14a594cad7f96bb01b4",
+    "executor/README.md": "1a296d6f53692ca02a2d919c1b29d25fd5cfdeae15f9ed4579ef4bc980cf92f4",
+    "executor/RESOURCE_POLICY.json": "183ae9984f58c66cd82b6ee90019fce0601c999477abb28950522017ca26a570",
+    "executor/fd_executor.py": "392663ef946cf33f298d6448da96d75d23533298f6a1879a142081084c499621",
+    "executor/fd_worker.py": "fbf08733f20ee6549c5d832e5eb9f60e87ff10727947a68331a4ea212514cae4",
+    "executor/g03_executor.py": "93c5c2fd17d5a3eb02cfb9613c1ba8191ba8bdf40eb2e151810ae09745806cbb",
+    "executor/g03_rate_postprocess.py": "e6c5a685a2824118f8124b5cdfac5eb84f9b5707dbb8a0cbe0d0c3f653ef639c",
+    "executor/g03_worker.py": "b0f39b2421f8e8e3ec2493d23f5127c40000897c6335e726e21f1bbc0c523491",
+    "executor/prepare_fd_authority.py": "0c5d56a15e20694000fa93dffaa940f736a3e778ab53a696fa6348e02803eee1",
+    "executor/prepare_g03_authority.py": "d77ce1656cf2e1f65c4f50f287357ee4a957bfbf783e671e2045cc0abb022090",
+    "executor/run_fd.py": "4df04cecd10290e07f648875d11d3d8817c83c7a8319a8c7ada1801f3f45ee1d",
+    "executor/run_g03.py": "276256d65d5a96edff64ce8033978c85f2981bfd4b4e431de76b7909e8a2bf96",
+    "executor/supervise_fd.py": "13706247827d717596729dc6195a9f56a18880e551880775b45143108333403c",
+    "executor/supervise_g03.py": "bd8939b534c13e1f80062361e51251694fec5ce7b046292f5193878676c2ccfb",
+    "executor/test_fd_executor.py": "f436d3f412949cdea1e360fa126745c035e8f87f2cd6b016dd0a77e6406a4b7d",
+    "executor/test_g03_executor.py": "f9bb2d3747b6994e81ac8641e6c1e3607c45d45cf67dc0753c9963f26f8e2add",
+    "executor/test_g03_rate.py": "7728da5a40a1b7b00a883270addedea0a581472c367ca36c8cdbe0f3be4820b5"
+  },
+  "physical_G02_closed": false,
+  "physical_G03_closed": false,
+  "claim_ceiling": {
+    "capture": false,
+    "production": "HOLD",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "original_capture_gap_resolved": false,
+    "continuous_global_supremum_bound": false,
+    "continuous_trajectory_error_bound": false
+  }
+}

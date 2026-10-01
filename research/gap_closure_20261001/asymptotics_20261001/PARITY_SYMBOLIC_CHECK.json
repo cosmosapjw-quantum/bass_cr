@@ -1,0 +1,75 @@
+{
+  "engine": "Python stdlib Fraction exact polynomial algebra; no external CAS",
+  "assumptions": [
+    "epsilon real near0",
+    "simple largest singular value at0=2,next1",
+    "real exact rational B2,B3"
+  ],
+  "input": {
+    "B2": [
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        0
+      ]
+    ],
+    "B3_diagonal": [
+      "3/10",
+      "7/10"
+    ],
+    "operation": "C=B^T B;lambda+=(trC+sqrt((C00-C11)^2+4*C01^2))/2"
+  },
+  "exact_trace_polynomial": {
+    "0": "5",
+    "2": "29/50"
+  },
+  "exact_discriminant_polynomial": {
+    "0": "9",
+    "2": "229/25",
+    "4": "4/25"
+  },
+  "leading_singular_series": {
+    "epsilon0": "2",
+    "epsilon1": "0",
+    "epsilon2": "79/300",
+    "epsilon3": "0",
+    "epsilon4": "-16891/270000",
+    "remainder": "O(epsilon^6)"
+  },
+  "exact_series_coefficient_checks": "PASS",
+  "independent_float64_spotchecks": [
+    {
+      "epsilon": -0.1,
+      "numpy_spectral_norm": 2.0026271084639786,
+      "analytic_formula_float64": 2.0026271084639786
+    },
+    {
+      "epsilon": 0.1,
+      "numpy_spectral_norm": 2.0026271084639786,
+      "analytic_formula_float64": 2.0026271084639786
+    },
+    {
+      "epsilon": 0.01,
+      "numpy_spectral_norm": 2.000026332707772,
+      "analytic_formula_float64": 2.000026332707772
+    }
+  ],
+  "degenerate_cusp_counterexample": {
+    "B2": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        0
+      ]
+    ],
+    "B3": "identity(2)",
+    "spectral_norm": "1+abs(epsilon) for abs(epsilon)<1"
+  },
+  "does_not_imply": "No B0 farfield branch simplicity, exact model compatibility or unconditional C3 cancellation proven."
+}

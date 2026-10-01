@@ -1,0 +1,141 @@
+{
+  "schema": "BASS_CR_GATE_DAG_V1",
+  "accepted_temporal": {
+    "status": "N1536_TEMPORAL_GATE_CLOSED",
+    "basis": "B0",
+    "window_a0": [
+      -12,
+      12
+    ],
+    "inherited_by_new_windows": false
+  },
+  "gaps": {
+    "G01": {
+      "status": "CLOSED",
+      "dependencies": [],
+      "blocker_class": null
+    },
+    "G02": {
+      "status": "BLOCKED",
+      "dependencies": [
+        "G01"
+      ],
+      "blocker_class": "RESOURCE_POLICY_BLOCKER"
+    },
+    "G03": {
+      "status": "RESOLVED_WITH_LIMITATION",
+      "dependencies": [
+        "G01",
+        "G02",
+        "G07",
+        "G08"
+      ],
+      "blocker_class": "NUMERICAL_METHOD_BLOCKER"
+    },
+    "G04": {
+      "status": "RESOLVED_WITH_LIMITATION",
+      "dependencies": [
+        "G01",
+        "G02",
+        "G03",
+        "G07",
+        "G08"
+      ],
+      "blocker_class": "NUMERICAL_METHOD_BLOCKER"
+    },
+    "G05": {
+      "status": "UNRESOLVED",
+      "dependencies": [
+        "G04"
+      ],
+      "blocker_class": "NUMERICAL_METHOD_BLOCKER"
+    },
+    "G06": {
+      "status": "UNRESOLVED",
+      "dependencies": [
+        "G01"
+      ],
+      "blocker_class": "RESOURCE_POLICY_BLOCKER"
+    },
+    "G07": {
+      "status": "RESOLVED_WITH_LIMITATION",
+      "dependencies": [
+        "G01"
+      ],
+      "blocker_class": "NUMERICAL_METHOD_BLOCKER"
+    },
+    "G08": {
+      "status": "CLOSED",
+      "dependencies": [
+        "G01"
+      ],
+      "blocker_class": null
+    },
+    "G09": {
+      "status": "RESOLVED_WITH_LIMITATION",
+      "dependencies": [],
+      "blocker_class": "IMPLEMENTATION_BLOCKER"
+    },
+    "G10": {
+      "status": "CLOSED",
+      "dependencies": [],
+      "blocker_class": null
+    },
+    "G11": {
+      "status": "UNRESOLVED",
+      "dependencies": [
+        "G02",
+        "G04",
+        "G05",
+        "G06"
+      ],
+      "blocker_class": "NUMERICAL_METHOD_BLOCKER"
+    },
+    "G12": {
+      "status": "RESOLVED_WITH_LIMITATION",
+      "dependencies": [
+        "G01"
+      ],
+      "blocker_class": "IMPLEMENTATION_BLOCKER"
+    },
+    "G13": {
+      "status": "UNRESOLVED",
+      "dependencies": [
+        "G04",
+        "G05",
+        "G09",
+        "G10",
+        "G11"
+      ],
+      "blocker_class": "IMPLEMENTATION_BLOCKER"
+    }
+  },
+  "progression": [
+    "local_rate_theory",
+    "continuous_tail_control",
+    "finite_window",
+    "basis_completeness",
+    "all_bound",
+    "b_grid",
+    "cross_section",
+    "production"
+  ],
+  "blocked_next_edge": "local_rate_theory -> actual continuous_tail_control",
+  "claims": {
+    "capture": false,
+    "production": "HOLD",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "original_capture_gap_resolved": false,
+    "continuous_global_supremum_bound": false,
+    "continuous_trajectory_error_bound": false
+  },
+  "layer_scope": {
+    "L0": "finite-index selectedspan preserved",
+    "L1": "semantic negative-energy projectile query implemented",
+    "L2": "basis-converged boundpopulation OPEN",
+    "L3": "finite-window asymptoticpopulation OPEN",
+    "L4": "all-bound capture OPEN",
+    "L5": "integratedcrosssection NO_GO"
+  }
+}

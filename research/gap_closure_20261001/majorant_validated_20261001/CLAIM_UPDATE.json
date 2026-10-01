@@ -1,0 +1,66 @@
+{
+  "gap_id": "G04",
+  "database_gap_id": "REPORT_GAP_04",
+  "recommended_status": "RESOLVED_WITH_LIMITATION",
+  "claims": [
+    {
+      "claim_id": "G04_ROUTE_B_LIPSCHITZ_DERIVED",
+      "text": "If S>=s0 I and S,W are AC with norm bounds s1,w0,w1 then rho is Lipschitz with L=w1/s0+w0*s1/s0^2 on the cell",
+      "evidence_status": [
+        "DERIVED"
+      ],
+      "scope": "conditional finite-dimensional Hermitian theorem",
+      "project_evidence": [
+        "CONTINUOUS_MAJORANT_RESEARCH_REPORT.md"
+      ],
+      "does_not_imply": [
+        "B0 hypotheses already verified",
+        "global integrability"
+      ]
+    },
+    {
+      "claim_id": "G04_ROUTE_B_SYNTHETIC_LEVEL2",
+      "text": "The rational family in validated_majorant.py has a verified continuous finite-interval majorant on [0,1]",
+      "evidence_status": [
+        "IMPLEMENTATION_VERIFIED",
+        "NUMERICALLY_CHECKED"
+      ],
+      "scope": "synthetic_rational_family_v1 only",
+      "project_evidence": [
+        "SYNTHETIC_CONTINUUM_CERTIFICATE.json",
+        "VALIDATION_RESULTS.json"
+      ],
+      "does_not_imply": [
+        "B0 certificate",
+        "physical state probability change",
+        "infinite tail closure"
+      ]
+    },
+    {
+      "claim_id": "G05_CONDITIONAL_P2_PRIMITIVE",
+      "text": "The p=2 one-sided time integral is enclosed with exact rational alternating-series arithmetic for exact rational C,v,b,Z and 0<=b<=Z",
+      "evidence_status": [
+        "DERIVED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "scope": "conditional integral evaluation only",
+      "project_evidence": [
+        "validated_majorant.py",
+        "test_validated_majorant.py"
+      ],
+      "does_not_imply": [
+        "actual B0 majorant exists",
+        "G05 physical closure"
+      ]
+    }
+  ],
+  "required_gate_preservation": {
+    "capture": false,
+    "production": "HOLD",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "original_capture_gap_resolved": false,
+    "continuous_global_supremum_bound": false,
+    "continuous_trajectory_error_bound": false
+  }
+}

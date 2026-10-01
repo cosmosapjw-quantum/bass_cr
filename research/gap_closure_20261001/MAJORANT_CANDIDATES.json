@@ -1,0 +1,29 @@
+{
+  "route_A": {
+    "formula": "Z_target*a/(hbar*(R^2-a^2))",
+    "domain": "R>2a, a=64 a0 for exact reference",
+    "status": "CONDITIONAL_NOT_B0_CERTIFIED",
+    "assumptions": [
+      "exact conforming finite basis",
+      "zero boundary traces",
+      "metric compatibility",
+      "isolated selected-span invariance"
+    ],
+    "proof": "majorant_analytic_20261001/CONTINUOUS_MAJORANT_ROUTE_A.md",
+    "reference_repair": "majorant_analytic_20261001/REFERENCE_SELECTOR_REPAIR.md"
+  },
+  "route_B": {
+    "formula": "continuous joined Lipschitz tents",
+    "L": "w1/s0+w0*s1/s0^2",
+    "status": "SYNTHETIC_LEVEL2_PHYSICAL_LEVEL0",
+    "missing": [
+      "whole-cell B0 S,Sprime,W,Wprime enclosures",
+      "operator/roundoff errors",
+      "metric lower bounds",
+      "analytic infinity join"
+    ],
+    "proof": "majorant_validated_20261001/CONTINUOUS_MAJORANT_RESEARCH_REPORT.md"
+  },
+  "fit_candidates": "asymptotics_20261001/ASYMPTOTIC_MODELS.json",
+  "fit_is_continuous_certificate": false
+}

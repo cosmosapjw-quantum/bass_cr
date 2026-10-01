@@ -1,0 +1,241 @@
+{
+  "schema": "BASS_R4Q_BOUNDED_INDEPENDENT_SCIENTIFIC_REVIEW_V1",
+  "date": "2026-10-01",
+  "reviewer_task": "/root/g04_validated",
+  "mode": "one_bounded_independent_pass",
+  "overall": "PASS_AFTER_CORRECTIONS",
+  "scope": [
+    "G01 conditional theorem and kernel",
+    "G07 finite eigensolver conditioning and scope",
+    "G08 constant basis covariance",
+    "G10 semantic selection and duplicate identity admission",
+    "G04 RouteA conditional compact-support theorem and RouteB compatibility",
+    "root error budget taxonomy/composition/predeclaration"
+  ],
+  "not_independently_reviewed": [
+    "reviewer-authored G04 RouteB implementation",
+    "all historical physical computation",
+    "remote backup/publication integrity",
+    "full source-database migration",
+    "G02,G03,G09,G11,G12,G13 implementation beyond inspected dependencies"
+  ],
+  "findings": [
+    {
+      "id": "SCI_REVIEW_01",
+      "severity": "MEDIUM",
+      "component": "G10",
+      "title": "Physical channel duplication admitted under changed principal_n",
+      "status": "RESOLVED",
+      "first_discriminator_result": [
+        9,
+        10,
+        12,
+        13,
+        14,
+        18
+      ],
+      "mutation": "copy actual B0 row9, retain center/l/m/energy/radial SHA, change principal_n1 to5, append at18",
+      "fix": "physical uniqueness key=(center,l,m,radial_identity), separate label validation",
+      "independent_postfix_discriminator": "PASS; ValueError: duplicate physical channel identity",
+      "author_regression": "REVIEW_REGRESSION_RED.txt then REVIEW_REGRESSION_GREEN.txt: 9 tests pass"
+    },
+    {
+      "id": "SCI_REVIEW_02",
+      "severity": "LOW",
+      "component": "ERROR_BUDGET",
+      "title": "Variation-of-constants approximate-trajectory hypothesis implicit",
+      "status": "RESOLVED",
+      "fix": "Exact yhat ODE hypothesis added; AC interpolant residual requires extra integral ||r||",
+      "verification": "corrected text inspected; no new suite required"
+    },
+    {
+      "id": "SCI_REVIEW_03",
+      "severity": "LOW",
+      "component": "G07",
+      "title": "Synthetic-only metadata scope despite archived physical point replay",
+      "status": "RESOLVED",
+      "minimum_fix": "Correct common helper and solver JSON scope to include finite stored-matrix postprocessing; no calculations need rerun"
+    },
+    {
+      "id": "SCI_REVIEW_04",
+      "severity": "LOW",
+      "component": "G07",
+      "title": "Local versus native Python environment equivalence wording",
+      "status": "RESOLVED",
+      "minimum_fix": "Only NumPy2.3.5 and SciPy1.17.0 match saved environment; local Python3.12.14 differs from saved3.13.5; clarify report"
+    },
+    {
+      "id": "SCI_REVIEW_05",
+      "severity": "LOW",
+      "component": "G04_ROUTE_B",
+      "title": "Point matrix availability text obsolete after recovery",
+      "status": "RESOLVED",
+      "fix": "Report/status/candidates distinguish recovered8 point fixtures from absent physical whole-cell/derivative/error enclosures",
+      "independence_note": "Reviewer authored RouteB; this provenance correction is not independent review of own implementation"
+    }
+  ],
+  "unresolved_mathematical_findings": 0,
+  "targeted_discriminator_executions": 2,
+  "full_suite_reruns": 0,
+  "parent_suite_records_observed": {
+    "G01": 12,
+    "G07_G08": 11,
+    "G10_before_fix": 8,
+    "G10_after_fix": 9,
+    "G04A_author": 9
+  },
+  "new_external_scientific_runs": 0,
+  "new_native_calls": 0,
+  "publication_mutations": 0,
+  "database_mutations": 0,
+  "accepted_scope_outcomes": {
+    "G01": "CLOSED conditional finite-model theorem",
+    "G07": "RESOLVED_WITH_LIMITATION; no uniform conditioning guarantee",
+    "G08": "CLOSED constant-coordinate-covariance claim",
+    "G10": "CLOSED scoped semantic selector after duplicate fix",
+    "G04_G05": "physical continuous/infinite claims remain OPEN; RouteA theorem conditional; RouteB synthetic level2 only",
+    "error_budget": "certified_total remains null; future research tail target1e-5 does not authorize native/production"
+  },
+  "file_pins": [
+    {
+      "path": "rho_integration_theorem_20261001/THEOREM.md",
+      "sha256": "56e9f38d9a15f54da3474344310645ed139f7fb08f72d5fb23b739a1c3c36645"
+    },
+    {
+      "path": "rho_integration_theorem_20261001/ASSUMPTIONS.json",
+      "sha256": "63bab64393f8d7555627c5ee7252337ea254e86455e4d7e3490094d6d2b6b2ec"
+    },
+    {
+      "path": "rho_integration_theorem_20261001/rho_theorem.py",
+      "sha256": "844f9e69a3a3b6a5fc5acffcf8b7724c342585480dce2b08a19d73370c9aa77a"
+    },
+    {
+      "path": "rho_integration_theorem_20261001/test_rho_theorem.py",
+      "sha256": "9bac9b4cb4e9c83fea6a6b237275bcda615630fcf67d1183ddb4a6f60ff2f3cd"
+    },
+    {
+      "path": "rho_integration_theorem_20261001/symbolic_checks.wls",
+      "sha256": "61e1b7f5776d13253d765c8e2b41827ab1dc634f5ed92a96b4a722b12cc76729"
+    },
+    {
+      "path": "rho_integration_theorem_20261001/VALIDATION.json",
+      "sha256": "da5bf6f97967d11de7fe25c0cafb081ec9dc0b1d3a6a1145cc2f56348bff6907"
+    },
+    {
+      "path": "rho_integration_theorem_20261001/CLAIM_UPDATE.json",
+      "sha256": "6e8999a90971e43bc0a9f73383c7cd491329e9142b1d25526bc122342a693cef"
+    },
+    {
+      "path": "numerical_methods_20261001/numerical_audit.py",
+      "sha256": "035e4e486ae4778c3b1b9dd88c1daa22c6ca176e595d666fe8c2a76b7eaccea7"
+    },
+    {
+      "path": "numerical_methods_20261001/E_RHO_SOLVER_REPORT.md",
+      "sha256": "c25ac954feeac034d4891167c9e3b06a4f5ab19d1e81ab6e447f3875ff2a5b70"
+    },
+    {
+      "path": "numerical_methods_20261001/E_COVARIANCE_REPORT.md",
+      "sha256": "f34adf2dce51e86afb1faf4a8ffb80109d39e43b3c8c10f23183c3fe7a9d36c2"
+    },
+    {
+      "path": "numerical_methods_20261001/test_generalized_rho_solver.py",
+      "sha256": "ebe8a31c44d7381cb90b7a0fe303f5c17ec8b626d326e25e2f15b5b21aafb15a"
+    },
+    {
+      "path": "numerical_methods_20261001/test_basis_covariance.py",
+      "sha256": "8735184173c05c5c98f3ff6145ef239f1545be5f8015947f03a15ac9bfa0da38"
+    },
+    {
+      "path": "numerical_methods_20261001/CLAIM_UPDATE.json",
+      "sha256": "cfbcca6e99210a7c0153c5e5c7f38c4bc2ee268f1f05526b39c0f0e269a8dc70"
+    },
+    {
+      "path": "numerical_methods_20261001/E_RHO_SOLVER_RESULTS.json",
+      "sha256": "b082a9ba1a96b53f48f95551917be64a965368d8dcc8cebcc22ec9d0930ec2e5"
+    },
+    {
+      "path": "semantic_selection_20261001/semantic_selection.py",
+      "sha256": "eb9d1ba7b921b6f37bf61b7e8ea1ac6a68e91789c5ff4af2cbefed835df6c03c"
+    },
+    {
+      "path": "semantic_selection_20261001/REPORT.md",
+      "sha256": "476e0d7bb9f7d23d15e539463a9abf15e90ae8a7461908d741eab9db58e8f3d5"
+    },
+    {
+      "path": "semantic_selection_20261001/SELECTED_SUBSPACE_SCHEMA.json",
+      "sha256": "53f353e6eaac05442a1f626586a861105a11c7bfae4569ce4345769f6c85b37d"
+    },
+    {
+      "path": "semantic_selection_20261001/test_selected_subspace_identity.py",
+      "sha256": "0f16605140f35c0108e55bf0f16128823d9711dd8ddfb9fe87a18caba933291e"
+    },
+    {
+      "path": "semantic_selection_20261001/CLAIM_UPDATE.json",
+      "sha256": "e3300e2eeabf7b748d2b4b5b988659cf32b227dc7c104b1dfc496dc7f65f43f2"
+    },
+    {
+      "path": "semantic_selection_20261001/B0_SEMANTIC_SELECTION_REGRESSION.json",
+      "sha256": "b762342777fbb5bf8693b00ad9a421fe5f5192b2b9f460b396ce1ae6696c9b2b"
+    },
+    {
+      "path": "semantic_selection_20261001/REVIEW_REGRESSION_GREEN.txt",
+      "sha256": "4d188996c09c4afa44af94527eafd7b1c6d531bf3194f485d9a178d43ebdc743"
+    },
+    {
+      "path": "semantic_selection_20261001/REVIEW_REGRESSION_RED.txt",
+      "sha256": "5810deb3c84db171c77e9f85a43aca6ac7cd1b05587c588c35ffbb29d743c041"
+    },
+    {
+      "path": "majorant_analytic_20261001/CONTINUOUS_MAJORANT_ROUTE_A.md",
+      "sha256": "48e297fd2d95b3ce179b28110abd4b492e035b9da10e5738f77e25984d76168a"
+    },
+    {
+      "path": "majorant_analytic_20261001/analytic_majorant.py",
+      "sha256": "c5eec2721a8307f3385c4ca795ee0246e827880c3cd191f37a98a61b3f310ef0"
+    },
+    {
+      "path": "majorant_analytic_20261001/test_analytic_majorant.py",
+      "sha256": "22a92f14035d63fe36868f59108b6be139fa5d5da0f8028aaac45510d90cbab0"
+    },
+    {
+      "path": "majorant_analytic_20261001/ROUTE_A_STATUS.json",
+      "sha256": "f37f068de499d440dfd40936affc589565ea1338b0167c612d93f0fb2aaad395"
+    },
+    {
+      "path": "ERROR_BUDGET_METHOD_NOTE.md",
+      "sha256": "a12be6af28a852c71fc4b394c0804428f328f99e32f40a9a038dcc6779521d06"
+    },
+    {
+      "path": "ERROR_BUDGET_SCHEMA.json",
+      "sha256": "e4a51efdc6b6e3545259522e3be74631f98e29620f6614db5a2677f379434f70"
+    },
+    {
+      "path": "ERROR_BUDGET_CURRENT_B0.json",
+      "sha256": "f6dcabeccef4bea8a6a9c3cc4891dfa9df76759ccf3691f26c7b9aa0e4541449"
+    }
+  ],
+  "claim_ceilings": {
+    "capture": false,
+    "production": "HOLD",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "original_capture_gap_resolved": false,
+    "continuous_global_supremum_bound": false,
+    "continuous_trajectory_error_bound": false
+  },
+  "project_source_pins": [
+    {
+      "repo_relative_path": "evidence/ENVIRONMENT_CURRENT_RUNTIME.json",
+      "sha256": "7348a236b454b373082f56c6c4037fec3fe19f814e663f3b48664d9191e5a153"
+    },
+    {
+      "repo_relative_path": "research/foundation_rebuild/full_operator_20260926/full_operator.py",
+      "sha256": "2976fbda4b40d9e04eff6c85519cb6b186a230709c7891296b478099285f2889"
+    },
+    {
+      "repo_relative_path": "research/foundation_rebuild/ncp_shared_research_20260928/r4p0_tail_basis_preflight_20260930/receipts/B0_B3_BASIS_REGISTRY_CONTRACT.json",
+      "sha256": "0b0e2b95dd9535cec17c5d8ab333e0d6efffb58843b4caf2fe6586a3af0abf04"
+    }
+  ],
+  "review_report_sha256": "d575e48dcc523f75c3a2fa9e0337a837f306f6004c674282d45f8869432e3f75"
+}

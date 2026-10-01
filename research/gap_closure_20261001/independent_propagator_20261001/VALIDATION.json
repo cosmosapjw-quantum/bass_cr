@@ -1,0 +1,51 @@
+{
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  },
+  "source_hashes": {
+    "metric_transport.py": "cca228bad86233fae37d7be2010942f91aaf0b5ed6ad8169a04d063332973d6c",
+    "reference_transport.py": "c205fd822012361382f128bd31597ffa9a2c8a77eae0a34cd970dce9eab222c4"
+  },
+  "commands": [
+    {
+      "command": "python -m unittest discover -s . -p test_independent_propagator.py -v",
+      "stage": "RED",
+      "exit_code": 1,
+      "output": "TDD_RED.txt",
+      "failure": "missing new module"
+    },
+    {
+      "command": "python -m unittest discover -s . -p test_independent_propagator.py -v",
+      "stage": "INTERMEDIATE",
+      "exit_code": 1,
+      "output": "TDD_INTERMEDIATE_FAILURE.txt",
+      "failure": "64-step CF4 state error 2.352867e-9 exceeds predeclared synthetic2e-9",
+      "repair": "added128-step point; threshold unchanged"
+    },
+    {
+      "command": "python -m unittest discover -s . -p test_independent_propagator.py -v",
+      "stage": "GREEN",
+      "exit_code": 0,
+      "tests": 6,
+      "output": "TDD_GREEN.txt"
+    },
+    {
+      "command": "python independent_propagator.py",
+      "stage": "BENCHMARK",
+      "exit_code": 0,
+      "output": "E_INDEPENDENT_PROPAGATOR_RESULTS.json"
+    }
+  ],
+  "test_count": 6,
+  "new_external_calls": 0,
+  "new_native_calls": 0,
+  "old_authorization_consumed": false,
+  "limitations": [
+    "synthetic float64 evidence only",
+    "no validated roundoff enclosure",
+    "no physical production-tolerance comparison",
+    "historical production implementations unchanged"
+  ]
+}

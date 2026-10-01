@@ -1,0 +1,98 @@
+{
+  "review_scope": [
+    "G09 synthetic rank-policy/reference",
+    "G12 whitening/CF4/synthetic method comparison"
+  ],
+  "excluded": [
+    "G01",
+    "G07",
+    "G08",
+    "G10",
+    "native or physical runs",
+    "repeated full suites"
+  ],
+  "status": "ACCEPT_SYNTHETIC_CLAIMS_WITH_STATED_LIMITATIONS_REVIEW_FINDING_REPAIRED",
+  "reviewed_files": [
+    {
+      "path": "independent_propagator_20261001/WHITENING_DERIVATION.md",
+      "sha256": "a7f03bbae25711a1581ad3c9fa993bab7aca16e157af55760f144470e7c071e1"
+    },
+    {
+      "path": "independent_propagator_20261001/independent_propagator.py",
+      "sha256": "3a7c845bccd8ab0ae13392e51a940425feb7ddee14f0f9eca4c5cf15a404eab6"
+    },
+    {
+      "path": "independent_propagator_20261001/test_independent_propagator.py",
+      "sha256": "abcaaf1090ff13309f61d2b9d5cace34890f920a88553f044edeb15a34a64169"
+    },
+    {
+      "path": "independent_propagator_20261001/E_INDEPENDENT_PROPAGATOR_RESULTS.json",
+      "sha256": "c59807b107f2f3306986d6bfc62ad7991d9b11c7e4c3f12a05a10f1346b7b171"
+    },
+    {
+      "path": "independent_propagator_20261001/PHYSICAL_PARITY_CONTRACT.json",
+      "sha256": "048c4420bc906da28e476d06d421f5284316513a638773493433c225384f3a3f"
+    },
+    {
+      "path": "rank_policy_20261001/rank_policy.py",
+      "sha256": "9209012c8153f4a6729dd4c887d8cc595d0d46532fa39533fef29609fbfd65ed"
+    },
+    {
+      "path": "rank_policy_20261001/test_rank_policy.py",
+      "sha256": "86c445c1caf9c2a749a3d8ea9c0b657e953b845f2b4b24cbddfc2d6db33f5e6e"
+    },
+    {
+      "path": "rank_policy_20261001/RANK_POLICY_RESULTS.json",
+      "sha256": "1b7142a842f31f483aabd662b311cc9297dfe4f15742d482e2ff2180ba717e3f"
+    },
+    {
+      "path": "rank_policy_20261001/RANK_POLICY_REPORT.md",
+      "sha256": "1e56bed2432de34dde39aa8d7844a5344340fa288ffdb82babc49a3e66e47516"
+    }
+  ],
+  "findings": [
+    {
+      "id": "G12-NORMALIZATION-01",
+      "priority": "P2",
+      "status": "RESOLVED_IN_PHYSICAL_CONTRACT",
+      "scope": "Unbound physical parity contract only; current normalized synthetic benchmark remains valid",
+      "first_artifact": "independent_propagator_20261001/PHYSICAL_PARITY_CONTRACT.json required_inputs/provider_interface",
+      "issue": "New CF4 preserves supplied norm while legacy midpoint and DOP853 normalize c0; identical source bytes alone need not mean identical actual initial-value problems.",
+      "evidence": "INDEPENDENT_NUMERICAL_REVIEW_DISCRIMINATOR.json",
+      "minimum_repair": "Bind common initial-state normalization admission/provenance and assert actual initial norms/states match; no hidden per-method renormalization.",
+      "original_status": "REPORTED_TO_IMPLEMENTATION_OWNER",
+      "remaining_boundary": "FUTURE_RUNTIME_ENFORCEMENT_REQUIRED",
+      "repair": "PHYSICAL_PARITY_CONTRACT.common_initial_value_contract now binds original/common/actual method initialization norms and states, normalization factor, hashes, predeclared discrepancy budget and contribution to parity error chain; null budget prevents launch.",
+      "repair_verification": "Directly read amended contract and report. Historical solvers and synthetic code unchanged; no test-suite rerun. Physical admission implementation remains in existing open G12 scope."
+    }
+  ],
+  "G09": "No actionable defect within declared synthetic reference scope; physical basis adoption remains open.",
+  "G12": "Derivation, coefficient orientation, normalization-aware synthetic benchmark and saved convergence claims consistent.",
+  "saved_test_counts_read_not_rerun": {
+    "G09": 8,
+    "G12": 6
+  },
+  "saved_record_counts": {
+    "G09_decisions": 20,
+    "G12_midpoint_ladder": 5,
+    "G12_CF4_ladder": 5,
+    "G12_DOP853_RHS": 371,
+    "G12_DOP853_provider_queries": 397
+  },
+  "review_execution": {
+    "focused_discriminators": 1,
+    "full_suites_rerun": 0,
+    "new_native_calls": 0,
+    "new_external_runs": 0
+  },
+  "claim_ceilings_promoted": false,
+  "post_review_resolution": {
+    "finding": "G12 initial normalization mismatch",
+    "status": "RESOLVED_BY_CONTRACT_CORRECTION",
+    "verified_by": "independent g07_g08_numerics reviewer",
+    "contract_sha256": "048c4420bc906da28e476d06d421f5284316513a638773493433c225384f3a3f",
+    "future_runtime_enforcement": "REQUIRED_NOT_IMPLEMENTED",
+    "scientific_effect": "Synthetic unit-norm results unchanged; physical G12 stays open",
+    "verification": "JSON assertions and source inspection; no suite/native replay"
+  }
+}

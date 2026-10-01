@@ -791,7 +791,7 @@
     },
     {
       "claim_id": "G01_RESEARCH_20261001",
-      "text": "Conditional exact finite moving-basis theorem and small synthetic audit kernel",
+      "text": "fixed-J Pi is the S-orthogonal coefficient projector; Q is its Hermitian quadratic form; metric norm conservation under Hermitian H and Sdot=D+D†; Pdot=c†Wc and sharp instantaneous |Pdot|<=N rho; finite-interval |Delta P|<=N integral rho; rho in L1 tail implies existence of P_infinity and remainder inequality; constant nonsingular basis covariance with consistent J transformation; dimension and normalization audit",
       "status": [
         "DERIVED",
         "SYMBOLICALLY_VERIFIED",
@@ -1014,6 +1014,246 @@
         "basis completeness"
       ],
       "gap_status": "CLOSED"
+    },
+    {
+      "claim_id": "G03_RESEARCH_20261001",
+      "text": "Actual B0 finite-FEM overlap asymptotics differs from infinite-support AO idealization.; Conditional smooth dominant-branch parity removes C3; an exact degenerate cusp counterexample proves symmetry alone insufficient.; M1-M4 signed fits, leave-one-radius-out errors and outer-window sensitivity computed from exact frozen rows.; Two-query signed48 discriminator specified with frozen predictions and stops.; Separate strict two-query/22-attempt G03 producer and create-only per-resolution spectral return implemented and synthetically tested; no native evaluation performed.",
+      "status": [
+        "LITERATURE_SUPPORTED",
+        "DERIVED",
+        "SYMBOLICALLY_VERIFIED",
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "scope": "B0 finite-model research only",
+      "assumptions": [],
+      "sources": [
+        "RungeMicha1996",
+        "Toshima1999",
+        "ThorsonDelos1978",
+        "Dollard1964"
+      ],
+      "project_evidence": [
+        "asymptotics_20261001/ASYMPTOTIC_MODELS.json",
+        "asymptotics_20261001/ASYMPTOTIC_REPORT.md",
+        "asymptotics_20261001/CLAIM_UPDATE.json",
+        "asymptotics_20261001/G03_RUNTIME.json",
+        "asymptotics_20261001/MINIMUM_STATIC_DISCRIMINATOR_CONTRACT.json",
+        "asymptotics_20261001/PARITY_SYMBOLIC_CHECK.json",
+        "asymptotics_20261001/RETURN_TDD_RED.log",
+        "asymptotics_20261001/SOURCE_EVIDENCE.json",
+        "asymptotics_20261001/TDD_RED.log",
+        "asymptotics_20261001/TEST_RESULTS.log",
+        "asymptotics_20261001/asymptotic_models.py",
+        "asymptotics_20261001/parity_symbolic_checks.py",
+        "asymptotics_20261001/test_asymptotic_models.py",
+        "asymptotics_20261001/write_research_records.py"
+      ],
+      "does_not_imply": [
+        "Unique asymptotic model or leading coefficient not empirically identified.",
+        "Pure R^-2 law for actual stored model not proved; isolated-generator residual may yield asymptotic floor.",
+        "Continuous majorant, infinite-tail certificate and propagated state probabilities not available."
+      ],
+      "gap_status": "RESOLVED_WITH_LIMITATION"
+    },
+    {
+      "claim_id": "G09_RESEARCH_20261001",
+      "text": "Formal no-shift rank policy with new basis/hash/operator/temporal/semantic requirements.; Canonical and pivoted-Cholesky reference algorithms with SVD/QR comparison and PSD failure behavior.; Predeclared cutoff sweep quantifies rank/subspace/rho/observable/state-norm changes.; Counterexamples establish that selected-observable plateau and post-whitening condition number alone are insufficient.",
+      "status": [
+        "DERIVED",
+        "LITERATURE_SUPPORTED",
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "scope": "B0 finite-model research only",
+      "assumptions": [],
+      "sources": [
+        "Lehtola2019"
+      ],
+      "project_evidence": [
+        "rank_policy_20261001/CLAIM_UPDATE.json",
+        "rank_policy_20261001/RANK_POLICY.json",
+        "rank_policy_20261001/RANK_POLICY_REPORT.md",
+        "rank_policy_20261001/RANK_POLICY_RESULTS.json",
+        "rank_policy_20261001/TDD_GREEN.log",
+        "rank_policy_20261001/TDD_RED.log",
+        "rank_policy_20261001/rank_policy.py",
+        "rank_policy_20261001/test_rank_policy.py"
+      ],
+      "does_not_imply": [
+        "Physical B1/B2/B3 reduction stability and dynamical qualification.",
+        "Any selected physical cutoff or enlarged-basis semantic selector.",
+        "Certified positive semidefiniteness or rigorous truncation error enclosure."
+      ],
+      "gap_status": "RESOLVED_WITH_LIMITATION"
+    },
+    {
+      "claim_id": "G12_RESEARCH_20261001",
+      "text": "Cholesky derivative X=upper(E)+diag(E)/2 and metric-compatible anti-Hermitian generator derived; CF4 small reference implemented with correct node/exponential ordering; Synthetic noncommuting trajectory parity checked against exact solution and existing direct DOP853; convergence orders measured",
+      "status": [
+        "DERIVED",
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "scope": "B0 finite-model research only",
+      "assumptions": [],
+      "sources": [],
+      "project_evidence": [
+        "independent_propagator_20261001/CLAIM_UPDATE.json",
+        "independent_propagator_20261001/E_INDEPENDENT_PROPAGATOR_REPORT.md",
+        "independent_propagator_20261001/E_INDEPENDENT_PROPAGATOR_RESULTS.json",
+        "independent_propagator_20261001/PHYSICAL_PARITY_CONTRACT.json",
+        "independent_propagator_20261001/TDD_GREEN.txt",
+        "independent_propagator_20261001/TDD_INTERMEDIATE_FAILURE.txt",
+        "independent_propagator_20261001/TDD_RED.txt",
+        "independent_propagator_20261001/VALIDATION.json",
+        "independent_propagator_20261001/WHITENING_DERIVATION.md",
+        "independent_propagator_20261001/independent_propagator.py",
+        "independent_propagator_20261001/test_independent_propagator.py"
+      ],
+      "does_not_imply": [
+        "Physical B0 independent-family agreement to tighter-than-production tolerance",
+        "Qualified full time-dependent operator provider and independently validated Sdot at new stages",
+        "Predeclared parity-budget composition"
+      ],
+      "gap_status": "RESOLVED_WITH_LIMITATION"
+    },
+    {
+      "claim_id": "G02_RESEARCH_20261001",
+      "text": "S and D have different formula paths but share geometry and quadrature; finite differences are a useful independent derivative check; Synthetic shrinking-h convergence and correlated-error counterexamples validated; Frozen finite-difference producer, exact source/input/native admission, global attempt budget, resource supervisor and create-only canonical return implemented; Six historical signed centers are qualified hash-verified reuse; +12 lacks paired JSON and is not reused",
+      "status": [
+        "DERIVED",
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED",
+        "BLOCKED"
+      ],
+      "scope": "B0 static derivative validation only; no transport or inherited temporal certificate",
+      "assumptions": [],
+      "sources": [],
+      "project_evidence": [
+        "static_validation_20261001/E_SDOT_FD_REPORT.md",
+        "static_validation_20261001/E_SDOT_FD_EXECUTION_CONTRACT.json",
+        "static_validation_20261001/E_SDOT_FD_RESULTS.json",
+        "static_validation_20261001/REUSE_MANIFEST.json",
+        "static_validation_20261001/STATIC_QUALIFICATION_REPORT.md",
+        "static_validation_20261001/EXECUTOR_VALIDATION.json",
+        "static_validation_20261001/executor/README.md",
+        "EXECUTOR_INDEPENDENT_REVIEW.json"
+      ],
+      "does_not_imply": [
+        "No new physical finite-difference samples; actual B0 Sdot versus D+Ddagger independence/convergence remains unverified",
+        "No rigorous static operator truncation-error bound from adjacent agreement"
+      ],
+      "gap_status": "BLOCKED"
+    },
+    {
+      "claim_id": "G04_RESEARCH_20261001",
+      "text": "Cancellation-aware single off-diagonal rate norm derived; Conditional compact-support majorant Z*a/[hbar*(R²-a²)] for an exact conforming isolated-invariant reference; Residual/gap reference-selector mapping bound and original-observable nonconvergence counterexample derived; Noncommuting inverse-square-root derivative bound derived; Exact-rational continuum finite-interval Level2 synthetic certificate implemented",
+      "status": [
+        "DERIVED",
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "scope": "Current finite B0 selected-span research; no physical gate promotion",
+      "assumptions": [],
+      "sources": [
+        "Mathias1997"
+      ],
+      "project_evidence": [
+        "majorant_analytic_20261001/CONTINUOUS_MAJORANT_ROUTE_A.md",
+        "majorant_analytic_20261001/REFERENCE_SELECTOR_REPAIR.md",
+        "majorant_analytic_20261001/ARCHIVED_RADIAL_AUDIT.json",
+        "majorant_validated_20261001/CONTINUOUS_MAJORANT_RESEARCH_REPORT.md",
+        "majorant_validated_20261001/SYNTHETIC_CONTINUUM_CERTIFICATE.json"
+      ],
+      "does_not_imply": [
+        "No actual B0 all-z majorant",
+        "Literal binary coefficient conformance and isolated invariance not exact; reference interpretation/mapping not certified",
+        "Finite bridge operator/derivative enclosures absent"
+      ],
+      "gap_status": "RESOLVED_WITH_LIMITATION"
+    },
+    {
+      "claim_id": "G05_RESEARCH_20261001",
+      "text": "Stable conditional p2 and compact-support one-sided integral formulas implemented; Exact rational p2 enclosure demonstrator verified",
+      "status": [
+        "DERIVED",
+        "IMPLEMENTATION_VERIFIED",
+        "UNRESOLVED"
+      ],
+      "scope": "Current finite B0 selected-span research; no physical gate promotion",
+      "assumptions": [],
+      "sources": [],
+      "project_evidence": [
+        "majorant_validated_20261001/validated_majorant.py",
+        "majorant_analytic_20261001/analytic_majorant.py",
+        "ERROR_BUDGET_CURRENT_B0.json"
+      ],
+      "does_not_imply": [
+        "No physical continuous majorant with validated finite bridge",
+        "No physical infinite-tail certificate below predeclared1e-5 total target"
+      ],
+      "gap_status": "UNRESOLVED"
+    },
+    {
+      "claim_id": "G06_RESEARCH_20261001",
+      "text": "Actual-state tightness unavailable outside±12; static queries do not provide c(t)",
+      "status": [
+        "UNRESOLVED"
+      ],
+      "scope": "Current finite B0 selected-span research; no physical gate promotion",
+      "assumptions": [],
+      "sources": [],
+      "project_evidence": [
+        "ERROR_BUDGET_METHOD_NOTE.md"
+      ],
+      "does_not_imply": [
+        "Actual-state tightness unavailable outside±12; static queries do not provide c(t)"
+      ],
+      "gap_status": "UNRESOLVED"
+    },
+    {
+      "claim_id": "G11_RESEARCH_20261001",
+      "text": "Formal common-observable error-composition rule and future finite-window acceptance criteria documented",
+      "status": [
+        "DERIVED",
+        "UNRESOLVED"
+      ],
+      "scope": "Current finite B0 selected-span research; no physical gate promotion",
+      "assumptions": [],
+      "sources": [],
+      "project_evidence": [
+        "ERROR_BUDGET_SCHEMA.json",
+        "ERROR_BUDGET_CURRENT_B0.json",
+        "ERROR_BUDGET_METHOD_NOTE.md"
+      ],
+      "does_not_imply": [
+        "Operator absolute error, nested-window selectedobservable evidence and certified tail are absent"
+      ],
+      "gap_status": "UNRESOLVED"
+    },
+    {
+      "claim_id": "G13_RESEARCH_20261001",
+      "text": "Actual registry confirms18/46/92/124 counts and current backend/radial/Gram prerequisites",
+      "status": [
+        "IMPLEMENTATION_VERIFIED",
+        "UNRESOLVED"
+      ],
+      "scope": "Current finite B0 selected-span research; no physical gate promotion",
+      "assumptions": [],
+      "sources": [],
+      "project_evidence": [
+        "rank_policy_20261001/RANK_POLICY_REPORT.md",
+        "semantic_selection_20261001/SELECTED_SUBSPACE_SCHEMA.json",
+        "ERROR_BUDGET_METHOD_NOTE.md"
+      ],
+      "does_not_imply": [
+        "B1-B3 higher-l backend UNSUPPORTED_L_GT_1",
+        "B1-B3 radial identities FUTURE_CONSTRUCTION_AND_QUALIFICATION_REQUIRED",
+        "Actual new Gram matrices NOT_MEASURED",
+        "G04/G05/G11 notclosed"
+      ],
+      "gap_status": "UNRESOLVED"
     }
   ]
 }

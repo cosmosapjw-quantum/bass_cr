@@ -257,7 +257,7 @@ def run_audits():
         except (ValueError,np.linalg.LinAlgError) as exc:
             item.update({'status':'REJECTED','error_type':type(exc).__name__,'error':str(exc)})
         whole_probe.append(item)
-    common={'schema_version':1,'scope':'FINITE_SYNTHETIC_MATRICES_ONLY',
+    common={'schema_version':1,'scope':'FINITE_MATRIX_RESEARCH_AUDIT_NO_NEW_NATIVE_RUNS',
             'python':sys.version,'numpy':np.__version__,'scipy':scipy.__version__,
             'source_probe_path':str(PROBE_PATH.relative_to(REPO)),
             'source_probe_sha256':hashlib.sha256(PROBE_PATH.read_bytes()).hexdigest(),

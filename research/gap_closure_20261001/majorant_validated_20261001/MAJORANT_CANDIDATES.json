@@ -1,0 +1,48 @@
+{
+  "schema": "G04_ROUTE_B_CANDIDATES_V1",
+  "candidates": [
+    {
+      "name": "exact_rational_interval_finite_envelope",
+      "level": 2,
+      "status": "IMPLEMENTATION_VERIFIED",
+      "verified_scope": "synthetic_rational_family_v1",
+      "domain": [
+        "0",
+        "1"
+      ],
+      "certificate": "SYNTHETIC_CONTINUUM_CERTIFICATE.json",
+      "integral_upper_exact": "15547803128543614211035287734184427/42962647902572398675361240029593600",
+      "integral_upper_display_only": 0.361891174952759,
+      "physical_b0": false
+    },
+    {
+      "name": "B0_validated_finite_cells_plus_finite_support_multipole_remainder",
+      "target_level": 3,
+      "status": "UNRESOLVED",
+      "finite_cells": "separate signed covers of Z to Zstar",
+      "join_condition": "Route A conditional support bound Z_target*a/[hbar*(R^2-a^2)] at R>128 a0, once exact conforming reference model and isolated-span invariance are established; archived coefficient/reference mapping remains open",
+      "required_inputs": [
+        "raw pinned center S,W for chosen finite cells (eight existing signed16,20,24,32 point fixtures recovered)",
+        "validated whole-cell S,Sprime,W,Wprime enclosures",
+        "interval SPD proof",
+        "center spectrum including operator and arithmetic errors",
+        "analytic infinity bound with certified coefficient and valid domain"
+      ],
+      "not_sufficient": [
+        "more unbounded-error static samples",
+        "finite-difference slopes",
+        "successful R^-2 regression",
+        "nominal exact-rational conversion of floating matrices"
+      ]
+    },
+    {
+      "name": "conditional_p2_integral_primitive",
+      "status": "IMPLEMENTATION_VERIFIED",
+      "domain": "C>=0, v>0, Z>0, 0<=b<=Z",
+      "formula": "C/(v*b)*atan(b/Z), b>0; C/(v*Z), b=0",
+      "arithmetic": "exact rational alternating series enclosure",
+      "physical_b0": false,
+      "does_not_prove": "rho <= C/(b^2+z^2)"
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "gap_id": "G09",
+  "database_gap_id": "REPORT_GAP_09",
+  "status_before": "REPORTED_RECOMMENDATION_NOT_VALIDATED",
+  "status_after": "RESOLVED_WITH_LIMITATION",
+  "closure_label": "POLICY_AND_SYNTHETIC_IMPLEMENTATION_VERIFIED_PHYSICAL_ADOPTION_OPEN",
+  "evidence_status": [
+    "DERIVED",
+    "LITERATURE_SUPPORTED",
+    "NUMERICALLY_CHECKED",
+    "IMPLEMENTATION_VERIFIED"
+  ],
+  "original_database_row": {
+    "gap_id": "REPORT_GAP_09",
+    "line_number": 1171,
+    "status": "REPORTED_RECOMMENDATION_NOT_VALIDATED",
+    "verbatim": "| **P1** | No formal policy for actual rank loss in enlarged basis | Numerics | Compare pivoted Cholesky and canonical spectral truncation; store rank decisions as new basis identities | **1\u20133 days** before real B1 studies | Observable/subspace stability over a nontrivial cutoff interval |"
+  },
+  "claims_closed": [
+    "Formal no-shift rank policy with new basis/hash/operator/temporal/semantic requirements.",
+    "Canonical and pivoted-Cholesky reference algorithms with SVD/QR comparison and PSD failure behavior.",
+    "Predeclared cutoff sweep quantifies rank/subspace/rho/observable/state-norm changes.",
+    "Counterexamples establish that selected-observable plateau and post-whitening condition number alone are insufficient."
+  ],
+  "claims_open": [
+    "Physical B1/B2/B3 reduction stability and dynamical qualification.",
+    "Any selected physical cutoff or enlarged-basis semantic selector.",
+    "Certified positive semidefiniteness or rigorous truncation error enclosure."
+  ],
+  "blocker_class": "IMPLEMENTATION_BLOCKER",
+  "first_blocking_artifact": "B0_B3_BASIS_REGISTRY_CONTRACT.json: B1/B2/B3 frozen_native_backend_status=UNSUPPORTED_L_GT_1; full_two_center_gram_status=NOT_MEASURED; radial identities unconstructed",
+  "next_minimum_action": "After prerequisite tail/window gates, support and pin actual enlarged basis/radial identities, qualify physical matrices and execute the declared cutoff study with predeclared physical tolerances and a new semantic selector.",
+  "source_ids": [
+    "Lehtola2019"
+  ],
+  "source_provenance": {
+    "work_id": "Lehtola2019",
+    "source_id": "Lehtola2019",
+    "title": "Curing basis set overcompleteness with pivoted Cholesky decompositions",
+    "authors": "Susi Lehtola",
+    "doi": "10.1063/1.5139948",
+    "arxiv": "1911.10372",
+    "publication_year": 2019,
+    "fulltext_status": "LEGACY_FULLTEXT_VERIFIED_REUSED",
+    "version_class": "AUTHORITATIVE_PREPRINT",
+    "fulltext_format": "PDF",
+    "cited_version_id": "Lehtola2019:cited",
+    "selected_version_id": "Lehtola2019:available",
+    "latest_version": "NOT_RECHECKED_V1_SCOPE",
+    "selection_reason": "Reuse already acquired pinned v1 file; newest revision not rechecked under hard scope",
+    "material_change_status": "NOT_REASSESSED_EXISTING_FILE",
+    "manual_access": null,
+    "notes": "Original v1 metadata and rows remain in sources; current recovery state is in works.",
+    "used_version": "arXiv:1911.10372v2",
+    "used_pdf_pages": [
+      1,
+      2
+    ],
+    "used_equations": [
+      "(1)",
+      "(2)",
+      "(3)"
+    ],
+    "pdf_sha256": "cb123261820c271299e0e0c9e7efb07391c86f2b21f344d0fadbcd70c074688d",
+    "scope": "Canonical orthogonalization and pivoted Cholesky method context; no BASS_CR physical certificate"
+  },
+  "artifacts": [
+    "RANK_POLICY_REPORT.md",
+    "RANK_POLICY.json",
+    "RANK_POLICY_RESULTS.json",
+    "rank_policy.py",
+    "test_rank_policy.py",
+    "TDD_RED.log",
+    "TDD_GREEN.log"
+  ],
+  "tests": {
+    "command": "python -m unittest discover -s research/gap_closure_20261001/rank_policy_20261001 -p 'test_*.py' -v",
+    "passed": 8,
+    "failed": 0,
+    "exit_code": 0,
+    "tdd_initial_red_exit_code": 1
+  },
+  "new_native_calls": 0,
+  "new_external_runs": 0,
+  "authorizations_consumed": 0,
+  "physical_basis_changed": false,
+  "production_source_modified": false,
+  "claim_ceilings": {
+    "capture": false,
+    "production": "HOLD",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "original_capture_gap_resolved": false,
+    "continuous_global_supremum_bound": false,
+    "continuous_trajectory_error_bound": false
+  },
+  "claim_updates": [
+    {
+      "claim_id": "G09_EXPLICIT_RANK_POLICY_REFERENCE",
+      "text": "Canonical eigentruncation and pivoted-Cholesky selection can be audited with explicit cutoffs, new basis identities and no shift; eight local tests pass.",
+      "status": [
+        "DERIVED",
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "scope": "Two six-dimensional synthetic complex metrics,20 method/cutoff decisions",
+      "assumptions": [
+        "Frozen normalization convention",
+        "Declared relative thresholds",
+        "Numerical PSD screen is not certified positivity",
+        "New semantic selector required after reduction"
+      ],
+      "sources": [
+        "Lehtola2019:available"
+      ],
+      "project_evidence": [
+        "RANK_POLICY_RESULTS.json",
+        "TDD_GREEN.log",
+        "RANK_POLICY.json"
+      ],
+      "does_not_imply": [
+        "Physical B1/B2/B3 rank reduction approved",
+        "Basis completeness",
+        "Inherited operator or temporal certificates"
+      ]
+    },
+    {
+      "claim_id": "G09_CUTOFF_PLATEAU_COUNTEREXAMPLE",
+      "text": "The declared synthetic rank-four plateau has tiny ordinary selected-probability drift but substantial rho drift and loss of a unit weak-direction state.",
+      "status": [
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "scope": "Seed909 near-SPD synthetic finite model",
+      "assumptions": [
+        "Projected selected span is an audit-only convention",
+        "No renormalization of projected states"
+      ],
+      "sources": [],
+      "project_evidence": [
+        "RANK_POLICY_RESULTS.json",
+        "RANK_POLICY_REPORT.md"
+      ],
+      "does_not_imply": [
+        "Actual B0 or B1 has this error",
+        "All cutoffs fail",
+        "One universal physical cutoff"
+      ]
+    }
+  ]
+}

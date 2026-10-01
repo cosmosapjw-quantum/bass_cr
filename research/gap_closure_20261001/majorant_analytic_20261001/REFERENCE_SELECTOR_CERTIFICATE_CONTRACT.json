@@ -1,0 +1,62 @@
+{
+  "schema": "BASS_CONDITIONAL_REFERENCE_SELECTOR_CERTIFICATE_V1",
+  "status": "CONTRACT_ONLY_NO_NEW_SELECTOR_CREATED",
+  "gap_ids": [
+    "G04",
+    "G05",
+    "G10"
+  ],
+  "target": "Named exact isolated negative spectral reference observable and explicit bounded mapping from current selected observable",
+  "forbidden_inferences": [
+    "original fixed-J probability has a limit",
+    "old B0 temporal certificate applies to a changed model",
+    "floating residual is rigorous upper bound",
+    "reference selector identity equals original index selector"
+  ],
+  "required_inputs": {
+    "exact_reference_definition": null,
+    "physical_hilbert_embedding_identity": null,
+    "original_basis_identity": "f23267b7214a5e3918866dcece5cb61c79a891578f4dda69dee5a762eb02983a",
+    "new_reference_basis_identity_if_changed": null,
+    "original_selected_projectile_indices": [
+      9,
+      10,
+      12,
+      13,
+      14
+    ],
+    "new_reference_selector_identity": null,
+    "projectile_selected_rank": 5,
+    "projectile_complement_rank": 4,
+    "metric_lower_bound_validated": null,
+    "selected_block_negative_margin_a_lower": null,
+    "H_complement_block_positive_margin_d_lower": null,
+    "offblock_residual_norm_r_upper": null,
+    "original_to_reference_projector_mapping_eta_P_upper": null,
+    "validated_enclosure_method_and_pins": null,
+    "same_state_dynamics_comparison_or_extra_error_certificate": null,
+    "finite_bridge_certificate": null,
+    "infinite_remainder_certificate": null
+  },
+  "conditional_output": {
+    "projector_distance_bound": "min(1,r_upper/(a_lower+d_lower))",
+    "physical_projector_distance_bound": "min(1,eta_P_upper+projector_distance_bound)",
+    "finite_observable_to_reference_asymptote": "N*(physical_projector_distance_bound+reference_tail_integral)",
+    "old_observable_two_time_change": "N*(2*physical_projector_distance_bound+reference_rate_integral_between_times)",
+    "old_observable_limit_exists": false
+  },
+  "identity_requirements": [
+    "new immutable selector name and hash",
+    "no silent overwriting of original J or accepted B0 artifacts",
+    "new operator/temporal qualification if model or basis changes",
+    "independent semantics/rank verification before adoption"
+  ],
+  "research_budget_reference": "../ERROR_BUDGET_CURRENT_B0.json",
+  "research_tail_total_probability_target": 1e-05,
+  "research_tail_per_side_probability_target": 5e-06,
+  "physical_delta_value": null,
+  "new_native_calls": 0,
+  "new_external_runs": 0,
+  "new_physical_queries": 0,
+  "authorization_consumed": null
+}

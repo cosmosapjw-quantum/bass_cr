@@ -1,0 +1,20 @@
+{
+  "schema": "G04_ROUTE_B_ASSUMPTIONS_V1",
+  "scope": "finite interval of z, fixed basis representation",
+  "matrix_class": "Hermitian absolutely continuous S,W; current code implements exact real-symmetric rational subset",
+  "derivative_variable": "z, not t",
+  "s0": "strict whole-cell lower eigenvalue bound",
+  "s1": "whole-cell spectral norm bound for dS/dz",
+  "w0": "whole-cell spectral norm bound for W",
+  "w1": "whole-cell spectral norm bound for dW/dz",
+  "center": "certified upper endpoint enclosing all absolute generalized eigenvalues",
+  "physical_input_error": "must be included in all interval bounds; exact rational nominalization does not eliminate physical operator error",
+  "units": {
+    "rho": "atomic_time^-1",
+    "L": "atomic_time^-1*a0^-1",
+    "integral_dz": "a0*atomic_time^-1",
+    "integral_dt": "dimensionless, after division by positive velocity"
+  },
+  "infinity_remainder": "separate analytic certificate on same signed side, same basis, connected domain",
+  "tail_epsilon": "must be predeclared before physical closure"
+}

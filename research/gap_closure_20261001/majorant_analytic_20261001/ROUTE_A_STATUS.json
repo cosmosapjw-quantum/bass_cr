@@ -1,0 +1,149 @@
+{
+  "schema": "BASS_G04_ANALYTIC_MAJORANT_ROUTE_A_V1",
+  "gap_id": "G04",
+  "database_gap_id": "REPORT_GAP_04",
+  "status_before": "REPORTED_RECOMMENDATION_NOT_VALIDATED",
+  "status_after": "UNRESOLVED",
+  "evidence_status": [
+    "DERIVED",
+    "NUMERICALLY_CHECKED"
+  ],
+  "base_commit": "432010f2afd5305ca63933056f50584c01e4e524",
+  "physical_certificate_level": 0,
+  "source_pins": {
+    "research/foundation_rebuild/full_operator_20260926/full_operator.py": "2976fbda4b40d9e04eff6c85519cb6b186a230709c7891296b478099285f2889",
+    "research/foundation_rebuild/src/bass_foundations/radial_basis.py": "5286879e45a30e2c6ddb7c48bab14edb58598de79ce2c201d324e491ef54857d",
+    "research/foundation_rebuild/src/bass_foundations/two_center.py": "aebd3a5bb78857ccaf6957e4194077ac9b6d500e0417194aa3d9a632a2db2570",
+    "research/foundation_rebuild/ncp_shared_research_20260928/r4p0_tail_basis_preflight_20260930/receipts/B0_B3_BASIS_REGISTRY_CONTRACT.json": "0b0e2b95dd9535cec17c5d8ab333e0d6efffb58843b4caf2fe6586a3af0abf04",
+    "research/foundation_rebuild/ncp_shared_research_20260928/r4p0a_b0_static_tail_executor_20260930/projector_rate_probe.py": "022cade99f705493043ef98ec86bb5fb9aefb22f079ca5471874d23a05c1fb27"
+  },
+  "closed_subclaims": [
+    {
+      "id": "FIXED_SELECTOR_OFFDIAGONAL_RATE",
+      "statement": "rho equals the metric-whitened selected-to-complement generator block norm; W=F+Fdagger",
+      "status": "DERIVED"
+    },
+    {
+      "id": "CONDITIONAL_COMPACT_SUPPORT_COULOMB_MAJORANT",
+      "statement": "rho<=Z_target*a/(hbar*(R^2-a^2)) for R>2a under exact invariant isolated-span, conforming FEM and compatibility assumptions",
+      "status": "DERIVED"
+    },
+    {
+      "id": "CONDITIONAL_TAIL_INTEGRALS",
+      "statement": "Stable exact analytic integrals for conditional compact-support and p=2 envelopes",
+      "status": "DERIVED"
+    },
+    {
+      "id": "CONDITIONAL_INVARIANT_SELECTOR_MAPPING",
+      "statement": "For exact whitened isolated A<=-aI, H_complement_block>=dI and offblock residual<=r, equal-rank negative spectral projector satisfies ||P-E||<=min(1,r/(a+d)); observable discrepancy<=N delta uniformly",
+      "status": "DERIVED"
+    }
+  ],
+  "not_established": [
+    "exact invariant reference mapping for archived B0 binary coefficients",
+    "certified finite bridge from tail cutoff to disjoint support",
+    "continuous project rho majorant",
+    "certified numerical infinite-tail bound"
+  ],
+  "blocker_classes": [
+    "NUMERICAL_METHOD_BLOCKER",
+    "IMPLEMENTATION_BLOCKER"
+  ],
+  "first_failing_artifact": "ARCHIVED_RADIAL_AUDIT.json",
+  "minimum_missing_inputs": [
+    {
+      "name": "reference_model_contract",
+      "requirement": "exact conforming radial representation, support a, immutable basis/selector identity, compatible derivative, and proof of exact isolated invariant subspace or explicit new model requalification"
+    },
+    {
+      "name": "archived_reference_mapping",
+      "requirement": "validated operator/model interpretation; do not absorb a constant residual into an infinite L1 tail"
+    },
+    {
+      "name": "finite_bridge_certificate",
+      "requirement": "validated lower metric eigenbound and operator/derivative interval bounds on every cell from requested cutoff to Zstar with sqrt(Zstar^2+b^2)>128a0"
+    },
+    {
+      "name": "tail_budget",
+      "requirement": "Existing root target1e-5 total (5e-6 per side) must include finite bridge, analytic remainder and any newly declared selector-mapping component without silent double counting"
+    }
+  ],
+  "candidate_majorants": [
+    {
+      "name": "support_oscillation",
+      "formula": "Z_target*a/(hbar*(z*z+b*b-a*a))",
+      "domain": "sqrt(z*z+b*b)>2*a",
+      "conditional_on": [
+        "metric compatibility",
+        "exact conforming support a",
+        "zero cross blocks",
+        "exact isolated-span invariance"
+      ],
+      "constants_fit_from_data": false,
+      "physical_certified": false
+    },
+    {
+      "name": "finite_angular_multipoles",
+      "formula": "C2/R^2+C3/R^3",
+      "domain": "R>2*a; B0 lmax1",
+      "conditional_on": [
+        "same exact-model assumptions",
+        "validated angular/radial constants if sharper than support bound"
+      ],
+      "coarse_C2": "Z_target*a/hbar",
+      "coarse_C3": "Z_target*a*a/hbar",
+      "physical_certified": false
+    }
+  ],
+  "archived_radial_audit": "ARCHIVED_RADIAL_AUDIT.json",
+  "tests": {
+    "runner": "python -m unittest discover -s research/gap_closure_20261001/majorant_analytic_20261001 -p test_analytic_majorant.py",
+    "passed": 9,
+    "failed": 0,
+    "environment": {
+      "python": "3.12.14",
+      "numpy": "2.3.5",
+      "scipy": "1.17.0"
+    },
+    "not_production_version_claim": true,
+    "red": "TDD_RED_MODULE.txt",
+    "green": "TDD_GREEN.txt",
+    "environment_probe_failure": "TDD_RED.txt (pytest unavailable; replaced with stdlib unittest)"
+  },
+  "new_external_runs": 0,
+  "new_native_calls": 0,
+  "new_physical_operator_queries": 0,
+  "authorization_consumed": null,
+  "gate_change": null,
+  "claim_ceilings": {
+    "capture": false,
+    "production": "HOLD",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "original_capture_gap_resolved": false,
+    "continuous_global_supremum_bound": false,
+    "continuous_trajectory_error_bound": false
+  },
+  "next_minimum_action": "Reconcile exact B0 reference model/invariant selector before generating certified finite bridge and integrating conditional support remainder.",
+  "source_ids": [],
+  "source_policy": "Exact task definitions, archived DB gap rows and actual project source suffice for the displayed elementary matrix/Coulomb derivations; no unsupported literature theorem imported.",
+  "files_changed": [
+    "test_analytic_majorant.py",
+    "audit_saved_radial.py",
+    "TDD_GREEN.txt",
+    "ROUTE_A_STATUS.json",
+    "analytic_majorant.py",
+    "CONTINUOUS_MAJORANT_ROUTE_A.md",
+    "TDD_RED_MODULE.txt",
+    "TDD_RED.txt",
+    "ARCHIVED_RADIAL_AUDIT.json"
+  ],
+  "operator_execution_source_commit": "01ec2ba7e71aefdccab1896acfe5d92c15c6b776",
+  "derivation_context_commit": "432010f2afd5305ca63933056f50584c01e4e524",
+  "reference_selector_repair": "REFERENCE_SELECTOR_REPAIR.md",
+  "reference_selector_repair_tests": {
+    "passed": 4,
+    "failed": 0,
+    "physical_delta_certified": false
+  }
+}

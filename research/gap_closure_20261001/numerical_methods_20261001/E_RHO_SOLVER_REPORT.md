@@ -17,8 +17,9 @@ The historical `projector_rate_probe.py` is unchanged, from returned execution
 commit `01ec2ba7e71aefdccab1896acfe5d92c15c6b776`, SHA256
 `022cade99f705493043ef98ec86bb5fb9aefb22f079ca5471874d23a05c1fb27`.
 The recovered preparation contains byte-identical probe code. The audit uses
-Python 3.12.14, NumPy 2.3.5 and **SciPy 1.17.0**, matching the project's pinned
-execution versions. Archived documentation `SciPy_1_17_0_eigh` is the versioned
+Python 3.12.14, NumPy 2.3.5 and **SciPy 1.17.0**. Only the NumPy/SciPy
+versions match the pinned native runtime; its Python 3.13.5 differs from this
+local Python 3.12.14. Archived documentation `SciPy_1_17_0_eigh` is the versioned
 reference; the archive's current SciPy 1.18 documentation does not establish
 behavior of this runtime. LAPACK `LAPACK_zhegvd` supplies the underlying
 Hermitian-definite driver reference.

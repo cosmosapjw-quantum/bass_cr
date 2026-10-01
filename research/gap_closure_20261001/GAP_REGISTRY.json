@@ -96,37 +96,68 @@
       "gap_id": "G02",
       "database_gap_id": "REPORT_GAP_02",
       "title": "| **P0** | \\(\\dot S=D+D^\\dagger\\) is algebraically assumed but not independently checked in the tail | Numerical/implementation | Run `E-SDOT-FD` with convergence in \\(h\\) | **0.5–1 day** plus ~10–25 min static compute | Finite-difference convergence and plateau consistent with implementation tolerance |",
-      "status": "UNRESOLVED",
+      "status": "BLOCKED",
       "evidence_status": [
-        "UNRESOLVED"
+        "DERIVED",
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED",
+        "BLOCKED"
       ],
       "dependencies": [
         "G01"
       ],
-      "claims_closed": [],
-      "claims_open": [
-        "| **P0** | \\(\\dot S=D+D^\\dagger\\) is algebraically assumed but not independently checked in the tail | Numerical/implementation | Run `E-SDOT-FD` with convergence in \\(h\\) | **0.5–1 day** plus ~10–25 min static compute | Finite-difference convergence and plateau consistent with implementation tolerance |"
+      "claims_closed": [
+        "S and D have different formula paths but share geometry and quadrature; finite differences are a useful independent derivative check",
+        "Synthetic shrinking-h convergence and correlated-error counterexamples validated",
+        "Frozen finite-difference producer, exact source/input/native admission, global attempt budget, resource supervisor and create-only canonical return implemented",
+        "Six historical signed centers are qualified hash-verified reuse; +12 lacks paired JSON and is not reused"
       ],
-      "artifacts": [],
+      "claims_open": [
+        "No new physical finite-difference samples; actual B0 Sdot versus D+Ddagger independence/convergence remains unverified",
+        "No rigorous static operator truncation-error bound from adjacent agreement"
+      ],
+      "artifacts": [
+        "static_validation_20261001/E_SDOT_FD_REPORT.md",
+        "static_validation_20261001/E_SDOT_FD_EXECUTION_CONTRACT.json",
+        "static_validation_20261001/E_SDOT_FD_RESULTS.json",
+        "static_validation_20261001/REUSE_MANIFEST.json",
+        "static_validation_20261001/STATIC_QUALIFICATION_REPORT.md",
+        "static_validation_20261001/EXECUTOR_VALIDATION.json",
+        "static_validation_20261001/executor/README.md",
+        "EXECUTOR_INDEPENDENT_REVIEW.json"
+      ],
       "source_ids": [],
-      "tests": [],
+      "tests": [
+        {
+          "offline_suite_passed": 8,
+          "executor_suites_passed": 17,
+          "independent_negative_guards": 24,
+          "new_native_calls": 0
+        }
+      ],
       "external_runs": [],
-      "blocker_class": null,
-      "next_minimum_action": "Execute exact gap loop in user contract",
+      "blocker_class": "RESOURCE_POLICY_BLOCKER",
+      "next_minimum_action": "Prepare a live proposal at the final clean source commit; obtain fresh G02-specific approval for 66 new queries, maximum726 raw attempts, explicitly bound workers/RAM/wall scope; return72 snapshots including six verified reuse centers. Do not use old authorization.",
       "legacy_report_row": {
         "gap_id": "REPORT_GAP_02",
         "line_number": 1164,
         "status": "REPORTED_RECOMMENDATION_NOT_VALIDATED",
         "verbatim": "| **P0** | \\(\\dot S=D+D^\\dagger\\) is algebraically assumed but not independently checked in the tail | Numerical/implementation | Run `E-SDOT-FD` with convergence in \\(h\\) | **0.5–1 day** plus ~10–25 min static compute | Finite-difference convergence and plateau consistent with implementation tolerance |"
-      }
+      },
+      "closure_label": "BLOCKED_RESOURCE_POLICY_FRESH_PHYSICAL_EXECUTION_REQUIRED",
+      "update_artifact": "integration_updates/G02.json"
     },
     {
       "gap_id": "G03",
       "database_gap_id": "REPORT_GAP_03",
       "title": "| **P0** | \\(R^{-2}\\) is suggested only by sparse samples | Numerical | Run extended and off-grid signed static ladder; compare \\(R^{-2},R^{-p}\\), correction models | **1–2 days** analysis plus minutes of native compute | Stable outer exponent/model under added radii and held-out points |",
-      "status": "UNRESOLVED",
+      "status": "RESOLVED_WITH_LIMITATION",
       "evidence_status": [
-        "UNRESOLVED"
+        "LITERATURE_SUPPORTED",
+        "DERIVED",
+        "SYMBOLICALLY_VERIFIED",
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
       ],
       "dependencies": [
         "G01",
@@ -134,30 +165,69 @@
         "G07",
         "G08"
       ],
-      "claims_closed": [],
-      "claims_open": [
-        "| **P0** | \\(R^{-2}\\) is suggested only by sparse samples | Numerical | Run extended and off-grid signed static ladder; compare \\(R^{-2},R^{-p}\\), correction models | **1–2 days** analysis plus minutes of native compute | Stable outer exponent/model under added radii and held-out points |"
+      "claims_closed": [
+        "Actual B0 finite-FEM overlap asymptotics differs from infinite-support AO idealization.",
+        "Conditional smooth dominant-branch parity removes C3; an exact degenerate cusp counterexample proves symmetry alone insufficient.",
+        "M1-M4 signed fits, leave-one-radius-out errors and outer-window sensitivity computed from exact frozen rows.",
+        "Two-query signed48 discriminator specified with frozen predictions and stops.",
+        "Separate strict two-query/22-attempt G03 producer and create-only per-resolution spectral return implemented and synthetically tested; no native evaluation performed."
       ],
-      "artifacts": [],
-      "source_ids": [],
-      "tests": [],
+      "claims_open": [
+        "Unique asymptotic model or leading coefficient not empirically identified.",
+        "Pure R^-2 law for actual stored model not proved; isolated-generator residual may yield asymptotic floor.",
+        "Continuous majorant, infinite-tail certificate and propagated state probabilities not available."
+      ],
+      "artifacts": [
+        "asymptotics_20261001/ASYMPTOTIC_MODELS.json",
+        "asymptotics_20261001/ASYMPTOTIC_REPORT.md",
+        "asymptotics_20261001/CLAIM_UPDATE.json",
+        "asymptotics_20261001/G03_RUNTIME.json",
+        "asymptotics_20261001/MINIMUM_STATIC_DISCRIMINATOR_CONTRACT.json",
+        "asymptotics_20261001/PARITY_SYMBOLIC_CHECK.json",
+        "asymptotics_20261001/RETURN_TDD_RED.log",
+        "asymptotics_20261001/SOURCE_EVIDENCE.json",
+        "asymptotics_20261001/TDD_RED.log",
+        "asymptotics_20261001/TEST_RESULTS.log",
+        "asymptotics_20261001/asymptotic_models.py",
+        "asymptotics_20261001/parity_symbolic_checks.py",
+        "asymptotics_20261001/test_asymptotic_models.py",
+        "asymptotics_20261001/write_research_records.py"
+      ],
+      "source_ids": [
+        "RungeMicha1996",
+        "Toshima1999",
+        "ThorsonDelos1978",
+        "Dollard1964"
+      ],
+      "tests": [
+        {
+          "command": "python -m unittest discover -s research/gap_closure_20261001/asymptotics_20261001 -p test_asymptotic_models.py -v",
+          "count": 7,
+          "result": "PASS",
+          "log": "TEST_RESULTS.log"
+        }
+      ],
       "external_runs": [],
-      "blocker_class": null,
-      "next_minimum_action": "Execute exact gap loop in user contract",
+      "blocker_class": "NUMERICAL_METHOD_BLOCKER",
+      "next_minimum_action": "MINIMUM_STATIC_DISCRIMINATOR_CONTRACT.json",
       "legacy_report_row": {
         "gap_id": "REPORT_GAP_03",
         "line_number": 1165,
         "status": "REPORTED_RECOMMENDATION_NOT_VALIDATED",
         "verbatim": "| **P0** | \\(R^{-2}\\) is suggested only by sparse samples | Numerical | Run extended and off-grid signed static ladder; compare \\(R^{-2},R^{-p}\\), correction models | **1–2 days** analysis plus minutes of native compute | Stable outer exponent/model under added radii and held-out points |"
-      }
+      },
+      "closure_label": "RESOLVED_WITH_LIMITATION",
+      "update_artifact": "asymptotics_20261001/CLAIM_UPDATE.json"
     },
     {
       "gap_id": "G04",
       "database_gap_id": "REPORT_GAP_04",
       "title": "| **P0** | No continuous \\(g(z)\\ge\\rho(z)\\) | Theory + numerics | Derive analytic matrix majorant or derivative/interval certificate | **3–10 days** initially | Upper bound valid between nodes and linked to analytic infinite remainder |",
-      "status": "UNRESOLVED",
+      "status": "RESOLVED_WITH_LIMITATION",
       "evidence_status": [
-        "UNRESOLVED"
+        "DERIVED",
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
       ],
       "dependencies": [
         "G01",
@@ -166,22 +236,54 @@
         "G07",
         "G08"
       ],
-      "claims_closed": [],
-      "claims_open": [
-        "| **P0** | No continuous \\(g(z)\\ge\\rho(z)\\) | Theory + numerics | Derive analytic matrix majorant or derivative/interval certificate | **3–10 days** initially | Upper bound valid between nodes and linked to analytic infinite remainder |"
+      "claims_closed": [
+        "Cancellation-aware single off-diagonal rate norm derived",
+        "Conditional compact-support majorant Z*a/[hbar*(R²-a²)] for an exact conforming isolated-invariant reference",
+        "Residual/gap reference-selector mapping bound and original-observable nonconvergence counterexample derived",
+        "Noncommuting inverse-square-root derivative bound derived",
+        "Exact-rational continuum finite-interval Level2 synthetic certificate implemented"
       ],
-      "artifacts": [],
-      "source_ids": [],
-      "tests": [],
+      "claims_open": [
+        "No actual B0 all-z majorant",
+        "Literal binary coefficient conformance and isolated invariance not exact; reference interpretation/mapping not certified",
+        "Finite bridge operator/derivative enclosures absent"
+      ],
+      "artifacts": [
+        "majorant_analytic_20261001/CONTINUOUS_MAJORANT_ROUTE_A.md",
+        "majorant_analytic_20261001/REFERENCE_SELECTOR_REPAIR.md",
+        "majorant_analytic_20261001/ARCHIVED_RADIAL_AUDIT.json",
+        "majorant_validated_20261001/CONTINUOUS_MAJORANT_RESEARCH_REPORT.md",
+        "majorant_validated_20261001/SYNTHETIC_CONTINUUM_CERTIFICATE.json"
+      ],
+      "source_ids": [
+        "Mathias1997"
+      ],
+      "tests": [
+        {
+          "root_commands": [
+            "python -m unittest -v test_analytic_majorant.py",
+            "python -m unittest -v test_validated_majorant.py",
+            "python -m unittest -v test_reference_selector.py"
+          ],
+          "passed": [
+            9,
+            23,
+            4
+          ],
+          "new_native_calls": 0
+        }
+      ],
       "external_runs": [],
-      "blocker_class": null,
-      "next_minimum_action": "Execute exact gap loop in user contract",
+      "blocker_class": "NUMERICAL_METHOD_BLOCKER",
+      "next_minimum_action": "Pin exact reference model and validated selector mapping; build finite bridge enclosures, then join to conditional analytic far remainder. Extra sample fits cannot close this.",
       "legacy_report_row": {
         "gap_id": "REPORT_GAP_04",
         "line_number": 1166,
         "status": "REPORTED_RECOMMENDATION_NOT_VALIDATED",
         "verbatim": "| **P0** | No continuous \\(g(z)\\ge\\rho(z)\\) | Theory + numerics | Derive analytic matrix majorant or derivative/interval certificate | **3–10 days** initially | Upper bound valid between nodes and linked to analytic infinite remainder |"
-      }
+      },
+      "closure_label": "RESOLVED_WITH_LIMITATION",
+      "update_artifact": "integration_updates/G04.json"
     },
     {
       "gap_id": "G05",
@@ -189,27 +291,39 @@
       "title": "| **P0** | No quantified infinite-tail integral | Theory | Integrate certified majorant; keep incoming/outgoing bounds separate | **<1 day after preceding gap** | Bound \\(<\\epsilon_{\\rm tail}\\) with complete provenance |",
       "status": "UNRESOLVED",
       "evidence_status": [
+        "DERIVED",
+        "IMPLEMENTATION_VERIFIED",
         "UNRESOLVED"
       ],
       "dependencies": [
         "G04"
       ],
-      "claims_closed": [],
-      "claims_open": [
-        "| **P0** | No quantified infinite-tail integral | Theory | Integrate certified majorant; keep incoming/outgoing bounds separate | **<1 day after preceding gap** | Bound \\(<\\epsilon_{\\rm tail}\\) with complete provenance |"
+      "claims_closed": [
+        "Stable conditional p2 and compact-support one-sided integral formulas implemented",
+        "Exact rational p2 enclosure demonstrator verified"
       ],
-      "artifacts": [],
+      "claims_open": [
+        "No physical continuous majorant with validated finite bridge",
+        "No physical infinite-tail certificate below predeclared1e-5 total target"
+      ],
+      "artifacts": [
+        "majorant_validated_20261001/validated_majorant.py",
+        "majorant_analytic_20261001/analytic_majorant.py",
+        "ERROR_BUDGET_CURRENT_B0.json"
+      ],
       "source_ids": [],
       "tests": [],
       "external_runs": [],
-      "blocker_class": null,
-      "next_minimum_action": "Execute exact gap loop in user contract",
+      "blocker_class": "NUMERICAL_METHOD_BLOCKER",
+      "next_minimum_action": "Complete G04 for named reference/observable; combine incoming/outgoing certified pieces plus mapping/dynamics errors against predeclared budget.",
       "legacy_report_row": {
         "gap_id": "REPORT_GAP_05",
         "line_number": 1167,
         "status": "REPORTED_RECOMMENDATION_NOT_VALIDATED",
         "verbatim": "| **P0** | No quantified infinite-tail integral | Theory | Integrate certified majorant; keep incoming/outgoing bounds separate | **<1 day after preceding gap** | Bound \\(<\\epsilon_{\\rm tail}\\) with complete provenance |"
-      }
+      },
+      "closure_label": "UNRESOLVED",
+      "update_artifact": "integration_updates/G05.json"
     },
     {
       "gap_id": "G06",
@@ -224,20 +338,24 @@
       ],
       "claims_closed": [],
       "claims_open": [
-        "| **P1** | Unknown tightness of worst-case \\(\\rho\\) integral for the actual state | Numerical physics | Nested stateful B0 windows; compare direct \\(\\Delta P\\) to \\(\\int\\rho dt\\) | **2–5 days** orchestration plus several temporal runs | Window convergence; actual change below envelope; quantified looseness |"
+        "Actual-state tightness unavailable outside±12; static queries do not provide c(t)"
       ],
-      "artifacts": [],
+      "artifacts": [
+        "ERROR_BUDGET_METHOD_NOTE.md"
+      ],
       "source_ids": [],
       "tests": [],
       "external_runs": [],
-      "blocker_class": null,
-      "next_minimum_action": "Execute exact gap loop in user contract",
+      "blocker_class": "RESOURCE_POLICY_BLOCKER",
+      "next_minimum_action": "After reference/majorant architecture is fixed, prepare one fresh±16 stateful window with own temporal ladder and matched incoming-state convention; compare actual ΔP and integralrho with uncertainties. No N1536 inheritance.",
       "legacy_report_row": {
         "gap_id": "REPORT_GAP_06",
         "line_number": 1168,
         "status": "REPORTED_RECOMMENDATION_NOT_VALIDATED",
         "verbatim": "| **P1** | Unknown tightness of worst-case \\(\\rho\\) integral for the actual state | Numerical physics | Nested stateful B0 windows; compare direct \\(\\Delta P\\) to \\(\\int\\rho dt\\) | **2–5 days** orchestration plus several temporal runs | Window convergence; actual change below envelope; quantified looseness |"
-      }
+      },
+      "closure_label": "UNRESOLVED",
+      "update_artifact": "integration_updates/G06.json"
     },
     {
       "gap_id": "G07",
@@ -359,27 +477,58 @@
       "gap_id": "G09",
       "database_gap_id": "REPORT_GAP_09",
       "title": "| **P1** | No formal policy for actual rank loss in enlarged basis | Numerics | Compare pivoted Cholesky and canonical spectral truncation; store rank decisions as new basis identities | **1–3 days** before real B1 studies | Observable/subspace stability over a nontrivial cutoff interval |",
-      "status": "UNRESOLVED",
+      "status": "RESOLVED_WITH_LIMITATION",
       "evidence_status": [
-        "UNRESOLVED"
+        "DERIVED",
+        "LITERATURE_SUPPORTED",
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
       ],
       "dependencies": [],
-      "claims_closed": [],
-      "claims_open": [
-        "| **P1** | No formal policy for actual rank loss in enlarged basis | Numerics | Compare pivoted Cholesky and canonical spectral truncation; store rank decisions as new basis identities | **1–3 days** before real B1 studies | Observable/subspace stability over a nontrivial cutoff interval |"
+      "claims_closed": [
+        "Formal no-shift rank policy with new basis/hash/operator/temporal/semantic requirements.",
+        "Canonical and pivoted-Cholesky reference algorithms with SVD/QR comparison and PSD failure behavior.",
+        "Predeclared cutoff sweep quantifies rank/subspace/rho/observable/state-norm changes.",
+        "Counterexamples establish that selected-observable plateau and post-whitening condition number alone are insufficient."
       ],
-      "artifacts": [],
-      "source_ids": [],
-      "tests": [],
+      "claims_open": [
+        "Physical B1/B2/B3 reduction stability and dynamical qualification.",
+        "Any selected physical cutoff or enlarged-basis semantic selector.",
+        "Certified positive semidefiniteness or rigorous truncation error enclosure."
+      ],
+      "artifacts": [
+        "rank_policy_20261001/CLAIM_UPDATE.json",
+        "rank_policy_20261001/RANK_POLICY.json",
+        "rank_policy_20261001/RANK_POLICY_REPORT.md",
+        "rank_policy_20261001/RANK_POLICY_RESULTS.json",
+        "rank_policy_20261001/TDD_GREEN.log",
+        "rank_policy_20261001/TDD_RED.log",
+        "rank_policy_20261001/rank_policy.py",
+        "rank_policy_20261001/test_rank_policy.py"
+      ],
+      "source_ids": [
+        "Lehtola2019"
+      ],
+      "tests": [
+        {
+          "command": "python -m unittest discover -s research/gap_closure_20261001/rank_policy_20261001 -p 'test_*.py' -v",
+          "passed": 8,
+          "failed": 0,
+          "exit_code": 0,
+          "tdd_initial_red_exit_code": 1
+        }
+      ],
       "external_runs": [],
-      "blocker_class": null,
-      "next_minimum_action": "Execute exact gap loop in user contract",
+      "blocker_class": "IMPLEMENTATION_BLOCKER",
+      "next_minimum_action": "After prerequisite tail/window gates, support and pin actual enlarged basis/radial identities, qualify physical matrices and execute the declared cutoff study with predeclared physical tolerances and a new semantic selector.",
       "legacy_report_row": {
         "gap_id": "REPORT_GAP_09",
         "line_number": 1171,
         "status": "REPORTED_RECOMMENDATION_NOT_VALIDATED",
         "verbatim": "| **P1** | No formal policy for actual rank loss in enlarged basis | Numerics | Compare pivoted Cholesky and canonical spectral truncation; store rank decisions as new basis identities | **1–3 days** before real B1 studies | Observable/subspace stability over a nontrivial cutoff interval |"
-      }
+      },
+      "closure_label": "POLICY_AND_SYNTHETIC_IMPLEMENTATION_VERIFIED_PHYSICAL_ADOPTION_OPEN",
+      "update_artifact": "rank_policy_20261001/CLAIM_UPDATE.json"
     },
     {
       "gap_id": "G10",
@@ -456,6 +605,7 @@
       "title": "| **P1** | B0 finite-window capture not yet established | Physics/numerics | Execute `E-WINDOW` only after error-budget design | **Several converged propagation jobs** | Successive windows + certified remainder below target |",
       "status": "UNRESOLVED",
       "evidence_status": [
+        "DERIVED",
         "UNRESOLVED"
       ],
       "dependencies": [
@@ -464,50 +614,109 @@
         "G05",
         "G06"
       ],
-      "claims_closed": [],
-      "claims_open": [
-        "| **P1** | B0 finite-window capture not yet established | Physics/numerics | Execute `E-WINDOW` only after error-budget design | **Several converged propagation jobs** | Successive windows + certified remainder below target |"
+      "claims_closed": [
+        "Formal common-observable error-composition rule and future finite-window acceptance criteria documented"
       ],
-      "artifacts": [],
+      "claims_open": [
+        "Operator absolute error, nested-window selectedobservable evidence and certified tail are absent"
+      ],
+      "artifacts": [
+        "ERROR_BUDGET_SCHEMA.json",
+        "ERROR_BUDGET_CURRENT_B0.json",
+        "ERROR_BUDGET_METHOD_NOTE.md"
+      ],
       "source_ids": [],
       "tests": [],
       "external_runs": [],
-      "blocker_class": null,
-      "next_minimum_action": "Execute exact gap loop in user contract",
+      "blocker_class": "NUMERICAL_METHOD_BLOCKER",
+      "next_minimum_action": "Close operator/continuous-tail bounds, then run first minimal new window under fresh resource contract and own temporal certificate.",
       "legacy_report_row": {
         "gap_id": "REPORT_GAP_11",
         "line_number": 1173,
         "status": "REPORTED_RECOMMENDATION_NOT_VALIDATED",
         "verbatim": "| **P1** | B0 finite-window capture not yet established | Physics/numerics | Execute `E-WINDOW` only after error-budget design | **Several converged propagation jobs** | Successive windows + certified remainder below target |"
-      }
+      },
+      "closure_label": "UNRESOLVED",
+      "update_artifact": "integration_updates/G11.json"
     },
     {
       "gap_id": "G12",
       "database_gap_id": "REPORT_GAP_12",
       "title": "| **P2** | Propagator result currently lacks an independent algorithmic family cross-check | Numerics | Compare current integrator against metric-aware CFET/Krylov/Volterra formulation | **3–7 days** | Same endpoint observable to tighter-than-production tolerance with independent method |",
-      "status": "UNRESOLVED",
+      "status": "RESOLVED_WITH_LIMITATION",
       "evidence_status": [
-        "UNRESOLVED"
+        "DERIVED",
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
       ],
       "dependencies": [
         "G01"
       ],
-      "claims_closed": [],
-      "claims_open": [
-        "| **P2** | Propagator result currently lacks an independent algorithmic family cross-check | Numerics | Compare current integrator against metric-aware CFET/Krylov/Volterra formulation | **3–7 days** | Same endpoint observable to tighter-than-production tolerance with independent method |"
+      "claims_closed": [
+        "Cholesky derivative X=upper(E)+diag(E)/2 and metric-compatible anti-Hermitian generator derived",
+        "CF4 small reference implemented with correct node/exponential ordering",
+        "Synthetic noncommuting trajectory parity checked against exact solution and existing direct DOP853; convergence orders measured"
       ],
-      "artifacts": [],
+      "claims_open": [
+        "Physical B0 independent-family agreement to tighter-than-production tolerance",
+        "Qualified full time-dependent operator provider and independently validated Sdot at new stages",
+        "Predeclared parity-budget composition"
+      ],
+      "artifacts": [
+        "independent_propagator_20261001/CLAIM_UPDATE.json",
+        "independent_propagator_20261001/E_INDEPENDENT_PROPAGATOR_REPORT.md",
+        "independent_propagator_20261001/E_INDEPENDENT_PROPAGATOR_RESULTS.json",
+        "independent_propagator_20261001/PHYSICAL_PARITY_CONTRACT.json",
+        "independent_propagator_20261001/TDD_GREEN.txt",
+        "independent_propagator_20261001/TDD_INTERMEDIATE_FAILURE.txt",
+        "independent_propagator_20261001/TDD_RED.txt",
+        "independent_propagator_20261001/VALIDATION.json",
+        "independent_propagator_20261001/WHITENING_DERIVATION.md",
+        "independent_propagator_20261001/independent_propagator.py",
+        "independent_propagator_20261001/test_independent_propagator.py"
+      ],
       "source_ids": [],
-      "tests": [],
+      "tests": [
+        {
+          "command": "python -m unittest discover -s . -p test_independent_propagator.py -v",
+          "stage": "RED",
+          "exit_code": 1,
+          "output": "TDD_RED.txt",
+          "failure": "missing new module"
+        },
+        {
+          "command": "python -m unittest discover -s . -p test_independent_propagator.py -v",
+          "stage": "INTERMEDIATE",
+          "exit_code": 1,
+          "output": "TDD_INTERMEDIATE_FAILURE.txt",
+          "failure": "64-step CF4 state error 2.352867e-9 exceeds predeclared synthetic2e-9",
+          "repair": "added128-step point; threshold unchanged"
+        },
+        {
+          "command": "python -m unittest discover -s . -p test_independent_propagator.py -v",
+          "stage": "GREEN",
+          "exit_code": 0,
+          "tests": 6,
+          "output": "TDD_GREEN.txt"
+        },
+        {
+          "command": "python independent_propagator.py",
+          "stage": "BENCHMARK",
+          "exit_code": 0,
+          "output": "E_INDEPENDENT_PROPAGATOR_RESULTS.json"
+        }
+      ],
       "external_runs": [],
-      "blocker_class": null,
-      "next_minimum_action": "Execute exact gap loop in user contract",
+      "blocker_class": "IMPLEMENTATION_BLOCKER",
+      "next_minimum_action": "Bind provider, physical source/state identities and predeclared parity budget in PHYSICAL_PARITY_CONTRACT.json before preparing a fresh scoped execution proposal.",
       "legacy_report_row": {
         "gap_id": "REPORT_GAP_12",
         "line_number": 1174,
         "status": "REPORTED_RECOMMENDATION_NOT_VALIDATED",
         "verbatim": "| **P2** | Propagator result currently lacks an independent algorithmic family cross-check | Numerics | Compare current integrator against metric-aware CFET/Krylov/Volterra formulation | **3–7 days** | Same endpoint observable to tighter-than-production tolerance with independent method |"
-      }
+      },
+      "closure_label": "RESOLVED_WITH_LIMITATION",
+      "update_artifact": "independent_propagator_20261001/CLAIM_UPDATE.json"
     },
     {
       "gap_id": "G13",
@@ -515,6 +724,7 @@
       "title": "| **P2** | B1–B3 completeness not executable yet | Physics model / implementation | Add higher-\\(l\\) support, actual radial coefficients, static qualification, temporal validation | **1–3+ weeks**, resource dependent | At least two successive independently validated basis enlargements with stable observable |",
       "status": "UNRESOLVED",
       "evidence_status": [
+        "IMPLEMENTATION_VERIFIED",
         "UNRESOLVED"
       ],
       "dependencies": [
@@ -524,22 +734,33 @@
         "G10",
         "G11"
       ],
-      "claims_closed": [],
-      "claims_open": [
-        "| **P2** | B1–B3 completeness not executable yet | Physics model / implementation | Add higher-\\(l\\) support, actual radial coefficients, static qualification, temporal validation | **1–3+ weeks**, resource dependent | At least two successive independently validated basis enlargements with stable observable |"
+      "claims_closed": [
+        "Actual registry confirms18/46/92/124 counts and current backend/radial/Gram prerequisites"
       ],
-      "artifacts": [],
+      "claims_open": [
+        "B1-B3 higher-l backend UNSUPPORTED_L_GT_1",
+        "B1-B3 radial identities FUTURE_CONSTRUCTION_AND_QUALIFICATION_REQUIRED",
+        "Actual new Gram matrices NOT_MEASURED",
+        "G04/G05/G11 notclosed"
+      ],
+      "artifacts": [
+        "rank_policy_20261001/RANK_POLICY_REPORT.md",
+        "semantic_selection_20261001/SELECTED_SUBSPACE_SCHEMA.json",
+        "ERROR_BUDGET_METHOD_NOTE.md"
+      ],
       "source_ids": [],
       "tests": [],
       "external_runs": [],
-      "blocker_class": null,
-      "next_minimum_action": "Execute exact gap loop in user contract",
+      "blocker_class": "IMPLEMENTATION_BLOCKER",
+      "next_minimum_action": "Do not run enlarged-basis science. First finish fixed-B0 tail/window; then implement higher-l backend, bind actual radial identities, apply G09/G10 and each basis own operator/temporal/window checks.",
       "legacy_report_row": {
         "gap_id": "REPORT_GAP_13",
         "line_number": 1175,
         "status": "REPORTED_RECOMMENDATION_NOT_VALIDATED",
         "verbatim": "| **P2** | B1–B3 completeness not executable yet | Physics model / implementation | Add higher-\\(l\\) support, actual radial coefficients, static qualification, temporal validation | **1–3+ weeks**, resource dependent | At least two successive independently validated basis enlargements with stable observable |"
-      }
+      },
+      "closure_label": "UNRESOLVED",
+      "update_artifact": "integration_updates/G13.json"
     }
   ]
 }
