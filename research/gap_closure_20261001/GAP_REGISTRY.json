@@ -2,7 +2,7 @@
   "schema": "BASS_CR_GAP_REGISTRY_V1",
   "date": "2026-10-01",
   "source_database_sha256": "a8eea6a9136b1a0dcd2c154823fc0f5a8909cd90228510262e7d27e079a877ea",
-  "status": "R4R_THEORY_FOLLOWUP_APPLIED",
+  "status": "R4T_CANCELLATION_FOLLOWUP_APPLIED_NO_GATE_PROMOTION",
   "claim_ceilings": {
     "capture": false,
     "production": "HOLD",
@@ -32,7 +32,9 @@
         "finite-interval |Delta P|<=N integral rho",
         "rho in L1 tail implies existence of P_infinity and remainder inequality",
         "constant nonsingular basis covariance with consistent J transformation",
-        "dimension and normalization audit"
+        "dimension and normalization audit",
+        "Exact selected/complement rate factorization rho=||E||, moving-selector connection and scalar/gauge cancellation.",
+        "New factorization agrees with original W generalized-eigenvalue method on six saved original-model matrices: max relative rho discrepancy7.221467647696728e-16."
       ],
       "claims_open": [
         "physical implementation satisfies independently evaluated Sdot=D+D†",
@@ -41,6 +43,12 @@
         "solver conditioning over physical matrix domain"
       ],
       "artifacts": [
+        "cancellation_followup_20261001/SAVED_MATRIX_REPLAY.json",
+        "cancellation_followup_20261001/SAVED_MATRIX_REPLAY_NOTE.md",
+        "cancellation_followup_20261001/projector/PROJECTOR_RATE_THEOREM.md",
+        "cancellation_followup_20261001/projector/VALIDATION.json",
+        "cancellation_followup_20261001/projector/projector_rate.py",
+        "cancellation_followup_20261001/replay_saved_matrices.py",
         "rho_integration_theorem_20261001/ASSUMPTIONS.json",
         "rho_integration_theorem_20261001/CLAIM_UPDATE.json",
         "rho_integration_theorem_20261001/EXACT_RATIONAL_REPLAY.json",
@@ -90,7 +98,11 @@
         "verbatim": "| **P0** | No formal project theorem connecting local \\(\\rho\\) to finite/infinite accumulated selected probability | Theory | Write `B0_RHO_INTEGRATION_THEOREM` with assumptions, proof, units, and state-normalization factor | **0.5–1 researcher-day** | Machine-checkable test cases plus documented theorem; no new physics assumption |"
       },
       "closure_label": "CLOSED_DERIVED_AND_SYMBOLICALLY_VERIFIED",
-      "update_artifact": "rho_integration_theorem_20261001/CLAIM_UPDATE.json"
+      "update_artifact": "rho_integration_theorem_20261001/CLAIM_UPDATE.json",
+      "r4t_claims": [
+        "R4T_PROJECTOR_FACTORIZATION",
+        "R4T_SAVED_MATRIX_PARITY"
+      ]
     },
     {
       "gap_id": "G02",
@@ -246,7 +258,10 @@
         "Original-to-reference same-state projector map<=2.76856e-14 certified",
         "All-R>=32 exact L2 Gram positivity and constructive finite reference bridge bound established; target FAIL",
         "Ordered-gap instantaneous-projector O(Z^-2) tail theorem derived",
-        "Uniform normalized-center reference Gram[33/100,167/100] and condition<=167/33 for all displacements via ETF phase; sharp rate target remains open"
+        "Uniform normalized-center reference Gram[33/100,167/100] and condition<=167/33 for all displacements via ETF phase; sharp rate target remains open",
+        "Weak Galilean H-iD identity cancels boosts and isolated selected energies before norms; remote scalar potential cancels in leakage.",
+        "Named H1 reference raw per-side [32,128] integrated-rate bound improves from55408/11 to25227/50; both capped probability bounds remain1.",
+        "All five repaired radial modes have40 nonzero derivative-jump shells; strong L2 residual cannot substitute for weak residual. Archived tiny value jumps also invalidate global H1 transfer."
       ],
       "claims_open": [
         "No sharp overlapping-support bridge bound meeting predeclared5e-6 per side",
@@ -255,22 +270,27 @@
         "No total physical tail bound for the archived B0 trajectory"
       ],
       "artifacts": [
+        "asymptotic_observable_followup_20261001/ASYMPTOTIC_OBSERVABLE_THEOREM.md",
+        "bridge_analysis_followup_20261001/BRIDGE_REPORT.md",
+        "bridge_analysis_followup_20261001/ETF_METRIC_CERTIFICATE.json",
+        "bridge_analysis_followup_20261001/ETF_METRIC_THEOREM.md",
+        "bridge_analysis_followup_20261001/ETF_VALIDATION.json",
+        "cancellation_followup_20261001/galilean/GALILEAN_BRIDGE_CERTIFICATE.json",
+        "cancellation_followup_20261001/galilean/VALIDATION.json",
+        "cancellation_followup_20261001/galilean/WEAK_GALILEAN_CANCELLATION.md",
+        "cancellation_followup_20261001/regularity/EXACT_REGULARITY_OBSTRUCTION.json",
+        "cancellation_followup_20261001/regularity/REGULARITY_AND_DYNAMICS_TRANSFER.md",
+        "gapped_tail_followup_20261001/CONDITIONAL_CUTOFF.json",
+        "gapped_tail_followup_20261001/GAPPED_TAIL_THEOREM.md",
+        "majorant_analytic_20261001/ARCHIVED_RADIAL_AUDIT.json",
         "majorant_analytic_20261001/CONTINUOUS_MAJORANT_ROUTE_A.md",
         "majorant_analytic_20261001/REFERENCE_SELECTOR_REPAIR.md",
-        "majorant_analytic_20261001/ARCHIVED_RADIAL_AUDIT.json",
         "majorant_validated_20261001/CONTINUOUS_MAJORANT_RESEARCH_REPORT.md",
         "majorant_validated_20261001/SYNTHETIC_CONTINUUM_CERTIFICATE.json",
         "reference_certificate_followup_20261001/REFERENCE_CERTIFICATE_PROOF.md",
         "reference_certificate_followup_20261001/actual_certificate/REFERENCE_CERTIFICATE.json",
-        "gapped_tail_followup_20261001/GAPPED_TAIL_THEOREM.md",
-        "gapped_tail_followup_20261001/CONDITIONAL_CUTOFF.json",
-        "bridge_analysis_followup_20261001/BRIDGE_REPORT.md",
-        "asymptotic_observable_followup_20261001/ASYMPTOTIC_OBSERVABLE_THEOREM.md",
-        "theory_followup_20261001/REFERENCE_INDEPENDENT_REVIEW.json",
-        "bridge_analysis_followup_20261001/ETF_METRIC_THEOREM.md",
-        "bridge_analysis_followup_20261001/ETF_METRIC_CERTIFICATE.json",
-        "bridge_analysis_followup_20261001/ETF_VALIDATION.json",
-        "theory_followup_20261001/ETF_REVIEW.json"
+        "theory_followup_20261001/ETF_REVIEW.json",
+        "theory_followup_20261001/REFERENCE_INDEPENDENT_REVIEW.json"
       ],
       "source_ids": [
         "Mathias1997"
@@ -303,7 +323,7 @@
       ],
       "external_runs": [],
       "blocker_class": "NUMERICAL_METHOD_BLOCKER",
-      "next_minimum_action": "Develop cancellation-preserving overlap bound and a precisely scoped state/dynamics comparison; preserveG02/G03 fresh native authorization boundaries. Do not launchZ14312 transport from this theoretical benchmark.",
+      "next_minimum_action": "Certify continuous weak cross-residual and remote-potential leakage with oscillatory cancellation or another justified projector construction; current504.54 raw bridge bound fails5e-6. Do not use nonexistent strong L2 residual. Retain separate G02/G03 approval boundaries.",
       "legacy_report_row": {
         "gap_id": "REPORT_GAP_04",
         "line_number": 1166,
@@ -312,7 +332,12 @@
       },
       "closure_label": "NAMED_REFERENCE_VALIDATED_ARCHIVED_DYNAMICS_AND_TARGET_OPEN",
       "update_artifact": "theory_followup_20261001/UPDATE_BUNDLE.json",
-      "research_loop": "R4R_THEORY_FOLLOWUP_20261001"
+      "research_loop": "R4R_THEORY_FOLLOWUP_20261001",
+      "r4t_claims": [
+        "R4T_GALILEAN_WEAK_CANCELLATION",
+        "R4T_REFERENCE_BRIDGE_BOUND",
+        "R4T_REGULARITY_OBSTRUCTION"
+      ]
     },
     {
       "gap_id": "G05",
@@ -331,7 +356,9 @@
         "Stable conditional p2 and compact-support one-sided integral formulas implemented",
         "Exact rational p2 enclosure demonstrator verified",
         "Exact named-reference spectral population has an asymptotic limit with rational O(Z^-2) far-tail bound",
-        "Pinned reference-gap bound meets far-only5e-6 at first integerZ14312; includes no useful finite bridge or state-transfer bound"
+        "Pinned reference-gap bound meets far-only5e-6 at first integerZ14312; includes no useful finite bridge or state-transfer bound",
+        "Weak Galilean H-iD identity cancels boosts and isolated selected energies before norms; remote scalar potential cancels in leakage.",
+        "Named H1 reference raw per-side [32,128] integrated-rate bound improves from55408/11 to25227/50; both capped probability bounds remain1."
       ],
       "claims_open": [
         "No sharp overlapping-support bridge bound meeting predeclared5e-6 per side",
@@ -340,15 +367,18 @@
         "No total physical tail bound for the archived B0 trajectory"
       ],
       "artifacts": [
-        "majorant_validated_20261001/validated_majorant.py",
-        "majorant_analytic_20261001/analytic_majorant.py",
         "ERROR_BUDGET_CURRENT_B0.json",
+        "asymptotic_observable_followup_20261001/ASYMPTOTIC_OBSERVABLE_THEOREM.md",
+        "bridge_analysis_followup_20261001/BRIDGE_REPORT.md",
+        "cancellation_followup_20261001/galilean/GALILEAN_BRIDGE_CERTIFICATE.json",
+        "cancellation_followup_20261001/galilean/VALIDATION.json",
+        "cancellation_followup_20261001/galilean/WEAK_GALILEAN_CANCELLATION.md",
+        "gapped_tail_followup_20261001/CONDITIONAL_CUTOFF.json",
+        "gapped_tail_followup_20261001/GAPPED_TAIL_THEOREM.md",
+        "majorant_analytic_20261001/analytic_majorant.py",
+        "majorant_validated_20261001/validated_majorant.py",
         "reference_certificate_followup_20261001/REFERENCE_CERTIFICATE_PROOF.md",
         "reference_certificate_followup_20261001/actual_certificate/REFERENCE_CERTIFICATE.json",
-        "gapped_tail_followup_20261001/GAPPED_TAIL_THEOREM.md",
-        "gapped_tail_followup_20261001/CONDITIONAL_CUTOFF.json",
-        "bridge_analysis_followup_20261001/BRIDGE_REPORT.md",
-        "asymptotic_observable_followup_20261001/ASYMPTOTIC_OBSERVABLE_THEOREM.md",
         "theory_followup_20261001/REFERENCE_INDEPENDENT_REVIEW.json"
       ],
       "source_ids": [],
@@ -367,7 +397,7 @@
       ],
       "external_runs": [],
       "blocker_class": "NUMERICAL_METHOD_BLOCKER",
-      "next_minimum_action": "Develop cancellation-preserving overlap bound and a precisely scoped state/dynamics comparison; preserveG02/G03 fresh native authorization boundaries. Do not launchZ14312 transport from this theoretical benchmark.",
+      "next_minimum_action": "Certify continuous weak cross-residual and remote-potential leakage with oscillatory cancellation or another justified projector construction; current504.54 raw bridge bound fails5e-6. Do not use nonexistent strong L2 residual. Retain separate G02/G03 approval boundaries.",
       "legacy_report_row": {
         "gap_id": "REPORT_GAP_05",
         "line_number": 1167,
@@ -376,7 +406,11 @@
       },
       "closure_label": "NAMED_REFERENCE_VALIDATED_ARCHIVED_DYNAMICS_AND_TARGET_OPEN",
       "update_artifact": "theory_followup_20261001/UPDATE_BUNDLE.json",
-      "research_loop": "R4R_THEORY_FOLLOWUP_20261001"
+      "research_loop": "R4R_THEORY_FOLLOWUP_20261001",
+      "r4t_claims": [
+        "R4T_GALILEAN_WEAK_CANCELLATION",
+        "R4T_REFERENCE_BRIDGE_BOUND"
+      ]
     },
     {
       "gap_id": "G06",
@@ -389,18 +423,24 @@
       "dependencies": [
         "G01"
       ],
-      "claims_closed": [],
+      "claims_closed": [
+        "Conditional sharp state-dependent angle integral theorem and outward rational sufficient probability budget."
+      ],
       "claims_open": [
         "Actual-state tightness unavailable outside±12; static queries do not provide c(t)"
       ],
       "artifacts": [
-        "ERROR_BUDGET_METHOD_NOTE.md"
+        "ERROR_BUDGET_METHOD_NOTE.md",
+        "cancellation_followup_20261001/angle/ANGLE_BUDGET.md",
+        "cancellation_followup_20261001/angle/VALIDATION.log",
+        "cancellation_followup_20261001/angle/angle_budget.py",
+        "cancellation_followup_20261001/projector/PROJECTOR_RATE_THEOREM.md"
       ],
       "source_ids": [],
       "tests": [],
       "external_runs": [],
       "blocker_class": "RESOURCE_POLICY_BLOCKER",
-      "next_minimum_action": "After reference/majorant architecture is fixed, prepare one fresh±16 stateful window with own temporal ladder and matched incoming-state convention; compare actual ΔP and integralrho with uncertainties. No N1536 inheritance.",
+      "next_minimum_action": "Obtain a state enclosure at the SAME interval endpoint plus a continuous rho integral; apply sharp angle/state-rate theorem. Actual tail-state tightness still needs a separately authorized qualified stateful run; no +/-12 state reuse at +/-32.",
       "legacy_report_row": {
         "gap_id": "REPORT_GAP_06",
         "line_number": 1168,
@@ -408,7 +448,10 @@
         "verbatim": "| **P1** | Unknown tightness of worst-case \\(\\rho\\) integral for the actual state | Numerical physics | Nested stateful B0 windows; compare direct \\(\\Delta P\\) to \\(\\int\\rho dt\\) | **2–5 days** orchestration plus several temporal runs | Window convergence; actual change below envelope; quantified looseness |"
       },
       "closure_label": "UNRESOLVED",
-      "update_artifact": "integration_updates/G06.json"
+      "update_artifact": "integration_updates/G06.json",
+      "r4t_claims": [
+        "R4T_STATE_AWARE_ANGLE"
+      ]
     },
     {
       "gap_id": "G07",
@@ -426,7 +469,8 @@
         "Equivalent generalized-eigen/Cholesky implementation checked in pinned SciPy1.17.0.",
         "Conditioning stress and independent Decimal2x2 reference quantified.",
         "Eight archived physical B0 pencils replayed with near-unit metrics and residual checks.",
-        "Singular/indefinite failures are explicit and unregularized."
+        "Singular/indefinite failures are explicit and unregularized.",
+        "New factorization agrees with original W generalized-eigenvalue method on six saved original-model matrices: max relative rho discrepancy7.221467647696728e-16."
       ],
       "claims_open": [
         "Uniform forward-error certification for arbitrary near-singular pencils.",
@@ -434,6 +478,9 @@
         "Certified operator assembly error and independent Sdot identity, delegated toG02/static qualification."
       ],
       "artifacts": [
+        "cancellation_followup_20261001/SAVED_MATRIX_REPLAY.json",
+        "cancellation_followup_20261001/SAVED_MATRIX_REPLAY_NOTE.md",
+        "cancellation_followup_20261001/replay_saved_matrices.py",
         "numerical_methods_20261001/CLAIM_UPDATE.json",
         "numerical_methods_20261001/E_COVARIANCE_REPORT.md",
         "numerical_methods_20261001/E_COVARIANCE_RESULTS.json",
@@ -469,7 +516,10 @@
         "verbatim": "| **P1** | Generalized eigensolver not yet stress-tested across near-singular metrics | Numerical | Generalized eig vs Cholesky congruence vs high precision; synthetic conditioning sweep | **1 day** | Backward errors and value errors scale predictably with conditioning |"
       },
       "closure_label": "CLOSED_IMPLEMENTATION_VERIFIED_WITH_CONDITIONING_DOMAIN",
-      "update_artifact": "numerical_methods_20261001/CLAIM_UPDATE.json"
+      "update_artifact": "numerical_methods_20261001/CLAIM_UPDATE.json",
+      "r4t_claims": [
+        "R4T_SAVED_MATRIX_PARITY"
+      ]
     },
     {
       "gap_id": "G08",
@@ -488,10 +538,14 @@
         "Constant nonsingular basis covariance derived for S,H,D,A,J,Pi,Q,W and generalized spectrum.",
         "Twelve random complex coordinate changes preserve norm/P/rho with historical probe.",
         "Raw coordinate block norm scaling counterexample established.",
-        "Separate metric_projected_coupling_norm derived and tested; existing diagnostic unchanged."
+        "Separate metric_projected_coupling_norm derived and tested; existing diagnostic unchanged.",
+        "Exact selected/complement rate factorization rho=||E||, moving-selector connection and scalar/gauge cancellation."
       ],
       "claims_open": [],
       "artifacts": [
+        "cancellation_followup_20261001/projector/PROJECTOR_RATE_THEOREM.md",
+        "cancellation_followup_20261001/projector/VALIDATION.json",
+        "cancellation_followup_20261001/projector/projector_rate.py",
         "numerical_methods_20261001/CLAIM_UPDATE.json",
         "numerical_methods_20261001/E_COVARIANCE_REPORT.md",
         "numerical_methods_20261001/E_COVARIANCE_RESULTS.json",
@@ -524,7 +578,10 @@
         "verbatim": "| **P1** | Hidden coordinate dependence could contaminate diagnostics | Implementation/theory | Random well-conditioned basis-change covariance test | **0.5–1 day** | \\(\\rho\\) invariant; projector identities preserved; raw \\(K_{TP}\\) allowed to vary |"
       },
       "closure_label": "CLOSED_DERIVED_AND_IMPLEMENTATION_VERIFIED",
-      "update_artifact": "numerical_methods_20261001/CLAIM_UPDATE.json"
+      "update_artifact": "numerical_methods_20261001/CLAIM_UPDATE.json",
+      "r4t_claims": [
+        "R4T_PROJECTOR_FACTORIZATION"
+      ]
     },
     {
       "gap_id": "G09",
@@ -668,21 +725,27 @@
         "G06"
       ],
       "claims_closed": [
-        "Formal common-observable error-composition rule and future finite-window acceptance criteria documented"
+        "Formal common-observable error-composition rule and future finite-window acceptance criteria documented",
+        "All five repaired radial modes have40 nonzero derivative-jump shells; strong L2 residual cannot substitute for weak residual. Archived tiny value jumps also invalidate global H1 transfer.",
+        "Finite-model Duhamel comparison including both metric defects, time-dependent map, physical embedding and observable differences; actual input bounds remain unavailable."
       ],
       "claims_open": [
         "Operator absolute error, nested-window selectedobservable evidence and certified tail are absent"
       ],
       "artifacts": [
-        "ERROR_BUDGET_SCHEMA.json",
         "ERROR_BUDGET_CURRENT_B0.json",
-        "ERROR_BUDGET_METHOD_NOTE.md"
+        "ERROR_BUDGET_METHOD_NOTE.md",
+        "ERROR_BUDGET_SCHEMA.json",
+        "cancellation_followup_20261001/regularity/EXACT_REGULARITY_OBSTRUCTION.json",
+        "cancellation_followup_20261001/regularity/REGULARITY_AND_DYNAMICS_TRANSFER.md",
+        "cancellation_followup_20261001/regularity/TRANSFER_INPUT_CONTRACT.json",
+        "cancellation_followup_20261001/regularity/VALIDATION.json"
       ],
       "source_ids": [],
       "tests": [],
       "external_runs": [],
       "blocker_class": "NUMERICAL_METHOD_BLOCKER",
-      "next_minimum_action": "Close operator/continuous-tail bounds, then run first minimal new window under fresh resource contract and own temporal certificate.",
+      "next_minimum_action": "Instantiate finite-metric transfer contract with both metric defects, continuous matrices, initial state error and common-L2 embedding; combine with valid bridge/far-tail controls before any capture closure.",
       "legacy_report_row": {
         "gap_id": "REPORT_GAP_11",
         "line_number": 1173,
@@ -690,7 +753,11 @@
         "verbatim": "| **P1** | B0 finite-window capture not yet established | Physics/numerics | Execute `E-WINDOW` only after error-budget design | **Several converged propagation jobs** | Successive windows + certified remainder below target |"
       },
       "closure_label": "UNRESOLVED",
-      "update_artifact": "integration_updates/G11.json"
+      "update_artifact": "integration_updates/G11.json",
+      "r4t_claims": [
+        "R4T_REGULARITY_OBSTRUCTION",
+        "R4T_FINITE_METRIC_TRANSFER"
+      ]
     },
     {
       "gap_id": "G12",
@@ -816,5 +883,15 @@
       "update_artifact": "integration_updates/G13.json"
     }
   ],
-  "followup_scope": "Named-reference lane; no original physical gate promotion"
+  "followup_scope": "Named-reference lane; no original physical gate promotion",
+  "r4t_followup": {
+    "new_claims": 7,
+    "gap_status_counts_unchanged": true,
+    "raw_bridge_integral": "25227/50",
+    "capped_probability_bound": "1",
+    "target": "1/200000",
+    "target_met": false,
+    "physical_queries": 0,
+    "physical_propagations": 0
+  }
 }
