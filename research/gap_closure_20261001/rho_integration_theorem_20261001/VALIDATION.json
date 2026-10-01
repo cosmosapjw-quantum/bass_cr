@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-01",
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "sympy": "not installed",
+    "pytest": "not installed; unittest used"
+  },
+  "project_saved_environment": {
+    "scipy": "1.17.0",
+    "numpy": "2.3.5",
+    "python": "3.13.5"
+  },
+  "environment_match": "SciPy and NumPy match recorded project versions; Python differs (local 3.12.14 vs saved 3.13.5). This is local synthetic verification, not native-environment execution.",
+  "commands": [
+    {
+      "command": "python -m unittest discover -s . -p test_rho_theorem.py -v",
+      "stage": "TDD_RED",
+      "exit_code": 1,
+      "expected_failure": "ModuleNotFoundError: rho_theorem",
+      "output_file": "TDD_RED.txt"
+    },
+    {
+      "command": "python -m unittest discover -s . -p test_rho_theorem.py -v",
+      "stage": "TDD_GREEN",
+      "exit_code": 0,
+      "tests": 12,
+      "output_file": "TDD_GREEN.txt"
+    },
+    {
+      "command": "python symbolic_checks.py",
+      "stage": "EXACT_RATIONAL_REPLAY",
+      "exit_code": 0,
+      "cases": 6,
+      "assertions": 78,
+      "output_file": "EXACT_RATIONAL_REPLAY.json"
+    }
+  ],
+  "symbolic": {
+    "tool": "Wolfram Language evaluator",
+    "input_file": "symbolic_checks.wls",
+    "output_file": "WOLFRAM_CAS_RESPONSE.json",
+    "parametric_identities": 14,
+    "all_passed": true,
+    "scope": "2x2 parameter family; general proof is THEOREM.md",
+    "preceding_context_lookup": "Internal error, preserved WOLFRAM_CONTEXT_RESPONSE.json"
+  },
+  "independent_numerical_spot_checks": "12 unittest cases include complex 3x3 fixture independent of 2x2 Wolfram family",
+  "new_external_tool_calls": 2,
+  "new_external_symbolic_evaluator_calls": 1,
+  "external_context_lookup_failures": 1,
+  "new_native_calls": 0,
+  "new_physical_runs": 0,
+  "authorization_consumed": "No old/native authorization consumed; current user contract authorizes synthetic/CAS research",
+  "kernel_scope": "Synthetic reference only; production probe unchanged",
+  "formal_proof_assistant_checked": false,
+  "outward_rounded_certificate": false
+}

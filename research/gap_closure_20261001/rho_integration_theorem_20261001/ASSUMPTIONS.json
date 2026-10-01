@@ -1,0 +1,34 @@
+{
+  "theorem_id": "B0_RHO_INTEGRATION_THEOREM",
+  "gap_id": "G01",
+  "database_gap_id": "REPORT_GAP_01",
+  "regularity": {
+    "S": "locally absolutely continuous Hermitian matrix; positive definite at every finite time",
+    "H": "locally integrable, Hermitian almost everywhere",
+    "D": "locally integrable",
+    "J": "time-independent finite n-by-k complex full-column-rank matrix, 1<=k<=n",
+    "c": "unique locally absolutely continuous exact finite-model solution of cdot=A c"
+  },
+  "compatibility": "Sdot=D+D† almost everywhere",
+  "generator": "A=-i solve(S,H)-solve(S,D) in atomic units; replace H by H/hbar otherwise",
+  "finite_interval": "No uniform infinite-half-line coercivity required; SPD and continuity imply coercivity on each compact interval",
+  "tail_extra_assumption": "rho belongs to L1([T0,infinity)); physical verification belongs to G04/G05",
+  "normalization": "N=c(t0)†S(t0)c(t0); use factor N unless N=1 or population divided by N",
+  "units": {
+    "S_J_G_Pi_Q_N_P": "dimensionless under stated normalized-basis convention",
+    "H": "energy",
+    "D_A_Sdot_Qdot_W_rho": "inverse time with hbar accounted for",
+    "integral_rho_dt": "dimensionless"
+  },
+  "scope_exclusions": [
+    "rank loss",
+    "untransformed selector under changed basis",
+    "time-dependent coordinate change without connection and Jdot terms",
+    "discrete propagator error",
+    "physical overlap-derivative validation",
+    "actual B0 continuous majorant",
+    "all-bound capture",
+    "norm distance between physical trajectories"
+  ],
+  "numerical_test_domain": "small well-conditioned synthetic finite matrices; float64/complex128; no B0 native evaluation"
+}
