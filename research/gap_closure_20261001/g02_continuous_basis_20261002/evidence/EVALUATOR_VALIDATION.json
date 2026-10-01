@@ -1,0 +1,245 @@
+{
+  "schema": "BASS_R4X_EVALUATOR_VALIDATION_V1",
+  "decision": "PASS_LOCAL_EVALUATOR_ONLY",
+  "physical_calls": 0,
+  "production_adopted": false,
+  "candidate_manifest_sha256": "77df01c595ff1ac14236ff4537d7be7dd78d9642c498433d3b6e60c8c38ef35f",
+  "native_manifest_sha256": "6af8bdfb1eff94fcf47770f5532d70e7662d6339d5ba8862d8e6021dd33847a7",
+  "validation_source_sha256": "5df93227ac93fa25fb313c52665fbe905f2f335a0f705de885c3c6b0f699ce57",
+  "parity": [
+    {
+      "mode": 0,
+      "u_bitwise_equal": true,
+      "du_bitwise_equal": true,
+      "max_u_difference": 0.0,
+      "max_du_difference": 0.0
+    },
+    {
+      "mode": 1,
+      "u_bitwise_equal": true,
+      "du_bitwise_equal": true,
+      "max_u_difference": 0.0,
+      "max_du_difference": 0.0
+    },
+    {
+      "mode": 2,
+      "u_bitwise_equal": true,
+      "du_bitwise_equal": true,
+      "max_u_difference": 0.0,
+      "max_du_difference": 0.0
+    },
+    {
+      "mode": 3,
+      "u_bitwise_equal": true,
+      "du_bitwise_equal": true,
+      "max_u_difference": 0.0,
+      "max_du_difference": 0.0
+    },
+    {
+      "mode": 4,
+      "u_bitwise_equal": true,
+      "du_bitwise_equal": true,
+      "max_u_difference": 0.0,
+      "max_du_difference": 0.0
+    }
+  ],
+  "exact_rational_reference": [
+    {
+      "mode": 0,
+      "sample_count": 169,
+      "max_u_absolute_error": 3.3177751571204207e-17,
+      "max_du_absolute_error": 1.0418511465452721e-16,
+      "max_u_error_over_64eps_coefficient_scale": 0.0023346767127041586,
+      "max_du_error_over_64eps_derivative_scale": 0.0031336914918130973
+    },
+    {
+      "mode": 1,
+      "sample_count": 169,
+      "max_u_absolute_error": 4.161012180496896e-17,
+      "max_du_absolute_error": 4.56790657620532e-17,
+      "max_u_error_over_64eps_coefficient_scale": 0.0029280520164952995,
+      "max_du_error_over_64eps_derivative_scale": 0.003214378492884612
+    },
+    {
+      "mode": 2,
+      "sample_count": 169,
+      "max_u_absolute_error": 3.167680524431596e-17,
+      "max_du_absolute_error": 1.3100055872778818e-17,
+      "max_u_error_over_64eps_coefficient_scale": 0.002229057004602955,
+      "max_du_error_over_64eps_derivative_scale": 0.0009218344804246775
+    },
+    {
+      "mode": 3,
+      "sample_count": 169,
+      "max_u_absolute_error": 3.04693533816893e-17,
+      "max_du_absolute_error": 2.4731118314231935e-17,
+      "max_u_error_over_64eps_coefficient_scale": 0.0021440901333749356,
+      "max_du_error_over_64eps_derivative_scale": 0.001740297737881728
+    },
+    {
+      "mode": 4,
+      "sample_count": 169,
+      "max_u_absolute_error": 3.622108592505832e-17,
+      "max_du_absolute_error": 1.7006518982171905e-17,
+      "max_u_error_over_64eps_coefficient_scale": 0.0025488323292976152,
+      "max_du_error_over_64eps_derivative_scale": 0.0011967273836090415
+    }
+  ],
+  "reference_screen": "64*eps*max(1,absolute coefficient sum), derivative coefficient/h sum; empirical screen not certified bound",
+  "direct_native_invalid_cases_rejected": 5,
+  "workload": {
+    "points": 1000000,
+    "modes": 1,
+    "radii_sha256": "270d8a6c0daa54b598b7dbe08a234b56862b5e709eed409b089c8f8999363f1f",
+    "repetitions": 3,
+    "warmups_per_timing": 1
+  },
+  "python_end_to_end": {
+    "seconds": [
+      0.06878039400908165,
+      0.07800824000150897,
+      0.08971801200823393
+    ],
+    "median_seconds": 0.07800824000150897,
+    "min_seconds": 0.06878039400908165,
+    "max_seconds": 0.08971801200823393
+  },
+  "fortran_benchmarks": [
+    {
+      "requested_threads": 1,
+      "observed_threads": 1,
+      "bitwise_equal_to_python": true,
+      "end_to_end": {
+        "seconds": [
+          0.036849712996627204,
+          0.03850732800492551,
+          0.0427217499964172
+        ],
+        "median_seconds": 0.03850732800492551,
+        "min_seconds": 0.036849712996627204,
+        "max_seconds": 0.0427217499964172
+      },
+      "prelocated_kernel_with_ctypes_and_validation": {
+        "seconds": [
+          0.009392142994329333,
+          0.009977494002669118,
+          0.009684995005954988
+        ],
+        "median_seconds": 0.009684995005954988,
+        "min_seconds": 0.009392142994329333,
+        "max_seconds": 0.009977494002669118
+      },
+      "end_to_end_speedup_vs_python": 2.025802465222486,
+      "kernel_speedup_vs_one_thread": 1.0
+    },
+    {
+      "requested_threads": 2,
+      "observed_threads": 2,
+      "bitwise_equal_to_python": true,
+      "end_to_end": {
+        "seconds": [
+          0.03808874801325146,
+          0.0394157809932949,
+          0.03861128400603775
+        ],
+        "median_seconds": 0.03861128400603775,
+        "min_seconds": 0.03808874801325146,
+        "max_seconds": 0.0394157809932949
+      },
+      "prelocated_kernel_with_ctypes_and_validation": {
+        "seconds": [
+          0.006748925996362232,
+          0.006777880000299774,
+          0.007459925996954553
+        ],
+        "median_seconds": 0.006777880000299774,
+        "min_seconds": 0.006748925996362232,
+        "max_seconds": 0.007459925996954553
+      },
+      "end_to_end_speedup_vs_python": 2.0203482481781907,
+      "kernel_speedup_vs_one_thread": 1.4289121385339718
+    },
+    {
+      "requested_threads": 4,
+      "observed_threads": 4,
+      "bitwise_equal_to_python": true,
+      "end_to_end": {
+        "seconds": [
+          0.031852183004957624,
+          0.03146286700211931,
+          0.03117929000291042
+        ],
+        "median_seconds": 0.03146286700211931,
+        "min_seconds": 0.03117929000291042,
+        "max_seconds": 0.031852183004957624
+      },
+      "prelocated_kernel_with_ctypes_and_validation": {
+        "seconds": [
+          0.006678089004708454,
+          0.006376025005010888,
+          0.006305388989858329
+        ],
+        "median_seconds": 0.006376025005010888,
+        "min_seconds": 0.006305388989858329,
+        "max_seconds": 0.006678089004708454
+      },
+      "end_to_end_speedup_vs_python": 2.479374813371407,
+      "kernel_speedup_vs_one_thread": 1.5189706750434002
+    },
+    {
+      "requested_threads": 8,
+      "observed_threads": 8,
+      "bitwise_equal_to_python": true,
+      "end_to_end": {
+        "seconds": [
+          0.03383392500109039,
+          0.03239948599366471,
+          0.034582862004754134
+        ],
+        "median_seconds": 0.03383392500109039,
+        "min_seconds": 0.03239948599366471,
+        "max_seconds": 0.034582862004754134
+      },
+      "prelocated_kernel_with_ctypes_and_validation": {
+        "seconds": [
+          0.006489926992799155,
+          0.005351302999770269,
+          0.005589451000560075
+        ],
+        "median_seconds": 0.005589451000560075,
+        "min_seconds": 0.005351302999770269,
+        "max_seconds": 0.006489926992799155
+      },
+      "end_to_end_speedup_vs_python": 2.30562194599045,
+      "kernel_speedup_vs_one_thread": 1.732727419022822
+    }
+  ],
+  "environment": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "affinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "admitted_cpus": 8,
+    "cpu_max": "800000 100000",
+    "memory_max": "8589934592",
+    "peak_rss_kib": 193760,
+    "OMP_DYNAMIC": "FALSE",
+    "OMP_PROC_BIND": "FALSE",
+    "OMP_PLACES": null
+  },
+  "limits": [
+    "Local admitted host only; no MPI or NCP64 scaling claim.",
+    "End-to-end time includes Python allocation/location/gathering and identity validation.",
+    "Prelocated benchmark still includes ctypes, validation, output allocation; not pure kernel-cycle timing.",
+    "Parity/reference check does not certify full operator or trajectory."
+  ]
+}

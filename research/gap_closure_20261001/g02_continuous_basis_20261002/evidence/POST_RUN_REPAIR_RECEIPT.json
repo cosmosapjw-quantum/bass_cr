@@ -1,0 +1,58 @@
+{
+  "schema": "BASS_R4X_POST_RUN_COORDINATOR_REPAIR_V1",
+  "reason": "Popen failure after durable reservation underreported the consumed reservation in FAILED.json; the reservation file itself was always retained.",
+  "only_runtime_change": "Increment a distinct reserved_attempts count immediately after durable reservation, report it on failure.",
+  "source_before": {
+    "path": "/workspace/scratch/63ee2321a512/runs_r4x/source_at_run/run_static_comparison.py",
+    "sha256": "5d2d118e8c439e581bc0c50bb918969147426f82d41ac18143611043812e02be",
+    "bound_to_static_manifest": true
+  },
+  "source_after": {
+    "path": "/workspace/scratch/63ee2321a512/recovered_r4u/source/research/gap_closure_20261001/g02_continuous_basis_20261002/run_static_comparison.py",
+    "sha256": "2acfabca4b067750d6a06f2f1d044a0d7daf21e16239db26a82f49f0f58fb9a1"
+  },
+  "source_diff": "--- executed_runner\n+++ repaired_runner\n@@ -339,7 +339,7 @@\n     write_json(out / 'STARTED.json', {'manifest_id': m['manifest_id'], 'fresh_census': actual,\n                'resource_admission': fresh, 'pid': os.getpid(), 'no_prior_approval_reuse': True})\n     original_affinity = os.sched_getaffinity(0)\n-    running, completed, next_index = {}, [], 0\n+    running, completed, next_index, reserved_attempts = {}, [], 0, 0\n     started = time.monotonic()\n     try:\n         os.sched_setaffinity(0, {m['resources']['coordinator_cpu_id']})\n@@ -357,6 +357,7 @@\n                 reservation = {'manifest_id': m['manifest_id'], 'global_attempt': index + 1,\n                                'task': task, 'worker_cpu_id': cpu, 'raw_attempt_budget': 8}\n                 write_json(out / 'reservations' / f'{index:03}.json', reservation)\n+                reserved_attempts += 1\n                 logpath = out / 'logs' / f'{index:03}.log'\n                 logpath.parent.mkdir(exist_ok=True)\n                 log = logpath.open('xb')\n@@ -402,7 +403,7 @@\n                 proc.wait(timeout=5)\n             log.close()\n         write_json(out / 'FAILED.json', {'manifest_id': m['manifest_id'], 'exception': type(exc).__name__,\n-                   'message': str(exc), 'reserved_attempts': next_index, 'completed_indices': completed,\n+                   'message': str(exc), 'reserved_attempts': reserved_attempts, 'completed_indices': completed,\n                    'no_retry': True, 'worker_processes_remaining': 0})\n         raise\n     finally:\n",
+  "test": {
+    "command": [
+      "python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "/workspace/scratch/63ee2321a512/recovered_r4u/source/research/gap_closure_20261001/g02_continuous_basis_20261002",
+      "-p",
+      "test_operator_adapter.py",
+      "-v"
+    ],
+    "exit_code": 0,
+    "unique_adapter_tests": 9,
+    "wall_seconds": 0.813799135008594,
+    "stdout_file": "OPERATOR_TESTS_FINAL.stdout",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_file": "OPERATOR_TESTS_FINAL.stderr",
+    "stderr_sha256": "9bb1b8ac2aeac8f9b34128f4f1355da55b5580a8e51572ae487f3b2c7391a628",
+    "new_test": "test_process_creation_failure_reports_consumed_reservation",
+    "suite_status": "PASS"
+  },
+  "initial_eight_tests_log": "Initial 8 tests passed in tool output; no saved initial logfile is claimed.",
+  "final_unique_tests_all_stage": 19,
+  "final_unique_tests_breakdown": {
+    "basis": 10,
+    "adapter": 9
+  },
+  "new_physical_calls_for_repair": 0,
+  "actual_static_calls_before_repair": 8,
+  "static_manifest_sha256": "fdf0e87470c809de2fa65795e8aaa193db338052d1f6e6aaa839a894b04ebe2c",
+  "static_summary_sha256": "748795fe11863d0636b7957c8e4025fa80f946f1158fed6f3c8241d5340c6973",
+  "static_results_unchanged": true,
+  "final_runner_physical_execution": "NOT_RUN; existing results bind to exact saved source_before",
+  "source_pin_mismatches_accounted_for": [
+    {
+      "path": "/workspace/scratch/63ee2321a512/recovered_r4u/source/research/gap_closure_20261001/g02_continuous_basis_20261002/run_static_comparison.py",
+      "executed_sha256": "5d2d118e8c439e581bc0c50bb918969147426f82d41ac18143611043812e02be",
+      "current_sha256": "2acfabca4b067750d6a06f2f1d044a0d7daf21e16239db26a82f49f0f58fb9a1"
+    }
+  ],
+  "basis_native_adapter_changes": false,
+  "production_admission": "HOLD"
+}

@@ -74,3 +74,14 @@ arithmetic, with an exact-coefficient/high-precision reference. The continuity
 candidate is a separate mathematical representation, not an adopted bank.
 Keep the original G02 failure and basis identity; tiny-h reruns or projecting
 raw D cannot substitute for independently validating a changed representation.
+
+R4X `research/gap_closure_20261001/g02_continuous_basis_20261002/` implements
+an explicitly separate shared-endpoint/bubble radial representation. Original
+nodal eigensolve bytes are not recovered. Exact trace/norm checks and bounded
+paired static S/H/D diagnostics preserve the original bank and raw operators.
+The strict Fortran/OpenMP evaluator has local bitwise parity and timing evidence;
+the static comparison itself uses the fixed C++ moment backend and Python radial
+evaluator. This does not establish full solver or NCP64 speedup. At z=0 the
+order32/40 spatial comparison remains unresolved for both representations.
+Before derivative/production adoption, bind the new representation separately
+and qualify spatial quadrature. Keep G02 UNRESOLVED and all prior claim ceilings.
