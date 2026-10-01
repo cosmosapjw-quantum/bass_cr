@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read-only validation of imported literature artifacts. No science/network execution."""
+"""Validate literature artifacts; --check-only skips the standalone result write."""
 import argparse, collections, csv, hashlib, importlib.util, json, re, sqlite3, zipfile
 from pathlib import Path
 import fitz
@@ -20,7 +20,7 @@ def ro(p):
 
 def rows(c,t): return collections.Counter(tuple(x) for x in c.execute('SELECT * FROM "'+t+'"'))
 
-def validate(base):
+def validate(base, check_only=False):
     root=base/'user_import_v3'; pkg=root/'package'; v=pkg/'v3'; d=root/'deliverables'
     prior=base/'recovery_v2/deliverables'
     module_spec=importlib.util.spec_from_file_location('integration',root/'scripts/integrate_user_upload.py')
@@ -58,9 +58,12 @@ def validate(base):
     for line in checksums:
         h,path=line.split('  ',1); check(sha(pkg/path)==h,'Checksum binding: '+path)
     check(len(checksums)==len([p for p in pkg.rglob('*') if p.is_file()])-1,'Checksum physical coverage excluding itself')
-    for p in d.iterdir():
-        if p.name.startswith('BASS_CR_') and p.name!='BASS_CR_LITERATURE_FULLTEXT_RECOVERY_20261001_v3.zip':
-            check(p.read_bytes()==(v/p.name).read_bytes(),'Delivery sidecar matches ZIP: '+p.name)
+    # Only frozen embedded artifacts have counterparts inside package/v3.
+    # Validation, split-transport, receipt and review controls are external.
+    for p in v.iterdir():
+        if p.is_file() and p.name.startswith('BASS_CR_') and 'WORK_STATUS_ALL31' not in p.name:
+            delivered=d/p.name
+            check(delivered.is_file() and delivered.read_bytes()==p.read_bytes(),'Delivery sidecar matches ZIP: '+p.name)
     old=ro(prior/'BASS_CR_SOURCE_DATABASE_20261001_v2.sqlite')
     c=ro(v/'BASS_CR_SOURCE_DATABASE_20261001_v3.sqlite')
     check(c.execute('PRAGMA integrity_check').fetchone()[0]=='ok','DB integrity')
@@ -180,8 +183,8 @@ def validate(base):
         check(summary[field]==expected,'Scientific boundary field '+field)
     result={'status':'PASS','archive':{'name':archive.name,'bytes':archive.stat().st_size,'sha256':archive_hash,'CRC':'PASS'},'frozen_v2_member_hashes_verified':frozen_count,'user_member_byte_equalities_verified':uploaded_count,'target_works':len(works),'complete_target_selected_versions':31,'target_formats':dict(formats),'version_class_counts':dict(class_counts),'supplemental_works':4,'PDF_physical_files':38,'PDF_unique_hashes':37,'duplicate_groups':duplicates,'immutable_tables_verified':unchanged,'append_only_history_tables_verified':extended,'catalog_files_hash_verified':c.execute('SELECT count(*) FROM files').fetchone()[0],'old_catalog_rows_preserved':old.execute('SELECT count(*) FROM files').fetchone()[0],'old_attempts_preserved':704,'new_import_records':19,'total_attempts':attempts,'FAILED_preserved':failed,'primary_Bib_entries':31,'supplemental_Bib_entries':4,'recovery_status_rows':18,'code_pin_count':4,'book_limitations_recorded':True,'current_database_sha256':sha(v/'BASS_CR_SOURCE_DATABASE_20261001_v3.sqlite'),'science_flags':{k:summary[k] for k in ['scientific_calculations','native_authorization_consumption','literature_source_downloads','code_source_downloads','capture','production','all_bound','b_grid','claim_ceilings']},'PDF_identity_checks':pdf_identity}
     out=d/'BASS_CR_USER_UPLOAD_LOCAL_VALIDATION_20261001_v3.json'
-    out.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+    if not check_only:out.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
     print('LOCAL_VALIDATION_PASS '+json.dumps({k:val for k,val in result.items() if k not in ['PDF_identity_checks','immutable_tables_verified','append_only_history_tables_verified','duplicate_groups']},ensure_ascii=False))
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('--base',type=Path,required=True);args=parser.parse_args();validate(args.base.resolve())
+    parser=argparse.ArgumentParser();parser.add_argument('--base',type=Path,required=True);parser.add_argument('--check-only',action='store_true',help='Validate and print results without writing any deliverable');args=parser.parse_args();validate(args.base.resolve(),check_only=args.check_only)
