@@ -243,57 +243,117 @@
       "gap_id": "G07",
       "database_gap_id": "REPORT_GAP_07",
       "title": "| **P1** | Generalized eigensolver not yet stress-tested across near-singular metrics | Numerical | Generalized eig vs Cholesky congruence vs high precision; synthetic conditioning sweep | **1 day** | Backward errors and value errors scale predictably with conditioning |",
-      "status": "UNRESOLVED",
+      "status": "RESOLVED_WITH_LIMITATION",
       "evidence_status": [
-        "UNRESOLVED"
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
       ],
       "dependencies": [
         "G01"
       ],
-      "claims_closed": [],
-      "claims_open": [
-        "| **P1** | Generalized eigensolver not yet stress-tested across near-singular metrics | Numerical | Generalized eig vs Cholesky congruence vs high precision; synthetic conditioning sweep | **1 day** | Backward errors and value errors scale predictably with conditioning |"
+      "claims_closed": [
+        "Equivalent generalized-eigen/Cholesky implementation checked in pinned SciPy1.17.0.",
+        "Conditioning stress and independent Decimal2x2 reference quantified.",
+        "Eight archived physical B0 pencils replayed with near-unit metrics and residual checks.",
+        "Singular/indefinite failures are explicit and unregularized."
       ],
-      "artifacts": [],
-      "source_ids": [],
-      "tests": [],
+      "claims_open": [
+        "Uniform forward-error certification for arbitrary near-singular pencils.",
+        "Full rate-matrix assembly reliability at synthetic cond(S)>=1e8; preserved Hermiticity failures.",
+        "Certified operator assembly error and independent Sdot identity, delegated toG02/static qualification."
+      ],
+      "artifacts": [
+        "numerical_methods_20261001/CLAIM_UPDATE.json",
+        "numerical_methods_20261001/E_COVARIANCE_REPORT.md",
+        "numerical_methods_20261001/E_COVARIANCE_RESULTS.json",
+        "numerical_methods_20261001/E_RHO_SOLVER_REPORT.md",
+        "numerical_methods_20261001/E_RHO_SOLVER_RESULTS.json",
+        "numerical_methods_20261001/PHYSICAL_MATRIX_FIXTURES.json",
+        "numerical_methods_20261001/TDD_DECISIONS.json",
+        "numerical_methods_20261001/TDD_GREEN.log",
+        "numerical_methods_20261001/TDD_RED.log",
+        "numerical_methods_20261001/numerical_audit.py",
+        "numerical_methods_20261001/test_basis_covariance.py",
+        "numerical_methods_20261001/test_generalized_rho_solver.py"
+      ],
+      "source_ids": [
+        "SciPy_1_17_0_eigh",
+        "LAPACK_zhegvd"
+      ],
+      "tests": [
+        {
+          "command": "python -m unittest discover -s research/gap_closure_20261001/numerical_methods_20261001 -p 'test_*.py' -v",
+          "passed": 11,
+          "failed": 0,
+          "exit_code": 0
+        }
+      ],
       "external_runs": [],
-      "blocker_class": null,
-      "next_minimum_action": "Execute exact gap loop in user contract",
+      "blocker_class": "NUMERICAL_METHOD_BLOCKER",
+      "next_minimum_action": "Keep per-pencil metric/residual diagnostics. Any near-singular extension requires G09 rank policy and renewed assembly validation; do not rerun these8 physical queries.",
       "legacy_report_row": {
         "gap_id": "REPORT_GAP_07",
         "line_number": 1169,
         "status": "REPORTED_RECOMMENDATION_NOT_VALIDATED",
         "verbatim": "| **P1** | Generalized eigensolver not yet stress-tested across near-singular metrics | Numerical | Generalized eig vs Cholesky congruence vs high precision; synthetic conditioning sweep | **1 day** | Backward errors and value errors scale predictably with conditioning |"
-      }
+      },
+      "closure_label": "CLOSED_IMPLEMENTATION_VERIFIED_WITH_CONDITIONING_DOMAIN",
+      "update_artifact": "numerical_methods_20261001/CLAIM_UPDATE.json"
     },
     {
       "gap_id": "G08",
       "database_gap_id": "REPORT_GAP_08",
       "title": "| **P1** | Hidden coordinate dependence could contaminate diagnostics | Implementation/theory | Random well-conditioned basis-change covariance test | **0.5–1 day** | \\(\\rho\\) invariant; projector identities preserved; raw \\(K_{TP}\\) allowed to vary |",
-      "status": "UNRESOLVED",
+      "status": "CLOSED",
       "evidence_status": [
-        "UNRESOLVED"
+        "DERIVED",
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
       ],
       "dependencies": [
         "G01"
       ],
-      "claims_closed": [],
-      "claims_open": [
-        "| **P1** | Hidden coordinate dependence could contaminate diagnostics | Implementation/theory | Random well-conditioned basis-change covariance test | **0.5–1 day** | \\(\\rho\\) invariant; projector identities preserved; raw \\(K_{TP}\\) allowed to vary |"
+      "claims_closed": [
+        "Constant nonsingular basis covariance derived for S,H,D,A,J,Pi,Q,W and generalized spectrum.",
+        "Twelve random complex coordinate changes preserve norm/P/rho with historical probe.",
+        "Raw coordinate block norm scaling counterexample established.",
+        "Separate metric_projected_coupling_norm derived and tested; existing diagnostic unchanged."
       ],
-      "artifacts": [],
+      "claims_open": [],
+      "artifacts": [
+        "numerical_methods_20261001/CLAIM_UPDATE.json",
+        "numerical_methods_20261001/E_COVARIANCE_REPORT.md",
+        "numerical_methods_20261001/E_COVARIANCE_RESULTS.json",
+        "numerical_methods_20261001/E_RHO_SOLVER_REPORT.md",
+        "numerical_methods_20261001/E_RHO_SOLVER_RESULTS.json",
+        "numerical_methods_20261001/PHYSICAL_MATRIX_FIXTURES.json",
+        "numerical_methods_20261001/TDD_DECISIONS.json",
+        "numerical_methods_20261001/TDD_GREEN.log",
+        "numerical_methods_20261001/TDD_RED.log",
+        "numerical_methods_20261001/numerical_audit.py",
+        "numerical_methods_20261001/test_basis_covariance.py",
+        "numerical_methods_20261001/test_generalized_rho_solver.py"
+      ],
       "source_ids": [],
-      "tests": [],
+      "tests": [
+        {
+          "command": "python -m unittest discover -s research/gap_closure_20261001/numerical_methods_20261001 -p 'test_*.py' -v",
+          "passed": 11,
+          "failed": 0,
+          "exit_code": 0
+        }
+      ],
       "external_runs": [],
       "blocker_class": null,
-      "next_minimum_action": "Execute exact gap loop in user contract",
+      "next_minimum_action": "Use consistent semantic selector/subspace transforms in future computations; no additional run needed for this closure.",
       "legacy_report_row": {
         "gap_id": "REPORT_GAP_08",
         "line_number": 1170,
         "status": "REPORTED_RECOMMENDATION_NOT_VALIDATED",
         "verbatim": "| **P1** | Hidden coordinate dependence could contaminate diagnostics | Implementation/theory | Random well-conditioned basis-change covariance test | **0.5–1 day** | \\(\\rho\\) invariant; projector identities preserved; raw \\(K_{TP}\\) allowed to vary |"
-      }
+      },
+      "closure_label": "CLOSED_DERIVED_AND_IMPLEMENTATION_VERIFIED",
+      "update_artifact": "numerical_methods_20261001/CLAIM_UPDATE.json"
     },
     {
       "gap_id": "G09",
@@ -325,27 +385,70 @@
       "gap_id": "G10",
       "database_gap_id": "REPORT_GAP_10",
       "title": "| **P1** | Selected-span definition is B0-index-specific | Theory/implementation | Define B1–B3 selected subspace semantically by center/energy/state identity, not inherited indices | **1–3 days** once basis files exist | Reproducible subspace mapping independent of channel ordering |",
-      "status": "UNRESOLVED",
+      "status": "CLOSED",
       "evidence_status": [
-        "UNRESOLVED"
+        "DERIVED",
+        "IMPLEMENTATION_VERIFIED"
       ],
       "dependencies": [],
-      "claims_closed": [],
-      "claims_open": [
-        "| **P1** | Selected-span definition is B0-index-specific | Theory/implementation | Define B1–B3 selected subspace semantically by center/energy/state identity, not inherited indices | **1–3 days** once basis files exist | Reproducible subspace mapping independent of channel ordering |"
+      "claims_closed": [
+        "Semantic query reproduces current B0 five-state negative-energy projectile span and transforms with reordering. Future unresolved basis identities fail closed."
       ],
-      "artifacts": [],
+      "claims_open": [
+        "B1-B3 physical state existence",
+        "all-bound closure",
+        "capture",
+        "basis completeness"
+      ],
+      "artifacts": [
+        "semantic_selection_20261001/B0_SEMANTIC_SELECTION_REGRESSION.json",
+        "semantic_selection_20261001/CLAIM_UPDATE.json",
+        "semantic_selection_20261001/REPORT.md",
+        "semantic_selection_20261001/REVIEW_REGRESSION_GREEN.txt",
+        "semantic_selection_20261001/REVIEW_REGRESSION_RED.txt",
+        "semantic_selection_20261001/SELECTED_SUBSPACE_SCHEMA.json",
+        "semantic_selection_20261001/semantic_selection.py",
+        "semantic_selection_20261001/test_selected_subspace_identity.py"
+      ],
       "source_ids": [],
-      "tests": [],
+      "tests": [
+        {
+          "command": "python -m unittest -v test_selected_subspace_identity.py",
+          "passed": 9,
+          "failed": 0,
+          "skipped": 0,
+          "red": {
+            "exit": 1,
+            "reason": "missing semantic_selection module before implementation"
+          },
+          "green": {
+            "exit": 0
+          },
+          "initial_green_passed": 8,
+          "independent_review_regression": {
+            "finding": "duplicate physical function admitted when principal_n label changed",
+            "red_exit": 1,
+            "green_exit": 0,
+            "fixed_physical_key": [
+              "center",
+              "l",
+              "m",
+              "radial_identity"
+            ]
+          }
+        }
+      ],
       "external_runs": [],
       "blocker_class": null,
-      "next_minimum_action": "Execute exact gap loop in user contract",
+      "next_minimum_action": null,
       "legacy_report_row": {
         "gap_id": "REPORT_GAP_10",
         "line_number": 1172,
         "status": "REPORTED_RECOMMENDATION_NOT_VALIDATED",
         "verbatim": "| **P1** | Selected-span definition is B0-index-specific | Theory/implementation | Define B1–B3 selected subspace semantically by center/energy/state identity, not inherited indices | **1–3 days** once basis files exist | Reproducible subspace mapping independent of channel ordering |"
-      }
+      },
+      "closure_label": "CLOSED_IMPLEMENTATION_VERIFIED",
+      "update_artifact": "semantic_selection_20261001/CLAIM_UPDATE.json"
     },
     {
       "gap_id": "G11",

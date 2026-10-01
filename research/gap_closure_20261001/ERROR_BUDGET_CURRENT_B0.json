@@ -1,0 +1,140 @@
+{
+  "schema": "BASS_ERROR_BUDGET_V1",
+  "context": {
+    "basis": "B0",
+    "channels": 18,
+    "energy_keV_per_u": 100,
+    "b_a0": 2,
+    "accepted_window_a0": [
+      -12,
+      12
+    ],
+    "P_selected": 0.009653428615023815,
+    "selected_indices": [
+      9,
+      10,
+      12,
+      13,
+      14
+    ]
+  },
+  "components": [
+    {
+      "name": "temporal",
+      "class": "EMPIRICAL_CONVERGENCE_ESTIMATE",
+      "scope": "current B0 finite span",
+      "value": null,
+      "units": "dimensionless selected probability",
+      "compared_objects": [],
+      "provenance": [
+        "historical TEMPORAL_GATE.json"
+      ],
+      "simultaneous_validity": false,
+      "applicable_to_current_fixed_b": true,
+      "empirical_metric_distances": {
+        "N1536_vs_reference": 1.6465482261011564e-07,
+        "N1536_vs_N768": 4.939684855805989e-07
+      },
+      "metric_distance_is_absolute_probability_error": false,
+      "existing_operational_gate": "N1536_TEMPORAL_GATE_CLOSED",
+      "gate_scope": "B0 \u00b112 only"
+    },
+    {
+      "name": "static_operator",
+      "class": "UNKNOWN",
+      "scope": "current B0 finite span",
+      "value": null,
+      "units": "dimensionless selected probability",
+      "compared_objects": [],
+      "provenance": [
+        "static_validation_20261001/STATIC_QUALIFICATION_REPORT.md"
+      ],
+      "simultaneous_validity": false,
+      "applicable_to_current_fixed_b": true,
+      "current_gate": "STATIC_QUALIFICATION_VALID_FOR_INTERNAL_RESOLUTION_CONSISTENCY",
+      "rigorous_truncation_bound": false
+    },
+    {
+      "name": "floating_point",
+      "class": "UNKNOWN",
+      "scope": "current B0 finite span",
+      "value": null,
+      "units": "dimensionless selected probability",
+      "compared_objects": [],
+      "provenance": [
+        "numerical_methods_20261001/E_RHO_SOLVER_REPORT.md"
+      ],
+      "simultaneous_validity": false,
+      "applicable_to_current_fixed_b": true
+    },
+    {
+      "name": "window",
+      "class": "UNKNOWN",
+      "scope": "current B0 finite span",
+      "value": null,
+      "units": "dimensionless selected probability",
+      "compared_objects": [],
+      "provenance": [],
+      "simultaneous_validity": false,
+      "applicable_to_current_fixed_b": true
+    },
+    {
+      "name": "tail",
+      "class": "UNKNOWN",
+      "scope": "current B0 finite span",
+      "value": null,
+      "units": "dimensionless selected probability",
+      "compared_objects": [],
+      "provenance": [
+        "majorant_analytic_20261001/ROUTE_A_STATUS.json",
+        "majorant_validated_20261001/MAJORANT_STATUS.json"
+      ],
+      "simultaneous_validity": false,
+      "applicable_to_current_fixed_b": true
+    },
+    {
+      "name": "basis",
+      "class": "UNKNOWN",
+      "scope": "B0 finite span versus basis-complete bound span",
+      "value": null,
+      "units": "dimensionless selected probability",
+      "compared_objects": [],
+      "provenance": [],
+      "simultaneous_validity": false,
+      "applicable_to_current_fixed_b": true
+    },
+    {
+      "name": "b_quadrature",
+      "class": "UNKNOWN",
+      "scope": "unopened integrated cross section",
+      "value": null,
+      "units": "cross-section area",
+      "compared_objects": [],
+      "provenance": [],
+      "simultaneous_validity": false,
+      "applicable_to_current_fixed_b": false
+    },
+    {
+      "name": "model",
+      "class": "SYSTEMATIC_MODEL_UNCERTAINTY",
+      "scope": "finite physical/Galerkin model versus physical scattering",
+      "value": null,
+      "units": "dimensionless selected probability",
+      "compared_objects": [],
+      "provenance": [],
+      "simultaneous_validity": false,
+      "applicable_to_current_fixed_b": true
+    }
+  ],
+  "certified_total": null,
+  "certified_total_status": "UNAVAILABLE_UNKNOWN_OPERATOR_AND_TAIL_BOUNDS",
+  "posthoc_threshold_selection": false,
+  "future_tail_acceptance_predeclaration": {
+    "epsilon_tail_total_probability": 1e-05,
+    "status": "RESEARCH_TARGET_PREDECLARED_BEFORE_NEW_TAIL_SAMPLES; does not authorize native or production",
+    "incoming_allocation": 5e-06,
+    "outgoing_allocation": 5e-06,
+    "finite_interval_and_remainder_validation_error": "must be included within each side allocation, not silently added outside target"
+  },
+  "production_error_budget_approved": false
+}

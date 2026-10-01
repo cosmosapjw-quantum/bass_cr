@@ -823,6 +823,197 @@
         "solver conditioning over physical matrix domain"
       ],
       "gap_status": "CLOSED"
+    },
+    {
+      "claim_id": "G07_RESEARCH_20261001",
+      "text": "Equivalent generalized-eigen/Cholesky implementation checked in pinned SciPy1.17.0.; Conditioning stress and independent Decimal2x2 reference quantified.; Eight archived physical B0 pencils replayed with near-unit metrics and residual checks.; Singular/indefinite failures are explicit and unregularized.",
+      "status": [
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "scope": "B0 finite-model research only",
+      "assumptions": [],
+      "sources": [
+        "SciPy_1_17_0_eigh",
+        "LAPACK_zhegvd"
+      ],
+      "project_evidence": [
+        "numerical_methods_20261001/CLAIM_UPDATE.json",
+        "numerical_methods_20261001/E_COVARIANCE_REPORT.md",
+        "numerical_methods_20261001/E_COVARIANCE_RESULTS.json",
+        "numerical_methods_20261001/E_RHO_SOLVER_REPORT.md",
+        "numerical_methods_20261001/E_RHO_SOLVER_RESULTS.json",
+        "numerical_methods_20261001/PHYSICAL_MATRIX_FIXTURES.json",
+        "numerical_methods_20261001/TDD_DECISIONS.json",
+        "numerical_methods_20261001/TDD_GREEN.log",
+        "numerical_methods_20261001/TDD_RED.log",
+        "numerical_methods_20261001/numerical_audit.py",
+        "numerical_methods_20261001/test_basis_covariance.py",
+        "numerical_methods_20261001/test_generalized_rho_solver.py"
+      ],
+      "does_not_imply": [
+        "Uniform forward-error certification for arbitrary near-singular pencils.",
+        "Full rate-matrix assembly reliability at synthetic cond(S)>=1e8; preserved Hermiticity failures.",
+        "Certified operator assembly error and independent Sdot identity, delegated toG02/static qualification."
+      ],
+      "gap_status": "RESOLVED_WITH_LIMITATION"
+    },
+    {
+      "claim_id": "G08_RESEARCH_20261001",
+      "text": "Constant nonsingular basis covariance derived for S,H,D,A,J,Pi,Q,W and generalized spectrum.; Twelve random complex coordinate changes preserve norm/P/rho with historical probe.; Raw coordinate block norm scaling counterexample established.; Separate metric_projected_coupling_norm derived and tested; existing diagnostic unchanged.",
+      "status": [
+        "DERIVED",
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "scope": "B0 finite-model research only",
+      "assumptions": [],
+      "sources": [],
+      "project_evidence": [
+        "numerical_methods_20261001/CLAIM_UPDATE.json",
+        "numerical_methods_20261001/E_COVARIANCE_REPORT.md",
+        "numerical_methods_20261001/E_COVARIANCE_RESULTS.json",
+        "numerical_methods_20261001/E_RHO_SOLVER_REPORT.md",
+        "numerical_methods_20261001/E_RHO_SOLVER_RESULTS.json",
+        "numerical_methods_20261001/PHYSICAL_MATRIX_FIXTURES.json",
+        "numerical_methods_20261001/TDD_DECISIONS.json",
+        "numerical_methods_20261001/TDD_GREEN.log",
+        "numerical_methods_20261001/TDD_RED.log",
+        "numerical_methods_20261001/numerical_audit.py",
+        "numerical_methods_20261001/test_basis_covariance.py",
+        "numerical_methods_20261001/test_generalized_rho_solver.py"
+      ],
+      "does_not_imply": [],
+      "gap_status": "CLOSED"
+    },
+    {
+      "claim_id": "G07_SOLVER_EQUIVALENCE_AND_B0_REPLAY",
+      "text": "Generalized-eigen and Cholesky-congruence paths agree on eight archived B0 pencils under SciPy1.17.0; archived rho reproduces exactly.",
+      "status": [
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "scope": "Eight stored B0 static operator pencils at signed16,20,24,32a0; no states",
+      "assumptions": [
+        "Historical Sdot=D+Ddagger assembly assumption retained",
+        "Archive byte provenance verified",
+        "Finite metric remainsSPD"
+      ],
+      "sources": [
+        "SciPy_1_17_0_eigh",
+        "LAPACK_zhegvd"
+      ],
+      "project_evidence": [
+        "numerical_methods_20261001/E_RHO_SOLVER_RESULTS.json",
+        "numerical_methods_20261001/PHYSICAL_MATRIX_FIXTURES.json",
+        "numerical_methods_20261001/TDD_GREEN.log"
+      ],
+      "does_not_imply": [
+        "physical operator error bound",
+        "independent derivative validation",
+        "continuous tail bound",
+        "near-singular full-probe accuracy"
+      ]
+    },
+    {
+      "claim_id": "G07_CONDITIONING_FAILURE_DOMAIN",
+      "text": "Near-machine precision cross-path agreement can coexist with2.78e-6 forward error at cond~1e12; historical W assembly rejects tested cond1e8/1e12.",
+      "status": [
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "scope": "Documented deterministic synthetic families",
+      "assumptions": [
+        "float64 paths",
+        "100-digit Decimal2x2 reference of rounded input"
+      ],
+      "sources": [],
+      "project_evidence": [
+        "numerical_methods_20261001/E_RHO_SOLVER_RESULTS.json",
+        "numerical_methods_20261001/TDD_DECISIONS.json"
+      ],
+      "does_not_imply": [
+        "all pencils withsamecond have sameerror",
+        "one uniform numerical rank threshold"
+      ]
+    },
+    {
+      "claim_id": "G08_CONSTANT_BASIS_COVARIANCE",
+      "text": "Under constant nonsingular T withJprime=T^-1J, norm/P/generalized spectrum/rho are invariant; Pi transforms bysimilarity and Q,W bycongruence.",
+      "status": [
+        "DERIVED",
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "scope": "Same finite model and selected physical subspace",
+      "assumptions": [
+        "S SPD",
+        "H Hermitian",
+        "fullcolumnrankJ",
+        "constant nonsingularT",
+        "consistent coordinate transform"
+      ],
+      "sources": [],
+      "project_evidence": [
+        "numerical_methods_20261001/E_COVARIANCE_REPORT.md",
+        "numerical_methods_20261001/E_COVARIANCE_RESULTS.json",
+        "numerical_methods_20261001/test_basis_covariance.py"
+      ],
+      "does_not_imply": [
+        "different-basis completeness",
+        "time-dependentT without connectionterms"
+      ]
+    },
+    {
+      "claim_id": "G08_RAW_BLOCK_NONINVARIANCE",
+      "text": "Raw coordinate-block2-norm changes under scaling; a separately named S-metric projected coupling norm is invariant.",
+      "status": [
+        "DERIVED",
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "scope": "Declared coefficient operator and full-rank subspace maps",
+      "assumptions": [
+        "S SPD",
+        "consistent operator/subspace transformations"
+      ],
+      "sources": [],
+      "project_evidence": [
+        "numerical_methods_20261001/E_COVARIANCE_REPORT.md",
+        "numerical_methods_20261001/E_COVARIANCE_RESULTS.json"
+      ],
+      "does_not_imply": [
+        "metric coupling automatically measures physical transfer rate",
+        "existing KTP was replaced"
+      ]
+    },
+    {
+      "claim_id": "G10_RESEARCH_20261001",
+      "text": "Semantic query reproduces current B0 five-state negative-energy projectile span and transforms with reordering. Future unresolved basis identities fail closed.",
+      "status": [
+        "DERIVED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "scope": "schema and new explicitly callable selector; no automatic production replacement",
+      "assumptions": [],
+      "sources": [],
+      "project_evidence": [
+        "semantic_selection_20261001/B0_SEMANTIC_SELECTION_REGRESSION.json",
+        "semantic_selection_20261001/CLAIM_UPDATE.json",
+        "semantic_selection_20261001/REPORT.md",
+        "semantic_selection_20261001/REVIEW_REGRESSION_GREEN.txt",
+        "semantic_selection_20261001/REVIEW_REGRESSION_RED.txt",
+        "semantic_selection_20261001/SELECTED_SUBSPACE_SCHEMA.json",
+        "semantic_selection_20261001/semantic_selection.py",
+        "semantic_selection_20261001/test_selected_subspace_identity.py"
+      ],
+      "does_not_imply": [
+        "B1-B3 physical state existence",
+        "all-bound closure",
+        "capture",
+        "basis completeness"
+      ],
+      "gap_status": "CLOSED"
     }
   ]
 }

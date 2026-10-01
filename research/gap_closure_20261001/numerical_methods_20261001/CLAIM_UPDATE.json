@@ -1,0 +1,282 @@
+{
+  "schema_version": 1,
+  "gap_updates": [
+    {
+      "gap_id": "G07",
+      "database_gap_id": "REPORT_GAP_07",
+      "title": "Generalized eigensolver conditioning",
+      "status_before": "REPORTED_RECOMMENDATION_NOT_VALIDATED",
+      "original_database_row": {
+        "gap_id": "REPORT_GAP_07",
+        "line_number": 1169,
+        "status": "REPORTED_RECOMMENDATION_NOT_VALIDATED",
+        "verbatim": "| **P1** | Generalized eigensolver not yet stress-tested across near-singular metrics | Numerical | Generalized eig vs Cholesky congruence vs high precision; synthetic conditioning sweep | **1 day** | Backward errors and value errors scale predictably with conditioning |"
+      },
+      "status_after": "RESOLVED_WITH_LIMITATION",
+      "closure_label": "CLOSED_IMPLEMENTATION_VERIFIED_WITH_CONDITIONING_DOMAIN",
+      "evidence_status": [
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "source_ids": [
+        "SciPy_1_17_0_eigh",
+        "LAPACK_zhegvd"
+      ],
+      "source_probe_commit": "01ec2ba7e71aefdccab1896acfe5d92c15c6b776",
+      "source_probe_sha256": "022cade99f705493043ef98ec86bb5fb9aefb22f079ca5471874d23a05c1fb27",
+      "new_native_calls": 0,
+      "new_external_runs": 0,
+      "authorizations_consumed": 0,
+      "production_source_modified": false,
+      "claim_ceilings": {
+        "capture": false,
+        "production": "HOLD",
+        "all_bound": "OPEN",
+        "b_grid": "NO_GO",
+        "original_capture_gap_resolved": false,
+        "continuous_global_supremum_bound": false,
+        "continuous_trajectory_error_bound": false
+      },
+      "claims_closed": [
+        "Equivalent generalized-eigen/Cholesky implementation checked in pinned SciPy1.17.0.",
+        "Conditioning stress and independent Decimal2x2 reference quantified.",
+        "Eight archived physical B0 pencils replayed with near-unit metrics and residual checks.",
+        "Singular/indefinite failures are explicit and unregularized."
+      ],
+      "claims_open": [
+        "Uniform forward-error certification for arbitrary near-singular pencils.",
+        "Full rate-matrix assembly reliability at synthetic cond(S)>=1e8; preserved Hermiticity failures.",
+        "Certified operator assembly error and independent Sdot identity, delegated toG02/static qualification."
+      ],
+      "verified_domain": {
+        "physical_z_a0": [
+          -32,
+          -24,
+          -20,
+          -16,
+          16,
+          20,
+          24,
+          32
+        ],
+        "physical_condition_range": [
+          1.0042690152710645,
+          1.0089766800019804
+        ],
+        "synthetic_direct_solver_conditions": [
+          1,
+          10000.0,
+          100000000.0,
+          1000000000000.0
+        ],
+        "synthetic_whole_probe_accepted_conditions": [
+          1,
+          10000.0
+        ],
+        "synthetic_whole_probe_rejected_conditions": [
+          100000000.0,
+          1000000000000.0
+        ],
+        "uniform_guarantee_over_condition_range": false
+      },
+      "blocker_class_for_remaining_near_singular_claim": "NUMERICAL_METHOD_BLOCKER",
+      "next_minimum_action": "Keep per-pencil metric/residual diagnostics. Any near-singular extension requires G09 rank policy and renewed assembly validation; do not rerun these8 physical queries.",
+      "artifacts": [
+        "E_RHO_SOLVER_REPORT.md",
+        "E_RHO_SOLVER_RESULTS.json",
+        "PHYSICAL_MATRIX_FIXTURES.json",
+        "numerical_audit.py",
+        "test_generalized_rho_solver.py",
+        "TDD_RED.log",
+        "TDD_GREEN.log",
+        "TDD_DECISIONS.json"
+      ]
+    },
+    {
+      "gap_id": "G08",
+      "database_gap_id": "REPORT_GAP_08",
+      "title": "Basis covariance and coordinate diagnostics",
+      "status_before": "REPORTED_RECOMMENDATION_NOT_VALIDATED",
+      "original_database_row": {
+        "gap_id": "REPORT_GAP_08",
+        "line_number": 1170,
+        "status": "REPORTED_RECOMMENDATION_NOT_VALIDATED",
+        "verbatim": "| **P1** | Hidden coordinate dependence could contaminate diagnostics | Implementation/theory | Random well-conditioned basis-change covariance test | **0.5\u20131 day** | \\(\\rho\\) invariant; projector identities preserved; raw \\(K_{TP}\\) allowed to vary |"
+      },
+      "status_after": "CLOSED",
+      "closure_label": "CLOSED_DERIVED_AND_IMPLEMENTATION_VERIFIED",
+      "evidence_status": [
+        "DERIVED",
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "source_ids": [],
+      "source_probe_commit": "01ec2ba7e71aefdccab1896acfe5d92c15c6b776",
+      "source_probe_sha256": "022cade99f705493043ef98ec86bb5fb9aefb22f079ca5471874d23a05c1fb27",
+      "new_native_calls": 0,
+      "new_external_runs": 0,
+      "authorizations_consumed": 0,
+      "production_source_modified": false,
+      "claim_ceilings": {
+        "capture": false,
+        "production": "HOLD",
+        "all_bound": "OPEN",
+        "b_grid": "NO_GO",
+        "original_capture_gap_resolved": false,
+        "continuous_global_supremum_bound": false,
+        "continuous_trajectory_error_bound": false
+      },
+      "claims_closed": [
+        "Constant nonsingular basis covariance derived for S,H,D,A,J,Pi,Q,W and generalized spectrum.",
+        "Twelve random complex coordinate changes preserve norm/P/rho with historical probe.",
+        "Raw coordinate block norm scaling counterexample established.",
+        "Separate metric_projected_coupling_norm derived and tested; existing diagnostic unchanged."
+      ],
+      "claims_open": [],
+      "scope_limits": [
+        "ConstantT only; time-dependent transformations needconnection/Jdot terms.",
+        "Coordinate covariance does not establish new-basis completeness or physical transfer interpretation."
+      ],
+      "blocker_class": null,
+      "next_minimum_action": "Use consistent semantic selector/subspace transforms in future computations; no additional run needed for this closure.",
+      "artifacts": [
+        "E_COVARIANCE_REPORT.md",
+        "E_COVARIANCE_RESULTS.json",
+        "numerical_audit.py",
+        "test_basis_covariance.py",
+        "TDD_RED.log",
+        "TDD_GREEN.log"
+      ]
+    }
+  ],
+  "claim_updates": [
+    {
+      "claim_id": "G07_SOLVER_EQUIVALENCE_AND_B0_REPLAY",
+      "text": "Generalized-eigen and Cholesky-congruence paths agree on eight archived B0 pencils under SciPy1.17.0; archived rho reproduces exactly.",
+      "status": [
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "scope": "Eight stored B0 static operator pencils at signed16,20,24,32a0; no states",
+      "assumptions": [
+        "Historical Sdot=D+Ddagger assembly assumption retained",
+        "Archive byte provenance verified",
+        "Finite metric remainsSPD"
+      ],
+      "sources": [
+        "SciPy_1_17_0_eigh",
+        "LAPACK_zhegvd"
+      ],
+      "project_evidence": [
+        "E_RHO_SOLVER_RESULTS.json",
+        "PHYSICAL_MATRIX_FIXTURES.json",
+        "TDD_GREEN.log"
+      ],
+      "does_not_imply": [
+        "physical operator error bound",
+        "independent derivative validation",
+        "continuous tail bound",
+        "near-singular full-probe accuracy"
+      ]
+    },
+    {
+      "claim_id": "G07_CONDITIONING_FAILURE_DOMAIN",
+      "text": "Near-machine precision cross-path agreement can coexist with2.78e-6 forward error at cond~1e12; historical W assembly rejects tested cond1e8/1e12.",
+      "status": [
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "scope": "Documented deterministic synthetic families",
+      "assumptions": [
+        "float64 paths",
+        "100-digit Decimal2x2 reference of rounded input"
+      ],
+      "sources": [],
+      "project_evidence": [
+        "E_RHO_SOLVER_RESULTS.json",
+        "TDD_DECISIONS.json"
+      ],
+      "does_not_imply": [
+        "all pencils withsamecond have sameerror",
+        "one uniform numerical rank threshold"
+      ]
+    },
+    {
+      "claim_id": "G08_CONSTANT_BASIS_COVARIANCE",
+      "text": "Under constant nonsingular T withJprime=T^-1J, norm/P/generalized spectrum/rho are invariant; Pi transforms bysimilarity and Q,W bycongruence.",
+      "status": [
+        "DERIVED",
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "scope": "Same finite model and selected physical subspace",
+      "assumptions": [
+        "S SPD",
+        "H Hermitian",
+        "fullcolumnrankJ",
+        "constant nonsingularT",
+        "consistent coordinate transform"
+      ],
+      "sources": [],
+      "project_evidence": [
+        "E_COVARIANCE_REPORT.md",
+        "E_COVARIANCE_RESULTS.json",
+        "test_basis_covariance.py"
+      ],
+      "does_not_imply": [
+        "different-basis completeness",
+        "time-dependentT without connectionterms"
+      ]
+    },
+    {
+      "claim_id": "G08_RAW_BLOCK_NONINVARIANCE",
+      "text": "Raw coordinate-block2-norm changes under scaling; a separately named S-metric projected coupling norm is invariant.",
+      "status": [
+        "DERIVED",
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "scope": "Declared coefficient operator and full-rank subspace maps",
+      "assumptions": [
+        "S SPD",
+        "consistent operator/subspace transformations"
+      ],
+      "sources": [],
+      "project_evidence": [
+        "E_COVARIANCE_REPORT.md",
+        "E_COVARIANCE_RESULTS.json"
+      ],
+      "does_not_imply": [
+        "metric coupling automatically measures physical transfer rate",
+        "existing KTP was replaced"
+      ]
+    }
+  ],
+  "documentation_provenance": [
+    {
+      "document_id": "SciPy_1_17_0_eigh",
+      "path": "11_rescue/documentation/SciPy_1_17_0_eigh.html",
+      "title": "eigh \u2014 SciPy v1.17.0 Manual",
+      "url": "https://docs.scipy.org/doc/scipy-1.17.0/reference/generated/scipy.linalg.eigh.html",
+      "scope": "ORIGINAL_PAGE_OR_SOURCE_FILE_ONLY_NOT_COMPLETE_WEBSITE",
+      "local_sha256": "52f30562247ee204491d39a10a03237dc844828b1f58a1f313003ebdee194671"
+    },
+    {
+      "document_id": "LAPACK_zhegvd",
+      "path": "10_acquired/documentation/LAPACK_zhegvd.original",
+      "title": "      SUBROUTINE ZHEGVD( ITYPE, JOBZ, UPLO, N, A, LDA, B, LDB, W, WORK,      $                   LWO",
+      "url": "https://www.netlib.org/lapack/complex16/zhegvd.f",
+      "scope": "ORIGINAL_PAGE_OR_SOURCE_FILE_ONLY_NOT_COMPLETE_WEBSITE",
+      "local_sha256": "a15bae3a94c60349cfeab83c553dc3e66f15743f450820fbb60bdd58b7392edd"
+    }
+  ],
+  "tests": {
+    "command": "python -m unittest discover -s research/gap_closure_20261001/numerical_methods_20261001 -p 'test_*.py' -v",
+    "passed": 11,
+    "failed": 0,
+    "exit_code": 0
+  },
+  "new_native_calls": 0,
+  "new_external_runs": 0,
+  "authorizations_consumed": 0
+}
