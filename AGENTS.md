@@ -57,3 +57,13 @@ connects the physical qualified provider to the HPC queue and a cache-only,
 checkpointed midpoint solver. Use its fresh source/native/input/resource manifest
 and exact cache/time identities for this archived B0 lane. Operational acceptance
 and restart checks do not close the independent scientific production gates.
+
+R4V `research/gap_closure_20261001/production_validation_20261001/` adds
+bounded local process partitions when no admitted MPI launcher is available.
+The single coordinator allocates disjoint, nontransferable raw-attempt blocks
+before launching any lane. Aggregate CPU/RAM admission and exact manifest pins
+remain mandatory; failed lanes cancel all owned work, including orphaned children.
+This local path is not evidence of MPI execution or NCP64 scaling. Its fresh-context
+G02/G03 analyzers preserve the original scientific thresholds. The Richardson
+supplement never replaces the raw FD gate, and the short same-IVP DOP853 pilot
+does not certify the full scattering window or a continuous error bound.

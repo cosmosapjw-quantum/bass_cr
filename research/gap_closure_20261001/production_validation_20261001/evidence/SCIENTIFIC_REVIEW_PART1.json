@@ -1,0 +1,153 @@
+{
+  "schema": "BASS_R4V_INDEPENDENT_SCIENTIFIC_REVIEW_PART1_V1",
+  "reviewed_utc": "2026-10-01T13:41:52.756520+00:00",
+  "verdict": "PASS_WITH_EXPLICIT_LIMITATIONS",
+  "reviewer_independence": {
+    "not_author_of_G02_G03_or_Richardson": true,
+    "author_of_G12_adapter": true,
+    "own_G12_code_not_reviewed_as_independent": true,
+    "model_routing": "UNAVAILABLE_NO_INFERENCE"
+  },
+  "reviewed_file_sha256": {
+    "runs_r4v/G03_ANALYSIS/G03_RESULT.json": "16248c9ef1807a08911f9e1b283026140be6d9449cc46cab4419a10f22a0ee81",
+    "runs_r4v/G03_PREDICTIONS_BEFORE_RUN.json": "77f7d08d19cc8d3830b2f4426987a96582fbaf719f043a0f1ae604014d112101",
+    "recovered_r4u/source/research/gap_closure_20261001/production_validation_20261001/fresh_context_analysis.py": "38c25a725ce145e20abb155f3bff5b35114c6ae1075ee02940f03e69644a7a48",
+    "recovered_r4u/source/research/gap_closure_20261001/production_validation_20261001/richardson_diagnostic.py": "00ad154246440a841beae6225bbc1ff59785e6b845c5cdb4ba85d68b25ce9006",
+    "recovered_r4u/source/research/gap_closure_20261001/production_validation_20261001/test_richardson_diagnostic.py": "82f6e43457d998bc276812266e10a94cbb549d51d5494e3aa8d692d22b6618f0",
+    "recovered_r4u/source/research/gap_closure_20261001/production_validation_20261001/RICHARDSON_DIAGNOSTIC.md": "d75944205cc6aa963aa5e8fd8621544883533b53746c3d481ffda340bd94a9d3",
+    "recovered_r4u/source/research/gap_closure_20261001/production_validation_20261001/RICHARDSON_SUPPLEMENT_CONTRACT.json": "7861935277408cfdba3e0a3d03971f3b19bd9dcad0c28f8766113bd7e8480026",
+    "recovered_r4u/source/research/gap_closure_20261001/production_validation_20261001/run_richardson_analysis.py": "865ada069587f2ae838d93e850228257b254938dc88a5cc56baa5a8376755d12",
+    "recovered_r4u/source/research/gap_closure_20261001/asymptotics_20261001/asymptotic_models.py": "c90b9a000ee50e381e175c5b9c975cb35dad3800cce29f28e9c36a155e367642",
+    "recovered_r4u/source/research/gap_closure_20261001/static_validation_20261001/executor/g03_rate_postprocess.py": "e6c5a685a2824118f8124b5cdfac5eb84f9b5707dbb8a0cbe0d0c3f653ef639c"
+  },
+  "review_actions": {
+    "source_edits": 0,
+    "native_operator_evaluations": 0,
+    "trajectory_executions": 0,
+    "full_suite_reruns": 0,
+    "original_43_test_reruns": 0,
+    "saved_matrix_only_algebra_recalculations": 4,
+    "exact_rational_Richardson_coefficient_checks": true
+  },
+  "G03": {
+    "verdict": "LOCAL_SIGNED48_DIAGNOSTIC_AND_FROZEN_HOLDOUT_SCORING_SUPPORTED",
+    "source_pin_count": 8,
+    "all_source_pins_match": true,
+    "frozen_prediction_hash_matches": true,
+    "rho_minus48": 0.0001877660071256205,
+    "rho_plus48": 0.00018776600712562042,
+    "independent_rate_reconstruction": {
+      "method": "Reconstruct Q,Qdot,A,W from saved S,H,D using separate NumPy expressions; general eigvals(solve(S,W)); no invocation of original rate_matrices/eigh path",
+      "Sdot_assumption": "D+Ddagger; this recalculation does not validate physical G02",
+      "matrices": "both signs and both saved q32/q40 subdivisions1 levels",
+      "all_saved_matrix_payload_hashes_match": true,
+      "maximum_relative_rho_disagreement": 1.2101430968414206e-14,
+      "maximum_relative_W_Frobenius_disagreement": 5.998685674507086e-13,
+      "maximum_eigenvalue_imaginary_part": 9.003365410125366e-19,
+      "interpretation": "Floating arithmetic consistency; not an enclosure or independent operator computation"
+    },
+    "independent_fit_checks": {
+      "outer3_M1_prediction_minus": 0.000188262417055503,
+      "outer3_M1_relative_error_minus": 0.0026437688987570596,
+      "outer3_M1_relative_error_percent_minus": 0.26437688987570596,
+      "outer3_M1_prediction_plus": 0.00018826241705550278,
+      "outer3_M1_relative_error_plus": 0.0026437688987561714,
+      "M1_method": "Closed-form minimizer of sum((C2/R^2-rho)/rho)^2 on original outer3 only",
+      "M2_refit_exponent_minus": 2.0025816245848085,
+      "M2_refit_exponent_plus": 2.002581624584807,
+      "M2_method": "Independent root of profiled least-squares stationarity with brentq; saved implementation used scalar minimization",
+      "maximum_exponent_difference_vs_saved": 5.942086822585679e-10,
+      "M2_is_post_holdout_refit_not_frozen_prediction": true,
+      "all4_M1_to_M4_relative_errors_minus": [
+        0.024566417693362874,
+        0.0652697647717263,
+        0.048814320003154665,
+        0.06790055705222486
+      ],
+      "all4_M1_to_M4_relative_errors_plus": [
+        0.02456641769336243,
+        0.06526976477133628,
+        0.048814320003155554,
+        0.06790055705222575
+      ],
+      "all4_models_fail_predeclared_2percent_screen_both_signs": true
+    },
+    "allowed_inferences": [
+      "Outer3 frozen R^-2 prediction agrees with the signed48 holdout at approximately0.2644% relative discrepancy.",
+      "Removing the abs(z)=16 sample improved the predeclared holdout forecasts; a pre-asymptotic inner sample is a plausible interpretation.",
+      "Outer20,24,32,48 refit gives an exponent approximately2.00258; it remains an empirical finite-data fit."
+    ],
+    "not_supported": [
+      "Proof that the z16 sample is pre-asymptotic rather than affected by another model or numerical discrepancy.",
+      "Proof of a unique asymptotic power law or exclusion of all alternative functional forms.",
+      "Statistical confidence interval, independent signs as replicated statistical samples, or certified continuous/tail error bound.",
+      "State-selected P or Pdot: no trajectory state was supplied."
+    ],
+    "provenance_limitations": {
+      "historical_CXX_baseline_and_fresh_Fortran_holdout_contexts_differ": true,
+      "same_archived_B0_physics_is_explicit": true,
+      "physical_backend_bridge_scope": "Only actually checked R4U z32 time and q32/q40 resolutions, not universal backend equivalence",
+      "no_hidden_same_context_claim": true,
+      "continuous_certificate": false,
+      "physical_G03_closed": false
+    }
+  },
+  "Richardson": {
+    "verdict": "FORMAL_DERIVATION_AND_OFFLINE_IMPLEMENTATION_SUPPORTED",
+    "declared_source_sha256": "00ad154246440a841beae6225bbc1ff59785e6b845c5cdb4ba85d68b25ce9006",
+    "all_four_declared_source_hashes_match": true,
+    "recurrence": "T[j,i]=(4^j*T[j-1,i+1]-T[j-1,i])/(4^j-1)",
+    "exact_rational_R8_weights": [
+      "-1/2835",
+      "4/135",
+      "-64/135",
+      "4096/2835"
+    ],
+    "exact_even_error_moments_k0_k1_k2_k3": [
+      "1",
+      "0",
+      "0",
+      "0"
+    ],
+    "layer_lengths_R2_R4_R6_R8": [
+      4,
+      3,
+      2,
+      1
+    ],
+    "formal_orders_require_smooth_even_power_expansion": true,
+    "R8_empirical_eighth_order_not_established_from_single_estimate": true,
+    "derivative_estimates_constructed_without_D": true,
+    "D_only_used_after_construction_for_comparison": true,
+    "norm_sensitivity_weight_formula_verified": "sum_i abs(w_i)*v/h_i for uniformly bounded absolute overlap errors",
+    "epsilon_surrogate_is_heuristic_not_total_roundoff_or_quadrature_bound": true,
+    "test_source_reviewed": "Polynomial degree0..8, complex oscillatory formal rates, analytic-D independence, coefficient weights, sinc ratio, finite input rejection and unchanged claim flags",
+    "test_suite_not_rerun": true,
+    "raw_G02_acceptance_unchanged": true,
+    "new_physical_samples": 0,
+    "physical_G02_closed": false,
+    "rigorous_operator_error_bound": false
+  },
+  "chronology": {
+    "evidence_type": "Local file ordering plus immutable content hashes and predeclaration statements; not external timestamp attestation",
+    "G03_prediction_mtime_utc": "2026-10-01T13:24:45.022776+00:00",
+    "G03_supervisor_mtime_utc": "2026-10-01T13:27:21.581938+00:00",
+    "G03_predictions_precede_launch_in_local_records": true,
+    "Richardson_declaration_mtime_utc": "2026-10-01T13:35:14.142792+00:00",
+    "G02_V2_admission_mtime_utc": "2026-10-01T13:37:00.948012+00:00",
+    "Richardson_declaration_precedes_G02_V2_physical_run_in_local_records": true,
+    "Richardson_declaration_sha256": "7861935277408cfdba3e0a3d03971f3b19bd9dcad0c28f8766113bd7e8480026",
+    "designer_statement": "physical_results_seen_by_supplement_designer=false; independently verifying subjective knowledge is outside this review"
+  },
+  "findings": [],
+  "pending": [
+    "G02 actual raw diagnostic and physical Richardson supplement final result review after completion."
+  ],
+  "claim_ceilings": {
+    "production_admission": "HOLD",
+    "capture": false,
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "continuous_trajectory_error_bound": false
+  }
+}

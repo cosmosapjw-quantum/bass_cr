@@ -1,0 +1,124 @@
+{
+  "schema": "BASS_R4V_STATIC_VALIDATION_CONTRACT_V1",
+  "created_date": "2026-10-01",
+  "task_authority": "Current user requested production solver implementation and execution, then continuation; no archived consumable approval is reused.",
+  "source_base_commit": "0551d0055dd9dae9fec705b1c1b5fd8dbb7ae972",
+  "recovery_package_sha256": "f3ebd034b795751235c154f56c5e69bb75953fef8d3d94e34b7e96defa867a69",
+  "objective": "Execute the frozen independent Sdot finite-difference diagnostic and signed48 static discriminator through the validated strict Fortran provider.",
+  "physics": {
+    "energy_keV_per_u": 100,
+    "b_a0": 2,
+    "charges": [
+      1,
+      1
+    ],
+    "basis": "archived B0 18 channels",
+    "basis_identity": "f23267b7214a5e3918866dcece5cb61c79a891578f4dda69dee5a762eb02983a",
+    "basis_npz_sha256": "889001a751cd3cae93ad217336587f5fc58db11c0a496843ecc7e7bbd93f83ec"
+  },
+  "G02": {
+    "original_science_plan_sha256": "6644827b9cbde65a5a27f8d2229ed9dc99caf9022c70e2c8663a43dfda0b1c7c",
+    "centers": [
+      -32.0,
+      -24.0,
+      -16.0,
+      -12.0,
+      12.0,
+      16.0,
+      24.0,
+      32.0
+    ],
+    "h_ladder": [
+      0.4,
+      0.2,
+      0.1,
+      0.05
+    ],
+    "acceptance": {
+      "relative_target": 1e-06,
+      "absolute_target_atomic_time_inverse": 1e-12,
+      "order_window": [
+        1.5,
+        2.5
+      ],
+      "minimum_consecutive_order_intervals": 2,
+      "scope": "DERIVATIVE_IMPLEMENTATION_DIAGNOSTIC_NOT_CERTIFIED_OPERATOR_ERROR"
+    },
+    "fresh_queries": 72,
+    "historical_reuse": 0,
+    "context_change_reason": "Six legacy centers cannot silently cross into the new strict Fortran source/native context.",
+    "lanes": 4,
+    "threads_per_lane": 2,
+    "cpus": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "per_lane_rss_estimate_GiB": 0.5,
+    "max_raw_attempts_per_lane": 198,
+    "max_raw_attempts_total": 792,
+    "per_lane_wall_limit_seconds": 1800,
+    "overall_wall_limit_seconds": 1830,
+    "stop": "No retry or budget transfer; on lane failure cancel all owned supervisors and preserve consumed reservations.",
+    "no_new_tolerances": true
+  },
+  "G03": {
+    "original_science_plan_sha256": "2ac771284781b8751adc3d4bdfe761ae578dcb0ac0307fa4d7d2f61b61d53e5e",
+    "query_times_hex": [
+      "-0x1.7e7946195fe4cp+4",
+      "0x1.7e7946195fe4cp+4"
+    ],
+    "fresh_queries": 2,
+    "threads": 2,
+    "cpus": [
+      0,
+      1
+    ],
+    "max_raw_attempts_total": 22,
+    "wall_limit_seconds": 300,
+    "predictions_frozen_before_run": true,
+    "no_automatic_larger_radius_followup": true
+  },
+  "total_static_raw_attempts_ceiling": 814,
+  "invariants": [
+    "FP64",
+    "original per-entry accumulation order",
+    "no fast math",
+    "same-center order20",
+    "unchanged qualification ladder/screens",
+    "exact float time identities",
+    "no interpolation",
+    "BLAS threads1",
+    "source/native/input and current host admission",
+    "create-only output",
+    "CPU/RAM collective admission",
+    "failure evidence retained"
+  ],
+  "independence_limits": [
+    "S FD and D analytic formula differ but share basis geometry and quadrature.",
+    "Finite h/resolution agreement is not a certified continuous operator error bound.",
+    "Historical G03 predictions are frozen; new backend/context is explicit."
+  ],
+  "completion_bar": [
+    "Restored package verified",
+    "New bounded execution manifests and source identities frozen",
+    "Actual outputs or first-failure receipts preserved",
+    "Same frozen scientific diagnostics evaluated without threshold relaxation",
+    "Independent implementation and result review",
+    "Report/package/DB and already-authorized same-branch dual backup"
+  ],
+  "claim_ceilings": {
+    "production": "HOLD",
+    "capture": false,
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "NCP64_scaling": "NOT_RUN",
+    "MPI_physical_run": "NOT_RUN"
+  },
+  "separate_G12_work": "A separately frozen same-IVP narrow independent-integrator pilot may be implemented; static success does not authorize automatic gate promotion or full scattering runs."
+}

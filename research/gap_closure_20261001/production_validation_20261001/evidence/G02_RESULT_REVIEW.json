@@ -1,0 +1,1400 @@
+{
+  "schema": "BASS_R4V_INDEPENDENT_G02_RESULT_REVIEW_V1",
+  "reviewed_utc": "2026-10-01T14:05:27.035006+00:00",
+  "verdict": "REPORT_AND_INTERPRETATION_PASS_RAW_G02_GATE_REMAINS_UNRESOLVED",
+  "scope": "Independent saved-cache numerical reconstruction and claim review; no evaluator import, no physics calls, no trajectory or old test reruns",
+  "reviewer_independence": {
+    "not_author_of_raw_G02_or_Richardson": true,
+    "own_G12_not_reviewed": true,
+    "model_routing": "UNAVAILABLE_NO_INFERENCE"
+  },
+  "file_sha256": {
+    "G02_RESULT.json": "f2f06597cea511033b364930db00ad9884de958fe2df2071a72c3464daeb85b7",
+    "G02_RICHARDSON_RESULT.json": "26ed214a581962b609af7b463ceef6af20962e2df77fcd8acb23ff13d21f19a2",
+    "G02_BATCH_PLAN_V2.json": "0a4798b60da0c3475d4baad98f8a62b7b54652895552a8bf4fdf41106fa60342",
+    "G02_BATCH_V2/BATCH_RESULT.json": "b6683ee4e9ea01500851b28d39500520e415511152fc059a7ab5b139c23b4df3"
+  },
+  "source_pins": {
+    "research/gap_closure_20261001/production_validation_20261001/fresh_context_analysis.py": "38c25a725ce145e20abb155f3bff5b35114c6ae1075ee02940f03e69644a7a48",
+    "research/gap_closure_20261001/static_validation_20261001/static_validation.py": "3e1d5ef9ad870299a8535377120d63a19320bbf8be98e9db7e2caeba86a3b30e",
+    "research/gap_closure_20261001/static_validation_20261001/executor/g03_rate_postprocess.py": "e6c5a685a2824118f8124b5cdfac5eb84f9b5707dbb8a0cbe0d0c3f653ef639c",
+    "research/gap_closure_20261001/asymptotics_20261001/asymptotic_models.py": "c90b9a000ee50e381e175c5b9c975cb35dad3800cce29f28e9c36a155e367642",
+    "research/gap_closure_20261001/static_validation_20261001/E_SDOT_FD_EXECUTION_CONTRACT.json": "6644827b9cbde65a5a27f8d2229ed9dc99caf9022c70e2c8663a43dfda0b1c7c",
+    "research/gap_closure_20261001/static_validation_20261001/executor/G03_SCIENCE_CONTRACT.json": "479ca3efdbbacfdc698b29a9c4eeef2597e5979b2960e14a594cad7f96bb01b4",
+    "research/foundation_rebuild/ncp_shared_research_20260928/r4p0a_b0_static_tail_executor_20260930/execution_evidence/R4P0-B0-STATIC-TAIL-20260930-A1/STATIC_TAIL_SNAPSHOTS.csv": "6291e3631ab099ba23ed7424a43a4f847261d5bb826576e3e7949425c675db99",
+    "research/gap_closure_20261001/production_solver_20261001/evidence/PHYSICAL_PARITY.json": "77d9d4baa4fc3aed9020d30de05cda65336e472b2e6a9d944b747b096b81aab9"
+  },
+  "supplement_source_pins": {
+    "richardson_diagnostic.py": "00ad154246440a841beae6225bbc1ff59785e6b845c5cdb4ba85d68b25ce9006",
+    "test_richardson_diagnostic.py": "82f6e43457d998bc276812266e10a94cbb549d51d5494e3aa8d692d22b6618f0",
+    "RICHARDSON_DIAGNOSTIC.md": "d75944205cc6aa963aa5e8fd8621544883533b53746c3d481ffda340bd94a9d3",
+    "run_richardson_analysis.py": "865ada069587f2ae838d93e850228257b254938dc88a5cc56baa5a8376755d12"
+  },
+  "context_id": "09178ba94c9ff36d061cb048ed12ee022880b6d53488c6d2047780b76601a938",
+  "provenance_checks": {
+    "complete_batch_success": true,
+    "fresh_manifest_bytes_match_executed_bytes": true,
+    "all_contexts_canonical_hash_match": true,
+    "source_pin_counts_per_lane": [
+      32,
+      32,
+      32,
+      32
+    ],
+    "all_source_input_native_bytes_match": true,
+    "all72_record_payload_hashes_match": true,
+    "all72_exact_query_time_and_context_ids_match": true,
+    "all72_selected_full_raw_cross_bindings_match": true,
+    "all72_selected_adjacent_pair_q32_q40": true,
+    "all72_qualification_screens_satisfied": true,
+    "operator_queries": 72,
+    "raw_attempts": 144,
+    "historical_query_reuse": 0,
+    "raw_and_supplement_source_context_agree": true,
+    "raw_result_digest_bound_by_supplement": true
+  },
+  "reconstruction": {
+    "raw_method": "Recompute each center FD ladder directly from eight admitted S samples; independently reconstruct spectral/Frobenius/component metrics, observed orders and original three conjunctive residual gates.",
+    "Richardson_method": "Direct prederived weight sums for R4/R6/R8, independent of production recurrence; compare all80 estimate spectral discrepancies.",
+    "raw_metric_max_absolute_reproduction_difference": 0.0,
+    "Richardson_spectral_discrepancy_max_absolute_difference_due_to_arithmetic_path": 7.990107699973812e-19,
+    "centers": [
+      {
+        "z_a0": -32.0,
+        "raw_status": "RESIDUAL_TARGET_NOT_MET",
+        "raw_visible_order": true,
+        "raw_orders": [
+          1.9874821232588327,
+          1.9968684133454362,
+          1.9992169682200889
+        ],
+        "raw_finest": {
+          "spectral_absolute": 1.3476937529507068e-06,
+          "spectral_relative": 0.0004125698621625362,
+          "frobenius_absolute": 2.624796337487272e-06,
+          "frobenius_relative": 0.0004266968498171178,
+          "elementwise_max_absolute": 1.1010270881551374e-06,
+          "elementwise_max_normalized": 0.016542323066914832
+        },
+        "raw_norm_gate": false,
+        "raw_frobenius_gate": false,
+        "raw_component_gate": false,
+        "raw_largest_normalized_entry": {
+          "row": 9,
+          "column": 13,
+          "absolute_error": 1.6542323066914832e-14,
+          "denominator": 1e-12,
+          "normalized_error": 0.016542323066914832,
+          "interpretation": "Tiny entry and absolute floor can dominate normalized diagnostic; raw spectral/frobenius also fail independently."
+        },
+        "richardson_independent_direct_weight_checks": [
+          {
+            "name": "R2",
+            "spectral_absolute_disagreement": [
+              8.527554727926447e-05,
+              2.15046698946401e-05,
+              5.387849928737527e-06,
+              1.3476937529507068e-06
+            ],
+            "successive_spectral_differences": [
+              6.377094211749543e-05,
+              1.611682096987834e-05,
+              4.040156196197252e-06
+            ]
+          },
+          {
+            "name": "R4",
+            "spectral_absolute_disagreement": [
+              2.5494426694116805e-07,
+              1.6027574528785973e-08,
+              1.0031948786346525e-09
+            ],
+            "successive_spectral_differences": [
+              2.3891669373727865e-07,
+              1.5024385850552577e-08
+            ]
+          },
+          {
+            "name": "R6",
+            "spectral_absolute_disagreement": [
+              1.0001972073482604e-10,
+              1.5731278223078378e-12
+            ],
+            "successive_spectral_differences": [
+              9.845336967311088e-11
+            ]
+          },
+          {
+            "name": "R8",
+            "spectral_absolute_disagreement": [
+              2.1433800870577884e-14
+            ],
+            "successive_spectral_differences": []
+          }
+        ],
+        "R4_independent_successive_difference_order": 3.991129737773102,
+        "R8_spectral_absolute_disagreement": 2.1433800870577884e-14,
+        "R8_spectral_relative_disagreement": 6.561535401816917e-12,
+        "R8_heuristic_epsilon_sample_sensitivity": 1.5095823154644904e-14,
+        "R8_residual_to_heuristic_ratio": 1.4198497591688346
+      },
+      {
+        "z_a0": -24.0,
+        "raw_status": "RESIDUAL_TARGET_NOT_MET",
+        "raw_visible_order": true,
+        "raw_orders": [
+          1.98770436902977,
+          1.9969241095868049,
+          1.9992309051148074
+        ],
+        "raw_finest": {
+          "spectral_absolute": 1.9626397546368405e-06,
+          "spectral_relative": 0.00041348977485553305,
+          "frobenius_absolute": 3.880401681098087e-06,
+          "frobenius_relative": 0.0004162214488341909,
+          "elementwise_max_absolute": 1.6251819768816768e-06,
+          "elementwise_max_normalized": 0.016431300764452317
+        },
+        "raw_norm_gate": false,
+        "raw_frobenius_gate": false,
+        "raw_component_gate": false,
+        "raw_largest_normalized_entry": {
+          "row": 9,
+          "column": 13,
+          "absolute_error": 1.6431300764452317e-14,
+          "denominator": 1e-12,
+          "normalized_error": 0.016431300764452317,
+          "interpretation": "Tiny entry and absolute floor can dominate normalized diagnostic; raw spectral/frobenius also fail independently."
+        },
+        "richardson_independent_direct_weight_checks": [
+          {
+            "name": "R2",
+            "spectral_absolute_disagreement": [
+              0.00012421148554026372,
+              3.131865612180387e-05,
+              7.846375032651548e-06,
+              1.9626397546368405e-06
+            ],
+            "successive_spectral_differences": [
+              9.289286048817688e-05,
+              2.347228157193313e-05,
+              5.883735285547677e-06
+            ]
+          },
+          {
+            "name": "R4",
+            "spectral_absolute_disagreement": [
+              3.579773520878869e-07,
+              2.250602358077172e-08,
+              1.4087038853360607e-09
+            ],
+            "successive_spectral_differences": [
+              3.354713305418922e-07,
+              2.1097321364859535e-08
+            ]
+          },
+          {
+            "name": "R6",
+            "spectral_absolute_disagreement": [
+              1.4161267911308734e-10,
+              2.2218570208998477e-12
+            ],
+            "successive_spectral_differences": [
+              1.393932892372877e-10
+            ]
+          },
+          {
+            "name": "R8",
+            "spectral_absolute_disagreement": [
+              2.2357189304946357e-14
+            ],
+            "successive_spectral_differences": []
+          }
+        ],
+        "R4_independent_successive_difference_order": 3.9910577356815518,
+        "R8_spectral_absolute_disagreement": 2.2357189304946357e-14,
+        "R8_spectral_relative_disagreement": 4.7102221129803634e-12,
+        "R8_heuristic_epsilon_sample_sensitivity": 1.5111842897228553e-14,
+        "R8_residual_to_heuristic_ratio": 1.4794482352014504
+      },
+      {
+        "z_a0": -16.0,
+        "raw_status": "RESIDUAL_TARGET_NOT_MET",
+        "raw_visible_order": true,
+        "raw_orders": [
+          1.9872710572976033,
+          1.996815366203828,
+          1.9992036891458553
+        ],
+        "raw_finest": {
+          "spectral_absolute": 3.0631390724915318e-06,
+          "spectral_relative": 0.00041341256605585794,
+          "frobenius_absolute": 5.543132267317197e-06,
+          "frobenius_relative": 0.00042033397253180417,
+          "elementwise_max_absolute": 2.1146496876643207e-06,
+          "elementwise_max_normalized": 0.016431300764452317
+        },
+        "raw_norm_gate": false,
+        "raw_frobenius_gate": false,
+        "raw_component_gate": false,
+        "raw_largest_normalized_entry": {
+          "row": 9,
+          "column": 13,
+          "absolute_error": 1.6431300764452317e-14,
+          "denominator": 1e-12,
+          "normalized_error": 0.016431300764452317,
+          "interpretation": "Tiny entry and absolute floor can dominate normalized diagnostic; raw spectral/frobenius also fail independently."
+        },
+        "richardson_independent_direct_weight_checks": [
+          {
+            "name": "R2",
+            "spectral_absolute_disagreement": [
+              0.000193783373337963,
+              4.887517371216276e-05,
+              1.2245795227449871e-05,
+              3.0631390724915318e-06
+            ],
+            "successive_spectral_differences": [
+              0.0001449083323104186,
+              3.66293805518932e-05,
+              9.182656187237593e-06
+            ]
+          },
+          {
+            "name": "R4",
+            "spectral_absolute_disagreement": [
+              5.867539706027624e-07,
+              3.689884720221126e-08,
+              2.3097493885757213e-09
+            ],
+            "successive_spectral_differences": [
+              5.49855141410936e-07,
+              3.458909789569807e-08
+            ]
+          },
+          {
+            "name": "R6",
+            "spectral_absolute_disagreement": [
+              2.446682449167782e-10,
+              3.856819470031227e-12
+            ],
+            "successive_spectral_differences": [
+              2.4081157389508523e-10
+            ]
+          },
+          {
+            "name": "R8",
+            "spectral_absolute_disagreement": [
+              4.652034108785992e-14
+            ],
+            "successive_spectral_differences": []
+          }
+        ],
+        "R4_independent_successive_difference_order": 3.9906622996806242,
+        "R8_spectral_absolute_disagreement": 4.652034108785992e-14,
+        "R8_spectral_relative_disagreement": 6.27855710360637e-12,
+        "R8_heuristic_epsilon_sample_sensitivity": 1.513104245650287e-14,
+        "R8_residual_to_heuristic_ratio": 3.074496765281818
+      },
+      {
+        "z_a0": -12.0,
+        "raw_status": "RESIDUAL_TARGET_NOT_MET",
+        "raw_visible_order": true,
+        "raw_orders": [
+          1.9854645671627558,
+          1.9963621840800998,
+          1.9990903012167192
+        ],
+        "raw_finest": {
+          "spectral_absolute": 3.2863902216368955e-06,
+          "spectral_relative": 0.0005298413875521178,
+          "frobenius_absolute": 6.211848132704077e-06,
+          "frobenius_relative": 0.0005229980293657111,
+          "elementwise_max_absolute": 1.7788951529694614e-06,
+          "elementwise_max_normalized": 0.016431300764452317
+        },
+        "raw_norm_gate": false,
+        "raw_frobenius_gate": false,
+        "raw_component_gate": false,
+        "raw_largest_normalized_entry": {
+          "row": 9,
+          "column": 13,
+          "absolute_error": 1.6431300764452317e-14,
+          "denominator": 1e-12,
+          "normalized_error": 0.016431300764452317,
+          "interpretation": "Tiny entry and absolute floor can dominate normalized diagnostic; raw spectral/frobenius also fail independently."
+        },
+        "richardson_independent_direct_weight_checks": [
+          {
+            "name": "R2",
+            "spectral_absolute_disagreement": [
+              0.00020756521042763725,
+              5.2416760161171234e-05,
+              1.3137274498260075e-05,
+              3.2863902216368955e-06
+            ],
+            "successive_spectral_differences": [
+              0.00015514961910125766,
+              3.9279503808668525e-05,
+              9.850884560735374e-06
+            ]
+          },
+          {
+            "name": "R4",
+            "spectral_absolute_disagreement": [
+              8.078909948800071e-07,
+              5.081052613564517e-08,
+              3.180633339482147e-09
+            ],
+            "successive_spectral_differences": [
+              7.57080587867531e-07,
+              4.7629893491499986e-08
+            ]
+          },
+          {
+            "name": "R6",
+            "spectral_absolute_disagreement": [
+              3.5621382186774225e-10,
+              5.583556134208385e-12
+            ],
+            "successive_spectral_differences": [
+              3.5063028646355975e-10
+            ]
+          },
+          {
+            "name": "R8",
+            "spectral_absolute_disagreement": [
+              3.2522053123816603e-14
+            ],
+            "successive_spectral_differences": []
+          }
+        ],
+        "R4_independent_successive_difference_order": 3.99050764915922,
+        "R8_spectral_absolute_disagreement": 3.2522053123816603e-14,
+        "R8_spectral_relative_disagreement": 5.243299970805801e-12,
+        "R8_heuristic_epsilon_sample_sensitivity": 1.513801741611094e-14,
+        "R8_residual_to_heuristic_ratio": 2.1483693821890015
+      },
+      {
+        "z_a0": 12.0,
+        "raw_status": "RESIDUAL_TARGET_NOT_MET",
+        "raw_visible_order": true,
+        "raw_orders": [
+          1.9854645671612716,
+          1.9963621840741652,
+          1.9990903011929788
+        ],
+        "raw_finest": {
+          "spectral_absolute": 3.2863902217090195e-06,
+          "spectral_relative": 0.0005298413875637396,
+          "frobenius_absolute": 6.211848132704077e-06,
+          "frobenius_relative": 0.0005229980293657111,
+          "elementwise_max_absolute": 1.7788951529694614e-06,
+          "elementwise_max_normalized": 0.016431300764452317
+        },
+        "raw_norm_gate": false,
+        "raw_frobenius_gate": false,
+        "raw_component_gate": false,
+        "raw_largest_normalized_entry": {
+          "row": 9,
+          "column": 13,
+          "absolute_error": 1.6431300764452317e-14,
+          "denominator": 1e-12,
+          "normalized_error": 0.016431300764452317,
+          "interpretation": "Tiny entry and absolute floor can dominate normalized diagnostic; raw spectral/frobenius also fail independently."
+        },
+        "richardson_independent_direct_weight_checks": [
+          {
+            "name": "R2",
+            "spectral_absolute_disagreement": [
+              0.0002075652104277095,
+              5.24167601612434e-05,
+              1.3137274498332206e-05,
+              3.2863902217090195e-06
+            ],
+            "successive_spectral_differences": [
+              0.00015514961910125763,
+              3.9279503808668505e-05,
+              9.850884560735371e-06
+            ]
+          },
+          {
+            "name": "R4",
+            "spectral_absolute_disagreement": [
+              8.07890994943708e-07,
+              5.0810526199312363e-08,
+              3.1806334031409705e-09
+            ],
+            "successive_spectral_differences": [
+              7.57080587867531e-07,
+              4.762989349149997e-08
+            ]
+          },
+          {
+            "name": "R6",
+            "spectral_absolute_disagreement": [
+              3.5621388176370454e-10,
+              5.583616125927815e-12
+            ],
+            "successive_spectral_differences": [
+              3.506302864635598e-10
+            ]
+          },
+          {
+            "name": "R8",
+            "spectral_absolute_disagreement": [
+              3.243439282711775e-14
+            ],
+            "successive_spectral_differences": []
+          }
+        ],
+        "R4_independent_successive_difference_order": 3.9905076491592206,
+        "R8_spectral_absolute_disagreement": 3.243439282711775e-14,
+        "R8_spectral_relative_disagreement": 5.229167122877289e-12,
+        "R8_heuristic_epsilon_sample_sensitivity": 1.513801741611094e-14,
+        "R8_residual_to_heuristic_ratio": 2.1425786439245864
+      },
+      {
+        "z_a0": 16.0,
+        "raw_status": "RESIDUAL_TARGET_NOT_MET",
+        "raw_visible_order": true,
+        "raw_orders": [
+          1.9872710572989312,
+          1.9968153662091455,
+          1.9992036891671217
+        ],
+        "raw_finest": {
+          "spectral_absolute": 3.0631390724313174e-06,
+          "spectral_relative": 0.00041341256604773456,
+          "frobenius_absolute": 5.543132267317197e-06,
+          "frobenius_relative": 0.00042033397253180417,
+          "elementwise_max_absolute": 2.1146496876643207e-06,
+          "elementwise_max_normalized": 0.016431300764452317
+        },
+        "raw_norm_gate": false,
+        "raw_frobenius_gate": false,
+        "raw_component_gate": false,
+        "raw_largest_normalized_entry": {
+          "row": 9,
+          "column": 13,
+          "absolute_error": 1.6431300764452317e-14,
+          "denominator": 1e-12,
+          "normalized_error": 0.016431300764452317,
+          "interpretation": "Tiny entry and absolute floor can dominate normalized diagnostic; raw spectral/frobenius also fail independently."
+        },
+        "richardson_independent_direct_weight_checks": [
+          {
+            "name": "R2",
+            "spectral_absolute_disagreement": [
+              0.00019378337333790277,
+              4.887517371210258e-05,
+              1.2245795227389656e-05,
+              3.0631390724313174e-06
+            ],
+            "successive_spectral_differences": [
+              0.00014490833231041856,
+              3.66293805518932e-05,
+              9.182656187237589e-06
+            ]
+          },
+          {
+            "name": "R4",
+            "spectral_absolute_disagreement": [
+              5.867539705430444e-07,
+              3.689884714249942e-08,
+              2.3097493288653484e-09
+            ],
+            "successive_spectral_differences": [
+              5.498551414109357e-07,
+              3.4589097895698075e-08
+            ]
+          },
+          {
+            "name": "R6",
+            "spectral_absolute_disagreement": [
+              2.4466818610089176e-10,
+              3.8567605617784914e-12
+            ],
+            "successive_spectral_differences": [
+              2.408115738950852e-10
+            ]
+          },
+          {
+            "name": "R8",
+            "spectral_absolute_disagreement": [
+              4.642753923292053e-14
+            ],
+            "successive_spectral_differences": []
+          }
+        ],
+        "R4_independent_successive_difference_order": 3.990662299680624,
+        "R8_spectral_absolute_disagreement": 4.642753923292053e-14,
+        "R8_spectral_relative_disagreement": 6.2660322224053745e-12,
+        "R8_heuristic_epsilon_sample_sensitivity": 1.513104245650287e-14,
+        "R8_residual_to_heuristic_ratio": 3.0683635556760573
+      },
+      {
+        "z_a0": 24.0,
+        "raw_status": "RESIDUAL_TARGET_NOT_MET",
+        "raw_visible_order": true,
+        "raw_orders": [
+          1.9877043690277765,
+          1.996924109578827,
+          1.9992309050828974
+        ],
+        "raw_finest": {
+          "spectral_absolute": 1.962639754694731e-06,
+          "spectral_relative": 0.00041348977486772447,
+          "frobenius_absolute": 3.880401681098087e-06,
+          "frobenius_relative": 0.0004162214488341909,
+          "elementwise_max_absolute": 1.6251819768816768e-06,
+          "elementwise_max_normalized": 0.016431300764452317
+        },
+        "raw_norm_gate": false,
+        "raw_frobenius_gate": false,
+        "raw_component_gate": false,
+        "raw_largest_normalized_entry": {
+          "row": 9,
+          "column": 13,
+          "absolute_error": 1.6431300764452317e-14,
+          "denominator": 1e-12,
+          "normalized_error": 0.016431300764452317,
+          "interpretation": "Tiny entry and absolute floor can dominate normalized diagnostic; raw spectral/frobenius also fail independently."
+        },
+        "richardson_independent_direct_weight_checks": [
+          {
+            "name": "R2",
+            "spectral_absolute_disagreement": [
+              0.00012421148554032162,
+              3.1318656121861744e-05,
+              7.846375032709438e-06,
+              1.962639754694731e-06
+            ],
+            "successive_spectral_differences": [
+              9.289286048817689e-05,
+              2.3472281571933126e-05,
+              5.883735285547677e-06
+            ]
+          },
+          {
+            "name": "R4",
+            "spectral_absolute_disagreement": [
+              3.579773521455037e-07,
+              2.2506023638388262e-08,
+              1.4087038277211451e-09
+            ],
+            "successive_spectral_differences": [
+              3.3547133054189217e-07,
+              2.109732136485953e-08
+            ]
+          },
+          {
+            "name": "R6",
+            "spectral_absolute_disagreement": [
+              1.4161273667299478e-10,
+              2.221800301257885e-12
+            ],
+            "successive_spectral_differences": [
+              1.393932892372877e-10
+            ]
+          },
+          {
+            "name": "R8",
+            "spectral_absolute_disagreement": [
+              2.2189735968901735e-14
+            ],
+            "successive_spectral_differences": []
+          }
+        ],
+        "R4_independent_successive_difference_order": 3.9910577356815518,
+        "R8_spectral_absolute_disagreement": 2.2189735968901735e-14,
+        "R8_spectral_relative_disagreement": 4.674942973211373e-12,
+        "R8_heuristic_epsilon_sample_sensitivity": 1.5111842897228553e-14,
+        "R8_residual_to_heuristic_ratio": 1.468367301050439
+      },
+      {
+        "z_a0": 32.0,
+        "raw_status": "RESIDUAL_TARGET_NOT_MET",
+        "raw_visible_order": true,
+        "raw_orders": [
+          1.9874821232617412,
+          1.996868413357075,
+          1.999216968266642
+        ],
+        "raw_finest": {
+          "spectral_absolute": 1.3476937528927126e-06,
+          "spectral_relative": 0.00041256986214478953,
+          "frobenius_absolute": 2.624796337487272e-06,
+          "frobenius_relative": 0.0004266968498171178,
+          "elementwise_max_absolute": 1.1010270881551374e-06,
+          "elementwise_max_normalized": 0.016542323066914832
+        },
+        "raw_norm_gate": false,
+        "raw_frobenius_gate": false,
+        "raw_component_gate": false,
+        "raw_largest_normalized_entry": {
+          "row": 9,
+          "column": 13,
+          "absolute_error": 1.6542323066914832e-14,
+          "denominator": 1e-12,
+          "normalized_error": 0.016542323066914832,
+          "interpretation": "Tiny entry and absolute floor can dominate normalized diagnostic; raw spectral/frobenius also fail independently."
+        },
+        "richardson_independent_direct_weight_checks": [
+          {
+            "name": "R2",
+            "spectral_absolute_disagreement": [
+              8.527554727920646e-05,
+              2.1504669894582114e-05,
+              5.3878499286795315e-06,
+              1.3476937528927126e-06
+            ],
+            "successive_spectral_differences": [
+              6.377094211749545e-05,
+              1.6116820969878352e-05,
+              4.0401561961972534e-06
+            ]
+          },
+          {
+            "name": "R4",
+            "spectral_absolute_disagreement": [
+              2.5494426688333376e-07,
+              1.6027574470952466e-08,
+              1.0031948208006669e-09
+            ],
+            "successive_spectral_differences": [
+              2.389166937372786e-07,
+              1.502438585055257e-08
+            ]
+          },
+          {
+            "name": "R6",
+            "spectral_absolute_disagreement": [
+              1.0001966303925678e-10,
+              1.5730696591237869e-12
+            ],
+            "successive_spectral_differences": [
+              9.845336967311086e-11
+            ]
+          },
+          {
+            "name": "R8",
+            "spectral_absolute_disagreement": [
+              2.1267681061817474e-14
+            ],
+            "successive_spectral_differences": []
+          }
+        ],
+        "R4_independent_successive_difference_order": 3.9911297377731025,
+        "R8_spectral_absolute_disagreement": 2.1267681061817474e-14,
+        "R8_spectral_relative_disagreement": 6.5106810987139015e-12,
+        "R8_heuristic_epsilon_sample_sensitivity": 1.5095823154644904e-14,
+        "R8_residual_to_heuristic_ratio": 1.4088454033905082
+      }
+    ]
+  },
+  "scientific_interpretation": {
+    "raw_G02_result": "All8 centers show the required consecutive second-order behavior; all8 nevertheless fail the unchanged finest-h residual thresholds. FD_VALIDATION_UNRESOLVED is correct.",
+    "raw_error_origin_supported_inference": "Large raw discrepancy is consistent with and strongly indicative of dominant central-stencil truncation over these h values: near-second-order raw decay and near-fourth-order D-independent Richardson differences are observed; higher-order extrapolated discrepancies drop by many orders. This does not prove exact D or independently bound shared operator error.",
+    "R8_limit": "Final residual approximately2.1e-14 to4.65e-14 is only about1.4 to3.1 times the heuristic1.51e-14 epsilon-relative sample sensitivity. Treat as a sensitivity-scale result, not a certified floor or evidence of eighth-order convergence; one R8 value per center gives no R8 contraction sequence.",
+    "operator_limit": "Adjacent spatial-resolution agreement is not a rigorous S/D error bound. Shared radial/quadrature/model errors and near-zero component noise remain possible.",
+    "component_floor_limit": "At the raw finest stencil, normalized max entries are driven by roughly1.64e-14 absolute errors divided by the1e-12 floor. Those entries alone do not demonstrate a macroscopic derivative error. The raw spectral and Frobenius residual failures are separate and decisive.",
+    "gate_policy": "Keep the original raw result unchanged. Richardson is an additional result-blind diagnostic and does not convert the old raw gate to PASS.",
+    "global_component_gate_structure": "The code uses (global_max_abs<=1e-12) OR (global_max_normalized<=1e-6), rather than an entrywise mixed absolute/relative criterion. A near-zero entry can fail the global relative branch while a different truncation-dominated entry fails the global absolute branch. Preserve this original gate unchanged; any redesigned criterion needs a separate explicit scientific contract and cannot retroactively pass this run."
+  },
+  "recommended_next_step": {
+    "priority_1_existing_data_only": "Inspect worst normalized component and block contribution before any further native h runs. The normalized maximum is the projectile same-center (9,13) entry; saved overlaps are identical at all four shifted pairs, so FD entry is exactly zero while D[9,13]+conj(D[13,9]) is approximately1.64e-14. This persistent cancellation residual is independent of shrinking h on the existing ladder.",
+    "priority_2_error_budget_design": "Quantify saved S and analytic D arithmetic/quadrature sensitivity separately, including cancellation of opposite O(0.1) D entries and phase-oscillation truncation in cross blocks. A phase-aware overlap derivative or a higher-precision independently evaluated S/D check requires a new source/numerical contract. Do not simply reinterpret the heuristic epsilon sample surrogate as a certified bound.",
+    "priority_3_new_native_only_if_discriminating": "Only after that diagnosis, predeclare a narrow additional stencil/high-precision experiment that can change a specified uncertainty. Adding h=.025 at representative signed points could provide a second R8 and more R4/R6 information, but is not automatically justified and is not a route to retroactively closing the old raw gate.",
+    "raw_gate_feasibility": "Norm-only O(h^2) extrapolation suggests h around .002, but it ignores the persistent tiny-entry normalized maximum. Meeting the unchanged global component absolute branch by reducing the largest truncation error below1e-12 instead suggests h of a few1e-5 a0, where an O(epsilon/h) saved-sample sensitivity estimate can exceed1e-12. This is a feasibility warning, not a rigorous impossibility proof. No automatic .0015 or smaller-h run is justified.",
+    "no_repeat": "Do not repeat the unchanged72-query ladder, lower the current acceptance criteria, zero/project D, or claim a physical identity proof.",
+    "production": "New experimental acceptance and global derivative-error certification remain separate."
+  },
+  "reviewed_DB_report_wording_ko": "G02 \ub3c5\ub9bd \ubb3c\ub9ac FD \uac80\uc99d\uc744 72\uac1c fresh operator\uc640 144\uac1c raw \uacc4\uc0b0\uc73c\ub85c \uc644\ub8cc\ud588\ub2e4. 8\uac1c \uc911\uc2ec\uc810 \ubaa8\ub450 2\ucc28 \uc218\ub834\uc744 \ubcf4\uc600\uc73c\ub098 \uae30\uc874 h=0.05\uc5d0\uc11c \uc794\ucc28 \uae30\uc900\uc744 \ucda9\uc871\ud558\uc9c0 \ubabb\ud558\uc5ec raw G02\ub294 UNRESOLVED\ub85c \uc720\uc9c0\ud55c\ub2e4. \uc2e4\ud589 \uc804 \uace0\uc815\ud55c Richardson \ubcf4\uc870 \ubd84\uc11d\uc740 R4 \uc218\ub834\uacfc R8 \uc57d 2.1e-14\u20134.65e-14\uc758 \uc808\ub300 \ubd88\uc77c\uce58\ub97c \ubcf4\uc5ec \ud070 raw \uc794\ucc28\uc758 \uc911\uc559\ucc28\ubd84 \uc808\ub2e8\uc624\ucc28 \ud574\uc11d\uc744 \uac15\ud558\uac8c \uc9c0\uc9c0\ud558\uc9c0\ub9cc, \ub2e8\uc77c R8\uacfc heuristic \uac10\ub3c4 \ucd94\uc815\uc73c\ub85c \uc778\uc99d \uc624\ucc28 \uacbd\uacc4\ub098 G02 \uc885\uacb0\uc744 \uc120\uc5b8\ud558\uc9c0 \uc54a\ub294\ub2e4.",
+  "findings": [],
+  "native_calls_in_review": 0,
+  "new_trajectory_executions": 0,
+  "original_tests_rerun": 0,
+  "claim_ceilings": {
+    "physical_G02_closed": false,
+    "production_admission": "HOLD",
+    "capture": false,
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "rigorous_operator_error_bound": false,
+    "continuous_trajectory_error_bound": false
+  },
+  "component_floor_followup_from_existing_cache": [
+    {
+      "z_a0": -32.0,
+      "row": 9,
+      "column": 13,
+      "D_9_13": [
+        -0.5609311717769246,
+        -0.0
+      ],
+      "conjugate_D_13_9": [
+        0.5609311717769081,
+        0.0
+      ],
+      "D_plus_Ddagger_9_13": [
+        -1.6542323066914832e-14,
+        0.0
+      ],
+      "sample_entry_history": [
+        {
+          "h_a0": 0.4,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6542323066914832e-14
+        },
+        {
+          "h_a0": 0.2,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6542323066914832e-14
+        },
+        {
+          "h_a0": 0.1,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6542323066914832e-14
+        },
+        {
+          "h_a0": 0.05,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6542323066914832e-14
+        }
+      ]
+    },
+    {
+      "z_a0": -24.0,
+      "row": 9,
+      "column": 13,
+      "D_9_13": [
+        -0.5609311717769246,
+        -0.0
+      ],
+      "conjugate_D_13_9": [
+        0.5609311717769082,
+        0.0
+      ],
+      "D_plus_Ddagger_9_13": [
+        -1.6431300764452317e-14,
+        0.0
+      ],
+      "sample_entry_history": [
+        {
+          "h_a0": 0.4,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6431300764452317e-14
+        },
+        {
+          "h_a0": 0.2,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6431300764452317e-14
+        },
+        {
+          "h_a0": 0.1,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6431300764452317e-14
+        },
+        {
+          "h_a0": 0.05,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6431300764452317e-14
+        }
+      ]
+    },
+    {
+      "z_a0": -16.0,
+      "row": 9,
+      "column": 13,
+      "D_9_13": [
+        -0.5609311717769246,
+        -0.0
+      ],
+      "conjugate_D_13_9": [
+        0.5609311717769082,
+        0.0
+      ],
+      "D_plus_Ddagger_9_13": [
+        -1.6431300764452317e-14,
+        0.0
+      ],
+      "sample_entry_history": [
+        {
+          "h_a0": 0.4,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6431300764452317e-14
+        },
+        {
+          "h_a0": 0.2,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6431300764452317e-14
+        },
+        {
+          "h_a0": 0.1,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6431300764452317e-14
+        },
+        {
+          "h_a0": 0.05,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6431300764452317e-14
+        }
+      ]
+    },
+    {
+      "z_a0": -12.0,
+      "row": 9,
+      "column": 13,
+      "D_9_13": [
+        -0.5609311717769246,
+        -0.0
+      ],
+      "conjugate_D_13_9": [
+        0.5609311717769082,
+        0.0
+      ],
+      "D_plus_Ddagger_9_13": [
+        -1.6431300764452317e-14,
+        0.0
+      ],
+      "sample_entry_history": [
+        {
+          "h_a0": 0.4,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6431300764452317e-14
+        },
+        {
+          "h_a0": 0.2,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6431300764452317e-14
+        },
+        {
+          "h_a0": 0.1,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6431300764452317e-14
+        },
+        {
+          "h_a0": 0.05,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6431300764452317e-14
+        }
+      ]
+    },
+    {
+      "z_a0": 12.0,
+      "row": 9,
+      "column": 13,
+      "D_9_13": [
+        -0.5609311717769246,
+        -0.0
+      ],
+      "conjugate_D_13_9": [
+        0.5609311717769082,
+        0.0
+      ],
+      "D_plus_Ddagger_9_13": [
+        -1.6431300764452317e-14,
+        0.0
+      ],
+      "sample_entry_history": [
+        {
+          "h_a0": 0.4,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6431300764452317e-14
+        },
+        {
+          "h_a0": 0.2,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6431300764452317e-14
+        },
+        {
+          "h_a0": 0.1,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6431300764452317e-14
+        },
+        {
+          "h_a0": 0.05,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6431300764452317e-14
+        }
+      ]
+    },
+    {
+      "z_a0": 16.0,
+      "row": 9,
+      "column": 13,
+      "D_9_13": [
+        -0.5609311717769246,
+        -0.0
+      ],
+      "conjugate_D_13_9": [
+        0.5609311717769082,
+        0.0
+      ],
+      "D_plus_Ddagger_9_13": [
+        -1.6431300764452317e-14,
+        0.0
+      ],
+      "sample_entry_history": [
+        {
+          "h_a0": 0.4,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6431300764452317e-14
+        },
+        {
+          "h_a0": 0.2,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6431300764452317e-14
+        },
+        {
+          "h_a0": 0.1,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6431300764452317e-14
+        },
+        {
+          "h_a0": 0.05,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6431300764452317e-14
+        }
+      ]
+    },
+    {
+      "z_a0": 24.0,
+      "row": 9,
+      "column": 13,
+      "D_9_13": [
+        -0.5609311717769246,
+        -0.0
+      ],
+      "conjugate_D_13_9": [
+        0.5609311717769082,
+        0.0
+      ],
+      "D_plus_Ddagger_9_13": [
+        -1.6431300764452317e-14,
+        0.0
+      ],
+      "sample_entry_history": [
+        {
+          "h_a0": 0.4,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6431300764452317e-14
+        },
+        {
+          "h_a0": 0.2,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6431300764452317e-14
+        },
+        {
+          "h_a0": 0.1,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6431300764452317e-14
+        },
+        {
+          "h_a0": 0.05,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6431300764452317e-14
+        }
+      ]
+    },
+    {
+      "z_a0": 32.0,
+      "row": 9,
+      "column": 13,
+      "D_9_13": [
+        -0.5609311717769246,
+        -0.0
+      ],
+      "conjugate_D_13_9": [
+        0.5609311717769081,
+        0.0
+      ],
+      "D_plus_Ddagger_9_13": [
+        -1.6542323066914832e-14,
+        0.0
+      ],
+      "sample_entry_history": [
+        {
+          "h_a0": 0.4,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6542323066914832e-14
+        },
+        {
+          "h_a0": 0.2,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6542323066914832e-14
+        },
+        {
+          "h_a0": 0.1,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6542323066914832e-14
+        },
+        {
+          "h_a0": 0.05,
+          "S_plus_entry": [
+            0.0,
+            0.0
+          ],
+          "S_minus_entry": [
+            0.0,
+            0.0
+          ],
+          "FD_entry": [
+            0.0,
+            0.0
+          ],
+          "error_absolute": 1.6542323066914832e-14
+        }
+      ]
+    }
+  ],
+  "DB_status_recommendation": {
+    "G02_status": "UNRESOLVED",
+    "evidence_status": "FRESH_FD_SECOND_ORDER_TARGET_UNMET",
+    "resource_execution_blocker_removed": true,
+    "physical_G02_closed": false,
+    "original_raw_gate_changed": false
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "schema": "BASS_R4V_G12_INDEPENDENT_PHYSICAL_RESULT_REVIEW_V1",
+  "status": "PASS_LOCAL_PILOT_ONLY",
+  "reviewer_implemented_g12_code": false,
+  "model_routing": "UNKNOWN_NO_TRUSTWORTHY_MODEL_METADATA",
+  "evidence_sha256": {
+    "runs_r4v/G12_ANALYSIS/RESULT.json": "0d80cd4157f68d19f642bccd621c70c71f8c113f869253eb31adb0c7ae50d424",
+    "runs_r4v/G12_ANALYSIS/PLAN.json": "c793154541fb3eaceb33dc4e7982619c6ea1c95d1f78daf9aee0b7c12b59bd1f",
+    "runs_r4v/G12_ANALYSIS/STATES.npz": "901bce0dacbf3899fce6ae92b072a9d15321983f605290abc2e424d7750b6da2",
+    "runs_r4v/G12_ANALYSIS/CACHE_MANIFEST.json": "262244589b69c76e24745463a349cda5b3c259f7e3a659ad568595315e54f921",
+    "runs_r4v/G12_PRODUCER_ADMISSION.json": "a549ea5baaa019fd044f3b720b65a06035cd98cb6a694077fd78f9750cd61cea",
+    "runs_r4v/G12_OVERLAP_ADMISSION.json": "ed8d5ac9221e84d872dcfaddf1834817e893ff1d1572a16351928b75ccd4bc46",
+    "recovered_r4u/source/research/gap_closure_20261001/production_validation_20261001/g12_pilot.py": "ce6def81b2a42f13e2214b20b98511c0fa6030a35bdb50481d5caef13a593329"
+  },
+  "source_plan_dependency_context_consistent": true,
+  "cache_validation": {
+    "exact_unique_times": 18,
+    "fresh_qualified_queries": 18,
+    "physical_raw_calls_in_existing_producer_receipts": 36,
+    "all_records_payloads_and_full_raw_bindings_verified": true,
+    "all_three_supervisor_queue_completions_verified": true,
+    "producer_receipt_bindings": [
+      {
+        "manifest_sha256": "02ca3195d345635c1695dab5512a3c10bfcd51b8bd0ede2e4f716f013e1ff273",
+        "queries": 6,
+        "raw_calls": 12
+      },
+      {
+        "manifest_sha256": "e8e4a9b7258dc8e4026ca461f40e5ac791e1e8d00d07445f932f7566d8574d2d",
+        "queries": 6,
+        "raw_calls": 12
+      },
+      {
+        "manifest_sha256": "28d8dd0d09757f00a2f81f8a805db9a2ac93a5c5c5872f91e9f911967b7ce85e",
+        "queries": 6,
+        "raw_calls": 12
+      }
+    ]
+  },
+  "common_initial_state_sha256": "07398559dda76cd440225f94d5bc32566fd094c1d41b0900649cf4a0a280cedb",
+  "once_normalization_recomputed_bytes_match": true,
+  "actual_method_initial_state_hashes_match_common": true,
+  "dop853": {
+    "one_accepted_step": true,
+    "nfev": 13,
+    "exact_planned_rhs_sequence": true,
+    "reported_endpoint_norm_drift": 0.0,
+    "independent_einsum_initial_norm": 1.0,
+    "independent_einsum_final_norm": 1.0,
+    "independent_einsum_endpoint_norm_drift": 0.0
+  },
+  "independent_endpoint_check": {
+    "method": "eigenbasis of endpoint S: sqrt(sum(lambda*abs(Q.conj().T@(c_mid-c_dop))**2)); independently solved Gram projector population",
+    "rows": [
+      {
+        "nstep": 1,
+        "independently_recomputed_unaligned_metric_distance": 1.0449678434074113e-11,
+        "reported_distance": 1.0449678434074114e-11,
+        "distance_absolute_difference": 1.6155871338926322e-27,
+        "selected_population": 6.225916585839797e-14,
+        "selected_population_difference": 1.2365494111056967e-20,
+        "initial_bytes_match_common": true
+      },
+      {
+        "nstep": 2,
+        "independently_recomputed_unaligned_metric_distance": 2.612416616004168e-12,
+        "reported_distance": 2.6124166160041685e-12,
+        "distance_absolute_difference": 4.0389678347315804e-28,
+        "selected_population": 6.225915658423247e-14,
+        "selected_population_difference": 3.0913286163351857e-21,
+        "initial_bytes_match_common": true
+      },
+      {
+        "nstep": 4,
+        "independently_recomputed_unaligned_metric_distance": 6.531058921702458e-13,
+        "reported_distance": 6.531058921702457e-13,
+        "distance_absolute_difference": 1.0097419586828951e-28,
+        "selected_population": 6.225915426573323e-14,
+        "selected_population_difference": 7.728293709825228e-22,
+        "initial_bytes_match_common": true
+      }
+    ],
+    "midpoint_successive_distances": [
+      7.837261825147045e-12,
+      1.959310736418624e-12
+    ],
+    "observed_order": 2.0000034753661207
+  },
+  "all_predeclared_local_screens_pass": true,
+  "review_new_native_calls": 0,
+  "review_new_propagations": 0,
+  "claim_ceiling": {
+    "production_admission": "HOLD",
+    "capture": false,
+    "full_original_G12": "OPEN",
+    "physical_G12_closed": false,
+    "independent_Sdot_validated": false,
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "continuous_trajectory_error_bound": false,
+    "NCP64_scaling": false
+  },
+  "limitations": [
+    "This is e0 test state on z32..32.02, not authentic incoming state on original[-12,+12]window.",
+    "DOP853 shares physical operator provider with midpoint; independent propagation family does not establish independent operator truth.",
+    "The midpoint uses Sdot=D+Ddagger; this comparison does not close G02.",
+    "DOP853 norm sampled only at endpoints; embedded local accuracy is not a certified global bound."
+  ]
+}
