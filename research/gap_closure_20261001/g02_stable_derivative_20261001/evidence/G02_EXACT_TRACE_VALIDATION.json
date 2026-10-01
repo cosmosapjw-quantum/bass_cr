@@ -1,0 +1,47 @@
+{
+  "schema": "BASS_R4W_EXACT_TRACE_VALIDATION_V1",
+  "status": "PASS_TARGETED_REFERENCE",
+  "source_sha256": {
+    "exact_trace_oracle.py": "d2084e7e482c3ebd5720adc5d62b86137c8cac2de5b984d4229c89a46d80307a",
+    "test_exact_trace_oracle.py": "5ca5d610a0b0f866fa3ba18742a9119ff889214d7c1b78fd6e3d09eb97cd2533",
+    "TASK_CONTRACT.json": "49c083bb2473640dd5cbb90044210e488d18f0c2027b8f08c50216dc6c6bb58f"
+  },
+  "test_run": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m unittest discover -s recovered_r4u/source/research/gap_closure_20261001/g02_stable_derivative_20261001 -p test_exact_trace_oracle.py -v",
+    "tests": 8,
+    "skipped": 0,
+    "exit_code": 0,
+    "reported_test_seconds": 0.003,
+    "scope": [
+      "Exact polynomial integration by parts",
+      "Continuous and discontinuous traces",
+      "Analytic origin and logarithmic radial integrals",
+      "Angular factor and sign",
+      "Separate continuity candidate and exact L2 difference",
+      "Nonintegrable origin rejected",
+      "BASIS.json exact admitted byte binding; same identity string is insufficient"
+    ]
+  },
+  "actual_reference_run": {
+    "result_sha256": "a15a25a0a2935127d33ac919bde3365b29ea0d6b89242d68cdd6fa0aefa8ee33",
+    "wall_seconds": 0.5335253259981982,
+    "pairs": 6,
+    "digits": [
+      80,
+      120
+    ],
+    "exit_code": 0,
+    "new_native_calls": 0,
+    "archived_cache_references": 72
+  },
+  "precision_comparison_scope": "Input binary64 bytes interpreted as exact rational numbers; precision is reference arithmetic, not physical accuracy",
+  "old_tests_rerun": 0,
+  "original_FD_gate_changed": false,
+  "production_admission": "HOLD",
+  "review_repairs": [
+    "Use cellwise/broken derivative norm; no global H1 differenceclaim",
+    "Add exact BASIS.json contextbytebinding"
+  ],
+  "previous_run_retained": "initial_reference/",
+  "unchanged_numeric_values": true
+}

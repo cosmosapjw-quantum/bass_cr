@@ -67,3 +67,10 @@ This local path is not evidence of MPI execution or NCP64 scaling. Its fresh-con
 G02/G03 analyzers preserve the original scientific thresholds. The Richardson
 supplement never replaces the raw FD gate, and the short same-IVP DOP853 pilot
 does not certify the full scattering window or a continuous error bound.
+
+R4W `research/gap_closure_20261001/g02_stable_derivative_20261001/` separates
+same-center derivative residuals into stored FEM interface defects and numerical
+arithmetic, with an exact-coefficient/high-precision reference. The continuity
+candidate is a separate mathematical representation, not an adopted bank.
+Keep the original G02 failure and basis identity; tiny-h reruns or projecting
+raw D cannot substitute for independently validating a changed representation.

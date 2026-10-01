@@ -1,0 +1,64 @@
+{
+  "schema": "BASS_R4W_G02_STABLE_DERIVATIVE_CONTRACT_V1",
+  "date": "2026-10-01",
+  "authority": "Current user asks one highest priority remaining research stage: G02. Existing samebranch publication and dual backup authorization applies.",
+  "base_commit": "cfb53b24217f5663008d44acc8305975320ab310",
+  "objective": "Independently quantify G02 same-center derivative cancellation and byte-level FEM continuity defects, and test a stable polynomial-integral reference.",
+  "scope": [
+    "Read-only existing72G02operators",
+    "Exact binary64-coefficient cell trace identities",
+    "Independent polynomial-integral derivative oracle at80and120decimaldigits",
+    "Explicit exact-arithmetic continuity-restored candidate kept separate from archivedbank",
+    "No new native or trajectory queries"
+  ],
+  "basis_npz_sha256": "889001a751cd3cae93ad217336587f5fc58db11c0a496843ecc7e7bbd93f83ec",
+  "invariants": [
+    "OriginalqueryoutputsandFDcriteriaunchanged",
+    "No symmetrization of rawD",
+    "ArchivedFP64quadrature/accumulation/native unchanged",
+    "Highprecisionreference is separate fromproduction"
+  ],
+  "oracle": {
+    "exact_source": "Fraction.from_float on each stored binary64 coefficient/edge",
+    "channels": "B0 l0,m0 andl1,m0 samecenter couplings; generalhigherlnotcovered",
+    "arithmetic": "Python stdlib decimal and fractions",
+    "digits": [
+      80,
+      120
+    ],
+    "acceptance": [
+      "Known polynomial andboundary examples",
+      "Exact rational integration-by-parts identity",
+      "80vs120digits individualD agreement <1e-65",
+      "Exact rational continuitycandidate zero trace defect",
+      "Report arithmetic discrepancy to archivedD withoutclaimingall explained"
+    ],
+    "candidate": "Add exact linear delta_right*s percell to join nextcellleft/zerooutertrace; leavearchivedbankimmutable; notclaimed originalnodal FEM recovery"
+  },
+  "resource_budget": {
+    "native_calls": 0,
+    "trajectory_executions": 0,
+    "highprecision_max_wall_seconds": 60,
+    "BLAS_threads": 1,
+    "working_memory_estimate_MiB": 256
+  },
+  "completion": [
+    "Actualblockandcomponentbudget",
+    "Derivedcomputabletraceidentity",
+    "Implementedreferenceandtargetedtests",
+    "Actualprecisionandcandidatecomparison",
+    "Independent review",
+    "Report,state,package,samebranchpublicationanddualbackup"
+  ],
+  "claim_ceiling": {
+    "G02": "UNRESOLVED",
+    "production": "HOLD",
+    "capture": false,
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "NCP64_scaling": "NOT_RUN"
+  },
+  "model_routing": "UNKNOWN; shared cores of both existing harnesses, no model-specific inference",
+  "python_version": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "environment_note": "mpmath distribution metadata unavailable; use stdlib Decimal ln/sqrt instead of addingdependency"
+}
