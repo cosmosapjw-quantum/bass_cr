@@ -2,6 +2,75 @@
 from pathlib import Path
 import argparse,json,math,os
 GiB=1024**3
+# Linux counter definitions:
+# https://docs.kernel.org/admin-guide/cgroup-v2.html#memory-interface-files
+# https://docs.kernel.org/filesystems/proc.html#meminfo
+# This is a conservative admission estimate, not the kernel's MemAvailable
+# algorithm or a guarantee that a future allocation cannot fail. Preserve half
+# the eligible cache in addition to plan()'s unchanged OS/orchestration reserve.
+_CACHE_KEYS=('file','active_file','inactive_file','file_mapped','file_dirty',
+             'file_writeback','shmem','unevictable')
+
+def clean_file_credit(stat,current,minimum,low,descendants):
+    """Half of eligible clean unmapped file LRU; no anon/slab/swap credit.
+
+    Subtracting whole categories may double-subtract overlapping pages, which
+    intentionally underestimates reclaimability. Missing/invalid counters and
+    non-leaf cgroups get no credit: protected descendants cannot be inferred
+    from the parent's aggregate memory.stat. memory.min/low are also excluded.
+    """
+    values=[current,minimum,low,descendants]+[stat.get(k) for k in _CACHE_KEYS]
+    if any(type(v) is not int or v<0 for v in values) or descendants!=0:return 0
+    file_lru=min(current,stat['file'],stat['active_file']+stat['inactive_file'])
+    excluded=sum(stat[k] for k in ('file_mapped','file_dirty','file_writeback','shmem','unevictable'))
+    return max(0,file_lru-excluded-max(minimum,low))//2
+
+def _flat_counters(path):
+    return {k:int(v) for k,v in (line.split() for line in path.read_text().splitlines())}
+
+def _cache_snapshot(path,current):
+    stat=_flat_counters(path/'memory.stat');group=_flat_counters(path/'cgroup.stat')
+    minimum=int((path/'memory.min').read_text());low=int((path/'memory.low').read_text())
+    if any(group[k]<0 for k in ('nr_descendants','nr_dying_descendants')):
+        raise ValueError('negative cgroup descendant count')
+    descendants=group['nr_descendants']+group['nr_dying_descendants']
+    return {'counters':{k:stat.get(k) for k in _CACHE_KEYS},'memory_min_bytes':minimum,
+            'memory_low_bytes':low,'descendants':descendants,
+            'credit_bytes':clean_file_credit(stat,current,minimum,low,descendants)}
+
+def cgroup_memory_headroom(path,limit):
+    """Read-only bounded cache allowance for one finite cgroup memory.max.
+
+    Bracket observations; charge the larger usage and retain the smaller cache
+    credit. Non-atomic counters still make this an estimate, rechecked at launch.
+    If accounting needed for credit is unavailable, retain raw headroom only;
+    if usage itself cannot be read, this finite cap supplies zero availability.
+    """
+    path=Path(path);row={'path':str(path),'limit_bytes':limit,
+                       'clean_file_credit_bytes':0,'estimated_available_bytes':0,
+                       'unreclaimed_headroom_bytes':0,'policy':'HALF_CLEAN_UNMAPPED_LEAF_FILE_V1'}
+    try:
+        before=int((path/'memory.current').read_text())
+        if before<0:raise ValueError('negative memory.current')
+        snapshots=[]
+        try:
+            snapshots=[_cache_snapshot(path,before),_cache_snapshot(path,before)]
+        except (OSError,ValueError,KeyError) as exc:
+            row['credit_disabled_reason']=type(exc).__name__
+        after=int((path/'memory.current').read_text())
+        if after<0:raise ValueError('negative memory.current')
+        current=max(before,after)
+        # Clamp once more to the smaller usage observation, preserving evidence.
+        credit=min(clean_file_credit(s['counters'],min(before,after),s['memory_min_bytes'],
+                                    s['memory_low_bytes'],s['descendants']) for s in snapshots) if len(snapshots)==2 else 0
+        row.update(current_bytes=current,unreclaimed_headroom_bytes=max(0,limit-current),
+                   clean_file_credit_bytes=credit,
+                   estimated_available_bytes=min(limit,max(0,limit-current+credit)),
+                   cache_observations=snapshots)
+    except (OSError,ValueError) as exc:
+        row['usage_unavailable_reason']=type(exc).__name__
+    return row
+
 def census():
     cpus=sorted(os.sched_getaffinity(0));physical=set();unknown=False
     for c in cpus:
@@ -9,7 +78,7 @@ def census():
         try:physical.add(((p/'physical_package_id').read_text().strip(),(p/'core_id').read_text().strip()))
         except OSError:unknown=True
     mem={k:int(v.split()[0])*1024 for k,v in (l.split(':',1) for l in Path('/proc/meminfo').read_text().splitlines())}
-    quotas=[];memlimits=[];memfree=[]
+    quotas=[];memlimits=[];memfree=[];memadmission=[]
     # Read current cgroup and accessible ancestors: tighter parent limits count.
     rel=next((x.split(':',2)[2] for x in Path('/proc/self/cgroup').read_text().splitlines() if x.startswith('0::')),'/')
     root=Path('/sys/fs/cgroup');p=root/rel.lstrip('/')
@@ -23,13 +92,13 @@ def census():
             m=(p/'memory.max').read_text().strip()
             if m!='max':
                 memlimits.append(int(m))
-                try:memfree.append(max(0,int(m)-int((p/'memory.current').read_text())))
-                except (OSError,ValueError):pass
+                estimate=cgroup_memory_headroom(p,int(m))
+                memadmission.append(estimate);memfree.append(estimate['estimated_available_bytes'])
         except (OSError,ValueError):pass
         if p==root:break
         p=p.parent
     budget=min([mem['MemTotal'],*memlimits]);quota=min([float(len(cpus)),*quotas])
-    return {'affinity_cpus':cpus,'logical_cpus':len(cpus),'physical_cores':0 if unknown else len(physical),'cpu_quota':quota,'usable_cpu_budget':max(0,math.floor(quota)),'memory_limit_bytes':budget,'memory_available_bytes':min([budget,mem['MemAvailable'],*memfree]),'topology_source':'Linux sysfs; missing topology requires explicit logical CPU mode','cgroup_source':'current accessible cgroup and parents','cpu_model':next((line.split(':',1)[1].strip() for line in Path('/proc/cpuinfo').read_text().splitlines() if line.startswith('model name')),'unknown')}
+    return {'affinity_cpus':cpus,'logical_cpus':len(cpus),'physical_cores':0 if unknown else len(physical),'cpu_quota':quota,'usable_cpu_budget':max(0,math.floor(quota)),'memory_limit_bytes':budget,'memory_available_bytes':min([budget,mem['MemAvailable'],*memfree]),'memory_available_is_estimate':True,'cgroup_memory_admission':memadmission,'topology_source':'Linux sysfs; missing topology requires explicit logical CPU mode','cgroup_source':'current accessible cgroup and parents','cpu_model':next((line.split(':',1)[1].strip() for line in Path('/proc/cpuinfo').read_text().splitlines() if line.startswith('model name')),'unknown')}
 def plan(info,ranks,threads,per_rank_gib,*,logical=False,program=None):
     if type(ranks) is not int or ranks<2 or type(threads) is not int or threads<1:raise ValueError('MPI requires>=2 ranks and positive integral threads')
     if not math.isfinite(per_rank_gib) or per_rank_gib<=0:raise ValueError('positive measured/estimated per-rank RSS required')

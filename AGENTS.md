@@ -51,3 +51,9 @@ math, uncontrolled floating reductions, nested BLAS oversubscription or silent
 reuse of old native approval. Measure same-input correctness and performance;
 do not claim64-core scaling from a smaller-host benchmark. Include rank0 and
 memory reserve in resource admission. See the additive R4S HPC implementation.
+
+The R4U integration in `research/gap_closure_20261001/production_solver_20261001/`
+connects the physical qualified provider to the HPC queue and a cache-only,
+checkpointed midpoint solver. Use its fresh source/native/input/resource manifest
+and exact cache/time identities for this archived B0 lane. Operational acceptance
+and restart checks do not close the independent scientific production gates.

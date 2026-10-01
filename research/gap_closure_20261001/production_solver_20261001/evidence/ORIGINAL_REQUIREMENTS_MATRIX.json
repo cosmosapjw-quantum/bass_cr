@@ -1,0 +1,3668 @@
+{
+  "schema": "BASS_ORIGINAL_CONTRACT_AUDIT_V2",
+  "audit_scope": "All37 sections and first10 steps source/evidence audit; no tests rerun/no physical run; one explicitly requested error-budget metadata sync preserves prior value and all claim ceilings",
+  "original_contract": {
+    "path": "/workspace/scratch/63ee2321a512/recovery/r4r/INPUT_CONTRACT.txt",
+    "lines": 1740,
+    "sha256": "ffd52cde44f79a63552a2f631cff9a56174ba45548d034a2bb865aa3718f0687",
+    "read_entire": true,
+    "ends_mid_sentence": false
+  },
+  "checkpoint": {
+    "head": "e1438233548cf01fa9894d17e194acba49e0ac7b",
+    "tree": "a20f9a68f59029d377e4772a589b7458e8a9d999",
+    "branch": "research/r4q-gap-closure-20261001",
+    "authority": "R4T detached closeout and delivery receipt, not a fresh remote query",
+    "local_git_metadata_present": false
+  },
+  "database": {
+    "path": "/workspace/scratch/63ee2321a512/deliverables/BASS_CR_SOURCE_DATABASE_20261001_v6.sqlite",
+    "sha256": "7635e9e17c8057d7c2ee5b56ae3e1cf9f64bb737716b4cdc3eb37e0c9f7d0c5b",
+    "counts": {
+      "sources": 31,
+      "code_snapshots": 4,
+      "documentation": 17,
+      "report_gaps": 13,
+      "research_gap_status": 13,
+      "research_claims": 36
+    }
+  },
+  "overall_verdict": "INITIAL_SEQUENCE_SUBSTANTIALLY_EXECUTED_ALL_RESEARCH_AND_PRODUCTION_STAGES_NOT_COMPLETE",
+  "physical_execution_since_R4Q": {
+    "new_operator_queries": 0,
+    "new_propagations": 0,
+    "R4S_native_scope": "synthetic only",
+    "NCP64_scaling": "UNVERIFIED"
+  },
+  "rows": [
+    {
+      "id": "SECTION_00",
+      "section": 0,
+      "title": "CORE OPERATING PRINCIPLE",
+      "contract_lines": [
+        30,
+        60
+      ],
+      "contract_section_sha256": "cb7aad83cf4d4f3f4208f280b762c35054502dbc4198ca31a45f094ba13bba0a",
+      "completion": "FOLLOWED",
+      "summary_ko": "이론·synthetic·physical 층위를 구별하고 claim ceilings를 유지했다.",
+      "derived_theory": "NOT_APPLICABLE",
+      "executable_implementation": "NOT_APPLICABLE",
+      "synthetic_validation": "NOT_APPLICABLE",
+      "archived_physical_validation": "NOT_APPLICABLE",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/GAP_REGISTRY.json",
+        "research/gap_closure_20261001/cancellation_followup_20261001/VALIDATION.json"
+      ],
+      "remaining_gap_ko": "운영규칙 준수는 scientific completion이 아니다.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_01",
+      "section": 1,
+      "title": "AUTHORITATIVE INPUTS",
+      "contract_lines": [
+        61,
+        105
+      ],
+      "contract_section_sha256": "5e7c15fc4b1d96261f5783dc0623fed412ccc92405c6517a50e4424889c569ca",
+      "completion": "COMPLETED_FOR_CHECKPOINT",
+      "summary_ko": "v3 authority inventory에서 v4/v5/v6로 연구테이블만 확장했다.",
+      "derived_theory": "NOT_APPLICABLE",
+      "executable_implementation": "NOT_APPLICABLE",
+      "synthetic_validation": "NOT_APPLICABLE",
+      "archived_physical_validation": "PINNED_ARCHIVE_REUSED",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/AUTHORITY_INVENTORY.json",
+        "research/gap_closure_20261001/theory_followup_20261001/DB_V5_VALIDATION.json",
+        "research/gap_closure_20261001/cancellation_followup_20261001/DATABASE_UPDATE.json"
+      ],
+      "remaining_gap_ko": "로컬은 selective snapshot이며 .git이 없어 HEAD는 게시receipt 기준; 별도 현재remote 재확인이 필요하다.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_02",
+      "section": 2,
+      "title": "CURRENT DATABASE CONTENT TO EXPECT",
+      "contract_lines": [
+        106,
+        143
+      ],
+      "contract_section_sha256": "3b6a26d17f086320acde5ce0ebd8fb33260c48d512532ea5ff5dd1b3f06350e8",
+      "completion": "COMPLETED",
+      "summary_ko": "31sources/4code/17docs/13report_gaps와 원 REPORT_GAP ID가 DBv6에 보존된다.",
+      "derived_theory": "NOT_APPLICABLE",
+      "executable_implementation": "NOT_APPLICABLE",
+      "synthetic_validation": "NOT_APPLICABLE",
+      "archived_physical_validation": "DB_ROWS_VERIFIED",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/GAP_REGISTRY.json",
+        "research/gap_closure_20261001/cancellation_followup_20261001/DATABASE_UPDATE.json"
+      ],
+      "remaining_gap_ko": "",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_03",
+      "section": 3,
+      "title": "FROZEN CURRENT SCIENTIFIC STATE",
+      "contract_lines": [
+        144,
+        221
+      ],
+      "contract_section_sha256": "27a77edb8344dc0207e2619d14fafe8dfef4d7cf467517b2f523f41808dfd2f7",
+      "completion": "PRESERVED_NOT_REEXECUTED",
+      "summary_ko": "18ch/100keV/u/b2/±12 temporal gate와8 static points를 역사적 증거로 보존했다.",
+      "derived_theory": "NOT_APPLICABLE",
+      "executable_implementation": "NOT_APPLICABLE",
+      "synthetic_validation": "NOT_APPLICABLE",
+      "archived_physical_validation": "HISTORICAL_N1536_AND_STATIC_ONLY",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/ERROR_BUDGET_CURRENT_B0.json",
+        "research/gap_closure_20261001/numerical_methods_20261001/PHYSICAL_MATRIX_FIXTURES.json"
+      ],
+      "remaining_gap_ko": "tail states 및 새window certificate는 없다.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_04",
+      "section": 4,
+      "title": "MASTER GOAL",
+      "contract_lines": [
+        222,
+        266
+      ],
+      "contract_section_sha256": "08ae266d8976dc05f11617c9d9bddb8cee34bb276e66a6f9095d17459717a66a",
+      "completion": "DAG_ONLY_END_GOAL_OPEN",
+      "summary_ko": "의존 DAG는 존재하나 production까지 실행되지 않았다.",
+      "derived_theory": "DEPENDENCY_FORMALIZED",
+      "executable_implementation": "REGISTRY_ONLY",
+      "synthetic_validation": "NOT_APPLICABLE",
+      "archived_physical_validation": "NOT_APPLICABLE",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/GATE_DEPENDENCY_STATE.json"
+      ],
+      "remaining_gap_ko": "fixed-b finite window→basis→all-bound→b-grid→cross-section 모두 후속 scientific gate가 열려 있다.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_05",
+      "section": 5,
+      "title": "RESEARCH LOOP MECHANISM",
+      "contract_lines": [
+        267,
+        332
+      ],
+      "contract_section_sha256": "fcc326a2ecf0bb9881a4922cae7fc40c94bb3b872ef28dca8f74eb04bac4ce28",
+      "completion": "PARTIAL",
+      "summary_ko": "핵심 연구 lanes는 theorem/code/test/DB/backup까지 수행했지만 모든 gap에서 physical return/closure가 완성된 것은 아니다.",
+      "derived_theory": "EXECUTED_MULTIPLE_LANES",
+      "executable_implementation": "IMPLEMENTED_COMPONENTS",
+      "synthetic_validation": "RECORDED_PASS",
+      "archived_physical_validation": "REPLAYS_ONLY",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/GAP_REGISTRY.json",
+        "research/gap_closure_20261001/CLAIM_EVIDENCE_MATRIX.json"
+      ],
+      "remaining_gap_ko": "RESOLVED_WITH_LIMITATION은 원 unresolved claim 전체 closure가 아니다.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_06",
+      "section": 6,
+      "title": "G01 — LOCAL rho TO INTEGRATED PROBABILITY THEOREM",
+      "contract_lines": [
+        333,
+        432
+      ],
+      "contract_section_sha256": "677bfe8780ae56451921ebb3e564f4abc6468cba2d546f361195420b7596fa71",
+      "completion": "COMPLETED_CONDITIONAL_THEOREM",
+      "summary_ko": "G01의10가지 항등식·정리·가정·단위·constant-basis covariance를 유도·구현했다.",
+      "derived_theory": "DERIVED_EXACT_ALGEBRA",
+      "executable_implementation": "RATE_FORMS_AND_FACTORIZATION",
+      "synthetic_validation": "12_G01_TESTS_PLUS_R4T",
+      "archived_physical_validation": "6_R4T_MATRIX_REPLAYS",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/rho_integration_theorem_20261001/THEOREM.md",
+        "research/gap_closure_20261001/rho_integration_theorem_20261001/rho_theorem.py",
+        "research/gap_closure_20261001/rho_integration_theorem_20261001/VALIDATION.json",
+        "research/gap_closure_20261001/cancellation_followup_20261001/projector/projector_rate.py",
+        "research/gap_closure_20261001/cancellation_followup_20261001/SAVED_MATRIX_REPLAY.json"
+      ],
+      "remaining_gap_ko": "실제 Sdot compatibility와 integrable physical tail은 정리의 미입증 적용조건이다.",
+      "requirements": [
+        {
+          "item": "norm conservation conditional on compatibility",
+          "status": "DERIVED_AND_CHECKED"
+        },
+        {
+          "item": "Pdot=c†Wc",
+          "status": "DERIVED_AND_CHECKED"
+        },
+        {
+          "item": "|Pdot|<=N rho",
+          "status": "DERIVED_AND_CHECKED"
+        },
+        {
+          "item": "finite integral inequality",
+          "status": "DERIVED_AND_CHECKED"
+        },
+        {
+          "item": "L1 tail implies limit",
+          "status": "DERIVED_AND_CHECKED"
+        },
+        {
+          "item": "regularity",
+          "status": "DERIVED_AND_CHECKED"
+        },
+        {
+          "item": "units",
+          "status": "DERIVED_AND_CHECKED"
+        },
+        {
+          "item": "Pi vs Q",
+          "status": "DERIVED_AND_CHECKED"
+        },
+        {
+          "item": "projector identities",
+          "status": "DERIVED_AND_CHECKED"
+        },
+        {
+          "item": "constant basis covariance",
+          "status": "DERIVED_AND_CHECKED"
+        }
+      ]
+    },
+    {
+      "id": "SECTION_07",
+      "section": 7,
+      "title": "G02 — INDEPENDENT Sdot = D + D† VALIDATION",
+      "contract_lines": [
+        433,
+        508
+      ],
+      "contract_section_sha256": "4fa6e87998b9fad03710d3ad3add9ace4682a6d9462e66739a46f8c5ffd25744",
+      "completion": "IMPLEMENTED_NOT_PHYSICALLY_EXECUTED",
+      "summary_ko": "G02 shrinking-h FD postprocessor와66new+6reuse query 실행기까지 구현했다.",
+      "derived_theory": "IDENTITY_AND_FAILURE_ANALYSIS",
+      "executable_implementation": "NATIVE_EXECUTOR_AND_RETURN_COLLECTOR",
+      "synthetic_validation": "FD_AND_EXECUTOR_TESTED",
+      "archived_physical_validation": "6_HASH_VERIFIED_REUSE_CENTERS",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/static_validation_20261001/static_validation.py",
+        "research/gap_closure_20261001/static_validation_20261001/executor/fd_executor.py",
+        "research/gap_closure_20261001/static_validation_20261001/executor/test_fd_executor.py",
+        "research/gap_closure_20261001/static_validation_20261001/E_SDOT_FD_RESULTS.json"
+      ],
+      "remaining_gap_ko": "실제64shift+±12centerD가 없어 독립 Sdot convergence/plateau를 확인하지 못했다.",
+      "requirements": [
+        {
+          "item": "independent source path inspection",
+          "status": "DONE"
+        },
+        {
+          "item": "signed centers and shrinking h ladder",
+          "status": "PLAN_AND_CODE"
+        },
+        {
+          "item": "spectral/Frobenius/elementwise residual",
+          "status": "POSTPROCESSOR_IMPLEMENTED"
+        },
+        {
+          "item": "visible physical truncation order",
+          "status": "NOT_EXECUTED"
+        },
+        {
+          "item": "source/native pins",
+          "status": "TEMPLATE_PLUS_PREPARER"
+        }
+      ]
+    },
+    {
+      "id": "SECTION_08",
+      "section": 8,
+      "title": "G07 — GENERALIZED EIGENSOLVER / CONDITIONING",
+      "contract_lines": [
+        509,
+        579
+      ],
+      "contract_section_sha256": "2649fd39ec1ec1fb90221e160507afb13fb7f407550206d25002bb4f5da436e3",
+      "completion": "PARTIAL_CONDITIONING_DOMAIN",
+      "summary_ko": "eigh(W,S)와Cholesky congruence,100digit 2x2,condition sweep 및8saved matrices를 검사했다.",
+      "derived_theory": "CONDITIONING_ANALYSIS",
+      "executable_implementation": "TWO_SOLVER_PATHS_AND_DECIMAL_REFERENCE",
+      "synthetic_validation": "COND_1_1E4_1E8_1E12",
+      "archived_physical_validation": "8_MATRICES_REPLAYED",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/numerical_methods_20261001/numerical_audit.py",
+        "research/gap_closure_20261001/numerical_methods_20261001/test_generalized_rho_solver.py",
+        "research/gap_closure_20261001/numerical_methods_20261001/E_RHO_SOLVER_RESULTS.json"
+      ],
+      "remaining_gap_ko": "whole rate assembly cond(S)>=1e8 문제와 uniform forward error는 남아 있다. High-precision lane은 rounded synthetic2x2이며 directed interval이 아니다.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_09",
+      "section": 9,
+      "title": "G08 — BASIS-COVARIANCE / DIAGNOSTIC SEMANTICS",
+      "contract_lines": [
+        580,
+        626
+      ],
+      "contract_section_sha256": "eaf8e79806125e26cfff4546c8af6ae45cbd87167157d1a9bee6a66c06116bc9",
+      "completion": "COMPLETED_WITH_DECLARED_DOMAIN",
+      "summary_ko": "norm/P/projector/spectrum/rho covariance와raw K_TP 비불변 반례 및 별도metric coupling을 구현했다.",
+      "derived_theory": "DERIVED",
+      "executable_implementation": "NAMED_METRIC_COUPLING",
+      "synthetic_validation": "12_COMPLEX_TRANSFORMS_AND_COUNTEREXAMPLE",
+      "archived_physical_validation": "NOT_APPLICABLE",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/numerical_methods_20261001/numerical_audit.py",
+        "research/gap_closure_20261001/numerical_methods_20261001/test_basis_covariance.py",
+        "research/gap_closure_20261001/numerical_methods_20261001/E_COVARIANCE_RESULTS.json"
+      ],
+      "remaining_gap_ko": "",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_10",
+      "section": 10,
+      "title": "G03 — rho ASYMPTOTIC FORM",
+      "contract_lines": [
+        627,
+        699
+      ],
+      "contract_section_sha256": "35ee78a7a26625a56457a3161ad0279ab611fd897d52d0bc549e00af0ce29deb",
+      "completion": "PARTIAL_NOT_MODEL_IDENTIFIED",
+      "summary_ko": "acquired collision sources 기반 유도, M1–M4 signed fits/holdouts/branch-switch 반례와최소±48선정을 수행했다.",
+      "derived_theory": "DERIVED_AND_LITERATURE_SUPPORTED",
+      "executable_implementation": "FIT_AND_RETURN_SCORER",
+      "synthetic_validation": "FIT_AND_PARITY_TESTS",
+      "archived_physical_validation": "8_HISTORICAL_STATIC_ROWS",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/asymptotics_20261001/SOURCE_EVIDENCE.json",
+        "research/gap_closure_20261001/asymptotics_20261001/asymptotic_models.py",
+        "research/gap_closure_20261001/asymptotics_20261001/ASYMPTOTIC_MODELS.json",
+        "research/gap_closure_20261001/asymptotics_20261001/MINIMUM_STATIC_DISCRIMINATOR_CONTRACT.json"
+      ],
+      "remaining_gap_ko": "새±48/offgrid관측이 없어 empirical model identified closure가 아니다. fixed-J 잔차floor 가능성도 남는다.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_11",
+      "section": 11,
+      "title": "G04 — CONTINUOUS MAJORANT",
+      "contract_lines": [
+        700,
+        796
+      ],
+      "contract_section_sha256": "425107eea24b318bc4c3ce155a064d5191204a8fc80151e61054a11e27cc6ce8",
+      "completion": "PARTIAL_PHYSICAL_MAJORANT_OPEN",
+      "summary_ko": "RouteA/B 실제 유도·코드·syntheticLEVEL2, repaired reference metric와finite bridge 정리가 있다.",
+      "derived_theory": "ACTUAL_DERIVATIONS_AND_CONDITIONAL_CERTIFICATES",
+      "executable_implementation": "RATIONAL_DEMO_AND_REFERENCE_CERTIFIER",
+      "synthetic_validation": "LEVEL2_DEMO_TESTED",
+      "archived_physical_validation": "ACTUAL_RADIAL_COEFFICIENTS_CERTIFIED",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/majorant_validated_20261001/validated_majorant.py",
+        "research/gap_closure_20261001/majorant_validated_20261001/SYNTHETIC_CONTINUUM_CERTIFICATE.json",
+        "research/gap_closure_20261001/reference_certificate_followup_20261001/exact_reference.py",
+        "research/gap_closure_20261001/bridge_analysis_followup_20261001/ETF_METRIC_CERTIFICATE.json",
+        "research/gap_closure_20261001/cancellation_followup_20261001/galilean/GALILEAN_BRIDGE_CERTIFICATE.json"
+      ],
+      "remaining_gap_ko": "B0 complex continuous enclosure engine/input proof가 없다. _matrix는real-symmetric만 지원하고 proof metadata validator는theoremchecker가 아니다. 새reference bridge504.54는5e-6목표실패.",
+      "requirements": [
+        {
+          "item": "uniform metric lower bound",
+          "status": "NEW_REFERENCE_NORMALIZED_FRAME_DONE"
+        },
+        {
+          "item": "continuous original B0 W/rho majorant",
+          "status": "OPEN"
+        },
+        {
+          "item": "validated finite complex physical interval",
+          "status": "NOT_IMPLEMENTED"
+        },
+        {
+          "item": "level3 original B0 finite+infinity",
+          "status": "NOT_CERTIFIED"
+        },
+        {
+          "item": "proof provenance",
+          "status": "METADATA_ONLY_FOR_GENERIC_INPUT"
+        }
+      ]
+    },
+    {
+      "id": "SECTION_12",
+      "section": 12,
+      "title": "G05 — INFINITE-TAIL INTEGRAL",
+      "contract_lines": [
+        797,
+        858
+      ],
+      "contract_section_sha256": "ec12ad9a55568785d028eb5fc7296778826591c2a276b0d7575778276a969afe",
+      "completion": "PARTIAL_FAR_REFERENCE_ONLY",
+      "summary_ko": "p2 integral exact enclosure와named-reference gapped O(Z^-2) far-tail cutoff14312가 계산됐다.",
+      "derived_theory": "DERIVED",
+      "executable_implementation": "TAIL_INTEGRAL_AND_CUTOFF_HELPERS",
+      "synthetic_validation": "EXACT_AND_SYNTHETIC_TESTED",
+      "archived_physical_validation": "REFERENCE_COEFFICIENT_CERTIFICATE_ONLY",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/majorant_validated_20261001/validated_majorant.py",
+        "research/gap_closure_20261001/gapped_tail_followup_20261001/gapped_tail.py",
+        "research/gap_closure_20261001/gapped_tail_followup_20261001/CONDITIONAL_CUTOFF.json",
+        "research/gap_closure_20261001/TAIL_BOUND.json"
+      ],
+      "remaining_gap_ko": "incoming/outgoing originalB0 bound는null. Far-only bound가per-side예산전체를 사용하며bridge/state전이여유가 없다.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_13",
+      "section": 13,
+      "title": "G06 — TIGHTNESS OF rho ENVELOPE",
+      "contract_lines": [
+        859,
+        906
+      ],
+      "contract_section_sha256": "11e3926b78b7163701aa8ee34cec8b8a8ee75aee605e817b7256592f2b2ce522",
+      "completion": "NOT_PHYSICALLY_EXECUTED",
+      "summary_ko": "state-aware angle inequality 연구는 있으나 nested B0 window tightness study는 없다.",
+      "derived_theory": "ANGLE_THEOREM_DERIVED",
+      "executable_implementation": "ILLUSTRATIVE_BUDGET_HELPER_ONLY",
+      "synthetic_validation": "7_ANGLE_TESTS",
+      "archived_physical_validation": "NO_TAIL_STATE",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/integration_updates/G06.json",
+        "research/gap_closure_20261001/cancellation_followup_20261001/angle/angle_budget.py",
+        "research/gap_closure_20261001/cancellation_followup_20261001/angle/ILLUSTRATIVE_BUDGET.json"
+      ],
+      "remaining_gap_ko": "±16/24/32/48/64 full-window endpoint/state/norm/integratedrho/uncertainty table가 없다. Scheduler·collector도해당study용구체구현이확인되지 않는다.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_14",
+      "section": 14,
+      "title": "G11 — B0 FINITE-WINDOW CLOSURE",
+      "contract_lines": [
+        907,
+        953
+      ],
+      "contract_section_sha256": "2092e09b2ed81b778dbae1e45927d6123d7cb04a3a550f10a6413e00d90d5534",
+      "completion": "ACCEPTANCE_DEFINED_NOT_CLOSED",
+      "summary_ko": "common-observable error composition과finite-metric transfer theorem은 있다.",
+      "derived_theory": "DERIVED",
+      "executable_implementation": "SCHEMA_AND_SMALL_ALGEBRA_HELPERS_ONLY",
+      "synthetic_validation": "REGULARITY_ALGEBRA_TESTED",
+      "archived_physical_validation": "ONLY_ORIGINAL_PLUS_MINUS12_TEMPORAL",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/ERROR_BUDGET_METHOD_NOTE.md",
+        "research/gap_closure_20261001/cancellation_followup_20261001/regularity/REGULARITY_AND_DYNAMICS_TRANSFER.md",
+        "research/gap_closure_20261001/cancellation_followup_20261001/regularity/TRANSFER_INPUT_CONTRACT.json"
+      ],
+      "remaining_gap_ko": "operator bound/nestedwindow/physicaltail/initialstate transfer가 없어서 executable acceptance pipeline 및 actualwindow closure는 미완성.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_15",
+      "section": 15,
+      "title": "G09 — RANK LOSS / BASIS CONDITIONING POLICY",
+      "contract_lines": [
+        954,
+        993
+      ],
+      "contract_section_sha256": "4579b6d0c01faefa838747131a9ad57f2c5bf1e34aec16618158497e63c8b999",
+      "completion": "POLICY_SYNTHETIC_IMPLEMENTATION_ONLY",
+      "summary_ko": "canonical truncation/pivotedCholesky/SVD/QR 및newbasisidentity를 synthetic에서검사했다.",
+      "derived_theory": "POLICY_AND_COUNTEREXAMPLES",
+      "executable_implementation": "RANK_DECISIONS_IMPLEMENTED",
+      "synthetic_validation": "8_TESTS_PLUS_SWEEP",
+      "archived_physical_validation": "NOT_APPLICABLE",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/rank_policy_20261001/rank_policy.py",
+        "research/gap_closure_20261001/rank_policy_20261001/test_rank_policy.py",
+        "research/gap_closure_20261001/rank_policy_20261001/RANK_POLICY_REPORT.md"
+      ],
+      "remaining_gap_ko": "realB1+ cutoff/rank/angle/rho/observable sweep및고정physicalthreshold 없음.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_16",
+      "section": 16,
+      "title": "G10 — SEMANTIC SELECTED SUBSPACE",
+      "contract_lines": [
+        994,
+        1034
+      ],
+      "contract_section_sha256": "2e36aebc1b5cdbce52f66b507c4385aa4206526ee4c838f3fd1eb8184fb3a505",
+      "completion": "COMPLETED_B0_SEMANTIC_SELECTION",
+      "summary_ko": "semantic query가B0five states를 재현하고 reorder/중복/energy/kind검사를 통과했다.",
+      "derived_theory": "SCHEMA_DEFINED",
+      "executable_implementation": "EXECUTABLE_SEMANTIC_SELECTOR",
+      "synthetic_validation": "9_IDENTITY_TESTS",
+      "archived_physical_validation": "B0_CHANNEL_METADATA_REGRESSION",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/semantic_selection_20261001/semantic_selection.py",
+        "research/gap_closure_20261001/semantic_selection_20261001/test_selected_subspace_identity.py",
+        "research/gap_closure_20261001/semantic_selection_20261001/B0_SEMANTIC_SELECTION_REGRESSION.json"
+      ],
+      "remaining_gap_ko": "B1+ 실제radialidentity의존부분은그basis생성시별도검증.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_17",
+      "section": 17,
+      "title": "G12 — INDEPENDENT PROPAGATOR FAMILY",
+      "contract_lines": [
+        1035,
+        1107
+      ],
+      "contract_section_sha256": "efa987faae883e6a3b459fe0aae213e10ea9745ff7a95e61d0c40ed6f34a9bcd",
+      "completion": "PROTOTYPE_IMPLEMENTED_PHYSICAL_PARITY_ABSENT",
+      "summary_ko": "Cholesky derivative/CF4 reference와existing midpoint/DOP853 synthetic comparison 수행.",
+      "derived_theory": "WHITENING_DERIVED",
+      "executable_implementation": "CF4_PROTOTYPE",
+      "synthetic_validation": "6_TESTS_ANALYTIC_NONCOMMUTING_IVP",
+      "archived_physical_validation": "NONE_ON_PHYSICAL_TRAJECTORY",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/independent_propagator_20261001/independent_propagator.py",
+        "research/gap_closure_20261001/independent_propagator_20261001/test_independent_propagator.py",
+        "research/gap_closure_20261001/independent_propagator_20261001/PHYSICAL_PARITY_CONTRACT.json"
+      ],
+      "remaining_gap_ko": "contract NOT_NATIVE_READY; provider/Sdot/initialstate/pinnedbudget/nstep미결. 실제B0독립가족comparison 없음.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_18",
+      "section": 18,
+      "title": "G13 — B1/B2/B3 COMPLETENESS",
+      "contract_lines": [
+        1108,
+        1181
+      ],
+      "contract_section_sha256": "f80e746d5e7876fc35b8fea62472edf4ed25e86e6da180dc52afb9d70b5be296",
+      "completion": "SYMBOLIC_REGISTRY_ONLY",
+      "summary_ko": "18/46/92/124 ladder와prerequisite를기록했으나B1–B3완전pipeline없음.",
+      "derived_theory": "STAGED_CONTRACT_ONLY",
+      "executable_implementation": "GENERIC_RADIAL_BUILDER_EXISTS_NOT_FULL_HIGHER_L_PIPELINE",
+      "synthetic_validation": "CHANNEL_COUNTS_AND_SCHEMA_ONLY",
+      "archived_physical_validation": "NOT_APPLICABLE",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/integration_updates/G13.json",
+        "research/gap_closure_20261001/rank_policy_20261001/RANK_POLICY_REPORT.md"
+      ],
+      "remaining_gap_ko": "higher-l optimizedbackend l>1 unsupported; actualnewradialbank/Gram/qualification/temporal/window/completenessrecords 없음.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_19",
+      "section": 19,
+      "title": "ALL-BOUND CAPTURE GATE",
+      "contract_lines": [
+        1182,
+        1224
+      ],
+      "contract_section_sha256": "66947c8d36bbf501b2bfd1795d66d9bf5cc056def6e6c26301c35f3e2eb6a9ad",
+      "completion": "GATE_CONTRACT_ONLY",
+      "summary_ko": "L0–L5의의미구별은유지한다.",
+      "derived_theory": "SEMANTIC_LAYERS_DEFINED",
+      "executable_implementation": "REGISTRY_ONLY",
+      "synthetic_validation": "NOT_APPLICABLE",
+      "archived_physical_validation": "NOT_APPLICABLE",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/GATE_DEPENDENCY_STATE.json",
+        "research/gap_closure_20261001/ERROR_BUDGET_METHOD_NOTE.md"
+      ],
+      "remaining_gap_ko": "all-bound capture: basis/window/pseudostatecontamination/asymptotic증거미완성.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_20",
+      "section": 20,
+      "title": "b-GRID AND CROSS SECTION",
+      "contract_lines": [
+        1225,
+        1252
+      ],
+      "contract_section_sha256": "6143f71b4367e8296c4952155fc36ab4dc329ee29c032fac64ecf9bf167c5fa8",
+      "completion": "INTENTIONALLY_NOT_EXECUTED",
+      "summary_ko": "원요청자체가b-grid실행을금지한조건부미래단계다.",
+      "derived_theory": "FUTURE_GATE_ONLY",
+      "executable_implementation": "NO_PRODUCTION_B_GRID_PIPELINE",
+      "synthetic_validation": "NOT_APPLICABLE",
+      "archived_physical_validation": "NOT_APPLICABLE",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/GATE_DEPENDENCY_STATE.json"
+      ],
+      "remaining_gap_ko": "adaptiveb quadrature/small-largeb tail/σ errorcertificate는미구현. 현재안한것은원계약위반이아니다.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_21",
+      "section": 21,
+      "title": "GLOBAL ERROR BUDGET",
+      "contract_lines": [
+        1253,
+        1289
+      ],
+      "contract_section_sha256": "9bb84054c12418d65baf3866fafc7a00afd41223f4f46be6267d2c61486a1186",
+      "completion": "SCHEMA_DONE_NUMERICAL_BUDGET_OPEN",
+      "summary_ko": "8개error component와triangle-composition규칙및1e-5tailtarget사전선언은존재. 감사에서찾은stale bridge값은별도history와certificatehash를남겨source만동기화했다.",
+      "derived_theory": "COMPOSITION_RULE_DERIVED",
+      "executable_implementation": "SCHEMA_NOT_EXECUTABLE_COMPLETE_LEDGER",
+      "synthetic_validation": "NOT_APPLICABLE",
+      "archived_physical_validation": "NOT_APPLICABLE",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/ERROR_BUDGET_SCHEMA.json",
+        "research/gap_closure_20261001/ERROR_BUDGET_CURRENT_B0.json",
+        "research/gap_closure_20261001/ERROR_BUDGET_METHOD_NOTE.md"
+      ],
+      "remaining_gap_ko": "certified_total=null; 모든component.value=null; productionbudget미승인. R4Tbaseline은old5037.09였으나audit수정후source는504.54;기게시detachedbudget는수정하지않았다.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_22",
+      "section": 22,
+      "title": "STATIC QUALIFICATION AUDIT",
+      "contract_lines": [
+        1290,
+        1327
+      ],
+      "contract_section_sha256": "131a1d6b70d970bec0451960758a07eda4585bac7eaa0ee4cf320cea3b4c34b3",
+      "completion": "AUDIT_COMPLETED_ABSOLUTE_BOUND_OPEN",
+      "summary_ko": "correlatedbias/plateau/preasymptotic/nonmonotone/Richardson반례와threeleveldiagnostic구현.",
+      "derived_theory": "FAILURE_MODES_DERIVED",
+      "executable_implementation": "DIAGNOSTICS_IMPLEMENTED",
+      "synthetic_validation": "COUNTEREXAMPLES_TESTED",
+      "archived_physical_validation": "NOT_APPLICABLE",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/static_validation_20261001/static_validation.py",
+        "research/gap_closure_20261001/static_validation_20261001/STATIC_QUALIFICATION_RESULTS.json",
+        "research/gap_closure_20261001/ERROR_BUDGET_SCHEMA.json",
+        "research/gap_closure_20261001/ERROR_BUDGET_CURRENT_B0.json"
+      ],
+      "remaining_gap_ko": "기존adjacentagreement는internalconsistency뿐. rigorousoperatorerror estimator는미구현.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_23",
+      "section": 23,
+      "title": "LITERATURE USAGE POLICY",
+      "contract_lines": [
+        1328,
+        1367
+      ],
+      "contract_section_sha256": "af10689c5bf58e5e5040244bd240b44bcbfacfce620e4b0ea82d2f9745cd8bb3",
+      "completion": "FOLLOWED_WITH_PINNED_SOURCE_RECORDS",
+      "summary_ko": "sourceDB/fulltextversion/page/equationprovenance를G03등에기록했다.",
+      "derived_theory": "NOT_APPLICABLE",
+      "executable_implementation": "NOT_APPLICABLE",
+      "synthetic_validation": "NOT_APPLICABLE",
+      "archived_physical_validation": "ACQUISITION_VERSION_RECORDS",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/asymptotics_20261001/SOURCE_EVIDENCE.json",
+        "research/gap_closure_20261001/AUTHORITY_INVENTORY.json"
+      ],
+      "remaining_gap_ko": "이감사는모든PDF를재독하지않았으며원pin/사용기록을확인한범위다.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_24",
+      "section": 24,
+      "title": "WOLFRAM / SYMBOLIC POLICY",
+      "contract_lines": [
+        1368,
+        1390
+      ],
+      "contract_section_sha256": "d667dd4592caab153ada6a83ebde6e0394bcd2662799073da3482bdb62266a48",
+      "completion": "EXECUTED_WHERE_USED",
+      "summary_ko": "G01 exactFraction symbolic replay/CASinput-output및G03paritysymbolic기록이존재.",
+      "derived_theory": "EXPLICIT_PROOFS",
+      "executable_implementation": "EXACT_ALGEBRA_REPLAYS",
+      "synthetic_validation": "RECORDED_CHECKS",
+      "archived_physical_validation": "NOT_APPLICABLE",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/rho_integration_theorem_20261001/symbolic_checks.py",
+        "research/gap_closure_20261001/rho_integration_theorem_20261001/EXACT_RATIONAL_REPLAY.json",
+        "research/gap_closure_20261001/rho_integration_theorem_20261001/WOLFRAM_CAS_RESPONSE.json",
+        "research/gap_closure_20261001/asymptotics_20261001/PARITY_SYMBOLIC_CHECK.json"
+      ],
+      "remaining_gap_ko": "",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_25",
+      "section": 25,
+      "title": "NUMERICAL PRECISION POLICY",
+      "contract_lines": [
+        1391,
+        1408
+      ],
+      "contract_section_sha256": "638ebb3a7bf15098beb7ae8398ed5cbc1951db59fe1a32987a963159cd1de378",
+      "completion": "FOLLOWED",
+      "summary_ko": "FP64production-equivalent경로와Decimal/Fraction감사경로를구분했다.",
+      "derived_theory": "NOT_APPLICABLE",
+      "executable_implementation": "PRECISION_LANES_SEPARATE",
+      "synthetic_validation": "STRICT_FP_PARITY",
+      "archived_physical_validation": "NOT_APPLICABLE",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/numerical_methods_20261001/numerical_audit.py",
+        "research/gap_closure_20261001/reference_certificate_followup_20261001/exact_reference.py",
+        "research/gap_closure_20261001/hpc_optimization_20261001/native/README_NATIVE.md"
+      ],
+      "remaining_gap_ko": "100digitDecimal은directedbound가아니며HPCbitwisechecks는물리certificate아님.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_26",
+      "section": 26,
+      "title": "CODE / REPO POLICY",
+      "contract_lines": [
+        1409,
+        1437
+      ],
+      "contract_section_sha256": "68666157d526d4946792bd1cab0971963dd39448cd5a6724d25b5f8a9342bef8",
+      "completion": "RECORDED_PUBLISHED",
+      "summary_ko": "datedadditivefolders,focusedred/green,nonforce같은branch게시기록존재.",
+      "derived_theory": "NOT_APPLICABLE",
+      "executable_implementation": "ADDITIVE_IMPLEMENTATIONS",
+      "synthetic_validation": "NOT_APPLICABLE",
+      "archived_physical_validation": "NOT_APPLICABLE",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/cancellation_followup_20261001/VALIDATION.json",
+        "research/gap_closure_20261001/hpc_optimization_20261001/evidence/ROOT_REVIEW.json"
+      ],
+      "remaining_gap_ko": "현재selectivesnapshot에는.git이없으므로새실행에는실제checkout/admission필요.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_27",
+      "section": 27,
+      "title": "EXTERNAL / NATIVE EXECUTION POLICY",
+      "contract_lines": [
+        1438,
+        1462
+      ],
+      "contract_section_sha256": "4d57531092b6f3a0046349d59c5815b3222b9d12cdc4fe0d69c05ee041552f92",
+      "completion": "PARTIAL_EXECUTOR_CONTRACTS",
+      "summary_ko": "G02/G03finished narrowexecutors는있으나G12/G06/G11은template수준이남는다.",
+      "derived_theory": "NOT_APPLICABLE",
+      "executable_implementation": "G02_G03_EXECUTABLE_G12_NOT_READY",
+      "synthetic_validation": "EXECUTOR_TESTED",
+      "archived_physical_validation": "NOT_APPLICABLE",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/static_validation_20261001/executor/fd_executor.py",
+        "research/gap_closure_20261001/static_validation_20261001/executor/g03_executor.py",
+        "research/gap_closure_20261001/independent_propagator_20261001/PHYSICAL_PARITY_CONTRACT.json"
+      ],
+      "remaining_gap_ko": "감사checkpoint의새physical실행은기록상0. 현재사용자의run지시는구현과현재exactplan으로구체화할수있다. 이전placeholder계약을최종실행설정으로오인하면안된다.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_28",
+      "section": 28,
+      "title": "COST / INFORMATION-VALUE ORDER",
+      "contract_lines": [
+        1463,
+        1503
+      ],
+      "contract_section_sha256": "eb50f0b2fe2350a0e42dbf91963cd650de92707806d4d3d7ac3bd0f2a9b0526c",
+      "completion": "ORDER_GENERALLY_FOLLOWED",
+      "summary_ko": "저비용theory/synthetic부터진행했고expensive후속science는미개방.",
+      "derived_theory": "NOT_APPLICABLE",
+      "executable_implementation": "NOT_APPLICABLE",
+      "synthetic_validation": "NOT_APPLICABLE",
+      "archived_physical_validation": "NOT_APPLICABLE",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/GAP_REGISTRY.json",
+        "research/gap_closure_20261001/cancellation_followup_20261001/REPORT_KO.md"
+      ],
+      "remaining_gap_ko": "더많은audit만으로생산단계가완성되지는않는다. 구현과최소physicaldiscriminator순으로전환필요.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_29",
+      "section": 29,
+      "title": "CLAIM-GATE MACHINE-READABLE REGISTRY",
+      "contract_lines": [
+        1504,
+        1547
+      ],
+      "contract_section_sha256": "a5497c401e2dfc2a9139821f5cfb16530bd2a31382cd8a0fc1be3f7e16989003",
+      "completion": "COMPLETED_FOR_CHECKPOINT",
+      "summary_ko": "registry13행과claimmatrix/DBv6 research36claims가존재.",
+      "derived_theory": "NOT_APPLICABLE",
+      "executable_implementation": "MACHINE_READABLE_REGISTRIES",
+      "synthetic_validation": "NOT_APPLICABLE",
+      "archived_physical_validation": "NOT_APPLICABLE",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/GAP_REGISTRY.json",
+        "research/gap_closure_20261001/CLAIM_EVIDENCE_MATRIX.json",
+        "research/gap_closure_20261001/cancellation_followup_20261001/DATABASE_UPDATE.json"
+      ],
+      "remaining_gap_ko": "section별미구현상태는13gaplabel만으로는보이지않아본matrix가보완한다.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_30",
+      "section": 30,
+      "title": "BLOCKER CLASSES",
+      "contract_lines": [
+        1548,
+        1571
+      ],
+      "contract_section_sha256": "8cb5e88aba92eae154ddd5a956877146577ef8888c70bf7b561ab970db07e038",
+      "completion": "MOSTLY_RECORDED",
+      "summary_ko": "승인/환경/수치/구현분류와firstfailure기록을보존.",
+      "derived_theory": "NOT_APPLICABLE",
+      "executable_implementation": "NOT_APPLICABLE",
+      "synthetic_validation": "NOT_APPLICABLE",
+      "archived_physical_validation": "NOT_APPLICABLE",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/GAP_REGISTRY.json",
+        "research/gap_closure_20261001/cancellation_followup_20261001/VALIDATION.json",
+        "research/gap_closure_20261001/hpc_optimization_20261001/RESULT.json"
+      ],
+      "remaining_gap_ko": "G02resourceblocker해소후에도G04/11numerical, G13implementationblocker는별도로남음.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_31",
+      "section": 31,
+      "title": "PERIODIC DURABLE CHECKPOINTS",
+      "contract_lines": [
+        1572,
+        1588
+      ],
+      "contract_section_sha256": "bacd6e0f58e63e2631861a17cedbb5cfa74aaab6f6e9587919380830fb941970",
+      "completion": "RECORDED_DURABLE_CHECKPOINTS",
+      "summary_ko": "R4Q/R/R4S/R4T Git및dualbackupreceipt존재;R1/R3의미구분.",
+      "derived_theory": "NOT_APPLICABLE",
+      "executable_implementation": "NOT_APPLICABLE",
+      "synthetic_validation": "NOT_APPLICABLE",
+      "archived_physical_validation": "PROVIDER_ACK_AND_METADATA_RECEIPTS",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/cancellation_followup_20261001/RECOVERY_VERIFIED.json"
+      ],
+      "remaining_gap_ko": "본감사는remote업로드재실행안함. R4Tdetachedreceipt를근거로게시성공기록확인.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_32",
+      "section": 32,
+      "title": "STOP RULES FOR RESEARCH LOOPS",
+      "contract_lines": [
+        1589,
+        1611
+      ],
+      "contract_section_sha256": "a82d20995841423425be488cf0cf499e7b66a568d2fad94399bb4401b85308c0",
+      "completion": "GENERALLY_FOLLOWED",
+      "summary_ko": "경계에서과학gate승격을멈추고추가derivation으로진전했다.",
+      "derived_theory": "NOT_APPLICABLE",
+      "executable_implementation": "NOT_APPLICABLE",
+      "synthetic_validation": "NOT_APPLICABLE",
+      "archived_physical_validation": "NOT_APPLICABLE",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/GAP_REGISTRY.json",
+        "research/gap_closure_20261001/cancellation_followup_20261001/CLAIM_UPDATE.json"
+      ],
+      "remaining_gap_ko": "무기한theoryrefinement대신현재실행가능G02/G03와미구현physicaladapter를우선할것.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_33",
+      "section": 33,
+      "title": "REQUIRED PROGRESS REPORT AFTER EACH GAP",
+      "contract_lines": [
+        1612,
+        1636
+      ],
+      "contract_section_sha256": "b1d209a2bdeca74fab22a2572dd65a8d37188d13ad1438dd785d5970698983f8",
+      "completion": "PARTIAL_GRANULARITY",
+      "summary_ko": "lane별claimupdate/test/runtimeaccounting이존재하나모든절별완료표는없었다.",
+      "derived_theory": "NOT_APPLICABLE",
+      "executable_implementation": "NOT_APPLICABLE",
+      "synthetic_validation": "NOT_APPLICABLE",
+      "archived_physical_validation": "NOT_APPLICABLE",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/CLAIM_EVIDENCE_MATRIX.json",
+        "research/gap_closure_20261001/cancellation_followup_20261001/VALIDATION.json"
+      ],
+      "remaining_gap_ko": "본37절+10STEPmatrix로누락가시화.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_34",
+      "section": 34,
+      "title": "REQUIRED END-OF-THREAD RETURN",
+      "contract_lines": [
+        1637,
+        1666
+      ],
+      "contract_section_sha256": "60fe6730ac5ee3db5233378427fde7e27f19968d62c0218d01a3eded63a296e4",
+      "completion": "COMPLETED_CHECKPOINT_NOT_MASTER_GOAL",
+      "summary_ko": "closeout/DB/registry/receipts/gates/nextaction은R4Tdelivery에있다.",
+      "derived_theory": "NOT_APPLICABLE",
+      "executable_implementation": "NOT_APPLICABLE",
+      "synthetic_validation": "NOT_APPLICABLE",
+      "archived_physical_validation": "NOT_APPLICABLE",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/cancellation_followup_20261001/REPORT_KO.md",
+        "research/gap_closure_20261001/cancellation_followup_20261001/DATABASE_UPDATE.json"
+      ],
+      "remaining_gap_ko": "Research loop complete라는표현은전체productionprogram완료로읽으면안됨.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_35",
+      "section": 35,
+      "title": "NON-NEGOTIABLE CLAIM CEILINGS",
+      "contract_lines": [
+        1667,
+        1685
+      ],
+      "contract_section_sha256": "87ca2ffd114605421204c984cdf2850c8298ee5501afa3570a68b4b8b7817dca",
+      "completion": "PRESERVED",
+      "summary_ko": "capturefalse/productionHOLD/allboundOPEN/bgridNOGO유지.",
+      "derived_theory": "NOT_APPLICABLE",
+      "executable_implementation": "NOT_APPLICABLE",
+      "synthetic_validation": "NOT_APPLICABLE",
+      "archived_physical_validation": "NOT_APPLICABLE",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/GAP_REGISTRY.json",
+        "research/gap_closure_20261001/GATE_DEPENDENCY_STATE.json"
+      ],
+      "remaining_gap_ko": "새production구현요청이물리gate증거를자동생성하지않는다.",
+      "requirements": []
+    },
+    {
+      "id": "SECTION_36",
+      "section": 36,
+      "title": "FIRST EXECUTION SEQUENCE",
+      "contract_lines": [
+        1686,
+        1740
+      ],
+      "contract_section_sha256": "3eb0ae9dc90bbc4a7b6a23047d4496920fb234a5ce6c67e6d4b5bc38fe7a72bf",
+      "completion": "FIRST_SEQUENCE_PERFORMED_TO_DECLARED_LIMITS",
+      "summary_ko": "STEP1–10모두착수및요구된local산출물을남겼으나후속전체gate종결아님.",
+      "derived_theory": "NOT_APPLICABLE",
+      "executable_implementation": "NOT_APPLICABLE",
+      "synthetic_validation": "NOT_APPLICABLE",
+      "archived_physical_validation": "NOT_APPLICABLE",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/GAP_REGISTRY.json",
+        "research/gap_closure_20261001/README.md"
+      ],
+      "remaining_gap_ko": "아래개별STEP행이실행·계획·physical미실행을구분한다.",
+      "requirements": []
+    },
+    {
+      "id": "STEP_01",
+      "section": 36,
+      "title": "FIRST EXECUTION STEP 1",
+      "contract_lines": [
+        1693,
+        1695
+      ],
+      "contract_section_sha256": "9e76328fa860fc8d4276ed5de646a959eeb678b8f83af3b8248c04a71c6e400a",
+      "completion": "COMPLETED_FOR_CHECKPOINT",
+      "summary_ko": "v3 authority inventory에서 v4/v5/v6로 연구테이블만 확장했다.",
+      "derived_theory": "NOT_APPLICABLE",
+      "executable_implementation": "NOT_APPLICABLE",
+      "synthetic_validation": "NOT_APPLICABLE",
+      "archived_physical_validation": "PINNED_ARCHIVE_REUSED",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/AUTHORITY_INVENTORY.json",
+        "research/gap_closure_20261001/theory_followup_20261001/DB_V5_VALIDATION.json",
+        "research/gap_closure_20261001/cancellation_followup_20261001/DATABASE_UPDATE.json"
+      ],
+      "remaining_gap_ko": "로컬은 selective snapshot이며 .git이 없어 HEAD는 게시receipt 기준; 별도 현재remote 재확인이 필요하다.",
+      "requirements": [],
+      "step": 1,
+      "source_section": 1
+    },
+    {
+      "id": "STEP_02",
+      "section": 36,
+      "title": "FIRST EXECUTION STEP 2",
+      "contract_lines": [
+        1696,
+        1699
+      ],
+      "contract_section_sha256": "e93ed4bec7d3bf007180d2af2291f9af07b88b6e5e5b39424656825384c1af62",
+      "completion": "COMPLETED_FOR_CHECKPOINT",
+      "summary_ko": "registry13행과claimmatrix/DBv6 research36claims가존재.",
+      "derived_theory": "NOT_APPLICABLE",
+      "executable_implementation": "MACHINE_READABLE_REGISTRIES",
+      "synthetic_validation": "NOT_APPLICABLE",
+      "archived_physical_validation": "NOT_APPLICABLE",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/GAP_REGISTRY.json",
+        "research/gap_closure_20261001/CLAIM_EVIDENCE_MATRIX.json",
+        "research/gap_closure_20261001/cancellation_followup_20261001/DATABASE_UPDATE.json"
+      ],
+      "remaining_gap_ko": "section별미구현상태는13gaplabel만으로는보이지않아본matrix가보완한다.",
+      "requirements": [],
+      "step": 2,
+      "source_section": 29
+    },
+    {
+      "id": "STEP_03",
+      "section": 36,
+      "title": "FIRST EXECUTION STEP 3",
+      "contract_lines": [
+        1700,
+        1702
+      ],
+      "contract_section_sha256": "89f8da6806bd941efcf830cca57511b2b30f20aef94fdfe59310e7c9cbe0943f",
+      "completion": "COMPLETED_CONDITIONAL_THEOREM",
+      "summary_ko": "G01의10가지 항등식·정리·가정·단위·constant-basis covariance를 유도·구현했다.",
+      "derived_theory": "DERIVED_EXACT_ALGEBRA",
+      "executable_implementation": "RATE_FORMS_AND_FACTORIZATION",
+      "synthetic_validation": "12_G01_TESTS_PLUS_R4T",
+      "archived_physical_validation": "6_R4T_MATRIX_REPLAYS",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/rho_integration_theorem_20261001/THEOREM.md",
+        "research/gap_closure_20261001/rho_integration_theorem_20261001/rho_theorem.py",
+        "research/gap_closure_20261001/rho_integration_theorem_20261001/VALIDATION.json",
+        "research/gap_closure_20261001/cancellation_followup_20261001/projector/projector_rate.py",
+        "research/gap_closure_20261001/cancellation_followup_20261001/SAVED_MATRIX_REPLAY.json"
+      ],
+      "remaining_gap_ko": "실제 Sdot compatibility와 integrable physical tail은 정리의 미입증 적용조건이다.",
+      "requirements": [
+        {
+          "item": "norm conservation conditional on compatibility",
+          "status": "DERIVED_AND_CHECKED"
+        },
+        {
+          "item": "Pdot=c†Wc",
+          "status": "DERIVED_AND_CHECKED"
+        },
+        {
+          "item": "|Pdot|<=N rho",
+          "status": "DERIVED_AND_CHECKED"
+        },
+        {
+          "item": "finite integral inequality",
+          "status": "DERIVED_AND_CHECKED"
+        },
+        {
+          "item": "L1 tail implies limit",
+          "status": "DERIVED_AND_CHECKED"
+        },
+        {
+          "item": "regularity",
+          "status": "DERIVED_AND_CHECKED"
+        },
+        {
+          "item": "units",
+          "status": "DERIVED_AND_CHECKED"
+        },
+        {
+          "item": "Pi vs Q",
+          "status": "DERIVED_AND_CHECKED"
+        },
+        {
+          "item": "projector identities",
+          "status": "DERIVED_AND_CHECKED"
+        },
+        {
+          "item": "constant basis covariance",
+          "status": "DERIVED_AND_CHECKED"
+        }
+      ],
+      "step": 3,
+      "source_section": 6
+    },
+    {
+      "id": "STEP_04",
+      "section": 36,
+      "title": "FIRST EXECUTION STEP 4",
+      "contract_lines": [
+        1703,
+        1705
+      ],
+      "contract_section_sha256": "95a6f83215f831a0e792c08d9f2d12864f9380e2e9e3c7358404dd5868e38d07",
+      "completion": "PARTIAL_CONDITIONING_DOMAIN",
+      "summary_ko": "eigh(W,S)와Cholesky congruence,100digit 2x2,condition sweep 및8saved matrices를 검사했다.",
+      "derived_theory": "CONDITIONING_ANALYSIS",
+      "executable_implementation": "TWO_SOLVER_PATHS_AND_DECIMAL_REFERENCE",
+      "synthetic_validation": "COND_1_1E4_1E8_1E12",
+      "archived_physical_validation": "8_MATRICES_REPLAYED",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/numerical_methods_20261001/numerical_audit.py",
+        "research/gap_closure_20261001/numerical_methods_20261001/test_generalized_rho_solver.py",
+        "research/gap_closure_20261001/numerical_methods_20261001/E_RHO_SOLVER_RESULTS.json"
+      ],
+      "remaining_gap_ko": "whole rate assembly cond(S)>=1e8 문제와 uniform forward error는 남아 있다. High-precision lane은 rounded synthetic2x2이며 directed interval이 아니다.",
+      "requirements": [],
+      "step": 4,
+      "source_section": 8
+    },
+    {
+      "id": "STEP_05",
+      "section": 36,
+      "title": "FIRST EXECUTION STEP 5",
+      "contract_lines": [
+        1706,
+        1708
+      ],
+      "contract_section_sha256": "66ebf7f8e7a0b3d8f0ceb256a5933f95e4fee8bd209abd2de5a3bb4e48b218c8",
+      "completion": "COMPLETED_WITH_DECLARED_DOMAIN",
+      "summary_ko": "norm/P/projector/spectrum/rho covariance와raw K_TP 비불변 반례 및 별도metric coupling을 구현했다.",
+      "derived_theory": "DERIVED",
+      "executable_implementation": "NAMED_METRIC_COUPLING",
+      "synthetic_validation": "12_COMPLEX_TRANSFORMS_AND_COUNTEREXAMPLE",
+      "archived_physical_validation": "NOT_APPLICABLE",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/numerical_methods_20261001/numerical_audit.py",
+        "research/gap_closure_20261001/numerical_methods_20261001/test_basis_covariance.py",
+        "research/gap_closure_20261001/numerical_methods_20261001/E_COVARIANCE_RESULTS.json"
+      ],
+      "remaining_gap_ko": "",
+      "requirements": [],
+      "step": 5,
+      "source_section": 9
+    },
+    {
+      "id": "STEP_06",
+      "section": 36,
+      "title": "FIRST EXECUTION STEP 6",
+      "contract_lines": [
+        1709,
+        1711
+      ],
+      "contract_section_sha256": "eaf385e47290ba0985c6f2e5e9442e03a62ca78777f0185454c725e91ad7058e",
+      "completion": "AUDIT_COMPLETED_ABSOLUTE_BOUND_OPEN",
+      "summary_ko": "staticqualificationsemantics와8componenterrorbudget구조감사완료;absoluteoperatorerror와numericaltotal은미완성.",
+      "derived_theory": "FAILURE_MODES_DERIVED",
+      "executable_implementation": "DIAGNOSTICS_IMPLEMENTED",
+      "synthetic_validation": "COUNTEREXAMPLES_TESTED",
+      "archived_physical_validation": "NOT_APPLICABLE",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/static_validation_20261001/static_validation.py",
+        "research/gap_closure_20261001/static_validation_20261001/STATIC_QUALIFICATION_RESULTS.json",
+        "research/gap_closure_20261001/ERROR_BUDGET_SCHEMA.json",
+        "research/gap_closure_20261001/ERROR_BUDGET_CURRENT_B0.json"
+      ],
+      "remaining_gap_ko": "기존adjacentagreement는internalconsistency뿐. rigorousoperatorerror estimator는미구현.",
+      "requirements": [],
+      "step": 6,
+      "source_section": 22
+    },
+    {
+      "id": "STEP_07",
+      "section": 36,
+      "title": "FIRST EXECUTION STEP 7",
+      "contract_lines": [
+        1712,
+        1715
+      ],
+      "contract_section_sha256": "b9f742391b6cc41ae85163d7b25e691a911846b769742847d29ee8b5a88c0b1a",
+      "completion": "COMPLETED_DECISION_AND_MINIMAL_CONTRACT_NOT_RUN",
+      "summary_ko": "기존자료로G02를닫을수없음판정+exactminimal66query실행계약/code작성까지완료;물리실행요구는별도.",
+      "derived_theory": "IDENTITY_AND_FAILURE_ANALYSIS",
+      "executable_implementation": "NATIVE_EXECUTOR_AND_RETURN_COLLECTOR",
+      "synthetic_validation": "FD_AND_EXECUTOR_TESTED",
+      "archived_physical_validation": "6_HASH_VERIFIED_REUSE_CENTERS",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/static_validation_20261001/static_validation.py",
+        "research/gap_closure_20261001/static_validation_20261001/executor/fd_executor.py",
+        "research/gap_closure_20261001/static_validation_20261001/executor/test_fd_executor.py",
+        "research/gap_closure_20261001/static_validation_20261001/E_SDOT_FD_RESULTS.json"
+      ],
+      "remaining_gap_ko": "실제64shift+±12centerD가 없어 독립 Sdot convergence/plateau를 확인하지 못했다.",
+      "requirements": [
+        {
+          "item": "independent source path inspection",
+          "status": "DONE"
+        },
+        {
+          "item": "signed centers and shrinking h ladder",
+          "status": "PLAN_AND_CODE"
+        },
+        {
+          "item": "spectral/Frobenius/elementwise residual",
+          "status": "POSTPROCESSOR_IMPLEMENTED"
+        },
+        {
+          "item": "visible physical truncation order",
+          "status": "NOT_EXECUTED"
+        },
+        {
+          "item": "source/native pins",
+          "status": "TEMPLATE_PLUS_PREPARER"
+        }
+      ],
+      "step": 7,
+      "source_section": 7
+    },
+    {
+      "id": "STEP_08",
+      "section": 36,
+      "title": "FIRST EXECUTION STEP 8",
+      "contract_lines": [
+        1716,
+        1718
+      ],
+      "contract_section_sha256": "8e01200ec4d5f13773b290cc5a9fda6fbd8725562dfb58f62984669e1df6611c",
+      "completion": "COMPLETED_ANALYTIC_STUDY_NOT_EMPIRICAL_CLOSURE",
+      "summary_ko": "acquired collision sources 기반 유도, M1–M4 signed fits/holdouts/branch-switch 반례와최소±48선정을 수행했다.",
+      "derived_theory": "DERIVED_AND_LITERATURE_SUPPORTED",
+      "executable_implementation": "FIT_AND_RETURN_SCORER",
+      "synthetic_validation": "FIT_AND_PARITY_TESTS",
+      "archived_physical_validation": "8_HISTORICAL_STATIC_ROWS",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/asymptotics_20261001/SOURCE_EVIDENCE.json",
+        "research/gap_closure_20261001/asymptotics_20261001/asymptotic_models.py",
+        "research/gap_closure_20261001/asymptotics_20261001/ASYMPTOTIC_MODELS.json",
+        "research/gap_closure_20261001/asymptotics_20261001/MINIMUM_STATIC_DISCRIMINATOR_CONTRACT.json"
+      ],
+      "remaining_gap_ko": "새±48/offgrid관측이 없어 empirical model identified closure가 아니다. fixed-J 잔차floor 가능성도 남는다.",
+      "requirements": [],
+      "step": 8,
+      "source_section": 10
+    },
+    {
+      "id": "STEP_09",
+      "section": 36,
+      "title": "FIRST EXECUTION STEP 9",
+      "contract_lines": [
+        1719,
+        1722
+      ],
+      "contract_section_sha256": "4801e72c6cb4785027eb86606d1aa1e2e6fed434cc9129e3714b4e8516a52186",
+      "completion": "COMPLETED_MINIMUM_DESIGN_NOT_RUN",
+      "summary_ko": "±48두query/22attempt의최소discriminator와후속44/64결정규칙설계·테스트;실행은0.",
+      "derived_theory": "DERIVED_AND_LITERATURE_SUPPORTED",
+      "executable_implementation": "FIT_AND_RETURN_SCORER",
+      "synthetic_validation": "FIT_AND_PARITY_TESTS",
+      "archived_physical_validation": "8_HISTORICAL_STATIC_ROWS",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/asymptotics_20261001/SOURCE_EVIDENCE.json",
+        "research/gap_closure_20261001/asymptotics_20261001/asymptotic_models.py",
+        "research/gap_closure_20261001/asymptotics_20261001/ASYMPTOTIC_MODELS.json",
+        "research/gap_closure_20261001/asymptotics_20261001/MINIMUM_STATIC_DISCRIMINATOR_CONTRACT.json"
+      ],
+      "remaining_gap_ko": "새±48/offgrid관측이 없어 empirical model identified closure가 아니다. fixed-J 잔차floor 가능성도 남는다.",
+      "requirements": [],
+      "step": 9,
+      "source_section": 10
+    },
+    {
+      "id": "STEP_10",
+      "section": 36,
+      "title": "FIRST EXECUTION STEP 10",
+      "contract_lines": [
+        1723,
+        1725
+      ],
+      "contract_section_sha256": "13ed06af88e3ebd42f86b054158d346888bbacb27ae2cbee9813a7e87f7322fb",
+      "completion": "COMPLETED_BEGIN_AND_SUBSTANTIVE_WORK_NOT_CLOSURE",
+      "summary_ko": "RouteA/B 실제 유도·코드·syntheticLEVEL2, repaired reference metric와finite bridge 정리가 있다.",
+      "derived_theory": "ACTUAL_DERIVATIONS_AND_CONDITIONAL_CERTIFICATES",
+      "executable_implementation": "RATIONAL_DEMO_AND_REFERENCE_CERTIFIER",
+      "synthetic_validation": "LEVEL2_DEMO_TESTED",
+      "archived_physical_validation": "ACTUAL_RADIAL_COEFFICIENTS_CERTIFIED",
+      "new_physical_execution": "NOT_EXECUTED",
+      "closure_evidence": [
+        "research/gap_closure_20261001/majorant_validated_20261001/validated_majorant.py",
+        "research/gap_closure_20261001/majorant_validated_20261001/SYNTHETIC_CONTINUUM_CERTIFICATE.json",
+        "research/gap_closure_20261001/reference_certificate_followup_20261001/exact_reference.py",
+        "research/gap_closure_20261001/bridge_analysis_followup_20261001/ETF_METRIC_CERTIFICATE.json",
+        "research/gap_closure_20261001/cancellation_followup_20261001/galilean/GALILEAN_BRIDGE_CERTIFICATE.json"
+      ],
+      "remaining_gap_ko": "B0 complex continuous enclosure engine/input proof가 없다. _matrix는real-symmetric만 지원하고 proof metadata validator는theoremchecker가 아니다. 새reference bridge504.54는5e-6목표실패.",
+      "requirements": [
+        {
+          "item": "uniform metric lower bound",
+          "status": "NEW_REFERENCE_NORMALIZED_FRAME_DONE"
+        },
+        {
+          "item": "continuous original B0 W/rho majorant",
+          "status": "OPEN"
+        },
+        {
+          "item": "validated finite complex physical interval",
+          "status": "NOT_IMPLEMENTED"
+        },
+        {
+          "item": "level3 original B0 finite+infinity",
+          "status": "NOT_CERTIFIED"
+        },
+        {
+          "item": "proof provenance",
+          "status": "METADATA_ONLY_FOR_GENERIC_INPUT"
+        }
+      ],
+      "step": 10,
+      "source_section": 11
+    }
+  ],
+  "production_priorities": [
+    {
+      "priority": "P0",
+      "task": "Freeze exact scientific model and observable for candidate production",
+      "why": "Literal archived basis is nonconforming; repaired reference is distinct and not dynamically transferred. Strong-L2 residual route invalid.",
+      "outputs": [
+        "explicit model identity",
+        "selected observable definition",
+        "metric-defect/state-transfer policy"
+      ],
+      "depends": []
+    },
+    {
+      "priority": "P0",
+      "task": "Integrate physical qualified provider with strict Fortran/OpenMP/MPI",
+      "why": "R4S synthetic queue/kernel is not wired to physical G02/G03/transport executors.",
+      "outputs": [
+        "exact physical adapter",
+        "whole-query qualification ladder",
+        "global durable raw budget",
+        "rank0/NUMA/RSS admission",
+        "failure return collector"
+      ],
+      "depends": [
+        "model decision"
+      ]
+    },
+    {
+      "priority": "P0",
+      "task": "Run minimal independent Sdot and signed48 discriminators under current exact plan",
+      "why": "Ready G02/G03 code can resolve concrete implementation/asymptotic questions; no broad grid needed.",
+      "outputs": [
+        "G02 h-convergence",
+        "G03 returned heldout residuals",
+        "first failures preserved"
+      ],
+      "depends": [
+        "provider parity",
+        "resource admission"
+      ]
+    },
+    {
+      "priority": "P1",
+      "task": "Implement physical complex finite-interval weak residual/enclosure",
+      "why": "Synthetic real-symmetric majorant and 504.54 bridge do not meet5e-6 target.",
+      "outputs": [
+        "cancellation-preserving weak residual assembly",
+        "complex Hermitian enclosure",
+        "continuous metric/derivative bounds",
+        "validated integral"
+      ],
+      "depends": [
+        "model decision",
+        "qualified operator inputs"
+      ]
+    },
+    {
+      "priority": "P1",
+      "task": "Implement same-IVP independent propagator and first nested window pipeline",
+      "why": "CF4 prototype exists but physical provider/Sdot/budget/initialstates and run collector are missing.",
+      "outputs": [
+        "physical CF4/current-solver parity",
+        "own temporal ladder",
+        "first±16 window state/rho record",
+        "norm/identity checks"
+      ],
+      "depends": [
+        "Sdot validation",
+        "predeclared error budget"
+      ]
+    },
+    {
+      "priority": "P1",
+      "task": "Instantiate finite-metric state transfer and conservative total error ledger",
+      "why": "All actual component values and certified_total remain null.",
+      "outputs": [
+        "Gamma0/Gamma1/B/embedding enclosures",
+        "initial-state allowance",
+        "common-observable budget",
+        "machine acceptance decision"
+      ],
+      "depends": [
+        "physical finite-interval results"
+      ]
+    },
+    {
+      "priority": "P2",
+      "task": "Higher-l backend and B1/B2/B3 qualification/completeness",
+      "why": "Current optimized kernel supports only s+p; symbolic channel counts are not an executable completeness study.",
+      "outputs": [
+        "l2/l3 kernels",
+        "actual radial identities",
+        "rank/semantic selector",
+        "per-basis static/temporal/window results"
+      ],
+      "depends": [
+        "fixed-B0 tail/window adequacy"
+      ]
+    },
+    {
+      "priority": "P3",
+      "task": "All-bound then b-grid/cross-section production",
+      "why": "These are explicitly downstream; finite selected P is not capture cross section.",
+      "outputs": [
+        "all-bound acceptance",
+        "b-tail/adaptivequadrature",
+        "cross-section uncertainty"
+      ],
+      "depends": [
+        "basis+window+asymptotic gates"
+      ]
+    }
+  ],
+  "evidence_catalog": {
+    "research/gap_closure_20261001/AUTHORITY_INVENTORY.json": {
+      "exists": true,
+      "sha256": "6a92734ce6a61ac34bf1c70854e6bd68806efcc8146db7cb92534cc7f0620fd2",
+      "bytes": 2886
+    },
+    "research/gap_closure_20261001/CLAIM_EVIDENCE_MATRIX.json": {
+      "exists": true,
+      "sha256": "a2d0b2a495abc6ba079fe100dab2099de9a3b60076d2a09a3b3a49e91d866aea",
+      "bytes": 93572
+    },
+    "research/gap_closure_20261001/ERROR_BUDGET_CURRENT_B0.json": {
+      "exists": true,
+      "sha256": "87e6ef9c1a035100614cb08d6a05ead2356584fcc48ac3286e8d9d9f1a2ed823",
+      "bytes": 7357
+    },
+    "research/gap_closure_20261001/ERROR_BUDGET_METHOD_NOTE.md": {
+      "exists": true,
+      "sha256": "a12be6af28a852c71fc4b394c0804428f328f99e32f40a9a038dcc6779521d06",
+      "bytes": 3935
+    },
+    "research/gap_closure_20261001/ERROR_BUDGET_SCHEMA.json": {
+      "exists": true,
+      "sha256": "e4a51efdc6b6e3545259522e3be74631f98e29620f6614db5a2677f379434f70",
+      "bytes": 895
+    },
+    "research/gap_closure_20261001/GAP_REGISTRY.json": {
+      "exists": true,
+      "sha256": "bb53eea39435c563f9dee9cb27322a97b026ca5771a568797135e71628c65e5e",
+      "bytes": 46239
+    },
+    "research/gap_closure_20261001/GATE_DEPENDENCY_STATE.json": {
+      "exists": true,
+      "sha256": "d5f1ec987b1e94e82d86131372e4daf6e58b30a4ed32e2162114ae6f94ca3046",
+      "bytes": 3494
+    },
+    "research/gap_closure_20261001/README.md": {
+      "exists": true,
+      "sha256": "4a3572b7c484e07fe789829779e0f467e941f70c73fc384f1e9c2755848ed74c",
+      "bytes": 4914
+    },
+    "research/gap_closure_20261001/TAIL_BOUND.json": {
+      "exists": true,
+      "sha256": "229a49d2f7dc67b151953339f72c509acfdbe37796937413562d3eb8ed181308",
+      "bytes": 702
+    },
+    "research/gap_closure_20261001/asymptotics_20261001/ASYMPTOTIC_MODELS.json": {
+      "exists": true,
+      "sha256": "947aeffeec680b3647241da1804f50f219dee714a8791416bd0a824369755daf",
+      "bytes": 44926
+    },
+    "research/gap_closure_20261001/asymptotics_20261001/MINIMUM_STATIC_DISCRIMINATOR_CONTRACT.json": {
+      "exists": true,
+      "sha256": "2ac771284781b8751adc3d4bdfe761ae578dcb0ac0307fa4d7d2f61b61d53e5e",
+      "bytes": 8705
+    },
+    "research/gap_closure_20261001/asymptotics_20261001/PARITY_SYMBOLIC_CHECK.json": {
+      "exists": true,
+      "sha256": "017a954d968a293389024a69b3e7fe0ba5d679345a78066c32087ff7662eaad1",
+      "bytes": 1638
+    },
+    "research/gap_closure_20261001/asymptotics_20261001/SOURCE_EVIDENCE.json": {
+      "exists": true,
+      "sha256": "934182495bc73a1be26bd69f5cf7280652a127d0c11237351f2110c1430cf418",
+      "bytes": 5582
+    },
+    "research/gap_closure_20261001/asymptotics_20261001/asymptotic_models.py": {
+      "exists": true,
+      "sha256": "c90b9a000ee50e381e175c5b9c975cb35dad3800cce29f28e9c36a155e367642",
+      "bytes": 10713,
+      "definitions": [
+        {
+          "name": "fit_model",
+          "line": 24
+        },
+        {
+          "name": "predict",
+          "line": 63
+        },
+        {
+          "name": "load_samples",
+          "line": 68
+        },
+        {
+          "name": "leave_one_out",
+          "line": 73
+        },
+        {
+          "name": "branch_switch_example",
+          "line": 82
+        },
+        {
+          "name": "analyze",
+          "line": 87
+        },
+        {
+          "name": "evaluate_return",
+          "line": 119
+        },
+        {
+          "name": "main",
+          "line": 163
+        },
+        {
+          "name": "profile",
+          "line": 35
+        }
+      ]
+    },
+    "research/gap_closure_20261001/bridge_analysis_followup_20261001/ETF_METRIC_CERTIFICATE.json": {
+      "exists": true,
+      "sha256": "d00117eb7d8f717a7ea92980a055221342378ae98880effb0592fc6c12597480",
+      "bytes": 3893
+    },
+    "research/gap_closure_20261001/cancellation_followup_20261001/CLAIM_UPDATE.json": {
+      "exists": true,
+      "sha256": "b046a634791856fd7a18f27766861c37b11631173c64e93a4a357ff36b24fbb0",
+      "bytes": 9092
+    },
+    "research/gap_closure_20261001/cancellation_followup_20261001/DATABASE_UPDATE.json": {
+      "exists": true,
+      "sha256": "5640493ddde8d373961ed56c4cef4659aa1a4b16fe9dbcb691401920f9ed197c",
+      "bytes": 2982
+    },
+    "research/gap_closure_20261001/cancellation_followup_20261001/RECOVERY_VERIFIED.json": {
+      "exists": true,
+      "sha256": "00ee592d203c544f14536d33d9c3ef9a2833a508fee162b70ef1124caabf494a",
+      "bytes": 1083
+    },
+    "research/gap_closure_20261001/cancellation_followup_20261001/REPORT_KO.md": {
+      "exists": true,
+      "sha256": "bd902a1753881995c30eacc635f40a1071212235b3add4198a74b5628dee9f53",
+      "bytes": 5606
+    },
+    "research/gap_closure_20261001/cancellation_followup_20261001/SAVED_MATRIX_REPLAY.json": {
+      "exists": true,
+      "sha256": "613a361dd434f6597d5db088a34517c100e8cbd2bab593a9f2dff7c5b732c2f7",
+      "bytes": 6056
+    },
+    "research/gap_closure_20261001/cancellation_followup_20261001/VALIDATION.json": {
+      "exists": true,
+      "sha256": "d73df3d97f5c59a4717d68fceb4160c182c3f23c6bf48ee6623e8534c241f012",
+      "bytes": 1179
+    },
+    "research/gap_closure_20261001/cancellation_followup_20261001/angle/ILLUSTRATIVE_BUDGET.json": {
+      "exists": true,
+      "sha256": "cd656e1e46cbb8bee564b2ecbeaed94c10b582cb094877e26ecf3448fad301cc",
+      "bytes": 789
+    },
+    "research/gap_closure_20261001/cancellation_followup_20261001/angle/angle_budget.py": {
+      "exists": true,
+      "sha256": "a73fd83b9e5ecc690e2beec367dc21b79a8edd235b9477e9908c4620a8b071d8",
+      "bytes": 2105,
+      "definitions": [
+        {
+          "name": "rational",
+          "line": 9
+        },
+        {
+          "name": "sqrt_upper",
+          "line": 14
+        },
+        {
+          "name": "_inputs",
+          "line": 23
+        },
+        {
+          "name": "initial_coherence_upper",
+          "line": 29
+        },
+        {
+          "name": "rate_budget",
+          "line": 34
+        },
+        {
+          "name": "population_interval",
+          "line": 44
+        },
+        {
+          "name": "admitted_angle",
+          "line": 49
+        }
+      ]
+    },
+    "research/gap_closure_20261001/cancellation_followup_20261001/galilean/GALILEAN_BRIDGE_CERTIFICATE.json": {
+      "exists": true,
+      "sha256": "ca8ed98d2f2a62f9473d191d9e18de1f10e4579d60604096ff232f16fba9d1aa",
+      "bytes": 3879
+    },
+    "research/gap_closure_20261001/cancellation_followup_20261001/projector/projector_rate.py": {
+      "exists": true,
+      "sha256": "ce99aa7f7925c999c23e43dc0b26f964dfc93db24a6bee4d1bb6a7b68d99823c",
+      "bytes": 5742,
+      "definitions": [
+        {
+          "name": "CancellationRate",
+          "line": 12
+        },
+        {
+          "name": "StateRate",
+          "line": 26
+        },
+        {
+          "name": "_hermitian",
+          "line": 34
+        },
+        {
+          "name": "_right_whiten",
+          "line": 39
+        },
+        {
+          "name": "cancellation_rate",
+          "line": 44
+        },
+        {
+          "name": "state_rate",
+          "line": 112
+        }
+      ]
+    },
+    "research/gap_closure_20261001/cancellation_followup_20261001/regularity/REGULARITY_AND_DYNAMICS_TRANSFER.md": {
+      "exists": true,
+      "sha256": "4824bddb0c85a4a9fc150be6d4e11c58d012688e947c16a748d48ee915cde23a",
+      "bytes": 11467
+    },
+    "research/gap_closure_20261001/cancellation_followup_20261001/regularity/TRANSFER_INPUT_CONTRACT.json": {
+      "exists": true,
+      "sha256": "43fe1bd96e75a18b0223589adb3e080a5e3d09be2e79349889de465041e25fe5",
+      "bytes": 2132
+    },
+    "research/gap_closure_20261001/gapped_tail_followup_20261001/CONDITIONAL_CUTOFF.json": {
+      "exists": true,
+      "sha256": "8d49fcbee140d9187752ad4ba26fec16da8ef68acdd6ebdd5942b5ff97289fd1",
+      "bytes": 17585
+    },
+    "research/gap_closure_20261001/gapped_tail_followup_20261001/gapped_tail.py": {
+      "exists": true,
+      "sha256": "4ab84a2d3ae10810465ac88789b532ab554ca5328fa4ae9feccb761c1ae2eadb",
+      "bytes": 3317,
+      "definitions": [
+        {
+          "name": "_rational",
+          "line": 10
+        },
+        {
+          "name": "tail_bound",
+          "line": 19
+        },
+        {
+          "name": "first_integer_cutoff",
+          "line": 52
+        },
+        {
+          "name": "passes",
+          "line": 62
+        }
+      ]
+    },
+    "research/gap_closure_20261001/hpc_optimization_20261001/RESULT.json": {
+      "exists": true,
+      "sha256": "6cf3ceab24ffebb601c75657d07f54ec086e56ea39924d168a9bd0438e477f0c",
+      "bytes": 3091
+    },
+    "research/gap_closure_20261001/hpc_optimization_20261001/evidence/ROOT_REVIEW.json": {
+      "exists": true,
+      "sha256": "6526685f43d0070432831c316e5c845735d7633248e1a5bddea39990b02a7f32",
+      "bytes": 636
+    },
+    "research/gap_closure_20261001/hpc_optimization_20261001/native/README_NATIVE.md": {
+      "exists": true,
+      "sha256": "953290d2cb06c8343e906e174a50c7b6d9b0c59cbe5ddca9697975010d39b6b6",
+      "bytes": 6948
+    },
+    "research/gap_closure_20261001/independent_propagator_20261001/PHYSICAL_PARITY_CONTRACT.json": {
+      "exists": true,
+      "sha256": "048c4420bc906da28e476d06d421f5284316513a638773493433c225384f3a3f",
+      "bytes": 6102
+    },
+    "research/gap_closure_20261001/independent_propagator_20261001/independent_propagator.py": {
+      "exists": true,
+      "sha256": "3a7c845bccd8ab0ae13392e51a940425feb7ddee14f0f9eca4c5cf15a404eab6",
+      "bytes": 7621,
+      "definitions": [
+        {
+          "name": "WhitenedGenerator",
+          "line": 17
+        },
+        {
+          "name": "_congruence_inverse",
+          "line": 25
+        },
+        {
+          "name": "whitened_generator",
+          "line": 31
+        },
+        {
+          "name": "propagate_cf4",
+          "line": 50
+        },
+        {
+          "name": "SyntheticTrajectory",
+          "line": 78
+        },
+        {
+          "name": "_observable",
+          "line": 112
+        },
+        {
+          "name": "_metrics",
+          "line": 118
+        },
+        {
+          "name": "benchmark",
+          "line": 124
+        },
+        {
+          "name": "__init__",
+          "line": 84
+        },
+        {
+          "name": "components",
+          "line": 86
+        },
+        {
+          "name": "at",
+          "line": 99
+        },
+        {
+          "name": "exact",
+          "line": 106
+        }
+      ]
+    },
+    "research/gap_closure_20261001/independent_propagator_20261001/test_independent_propagator.py": {
+      "exists": true,
+      "sha256": "abcaaf1090ff13309f61d2b9d5cace34890f920a88553f044edeb15a34a64169",
+      "bytes": 2991,
+      "definitions": [
+        {
+          "name": "IndependentPropagatorTests",
+          "line": 8
+        },
+        {
+          "name": "test_cholesky_derivative_matches_independent_difference",
+          "line": 9
+        },
+        {
+          "name": "test_whitened_generator_antihermitian_and_same_ode",
+          "line": 19
+        },
+        {
+          "name": "test_connection_term_is_required",
+          "line": 29
+        },
+        {
+          "name": "test_bad_compatibility_and_non_spd_are_rejected",
+          "line": 36
+        },
+        {
+          "name": "test_cf4_fourth_order_and_metric_norm",
+          "line": 43
+        },
+        {
+          "name": "test_benchmark_existing_families_same_trajectory",
+          "line": 52
+        }
+      ]
+    },
+    "research/gap_closure_20261001/integration_updates/G06.json": {
+      "exists": true,
+      "sha256": "28bfaa89f9579702659dc893e22a2f4876cc356a3185799c885cdb35d9d5bd4c",
+      "bytes": 911
+    },
+    "research/gap_closure_20261001/integration_updates/G13.json": {
+      "exists": true,
+      "sha256": "d04f3efb0aa3afd161063a70771c0e32e5799ab743dd5ebdcf94f5b265e594f2",
+      "bytes": 1227
+    },
+    "research/gap_closure_20261001/majorant_validated_20261001/SYNTHETIC_CONTINUUM_CERTIFICATE.json": {
+      "exists": true,
+      "sha256": "a10d30c90126c2c59e549f839b1ba7d0b11f86d3abc2239eb2925789cac84468",
+      "bytes": 5714
+    },
+    "research/gap_closure_20261001/majorant_validated_20261001/validated_majorant.py": {
+      "exists": true,
+      "sha256": "fdf554e24596cef8b2a7be45569ef798acedcd6608c1156b64933729c424328c",
+      "bytes": 12451,
+      "definitions": [
+        {
+          "name": "rational",
+          "line": 14
+        },
+        {
+          "name": "Interval",
+          "line": 23
+        },
+        {
+          "name": "_matrix",
+          "line": 82
+        },
+        {
+          "name": "is_spd",
+          "line": 92
+        },
+        {
+          "name": "pencil_radius_bounds",
+          "line": 108
+        },
+        {
+          "name": "lipschitz_bound",
+          "line": 143
+        },
+        {
+          "name": "Proof",
+          "line": 151
+        },
+        {
+          "name": "CellBounds",
+          "line": 166
+        },
+        {
+          "name": "assemble_envelope",
+          "line": 215
+        },
+        {
+          "name": "demo_matrices",
+          "line": 250
+        },
+        {
+          "name": "_norm_upper",
+          "line": 260
+        },
+        {
+          "name": "certify_demo_cell",
+          "line": 265
+        },
+        {
+          "name": "tail_p2_enclosure",
+          "line": 289
+        },
+        {
+          "name": "write_demo",
+          "line": 308
+        },
+        {
+          "name": "__post_init__",
+          "line": 27
+        },
+        {
+          "name": "point",
+          "line": 34
+        },
+        {
+          "name": "coerce",
+          "line": 38
+        },
+        {
+          "name": "__add__",
+          "line": 41
+        },
+        {
+          "name": "__neg__",
+          "line": 47
+        },
+        {
+          "name": "__sub__",
+          "line": 50
+        },
+        {
+          "name": "__rsub__",
+          "line": 53
+        },
+        {
+          "name": "__mul__",
+          "line": 56
+        },
+        {
+          "name": "reciprocal",
+          "line": 63
+        },
+        {
+          "name": "__truediv__",
+          "line": 68
+        },
+        {
+          "name": "__rtruediv__",
+          "line": 71
+        },
+        {
+          "name": "square",
+          "line": 74
+        },
+        {
+          "name": "abs_upper",
+          "line": 78
+        },
+        {
+          "name": "above",
+          "line": 123
+        },
+        {
+          "name": "__post_init__",
+          "line": 157
+        },
+        {
+          "name": "__post_init__",
+          "line": 179
+        },
+        {
+          "name": "L",
+          "line": 191
+        },
+        {
+          "name": "upper_at",
+          "line": 194
+        },
+        {
+          "name": "integral_upper",
+          "line": 200
+        },
+        {
+          "name": "as_json",
+          "line": 204
+        }
+      ]
+    },
+    "research/gap_closure_20261001/numerical_methods_20261001/E_COVARIANCE_RESULTS.json": {
+      "exists": true,
+      "sha256": "24856b75cfccd605b87a7edffb1d12fe3a5a856266d0b3e6b3bcc8c07649f0f3",
+      "bytes": 11526
+    },
+    "research/gap_closure_20261001/numerical_methods_20261001/E_RHO_SOLVER_RESULTS.json": {
+      "exists": true,
+      "sha256": "b082a9ba1a96b53f48f95551917be64a965368d8dcc8cebcc22ec9d0930ec2e5",
+      "bytes": 59366
+    },
+    "research/gap_closure_20261001/numerical_methods_20261001/PHYSICAL_MATRIX_FIXTURES.json": {
+      "exists": true,
+      "sha256": "fd3565c7549cf3fc5da97f50da5002b51e81863941e53bdeae9035f1377c6e80",
+      "bytes": 277634
+    },
+    "research/gap_closure_20261001/numerical_methods_20261001/numerical_audit.py": {
+      "exists": true,
+      "sha256": "035e4e486ae4778c3b1b9dd88c1daa22c6ca176e595d666fe8c2a76b7eaccea7",
+      "bytes": 15323,
+      "definitions": [
+        {
+          "name": "adj",
+          "line": 22
+        },
+        {
+          "name": "hermitian_input",
+          "line": 25
+        },
+        {
+          "name": "eigen_diagnostics",
+          "line": 39
+        },
+        {
+          "name": "audit_pencil",
+          "line": 57
+        },
+        {
+          "name": "conditioning_cases",
+          "line": 80
+        },
+        {
+          "name": "decimal_pencil_eigenvalues",
+          "line": 92
+        },
+        {
+          "name": "load_historical_probe",
+          "line": 122
+        },
+        {
+          "name": "metric_projected_coupling_norm",
+          "line": 128
+        },
+        {
+          "name": "covariance_case",
+          "line": 143
+        },
+        {
+          "name": "raw_block_counterexample",
+          "line": 184
+        },
+        {
+          "name": "saved_physical_audit",
+          "line": 196
+        },
+        {
+          "name": "run_audits",
+          "line": 221
+        },
+        {
+          "name": "rel",
+          "line": 163
+        }
+      ]
+    },
+    "research/gap_closure_20261001/numerical_methods_20261001/test_basis_covariance.py": {
+      "exists": true,
+      "sha256": "8735184173c05c5c98f3ff6145ef239f1545be5f8015947f03a15ac9bfa0da38",
+      "bytes": 1548,
+      "definitions": [
+        {
+          "name": "BasisCovarianceTest",
+          "line": 7
+        },
+        {
+          "name": "test_twelve_complex_changes_preserve_quantities_and_projectors",
+          "line": 8
+        },
+        {
+          "name": "test_raw_block_is_not_basis_invariant",
+          "line": 15
+        },
+        {
+          "name": "test_metric_coupling_is_subspace_basis_invariant",
+          "line": 22
+        }
+      ]
+    },
+    "research/gap_closure_20261001/numerical_methods_20261001/test_generalized_rho_solver.py": {
+      "exists": true,
+      "sha256": "ebe8a31c44d7381cb90b7a0fe303f5c17ec8b626d326e25e2f15b5b21aafb15a",
+      "bytes": 4410,
+      "definitions": [
+        {
+          "name": "GeneralizedRhoSolverTest",
+          "line": 9
+        },
+        {
+          "name": "test_eight_archived_physical_matrices_no_native_execution",
+          "line": 10
+        },
+        {
+          "name": "test_project_scipy_version",
+          "line": 22
+        },
+        {
+          "name": "test_conditioning_sweep_independent_paths",
+          "line": 25
+        },
+        {
+          "name": "test_decimal_reference_uses_rounded_input_pencil",
+          "line": 38
+        },
+        {
+          "name": "test_exact_diagonal_reference",
+          "line": 47
+        },
+        {
+          "name": "test_singular_indefinite_and_nonhermitian_fail_without_mutation",
+          "line": 51
+        },
+        {
+          "name": "test_scale_relative_hermiticity_and_nonfinite_guard",
+          "line": 61
+        },
+        {
+          "name": "test_existing_rate_probe_matches_both_solver_paths",
+          "line": 67
+        }
+      ]
+    },
+    "research/gap_closure_20261001/rank_policy_20261001/RANK_POLICY_REPORT.md": {
+      "exists": true,
+      "sha256": "1e56bed2432de34dde39aa8d7844a5344340fa288ffdb82babc49a3e66e47516",
+      "bytes": 11164
+    },
+    "research/gap_closure_20261001/rank_policy_20261001/rank_policy.py": {
+      "exists": true,
+      "sha256": "9209012c8153f4a6729dd4c887d8cc595d0d46532fa39533fef29609fbfd65ed",
+      "bytes": 11466,
+      "definitions": [
+        {
+          "name": "adj",
+          "line": 16
+        },
+        {
+          "name": "checked_metric",
+          "line": 19
+        },
+        {
+          "name": "anchor_phases",
+          "line": 42
+        },
+        {
+          "name": "canonical_truncation",
+          "line": 50
+        },
+        {
+          "name": "pivoted_cholesky_selection",
+          "line": 62
+        },
+        {
+          "name": "array_hash",
+          "line": 97
+        },
+        {
+          "name": "new_basis_identity",
+          "line": 103
+        },
+        {
+          "name": "synthetic_case",
+          "line": 122
+        },
+        {
+          "name": "orthonormal_span",
+          "line": 136
+        },
+        {
+          "name": "physical_diagnostics",
+          "line": 141
+        },
+        {
+          "name": "run_case",
+          "line": 158
+        },
+        {
+          "name": "run_audit",
+          "line": 199
+        }
+      ]
+    },
+    "research/gap_closure_20261001/rank_policy_20261001/test_rank_policy.py": {
+      "exists": true,
+      "sha256": "86c445c1caf9c2a749a3d8ea9c0b657e953b845f2b4b24cbddfc2d6db33f5e6e",
+      "bytes": 3963,
+      "definitions": [
+        {
+          "name": "RankPolicyTest",
+          "line": 7
+        },
+        {
+          "name": "test_diagonal_decisions_and_no_shift",
+          "line": 8
+        },
+        {
+          "name": "test_indefinite_and_nonhermitian_inputs_rejected",
+          "line": 17
+        },
+        {
+          "name": "test_declared_synthetic_rank_plateau",
+          "line": 24
+        },
+        {
+          "name": "test_svd_rank_audit_and_weak_state_loss",
+          "line": 33
+        },
+        {
+          "name": "test_basis_identity_blocks_certificate_and_index_reuse",
+          "line": 40
+        },
+        {
+          "name": "test_rank_policy_is_coordinate_dependent_and_disclosed",
+          "line": 51
+        },
+        {
+          "name": "test_tiny_negative_sign_is_uncertain_not_certified_psd",
+          "line": 56
+        },
+        {
+          "name": "test_trace_residual_and_dimension_change_are_reported",
+          "line": 62
+        }
+      ]
+    },
+    "research/gap_closure_20261001/reference_certificate_followup_20261001/exact_reference.py": {
+      "exists": true,
+      "sha256": "4b0346af93ad4db6393da4b75dd8cfc91da24a2a8737a5f721b84dff76f1da40",
+      "bytes": 15414,
+      "definitions": [
+        {
+          "name": "down",
+          "line": 22
+        },
+        {
+          "name": "up",
+          "line": 25
+        },
+        {
+          "name": "I",
+          "line": 29
+        },
+        {
+          "name": "interval",
+          "line": 57
+        },
+        {
+          "name": "_unit_log",
+          "line": 60
+        },
+        {
+          "name": "log_enclosure",
+          "line": 70
+        },
+        {
+          "name": "sqrt_enclosure",
+          "line": 79
+        },
+        {
+          "name": "mul",
+          "line": 87
+        },
+        {
+          "name": "local_value",
+          "line": 93
+        },
+        {
+          "name": "repair_coefficients",
+          "line": 95
+        },
+        {
+          "name": "global_poly",
+          "line": 110
+        },
+        {
+          "name": "rational_integral",
+          "line": 116
+        },
+        {
+          "name": "enclosed_integral",
+          "line": 126
+        },
+        {
+          "name": "gram_matrix",
+          "line": 140
+        },
+        {
+          "name": "isolated_matrices",
+          "line": 153
+        },
+        {
+          "name": "transpose",
+          "line": 171
+        },
+        {
+          "name": "matmul",
+          "line": 172
+        },
+        {
+          "name": "subtract",
+          "line": 173
+        },
+        {
+          "name": "plus",
+          "line": 174
+        },
+        {
+          "name": "block",
+          "line": 175
+        },
+        {
+          "name": "inverse",
+          "line": 177
+        },
+        {
+          "name": "spectral_bounds",
+          "line": 188
+        },
+        {
+          "name": "block_certificate",
+          "line": 195
+        },
+        {
+          "name": "projector_bridge",
+          "line": 216
+        },
+        {
+          "name": "encode",
+          "line": 229
+        },
+        {
+          "name": "exact_data",
+          "line": 236
+        },
+        {
+          "name": "certify_reference",
+          "line": 239
+        },
+        {
+          "name": "main",
+          "line": 277
+        },
+        {
+          "name": "__init__",
+          "line": 32
+        },
+        {
+          "name": "contains",
+          "line": 39
+        },
+        {
+          "name": "__add__",
+          "line": 40
+        },
+        {
+          "name": "__neg__",
+          "line": 43
+        },
+        {
+          "name": "__sub__",
+          "line": 44
+        },
+        {
+          "name": "__rsub__",
+          "line": 45
+        },
+        {
+          "name": "__mul__",
+          "line": 46
+        },
+        {
+          "name": "__truediv__",
+          "line": 50
+        },
+        {
+          "name": "__rtruediv__",
+          "line": 54
+        },
+        {
+          "name": "abs_upper",
+          "line": 55
+        }
+      ]
+    },
+    "research/gap_closure_20261001/rho_integration_theorem_20261001/EXACT_RATIONAL_REPLAY.json": {
+      "exists": true,
+      "sha256": "b7d65e071970fd7a41c0bfd5cd452a3c16325508246156ca202ca4b928f7e708",
+      "bytes": 3965
+    },
+    "research/gap_closure_20261001/rho_integration_theorem_20261001/THEOREM.md": {
+      "exists": true,
+      "sha256": "56e9f38d9a15f54da3474344310645ed139f7fb08f72d5fb23b739a1c3c36645",
+      "bytes": 11003
+    },
+    "research/gap_closure_20261001/rho_integration_theorem_20261001/VALIDATION.json": {
+      "exists": true,
+      "sha256": "da5bf6f97967d11de7fe25c0cafb081ec9dc0b1d3a6a1145cc2f56348bff6907",
+      "bytes": 2299
+    },
+    "research/gap_closure_20261001/rho_integration_theorem_20261001/WOLFRAM_CAS_RESPONSE.json": {
+      "exists": true,
+      "sha256": "824c75605e00422e3eb0232cd96a2e4d9fd477939587538f26ea65cf6a09c2bc",
+      "bytes": 1458
+    },
+    "research/gap_closure_20261001/rho_integration_theorem_20261001/rho_theorem.py": {
+      "exists": true,
+      "sha256": "844f9e69a3a3b6a5fc5acffcf8b7724c342585480dce2b08a19d73370c9aa77a",
+      "bytes": 3032,
+      "definitions": [
+        {
+          "name": "RateForms",
+          "line": 13
+        },
+        {
+          "name": "_hermitian",
+          "line": 23
+        },
+        {
+          "name": "rate_forms",
+          "line": 29
+        }
+      ]
+    },
+    "research/gap_closure_20261001/rho_integration_theorem_20261001/symbolic_checks.py": {
+      "exists": true,
+      "sha256": "3997a17e3b1b1ebfc7bd63cbdc513b02008905626e7e2fd4fdba02687f3ec79d",
+      "bytes": 3859,
+      "definitions": [
+        {
+          "name": "mat",
+          "line": 12
+        },
+        {
+          "name": "tr",
+          "line": 13
+        },
+        {
+          "name": "mul",
+          "line": 14
+        },
+        {
+          "name": "add",
+          "line": 15
+        },
+        {
+          "name": "neg",
+          "line": 16
+        },
+        {
+          "name": "sub",
+          "line": 17
+        },
+        {
+          "name": "inv",
+          "line": 18
+        },
+        {
+          "name": "det2",
+          "line": 28
+        },
+        {
+          "name": "scale",
+          "line": 29
+        },
+        {
+          "name": "zero",
+          "line": 30
+        },
+        {
+          "name": "forms",
+          "line": 33
+        },
+        {
+          "name": "run",
+          "line": 43
+        }
+      ]
+    },
+    "research/gap_closure_20261001/semantic_selection_20261001/B0_SEMANTIC_SELECTION_REGRESSION.json": {
+      "exists": true,
+      "sha256": "b762342777fbb5bf8693b00ad9a421fe5f5192b2b9f460b396ce1ae6696c9b2b",
+      "bytes": 1230
+    },
+    "research/gap_closure_20261001/semantic_selection_20261001/semantic_selection.py": {
+      "exists": true,
+      "sha256": "eb9d1ba7b921b6f37bf61b7e8ea1ac6a68e91789c5ff4af2cbefed835df6c03c",
+      "bytes": 2896,
+      "definitions": [
+        {
+          "name": "_identity",
+          "line": 7
+        },
+        {
+          "name": "select_projectile_bound",
+          "line": 22
+        },
+        {
+          "name": "selection_identity",
+          "line": 40
+        }
+      ]
+    },
+    "research/gap_closure_20261001/semantic_selection_20261001/test_selected_subspace_identity.py": {
+      "exists": true,
+      "sha256": "0f16605140f35c0108e55bf0f16128823d9711dd8ddfb9fe87a18caba933291e",
+      "bytes": 2735,
+      "definitions": [
+        {
+          "name": "SemanticTests",
+          "line": 10
+        },
+        {
+          "name": "setUp",
+          "line": 11
+        },
+        {
+          "name": "test_b0_exact_current_selection",
+          "line": 13
+        },
+        {
+          "name": "test_reorder_preserves_actual_subspace",
+          "line": 15
+        },
+        {
+          "name": "test_projectile_mapping_must_be_explicit",
+          "line": 22
+        },
+        {
+          "name": "test_nonnegative_bound_energy_rejected",
+          "line": 24
+        },
+        {
+          "name": "test_negative_pseudostate_rejected",
+          "line": 27
+        },
+        {
+          "name": "test_missing_identity_and_duplicate_rejected",
+          "line": 30
+        },
+        {
+          "name": "test_kind_and_quantum_numbers_must_agree",
+          "line": 34
+        },
+        {
+          "name": "test_identity_changes_if_radial_state_changes",
+          "line": 37
+        },
+        {
+          "name": "test_duplicate_physical_state_with_aliased_label_rejected",
+          "line": 40
+        }
+      ]
+    },
+    "research/gap_closure_20261001/static_validation_20261001/E_SDOT_FD_RESULTS.json": {
+      "exists": true,
+      "sha256": "c2d552cda8925b6689e1e4542260456132dfa782cde672573dc812b9ba720f44",
+      "bytes": 7671
+    },
+    "research/gap_closure_20261001/static_validation_20261001/STATIC_QUALIFICATION_RESULTS.json": {
+      "exists": true,
+      "sha256": "23d0acf343927a1474271e006a637a1c1e144d9f517fb4b382b10c33606338c9",
+      "bytes": 3492
+    },
+    "research/gap_closure_20261001/static_validation_20261001/executor/fd_executor.py": {
+      "exists": true,
+      "sha256": "392663ef946cf33f298d6448da96d75d23533298f6a1879a142081084c499621",
+      "bytes": 16694,
+      "definitions": [
+        {
+          "name": "frozen_plan",
+          "line": 29
+        },
+        {
+          "name": "exact_items",
+          "line": 40
+        },
+        {
+          "name": "fixed_scope",
+          "line": 46
+        },
+        {
+          "name": "validate_scope",
+          "line": 58
+        },
+        {
+          "name": "required_sources",
+          "line": 81
+        },
+        {
+          "name": "verify_source",
+          "line": 94
+        },
+        {
+          "name": "verify_inputs",
+          "line": 102
+        },
+        {
+          "name": "verify_budget",
+          "line": 110
+        },
+        {
+          "name": "_copy_new",
+          "line": 117
+        },
+        {
+          "name": "execute_plan",
+          "line": 122
+        },
+        {
+          "name": "native_pool",
+          "line": 171
+        },
+        {
+          "name": "request",
+          "line": 179
+        },
+        {
+          "name": "commit",
+          "line": 136
+        }
+      ]
+    },
+    "research/gap_closure_20261001/static_validation_20261001/executor/g03_executor.py": {
+      "exists": true,
+      "sha256": "93c5c2fd17d5a3eb02cfb9613c1ba8191ba8bdf40eb2e151810ae09745806cbb",
+      "bytes": 18020,
+      "definitions": [
+        {
+          "name": "frozen_plan",
+          "line": 29
+        },
+        {
+          "name": "exact_items",
+          "line": 58
+        },
+        {
+          "name": "fixed_scope",
+          "line": 64
+        },
+        {
+          "name": "validate_scope",
+          "line": 75
+        },
+        {
+          "name": "required_sources",
+          "line": 98
+        },
+        {
+          "name": "verify_source",
+          "line": 111
+        },
+        {
+          "name": "verify_inputs",
+          "line": 119
+        },
+        {
+          "name": "verify_budget",
+          "line": 127
+        },
+        {
+          "name": "_copy_new",
+          "line": 134
+        },
+        {
+          "name": "execute_plan",
+          "line": 139
+        },
+        {
+          "name": "native_pool",
+          "line": 182
+        },
+        {
+          "name": "request",
+          "line": 190
+        },
+        {
+          "name": "commit",
+          "line": 147
+        }
+      ]
+    },
+    "research/gap_closure_20261001/static_validation_20261001/executor/test_fd_executor.py": {
+      "exists": true,
+      "sha256": "f436d3f412949cdea1e360fa126745c035e8f87f2cd6b016dd0a77e6406a4b7d",
+      "bytes": 8734,
+      "definitions": [
+        {
+          "name": "ExecutorTests",
+          "line": 14
+        },
+        {
+          "name": "sample",
+          "line": 15
+        },
+        {
+          "name": "test_frozen_plan_rejects_changed_scope",
+          "line": 25
+        },
+        {
+          "name": "test_scope_rejects_old_auth_and_all_resource_drift",
+          "line": 32
+        },
+        {
+          "name": "test_unapproved_request_never_reaches_factory",
+          "line": 44
+        },
+        {
+          "name": "test_budget_shape_and_deadline",
+          "line": 53
+        },
+        {
+          "name": "test_query_whitelist_before_worker",
+          "line": 60
+        },
+        {
+          "name": "test_source_pin_drift_fails_closed",
+          "line": 64
+        },
+        {
+          "name": "test_synthetic_full_collector_66_new_and_6_real_saved",
+          "line": 69
+        },
+        {
+          "name": "test_saved_native_preload_validation_never_dlopen",
+          "line": 98
+        },
+        {
+          "name": "test_complete_synthetic_collector_and_create_only",
+          "line": 105
+        },
+        {
+          "name": "test_first_failure_cancels_dispatch_without_native",
+          "line": 133
+        },
+        {
+          "name": "compute",
+          "line": 76
+        },
+        {
+          "name": "compute",
+          "line": 111
+        },
+        {
+          "name": "fail",
+          "line": 137
+        },
+        {
+          "name": "evaluate",
+          "line": 78
+        },
+        {
+          "name": "evaluate",
+          "line": 113
+        }
+      ]
+    },
+    "research/gap_closure_20261001/static_validation_20261001/static_validation.py": {
+      "exists": true,
+      "sha256": "3e1d5ef9ad870299a8535377120d63a19320bbf8be98e9db7e2caeba86a3b30e",
+      "bytes": 14554,
+      "definitions": [
+        {
+          "name": "sha",
+          "line": 22
+        },
+        {
+          "name": "query_id",
+          "line": 25
+        },
+        {
+          "name": "load_source_plan",
+          "line": 30
+        },
+        {
+          "name": "make_plan",
+          "line": 33
+        },
+        {
+          "name": "_inside",
+          "line": 68
+        },
+        {
+          "name": "load_saved",
+          "line": 74
+        },
+        {
+          "name": "verify_manifest",
+          "line": 113
+        },
+        {
+          "name": "_norm",
+          "line": 123
+        },
+        {
+          "name": "compare_ladder",
+          "line": 126
+        },
+        {
+          "name": "analyze",
+          "line": 169
+        },
+        {
+          "name": "three_level",
+          "line": 184
+        },
+        {
+          "name": "main",
+          "line": 209
+        }
+      ]
+    },
+    "research/gap_closure_20261001/theory_followup_20261001/DB_V5_VALIDATION.json": {
+      "exists": true,
+      "sha256": "d4e9d85beed20c5a9e37d5a58353f7df5017b30e8ba0f063dd81ec36a20497ad",
+      "bytes": 2999
+    },
+    "deliverables/BASS_CR_R4T_CLOSEOUT_20261001.json": {
+      "exists": true,
+      "sha256": "fd19450ccceaa71efcfedf7baa3d73ae0bba2af6a272a9ed5e9d504c1f23767e",
+      "bytes": 6215
+    },
+    "deliverables/BASS_CR_R4T_DELIVERY_RECEIPT_20261001.json": {
+      "exists": true,
+      "sha256": "8b59c8c78447ed93b6d777cd014b8b8981b076b28eae1b81cedb11c2c6a1577a",
+      "bytes": 4148
+    },
+    "deliverables/BASS_CR_SOURCE_DATABASE_20261001_v6.sqlite": {
+      "exists": true,
+      "sha256": "7635e9e17c8057d7c2ee5b56ae3e1cf9f64bb737716b4cdc3eb37e0c9f7d0c5b",
+      "bytes": 5033984
+    },
+    "recovery/r4r/BASS_CR_R4R_CLOSEOUT_20261001.json": {
+      "exists": true,
+      "sha256": "9f63e661ea37d217a1046e213fb5b44970037f6c02398dfa2aefd5b9b120288c",
+      "bytes": 3428
+    },
+    "recovery/r4s/BASS_CR_R4S_CLOSEOUT_20261001.json": {
+      "exists": true,
+      "sha256": "d2df4b862842e583f2927aaba46b51262fa061b1500ad3c0aff5ae45c33a365d",
+      "bytes": 4795
+    },
+    "recovery/r4r/history/R4Q/RESEARCH_LOOP_CLOSEOUT.json": {
+      "exists": true,
+      "sha256": "b1993d4604163dcbf61a76f29354a85f2375bd46ec894c7bba57c7068e9870d3",
+      "bytes": 50540
+    },
+    "research/gap_closure_20261001/hpc_optimization_20261001/mpi_queue.py": {
+      "exists": true,
+      "sha256": "c769182740e5ff1279468630cf01b6d1ed43556432fa3718559d42400fa0b67f",
+      "bytes": 18222,
+      "definitions": [
+        {
+          "name": "QueueExecutionError",
+          "line": 24
+        },
+        {
+          "name": "ReservationDenied",
+          "line": 30
+        },
+        {
+          "name": "_json",
+          "line": 34
+        },
+        {
+          "name": "_write_new",
+          "line": 38
+        },
+        {
+          "name": "_Authority",
+          "line": 51
+        },
+        {
+          "name": "_Reserve",
+          "line": 160
+        },
+        {
+          "name": "_sequential",
+          "line": 173
+        },
+        {
+          "name": "_workers",
+          "line": 200
+        },
+        {
+          "name": "_root",
+          "line": 222
+        },
+        {
+          "name": "run_queue",
+          "line": 297
+        },
+        {
+          "name": "_self_test",
+          "line": 352
+        },
+        {
+          "name": "main",
+          "line": 411
+        },
+        {
+          "name": "__init__",
+          "line": 25
+        },
+        {
+          "name": "__init__",
+          "line": 53
+        },
+        {
+          "name": "fail",
+          "line": 93
+        },
+        {
+          "name": "reserve",
+          "line": 102
+        },
+        {
+          "name": "envelope",
+          "line": 127
+        },
+        {
+          "name": "publish",
+          "line": 136
+        },
+        {
+          "name": "finish",
+          "line": 146
+        },
+        {
+          "name": "__init__",
+          "line": 161
+        },
+        {
+          "name": "__call__",
+          "line": 165
+        },
+        {
+          "name": "stop_idle",
+          "line": 231
+        },
+        {
+          "name": "synthetic",
+          "line": 359
+        },
+        {
+          "name": "request",
+          "line": 207
+        },
+        {
+          "name": "invoke",
+          "line": 180
+        }
+      ]
+    },
+    "research/gap_closure_20261001/hpc_optimization_20261001/kernel.py": {
+      "exists": true,
+      "sha256": "6e963fcc898a28d06b347b244aa20fda170ae8411c7e744d29ffe76a98e90a90",
+      "bytes": 4517,
+      "definitions": [
+        {
+          "name": "HPCMomentKernel",
+          "line": 7
+        },
+        {
+          "name": "cross_with_identity",
+          "line": 46
+        },
+        {
+          "name": "__init__",
+          "line": 8
+        },
+        {
+          "name": "accumulate",
+          "line": 28
+        }
+      ]
+    }
+  },
+  "missing_named_evidence_files": [],
+  "audit_limits": [
+    "No remote readback; uses pinned checkpoint receipts.",
+    "No prior tests rerun; reads source/test definitions and saved logs.",
+    "No native physics.",
+    "No assertion that absent selective-snapshot files never existed elsewhere; missing executable pipeline claims bounded to inspected checkpoint."
+  ],
+  "claim_ceilings": {
+    "capture": false,
+    "production": "HOLD",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "original_capture_gap_resolved": false,
+    "continuous_global_supremum_bound": false,
+    "continuous_trajectory_error_bound": false
+  },
+  "baseline_cutoff": "R4T checkpoint e1438233548cf01fa9894d17e194acba49e0ac7b; concurrent R4U implementation is not included or pre-admitted",
+  "post_baseline_metadata_fix": {
+    "schema": "R4T_ERROR_BUDGET_METADATA_SYNC_V1",
+    "source_path": "/workspace/scratch/63ee2321a512/bass_cr/research/gap_closure_20261001/ERROR_BUDGET_CURRENT_B0.json",
+    "source_before_sha256": "6989eb21db8e4a556d536dcdcf14d7f86d8824954d9a82f781f97381a7a7f804",
+    "source_after_sha256": "87e6ef9c1a035100614cb08d6a05ead2356584fcc48ac3286e8d9d9f1a2ed823",
+    "before_snapshot": "/workspace/scratch/63ee2321a512/cloud_audit_20261001/contract_audit/ERROR_BUDGET_CURRENT_B0_BEFORE_R4T_SYNC.json",
+    "exact_certificate_path": "/workspace/scratch/63ee2321a512/bass_cr/research/gap_closure_20261001/cancellation_followup_20261001/galilean/GALILEAN_BRIDGE_CERTIFICATE.json",
+    "exact_certificate_sha256": "ca8ed98d2f2a62f9473d191d9e18de1f10e4579d60604096ff232f16fba9d1aa",
+    "certificate_input_pins_verified": [
+      "reference_certificate_followup_20261001/actual_certificate/REFERENCE_CERTIFICATE.json",
+      "bridge_analysis_followup_20261001/NAMED_REFERENCE_BRIDGE_CERTIFICATE.json",
+      "bridge_analysis_followup_20261001/ETF_METRIC_CERTIFICATE.json",
+      "reference_certificate_followup_20261001/actual_certificate/EXACT_REPAIRED_REFERENCE.json"
+    ],
+    "old_exact": "55408/11",
+    "new_exact": "25227/50",
+    "new_display": 504.54,
+    "unchanged_components_total_gates": true,
+    "source_only_mutation": true,
+    "detached_delivered_budget_not_modified": true,
+    "new_physical_runs": 0,
+    "tests_repeated": 0,
+    "first_sync_after_sha256": "9f0074e42cc75936eb81e45d15972dee320cdc574770e4d05068cdc607bbb3bf",
+    "history_provenance_verified": "Old55408/11 is in ETF_METRIC_CERTIFICATE.json.updated_conservative_bridge, which refers to NAMED_REFERENCE_BRIDGE_CERTIFICATE.json for the base proof."
+  },
+  "audit_method": {
+    "entire_contracts_read": [
+      "BASS_CR 1739 lines",
+      "BASS_HE 673 lines"
+    ],
+    "code_review": "Function bodies and tests inspected for G01/G02/G03/G04/G07/G08/G09/G10/G12, R4S HPC adapters, R4R/R4T reference/projector/regularity; no old scientific tests rerun",
+    "absence_scope": "Inspected selective checkpoint; not a claim about every external branch or every archived file",
+    "first_builder_failure": "FIRST_AUDIT_BUILDER_FAILURE.json; section20 lower-case title extraction was fixed; no scientific result changed"
+  },
+  "earliest_HE_contract_appendix": {
+    "contract": {
+      "path": "/workspace/scratch/63ee2321a512/cloud_audit_20261001/inputs/Pasted text(20260930-213213).txt",
+      "lines": 673,
+      "sha256": "2e2f50fcf52429dcb879d15fa8dc445d5d25e7b1d9be1f9a51518ed06559accb",
+      "read_entire": true
+    },
+    "scope": "Earliest BASS_HE source acquisition and dual backup only; does not require solver execution",
+    "verdict": "PRIMARY_SOURCE_ARCHIVE_COMPLETE_WITH_EXPLICIT_BLOCKERS",
+    "scope_warning": "All24 selected paper fulltexts recovered; v3 had4 numeric-material entries but B1 later superseded P04 table absence and transcribed selected P09 tables;197 search leads are metadata only",
+    "rows": [
+      {
+        "id": "HE_SECTION_00",
+        "section": 0,
+        "title": "현재 입력 상태",
+        "contract_lines": [
+          19,
+          56
+        ],
+        "contract_section_sha256": "4c7496f978e7e84488103464eadbc7846d636621d6fb0bec601121c360e40ff6",
+        "completion": "PRESERVED",
+        "finding_ko": "원입력·gate identity를 보존했다. HE 연구 상태와 CR 연구 상태는 별개다.",
+        "evidence": [
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/GATES.json",
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/RECOVERY_INVENTORY.json"
+        ]
+      },
+      {
+        "id": "HE_SECTION_01",
+        "section": 1,
+        "title": "최우선 입력 검증",
+        "contract_lines": [
+          57,
+          87
+        ],
+        "contract_section_sha256": "2dad3a13571f56e72fe8e4faf874942b14653836a36744aba0b4084d0e1c86c0",
+        "completion": "VERIFIED",
+        "finding_ko": "v1 SHA/CRC/51 manifest payload와 safe paths를 확인했고 v3에 원본을 보존했다.",
+        "evidence": [
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/RECOVERY_INVENTORY.json",
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/VERIFICATION.json"
+        ]
+      },
+      {
+        "id": "HE_SECTION_02",
+        "section": 2,
+        "title": "문헌 원문 확보 정책",
+        "contract_lines": [
+          88,
+          140
+        ],
+        "contract_section_sha256": "4a94ee459245d8cf37b7a2dfd047af928a77e4992b2f02208e19c2507bf51f21",
+        "completion": "COMPLETED_SELECTED_SCOPE",
+        "finding_ko": "대체 경로 및 user upload를 통해 선택 논문 24편 모두 published full text를 확보했다.",
+        "evidence": [
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/PAPERS.json",
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/RESOLVED_ACCESS_BLOCKERS.json"
+        ]
+      },
+      {
+        "id": "HE_SECTION_03",
+        "section": 3,
+        "title": "publisher 원문이 막혔을 때의 fallback 규칙",
+        "contract_lines": [
+          141,
+          178
+        ],
+        "contract_section_sha256": "44c9508d65570772e6c39038b98f7654604f04b44216877f5225b068cd9173a0",
+        "completion": "COMPLETED_SELECTED_SCOPE",
+        "finding_ko": "published/preprint/accepted/metadata를 구별한다. 최종 선택집합은 published24, preprint0, accepted0이다.",
+        "evidence": [
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/SOURCE_COUNTS.json",
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/VERSION_DIFFERENCE_LEDGER.json"
+        ]
+      },
+      {
+        "id": "HE_SECTION_04",
+        "section": 4,
+        "title": "동일성 검증",
+        "contract_lines": [
+          179,
+          202
+        ],
+        "contract_section_sha256": "090043d6b16cb47258300cd174eeff2a4adf38a8ee61a594fe7eefa56b41dfcf",
+        "completion": "IDENTITY_AUDITED",
+        "finding_ko": "DOI·title·author·page/render identity 및 P07/P14 특수 확인 기록이 있다.",
+        "evidence": [
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/USER_UPLOAD_INTAKE.json",
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/VERIFICATION.json"
+        ]
+      },
+      {
+        "id": "HE_SECTION_05",
+        "section": 5,
+        "title": "우선 확보 대상 문헌",
+        "contract_lines": [
+          203,
+          306
+        ],
+        "contract_section_sha256": "1f74169e388588b77d3a1966e743dd11386683be430b48bffca253da75c9f4aa",
+        "completion": "PAPERS_COMPLETE_NUMERICAL_MATERIAL_LIMITED",
+        "finding_ko": "우선 10편을 포함한24편 원문과 ScienceDB4CSV는 확보. 이후 B1이 P04 table-header false negative를 정정하고 native5keV/u63cells 및 P09 tables25–30을 전사했다. 별도 author raw와 physical comparability는 한계가 남는다.",
+        "evidence": [
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/PAPERS.json",
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/DATASETS.json",
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/NUMERICAL_MATERIAL_GAPS.json"
+        ]
+      },
+      {
+        "id": "HE_SECTION_06",
+        "section": 6,
+        "title": "데이터 확보 정책",
+        "contract_lines": [
+          307,
+          342
+        ],
+        "contract_section_sha256": "ed683610df7d42bb3cb96a4342400e811ff12d1c190102ab05ea8b850ca054aa",
+        "completion": "RAW_BYTES_PRESERVED_METADATA_GAPS_EXPLICIT",
+        "finding_ko": "raw6files 보존. ScienceDB 단위/energy-frame 일부 미확정, 5keV 보간·shell sum·digitization 없음. 수치 benchmark 준비 완료로 승격 불가.",
+        "evidence": [
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/DATASETS.json",
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/derived_values.json",
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/NUMERICAL_MATERIAL_GAPS.json"
+        ]
+      },
+      {
+        "id": "HE_SECTION_07",
+        "section": 7,
+        "title": "코드 확보 정책",
+        "contract_lines": [
+          343,
+          375
+        ],
+        "contract_section_sha256": "bd44822d499a45021f653b7b0dbf8f1b31170d730034698a3dbd80a39ae7631e",
+        "completion": "PINNED_SELECTED_SNAPSHOTS_ONLY",
+        "finding_ko": "code source9, archive3. BASS_HE는 pinned7module subset, full checkout/dependency closure가 아니다. treeSHA 미반환과 license 제한이 명시되어 있다.",
+        "evidence": [
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/CODE_SOURCES.json"
+        ]
+      },
+      {
+        "id": "HE_SECTION_08",
+        "section": 8,
+        "title": "파일 구조",
+        "contract_lines": [
+          376,
+          418
+        ],
+        "contract_section_sha256": "43e7ff8749ca277d412b35f4080260f8ed2f536bf8a95bb1e855567e4deee667",
+        "completion": "ARCHIVE_LAYOUT_PRESENT",
+        "finding_ko": "catalog JSON/CSV/SQLite/XLSX 및 paper/data/code/provenance 구조가 archive에 있다. selective intake에서 없는 파일을 archive 누락으로 오인하지 않았다.",
+        "evidence": [
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/MANIFEST.json"
+        ]
+      },
+      {
+        "id": "HE_SECTION_09",
+        "section": 9,
+        "title": "source status taxonomy",
+        "contract_lines": [
+          419,
+          436
+        ],
+        "contract_section_sha256": "9ab653a2b7376bf7545129aa041b715ba64e115c3a18a7139c56d3866a98bc0e",
+        "completion": "TAXONOMY_APPLIED",
+        "finding_ko": "39 selected source와197 search metadata leads를 구별한다. leads를 원문으로 집계하지 않는다.",
+        "evidence": [
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/SOURCE_COUNTS.json",
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/SOURCE_CATALOG.json"
+        ]
+      },
+      {
+        "id": "HE_SECTION_10",
+        "section": 10,
+        "title": "검증",
+        "contract_lines": [
+          437,
+          471
+        ],
+        "contract_section_sha256": "9d9d4758d426d9ab9f8782af2d8e47247ad3b4d3d1e2ee0c329bb402f779d691",
+        "completion": "VERIFIED",
+        "finding_ko": "SHA/CRC/manifest/safe paths/duplicate-member checks PASS. 동일 payload alias8은 문헌 추가8편이 아니다.",
+        "evidence": [
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/VERIFICATION.json",
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/MANIFEST.json"
+        ]
+      },
+      {
+        "id": "HE_SECTION_11",
+        "section": 11,
+        "title": "클라우드 이중백업",
+        "contract_lines": [
+          472,
+          517
+        ],
+        "contract_section_sha256": "2f82a60d44a81af6566d07143d1c4f1db7ab6f2222d33d873dac94b82accf194",
+        "completion": "DUAL_ACK_DRIVE_RAW_VERIFIED",
+        "finding_ko": "현재 v3 외부 receipt가 양 provider ACK를 정확한 ZIP identity에 연결. Drive raw R3, Dropbox ACK+size R0이며 Dropbox raw restore는 하지 않았다.",
+        "evidence": [
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/VERIFICATION.json"
+        ]
+      },
+      {
+        "id": "HE_SECTION_12",
+        "section": 12,
+        "title": "mutation 정책",
+        "contract_lines": [
+          518,
+          540
+        ],
+        "contract_section_sha256": "a147aa40c33756ac798be0dbbba9dd472a2a4b89ac34f8ad34937e93202c4924",
+        "completion": "FOLLOWED_IN_ACQUISITION_SCOPE",
+        "finding_ko": "v3 acquisition에서 scientific code execution/production/Git mutation0, private PDF 백업. 이후 별도 연구 패키지와 범위를 구별한다.",
+        "evidence": [
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/VERIFICATION.json",
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/GATES.json"
+        ]
+      },
+      {
+        "id": "HE_SECTION_13",
+        "section": 13,
+        "title": "실패 정책",
+        "contract_lines": [
+          541,
+          580
+        ],
+        "contract_section_sha256": "6adfd0d9a9383c81363f5a782457d39c166b1a344876d56224a1e702a40c66b8",
+        "completion": "BLOCKERS_EXPLICIT_WITH_LATER_ERRATUM",
+        "finding_ko": "선택 논문 access-blocker0. v3 numeric material4개 항목 중 P04 table 미발견 문구는 이후 B1에서 철회·정정됐다. immutable v3의 오래된 gap을 현재 truth로 쓰면 안 된다.",
+        "evidence": [
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/ACCESS_BLOCKERS.json",
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/NUMERICAL_MATERIAL_GAPS.json"
+        ]
+      },
+      {
+        "id": "HE_SECTION_14",
+        "section": 14,
+        "title": "완료 조건",
+        "contract_lines": [
+          581,
+          627
+        ],
+        "contract_section_sha256": "61bfddcbad393012b78ac669dec6a0d807529270eb9761b0293a12e09202011c",
+        "completion": "COMPLETE_WITH_EXPLICIT_BLOCKERS",
+        "finding_ko": "A–H의 해당 증거를 확인했다. 원문 확보와 numerical-material 완비는 동일하지 않다.",
+        "evidence": [
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/VERIFICATION.json",
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/SOURCE_COUNTS.json"
+        ]
+      },
+      {
+        "id": "HE_SECTION_15",
+        "section": 15,
+        "title": "RETURN",
+        "contract_lines": [
+          628,
+          655
+        ],
+        "contract_section_sha256": "15d98831d59d7a0068680fc3e17d0f621bd65c569ac80b8d398e2f6ccac94f2d",
+        "completion": "RETURN_EVIDENCED",
+        "finding_ko": "counts/catalog/ZIP identity/provider IDs/tier/restore/gaps/not-run/handoff가 archive와 detached receipt에 있다.",
+        "evidence": [
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/README_KO.md",
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/NEXT_SOURCE_RECOVERY_HANDOFF_KO.md"
+        ]
+      },
+      {
+        "id": "HE_SECTION_16",
+        "section": 16,
+        "title": "절대 실행 금지",
+        "contract_lines": [
+          656,
+          673
+        ],
+        "contract_section_sha256": "dfa6336cbeca5258d7ee1bb1e14d8f5c13561b09dd35dd3aa8d2ec36f0f6d784",
+        "completion": "FOLLOWED_IN_ACQUISITION_SCOPE",
+        "finding_ko": "v3 acquisition은 solver/Eq55/보간/새 digitization/production mutation을 실행하지 않았다.",
+        "evidence": [
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/VERIFICATION.json",
+          "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/GATES.json"
+        ]
+      }
+    ],
+    "completion_conditions": [
+      {
+        "id": "A",
+        "status": "VERIFIED_SELECTED_AND_SEARCH_ROWS",
+        "finding": "39selected primary rows plus197 preserved search-lead rows; no claim that search leads are acquired fulltext"
+      },
+      {
+        "id": "B",
+        "status": "VERIFIED_SELECTED_SOURCE_BYTES",
+        "finding": "39 recovered:24 publishedPDF+6rawdataset+9code source;3code archives"
+      },
+      {
+        "id": "C",
+        "status": "EXPLICIT_WITH_ERRATUM",
+        "finding": "Selected paper access blockers0;v3 documented4numeric-material/metadata gaps;B1 subsequently corrected P04 and supplied selected P09 transcriptions"
+      },
+      {
+        "id": "D",
+        "status": "VERIFIED",
+        "finding": "Recovered payload SHA256 in manifest/catalog"
+      },
+      {
+        "id": "E",
+        "status": "PASS",
+        "finding": "ZIP CRC, manifest and safe path checks; current Drive intake SHA+CRC independently matches"
+      },
+      {
+        "id": "F",
+        "status": "ACK_RECEIPT_VERIFIED",
+        "finding": "Drive and Dropbox completed ACK in exact-v3 detached receipt, current Dropbox listing agrees ID/size"
+      },
+      {
+        "id": "G",
+        "status": "DRIVE_RAW_VERIFIED",
+        "finding": "Drive historical R3 plus fresh independent raw SHA/CRC intake; Dropbox R0 ACK+size only"
+      },
+      {
+        "id": "H",
+        "status": "ZERO_IN_V3_ACQUISITION_SCOPE",
+        "finding": "science_solver_runs=0/new_physics_calculations=0; separate later studies are not attributed to this acquisition action"
+      }
+    ],
+    "archive": {
+      "schema": "BASS_HE_V3_SEALED_ARCHIVE_IDENTITY",
+      "sealed_at_utc": "2026-10-01T01:38:14.728207+00:00",
+      "archive_filename": "BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3.zip",
+      "bytes": 26874721,
+      "sha256": "0f9dc51cc013aa0b91e7f3ff560bbca5afd1ee1551b67c8bb33278c445b1cd84",
+      "md5": "91c0aeac446a0dbfdf0426e18c83bb5c",
+      "dropbox_content_hash": "f4246ff674375cf11b6ebbe8c6eb626ff81cc9dfb628eb95af853891d476459e",
+      "zip_members": 254,
+      "manifest_payload_count": 252,
+      "zip_crc": "PASS",
+      "manifest_hashes": "PASS",
+      "counts": {
+        "total_sources": 39,
+        "recovered_sources": 39,
+        "published_pdf_count": 24,
+        "preprint_count": 0,
+        "accepted_manuscript_count": 0,
+        "dataset_file_count": 6,
+        "code_archive_count": 3,
+        "code_source_count": 9,
+        "metadata_only_count": 0,
+        "access_blocked_count": 0,
+        "auxiliary_search_metadata_only_count": 197,
+        "all_database_row_count_including_search_leads": 236,
+        "newly_recovered_source_count": 19,
+        "reused_recovered_source_count": 20,
+        "count_scope": "39 selected primary sources; 197 preserved search-result URL leads tracked separately, not full texts or additional selected papers",
+        "newly_recovered_source_count_scope": "v3 user-upload intake only",
+        "fulltext_recovery_complete_for_selected_papers": true,
+        "raw_dataset_file_count_scope": "Six standalone raw data files. Embedded PDF tables are indexed separately, not counted as newly recovered CSV datasets."
+      }
+    },
+    "providers": {
+      "drive": {
+        "object_id": "10cFFUiYVvA-vKZbofgnmbdyB56NB3IgS",
+        "parent_folder_id": "1pkohlay5eIfFJsBwPZ_yn2jIZONZjesI",
+        "canonical_url": "https://drive.google.com/file/d/10cFFUiYVvA-vKZbofgnmbdyB56NB3IgS/view?usp=drivesdk",
+        "bytes": 26874721,
+        "created_at_utc": "2026-10-01T01:38:57.677Z",
+        "shared": false,
+        "permission_scope": "Owner-only metadata observed; no sharing/permission mutation",
+        "verification_level": "R3",
+        "actual_raw_download_sha256": "0f9dc51cc013aa0b91e7f3ff560bbca5afd1ee1551b67c8bb33278c445b1cd84",
+        "restore_bytes": 26874721,
+        "restore_zip_crc": "PASS",
+        "restore_manifest_hashes": "PASS",
+        "restore_zip_members": 254,
+        "verified_at_utc": "2026-10-01T01:42:06.108411+00:00",
+        "provider_checksum_status": "NOT_RETURNED_BY_METADATA_ADAPTER",
+        "sha256_sidecar_object_id": "1JHB2iC4JsjwmeMShXi4E5gDU2wNF6FWO"
+      },
+      "dropbox": {
+        "object_id": "id:BSpOijBcT10AAAAAADxPyA",
+        "path": "/BASS_DERIVATION_DOSSIERS_20260912/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3.zip",
+        "provider_ns_path": "ns:183516487//BASS_DERIVATION_DOSSIERS_20260912/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3.zip",
+        "bytes": 26874721,
+        "modified_at_utc": "2026-10-01T01:39:16Z",
+        "upload_status": "completed",
+        "verification_level": "R0",
+        "size_match": true,
+        "provider_checksum_status": "NOT_RETURNED_BY_METADATA_ADAPTER",
+        "actual_raw_download": "NOT_PERFORMED_SELECTIVE_RESTORE_USED_DRIVE",
+        "private_backup_scope": "Existing designated folder; no new shared link or permission change",
+        "sha256_sidecar_object_id": "id:BSpOijBcT10AAAAAADxPyQ"
+      }
+    },
+    "historical_v3_numerical_material_gaps_do_not_treat_as_current": [
+      {
+        "id": "P04_NUMERICAL_MATERIAL",
+        "paper_doi": "10.1088/0953-4075/41/13/135201",
+        "paper_fulltext_status": "PUBLISHED_VERSION_RECOVERED",
+        "status": "UNRESOLVED",
+        "reason": "No numbered table headers found in the complete uploaded PDF text. Figures are preserved; no standalone numeric dataset supplied. Do not infer missing tables or digitize figures.",
+        "next_route": "If independent machine-readable values are required, obtain a documented author/publisher data file; no new retrieval or digitization authorized by this update."
+      },
+      {
+        "id": "P10_WPCCC_NUMERICAL_MATERIAL",
+        "paper_doi": "10.1088/1361-6587/ab2e7a",
+        "paper_fulltext_status": "PUBLISHED_VERSION_RECOVERED",
+        "status": "NOT_ACQUIRED",
+        "reason": "The uploaded article is acquired. No separate WP-CCC supplementary raw numerical file is present in paper.zip."
+      },
+      {
+        "id": "P09_STANDALONE_RAW_TABLES",
+        "paper_doi": "10.1016/j.adt.2019.05.002",
+        "paper_fulltext_status": "PUBLISHED_VERSION_RECOVERED",
+        "status": "EMBEDDED_PUBLISHED_TABLES_RECOVERED; STANDALONE_EXPORT_NOT_ACQUIRED",
+        "reason": "All published table headers 1–114 are present on PDF pages 6–28. Values remain original PDF bytes. No table transcription/digitization or raw CSV export has been performed."
+      },
+      {
+        "id": "SCIENCEDB_RAW_CSV_SEMANTICS",
+        "status": "UNRESOLVED_METADATA_ONLY",
+        "reason": "Existing raw CSV energy-frame and cross-section-unit uncertainties remain as recorded in DATASETS.json. New uploads do not alter raw CSV bytes or benchmark admission."
+      }
+    ],
+    "evidence_catalog": {
+      "/workspace/scratch/63ee2321a512/cloud_audit_20261001/inputs/Pasted text(20260930-213213).txt": {
+        "sha256": "2e2f50fcf52429dcb879d15fa8dc445d5d25e7b1d9be1f9a51518ed06559accb",
+        "bytes": 14416
+      },
+      "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/receipts/BASS_HE_BACKUP_RECEIPT_20261001_v3.json": {
+        "sha256": "1381e86c7f3c9abffade76afc826c9734602f249138021a4d4c099cadc4171ab",
+        "bytes": 6322
+      },
+      "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/DOWNLOAD_INTAKE.json": {
+        "sha256": "327d3d88c7642b7604f4a9b2b80c199116c2a5cefecede541402801bdc3995d7",
+        "bytes": 394094
+      },
+      "/workspace/scratch/63ee2321a512/cloud_audit_20261001/dropbox/INVENTORY.json": {
+        "sha256": "baf49fb19e658ee1ef89aa5a7109ab8768077e5e06b020d90d15a85ba51ba6f3",
+        "bytes": 189298
+      },
+      "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/ACCESS_BLOCKERS.json": {
+        "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "bytes": 3
+      },
+      "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/CODE_SOURCES.json": {
+        "sha256": "e001a6304f3855ba427fd18fbe5512b211d183d6cdb18771ac6bb0ce9c61ed30",
+        "bytes": 13740
+      },
+      "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/DATASETS.json": {
+        "sha256": "74a716753ecd30ea1c576a9f2d902d027faad01e2f3c1f35adbdb639b00bf053",
+        "bytes": 22871
+      },
+      "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/GATES.json": {
+        "sha256": "10b602d844cb319b6f11ec73ea475d9c9e2a4a4fd01d147a635a0ae6f589ad78",
+        "bytes": 210
+      },
+      "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/MANIFEST.json": {
+        "sha256": "29524c3d8c9da104cc704c7827a91f6683bfdf77b28d16cfa2cb7213509a7e84",
+        "bytes": 47103
+      },
+      "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/NEXT_SOURCE_RECOVERY_HANDOFF_KO.md": {
+        "sha256": "eb2a906a966bd8c176860752e197157ed6d1486e011c616d088725bcc3a47dd1",
+        "bytes": 948
+      },
+      "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/NUMERICAL_MATERIAL_GAPS.json": {
+        "sha256": "779ee7ec35908d22e4a4d39cdf24d6de6ef934d2cc229beb305cdc2a1eb3a154",
+        "bytes": 1584
+      },
+      "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/PAPERS.json": {
+        "sha256": "0b1108eb68f7ff707ab10d4125300ba7eeed2a68627799f4ce666c27412275ef",
+        "bytes": 297985
+      },
+      "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/README_KO.md": {
+        "sha256": "761cebe62b0758fc137413c9a2721a5514ef952ab257ba3eb25809fc6938061c",
+        "bytes": 2681
+      },
+      "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/RECOVERY_INVENTORY.json": {
+        "sha256": "f33e4c2cfae5afcebf39e4923a8049d047af091dfc2c5d1d2f9c6cb5c5d90c40",
+        "bytes": 48929
+      },
+      "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/RESOLVED_ACCESS_BLOCKERS.json": {
+        "sha256": "f4375943e62340342d1a11ef5640056b460e3a0dfa7e4ae2e9b4a9266efea865",
+        "bytes": 181252
+      },
+      "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/SOURCE_CATALOG.json": {
+        "sha256": "13bcb578cb0bd06ac5112d56ac3291d8a54e3a84655e8c30ed3388f93f2cf3d2",
+        "bytes": 334590
+      },
+      "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/SOURCE_COUNTS.json": {
+        "sha256": "ee781c3b48e29139bb484575d14fa6b67f70fda4e63a9e30cd467d75ef6954d7",
+        "bytes": 893
+      },
+      "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/USER_UPLOAD_INTAKE.json": {
+        "sha256": "7a457bfeca6801acc12ad2d51aac57d27d7591e56d5c71a762b0c83a711598a2",
+        "bytes": 43297
+      },
+      "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/VERIFICATION.json": {
+        "sha256": "16c61b74ed011bb13540a72a026f59ea3c72cb13afcd05bdfd333414c8643241",
+        "bytes": 10145
+      },
+      "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/VERSION_DIFFERENCE_LEDGER.json": {
+        "sha256": "db45df61a731753f08147b9d222ac742b7f610eb84eeaae47d44195629ede22f",
+        "bytes": 2412
+      },
+      "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_v3/BASS_HE_PRIMARY_SOURCE_ARCHIVE_20261001_v3/derived_values.json": {
+        "sha256": "d17563bd72f42c0fe11ebee66b9d66fb173d1690b2d715f958265aa7506fbf2a",
+        "bytes": 170
+      },
+      "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_postdb/BASS_HE_POST_DATABASE_A1_B1_20261001_v1/B1/SOURCE_RECOVERY_ERRATA.json": {
+        "sha256": "c9466c00df8a8a0f4ceb991a551b2111b8df992cc72025ba85edd0631ec320c3",
+        "bytes": 1659
+      },
+      "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_postdb/BASS_HE_POST_DATABASE_A1_B1_20261001_v1/B1/RESULT.json": {
+        "sha256": "a6d4bc60212f23a718ac39c03f695bc8c1ad2b5502bdbbba479cb9aa3407930e",
+        "bytes": 1477
+      },
+      "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_postdb/BASS_HE_POST_DATABASE_A1_B1_20261001_v1/B1/REPORT_KO.md": {
+        "sha256": "085434754825a906679153ac8ac6731b1bc7cb01011a17675ec246344852b1b7",
+        "bytes": 3412
+      },
+      "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_postdb/BASS_HE_POST_DATABASE_A1_B1_20261001_v1/B1/BENCHMARK_MATRIX.csv": {
+        "sha256": "c1c82da40b532a2e87ffa8c28e260f725f3cb8d038b247ad641adc66d8378327",
+        "bytes": 13244
+      },
+      "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/intake/he_postdb/BASS_HE_POST_DATABASE_A1_B1_20261001_v1/B1/evidence/P04_A3_verified_cells.json": {
+        "sha256": "c4c079520a1760d1a2a953479f258f745f683d0afa4903eb15c54ec519720527",
+        "bytes": 5969
+      },
+      "/workspace/scratch/63ee2321a512/cloud_audit_20261001/drive/downloads/BASS_HE_POST_DATABASE_A1_B1_20261001_v1.zip::BASS_HE_POST_DATABASE_A1_B1_20261001_v1/B1/code/verify_source_cells.py": {
+        "archive_sha256": "40856c46050796054d2da66563149705880888db84a69dd062bb767639d0039e",
+        "member_sha256": "0d34aea0fd5d39849540a43ab8ad92f4ff921ba5025bcbe56c09098f45acfdb6",
+        "bytes": 5052,
+        "body_read": true,
+        "run": false
+      }
+    },
+    "later_B1_update": {
+      "source_recovery_erratum": {
+        "schema": "B1_SOURCE_RECOVERY_ERRATA_v1",
+        "source_id": "P04",
+        "classification": "IMPLEMENTATION_ERROR_TABLE_HEADER_INDEX_FALSE_NEGATIVE",
+        "supersedes_archive_sha256": "0f9dc51cc013aa0b91e7f3ff560bbca5afd1ee1551b67c8bb33278c445b1cd84",
+        "supersedes_file": "NUMERICAL_MATERIAL_GAPS.json",
+        "supersedes_entry_id": "P04_NUMERICAL_MATERIAL",
+        "prior_statement": {
+          "id": "P04_NUMERICAL_MATERIAL",
+          "paper_doi": "10.1088/0953-4075/41/13/135201",
+          "paper_fulltext_status": "PUBLISHED_VERSION_RECOVERED",
+          "status": "UNRESOLVED",
+          "reason": "No numbered table headers found in the complete uploaded PDF text. Figures are preserved; no standalone numeric dataset supplied. Do not infer missing tables or digitize figures.",
+          "next_route": "If independent machine-readable values are required, obtain a documented author/publisher data file; no new retrieval or digitization authorized by this update."
+        },
+        "correction": "Published PDF contains Appendix Tables A1–A12;TableA3 explicitly supplies 5keV/u capture cells. Absence of detected numbered headers did not establish absence of tables. Letter-prefixed Appendix labels were missed in the previous indexing.",
+        "established_now": {
+          "embedded_tables": "PRESENT",
+          "table_A3_cells": "VERIFIED",
+          "standalone_author_raw_file": "NOT_ACQUIRED;unchanged",
+          "complete_A1_A12_transcription": "NOT_RUN;onlyA3 is fully transcribed here"
+        },
+        "preservation": "Immutable v3 untouched;old statement preserved here and in v3",
+        "claim_withdrawn": "Any reading of old numerical-material gap as no published numeric table/5keV/u authority",
+        "scientific_gate_change": "NONE"
+      },
+      "result": {
+        "node": "B1",
+        "status": "PRIMARY_NUMERIC_AUTHORITY_MATRIX_PARTIAL",
+        "remaining_gate": "SOURCE_AUTHORITY_UNRESOLVED",
+        "scope": "first bounded source-authority loop;13 rows reviewed,selected native tables transcribed",
+        "source_value_cells": 1131,
+        "P09_additional_convergence_tokens": 300,
+        "matrix_rows": 13,
+        "new_exact_native_5_keV_u_authority": {
+          "source_id": "P04",
+          "table": "A3",
+          "pdf_page": 8,
+          "cells": 63,
+          "energy_frame": "LAB_VS_CM_NOT_EXPLICIT",
+          "target_state": "H nativeP04;H1s explicit cross-referenceP01",
+          "statement": "Source-native authority recovered;full physical comparability not yet certified"
+        },
+        "P08": "16native20keValphacells;conditionalA4adapter notrun;no native n2/n3 shelltotal",
+        "exact_native_0_5_keV_u_admitted": false,
+        "zero_point_five_scope": "none in bounded selected tables/grids;not a claim of absence from all literature",
+        "source_recovery_erratum": "v3 P04 table-header false-negative corrected here;immutablev3 unchanged",
+        "global_authority_closed": false,
+        "G1_authorized": false,
+        "production_change": false,
+        "next_single_node": "A1b ASYMPTOTIC_CHANNEL_EMBEDDING_AND_ETF_CHOICE",
+        "followup_B1_dependencies": [
+          "resolve source-native frames/units before comparison",
+          "obtain authorized exact0.5nativecells or preservegap",
+          "complete further table transcription only for a needed comparison",
+          "keep fulluncertainty model separate from convergence diagnostics"
+        ]
+      },
+      "inspected": [
+        "SOURCE_RECOVERY_ERRATA.json",
+        "RESULT.json",
+        "REPORT_KO.md",
+        "BENCHMARK_MATRIX.csv",
+        "evidence/P04_A3_verified_cells.json",
+        "B1/code/verify_source_cells.py inside original ZIP"
+      ],
+      "current_limits": [
+        "P04 source-native5keV/u63cells established;lab/CM not explicit,H1s cross-source binding,masses/provenance limits;other11appendix tables not transcribed",
+        "P09 tables25–30 transcribed300values+300convergence tokens;other108tables untranscribed;native velocity retained",
+        "P10 author-request nlm raw not acquired;desired5/.5 outside published10–1000keV/amu range",
+        "ScienceDB raw sigma units/frame unresolved;native5/.5 tokens absent in inspected exact grids",
+        "No admissible exact0.5keV/u established in bounded selected sources;not a literature-wide absence claim",
+        "Verifier checks source bytes and preserved transcription records,not an independent PDF re-extraction"
+      ],
+      "all_later_HE_research_stages_audited_here": false,
+      "coverage_limit": "This appendix exhaustively maps the earliest acquisition contract and applies B1 corrections;later A1/C1B/C2/HPC scientific programs need their separate contract/execution audit."
+    }
+  },
+  "scope_chronology": [
+    {
+      "task": "HE primary-source recovery",
+      "contract": "/workspace/scratch/63ee2321a512/cloud_audit_20261001/inputs/Pasted text(20260930-213213).txt",
+      "result": "Selected fulltexts recovered; explicit numerical-material limitations; independent dual-backup evidence"
+    },
+    {
+      "task": "CR original research loop",
+      "contract": "/workspace/scratch/63ee2321a512/recovery/r4r/INPUT_CONTRACT.txt",
+      "result": "First10 sequence substantively executed; full production research chain incomplete"
+    },
+    {
+      "task": "R4U current authorized implementation",
+      "result": "Concurrent new work; await its own results; not included in this R4T baseline verdict"
+    },
+    {
+      "task": "WU088 attachment",
+      "result": "Different project; excluded from HE/CR completion tally"
+    }
+  ]
+}

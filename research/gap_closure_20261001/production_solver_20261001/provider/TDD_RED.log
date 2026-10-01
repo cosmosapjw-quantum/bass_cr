@@ -1,0 +1,21 @@
+test_hpc_provider (unittest.loader._FailedTest.test_hpc_provider) ... ERROR
+
+======================================================================
+ERROR: test_hpc_provider (unittest.loader._FailedTest.test_hpc_provider)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_hpc_provider
+Traceback (most recent call last):
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/unittest/loader.py", line 396, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/unittest/loader.py", line 339, in _get_module_from_name
+    __import__(name)
+  File "/workspace/scratch/63ee2321a512/bass_cr/research/gap_closure_20261001/production_solver_20261001/provider/test_hpc_provider.py", line 5, in <module>
+    from hpc_provider import validate_contract, bind_rank, build_tasks, qualified_task, SerialComm, collect_cache
+ModuleNotFoundError: No module named 'hpc_provider'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)

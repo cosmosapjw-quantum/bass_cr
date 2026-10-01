@@ -1,0 +1,52 @@
+{
+  "schema": "BASS_R4U_SINGLE_OBSERVATION_V1",
+  "repetitions": 1,
+  "statistical_benchmark": false,
+  "NCP64_scaling": false,
+  "scope": "same first time; same resolutions32/40; full operator+attempt persistence; backend/thread count differs",
+  "results": {
+    "fortran": {
+      "threads": 2,
+      "first_query_attempt_seconds": 22.288366929002223,
+      "attempts": 2,
+      "full_run_supervisor": {
+        "execution_sha256": "8b80e7857a691892e1629f9259c3f30461a0349fd2394414c25f328dacfa79b0",
+        "status": "EXITED",
+        "returncode": 0,
+        "wall_seconds": 88.92332608700235,
+        "error": null,
+        "resources_measured": {
+          "max_child_rss_kib": 86292,
+          "user_cpu_seconds": 176.42789499999998,
+          "system_cpu_seconds": 0.16507299999999997,
+          "minor_page_faults": 32445,
+          "major_page_faults": 0,
+          "scope": "RUSAGE_CHILDREN; RSS is lifetime max waited-child high-water, not summed MPI peak"
+        },
+        "success": true
+      }
+    },
+    "reference": {
+      "threads": 1,
+      "first_query_attempt_seconds": 35.00166633299523,
+      "attempts": 2,
+      "full_run_supervisor": {
+        "execution_sha256": "5c24db179eb9f3fc47679de0f68a0417c2b4f118adca32542c2f6dea3da70d09",
+        "status": "EXITED",
+        "returncode": 0,
+        "wall_seconds": 35.92512885799806,
+        "error": null,
+        "resources_measured": {
+          "max_child_rss_kib": 85616,
+          "user_cpu_seconds": 35.793893,
+          "system_cpu_seconds": 0.099592,
+          "minor_page_faults": 32307,
+          "major_page_faults": 0,
+          "scope": "RUSAGE_CHILDREN; RSS is lifetime max waited-child high-water, not summed MPI peak"
+        },
+        "success": true
+      }
+    }
+  },
+  "observed_time_ratio_reference_over_fortran": 1.5704006688552008
+}

@@ -1,0 +1,140 @@
+{
+  "schema": "BASS_R4U_PRODUCTION_BOUNDARY_REVIEW_V1",
+  "created_utc": "2026-10-01T11:33:36.950787+00:00",
+  "status": "CONFIRMED_FINDINGS_FIXED_FOCUSED_AUTHOR_VALIDATION_PASSED",
+  "role": "Initial independent read-only verifier; implementation authorized by root after reproduced finding. Final focused tests are author validation, not a new independent review of own fixes.",
+  "review_scope": [
+    "production_solver_20261001/runtime",
+    "production_solver_20261001/provider/hpc_provider.py"
+  ],
+  "initial_hpc_provider_sha256": "9467e5658f088aa56c936a5d7e203bab3894162a6940b4d594d7f4748781cb41",
+  "fixes": [
+    {
+      "id": "F01",
+      "finding": "Qualified publication and runtime admission accepted full S/H/D cross blocks different from the final qualified raw cross.",
+      "original_reproduction": {
+        "exit_code": 0,
+        "qualified_queries": 1,
+        "S_tp_mismatch_max": 0.001,
+        "H_tp_mismatch_max": 0.001,
+        "D_tp_mismatch_max": 0.001,
+        "scope": "synthetic public qualified_task -> collect_cache; zero physical/native calls"
+      },
+      "repair": "Shared exact6-block equality guard at each raw/full attempt, qualified task pair, cache publication and QualifiedCache admission. Failed attempt payload/record remains preserved. Shared file is included in both operator and runtime source identities."
+    },
+    {
+      "id": "F02",
+      "finding": "Supplied contracts could differ from archived SCIENCE_CONTEXT, or both documents could be changed while the actual evaluator remained fixed100keV/b2/same20.",
+      "repair": "Require exact archived canonical contract SHA256 and exact supplied-contract canonical SHA256/equality. Guard executes before basis/native admission.",
+      "pinned_sha256": "45688d008edc60a54097cd2907497c75475c44ef168a176333b758b425370cff"
+    },
+    {
+      "id": "F03",
+      "finding": "An unchanged BASIS.npz plus self-consistent changed BASIS.json could alter channel meanings.",
+      "evidence_origin": "Root-identified invariant and original source inspection; final altered-metadata rejection directly tested.",
+      "repair": "Require archived semantic BASIS.json identity in addition to self-hash and existing BASIS.npz SHA256.",
+      "pinned_identity": "f23267b7214a5e3918866dcece5cb61c79a891578f4dda69dee5a762eb02983a"
+    }
+  ],
+  "archived_local_identity_read": {
+    "path": "/workspace/scratch/63ee2321a512/recovery/r4r/restored_static_A1/EXECUTION_PREPARATION/runtime_inputs",
+    "exit_code": 0,
+    "contract_canonical_sha256": "45688d008edc60a54097cd2907497c75475c44ef168a176333b758b425370cff",
+    "basis_identity_and_self_hash": "f23267b7214a5e3918866dcece5cb61c79a891578f4dda69dee5a762eb02983a"
+  },
+  "thread_environment": {
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "tests_observed_before_final_pin_slice": [
+    {
+      "command": "python -B -m unittest test_hpc_provider -v",
+      "cwd": "/workspace/scratch/63ee2321a512/bass_cr/research/gap_closure_20261001/production_solver_20261001/provider",
+      "exit_code": 0,
+      "test_methods": 15,
+      "skips": 0,
+      "seconds": 0.054,
+      "log_scope": "Tool output observed directly; no durable raw log was created for this earlier run."
+    },
+    {
+      "command": "python -B -m unittest test_runtime_solver -v",
+      "cwd": "/workspace/scratch/63ee2321a512/bass_cr/research/gap_closure_20261001/production_solver_20261001/runtime",
+      "exit_code": 0,
+      "test_methods": 6,
+      "skips": 0,
+      "seconds": 0.801,
+      "log_scope": "Tool output observed directly; no durable raw log was created for this earlier run."
+    },
+    {
+      "command": "python -B -m unittest test_precompute_cli -v",
+      "cwd": "/workspace/scratch/63ee2321a512/bass_cr/research/gap_closure_20261001/production_solver_20261001/provider",
+      "exit_code": 0,
+      "test_methods": 8,
+      "skips": 0,
+      "seconds": 0.321,
+      "log_scope": "Tool output observed directly; no durable raw log was created for this earlier run."
+    }
+  ],
+  "initial_boundary_regression_red": {
+    "command": "python -B -m unittest test_hpc_provider.ProviderTests.test_each_inconsistent_full_raw_block_is_rejected_before_qualification test_hpc_provider.ProviderTests.test_publish_rejects_rehashed_raw_full_mismatch test_hpc_provider.ProviderTests.test_pinned_context_rejects_changed_contract_before_native_load test_hpc_provider.ProviderTests.test_shared_cross_validator_is_in_operator_source_identity -v",
+    "cwd": "/workspace/scratch/63ee2321a512/bass_cr/research/gap_closure_20261001/production_solver_20261001/provider",
+    "exit_code": 1,
+    "test_methods": 4,
+    "failures_including_subtests": 12,
+    "decisive_line": "AssertionError: ValueError not raised",
+    "log_scope": "Tool output observed directly; no durable raw log created. Do not label this a stored full log."
+  },
+  "final_pin_regression": {
+    "command": "python -B -m unittest test_hpc_provider.ProviderTests.test_pinned_context_rejects_changed_contract_before_native_load -v",
+    "cwd": "/workspace/scratch/63ee2321a512/bass_cr/research/gap_closure_20261001/production_solver_20261001/provider",
+    "test_methods": 1,
+    "red_exit_code": 1,
+    "red_decisive_line": "AssertionError: ValueError not raised",
+    "green_exit_code": 0,
+    "green_decisive_line": "Ran 1 test in 0.003s; OK",
+    "red_log": "/workspace/scratch/63ee2321a512/bass_cr/research/gap_closure_20261001/production_solver_20261001/provider/evidence/ARCHIVED_PINS_RED.log",
+    "red_log_sha256": "e7f0236bb262ce8e9696416dd46aae1bf584483cbcc910d4233e9d91ed6e7a76",
+    "green_log": "/workspace/scratch/63ee2321a512/bass_cr/research/gap_closure_20261001/production_solver_20261001/provider/evidence/ARCHIVED_PINS_GREEN.log",
+    "green_log_sha256": "382613d568fafcc4764d08cf2a744419e92bcddd1794d4f25e0fc1ef6af31852",
+    "coverage": [
+      "Changed supplied screens",
+      "Changed ordered ladder",
+      "Changed supplied energy",
+      "Changed supplied same_center_order",
+      "Matched original synthetic contract positive",
+      "Both SCIENCE_CONTEXT and supplied contract changed together",
+      "Rehashed altered BASIS.json semantic metadata"
+    ],
+    "fixture_policy": "Synthetic test consciously patches archived constants and sha seam; production constants and archived input files are unchanged."
+  },
+  "final_owned_file_sha256": {
+    "provider/hpc_provider.py": "da90d7e29838a3dce91be4668cd57babc3485223e6fee4949fdad581e373a433",
+    "provider/test_hpc_provider.py": "9ca81d8427302cecdd45a64b26d7587ea24c9678d2b6ee9da1ff841fd0e437f1",
+    "runtime/cache_consistency.py": "83c21692b3b6ad19ff5b90bcca81eae791220f26672a41541f22e1a0abe7080f",
+    "runtime/qualified_cache.py": "0381bb5dd9e5665cacc5f664eeba49be681e73c0f597f52e0634036f3cfb759d",
+    "runtime/checkpoint_solver.py": "f14d9ed293e090c584997262275264fe14182a613ac26486c52175b048659528",
+    "runtime/test_runtime_solver.py": "93d64dc6c9f59a666f7911cda99cd341b20a885d50d9eda51c29f140cef42d29"
+  },
+  "remaining_concrete_blockers_in_bounded_review": [],
+  "limits": [
+    "No physical provider or native physics call was executed by this reviewer/implementer.",
+    "No MPI or physical pilot was executed; root owns actual integration evidence.",
+    "Legacy numerical source, quadrature, tolerances, midpoint arithmetic, selector and archived inputs were not edited.",
+    "No broad suites, remote lookup, Git or provider publication was performed.",
+    "The final hard-pin change was verified through its affected regression; the prior29 methods were not rerun after that narrow guard change.",
+    "This review does not certify continuous error, asymptotic capture, all-bound completeness, NCP scaling, or production admission."
+  ],
+  "physical_native_calls": 0,
+  "physical_transport_runs": 0,
+  "claim_ceilings": {
+    "capture": false,
+    "production": "HOLD",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "continuous_global_supremum_bound": false,
+    "continuous_trajectory_error_bound": false
+  }
+}
