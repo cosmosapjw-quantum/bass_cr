@@ -1,0 +1,60 @@
+{
+  "schema": "BASS_HPC_STRICT_BUILD_V1",
+  "machine": "x86_64",
+  "system": "Linux",
+  "native_arch": true,
+  "source_hashes": {
+    "reference": "90913155c0cfa80962d1cb00bb1b7ec0443170917c25913ac5e359979738ab30",
+    "fortran": "0187e6c0f14060f770c972748ceec1bffe0ea525a0c98e65be86b3266d49405d"
+  },
+  "libraries": {
+    "libreference.so": "8475f99e86d3e7a85f45455f7c94fa89a2b6f4fd924c0f8f26e51bbdc48a296a",
+    "libmoments_f90.so": "0eaa0cf0aa7f595576419c2bdd12c2963b3e1a78a4a67eb223289ed360024f0e"
+  },
+  "builds": [
+    {
+      "name": "reference",
+      "command": [
+        "/usr/bin/g++",
+        "-O3",
+        "-fPIC",
+        "-shared",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-march=native",
+        "-std=c++17",
+        "/workspace/scratch/63ee2321a512/gap_closure_20261001/repo/research/foundation_rebuild/tp2a_analytic_pruning_20260926/code/moment_kernel.cpp",
+        "-o",
+        "/workspace/scratch/63ee2321a512/gap_closure_20261001/hpc_optimization_20261001/build_native_arch/libreference.so"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "fortran",
+      "command": [
+        "/workspace/scratch/63ee2321a512/gap_closure_20261001/hpc_optimization_20261001/toolchain/bin/gfortran-local",
+        "-O3",
+        "-fPIC",
+        "-shared",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-march=native",
+        "-fopenmp",
+        "-fprotect-parens",
+        "-ffree-line-length-none",
+        "-fopt-info-vec-optimized=/workspace/scratch/63ee2321a512/gap_closure_20261001/hpc_optimization_20261001/build_native_arch/VECTORIZATION.txt",
+        "/workspace/scratch/63ee2321a512/gap_closure_20261001/repo/research/gap_closure_20261001/hpc_optimization_20261001/native/moment_kernel_real.f90",
+        "-o",
+        "/workspace/scratch/63ee2321a512/gap_closure_20261001/hpc_optimization_20261001/build_native_arch/libmoments_f90.so"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "compiler_versions": {
+    "fc": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "cxx": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0"
+  },
+  "physical_admission": false,
+  "numerical_parity_status": "NOT_YET_RUN",
+  "old_context_reuse": false
+}

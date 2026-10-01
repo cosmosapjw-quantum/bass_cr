@@ -1,0 +1,174 @@
+{
+  "schema": "BASS_HPC_SYNTHETIC_KERNEL_BENCHMARK_V1",
+  "status": "PASS",
+  "scope": "same artificial 1024-point9x9 moving-target kernel inputs including Python wrapper; not physical B0 or NCP64 scaling",
+  "census": {
+    "affinity_cpus": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "logical_cpus": 9,
+    "physical_cores": 9,
+    "cpu_quota": 8.0,
+    "usable_cpu_budget": 8,
+    "memory_limit_bytes": 8589934592,
+    "memory_available_bytes": 3220418560,
+    "topology_source": "Linux sysfs; missing topology requires explicit logical CPU mode",
+    "cgroup_source": "current accessible cgroup and parents",
+    "cpu_model": "AMD EPYC 9V74 80-Core Processor"
+  },
+  "repeat": 7,
+  "calls_per_repeat": 10,
+  "rows": [
+    {
+      "backend": "reference",
+      "threads": 1,
+      "seconds_median": 0.0059947372999886285,
+      "seconds_samples": [
+        0.006156984400149668,
+        0.005905005200111191,
+        0.005890402300065034,
+        0.005954636999740614,
+        0.0059947372999886285,
+        0.00653277480014367,
+        0.006075649600097677
+      ],
+      "bitwise_reference_equal": true,
+      "speedup_vs_strict_cpp": 1.0
+    },
+    {
+      "backend": "fortran",
+      "threads": 1,
+      "seconds_median": 0.0008754270998906577,
+      "seconds_samples": [
+        0.0008944187000452075,
+        0.0008568070999899647,
+        0.0009825653000007152,
+        0.0008746149000216974,
+        0.0008754270998906577,
+        0.0009210366999468534,
+        0.0008737156000279356
+      ],
+      "bitwise_reference_equal": true,
+      "speedup_vs_strict_cpp": 6.847785841605065
+    },
+    {
+      "backend": "fortran",
+      "threads": 2,
+      "seconds_median": 0.0005517149998922833,
+      "seconds_samples": [
+        0.0005798505000711885,
+        0.0005592263998551062,
+        0.0005517149998922833,
+        0.000523200200041174,
+        0.0005191570002352819,
+        0.0005708589000278152,
+        0.0005151781002496137
+      ],
+      "bitwise_reference_equal": true,
+      "speedup_vs_strict_cpp": 10.865641320535131
+    },
+    {
+      "backend": "fortran",
+      "threads": 4,
+      "seconds_median": 0.0005353204000130063,
+      "seconds_samples": [
+        0.0005423709997558035,
+        0.000533781100239139,
+        0.0005443719997856533,
+        0.0005270579997159075,
+        0.0005353204000130063,
+        0.0005275446997984546,
+        0.0005367485999158816
+      ],
+      "bitwise_reference_equal": true,
+      "speedup_vs_strict_cpp": 11.1984099612923
+    },
+    {
+      "backend": "fortran",
+      "threads": 8,
+      "seconds_median": 0.0003993828002421651,
+      "seconds_samples": [
+        0.0004609976000210736,
+        0.00045412529980239926,
+        0.0005824212999868905,
+        0.0003993828002421651,
+        0.00039223610001499766,
+        0.00038560110006073954,
+        0.00038783849995525086
+      ],
+      "bitwise_reference_equal": true,
+      "speedup_vs_strict_cpp": 15.01000367655725
+    }
+  ],
+  "physical_queries": 0,
+  "result_sha256": "7efbcf559842a1b8305331f464ac0cfe8bf9f4935ed6f03dd01d0f92c17d8073",
+  "floating_acceptance": "bitwise equality to unchanged C++ source compiled with same strict FP policy",
+  "build": {
+    "schema": "BASS_HPC_STRICT_BUILD_V1",
+    "machine": "x86_64",
+    "system": "Linux",
+    "native_arch": true,
+    "source_hashes": {
+      "reference": "90913155c0cfa80962d1cb00bb1b7ec0443170917c25913ac5e359979738ab30",
+      "fortran": "0187e6c0f14060f770c972748ceec1bffe0ea525a0c98e65be86b3266d49405d"
+    },
+    "libraries": {
+      "libreference.so": "8475f99e86d3e7a85f45455f7c94fa89a2b6f4fd924c0f8f26e51bbdc48a296a",
+      "libmoments_f90.so": "0eaa0cf0aa7f595576419c2bdd12c2963b3e1a78a4a67eb223289ed360024f0e"
+    },
+    "builds": [
+      {
+        "name": "reference",
+        "command": [
+          "/usr/bin/g++",
+          "-O3",
+          "-fPIC",
+          "-shared",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-march=native",
+          "-std=c++17",
+          "/workspace/scratch/63ee2321a512/gap_closure_20261001/repo/research/foundation_rebuild/tp2a_analytic_pruning_20260926/code/moment_kernel.cpp",
+          "-o",
+          "/workspace/scratch/63ee2321a512/gap_closure_20261001/hpc_optimization_20261001/build_native_arch/libreference.so"
+        ],
+        "exit_code": 0
+      },
+      {
+        "name": "fortran",
+        "command": [
+          "/workspace/scratch/63ee2321a512/gap_closure_20261001/hpc_optimization_20261001/toolchain/bin/gfortran-local",
+          "-O3",
+          "-fPIC",
+          "-shared",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-march=native",
+          "-fopenmp",
+          "-fprotect-parens",
+          "-ffree-line-length-none",
+          "-fopt-info-vec-optimized=/workspace/scratch/63ee2321a512/gap_closure_20261001/hpc_optimization_20261001/build_native_arch/VECTORIZATION.txt",
+          "/workspace/scratch/63ee2321a512/gap_closure_20261001/repo/research/gap_closure_20261001/hpc_optimization_20261001/native/moment_kernel_real.f90",
+          "-o",
+          "/workspace/scratch/63ee2321a512/gap_closure_20261001/hpc_optimization_20261001/build_native_arch/libmoments_f90.so"
+        ],
+        "exit_code": 0
+      }
+    ],
+    "compiler_versions": {
+      "fc": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+      "cxx": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0"
+    },
+    "physical_admission": false,
+    "numerical_parity_status": "NOT_YET_RUN",
+    "old_context_reuse": false
+  }
+}

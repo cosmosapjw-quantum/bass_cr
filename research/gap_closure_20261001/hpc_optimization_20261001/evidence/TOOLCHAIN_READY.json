@@ -1,0 +1,52 @@
+{
+  "scope": "scratch-only toolchain; synthetic validation only",
+  "gfortran": "GNU Fortran 13.3.0",
+  "openmpi": "Open MPI 5.0.11",
+  "activation": "/workspace/scratch/63ee2321a512/gap_closure_20261001/hpc_optimization_20261001/toolchain/activate.sh",
+  "smokes": {
+    "fortran_openmp": {
+      "compile_flags": [
+        "-O3",
+        "-fopenmp",
+        "-fno-fast-math",
+        "-ffp-contract=off"
+      ],
+      "sum_of_squares_1_through_8": 204.0,
+      "status": "PASS"
+    },
+    "mpi4py_openmpi": {
+      "ranks": 2,
+      "allreduce_rank_plus_one": 3,
+      "status": "PASS",
+      "warning": "UCX getifaddrs Operation not permitted; MPI execution nevertheless completed with both rank outputs"
+    },
+    "cxx_after_scoped_wrapper": {
+      "compiler": "installed g++",
+      "compile_flags": [
+        "-O3",
+        "-fno-fast-math",
+        "-ffp-contract=off"
+      ],
+      "status": "PASS",
+      "exit_code": 0
+    }
+  },
+  "existing_runtime": {
+    "path": "/usr/lib/x86_64-linux-gnu/libgfortran.so.5.0.0",
+    "sha256": "342618ccfebe840446e4ef2b7893f4161b2084845e570f42d68a70bfde58a58d",
+    "package": "libgfortran5 14.2.0-4ubuntu2~24.04.1"
+  },
+  "no_system_install": true,
+  "no_physical_computation": true,
+  "no_ncp_benchmark": true,
+  "fortran_mpi_bindings_available": false,
+  "activation_revision": 2,
+  "fortran_driver": "/workspace/scratch/63ee2321a512/gap_closure_20261001/hpc_optimization_20261001/toolchain/bin/gfortran-local",
+  "environment_incident": {
+    "first_activation": "Global GCC_EXEC_PREFIX/COMPILER_PATH caused installed g++ to fail finding cc1plus",
+    "classification": "RUNTIME_TOOLCHAIN_ENVIRONMENT_ERROR",
+    "failure_log": "../build_portable/reference_build.log",
+    "repair": "Fortran-only subprocess wrapper; activation no longer exports compiler lookup overrides",
+    "verification": "Fresh bash activation then installed g++ compile/run exit0 and Fortran OpenMP sum204 exit0"
+  }
+}

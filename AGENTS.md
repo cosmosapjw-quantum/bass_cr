@@ -39,3 +39,15 @@ performs focused review, necessary in-scope repairs, approved execution and evid
 return; do not make it reimplement delivered features or restart completed work.
 Unchanged prior suites are not rerun. Changed code/environment receives targeted
 checks. Preserve separate scientific, runtime, publication and authority gates.
+
+## Accuracy-preserving HPC development (owner instruction, 2026-10-01)
+
+Apply [docs/HPC_ACCURACY_POLICY_KO.md](docs/HPC_ACCURACY_POLICY_KO.md) to future
+research code. Target the actual admitted topology/RAM of the64-CPU128GB NCP:
+OpenMPI for independent complete query ladders, Fortran/OpenMP and SIMD for
+validated hot kernels, Python for orchestration. Preserve FP64, quadrature,
+tolerances, per-entry accumulation order and source/context identity. No fast
+math, uncontrolled floating reductions, nested BLAS oversubscription or silent
+reuse of old native approval. Measure same-input correctness and performance;
+do not claim64-core scaling from a smaller-host benchmark. Include rank0 and
+memory reserve in resource admission. See the additive R4S HPC implementation.
