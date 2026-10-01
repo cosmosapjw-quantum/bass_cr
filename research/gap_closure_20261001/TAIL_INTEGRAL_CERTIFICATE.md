@@ -1,3 +1,5 @@
+> R4R update (2026-10-01): a named exact conforming reference, isolated gap and same-state selector map are now validated. A gapped O(Z^-2) far-tail bound and a constructive finite bridge bound are provided; the bridge target fails and archived dynamics are not mapped. The original B0 physical tail certificate remains unissued. Current details: `theory_followup_20261001/REPORT_KO.md`. The earlier checkpoint narrative below is preserved as history.
+
 # Infinite-tail certificate status: not issued
 
 G05 remains open. The conditional p=2 integral is C/(v*b)*atan(b/Z), with b=0 limit C/(v*Z). A conditional compact-support integral is also implemented. The exact-rational helper encloses the p=2 expression without large-Z subtraction cancellation.

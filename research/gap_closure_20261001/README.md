@@ -36,8 +36,12 @@ Physical G04 remains Level 0: neither conditional analytic formulas nor the synt
 
 G02 needs 66 new static queries, six verified reused centers and a maximum of 726 raw attempts. G03 is a separate signed ±48 a0 proposal: two queries, maximum 22 raw attempts. Each requires a clean exact Git source pin, fresh gap-specific authorization and successful runtime/resource admission. See the executor README and immutable science/resource contracts. The proposals cannot borrow each other's scope or consume historical authorization. Neither launches automatically when tests run.
 
-G04 additionally needs a certified interpretation of the exact isolated reference model and selector mapping, together with continuous finite-bridge operator/derivative enclosures. More point samples alone do not close that requirement. Stateful window and basis-expansion work remains downstream.
+R4R follow-up now certifies a separately named conforming reference, its isolated spectral gap and the same-state selector mapping. It also proves an O(Z^-2) gapped far-tail bound and a constructive finite bridge bound. The bridge bound is too large to meet the target; archived-to-reference dynamics remain unbounded. No reference is adopted. More point samples alone do not close the remaining requirements. See `theory_followup_20261001/REPORT_KO.md`.
 
-The final archive's `RESEARCH_LOOP_CLOSEOUT.json` supplies the published branch/HEAD/tree, test totals and checkpoint receipts. The separate delivery receipt binds the final ZIP hash to its dual-backup readbacks.
+The R4R final archive's `BASS_CR_R4R_CLOSEOUT_20261001.json` supplies the published branch/HEAD/tree, test totals and checkpoint receipts. The separate delivery receipt binds the final ZIP hash to its dual-backup readbacks.
 
 Claim ceilings remain `capture=false`, `production=HOLD`, `all_bound=OPEN`, `b_grid=NO_GO`, `original_capture_gap_resolved=false`, `continuous_global_supremum_bound=false`, and `continuous_trajectory_error_bound=false`.
+
+## R4R follow-up only
+
+The four new folders `reference_certificate_followup_20261001`, `gapped_tail_followup_20261001`, `bridge_analysis_followup_20261001` and `asymptotic_observable_followup_20261001` contain30 new tests. Run `python research/gap_closure_20261001/theory_followup_20261001/run_followup_validation.py --out new_followup_validation` from a source root. The original114 suites were not repeated in this follow-up.

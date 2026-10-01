@@ -1,3 +1,5 @@
+> R4R update (2026-10-01): a named exact conforming reference, isolated gap and same-state selector map are now validated. A gapped O(Z^-2) far-tail bound and a constructive finite bridge bound are provided; the bridge target fails and archived dynamics are not mapped. The original B0 physical tail certificate remains unissued. Current details: `theory_followup_20261001/REPORT_KO.md`. The earlier checkpoint narrative below is preserved as history.
+
 # Continuous majorant: combined research result
 
 G04 is partially resolved. Two independent routes now have proofs and working reference implementations; the actual B0 continuous majorant remains open at Level 0. The synthetic finite-interval demonstrator reaches Level 2. Nothing reaches physical Level 3.

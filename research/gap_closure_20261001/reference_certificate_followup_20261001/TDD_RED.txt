@@ -1,0 +1,21 @@
+test_exact_reference (unittest.loader._FailedTest.test_exact_reference) ... ERROR
+
+======================================================================
+ERROR: test_exact_reference (unittest.loader._FailedTest.test_exact_reference)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_exact_reference
+Traceback (most recent call last):
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/unittest/loader.py", line 396, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/unittest/loader.py", line 339, in _get_module_from_name
+    __import__(name)
+  File "/workspace/scratch/63ee2321a512/gap_closure_20261001/repo/research/gap_closure_20261001/reference_certificate_followup_20261001/test_exact_reference.py", line 3, in <module>
+    from exact_reference import I, log_enclosure, sqrt_enclosure, repair_coefficients, local_value, gram_matrix, isolated_matrices, projector_bridge, block_certificate
+ModuleNotFoundError: No module named 'exact_reference'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)

@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "work_id": "R4R_GAPPED_TAIL_FOLLOWUP_20261001",
+  "status": "CONDITIONAL_THEOREM_AND_BOUND_ARITHMETIC_COMPLETE",
+  "gap_ids": [
+    "G04",
+    "G05"
+  ],
+  "database_gap_ids": [
+    "REPORT_GAP_04",
+    "REPORT_GAP_05"
+  ],
+  "claim_updates": [
+    {
+      "claim_id": "G04_GAPPED_REFERENCE_INVERSE_SQUARE_POPULATION_TAIL",
+      "text": "For an exact self-adjoint finite reference with an ordered isolated cluster, epsilon=O(R^-2) and derivative modulo scalars O(v R^-3), the fixed isolated spectral population has a limit and an O(Z^-2) certified conditional remainder.",
+      "status": [
+        "DERIVED",
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "scope": "Same exact reference trajectory and isolated projectile block after exact disjoint support; no whole two-center spectral gap assumption.",
+      "assumptions": [
+        "Exact conforming compact support and exact ETF cancellation",
+        "Ordered cluster gap Delta and 2 epsilon(Z)<Delta",
+        "Cluster continued by fixed separator/rank, not zero-energy sign cut",
+        "Same physical state for all projector comparisons"
+      ],
+      "project_evidence": [
+        "GAPPED_TAIL_THEOREM.md",
+        "VALIDATION.json"
+      ],
+      "does_not_imply": [
+        "Archived B0 original-selector limit",
+        "A finite bridge bound within target",
+        "Archived-to-reference dynamics certificate",
+        "An actual native run or adopted new model"
+      ]
+    },
+    {
+      "claim_id": "G05_EXACT_REFERENCE_GAPPED_TAIL_CUTOFF_ARITHMETIC",
+      "text": "For the pinned exact reference gap Delta approximately0.1255525039332252 and a64,b2,q1,N1, the support-only bound first meets5e-6 at integer Z14312; adding the certified same-state projector discrepancy leaves the same integer.",
+      "status": [
+        "DERIVED",
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "scope": "Far-tail remainder benchmark only; the full one-side target is consumed before any finite bridge allowance.",
+      "assumptions": [
+        "Imported exact reference certificate identified by SHA256",
+        "No dynamical state transfer implicit",
+        "Both signed sides need their own actual state/bridge accounting"
+      ],
+      "project_evidence": [
+        "CONDITIONAL_CUTOFF.json",
+        "build_cutoff.py",
+        "test_gapped_tail.py"
+      ],
+      "does_not_imply": [
+        "Full one-side error <=5e-6 from archived \u00b112",
+        "A practicable or authorized Z14312 transport run",
+        "Physical G05 closure"
+      ],
+      "arithmetic_class": "EXACT_RATIONAL_ARITHMETIC"
+    },
+    {
+      "claim_id": "G04_GAP_AND_AMPLITUDE_WITHOUT_DERIVATIVE_COUNTEREXAMPLE",
+      "text": "An exactly solvable resonantly rotating t^-2 perturbation keeps the spectral gap open but has O(t^-1) fixed-cluster population remainder; derivative control is essential for the improved power.",
+      "status": [
+        "DERIVED",
+        "NUMERICALLY_CHECKED"
+      ],
+      "scope": "Two-level exact analytical counterexample supplied by independent bridge review.",
+      "assumptions": [
+        "hbar1",
+        "H0=Delta sigma_z/2",
+        "Interaction-picture asymptotic state (1,i)/sqrt2"
+      ],
+      "project_evidence": [
+        "GAPPED_TAIL_THEOREM.md",
+        "test_gapped_tail.py"
+      ],
+      "does_not_imply": [
+        "Failure of the straight-line Coulomb derivative bound"
+      ]
+    }
+  ],
+  "artifact_paths_relative_to_research_root": [
+    "gapped_tail_followup_20261001/GAPPED_TAIL_THEOREM.md",
+    "gapped_tail_followup_20261001/gapped_tail.py",
+    "gapped_tail_followup_20261001/test_gapped_tail.py",
+    "gapped_tail_followup_20261001/build_cutoff.py",
+    "gapped_tail_followup_20261001/CONDITIONAL_CUTOFF.json",
+    "gapped_tail_followup_20261001/VALIDATION.json"
+  ],
+  "tests": {
+    "command": "python -m unittest -v test_gapped_tail.py",
+    "passed": 9,
+    "failed": 0,
+    "skipped": 0,
+    "exit_code": 0
+  },
+  "new_native_calls": 0,
+  "new_external_physical_runs": 0,
+  "new_synthetic_two_level_ODE_checks": 1,
+  "external_CAS_calls": 0,
+  "authorization_consumed": false,
+  "physical_adoption": false,
+  "physical_gap_status_promotion_authorized": false,
+  "remaining_blockers": [
+    "Finite-bridge numerical bound meeting target",
+    "Archived/reference same-state versus dynamical-state distinction",
+    "No exact-reference model adoption or temporal-gate migration"
+  ],
+  "source_certificate_sha256": "7005abab64da711aad03614e00819548b9a04138f9ef2fdc76cad2a7a305f8f2",
+  "claim_ceilings": {
+    "capture": false,
+    "production": "HOLD",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "original_capture_gap_resolved": false,
+    "continuous_global_supremum_bound": false,
+    "continuous_trajectory_error_bound": false
+  }
+}
