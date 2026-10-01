@@ -85,3 +85,19 @@ evaluator. This does not establish full solver or NCP64 speedup. At z=0 the
 order32/40 spatial comparison remains unresolved for both representations.
 Before derivative/production adoption, bind the new representation separately
 and qualify spatial quadrature. Keep G02 UNRESOLVED and all prior claim ceilings.
+
+R4Y `research/gap_closure_20261001/g02_central_quadrature_20261002/` qualifies
+only the separate R4X candidate's central z=0, b=2, 100keV/u spatial operator.
+Fresh C++/Python and Fortran/Fortran raw/full parity is bitwise exact. The
+original 1e-9 six-raw-block criterion passes at legacy (56,2)->(64,2), with
+independent (48,4), and at inner-phase beta24 order40->48, with independent
+beta12/order40. Both full screens and unprojected identical-s central exact-zero
+controls pass for the selected comparisons. The phase rule preserves the basis,
+outer FEM/triangle panels and radial Gauss measure; it is a separately identified
+quadrature rule, not a certified error bound. Lower-resolution failures remain.
+Thirteen actual static calls used local admitted process/OpenMP parallelism;
+no MPI or NCP64 scaling is claimed. Preserve the immutable run context and
+distinguish the subsequently added read-only analyzer from executed sources.
+Next qualify every derivative-stencil geometry under a fresh context before
+testing the full dS/dt=D+D-dagger identity. G02 remains UNRESOLVED, production
+HOLD, capture false, all_bound OPEN and b_grid NO_GO.

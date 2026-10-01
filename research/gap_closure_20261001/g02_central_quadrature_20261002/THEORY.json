@@ -1,0 +1,418 @@
+{
+  "schema": "BASS_R4Y_CENTRAL_QUADRATURE_THEORY_V1",
+  "scope": "Source-bound direct derivation and read-only R4X/geometry diagnostics; no physical operator, trajectory, or capture calls.",
+  "date_kst": "2026-10-02",
+  "input_sha256": {
+    "recovered_r4u/runtime_inputs/BASIS.npz": "889001a751cd3cae93ad217336587f5fc58db11c0a496843ecc7e7bbd93f83ec",
+    "runs_r4x/candidate_v1/CANDIDATE.npz": "c948eab57638938407d4f34ee8bdae879b926c84fc0b55d91ac2e9105a1cfed5",
+    "runs_r4x/static_v1/MANIFEST.json": "fdf0e87470c809de2fa65795e8aaa193db338052d1f6e6aaa839a894b04ebe2c",
+    "recovered_r4u/source/research/gap_closure_20261001/g02_continuous_basis_20261002/continuous_exact_cross.py": "0b30ddd6a5ffcc7bf79107a9051e18718f4cbbd63d123b56d9f07a7b68bd640e",
+    "recovered_r4u/source/research/foundation_rebuild/reaudit_20260925/repair/aligned_cross.py": "08e886627ba2e58afd20a7e5c9f29535463c80bcde10781ef41444e3848f1e92",
+    "recovered_r4u/source/research/foundation_rebuild/tp2a_analytic_pruning_20260926/code/analytic_moments.py": "fa466593fcf119420d4ad38f94b33c9b2041e4efd7208ba2d8ae06d5ca2ee124",
+    "recovered_r4u/source/research/foundation_rebuild/tp2a_derivative_aware_20260926/phase_panels.py": "c0d77c64ad1b8cb8b76653c50fd55bda03d3ee345c3396594be362f42bfa414d",
+    "runs_r4x/static_v1/attempts/000/RAW.npz": "89a7b0ce3701e04d810f29a1a6ea97b9d328b0a6551022ba6835991c80a40478",
+    "runs_r4x/static_v1/attempts/001/RAW.npz": "89d3719695b774e85dfc273471680ad30fe15f4eb7bd4592c6cce8d0d534c9e6",
+    "runs_r4x/static_v1/attempts/002/RAW.npz": "7b249d1943f34ac679aa0fcfd45c294275a887572cd3329c25e7e2fd5286f63f",
+    "runs_r4x/static_v1/attempts/003/RAW.npz": "dc67715e6d2db008b773ca287f42a496a3b863a8d62cd3ae98910aa46f0bffbe",
+    "runs_r4x/static_v1/attempts/004/RAW.npz": "6fa1ce0104d192d5f887a97e2b4052c2a6bd6068497de022d2c9b7a10c2fc2ba",
+    "runs_r4x/static_v1/attempts/005/RAW.npz": "8ac98ff5a1b387a659d7c48674bad79585a3469fd6a8cd3132f27be3ae519a57",
+    "runs_r4x/static_v1/attempts/006/RAW.npz": "0c476e67cd1becbc3b27998e8dcda669774e6fe3a67d2c27c226afa799cc01ef",
+    "runs_r4x/static_v1/attempts/007/RAW.npz": "0729f5d0020f4edc86b2f457421fdd23446be46eb7a21de279007e2c495efedd"
+  },
+  "atomic_units": {
+    "length": "a0",
+    "energy": "Eh",
+    "time": "ta=hbar/Eh",
+    "physical_wave_vector": "k=m_e*(v_P-v_T)/hbar",
+    "atomic_speed_a0_per_ta": 2.00798106651023
+  },
+  "frames": [
+    {
+      "z_a0": -32.0,
+      "separation_a0": 32.0624390837628,
+      "k_parallel_per_a0": -2.0040706809753552,
+      "k_transverse_per_a0": 0.1252544175609597,
+      "support_lens_max_rho_a0": 61.95966429863868,
+      "support_lens_max_kappa": 7.760721663998576,
+      "support_lens_max_kappa_over_2pi": 1.2351572147857328
+    },
+    {
+      "z_a0": 0.0,
+      "separation_a0": 2.0,
+      "k_parallel_per_a0": 0.0,
+      "k_transverse_per_a0": 2.00798106651023,
+      "support_lens_max_rho_a0": 63.99218702310463,
+      "support_lens_max_kappa": 128.49509994697573,
+      "support_lens_max_kappa_over_2pi": 20.450630319648326
+    }
+  ],
+  "established_from_source": [
+    "geometry_pairs splits all original FEM edges and triangle-boundary intersections.",
+    "Only the longitudinal phase enters phase_split_edges; k_parallel=0 at z=0 returns the original edges.",
+    "Azimuthal integral uses six Bessel moments exactly in angular truncation for the implemented s+p amplitude; radial Bessel dependence remains quadrature-resolved.",
+    "D_pt is identically zero in the stationary target-ket implementation."
+  ],
+  "derived": [
+    {
+      "name": "identical_real_s_mode_central_zero",
+      "scope": "Three diagonal s-s pairs only, equal radial function on the two centers, real continuous compact H1 candidate, straight target-static trajectory, b>0, exact ETF.",
+      "statement": "D_tp[i,i](z=0)=0 for i in [0,1,2].",
+      "reason": "Midpoint overlap is real and even in longitudinal separation; H1 gives a continuous first translation derivative; D_pt=0.",
+      "use": "Independent raw-D absolute error diagnostic, never a projection or replacement of computed entries."
+    },
+    {
+      "name": "inner_arc_phase_budget",
+      "statement": "With a=r0*cos(theta), rho=r0*sin(theta), for every azimuth phi, abs(dPhi/dtheta)<=abs(k)*r0; each theta panel width<=beta/(abs(k)*r0) bounds its phase variation by beta.",
+      "qualification": "Exact mathematical phase-variation bound; not a quadrature error bound or certified floating-point interval bound."
+    }
+  ],
+  "numerically_checked": {
+    "read_only_raw_operator_summaries": [
+      {
+        "attempt": 0,
+        "S_tp_ss_diagonal": [
+          [
+            3.879285011041732e-15,
+            -1.007528508941681e-27
+          ],
+          [
+            -1.4543937185550495e-07,
+            -2.9556627016844007e-20
+          ],
+          [
+            0.00015405550068182077,
+            8.31810642294459e-18
+          ]
+        ],
+        "D_tp_ss_diagonal": [
+          [
+            -8.137626985067474e-16,
+            3.4672177532963746e-28
+          ],
+          [
+            -1.0839116367956805e-07,
+            6.267313045852884e-19
+          ],
+          [
+            7.759344238628085e-05,
+            -7.443581455947842e-17
+          ]
+        ],
+        "D_pt_max_absolute": 0.0
+      },
+      {
+        "attempt": 1,
+        "S_tp_ss_diagonal": [
+          [
+            3.879285011041991e-15,
+            -1.0826273025971055e-27
+          ],
+          [
+            -1.4543937185547732e-07,
+            -2.891390621409764e-20
+          ],
+          [
+            0.00015405550068181792,
+            1.3553329238816068e-17
+          ]
+        ],
+        "D_tp_ss_diagonal": [
+          [
+            -8.137626985068015e-16,
+            -1.4293585946756478e-27
+          ],
+          [
+            -1.0839116367958629e-07,
+            5.647331477334819e-19
+          ],
+          [
+            7.759344238629925e-05,
+            -6.15749657685381e-17
+          ]
+        ],
+        "D_pt_max_absolute": 0.0
+      },
+      {
+        "attempt": 2,
+        "S_tp_ss_diagonal": [
+          [
+            0.10749492805726826,
+            0.0
+          ],
+          [
+            0.005557202650391508,
+            0.0
+          ],
+          [
+            -2.994756547269715e-05,
+            0.0
+          ]
+        ],
+        "D_tp_ss_diagonal": [
+          [
+            0.0,
+            -4.288708075267476e-15
+          ],
+          [
+            0.0,
+            1.3452510807896032e-14
+          ],
+          [
+            0.0,
+            0.0005105691955782264
+          ]
+        ],
+        "D_pt_max_absolute": 0.0
+      },
+      {
+        "attempt": 3,
+        "S_tp_ss_diagonal": [
+          [
+            0.10749492805726825,
+            0.0
+          ],
+          [
+            0.005557202650397828,
+            0.0
+          ],
+          [
+            0.00014501448381915524,
+            0.0
+          ]
+        ],
+        "D_tp_ss_diagonal": [
+          [
+            0.0,
+            -4.373138646015885e-15
+          ],
+          [
+            0.0,
+            -1.285249867180272e-15
+          ],
+          [
+            0.0,
+            0.0001615923529382443
+          ]
+        ],
+        "D_pt_max_absolute": 0.0
+      },
+      {
+        "attempt": 4,
+        "S_tp_ss_diagonal": [
+          [
+            3.879285011038848e-15,
+            -9.150991443915231e-28
+          ],
+          [
+            -1.4543937185535304e-07,
+            -1.524374316435466e-20
+          ],
+          [
+            0.00015405550068177466,
+            8.768212100374375e-18
+          ]
+        ],
+        "D_tp_ss_diagonal": [
+          [
+            -8.137626985094725e-16,
+            -2.333142005624104e-27
+          ],
+          [
+            -1.0839116367983914e-07,
+            -1.841440070180239e-19
+          ],
+          [
+            7.759344238628814e-05,
+            -2.089811950418391e-18
+          ]
+        ],
+        "D_pt_max_absolute": 0.0
+      },
+      {
+        "attempt": 5,
+        "S_tp_ss_diagonal": [
+          [
+            3.879285011039254e-15,
+            -1.211341086458454e-27
+          ],
+          [
+            -1.4543937185534314e-07,
+            -3.187247732270354e-20
+          ],
+          [
+            0.0001540555006817704,
+            1.2254941532497253e-17
+          ]
+        ],
+        "D_tp_ss_diagonal": [
+          [
+            -8.137626985095167e-16,
+            -3.6492312209153814e-27
+          ],
+          [
+            -1.083911636798187e-07,
+            -2.1654507762372602e-19
+          ],
+          [
+            7.759344238630516e-05,
+            1.3153267028910046e-17
+          ]
+        ],
+        "D_pt_max_absolute": 0.0
+      },
+      {
+        "attempt": 6,
+        "S_tp_ss_diagonal": [
+          [
+            0.10749492805726771,
+            0.0
+          ],
+          [
+            0.005557202650391201,
+            0.0
+          ],
+          [
+            -2.9947565472693006e-05,
+            0.0
+          ]
+        ],
+        "D_tp_ss_diagonal": [
+          [
+            0.0,
+            8.985676403941507e-17
+          ],
+          [
+            0.0,
+            1.4120918571592784e-14
+          ],
+          [
+            0.0,
+            0.0005105691955782308
+          ]
+        ],
+        "D_pt_max_absolute": 0.0
+      },
+      {
+        "attempt": 7,
+        "S_tp_ss_diagonal": [
+          [
+            0.10749492805726775,
+            0.0
+          ],
+          [
+            0.005557202650397523,
+            0.0
+          ],
+          [
+            0.00014501448381915388,
+            0.0
+          ]
+        ],
+        "D_tp_ss_diagonal": [
+          [
+            0.0,
+            -6.276949385708331e-17
+          ],
+          [
+            0.0,
+            -6.586629009672489e-16
+          ],
+          [
+            0.0,
+            0.00016159235293825933
+          ]
+        ],
+        "D_pt_max_absolute": 0.0
+      }
+    ],
+    "candidate_central_D_ss_exact_zero_errors_order32": [
+      8.985676403941507e-17,
+      1.4120918571592784e-14,
+      0.0005105691955782308
+    ],
+    "candidate_central_D_ss_exact_zero_errors_order40": [
+      6.276949385708331e-17,
+      6.586629009672489e-16,
+      0.00016159235293825933
+    ],
+    "geometry_dry_run_order40": {
+      "z_minus32_max_inner_kappa_range": 2.360331589154781,
+      "z_zero_max_inner_kappa_range": 128.49405683401102,
+      "z_zero_maximum_example": {
+        "r0_a0": 63.99897787163213,
+        "r1_panel_a0": [
+          61.99897787163213,
+          64.0
+        ],
+        "theta_width": 1.555681570010309,
+        "arc_phase_bound": 199.91867193510296
+      },
+      "z_zero_uniform_subdivision_cost": [
+        {
+          "subdivisions": 1,
+          "radial_nodes": 720000,
+          "max_inner_kappa_range": 128.49405683401102
+        },
+        {
+          "subdivisions": 2,
+          "radial_nodes": 2505600,
+          "max_inner_kappa_range": 122.92708908848941
+        },
+        {
+          "subdivisions": 4,
+          "radial_nodes": 9409600,
+          "max_inner_kappa_range": 100.73662676308467
+        }
+      ],
+      "z_zero_inner_arc_only_cost": [
+        {
+          "phase_budget": 24,
+          "radial_nodes": 1541560
+        },
+        {
+          "phase_budget": 12,
+          "radial_nodes": 2563720
+        }
+      ],
+      "cost_meaning": "Counts from order40 outer Gauss nodes and each inner FEM panel; no operator evaluation. Arc panel cost holds original outer edges unchanged. Endpoint geometry is FP64, so counts near exact integer ceil boundaries are implementation-specific."
+    }
+  },
+  "hypotheses": [
+    {
+      "statement": "Dominant z=0 quadrature failure comes from underresolved transverse/Bessel oscillation in wide far-radius inner panels with positive-energy s-mode support.",
+      "strength": "Strong source and geometry support, with exact-zero residual identifying an actual error; panel intervention must establish causal numerical correction."
+    }
+  ],
+  "proposed_targeted_rule": {
+    "original_FEM_payload": "unchanged",
+    "original_outer_geometry_edges": "unchanged initially",
+    "inner_FEM_edges": "retained exactly",
+    "extra_inner_edges": "For every inner panel [l,h] at fixed outer r0, map endpoints to theta; split theta into ceil(abs(k)*r0*Delta_theta/beta) equal spans; convert inner split points back to r1=sqrt(r0^2+R^2-2*R*r0*cos(theta)); apply unchanged r1 Gauss-Legendre rule on each subpanel.",
+    "origin_handling": "Gauss nodes exclude endpoints; preserve original l,h bytes, clip trigonometric arguments only for FP64 roundoff, reject invalid triangles. A cancellation-resistant conversion sqrt((r0-R)^2+4*R*r0*sin(theta/2)^2) is algebraically equivalent for new interior endpoints.",
+    "future_option": "Direct theta quadrature gives volume Jacobian r0^2*sin(theta); separate algorithm/context, not required for endpoint-only phase panels.",
+    "validation_required": [
+      "Existing absolute/relative operator delta screens at independently varied order and phase budget.",
+      "Raw identical s-s D_tp diagonal central zero controls with the same absolute tolerance.",
+      "Basis/native/hash/resource identity fixed and node-count cap before operator calls.",
+      "Same-center raw residuals, cross shape/finite checks, and geometric volume screen."
+    ],
+    "not_proven": [
+      "Global or continuous quadrature error bound",
+      "All central or noncentral derivative entries",
+      "Production qualification",
+      "Outer-variable quadrature convergence from inner phase panels alone"
+    ]
+  },
+  "execution": {
+    "new_physical_operator_calls": 0,
+    "new_trajectory_calls": 0,
+    "new_capture_calls": 0
+  },
+  "claim_ceiling": {
+    "G02": "UNRESOLVED",
+    "production_admission": "HOLD",
+    "capture_execution_allowed": false,
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO"
+  }
+}
