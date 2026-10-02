@@ -1,0 +1,218 @@
+{
+  "schema": "BASS_R4Z_DERIVATIVE_THEORY_V1",
+  "status": "DERIVED_DESIGN_WITH_EXACT_STENCIL_CHECKS_NO_R4Z_PHYSICS_BY_THIS_DOCUMENT",
+  "date_KST": "2026-10-02",
+  "contract_sha256": "bf6841dc3415619daf11e1164fcf30f68ad80681d24bc3e850182627b1df2111",
+  "basis_identity": "17c0215979675e40db364207ce138c5efb58cb24c22824e418f5abe3cfeb49ef",
+  "evidence_classes": {
+    "ETF_and_metric_identity": "DERIVED_FROM_PINNED_BASIS_DEFINITION",
+    "midpoint_formula": "DERIVED_NOT_NEW_IMPLEMENTATION",
+    "R8_weights": "EXACT_RATIONAL_ARITHMETIC",
+    "same_center_R_partition_byte_variation": "NUMERICALLY_CHECKED_SAVED_R4X_ARRAYS_ONLY",
+    "shell_contact_ordering": "EXACT_RATIONAL_ARITHMETIC_ON_SAVED_FP64_EDGES",
+    "R4Z_derivative_result": "NOT_ASSESSED_IN_THIS_DESIGN_DOCUMENT"
+  },
+  "units": {
+    "S": "dimensionless",
+    "D_and_Sdot": "ta^-1",
+    "h_and_z": "a0",
+    "time": "ta=hbar/Eh",
+    "velocity": "a0/ta",
+    "wavevector": "a0^-1",
+    "physical_wavevector_definition": "k=m_e*(vP-vT)/hbar",
+    "geometric_gradient_prefactor": "(vP-vT)/2, not k/2 in physical units"
+  },
+  "identities": {
+    "basis": "chi_C=exp[i*m_e/hbar*(v_C.r-v_C^2*t/2)]*phi_C(r-A_C-v_C*t)",
+    "fixed_lab_derivative": "dot_chi_C=phase*(-v_C.grad(phi_C)-i*m_e*v_C^2*phi_C/(2*hbar))",
+    "metric_derivative": "Sdot=D+Ddagger",
+    "midpoint_phase": "theta0=(m_e/hbar)*(vP-vT).(AP+AT)/2, constant for fixed velocities",
+    "geometric_derivative": "Sdot_TP=exp(i*theta0)/2*integral exp(i*k.x)*(vP-vT).[(grad phiT*)phiP-phiT*(grad phiP)] dx",
+    "stationary_target": "D_PT=0, Sdot_TP=D_TP",
+    "same_center": "S_CC independent of t; D_CC+D_CC^dagger=0 under H1 zero trace assumptions"
+  },
+  "regularity": {
+    "assumptions": [
+      "fixed straight-line velocities",
+      "time-independent finite radial basis",
+      "continuous shared endpoint radial representation",
+      "u(0)=u(L)=0",
+      "zero extension in H1(R3)",
+      "full-space inner product"
+    ],
+    "gradient_shell_jumps_allowed": true,
+    "distributional_value_jump_terms_absent_for_candidate": true,
+    "H2_or_strong_Coulomb_action_asserted": false,
+    "C9_from_H1_asserted": false,
+    "uniform_order8_bound_asserted": false
+  },
+  "stencil": {
+    "sample_only": true,
+    "uses_D_to_construct_or_fit": false,
+    "R2": "F(h)=v*(S(+h)-S(-h))/(2*h)",
+    "h_factors_coarse_to_fine": [
+      "1",
+      "1/2",
+      "1/4",
+      "1/8"
+    ],
+    "R8_weights_exact": [
+      "-1/2835",
+      "4/135",
+      "-64/135",
+      "4096/2835"
+    ],
+    "moment_constraints": "sum_j w_j*4^(-j*k), k=0..4",
+    "moments_exact": [
+      "1",
+      "0",
+      "0",
+      "0",
+      "-1/4096"
+    ],
+    "exact_for_polynomial_degree_up_to": 8,
+    "weight_L1_exact": "1105/567",
+    "sample_coefficient_L1": "473*v/(35*H)",
+    "sample_coefficient_L1_times_H_over_v_exact": "473/35",
+    "sample_coefficient_L1_by_window": [
+      {
+        "H_a0": 0.4,
+        "coefficient_ta_inverse": 67.84107460423847
+      },
+      {
+        "H_a0": 0.2,
+        "coefficient_ta_inverse": 135.68214920847694
+      },
+      {
+        "H_a0": 0.1,
+        "coefficient_ta_inverse": 271.3642984169539
+      }
+    ],
+    "conditional_smooth_expansion": "If the relevant ninth-derivative Taylor remainder is controlled: R8=v*Sprime(0)-v*H^8*S9(0)/(4096*9!)+o(H^8). Such regularity is not established for this candidate.",
+    "sensitivity_scope": "A norm bound requires actual independent sample-error bounds. Epsilon times saved sample norms is only a sensitivity surrogate."
+  },
+  "fixed_validation": {
+    "h_ladder_a0": [
+      0.4,
+      0.2,
+      0.1,
+      0.05,
+      0.025,
+      0.0125
+    ],
+    "windows": [
+      [
+        0.4,
+        0.2,
+        0.1,
+        0.05
+      ],
+      [
+        0.2,
+        0.1,
+        0.05,
+        0.025
+      ],
+      [
+        0.1,
+        0.05,
+        0.025,
+        0.0125
+      ]
+    ],
+    "accepted_windows_indices": [
+      1,
+      2
+    ],
+    "space_rules": [
+      {
+        "order": 40,
+        "beta": 24
+      },
+      {
+        "order": 48,
+        "beta": 24
+      },
+      {
+        "order": 48,
+        "beta": 12
+      }
+    ],
+    "absolute_target_ta_inverse": 1e-12,
+    "norms": [
+      "spectral",
+      "Frobenius",
+      "elementwise_max_absolute"
+    ],
+    "raw_R2_first4_reported_unchanged": true,
+    "raw_R2_all6_reported_unchanged": true,
+    "original_R2_thresholds_changed": false,
+    "raw_D_projected": false,
+    "original_eight_center_gate_replaced": false,
+    "R8_is_certified_operator_bound": false
+  },
+  "saved_same_center_observation": {
+    "source_z_a0": [
+      -32.0,
+      0.0
+    ],
+    "source_order": 40,
+    "representation": "R4X_CONTINUOUS_CANDIDATE",
+    "S_TT_max_absolute_difference": 1.1102230246251565e-16,
+    "interpretation": "Same-center overlap is theoretically constant but the R-split quadrature produces different FP64 bytes. This is not a bound on close shifted samples.",
+    "same_center_algorithm_changed_in_R4Z": false
+  },
+  "shell_contacts": {
+    "method": "Fraction.from_float applied to every saved edge; unique union of abs(ei-ej) and ei+ej",
+    "central_R_a0": "2",
+    "central_exact_contact_exists": true,
+    "near_central_contacts_exact": [
+      "72057594037927927/36028797018963968",
+      "2",
+      "9187343239835813/4503599627370496",
+      "574208952489739/281474976710656"
+    ],
+    "next_strictly_greater_contact_exact": "9187343239835813/4503599627370496",
+    "max_stencil_R_squared_exact_from_binary_z04": "337499295804763797295634142157865/81129638414606681695789005144064",
+    "max_stencil_R_display": 2.039607805437114,
+    "max_stencil_R_squared_less_than_next_contact_squared_exact": true,
+    "inference_limit": "No additional shell-contact radius above R=2 is crossed. This does not prove central C9 or an order8 remainder bound.",
+    "future_offcentral_diagnostic": {
+      "z_a0": -32.0,
+      "R_a0": 32.0624390837628,
+      "nearest_contact_display": 32.08,
+      "distance_display": 0.01756091623720124,
+      "executed_in_R4Z": false
+    }
+  },
+  "physical_operator_calls_by_this_theory_task": 0,
+  "pinned_files_modified": false,
+  "new_implementation_claim": false,
+  "claim_ceiling": {
+    "G02": "UNRESOLVED",
+    "production": "HOLD",
+    "capture": false,
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "original_eight_center_gate": "UNCHANGED_UNRESOLVED",
+    "rigorous_operator_error_bound": false
+  },
+  "source_sha256": {
+    "recovered_r4u/source/research/gap_closure_20261001/g02_derivative_validation_20261002/TASK_CONTRACT.json": "bf6841dc3415619daf11e1164fcf30f68ad80681d24bc3e850182627b1df2111",
+    "recovered_r4u/source/research/gap_closure_20261001/g02_derivative_validation_20261002/DERIVATION_KO.md": "4007e65486061fb3118dbe80188cf3df2776808ef9ffe3d30c986ace91bdd0c0",
+    "recovered_r4u/source/research/gap_closure_20261001/static_validation_20261001/static_validation.py": "3e1d5ef9ad870299a8535377120d63a19320bbf8be98e9db7e2caeba86a3b30e",
+    "recovered_r4u/source/research/gap_closure_20261001/production_validation_20261001/richardson_diagnostic.py": "00ad154246440a841beae6225bbc1ff59785e6b845c5cdb4ba85d68b25ce9006",
+    "recovered_r4u/source/research/gap_closure_20261001/g02_stable_derivative_20261001/DERIVATION_KO.md": "17a24ee0012d9300314fe878cc36dd8f942307b3cec4c6c2698e81093aec5e29",
+    "recovered_r4u/source/research/gap_closure_20261001/g02_continuous_basis_20261002/basis_representation.py": "656d51b7eaf478e4148e824d8dcd8b531b91ba7b77085567b89b42b238ff27e3",
+    "recovered_r4u/source/research/gap_closure_20261001/g02_continuous_basis_20261002/continuous_full_operator.py": "5cfe910828693dd665cf1305a70d68a110aa1a93ea7b2f1372565f4620133ebd",
+    "recovered_r4u/source/research/gap_closure_20261001/g02_continuous_basis_20261002/continuous_exact_cross.py": "0b30ddd6a5ffcc7bf79107a9051e18718f4cbbd63d123b56d9f07a7b68bd640e",
+    "recovered_r4u/source/research/gap_closure_20261001/g02_central_quadrature_20261002/phase_pairs.py": "889323726fb589a387c5a17e46e3b8008ee750c10d5b0900694336e21d9e97d0",
+    "recovered_r4u/source/research/gap_closure_20261001/g02_central_quadrature_20261002/DERIVATION_KO.md": "00717a614eb15f370863dd43ac9e80c6df70343804b04aebcc71faa4277e84a7",
+    "recovered_r4u/source/research/foundation_rebuild/src/bass_foundations/two_center.py": "aebd3a5bb78857ccaf6957e4194077ac9b6d500e0417194aa3d9a632a2db2570",
+    "runs_r4x/candidate_v1/CANDIDATE.npz": "c948eab57638938407d4f34ee8bdae879b926c84fc0b55d91ac2e9105a1cfed5",
+    "runs_r4x/candidate_v1/CANDIDATE.json": "77df01c595ff1ac14236ff4537d7be7dd78d9642c498433d3b6e60c8c38ef35f",
+    "runs_r4x/static_v1/attempts/005/FULL.npz": "691e69b069d8cb42d488c0879168f61fdf57a232069ead13249a1e14109bbe86",
+    "runs_r4x/static_v1/attempts/007/FULL.npz": "1e198264c5c6e2e86b43735ecbe1d8a01ff4fa9d3f70e0e09a2dff640d7c29f8",
+    "runs_r4y/CENTRAL_RESULT.json": "28f680af2507f7ec7b6040880b2bd42a16783903fd44507770250dec6d3d5c15"
+  }
+}

@@ -101,3 +101,20 @@ distinguish the subsequently added read-only analyzer from executed sources.
 Next qualify every derivative-stencil geometry under a fresh context before
 testing the full dS/dt=D+D-dagger identity. G02 remains UNRESOLVED, production
 HOLD, capture false, all_bound OPEN and b_grid NO_GO.
+
+R4Z `research/gap_closure_20261001/g02_derivative_validation_20261002/`
+checks the separate candidate's central full metric derivative using S-only
+fixed Richardson weights. All13 shifted geometries pass the original six-block
+spatial criterion with order40/48 beta24 and independent order48 beta12.
+The two preselected fine windows pass all three absolute residual norms at1e-12,
+window agreement and cross-rule agreement. The coarse window and original R2
+failures remain recorded; this does not establish physical C9 regularity, a
+certified order8 bound, the original eight-center gate or full G02 closure.
+RUNTIME_INTERRUPTION_RECOVERY retains25 completed payloads and three interrupted
+attempts; a distinct context adds15 missing payloads, for40 completed results
+and43 charged attempts. Do not resume the old started batch in place or fabricate
+its terminal marker. The source-pinned recovery adapter changes collection and
+reporting only; original numerical functions, inputs and native binaries remain.
+Use FINAL_STATE.json and the report for current state; RUN_STATE.json preserves
+the original pre-execution record. G02 remains UNRESOLVED, production HOLD,
+capture false, all_bound OPEN and b_grid NO_GO; no MPI/NCP64 scaling is claimed.
