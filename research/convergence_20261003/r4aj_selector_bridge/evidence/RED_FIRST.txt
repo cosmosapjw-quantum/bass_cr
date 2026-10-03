@@ -1,0 +1,25 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+____________ test_rank_one_and_five_cannot_have_small_mapping_error ____________
+
+    def test_rank_one_and_five_cannot_have_small_mapping_error():
+>       assert exact_projector_rank_distance(1,5,9)==F(1)
+E       assert None == Fraction(1, 1)
+E        +  where None = exact_projector_rank_distance(1, 5, 9)
+E        +  and   Fraction(1, 1) = F(1)
+
+tests/test_first.py:5: AssertionError
+_____________ test_minmax_gap_for_exact_saved_matrix_with_coupling _____________
+
+    def test_minmax_gap_for_exact_saved_matrix_with_coupling():
+        out=stored_ground_gap([[1,0],[0,1]],[[-2,F(1,10)],[F(1,10),1]], F(-1),F(1,2))
+>       assert out['verified'] is True
+E       assert False is True
+
+tests/test_first.py:9: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_first.py::test_rank_one_and_five_cannot_have_small_mapping_error - assert None == Fraction(1, 1)
+ +  where None = exact_projector_rank_distance(1, 5, 9)
+ +  and   Fraction(1, 1) = F(1)
+FAILED tests/test_first.py::test_minmax_gap_for_exact_saved_matrix_with_coupling - assert False is True
+2 failed in 0.07s

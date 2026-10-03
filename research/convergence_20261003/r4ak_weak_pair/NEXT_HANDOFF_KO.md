@@ -1,0 +1,11 @@
+# 다음 원자 연구: R4AL full-frame continuous weak tube
+
+R4AK에서 실제finitecandidate의T1s/P1sGram은|z|≥12a0,b2에서λmin≥0.954294089581로제한됐다. 새exactτ(6)적분1개,oldG/T재계산0이다. gap-free weakGalerkin residual의exactpolynomial/Bernsteinprovider와조건부uniformremainder경로를구현했다. 71새시험+64독립유리수/기호조건을확인했다. 실제full18bridge는미완료다.
+
+다음한localnode=R4AL_FULL_FRAME_CONTINUOUS_S_K_TUBE_ENCLOSURE. 원데이터를갖는full18 weakS,K=H−iħD,Sdot의연속함수정의와현inputidentity를회수하고,가장좁은registeredtimecell에서fullmetric하한및절대remainder를만드는경로를완성한다. 정확한polynomial모델과실제원자연산자의차이를분리하고,미확보bound를0으로입력하지말라. 실제newcross평가최초cap0,필요하면source/input/native/resource/attempt를새계약에고정한뒤최소batch만허용한다.
+
+측정은P1s,내부공진쌍은T1s/P1s다. 이를pairtotalpopulation으로바꾸지않는다. storedgap0.373Eh를actualbridgegap으로,이번pairGram하한을full18하한으로쓰지말라. physicalbridge에는actualinitialstate/selector/embedding/공통목표배분이추가로필요하다. coarseweakKbound20.2Eh로5e−6목표를닫았다고하지말라.
+
+큰runtime노드는R4AH_m64그대로다. R4Z–R4AJ완료science/test,central,M9,oldR8,m64memorypreflight를반복하지않는다. Bianchi물리는rei_bianchi전용이며본스레드는원자source데이터에집중한다.
+
+게시기준HEAD333d6940adc2eaa3a44d6b22f7418fc7416b94ca/treeb623d20fb442eda92ae6cb312b9e8aa49ee15b26는최종receipt와actualref를다시확인한다. 원146patch는이미게시된2target때문에그대로적용하면안된다. 새pendingpatch는그2개와현재게시된6개를제외한다. 원격R1과restore검증을구분한다.

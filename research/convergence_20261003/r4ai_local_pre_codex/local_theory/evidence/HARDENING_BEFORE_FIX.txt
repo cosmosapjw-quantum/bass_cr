@@ -1,0 +1,202 @@
+FF.FFF..FFF..........                                                    [100%]
+=================================== FAILURES ===================================
+__________________ test_bad_interval_is_contract_error[None] ___________________
+
+bad = None
+
+    @pytest.mark.parametrize('bad',[None,1,{},'12'])
+    def test_bad_interval_is_contract_error(bad):
+>       with pytest.raises(ContractError):interval(bad)
+                                          ^^^^^^^^^^^^^
+
+tests/test_hardening.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+pair = None
+
+    def interval(pair) -> tuple[F,F]:
+>       if len(pair) != 2:
+           ^^^^^^^^^
+E       TypeError: object of type 'NoneType' has no len()
+
+cr_reion/core.py:31: TypeError
+____________________ test_bad_interval_is_contract_error[1] ____________________
+
+bad = 1
+
+    @pytest.mark.parametrize('bad',[None,1,{},'12'])
+    def test_bad_interval_is_contract_error(bad):
+>       with pytest.raises(ContractError):interval(bad)
+                                          ^^^^^^^^^^^^^
+
+tests/test_hardening.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+pair = 1
+
+    def interval(pair) -> tuple[F,F]:
+>       if len(pair) != 2:
+           ^^^^^^^^^
+E       TypeError: object of type 'int' has no len()
+
+cr_reion/core.py:31: TypeError
+___________________ test_bad_interval_is_contract_error[12] ____________________
+
+bad = '12'
+
+    @pytest.mark.parametrize('bad',[None,1,{},'12'])
+    def test_bad_interval_is_contract_error(bad):
+>       with pytest.raises(ContractError):interval(bad)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'cr_reion.core.ContractError'>
+
+tests/test_hardening.py:13: Failed
+______________________ test_malformed_source_array[None] _______________________
+
+bad = None
+
+    @pytest.mark.parametrize('bad',[None,2,{'not':'list'},'0'])
+    def test_malformed_source_array(bad):
+        s,_=objects();s['energies']=bad;b=json.dumps(s).encode()
+>       with pytest.raises(ContractError):SourceModel.load(b,hashlib.sha256(b).hexdigest())
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_hardening.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = <class 'cr_reion.provider.SourceModel'>
+data = b'{"schema": "CX_LINEAR_MODEL_V1", "source_id": "SYNTHETIC_NOT_ATOMIC", "profile": "MODEL", "reaction": "p_CR+H_g(1s)-...m^2", "interpolation": "PIECEWISE_LINEAR_MODEL_FAMILY", "energies": null, "sigma_envelopes": [["1", "2"], ["1", "2"]]}'
+sha256 = 'ba10b73a46b4737757cf541ff46ff24dc5816d1bf8858dfa0dccb9cb9d9890a5'
+
+    @classmethod
+    def load(cls,data:bytes,sha256:str):
+        o=pinned(data,sha256)
+        required={'schema','source_id','profile','reaction','energy_kind','sigma_unit',
+                  'interpolation','energies','sigma_envelopes'}
+        if set(o)!=required: raise ContractError('source schema keys mismatch')
+        fixed={'schema':'CX_LINEAR_MODEL_V1','profile':'MODEL','reaction':REACTION,
+               'energy_kind':'E_CM_J','sigma_unit':'m^2',
+               'interpolation':'PIECEWISE_LINEAR_MODEL_FAMILY'}
+        if any(o[k]!=v for k,v in fixed.items()):
+            raise ContractError('CHANNEL_ENERGY_PROFILE_OR_MODEL_MISMATCH')
+        if not isinstance(o['source_id'],str) or not o['source_id'].strip():
+            raise ContractError('source_id required')
+>       e=tuple(map(nonnegative,o['energies']))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: 'NoneType' object is not iterable
+
+cr_reion/provider.py:57: TypeError
+________________________ test_malformed_source_array[2] ________________________
+
+bad = 2
+
+    @pytest.mark.parametrize('bad',[None,2,{'not':'list'},'0'])
+    def test_malformed_source_array(bad):
+        s,_=objects();s['energies']=bad;b=json.dumps(s).encode()
+>       with pytest.raises(ContractError):SourceModel.load(b,hashlib.sha256(b).hexdigest())
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_hardening.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = <class 'cr_reion.provider.SourceModel'>
+data = b'{"schema": "CX_LINEAR_MODEL_V1", "source_id": "SYNTHETIC_NOT_ATOMIC", "profile": "MODEL", "reaction": "p_CR+H_g(1s)-...: "m^2", "interpolation": "PIECEWISE_LINEAR_MODEL_FAMILY", "energies": 2, "sigma_envelopes": [["1", "2"], ["1", "2"]]}'
+sha256 = 'b2b3c5a2b9332275fcdb94eaf7684a6d1d88f2de74250e2ec776f7c0304de4f8'
+
+    @classmethod
+    def load(cls,data:bytes,sha256:str):
+        o=pinned(data,sha256)
+        required={'schema','source_id','profile','reaction','energy_kind','sigma_unit',
+                  'interpolation','energies','sigma_envelopes'}
+        if set(o)!=required: raise ContractError('source schema keys mismatch')
+        fixed={'schema':'CX_LINEAR_MODEL_V1','profile':'MODEL','reaction':REACTION,
+               'energy_kind':'E_CM_J','sigma_unit':'m^2',
+               'interpolation':'PIECEWISE_LINEAR_MODEL_FAMILY'}
+        if any(o[k]!=v for k,v in fixed.items()):
+            raise ContractError('CHANNEL_ENERGY_PROFILE_OR_MODEL_MISMATCH')
+        if not isinstance(o['source_id'],str) or not o['source_id'].strip():
+            raise ContractError('source_id required')
+>       e=tuple(map(nonnegative,o['energies']))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: 'int' object is not iterable
+
+cr_reion/provider.py:57: TypeError
+___________________ test_malformed_distribution_entry[bad0] ____________________
+
+bad = [None]
+
+    @pytest.mark.parametrize('bad',[[None],[2],[{'velocity_m_s':None,'probability':'1'}]])
+    def test_malformed_distribution_entry(bad):
+>       with pytest.raises(ContractError):distribution(bad)
+                                          ^^^^^^^^^^^^^^^^^
+
+tests/test_hardening.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+items = [None]
+
+    def distribution(items) -> tuple:
+        if not isinstance(items,list) or not items: raise ContractError('empty distribution')
+        out=[]
+        for a in items:
+>           if set(a)!={'velocity_m_s','probability'} or len(a['velocity_m_s'])!=3:
+               ^^^^^^
+E           TypeError: 'NoneType' object is not iterable
+
+cr_reion/provider.py:75: TypeError
+___________________ test_malformed_distribution_entry[bad1] ____________________
+
+bad = [2]
+
+    @pytest.mark.parametrize('bad',[[None],[2],[{'velocity_m_s':None,'probability':'1'}]])
+    def test_malformed_distribution_entry(bad):
+>       with pytest.raises(ContractError):distribution(bad)
+                                          ^^^^^^^^^^^^^^^^^
+
+tests/test_hardening.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+items = [2]
+
+    def distribution(items) -> tuple:
+        if not isinstance(items,list) or not items: raise ContractError('empty distribution')
+        out=[]
+        for a in items:
+>           if set(a)!={'velocity_m_s','probability'} or len(a['velocity_m_s'])!=3:
+               ^^^^^^
+E           TypeError: 'int' object is not iterable
+
+cr_reion/provider.py:75: TypeError
+___________________ test_malformed_distribution_entry[bad2] ____________________
+
+bad = [{'probability': '1', 'velocity_m_s': None}]
+
+    @pytest.mark.parametrize('bad',[[None],[2],[{'velocity_m_s':None,'probability':'1'}]])
+    def test_malformed_distribution_entry(bad):
+>       with pytest.raises(ContractError):distribution(bad)
+                                          ^^^^^^^^^^^^^^^^^
+
+tests/test_hardening.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+items = [{'probability': '1', 'velocity_m_s': None}]
+
+    def distribution(items) -> tuple:
+        if not isinstance(items,list) or not items: raise ContractError('empty distribution')
+        out=[]
+        for a in items:
+>           if set(a)!={'velocity_m_s','probability'} or len(a['velocity_m_s'])!=3:
+                                                         ^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: object of type 'NoneType' has no len()
+
+cr_reion/provider.py:75: TypeError
+=========================== short test summary info ============================
+FAILED tests/test_hardening.py::test_bad_interval_is_contract_error[None] - TypeError: object of type 'NoneType' has no len()
+FAILED tests/test_hardening.py::test_bad_interval_is_contract_error[1] - TypeError: object of type 'int' has no len()
+FAILED tests/test_hardening.py::test_bad_interval_is_contract_error[12] - Failed: DID NOT RAISE <class 'cr_reion.core.ContractError'>
+FAILED tests/test_hardening.py::test_malformed_source_array[None] - TypeError: 'NoneType' object is not iterable
+FAILED tests/test_hardening.py::test_malformed_source_array[2] - TypeError: 'int' object is not iterable
+FAILED tests/test_hardening.py::test_malformed_distribution_entry[bad0] - TypeError: 'NoneType' object is not iterable
+FAILED tests/test_hardening.py::test_malformed_distribution_entry[bad1] - TypeError: 'int' object is not iterable
+FAILED tests/test_hardening.py::test_malformed_distribution_entry[bad2] - TypeError: object of type 'NoneType' has no len()
+8 failed, 13 passed in 1.29s

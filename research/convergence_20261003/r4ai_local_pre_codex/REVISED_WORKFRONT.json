@@ -1,0 +1,180 @@
+{
+  "schema": "BASS_CR_REVISED_WORKFRONT_R4AI_V1",
+  "date": "2026-10-03",
+  "scope": "CR_REION_1S_V1",
+  "all_possible_local_work_finished": false,
+  "scientific_program_complete": false,
+  "post_gap_successor_activation": false,
+  "previous_DAG": "audit/R4AH_DAG_SNAPSHOT.json",
+  "original_requirements": "audit/ORIGINAL_47_REQUIREMENT_CROSSWALK.json",
+  "eligibility_semantics": "Local derivation/reference work may proceed with symbolic premises; physical use still requires original scientific predecessor gates. Reference completion does not close those gates.",
+  "completed_here": [
+    {
+      "id": "L_DB_DAG_AUDIT",
+      "status": "CATALOG_AND_REQUIREMENT_CROSSWALK_COMPLETE"
+    },
+    {
+      "id": "L_C0_SEMANTICS",
+      "status": "H5_REPORT_DP_MEASURE_AND_TYPED_MODEL_CONTRACT_COMPLETE_ACTUAL_BINDING_OPEN"
+    },
+    {
+      "id": "L_B1_DISCRETE",
+      "status": "EXACT_MODEL_FAMILY_REFERENCE_IMPLEMENTED_TESTED"
+    },
+    {
+      "id": "L_B1_MAXWELL",
+      "status": "ANALYTIC_REDUCTION_AND_FLOATING_CORE_REFERENCE_IMPLEMENTED_NOT_CERTIFIED_CONTINUUM"
+    },
+    {
+      "id": "L_B2_REFERENCE",
+      "status": "LOCAL_STOICHIOMETRY_AND_BIANCHI_I_REFERENCE_IMPLEMENTED_NOT_ACTUAL_HOST"
+    },
+    {
+      "id": "L_METRIC_BOUND",
+      "status": "EXISTING_THEOREM_SPECIALIZATION_IMPLEMENTED_WITH_CONDITIONAL_INPUTS"
+    },
+    {
+      "id": "L_G11_CHAIN",
+      "status": "ORDERED_COMMON_OBSERVABLE_REFERENCE_IMPLEMENTED_PHYSICAL_LINKS_MISSING"
+    },
+    {
+      "id": "L_BRIDGE_IBP",
+      "status": "CONDITIONAL_NONSTATIONARY_PHASE_BOUND_IMPLEMENTED_NO_PHYSICAL_AMPLITUDE_BOUNDS"
+    },
+    {
+      "id": "L_MULTI_BATCH",
+      "status": "READ_ONLY_SAME_NATIVE_COLLECTOR_IMPLEMENTED_FIXTURE_TESTED_ACTUAL_RETURNS_PENDING"
+    }
+  ],
+  "pending_local": [
+    {
+      "id": "LOCAL_BRIDGE_SELECTOR_AND_PHASE_GAP_DISCRIMINATOR",
+      "priority": 1,
+      "depends_on": [
+        "L_DB_DAG_AUDIT"
+      ],
+      "question": "Bind current candidate/selected1s to old fixed-J/reference and identify continuous phase-gap and amplitude derivative bounds; avoid false inherited invariant projector.",
+      "deliverable": "Exact input/basis/selector comparison, actual gap/derivative bound or explicit obstruction and minimum alternative.",
+      "cannot_be_replaced_by": "rerunning m64 or generic audit"
+    },
+    {
+      "id": "LOCAL_CONTINUOUS_RATE_ENVELOPE",
+      "priority": 2,
+      "depends_on": [
+        "L_B1_MAXWELL"
+      ],
+      "question": "Validated core quadrature and weighted low/high tails for a specified source model; physical sigma discrepancy remains separate.",
+      "deliverable": "interval rate provider with source-validity and remainder proof; reject finite-node-only physical truth claim"
+    },
+    {
+      "id": "ACTUAL_CONSUMER_STATE_BINDING",
+      "priority": 2,
+      "depends_on": [
+        "L_C0_SEMANTICS"
+      ],
+      "question": "Recover exact H5 state bytes, or explicitly version a new model event; bind current receiver repository/entrypoint/first-step and source profile.",
+      "deliverable": "STATE_HOST_BINDING with actual identities or exact remaining absent objects"
+    },
+    {
+      "id": "LOCAL_FULL_OPERATOR_TO_STATE_CERTIFICATE",
+      "priority": 3,
+      "depends_on": [
+        "L_METRIC_BOUND"
+      ],
+      "question": "Continuous H,D,S operator bounds and residual interpolant; same-endpoint initial state and consistent embedding.",
+      "deliverable": "Executable physical-bound provider and run contract, not only numeric helper"
+    },
+    {
+      "id": "LOCAL_SELECTED_1S_COUPLING_BASIS_PLAN",
+      "priority": 4,
+      "depends_on": [
+        "LOCAL_BRIDGE_SELECTOR_AND_PHASE_GAP_DISCRIMINATOR"
+      ],
+      "question": "Specify minimal omitted-channel control and conditional higher-l need; do not demand all-bound output or execute enlargement without prerequisites."
+    }
+  ],
+  "external_queue": [
+    {
+      "id": "R4AH_m64",
+      "priority": 1,
+      "status": "NOT_RUN",
+      "allowed_scope": "first m64 only",
+      "runtime_required": true,
+      "start": "CODEX_HANDOFF_KO.md",
+      "local_memory_policy_relaxed": false
+    },
+    {
+      "id": "R4AH_remaining9",
+      "priority": 2,
+      "depends_on": [
+        "R4AH_m64_ACCEPTED"
+      ],
+      "status": "NOT_AUTHORIZED_HERE",
+      "new_batch_required": true,
+      "nodes": [
+        "m128",
+        "m256",
+        "m512",
+        "m1024",
+        "p1024",
+        "p512",
+        "p256",
+        "p128",
+        "p64"
+      ],
+      "reuse_m64_without_rerun": true,
+      "collector": "runtime_tools/merge_returns.py"
+    },
+    {
+      "id": "STATE_WINDOW_RUNS",
+      "status": "BLOCKED_BY_OPERATOR_AND_INITIAL_STATE_PREREQUISITES",
+      "depends_on": [
+        "LOCAL_FULL_OPERATOR_TO_STATE_CERTIFICATE"
+      ]
+    },
+    {
+      "id": "BASIS_B_ENERGY_PHYSICAL_SOURCE",
+      "status": "BLOCKED_BY_STATE_WINDOW_AND_SOURCE_SCOPE",
+      "depends_on": [
+        "STATE_WINDOW_RUNS",
+        "LOCAL_SELECTED_1S_COUPLING_BASIS_PLAN"
+      ]
+    },
+    {
+      "id": "ACTUAL_BIANCHI_HOST_REPLAY",
+      "status": "BLOCKED_BY_SOURCE_ADMISSION_AND_ACTUAL_BINDING",
+      "depends_on": [
+        "ACTUAL_CONSUMER_STATE_BINDING",
+        "BASIS_B_ENERGY_PHYSICAL_SOURCE"
+      ]
+    }
+  ],
+  "next_local_node": "LOCAL_BRIDGE_SELECTOR_AND_PHASE_GAP_DISCRIMINATOR",
+  "next_external_node": "R4AH_m64",
+  "forbidden_replays": [
+    "R4Z-R4AH completed scientific runs/tests",
+    "central R4AF point",
+    "M9/window jet",
+    "old R8 matrix"
+  ],
+  "excluded_unconditional_scope": [
+    "all-bound final observable",
+    "all elements/He",
+    "H-H/H2+ sibling redevelopment",
+    "HyRec/Ly-alpha",
+    "Einstein/background rewrite",
+    "CMB likelihood"
+  ],
+  "physical_gates_unchanged": {
+    "G02": "UNRESOLVED",
+    "production": "HOLD",
+    "capture": false,
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO"
+  },
+  "full_stencil_total_upper": [
+    null,
+    null
+  ],
+  "git_expected_base": "0d7bdbe76dc35d38668d750e6312919cecb09144"
+}

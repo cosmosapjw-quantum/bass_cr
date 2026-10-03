@@ -1,0 +1,102 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+___________________ test_positive_interval_functional_exact ____________________
+
+    def test_positive_interval_functional_exact():
+>       assert weighted_intervals([F(1,4),F(3,4)],[(2,3),(4,6)]) == (F(7,2),F(21,4))
+E       assert (Fraction(0, ...raction(0, 1)) == (Fraction(7, ...action(21, 4))
+E         
+E         At index 0 diff: Fraction(0, 1) != Fraction(7, 2)
+E         
+E         Full diff:
+E           (
+E         -     Fraction(7, 2),
+E         ?              ^  ^
+E         +     Fraction(0, 1),
+E         ?              ^  ^
+E         -     Fraction(21, 4),
+E         ?              ^ ---
+E         +     Fraction(0, 1),
+E         ?              ^^^
+E           )
+
+tests/test_core_first.py:5: AssertionError
+_____________ test_cx_population_transfer_is_not_electron_creation _____________
+
+    def test_cx_population_transfer_is_not_electron_creation():
+>       assert cx_delta(F(3,2)) == (-F(3,2),-F(3,2),F(3,2),F(3,2),0)
+E       assert (Fraction(0, ...raction(0, 1)) == (Fraction(-3,...tion(3, 2), 0)
+E         
+E         At index 0 diff: Fraction(0, 1) != Fraction(-3, 2)
+E         
+E         Full diff:
+E           (
+E         -     Fraction(-3, 2),
+E         -     Fraction(-3, 2),
+E         -     Fraction(3, 2),
+E         ?              ^  ^
+E         +     Fraction(0, 1),
+E         ?              ^  ^
+E         -     Fraction(3, 2),
+E         ?              ^  ^
+E         +     Fraction(0, 1),
+E         ?              ^  ^
+E         -     0,
+E         +     Fraction(0, 1),
+E         +     Fraction(0, 1),
+E         +     Fraction(0, 1),
+E           )
+
+tests/test_core_first.py:8: AssertionError
+____________ test_zero_metric_defect_residual_accumulates_linearly _____________
+
+    def test_zero_metric_defect_residual_accumulates_linearly():
+>       assert state_error_bound(F(1,100),[(2,0,F(3,100))]) == F(7,100)
+E       assert Fraction(0, 1) == Fraction(7, 100)
+E        +  where Fraction(0, 1) = state_error_bound(Fraction(1, 100), [(2, 0, Fraction(3, 100))])
+E        +    where Fraction(1, 100) = F(1, 100)
+E        +  and   Fraction(7, 100) = F(7, 100)
+
+tests/test_core_first.py:11: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_core_first.py::test_positive_interval_functional_exact - assert (Fraction(0, ...raction(0, 1)) == (Fraction(7, ...action(21, 4))
+  
+  At index 0 diff: Fraction(0, 1) != Fraction(7, 2)
+  
+  Full diff:
+    (
+  -     Fraction(7, 2),
+  ?              ^  ^
+  +     Fraction(0, 1),
+  ?              ^  ^
+  -     Fraction(21, 4),
+  ?              ^ ---
+  +     Fraction(0, 1),
+  ?              ^^^
+    )
+FAILED tests/test_core_first.py::test_cx_population_transfer_is_not_electron_creation - assert (Fraction(0, ...raction(0, 1)) == (Fraction(-3,...tion(3, 2), 0)
+  
+  At index 0 diff: Fraction(0, 1) != Fraction(-3, 2)
+  
+  Full diff:
+    (
+  -     Fraction(-3, 2),
+  -     Fraction(-3, 2),
+  -     Fraction(3, 2),
+  ?              ^  ^
+  +     Fraction(0, 1),
+  ?              ^  ^
+  -     Fraction(3, 2),
+  ?              ^  ^
+  +     Fraction(0, 1),
+  ?              ^  ^
+  -     0,
+  +     Fraction(0, 1),
+  +     Fraction(0, 1),
+  +     Fraction(0, 1),
+    )
+FAILED tests/test_core_first.py::test_zero_metric_defect_residual_accumulates_linearly - assert Fraction(0, 1) == Fraction(7, 100)
+ +  where Fraction(0, 1) = state_error_bound(Fraction(1, 100), [(2, 0, Fraction(3, 100))])
+ +    where Fraction(1, 100) = F(1, 100)
+ +  and   Fraction(7, 100) = F(7, 100)
+3 failed in 0.07s

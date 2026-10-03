@@ -1,0 +1,17 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_______ test_decoupled_pair_has_exact_zero_residual_without_spectral_gap _______
+
+    def test_decoupled_pair_has_exact_zero_residual_without_spectral_gap():
+        # All three energies coincide; a gap-based implementation would reject it.
+        result=exact_pair_certificate([[1,0,0],[0,1,0],[0,0,1]],
+                                      [[0,0,0],[0,0,0],[0,0,0]],(0,1))
+>       assert result is not None, 'missing weak retained-pair certificate'
+E       AssertionError: missing weak retained-pair certificate
+E       assert None is not None
+
+tests/test_first.py:7: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_first.py::test_decoupled_pair_has_exact_zero_residual_without_spectral_gap - AssertionError: missing weak retained-pair certificate
+assert None is not None
+1 failed in 0.06s
