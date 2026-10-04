@@ -1,0 +1,421 @@
+{
+  "task_id": "REI-F04",
+  "state": "partial",
+  "input_identity": {
+    "logical_task": "REI-F04",
+    "run_id": "REI-F04-SUCCESSOR-20261005",
+    "candidate_source_parent_commit": "c1d7f89c8abc90a6adf971390f2bce7ae7530a23",
+    "publication_parent_commit": "c433eaee7b120a5bfb7c35e802c4b218315bf210",
+    "original_FT03_archive_sha256": "0d8d28b5e4d63a9013b5c57f785680d2f3344b94127f2510b4037417356f5480",
+    "frozen_inputs": {
+      "rust/rei_microphysics/src/lib.rs": "d4f155351a7f78680f5e8cde3c5bd18d26999cc8d01d595f99fcdfc3c94441bf",
+      "rust/rei_microphysics/src/hhe_events.rs": "c100b08e034089c2d67b2102769ccdd51f1d29a2f388d6bb2dfe7984af93b290",
+      "rust/rei_microphysics/src/microstep.rs": "e03cc1512cdd2b60735b1ab655c8e6657423c18ee4ad55ca1d30f24ad4974e53",
+      "rust/rei_microphysics/tests/ft03_controlled.rs": "dea4d4dab4afdc3e80ce3efd20c1cf1e032e0cc67e4b8e430c27c19ecfabfc60",
+      ".cuh/fastest-track/REI-F04/verify_candidate.py": "b37a0670e0d6833a29e0062ee9c56741299715e50e8fc06528f3d3afd3ae3a4c",
+      ".cuh/fastest-track/REI-F04/oracle.json": "34f94b8e144f1bf90d858ddaf4576bae0932f0590bfbc9c6600bf02e0fa886c5",
+      ".cuh/fastest-track/REI-F04/FT03_original/SOURCE_TRACE.json": "493548daf6da754c6c0c98a580879d973bd45f7b73c2936df4e9bf307352d87f",
+      ".cuh/fastest-track/REI-F04/FT03_original/MODEL_POLICY.json": "a875647ddc56a942982c931bf0be64a0b0dc02e107a33230df4d06093b456f22",
+      ".cuh/fastest-track/REI-F04/FT03_original/SOURCE_TO_MODEL_MAP.json": "2d0a20f12ed035ec6f359472f3376bef76162094492f04a59100b9f8155f4ab8",
+      ".cuh/fastest-track/REI-F04/FT03_original/inputs/VERNER96_HHE_PARAMETERS.json": "c05af3790b9717229b998a4f57b8bbebb96340b5e9c57079d50f760966e8f8ea",
+      ".cuh/fastest-track/REI-F04/FT03_original/research/closure_model.py": "cbc3ca1ac9b861b1b2c274a603ad9628aec88ac7f6296042282d45dc5b30c7ce",
+      ".cuh/fastest-track/REI-F04/FT03_original/research/moment_api.py": "d90859b9d5a00a4486ed44f27060f223c9b81ab387f5777d8fc772579ccacb0e",
+      ".cuh/fastest-track/REI-F04/FT03_original/research/mp_reference.py": "f062fda7fcf4c0c30b1d16377d1d41fcbf55f313afdd113a839cafee02f656c1",
+      ".cuh/fastest-track/REI-F04/FT03_original/results/float_reference.json": "aae5a0e255223d728726c781adb181d4d5073cdc7d3daa5eadd04aeca51cbd03",
+      ".cuh/fastest-track/REI-F04/FT03_original/results/finite_domain_certificate.json": "224ce4424b7cf6570dd0ae535bb8572e8d457858c2cfca2acf19f206e6c95853",
+      ".cuh/fastest-track/REI-F04/FT03_original/results/mp_reference.json": "fb53d8de69cef8183c839f8fc10c603a47256c0ce21e619842c833dcea74af64",
+      ".cuh/fastest-track/REI-F04/FT03_original/research/__pycache__/mp_reference.cpython-312.pyc": "af7194ebae260c3b7b3da9632fd7eaad0e67a0f09c695619a939a629c1011893"
+    },
+    "reference_repair_receipt": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/test-reference-repair.json",
+    "current_continuation_binding": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/post-integration.json"
+  },
+  "changed_paths": [
+    "rust/rei_microphysics/src/ft03_rates.rs",
+    "rust/rei_microphysics/src/ft03_controlled.rs",
+    "rust/rei_microphysics/src/lib.rs",
+    "rust/rei_microphysics/examples/ft03_fixture.rs",
+    "rust/rei_microphysics/tests/ft03_controlled.rs",
+    "docs/atomic_reionization_handoff_20261004_v1/runtime_inputs/ft03_successor_binding.json"
+  ],
+  "commands": [
+    {
+      "command": "CUHG_EXECUTION_MODE=CODEX_ONLY cuhg-telemetry run --project /home/cosmosapjw/Dropbox/bianchi/rei_bianchi --task REI-F04 -- /usr/bin/python3 /home/cosmosapjw/Dropbox/bianchi/rei_bianchi/.cuh/fastest-track/REI-F04/verify_boundaries.py",
+      "exit_code": 0,
+      "evidence_path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/review-probe-green.log"
+    },
+    {
+      "command": "CUHG_EXECUTION_MODE=CODEX_ONLY cuhg-telemetry run --project /home/cosmosapjw/Dropbox/bianchi/rei_bianchi --task REI-F04 -- /usr/bin/python3 /home/cosmosapjw/Dropbox/bianchi/rei_bianchi/.cuh/fastest-track/REI-F04/verify_candidate.py",
+      "exit_code": 0,
+      "evidence_path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/final-candidate.log"
+    },
+    {
+      "command": "CUHG_EXECUTION_MODE=CODEX_ONLY cuhg-telemetry run --project /home/cosmosapjw/Dropbox/bianchi/rei_bianchi --task REI-F04 -- /home/cosmosapjw/.cargo/bin/cargo fmt --manifest-path rust/rei_microphysics/Cargo.toml -- --check",
+      "exit_code": 0,
+      "evidence_path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/final-fmt.log"
+    },
+    {
+      "command": "CUHG_EXECUTION_MODE=CODEX_ONLY cuhg-telemetry run --project /home/cosmosapjw/Dropbox/bianchi/rei_bianchi --task REI-F04 -- /home/cosmosapjw/.cargo/bin/cargo clippy --manifest-path rust/rei_microphysics/Cargo.toml --lib --locked -- -D warnings",
+      "exit_code": 0,
+      "evidence_path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/final-clippy-lib.log"
+    },
+    {
+      "command": "CUHG_EXECUTION_MODE=CODEX_ONLY cuhg-telemetry run --project /home/cosmosapjw/Dropbox/bianchi/rei_bianchi --task REI-F04 -- /home/cosmosapjw/.cargo/bin/cargo clippy --manifest-path rust/rei_microphysics/Cargo.toml --all-targets --locked -- -D warnings -A clippy::excessive_precision",
+      "exit_code": 0,
+      "evidence_path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/final-clippy-all.log"
+    },
+    {
+      "command": "CUHG_EXECUTION_MODE=CODEX_ONLY cuhg-telemetry run --project /home/cosmosapjw/Dropbox/bianchi/rei_bianchi --task REI-F04 -- /home/cosmosapjw/.cargo/bin/cargo run --quiet --manifest-path rust/rei_microphysics/Cargo.toml --example ft03_fixture -- 1e14",
+      "exit_code": 0,
+      "evidence_path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/final-bisection.log"
+    },
+    {
+      "command": "CUHG_EXECUTION_MODE=CODEX_ONLY cuhg-telemetry run --project /home/cosmosapjw/Dropbox/bianchi/rei_bianchi --task REI-F04 -- /home/cosmosapjw/.cargo/bin/cargo test --manifest-path rust/rei_microphysics/Cargo.toml --locked",
+      "exit_code": 0,
+      "evidence_path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/post-integration-tests.log"
+    },
+    {
+      "command": "CUHG_EXECUTION_MODE=CODEX_ONLY cuhg-telemetry run --project /home/cosmosapjw/Dropbox/bianchi/rei_bianchi --task REI-F04 -- /home/cosmosapjw/.cargo/bin/rustfmt --edition 2021 --check --config skip_children=true rust/rei_microphysics/src/ft03_rates.rs rust/rei_microphysics/src/ft03_controlled.rs rust/rei_microphysics/src/lib.rs rust/rei_microphysics/examples/ft03_fixture.rs rust/rei_microphysics/tests/ft03_controlled.rs",
+      "exit_code": 0,
+      "evidence_path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/post-integration-fmt.log"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "rust/rei_microphysics/src/ft03_rates.rs",
+      "sha256": "1a97cd7a3555deeb4d8700376cd84580c5102127773bc3a235a29c33b0c1542f"
+    },
+    {
+      "path": "rust/rei_microphysics/src/ft03_controlled.rs",
+      "sha256": "61e11471482bb49d99e5d0eb79504d3f67538fbe6361653a0462d1abb0b672db"
+    },
+    {
+      "path": "rust/rei_microphysics/src/lib.rs",
+      "sha256": "7decf2b7e4a957149dd0b401e61a2473c6d2e4ff2c6058b229db226557b6e67d"
+    },
+    {
+      "path": "rust/rei_microphysics/examples/ft03_fixture.rs",
+      "sha256": "259f661ecaa8795d80ffc5822f89095367780df1f594cfb071368d486de86faf"
+    },
+    {
+      "path": "rust/rei_microphysics/tests/ft03_controlled.rs",
+      "sha256": "dea4d4dab4afdc3e80ce3efd20c1cf1e032e0cc67e4b8e430c27c19ecfabfc60"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_inputs/ft03_successor_binding.json",
+      "sha256": "2e65cd0987ac717c0f7c86256c732b0deb952ce497f3f8b3a2c11a7dbb0fd41c"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/DECISION_LOG.md",
+      "sha256": "c4705edc11e6481d089a76000aeb18f1d7932df313a4357ac297a614c2db8d55"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/FT03_original/MODEL_POLICY.json",
+      "sha256": "a875647ddc56a942982c931bf0be64a0b0dc02e107a33230df4d06093b456f22"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/FT03_original/SOURCE_TO_MODEL_MAP.json",
+      "sha256": "2d0a20f12ed035ec6f359472f3376bef76162094492f04a59100b9f8155f4ab8"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/FT03_original/SOURCE_TRACE.json",
+      "sha256": "493548daf6da754c6c0c98a580879d973bd45f7b73c2936df4e9bf307352d87f"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/FT03_original/inputs/VERNER96_HHE_PARAMETERS.json",
+      "sha256": "c05af3790b9717229b998a4f57b8bbebb96340b5e9c57079d50f760966e8f8ea"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/FT03_original/research/closure_model.py",
+      "sha256": "cbc3ca1ac9b861b1b2c274a603ad9628aec88ac7f6296042282d45dc5b30c7ce"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/FT03_original/research/moment_api.py",
+      "sha256": "d90859b9d5a00a4486ed44f27060f223c9b81ab387f5777d8fc772579ccacb0e"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/FT03_original/research/mp_reference.py",
+      "sha256": "f062fda7fcf4c0c30b1d16377d1d41fcbf55f313afdd113a839cafee02f656c1"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/FT03_original/results/finite_domain_certificate.json",
+      "sha256": "224ce4424b7cf6570dd0ae535bb8572e8d457858c2cfca2acf19f206e6c95853"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/FT03_original/results/float_reference.json",
+      "sha256": "aae5a0e255223d728726c781adb181d4d5073cdc7d3daa5eadd04aeca51cbd03"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/FT03_original/results/mp_reference.json",
+      "sha256": "fb53d8de69cef8183c839f8fc10c603a47256c0ce21e619842c833dcea74af64"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/README_KO.md",
+      "sha256": "25294088f097ed33a72086867413cf5adf785e9fa6d15ba36c92de5635715903"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/author-final.md",
+      "sha256": "a0009e03358bce6fe66c3c0eba597dd9417115ba3ccd09e8b9921ae57b5aff05"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/author-validator-red.log",
+      "sha256": "66647fa78723b75d3d05f722a474e799adb4a2724fe644b8a930e40b2695b75e"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/brief.md",
+      "sha256": "6510b2a4fcc33c6c1b3f5b71a05ab8ad5dd122a983e7d00d90daa20c9c99e751"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/build_oracle.py",
+      "sha256": "9b854381015f00e83173099e154d62b892ffa9ecda3f30995132c24fc7468f93"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/continuation-intent.json",
+      "sha256": "39be7de505b3a2a77255f5658bde1f83d2a721847407cfb4a84b6548a31cc4d6"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/final-bisection.json",
+      "sha256": "783888b9ddabe85c9504d928b5134055428485748978329229b63d597dd5b14c"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/final-bisection.log",
+      "sha256": "aab67c25af3a271585196cc4dee674352678e6c6b49e143c2e641a7bab03f778"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/final-candidate.log",
+      "sha256": "3bdd7a4def845d943e72b6e4b4024d4976b8f18b5d413dc99b469b230b73b258"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/final-checks.json",
+      "sha256": "a9058309f1383dc1b57c8e2588e5b44d6fb052bf32cf3751d7834302d2fa85ed"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/final-clippy-all.log",
+      "sha256": "7d55b22ef0b6feec92d17c797dbfe6dc4ba2e63c27239ffcc5c2c66e1fbe5b57"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/final-clippy-lib.log",
+      "sha256": "c05e6faf970d69b0da2990ab3989426c3e0ea3783cc50827eb7c8bab5afbe540"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/final-fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/fixture-results.json",
+      "sha256": "deb1bbfd650e401366b2ebabf7dabb0492a7b1eeb4e186efb2f764c9b99c167e"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/frozen-inputs.json",
+      "sha256": "bb1c5652a0e6cbaeb6390fcf5d9d5fde49339be2872197a93711925c0eda511f"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/intake.json",
+      "sha256": "71fb635c1f6e58a43fff361bbe90a3604e06150f084a2f8a05b8aa972338a9a5"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/lib-export.patch",
+      "sha256": "6f2187d11294e69197aa3e6d8199a1558b26f63634af2178490821d7cbaf0a5c"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/native-runtime.json",
+      "sha256": "ff770ee5d8d04126ad72eab3341111b7c84c40a58c50372def66226c253be656"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/oracle.json",
+      "sha256": "34f94b8e144f1bf90d858ddaf4576bae0932f0590bfbc9c6600bf02e0fa886c5"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/original-invalid-test.rs",
+      "sha256": "a93dc17553ba2a43ed40b17d7cfc51d074f32e349a33e9b1c270360125f83ccf"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/original-oracle.json",
+      "sha256": "e7bdf49aedacb9e390d2e8042334a3d33bd8484e5f10fb288ae2e26128375c7c"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/post-integration-fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/post-integration-tests.log",
+      "sha256": "d02ce9b0c8ad9202c5e0a0d45deda64f31d2079d61257b7f3367eb111350b71a"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/post-integration.json",
+      "sha256": "d34214ef7aa255933d47e67092305b8dd975ceca6726ba28e112fc2edc202e9c"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/preparation-repair.json",
+      "sha256": "fbc4de26967634232b1fc30ec0a148f904fdb18283131e5496ba00c4efe81f35"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/prepared-continuation.json",
+      "sha256": "754f993ca8a8ddb0c919ddba0a6179e66d27bf316bad0ad077691750cea7d715"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/prepared.json",
+      "sha256": "2d50082c54f9d3344d52fb94a416dcd9d493b48aea18d6e03878fcf4e3e01335"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/preservation-final.json",
+      "sha256": "0fa892f8682c333dfd9c8283349460bf93830bbca8f2351746748e20d8204abd"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/review-final.md",
+      "sha256": "b402d5731a38b4aa745362d9490fba26f70b5d3c0f48003d98c632a24faa15ab"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/review-normal-probe.rs",
+      "sha256": "18e7db03160b39035fe77207edf5ae378fce7df55fb63f3d26fe4f14d1be783b"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/review-original-probe.rs",
+      "sha256": "308e329f5257ecb10582136c6c3fb768cc8717b0478e6083991a38c495f15925"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/review-probe-green.log",
+      "sha256": "2fb9fe4b5f5c6704ed30edb69e0028e9e53dd470e23ad272186508aa7d374ac1"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/review-probe-red.log",
+      "sha256": "06cf41047e03e7d0769207d1cd52794f95a32a3df09f724dba5d50e2dbd95dc5"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/review-probe.rs",
+      "sha256": "638e7c1a488b962e8092453cc6d14e0a38281b50d4b103fa6f3e117d9391d001"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/review-scope.json",
+      "sha256": "5994f671dd47fad7cdf0134c7e88e71a271383d900954998b60266724d9e6bc8"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/review.json",
+      "sha256": "369ebfc5591e8f0a4bffd1809c3a92425ac5eb813f6cb1e0d8beb3289e9e5481"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/reviewer-reproduction.log",
+      "sha256": "e16e9b98bd1647b546cf217fa5e1d1cb9d60b7ab2aa2e36b4e4b9c7563bcb93a"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/test-reference-repair.json",
+      "sha256": "45372325614a9bbe8a3843f84ed1e454fd46cbcb9c720387b00e969c8cfcba10"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/verify_boundaries.py",
+      "sha256": "94556f65626cc3f070a359299c38895ded1df847fb750407e5a20fe8e827f277"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/verify_candidate.py",
+      "sha256": "b37a0670e0d6833a29e0062ee9c56741299715e50e8fc06528f3d3afd3ae3a4c"
+    }
+  ],
+  "claim": {
+    "basis": "Actual FT03 endpoint temperature-dependent controlled successor; archived independent references reused, new152+9 coefficient points,71 tests, three finite refinements and one native independent review plus Host representability repair",
+    "ceiling": "Controlled numerical implementation prerequisite only. No full F04 interval/root/derivative/remainder certificate, physical rate/moment accuracy, FLRW/filling consumer or Peebles admission."
+  },
+  "next_task": "REI-F04",
+  "blocker": {
+    "code": "ACTUAL_PARENT_DOMAIN_NOT_FROZEN",
+    "scope": "Full mathematical F04 acceptance",
+    "next_action": "Freeze actual accepted augmented parent/source uncertainty/domain and topology for FT03, then execute unchanged PREWORK\u00a76.1 Krawczyk/implicit derivative/Taylor/shared-half recipe; do not infer physical error bounds from point parity."
+  },
+  "execution_mode": "CODEX_ONLY",
+  "validation": {
+    "crate_tests_passed": 92,
+    "new_frozen_tests": 8,
+    "external_boundary_assertions": 14,
+    "coefficient_point_values": 152,
+    "Verner_point_values": 9,
+    "relative_coefficient_tolerance": 3e-12,
+    "reference_methods_reused": [
+      "archived DOP853",
+      "archived Radau",
+      "archived50-digit RK4"
+    ],
+    "reference_campaign_rerun": false,
+    "refinement_dt_s": [
+      100000000000,
+      50000000000,
+      25000000000
+    ],
+    "refinement_observable_errors": [
+      2.3040561396237003e-05,
+      1.1533612905123558e-05,
+      5.770087748546704e-06
+    ],
+    "max_abs_energy_residual": 9.489248255082107e-15,
+    "max_scaled_event_residual": 1.9989977555201485e-13,
+    "strict_local_limit": 0.0002,
+    "strict_public_width_limit": 0.002,
+    "public_width_evaluated": false,
+    "rejected_branch": {
+      "model_id": "REI_FT03_HG_RATE_MOMENT_CASE_A_CONTROLLED_V1",
+      "dt_s": 100000000000000,
+      "t_end_s": 100000000000000,
+      "source_site": "backward_euler_endpoint",
+      "scientific_admission": "HOLD",
+      "F04_certificate_completed": false,
+      "accepted_steps": 1024,
+      "rejected_steps": 10,
+      "rejected_candidate_writes": 0,
+      "max_local_error": 7.336128592583258e-05,
+      "temperature_min_K": 46683.243493871014,
+      "temperature_max_K": 49999.99999999999,
+      "observables": [
+        0.9996100295166038,
+        0.3435583730685287,
+        0.6036025472082948,
+        10.751140567574259
+      ],
+      "photons_cm3": [
+        2.1857158574628428e-08,
+        3.813731862803771e-10,
+        2.6596645047604738e-11
+      ],
+      "relative_energy_residual": -7.778072340231236e-16,
+      "scaled_event_residual": 1.5924219408380846e-14
+    },
+    "strict_library_clippy": true,
+    "all_target_clippy_precision_fixture_allowance": true,
+    "original_fixture_and_old_tests_unchanged": true,
+    "pre_concurrent_FT03_crate_tests_passed": 71,
+    "received_FLRW_tests_passed_in_merged_crate": 21,
+    "clippy_scope": "Final repaired FT03 before concurrent FLRW payload; no new external file Clippy claim"
+  },
+  "review": {
+    "status": "SCOPED_INDEPENDENT_REVIEW_ONE_P2_REPAIRED_BY_HOST",
+    "receipt": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/review.json",
+    "final_bytes_independently_reviewed": false
+  },
+  "native_usage": {
+    "dispatches": 2,
+    "known_total_tokens": 3438033,
+    "cost": "NOT_MEASURED",
+    "runtime_receipt": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F04_successor/native-runtime.json",
+    "soft_target": 100000,
+    "target_exceeded_replan": "Preserve exact same-task identities/usage; one deterministic Host P2 repair and final validators, no third native dispatch. Complete controlled prerequisite; keep mathematical F04 certification partial.",
+    "prior_closed_accounting_preserved": true
+  },
+  "scientific_admission": "HOLD",
+  "F04_certificate_completed": false,
+  "unresolved": [
+    "Actual accepted parent/domain and independent source/physical uncertainty definition",
+    "Krawczyk root inclusion/contraction and implicit/observable derivative interval bounds",
+    "Coefficient rounding and uniform nonlinear full/half remainder plus production-free checker",
+    "Physical accuracy of differentiated RR kinetic moment and truncated effective channels",
+    "FLRW03 expansion/storage/emission and filling closure; deferred PB02 and FT07"
+  ],
+  "research_sync": {
+    "latest_handoff": "REI-CHAT-FLRW03-20261005",
+    "latest_read_commit": "c433eaee7b120a5bfb7c35e802c4b218315bf210",
+    "F03_ack_observed": true,
+    "F03_ack_path": "docs/fastest_track_chat/REI-CHAT-FLRW02-20261004/CODEX_RETURN_ACK.json",
+    "next_chat_task": "REI-CHAT-FLRW04_EVENT_WEIGHTED_CONSUMER_CONTRACT",
+    "FLRW02_native_consumer_regression": "Earlier 20261004 prepared probe NOT_RUN; distinct 20261005 native module received and merged tests executed",
+    "REC_PB02_supplier": "HANDOFF_RECEIVED; reported supplier tests inspected, not executed by REI",
+    "PB02_and_FT07": "DEFERRED_NOT_COMPLETED",
+    "direct_chat_delivery": "UNDELIVERED_BROWSER_MODULE_MISSING",
+    "FLRW02_new_native_payload": "c0b630d9 received;21 tests directly passed as part of merged92; external2352checks/history inspected not rerun",
+    "FLRW03_scope": "Expanding event/birth spectrum source contract received, scoped synthetic reference not production coupled history."
+  }
+}

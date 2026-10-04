@@ -1,0 +1,92 @@
+{
+  "task_id": "BASS-CR-CHAT-F04C_TEMPERATURE_COUPLED_RESIDUAL_SCOPE_AND_OWNER_BOX_INTAKE",
+  "bass_parent": "da8b174267e27f0a70ee7ff12fb130179c1abfab",
+  "receiver_ref": "752e360a80e8622bcbaffae54183258b2e67b810",
+  "source_files": [
+    {
+      "path": "rust/rei_microphysics/src/ft03_controlled.rs",
+      "bytes": 14726,
+      "sha256": "61e11471482bb49d99e5d0eb79504d3f67538fbe6361653a0462d1abb0b672db",
+      "git_blob": "370fd2fa60521f2dc121ee81c7d24013a3b0d1e5"
+    },
+    {
+      "path": "rust/rei_microphysics/src/ft03_rates.rs",
+      "bytes": 2755,
+      "sha256": "1a97cd7a3555deeb4d8700376cd84580c5102127773bc3a235a29c33b0c1542f",
+      "git_blob": "b8a85ff37de160ecc576a168e4259ed23920a499"
+    },
+    {
+      "path": "rust/rei_microphysics/src/hhe_events.rs",
+      "bytes": 9447,
+      "sha256": "c100b08e034089c2d67b2102769ccdd51f1d29a2f388d6bb2dfe7984af93b290",
+      "git_blob": "57a63eee1e9d8c4aa2b5ed663dbea15619359f71"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_inputs/ft03_successor_binding.json",
+      "bytes": 9206,
+      "sha256": "2e65cd0987ac717c0f7c86256c732b0deb952ce497f3f8b3a2c11a7dbb0fd41c",
+      "git_blob": "37af0db4699bdd39c79c0ed6ce8bfb014f5571f3"
+    },
+    {
+      "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/REI-F04.json",
+      "bytes": 24654,
+      "sha256": "f6610b93c28248ab0700fecdd2d3ca39abaa17b8939bdd25ce51d30014475d0b",
+      "git_blob": "7c0e3f514a16d6fdf435ee27f672e5315b01b58e"
+    }
+  ],
+  "model_id": "REI_FT03_HG_RATE_MOMENT_CASE_A_CONTROLLED_V1",
+  "native_state_dimension": 7,
+  "formal_reduced_coordinates": [
+    "x_HII",
+    "x_HeII",
+    "x_HeIII",
+    "T_K"
+  ],
+  "native_solver_modified": false,
+  "native_runs": 0,
+  "atomic_calculations": 0,
+  "root_solves": 0,
+  "old_suites_replayed": 0,
+  "owner_domain": "NOT_FROZEN",
+  "canonical_F04_state": "partial",
+  "uniform_certificate": false,
+  "physical_rates_accuracy": "UNRESOLVED",
+  "case": "Case-A escaped capture binding and kinetic energy; RCT Disabled",
+  "positive_density_requirements": [
+    "nH>0",
+    "nHe>0"
+  ],
+  "T_window_K": [
+    30000,
+    110000
+  ],
+  "geometry": "static/proper H=0",
+  "photon_elimination_conditions": [
+    "fixed sigma/energy independent of T and photon density",
+    "no tracked emissivity",
+    "physical fraction simplex",
+    "h>=0"
+  ],
+  "unit_rows": [
+    "dimensionless",
+    "dimensionless",
+    "dimensionless",
+    "erg cm^-3"
+  ],
+  "formal_coefficient_functions": "symbolic, not newly computed native or physical provider values",
+  "tests": {
+    "new": 10,
+    "exit_code": 0,
+    "authority": "evidence/TEST_RECEIPT.json"
+  },
+  "stop_condition": "Formal scope complete; uniform proof blocked on owner-selected actual augmented parent/domain",
+  "next_owner_input": [
+    "accepted original joint parent/domain",
+    "source/physical uncertainty and correlations",
+    "stage topology and half1 initial-box transfer"
+  ],
+  "consumer_next": "REI-CHAT-FLRW05_COHERENT_SPECTRAL_MEASURE",
+  "He_RCT_next": "RCT-STEP01 owned by rei_bianchi",
+  "direct_chatgpt_ack": "UNVERIFIED",
+  "thread_url": "https://chatgpt.com/c/6abfa205-dbe8-83ee-969b-0e00111c9404"
+}
