@@ -1,0 +1,316 @@
+{
+  "schema": "research-sync.repo-successor.v1",
+  "task_id": "REI-REC-BASS-SYNC02-20261005",
+  "repository": "cosmosapjw-quantum/bass_cr",
+  "snapshot": {
+    "repository": "cosmosapjw-quantum/bass_cr",
+    "branch": "research/r4q-gap-closure-20261001",
+    "head": "3c7d7d4b811dd5f6eeafe60bafa1308a52dc1cf2",
+    "tree": "fd1d83ccad021817bdede642f3427a00a630a55e",
+    "pr": 23,
+    "draft": true,
+    "private": false
+  },
+  "document_phase": "BOTH_LOOPS_CONFIRMED_DELIVERY_RECEIPT_SEPARATE",
+  "central_packet": {
+    "repository": "cosmosapjw-quantum/rei_bianchi",
+    "path": "docs/research_sync/REI-REC-BASS-SYNC02-20261005",
+    "immutable_commit": "7c10471375837b85d58ec39fe1e8242429b74700",
+    "immutable_url": "https://github.com/cosmosapjw-quantum/rei_bianchi/blob/7c10471375837b85d58ec39fe1e8242429b74700/docs/research_sync/REI-REC-BASS-SYNC02-20261005/README_KO.md"
+  },
+  "repo_publication_path": "docs/research_sync/REI-REC-BASS-SYNC02-20261005",
+  "atomic_consumer_return_path": "docs/atomic_reionization_handoff_20261004_v1/threads/bass_cr/consumer_returns/REI-REC-BASS-SYNC02-20261005",
+  "loop1": {
+    "review_status": "CONFIRMED",
+    "decision": "PROMOTE_SCOPED_LOOP2_INPUTS",
+    "input_evidence": [
+      {
+        "path": "review/LOOP1_REVIEW.json",
+        "sha256": "a68e61204cbd4b56fef04e8998b4d16ac7e73d84a3e4efe5b8cdf7dd186663de"
+      },
+      {
+        "path": "state/LOOP1_SYNC.json",
+        "sha256": "86b0027a7cf61f690685966640955692927314912078e7b009c8207091abdb9f"
+      }
+    ],
+    "relevant_decisions": [
+      {
+        "id": "REI-PB03",
+        "decision": "PROMOTE",
+        "claim": "Actual pinned REC public source consumed by separate REI research crate; collapsed source and retained actual-ground source/defect remain distinct; SI/cgs boundary explicit. Pointwise consumer only.",
+        "evidence": [
+          "loop1/peebles_consumer/NATIVE_BUILD_AND_TEST.json",
+          "loop1/peebles_consumer/crate/tests/reference.rs",
+          "loop1/peebles_oracle/POINT_ORACLE_RESULT.json",
+          "loop1/independent_peebles_check.py"
+        ],
+        "native_tests": 10,
+        "source_commit": "cd68764aacfeae9fe794d7966604ac6fbb80ba7f",
+        "limits": [
+          "No retained n=2 trajectory",
+          "No physical cosmology/thermal/radiation admission",
+          "Cargo Git resolution not executed; actual exact-source rustc build was executed"
+        ],
+        "independent_decimal_checks": 2170,
+        "independent_valid_cases": 72,
+        "independent_invalid_cases": 8,
+        "source_field_max_relative_error": 9.418418766385736e-15
+      },
+      {
+        "id": "BASS-REI-CLOCK01",
+        "decision": "PROMOTE",
+        "claim": "Coordinate conversion and finite-cell tau/survival/probability invariance for supplied normal opacity cells with constant a or exact effective dt/deta.",
+        "evidence": [
+          "loop1/bass_clock/evidence/GREEN_SCOPED_CLOCK.log",
+          "loop1/bass_clock/evidence/DECIMAL_RESULT.json"
+        ],
+        "scoped_tests": 30,
+        "decimal_cases": 151,
+        "decimal_checks": 5001,
+        "limits": [
+          "Whole BASS crate build not run",
+          "No continuum quadrature guarantee or visibility peak certificate",
+          "Tiny probability underflow allowed by frozen absolute criterion; not global relative-error guarantee",
+          "Cold-Thomson numerical evaluation is not finite-temperature/spectrum physical admission"
+        ]
+      }
+    ]
+  },
+  "loop2": {
+    "status": "CONFIRMED",
+    "decision": "PROMOTE_SCOPED_EXPANDING_BENCHMARK",
+    "result": {
+      "path": "loop2/evidence/INDEPENDENT_HISTORY_RESULT.json",
+      "sha256": "41dd09aee3d9112fb9308861da7291d64988538e41e5a1747dad98c8930135eb"
+    },
+    "review": {
+      "path": "review/LOOP2_REVIEW.json",
+      "sha256": "6962477811e5a13f988abbaffcad5659d7bfaeccbc3e4876e4cbbc84d079349d"
+    },
+    "scope": "Pure-H one-T prescribed matter-only FLRW z1200->1000 xp_initial0.8; actual native REC->REI->BASS benchmark, no EoR/admission",
+    "checks": 91,
+    "actual_history_runs": 3,
+    "actual_constant_x_runs": 3,
+    "fine_x_max_abs_error": 1.9641732684760882e-11,
+    "fine_tau_relative_error": 3.578215511124118e-07,
+    "max_clock_tau_abs_error": 4.440892098500626e-15,
+    "source_physical_admission": false,
+    "EoR_history": false,
+    "general_Bianchi_transport": false
+  },
+  "resolved_blockers": [
+    "cross-repo stale F04 partial status for the later bounded static domain only"
+  ],
+  "unfinished": [
+    "CR-F0 actual source/provider load/callback 관측값 null.",
+    "기존 G02/production/b-grid gates 미완료.",
+    "F04E는 완료된 F05 실제 반환을 읽어 event-consuming call-site의 state/time/units/accepted-step 필드를25-output 계약에 연결해야 한다. Optional이며 완료된 F05나 F08의 새 선행조건이 아니다."
+  ],
+  "next_minimal": "완료된 F04D와 이제 이용 가능한 실제 F05 반환/accepted-step 기록을 읽어 F04E25-output/state/time/units/accepted-half binding을 작성한다. 부족한 실제 필드만 특정하고24/272/1512/50검사나 static certificate는 반복하지 않는다.",
+  "parallel_candidates": [
+    {
+      "id": "CR-F04E-RECEIVER-BINDING",
+      "scope": "이제 이용 가능한 실제 F05 완료 반환을 read-only 소비하여25-output/state/time/units/accepted-half binding 작성",
+      "collision": "optional 계약; F05 source 재실행/수정 없음, F08 owner 경로 충돌 금지, 새 F08 선행조건 아님"
+    },
+    {
+      "id": "CR-OFF-DISPATCH-OBSERVATION",
+      "scope": "REI actual dispatcher가 정해질 때 소스·로드·callback 영수증 수신",
+      "collision": "전용 CR history/campaign 실행 금지"
+    }
+  ],
+  "preserve": [
+    "CR_OFF_FASTEST",
+    "G02 UNRESOLVED/production HOLD/capture false/all_bound OPEN/b_grid NO_GO",
+    "legacy atomic PARKED/consumed execution authorities not reusable",
+    "R1 default readback with concrete R3 triggers"
+  ],
+  "owner_ack": "PENDING_RECIPIENT_ACK_NOT_INFERRED_FROM_PUBLICATION",
+  "physical_admission": false,
+  "publication": {
+    "status": "DELIVERY_RECEIPT_SEPARATE",
+    "receipt": "publication/GITHUB_PUBLICATION_RECEIPT.json",
+    "existing_PR": 23,
+    "preserve_draft": true,
+    "canonical_state_overwritten": false,
+    "direct_chat_thread_delivery": "UNAVAILABLE_NOT_PERFORMED",
+    "external_mutations": "SEE_DETACHED_ACTUAL_RECEIPT"
+  },
+  "finalization_todo": [
+    "Recipient owner ACK stays pending until actually received; do not rerun unchanged scientific suites for delivery."
+  ],
+  "publication_parent_observation": {
+    "commit": "abc5f8f8cb57dafb6aed71871cb0f55aef3528e9",
+    "tree": "960f73b709584f6ea64c8950aacd9d82bc66b1f4",
+    "initial_snapshot_preserved": true,
+    "evidence": "publication/atomic_publish/bass_cr.FINAL_COMMIT.json",
+    "source_execution_replayed": false
+  },
+  "late_source_delta": {
+    "state": "F04D_SCOPED_MIXED_PARENT_AND_EVENT_JETS_COMPLETE_RECEIVED",
+    "source": {
+      "r": "bass_cr",
+      "path": "docs/fastest_track_resume_20261005_v1/F04D_PARENT_EVENT_JETS_KO.md",
+      "sha": "b15d2070655746c3899ad87fa2fcd348f09c9771",
+      "commit": "abc5f8f8cb57dafb6aed71871cb0f55aef3528e9",
+      "local_path": "research_sync_20261005/publication/atomic_publish/prepublication_sources/bass_cr/docs/fastest_track_resume_20261005_v1/F04D_PARENT_EVENT_JETS_KO.md",
+      "bytes": 12609,
+      "sha256": "2ffeaaa730ac52c48b3e54b192cc2cf117c5e35ad43d0d51d7d1e7a70792dca7",
+      "Git_blob_match": true
+    },
+    "new_tests_reported": 24,
+    "comparisons_reported": {
+      "mixed_derivatives": 272,
+      "coordinate_derivatives": 1512,
+      "directional": 50
+    },
+    "science_replay_here": false,
+    "independent_review_of_supplier_result": false,
+    "source_native_executed_here": false,
+    "next": "BASS-CR-CHAT-F04E_EVENT_JET_RECEIVER_BINDING",
+    "remaining": [
+      "uniform cumulative event/escape Taylor remainder",
+      "actual native event/escape consumer binding",
+      "expanding source-stage weighting",
+      "physical source error"
+    ]
+  },
+  "late_FLRW06_native_return": {
+    "task": "REI-CHAT-FLRW06-20261005",
+    "status": "NATIVE_EVENT_PHOTON_POINTWISE_REGRESSION_PASS",
+    "source_commit": "b553698a114fbff05640ab6ecb95d260410de492",
+    "calls": 18,
+    "scalar_fields": 167,
+    "max_relative_difference": 3.777652226439761e-15,
+    "review_status": "CONFIRMED",
+    "decision": "PROMOTE_SCOPED_NATIVE_EVENT_PHOTON_POINTWISE_REGRESSION",
+    "result": {
+      "path": "late_flrw06/native_result/NATIVE_EXECUTION_RECEIPT.json",
+      "sha256": "d9c6164a16ee742959678c7148e82dbac791214f05941208188841991e41326f"
+    },
+    "review": {
+      "path": "review/LATE_FLRW06_REVIEW.json",
+      "sha256": "eed0141a7feeb9b9406a365af312dcc6e4f0a792e748d10c9cc4c47797da7697"
+    },
+    "owner_ACK": "PENDING",
+    "scope": "finite minimal original-module event/photon regression; no native U/accepted-stage/history/physical admission",
+    "concurrent_owner_same_probe_executed": true
+  },
+  "late_REI_owner_return": {
+    "source_commit": "bda0feefd4957dc59ebf4b068d01690942aa0a2a",
+    "source_refs": [
+      {
+        "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/REI-F05.json",
+        "sha256": "df801903436a54c8fea6d8d212e2d7d97b71e9859952d032ef61b481bcd32059",
+        "bytes": 44740,
+        "immutable_url": "https://github.com/cosmosapjw-quantum/rei_bianchi/blob/bda0feefd4957dc59ebf4b068d01690942aa0a2a/docs/atomic_reionization_handoff_20261004_v1/runtime_returns/REI-F05.json"
+      },
+      {
+        "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F08_stage/qualification.json",
+        "sha256": "32669f526103a2f91ab3bd4952e8b225de228029959216ba3232a86212a559f6",
+        "bytes": 431,
+        "immutable_url": "https://github.com/cosmosapjw-quantum/rei_bianchi/blob/bda0feefd4957dc59ebf4b068d01690942aa0a2a/docs/atomic_reionization_handoff_20261004_v1/runtime_returns/evidence/F08_stage/qualification.json"
+      },
+      {
+        "path": "docs/atomic_reionization_handoff_20261004_v1/runtime_returns/EXECUTION_STATE.json",
+        "sha256": "454131a8a33124ea80d09b1104cb28431de80255b3e252825b2a7f346021c89a",
+        "bytes": 3616,
+        "immutable_url": "https://github.com/cosmosapjw-quantum/rei_bianchi/blob/bda0feefd4957dc59ebf4b068d01690942aa0a2a/docs/atomic_reionization_handoff_20261004_v1/runtime_returns/EXECUTION_STATE.json"
+      },
+      {
+        "path": "docs/fastest_track_chat/CODEX_SYNC_KO.md",
+        "sha256": "cf0daae2c1bc6c7a5bbfddcbbdb5035d40d155a8d6ee8cae49f01016b24b2eab",
+        "bytes": 14500,
+        "immutable_url": "https://github.com/cosmosapjw-quantum/rei_bianchi/blob/bda0feefd4957dc59ebf4b068d01690942aa0a2a/docs/fastest_track_chat/CODEX_SYNC_KO.md"
+      }
+    ],
+    "F05": {
+      "state": "COMPLETED_SCOPED_STATIC_FT03_FIRST_INTERVAL_OWNER_RETURN_RECEIVED",
+      "accepted_steps": 7000,
+      "grids": [
+        1000,
+        2000,
+        4000
+      ],
+      "independent_MPFI_validation": "PASS_200_BITS_OWNER_REPORTED_NOT_RERUN_HERE",
+      "interval_s": [
+        0,
+        1000000000000.0
+      ],
+      "final_repaired_bytes_second_independent_review": false,
+      "scientific_admission": "HOLD"
+    },
+    "F08": {
+      "state": "CONDITIONAL_STAGE_ONLY_PASS_OWNER_REPORTED",
+      "crate_tests_reported": 140,
+      "paired_history": "NOT_EXECUTED",
+      "scientific_admission": "HOLD",
+      "owner": "REI_CODING_OWNER_RESERVED"
+    },
+    "FLRW06": {
+      "owner_also_executed_same_prepared_probe": true,
+      "scalar_fields": 167,
+      "invalid_inputs": 6,
+      "sole_gap_closure_claim": false,
+      "no_repeat_due_to_delivery": true
+    },
+    "fresh_execution_by_this_publication_task": false
+  },
+  "second_late_atomic_return": {
+    "source_refs": [
+      {
+        "repo": "BASS_HE",
+        "path": "research_sync_20261005/publication/atomic_publish/second_late_sources/BASS_HE/docs/atomic_reionization_handoff_20261004_v1/threads/BASS_HE/runs/HE-FLRW02B_NATIVE_20261005/RETURN.json",
+        "source_path": "docs/atomic_reionization_handoff_20261004_v1/threads/BASS_HE/runs/HE-FLRW02B_NATIVE_20261005/RETURN.json",
+        "sha": "a95825dbcbd518f276b17d25cdf00a91dd4aef67",
+        "commit": "d9f7fd916e4fc019bf2563fdb17c4257a6c00ebe",
+        "sha256": "d6e8ec19122eb3b0cc103525ff79b7e58be3de780f45ad05100fc4aa8d752055",
+        "bytes": 3104,
+        "actual_blob": "a95825dbcbd518f276b17d25cdf00a91dd4aef67",
+        "git_blob_match": true
+      },
+      {
+        "repo": "BASS_HE",
+        "path": "research_sync_20261005/publication/atomic_publish/second_late_sources/BASS_HE/docs/atomic_reionization_handoff_20261004_v1/threads/BASS_HE/CURRENT_FASTEST_STATE.json",
+        "source_path": "docs/atomic_reionization_handoff_20261004_v1/threads/BASS_HE/CURRENT_FASTEST_STATE.json",
+        "sha": "95eb95eca215f3e1d78f0fc6e14119fd3976df69",
+        "commit": "d9f7fd916e4fc019bf2563fdb17c4257a6c00ebe",
+        "sha256": "8bd963a0c81efcd3448fb093e5af5a1eaa35f825f5b167d78540412a60f528fa",
+        "bytes": 5855,
+        "actual_blob": "95eb95eca215f3e1d78f0fc6e14119fd3976df69",
+        "git_blob_match": true
+      },
+      {
+        "repo": "WU088_HH",
+        "path": "research_sync_20261005/publication/atomic_publish/second_late_sources/WU088_HH/docs/atomic_reionization_handoff_20261004_v1/threads/WU088_HH/rust_flrw06_native_20261005_v1/RESULT_SUMMARY.json",
+        "source_path": "docs/atomic_reionization_handoff_20261004_v1/threads/WU088_HH/rust_flrw06_native_20261005_v1/RESULT_SUMMARY.json",
+        "sha": "9ffc5f226a877af3d58b29ff079b29b6c3c7f566",
+        "commit": "444bf1dbad119543753c4cccabb107d7eb726b38",
+        "sha256": "7398844eb938fe5d98e4062dad3429a29276aa1c8f67b780bd04bc03bc2dadc7",
+        "bytes": 2915,
+        "actual_blob": "9ffc5f226a877af3d58b29ff079b29b6c3c7f566",
+        "git_blob_match": true
+      }
+    ],
+    "HE": {
+      "head": "d9f7fd916e4fc019bf2563fdb17c4257a6c00ebe",
+      "owner_reported_original_contract_native": "2_tests_274_comparisons_PASS",
+      "execution_commit": "3dceea736f9aaa363617a9a6a5bb2854d9ff9986",
+      "same_test_input_golden_tolerance": true,
+      "live_whole_crate_build": false,
+      "owner_ACK": "PENDING",
+      "independent_review_of_this_supplier_run_here": false
+    },
+    "HH": {
+      "head": "444bf1dbad119543753c4cccabb107d7eb726b38",
+      "owner_reported_FLRW06": "167_scalars_6_invalid_PASS",
+      "HH_optional": "PARKED",
+      "HH_OFF_runtime_admission": false,
+      "independent_review_of_this_supplier_run_here": false
+    },
+    "gate_accounting": "Concurrent duplicate executions support same completed finite gates; do not sum as new scientific milestones or claim sole completion",
+    "new_execution_here": false
+  },
+  "evidence_path_base": "https://github.com/cosmosapjw-quantum/rei_bianchi/blob/7c10471375837b85d58ec39fe1e8242429b74700/docs/research_sync/REI-REC-BASS-SYNC02-20261005",
+  "local_projection": "Root filenames in this folder are copied summary projections; detailed relative evidence pointers resolve under central_packet."
+}
