@@ -1,0 +1,160 @@
+{
+  "task_id": "BASS-FASTEST-FLRW02-SOURCE-AND-DELIVERED-PROBE-CLOSEOUT",
+  "state": "completed",
+  "input_identity": {
+    "bass_science_input_parent": "3e52c30943c50fa111d319dac2499eac13ec5e48",
+    "bass_publication_parent": "4a1db971e51bcd0fa00a6c526ed7de19b0821b12",
+    "receiver_executed_commit": "c1d7f89c8abc90a6adf971390f2bce7ae7530a23",
+    "receiver_latest_handoff_observed": "aa3e98d7a4f90105c4ac9712ba71c955f9b53cea",
+    "receiver_Rust_source_change_in_between": false,
+    "delivered_probe_input_sha256": "35e002b6e891e1f168290824dadc531bb6577961b48a51fa84cd84bdd0052b35",
+    "delivered_script_sha256": "67d09129e45e692b4b2a4bffc6f0edbf472deaad96ddf15993d3b7814c4eb51c",
+    "user_thread_url": "https://chatgpt.com/c/6abfa205-dbe8-83ee-969b-0e00111c9404"
+  },
+  "changed_paths": [
+    "research/fastest_track_20261004/flrw_source_regression/BACKUP_RECEIPT.json",
+    "research/fastest_track_20261004/flrw_source_regression/OWNER_PROBE_BACKUP_RECEIPT.json",
+    "research/fastest_track_20261004/flrw_source_regression/OWNER_PROBE_RETURN_KO.md",
+    "research/fastest_track_20261004/flrw_source_regression/PREPUBLICATION_SYNC.json",
+    "research/fastest_track_20261004/flrw_source_regression/README_KO.md",
+    "research/fastest_track_20261004/flrw_source_regression/REMOTE_FETCH_RECEIPT.json",
+    "research/fastest_track_20261004/flrw_source_regression/RESULTS.json",
+    "research/fastest_track_20261004/flrw_source_regression/SOURCE_INPUT_LOCK.json",
+    "research/fastest_track_20261004/flrw_source_regression/TASK_RETURN.json",
+    "research/fastest_track_20261004/flrw_source_regression/evidence/ACTUAL_ROWS.tsv",
+    "research/fastest_track_20261004/flrw_source_regression/evidence/BUILD_LIBRARY.log",
+    "research/fastest_track_20261004/flrw_source_regression/evidence/BUILD_PROBE.log",
+    "research/fastest_track_20261004/flrw_source_regression/evidence/COMMANDS.json",
+    "research/fastest_track_20261004/flrw_source_regression/evidence/LIBRARIES.txt",
+    "research/fastest_track_20261004/flrw_source_regression/evidence/RUSTC.txt",
+    "research/fastest_track_20261004/flrw_source_regression/evidence/VERIFICATION.json",
+    "research/fastest_track_20261004/flrw_source_regression/evidence/owner_probe/LIBRARIES.txt",
+    "research/fastest_track_20261004/flrw_source_regression/evidence/owner_probe/LIBRARY_SHA256.json",
+    "research/fastest_track_20261004/flrw_source_regression/evidence/owner_probe/NATIVE_RESULT.json",
+    "research/fastest_track_20261004/flrw_source_regression/evidence/owner_probe/OBSERVATION_RECEIPT.json",
+    "research/fastest_track_20261004/flrw_source_regression/evidence/owner_probe/REMOTE_FETCH_RECEIPT.json",
+    "research/fastest_track_20261004/flrw_source_regression/evidence/owner_probe/native_run.log",
+    "research/fastest_track_20261004/flrw_source_regression/observe_owner_probe.py",
+    "research/fastest_track_20261004/flrw_source_regression/probe.rs",
+    "research/fastest_track_20261004/flrw_source_regression/verify.py",
+    "research/fastest_track_20261004/flrw_source_regression/LOOP_RETURN.json"
+  ],
+  "commands": [
+    {
+      "command": "python3 verify.py --receiver <pinned repo> --rustc <1.94.1> --output <new attempt_01>",
+      "exit_code": 0,
+      "evidence_path": "evidence/COMMANDS.json"
+    },
+    {
+      "command": "python3 observe_owner_probe.py --script <verified original run_native_probe.py> --repo <pinned repo> --output <new attempt_01> --toolchain-bin <1.94.1>",
+      "exit_code": 0,
+      "evidence_path": "evidence/owner_probe/NATIVE_RESULT.json"
+    },
+    {
+      "command": "rustfmt --check probe.rs and Python AST parse both drivers",
+      "exit_code": 0,
+      "evidence_path": "evidence/VERIFICATION.json"
+    },
+    {
+      "command": "Both artifact archives/provider raw readback SHA/size/payload manifest verification",
+      "exit_code": 0,
+      "evidence_path": "BACKUP_RECEIPT.json; OWNER_PROBE_BACKUP_RECEIPT.json"
+    }
+  ],
+  "artifacts": [
+    "SOURCE_INPUT_LOCK.json",
+    "RESULTS.json",
+    "TASK_RETURN.json",
+    "OWNER_PROBE_RETURN_KO.md",
+    "evidence/owner_probe/NATIVE_RESULT.json",
+    "evidence/owner_probe/OBSERVATION_RECEIPT.json",
+    "BACKUP_RECEIPT.json",
+    "OWNER_PROBE_BACKUP_RECEIPT.json"
+  ],
+  "claim": {
+    "basis": "New real-function L/P finite comparisons and original supplied source-guarded native probe compilation/execution. Each separate immutable input contract executed once; source/native/library identities and full outputs retained.",
+    "ceiling": {
+      "L_P_finite_regression": "PASS_108_RECORDS_2137_ASSERTIONS",
+      "delivered_native_probe": "BUILD_AND_RUN_PASS_7_GROUPS",
+      "owner_native_environment_blocker": "CLOSED_FOR_THIS_PINNED_PROBE_ONLY",
+      "general_FLRW_consumer": "OPEN",
+      "Q_phase_API": "NOT_APPLICABLE_TO_HOMOGENEOUS_STATE",
+      "Peebles_receiver": "NOT_BOUND",
+      "CR_F0": "WAIT_FOR_ACTUAL_CR_OFF_DISPATCH_BINDING",
+      "uniform_root_remainder": "OPEN_REI_F04_OWNER",
+      "G02": "UNRESOLVED",
+      "production": "HOLD",
+      "capture": false,
+      "all_bound": "OPEN",
+      "b_grid": "NO_GO"
+    }
+  },
+  "next_task": "REI-CHAT-FLRW03_EXPANDING_ADAPTER_AND_INTEGRATED_BUDGET and independent canonical REI-F04 (rei_bianchi owner); CR-F0 when actual off hook supplied",
+  "blocker": null,
+  "extensions": {
+    "source_regression_rows": {
+      "L": 46,
+      "R": 18,
+      "P": 36,
+      "G": 6,
+      "E": 2
+    },
+    "source_regression_assertions": 2137,
+    "native_stdout": "RHS,0,1.63099468701162854e-16\nRHS,1,2.85659968801504430e-17\nRHS,2,4.69129132396734867e-17\nRHS,3,1.33491611353153529e-16\nSTEP,1.00000000000000000e4,-6.70382528366436498e-16,1.69002056431488150e-15,1.92033888790632545e-15\nSTEP,1.00000000000000000e6,-1.72755875169330564e-17,1.24101325689962541e-16,1.92361179068845090e-11\nSTEP,1.00000000000000000e8,-1.92393987851051019e-18,9.33964749469179369e-17,1.91463717807288658e-7\nCHECKS,7\n",
+    "native_observation": {
+      "exit_code": 0,
+      "wall_seconds": 0.5953606149996631,
+      "children_peak_RSS_KiB": 135680,
+      "execution_attempt_count": 1,
+      "automatic_retries": 0,
+      "script_sha256": "67d09129e45e692b4b2a4bffc6f0edbf472deaad96ddf15993d3b7814c4eb51c",
+      "observer_sha256": "c0194613f0786cc6f376f7ff28de00c6a47e158ffa29ccdb7abeebbc2517bb51",
+      "retained_native_files": {
+        "native_artifacts_0/probe": {
+          "bytes": 4009504,
+          "sha256": "298eac6737bdf0d0cf8b9bfcb68d60992444975dfce2504ab8b7fd41a471b430"
+        },
+        "native_artifacts_0/microstep.rs": {
+          "bytes": 8928,
+          "sha256": "e03cc1512cdd2b60735b1ab655c8e6657423c18ee4ad55ca1d30f24ad4974e53"
+        },
+        "native_artifacts_0/main.rs": {
+          "bytes": 2391,
+          "sha256": "191c88782bd3570eb5a5ce700402d934a081b439cade661c024c8e8c59563ed6"
+        },
+        "native_artifacts_0/hhe_events.rs": {
+          "bytes": 9447,
+          "sha256": "c100b08e034089c2d67b2102769ccdd51f1d29a2f388d6bb2dfe7984af93b290"
+        },
+        "native_artifacts_0/thermal.rs": {
+          "bytes": 1489,
+          "sha256": "6d7be31934bb33a46c0911d28b62e34d22027e08a8a1945c5d7d32bf32f79b8a"
+        }
+      },
+      "affinity": [
+        0
+      ],
+      "observation_scope": "Cleanup retention only; no numerical/source/argument changes"
+    },
+    "checks_are_finite_not_interval_certification": true,
+    "science_attempts": [
+      {
+        "contract": "New BASS L/P actual-function driver",
+        "attempts": 1
+      },
+      {
+        "contract": "Newly delivered original FLRW02 native probe",
+        "attempts": 1
+      }
+    ],
+    "science_retries": 0,
+    "history_runs": 0,
+    "old_suite_replays": 0,
+    "original_atomic_GMP_calls": 0,
+    "patch_reapplications": 0,
+    "independent_reviewer_used": false,
+    "dual_provider_backups": "R3_BOTH_ARCHIVES_BOTH_PROVIDERS",
+    "direct_chat_delivery": "UNVERIFIED_SHARED_GIT_CLOUD_ONLY",
+    "original_runtime_checkout_preserved": true
+  }
+}

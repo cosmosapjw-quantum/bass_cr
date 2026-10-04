@@ -1,0 +1,66 @@
+[
+  {
+    "command": [
+      "/root/.local/state/bass_cr/fastest_track/rustup/toolchains/1.94.1-x86_64-unknown-linux-gnu/bin/rustc",
+      "--version",
+      "--verbose"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 0.01786088800872676,
+    "evidence_path": "RUSTC.txt"
+  },
+  {
+    "command": [
+      "/root/.local/state/bass_cr/fastest_track/rustup/toolchains/1.94.1-x86_64-unknown-linux-gnu/bin/rustc",
+      "--edition=2021",
+      "--crate-name",
+      "rei_microphysics",
+      "--crate-type=rlib",
+      "-C",
+      "opt-level=0",
+      "-C",
+      "codegen-units=1",
+      "/root/bass_cr_intake/fastest_track_20261004/receiver/rust/rei_microphysics/src/lib.rs",
+      "-o",
+      "/root/bass_cr_intake/fastest_track_20261004/source_bound_03/attempt_01/librei_microphysics.rlib"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 0.46678525100287516,
+    "evidence_path": "BUILD_LIBRARY.log"
+  },
+  {
+    "command": [
+      "/root/.local/state/bass_cr/fastest_track/rustup/toolchains/1.94.1-x86_64-unknown-linux-gnu/bin/rustc",
+      "--edition=2021",
+      "-C",
+      "opt-level=0",
+      "-C",
+      "codegen-units=1",
+      "/root/bass_cr_intake/fastest_track_20261004/bass_source/research/fastest_track_20261004/flrw_source_regression/probe.rs",
+      "--extern",
+      "rei_microphysics=/root/bass_cr_intake/fastest_track_20261004/source_bound_03/attempt_01/librei_microphysics.rlib",
+      "-o",
+      "/root/bass_cr_intake/fastest_track_20261004/source_bound_03/attempt_01/probe"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 0.2165919830003986,
+    "evidence_path": "BUILD_PROBE.log"
+  },
+  {
+    "command": [
+      "/root/bass_cr_intake/fastest_track_20261004/source_bound_03/attempt_01/probe"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 0.005930403000093065,
+    "evidence_path": "ACTUAL_ROWS.tsv"
+  },
+  {
+    "command": [
+      "ldd",
+      "/root/bass_cr_intake/fastest_track_20261004/source_bound_03/attempt_01/probe"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 0.010120741004357114,
+    "evidence_path": "LIBRARIES.txt"
+  }
+]
