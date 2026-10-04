@@ -1,0 +1,13 @@
+# R4AM 다음 한 단계: native weak-K cell parity
+
+원자 데이터 생산 전용이다. rei_bianchi 배경/수송/재이온화 코드를 여기서 개발하지 않는다.
+
+R4AM은 R4AL의정밀weakK문제를originchart/사차entire각도moment/explicitGaussianremainder를갖는고정geometryPythonreferenceprovider로진전시켰다. 실제기하1,227regular+2origin의완전한cover를확인했고제조함수3cell의n32구간은1e-16목표를충족했다. 새시험153/read-only검토55이며actualatomicintegral0이다. 전체K또는연속K상계는계산하지않았다. 기존full18Gram/R4AFcenter/M9/oldR8/samecentreG/T/V는재계산하지않는다.
+
+다음로컬node=R4AN_WEAK_K_NATIVE_SINGLE_CELL_PARITY. 이식대상은R4AM의식을정확히보존한GMP정수interval hotkernel이다. R4AFnativeSbackend의프레임을재사용하되새source/nativehash와독립parity를둔다. 먼저저장된analyticfixture의동일node/weight와regular/두origin을비교한다. 각도degree4,coeff-onlyconjugation,원점scaledgradient,weakkinetic1/2,Coulomb두핵,ETF시간항K=H-iD와actualepoch를보존한다. arbitraryfastmath나FP64로oracleprecision을내리지않는다.
+
+초기actualcrosscap0. native구현후실제cell계산이필요하면하나의geometry/cell/entry,precision,원천input,wall/memory/attemptcap/output을새계약으로등록한다. 첫cell완료후에도full81entry나전체shifted를자동승인하지않는다. 고정z의성공을continuouszKremainder로올리지않는다. 이후복소z근방또는jet상계는별도노드다.
+
+외부첫node는R4AH_m64다. runtime/R4AH_M64_RUNTIME.zip의원본코드를NCP에풀고실제environment/build/BATCHsha를bind하고한점만승인/실행/반환한다. 기존center와M9를반복하지않고m64수락전9점추가실행금지. R4AM의referencepilot은이m64실행을대체하지않는다.
+
+G02UNRESOLVED/productionHOLD/capturefalse/all_boundOPEN/b_gridNO_GO. physicalbridge/preciseK/windowKderivative와stenciltotal은null유지. all_possible_local_work_finished=false. 새파일과결과hash를먼저읽고같은시험/기하생성을검증이라는이유로반복하지않는다. 바뀐implementation/native에대한영향범위만검증한다.
