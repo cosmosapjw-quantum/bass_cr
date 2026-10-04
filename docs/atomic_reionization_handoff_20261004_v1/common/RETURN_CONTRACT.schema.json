@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TaskReturnV1",
+  "type": "object",
+  "required": [
+    "task_id",
+    "state",
+    "input_identity",
+    "changed_paths",
+    "commands",
+    "artifacts",
+    "claim",
+    "next_task"
+  ],
+  "properties": {
+    "task_id": {
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "completed",
+        "partial",
+        "blocked"
+      ]
+    },
+    "input_identity": {
+      "type": "object"
+    },
+    "changed_paths": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "commands": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "command",
+          "exit_code",
+          "evidence_path"
+        ]
+      }
+    },
+    "artifacts": {
+      "type": "array"
+    },
+    "claim": {
+      "type": "object",
+      "required": [
+        "basis",
+        "ceiling"
+      ]
+    },
+    "next_task": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "blocker": {
+      "type": [
+        "object",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

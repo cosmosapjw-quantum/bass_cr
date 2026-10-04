@@ -1,0 +1,444 @@
+{
+  "schema": "atomic_external_adoption.recommendation.v1",
+  "date": "2026-10-04",
+  "language": "ko",
+  "status": "HISTORICAL_RECOMMENDATION_REFERENCE_SUPERSEDED_FOR_CURRENT_REPO_BINDING",
+  "question": "Replace bespoke atomic calculations where public data suffice, finish application role of three threads, advance rei_bianchi.",
+  "internal_authority": {
+    "library_file_id": "libfile_ec83622f03d08191af87305d4af4a737",
+    "snapshot_date": "2026-10-04",
+    "live_repository_rescan": false,
+    "input_files": [
+      "input_H_He_Atomic_SSOT_20261004.json",
+      "input_CONVERGENCE_PLAN_KO.md",
+      "input_R1_CONSUMER.md"
+    ]
+  },
+  "recommended_baseline": {
+    "geometry": "prescribed homogeneous Bianchi I",
+    "tilt": false,
+    "species": [
+      "HI",
+      "HII",
+      "HeI",
+      "HeII",
+      "HeIII",
+      "e"
+    ],
+    "atom_internal_state": "unpolarized scalar populations",
+    "particle_distribution": "local nonrelativistic Maxwellian",
+    "thermal_variable": "proper thermal energy density",
+    "radiation": "direction- and frequency-resolved native field",
+    "closure": "freeze coupled OTS or explicitly scoped escape/transport choice before runs; no silent specieswise CaseB",
+    "secondary_electrons": "inherited MICRO0 primary-only approximation; qualify SED/excess-energy regime, MICRO1 when required",
+    "initial_conditions_and_domain": "inherit selected R1 scenario, freeze actual values in W0; not chosen from plotted outcomes",
+    "new_global_temperature_range": null,
+    "H_only_role": "unit/reference fixture, not H/He replacement"
+  },
+  "providers": [
+    {
+      "provider_id": "VERNER96_PI",
+      "process": [
+        "HI+photon->HII+e",
+        "HeI+photon->HeII+e",
+        "HeII+photon->HeIII+e"
+      ],
+      "source_urls": [
+        "https://www.pa.uky.edu/~verner/photo.html"
+      ],
+      "proposed_role": "BASELINE_PHOTO_CROSS_SECTION",
+      "domain": {
+        "state": "ground unpolarized",
+        "energy": "per-row threshold/Emax; units eV, cross section Mb",
+        "resonances": "smoothed"
+      },
+      "reuse_status": "PUBLIC_AUTHOR_DATA_EXPLICIT_BLANKET_REDISTRIBUTION_LICENSE_NOT_CONFIRMED",
+      "physical_uncertainty": {
+        "kind": "fit/model",
+        "rigorous_physical_bound": null
+      },
+      "numerical_execution": "NOT_RUN",
+      "consumer_admission": false,
+      "existing_authority_preferred": true
+    },
+    {
+      "provider_id": "GRACKLE_3_4_1_RATES",
+      "process": [
+        "electron_impact_ionization",
+        "radiative_recombination",
+        "dielectronic_recombination",
+        "collisional_excitation_cooling",
+        "collisional_ionization_cooling",
+        "recombination_cooling",
+        "free_free_cooling",
+        "Compton_CMB_energy_exchange"
+      ],
+      "source_urls": [
+        "https://grackle.readthedocs.io/en/grackle-3.4.1/RateFunctions.html",
+        "https://github.com/grackle-project/grackle/tree/grackle-3.4.1"
+      ],
+      "proposed_role": "PINNED_RATE_REFERENCE_OR_THIN_ADAPTER",
+      "domain": {
+        "temperature_K": "per-function and original source; no global validity inferred",
+        "distribution": "local nonrelativistic Maxwellian",
+        "case": "explicit transport closure"
+      },
+      "reuse_status": "ENZO_PUBLIC_LICENSE_NCSA_BSD_LIKE_NOTICE_REQUIRED",
+      "physical_uncertainty": {
+        "kind": "source-specific empirical/model; not floating-point enclosure",
+        "rigorous_physical_bound": null
+      },
+      "numerical_execution": "NOT_RUN",
+      "consumer_admission": false,
+      "version": "grackle-3.4.1",
+      "commit": "af7939494ce65007887ada7b98d1813df6843346",
+      "source_sha256": "a900e726413da39bb24fc506846a09f7e0e4addbd5152197ca76d0e22ad02cea",
+      "validation_status": "RELEASE_SOURCE_HEADER_LICENSE_READ_NOT_BUILT",
+      "fallback_policy": "Keep already-pinned HG97/Friedrich family if implemented; do not rewrite merely for adoption"
+    },
+    {
+      "provider_id": "GRACKLE_K57_HH",
+      "process": [
+        "HI+HI->HI+HII+e"
+      ],
+      "source_urls": [
+        "https://grackle.readthedocs.io/en/grackle-3.4.1/Network.html",
+        "https://arxiv.org/abs/1504.00514"
+      ],
+      "proposed_role": "OPTIONAL_HH_RATE_WITH_REQUIRED_SENSITIVITY",
+      "domain": {
+        "T_code_branch_K": ">3000; below returns tiny",
+        "validity": "implementation cutoff not physical bound",
+        "distribution": "Maxwellian"
+      },
+      "reuse_status": "GRACKLE_LICENSE_FOR_CODE_PUBLISHED_EQUATION_PROVENANCE",
+      "physical_uncertainty": {
+        "kind": "large literature model spread",
+        "rigorous_physical_bound": null
+      },
+      "numerical_execution": "NOT_RUN",
+      "consumer_admission": false,
+      "formula_cgs": "1.2e-17 * T_K**1.2 * exp(-157800/T_K)",
+      "alternative_formula_cgs": "4.65e-21 * T_K**1.5 * exp(-157800/T_K)",
+      "illustrative_formula_evaluation": true,
+      "upstream_or_consumer_execution": "NOT_RUN",
+      "native_source_convention": "R_HII=R_e=k57*n_HI**2; no additional 1/2",
+      "rate_solver_sha256": "0a94542b8b35bcb47ebb1865320c3e37a3831818549eaabcbfeb65aab158fe83"
+    },
+    {
+      "provider_id": "KF96_HE2_H_RCT_NOMINAL",
+      "process": [
+        "HeIII+HI->HeII_1s+HII+photon"
+      ],
+      "source_urls": [
+        "https://uknowledge.uky.edu/physastron_facpub/150",
+        "https://doi.org/10.1103/PhysRevA.26.3164"
+      ],
+      "proposed_role": "APPROXIMATE_CX_PROVIDER_CANDIDATE",
+      "domain": {
+        "published_T_K": [
+          1000.0,
+          10000000.0
+        ],
+        "distribution": "thermal nominal prescription",
+        "state": "radiative ground-state channel"
+      },
+      "reuse_status": "PUBLISHED_NOMINAL_PRESCRIPTION_NO_UNRESTRICTED_PDF_REDISTRIBUTION_ASSUMED",
+      "physical_uncertainty": {
+        "kind": "nominal assumed coefficient, not precise fit or proven upper bound",
+        "rigorous_physical_bound": null
+      },
+      "numerical_execution": "NOT_RUN",
+      "consumer_admission": false,
+      "coefficient_cm3_s": 1e-14,
+      "direct_free_electron_delta": 0,
+      "photon_secondary_ionization": "separate absorption event",
+      "stop_condition": "declared sensitivity family and energy/photon ledger closed for selected consumer domain"
+    },
+    {
+      "provider_id": "COLLISIONDB_HE2_H_NRCT",
+      "process": [
+        "HeIII+HI_1s->HeII_nl+HII"
+      ],
+      "source_urls": [
+        "https://db-amdis.org/collisiondb/",
+        "https://db-amdis.org/collisiondb/licence/"
+      ],
+      "proposed_role": "FAST_ION_EXTENSION_NOT_THERMAL_BASELINE",
+      "domain": {
+        "example_dataset_ids": [
+          "D102743",
+          "D102744",
+          "D102793"
+        ],
+        "example_energy_keV_per_u": [
+          1,
+          100
+        ],
+        "example_rows_each": 10,
+        "cross_section_unit": "cm2",
+        "process": "nonradiative capture"
+      },
+      "reuse_status": "CC_BY_4_0_UNLESS_RECORD_SPECIFIES_EXCEPTION",
+      "physical_uncertainty": {
+        "kind": "dataset basis/fit uncertainty must be interpreted from paper",
+        "rigorous_physical_bound": null
+      },
+      "numerical_execution": "NOT_RUN",
+      "consumer_admission": false,
+      "raw_access_verified": true,
+      "source_doi": "10.1016/j.adt.2019.05.002",
+      "caution": "1s final state does not identify RCT; no keV/u-to-thermal extrapolation"
+    },
+    {
+      "provider_id": "UGA_HH_HP_H",
+      "process": [
+        "elastic",
+        "spin_exchange",
+        "proton_H_charge_exchange",
+        "transport_cross_sections"
+      ],
+      "source_urls": [
+        "https://sites.physast.uga.edu/amdbs/elastic/index-h%2Bh.html"
+      ],
+      "proposed_role": "PROCESS_SPECIFIC_OPTIONAL_PROVIDER",
+      "domain": {
+        "HH_Ecm_eV": [
+          0.0001,
+          10000.0
+        ],
+        "HpH_2023_elastic_Ecm_eV": [
+          0.0001,
+          100000000.0
+        ],
+        "other_processes": "source-specific; 2023 elastic update not all-channel supersession"
+      },
+      "reuse_status": "PUBLIC_INDEX_RAW_RETRIEVAL_AND_REUSE_CONDITIONS_NOT_FULLY_CONFIRMED",
+      "physical_uncertainty": {
+        "kind": "source-specific",
+        "rigorous_physical_bound": null
+      },
+      "numerical_execution": "NOT_RUN",
+      "consumer_admission": false,
+      "raw_access_verified": false
+    },
+    {
+      "provider_id": "FIDASIM_ATOMIC",
+      "process": [
+        "proton_H_capture",
+        "ionization",
+        "excitation",
+        "beam_Maxwell_average"
+      ],
+      "source_urls": [
+        "https://github.com/D3DEnergetic/FIDASIM"
+      ],
+      "proposed_role": "CR_EXTENSION_CODE_CANDIDATE",
+      "domain": {
+        "energy": "fit-specific; not universal low-E coverage",
+        "distribution": "beam-target routines do not imply arbitrary anisotropic distribution"
+      },
+      "reuse_status": "MIT_SOURCE_DATA_PROVENANCE_SEPARATE",
+      "physical_uncertainty": {
+        "kind": "source/fit-specific",
+        "rigorous_physical_bound": null
+      },
+      "numerical_execution": "NOT_RUN",
+      "consumer_admission": false
+    },
+    {
+      "provider_id": "CLOUDY_C25_REFERENCE",
+      "process": [
+        "H_He_equilibrium",
+        "thermal_reference"
+      ],
+      "source_urls": [
+        "https://data.nublado.org/cloudy_releases/c25/",
+        "https://gitlab.nublado.org/cloudy/cloudy/-/blob/c25.00/license.txt"
+      ],
+      "proposed_role": "INDEPENDENT_LOCAL_REFERENCE_NOT_BIANCHI_SOLVER",
+      "domain": {
+        "comparison": "match species, SED, densities, rates/closure deliberately"
+      },
+      "reuse_status": "ZLIB_SOURCE_UPSTREAM_DATA_RIGHTS_SEPARATE",
+      "physical_uncertainty": {
+        "kind": "model-comparison discrepancy",
+        "rigorous_physical_bound": null
+      },
+      "numerical_execution": "NOT_RUN",
+      "consumer_admission": false,
+      "version": "c25.00",
+      "build_status": "NOT_BUILT"
+    },
+    {
+      "provider_id": "FS10_ELECINTERP",
+      "process": [
+        "secondary_electron_heating",
+        "secondary_ionization",
+        "excitation_deposition"
+      ],
+      "source_urls": [
+        "https://cosmicdawn.astro.ucla.edu/codes_and_tools.html",
+        "https://cosmicdawn.astro.ucla.edu/elec_interp.tar"
+      ],
+      "proposed_role": "MICRO1_EXTENSION_CANDIDATE",
+      "domain": {
+        "energy": "table-specific; paper fast electrons E>10eV",
+        "ion_fraction": "table-specific",
+        "distribution": "scalar deposited-energy fractions"
+      },
+      "reuse_status": "PUBLIC_AUTHOR_TAR_NO_EXPLICIT_LICENSE_FOUND_IN_ARCHIVE",
+      "physical_uncertainty": {
+        "kind": "Monte Carlo/cross-section/model",
+        "rigorous_physical_bound": null
+      },
+      "numerical_execution": "NOT_RUN",
+      "consumer_admission": false,
+      "download_verified": true,
+      "archive_bytes": 310272,
+      "sha256": "e9760d637b5bd97fe981cb459a7e2d733692a9f9f8deb9a757224b14be632101"
+    }
+  ],
+  "threads": [
+    {
+      "id": "bass_cr",
+      "proposal": "CR_OFF_BASELINE_UNBLOCKED; external fast-particle provider only when CR science selected",
+      "internal_science_status": "PARKED_UNRESOLVED_IF_ADOPTED",
+      "must_not_promote": [
+        "FULL_K",
+        "physical_bridge",
+        "production_rate"
+      ],
+      "exit_artifacts": [
+        "process_crosswalk",
+        "external_provider_manifest_if_needed",
+        "charge_electron_energy_ledger"
+      ]
+    },
+    {
+      "id": "WU088_HH",
+      "proposal": "EXTERNAL_RATE_FAMILY_ADOPTED_WITH_SENSITIVITY after finite validation",
+      "internal_science_status": "24_of_289_FROM_READ_SSOT_UNCHANGED",
+      "must_not_promote": [
+        "missing_cell_bounds",
+        "epsilon_C",
+        "epsilon_R"
+      ],
+      "exit_artifacts": [
+        "process_and_symmetry_conventions",
+        "public_fit_family_sensitivity",
+        "consumer_domain_admission"
+      ]
+    },
+    {
+      "id": "BASS_HE",
+      "proposal": "EXTERNAL_APPROXIMATE_CX_PROVIDER_ADOPTED after sensitivity/ledger closure",
+      "internal_science_status": "B5C1_SCOPED_RESULTS_UNCHANGED",
+      "must_not_promote": [
+        "B5C_uniform_bounds",
+        "Eq55",
+        "cross_section_certificate"
+      ],
+      "exit_artifacts": [
+        "RCT_NRCT_split",
+        "nominal_rate_and_uncertainty_semantics",
+        "photon_energy_ledger",
+        "consumer_sensitivity"
+      ]
+    }
+  ],
+  "work_units": [
+    {
+      "id": "W0",
+      "name": "Freeze application scope and inherited gates",
+      "depends_on": [],
+      "status": "PROPOSED"
+    },
+    {
+      "id": "W1",
+      "name": "Pin one external rate family and photo cross sections",
+      "depends_on": [
+        "W0"
+      ],
+      "status": "PROPOSED"
+    },
+    {
+      "id": "W2",
+      "name": "Close three consumer-provider contracts with relevance tests",
+      "depends_on": [
+        "W1"
+      ],
+      "status": "PROPOSED"
+    },
+    {
+      "id": "W3",
+      "name": "Bind actual Rust nonlinear map and certify thermal step",
+      "depends_on": [
+        "W0"
+      ],
+      "final_rate_binding_requires": [
+        "W1"
+      ],
+      "status": "REQUIRED_UNRESOLVED"
+    },
+    {
+      "id": "W4",
+      "name": "Generate finite H/He FLRW-Bianchi paired history and scientific plot",
+      "depends_on": [
+        "W1",
+        "W3"
+      ],
+      "condition": "Selected mandatory channels admitted; optional missing channels explicitly limit claim scope; process-dominant uncertainty blocks broader interpretation",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "W5",
+      "name": "Only requested/relevance-driven hard-photon, diffuse, CR, molecular, 21cm extensions",
+      "depends_on": [
+        "W4"
+      ],
+      "status": "OPTIONAL"
+    }
+  ],
+  "gates": {
+    "preserve_current_consumer_numeric_gates": true,
+    "logT_local_error_strict": 0.0002,
+    "public_uncertainty_width_strict": 0.002,
+    "same_source_numerical_parity": true,
+    "nuclei_charge_electron_photon_energy": true,
+    "finite_domain_and_no_silent_extrapolation": true,
+    "exact_Saha_required_for_reduced_nonLTE_baseline": false,
+    "same_level_detailed_balance_when_claimed": true,
+    "uncertainty_of_true_atomic_physics_proved": false,
+    "paired_runs_preserve_common_rate_correlation": true
+  },
+  "do_not_adopt_as_unconditional_bundle": [
+    "OPEN_ADAS",
+    "LXCat",
+    "PRIZMO_license_unresolved",
+    "HYREC2_license_unresolved",
+    "elecinterp_license_unresolved"
+  ],
+  "reopen_triggers": [
+    "consumer domain outside external data support",
+    "atomic model uncertainty dominates requested observable",
+    "state-resolved/coherent/nonthermal observable genuinely required"
+  ],
+  "execution": {
+    "atomic_eigensolves": 0,
+    "new_scattering_integrals": 0,
+    "external_code_builds": 0,
+    "reionization_histories": 0,
+    "illustrative_published_formula_evaluation": true,
+    "source_repositories_modified": false,
+    "scientific_gates_promoted": false
+  },
+  "independent_review": {
+    "verdict": "CONFIRMED_FOR_RESEARCH_RECOMMENDATION",
+    "artifact": "independent_review.md",
+    "blocking_findings": 0,
+    "minor_metadata_requests": "incorporated",
+    "implementation_and_admission_assessed": false
+  },
+  "current_binding_authority": "common/DECISIONS.json and threads/*/REPO_SNAPSHOT.json; BASS_HE B3 GM25/KF96 split"
+}

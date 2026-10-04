@@ -1,0 +1,126 @@
+{
+  "schema": "cr_external_contract.v1",
+  "state": "DERIVED_REFERENCE_IMPLEMENTED_NO_PHYSICAL_PROVIDER",
+  "species": [
+    "p_fast",
+    "H_gas",
+    "H_fast",
+    "p_gas",
+    "e_free"
+  ],
+  "weights": {
+    "nuclei": [
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    "charge_e": [
+      1,
+      0,
+      0,
+      1,
+      -1
+    ]
+  },
+  "channels": {
+    "resonant_cx_1s": [
+      -1,
+      -1,
+      1,
+      1,
+      0
+    ],
+    "target_ionization": [
+      0,
+      -1,
+      0,
+      1,
+      1
+    ],
+    "fast_neutral_stripping": [
+      1,
+      0,
+      -1,
+      0,
+      1
+    ],
+    "target_excitation": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "elastic": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "supported_off_mode": {
+    "flag": "CR.enabled=false",
+    "provider_calls": 0,
+    "all_CR_sources": 0,
+    "not_a_claim": "real-universe CR negligible bound"
+  },
+  "source_contract": {
+    "required_for_admission": [
+      "process_id",
+      "projectile",
+      "target_initial_state",
+      "final_state_or_inclusive_definition",
+      "energy_frame",
+      "energy_unit",
+      "cross_section_unit",
+      "support",
+      "source_url",
+      "source_version_or_commit",
+      "raw_sha256",
+      "reuse_terms",
+      "interpolation_model",
+      "uncertainty_class"
+    ],
+    "cross_section_output_unit": "cm^2",
+    "out_of_domain": "UNSUPPORTED_DOMAIN",
+    "unsupported_output": "UNSUPPORTED_CAPABILITY",
+    "default_extrapolation": null
+  },
+  "rate_contract": {
+    "frame": "local gas rest tetrad",
+    "time": "proper seconds",
+    "N_unit": "cm^-3 erg^-1 sr^-1",
+    "energy_unit": "erg",
+    "speed_unit": "cm/s",
+    "rate_unit": "cm^-3 s^-1",
+    "formula": "R=n_target integral N(E,Omega) v_rel sigma(E_CM) dE dOmega",
+    "j_alternative": "j=v*N => R=n_target integral j*sigma dE dOmega; no extra v",
+    "isotropic_angular_factor": "4pi only after actual isotropic angular integration",
+    "normalized_velocity_pdf_alternative": "k=integral fp(v)ft(w)|v-w|sigma(mu|v-w|^2/2)d3v d3w; R=np nt k"
+  },
+  "energy_contract": {
+    "output_unit": "erg cm^-3 s^-1",
+    "bookkeeping": "projectile_loss=heat+ion_potential+stored_excitation+radiation+stored_nonthermal+escape+unallocated",
+    "all_categories_disjoint": true,
+    "positive_unallocated_is_not_success": true,
+    "reference_scope": "nonnegative slowing/deposition partition; general signed exchange requires an extended ledger",
+    "CX_rate_times_projectile_energy_is_heat": false,
+    "total_sigma_determines_stopping_or_momentum": false
+  },
+  "error_contract": {
+    "numerical_enclosure_separate_from_model_uncertainty": true,
+    "fit_difference_is_rigorous_bound": false,
+    "paired_observable_variation": "same source perturbation in FLRW and Bianchi"
+  },
+  "not_implemented": [
+    "real external cross-section intake",
+    "warm-target quadrature",
+    "interpolation",
+    "secondary cascade",
+    "CR transport",
+    "actual receiver binding"
+  ]
+}

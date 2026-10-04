@@ -1,0 +1,174 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AtomicProviderRecordV1",
+  "type": "object",
+  "required": [
+    "provider_id",
+    "process_id",
+    "observable_kind",
+    "source_identity",
+    "units",
+    "frame",
+    "particle_distribution",
+    "domain",
+    "species_in",
+    "species_out",
+    "density_prefactor",
+    "branches_and_floors",
+    "uncertainty",
+    "energy_photon_closure",
+    "implementation_status",
+    "consumer_admission",
+    "closure_id"
+  ],
+  "properties": {
+    "provider_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "process_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "observable_kind": {
+      "enum": [
+        "cross_section",
+        "thermal_rate",
+        "cooling_coefficient",
+        "deposition_fraction",
+        "source_term"
+      ]
+    },
+    "source_identity": {
+      "type": "object",
+      "required": [
+        "url",
+        "version",
+        "read_status"
+      ],
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "read_status": {
+          "type": "string"
+        }
+      }
+    },
+    "units": {
+      "type": "string"
+    },
+    "frame": {
+      "type": "string"
+    },
+    "particle_distribution": {
+      "type": "string"
+    },
+    "domain": {
+      "type": "object",
+      "required": [
+        "variable",
+        "units",
+        "minimum",
+        "maximum",
+        "status"
+      ],
+      "properties": {
+        "variable": {
+          "type": "string"
+        },
+        "units": {
+          "type": "string"
+        },
+        "minimum": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "maximum": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "source_supported",
+            "fixture_only",
+            "unresolved"
+          ]
+        }
+      }
+    },
+    "species_in": {
+      "type": "object"
+    },
+    "species_out": {
+      "type": "object"
+    },
+    "density_prefactor": {
+      "type": "string"
+    },
+    "branches_and_floors": {
+      "type": "array"
+    },
+    "uncertainty": {
+      "type": "object",
+      "required": [
+        "kind",
+        "rigorous_physical_bound"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string"
+        },
+        "rigorous_physical_bound": {
+          "type": [
+            "object",
+            "null"
+          ]
+        }
+      }
+    },
+    "energy_photon_closure": {
+      "type": "object",
+      "required": [
+        "status",
+        "owner"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "complete_for_declared_model",
+            "unresolved",
+            "not_applicable"
+          ]
+        },
+        "owner": {
+          "type": "string"
+        }
+      }
+    },
+    "implementation_status": {
+      "type": "string"
+    },
+    "consumer_admission": {
+      "type": "boolean"
+    },
+    "closure_id": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true,
+  "$comment": "Adapter schema: does not rewrite existing export schemas; null unresolved quantities cannot silently admit a provider."
+}

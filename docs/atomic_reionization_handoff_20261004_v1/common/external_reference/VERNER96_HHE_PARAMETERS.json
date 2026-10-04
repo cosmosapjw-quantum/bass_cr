@@ -1,0 +1,75 @@
+{
+  "source_url": "https://www.pa.uky.edu/~verner/dima/photo//photo.dat",
+  "retrieved_date": "2026-10-04",
+  "source_bytes": 17760,
+  "source_sha256": "a53e73b0af4cc6b801aef67b84bd964e3ed8c9c4992f214e4a69dc7e4443f389",
+  "selection": "Only factual parameter rows for HI,HeI,HeII. Original full code/PDF not redistributed.",
+  "columns": [
+    "Z",
+    "N_electrons",
+    "E_th_eV",
+    "E_max_eV",
+    "E0_eV",
+    "sigma0_Mb",
+    "y_a",
+    "P",
+    "y_w",
+    "y0",
+    "y1"
+  ],
+  "rows": [
+    [
+      "1",
+      "1",
+      "1.360E+01",
+      "5.000E+04",
+      "4.298E-01",
+      "5.475E+04",
+      "3.288E+01",
+      "2.963E+00",
+      "0.000E+00",
+      "0.000E+00",
+      "0.000E+00"
+    ],
+    [
+      "2",
+      "2",
+      "2.459E+01",
+      "5.000E+04",
+      "1.361E+01",
+      "9.492E+02",
+      "1.469E+00",
+      "3.188E+00",
+      "2.039E+00",
+      "4.434E-01",
+      "2.136E+00"
+    ],
+    [
+      "2",
+      "1",
+      "5.442E+01",
+      "5.000E+04",
+      "1.720E+00",
+      "1.369E+04",
+      "3.288E+01",
+      "2.963E+00",
+      "0.000E+00",
+      "0.000E+00",
+      "0.000E+00"
+    ]
+  ],
+  "conversion": "1 Mb = 1e-18 cm2",
+  "threshold_policy": "Fit E_th and physical ionization threshold are explicit distinct metadata; do not silently mix at a quadrature boundary.",
+  "formula": {
+    "x": "E/E0-y0",
+    "y": "sqrt(x*x+y1*y1)",
+    "sigma_Mb": "sigma0*((x-1)^2+yw^2)*y^(P/2-5.5)*(1+sqrt(y/ya))^(-P)",
+    "sigma_cm2": "sigma_Mb*1e-18",
+    "E_below_Eth": "0",
+    "E_above_Emax": "DOMAIN_ERROR",
+    "nonfinite_or_negative_energy": "INPUT_ERROR",
+    "source_code_url": "https://www.pa.uky.edu/~verner/dima/photo//phfit2.f",
+    "source_match": "Author phfit2.f outer-shell expression lines60-66; H/He parameters selected separately from table",
+    "runtime_validation": "not upstream Fortran execution"
+  }
+}

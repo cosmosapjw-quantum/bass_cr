@@ -1,0 +1,253 @@
+{
+  "schema": "atomic_handoff.tasks.v1",
+  "repository": "cosmosapjw-quantum/bass_cr",
+  "packet_root": "docs/atomic_reionization_handoff_20261004_v1/threads/bass_cr",
+  "first_action": "CR-F0 receiver binding; prework and portable tests already completed",
+  "cross_repo_refs": [
+    "DECISION_CR_ON_SCOPE",
+    "REI_BASELINE_HISTORY_ACCEPTED",
+    "DECISION_REOPEN_LEGACY"
+  ],
+  "cost_policy": {
+    "read_first": [
+      "REPO_SNAPSHOT.json",
+      "TASKS.json",
+      "VERIFICATION.json"
+    ],
+    "do_not_read_legacy_unless_reopened": true,
+    "repeat_completed_tests": false,
+    "atomic_calls_fastest": 0,
+    "mandatory_new_audits": 0
+  },
+  "tasks": [
+    {
+      "id": "CR-F0",
+      "lane": "fastest",
+      "status": "PREWORK_COMPLETE_RECEIVER_BINDING_PENDING",
+      "deps": [],
+      "inputs": [
+        "REPO_SNAPSHOT.json",
+        "PREWORK_KO.md",
+        "LEGACY_SOURCE_MANIFEST.json",
+        "reference/cr_contract.py",
+        "rei_bianchi CR-off interface"
+      ],
+      "outputs": [
+        "CR_OFF_ACCEPTANCE.json (proposed)"
+      ],
+      "steps": [
+        "Preserve latest science ceilings.",
+        "Reuse completed derivation and 10 passing reference tests.",
+        "Bind consumer off switch so no provider loads/calls occur.",
+        "Record actual receiver identity and zero-source callback test.",
+        "Return to rei_bianchi nonlinear map task; do not start CR-M1 or CR-L1."
+      ],
+      "commands": [
+        "PYTHONPATH=\"$CR_PACKET/reference\" python -m unittest discover -s \"$CR_PACKET/tests\" -v"
+      ],
+      "acceptance": [
+        "Off source exactly zero.",
+        "Provider call count zero.",
+        "Legacy files and ceilings preserved.",
+        "Actual receiver binding evidence recorded."
+      ],
+      "failure_branches": {
+        "provider_called": "IMPLEMENTATION: fix off dispatch only",
+        "source_identity_mismatch": "PROVENANCE: inspect changed bounded diff",
+        "consumer_not_yet_built": "WAIT_FOR_REI_CONSUMER_TASK; no atomic retry"
+      },
+      "claims": {
+        "prework": "derived + implementation-verified",
+        "receiver_binding": "not-executed",
+        "atomic_physics_completion": false
+      },
+      "pr": "PR-CR-00",
+      "command_when": "Only if reference code or execution environment changed; otherwise reuse VERIFICATION.json."
+    },
+    {
+      "id": "CR-M1",
+      "lane": "conditional_external_cr",
+      "status": "CONDITIONAL_NOT_READY",
+      "deps": [
+        "CR-F0",
+        "DECISION_CR_ON_SCOPE"
+      ],
+      "inputs": [
+        "actual spectrum domain",
+        "process/state observable",
+        "named public source",
+        "reuse terms"
+      ],
+      "outputs": [
+        "research/external_atomic_provider_20261004/manifest.json (proposed)",
+        "research/external_atomic_provider_20261004/provider.py (proposed)"
+      ],
+      "steps": [
+        "Pin one suitable external source/version/raw hash and reuse terms.",
+        "Write source-node/frame/state/domain refusal tests.",
+        "Implement only chosen source lookup/interpolation contract.",
+        "Record source uncertainty separately from numeric error."
+      ],
+      "commands": [
+        "python -m unittest discover -s research/external_atomic_provider_20261004/tests -p test_provider.py -v"
+      ],
+      "acceptance": [
+        "No unresolved frame/unit ambiguity.",
+        "Requested observable and domain supported.",
+        "No uncontrolled extrapolation.",
+        "Source-node tests pass."
+      ],
+      "failure_branches": {
+        "missing_source": "Try one alternate source; if unsupported mark CR-on BLOCKED_SOURCE",
+        "unlicensed_payload": "Use allowed source; do not repackage restricted tables",
+        "range_missing": "Domain/tail plan, not zero-fill"
+      },
+      "claims": {
+        "adopted_provider": false,
+        "physical_rates_verified": false
+      },
+      "pr": "PR-CR-01",
+      "command_when": "After this conditional task is activated and the proposed implementation/tests are created."
+    },
+    {
+      "id": "CR-M2",
+      "lane": "conditional_external_cr",
+      "status": "CONDITIONAL_NOT_READY",
+      "deps": [
+        "CR-M1"
+      ],
+      "inputs": [
+        "provider manifest",
+        "normalized distribution",
+        "thermal/fast reservoir convention",
+        "stopping/deposition choice"
+      ],
+      "outputs": [
+        "research/external_atomic_provider_20261004/distribution.json (proposed)",
+        "research/external_atomic_provider_20261004/rate_reference.py (proposed)",
+        "research/external_atomic_provider_20261004/ENERGY_LEDGER.json (proposed)"
+      ],
+      "steps": [
+        "Declare N or j or normalized velocity PDF without mixing normalization.",
+        "Build supplied quadrature deterministic rate adapter.",
+        "Test monoenergetic analytic result, zero density, support/tail refusal.",
+        "Implement nonoverlapping chemical/heat/secondary/radiation ledger."
+      ],
+      "commands": [
+        "python -m unittest discover -s research/external_atomic_provider_20261004/tests -p test_rate_reference.py -v"
+      ],
+      "acceptance": [
+        "Correct rate/energy units.",
+        "Nuclei/charge conserved.",
+        "CX no total free-electron source.",
+        "No energy double counting.",
+        "Unsupported momentum rejected."
+      ],
+      "failure_branches": {
+        "warm_tail_outside": "Quantify tail or extend selected data domain",
+        "missing_deposition": "BLOCKED_CR_HEAT_ONLY",
+        "normalization_mismatch": "Repair density/v/4pi/Jacobian interface"
+      },
+      "claims": {
+        "physical_rate_execution": false,
+        "heat_closure_verified": false
+      },
+      "pr": "PR-CR-02",
+      "command_when": "After this conditional task is activated and the proposed implementation/tests are created."
+    },
+    {
+      "id": "CR-M3",
+      "lane": "conditional_external_cr",
+      "status": "CONDITIONAL_NOT_READY",
+      "deps": [
+        "CR-M2",
+        "REI_BASELINE_HISTORY_ACCEPTED"
+      ],
+      "inputs": [
+        "actual receiver version",
+        "source rate contract",
+        "paired FLRW/Bianchi setup"
+      ],
+      "outputs": [
+        "CONSUMER_ACCEPTANCE.json (proposed)"
+      ],
+      "steps": [
+        "Use receiver-owned gas tetrad/time conversion.",
+        "Verify CR-off recovery and controlled CR-on conservation.",
+        "Pair source variations across FLRW/Bianchi.",
+        "Return accepted source scope and observable sensitivity."
+      ],
+      "commands": [],
+      "acceptance": [
+        "Actual receiver source identity pinned.",
+        "Numerical gate retained.",
+        "Energy/species effects mapped once.",
+        "Model uncertainty distinguished from certified numeric enclosure."
+      ],
+      "failure_branches": {
+        "consumer_gate_fails": "Resolve rei_bianchi numerical or implementation issue",
+        "external_uncertainty_dominates": "Reopen only relevant source/channel lane"
+      },
+      "claims": {
+        "cosmological_history_executed": false
+      },
+      "pr": "PR-CR-03",
+      "command_when": "After CR-M2 and actual receiver baseline acceptance.",
+      "command_notes": "Resolve exact receiver integration command from rei_bianchi TASKS.json at the pinned receiver version; no unverified executable is prescribed here."
+    },
+    {
+      "id": "CR-L1",
+      "lane": "legacy_atomic",
+      "status": "PARKED_UNRESOLVED",
+      "deps": [
+        "DECISION_REOPEN_LEGACY"
+      ],
+      "inputs": [
+        "LEGACY_LANE.json",
+        "legacy_sources current NEXT_DAG",
+        "fresh bounded execution contract"
+      ],
+      "outputs": [
+        "R4AP single-entry complete-cover/error-allocation artifacts (proposed)",
+        "future same-interface source provider (conditional)"
+      ],
+      "steps": [
+        "Read current R4AO DAG and exact source.",
+        "Retain completed single-cell and S-only evidence.",
+        "Define R4AP scope/error/cache/new execution contract.",
+        "Execute only separately admitted work; do not replay consumed contracts.",
+        "Submit resulting observable as optional provider; do not block baseline."
+      ],
+      "commands": [
+        "git show b263cbe3b7ab10e1a5fee919def22938ab7515cd:research/convergence_20261004/r4ao_finite_cell/NEXT_DAG.json"
+      ],
+      "acceptance": [
+        "Reopen trigger recorded.",
+        "Old failures/holds retained.",
+        "New source/environment/attempt budget explicit.",
+        "New scope claims supported by actual results."
+      ],
+      "failure_branches": {
+        "native_authorization_absent": "Stop at prepared state for that optional lane only",
+        "unbounded_entry": "NUMERICAL_UNRESOLVED; no threshold change"
+      },
+      "claims": {
+        "executed": false,
+        "legacy_science_closed": false
+      },
+      "pr": "PR-LCR-01",
+      "command_when": "Read-only recall only when legacy lane is selected; command does not authorize science execution."
+    }
+  ],
+  "return_contract": "../../common/RETURN_CONTRACT.schema.json",
+  "return_required_fields": [
+    "task_id",
+    "state",
+    "input_identity",
+    "changed_paths",
+    "commands",
+    "artifacts",
+    "claim",
+    "next_task"
+  ]
+}

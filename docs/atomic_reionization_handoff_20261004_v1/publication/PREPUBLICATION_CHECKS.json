@@ -1,0 +1,92 @@
+{
+  "scope": "portable algebra/reference checks and DAG only; original runtime not reexecuted",
+  "results": [
+    {
+      "command": [
+        "python3",
+        "atomic_handoff_20261004/tools/build_program.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"tasks\": 31,\n  \"dag_acyclic\": true,\n  \"initial_completed\": [\n    \"HE-P0\",\n    \"HH-F0\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "atomic_handoff_20261004/tools/check_common_physics.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"status\": \"FINITE_BOOKKEEPING_CHECKS_PASS\",\n  \"checks\": [\n    \"HI_photo:nuclei_charge\",\n    \"HI_e_impact:nuclei_charge\",\n    \"HI_H_impact_k57:nuclei_charge\",\n    \"HI_He_impact_k58:nuclei_charge\",\n    \"HeI_photo:nuclei_charge\",\n    \"HeI_e_impact:nuclei_charge\",\n    \"HeII_photo:nuclei_charge\",\n    \"HeII_e_impact:nuclei_charge\",\n    \"HII_RR:nuclei_charge\",\n    \"HeII_RR_DR:nuclei_charge\",\n    \"HeIII_RR:nuclei_charge\",\n    \"HeIII_HI_RCT:nuclei_charge\",\n    \"HeIII_HI_NRCT:nuclei_charge\",\n    \"HII_HI_resonant_CX:nuclei_charge\",\n    \"HH_ion_pair:nuclei_charge\",\n    \"CX_and_ion_pair_free_electron_zero\",\n    \"negative_wrong_CX_electron_detected\",\n    \"declared_rounded_threshold_RCT_binding_release\",\n    \"symbolic_photon_plus_binding_partition\",\n    \"negative_double_count_photon_and_heat_detected\",\n    \"photoelectron_plus_threshold_equals_absorbed_energy\",\n    \"proper_thermal_expansion_factor_five\",\n    \"He_source_alternative_ratio17\",\n    \"k57_density_normalization\"\n  ],\n  \"count\": 24,\n  \"threshold_note\": \"rounded declared fixture values, not updated atomic constants\",\n  \"scientific_history_executed\": false,\n  \"consumer_admission\": false\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "atomic_handoff_20261004/threads/rei_bianchi/prework_checks/check_event_identities.py"
+      ],
+      "exit_code": 0,
+      "stdout": "EXACT_ALGEBRA_CHECKED: 30 event invariants, 3 rational event identities\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "atomic_handoff_20261004/threads/bass_cr/tests",
+        "-v"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "test_cr_contract (unittest.loader._FailedTest.test_cr_contract) ... ERROR\n\n======================================================================\nERROR: test_cr_contract (unittest.loader._FailedTest.test_cr_contract)\n----------------------------------------------------------------------\nImportError: Failed to import test module: test_cr_contract\nTraceback (most recent call last):\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/unittest/loader.py\", line 396, in _find_test_path\n    module = self._get_module_from_name(name)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/unittest/loader.py\", line 339, in _get_module_from_name\n    __import__(name)\n  File \"/workspace/scratch/a5a7937171cb/atomic_handoff_20261004/threads/bass_cr/tests/test_cr_contract.py\", line 3, in <module>\n    from cr_contract import CHANNELS, conservation, event_delta, ecm_from_lab, number_rate, cr_sources, close_energy\nModuleNotFoundError: No module named 'cr_contract'\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nFAILED (errors=1)\n"
+    },
+    {
+      "command": [
+        "python3",
+        "atomic_handoff_20261004/threads/WU088_HH/verify_prework.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"BOUNDED_REFERENCE_CHECKS_PASSED\", \"checks\": 34}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "atomic_handoff_20261004/threads/BASS_HE/evidence/prework_checks.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"schema\": \"bass-he.prework-checks.v1\",\n  \"status\": \"BOUNDED_ALGEBRA_AND_ARITHMETIC_CHECKED\",\n  \"checks\": {\n    \"hydrogen_nuclei_dot_nu\": 0,\n    \"helium_nuclei_dot_nu\": 0,\n    \"charge_dot_nu\": 0,\n    \"direct_electron_change\": 0,\n    \"OTS_HI_rounded_energy_residual_eV\": \"0\",\n    \"OTS_HeI_rounded_energy_residual_eV\": \"0\",\n    \"ground_defect_rounded_eV\": \"40.8\",\n    \"GM25_to_KF96_ratio\": \"17\",\n    \"rate_cgs_to_si_factor\": \"1e-6\",\n    \"C0_physical_mass_u_coefficient\": \"0.80506117958511879578261976343373384997107342356971\",\n    \"integer_4_to_1_relative_difference\": \"0.0062867018227447387357513623430925348261077334304709\",\n    \"mass_number_u_coefficient_4\": \"0.80475815210197164648919681484211173344027498518204\",\n    \"kBT_at_1e4K_eV\": \"0.86173332621451774336636593340806392012330395775826\",\n    \"Agueny_1keVu_Ecm_over_kBT_integer_mass_approx\": \"928.36144972400660848629883482333308465801228262940\"\n  },\n  \"source_accuracy_certified\": false,\n  \"B3_runtime_executed\": false,\n  \"thermal_integration_executed\": false,\n  \"consumer_integration_executed\": false,\n  \"physical_history_executed\": false,\n  \"energy_fixture\": \"rounded thresholds only; not production constants\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "atomic_handoff_20261004/tools/verify_packet.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"status\": \"PACKET_LOGIC_AND_AVAILABLE_MANIFEST_PASS\",\n  \"tasks\": 31,\n  \"files_checked\": 0,\n  \"scientific_gate_promoted\": false\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "atomic_handoff_20261004/threads/bass_cr/tests",
+        "-v"
+      ],
+      "environment": {
+        "PYTHONPATH": "packet_root/threads/bass_cr/reference"
+      },
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_cx_has_no_total_ionization (test_cr_contract.ContractTests.test_cx_has_no_total_ionization) ... ok\ntest_energy_frame (test_cr_contract.ContractTests.test_energy_frame) ... ok\ntest_energy_ledger (test_cr_contract.ContractTests.test_energy_ledger) ... ok\ntest_every_channel_conserves_nuclei_and_charge (test_cr_contract.ContractTests.test_every_channel_conserves_nuclei_and_charge) ... ok\ntest_invalid_rates_and_inputs (test_cr_contract.ContractTests.test_invalid_rates_and_inputs) ... ok\ntest_ionization_and_stripping (test_cr_contract.ContractTests.test_ionization_and_stripping) ... ok\ntest_number_density_measure (test_cr_contract.ContractTests.test_number_density_measure) ... ok\ntest_off_never_calls_provider (test_cr_contract.ContractTests.test_off_never_calls_provider) ... ok\ntest_on_calls_provider (test_cr_contract.ContractTests.test_on_calls_provider) ... ok\ntest_unknown_channel_rejected (test_cr_contract.ContractTests.test_unknown_channel_rejected) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.001s\n\nOK\n"
+    }
+  ],
+  "initial_harness_failure": "CR import needed documented PYTHONPATH; corrected invocation rerun below. No physics failure.",
+  "final_required_checks": "PASS"
+}

@@ -1,0 +1,81 @@
+{
+  "schema": "atomic_handoff.dag.v1",
+  "nodes": [
+    {
+      "id": "CR-F0",
+      "lane": "fastest",
+      "status": "PREWORK_COMPLETE_RECEIVER_BINDING_PENDING",
+      "deps": []
+    },
+    {
+      "id": "CR-M1",
+      "lane": "conditional_external_cr",
+      "status": "CONDITIONAL_NOT_READY",
+      "deps": [
+        "CR-F0",
+        "DECISION_CR_ON_SCOPE"
+      ]
+    },
+    {
+      "id": "CR-M2",
+      "lane": "conditional_external_cr",
+      "status": "CONDITIONAL_NOT_READY",
+      "deps": [
+        "CR-M1"
+      ]
+    },
+    {
+      "id": "CR-M3",
+      "lane": "conditional_external_cr",
+      "status": "CONDITIONAL_NOT_READY",
+      "deps": [
+        "CR-M2",
+        "REI_BASELINE_HISTORY_ACCEPTED"
+      ]
+    },
+    {
+      "id": "CR-L1",
+      "lane": "legacy_atomic",
+      "status": "PARKED_UNRESOLVED",
+      "deps": [
+        "DECISION_REOPEN_LEGACY"
+      ]
+    }
+  ],
+  "external_nodes": [
+    "DECISION_CR_ON_SCOPE",
+    "REI_BASELINE_HISTORY_ACCEPTED",
+    "DECISION_REOPEN_LEGACY"
+  ],
+  "fastest_path": [
+    "CR-F0"
+  ],
+  "legacy_is_prerequisite_of_fastest": false,
+  "edges": [
+    [
+      "CR-F0",
+      "CR-M1"
+    ],
+    [
+      "DECISION_CR_ON_SCOPE",
+      "CR-M1"
+    ],
+    [
+      "CR-M1",
+      "CR-M2"
+    ],
+    [
+      "CR-M2",
+      "CR-M3"
+    ],
+    [
+      "REI_BASELINE_HISTORY_ACCEPTED",
+      "CR-M3"
+    ],
+    [
+      "DECISION_REOPEN_LEGACY",
+      "CR-L1"
+    ]
+  ],
+  "rejoin_contract": "CR-L1 results may provide the same sigma provider consumed by CR-M2 only after CR-M1-style admission; it never rewrites CR-F0."
+}

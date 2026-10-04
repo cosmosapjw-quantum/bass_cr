@@ -1,0 +1,18 @@
+flowchart TD
+  A["REI-F00 모델 계약"] --> B["F01/F02 provider·oracle"]
+  B --> C["F03 H/He coupled map"]
+  C --> D["F04/F05 인증·첫 구간"]
+  B --> E["F06 기하 adapter"]
+  C --> F["F07 물리 scenario"]
+  D --> G["F08 paired baseline"]
+  E --> G
+  F --> G
+  C --> H["CR-F0 무호출 수락"]
+  F --> I["HH-F1/F2 외부율 계약"]
+  A --> J["HE-F1/F2 source family"]
+  G --> K["F09 단일 원자 감도 실행"]
+  I --> K
+  J --> K
+  K --> L["HH/He 결과 수락·응용 종료"]
+  M["명시한 확장/재개 조건"] --> N["Legacy 계획·DAG·gate 복원"]
+  N -. "필요한 provider만 교체" .-> B
