@@ -1,0 +1,116 @@
+{
+  "schema": "rei.actual-parent.v1",
+  "task_id": "REI-F04",
+  "status": "FROZEN_PROSPECTIVE_NUMERICAL_DOMAIN_NOT_YET_ROOT_CERTIFIED",
+  "model_id": "REI_FT03_HG_RATE_MOMENT_CASE_A_CONTROLLED_V1",
+  "source_head": "d0653167609e7ce5302b14738c384acf19c618e4",
+  "source_identity": {
+    "rust/rei_microphysics/src/ft03_controlled.rs": "61e11471482bb49d99e5d0eb79504d3f67538fbe6361653a0462d1abb0b672db",
+    "rust/rei_microphysics/src/ft03_rates.rs": "1a97cd7a3555deeb4d8700376cd84580c5102127773bc3a235a29c33b0c1542f",
+    "rust/rei_microphysics/src/hhe_events.rs": "c100b08e034089c2d67b2102769ccdd51f1d29a2f388d6bb2dfe7984af93b290",
+    "rust/rei_microphysics/src/atomic_provider.rs": "b0b572d3940a7a1f740e09d5f43c60236ec61511e8bdbcc68e60395ec7e107d3",
+    "docs/atomic_reionization_handoff_20261004_v1/threads/rei_bianchi/PREWORK_KO.md": "3760c99bded1e78751c610c5e86116b80ccfc7040aeef95f9054117517146cb1"
+  },
+  "topology": "Actual static7state backward-Euler with endpointT/ne,CaseAescape,threefixedVernerphotonenergies; no inheritedNodeHistory or expansion",
+  "coordinate_ids": [
+    "x_HII",
+    "x_HeII",
+    "x_HeIII",
+    "w_u_over_nH_eV",
+    "p0_over_nH",
+    "p1_over_nH",
+    "p2_over_nH"
+  ],
+  "center_source": "Ft03Model::controlled().initial_state(), transform from actual Rust binary64 state; producer must record exact center bits, no invented input",
+  "radii": [
+    1e-07,
+    1e-07,
+    1e-07,
+    1e-05,
+    1e-08,
+    1e-08,
+    1e-08
+  ],
+  "radius_meaning": "Prospectively prescribed mathematical neighborhood of actual controlled fit map for uniform numerical verification. Not a physical IC/fit/source uncertainty estimate.",
+  "fixed_model_inputs": {
+    "nH_cm3": 0.0001,
+    "nHe_cm3": 8.3e-06,
+    "photon_E_ev": [
+      20.0,
+      35.0,
+      70.0
+    ],
+    "t0_s": 0.0,
+    "step_h_s": 1000000000.0,
+    "external_source": 0.0,
+    "coefficient_family": "Actual HG analytic fits and two pinned Grackle DR capture terms; fit literals/compiled parameter bits must be bound in certificate"
+  },
+  "source_sites": [
+    "FULL_BE_ENDPOINT",
+    "HALF1_BE_ENDPOINT",
+    "HALF2_BE_ENDPOINT"
+  ],
+  "site_sharing": "Initial seven parent coordinates and fixed model realization shared; T/ne evaluated separately as functions of each implicit root, not forcedequal. Every site nonlinear/domain contribution independently enclosed; physical fit uncertainty NOT_MEASURED and not canceled.",
+  "uncertainty_variable_union": "Seven actual initial coordinates; all model parameters fixed by mathematical experiment definition; no stochastic sources or independent site noise specified. No physical uncertainty bound claimed.",
+  "temperature_guard_K": [
+    30000.0,
+    110000.0
+  ],
+  "root_domain_requirement": "Positivepopulations/photons/u and Tguard; eventsplit at provider boundaries if a future energy-variable domain crosses them",
+  "lane": "NEW_HOMOGENEOUS_ONLY; original46080node/3lanes/history gates unchanged",
+  "strict_local_error_limit": 0.0002,
+  "strict_public_width_limit": 0.002,
+  "independent_checker_requirement": "Recompute actual source residual/derivative/root/Taylor/shared-half bounds without production evaluator calls",
+  "scientific_admission": "HOLD",
+  "current_prerequisite": "OUTWARD_INTERVAL_AND_JET2_KERNEL_IMPLEMENTATION_QUALIFICATION",
+  "S0_F07_history": "Separate future expanding scenario, not covered by this static certificate domain",
+  "actual_center_and_model_bits": {
+    "center_bits": [
+      "3feccccccccccccd",
+      "3fd3333333333333",
+      "3fe3333333333333",
+      "402b3dd5e0dcf523",
+      "3fa999999999999a",
+      "3f747ae147ae147c",
+      "3f50624dd2f1a9fc"
+    ],
+    "sigma_bits": [
+      "3c4464d1be5d9def",
+      "3c20a3ba2a3cb7ca",
+      "3bf10a475c192130",
+      "0000000000000000",
+      "3c52bf7d77636818",
+      "3c31b80c8da8a9de",
+      "0000000000000000",
+      "0000000000000000",
+      "3c2d8a8186414a35"
+    ],
+    "constants_bits": [
+      "3f1a36e2eb1c432d",
+      "3ee16807505659a9",
+      "421beb9bf3a00000",
+      "3ca3e5b21cc8f74f",
+      "3d7c2f8fe5409db9",
+      "402b3266051507a6",
+      "4038965f20504658",
+      "404b357928e0c9da",
+      "4034000000000000",
+      "4041800000000000",
+      "4051800000000000"
+    ]
+  },
+  "actual_center_receipt": ".cuh/fastest-track/REI-F04-INTERVAL/parent-center.json",
+  "bit_order_constants": [
+    "nH",
+    "nHe",
+    "c",
+    "kB",
+    "eV_erg",
+    "chiHI",
+    "chiHeI",
+    "chiHeII",
+    "E0",
+    "E1",
+    "E2"
+  ]
+}

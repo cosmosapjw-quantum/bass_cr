@@ -1,0 +1,41 @@
+{
+  "checks": [
+    {
+      "label": "tests",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "-v",
+        "test_binding"
+      ],
+      "exit_code": 0,
+      "wall_s": 0.149765448004473,
+      "resources_log": "tests.resources.txt"
+    },
+    {
+      "label": "binding",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "receiver_binding.py",
+        "--capsule",
+        "inputs",
+        "--receiver",
+        "/root/bass_cr_intake/fastest_track_20261005/f04e/receiver",
+        "--output",
+        "evidence/binding"
+      ],
+      "exit_code": 0,
+      "wall_s": 4.847569915000349,
+      "resources_log": "binding.resources.txt"
+    }
+  ],
+  "test_count": 20,
+  "earlier_red": "ModuleNotFoundError: receiver_binding (exit 1)",
+  "first_implementation_failure": "ledger field treated as list; corrected to actual named dictionary before full-data run",
+  "native_attempts": 0,
+  "automatic_native_retries": 0,
+  "independent_review": "NOT_PERFORMED"
+}
