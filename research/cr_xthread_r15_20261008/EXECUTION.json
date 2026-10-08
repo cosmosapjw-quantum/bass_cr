@@ -1,0 +1,96 @@
+{
+  "commands": [
+    {
+      "unit": "bootstrap_initial",
+      "command": "python3 research/ncp_bass_cr_handoff_20261008/bootstrap_inputs.py --workdir /root/bass_cr_ncp_inputs_20261008 --extract",
+      "exit_code": null,
+      "reported_status": "four BLOCKED_INPUT; enclosing inspection batch exit1; bootstrap exit not separately captured",
+      "log": "results/audit/INITIAL_BLOCKED_SOURCE_INVENTORY.json"
+    },
+    {
+      "unit": "bootstrap_recovered",
+      "command": "python3 research/ncp_bass_cr_handoff_20261008/bootstrap_inputs.py --workdir /root/bass_cr_ncp_inputs_20261008 --source-dir /root/bass_cr_ncp_mirror_20261008 --resume --extract",
+      "exit_code": 0,
+      "log": "results/audit/SOURCE_INVENTORY.json"
+    },
+    {
+      "unit": "focused_assertion_RED",
+      "command": "python3 -m unittest -v test_goal",
+      "exit_code": 1,
+      "log": "logs/UNIT_RED.log",
+      "expected_failure": true
+    },
+    {
+      "unit": "focused_GREEN",
+      "command": "python3 -m unittest -v test_goal",
+      "exit_code": 0,
+      "log": "logs/UNIT_GREEN.log"
+    },
+    {
+      "unit": "R15_interval",
+      "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/time -v python3 run_r15.py --stage /root/bass_cr_ncp_inputs_20261008 --output results/run_v1",
+      "exit_code": 0,
+      "log": "logs/INTERVAL_RUN_V1.log",
+      "wall_seconds": 9.58,
+      "peak_RSS_KiB": 29696
+    },
+    {
+      "unit": "independent_v1",
+      "command": "/usr/bin/time -v /tmp/bass_cr_r15_venv/bin/python independent_goal.py --stage /root/bass_cr_ncp_inputs_20261008 --result results/run_v1 --output results/INDEPENDENT_GOAL_V1.json",
+      "exit_code": 130,
+      "log": "logs/INDEPENDENT_GOAL_V1.log",
+      "failure": "coordinator SIGINT stopped growing nested mp.quad cache; no science result issued"
+    },
+    {
+      "unit": "independent_v2",
+      "command": "/usr/bin/time -v timeout 300 /tmp/bass_cr_r15_venv/bin/python independent_goal.py --stage /root/bass_cr_ncp_inputs_20261008 --result results/run_v1 --output results/INDEPENDENT_GOAL_V2.json",
+      "exit_code": 1,
+      "log": "logs/INDEPENDENT_GOAL_V2.log",
+      "failure": "numpy boolean JSON serialization after numerical checks; no completed result issued"
+    },
+    {
+      "unit": "independent_v3",
+      "command": "/usr/bin/time -v timeout 300 /tmp/bass_cr_r15_venv/bin/python independent_goal.py --stage /root/bass_cr_ncp_inputs_20261008 --result results/run_v1 --output results/INDEPENDENT_GOAL_V3.json",
+      "exit_code": 0,
+      "log": "logs/INDEPENDENT_GOAL_V3.log",
+      "wall_seconds": 67.68,
+      "peak_RSS_KiB": 88288
+    },
+    {
+      "unit": "P0_P2_P3_audit",
+      "command": "python3 audit_stage.py --stage /root/bass_cr_ncp_inputs_20261008 --output results/audit --repo /root/bass_cr_ncp_r15",
+      "exit_code": 0,
+      "log": "logs/AUDIT_V1.log"
+    },
+    {
+      "unit": "source_bytes",
+      "command": "python3 verify_sources.py --stage /root/bass_cr_ncp_inputs_20261008 --manifest ../ncp_bass_cr_handoff_20261008/INPUTS.json",
+      "exit_code": 0,
+      "log": "logs/SOURCE_BYTE_CHECK.log",
+      "criterion": "four pinned ZIPs and all394 extracted file members match actual archived bytes"
+    },
+    {
+      "unit": "focused_final",
+      "command": "R15_INPUT_STAGE=/root/bass_cr_ncp_inputs_20261008 PYTHONDONTWRITEBYTECODE=1 python3 -m unittest -v test_goal test_contract",
+      "exit_code": 0,
+      "log": "logs/UNIT_FINAL.log",
+      "tests": 8
+    },
+    {
+      "unit": "reproducer_verify_only",
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 reproduce.py --stage /root/bass_cr_ncp_inputs_20261008 --output results/reproducer_verify_v1 --verify-only",
+      "exit_code": 0,
+      "log": "results/reproducer_verify_v1/EXECUTION.json"
+    }
+  ],
+  "independent_environment": {
+    "python": "3.12.3",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "mpmath": "1.4.1"
+  },
+  "old_endpoint_proofs_reexecuted": 0,
+  "new_native_build": "NOT_APPLICABLE_PYTHON_OPTICAL_ONLY",
+  "new_Grackle_native_calls": 0,
+  "new_G02_calls": 0
+}

@@ -1,0 +1,67 @@
+Traceback (most recent call last):
+  File "/root/bass_cr_ncp_r15/research/cr_xthread_r15_20261008/independent_goal.py", line 79, in <module>
+    x=a.parse_args();calc(x.stage,x.result,x.output)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/bass_cr_ncp_r15/research/cr_xthread_r15_20261008/independent_goal.py", line 37, in calc
+    J=mp.quad(lambda u:mp.quad(lambda s:mp.exp(-alpha*s),[u,1]),[a,b])
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/bass_cr_r15_venv/lib/python3.12/site-packages/mpmath/calculus/quadrature.py", line 742, in quad
+    v, err = rule.summation(f, points[0], prec, epsilon, m, verbose)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/bass_cr_r15_venv/lib/python3.12/site-packages/mpmath/calculus/quadrature.py", line 227, in summation
+    result = self.sum_next(f, nodes, degree, prec, results, verbose)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/bass_cr_r15_venv/lib/python3.12/site-packages/mpmath/calculus/quadrature.py", line 302, in sum_next
+    S += self.ctx.fdot((w,f(x)) for (x,w) in nodes)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/bass_cr_r15_venv/lib/python3.12/site-packages/mpmath/ctx_mp_python.py", line 1104, in fdot
+    for a, b in A:
+  File "/tmp/bass_cr_r15_venv/lib/python3.12/site-packages/mpmath/calculus/quadrature.py", line 302, in <genexpr>
+    S += self.ctx.fdot((w,f(x)) for (x,w) in nodes)
+                          ^^^^
+  File "/root/bass_cr_ncp_r15/research/cr_xthread_r15_20261008/independent_goal.py", line 37, in <lambda>
+    J=mp.quad(lambda u:mp.quad(lambda s:mp.exp(-alpha*s),[u,1]),[a,b])
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/bass_cr_r15_venv/lib/python3.12/site-packages/mpmath/calculus/quadrature.py", line 742, in quad
+    v, err = rule.summation(f, points[0], prec, epsilon, m, verbose)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/bass_cr_r15_venv/lib/python3.12/site-packages/mpmath/calculus/quadrature.py", line 230, in summation
+    err = self.estimate_error(results, prec, epsilon)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/bass_cr_r15_venv/lib/python3.12/site-packages/mpmath/calculus/quadrature.py", line 194, in estimate_error
+    D4 = min(0, max(D1**2/D2, 2*D1, D3))
+                              ~^~~
+  File "/tmp/bass_cr_r15_venv/lib/python3.12/site-packages/mpmath/ctx_mp_python.py", line 278, in __mul__
+    return self.__mul__(other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/tmp/bass_cr_r15_venv/lib/python3.12/site-packages/mpmath/ctx_mp_python.py", line 262, in __mul__
+    val = mpf_mul(sval, oval, prec, rounding)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/bass_cr_r15_venv/lib/python3.12/site-packages/mpmath/libmp/libmpf.py", line 764, in mpf_mul
+    man = sman*tman
+          ~~~~^~~~~
+KeyboardInterrupt
+Command terminated by signal 2
+	Command being timed: "/tmp/bass_cr_r15_venv/bin/python independent_goal.py --stage /root/bass_cr_ncp_inputs_20261008 --result results/run_v1 --output results/INDEPENDENT_GOAL_V1.json"
+	User time (seconds): 75.15
+	System time (seconds): 0.88
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:16.05
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1088580
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 266352
+	Voluntary context switches: 5
+	Involuntary context switches: 222
+	Swaps: 0
+	File system inputs: 352
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

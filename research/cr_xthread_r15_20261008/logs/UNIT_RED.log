@@ -1,0 +1,54 @@
+test_bad_clock_panels_rejected (test_goal.GoalTests.test_bad_clock_panels_rejected) ... FAIL
+test_no_sign_from_endpoint (test_goal.GoalTests.test_no_sign_from_endpoint) ... FAIL
+test_nonzero_incoming_and_constant_residual (test_goal.GoalTests.test_nonzero_incoming_and_constant_residual) ... FAIL
+
+======================================================================
+FAIL: test_bad_clock_panels_rejected (test_goal.GoalTests.test_bad_clock_panels_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/bass_cr_ncp_r15/research/cr_xthread_r15_20261008/test_goal.py", line 21, in test_bad_clock_panels_rejected
+    with self.assertRaisesRegex(ContractError, 'COVER'):
+AssertionError: ContractError not raised
+
+======================================================================
+FAIL: test_no_sign_from_endpoint (test_goal.GoalTests.test_no_sign_from_endpoint)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/bass_cr_ncp_r15/research/cr_xthread_r15_20261008/test_goal.py", line 17, in test_no_sign_from_endpoint
+    self.assertEqual(r['difference'], (Q(-1),Q(1)))
+AssertionError: Tuples differ: (Fraction(0, 1), Fraction(0, 1)) != (Fraction(-1, 1), Fraction(1, 1))
+
+First differing element 0:
+Fraction(0, 1)
+Fraction(-1, 1)
+
+- (Fraction(0, 1), Fraction(0, 1))
+?           ^               ^
+
++ (Fraction(-1, 1), Fraction(1, 1))
+?           ^^               ^
+
+
+======================================================================
+FAIL: test_nonzero_incoming_and_constant_residual (test_goal.GoalTests.test_nonzero_incoming_and_constant_residual)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/bass_cr_ncp_r15/research/cr_xthread_r15_20261008/test_goal.py", line 10, in test_nonzero_incoming_and_constant_residual
+    self.assertEqual(r['initial'], (Q(2),Q(2)))
+AssertionError: Tuples differ: (Fraction(0, 1), Fraction(0, 1)) != (Fraction(2, 1), Fraction(2, 1))
+
+First differing element 0:
+Fraction(0, 1)
+Fraction(2, 1)
+
+- (Fraction(0, 1), Fraction(0, 1))
+?           ^               ^
+
++ (Fraction(2, 1), Fraction(2, 1))
+?           ^               ^
+
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.002s
+
+FAILED (failures=3)
