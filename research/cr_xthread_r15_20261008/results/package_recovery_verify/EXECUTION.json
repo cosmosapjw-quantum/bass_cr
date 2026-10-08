@@ -1,0 +1,40 @@
+[
+  {
+    "argv": [
+      "/usr/bin/python3",
+      "/tmp/bass_cr_r15_package_check/source/research/ncp_bass_cr_handoff_20261008/bootstrap_inputs.py",
+      "--workdir",
+      "/tmp/bass_cr_r15_restored_inputs",
+      "--source-dir",
+      "/tmp/bass_cr_r15_package_check/inputs",
+      "--offline",
+      "--extract"
+    ],
+    "exit_code": 0,
+    "log": "bootstrap.log"
+  },
+  {
+    "argv": [
+      "/usr/bin/python3",
+      "/tmp/bass_cr_r15_package_check/source/research/cr_xthread_r15_20261008/verify_sources.py",
+      "--stage",
+      "/tmp/bass_cr_r15_restored_inputs",
+      "--manifest",
+      "/tmp/bass_cr_r15_package_check/source/research/ncp_bass_cr_handoff_20261008/INPUTS.json"
+    ],
+    "exit_code": 0,
+    "log": "verify_sources.log"
+  },
+  {
+    "argv": [
+      "/usr/bin/python3",
+      "-m",
+      "unittest",
+      "-v",
+      "test_goal",
+      "test_contract"
+    ],
+    "exit_code": 0,
+    "log": "unit.log"
+  }
+]

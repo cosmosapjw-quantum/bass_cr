@@ -92,5 +92,27 @@
   "old_endpoint_proofs_reexecuted": 0,
   "new_native_build": "NOT_APPLICABLE_PYTHON_OPTICAL_ONLY",
   "new_Grackle_native_calls": 0,
-  "new_G02_calls": 0
+  "new_G02_calls": 0,
+  "delivery_commands": [
+    {
+      "command": "git push -u origin research/ncp-r15-20261008",
+      "exit_code": 0,
+      "log": "logs/SCIENCE_PUSH.log"
+    },
+    {
+      "command": "python3 package_delivery.py --repo /root/bass_cr_ncp_r15 --source-commit 3a6b141973f0141443396e8e425d9acd637fc393 --stage /root/bass_cr_ncp_inputs_20261008 --output /root/BASS_CR_NCP_R15_20261008_v1.zip",
+      "exit_code": 0,
+      "log": "logs/PACKAGE_BUILD.log"
+    },
+    {
+      "command": "local ZIP CRC+95 member SHA256 check and restored reproduce.py --verify-only",
+      "exit_code": 0,
+      "log": "results/package_recovery_verify/EXECUTION.json"
+    },
+    {
+      "command": "Drive upload_file + get_file_metadata; Dropbox upload_file + check_upload_file_status",
+      "status": "COMPLETED_R1_BOTH",
+      "log": "DELIVERY_RECEIPT.json"
+    }
+  ]
 }

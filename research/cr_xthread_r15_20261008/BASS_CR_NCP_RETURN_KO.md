@@ -24,3 +24,13 @@ P3: BLOCKED_INPUT. authoritative BASIS.npz/JSON/SCIENCE_CONTEXT 및 별도 CANDI
 CR_OFF_FASTEST, G02=UNRESOLVED, all_bound=OPEN, b_grid=NO_GO, capture=false, physical/production=HOLD를 유지한다. owner ACK/global CR counter/observer tail=null. REI BRIDGE14 및 타repo science/수정/push는0회다.
 
 재현은 reproduce.py --stage VERIFIED_STAGE --output NEW_OUTPUT --independent를 사용한다. 새 stage는 --source-dir ORIGINAL_ZIP_DIRECTORY를 추가한다. requirements.txt에 이번 검산 버전을 고정했다. ZIP은 source commit 이후 create-only로 만들며4개 원본 ZIP과 코드·결과·로그를 포함한다. 실제 commit/tree/remote ref, packageSHA256/size, Drive·Dropbox provider ACK/ID는 **봉인 후 별도 DELIVERY_RECEIPT.json**에만 기록한다. 이 문서의 science checkpoint 단계에서는 배포/백업 성공을 미리 주장하지 않는다.
+
+## 실제 봉인 이후 배포 receipt
+
+Science commit `3a6b141973f0141443396e8e425d9acd637fc393`, tree `e0721112781c7c0022fcca5677ab4cfa553cdd96`를 research/ncp-r15-20261008에 non-force push했다. push exit0 및 해당 ref의 ls-remote SHA 일치를 확인했다. 이 반환 문서와 receipt는 그 뒤의 additive delivery commit에 포함한다. immutable ZIP의 scientific bytes는 바꾸지 않았다.
+
+`BASS_CR_NCP_R15_20261008_v1.zip`: 6,070,096 bytes, SHA256 `0fe656016c1de11fa2d4d1e5dd0227bdd79d0b2e53ee1ad253b49290725ac5aa`. 96 members(95 manifest-listed files), ZIP CRC/모든 member hash 검증, 동일source 두번build SHA동일. Local package에서 빈stage로4원본ZIP bootstrap 및8시험 verify-only 복구가 exit0이다. 실제 과학 trial을 이 복구시험에서 재실행하지 않았다.
+
+Drive object `1Veel2GVZgRZGwZ0IJJZUqB9uBp-x0Pnr`와 Dropbox object `id:BSpOijBcT10AAAAAAD3fxw`에 create-only 생성 완료 ACK 및 metadata size6,070,096 일치를 확인했다. **이중백업 R1 완료**다. Provider SHA256은UNAVAILABLE이며 이를localhash로대체하지 않았다. remote file body readback/R3는 수행하지 않았다. 사용한 연결은 기존 Google Drive/Dropbox plugin이며 NCP에rclone credential을 새로 설치하지 않았다.
+
+완료된 원격 생성 결과: [Google Drive ZIP](https://drive.google.com/file/d/1Veel2GVZgRZGwZ0IJJZUqB9uBp-x0Pnr/view?usp=drivesdk). Dropbox destination은 `/BASS_DERIVATION_DOSSIERS_20260912/ATOMIC_REIONIZATION_HANDOFF_20261004_v1/BASS_CR_NCP_R15_20261008_v1.zip`이다. 상세 provider receipt는 DELIVERY_RECEIPT.json, 최종return commit/ref는 ZIP바깥 delivery sidecar에 기록한다.
