@@ -1,0 +1,25 @@
+test_nonzero_terminal_incoming_not_reset (test_validated.DirectedTests.test_nonzero_terminal_incoming_not_reset) ... ok
+test_shared_birth_noise_cancels (test_validated.DirectedTests.test_shared_birth_noise_cancels) ... FAIL
+test_signed_negative_offdiagonal_not_absolute (test_validated.DirectedTests.test_signed_negative_offdiagonal_not_absolute) ... ok
+
+======================================================================
+FAIL: test_shared_birth_noise_cancels (test_validated.DirectedTests.test_shared_birth_noise_cancels)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/bass_cr_ncp_r16b/research/cr_r16b_20261009/test_validated.py", line 16, in test_shared_birth_noise_cancels
+    self.assertEqual((a+a.scale(-1)).box().data(),['0','0'])
+AssertionError: Lists differ: ['-0', '0'] != ['0', '0']
+
+First differing element 0:
+'-0'
+'0'
+
+- ['-0', '0']
+?   -
+
++ ['0', '0']
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.002s
+
+FAILED (failures=1)

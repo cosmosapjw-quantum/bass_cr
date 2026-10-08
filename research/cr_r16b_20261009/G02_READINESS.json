@@ -1,0 +1,166 @@
+{
+  "status": "BLOCKED_INPUT",
+  "authoritative_input_pins": [
+    {
+      "historical_path": "/workspace/scratch/63ee2321a512/recovered_r4u/runtime_inputs/BASIS.npz",
+      "expected_sha256": "889001a751cd3cae93ad217336587f5fc58db11c0a496843ecc7e7bbd93f83ec",
+      "accessible_here": false
+    },
+    {
+      "historical_path": "/workspace/scratch/63ee2321a512/recovered_r4u/runtime_inputs/BASIS.json",
+      "expected_sha256": "3cf2359dd9802e84f9ec4dc45f3585e0aa9712de38a3fb0a077300d257150131",
+      "accessible_here": false
+    },
+    {
+      "historical_path": "/workspace/scratch/63ee2321a512/recovered_r4u/runtime_inputs/SCIENCE_CONTEXT.json",
+      "expected_sha256": "cf484b252092d642c8c8487a8bf70deb61e7b0b9f2bc2f522a3325a146e7f746",
+      "accessible_here": false
+    },
+    {
+      "historical_path": "/workspace/scratch/63ee2321a512/runs_r4x/candidate_v1/CANDIDATE.json",
+      "expected_sha256": "77df01c595ff1ac14236ff4537d7be7dd78d9642c498433d3b6e60c8c38ef35f",
+      "accessible_here": false
+    },
+    {
+      "historical_path": "/workspace/scratch/63ee2321a512/runs_r4x/candidate_v1/CANDIDATE.npz",
+      "expected_sha256": "c948eab57638938407d4f34ee8bdae879b926c84fc0b55d91ac2e9105a1cfed5",
+      "accessible_here": false
+    },
+    {
+      "historical_path": "/workspace/scratch/63ee2321a512/recovered_r4u/native_build_portable/BUILD_HPC.json",
+      "expected_sha256": "49a350703604034db32257d2fbdaa80cae2af2a46674b4ad87b0fed97c89bd66",
+      "accessible_here": false
+    },
+    {
+      "historical_path": "/workspace/scratch/63ee2321a512/recovered_r4u/native_build_portable/libreference.so",
+      "expected_sha256": "b6e7632e2b7eb17542b3f12c03f1bb6fd96123e8d05b97f70306efc5430734d7",
+      "accessible_here": false
+    },
+    {
+      "historical_path": "/workspace/scratch/63ee2321a512/recovered_r4u/native_build_portable/libmoments_f90.so",
+      "expected_sha256": "8f07ef766c50553f1931cd6304fcef59138a6d4be63623736258b6e18212788c",
+      "accessible_here": false
+    },
+    {
+      "historical_path": "/workspace/scratch/63ee2321a512/runs_r4x/native_v1/NATIVE_BUILD.json",
+      "expected_sha256": "6af8bdfb1eff94fcf47770f5532d70e7662d6339d5ba8862d8e6021dd33847a7",
+      "accessible_here": false
+    },
+    {
+      "historical_path": "/workspace/scratch/63ee2321a512/runs_r4x/native_v1/libcontinuous.so",
+      "expected_sha256": "dfe7222040b3a5ae40cd25d9abaafa3c4266a523018936b29830739e7d18cb24",
+      "accessible_here": false
+    },
+    {
+      "historical_path": "/workspace/scratch/63ee2321a512/recovered_r4u/source/research/gap_closure_20261001/g02_derivative_validation_20261002/TASK_CONTRACT.json",
+      "expected_sha256": "bf6841dc3415619daf11e1164fcf30f68ad80681d24bc3e850182627b1df2111",
+      "accessible_here": false
+    }
+  ],
+  "context_sha256": "b26ff8ee6915b551aea66af0bb4e71a3c697534b6dc4cd101a9b314c140cedf3",
+  "contract_sha256": "bf6841dc3415619daf11e1164fcf30f68ad80681d24bc3e850182627b1df2111",
+  "geometry": {
+    "center_z_a0": 0.0,
+    "b_a0": 2.0,
+    "energy_keV_per_u": 100.0,
+    "charges": [
+      1,
+      1
+    ],
+    "channels": 18,
+    "velocity_a0_per_ta": 2.00798106651023,
+    "trajectory": {
+      "origins": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          2.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "velocities": "target zero; projectile (0,0,v)",
+      "time_mapping": "t=float(z_a0/velocity); record requested z.hex, time.hex, actual trajectory position; use original v/(2h) centered FD formula"
+    }
+  },
+  "fixed_derivative_contract": {
+    "direct": "raw D(0)+raw D(0).conj().T",
+    "S_only_formula": "R8 constructed from four centered R2 differences on halving h; no D values used in construction",
+    "windows": [
+      [
+        0.4,
+        0.2,
+        0.1,
+        0.05
+      ],
+      [
+        0.2,
+        0.1,
+        0.05,
+        0.025
+      ],
+      [
+        0.1,
+        0.05,
+        0.025,
+        0.0125
+      ]
+    ],
+    "accepted_windows_indices": [
+      1,
+      2
+    ],
+    "absolute_residual_ta_inverse_max": 1e-12,
+    "two_finest_window_disagreement_ta_inverse_max": 1e-12,
+    "norms": [
+      "spectral",
+      "Frobenius",
+      "elementwise_max_absolute"
+    ],
+    "require_all_q40beta24_q48beta24_q48beta12_estimates": true,
+    "require_cross_resolution_derivative_agreement": true,
+    "original_R2_compare_ladder": {
+      "relative_target": 1e-06,
+      "absolute_target_atomic_time_inverse": 1e-12,
+      "order_window": [
+        1.5,
+        2.5
+      ],
+      "minimum_consecutive_order_intervals": 2,
+      "always_report_without_modification": true,
+      "failure_does_not_silently_become_pass": true
+    },
+    "formal_order8_claim": false,
+    "C0_H1_does_not_imply_C9": true,
+    "scope": "CENTRAL_CANDIDATE_DERIVATIVE_NUMERICAL_CHECK_ONLY; observed differences not certified bounds",
+    "cross_resolution_derivative_agreement_ta_inverse_max": 1e-12
+  },
+  "candidate_basis_identity": "17c0215979675e40db364207ce138c5efb58cb24c22824e418f5abe3cfeb49ef",
+  "needed": [
+    "exact BASIS.npz/BASIS.json/SCIENCE_CONTEXT.json with pinned hashes",
+    "separately bound CANDIDATE.npz/CANDIDATE.json",
+    "portable native sources/build manifests and new NCP source/native qualification",
+    "unmatched geometry with source-specific authority; historical completed central tests are not repeated"
+  ],
+  "scientific_PASS": false,
+  "new_operator_calls": 0,
+  "claim_ceiling": {
+    "G02": "UNRESOLVED",
+    "production": "HOLD",
+    "capture": false,
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "original_eight_center_gate": "UNCHANGED_UNRESOLVED",
+    "rigorous_operator_error_bound": false
+  },
+  "branch_restrictions": [
+    "bass_cr additive research only",
+    "no main merge",
+    "no force push",
+    "no 50/225 keV/u",
+    "no production release"
+  ]
+}

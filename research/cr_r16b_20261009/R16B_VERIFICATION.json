@@ -1,0 +1,42 @@
+{
+  "focused_RED_exit": 1,
+  "focused_RED_tests": 3,
+  "focused_GREEN_exit": 0,
+  "new_final_tests": 15,
+  "new_final_exit": 0,
+  "counterexamples": [
+    "signed negative offdiagonal",
+    "lost birth correlation yields width4 instead of zero",
+    "wrong birth transpose dimension",
+    "nonzero carried terminal error",
+    "wrong birth weight",
+    "wrong clock",
+    "wrong variant",
+    "wrong donor bytes",
+    "inexact panel clock",
+    "negative/duplicated source bound"
+  ],
+  "independent_check": {
+    "status": "PASS_MPFR256_SEPARATE_PROPAGATION",
+    "Decimal_contains_MPFR_backward_at_all32_boundaries": true,
+    "Decimal_MPFR_forward_backward_intersection_nonempty": true,
+    "archived_R16_midpoint_forward_inside": true,
+    "archived_R16_midpoint_backward_inside": true,
+    "archived_R15_nonlinear_diagnostic_inside": true,
+    "archived_numbers_are_proof_premises": false,
+    "shares_interval_FT03_AD_panels": true
+  },
+  "independent_arithmetic": "MPFR256 9-term Neumann vs Decimal60 7-term; same bound FT03 AD input panels, independent forward interval boxes and backward propagation",
+  "parent_science_suites_run": 0,
+  "archive_recovery_verify_only_exit": 0,
+  "full_reproduction": {
+    "exit_code": 0,
+    "wall_s": 265.57,
+    "peak_RSS_KiB": 147544,
+    "workers": 8,
+    "command": "/usr/bin/time -v timeout 900 /tmp/bass_cr_r15_venv/bin/python -B reproduce.py --archive /root/BASS_CR_R16_THEORY_20261009_v1.zip --output /root/bass_cr_r16b_full_reproduction_v1 --workers 8",
+    "no_parent_science_suite": true,
+    "reconciliation": "results/full_reproduction/RECONCILIATION.json"
+  },
+  "not_formal_proof_assistant": true
+}

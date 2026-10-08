@@ -1,0 +1,88 @@
+{
+  "source_SHA256": {
+    "mpfr_check.py": "4b1eca35b7684f71327789483cbdfce4e361d2c09ac239b0f44ceebfc1a67df1",
+    "finish_certificate.py": "30d119e76ed4673f4395062e555d8e13340334cd2b93a9ef6ff7259cbfee863d",
+    "prepare.py": "c215193667611b5ed11c9b4b7cf0011bdf23797e66d8fc1c5992128973757991",
+    "finalize_math.py": "dac0a806be4263f9f12a30cf464070a83370784fa5b6eb2deeb809214b77dfda",
+    "seal_package.py": "80da04ef988d6ce482b9d9727d42d38800d9ae4b272e5ad7f23a35ec4193396c",
+    "run_certificate.py": "c5605167709a44abecb25b57808f868b8d4035c429011bcbe64101fc7653bd39",
+    "test_finalize.py": "0e3a8adb0247b8a51f313832762917fc18701a80770dc0f68c57d71df5bb1f84",
+    "validated.py": "cc1c7f30b3617d18dfe9cb67ad8be4007b54e6a1bdd99fee2bfb5364568ebacc",
+    "test_contract.py": "ac7de85bb61e881cc6578c433e43fa273f8ac8430244e4f99d595dc9f448d2ab",
+    "test_validated.py": "1e43ece536d9b97ab9796eccf47547e2803b90cc9029a07ce57aa43ae93258f9",
+    "reproduce.py": "25278d9a9f0108b7aff72df5f3b67cd8c5075765ae41b7a625d84adf851c4d4d",
+    "pilot_workers.py": "8bc8bdf307982c10d1da1c4369b5511f90810d44739f2d68f78dc558930e018f"
+  },
+  "steps": [
+    {
+      "command": "python3 -B reproduce.py --verify-only (in original R16 root)",
+      "exit_code": 0,
+      "purpose": "44-member manifest and ZIP integrity, no parent science"
+    },
+    {
+      "command": "python3 -m unittest -v test_validated (RED then GREEN)",
+      "exit_codes": [
+        1,
+        1,
+        0
+      ],
+      "logs": [
+        "UNIT_RED.log",
+        "UNIT_GREEN_ATTEMPT1.log",
+        "UNIT_GREEN.log"
+      ]
+    },
+    {
+      "command": "/usr/bin/time -v timeout 600 python3 run_certificate.py --stage /root/bass_cr_r16b_inputs --output results/pilot_serial_v1 --panels 64 --workers 1",
+      "exit_code": 130,
+      "log": "PILOT_SERIAL_V1.log"
+    },
+    {
+      "command": "timeout 120 python3 pilot_workers.py (workers1,2,4,8; same8cells4panels)",
+      "exit_code": 0,
+      "log": "RESOURCE_PILOTS.log"
+    },
+    {
+      "command": "/usr/bin/time -v timeout 600 /tmp/bass_cr_r15_venv/bin/python mpfr_check.py --prepared results/pilot_serial_v1 --output results/MPFR256_CHECK.json",
+      "exit_code": 0,
+      "log": "MPFR256_CHECK.log",
+      "wall_s": 110.74,
+      "peak_RSS_KiB": 90548
+    },
+    {
+      "command": "/usr/bin/time -v timeout 600 python3 finish_certificate.py --prepared results/pilot_serial_v1 --stage /root/bass_cr_r16b_inputs --output results/final_v2",
+      "exit_code": 0,
+      "log": "FINISH_V2.log",
+      "wall_s": 110.31,
+      "peak_RSS_KiB": 119188
+    },
+    {
+      "command": "python3 -B finalize_math.py --result results/final_v2 --r16root /root/bass_cr_r16_verified_input/BASS_CR_R16_THEORY_20261009 --mpfr results/MPFR256_CHECK.json --output results/final_math",
+      "exit_code": 0,
+      "log": "FINAL_MATH.log"
+    },
+    {
+      "command": "R16B_STAGE=/root/bass_cr_r16b_inputs python3 -m unittest -v test_validated test_contract test_finalize",
+      "exit_code": 0,
+      "tests": 15,
+      "log": "UNIT_FINAL_V2.log"
+    },
+    {
+      "command": "python3 -B reproduce.py --archive /root/BASS_CR_R16_THEORY_20261009_v1.zip --output /root/bass_cr_r16b_recovery_verify_v1 --verify-only",
+      "exit_code": 0,
+      "log": "RECOVERY_VERIFY_ONLY.log"
+    },
+    {
+      "exit_code": 0,
+      "wall_s": 265.57,
+      "peak_RSS_KiB": 147544,
+      "workers": 8,
+      "command": "/usr/bin/time -v timeout 900 /tmp/bass_cr_r15_venv/bin/python -B reproduce.py --archive /root/BASS_CR_R16_THEORY_20261009_v1.zip --output /root/bass_cr_r16b_full_reproduction_v1 --workers 8",
+      "no_parent_science_suite": true,
+      "reconciliation": "results/full_reproduction/RECONCILIATION.json",
+      "log": "FULL_REPRODUCTION.log"
+    }
+  ],
+  "version_notes": "Full current science entrypoint freshly reproduced from pinned original R16 ZIP; panel scientific data, backward and MPFR science match recovery. Forward affine rounding differs at last digits; final certificate/source result unchanged. Snapshot applies to scientific scripts present at execution; seal_package.py added subsequently.",
+  "no_parent_suite_replay": true
+}
