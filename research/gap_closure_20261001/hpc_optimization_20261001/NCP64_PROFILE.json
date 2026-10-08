@@ -1,0 +1,17 @@
+{
+  "schema": "BASS_NCP64_HPC_POLICY_V1",
+  "target": {"advertised_cpus": 64, "advertised_memory_gib": 128, "actual_topology_and_limits_required": true},
+  "accuracy": {"precision": "FP64", "fast_math": false, "reassociation": false, "fma_contraction": false, "original_quadrature_and_batch_order": true, "floating_MPI_reductions": false, "backend_admission": "strict C++ bitwise parity on deterministic suite; separate physical qualification still required"},
+  "candidate_rank_thread_pairs": [[64, 1], [32, 2], [16, 4], [8, 8]],
+  "rank_zero_is_coordinator": true,
+  "blas_threads_per_rank": 1,
+  "memory_reserve_fraction": 0.125,
+  "memory_reserve_minimum_gib": 1,
+  "require_measured_peak_rss_before_large_run": true,
+  "profiles_are_candidates_not_measured_NCP_winners": true,
+  "few_query_policy": "Avoid idle MPI ranks; use a small rank count and independent-pair OpenMP. Current9x9 kernel has11 tiles, so64 inner threads are wasteful.",
+  "many_query_policy": "MPI whole ordered query ladders; compare64x1/32x2/16x4 using identical authorized workloads and measured RSS.",
+  "physical_admission": false,
+  "old_G02_G03_authorization_reuse": false,
+  "legacy_context_accepts_new_kernel": false
+}

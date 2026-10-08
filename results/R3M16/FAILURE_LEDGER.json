@@ -1,0 +1,47 @@
+{
+  "schema": "BASS_CR_R3M16_FAILURE_LEDGER_V1",
+  "failures": [
+    {
+      "id": "INITIAL_TEST_COLLECTION_RED",
+      "classification": "EXPECTED_TDD_MISSING_MODULES",
+      "evidence": "/mnt/sn850x2t/bass_cr_r3m16_20260922/receipts/tests-red.stdout",
+      "preserved": true,
+      "scientific_failure": false
+    },
+    {
+      "id": "TARGET_ONLY_INITIAL_CONFIG_AUTHORITY_MISMATCH",
+      "classification": "INSTRUMENTATION_PROVENANCE_VALIDATION_FAILURE",
+      "message": "collision result is not the exact preparation config authority",
+      "evidence": "results/R3M16/receipts/target-only-initial-failure.json",
+      "repair": "permit only the two exact historical runner enrichment fields",
+      "partial_overwritten": false,
+      "scientific_failure": false
+    },
+    {
+      "id": "B_REFINED_CONTROL_PREPARATION_CONFIG_MISMATCH",
+      "classification": "INSTRUMENTATION_PROVENANCE_VALIDATION_FAILURE",
+      "message": "preparation config identity mismatch",
+      "evidence": "results/R3M16/receipts/B-refined-initial-failure.json",
+      "repair": "use the immutable preparation-only receipt and separately bind the historical collision as real-time authority",
+      "partial_overwritten": false,
+      "scientific_failure": false
+    },
+    {
+      "id": "ANALYSIS_TEST_COLLECTION_RED",
+      "classification": "EXPECTED_TDD_MISSING_MODULE",
+      "evidence": "results/R3M16/receipts/analysis-tests-red.stdout",
+      "preserved": true,
+      "scientific_failure": false
+    },
+    {
+      "id": "CANDIDATE_COMPILER_SCOPE_INCOMPATIBLE",
+      "classification": "ROUTING_SCOPE_MISMATCH",
+      "evidence": "/mnt/sn850x2t/bass_cr_r3m16_20260922/host-fallback-evidence.json",
+      "resolution": "explicit owner-directed Host implementation in the dedicated worktree",
+      "model_calls": 0,
+      "scientific_failure": false
+    }
+  ],
+  "collision_structural_failures": [],
+  "historical_failures_modified": false
+}

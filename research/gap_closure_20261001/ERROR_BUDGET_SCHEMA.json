@@ -1,0 +1,33 @@
+{
+  "schema": "BASS_ERROR_BUDGET_V1",
+  "required_components": [
+    "temporal",
+    "static_operator",
+    "floating_point",
+    "window",
+    "tail",
+    "basis",
+    "b_quadrature",
+    "model"
+  ],
+  "allowed_classes": [
+    "RIGOROUS_BOUND",
+    "VALIDATED_NUMERICAL_BOUND",
+    "EMPIRICAL_CONVERGENCE_ESTIMATE",
+    "SYSTEMATIC_MODEL_UNCERTAINTY",
+    "UNKNOWN"
+  ],
+  "component_required": [
+    "name",
+    "class",
+    "scope",
+    "value",
+    "units",
+    "compared_objects",
+    "provenance",
+    "simultaneous_validity"
+  ],
+  "composition_rule": "Sum only deterministic bounds on adjacent links of a common exact telescoping chain. Independence is unnecessary; covariance assumptions are necessary for statistical RSS. Unknowns prohibit certified total.",
+  "unknown_numeric_value": null,
+  "not_applicable": "Explicit applicability flag; never encode unknown/notapplicable as0"
+}

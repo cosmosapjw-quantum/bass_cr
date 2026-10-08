@@ -1,0 +1,49 @@
+{
+  "gap_id": "G10",
+  "database_gap_id": "REPORT_GAP_10",
+  "status_before": "REPORTED_RECOMMENDATION_NOT_VALIDATED",
+  "status_after": "CLOSED_IMPLEMENTATION_VERIFIED",
+  "evidence_status": [
+    "DERIVED",
+    "IMPLEMENTATION_VERIFIED"
+  ],
+  "claim": "Semantic query reproduces current B0 five-state negative-energy projectile span and transforms with reordering. Future unresolved basis identities fail closed.",
+  "scope": "schema and new explicitly callable selector; no automatic production replacement",
+  "tests_passed": 9,
+  "source_ids": [],
+  "new_native_calls": 0,
+  "authorization_consumed": false,
+  "does_not_imply": [
+    "B1-B3 physical state existence",
+    "all-bound closure",
+    "capture",
+    "basis completeness"
+  ],
+  "tests": [
+    {
+      "command": "python -m unittest -v test_selected_subspace_identity.py",
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "red": {
+        "exit": 1,
+        "reason": "missing semantic_selection module before implementation"
+      },
+      "green": {
+        "exit": 0
+      },
+      "initial_green_passed": 8,
+      "independent_review_regression": {
+        "finding": "duplicate physical function admitted when principal_n label changed",
+        "red_exit": 1,
+        "green_exit": 0,
+        "fixed_physical_key": [
+          "center",
+          "l",
+          "m",
+          "radial_identity"
+        ]
+      }
+    }
+  ]
+}

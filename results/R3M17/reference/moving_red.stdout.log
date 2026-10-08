@@ -1,0 +1,22 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+________ test_moving_two_center_oracle_resolves_temporal_error_and_norm ________
+
+    def test_moving_two_center_oracle_resolves_temporal_error_and_norm():
+>       report = MOD.run_moving_reference(shape=(4,4,4), spacing=0.7, horizon=0.4, steps=(8,16,32))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'r3m17_reference' has no attribute 'run_moving_reference'
+
+tests/test_r3m17_reference.py:137: AttributeError
+_____ test_moving_oracle_has_matching_physical_end_times_and_initial_bytes _____
+
+    def test_moving_oracle_has_matching_physical_end_times_and_initial_bytes():
+>       report = MOD.run_moving_reference(shape=(4,4,4), spacing=0.7, horizon=0.4, steps=(8,16,32))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'r3m17_reference' has no attribute 'run_moving_reference'
+
+tests/test_r3m17_reference.py:150: AttributeError
+=========================== short test summary info ============================
+FAILED tests/test_r3m17_reference.py::test_moving_two_center_oracle_resolves_temporal_error_and_norm
+FAILED tests/test_r3m17_reference.py::test_moving_oracle_has_matching_physical_end_times_and_initial_bytes
+2 failed, 23 deselected in 0.78s

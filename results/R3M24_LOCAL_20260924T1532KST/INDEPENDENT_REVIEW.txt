@@ -1,0 +1,43 @@
+**No BLOCKER, MAJOR, or actionable MINOR finding. The recorded run is not invalidated by this review.** Its admissible result remains **empirical `REFERENCE_FOR_STRANG` consistency for the two selected B2 restart windows**, with production **HOLD**.
+
+I verified branch `repair/r3m24-audit-safety-gates-20260924`, head `de2b78aa7dc7ec1f8b010e49277960bbfbafbf32`, and parent `381b00e800bf1e7e2a78b5c0e9a56cbed5db56a5`.
+
+- **Provenance passes.** All 60 contract source hashes match; the six patch source/test files also match the posted test receipt. Numerical source digest remains `581ff84930bb862efafdfec5d39d5b25aebf9297ce7ce45f833a5abe125b2a5b`. I independently hashed the three existing local checkpoint generations and checked their manifests, seals, witness identities, configuration, shape, dtype, and step bindings.
+- **Frozen approval binding passes.** Contract SHA is `0b3ca3812c0cf30c9b3c0db080901fabe9b898221bae20515100ce57fcbceb76`, matching approval, command, reservation, and completion evidence. Configuration and runtime validation passed under the canonical interpreter. See [contract validation](/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m24_cross_window.py:77).
+- **Replay and failure handling pass within the reviewed scope.** Before reading checkpoint arrays, I replayed the completed attempt with input intake and backend construction replaced by rejecting sentinels: neither was called, and CuPy was not imported. In-memory negative checks rejected incomplete output and a changed contract. Window results are sealed before advancing; unresolved results stop execution; cleanup preserves the original failure. The latter paths were checked against source and the recorded regression tests. See [coordinator](/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m24_execution.py:118).
+
+Independent recalculation from the saved JSON gives:
+
+| Quantity | Closest | Outgoing |
+|---|---:|---:|
+| Strang comparison scale | `1.795672139813351e-5` | `1.5006759727088076e-5` |
+| Gate threshold: 1% of scale | `1.795672139813351e-7` | `1.5006759727088075e-7` |
+| CF4 n8→n16 distance | `7.41035160757068e-9` | `2.0651164776986198e-9` |
+| Distance as % of scale | `0.0412678431%` | `0.0137612417%` |
+| Full-window substep-repeat distance | `1.6605985172529764e-15` | `8.717507491097588e-15` |
+| Calibration distance / calibration limit | `0.0302685357` | `0.0326566191` |
+| Kinetic pairs / FFT transforms | `1434 / 2868` | `1814 / 3628` |
+| Window seconds | `343.131795` | `417.115632` |
+
+These use the [closest result](/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/results/R3M24_LOCAL_20260924T1532KST/ATTEMPT/windows/closest/RESULT.json:191) and [outgoing result](/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/results/R3M24_LOCAL_20260924T1532KST/ATTEMPT/windows/outgoing/RESULT.json:261).
+
+**The work fingerprints support the stated tightening distinction.** Closest n16 used 64 dimension-8 actions; every accepted bound already satisfies the tighter per-action budget `1.5625e-17`. Its skip supplies no independent experiment. Outgoing changed all 64 dimensions from 7 to 8, increasing that trajectory from 448 to 512 pairs; its recorded tightening distance is `6.181932652712236e-15`. Both required substep comparisons changed actual work. All saved action counts, dimensions, per-action budgets, and accumulated bounds reconcile.
+
+**The mathematics supports the limited gate.** Physical distances use `sqrt(dv)` scaling; action budgets divide across `2 × n × substeps`. The full-generator stages retain nonnegative CAP damping. The Arnoldi bound remains an exact-arithmetic statement, while changed-work repeats provide empirical floating-point checks. Neither establishes CF4 order or an absolute reference-error certificate. The [gate implementation](/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m24_metrics.py:54) preserves those distinctions.
+
+**Resource accounting passes.** Required worst-case work is `4871 ≤ 5000`; actual work is `3 + 1434 + 1814 = 3251` pairs and `6502` transforms. Backend wall time is `762.350190 s`; total attempt time is `763.939505 s`. Both window times are below 1800 seconds. Recorded minimum sampled GPU free memory is `2.94580078125 GiB`, above 2 GiB; preflight host availability is `79,876,485,120` bytes, above 8 GiB. Memory readings are sampled, and deadlines are cooperative checks—not continuous peak or hard-real-time guarantees.
+
+**Integration evidence is consistent.** Logs retain 57/57 patch tests, the original 418-pass/4-failure suite caused by missing `threadpoolctl`, and the subsequent 422/422 suite. I verified the external shim resolves to the existing user-site `threadpoolctl 3.6.0`. The original `psutil` preflight failure and committed RED logs remain present; the committed RED hashes match their index. I audited these logs rather than rerunning pytest or CUDA. `git diff --check` flags only preserved trailing spaces in raw `RED_LIFETIME.txt` failure output; this does not invalidate execution.
+
+**B3 remains non-executable design evidence.** I recalculated `7172` steps, `dt=0.00624946176119497`, and the conditional 57-generation storage estimate. Predictions are explicitly not acceptance targets. The projector-budget inverse also checks:
+\[
+\epsilon=\frac{\Delta Q}{\sqrt{Q+\Delta Q}+\sqrt Q},
+\]
+giving P1/P2/P3 budgets approximately `3.8994232e-5`, `4.3526283e-5`, and `4.4944829e-5`, each for one error component only.
+
+The next discriminator remains the **four-step window spanning actual t=0**: start step 1194, 42 warmup steps from g001152, interval `[-0.01666523136, 0.03333046273]`. The completed “closest” window does not span zero. B3 full collision is a separate future contract.
+
+**Claim limit:** the saved scalar comparisons pass for these two identical-start, four-B2-step restarts of the frozen discrete Hamiltonian. Raw endpoint arrays were not retained; I did **not** independently recompute endpoint distances or the Strang minimum from arrays. CF4 order, target-Q accuracy, global time error, broader convergence, and production admission remain unestablished; b-grid remains **NO_GO**.
+
+No files were modified, workers spawned, checkpoints downloaded, or GPU work run. Original untracked entries remain present. A new untracked local integration report appeared during review from another writer; the pinned source, contract, and sealed summary remained unchanged.
+

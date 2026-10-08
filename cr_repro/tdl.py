@@ -69,6 +69,10 @@ class TDLRunner:
             eb=float(np.sum(np.abs(bcomp[:,:,~region])**2)*self.dv); ec=float(np.sum(np.abs(resid[:,:,region])**2)*self.dv)
             out.update({'eps_b_n1':eb,'eps_c_n1':ec,'estimator_gap_bound_n1':estimator_gap_bound(abs(a)**2,eb,ec)})
         return out
+    def _save_checkpoint(self, out, psi, metadata):
+        atomic_npy(out/'state.npy',asnumpy(psi))
+        atomic_json(out/'state.json',metadata)
+
     def run(self,outdir,max_steps=None):
         out=Path(outdir); out.mkdir(parents=True,exist_ok=True); ident=config_hash(self.cfg); meta=out/'state.json'; state=out/'state.npy'
         if meta.exists():
@@ -81,7 +85,7 @@ class TDLRunner:
         for j in range(done,stop):
             tm=self.t0+(j+0.5)*self.dt_actual; psi=self.step(psi,tm); done=j+1
             if done%stride==0 or done==stop:
-                atomic_npy(state,asnumpy(psi)); atomic_json(meta,{'config_hash':ident,'done':done,'nstep':self.nstep,'initial':init,'norm':self.norm(psi),'backend':self.backend})
+                self._save_checkpoint(out,psi,{'config_hash':ident,'done':done,'nstep':self.nstep,'initial':init,'norm':self.norm(psi),'backend':self.backend})
         if done<self.nstep: return {'status':'checkpoint','done':done,'nstep':self.nstep,'backend':self.backend}
         analysis=self.analyze(psi); result={'status':'completed','config':self.cfg,'backend':self.backend,'nstep':self.nstep,'dt_actual':self.dt_actual,'v_au':self.v,'initial':init,'analysis':analysis,'seconds_last_call':time.time()-tic,
           'claim':'P_bound is truncated at project_nmax; this is an independent paper-based implementation, not Nichols code reproduction'}

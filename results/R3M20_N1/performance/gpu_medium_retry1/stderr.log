@@ -1,0 +1,32 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/sn850x2t/bass_cr_r3m19_n1_20260923/worktree/scripts/r3m19_performance.py", line 420, in <module>
+    main()
+  File "/mnt/sn850x2t/bass_cr_r3m19_n1_20260923/worktree/scripts/r3m19_performance.py", line 413, in main
+    result = execute_benchmark(result, args.out)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/sn850x2t/bass_cr_r3m19_n1_20260923/worktree/scripts/r3m19_performance.py", line 381, in execute_benchmark
+    result = benchmark(plan)
+             ^^^^^^^^^^^^^^^
+  File "/mnt/sn850x2t/bass_cr_r3m19_n1_20260923/worktree/scripts/r3m19_performance.py", line 301, in benchmark
+    initial, _ = runner.relaxed_initial()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/sn850x2t/bass_cr_r3m19_n1_20260923/worktree/cr_repro/r3m11.py", line 167, in relaxed_initial
+    psi,info=super().relaxed_initial()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/sn850x2t/bass_cr_r3m19_n1_20260923/worktree/cr_repro/tdl.py", line 34, in relaxed_initial
+    if mode=='analytic': return psi,{'mode':'analytic','energy_Eh':self.target_energy(psi),'steps':0}
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/sn850x2t/bass_cr_r3m19_n1_20260923/worktree/cr_repro/tdl.py", line 27, in target_energy
+    pk=self.xp.fft.fftn(psi); Tpsi=self.xp.fft.ifftn(0.5*self.k2*pk)
+       ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/lib/python3.12/site-packages/cupy/fft/_fft.py", line 802, in fftn
+    from cupy.cuda import cufft
+  File "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/lib/python3.12/site-packages/cupy/cuda/__init__.py", line 85, in __getattr__
+    return _importlib.import_module('cupy.cuda.cufft')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ImportError: libcufft.so.11: cannot open shared object file: No such file or directory

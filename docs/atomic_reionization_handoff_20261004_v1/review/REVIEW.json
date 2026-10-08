@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "review_date": "2026-10-04",
+  "status": "COMPLETE",
+  "scope": "Bounded independent physics, interface, DAG, and low-cost execution-contract review",
+  "scientific_runtime_run": false,
+  "physical_provider_admission": false,
+  "issues": [
+    {
+      "id": "R01",
+      "kind": "MODEL_CONTRACT",
+      "status": "RESOLVED_VERIFIED_IN_FILES",
+      "summary": "Distinguish inherited 46080-node parent from new homogeneous successor parent."
+    },
+    {
+      "id": "R02",
+      "kind": "EXECUTION_CONTRACT",
+      "status": "RESOLVED_VERIFIED_IN_FILES",
+      "summary": "Move prose suffixes out of shell command fields."
+    },
+    {
+      "id": "R03",
+      "kind": "RETURN_CONTRACT",
+      "status": "RESOLVED_VERIFIED_IN_FILES",
+      "summary": "Align thread return instructions with common required envelope."
+    },
+    {
+      "id": "R04",
+      "kind": "LEGACY_ACTIVATION",
+      "status": "RESOLVED_VERIFIED_IN_FILES",
+      "summary": "REI-L01 must be explicitly callable before F09 when a selected extension resolves an earlier real dependency; F09 is a trigger, not a universal prerequisite."
+    }
+  ],
+  "not_claimed": [
+    "atomic physical accuracy",
+    "cosmological implementation correctness",
+    "first-interval certification",
+    "physical histories",
+    "remote restore verification"
+  ],
+  "verdict": "NO_OPEN_BLOCKING_FINDINGS_IN_REVIEWED_SCOPE",
+  "open_blocking_findings": 0,
+  "checks": {
+    "unique_global_nodes": 31,
+    "all_dependency_ids_resolved": true,
+    "global_dag_acyclic": true,
+    "baseline_f08_independent_of_optional_atomic_paths": true,
+    "one_rei_f09_campaign": true,
+    "legacy_l01_not_gated_by_f09": true,
+    "grackle_reference_hashes_and_sizes_checked": 4,
+    "hh_return_schema_path_exists": true,
+    "reviewed_content_manifest": "REVIEWED_CONTENT_IDENTITIES.json"
+  },
+  "stop_rule": "No repeat science review for publication-receipt-only changes. Review only changed scientific contracts or executable behavior."
+}

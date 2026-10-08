@@ -1,0 +1,142 @@
+{
+  "schema": "R3M26_INDEPENDENT_REVIEW_V1",
+  "date_utc": "2026-09-24",
+  "base_commit": "90d6cbad25e4bc49e9563f8721fdc408761b31c7",
+  "review_type": "ACTUAL_SEPARATE_NONAUTHOR_REVIEW_OF_LISTED_COMPONENTS",
+  "independence": {
+    "author_of_reviewed_implementation": false,
+    "author_of_reviewed_tests": false,
+    "author_of_reviewed_validation_design": false,
+    "shared_context": true,
+    "same_model_family": true,
+    "blind_review": false,
+    "excluded_self_authored": [
+      "docs/r3m26/CROSS_THREAD_REVIEW_KO.md",
+      "docs/r3m26/PERFORMANCE_AND_CODE_REVIEW_KO.md",
+      "results/R3M26/CROSS_THREAD_RECEIPT.json"
+    ],
+    "limits": "Not external peer review, independent hardware replication, raw checkpoint restore, or a second physics solver."
+  },
+  "reviewed_hashes": {
+    "scripts/r3m26_temporal.py": "8be5b9d0638759bbb3ff8cb10709f9d6831ce1455b4e9e03a3a3ed373a25e48a",
+    "scripts/r3m26_budget.py": "07a828203db3569f950ae54dba4541b048ae9f07b5f922cdcc9ec494ff82ff43",
+    "scripts/r3m26_foundation.py": "3f4a371e061622f86b71dbee7e3ea94f5bdf395492f4096d8f0af8a909e14897",
+    "tests/test_r3m26_temporal.py": "491f4cd3cf619ebb431fcc8b0972a07e26082767669c97d2437680100af2b9c7",
+    "tests/test_r3m26_budget.py": "03124448bede83231a700ebf2e2048d1ef655c74f1d9ee43821f44a53bd27983",
+    "tests/test_r3m26_foundation.py": "9af4d9b88a77822e5ed6b6341a291fbed34a005292ef8e6e4e7abed50ad0c966",
+    "docs/r3m26/MODEL_FOUNDATION_KO.md": "1d4d8dc418e814271a4acf98d39f9fbd70cbe0b53e34bf5ddb18a3d072ab5b73",
+    "docs/r3m26/NUMERICAL_STRATEGY_KO.md": "f94d0f77ca7bd9430e052ebc0deb7d7ca6be0df62a35eebb1587060f324d1915",
+    "docs/r3m26/SCIENTIFIC_CONTRACT.md": "6891c22d7409677d825e8d02c3b9164366d12b19ac119b38fd4bc8cc70daf459",
+    "docs/r3m26/MODEL_CONTRACT.json": "0dee9dc7347f4047db9ee7ef8bc706544b6fc3e12c53905e37214c8c9b8b4e35",
+    "docs/r3m26/LOCAL_CODEX_HANDOFF.md": "3f6a13c8982ff924f5f5c25fdb0926ef7dc8215e91ce45c2c755818591e8ce0d",
+    "docs/r3m26/LOW_COST_CODEX_MASTER_PROMPT_KO.md": "d94646a173f529f8f9b2e991e812bb47c521006dc848ecc5865451ebaa9cc3a8",
+    "docs/CLAIM_POLICY.md": "32857e2b450d9d6f6b8328ac7bc5092e18fc4ef4a00b87cc5a7a0f82136cc6b1",
+    "docs/LITERATURE_AND_METHOD_LOCK.md": "f48cd7db6b28aba14b852ec84d8cc49187d4b25e00f70a4d9f9149db2e136d7b",
+    "docs/roadmap/DAG.json": "4cace8fbd4ef0311f0dcbf1a225c3d66f675bdd75fd721452001a5c2df9d003c",
+    "docs/roadmap/ERROR_BUDGET.json": "d50e72cb87505f16e3245865cdb2cf84c0ad4bf85bf9cf1476b9c83d72677829",
+    "docs/roadmap/RESEARCH_PLAN_KO.md": "249c21ae489c724ee0a8b09af1f623ee674b4838c109eea55b36dd567bf53b1d"
+  },
+  "fresh_checks": {
+    "initial_command": {
+      "argv": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q tests/test_r3m26_temporal.py tests/test_r3m26_budget.py tests/test_r3m26_foundation.py",
+      "exit_code": 1,
+      "output": "No module named pytest",
+      "classification": "TEST_ENVIRONMENT_IMPORT_PATH; no dependency installation or science-code change"
+    },
+    "resolved_command": {
+      "argv": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=../test_deps:. python -m pytest -p no:cacheprovider -q tests/test_r3m26_temporal.py tests/test_r3m26_budget.py tests/test_r3m26_foundation.py",
+      "exit_code": 0,
+      "output": "45 passed in 2.64s",
+      "count": 45
+    },
+    "review_counterexample_serialization_failure": {
+      "exit_code": 1,
+      "error": "TypeError: Object of type bool is not JSON serializable",
+      "classification": "REVIEW_RECORD_SERIALIZATION_NUMPY_BOOL; calculations completed but no receipt written; explicit Python bool conversion fixed, no reviewed code changed"
+    },
+    "counterexample_rerun_exit_code": 0,
+    "runtime": {
+      "python": "3.12.14",
+      "numpy": "2.3.5",
+      "scipy": "1.17.0",
+      "GPU_executed": false
+    },
+    "numerical_source_digest": "581ff84930bb862efafdfec5d39d5b25aebf9297ce7ce45f833a5abe125b2a5b",
+    "counterexamples": {
+      "hidden_remainder": {
+        "sample_perturbations": [
+          0.0,
+          -0.0,
+          0.0,
+          -0.0
+        ],
+        "limit_shift": 0.00010000000000000002,
+        "same_samples_empirical_accepted": true,
+        "reported_U_t": 2.746582031247502e-06,
+        "true_error_under_alternative_model": 0.0001004211425781245,
+        "certified_error_bound": null,
+        "interpretation": "Finite-data empirical estimate does not certify an unrestricted remainder; disclosed limitation."
+      },
+      "ETF_sign": {
+        "checked_points": 6,
+        "correct_ETF_max_residual": 0.0,
+        "wrong_spatial_ETF_sign_min_residual": 1.9058363716057738,
+        "method": "Independent analytic isolated translating hydrogen1s derivatives; no production grid."
+      },
+      "ledger_admission": {
+        "missing_h_dt_status": "NUMERICAL_BUDGET_OPEN",
+        "missing_h_dt_total": null,
+        "synthetic_declared_certificate_scope": "EXACT_SUM_OF_DECLARED_CERTIFIED_INPUT_BOUNDS_EVIDENCE_NOT_REPROVED_BY_LEDGER",
+        "synthetic_production_admitted": false,
+        "decimal_just_above_limit_status": "NUMERICAL_BUDGET_EXCEEDED",
+        "decimal_exact_error": {
+          "numerator": 1000000000000000001,
+          "denominator": 100000000000000000000000
+        }
+      },
+      "projector_inequality": {
+        "cases": 128,
+        "max_error_over_bound": 0.7174006178677976,
+        "bound_satisfied": true,
+        "formal_roundoff_certification": false
+      }
+    },
+    "historical_protected_tracked_diff_empty": true
+  },
+  "findings": [
+    {
+      "id": "R26-IR-1",
+      "severity": "MINOR",
+      "location": "docs/r3m26/NUMERICAL_STRATEGY_KO.md",
+      "issue": "Text said finest dt scaling, implementation uses max(dt).",
+      "resolution": "Author changed text to max(dt); re-read verified.",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "R26-IR-2",
+      "severity": "MINOR",
+      "location": "docs/r3m26/NUMERICAL_STRATEGY_KO.md",
+      "issue": "Text implied an absolute criterion for zero/small channels although none is registered.",
+      "resolution": "Author now states zero input rejected, unresolved differences OPEN, no absolute admission criterion; re-read verified.",
+      "status": "RESOLVED"
+    }
+  ],
+  "unresolved_blocker_count": 0,
+  "unresolved_major_count": 0,
+  "unresolved_minor_count": 0,
+  "scope_decision": "PROMOTE_SCOPED_MODEL_FOUNDATION_AND_PROSPECTIVE_ANALYZERS",
+  "specification_verdict": "PASS_WITHIN_REVIEWED_SCOPE",
+  "engineering_verdict": "PASS_WITHIN_REVIEWED_SCOPE",
+  "whole_production": "HOLD",
+  "B3_executed": false,
+  "certified_global_error_evaluated": false,
+  "real_world_validation": "NOT_EVALUATED",
+  "scope_limits": [
+    "No endpoint or preparation array readback",
+    "No GPU run or full collision",
+    "No empirical envelope established for real B3",
+    "Ledger references and certification declarations are audited inputs, not automatically re-proved",
+    "No final report/backup delivery verification",
+    "Self-authored cross-thread/performance documents excluded"
+  ]
+}

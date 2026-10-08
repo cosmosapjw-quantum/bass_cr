@@ -1,0 +1,41 @@
+{
+  "scope": "AST_METHOD_BODY_IDENTITY_EXCLUDING_LINE_NUMBERS",
+  "old_ref": "59adc78",
+  "new_ref": "02546302",
+  "files": {
+    "cr_repro/r3m11.py": {
+      "unchanged_methods": [
+        "ControlledTDLRunner.__init__",
+        "ControlledTDLRunner.step",
+        "ControlledTDLRunner.relaxed_initial",
+        "ControlledTDLRunner.analyze"
+      ],
+      "changed_methods": [
+        "ControlledTDLRunner.run"
+      ],
+      "added_methods": [
+        "ControlledTDLRunner._save_checkpoint"
+      ]
+    },
+    "cr_repro/tdl.py": {
+      "unchanged_methods": [
+        "TDLRunner.__init__",
+        "TDLRunner.norm",
+        "TDLRunner.normalize",
+        "TDLRunner.target_energy",
+        "TDLRunner.relaxed_initial",
+        "TDLRunner.Vmid",
+        "TDLRunner.step",
+        "TDLRunner._project_state",
+        "TDLRunner.analyze"
+      ],
+      "changed_methods": [
+        "TDLRunner.run"
+      ],
+      "added_methods": [
+        "TDLRunner._save_checkpoint"
+      ]
+    }
+  },
+  "interpretation": "Checkpoint persistence changes only; no old checkpoint resumed or re-sealed. Historical initial array byte binding remains unavailable."
+}

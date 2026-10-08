@@ -1,0 +1,44 @@
+{
+  "schema": "R3M15_SPATIAL_PREREGISTRATION_V1",
+  "new_collision_limit": 3,
+  "order": [
+    "A",
+    "B",
+    "C"
+  ],
+  "grid_spacing_a0": {
+    "A": 0.25,
+    "B": 0.2,
+    "C": 0.3125
+  },
+  "preparation": {
+    "imag_dt": 0.00625,
+    "imag_steps": 4800,
+    "T": 30
+  },
+  "observable_schema": {
+    "P1": "Gram orthogonal projector on sampled projectile n<=1 span",
+    "P2": "nested n<=2 span",
+    "P3": "nested n<=3 span; primary screen",
+    "P_region": "z>30 comparator only",
+    "norm": "surviving wavefunction norm",
+    "n3_increment": "(P3-P2)/P3; not n>3 tail bound"
+  },
+  "spatial_metric": "abs(P_dx020-P_dx025)/abs(P_dx020)",
+  "relative_screen": 0.01,
+  "small_observable_floor": 1e-08,
+  "small_observable_absolute_screen": 1e-10,
+  "absolute_screen_purpose": "explicit pair diagnostic near zero, not a total relative-error claim",
+  "planning_spatial_budget_relative": 0.003,
+  "observed_order_rule": "common tau/dt/box/CAP only; equal h ratio 1.25; positive shrinking same-sign differences above 1e-10; otherwise null",
+  "extrapolation": "empirical three-point single-power diagnostic, never certified continuum answer",
+  "max_steps_per_chunk": 128,
+  "max_chunks_per_collision": 8,
+  "gpu_reserve_mib": 1536,
+  "cpu_fallback": false,
+  "preflight_budget": "256 bytes * N + 2 GiB includes arrays/FFT allowance; actual FFT allocations measured before preparation",
+  "source_digest": "581ff84930bb862efafdfec5d39d5b25aebf9297ce7ce45f833a5abe125b2a5b",
+  "cross_grid_pair_theorem": false,
+  "bgrid": "NO_GO",
+  "all_bound": "OPEN"
+}

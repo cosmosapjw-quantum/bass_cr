@@ -1,0 +1,11 @@
+{
+  "schema": "R3M19_INDEPENDENT_REVIEW_FINDING_V1",
+  "id": "IR19_01_GPU_TIMING_MONITORING",
+  "observed_utc": "2026-09-23T02:28:41.705350+00:00",
+  "scope": "static implementation/timing semantics review, GPU not executed",
+  "code_sha256_at_observation": "1c87fe433e63d2ce18361195d842e7a32a6ada11d9726bb2c8156eb5c1a2cc02",
+  "finding": "The step timing interval calls _gpu_counters before every advance. enqueue_seconds includes memGetInfo/pool/cache host monitoring. CUDA event interval can include monitoring-induced idle time; it is not a pure kernel time measure.",
+  "recommended_repair": "Move resource counters outside the bounded microtrajectory measured interval, preserving pre/post reserve guards; or label measured interval explicitly as monitored timeline rather than enqueue/device-only.",
+  "production_runs": 0,
+  "status": "REPORTED_FOR_BOUNDED_REPAIR"
+}

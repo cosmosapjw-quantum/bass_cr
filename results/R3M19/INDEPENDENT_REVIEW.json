@@ -1,0 +1,138 @@
+{
+  "schema": "BASS_CR_R3M19_INDEPENDENT_DECISION_REVIEW_V1",
+  "reviewed_utc": "2026-09-23T02:37:19.170236+00:00",
+  "reviewer": "independent_review subagent; no candidate implementation generated or owner files modified by reviewer",
+  "base_commit": "3d033eb08a0efd99257470f0fa27214f569b427a",
+  "candidate_identity": "reviewed file SHA256 inventory; publication commit assigned later by owner",
+  "decision": "PROMOTE_BOUNDED_DIAGNOSTIC_BENCHMARK_AND_CONTRACT_REPAIR_ONLY",
+  "scientific_production_decision": "HOLD",
+  "inherited_scientific_status": "TIME_REFINEMENT_STILL_OPEN",
+  "promoted_scope": [
+    "Three-point actual-dt temporal model comparison with explicit interpolation ambiguity and no certification",
+    "Tiny non-Hermitian moving two-center full-H reference/decomposition diagnostics",
+    "Opt-in accuracy-matched bounded CPU/GPU benchmark infrastructure; measured CPU microbenchmark results only",
+    "R3M18 outer-coordinator frozen-config/argv contract repair; historical result artifacts and numerical core unchanged"
+  ],
+  "not_promoted": [
+    "Production collision, prepared-state replay or raw B2 reprojection",
+    "Continuum Coulomb, CAP physical bias, all-bound or b-integral accuracy",
+    "Actual GPU correctness/speed or full production performance",
+    "Independent measured CPU RAM reduction",
+    "Refined h=.20 CF4 cases as jointly reference-resolved validation",
+    "Physical rates, new production solver or additional collision authorization"
+  ],
+  "findings": [
+    {
+      "id": "IR19_01_GPU_TIMING_MONITORING",
+      "priority": "medium",
+      "status": "RESOLVED",
+      "location": "scripts/r3m19_performance.py:benchmark",
+      "finding": "Per-step GPU counter calls inside the timed trajectory mixed host resource monitoring into the enqueue/event span.",
+      "repair": "GPU counters/reserve checks moved before the event interval and observations after the measured wall/event span; a fake-event instrumentation-scope regression rejects monitors inside the timed trajectory.",
+      "verification": "Independent CPU-only performance test execution: 18 passed, 1 actual-GPU test deselected; later owner final evidence 19 passed, 1 CuPy skip. Real GPU was not exercised.",
+      "evidence": [
+        "results/R3M19/independent_review/IR19_01_gpu_timing_before_fix.json",
+        "results/R3M19/independent_review/IR19_01_provenance_correction.json"
+      ],
+      "provenance_note": "Before-fix SHA was not captured. Initial finding-record SHA was sampled after concurrent repair; correction explicitly identifies it as repaired-source SHA."
+    },
+    {
+      "id": "IR19_02_REFINED_REFERENCE_RESOLUTION",
+      "priority": "scientific_limit",
+      "status": "RETAINED_NEGATIVE_DIAGNOSTIC_NOT_A_CODE_BLOCKER",
+      "location": "results/R3M19/fullh/fullh_rect128_h020_refined_v1.json",
+      "finding": "All six refined h=.20 cases have reference_refinement_resolved=false despite CF4 apparent orders near four.",
+      "required_claim_ceiling": "Preserve the false flags. The apparent orders are observations, not a jointly reference-resolved CF4 validation PASS. The coarser h=.20 and 64-point suites separately satisfy their registered resolution checks.",
+      "production_impact": "No production admission or quantified production error follows."
+    },
+    {
+      "id": "IR19_03_REFERENCE_CHECK_SCOPE",
+      "priority": "documentation_limit",
+      "status": "EXPLICIT_LIMIT_OF_PROMOTION",
+      "location": "docs/r3m19/LITERATURE_AND_DERIVATION_KO.md section 5; dop853_reference",
+      "finding": "The document recommends max_step halving, but current code leaves solve_ivp max_step at its default and does not execute that sweep.",
+      "required_claim_ceiling": "Treat this as future reference-hardening work, not a completed check. Current admitted evidence is tolerance tightening, constant/diagonal limits, CF4 comparison and the recorded tiny-grid resolution checks."
+    }
+  ],
+  "mathematical_checks": {
+    "CF4": "Early a*A1+b*A2 acts first; late b*A1+a*A2 follows. With a+b=1/2 and static W>=0, each generator has dissipative Hermitian part -W/2. Negative b alone does not imply CAP antidamping.",
+    "Coulomb_phase": "Analytic projectile integral has correct sign and static-velocity limit; quadrature tests cover positive, negative, tiny and zero velocity. No soft core introduced.",
+    "CAP": "A=-iH-W and augmented loss derivative 2<psi,W psi> have correct sign. Ledger closure is a consistency check, not a CAP-reflection/bias bound.",
+    "vector_decomposition": "Raw endpoint telescope S-E_mid + E_mid-E_avg + E_avg-U closes; Gram cross terms reconstruct squared error. Independent phase alignment is correctly excluded.",
+    "temporal_models": "Unequal actual-step signed single-power fit, even dt2+dt4 interpolation and null degree-six ambiguity are correct. No fit closes a budget or replaces raw capture by P/norm.",
+    "independence": "Full-H dense expm/DOP853 differs from frozen FFT split products but shares H_h; this is temporal independence, not continuum spatial independence."
+  },
+  "resource_and_performance_checks": {
+    "fullH_cli": "Even three-dimensional shape, <=512 grid points, <=64 steps per ladder method, <=2 atomic-time horizon and <=20000 RHS calls per oracle; no production grid admitted.",
+    "benchmark": "<=2^20 points, <=256 per axis, <=8 microsteps, <=10 repetitions, <=1GiB requested screening/pool budget, affinity/physical-core/quota worker cap, current resource recheck and no GPU-to-CPU fallback.",
+    "memory_limits": "Working-byte estimates and sampled counters are explicitly not peak proofs. RSS is a process lifetime peak of setup and both implementations, not isolated A/B memory reduction.",
+    "timing": "Two warmups per implementation, alternating measured order, fixed state/grid/dtype/CAP/actual dt/horizon, parity gate before speed ratio and no full-grid extrapolation.",
+    "measured_CPU_speed_ratios": {
+      "buffer_reuse": 1.5729042740142631,
+      "scipy_fft_1worker": 1.9668581480766398,
+      "scipy_fft_4workers": 3.004340507015523
+    },
+    "measured_CPU_scope": "Intel Xeon web runtime, 64x64x96 complex128, four steps, five repeats; not user workstation or production throughput.",
+    "maximum_recorded_relative_state_parity_error": 1.0328685439028702e-15,
+    "GPU_execution": "NOT_RUN"
+  },
+  "coordinator_review": {
+    "repair": "Validate frozen B2 family, rebuild canonical metadata plan and compare executable argv/interpreter/config/prepared/output paths/cwd/env/prerequisites/snapshot ordering before large-array hashing or launch.",
+    "independent_targeted_result": "18 passed in 1.08s, including existing coordinator regression.",
+    "historical_script": "Pre-repair implementation remains retrievable at base commit; current outer instrumentation intentionally changes."
+  },
+  "independent_test_executions": [
+    {
+      "scope": "R3M19 fullH and temporal model tests",
+      "stdout": "40 passed in 1.44s",
+      "exit_code": 0
+    },
+    {
+      "scope": "R3M19 execution contract plus R3M18 coordinator tests",
+      "stdout": "18 passed in 1.08s",
+      "exit_code": 0
+    },
+    {
+      "scope": "R3M19 performance CPU-only; actual GPU test excluded",
+      "stdout": "18 passed, 1 deselected in 0.63s",
+      "exit_code": 0
+    }
+  ],
+  "owner_integrated_evidence": {
+    "path": "results/R3M19/integrated_tests.stdout",
+    "sha256": "6a0331cc9738c365fd5a4800e323190b0cb1b89284705869f080fa35f901bbe1",
+    "result": "323 passed, 1 skipped in 15.61s",
+    "reviewer_read_actual_log": true,
+    "skip": "CuPy/GPU unavailable; not a pass"
+  },
+  "test_count_semantics": "These are overlapping executions; do not add them to form a unique total.",
+  "protected_files_changed": [],
+  "frozen_numerical_source_digest": "581ff84930bb862efafdfec5d39d5b25aebf9297ce7ce45f833a5abe125b2a5b",
+  "literature_and_sibling_scope": "Reviewer checked displayed derivations and scope controls in owner literature/sibling ledgers; did not independently retrieve every cited paper/cloud archive or validate their provider ACKs.",
+  "raw_B2_evidence_limit": "Summary arithmetic is pinned; missing small B2 raw result/witness/seal/receipt publication remains for local handoff. No raw state reprojection or large archive transfer by reviewer.",
+  "new_production_full_collisions_by_reviewer": 0,
+  "unresolved_blocking_findings_within_promoted_scope": [],
+  "reviewed_files_sha256": {
+    "scripts/r3m19_fullh_diagnostic.py": "438fbdfb5330093290fd66aae766ad66ad5e0ab9fa0f0f751415c6b706bc95a6",
+    "scripts/r3m19_performance.py": "1c87fe433e63d2ce18361195d842e7a32a6ada11d9726bb2c8156eb5c1a2cc02",
+    "scripts/r3m19_temporal_models.py": "cc1e06e67835f637f92eb6e2ce56af96a96ac04b2a788eb5accdbd78e86ef948",
+    "scripts/r3m18_b2_execute.py": "70e8fd37b0d0a491412bcc3a2696daa342c328f63ca7718bb2197a90a899b0b5",
+    "tests/test_r3m19_execution_contract.py": "09312984d3287cd87a309692ca9964c07e260a436de48bc0574ab7fa1aa5c890",
+    "tests/test_r3m19_fullh_diagnostic.py": "1676c3355ee2b3a2adef47c80385751d900870277359bd2897d039811928796c",
+    "tests/test_r3m19_performance.py": "7ac3a24da5bf8f6356552a7c17b5ed494ac9198dec6a175d6730e643a4727f97",
+    "tests/test_r3m19_temporal_models.py": "7c12106944697af4b8e26f4c3fdee79872f34bd40107e16e8432ff93b3b890e5",
+    "docs/r3m19/SCIENTIFIC_CONTRACT.md": "de4df02aebd53502840cf4eb66b880fcb34adf55d4bb7fdae89837ffdb310815",
+    "docs/r3m19/LITERATURE_AND_DERIVATION_KO.md": "d0283c789ad99d8427ab9af846c9c26b8a9ef2678bdbbd2ba5b6c3fd5ab1e89f",
+    "docs/r3m19/CROSS_THREAD_REVIEW_KO.md": "c6f7bf4549e5ebf0fe17eebc2a44d74cb27e1bede8ab4c77713ad76bf1e6ec7a",
+    "results/R3M19/temporal/B_MODEL_COMPARISON.json": "9417d3922cdbfd3d4e8e4156193c309947ef5fa4047acf85bacee1070481f108",
+    "results/R3M19/fullh/fullh_64pt_suite_v2.json": "ae55426bc7313c9cbda26ca5b0e35c499952b568c2e60ba454494291e3cbdcb3",
+    "results/R3M19/fullh/fullh_rect128_h020_stiffness_v1.json": "a1e4973cb51e5fe101afc1bc607f22cf78627e6215c171258f76a0d0ff56a2a9",
+    "results/R3M19/fullh/fullh_rect128_h020_refined_v1.json": "5ed35d079de1d1498a1377916287fc3d2cea7c3e490d5d90811c51a287411c5c",
+    "results/R3M19/performance/SUMMARY.json": "ef2c42babc13573be381d6b43402b5f67f887ec281d1e90d7a6320e30573b228",
+    "results/R3M19/integrated_tests.stdout": "6a0331cc9738c365fd5a4800e323190b0cb1b89284705869f080fa35f901bbe1",
+    "results/R3M19/performance/cpu_native/RESULT.json": "9fbd3dbd1a11f900e4a91232c3c59095c59c54faa2fe36a467ae453e3860561f",
+    "results/R3M19/performance/cpu_scipy_w1/RESULT.json": "9805c61f4eb391a6f9db5742c280f967fb95cb8722793715a68ef2e26464872b",
+    "results/R3M19/performance/cpu_scipy_w4/RESULT.json": "96f56c4b703902a532d7f67176f28bd20e3e99b1c400950454a0ac42b61cdd74"
+  },
+  "final_limit": "PROMOTE is limited to the reviewed bounded code/diagnostic/benchmark scope. Scientific production remains HOLD. New evidence/docs or material code changes require only a bounded addendum for affected claims, not a recursive whole review."
+}

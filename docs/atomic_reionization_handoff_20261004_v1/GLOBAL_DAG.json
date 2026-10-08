@@ -1,0 +1,664 @@
+{
+  "schema": "atomic_reionization.program.v1",
+  "date": "2026-10-04",
+  "authority": "Current per-thread exact-ref snapshots plus explicit plan decisions; not old deep-research snapshot",
+  "source_aliases": {
+    "REI_SCOPE_LOCK": "REI-F00",
+    "REI_PROVIDER_CONTRACT": "REI-F01",
+    "REI_DOMAIN_FREEZE": "REI-F07",
+    "REI_NONLINEAR_CERTIFIED_SEAM": "REI-F05",
+    "REI_BASELINE_EXECUTOR": "REI-F08",
+    "REI_BASELINE_HISTORY_ACCEPTED": "REI-F08",
+    "REI_ATOMIC_SENSITIVITY_RESULT": "REI-F09"
+  },
+  "default_lane": "fastest",
+  "prework_completed_task_ids": [
+    "HE-P0",
+    "HH-F0"
+  ],
+  "single_campaign": {
+    "owner_task": "REI-F09",
+    "inputs": [
+      "HH-F2",
+      "HE-F2"
+    ],
+    "output": "runtime_outputs/paired_atomic_sensitivity_v1.json",
+    "review_tasks": [
+      "HH-F3",
+      "HE-F3"
+    ],
+    "duplicate_cosmology_execution": false
+  },
+  "failure_rules": {
+    "source_drift": "Review changed code/contracts only; docs-only publication does not restart completed science",
+    "runtime": "Record environment error; do not relabel physics failure",
+    "numeric": "Preserve rejected step and thresholds; repair local map/evaluator",
+    "source_conflict": "Keep named alternatives; no silent averaging or legacy restart",
+    "physical_domain": "Limit claim or select one provider extension"
+  },
+  "claim_ceiling": "PLANNING_AND_PORTABLE_PREWORK_ONLY; runtime admissions are task outputs not package metadata",
+  "nodes": [
+    {
+      "id": "REI-F00",
+      "thread": "rei_bianchi",
+      "title": "SSOT 채택과 source/closure successor contract",
+      "lane": "FASTEST",
+      "optional": false,
+      "state": "pending",
+      "source_status": "CODEX_READY_NOT_EXECUTED",
+      "dependencies": [],
+      "execution_owner": "rei_bianchi",
+      "source_card": "threads/rei_bianchi/TASKS.json#REI-F00",
+      "read_first": [
+        "threads/rei_bianchi/CODEX_START_KO.md",
+        "common/DECISIONS.json",
+        "threads/rei_bianchi/PREWORK_KO.md"
+      ],
+      "working_directory": "repository_root",
+      "packet_directory": "docs/atomic_reionization_handoff_20261004_v1"
+    },
+    {
+      "id": "REI-F01",
+      "thread": "rei_bianchi",
+      "title": "정의된 AtomicProvider와 R1 homogeneous opacity 구현",
+      "lane": "FASTEST",
+      "optional": false,
+      "state": "pending",
+      "source_status": "CODEX_READY_NOT_EXECUTED",
+      "dependencies": [
+        "REI-F00"
+      ],
+      "execution_owner": "rei_bianchi",
+      "source_card": "threads/rei_bianchi/TASKS.json#REI-F01",
+      "read_first": [
+        "threads/rei_bianchi/CODEX_START_KO.md",
+        "common/DECISIONS.json",
+        "threads/rei_bianchi/PREWORK_KO.md"
+      ],
+      "working_directory": "repository_root",
+      "packet_directory": "docs/atomic_reionization_handoff_20261004_v1"
+    },
+    {
+      "id": "REI-F02",
+      "thread": "rei_bianchi",
+      "title": "상수율 H oracle 구현",
+      "lane": "FASTEST",
+      "optional": false,
+      "state": "pending",
+      "source_status": "CODEX_READY_NOT_EXECUTED",
+      "dependencies": [
+        "REI-F00"
+      ],
+      "execution_owner": "rei_bianchi",
+      "source_card": "threads/rei_bianchi/TASKS.json#REI-F02",
+      "read_first": [
+        "threads/rei_bianchi/CODEX_START_KO.md",
+        "common/DECISIONS.json",
+        "threads/rei_bianchi/PREWORK_KO.md"
+      ],
+      "working_directory": "repository_root",
+      "packet_directory": "docs/atomic_reionization_handoff_20261004_v1"
+    },
+    {
+      "id": "REI-F03",
+      "thread": "rei_bianchi",
+      "title": "H/He 사건/열 coupled map와 controlled fixture",
+      "lane": "FASTEST",
+      "optional": false,
+      "state": "pending",
+      "source_status": "CODEX_READY_NOT_EXECUTED",
+      "dependencies": [
+        "REI-F01",
+        "REI-F02"
+      ],
+      "execution_owner": "rei_bianchi",
+      "source_card": "threads/rei_bianchi/TASKS.json#REI-F03",
+      "read_first": [
+        "threads/rei_bianchi/CODEX_START_KO.md",
+        "common/DECISIONS.json",
+        "threads/rei_bianchi/PREWORK_KO.md"
+      ],
+      "working_directory": "repository_root",
+      "packet_directory": "docs/atomic_reionization_handoff_20261004_v1"
+    },
+    {
+      "id": "REI-F04",
+      "thread": "rei_bianchi",
+      "title": "실제 공동-parent sparse nonlinear remainder 인증",
+      "lane": "FASTEST",
+      "optional": false,
+      "state": "pending",
+      "source_status": "CODEX_READY_NOT_EXECUTED",
+      "dependencies": [
+        "REI-F03"
+      ],
+      "execution_owner": "rei_bianchi",
+      "source_card": "threads/rei_bianchi/TASKS.json#REI-F04",
+      "read_first": [
+        "threads/rei_bianchi/CODEX_START_KO.md",
+        "common/DECISIONS.json",
+        "threads/rei_bianchi/PREWORK_KO.md"
+      ],
+      "working_directory": "repository_root",
+      "packet_directory": "docs/atomic_reionization_handoff_20261004_v1"
+    },
+    {
+      "id": "REI-F05",
+      "thread": "rei_bianchi",
+      "title": "전체 첫 canonical interval 구현·실행",
+      "lane": "FASTEST",
+      "optional": false,
+      "state": "pending",
+      "source_status": "CODEX_READY_NOT_EXECUTED",
+      "dependencies": [
+        "REI-F04"
+      ],
+      "execution_owner": "rei_bianchi",
+      "source_card": "threads/rei_bianchi/TASKS.json#REI-F05",
+      "read_first": [
+        "threads/rei_bianchi/CODEX_START_KO.md",
+        "common/DECISIONS.json",
+        "threads/rei_bianchi/PREWORK_KO.md"
+      ],
+      "working_directory": "repository_root",
+      "packet_directory": "docs/atomic_reionization_handoff_20261004_v1"
+    },
+    {
+      "id": "REI-F06",
+      "thread": "rei_bianchi",
+      "title": "Bianchi-I exact geometry와 angular-energy adapter",
+      "lane": "FASTEST",
+      "optional": false,
+      "state": "pending",
+      "source_status": "CODEX_READY_NOT_EXECUTED",
+      "dependencies": [
+        "REI-F01"
+      ],
+      "execution_owner": "rei_bianchi",
+      "source_card": "threads/rei_bianchi/TASKS.json#REI-F06",
+      "read_first": [
+        "threads/rei_bianchi/CODEX_START_KO.md",
+        "common/DECISIONS.json",
+        "threads/rei_bianchi/PREWORK_KO.md"
+      ],
+      "working_directory": "repository_root",
+      "packet_directory": "docs/atomic_reionization_handoff_20261004_v1"
+    },
+    {
+      "id": "REI-F07",
+      "thread": "rei_bianchi",
+      "title": "첫 과학 scenario 선등록",
+      "lane": "FASTEST",
+      "optional": false,
+      "state": "pending",
+      "source_status": "CODEX_READY_NOT_EXECUTED",
+      "dependencies": [
+        "REI-F03"
+      ],
+      "execution_owner": "rei_bianchi",
+      "source_card": "threads/rei_bianchi/TASKS.json#REI-F07",
+      "read_first": [
+        "threads/rei_bianchi/CODEX_START_KO.md",
+        "common/DECISIONS.json",
+        "threads/rei_bianchi/PREWORK_KO.md"
+      ],
+      "working_directory": "repository_root",
+      "packet_directory": "docs/atomic_reionization_handoff_20261004_v1"
+    },
+    {
+      "id": "REI-F08",
+      "thread": "rei_bianchi",
+      "title": "동일 원자 realization의 FLRW/Bianchi paired histories",
+      "lane": "FASTEST",
+      "optional": false,
+      "state": "pending",
+      "source_status": "CODEX_READY_NOT_EXECUTED",
+      "dependencies": [
+        "REI-F05",
+        "REI-F06",
+        "REI-F07"
+      ],
+      "execution_owner": "rei_bianchi",
+      "source_card": "threads/rei_bianchi/TASKS.json#REI-F08",
+      "read_first": [
+        "threads/rei_bianchi/CODEX_START_KO.md",
+        "common/DECISIONS.json",
+        "threads/rei_bianchi/PREWORK_KO.md"
+      ],
+      "working_directory": "repository_root",
+      "packet_directory": "docs/atomic_reionization_handoff_20261004_v1"
+    },
+    {
+      "id": "REI-F09",
+      "thread": "rei_bianchi",
+      "title": "HH/He 원자 감도 import와 응용 종결",
+      "lane": "FASTEST",
+      "optional": false,
+      "state": "pending",
+      "source_status": "CODEX_READY_NOT_EXECUTED",
+      "dependencies": [
+        "REI-F08",
+        "HH-F2",
+        "HE-F2"
+      ],
+      "execution_owner": "rei_bianchi",
+      "source_card": "threads/rei_bianchi/TASKS.json#REI-F09",
+      "read_first": [
+        "threads/rei_bianchi/CODEX_START_KO.md",
+        "common/DECISIONS.json",
+        "threads/rei_bianchi/PREWORK_KO.md"
+      ],
+      "working_directory": "repository_root",
+      "packet_directory": "docs/atomic_reionization_handoff_20261004_v1"
+    },
+    {
+      "id": "REI-L01",
+      "thread": "rei_bianchi",
+      "title": "정밀·확장 lane 호출",
+      "lane": "MID_LONG",
+      "optional": true,
+      "state": "parked",
+      "source_status": "DORMANT_CALLABLE",
+      "dependencies": [],
+      "execution_owner": "rei_bianchi",
+      "source_card": "threads/rei_bianchi/TASKS.json#REI-L01",
+      "read_first": [
+        "threads/rei_bianchi/CODEX_START_KO.md",
+        "common/DECISIONS.json",
+        "threads/rei_bianchi/PREWORK_KO.md"
+      ],
+      "working_directory": "repository_root",
+      "packet_directory": "docs/atomic_reionization_handoff_20261004_v1"
+    },
+    {
+      "id": "CR-F0",
+      "thread": "bass_cr",
+      "title": "CR-F0",
+      "lane": "fastest",
+      "optional": false,
+      "state": "pending",
+      "source_status": "PREWORK_COMPLETE_RECEIVER_BINDING_PENDING",
+      "dependencies": [
+        "REI-F03"
+      ],
+      "execution_owner": "bass_cr",
+      "source_card": "threads/bass_cr/TASKS.json#CR-F0",
+      "read_first": [
+        "threads/bass_cr/CODEX_START_KO.md",
+        "common/DECISIONS.json",
+        "threads/bass_cr/PREWORK_KO.md"
+      ],
+      "working_directory": "repository_root",
+      "packet_directory": "docs/atomic_reionization_handoff_20261004_v1"
+    },
+    {
+      "id": "CR-M1",
+      "thread": "bass_cr",
+      "title": "CR-M1",
+      "lane": "conditional_external_cr",
+      "optional": true,
+      "state": "parked",
+      "source_status": "CONDITIONAL_NOT_READY",
+      "dependencies": [
+        "CR-F0",
+        "DECISION_CR_ON_SCOPE"
+      ],
+      "execution_owner": "bass_cr",
+      "source_card": "threads/bass_cr/TASKS.json#CR-M1",
+      "read_first": [
+        "threads/bass_cr/CODEX_START_KO.md",
+        "common/DECISIONS.json",
+        "threads/bass_cr/PREWORK_KO.md"
+      ],
+      "working_directory": "repository_root",
+      "packet_directory": "docs/atomic_reionization_handoff_20261004_v1"
+    },
+    {
+      "id": "CR-M2",
+      "thread": "bass_cr",
+      "title": "CR-M2",
+      "lane": "conditional_external_cr",
+      "optional": true,
+      "state": "parked",
+      "source_status": "CONDITIONAL_NOT_READY",
+      "dependencies": [
+        "CR-M1"
+      ],
+      "execution_owner": "bass_cr",
+      "source_card": "threads/bass_cr/TASKS.json#CR-M2",
+      "read_first": [
+        "threads/bass_cr/CODEX_START_KO.md",
+        "common/DECISIONS.json",
+        "threads/bass_cr/PREWORK_KO.md"
+      ],
+      "working_directory": "repository_root",
+      "packet_directory": "docs/atomic_reionization_handoff_20261004_v1"
+    },
+    {
+      "id": "CR-M3",
+      "thread": "bass_cr",
+      "title": "CR-M3",
+      "lane": "conditional_external_cr",
+      "optional": true,
+      "state": "parked",
+      "source_status": "CONDITIONAL_NOT_READY",
+      "dependencies": [
+        "CR-M2",
+        "REI-F08"
+      ],
+      "execution_owner": "bass_cr",
+      "source_card": "threads/bass_cr/TASKS.json#CR-M3",
+      "read_first": [
+        "threads/bass_cr/CODEX_START_KO.md",
+        "common/DECISIONS.json",
+        "threads/bass_cr/PREWORK_KO.md"
+      ],
+      "working_directory": "repository_root",
+      "packet_directory": "docs/atomic_reionization_handoff_20261004_v1"
+    },
+    {
+      "id": "CR-L1",
+      "thread": "bass_cr",
+      "title": "CR-L1",
+      "lane": "legacy_atomic",
+      "optional": true,
+      "state": "parked",
+      "source_status": "PARKED_UNRESOLVED",
+      "dependencies": [
+        "DECISION_REOPEN_LEGACY"
+      ],
+      "execution_owner": "bass_cr",
+      "source_card": "threads/bass_cr/TASKS.json#CR-L1",
+      "read_first": [
+        "threads/bass_cr/CODEX_START_KO.md",
+        "common/DECISIONS.json",
+        "threads/bass_cr/PREWORK_KO.md"
+      ],
+      "working_directory": "repository_root",
+      "packet_directory": "docs/atomic_reionization_handoff_20261004_v1"
+    },
+    {
+      "id": "HH-F0",
+      "thread": "WU088_HH",
+      "title": "Preserve latest legacy and finish analytic prework",
+      "lane": "fastest",
+      "optional": false,
+      "state": "completed",
+      "source_status": "COMPLETED",
+      "dependencies": [],
+      "execution_owner": "WU088_HH",
+      "source_card": "threads/WU088_HH/TASKS.json#HH-F0",
+      "read_first": [
+        "threads/WU088_HH/CODEX_START_KO.md",
+        "common/DECISIONS.json",
+        "threads/WU088_HH/PREWORK_KO.md"
+      ],
+      "working_directory": "repository_root",
+      "packet_directory": "docs/atomic_reionization_handoff_20261004_v1"
+    },
+    {
+      "id": "HH-F1",
+      "thread": "WU088_HH",
+      "title": "Freeze external HH provider and cross-repo domain",
+      "lane": "fastest",
+      "optional": false,
+      "state": "pending",
+      "source_status": "PROPOSED",
+      "dependencies": [
+        "HH-F0",
+        "REI-F07"
+      ],
+      "execution_owner": "WU088_HH",
+      "source_card": "threads/WU088_HH/TASKS.json#HH-F1",
+      "read_first": [
+        "threads/WU088_HH/CODEX_START_KO.md",
+        "common/DECISIONS.json",
+        "threads/WU088_HH/PREWORK_KO.md"
+      ],
+      "working_directory": "repository_root",
+      "packet_directory": "docs/atomic_reionization_handoff_20261004_v1"
+    },
+    {
+      "id": "HH-F2",
+      "thread": "WU088_HH",
+      "title": "Implement consumer external-rate seam",
+      "lane": "fastest",
+      "optional": false,
+      "state": "pending",
+      "source_status": "PROPOSED",
+      "dependencies": [
+        "HH-F1"
+      ],
+      "execution_owner": "WU088_HH",
+      "source_card": "threads/WU088_HH/TASKS.json#HH-F2",
+      "read_first": [
+        "threads/WU088_HH/CODEX_START_KO.md",
+        "common/DECISIONS.json",
+        "threads/WU088_HH/PREWORK_KO.md"
+      ],
+      "working_directory": "repository_root",
+      "packet_directory": "docs/atomic_reionization_handoff_20261004_v1"
+    },
+    {
+      "id": "HH-F3",
+      "thread": "WU088_HH",
+      "title": "Interpret and accept REI-F09 paired physical sensitivity",
+      "lane": "fastest",
+      "optional": false,
+      "state": "pending",
+      "source_status": "PROPOSED",
+      "dependencies": [
+        "HH-F2",
+        "REI-F09"
+      ],
+      "execution_owner": "WU088_HH",
+      "source_card": "threads/WU088_HH/TASKS.json#HH-F3",
+      "read_first": [
+        "threads/WU088_HH/CODEX_START_KO.md",
+        "common/DECISIONS.json",
+        "threads/WU088_HH/PREWORK_KO.md"
+      ],
+      "working_directory": "repository_root",
+      "packet_directory": "docs/atomic_reionization_handoff_20261004_v1"
+    },
+    {
+      "id": "HH-F4",
+      "thread": "WU088_HH",
+      "title": "Close selected consumer and park legacy",
+      "lane": "fastest",
+      "optional": false,
+      "state": "pending",
+      "source_status": "PROPOSED",
+      "dependencies": [
+        "HH-F3"
+      ],
+      "execution_owner": "WU088_HH",
+      "source_card": "threads/WU088_HH/TASKS.json#HH-F4",
+      "read_first": [
+        "threads/WU088_HH/CODEX_START_KO.md",
+        "common/DECISIONS.json",
+        "threads/WU088_HH/PREWORK_KO.md"
+      ],
+      "working_directory": "repository_root",
+      "packet_directory": "docs/atomic_reionization_handoff_20261004_v1"
+    },
+    {
+      "id": "HE-P0",
+      "thread": "BASS_HE",
+      "title": "Latest-state source research and derived precursor contract",
+      "lane": "fastest",
+      "optional": false,
+      "state": "completed",
+      "source_status": "COMPLETE_IN_DECLARED_SCOPE",
+      "dependencies": [],
+      "execution_owner": "BASS_HE",
+      "source_card": "threads/BASS_HE/TASKS.json#HE-P0",
+      "read_first": [
+        "threads/BASS_HE/CODEX_START_KO.md",
+        "common/DECISIONS.json",
+        "threads/BASS_HE/PREWORK_KO.md"
+      ],
+      "working_directory": "repository_root",
+      "packet_directory": "docs/atomic_reionization_handoff_20261004_v1"
+    },
+    {
+      "id": "HE-F1",
+      "thread": "BASS_HE",
+      "title": "Extend existing B3 with explicit KF96 alternative",
+      "lane": "fastest",
+      "optional": false,
+      "state": "pending",
+      "source_status": "READY_FOR_IMPLEMENTATION",
+      "dependencies": [
+        "HE-P0"
+      ],
+      "execution_owner": "BASS_HE",
+      "source_card": "threads/BASS_HE/TASKS.json#HE-F1",
+      "read_first": [
+        "threads/BASS_HE/CODEX_START_KO.md",
+        "common/DECISIONS.json",
+        "threads/BASS_HE/PREWORK_KO.md"
+      ],
+      "working_directory": "repository_root",
+      "packet_directory": "docs/atomic_reionization_handoff_20261004_v1"
+    },
+    {
+      "id": "HE-F2",
+      "thread": "BASS_HE",
+      "title": "Bind atom-to-consumer ledger and photon closure",
+      "lane": "fastest",
+      "optional": false,
+      "state": "pending",
+      "source_status": "WAITING_DEPENDENCIES",
+      "dependencies": [
+        "HE-F1",
+        "REI-F00",
+        "REI-F01"
+      ],
+      "execution_owner": "BASS_HE",
+      "source_card": "threads/BASS_HE/TASKS.json#HE-F2",
+      "read_first": [
+        "threads/BASS_HE/CODEX_START_KO.md",
+        "common/DECISIONS.json",
+        "threads/BASS_HE/PREWORK_KO.md"
+      ],
+      "working_directory": "repository_root",
+      "packet_directory": "docs/atomic_reionization_handoff_20261004_v1"
+    },
+    {
+      "id": "HE-F3",
+      "thread": "BASS_HE",
+      "title": "One paired sensitivity campaign and application-role closure",
+      "lane": "fastest",
+      "optional": false,
+      "state": "pending",
+      "source_status": "WAITING_DEPENDENCIES",
+      "dependencies": [
+        "HE-F2",
+        "REI-F09"
+      ],
+      "execution_owner": "BASS_HE",
+      "source_card": "threads/BASS_HE/TASKS.json#HE-F3",
+      "read_first": [
+        "threads/BASS_HE/CODEX_START_KO.md",
+        "common/DECISIONS.json",
+        "threads/BASS_HE/PREWORK_KO.md"
+      ],
+      "working_directory": "repository_root",
+      "packet_directory": "docs/atomic_reionization_handoff_20261004_v1"
+    },
+    {
+      "id": "HE-L1",
+      "thread": "BASS_HE",
+      "title": "Thermal RCT B5C3 extension",
+      "lane": "legacy",
+      "optional": true,
+      "state": "parked",
+      "source_status": "PARKED_OPEN",
+      "dependencies": [
+        "EXPLICIT_REOPEN_TRIGGER"
+      ],
+      "execution_owner": "BASS_HE",
+      "source_card": "threads/BASS_HE/TASKS.json#HE-L1",
+      "read_first": [
+        "threads/BASS_HE/CODEX_START_KO.md",
+        "common/DECISIONS.json",
+        "threads/BASS_HE/PREWORK_KO.md"
+      ],
+      "working_directory": "repository_root",
+      "packet_directory": "docs/atomic_reionization_handoff_20261004_v1"
+    },
+    {
+      "id": "HE-L2",
+      "thread": "BASS_HE",
+      "title": "Public fast-ion population extension",
+      "lane": "legacy",
+      "optional": true,
+      "state": "parked",
+      "source_status": "PARKED_OPEN",
+      "dependencies": [
+        "EXPLICIT_REOPEN_TRIGGER"
+      ],
+      "execution_owner": "BASS_HE",
+      "source_card": "threads/BASS_HE/TASKS.json#HE-L2",
+      "read_first": [
+        "threads/BASS_HE/CODEX_START_KO.md",
+        "common/DECISIONS.json",
+        "threads/BASS_HE/PREWORK_KO.md"
+      ],
+      "working_directory": "repository_root",
+      "packet_directory": "docs/atomic_reionization_handoff_20261004_v1"
+    },
+    {
+      "id": "HE-L3",
+      "thread": "BASS_HE",
+      "title": "Original coherent/continuum extension",
+      "lane": "legacy",
+      "optional": true,
+      "state": "parked",
+      "source_status": "PARKED_OPEN",
+      "dependencies": [
+        "EXPLICIT_REOPEN_TRIGGER"
+      ],
+      "execution_owner": "BASS_HE",
+      "source_card": "threads/BASS_HE/TASKS.json#HE-L3",
+      "read_first": [
+        "threads/BASS_HE/CODEX_START_KO.md",
+        "common/DECISIONS.json",
+        "threads/BASS_HE/PREWORK_KO.md"
+      ],
+      "working_directory": "repository_root",
+      "packet_directory": "docs/atomic_reionization_handoff_20261004_v1"
+    },
+    {
+      "id": "DECISION_CR_ON_SCOPE",
+      "thread": "coordinator",
+      "title": "DECISION_CR_ON_SCOPE",
+      "lane": "explicit_decision",
+      "optional": true,
+      "state": "parked",
+      "dependencies": [],
+      "execution_owner": "user_or_explicit_research_decision"
+    },
+    {
+      "id": "DECISION_REOPEN_LEGACY",
+      "thread": "coordinator",
+      "title": "DECISION_REOPEN_LEGACY",
+      "lane": "explicit_decision",
+      "optional": true,
+      "state": "parked",
+      "dependencies": [],
+      "execution_owner": "user_or_explicit_research_decision"
+    },
+    {
+      "id": "EXPLICIT_REOPEN_TRIGGER",
+      "thread": "coordinator",
+      "title": "EXPLICIT_REOPEN_TRIGGER",
+      "lane": "explicit_decision",
+      "optional": true,
+      "state": "parked",
+      "dependencies": [],
+      "execution_owner": "user_or_explicit_research_decision"
+    }
+  ]
+}

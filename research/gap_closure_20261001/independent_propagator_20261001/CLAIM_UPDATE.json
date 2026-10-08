@@ -1,0 +1,97 @@
+{
+  "gap_id": "G12",
+  "database_gap_id": "REPORT_GAP_12",
+  "database_input": {
+    "path": "/workspace/scratch/63ee2321a512/user_import_v3/deliverables/BASS_CR_SOURCE_DATABASE_20261001_v3.sqlite",
+    "sha256": "a8eea6a9136b1a0dcd2c154823fc0f5a8909cd90228510262e7d27e079a877ea",
+    "row": {
+      "gap_id": "REPORT_GAP_12",
+      "line_number": 1174,
+      "status": "REPORTED_RECOMMENDATION_NOT_VALIDATED",
+      "verbatim": "| **P2** | Propagator result currently lacks an independent algorithmic family cross-check | Numerics | Compare current integrator against metric-aware CFET/Krylov/Volterra formulation | **3–7 days** | Same endpoint observable to tighter-than-production tolerance with independent method |"
+    }
+  },
+  "status_before": "REPORTED_RECOMMENDATION_NOT_VALIDATED",
+  "status_after": "RESOLVED_WITH_LIMITATION",
+  "evidence_status": [
+    "DERIVED",
+    "NUMERICALLY_CHECKED",
+    "IMPLEMENTATION_VERIFIED"
+  ],
+  "claims_closed": [
+    "Cholesky derivative X=upper(E)+diag(E)/2 and metric-compatible anti-Hermitian generator derived",
+    "CF4 small reference implemented with correct node/exponential ordering",
+    "Synthetic noncommuting trajectory parity checked against exact solution and existing direct DOP853; convergence orders measured"
+  ],
+  "claims_open": [
+    "Physical B0 independent-family agreement to tighter-than-production tolerance",
+    "Qualified full time-dependent operator provider and independently validated Sdot at new stages",
+    "Predeclared parity-budget composition"
+  ],
+  "source_ids_used": [],
+  "existing_project_sources": [
+    "research/foundation_rebuild/tp1_short_transport_20260926/metric_transport.py",
+    "research/foundation_rebuild/tp1_short_transport_20260926/reference_transport.py"
+  ],
+  "source_hashes": {
+    "metric_transport.py": "cca228bad86233fae37d7be2010942f91aaf0b5ed6ad8169a04d063332973d6c",
+    "reference_transport.py": "c205fd822012361382f128bd31597ffa9a2c8a77eae0a34cd970dce9eab222c4"
+  },
+  "tests": [
+    {
+      "command": "python -m unittest discover -s . -p test_independent_propagator.py -v",
+      "stage": "RED",
+      "exit_code": 1,
+      "output": "TDD_RED.txt",
+      "failure": "missing new module"
+    },
+    {
+      "command": "python -m unittest discover -s . -p test_independent_propagator.py -v",
+      "stage": "INTERMEDIATE",
+      "exit_code": 1,
+      "output": "TDD_INTERMEDIATE_FAILURE.txt",
+      "failure": "64-step CF4 state error 2.352867e-9 exceeds predeclared synthetic2e-9",
+      "repair": "added128-step point; threshold unchanged"
+    },
+    {
+      "command": "python -m unittest discover -s . -p test_independent_propagator.py -v",
+      "stage": "GREEN",
+      "exit_code": 0,
+      "tests": 6,
+      "output": "TDD_GREEN.txt"
+    },
+    {
+      "command": "python independent_propagator.py",
+      "stage": "BENCHMARK",
+      "exit_code": 0,
+      "output": "E_INDEPENDENT_PROPAGATOR_RESULTS.json"
+    }
+  ],
+  "metrics": {
+    "cf4_128_metric_state_error": 1.4702486564304657e-10,
+    "cf4_128_selected_population_error": 7.239503441169859e-11,
+    "dop853_metric_state_error": 2.926721084795059e-14,
+    "cf4_halving_ratios": [
+      16.23001292976,
+      16.05314547021648,
+      16.01302489911822,
+      16.00319191342533
+    ]
+  },
+  "new_external_calls": 0,
+  "new_native_calls": 0,
+  "authorization_consumed": "Current synthetic research contract only; no native authorization",
+  "blocker_class": "IMPLEMENTATION_BLOCKER",
+  "blocker_scope": "Remaining physical parity claim only; nonnative method work completed",
+  "next_minimum_action": "Bind provider, physical source/state identities and predeclared parity budget in PHYSICAL_PARITY_CONTRACT.json before preparing a fresh scoped execution proposal.",
+  "claim_gate_change": "Nonnative method uncertainty reduced; G12 physical closure and all capture/continuous-bound ceilings unchanged",
+  "claim_ceilings": {
+    "capture": false,
+    "production": "HOLD",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "original_capture_gap_resolved": false,
+    "continuous_global_supremum_bound": false,
+    "continuous_trajectory_error_bound": false
+  }
+}

@@ -1,0 +1,30 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+__________ test_worker_keeps_scientific_arrays_and_excludes_metadata ___________
+
+    def test_worker_keeps_scientific_arrays_and_excludes_metadata():
+        keys = ('S_tp', 'S_pt', 'H_tp', 'H_pt', 'D_tp', 'D_pt')
+        def factory(*args):
+            return lambda t, q, h: ({**{key: np.ones((1, 1)) for key in keys}, 'metadata': {'sector': 'full'}},
+                                    {'S': np.eye(1), 'H': np.eye(1), 'D': np.zeros((1, 1)), 'diagnostics': {'ok': True}})
+        worker.initialize_worker('repo', 'build', 'basis', {}, evaluator_factory=factory)
+>       result = worker.evaluate_task({'task_id': 'x', 'time_hex': '0x0.0p+0', 'order': 40, 'subdivisions': 1})
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_worker.py:34:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/worker.py:30: in evaluate_task
+    if any(not np.isfinite(value).all() for section in arrays.values() for value in section.values()):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+.0 = <dict_valueiterator object at 0x7d87768e8360>
+
+>   if any(not np.isfinite(value).all() for section in arrays.values() for value in section.values()):
+               ^^^^^^^^^^^^^^^^^^
+E   TypeError: ufunc 'isfinite' not supported for the input types, and the inputs could not be safely coerced to any supported types according to the casting rule ''safe''
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/worker.py:30: TypeError
+=========================== short test summary info ============================
+FAILED research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_worker.py::test_worker_keeps_scientific_arrays_and_excludes_metadata
+1 failed, 2 deselected in 0.17s

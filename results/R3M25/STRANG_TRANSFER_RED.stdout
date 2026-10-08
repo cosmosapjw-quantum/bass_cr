@@ -1,0 +1,38 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_____________ test_strang_helper_guards_each_of_six_host_transfers _____________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7143eceb03b0>
+
+    def test_strang_helper_guards_each_of_six_host_transfers(monkeypatch):
+        from scripts import r3m20_short_window
+        class Buffered:
+            def __init__(self, runner): self.runner = runner
+            def step(self, state, time): return self.runner.step(state, time)
+        monkeypatch.setattr(r3m20_short_window, 'ProductionBufferedStep', Buffered)
+        fake_cp = SimpleNamespace(exp=np.exp, fft=np.fft, asnumpy=np.asarray,
+            cuda=SimpleNamespace(get_current_stream=lambda:
+                SimpleNamespace(synchronize=lambda: None)))
+        monkeypatch.setitem(sys.modules, 'cupy', fake_cp)
+        state = np.ones((2,2,2), dtype=np.complex128)
+        runner = SimpleNamespace(k2=np.zeros_like(state), dv=1.,
+            Vmid=lambda _time: np.zeros_like(state),
+            step=lambda value, _time: value.copy())
+        mf = SimpleNamespace(W=np.zeros_like(state))
+        class Counter:
+            count=0
+            def tick(self): self.count += 1
+            def check(self): pass
+        budget = Counter()
+        checks=[]
+        monkeypatch.setattr(event, '_resources', lambda _cp, _budget, _minimum,
+                            upcoming_host_bytes=0: checks.append(upcoming_host_bytes))
+>       endpoints, rows, parity = event._guarded_strang_ladder(
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            runner,mf,state,0.,.1,budget,{'gpu':[],'host':[]})
+E       AttributeError: module 'scripts.r3m25_event_window' has no attribute '_guarded_strang_ladder'
+
+tests/test_r3m25_event_window.py:204: AttributeError
+=========================== short test summary info ============================
+FAILED tests/test_r3m25_event_window.py::test_strang_helper_guards_each_of_six_host_transfers
+1 failed in 0.36s

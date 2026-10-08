@@ -1,0 +1,64 @@
+{
+  "schema": "BASS_NCLOUD_F0_ENVIRONMENT_CONTRACT_V2",
+  "scope": "F0_CACHE_ONLY_M4_ONLY",
+  "decision_date": "2026-09-28",
+  "historical_tp2d_python_minor": "NOT_RECORDED_IN_TP2D_RETURN_ARCHIVE",
+  "historical_numeric_package_lock": {
+    "source_path": "Dropbox:/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/research/foundation_rebuild/requirements-tested.txt",
+    "source_sha256": "555144ce0107590dfce4b77cc7d60b83d84816edcf7abd32e8b3d9cdc08e4467",
+    "packages": {
+      "numpy": "2.3.5",
+      "scipy": "1.17.0",
+      "mpmath": "1.3.0",
+      "pytest": "9.0.2"
+    }
+  },
+  "tp2e_development_validation": {
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "pytest": "9.0.2",
+    "evidence": "BASS_TP2E_RESEARCH_20260928.zip/VALIDATION.json",
+    "limitation": "This is TP2E package validation evidence, not proof that TP2D originally ran under Python 3.13.5."
+  },
+  "f0_admission_policy": {
+    "isolated_venv_creation_authorized": true,
+    "system_python_replacement_authorized": false,
+    "apt_or_system_upgrade_authorized": false,
+    "dependency_fallback_or_latest_upgrade_authorized": false,
+    "exact_top_level_pins_required": true,
+    "python_minor_rule": "Use the already available python3 interpreter. Do not block solely because the historical TP2D Python minor is absent. The environment is admitted only if the exact pinned packages install/import, the unchanged TP2E fresh admission tests pass without failures/errors/skips, and the historical N384 replay gate <=1e-10 passes.",
+    "if_exact_pins_unavailable": "ENVIRONMENT_BLOCKED",
+    "if_tp2e_tests_fail": "NEW_TESTS_FAILED",
+    "if_historical_replay_fails": "EVIDENCE_OR_NUMERICAL_ADMISSION_BLOCKED"
+  },
+  "f0_thread_policy": {
+    "worker_processes": 1,
+    "OMP_NUM_THREADS": 1,
+    "OPENBLAS_NUM_THREADS": 1,
+    "MKL_NUM_THREADS": 1,
+    "NUMEXPR_NUM_THREADS": 1
+  },
+  "new_spatial_operator_evaluations_allowed": 0,
+  "reference_reintegration_allowed": false,
+  "native_engine_required": false,
+  "claim_ceiling": {
+    "capture_execution_allowed": false,
+    "production_admission": "HOLD",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "original_capture_gap_resolved": false,
+    "continuous_global_supremum_bound": false
+  },
+  "f0_workspace_policy": {
+    "preferred_cloud_root": "/data/bass",
+    "explicit_override_env": "BASS_F0_ROOT",
+    "local_fallback_root": "$HOME/.local/state/bass_f0",
+    "minimum_available_bytes": 1073741824,
+    "data_volume_required_for_f0": false,
+    "data_volume_required_for_native_f1_f2_f3": true,
+    "system_mount_mutation_authorized": false,
+    "sudo_for_workspace_authorized": false,
+    "local_fallback_semantics": "Valid only for cache-only F0. Record WORKSPACE_CLASS=LOCAL_HOME_FALLBACK and do not promote the result to cloud-throughput evidence."
+  }
+}

@@ -1,0 +1,40 @@
+name: Foundation R2 validation
+on:
+  pull_request:
+    paths:
+      - 'research/foundation_rebuild/**'
+      - '.github/workflows/foundation-r2.yml'
+permissions:
+  contents: read
+jobs:
+  cpu-validation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout exact public repository commit
+        env:
+          SOURCE_REPO: ${{ github.repository }}
+          EXPECTED_SHA: ${{ github.sha }}
+        run: |
+          git init source
+          cd source
+          git remote add origin "https://github.com/${SOURCE_REPO}.git"
+          git fetch origin '+refs/heads/*:refs/remotes/origin/*'
+          git fetch origin "$EXPECTED_SHA"
+          git checkout --detach "$EXPECTED_SHA"
+      - name: Install isolated CPU test environment
+        run: |
+          python3 -m venv "$RUNNER_TEMP/fnd-venv"
+          "$RUNNER_TEMP/fnd-venv/bin/python" -m pip install -r source/research/foundation_rebuild/requirements-validation.txt
+      - name: Run fixed new and historical tests
+        env:
+          EXPECTED_SHA: ${{ github.sha }}
+        run: |
+          cd source
+          set +e
+          "$RUNNER_TEMP/fnd-venv/bin/python" research/foundation_rebuild/run_validation.py --profile local --expected-commit "$EXPECTED_SHA" --out "$RUNNER_TEMP/fnd-return"
+          code=$?
+          cat "$RUNNER_TEMP/fnd-return/RETURN_REPORT.json"
+          find "$RUNNER_TEMP/fnd-return" -maxdepth 1 -name '*.stdout.txt' -exec sh -c 'echo "===== $1"; cat "$1"' _ {} \;
+          find "$RUNNER_TEMP/fnd-return" -maxdepth 1 -name '*.stderr.txt' -exec sh -c 'echo "===== $1"; cat "$1"' _ {} \;
+          exit "$code"

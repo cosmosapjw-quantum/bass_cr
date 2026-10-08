@@ -1,0 +1,105 @@
+{
+  "base_commit": "381b00e800bf1e7e2a78b5c0e9a56cbed5db56a5",
+  "base_tree": "b0b6401620b0fe89ce07956781b2a34724dd13e4",
+  "cli_help": {
+    "command": "python -m scripts.r3m24_cross_window --help",
+    "exit_code": 0
+  },
+  "compile": {
+    "command": "python -m compileall -q scripts tests",
+    "exit_code": 0
+  },
+  "compressed_logs": {
+    "bytes": 6479,
+    "companion_archive": "BASS_CR_R3M24_REPAIR_AND_TEST_LOGS_20260924.zip",
+    "file": "TEST_LOGS.json.gz",
+    "members": [
+      "CLI_HELP.txt",
+      "FINAL_PATCH_SUITE.txt",
+      "FINAL_TESTS.txt",
+      "GREEN_1.txt",
+      "GREEN_2.txt",
+      "GREEN_3.txt",
+      "GREEN_4.txt",
+      "RED.txt",
+      "RED_ADAPTER.txt",
+      "RED_LIFETIME.txt",
+      "RED_REUSE_KEY.txt",
+      "RED_REVIEW.txt",
+      "RED_RUNTIME.txt"
+    ],
+    "sha256": "5649d27bae621523d0e6ae489c3ff04e347f89b06ad86512a3eafc8a8b4c1511",
+    "storage": "COMPANION_ATTACHMENT_NOT_IN_GIT_TREE"
+  },
+  "environment": {
+    "numpy": "2.3.5",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "pytest": "9.0.2",
+    "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]"
+  },
+  "first_failure_preservation": {
+    "adapter_red": "6 missing-adapter failures; 37 passed",
+    "cleanup_green": "first failure preserved; failed cleanup cannot publish COMPLETED",
+    "initial_red": "35 missing-implementation failures",
+    "isolated_lifetime_red": "subprocess returncode -11",
+    "lifetime_green": "retained views no longer manually unmapped",
+    "logs": "Full raw logs retained in companion attachment; RED_LIFETIME.txt and RED_RUNTIME.txt also committed as plaintext; log hashes in TEST_LOG_INDEX.json.",
+    "review_red": "contract checks missing; cleanup failure path exposed dangling mmap repr segmentation fault"
+  },
+  "full_collision": "NOT_RUN",
+  "historical_365_suite": "NOT_RUN: full base checkout unavailable in this container; git network DNS failed",
+  "independent_review": "NOT_RUN",
+  "owner_review": "OWNER_SELF_REVIEW",
+  "patch_directory_suite": {
+    "command": "python -m pytest -q",
+    "exit_code": 0,
+    "failed": 0,
+    "passed": 57,
+    "scope": "ONLY_NEW_PATCH_TESTS_NOT_ORIGINAL_REPOSITORY_SUITE",
+    "skipped": 0
+  },
+  "production_admission": "HOLD",
+  "production_gpu": "NOT_RUN",
+  "schema": "BASS_CR_R3M24_CORRECTIVE_TEST_RECEIPT_V1",
+  "scope": "ADDITIVE_PATCH_CPU_REGRESSIONS_AND_COMPILE_ONLY",
+  "source_files": {
+    "scripts/r3m24_cross_window.py": {
+      "bytes": 10101,
+      "git_blob_sha1": "0df76fb83d58844977f66ec7b535c81bacfd549a",
+      "sha256": "c0d1403c8a7419cf536b081897423ca434888ea806cbf2e7c43819bb072ad990"
+    },
+    "scripts/r3m24_execution.py": {
+      "bytes": 8795,
+      "git_blob_sha1": "96f99a820776c266660b8dc09ece171251aba374",
+      "sha256": "8d3158603aaa11c97d10c388d3c82bab54651be9146cff5737f002f855c01a2d"
+    },
+    "scripts/r3m24_gpu.py": {
+      "bytes": 13092,
+      "git_blob_sha1": "0c03ace426017d27fe11f7065cbe971ae9ab471f",
+      "sha256": "dc9b8132a4294a5af479ca560da22af45c3007efdbe63d3bdcbcccbd2fff2b96"
+    },
+    "scripts/r3m24_guard.py": {
+      "bytes": 10000,
+      "git_blob_sha1": "0640bfce2ca24303b19cef6c3834dbe49dc69e5e",
+      "sha256": "6ada402d32bfe301387ff0f12875f345dd1d91c6930c82b43ef8381aa6295474"
+    },
+    "scripts/r3m24_metrics.py": {
+      "bytes": 4682,
+      "git_blob_sha1": "f742603a599c3654344ed475b5ad5a5dbdbc89ef",
+      "sha256": "2ac59b4d483f0ebd69ce0d5f043fc323ca2bb42e2260f96acdb3335fba637a89"
+    },
+    "tests/test_r3m24_safe_execution.py": {
+      "bytes": 19709,
+      "git_blob_sha1": "6abdb3a3443bacb7cf33683b0145ab45cfc72c01",
+      "sha256": "e0d397f91a8b77ce5bbf5d3b85f8282907079765f95f3f24a8cedb85c1e6cddd"
+    }
+  },
+  "tests": {
+    "command": "python -m pytest -q tests/test_r3m24_safe_execution.py",
+    "exit_code": 0,
+    "failed": 0,
+    "passed": 57,
+    "skipped": 0
+  },
+  "timestamp_utc": "2026-09-24T00:20:24.790902+00:00"
+}

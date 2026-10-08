@@ -1,0 +1,14 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_______________ test_maxwellian_constant_cross_section_integral ________________
+
+    def test_maxwellian_constant_cross_section_integral():
+        r=maxwellian_core(model(),reduced_mass_kg=2,thermal_sigma_m_s=1,drift_m_s=0)
+>       assert abs(r['K_core_interval_estimate_m3_s'][0]-3*math.sqrt(8/math.pi))<1e-12
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'K_core_interval_estimate_m3_s'
+
+tests/test_continuum.py:16: KeyError
+=========================== short test summary info ============================
+FAILED tests/test_continuum.py::test_maxwellian_constant_cross_section_integral - KeyError: 'K_core_interval_estimate_m3_s'
+1 failed in 0.07s

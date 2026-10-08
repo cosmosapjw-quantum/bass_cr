@@ -1,0 +1,17 @@
+{
+  "provider": "google_drive",
+  "status": "UPLOAD_REJECTED_SIZE_LIMIT",
+  "bytes": 1231876036,
+  "limit_bytes": 536870912,
+  "tool": "google_drive_upload_file",
+  "error": "file too large: 1231876036 bytes exceeds limit 536870912",
+  "repair": "Byte-preserving ordered multipart upload under same logical task; raw reassembly hash required",
+  "second_attempt": {
+    "status": "BLOB_TRANSPORT_TIMEOUT",
+    "chunk_bytes": 471859200,
+    "timeout_ms": 60000,
+    "azure_client_request_id": "534bc782-9e07-4ed3-b64c-113405dc7b13",
+    "remote_reconciliation": "Drive exact filename search returned no objects",
+    "next_action": "One bounded 64MiB-chunk transfer repair; stop on repeat failure, no further shrinking"
+  }
+}

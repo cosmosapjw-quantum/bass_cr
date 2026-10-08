@@ -1,0 +1,20 @@
+**Verdict: the residency repair is scientifically consistent, but a second GPU attempt is not yet operationally admissible under the stated reserve requirements.** One MAJOR and one MINOR finding; no BLOCKER-level scientific defect.
+
+Reviewed the three uncommitted files against exact HEAD `cae7ac7e3011c0e8c1409b1ce8340f1b2ff11e8f`.
+
+- **MAJOR — inherited host-reserve gap.** [r3m25_event_window.py:345](/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m25_event_window.py:345) calls `_strang_ladder`, whose six host transfers lack capacity checks: [r3m23_cross_window.py:167](/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/scripts/r3m23_cross_window.py:167), lines 168, 196 and 210. Each production endpoint is 1,008,000,000 bytes. A CPU-only reproducer completed all 34 matvecs and six transfers after simulated host availability fell below 8 GiB; detection occurred only after returning. This contradicts the pre/post-transfer requirement at [RESEARCH_PLAN.md:45](/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/docs/r3m25/RESEARCH_PLAN.md:45). Guard these transfers and add a targeted CPU regression while preserving frozen numerical kernels and thresholds. **This is not introduced by the residency patch, but it affects the requested next-attempt admission.**
+
+- **MINOR — lifecycle regression coverage is incomplete.** [test_r3m25_event_window.py:153](/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/tests/test_r3m25_event_window.py:153) verifies deletion before 15 allocations and three probe calls. It does not test `_gpu` releasing the probe objects before constructing warmup, reloading the pinned state, or stopping before warmup on probe failure. The saved RED is an absent-helper `AttributeError`; the resulting test meaningfully checks allocation order, but not the complete lifecycle.
+
+The repair itself checks out:
+
+- The original failure was a resource stop after one matvec, with no numerical verdict. Removing `kin`, `mask` and `cap_half` eliminates **2,016,000,000 bytes of array payload**—more than the recorded reserve shortfall. Actual GPU headroom remains unverified.
+- Full-H constructs its independent CAP rate before deletion. Its matvec does not use those deleted arrays or mutate the input. The fresh runner uses the same configuration and pinned state; construction performs no preparation or propagation.
+- Preflight remains before the unchanged 42-step warmup. Strang/parity, calibration, CF4 n4/n8/n16/n32, substep repeat and conditional tightening remain intact.
+- Worst-case work remains **3,879/4,000 matvecs**, including probe and warmup. Both setups share the budget. Cooperative limits remain 7,200 seconds total / 3,600 seconds event; the new launch must retain the external **3,600-second watchdog plus 10-second kill grace**.
+- The original contract SHA and attempt receipts remain intact. Create-only publication and output-directory reservation prevent overwriting them; changed source hashes reject the old contract. No automatic rerun path or second attempt receipt was found.
+
+Independent validation: **11 write-free tests passed**, in-memory compilation and diff checks passed, and tiny-grid CPU checks preserved probe output, input state, CAP and fresh-runner warmup exactly. Saved logs report 12 targeted and 434 full-suite passes; I did not rerun that suite.
+
+After resolving the MAJOR finding, one fresh attempt is scientifically reasonable under a **new committed source, new exact contract/SHA and fresh output directory**, retaining the first failure and its consumed work. GPU success and scientific comparisons remain unverified; production stays HOLD and b-grid NO_GO. One review round completed; no files changed, GPU work, workers or checkpoint downloads.
+

@@ -1,0 +1,83 @@
+{
+  "schema": "BASS_R4S_HPC_RESULT_V1",
+  "status": "IMPLEMENTATION_VERIFIED_TARGET_NCP_SCALING_UNVERIFIED",
+  "baseline_head": "82cac33a2ad1b938db6a89d63a8ac0ac8a2414a1",
+  "unique_new_tests": 19,
+  "skipped": 0,
+  "native_arch_affected_kernel_rechecks": 7,
+  "reference_cpp_sha256": "90913155c0cfa80962d1cb00bb1b7ec0443170917c25913ac5e359979738ab30",
+  "fortran_sha256": "0187e6c0f14060f770c972748ceec1bffe0ea525a0c98e65be86b3266d49405d",
+  "kernel_test_acceptance": "uint64 bitwise equality on declared synthetic fixtures; same per-entry accumulation order",
+  "portable_single_thread_speedup": 3.6745775685755366,
+  "portable_8thread_speedup": 9.240735995178936,
+  "native_arch_single_thread_speedup": 6.847785841605065,
+  "native_arch_8thread_speedup": 15.01000367655725,
+  "mpi_hybrid": {
+    "ranks": 4,
+    "threads_per_rank": 2,
+    "worker_ranks": 3,
+    "tasks": 24,
+    "all_reference_hashes_match": true,
+    "observed_queue_speedup": 6.156185312841116,
+    "binding_verified": false,
+    "scope": "explicit synthetic-only unbound test; total8CPU budget retained"
+  },
+  "local_environment": {
+    "affinity_cpus": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "logical_cpus": 9,
+    "physical_cores": 9,
+    "cpu_quota": 8.0,
+    "usable_cpu_budget": 8,
+    "memory_limit_bytes": 8589934592,
+    "memory_available_bytes": 3220418560,
+    "topology_source": "Linux sysfs; missing topology requires explicit logical CPU mode",
+    "cgroup_source": "current accessible cgroup and parents",
+    "cpu_model": "AMD EPYC 9V74 80-Core Processor"
+  },
+  "performance_scope": "artificial contraction inputs; microbenchmark includes Python wrapper; no NCP64 or full-operator/trajectory extrapolation",
+  "physical_queries": 0,
+  "physical_transport_runs": 0,
+  "synthetic_native_execution": true,
+  "ncp64_scaling_measured": false,
+  "ncp_binding_verified": false,
+  "legacy_executors_modified": false,
+  "science_tolerances_modified": false,
+  "reference_basis_or_selector_changed": false,
+  "independent_review": {
+    "reviewer": "r4s_runtime_survey",
+    "findings": [
+      "complete library keyset enforcement",
+      "OpenMP per-call thread configuration",
+      "actual rank CPU-ID admission"
+    ],
+    "resolution": [
+      "negative manifest test",
+      "thread-instance test",
+      "pre-native rank affinity validation; actual binding blocked by local environment"
+    ]
+  },
+  "failure_classification": {
+    "apt_setuid": "RUNTIME_ENVIRONMENT; replaced with verified scratch-only dependency extraction",
+    "compiler_env_interference": "RUNTIME_ENVIRONMENT; scoped Fortran toolchain variables; rebuild passed",
+    "MPI_cpu_binding": "RUNTIME_ENVIRONMENT; preserved failure; NCP binding still UNVERIFIED; explicit synthetic-only unbound integration passed"
+  },
+  "claim_ceilings": {
+    "capture": false,
+    "production": "HOLD",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "original_capture_gap_resolved": false,
+    "continuous_global_supremum_bound": false,
+    "continuous_trajectory_error_bound": false
+  }
+}

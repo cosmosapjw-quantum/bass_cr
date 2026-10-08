@@ -1,0 +1,99 @@
+test_actual_nonroot_with_root_limit_files_absent_is_observable (test_resource_reader.ResourceReaderTests.test_actual_nonroot_with_root_limit_files_absent_is_observable) ... FAIL
+test_alternate_mountpoint (test_resource_reader.ResourceReaderTests.test_alternate_mountpoint) ... ERROR
+test_ambiguous_and_hybrid_mounts_rejected (test_resource_reader.ResourceReaderTests.test_ambiguous_and_hybrid_mounts_rejected) ... ok
+test_escaped_mountpoint (test_resource_reader.ResourceReaderTests.test_escaped_mountpoint) ... ERROR
+test_finite_parent_fully_used_has_no_available_memory (test_resource_reader.ResourceReaderTests.test_finite_parent_fully_used_has_no_available_memory) ... ERROR
+test_host_available_and_affinity_remain_upper_limits (test_resource_reader.ResourceReaderTests.test_host_available_and_affinity_remain_upper_limits) ... ERROR
+test_kernel_thread_identity_is_required_for_root_visibility (test_resource_reader.ResourceReaderTests.test_kernel_thread_identity_is_required_for_root_visibility) ... ok
+test_malformed_cpu_and_memory_values_rejected (test_resource_reader.ResourceReaderTests.test_malformed_cpu_and_memory_values_rejected) ... ok
+test_missing_controllers_and_partial_global_root_rejected (test_resource_reader.ResourceReaderTests.test_missing_controllers_and_partial_global_root_rejected) ... ok
+test_missing_current_is_rejected_even_with_explicit_max (test_resource_reader.ResourceReaderTests.test_missing_current_is_rejected_even_with_explicit_max) ... ok
+test_missing_parent_limit_is_not_skipped (test_resource_reader.ResourceReaderTests.test_missing_parent_limit_is_not_skipped) ... ok
+test_namespace_hidden_ancestors_are_not_admitted (test_resource_reader.ResourceReaderTests.test_namespace_hidden_ancestors_are_not_admitted) ... ok
+test_namespace_relative_membership_does_not_guess_hidden_root (test_resource_reader.ResourceReaderTests.test_namespace_relative_membership_does_not_guess_hidden_root) ... ok
+test_parent_quota_and_paired_parent_usage_restrict_leaf (test_resource_reader.ResourceReaderTests.test_parent_quota_and_paired_parent_usage_restrict_leaf) ... ERROR
+test_path_traversal_or_malformed_membership_rejected (test_resource_reader.ResourceReaderTests.test_path_traversal_or_malformed_membership_rejected) ... ok
+test_pid_namespace_visibility_insufficient_is_rejected (test_resource_reader.ResourceReaderTests.test_pid_namespace_visibility_insufficient_is_rejected) ... ok
+test_proven_global_root_has_documented_root_exemption (test_resource_reader.ResourceReaderTests.test_proven_global_root_has_documented_root_exemption) ... ERROR
+test_truncated_mount_root_is_rejected (test_resource_reader.ResourceReaderTests.test_truncated_mount_root_is_rejected) ... ok
+test_unreadable_limit_is_not_unlimited (test_resource_reader.ResourceReaderTests.test_unreadable_limit_is_not_unlimited) ... ok
+test_v1_hybrid_and_duplicate_memberships_rejected (test_resource_reader.ResourceReaderTests.test_v1_hybrid_and_duplicate_memberships_rejected) ... ok
+
+======================================================================
+ERROR: test_alternate_mountpoint (test_resource_reader.ResourceReaderTests.test_alternate_mountpoint)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/bass_cr_intake/r4am_20261003/repository/research/convergence_20261003/r4ah_env_port_v1/tests/test_resource_reader.py", line 80, in test_alternate_mountpoint
+    result = reader.evaluate_snapshot(s)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/bass_cr_intake/r4am_20261003/repository/research/convergence_20261003/r4ah_env_port_v1/runtime/r4ag/source/resource_reader.py", line 14, in evaluate_snapshot
+    raise ResourceError('cgroup-v2 resource reader required; no guessed quotas')
+resource_reader.ResourceError: cgroup-v2 resource reader required; no guessed quotas
+
+======================================================================
+ERROR: test_escaped_mountpoint (test_resource_reader.ResourceReaderTests.test_escaped_mountpoint)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/bass_cr_intake/r4am_20261003/repository/research/convergence_20261003/r4ah_env_port_v1/tests/test_resource_reader.py", line 86, in test_escaped_mountpoint
+    self.assertEqual(reader.evaluate_snapshot(s)['resource_hierarchy']['leaf'], '/accounting space/user/jobs')
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/bass_cr_intake/r4am_20261003/repository/research/convergence_20261003/r4ah_env_port_v1/runtime/r4ag/source/resource_reader.py", line 14, in evaluate_snapshot
+    raise ResourceError('cgroup-v2 resource reader required; no guessed quotas')
+resource_reader.ResourceError: cgroup-v2 resource reader required; no guessed quotas
+
+======================================================================
+ERROR: test_finite_parent_fully_used_has_no_available_memory (test_resource_reader.ResourceReaderTests.test_finite_parent_fully_used_has_no_available_memory)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/bass_cr_intake/r4am_20261003/repository/research/convergence_20261003/r4ah_env_port_v1/tests/test_resource_reader.py", line 98, in test_finite_parent_fully_used_has_no_available_memory
+    self.assertEqual(reader.evaluate_snapshot(s)['memory_available'], 0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/bass_cr_intake/r4am_20261003/repository/research/convergence_20261003/r4ah_env_port_v1/runtime/r4ag/source/resource_reader.py", line 14, in evaluate_snapshot
+    raise ResourceError('cgroup-v2 resource reader required; no guessed quotas')
+resource_reader.ResourceError: cgroup-v2 resource reader required; no guessed quotas
+
+======================================================================
+ERROR: test_host_available_and_affinity_remain_upper_limits (test_resource_reader.ResourceReaderTests.test_host_available_and_affinity_remain_upper_limits)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/bass_cr_intake/r4am_20261003/repository/research/convergence_20261003/r4ah_env_port_v1/tests/test_resource_reader.py", line 74, in test_host_available_and_affinity_remain_upper_limits
+    result = reader.evaluate_snapshot(s)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/bass_cr_intake/r4am_20261003/repository/research/convergence_20261003/r4ah_env_port_v1/runtime/r4ag/source/resource_reader.py", line 14, in evaluate_snapshot
+    raise ResourceError('cgroup-v2 resource reader required; no guessed quotas')
+resource_reader.ResourceError: cgroup-v2 resource reader required; no guessed quotas
+
+======================================================================
+ERROR: test_parent_quota_and_paired_parent_usage_restrict_leaf (test_resource_reader.ResourceReaderTests.test_parent_quota_and_paired_parent_usage_restrict_leaf)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/bass_cr_intake/r4am_20261003/repository/research/convergence_20261003/r4ah_env_port_v1/tests/test_resource_reader.py", line 63, in test_parent_quota_and_paired_parent_usage_restrict_leaf
+    result = reader.evaluate_snapshot(s)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/bass_cr_intake/r4am_20261003/repository/research/convergence_20261003/r4ah_env_port_v1/runtime/r4ag/source/resource_reader.py", line 14, in evaluate_snapshot
+    raise ResourceError('cgroup-v2 resource reader required; no guessed quotas')
+resource_reader.ResourceError: cgroup-v2 resource reader required; no guessed quotas
+
+======================================================================
+ERROR: test_proven_global_root_has_documented_root_exemption (test_resource_reader.ResourceReaderTests.test_proven_global_root_has_documented_root_exemption)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/bass_cr_intake/r4am_20261003/repository/research/convergence_20261003/r4ah_env_port_v1/tests/test_resource_reader.py", line 90, in test_proven_global_root_has_documented_root_exemption
+    result = reader.evaluate_snapshot(s)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/bass_cr_intake/r4am_20261003/repository/research/convergence_20261003/r4ah_env_port_v1/runtime/r4ag/source/resource_reader.py", line 14, in evaluate_snapshot
+    raise ResourceError('cgroup-v2 resource reader required; no guessed quotas')
+resource_reader.ResourceError: cgroup-v2 resource reader required; no guessed quotas
+
+======================================================================
+FAIL: test_actual_nonroot_with_root_limit_files_absent_is_observable (test_resource_reader.ResourceReaderTests.test_actual_nonroot_with_root_limit_files_absent_is_observable)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/bass_cr_intake/r4am_20261003/repository/research/convergence_20261003/r4ah_env_port_v1/tests/test_resource_reader.py", line 51, in test_actual_nonroot_with_root_limit_files_absent_is_observable
+    self.assertIsInstance(value, dict, 'valid non-root v2 hierarchy was rejected')
+AssertionError: 'cgroup-v2 resource reader required; no guessed quotas' is not an instance of <class 'dict'> : valid non-root v2 hierarchy was rejected
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.015s
+
+FAILED (failures=1, errors=6)

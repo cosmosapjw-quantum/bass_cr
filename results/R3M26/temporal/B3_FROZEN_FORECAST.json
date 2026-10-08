@@ -1,0 +1,161 @@
+{
+  "B3_execution_status": "NOT_RUN",
+  "certified_error_bound": null,
+  "forecast_generated_before_B3": true,
+  "instrumentation_sha256": "8be5b9d0638759bbb3ff8cb10709f9d6831ce1455b4e9e03a3a3ed373a25e48a",
+  "payload": {
+    "B3": {
+      "actual_dt": 0.00624946176119497,
+      "config": {
+        "absorber_power": 0.125,
+        "absorber_reference_dt": 0.05,
+        "absorber_width": 4.0,
+        "b": 2.0,
+        "backend": "cupy",
+        "capture_plane": 30.0,
+        "checkpoint_stride": 100,
+        "dt": 0.00625,
+        "energy_keV_per_u": 100.0,
+        "grid": {
+          "dx": 0.2,
+          "xlim": [
+            -30,
+            40
+          ],
+          "ylim": [
+            -30,
+            30
+          ],
+          "zlim": [
+            -30,
+            90
+          ]
+        },
+        "imag_dt": 0.00625,
+        "imag_steps": 4800,
+        "initial_state": "imag_time",
+        "project_nmax": 3,
+        "projection_slab_x": 2,
+        "z_start": -30.0,
+        "z_stop": 60.0
+      },
+      "nstep": 7172,
+      "preparation_contract": {
+        "B2_receipt_relabel_or_reuse_allowed": false,
+        "expected_array_digest": "79a6f07a458e2483f18e01d26c6c9ef380146ebd24844656700dcc0410875826",
+        "expected_initial_file_sha256": "ed2ff41eb7517f245d5d5a2df4ce699b607f101406c1a588d3fd4a9b522f5daa",
+        "fresh_full_B3_config_receipt_required": true,
+        "helper": "scripts/r3m13_initial_state_pair.py",
+        "prepared_receipt_must_differ_from": "a238656dc9091b9a1a2ba935408549f09c2f55e3cb59497e01c2d927a69cf0dd"
+      },
+      "requested_dt": 0.00625
+    },
+    "base_commit": "90d6cbad25e4bc49e9563f8721fdc408761b31c7",
+    "baseline_provenance": {
+      "B0_result": [
+        "results/R3M15/B/collision/result.json",
+        "23da11c5b877d133db1ddaaeff4b52081c22f930e752aec608e13966d454a1d7"
+      ],
+      "B1_result": [
+        "results/R3M16/collisions/B1_result.json",
+        "ae4f70261f866a601a51a80c5d00a1fde1394644c3808558e91519bbf124f11f"
+      ],
+      "B2_result": [
+        "results/R3M20_N1/intake/collision/result.json",
+        "f73ebb98708aabe48a77466bca8d0c108d0983d83cb8516db76bbac6c9993edc"
+      ],
+      "B2_witness": [
+        "results/R3M20_N1/intake/collision/r3m14_initial_binding.json",
+        "4d61a07dac58a49da82580a31df22e718bbbb0a6236c82a9a0e9d923bbc737b0"
+      ],
+      "R18_summary": [
+        "results/R3M18/B_TEMPORAL_ANALYSIS.json",
+        "630a74fb5089e363e3134fce23ffb4086f1bc0c153cc1e7e3e683c5738faea61"
+      ]
+    },
+    "criterion": {
+      "D_hold": "max(abs(B3-frozen_forecast)) over three preregistered forecasts",
+      "E_model": "max(abs(P_infinity_model-B3)) over four registered models",
+      "LOO": "all four even-degree-two residuals diagnostic only",
+      "U_t": "2*max(E_model,D_hold)",
+      "factor": 2.0,
+      "fine_increment_rule": "same sign and strict contraction on B1/B2/B3 only",
+      "interpretation": "PROSPECTIVE_ENGINEERING_EMPIRICAL_ESTIMATE_NOT_CERTIFIED_BOUND",
+      "p_range": "1.5..2.5 diagnostic only",
+      "relative_target": 0.001
+    },
+    "forecasts": {
+      "P1": {
+        "even_dt2_dt4_old_triplet": 0.006088483581395873,
+        "leading_p2_B1_B2": 0.006089481091543652,
+        "single_power_old_triplet": 0.006087425905056484
+      },
+      "P2": {
+        "even_dt2_dt4_old_triplet": 0.007585789738104656,
+        "leading_p2_B1_B2": 0.007586849802025597,
+        "single_power_old_triplet": 0.007584574562317878
+      },
+      "P3": {
+        "even_dt2_dt4_old_triplet": 0.008088288894064292,
+        "leading_p2_B1_B2": 0.008089375422685228,
+        "single_power_old_triplet": 0.008087011530294713
+      }
+    },
+    "initial_array_digest": "79a6f07a458e2483f18e01d26c6c9ef380146ebd24844656700dcc0410875826",
+    "initial_metadata": {
+      "energy_Eh": -0.4914915230191285,
+      "energy_error_from_infinite_mass_1s_Eh": 0.008508476980871482,
+      "imag_dt": 0.00625,
+      "mode": "imag_time",
+      "residual_semantics": "DISCRETE_TARGET_HAMILTONIAN_RESIDUAL_NOT_CONTINUUM_ERROR_BOUND",
+      "stationary_residual_Eh": 0.003195199693883384,
+      "steps": 4800
+    },
+    "initial_state_file_sha256": "ed2ff41eb7517f245d5d5a2df4ce699b607f101406c1a588d3fd4a9b522f5daa",
+    "numerical_source_digest": "581ff84930bb862efafdfec5d39d5b25aebf9297ce7ce45f833a5abe125b2a5b",
+    "rows": {
+      "B0": {
+        "P1": 0.0059368765332443235,
+        "P2": 0.007416156280617876,
+        "P3": 0.007911255992446844,
+        "actual_dt": 0.04996782580968821,
+        "initial_residual_Eh": 0.003195199693883384,
+        "norm": 0.9719538007036279,
+        "nstep": 897,
+        "requested_dt": 0.05,
+        "result_sha256": "23da11c5b877d133db1ddaaeff4b52081c22f930e752aec608e13966d454a1d7"
+      },
+      "B1": {
+        "P1": 0.006068282194867191,
+        "P2": 0.007562290857479282,
+        "P3": 0.008063449050040342,
+        "actual_dt": 0.02499784704477988,
+        "initial_residual_Eh": 0.003195199693883384,
+        "norm": 0.9787299101287787,
+        "nstep": 1793,
+        "requested_dt": 0.025,
+        "result_sha256": "ae4f70261f866a601a51a80c5d00a1fde1394644c3808558e91519bbf124f11f"
+      },
+      "B2": {
+        "P1": 0.00608524131220836,
+        "P2": 0.007581938013116333,
+        "P3": 0.008084190148156251,
+        "actual_dt": 0.01249892352238994,
+        "initial_residual_Eh": 0.003195199693883384,
+        "norm": 0.9786935443969073,
+        "nstep": 3586,
+        "requested_dt": 0.0125,
+        "result_sha256": "f73ebb98708aabe48a77466bca8d0c108d0983d83cb8516db76bbac6c9993edc"
+      }
+    },
+    "schema": "BASS_CR_R3M26_FROZEN_FORECAST_PAYLOAD_V1"
+  },
+  "payload_sha256": "be693bbae3a90420b25f441431ee0f63b2dd8131fd1c2017c81c847e83a4c64e",
+  "production_admitted": false,
+  "runtime": {
+    "GPU_executed": false,
+    "numpy": "2.3.5",
+    "python": "3.12.14"
+  },
+  "schema": "BASS_CR_R3M26_FORECAST_V1"
+}

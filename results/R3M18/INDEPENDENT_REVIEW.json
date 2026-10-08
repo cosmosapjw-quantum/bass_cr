@@ -1,0 +1,30 @@
+{
+  "schema": "BASS_CR_R3M18_INDEPENDENT_DIFF_REVIEW_V1",
+  "base": "07a2ba92d3622831a959a57c7ff142fd1977908a",
+  "review_scope": [
+    "scripts/r3m18_b2_execute.py",
+    "tests/test_r3m18_b2_execute.py",
+    "docs/r3m18",
+    "results/R3M18",
+    "docs/roadmap"
+  ],
+  "review_rounds": 1,
+  "findings": [
+    {
+      "severity": "MAJOR",
+      "location": "scripts/r3m18_b2_execute.py existing-generation resume branch",
+      "impact": "A later resume could have skipped an existing generation after checking only manifest done, without recomputing state/seal/witness inventory.",
+      "disposition": "FIXED_IN_ONE_REPAIR_CLOSEOUT",
+      "repair": "validate_generation now calls the frozen R3M17 guard over all bytes and compares the complete inventory with the published manifest before skipping.",
+      "validation": "4 targeted tests, 29 actual generation revalidations, and 250-test integrated regression PASS"
+    }
+  ],
+  "remaining_blockers_in_frozen_scope": [],
+  "residual_scientific_risks": [
+    "Three-point conditional Richardson estimates do not independently validate their remainder model.",
+    "A2 is absent, so the dt=.0125 spatial gap is not measured.",
+    "Boundary/CAP and all-bound budgets remain open."
+  ],
+  "review_decision": "PROMOTE_REPOSITORY_EVIDENCE_WITH_SCIENTIFIC_HOLD",
+  "production_scientific_admission": "HOLD"
+}

@@ -1,0 +1,102 @@
+{
+  "schema": "BASS_NCLOUD_F1_IMPLEMENTATION_AUDIT_V1",
+  "audited_at": "2026-09-28",
+  "status": "PASS_FOR_BOUNDED_EXECUTION_AUTHORIZATION",
+  "implementation_commit": "8236887dd8869de57522d5c87a48972f287969fe",
+  "implementation_tree": "d114060c6dc6bdc1aa10fc6d9ffe9de19da99fae",
+  "parent_commit": "c1f527222d0d204e8db68909ab4ec19e7336a8a4",
+  "commit_message": "feat(f1): implement gated native engine admission",
+  "scope_audit": {
+    "ahead_by": 1,
+    "behind_by": 0,
+    "existing_scientific_source_modified": 0,
+    "changes_limited_to": "research/foundation_rebuild/ncloud_f1_engine_admission_20260928/",
+    "source_manifest_entries": 21,
+    "source_manifest_blob_size_matches": 21,
+    "source_manifest_mismatches": 0
+  },
+  "test_evidence": {
+    "focused_tests": {
+      "tests": 48,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "receipt": "runtime/receipts/GREEN_FOCUSED.txt"
+    },
+    "py_compile_files": 8,
+    "py_compile_reported_pass": true,
+    "cli_help_pass": true,
+    "cli_help_receipt": "runtime/receipts/CLI_HELP.txt",
+    "red_receipts_present": [
+      "RED_INITIAL.txt",
+      "RED_BUILD_BUDGET.txt",
+      "RED_FULL_LADDER.txt",
+      "RED_ORCHESTRATION.txt",
+      "RED_RUNNER.txt",
+      "RED_BEHAVIOR.txt"
+    ]
+  },
+  "code_audit": {
+    "archive_evidence": {
+      "archive_sha_size_gate": true,
+      "duplicate_and_path_traversal_rejected": true,
+      "zip_crc_and_manifest_verified": true,
+      "basis_loaded_allow_pickle_false": true,
+      "representative_query_json_npz_hash_pins": true,
+      "fuzzy_or_nearby_time_fallback": false
+    },
+    "engine_build": {
+      "frozen_required_flags": true,
+      "forbidden_native_fastmath_lto_flags": true,
+      "source_sha_gate": true,
+      "separate_engine_identity": true,
+      "historical_build_overwrite": false,
+      "library_sha_may_differ_from_historical": true
+    },
+    "admission": {
+      "exact_selected_resolution_match": true,
+      "historical_attempt_raw_arrays_compared": true,
+      "selected_full_SHD_compared": true,
+      "allclose_rtol": 1e-11,
+      "allclose_atol": 1e-12,
+      "full_frozen_ladder_screened": true,
+      "metric_sentinels_z_a0": [
+        -12,
+        -6,
+        0,
+        6,
+        12
+      ],
+      "metric_derivative_gate": 0.000001
+    },
+    "authorization_firewall": {
+      "external_authorization_required": true,
+      "exact_implementation_commit_tree_required": true,
+      "native_permission_true_required": true,
+      "positive_wall_budget_required": true,
+      "cost_or_prepaid_host_gate_required": true,
+      "native_build_before_authorization": false
+    }
+  },
+  "nonblocking_notes": [
+    "The successful path writes RETURN_REPORT in finally before returning, but does not emit the trailing 'stopped' progress event because the return occurs inside the try block. This does not alter scientific admission or RETURN_REPORT creation.",
+    "The runner is intentionally serial for F1 admission; performance scaling is deferred to F2.",
+    "F1 execution may overshoot the in-process wall check by at most an in-flight native evaluation because budget checks occur between evaluation calls."
+  ],
+  "f0_dependency": {
+    "durable_status": "F0_DURABLE_CLOSED",
+    "scientific_status": "TP2E_CACHE_ONLY_M4_COMPARISON_PASS",
+    "historical_tp2d_status": "TEMPORAL_REFINEMENT_UNRESOLVED"
+  },
+  "scientific_execution_performed": false,
+  "f1_engine_admission_pass_claimed": false,
+  "next_gate": "EXPLICIT_RUN_AUTHORIZATION_WITH_WALL_AND_COST_OR_PREPAID_HOST_APPROVAL",
+  "claim_ceiling": {
+    "capture_execution_allowed": false,
+    "production_admission": "HOLD",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "original_capture_gap_resolved": false,
+    "continuous_global_supremum_bound": false
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "schema": "BASS_FND_TEST_ONLY_RETURN_V1",
+  "profile": "local",
+  "output": "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/runs/fnd_validation/20260925T093827Z_ee8379e7",
+  "steps": [
+    {
+      "step": "foundation_tests",
+      "argv": [
+        "/usr/bin/python3",
+        "-m",
+        "pytest",
+        "-q",
+        "-ra",
+        "tests",
+        "--junitxml=/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/runs/fnd_validation/20260925T093827Z_ee8379e7/foundation.xml"
+      ],
+      "cwd": "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/research/foundation_rebuild",
+      "returncode": 0,
+      "status": "PASSED",
+      "seconds": 3.1191675230002147,
+      "counts": {
+        "tests": 84,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "step": "operator_cases",
+      "argv": [
+        "/usr/bin/python3",
+        "-m",
+        "bass_foundations.validation_cases",
+        "--out",
+        "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/runs/fnd_validation/20260925T093827Z_ee8379e7/operator_cases"
+      ],
+      "cwd": "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/research/foundation_rebuild",
+      "returncode": 0,
+      "status": "PASSED",
+      "seconds": 1.6165924730012193
+    },
+    {
+      "step": "legacy_tests",
+      "argv": [
+        "/usr/bin/python3",
+        "-m",
+        "pytest",
+        "-q",
+        "-ra",
+        "tests",
+        "--junitxml=/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/runs/fnd_validation/20260925T093827Z_ee8379e7/legacy.xml"
+      ],
+      "cwd": "/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1",
+      "returncode": 0,
+      "status": "PASSED",
+      "seconds": 49.24880930099971,
+      "counts": {
+        "tests": 495,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 3
+      }
+    }
+  ],
+  "production_admission": "HOLD",
+  "all_bound": "OPEN",
+  "b_grid": "NO_GO",
+  "capture_gap_resolved": false,
+  "code_changes_by_runner": false,
+  "collision_runs": 0,
+  "gpu_required_for_new_package": false,
+  "legacy_full_suite": "PASSED",
+  "scope": "LOCAL_REPRODUCTION_OF_FIXED_TEST_CONTRACT_NOT_PRODUCTION_ADMISSION",
+  "source_files_verified": 14,
+  "commit": "09a3306bc3eef36bc7c82b2580a2f8603a550ed7",
+  "legacy_source_digest": "581ff84930bb862efafdfec5d39d5b25aebf9297ce7ce45f833a5abe125b2a5b",
+  "git_status_before": "?? .codex/\n?? AGENTS.md\n?? BASS_CR_FOUNDATION_REBUILD_CP3_20260924.zip\n?? BASS_CR_R3M11_REPO_REPAIR_AND_HANDOFF_20260921_v1.zip\n?? LOCAL_CODEX_HANDOFF_KO.md\n?? docs/READBACK_POLICY.md\n?? docs/audit/\n?? mlruns/\n?? results/R3M28/INDEPENDENT_REVIEW.stderr\n?? results/R3M28/INDEPENDENT_REVIEW.stdout\n?? results/R3M29/INDEPENDENT_REVIEW.stderr\n?? results/R3M29/INDEPENDENT_REVIEW.stdout\n?? scripts/r3m30_audit_inventory.py\n",
+  "environment": {
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "executable": "/usr/bin/python3",
+    "platform": "Linux-7.0.0-34-generic-x86_64-with-glibc2.39",
+    "packages": {
+      "numpy": "2.4.2",
+      "scipy": "1.17.0",
+      "mpmath": "1.3.0",
+      "pytest": "9.1.1"
+    }
+  }
+}

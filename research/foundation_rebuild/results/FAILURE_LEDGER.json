@@ -1,0 +1,40 @@
+[
+  {
+    "id": "CP1-RADIAL-01",
+    "classification": "FINITE_DOMAIN_APPROXIMATION_IN_TEST",
+    "first_log": "results/CP1_TEST_GREEN_ATTEMPT1.txt",
+    "retained": true,
+    "change": "R=64 to128 for infinite-domain n<=5 test; unchanged kernel and error threshold; R64 negative control added"
+  },
+  {
+    "id": "CP1-ARPACK-01",
+    "classification": "RUNTIME_TIME_LIMIT",
+    "limit_seconds": 45,
+    "completed_output": "ATOM_N64_PHASE0.json",
+    "incomplete_output": "ATOM_N80_PHASE0.stdout",
+    "scientific_result": "NOT_AVAILABLE"
+  },
+  {
+    "id": "CP1-ARPACK-02",
+    "classification": "RUNTIME_TIME_LIMIT",
+    "limit_seconds": 90,
+    "incomplete_output": "ATOM_N80_PHASE0_ATTEMPT2.stdout",
+    "scientific_result": "NOT_AVAILABLE",
+    "resolution": "same H new preconditioned solver; no claimed endpoint parity of incomplete runs"
+  },
+  {
+    "id": "VIS-01",
+    "classification": "RUNTIME_FILESYSTEM_PERMISSION",
+    "tool": "python_user_visible",
+    "operation": "create figures directory",
+    "result": "PermissionError before creating figures",
+    "repair": "container created dedicated writable figures directory; scientific code/data unchanged"
+  },
+  {
+    "id": "CLI-01",
+    "classification": "IMPLEMENTATION_OUTPUT_DIRECTORY_CREATION",
+    "first_failure": "results/CP3_CLI_RED.txt",
+    "fix": "create out.parent before durable partial-row writes",
+    "scientific_values_changed": false
+  }
+]

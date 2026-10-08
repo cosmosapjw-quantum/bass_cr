@@ -1,0 +1,40 @@
+{
+  "schema": "verification.v1",
+  "date_utc": "2026-10-04T09:11:23.798507+00:00",
+  "scope": "portable CR stoichiometry/normalization/off-dispatch only",
+  "red": {
+    "observed": "ModuleNotFoundError: cr_contract",
+    "exit_code": 1
+  },
+  "green": {
+    "command": "PYTHONPATH=\"$CR_PACKET/reference\" python -m unittest discover -s \"$CR_PACKET/tests\" -v",
+    "exit_code": 0,
+    "tests": 10,
+    "stdout": "TEST_STDOUT.txt",
+    "stderr": "TEST_STDERR.txt",
+    "python": "3.12.14"
+  },
+  "files": [
+    {
+      "path": "reference/cr_contract.py",
+      "sha256": "cfce35a89abfc4120941845121a5ebd6f500a81cd36d95edeb2966729601f84f"
+    },
+    {
+      "path": "tests/test_cr_contract.py",
+      "sha256": "f3f5875d98adada7fa1e60873201b9b1bd0acf0e711f0ec4c55aa4f1dd703178"
+    }
+  ],
+  "derived_assertions": [
+    "integer nuclei/charge conservation",
+    "CX total HI/HII/free electrons zero",
+    "target ionization and fast stripping +1 electron",
+    "NR lab-to-COM factor",
+    "density measure quadrature and CR-off exact-zero"
+  ],
+  "source_reported_legacy_tests_rerun": false,
+  "scientific_native_calls": 0,
+  "atomic_integrations": 0,
+  "external_data_adoptions": 0,
+  "cosmological_histories": 0,
+  "consumer_implementation_verified": false
+}

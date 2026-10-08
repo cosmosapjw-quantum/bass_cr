@@ -1,0 +1,186 @@
+{
+  "schema": "BASS_CR_G03_MINIMUM_STATIC_DISCRIMINATOR_V1",
+  "status": "SPECIFIED_NOT_AUTHORIZED_EXECUTOR_BINDING_REQUIRED",
+  "scientific_question": "Does the outer |z|20,24,32 near-R^-2 class predict an independent signed pair at48, and is the |z|16 correction preasymptotic?",
+  "research_source_commit": "432010f2afd5305ca63933056f50584c01e4e524",
+  "new_execution_commit": null,
+  "execution_commit_rule": "Bind final delivered new executor commit/tree/source hash before a fresh run; old fixed-eight-query executor rejects this plan.",
+  "finished_offline_analyzer": "asymptotic_models.py",
+  "returned_pair_analysis_command": "python asymptotic_models.py --return-json externally_verified_signed48.json --output G03_RETURN_ANALYSIS.json",
+  "native_executor_remaining_delta": "New context/plan digest, exact-two-query admission, maximum22 budget, fresh authorization digest, unchanged native operator worker; do not edit historical hardcoded eight-query evidence.",
+  "runtime_inputs": {
+    "BASIS.json": {
+      "bytes": 1308,
+      "sha256": "3cf2359dd9802e84f9ec4dc45f3585e0aa9712de38a3fb0a077300d257150131"
+    },
+    "BASIS.npz": {
+      "bytes": 8250,
+      "sha256": "889001a751cd3cae93ad217336587f5fc58db11c0a496843ecc7e7bbd93f83ec"
+    },
+    "SCIENCE_CONTEXT.json": {
+      "bytes": 4706,
+      "sha256": "cf484b252092d642c8c8487a8bf70deb61e7b0b9f2bc2f522a3325a146e7f746"
+    }
+  },
+  "native_pins": {
+    "source_sha256": "90913155c0cfa80962d1cb00bb1b7ec0443170917c25913ac5e359979738ab30",
+    "library_sha256": "966146f0ca713251f8b73999b4d89595cf1820a8c2d36f5c6290387b70c68035",
+    "build_receipt_sha256": "180a74d3acf2588d3b8c7944effe4709a4fd4f6241cb4df736cd8f0c94430af1"
+  },
+  "basis_identity": "f23267b7214a5e3918866dcece5cb61c79a891578f4dda69dee5a762eb02983a",
+  "physics": {
+    "energy_keV_per_u": 100.0,
+    "b_a0": 2.0,
+    "velocity_au": 2.00798106651023,
+    "basis": "B0",
+    "channels": 18,
+    "selected_indices": [
+      9,
+      10,
+      12,
+      13,
+      14
+    ]
+  },
+  "queries": [
+    {
+      "z_a0": -48.0,
+      "R_a0": 48.041648597857254,
+      "time_au": -23.90460786735484,
+      "time_hex": "-0x1.7e7946195fe4cp+4",
+      "predictions": {
+        "M1": 0.00019237874528528346,
+        "M2": 0.00017551056400840498,
+        "M3": 0.00017860033716807585,
+        "M4": 0.00020051542360492218
+      }
+    },
+    {
+      "z_a0": 48.0,
+      "R_a0": 48.041648597857254,
+      "time_au": 23.90460786735484,
+      "time_hex": "0x1.7e7946195fe4cp+4",
+      "predictions": {
+        "M1": 0.0001923787452852833,
+        "M2": 0.00017551056400847814,
+        "M3": 0.0001786003371680756,
+        "M4": 0.00020051542360492223
+      }
+    }
+  ],
+  "number_of_qualified_queries": 2,
+  "same_center_order": 20,
+  "qualification_ladder": [
+    {
+      "order": 32,
+      "subdivisions": 1
+    },
+    {
+      "order": 40,
+      "subdivisions": 1
+    },
+    {
+      "order": 48,
+      "subdivisions": 1
+    },
+    {
+      "order": 56,
+      "subdivisions": 1
+    },
+    {
+      "order": 64,
+      "subdivisions": 1
+    },
+    {
+      "order": 48,
+      "subdivisions": 2
+    },
+    {
+      "order": 56,
+      "subdivisions": 2
+    },
+    {
+      "order": 64,
+      "subdivisions": 2
+    },
+    {
+      "order": 48,
+      "subdivisions": 4
+    },
+    {
+      "order": 56,
+      "subdivisions": 4
+    },
+    {
+      "order": 64,
+      "subdivisions": 4
+    }
+  ],
+  "active_screens": {
+    "raw_cross_relative_max": 1e-09,
+    "operator_hermiticity_relative_max": 1e-11,
+    "metric_min_ratio": 1e-08
+  },
+  "resources": {
+    "maximum_raw_operator_evaluations": 22,
+    "maximum_attempts_per_query": 11,
+    "maximum_workers": 2,
+    "threads_per_worker": 1,
+    "maximum_total_wall_seconds": 900,
+    "proposed_worker_memory_bytes": 4294967296,
+    "allocation_requires_fresh_resource_binding": true
+  },
+  "information_value": {
+    "all_four_radius_model_prediction_relative_range_at48": 0.1348046872674435,
+    "reason": "One signed pair beyond32 tests outward continuation, sign parity and current13.48percent spread without jumping past the64-radius or128-disjoint-support regimes. 40 only8.23percent;48 uses1.5times outerz; larger jumps risk regime mixing.",
+    "limitation": "Single pair cannot uniquely distinguish all nested models, since outer-three fits largely coincide. Do not claim optimality without cost data."
+  },
+  "predeclared_analysis": {
+    "primary_fit_region": "|z|>=20 for outer hypothesis; retain all-four fits as sensitivity check, never delete16",
+    "primary_holdout": "±48 are holdout until predictions scored",
+    "score": "abs(observed-predicted)/observed for each sign; report every M1-M4 residual",
+    "empirical_screen": "residual <= max(0.02,10*observed adjacent-level relative rho discrepancy). This is a diagnostic, not a confidence interval or certified error bound.",
+    "exponent_stability_screen": "report p from20..32 and20..48; empirical class near2 requires abs(p-2)<=0.05 and abs(delta_p)<=0.05; no p confidence interval from deterministic four radii",
+    "symmetry": "score negative and positive independently; neither may be reused from the other",
+    "followup_decision": "If near-R^-2 class predicts48 within empirical screen, freeze refit and propose off-grid±44 as new holdout; if all models miss or exponent unstable, diagnose matrices/qualification first and only then propose±64 as different-regime discriminator.",
+    "budget_separation": "No automatic second pair. Every followup requires separately fixed predictions, source, ceiling and new authorization.",
+    "empirical_G03_closure_candidate": "Only after accepted outer48 plus heldout44, stability under exclusion16 and pairwise resolution checks; identify an empirical predictive class, not unique coefficients. If multiple models indistinguishable retain that limitation.",
+    "continuous_claims": "None; successful heldout fits do not close G04 orG05."
+  },
+  "stop_rules": [
+    "Stop after exactly two qualified signed queries, no propagation/state reuse.",
+    "Stop immediately on source/input/native pin mismatch, nonfinite operator, SPD/rank failure or resource ceiling.",
+    "If either sign exhausts11 resolutions, return attempted evidence and no qualified-pair success.",
+    "Do not rerun N768/N1536, previous static points or launch larger radius pool automatically."
+  ],
+  "return_schema": [
+    "fresh_authorization_receipt",
+    "exact_source_commit_tree_and_hashes",
+    "exact_input_and_native_hashes",
+    "per_attempt_resolution_and_wall_time",
+    "raw_attempt_global_ledger",
+    "raw_S_H_D_npz_per_returned_resolution",
+    "rho_and_full_generalized_spectrum",
+    "SPD_Hermiticity_generalized_residuals",
+    "dominant_plus_minus_pair_invariant_subspace_and_next_pair_gap",
+    "adjacent_level_rho_discrepancy",
+    "per_sign_frozen_holdout_residuals",
+    "failures_and_unused_budget",
+    "P_selected=unavailable_without_state",
+    "Pdot=unavailable_without_state"
+  ],
+  "authorization": {
+    "new_native_run_authorized": false,
+    "old_authorization_reuse": false,
+    "authorization_consumed_here": 0
+  },
+  "claim_ceiling": {
+    "capture": false,
+    "production": "HOLD",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "original_capture_gap_resolved": false,
+    "continuous_global_supremum_bound": false,
+    "continuous_trajectory_error_bound": false
+  }
+}

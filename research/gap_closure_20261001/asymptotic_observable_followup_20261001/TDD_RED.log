@@ -1,0 +1,21 @@
+test_dephasing (unittest.loader._FailedTest.test_dephasing) ... ERROR
+
+======================================================================
+ERROR: test_dephasing (unittest.loader._FailedTest.test_dephasing)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_dephasing
+Traceback (most recent call last):
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/unittest/loader.py", line 396, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/unittest/loader.py", line 339, in _get_module_from_name
+    __import__(name)
+  File "/workspace/scratch/63ee2321a512/gap_closure_20261001/repo/research/gap_closure_20261001/asymptotic_observable_followup_20261001/test_dephasing.py", line 3, in <module>
+    from dephasing import QComplex as Q, bohr_coefficients, ordinary_limit_exists
+ModuleNotFoundError: No module named 'dephasing'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)

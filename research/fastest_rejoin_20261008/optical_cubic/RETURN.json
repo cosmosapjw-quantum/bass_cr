@@ -1,0 +1,100 @@
+{
+  "schema": "bass-cr.r9.return.v1",
+  "task": "CR-XTHREAD-R9",
+  "date_kst": "2026-10-08",
+  "status": "ACTUAL_N384_CUBIC_READOUT_CHECKED__TRUE_CONTINUOUS_ERROR_OPEN",
+  "intake": {
+    "bass_cr": "3c5148557d1c698ee6f1bf7c895e650a44b08cdf",
+    "BASS_HE": "8b7e5129c67de9e41ae29c7464afff9c5be2b6cd",
+    "WU088_HH": "649ecb06321d3f7956fc13902666f062dfcde50c",
+    "rei_bianchi": "e94e41b009723c9077015404503632325f58d16c"
+  },
+  "input_counts": {
+    "new_N384_histories": 5,
+    "new_N384_rows": 1925,
+    "old_histories_for_new_cubic_readout": 9,
+    "old_rows_for_new_cubic_readout": 1017,
+    "selected_files": 36,
+    "R8_exact_linear_anchors": 9
+  },
+  "new_output_definition": "opt-in ln(a) piecewise cubic through four actual nodes per three cells; exact Fraction integration; R8 linear rule unchanged",
+  "GM_N384": {
+    "Delta_tau_linear_display": "4.3939282866297126e-13",
+    "Delta_tau_cubic_display": "4.393914120357170e-13",
+    "N192_to_N384_cubic_history_display": "4.790234664112217e-19",
+    "N192_to_N384_cubic_grid_display": "-2.295770732312903e-22",
+    "linear_over_cubic_grid_magnitude_ratio_display": "18508.86835477667",
+    "cubic_electron_species_cancellation_condition_display": "2108.994006818195"
+  },
+  "error_contract": {
+    "form": "sum(abs(weight)*node_error)+sum(integral_abs_nodal_polynomial/24*uniform_fourth_derivative)",
+    "actual_node_errors": null,
+    "actual_panel_C4_bounds": null,
+    "actual_source_cutoff_regular_partition": null,
+    "actual_continuous_error_certificate": null,
+    "missing_premise_behavior": "raise MissingPremise",
+    "not_inferred": "finite differences or surrogate derivative zero are not true-target uniform derivative bounds"
+  },
+  "verification": {
+    "unit_tests": 19,
+    "assertion_RED_GREEN": 1,
+    "tests_after": 18,
+    "syntax_files": 6,
+    "artifact_checks": 76,
+    "new_cubic_absolute_integrals": 14,
+    "independent_paired_integrals": 8,
+    "exact_manufactured_cases": 128,
+    "exact_moments": 512,
+    "quartic_remainder_checks": 128,
+    "nonnegative_absolute_cubic_panels": 976,
+    "high_precision_background_comparisons": 1155,
+    "native_saved_density_comparisons": 3850,
+    "science_invocations": 1,
+    "new_native": 0,
+    "new_IVP": 0,
+    "new_root": 0,
+    "new_atomic_provider_calls": 0,
+    "other_repo_mutations": 0,
+    "old_scientific_suite_replays": 0,
+    "independent_human_agent_review": false,
+    "proof_assistant": false
+  },
+  "supplier_update": {
+    "HE_N384_targeted_escape_temporal": "PASS_ALL_MODES",
+    "HE_N384_18field_three_axis": "GM_ONLY_PASS; OFF_KF_NOT_EVALUATED",
+    "HE_actual_Gamma": "AVAILABLE; temporal_and_cutoff_aware_accuracy_OPEN",
+    "HE_next_owner": "RCT03E3_DIRECT_RATE_TEMPORAL_AND_CUTOFF_AWARE_SPECTRAL_BUDGET",
+    "historical_N192_escape_failure": "PRESERVED_NOT_RECLASSIFIED"
+  },
+  "publication": {
+    "core_commit": "b116e23e1872ffce960d3f0c2614d6a3fbef1a49",
+    "core_blob": "c492a25cc896f49712b402ff9bf49f86c404f99f",
+    "core_sha256": "bb9507d5c55cc5fa5dbf69d66dbbcfa96596b56a169c8d9113ad84b9dbbf9b3d",
+    "summary_commit": "3768dde18d251a3bee636f4d7cf729b7ebb5525a",
+    "archive": "BASS_CR_XTHREAD_R9_20261008_v1.zip",
+    "bytes": 2456901,
+    "sha256": "7d45de8687487431edba6664fe51243e30bf50ea7658b16eb844eaa6df975207",
+    "entries": 88,
+    "payloads": 87,
+    "google_drive_id": "1A5Mv_ZT1SqXDSORes8ISMmfuIsySTxFS",
+    "dropbox_id": "id:BSpOijBcT10AAAAAAD3QHg",
+    "dropbox_path": "/BASS_DERIVATION_DOSSIERS_20260912/ATOMIC_REIONIZATION_HANDOFF_20261004_v1/BASS_CR_XTHREAD_R9_20261008_v1.zip",
+    "backup_tier": "R1_UPLOAD_VERIFIED_ID_NAME_SIZE_PATH",
+    "remote_restore_verified": false,
+    "independent_remote_bytehash_verified": false
+  },
+  "protected": {
+    "CR": "OFF_FASTEST",
+    "precision_atomic": "PARKED",
+    "HH_research": "ACTIVE",
+    "physical_production": "HOLD",
+    "G02": "UNRESOLVED",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "capture": false,
+    "owner_adoption_ACK": null,
+    "global_CR_counters": null,
+    "observer_tail": null
+  },
+  "next": "Use explicit opt-in readout or bind new producer node-error and regular-panel premises. Do not repeat the 14-track reconstruction study merely for synchronization."
+}

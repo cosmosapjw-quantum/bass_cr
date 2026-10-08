@@ -1,0 +1,19 @@
+..F                                                                      [100%]
+=================================== FAILURES ===================================
+_______ test_strang_scale_gate_fails_closed_without_full_substep_repeat ________
+
+    def test_strang_scale_gate_fails_closed_without_full_substep_repeat():
+        distances = dict(strang_4_vs_cf4_16=2e-7,
+                         strang_8_vs_cf4_16=1e-8,
+                         strang_16_vs_cf4_16=1e-9,
+                         cf4_8_to_16=5e-12,
+                         inner_16_repeat=4e-13,
+                         substep_8_repeat=3e-12)
+        scale, threshold, passed = cross.assess_window(distances, True)
+>       assert scale == 1e-9 and threshold == 1e-11 and passed
+E       assert (1e-09 == 1e-09 and 1.0000000000000001e-11 == 1e-11)
+
+tests/test_r3m23_cross_window.py:35: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_r3m23_cross_window.py::test_strang_scale_gate_fails_closed_without_full_substep_repeat
+1 failed, 2 passed in 0.36s

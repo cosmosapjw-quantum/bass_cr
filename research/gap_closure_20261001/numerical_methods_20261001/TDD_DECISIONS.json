@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "tdd_initial_red": {
+    "command": "python -m unittest discover -s research/gap_closure_20261001/numerical_methods_20261001 -p 'test_*.py' -v",
+    "exit_code": 1,
+    "evidence": "TDD_RED.log",
+    "failure": "numerical_audit helper did not exist"
+  },
+  "intermediate_failure": {
+    "test": "test_conditioning_sweep_independent_paths",
+    "original_expectation": "all eigenpairs max normwise backward error <2e-13 independent of cond(S)",
+    "observed": {
+      "cond1e8_pathA": 9.572523883910294e-13,
+      "cond1e12_pathA": 3.5029914387684376e-10,
+      "cond1e12_pathB": 1.214835800885415e-07
+    },
+    "classification": "NUMERICAL_METHOD_BLOCKER",
+    "interpretation": "Uniform condition-independent spectrum accuracy is not supported. Preserve stress failures; exact closure domain excludes that claim.",
+    "change": "Dominant-rho eigenpair residual remains constrained at2e-13; whole-spectrum stress regression uses recorded eps*cond(S) scale, not a forward-error certificate."
+  },
+  "intermediate_historical_W_guard_failure": {
+    "observed_relative_defect_at_cond1e4": 4.993003959518301e-13,
+    "new_helper_default_relative_admission": 1.1102230246251565e-13,
+    "change": "Keep helper strict default. Explicitly project already production-admitted assembled W to its Hermitian part and preserve raw defect in result. Reject historical W failures at1e8/1e12 without repair."
+  },
+  "final_green": {
+    "exit_code": 0,
+    "tests": 11,
+    "evidence": "TDD_GREEN.log"
+  },
+  "new_native_calls": 0,
+  "new_external_runs": 0
+}

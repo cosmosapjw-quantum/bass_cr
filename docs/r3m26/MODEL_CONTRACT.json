@@ -1,0 +1,37 @@
+{
+  "schema": "BASS_CR_R3M26_MODEL_CONTRACT_V1",
+  "model_id": "NONRELATIVISTIC_ONE_ELECTRON_FIXED_TARGET_STRAIGHT_LINE_POINT_COULOMB_V1",
+  "definition": "docs/r3m26/MODEL_FOUNDATION_KO.md",
+  "hamiltonian_atomic_units": "-laplacian/2 - 1/|r| - 1/|r-b e_x-v t e_z|",
+  "nuclear_trajectory": "prescribed straight line; fixed infinite-mass target; no backreaction",
+  "incoming_channel": "isolated target hydrogen 1s at asymptotic incoming time",
+  "outgoing_observable": "boosted projectile bound spectral projection at asymptotic outgoing time",
+  "energy_input_unit": "keV/u",
+  "probability_unit": "dimensionless incident-electron probability; no survival renormalization",
+  "cross_section_unit": "a0^2",
+  "intermediate_observables": [
+    "Gram-corrected sampled projectile spans n<=1",
+    "Gram-corrected sampled projectile spans n<=2",
+    "Gram-corrected sampled projectile spans n<=3"
+  ],
+  "final_objective": {
+    "energies_keV_per_u": [
+      50,
+      100,
+      225
+    ],
+    "observable": "all-bound capture cross section"
+  },
+  "numerical_approximations_requiring_validation": [
+    "grid/Coulomb sampling",
+    "time propagation",
+    "initial relaxation",
+    "finite start/stop",
+    "box/CAP",
+    "finite channel span",
+    "b quadrature/tails"
+  ],
+  "physical_model_discrepancy": "SEPARATE_NOT_QUANTIFIED",
+  "real_world_validation": "NOT_EVALUATED",
+  "production_admission": "HOLD"
+}

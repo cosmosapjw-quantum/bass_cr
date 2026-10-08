@@ -1,0 +1,17 @@
+{
+  "schema": "BASS_R4U_LOCAL_PHYSICAL_ACCEPTANCE_SCOPE_V1",
+  "authorization_source": "Current user request to implement and run the theory/numerical design toward a production solver; no archived native approval reused",
+  "purpose": "Exercise the real 18-channel operator, unchanged spatial qualification, cache-only midpoint integration and durable restart",
+  "model": {"basis": "archived B0", "energy_keV_per_u": 100, "b_a0": 2, "charges": [1, 1]},
+  "window_z_a0": [32, 32.02],
+  "steps": 2,
+  "initial_state": "Explicit acceptance vector e0 at z=32, normalized once in S; not an incoming scattering state or a saved tail state",
+  "fortran": {"ranks": 1, "threads": 2, "cpus": [0, 1], "unique_queries": 4, "maximum_raw_attempts": 44, "hard_timeout_seconds": 900},
+  "reference": {"ranks": 1, "threads": 1, "cpus": [0], "unique_queries": 1, "maximum_raw_attempts": 11, "hard_timeout_seconds": 300},
+  "spatial_contract": "Exact archived SCIENCE_CONTEXT.context.contract ordered ladder and screens, same-center order 20, no tolerance relaxation",
+  "parity": {"scope": "Same first physical time, same attempted resolution; all full S/H/D and raw cross matrices", "relative_frobenius_max": 1e-12, "norm_floor": 1.0, "record_bitwise_equality": true},
+  "restart": {"pause_after_step": 1, "full_vs_resume": "bitwise final state and norm history"},
+  "temporal_accuracy": "NOT_CERTIFIED; two steps are only an operational acceptance test",
+  "performance": "Single local workload timing only, not a repeat benchmark or NCP scaling result",
+  "claim_ceilings": {"production": "HOLD", "capture": false, "all_bound": "OPEN", "b_grid": "NO_GO", "original_capture_gap_resolved": false, "continuous_global_supremum_bound": false, "continuous_trajectory_error_bound": false}
+}

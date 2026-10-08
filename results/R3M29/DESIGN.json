@@ -1,0 +1,43 @@
+{
+  "all_bound": "OPEN",
+  "b_grid": "NO_GO",
+  "claim_ceiling": "LOCAL_SINGULAR_CELL_OPERATOR_DIAGNOSTIC_NO_CAPTURE_ERROR_BOUND",
+  "created_before_diagnostic": true,
+  "decision_if_fail": "LOCAL_DISCRIMINATOR_INCONCLUSIVE",
+  "decision_if_pass": "LOCAL_CELL_AVERAGE_CANDIDATE_PRIORITIZED_PHASE_OCCUPANCY_BALANCED_NOT_CAUSALLY_RESOLVED",
+  "formula": "Cell mean of 1/r for x,y in [0,h], z in [-a*h,(1-a)*h] equals h^-1 int_0^1 int_0^1 [asinh((1-a)/sqrt(u\u00b2+v\u00b2))+asinh(a/sqrt(u\u00b2+v\u00b2))] du dv. Midpoint is h^-1/sqrt(.5\u00b2+.5\u00b2+(.5-a)\u00b2).",
+  "frozen_numerical_source_digest": "581ff84930bb862efafdfec5d39d5b25aebf9297ce7ce45f833a5abe125b2a5b",
+  "gpu_runs": 0,
+  "h_values": [
+    0.25,
+    0.2
+  ],
+  "independent_reference": "scipy.integrate.dblquad of analytically z-integrated 2D integrand; compare GL n=64,128,256",
+  "input_head": "8656736dd1b45b748b0669f4a7dafdb71787e032",
+  "input_sha256": {
+    "configs/r3m27/B3.json": "c6a061e0fcb1a09b3820d92822de253a5908eb529988d832eb4b69d58da2e8d1",
+    "configs/r3m28/A3.json": "4239726545da4b715f1e325420b8ed704e84cd3810f5fd1912a48a99cbac55c1",
+    "cr_repro/grid.py": "1e5490f48578932944d0b6759183d57589378d7209e7736cf487a983704e04d8",
+    "cr_repro/tdl.py": "ef849438b1cb361a900ccb9e8c0343837b1753d9b1fa5f51b950395455ffa563",
+    "docs/r3m28/SCIENTIFIC_CONTRACT.md": "1b479b7de5eb5107e7ee5cf3dfc40ad7d8b6b47970917646224608d3f3718381",
+    "results/R3M28/SPATIAL_EVALUATION.json": "83de2245139fcfccc18347b72e10115d54278076919ffc881ebd2d4b4873cd19"
+  },
+  "max_cpu_wall_seconds": 180,
+  "max_new_full_collisions": 0,
+  "max_new_preparations": 0,
+  "minimum_all_phase_local_midpoint_bias": 0.005,
+  "nstep": 7172,
+  "phase_bins": 32,
+  "phase_total_variation_threshold": 0.01,
+  "production_admission": false,
+  "production_representation_change": false,
+  "quadrature_relative_tolerance": 1e-06,
+  "schema": "R3M29_COULOMB_CELL_DISCRIMINATOR_DESIGN_V1",
+  "singular_cell_phases": [
+    0.0,
+    0.25,
+    0.5
+  ],
+  "z_start": -30.0,
+  "z_stop": 60.0
+}

@@ -1,0 +1,463 @@
+{
+  "schema": "BASS_CR_R3M19_TEMPORAL_MODEL_COMPARISON_V1",
+  "status": "SCALAR_DIAGNOSTIC_COMPLETE_NOT_SCIENTIFIC_ADMISSION",
+  "actual_horizons_au": [
+    44.821139751290325,
+    44.821139751290325,
+    44.821139751290325
+  ],
+  "observables": {
+    "P1": {
+      "values": [
+        0.0059368765332443235,
+        0.006068282194867191,
+        0.00608524131220836
+      ],
+      "actual_dt": [
+        0.04996782580968821,
+        0.02499784704477988,
+        0.01249892352238994
+      ],
+      "signed_coarse_change": 0.00013140566162286784,
+      "signed_fine_change": 1.695911734116845e-05,
+      "fine_pair_relative": 0.0027869260183888936,
+      "single_power": {
+        "status": "EMPIRICAL_CONTRACTION_ONLY",
+        "observed_order": 2.956624756285566,
+        "P_at_dt_zero": 0.0060877489236358185,
+        "fine_error_absolute_under_model": 2.5076114274587357e-06,
+        "fine_error_relative_under_model": 0.00041208085247628623,
+        "model": "P(dt)=P_infinity+c*dt^p; fitted on the same three samples",
+        "budget_closed": false,
+        "three_point_fit_validates_remainder": false,
+        "certified_error_bound": null
+      },
+      "even_dt2_dt4": {
+        "status": "THREE_POINT_INTERPOLATION_ONLY",
+        "model": "P(dt)=P_infinity+c2_scaled*(dt/dt_ref)^2+c4_scaled*(dt/dt_ref)^4",
+        "dt_ref_au": 0.01249892352238994,
+        "P_at_dt_zero": 0.006089475670223018,
+        "c2_scaled_at_finest": -3.879687739892879e-06,
+        "c4_scaled_at_finest": -3.546702747659873e-07,
+        "c2_physical_au": -0.024834278718335184,
+        "c4_physical_au": -14.532299790303615,
+        "coefficient_units": "P dimensionless; physical c2 in t_a^-2 and c4 in t_a^-4",
+        "fine_error_absolute_under_model": 4.234358014658379e-06,
+        "fine_error_relative_under_model": 0.0006958406080237619,
+        "signed_dt4_over_dt2_at_coarsest": 1.4610453733283986,
+        "scaled_matrix_condition": 409.9430454972675,
+        "reconstruction_max_absolute": 8.673617379884035e-19,
+        "three_point_fit_validates_remainder": false,
+        "certified_error_bound": null,
+        "unidentified_even_degree_six": {
+          "null_term": "lambda*product_j(u-u_j), u=(dt/dt_ref)^2",
+          "u_samples": [
+            15.982167736130219,
+            4.0,
+            1.0
+          ],
+          "P0_shift_per_lambda": -63.928670944520874,
+          "three_point_data_constrain_lambda": false,
+          "meaning": "This smooth even term preserves all three samples but changes the dt=0 limit; local positivity may restrict lambda, not identify it."
+        }
+      },
+      "assumed_second_order": {
+        "P_at_dt_zero": 0.006090894351322083,
+        "fine_error_absolute": 5.653039113722817e-06,
+        "fine_error_relative": 0.0009289753394629645,
+        "p_equals_two_independently_validated": false,
+        "meaning": "two finest levels with an assumed leading dt^2 error, not a bound"
+      },
+      "budget_closed": false,
+      "production_admitted": false,
+      "physical_capture_probability": true,
+      "scope": "FINITE_SELECTED_SPAN_OR_NESTED_SPAN_INCREMENT_NOT_ALL_BOUND"
+    },
+    "P2": {
+      "values": [
+        0.007416156280617876,
+        0.007562290857479282,
+        0.007581938013116333
+      ],
+      "actual_dt": [
+        0.04996782580968821,
+        0.02499784704477988,
+        0.01249892352238994
+      ],
+      "signed_coarse_change": 0.00014613457686140589,
+      "signed_fine_change": 1.964715563705123e-05,
+      "fine_pair_relative": 0.002591310507031677,
+      "single_power": {
+        "status": "EMPIRICAL_CONTRACTION_ONLY",
+        "observed_order": 2.897597640686246,
+        "P_at_dt_zero": 0.007584983212751272,
+        "fine_error_absolute_under_model": 3.045199634938718e-06,
+        "fine_error_relative_under_model": 0.0004016386878487652,
+        "model": "P(dt)=P_infinity+c*dt^p; fitted on the same three samples",
+        "budget_closed": false,
+        "three_point_fit_validates_remainder": false,
+        "certified_error_bound": null
+      },
+      "even_dt2_dt4": {
+        "status": "THREE_POINT_INTERPOLATION_ONLY",
+        "model": "P(dt)=P_infinity+c2_scaled*(dt/dt_ref)^2+c4_scaled*(dt/dt_ref)^4",
+        "dt_ref_au": 0.01249892352238994,
+        "P_at_dt_zero": 0.007586979418530013,
+        "c2_scaled_at_finest": -4.664493797345826e-06,
+        "c4_scaled_at_finest": -3.7691161633424946e-07,
+        "c2_physical_au": -0.029857902699775094,
+        "c4_physical_au": -15.443619025110612,
+        "coefficient_units": "P dimensionless; physical c2 in t_a^-2 and c4 in t_a^-4",
+        "fine_error_absolute_under_model": 5.041405413679957e-06,
+        "fine_error_relative_under_model": 0.0006649230585845736,
+        "signed_dt4_over_dt2_at_coarsest": 1.2914294531547263,
+        "scaled_matrix_condition": 409.9430454972675,
+        "reconstruction_max_absolute": 0.0,
+        "three_point_fit_validates_remainder": false,
+        "certified_error_bound": null,
+        "unidentified_even_degree_six": {
+          "null_term": "lambda*product_j(u-u_j), u=(dt/dt_ref)^2",
+          "u_samples": [
+            15.982167736130219,
+            4.0,
+            1.0
+          ],
+          "P0_shift_per_lambda": -63.928670944520874,
+          "three_point_data_constrain_lambda": false,
+          "meaning": "This smooth even term preserves all three samples but changes the dt=0 limit; local positivity may restrict lambda, not identify it."
+        }
+      },
+      "assumed_second_order": {
+        "P_at_dt_zero": 0.007588487064995351,
+        "fine_error_absolute": 6.549051879017077e-06,
+        "fine_error_relative": 0.0008637701690105589,
+        "p_equals_two_independently_validated": false,
+        "meaning": "two finest levels with an assumed leading dt^2 error, not a bound"
+      },
+      "budget_closed": false,
+      "production_admitted": false,
+      "physical_capture_probability": true,
+      "scope": "FINITE_SELECTED_SPAN_OR_NESTED_SPAN_INCREMENT_NOT_ALL_BOUND"
+    },
+    "P3": {
+      "values": [
+        0.007911255992446844,
+        0.008063449050040342,
+        0.008084190148156251
+      ],
+      "actual_dt": [
+        0.04996782580968821,
+        0.02499784704477988,
+        0.01249892352238994
+      ],
+      "signed_coarse_change": 0.0001521930575934978,
+      "signed_fine_change": 2.0741098115908962e-05,
+      "fine_pair_relative": 0.0025656370936103417,
+      "single_power": {
+        "status": "EMPIRICAL_CONTRACTION_ONLY",
+        "observed_order": 2.878018289926647,
+        "P_at_dt_zero": 0.008087455744766709,
+        "fine_error_absolute_under_model": 3.265596610457043e-06,
+        "fine_error_relative_under_model": 0.0004039485156347817,
+        "model": "P(dt)=P_infinity+c*dt^p; fitted on the same three samples",
+        "budget_closed": false,
+        "three_point_fit_validates_remainder": false,
+        "certified_error_bound": null
+      },
+      "even_dt2_dt4": {
+        "status": "THREE_POINT_INTERPOLATION_ONLY",
+        "model": "P(dt)=P_infinity+c2_scaled*(dt/dt_ref)^2+c4_scaled*(dt/dt_ref)^4",
+        "dt_ref_au": 0.01249892352238994,
+        "P_at_dt_zero": 0.008089558562378446,
+        "c2_scaled_at_finest": -4.982092934750431e-06,
+        "c4_scaled_at_finest": -3.863212874438442e-07,
+        "c2_physical_au": -0.03189088731807496,
+        "c4_physical_au": -15.829171949113093,
+        "coefficient_units": "P dimensionless; physical c2 in t_a^-2 and c4 in t_a^-4",
+        "fine_error_absolute_under_model": 5.368414222195125e-06,
+        "fine_error_relative_under_model": 0.0006640633290175011,
+        "signed_dt4_over_dt2_at_coarsest": 1.2392887280161873,
+        "scaled_matrix_condition": 409.9430454972675,
+        "reconstruction_max_absolute": 1.734723475976807e-18,
+        "three_point_fit_validates_remainder": false,
+        "certified_error_bound": null,
+        "unidentified_even_degree_six": {
+          "null_term": "lambda*product_j(u-u_j), u=(dt/dt_ref)^2",
+          "u_samples": [
+            15.982167736130219,
+            4.0,
+            1.0
+          ],
+          "P0_shift_per_lambda": -63.928670944520874,
+          "three_point_data_constrain_lambda": false,
+          "meaning": "This smooth even term preserves all three samples but changes the dt=0 limit; local positivity may restrict lambda, not identify it."
+        }
+      },
+      "assumed_second_order": {
+        "P_at_dt_zero": 0.00809110384752822,
+        "fine_error_absolute": 6.9136993719696544e-06,
+        "fine_error_relative": 0.0008552123645367807,
+        "p_equals_two_independently_validated": false,
+        "meaning": "two finest levels with an assumed leading dt^2 error, not a bound"
+      },
+      "budget_closed": false,
+      "production_admitted": false,
+      "physical_capture_probability": true,
+      "scope": "FINITE_SELECTED_SPAN_OR_NESTED_SPAN_INCREMENT_NOT_ALL_BOUND"
+    },
+    "shell_n2": {
+      "values": [
+        0.0014792797473735528,
+        0.0014940086626120909,
+        0.0014966967009079736
+      ],
+      "actual_dt": [
+        0.04996782580968821,
+        0.02499784704477988,
+        0.01249892352238994
+      ],
+      "signed_coarse_change": 1.4728915238538046e-05,
+      "signed_fine_change": 2.6880382958827803e-06,
+      "fine_pair_relative": 0.0017959806380625262,
+      "single_power": {
+        "status": "EMPIRICAL_CONTRACTION_ONLY",
+        "observed_order": 2.456442138453803,
+        "P_at_dt_zero": 0.0014972955578627756,
+        "fine_error_absolute_under_model": 5.988569548020133e-07,
+        "fine_error_relative_under_model": 0.00040011911193411177,
+        "model": "P(dt)=P_infinity+c*dt^p; fitted on the same three samples",
+        "budget_closed": false,
+        "three_point_fit_validates_remainder": false,
+        "certified_error_bound": null
+      },
+      "even_dt2_dt4": {
+        "status": "THREE_POINT_INTERPOLATION_ONLY",
+        "model": "P(dt)=P_infinity+c2_scaled*(dt/dt_ref)^2+c4_scaled*(dt/dt_ref)^4",
+        "dt_ref_au": 0.01249892352238994,
+        "P_at_dt_zero": 0.0014975037483069948,
+        "c2_scaled_at_finest": -7.848060574529493e-07,
+        "c4_scaled_at_finest": -2.2241341568262086e-08,
+        "c2_physical_au": -0.005023623981439923,
+        "c4_physical_au": -0.9113192348069948,
+        "coefficient_units": "P dimensionless; physical c2 in t_a^-2 and c4 in t_a^-4",
+        "fine_error_absolute_under_model": 8.070473990211442e-07,
+        "fine_error_relative_under_model": 0.0005392190672509317,
+        "signed_dt4_over_dt2_at_coarsest": 0.4529333690086114,
+        "scaled_matrix_condition": 409.9430454972675,
+        "reconstruction_max_absolute": 2.168404344971009e-19,
+        "three_point_fit_validates_remainder": false,
+        "certified_error_bound": null,
+        "unidentified_even_degree_six": {
+          "null_term": "lambda*product_j(u-u_j), u=(dt/dt_ref)^2",
+          "u_samples": [
+            15.982167736130219,
+            4.0,
+            1.0
+          ],
+          "P0_shift_per_lambda": -63.928670944520874,
+          "three_point_data_constrain_lambda": false,
+          "meaning": "This smooth even term preserves all three samples but changes the dt=0 limit; local positivity may restrict lambda, not identify it."
+        }
+      },
+      "assumed_second_order": {
+        "P_at_dt_zero": 0.001497592713673268,
+        "fine_error_absolute": 8.960127652942601e-07,
+        "fine_error_relative": 0.0005986602126875087,
+        "p_equals_two_independently_validated": false,
+        "meaning": "two finest levels with an assumed leading dt^2 error, not a bound"
+      },
+      "budget_closed": false,
+      "production_admitted": false,
+      "physical_capture_probability": true,
+      "scope": "FINITE_SELECTED_SPAN_OR_NESTED_SPAN_INCREMENT_NOT_ALL_BOUND"
+    },
+    "shell_n3": {
+      "values": [
+        0.0004950997118289679,
+        0.0005011581925610598,
+        0.0005022521350399175
+      ],
+      "actual_dt": [
+        0.04996782580968821,
+        0.02499784704477988,
+        0.01249892352238994
+      ],
+      "signed_coarse_change": 6.058480732091913e-06,
+      "signed_fine_change": 1.0939424788577318e-06,
+      "fine_pair_relative": 0.002178074322712015,
+      "single_power": {
+        "status": "EMPIRICAL_CONTRACTION_ONLY",
+        "observed_order": 2.4718451417176066,
+        "P_at_dt_zero": 0.0005024926926326587,
+        "fine_error_absolute_under_model": 2.405575927411547e-07,
+        "fine_error_relative_under_model": 0.0004789578300588725,
+        "model": "P(dt)=P_infinity+c*dt^p; fitted on the same three samples",
+        "budget_closed": false,
+        "three_point_fit_validates_remainder": false,
+        "certified_error_bound": null
+      },
+      "even_dt2_dt4": {
+        "status": "THREE_POINT_INTERPOLATION_ONLY",
+        "model": "P(dt)=P_infinity+c2_scaled*(dt/dt_ref)^2+c4_scaled*(dt/dt_ref)^4",
+        "dt_ref_au": 0.01249892352238994,
+        "P_at_dt_zero": 0.0005025791438484317,
+        "c2_scaled_at_finest": -3.175991374046033e-07,
+        "c4_scaled_at_finest": -9.409671109594756e-09,
+        "c2_physical_au": -0.002032984618299855,
+        "c4_physical_au": -0.38555292400248126,
+        "coefficient_units": "P dimensionless; physical c2 in t_a^-2 and c4 in t_a^-4",
+        "fine_error_absolute_under_model": 3.270088085141924e-07,
+        "fine_error_relative_under_model": 0.0006510849545481826,
+        "signed_dt4_over_dt2_at_coarsest": 0.4735118087672181,
+        "scaled_matrix_condition": 409.9430454972675,
+        "reconstruction_max_absolute": 0.0,
+        "three_point_fit_validates_remainder": false,
+        "certified_error_bound": null,
+        "unidentified_even_degree_six": {
+          "null_term": "lambda*product_j(u-u_j), u=(dt/dt_ref)^2",
+          "u_samples": [
+            15.982167736130219,
+            4.0,
+            1.0
+          ],
+          "P0_shift_per_lambda": -63.928670944520874,
+          "three_point_data_constrain_lambda": false,
+          "meaning": "This smooth even term preserves all three samples but changes the dt=0 limit; local positivity may restrict lambda, not identify it."
+        }
+      },
+      "assumed_second_order": {
+        "P_at_dt_zero": 0.0005026167825328701,
+        "fine_error_absolute": 3.6464749295257726e-07,
+        "fine_error_relative": 0.0007260247742373383,
+        "p_equals_two_independently_validated": false,
+        "meaning": "two finest levels with an assumed leading dt^2 error, not a bound"
+      },
+      "budget_closed": false,
+      "production_admitted": false,
+      "physical_capture_probability": true,
+      "scope": "FINITE_SELECTED_SPAN_OR_NESTED_SPAN_INCREMENT_NOT_ALL_BOUND"
+    },
+    "P3_divided_by_survival_norm": {
+      "values": [
+        0.008139539129040535,
+        0.008238686655626345,
+        0.008260185422126094
+      ],
+      "actual_dt": [
+        0.04996782580968821,
+        0.02499784704477988,
+        0.01249892352238994
+      ],
+      "signed_coarse_change": 9.91475265858105e-05,
+      "signed_fine_change": 2.1498766499749092e-05,
+      "fine_pair_relative": 0.0026026978089573574,
+      "single_power": {
+        "status": "EMPIRICAL_CONTRACTION_ONLY",
+        "observed_order": 2.2075897518781717,
+        "P_at_dt_zero": 0.00826612590054921,
+        "fine_error_absolute_under_model": 5.940478423116752e-06,
+        "fine_error_relative_under_model": 0.0007191701056981513,
+        "model": "P(dt)=P_infinity+c*dt^p; fitted on the same three samples",
+        "budget_closed": false,
+        "three_point_fit_validates_remainder": false,
+        "certified_error_bound": null
+      },
+      "even_dt2_dt4": {
+        "status": "THREE_POINT_INTERPOLATION_ONLY",
+        "model": "P(dt)=P_infinity+c2_scaled*(dt/dt_ref)^2+c4_scaled*(dt/dt_ref)^4",
+        "dt_ref_au": 0.01249892352238994,
+        "P_at_dt_zero": 0.008267055769951074,
+        "c2_scaled_at_finest": -6.796370906244067e-06,
+        "c4_scaled_at_finest": -7.397691873445861e-08,
+        "c2_physical_au": -0.04350426649633139,
+        "c4_physical_au": -3.0311386013993005,
+        "coefficient_units": "P dimensionless; physical c2 in t_a^-2 and c4 in t_a^-4",
+        "fine_error_absolute_under_model": 6.870347824979722e-06,
+        "fine_error_relative_under_model": 0.0008317425667681149,
+        "signed_dt4_over_dt2_at_coarsest": 0.1739621836603944,
+        "scaled_matrix_condition": 409.9430454972675,
+        "reconstruction_max_absolute": 1.734723475976807e-18,
+        "three_point_fit_validates_remainder": false,
+        "certified_error_bound": null,
+        "unidentified_even_degree_six": {
+          "null_term": "lambda*product_j(u-u_j), u=(dt/dt_ref)^2",
+          "u_samples": [
+            15.982167736130219,
+            4.0,
+            1.0
+          ],
+          "P0_shift_per_lambda": -63.928670944520874,
+          "three_point_data_constrain_lambda": false,
+          "meaning": "This smooth even term preserves all three samples but changes the dt=0 limit; local positivity may restrict lambda, not identify it."
+        }
+      },
+      "assumed_second_order": {
+        "P_at_dt_zero": 0.00826735167762601,
+        "fine_error_absolute": 7.166255499916364e-06,
+        "fine_error_relative": 0.0008675659363191193,
+        "p_equals_two_independently_validated": false,
+        "meaning": "two finest levels with an assumed leading dt^2 error, not a bound"
+      },
+      "budget_closed": false,
+      "production_admitted": false,
+      "physical_capture_probability": false,
+      "scope": "SURVIVAL_CONDITIONED_DIAGNOSTIC_NOT_CAPTURE_PROBABILITY"
+    }
+  },
+  "CAP_norm_diagnostic": {
+    "norms": [
+      0.9719538007036279,
+      0.9787299101287787,
+      0.9786935443969073
+    ],
+    "absorbed_probability": [
+      0.028046199296372087,
+      0.021270089871221254,
+      0.021306455603092744
+    ],
+    "signed_norm_changes": [
+      0.006776109425150834,
+      -3.63657318714905e-05
+    ],
+    "relative_norm_changes": [
+      0.006923370130028263,
+      -3.7157424895348496e-05
+    ],
+    "conditional_probability_decomposition": [
+      {
+        "raw_capture_change_over_new_norm": 0.00015550056866400725,
+        "normalization_change_term": -5.6353042078194554e-05,
+        "conditional_observable_change": 9.91475265858105e-05,
+        "identity_residual": 2.1955093992831465e-18
+      },
+      {
+        "raw_capture_change_over_new_norm": 2.119263811910611e-05,
+        "normalization_change_term": 3.0612838064270166e-07,
+        "conditional_observable_change": 2.1498766499749092e-05,
+        "identity_residual": 2.812149384884277e-19
+      }
+    ],
+    "CAP_channel_specific_error_inferred": false,
+    "meaning": "total norm loss cannot identify channel-specific CAP bias; no post-hoc renormalization of physical outputs"
+  },
+  "three_point_fit_validates_remainder": false,
+  "production_admitted": false,
+  "representation_change_admitted": false,
+  "source_observables_overwritten": false,
+  "decision": "TIME_REFINEMENT_STILL_OPEN",
+  "source": {
+    "path": "/workspace/scratch/235b855501c6/bass_cr/results/R3M18/B_TEMPORAL_ANALYSIS.json",
+    "sha256": "630a74fb5089e363e3134fce23ffb4086f1bc0c153cc1e7e3e683c5738faea61",
+    "canonical_sha_matched": true,
+    "canonical_repository_head": "3d033eb08a0efd99257470f0fa27214f569b427a"
+  },
+  "instrumentation_sha256": "cc1e06e67835f637f92eb6e2ce56af96a96ac04b2a788eb5accdbd78e86ef948",
+  "evidence_scope": {
+    "execution": "arithmetic recomputation from small repository summaries only",
+    "B2_raw_state_reprojection": "NOT_RUN",
+    "B2_raw_result_in_repository": false,
+    "small_evidence_gap": "At canonical R3M18, B2 raw result/witness/seal receipts are referenced in external pointers, not committed as raw small files; local handoff should publish existing bytes unchanged.",
+    "large_arrays_downloaded": false,
+    "production_trajectories_run": false
+  }
+}

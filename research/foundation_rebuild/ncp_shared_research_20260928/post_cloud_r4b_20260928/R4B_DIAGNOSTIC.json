@@ -1,0 +1,76 @@
+{
+  "schema": "BASS_R4B_REFERENCE_PATH_FINITE_SPAN_DIAGNOSTIC_V1",
+  "status": "REFERENCE_PATH_FINITE_SPAN_DIAGNOSTIC_COMPLETE__TRANSPORT_GATE_OPEN",
+  "authority": {
+    "reference_states_sha256": "6684dd51f5e1f3ac6e98212c38a4db8236c9a01e6c26c67f4da713ac7b0df9e7",
+    "final_operator_npz_sha256": "87dc49ef9f9b42fe0022bc0655265b15e524b14d468b42c4ff4bfc3a33ad17d4",
+    "final_query_id": "9a30b3744896b21ce0f75284f264165d9bb4ab42f50e92cac926c6329f974ede",
+    "selected_indices": [9,10,12,13,14],
+    "positive_projectile_pseudostates_excluded": [11,15,16,17],
+    "initial_target_1s_index": 0,
+    "basis_phase_convention": "historical two_center basis_values: exp(i v.r - i v^2 t/2) on moving-center channel; pinned source commit c954d68fdc86527453765a563b3a025351163ed9"
+  },
+  "reference_result": {
+    "P_projectile_negative_energy_finite_span": 0.009653432376161852,
+    "P_target_negative_energy_finite_span_nonexclusive": 0.9871795356212304,
+    "metric_norm_real": 0.999999999996495,
+    "metric_norm_imag": -5.551115123125783e-17,
+    "selected_gram_condition_number_2": 1.0000000000000073,
+    "selected_gram_eigenvalues": [0.9999999999999933,0.9999999999999978,0.9999999999999978,0.9999999999999978,1.0000000000000007],
+    "final_S_condition_number_2": 1.009910589510282,
+    "final_S_min_eigenvalue": 0.9950691391139449,
+    "final_S_max_eigenvalue": 1.004930860886053
+  },
+  "projector_checks": {
+    "Q_hermiticity_max_abs": 5.551116446614763e-17,
+    "Q_Sinv_Q_minus_Q_spectral_norm": 1.1102284465711333e-16,
+    "min_eigenvalue_Q_symmetrized": -1.812000406458725e-16,
+    "min_eigenvalue_S_minus_Q_symmetrized": -1.0861615773037509e-16,
+    "pass_numerical_tolerance_1e-12": true
+  },
+  "candidate_observable_convergence_diagnostic": [
+    {"nstep":24,"selected_span_probability":0.009637291386080778,"abs_error_to_reference":1.6140990081073975e-05,"relative_error_to_reference":0.001672046734478865,"metric_norm_real":1.0000000000000016},
+    {"nstep":48,"selected_span_probability":0.00964954348318132,"abs_error_to_reference":3.8888929805320355e-06,"relative_error_to_reference":0.0004028508025948628,"metric_norm_real":0.9999999999999991},
+    {"nstep":96,"selected_span_probability":0.00965246710707899,"abs_error_to_reference":9.652690828622357e-07,"relative_error_to_reference":9.99923183018164e-05,"metric_norm_real":1.0000000000000007},
+    {"nstep":192,"selected_span_probability":0.009653191487284945,"abs_error_to_reference":2.4088887690641714e-07,"relative_error_to_reference":2.495370221904358e-05,"metric_norm_real":0.9999999999999984},
+    {"nstep":384,"selected_span_probability":0.009653372181025514,"abs_error_to_reference":6.019513633728768e-08,"relative_error_to_reference":6.235620035618969e-06,"metric_norm_real":0.9999999999999917}
+  ],
+  "candidate_observable_error_orders": [
+    {"nstep_pair":[24,48],"observed_order":2.0532976370679714},
+    {"nstep_pair":[48,96],"observed_order":2.0103564575303134},
+    {"nstep_pair":[96,192],"observed_order":2.002563392398223},
+    {"nstep_pair":[192,384],"observed_order":2.00064894882612}
+  ],
+  "historical_state_metric_temporal_pairs": [
+    {"previous_nstep":24,"selected_nstep":48,"previous_norm_drift":1.3322676295501878e-15,"selected_norm_drift":1.3322676295501878e-15,"previous_norm_pass":true,"selected_norm_pass":true,"candidate_reference_metric_distance":0.0001689832623790736,"candidate_refinement_metric_distance":0.0005119795498695432,"reference_pass":false,"refinement_pass":false,"qualified":false,"evidence_relation":"INDEPENDENT_TEMPORAL_DISCRETIZATION_COMPARISON"},
+    {"previous_nstep":48,"selected_nstep":96,"previous_norm_drift":1.3322676295501878e-15,"selected_norm_drift":2.220446049250313e-15,"previous_norm_pass":true,"selected_norm_pass":true,"candidate_reference_metric_distance":4.2174805878042276e-05,"candidate_refinement_metric_distance":0.00012680878664054414,"reference_pass":false,"refinement_pass":false,"qualified":false,"evidence_relation":"INDEPENDENT_TEMPORAL_DISCRETIZATION_COMPARISON"},
+    {"previous_nstep":96,"selected_nstep":192,"previous_norm_drift":2.220446049250313e-15,"selected_norm_drift":3.774758283725532e-15,"previous_norm_pass":true,"selected_norm_pass":true,"candidate_reference_metric_distance":1.0539330230533098e-05,"candidate_refinement_metric_distance":3.1635480722505664e-05,"reference_pass":false,"refinement_pass":false,"qualified":false,"evidence_relation":"INDEPENDENT_TEMPORAL_DISCRETIZATION_COMPARISON"},
+    {"previous_nstep":192,"selected_nstep":384,"previous_norm_drift":3.774758283725532e-15,"selected_norm_drift":8.548717289613705e-15,"previous_norm_pass":true,"selected_norm_pass":true,"candidate_reference_metric_distance":2.634560877280569e-06,"candidate_refinement_metric_distance":7.904769432369909e-06,"reference_pass":false,"refinement_pass":false,"qualified":false,"evidence_relation":"INDEPENDENT_TEMPORAL_DISCRETIZATION_COMPARISON"}
+  ],
+  "state_metric_observed_orders": {
+    "reference_distance": [2.0024270228896484,2.000598240800984,2.0001487654709194],
+    "refinement_distance": [2.013431471478553,2.0030392901016403,2.000748231204326]
+  },
+  "future_temporal_extrapolation": {
+    "basis": "latest observed state-distance order; extrapolation only, not certificate",
+    "observed_order_reference_distance_latest": 2.0001487654709194,
+    "observed_order_refinement_distance_latest": 2.000748231204326,
+    "N768_reference_distance_estimate": 6.585723062352775e-07,
+    "N768_refinement_distance_estimate": 1.975988590822597e-06,
+    "N1536_reference_distance_estimate": 1.6462610003825058e-07,
+    "N1536_refinement_distance_estimate": 4.939462111408435e-07,
+    "frozen_limit": 1e-06
+  },
+  "claim_policy": {
+    "this_is_capture_execution": false,
+    "this_is_production_result": false,
+    "reference_path_is_temporally_admitted_by_frozen_TP2D_gate": false,
+    "reason": "historical TP2D return status is TEMPORAL_REFINEMENT_UNRESOLVED; diagnostic uses archived reference final c and exact matching final S only",
+    "capture_execution_allowed": false,
+    "production_admission": "HOLD",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "original_capture_gap_resolved": false,
+    "continuous_global_supremum_bound": false
+  }
+}

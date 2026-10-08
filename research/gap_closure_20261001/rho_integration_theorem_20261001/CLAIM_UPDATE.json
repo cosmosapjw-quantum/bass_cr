@@ -1,0 +1,113 @@
+{
+  "gap_id": "G01",
+  "database_gap_id": "REPORT_GAP_01",
+  "database_input": {
+    "path": "/workspace/scratch/63ee2321a512/user_import_v3/deliverables/BASS_CR_SOURCE_DATABASE_20261001_v3.sqlite",
+    "sha256": "a8eea6a9136b1a0dcd2c154823fc0f5a8909cd90228510262e7d27e079a877ea",
+    "row": {
+      "gap_id": "REPORT_GAP_01",
+      "line_number": 1163,
+      "status": "REPORTED_RECOMMENDATION_NOT_VALIDATED",
+      "verbatim": "| **P0** | No formal project theorem connecting local \\(\\rho\\) to finite/infinite accumulated selected probability | Theory | Write `B0_RHO_INTEGRATION_THEOREM` with assumptions, proof, units, and state-normalization factor | **0.5–1 researcher-day** | Machine-checkable test cases plus documented theorem; no new physics assumption |"
+    }
+  },
+  "status_before": "REPORTED_RECOMMENDATION_NOT_VALIDATED",
+  "status_after": "CLOSED",
+  "closure_label": "CLOSED_DERIVED_AND_SYMBOLICALLY_VERIFIED",
+  "evidence_status": [
+    "DERIVED",
+    "SYMBOLICALLY_VERIFIED",
+    "NUMERICALLY_CHECKED",
+    "IMPLEMENTATION_VERIFIED"
+  ],
+  "scope": "Conditional exact finite moving-basis theorem and small synthetic audit kernel",
+  "claims_closed": [
+    "fixed-J Pi is the S-orthogonal coefficient projector; Q is its Hermitian quadratic form",
+    "metric norm conservation under Hermitian H and Sdot=D+D†",
+    "Pdot=c†Wc and sharp instantaneous |Pdot|<=N rho",
+    "finite-interval |Delta P|<=N integral rho",
+    "rho in L1 tail implies existence of P_infinity and remainder inequality",
+    "constant nonsingular basis covariance with consistent J transformation",
+    "dimension and normalization audit"
+  ],
+  "claims_open": [
+    "physical implementation satisfies independently evaluated Sdot=D+D†",
+    "physical rho has a certified continuous integrable tail majorant",
+    "actual state tightness and finite-window closure",
+    "solver conditioning over physical matrix domain"
+  ],
+  "what_was_implementation_verified": "Self-contained synthetic rate_forms kernel only; no production integration or physical operators executed",
+  "source_ids_used": [],
+  "project_evidence": [
+    "AGENTS.md",
+    "docs/CHATGPT_CODEX_DIVISION_OF_LABOR_KO.md",
+    "docs/READBACK_POLICY.md",
+    "research/foundation_rebuild/ncp_shared_research_20260928/r4p0a_b0_tail_rate_20260930/RESEARCH_AND_HANDOFF_KO.md"
+  ],
+  "inspected_prior_formulation_commit": "432010f2afd5305ca63933056f50584c01e4e524",
+  "tests": [
+    {
+      "command": "python -m unittest discover -s . -p test_rho_theorem.py -v",
+      "stage": "TDD_RED",
+      "exit_code": 1,
+      "expected_failure": "ModuleNotFoundError: rho_theorem",
+      "output_file": "TDD_RED.txt"
+    },
+    {
+      "command": "python -m unittest discover -s . -p test_rho_theorem.py -v",
+      "stage": "TDD_GREEN",
+      "exit_code": 0,
+      "tests": 12,
+      "output_file": "TDD_GREEN.txt"
+    },
+    {
+      "command": "python symbolic_checks.py",
+      "stage": "EXACT_RATIONAL_REPLAY",
+      "exit_code": 0,
+      "cases": 6,
+      "assertions": 78,
+      "output_file": "EXACT_RATIONAL_REPLAY.json"
+    }
+  ],
+  "symbolic": {
+    "tool": "Wolfram Language evaluator",
+    "input_file": "symbolic_checks.wls",
+    "output_file": "WOLFRAM_CAS_RESPONSE.json",
+    "parametric_identities": 14,
+    "all_passed": true,
+    "scope": "2x2 parameter family; general proof is THEOREM.md",
+    "preceding_context_lookup": "Internal error, preserved WOLFRAM_CONTEXT_RESPONSE.json"
+  },
+  "new_external_tool_calls": 2,
+  "new_external_symbolic_evaluator_calls": 1,
+  "new_external_physical_runs": 0,
+  "new_native_calls": 0,
+  "authorization_consumed": "Current user research contract only; no historical native authorization",
+  "claim_gate_change": "G01 conditional theorem closes; no physical claim ceiling changes",
+  "claim_ceilings": {
+    "capture": false,
+    "production": "HOLD",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "original_capture_gap_resolved": false,
+    "continuous_global_supremum_bound": false,
+    "continuous_trajectory_error_bound": false
+  },
+  "blocker_class": null,
+  "next_minimum_action": "Integrate conditional theorem into G07/G08 and G04 reasoning; independently validate G02 and obtain continuous majorant before applying a physical infinite-tail bound.",
+  "artifacts": [
+    "ASSUMPTIONS.json",
+    "CLAIM_UPDATE.json",
+    "EXACT_RATIONAL_REPLAY.json",
+    "TDD_GREEN.txt",
+    "TDD_RED.txt",
+    "THEOREM.md",
+    "VALIDATION.json",
+    "WOLFRAM_CAS_RESPONSE.json",
+    "WOLFRAM_CONTEXT_RESPONSE.json",
+    "rho_theorem.py",
+    "symbolic_checks.py",
+    "symbolic_checks.wls",
+    "test_rho_theorem.py"
+  ]
+}

@@ -1,0 +1,16 @@
+F..................                                                      [100%]
+=================================== FAILURES ===================================
+____________ test_true_even_model_with_high_p_can_pass_heldout_gate ____________
+
+    def test_true_even_model_with_high_p_can_pass_heldout_gate():
+        dt=[.05,.025,.0125,.00625]
+        v=[.008-.01*t*t-5*t**4 for t in dt]
+        out=MOD.channel_gate(v,dt,forecasts(v,dt))
+        assert out['accepted']
+>       assert out['fine_observed_order']>2.5
+E       assert 2.341307110745633 > 2.5
+
+tests/test_r3m26_temporal.py:24: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_r3m26_temporal.py::test_true_even_model_with_high_p_can_pass_heldout_gate
+1 failed, 18 passed in 2.60s

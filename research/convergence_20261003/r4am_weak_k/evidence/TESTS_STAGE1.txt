@@ -1,0 +1,140 @@
+....F..FFF.                                                              [100%]
+=================================== FAILURES ===================================
+___________ test_origin_kernel_zero_radius_finite_zero[0-1-origin_T] ___________
+
+side = 'origin_T', la = 1, lb = 0
+
+    @pytest.mark.parametrize('side',['origin_T','origin_P'])
+    @pytest.mark.parametrize('la',[0,1])
+    @pytest.mark.parametrize('lb',[0,1])
+    def test_origin_kernel_zero_radius_finite_zero(side,la,lb):
+        c=candidate();ct=Context(F(1),F(3),F(2),F(3,2))
+        cell=Cell(side,0 if side=='origin_T' else 3,3 if side=='origin_T' else 0)
+>       ks=kernel(c,cell,ct,F(0),F(2,5),la,lb,0,0).value()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_weak_basic.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+source/weak_kernel.py:183: in kernel
+    ft,gts=origin_field(candidate,a,r,n,ma,True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+source/weak_kernel.py:127: in origin_field
+    return g*f,[g*n[k]*(C(r)*fp)+(P(c[k])-g*n[k])*f for k in range(3)]
+           ^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <moments.P object at 0x7fe2ce3293c0>, b = 0
+
+    def __mul__(self,b):
+        b=P(b);d={}
+        for (a,c),v in self.terms.items():
+>           for (b,e),w in b.terms.items():
+                           ^^^^^^^
+E           AttributeError: 'int' object has no attribute 'terms'
+
+source/moments.py:67: AttributeError
+___________ test_origin_kernel_zero_radius_finite_zero[1-0-origin_P] ___________
+
+side = 'origin_P', la = 0, lb = 1
+
+    @pytest.mark.parametrize('side',['origin_T','origin_P'])
+    @pytest.mark.parametrize('la',[0,1])
+    @pytest.mark.parametrize('lb',[0,1])
+    def test_origin_kernel_zero_radius_finite_zero(side,la,lb):
+        c=candidate();ct=Context(F(1),F(3),F(2),F(3,2))
+        cell=Cell(side,0 if side=='origin_T' else 3,3 if side=='origin_T' else 0)
+>       ks=kernel(c,cell,ct,F(0),F(2,5),la,lb,0,0).value()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_weak_basic.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+source/weak_kernel.py:191: in kernel
+    fp,gps=origin_field(candidate,b,r,n,mb,False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+source/weak_kernel.py:127: in origin_field
+    return g*f,[g*n[k]*(C(r)*fp)+(P(c[k])-g*n[k])*f for k in range(3)]
+           ^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <moments.P object at 0x7fe2ce323bb0>, b = 0
+
+    def __mul__(self,b):
+        b=P(b);d={}
+        for (a,c),v in self.terms.items():
+>           for (b,e),w in b.terms.items():
+                           ^^^^^^^
+E           AttributeError: 'int' object has no attribute 'terms'
+
+source/moments.py:67: AttributeError
+___________ test_origin_kernel_zero_radius_finite_zero[1-1-origin_T] ___________
+
+side = 'origin_T', la = 1, lb = 1
+
+    @pytest.mark.parametrize('side',['origin_T','origin_P'])
+    @pytest.mark.parametrize('la',[0,1])
+    @pytest.mark.parametrize('lb',[0,1])
+    def test_origin_kernel_zero_radius_finite_zero(side,la,lb):
+        c=candidate();ct=Context(F(1),F(3),F(2),F(3,2))
+        cell=Cell(side,0 if side=='origin_T' else 3,3 if side=='origin_T' else 0)
+>       ks=kernel(c,cell,ct,F(0),F(2,5),la,lb,0,0).value()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_weak_basic.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+source/weak_kernel.py:183: in kernel
+    ft,gts=origin_field(candidate,a,r,n,ma,True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+source/weak_kernel.py:127: in origin_field
+    return g*f,[g*n[k]*(C(r)*fp)+(P(c[k])-g*n[k])*f for k in range(3)]
+           ^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <moments.P object at 0x7fe2ce3149d0>, b = 0
+
+    def __mul__(self,b):
+        b=P(b);d={}
+        for (a,c),v in self.terms.items():
+>           for (b,e),w in b.terms.items():
+                           ^^^^^^^
+E           AttributeError: 'int' object has no attribute 'terms'
+
+source/moments.py:67: AttributeError
+___________ test_origin_kernel_zero_radius_finite_zero[1-1-origin_P] ___________
+
+side = 'origin_P', la = 1, lb = 1
+
+    @pytest.mark.parametrize('side',['origin_T','origin_P'])
+    @pytest.mark.parametrize('la',[0,1])
+    @pytest.mark.parametrize('lb',[0,1])
+    def test_origin_kernel_zero_radius_finite_zero(side,la,lb):
+        c=candidate();ct=Context(F(1),F(3),F(2),F(3,2))
+        cell=Cell(side,0 if side=='origin_T' else 3,3 if side=='origin_T' else 0)
+>       ks=kernel(c,cell,ct,F(0),F(2,5),la,lb,0,0).value()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_weak_basic.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+source/weak_kernel.py:191: in kernel
+    fp,gps=origin_field(candidate,b,r,n,mb,False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+source/weak_kernel.py:127: in origin_field
+    return g*f,[g*n[k]*(C(r)*fp)+(P(c[k])-g*n[k])*f for k in range(3)]
+           ^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <moments.P object at 0x7fe2ce3620e0>, b = 0
+
+    def __mul__(self,b):
+        b=P(b);d={}
+        for (a,c),v in self.terms.items():
+>           for (b,e),w in b.terms.items():
+                           ^^^^^^^
+E           AttributeError: 'int' object has no attribute 'terms'
+
+source/moments.py:67: AttributeError
+=========================== short test summary info ============================
+FAILED tests/test_weak_basic.py::test_origin_kernel_zero_radius_finite_zero[0-1-origin_T] - AttributeError: 'int' object has no attribute 'terms'
+FAILED tests/test_weak_basic.py::test_origin_kernel_zero_radius_finite_zero[1-0-origin_P] - AttributeError: 'int' object has no attribute 'terms'
+FAILED tests/test_weak_basic.py::test_origin_kernel_zero_radius_finite_zero[1-1-origin_T] - AttributeError: 'int' object has no attribute 'terms'
+FAILED tests/test_weak_basic.py::test_origin_kernel_zero_radius_finite_zero[1-1-origin_P] - AttributeError: 'int' object has no attribute 'terms'
+4 failed, 7 passed in 0.17s

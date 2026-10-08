@@ -1,0 +1,5221 @@
+REI_F05_SOURCE_V1
+rust/rei_microphysics/src/adaptive_history.rs 18880
+//! Uniform FT03 backward-Euler trial over the incoming seven-coordinate box.
+//! The returned half-step box is the next accepted parent; no radius is reset.
+use crate::{
+    ft03_implicit_step, ft03_interval_rhs, interval_ad::Jet, interval_math::Interval, ForwardError,
+    Ft03Events, Ft03Model, HHeState, StepControl,
+};
+
+const N: usize = 7;
+type V = [Interval; N];
+type M = [[Interval; N]; N];
+const IDS: [&str; 3] = ["FULL_BE_ENDPOINT", "HALF1_BE_ENDPOINT", "HALF2_BE_ENDPOINT"];
+fn fail(code: &'static str) -> ForwardError {
+    ForwardError::InvalidInput(code)
+}
+fn domain(_: crate::interval_math::IntervalError) -> ForwardError {
+    fail("FT03_CERT_INTERVAL")
+}
+fn p(x: f64) -> Result<Interval, ForwardError> {
+    Interval::point(x).map_err(domain)
+}
+fn z() -> Interval {
+    Interval { lo: 0.0, hi: 0.0 }
+}
+fn one() -> Interval {
+    Interval { lo: 1.0, hi: 1.0 }
+}
+fn add(a: Interval, b: Interval) -> Result<Interval, ForwardError> {
+    a.add(&b).map_err(domain)
+}
+fn sub(a: Interval, b: Interval) -> Result<Interval, ForwardError> {
+    a.sub(&b).map_err(domain)
+}
+fn mul(a: Interval, b: Interval) -> Result<Interval, ForwardError> {
+    a.mul(&b).map_err(domain)
+}
+fn div(a: Interval, b: Interval) -> Result<Interval, ForwardError> {
+    a.div(&b).map_err(domain)
+}
+fn abs(a: Interval) -> f64 {
+    a.lo.abs().max(a.hi.abs())
+}
+fn ubadd(a: f64, b: f64) -> f64 {
+    up(a + b)
+}
+fn ubmul(a: f64, b: f64) -> f64 {
+    up(a * b)
+}
+fn down(x: f64) -> f64 {
+    if !x.is_finite() {
+        return x;
+    }
+    if x == 0.0 {
+        -f64::from_bits(1)
+    } else {
+        f64::from_bits(if x > 0.0 {
+            x.to_bits() - 1
+        } else {
+            x.to_bits() + 1
+        })
+    }
+}
+fn up(x: f64) -> f64 {
+    if !x.is_finite() {
+        return x;
+    }
+    if x == 0.0 {
+        f64::from_bits(1)
+    } else {
+        f64::from_bits(if x > 0.0 {
+            x.to_bits() + 1
+        } else {
+            x.to_bits() - 1
+        })
+    }
+}
+fn outer(lo: f64, hi: f64) -> Result<Interval, ForwardError> {
+    Interval::new(down(lo), up(hi)).map_err(domain)
+}
+fn mid(a: Interval) -> f64 {
+    a.lo / 2.0 + a.hi / 2.0
+}
+fn mm(a: &M, b: &M) -> Result<M, ForwardError> {
+    let mut c = [[z(); N]; N];
+    for i in 0..N {
+        for j in 0..N {
+            for k in 0..N {
+                c[i][j] = add(c[i][j], mul(a[i][k], b[k][j])?)?;
+            }
+        }
+    }
+    Ok(c)
+}
+fn norm(a: &M) -> f64 {
+    (0..N)
+        .map(|i| (0..N).fold(0.0, |s, j| ubadd(s, abs(a[i][j]))))
+        .fold(0.0, f64::max)
+}
+fn identity() -> M {
+    std::array::from_fn(|i| std::array::from_fn(|j| if i == j { one() } else { z() }))
+}
+fn subtract_matrix(a: &M, b: &M) -> Result<M, ForwardError> {
+    let mut c = [[z(); N]; N];
+    for i in 0..N {
+        for j in 0..N {
+            c[i][j] = sub(a[i][j], b[i][j])?;
+        }
+    }
+    Ok(c)
+}
+fn inverse(mut a: [[f64; N]; N]) -> Result<[[f64; N]; N], ForwardError> {
+    let mut b = [[0.0; N]; N];
+    for i in 0..N {
+        b[i][i] = 1.0;
+    }
+    for k in 0..N {
+        let pivot = (k..N)
+            .max_by(|&i, &j| a[i][k].abs().total_cmp(&a[j][k].abs()))
+            .unwrap();
+        if !a[pivot][k].is_finite() || a[pivot][k].abs() < 1e-300 {
+            return Err(fail("FT03_CERT_SINGULAR"));
+        }
+        a.swap(k, pivot);
+        b.swap(k, pivot);
+        let t = a[k][k];
+        for j in 0..N {
+            a[k][j] /= t;
+            b[k][j] /= t;
+        }
+        for i in 0..N {
+            if i != k {
+                let t = a[i][k];
+                for j in 0..N {
+                    a[i][j] -= t * a[k][j];
+                    b[i][j] -= t * b[k][j];
+                }
+            }
+        }
+    }
+    Ok(b)
+}
+pub fn scaled(model: &Ft03Model, s: &HHeState) -> [f64; N] {
+    let nh = model.gas.n_h_cm3;
+    [
+        s.fractions[0],
+        s.fractions[1],
+        s.fractions[2],
+        s.u_erg_cm3 / (nh * model.gas.ev_erg),
+        s.photon_cm3[0] / nh,
+        s.photon_cm3[1] / nh,
+        s.photon_cm3[2] / nh,
+    ]
+}
+fn scaled_enclosure(model: &Ft03Model, s: &HHeState) -> Result<V, ForwardError> {
+    let nh = p(model.gas.n_h_cm3)?;
+    let ev = p(model.gas.ev_erg)?;
+    Ok([
+        p(s.fractions[0])?,
+        p(s.fractions[1])?,
+        p(s.fractions[2])?,
+        div(p(s.u_erg_cm3)?, mul(nh, ev)?)?,
+        div(p(s.photon_cm3[0])?, nh)?,
+        div(p(s.photon_cm3[1])?, nh)?,
+        div(p(s.photon_cm3[2])?, nh)?,
+    ])
+}
+fn contains(b: &V, v: &V) -> bool {
+    (0..N).all(|i| b[i].lo <= v[i].lo && v[i].hi <= b[i].hi)
+}
+fn residual(model: &Ft03Model, y: &V, parent: &V, dt: f64) -> Result<V, ForwardError> {
+    let f = ft03_interval_rhs(model, y)?;
+    let t = p(dt)?;
+    let mut r = [z(); N];
+    for i in 0..N {
+        r[i] = sub(sub(y[i], parent[i])?, mul(t, f[i].value)?)?;
+    }
+    Ok(r)
+}
+fn a_matrix(j: &[Jet; N], dt: f64) -> Result<M, ForwardError> {
+    let mut a = identity();
+    let d = p(dt)?;
+    for i in 0..N {
+        for k in 0..N {
+            a[i][k] = sub(a[i][k], mul(d, j[i].gradient[k])?)?;
+        }
+    }
+    Ok(a)
+}
+fn preconditioner(
+    model: &Ft03Model,
+    center: &[f64; N],
+    dt: f64,
+) -> Result<[[f64; N]; N], ForwardError> {
+    let at = center.map(p).map(|x| x.unwrap());
+    let f = ft03_interval_rhs(model, &at)?;
+    let a = a_matrix(&f, dt)?;
+    inverse(std::array::from_fn(|i| {
+        std::array::from_fn(|j| mid(a[i][j]))
+    }))
+}
+
+#[derive(Clone, Debug)]
+pub struct RootSite {
+    pub id: &'static str,
+    pub center: [f64; N],
+    pub r#box: V,
+    pub preconditioner: [[f64; N]; N],
+    pub step_s: f64,
+}
+#[derive(Clone, Debug)]
+pub struct CertifiedTrial {
+    pub state: HHeState,
+    pub events: Ft03Events,
+    pub next_box: V,
+    pub local_bounds: [f64; 4],
+    pub public_widths: [[f64; 4]; 2],
+    pub sites: [RootSite; 3],
+}
+struct SiteMath {
+    site: RootSite,
+    jac: M,
+    hess: [M; N],
+    jc: M,
+    eta: f64,
+}
+
+fn certify_site(
+    model: &Ft03Model,
+    id: &'static str,
+    center: [f64; N],
+    parent: &V,
+    parent_center: [f64; N],
+    parent_eta: f64,
+    dt: f64,
+) -> Result<SiteMath, ForwardError> {
+    let c = preconditioner(model, &center, dt)?;
+    let ci: M = std::array::from_fn(|i| std::array::from_fn(|j| p(c[i][j]).unwrap()));
+    let yc = center.map(p).map(|x| x.unwrap());
+    let parent_mid = parent_center.map(p).map(|x| x.unwrap());
+    let r0 = residual(model, &yc, parent, dt)?;
+    let mut cr = [z(); N];
+    for i in 0..N {
+        for j in 0..N {
+            cr[i] = add(cr[i], mul(ci[i][j], r0[j])?)?;
+        }
+    }
+    let mut radii = [0.0; N];
+    for i in 0..N {
+        radii[i] = ubadd(
+            ubmul(2.0, abs(cr[i])),
+            ubmul(1e-12, center[i].abs().max(1.0)),
+        );
+    }
+    let mut bx: V =
+        std::array::from_fn(|i| outer(center[i] - radii[i], center[i] + radii[i]).unwrap());
+    // A Krawczyk image is an enclosure of every root. Rebox near that image,
+    // then validate strict inclusion on the final box. This avoids multiplying
+    // inherited radii by an arbitrary factor at every accepted time step.
+    let mut q = 0.0;
+    let mut valid = false;
+    for iteration in 0..7 {
+        let fj = ft03_interval_rhs(model, &bx)?;
+        let a = a_matrix(&fj, dt)?;
+        let b = subtract_matrix(&identity(), &mm(&ci, &a)?)?;
+        q = norm(&b);
+        if !q.is_finite() || q >= 1.0 {
+            return Err(fail("FT03_CERT_DERIVATIVE_UNBOUNDED"));
+        }
+        let mut k = [z(); N];
+        for i in 0..N {
+            let mut v = sub(yc[i], cr[i])?;
+            for j in 0..N {
+                v = add(v, mul(b[i][j], sub(bx[j], yc[j])?)?)?;
+            }
+            k[i] = v;
+        }
+        let weighted = (0..N)
+            .map(|i| {
+                let rad = (center[i] - bx[i].lo).min(bx[i].hi - center[i]);
+                (0..N).fold(0.0, |s, j| {
+                    ubadd(
+                        s,
+                        up(ubmul(
+                            abs(b[i][j]),
+                            (center[j] - bx[j].lo).max(bx[j].hi - center[j]),
+                        ) / rad),
+                    )
+                })
+            })
+            .fold(0.0, f64::max);
+        if (0..N).all(|i| bx[i].lo < k[i].lo && k[i].hi < bx[i].hi)
+            && weighted < 1.0
+            && iteration > 0
+        {
+            valid = true;
+            break;
+        }
+        // The small relative margin is for strict inclusion and binary rounding.
+        // Preserve the approximate centre in the reboxed interval.
+        bx = std::array::from_fn(|i| {
+            let width = (k[i].hi - k[i].lo)
+                .abs()
+                .max(1e-15 * center[i].abs().max(1.0));
+            let margin = width * 1e-4 + 1e-14 * center[i].abs().max(1.0);
+            outer(
+                k[i].lo.min(center[i]) - margin,
+                k[i].hi.max(center[i]) + margin,
+            )
+            .unwrap()
+        });
+    }
+    if !valid {
+        return Err(fail("FT03_CERT_ROOT_INCLUSION"));
+    }
+    let rc = residual(model, &yc, &parent_mid, dt)?;
+    let mut delta: f64 = 0.0;
+    for i in 0..N {
+        let mut v = z();
+        for j in 0..N {
+            v = add(v, mul(ci[i][j], rc[j])?)?;
+        }
+        let mut bound = abs(v);
+        for j in 0..N {
+            bound = ubadd(bound, ubmul(abs(ci[i][j]), parent_eta));
+        }
+        delta = delta.max(bound);
+    }
+    let eta = up(delta / (1.0 - q));
+    let ycenter: V = std::array::from_fn(|i| outer(center[i] - eta, center[i] + eta).unwrap());
+    if !contains(&bx, &ycenter) {
+        return Err(fail("FT03_CERT_CENTER_ERROR"));
+    }
+    let (jac, hess) = derivatives(model, &bx, dt, &ci)?;
+    let (jc, _) = derivatives(model, &ycenter, dt, &ci)?;
+    Ok(SiteMath {
+        site: RootSite {
+            id,
+            center,
+            r#box: bx,
+            preconditioner: c,
+            step_s: dt,
+        },
+        jac,
+        hess,
+        jc,
+        eta,
+    })
+}
+
+fn derivatives(model: &Ft03Model, bx: &V, dt: f64, c: &M) -> Result<(M, [M; N]), ForwardError> {
+    let f = ft03_interval_rhs(model, bx)?;
+    let a = a_matrix(&f, dt)?;
+    let b = subtract_matrix(&identity(), &mm(c, &a)?)?;
+    let q = norm(&b);
+    if !q.is_finite() || q >= 1.0 {
+        return Err(fail("FT03_CERT_DERIVATIVE_UNBOUNDED"));
+    }
+    let mut sum = identity();
+    let mut term = identity();
+    for _ in 0..8 {
+        term = mm(&term, &b)?;
+        for i in 0..N {
+            for j in 0..N {
+                sum[i][j] = add(sum[i][j], term[i][j])?;
+            }
+        }
+    }
+    let mut inv = mm(&sum, c)?;
+    let mut qpower = one();
+    for _ in 0..9 {
+        qpower = mul(qpower, p(q)?)?;
+    }
+    let tail = div(mul(qpower, p(norm(c))?)?, sub(one(), p(q)?)?)?.hi;
+    if !tail.is_finite() {
+        return Err(fail("FT03_CERT_DERIVATIVE_UNBOUNDED"));
+    }
+    for row in &mut inv {
+        for x in row {
+            x.lo = down(x.lo - tail);
+            x.hi = up(x.hi + tail);
+        }
+    }
+    let d = p(dt)?;
+    let mut h = [[[z(); N]; N]; N];
+    for output in 0..N {
+        for i in 0..N {
+            for j in 0..N {
+                let mut v = z();
+                for k in 0..N {
+                    for a in 0..N {
+                        for bb in 0..N {
+                            v = add(
+                                v,
+                                mul(
+                                    mul(
+                                        mul(mul(d, inv[output][k])?, f[k].hessian[a][bb])?,
+                                        inv[a][i],
+                                    )?,
+                                    inv[bb][j],
+                                )?,
+                            )?;
+                        }
+                    }
+                }
+                h[output][i][j] = v;
+            }
+        }
+    }
+    Ok((inv, h))
+}
+
+fn obs(model: &Ft03Model, bx: &V) -> Result<[Jet; 4], ForwardError> {
+    let y: [Jet; N] = std::array::from_fn(|i| Jet::variable(bx[i], i).unwrap());
+    let nh = p(model.gas.n_h_cm3)?;
+    let fhe = div(p(model.gas.n_he_cm3)?, nh)?;
+    let temperature_factor = div(
+        mul(p(2.0)?, p(model.gas.ev_erg)?)?,
+        mul(p(3.0)?, p(model.gas.kb_erg_k)?)?,
+    )?;
+    let k = Jet::constant(temperature_factor).map_err(domain)?;
+    let f = Jet::constant(fhe).map_err(domain)?;
+    let onej = Jet::constant(one()).map_err(domain)?;
+    let two = Jet::constant(p(2.0)?).map_err(domain)?;
+    let particles = onej
+        .add(&f)
+        .and_then(|v| v.add(&y[0]))
+        .and_then(|v| {
+            y[2].mul(&two)
+                .and_then(|h| y[1].add(&h))
+                .and_then(|h| h.mul(&f))
+                .and_then(|h| v.add(&h))
+        })
+        .map_err(domain)?;
+    let logt = k
+        .mul(&y[3])
+        .and_then(|v| v.div(&particles))
+        .and_then(|v| v.ln())
+        .map_err(domain)?;
+    Ok([y[0].clone(), y[1].clone(), y[2].clone(), logt])
+}
+fn compose(first: &SiteMath, second: &SiteMath) -> Result<(M, [M; N], M), ForwardError> {
+    let j = mm(&second.jac, &first.jac)?;
+    let jc = mm(&second.jc, &first.jc)?;
+    let mut h = [[[z(); N]; N]; N];
+    for o in 0..N {
+        for i in 0..N {
+            for jj in 0..N {
+                let mut v = z();
+                for a in 0..N {
+                    v = add(v, mul(second.jac[o][a], first.hess[a][i][jj])?)?;
+                    for b in 0..N {
+                        v = add(
+                            v,
+                            mul(
+                                mul(second.hess[o][a][b], first.jac[a][i])?,
+                                first.jac[b][jj],
+                            )?,
+                        )?;
+                    }
+                }
+                h[o][i][jj] = v;
+            }
+        }
+    }
+    Ok((j, h, jc))
+}
+struct Affine {
+    a: f64,
+    b: [f64; N],
+    rho: f64,
+    width: f64,
+}
+fn affine(
+    model: &Ft03Model,
+    root: &SiteMath,
+    j: &M,
+    h: &[M; N],
+    jc: &M,
+    radii: &[f64; N],
+) -> Result<[Affine; 4], ForwardError> {
+    let o = obs(model, &root.site.r#box)?;
+    let yc = root.site.center.map(p).map(|x| x.unwrap());
+    let oc = obs(model, &yc)?;
+    let yerr: V = std::array::from_fn(|i| {
+        outer(
+            root.site.center[i] - root.eta,
+            root.site.center[i] + root.eta,
+        )
+        .unwrap()
+    });
+    let oe = obs(model, &yerr)?;
+    let mut result = Vec::with_capacity(4);
+    for k in 0..4 {
+        let mut coeff = [z(); N];
+        for i in 0..N {
+            for a in 0..N {
+                coeff[i] = add(coeff[i], mul(oe[k].gradient[a], jc[a][i])?)?;
+            }
+        }
+        let b = coeff.map(mid);
+        let a = mid(oc[k].value);
+        let mut epsa = abs(sub(oc[k].value, p(a)?)?);
+        for i in 0..N {
+            epsa = ubadd(epsa, ubmul(abs(o[k].gradient[i]), root.eta));
+        }
+        let mut rho = epsa;
+        for i in 0..N {
+            rho = ubadd(rho, ubmul(abs(sub(coeff[i], p(b[i])?)?), radii[i]));
+        }
+        for i in 0..N {
+            for jj in 0..N {
+                let mut hij = z();
+                for a in 0..N {
+                    hij = add(hij, mul(o[k].gradient[a], h[a][i][jj])?)?;
+                    for bb in 0..N {
+                        hij = add(
+                            hij,
+                            mul(mul(mul(o[k].hessian[a][bb], j[a][i])?, j[bb][jj])?, one())?,
+                        )?;
+                    }
+                }
+                rho = ubadd(rho, ubmul(0.5, ubmul(abs(hij), ubmul(radii[i], radii[jj]))));
+            }
+        }
+        let mut radius = rho;
+        for i in 0..N {
+            radius = ubadd(radius, ubmul(b[i].abs(), radii[i]));
+        }
+        let width = ubmul(2.0, radius);
+        result.push(Affine { a, b, rho, width });
+    }
+    Ok(result.try_into().map_err(|_| fail("FT03_CERT_INTERNAL"))?)
+}
+
+pub fn certified_ft03_trial(
+    model: &Ft03Model,
+    old: &HHeState,
+    parent: &V,
+    dt: f64,
+    control: StepControl,
+) -> Result<CertifiedTrial, ForwardError> {
+    if !dt.is_finite() || dt <= 0.0 {
+        return Err(fail("FT03_CERT_STEP_CONTROL"));
+    }
+    let old_exact = scaled_enclosure(model, old)?;
+    if !contains(parent, &old_exact) {
+        return Err(fail("FT03_CERT_PARENT_EXCLUDES_STATE"));
+    }
+    let center = scaled(model, old);
+    let radii = std::array::from_fn(|i| {
+        let c = p(center[i]).unwrap();
+        abs(sub(parent[i], c).unwrap())
+    });
+    let full = ft03_implicit_step(model, old, dt, control)?;
+    let half1 = ft03_implicit_step(model, old, dt / 2.0, control)?;
+    let half2 = ft03_implicit_step(model, &half1.state, dt / 2.0, control)?;
+    let f = certify_site(
+        model,
+        IDS[0],
+        scaled(model, &full.state),
+        parent,
+        center,
+        0.0,
+        dt,
+    )?;
+    let h1 = certify_site(
+        model,
+        IDS[1],
+        scaled(model, &half1.state),
+        parent,
+        center,
+        0.0,
+        dt / 2.0,
+    )?;
+    let h2 = certify_site(
+        model,
+        IDS[2],
+        scaled(model, &half2.state),
+        &h1.site.r#box,
+        h1.site.center,
+        h1.eta,
+        dt / 2.0,
+    )?;
+    let (j, h, jc) = compose(&h1, &h2)?;
+    let of = affine(model, &f, &f.jac, &f.hess, &f.jc, &radii)?;
+    let oh = affine(model, &h2, &j, &h, &jc, &radii)?;
+    let mut local = [0.0; 4];
+    let mut widths = [[0.0; 4]; 2];
+    for k in 0..4 {
+        let mut v = ubadd(
+            abs(sub(p(of[k].a)?, p(oh[k].a)?)?),
+            ubadd(of[k].rho, oh[k].rho),
+        );
+        for i in 0..N {
+            v = ubadd(
+                v,
+                ubmul(abs(sub(p(of[k].b[i])?, p(oh[k].b[i])?)?), radii[i]),
+            );
+        }
+        local[k] = v;
+        widths[0][k] = of[k].width;
+        widths[1][k] = oh[k].width;
+    }
+    if local.iter().any(|x| !x.is_finite() || *x >= 2e-4) {
+        return Err(fail("FT03_CERT_LOCAL_ERROR"));
+    }
+    if widths
+        .iter()
+        .flatten()
+        .any(|x| !x.is_finite() || *x >= 2e-3)
+    {
+        return Err(fail("FT03_CERT_PUBLIC_WIDTH"));
+    }
+    let state = half2.state;
+    let exact = scaled_enclosure(model, &state)?;
+    let mut next = h2.site.r#box;
+    for i in 0..N {
+        next[i] = outer(next[i].lo.min(exact[i].lo), next[i].hi.max(exact[i].hi))?;
+    }
+    let events = half1.events.plus(half2.events);
+    Ok(CertifiedTrial {
+        state,
+        events,
+        next_box: next,
+        local_bounds: local,
+        public_widths: widths,
+        sites: [f.site, h1.site, h2.site],
+    })
+}
+pub fn try_certified_ft03_step(
+    model: &Ft03Model,
+    state: &mut HHeState,
+    parent: &mut V,
+    dt: f64,
+    control: StepControl,
+) -> Result<CertifiedTrial, ForwardError> {
+    let trial = certified_ft03_trial(model, state, parent, dt, control)?;
+    *state = trial.state;
+    *parent = trial.next_box;
+    Ok(trial)
+}
+
+rust/rei_microphysics/src/angular_photons.rs 9735
+//! Positive packet measure and conservative angular/energy deposition.
+use crate::{CharacteristicRay, ForwardError, GeometrySnapshot};
+
+fn invalid(tag: &'static str) -> ForwardError {
+    ForwardError::InvalidInput(tag)
+}
+
+fn nonnegative(x: f64, tag: &'static str) -> Result<f64, ForwardError> {
+    if x.is_finite() && x >= 0.0 {
+        Ok(x)
+    } else {
+        Err(invalid(tag))
+    }
+}
+
+#[derive(Clone, Copy, Default)]
+struct MeasureSum {
+    sum: f64,
+    correction: f64,
+}
+impl MeasureSum {
+    fn add(&mut self, value: f64) -> Result<(), ForwardError> {
+        nonnegative(value, "PhotonMeasure")?;
+        let next = nonnegative(self.sum + value, "PhotonMeasureOverflow")?;
+        let error = if self.sum >= value {
+            (self.sum - next) + value
+        } else {
+            (value - next) + self.sum
+        };
+        self.correction += error;
+        if !self.correction.is_finite() {
+            return Err(invalid("PhotonMeasureOverflow"));
+        }
+        self.sum = next;
+        Ok(())
+    }
+    fn value(self) -> Result<f64, ForwardError> {
+        nonnegative(self.sum + self.correction, "PhotonMeasureOverflow")
+    }
+}
+fn total(values: impl Iterator<Item = f64>) -> Result<f64, ForwardError> {
+    let mut sum = MeasureSum::default();
+    for value in values {
+        sum.add(value)?;
+    }
+    sum.value()
+}
+
+#[derive(Clone, Debug, PartialEq)]
+pub struct PhotonPacket {
+    pub ray: CharacteristicRay,
+    pub comoving_count_cm3: f64,
+}
+
+impl PhotonPacket {
+    pub fn new(ray: CharacteristicRay, comoving_count_cm3: f64) -> Result<Self, ForwardError> {
+        let ray = CharacteristicRay::new(ray.energy_ev, ray.direction, ray.occupation)?;
+        nonnegative(comoving_count_cm3, "PhotonCount")?;
+        Ok(Self {
+            ray,
+            comoving_count_cm3,
+        })
+    }
+
+    fn deposited_energy(&self) -> Result<f64, ForwardError> {
+        Self::new(self.ray, self.comoving_count_cm3)?;
+        let energy = nonnegative(
+            self.ray.energy_ev * self.comoving_count_cm3,
+            "PhotonEnergyMeasure",
+        )?;
+        if energy == 0.0 && self.comoving_count_cm3 != 0.0 {
+            return Err(invalid("PhotonEnergyUnderflow"));
+        }
+        Ok(energy)
+    }
+}
+
+#[derive(Clone, Debug, PartialEq)]
+pub struct RadiationState {
+    pub geometry: GeometrySnapshot,
+    pub packets: Vec<PhotonPacket>,
+}
+
+impl RadiationState {
+    pub fn new(
+        geometry: GeometrySnapshot,
+        packets: Vec<PhotonPacket>,
+    ) -> Result<Self, ForwardError> {
+        geometry.volume_factor()?;
+        let packets: Vec<_> = packets
+            .into_iter()
+            .map(|packet| PhotonPacket::new(packet.ray, packet.comoving_count_cm3))
+            .collect::<Result<_, _>>()?;
+        for packet in &packets {
+            packet.deposited_energy()?;
+        }
+        let state = Self { geometry, packets };
+        state.comoving_photon_count()?;
+        state.comoving_energy_ev_cm3()?;
+        Ok(state)
+    }
+
+    pub fn transport(&self, to: GeometrySnapshot) -> Result<Self, ForwardError> {
+        self.validate()?;
+        to.volume_factor()?;
+        let mut packets = Vec::with_capacity(self.packets.len());
+        for packet in &self.packets {
+            packets.push(PhotonPacket::new(
+                packet.ray.pullback(&self.geometry, &to)?,
+                packet.comoving_count_cm3,
+            )?);
+        }
+        Self::new(to, packets)
+    }
+
+    fn validate(&self) -> Result<(), ForwardError> {
+        self.geometry.volume_factor()?;
+        for packet in &self.packets {
+            PhotonPacket::new(packet.ray, packet.comoving_count_cm3)?;
+        }
+        Ok(())
+    }
+
+    pub fn comoving_photon_count(&self) -> Result<f64, ForwardError> {
+        self.validate()?;
+        total(self.packets.iter().map(|packet| packet.comoving_count_cm3))
+    }
+
+    pub fn proper_photon_density_cm3(&self) -> Result<f64, ForwardError> {
+        let count = self.comoving_photon_count()?;
+        let density = nonnegative(
+            count / self.geometry.volume_factor()?,
+            "PhotonProperDensity",
+        )?;
+        if density == 0.0 && count != 0.0 {
+            return Err(invalid("PhotonDensityUnderflow"));
+        }
+        Ok(density)
+    }
+
+    pub fn comoving_energy_ev_cm3(&self) -> Result<f64, ForwardError> {
+        self.validate()?;
+        let mut sum = MeasureSum::default();
+        for packet in &self.packets {
+            sum.add(packet.deposited_energy()?)?;
+        }
+        sum.value()
+    }
+
+    pub fn remap(&self, grid: &PhotonGrid) -> Result<PhotonBins, ForwardError> {
+        self.validate()?;
+        grid.validate()?;
+        let shape = grid.bin_count()?;
+        let size = shape
+            .checked_add(2)
+            .ok_or_else(|| invalid("PhotonGridShapeOverflow"))?;
+        let mut counts = Vec::new();
+        counts
+            .try_reserve_exact(size)
+            .map_err(|_| invalid("PhotonGridAllocation"))?;
+        counts.resize(size, MeasureSum::default());
+        let mut energies = Vec::new();
+        energies
+            .try_reserve_exact(size)
+            .map_err(|_| invalid("PhotonGridAllocation"))?;
+        energies.resize(size, MeasureSum::default());
+        let nmu = grid.mu_edges.len() - 1;
+        for packet in &self.packets {
+            let packet = PhotonPacket::new(packet.ray, packet.comoving_count_cm3)?;
+            let energy = packet.deposited_energy()?;
+            let count = packet.comoving_count_cm3;
+            let ray_energy = packet.ray.energy_ev;
+            let index = if ray_energy < grid.energy_edges_ev[0] {
+                shape
+            } else if ray_energy > *grid.energy_edges_ev.last().expect("validated edges") {
+                shape + 1
+            } else {
+                let ebin = grid
+                    .energy_edges_ev
+                    .partition_point(|edge| *edge <= ray_energy)
+                    .saturating_sub(1)
+                    .min(grid.energy_edges_ev.len() - 2);
+                let mu = packet.ray.direction[2];
+                let mubin = grid
+                    .mu_edges
+                    .partition_point(|edge| *edge <= mu)
+                    .saturating_sub(1)
+                    .min(nmu - 1);
+                let mut phi = packet.ray.direction[1].atan2(packet.ray.direction[0]);
+                if phi < 0.0 {
+                    phi += std::f64::consts::TAU;
+                }
+                let pbin = ((phi / std::f64::consts::TAU) * grid.phi_bins as f64) as usize;
+                let pbin = pbin.min(grid.phi_bins - 1);
+                (ebin * nmu + mubin) * grid.phi_bins + pbin
+            };
+            counts[index].add(count)?;
+            energies[index].add(energy)?;
+        }
+        let bins = PhotonBins {
+            counts_cm3: counts[..shape]
+                .iter()
+                .map(|sum| sum.value())
+                .collect::<Result<_, _>>()?,
+            energy_ev_cm3: energies[..shape]
+                .iter()
+                .map(|sum| sum.value())
+                .collect::<Result<_, _>>()?,
+            below_count_cm3: counts[shape].value()?,
+            above_count_cm3: counts[shape + 1].value()?,
+            below_energy_ev_cm3: energies[shape].value()?,
+            above_energy_ev_cm3: energies[shape + 1].value()?,
+        };
+        bins.total_count()?;
+        bins.total_energy_ev_cm3()?;
+        Ok(bins)
+    }
+}
+
+#[derive(Clone, Debug, PartialEq)]
+pub struct PhotonGrid {
+    pub energy_edges_ev: Vec<f64>,
+    pub mu_edges: Vec<f64>,
+    pub phi_bins: usize,
+}
+
+impl PhotonGrid {
+    pub fn new(
+        energy_edges_ev: Vec<f64>,
+        mu_edges: Vec<f64>,
+        phi_bins: usize,
+    ) -> Result<Self, ForwardError> {
+        let grid = Self {
+            energy_edges_ev,
+            mu_edges,
+            phi_bins,
+        };
+        grid.validate()?;
+        Ok(grid)
+    }
+
+    fn validate(&self) -> Result<(), ForwardError> {
+        if self.energy_edges_ev.len() < 2 || self.mu_edges.len() < 2 || self.phi_bins == 0 {
+            return Err(invalid("PhotonGridShape"));
+        }
+        for edges in [&self.energy_edges_ev, &self.mu_edges] {
+            if edges.iter().any(|x| !x.is_finite())
+                || edges.windows(2).any(|pair| pair[0] >= pair[1])
+            {
+                return Err(invalid("PhotonGridEdges"));
+            }
+        }
+        if self.energy_edges_ev[0] <= 0.0
+            || self.mu_edges[0] != -1.0
+            || *self.mu_edges.last().expect("checked length") != 1.0
+        {
+            return Err(invalid("PhotonGridDomain"));
+        }
+        self.bin_count()?;
+        Ok(())
+    }
+
+    fn bin_count(&self) -> Result<usize, ForwardError> {
+        (self.energy_edges_ev.len() - 1)
+            .checked_mul(self.mu_edges.len() - 1)
+            .and_then(|n| n.checked_mul(self.phi_bins))
+            .filter(|n| *n <= isize::MAX as usize)
+            .ok_or_else(|| invalid("PhotonGridShapeOverflow"))
+    }
+}
+
+#[derive(Clone, Debug, PartialEq)]
+pub struct PhotonBins {
+    pub counts_cm3: Vec<f64>,
+    pub energy_ev_cm3: Vec<f64>,
+    pub below_count_cm3: f64,
+    pub above_count_cm3: f64,
+    pub below_energy_ev_cm3: f64,
+    pub above_energy_ev_cm3: f64,
+}
+
+impl PhotonBins {
+    pub fn total_count(&self) -> Result<f64, ForwardError> {
+        total(
+            self.counts_cm3
+                .iter()
+                .chain([&self.below_count_cm3, &self.above_count_cm3])
+                .copied(),
+        )
+    }
+
+    pub fn total_energy_ev_cm3(&self) -> Result<f64, ForwardError> {
+        total(
+            self.energy_ev_cm3
+                .iter()
+                .chain([&self.below_energy_ev_cm3, &self.above_energy_ev_cm3])
+                .copied(),
+        )
+    }
+}
+
+rust/rei_microphysics/src/atomic_provider.rs 12939
+//! Scoped reference values from Grackle 3.4.1 and Verner et al. (1996).
+//!
+//! Grackle source: commit af7939494ce65007887ada7b98d1813df6843346,
+//! `rate_functions.c`; copyright Enzo/Grackle development team. Its license
+//! is retained in the handoff's `common/external_reference/grackle_3_4_1/LICENSE`.
+//! These raw values are not a
+//! physical-source admission or a thermal closure.
+
+use crate::ForwardError;
+
+const TINY: f64 = 1e-20;
+const TEVK: f64 = 11605.0;
+const KBOLTZ: f64 = 1.3806504e-16;
+const LN_DHUGE: f64 = 69.07755278982137; // ln(1e30)
+const COMMIT: &str = "af7939494ce65007887ada7b98d1813df6843346";
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum RecombinationCase {
+    A,
+    B,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum CoefficientUnits {
+    Cm3PerSecond,
+    ErgCm3PerSecond,
+    ErgCm6PerSecond,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct RawCoefficient {
+    pub value: f64,
+    pub unit: CoefficientUnits,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum RawProcess {
+    K1,
+    K2,
+    K3,
+    K4,
+    K5,
+    K6,
+    CeHI,
+    CeHeI,
+    CeHeII,
+    CiHeIS,
+    CiHI,
+    CiHeI,
+    CiHeII,
+    ReHII,
+    ReHeII1,
+    ReHeII2,
+    ReHeIII,
+    Brem,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Absorber {
+    HI,
+    HeI,
+    HeII,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum SourceFrame {
+    GasRest,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum ObservableKind {
+    ThermalRate,
+    CoolingCoefficient,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct TemperatureDomain {
+    pub minimum_k: f64,
+    pub maximum_k: f64,
+    pub physical_support_resolved: bool,
+}
+
+#[derive(Debug, Clone, Copy)]
+pub struct RawRecord {
+    pub source_function: &'static str,
+    pub source_commit: &'static str,
+    pub consumer_admission: bool,
+    pub density_prefactor: &'static str,
+    /// HI, HII, HeI, HeII, HeIII, electron.
+    pub species_change: [i8; 6],
+    pub frame: SourceFrame,
+    pub frame_description: &'static str,
+    pub distribution: &'static str,
+    pub domain: TemperatureDomain,
+    pub reference_domain: &'static str,
+    pub observable_kind: ObservableKind,
+    pub observable: &'static str,
+    pub provenance: &'static str,
+}
+
+#[derive(Debug, Clone, Copy, Default)]
+pub struct AtomicProvider;
+
+impl AtomicProvider {
+    /// Returns a raw reference-value provider; no physical consumer is admitted.
+    pub fn reference() -> Self {
+        Self
+    }
+
+    pub fn record(&self, process: RawProcess) -> RawRecord {
+        use RawProcess::*;
+        let (source_function, density_prefactor, species_change) = match process {
+            K1 => ("k1_rate", "n_e*n_HI", [-1, 1, 0, 0, 0, 1]),
+            K2 => ("k2_rate", "n_e*n_HII", [1, -1, 0, 0, 0, -1]),
+            K3 => ("k3_rate", "n_e*n_HeI", [0, 0, -1, 1, 0, 1]),
+            K4 => ("k4_rate", "n_e*n_HeII", [0, 0, 1, -1, 0, -1]),
+            K5 => ("k5_rate", "n_e*n_HeII", [0, 0, 0, -1, 1, 1]),
+            K6 => ("k6_rate", "n_e*n_HeIII", [0, 0, 0, 1, -1, -1]),
+            CeHI => ("ceHI_rate", "n_e*n_HI", [0; 6]),
+            CeHeI => ("ceHeI_rate", "n_e^2*n_HeII", [0; 6]),
+            CeHeII => ("ceHeII_rate", "n_e*n_HeII", [0; 6]),
+            CiHeIS => ("ciHeIS_rate", "n_e^2*n_HeII", [0; 6]),
+            CiHI => ("ciHI_rate", "n_e*n_HI", [0; 6]),
+            CiHeI => ("ciHeI_rate", "n_e*n_HeI", [0; 6]),
+            CiHeII => ("ciHeII_rate", "n_e*n_HeII", [0; 6]),
+            ReHII => ("reHII_rate", "n_e*n_HII", [0; 6]),
+            ReHeII1 => ("reHeII1_rate", "n_e*n_HeII", [0; 6]),
+            ReHeII2 => ("reHeII2_rate", "n_e*n_HeII", [0; 6]),
+            ReHeIII => ("reHeIII_rate", "n_e*n_HeIII", [0; 6]),
+            Brem => ("brem_rate", "n_e*(n_HII+n_HeII+4*n_HeIII)", [0; 6]),
+        };
+        RawRecord {
+            source_function,
+            source_commit: COMMIT,
+            consumer_admission: false,
+            density_prefactor,
+            species_change,
+            frame: SourceFrame::GasRest,
+            frame_description: "gas-rest thermal coefficient with proper gas density",
+            distribution: "Grackle original temperature fit; enabled cooling flags",
+            domain: TemperatureDomain {
+                minimum_k: 100.0,
+                maximum_k: 1e9,
+                physical_support_resolved: false,
+            },
+            reference_domain: "finite 100 <= T/K <= 1e9; implementation guard only",
+            observable_kind: match process {
+                K1 | K2 | K3 | K4 | K5 | K6 => ObservableKind::ThermalRate,
+                _ => ObservableKind::CoolingCoefficient,
+            },
+            observable: "raw source coefficient, not modeled cooling",
+            provenance: "Grackle 3.4.1 exact isolated rate bodies at units=1",
+        }
+    }
+
+    // Preserve the original C source literals, including excess decimal digits.
+    #[allow(clippy::excessive_precision)]
+    pub fn raw_coefficient(
+        &self,
+        process: RawProcess,
+        t: f64,
+        case: RecombinationCase,
+    ) -> Result<RawCoefficient, ForwardError> {
+        if !t.is_finite() || !(100.0..=1e9).contains(&t) {
+            return Err(ForwardError::InvalidInput("RAW_TEMPERATURE_DOMAIN"));
+        }
+        use RawProcess::*;
+        let te = t / TEVK;
+        let l = te.ln();
+        let k1 = || {
+            let v = (-32.71396786375 + 13.53655609057 * l - 5.739328757388 * l.powi(2)
+                + 1.563154982022 * l.powi(3)
+                - 0.2877056004391 * l.powi(4)
+                + 0.03482559773736999 * l.powi(5)
+                - 0.00263197617559 * l.powi(6)
+                + 0.0001119543953861 * l.powi(7)
+                - 2.039149852002e-6 * l.powi(8))
+            .exp();
+            if te <= 0.8 {
+                v.max(TINY)
+            } else {
+                v
+            }
+        };
+        let k3 = || {
+            if te > 0.8 {
+                (-44.09864886561001 + 23.91596563469 * l - 10.75323019821 * l.powi(2)
+                    + 3.058038757198 * l.powi(3)
+                    - 0.5685118909884001 * l.powi(4)
+                    + 0.06795391233790001 * l.powi(5)
+                    - 0.005009056101857001 * l.powi(6)
+                    + 0.0002067236157507 * l.powi(7)
+                    - 3.649161410833e-6 * l.powi(8))
+                .exp()
+            } else {
+                TINY
+            }
+        };
+        let k5 = || {
+            if te > 0.8 {
+                (-68.71040990212001 + 43.93347632635 * l - 18.48066993568 * l.powi(2)
+                    + 4.701626486759002 * l.powi(3)
+                    - 0.7692466334492 * l.powi(4)
+                    + 0.08113042097303 * l.powi(5)
+                    - 0.005324020628287001 * l.powi(6)
+                    + 0.0001975705312221 * l.powi(7)
+                    - 3.165581065665e-6 * l.powi(8))
+                .exp()
+            } else {
+                TINY
+            }
+        };
+        let k4 = || {
+            if case == RecombinationCase::B {
+                1.26e-14 * (5.7067e5 / t).powf(0.75)
+            } else if te > 0.8 {
+                1.54e-9 * (1.0 + 0.3 / (8.099328789667 / te).exp())
+                    / ((40.49664394833662 / te).exp() * te.powf(1.5))
+                    + 3.92e-13 / te.powf(0.6353)
+            } else {
+                3.92e-13 / te.powf(0.6353)
+            }
+        };
+        let v = match process {
+            K1 => k1(),
+            K2 => {
+                if case == RecombinationCase::B {
+                    if t < 1e9 {
+                        4.881357e-6 * t.powf(-1.5) * (1.0 + 1.14813e2 * t.powf(-0.407)).powf(-2.242)
+                    } else {
+                        TINY
+                    }
+                } else if t > 5500.0 {
+                    (-28.61303380689232
+                        - 0.7241125657826851 * l
+                        - 0.02026044731984691 * l.powi(2)
+                        - 0.002380861877349834 * l.powi(3)
+                        - 0.0003212605213188796 * l.powi(4)
+                        - 0.00001421502914054107 * l.powi(5)
+                        + 4.989108920299513e-6 * l.powi(6)
+                        + 5.755614137575758e-7 * l.powi(7)
+                        - 1.856767039775261e-8 * l.powi(8)
+                        - 3.071135243196595e-9 * l.powi(9))
+                    .exp()
+                } else {
+                    k4()
+                }
+            }
+            K3 => k3(),
+            K4 => k4(),
+            K5 => k5(),
+            K6 => {
+                if case == RecombinationCase::B {
+                    if t < 1e9 {
+                        7.8155e-5 * t.powf(-1.5) * (1.0 + 2.0189e2 * t.powf(-0.407)).powf(-2.242)
+                    } else {
+                        TINY
+                    }
+                } else {
+                    3.36e-10 / t.sqrt() / (t / 1e3).powf(0.2) / (1.0 + (t / 1e6).powf(0.7))
+                }
+            }
+            CeHI => 7.5e-19 * (-(118348.0 / t).min(LN_DHUGE)).exp() / (1.0 + (t / 1e5).sqrt()),
+            CeHeI => {
+                9.1e-27 * (-(13179.0 / t).min(LN_DHUGE)).exp() * t.powf(-0.1687)
+                    / (1.0 + (t / 1e5).sqrt())
+            }
+            CeHeII => {
+                5.54e-17 * (-(473638.0 / t).min(LN_DHUGE)).exp() * t.powf(-0.3970)
+                    / (1.0 + (t / 1e5).sqrt())
+            }
+            CiHeIS => {
+                5.01e-27 * t.powf(-0.1687) / (1.0 + (t / 1e5).sqrt())
+                    * (-(55338.0 / t).min(LN_DHUGE)).exp()
+            }
+            CiHI => 2.18e-11 * k1(),
+            CiHeI => 3.94e-11 * k3(),
+            CiHeII => 8.72e-11 * k5(),
+            ReHII => {
+                let lambda = 2.0 * 157807.0 / t;
+                if case == RecombinationCase::B {
+                    3.435e-30 * t * lambda.powf(1.970)
+                        / (1.0 + (lambda / 2.25).powf(0.376)).powf(3.720)
+                } else {
+                    1.778e-29 * t * lambda.powf(1.965)
+                        / (1.0 + (lambda / 0.541).powf(0.502)).powf(2.697)
+                }
+            }
+            ReHeII1 => {
+                let lambda = 2.0 * 285335.0 / t;
+                if case == RecombinationCase::B {
+                    1.26e-14 * KBOLTZ * t * lambda.powf(0.75)
+                } else {
+                    3e-14 * KBOLTZ * t * lambda.powf(0.654)
+                }
+            }
+            ReHeII2 => {
+                1.24e-13
+                    * t.powf(-1.5)
+                    * (-(470000.0 / t).min(LN_DHUGE)).exp()
+                    * (1.0 + 0.3 * (-(94000.0 / t).min(LN_DHUGE)).exp())
+            }
+            ReHeIII => {
+                let lambda = 2.0 * 631515.0 / t;
+                // Preserve original raw 8*T term; no kinetic-moment substitution.
+                if case == RecombinationCase::B {
+                    8.0 * 3.435e-30 * t * lambda.powf(1.970)
+                        / (1.0 + (lambda / 2.25).powf(0.376)).powf(3.720)
+                } else {
+                    8.0 * 1.778e-29 * t * lambda.powf(1.965)
+                        / (1.0 + (lambda / 0.541).powf(0.502)).powf(2.697)
+                }
+            }
+            Brem => 1.43e-27 * t.sqrt() * (1.1 + 0.34 * (-(5.5 - t.log10()).powi(2) / 3.0).exp()),
+        };
+        if !v.is_finite() || v < 0.0 {
+            return Err(ForwardError::InvalidInput("RAW_COEFFICIENT_INVALID"));
+        }
+        let unit = match process {
+            K1 | K2 | K3 | K4 | K5 | K6 => CoefficientUnits::Cm3PerSecond,
+            CeHeI | CiHeIS => CoefficientUnits::ErgCm6PerSecond,
+            _ => CoefficientUnits::ErgCm3PerSecond,
+        };
+        Ok(RawCoefficient { value: v, unit })
+    }
+
+    /// Verner ground-state outer-shell fit. Fit thresholds differ from binding energies.
+    pub fn cross_section(&self, absorber: Absorber, energy_ev: f64) -> Result<f64, ForwardError> {
+        if !energy_ev.is_finite() || energy_ev < 0.0 {
+            return Err(ForwardError::InvalidInput("PHOTON_ENERGY_INVALID"));
+        }
+        if energy_ev > 50000.0 {
+            return Err(ForwardError::InvalidInput("VERNER_ENERGY_DOMAIN"));
+        }
+        let (eth, e0, sigma0, ya, p, yw, y0, y1) = match absorber {
+            Absorber::HI => (13.60, 0.4298, 5.475e4, 32.88, 2.963, 0.0, 0.0, 0.0),
+            Absorber::HeI => (24.59, 13.61, 949.2, 1.469, 3.188, 2.039, 0.4434, 2.136),
+            Absorber::HeII => (54.42, 1.720, 1.369e4, 32.88, 2.963, 0.0, 0.0, 0.0),
+        };
+        if energy_ev < eth {
+            return Ok(0.0);
+        }
+        let x = energy_ev / e0 - y0;
+        let y = (x * x + y1 * y1).sqrt();
+        let sigma = sigma0
+            * ((x - 1.0).powi(2) + yw * yw)
+            * y.powf(p / 2.0 - 5.5)
+            * (1.0 + (y / ya).sqrt()).powf(-p)
+            * 1e-18;
+        if !sigma.is_finite() || sigma < 0.0 {
+            return Err(ForwardError::InvalidInput("VERNER_RESULT_INVALID"));
+        }
+        Ok(sigma)
+    }
+}
+
+rust/rei_microphysics/src/bianchi_i.rs 7902
+//! Homogeneous diagonal Bianchi-I geometry and collisionless photon characteristics.
+use crate::ForwardError;
+
+fn invalid(tag: &'static str) -> ForwardError {
+    ForwardError::InvalidInput(tag)
+}
+
+fn positive_finite(x: f64, tag: &'static str) -> Result<f64, ForwardError> {
+    if x.is_finite() && x > 0.0 {
+        Ok(x)
+    } else {
+        Err(invalid(tag))
+    }
+}
+
+fn finite(x: f64, tag: &'static str) -> Result<f64, ForwardError> {
+    if x.is_finite() {
+        Ok(x)
+    } else {
+        Err(invalid(tag))
+    }
+}
+
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct GeometrySnapshot {
+    pub scale_factors: [f64; 3],
+    pub hubble_per_s: [f64; 3],
+}
+
+impl GeometrySnapshot {
+    pub fn new(scale_factors: [f64; 3], hubble_per_s: [f64; 3]) -> Result<Self, ForwardError> {
+        let snapshot = Self {
+            scale_factors,
+            hubble_per_s,
+        };
+        snapshot.validate()?;
+        Ok(snapshot)
+    }
+
+    fn validate(&self) -> Result<(), ForwardError> {
+        for a in self.scale_factors {
+            positive_finite(a, "BianchiScale")?;
+        }
+        for h in self.hubble_per_s {
+            finite(h, "BianchiHubble")?;
+        }
+        self.volume_factor()?;
+        Ok(())
+    }
+
+    pub fn volume_factor(&self) -> Result<f64, ForwardError> {
+        for a in self.scale_factors {
+            positive_finite(a, "BianchiScale")?;
+        }
+        for h in self.hubble_per_s {
+            finite(h, "BianchiHubble")?;
+        }
+        let v = self.scale_factors.iter().product();
+        positive_finite(v, "BianchiVolume")
+    }
+}
+
+pub trait GeometryBackground {
+    fn snapshot(&self, t: f64) -> Result<GeometrySnapshot, ForwardError>;
+}
+
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct ConstantHubbleBackground {
+    pub initial_scale_factors: [f64; 3],
+    pub hubble_per_s: [f64; 3],
+}
+
+impl ConstantHubbleBackground {
+    pub fn new(
+        initial_scale_factors: [f64; 3],
+        hubble_per_s: [f64; 3],
+    ) -> Result<Self, ForwardError> {
+        GeometrySnapshot::new(initial_scale_factors, hubble_per_s)?;
+        Ok(Self {
+            initial_scale_factors,
+            hubble_per_s,
+        })
+    }
+}
+
+impl GeometryBackground for ConstantHubbleBackground {
+    fn snapshot(&self, t: f64) -> Result<GeometrySnapshot, ForwardError> {
+        finite(t, "BianchiTime")?;
+        GeometrySnapshot::new(self.initial_scale_factors, self.hubble_per_s)?;
+        let mut a = [0.0; 3];
+        for (i, output) in a.iter_mut().enumerate() {
+            let ht = finite(self.hubble_per_s[i] * t, "BianchiExponent")?;
+            *output = positive_finite(self.initial_scale_factors[i] * ht.exp(), "BianchiScale")?;
+        }
+        GeometrySnapshot::new(a, self.hubble_per_s)
+    }
+}
+
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct CharacteristicRay {
+    pub energy_ev: f64,
+    pub direction: [f64; 3],
+    pub occupation: f64,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct RayDerivative {
+    pub energy_dot_ev_s: f64,
+    pub direction_dot_per_s: [f64; 3],
+}
+
+impl CharacteristicRay {
+    pub fn new(energy_ev: f64, direction: [f64; 3], occupation: f64) -> Result<Self, ForwardError> {
+        positive_finite(energy_ev, "RayEnergy")?;
+        if !occupation.is_finite() || occupation < 0.0 {
+            return Err(invalid("RayOccupation"));
+        }
+        for component in direction {
+            finite(component, "RayDirection")?;
+        }
+        let norm = direction[0].hypot(direction[1]).hypot(direction[2]);
+        if !norm.is_finite() || (norm - 1.0).abs() > 1e-12 {
+            return Err(invalid("RayUnitDirection"));
+        }
+        let normalized = direction.map(|component| component / norm);
+        Ok(Self {
+            energy_ev,
+            direction: normalized,
+            occupation,
+        })
+    }
+
+    fn scaled_components(
+        &self,
+        g0: &GeometrySnapshot,
+        g1: &GeometrySnapshot,
+    ) -> Result<([f64; 3], f64), ForwardError> {
+        let ray = Self::new(self.energy_ev, self.direction, self.occupation)?;
+        g0.validate()?;
+        g1.validate()?;
+        let mut q = [0.0; 3];
+        let mut direct = true;
+        for (i, component) in q.iter_mut().enumerate() {
+            let ratio = g0.scale_factors[i] / g1.scale_factors[i];
+            *component = ray.direction[i] * ratio;
+            direct &= ratio.is_finite()
+                && ratio > 0.0
+                && component.is_finite()
+                && (*component != 0.0 || ray.direction[i] == 0.0);
+        }
+        let r = q[0].hypot(q[1]).hypot(q[2]);
+        if direct && r.is_finite() && r > 0.0 {
+            let direction = q.map(|value| value / r);
+            if direction
+                .iter()
+                .zip(ray.direction)
+                .all(|(a, b)| a.is_finite() && (*a != 0.0 || b == 0.0))
+            {
+                return Ok((direction, r));
+            }
+        }
+        // A scaled component can underflow while its normalized direction is
+        // representable. Rescale before exponentiation rather than losing it.
+        let logs: [f64; 3] = std::array::from_fn(|i| {
+            if ray.direction[i] == 0.0 {
+                f64::NEG_INFINITY
+            } else {
+                ray.direction[i].abs().ln() + g0.scale_factors[i].ln() - g1.scale_factors[i].ln()
+            }
+        });
+        let largest = logs.iter().copied().fold(f64::NEG_INFINITY, f64::max);
+        let scaled = logs.map(|value| (value - largest).exp());
+        let norm = scaled[0].hypot(scaled[1]).hypot(scaled[2]);
+        let r = positive_finite((largest + norm.ln()).exp(), "RayRedshift")?;
+        let mut direction = [0.0; 3];
+        for i in 0..3 {
+            direction[i] = (logs[i] - largest).exp() / norm * ray.direction[i].signum();
+            if !direction[i].is_finite() || (direction[i] == 0.0 && ray.direction[i] != 0.0) {
+                return Err(invalid("RayDirectionUnderflow"));
+            }
+        }
+        Ok((direction, r))
+    }
+
+    pub fn pullback(
+        &self,
+        g0: &GeometrySnapshot,
+        g1: &GeometrySnapshot,
+    ) -> Result<Self, ForwardError> {
+        let (direction, r) = self.scaled_components(g0, g1)?;
+        let energy = positive_finite(self.energy_ev * r, "RayTransportEnergy")?;
+        Self::new(energy, direction, self.occupation)
+    }
+
+    pub fn solid_angle_jacobian(
+        &self,
+        g0: &GeometrySnapshot,
+        g1: &GeometrySnapshot,
+    ) -> Result<f64, ForwardError> {
+        let (_, r) = self.scaled_components(g0, g1)?;
+        let log_j = g0
+            .scale_factors
+            .iter()
+            .zip(g1.scale_factors)
+            .map(|(a, b)| a.ln() - b.ln())
+            .sum::<f64>()
+            - 3.0 * r.ln();
+        positive_finite(log_j.exp(), "RaySolidAngleJacobian")
+    }
+
+    pub fn derivative(&self, g: &GeometrySnapshot) -> Result<RayDerivative, ForwardError> {
+        let ray = Self::new(self.energy_ev, self.direction, self.occupation)?;
+        g.validate()?;
+        let reference = g.hubble_per_s[0];
+        let mut shear_projection = 0.0;
+        for i in 0..3 {
+            shear_projection = finite(
+                shear_projection
+                    + ray.direction[i] * ray.direction[i] * (g.hubble_per_s[i] - reference),
+                "RayHubbleProjection",
+            )?;
+        }
+        let hd = finite(reference + shear_projection, "RayHubbleProjection")?;
+        let energy_dot_ev_s = finite(-self.energy_ev * hd, "RayEnergyDerivative")?;
+        let mut direction_dot_per_s = [0.0; 3];
+        for (i, derivative) in direction_dot_per_s.iter_mut().enumerate() {
+            let difference = shear_projection - (g.hubble_per_s[i] - reference);
+            *derivative = finite(ray.direction[i] * difference, "RayDirectionDerivative")?;
+        }
+        Ok(RayDerivative {
+            energy_dot_ev_s,
+            direction_dot_per_s,
+        })
+    }
+}
+
+rust/rei_microphysics/src/coverage.rs 865
+//! Registry metadata is not a physical-source provider.
+use crate::ForwardError;
+
+pub const PORTED_FUNCTIONS: [&str; 7] = [
+    "transform_z_to_y",
+    "pchip_eval",
+    "opacity_cMpc_inv",
+    "photon_rates",
+    "gamma_species",
+    "positive_mass_projection",
+    "signed_transfer_lift",
+];
+pub const SOURCE_SITES: [&str; 4] = [
+    "population_t0",
+    "population_t1_predictor",
+    "thermal_tgamma",
+    "thermal_t1_final",
+];
+pub const EXCLUDED: [&str; 6] = [
+    "bernoulli_kl_mean_projection",
+    "capacity_constrained_group_projection",
+    "P0_C8",
+    "C9_CP0",
+    "HOST4_H19",
+    "HH_R10",
+];
+
+/// Fail closed: no external physical rate is admitted by this compatibility port.
+pub fn require_physical_source(_name: &str) -> Result<(), ForwardError> {
+    Err(ForwardError::MissingAuthority(
+        "NO_EXTERNAL_PHYSICAL_SOURCE_ADMITTED",
+    ))
+}
+
+rust/rei_microphysics/src/flrw_three_equations.rs 15943
+//! Additive source-bound FLRW point diagnostics, not a cosmological solver.
+//! Atomic densities are proper cm^-3. Comoving counts in this module are a^3*n
+//! per reference comoving cm^3, distinct from the legacy cMpc^-3 storage.
+use crate::{Absorber, AtomicProvider, ForwardError, HHeModel, HHeState,
+    PhotonNode, RawProcess, RecombinationCase, C_LIGHT, MPC_CM,
+    hhe_rhs, homogeneous_photo_rates};
+
+fn nn(x:f64)->Result<(),ForwardError>{
+    if x.is_finite()&&x>=0.0 {Ok(())} else {Err(ForwardError::InvalidInput("FLRW_NONFINITE_OR_NEGATIVE"))}
+}
+fn positive(x:f64)->Result<(),ForwardError>{nn(x)?;if x>0.0{Ok(())}else{Err(ForwardError::InvalidInput("FLRW_NONPOSITIVE"))}}
+fn finite(x:f64)->Result<f64,ForwardError>{if x.is_finite(){Ok(x)}else{Err(ForwardError::InvalidInput("FLRW_OVERFLOW"))}}
+fn cube(a:f64)->Result<f64,ForwardError>{positive(a)?;let a3=finite(a*a*a)?;positive(a3)?;Ok(a3)}
+
+#[derive(Debug,Clone,Copy)]
+pub struct PhotonInput {
+    pub scale_factor:f64,
+    pub hubble_s:f64,
+    pub comoving_photons_cm3:[f64;3],
+    pub edge_energy_ev:[f64;4],
+    /// Proper spectral number density per eV, evaluated at the FIXED edges.
+    pub edge_n_per_cm3_ev:[f64;4],
+    pub source_proper_cm3_s:[f64;3],
+    pub absorption_proper_cm3_s:[f64;3],
+}
+#[derive(Debug,Clone,Copy)]
+pub struct PhotonBalance {
+    pub comoving_dot_cm3_s:[f64;3],
+    pub proper_dot_cm3_s:[f64;3],
+    pub edge_flux_comoving_cm3_s:[f64;4],
+    /// Positive net exit; lower-edge loss minus upper-edge inflow.
+    pub boundary_net_loss_comoving_cm3_s:f64,
+    pub source_comoving_cm3_s:f64,
+    pub absorption_comoving_cm3_s:f64,
+    pub summed_balance_residual:f64,
+}
+/// Fixed-energy FV number balance. Downward FLRW edge flux is a^3*H*E*n_E.
+/// Bin averages alone do not determine edge spectra: callers supply that closure.
+pub fn photon_balance(input:PhotonInput)->Result<PhotonBalance,ForwardError>{
+    let a3=cube(input.scale_factor)?;nn(input.hubble_s)?;
+    for x in input.comoving_photons_cm3.into_iter().chain(input.edge_n_per_cm3_ev)
+        .chain(input.source_proper_cm3_s).chain(input.absorption_proper_cm3_s){nn(x)?;}
+    for i in 0..4 {positive(input.edge_energy_ev[i])?;
+        if i>0&&input.edge_energy_ev[i]<=input.edge_energy_ev[i-1]{return Err(ForwardError::InvalidInput("FLRW_EDGES_NOT_INCREASING"));}}
+    let mut flux=[0.0;4];let mut dc=[0.0;3];let mut dp=[0.0;3];
+    for i in 0..4 {flux[i]=finite(a3*input.hubble_s*input.edge_energy_ev[i]*input.edge_n_per_cm3_ev[i])?;}
+    for g in 0..3 {
+        dc[g]=finite(a3*(input.source_proper_cm3_s[g]-input.absorption_proper_cm3_s[g])+flux[g+1]-flux[g])?;
+        dp[g]=finite(dc[g]/a3-3.0*input.hubble_s*(input.comoving_photons_cm3[g]/a3))?;
+    }
+    let source=finite(a3*input.source_proper_cm3_s.iter().sum::<f64>())?;
+    let absorption=finite(a3*input.absorption_proper_cm3_s.iter().sum::<f64>())?;
+    let loss=finite(flux[0]-flux[3])?;
+    let residual=finite(dc.iter().sum::<f64>()-(source-absorption-loss))?;
+    Ok(PhotonBalance{comoving_dot_cm3_s:dc,proper_dot_cm3_s:dp,
+        edge_flux_comoving_cm3_s:flux,boundary_net_loss_comoving_cm3_s:loss,
+        source_comoving_cm3_s:source,absorption_comoving_cm3_s:absorption,
+        summed_balance_residual:residual})
+}
+
+#[derive(Debug,Clone,Copy)]
+pub struct CellInput {
+    pub scale_factor:f64,pub hubble_s:f64,pub temperature_k:f64,
+    pub n_h_proper_cm3:f64,pub x_hii:f64,
+    pub case:RecombinationCase,pub include_collisions:bool,
+    pub photon_energy_ev:[f64;3],pub photon_proper_cm3:[f64;3],
+    pub source_proper_cm3_s:[f64;3],pub other_absorption_proper_cm3_s:[f64;3],
+    pub edge_energy_ev:[f64;4],pub edge_n_per_cm3_ev:[f64;4],
+}
+#[derive(Debug,Clone,Copy)]
+pub struct CellResult {
+    pub n_h_proper_cm3:f64,pub x_hii:f64,pub photon_proper_cm3:f64,
+    pub x_dot_s:f64,pub gamma_hi_s:f64,pub alpha_cm3_s:f64,pub ci_cm3_s:f64,
+    pub sigma_hi_cm2:[f64;3],pub electron_proper_cm3:f64,
+    pub photo_proper_cm3_s:f64,pub collision_proper_cm3_s:f64,pub recombination_proper_cm3_s:f64,
+    pub other_absorption_proper_cm3_s:f64,
+    pub photo_bridge_residual_proper_cm3_s:f64,
+    pub photon:PhotonBalance,
+    pub scale_factor:f64,pub hubble_s:f64,
+}
+/// Connect the actual public AtomicProvider -> HHeModel -> hhe_rhs paths and
+/// compare its photo events against the actual homogeneous_photo_rates bridge.
+/// Only the hydrogen number equation is admitted to this diagnostic. The source
+/// case is explicit: A primary-only, or B with same-species local OTS recycling.
+/// No tracked recombination-photon source is added in either profile.
+pub fn connected_cell(input:CellInput)->Result<CellResult,ForwardError>{
+    let a3=cube(input.scale_factor)?;nn(input.hubble_s)?;positive(input.n_h_proper_cm3)?;
+    nn(input.x_hii)?;if input.x_hii>1.0{return Err(ForwardError::InvalidInput("FLRW_FRACTION_DOMAIN"));}
+    let provider=AtomicProvider::reference();
+    let alpha=provider.raw_coefficient(RawProcess::K2,input.temperature_k,input.case)?.value;
+    let ci=if input.include_collisions{provider.raw_coefficient(RawProcess::K1,input.temperature_k,input.case)?.value}else{0.0};
+    let mut model=HHeModel::controlled_fixture();
+    model.n_h_cm3=input.n_h_proper_cm3;model.n_he_cm3=0.0;
+    model.c_cm_s=C_LIGHT;model.photon_energy_ev=input.photon_energy_ev;
+    model.alpha_cm3_s=[alpha,0.0,0.0];model.beta_cm3_s=[ci,0.0,0.0];
+    model.sigma_cm2=[[0.0;3];3];
+    for g in 0..3{model.sigma_cm2[0][g]=provider.cross_section(Absorber::HI,input.photon_energy_ev[g])?;}
+    let state=HHeState{fractions:[input.x_hii,0.0,0.0],
+        u_erg_cm3:finite(1.5*model.kb_erg_k*input.temperature_k*input.n_h_proper_cm3*(1.0+input.x_hii))?,
+        photon_cm3:input.photon_proper_cm3,escaped_erg_cm3:0.0};
+    let event=hhe_rhs(&model,&state)?;
+    // The existing du/escaped-energy fields are deliberately not consumed:
+    // Case-B OTS thermal recycling is outside this number-only adapter.
+    for g in 0..3 {
+        if input.photon_energy_ev[g]<input.edge_energy_ev[g]||input.photon_energy_ev[g]>input.edge_energy_ev[g+1] {
+            return Err(ForwardError::InvalidInput("FLRW_NODE_OUTSIDE_BIN"));
+        }
+    }
+    let volume=finite((input.scale_factor*MPC_CM).powi(3))?;positive(volume)?;
+    let mut nodes=[PhotonNode{energy_ev:0.0,n_comoving_per_cmpc3:0.0};3];
+    for g in 0..3 {nodes[g]=PhotonNode{energy_ev:input.photon_energy_ev[g],n_comoving_per_cmpc3:finite(volume*input.photon_proper_cm3[g])?};}
+    let bridge=homogeneous_photo_rates(&provider,[input.n_h_proper_cm3*(1.0-input.x_hii),0.0,0.0],input.scale_factor,&nodes)?;
+    let mut absorption=[0.0;3];
+    for g in 0..3{nn(input.other_absorption_proper_cm3_s[g])?;
+        absorption[g]=finite(event.photo_per_cm3_s[0][g]+input.other_absorption_proper_cm3_s[g])?;}
+    let photon=photon_balance(PhotonInput{scale_factor:input.scale_factor,hubble_s:input.hubble_s,
+        comoving_photons_cm3:input.photon_proper_cm3.map(|n|a3*n),edge_energy_ev:input.edge_energy_ev,
+        edge_n_per_cm3_ev:input.edge_n_per_cm3_ev,source_proper_cm3_s:input.source_proper_cm3_s,
+        absorption_proper_cm3_s:absorption})?;
+    let photo=finite(event.photo_per_cm3_s[0].iter().sum())?;
+    Ok(CellResult{n_h_proper_cm3:input.n_h_proper_cm3,x_hii:input.x_hii,
+        photon_proper_cm3:finite(input.photon_proper_cm3.iter().sum())?,x_dot_s:event.derivative[0],
+        gamma_hi_s:bridge.gamma_per_s[0],alpha_cm3_s:alpha,ci_cm3_s:ci,
+        sigma_hi_cm2:model.sigma_cm2[0],electron_proper_cm3:input.n_h_proper_cm3*input.x_hii,
+        photo_proper_cm3_s:photo,collision_proper_cm3_s:event.collision_per_cm3_s[0],
+        recombination_proper_cm3_s:event.recombination_per_cm3_s[0],
+        other_absorption_proper_cm3_s:finite(input.other_absorption_proper_cm3_s.iter().sum())?,
+        photo_bridge_residual_proper_cm3_s:finite(photo-bridge.events_proper_per_cm3_s[0])?,
+        photon,scale_factor:input.scale_factor,hubble_s:input.hubble_s})
+}
+
+#[derive(Debug,Clone,Copy)]
+pub struct Ensemble {
+    pub x_volume:f64,pub x_mass:f64,pub eta:f64,
+    pub x_volume_dot_s:f64,pub x_mass_dot_s:f64,pub eta_dot_s:f64,
+    pub mean_n_h_proper_cm3:f64,pub source_per_h_s:f64,
+    pub recombination_per_h_s:f64,pub collision_per_h_s:f64,
+    pub other_absorption_per_h_s:f64,pub redshift_boundary_per_h_s:f64,
+    pub combined_inventory_residual_s:f64,
+    pub density_ionization_covariance:f64,
+}
+fn validate_cell_result(c:&CellResult)->Result<(),ForwardError>{
+    // Public CellResult records may be constructed outside connected_cell().
+    // Validate each cell BEFORE weighting, so a positive aggregate cannot hide
+    // a negative individual density or a zero weight hide nonfinite data.
+    positive(c.n_h_proper_cm3)?;positive(c.scale_factor)?;nn(c.hubble_s)?;
+    nn(c.x_hii)?;
+    if c.x_hii>1.0{return Err(ForwardError::InvalidInput("FLRW_FRACTION_DOMAIN"));}
+    for v in [c.photon_proper_cm3,c.gamma_hi_s,c.alpha_cm3_s,c.ci_cm3_s,
+        c.electron_proper_cm3,c.photo_proper_cm3_s,c.collision_proper_cm3_s,
+        c.recombination_proper_cm3_s,c.other_absorption_proper_cm3_s,
+        c.photon.source_comoving_cm3_s,c.photon.absorption_comoving_cm3_s] {nn(v)?;}
+    for v in c.sigma_hi_cm2.into_iter().chain(c.photon.edge_flux_comoving_cm3_s){nn(v)?;}
+    for v in [c.x_dot_s,c.photo_bridge_residual_proper_cm3_s,
+        c.photon.boundary_net_loss_comoving_cm3_s,c.photon.summed_balance_residual]
+        .into_iter().chain(c.photon.comoving_dot_cm3_s).chain(c.photon.proper_dot_cm3_s){finite(v)?;}
+    Ok(())
+}
+/// Fixed comoving-volume weights, common FLRW background, no matter boundary
+/// flux, and frozen density contrasts. Cells co-expand without peculiar advection,
+/// compression, or intercell matter transport. Generic X_V=<x> is NOT geometric Q_V.
+pub fn ensemble(cells:&[(f64,CellResult)])->Result<Ensemble,ForwardError>{
+    if cells.is_empty(){return Err(ForwardError::InvalidInput("FLRW_EMPTY_ENSEMBLE"));}
+    let a=cells[0].1.scale_factor;let h=cells[0].1.hubble_s;let a3=cube(a)?;
+    let mut wsum=0.0;let mut n=0.0;let mut vx=0.0;let mut mx=0.0;let mut ng=0.0;
+    let mut vdx=0.0;let mut mdx=0.0;let mut dg=0.0;let mut source=0.0;
+    let mut recomb=0.0;let mut coll=0.0;let mut other=0.0;let mut loss=0.0;
+    for &(w,c) in cells{
+        validate_cell_result(&c)?;
+        nn(w)?;if c.scale_factor!=a||c.hubble_s!=h{return Err(ForwardError::InvalidInput("FLRW_MIXED_BACKGROUND"));}
+        wsum+=w;n+=w*c.n_h_proper_cm3;vx+=w*c.x_hii;mx+=w*c.n_h_proper_cm3*c.x_hii;
+        ng+=w*c.photon_proper_cm3;vdx+=w*c.x_dot_s;mdx+=w*c.n_h_proper_cm3*c.x_dot_s;
+        dg+=w*c.photon.comoving_dot_cm3_s.iter().sum::<f64>()/a3;
+        source+=w*c.photon.source_comoving_cm3_s/a3;recomb+=w*c.recombination_proper_cm3_s;
+        coll+=w*c.collision_proper_cm3_s;other+=w*c.other_absorption_proper_cm3_s;
+        loss+=w*c.photon.boundary_net_loss_comoving_cm3_s/a3;
+    }
+    positive(wsum)?;positive(n)?;
+    let x_volume=vx/wsum;let x_mass=mx/n;let eta=ng/n;let xm_dot=mdx/n;let eta_dot=dg/n;
+    let residual=xm_dot+eta_dot-(source-recomb+coll-other-loss)/n;
+    for v in [x_volume,x_mass,eta,vdx/wsum,xm_dot,eta_dot,n/wsum,source/n,recomb/n,coll/n,other/n,loss/n,residual]{finite(v)?;}
+    Ok(Ensemble{x_volume,x_mass,eta,x_volume_dot_s:vdx/wsum,x_mass_dot_s:xm_dot,eta_dot_s:eta_dot,
+        mean_n_h_proper_cm3:n/wsum,source_per_h_s:source/n,recombination_per_h_s:recomb/n,
+        collision_per_h_s:coll/n,other_absorption_per_h_s:other/n,redshift_boundary_per_h_s:loss/n,
+        combined_inventory_residual_s:residual,density_ionization_covariance:x_mass-x_volume})
+}
+#[derive(Debug,Clone,Copy)]
+pub struct FillingDefect{
+    pub xi:f64,pub xi_dot_s:f64,pub standard_rhs_s:f64,pub observed_defect_s:f64,
+    pub storage_term_s:f64,pub boundary_term_s:f64,pub other_term_s:f64,
+    pub collision_term_s:f64,pub geometry_density_term_s:f64,pub sink_closure_term_s:f64,
+    pub reconstructed_defect_s:f64,pub identity_residual_s:f64,
+}
+fn validate_ensemble(e:&Ensemble)->Result<(),ForwardError>{
+    // Public diagnostic records can be assembled by external callers; do not
+    // assume they necessarily came from ensemble(). In particular NaN must not
+    // bypass a mass-closure comparison.
+    for v in [e.x_volume,e.x_mass,e.eta,e.x_volume_dot_s,e.x_mass_dot_s,e.eta_dot_s,
+        e.mean_n_h_proper_cm3,e.source_per_h_s,e.recombination_per_h_s,e.collision_per_h_s,
+        e.other_absorption_per_h_s,e.redshift_boundary_per_h_s,
+        e.combined_inventory_residual_s,e.density_ionization_covariance]{finite(v)?;}
+    for v in [e.x_volume,e.x_mass,e.eta,e.source_per_h_s,e.recombination_per_h_s,
+        e.collision_per_h_s,e.other_absorption_per_h_s]{nn(v)?;}
+    positive(e.mean_n_h_proper_cm3)?;
+    if e.x_volume>1.0||e.x_mass>1.0{return Err(ForwardError::InvalidInput("FLRW_ENSEMBLE_FRACTION_DOMAIN"));}
+    Ok(())
+}
+/// Identity diagnostic using EXTERNALLY SUPPLIED geometric Q_V and dot Q_V.
+/// This function does not infer a front/region geometry from local fractions.
+pub fn filling_defect(e:Ensemble,q_v:f64,q_v_dot_s:f64,inverse_t_ref_s:f64)->Result<FillingDefect,ForwardError>{
+    validate_ensemble(&e)?;
+    nn(q_v)?;if q_v>1.0{return Err(ForwardError::InvalidInput("FLRW_Q_DOMAIN"));}
+    finite(q_v_dot_s)?;nn(inverse_t_ref_s)?;
+    let xi=e.x_mass-q_v;let xidot=e.x_mass_dot_s-q_v_dot_s;
+    let standard=e.source_per_h_s-q_v*inverse_t_ref_s;let defect=q_v_dot_s-standard;
+    let storage=-e.eta_dot_s;let boundary=-e.redshift_boundary_per_h_s;
+    let other=-e.other_absorption_per_h_s;let coll=e.collision_per_h_s;
+    let geometry=-xidot;let sink=-(e.recombination_per_h_s-q_v*inverse_t_ref_s);
+    let reconstructed=finite(storage+boundary+other+coll+geometry+sink)?;
+    Ok(FillingDefect{xi,xi_dot_s:xidot,standard_rhs_s:standard,observed_defect_s:defect,
+        storage_term_s:storage,boundary_term_s:boundary,other_term_s:other,
+        collision_term_s:coll,geometry_density_term_s:geometry,sink_closure_term_s:sink,
+        reconstructed_defect_s:reconstructed,identity_residual_s:finite(defect-reconstructed)?})
+}
+
+#[derive(Debug,Clone,Copy)]
+pub struct SharpPhaseInput {
+    pub q_v:f64,
+    pub ionized_density_contrast:f64,
+    pub contrast_dot_s:f64,
+    /// An external model declaration, not a conclusion inferred from cell x.
+    pub fully_ionized_neutral_sharp_phases_declared:bool,
+}
+#[derive(Debug,Clone,Copy)]
+pub struct SharpFillingRhs {
+    pub q_v_dot_s:f64,
+    pub inventory_q_v_dot_s:f64,
+    pub identity_residual_s:f64,
+}
+/// Conditional sharp-phase inventory closure X_M=Q_V*Delta_I. The caller owns
+/// the sharp geometry and Delta_I derivative. Only 0<Q_V<1 is admitted here;
+/// endpoint phases need a separately defined one-sided closure. Not a front solver.
+pub fn sharp_filling_rhs(e:Ensemble,p:SharpPhaseInput)->Result<SharpFillingRhs,ForwardError>{
+    validate_ensemble(&e)?;
+    if !p.fully_ionized_neutral_sharp_phases_declared {
+        return Err(ForwardError::InvalidInput("FLRW_SHARP_PHASE_NOT_DECLARED"));
+    }
+    positive(p.q_v)?;positive(p.ionized_density_contrast)?;finite(p.contrast_dot_s)?;
+    if p.q_v>=1.0{return Err(ForwardError::InvalidInput("FLRW_SHARP_INTERIOR_PHASE_REQUIRED"));}
+    let mass=finite(p.q_v*p.ionized_density_contrast)?;
+    if mass>1.0{return Err(ForwardError::InvalidInput("FLRW_SHARP_MASS_EXCEEDS_ONE"));}
+    if (mass-e.x_mass).abs()>2e-12*mass.abs().max(e.x_mass.abs())+2e-14 {
+        return Err(ForwardError::InvalidInput("FLRW_SHARP_MASS_CLOSURE_MISMATCH"));
+    }
+    let drift=p.q_v*p.contrast_dot_s;
+    let direct=finite((e.x_mass_dot_s-drift)/p.ionized_density_contrast)?;
+    let inventory=finite((e.source_per_h_s-e.recombination_per_h_s+e.collision_per_h_s
+        -e.other_absorption_per_h_s-e.redshift_boundary_per_h_s-e.eta_dot_s-drift)
+        /p.ionized_density_contrast)?;
+    Ok(SharpFillingRhs{q_v_dot_s:direct,inventory_q_v_dot_s:inventory,
+        identity_residual_s:finite(direct-inventory)?})
+}
+
+rust/rei_microphysics/src/ft03_controlled.rs 14726
+//! Source bound, temperature dependent FT03 controlled H/He successor.
+//! Photon number and thermal energy use proper cm^-3 units throughout.
+use crate::{
+    ft03_rates::ft03_coefficients, Absorber, AtomicProvider, ForwardError, HHeModel, HHeState,
+    StepControl,
+};
+
+pub const FT03_MODEL_ID: &str = "REI_FT03_HG_RATE_MOMENT_CASE_A_CONTROLLED_V1";
+
+#[derive(Clone, Copy, Debug)]
+pub struct Ft03Model {
+    pub gas: HHeModel,
+}
+
+impl Ft03Model {
+    pub fn controlled() -> Result<Self, ForwardError> {
+        let provider = AtomicProvider::reference();
+        let mut gas = HHeModel::controlled_fixture();
+        gas.photon_energy_ev = [20.0, 35.0, 70.0];
+        gas.alpha_cm3_s = [0.0; 3];
+        gas.beta_cm3_s = [0.0; 3];
+        for (a, absorber) in [Absorber::HI, Absorber::HeI, Absorber::HeII]
+            .into_iter()
+            .enumerate()
+        {
+            for g in 0..3 {
+                gas.sigma_cm2[a][g] = provider.cross_section(absorber, gas.photon_energy_ev[g])?;
+            }
+        }
+        gas.validate()?;
+        Ok(Self { gas })
+    }
+
+    pub fn initial_state(&self) -> HHeState {
+        let fractions = [0.9, 0.3, 0.6];
+        let ne = self.gas.n_h_cm3 * fractions[0]
+            + self.gas.n_he_cm3 * (fractions[1] + 2.0 * fractions[2]);
+        HHeState {
+            fractions,
+            u_erg_cm3: 1.5
+                * self.gas.kb_erg_k
+                * 50_000.0
+                * (self.gas.n_h_cm3 + self.gas.n_he_cm3 + ne),
+            photon_cm3: [0.05, 0.005, 0.001].map(|p| self.gas.n_h_cm3 * p),
+            escaped_erg_cm3: 0.0,
+        }
+    }
+
+    fn validate_state(&self, state: &HHeState) -> Result<f64, ForwardError> {
+        self.gas.validate_state(state)?;
+        if self.gas.n_h_cm3 <= 0.0 || self.gas.n_he_cm3 <= 0.0 {
+            return Err(ForwardError::InvalidInput("FT03_NUCLEAR_DENSITY_DOMAIN"));
+        }
+        let t = self.gas.temperature(state)?;
+        ft03_coefficients(t)?;
+        Ok(t)
+    }
+}
+
+#[derive(Clone, Copy, Debug)]
+pub struct Ft03Rhs {
+    pub derivative: [f64; 7],
+    pub photo_per_cm3_s: [[f64; 3]; 3],
+    pub collision_per_cm3_s: [f64; 3],
+    pub recombination_per_cm3_s: [f64; 3],
+    pub dr_per_cm3_s: [f64; 2],
+    pub escaped_energy_rate: f64,
+}
+
+// Exact zero factors describe absent channels. A zero from nonzero factors
+// instead means this binary64 event/energy ledger cannot represent the product.
+fn checked_product(factors: &[f64]) -> Result<f64, ForwardError> {
+    if factors.iter().any(|x| !x.is_finite()) {
+        return Err(ForwardError::InvalidInput("FT03_OVERFLOW"));
+    }
+    if factors.contains(&0.0) {
+        return Ok(0.0);
+    }
+    let product = factors.iter().product::<f64>();
+    if !product.is_finite() {
+        return Err(ForwardError::InvalidInput("FT03_OVERFLOW"));
+    }
+    if product == 0.0 {
+        return Err(ForwardError::InvalidInput("FT03_PRODUCT_UNDERFLOW"));
+    }
+    Ok(product)
+}
+
+pub fn ft03_rhs(model: &Ft03Model, state: &HHeState) -> Result<Ft03Rhs, ForwardError> {
+    let t = model.validate_state(state)?;
+    let c = ft03_coefficients(t)?;
+    let g = &model.gas;
+    let [h, he1, he2] = state.fractions;
+    let lower = [
+        checked_product(&[g.n_h_cm3, 1.0 - h])?,
+        checked_product(&[g.n_he_cm3, 1.0 - (he1 + he2)])?,
+        checked_product(&[g.n_he_cm3, he1])?,
+    ];
+    let upper = [
+        checked_product(&[g.n_h_cm3, h])?,
+        checked_product(&[g.n_he_cm3, he1])?,
+        checked_product(&[g.n_he_cm3, he2])?,
+    ];
+    let ne = g.electron_density(state)?;
+    let mut photo = [[0.0; 3]; 3];
+    let mut ci = [0.0; 3];
+    let mut rr = [0.0; 3];
+    let mut photon_dot = [0.0; 3];
+    let mut j = [0.0; 3];
+    let mut du = 0.0;
+    let mut escape = 0.0;
+    for a in 0..3 {
+        ci[a] = checked_product(&[lower[a], ne, c.beta_ci_cm3_s[a]])?;
+        rr[a] = checked_product(&[upper[a], ne, c.alpha_rr_cm3_s[a]])?;
+        j[a] = ci[a] - rr[a];
+        let chi = g.threshold_ev[a] * g.ev_erg;
+        let kinetic_rate = checked_product(&[upper[a], ne, c.rr_kinetic_erg_cm3_s[a]])?;
+        du -= checked_product(&[ci[a], chi])? + kinetic_rate;
+        escape += checked_product(&[rr[a], chi])? + kinetic_rate;
+        for (k, photon_dot_k) in photon_dot.iter_mut().enumerate() {
+            photo[a][k] =
+                checked_product(&[g.c_cm_s, lower[a], g.sigma_cm2[a][k], state.photon_cm3[k]])?;
+            j[a] += photo[a][k];
+            *photon_dot_k -= photo[a][k];
+            du += checked_product(&[
+                photo[a][k],
+                g.photon_energy_ev[k] - g.threshold_ev[a],
+                g.ev_erg,
+            ])?;
+        }
+    }
+    let dr = [
+        checked_product(&[upper[1], ne, c.alpha_dr_cm3_s[0]])?,
+        checked_product(&[upper[1], ne, c.alpha_dr_cm3_s[1]])?,
+    ];
+    for (k, event) in dr.iter().enumerate() {
+        j[1] -= event;
+        du -= checked_product(&[*event, c.dr_energy_erg[k]])?;
+        escape += checked_product(&[*event, g.threshold_ev[1] * g.ev_erg + c.dr_energy_erg[k]])?;
+    }
+    let d = [
+        j[0] / g.n_h_cm3,
+        (j[1] - j[2]) / g.n_he_cm3,
+        j[2] / g.n_he_cm3,
+        du,
+        photon_dot[0],
+        photon_dot[1],
+        photon_dot[2],
+    ];
+    if d.iter().any(|x| !x.is_finite())
+        || !escape.is_finite()
+        || photo.iter().flatten().any(|x| !x.is_finite() || *x < 0.0)
+        || ci
+            .iter()
+            .chain(rr.iter())
+            .chain(dr.iter())
+            .any(|x| !x.is_finite() || *x < 0.0)
+    {
+        return Err(ForwardError::InvalidInput("FT03_OVERFLOW"));
+    }
+    Ok(Ft03Rhs {
+        derivative: d,
+        photo_per_cm3_s: photo,
+        collision_per_cm3_s: ci,
+        recombination_per_cm3_s: rr,
+        dr_per_cm3_s: dr,
+        escaped_energy_rate: escape,
+    })
+}
+
+#[derive(Clone, Copy, Debug, Default)]
+pub struct Ft03Events {
+    pub photo_per_cm3: [[f64; 3]; 3],
+    pub collision_per_cm3: [f64; 3],
+    pub recombination_per_cm3: [f64; 3],
+    pub dr_per_cm3: [f64; 2],
+}
+
+impl Ft03Events {
+    pub(crate) fn plus(self, other: Self) -> Self {
+        let mut sum = self;
+        for a in 0..3 {
+            for k in 0..3 {
+                sum.photo_per_cm3[a][k] += other.photo_per_cm3[a][k];
+            }
+            sum.collision_per_cm3[a] += other.collision_per_cm3[a];
+            sum.recombination_per_cm3[a] += other.recombination_per_cm3[a];
+        }
+        for k in 0..2 {
+            sum.dr_per_cm3[k] += other.dr_per_cm3[k];
+        }
+        sum
+    }
+
+    fn finite(&self) -> bool {
+        self.photo_per_cm3
+            .iter()
+            .flatten()
+            .all(|x| x.is_finite() && *x >= 0.0)
+            && self
+                .collision_per_cm3
+                .iter()
+                .all(|x| x.is_finite() && *x >= 0.0)
+            && self
+                .recombination_per_cm3
+                .iter()
+                .all(|x| x.is_finite() && *x >= 0.0)
+            && self.dr_per_cm3.iter().all(|x| x.is_finite() && *x >= 0.0)
+    }
+}
+
+#[derive(Clone, Copy, Debug)]
+pub struct Ft03Step {
+    pub state: HHeState,
+    pub events: Ft03Events,
+    pub iterations: usize,
+    pub residual_norm: f64,
+    pub local_error: f64,
+}
+
+/// Final endpoint backward Euler residual; one source site for all seven
+/// coordinates, escaped energy, and integrated event counts.
+fn be_endpoint_residual(
+    model: &Ft03Model,
+    old: &HHeState,
+    new: &HHeState,
+    dt: f64,
+) -> Result<(f64, Ft03Events), ForwardError> {
+    let rhs = ft03_rhs(model, new)?;
+    let x0 = old.coordinates();
+    let x1 = new.coordinates();
+    let scale = [
+        1.0,
+        1.0,
+        1.0,
+        old.u_erg_cm3.max(1e-30),
+        old.photon_cm3[0].max(1e-30),
+        old.photon_cm3[1].max(1e-30),
+        old.photon_cm3[2].max(1e-30),
+    ];
+    let mut norm: f64 = 0.0;
+    for k in 0..7 {
+        norm = norm.max(((x1[k] - x0[k] - dt * rhs.derivative[k]) / scale[k]).abs());
+    }
+    norm = norm.max(
+        ((new.escaped_erg_cm3 - old.escaped_erg_cm3 - dt * rhs.escaped_energy_rate)
+            / model.gas.total_energy(old)?.max(1e-30))
+        .abs(),
+    );
+    let mut events = Ft03Events::default();
+    for a in 0..3 {
+        events.collision_per_cm3[a] = dt * rhs.collision_per_cm3_s[a];
+        events.recombination_per_cm3[a] = dt * rhs.recombination_per_cm3_s[a];
+        for k in 0..3 {
+            events.photo_per_cm3[a][k] = dt * rhs.photo_per_cm3_s[a][k];
+        }
+    }
+    for k in 0..2 {
+        events.dr_per_cm3[k] = dt * rhs.dr_per_cm3_s[k];
+    }
+    if !norm.is_finite() || !events.finite() {
+        return Err(ForwardError::InvalidInput("FT03_OVERFLOW"));
+    }
+    Ok((norm, events))
+}
+
+fn check_invariants(
+    model: &Ft03Model,
+    old: &HHeState,
+    new: &HHeState,
+    events: &Ft03Events,
+    tolerance: f64,
+) -> Result<(), ForwardError> {
+    let g = &model.gas;
+    let energy0 = g.total_energy(old)?;
+    let energy1 = g.total_energy(new)?;
+    let mut norm = ((energy1 - energy0) / energy0.max(1e-30)).abs();
+    let mut j = [0.0; 3];
+    for (a, value) in j.iter_mut().enumerate() {
+        *value = events.photo_per_cm3[a].iter().sum::<f64>() + events.collision_per_cm3[a]
+            - events.recombination_per_cm3[a];
+    }
+    j[1] -= events.dr_per_cm3.iter().sum::<f64>();
+    norm = norm.max(((g.n_h_cm3 * (new.fractions[0] - old.fractions[0]) - j[0]) / g.n_h_cm3).abs());
+    norm = norm.max(
+        ((g.n_he_cm3 * (new.fractions[1] - old.fractions[1]) - j[1] + j[2]) / g.n_he_cm3).abs(),
+    );
+    norm =
+        norm.max(((g.n_he_cm3 * (new.fractions[2] - old.fractions[2]) - j[2]) / g.n_he_cm3).abs());
+    for k in 0..3 {
+        let absorbed = (0..3).map(|a| events.photo_per_cm3[a][k]).sum::<f64>();
+        norm = norm.max(
+            ((old.photon_cm3[k] - new.photon_cm3[k] - absorbed) / old.photon_cm3[k].max(1e-30))
+                .abs(),
+        );
+    }
+    if !norm.is_finite() || norm > tolerance.max(1e-13) * 8.0 {
+        return Err(ForwardError::InvalidInput("FT03_INVARIANT_RESIDUAL"));
+    }
+    Ok(())
+}
+
+pub fn ft03_implicit_step(
+    model: &Ft03Model,
+    old: &HHeState,
+    dt: f64,
+    control: StepControl,
+) -> Result<Ft03Step, ForwardError> {
+    model.validate_state(old)?;
+    if !dt.is_finite()
+        || dt < 0.0
+        || control.max_iterations == 0
+        || !control.residual_tolerance.is_finite()
+        || control.residual_tolerance <= 0.0
+    {
+        return Err(ForwardError::InvalidInput("FT03_STEP_CONTROL"));
+    }
+    if dt == 0.0 {
+        return Ok(Ft03Step {
+            state: *old,
+            events: Ft03Events::default(),
+            iterations: 0,
+            residual_norm: 0.0,
+            local_error: 0.0,
+        });
+    }
+    let g = &model.gas;
+    let mut guess = *old;
+    for iteration in 1..=control.max_iterations {
+        let ne = g.electron_density(&guess)?;
+        let c = ft03_coefficients(model.validate_state(&guess)?)?;
+        let [h, he1, he2] = guess.fractions;
+        let lower = [
+            g.n_h_cm3 * (1.0 - h),
+            g.n_he_cm3 * (1.0 - (he1 + he2)),
+            g.n_he_cm3 * he1,
+        ];
+        let mut next = guess;
+        for k in 0..3 {
+            let opacity = (0..3).map(|a| lower[a] * g.sigma_cm2[a][k]).sum::<f64>();
+            next.photon_cm3[k] = old.photon_cm3[k] / (1.0 + dt * g.c_cm_s * opacity);
+        }
+        let ion = std::array::from_fn::<_, 3, _>(|a| {
+            (0..3)
+                .map(|k| g.c_cm_s * g.sigma_cm2[a][k] * next.photon_cm3[k])
+                .sum::<f64>()
+                + ne * c.beta_ci_cm3_s[a]
+        });
+        let rr = std::array::from_fn::<_, 3, _>(|a| ne * c.alpha_rr_cm3_s[a]);
+        let dr = ne * c.alpha_dr_cm3_s.iter().sum::<f64>();
+        next.fractions[0] = (old.fractions[0] + dt * ion[0]) / (1.0 + dt * (ion[0] + rr[0]));
+        let he0_old = 1.0 - (old.fractions[1] + old.fractions[2]);
+        let a = dt * ion[1];
+        let b = dt * (rr[1] + dr);
+        let c2 = dt * ion[2];
+        let d = dt * rr[2];
+        // All production terms are nonnegative at a helium boundary.
+        let he1_next =
+            (old.fractions[1] + he0_old * (a / (1.0 + a)) + old.fractions[2] * (d / (1.0 + d)))
+                / (1.0 + b / (1.0 + a) + c2 / (1.0 + d));
+        next.fractions[1] = he1_next;
+        next.fractions[2] = (old.fractions[2] + c2 * he1_next) / (1.0 + d);
+        // Use the candidate's fractions and photons with the current thermal
+        // guess; the final RHS and residual are reevaluated at the actual T.
+        let rates = ft03_rhs(model, &next)?;
+        next.u_erg_cm3 = old.u_erg_cm3 + dt * rates.derivative[3];
+        next.escaped_erg_cm3 = old.escaped_erg_cm3 + dt * rates.escaped_energy_rate;
+        model.validate_state(&next)?;
+        let (norm, events) = be_endpoint_residual(model, old, &next, dt)?;
+        if norm < control.residual_tolerance {
+            check_invariants(model, old, &next, &events, control.residual_tolerance)?;
+            return Ok(Ft03Step {
+                state: next,
+                events,
+                iterations: iteration,
+                residual_norm: norm,
+                local_error: 0.0,
+            });
+        }
+        guess = next;
+    }
+    Err(ForwardError::InvalidInput("FT03_NONCONVERGENCE"))
+}
+
+pub fn ft03_try_step(
+    model: &Ft03Model,
+    state: &mut HHeState,
+    dt: f64,
+    control: StepControl,
+) -> Result<Ft03Step, ForwardError> {
+    let step = ft03_implicit_step(model, state, dt, control)?;
+    *state = step.state;
+    Ok(step)
+}
+
+pub fn ft03_adaptive_step(
+    model: &Ft03Model,
+    old: &HHeState,
+    dt: f64,
+    control: StepControl,
+) -> Result<Ft03Step, ForwardError> {
+    if dt == 0.0 {
+        return ft03_implicit_step(model, old, dt, control);
+    }
+    let full = ft03_implicit_step(model, old, dt, control)?;
+    let half1 = ft03_implicit_step(model, old, dt / 2.0, control)?;
+    let half2 = ft03_implicit_step(model, &half1.state, dt / 2.0, control)?;
+    let tf = model.gas.temperature(&full.state)?;
+    let th = model.gas.temperature(&half2.state)?;
+    let mut error = (tf.ln() - th.ln()).abs();
+    for a in 0..3 {
+        error = error.max((full.state.fractions[a] - half2.state.fractions[a]).abs());
+    }
+    if !error.is_finite() || error >= 2e-4 {
+        return Err(ForwardError::InvalidInput("FT03_LOCAL_ERROR"));
+    }
+    let events = half1.events.plus(half2.events);
+    if !events.finite() {
+        return Err(ForwardError::InvalidInput("FT03_OVERFLOW"));
+    }
+    Ok(Ft03Step {
+        state: half2.state,
+        events,
+        iterations: full.iterations + half1.iterations + half2.iterations,
+        residual_norm: half1.residual_norm.max(half2.residual_norm),
+        local_error: error,
+    })
+}
+
+rust/rei_microphysics/src/ft03_interval.rs 6248
+//! Outward second-order enclosure of the static FT03 map in the seven scaled
+//! parent coordinates. The fit parameters are binary64 values from FT03.
+use crate::{interval_ad::Jet, interval_math::Interval, ForwardError, Ft03Model};
+
+fn err(_: crate::interval_math::IntervalError) -> ForwardError {
+    ForwardError::InvalidInput("FT03_INTERVAL_DOMAIN")
+}
+type R<T> = Result<T, crate::interval_math::IntervalError>;
+fn c(x: f64) -> R<Jet> {
+    Jet::constant(Interval::point(x)?)
+}
+fn add(a: &Jet, b: &Jet) -> R<Jet> {
+    a.add(b)
+}
+fn mul(a: &Jet, b: &Jet) -> R<Jet> {
+    a.mul(b)
+}
+fn div(a: &Jet, b: &Jet) -> R<Jet> {
+    a.div(b)
+}
+fn neg(a: &Jet) -> R<Jet> {
+    a.neg()
+}
+fn sub(a: &Jet, b: &Jet) -> R<Jet> {
+    a.sub(b)
+}
+fn product(items: &[Jet]) -> R<Jet> {
+    let mut out = c(1.0)?;
+    for item in items {
+        out = mul(&out, item)?;
+    }
+    Ok(out)
+}
+
+pub fn ft03_interval_rhs(model: &Ft03Model, bx: &[Interval; 7]) -> Result<[Jet; 7], ForwardError> {
+    let g = &model.gas;
+    g.validate()?;
+    if g.n_h_cm3 <= 0.0 || g.n_he_cm3 <= 0.0 {
+        return Err(ForwardError::InvalidInput("FT03_NUCLEAR_DENSITY_DOMAIN"));
+    }
+    for x in bx {
+        if x.lo <= 0.0 || x.valid().is_err() {
+            return Err(ForwardError::InvalidInput("FT03_INTERVAL_DOMAIN"));
+        }
+    }
+    if bx[0].hi >= 1.0 || bx[1].hi + bx[2].hi >= 1.0 {
+        return Err(ForwardError::InvalidInput("FT03_INTERVAL_DOMAIN"));
+    }
+    let calc = || -> R<[Jet; 7]> {
+        let y: [Jet; 7] =
+            std::array::from_fn(|i| Jet::variable(bx[i], i).expect("validated interval"));
+        let one = c(1.0)?;
+        let two = c(2.0)?;
+        let three = c(3.0)?;
+        let nh = c(g.n_h_cm3)?;
+        let nhe = c(g.n_he_cm3)?;
+        let ev = c(g.ev_erg)?;
+        let kb = c(g.kb_erg_k)?;
+        let fhe = div(&nhe, &nh)?;
+        let particles = add(
+            &add(&add(&one, &fhe)?, &y[0])?,
+            &mul(&fhe, &add(&y[1], &mul(&two, &y[2])?)?)?,
+        )?;
+        let t = div(
+            &mul(&mul(&two, &ev)?, &y[3])?,
+            &mul(&mul(&three, &kb)?, &particles)?,
+        )?;
+        if t.value.lo < 30_000.0 || t.value.hi > 110_000.0 {
+            return Err(crate::interval_math::IntervalError);
+        }
+        let ne = add(
+            &mul(&nh, &y[0])?,
+            &mul(&nhe, &add(&y[1], &mul(&two, &y[2])?)?)?,
+        )?;
+        let lower = [
+            mul(&nh, &sub(&one, &y[0])?)?,
+            mul(&nhe, &sub(&sub(&one, &y[1])?, &y[2])?)?,
+            mul(&nhe, &y[1])?,
+        ];
+        let upper = [mul(&nh, &y[0])?, mul(&nhe, &y[1])?, mul(&nhe, &y[2])?];
+        let lambda = [315_614.0, 570_670.0, 1_263_030.0];
+        let ci_a = [21.11, 32.38, 19.95];
+        let ci_p = [-1.089, -1.146, -1.089];
+        let ci_c = [0.354, 0.416, 0.553];
+        let ci_r = [0.874, 0.987, 0.735];
+        let ci_d = [1.101, 1.056, 1.275];
+        let mut j = [c(0.0)?, c(0.0)?, c(0.0)?];
+        let mut pd = [c(0.0)?, c(0.0)?, c(0.0)?];
+        let mut w = c(0.0)?;
+        for a in 0..3 {
+            let l = div(&c(lambda[a])?, &t)?;
+            let (alpha, slope) = if a == 1 {
+                (mul(&c(3e-14)?, &l.powf(0.654)?)?, c(-0.654)?)
+            } else {
+                let u = div(&l, &c(0.522)?)?.powf(0.470)?;
+                let alpha = div(
+                    &product(&[
+                        c(if a == 2 { 2.0 } else { 1.0 })?,
+                        c(1.269e-13)?,
+                        l.powf(1.503)?,
+                    ])?,
+                    &add(&one, &u)?.powf(1.923)?,
+                )?;
+                let slope = add(
+                    &c(-1.503)?,
+                    &div(
+                        &product(&[c(1.923)?, c(0.470)?, u.clone()])?,
+                        &add(&one, &u)?,
+                    )?,
+                )?;
+                (alpha, slope)
+            };
+            let beta = div(
+                &product(&[
+                    c(ci_a[a])?,
+                    t.powf(-1.5)?,
+                    neg(&div(&l, &two)?)?.exp()?,
+                    l.powf(ci_p[a])?,
+                ])?,
+                &add(&one, &div(&l, &c(ci_c[a])?)?.powf(ci_r[a])?)?.powf(ci_d[a])?,
+            )?;
+            let kinetic = product(&[kb.clone(), t.clone(), alpha.clone(), add(&c(1.5)?, &slope)?])?;
+            let ci = div(&product(&[lower[a].clone(), ne.clone(), beta])?, &nh)?;
+            let rr = div(&product(&[upper[a].clone(), ne.clone(), alpha])?, &nh)?;
+            j[a] = sub(&ci, &rr)?;
+            w = sub(
+                &sub(&w, &mul(&c(g.threshold_ev[a])?, &ci)?)?,
+                &div(
+                    &product(&[upper[a].clone(), ne.clone(), kinetic])?,
+                    &mul(&nh, &ev)?,
+                )?,
+            )?;
+            for k in 0..3 {
+                let ph = product(&[
+                    c(g.c_cm_s)?,
+                    lower[a].clone(),
+                    c(g.sigma_cm2[a][k])?,
+                    y[4 + k].clone(),
+                ])?;
+                j[a] = add(&j[a], &ph)?;
+                pd[k] = sub(&pd[k], &ph)?;
+                w = add(
+                    &w,
+                    &mul(
+                        &sub(&c(g.photon_energy_ev[k])?, &c(g.threshold_ev[a])?)?,
+                        &ph,
+                    )?,
+                )?;
+            }
+        }
+        let dr_a = f64::from_bits(0x3f5f8b1ba9b90acb);
+        let b1 = f64::from_bits(0x411caf2e364afdee);
+        let b12 = f64::from_bits(0x412135e886f9cb6f);
+        for (factor, b) in [(1.0, b1), (0.3, b12)] {
+            let dr = div(
+                &product(&[
+                    upper[1].clone(),
+                    ne.clone(),
+                    c(factor)?,
+                    c(dr_a)?,
+                    t.powf(-1.5)?,
+                    neg(&div(&c(b)?, &t)?)?.exp()?,
+                ])?,
+                &nh,
+            )?;
+            j[1] = sub(&j[1], &dr)?;
+            w = sub(&w, &div(&product(&[dr, kb.clone(), c(b)?])?, &ev)?)?;
+        }
+        Ok([
+            j[0].clone(),
+            div(&sub(&j[1], &j[2])?, &fhe)?,
+            div(&j[2], &fhe)?,
+            w,
+            pd[0].clone(),
+            pd[1].clone(),
+            pd[2].clone(),
+        ])
+    };
+    calc().map_err(err)
+}
+
+rust/rei_microphysics/src/ft03_rates.rs 2755
+//! Controlled FT03 Case A rates. These analytic fits are distinct from the raw
+//! Grackle reference coefficients in `atomic_provider`.
+use crate::ForwardError;
+
+const KB: f64 = 1.380_649e-16;
+const LAMBDA_K: [f64; 3] = [315_614.0, 570_670.0, 1_263_030.0];
+const CI_A: [f64; 3] = [21.11, 32.38, 19.95];
+const CI_P: [f64; 3] = [-1.089, -1.146, -1.089];
+const CI_C: [f64; 3] = [0.354, 0.416, 0.553];
+const CI_R: [f64; 3] = [0.874, 0.987, 0.735];
+const CI_D: [f64; 3] = [1.101, 1.056, 1.275];
+
+#[derive(Clone, Copy, Debug)]
+pub struct Ft03Coefficients {
+    pub alpha_rr_cm3_s: [f64; 3],
+    pub log_slope: [f64; 3],
+    pub log_slope_derivative: [f64; 3],
+    pub rr_kinetic_erg_cm3_s: [f64; 3],
+    pub beta_ci_cm3_s: [f64; 3],
+    pub alpha_dr_cm3_s: [f64; 2],
+    pub dr_energy_erg: [f64; 2],
+}
+
+pub fn ft03_coefficients(t: f64) -> Result<Ft03Coefficients, ForwardError> {
+    if !t.is_finite() || !(30_000.0..=110_000.0).contains(&t) {
+        return Err(ForwardError::InvalidInput("FT03_TEMPERATURE_DOMAIN"));
+    }
+    let mut alpha_rr = [0.0; 3];
+    let mut g = [0.0; 3];
+    let mut gp = [0.0; 3];
+    let mut beta = [0.0; 3];
+    for a in 0..3 {
+        let l = LAMBDA_K[a] / t;
+        if a == 1 {
+            alpha_rr[a] = 3e-14 * l.powf(0.654);
+            g[a] = -0.654;
+        } else {
+            let u = (l / 0.522).powf(0.470);
+            let prefactor = if a == 2 { 2.0 } else { 1.0 };
+            alpha_rr[a] = prefactor * 1.269e-13 * l.powf(1.503) / (1.0 + u).powf(1.923);
+            g[a] = -1.503 + 1.923 * 0.470 * u / (1.0 + u);
+            gp[a] = -1.923 * 0.470 * 0.470 * u / (1.0 + u).powi(2);
+        }
+        beta[a] = CI_A[a] * t.powf(-1.5) * (-l / 2.0).exp() * l.powf(CI_P[a])
+            / (1.0 + (l / CI_C[a]).powf(CI_R[a])).powf(CI_D[a]);
+    }
+    let kinetic = std::array::from_fn(|a| KB * t * alpha_rr[a] * (1.5 + g[a]));
+    let dr_a = 1.54e-9 * 11_605.0_f64.powf(1.5);
+    let b1 = 40.496_643_948_336_62 * 11_605.0;
+    let b2 = 8.099_328_789_667 * 11_605.0;
+    let dr = [
+        dr_a * t.powf(-1.5) * (-b1 / t).exp(),
+        0.3 * dr_a * t.powf(-1.5) * (-(b1 + b2) / t).exp(),
+    ];
+    let energy = [KB * b1, KB * (b1 + b2)];
+    if alpha_rr
+        .iter()
+        .chain(kinetic.iter())
+        .chain(beta.iter())
+        .chain(dr.iter())
+        .chain(energy.iter())
+        .any(|x| !x.is_finite() || *x < 0.0)
+        || g.iter().chain(gp.iter()).any(|x| !x.is_finite())
+    {
+        return Err(ForwardError::InvalidInput("FT03_OVERFLOW"));
+    }
+    Ok(Ft03Coefficients {
+        alpha_rr_cm3_s: alpha_rr,
+        log_slope: g,
+        log_slope_derivative: gp,
+        rr_kinetic_erg_cm3_s: kinetic,
+        beta_ci_cm3_s: beta,
+        alpha_dr_cm3_s: dr,
+        dr_energy_erg: energy,
+    })
+}
+
+rust/rei_microphysics/src/group_rates.rs 4844
+//! Compatibility with monolithic_model_b2a.py blob 3d806e1c... only.
+//! Table-domain rejection is the documented intentional API restriction.
+use crate::{ForwardError, GammaSpecies, GroupParams, State};
+
+pub const C_LIGHT: f64 = 2.99792458e10;
+pub const MPC_CM: f64 = 3.085677581491367e24;
+
+#[derive(Debug, Clone)]
+pub struct PchipTable {
+    knots: Vec<f64>,
+    coeffs: [Vec<f64>; 4],
+}
+impl PchipTable {
+    /// Coefficients are degree-major: cubic, quadratic, linear, constant.
+    /// No coefficient fitting, extrapolation, clipping, or FMA is performed.
+    pub fn new(knots: Vec<f64>, coeffs: [Vec<f64>; 4]) -> Result<Self, ForwardError> {
+        if knots.len() < 2
+            || knots.iter().any(|x| !x.is_finite())
+            || knots.windows(2).any(|w| w[0] >= w[1])
+            || coeffs
+                .iter()
+                .any(|c| c.len() != knots.len() - 1 || c.iter().any(|x| !x.is_finite()))
+        {
+            return Err(ForwardError::InvalidInput("BAD_TABLE"));
+        }
+        Ok(Self { knots, coeffs })
+    }
+}
+
+pub fn pchip_eval(table: &PchipTable, x: f64) -> Result<f64, ForwardError> {
+    if !x.is_finite() {
+        return Err(ForwardError::InvalidInput("NONFINITE_X"));
+    }
+    let lower = table.knots[0];
+    let upper = table.knots[table.knots.len() - 1];
+    if x < lower || x > upper {
+        return Err(ForwardError::OutsideTableDomain { x, lower, upper });
+    }
+    let i = (table.knots.partition_point(|k| *k <= x) - 1).min(table.knots.len() - 2);
+    let dx = x - table.knots[i];
+    let c = &table.coeffs;
+    Ok(((c[0][i] * dx + c[1][i]) * dx + c[2][i]) * dx + c[3][i])
+}
+
+/// Rust f64 exponential semantics are canonical: representable positive
+/// subnormals remain nonzero; sufficiently small inputs underflow to zero.
+/// NaN and infinities follow the operations below without clipping or FTZ.
+pub fn transform_z_to_y(z: &[f64; 9]) -> State {
+    let logits = [0.0, z[5], z[6]];
+    let helium = if logits.iter().any(|v| v.is_nan()) {
+        [f64::NAN; 3]
+    } else {
+        let m = logits.iter().copied().fold(f64::NEG_INFINITY, f64::max);
+        let e = logits.map(|v| (v - m).exp());
+        let sum = e[0] + e[1] + e[2];
+        e.map(|v| v / sum)
+    };
+    State {
+        n_comoving_per_cmpc3: [z[0].exp(), z[1].exp(), z[2].exp(), z[3].exp()],
+        x_hii: 1.0 / (1.0 + (-z[4]).exp()),
+        helium,
+        u_erg_per_cm3: z[7].exp(),
+        gamma_hi_per_s: z[8].exp(),
+    }
+}
+
+/// cMpc^-1. The effective HI lowgroup owner must not be counted twice.
+#[allow(non_snake_case)]
+pub fn opacity_cMpc_inv(state: &State, p: &GroupParams) -> Result<[f64; 4], ForwardError> {
+    let x = (state.gamma_hi_per_s / 1.0e-12).ln();
+    let low0 = pchip_eval(&p.lowgroup_log_opacity[0], x)?.exp();
+    let low1 = pchip_eval(&p.lowgroup_log_opacity[1], x)?.exp();
+    let n_hi = p.n_h_proper_per_cm3 * (1.0 - state.x_hii);
+    let n_hei = p.n_he_proper_per_cm3 * state.helium[0];
+    let n_heii = p.n_he_proper_per_cm3 * state.helium[1];
+    let factor = MPC_CM / (1.0 + p.redshift);
+    let hi = p.sigma_hi_cm2.map(|s| n_hi * s * factor);
+    let hei = p.sigma_hei_cm2.map(|s| n_hei * s * factor);
+    let heii = p.sigma_heii_cm2.map(|s| n_heii * s * factor);
+    Ok([
+        low0,
+        low1 + hei[1],
+        hi[2] + hei[2],
+        hi[3] + hei[3] + heii[3],
+    ])
+}
+
+/// Comoving count per cMpc^3 per second. Scalar emissivity broadcasting is an
+/// adapter operation: pass [e; 4], not a newly normalized spectral model.
+pub fn photon_rates(
+    state: &State,
+    emissivity: &[f64; 4],
+    p: &GroupParams,
+) -> Result<[f64; 4], ForwardError> {
+    let kappa = opacity_cMpc_inv(state, p)?;
+    let a = kappa.map(|k| C_LIGHT * (1.0 + p.redshift) / MPC_CM * k);
+    let r = p.redshift_coeff.map(|v| p.hubble_per_s * v);
+    let n = state.n_comoving_per_cmpc3;
+    let mut rhs =
+        std::array::from_fn(|g| emissivity[g] * p.source_fraction[g] - (a[g] + r[g]) * n[g]);
+    for g in 0..3 {
+        rhs[g] += r[g + 1] * n[g + 1];
+    }
+    Ok(rhs)
+}
+
+/// s^-1. N alone is converted from comoving density with (1+z)^3 once.
+/// This function does not query an opacity table or the GammaHI state field.
+pub fn gamma_species(state: &State, p: &GroupParams) -> GammaSpecies {
+    let prefactor = C_LIGHT * (1.0 + p.redshift).powi(3) / MPC_CM.powi(3);
+    let hi: [f64; 4] =
+        std::array::from_fn(|g| prefactor * p.sigma_hi_cm2[g] * state.n_comoving_per_cmpc3[g]);
+    let hei: [f64; 4] =
+        std::array::from_fn(|g| prefactor * p.sigma_hei_cm2[g] * state.n_comoving_per_cmpc3[g]);
+    let heii: [f64; 4] =
+        std::array::from_fn(|g| prefactor * p.sigma_heii_cm2[g] * state.n_comoving_per_cmpc3[g]);
+    GammaSpecies {
+        hi_per_s: hi.iter().sum(),
+        hei_per_s: hei.iter().sum(),
+        heii_per_s: heii.iter().sum(),
+        group_hi_per_s: hi,
+    }
+}
+
+rust/rei_microphysics/src/he_rct.rs 11918
+//! Opt-in ground-state HeIII + HI radiative charge transfer (RCT).
+//!
+//! This module adds a source-count ledger and an explicitly supplied escaped
+//! photon mean-energy closure to the existing static H/He RHS. It does not admit
+//! either nominal rate as physically certified, infer a spectrum, or modify the
+//! production microstep. All densities are proper cm^-3; rates are per proper s.
+use crate::{hhe_rhs, ForwardError, HHeModel, HHeRhs, HHeState};
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum RctSource { Kf96Nominal, Gm25Constant }
+
+/// Explicit scenario mapping, not a claim of isotope resolution in KF96.
+/// Gas-rest common-T Maxwell distributions, zero relative drift, H(1s), 4HeIII,
+/// HeII(1s) final state, and one spontaneous photon. No reverse/RA/NRCT channel.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum RctScenario { W82GroundStateCommonTemperatureZeroDrift }
+
+#[derive(Clone, Copy, Debug)]
+pub struct RctSourceRecord {
+    pub source_id: &'static str,
+    pub rate_source: &'static str,
+    pub mechanism_doi: &'static str,
+    pub snapshot_commit: &'static str,
+    pub provider_git_blob: &'static str,
+    pub packet_git_blob: &'static str,
+    pub minimum_k: f64,
+    pub maximum_k: f64,
+    pub lower_endpoint_approximate_in_source: bool,
+    pub coefficient_cm3_s: f64,
+    pub isotope_source_resolved: bool,
+    pub physical_admission: bool,
+    pub source_conflict_resolved: bool,
+    pub uncertainty: Option<f64>,
+    pub photon_energy_moment_ev: Option<f64>,
+}
+
+impl RctSource {
+    pub fn record(self) -> RctSourceRecord {
+        let (source_id, rate_source, provider_git_blob, packet_git_blob, minimum_k,
+            maximum_k, lower_endpoint_approximate_in_source, coefficient_cm3_s) = match self {
+            Self::Kf96Nominal => (
+                "KF96_HEIII_HI_RCT_NOMINAL_V1", "10.1086/192335 Eq.7 Table1 He2+",
+                "a2cdc62b238bea64d2dfe587f7efccc6ce3728e2",
+                "aaceceb59007c81328a3185d826dca7526039d1e", 1000.0, 1e7, true, 1e-14),
+            Self::Gm25Constant => (
+                "GM25_W82_RCX_CONSTANT_200_10000_K_V1", "arXiv:2511.21966v1 Appendix B.3",
+                "c3f5cb56b7f5babcbead21694de31b57ca4ff992",
+                "a93d3cf75e69390275c956a3b1b73912eaee0519", 200.0, 10000.0, false, 1.7e-13),
+        };
+        RctSourceRecord {
+            source_id, rate_source, mechanism_doi: "10.1103/PhysRevA.26.3164",
+            snapshot_commit: "21d5b8075429903d195d6e0e0c24a10c00b21063",
+            provider_git_blob, packet_git_blob, minimum_k, maximum_k,
+            lower_endpoint_approximate_in_source, coefficient_cm3_s,
+            // Explicit W82 scenario, not new isotope-data admission.
+            isotope_source_resolved: false, physical_admission: false,
+            source_conflict_resolved: false, uncertainty: None,
+            photon_energy_moment_ev: None,
+        }
+    }
+}
+
+/// Private fields prevent bypass of source choice and conflict acknowledgment.
+/// No default source, automatic source switch, extrapolation, or clamping.
+#[derive(Clone, Copy, Debug)]
+pub struct RctProvider { source: RctSource, scenario: RctScenario }
+
+impl RctProvider {
+    pub fn new(source: RctSource, scenario: RctScenario,
+               acknowledge_seventeen_fold_source_conflict: bool) -> Result<Self, ForwardError> {
+        if !acknowledge_seventeen_fold_source_conflict {
+            return Err(ForwardError::InvalidInput("RCT_SOURCE_CONFLICT_NOT_ACKNOWLEDGED"));
+        }
+        Ok(Self { source, scenario })
+    }
+    pub fn source(&self) -> RctSource { self.source }
+    pub fn scenario(&self) -> RctScenario { self.scenario }
+    pub fn record(&self) -> RctSourceRecord { self.source.record() }
+    pub fn coefficient_cm3_s(&self, temperature_k: f64) -> Result<f64, ForwardError> {
+        let r = self.record();
+        if !temperature_k.is_finite()
+            || !(r.minimum_k..=r.maximum_k).contains(&temperature_k) {
+            return Err(ForwardError::InvalidInput("RCT_TEMPERATURE_DOMAIN"));
+        }
+        Ok(r.coefficient_cm3_s)
+    }
+
+    /// Number-only ledger; missing photon/heat moments remain explicitly absent.
+    /// Fractions of an absent nuclear species receive zero RCT derivative.
+    /// (The baseline HHe RHS separately uses virtual per-capita equations.)
+    pub fn events(&self, model: &HHeModel, state: &HHeState)
+        -> Result<RctEventLedger, ForwardError> {
+        model.validate_state(state)?;
+        let temperature_k = model.temperature(state)?;
+        let k = self.coefficient_cm3_s(temperature_k)?;
+        let n_hi = model.n_h_cm3 * (1.0 - state.fractions[0]);
+        let n_heiii = model.n_he_cm3 * state.fractions[2];
+        let event_rate = (k * n_hi) * n_heiii;
+        let dh = if model.n_h_cm3 == 0.0 { 0.0 } else { event_rate / model.n_h_cm3 };
+        let dhe = if model.n_he_cm3 == 0.0 { 0.0 } else { event_rate / model.n_he_cm3 };
+        let q_ev = model.threshold_ev[2] - model.threshold_ev[0];
+        if !q_ev.is_finite() || q_ev <= 0.0 {
+            return Err(ForwardError::InvalidInput("RCT_Q_DOMAIN"));
+        }
+        let chemical = -(q_ev * model.ev_erg) * event_rate;
+        if [n_hi, n_heiii, event_rate, dh, dhe, chemical].iter().any(|x| !x.is_finite()) {
+            return Err(ForwardError::InvalidInput("RCT_OVERFLOW"));
+        }
+        Ok(RctEventLedger {
+            source: self.source, temperature_k, coefficient_cm3_s: k,
+            n_hi_cm3: n_hi, n_heiii_cm3: n_heiii,
+            event_rate_cm3_s: event_rate,
+            species_rate_cm3_s: [-event_rate, event_rate, 0.0, event_rate, -event_rate, 0.0],
+            fraction_rate_s: [dh, dhe, -dhe],
+            free_electron_rate_cm3_s: 0.0, emitted_photon_count_cm3_s: event_rate,
+            q_ev, chemical_energy_rate_erg_cm3_s: chemical,
+            thermal_photon_closure: RctClosureStatus::IncompleteScalarOnly,
+        })
+    }
+
+    /// The supplied event-weighted mean photon energy is a research closure input.
+    /// It is not predicted by the count provider, a group spectrum, or an OTS model.
+    pub fn closed_events(&self, model: &HHeModel, state: &HHeState,
+                         closure: EscapingMeanPhotonEnergy)
+        -> Result<ClosedRctLedger, ForwardError> {
+        let event = self.events(model, state)?;
+        let r = event.event_rate_cm3_s;
+        let heat = ((event.q_ev - closure.mean_ev) * model.ev_erg) * r;
+        let escape = (closure.mean_ev * model.ev_erg) * r;
+        if !heat.is_finite() || !escape.is_finite() {
+            return Err(ForwardError::InvalidInput("RCT_OVERFLOW"));
+        }
+        Ok(ClosedRctLedger {
+            event, mean_escaped_photon_energy_ev: closure.mean_ev,
+            closure_input_origin: "CALLER_SUPPLIED_NO_ATOMIC_MOMENT",
+            thermal_energy_rate_erg_cm3_s: heat,
+            escaped_energy_rate_erg_cm3_s: escape,
+            escaped_photon_count_cm3_s: r,
+            tracked_photon_rate_cm3_s: [0.0; 3],
+            physical_closure_admission: false,
+        })
+    }
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum RctClosureStatus { IncompleteScalarOnly }
+
+#[derive(Clone, Copy, Debug)]
+pub struct RctEventLedger {
+    pub source: RctSource,
+    pub temperature_k: f64,
+    pub coefficient_cm3_s: f64,
+    pub n_hi_cm3: f64,
+    pub n_heiii_cm3: f64,
+    pub event_rate_cm3_s: f64,
+    /// HI, HII, HeI, HeII, HeIII, free electron (proper cm^-3 s^-1).
+    pub species_rate_cm3_s: [f64; 6],
+    /// x_HII, y_HeII, y_HeIII (s^-1).
+    pub fraction_rate_s: [f64; 3],
+    pub free_electron_rate_cm3_s: f64,
+    pub emitted_photon_count_cm3_s: f64,
+    pub q_ev: f64,
+    pub chemical_energy_rate_erg_cm3_s: f64,
+    pub thermal_photon_closure: RctClosureStatus,
+}
+
+#[derive(Clone, Copy, Debug)]
+pub struct EscapingMeanPhotonEnergy { mean_ev: f64 }
+impl EscapingMeanPhotonEnergy {
+    /// Strictly positive for the declared real emitted photon; no physical upper bound
+    /// or moment accuracy is certified. Exact input provenance is owned by the caller.
+    pub fn research_input_ev(mean_ev: f64) -> Result<Self, ForwardError> {
+        if !mean_ev.is_finite() || mean_ev <= 0.0 {
+            return Err(ForwardError::InvalidInput("RCT_ESCAPE_MOMENT_DOMAIN"));
+        }
+        Ok(Self { mean_ev })
+    }
+    pub fn mean_ev(&self) -> f64 { self.mean_ev }
+}
+
+#[derive(Clone, Copy, Debug)]
+pub struct ClosedRctLedger {
+    pub event: RctEventLedger,
+    pub mean_escaped_photon_energy_ev: f64,
+    /// Exact caller input/scenario provenance belongs to the external run manifest.
+    pub closure_input_origin: &'static str,
+    pub thermal_energy_rate_erg_cm3_s: f64,
+    pub escaped_energy_rate_erg_cm3_s: f64,
+    pub escaped_photon_count_cm3_s: f64,
+    pub tracked_photon_rate_cm3_s: [f64; 3],
+    pub physical_closure_admission: bool,
+}
+
+/// Disabled is the only default. Enabled requires both a selected provider and
+/// a validated explicit escaped-photon energy moment; count-only cannot compose.
+#[derive(Clone, Copy, Debug, Default)]
+pub enum RctSelection {
+    #[default]
+    Disabled,
+    Escaping { provider: RctProvider, closure: EscapingMeanPhotonEnergy },
+}
+
+#[derive(Clone, Copy, Debug)]
+pub struct CombinedRctRhs {
+    pub baseline: HHeRhs,
+    pub combined: HHeRhs,
+    /// Separate event type: these are not electron-recombination events.
+    pub rct: Option<ClosedRctLedger>,
+}
+
+pub fn combined_hhe_rhs(model: &HHeModel, state: &HHeState, selection: RctSelection)
+    -> Result<CombinedRctRhs, ForwardError> {
+    let baseline = hhe_rhs(model, state)?;
+    let (provider, closure) = match selection {
+        RctSelection::Disabled => return Ok(CombinedRctRhs {
+            baseline, combined: baseline, rct: None }),
+        RctSelection::Escaping { provider, closure } => (provider, closure),
+    };
+    let rct = provider.closed_events(model, state, closure)?;
+    let mut combined = baseline;
+    for i in 0..3 { combined.derivative[i] += rct.event.fraction_rate_s[i]; }
+    combined.derivative[3] += rct.thermal_energy_rate_erg_cm3_s;
+    combined.escaped_energy_rate += rct.escaped_energy_rate_erg_cm3_s;
+    if combined.derivative.iter().any(|x| !x.is_finite())
+        || !combined.escaped_energy_rate.is_finite() {
+        return Err(ForwardError::InvalidInput("RCT_COMPOSED_OVERFLOW"));
+    }
+    Ok(CombinedRctRhs { baseline, combined, rct: Some(rct) })
+}
+
+/// Typed FT03 wrapper. Ft03Model.gas deliberately has zero legacy alpha/beta;
+/// passing that gas to combined_hhe_rhs would drop FT03 RR/CI/DR physics.
+#[derive(Clone, Copy, Debug)]
+pub struct CombinedFt03RctRhs {
+    pub baseline: crate::Ft03Rhs,
+    pub combined: crate::Ft03Rhs,
+    pub rct: Option<ClosedRctLedger>,
+}
+
+/// Compose against the actual temperature-dependent FT03 RHS, preserving its
+/// RR kinetic moments, two DR channels, CI and photo event inventories. This is
+/// an RHS adapter only; the FT03 implicit stepper does not call it yet.
+pub fn combined_ft03_rhs(model: &crate::Ft03Model, state: &HHeState, selection: RctSelection)
+    -> Result<CombinedFt03RctRhs, ForwardError> {
+    let baseline = crate::ft03_rhs(model, state)?;
+    let (provider, closure) = match selection {
+        RctSelection::Disabled => return Ok(CombinedFt03RctRhs {
+            baseline, combined: baseline, rct: None }),
+        RctSelection::Escaping { provider, closure } => (provider, closure),
+    };
+    let rct = provider.closed_events(&model.gas, state, closure)?;
+    let mut combined = baseline;
+    for i in 0..3 { combined.derivative[i] += rct.event.fraction_rate_s[i]; }
+    combined.derivative[3] += rct.thermal_energy_rate_erg_cm3_s;
+    combined.escaped_energy_rate += rct.escaped_energy_rate_erg_cm3_s;
+    if combined.derivative.iter().any(|x| !x.is_finite())
+        || !combined.escaped_energy_rate.is_finite() {
+        return Err(ForwardError::InvalidInput("RCT_COMPOSED_OVERFLOW"));
+    }
+    Ok(CombinedFt03RctRhs { baseline, combined, rct: Some(rct) })
+}
+
+rust/rei_microphysics/src/hhe_events.rs 9447
+//! Synthetic static H/He event model. All rates use proper number densities.
+use crate::ForwardError;
+
+#[derive(Clone, Copy, Debug)]
+pub struct HHeModel {
+    pub n_h_cm3: f64,
+    pub n_he_cm3: f64,
+    pub c_cm_s: f64,
+    pub kb_erg_k: f64,
+    pub ev_erg: f64,
+    pub threshold_ev: [f64; 3],
+    pub photon_energy_ev: [f64; 3],
+    pub sigma_cm2: [[f64; 3]; 3],
+    pub alpha_cm3_s: [f64; 3],
+    pub beta_cm3_s: [f64; 3],
+}
+
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct HHeState {
+    pub fractions: [f64; 3],
+    pub u_erg_cm3: f64,
+    pub photon_cm3: [f64; 3],
+    pub escaped_erg_cm3: f64,
+}
+
+#[derive(Clone, Copy, Debug, Default)]
+pub struct HHeEvents {
+    pub photo_per_cm3: [[f64; 3]; 3],
+    pub collision_per_cm3: [f64; 3],
+    pub recombination_per_cm3: [f64; 3],
+}
+
+impl HHeEvents {
+    pub(crate) fn plus(self, other: Self) -> Self {
+        let mut out = self;
+        for a in 0..3 {
+            for g in 0..3 {
+                out.photo_per_cm3[a][g] += other.photo_per_cm3[a][g];
+            }
+            out.collision_per_cm3[a] += other.collision_per_cm3[a];
+            out.recombination_per_cm3[a] += other.recombination_per_cm3[a];
+        }
+        out
+    }
+}
+
+#[derive(Clone, Copy, Debug)]
+pub struct HHeRhs {
+    pub derivative: [f64; 7],
+    pub photo_per_cm3_s: [[f64; 3]; 3],
+    pub collision_per_cm3_s: [f64; 3],
+    pub recombination_per_cm3_s: [f64; 3],
+    pub escaped_energy_rate: f64,
+}
+
+fn valid_nonnegative(x: f64) -> bool {
+    x.is_finite() && x >= 0.0
+}
+
+impl HHeModel {
+    pub fn controlled_fixture() -> Self {
+        Self {
+            n_h_cm3: 1e-4,
+            n_he_cm3: 8.3e-6,
+            c_cm_s: 29_979_245_800.0,
+            kb_erg_k: 1.380_649e-16,
+            ev_erg: 1.602_176_634e-12,
+            threshold_ev: [13.598_434_599_702, 24.587_389_011, 54.417_76],
+            photon_energy_ev: [13.7, 24.7, 54.5],
+            sigma_cm2: [
+                [6e-18, 1e-18, 1e-19],
+                [0.0, 7e-18, 1e-18],
+                [0.0, 0.0, 1.5e-18],
+            ],
+            alpha_cm3_s: [2e-13, 1e-12, 3e-13],
+            beta_cm3_s: [1e-16, 1e-17, 1e-18],
+        }
+    }
+
+    pub(crate) fn validate(&self) -> Result<(), ForwardError> {
+        if !valid_nonnegative(self.n_h_cm3)
+            || !valid_nonnegative(self.n_he_cm3)
+            || !(self.n_h_cm3 + self.n_he_cm3).is_finite()
+            || self.n_h_cm3 + self.n_he_cm3 <= 0.0
+            || !self.c_cm_s.is_finite()
+            || self.c_cm_s <= 0.0
+            || !self.kb_erg_k.is_finite()
+            || self.kb_erg_k <= 0.0
+            || !self.ev_erg.is_finite()
+            || self.ev_erg <= 0.0
+        {
+            return Err(ForwardError::InvalidInput("HHE_MODEL_DOMAIN"));
+        }
+        for a in 0..3 {
+            if !valid_nonnegative(self.threshold_ev[a])
+                || !valid_nonnegative(self.alpha_cm3_s[a])
+                || !valid_nonnegative(self.beta_cm3_s[a])
+            {
+                return Err(ForwardError::InvalidInput("HHE_MODEL_DOMAIN"));
+            }
+            for g in 0..3 {
+                let sigma = self.sigma_cm2[a][g];
+                if !valid_nonnegative(sigma)
+                    || (sigma > 0.0 && self.photon_energy_ev[g] < self.threshold_ev[a])
+                {
+                    return Err(ForwardError::InvalidInput("HHE_SUBTHRESHOLD_EDGE"));
+                }
+            }
+        }
+        if self.photon_energy_ev.iter().any(|&x| !valid_nonnegative(x)) {
+            return Err(ForwardError::InvalidInput("HHE_MODEL_DOMAIN"));
+        }
+        Ok(())
+    }
+
+    pub(crate) fn validate_state(&self, s: &HHeState) -> Result<(), ForwardError> {
+        self.validate()?;
+        let [h, he1, he2] = s.fractions;
+        if !valid_nonnegative(h)
+            || h > 1.0
+            || !valid_nonnegative(he1)
+            || !valid_nonnegative(he2)
+            || he1 + he2 > 1.0
+            || !valid_nonnegative(s.u_erg_cm3)
+            || !valid_nonnegative(s.escaped_erg_cm3)
+            || s.photon_cm3.iter().any(|&x| !valid_nonnegative(x))
+        {
+            return Err(ForwardError::InvalidInput("HHE_STATE_DOMAIN"));
+        }
+        Ok(())
+    }
+
+    pub fn electron_density(&self, s: &HHeState) -> Result<f64, ForwardError> {
+        self.validate_state(s)?;
+        let ne =
+            self.n_h_cm3 * s.fractions[0] + self.n_he_cm3 * (s.fractions[1] + 2.0 * s.fractions[2]);
+        if !ne.is_finite() {
+            return Err(ForwardError::InvalidInput("HHE_OVERFLOW"));
+        }
+        Ok(ne)
+    }
+
+    pub fn temperature(&self, s: &HHeState) -> Result<f64, ForwardError> {
+        let ne = self.electron_density(s)?;
+        let particles = self.n_h_cm3 + self.n_he_cm3 + ne;
+        let numerator = 2.0 * s.u_erg_cm3;
+        let denominator = 3.0 * self.kb_erg_k * particles;
+        if !particles.is_finite()
+            || !numerator.is_finite()
+            || !denominator.is_finite()
+            || denominator <= 0.0
+        {
+            return Err(ForwardError::InvalidInput("HHE_OVERFLOW"));
+        }
+        let t = numerator / denominator;
+        if !t.is_finite() || (s.u_erg_cm3 > 0.0 && t == 0.0) {
+            return Err(ForwardError::InvalidInput("HHE_OVERFLOW"));
+        }
+        Ok(t)
+    }
+
+    pub fn total_energy(&self, s: &HHeState) -> Result<f64, ForwardError> {
+        self.validate_state(s)?;
+        let [h, he1, he2] = s.fractions;
+        let binding = self.ev_erg
+            * (self.n_h_cm3 * h * self.threshold_ev[0]
+                + self.n_he_cm3
+                    * (he1 * self.threshold_ev[1]
+                        + he2 * (self.threshold_ev[1] + self.threshold_ev[2])));
+        let photons = self.ev_erg
+            * (0..3)
+                .map(|g| self.photon_energy_ev[g] * s.photon_cm3[g])
+                .sum::<f64>();
+        let total = s.u_erg_cm3 + binding + photons + s.escaped_erg_cm3;
+        if !total.is_finite() {
+            return Err(ForwardError::InvalidInput("HHE_OVERFLOW"));
+        }
+        Ok(total)
+    }
+}
+
+impl HHeState {
+    pub fn controlled_fixture(model: &HHeModel) -> Self {
+        let fractions = [0.01, 0.019, 0.001];
+        let ne =
+            model.n_h_cm3 * fractions[0] + model.n_he_cm3 * (fractions[1] + 2.0 * fractions[2]);
+        Self {
+            fractions,
+            u_erg_cm3: 1.5 * model.kb_erg_k * 1e4 * (model.n_h_cm3 + model.n_he_cm3 + ne),
+            photon_cm3: [2e-5, 2e-6, 2e-7],
+            escaped_erg_cm3: 0.0,
+        }
+    }
+
+    pub fn coordinates(&self) -> [f64; 7] {
+        [
+            self.fractions[0],
+            self.fractions[1],
+            self.fractions[2],
+            self.u_erg_cm3,
+            self.photon_cm3[0],
+            self.photon_cm3[1],
+            self.photon_cm3[2],
+        ]
+    }
+}
+
+pub fn hhe_rhs(model: &HHeModel, state: &HHeState) -> Result<HHeRhs, ForwardError> {
+    model.validate_state(state)?;
+    let [h, he1, he2] = state.fractions;
+    let lower = [
+        model.n_h_cm3 * (1.0 - h),
+        model.n_he_cm3 * (1.0 - (he1 + he2)),
+        model.n_he_cm3 * he1,
+    ];
+    let upper = [
+        model.n_h_cm3 * h,
+        model.n_he_cm3 * he1,
+        model.n_he_cm3 * he2,
+    ];
+    let ne = model.electron_density(state)?;
+    let temperature = model.temperature(state)?;
+    let mut photo = [[0.0; 3]; 3];
+    let mut collision = [0.0; 3];
+    let mut recombination = [0.0; 3];
+    let mut j = [0.0; 3];
+    let mut du = 0.0;
+    let mut escape = 0.0;
+    let mut photon_dot = [0.0; 3];
+    for a in 0..3 {
+        collision[a] = lower[a] * ne * model.beta_cm3_s[a];
+        recombination[a] = upper[a] * ne * model.alpha_cm3_s[a];
+        j[a] = collision[a] - recombination[a];
+        du -= collision[a] * model.threshold_ev[a] * model.ev_erg
+            + recombination[a] * 1.5 * model.kb_erg_k * temperature;
+        escape += recombination[a]
+            * (model.threshold_ev[a] * model.ev_erg + 1.5 * model.kb_erg_k * temperature);
+        for g in 0..3 {
+            photo[a][g] = model.c_cm_s * lower[a] * model.sigma_cm2[a][g] * state.photon_cm3[g];
+            j[a] += photo[a][g];
+            photon_dot[g] -= photo[a][g];
+            du += photo[a][g] * (model.photon_energy_ev[g] - model.threshold_ev[a]) * model.ev_erg;
+        }
+    }
+    // Per-capita equations remain meaningful if one nuclear density is zero.
+    let per_capita = |a: usize| {
+        let lower_fraction = [1.0 - h, 1.0 - (he1 + he2), he1][a];
+        let upper_fraction = [h, he1, he2][a];
+        let photo_rate: f64 = (0..3)
+            .map(|g| model.c_cm_s * model.sigma_cm2[a][g] * state.photon_cm3[g])
+            .sum();
+        lower_fraction * (photo_rate + ne * model.beta_cm3_s[a])
+            - upper_fraction * ne * model.alpha_cm3_s[a]
+    };
+    let d = [
+        per_capita(0),
+        per_capita(1) - per_capita(2),
+        per_capita(2),
+        du,
+        photon_dot[0],
+        photon_dot[1],
+        photon_dot[2],
+    ];
+    if d.iter().any(|x| !x.is_finite())
+        || !escape.is_finite()
+        || photo.iter().flatten().any(|x| !x.is_finite())
+        || collision
+            .iter()
+            .chain(recombination.iter())
+            .any(|x| !x.is_finite())
+    {
+        return Err(ForwardError::InvalidInput("HHE_OVERFLOW"));
+    }
+    Ok(HHeRhs {
+        derivative: d,
+        photo_per_cm3_s: photo,
+        collision_per_cm3_s: collision,
+        recombination_per_cm3_s: recombination,
+        escaped_energy_rate: escape,
+    })
+}
+
+rust/rei_microphysics/src/homogeneous_rates.rs 5642
+//! Primary-only homogeneous absorption ledger for bin-integrated photons.
+
+use crate::{Absorber, AtomicProvider, ForwardError, C_LIGHT, MPC_CM};
+
+const EV_ERG: f64 = 1.602176634e-12;
+const BINDING_EV: [f64; 3] = [13.598434599702, 24.587389011, 54.41776];
+const ABSORBERS: [Absorber; 3] = [Absorber::HI, Absorber::HeI, Absorber::HeII];
+
+#[derive(Debug, Clone, Copy)]
+pub struct PhotonNode {
+    pub energy_ev: f64,
+    /// Already quadrature weighted or bin integrated, per comoving cMpc^3.
+    pub n_comoving_per_cmpc3: f64,
+}
+
+#[derive(Debug, Clone, Copy)]
+pub struct OpacityOwners {
+    pub kappa_per_cm: f64,
+    pub fractions: [f64; 3],
+}
+
+#[derive(Debug, Clone, Copy)]
+pub struct HomogeneousPhotoRates {
+    pub gamma_per_s: [f64; 3],
+    pub events_proper_per_cm3_s: [f64; 3],
+    pub heat_erg_per_cm3_s: [f64; 3],
+    pub binding_erg_per_cm3_s: [f64; 3],
+    pub photon_loss_comoving_per_cmpc3_s: f64,
+    pub absorbed_erg_per_cm3_s: f64,
+}
+
+fn nonnegative(v: f64) -> Result<f64, ForwardError> {
+    if v.is_finite() && v >= 0.0 {
+        Ok(v)
+    } else {
+        Err(ForwardError::InvalidInput(
+            "HOMOGENEOUS_NONFINITE_OR_NEGATIVE",
+        ))
+    }
+}
+
+// This reference adapter promises consistent photon/species ledgers, not
+// scaled arithmetic for extreme inputs. Reject zero/subnormal positive
+// intermediate products, whose rounding can materially change owner counts.
+fn product(a: f64, b: f64) -> Result<f64, ForwardError> {
+    let value = nonnegative(a * b)?;
+    if a > 0.0 && b > 0.0 && value < f64::MIN_POSITIVE {
+        return Err(ForwardError::InvalidInput("HOMOGENEOUS_PRODUCT_UNDERFLOW"));
+    }
+    Ok(value)
+}
+
+fn cross_sections(provider: &AtomicProvider, energy_ev: f64) -> Result<[f64; 3], ForwardError> {
+    Ok([
+        provider.cross_section(ABSORBERS[0], energy_ev)?,
+        provider.cross_section(ABSORBERS[1], energy_ev)?,
+        provider.cross_section(ABSORBERS[2], energy_ev)?,
+    ])
+}
+
+fn opacity_from_sigma(n: [f64; 3], sigma: [f64; 3]) -> Result<OpacityOwners, ForwardError> {
+    let mut terms = [0.0; 3];
+    for i in 0..3 {
+        terms[i] = product(n[i], sigma[i])?;
+    }
+    let kappa = nonnegative(terms.iter().sum())?;
+    let fractions = if kappa > 0.0 {
+        [terms[0] / kappa, terms[1] / kappa, terms[2] / kappa]
+    } else {
+        [0.0; 3]
+    };
+    Ok(OpacityOwners {
+        kappa_per_cm: kappa,
+        fractions,
+    })
+}
+
+/// Absorber density is proper cm^-3; returned opacity excludes any effective MFP.
+pub fn homogeneous_opacity(
+    provider: &AtomicProvider,
+    n_absorber_proper_per_cm3: [f64; 3],
+    energy_ev: f64,
+) -> Result<OpacityOwners, ForwardError> {
+    for value in n_absorber_proper_per_cm3 {
+        nonnegative(value)?;
+    }
+    let sigma = cross_sections(provider, energy_ev)?;
+    opacity_from_sigma(n_absorber_proper_per_cm3, sigma)
+}
+
+/// Per-node photon count is comoving; all event and energy rates are proper.
+pub fn homogeneous_photo_rates(
+    provider: &AtomicProvider,
+    n: [f64; 3],
+    mean_scale_factor: f64,
+    nodes: &[PhotonNode],
+) -> Result<HomogeneousPhotoRates, ForwardError> {
+    for value in n {
+        nonnegative(value)?;
+    }
+    if !mean_scale_factor.is_finite() || mean_scale_factor <= 0.0 {
+        return Err(ForwardError::InvalidInput("MEAN_SCALE_FACTOR_INVALID"));
+    }
+    let proper_length = mean_scale_factor * MPC_CM;
+    if !proper_length.is_finite() || proper_length <= 0.0 {
+        return Err(ForwardError::InvalidInput("COMOVING_VOLUME_INVALID"));
+    }
+    let proper_volume = proper_length.powi(3);
+    if !proper_volume.is_finite() || proper_volume <= 0.0 {
+        return Err(ForwardError::InvalidInput("COMOVING_VOLUME_INVALID"));
+    }
+    let mut out = HomogeneousPhotoRates {
+        gamma_per_s: [0.0; 3],
+        events_proper_per_cm3_s: [0.0; 3],
+        heat_erg_per_cm3_s: [0.0; 3],
+        binding_erg_per_cm3_s: [0.0; 3],
+        photon_loss_comoving_per_cmpc3_s: 0.0,
+        absorbed_erg_per_cm3_s: 0.0,
+    };
+    for node in nodes {
+        nonnegative(node.n_comoving_per_cmpc3)?;
+        // Evaluate the fit even for zero density or photons, so its domain is enforced.
+        let sigma = cross_sections(provider, node.energy_ev)?;
+        let opacity = opacity_from_sigma(n, sigma)?;
+        let nproper = nonnegative(node.n_comoving_per_cmpc3 / proper_volume)?;
+        if node.n_comoving_per_cmpc3 > 0.0 && nproper < f64::MIN_POSITIVE {
+            return Err(ForwardError::InvalidInput("PHOTON_CONVERSION_UNDERFLOW"));
+        }
+        let photon_loss = product(
+            product(C_LIGHT, opacity.kappa_per_cm)?,
+            node.n_comoving_per_cmpc3,
+        )?;
+        out.photon_loss_comoving_per_cmpc3_s =
+            nonnegative(out.photon_loss_comoving_per_cmpc3_s + photon_loss)?;
+        for i in 0..3 {
+            let gamma = product(product(C_LIGHT, nproper)?, sigma[i])?;
+            let events = product(n[i], gamma)?;
+            let heat = product(product(events, node.energy_ev - BINDING_EV[i])?, EV_ERG)?;
+            let binding = product(product(events, BINDING_EV[i])?, EV_ERG)?;
+            out.gamma_per_s[i] = nonnegative(out.gamma_per_s[i] + gamma)?;
+            out.events_proper_per_cm3_s[i] = nonnegative(out.events_proper_per_cm3_s[i] + events)?;
+            out.heat_erg_per_cm3_s[i] = nonnegative(out.heat_erg_per_cm3_s[i] + heat)?;
+            out.binding_erg_per_cm3_s[i] = nonnegative(out.binding_erg_per_cm3_s[i] + binding)?;
+            out.absorbed_erg_per_cm3_s = nonnegative(
+                out.absorbed_erg_per_cm3_s + product(product(events, node.energy_ev)?, EV_ERG)?,
+            )?;
+        }
+    }
+    Ok(out)
+}
+
+rust/rei_microphysics/src/hydrogen_step.rs 4045
+//! Exact constant-rate hydrogen oracle; no H/He, physical-rate or interval claim.
+use crate::ForwardError;
+
+/// Constant ionization rates per neutral H and recombination rate per H ion [s^-1].
+#[derive(Debug, Clone, Copy)]
+pub struct HydrogenRates {
+    pub photo_per_s: f64,
+    pub collisional_per_s: f64,
+    pub secondary_per_s: f64,
+    pub recombination_per_s: f64,
+}
+
+/// Dimensionless endpoint and nonnegative cumulative event counts per H nucleus.
+#[derive(Debug, Clone, Copy)]
+pub struct HydrogenStep {
+    pub x_next: f64,
+    pub photo_events: f64,
+    pub collisional_events: f64,
+    pub secondary_events: f64,
+    pub recombination_events: f64,
+}
+
+/// Solve dx/dt = I(1-x)-Rx with independent photo/collisional/secondary ledgers.
+/// Inputs and arithmetic overflow are errors; no endpoint or event is clipped.
+/// Reversible cycles use min(q*dt,R*dt)*max(q,R)/(I+R) to avoid losing a
+/// representable event count when the rate ratio itself underflows.
+pub fn hydrogen_step(x: f64, dt: f64, rates: HydrogenRates) -> Result<HydrogenStep, ForwardError> {
+    let channels = [
+        rates.photo_per_s,
+        rates.collisional_per_s,
+        rates.secondary_per_s,
+    ];
+    if !x.is_finite()
+        || !(0.0..=1.0).contains(&x)
+        || !dt.is_finite()
+        || dt < 0.0
+        || channels
+            .iter()
+            .chain([rates.recombination_per_s].iter())
+            .any(|v| !v.is_finite() || *v < 0.0)
+    {
+        return Err(ForwardError::InvalidInput("INVALID_HYDROGEN_STEP_INPUT"));
+    }
+    let i = channels.iter().sum::<f64>();
+    let r = rates.recombination_per_s;
+    let k = i + r;
+    let depth = k * dt;
+    if !k.is_finite() || !depth.is_finite() {
+        return Err(ForwardError::InvalidInput("HYDROGEN_STEP_OVERFLOW"));
+    }
+    if dt == 0.0 || k == 0.0 {
+        return Ok(HydrogenStep {
+            x_next: x,
+            photo_events: 0.0,
+            collisional_events: 0.0,
+            secondary_events: 0.0,
+            recombination_events: 0.0,
+        });
+    }
+    // A depth rounded to zero also has zero representable event count.
+    let (loss, phi1, complement) = if depth == 0.0 {
+        (0.0, 1.0, 0.0)
+    } else {
+        let loss = -(-depth).exp_m1();
+        (loss, loss / depth, one_minus_phi1(depth))
+    };
+    let eq = i / k;
+    let x_next = if eq >= x {
+        x + (eq - x) * loss
+    } else {
+        eq + (x - eq) * (-depth).exp()
+    };
+    let cycles = |q: f64| (q * dt).min(r * dt) * (q.max(r) / k) * complement;
+    let ion_events = channels.map(|q| (q * dt) * (1.0 - x) * phi1 + cycles(q));
+    let rec_events = (r * dt) * x * phi1 + cycles(i);
+    let result = HydrogenStep {
+        x_next,
+        photo_events: ion_events[0],
+        collisional_events: ion_events[1],
+        secondary_events: ion_events[2],
+        recombination_events: rec_events,
+    };
+    if !x_next.is_finite()
+        || !(0.0..=1.0).contains(&x_next)
+        || ion_events
+            .iter()
+            .chain([rec_events].iter())
+            .any(|v| !v.is_finite() || *v < 0.0)
+    {
+        return Err(ForwardError::InvalidInput("HYDROGEN_STEP_NUMERICAL_DOMAIN"));
+    }
+    Ok(result)
+}
+
+// Managed Devstral candidate, externally checked against Decimal(90).
+// At most 7 alternating terms through t^7/8! for t<0.01. At that cap,
+// the first omitted term is <= t^8/9! (<2.8e-22 at the switch). Early
+// termination uses the last retained term < 1e-16*abs(sum); its truncation
+// bound is the next alternating term. Rounding error is separate. No clipping.
+pub fn one_minus_phi1(t: f64) -> f64 {
+    if t == 0.0 {
+        return 0.0;
+    }
+    const SMALL_T: f64 = 0.01;
+    if t < SMALL_T {
+        let mut sum: f64 = t / 2.0;
+        let mut term: f64 = t / 2.0;
+        let mut n: i32 = 1;
+        loop {
+            term *= -t / (n as f64 + 2.0);
+            sum += term;
+            n += 1;
+            if n > 6 || term.abs() < sum.abs() * 1e-16 {
+                break;
+            }
+        }
+        sum
+    } else {
+        1.0 - (-(-t).exp_m1()) / t
+    }
+}
+
+rust/rei_microphysics/src/interval_ad.rs 4598
+//! Seven-variable second-order interval automatic differentiation.
+use crate::interval_math::{Interval, IntervalError, Result};
+
+const N: usize = 7;
+
+#[derive(Clone, Debug)]
+pub struct Jet {
+    pub value: Interval,
+    pub gradient: [Interval; N],
+    pub hessian: [[Interval; N]; N],
+}
+
+fn zero() -> Interval {
+    Interval { lo: 0.0, hi: 0.0 }
+}
+
+impl Jet {
+    pub fn constant(value: Interval) -> Result<Self> {
+        value.valid()?;
+        Ok(Self {
+            value,
+            gradient: [zero(); N],
+            hessian: [[zero(); N]; N],
+        })
+    }
+    pub fn variable(value: Interval, index: usize) -> Result<Self> {
+        if index >= N {
+            return Err(IntervalError);
+        }
+        let mut out = Self::constant(value)?;
+        out.gradient[index] = Interval::point(1.0)?;
+        Ok(out)
+    }
+    fn valid(&self) -> Result<()> {
+        self.value.valid()?;
+        for v in self.gradient.iter().chain(self.hessian.iter().flatten()) {
+            v.valid()?;
+        }
+        Ok(())
+    }
+    pub fn add(&self, rhs: &Self) -> Result<Self> {
+        self.valid()?;
+        rhs.valid()?;
+        let mut out = Self::constant(self.value.add(&rhs.value)?)?;
+        for i in 0..N {
+            out.gradient[i] = self.gradient[i].add(&rhs.gradient[i])?;
+            for j in 0..N {
+                out.hessian[i][j] = self.hessian[i][j].add(&rhs.hessian[i][j])?;
+            }
+        }
+        Ok(out)
+    }
+    pub fn neg(&self) -> Result<Self> {
+        self.valid()?;
+        let mut out = Self::constant(self.value.neg()?)?;
+        for i in 0..N {
+            out.gradient[i] = self.gradient[i].neg()?;
+            for j in 0..N {
+                out.hessian[i][j] = self.hessian[i][j].neg()?;
+            }
+        }
+        Ok(out)
+    }
+    pub fn sub(&self, rhs: &Self) -> Result<Self> {
+        self.add(&rhs.neg()?)
+    }
+    pub fn mul(&self, rhs: &Self) -> Result<Self> {
+        self.valid()?;
+        rhs.valid()?;
+        let mut out = Self::constant(self.value.mul(&rhs.value)?)?;
+        for i in 0..N {
+            out.gradient[i] = self.gradient[i]
+                .mul(&rhs.value)?
+                .add(&self.value.mul(&rhs.gradient[i])?)?;
+            for j in 0..N {
+                out.hessian[i][j] = self.hessian[i][j]
+                    .mul(&rhs.value)?
+                    .add(&self.gradient[i].mul(&rhs.gradient[j])?)?
+                    .add(&self.gradient[j].mul(&rhs.gradient[i])?)?
+                    .add(&self.value.mul(&rhs.hessian[i][j])?)?;
+            }
+        }
+        Ok(out)
+    }
+    fn chain(&self, value: Interval, first: Interval, second: Interval) -> Result<Self> {
+        self.valid()?;
+        let mut out = Self::constant(value)?;
+        for i in 0..N {
+            out.gradient[i] = first.mul(&self.gradient[i])?;
+            for j in 0..N {
+                out.hessian[i][j] = second
+                    .mul(&self.gradient[i])?
+                    .mul(&self.gradient[j])?
+                    .add(&first.mul(&self.hessian[i][j])?)?;
+            }
+        }
+        Ok(out)
+    }
+    fn inverse(&self) -> Result<Self> {
+        self.valid()?;
+        let one = Interval::point(1.0)?;
+        let two = Interval::point(2.0)?;
+        let value = one.div(&self.value)?;
+        let square = value.mul(&value)?;
+        let first = square.neg()?;
+        let second = two.mul(&square)?.mul(&value)?;
+        self.chain(value, first, second)
+    }
+    pub fn div(&self, rhs: &Self) -> Result<Self> {
+        self.mul(&rhs.inverse()?)
+    }
+    pub fn exp(&self) -> Result<Self> {
+        let value = self.value.exp()?;
+        self.chain(value, value, value)
+    }
+    pub fn ln(&self) -> Result<Self> {
+        let value = self.value.ln()?;
+        let first = Interval::point(1.0)?.div(&self.value)?;
+        let second = first.mul(&first)?.neg()?;
+        self.chain(value, first, second)
+    }
+    pub fn powf(&self, p: f64) -> Result<Self> {
+        self.valid()?;
+        if self.value.lo <= 0.0 || !p.is_finite() {
+            return Err(IntervalError);
+        }
+        if p == 0.0 {
+            return Self::constant(Interval::point(1.0)?);
+        }
+        if p == 1.0 {
+            return Ok(self.clone());
+        }
+        let value = self.value.powf(p)?;
+        let ip = Interval::point(p)?;
+        let first = ip.mul(&value)?.div(&self.value)?;
+        let p_minus_one = ip.sub(&Interval::point(1.0)?)?;
+        let second = ip
+            .mul(&p_minus_one)?
+            .mul(&value)?
+            .div(&self.value.mul(&self.value)?)?;
+        self.chain(value, first, second)
+    }
+}
+
+rust/rei_microphysics/src/interval_math.rs 6813
+//! Finite binary64 enclosures. Every primitive rounds its result out by one
+//! representable number; transcendental functions use positive series and
+//! explicit geometric remainder bounds, never an assumed libm error bound.
+
+#[derive(Clone, Copy, Debug)]
+pub struct Interval {
+    pub lo: f64,
+    pub hi: f64,
+}
+
+#[derive(Clone, Copy, Debug)]
+pub struct IntervalError;
+
+pub type Result<T> = std::result::Result<T, IntervalError>;
+
+fn down(x: f64) -> f64 {
+    if x == 0.0 {
+        return -f64::from_bits(1);
+    }
+    if x > 0.0 {
+        f64::from_bits(x.to_bits() - 1)
+    } else {
+        f64::from_bits(x.to_bits() + 1)
+    }
+}
+
+fn up(x: f64) -> f64 {
+    if x == 0.0 {
+        return f64::from_bits(1);
+    }
+    if x > 0.0 {
+        f64::from_bits(x.to_bits() + 1)
+    } else {
+        f64::from_bits(x.to_bits() - 1)
+    }
+}
+
+impl Interval {
+    pub fn new(lo: f64, hi: f64) -> Result<Self> {
+        if lo.is_finite() && hi.is_finite() && lo <= hi {
+            Ok(Self { lo, hi })
+        } else {
+            Err(IntervalError)
+        }
+    }
+    pub fn point(x: f64) -> Result<Self> {
+        Self::new(x, x)
+    }
+    pub(crate) fn valid(&self) -> Result<()> {
+        Self::new(self.lo, self.hi).map(|_| ())
+    }
+    fn rounded(lo: f64, hi: f64) -> Result<Self> {
+        if !lo.is_finite() || !hi.is_finite() {
+            return Err(IntervalError);
+        }
+        Self::new(down(lo), up(hi))
+    }
+    pub fn add(&self, rhs: &Self) -> Result<Self> {
+        self.valid()?;
+        rhs.valid()?;
+        Self::rounded(self.lo + rhs.lo, self.hi + rhs.hi)
+    }
+    pub fn sub(&self, rhs: &Self) -> Result<Self> {
+        self.valid()?;
+        rhs.valid()?;
+        Self::rounded(self.lo - rhs.hi, self.hi - rhs.lo)
+    }
+    pub fn neg(&self) -> Result<Self> {
+        self.valid()?;
+        Self::new(-self.hi, -self.lo)
+    }
+    pub fn mul(&self, rhs: &Self) -> Result<Self> {
+        self.valid()?;
+        rhs.valid()?;
+        let p = [
+            self.lo * rhs.lo,
+            self.lo * rhs.hi,
+            self.hi * rhs.lo,
+            self.hi * rhs.hi,
+        ];
+        if p.iter().any(|x| !x.is_finite()) {
+            return Err(IntervalError);
+        }
+        Self::rounded(
+            p.iter().copied().fold(f64::INFINITY, f64::min),
+            p.iter().copied().fold(f64::NEG_INFINITY, f64::max),
+        )
+    }
+    pub fn div(&self, rhs: &Self) -> Result<Self> {
+        self.valid()?;
+        rhs.valid()?;
+        if rhs.lo <= 0.0 && rhs.hi >= 0.0 {
+            return Err(IntervalError);
+        }
+        let q = [
+            self.lo / rhs.lo,
+            self.lo / rhs.hi,
+            self.hi / rhs.lo,
+            self.hi / rhs.hi,
+        ];
+        if q.iter().any(|x| !x.is_finite()) {
+            return Err(IntervalError);
+        }
+        Self::rounded(
+            q.iter().copied().fold(f64::INFINITY, f64::min),
+            q.iter().copied().fold(f64::NEG_INFINITY, f64::max),
+        )
+    }
+
+    pub fn exp(&self) -> Result<Self> {
+        self.valid()?;
+        Self::new(exp_scalar(self.lo)?.lo, exp_scalar(self.hi)?.hi)
+    }
+    pub fn ln(&self) -> Result<Self> {
+        self.valid()?;
+        if self.lo <= 0.0 {
+            return Err(IntervalError);
+        }
+        Self::new(ln_scalar(self.lo)?.lo, ln_scalar(self.hi)?.hi)
+    }
+    pub fn powf(&self, exponent: f64) -> Result<Self> {
+        self.valid()?;
+        if self.lo <= 0.0 || !exponent.is_finite() {
+            return Err(IntervalError);
+        }
+        if exponent == 0.0 {
+            return Self::point(1.0);
+        }
+        if exponent == 1.0 {
+            return Ok(*self);
+        }
+        self.ln()?.mul(&Self::point(exponent)?)?.exp()
+    }
+}
+
+fn exp_scalar(x: f64) -> Result<Interval> {
+    if x == 0.0 {
+        return Interval::point(1.0);
+    }
+    if x < 0.0 {
+        // Halve before inversion so exp(large negative x) can underflow
+        // outward to [0, min_subnormal] without first overflowing exp(-x).
+        let mut magnitude = -x;
+        let mut squarings = 0;
+        while magnitude > 700.0 {
+            magnitude *= 0.5;
+            squarings += 1;
+        }
+        let positive = exp_scalar(magnitude)?;
+        let mut result = Interval::point(1.0)?.div(&positive)?;
+        for _ in 0..squarings {
+            result = result.mul(&result)?;
+            result.lo = result.lo.max(0.0);
+        }
+        return Ok(result);
+    }
+    let mut y = x;
+    let mut squarings = 0;
+    while y > 0.5 {
+        y *= 0.5;
+        squarings += 1;
+    }
+    let iy = Interval::point(y)?;
+    let mut term = Interval::point(1.0)?;
+    let mut sum = term;
+    // For 0 <= y <= 1/2, terms are positive and the omitted tail after
+    // term 40 is <= 2 * term_41: each later ratio is at most 1/2.
+    for n in 1..=40 {
+        term = term.mul(&iy)?.div(&Interval::point(n as f64)?)?;
+        sum = sum.add(&term)?;
+    }
+    let next = term.mul(&iy)?.div(&Interval::point(41.0)?)?;
+    let tail = next.mul(&Interval::point(2.0)?)?;
+    let mut result = Interval::new(sum.lo, sum.add(&tail)?.hi)?;
+    for _ in 0..squarings {
+        result = result.mul(&result)?;
+    }
+    Ok(result)
+}
+
+fn atanh_twice(z: Interval) -> Result<Interval> {
+    z.valid()?;
+    if z.lo < 0.0 || z.hi > 0.5 {
+        return Err(IntervalError);
+    }
+    let z2 = z.mul(&z)?;
+    let mut power = z;
+    let mut sum = Interval::point(0.0)?;
+    // 2 atanh(z) = 2 sum z^(2n+1)/(2n+1). For z <= 1/2,
+    // the remaining sum is <= 2*next_term/(1-z^2) <= 4*next_term.
+    for n in 0..40 {
+        let term = power.div(&Interval::point((2 * n + 1) as f64)?)?;
+        sum = sum.add(&term)?;
+        power = power.mul(&z2)?;
+    }
+    let next = power.div(&Interval::point(81.0)?)?;
+    let twice = sum.mul(&Interval::point(2.0)?)?;
+    let tail = next.mul(&Interval::point(4.0)?)?;
+    Interval::new(twice.lo, twice.add(&tail)?.hi)
+}
+
+fn ln_scalar(x: f64) -> Result<Interval> {
+    if x == 1.0 {
+        return Interval::point(0.0);
+    }
+    // Exact binary decomposition x = m*2^e, including subnormals. Scaling
+    // a subnormal by 2^54 is exact and makes its exponent field nonzero.
+    let (normal, correction) = if x < f64::MIN_POSITIVE {
+        (x * (2.0_f64).powi(54), -54)
+    } else {
+        (x, 0)
+    };
+    let bits = normal.to_bits();
+    let e = ((bits >> 52) & 0x7ff) as i32 - 1023 + correction;
+    let m = f64::from_bits((bits & ((1_u64 << 52) - 1)) | (1023_u64 << 52));
+    let ln2 = atanh_twice(Interval::point(1.0)?.div(&Interval::point(3.0)?)?)?;
+    let ln_m = if m == 1.0 {
+        Interval::point(0.0)?
+    } else {
+        let z = Interval::point(m)?
+            .sub(&Interval::point(1.0)?)?
+            .div(&Interval::point(m)?.add(&Interval::point(1.0)?)?)?;
+        atanh_twice(z)?
+    };
+    ln_m.add(&ln2.mul(&Interval::point(e as f64)?)?)
+}
+
+rust/rei_microphysics/src/joint_affine.rs 6266
+//! Outward-rounded differences of two affine enclosures over one parent box.
+//!
+//! The caller must separately prove that each map's nonlinear residual lies in
+//! its supplied remainder. This module only combines those inputs; it does not
+//! certify a physical discrete map or change a historical acceptance decision.
+
+use crate::ForwardError;
+
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct ClosedInterval {
+    pub lower: f64,
+    pub upper: f64,
+}
+
+impl ClosedInterval {
+    pub fn new(lower: f64, upper: f64) -> Result<Self, ForwardError> {
+        if !lower.is_finite() || !upper.is_finite() {
+            return Err(ForwardError::InvalidInput("JOINT_INTERVAL_NONFINITE"));
+        }
+        if lower > upper {
+            return Err(ForwardError::InvalidInput("JOINT_INTERVAL_REVERSED"));
+        }
+        Ok(Self { lower, upper })
+    }
+
+    pub fn point(value: f64) -> Result<Self, ForwardError> {
+        Self::new(value, value)
+    }
+
+    pub fn contains(self, value: f64) -> bool {
+        value.is_finite() && self.lower <= value && value <= self.upper
+    }
+
+    fn is_zero(self) -> bool {
+        self.lower == 0.0 && self.upper == 0.0
+    }
+
+    fn checked(self) -> Result<Self, ForwardError> {
+        Self::new(self.lower, self.upper)
+    }
+
+    fn add(self, other: Self) -> Result<Self, ForwardError> {
+        if self.is_zero() {
+            return Ok(other);
+        }
+        if other.is_zero() {
+            return Ok(self);
+        }
+        Ok(Self {
+            lower: down(self.lower + other.lower)?,
+            upper: up(self.upper + other.upper)?,
+        })
+    }
+
+    fn sub(self, other: Self) -> Result<Self, ForwardError> {
+        if other.is_zero() {
+            return Ok(self);
+        }
+        if self.is_zero() {
+            return Ok(Self {
+                lower: -other.upper,
+                upper: -other.lower,
+            });
+        }
+        // Equal point operands are identical binary64 values, so their exact
+        // difference is zero. Intervals with width are never cancelled here.
+        if self.lower == self.upper && other.lower == other.upper && self.lower == other.lower {
+            return Self::point(0.0);
+        }
+        Ok(Self {
+            lower: down(self.lower - other.upper)?,
+            upper: up(self.upper - other.lower)?,
+        })
+    }
+
+    fn mul(self, other: Self) -> Result<Self, ForwardError> {
+        if self.is_zero() || other.is_zero() {
+            return Self::point(0.0);
+        }
+        let products = [
+            self.lower * other.lower,
+            self.lower * other.upper,
+            self.upper * other.lower,
+            self.upper * other.upper,
+        ];
+        if products.iter().any(|x| !x.is_finite()) {
+            return Err(ForwardError::InvalidInput("JOINT_ARITHMETIC_OVERFLOW"));
+        }
+        let lower = products.iter().copied().fold(f64::INFINITY, f64::min);
+        let upper = products.iter().copied().fold(f64::NEG_INFINITY, f64::max);
+        Ok(Self {
+            lower: down(lower)?,
+            upper: up(upper)?,
+        })
+    }
+}
+
+fn down(value: f64) -> Result<f64, ForwardError> {
+    if !value.is_finite() {
+        return Err(ForwardError::InvalidInput("JOINT_ARITHMETIC_OVERFLOW"));
+    }
+    let bound = value.next_down();
+    if !bound.is_finite() {
+        return Err(ForwardError::InvalidInput("JOINT_ARITHMETIC_OVERFLOW"));
+    }
+    Ok(bound)
+}
+
+fn up(value: f64) -> Result<f64, ForwardError> {
+    if !value.is_finite() {
+        return Err(ForwardError::InvalidInput("JOINT_ARITHMETIC_OVERFLOW"));
+    }
+    let bound = value.next_up();
+    if !bound.is_finite() {
+        return Err(ForwardError::InvalidInput("JOINT_ARITHMETIC_OVERFLOW"));
+    }
+    Ok(bound)
+}
+
+/// Intervals for deviations from a single, caller-chosen reference state.
+/// Every coordinate in both images must refer to this same state.
+#[derive(Clone, Copy, Debug)]
+pub struct JointParent<'a> {
+    pub coordinate_id: &'a str,
+    pub deviations: &'a [ClosedInterval],
+}
+
+/// `offset + sum(coefficients[i] * deviation[i]) + remainder`.
+///
+/// Coefficients and offset are exact binary64 input values for this arithmetic
+/// contract. Any error in their derivation must be included in `remainder`.
+#[derive(Clone, Copy, Debug)]
+pub struct AffineEnclosure<'a> {
+    pub parent_id: &'a str,
+    pub offset: f64,
+    pub coefficients: &'a [f64],
+    pub remainder: ClosedInterval,
+}
+
+/// Enclose `full(x) - two_half(x)` with both maps evaluated at the same `x`.
+/// The independently certified map remainders are treated as uncorrelated.
+pub fn joint_affine_difference(
+    parent: JointParent<'_>,
+    full: AffineEnclosure<'_>,
+    two_half: AffineEnclosure<'_>,
+) -> Result<ClosedInterval, ForwardError> {
+    if parent.coordinate_id.is_empty()
+        || parent.coordinate_id != full.parent_id
+        || parent.coordinate_id != two_half.parent_id
+    {
+        return Err(ForwardError::InvalidInput("JOINT_PARENT_ID_MISMATCH"));
+    }
+    if parent.deviations.is_empty()
+        || parent.deviations.len() != full.coefficients.len()
+        || parent.deviations.len() != two_half.coefficients.len()
+    {
+        return Err(ForwardError::InvalidInput(
+            "JOINT_PARENT_DIMENSION_MISMATCH",
+        ));
+    }
+    for deviation in parent.deviations {
+        deviation.checked()?;
+    }
+    full.remainder.checked()?;
+    two_half.remainder.checked()?;
+    let mut difference =
+        ClosedInterval::point(full.offset)?.sub(ClosedInterval::point(two_half.offset)?)?;
+    for (index, deviation) in parent.deviations.iter().enumerate() {
+        let coefficient = ClosedInterval::point(full.coefficients[index])?
+            .sub(ClosedInterval::point(two_half.coefficients[index])?)?;
+        difference = difference.add(coefficient.mul(*deviation)?)?;
+    }
+    difference.add(full.remainder.sub(two_half.remainder)?)
+}
+
+/// A strict synthetic local-error decision. `false` never writes a state.
+pub fn below_strict_error_limit(
+    difference: ClosedInterval,
+    limit: f64,
+) -> Result<bool, ForwardError> {
+    difference.checked()?;
+    if !limit.is_finite() || limit < 0.0 {
+        return Err(ForwardError::InvalidInput("JOINT_ERROR_LIMIT_INVALID"));
+    }
+    Ok(difference.lower > -limit && difference.upper < limit)
+}
+
+rust/rei_microphysics/src/lib.rs 3917
+//! Rust-only fixed-input microphysics kernels and synthetic static H/He microsteps.
+//! f64 tests are implementation evidence, not a validated enclosure.
+//! The original four-group N is comoving count per cMpc^3; atomic densities are proper cm^-3.
+//! Synthetic three-group H/He photons are proper cm^-3.
+#![forbid(unsafe_code)]
+
+mod angular_photons;
+mod adaptive_history;
+mod atomic_provider;
+mod bianchi_i;
+pub mod coverage;
+mod ft03_controlled;
+mod ft03_interval;
+mod ft03_rates;
+mod group_rates;
+mod hhe_events;
+mod homogeneous_rates;
+mod hydrogen_step;
+mod interval_ad;
+mod interval_math;
+mod joint_affine;
+mod lift;
+mod microstep;
+mod thermal;
+
+pub use angular_photons::{PhotonBins, PhotonGrid, PhotonPacket, RadiationState};
+pub use adaptive_history::{certified_ft03_trial, try_certified_ft03_step, scaled as ft03_scaled, CertifiedTrial, RootSite};
+pub use atomic_provider::{
+    Absorber, AtomicProvider, CoefficientUnits, ObservableKind, RawCoefficient, RawProcess,
+    RawRecord, RecombinationCase, SourceFrame, TemperatureDomain,
+};
+pub use bianchi_i::{
+    CharacteristicRay, ConstantHubbleBackground, GeometryBackground, GeometrySnapshot,
+    RayDerivative,
+};
+pub use ft03_controlled::{
+    ft03_adaptive_step, ft03_implicit_step, ft03_rhs, ft03_try_step, Ft03Events, Ft03Model,
+    Ft03Rhs, Ft03Step, FT03_MODEL_ID,
+};
+pub use ft03_interval::ft03_interval_rhs;
+pub use ft03_rates::{ft03_coefficients, Ft03Coefficients};
+pub use group_rates::{
+    gamma_species, opacity_cMpc_inv, pchip_eval, photon_rates, transform_z_to_y, PchipTable,
+    C_LIGHT, MPC_CM,
+};
+pub use hhe_events::{hhe_rhs, HHeEvents, HHeModel, HHeRhs, HHeState};
+pub use homogeneous_rates::{
+    homogeneous_opacity, homogeneous_photo_rates, HomogeneousPhotoRates, OpacityOwners, PhotonNode,
+};
+pub use hydrogen_step::{hydrogen_step, HydrogenRates, HydrogenStep};
+pub use interval_ad::Jet;
+pub use interval_math::Interval;
+pub use joint_affine::{
+    below_strict_error_limit, joint_affine_difference, AffineEnclosure, ClosedInterval, JointParent,
+};
+pub use lift::{positive_mass_projection, signed_transfer_lift};
+pub use microstep::{adaptive_hhe_step, implicit_hhe_step, try_hhe_step, HHeStep, StepControl};
+
+#[derive(Debug, Clone)]
+pub struct State {
+    pub n_comoving_per_cmpc3: [f64; 4],
+    pub x_hii: f64,
+    /// HeI, HeII, HeIII fractions.
+    pub helium: [f64; 3],
+    pub u_erg_per_cm3: f64,
+    pub gamma_hi_per_s: f64,
+}
+
+#[derive(Debug, Clone)]
+pub struct GroupParams {
+    pub redshift: f64,
+    pub n_h_proper_per_cm3: f64,
+    pub n_he_proper_per_cm3: f64,
+    pub hubble_per_s: f64,
+    pub sigma_hi_cm2: [f64; 4],
+    pub sigma_hei_cm2: [f64; 4],
+    pub sigma_heii_cm2: [f64; 4],
+    pub redshift_coeff: [f64; 4],
+    pub source_fraction: [f64; 4],
+    pub lowgroup_log_opacity: [PchipTable; 2],
+}
+
+#[derive(Debug, Clone)]
+pub struct GammaSpecies {
+    pub hi_per_s: f64,
+    pub hei_per_s: f64,
+    pub heii_per_s: f64,
+    pub group_hi_per_s: [f64; 4],
+}
+
+#[derive(Debug, Clone)]
+pub struct SignedLift {
+    pub positive: Vec<f64>,
+    pub negative: Vec<f64>,
+    pub signed: Vec<f64>,
+}
+
+#[derive(Debug, Clone)]
+pub enum ForwardError {
+    InvalidInput(&'static str),
+    OutsideTableDomain { x: f64, lower: f64, upper: f64 },
+    InfeasibleZeroPriorSupport,
+    MissingAuthority(&'static str),
+}
+
+impl ForwardError {
+    pub fn code(&self) -> &'static str {
+        match self {
+            Self::InvalidInput(code) => code,
+            Self::OutsideTableDomain { .. } => "OUTSIDE_TABLE_DOMAIN",
+            Self::InfeasibleZeroPriorSupport => "INFEASIBLE_ZERO_PRIOR_SUPPORT",
+            Self::MissingAuthority(_) => "MISSING_AUTHORITY",
+        }
+    }
+}
+impl std::fmt::Display for ForwardError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.code())
+    }
+}
+impl std::error::Error for ForwardError {}
+
+pub mod flrw_three_equations;
+
+pub mod he_rct;
+
+rust/rei_microphysics/src/lift.rs 1749
+//! Preserve node_lift_operator.py validation order, including zero support.
+use crate::{ForwardError, SignedLift};
+
+pub fn positive_mass_projection(prior: &[f64], total: f64) -> Result<Vec<f64>, ForwardError> {
+    if prior.iter().any(|p| !p.is_finite()) {
+        return Err(ForwardError::InvalidInput("PRIOR_NOT_FINITE"));
+    }
+    if !total.is_finite() || total < 0.0 {
+        return Err(ForwardError::InvalidInput("INVALID_TOTAL"));
+    }
+    if prior.iter().any(|p| *p < 0.0) {
+        return Err(ForwardError::InvalidInput("NEGATIVE_PRIOR"));
+    }
+    if total == 0.0 {
+        return Ok(vec![0.0; prior.len()]);
+    }
+    let s: f64 = prior.iter().sum();
+    if s <= 0.0 {
+        return Err(ForwardError::InfeasibleZeroPriorSupport);
+    }
+    // Do not repair the original module's finite-input sum overflow behavior.
+    Ok(prior.iter().map(|p| p * (total / s)).collect())
+}
+
+pub fn signed_transfer_lift(rate: f64, prior: &[f64]) -> Result<SignedLift, ForwardError> {
+    if prior.iter().any(|p| !p.is_finite()) {
+        return Err(ForwardError::InvalidInput(
+            "CONDITIONAL_MASS_PRIOR_NOT_FINITE",
+        ));
+    }
+    let s: f64 = prior.iter().sum();
+    if prior.iter().any(|p| *p < 0.0) || s <= 0.0 {
+        return Err(ForwardError::InvalidInput("INVALID_CONDITIONAL_MASS_PRIOR"));
+    }
+    if !rate.is_finite() {
+        return Err(ForwardError::InvalidInput("NONFINITE_RATE"));
+    }
+    let positive: Vec<_> = prior.iter().map(|p| (p / s) * rate.max(0.0)).collect();
+    let negative: Vec<_> = prior.iter().map(|p| (p / s) * (-rate).max(0.0)).collect();
+    let signed = positive.iter().zip(&negative).map(|(p, n)| p - n).collect();
+    Ok(SignedLift {
+        positive,
+        negative,
+        signed,
+    })
+}
+
+rust/rei_microphysics/src/microstep.rs 8928
+//! Positive backward Euler solve for the controlled H/He system.
+use crate::{hhe_rhs, thermal::endpoint_thermal, ForwardError, HHeEvents, HHeModel, HHeState};
+
+#[derive(Clone, Copy, Debug)]
+pub struct StepControl {
+    pub max_iterations: usize,
+    pub residual_tolerance: f64,
+}
+
+impl Default for StepControl {
+    fn default() -> Self {
+        Self {
+            max_iterations: 80,
+            residual_tolerance: 1e-14,
+        }
+    }
+}
+
+#[derive(Clone, Copy, Debug)]
+pub struct HHeStep {
+    pub state: HHeState,
+    pub events: HHeEvents,
+    pub iterations: usize,
+    pub residual_norm: f64,
+    pub local_error: f64,
+}
+
+/// Seven coordinate backward Euler residual evaluated at the final endpoint.
+/// Fractions use unit scales, thermal energy uses old u, and each photon
+/// coordinate uses its old group density, with 1e-30 floors for zero inputs.
+fn be_endpoint_residual(
+    model: &HHeModel,
+    old: &HHeState,
+    new: &HHeState,
+    dt: f64,
+) -> Result<(f64, HHeEvents), ForwardError> {
+    let rhs = hhe_rhs(model, new)?;
+    let x0 = old.coordinates();
+    let x1 = new.coordinates();
+    let scale = [
+        1.0,
+        1.0,
+        1.0,
+        old.u_erg_cm3.max(1e-30),
+        old.photon_cm3[0].max(1e-30),
+        old.photon_cm3[1].max(1e-30),
+        old.photon_cm3[2].max(1e-30),
+    ];
+    let mut norm: f64 = 0.0;
+    for i in 0..7 {
+        norm = norm.max(((x1[i] - x0[i] - dt * rhs.derivative[i]) / scale[i]).abs());
+    }
+    let escape_scale = model.total_energy(old)?.max(1e-30);
+    norm = norm.max(
+        ((new.escaped_erg_cm3 - old.escaped_erg_cm3 - dt * rhs.escaped_energy_rate) / escape_scale)
+            .abs(),
+    );
+    let mut events = HHeEvents::default();
+    for a in 0..3 {
+        events.collision_per_cm3[a] = dt * rhs.collision_per_cm3_s[a];
+        events.recombination_per_cm3[a] = dt * rhs.recombination_per_cm3_s[a];
+        for g in 0..3 {
+            events.photo_per_cm3[a][g] = dt * rhs.photo_per_cm3_s[a][g];
+        }
+    }
+    if !norm.is_finite()
+        || events
+            .photo_per_cm3
+            .iter()
+            .flatten()
+            .any(|x| !x.is_finite())
+        || events
+            .collision_per_cm3
+            .iter()
+            .chain(events.recombination_per_cm3.iter())
+            .any(|x| !x.is_finite())
+    {
+        return Err(ForwardError::InvalidInput("HHE_OVERFLOW"));
+    }
+    Ok((norm, events))
+}
+
+fn check_invariants(
+    model: &HHeModel,
+    old: &HHeState,
+    new: &HHeState,
+    events: &HHeEvents,
+    tolerance: f64,
+) -> Result<(), ForwardError> {
+    let energy0 = model.total_energy(old)?;
+    let energy1 = model.total_energy(new)?;
+    let mut norm = ((energy1 - energy0) / energy0.max(1e-30)).abs();
+    let mut j = [0.0; 3];
+    for (a, value) in j.iter_mut().enumerate() {
+        *value = events.photo_per_cm3[a].iter().sum::<f64>() + events.collision_per_cm3[a]
+            - events.recombination_per_cm3[a];
+    }
+    let counts = [
+        (
+            model.n_h_cm3 * (new.fractions[0] - old.fractions[0]) - j[0],
+            model.n_h_cm3,
+        ),
+        (
+            model.n_he_cm3 * (new.fractions[1] - old.fractions[1]) - j[1] + j[2],
+            model.n_he_cm3,
+        ),
+        (
+            model.n_he_cm3 * (new.fractions[2] - old.fractions[2]) - j[2],
+            model.n_he_cm3,
+        ),
+    ];
+    for (difference, scale) in counts {
+        norm = norm.max((difference / scale.max(1e-30)).abs());
+    }
+    for g in 0..3 {
+        let absorbed: f64 = (0..3).map(|a| events.photo_per_cm3[a][g]).sum();
+        norm = norm.max(
+            ((old.photon_cm3[g] - new.photon_cm3[g] - absorbed) / old.photon_cm3[g].max(1e-30))
+                .abs(),
+        );
+    }
+    if !norm.is_finite() || norm > tolerance.max(1e-13) * 8.0 {
+        return Err(ForwardError::InvalidInput("HHE_INVARIANT_RESIDUAL"));
+    }
+    Ok(())
+}
+
+pub fn implicit_hhe_step(
+    model: &HHeModel,
+    old: &HHeState,
+    dt: f64,
+    control: StepControl,
+) -> Result<HHeStep, ForwardError> {
+    model.validate_state(old)?;
+    if !dt.is_finite()
+        || dt < 0.0
+        || !control.residual_tolerance.is_finite()
+        || control.residual_tolerance <= 0.0
+    {
+        return Err(ForwardError::InvalidInput("HHE_STEP_CONTROL"));
+    }
+    if dt == 0.0 {
+        return Ok(HHeStep {
+            state: *old,
+            events: HHeEvents::default(),
+            iterations: 0,
+            residual_norm: 0.0,
+            local_error: 0.0,
+        });
+    }
+    if control.max_iterations == 0 {
+        return Err(ForwardError::InvalidInput("HHE_STEP_CONTROL"));
+    }
+    let mut guess = *old;
+    for iteration in 1..=control.max_iterations {
+        let ne = model.electron_density(&guess)?;
+        let [h, he1, he2] = guess.fractions;
+        let lower = [
+            model.n_h_cm3 * (1.0 - h),
+            model.n_he_cm3 * (1.0 - (he1 + he2)),
+            model.n_he_cm3 * he1,
+        ];
+        let mut next = guess;
+        for g in 0..3 {
+            let opacity: f64 = (0..3).map(|a| lower[a] * model.sigma_cm2[a][g]).sum();
+            next.photon_cm3[g] = old.photon_cm3[g] / (1.0 + dt * model.c_cm_s * opacity);
+        }
+        let photo_rate = std::array::from_fn::<_, 3, _>(|a| {
+            (0..3)
+                .map(|g| model.c_cm_s * model.sigma_cm2[a][g] * next.photon_cm3[g])
+                .sum::<f64>()
+        });
+        let ion = std::array::from_fn::<_, 3, _>(|a| photo_rate[a] + ne * model.beta_cm3_s[a]);
+        let rr = std::array::from_fn::<_, 3, _>(|a| ne * model.alpha_cm3_s[a]);
+        next.fractions[0] = (old.fractions[0] + dt * ion[0]) / (1.0 + dt * (ion[0] + rr[0]));
+        let p0old = 1.0 - (old.fractions[1] + old.fractions[2]);
+        let p2old = old.fractions[2];
+        let a = dt * ion[1];
+        let b = dt * rr[1];
+        let c = dt * ion[2];
+        let d = dt * rr[2];
+        // Nonnegative production terms avoid cancellation at a zero HeII boundary.
+        let p1 = (old.fractions[1] + p0old * (a / (1.0 + a)) + p2old * (d / (1.0 + d)))
+            / (1.0 + b / (1.0 + a) + c / (1.0 + d));
+        let p2 = (p2old + c * p1) / (1.0 + d);
+        next.fractions[1] = p1;
+        next.fractions[2] = p2;
+        // Rates are independent of temperature in this synthetic fixture.
+        // The temporary u merely permits evaluating the endpoint event rates.
+        let rates = hhe_rhs(model, &next)?;
+        let (u, escaped) = endpoint_thermal(model, old, &next, &rates, dt)?;
+        next.u_erg_cm3 = u;
+        next.escaped_erg_cm3 = escaped;
+        model.validate_state(&next)?;
+        let (norm, events) = be_endpoint_residual(model, old, &next, dt)?;
+        if norm < control.residual_tolerance {
+            check_invariants(model, old, &next, &events, control.residual_tolerance)?;
+            return Ok(HHeStep {
+                state: next,
+                events,
+                iterations: iteration,
+                residual_norm: norm,
+                local_error: 0.0,
+            });
+        }
+        guess = next;
+    }
+    Err(ForwardError::InvalidInput("HHE_NONCONVERGENCE"))
+}
+
+pub fn try_hhe_step(
+    model: &HHeModel,
+    state: &mut HHeState,
+    dt: f64,
+    control: StepControl,
+) -> Result<HHeStep, ForwardError> {
+    let result = implicit_hhe_step(model, state, dt, control)?;
+    *state = result.state;
+    Ok(result)
+}
+
+pub fn adaptive_hhe_step(
+    model: &HHeModel,
+    old: &HHeState,
+    dt: f64,
+    control: StepControl,
+) -> Result<HHeStep, ForwardError> {
+    if dt == 0.0 {
+        return implicit_hhe_step(model, old, dt, control);
+    }
+    let full = implicit_hhe_step(model, old, dt, control)?;
+    let half1 = implicit_hhe_step(model, old, 0.5 * dt, control)?;
+    let half2 = implicit_hhe_step(model, &half1.state, 0.5 * dt, control)?;
+    let t_full = model.temperature(&full.state)?;
+    let t_half = model.temperature(&half2.state)?;
+    if t_full <= 0.0 || t_half <= 0.0 {
+        return Err(ForwardError::InvalidInput("HHE_TEMPERATURE_DOMAIN"));
+    }
+    let mut error = (t_full.ln() - t_half.ln()).abs();
+    for a in 0..3 {
+        error = error.max((full.state.fractions[a] - half2.state.fractions[a]).abs());
+    }
+    if !error.is_finite() || error >= 2e-4 {
+        return Err(ForwardError::InvalidInput("HHE_LOCAL_ERROR"));
+    }
+    let events = half1.events.plus(half2.events);
+    if events
+        .photo_per_cm3
+        .iter()
+        .flatten()
+        .any(|x| !x.is_finite())
+        || events
+            .collision_per_cm3
+            .iter()
+            .chain(events.recombination_per_cm3.iter())
+            .any(|x| !x.is_finite())
+    {
+        return Err(ForwardError::InvalidInput("HHE_OVERFLOW"));
+    }
+    Ok(HHeStep {
+        state: half2.state,
+        events,
+        iterations: full.iterations + half1.iterations + half2.iterations,
+        residual_norm: half1.residual_norm.max(half2.residual_norm),
+        local_error: error,
+    })
+}
+
+rust/rei_microphysics/src/thermal.rs 1489
+use crate::{ForwardError, HHeModel, HHeRhs, HHeState};
+
+/// Solve the backward Euler thermal balance with its endpoint recombination sink.
+pub(crate) fn endpoint_thermal(
+    model: &HHeModel,
+    old: &HHeState,
+    candidate: &HHeState,
+    rates: &HHeRhs,
+    dt: f64,
+) -> Result<(f64, f64), ForwardError> {
+    let mut heating = 0.0;
+    let mut recombination_sum = 0.0;
+    let mut escape_binding = 0.0;
+    for a in 0..3 {
+        for g in 0..3 {
+            heating += rates.photo_per_cm3_s[a][g]
+                * (model.photon_energy_ev[g] - model.threshold_ev[a])
+                * model.ev_erg;
+        }
+        heating -= rates.collision_per_cm3_s[a] * model.threshold_ev[a] * model.ev_erg;
+        recombination_sum += rates.recombination_per_cm3_s[a];
+        escape_binding += rates.recombination_per_cm3_s[a] * model.threshold_ev[a] * model.ev_erg;
+    }
+    let ne = model.electron_density(candidate)?;
+    let npart = model.n_h_cm3 + model.n_he_cm3 + ne;
+    let numerator = old.u_erg_cm3 + dt * heating;
+    let denominator = 1.0 + dt * recombination_sum / npart;
+    let u = numerator / denominator;
+    let temperature = 2.0 * u / (3.0 * model.kb_erg_k * npart);
+    let escaped = old.escaped_erg_cm3
+        + dt * (escape_binding + 1.5 * model.kb_erg_k * temperature * recombination_sum);
+    if !u.is_finite() || u < 0.0 || !escaped.is_finite() || escaped < 0.0 {
+        return Err(ForwardError::InvalidInput("HHE_THERMAL_DOMAIN"));
+    }
+    Ok((u, escaped))
+}
+
+rust/rei_microphysics/examples/first_interval.rs 22094
+//! Static FT03 first canonical interval: atomic accepted trials and exact resume.
+use rei_microphysics::{
+    certified_ft03_trial, Ft03Events, Ft03Model, HHeState, Interval, RootSite, StepControl,
+    FT03_MODEL_ID,
+};
+use std::{
+    env,
+    fmt::Write as FmtWrite,
+    fs::{self, File, OpenOptions},
+    io::{self, Write as IoWrite},
+    path::{Path, PathBuf},
+};
+
+const INPUT: &str = include_str!(
+    "../../../docs/atomic_reionization_handoff_20261004_v1/runtime_inputs/ft03_first_interval.json"
+);
+// Exact compile-time source bytes are written once and compared before resume.
+// This records accidental source changes without adding a hashing dependency.
+fn source_identity() -> String {
+    let mut out = String::from("REI_F05_SOURCE_V1\n");
+    let parts = [
+        (
+            "rust/rei_microphysics/src/adaptive_history.rs",
+            include_str!("../src/adaptive_history.rs"),
+        ),
+        (
+            "rust/rei_microphysics/src/angular_photons.rs",
+            include_str!("../src/angular_photons.rs"),
+        ),
+        (
+            "rust/rei_microphysics/src/atomic_provider.rs",
+            include_str!("../src/atomic_provider.rs"),
+        ),
+        (
+            "rust/rei_microphysics/src/bianchi_i.rs",
+            include_str!("../src/bianchi_i.rs"),
+        ),
+        (
+            "rust/rei_microphysics/src/coverage.rs",
+            include_str!("../src/coverage.rs"),
+        ),
+        (
+            "rust/rei_microphysics/src/flrw_three_equations.rs",
+            include_str!("../src/flrw_three_equations.rs"),
+        ),
+        (
+            "rust/rei_microphysics/src/ft03_controlled.rs",
+            include_str!("../src/ft03_controlled.rs"),
+        ),
+        (
+            "rust/rei_microphysics/src/ft03_interval.rs",
+            include_str!("../src/ft03_interval.rs"),
+        ),
+        (
+            "rust/rei_microphysics/src/ft03_rates.rs",
+            include_str!("../src/ft03_rates.rs"),
+        ),
+        (
+            "rust/rei_microphysics/src/group_rates.rs",
+            include_str!("../src/group_rates.rs"),
+        ),
+        (
+            "rust/rei_microphysics/src/he_rct.rs",
+            include_str!("../src/he_rct.rs"),
+        ),
+        (
+            "rust/rei_microphysics/src/hhe_events.rs",
+            include_str!("../src/hhe_events.rs"),
+        ),
+        (
+            "rust/rei_microphysics/src/homogeneous_rates.rs",
+            include_str!("../src/homogeneous_rates.rs"),
+        ),
+        (
+            "rust/rei_microphysics/src/hydrogen_step.rs",
+            include_str!("../src/hydrogen_step.rs"),
+        ),
+        (
+            "rust/rei_microphysics/src/interval_ad.rs",
+            include_str!("../src/interval_ad.rs"),
+        ),
+        (
+            "rust/rei_microphysics/src/interval_math.rs",
+            include_str!("../src/interval_math.rs"),
+        ),
+        (
+            "rust/rei_microphysics/src/joint_affine.rs",
+            include_str!("../src/joint_affine.rs"),
+        ),
+        (
+            "rust/rei_microphysics/src/lib.rs",
+            include_str!("../src/lib.rs"),
+        ),
+        (
+            "rust/rei_microphysics/src/lift.rs",
+            include_str!("../src/lift.rs"),
+        ),
+        (
+            "rust/rei_microphysics/src/microstep.rs",
+            include_str!("../src/microstep.rs"),
+        ),
+        (
+            "rust/rei_microphysics/src/thermal.rs",
+            include_str!("../src/thermal.rs"),
+        ),
+        (
+            "rust/rei_microphysics/examples/first_interval.rs",
+            include_str!("first_interval.rs"),
+        ),
+    ];
+    for (name, text) in parts {
+        writeln!(out, "{} {}", name, text.len()).unwrap();
+        out.push_str(text);
+        out.push('\n');
+    }
+    out
+}
+const RADII: [f64; 7] = [1e-7, 1e-7, 1e-7, 1e-5, 1e-8, 1e-8, 1e-8];
+const IDS: [&str; 7] = [
+    "H_nuclei",
+    "He_nuclei",
+    "electron_charge_neutrality",
+    "photon_group0_absorption",
+    "photon_group1_absorption",
+    "photon_group2_absorption",
+    "thermal_binding_photon_escape_total_energy",
+];
+fn error(s: &str) -> io::Error {
+    io::Error::other(s.to_owned())
+}
+fn num(out: &mut String, x: f64) {
+    write!(out, "{x:.17e}").unwrap();
+}
+fn scalars(out: &mut String, x: &[f64]) {
+    out.push('[');
+    for (i, v) in x.iter().enumerate() {
+        if i > 0 {
+            out.push(',');
+        }
+        num(out, *v);
+    }
+    out.push(']');
+}
+fn pair(out: &mut String, x: Interval) {
+    out.push('[');
+    num(out, x.lo);
+    out.push(',');
+    num(out, x.hi);
+    out.push(']');
+}
+fn boxes(out: &mut String, x: &[Interval; 7]) {
+    out.push('[');
+    for (i, v) in x.iter().enumerate() {
+        if i > 0 {
+            out.push(',');
+        }
+        pair(out, *v);
+    }
+    out.push(']');
+}
+fn state_array(s: &HHeState) -> [f64; 8] {
+    [
+        s.fractions[0],
+        s.fractions[1],
+        s.fractions[2],
+        s.u_erg_cm3,
+        s.photon_cm3[0],
+        s.photon_cm3[1],
+        s.photon_cm3[2],
+        s.escaped_erg_cm3,
+    ]
+}
+fn state_json(out: &mut String, s: &HHeState) {
+    scalars(out, &state_array(s));
+}
+fn site(out: &mut String, s: &RootSite) {
+    write!(out, "{{\"id\":\"{}\",\"step_s\":", s.id).unwrap();
+    num(out, s.step_s);
+    out.push_str(",\"center\":");
+    scalars(out, &s.center);
+    out.push_str(",\"box\":");
+    boxes(out, &s.r#box);
+    out.push_str(",\"preconditioner\":[");
+    for (i, row) in s.preconditioner.iter().enumerate() {
+        if i > 0 {
+            out.push(',');
+        }
+        scalars(out, row);
+    }
+    out.push_str("]}");
+}
+fn events_json(out: &mut String, e: &Ft03Events) {
+    out.push_str("{\"photo\":[");
+    for (i, row) in e.photo_per_cm3.iter().enumerate() {
+        if i > 0 {
+            out.push(',');
+        }
+        scalars(out, row);
+    }
+    out.push_str("],\"collision\":");
+    scalars(out, &e.collision_per_cm3);
+    out.push_str(",\"recombination\":");
+    scalars(out, &e.recombination_per_cm3);
+    out.push_str(",\"dr\":");
+    scalars(out, &e.dr_per_cm3);
+    out.push('}');
+}
+fn ledgers_json(out: &mut String, x: &[f64; 7]) {
+    out.push('{');
+    for i in 0..7 {
+        if i > 0 {
+            out.push(',');
+        }
+        write!(out, "\"{}\":", IDS[i]).unwrap();
+        num(out, x[i]);
+    }
+    out.push('}');
+}
+fn step_residual(
+    model: &Ft03Model,
+    old: &HHeState,
+    new: &HHeState,
+    e: &Ft03Events,
+) -> Result<[f64; 7], String> {
+    let nh = model.gas.n_h_cm3;
+    let nhe = model.gas.n_he_cm3;
+    let mut j = [0.0; 3];
+    for a in 0..3 {
+        j[a] = e.photo_per_cm3[a].iter().sum::<f64>() + e.collision_per_cm3[a]
+            - e.recombination_per_cm3[a];
+    }
+    j[1] -= e.dr_per_cm3.iter().sum::<f64>();
+    let mut r = [0.0; 7];
+    r[0] = 0.0;
+    r[1] = 0.0;
+    // The state stores independent ion fractions. Nuclear totals and charge
+    // are structural identities, hence these three residuals are zero.
+    r[2] = 0.0;
+    let species = [
+        (nh * (new.fractions[0] - old.fractions[0]) - j[0]) / nh,
+        (nhe * (new.fractions[1] - old.fractions[1]) - j[1] + j[2]) / nhe,
+        (nhe * (new.fractions[2] - old.fractions[2]) - j[2]) / nhe,
+    ];
+    for k in 0..3 {
+        let absorbed = (0..3).map(|a| e.photo_per_cm3[a][k]).sum::<f64>();
+        r[3 + k] = (old.photon_cm3[k] - new.photon_cm3[k] - absorbed) / old.photon_cm3[k];
+    }
+    let energy0 = model.gas.total_energy(old).map_err(|e| e.to_string())?;
+    let energy1 = model.gas.total_energy(new).map_err(|e| e.to_string())?;
+    r[6] = (energy1 - energy0) / energy0;
+    if species
+        .iter()
+        .chain(r.iter())
+        .any(|x| !x.is_finite() || x.abs() > 1e-12)
+    {
+        return Err("FT03_LEDGER_RESIDUAL".into());
+    }
+    Ok(r)
+}
+#[derive(Clone)]
+struct Progress {
+    time: f64,
+    dt: f64,
+    accepted: u64,
+    rejected: u64,
+    state: HHeState,
+    parent: [Interval; 7],
+    sum: [f64; 7],
+    comp: [f64; 7],
+    offset: u64,
+}
+fn compensated(p: &mut Progress, events: &Ft03Events) {
+    let mut r = [0.0; 7];
+    for k in 0..3 {
+        r[3 + k] = (0..3).map(|a| events.photo_per_cm3[a][k]).sum();
+    }
+    for i in 0..7 {
+        let y = r[i] - p.comp[i];
+        let t = p.sum[i] + y;
+        p.comp[i] = (t - p.sum[i]) - y;
+        p.sum[i] = t;
+    }
+}
+fn hex(bytes: &[u8]) -> String {
+    let mut s = String::new();
+    for b in bytes {
+        write!(s, "{b:02x}").unwrap();
+    }
+    s
+}
+fn bits(v: f64) -> String {
+    format!("{:016x}", v.to_bits())
+}
+fn read_bits(s: &str) -> io::Result<f64> {
+    Ok(f64::from_bits(
+        u64::from_str_radix(s, 16).map_err(|_| error("bad checkpoint bits"))?,
+    ))
+}
+fn checkpoint_text(level: usize, mode: &str, p: &Progress) -> String {
+    let mut v = vec![
+        "REI_F05_CHECKPOINT_V2".to_string(),
+        hex(INPUT.as_bytes()),
+        level.to_string(),
+        mode.to_string(),
+        bits(p.time),
+        bits(p.dt),
+        p.accepted.to_string(),
+        p.rejected.to_string(),
+        p.offset.to_string(),
+    ];
+    for x in state_array(&p.state) {
+        v.push(bits(x));
+    }
+    for x in p.parent {
+        v.push(bits(x.lo));
+        v.push(bits(x.hi));
+    }
+    for x in p.sum {
+        v.push(bits(x));
+    }
+    for x in p.comp {
+        v.push(bits(x));
+    }
+    v.join("\n") + "\n"
+}
+fn read_checkpoint(path: &Path, level: usize, mode: &str) -> io::Result<Progress> {
+    let s = fs::read_to_string(path)?;
+    let v: Vec<_> = s.split_whitespace().collect();
+    if v.len() != 45
+        || v[0] != "REI_F05_CHECKPOINT_V2"
+        || v[1] != hex(INPUT.as_bytes())
+        || v[2] != level.to_string()
+        || v[3] != mode
+    {
+        return Err(error("checkpoint identity mismatch"));
+    }
+    let time = read_bits(v[4])?;
+    let dt = read_bits(v[5])?;
+    let accepted = v[6].parse().map_err(|_| error("checkpoint accepted"))?;
+    let rejected = v[7].parse().map_err(|_| error("checkpoint rejected"))?;
+    let offset = v[8].parse().map_err(|_| error("checkpoint offset"))?;
+    let mut values = [0.0; 8];
+    for i in 0..8 {
+        values[i] = read_bits(v[9 + i])?;
+    }
+    let state = HHeState {
+        fractions: [values[0], values[1], values[2]],
+        u_erg_cm3: values[3],
+        photon_cm3: [values[4], values[5], values[6]],
+        escaped_erg_cm3: values[7],
+    };
+    let mut parent = [Interval { lo: 0.0, hi: 0.0 }; 7];
+    for i in 0..7 {
+        parent[i] = Interval::new(read_bits(v[17 + 2 * i])?, read_bits(v[18 + 2 * i])?)
+            .map_err(|_| error("checkpoint box"))?;
+    }
+    let mut sum = [0.0; 7];
+    let mut comp = [0.0; 7];
+    for i in 0..7 {
+        sum[i] = read_bits(v[31 + i])?;
+        comp[i] = read_bits(v[38 + i])?;
+    }
+    Ok(Progress {
+        time,
+        dt,
+        accepted,
+        rejected,
+        state,
+        parent,
+        sum,
+        comp,
+        offset,
+    })
+}
+fn sync_replace(path: &Path, data: &str) -> io::Result<()> {
+    let tmp = path.with_extension("tmp");
+    {
+        let mut f = File::create(&tmp)?;
+        f.write_all(data.as_bytes())?;
+        f.sync_all()?;
+    }
+    fs::rename(tmp, path)?;
+    if let Some(parent) = path.parent() {
+        File::open(parent)?.sync_all()?;
+    }
+    Ok(())
+}
+fn summary(
+    level: usize,
+    factor: f64,
+    mode: &str,
+    initial: &HHeState,
+    initial_parent: &[Interval; 7],
+    p: &Progress,
+    finished: bool,
+) -> String {
+    let mut s = String::new();
+    write!(
+        s,
+        "{{\"refinement_factor\":{factor},\"mode\":\"{mode}\",\"initial_parent_box\":"
+    )
+    .unwrap();
+    boxes(&mut s, initial_parent);
+    s.push_str(",\"initial_state\":");
+    state_json(&mut s, initial);
+    write!(
+        s,
+        ",\"accepted_steps\":{},\"rejected_steps\":{},\"final_state\":",
+        p.accepted, p.rejected
+    )
+    .unwrap();
+    state_json(&mut s, &p.state);
+    s.push_str(",\"t_end_s\":");
+    num(&mut s, p.time);
+    write!(s, ",\"finished\":{},\"all_seven_ledgers\":", finished).unwrap();
+    let mut budget = [0.0; 7];
+    for k in 0..3 {
+        budget[3 + k] =
+            (initial.photon_cm3[k] - p.state.photon_cm3[k] - p.sum[3 + k]) / initial.photon_cm3[k];
+    }
+    // Structural nucleus/charge identities are derived, not integrated slots.
+    let model = Ft03Model::controlled().expect("frozen FT03 model");
+    let energy0 = model.gas.total_energy(initial).expect("initial energy");
+    budget[6] = (model.gas.total_energy(&p.state).expect("final energy") - energy0) / energy0;
+    ledgers_json(&mut s, &budget);
+    write!(s,",\"level\":{level},\"scientific_admission\":\"HOLD\",\"claim\":\"CANDIDATE_PENDING_EXTERNAL_CHECK\"}}\n").unwrap();
+    s
+}
+fn record(
+    accepted: bool,
+    t: f64,
+    dt: f64,
+    old: &HHeState,
+    parent: &[Interval; 7],
+    center: &[f64; 7],
+    state: &HHeState,
+    next: &[Interval; 7],
+    trial: Option<&rei_microphysics::CertifiedTrial>,
+    failure: Option<&str>,
+    ledgers: &[f64; 7],
+) -> String {
+    let mut s = String::new();
+    write!(
+        s,
+        "{{\"accepted\":{accepted},\"model_id\":\"{FT03_MODEL_ID}\",\"t0_s\":"
+    )
+    .unwrap();
+    num(&mut s, t);
+    s.push_str(",\"dt_s\":");
+    num(&mut s, dt);
+    s.push_str(",\"old_state\":");
+    state_json(&mut s, old);
+    s.push_str(",\"parent_box\":");
+    boxes(&mut s, parent);
+    s.push_str(",\"parent_center\":");
+    scalars(&mut s, center);
+    s.push_str(",\"state\":");
+    state_json(&mut s, state);
+    s.push_str(",\"next_box\":");
+    boxes(&mut s, next);
+    if let Some(x) = trial {
+        s.push_str(",\"local_bounds\":");
+        scalars(&mut s, &x.local_bounds);
+        s.push_str(",\"public_widths\":[");
+        scalars(&mut s, &x.public_widths[0]);
+        s.push(',');
+        scalars(&mut s, &x.public_widths[1]);
+        s.push_str("],\"sites\":[");
+        for (i, v) in x.sites.iter().enumerate() {
+            if i > 0 {
+                s.push(',');
+            }
+            site(&mut s, v);
+        }
+        s.push_str("],\"events\":");
+        events_json(&mut s, &x.events);
+    } else {
+        write!(s, ",\"failure\":\"{}\"", failure.unwrap_or("UNKNOWN")).unwrap();
+    }
+    s.push_str(",\"ledgers\":");
+    ledgers_json(&mut s, ledgers);
+    s.push_str("}\n");
+    s
+}
+fn initial_box(model: &Ft03Model, state: &HHeState) -> io::Result<[Interval; 7]> {
+    let c = rei_microphysics::ft03_scaled(model, state);
+    let mut out = [Interval { lo: 0.0, hi: 0.0 }; 7];
+    for i in 0..7 {
+        let a = Interval::point(c[i]).map_err(|_| error("initial center"))?;
+        let d = Interval::point(RADII[i]).map_err(|_| error("initial radius"))?;
+        let lo = a.sub(&d).map_err(|_| error("initial box"))?.lo;
+        let hi = a.add(&d).map_err(|_| error("initial box"))?.hi;
+        out[i] = Interval::new(lo, hi).map_err(|_| error("initial box"))?;
+    }
+    Ok(out)
+}
+fn run_level(dir: &Path, level: usize, factor: f64, mode: &str, resume: bool) -> io::Result<()> {
+    let model = Ft03Model::controlled().map_err(|e| error(&e.to_string()))?;
+    let initial = model.initial_state();
+    let initial_parent = initial_box(&model, &initial)?;
+    let log = dir.join(format!("level_{level}_transactions.jsonl"));
+    let cp = dir.join(format!("level_{level}_checkpoint.dat"));
+    let summary_path = dir.join(format!("level_{level}_summary.json"));
+    let mut p = if resume && cp.exists() {
+        read_checkpoint(&cp, level, mode)?
+    } else {
+        if resume && log.exists() {
+            return Err(error("transaction log without checkpoint"));
+        }
+        if !resume && (log.exists() || cp.exists() || summary_path.exists()) {
+            return Err(error("existing output; use --resume"));
+        }
+        Progress {
+            time: 0.0,
+            dt: 1e9 * factor,
+            accepted: 0,
+            rejected: 0,
+            state: initial,
+            parent: initial_parent,
+            sum: [0.0; 7],
+            comp: [0.0; 7],
+            offset: 0,
+        }
+    };
+    // A durable zero-offset checkpoint makes interruption before the first
+    // transaction recoverable. Existing checkpoints retain their exact offset.
+    if !cp.exists() {
+        sync_replace(&cp, &checkpoint_text(level, mode, &p))?;
+    }
+    let mut file = OpenOptions::new()
+        .read(true)
+        .write(true)
+        .create(true)
+        .open(&log)?;
+    if file.metadata()?.len() < p.offset {
+        return Err(error("checkpoint exceeds transaction log"));
+    }
+    file.set_len(p.offset)?;
+    use std::io::Seek;
+    file.seek(std::io::SeekFrom::End(0))?;
+    let target = if mode == "PILOT" { 3 } else { u64::MAX };
+    let end = 1e12;
+    let control = StepControl {
+        max_iterations: 200,
+        // Solve more tightly than the unchanged 1e-12 whole-budget gate.
+        residual_tolerance: 1e-15,
+    };
+    while p.accepted < target && p.time < end {
+        let dt = p.dt.min(end - p.time);
+        let old = p.state;
+        let parent = p.parent;
+        let center = rei_microphysics::ft03_scaled(&model, &old);
+        let result = certified_ft03_trial(&model, &old, &parent, dt, control).and_then(|trial| {
+            let ledgers =
+                step_residual(&model, &old, &trial.state, &trial.events).map_err(|_| {
+                    rei_microphysics::ForwardError::InvalidInput("FT03_LEDGER_RESIDUAL")
+                })?;
+            Ok((trial, ledgers))
+        });
+        match result {
+            Ok((trial, r)) => {
+                let line = record(
+                    true,
+                    p.time,
+                    dt,
+                    &old,
+                    &parent,
+                    &center,
+                    &trial.state,
+                    &trial.next_box,
+                    Some(&trial),
+                    None,
+                    &r,
+                );
+                file.write_all(line.as_bytes())?;
+                file.sync_all()?;
+                p.offset += line.len() as u64;
+                p.time += dt;
+                p.state = trial.state;
+                p.parent = trial.next_box;
+                p.accepted += 1;
+                compensated(&mut p, &trial.events);
+                p.dt = 1e9 * factor;
+                sync_replace(&cp, &checkpoint_text(level, mode, &p))?;
+                sync_replace(
+                    &summary_path,
+                    &summary(
+                        level,
+                        factor,
+                        mode,
+                        &initial,
+                        &initial_parent,
+                        &p,
+                        p.time == end,
+                    ),
+                )?;
+            }
+            Err(e) => {
+                let line = record(
+                    false,
+                    p.time,
+                    dt,
+                    &old,
+                    &parent,
+                    &center,
+                    &old,
+                    &parent,
+                    None,
+                    Some(e.code()),
+                    &[0.0; 7],
+                );
+                file.write_all(line.as_bytes())?;
+                file.sync_all()?;
+                p.offset += line.len() as u64;
+                p.rejected += 1;
+                let minimum_reached = dt / 2.0 < 1000.0;
+                if !minimum_reached {
+                    p.dt = dt / 2.0;
+                }
+                sync_replace(&cp, &checkpoint_text(level, mode, &p))?;
+                sync_replace(
+                    &summary_path,
+                    &summary(level, factor, mode, &initial, &initial_parent, &p, false),
+                )?;
+                if minimum_reached {
+                    return Err(error(&format!(
+                        "minimum step after {} at t={} dt={}",
+                        e.code(),
+                        p.time,
+                        dt
+                    )));
+                }
+            }
+        }
+    }
+    sync_replace(
+        &summary_path,
+        &summary(
+            level,
+            factor,
+            mode,
+            &initial,
+            &initial_parent,
+            &p,
+            p.time == end,
+        ),
+    )?;
+    Ok(())
+}
+fn main() -> io::Result<()> {
+    let args: Vec<_> = env::args().collect();
+    let mut input = None;
+    let mut output = None;
+    let mut pilot = false;
+    let mut resume = false;
+    let mut i = 1;
+    while i < args.len() {
+        match args[i].as_str() {
+            "--input" => {
+                i += 1;
+                input = args.get(i).cloned();
+            }
+            "--output" => {
+                i += 1;
+                output = args.get(i).cloned();
+            }
+            "--pilot" => pilot = true,
+            "--resume" => resume = true,
+            _ => return Err(error("unknown argument")),
+        }
+        i += 1;
+    }
+    let input = PathBuf::from(input.ok_or_else(|| error("missing --input"))?);
+    let out = PathBuf::from(output.ok_or_else(|| error("missing --output"))?);
+    if fs::read(&input)? != INPUT.as_bytes() {
+        return Err(error("frozen input identity mismatch"));
+    }
+    fs::create_dir_all(&out)?;
+    let identity_path = out.join("source_identity.dat");
+    let identity = source_identity();
+    if identity_path.exists() {
+        if fs::read(&identity_path)? != identity.as_bytes() {
+            return Err(error("compiled source identity mismatch"));
+        }
+    } else {
+        if fs::read_dir(&out)?.next().is_some() {
+            return Err(error("existing output without source identity"));
+        }
+        sync_replace(&identity_path, &identity)?;
+    }
+    // The frozen validator names pilot output by the exact source hash and
+    // calls this program again without --resume. A completed pilot is safe to
+    // read from its exact checkpoint; an interrupted pilot resumes there.
+    // Full campaigns retain explicit --resume so a new run cannot silently
+    // inherit an unrelated history.
+    resume |= pilot;
+    let mode = if pilot { "PILOT" } else { "FULL" };
+    for (level, factor) in [1.0, 0.5, 0.25].into_iter().enumerate() {
+        run_level(&out, level, factor, mode, resume)?;
+    }
+    Ok(())
+}
+

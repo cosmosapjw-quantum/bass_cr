@@ -1,0 +1,89 @@
+{
+  "schema": "BASS_NCLOUD_F1_R2_PARALLEL_ADMISSION_CONTRACT_V1",
+  "work_unit": "FND_NCLOUD_F1_R2_PARALLEL_OPERATOR_PRECOMPUTE",
+  "parent_evidence_commit": "477fef8ede26af74e0cf7a91762ea4ec54ae1527",
+  "frozen_f1_implementation_commit": "8236887dd8869de57522d5c87a48972f287969fe",
+  "frozen_f1_implementation_tree": "d114060c6dc6bdc1aa10fc6d9ffe9de19da99fae",
+  "inherited_scientific_contract": {
+    "path": "research/foundation_rebuild/ncloud_f1_engine_admission_20260928/F1_CONTRACT.json",
+    "sha256": "9dbc2de705e1a4895df11f2d1e8c45a3682bec555664e38ccf90321dc06cad62",
+    "immutable": true
+  },
+  "inherited_representative_set": {
+    "path": "research/foundation_rebuild/ncloud_f1_engine_admission_20260928/F1_REPRESENTATIVE_QUERIES.json",
+    "sha256": "f56c93f422aaf08af880dd2aaae20a9541d206e2018b8a01e22456f8da1ec11d",
+    "query_count": 15,
+    "immutable": true
+  },
+  "parallelization": {
+    "model": "PROCESS_POOL_FLAT_EXACT_TIME_RESOLUTION_TASKS",
+    "multiprocessing_start_method": "spawn",
+    "configured_vcpu": 64,
+    "reserve_vcpu": 4,
+    "preferred_workers": 60,
+    "worker_formula": "min(60, affinity_count - 4, remaining_task_count)",
+    "minimum_affinity_count": 64,
+    "configured_memory_gb": 128,
+    "minimum_mem_total_bytes": 120000000000,
+    "parent_is_only_task_store_writer": true,
+    "worker_internal_blas_threads": 1,
+    "worker_reuses_loaded_engine_and_basis": true
+  },
+  "task_model": {
+    "identity_fields": [
+      "engine_identity_sha256",
+      "historical_archive_sha256",
+      "time_hex",
+      "order",
+      "subdivisions",
+      "sector"
+    ],
+    "sector": "full",
+    "representative_task_upper_bound": 165,
+    "metric_time_count": 15,
+    "metric_full_ladder_task_upper_bound": 165,
+    "deduplicate_exact_task_identity": true,
+    "maximum_unique_tasks": 330,
+    "fuzzy_time_reuse_allowed": false,
+    "missing_cache_fallback_compute_in_reducer_allowed": false
+  },
+  "reduction_semantics": {
+    "expensive_operator_evaluations_parallelized": true,
+    "historical_admit_query_reducer_reused": true,
+    "historical_metric_sentinels_reducer_reused": true,
+    "selection_policy_changed": false,
+    "parity_thresholds_changed": false,
+    "metric_thresholds_changed": false,
+    "output_order": "representative contract order and frozen resolution order, independent of task completion order"
+  },
+  "durable_task_store": {
+    "enabled": true,
+    "create_only": true,
+    "per_task_npz": true,
+    "per_task_json_receipt": true,
+    "payload_sha256_required": true,
+    "exact_context_resume_to_fresh_output_allowed": true,
+    "scientific_failure_resume_override_allowed": false
+  },
+  "progress_policy": {
+    "task_submitted_and_completed_counts": true,
+    "every_n_completed_tasks": 10,
+    "record_worker_count": true,
+    "record_parent_rss_and_memavailable": true,
+    "persist_partial_summary_on_timeout_or_interrupt": true
+  },
+  "implementation_scope": {
+    "code_implementation_authorized": true,
+    "focused_tests_authorized": true,
+    "actual_r2_scientific_execution_authorized": false,
+    "reason": "R2 changes the executable implementation identity and therefore requires a new explicit run authorization."
+  },
+  "inherited_claim_ceiling": {
+    "capture_execution_allowed": false,
+    "production_admission": "HOLD",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "original_capture_gap_resolved": false,
+    "continuous_global_supremum_bound": false
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "schema": "BASS_FND_TEST_ONLY_RETURN_V1",
+  "profile": "package",
+  "output": "/mnt/data/bass_cr_integration_20260925/evidence/PACKAGE_VALIDATION",
+  "steps": [
+    {
+      "step": "foundation_tests",
+      "argv": [
+        "/opt/pyvenv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-ra",
+        "tests",
+        "--junitxml=/mnt/data/bass_cr_integration_20260925/evidence/PACKAGE_VALIDATION/foundation.xml"
+      ],
+      "cwd": "/mnt/data/bass_cr_integration_20260925/repo/research/foundation_rebuild",
+      "returncode": 0,
+      "status": "PASSED",
+      "seconds": 6.28918373700003,
+      "counts": {
+        "tests": 84,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "step": "operator_cases",
+      "argv": [
+        "/opt/pyvenv/bin/python",
+        "-m",
+        "bass_foundations.validation_cases",
+        "--out",
+        "/mnt/data/bass_cr_integration_20260925/evidence/PACKAGE_VALIDATION/operator_cases"
+      ],
+      "cwd": "/mnt/data/bass_cr_integration_20260925/repo/research/foundation_rebuild",
+      "returncode": 0,
+      "status": "PASSED",
+      "seconds": 3.022788926999965
+    }
+  ],
+  "production_admission": "HOLD",
+  "all_bound": "OPEN",
+  "b_grid": "NO_GO",
+  "capture_gap_resolved": false,
+  "code_changes_by_runner": false,
+  "collision_runs": 0,
+  "gpu_required_for_new_package": false,
+  "legacy_full_suite": "NOT_REQUESTED",
+  "scope": "LOCAL_REPRODUCTION_OF_FIXED_TEST_CONTRACT_NOT_PRODUCTION_ADMISSION",
+  "source_files_verified": 14,
+  "environment": {
+    "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+    "executable": "/opt/pyvenv/bin/python",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "packages": {
+      "numpy": "2.3.5",
+      "scipy": "1.17.0",
+      "mpmath": "1.3.0",
+      "pytest": "9.0.2"
+    }
+  },
+  "status": "PASS_TESTS_ONLY",
+  "source_files_verified_after": 14
+}

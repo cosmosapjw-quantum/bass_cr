@@ -1,0 +1,1284 @@
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF                               [100%]
+=================================== FAILURES ===================================
+________ test_valid_archive_exposes_exact_basis_and_all_attempt_arrays _________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_valid_archive_exposes_exa0')
+
+    def test_valid_archive_exposes_exact_basis_and_all_attempt_arrays(tmp_path):
+        path, contract, reps = fixture_archive(tmp_path)
+>       evidence = open_evidence(path, contract, reps)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_archive_evidence.py:60:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+archive_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_valid_archive_exposes_exa0/archive.zip')
+contract = {'historical_tp2d_archive': {'bytes': 5368, 'sha256': 'c4b7b29eae7080d98c69473fda99c39d914f65486a67777292dcecc6ee5447b4'}}
+representatives = {'queries': [{'json_sha256': 'ae9bf853629ae6e585ac9e3209b8d57c69f3feea96e2671f433991c943ae8e7c', 'npz_sha256': 'e2b7a9...f9db6da3abe3771c9145b5d38bb47dbc9d6', 'selected_resolution': {'order': 40, 'subdivisions': 1}, ...}], 'query_count': 1}
+
+    def open_evidence(archive_path, contract, representatives):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/archive_evidence.py:5: NotImplementedError
+________________ test_archive_sha_mismatch_rejected_before_read ________________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_archive_sha_mismatch_reje0')
+
+    def test_archive_sha_mismatch_rejected_before_read(tmp_path):
+        path, contract, reps = fixture_archive(tmp_path)
+        contract['historical_tp2d_archive']['sha256'] = '0' * 64
+        with pytest.raises(ValueError, match='archive SHA'):
+>           open_evidence(path, contract, reps)
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_archive_evidence.py:72:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+archive_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_archive_sha_mismatch_reje0/archive.zip')
+contract = {'historical_tp2d_archive': {'bytes': 5368, 'sha256': '0000000000000000000000000000000000000000000000000000000000000000'}}
+representatives = {'queries': [{'json_sha256': 'ae9bf853629ae6e585ac9e3209b8d57c69f3feea96e2671f433991c943ae8e7c', 'npz_sha256': 'e2b7a9...f9db6da3abe3771c9145b5d38bb47dbc9d6', 'selected_resolution': {'order': 40, 'subdivisions': 1}, ...}], 'query_count': 1}
+
+    def open_evidence(archive_path, contract, representatives):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/archive_evidence.py:5: NotImplementedError
+___________ test_unsafe_or_duplicate_zip_member_rejected[../escape] ____________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_unsafe_or_duplicate_zip_m0')
+name = '../escape'
+
+    @pytest.mark.parametrize('name', ['../escape', '/absolute', 'BASIS.json'])
+    def test_unsafe_or_duplicate_zip_member_rejected(tmp_path, name):
+        path, contract, reps = fixture_archive(tmp_path)
+        with zipfile.ZipFile(path, 'a') as z:
+            z.writestr(name, b'x')
+        contract['historical_tp2d_archive'] = {'sha256': sha(path.read_bytes()), 'bytes': path.stat().st_size}
+        with pytest.raises(ValueError, match='unsafe|duplicate'):
+>           open_evidence(path, contract, reps)
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_archive_evidence.py:82:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+archive_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_unsafe_or_duplicate_zip_m0/archive.zip')
+contract = {'historical_tp2d_archive': {'bytes': 5463, 'sha256': '9ce2d64593c37feebf1d1854faa74cc1d7cada699dd3b56a91d0a1c4cb5e6f46'}}
+representatives = {'queries': [{'json_sha256': 'ae9bf853629ae6e585ac9e3209b8d57c69f3feea96e2671f433991c943ae8e7c', 'npz_sha256': 'e2b7a9...f9db6da3abe3771c9145b5d38bb47dbc9d6', 'selected_resolution': {'order': 40, 'subdivisions': 1}, ...}], 'query_count': 1}
+
+    def open_evidence(archive_path, contract, representatives):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/archive_evidence.py:5: NotImplementedError
+___________ test_unsafe_or_duplicate_zip_member_rejected[/absolute] ____________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_unsafe_or_duplicate_zip_m1')
+name = '/absolute'
+
+    @pytest.mark.parametrize('name', ['../escape', '/absolute', 'BASIS.json'])
+    def test_unsafe_or_duplicate_zip_member_rejected(tmp_path, name):
+        path, contract, reps = fixture_archive(tmp_path)
+        with zipfile.ZipFile(path, 'a') as z:
+            z.writestr(name, b'x')
+        contract['historical_tp2d_archive'] = {'sha256': sha(path.read_bytes()), 'bytes': path.stat().st_size}
+        with pytest.raises(ValueError, match='unsafe|duplicate'):
+>           open_evidence(path, contract, reps)
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_archive_evidence.py:82:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+archive_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_unsafe_or_duplicate_zip_m1/archive.zip')
+contract = {'historical_tp2d_archive': {'bytes': 5463, 'sha256': '13ac5cfc064b7a6c5d3dfd14577c59a1f6a1a78b3d699ecb024352cf8e7c0996'}}
+representatives = {'queries': [{'json_sha256': 'ae9bf853629ae6e585ac9e3209b8d57c69f3feea96e2671f433991c943ae8e7c', 'npz_sha256': 'e2b7a9...f9db6da3abe3771c9145b5d38bb47dbc9d6', 'selected_resolution': {'order': 40, 'subdivisions': 1}, ...}], 'query_count': 1}
+
+    def open_evidence(archive_path, contract, representatives):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/archive_evidence.py:5: NotImplementedError
+___________ test_unsafe_or_duplicate_zip_member_rejected[BASIS.json] ___________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_unsafe_or_duplicate_zip_m2')
+name = 'BASIS.json'
+
+    @pytest.mark.parametrize('name', ['../escape', '/absolute', 'BASIS.json'])
+    def test_unsafe_or_duplicate_zip_member_rejected(tmp_path, name):
+        path, contract, reps = fixture_archive(tmp_path)
+        with zipfile.ZipFile(path, 'a') as z:
+            z.writestr(name, b'x')
+        contract['historical_tp2d_archive'] = {'sha256': sha(path.read_bytes()), 'bytes': path.stat().st_size}
+        with pytest.raises(ValueError, match='unsafe|duplicate'):
+>           open_evidence(path, contract, reps)
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_archive_evidence.py:82:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+archive_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_unsafe_or_duplicate_zip_m2/archive.zip')
+contract = {'historical_tp2d_archive': {'bytes': 5465, 'sha256': '4235cc1d832b7dea4b5c05b182eb7c39bde448d235ecae857886de9a8f36b58b'}}
+representatives = {'queries': [{'json_sha256': 'ae9bf853629ae6e585ac9e3209b8d57c69f3feea96e2671f433991c943ae8e7c', 'npz_sha256': 'e2b7a9...f9db6da3abe3771c9145b5d38bb47dbc9d6', 'selected_resolution': {'order': 40, 'subdivisions': 1}, ...}], 'query_count': 1}
+
+    def open_evidence(archive_path, contract, representatives):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/archive_evidence.py:5: NotImplementedError
+_____________________ test_missing_basis_or_query_rejected _____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_missing_basis_or_query_re0')
+
+    def test_missing_basis_or_query_rejected(tmp_path):
+        for missing in ('BASIS.npz', 'query'):
+            def mutate(files, record, qid):
+                files.pop('BASIS.npz' if missing == 'BASIS.npz' else f'runtime_queries/{qid}.npz')
+            path, contract, reps = fixture_archive(tmp_path / missing.replace('.', '_'), mutate=mutate)
+            with pytest.raises(ValueError, match='missing'):
+>               open_evidence(path, contract, reps)
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_archive_evidence.py:91:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+archive_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_missing_basis_or_query_re0/BASIS_npz/archive.zip')
+contract = {'historical_tp2d_archive': {'bytes': 4755, 'sha256': 'dfe674c09936700b4565c788a05fc17fc6553a5a1be4ada3b8727ffb9a01c9c2'}}
+representatives = {'queries': [{'json_sha256': 'ae9bf853629ae6e585ac9e3209b8d57c69f3feea96e2671f433991c943ae8e7c', 'npz_sha256': 'e2b7a9...f9db6da3abe3771c9145b5d38bb47dbc9d6', 'selected_resolution': {'order': 40, 'subdivisions': 1}, ...}], 'query_count': 1}
+
+    def open_evidence(archive_path, contract, representatives):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/archive_evidence.py:5: NotImplementedError
+___________ test_basis_byte_tamper_rejected_even_if_manifest_updated ___________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_basis_byte_tamper_rejecte0')
+
+    def test_basis_byte_tamper_rejected_even_if_manifest_updated(tmp_path):
+        def mutate(files, record, qid):
+            files['BASIS.json'] += b' '
+        path, contract, reps = fixture_archive(tmp_path, mutate=mutate)
+        # The contract pins the historical basis bytes independently of the archive manifest.
+        contract['basis_policy'] = {'json_sha256': sha(b'{"schema": "BASIS", "identity": "frozen"}')}
+        with pytest.raises(ValueError, match='BASIS'):
+>           open_evidence(path, contract, reps)
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_archive_evidence.py:101:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+archive_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_basis_byte_tamper_rejecte0/archive.zip')
+contract = {'basis_policy': {'json_sha256': '34a738595d23c3f8d3a37e4b450b2c4fa1c95574abbfddd58c71fe096b53f352'}, 'historical_tp2d_archive': {'bytes': 5369, 'sha256': '70e8bafffe9ea485d0e0a80a06e6f17e3ce7783f1b9e956bb5a0efb4211e7fc5'}}
+representatives = {'queries': [{'json_sha256': 'ae9bf853629ae6e585ac9e3209b8d57c69f3feea96e2671f433991c943ae8e7c', 'npz_sha256': 'e2b7a9...f9db6da3abe3771c9145b5d38bb47dbc9d6', 'selected_resolution': {'order': 40, 'subdivisions': 1}, ...}], 'query_count': 1}
+
+    def open_evidence(archive_path, contract, representatives):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/archive_evidence.py:5: NotImplementedError
+____________ test_representative_query_hash_mismatch_rejected[json] ____________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_representative_query_hash0')
+which = 'json'
+
+    @pytest.mark.parametrize('which', ['json', 'npz'])
+    def test_representative_query_hash_mismatch_rejected(tmp_path, which):
+        path, contract, reps = fixture_archive(tmp_path)
+        reps['queries'][0][which + '_sha256'] = '0' * 64
+        with pytest.raises(ValueError, match='representative'):
+>           open_evidence(path, contract, reps)
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_archive_evidence.py:109:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+archive_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_representative_query_hash0/archive.zip')
+contract = {'historical_tp2d_archive': {'bytes': 5368, 'sha256': 'c4b7b29eae7080d98c69473fda99c39d914f65486a67777292dcecc6ee5447b4'}}
+representatives = {'queries': [{'json_sha256': '0000000000000000000000000000000000000000000000000000000000000000', 'npz_sha256': 'e2b7a9...f9db6da3abe3771c9145b5d38bb47dbc9d6', 'selected_resolution': {'order': 40, 'subdivisions': 1}, ...}], 'query_count': 1}
+
+    def open_evidence(archive_path, contract, representatives):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/archive_evidence.py:5: NotImplementedError
+____________ test_representative_query_hash_mismatch_rejected[npz] _____________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_representative_query_hash1')
+which = 'npz'
+
+    @pytest.mark.parametrize('which', ['json', 'npz'])
+    def test_representative_query_hash_mismatch_rejected(tmp_path, which):
+        path, contract, reps = fixture_archive(tmp_path)
+        reps['queries'][0][which + '_sha256'] = '0' * 64
+        with pytest.raises(ValueError, match='representative'):
+>           open_evidence(path, contract, reps)
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_archive_evidence.py:109:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+archive_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_representative_query_hash1/archive.zip')
+contract = {'historical_tp2d_archive': {'bytes': 5368, 'sha256': 'c4b7b29eae7080d98c69473fda99c39d914f65486a67777292dcecc6ee5447b4'}}
+representatives = {'queries': [{'json_sha256': 'ae9bf853629ae6e585ac9e3209b8d57c69f3feea96e2671f433991c943ae8e7c', 'npz_sha256': '000000...f9db6da3abe3771c9145b5d38bb47dbc9d6', 'selected_resolution': {'order': 40, 'subdivisions': 1}, ...}], 'query_count': 1}
+
+    def open_evidence(archive_path, contract, representatives):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/archive_evidence.py:5: NotImplementedError
+_______ test_query_time_or_resolution_drift_rejected[time_hex-0x1.0p+0] ________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_query_time_or_resolution_0')
+field = 'time_hex', value = '0x1.0p+0'
+
+    @pytest.mark.parametrize('field,value', [('time_hex', '0x1.0p+0'), ('selected_resolution', {'order': 48, 'subdivisions': 1})])
+    def test_query_time_or_resolution_drift_rejected(tmp_path, field, value):
+        path, contract, reps = fixture_archive(tmp_path)
+        reps['queries'][0][field] = value
+        with pytest.raises(ValueError, match='time|resolution'):
+>           open_evidence(path, contract, reps)
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_archive_evidence.py:117:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+archive_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_query_time_or_resolution_0/archive.zip')
+contract = {'historical_tp2d_archive': {'bytes': 5368, 'sha256': 'c4b7b29eae7080d98c69473fda99c39d914f65486a67777292dcecc6ee5447b4'}}
+representatives = {'queries': [{'json_sha256': 'ae9bf853629ae6e585ac9e3209b8d57c69f3feea96e2671f433991c943ae8e7c', 'npz_sha256': 'e2b7a9...f9db6da3abe3771c9145b5d38bb47dbc9d6', 'selected_resolution': {'order': 40, 'subdivisions': 1}, ...}], 'query_count': 1}
+
+    def open_evidence(archive_path, contract, representatives):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/archive_evidence.py:5: NotImplementedError
+___ test_query_time_or_resolution_drift_rejected[selected_resolution-value1] ___
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_query_time_or_resolution_1')
+field = 'selected_resolution', value = {'order': 48, 'subdivisions': 1}
+
+    @pytest.mark.parametrize('field,value', [('time_hex', '0x1.0p+0'), ('selected_resolution', {'order': 48, 'subdivisions': 1})])
+    def test_query_time_or_resolution_drift_rejected(tmp_path, field, value):
+        path, contract, reps = fixture_archive(tmp_path)
+        reps['queries'][0][field] = value
+        with pytest.raises(ValueError, match='time|resolution'):
+>           open_evidence(path, contract, reps)
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_archive_evidence.py:117:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+archive_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_query_time_or_resolution_1/archive.zip')
+contract = {'historical_tp2d_archive': {'bytes': 5368, 'sha256': 'c4b7b29eae7080d98c69473fda99c39d914f65486a67777292dcecc6ee5447b4'}}
+representatives = {'queries': [{'json_sha256': 'ae9bf853629ae6e585ac9e3209b8d57c69f3feea96e2671f433991c943ae8e7c', 'npz_sha256': 'e2b7a9...f9db6da3abe3771c9145b5d38bb47dbc9d6', 'selected_resolution': {'order': 48, 'subdivisions': 1}, ...}], 'query_count': 1}
+
+    def open_evidence(archive_path, contract, representatives):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/archive_evidence.py:5: NotImplementedError
+_______ test_build_records_frozen_flags_and_independent_engine_identity ________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_build_records_frozen_flag0')
+
+    def test_build_records_frozen_flags_and_independent_engine_identity(tmp_path):
+        source = tmp_path / 'moment_kernel.cpp'
+        source.write_text('synthetic source')
+        out = tmp_path / 'new-engine'
+>       rec = build_engine(source, out, contract(source), run=fake_compiler, compiler='g++')
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_cloud_engine.py:31:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+source = PosixPath('/tmp/pytest-of-root/pytest-52/test_build_records_frozen_flag0/moment_kernel.cpp')
+out_dir = PosixPath('/tmp/pytest-of-root/pytest-52/test_build_records_frozen_flag0/new-engine')
+contract = {'build_policy': {'forbidden_flag_patterns': ['-march=native', '-mtune=native', '-ffast-math', '-Ofast', '-flto'], 'ou...ffp-contract=off', '-Wall', ...], 'source_sha256': '39631bb5e5dc9326b23f8c00bf43440a84ce711315c6b799de554c56aa04d133'}}
+
+    def build_engine(source, out_dir, contract, *, run=None, compiler='g++', extra_flags=()):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/cloud_engine.py:9: NotImplementedError
+___________________ test_source_sha_mismatch_blocks_compiler ___________________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_source_sha_mismatch_block0')
+
+    def test_source_sha_mismatch_blocks_compiler(tmp_path):
+        source = tmp_path / 'moment_kernel.cpp'
+        source.write_text('modified')
+        policy = contract(source)
+        policy['build_policy']['source_sha256'] = '0' * 64
+        with pytest.raises(ValueError, match='source SHA'):
+>           build_engine(source, tmp_path / 'engine', policy, run=fake_compiler)
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_cloud_engine.py:44:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+source = PosixPath('/tmp/pytest-of-root/pytest-52/test_source_sha_mismatch_block0/moment_kernel.cpp')
+out_dir = PosixPath('/tmp/pytest-of-root/pytest-52/test_source_sha_mismatch_block0/engine')
+contract = {'build_policy': {'forbidden_flag_patterns': ['-march=native', '-mtune=native', '-ffast-math', '-Ofast', '-flto'], 'ou...ffp-contract=off', '-Wall', ...], 'source_sha256': '0000000000000000000000000000000000000000000000000000000000000000'}}
+
+    def build_engine(source, out_dir, contract, *, run=None, compiler='g++', extra_flags=()):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/cloud_engine.py:9: NotImplementedError
+______ test_forbidden_compiler_flag_rejected_before_build[-march=native] _______
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_forbidden_compiler_flag_r0')
+flag = '-march=native'
+
+    @pytest.mark.parametrize('flag', ['-march=native', '-mtune=native', '-ffast-math', '-Ofast', '-flto'])
+    def test_forbidden_compiler_flag_rejected_before_build(tmp_path, flag):
+        source = tmp_path / 'moment_kernel.cpp'
+        source.write_text('source')
+        with pytest.raises(ValueError, match='forbidden'):
+>           build_engine(source, tmp_path / 'engine', contract(source), run=fake_compiler, extra_flags=(flag,))
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_cloud_engine.py:53:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+source = PosixPath('/tmp/pytest-of-root/pytest-52/test_forbidden_compiler_flag_r0/moment_kernel.cpp')
+out_dir = PosixPath('/tmp/pytest-of-root/pytest-52/test_forbidden_compiler_flag_r0/engine')
+contract = {'build_policy': {'forbidden_flag_patterns': ['-march=native', '-mtune=native', '-ffast-math', '-Ofast', '-flto'], 'ou...ffp-contract=off', '-Wall', ...], 'source_sha256': '41cf6794ba4200b839c53531555f0f3998df4cbb01a4d5cb0b94e3ca5e23947d'}}
+
+    def build_engine(source, out_dir, contract, *, run=None, compiler='g++', extra_flags=()):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/cloud_engine.py:9: NotImplementedError
+______ test_forbidden_compiler_flag_rejected_before_build[-mtune=native] _______
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_forbidden_compiler_flag_r1')
+flag = '-mtune=native'
+
+    @pytest.mark.parametrize('flag', ['-march=native', '-mtune=native', '-ffast-math', '-Ofast', '-flto'])
+    def test_forbidden_compiler_flag_rejected_before_build(tmp_path, flag):
+        source = tmp_path / 'moment_kernel.cpp'
+        source.write_text('source')
+        with pytest.raises(ValueError, match='forbidden'):
+>           build_engine(source, tmp_path / 'engine', contract(source), run=fake_compiler, extra_flags=(flag,))
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_cloud_engine.py:53:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+source = PosixPath('/tmp/pytest-of-root/pytest-52/test_forbidden_compiler_flag_r1/moment_kernel.cpp')
+out_dir = PosixPath('/tmp/pytest-of-root/pytest-52/test_forbidden_compiler_flag_r1/engine')
+contract = {'build_policy': {'forbidden_flag_patterns': ['-march=native', '-mtune=native', '-ffast-math', '-Ofast', '-flto'], 'ou...ffp-contract=off', '-Wall', ...], 'source_sha256': '41cf6794ba4200b839c53531555f0f3998df4cbb01a4d5cb0b94e3ca5e23947d'}}
+
+    def build_engine(source, out_dir, contract, *, run=None, compiler='g++', extra_flags=()):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/cloud_engine.py:9: NotImplementedError
+_______ test_forbidden_compiler_flag_rejected_before_build[-ffast-math] ________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_forbidden_compiler_flag_r2')
+flag = '-ffast-math'
+
+    @pytest.mark.parametrize('flag', ['-march=native', '-mtune=native', '-ffast-math', '-Ofast', '-flto'])
+    def test_forbidden_compiler_flag_rejected_before_build(tmp_path, flag):
+        source = tmp_path / 'moment_kernel.cpp'
+        source.write_text('source')
+        with pytest.raises(ValueError, match='forbidden'):
+>           build_engine(source, tmp_path / 'engine', contract(source), run=fake_compiler, extra_flags=(flag,))
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_cloud_engine.py:53:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+source = PosixPath('/tmp/pytest-of-root/pytest-52/test_forbidden_compiler_flag_r2/moment_kernel.cpp')
+out_dir = PosixPath('/tmp/pytest-of-root/pytest-52/test_forbidden_compiler_flag_r2/engine')
+contract = {'build_policy': {'forbidden_flag_patterns': ['-march=native', '-mtune=native', '-ffast-math', '-Ofast', '-flto'], 'ou...ffp-contract=off', '-Wall', ...], 'source_sha256': '41cf6794ba4200b839c53531555f0f3998df4cbb01a4d5cb0b94e3ca5e23947d'}}
+
+    def build_engine(source, out_dir, contract, *, run=None, compiler='g++', extra_flags=()):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/cloud_engine.py:9: NotImplementedError
+__________ test_forbidden_compiler_flag_rejected_before_build[-Ofast] __________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_forbidden_compiler_flag_r3')
+flag = '-Ofast'
+
+    @pytest.mark.parametrize('flag', ['-march=native', '-mtune=native', '-ffast-math', '-Ofast', '-flto'])
+    def test_forbidden_compiler_flag_rejected_before_build(tmp_path, flag):
+        source = tmp_path / 'moment_kernel.cpp'
+        source.write_text('source')
+        with pytest.raises(ValueError, match='forbidden'):
+>           build_engine(source, tmp_path / 'engine', contract(source), run=fake_compiler, extra_flags=(flag,))
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_cloud_engine.py:53:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+source = PosixPath('/tmp/pytest-of-root/pytest-52/test_forbidden_compiler_flag_r3/moment_kernel.cpp')
+out_dir = PosixPath('/tmp/pytest-of-root/pytest-52/test_forbidden_compiler_flag_r3/engine')
+contract = {'build_policy': {'forbidden_flag_patterns': ['-march=native', '-mtune=native', '-ffast-math', '-Ofast', '-flto'], 'ou...ffp-contract=off', '-Wall', ...], 'source_sha256': '41cf6794ba4200b839c53531555f0f3998df4cbb01a4d5cb0b94e3ca5e23947d'}}
+
+    def build_engine(source, out_dir, contract, *, run=None, compiler='g++', extra_flags=()):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/cloud_engine.py:9: NotImplementedError
+__________ test_forbidden_compiler_flag_rejected_before_build[-flto] ___________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_forbidden_compiler_flag_r4')
+flag = '-flto'
+
+    @pytest.mark.parametrize('flag', ['-march=native', '-mtune=native', '-ffast-math', '-Ofast', '-flto'])
+    def test_forbidden_compiler_flag_rejected_before_build(tmp_path, flag):
+        source = tmp_path / 'moment_kernel.cpp'
+        source.write_text('source')
+        with pytest.raises(ValueError, match='forbidden'):
+>           build_engine(source, tmp_path / 'engine', contract(source), run=fake_compiler, extra_flags=(flag,))
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_cloud_engine.py:53:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+source = PosixPath('/tmp/pytest-of-root/pytest-52/test_forbidden_compiler_flag_r4/moment_kernel.cpp')
+out_dir = PosixPath('/tmp/pytest-of-root/pytest-52/test_forbidden_compiler_flag_r4/engine')
+contract = {'build_policy': {'forbidden_flag_patterns': ['-march=native', '-mtune=native', '-ffast-math', '-Ofast', '-flto'], 'ou...ffp-contract=off', '-Wall', ...], 'source_sha256': '41cf6794ba4200b839c53531555f0f3998df4cbb01a4d5cb0b94e3ca5e23947d'}}
+
+    def build_engine(source, out_dir, contract, *, run=None, compiler='g++', extra_flags=()):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/cloud_engine.py:9: NotImplementedError
+____ test_compiler_failure_or_missing_library_never_emits_identity[failure] ____
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_compiler_failure_or_missi0')
+mode = 'failure'
+
+    @pytest.mark.parametrize('mode', ['failure', 'missing-library'])
+    def test_compiler_failure_or_missing_library_never_emits_identity(tmp_path, mode):
+        source = tmp_path / 'moment_kernel.cpp'
+        source.write_text('source')
+        def runner(argv, **kwargs):
+            if '--version' in argv:
+                return subprocess.CompletedProcess(argv, 0, 'g++ synthetic', '')
+            return subprocess.CompletedProcess(argv, 1 if mode == 'failure' else 0, '', 'compiler error')
+        with pytest.raises(RuntimeError, match='compiler|library'):
+>           build_engine(source, tmp_path / 'engine', contract(source), run=runner)
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_cloud_engine.py:66:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+source = PosixPath('/tmp/pytest-of-root/pytest-52/test_compiler_failure_or_missi0/moment_kernel.cpp')
+out_dir = PosixPath('/tmp/pytest-of-root/pytest-52/test_compiler_failure_or_missi0/engine')
+contract = {'build_policy': {'forbidden_flag_patterns': ['-march=native', '-mtune=native', '-ffast-math', '-Ofast', '-flto'], 'ou...ffp-contract=off', '-Wall', ...], 'source_sha256': '41cf6794ba4200b839c53531555f0f3998df4cbb01a4d5cb0b94e3ca5e23947d'}}
+
+    def build_engine(source, out_dir, contract, *, run=None, compiler='g++', extra_flags=()):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/cloud_engine.py:9: NotImplementedError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_compiler_failure_or_missi0')
+mode = 'failure'
+
+    @pytest.mark.parametrize('mode', ['failure', 'missing-library'])
+    def test_compiler_failure_or_missing_library_never_emits_identity(tmp_path, mode):
+        source = tmp_path / 'moment_kernel.cpp'
+        source.write_text('source')
+        def runner(argv, **kwargs):
+            if '--version' in argv:
+                return subprocess.CompletedProcess(argv, 0, 'g++ synthetic', '')
+            return subprocess.CompletedProcess(argv, 1 if mode == 'failure' else 0, '', 'compiler error')
+>       with pytest.raises(RuntimeError, match='compiler|library'):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'compiler|library'
+E         Actual message: ''
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_cloud_engine.py:65: AssertionError
+_ test_compiler_failure_or_missing_library_never_emits_identity[missing-library] _
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_compiler_failure_or_missi1')
+mode = 'missing-library'
+
+    @pytest.mark.parametrize('mode', ['failure', 'missing-library'])
+    def test_compiler_failure_or_missing_library_never_emits_identity(tmp_path, mode):
+        source = tmp_path / 'moment_kernel.cpp'
+        source.write_text('source')
+        def runner(argv, **kwargs):
+            if '--version' in argv:
+                return subprocess.CompletedProcess(argv, 0, 'g++ synthetic', '')
+            return subprocess.CompletedProcess(argv, 1 if mode == 'failure' else 0, '', 'compiler error')
+        with pytest.raises(RuntimeError, match='compiler|library'):
+>           build_engine(source, tmp_path / 'engine', contract(source), run=runner)
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_cloud_engine.py:66:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+source = PosixPath('/tmp/pytest-of-root/pytest-52/test_compiler_failure_or_missi1/moment_kernel.cpp')
+out_dir = PosixPath('/tmp/pytest-of-root/pytest-52/test_compiler_failure_or_missi1/engine')
+contract = {'build_policy': {'forbidden_flag_patterns': ['-march=native', '-mtune=native', '-ffast-math', '-Ofast', '-flto'], 'ou...ffp-contract=off', '-Wall', ...], 'source_sha256': '41cf6794ba4200b839c53531555f0f3998df4cbb01a4d5cb0b94e3ca5e23947d'}}
+
+    def build_engine(source, out_dir, contract, *, run=None, compiler='g++', extra_flags=()):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/cloud_engine.py:9: NotImplementedError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_compiler_failure_or_missi1')
+mode = 'missing-library'
+
+    @pytest.mark.parametrize('mode', ['failure', 'missing-library'])
+    def test_compiler_failure_or_missing_library_never_emits_identity(tmp_path, mode):
+        source = tmp_path / 'moment_kernel.cpp'
+        source.write_text('source')
+        def runner(argv, **kwargs):
+            if '--version' in argv:
+                return subprocess.CompletedProcess(argv, 0, 'g++ synthetic', '')
+            return subprocess.CompletedProcess(argv, 1 if mode == 'failure' else 0, '', 'compiler error')
+>       with pytest.raises(RuntimeError, match='compiler|library'):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'compiler|library'
+E         Actual message: ''
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_cloud_engine.py:65: AssertionError
+_____________________ test_engine_identity_tamper_rejected _____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_engine_identity_tamper_re0')
+
+    def test_engine_identity_tamper_rejected(tmp_path):
+        source = tmp_path / 'moment_kernel.cpp'
+        source.write_text('source')
+        out = tmp_path / 'engine'
+>       build_engine(source, out, contract(source), run=fake_compiler)
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_cloud_engine.py:74:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+source = PosixPath('/tmp/pytest-of-root/pytest-52/test_engine_identity_tamper_re0/moment_kernel.cpp')
+out_dir = PosixPath('/tmp/pytest-of-root/pytest-52/test_engine_identity_tamper_re0/engine')
+contract = {'build_policy': {'forbidden_flag_patterns': ['-march=native', '-mtune=native', '-ffast-math', '-Ofast', '-flto'], 'ou...ffp-contract=off', '-Wall', ...], 'source_sha256': '41cf6794ba4200b839c53531555f0f3998df4cbb01a4d5cb0b94e3ca5e23947d'}}
+
+    def build_engine(source, out_dir, contract, *, run=None, compiler='g++', extra_flags=()):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/cloud_engine.py:9: NotImplementedError
+_______________________ test_source_pin_tamper_rejected ________________________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_source_pin_tamper_rejecte0')
+
+    def test_source_pin_tamper_rejected(tmp_path):
+        file = tmp_path / 'source.txt'
+        file.write_text('changed')
+        pins = {'additional_pins': [{'path': 'source.txt', 'sha256': hashlib.sha256(b'original').hexdigest()}]}
+        with pytest.raises(ValueError, match='source pin'):
+>           verify_source_pins(tmp_path, pins)
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_cloud_engine.py:87:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo_root = PosixPath('/tmp/pytest-of-root/pytest-52/test_source_pin_tamper_rejecte0')
+pins = {'additional_pins': [{'path': 'source.txt', 'sha256': '0682c5f2076f099c34cfdd15a9e063849ed437a49677e6fcc5b4198c76575be5'}]}
+
+    def verify_source_pins(repo_root, pins):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/cloud_engine.py:5: NotImplementedError
+_____________________ test_existing_output_is_create_only ______________________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_existing_output_is_create0')
+
+    def test_existing_output_is_create_only(tmp_path):
+        source = tmp_path / 'moment_kernel.cpp'
+        source.write_text('source')
+        out = tmp_path / 'engine'
+        out.mkdir()
+        with pytest.raises(FileExistsError):
+>           build_engine(source, out, contract(source), run=fake_compiler)
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_cloud_engine.py:96:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+source = PosixPath('/tmp/pytest-of-root/pytest-52/test_existing_output_is_create0/moment_kernel.cpp')
+out_dir = PosixPath('/tmp/pytest-of-root/pytest-52/test_existing_output_is_create0/engine')
+contract = {'build_policy': {'forbidden_flag_patterns': ['-march=native', '-mtune=native', '-ffast-math', '-Ofast', '-flto'], 'ou...ffp-contract=off', '-Wall', ...], 'source_sha256': '41cf6794ba4200b839c53531555f0f3998df4cbb01a4d5cb0b94e3ca5e23947d'}}
+
+    def build_engine(source, out_dir, contract, *, run=None, compiler='g++', extra_flags=()):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/cloud_engine.py:9: NotImplementedError
+____________ test_exact_selected_and_all_historical_raw_arrays_pass ____________
+
+    def test_exact_selected_and_all_historical_raw_arrays_pass():
+>       result = admit_query(evidence(), evaluator, policy())
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_engine_admission.py:39:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+query = namespace(record={'query_id': 'exact-query', 'context_id': 'context', 'time_hex': '0x0.0p+0', 'qualification': {'selec...sentative={'query_id': 'exact-query', 'time_hex': '0x0.0p+0', 'selected_resolution': {'order': 40, 'subdivisions': 1}})
+evaluator = <function evaluator at 0x7fb79d3e4220>
+contract = {'parity_policy': {'compare_selected_full_arrays': ['S', 'H', 'D'], 'epsilon_z_a0': 0.0001, 'metric_connection_sentine...e_resolutions': [{'order': 32, 'subdivisions': 1}, {'order': 40, 'subdivisions': 1}, {'order': 48, 'subdivisions': 1}]}
+
+    def admit_query(query, evaluator, contract):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/engine_admission.py:5: NotImplementedError
+_________________ test_q_h_policy_selection_drift_is_distinct __________________
+
+    def test_q_h_policy_selection_drift_is_distinct():
+        def drifting(t, q, h):
+            raw, full = evaluator(t, q, h)
+            value = 1.0 if q == 32 else 1.1
+            return {k: a * value for k, a in raw.items()}, full
+        with pytest.raises(Exception, match='POLICY_SELECTION_DRIFT'):
+>           admit_query(evidence(), drifting, policy())
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_engine_admission.py:51:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+query = namespace(record={'query_id': 'exact-query', 'context_id': 'context', 'time_hex': '0x0.0p+0', 'qualification': {'selec...sentative={'query_id': 'exact-query', 'time_hex': '0x0.0p+0', 'selected_resolution': {'order': 40, 'subdivisions': 1}})
+evaluator = <function test_q_h_policy_selection_drift_is_distinct.<locals>.drifting at 0x7fb6fd727ec0>
+contract = {'parity_policy': {'compare_selected_full_arrays': ['S', 'H', 'D'], 'epsilon_z_a0': 0.0001, 'metric_connection_sentine...e_resolutions': [{'order': 32, 'subdivisions': 1}, {'order': 40, 'subdivisions': 1}, {'order': 48, 'subdivisions': 1}]}
+
+    def admit_query(query, evaluator, contract):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/engine_admission.py:5: NotImplementedError
+
+During handling of the above exception, another exception occurred:
+
+    def test_q_h_policy_selection_drift_is_distinct():
+        def drifting(t, q, h):
+            raw, full = evaluator(t, q, h)
+            value = 1.0 if q == 32 else 1.1
+            return {k: a * value for k, a in raw.items()}, full
+>       with pytest.raises(Exception, match='POLICY_SELECTION_DRIFT'):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'POLICY_SELECTION_DRIFT'
+E         Actual message: ''
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_engine_admission.py:50: AssertionError
+___________________ test_attempted_raw_cross_parity_failure ____________________
+
+    def test_attempted_raw_cross_parity_failure():
+        def wrong_raw(t, q, h):
+            raw, full = evaluator(t, q, h)
+            if q == 32:
+                raw['D_pt'] = raw['D_pt'] + 0.01
+            return raw, full
+        with pytest.raises(Exception, match='F1_RAW_PARITY_FAILED'):
+>           admit_query(evidence(), wrong_raw, policy())
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_engine_admission.py:61:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+query = namespace(record={'query_id': 'exact-query', 'context_id': 'context', 'time_hex': '0x0.0p+0', 'qualification': {'selec...sentative={'query_id': 'exact-query', 'time_hex': '0x0.0p+0', 'selected_resolution': {'order': 40, 'subdivisions': 1}})
+evaluator = <function test_attempted_raw_cross_parity_failure.<locals>.wrong_raw at 0x7fb6fd768680>
+contract = {'parity_policy': {'compare_selected_full_arrays': ['S', 'H', 'D'], 'epsilon_z_a0': 0.0001, 'metric_connection_sentine...e_resolutions': [{'order': 32, 'subdivisions': 1}, {'order': 40, 'subdivisions': 1}, {'order': 48, 'subdivisions': 1}]}
+
+    def admit_query(query, evaluator, contract):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/engine_admission.py:5: NotImplementedError
+
+During handling of the above exception, another exception occurred:
+
+    def test_attempted_raw_cross_parity_failure():
+        def wrong_raw(t, q, h):
+            raw, full = evaluator(t, q, h)
+            if q == 32:
+                raw['D_pt'] = raw['D_pt'] + 0.01
+            return raw, full
+>       with pytest.raises(Exception, match='F1_RAW_PARITY_FAILED'):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'F1_RAW_PARITY_FAILED'
+E         Actual message: ''
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_engine_admission.py:60: AssertionError
+__________________ test_selected_full_operator_parity_failure __________________
+
+    def test_selected_full_operator_parity_failure():
+        def wrong_full(t, q, h):
+            raw, full = evaluator(t, q, h)
+            full['H'] = full['H'] + np.eye(2) * 0.01
+            return raw, full
+        with pytest.raises(Exception, match='F1_FULL_OPERATOR_PARITY_FAILED'):
+>           admit_query(evidence(), wrong_full, policy())
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_engine_admission.py:70:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+query = namespace(record={'query_id': 'exact-query', 'context_id': 'context', 'time_hex': '0x0.0p+0', 'qualification': {'selec...sentative={'query_id': 'exact-query', 'time_hex': '0x0.0p+0', 'selected_resolution': {'order': 40, 'subdivisions': 1}})
+evaluator = <function test_selected_full_operator_parity_failure.<locals>.wrong_full at 0x7fb6fd7689a0>
+contract = {'parity_policy': {'compare_selected_full_arrays': ['S', 'H', 'D'], 'epsilon_z_a0': 0.0001, 'metric_connection_sentine...e_resolutions': [{'order': 32, 'subdivisions': 1}, {'order': 40, 'subdivisions': 1}, {'order': 48, 'subdivisions': 1}]}
+
+    def admit_query(query, evaluator, contract):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/engine_admission.py:5: NotImplementedError
+
+During handling of the above exception, another exception occurred:
+
+    def test_selected_full_operator_parity_failure():
+        def wrong_full(t, q, h):
+            raw, full = evaluator(t, q, h)
+            full['H'] = full['H'] + np.eye(2) * 0.01
+            return raw, full
+>       with pytest.raises(Exception, match='F1_FULL_OPERATOR_PARITY_FAILED'):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'F1_FULL_OPERATOR_PARITY_FAILED'
+E         Actual message: ''
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_engine_admission.py:69: AssertionError
+_______________ test_nonhermitian_or_bad_metric_screen_rejected ________________
+
+    def test_nonhermitian_or_bad_metric_screen_rejected():
+        def bad_metric(t, q, h):
+            raw, full = evaluator(t, q, h)
+            full['S'] = np.diag([-1., 1.])
+            return raw, full
+        with pytest.raises(Exception, match='F1_FULL_OPERATOR_PARITY_FAILED'):
+>           admit_query(evidence(), bad_metric, policy())
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_engine_admission.py:79:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+query = namespace(record={'query_id': 'exact-query', 'context_id': 'context', 'time_hex': '0x0.0p+0', 'qualification': {'selec...sentative={'query_id': 'exact-query', 'time_hex': '0x0.0p+0', 'selected_resolution': {'order': 40, 'subdivisions': 1}})
+evaluator = <function test_nonhermitian_or_bad_metric_screen_rejected.<locals>.bad_metric at 0x7fb6fd768cc0>
+contract = {'parity_policy': {'compare_selected_full_arrays': ['S', 'H', 'D'], 'epsilon_z_a0': 0.0001, 'metric_connection_sentine...e_resolutions': [{'order': 32, 'subdivisions': 1}, {'order': 40, 'subdivisions': 1}, {'order': 48, 'subdivisions': 1}]}
+
+    def admit_query(query, evaluator, contract):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/engine_admission.py:5: NotImplementedError
+
+During handling of the above exception, another exception occurred:
+
+    def test_nonhermitian_or_bad_metric_screen_rejected():
+        def bad_metric(t, q, h):
+            raw, full = evaluator(t, q, h)
+            full['S'] = np.diag([-1., 1.])
+            return raw, full
+>       with pytest.raises(Exception, match='F1_FULL_OPERATOR_PARITY_FAILED'):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'F1_FULL_OPERATOR_PARITY_FAILED'
+E         Actual message: ''
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_engine_admission.py:78: AssertionError
+______ test_metric_connection_sentinels_record_exact_time_and_resolution _______
+
+    def test_metric_connection_sentinels_record_exact_time_and_resolution():
+>       rows = metric_sentinels(SyntheticProvider(), 1.0, policy())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_engine_admission.py:94:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+provider = <test_engine_admission.SyntheticProvider object at 0x7fb6fd7a1e50>
+speed = 1.0
+contract = {'parity_policy': {'compare_selected_full_arrays': ['S', 'H', 'D'], 'epsilon_z_a0': 0.0001, 'metric_connection_sentine...e_resolutions': [{'order': 32, 'subdivisions': 1}, {'order': 40, 'subdivisions': 1}, {'order': 48, 'subdivisions': 1}]}
+
+    def metric_sentinels(provider, speed, contract):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/engine_admission.py:9: NotImplementedError
+__________________ test_metric_connection_failure_is_distinct __________________
+
+    def test_metric_connection_failure_is_distinct():
+        with pytest.raises(Exception, match='F1_METRIC_CONNECTION_FAILED'):
+>           metric_sentinels(SyntheticProvider(d=0.02), 1.0, policy())
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_engine_admission.py:102:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+provider = <test_engine_admission.SyntheticProvider object at 0x7fb6fd7a3740>
+speed = 1.0
+contract = {'parity_policy': {'compare_selected_full_arrays': ['S', 'H', 'D'], 'epsilon_z_a0': 0.0001, 'metric_connection_sentine...e_resolutions': [{'order': 32, 'subdivisions': 1}, {'order': 40, 'subdivisions': 1}, {'order': 48, 'subdivisions': 1}]}
+
+    def metric_sentinels(provider, speed, contract):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/native/engine_admission.py:9: NotImplementedError
+
+During handling of the above exception, another exception occurred:
+
+    def test_metric_connection_failure_is_distinct():
+>       with pytest.raises(Exception, match='F1_METRIC_CONNECTION_FAILED'):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'F1_METRIC_CONNECTION_FAILED'
+E         Actual message: ''
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_engine_admission.py:101: AssertionError
+_______________ test_missing_authorization_blocks_before_science _______________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_missing_authorization_blo0')
+
+    def test_missing_authorization_blocks_before_science(tmp_path):
+        with pytest.raises(Exception, match='F1_EXECUTION_NOT_AUTHORIZED'):
+>           check_authorization(tmp_path / 'missing.json', 'a' * 40, 'b' * 40)
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py:23:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = PosixPath('/tmp/pytest-of-root/pytest-52/test_missing_authorization_blo0/missing.json')
+implementation_commit = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+implementation_tree = 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb'
+
+    def check_authorization(path, implementation_commit, implementation_tree):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/run_f1_engine_admission.py:6: NotImplementedError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_missing_authorization_blo0')
+
+    def test_missing_authorization_blocks_before_science(tmp_path):
+>       with pytest.raises(Exception, match='F1_EXECUTION_NOT_AUTHORIZED'):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'F1_EXECUTION_NOT_AUTHORIZED'
+E         Actual message: ''
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py:22: AssertionError
+__________ test_invalid_authorization_blocks_before_science[changes0] __________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_invalid_authorization_blo0')
+changes = {'implementation_commit': 'cccccccccccccccccccccccccccccccccccccccc'}
+
+    @pytest.mark.parametrize('changes', [
+        {'implementation_commit': 'c' * 40}, {'implementation_tree': 'd' * 40},
+        {'native_admission_allowed': False}, {'max_wall_seconds': 0},
+        {'spending_limit_krw': None, 'prepaid_host_approved': False},
+        {'spending_limit_krw': -1}, {'schema': 'wrong'},
+    ])
+    def test_invalid_authorization_blocks_before_science(tmp_path, changes):
+        with pytest.raises(Exception, match='F1_EXECUTION_NOT_AUTHORIZED'):
+>           check_authorization(authorization(tmp_path, **changes), 'a' * 40, 'b' * 40)
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py:34:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = PosixPath('/tmp/pytest-of-root/pytest-52/test_invalid_authorization_blo0/synthetic_authorization_fixture.json')
+implementation_commit = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+implementation_tree = 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb'
+
+    def check_authorization(path, implementation_commit, implementation_tree):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/run_f1_engine_admission.py:6: NotImplementedError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_invalid_authorization_blo0')
+changes = {'implementation_commit': 'cccccccccccccccccccccccccccccccccccccccc'}
+
+    @pytest.mark.parametrize('changes', [
+        {'implementation_commit': 'c' * 40}, {'implementation_tree': 'd' * 40},
+        {'native_admission_allowed': False}, {'max_wall_seconds': 0},
+        {'spending_limit_krw': None, 'prepaid_host_approved': False},
+        {'spending_limit_krw': -1}, {'schema': 'wrong'},
+    ])
+    def test_invalid_authorization_blocks_before_science(tmp_path, changes):
+>       with pytest.raises(Exception, match='F1_EXECUTION_NOT_AUTHORIZED'):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'F1_EXECUTION_NOT_AUTHORIZED'
+E         Actual message: ''
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py:33: AssertionError
+__________ test_invalid_authorization_blocks_before_science[changes1] __________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_invalid_authorization_blo1')
+changes = {'implementation_tree': 'dddddddddddddddddddddddddddddddddddddddd'}
+
+    @pytest.mark.parametrize('changes', [
+        {'implementation_commit': 'c' * 40}, {'implementation_tree': 'd' * 40},
+        {'native_admission_allowed': False}, {'max_wall_seconds': 0},
+        {'spending_limit_krw': None, 'prepaid_host_approved': False},
+        {'spending_limit_krw': -1}, {'schema': 'wrong'},
+    ])
+    def test_invalid_authorization_blocks_before_science(tmp_path, changes):
+        with pytest.raises(Exception, match='F1_EXECUTION_NOT_AUTHORIZED'):
+>           check_authorization(authorization(tmp_path, **changes), 'a' * 40, 'b' * 40)
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py:34:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = PosixPath('/tmp/pytest-of-root/pytest-52/test_invalid_authorization_blo1/synthetic_authorization_fixture.json')
+implementation_commit = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+implementation_tree = 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb'
+
+    def check_authorization(path, implementation_commit, implementation_tree):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/run_f1_engine_admission.py:6: NotImplementedError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_invalid_authorization_blo1')
+changes = {'implementation_tree': 'dddddddddddddddddddddddddddddddddddddddd'}
+
+    @pytest.mark.parametrize('changes', [
+        {'implementation_commit': 'c' * 40}, {'implementation_tree': 'd' * 40},
+        {'native_admission_allowed': False}, {'max_wall_seconds': 0},
+        {'spending_limit_krw': None, 'prepaid_host_approved': False},
+        {'spending_limit_krw': -1}, {'schema': 'wrong'},
+    ])
+    def test_invalid_authorization_blocks_before_science(tmp_path, changes):
+>       with pytest.raises(Exception, match='F1_EXECUTION_NOT_AUTHORIZED'):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'F1_EXECUTION_NOT_AUTHORIZED'
+E         Actual message: ''
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py:33: AssertionError
+__________ test_invalid_authorization_blocks_before_science[changes2] __________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_invalid_authorization_blo2')
+changes = {'native_admission_allowed': False}
+
+    @pytest.mark.parametrize('changes', [
+        {'implementation_commit': 'c' * 40}, {'implementation_tree': 'd' * 40},
+        {'native_admission_allowed': False}, {'max_wall_seconds': 0},
+        {'spending_limit_krw': None, 'prepaid_host_approved': False},
+        {'spending_limit_krw': -1}, {'schema': 'wrong'},
+    ])
+    def test_invalid_authorization_blocks_before_science(tmp_path, changes):
+        with pytest.raises(Exception, match='F1_EXECUTION_NOT_AUTHORIZED'):
+>           check_authorization(authorization(tmp_path, **changes), 'a' * 40, 'b' * 40)
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py:34:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = PosixPath('/tmp/pytest-of-root/pytest-52/test_invalid_authorization_blo2/synthetic_authorization_fixture.json')
+implementation_commit = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+implementation_tree = 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb'
+
+    def check_authorization(path, implementation_commit, implementation_tree):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/run_f1_engine_admission.py:6: NotImplementedError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_invalid_authorization_blo2')
+changes = {'native_admission_allowed': False}
+
+    @pytest.mark.parametrize('changes', [
+        {'implementation_commit': 'c' * 40}, {'implementation_tree': 'd' * 40},
+        {'native_admission_allowed': False}, {'max_wall_seconds': 0},
+        {'spending_limit_krw': None, 'prepaid_host_approved': False},
+        {'spending_limit_krw': -1}, {'schema': 'wrong'},
+    ])
+    def test_invalid_authorization_blocks_before_science(tmp_path, changes):
+>       with pytest.raises(Exception, match='F1_EXECUTION_NOT_AUTHORIZED'):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'F1_EXECUTION_NOT_AUTHORIZED'
+E         Actual message: ''
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py:33: AssertionError
+__________ test_invalid_authorization_blocks_before_science[changes3] __________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_invalid_authorization_blo3')
+changes = {'max_wall_seconds': 0}
+
+    @pytest.mark.parametrize('changes', [
+        {'implementation_commit': 'c' * 40}, {'implementation_tree': 'd' * 40},
+        {'native_admission_allowed': False}, {'max_wall_seconds': 0},
+        {'spending_limit_krw': None, 'prepaid_host_approved': False},
+        {'spending_limit_krw': -1}, {'schema': 'wrong'},
+    ])
+    def test_invalid_authorization_blocks_before_science(tmp_path, changes):
+        with pytest.raises(Exception, match='F1_EXECUTION_NOT_AUTHORIZED'):
+>           check_authorization(authorization(tmp_path, **changes), 'a' * 40, 'b' * 40)
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py:34:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = PosixPath('/tmp/pytest-of-root/pytest-52/test_invalid_authorization_blo3/synthetic_authorization_fixture.json')
+implementation_commit = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+implementation_tree = 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb'
+
+    def check_authorization(path, implementation_commit, implementation_tree):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/run_f1_engine_admission.py:6: NotImplementedError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_invalid_authorization_blo3')
+changes = {'max_wall_seconds': 0}
+
+    @pytest.mark.parametrize('changes', [
+        {'implementation_commit': 'c' * 40}, {'implementation_tree': 'd' * 40},
+        {'native_admission_allowed': False}, {'max_wall_seconds': 0},
+        {'spending_limit_krw': None, 'prepaid_host_approved': False},
+        {'spending_limit_krw': -1}, {'schema': 'wrong'},
+    ])
+    def test_invalid_authorization_blocks_before_science(tmp_path, changes):
+>       with pytest.raises(Exception, match='F1_EXECUTION_NOT_AUTHORIZED'):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'F1_EXECUTION_NOT_AUTHORIZED'
+E         Actual message: ''
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py:33: AssertionError
+__________ test_invalid_authorization_blocks_before_science[changes4] __________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_invalid_authorization_blo4')
+changes = {'prepaid_host_approved': False, 'spending_limit_krw': None}
+
+    @pytest.mark.parametrize('changes', [
+        {'implementation_commit': 'c' * 40}, {'implementation_tree': 'd' * 40},
+        {'native_admission_allowed': False}, {'max_wall_seconds': 0},
+        {'spending_limit_krw': None, 'prepaid_host_approved': False},
+        {'spending_limit_krw': -1}, {'schema': 'wrong'},
+    ])
+    def test_invalid_authorization_blocks_before_science(tmp_path, changes):
+        with pytest.raises(Exception, match='F1_EXECUTION_NOT_AUTHORIZED'):
+>           check_authorization(authorization(tmp_path, **changes), 'a' * 40, 'b' * 40)
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py:34:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = PosixPath('/tmp/pytest-of-root/pytest-52/test_invalid_authorization_blo4/synthetic_authorization_fixture.json')
+implementation_commit = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+implementation_tree = 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb'
+
+    def check_authorization(path, implementation_commit, implementation_tree):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/run_f1_engine_admission.py:6: NotImplementedError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_invalid_authorization_blo4')
+changes = {'prepaid_host_approved': False, 'spending_limit_krw': None}
+
+    @pytest.mark.parametrize('changes', [
+        {'implementation_commit': 'c' * 40}, {'implementation_tree': 'd' * 40},
+        {'native_admission_allowed': False}, {'max_wall_seconds': 0},
+        {'spending_limit_krw': None, 'prepaid_host_approved': False},
+        {'spending_limit_krw': -1}, {'schema': 'wrong'},
+    ])
+    def test_invalid_authorization_blocks_before_science(tmp_path, changes):
+>       with pytest.raises(Exception, match='F1_EXECUTION_NOT_AUTHORIZED'):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'F1_EXECUTION_NOT_AUTHORIZED'
+E         Actual message: ''
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py:33: AssertionError
+__________ test_invalid_authorization_blocks_before_science[changes5] __________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_invalid_authorization_blo5')
+changes = {'spending_limit_krw': -1}
+
+    @pytest.mark.parametrize('changes', [
+        {'implementation_commit': 'c' * 40}, {'implementation_tree': 'd' * 40},
+        {'native_admission_allowed': False}, {'max_wall_seconds': 0},
+        {'spending_limit_krw': None, 'prepaid_host_approved': False},
+        {'spending_limit_krw': -1}, {'schema': 'wrong'},
+    ])
+    def test_invalid_authorization_blocks_before_science(tmp_path, changes):
+        with pytest.raises(Exception, match='F1_EXECUTION_NOT_AUTHORIZED'):
+>           check_authorization(authorization(tmp_path, **changes), 'a' * 40, 'b' * 40)
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py:34:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = PosixPath('/tmp/pytest-of-root/pytest-52/test_invalid_authorization_blo5/synthetic_authorization_fixture.json')
+implementation_commit = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+implementation_tree = 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb'
+
+    def check_authorization(path, implementation_commit, implementation_tree):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/run_f1_engine_admission.py:6: NotImplementedError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_invalid_authorization_blo5')
+changes = {'spending_limit_krw': -1}
+
+    @pytest.mark.parametrize('changes', [
+        {'implementation_commit': 'c' * 40}, {'implementation_tree': 'd' * 40},
+        {'native_admission_allowed': False}, {'max_wall_seconds': 0},
+        {'spending_limit_krw': None, 'prepaid_host_approved': False},
+        {'spending_limit_krw': -1}, {'schema': 'wrong'},
+    ])
+    def test_invalid_authorization_blocks_before_science(tmp_path, changes):
+>       with pytest.raises(Exception, match='F1_EXECUTION_NOT_AUTHORIZED'):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'F1_EXECUTION_NOT_AUTHORIZED'
+E         Actual message: ''
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py:33: AssertionError
+__________ test_invalid_authorization_blocks_before_science[changes6] __________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_invalid_authorization_blo6')
+changes = {'schema': 'wrong'}
+
+    @pytest.mark.parametrize('changes', [
+        {'implementation_commit': 'c' * 40}, {'implementation_tree': 'd' * 40},
+        {'native_admission_allowed': False}, {'max_wall_seconds': 0},
+        {'spending_limit_krw': None, 'prepaid_host_approved': False},
+        {'spending_limit_krw': -1}, {'schema': 'wrong'},
+    ])
+    def test_invalid_authorization_blocks_before_science(tmp_path, changes):
+        with pytest.raises(Exception, match='F1_EXECUTION_NOT_AUTHORIZED'):
+>           check_authorization(authorization(tmp_path, **changes), 'a' * 40, 'b' * 40)
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py:34:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = PosixPath('/tmp/pytest-of-root/pytest-52/test_invalid_authorization_blo6/synthetic_authorization_fixture.json')
+implementation_commit = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+implementation_tree = 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb'
+
+    def check_authorization(path, implementation_commit, implementation_tree):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/run_f1_engine_admission.py:6: NotImplementedError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_invalid_authorization_blo6')
+changes = {'schema': 'wrong'}
+
+    @pytest.mark.parametrize('changes', [
+        {'implementation_commit': 'c' * 40}, {'implementation_tree': 'd' * 40},
+        {'native_admission_allowed': False}, {'max_wall_seconds': 0},
+        {'spending_limit_krw': None, 'prepaid_host_approved': False},
+        {'spending_limit_krw': -1}, {'schema': 'wrong'},
+    ])
+    def test_invalid_authorization_blocks_before_science(tmp_path, changes):
+>       with pytest.raises(Exception, match='F1_EXECUTION_NOT_AUTHORIZED'):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'F1_EXECUTION_NOT_AUTHORIZED'
+E         Actual message: ''
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py:33: AssertionError
+_____________ test_valid_synthetic_authorization_shape_is_accepted _____________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_valid_synthetic_authoriza0')
+
+    def test_valid_synthetic_authorization_shape_is_accepted(tmp_path):
+>       assert check_authorization(authorization(tmp_path), 'a' * 40, 'b' * 40)['max_wall_seconds'] == 60
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py:38:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = PosixPath('/tmp/pytest-of-root/pytest-52/test_valid_synthetic_authoriza0/synthetic_authorization_fixture.json')
+implementation_commit = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+implementation_tree = 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb'
+
+    def check_authorization(path, implementation_commit, implementation_tree):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/run_f1_engine_admission.py:6: NotImplementedError
+_________________________ test_cli_help_is_import_safe _________________________
+
+    def test_cli_help_is_import_safe():
+        script = Path(__file__).resolve().parents[1] / 'run_f1_engine_admission.py'
+        p = subprocess.run([sys.executable, str(script), '--help'], capture_output=True, text=True)
+>       assert p.returncode == 0 and '--authorization' in p.stdout
+E       assert (1 == 0)
+E        +  where 1 = CompletedProcess(args=['/root/.local/state/bass_f0/env/tp2e_f0_20260928T045058Z/bin/python', '/root/.local/state/bass_..._20260928/runtime/run_f1_engine_admission.py", line 10, in main\n    raise NotImplementedError\nNotImplementedError\n').returncode
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py:44: AssertionError
+__________ test_cli_without_authorization_never_claims_admission_pass __________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_cli_without_authorization0')
+
+    def test_cli_without_authorization_never_claims_admission_pass(tmp_path):
+        out = tmp_path / 'out'
+>       rc = main(['--out', str(out)])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py:49:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+argv = ['--out', '/tmp/pytest-of-root/pytest-52/test_cli_without_authorization0/out']
+
+    def main(argv=None):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/run_f1_engine_admission.py:10: NotImplementedError
+________________ test_output_collision_preserves_existing_bytes ________________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-52/test_output_collision_preserve0')
+
+    def test_output_collision_preserves_existing_bytes(tmp_path):
+        out = tmp_path / 'out'
+        out.mkdir()
+        marker = out / 'marker'
+        marker.write_bytes(b'original')
+>       assert main(['--out', str(out)]) != 0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py:61:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+argv = ['--out', '/tmp/pytest-of-root/pytest-52/test_output_collision_preserve0/out']
+
+    def main(argv=None):
+>       raise NotImplementedError
+E       NotImplementedError
+
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/run_f1_engine_admission.py:10: NotImplementedError
+=============================== warnings summary ===============================
+research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_archive_evidence.py::test_unsafe_or_duplicate_zip_member_rejected[BASIS.json]
+  /usr/lib/python3.12/zipfile/__init__.py:1620: UserWarning: Duplicate name: 'BASIS.json'
+    return self._open_to_write(zinfo, force_zip64=force_zip64)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_archive_evidence.py::test_valid_archive_exposes_exact_basis_and_all_attempt_arrays
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_archive_evidence.py::test_archive_sha_mismatch_rejected_before_read
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_archive_evidence.py::test_unsafe_or_duplicate_zip_member_rejected[../escape]
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_archive_evidence.py::test_unsafe_or_duplicate_zip_member_rejected[/absolute]
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_archive_evidence.py::test_unsafe_or_duplicate_zip_member_rejected[BASIS.json]
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_archive_evidence.py::test_missing_basis_or_query_rejected
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_archive_evidence.py::test_basis_byte_tamper_rejected_even_if_manifest_updated
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_archive_evidence.py::test_representative_query_hash_mismatch_rejected[json]
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_archive_evidence.py::test_representative_query_hash_mismatch_rejected[npz]
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_archive_evidence.py::test_query_time_or_resolution_drift_rejected[time_hex-0x1.0p+0]
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_archive_evidence.py::test_query_time_or_resolution_drift_rejected[selected_resolution-value1]
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_cloud_engine.py::test_build_records_frozen_flags_and_independent_engine_identity
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_cloud_engine.py::test_source_sha_mismatch_blocks_compiler
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_cloud_engine.py::test_forbidden_compiler_flag_rejected_before_build[-march=native]
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_cloud_engine.py::test_forbidden_compiler_flag_rejected_before_build[-mtune=native]
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_cloud_engine.py::test_forbidden_compiler_flag_rejected_before_build[-ffast-math]
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_cloud_engine.py::test_forbidden_compiler_flag_rejected_before_build[-Ofast]
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_cloud_engine.py::test_forbidden_compiler_flag_rejected_before_build[-flto]
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_cloud_engine.py::test_compiler_failure_or_missing_library_never_emits_identity[failure]
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_cloud_engine.py::test_compiler_failure_or_missing_library_never_emits_identity[missing-library]
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_cloud_engine.py::test_engine_identity_tamper_rejected
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_cloud_engine.py::test_source_pin_tamper_rejected
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_cloud_engine.py::test_existing_output_is_create_only
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_engine_admission.py::test_exact_selected_and_all_historical_raw_arrays_pass
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_engine_admission.py::test_q_h_policy_selection_drift_is_distinct
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_engine_admission.py::test_attempted_raw_cross_parity_failure
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_engine_admission.py::test_selected_full_operator_parity_failure
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_engine_admission.py::test_nonhermitian_or_bad_metric_screen_rejected
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_engine_admission.py::test_metric_connection_sentinels_record_exact_time_and_resolution
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_engine_admission.py::test_metric_connection_failure_is_distinct
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py::test_missing_authorization_blocks_before_science
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py::test_invalid_authorization_blocks_before_science[changes0]
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py::test_invalid_authorization_blocks_before_science[changes1]
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py::test_invalid_authorization_blocks_before_science[changes2]
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py::test_invalid_authorization_blocks_before_science[changes3]
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py::test_invalid_authorization_blocks_before_science[changes4]
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py::test_invalid_authorization_blocks_before_science[changes5]
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py::test_invalid_authorization_blocks_before_science[changes6]
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py::test_valid_synthetic_authorization_shape_is_accepted
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py::test_cli_help_is_import_safe
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py::test_cli_without_authorization_never_claims_admission_pass
+FAILED research/foundation_rebuild/ncloud_f1_engine_admission_20260928/runtime/tests/test_runner_contract.py::test_output_collision_preserves_existing_bytes
+42 failed, 1 warning in 0.51s

@@ -1,0 +1,112 @@
+{
+  "contract_id": "G12_B0_EXISTING_WINDOW_METHOD_PARITY_ONLY",
+  "status": "PREPARED_NOT_AUTHORIZED_NOT_NATIVE_READY",
+  "execution_allowed": false,
+  "question": "Does an independent algorithmic family reproduce the same qualified B0 finite-window endpoint selected population within a predeclared method-parity budget?",
+  "scientific_scope": {
+    "basis": "B0",
+    "channels": 18,
+    "energy_keV_per_u": 100,
+    "impact_b_a0": 2,
+    "window_z_a0": [
+      -12,
+      12
+    ],
+    "selected_indices": [
+      9,
+      10,
+      12,
+      13,
+      14
+    ],
+    "old_temporal_gate": "N1536_TEMPORAL_GATE_CLOSED remains historical scope only"
+  },
+  "source_requirements": {
+    "execution_commit": "bind after parent integration/publish",
+    "execution_tree": "bind exact tree",
+    "native_library_build_and_radial_bank": "must match current B0 qualification identity"
+  },
+  "required_inputs": [
+    "Exact current B0 c_initial bytes/hash at z=-12; never reuse endpoint state at another time",
+    "Qualified operator provider at each requested actual time; at(t) returns S,H,D,Sdot with identity receipt; Sdot must have independently validated provenance",
+    "Current baseline endpoint c and selected probability with its existing temporal/operator evidence",
+    "Predeclared method_parity_budget and its relation to the global error budget; numerical values must be bound before execution",
+    "Fresh resource proposal binding initial nstep, maximum refinement count, exact unique query accounting, ordered qualification ladder/raw attempt cap, wall/RAM/CPU/deadline, stop policy, authorization identity",
+    "Common normalized-IVP receipt and each method actual initial state/norm/distance, under a predeclared initial-state allowance."
+  ],
+  "implemented_reference_entrypoint": "independent_propagator.propagate_cf4(provider,c0,t0,tf,nstep)",
+  "provider_interface": {
+    "method": "at(float_time)",
+    "required_fields": [
+      "S",
+      "H",
+      "D",
+      "Sdot"
+    ],
+    "shape": "18x18 complex matrices",
+    "time_map": "z=v*t using the pinned existing trajectory convention",
+    "prohibited": [
+      "unqualified interpolation between sparse snapshots",
+      "copying +/-12 state to tail times",
+      "automatic matrix shifts",
+      "silent state renormalization during CF4 propagation"
+    ]
+  },
+  "stage_rule": {
+    "gauss_nodes": [
+      "1/2-sqrt(3)/6",
+      "1/2+sqrt(3)/6"
+    ],
+    "new_unique_stage_queries_upper_bound": "2*nstep + 2 including endpoints before cache deduplication",
+    "adjacent_pair_raw_qualification_ceiling": "11 times distinct uncached queries unless the actual pinned provider policy differs; any difference requires a newly bound proposal"
+  },
+  "run_rule": "Use only the prebound initial stage count, compare same endpoint and norm; refine by factor 2 only within the fresh approved proposal and only when result could change parity status.",
+  "initial_nstep": null,
+  "maximum_refinements": null,
+  "method_parity_budget": null,
+  "stop_rules": [
+    "Any provider qualification, source identity, state identity, metric SPD, or independent derivative failure: preserve first failure and stop",
+    "No budget or authorization identity: native calls remain zero",
+    "No tolerance relaxation after inspecting result",
+    "Stop once independent-family difference and component uncertainty enclosures satisfy the predeclared criterion, or resource cap is reached"
+  ],
+  "return_schema": [
+    "source commit/tree and library/input hashes",
+    "method/version and stage times",
+    "per-query qualification/raw attempt receipts",
+    "initial/final states and norm history",
+    "selected P endpoints",
+    "CF4 refinement differences and direct-method difference",
+    "operator/temporal/floating-point uncertainty classification",
+    "budget comparison and explicit PASS/UNRESOLVED",
+    "resource usage and authorization consumed"
+  ],
+  "current_remaining_blocker": {
+    "class": "IMPLEMENTATION_BLOCKER",
+    "claim": "Physical parity within a production-relevant budget",
+    "first_failing_artifact": "This contract has no bound qualified time-dependent B0 provider/independent Sdot dataset, state hashes, stage count or parity budget",
+    "minimum_repair": "Bind existing B0 source/state identities and qualified provider plus predeclared budget; create fresh narrow run proposal",
+    "already_complete": "Whitening derivation, CF4 code, exact synthetic solution, six focused tests, comparison against existing midpoint and direct DOP853",
+    "unverified": "Physical stage sampling, physical independent Sdot, real observable parity and production-budget acceptance"
+  },
+  "authorization_consumed": false,
+  "native_execution_performed": false,
+  "common_initial_value_contract": {
+    "source_state": "One exact initial-state byte payload at z=-12 and one exact S0 identity shared by every method.",
+    "normalization_policy": "Predeclare the common normalized IVP. Existing midpoint/DOP853 normalize supplied c0; CF4 preserves its supplied norm. Explicitly construct the intended common initial state, record each method actual post-initialization state, and compare them before any trajectory comparison.",
+    "state_receipt_fields": [
+      "input_state_sha256",
+      "S0_sha256",
+      "raw_metric_norm",
+      "normalization_factor",
+      "actual_initial_state_sha256",
+      "actual_initial_metric_norm",
+      "metric_distance_to_common_initial_state"
+    ],
+    "initial_state_difference_budget": null,
+    "budget_requirement": "Predeclare a numerical initial-state discrepancy allowance and include its propagated contribution in the parity error chain. Null budget means no physical launch.",
+    "admission": "Reject inconsistent source/state/time/metric identities, nonpositive norms, undeclared normalization or initial distances exceeding the predeclared allowance.",
+    "no_silent_renormalization": true,
+    "synthetic_benchmark": "Existing analytic initial norm1 result remains valid; a nonunit input is not the same IVP across current methods without this explicit mapping."
+  }
+}

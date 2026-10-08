@@ -1,0 +1,84 @@
+{
+  "schema": "BASS_CR_R3M16_FINAL_DECISION_V1",
+  "work_unit": "N1_TDL_COULOMB_FFT_H_DT_REPRESENTATION_DECISION",
+  "decision": "TIME_REFINEMENT_STILL_OPEN",
+  "matrix_completion": "COMPLETE_2_NEW_COLLISIONS",
+  "new_collision_count": 2,
+  "new_collision_ids": ["A1", "B1"],
+  "target_only_diagnostics": {
+    "status": "COMPLETE",
+    "projectile_potential_included": false,
+    "CAP_included": false,
+    "T_probe_ta": 1.0,
+    "A": {
+      "D01": 0.003732331851925839,
+      "D12": 0.0005974960826244083,
+      "empirical_temporal_order": 2.6430761064238966,
+      "clean_second_order_diagnostic": false
+    },
+    "B": {
+      "D01": 0.014265614155739242,
+      "D12": 0.0009790506342212462,
+      "empirical_temporal_order": 3.8650145735918375,
+      "clean_second_order_diagnostic": false
+    },
+    "B_refined_one_step_only": true,
+    "ray_defect_is_capture_probability_error": false,
+    "full_collision_error_bound": false
+  },
+  "P3_decision_metrics": {
+    "time_effect_h020": 0.0001521930575934978,
+    "time_effect_h020_relative_denominator": 0.008063449050040342,
+    "time_effect_h020_relative": 0.018874436565421884,
+    "real_time_allocation": 0.001,
+    "real_time_allocation_met": false,
+    "spatial_effect_dt025": 0.0002380941829022605,
+    "spatial_effect_dt025_relative_denominator": 0.008063449050040342,
+    "spatial_effect_dt025_relative": 0.02952758570491238,
+    "spatial_allocation": 0.003,
+    "spatial_allocation_met": false,
+    "interaction": 0.00008422143110339755,
+    "interaction_relative_to_B1": 0.010444839494952372
+  },
+  "interpretation": {
+    "finite_dt_contamination_material": true,
+    "h_and_dt_additivity_assumed": false,
+    "point_coulomb_fft_representation_change_admitted": false,
+    "reason": "The P3 h=.20 dt effect is 1.8874%, the dt=.025 spatial gap is 2.9528%, and the target-only ladder is resolved and monotone but outside the preregistered clean second-order range. The present matrix cannot isolate the residual representation error.",
+    "physical_charge_transfer_model_failed": false,
+    "analytic_h_minus_5_over_2_hypothesis_proved": false
+  },
+  "structural_checks": {
+    "A1_binding": "PASS_BYTE_IDENTICAL_INTERNAL_INITIAL_TO_PREPARED",
+    "B1_binding": "PASS_BYTE_IDENTICAL_INTERNAL_INITIAL_TO_PREPARED",
+    "A1_Gram_rank": 14,
+    "B1_Gram_rank": 14,
+    "NaN_or_Inf": false,
+    "checkpoint_corruption": false,
+    "CPU_fallback": false,
+    "runtime_blocker": false
+  },
+  "global_spatial_convergence": "NO_GO",
+  "N1_TDL": "OPEN",
+  "all_bound_completion": "OPEN",
+  "bgrid_admission": "NO_GO",
+  "cross_section_convergence_100_keV_u": "NOT_ESTABLISHED",
+  "energies_50_225_execution": false,
+  "physical_rate_execution": false,
+  "AOCC_large_trajectory": false,
+  "Nichols_code_reproduction": false,
+  "numerical_source_digest": "581ff84930bb862efafdfec5d39d5b25aebf9297ce7ce45f833a5abe125b2a5b",
+  "numerical_sources_modified": false,
+  "historical_R3M15_bytes_unchanged": true,
+  "test_scope": {
+    "R3M16_new": "37 passed",
+    "relevant_R3M11_through_R3M16": "122 passed",
+    "historical_85_reused_as_current": false
+  },
+  "next_canonical_node": {
+    "id": "N1_TDL_B_DT0125_SINGLE_COLLISION_TEMPORAL_RESOLUTION",
+    "action": "Run one preregistered h=.20, requested dt=.0125 collision from the same saved preparation/config family, then test B1/B2 temporal contraction before any further h refinement.",
+    "automatic_finer_h_allowed": false,
+    "execution_in_this_work_unit": "NOT_RUN"
+  }
+}

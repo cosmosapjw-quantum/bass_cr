@@ -1,0 +1,48 @@
+{
+  "actual_B3_executed": false,
+  "base_commit": "90d6cbad25e4bc49e9563f8721fdc408761b31c7",
+  "code_scope": "typed declaration/identity/accounting evaluator; not scientific evidence verification or runner",
+  "commands": [
+    {
+      "actual_exit_code": 2,
+      "argv": "PYTHONPATH=../test_deps:. python -m pytest -p no:cacheprovider tests/test_r3m26_budget.py -q",
+      "phase": "TDD_RED",
+      "reason": "new module absent before implementation",
+      "stderr": "tdd_red.stderr",
+      "stdout": "tdd_red.stdout"
+    },
+    {
+      "actual_exit_code": 0,
+      "argv": "PYTHONPATH=../test_deps:. python -m pytest -p no:cacheprovider tests/test_r3m26_budget.py -q",
+      "passed": 15,
+      "phase": "CURRENT_GREEN",
+      "stderr": "current_green.stderr",
+      "stdout": "current_green.stdout"
+    },
+    {
+      "actual_exit_code": 0,
+      "argv": "PYTHONPATH=. python scripts/r3m26_budget.py --ledger results/R3M26/budget/CURRENT_SELECTED_P3_LEDGER.json --out results/R3M26/budget/CURRENT_SELECTED_P3_CLI_EVALUATION.json",
+      "phase": "REAL_CURRENT_LEDGER_CLI",
+      "stderr": "current_cli.stderr",
+      "stdout": "current_cli.stdout"
+    }
+  ],
+  "failure_recovery": "FIXTURE_EXTRACTION_FAILURE.json",
+  "floating_helper_example": {
+    "evidence": "FLOATING_NUMERICAL_CHECK_OF_DERIVED_FORMULA_NOT_CERTIFIED_BOUND_OR_MEASURED_STATE_ERROR",
+    "p_num": 0.008084190148156251,
+    "projector_probability_error_at_threshold": 8.084190148156251e-06,
+    "relative_goal": 0.001,
+    "sufficient_state_error": 4.494482889505894e-05,
+    "target_absolute": 8.084190148156251e-06
+  },
+  "production_admitted": false,
+  "python": "3.12.14",
+  "real_current_status": "NUMERICAL_BUDGET_OPEN",
+  "schema": "R3M26_BUDGET_VALIDATION_V1",
+  "source_files": {
+    "scripts/r3m26_budget.py": "a332d23e3eab11cd016a8b18679a0985d82ee885f8351df0368918534dab32ec",
+    "tests/test_r3m26_budget.py": "f50b594e3eb9643c196e78fd1e56ccc609aadac7285cfff8480c6220cb10d9d4"
+  },
+  "synthetic_passes_are_real_scientific_evidence": false
+}

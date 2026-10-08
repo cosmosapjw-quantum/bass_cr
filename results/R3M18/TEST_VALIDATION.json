@@ -1,0 +1,42 @@
+{
+  "canonical_environment_integrated_regression": {
+    "command": "python -m pytest -p no:cacheprovider -q tests/test_r3m11*.py tests/test_r3m13*.py tests/test_r3m14*.py tests/test_r3m15*.py tests/test_r3m16*.py tests/test_r3m17*.py",
+    "failed": 0,
+    "passed": 246,
+    "seconds": 4.25,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "7b76839a52908a695e50ce10be60195884da0040a7a7cf57d54d9c4c6e7062ba"
+  },
+  "final_integrated_rerun": {
+    "command": "python -m pytest -p no:cacheprovider -q tests/test_r3m11*.py tests/test_r3m13*.py tests/test_r3m14*.py tests/test_r3m15*.py tests/test_r3m16*.py tests/test_r3m17*.py tests/test_r3m18*.py",
+    "passed": 249,
+    "failed": 0,
+    "seconds": 4.75,
+    "stdout_sha256": "2f0d78deeb7533ec5d8439b601e63d76404ab3b5db200a363453b611807ba83a",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "post_review_repair": {
+    "finding": "Existing-generation resume path checked only manifest done before the review repair.",
+    "repair": "Revalidate every existing generation state/seal/witness inventory and compare all inventory fields with the published manifest.",
+    "targeted_passed": 4,
+    "targeted_failed": 0,
+    "targeted_seconds": 0.20,
+    "targeted_stdout_sha256": "ba687f67e739d608d0c2920e1525f9fa9c54bbaf5dbf028d4955aed5701ab533",
+    "final_integrated_passed": 250,
+    "final_integrated_failed": 0,
+    "final_integrated_seconds": 4.56,
+    "final_integrated_stdout_sha256": "6a393eccfe30698a748b51e0e50037737f85f4e33342fa9d6225dd7d785b885f",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "actual_generation_revalidation": "results/R3M18/GENERATION_REVALIDATION.json"
+  },
+  "historical_246_reused_as_current": false,
+  "new_R3M18_coordinator_tests": {
+    "command": "python -m pytest -p no:cacheprovider -q tests/test_r3m18_b2_execute.py",
+    "failed": 0,
+    "passed": 4,
+    "seconds": 0.20,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "ba687f67e739d608d0c2920e1525f9fa9c54bbaf5dbf028d4955aed5701ab533"
+  },
+  "schema": "BASS_CR_R3M18_TEST_VALIDATION_V1"
+}

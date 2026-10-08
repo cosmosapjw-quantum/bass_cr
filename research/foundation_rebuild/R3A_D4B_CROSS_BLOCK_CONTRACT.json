@@ -1,0 +1,71 @@
+{
+  "schema": "BASS_FND_R3A_D4B_CROSS_BLOCK_AXIS_SEPARATION_V1",
+  "status": "PREREGISTERED_NOT_RUN",
+
+  "parent_commit": "26c806189f1cb3f20969ac5ecebaea66aabd8071",
+  "parent_tree": "9c0d6ce4ce062a1d86d98195e0f07f8de1afd0c9",
+
+  "d4a_result": {
+    "path": "research/foundation_rebuild/results/R3A_D4A/RESULT_20260925.json",
+    "sha256": "736183d2b0645fdd8e6317097992cfc973f3a8dbe5c0c164e37b0883e4ec4392"
+  },
+
+  "energy_keV_per_u": 100.0,
+  "b_a0": 2.0,
+  "z_samples_a0": [-12.0, 0.0],
+
+  "fem_spec": {
+    "radius": 64.0,
+    "elements": 40,
+    "degree": 4,
+    "lmax": 1,
+    "bound_nmax": 2,
+    "positive_per_l": 1,
+    "positive_emax": 2.0,
+    "quad_order": 12,
+    "grading": 2.0
+  },
+
+  "phase_ladders": {
+    "-12.0": [
+      {"nrho": 96, "neta": 80, "nphi": 64},
+      {"nrho": 96, "neta": 80, "nphi": 96},
+      {"nrho": 96, "neta": 80, "nphi": 128}
+    ],
+    "0.0": [
+      {"nrho": 96, "neta": 80, "nphi": 192},
+      {"nrho": 96, "neta": 80, "nphi": 256},
+      {"nrho": 96, "neta": 80, "nphi": 384}
+    ]
+  },
+
+  "radial_eta_ladders": {
+    "-12.0": [
+      {"nrho": 80,  "neta": 64, "nphi": 128},
+      {"nrho": 96,  "neta": 80, "nphi": 128},
+      {"nrho": 128, "neta": 96, "nphi": 128}
+    ],
+    "0.0": [
+      {"nrho": 80,  "neta": 64, "nphi": 384},
+      {"nrho": 96,  "neta": 80, "nphi": 384},
+      {"nrho": 128, "neta": 96, "nphi": 384}
+    ]
+  },
+
+  "screens": {
+    "final_phase_relative_change_max": 1.0e-4,
+    "final_radial_eta_relative_change_max": 1.0e-4,
+    "cross_S_H_hermitian_pair_defect_max": 1.0e-11
+  },
+
+  "interpretation": {
+    "cross_block_only": true,
+    "same_center_D3_oracle_is_not_reused": true,
+    "capture_error_bound": false,
+    "capture_execution": false
+  },
+
+  "production_admission": "HOLD",
+  "all_bound": "OPEN",
+  "b_grid": "NO_GO"
+}

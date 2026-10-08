@@ -1,0 +1,15 @@
+# R4AH first shifted runtime
+
+Use the immutable R4AG package identified in STATE_POINTER.json. Do not reconstruct numerical source from these metadata files. The full package contains source, vendored provider, exact inputs, tests, locked policy, and NCP_START_HANDOFF_KO.md.
+
+1. Extract to a new directory and run `python verify_delivery.py .`. Read REPORT_KO.md, DERIVATION_KO.md, SOURCE_INPUT_LOCK.json, inputs/NODE_REGISTRY.json, contracts/EXECUTION_POLICY.json. This verifies bytes, not past scientific calculations.
+2. Linux cgroup-v2, Python>=3.11 with numpy/scipy/mpmath, C++17, GMP/GMPXX development headers are required. Set PYTHONDONTWRITEBYTECODE=1 and OMP_NUM_THREADS=OPENBLAS_NUM_THREADS=MKL_NUM_THREADS=1. Run `python source/batch.py prepare --output /absolute/new/r4ah_batch --workers 3`. This measures environment and builds a newly pinned native binary but does not run atomic integrals. At least workers+1 available CPU and workers*512MiB+1792MiB available memory are required. Stop if unavailable; never change measurements or use the test-only resource fixture for science.
+3. Inspect the produced BATCH.json SHA, ENVIRONMENT and native/library identities. Only after the exact batch and scope have been explicitly authorized, run `python source/batch.py authorize --batch /absolute/new/r4ah_batch/BATCH.json --confirm-sha256 <actual_Batch_SHA256> --nodes m64 --authorize-native`. This approval is for one node, not all10. Do not pass the angle-bracket field literally; obtain the actual SHA with sha256sum. No authorized runtime files are included in the release.
+4. Run `python source/batch.py run --batch /absolute/new/r4ah_batch/BATCH.json --max-new-nodes 1` and collect with `python source/batch.py collect --batch /absolute/new/r4ah_batch/BATCH.json --output /absolute/new/r4ah_batch/PILOT_RETURN.json`.
+5. Return the complete immutable context and point evidence, not a prose PASS alone. Include source/native/geometry/epoch, cover/pole/cell certificates, signed Jacobians, intervals, Gaussian error bounds, reservation/DONE/failure states, manifests, wall/RSS and collect output. Require point full-cross radius<=1e-16 before proceeding.
+
+Do not rerun the original center, M9, oldR8, D/V_other, or historical suites. Failed or interrupted node directories are not reset and rerun. Bounded manual recovery needs a new contract and explicit missing-work accounting. This implementation refuses automatic partial retry.
+
+If all10 are explicitly authorized initially, the package's full start guide permits running just the first node with max-new-nodes1, reviewing that result, and only then consuming the remaining authorization for9. With m64-only approval, the other9 require a separate new batch and approval. Do not silently expand scope. Ordinary 64CPU optimization and MPI/NUMA tuning are later work, not prerequisites for rewriting already implemented numerical code.
+
+The target is a new finite-candidate S-only derivative certificate, not production/capture/fullH/D/globaltrajectory approval. Both incomplete windows remain null.

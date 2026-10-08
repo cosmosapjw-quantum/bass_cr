@@ -1,0 +1,49 @@
+{
+  "schema": "BASS_R4V_BATCH_ORPHAN_FIX_VALIDATION_V2",
+  "status": "TARGETED_VALIDATION_PASS",
+  "sources": {
+    "batch_runtime.py": "8a9098502f99c4967e841a3ad80834d362a556d21178bf74150fb993698a7a21",
+    "test_batch_runtime.py": "9efdeb761a1c21b89662d0ece5814532ccd6eaa5492b3c73f3615cc89450556e",
+    "BATCH_RUNTIME_CONTRACT.md": "053ebd924f7665229218bbaadc2a6e357439138e3648f5abdabfa17096bbb3ce"
+  },
+  "rejected_runtime_sha256": "b07abdd404e424f6704fea0da5740b8a56180ec8423f072df407a1a93b828454",
+  "independent_blocker": "Immediate wrapper exit or SIGKILL after setsid child could miss post-exit descendant snapshot; no physics was launched under that source",
+  "independent_repro": "/workspace/scratch/63ee2321a512/recovery_r4v/BATCH_DEAD_LANE_REPRO.json",
+  "fixes": [
+    "process-local Linux child subreaper enabled before launch and previous setting restored",
+    "continuous exact descendant identity retention",
+    "lane execution and supervisor/admission identity receipt validation",
+    "terminal orphan kill/reap regardless of active wrapper count",
+    "success false with live surviving owned descendants"
+  ],
+  "validation_runs": [
+    {
+      "unique_methods": 13,
+      "status": "PASS",
+      "elapsed_seconds": 1.784,
+      "stage": "after main subreaper/receipt/terminal fix, before final double-reap and explicit survivor-status guard"
+    },
+    {
+      "methods": [
+        "test_abrupt_wrapper_exit_and_sigkill_leave_no_independent_session_child",
+        "test_unbound_receipt_does_not_authorize_signalling_unrelated_identity",
+        "test_real_failure_cancels_watchdog_and_long_child"
+      ],
+      "status": "PASS",
+      "elapsed_seconds": 0.977,
+      "stage": "final source targeted cleanup/receipt/watchdog regression"
+    }
+  ],
+  "fault_injections": [
+    "wrapper immediate exit7 with independent-session child",
+    "wrapper SIGKILL with independent-session child",
+    "wrapper exit0 with live independent-session child",
+    "SIGTERM into original R4U watchdog while child active",
+    "unbound execution receipt"
+  ],
+  "physical_operator_calls": 0,
+  "native_evaluator_constructions": 0,
+  "mpi_physical_execution": false,
+  "ncp64_scaling_measured": false,
+  "production_admission": "HOLD"
+}

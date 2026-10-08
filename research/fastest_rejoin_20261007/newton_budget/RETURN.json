@@ -1,0 +1,50 @@
+{
+  "task": "CR-F0-R6",
+  "status": "SCOPED_NEWTON_LEDGER_ATTRIBUTION_AND_TOLERANCE_PLATEAU_VERIFIED",
+  "source_bass_commit": "2338a2d1d494fb07c6de62da34fe11f5af26f8e6",
+  "source_receiver_commit": "e94e41b009723c9077015404503632325f58d16c",
+  "summary_commit": "7d3312c934c11f400e66e3898a4ff13dc495288d",
+  "summary_path": "docs/fastest_track_resume_20261007_v1/CR_F0_R6_NEWTON_LEDGER_BUDGET_KO.md",
+  "target": {"finite_births": 16, "fixed_macro_intervals": 128, "scheme": "ImplicitMidpoint", "provider": "Grackle-based IGM, not FT03", "requested_tolerances": [2e-13,2e-14,2e-15]},
+  "unchanged_library_source_files": 31,
+  "native": {"processes": 1, "profiles": 3, "accepted_macros": 384, "accepted_halves": 768, "internal_BE_solves": 1152, "rejected_trials": 0, "additional_point_RHS_telemetry": 768},
+  "results": {
+    "default_energy_residual_erg_per_H": 2.1461836877686784e-22,
+    "tight_energy_residual_erg_per_H": -2.271919407036514e-27,
+    "default_normalized_energy_residual": 2.1545977697617825e-9,
+    "tight_normalized_energy_residual": -2.2808264390060974e-14,
+    "signed_energy_magnitude_reduction": 94465.66111111111,
+    "default_absolute_accounting_budget_erg_per_H": 2.1496132364105185e-22,
+    "tight_absolute_accounting_budget_erg_per_H": 5.267951229268573e-25,
+    "T_default_K": 9815.372566619202,
+    "T_tight_K": 9815.37256665637,
+    "T_tight_minus_inherited_numerical_reference_K": -0.00028801234475395177,
+    "default_Newton_iteration_histogram": {"1":107,"2":149},
+    "tight_Newton_iteration_histogram": {"2":256},
+    "tight_pair_numeric_bit_identity_checks": 49024,
+    "R5_default_numeric_bit_identity_checks": 37238
+  },
+  "verification": {
+    "new_tests": 21, "assertion_red_green": 1, "exception_regression": 1, "tests_after": 19,
+    "exact_synthetic_cases": 128, "exact_stage_identities": 1536, "exact_global_identities": 6,
+    "artifact_assertions": 3129, "python_syntax_files": 6, "rustfmt_files": 2,
+    "independent_C_points": 12, "independent_C_RHS_scalars": 48, "independent_C_ledger_scalars": 156,
+    "max_RHS_relative_difference": 4.134842474368532e-16,
+    "max_ledger_relative_difference": 3.7508415724110804e-16,
+    "new_independent_root_solves": 0, "new_IVP_solves": 0,
+    "independent_human_or_agent_review": false, "proof_assistant": false, "interval_IVP_certificate": false
+  },
+  "decision": "End this fixed M16/N128 tolerance search. 2e-14 is a scoped opt-in choice; 2e-15 gave identical output. No default or producer source change.",
+  "accounting_scope": "Exact identities and retrospective absolute bounds on rational images of recorded binary64 values; not exact-root or IVP solution-error enclosures.",
+  "CR": {"mode":"OFF","candidate_boundary_loads":0,"candidate_boundary_callbacks":0,"original_global_history_counts":null,"owner_adoption_ACK":null},
+  "preserved": {"physical":"HOLD","precision_atomic":"PARKED","G02":"UNRESOLVED","capture":false,"all_bound":"OPEN","b_grid":"NO_GO","receiver_remote_mutations":0,"production_defaults_changed":false},
+  "archive": {
+    "name":"BASS_CR_FASTEST_NEWTON_20261007_v1.zip", "bytes":2439037,
+    "sha256":"5ea7e2727d078f98ada161d895e65db9595869a92d054caf72247e2a1f1a6f96",
+    "entries":129,"payload_files":128,"local_CRC_manifest_checked":true,
+    "google_drive":{"id":"1U3hO8She7XQu4sqUdm_ZX_5Pp4Kp7mW7","parent":"1zzbClTE3qzz8gaiQwopXJqVk9ZGBawYZ","upload_success":true,"metadata_size":2439037},
+    "dropbox":{"id":"id:BSpOijBcT10AAAAAADzxAw","status":"completed","size":2439037,"path":"/BASS_DERIVATION_DOSSIERS_20260912/ATOMIC_REIONIZATION_HANDOFF_20261004_v1/BASS_CR_FASTEST_NEWTON_20261007_v1.zip"},
+    "verification_tier":"R1_UPLOAD_VERIFIED_ID_PATH_SIZE","remote_checksum_returned":false,"remote_full_restore_verified":false,
+    "entry":"REPORT_KO.md","results":"results/final/RESULTS.json","evidence":"VERIFICATION.json","reproduce":"python research/reproduce.py --rustc /path/to/rustc --output NEW_DIRECTORY"
+  }
+}

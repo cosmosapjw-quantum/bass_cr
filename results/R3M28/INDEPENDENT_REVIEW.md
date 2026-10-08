@@ -1,0 +1,21 @@
+**One low-severity provenance finding; no defect found that changes the scientific NO_GO.** Scientific checks included the requested GPT-6 Astra/xhigh review.
+
+- **Low — stale “current roadmap” hash.** [CURRENT_SELECTED_P3_LEDGER.json:120](/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/results/R3M28/CURRENT_SELECTED_P3_LEDGER.json:120) records `36f5e987…`, but the referenced current file hashes to `c5eb44b6…`. The recorded digest matches R3M27 commit `1ff87bf…`; identify that historical ref explicitly or update the current pointer. This metadata mismatch does not invalidate numerical evidence.
+
+The bounded scientific conclusions are supported:
+
+| Channel | \|B3−A3\|/B3 | Raw h–dt interaction |
+|---|---:|---:|
+| P1 | 3.292486571% | 5.456046119×10⁻⁶ |
+| P2 | 3.064521476% | 6.697127031×10⁻⁶ |
+| P3 | 3.029905479% | 7.001510908×10⁻⁶ |
+
+All exceed the preregistered **0.30%** screen; the denominator, signs and interaction arithmetic are correct. [SPATIAL_EVALUATION.json:7](/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/results/R3M28/SPATIAL_EVALUATION.json:7)
+
+- **Matched comparisons:** all four runs span `44.821139751290325 au` and use the same Gram-corrected P1–P3 observables. A3/B3 share 7,172 steps and actual dt `0.00624946176119497`.
+- **No double admission:** spatial and h–dt remain unadmitted; the total remains null. No full spatial continuum bound, subcell-translation validation or production admission is claimed. [Budget evaluation:98](/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/results/R3M28/CURRENT_SELECTED_P3_BUDGET_EVALUATION.json:98)
+- **Runtime integrity supported:** independently checked contract/source/input hashes, all 57 generation payloads and 116 command receipts; all matched, with exit code zero. **Scientific NO_GO is not a runtime failure.**
+- **Resources described honestly:** `1241.598 s` is summed command wall time; memory figures are sampled minima. Exact GPU peak, D2H and Gram timings remain explicitly unmeasured. [RUNTIME_AUDIT.json:2](/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1/results/R3M28/RUNTIME_AUDIT.json:2)
+
+Five non-writing tests passed. Earlier suite/ledger failure records remain preserved. No edits or new collision were performed. MLflow evaluation was not run under the read-only restriction.
+

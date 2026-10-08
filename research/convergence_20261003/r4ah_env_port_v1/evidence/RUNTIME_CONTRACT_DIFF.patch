@@ -1,0 +1,39 @@
+--- original/source/runtime_contract.py
++++ derived/source/runtime_contract.py
+@@ -5,6 +5,7 @@
+ from fractions import Fraction as F
+ from common import ROOT,CANDIDATE,CEILING,ContractError,inside,sha,read,write_new,verify_lock
+ from stencil import windows
++from resource_reader import observe_resources, assert_same_hierarchy, ResourceError
+ GiB=1024**3
+ 
+ def validate_registry(registry,root=ROOT):
+@@ -33,16 +34,9 @@
+ def observe_environment():
+     if any(os.environ.get(k) for k in ('LD_PRELOAD','LD_AUDIT','LD_LIBRARY_PATH')):raise ContractError('unbound dynamic loader override')
+     if sys.platform!='linux':raise ContractError('Linux process/affinity contract required')
+-    mem={}
+-    for line in Path('/proc/meminfo').read_text().splitlines():
+-        k,value=line.split(':',1);mem[k]=int(value.split()[0])*1024
+-    cg=Path('/sys/fs/cgroup');cpu=cg/'cpu.max';mm=cg/'memory.max';mc=cg/'memory.current'
+-    if not cpu.exists() or not mm.exists():raise ContractError('cgroup-v2 resource reader required; no guessed quotas')
+-    a=cpu.read_text().split();quota='unlimited' if a[0]=='max' else str(F(int(a[0]),int(a[1])))
+-    limit=mem['MemTotal'] if mm.read_text().strip()=='max' else min(int(mm.read_text()),mem['MemTotal'])
+-    used=int(mc.read_text()) if mc.exists() else 0
+-    available=min(mem['MemAvailable'],max(0,limit-used))
+-    return {'platform':platform.platform(),'python':sys.version,'python_executable':str(Path(sys.executable).resolve()),'python_sha256':sha(sys.executable),'dependencies':{n:importlib.metadata.version(n) for n in ('numpy','scipy','mpmath')},'affinity':sorted(os.sched_getaffinity(0)),'quota':quota,'memory_limit':limit,'memory_available':available,'cgroup_cpu_max':a,'cgroup_memory_current':used,'observed_utc':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime())}
++    try:resources=observe_resources()
++    except ResourceError as e:raise ContractError(str(e)) from e
++    return {'platform':platform.platform(),'python':sys.version,'python_executable':str(Path(sys.executable).resolve()),'python_sha256':sha(sys.executable),'dependencies':{n:importlib.metadata.version(n) for n in ('numpy','scipy','mpmath')},**resources}
+ 
+ def choose_resources(environment,workers):
+     if type(workers) is not int or workers not in (1,2,3):raise ContractError('validated profile supports workers 1..3 only')
+@@ -133,6 +127,8 @@
+     if c['caps']!={'point_geometry':1,'window_jet':0,'D':0,'Vother':0,'attempts':1} or c['precision_bits']!=256 or c['rho']!='2' or c['degrees']!=[16,24,32,40,48,56,64]:raise ContractError('method/cap')
+     if F(c['target_radius'])!=F(1,10**16) or F(c['quadrature_budget'])!=F(1,10**18) or c['max_cells']!=10000 or c['max_split_depth']!=5:raise ContractError('posthoc target/cell change')
+     r=c['resources'];env=observe_environment();choose_resources(env,r['workers'])
++    try:assert_same_hierarchy(read(ap.parent/'ENVIRONMENT.json'),env)
++    except ResourceError as e:raise ContractError(str(e)) from e
+     if len(set(r['worker_cpu_ids']+[r['coordinator_cpu_id']]))!=r['workers']+1 or not set(r['worker_cpu_ids']+[r['coordinator_cpu_id']])<=set(env['affinity']):raise ContractError('bound CPU allocation')
+     if c['resources']!=b['resources'] or r['wall_seconds']!=1800 or r['parallel_nodes']!=1:raise ContractError('bound resources')
+     # Old numerical core expects these selected fields at top level.

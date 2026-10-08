@@ -1,0 +1,181 @@
+{
+  "schema": "BASS_R4Y_CENTRAL_QUADRATURE_CONTRACT_V1",
+  "date_KST": "2026-10-02",
+  "base_commit": "6becf5a7207725c8d335212788e1e91adf7a35d7",
+  "selected_priority": "G02 central spatial quadrature qualification for separate R4X continuous bank",
+  "model_metadata": "Unavailable; common model-independent harness rules applied",
+  "authority": "Current request to perform highest-priority remaining step; previously authorized same-branch nonforce publication and create-only dual backup continue",
+  "input_pins": {
+    "recovered_r4u/runtime_inputs/BASIS.npz": "889001a751cd3cae93ad217336587f5fc58db11c0a496843ecc7e7bbd93f83ec",
+    "recovered_r4u/runtime_inputs/BASIS.json": "3cf2359dd9802e84f9ec4dc45f3585e0aa9712de38a3fb0a077300d257150131",
+    "recovered_r4u/runtime_inputs/SCIENCE_CONTEXT.json": "cf484b252092d642c8c8487a8bf70deb61e7b0b9f2bc2f522a3325a146e7f746",
+    "runs_r4x/candidate_v1/CANDIDATE.npz": "c948eab57638938407d4f34ee8bdae879b926c84fc0b55d91ac2e9105a1cfed5",
+    "runs_r4x/candidate_v1/CANDIDATE.json": "77df01c595ff1ac14236ff4537d7be7dd78d9642c498433d3b6e60c8c38ef35f",
+    "runs_r4x/native_v1/NATIVE_BUILD.json": "6af8bdfb1eff94fcf47770f5532d70e7662d6339d5ba8862d8e6021dd33847a7",
+    "runs_r4x/native_v1/libcontinuous.so": "dfe7222040b3a5ae40cd25d9abaafa3c4266a523018936b29830739e7d18cb24",
+    "recovered_r4u/native_build_portable/BUILD_HPC.json": "49a350703604034db32257d2fbdaa80cae2af2a46674b4ad87b0fed97c89bd66",
+    "recovered_r4u/native_build_portable/libreference.so": "b6e7632e2b7eb17542b3f12c03f1bb6fd96123e8d05b97f70306efc5430734d7",
+    "recovered_r4u/native_build_portable/libmoments_f90.so": "8f07ef766c50553f1931cd6304fcef59138a6d4be63623736258b6e18212788c"
+  },
+  "geometry": {
+    "energy_keV_per_u": 100.0,
+    "b_a0": 2.0,
+    "z_a0": 0.0,
+    "time_ta": 0.0,
+    "centers": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        0,
+        0
+      ]
+    ],
+    "velocities": "stationary target, projectile v_z from existing projectile_speed_au(100)",
+    "charges": [
+      1,
+      1
+    ],
+    "channels": 18
+  },
+  "fixed_numerics": {
+    "radial_same_center_order": 20,
+    "cross_batch": 1024,
+    "sector": "full",
+    "phase_budget": null,
+    "precision": "FP64",
+    "raw_symmetrization": false,
+    "candidate_renormalization": false
+  },
+  "original_resolution_ladder": [
+    [
+      32,
+      1
+    ],
+    [
+      40,
+      1
+    ],
+    [
+      48,
+      1
+    ],
+    [
+      56,
+      1
+    ],
+    [
+      64,
+      1
+    ],
+    [
+      48,
+      2
+    ],
+    [
+      56,
+      2
+    ],
+    [
+      64,
+      2
+    ],
+    [
+      48,
+      4
+    ],
+    [
+      56,
+      4
+    ],
+    [
+      64,
+      4
+    ]
+  ],
+  "qualification": {
+    "raw_cross_relative_max": 1e-09,
+    "relative_definition": "max_six_blocks ||A-B||_F/max(||A||_F,||B||_F,1e-300)",
+    "operator_hermiticity_relative_max": 1e-11,
+    "metric_min_ratio": 1e-08,
+    "both_resolutions_must_pass_full_screens": true,
+    "evidence_relation": "INDEPENDENT_NUMERICAL_RESOLUTION_COMPARISON; not certified error bound",
+    "closure_scope": "one exact z0 geometry only"
+  },
+  "validation_strategy": {
+    "stage1": "Fresh (40,1) CXX+Python vs F90+F90, raw/full bitwise equality required before ladder",
+    "stage2": "F90 refinement (48,1),(56,1),(64,1),(48,2); analyze declared pairs in fixed order",
+    "continuation": "If needed, remaining original resolution ladder. Stop when original adjacent-pair criterion and an independent subdivision comparison pass. Preserve failed comparisons; no looser tolerances.",
+    "new_rule_if_needed": "Only after concrete failure evidence, separately derive/pin a transverse-phase-aware integration panel rule; basis and physics unchanged, original failures retained."
+  },
+  "resource": {
+    "global_raw_attempt_cap": 24,
+    "automatic_retries": 0,
+    "workers_max": 3,
+    "cpus_per_worker": 2,
+    "coordinator_cpus": 1,
+    "blas_threads": 1,
+    "radial_fortran_threads": 1,
+    "moment_fortran_threads": 2,
+    "cpu_quota": 8,
+    "memory_limit_bytes": 8589934592,
+    "memory_reserve_min_bytes": 1073741824,
+    "MPI_execution": false,
+    "NCP64_scaling": "NOT_RUN"
+  },
+  "claim_ceiling": {
+    "G02": "UNRESOLVED",
+    "production": "HOLD",
+    "capture": false,
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "full_time_derivative": "NOT_RUN",
+    "trajectory": "NOT_RUN"
+  },
+  "completion_bar": [
+    "Actual preserved-accuracy compiled-backend parity",
+    "Central spatial convergence diagnosis and bounded qualification experiment",
+    "Any required numerical integration correction implemented and tested",
+    "Independent raw payload/review plus result/status/database/publication/backups"
+  ],
+  "independent_central_control": {
+    "derived_identity": "At z=0 for identical real s channels i=0,1,2: dS_ii/dt=0 and D_pt=0, hence D_tp[i,i]=0",
+    "assumptions": [
+      "Continuous compact radial bank, zero outer trace",
+      "Stationary target, projectile velocity along z, b along x",
+      "Matched real s radial functions and ballistic ETF convention"
+    ],
+    "indices_zero_based": [
+      0,
+      1,
+      2
+    ],
+    "raw_D_tp_diagonal_absolute_max": 1e-12,
+    "units": "ta^-1",
+    "raw_projection_or_replacement": false,
+    "scope": "Independent exact-zero diagnostic for selected central entries, not bound for all operators"
+  },
+  "optional_phase_panel_family": {
+    "basis_unchanged": true,
+    "outer_FEM_triangle_panels_unchanged": true,
+    "inner_new_edges": "theta=acos(axial/r0), phasebudget >= |dv|*r0*delta_theta; map back to r1; existing Gauss in r1",
+    "allowed_budgets_rad": [
+      24.0,
+      12.0,
+      6.0
+    ],
+    "allowed_orders": [
+      32,
+      40,
+      48,
+      56,
+      64
+    ],
+    "subdivisions": 1,
+    "use_condition": "Legacy p/h comparisons do not close the central exactzero/qualification checks or geometric evidence shows avoidable endpoint phase undersampling",
+    "interpretation": "Distinct quadrature rule requiring separately pinned tasks and raw comparison; not an error bound"
+  }
+}

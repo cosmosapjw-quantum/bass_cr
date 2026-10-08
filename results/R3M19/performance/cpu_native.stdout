@@ -1,0 +1,254 @@
+{
+  "accuracy": {
+    "norm_tolerance": 2e-13,
+    "observable_probabilities": "NOT_EVALUATED_NOT_A_PRODUCTION_CHANNEL_BENCHMARK",
+    "relative_squared_norm_difference": 0.0,
+    "relative_unaligned_state_l2": 6.2752401309046e-16,
+    "state_tolerance": 5e-13,
+    "status": "PASS_SAME_DISCRETIZATION_PARITY"
+  },
+  "actual_dt": 0.012450316597580644,
+  "actual_horizon": 0.04980126639032258,
+  "actual_inventory": {
+    "cpu": {
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "affinity_logical_count": 9,
+      "model_names": [
+        "Intel(R) Xeon(R) Platinum 8272CL CPU @ 2.60GHz"
+      ],
+      "physical_cores_in_affinity": 9,
+      "quota_logical_capacity": 8.0
+    },
+    "gpu": {
+      "status": "NOT_PROBED"
+    },
+    "memory": {
+      "available_bytes": 16288063488,
+      "cgroup_current_bytes": 5186772992,
+      "cgroup_max_bytes": 21474836480,
+      "host_total_bytes": 23109894144
+    },
+    "numpy": "2.3.5",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "python": "3.12.14",
+    "schema": "BASS_CR_R3M19_HARDWARE_INVENTORY_V1"
+  },
+  "blas_pools_after": [
+    {
+      "architecture": "SkylakeX",
+      "filepath": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy.libs/libscipy_openblas64_-fdde5778.so",
+      "internal_api": "openblas",
+      "num_threads": 9,
+      "prefix": "libscipy_openblas",
+      "threading_layer": "pthreads",
+      "user_api": "blas",
+      "version": "0.3.30"
+    },
+    {
+      "architecture": "SkylakeX",
+      "filepath": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/scipy.libs/libscipy_openblas-6cdc3b4a.so",
+      "internal_api": "openblas",
+      "num_threads": 9,
+      "prefix": "libscipy_openblas",
+      "threading_layer": "pthreads",
+      "user_api": "blas",
+      "version": "0.3.30"
+    }
+  ],
+  "blas_pools_before": [
+    {
+      "architecture": "SkylakeX",
+      "filepath": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy.libs/libscipy_openblas64_-fdde5778.so",
+      "internal_api": "openblas",
+      "num_threads": 9,
+      "prefix": "libscipy_openblas",
+      "threading_layer": "pthreads",
+      "user_api": "blas",
+      "version": "0.3.30"
+    },
+    {
+      "architecture": "SkylakeX",
+      "filepath": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/scipy.libs/libscipy_openblas-6cdc3b4a.so",
+      "internal_api": "openblas",
+      "num_threads": 9,
+      "prefix": "libscipy_openblas",
+      "threading_layer": "pthreads",
+      "user_api": "blas",
+      "version": "0.3.30"
+    }
+  ],
+  "blas_pools_inside": [
+    {
+      "architecture": "SkylakeX",
+      "filepath": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy.libs/libscipy_openblas64_-fdde5778.so",
+      "internal_api": "openblas",
+      "num_threads": 1,
+      "prefix": "libscipy_openblas",
+      "threading_layer": "pthreads",
+      "user_api": "blas",
+      "version": "0.3.30"
+    },
+    {
+      "architecture": "SkylakeX",
+      "filepath": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/scipy.libs/libscipy_openblas-6cdc3b4a.so",
+      "internal_api": "openblas",
+      "num_threads": 1,
+      "prefix": "libscipy_openblas",
+      "threading_layer": "pthreads",
+      "user_api": "blas",
+      "version": "0.3.30"
+    }
+  ],
+  "elapsed_total_seconds": 6.026583394999761,
+  "full_collision_executed": false,
+  "gpu_memory_observations": [],
+  "initial_array_bytes_sha256": "8a468f19e7ab9db911f413d7c29365e4ba655692b7eebd52f128203122002fe2",
+  "initial_dtype": "complex128",
+  "instrumentation_sha256": "1c87fe433e63d2ce18361195d842e7a32a6ada11d9726bb2c8156eb5c1a2cc02",
+  "median_device_speedup": null,
+  "median_wall_speedup": 1.5729042740142631,
+  "memory_counters_are_peak_proof": false,
+  "numerical_source_digest": "581ff84930bb862efafdfec5d39d5b25aebf9297ce7ce45f833a5abe125b2a5b",
+  "plan": {
+    "blas_threads": 1,
+    "config": {
+      "absorber_power": 0.125,
+      "absorber_reference_dt": 0.05,
+      "absorber_width": 1.0,
+      "b": 2.0,
+      "backend": "numpy",
+      "capture_plane": 1.0,
+      "checkpoint_stride": 128,
+      "dt": 0.0125,
+      "energy_keV_per_u": 100.0,
+      "grid": {
+        "dx": 0.5,
+        "xlim": [
+          -16.0,
+          16.0
+        ],
+        "ylim": [
+          -16.0,
+          16.0
+        ],
+        "zlim": [
+          -24.0,
+          24.0
+        ]
+      },
+      "initial_state": "analytic",
+      "project_nmax": 1,
+      "z_start": -2.0,
+      "z_stop": 2.0
+    },
+    "config_sha256": "4862d487ff7132520df9b3892cb32da50eaaffe296baf8713c667ca78a33f793",
+    "estimated_working_bytes": 167772160,
+    "inventory": {
+      "cpu": {
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "affinity_logical_count": 9,
+        "model_names": [
+          "Intel(R) Xeon(R) Platinum 8272CL CPU @ 2.60GHz"
+        ],
+        "physical_cores_in_affinity": 9,
+        "quota_logical_capacity": 8.0
+      },
+      "gpu": {
+        "status": "NOT_PROBED"
+      },
+      "memory": {
+        "available_bytes": 16288206848,
+        "cgroup_current_bytes": 5186629632,
+        "cgroup_max_bytes": 21474836480,
+        "host_total_bytes": 23109894144
+      },
+      "numpy": "2.3.5",
+      "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+      "python": "3.12.14",
+      "schema": "BASS_CR_R3M19_HARDWARE_INVENTORY_V1"
+    },
+    "memory_estimate_is_peak_guarantee": false,
+    "numpy_fft_worker_control": false,
+    "points": 393216,
+    "production_admitted": false,
+    "request": {
+      "backend": "numpy",
+      "candidate": "buffer_reuse",
+      "fft_workers": 1,
+      "max_seconds": 30.0,
+      "max_working_bytes": 536870912,
+      "repeats": 5,
+      "shape": [
+        64,
+        64,
+        96
+      ],
+      "steps": 4
+    },
+    "schema": "BASS_CR_R3M19_BOUNDED_PERFORMANCE_V1",
+    "status": "PLAN_ONLY_NOT_EXECUTED",
+    "total_bounded_step_calls": 56,
+    "warmup_repeats": 2,
+    "worker_cap": 8
+  },
+  "process_peak_rss_kib": 134968,
+  "production_admitted": false,
+  "production_extrapolation": "FORBIDDEN_NO_63M_POINT_SPEED_OR_ACCURACY_CLAIM",
+  "requested_dt": 0.0125,
+  "schema": "BASS_CR_R3M19_BOUNDED_PERFORMANCE_V1",
+  "scipy_version": null,
+  "status": "BENCHMARK_COMPLETE_PARITY_PASSED",
+  "timing": {
+    "candidate_device_seconds": [],
+    "candidate_enqueue_seconds": [
+      0.3004928089976602,
+      0.3062117850022332,
+      0.26807556199855753,
+      0.33541770900046686,
+      0.2666620830023021
+    ],
+    "candidate_wall_seconds": [
+      0.3005029649975768,
+      0.30622180300269974,
+      0.2680847839983471,
+      0.3354278950027947,
+      0.2666721300010977
+    ],
+    "reference_device_seconds": [],
+    "reference_enqueue_seconds": [
+      0.459820136999042,
+      0.4855374139988271,
+      0.39154869800040615,
+      0.4726528850005707,
+      0.5081719509980758
+    ],
+    "reference_wall_seconds": [
+      0.45983013400109485,
+      0.48555275599937886,
+      0.3915587259980384,
+      0.47266239799864707,
+      0.5081814879995363
+    ]
+  },
+  "timing_scope": "WARM_MATCHED_MICROTRAJECTORY_EXCLUDES_SETUP_RESET_VALIDATION_IO"
+}

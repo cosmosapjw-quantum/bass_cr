@@ -1,0 +1,78 @@
+{
+  "schema": "BASS_R4T_FINITE_METRIC_TRANSFER_INPUT_CONTRACT_V1",
+  "status": "DERIVED_NOT_INSTANTIATED",
+  "system_equation": "i*hbar*S_k*c_k_dot=(H_k-i*hbar*D_k)*c_k",
+  "convention": "D_ab=<F_a,partial_t F_b>; inner product conjugate-linear in first slot",
+  "required_inputs": [
+    {
+      "id": "IDENTITIES_INTERVAL_MAP",
+      "requires": [
+        "source/native/context IDs",
+        "physical time interval",
+        "channel order",
+        "T(t)",
+        "T_dot(t)",
+        "initial coefficient mismatch"
+      ]
+    },
+    {
+      "id": "METRIC_BOUNDS",
+      "requires": [
+        "continuous lower S0 bound",
+        "continuous lower S1 bound",
+        "Sdot0",
+        "Sdot1",
+        "quantified finite matrix errors"
+      ]
+    },
+    {
+      "id": "MATRIX_RESIDUAL",
+      "requires": [
+        "H0,D0,H1,D1",
+        "B=(H1-i*hbar*D1)T-S1*T*S0^-1*(H0-i*hbar*D0)-i*hbar*S1*T_dot",
+        "validated time integral of ||S1^-1/2*B*S0^-1/2||/hbar"
+      ]
+    },
+    {
+      "id": "BOTH_METRIC_DEFECTS",
+      "requires": [
+        "Gamma0=Sdot0+L0_dagger*S0+S0*L0",
+        "Gamma1=Sdot1+L1_dagger*S1+S1*L1",
+        "validated norm-growth integrals for both"
+      ]
+    },
+    {
+      "id": "EMBEDDING",
+      "requires": [
+        "Gram of F1*T-F0 in common physical L2",
+        "beta=||(F1*T-F0)*S0^-1/2||",
+        "state norm bounds"
+      ]
+    },
+    {
+      "id": "SAVED_STATE_ERROR",
+      "requires": [
+        "independent temporal residual/error",
+        "qualified time window",
+        "no extrapolation beyond original +/-12 qualification"
+      ]
+    }
+  ],
+  "not_sufficient": [
+    "small L2 projector distance",
+    "small cellwise derivative repair",
+    "unproved H1 closeness of archived frame",
+    "finite grid samples without interval enclosure",
+    "strong L2 residual of repaired C0 basis"
+  ],
+  "native_physics_budget": 0,
+  "gates": {
+    "capture": false,
+    "production": "HOLD",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "original_capture_gap_resolved": false,
+    "continuous_global_supremum_bound": false,
+    "continuous_trajectory_error_bound": false
+  }
+}

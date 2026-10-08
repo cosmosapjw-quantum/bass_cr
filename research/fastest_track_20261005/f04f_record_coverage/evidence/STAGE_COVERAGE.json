@@ -1,0 +1,177 @@
+{
+  "task": "F04F_READ_ONLY_RECORD_AND_STAGE_COVERAGE",
+  "state": "SCOPED_READ_ONLY_RECORD_COVERAGE_COMPLETE__EXPANDING_BINDING_UNOBSERVED",
+  "aggregate_25_output_records": 7000,
+  "native_stage_observed_records": 1,
+  "remaining_native_stage_observation_records": 6999,
+  "observation_record_selection": {
+    "level": 0,
+    "line": 0,
+    "t0_s": 0,
+    "dt_s": 1000000000.0,
+    "source": "verified F04E first-record probe, no rerun"
+  },
+  "native_stage_observation_coverage": [
+    {
+      "level": 0,
+      "records": 1
+    },
+    {
+      "level": 1,
+      "records": 0
+    },
+    {
+      "level": 2,
+      "records": 0
+    }
+  ],
+  "first_record_stage_views": [
+    {
+      "site": "HALF1_BE_ENDPOINT",
+      "static_endpoint_s": "500000000",
+      "endpoint_time_origin": "DERIVED_FROM_STATIC_BE_RECORD_NOT_EXPANDING_CLOCK",
+      "photo_per_h_packet_major_exact": [
+        [
+          "8009367334388597/483570327845851693056",
+          "0",
+          "0"
+        ],
+        [
+          "871510542093673/2579041748511209029632",
+          "1956357737937641/7737125245533627088896",
+          "0"
+        ],
+        [
+          "238013939916997/27509778650786229649408",
+          "5917118702323963/495176015714152133689344",
+          "3699542693620913/123794003928538033422336"
+        ]
+      ],
+      "collision_per_h_exact": [
+        "3074438304274381/967140655691703386112",
+        "7580859367784821/990352031428304267378688",
+        "241398957846539/42255020007607648741490688"
+      ],
+      "recombination_per_h_exact": [
+        "5778827983618523/990352031428304267378688",
+        "745101944727877/3961408125713217069514752",
+        "7399340902666091/3961408125713217069514752"
+      ],
+      "dr_per_h_exact": [
+        "1536631895347231/84510040015215297482981376",
+        "3376902805334795/4056481920730334279183106048"
+      ],
+      "state_bits": [
+        "3fecccf6ea926d98",
+        "3fd3333f8ab0d43e",
+        "3fe33333e8757245",
+        "3ce3a80aa63d54b2",
+        "3ed4f6ee4140fb79",
+        "3ea0c675b71d06a9",
+        "3e7ad799c9c99a7a",
+        "3b4470a64c17627a"
+      ],
+      "temperature_observed_K": 49999.78787800223,
+      "escape_difference_of_stored_states_eV_per_h_exact": "12355244540424783508013056/58539594347107869860469575459973",
+      "native_reported_escape_increment_erg_cm3_bits": "3b4470a64c17627a",
+      "actual_F08_stage": null,
+      "actual_expanding_time_a": null,
+      "actual_stage_weight": null,
+      "actual_F08_thermal_work_ev_per_h": null
+    },
+    {
+      "site": "HALF2_BE_ENDPOINT",
+      "static_endpoint_s": "1000000000",
+      "endpoint_time_origin": "DERIVED_FROM_STATIC_BE_RECORD_NOT_EXPANDING_CLOCK",
+      "photo_per_h_packet_major_exact": [
+        [
+          "4002553585074353/241785163922925846528",
+          "0",
+          "0"
+        ],
+        [
+          "5227395773270065/15474250491067254177792",
+          "7824249834423841/30948500982134508355584",
+          "0"
+        ],
+        [
+          "2855449680597337/330117343809434755792896",
+          "2958312961579489/247588007857076066844672",
+          "7398784406435317/247588007857076066844672"
+        ]
+      ],
+      "collision_per_h_exact": [
+        "512305794969757/161190109281950564352",
+        "1263426180653845/165058671904717377896448",
+        "60348177264499/10563755001901912185372672"
+      ],
+      "recombination_per_h_exact": [
+        "5779091715812051/990352031428304267378688",
+        "165583585714857/880312916825159348781056",
+        "7399514957177537/3961408125713217069514752"
+      ],
+      "dr_per_h_exact": [
+        "2304939053435905/126765060022822946224472064",
+        "2251242001480663/2704321280486889519455404032"
+      ],
+      "state_bits": [
+        "3feccd21033854ed",
+        "3fd3334be1afe9af",
+        "3fe333349db59b53",
+        "3ce3a811a369b335",
+        "3ed4f527379ce739",
+        "3ea0c5f3d5bb15f7",
+        "3e7ad740fad00798",
+        "3b5470bc9488f6a0"
+      ],
+      "temperature_observed_K": 49999.575801042796,
+      "escape_difference_of_stored_states_eV_per_h_exact": "12355655588910739146932224/58539594347107869860469575459973",
+      "native_reported_escape_increment_erg_cm3_bits": "3b4470d2dcfa8ac6",
+      "actual_F08_stage": null,
+      "actual_expanding_time_a": null,
+      "actual_stage_weight": null,
+      "actual_F08_thermal_work_ev_per_h": null
+    }
+  ],
+  "owner_contract": {
+    "receiver_ref": "8e8ea0c664e2ba2f2f8560e0c64266d206fbd50f",
+    "source": "rust/rei_microphysics/src/coupled_primary.rs",
+    "call_site": "endpoint -> PrimaryEvents -> primary_stage_step; try_primary_stage_step commits after checks",
+    "photo_axes": "photo_per_h[packet][absorber]; F04D PI_[absorber]_[group] requires explicit transpose for fixed 3 packets only",
+    "units": "photons/events per H; w/escape/work eV per H; dt seconds; nH proper cm^-3; Hmean s^-1",
+    "required_owner_context": [
+      "packet_id/energy at conditional stage",
+      "n_h_cm3",
+      "f_he",
+      "h_mean_per_s",
+      "dt",
+      "old/state identity",
+      "accepted commit identity",
+      "transport/time/scale-factor convention"
+    ],
+    "paired_history": "NOT_EXECUTED",
+    "conditional_stage_status": "CONDITIONAL_STAGE_ONLY_PASS",
+    "qualified_root_scope": "ConditionalactualFT03coupled4gas/eliminated3packetstage only",
+    "qualification_reexecuted": false,
+    "reuse_static_records_as_expanding_stage": "FORBIDDEN_CONTEXT_NOT_OBSERVED",
+    "mandatory_new_gate": false
+  },
+  "new_native_runs": 0,
+  "new_root_refinements": 0,
+  "new_history_runs": 0,
+  "new_certificate_checker_runs": 0,
+  "inherited_F04E_native_binary_sha256": "b40c636d2b17f8b2b91a778807cba4923d8e5b1078813f169899ae51f61f45fb",
+  "inherited_F04E_compiler_sha256": "ef6d716e5d1c6c93def277c0afa037c21e7a74f7de3aed4ee0700646c3301b1d",
+  "inherited_native_binary_locally_executed": false,
+  "unverified": {
+    "native_FP_derivatives": null,
+    "uniform_event_escape_remainders": null,
+    "expanding_stage_owner_binding": null,
+    "physical_fit_error": null
+  },
+  "next_optional_task": "OWNER_STAGE_LOG_CONTRACT_OR_EVENT_OBSERVABLE_ENCLOSURE_USING_EXISTING_ROOT_BOXES",
+  "new_mandatory_gate": false,
+  "physical_production": "HOLD",
+  "actual_CR_dispatch_counts": null,
+  "independent_review": "NOT_PERFORMED"
+}

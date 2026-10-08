@@ -1,0 +1,454 @@
+{
+  "bgrid_allowed": false,
+  "jobs": {
+    "aocc_base": {
+      "config": {
+        "alpha_max": 100.0,
+        "alpha_min": 0.001,
+        "b": 2.0,
+        "dt": 0.05,
+        "energy_keV_per_u": 100.0,
+        "eps_max": 5.0,
+        "np": 8,
+        "ns": 12,
+        "pmax": 10.0,
+        "pmin": 0.001,
+        "zmax": 30.0
+      },
+      "lane": "aocc",
+      "question": "Preserved s+p one-electron AOCC baseline.",
+      "scientific_admission": false
+    },
+    "aocc_dt025": {
+      "config": {
+        "alpha_max": 100.0,
+        "alpha_min": 0.001,
+        "b": 2.0,
+        "dt": 0.025,
+        "energy_keV_per_u": 100.0,
+        "eps_max": 5.0,
+        "np": 8,
+        "ns": 12,
+        "pmax": 10.0,
+        "pmin": 0.001,
+        "zmax": 30.0
+      },
+      "lane": "aocc",
+      "question": "Production-basis time refinement only.",
+      "scientific_admission": false
+    },
+    "aocc_exponent_only": {
+      "config": {
+        "alpha_max": 1000.0,
+        "alpha_min": 0.001,
+        "b": 2.0,
+        "dt": 0.05,
+        "energy_keV_per_u": 100.0,
+        "eps_max": 5.0,
+        "np": 8,
+        "ns": 12,
+        "pmax": 10.0,
+        "pmin": 0.001,
+        "zmax": 30.0
+      },
+      "lane": "aocc",
+      "question": "s-exponent upper endpoint only; fixed counts.",
+      "scientific_admission": false
+    },
+    "aocc_radial_only": {
+      "config": {
+        "alpha_max": 100.0,
+        "alpha_min": 0.001,
+        "b": 2.0,
+        "dt": 0.05,
+        "energy_keV_per_u": 100.0,
+        "eps_max": 5.0,
+        "np": 12,
+        "ns": 16,
+        "pmax": 10.0,
+        "pmin": 0.001,
+        "zmax": 30.0
+      },
+      "lane": "aocc",
+      "question": "Radial count only; same exponent endpoints and energy cutoff.",
+      "scientific_admission": false
+    },
+    "aocc_window_only": {
+      "config": {
+        "alpha_max": 100.0,
+        "alpha_min": 0.001,
+        "b": 2.0,
+        "dt": 0.05,
+        "energy_keV_per_u": 100.0,
+        "eps_max": 10.0,
+        "np": 8,
+        "ns": 12,
+        "pmax": 10.0,
+        "pmin": 0.001,
+        "zmax": 30.0
+      },
+      "lane": "aocc",
+      "question": "Positive pseudostate energy window only; same primitive basis.",
+      "scientific_admission": false
+    },
+    "tdl_cap_base": {
+      "config": {
+        "absorber_power": 0.125,
+        "absorber_reference_dt": 0.05,
+        "absorber_width": 4.0,
+        "b": 2.0,
+        "backend": "auto",
+        "capture_plane": 30.0,
+        "checkpoint_stride": 100,
+        "dt": 0.05,
+        "energy_keV_per_u": 100.0,
+        "grid": {
+          "dx": 0.4,
+          "xlim": [
+            -30,
+            40
+          ],
+          "ylim": [
+            -30,
+            30
+          ],
+          "zlim": [
+            -30,
+            90
+          ]
+        },
+        "imag_dt": 0.05,
+        "imag_steps": 300,
+        "initial_state": "imag_time",
+        "project_nmax": 3,
+        "projection_slab_x": 2,
+        "z_start": -30.0,
+        "z_stop": 60.0
+      },
+      "lane": "tdl",
+      "question": "New symmetric fixed-CAP reference. Not the historical baseline.",
+      "scientific_admission": false
+    },
+    "tdl_dt0125": {
+      "config": {
+        "absorber_power": 0.125,
+        "absorber_reference_dt": 0.05,
+        "absorber_width": 4.0,
+        "b": 2.0,
+        "backend": "auto",
+        "capture_plane": 30.0,
+        "checkpoint_stride": 100,
+        "dt": 0.0125,
+        "energy_keV_per_u": 100.0,
+        "grid": {
+          "dx": 0.4,
+          "xlim": [
+            -30,
+            40
+          ],
+          "ylim": [
+            -30,
+            30
+          ],
+          "zlim": [
+            -30,
+            90
+          ]
+        },
+        "imag_dt": 0.05,
+        "imag_steps": 300,
+        "initial_state": "imag_time",
+        "project_nmax": 3,
+        "projection_slab_x": 2,
+        "z_start": -30.0,
+        "z_stop": 60.0
+      },
+      "lane": "tdl",
+      "question": "Second step refinement at fixed CAP.",
+      "scientific_admission": false
+    },
+    "tdl_dt025": {
+      "config": {
+        "absorber_power": 0.125,
+        "absorber_reference_dt": 0.05,
+        "absorber_width": 4.0,
+        "b": 2.0,
+        "backend": "auto",
+        "capture_plane": 30.0,
+        "checkpoint_stride": 100,
+        "dt": 0.025,
+        "energy_keV_per_u": 100.0,
+        "grid": {
+          "dx": 0.4,
+          "xlim": [
+            -30,
+            40
+          ],
+          "ylim": [
+            -30,
+            30
+          ],
+          "zlim": [
+            -30,
+            90
+          ]
+        },
+        "imag_dt": 0.05,
+        "imag_steps": 300,
+        "initial_state": "imag_time",
+        "project_nmax": 3,
+        "projection_slab_x": 2,
+        "z_start": -30.0,
+        "z_stop": 60.0
+      },
+      "lane": "tdl",
+      "question": "Halve physical step with identical CAP function.",
+      "scientific_admission": false
+    },
+    "tdl_dx020": {
+      "config": {
+        "absorber_power": 0.125,
+        "absorber_reference_dt": 0.05,
+        "absorber_width": 4.0,
+        "b": 2.0,
+        "backend": "auto",
+        "capture_plane": 30.0,
+        "checkpoint_stride": 100,
+        "dt": 0.05,
+        "energy_keV_per_u": 100.0,
+        "grid": {
+          "dx": 0.2,
+          "xlim": [
+            -30,
+            40
+          ],
+          "ylim": [
+            -30,
+            30
+          ],
+          "zlim": [
+            -30,
+            90
+          ]
+        },
+        "imag_dt": 0.05,
+        "imag_steps": 300,
+        "initial_state": "imag_time",
+        "project_nmax": 3,
+        "projection_slab_x": 2,
+        "z_start": -30.0,
+        "z_stop": 60.0
+      },
+      "lane": "tdl",
+      "question": "Conditional later grid refinement, not automatically executed.",
+      "scientific_admission": false
+    },
+    "tdl_dx025": {
+      "config": {
+        "absorber_power": 0.125,
+        "absorber_reference_dt": 0.05,
+        "absorber_width": 4.0,
+        "b": 2.0,
+        "backend": "auto",
+        "capture_plane": 30.0,
+        "checkpoint_stride": 100,
+        "dt": 0.05,
+        "energy_keV_per_u": 100.0,
+        "grid": {
+          "dx": 0.25,
+          "xlim": [
+            -30,
+            40
+          ],
+          "ylim": [
+            -30,
+            30
+          ],
+          "zlim": [
+            -30,
+            90
+          ]
+        },
+        "imag_dt": 0.05,
+        "imag_steps": 300,
+        "initial_state": "imag_time",
+        "project_nmax": 3,
+        "projection_slab_x": 2,
+        "z_start": -30.0,
+        "z_stop": 60.0
+      },
+      "lane": "tdl",
+      "question": "Grid refinement only; no outcome-based potential adjustment.",
+      "scientific_admission": false
+    },
+    "tdl_dx03125": {
+      "config": {
+        "absorber_power": 0.125,
+        "absorber_reference_dt": 0.05,
+        "absorber_width": 4.0,
+        "b": 2.0,
+        "backend": "auto",
+        "capture_plane": 30.0,
+        "checkpoint_stride": 100,
+        "dt": 0.05,
+        "energy_keV_per_u": 100.0,
+        "grid": {
+          "dx": 0.3125,
+          "xlim": [
+            -30,
+            40
+          ],
+          "ylim": [
+            -30,
+            30
+          ],
+          "zlim": [
+            -30,
+            90
+          ]
+        },
+        "imag_dt": 0.05,
+        "imag_steps": 300,
+        "initial_state": "imag_time",
+        "project_nmax": 3,
+        "projection_slab_x": 2,
+        "z_start": -30.0,
+        "z_stop": 60.0
+      },
+      "lane": "tdl",
+      "question": "Grid refinement only at fixed preparation and CAP parameters.",
+      "scientific_admission": false
+    },
+    "tdl_imag025": {
+      "config": {
+        "absorber_power": 0.125,
+        "absorber_reference_dt": 0.05,
+        "absorber_width": 4.0,
+        "b": 2.0,
+        "backend": "auto",
+        "capture_plane": 30.0,
+        "checkpoint_stride": 100,
+        "dt": 0.05,
+        "energy_keV_per_u": 100.0,
+        "grid": {
+          "dx": 0.4,
+          "xlim": [
+            -30,
+            40
+          ],
+          "ylim": [
+            -30,
+            30
+          ],
+          "zlim": [
+            -30,
+            90
+          ]
+        },
+        "imag_dt": 0.025,
+        "imag_steps": 600,
+        "initial_state": "imag_time",
+        "project_nmax": 3,
+        "projection_slab_x": 2,
+        "z_start": -30.0,
+        "z_stop": 60.0
+      },
+      "lane": "tdl",
+      "question": "Imaginary-time step at equal preparation duration.",
+      "scientific_admission": false
+    },
+    "tdl_imag025_long": {
+      "config": {
+        "absorber_power": 0.125,
+        "absorber_reference_dt": 0.05,
+        "absorber_width": 4.0,
+        "b": 2.0,
+        "backend": "auto",
+        "capture_plane": 30.0,
+        "checkpoint_stride": 100,
+        "dt": 0.05,
+        "energy_keV_per_u": 100.0,
+        "grid": {
+          "dx": 0.4,
+          "xlim": [
+            -30,
+            40
+          ],
+          "ylim": [
+            -30,
+            30
+          ],
+          "zlim": [
+            -30,
+            90
+          ]
+        },
+        "imag_dt": 0.025,
+        "imag_steps": 1200,
+        "initial_state": "imag_time",
+        "project_nmax": 3,
+        "projection_slab_x": 2,
+        "z_start": -30.0,
+        "z_stop": 60.0
+      },
+      "lane": "tdl",
+      "question": "Preparation duration; compare against tdl_imag025.",
+      "scientific_admission": false
+    },
+    "tdl_plane25": {
+      "config": {
+        "absorber_power": 0.125,
+        "absorber_reference_dt": 0.05,
+        "absorber_width": 4.0,
+        "b": 2.0,
+        "backend": "auto",
+        "capture_plane": 25.0,
+        "checkpoint_stride": 100,
+        "dt": 0.05,
+        "energy_keV_per_u": 100.0,
+        "grid": {
+          "dx": 0.4,
+          "xlim": [
+            -30,
+            40
+          ],
+          "ylim": [
+            -30,
+            30
+          ],
+          "zlim": [
+            -30,
+            90
+          ]
+        },
+        "imag_dt": 0.05,
+        "imag_steps": 300,
+        "initial_state": "imag_time",
+        "project_nmax": 3,
+        "projection_slab_x": 2,
+        "z_start": -30.0,
+        "z_stop": 60.0
+      },
+      "lane": "tdl",
+      "question": "Postprocess-only change; prefer reusing saved state rather than propagation.",
+      "scientific_admission": false
+    }
+  },
+  "next_rule": "Inspect results before additional jobs; do not infer all-bound or continuum from finite spans.",
+  "recommended_order": [
+    "audit saved baseline and dx states first",
+    "tdl_cap_base",
+    "tdl_dt025",
+    "tdl_dt0125",
+    "tdl_imag025",
+    "tdl_imag025_long",
+    "tdl_dx03125",
+    "tdl_dx025",
+    "aocc_base",
+    "aocc_dt025",
+    "aocc_radial_only",
+    "aocc_exponent_only"
+  ],
+  "schema": "R3M11_ONE_ENERGY_SINGLE_B_MATRIX_V1",
+  "threshold_policy": "Retain parent 1% screening; no automatic admission."
+}

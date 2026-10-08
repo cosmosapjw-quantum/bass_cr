@@ -1,0 +1,60 @@
+{
+  "schema": "BASS_RANK_POLICY_V1",
+  "status": "SYNTHETIC_REFERENCE_AND_POLICY_VERIFIED_PHYSICAL_ADOPTION_OPEN",
+  "relative_cutoff_ladder": [
+    1e-14,
+    1e-12,
+    1e-10,
+    1e-08,
+    1e-06
+  ],
+  "cutoff_ladder_scope": "PREDECLARED_SYNTHETIC_EXPERIMENT_ONLY",
+  "physical_cutoff": null,
+  "physical_observable_tolerance": null,
+  "physical_rho_tolerance": null,
+  "physical_subspace_tolerance": null,
+  "normalization_convention": "Must be frozen in parent basis identity; relative overlap cutoffs are coordinate dependent",
+  "diagonal_shift_allowed": false,
+  "material_indefiniteness_action": "REJECT",
+  "uncertain_roundoff_sign_action": "Flag numerical PSD screen; high precision sign audit required if material",
+  "methods": {
+    "canonical": "Retain lambda strictly greater than tau*lambda_max; whiten retained eigenspace",
+    "pivoted_cholesky": "Stop at residual trace <= tau*lambda_max; orthogonalize explicit pivot subset",
+    "SVD": "Reference singular-value rank audit of S",
+    "pivoted_QR": "Independent heuristic rank audit of known physical B columns"
+  },
+  "required_diagnostics": [
+    "retained_rank",
+    "cond_retained_metric",
+    "metric_orthonormality_defect",
+    "principal_angles_in_physical_metric",
+    "dimension_loss",
+    "projector_distance",
+    "rho",
+    "selected_observable",
+    "state_norm_loss_without_renormalization",
+    "semantic_channel_identity_changes"
+  ],
+  "rank_change_requires": [
+    "NEW_BASIS_IDENTITY",
+    "NEW_HASH",
+    "NEW_OPERATOR_QUALIFICATION",
+    "NEW_TEMPORAL_CERTIFICATE",
+    "NEW_SEMANTIC_SUBSPACE_DEFINITION"
+  ],
+  "selected_index_inheritance_allowed": false,
+  "time_varying_transform_allowed_under_this_contract": false,
+  "time_varying_transform_connection": "Dnew=Tdagger D T+Tdagger S Tdot; rank jumps need separate model contract",
+  "B0_temporal_certificate_inherited": false,
+  "physical_execution_authorized": false,
+  "new_native_calls": 0,
+  "new_external_runs": 0,
+  "authorizations_consumed": 0,
+  "minimum_physical_adoption_prerequisites": [
+    "Prerequisite G04/G05/G11 gates permit enlarged basis work",
+    "Pinned higher-l backend and actual radial coefficient identities",
+    "Independently qualified physical S,H,D over declared domain",
+    "Predeclared physical tolerances and semantic selector",
+    "Conditioning, operator qualification, temporal and window evidence for new basis"
+  ]
+}

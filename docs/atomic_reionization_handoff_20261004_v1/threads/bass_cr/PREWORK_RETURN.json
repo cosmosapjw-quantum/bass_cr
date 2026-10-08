@@ -1,0 +1,58 @@
+{
+  "task_id": "CR-F0",
+  "state": "partial",
+  "input_identity": {
+    "repository": "cosmosapjw-quantum/bass_cr",
+    "commit": "b263cbe3b7ab10e1a5fee919def22938ab7515cd",
+    "tree": "912771a38b225f98819d6cce9459acc65decf36d",
+    "legacy_manifest": "LEGACY_SOURCE_MANIFEST.json",
+    "reference_files": [
+      {
+        "path": "reference/cr_contract.py",
+        "sha256": "cfce35a89abfc4120941845121a5ebd6f500a81cd36d95edeb2966729601f84f"
+      },
+      {
+        "path": "tests/test_cr_contract.py",
+        "sha256": "f3f5875d98adada7fa1e60873201b9b1bd0acf0e711f0ec4c55aa4f1dd703178"
+      }
+    ]
+  },
+  "changed_paths": [
+    "PREWORK_KO.md",
+    "RESEARCH_PLAN_KO.md",
+    "TASKS.json",
+    "reference/cr_contract.py",
+    "tests/test_cr_contract.py"
+  ],
+  "commands": [
+    {
+      "command": "PYTHONPATH=\"$CR_PACKET/reference\" python -m unittest discover -s \"$CR_PACKET/tests\" -v",
+      "exit_code": 0,
+      "evidence_path": "TEST_STDERR.txt"
+    }
+  ],
+  "artifacts": [
+    "VERIFICATION.json",
+    "PHYSICS_CONTRACT.json",
+    "LEGACY_LANE.json",
+    "DAG.json"
+  ],
+  "claim": {
+    "basis": [
+      "derived",
+      "implementation-verified"
+    ],
+    "ceiling": "Portable CR-off/source bookkeeping complete; actual receiver binding and physical source adoption not executed; original atomic ceilings unchanged."
+  },
+  "next_task": "CR-F0.receiver_binding",
+  "blocker": null,
+  "extensions": {
+    "tests": 10,
+    "native_calls": 0,
+    "atomic_integrations": 0,
+    "cosmological_histories": 0,
+    "legacy_original_tests_rerun": false,
+    "publication_receipts": "root publication receipt owns remote statuses",
+    "backup_receipts": "root backup receipt owns remote statuses"
+  }
+}

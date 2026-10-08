@@ -1,0 +1,17 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+____________________ test_contract_runtime_change_rejected _____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-7/test_contract_runtime_change_r0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f5e1dce8e90>
+
+    def test_contract_runtime_change_rejected(tmp_path,monkeypatch):
+        m,p=contract_fixture(tmp_path,monkeypatch)
+>       p['runtime_identity']=dict(m.runtime_identity(),numpy='different-version')
+                                   ^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'scripts.r3m24_cross_window' has no attribute 'runtime_identity'
+
+tests/test_r3m24_safe_execution.py:425: AttributeError
+=========================== short test summary info ============================
+FAILED tests/test_r3m24_safe_execution.py::test_contract_runtime_change_rejected - AttributeError: module 'scripts.r3m24_cross_window' has no attribute 'runtime_identity'
+1 failed in 0.09s

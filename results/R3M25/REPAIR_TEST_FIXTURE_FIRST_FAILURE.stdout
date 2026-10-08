@@ -1,0 +1,79 @@
+.........FF                                                              [100%]
+=================================== FAILURES ===================================
+__________ test_host_reserve_loss_after_endpoint_transfer_is_rejected __________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7c7fbe5dd640>
+
+    def test_host_reserve_loss_after_endpoint_transfer_is_rejected(monkeypatch):
+        state = np.ones((2, 2), dtype=np.complex128)
+        avail = [event.HOST_RESERVE + state.nbytes + 10,
+                 event.HOST_RESERVE - 1]
+        transfers = []
+        from scripts import r3m19_performance
+        monkeypatch.setattr(r3m19_performance, 'hardware_inventory',
+                            lambda **_: {'memory': {'available_bytes': avail.pop(0)}})
+        cp = SimpleNamespace(cuda=SimpleNamespace(
+            runtime=SimpleNamespace(memGetInfo=lambda: (event.GPU_RESERVE + 1, 0)),
+            get_current_stream=lambda: SimpleNamespace(synchronize=lambda: None)),
+            asnumpy=lambda value: transfers.append(True) or np.asarray(value))
+        mf = SimpleNamespace(cf4_step=lambda value, *_args, **_kwargs:
+                             (value, {'actions': []}))
+        budget = SimpleNamespace(count=0, check=lambda: None)
+        spec = dict(actual_start_time_au=0., horizon_au=.1)
+        with pytest.raises(MemoryError, match='reserve lost'):
+            event._cf4(mf, cp, state, spec, 1, 2, 1e-14,
+                       budget, 'key', {'gpu': [], 'host': []})
+>       assert transfers == [True]
+E       assert [] == [True]
+E         
+E         Right contains one more item: True
+E         Use -v to get more diff
+
+tests/test_r3m25_event_window.py:122: AssertionError
+________ test_first_failure_keeps_original_exception_and_consumed_work _________
+
+tmp_path = PosixPath('/tmp/pytest-of-cosmosapjw/pytest-17/test_first_failure_keeps_origi0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7c7fbb723a70>
+
+    def test_first_failure_keeps_original_exception_and_consumed_work(tmp_path, monkeypatch):
+        monkeypatch.setattr(event, 'read_json', lambda *_args: {'generation': {}})
+        monkeypatch.setattr(event, 'validate', lambda *_args: None)
+        @contextmanager
+        def intake(_spec):
+            yield SimpleNamespace(assert_current=lambda: None)
+        monkeypatch.setattr(event, 'bind_generation', intake)
+        def failing_gpu(_plan, _out, _pinned, progress):
+            progress.update(stage='EVENT_CF4_N32',
+                            budget=SimpleNamespace(snapshot=lambda:
+                                {'kinetic_matvecs': 2761, 'wall_seconds': 123.}),
+                            minimum={'gpu': [event.GPU_RESERVE+1],
+                                     'host': [event.HOST_RESERVE+1]})
+            raise MemoryError('injected reserve loss')
+        monkeypatch.setattr(event, '_gpu', failing_gpu)
+        out = tmp_path/'fresh'
+        with pytest.raises(MemoryError, match='injected reserve loss'):
+>           event.run(tmp_path/'contract', 'a'*64, out)
+
+tests/test_r3m25_event_window.py:142: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+contract = PosixPath('/tmp/pytest-of-cosmosapjw/pytest-17/test_first_failure_keeps_origi0/contract')
+approval = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+out = PosixPath('/tmp/pytest-of-cosmosapjw/pytest-17/test_first_failure_keeps_origi0/fresh')
+
+    def run(contract: Path, approval: str, out: Path) -> dict:
+        plan = read_json(contract, approval)
+        validate(plan)
+        out.mkdir(parents=False, exist_ok=False)
+        publish_json(out/'RUN.json', dict(contract_sha256=approval,
+>           computation_key=plan['computation_key'],
+                            ^^^^^^^^^^^^^^^^^^^^^^^
+            implementation_commit=plan['implementation_commit'],
+            automatic_retry=False, production_admission=False))
+E       KeyError: 'computation_key'
+
+scripts/r3m25_event_window.py:398: KeyError
+=========================== short test summary info ============================
+FAILED tests/test_r3m25_event_window.py::test_host_reserve_loss_after_endpoint_transfer_is_rejected
+FAILED tests/test_r3m25_event_window.py::test_first_failure_keeps_original_exception_and_consumed_work
+2 failed, 9 passed in 0.29s

@@ -1,0 +1,30 @@
+{
+  "argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "3600s",
+    "env",
+    "PYTHONPATH=/home/cosmosapjw/Dropbox/bianchi/BASS_CR_R3M10_LOCAL_REPRODUCTION_PACKAGE_20260921_v1:/mnt/sn850x2t/bass_cr_r3m24_python_support",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "LD_LIBRARY_PATH=/home/cosmosapjw/.local/lib/python3.10/site-packages/nvidia/cufft/lib:/home/cosmosapjw/.local/lib/python3.10/site-packages/nvidia/cublas/lib:/usr/local/cuda/lib64:/usr/lib/x86_64-linux-gnu/dri:/usr/lib/x86_64-linux-gnu/gallium-pipe",
+    "/mnt/sn850x2t/bass_cr_r3m11_20260921/.venv/bin/python",
+    "-B",
+    "-m",
+    "scripts.r3m25_event_window",
+    "run",
+    "--contract",
+    "results/R3M25/CONTRACT.json",
+    "--approve-sha256",
+    "cc7de90c1ccac65854f039453289e9c635d4c0600562172bf307a61b354a4c8e",
+    "--out",
+    "results/R3M25/ATTEMPT"
+  ],
+  "automatic_retry": false,
+  "event_window_contract_seconds": 3600,
+  "fresh_output": true,
+  "hard_whole_process_deadline_seconds": 3600,
+  "schema": "BASS_CR_R3M25_GPU_RUN_COMMAND_V1",
+  "total_contract_seconds": 7200,
+  "watchdog_probe_exit_code": 124
+}

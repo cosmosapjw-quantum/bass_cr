@@ -1,0 +1,30 @@
+{
+  "schema": "BASS_NCLOUD_F1_EVIDENCE_SANITIZATION_V1",
+  "run_id": "20260928T064313Z",
+  "original_receipts_unchanged": true,
+  "removed_fields": [
+    {
+      "file": "PRE_RUN_RECEIPT.json",
+      "field": "numpy_runtime",
+      "reason": "contains host node identifier and runtime detail unnecessary for scientific reproduction"
+    },
+    {
+      "file": "PRE_RUN_RECEIPT.json",
+      "field": "storage.workspace",
+      "reason": "internal absolute host path unnecessary in public receipt"
+    }
+  ],
+  "unpublished_sources": [
+    {
+      "path": "/root/.local/state/bass_f1/authorization/20260928T064313Z/RUN_AUTHORIZATION.json",
+      "reason": "authorization is retained locally; manifest records only its hash and approved bounds"
+    }
+  ],
+  "missing_requested_files": [
+    "RETURN_REPORT.json",
+    "ENGINE_ADMISSION.json",
+    "REPRESENTATIVE_PARITY.json",
+    "METRIC_CONNECTION_PARITY.json"
+  ],
+  "secret_scan_policy": "PRIVATE KEY, Authorization/Bearer header, cloud keys, password/cookie/session, signed URL, metadata credential, IP/VPC/account/project/resource ID"
+}

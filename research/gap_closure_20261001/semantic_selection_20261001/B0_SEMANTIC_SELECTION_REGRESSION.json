@@ -1,0 +1,44 @@
+{
+  "status": "IMPLEMENTATION_VERIFIED",
+  "basis_identity": "f23267b7214a5e3918866dcece5cb61c79a891578f4dda69dee5a762eb02983a",
+  "registry_sha256": "0b0e2b95dd9535cec17c5d8ab333e0d6efffb58843b4caf2fe6586a3af0abf04",
+  "source_head": "01ec2ba7e71aefdccab1896acfe5d92c15c6b776",
+  "selected_positions": [
+    9,
+    10,
+    12,
+    13,
+    14
+  ],
+  "selection_identity": "5d46617ae1205369cd4841644c690d3d4a99a3ab1f8b93b9dce3f26d5a9666c4",
+  "coefficient_bank_records_compared": 18,
+  "coefficient_bank_identity_match": true,
+  "tests": {
+    "command": "python -m unittest -v test_selected_subspace_identity.py",
+    "passed": 9,
+    "failed": 0,
+    "skipped": 0,
+    "red": {
+      "exit": 1,
+      "reason": "missing semantic_selection module before implementation"
+    },
+    "green": {
+      "exit": 0
+    },
+    "initial_green_passed": 8,
+    "independent_review_regression": {
+      "finding": "duplicate physical function admitted when principal_n label changed",
+      "red_exit": 1,
+      "green_exit": 0,
+      "fixed_physical_key": [
+        "center",
+        "l",
+        "m",
+        "radial_identity"
+      ]
+    }
+  },
+  "new_native_calls": 0,
+  "new_external_runs": 0,
+  "production_selection_replaced": false
+}

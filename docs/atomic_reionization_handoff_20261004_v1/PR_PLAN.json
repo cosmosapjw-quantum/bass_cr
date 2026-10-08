@@ -1,0 +1,578 @@
+{
+  "schema": "pr_plan.v1",
+  "publication_prs": "publication/GITHUB_RECEIPT.json after publication",
+  "implementation_prs": [
+    {
+      "planning_id": "PR-REI-F00",
+      "repository": "cosmosapjw-quantum/rei_bianchi",
+      "task_id": "REI-F00",
+      "title": "SSOT 채택과 source/closure successor contract",
+      "depends_on": [],
+      "state": "PLANNED_NOT_OPENED",
+      "delivery": "One independently reviewable task change on selected research branch unless later user instruction changes integration policy",
+      "files": [
+        "docs/atomic_reionization_handoff_20261004_v1/runtime_inputs/rei_model_lock.json",
+        "docs/atomic_reionization_handoff_20261004_v1/runtime_inputs/closure_process_decision.json",
+        "docs/atomic_reionization_handoff_20261004_v1/runtime_inputs/parent_and_lane_applicability.json"
+      ],
+      "acceptance": [
+        "source snapshot와 local HEAD 차이가 기록됨",
+        "case/opacity/process flags에 암묵적 기본값 없음"
+      ],
+      "no_auto_merge": true
+    },
+    {
+      "planning_id": "PR-REI-F01",
+      "repository": "cosmosapjw-quantum/rei_bianchi",
+      "task_id": "REI-F01",
+      "title": "정의된 AtomicProvider와 R1 homogeneous opacity 구현",
+      "depends_on": [
+        "REI-F00"
+      ],
+      "state": "PLANNED_NOT_OPENED",
+      "delivery": "One independently reviewable task change on selected research branch unless later user instruction changes integration policy",
+      "files": [
+        "rust/rei_microphysics/src/atomic_provider.rs",
+        "rust/rei_microphysics/src/homogeneous_rates.rs",
+        "rust/rei_microphysics/tests/atomic_provider.rs",
+        "rust/rei_microphysics/tests/homogeneous_rates.rs",
+        "rust/rei_microphysics/src/lib.rs"
+      ],
+      "acceptance": [
+        "independent C/original formula point values selected domain에서 일치",
+        "domain 밖 return error, no clamp",
+        "κ=Σnσ owner합=1, zero-opacity absorption0",
+        "기존 seven APIs tests unchanged"
+      ],
+      "no_auto_merge": true
+    },
+    {
+      "planning_id": "PR-REI-F02",
+      "repository": "cosmosapjw-quantum/rei_bianchi",
+      "task_id": "REI-F02",
+      "title": "상수율 H oracle 구현",
+      "depends_on": [
+        "REI-F00"
+      ],
+      "state": "PLANNED_NOT_OPENED",
+      "delivery": "One independently reviewable task change on selected research branch unless later user instruction changes integration policy",
+      "files": [
+        "rust/rei_microphysics/src/hydrogen_step.rs",
+        "rust/rei_microphysics/tests/hydrogen_step.rs",
+        "rust/rei_microphysics/src/lib.rs"
+      ],
+      "acceptance": [
+        "analytic endpoint와 count identity",
+        "equilibrium/pure rec/pure photo/secondary at x1/small dt cases",
+        "no post-step clipping"
+      ],
+      "no_auto_merge": true
+    },
+    {
+      "planning_id": "PR-REI-F03",
+      "repository": "cosmosapjw-quantum/rei_bianchi",
+      "task_id": "REI-F03",
+      "title": "H/He 사건/열 coupled map와 controlled fixture",
+      "depends_on": [
+        "REI-F01",
+        "REI-F02"
+      ],
+      "state": "PLANNED_NOT_OPENED",
+      "delivery": "One independently reviewable task change on selected research branch unless later user instruction changes integration policy",
+      "files": [
+        "rust/rei_microphysics/src/hhe_events.rs",
+        "rust/rei_microphysics/src/thermal.rs",
+        "rust/rei_microphysics/src/microstep.rs",
+        "rust/rei_microphysics/tests/hhe_events.rs",
+        "rust/rei_microphysics/tests/hhe_fixture.rs",
+        "rust/rei_microphysics/examples/hhe_fixture.rs"
+      ],
+      "acceptance": [
+        "CONTROLLED_FIXTURE assertions 충족",
+        "원자별 stoichiometry exact 검산 재사용",
+        "independent toy reference와 refinement agreement",
+        "불수락 candidate writes 0"
+      ],
+      "no_auto_merge": true
+    },
+    {
+      "planning_id": "PR-REI-F04",
+      "repository": "cosmosapjw-quantum/rei_bianchi",
+      "task_id": "REI-F04",
+      "title": "실제 공동-parent sparse nonlinear remainder 인증",
+      "depends_on": [
+        "REI-F03"
+      ],
+      "state": "PLANNED_NOT_OPENED",
+      "delivery": "One independently reviewable task change on selected research branch unless later user instruction changes integration policy",
+      "files": [
+        "rust/rei_microphysics/src/validated_map.rs",
+        "rust/rei_microphysics/src/source_events.rs",
+        "rust/rei_microphysics/tests/validated_map.rs",
+        "rust/rei_microphysics/examples/check_map_certificate.rs"
+      ],
+      "acceptance": [
+        "실제 HHe map certificate에 source/parent/runtime/input identities",
+        "all source-site remainders independently enclosed",
+        "strict <2e-4 local error and <2e-3 public width",
+        "synthetic-only result 불허",
+        "새 homogeneous 인증은 inherited 46080-node whole-history 인증/수락으로 승격되지 않는다"
+      ],
+      "no_auto_merge": true
+    },
+    {
+      "planning_id": "PR-REI-F05",
+      "repository": "cosmosapjw-quantum/rei_bianchi",
+      "task_id": "REI-F05",
+      "title": "전체 첫 canonical interval 구현·실행",
+      "depends_on": [
+        "REI-F04"
+      ],
+      "state": "PLANNED_NOT_OPENED",
+      "delivery": "One independently reviewable task change on selected research branch unless later user instruction changes integration policy",
+      "files": [
+        "rust/rei_microphysics/src/adaptive_history.rs",
+        "rust/rei_microphysics/tests/adaptive_history.rs",
+        "rust/rei_microphysics/examples/first_interval.rs",
+        "runs/rei_fastest_v1/first_interval/"
+      ],
+      "acceptance": [
+        "각 accepted microstep strictgates",
+        "전체 declared successor interval and every applicable lane 완료; no inherited historical promotion",
+        "rejectedcandidate nevercommitted",
+        "previous [160,161] failure immutable"
+      ],
+      "no_auto_merge": true
+    },
+    {
+      "planning_id": "PR-REI-F06",
+      "repository": "cosmosapjw-quantum/rei_bianchi",
+      "task_id": "REI-F06",
+      "title": "Bianchi-I exact geometry와 angular-energy adapter",
+      "depends_on": [
+        "REI-F01"
+      ],
+      "state": "PLANNED_NOT_OPENED",
+      "delivery": "One independently reviewable task change on selected research branch unless later user instruction changes integration policy",
+      "files": [
+        "rust/rei_microphysics/src/bianchi_i.rs",
+        "rust/rei_microphysics/src/angular_photons.rs",
+        "rust/rei_microphysics/tests/bianchi_i.rs",
+        "rust/rei_microphysics/tests/radiation_conservation.rs"
+      ],
+      "acceptance": [
+        "isotropic FLRW limit",
+        "e norm=1",
+        "a1a2a3 n_gamma conserved collisionless",
+        "refinement errors declared",
+        "temperature-rate coordinate changes independent"
+      ],
+      "no_auto_merge": true
+    },
+    {
+      "planning_id": "PR-REI-F07",
+      "repository": "cosmosapjw-quantum/rei_bianchi",
+      "task_id": "REI-F07",
+      "title": "첫 과학 scenario 선등록",
+      "depends_on": [
+        "REI-F03"
+      ],
+      "state": "PLANNED_NOT_OPENED",
+      "delivery": "One independently reviewable task change on selected research branch unless later user instruction changes integration policy",
+      "files": [
+        "configs/rei_fastest_v1/science_scenario_v1.json",
+        "docs/atomic_reionization_handoff_20261004_v1/science_scenario_decision.md"
+      ],
+      "acceptance": [
+        "모든 scientific input specified",
+        "0/unknown source provenance없음",
+        "source/family/ε값 결과보고튜닝금지"
+      ],
+      "no_auto_merge": true
+    },
+    {
+      "planning_id": "PR-REI-F08",
+      "repository": "cosmosapjw-quantum/rei_bianchi",
+      "task_id": "REI-F08",
+      "title": "동일 원자 realization의 FLRW/Bianchi paired histories",
+      "depends_on": [
+        "REI-F05",
+        "REI-F06",
+        "REI-F07"
+      ],
+      "state": "PLANNED_NOT_OPENED",
+      "delivery": "One independently reviewable task change on selected research branch unless later user instruction changes integration policy",
+      "files": [
+        "rust/rei_microphysics/examples/paired_history.rs",
+        "runs/rei_fastest_v1/paired/"
+      ],
+      "acceptance": [
+        "positiveallstate",
+        "gatesallpass",
+        "numerical/model/atomicerrors separate",
+        "firstscientificplot with explicitmodeldomain"
+      ],
+      "no_auto_merge": true
+    },
+    {
+      "planning_id": "PR-REI-F09",
+      "repository": "cosmosapjw-quantum/rei_bianchi",
+      "task_id": "REI-F09",
+      "title": "HH/He 원자 감도 import와 응용 종결",
+      "depends_on": [
+        "REI-F08",
+        "HH-F2",
+        "HE-F2"
+      ],
+      "state": "PLANNED_NOT_OPENED",
+      "delivery": "One independently reviewable task change on selected research branch unless later user instruction changes integration policy",
+      "files": [
+        "runs/rei_fastest_v1/atomic_sensitivity/"
+      ],
+      "acceptance": [
+        "관측량별 sensitivity result",
+        "providerdomain violationsnotignored",
+        "atomicthreadapplicationclosure 조건에 matchedreturnedreceipt",
+        "one combined paired campaign receipt consumed by HH-F3 and HE-F3; separate astrophysical campaign reruns prohibited"
+      ],
+      "no_auto_merge": true
+    },
+    {
+      "planning_id": "PR-REI-L01",
+      "repository": "cosmosapjw-quantum/rei_bianchi",
+      "task_id": "REI-L01",
+      "title": "정밀·확장 lane 호출",
+      "depends_on": [],
+      "state": "PLANNED_NOT_OPENED",
+      "delivery": "One independently reviewable task change on selected research branch unless later user instruction changes integration policy",
+      "files": [
+        "docs/atomic_reionization_handoff_20261004_v1/extensions/"
+      ],
+      "acceptance": [
+        "requestednewobservable에 필요한gate만추가"
+      ],
+      "no_auto_merge": true
+    },
+    {
+      "planning_id": "PR-CR-F0",
+      "repository": "cosmosapjw-quantum/bass_cr",
+      "task_id": "CR-F0",
+      "title": "CR-F0",
+      "depends_on": [
+        "REI-F03"
+      ],
+      "state": "PLANNED_NOT_OPENED",
+      "delivery": "One independently reviewable task change on selected research branch unless later user instruction changes integration policy",
+      "files": [],
+      "acceptance": [
+        "Off source exactly zero.",
+        "Provider call count zero.",
+        "Legacy files and ceilings preserved.",
+        "Actual receiver binding evidence recorded."
+      ],
+      "no_auto_merge": true
+    },
+    {
+      "planning_id": "PR-CR-M1",
+      "repository": "cosmosapjw-quantum/bass_cr",
+      "task_id": "CR-M1",
+      "title": "CR-M1",
+      "depends_on": [
+        "CR-F0",
+        "DECISION_CR_ON_SCOPE"
+      ],
+      "state": "PLANNED_NOT_OPENED",
+      "delivery": "One independently reviewable task change on selected research branch unless later user instruction changes integration policy",
+      "files": [],
+      "acceptance": [
+        "No unresolved frame/unit ambiguity.",
+        "Requested observable and domain supported.",
+        "No uncontrolled extrapolation.",
+        "Source-node tests pass."
+      ],
+      "no_auto_merge": true
+    },
+    {
+      "planning_id": "PR-CR-M2",
+      "repository": "cosmosapjw-quantum/bass_cr",
+      "task_id": "CR-M2",
+      "title": "CR-M2",
+      "depends_on": [
+        "CR-M1"
+      ],
+      "state": "PLANNED_NOT_OPENED",
+      "delivery": "One independently reviewable task change on selected research branch unless later user instruction changes integration policy",
+      "files": [],
+      "acceptance": [
+        "Correct rate/energy units.",
+        "Nuclei/charge conserved.",
+        "CX no total free-electron source.",
+        "No energy double counting.",
+        "Unsupported momentum rejected."
+      ],
+      "no_auto_merge": true
+    },
+    {
+      "planning_id": "PR-CR-M3",
+      "repository": "cosmosapjw-quantum/bass_cr",
+      "task_id": "CR-M3",
+      "title": "CR-M3",
+      "depends_on": [
+        "CR-M2",
+        "REI-F08"
+      ],
+      "state": "PLANNED_NOT_OPENED",
+      "delivery": "One independently reviewable task change on selected research branch unless later user instruction changes integration policy",
+      "files": [],
+      "acceptance": [
+        "Actual receiver source identity pinned.",
+        "Numerical gate retained.",
+        "Energy/species effects mapped once.",
+        "Model uncertainty distinguished from certified numeric enclosure."
+      ],
+      "no_auto_merge": true
+    },
+    {
+      "planning_id": "PR-CR-L1",
+      "repository": "cosmosapjw-quantum/bass_cr",
+      "task_id": "CR-L1",
+      "title": "CR-L1",
+      "depends_on": [
+        "DECISION_REOPEN_LEGACY"
+      ],
+      "state": "PLANNED_NOT_OPENED",
+      "delivery": "One independently reviewable task change on selected research branch unless later user instruction changes integration policy",
+      "files": [],
+      "acceptance": [
+        "Reopen trigger recorded.",
+        "Old failures/holds retained.",
+        "New source/environment/attempt budget explicit.",
+        "New scope claims supported by actual results."
+      ],
+      "no_auto_merge": true
+    },
+    {
+      "planning_id": "PR-HH-F1",
+      "repository": "cosmosapjw-quantum/WU088_HH",
+      "task_id": "HH-F1",
+      "title": "Freeze external HH provider and cross-repo domain",
+      "depends_on": [
+        "HH-F0",
+        "REI-F07"
+      ],
+      "state": "PLANNED_NOT_OPENED",
+      "delivery": "One independently reviewable task change on selected research branch unless later user instruction changes integration policy",
+      "files": {
+        "package_root": "docs/atomic_reionization_handoff_20261004_v1/threads/WU088_HH/",
+        "outputs_are_proposed": true
+      },
+      "acceptance": [
+        "all cross-repo fields present",
+        "no implicit clipping or extrapolation",
+        "no species double counting"
+      ],
+      "no_auto_merge": true
+    },
+    {
+      "planning_id": "PR-HH-F2",
+      "repository": "cosmosapjw-quantum/WU088_HH",
+      "task_id": "HH-F2",
+      "title": "Implement consumer external-rate seam",
+      "depends_on": [
+        "HH-F1"
+      ],
+      "state": "PLANNED_NOT_OPENED",
+      "delivery": "One independently reviewable task change on selected research branch unless later user instruction changes integration policy",
+      "files": {
+        "package_root": "docs/atomic_reionization_handoff_20261004_v1/threads/WU088_HH/",
+        "outputs_are_proposed": true
+      },
+      "acceptance": [
+        "reference parity at interior points and both cutoff sides",
+        "conservation",
+        "zero density",
+        "no extra half",
+        "thermal plus binding closure",
+        "duplicate owner refusal",
+        "numeric uncertainty separate from model error"
+      ],
+      "no_auto_merge": true
+    },
+    {
+      "planning_id": "PR-HH-F3",
+      "repository": "cosmosapjw-quantum/WU088_HH",
+      "task_id": "HH-F3",
+      "title": "Interpret and accept REI-F09 paired physical sensitivity",
+      "depends_on": [
+        "HH-F2",
+        "REI-F09"
+      ],
+      "state": "PLANNED_NOT_OPENED",
+      "delivery": "One independently reviewable task change on selected research branch unless later user instruction changes integration policy",
+      "files": {
+        "package_root": "docs/atomic_reionization_handoff_20261004_v1/threads/WU088_HH/",
+        "outputs_are_proposed": true
+      },
+      "acceptance": [
+        "matched IC/geometry convention",
+        "same atomic parameters per pair",
+        "consumer numerical gates pass",
+        "claim stability evaluated under registered budget"
+      ],
+      "no_auto_merge": true
+    },
+    {
+      "planning_id": "PR-HH-F4",
+      "repository": "cosmosapjw-quantum/WU088_HH",
+      "task_id": "HH-F4",
+      "title": "Close selected consumer and park legacy",
+      "depends_on": [
+        "HH-F3"
+      ],
+      "state": "PLANNED_NOT_OPENED",
+      "delivery": "One independently reviewable task change on selected research branch unless later user instruction changes integration policy",
+      "files": {
+        "package_root": "docs/atomic_reionization_handoff_20261004_v1/threads/WU088_HH/",
+        "outputs_are_proposed": true
+      },
+      "acceptance": [
+        "all consumer dependencies satisfied or explicit conditional claim",
+        "old epsilon remains null unless separately earned"
+      ],
+      "no_auto_merge": true
+    },
+    {
+      "planning_id": "PR-HE-F1",
+      "repository": "cosmosapjw-quantum/BASS_HE",
+      "task_id": "HE-F1",
+      "title": "Extend existing B3 with explicit KF96 alternative",
+      "depends_on": [
+        "HE-P0"
+      ],
+      "state": "PLANNED_NOT_OPENED",
+      "delivery": "One independently reviewable task change on selected research branch unless later user instruction changes integration policy",
+      "files": [
+        "research/shared_c64/20261003/EOR_B3_ATOMIC_EXPORT_v1/src/bass_he_atomic_export/registry.py",
+        "research/shared_c64/20261003/EOR_B3_ATOMIC_EXPORT_v1/src/bass_he_atomic_export/api.py",
+        "research/shared_c64/20261003/EOR_B3_ATOMIC_EXPORT_v1/src/bass_he_atomic_export/_kf96.py",
+        "research/shared_c64/20261003/EOR_B3_ATOMIC_EXPORT_v1/tests/test_kf96_source.py",
+        "research/shared_c64/20261003/EOR_B3_ATOMIC_EXPORT_v1/contract/ATOMIC_EXPORT_CONTRACT.json"
+      ],
+      "acceptance": [
+        "old GM25 byte/semantic identity retained",
+        "KF96=1e-14cm3/s=1e-20m3/s",
+        "two-source common range1000–10000K recorded",
+        "unknown source/domain/nonMaxwell/drift/species fail explicitly",
+        "fit_error_bound and true-sourceUQ remainnull",
+        "existing GM25 selected packet remains compatible or explicit schema migration supplied"
+      ],
+      "no_auto_merge": true
+    },
+    {
+      "planning_id": "PR-HE-F2",
+      "repository": "cosmosapjw-quantum/BASS_HE",
+      "task_id": "HE-F2",
+      "title": "Bind atom-to-consumer ledger and photon closure",
+      "depends_on": [
+        "HE-F1",
+        "REI-F00",
+        "REI-F01"
+      ],
+      "state": "PLANNED_NOT_OPENED",
+      "delivery": "One independently reviewable task change on selected research branch unless later user instruction changes integration policy",
+      "files": [
+        "consumer adapter path resolved by rei plan; no edit outside BASS_HE from this task"
+      ],
+      "acceptance": [
+        "event nuclei/charge conserved",
+        "direct electronCX=0",
+        "photon birth1 not primaryabsorption",
+        "chemical/radiation/thermal ownership sums correctly",
+        "rei owns geometry/density/opacities",
+        "missing domain/closure yields explicit status"
+      ],
+      "no_auto_merge": true
+    },
+    {
+      "planning_id": "PR-HE-F3",
+      "repository": "cosmosapjw-quantum/BASS_HE",
+      "task_id": "HE-F3",
+      "title": "One paired sensitivity campaign and application-role closure",
+      "depends_on": [
+        "HE-F2",
+        "REI-F09"
+      ],
+      "state": "PLANNED_NOT_OPENED",
+      "delivery": "One independently reviewable task change on selected research branch unless later user instruction changes integration policy",
+      "files": [
+        "rei output namespace specified by consumer plan"
+      ],
+      "acceptance": [
+        "all outputs identify source+closure",
+        "paired difference uses shared source perturbation",
+        "no spread-as-confidence claim",
+        "onebounded campaign decides robust/notrobust",
+        "remaininguncertaintyandtriggers recorded"
+      ],
+      "no_auto_merge": true
+    },
+    {
+      "planning_id": "PR-HE-L1",
+      "repository": "cosmosapjw-quantum/BASS_HE",
+      "task_id": "HE-L1",
+      "title": "Thermal RCT B5C3 extension",
+      "depends_on": [
+        "EXPLICIT_REOPEN_TRIGGER"
+      ],
+      "state": "PLANNED_NOT_OPENED",
+      "delivery": "One independently reviewable task change on selected research branch unless later user instruction changes integration policy",
+      "files": [],
+      "acceptance": [
+        "trigger recorded",
+        "old source remainsreproducible",
+        "provider replacement explicit",
+        "new claim scoped to actualevidence"
+      ],
+      "no_auto_merge": true
+    },
+    {
+      "planning_id": "PR-HE-L2",
+      "repository": "cosmosapjw-quantum/BASS_HE",
+      "task_id": "HE-L2",
+      "title": "Public fast-ion population extension",
+      "depends_on": [
+        "EXPLICIT_REOPEN_TRIGGER"
+      ],
+      "state": "PLANNED_NOT_OPENED",
+      "delivery": "One independently reviewable task change on selected research branch unless later user instruction changes integration policy",
+      "files": [],
+      "acceptance": [
+        "trigger recorded",
+        "old source remainsreproducible",
+        "provider replacement explicit",
+        "new claim scoped to actualevidence"
+      ],
+      "no_auto_merge": true
+    },
+    {
+      "planning_id": "PR-HE-L3",
+      "repository": "cosmosapjw-quantum/BASS_HE",
+      "task_id": "HE-L3",
+      "title": "Original coherent/continuum extension",
+      "depends_on": [
+        "EXPLICIT_REOPEN_TRIGGER"
+      ],
+      "state": "PLANNED_NOT_OPENED",
+      "delivery": "One independently reviewable task change on selected research branch unless later user instruction changes integration policy",
+      "files": [],
+      "acceptance": [
+        "trigger recorded",
+        "old source remainsreproducible",
+        "provider replacement explicit",
+        "new claim scoped to actualevidence"
+      ],
+      "no_auto_merge": true
+    }
+  ],
+  "distinction": "Publication PRs contain current packet and inherited branch history; proposed implementation PR units are not fabricated open GitHub PRs."
+}

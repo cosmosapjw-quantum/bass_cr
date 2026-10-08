@@ -1,0 +1,249 @@
+{
+  "schema": "BASS_EXECUTOR_BOUNDED_INDEPENDENT_REVIEW_V1",
+  "reviewer": "g07_g08_numerics (independent of executor implementation)",
+  "status": "ACCEPT_ADMISSION_RESOURCE_RETURN_AND_POSTPROCESSOR_SCOPE",
+  "review_scope": [
+    "G02/G03 exact admission and source/native/bank binding",
+    "fresh authorization and no old nonce reuse",
+    "resource limits and create-only/partial-failure behavior",
+    "own process-group supervisor preservation",
+    "G03 saved-matrix postprocessor source and final diagnostic-path correction"
+  ],
+  "not_reviewed_as_closed": [
+    "G02 independent-derivative scientific gate",
+    "G03 empirical model identification",
+    "live-host readiness or native authorization",
+    "continuous tail/capture/basis gates"
+  ],
+  "reviewed_files": [
+    {
+      "path": "static_validation_20261001/executor/fd_executor.py",
+      "sha256": "392663ef946cf33f298d6448da96d75d23533298f6a1879a142081084c499621"
+    },
+    {
+      "path": "static_validation_20261001/executor/fd_worker.py",
+      "sha256": "fbf08733f20ee6549c5d832e5eb9f60e87ff10727947a68331a4ea212514cae4"
+    },
+    {
+      "path": "static_validation_20261001/executor/prepare_fd_authority.py",
+      "sha256": "0c5d56a15e20694000fa93dffaa940f736a3e778ab53a696fa6348e02803eee1"
+    },
+    {
+      "path": "static_validation_20261001/executor/run_fd.py",
+      "sha256": "4df04cecd10290e07f648875d11d3d8817c83c7a8319a8c7ada1801f3f45ee1d"
+    },
+    {
+      "path": "static_validation_20261001/executor/supervise_fd.py",
+      "sha256": "13706247827d717596729dc6195a9f56a18880e551880775b45143108333403c"
+    },
+    {
+      "path": "static_validation_20261001/executor/g03_executor.py",
+      "sha256": "93c5c2fd17d5a3eb02cfb9613c1ba8191ba8bdf40eb2e151810ae09745806cbb"
+    },
+    {
+      "path": "static_validation_20261001/executor/g03_worker.py",
+      "sha256": "b0f39b2421f8e8e3ec2493d23f5127c40000897c6335e726e21f1bbc0c523491"
+    },
+    {
+      "path": "static_validation_20261001/executor/prepare_g03_authority.py",
+      "sha256": "d77ce1656cf2e1f65c4f50f287357ee4a957bfbf783e671e2045cc0abb022090"
+    },
+    {
+      "path": "static_validation_20261001/executor/run_g03.py",
+      "sha256": "276256d65d5a96edff64ce8033978c85f2981bfd4b4e431de76b7909e8a2bf96"
+    },
+    {
+      "path": "static_validation_20261001/executor/supervise_g03.py",
+      "sha256": "bd8939b534c13e1f80062361e51251694fec5ce7b046292f5193878676c2ccfb"
+    },
+    {
+      "path": "static_validation_20261001/executor/RESOURCE_POLICY.json",
+      "sha256": "183ae9984f58c66cd82b6ee90019fce0601c999477abb28950522017ca26a570"
+    },
+    {
+      "path": "static_validation_20261001/executor/G03_RESOURCE_POLICY.json",
+      "sha256": "c8b2e7a046aab3f5400fbcf4a96ed0a2c93a6399d2ddf1e6b6bfb92978027209"
+    },
+    {
+      "path": "static_validation_20261001/executor/G03_SCIENCE_CONTRACT.json",
+      "sha256": "479ca3efdbbacfdc698b29a9c4eeef2597e5979b2960e14a594cad7f96bb01b4"
+    },
+    {
+      "path": "static_validation_20261001/E_SDOT_FD_EXECUTION_CONTRACT.json",
+      "sha256": "6644827b9cbde65a5a27f8d2229ed9dc99caf9022c70e2c8663a43dfda0b1c7c"
+    },
+    {
+      "path": "static_validation_20261001/static_validation.py",
+      "sha256": "3e1d5ef9ad870299a8535377120d63a19320bbf8be98e9db7e2caeba86a3b30e"
+    },
+    {
+      "path": "static_validation_20261001/REUSE_MANIFEST.json",
+      "sha256": "34bb06986d2cd44a91d30af6073e0d8dea56cd588e538b062a00b1dc6f731371"
+    },
+    {
+      "path": "static_validation_20261001/executor/g03_rate_postprocess.py",
+      "sha256": "e6c5a685a2824118f8124b5cdfac5eb84f9b5707dbb8a0cbe0d0c3f653ef639c"
+    },
+    {
+      "path": "static_validation_20261001/executor/test_fd_executor.py",
+      "sha256": "f436d3f412949cdea1e360fa126745c035e8f87f2cd6b016dd0a77e6406a4b7d"
+    },
+    {
+      "path": "static_validation_20261001/executor/test_g03_executor.py",
+      "sha256": "f9bb2d3747b6994e81ac8641e6c1e3607c45d45cf67dc0753c9963f26f8e2add"
+    },
+    {
+      "path": "static_validation_20261001/executor/test_g03_rate.py",
+      "sha256": "7728da5a40a1b7b00a883270addedea0a581472c367ca36c8cdbe0f3be4820b5"
+    }
+  ],
+  "scope_summary": {
+    "G02": {
+      "new_queries": 66,
+      "verified_reused_queries": 6,
+      "raw_attempt_cap": 726,
+      "maximum_workers": 8,
+      "worker_ram_bytes": 1073741824,
+      "wall_rule": "positive explicit wall bound and absolute unexpired deadline in fresh proposal"
+    },
+    "G03": {
+      "signed_z_a0": [
+        -48,
+        48
+      ],
+      "new_queries": 2,
+      "verified_reused_queries": 0,
+      "raw_attempt_cap": 22,
+      "maximum_workers": 2,
+      "worker_ram_bytes": 4294967296,
+      "maximum_wall_seconds": 900
+    },
+    "shared": {
+      "numerical_threads": 1,
+      "transport": false,
+      "automatic_retry": false,
+      "monetary_limit_enforced_by_code": false
+    }
+  },
+  "findings": [],
+  "independent_discriminators": {
+    "G02": [
+      "legacy environment plus matching proposal hash rejected before factory/output",
+      "unapproved supervisor rejected before child",
+      "old R4P0 nonce rejected",
+      "operator_query_count=2 rejected",
+      "raw_cap=22 rejected",
+      "FD count0 rejected",
+      "thread count2 rejected",
+      "RAM drift rejected",
+      "expired deadline rejected",
+      "consumed nonce rejected"
+    ],
+    "G03": [
+      "foreign G02/R4P0 environment plus matching hash rejected before factory/output",
+      "unapproved supervisor rejected before child",
+      "old R4P0 nonce rejected",
+      "G02 nonce rejected",
+      "query count66 rejected",
+      "raw cap726 rejected",
+      "FD count66 rejected",
+      "thread count2 rejected",
+      "worker count3 rejected",
+      "RAM1GiB rejected",
+      "expired deadline rejected",
+      "wall901 seconds rejected",
+      "consumed nonce rejected",
+      "first failure cancels dispatch and preserves failure/cancel receipts"
+    ],
+    "authorization_scope_negative_checks": 24,
+    "source_closure_checks": [
+      {
+        "module": "fd_executor",
+        "verified_closure_members_at_review": 83,
+        "valid_source_closure": "PASS",
+        "tampered_source_hash": "REJECTED",
+        "native_dlopen_calls": 0
+      },
+      {
+        "module": "g03_executor",
+        "verified_closure_members_at_review": 70,
+        "valid_source_closure": "PASS",
+        "tampered_source_hash": "REJECTED",
+        "native_dlopen_calls": 0
+      }
+    ],
+    "native_factory_calls": 0,
+    "child_launch_calls": 0,
+    "native_dlopen_calls": 0,
+    "synthetic_first_failure_compute_calls": 1,
+    "synthetic_first_failure_raw_attempts": 0,
+    "full_suites_rerun": 0,
+    "exit_codes": [
+      0,
+      0,
+      0
+    ],
+    "execution_commands": [
+      "python -B inline G02 guard discriminator (10 checks)",
+      "python -B inline G03 guard discriminator (14 checks)",
+      "python -B inline source-closure and SHA-drift checks for both modules"
+    ]
+  },
+  "discriminator_execution_source_hashes": {
+    "fd_executor.py": "c84a33cdcd05586d33f74f3241347e0c950cd997a5fa198673f5900cf9396d98",
+    "g03_executor.py": "4e8efe7d706822a7f684d9f63ece80c8c2efe42fe62ca5712555d12a70a73b90"
+  },
+  "post_discriminator_metadata_changes": "Comments and G03 FD-named schema/status/error labels were clarified; final producer also prefixes diagnostic_relative_path with diagnostics/. Current affected code re-inspected; native admission/resource behavior unchanged. Root portable integration tests remain separate.",
+  "preserved_boundaries": [
+    "No new gap-specific env approval and matching proposal hash means zero factory/child launch.",
+    "Different regex nonce namespaces share exclusive durable OS-account consumption records.",
+    "Source closure, clean commit/tree, runtime inputs, native build/source/library hashes and exact executable path precede native construction.",
+    "Worker whitelist and global reservation budget bound queries and failed attempts.",
+    "Preflight returns before native pool creation or authorization consumption.",
+    "Fresh outputs and create-only writes retain qualified matrix pairs before diagnostic failure.",
+    "Failure cancels remaining dispatch; supervisor manages only its new dedicated process group and preserves/archives partial outputs.",
+    "No automatic G02/G03 scientific closure or following-batch launch."
+  ],
+  "limitations": [
+    "A live proposal, source commit/tree, host census, native/runtime inputs and fresh explicit authorization are still required.",
+    "Own-process-group teardown was source-reviewed against the unchanged helper; no real process group/native kill exercise was launched.",
+    "Actual native build/operator accuracy require their separate execution/integration evidence.",
+    "No billing API monetary enforcement is claimed."
+  ],
+  "G12_followup": {
+    "finding": "G12-NORMALIZATION-01",
+    "status": "RESOLVED_BY_CONTRACT_CORRECTION_FUTURE_RUNTIME_ENFORCEMENT_REQUIRED",
+    "contract_sha256": "048c4420bc906da28e476d06d421f5284316513a638773493433c225384f3a3f",
+    "report_sha256": "56b4ee7d3eaf0bbf4a5fc586f06e9919b1861eb9c5f2a667cb1b71dea6507ff2",
+    "evidence": "Common normalized IVP, shared source/S0, per-method actual initial receipts, null initial-distance budget blocking launch and no silent renormalization are explicit.",
+    "numerical_suite_rerun": false,
+    "runtime_enforcement_verified": false
+  },
+  "new_native_calls": 0,
+  "new_external_runs": 0,
+  "authorizations_consumed": 0,
+  "claim_ceilings_promoted": false,
+  "author_final_test_report": {
+    "executor_suite_passed": 17,
+    "executor_suite_failed": 0,
+    "executor_suite_skipped": 0,
+    "G02_tests": 10,
+    "G03_producer_tests": 4,
+    "G03_rate_tests": 3,
+    "source": "g02_static_audit final readiness message; review does not relabel these as independently rerun tests",
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "additional_offline_suite_reported_passed": 8
+  },
+  "postprocessor_review": {
+    "payload_and_selected_cross_identity": "CHECKED_BEFORE_DIAGNOSTIC_OUTPUT",
+    "same_center_reconstruction": "Pinned unchanged order20 diagonal blocks across resolution ladder",
+    "spectral_outputs": "Full generalized spectra/eigenvectors, rho paths, residuals, dominant absolute cluster S-projector",
+    "state_used": false,
+    "Sdot": "Assumed identity remains explicitly labelled; no independent derivative claim",
+    "adjacent_resolution_meaning": "Internal consistency only, not certified operator bound",
+    "scientific_gate_promotion": false,
+    "final_relative_diagnostic_path": "Resolved from RHO_SAMPLES root by diagnostics/ prefix"
+  }
+}

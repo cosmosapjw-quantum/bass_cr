@@ -1,0 +1,39 @@
+{
+  "schema": "BASS_NCLOUD_F1_R2_HOST_STORAGE_APPROVAL_V1",
+  "status": "APPROVED_FOR_ONE_BOUNDED_R2_RUN",
+  "scope": "F1_R2_ONLY",
+  "host": {
+    "configured_vcpu": 64,
+    "configured_memory_gb": 128,
+    "cpu_model_observed": "Intel(R) Xeon(R) Gold 5220 CPU @ 2.20GHz"
+  },
+  "storage": {
+    "class": "CB1",
+    "provisioned_gb": 100,
+    "block_device": "/dev/vda",
+    "observed_partition": "/dev/vda2",
+    "observed_fstype": "ext4",
+    "mount_target": "/"
+  },
+  "approved_workspace": {
+    "root": "/root/.local/state/bass_f1_r2",
+    "minimum_free_bytes": 5368709120,
+    "requires_new_volume": false,
+    "requires_format": false,
+    "requires_mount_change": false,
+    "requires_sudo": false
+  },
+  "resource_expectation": {
+    "minimum_affinity_count": 64,
+    "minimum_mem_total_bytes": 120000000000,
+    "preferred_workers": 60,
+    "reserved_vcpu": 4
+  },
+  "not_authorized_for": [
+    "F2/F3 by implication",
+    "new volume creation",
+    "filesystem format",
+    "mount-table mutation",
+    "automatic second R2 run"
+  ]
+}

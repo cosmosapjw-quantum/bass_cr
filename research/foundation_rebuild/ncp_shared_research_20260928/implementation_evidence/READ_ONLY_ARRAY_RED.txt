@@ -1,0 +1,18 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+________________ test_returned_snapshot_cannot_be_made_writable ________________
+
+evidence = (Inputs(root=PosixPath('/mnt/data/bass_cr_r3_impl_20260928/repo'), pins={'schema': 'BASS_R3_INPUT_PINS_V1', 'source_re...esearch.foundation_rebuild.ncp_shared_research_20260928.runtime_r3.cache_bridge.CacheArchive object at 0x7f79a1390830>)
+
+    def test_returned_snapshot_cannot_be_made_writable(evidence):
+        _,c=evidence
+        r=next(iter(c.records.values()))
+        a=c.evaluate(r['time_hex'],r['order'],r['subdivisions'])['full']['S']
+>       with pytest.raises(ValueError):a.setflags(write=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+mnt/data/bass_cr_r3_impl_20260928/repo/research/foundation_rebuild/ncp_shared_research_20260928/runtime_r3/tests/test_r3.py:283: Failed
+=========================== short test summary info ============================
+FAILED mnt/data/bass_cr_r3_impl_20260928/repo/research/foundation_rebuild/ncp_shared_research_20260928/runtime_r3/tests/test_r3.py::test_returned_snapshot_cannot_be_made_writable - Failed: DID NOT RAISE <class 'ValueError'>
+1 failed in 5.32s

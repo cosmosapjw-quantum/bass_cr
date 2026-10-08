@@ -1,0 +1,65 @@
+{
+  "A1_initial_source_path": "/mnt/sn850x2t/bass_cr_r3m16_20260922/A1/preparation/initial.npy",
+  "A3_config_sha256": "4239726545da4b715f1e325420b8ed704e84cd3810f5fd1912a48a99cbac55c1",
+  "A3_h": 0.25,
+  "A3_initial_reference_sha256": "08595a1a42900da0a86f0401d28e98f79c0663524a8222d3c51756223a13ee8e",
+  "B3_h": 0.2,
+  "actual_dt": 0.00624946176119497,
+  "all_bound": "OPEN",
+  "automatic_retry": false,
+  "b_grid": "NO_GO",
+  "canonical_node": "N1_TDL_PRODUCTION_H_SPATIAL_H_DT_BUDGET",
+  "chunks": 57,
+  "created_before_A3": true,
+  "criterion": "For each P1-P3, |B3-A3|/|B3|<=.003 is a necessary empirical pair screen only; a PASS does not validate a full spatial error estimate.",
+  "h_dt_raw_interaction": "(B3-A3)-(B1-A1); do not add twice to spatial ledger",
+  "historical": {
+    "P1": {
+      "A1": 0.005873247874601518,
+      "B1": 0.006068282194867191,
+      "B3": 0.006089329814044807,
+      "B3_pair_pass_A3_interval": [
+        0.006071061824602673,
+        0.006107597803486941
+      ]
+    },
+    "P2": {
+      "A1": 0.007336491989743904,
+      "B1": 0.007562290857479282,
+      "B3": 0.007586698170080142,
+      "B3_pair_pass_A3_interval": [
+        0.007563938075569902,
+        0.007609458264590381
+      ]
+    },
+    "P3": {
+      "A1": 0.007825354867138081,
+      "B1": 0.008063449050040342,
+      "B3": 0.008089219135272727,
+      "B3_pair_pass_A3_interval": [
+        0.008064951477866908,
+        0.008113486792678544
+      ]
+    }
+  },
+  "horizon_au": 44.821139751290325,
+  "if_all_pair_within": "SPATIAL_PAIR_SCREEN_PASS_BUDGET_OPEN; translation and full-component envelope still required",
+  "if_any_pair_exceeds": "SPATIAL_PAIR_SCREEN_NO_GO; preserve raw result; actual B3 error not mathematically lower-bounded by pair alone",
+  "input_sha256": {
+    "configs/r3m16/A1.json": "af90d1c60f8c4c63ed309261945d441d86ebe095bb4a556385aade81a56830aa",
+    "results/R3M16/collisions/A1_MANIFEST.json": "a321de7e707b70a3fed37d335ea7021442279f7bd999bec75563c60a40ebe42a",
+    "results/R3M16/collisions/A1_result.json": "c2f19c93020f11e9e56e1045f733201de826043aaf6928a74a7871d154e0c775",
+    "results/R3M16/collisions/B1_result.json": "ae4f70261f866a601a51a80c5d00a1fde1394644c3808558e91519bbf124f11f",
+    "results/R3M27/B3_TEMPORAL_EVALUATION.json": "8ead001d4a0cb45f92f82ae9722ad96b420dff80b1325d29124f39eaeb7529dc"
+  },
+  "last_chunk_steps": 4,
+  "max_new_exact_preparations": 1,
+  "max_new_full_collisions": 1,
+  "model": "NONRELATIVISTIC_ONE_ELECTRON_FIXED_TARGET_STRAIGHT_LINE_POINT_COULOMB_V1",
+  "nstep": 7172,
+  "observable": "selected projectile hydrogen n<=1/2/3 span probabilities at 100keV/u b=2",
+  "production_admission": false,
+  "requested_dt": 0.00625,
+  "schema": "R3M28_SPATIAL_HDT_DESIGN_V1",
+  "spatial_pair_screen_relative": 0.003
+}

@@ -1,0 +1,66 @@
+{
+  "schema": "BASS_FND_R3A_D2_PSEUDOSTATE_RADIAL_RULE_DISCRIMINATOR_V1",
+  "status": "PREREGISTERED_NOT_RUN",
+
+  "parent_commit": "617ec4a8241595adcf1925aa20a2abcecb14b890",
+  "parent_tree": "1abd7aeea3d71720af5fd1e695ebbc1dedbeb498",
+
+  "d1_result": {
+    "path": "research/foundation_rebuild/results/R3A_D1/RESULT_20260925.json",
+    "sha256": "b9c7e78adc19eb352caaa6961cc70253d79e761ce2743dc7a052f267224738c7",
+    "classification": "POSITIVE_PSEUDOSTATE_CROSS_CENTER_INTEGRATION_UNRESOLVED"
+  },
+
+  "energy_keV_per_u": 100.0,
+  "b_a0": 2.0,
+  "z_samples_a0": [-12.0, 0.0],
+
+  "fem_spec": {
+    "radius": 64.0,
+    "elements": 40,
+    "degree": 4,
+    "lmax": 1,
+    "bound_nmax": 2,
+    "positive_per_l": 1,
+    "positive_emax": 2.0,
+    "quad_order": 12,
+    "grading": 2.0
+  },
+
+  "laguerre_ladder": [
+    {"id": "L5", "nrad": 80, "neta": 64, "nphi": 80, "scale": 1.0},
+    {"id": "L6", "nrad": 96, "neta": 80, "nphi": 96, "scale": 1.0}
+  ],
+
+  "finite_rho_ladder": [
+    {"id": "F5", "nrho": 80, "neta": 64, "nphi": 80, "rho_max_a0": 64.0},
+    {"id": "F6", "nrho": 96, "neta": 80, "nphi": 96, "rho_max_a0": 64.0}
+  ],
+
+  "controls": [
+    "A_ANALYTIC_BOUND",
+    "B_FEM_BOUND_ONLY"
+  ],
+
+  "main_case": "C_FEM_BOUND_PLUS_PSEUDOSTATE",
+
+  "screens": {
+    "final_relative_matrix_change_max": 1.0e-4,
+    "independent_rule_control_difference_max": 1.0e-4,
+    "metric_eigenvalue_ratio_min": 1.0e-8,
+    "S_hermiticity_relative_max": 1.0e-11,
+    "H_hermiticity_relative_max": 1.0e-11
+  },
+
+  "decision_logic": {
+    "finite_controls_fail": "FINITE_RHO_RULE_NOT_VALIDATED",
+    "finite_pass_laguerre_fail": "LAGUERRE_RADIAL_RULE_MISMATCH_SUPPORTED",
+    "finite_pass_laguerre_pass": "PSEUDOSTATE_EVENTUALLY_CONVERGES_AND_D1_LADDER_WAS_TOO_COARSE",
+    "finite_fail": "PSEUDOSTATE_INTEGRATION_REMAINS_UNRESOLVED_UNDER_FINITE_RHO"
+  },
+
+  "capture_execution_allowed": false,
+  "production_admission": "HOLD",
+  "all_bound": "OPEN",
+  "b_grid": "NO_GO"
+}

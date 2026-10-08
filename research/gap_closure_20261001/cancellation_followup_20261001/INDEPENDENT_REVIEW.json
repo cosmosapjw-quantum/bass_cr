@@ -1,0 +1,214 @@
+{
+  "schema": "BASS_CR_R4T_INDEPENDENT_REVIEW_V1",
+  "status": "ACCEPT_CONDITIONAL_DERIVATIONS_AND_SCOPE",
+  "reviewer": "r4s_toolchain",
+  "independent_from_implementation_owners": true,
+  "scope": [
+    "angle rational bound",
+    "arbitrary-dimensional projector factorization and endpoint proof",
+    "weak Galilean cancellation and finite-test bridge bound",
+    "strong-domain obstruction and finite-metric state transfer",
+    "saved-matrix replay interpretation"
+  ],
+  "blocking_findings": [],
+  "resolved_findings": [
+    {
+      "id": "R4T_REVIEW_DOC_01",
+      "severity": "MINOR_SCOPE_CLARIFICATION",
+      "file": "projector/PROJECTOR_RATE_THEOREM.md",
+      "finding": "Section 6 Hilbert-space residual notation could be applied to the H1-only reference without its strong operator-domain condition.",
+      "resolution": "Owner explicitly added the L2/strong-domain requirement and restricted H1-only functions to the sibling weak-pairing interpretation.",
+      "implementation_changed": false,
+      "status": "RESOLVED"
+    }
+  ],
+  "lane_decisions": {
+    "angle": "ACCEPT_EXACT_RATIONAL_SUFFICIENT_BOUND_NOT_ACTUAL_ENDPOINT_CERTIFICATE",
+    "projector": "ACCEPT_GENERAL_PROOF_CORRECT_SIGN_NO_FACTOR_TWO_IN_RHO",
+    "galilean": "ACCEPT_WEAK_REFERENCE_BOUND_TARGET_REMAINS_FAILED",
+    "regularity": "ACCEPT_DOMAIN_OBSTRUCTIONS_AND_CONDITIONAL_TWO_METRIC_TRANSFER",
+    "saved_matrix_replay": "ACCEPT_FP64_ALGEBRAIC_PARITY_ONLY"
+  },
+  "mathematical_checks": {
+    "projector": "W=S(Pi_dot+[Pi,A]); normalized offdiagonal E=Ydag[(D+iH/hbar)J+S Jdot]L_G^-dag; rho=||E||; actual population bound has 2sqrt(P(N-P)).",
+    "angle": "epsilon regularization denominator squared is p(1-p)+epsilon+epsilon^2; clipped angle interval includes p=0,1; rational ceil-sqrt and dyadic admission are outward/exact.",
+    "galilean": "Hkin-i*d_t cancels -i v.grad and v^2/2; foreign weak residual does not vanish from isolated matrix closure; potential leakage is a physical orthogonal projection without a metric penalty.",
+    "galilean_constants": {
+      "weak_target_residual": "927/200",
+      "rho": "8409/800",
+      "integrated_bridge": "25227/50",
+      "probability_bound_after_cap": "1",
+      "per_side_target": "1/200000",
+      "target_certified": false
+    },
+    "regularity": "Nonzero shell derivative jumps exclude strong L2 Coulomb action; l=1 linear origin terms add r^-2 obstruction. Archived value jumps exclude global H1 and strong translated-frame L2 differentiability.",
+    "transfer": "R=L1*T-T*L0-Tdot; B=K1*T-S1*T*S0^-1*K0-i*hbar*S1*Tdot; both metric defects retained; coefficient, physical embedding beta, and selector delta errors remain distinct."
+  },
+  "verification": {
+    "review_method": "Source-bound independent derivation and code/proof inspection; validation receipt/source identities checked",
+    "owner_new_tests": {
+      "angle": 7,
+      "projector": 11,
+      "galilean": 5,
+      "regularity": 7,
+      "total": 30
+    },
+    "projector_exact_fraction_assertions": 33,
+    "saved_matrix_replay_cases": 6,
+    "new_reviewer_test_executions": 0,
+    "reason_no_duplicate_runs": "No concrete unresolved numerical concern remained; unchanged owner suites and prior suites were not repeated.",
+    "validation_source_hashes_checked": [
+      "projector/projector_rate.py",
+      "projector/test_projector_rate.py",
+      "projector/exact_replay.py",
+      "projector/PROJECTOR_RATE_THEOREM.md",
+      "regularity/regularity.py",
+      "regularity/test_regularity.py",
+      "regularity/EXACT_REGULARITY_OBSTRUCTION.json",
+      "regularity/REGULARITY_AND_DYNAMICS_TRANSFER.md",
+      "regularity/TRANSFER_INPUT_CONTRACT.json",
+      "regularity/CLAIM_UPDATE.json",
+      "regularity/TEST_LOG.txt",
+      "galilean/galilean_cancellation.py",
+      "galilean/test_galilean_cancellation.py"
+    ],
+    "physical_queries": 0,
+    "native_operator_calls": 0,
+    "physical_propagations": 0,
+    "external_CAS_calls": 0
+  },
+  "remaining_obligations": [
+    "Physical B0 Sdot compatibility remains unverified by constructed Sdot replay.",
+    "No state at the static-tail endpoints is supplied; the illustrative archived +/-12 population is not an outward endpoint enclosure.",
+    "Named repaired reference is not adopted and no archived-to-reference dynamics bound is instantiated.",
+    "Continuous foreign-test residual and centered potential coupling bounds still need to meet the per-side target.",
+    "Finite FP64 agreement is not outward error certification, a continuous supremum or a trajectory certificate."
+  ],
+  "claim_ceilings": {
+    "capture": false,
+    "production": "HOLD",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "original_capture_gap_resolved": false,
+    "continuous_global_supremum_bound": false,
+    "continuous_trajectory_error_bound": false
+  },
+  "reviewed_file_identities": {
+    "CONTRACT.json": {
+      "sha256": "002d5822283c395a39a1362d56f84cc42c14c41365d63747f803bdc9d211f013",
+      "bytes": 1494
+    },
+    "angle/angle_budget.py": {
+      "sha256": "a73fd83b9e5ecc690e2beec367dc21b79a8edd235b9477e9908c4620a8b071d8",
+      "bytes": 2105
+    },
+    "angle/test_angle_budget.py": {
+      "sha256": "34c4267e6ce03c352a6b02fc3200446b4f675caf8e169679855c0c411f5237ec",
+      "bytes": 1968
+    },
+    "angle/ANGLE_BUDGET.md": {
+      "sha256": "fee111b4c4e0002bb6f6da7c9f1ac88db6a3ccc94558394c247265effe62e10c",
+      "bytes": 2850
+    },
+    "angle/ILLUSTRATIVE_BUDGET.json": {
+      "sha256": "cd656e1e46cbb8bee564b2ecbeaed94c10b582cb094877e26ecf3448fad301cc",
+      "bytes": 789
+    },
+    "angle/VALIDATION.log": {
+      "sha256": "2b0f564b03c4d4fc0dae2cd039ec589fee8399de6974f9eeaf2dc1876f9d6370",
+      "bytes": 780
+    },
+    "projector/projector_rate.py": {
+      "sha256": "ce99aa7f7925c999c23e43dc0b26f964dfc93db24a6bee4d1bb6a7b68d99823c",
+      "bytes": 5742
+    },
+    "projector/test_projector_rate.py": {
+      "sha256": "9093e930fa2a0bcfb47c613dab08d2b495f6d473e29331d185173a9040241708",
+      "bytes": 6367
+    },
+    "projector/exact_replay.py": {
+      "sha256": "de23c97fde31938dadeefe6d809606275c40c6bf6bcc72dad1d1706da354ff0e",
+      "bytes": 2398
+    },
+    "projector/EXACT_REPLAY.json": {
+      "sha256": "0656e28e4d2136ca054e0545b8012e2ffd40b5233002259a9013a285a454e90b",
+      "bytes": 287
+    },
+    "projector/PROJECTOR_RATE_THEOREM.md": {
+      "sha256": "ec4dc62db4af83cbb911d393fb89ae532bf1146881e1c56264aa60a07c84014e",
+      "bytes": 14253
+    },
+    "projector/VALIDATION.json": {
+      "sha256": "f2fc97a819194e174f6e9acf194e45000158b9586b206df1f588e7bed8b752bb",
+      "bytes": 1508
+    },
+    "projector/CLAIM_UPDATE.json": {
+      "sha256": "c8a13748fa0e3cb8847fd0c11eb5943b7a534b93b7b877a23d8e6e77114a34b0",
+      "bytes": 981
+    },
+    "regularity/regularity.py": {
+      "sha256": "273ecce99f4f046d74ffbd11f89244607ab09423a270a15dde903a029b085a07",
+      "bytes": 5517
+    },
+    "regularity/test_regularity.py": {
+      "sha256": "e7eaca590c93dba5b2ff294261e4a431c9ffd94d2ae1d0ee9d1e753ce0fe3902",
+      "bytes": 2386
+    },
+    "regularity/REGULARITY_AND_DYNAMICS_TRANSFER.md": {
+      "sha256": "4824bddb0c85a4a9fc150be6d4e11c58d012688e947c16a748d48ee915cde23a",
+      "bytes": 11467
+    },
+    "regularity/EXACT_REGULARITY_OBSTRUCTION.json": {
+      "sha256": "50f67528b915efa2372fb70effeb1159aed9147860c158c56f265f692848756d",
+      "bytes": 228131
+    },
+    "regularity/TRANSFER_INPUT_CONTRACT.json": {
+      "sha256": "43fe1bd96e75a18b0223589adb3e080a5e3d09be2e79349889de465041e25fe5",
+      "bytes": 2132
+    },
+    "regularity/VALIDATION.json": {
+      "sha256": "ef207ceacd6dcf0889b33e7ff8f12c1a7453d3bfcd1beed8dce56fee85720495",
+      "bytes": 1598
+    },
+    "regularity/CLAIM_UPDATE.json": {
+      "sha256": "f28b20027b0fdc21769b6e4d77419cdbd3fae7da0612edb6d7ef0e96b755d7a2",
+      "bytes": 1403
+    },
+    "galilean/galilean_cancellation.py": {
+      "sha256": "ee51c1becbce4f4e3d0545806b6e091dd4a0d1f4f86293fe04c64ecbbff9b66a",
+      "bytes": 8542
+    },
+    "galilean/test_galilean_cancellation.py": {
+      "sha256": "ee245a2d431635119ae00f7f4597d15febd841d24bb581c8dba4e77f7fbb1269",
+      "bytes": 2904
+    },
+    "galilean/WEAK_GALILEAN_CANCELLATION.md": {
+      "sha256": "7ea43505391f061bc6b32563d81b99321c746a29d32840c5aa7895e692af039b",
+      "bytes": 13705
+    },
+    "galilean/GALILEAN_BRIDGE_CERTIFICATE.json": {
+      "sha256": "ca8ed98d2f2a62f9473d191d9e18de1f10e4579d60604096ff232f16fba9d1aa",
+      "bytes": 3879
+    },
+    "galilean/VALIDATION.json": {
+      "sha256": "972f98098b6e919d14b4b3d7527ab0307df3a155a7d2d30a0cc568933235e007",
+      "bytes": 513
+    },
+    "galilean/FIRST_ADMISSION_FAILURE.json": {
+      "sha256": "ca603c03687d7310e24257b75d97e1183115000577626212f3d75501759d6e63",
+      "bytes": 688
+    },
+    "replay_saved_matrices.py": {
+      "sha256": "69fcb2100680e093708bba3033022bb5707136e68804a425b5cd898f02be183d",
+      "bytes": 3232
+    },
+    "SAVED_MATRIX_REPLAY.json": {
+      "sha256": "613a361dd434f6597d5db088a34517c100e8cbd2bab593a9f2dff7c5b732c2f7",
+      "bytes": 6056
+    },
+    "SAVED_MATRIX_REPLAY_NOTE.md": {
+      "sha256": "d9adc560fba6006092d988b96d3f7bea9a54514731ac4f6427916d1405f6adb3",
+      "bytes": 1240
+    }
+  }
+}

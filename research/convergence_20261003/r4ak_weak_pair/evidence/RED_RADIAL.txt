@@ -1,0 +1,18 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+____________ test_polynomial_tail_is_exact_not_a_sampled_quadrature ____________
+
+    def test_polynomial_tail_is_exact_not_a_sampled_quadrature():
+>       assert tail_mass([0,1],[0,1],[[0,0,0]],F(1,2)) == F(7,24)
+E       assert None == Fraction(7, 24)
+E        +  where None = tail_mass([0, 1], [0, 1], [[0, 0, 0]], Fraction(1, 2))
+E        +    where Fraction(1, 2) = F(1, 2)
+E        +  and   Fraction(7, 24) = F(7, 24)
+
+tests/test_radial_first.py:5: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_radial_first.py::test_polynomial_tail_is_exact_not_a_sampled_quadrature - assert None == Fraction(7, 24)
+ +  where None = tail_mass([0, 1], [0, 1], [[0, 0, 0]], Fraction(1, 2))
+ +    where Fraction(1, 2) = F(1, 2)
+ +  and   Fraction(7, 24) = F(7, 24)
+1 failed in 0.06s

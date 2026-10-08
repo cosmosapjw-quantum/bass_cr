@@ -1,0 +1,27 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+_____________________ test_adjacent_chain_sums_real_links ______________________
+
+    def test_adjacent_chain_sums_real_links():
+        r=compose_chain([edge('physical','finite_window'),edge('finite_window','computed')],
+                        quantity='P_1s_fixed_b',unit='1',target='1/10')
+>       assert r['upper']=='1/50'
+               ^^^^^^^^^^
+E       KeyError: 'upper'
+
+tests/test_closure.py:13: KeyError
+_______ test_nonstationary_phase_bound_has_boundary_and_derivative_terms _______
+
+    def test_nonstationary_phase_bound_has_boundary_and_derivative_terms():
+>       assert oscillatory_integral_bound(2,3,7,11,13,17,5)==F(1789,25)
+E       assert None == Fraction(1789, 25)
+E        +  where None = oscillatory_integral_bound(2, 3, 7, 11, 13, 17, 5)
+E        +  and   Fraction(1789, 25) = F(1789, 25)
+
+tests/test_closure.py:17: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_closure.py::test_adjacent_chain_sums_real_links - KeyError: 'upper'
+FAILED tests/test_closure.py::test_nonstationary_phase_bound_has_boundary_and_derivative_terms - assert None == Fraction(1789, 25)
+ +  where None = oscillatory_integral_bound(2, 3, 7, 11, 13, 17, 5)
+ +  and   Fraction(1789, 25) = F(1789, 25)
+2 failed in 0.07s

@@ -1,0 +1,178 @@
+{
+  "schema": "BASS_R4R_REFERENCE_BOUNDED_INDEPENDENT_REVIEW_V1",
+  "reviewer": "g07_g08_numerics",
+  "implementation_author": "r4r_reference",
+  "status": "ACCEPT_VALIDATED_FINITE_REFERENCE_AND_SAME_STATE_PROJECTOR_CERTIFICATE",
+  "scope": "Exact rational conforming reference constructed from the archived binary64 radial bank; finite nine-channel isolated weak-Galerkin compression and projector map in common L2",
+  "model_alias": "UNRESOLVED_NOT_GUESSED",
+  "baseline_commit_prefix_at_assignment": "9d908c6",
+  "new_work_publication_at_assignment": "UNPUBLISHED",
+  "reviewed_files": [
+    {
+      "path": "reference_certificate_followup_20261001/exact_reference.py",
+      "sha256": "4b0346af93ad4db6393da4b75dd8cfc91da24a2a8737a5f721b84dff76f1da40",
+      "bytes": 15414
+    },
+    {
+      "path": "reference_certificate_followup_20261001/test_exact_reference.py",
+      "sha256": "e278b663e807c5fc059db5e4fe353e529d5eb3c512b5a1ab1da27755574473a4",
+      "bytes": 3694
+    },
+    {
+      "path": "reference_certificate_followup_20261001/REFERENCE_CERTIFICATE_PROOF.md",
+      "sha256": "484df21b2d34735da2a277b63ea4235ace86af5a6c275005bbcce60ca3b80cae",
+      "bytes": 12011
+    },
+    {
+      "path": "reference_certificate_followup_20261001/CERTIFICATE_SUMMARY.json",
+      "sha256": "22c4f63b5f1f95dc0c3c6aafe93b4f90d1a014cc1b7a41a0e88b22b9997d6a80",
+      "bytes": 1246
+    },
+    {
+      "path": "reference_certificate_followup_20261001/actual_certificate/REFERENCE_CERTIFICATE.json",
+      "sha256": "7005abab64da711aad03614e00819548b9a04138f9ef2fdc76cad2a7a305f8f2",
+      "bytes": 36324
+    },
+    {
+      "path": "reference_certificate_followup_20261001/actual_certificate/EXACT_REPAIRED_REFERENCE.json",
+      "sha256": "9471aac1fe9101c3ee8f9d6ea1bdc4e87a7d660f6d63155621576a47583179d2",
+      "bytes": 51620
+    },
+    {
+      "path": "reference_certificate_followup_20261001/actual_certificate/EXECUTION_RECEIPT.json",
+      "sha256": "df72e0d8e744eac8d22c313af7a7edddcb4566b75924096868776646b072eee3",
+      "bytes": 587
+    },
+    {
+      "path": "reference_certificate_followup_20261001/TDD_GREEN.txt",
+      "sha256": "d37a889470897a7d5075ca277de7b03f9cf4c4632f629e8c0070a51a2e0de61c",
+      "bytes": 1294
+    }
+  ],
+  "input_pins_in_certificate_and_receipt": {
+    "BASIS.json": {
+      "sha256": "3cf2359dd9802e84f9ec4dc45f3585e0aa9712de38a3fb0a077300d257150131",
+      "bytes": 1308
+    },
+    "BASIS.npz": {
+      "sha256": "889001a751cd3cae93ad217336587f5fc58db11c0a496843ecc7e7bbd93f83ec",
+      "bytes": 8250
+    }
+  },
+  "input_provenance_review_boundary": "Pins agree between certificate and receipt. Raw BASIS files outside authorized review directory were not reread; canonical archive identity remains root provenance responsibility.",
+  "reference_coefficients_sha256": "85166a5812f6c9bb09f7389e1eb73019b48ea530058e37e9abdd2f11b05da6ee",
+  "selector_identity_sha256": "2df8fd41703e3075c837e0e576ff34ec26d38f5b83d04066f1d9ec7b805e7150",
+  "conservative_exact_summary_bounds": {
+    "S_reference_lower": {
+      "direction": "lower",
+      "rational": "99999999999999/100000000000000",
+      "display_float": 0.99999999999999
+    },
+    "a_lower": {
+      "direction": "lower",
+      "rational": "3124999999/25000000000",
+      "display_float": 0.12499999996
+    },
+    "d_lower": {
+      "direction": "lower",
+      "rational": "5525039691/10000000000000",
+      "display_float": 0.0005525039691
+    },
+    "r_upper": {
+      "direction": "upper",
+      "rational": "220011/100000000000000000000",
+      "display_float": 2.20011e-15
+    },
+    "eta_original_to_repair_upper": {
+      "direction": "upper",
+      "rational": "50811/5000000000000000000",
+      "display_float": 1.01622e-14
+    },
+    "delta_repair_to_spectral_upper": {
+      "direction": "upper",
+      "rational": "35047/2000000000000000000",
+      "display_float": 1.75235e-14
+    },
+    "delta_original_to_spectral_upper": {
+      "direction": "upper",
+      "rational": "34607/1250000000000000000",
+      "display_float": 2.76856e-14
+    }
+  },
+  "mathematical_checks": {
+    "C0_H10_origin": "PASS: exact endpoint/interface repair; radial O(r) suffices for finite H1/Coulomb-form energy; no strong-domain assertion",
+    "rational_polynomial_integration": "PASS: local mass/kinetic scaling and exact global potential primitives; singular origin coefficients rejected unless exactly zero",
+    "log_intervals": "PASS: positive atanh series and geometric remainder; exact power-of-two reduction",
+    "interval_arithmetic": "PASS: rational point values and 256-bit outward dyadic interval endpoints; interval division avoids zero; integer sqrt enclosure",
+    "S_orthogonal_block_Schur": "PASS: exact X and K; complementary H and residual signs correct",
+    "generalized_sign_margins": "PASS: Gershgorin form bounds divided by Gram upper bounds; positive Gram lower bounds",
+    "spectral_projector_bound": "PASS: min-max rank/sign separation and Sylvester leakage bound; equal finite ranks essential",
+    "same_Hilbert_projector_bridge": "PASS: equal-rank gap bound using original Gram and repair synthesis norm",
+    "angular_multiplicity": "PASS: orthogonal repeated l=1 sectors use maximum operator norm; no missing multiplicity factor",
+    "observable_mapping": "PASS: norm-squared times projector norm for same common physical state only"
+  },
+  "findings": [
+    {
+      "id": "R4R-PROOF-RSQ-DIRECTION-01",
+      "status": "RESOLVED_BEFORE_REVIEW_FREEZE",
+      "kind": "PROOF_EXPOSITION_INEQUALITY_DIRECTION",
+      "artifact": "REFERENCE_CERTIFICATE_PROOF.md section3",
+      "original_issue": "The displayed implemented bound stated r_upper^2 <= residual quotient, whereas the code uses the upper square-root endpoint.",
+      "correction": "||R||^2 <= residual quotient <= r_upper^2; r=r_upper explicitly identified.",
+      "source_code_changed": false,
+      "saved_certificate_changed": false,
+      "remaining_risk": null
+    }
+  ],
+  "unresolved_scoped_findings": [],
+  "independent_discriminator": {
+    "count": 1,
+    "description": "Exact saved-certificate conformity/mass/identity and upper-bound-direction consistency",
+    "execution": "python -B inline exact Fraction checks; exit0",
+    "source_hash_matches_execution_receipt": true,
+    "reference_and_selector_identity_hashes_match": true,
+    "forty_cells_per_mode_and_39_internal_traces_exact": true,
+    "origin_and_outer_traces_zero": true,
+    "independent_local_monomial_mass_equals_saved_matrix": true,
+    "r_upper_squared_ge_residual_quotient": true,
+    "eta_upper_squared_ge_repair_quotient": true,
+    "final_projector_sum_exact": true,
+    "seven_outward_summary_bounds_exact": true,
+    "angular_ranks": [
+      5,
+      4
+    ],
+    "status": "PASS",
+    "actual_certificate_construction_rerun": false
+  },
+  "saved_author_tests_read_not_rerun": {
+    "passed": 9,
+    "failed": 0,
+    "evidence": "reference_certificate_followup_20261001/TDD_GREEN.txt"
+  },
+  "old_114_suite_reruns": 0,
+  "new_native_calls": 0,
+  "new_two_center_operator_queries": 0,
+  "new_time_propagations": 0,
+  "authorizations_consumed": 0,
+  "does_not_establish": [
+    "Negative projector of the full infinite-dimensional Coulomb Hamiltonian",
+    "An L2 strong-operator residual",
+    "Archived numerical selected-population error without its own operator/state uncertainties",
+    "Hamiltonian or dynamical state-map closeness",
+    "Original fixed-J ordinary asymptotic limit existence",
+    "Finite bridge or continuous infinite-tail certificate",
+    "Transfer of the historical temporal qualification",
+    "Operational adoption of the repaired reference"
+  ],
+  "claim_ceilings": {
+    "capture": false,
+    "production": "HOLD",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "original_capture_gap_resolved": false,
+    "continuous_global_supremum_bound": false,
+    "continuous_trajectory_error_bound": false
+  },
+  "reference_adopted": false
+}

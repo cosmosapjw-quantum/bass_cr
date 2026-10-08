@@ -1,0 +1,85 @@
+{
+  "schema": "BASS_R4X_CONTINUOUS_BASIS_CONTRACT_V1",
+  "date_KST": "2026-10-02",
+  "base_commit": "33f78734066844e72af58c9a3e713b7f5404cb0d",
+  "selected_gap": "G02",
+  "task": "Implement and independently validate separate shared-endpoint radial representation",
+  "model_metadata": "UNAVAILABLE; model-independent shared harness rules applied",
+  "authority": "Current request to perform highest-priority remaining research step; prior same-branch nonforce publication and create-only dual backup persist",
+  "original_inputs": {
+    "BASIS.npz": "889001a751cd3cae93ad217336587f5fc58db11c0a496843ecc7e7bbd93f83ec",
+    "BASIS.json": "3cf2359dd9802e84f9ec4dc45f3585e0aa9712de38a3fb0a077300d257150131",
+    "SCIENCE_CONTEXT.json": "cf484b252092d642c8c8487a8bf70deb61e7b0b9f2bc2f522a3325a146e7f746"
+  },
+  "representation": "u=(1-s)L+sR+s(1-s)q(s), shared endpoints; bubble coefficients rounded once; separate candidate, not recovered original nodal eigenvectors",
+  "invariants": [
+    "Original input bytes unchanged",
+    "No raw D projection",
+    "Original G02 FD failure and thresholds retained",
+    "FP64, strict floating flags and deterministic per-point arithmetic",
+    "Existing moments/quadrature/accumulation preserved for paired operator comparisons"
+  ],
+  "diagnostic_acceptance": {
+    "exact_internal_and_outer_trace_defect": 0,
+    "relative_radial_L2_change_max": 1e-12,
+    "radial_normalization_absolute_defect_max": 1e-10,
+    "weak_FEM_residual_absolute_max": 2e-08,
+    "radial_same_l_orthogonality_absolute_defect_max": 1e-10,
+    "paired_operator_entry_difference_absolute_max_OR_relative_frobenius_max": [
+      1e-12,
+      1e-09
+    ],
+    "same_center_D_plus_Ddagger_entry_max": 1e-12,
+    "full_metric_min_ratio": 1e-08,
+    "notes": "New local representation screens; do not replace original G02 gate or certify full physical accuracy. Thresholds fixed before candidate results.",
+    "energy_sign_resolved": "abs(stored_energy)>100*weak_FEM_residual, original atomic_bank rule"
+  },
+  "static_probe_plan": {
+    "z_a0": [
+      -32.0,
+      0.0
+    ],
+    "b_a0": 2.0,
+    "energy_keV_per_u": 100.0,
+    "orders": [
+      32,
+      40
+    ],
+    "representations": [
+      "original",
+      "candidate"
+    ],
+    "same_center_order": 20,
+    "subdivisions": 1,
+    "phase_budget": null,
+    "sector": "full",
+    "cross_call_cap": 8,
+    "trajectory_or_capture_calls": 0,
+    "qualification": "paired static diagnostic only; no archived runtime approval reused"
+  },
+  "resource": {
+    "available_cpu_quota": 8,
+    "memory_bytes": 8589934592,
+    "parallel_static_workers_max": 4,
+    "threads_per_static_worker": 1,
+    "blas_threads": 1,
+    "benchmark_cpu_max": 8,
+    "benchmark_must_not_overlap_physics": true,
+    "MPI_execution": false,
+    "NCP64_scaling": "NOT_RUN"
+  },
+  "completion_bar": [
+    "Separate implemented representation and identity",
+    "Actual basis invariants, high precision/reference checks",
+    "Actual same-input full S/H/D paired static diagnostic",
+    "Targeted failclosed tests and local strict Fortran/OpenMP evaluator benchmark",
+    "Independent review and report, DB update, samebranch publication and create-only backups"
+  ],
+  "claim_ceiling": {
+    "G02": "UNRESOLVED",
+    "production": "HOLD",
+    "capture": false,
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO"
+  }
+}

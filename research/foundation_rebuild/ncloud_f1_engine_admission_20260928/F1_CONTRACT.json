@@ -1,0 +1,175 @@
+{
+  "schema": "BASS_NCLOUD_F1_ENGINE_ADMISSION_CONTRACT_V1",
+  "work_unit": "FND_NCLOUD_F1_INTEL_NATIVE_ENGINE_ADMISSION",
+  "upstream_f0_record_commit": "609508ea136019d75a8e6af46f29740e18f6f061",
+  "scientific_source_commit": "c954d68fdc86527453765a563b3a025351163ed9",
+  "scientific_source_tree": "0e13583301e271e9a9e8aa0eae3c05eaf8580a1a",
+  "historical_tp2d_archive": {
+    "path": "research/foundation_rebuild/ncloud_c64g3_20260928/artifacts/tp2d_runtime_self_qualified_20260927T074944Z_RETURN.zip",
+    "sha256": "630a80208331b7b37c02a77eae7435f6317d07439a4ea34b11885455fe53fa35",
+    "bytes": 31849212
+  },
+  "f0_dependency": {
+    "reported_status": "STOP_F0_COMPLETE",
+    "reported_result_path": "research/foundation_rebuild/ncloud_c64g3_20260928/F0_REPORTED_RESULT_20260928.json",
+    "artifact_import_contract": "research/foundation_rebuild/ncloud_c64g3_20260928/F0_ARTIFACT_IMPORT_CONTRACT.json",
+    "artifact_import_required_before_f1_execution": true,
+    "artifact_import_required_before_f1_code_implementation": false
+  },
+  "implementation_scope": {
+    "implementation_authorized": true,
+    "focused_tests_authorized": true,
+    "actual_scientific_native_admission_execution_authorized": false,
+    "reason": "Native wall/cost budget and execution-host approval remain unset. This branch prepares the admission engine and execution contract only."
+  },
+  "build_policy": {
+    "source_path": "research/foundation_rebuild/tp2a_analytic_pruning_20260926/code/moment_kernel.cpp",
+    "source_sha256": "90913155c0cfa80962d1cb00bb1b7ec0443170917c25913ac5e359979738ab30",
+    "compiler_family": "g++",
+    "required_flags": [
+      "-std=c++17",
+      "-O3",
+      "-fPIC",
+      "-shared",
+      "-ffp-contract=off",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "forbidden_flag_patterns": [
+      "-ffast-math",
+      "-Ofast",
+      "-march=native",
+      "-mtune=native",
+      "-flto"
+    ],
+    "output_library_name": "libmoments.so",
+    "historical_library_sha256": "966146f0ca713251f8b73999b4d89595cf1820a8c2d36f5c6290387b70c68035",
+    "historical_library_hash_must_match_new_build": false,
+    "historical_build_receipt": "research/foundation_rebuild/ncloud_c64g3_20260928/artifacts/HISTORICAL_ANALYTIC_BUILD.json",
+    "new_engine_identity_required": true
+  },
+  "basis_policy": {
+    "source": "BASIS.json and BASIS.npz inside the historical TP2D RETURN archive",
+    "recompute_atomic_bank_allowed": false,
+    "exact_bytes_required": true
+  },
+  "runtime_reference_resolutions": [
+    {
+      "order": 32,
+      "subdivisions": 1
+    },
+    {
+      "order": 40,
+      "subdivisions": 1
+    },
+    {
+      "order": 48,
+      "subdivisions": 1
+    },
+    {
+      "order": 56,
+      "subdivisions": 1
+    },
+    {
+      "order": 64,
+      "subdivisions": 1
+    },
+    {
+      "order": 48,
+      "subdivisions": 2
+    },
+    {
+      "order": 56,
+      "subdivisions": 2
+    },
+    {
+      "order": 64,
+      "subdivisions": 2
+    },
+    {
+      "order": 48,
+      "subdivisions": 4
+    },
+    {
+      "order": 56,
+      "subdivisions": 4
+    },
+    {
+      "order": 64,
+      "subdivisions": 4
+    }
+  ],
+  "parity_policy": {
+    "representative_query_set": "research/foundation_rebuild/ncloud_f1_engine_admission_20260928/F1_REPRESENTATIVE_QUERIES.json",
+    "run_full_frozen_ladder": true,
+    "selected_resolution_must_match_historical_exactly": true,
+    "selection_drift_status": "POLICY_SELECTION_DRIFT",
+    "compare_every_historical_attempt_raw_cross_array": true,
+    "raw_cross_keys": [
+      "S_tp",
+      "S_pt",
+      "H_tp",
+      "H_pt",
+      "D_tp",
+      "D_pt"
+    ],
+    "compare_selected_full_arrays": [
+      "S",
+      "H",
+      "D"
+    ],
+    "numpy_allclose": {
+      "rtol": 1e-11,
+      "atol": 1e-12
+    },
+    "record_relative_frobenius": true,
+    "operator_hermiticity_relative_max": 1e-11,
+    "metric_min_ratio": 1e-8,
+    "runtime_raw_cross_convergence_max": 1e-9,
+    "metric_connection_sentinels_z_a0": [
+      -12,
+      -6,
+      0,
+      6,
+      12
+    ],
+    "metric_derivative_relative_max": 0.000001,
+    "epsilon_z_a0": 0.0001
+  },
+  "required_outputs": [
+    "ENGINE_IDENTITY.json",
+    "ENGINE_BUILD.json",
+    "ENGINE_ADMISSION.json",
+    "REPRESENTATIVE_PARITY.json",
+    "METRIC_CONNECTION_PARITY.json",
+    "PROGRESS.jsonl",
+    "RETURN_REPORT.json"
+  ],
+  "failure_statuses": [
+    "F1_INPUT_IDENTITY_BLOCKED",
+    "F1_BUILD_FAILED",
+    "F1_ENGINE_LOAD_FAILED",
+    "POLICY_SELECTION_DRIFT",
+    "F1_RAW_PARITY_FAILED",
+    "F1_FULL_OPERATOR_PARITY_FAILED",
+    "F1_METRIC_CONNECTION_FAILED",
+    "F1_TESTS_FAILED",
+    "F1_ENVIRONMENT_BLOCKED",
+    "F1_INTERRUPTED"
+  ],
+  "success_status": "F1_ENGINE_ADMISSION_PASS",
+  "execution_budget": {
+    "max_wall_seconds": null,
+    "spending_limit_krw": null,
+    "native_execution_allowed": false
+  },
+  "claim_ceiling": {
+    "capture_execution_allowed": false,
+    "production_admission": "HOLD",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "original_capture_gap_resolved": false,
+    "continuous_global_supremum_bound": false
+  }
+}

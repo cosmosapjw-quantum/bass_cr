@@ -1,0 +1,164 @@
+{
+  "schema": "BASS_R4U_MEMORY_ADMISSION_VALIDATION_V1",
+  "written_at_utc": "2026-10-01T11:42:49.083305+00:00",
+  "evidence_kind": "persisted observations from completed tests and read-only census; no rerun",
+  "repository": "/workspace/scratch/63ee2321a512/bass_cr",
+  "source": {
+    "path": "research/gap_closure_20261001/hpc_optimization_20261001/resource_profile.py",
+    "sha256": "0759465ca5f01967e7df6afdf897f0a068c4812163f80df5f44a5291d369d17f"
+  },
+  "focused_test_source": {
+    "path": "research/gap_closure_20261001/production_solver_20261001/provider/test_resource_cache.py",
+    "sha256": "5f513662fc57678a2d5a86a9d6abedbab7587cb222c6b631ac93e1a1bc28058d"
+  },
+  "tests": [
+    {
+      "name": "cache_races_and_ancestor_caps",
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 python -m unittest discover -s research/gap_closure_20261001/production_solver_20261001/provider -p test_resource_cache.py",
+      "cwd": "/workspace/scratch/63ee2321a512/bass_cr",
+      "result": "PASS",
+      "tests": 9,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "elapsed_seconds_reported": 0.007
+    },
+    {
+      "name": "affected_resource_admission",
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 python -m unittest discover -s research/gap_closure_20261001/hpc_optimization_20261001 -p test_resource_profile.py",
+      "cwd": "/workspace/scratch/63ee2321a512/bass_cr",
+      "result": "PASS",
+      "tests": 5,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "elapsed_seconds_reported": 0.0
+    },
+    {
+      "name": "affected_execution_cli",
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 python -m unittest discover -s research/gap_closure_20261001/production_solver_20261001/provider -p test_precompute_cli.py",
+      "cwd": "/workspace/scratch/63ee2321a512/bass_cr",
+      "result": "PASS",
+      "tests": 8,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "elapsed_seconds_reported": 0.329
+    }
+  ],
+  "aggregate": {
+    "tests": 22,
+    "skipped": 0,
+    "failures": 0,
+    "errors": 0
+  },
+  "red_evidence": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 python -m unittest discover -s research/gap_closure_20261001/production_solver_20261001/provider -p test_resource_cache.py",
+    "tests_at_initial_red": 6,
+    "result": "EXPECTED_FAILURE_BEFORE_IMPLEMENTATION",
+    "reason": "AttributeError: clean_file_credit and cgroup_memory_headroom did not yet exist"
+  },
+  "coverage": [
+    "all five excluded file categories",
+    "half-credit retention",
+    "memory.min and memory.low exclusion",
+    "missing/negative counters",
+    "non-leaf/unknown descendant rejection",
+    "type-based versus file-LRU minimum",
+    "missing usage fails closed",
+    "raw headroom retained when cache accounting is unavailable",
+    "over-limit usage repaid before credit",
+    "larger racing usage and smaller cache-base observation",
+    "smaller of two racing cache credits",
+    "census traversal honors tighter ancestor limit",
+    "host MemAvailable remains upper bound",
+    "unchanged quota/reserve tests",
+    "execution manifest and watchdog regressions"
+  ],
+  "policy": {
+    "name": "HALF_CLEAN_UNMAPPED_LEAF_FILE_V1",
+    "formula": "credit = floor(max(0, min(current, file, active_file + inactive_file) - file_mapped - file_dirty - file_writeback - shmem - unevictable - max(memory.min, memory.low)) / 2)",
+    "bracketing": "Use larger before/after usage for cap headroom, smaller before/after usage when computing credit, and the smaller credit of two cache observations.",
+    "cap_formula": "estimated_available = min(memory.max, max(0, memory.max - charged_current + credit))",
+    "overall_formula": "min(host MemAvailable, finite ancestor memory limits, every finite ancestor estimated_available)",
+    "eligibility": "Verified leaf with zero living and dying descendants and complete nonnegative accounting. Otherwise no cache credit.",
+    "no_credit": [
+      "anonymous memory",
+      "swap",
+      "slab"
+    ],
+    "unchanged_reserve": "max(1 GiB, usable available memory // 8)",
+    "unchanged_cpu_admission": true,
+    "kernel_writes": 0,
+    "forced_reclaims": 0,
+    "estimate_not_allocation_guarantee": true,
+    "half_factor_origin": "Explicit conservative project policy; not a kernel-defined cgroup MemAvailable formula."
+  },
+  "actual_census_sample": {
+    "origin_command": "python research/gap_closure_20261001/hpc_optimization_20261001/resource_profile.py",
+    "origin": "Earlier observed read-only census output in this implementation session, before physical pilot; recorded here without resampling.",
+    "affinity_cpus": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "logical_cpus": 9,
+    "physical_cores": 9,
+    "cpu_quota": 8.0,
+    "usable_cpu_budget": 8,
+    "cpu_model": "AMD EPYC 9V74 80-Core Processor",
+    "memory_limit_bytes": 8589934592,
+    "memory_available_bytes": 4106442752,
+    "memory_available_is_estimate": true,
+    "cgroup": {
+      "path": "/sys/fs/cgroup",
+      "limit_bytes": 8589934592,
+      "current_bytes": 8214339584,
+      "unreclaimed_headroom_bytes": 375595008,
+      "clean_file_credit_bytes": 3730847744,
+      "estimated_available_bytes": 4106442752,
+      "memory_min_bytes": 0,
+      "memory_low_bytes": 0,
+      "descendants": 0,
+      "cache_observations_identical": true,
+      "counters": {
+        "file": 7478534144,
+        "active_file": 6730973184,
+        "inactive_file": 747102208,
+        "file_mapped": 2187264,
+        "file_dirty": 13733888,
+        "file_writeback": 0,
+        "shmem": 458752,
+        "unevictable": 0
+      }
+    },
+    "unchanged_reserve_for_sample_bytes": 1073741824
+  },
+  "primary_documentation": [
+    {
+      "url": "https://docs.kernel.org/admin-guide/cgroup-v2.html#memory-interface-files",
+      "supports": "memory.current includes charged memory; file includes filesystem cache and shared memory; mapped/dirty/writeback/shmem and file-LRU counters have distinct meanings; min/low protections and hierarchical limits apply."
+    },
+    {
+      "url": "https://docs.kernel.org/filesystems/proc.html#meminfo",
+      "supports": "Host MemAvailable estimates allocation headroom including some reclaimable file cache, while retaining memory needed for normal operation."
+    }
+  ],
+  "limits": {
+    "physical_operator_calls_in_this_validation": 0,
+    "mpi_launches_in_this_validation": 0,
+    "new_allocations_for_memory_probe": false,
+    "cgroup_modification": false,
+    "cpu_quota_relaxed": false,
+    "memory_reserve_relaxed": false,
+    "physical_pilot_evidence_included": false,
+    "ncp_scaling_established": false
+  },
+  "source_freeze_preserved": true
+}

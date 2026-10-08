@@ -1,0 +1,54 @@
+{
+  "schema": "BASS_R4P0_B0_NON_NATIVE_BINDING_VERIFICATION_V1",
+  "tests_passed": 64,
+  "tests_failed": 0,
+  "tests_skipped": 0,
+  "checks": [
+    {
+      "log": "BINDING_RED.txt",
+      "exit_code": 1,
+      "decisive_output": "14 failed in 0.25s",
+      "log_sha256": "75074496d35b319f09d8ec46b4b4b90e64ee7e1252a1ccf904a7da1e69266e7d",
+      "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /root/.local/state/bass_f0/env/tp2e_f0_20260928T045058Z/bin/python -B -m pytest -q -p no:cacheprovider research/foundation_rebuild/ncp_shared_research_20260928/r4p0a_b0_static_tail_executor_20260930/tests/test_static_binding.py"
+    },
+    {
+      "log": "BINDING_GREEN.txt",
+      "exit_code": 0,
+      "decisive_output": "14 passed in 0.39s",
+      "log_sha256": "b09d241111e3b4c19eaefdf3ba4c3ee4cbc877351ea27fb901bdbf0c95b21be6",
+      "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /root/.local/state/bass_f0/env/tp2e_f0_20260928T045058Z/bin/python -B -m pytest -q -p no:cacheprovider research/foundation_rebuild/ncp_shared_research_20260928/r4p0a_b0_static_tail_executor_20260930/tests/test_static_binding.py"
+    },
+    {
+      "log": "FINAL_TARGETED_TESTS.txt",
+      "exit_code": 0,
+      "decisive_output": "62 passed in 1.98s",
+      "log_sha256": "fd7d91b9e989b18be5d3fdf6eb540ec634dceae31587ff54bed4c53df94659d9",
+      "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 R4P0A_RUNTIME_INPUTS=/root/.local/state/bass_r4p0a/evidence/runtime_inputs R4P0A_NATIVE_BUILD=/root/.local/state/bass_f1/runs/f1_native_20260928T064313Z/engine /root/.local/state/bass_f0/env/tp2e_f0_20260928T045058Z/bin/python -B -m pytest -q -p no:cacheprovider research/foundation_rebuild/ncp_shared_research_20260928/r4p0a_b0_static_tail_executor_20260930/tests"
+    },
+    {
+      "log": "SUPERVISOR_RED.txt",
+      "exit_code": 1,
+      "decisive_output": "1 failed in 0.19s",
+      "log_sha256": "7e0dcb3f3d3914bdea462773fcf618e05f80dd5484fc30d5d69d36112bd943da",
+      "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /root/.local/state/bass_f0/env/tp2e_f0_20260928T045058Z/bin/python -B -m pytest -q -p no:cacheprovider research/foundation_rebuild/ncp_shared_research_20260928/r4p0a_b0_static_tail_executor_20260930/tests/test_launch_boundary.py::test_supervisor_lingering_own_group_is_hard_failure"
+    },
+    {
+      "log": "SUPERVISOR_GREEN_FULL.txt",
+      "exit_code": 0,
+      "decisive_output": "63 passed in 1.99s",
+      "log_sha256": "ee56fcdd8a55c15b933ba1d7dce5ca1db86737dfb68c0030ef31da10138d7186",
+      "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 R4P0A_RUNTIME_INPUTS=/root/.local/state/bass_r4p0a/evidence/runtime_inputs R4P0A_NATIVE_BUILD=/root/.local/state/bass_f1/runs/f1_native_20260928T064313Z/engine /root/.local/state/bass_f0/env/tp2e_f0_20260928T045058Z/bin/python -B -m pytest -q -p no:cacheprovider research/foundation_rebuild/ncp_shared_research_20260928/r4p0a_b0_static_tail_executor_20260930/tests"
+    },
+    {
+      "log": "FINAL_BINDING_64.txt",
+      "exit_code": 0,
+      "decisive_output": "64 passed in 2.10s",
+      "log_sha256": "62194a9715c18f52e51db90ec8cbf8fd90242ff58480ece4584e734c9413c99f",
+      "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 R4P0A_RUNTIME_INPUTS=/root/.local/state/bass_r4p0a/evidence/runtime_inputs R4P0A_NATIVE_BUILD=/root/.local/state/bass_f1/runs/f1_native_20260928T064313Z/engine /root/.local/state/bass_f0/env/tp2e_f0_20260928T045058Z/bin/python -B -m pytest -q -p no:cacheprovider research/foundation_rebuild/ncp_shared_research_20260928/r4p0a_b0_static_tail_executor_20260930/tests"
+    }
+  ],
+  "new_native_operator_evaluations": 0,
+  "new_authorization_consumed": 0,
+  "synthetic_is_native_parity": false,
+  "fresh_package_replay": "REQUIRED_AFTER_FINAL_CLEAN_COMMIT"
+}

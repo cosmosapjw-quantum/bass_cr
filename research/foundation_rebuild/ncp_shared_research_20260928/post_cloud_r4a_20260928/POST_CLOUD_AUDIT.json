@@ -1,0 +1,73 @@
+{
+  "schema": "BASS_CR_R3_POST_CLOUD_AUDIT_V1",
+  "status": "R3_CLOUD_BLOCKED__BACKUP_ONLY",
+  "remote_identity": {
+    "research": {
+      "ref": "research/ncp-shared-r3-20260928",
+      "head": "6f4be73104d791011137659fe08c71b6e354aaf3",
+      "tree": "2218137c0bf1e0fcd6f284905414f3f8462d609d"
+    },
+    "implementation": {
+      "ref": "impl/ncp-r3-cache-audit-20260928",
+      "head": "ae22511993fda12b61be9ff13c62c34a95e689aa",
+      "tree": "3a398953d285949e94128590abcaefef32fc6b38"
+    },
+    "cloud_evidence": {
+      "ref": "codex/r3-cloud-review-cache-audit-20260928",
+      "head": "b20a863baebc232109dc8109d40515809ae4ffee",
+      "tree": "a888827cf07d9d24cc62360961eb79ef8d46429c",
+      "parent": "ae22511993fda12b61be9ff13c62c34a95e689aa"
+    }
+  },
+  "diff_audit": {
+    "ahead_by": 1,
+    "behind_by": 0,
+    "total_commits": 1,
+    "changed_files": [
+      "CACHE_AUDIT.json",
+      "CLOUD_REVIEW_RECEIPT.json",
+      "METRIC_DIAGNOSTICS.json",
+      "R3_RETURN.json",
+      "READER_ENVIRONMENT.json"
+    ],
+    "implementation_source_changed": false
+  },
+  "cloud_review": {
+    "verdict": "LOOKS_GOOD_FOR_CACHE_ONLY",
+    "findings": [],
+    "code_changes": [],
+    "environment": {
+      "python": "3.12.3",
+      "numpy": "2.3.5",
+      "scipy": "1.17.0"
+    },
+    "cache_run": {
+      "status": "R3_CACHE_REUSE_AND_METRIC_AUDIT_COMPLETE",
+      "tasks": 297,
+      "arrays": 2673,
+      "new_native_evaluations": 0
+    },
+    "metric": {
+      "max_relative_residual": 2.3253812582402828e-9,
+      "max_whitened_connection_spectral_norm_per_atomic_time": 1.9772810219871182e-10,
+      "continuous_global_supremum_bound": "NOT_CERTIFIED",
+      "eta": "NOT_CERTIFIED"
+    }
+  },
+  "exact_cloud_portable_zip": {
+    "file": "cache_audit_20260928T133401Z.zip",
+    "bytes": 3774880,
+    "sha256": "d21755fd5a5ce1d2e7da77d365b02d10a39c296103e9f54a950996492a06549c",
+    "current_chat_has_exact_bytes": false,
+    "dual_backup": "BLOCKED_SOURCE_BYTES_UNAVAILABLE"
+  },
+  "claim_ceiling": {
+    "capture_execution_allowed": false,
+    "production_admission": "HOLD",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "original_capture_gap_resolved": false,
+    "continuous_global_supremum_bound": false
+  },
+  "next_gate": "R4A_SELECTED_SPAN_PROVENANCE_AND_TRANSPORT_AUTHORITY_GATE"
+}

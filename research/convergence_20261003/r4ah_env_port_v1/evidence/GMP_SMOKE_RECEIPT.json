@@ -1,0 +1,70 @@
+{
+  "status": "GMP_GMPXX_COMPILE_LINK_EXACT_ARITHMETIC_SMOKE_PASS",
+  "scientific_native_build": false,
+  "atomic_integrals": 0,
+  "commands": [
+    {
+      "label": "compile",
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "/root/bass_cr_intake/r4ah_env_recovery_20261003/evidence/gmp_smoke/gmp_smoke.cpp",
+        "-lgmpxx",
+        "-lgmp",
+        "-o",
+        "/root/bass_cr_intake/r4ah_env_recovery_20261003/evidence/gmp_smoke/gmp_smoke_verified"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "run",
+      "command": [
+        "/root/bass_cr_intake/r4ah_env_recovery_20261003/evidence/gmp_smoke/gmp_smoke_verified"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "ldd",
+      "command": [
+        "ldd",
+        "/root/bass_cr_intake/r4ah_env_recovery_20261003/evidence/gmp_smoke/gmp_smoke_verified"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "compiler",
+      "command": [
+        "g++",
+        "--version"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "packages",
+      "command": [
+        "dpkg-query",
+        "-W",
+        "libgmp-dev",
+        "libgmp10",
+        "libgmpxx4ldbl"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "source_sha256": "c906d9e7ce2fbf5873732e0bb4541e1baec16c065409dae697aa5c02b75727a0",
+  "binary_sha256": "adbc567bc452735c141158e6d9da8aa2904653ccf8cd3ff5bb030298d304bf35",
+  "shared_library_pins": {
+    "/lib/x86_64-linux-gnu/libgmpxx.so.4": "ce7e88d711f00edc7b7da3d013d0f76707712e32314706f94340bdb727570ee1",
+    "/lib/x86_64-linux-gnu/libgmp.so.10": "0ccdfb6d6f5c039465f6d002cf7e4c072d48ac6a2cffc8dd6c748dec31592804",
+    "/lib/x86_64-linux-gnu/libstdc++.so.6": "1fd75fe70354a416d75aef22bcae68c47bd25d20e2d0568c30b1a9838cf62f11",
+    "/lib/x86_64-linux-gnu/libgcc_s.so.1": "d93224d2b0dab4247598be683adca02f5cf00586f99c187579cd7e92058fb7cb",
+    "/lib/x86_64-linux-gnu/libc.so.6": "c1e50a701d3245c8c45a1ba40151efe414ac41d2c9ae604087b4875e0d85c4fb",
+    "/lib/x86_64-linux-gnu/libm.so.6": "3a51627ed6b9bf776b69103c82ece3a32099db77821c9d92d5270a76c2aeaf58",
+    "/lib64/ld-linux-x86-64.so.2": "854a9eb45875e00f48e1e89d40251317931d2d82555ab612d6090beba0c9f972"
+  },
+  "runtime_output": "gmp=6.3.0 numerator=41152263004115226300411522630 denominator=1 square=15241578753238836750495351562536198787501905199875019052100\n",
+  "compiler_sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769",
+  "observed_utc": "2026-10-03T09:14:31Z"
+}

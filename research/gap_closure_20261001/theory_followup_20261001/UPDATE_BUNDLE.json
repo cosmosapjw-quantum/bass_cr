@@ -1,0 +1,481 @@
+{
+  "schema": "BASS_R4R_UPDATE_BUNDLE_V1",
+  "baseline_head": "9d908c64726c77be8a058b9a0100daf362a5c139",
+  "gap_updates": [
+    {
+      "gap_id": "G04",
+      "database_gap_id": "REPORT_GAP_04",
+      "status_before": "RESOLVED_WITH_LIMITATION",
+      "status_after": "RESOLVED_WITH_LIMITATION",
+      "record_after": {
+        "gap_id": "G04",
+        "database_gap_id": "REPORT_GAP_04",
+        "title": "| **P0** | No continuous \\(g(z)\\ge\\rho(z)\\) | Theory + numerics | Derive analytic matrix majorant or derivative/interval certificate | **3–10 days** initially | Upper bound valid between nodes and linked to analytic infinite remainder |",
+        "status": "RESOLVED_WITH_LIMITATION",
+        "evidence_status": [
+          "DERIVED",
+          "NUMERICALLY_CHECKED",
+          "IMPLEMENTATION_VERIFIED"
+        ],
+        "dependencies": [
+          "G01",
+          "G02",
+          "G03",
+          "G07",
+          "G08"
+        ],
+        "claims_closed": [
+          "Cancellation-aware single off-diagonal rate norm derived",
+          "Conditional compact-support majorant Z*a/[hbar*(R²-a²)] for an exact conforming isolated-invariant reference",
+          "Residual/gap reference-selector mapping bound and original-observable nonconvergence counterexample derived",
+          "Noncommuting inverse-square-root derivative bound derived",
+          "Exact-rational continuum finite-interval Level2 synthetic certificate implemented",
+          "Exact rational conforming reference and isolated sign/gap certificate constructed",
+          "Original-to-reference same-state projector map<=2.76856e-14 certified",
+          "All-R>=32 exact L2 Gram positivity and constructive finite reference bridge bound established; target FAIL",
+          "Ordered-gap instantaneous-projector O(Z^-2) tail theorem derived",
+          "Uniform normalized-center reference Gram[33/100,167/100] and condition<=167/33 for all displacements via ETF phase; sharp rate target remains open"
+        ],
+        "claims_open": [
+          "No sharp overlapping-support bridge bound meeting predeclared5e-6 per side",
+          "No archived-to-reference dynamics/state comparison or adopted reference model",
+          "No original fixed-J ordinary asymptotic limit certified",
+          "No total physical tail bound for the archived B0 trajectory"
+        ],
+        "artifacts": [
+          "majorant_analytic_20261001/CONTINUOUS_MAJORANT_ROUTE_A.md",
+          "majorant_analytic_20261001/REFERENCE_SELECTOR_REPAIR.md",
+          "majorant_analytic_20261001/ARCHIVED_RADIAL_AUDIT.json",
+          "majorant_validated_20261001/CONTINUOUS_MAJORANT_RESEARCH_REPORT.md",
+          "majorant_validated_20261001/SYNTHETIC_CONTINUUM_CERTIFICATE.json",
+          "reference_certificate_followup_20261001/REFERENCE_CERTIFICATE_PROOF.md",
+          "reference_certificate_followup_20261001/actual_certificate/REFERENCE_CERTIFICATE.json",
+          "gapped_tail_followup_20261001/GAPPED_TAIL_THEOREM.md",
+          "gapped_tail_followup_20261001/CONDITIONAL_CUTOFF.json",
+          "bridge_analysis_followup_20261001/BRIDGE_REPORT.md",
+          "asymptotic_observable_followup_20261001/ASYMPTOTIC_OBSERVABLE_THEOREM.md",
+          "theory_followup_20261001/REFERENCE_INDEPENDENT_REVIEW.json",
+          "bridge_analysis_followup_20261001/ETF_METRIC_THEOREM.md",
+          "bridge_analysis_followup_20261001/ETF_METRIC_CERTIFICATE.json",
+          "bridge_analysis_followup_20261001/ETF_VALIDATION.json",
+          "theory_followup_20261001/ETF_REVIEW.json"
+        ],
+        "source_ids": [
+          "Mathias1997"
+        ],
+        "tests": [
+          {
+            "root_commands": [
+              "python -m unittest -v test_analytic_majorant.py",
+              "python -m unittest -v test_validated_majorant.py",
+              "python -m unittest -v test_reference_selector.py"
+            ],
+            "passed": [
+              9,
+              23,
+              4
+            ],
+            "new_native_calls": 0
+          },
+          {
+            "loop": "R4R",
+            "shared_new_focused_tests": 30,
+            "per_suite": [
+              9,
+              9,
+              6,
+              6
+            ],
+            "native_calls": 0
+          }
+        ],
+        "external_runs": [],
+        "blocker_class": "NUMERICAL_METHOD_BLOCKER",
+        "next_minimum_action": "Develop cancellation-preserving overlap bound and a precisely scoped state/dynamics comparison; preserveG02/G03 fresh native authorization boundaries. Do not launchZ14312 transport from this theoretical benchmark.",
+        "legacy_report_row": {
+          "gap_id": "REPORT_GAP_04",
+          "line_number": 1166,
+          "status": "REPORTED_RECOMMENDATION_NOT_VALIDATED",
+          "verbatim": "| **P0** | No continuous \\(g(z)\\ge\\rho(z)\\) | Theory + numerics | Derive analytic matrix majorant or derivative/interval certificate | **3–10 days** initially | Upper bound valid between nodes and linked to analytic infinite remainder |"
+        },
+        "closure_label": "NAMED_REFERENCE_VALIDATED_ARCHIVED_DYNAMICS_AND_TARGET_OPEN",
+        "update_artifact": "theory_followup_20261001/UPDATE_BUNDLE.json",
+        "research_loop": "R4R_THEORY_FOLLOWUP_20261001"
+      }
+    },
+    {
+      "gap_id": "G05",
+      "database_gap_id": "REPORT_GAP_05",
+      "status_before": "UNRESOLVED",
+      "status_after": "RESOLVED_WITH_LIMITATION",
+      "record_after": {
+        "gap_id": "G05",
+        "database_gap_id": "REPORT_GAP_05",
+        "title": "| **P0** | No quantified infinite-tail integral | Theory | Integrate certified majorant; keep incoming/outgoing bounds separate | **<1 day after preceding gap** | Bound \\(<\\epsilon_{\\rm tail}\\) with complete provenance |",
+        "status": "RESOLVED_WITH_LIMITATION",
+        "evidence_status": [
+          "DERIVED",
+          "NUMERICALLY_CHECKED",
+          "IMPLEMENTATION_VERIFIED"
+        ],
+        "dependencies": [
+          "G04"
+        ],
+        "claims_closed": [
+          "Stable conditional p2 and compact-support one-sided integral formulas implemented",
+          "Exact rational p2 enclosure demonstrator verified",
+          "Exact named-reference spectral population has an asymptotic limit with rational O(Z^-2) far-tail bound",
+          "Pinned reference-gap bound meets far-only5e-6 at first integerZ14312; includes no useful finite bridge or state-transfer bound"
+        ],
+        "claims_open": [
+          "No sharp overlapping-support bridge bound meeting predeclared5e-6 per side",
+          "No archived-to-reference dynamics/state comparison or adopted reference model",
+          "No original fixed-J ordinary asymptotic limit certified",
+          "No total physical tail bound for the archived B0 trajectory"
+        ],
+        "artifacts": [
+          "majorant_validated_20261001/validated_majorant.py",
+          "majorant_analytic_20261001/analytic_majorant.py",
+          "ERROR_BUDGET_CURRENT_B0.json",
+          "reference_certificate_followup_20261001/REFERENCE_CERTIFICATE_PROOF.md",
+          "reference_certificate_followup_20261001/actual_certificate/REFERENCE_CERTIFICATE.json",
+          "gapped_tail_followup_20261001/GAPPED_TAIL_THEOREM.md",
+          "gapped_tail_followup_20261001/CONDITIONAL_CUTOFF.json",
+          "bridge_analysis_followup_20261001/BRIDGE_REPORT.md",
+          "asymptotic_observable_followup_20261001/ASYMPTOTIC_OBSERVABLE_THEOREM.md",
+          "theory_followup_20261001/REFERENCE_INDEPENDENT_REVIEW.json"
+        ],
+        "source_ids": [],
+        "tests": [
+          {
+            "loop": "R4R",
+            "shared_new_focused_tests": 30,
+            "per_suite": [
+              9,
+              9,
+              6,
+              6
+            ],
+            "native_calls": 0
+          }
+        ],
+        "external_runs": [],
+        "blocker_class": "NUMERICAL_METHOD_BLOCKER",
+        "next_minimum_action": "Develop cancellation-preserving overlap bound and a precisely scoped state/dynamics comparison; preserveG02/G03 fresh native authorization boundaries. Do not launchZ14312 transport from this theoretical benchmark.",
+        "legacy_report_row": {
+          "gap_id": "REPORT_GAP_05",
+          "line_number": 1167,
+          "status": "REPORTED_RECOMMENDATION_NOT_VALIDATED",
+          "verbatim": "| **P0** | No quantified infinite-tail integral | Theory | Integrate certified majorant; keep incoming/outgoing bounds separate | **<1 day after preceding gap** | Bound \\(<\\epsilon_{\\rm tail}\\) with complete provenance |"
+        },
+        "closure_label": "NAMED_REFERENCE_VALIDATED_ARCHIVED_DYNAMICS_AND_TARGET_OPEN",
+        "update_artifact": "theory_followup_20261001/UPDATE_BUNDLE.json",
+        "research_loop": "R4R_THEORY_FOLLOWUP_20261001"
+      }
+    }
+  ],
+  "claim_updates": [
+    {
+      "claim_id": "G04_CONFORMING_REFERENCE_ACTUAL_BINARY_BANK_VALIDATED",
+      "text": "The pinned archived B0 radial binary coefficients admit an explicitly defined rational C0 H1_0 repair preserving all l,m multiplets, with validated exact weak-Galerkin Gram positivity.",
+      "scope": "named repaired compact-support reference only; no model adoption",
+      "project_evidence": [
+        "reference_certificate_followup_20261001/REFERENCE_CERTIFICATE_PROOF.md",
+        "reference_certificate_followup_20261001/exact_reference.py",
+        "reference_certificate_followup_20261001/actual_certificate/EXACT_REPAIRED_REFERENCE.json",
+        "reference_certificate_followup_20261001/actual_certificate/REFERENCE_CERTIFICATE.json"
+      ],
+      "does_not_imply": [
+        "archived functions conform exactly",
+        "repaired functions belong to the strong Coulomb operator domain",
+        "old temporal qualification transfers"
+      ],
+      "certificate_class": "VALIDATED_NUMERICAL_BOUND",
+      "status": [
+        "DERIVED",
+        "IMPLEMENTATION_VERIFIED",
+        "NUMERICALLY_CHECKED"
+      ],
+      "assumptions": [],
+      "sources": [],
+      "research_loop": "R4R_THEORY_FOLLOWUP_20261001"
+    },
+    {
+      "claim_id": "G04_ISOLATED_REFERENCE_SPECTRAL_SELECTOR_GAP_VALIDATED",
+      "text": "For the actual repaired reference 9-channel isolated weak-Galerkin operator, exact interval inequalities certify negative rank5 and positive rank4, a>=0.12499999996,d>=0.0005525039691,r<=2.20011e-15 and selected-to-negative-projector distance<=1.75235e-14.",
+      "scope": "finite isolated weak-Galerkin compression, not full Coulomb spectral projector or strong residual",
+      "project_evidence": [
+        "reference_certificate_followup_20261001/REFERENCE_CERTIFICATE_PROOF.md",
+        "reference_certificate_followup_20261001/actual_certificate/REFERENCE_CERTIFICATE.json",
+        "reference_certificate_followup_20261001/CERTIFICATE_SUMMARY.json"
+      ],
+      "does_not_imply": [
+        "actual B0 trajectory changed",
+        "infinite-dimensional Coulomb spectral certificate",
+        "finite bridge or tail integral closed"
+      ],
+      "certificate_class": "VALIDATED_NUMERICAL_BOUND",
+      "status": [
+        "DERIVED",
+        "IMPLEMENTATION_VERIFIED",
+        "NUMERICALLY_CHECKED"
+      ],
+      "assumptions": [],
+      "sources": [],
+      "research_loop": "R4R_THEORY_FOLLOWUP_20261001"
+    },
+    {
+      "claim_id": "G04_ORIGINAL_TO_REFERENCE_OBSERVABLE_MAP_VALIDATED",
+      "text": "Exact L2 repair integration and residual-gap arithmetic certify the original selected physical projector and named negative reference projector differ in operator norm by at most2.76856e-14, hence the same-state observable error is at most N times this value.",
+      "scope": "same physical Hilbert space, same state, any common unitary translation/ETF; finite reference spectral projector only",
+      "project_evidence": [
+        "reference_certificate_followup_20261001/REFERENCE_CERTIFICATE_PROOF.md",
+        "reference_certificate_followup_20261001/actual_certificate/REFERENCE_CERTIFICATE.json",
+        "reference_certificate_followup_20261001/CERTIFICATE_SUMMARY.json"
+      ],
+      "does_not_imply": [
+        "original fixed-J ordinary asymptotic limit exists",
+        "archived state equals reference dynamical state",
+        "native authorization or reference adoption"
+      ],
+      "certificate_class": "VALIDATED_NUMERICAL_BOUND",
+      "status": [
+        "DERIVED",
+        "IMPLEMENTATION_VERIFIED",
+        "NUMERICALLY_CHECKED"
+      ],
+      "assumptions": [],
+      "sources": [],
+      "research_loop": "R4R_THEORY_FOLLOWUP_20261001"
+    },
+    {
+      "claim_id": "G04_GAPPED_REFERENCE_INVERSE_SQUARE_POPULATION_TAIL",
+      "text": "For an exact self-adjoint finite reference with an ordered isolated cluster, epsilon=O(R^-2) and derivative modulo scalars O(v R^-3), the fixed isolated spectral population has a limit and an O(Z^-2) certified conditional remainder.",
+      "status": [
+        "DERIVED",
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "scope": "Same exact reference trajectory and isolated projectile block after exact disjoint support; no whole two-center spectral gap assumption.",
+      "assumptions": [
+        "Exact conforming compact support and exact ETF cancellation",
+        "Ordered cluster gap Delta and 2 epsilon(Z)<Delta",
+        "Cluster continued by fixed separator/rank, not zero-energy sign cut",
+        "Same physical state for all projector comparisons"
+      ],
+      "project_evidence": [
+        "gapped_tail_followup_20261001/GAPPED_TAIL_THEOREM.md",
+        "gapped_tail_followup_20261001/VALIDATION.json"
+      ],
+      "does_not_imply": [
+        "Archived B0 original-selector limit",
+        "A finite bridge bound within target",
+        "Archived-to-reference dynamics certificate",
+        "An actual native run or adopted new model"
+      ],
+      "sources": [],
+      "research_loop": "R4R_THEORY_FOLLOWUP_20261001"
+    },
+    {
+      "claim_id": "G05_EXACT_REFERENCE_GAPPED_TAIL_CUTOFF_ARITHMETIC",
+      "text": "For the pinned exact reference gap Delta approximately0.1255525039332252 and a64,b2,q1,N1, the support-only bound first meets5e-6 at integer Z14312; adding the certified same-state projector discrepancy leaves the same integer.",
+      "status": [
+        "DERIVED",
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "scope": "Far-tail remainder benchmark only; the full one-side target is consumed before any finite bridge allowance.",
+      "assumptions": [
+        "Imported exact reference certificate identified by SHA256",
+        "No dynamical state transfer implicit",
+        "Both signed sides need their own actual state/bridge accounting"
+      ],
+      "project_evidence": [
+        "gapped_tail_followup_20261001/CONDITIONAL_CUTOFF.json",
+        "gapped_tail_followup_20261001/build_cutoff.py",
+        "gapped_tail_followup_20261001/test_gapped_tail.py"
+      ],
+      "does_not_imply": [
+        "Full one-side error <=5e-6 from archived ±12",
+        "A practicable or authorized Z14312 transport run",
+        "Physical G05 closure"
+      ],
+      "arithmetic_class": "EXACT_RATIONAL_ARITHMETIC",
+      "sources": [],
+      "research_loop": "R4R_THEORY_FOLLOWUP_20261001"
+    },
+    {
+      "claim_id": "G04_GAP_AND_AMPLITUDE_WITHOUT_DERIVATIVE_COUNTEREXAMPLE",
+      "text": "An exactly solvable resonantly rotating t^-2 perturbation keeps the spectral gap open but has O(t^-1) fixed-cluster population remainder; derivative control is essential for the improved power.",
+      "status": [
+        "DERIVED",
+        "NUMERICALLY_CHECKED"
+      ],
+      "scope": "Two-level exact analytical counterexample supplied by independent bridge review.",
+      "assumptions": [
+        "hbar1",
+        "H0=Delta sigma_z/2",
+        "Interaction-picture asymptotic state (1,i)/sqrt2"
+      ],
+      "project_evidence": [
+        "gapped_tail_followup_20261001/GAPPED_TAIL_THEOREM.md",
+        "gapped_tail_followup_20261001/test_gapped_tail.py"
+      ],
+      "does_not_imply": [
+        "Failure of the straight-line Coulomb derivative bound"
+      ],
+      "sources": [],
+      "research_loop": "R4R_THEORY_FOLLOWUP_20261001"
+    },
+    {
+      "claim_id": "G04_EXCLUSIVE_CAP_CONTINUUM_METRIC",
+      "text": "For all R>=32 the full 18-channel exact L2 Gram is positive by exact radial mass integrals and exclusive-cap geometry; both the archived literal L2 span and the named conforming reference are covered.",
+      "certificate_class": "CERTIFIED_EXACT_L2_REFERENCE",
+      "status": [
+        "DERIVED",
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "scope": "Exact physical L2 metric; rate statement only for named conforming reference; no adoption",
+      "project_evidence": [
+        "bridge_analysis_followup_20261001/BRIDGE_REPORT.md",
+        "bridge_analysis_followup_20261001/ARCHIVED_L2_METRIC_CERTIFICATE.json",
+        "bridge_analysis_followup_20261001/NAMED_REFERENCE_BRIDGE_CERTIFICATE.json"
+      ],
+      "does_not_imply": [
+        "Native quadrature certification",
+        "Useful probability target bound",
+        "Archived-to-reference dynamical equivalence"
+      ],
+      "assumptions": [],
+      "sources": [],
+      "research_loop": "R4R_THEORY_FOLLOWUP_20261001"
+    },
+    {
+      "claim_id": "G04_HARDY_FINITE_BRIDGE",
+      "text": "The named exact conforming weak Galerkin model has a continuous constant majorant on both signed bridges from |z|=32 to 128; its integral 6.26927233733826940e57 does not certify the 5e-6 target.",
+      "certificate_class": "CERTIFIED_NAMED_REFERENCE_TARGET_FAIL",
+      "status": [
+        "DERIVED",
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "scope": "Exact physical L2 metric; rate statement only for named conforming reference; no adoption",
+      "project_evidence": [
+        "bridge_analysis_followup_20261001/BRIDGE_REPORT.md",
+        "bridge_analysis_followup_20261001/ARCHIVED_L2_METRIC_CERTIFICATE.json",
+        "bridge_analysis_followup_20261001/NAMED_REFERENCE_BRIDGE_CERTIFICATE.json"
+      ],
+      "does_not_imply": [
+        "Native quadrature certification",
+        "Useful probability target bound",
+        "Archived-to-reference dynamical equivalence"
+      ],
+      "assumptions": [],
+      "sources": [],
+      "research_loop": "R4R_THEORY_FOLLOWUP_20261001"
+    },
+    {
+      "claim_id": "G11_REFERENCE_ORDINARY_LIMIT_CRITERION",
+      "text": "In the exact finite reference with integrable centered interaction, the observable has an ordinary asymptotic limit iff every nonzero grouped Bohr coefficient vanishes for its asymptotic state.",
+      "status": [
+        "DERIVED",
+        "SYMBOLICALLY_VERIFIED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "scope": "Named exact reference; same-state observable or compressed Hermitian contraction; actual B0 asymptotic state unavailable",
+      "project_evidence": [
+        "asymptotic_observable_followup_20261001/ASYMPTOTIC_OBSERVABLE_THEOREM.md",
+        "asymptotic_observable_followup_20261001/test_dephasing.py",
+        "bridge_analysis_followup_20261001/INDEPENDENT_THEOREM_REVIEW.json"
+      ],
+      "does_not_imply": [
+        "Original B0 ordinary limit exists",
+        "Reference dynamics adopted",
+        "Archived and reference states agree"
+      ],
+      "assumptions": [],
+      "sources": [],
+      "research_loop": "R4R_THEORY_FOLLOWUP_20261001"
+    },
+    {
+      "claim_id": "G11_REFERENCE_CESARO_DEPHASING_LIMIT",
+      "text": "The same exact reference always admits the long-time average determined by the energy-dephased observable, retaining exact degeneracies; this is not the instantaneous observable.",
+      "status": [
+        "DERIVED",
+        "SYMBOLICALLY_VERIFIED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "scope": "Named exact reference; same-state observable or compressed Hermitian contraction; actual B0 asymptotic state unavailable",
+      "project_evidence": [
+        "asymptotic_observable_followup_20261001/ASYMPTOTIC_OBSERVABLE_THEOREM.md",
+        "asymptotic_observable_followup_20261001/test_dephasing.py",
+        "bridge_analysis_followup_20261001/INDEPENDENT_THEOREM_REVIEW.json"
+      ],
+      "does_not_imply": [
+        "Original B0 ordinary limit exists",
+        "Reference dynamics adopted",
+        "Archived and reference states agree"
+      ],
+      "assumptions": [],
+      "sources": [],
+      "research_loop": "R4R_THEORY_FOLLOWUP_20261001"
+    },
+    {
+      "claim_id": "G06_UNIFORM_MAPPING_BAND_NOT_INTEGRATED_DEFECT",
+      "text": "A same-state projector discrepancy delta yields a uniform N*delta band around the reference population, and limiting oscillation diameter<=2N*delta when the reference limit exists; no infinite integration of a constant defect is needed.",
+      "status": [
+        "DERIVED",
+        "SYMBOLICALLY_VERIFIED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "scope": "Named exact reference; same-state observable or compressed Hermitian contraction; actual B0 asymptotic state unavailable",
+      "project_evidence": [
+        "asymptotic_observable_followup_20261001/ASYMPTOTIC_OBSERVABLE_THEOREM.md",
+        "asymptotic_observable_followup_20261001/test_dephasing.py",
+        "bridge_analysis_followup_20261001/INDEPENDENT_THEOREM_REVIEW.json"
+      ],
+      "does_not_imply": [
+        "Original B0 ordinary limit exists",
+        "Reference dynamics adopted",
+        "Archived and reference states agree"
+      ],
+      "assumptions": [],
+      "sources": [],
+      "research_loop": "R4R_THEORY_FOLLOWUP_20261001"
+    },
+    {
+      "claim_id": "G04_ETF_UNIFORM_METRIC_BOUND",
+      "text": "For the exact conforming reference, independently normalized center frames have Gram eigenvalues in [33/100,167/100] and condition number<=167/33 at every displacement, using the pinned relative ETF velocity in [2,3]. The same conservative bridge formula gives55408/11 per side, which fails5e-6.",
+      "status": [
+        "DERIVED",
+        "NUMERICALLY_CHECKED",
+        "IMPLEMENTATION_VERIFIED"
+      ],
+      "certificate_class": "EXACT_RATIONAL_BOUND",
+      "scope": "Named conforming reference; normalized center coordinates; raw coordinates require one-center mass congruence",
+      "assumptions": [
+        "H1 conforming compact support",
+        "Complete declared s/p one-center spaces",
+        "Relative ETF spatial phase exp(i*v*z_lab)",
+        "Exact gradient and velocity source pins"
+      ],
+      "sources": [],
+      "project_evidence": [
+        "bridge_analysis_followup_20261001/ETF_METRIC_THEOREM.md",
+        "bridge_analysis_followup_20261001/ETF_METRIC_CERTIFICATE.json",
+        "bridge_analysis_followup_20261001/ETF_VALIDATION.json",
+        "theory_followup_20261001/ETF_REVIEW.json"
+      ],
+      "does_not_imply": [
+        "Same scalar endpoints for raw coefficient Gram",
+        "Archived native quadrature error certified",
+        "Bridge target met",
+        "Reference adopted or archived dynamics transferred"
+      ],
+      "research_loop": "R4R_THEORY_FOLLOWUP_20261001"
+    }
+  ],
+  "new_claim_count": 12,
+  "native_calls": 0
+}

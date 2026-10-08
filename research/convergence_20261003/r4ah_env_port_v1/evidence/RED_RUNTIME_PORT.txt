@@ -1,0 +1,53 @@
+test_changed_membership_namespace_or_mount_cannot_reuse_observation (test_runtime_port.RuntimePortTests.test_changed_membership_namespace_or_mount_cannot_reuse_observation) ... 
+  test_changed_membership_namespace_or_mount_cannot_reuse_observation (test_runtime_port.RuntimePortTests.test_changed_membership_namespace_or_mount_cannot_reuse_observation) (part='membership') ... FAIL
+  test_changed_membership_namespace_or_mount_cannot_reuse_observation (test_runtime_port.RuntimePortTests.test_changed_membership_namespace_or_mount_cannot_reuse_observation) (part='namespaces') ... FAIL
+  test_changed_membership_namespace_or_mount_cannot_reuse_observation (test_runtime_port.RuntimePortTests.test_changed_membership_namespace_or_mount_cannot_reuse_observation) (part='mount') ... FAIL
+test_changed_usage_and_timestamp_do_not_reuse_values (test_runtime_port.RuntimePortTests.test_changed_usage_and_timestamp_do_not_reuse_values) ... ok
+test_missing_binding_is_rejected (test_runtime_port.RuntimePortTests.test_missing_binding_is_rejected) ... FAIL
+test_runtime_observes_actual_nonroot_process_not_fixed_mount_root (test_runtime_port.RuntimePortTests.test_runtime_observes_actual_nonroot_process_not_fixed_mount_root) ... FAIL
+test_three_worker_memory_and_coordinator_thresholds_unchanged (test_runtime_port.RuntimePortTests.test_three_worker_memory_and_coordinator_thresholds_unchanged) ... ok
+
+======================================================================
+FAIL: test_changed_membership_namespace_or_mount_cannot_reuse_observation (test_runtime_port.RuntimePortTests.test_changed_membership_namespace_or_mount_cannot_reuse_observation) (part='membership')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/bass_cr_intake/r4am_20261003/repository/research/convergence_20261003/r4ah_env_port_v1/tests/test_runtime_port.py", line 32, in test_changed_membership_namespace_or_mount_cannot_reuse_observation
+    with self.assertRaises(reader.ResourceError):reader.assert_same_hierarchy(original,changed)
+AssertionError: ResourceError not raised
+
+======================================================================
+FAIL: test_changed_membership_namespace_or_mount_cannot_reuse_observation (test_runtime_port.RuntimePortTests.test_changed_membership_namespace_or_mount_cannot_reuse_observation) (part='namespaces')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/bass_cr_intake/r4am_20261003/repository/research/convergence_20261003/r4ah_env_port_v1/tests/test_runtime_port.py", line 32, in test_changed_membership_namespace_or_mount_cannot_reuse_observation
+    with self.assertRaises(reader.ResourceError):reader.assert_same_hierarchy(original,changed)
+AssertionError: ResourceError not raised
+
+======================================================================
+FAIL: test_changed_membership_namespace_or_mount_cannot_reuse_observation (test_runtime_port.RuntimePortTests.test_changed_membership_namespace_or_mount_cannot_reuse_observation) (part='mount')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/bass_cr_intake/r4am_20261003/repository/research/convergence_20261003/r4ah_env_port_v1/tests/test_runtime_port.py", line 32, in test_changed_membership_namespace_or_mount_cannot_reuse_observation
+    with self.assertRaises(reader.ResourceError):reader.assert_same_hierarchy(original,changed)
+AssertionError: ResourceError not raised
+
+======================================================================
+FAIL: test_missing_binding_is_rejected (test_runtime_port.RuntimePortTests.test_missing_binding_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/bass_cr_intake/r4am_20261003/repository/research/convergence_20261003/r4ah_env_port_v1/tests/test_runtime_port.py", line 40, in test_missing_binding_is_rejected
+    with self.assertRaises(reader.ResourceError):reader.assert_same_hierarchy({}, {})
+AssertionError: ResourceError not raised
+
+======================================================================
+FAIL: test_runtime_observes_actual_nonroot_process_not_fixed_mount_root (test_runtime_port.RuntimePortTests.test_runtime_observes_actual_nonroot_process_not_fixed_mount_root)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/bass_cr_intake/r4am_20261003/repository/research/convergence_20261003/r4ah_env_port_v1/tests/test_runtime_port.py", line 20, in test_runtime_observes_actual_nonroot_process_not_fixed_mount_root
+    self.assertIsInstance(result,dict,'live v2 environment rejected by fixed-root reader')
+AssertionError: 'cgroup-v2 resource reader required; no guessed quotas' is not an instance of <class 'dict'> : live v2 environment rejected by fixed-root reader
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.002s
+
+FAILED (failures=5)

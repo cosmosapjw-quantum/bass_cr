@@ -1,0 +1,106 @@
+{
+  "actual_gpu_test": "20 passed, 0 skipped",
+  "cpu_library_support": "threadpoolctl 3.6.0 reused as exact copied Python module; scientific NumPy/SciPy/CuPy versions unchanged",
+  "gpu_library_support": "existing libcufft.so.11 exposed through LD_LIBRARY_PATH; no package upgrade",
+  "production_63M_speed": "NOT_MEASURED",
+  "rows": [
+    {
+      "backend": "cupy",
+      "candidate": "buffer_reuse",
+      "case": "gpu_medium_retry2",
+      "fft_workers": 1,
+      "median_candidate_wall_seconds": 0.0022382489987649024,
+      "median_device_speed_ratio_reference_over_candidate": 1.0252177676356662,
+      "median_reference_wall_seconds": 0.0022940939998079557,
+      "median_wall_speed_ratio_reference_over_candidate": 1.0249503076171906,
+      "relative_norm_difference": 0.0,
+      "relative_state_l2": 7.809212911654609e-16,
+      "result_sha256": "94ada5c69089b9be0d0ddff18c04ada2cb07c7f944570205d6bab3b4c7bf6266",
+      "shape": [
+        64,
+        64,
+        96
+      ],
+      "status": "BENCHMARK_COMPLETE_PARITY_PASSED"
+    },
+    {
+      "backend": "cupy",
+      "candidate": "buffer_reuse",
+      "case": "gpu_larger_retry2",
+      "fft_workers": 1,
+      "median_candidate_wall_seconds": 0.005467265998959192,
+      "median_device_speed_ratio_reference_over_candidate": 0.9996482344856514,
+      "median_reference_wall_seconds": 0.00546535200010112,
+      "median_wall_speed_ratio_reference_over_candidate": 0.9996499166386936,
+      "relative_norm_difference": 3.3306690738760006e-16,
+      "relative_state_l2": 7.845820640602516e-16,
+      "result_sha256": "d8aa4a828c20867275eb889571dcdd764e44fa7049f9c13a9ec328d0a8b981ea",
+      "shape": [
+        128,
+        128,
+        64
+      ],
+      "status": "BENCHMARK_COMPLETE_PARITY_PASSED"
+    },
+    {
+      "backend": "numpy",
+      "candidate": "buffer_reuse",
+      "case": "cpu_native_retry1",
+      "fft_workers": 1,
+      "median_candidate_wall_seconds": 0.09375101099976746,
+      "median_device_speed_ratio_reference_over_candidate": null,
+      "median_reference_wall_seconds": 0.10222290099954989,
+      "median_wall_speed_ratio_reference_over_candidate": 1.0903658521592203,
+      "relative_norm_difference": 0.0,
+      "relative_state_l2": 6.439309205190762e-16,
+      "result_sha256": "27483261619668259bf3f27e581b0b02d1a8bf1b268de24ef5735df6e2e1f00f",
+      "shape": [
+        64,
+        64,
+        96
+      ],
+      "status": "BENCHMARK_COMPLETE_PARITY_PASSED"
+    },
+    {
+      "backend": "numpy",
+      "candidate": "scipy_fft_workers",
+      "case": "cpu_scipy_w1_retry1",
+      "fft_workers": 1,
+      "median_candidate_wall_seconds": 0.06512249600018549,
+      "median_device_speed_ratio_reference_over_candidate": null,
+      "median_reference_wall_seconds": 0.10170988400022907,
+      "median_wall_speed_ratio_reference_over_candidate": 1.561824104529706,
+      "relative_norm_difference": 0.0,
+      "relative_state_l2": 6.439309205190762e-16,
+      "result_sha256": "2ea0adf56261d794e7cd5f3fe74c4ae57022c0ec460d14a2046488bcfb66e5eb",
+      "shape": [
+        64,
+        64,
+        96
+      ],
+      "status": "BENCHMARK_COMPLETE_PARITY_PASSED"
+    },
+    {
+      "backend": "numpy",
+      "candidate": "scipy_fft_workers",
+      "case": "cpu_scipy_w4_retry1",
+      "fft_workers": 4,
+      "median_candidate_wall_seconds": 0.04763006299981498,
+      "median_device_speed_ratio_reference_over_candidate": null,
+      "median_reference_wall_seconds": 0.09972194700094406,
+      "median_wall_speed_ratio_reference_over_candidate": 2.093676571482415,
+      "relative_norm_difference": 0.0,
+      "relative_state_l2": 6.439309205190762e-16,
+      "result_sha256": "ca913e97350ff5b42c5e8ef491eb516250bffd96d1637c4967728e1d7aed03ff",
+      "shape": [
+        64,
+        64,
+        96
+      ],
+      "status": "BENCHMARK_COMPLETE_PARITY_PASSED"
+    }
+  ],
+  "same_discrete_state_parity": true,
+  "schema": "BASS_CR_R3M20_N1_LOCAL_MICROBENCH_SUMMARY_V1",
+  "scope": "four steps, five repeats, matched microtrajectory; excludes setup/reset/validation/projector/checkpoint"
+}

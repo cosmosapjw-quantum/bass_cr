@@ -1,0 +1,108 @@
+{
+  "status": "PASS_SCOPED_INPUT_AND_RESULT_INVARIANTS",
+  "checks": [
+    {
+      "run": "tdl_dt025",
+      "reference": "tdl_cap_base",
+      "changed_fields": [
+        "dt"
+      ],
+      "status": "PASS"
+    },
+    {
+      "run": "tdl_imag025",
+      "reference": "tdl_cap_base",
+      "changed_fields": [
+        "imag_dt",
+        "imag_steps"
+      ],
+      "status": "PASS"
+    },
+    {
+      "run": "tdl_imag025_long",
+      "reference": "tdl_imag025",
+      "changed_fields": [
+        "imag_steps"
+      ],
+      "status": "PASS"
+    },
+    {
+      "run": "tdl_refined_dx03125",
+      "reference": "tdl_imag025_long",
+      "changed_fields": [
+        "grid.dx"
+      ],
+      "status": "PASS"
+    },
+    {
+      "run": "tdl_refined_dx025",
+      "reference": "tdl_refined_dx03125",
+      "changed_fields": [
+        "grid.dx"
+      ],
+      "status": "PASS"
+    },
+    {
+      "run": "aocc_dt025",
+      "reference": "aocc_base",
+      "changed_fields": [
+        "dt"
+      ],
+      "status": "PASS"
+    },
+    {
+      "run": "aocc_radial_only",
+      "reference": "aocc_base",
+      "changed_fields": [
+        "np",
+        "ns"
+      ],
+      "status": "PASS"
+    },
+    {
+      "run": "aocc_exponent_only",
+      "reference": "aocc_base",
+      "changed_fields": [
+        "alpha_max"
+      ],
+      "status": "PASS"
+    },
+    {
+      "run": "tdl_cap_base",
+      "complete_checkpoint_seal": "PASS",
+      "finite_span_invariants": "PASS",
+      "scientific_admission": false
+    },
+    {
+      "run": "tdl_dt025",
+      "complete_checkpoint_seal": "PASS",
+      "finite_span_invariants": "PASS",
+      "scientific_admission": false
+    },
+    {
+      "run": "tdl_imag025",
+      "complete_checkpoint_seal": "PASS",
+      "finite_span_invariants": "PASS",
+      "scientific_admission": false
+    },
+    {
+      "run": "tdl_imag025_long",
+      "complete_checkpoint_seal": "PASS",
+      "finite_span_invariants": "PASS",
+      "scientific_admission": false
+    },
+    {
+      "run": "tdl_refined_dx03125",
+      "complete_checkpoint_seal": "PASS",
+      "finite_span_invariants": "PASS",
+      "scientific_admission": false
+    },
+    {
+      "run": "tdl_refined_dx025",
+      "complete_checkpoint_seal": "PASS",
+      "finite_span_invariants": "PASS",
+      "scientific_admission": false
+    }
+  ],
+  "numerical_convergence_not_implied": true
+}

@@ -1,0 +1,141 @@
+{
+  "schema": "BASS_CR_R3M17_INDEPENDENT_DECISION_REVIEW_V1",
+  "reviewed_utc": "2026-09-22T23:07:31.893299+00:00",
+  "reviewer": "independent_review subagent; candidate generation and validation design not performed by reviewer",
+  "base_commit": "7844bc0d8122070b267ee77c75cb2c9447435155",
+  "candidate_identity": "reviewed file SHA256 inventory below; candidate commit not yet published at review time",
+  "decision": "PROMOTE_BOUNDED_DIAGNOSTIC_INFRASTRUCTURE_ONLY",
+  "scientific_production_decision": "HOLD",
+  "inherited_scientific_status": "TIME_REFINEMENT_STILL_OPEN",
+  "scope": [
+    "Stable weighted phase-aligned metrics and at-most-512-point independent same-discretization temporal oracles",
+    "Exact frozen B2 family metadata planning and signed actual-dt empirical temporal analysis",
+    "Sealed checkpoint generation retention and fresh-path local recovery under single-writer atomic-replace protocol",
+    "Bounded AOCC matrix-identity diagnostics without trajectories",
+    "Repository-native single-B2 execution handoff"
+  ],
+  "not_promoted": [
+    "Production P1/P2/P3 accuracy",
+    "Coulomb continuum spatial discretization",
+    "Large-grid temporal asymptotic order or certified remainder",
+    "CAP/boundary and moving-isolated-atom validation",
+    "All-bound channels, b integration, 50/225 keV/u, physical rate",
+    "GPU/CuPy runtime execution or remote restore"
+  ],
+  "findings": [
+    {
+      "id": "IR01",
+      "priority": "medium",
+      "status": "RESOLVED",
+      "location": "scripts/r3m17_aocc_metric.py:run_audit",
+      "finding": "Bounded matrix diagnostic initially allowed unbounded ns/np and sample counts before constructing matrices.",
+      "repair": "Pre-model validation caps ns+3*np <=32, time samples <=9 and derivative steps <=8; preserves rejected-input evidence.",
+      "verification": "Independent targeted run of tests/test_r3m17_aocc_metric.py: 23 passed in 1.71s."
+    },
+    {
+      "id": "IR02",
+      "priority": "medium",
+      "status": "RESOLVED",
+      "location": "scripts/r3m17_checkpoint_guard.py:validate_checkpoint",
+      "finding": "Deleting both prepared_array_digest and internal_array_digest produced None==None and PUBLISHED_VERIFIED_LOCAL despite malformed v2 witness.",
+      "first_failure_evidence": "results/R3M17/independent_review/missing_witness_digest_before_fix.json",
+      "repair": "Require four 64-character lowercase hex witness identities, nonempty prepared/runtime identity dictionaries, backend/grid/dtype/dv consistency and exact booleans. Analyzer invokes this guard and binds completed receipt plus initial/norm metadata.",
+      "verification": "Independent targeted checkpoint+temporal run after repair: 58 passed in 2.14s, including missing-both-digest and malformed-runtime rejection."
+    },
+    {
+      "id": "IR03",
+      "priority": "medium",
+      "status": "RESOLVED_CODE_AND_EXECUTION_CONTRACT",
+      "location": "scripts/r3m17_preflight.py command plan; docs/r3m17/LOCAL_CODEX_HANDOFF.md section 2",
+      "finding": "A raw loop over collision chunk argv without generation snapshots would omit the new recovery safeguard.",
+      "repair": "Preflight V2 emits a required witnessed snapshot after every one of 29 collision chunks, with stop/finalization dependencies and retained-storage accounting. Authoritative handoff preserves single-writer/fresh-path sequencing; plan remains metadata, not an automatic executor.",
+      "verification": "Independent bounded code/test inspection; owner targeted preflight V2 evidence: 16 passed in 0.62s. No full-suite reexecution necessary."
+    }
+  ],
+  "independent_execution": [
+    {
+      "scope": "temporal/reference/preflight before narrow integrity repairs",
+      "command": "PYTHONPATH=/workspace/scratch/235b855501c6/test_deps:. OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m pytest -p no:cacheprovider tests/test_r3m17_temporal.py tests/test_r3m17_reference.py tests/test_r3m17_preflight.py -q",
+      "actual_stdout": "62 passed in 2.77s",
+      "exit_code": 0
+    },
+    {
+      "scope": "AOCC after bound repair",
+      "actual_stdout": "23 passed in 1.71s",
+      "exit_code": 0
+    },
+    {
+      "scope": "checkpoint and temporal after witness repair and analyzer linkage",
+      "actual_stdout": "58 passed in 2.14s",
+      "exit_code": 0
+    }
+  ],
+  "test_count_semantics": "Separate overlapping test invocations and patch states; do not sum as a new unique-suite count. Final integrated regression belongs to owner evidence.",
+  "numerical_review": {
+    "actual_dt_relation": "(dt0^p-dt1^p)/(dt1^p-dt2^p)=(P1-P0)/(P2-P1) implemented with expm1; signed correction sign and unequal-ratio treatment verified.",
+    "gates": "Sign reversal, unresolved differences, non-contraction and zero denominator cannot close a budget. Three-level fit is conditional empirical and budget_closed remains false.",
+    "oracle": "Explicit DFT full-H eigendecomposition and independent full-H moving DOP853 references; shared H_h is correctly disclosed, not continuum-independent.",
+    "tiny_moving_orders": [
+      1.9974156369998248,
+      1.999351506552713
+    ],
+    "oracle_tighter_repeat_unaligned_distance": 1.3270179170918764e-11,
+    "oracle_claim_limit": "Small periodic 64-point h=.7,T=.4 example; not production Coulomb capture data.",
+    "recovery_limit": "Hardlinks retain old inode only for atomic replacement and single-writer protocol. Every retained generation consumes another full state after the next save. No protection from arbitrary in-place writes/storage failure claimed.",
+    "AOCC_limit": "Independent dot(O)/dot(R) sample tests do not validate full trajectories, anti-Hermitian connection components, basis truncation or common capture channels."
+  },
+  "protected_tracked_files_changed": [],
+  "frozen_numerical_source_digest": "581ff84930bb862efafdfec5d39d5b25aebf9297ce7ce45f833a5abe125b2a5b",
+  "new_production_full_collisions_executed_by_reviewer": 0,
+  "unresolved_blocking_findings_within_promoted_scope": [],
+  "next_canonical_scientific_node": "N1_TDL_B_DT0125_SINGLE_COLLISION_TEMPORAL_RESOLUTION",
+  "reviewed_files_sha256": {
+    "scripts/r3m17_aocc_metric.py": "f6e1cd43602693f2405be3db8bff766bf316040e57f6b2c1d6b8bd219641aaf3",
+    "scripts/r3m17_checkpoint_guard.py": "83ada4d8cfa408e3508900b223e539483efed7d9ed3fa68277c54c92c1430f53",
+    "scripts/r3m17_preflight.py": "e7d1e5f4bd6acd2a121fcc447eca8bb94741e1bdc7ba290aed303aaa71954fe3",
+    "scripts/r3m17_reference.py": "185465692b7816a80f6a66b66179c800d4990577a6f2e92ab355289c35a9f767",
+    "scripts/r3m17_temporal.py": "ada46047152184ae1f39675c218a013fac35ad7ed8331a8f783b9096903032e0",
+    "tests/test_r3m17_aocc_metric.py": "d7789280845391571cc1e7932dc900bb975cc370fc54d200fa28dbbaf9c7576a",
+    "tests/test_r3m17_checkpoint_guard.py": "c55c6f54c9bbcf2e008bf8a8ad233519eafafaaf9b43807f8427e8ed7f716d25",
+    "tests/test_r3m17_preflight.py": "4474f866aa77c8389944383709cccdc820ec95e5599572b110c9ee75623e8eef",
+    "tests/test_r3m17_reference.py": "6935bb15120cc12a5fa55e6a33f6060f75fb4064ed9c68f0f752980dda836800",
+    "tests/test_r3m17_temporal.py": "6cf66fa4c6b4dc10a3b94d33ec334633d8f5c6416a7fac605a70331d43df6f98",
+    "docs/r3m17/SCIENTIFIC_CONTRACT.md": "c8188c67e90b76f11e1e05f654cbc6fd59d33574189073aa910cb2b8d6f4d58d",
+    "docs/r3m17/REPORT_KO.md": "cd13ed36e942818bb9f1109e35947db0afd4f61f70e33971e1d3b1e1a3c3f4e5",
+    "docs/r3m17/LOCAL_CODEX_HANDOFF.md": "57d51853a3a40448449c2da09e99b837e4e021af02522193dc1300020bcf4d3b",
+    "results/R3M17/reference/tiny_temporal_oracle_v2.json": "a625c8c3f58e267ce5cad38f34a27327f0e451d2de59182e109ccdeb624c73a1",
+    "results/R3M17/aocc/smoke_matrices/result.json": "e61a2bca7428a4b4327dd3122500f0f1f6ced6d4defbfaed00cb04ae077aabe1"
+  },
+  "final_limit": "This decision is limited to reviewed files and contract. It does not authorize additional collisions, change tolerances/physical Hamiltonian, publish/merge main, or replace scientific admission.",
+  "bounded_addenda": [
+    {
+      "reviewed_utc": "2026-09-22T23:10:01.274688+00:00",
+      "scope": "IR03 final preflight V2 integration only; no repeated full review",
+      "previous_files_sha256": {
+        "scripts/r3m17_preflight.py": "be1ca2081b3c08f29bc53694654652f95ebcc4d9ca832e8eaa7736a14d04bbc2",
+        "tests/test_r3m17_preflight.py": "bcc9cf771ab899a100e6621a6f72900d6cff254546259a7a33398b089f0765d5"
+      },
+      "reviewed_files_sha256": {
+        "scripts/r3m17_preflight.py": "e7d1e5f4bd6acd2a121fcc447eca8bb94741e1bdc7ba290aed303aaa71954fe3",
+        "tests/test_r3m17_preflight.py": "4474f866aa77c8389944383709cccdc820ec95e5599572b110c9ee75623e8eef"
+      },
+      "checks": [
+        "29 collision commands each immediately followed by witnessed checkpoint snapshot",
+        "Both phases stop on previous failure; snapshot must finish before next chunk",
+        "No allow-unwitnessed flag in production snapshot argv",
+        "Generation paths are fresh per expected completed count",
+        "Same-filesystem parent prerequisite and 29 full state retention estimate explicitly preserved",
+        "40 GiB floor explicitly not a sufficient-storage certificate; local full accounting still required"
+      ],
+      "owner_test_evidence": {
+        "path": "results/R3M17/receipts/preflight_v2_tests.stdout",
+        "sha256": "f56dd4ca05ff45af426ff172d2ad855bb378255cafc58876326c27c4d453b595",
+        "observed_stdout": "................                                                         [100%]\n16 passed in 0.62s",
+        "execution_class": "owner targeted execution, independently read by reviewer"
+      },
+      "additional_tests_run_by_reviewer": false,
+      "decision_unchanged": "PROMOTE_BOUNDED_DIAGNOSTIC_INFRASTRUCTURE_ONLY; scientific production HOLD",
+      "new_blocking_findings": []
+    }
+  ]
+}

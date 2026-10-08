@@ -1,0 +1,70 @@
+{
+  "schema": "R3M17_AOCC_EXECUTION_RECEIPT_V1",
+  "created_utc": "2026-09-22T23:00:05.140112+00:00",
+  "runs": [
+    {
+      "id": "initial_test_runtime",
+      "exit_code": 1,
+      "stdout": "tdd_initial.stdout.log",
+      "stderr": "tdd_initial.stderr.log",
+      "classification": "RUNTIME_ENVIRONMENT",
+      "detail": "pytest not installed in primary Python; reused already prepared test_deps afterward",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "51f5550d86043279227c92b72199d4ee1f66d30623405f70c98442058ffe76c7"
+    },
+    {
+      "id": "test_before_implementation",
+      "exit_code": 2,
+      "stdout": "tdd_missing_sidecar.stdout.log",
+      "stderr": "tdd_missing_sidecar.stderr.log",
+      "classification": "EXPECTED_TDD_MISSING_IMPLEMENTATION",
+      "detail": "FileNotFoundError for scripts/r3m17_aocc_metric.py",
+      "stdout_sha256": "c5e1facdfe57f27969f7611a21d5e0cf3a0bbb10c6b23cf0d38f272ee6e8ef40",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "first_implementation_tests",
+      "exit_code": 0,
+      "stdout": "first_implementation.stdout.log",
+      "stderr": "first_implementation.stderr.log",
+      "passed": 12,
+      "stdout_sha256": "df753a63fdf3543ad1a35f1ec6a836475a968a64aff5a20226f0564cf30b4580",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "actual_smoke_matrix_evaluations",
+      "exit_code": 0,
+      "stdout": "smoke_matrices.stdout.log",
+      "stderr": "smoke_matrices.stderr.log",
+      "scientific_trajectory_count": 0,
+      "result": "smoke_matrices/result.json",
+      "stdout_sha256": "0d7486304f427a104b2080b23fc08630b63438669d900494bf232fe57b6973a2",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "final_tests_with_primitive_etf_oracle",
+      "exit_code": 0,
+      "stdout": "final_tests.stdout.log",
+      "stderr": "final_tests.stderr.log",
+      "passed": 13,
+      "stdout_sha256": "9b64206160ef3982f7adea27db5cabcfbd88c986a1d809dca88a1e5a8b1ec79e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "files": [
+    {
+      "path": "scripts/r3m17_aocc_metric.py",
+      "sha256": "8a4b571d2bf8afa132f8c87b496170205e3e2ad763fe0c01b6477b8b9d3db01a",
+      "size_bytes": 11666
+    },
+    {
+      "path": "tests/test_r3m17_aocc_metric.py",
+      "sha256": "9e621df440ae96e735af4674bc5c35198b15608f2bdceb54c01387abd846dc43",
+      "size_bytes": 5706
+    }
+  ],
+  "numerical_source_digest_after": "581ff84930bb862efafdfec5d39d5b25aebf9297ce7ce45f833a5abe125b2a5b",
+  "production_admission": "HOLD",
+  "backup_status": "NOT_REQUESTED_BY_SUBTASK_NO_PROVIDER_UPLOAD",
+  "claim": "Local matrix identity and bounded test behavior only; no AOCC full trajectory, d channels, basis convergence or physical observable validated"
+}

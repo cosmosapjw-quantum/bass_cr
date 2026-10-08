@@ -1,0 +1,13 @@
+**No concrete current-task blocker or major scientific error found** at exact HEAD `3495713b449e9f0290878c78247114bf03e51c7d` on the requested branch. The evidence supports **local event-window GO only**.
+
+- **Seals:** All 62 frozen source hashes, the computation key, generation JSON seals, and contract → preflight/warmup/result → manifest → completion links verify locally. [Manifest](./results/R3M25/ATTEMPT_2/MANIFEST.json)
+- **Scalar gates:** Recalculated orders are **4.202021 and 4.045840**. The finest difference, **5.02659×10⁻¹⁰**, passes the fixed **1.52801×10⁻⁹** self-scaled limit. All ladder signals exceed the **1.66290×10⁻¹³** floor; calibration and Strang-scale gates also pass. [Results](./results/R3M25/ATTEMPT_2/RESULT.json)
+- **Independence:** The n8 substep repeat changes actual work from **32×9 = 288** to **64×8 = 512** matvecs. The tighter n16 run is correctly skipped and contributes no independent evidence.
+- **Geometry:** Exactly **42 warmup steps**, from step 1152 to 1194, produce the shared derived input. The interval **[−0.01666523136, +0.03333046273] au** brackets physical t=0. [Contract](./results/R3M25/CONTRACT_2.json)
+- **Accounting:** Attempt 2 totals **2,523 matvecs / 5,046 FFTs**; including the first resource failure gives **2,524 matvecs**. The 3,879 worst-case count fits 4,000. Recorded total/event times **585.053/578.883 s** and sampled GPU/host reserves satisfy their limits.
+
+**Production remains HOLD; b-grid remains NO_GO.** Independently recalculated B1→B2 channel changes are **0.278693%, 0.259131%, 0.256564%**, all above 0.10%. Global temporal error remains unevaluated. [Temporal evidence](./results/R3M18/B_TEMPORAL_ANALYSIS.json)
+
+Limitations: source/JSON scalar and seal-link audit only. No independent state-array recomputation or array rehashing, continuous resource verification, GPU execution, agents, edits, or remote publication verification.
+
+

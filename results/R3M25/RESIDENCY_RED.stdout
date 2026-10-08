@@ -1,0 +1,35 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_____ test_probe_releases_split_step_buffers_before_held_basis_allocation ______
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x70320c72e000>
+
+    def test_probe_releases_split_step_buffers_before_held_basis_allocation(monkeypatch):
+        runner = SimpleNamespace(kin=object(), mask=object(), cap_half=object())
+        budget = SimpleNamespace(count=0, check=lambda: None)
+        def act(value, _time):
+            budget.count += 1
+            return value
+        mf = SimpleNamespace(generator_matvec=act)
+        state = np.ones((2, 2), dtype=np.complex128)
+        allocated = []
+        def empty_like(value):
+            assert value is state
+            assert not any(hasattr(runner, name) for name in ('kin','mask','cap_half'))
+            allocated.append(True)
+            return np.empty_like(value)
+        pool = SimpleNamespace(free_all_blocks=lambda: None)
+        cp = SimpleNamespace(empty_like=empty_like,
+            get_default_memory_pool=lambda: pool,
+            cuda=SimpleNamespace(get_current_stream=lambda:
+                SimpleNamespace(synchronize=lambda: None)))
+        monkeypatch.setattr(event, '_resources', lambda *_args, **_kwargs: None)
+>       samples = event._probe_with_released_split_buffers(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            cp, runner, mf, state, budget, {'gpu': [], 'host': []}, 0.)
+E       AttributeError: module 'scripts.r3m25_event_window' has no attribute '_probe_with_released_split_buffers'
+
+tests/test_r3m25_event_window.py:173: AttributeError
+=========================== short test summary info ============================
+FAILED tests/test_r3m25_event_window.py::test_probe_releases_split_step_buffers_before_held_basis_allocation
+1 failed in 0.10s

@@ -1,0 +1,195 @@
+{
+  "schema": "BASS_R4Z_CENTRAL_DERIVATIVE_CONTRACT_V1",
+  "date_KST": "2026-10-02",
+  "base_commit": "95ebfb12951083593dfd4b5fd8972c2f123aa645",
+  "selected_priority": "Independent central derivative identity numerical check using individually spatially qualified S stencils of separate continuous candidate",
+  "authority": "Current user request to perform next highest-priority research step; prior same-branch publication and dual backup authorization continues",
+  "model_metadata": "UNAVAILABLE; shared model-independent harness rules",
+  "basis_identity": "17c0215979675e40db364207ce138c5efb58cb24c22824e418f5abe3cfeb49ef",
+  "geometry": {
+    "center_z_a0": 0.0,
+    "b_a0": 2.0,
+    "energy_keV_per_u": 100.0,
+    "charges": [
+      1,
+      1
+    ],
+    "channels": 18,
+    "velocity_a0_per_ta": 2.00798106651023,
+    "trajectory": {
+      "origins": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          2.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "velocities": "target zero; projectile (0,0,v)",
+      "time_mapping": "t=float(z_a0/velocity); record requested z.hex, time.hex, actual trajectory position; use original v/(2h) centered FD formula"
+    }
+  },
+  "h_ladder_a0": [
+    0.4,
+    0.2,
+    0.1,
+    0.05,
+    0.025,
+    0.0125
+  ],
+  "required_z_a0": [
+    -0.4,
+    -0.2,
+    -0.1,
+    -0.05,
+    -0.025,
+    -0.0125,
+    0.0,
+    0.0125,
+    0.025,
+    0.05,
+    0.1,
+    0.2,
+    0.4
+  ],
+  "fixed_numerics": {
+    "FP64": true,
+    "same_center_order": 20,
+    "same_center_refinement": "NOT_RUN",
+    "raw_projection": false,
+    "renormalization": false,
+    "cross_batch": 1024,
+    "sector": "full",
+    "longitudinal_phase_budget": null
+  },
+  "space_qualification": {
+    "adjacent_orders": [
+      40,
+      48
+    ],
+    "inner_phase_budget": 24,
+    "independent_panel_probe": {
+      "order": 48,
+      "inner_phase_budget": 12
+    },
+    "raw_cross_relative_max": 1e-09,
+    "operator_hermiticity_relative_max": 1e-11,
+    "metric_min_ratio": 1e-08,
+    "all13_geometries_must_pass": true,
+    "reference_probe_vs_fine_raw_criterion_must_pass": true,
+    "fallback_orders": [
+      56,
+      64
+    ],
+    "fallback_budgets": [
+      12,
+      6
+    ],
+    "no_automatic_continuation": true
+  },
+  "backend_parity": {
+    "z_a0": 0.4,
+    "order": 40,
+    "inner_phase_budget": 24,
+    "CXX_Python_vs_Fortran_Fortran": "RAW6 and fullS/H/D bitwise equality required"
+  },
+  "derivative_validation": {
+    "direct": "raw D(0)+raw D(0).conj().T",
+    "S_only_formula": "R8 constructed from four centered R2 differences on halving h; no D values used in construction",
+    "windows": [
+      [
+        0.4,
+        0.2,
+        0.1,
+        0.05
+      ],
+      [
+        0.2,
+        0.1,
+        0.05,
+        0.025
+      ],
+      [
+        0.1,
+        0.05,
+        0.025,
+        0.0125
+      ]
+    ],
+    "accepted_windows_indices": [
+      1,
+      2
+    ],
+    "absolute_residual_ta_inverse_max": 1e-12,
+    "two_finest_window_disagreement_ta_inverse_max": 1e-12,
+    "norms": [
+      "spectral",
+      "Frobenius",
+      "elementwise_max_absolute"
+    ],
+    "require_all_q40beta24_q48beta24_q48beta12_estimates": true,
+    "require_cross_resolution_derivative_agreement": true,
+    "original_R2_compare_ladder": {
+      "relative_target": 1e-06,
+      "absolute_target_atomic_time_inverse": 1e-12,
+      "order_window": [
+        1.5,
+        2.5
+      ],
+      "minimum_consecutive_order_intervals": 2,
+      "always_report_without_modification": true,
+      "failure_does_not_silently_become_pass": true
+    },
+    "formal_order8_claim": false,
+    "C0_H1_does_not_imply_C9": true,
+    "scope": "CENTRAL_CANDIDATE_DERIVATIVE_NUMERICAL_CHECK_ONLY; observed differences not certified bounds",
+    "cross_resolution_derivative_agreement_ta_inverse_max": 1e-12
+  },
+  "staging": {
+    "pilot": "center and +0.4 allthree rules plus reference backend +0.4 (7calls)",
+    "remaining": "other11 geometries allthree rules (33calls)",
+    "total_planned_calls": 40,
+    "stop_after_required_checks": "No additional physics after bounded checks resolve; preserve failure if unresolved"
+  },
+  "resource": {
+    "global_raw_attempt_cap": 64,
+    "automatic_retries": 0,
+    "workers_max": 3,
+    "worker_cpus": 2,
+    "coordinator_cpus": 1,
+    "BLAS_threads": 1,
+    "moment_threads_configured": 2,
+    "radial_threads_observed_required": 1,
+    "cpu_quota": 8,
+    "memory_limit_bytes": 8589934592,
+    "memory_reserve_min_bytes": 1073741824,
+    "MPI_execution": false,
+    "NCP64_scaling": "NOT_RUN"
+  },
+  "evidence_pins": {
+    "runs_r4y/CENTRAL_RESULT.json": "28f680af2507f7ec7b6040880b2bd42a16783903fd44507770250dec6d3d5c15",
+    "runs_r4y/INDEPENDENT_REVIEW.json": "03d5a1706ca8431c184d23bda760ff4838d835a3a3a3e3cdd32fb5e1b128a04d",
+    "runs_r4y/central_v1/CONTEXT.json": "2b28f6ee484de9075e769ded2e9777edd50017dd6b3338f6662a2294a8d021c6",
+    "recovered_r4u/source/research/gap_closure_20261001/static_validation_20261001/static_validation.py": "3e1d5ef9ad870299a8535377120d63a19320bbf8be98e9db7e2caeba86a3b30e",
+    "recovered_r4u/source/research/gap_closure_20261001/production_validation_20261001/richardson_diagnostic.py": "00ad154246440a841beae6225bbc1ff59785e6b845c5cdb4ba85d68b25ce9006"
+  },
+  "claim_ceiling": {
+    "G02": "UNRESOLVED",
+    "production": "HOLD",
+    "capture": false,
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "original_eight_center_gate": "UNCHANGED_UNRESOLVED",
+    "rigorous_operator_error_bound": false
+  },
+  "completion_bar": [
+    "Actual qualified shifted S snapshots and untouched fullD center",
+    "S-only derivative construction plus unchanged raw R2 diagnostic",
+    "Independent payload/result review",
+    "DBv12/report/source publication/create-only dualbackup"
+  ]
+}

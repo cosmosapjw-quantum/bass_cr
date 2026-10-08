@@ -1,0 +1,167 @@
+{
+  "schema": "BASS_R4Y_INDEPENDENT_REVIEW_V1",
+  "passed": true,
+  "decision": "PASS_LOCAL_CENTRAL_SPATIAL_ONLY",
+  "reviewer_role": "independent reviewer; not author of candidate, runner, phase panel or production analyzer",
+  "scope": "13 existing central z=0 full18 S/H/D payloads at b=2a0,100keV/u in separately identified R4X continuous bank",
+  "actual_cross_calls": 13,
+  "reviewer_physical_calls": 0,
+  "status_checks": {
+    "source_input_native_context_manifest_identity": true,
+    "raw13_and_full13_sha_shape_complex128_finiteness": true,
+    "full_raw_and_same_center_assembly_exact": true,
+    "all13_full_screens": true,
+    "fresh_backend_raw6_full3_bitwise_parity": true,
+    "legacy_declared_adjacent_plus_independent_subdivision": true,
+    "phase_declared_adjacent_plus_independent_budget": true,
+    "phase_and_legacy_agreement": true,
+    "selected_exactzero_controls": true,
+    "original_raw_tolerances_unchanged": true,
+    "lower_resolution_failures_retained": true,
+    "global13_reservations_below24_cap": true,
+    "CPU_affinity_BLAS_and_thread_evidence": true,
+    "no_matching_owned_workers_remaining": true,
+    "postrun_analyzer_and_public_summary_crosscheck": true
+  },
+  "criterion_definition": "max over S_tp,S_pt,H_tp,H_pt,D_tp,D_pt of Frobenius(A-B)/max(Frobenius(A),Frobenius(B),1e-300) <= 1e-9; both full S/H Hermiticity<=1e-11 and metric eigenvalue ratio>=1e-8; selected identical-s central diagonal D absolute <=1e-12",
+  "context_id": "ee670d1223af11121fb32507ca541542bcb3f37cc0dfa6b061b22436cd384063",
+  "context_sha256": "2b28f6ee484de9075e769ded2e9777edd50017dd6b3338f6662a2294a8d021c6",
+  "source_input_pin_count": 77,
+  "basis_identity": "17c0215979675e40db364207ce138c5efb58cb24c22824e418f5abe3cfeb49ef",
+  "independent_numerical_checks": {
+    "batch_stored_scalar_count": 236,
+    "central_result_raw6_full3_pairwise_norm_count": 702,
+    "all_pairs_checked": 78,
+    "max_numeric_discrepancy": 0.0,
+    "imports": "json/pathlib/hashlib/math/numpy only; production analyzer or provider helpers not imported"
+  },
+  "selected_comparison_summaries": [
+    {
+      "a": "q56_h2_fortran_fortran",
+      "b": "q64_h2_fortran_fortran",
+      "raw_relative_max": 1.2400207652449407e-14,
+      "conjunction_pass": true
+    },
+    {
+      "a": "q56_h2_fortran_fortran",
+      "b": "q48_h4_fortran_fortran",
+      "raw_relative_max": 1.0664603836998744e-14,
+      "conjunction_pass": true
+    },
+    {
+      "a": "q64_h2_fortran_fortran",
+      "b": "q48_h4_fortran_fortran",
+      "raw_relative_max": 2.04610325214446e-14,
+      "conjunction_pass": true
+    },
+    {
+      "a": "q40_beta24_fortran_fortran",
+      "b": "q48_beta24_fortran_fortran",
+      "raw_relative_max": 1.1951568080353753e-14,
+      "conjunction_pass": true
+    },
+    {
+      "a": "q40_beta24_fortran_fortran",
+      "b": "q40_beta12_fortran_fortran",
+      "raw_relative_max": 3.7957239668578796e-15,
+      "conjunction_pass": true
+    },
+    {
+      "a": "q48_beta24_fortran_fortran",
+      "b": "q40_beta12_fortran_fortran",
+      "raw_relative_max": 1.3806757705273298e-14,
+      "conjunction_pass": true
+    },
+    {
+      "a": "q40_beta12_fortran_fortran",
+      "b": "q64_h2_fortran_fortran",
+      "raw_relative_max": 2.1897753334803054e-14,
+      "conjunction_pass": true
+    },
+    {
+      "a": "q48_beta24_fortran_fortran",
+      "b": "q64_h2_fortran_fortran",
+      "raw_relative_max": 2.9560513583711093e-14,
+      "conjunction_pass": true
+    }
+  ],
+  "tests": {
+    "unique_new_tests": 20,
+    "recorded_status": "PASS",
+    "log_sha256": "3f342ed0290d08f4a00cdcb34cec8fe8941521373729f98678b76b992d188a1a",
+    "old_suites_rerun_by_reviewer": false,
+    "geometry_review_extra_cases": 15
+  },
+  "selected_pair_work_verified": {
+    "definition": "Sum of radial distance-pair quadrature nodes in each selected adjacent qualification pair; independent reference costs not included in either sum",
+    "legacy_56h2_plus_64h2": 11325312,
+    "phase_40beta24_plus_48beta24": 3761752,
+    "legacy_over_phase": 3.0106482298673596,
+    "fraction_reduction": 0.667845618734389,
+    "controlled_wall_time_benchmark": false
+  },
+  "single_observation_performance": {
+    "legacy_q56h2_pairs": 4910976,
+    "phase_q40beta24_pairs": 1541560,
+    "legacy_over_phase_pair_ratio": 3.185718363216482,
+    "legacy_q56h2_wall_seconds": 23.417388335001306,
+    "phase_q40beta24_wall_seconds": 8.139835233989288,
+    "observed_wall_ratio": 2.8768872663684832,
+    "claim": "single concurrent measurements, different quadrature workload; no repeat variance or matched-stage scaling evidence; not production or NCP64 speedup"
+  },
+  "runtime_resources": {
+    "admitted_cpu_budget": 8,
+    "worker_cpu_sets": [
+      [
+        0,
+        1
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        4,
+        5
+      ]
+    ],
+    "coordinator_cpu_id": 6,
+    "moment_threads_configured": 2,
+    "moment_team_observed": false,
+    "radial_threads_observed": 1,
+    "max_peak_worker_rss_kib": 90960,
+    "owned_matching_worker_processes_remaining": 0,
+    "MPI_execution": false,
+    "NCP64_scaling": "NOT_RUN"
+  },
+  "findings": [],
+  "review_operation_note": "One provisional reviewer assertion required identical ordered comparison records; declared selected pairs may reverse the order used by exhaustive combinations. The assertion was corrected to unordered pair identity. Numeric formulas are symmetric, all 702 norm values match exactly; no research source or payload was changed.",
+  "limitations": [
+    "One geometry z=0, b=2a0, 100keV/u and unchanged R4X candidate only",
+    "Resolution agreement is empirical, not rigorous quadrature error enclosure",
+    "Full Hermiticity is not independent S/H reverse-block integration verification",
+    "Phase panels change quadrature and require their separate context",
+    "Same-center radial order20 held fixed and not independently spatially refined in this study",
+    "No full FD/trajectory/capture calculations or global derivative closure",
+    "Momentum OpenMP two-thread team configured but not dynamically observed; radial one-thread team was observed",
+    "Timing observations overlap across workers and have no repeat variance; no controlled speedup or MPI/NCP64 scaling claim",
+    "Selected-pair point totals exclude independent references and earlier failed/refinement calculations, explicitly in both totals"
+  ],
+  "bound_review_files": {
+    "runs_r4y/INDEPENDENT_CODE_REVIEW.json": "f6b9d26411c81dd065fefed601593c463c236b0fbce35559d9ed95850b62c23a",
+    "runs_r4y/INDEPENDENT_STAGE1_PARITY_REVIEW.json": "f6bef71e81291f9c34c2c093086b556255efd471dfd7ab87f68c2b94cb99fda9",
+    "runs_r4y/INDEPENDENT_PAYLOAD_RECOMPUTATION.json": "f0db87b4bac2e88cdd7a106ce4ecc2ec11a3dfd141650849c86c3da943dbad33",
+    "runs_r4y/CENTRAL_RESULT.json": "28f680af2507f7ec7b6040880b2bd42a16783903fd44507770250dec6d3d5c15",
+    "runs_r4y/PUBLIC_SCIENTIFIC_SUMMARY.json": "06af8332283b9c9706fd5c88cdedd80865d55ec3e7d5da3d90e0c5c635bdbd93",
+    "recovered_r4u/source/research/gap_closure_20261001/g02_central_quadrature_20261002/analyze_results.py": "1f1f5f1573e28a623ae87b3e300b182a6f9763367e444e1f4bd210f92f864855",
+    "runs_r4y/TARGETED_TESTS.log": "3f342ed0290d08f4a00cdcb34cec8fe8941521373729f98678b76b992d188a1a",
+    "runs_r4y/STAGE3_DECISION.json": "4e6087b577802d33d3b2c4af143610ea65f5ba3a01967b0e1a1f1b9c61b48455",
+    "runs_r4y/STAGE4_DECISION.json": "ca3d1c78aee7f381bfc719389aeff0e9f3b53cbfff29a2370f69ae0360923e8c"
+  },
+  "G02": "UNRESOLVED",
+  "production_admission": "HOLD",
+  "capture_execution_allowed": false,
+  "continuous_error_bound": false,
+  "all_bound": "OPEN",
+  "b_grid": "NO_GO"
+}

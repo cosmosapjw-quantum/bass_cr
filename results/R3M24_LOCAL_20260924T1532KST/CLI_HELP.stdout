@@ -1,0 +1,15 @@
+usage: r3m24_cross_window.py [-h] {freeze,design,run} ...
+
+Explicit opt-in successor: freeze intent on CPU; execute only by exact SHA.
+Examples from repository root: python -m scripts.r3m24_cross_window freeze
+--contract /fresh/contract.json python -m scripts.r3m24_cross_window design
+--out /fresh/design.json python -m scripts.r3m24_cross_window run --contract
+/fresh/contract.json --approve-sha256 <printed-contract-sha> --out
+/fresh/attempt No command starts a new full collision. Historical entrypoints
+remain unchanged.
+
+positional arguments:
+  {freeze,design,run}
+
+options:
+  -h, --help           show this help message and exit

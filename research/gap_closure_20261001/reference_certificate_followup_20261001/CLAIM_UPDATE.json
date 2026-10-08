@@ -1,0 +1,84 @@
+{
+  "gap_id": "G04",
+  "database_gap_id": "REPORT_GAP_04",
+  "recommended_status": "RESOLVED_WITH_LIMITATION",
+  "claims": [
+    {
+      "claim_id": "G04_CONFORMING_REFERENCE_ACTUAL_BINARY_BANK_VALIDATED",
+      "text": "The pinned archived B0 radial binary coefficients admit an explicitly defined rational C0 H1_0 repair preserving all l,m multiplets, with validated exact weak-Galerkin Gram positivity.",
+      "evidence_status": [
+        "DERIVED",
+        "IMPLEMENTATION_VERIFIED",
+        "NUMERICALLY_CHECKED"
+      ],
+      "scope": "named repaired compact-support reference only; no model adoption",
+      "project_evidence": [
+        "REFERENCE_CERTIFICATE_PROOF.md",
+        "exact_reference.py",
+        "actual_certificate/EXACT_REPAIRED_REFERENCE.json",
+        "actual_certificate/REFERENCE_CERTIFICATE.json"
+      ],
+      "does_not_imply": [
+        "archived functions conform exactly",
+        "repaired functions belong to the strong Coulomb operator domain",
+        "old temporal qualification transfers"
+      ],
+      "certificate_class": "VALIDATED_NUMERICAL_BOUND"
+    },
+    {
+      "claim_id": "G04_ISOLATED_REFERENCE_SPECTRAL_SELECTOR_GAP_VALIDATED",
+      "text": "For the actual repaired reference 9-channel isolated weak-Galerkin operator, exact interval inequalities certify negative rank5 and positive rank4, a>=0.12499999996,d>=0.0005525039691,r<=2.20011e-15 and selected-to-negative-projector distance<=1.75235e-14.",
+      "evidence_status": [
+        "DERIVED",
+        "IMPLEMENTATION_VERIFIED",
+        "NUMERICALLY_CHECKED"
+      ],
+      "scope": "finite isolated weak-Galerkin compression, not full Coulomb spectral projector or strong residual",
+      "project_evidence": [
+        "REFERENCE_CERTIFICATE_PROOF.md",
+        "actual_certificate/REFERENCE_CERTIFICATE.json",
+        "CERTIFICATE_SUMMARY.json"
+      ],
+      "does_not_imply": [
+        "actual B0 trajectory changed",
+        "infinite-dimensional Coulomb spectral certificate",
+        "finite bridge or tail integral closed"
+      ],
+      "certificate_class": "VALIDATED_NUMERICAL_BOUND"
+    },
+    {
+      "claim_id": "G04_ORIGINAL_TO_REFERENCE_OBSERVABLE_MAP_VALIDATED",
+      "text": "Exact L2 repair integration and residual-gap arithmetic certify the original selected physical projector and named negative reference projector differ in operator norm by at most2.76856e-14, hence the same-state observable error is at most N times this value.",
+      "evidence_status": [
+        "DERIVED",
+        "IMPLEMENTATION_VERIFIED",
+        "NUMERICALLY_CHECKED"
+      ],
+      "scope": "same physical Hilbert space, same state, any common unitary translation/ETF; finite reference spectral projector only",
+      "project_evidence": [
+        "REFERENCE_CERTIFICATE_PROOF.md",
+        "actual_certificate/REFERENCE_CERTIFICATE.json",
+        "CERTIFICATE_SUMMARY.json"
+      ],
+      "does_not_imply": [
+        "original fixed-J ordinary asymptotic limit exists",
+        "archived state equals reference dynamical state",
+        "native authorization or reference adoption"
+      ],
+      "certificate_class": "VALIDATED_NUMERICAL_BOUND"
+    }
+  ],
+  "new_tests": 9,
+  "native_calls": 0,
+  "new_physical_operator_queries": 0,
+  "required_gate_preservation": {
+    "capture": false,
+    "production": "HOLD",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "original_capture_gap_resolved": false,
+    "continuous_global_supremum_bound": false,
+    "continuous_trajectory_error_bound": false
+  },
+  "remaining_boundary": "Finite bridge/tail and state/dynamics transport for the named reference; original fixed-J ordinary limit remains separate"
+}

@@ -1,0 +1,61 @@
+{
+  "schema": "BASS_R4W_CACHE_BUDGET_VALIDATION_V1",
+  "status": "TARGETED_IMPLEMENTATION_TESTS_AND_CACHE_ANALYSIS_PASS",
+  "tests": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m unittest -v test_cache_error_budget.py",
+    "passed": 6,
+    "failed": 0,
+    "covers": [
+      "channel ordering and TP/PT binding",
+      "known affine derivative",
+      "near-cancelled D and original denominator floor",
+      "sample perturbation amplification",
+      "exact cancellation representation",
+      "shape/finiteness/step rejection",
+      "JSON serialization of numpy-derived index data"
+    ]
+  },
+  "analysis": {
+    "selected_block_rows": 128,
+    "cross_resolution_rows": 64,
+    "snapshots": 72,
+    "new_native_calls": 0,
+    "producer_chain": "fresh_context_analysis._load_lanes; all original pair hashes and cross-bindings checked",
+    "unchanged_old_suites_rerun": false
+  },
+  "initial_development_failure": {
+    "class": "SERIALIZATION_IMPLEMENTATION_ERROR",
+    "exception": "TypeError: Object of type int64 is not JSON serializable",
+    "repair": "Cast local/global indices to Python int; serialize complete JSON before opening create-only output. JSON serialization checked in targeted near-cancellation test.",
+    "preserved_partial": "runs_r4w/G02_COMPONENT_BUDGET.json.serialization_failure_partial",
+    "scientific_evaluation_performed": false
+  },
+  "files": [
+    {
+      "path": "/workspace/scratch/63ee2321a512/recovered_r4u/source/research/gap_closure_20261001/g02_stable_derivative_20261001/cache_error_budget.py",
+      "sha256": "ef14026035f7dca354f3b237dc3b92a62115dce54e245ac83f82c99325c49903",
+      "bytes": 14719
+    },
+    {
+      "path": "/workspace/scratch/63ee2321a512/recovered_r4u/source/research/gap_closure_20261001/g02_stable_derivative_20261001/test_cache_error_budget.py",
+      "sha256": "ec22b67e3e35c7f531a0a31796f34af7f2290b5eb4dc9e2c78a3a83e32f75925",
+      "bytes": 3583
+    },
+    {
+      "path": "/workspace/scratch/63ee2321a512/runs_r4w/G02_COMPONENT_BUDGET.json",
+      "sha256": "58a24ae8e02128b6fe73509f9709144863361b679d46ecc4cf2bccd1ecc1425a",
+      "bytes": 1213071
+    },
+    {
+      "path": "/workspace/scratch/63ee2321a512/runs_r4w/G02_COMPONENT_BUDGET.csv",
+      "sha256": "d3bc4fefcab99cc3df364663351194b4bdb92405118c091fca623e0850e37953",
+      "bytes": 24041
+    }
+  ],
+  "limits": [
+    "No original scientific gate changed",
+    "No certified quadrature or operator error bound",
+    "No independent verification of this new analyzer yet",
+    "No physical backend calls"
+  ]
+}

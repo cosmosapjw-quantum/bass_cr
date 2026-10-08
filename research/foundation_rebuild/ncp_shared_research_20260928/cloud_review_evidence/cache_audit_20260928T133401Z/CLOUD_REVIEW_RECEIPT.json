@@ -1,0 +1,116 @@
+{
+  "schema": "BASS_R3_CLOUD_REVIEW_RECEIPT_V1",
+  "final_state": "R3_CLOUD_BLOCKED",
+  "implementation_head": "ae22511993fda12b61be9ff13c62c34a95e689aa",
+  "implementation_tree": "3a398953d285949e94128590abcaefef32fc6b38",
+  "review": {
+    "verdict": "LOOKS_GOOD_FOR_CACHE_ONLY",
+    "findings": [],
+    "code_changes": [],
+    "scope": "R3 diff, identity pins, cache import, diagnostics, executor and focused test mapping",
+    "limits": [
+      "No new native science or continuous bound checked",
+      "Generic interrupted native resume remains unresolved"
+    ]
+  },
+  "checks": [
+    {
+      "command": "git fetch origin refs/heads/impl/ncp-r3-cache-audit-20260928:refs/remotes/origin/impl/ncp-r3-cache-audit-20260928",
+      "exit": 0,
+      "result": "HEAD/tree exact"
+    },
+    {
+      "command": "implementation and code manifest byte/hash/blob verification",
+      "exit": 0,
+      "result": "29+6 files match"
+    },
+    {
+      "command": "/root/wu088_hh_ncp_work/venv/bin/python -c import/version check",
+      "exit": 0,
+      "result": "Python 3.12.3, NumPy 2.3.5, SciPy 1.17.0"
+    },
+    {
+      "command": "bash -n research/foundation_rebuild/ncp_shared_research_20260928/run_reviewed_r3.sh",
+      "exit": 0
+    },
+    {
+      "command": "/root/wu088_hh_ncp_work/venv/bin/python research/foundation_rebuild/ncp_shared_research_20260928/runtime_r3/run_cache_audit.py --help",
+      "exit": 0
+    },
+    {
+      "command": "BASS_R3_PYTHON=/root/wu088_hh_ncp_work/venv/bin/python bash research/foundation_rebuild/ncp_shared_research_20260928/run_reviewed_r3.sh /root/.local/state/bass_r3/runs/cache_audit_20260928T133401Z",
+      "exit": 0
+    },
+    {
+      "command": "OUTPUT_MANIFEST.json hash/size verification",
+      "exit": 0,
+      "result": "603/603 match"
+    },
+    {
+      "command": "portable ZIP CRC and required-member verification",
+      "exit": 0,
+      "result": "604 members; no CRC error"
+    }
+  ],
+  "run": {
+    "path": "/root/.local/state/bass_r3/runs/cache_audit_20260928T133401Z",
+    "status": "R3_CACHE_REUSE_AND_METRIC_AUDIT_COMPLETE",
+    "new_native_evaluations": 0,
+    "task_pairs": 297,
+    "array_count": 2673,
+    "cache_archive_sha256": "6f7929f553a10d7ee163af6831e46c86e4fcec2d0fc8b9f75aacd99110d318ef",
+    "metric_summary": {
+      "sentinels": 5,
+      "max_relative_residual": 2.3253812582402828e-09,
+      "max_whitened_connection_rate_per_atomic_time": 1.9772810219871182e-10,
+      "continuous_bound": "NOT_CERTIFIED",
+      "integrated_eta": "NOT_CERTIFIED"
+    },
+    "capture": false,
+    "production": "HOLD",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO"
+  },
+  "artifacts": {
+    "R3_RETURN.json": {
+      "path": "/root/.local/state/bass_r3/runs/cache_audit_20260928T133401Z/R3_RETURN.json",
+      "bytes": 2737,
+      "sha256": "e83734e526f8f98e9d0e9c6ee39249afb8a40d0ef6351c3d4e50aea6a6a0d956"
+    },
+    "CACHE_AUDIT.json": {
+      "path": "/root/.local/state/bass_r3/runs/cache_audit_20260928T133401Z/CACHE_AUDIT.json",
+      "bytes": 660,
+      "sha256": "333570004e6392e467d224ee599af60228b2e3622538fc6d71d1b62245b881d0"
+    },
+    "IMPORT_BRIDGE.json": {
+      "path": "/root/.local/state/bass_r3/runs/cache_audit_20260928T133401Z/IMPORT_BRIDGE.json",
+      "bytes": 147866,
+      "sha256": "0e5e9f2f751ec673352304456c91724949a5b832cb403744e06c91aef1605a03"
+    },
+    "METRIC_DIAGNOSTICS.json": {
+      "path": "/root/.local/state/bass_r3/runs/cache_audit_20260928T133401Z/METRIC_DIAGNOSTICS.json",
+      "bytes": 9939,
+      "sha256": "5be4af4feeba0f85881ebd45b0d408052538424969d3f0e0212d439b313bbacf"
+    },
+    "READER_ENVIRONMENT.json": {
+      "path": "/root/.local/state/bass_r3/runs/cache_audit_20260928T133401Z/READER_ENVIRONMENT.json",
+      "bytes": 411,
+      "sha256": "bc8560e635eb4bebe0457762dad61cde3f98a485d1fd8b0e747da1daeafb7dfb"
+    },
+    "OUTPUT_MANIFEST.json": {
+      "path": "/root/.local/state/bass_r3/runs/cache_audit_20260928T133401Z/OUTPUT_MANIFEST.json",
+      "bytes": 132076,
+      "sha256": "a1c3263dd5b3105790ad6aceeb03355302eff6ed9315f2a07683f589b5949a1f"
+    }
+  },
+  "portable_zip": {
+    "path": "/root/.local/state/bass_r3/portable/cache_audit_20260928T133401Z.zip",
+    "bytes": 3774880,
+    "sha256": "d21755fd5a5ce1d2e7da77d365b02d10a39c296103e9f54a950996492a06549c"
+  },
+  "backup": {
+    "drive": "BLOCKED_NO_CLOUD_CREDENTIALS",
+    "dropbox": "BLOCKED_NO_CLOUD_CREDENTIALS",
+    "action": "Portable ZIP retained for ChatGPT connected tools; no credential bypass attempted"
+  }
+}

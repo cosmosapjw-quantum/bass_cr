@@ -1,0 +1,284 @@
+{
+  "schema": "BASS_R4W_G02_INDEPENDENT_SCIENTIFIC_CODE_REVIEW_V1",
+  "review_date_utc": "2026-10-01",
+  "reviewer": "/root/r4v_independent_adapter",
+  "model_route": "UNKNOWN_CURRENT_MODEL_COMMON_RULES_ONLY",
+  "decision": "PASS_LOCAL_DIAGNOSIS_REFERENCE_ONLY",
+  "scientific_status": {
+    "G02": "UNRESOLVED",
+    "local_closure_label": "SAME_CENTER_REPRESENTATION_DEFECT_IDENTIFIED_CROSS_FD_OPEN",
+    "original_raw_FD_gate": "FRESH_FD_SECOND_ORDER_TARGET_UNMET; unchanged",
+    "production_admission": "HOLD",
+    "capture": false,
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO",
+    "total_operator_or_state_error_certified": false,
+    "candidate_admitted_to_production": false,
+    "NCP64_or_MPI_scaling_demonstrated": false
+  },
+  "scope": {
+    "context_id": "09178ba94c9ff36d061cb048ed12ee022880b6d53488c6d2047780b76601a938",
+    "basis": "Archived B0 18-channel bank; 100 keV/u, b=2 a0; fixed target and ballistic projectile.",
+    "reviewed": "R4W theory, component budget, exact saved-coefficient reference, separate continuity candidate, targeted test source and validation receipts.",
+    "implementation_independence": "Reviewer did not author the R4W theory, cache_error_budget.py, exact_trace_oracle.py or their tests. Independent calculations do not import those modules.",
+    "prior_G12_authorship_excluded": "No independent-review claim is made for the reviewer's earlier G12 implementation.",
+    "execution": "Read-only saved-data calculations plus this create-only review artifact; no native operator calls, trajectories or unchanged R4U43/R4V41 test reruns.",
+    "old_review_frozen_sha256": "9d52b04999c4ab8eee3912b6cc04fd99baf729e21e3be11515cf4c8152fb6ed3"
+  },
+  "bound_files": [
+    {
+      "path": "/workspace/scratch/63ee2321a512/recovered_r4u/source/research/gap_closure_20261001/g02_stable_derivative_20261001/TASK_CONTRACT.json",
+      "sha256": "49c083bb2473640dd5cbb90044210e488d18f0c2027b8f08c50216dc6c6bb58f"
+    },
+    {
+      "path": "/workspace/scratch/63ee2321a512/recovered_r4u/source/research/gap_closure_20261001/g02_stable_derivative_20261001/DERIVATION_KO.md",
+      "sha256": "17a24ee0012d9300314fe878cc36dd8f942307b3cec4c6c2698e81093aec5e29"
+    },
+    {
+      "path": "/workspace/scratch/63ee2321a512/recovered_r4u/source/research/gap_closure_20261001/g02_stable_derivative_20261001/THEORY_RESULT.json",
+      "sha256": "5f31d0683b180e1a1e3246689c0b4a7d3738f9d75aae3c8b4878f38809f2c444"
+    },
+    {
+      "path": "/workspace/scratch/63ee2321a512/recovered_r4u/source/research/gap_closure_20261001/g02_stable_derivative_20261001/cache_error_budget.py",
+      "sha256": "ef14026035f7dca354f3b237dc3b92a62115dce54e245ac83f82c99325c49903"
+    },
+    {
+      "path": "/workspace/scratch/63ee2321a512/recovered_r4u/source/research/gap_closure_20261001/g02_stable_derivative_20261001/test_cache_error_budget.py",
+      "sha256": "ec22b67e3e35c7f531a0a31796f34af7f2290b5eb4dc9e2c78a3a83e32f75925"
+    },
+    {
+      "path": "/workspace/scratch/63ee2321a512/recovered_r4u/source/research/gap_closure_20261001/g02_stable_derivative_20261001/exact_trace_oracle.py",
+      "sha256": "d2084e7e482c3ebd5720adc5d62b86137c8cac2de5b984d4229c89a46d80307a"
+    },
+    {
+      "path": "/workspace/scratch/63ee2321a512/recovered_r4u/source/research/gap_closure_20261001/g02_stable_derivative_20261001/test_exact_trace_oracle.py",
+      "sha256": "5ca5d610a0b0f866fa3ba18742a9119ff889214d7c1b78fd6e3d09eb97cd2533"
+    },
+    {
+      "path": "/workspace/scratch/63ee2321a512/runs_r4w/G02_COMPONENT_BUDGET.json",
+      "sha256": "58a24ae8e02128b6fe73509f9709144863361b679d46ecc4cf2bccd1ecc1425a"
+    },
+    {
+      "path": "/workspace/scratch/63ee2321a512/runs_r4w/G02_EXACT_TRACE_ORACLE.json",
+      "sha256": "a15a25a0a2935127d33ac919bde3365b29ea0d6b89242d68cdd6fa0aefa8ee33"
+    },
+    {
+      "path": "/workspace/scratch/63ee2321a512/runs_r4w/G02_COMPONENT_BUDGET_VALIDATION.json",
+      "sha256": "8ee813e06b020868fb85f4ad0146b7bd8a8908d75887f3fcd7b3ffd5558a230a"
+    },
+    {
+      "path": "/workspace/scratch/63ee2321a512/runs_r4w/G02_EXACT_TRACE_VALIDATION.json",
+      "sha256": "b5f398aebafcceb42b49f0ac1b2e2788e48312df4a74537ee5fcf46bdceff0f3"
+    },
+    {
+      "path": "/workspace/scratch/63ee2321a512/recovered_r4u/runtime_inputs/BASIS.npz",
+      "sha256": "889001a751cd3cae93ad217336587f5fc58db11c0a496843ecc7e7bbd93f83ec"
+    },
+    {
+      "path": "/workspace/scratch/63ee2321a512/recovered_r4u/runtime_inputs/BASIS.json",
+      "sha256": "3cf2359dd9802e84f9ec4dc45f3585e0aa9712de38a3fb0a077300d257150131"
+    }
+  ],
+  "mathematical_review": [
+    {
+      "claim": "Units and same-center overlap",
+      "decision": "ACCEPT",
+      "reason": "S is dimensionless; radial/angular spatial-gradient matrix A has units a0^-1; D=-v.A-i|v|^2 S/2 has units ta^-1 in atomic units. Common phase and rigid translation make the same-center overlap time independent for L2 functions, including the saved discontinuous representation."
+    },
+    {
+      "claim": "Integration by parts and exact interface trace",
+      "decision": "ACCEPT_WITH_SCOPE",
+      "reason": "For the strong cell-interior derivative, I_sp+I_ps equals the sum of per-cell endpoint products. It vanishes only when interface products cancel and exterior traces vanish. H_0^1 regularity supplies the ideal weak-derivative identity; the exact saved coefficient polynomial is not exactly continuous, so omitting interface distributions need not preserve D+D^dagger=0."
+    },
+    {
+      "claim": "Angular factor and sign",
+      "decision": "ACCEPT",
+      "reason": "With Y00=1/sqrt(4pi), Y10=sqrt(3/4pi)cos(theta), the s-p_z angular factor is 1/sqrt(3). A_sp=(I_sp+J)/sqrt(3), A_ps=(I_ps-J)/sqrt(3), hence D_sp+D_ps*= -v B_sp/sqrt(3) for real m=0 radial functions and projectile velocity +z. dr and the cell derivative scale cancel in I; no missing element-width factor."
+    },
+    {
+      "claim": "Exact-rational/Decimal oracle",
+      "decision": "ACCEPT_LOCAL_REFERENCE",
+      "reason": "Exact polynomial contraction and endpoint arithmetic are appropriate for binary64 coefficients interpreted as exact rational input. Rational division plus a logarithm evaluates J=integral(u_s u_p/r) away from the origin; the origin integral correctly rejects a nonzero singular constant term. The 80/120-digit agreement checks this reference arithmetic, not physical accuracy or recovery of the original nodal FEM."
+    },
+    {
+      "claim": "Midpoint ETF carrier",
+      "decision": "ACCEPT_WITH_SCOPE",
+      "reason": "For ballistic centers M=(R_P+R_T)/2 and q=v_P-v_T, q.M-(|v_P|^2-|v_T|^2)t/2 is constant. Removing only the laboratory time phase need not improve smoothness. The stated geometric derivative assumes suitable weak derivatives; the saved discontinuous representation needs interface terms."
+    },
+    {
+      "claim": "Continuity candidate",
+      "decision": "ACCEPT_AS_SEPARATE_EXACT_CANDIDATE",
+      "reason": "Adding delta_e*s leaves each left endpoint fixed and matches its right endpoint to the next cell's left value, with final target zero. The original bank is unmodified. The exact radial L2 correction squared is sum(h_e delta_e^2/3). The derivative quantity sum(delta_e^2/h_e) is the cellwise/broken strong-derivative change only, not a global weak/H1 difference. This does not bound full H, D, propagated states or observables."
+    },
+    {
+      "claim": "Higher-order FD and production closure",
+      "decision": "NOT_ESTABLISHED",
+      "reason": "H_0^1 or exact C0 continuity does not supply an eighth-order FD remainder, a global smoothness theorem or continuous trajectory error bound. Restoring selected traces is not full G02 closure or production-bank admission."
+    }
+  ],
+  "independent_reference_reconstruction": {
+    "method": "Independent exact interface-product sum, direct coefficient contraction for I, 110-digit midpoint geometric series (700 terms/cell) for J; no production oracle import",
+    "pairs": [
+      {
+        "s_mode": 0,
+        "p_mode": 3,
+        "exact_interface_endpoint_product_identity": true,
+        "D_sp_independent": "-0.56093117177692440807950324587482823326204700305687235445244047294157734146404832743545263479946831372444148617",
+        "D_ps_independent": "0.56093117177690655660884560023770954483245500421073226330258957891680093753265035748382499347287141077749519375",
+        "Dsum_independent": "-1.7851470657645637118688429591998846140091149850894024776403931397969951627641326596902946946292432769392654524E-14",
+        "max_abs_disagreement_vs_saved120": "2.2182821498E-110",
+        "quantity_disagreements": {
+          "J_sp": "3.067940325E-111",
+          "I_sp": "1.067888647E-111",
+          "I_ps": "4.295662121E-111",
+          "D_sp": "9.413428843E-111",
+          "D_ps": "2.2182821498E-110",
+          "trace_D_sum": "5.625551083E-124"
+        }
+      },
+      {
+        "s_mode": 2,
+        "p_mode": 4,
+        "exact_interface_endpoint_product_identity": true,
+        "D_sp_independent": "-0.23643880281315552277869264783121725170697062384515289954197766535303740731752429800124080865327143633498730677",
+        "D_ps_independent": "0.23643880281315545701830839351803032831357453670260492308975198871658171780506734524857631688950889418089707482",
+        "Dsum_independent": "-6.5760384254313186923393396087142547976452225676636455689512456952752664491763762542154090231942403126385039339E-17",
+        "max_abs_disagreement_vs_saved120": "5.669179556E-111",
+        "quantity_disagreements": {
+          "J_sp": "1.1577585469E-111",
+          "I_sp": "4.421532041E-111",
+          "I_ps": "3.156592959E-111",
+          "D_sp": "5.669179556E-111",
+          "D_ps": "1.927694059E-111",
+          "trace_D_sum": "1.4505321831E-126"
+        }
+      }
+    ],
+    "max_internal_jump_exact": "143/9007199254740992",
+    "max_internal_jump_decimal": "1.587618925213973852805793285369873046875E-14",
+    "candidate_modes": [
+      {
+        "mode": 0,
+        "L2_correction_independent": "1.1313045286435942190057865019459619134262883747252015349831404139489214425634460387013562979485366323269342157E-14",
+        "max_jump_exact": "143/9007199254740992",
+        "exact_C0_and_zero_endpoints": true
+      },
+      {
+        "mode": 1,
+        "L2_correction_independent": "7.6152213294741597026863876710742474756533694179855653728129393939286635959110002823458300939987513307137247843E-15",
+        "max_jump_exact": "193/18014398509481984",
+        "exact_C0_and_zero_endpoints": true
+      },
+      {
+        "mode": 2,
+        "L2_correction_independent": "1.1827393126032673604562726875026227572465559328896953399526527755231970548449182868696329450754179951074091852E-14",
+        "max_jump_exact": "91/18014398509481984",
+        "exact_C0_and_zero_endpoints": true
+      },
+      {
+        "mode": 3,
+        "L2_correction_independent": "7.7000810653867151245097348152423072711880753740215413587352957248739269258221245971448315724731849410014278443E-15",
+        "max_jump_exact": "173/18014398509481984",
+        "exact_C0_and_zero_endpoints": true
+      },
+      {
+        "mode": 4,
+        "L2_correction_independent": "1.0123068048390104854335102300802153419605824417213814430213946376358940956500032442858505811158306356031606325E-14",
+        "max_jump_exact": "69/9007199254740992",
+        "exact_C0_and_zero_endpoints": true
+      }
+    ],
+    "all6_candidate_pair_trace_exact_zero": true,
+    "original_bank_sha256": "889001a751cd3cae93ad217336587f5fc58db11c0a496843ecc7e7bbd93f83ec",
+    "wall_seconds": 0.2927952300015022,
+    "native_calls": 0
+  },
+  "independent_cache_reconstruction": {
+    "method": "Independent NumPy reconstruction from saved NPZ payloads and plan; no budget/oracle/physical evaluator imports",
+    "payload_sha_checks": 72,
+    "selected_block_rows_reconstructed": 128,
+    "cross_resolution_rows_reconstructed": 64,
+    "scalar_comparisons": 5382,
+    "maximum_scalar_difference": 6.938893903907228e-18,
+    "same_center_overlap": {
+      "TT": {
+        "spectral": 2.221814170428743e-16,
+        "frobenius": 5.087681083355541e-16,
+        "max_absolute": 2.220446049250313e-16
+      },
+      "PP": {
+        "spectral": 2.221814170428743e-16,
+        "frobenius": 5.087681083355541e-16,
+        "max_absolute": 2.220446049250313e-16
+      }
+    },
+    "source_pins_checked": 16,
+    "final_oracle_pair_values_unchanged": true,
+    "maximum_cross_h005_absolute_residual": 0.0000021146496876643207,
+    "maximum_adjacent_cross_fd_absolute_difference": 7.967131430719988e-16,
+    "new_native_calls": 0
+  },
+  "component_budget_review": {
+    "decision": "ACCEPT_AS_OBSERVATIONAL_DIAGNOSTICS",
+    "key_findings": [
+      "Cross TP/PT residuals at h=0.05 reach 2.1146496876643207e-6 while adjacent order32/40 FD changes reach only 7.967131430719988e-16 across the saved ladder. Together with the frozen raw second-order trend this supports truncation-dominated cross residuals at tested steps; it does not certify absolute quadrature accuracy.",
+      "At z=32,h=0.05, PP[9,13] has exactly zero saved S+ and S-, FD=0, raw D sum=-1.6542323066914832e-14, floor=1e-12 and normalized residual 0.016542323066914832. Large operand cancellation makes relative sensitivity severe but does not itself identify the cause.",
+      "The saved same-center overlap varies by up to 2.220446049250313e-16 across the 72 samples. This is consistent with the inspected moving radial partition path. It is an observed computation difference, not actual time dependence of the mathematical same-center overlap.",
+      "Same-center order20 is shared; no independent full same-center order32/40 payload exists. Cross-order observations must not be promoted to same-center convergence evidence."
+    ],
+    "semantics": [
+      "The elementwise denominator floor is the unchanged full-matrix rule, not a new block-specific acceptance tolerance.",
+      "Block-relative norms and dominating elements are diagnostics; they do not replace the original all-matrix gate.",
+      "The exact-arithmetic perturbation gain v/(2h) per S sample is valid. Epsilon-scaled operand surrogates assume perturbation sizes and are not rigorous floating-point, FEM or quadrature bounds.",
+      "Adjacent-resolution differences and their amplified sample proxies are observations, not certified residual bounds.",
+      "Exact zero cancellation represented by null rather than JSON infinity is appropriate."
+    ]
+  },
+  "scientific_interpretation": {
+    "dominant_saved_representation_effect": "For PP[9,13], the exact saved-polynomial interface trace predicts -1.7851470657645637e-14, versus the exact sum of the cached binary64 D operands -1.6542323066914832e-14 at |z|=32. The residual between these is +1.3091475907308047e-15. The representation defect explains the same sign and scale of the dominant same-center residual; final addition roundoff alone is not an adequate explanation.",
+    "remaining_difference": "The oracle-to-cache discrepancy includes remaining evaluation, quadrature and accumulation path effects; this review does not uniquely apportion those. Other entries, notably [10,13], have a much smaller trace defect than the cached sum, so the dominant-entry explanation must not be generalized to all components.",
+    "precision_ceiling": "The separate 110-digit series calculation confirms the two selected oracle couplings to roughly 2.3e-110 absolute. This is agreement for the saved mathematical coefficient input, not a 110-digit physical accuracy claim.",
+    "repaired_candidate_ceiling": "All six selected candidate interface sums are exactly zero, with radial L2 changes near 1e-14. The candidate differs from the old bank, is not exported or admitted, and does not establish S/H/D equivalence.",
+    "closure_wording": "G02 remains UNRESOLVED. Its same-center representation defect has been identified and a local independent reference has been verified; cross-center FD acceptance and production admission remain open."
+  },
+  "review_findings": [
+    {
+      "id": "R4W-IR-01",
+      "severity": "SCIENTIFIC_SCOPE",
+      "initial": "The derivative correction field could be read as a global H1 difference despite discontinuous original coefficients.",
+      "resolution": "RESOLVED",
+      "evidence": "Frozen source uses candidate_cellwise_radial_derivative_L2_change and explicit cell-interior-only/not-global-H1 scope; report states the same."
+    },
+    {
+      "id": "R4W-IR-02",
+      "severity": "PROVENANCE_BINDING",
+      "initial": "External BASIS.json was compared by semantic identity and matrix hash but not exact admitted metadata bytes.",
+      "resolution": "RESOLVED",
+      "evidence": "Frozen source metadata_bound_to_context checks SHA256 against context.input_files['BASIS.json']; the new targeted test alters modes while retaining identity and expects rejection. The original actually supplied metadata already had the correct hash."
+    }
+  ],
+  "targeted_validation": {
+    "reviewed_tests": {
+      "cache_error_budget": 6,
+      "exact_trace_oracle": 8
+    },
+    "author_receipts": "Both targeted suites report PASS; source and result hashes verified. Changed oracle targeted suite reports 8 tests in 0.003 seconds.",
+    "independent_test_suite_execution": false,
+    "independent_work": "Separate saved-payload reconstruction and independent rational/Decimal arithmetic recorded above, rather than rerunning author tests.",
+    "old_suites_rerun": false,
+    "new_native_calls": 0,
+    "initial_failed_review_probe": "One read-only review script initially used manifest key queries instead of tasks and raised KeyError before payload analysis; corrected to actual schema, then completed successfully. No file or scientific output was changed."
+  },
+  "report_consistency": {
+    "path": "/workspace/scratch/63ee2321a512/deliverables_r4w/BASS_CR_R4W_G02_RESEARCH_REPORT_KO_20261001.md",
+    "reviewed_draft_sha256": "4f348e4161879345edb3b8ead372ce583f4a8cc70457e68866e32c22a835f1e0",
+    "decision": "NO_MATERIAL_SCIENTIFIC_MISMATCH",
+    "scope": "Scientific wording checked in current review, not publication or backup certification."
+  },
+  "next_step": {
+    "priority": "Treat saved basis representation and cross-derivative validation as separate remaining numerical contracts.",
+    "recommendation": "Build a separate basis evaluator representation that preserves shared endpoints/nodal information under a new identity, verify its exact continuity and original-bank differences, then predeclare and validate S/H/D changes before any adoption. For cross blocks derive an interface-aware geometric derivative or a separately justified higher-order FD check. Preserve raw historical D, old gate and all old evidence.",
+    "not_justified_by_current_evidence": "Automatic extra native h refinement, tolerance relaxation, antisymmetric projection of old D, or claiming production closure.",
+    "approval_scope": "No new physical/native execution is performed or authorized by this review."
+  }
+}

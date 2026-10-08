@@ -1,0 +1,35 @@
+{
+  "schema": "BASS_CR_R3M21_CF4_REFERENCE_EXECUTION_CONTRACT_V1",
+  "input_branch": "cr/r3m19-n1-gpu-short-window-20260923",
+  "input_exact_head": "7b731c85d663707b3657ae7c1b4b709f1a2558af",
+  "working_branch": "cr/r3m21-cf4-reference-resolution-20260923",
+  "canonical_node": "N1_TDL_PRODUCTION_H_CF4_OUTER_REFERENCE_RESOLUTION_AT_INCOMING_CHECKPOINT",
+  "checkpoint": "incoming g000384; B2 immutable state SHA eaad0a24ae65edec6a6609abf7fbdb5f690cdb77b820d1b8a65426ddd12ebf55",
+  "horizon": "4 B2 dt = 0.04999569408955976 au",
+  "same_discrete_H_CAP_box_energy_b": true,
+  "source_sha256_before_run": "6c40600a952fdc2bf3dc5a356124be1d556972216326cc4b378c5f03fd814cfc",
+  "prior_tiny_v3_sha256": "8343645f162316954cdb93119c4470aff786618d5405130f9c2c5737d776629b",
+  "one_gpu_propagation_job": true,
+  "gpu_wall_seconds_max": 7200,
+  "window_seconds_max": 1800,
+  "fft_matvec_max_including_preflight": 4000,
+  "gpu_free_reserve_bytes": 2147483648,
+  "host_available_reserve_bytes": 8589934592,
+  "candidate_ladder": [
+    "CF4_4_sub8",
+    "CF4_8_sub8",
+    "CF4_8_sub4",
+    "CF4_16_sub4",
+    "CF4_32_sub4",
+    "CF4_16_sub4_tight"
+  ],
+  "gate": "CF4 16->32 outer, 16-step inner tolerance, 8-step action-substeps raw differences each <1% of measured 4->32 raw difference; only incoming discrete-H prior CF4_4 error scale",
+  "claim_ceiling": "No full collision, no independent production ODE, no global observable/continuum/physical admission",
+  "excluded": [
+    "new collision",
+    "preparation rerun",
+    "finer h",
+    "other checkpoint windows",
+    "representation/CAP/box/energy/b changes"
+  ]
+}

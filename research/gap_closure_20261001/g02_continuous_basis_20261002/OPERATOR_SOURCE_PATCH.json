@@ -1,0 +1,54 @@
+{
+  "schema": "BASS_R4X_OPERATOR_SOURCE_PATCH_AUDIT_V1",
+  "status": "PASS_NUMERICAL_BODIES_UNCHANGED",
+  "comparisons": [
+    {
+      "upstream_path": "research/foundation_rebuild/full_operator_20260926/full_operator.py",
+      "upstream_sha256": "2976fbda4b40d9e04eff6c85519cb6b186a230709c7891296b478099285f2889",
+      "adapter_path": "research/gap_closure_20261001/g02_continuous_basis_20261002/continuous_full_operator.py",
+      "adapter_sha256": "5cfe910828693dd665cf1305a70d68a110aa1a93ea7b2f1372565f4620133ebd",
+      "unchanged_numerical_function_or_class_AST": [
+        "_integer",
+        "_angular_rule",
+        "_radial_rule",
+        "same_center_blocks",
+        "_signature",
+        "CrossSnapshot",
+        "_bind_cross",
+        "compute_cross_snapshot",
+        "assemble_full",
+        "load_cross_archive"
+      ],
+      "allowed_changes": [
+        "radial type and identity/payload guards",
+        "representation metadata only"
+      ],
+      "unified_diff": "--- research/foundation_rebuild/full_operator_20260926/full_operator.py\n+++ research/gap_closure_20261001/g02_continuous_basis_20261002/continuous_full_operator.py\n@@ -15,6 +15,7 @@\n from numpy.polynomial.legendre import leggauss\n from scipy.special import eval_legendre\n from bass_foundations.radial_basis import FEMRadial, readonly\n+from continuous_adapter_support import validate_radial_channel_types\n from bass_foundations.two_center import solid_harmonic\n \n \n@@ -28,8 +29,7 @@\n     channels = tuple(channels)\n     if not channels or len(channels) > 128:\n         raise ValueError('1..128 channels required')\n-    if not all(isinstance(c.radial, FEMRadial) for c in channels):\n-        raise ValueError('finite common-mesh FEM radial channels required')\n+    validate_radial_channel_types(channels)\n     edges = np.asarray(channels[0].radial.edges, float)\n     if edges.ndim != 1 or len(edges) < 2 or edges[0] != 0 or not np.isfinite(edges).all() or np.any(np.diff(edges) <= 0):\n         raise ValueError('invalid FEM partition')\n"
+    },
+    {
+      "upstream_path": "research/foundation_rebuild/tp2a_analytic_pruning_20260926/code/exact_cross.py",
+      "upstream_sha256": "fcc7e01e01a0a43555d0f298b75491c78d312f67957c8d03f0d6e5414bf43417",
+      "adapter_path": "research/gap_closure_20261001/g02_continuous_basis_20261002/continuous_exact_cross.py",
+      "adapter_sha256": "0b30ddd6a5ffcc7bf79107a9051e18718f4cbbd63d123b56d9f07a7b68bd640e",
+      "unchanged_numerical_function_or_class_AST": [
+        "_radials",
+        "_coefficients",
+        "MomentKernel",
+        "cartesian_transform",
+        "frame",
+        "split_edges",
+        "resolution_edges",
+        "rebatch",
+        "cross"
+      ],
+      "allowed_changes": [
+        "radial type and identity/payload guards",
+        "representation metadata only"
+      ],
+      "unified_diff": "--- research/foundation_rebuild/tp2a_analytic_pruning_20260926/code/exact_cross.py\n+++ research/gap_closure_20261001/g02_continuous_basis_20261002/continuous_exact_cross.py\n@@ -7,7 +7,8 @@\n import ctypes,hashlib,json,math,platform,time\n import numpy as np\n import bootstrap\n-from fast_cross import _validate,_batches,_P,_Y00\n+from fast_cross import _batches,_P,_Y00\n+from continuous_adapter_support import validate_cross_channels as _validate, radial_fingerprint, representation_metadata\n from aligned_cross import intersection_volume\n from analytic_moments import moments\n \n@@ -121,10 +122,8 @@\n     # Reject, rather than silently dropping, genuinely complex radial data.\n     seen={}\n     for channel in channels:\n-        r=channel.radial;coef=np.asarray(r.polynomial_coefficients)\n-        if np.iscomplexobj(coef):raise ValueError('real radial coefficient payload required')\n-        if not np.isfinite(coef).all():raise ValueError('finite radial coefficient payload required')\n-        fingerprint=(r.l,float(r.energy),hashlib.sha256(coef.tobytes()).hexdigest())\n+        r=channel.radial\n+        fingerprint=radial_fingerprint(r)\n         if r.identity in seen and seen[r.identity]!=fingerprint:raise ValueError('inconsistent radial identity payload')\n         seen[r.identity]=fingerprint\n     if not np.isfinite(t):raise ValueError('finite time required')\n@@ -155,7 +154,7 @@\n     if R>=2*L:\n         a,b=output.shape[1:]\n         return {**{k:np.zeros((a,b) if k.endswith('tp') else (b,a),complex) for k in KEYS},\n-            'metadata':{'zero_reason':'DISJOINT_SUPPORTS','sector':sector,'radial_pairs':0,'same_center_computed':False,\n+            'metadata':{**representation_metadata(channels),'zero_reason':'DISJOINT_SUPPORTS','sector':sector,'radial_pairs':0,'same_center_computed':False,\n               'sector_columns_T':active[0].tolist(),'sector_columns_P':active[1].tolist(),'original_cross_shape':[nt,np_]}}\n     vt,vp=trajectory.velocities;vel=np.r_[axes@vt,axes@vp]\n     phase_constant=-.5*float(vp@vp-vt@vt)*t+float(centers[0]@dv)\n@@ -184,7 +183,7 @@\n         output=np.array([u0@a@u1.conj().T for a in output])\n     S,H,dt,dc=output;exact=intersection_volume(L,R);volume=math.fsum(vol)\n     return {'S_tp':S,'S_pt':S.conj().T.copy(),'H_tp':H,'H_pt':H.conj().T.copy(),'D_tp':dt,'D_pt':dc.conj().T.copy(),\n-       'metadata':{'backend':'EXACT_SP_MOMENTS_CXX_V1','sector':sector,'cartesian_specialization':real_coefficients,'angular_samples':0,'analytic_moments':6,'max_azimuth_degree':3,\n+       'metadata':{**representation_metadata(channels),'backend':'EXACT_SP_MOMENTS_CXX_V1','sector':sector,'cartesian_specialization':real_coefficients,'angular_samples':0,'analytic_moments':6,'max_azimuth_degree':3,\n          'SH_reverse':'DERIVED_CONJUGACY_NOT_INDEPENDENT_HERMITICITY_TEST','D':'BOTH_DIRECT','order':order,'subdivisions':subdivisions,\n          'phase_budget':phase_budget,'sector_columns_T':active[0].tolist(),'sector_columns_P':active[1].tolist(),'original_cross_shape':[nt,np_],'radial_pairs':count,'volume':volume,'volume_exact':exact,'volume_relative_error':abs(volume-exact)/exact,\n          'wall_seconds':time.monotonic()-started,'same_center_computed':False,'production_admission':'HOLD'}}\n"
+    }
+  ],
+  "normalization": "full _basis reviewed diff; cross radial payload validation loop preamble and representation metadata dict-unpacking excluded; all other function/class AST nodes identical",
+  "original_files_mutated": false,
+  "physical_calls": 0
+}

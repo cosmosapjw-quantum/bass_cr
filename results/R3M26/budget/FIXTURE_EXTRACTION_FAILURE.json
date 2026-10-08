@@ -1,0 +1,11 @@
+{
+  "status": "RUNTIME_ENVIRONMENT_FAILURE",
+  "actual_exit_code": 1,
+  "error": "ModuleNotFoundError: No module named pytest",
+  "cause": "test fixture imported without explicitly configured test-only PYTHONPATH",
+  "completed_before_failure": [
+    "CURRENT_SELECTED_P3_LEDGER.json",
+    "CURRENT_SELECTED_P3_EVALUATION.json"
+  ],
+  "repair": "Set PYTHONPATH=../test_deps:. and generate only missing synthetic artifacts; preserve current ledgers"
+}

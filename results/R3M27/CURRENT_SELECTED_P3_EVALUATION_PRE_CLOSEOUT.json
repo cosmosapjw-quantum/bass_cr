@@ -1,0 +1,169 @@
+{
+  "additive_total_absolute_error": null,
+  "additive_total_exact": null,
+  "all_required_evidence_admitted": false,
+  "certified_total_bound": null,
+  "combination": "CONSERVATIVE_L1_NO_RSS_OR_INDEPENDENCE_ASSUMPTION",
+  "components": {
+    "box_CAP_finite_time": {
+      "absolute_error": null,
+      "absolute_error_exact": null,
+      "admitted": false,
+      "allocation_absolute": 1.213382870290909e-05,
+      "allocation_relative": 0.0015,
+      "evidence_class": "MISSING_VALIDATED_ESTIMATE",
+      "evidence_refs": [
+        "docs/r3m25/REPORT_KO.md"
+      ],
+      "reasons": [
+        "EVIDENCE_CLASS_NOT_ADMISSIBLE",
+        "MISSING_ERROR_ESTIMATE",
+        "LOCAL_OR_UNDECLARED_SUPPORT_SCOPE"
+      ],
+      "reported_value_exceeds_allocation": null,
+      "status": "UNADMITTED"
+    },
+    "preparation": {
+      "absolute_error": null,
+      "absolute_error_exact": null,
+      "admitted": false,
+      "allocation_absolute": 1.213382870290909e-05,
+      "allocation_relative": 0.0015,
+      "evidence_class": "MISSING_VALIDATED_ESTIMATE",
+      "evidence_refs": [
+        "docs/r3m25/REPORT_KO.md"
+      ],
+      "reasons": [
+        "EVIDENCE_CLASS_NOT_ADMISSIBLE",
+        "MISSING_ERROR_ESTIMATE",
+        "LOCAL_OR_UNDECLARED_SUPPORT_SCOPE"
+      ],
+      "reported_value_exceeds_allocation": null,
+      "status": "UNADMITTED"
+    },
+    "real_time": {
+      "absolute_error": 4.415209956028926e-06,
+      "absolute_error_exact": {
+        "denominator": 500000000000000000000,
+        "numerator": 2207604978014463
+      },
+      "admitted": true,
+      "allocation_absolute": 8.089219135272728e-06,
+      "allocation_relative": 0.001,
+      "evidence_class": "VALIDATED_ESTIMATE",
+      "evidence_refs": [
+        "results/R3M27/B3_TEMPORAL_EVALUATION.json#/channels/P3",
+        "results/R3M26/temporal/B3_FROZEN_FORECAST.json#/payload/criterion",
+        "results/R3M27/FULL_GENERATION_AUDIT.json",
+        "results/R3M27/RUNTIME_AUDIT.json"
+      ],
+      "reasons": [],
+      "reported_value_exceeds_allocation": false,
+      "status": "ADMITTED_WITHIN_ALLOCATION"
+    },
+    "spatial": {
+      "absolute_error": 0.0002380941829022605,
+      "absolute_error_exact": {
+        "denominator": 2000000000000000000,
+        "numerator": 476188365804521
+      },
+      "admitted": false,
+      "allocation_absolute": 2.426765740581818e-05,
+      "allocation_relative": 0.003,
+      "evidence_class": "RAW_PAIR_DIFFERENCE",
+      "evidence_refs": [
+        "results/R3M16/COLLISION_MATRIX.json#/decomposition/P3/Delta_h_dt025"
+      ],
+      "reasons": [
+        "EVIDENCE_CLASS_NOT_ADMISSIBLE",
+        "LOCAL_OR_UNDECLARED_SUPPORT_SCOPE"
+      ],
+      "reported_value_exceeds_allocation": true,
+      "status": "UNADMITTED"
+    }
+  },
+  "exceeded_components": [],
+  "external_validation": {
+    "evidence_refs": [
+      "results/R3M27/B3_TEMPORAL_EVALUATION.json",
+      "results/R3M27/FULL_GENERATION_AUDIT.json"
+    ],
+    "production_admission": false,
+    "status": "FIXED_H_SELECTED_SPANS_TEMPORAL_ESTIMATE_VALIDATED_NONCERTIFIED"
+  },
+  "float_display_total_is_certified": false,
+  "h_dt": {
+    "absolute_error": 8.422143110339755e-05,
+    "absolute_error_exact": {
+      "denominator": 20000000000000000000,
+      "numerator": 1684428622067951
+    },
+    "accounting": "SEPARATE_ADDITIVE",
+    "admitted": false,
+    "allocation_absolute": null,
+    "allocation_relative": null,
+    "evidence_class": "RAW_INTERACTION_DIFFERENCE",
+    "evidence_refs": [
+      "results/R3M16/COLLISION_MATRIX.json#/decomposition/P3/I_ht"
+    ],
+    "reasons": [
+      "EVIDENCE_CLASS_NOT_ADMISSIBLE",
+      "LOCAL_OR_UNDECLARED_SUPPORT_SCOPE"
+    ],
+    "reported_value_exceeds_allocation": null,
+    "status": "UNADMITTED"
+  },
+  "historical_decisions_changed": false,
+  "production_admitted": false,
+  "profile": "SELECTED_SPANS_SINGLE_B",
+  "quantity": {
+    "domain": {
+      "b_a0": 2.0,
+      "kind": "SINGLE_B"
+    },
+    "energy_keV_per_u": 100.0,
+    "model_id": "NONRELATIVISTIC_ONE_ELECTRON_FIXED_TARGET_STRAIGHT_LINE_POINT_COULOMB_V1",
+    "observable_id": "PROJECTILE_HYDROGEN_N_LE_3_CAPTURE_PROBABILITY_MODEL",
+    "observable_scope": "SELECTED_SPANS",
+    "reference_value": 0.008089219135272727,
+    "units": "dimensionless"
+  },
+  "quantity_numeric_identity_exact": {
+    "domain": {
+      "b_a0": {
+        "denominator": 1,
+        "numerator": 2
+      },
+      "kind": "SINGLE_B"
+    },
+    "energy_keV_per_u": {
+      "denominator": 1,
+      "numerator": 100
+    },
+    "model_id": "NONRELATIVISTIC_ONE_ELECTRON_FIXED_TARGET_STRAIGHT_LINE_POINT_COULOMB_V1",
+    "observable_id": "PROJECTILE_HYDROGEN_N_LE_3_CAPTURE_PROBABILITY_MODEL",
+    "observable_scope": "SELECTED_SPANS",
+    "reference_value": {
+      "denominator": 1000000000000000000,
+      "numerator": 8089219135272727
+    },
+    "units": "dimensionless"
+  },
+  "required_absolute_total": 5.662453394690909e-05,
+  "required_absolute_total_exact": {
+    "denominator": 1000000000000000000000,
+    "numerator": 56624533946909089
+  },
+  "required_components": [
+    "preparation",
+    "spatial",
+    "real_time",
+    "box_CAP_finite_time"
+  ],
+  "required_relative_total": 0.007,
+  "schema": "BASS_CR_R3M26_BUDGET_EVALUATION_V1",
+  "scope": "DECLARED_QUANTITY_NUMERICAL_LEDGER_ONLY_NOT_WHOLE_PRODUCTION_OR_EXPERIMENTAL_VALIDATION",
+  "status": "NUMERICAL_BUDGET_OPEN",
+  "synthetic_fixture": false,
+  "total_within_budget": null
+}

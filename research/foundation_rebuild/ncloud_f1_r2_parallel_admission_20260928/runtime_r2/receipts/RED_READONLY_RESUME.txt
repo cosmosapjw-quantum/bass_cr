@@ -1,0 +1,18 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+__________ test_resume_does_not_create_missing_source_task_directory ___________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-92/test_resume_does_not_create_mi0')
+
+    def test_resume_does_not_create_missing_source_task_directory(tmp_path):
+        source = tmp_path / 'incomplete_old'
+        source.mkdir()
+        (source / 'TASK_CONTEXT.json').write_text(json.dumps(CONTEXT))
+        new = TaskStore(tmp_path / 'new', CONTEXT)
+>       with pytest.raises(Exception):
+E       Failed: DID NOT RAISE <class 'Exception'>
+
+research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_task_store.py:88: Failed
+=========================== short test summary info ============================
+FAILED research/foundation_rebuild/ncloud_f1_r2_parallel_admission_20260928/runtime_r2/tests/test_task_store.py::test_resume_does_not_create_missing_source_task_directory
+1 failed, 6 deselected in 0.19s
