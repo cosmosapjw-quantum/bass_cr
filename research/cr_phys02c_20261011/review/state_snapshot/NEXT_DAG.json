@@ -1,0 +1,39 @@
+{
+  "schema": "cr-phys02c-next-dag.v1",
+  "scientific_contract_sha256": "e0445ecbf052a3441f6203f9e0463defcf0c24c0ee018a67e112d338991f47ee",
+  "tasks": [
+    {
+      "id": "CR-PHYS02C-SOURCE-COHERENT-IONIZATION",
+      "status": "IN_PROGRESS",
+      "purpose": "Primary-source H analytic oscillator and He2000 coefficients, same SDCS-total integral, finite-time paired cascade comparison.",
+      "completion": "Targeted numerical result and distinct final Astra decision."
+    },
+    {
+      "id": "CR-PHYS02C-NCP-MATCHED-THIRD-GRID",
+      "status": "WAITING_INDEPENDENT_REVIEW",
+      "depends_on": ["CR-PHYS02C-SOURCE-COHERENT-IONIZATION"],
+      "independent_review": {"path": "review/FINAL_DECISION.json", "sha256": null},
+      "purpose": "Measure the paired representation delta on a third matched grid (4800 to9600 nodes) to check whether its apparent sign and size persist as the discretization changes; not an error certificate.",
+      "max_transport_calls": 2,
+      "max_wall_s": 3600,
+      "grid": [3200,6400],
+      "models_sequential": ["coherent_full_BED","legacy_BEQ_total_BED_shape"],
+      "fixed_physics": "No source, bath, Coulomb, CCC energy cost, cutoff, quadrature rule, precision or tolerance changes.",
+      "if_resource_or_identity_blocked": "HOLD this node with actual evidence; preserve independent source work as separate READY tasks."
+    },
+    {
+      "id": "CR-PHYS02C-CCC-TARGET-ENERGY-IDENTITY",
+      "status": "SOURCE_IDENTITY_UNRESOLVED",
+      "purpose": "Identify whether each native first-zero marker is a target Hamiltonian transition energy, a sampling convention or another offset. Do not equate a spectroscopy list with a justified rate-table transformation.",
+      "blocked_descendants": ["spectroscopic_cost_replacement","physical_atomic_G02_admission"]
+    },
+    {
+      "id": "CR-PHYS02C-ATOMIC-COMPLETENESS",
+      "status": "BLOCKED",
+      "missing": ["HeII impact channels","higher excitation/continuum completeness","elastic neutral recoil and thermal diffusion","photon branching/transport","bath feedback"],
+      "global_gate": "atomic_G02 UNRESOLVED"
+    }
+  ],
+  "inherited_gates": {"PHYS02_DELAY":"OPEN","production_history":"HOLD","atomic_G02":"UNRESOLVED","b_grid":"NO_GO","all_bound":"OPEN","R17B2B":"NO_CERTIFIED_SOURCE_SHARPENING"},
+  "model_performance": "NOT_EVALUATED"
+}

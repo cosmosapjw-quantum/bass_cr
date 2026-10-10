@@ -1,0 +1,50 @@
+{
+  "schema": "cr-phys02c-ncp-resource-repair.v1",
+  "end_utc": "2026-10-10T17:39:49.742849+00:00",
+  "status": "PASS_OPERATIONAL_ONLY",
+  "actual_fixture_exit": 0,
+  "actual_realprobe_exit": 0,
+  "actual_plan_exit": 0,
+  "transport_calls": 0,
+  "candidate_science_code_modified": false,
+  "launcher_modified": false,
+  "before_identity": {
+    "state": "FROZEN_BEFORE_OPERATIONAL_REPAIR",
+    "scope": "Visible cgroup2 ancestor resource aggregation; no scientific/code candidate modifications or transport",
+    "reason": "Independent review demonstrated unrestricted leaf hiding8GiB and0.5CPU parent; must HOLD",
+    "files": {
+      "ncp/ops.py": {
+        "bytes": 7633,
+        "sha256": "833fc9bc444c547227493a7499af22d2350a66712bf89f138d737e7b45752d17"
+      },
+      "ncp/launch_refinement.py": {
+        "bytes": 10553,
+        "sha256": "c685d6eaad38c983268db780b0afb11bc063055d31fb87a13bd9d1708d4ea299"
+      }
+    }
+  },
+  "after_files": {
+    "ncp/ops.py": {
+      "bytes": 12072,
+      "sha256": "86f03aac7e2aa5cc6bccc794f466eca204d524d4ef5a5a74305bbd96ff659dfa"
+    },
+    "ncp/launch_refinement.py": {
+      "bytes": 10553,
+      "sha256": "c685d6eaad38c983268db780b0afb11bc063055d31fb87a13bd9d1708d4ea299"
+    },
+    "evidence/ncp_prepare/resource_repair/test_resource_hierarchy.py": {
+      "bytes": 3820,
+      "sha256": "88b64c4be6b9cd16eaf09aa943416c9227e78579f1a59d7a04a668471fe440cd"
+    }
+  },
+  "actual_real_probe": {
+    "status": "HOLD",
+    "capacity_established": true,
+    "bounded_memory_bytes": 8589934592,
+    "cpu_quota": 8.0,
+    "available_working_bytes": 6737743872,
+    "minimum_working_bytes": 12884901888
+  },
+  "fixtures": "SYNTHETIC_RESOURCE_FIXTURES.json",
+  "scope": "All readable visible ancestors only; unresolvable hierarchy and unreadable required capacity metadata fail closed with typed HOLD"
+}

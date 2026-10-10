@@ -1,0 +1,716 @@
+{
+  "status": "PASS_OPERATIONAL_ONLY",
+  "transport_calls": 0,
+  "cases": [
+    {
+      "id": "EXACT_REVIEW_COUNTEREXAMPLE_LEAF_MAX_PARENT_8GiB_0p5CPU",
+      "status": "PASS_OPERATIONAL_ONLY",
+      "probe": {
+        "utc": "2026-10-10T17:39:32Z",
+        "status": "HOLD",
+        "reason": "INSUFFICIENT_EFFECTIVE_MEMORY_CPU_OR_DISK",
+        "capacity_established": true,
+        "affinity_cpus": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "effective_allowed_cpus": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "cgroup_hierarchy": {
+          "membership": "/jobs/task",
+          "mount_root": "/",
+          "mount_point": "/tmp/tmpdc3st45m/cgroup",
+          "leaf": "/tmp/tmpdc3st45m/cgroup/jobs/task",
+          "inspection_scope": "ALL_READABLE_VISIBLE_ANCESTORS_TO_MOUNT_ROOT",
+          "ancestors": [
+            {
+              "path": "/tmp/tmpdc3st45m/cgroup/jobs/task",
+              "values": {
+                "cpu.max": "max 100000",
+                "memory.max": "max",
+                "memory.current": "268435456"
+              }
+            },
+            {
+              "path": "/tmp/tmpdc3st45m/cgroup/jobs",
+              "values": {
+                "cpu.max": "50000 100000",
+                "memory.max": "8589934592",
+                "memory.current": "1073741824"
+              }
+            },
+            {
+              "path": "/tmp/tmpdc3st45m/cgroup",
+              "values": {
+                "cpu.max": "max 100000",
+                "memory.max": "max",
+                "memory.current": "268435456"
+              }
+            }
+          ],
+          "effective_cpuset": "0,1,2,3,4,5,6,7,8",
+          "effective_cpuset_cpus": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        },
+        "cgroup": {
+          "cpu.max": "max 100000",
+          "memory.max": "max",
+          "memory.current": "268435456"
+        },
+        "topology": [
+          {
+            "cpu": 0,
+            "core_id": "0",
+            "package_id": "0"
+          },
+          {
+            "cpu": 1,
+            "core_id": "1",
+            "package_id": "0"
+          },
+          {
+            "cpu": 2,
+            "core_id": "2",
+            "package_id": "0"
+          },
+          {
+            "cpu": 3,
+            "core_id": "3",
+            "package_id": "0"
+          },
+          {
+            "cpu": 4,
+            "core_id": "4",
+            "package_id": "0"
+          },
+          {
+            "cpu": 5,
+            "core_id": "5",
+            "package_id": "0"
+          },
+          {
+            "cpu": 6,
+            "core_id": "6",
+            "package_id": "0"
+          },
+          {
+            "cpu": 7,
+            "core_id": "7",
+            "package_id": "0"
+          },
+          {
+            "cpu": 8,
+            "core_id": "8",
+            "package_id": "0"
+          }
+        ],
+        "load_average": [
+          1.51806640625,
+          1.3369140625,
+          1.02685546875
+        ],
+        "same_uid_process_count_no_commandlines": 0,
+        "coordinator_pid": 6,
+        "coordinator_RSS": null,
+        "memory_host_bytes": {
+          "MemTotal": 137438953472,
+          "MemAvailable": 128849018880
+        },
+        "bounded_memory_bytes": 8589934592,
+        "available_before_reserve_bytes": 7516192768,
+        "reserve_bytes": 1073741824,
+        "available_working_bytes": 6442450944,
+        "cpu_quota": 0.5,
+        "estimated_peak_bytes": 8589934592,
+        "minimum_working_bytes": 12884901888,
+        "free_disk_bytes": 25410637824,
+        "admitted": false,
+        "thread_environment": {
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "NUMEXPR_NUM_THREADS": "1",
+          "OMP_MAX_ACTIVE_LEVELS": "1"
+        }
+      }
+    },
+    {
+      "id": "PARENT_QUOTA2_INSUFFICIENT_HEADROOM",
+      "status": "PASS_OPERATIONAL_ONLY",
+      "probe": {
+        "utc": "2026-10-10T17:39:32Z",
+        "status": "HOLD",
+        "reason": "INSUFFICIENT_EFFECTIVE_MEMORY_CPU_OR_DISK",
+        "capacity_established": true,
+        "affinity_cpus": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "effective_allowed_cpus": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "cgroup_hierarchy": {
+          "membership": "/jobs/task",
+          "mount_root": "/",
+          "mount_point": "/tmp/tmpdc3st45m/cgroup",
+          "leaf": "/tmp/tmpdc3st45m/cgroup/jobs/task",
+          "inspection_scope": "ALL_READABLE_VISIBLE_ANCESTORS_TO_MOUNT_ROOT",
+          "ancestors": [
+            {
+              "path": "/tmp/tmpdc3st45m/cgroup/jobs/task",
+              "values": {
+                "cpu.max": "max 100000",
+                "memory.max": "max",
+                "memory.current": "268435456"
+              }
+            },
+            {
+              "path": "/tmp/tmpdc3st45m/cgroup/jobs",
+              "values": {
+                "cpu.max": "200000 100000",
+                "memory.max": "34359738368",
+                "memory.current": "26843545600"
+              }
+            },
+            {
+              "path": "/tmp/tmpdc3st45m/cgroup",
+              "values": {
+                "cpu.max": "max 100000",
+                "memory.max": "max",
+                "memory.current": "268435456"
+              }
+            }
+          ],
+          "effective_cpuset": "0,1,2,3,4,5,6,7,8",
+          "effective_cpuset_cpus": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        },
+        "cgroup": {
+          "cpu.max": "max 100000",
+          "memory.max": "max",
+          "memory.current": "268435456"
+        },
+        "topology": [
+          {
+            "cpu": 0,
+            "core_id": "0",
+            "package_id": "0"
+          },
+          {
+            "cpu": 1,
+            "core_id": "1",
+            "package_id": "0"
+          },
+          {
+            "cpu": 2,
+            "core_id": "2",
+            "package_id": "0"
+          },
+          {
+            "cpu": 3,
+            "core_id": "3",
+            "package_id": "0"
+          },
+          {
+            "cpu": 4,
+            "core_id": "4",
+            "package_id": "0"
+          },
+          {
+            "cpu": 5,
+            "core_id": "5",
+            "package_id": "0"
+          },
+          {
+            "cpu": 6,
+            "core_id": "6",
+            "package_id": "0"
+          },
+          {
+            "cpu": 7,
+            "core_id": "7",
+            "package_id": "0"
+          },
+          {
+            "cpu": 8,
+            "core_id": "8",
+            "package_id": "0"
+          }
+        ],
+        "load_average": [
+          1.51806640625,
+          1.3369140625,
+          1.02685546875
+        ],
+        "same_uid_process_count_no_commandlines": 0,
+        "coordinator_pid": 6,
+        "coordinator_RSS": null,
+        "memory_host_bytes": {
+          "MemTotal": 137438953472,
+          "MemAvailable": 128849018880
+        },
+        "bounded_memory_bytes": 34359738368,
+        "available_before_reserve_bytes": 7516192768,
+        "reserve_bytes": 4294967296,
+        "available_working_bytes": 3221225472,
+        "cpu_quota": 2.0,
+        "estimated_peak_bytes": 8589934592,
+        "minimum_working_bytes": 12884901888,
+        "free_disk_bytes": 25410637824,
+        "admitted": false,
+        "thread_environment": {
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "NUMEXPR_NUM_THREADS": "1",
+          "OMP_MAX_ACTIVE_LEVELS": "1"
+        }
+      }
+    },
+    {
+      "id": "PARENT_SUFFICIENT_CAPACITY_POSITIVE",
+      "status": "PASS_OPERATIONAL_ONLY",
+      "probe": {
+        "utc": "2026-10-10T17:39:32Z",
+        "status": "ADMITTED_RESOURCE_ONLY",
+        "reason": null,
+        "capacity_established": true,
+        "affinity_cpus": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "effective_allowed_cpus": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "cgroup_hierarchy": {
+          "membership": "/jobs/task",
+          "mount_root": "/",
+          "mount_point": "/tmp/tmpdc3st45m/cgroup",
+          "leaf": "/tmp/tmpdc3st45m/cgroup/jobs/task",
+          "inspection_scope": "ALL_READABLE_VISIBLE_ANCESTORS_TO_MOUNT_ROOT",
+          "ancestors": [
+            {
+              "path": "/tmp/tmpdc3st45m/cgroup/jobs/task",
+              "values": {
+                "cpu.max": "max 100000",
+                "memory.max": "max",
+                "memory.current": "268435456"
+              }
+            },
+            {
+              "path": "/tmp/tmpdc3st45m/cgroup/jobs",
+              "values": {
+                "cpu.max": "200000 100000",
+                "memory.max": "34359738368",
+                "memory.current": "1073741824"
+              }
+            },
+            {
+              "path": "/tmp/tmpdc3st45m/cgroup",
+              "values": {
+                "cpu.max": "max 100000",
+                "memory.max": "max",
+                "memory.current": "268435456"
+              }
+            }
+          ],
+          "effective_cpuset": "0,1,2,3,4,5,6,7,8",
+          "effective_cpuset_cpus": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        },
+        "cgroup": {
+          "cpu.max": "max 100000",
+          "memory.max": "max",
+          "memory.current": "268435456"
+        },
+        "topology": [
+          {
+            "cpu": 0,
+            "core_id": "0",
+            "package_id": "0"
+          },
+          {
+            "cpu": 1,
+            "core_id": "1",
+            "package_id": "0"
+          },
+          {
+            "cpu": 2,
+            "core_id": "2",
+            "package_id": "0"
+          },
+          {
+            "cpu": 3,
+            "core_id": "3",
+            "package_id": "0"
+          },
+          {
+            "cpu": 4,
+            "core_id": "4",
+            "package_id": "0"
+          },
+          {
+            "cpu": 5,
+            "core_id": "5",
+            "package_id": "0"
+          },
+          {
+            "cpu": 6,
+            "core_id": "6",
+            "package_id": "0"
+          },
+          {
+            "cpu": 7,
+            "core_id": "7",
+            "package_id": "0"
+          },
+          {
+            "cpu": 8,
+            "core_id": "8",
+            "package_id": "0"
+          }
+        ],
+        "load_average": [
+          1.51806640625,
+          1.3369140625,
+          1.02685546875
+        ],
+        "same_uid_process_count_no_commandlines": 0,
+        "coordinator_pid": 6,
+        "coordinator_RSS": null,
+        "memory_host_bytes": {
+          "MemTotal": 137438953472,
+          "MemAvailable": 128849018880
+        },
+        "bounded_memory_bytes": 34359738368,
+        "available_before_reserve_bytes": 33285996544,
+        "reserve_bytes": 4294967296,
+        "available_working_bytes": 28991029248,
+        "cpu_quota": 2.0,
+        "estimated_peak_bytes": 8589934592,
+        "minimum_working_bytes": 12884901888,
+        "free_disk_bytes": 25410637824,
+        "admitted": true,
+        "thread_environment": {
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "NUMEXPR_NUM_THREADS": "1",
+          "OMP_MAX_ACTIVE_LEVELS": "1"
+        }
+      }
+    },
+    {
+      "id": "UNRESOLVED_MEMBERSHIP_HOLD",
+      "probe": {
+        "utc": "2026-10-10T17:39:32Z",
+        "status": "HOLD",
+        "reason": "CGROUP2_MEMBERSHIP_MOUNT_MAPPING_UNRESOLVED",
+        "capacity_established": false,
+        "affinity_cpus": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "effective_allowed_cpus": [],
+        "cgroup_hierarchy": null,
+        "cgroup": null,
+        "topology": [],
+        "load_average": [
+          1.51806640625,
+          1.3369140625,
+          1.02685546875
+        ],
+        "same_uid_process_count_no_commandlines": 0,
+        "coordinator_pid": 6,
+        "coordinator_RSS": null,
+        "memory_host_bytes": {
+          "MemTotal": 137438953472,
+          "MemAvailable": 128849018880
+        },
+        "estimated_peak_bytes": 8589934592,
+        "minimum_working_bytes": 12884901888,
+        "free_disk_bytes": 25410637824,
+        "admitted": false,
+        "thread_environment": {
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "NUMEXPR_NUM_THREADS": "1",
+          "OMP_MAX_ACTIVE_LEVELS": "1"
+        }
+      }
+    },
+    {
+      "id": "UNREADABLE_ANCESTOR_HOLD",
+      "probe": {
+        "utc": "2026-10-10T17:39:32Z",
+        "status": "HOLD",
+        "reason": "CGROUP2_ANCESTOR_LIMIT_UNREADABLE /tmp/tmpdc3st45m/cgroup/jobs",
+        "capacity_established": false,
+        "affinity_cpus": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "effective_allowed_cpus": [],
+        "cgroup_hierarchy": null,
+        "cgroup": null,
+        "topology": [],
+        "load_average": [
+          1.51806640625,
+          1.3369140625,
+          1.02685546875
+        ],
+        "same_uid_process_count_no_commandlines": 0,
+        "coordinator_pid": 6,
+        "coordinator_RSS": null,
+        "memory_host_bytes": {
+          "MemTotal": 137438953472,
+          "MemAvailable": 128849018880
+        },
+        "estimated_peak_bytes": 8589934592,
+        "minimum_working_bytes": 12884901888,
+        "free_disk_bytes": 25410641920,
+        "admitted": false,
+        "thread_environment": {
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "NUMEXPR_NUM_THREADS": "1",
+          "OMP_MAX_ACTIVE_LEVELS": "1"
+        }
+      }
+    },
+    {
+      "id": "UNRESOLVED_MOUNT_HOLD",
+      "probe": {
+        "utc": "2026-10-10T17:39:32Z",
+        "status": "HOLD",
+        "reason": "CGROUP2_MEMBERSHIP_MOUNT_MAPPING_UNRESOLVED",
+        "capacity_established": false,
+        "affinity_cpus": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "effective_allowed_cpus": [],
+        "cgroup_hierarchy": null,
+        "cgroup": null,
+        "topology": [],
+        "load_average": [
+          1.51806640625,
+          1.3369140625,
+          1.02685546875
+        ],
+        "same_uid_process_count_no_commandlines": 0,
+        "coordinator_pid": 6,
+        "coordinator_RSS": null,
+        "memory_host_bytes": {
+          "MemTotal": 137438953472,
+          "MemAvailable": 128849018880
+        },
+        "estimated_peak_bytes": 8589934592,
+        "minimum_working_bytes": 12884901888,
+        "free_disk_bytes": 25410637824,
+        "admitted": false,
+        "thread_environment": {
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "NUMEXPR_NUM_THREADS": "1",
+          "OMP_MAX_ACTIVE_LEVELS": "1"
+        }
+      }
+    },
+    {
+      "id": "PRESERVED_FIRST_FAILURE_OLD_PROBE_COUNTEREXAMPLE",
+      "old_probe": {
+        "utc": "2026-10-10T17:39:32Z",
+        "affinity_cpus": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "cpu_quota": null,
+        "cgroup": {
+          "cpu.max": "max 100000",
+          "cpuset.cpus.effective": "0,1,2,3,4,5,6,7,8",
+          "memory.max": "max",
+          "memory.current": "268435456"
+        },
+        "topology": [
+          {
+            "cpu": 0,
+            "core_id": "0",
+            "package_id": "0"
+          },
+          {
+            "cpu": 1,
+            "core_id": "1",
+            "package_id": "0"
+          },
+          {
+            "cpu": 2,
+            "core_id": "2",
+            "package_id": "0"
+          },
+          {
+            "cpu": 3,
+            "core_id": "3",
+            "package_id": "0"
+          },
+          {
+            "cpu": 4,
+            "core_id": "4",
+            "package_id": "0"
+          },
+          {
+            "cpu": 5,
+            "core_id": "5",
+            "package_id": "0"
+          },
+          {
+            "cpu": 6,
+            "core_id": "6",
+            "package_id": "0"
+          },
+          {
+            "cpu": 7,
+            "core_id": "7",
+            "package_id": "0"
+          },
+          {
+            "cpu": 8,
+            "core_id": "8",
+            "package_id": "0"
+          }
+        ],
+        "load_average": [
+          1.51806640625,
+          1.3369140625,
+          1.02685546875
+        ],
+        "same_uid_process_count_no_commandlines": 23,
+        "coordinator_pid": 6,
+        "coordinator_RSS": "13092 kB",
+        "memory_host_bytes": {
+          "MemTotal": 137438953472,
+          "MemAvailable": 128849018880
+        },
+        "bounded_memory_bytes": 137438953472,
+        "available_before_reserve_bytes": 128849018880,
+        "reserve_bytes": 17179869184,
+        "available_working_bytes": 111669149696,
+        "estimated_peak_bytes": 8589934592,
+        "minimum_working_bytes": 12884901888,
+        "free_disk_bytes": 25410613248,
+        "admitted": true,
+        "thread_environment": {
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "NUMEXPR_NUM_THREADS": "1",
+          "OMP_MAX_ACTIVE_LEVELS": "1"
+        }
+      }
+    }
+  ]
+}

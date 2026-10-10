@@ -1,0 +1,38 @@
+{
+  "work_unit": "CR-PHYS02C-SOURCE-ALGEBRA",
+  "created_utc": "2026-10-10T17:18:40.345466+00:00",
+  "actor": "/root/phys02c_helium_sources",
+  "model_identity": "GPT-6 Astra Pro host developer metadata",
+  "harness": "physmath research 4.0.0",
+  "scope": "Lightweight independent source algebra only. No cascade/code changes. H exact nonrelativistic Coulomb continuum oscillator with original Kim2000 He polynomial.",
+  "inputs": {
+    "H_source": "https://arxiv.org/pdf/2208.02111v2",
+    "equations": "5,9,10; Table1",
+    "He_source": "https://scispace.com/pdf/cross-sections-for-singly-differential-and-total-ionization-18cqvgiyli.pdf",
+    "He_coefficients_c3_to_c6": [
+      "8.24012",
+      "-10.4769",
+      "3.96496",
+      "-0.0445976"
+    ]
+  },
+  "checks": [
+    {
+      "id": "H_THRESHOLD",
+      "criterion": "Closed-form threshold128/(3e^4); compare printed10digit rounding only."
+    },
+    {
+      "id": "H_MOMENT_TRANSFORM",
+      "criterion": "Independent w and y=1/(1+w) integration representations for Ni and Q, absolute discrepancy <=1e-35 at50digits."
+    },
+    {
+      "id": "H_TABLE1",
+      "criterion": "Ni agrees .4349958493 to5e-10 (source rounding scale)."
+    },
+    {
+      "id": "HE_MOMENT_RATIONAL",
+      "criterion": "Exact rational sums for Ni and Q; no parameter fitting."
+    }
+  ],
+  "claim_ceiling": "Exact within specified nonrelativistic oscillator model and numerical integration. No physical cross-section accuracy certificate; no source-current-CGI equivalence."
+}

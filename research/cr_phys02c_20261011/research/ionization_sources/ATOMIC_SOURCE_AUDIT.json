@@ -1,0 +1,315 @@
+{
+  "work_unit": "CR-PHYS02C-ATOMIC-CONSISTENCY",
+  "audit_completed_utc": "2026-10-10T17:22:37.035447+00:00",
+  "actor": "/root/phys02c_helium_sources",
+  "scope": "Primary source and lightweight algebra; no cascade code changes or execution",
+  "model": "GPT-6 Astra Pro (host metadata)",
+  "harness": "research4.0.0",
+  "sources": [
+    {
+      "id": "KIM_RUDD_1994",
+      "doi": "10.1103/PhysRevA.50.3954",
+      "primary_url": "https://digitalcommons.unl.edu/physicsrudd/34/",
+      "retrieved_pdf_url": "https://scispace.com/pdf/binary-encounter-dipole-model-for-electron-impact-ionization-9lx87pf4e9.pdf",
+      "web_refs": [
+        "turn88view2",
+        "turn89view0",
+        "turn89view4",
+        "turn90view1"
+      ],
+      "read_scope": [
+        "III-V",
+        "Table I extracted text",
+        "H and He discussion",
+        "Eq35,38,39 screenshot"
+      ],
+      "image_limitation": "Table I screenshot requests returned challenge page; no image confirmation of TableI",
+      "supports": [
+        "Ni,Q distinct moments",
+        "BED total integration",
+        "1994 He photoionization-fit representation differs from2000 RRPA fit"
+      ],
+      "raw_pdf_local_sha256": null
+    },
+    {
+      "id": "KIM_JOHNSON_RUDD_2000",
+      "doi": "10.1103/PhysRevA.61.034702",
+      "primary_url": "https://digitalcommons.unl.edu/physicsrudd/26/",
+      "retrieved_pdf_url": "https://scispace.com/pdf/cross-sections-for-singly-differential-and-total-ionization-18cqvgiyli.pdf",
+      "web_refs": [
+        "turn85view0",
+        "turn86view0",
+        "turn86view1"
+      ],
+      "read_scope": [
+        "full4page extracted text",
+        "page0 and1 images",
+        "Eq1-6"
+      ],
+      "supports": [
+        "He original coefficients",
+        "Ni defined by same continuum integral",
+        "total Eq3 with D Eq4",
+        "slow-electron half interval"
+      ],
+      "limits": [
+        "Nonrelativistic BED approximation",
+        "Eq1 printed multiplication symbol between Mott contributions conflicts with Eq3 and NIST; explicit algebra-supported plus correction, no erratum claimed"
+      ],
+      "raw_pdf_local_sha256": null
+    },
+    {
+      "id": "MULLER_2009",
+      "doi": "10.1088/0741-3335/51/10/105014",
+      "primary_url": "https://backend.orbit.dtu.dk/ws/portalfiles/portal/4857374/Naulin_paper.pdf",
+      "web_refs": [
+        "turn75view1",
+        "turn76view0",
+        "turn77view4"
+      ],
+      "read_scope": [
+        "Table I",
+        "Eq42-48",
+        "references47,49"
+      ],
+      "contradicts": [
+        "Printed He K1.1860 does not equal2-Ni/N from printed oscillator polynomial"
+      ],
+      "raw_pdf_local_sha256": null
+    },
+    {
+      "id": "NIST_IONIZATION_EQUATIONS",
+      "primary_url": "https://physics.nist.gov/PhysRefData/Ionization/Eqs/latex.html",
+      "web_refs": [
+        "turn75view0"
+      ],
+      "read_scope": [
+        "Eq1-4"
+      ],
+      "supports": [
+        "BEQ total and BED SDCS distinct formulas",
+        "positive second Mott term"
+      ],
+      "raw_local_sha256": null
+    },
+    {
+      "id": "NIST_INTRO",
+      "primary_url": "https://physics.nist.gov/PhysRefData/Ionization/intro.html",
+      "web_refs": [
+        "turn75view2",
+        "turn77view3"
+      ],
+      "read_scope": [
+        "A-B"
+      ],
+      "supports": [
+        "Database SDCS normalized to total"
+      ],
+      "limits": [
+        "Current CGI output equivalence not established"
+      ],
+      "raw_local_sha256": null
+    },
+    {
+      "id": "NIST_HE_ORBITAL",
+      "primary_url": "https://physics.nist.gov/cgi-bin/Ionization/ion_data.php?differential=Y&id=HeI&initial=&ision=I",
+      "web_refs": [
+        "turn96view2"
+      ],
+      "read_scope": [
+        "orbital row and form"
+      ],
+      "values": {
+        "B_eV": 24.587,
+        "U_eV": 39.51,
+        "N": 2,
+        "Q": 0.8841
+      },
+      "raw_local_sha256": null
+    },
+    {
+      "id": "ROHRMANN_VERA_RUEDA_2022",
+      "arxiv": "2208.02111v2",
+      "primary_url": "https://arxiv.org/pdf/2208.02111v2",
+      "retrieved_pdf_url": "https://arxiv.org/pdf/2208.02111",
+      "web_refs": [
+        "turn99view1",
+        "turn102view0"
+      ],
+      "read_scope": [
+        "section2 Eq5,8-11",
+        "section3 Table1",
+        "PDFpage1 image"
+      ],
+      "supports": [
+        "Exact Coulomb H continuum formula in Rydberg photon-energy convention",
+        "threshold128/(3exp4)",
+        "continuum f-sum0.4349958493"
+      ],
+      "raw_pdf_local_sha256": null
+    }
+  ],
+  "access_failures": [
+    {
+      "url": "https://www3.nd.edu/~johnson/Publications/ykim.pdf",
+      "methods": [
+        "web open",
+        "urllib"
+      ],
+      "observed": [
+        "Internal Error",
+        "HTTP403"
+      ],
+      "resolved_by": "KIM_JOHNSON_RUDD_2000 mirror PDF"
+    },
+    {
+      "url": "https://digitalcommons.unl.edu/cgi/viewcontent.cgi?article=1034&context=physicsrudd",
+      "methods": [
+        "web click",
+        "urllib"
+      ],
+      "observed": [
+        "HTTP403"
+      ],
+      "resolved_by": "KIM_JOHNSON_RUDD_2000 mirror PDF"
+    },
+    {
+      "url": "https://journals.aps.org/pra/pdf/10.1103/PhysRevA.61.034702",
+      "methods": [
+        "web open"
+      ],
+      "observed": [
+        "HTTP401"
+      ],
+      "resolved_by": "KIM_JOHNSON_RUDD_2000 mirror PDF"
+    },
+    {
+      "url": "https://digitalcommons.unl.edu/cgi/viewcontent.cgi?article=1026&context=physicsrudd",
+      "methods": [
+        "web click",
+        "web open"
+      ],
+      "observed": [
+        "HTTP403"
+      ],
+      "resolved_by": "KIM_RUDD_1994 mirror PDF"
+    },
+    {
+      "url": "https://physics.nist.gov/cgi-bin/Ionization/ion_data.php?id=HeI&initial=&ision=I&total=Y",
+      "methods": [
+        "web click from official He atom page"
+      ],
+      "observed": [
+        "HTTP500"
+      ],
+      "resolved_by": null,
+      "remaining": "CGI total direct comparison NOT_EVALUATED"
+    },
+    {
+      "url": "https://arxiv.org/html/2208.02111v1",
+      "methods": [
+        "web open"
+      ],
+      "observed": [
+        "DisabledError"
+      ],
+      "resolved_by": "arxivPDFv2"
+    }
+  ],
+  "claims": [
+    {
+      "id": "H_EXACT_OSCILLATOR",
+      "status": [
+        "literature-supported",
+        "derived",
+        "numerically checked"
+      ],
+      "source_ids": [
+        "ROHRMANN_VERA_RUEDA_2022"
+      ],
+      "meaning": "Exact nonrelativistic hydrogenic Coulomb continuum oscillator; not exact electron-impact collision theory"
+    },
+    {
+      "id": "HE_MOMENT_COHERENCE",
+      "status": [
+        "literature-supported",
+        "derived"
+      ],
+      "source_ids": [
+        "KIM_JOHNSON_RUDD_2000"
+      ],
+      "coefficients_c3_to_c6": [
+        "8.24012",
+        "-10.4769",
+        "3.96496",
+        "-0.0445976"
+      ],
+      "Ni": "1.61008048",
+      "K": "1.19495976",
+      "Q": "13695611/15000000"
+    },
+    {
+      "id": "BED_TOTAL_FROM_SAME_SDCS",
+      "status": [
+        "literature-supported",
+        "derived"
+      ],
+      "source_ids": [
+        "KIM_RUDD_1994",
+        "KIM_JOHNSON_RUDD_2000",
+        "NIST_IONIZATION_EQUATIONS"
+      ],
+      "meaning": "D(t) and K from same g; no external total normalization"
+    },
+    {
+      "id": "NIST_Q_HISTORY",
+      "status": [
+        "unresolved"
+      ],
+      "source_ids": [
+        "NIST_HE_ORBITAL",
+        "KIM_RUDD_1994",
+        "KIM_JOHNSON_RUDD_2000"
+      ],
+      "meaning": "Different published atomic representations confirmed; exact origin ofcurrentQ.8841 not verified"
+    },
+    {
+      "id": "MULLER_K_HISTORY",
+      "status": [
+        "unresolved"
+      ],
+      "source_ids": [
+        "MULLER_2009",
+        "KIM_JOHNSON_RUDD_2000"
+      ],
+      "meaning": "PrintedK1.1860 inconsistent with same fit; exact historical cause and erratum not verified"
+    },
+    {
+      "id": "HE_EQ1_PLUS_CORRECTION",
+      "status": [
+        "derived",
+        "literature-supported"
+      ],
+      "source_ids": [
+        "KIM_JOHNSON_RUDD_2000",
+        "KIM_RUDD_1994",
+        "NIST_IONIZATION_EQUATIONS",
+        "MULLER_2009"
+      ],
+      "meaning": "Read PDF contains multiplication glyph atMott join; use additive form supported byownEq3 and otherprimaries; explicit repair, noerratumclaim"
+    },
+    {
+      "id": "PHYSICAL_ACCURACY",
+      "status": [
+        "unresolved"
+      ],
+      "meaning": "No empirical source calibration or production admission fromthis audit"
+    }
+  ],
+  "numeric_evidence": "SOURCE_ALGEBRA_RESULT.json",
+  "actual_execution": "SOURCE_ALGEBRA_ACTUAL_EXIT.json",
+  "report": "ATOMIC_PRIMARY_SOURCE_AUDIT_KO.md",
+  "publication_fulltext_vendored": false,
+  "independent_final_decision_role": false,
+  "instruction_to_root": "Copy audit files except _deps. Requirements file pinsmpmath. Full source paperbytes are not locally hashed; do not mislabeltoolretrieval asrawbyteidentity."
+}
