@@ -1,0 +1,18 @@
+{
+  "schema": "cr-phys02b-focused-thread-control-contract.v1",
+  "frozen_utc": "2026-10-10T12:24:14.645463+00:00",
+  "reason": "Repository AGENTS.md references HPC_ACCURACY_POLICY_KO.md default BLAS/NumExpr1thread. Prior R002 runtime thread count was not recorded; current fresh process observes unset control vars and OpenBLAS9. This observation is not retroactive thread provenance.",
+  "scope": "One canonical4800-node final-time propagation under explicit1thread environment, compare fixed R002 saved state and observables; do not rerun13-check suite or alter physical/numerical algorithms.",
+  "environment": {
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_MAX_ACTIVE_LEVELS": "1"
+  },
+  "state_normalized_linf_limit": 1e-11,
+  "positive_observable_relative_limit": 1e-11,
+  "expected_reference": "evidence/runs/R002/NUMERICAL_RESULT.json",
+  "reference_result_sha256": "1f2ebaef36c1d77ae4fcab83ef81f0618060a701eaebb5db611307aa8b090ced",
+  "claim_ceiling": "Targeted reproducibility and explicit local thread-policy compliance. No HPC64 scaling, performance speedup, physical error certificate or new production admission."
+}

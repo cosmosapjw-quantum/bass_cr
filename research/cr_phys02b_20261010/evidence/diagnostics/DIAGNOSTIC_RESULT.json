@@ -1,0 +1,380 @@
+{
+  "schema": "cr-phys02b-canonical-diagnostics.v1",
+  "created_utc": "2026-10-10T12:12:34.608006+00:00",
+  "status": "DIAGNOSTIC_CONSISTENCY_PASS",
+  "role": "Additional same-model physical diagnostics by verification participant; no final PROMOTE/admission decision.",
+  "run_directory": "/workspace/scratch/584ff08e1634/bass_cr_work/research/cr_phys02b_20261010/evidence/runs/R002",
+  "canonical_mesh": [
+    1600,
+    3200
+  ],
+  "canonical_run_status": "PASS_SCOPED",
+  "canonical_actual_exit": {
+    "schema": "cr-phys02b-actual-process-receipt.v1",
+    "run": "R002",
+    "tool_session_id": 78368,
+    "final_tool_chunk_id": "66e5a6",
+    "actual_process_exit_code": 0,
+    "observed_utc": "2026-10-10T12:07:33.179348+00:00",
+    "logs": [
+      "stdout.log",
+      "stderr.log"
+    ]
+  },
+  "input_files": {
+    "NUMERICAL_RESULT.json": {
+      "path": "/workspace/scratch/584ff08e1634/bass_cr_work/research/cr_phys02b_20261010/evidence/runs/R002/NUMERICAL_RESULT.json",
+      "bytes": 169912,
+      "sha256": "1f2ebaef36c1d77ae4fcab83ef81f0618060a701eaebb5db611307aa8b090ced"
+    },
+    "CANONICAL_SPECTRUM.npz": {
+      "path": "/workspace/scratch/584ff08e1634/bass_cr_work/research/cr_phys02b_20261010/evidence/runs/R002/CANONICAL_SPECTRUM.npz",
+      "bytes": 987130,
+      "sha256": "30c3b7cad8e089cbee4b290307049d85cfcf5f90c93be1a019008e0dcd623ffd"
+    },
+    "ACTUAL_EXIT.json": {
+      "path": "/workspace/scratch/584ff08e1634/bass_cr_work/research/cr_phys02b_20261010/evidence/runs/R002/ACTUAL_EXIT.json",
+      "bytes": 274,
+      "sha256": "7d1c94e7a03097cfd0d94c9e705997b22e2114690ba6233ce663924bba9e5482"
+    },
+    "stdout.log": {
+      "path": "/workspace/scratch/584ff08e1634/bass_cr_work/research/cr_phys02b_20261010/evidence/runs/R002/stdout.log",
+      "bytes": 27408,
+      "sha256": "0293d66d6db64b6741e5d2ad8f9fa4a5271ee05f1da1a9907119b04e2947341a"
+    },
+    "stderr.log": {
+      "path": "/workspace/scratch/584ff08e1634/bass_cr_work/research/cr_phys02b_20261010/evidence/runs/R002/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "analysis_script_identity": {
+    "path": "/workspace/scratch/584ff08e1634/bass_cr_work/research/cr_phys02b_20261010/tests/analyze_canonical.py",
+    "bytes": 23497,
+    "sha256": "382465c4169b7f11c2e50acc0979963274e07d71ef1d20ba7dc1ef906b21bd8a"
+  },
+  "source_identities_verified": {
+    "src/causal_cascade.py": {
+      "sha256": "d87a9cc122125b2d37b47f261f57eab698baa59e07a6b21723860f39313c7b72",
+      "bytes": 19115
+    },
+    "tests/verify_cascade.py": {
+      "sha256": "28ffa8391f6786ac7348846c8a6c461ec4f4e9694c86d7f7deccf6a146373e52",
+      "bytes": 16904
+    },
+    "state/SCIENTIFIC_CONTRACT.json": {
+      "sha256": "a63ba177161db9b9adfa30dce39fdde05a108a05f505d56e8bd09c8bd441075b",
+      "bytes": 7223
+    },
+    "inputs/NIST_IONIZATION.json": {
+      "sha256": "85efc3e0deea31d06a252505e201d6a729bc50dea679c7990e0353da2af740f2",
+      "bytes": 3519
+    },
+    "inputs/CCC_USED_CHANNELS.json": {
+      "sha256": "75ef5831e777d723c0c2aeac9330ee8c15097e33a18eca0764fe116256aea3a1",
+      "bytes": 25150
+    },
+    "state/SOURCE_COMPLETION_ADDENDUM.json": {
+      "sha256": "717c931ea3c174e134816e04536f5eb9b80466db1f6addb56f042aa7af969562",
+      "bytes": 2110
+    },
+    "tests/independent_oracles.py": {
+      "sha256": "d3c6bdcd27c80e3b5ff72558cb65608b168de5cb9c13a990147103a8fb155942",
+      "bytes": 18485
+    }
+  },
+  "scope": {
+    "model": "conditional hybrid; prescribed fixed bath",
+    "active_electron_interval_eV": [
+      0.1,
+      900.0
+    ],
+    "birth_tags_eV": [
+      [
+        0.1,
+        10.0
+      ],
+      [
+        10.0,
+        900.0
+      ]
+    ],
+    "heat_partition_coordinate": "Electron energy immediately before Coulomb energy loss, separate from birth-source energy.",
+    "bath": {
+      "nH_m3": 140.0,
+      "Y_He": 0.248,
+      "xHII": 0.01,
+      "xHeII": 0.01,
+      "xHeIII": 0.0,
+      "temperature_K": 100.0,
+      "nHe_m3": 11.542553191489361,
+      "ne_m3": 1.5154255319148937,
+      "H_s": 3.3e-17,
+      "shear_s": 3.3e-18,
+      "state": "prescribed, not evolved"
+    },
+    "HeII_channels": false,
+    "photon_semantics": "Excitation energy reservoir; no branching, transport, or reabsorption calculation.",
+    "terminal": "Mathematical resolvent of the same frozen operator; not a physical continuation of the local source.",
+    "interpretation_limit": "Postprocessing shares the canonical generator, source and saved trajectory. No independent physical error certificate."
+  },
+  "source_coverage": {
+    "all_direct_A_energy_eV_m3_s2": 1.5285042578786697e-33,
+    "band_A_energy_eV_m3_s2": {
+      "below_cutoff": 1.674709854087335e-38,
+      "direct_low": 6.828624650684662e-35,
+      "direct_high_selected": 1.0559734263674833e-33,
+      "unselected_900_1000": 3.0326802746639703e-35,
+      "unselected_above_1000": 3.7390103515915917e-34
+    },
+    "band_fractions_of_all_direct": {
+      "below_cutoff": 1.0956527241942894e-05,
+      "direct_low": 0.04467520856083024,
+      "direct_high_selected": 0.6908540953840803,
+      "unselected_900_1000": 0.019840836288365117,
+      "unselected_above_1000": 0.2446189032394824
+    },
+    "selected_fraction_of_all_direct": 0.7355293039449105,
+    "minimum_sampled_proton_ejection_endpoint_eV": 2154.927725029828,
+    "selected_injected_energy_at_T_J_m3": 9.006312892138674e-33
+  },
+  "occupation": {
+    "equation": "Gaa*J = x_active(u=1) - A_active/2; J=int_0^1 x_active(u)du; x(0)=0",
+    "basis": "Energy-weighted electron nodes E_j*N_j normalized by energy_scale_eV_m3.",
+    "canonical_generators_constructed": 1,
+    "trajectory_recomputed": false,
+    "generator_build_seconds": 15.599693390002358,
+    "occupation_solve_seconds": 0.3671883759961929,
+    "generator_nnz": 9080055,
+    "active_nodes": 4800
+  },
+  "checks": {
+    "occupation_linear_solve": {
+      "passed": true,
+      "relative_residual_per_tag": [
+        5.992498174633298e-14,
+        3.080621060624581e-13
+      ],
+      "tolerance": 1e-09
+    },
+    "occupation_nonnegative": {
+      "passed": true,
+      "minimum_normalized_occupation": -0.0,
+      "tolerance": 1e-12
+    },
+    "cumulative_heat_matches_saved_ledger": {
+      "passed": true,
+      "relative_error_per_tag": [
+        1.4386288818020101e-13,
+        3.391606662883387e-12
+      ],
+      "tolerance": 1e-09
+    },
+    "instantaneous_heat_matches_final_result": {
+      "passed": true,
+      "relative_error_per_tag": [
+        2.3926384459081005e-14,
+        2.4350310895026522e-14
+      ],
+      "tolerance": 1e-09
+    },
+    "saved_trajectory_heat_power_matches_JSON": {
+      "passed": true,
+      "maximum_relative_error": 2.4092573968710732e-16,
+      "tolerance": 1e-09
+    },
+    "finite_and_terminal_energy_partition_closure": {
+      "passed": true,
+      "finite_absolute_residual": 2.5424107263916085e-14,
+      "terminal_absolute_residual": 2.220446049250313e-16,
+      "tolerance": 1e-09
+    },
+    "low_birth_tag_has_no_heat_above_10_eV": {
+      "passed": true,
+      "cumulative_normalized": 0.0,
+      "instantaneous_normalized_per_u": 0.0
+    }
+  },
+  "heat_partition_by_birth_tag": {
+    "direct_0p1_10": {
+      "cumulative_heat_at_electron_E_le_10_J_m3": 8.514214250273995e-35,
+      "cumulative_heat_at_electron_E_gt_10_J_m3": 0.0,
+      "cumulative_heat_total_J_m3": 8.514214250273995e-35,
+      "instantaneous_heat_at_electron_E_le_10_J_m3_s": 2.4136359539534096e-44,
+      "instantaneous_heat_at_electron_E_gt_10_J_m3_s": 0.0,
+      "instantaneous_heat_total_J_m3_s": 2.4136359539534096e-44,
+      "cumulative_low_energy_share_of_tag_heat": 1.0,
+      "instantaneous_low_energy_share_of_tag_heat": 1.0
+    },
+    "direct_10_900": {
+      "cumulative_heat_at_electron_E_le_10_J_m3": 1.4516478278780492e-36,
+      "cumulative_heat_at_electron_E_gt_10_J_m3": 3.2566260341020925e-35,
+      "cumulative_heat_total_J_m3": 3.4017908168898974e-35,
+      "instantaneous_heat_at_electron_E_le_10_J_m3_s": 5.687740015923176e-46,
+      "instantaneous_heat_at_electron_E_gt_10_J_m3_s": 9.704820255518678e-45,
+      "instantaneous_heat_total_J_m3_s": 1.0273594257110995e-44,
+      "cumulative_low_energy_share_of_tag_heat": 0.04267304799197573,
+      "instantaneous_low_energy_share_of_tag_heat": 0.055362708255548794
+    },
+    "selected_total": {
+      "cumulative_heat_at_electron_E_le_10_J_m3": 8.659379033061801e-35,
+      "cumulative_heat_at_electron_E_gt_10_J_m3": 3.2566260341020925e-35,
+      "cumulative_heat_total_J_m3": 1.1916005067163893e-34,
+      "instantaneous_heat_at_electron_E_le_10_J_m3_s": 2.4705133541126415e-44,
+      "instantaneous_heat_at_electron_E_gt_10_J_m3_s": 9.704820255518678e-45,
+      "instantaneous_heat_total_J_m3_s": 3.440995379664509e-44,
+      "cumulative_low_energy_share_of_total_heat": 0.7267015232247467,
+      "instantaneous_low_energy_share_of_total_heat": 0.7179647402936973
+    }
+  },
+  "energy_fractions_of_selected_injected_energy": {
+    "finite_time": {
+      "heat": 0.01323072517006625,
+      "binding_HI": 0.0014223008518915471,
+      "binding_HeI": 0.00010089735959146676,
+      "excitation_HI": 0.0019199109167127954,
+      "excitation_HeI": 4.8483963957099306e-05,
+      "cutoff_energy": 0.00032681650005534165,
+      "active_energy": 0.9829508652377,
+      "binding_total": 0.001523198211483014,
+      "excitation_total": 0.0019683948806698947
+    },
+    "fixed_bath_terminal": {
+      "heat": 0.5600659881315516,
+      "binding_HI": 0.18737879922934406,
+      "binding_HeI": 0.017016568692621612,
+      "excitation_HI": 0.22415527433147267,
+      "excitation_HeI": 0.006945292246595162,
+      "cutoff_energy": 0.004438077368415004,
+      "active_energy": 0.0,
+      "binding_total": 0.20439536792196566,
+      "excitation_total": 0.23110056657806782
+    }
+  },
+  "finite_to_terminal_heat_power_ratio": 0.034108911752141674,
+  "heat_rate_time_series": {
+    "time_s": [
+      0.0,
+      500000000.0,
+      1000000000.0,
+      1500000000.0,
+      2000000000.0,
+      2500000000.0,
+      3000000000.0,
+      3500000000.0,
+      4000000000.0,
+      4500000000.0,
+      5000000000.0,
+      5500000000.0,
+      6000000000.0,
+      6500000000.0,
+      7000000000.0,
+      7500000000.0,
+      8000000000.0,
+      8500000000.0,
+      9000000000.0,
+      9500000000.0,
+      10000000000.0
+    ],
+    "birth_tags": [
+      "direct_0p1_10",
+      "direct_10_900"
+    ],
+    "values_J_m3_s": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        8.022410019814981e-47,
+        2.498795321943266e-47
+      ],
+      [
+        3.115045108976192e-46,
+        1.0012095757967843e-46
+      ],
+      [
+        6.8405461671295415e-46,
+        2.2564285673172316e-46
+      ],
+      [
+        1.1906346618587174e-45,
+        4.0178753171760884e-46
+      ],
+      [
+        1.8253049244506102e-45,
+        6.2878101428959694e-46
+      ],
+      [
+        2.582959913682546e-45,
+        9.068426787145451e-46
+      ],
+      [
+        3.459089003032834e-45,
+        1.2361860334375541e-45
+      ],
+      [
+        4.44963342686091e-45,
+        1.6170193300723576e-45
+      ],
+      [
+        5.5508925769586104e-45,
+        2.049546123944918e-45
+      ],
+      [
+        6.759458588121746e-45,
+        2.5339656847772427e-45
+      ],
+      [
+        8.07216850349714e-45,
+        3.070473236173366e-45
+      ],
+      [
+        9.486068029160753e-45,
+        3.6592602871185923e-45
+      ],
+      [
+        1.0998383285776894e-44,
+        4.300515002896364e-45
+      ],
+      [
+        1.2606498283500177e-44,
+        4.994422462530577e-45
+      ],
+      [
+        1.4307936616774918e-44,
+        5.741164839721938e-45
+      ],
+      [
+        1.6100346348889664e-44,
+        6.540921577446302e-45
+      ],
+      [
+        1.798148735891697e-44,
+        7.39386955415744e-45
+      ],
+      [
+        1.9949220624185186e-44,
+        8.300183231952483e-45
+      ],
+      [
+        2.200149904819014e-44,
+        9.260034791544049e-45
+      ],
+      [
+        2.4136359539534136e-44,
+        1.027359425711103e-44
+      ]
+    ]
+  },
+  "energy_scale_J_m3": 1.8012625784277348e-32,
+  "selected_injected_energy_at_T_J_m3": 9.006312892138673e-33,
+  "diagnostic_elapsed_before_render_s": 16.074402762998943,
+  "scientific_suites_rerun": 0,
+  "external_mutations": 0,
+  "saved_diagnostic_array_identity": {
+    "path": "/workspace/scratch/584ff08e1634/bass_cr_work/research/cr_phys02b_20261010/evidence/diagnostics/OCCUPANCY_AND_PLOT_DATA.npz",
+    "bytes": 267410,
+    "sha256": "36591c0ec3ddb666334bcf9884b781603e5e1704e0d03335dd0255acae38cee0"
+  }
+}

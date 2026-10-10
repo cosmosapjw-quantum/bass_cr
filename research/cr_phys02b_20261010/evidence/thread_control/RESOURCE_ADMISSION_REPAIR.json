@@ -1,0 +1,17 @@
+{
+  "recorded_utc": "2026-10-10T12:26:17.307706+00:00",
+  "initial_failure": "ATTEMPT01 rejected using total cgroup memory.current including file cache and a generic3GiB incremental estimate. No propagation occurred.",
+  "observations": {
+    "memory.max": "8589934592",
+    "memory.current": "6857453568",
+    "cpu.max": "800000 100000",
+    "anon": 102576128,
+    "file": 6420377600,
+    "kernel": 333467648,
+    "inactive_file": 2418700288
+  },
+  "revised_accounting": "Retain1GiB reserve; count memory.current minus inactive_file as resident pressure, preserving active file cache; do not flush caches or kill any processes.",
+  "incremental_estimate_bytes": 2147483648,
+  "estimate_basis": "One generator with9,080,055 nonzeros: conservative192bytes/nonzero for Python lists/objects plus sparse assembly temporaries, plus256MiB module/workspace allowance =2011806016bytes, below2GiB. No concurrent cascade or second retained generator.",
+  "scientific_changes": "None; same source/code core,4800nodes,one endpoint,original thread-comparison tolerance1e-11 unchanged."
+}

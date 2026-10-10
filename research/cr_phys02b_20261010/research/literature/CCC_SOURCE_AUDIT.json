@@ -1,0 +1,224 @@
+{
+  "schema": "bass-cr-phys02b-excitation-source-audit.v1",
+  "created_utc": "2026-10-10T11:49:43.154374+00:00",
+  "role": "read_only_source_acquisition",
+  "report": "SOURCE_AUDIT_KO.md",
+  "upstream": {
+    "repo": "cosmosapjw-quantum/bass_cr",
+    "pr": 26,
+    "ref": "refs/heads/research/cr-phys02a-causal-subthreshold-20261010",
+    "expected_head": "58c8e1cda5c8f8ca8b83269cb89899ea40ab91fe",
+    "observed_head": "58c8e1cda5c8f8ca8b83269cb89899ea40ab91fe",
+    "match": true,
+    "source_response": "git_metadata/PHYS02A_REF_RAW.json",
+    "new_input_found": {
+      "pr": 25,
+      "branch": "research/cr-phys03-fs10-xi01-20261010",
+      "head": "c55cd78bade16d95bf140456c6036b406c9356ea",
+      "xi": "0.1",
+      "automatically_adopted": false,
+      "owner_reason": "Current state xi=0.01 is a different exact knot; no composition interpolation is admitted."
+    }
+  },
+  "source_acquisitions": [
+    {
+      "metadata_file": "H_I_acquisition.json",
+      "species": "H_I",
+      "url": "https://atom.curtin.edu.au/CCC-DB/H/I/ELECTRON_IMPACT/e-H_XSEC_LS.zip",
+      "acquisition_utc": "2026-10-10T11:40:57.695898+00:00",
+      "status_code": 200,
+      "bytes": 7010330,
+      "sha256": "17f44cbbc0bb03a59f2366f50dd19a03e7f0296ccc5b8dbf869d9dbf3762a9a1",
+      "last_modified": "Sun, 04 Oct 2026 01:05:33 GMT"
+    },
+    {
+      "metadata_file": "He_I_acquisition.json",
+      "species": "He_I",
+      "url": "https://atom.curtin.edu.au/CCC-DB/He/I/ELECTRON_IMPACT/e-He_sig.zip",
+      "acquisition_utc": "2026-10-10T11:40:57.696409+00:00",
+      "status_code": 200,
+      "bytes": 1502872,
+      "sha256": "d68ba39d81c8252043e12f92155c1a9ab73117b55abfd971b98d6a65c6993a85",
+      "last_modified": "Sat, 22 Aug 2026 23:20:20 GMT"
+    },
+    {
+      "metadata_file": "He_II_acquisition.json",
+      "species": "He_II",
+      "url": "https://atom.curtin.edu.au/CCC-DB/He/II/ELECTRON_IMPACT/e-HeII_XSEC_LS.zip",
+      "acquisition_utc": "2026-10-10T11:40:57.696841+00:00",
+      "status_code": 200,
+      "bytes": 9596492,
+      "sha256": "e32f7d22a3dc54e7981e93369bb98ddd38109a784cff608e59e9657b3a3558db",
+      "last_modified": "Fri, 10 Jul 2026 07:12:23 GMT"
+    },
+    {
+      "metadata_file": "ccc_index_acquisition.json",
+      "url": "https://atom.curtin.edu.au/CCC-WWW/",
+      "status_code": 200,
+      "bytes": 5994,
+      "sha256": "04a78c3decb5d7ccc57572b143b8409b6ce79a85c43d8c02b6bb046946ca55f9",
+      "last_modified": "Wed, 05 Aug 2026 07:18:13 GMT"
+    },
+    {
+      "metadata_file": "NIST_CODATA2022_wallet_acquisition.json",
+      "url": "https://physics.nist.gov/cuu/pdf/wallet_2022.pdf",
+      "acquired_utc": "2026-10-10T11:47:30.155466+00:00",
+      "status": 200,
+      "bytes": 120187,
+      "sha256": "1e7d5131229b2d189932825ce8bbfa2c6a153a990ba034b443286bfe4e420de5",
+      "last_modified": null
+    }
+  ],
+  "selected_scope": {
+    "HI": 9,
+    "HeI": 18,
+    "HeII_optional": 9,
+    "all_l_for_n": [
+      2,
+      3,
+      4
+    ],
+    "HeI_final_spin": [
+      "singlet",
+      "triplet"
+    ],
+    "rows_total": 12142,
+    "n_greater_than_4_enhancement": false
+  },
+  "formula": {
+    "HI_HeII": "sigma_native * a0^2",
+    "HeI": "sigma_native * 1e-4 m^2/cm^2",
+    "a0_m": "5.29177210544e-11",
+    "constant_source": "CODATA2022, https://physics.nist.gov/cuu/pdf/JPCRD2022CODATA.pdf",
+    "a0_uncertainty_m": "8.2e-21",
+    "a0_m_is_not_exact": true,
+    "a0_squared_m2": "2.80028520159128904775936E-21",
+    "native_tables_unchanged": true
+  },
+  "input_semantics": {
+    "energy": "Incident electron kinetic energy in eV relative to the INITIAL target state; all selected INITIAL states are ground. Not outgoing energy. Frame and nuclear-mass convention not independently documented by these README files.",
+    "cross_section": "Absolute angle-integrated LS-transition cross section; raw second sig column.",
+    "direction": "FINAL.INITIAL filename; header arrow checked for every selected member.",
+    "asym": "Retained in raw; not used as another channel or cross section.",
+    "thresholds": "Native HI/HeI first zero/start markers; HeII explicit comments. Not certified spectroscopic level energies.",
+    "explicit_target_energy_metadata": "NO_EXPLICIT_TARGET_ENERGY_METADATA"
+  },
+  "coverage": {
+    "requested_eV": [
+      "10",
+      "1000"
+    ],
+    "common_tabulated_upper_eV": "968.6058000",
+    "remaining_upper_gap_eV": "31.3942000",
+    "species_upper_eV": {
+      "HI": "968.6058000",
+      "HeI": "2000.0000000",
+      "HeII": "10290.0000000"
+    },
+    "extrapolation_performed": false,
+    "interpolation_selected_by_acquirer": false,
+    "effective_cost_selected_by_acquirer": false,
+    "owner_followup_instruction": "Owner plans to admit first HI/HeI zero marker as effective cost in a truncated CCC model, preserving all raw zero rows; no experimental spectroscopic claim. This is recorded as an owner decision, not source certification."
+  },
+  "claim_support": [
+    {
+      "id": "S1",
+      "claim": "Official CCC absolute excitation tables acquired for all selected ground n=2,3,4 l/spin channels",
+      "support": "SUPPORTED",
+      "evidence": [
+        "CHANNELS.json",
+        "*_acquisition.json",
+        "raw_n2_n4/*/README"
+      ]
+    },
+    {
+      "id": "S2",
+      "claim": "These current tables cover the entire 10-1000 eV interval without extension",
+      "support": "PARTIALLY_SUPPORTED",
+      "limit": "HI ends at 968.6058 eV; threshold and interpolation choices remain explicit owner inputs."
+    },
+    {
+      "id": "S3",
+      "claim": "2026 archived bytes exactly reproduce FS10 historical numerical inputs",
+      "support": "NOT_ESTABLISHED",
+      "limit": "Only methodological/source-family continuity is established."
+    },
+    {
+      "id": "S4",
+      "claim": "First zero/start markers are independently verified physical spectroscopic thresholds",
+      "support": "NOT_ESTABLISHED",
+      "limit": "No explicit target-energy metadata located in same archives/README."
+    },
+    {
+      "id": "S5",
+      "claim": "Causal evolution or production heating is validated by this acquisition",
+      "support": "NOT_TESTED",
+      "limit": "No physical evolution executed by this role."
+    }
+  ],
+  "license": {
+    "CCC": "NO_EXPLICIT_DATA_LICENSE_FOUND_IN_INDEX_OR_README",
+    "FS10_paper": "arXiv perpetual non-exclusive license; does not license CCC ZIP data",
+    "HeI_dataset_publication_status": "README says unpublished as at 13-Apr-2026, based on Fursa and Bray PRA52 1279 (1995)",
+    "redistribution_permission_inferred": false
+  },
+  "data_reproduction": {
+    "script": "reproduce_tables.py",
+    "result": "SOURCE_REPRODUCTION_RESULT.json",
+    "status": "PASS_SOURCE_BYTE_REPRODUCTION",
+    "all_36_CSV_sha256_matched": true,
+    "rows_finite_nonnegative": true,
+    "energy_strictly_increasing_per_channel": true,
+    "science_accuracy_validation_claimed": false
+  },
+  "counts": {
+    "old_science_suites_rerun": 0,
+    "new_cascade_runs": 0,
+    "external_write_api_calls": 0,
+    "source_byte_reproduction_runs": 1,
+    "target_metadata_local_archive_checks": 1
+  },
+  "failures": [
+    {
+      "operation": "requests import",
+      "class": "LOCAL_OPTIONAL_PACKAGE_UNAVAILABLE",
+      "recovery": "stdlib urllib.request; no package install"
+    },
+    {
+      "operation": "web ZIP reader",
+      "class": "UNSUPPORTED_DOCUMENT_FORMAT",
+      "recovery": "direct HTTP200 raw archive acquisition from index-observed official URL"
+    }
+  ],
+  "primary_sources": [
+    {
+      "url": "https://atom.curtin.edu.au/CCC-WWW/",
+      "web_ref": "turn47view1",
+      "role": "official numerical dataset source"
+    },
+    {
+      "url": "https://arxiv.org/html/0910.4410v1",
+      "web_ref": "turn47view2",
+      "role": "historical method and channel scope; not current byte identity"
+    },
+    {
+      "url": "https://journals.aps.org/pra/abstract/10.1103/PhysRevA.46.6995",
+      "web_ref": "turn39view0",
+      "access": "official abstract only"
+    },
+    {
+      "url": "https://journals.aps.org/pra/abstract/10.1103/PhysRevA.52.1279",
+      "web_ref": "turn39view1",
+      "access": "official abstract only"
+    },
+    {
+      "url": "https://doi.org/10.1088/0953-4075/26/23/006",
+      "access": "official index DOI observed; full content not acquired"
+    },
+    {
+      "url": "https://physics.nist.gov/cuu/pdf/wallet_2022.pdf",
+      "web_ref": "turn47view0",
+      "role": "unit conversion constant"
+    }
+  ]
+}

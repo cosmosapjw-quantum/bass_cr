@@ -1,0 +1,79 @@
+{
+  "schema": "cr-phys02b-ionization-input.v1",
+  "adopted_before_first_model_run_utc": "2026-10-10T12:01:26.407612+00:00",
+  "total_cross_section": "NIST Eq1 generalized BEB with Q (BEQ in Muller2009 terminology), n=1; modern CODATA2022 a0 central value and NIST R=13.6057 eV.",
+  "sharing": "NIST Eq3 raw BED slow-electron shape with printed Muller2009 TableI coefficients, normalized to the adopted generalized BEB total per NIST introB procedure. This is an explicitly specified research combination, not a byte-exact clone of the NIST CGI.",
+  "coefficient_source": {
+    "title": "Source formulation for electron-impact ionization for fluid plasma simulations",
+    "authors": "Muller, Holland, Tynan, Yu and Naulin",
+    "year": 2009,
+    "doi": "10.1088/0741-3335/51/10/105014",
+    "url": "https://backend.orbit.dtu.dk/ws/portalfiles/portal/4857374/Naulin_paper.pdf",
+    "locations": "Table I p12 of manuscript (PDF page index12), Eqs42-48 pp13-14",
+    "retrieval": "Full PDF read through web; Table I visually checked through screenshot. Local direct byte download403, so no original PDF SHA is claimed.",
+    "web_refs": [
+      "turn63view0",
+      "turn64view0",
+      "turn64view2",
+      "turn66view0"
+    ],
+    "rounding": "Retain printed four-decimal coefficients; do not substitute remembered extra digits."
+  },
+  "species": {
+    "HI": {
+      "B_eV": 13.6057,
+      "U_eV": 13.6057,
+      "N": 1.0,
+      "Q": 0.5668,
+      "coefficients": [
+        -0.0225,
+        1.1775,
+        -0.4626,
+        0.089,
+        0.0
+      ]
+    },
+    "HeI": {
+      "B_eV": 24.587,
+      "U_eV": 39.51,
+      "N": 2.0,
+      "Q": 0.8841,
+      "coefficients": [
+        0.0,
+        8.2401,
+        -10.4769,
+        3.965,
+        -0.0446
+      ]
+    }
+  },
+  "coefficient_powers": [
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "Ni_rule": "Integral of the adopted printed polynomial on w in [0,infinity], sum(c_k/(k-1)); not copied separately from a rounded K_BED table.",
+  "sharing_domain_source": "Muller2009 Eq47: slower electron W in [0,(T-B)/2]; both daughters retained in cascade. Lee et al2026 Eq2.13 independently states double counting above the half-energy boundary.",
+  "domain_sources": [
+    {
+      "url": "https://backend.orbit.dtu.dk/ws/portalfiles/portal/4857374/Naulin_paper.pdf",
+      "location": "Eq47 and preceding paragraph"
+    },
+    {
+      "url": "https://www.cambridge.org/core/journals/journal-of-plasma-physics/article/collision-operator-for-electron-runaway-in-cold-weakly-ionised-plasmas/55452E4C69E1DB5C490E18B46213D046",
+      "location": "Eqs2.6,2.13 and paragraph following; 2026"
+    }
+  ],
+  "NIST_urls": {
+    "equations": "https://physics.nist.gov/PhysRefData/Ionization/Eqs/latex.html",
+    "normalization_statement": "https://physics.nist.gov/PhysRefData/Ionization/intro.html",
+    "HI_parameters": "https://physics.nist.gov/cgi-bin/Ionization/ion_data.php?differential=Y&id=HI&initial=&ision=I",
+    "HeI_parameters": "https://physics.nist.gov/cgi-bin/Ionization/ion_data.php?differential=Y&id=HeI&initial=&ision=I"
+  },
+  "reference_points": [],
+  "CGI_numerical_comparison": "NOT_EVALUATED_HTTP500_ON_TOTAL_ENDPOINTS_AND_DIFFERENTIAL_FORM_UNAVAILABLE",
+  "closed_total_reference": "Independent adaptive integration of published symmetric BEQ SDCS, Muller2009 Eqs42,43,44 first expression, K=2-Q; this uses different algebra from NIST Eq1.",
+  "physical_accuracy": "UNRESOLVED; no claim to reproduce original FS10 Monte Carlo or current NIST CGI numeric bytes."
+}

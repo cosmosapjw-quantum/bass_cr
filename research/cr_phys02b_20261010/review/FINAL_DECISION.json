@@ -1,0 +1,646 @@
+{
+  "schema": "cr-phys02b-independent-final-decision.v1",
+  "reviewed_utc": "2026-10-10 12:30:02 UTC",
+  "project": "bass_cr",
+  "unit": "CR-PHYS02B-CAUSAL-CASCADE",
+  "verdict": "PROMOTE_SCOPED",
+  "harness_phase_8_decision": "PROMOTE",
+  "promoted_to": "Frozen conditional research-operator result and next research/reporting stage only",
+  "production_admission": false,
+  "physical_accuracy_certified": false,
+  "PHYS02_complete": false,
+  "blocking_findings_for_this_scoped_promotion": [],
+  "required_repairs_for_this_scoped_promotion": [],
+  "reviewer": {
+    "identity": "/root/phys02_decision_review",
+    "role": "Actual independent final decision reviewer",
+    "independence": {
+      "participated_in_CR_PHYS02B_candidate_generation": false,
+      "participated_in_CR_PHYS02B_derivation": false,
+      "participated_in_CR_PHYS02B_implementation": false,
+      "participated_in_CR_PHYS02B_validation_design": false,
+      "executed_CR_PHYS02B_scientific_suite": false,
+      "prior_PHYS02A_review": "Separate completed candidate review; no participation in the new PHYS02B candidate's creation or verification design",
+      "method": "Direct code, derivation, contract, source and raw-result inspection; read-only artifact arithmetic and identity checks; independent final scientific decision",
+      "further_reviewer_delegation": false
+    },
+    "host_model_declaration": "GPT-6 Astra Pro",
+    "identity_source": "Host developer metadata",
+    "model_override_requested": false,
+    "effort_override_requested": false,
+    "actual_backend_model_independently_observed": "UNKNOWN",
+    "actual_backend_effort_independently_observed": "UNKNOWN",
+    "model_performance": "NOT_EVALUATED"
+  },
+  "fixed_target": {
+    "review_packet": "review/REVIEW_PACKET.json",
+    "review_packet_sha256": "0c32320b708ab6296e3d7777f656b81dfa0f39906fce9ac5c28cb88fe311219e",
+    "frozen_utc": "2026-10-10T12:14:43.618500+00:00",
+    "baseline_head": "58c8e1cda5c8f8ca8b83269cb89899ea40ab91fe",
+    "file_count": 27,
+    "file_identity_check": "ALL_SHA256_AND_BYTE_LENGTHS_MATCH",
+    "reviewed_files": {
+      "src/causal_cascade.py": {
+        "sha256": "d87a9cc122125b2d37b47f261f57eab698baa59e07a6b21723860f39313c7b72",
+        "bytes": 19115
+      },
+      "tests/verify_cascade.py": {
+        "sha256": "28ffa8391f6786ac7348846c8a6c461ec4f4e9694c86d7f7deccf6a146373e52",
+        "bytes": 16904
+      },
+      "tests/independent_oracles.py": {
+        "sha256": "d3c6bdcd27c80e3b5ff72558cb65608b168de5cb9c13a990147103a8fb155942",
+        "bytes": 18485
+      },
+      "tests/analyze_canonical.py": {
+        "sha256": "382465c4169b7f11c2e50acc0979963274e07d71ef1d20ba7dc1ef906b21bd8a",
+        "bytes": 23497
+      },
+      "state/SCIENTIFIC_CONTRACT.json": {
+        "sha256": "a63ba177161db9b9adfa30dce39fdde05a108a05f505d56e8bd09c8bd441075b",
+        "bytes": 7223
+      },
+      "state/SOURCE_COMPLETION_ADDENDUM.json": {
+        "sha256": "717c931ea3c174e134816e04536f5eb9b80466db1f6addb56f042aa7af969562",
+        "bytes": 2110
+      },
+      "state/REWORK_01.json": {
+        "sha256": "952af31db78dbf7edefc6f1b0ced636904066b3f3aed672005b91a9c6bff181a",
+        "bytes": 854
+      },
+      "inputs/NIST_IONIZATION.json": {
+        "sha256": "85efc3e0deea31d06a252505e201d6a729bc50dea679c7990e0353da2af740f2",
+        "bytes": 3519
+      },
+      "inputs/CCC_USED_CHANNELS.json": {
+        "sha256": "75ef5831e777d723c0c2aeac9330ee8c15097e33a18eca0764fe116256aea3a1",
+        "bytes": 25150
+      },
+      "inputs/PARENT_SOURCE_MANIFEST.json": {
+        "sha256": "e6463f62176d1bac1a454c61539d7c17030a6601dd46aa117f0e123bf52813bc",
+        "bytes": 794
+      },
+      "evidence/runs/R001/NUMERICAL_RESULT.json": {
+        "sha256": "df31b011a73b18ce4654c685cb7e5f98b8390387225f97648c4ea1c16f0ec792",
+        "bytes": 169902
+      },
+      "evidence/runs/R001/ACTUAL_EXIT.json": {
+        "sha256": "dc73f7522fb8e01db2b7b1550842cd70718244b3a603a95daea567fd62f6ea1e",
+        "bytes": 221
+      },
+      "evidence/runs/R002/NUMERICAL_RESULT.json": {
+        "sha256": "1f2ebaef36c1d77ae4fcab83ef81f0618060a701eaebb5db611307aa8b090ced",
+        "bytes": 169912
+      },
+      "evidence/runs/R002/CANONICAL_SPECTRUM.npz": {
+        "sha256": "30c3b7cad8e089cbee4b290307049d85cfcf5f90c93be1a019008e0dcd623ffd",
+        "bytes": 987130
+      },
+      "evidence/runs/R002/ACTUAL_EXIT.json": {
+        "sha256": "7d1c94e7a03097cfd0d94c9e705997b22e2114690ba6233ce663924bba9e5482",
+        "bytes": 274
+      },
+      "evidence/runs/R002/stdout.log": {
+        "sha256": "0293d66d6db64b6741e5d2ad8f9fa4a5271ee05f1da1a9907119b04e2947341a",
+        "bytes": 27408
+      },
+      "evidence/runs/R002/stderr.log": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "evidence/diagnostics/DIAGNOSTIC_RESULT.json": {
+        "sha256": "f5c7cb418d50ffbcca35eaf11f08e7d09b65be45c021ff0f167b5b4988a50429",
+        "bytes": 12597
+      },
+      "evidence/diagnostics/ACTUAL_EXIT.json": {
+        "sha256": "378131e99b1b5c60293f01ead0b4a9a6202fa42e4fbcfe440034fbd601a373fe",
+        "bytes": 712
+      },
+      "evidence/diagnostics/canonical_diagnostics.png": {
+        "sha256": "d7108b8bdb21452ba215c293ad7a11eb65f2d411fca6f740045f94ffde67a76a",
+        "bytes": 466984
+      },
+      "DERIVATION_KO.md": {
+        "sha256": "9b2653348ffeeb7882216ebc38c2cec254754871a65f2c159ad7f5ca4a228500",
+        "bytes": 19986
+      },
+      "REPORT_KO.md": {
+        "sha256": "c2d1c5e91df168a83c0531fac1aeea6c80a8d1d24b90481c20a0120172088acb",
+        "bytes": 22319
+      },
+      "state/RESEARCH_STATE.md": {
+        "sha256": "191d8859df56e66e0cf1bcc1320003c8f1aa8acb23994a110605325076940cd3",
+        "bytes": 2695
+      },
+      "state/HYPOTHESIS_GRAPH.md": {
+        "sha256": "c8377023550e0cfe9fef8c11ba6719c668f2edd4adfc732d09b600e5e6ad7887",
+        "bytes": 3193
+      },
+      "state/NEGATIVE_RESULTS.md": {
+        "sha256": "fec1144e00a95286d096b40cffd5014afadca22cf8595a56e6887a0e19fea4ec",
+        "bytes": 2950
+      },
+      "state/EVIDENCE_LEDGER.md": {
+        "sha256": "e484b1e244fd52b42cd86f2b321d548034ef5ecb1b61f3ee8ed1a77434ced8dc",
+        "bytes": 3350
+      },
+      "state/DECISION_LOG.md": {
+        "sha256": "83f8526d81cd3529829f08a18cbe1f25797addfdd1eeebe51b21e2cde6396f74",
+        "bytes": 2943
+      }
+    },
+    "read_modes": {
+      "source_tests_derivation_contract_state_and_inputs": "Direct text reading and mathematical/code inspection",
+      "numerical_result_json": "Full JSON parsing with checks, metadata, mesh results, final values and diagnostic fields inspected",
+      "canonical_spectrum_npz": "Read-only array loading and independent energy/number ledger arithmetic",
+      "raw_stdout": "Parsed check records compared with numerical-result JSON and final marker",
+      "raw_stderr": "Confirmed empty",
+      "canonical_diagnostics_png": "Viewed",
+      "original_parent_source": "Pinned parent files and manifest checked against local bytes; no prior suite rerun"
+    },
+    "fixed_snapshot_mutations_by_reviewer": 0,
+    "permitted_outputs": [
+      "review/FINAL_DECISION.json",
+      "review/INDEPENDENT_REVIEW_KO.md"
+    ]
+  },
+  "claim_ceiling": {
+    "accepted": [
+      "Derivation and numerical implementation of the explicitly specified positive, conservative, finite energy-grid branching operator",
+      "Causal ramp-source propagation from an empty electron population for 0 <= t <= 1e10 s in the prescribed bath",
+      "Repeated neutral HI/HeI impact ionization, the adopted 27 CCC n=2..4 excitation channels, and the prescribed matched leading-log Coulomb drift on 0.1-900 eV",
+      "Conditional finite-time energy storage, disjoint heat/binding/excitation/cutoff ledgers, additional free-electron counts, and stated cumulative low-band entry diagnostics",
+      "Comparison with the terminal yield of the identical frozen operator, and explicitly labeled same-generator finite-grid heat-partition diagnostics",
+      "Empirical satisfaction of the stated executed numerical criteria after the preserved R001 failure and predeclared grid refinement"
+    ],
+    "rejected_extensions": [
+      "A coherent or calibrated physical HI/HeI atomic data model",
+      "Exact current NIST CGI numerical reproduction",
+      "Original FS10 cascade or terminal-yield reproduction",
+      "Continuum or physical error bounds inferred from mesh differences, exact toy tests, formula integrals, or one Coulomb-prescription sensitivity",
+      "Complete proton-electron cascade, full source-energy coverage, thermal equilibration, photon transfer, bath feedback or cosmological/IGM history",
+      "Closure of inherited PHYS02, atomic_G02, b_grid, all_bound or R17B2B gates"
+    ]
+  },
+  "findings": [
+    {
+      "id": "F01",
+      "severity": "NO_BLOCKER_WITHIN_SCOPE",
+      "subject": "Branching signs, factors and units",
+      "evidence": [
+        "src/causal_cascade.py",
+        "tests/independent_oracles.py",
+        "DERIVATION_KO.md"
+      ],
+      "assessment": "Ionization uses one parent removal and two daughters W and E-B-W over the slower-electron half-domain, one net new free electron, and one binding cost B. Excitation retains one daughter and records its effective cost separately. Number-conserving nonnegative interpolation also conserves energy. SI area, eV-to-joule, collision rate n*sigma*v, stopping b in eV/s, and G=T*G_physical scaling are consistent."
+    },
+    {
+      "id": "F02",
+      "severity": "NO_BLOCKER_WITHIN_SCOPE",
+      "subject": "Causal source and disjoint ledgers",
+      "evidence": [
+        "src/causal_cascade.py",
+        "tests/verify_cascade.py",
+        "evidence/runs/R002/CANONICAL_SPECTRUM.npz"
+      ],
+      "assessment": "The augmented linear system implements dx/du=Gx+u*a from zero initial state. Heat, H/He binding, H/He excitation and cutoff kinetic energy are disjoint absorbing energy ledgers. Ionization counts repair the free-electron number balance. Low-band crossing counters are excluded from the conservation ledger and do not double-count heat."
+    },
+    {
+      "id": "F03",
+      "severity": "KNOWN_PHYSICAL_LIMIT_NONBLOCKING_FOR_CONDITIONAL_MODEL",
+      "subject": "He total rate and printed BED sharing are an explicit hybrid",
+      "evidence": [
+        "inputs/NIST_IONIZATION.json",
+        "DERIVATION_KO.md",
+        "REPORT_KO.md"
+      ],
+      "assessment": "He Q_total=0.8841 differs from Q_df=0.9130416667 implied by the printed continuum polynomial. Printed K_BED=1.1860 also differs from 2-Ni/N=1.19496. Normalizing the nonnegative slower-electron shape defines a legitimate conditional branching kernel but does not reconcile the atomic sources or certify physical accuracy.",
+      "implication": "atomic_G02 remains UNRESOLVED; cannot promote the model as a consistent NIST atomic replica"
+    },
+    {
+      "id": "F04",
+      "severity": "KNOWN_PHYSICAL_LIMIT_NONBLOCKING_FOR_CONDITIONAL_MODEL",
+      "subject": "CCC excitation energy semantics",
+      "evidence": [
+        "inputs/CCC_USED_CHANNELS.json",
+        "DERIVATION_KO.md",
+        "REPORT_KO.md"
+      ],
+      "assessment": "The 27 adopted first-zero table energies are explicit effective excitation costs. He 2^1P uses 21.1156 eV while the independently read NIST level is 21.2180 eV. Native table coverage, units, positivity and hashes were checked; a spectroscopic target-state energy certificate was not obtained. A conserved effective-energy ledger does not resolve this difference.",
+      "implication": "Excitation reservoirs are atomic-energy bookkeeping, not a solved photon spectrum, prompt photon count, or absorption model"
+    },
+    {
+      "id": "F05",
+      "severity": "OPEN_EXTERNAL_EVIDENCE_NONBLOCKING_FOR_NARROWED_CONTRACT",
+      "subject": "NIST CGI comparison",
+      "evidence": [
+        "state/SOURCE_COMPLETION_ADDENDUM.json",
+        "research/literature/ionization/SOURCE_AUDIT_FINAL_KO.md"
+      ],
+      "assessment": "The pre-numerical addendum records actual external HTTP500 failure and retains the original CGI comparison as NOT_EVALUATED. The executed published-equation integral check is only an algebraic/units oracle. Its numerical agreement is not substituted for an independent CGI result.",
+      "original_check_state": "NOT_EVALUATED_EXTERNAL_SERVICE_FAILURE",
+      "reviewer_retried_external_CGI": false
+    },
+    {
+      "id": "F06",
+      "severity": "NUMERICAL_SCOPE_LIMIT",
+      "subject": "Independent time propagation and grid convergence",
+      "evidence": [
+        "tests/independent_oracles.py",
+        "evidence/runs/R001/NUMERICAL_RESULT.json",
+        "evidence/runs/R002/NUMERICAL_RESULT.json"
+      ],
+      "assessment": "DOP853 independently checks propagation on 240 active nodes with the same G, not an independent final 4800-node physical calculation. The reported 1.3928%/1.1529% refinement changes concern cumulative low-band crossing energy/count. Instantaneous crossing rates, pointwise spectra, and diagnostic heat partitions do not inherit a separately certified continuum error bound."
+    },
+    {
+      "id": "F07",
+      "severity": "KNOWN_MODEL_LIMIT",
+      "subject": "Coulomb closure, source projection and cutoff",
+      "evidence": [
+        "src/causal_cascade.py",
+        "DERIVATION_KO.md",
+        "REPORT_KO.md"
+      ],
+      "assessment": "The min(classical, quantum) logarithm is an adopted leading-log matching prescription. Its preselected -1/2 sensitivity is not a physical uncertainty bound. Linear grid projection and the 0.1 eV ghost boundary introduce finite-grid effects, including near-boundary early absorption and low-band assignment of projected source just above 10 eV. Cutoff kinetic energy is retained separately from heat."
+    },
+    {
+      "id": "F08",
+      "severity": "INTERPRETATION_LIMIT",
+      "subject": "High-birth heat, low-energy heat and terminal comparison",
+      "evidence": [
+        "evidence/runs/R002/NUMERICAL_RESULT.json",
+        "evidence/diagnostics/DIAGNOSTIC_RESULT.json",
+        "REPORT_KO.md"
+      ],
+      "assessment": "42.5648% is total high-birth stopping-heat power relative to direct low-birth stopping heat. Only 2.3565% is the additional high-birth heat generated at E<=10 eV relative to that same direct low-birth reference. The terminal comparison uses the same frozen operator and current injection; it is not an IGM history or original FS10 reproduction."
+    },
+    {
+      "id": "F09",
+      "severity": "RUNTIME_GAP_ADDRESSED_FOR_EXPLICIT_REPRODUCTION",
+      "subject": "One-thread project policy and historical runtime provenance",
+      "evidence": [
+        "research/PROJECT_HPC_ACCURACY_POLICY_KO_SNAPSHOT.md",
+        "evidence/thread_control/FOCUSED_CONTRACT.json",
+        "evidence/thread_control/THREAD_CONTROL_RESULT.json",
+        "evidence/thread_control/ACTUAL_EXIT.json"
+      ],
+      "assessment": "The original R002 thread count was not recorded and is not retroactively inferred. A predeclared focused run fixes the five thread-control variables to 1, checks both loaded OpenBLAS pools at one thread, and reports /proc Threads=1. It reproduces all compared final observables exactly and the saved 21-time trajectory endpoint within the stated normalized tolerance. The initial resource-admission failure is preserved and the repaired resource estimate retains the mandatory reserve."
+    }
+  ],
+  "actual_review_checks": [
+    {
+      "id": "R01",
+      "method": "SHA256 and byte-length recomputation",
+      "result": "27/27 packet files match; packet SHA also matches independently supplied value"
+    },
+    {
+      "id": "R02",
+      "method": "Parent dependency SHA256 and byte-length recomputation",
+      "result": "4/4 manifest-referenced parent files match local bytes; prior parent scientific suite not rerun"
+    },
+    {
+      "id": "R03",
+      "method": "Raw CCC dependency SHA256 and array checks",
+      "result": "27/27 referenced raw tables match; finite increasing energies, nonnegative cross sections, native first-zero costs and at least 900 eV coverage checked"
+    },
+    {
+      "id": "R04",
+      "method": "Direct mathematical and implementation audit",
+      "result": "Signs, two-daughter convention, total-rate normalization, dimensional conversions, drift rates, source ramp, energy/number functionals and resolvent interpretation are consistent within the declared operator"
+    },
+    {
+      "id": "R05",
+      "method": "Read-only arithmetic using saved canonical NPZ arrays",
+      "result": "21 times, 4811 states, 2 birth tags; 4800 active nodes; independently constructed ledger functionals",
+      "max_energy_ledger_relative_residual": 2.6980120383788226e-14,
+      "max_number_ledger_relative_residual": 2.7008241818759334e-14,
+      "minimum_saved_state": 0,
+      "low_birth_population_above_10_eV": 0
+    },
+    {
+      "id": "R06",
+      "method": "Parsed stdout check records versus R002 JSON",
+      "result": "All 13 raw check records agree with result JSON, final PASS_SCOPED marker present, stderr empty; owner-observed actual exit receipt read"
+    },
+    {
+      "id": "R07",
+      "method": "Read failed and successful run metadata, result criteria and source identities",
+      "result": "R001 failure retained; R001 and R002 source identities identical; addendum precedes R001; only predeclared grid refinement repairs the failed mesh criterion"
+    },
+    {
+      "id": "R08",
+      "method": "Read-only recomputation of reported ratios",
+      "result": "42.5648045236% total high-birth increment and 2.35650285479% low-energy-only increment use their stated common direct low-birth denominator"
+    },
+    {
+      "id": "R09",
+      "method": "Diagnostic NPZ hash, script and output inspection plus rendered PNG view",
+      "result": "Saved diagnostic array identity agrees with DIAGNOSTIC_RESULT; postprocessing uses the same frozen generator and an occupation integral, with no independent physical or separate heat-partition mesh certification"
+    },
+    {
+      "id": "R10",
+      "method": "Primary-source equation and parameter reading",
+      "result": "NIST equations/normalization explanation, Muller2009 Table I and Eqs42-47, NIST He level table, and Krommes2018 classical/quantum discussion checked; exact CGI comparison not executed by reviewer"
+    },
+    {
+      "id": "R11",
+      "method": "Narrow runtime-supplement audit and read-only saved-array arithmetic",
+      "result": "14/14 supplement hashes match; policy/contract/script delta/receipts read; final raw stdout matches result JSON; final stderr empty; endpoint and source arrays independently compared without importing or running the cascade.",
+      "state_normalized_linf_per_tag": [
+        3.3986826035985765e-15,
+        1.0065617007183735e-16
+      ],
+      "source_arrays_identical": true,
+      "energy_grids_identical": true,
+      "original_R002_thread_count": "NOT_RECORDED"
+    }
+  ],
+  "execution_evidence": {
+    "ownership": "Scientific runs were executed by the implementation/diagnostic owners. Reviewer read their actual-process receipts and raw artifacts; reviewer did not personally rerun the scientific suites.",
+    "reviewer_scientific_suite_run_count": 0,
+    "reviewer_code_edit_count": 0,
+    "R001": {
+      "status": "FAIL",
+      "passed": 12,
+      "total": 13,
+      "actual_process_exit_code": 1,
+      "active_grid_pairs": [
+        [
+          200,
+          400
+        ],
+        [
+          400,
+          800
+        ]
+      ],
+      "cumulative_low_cross_energy_relative_change": 0.05126664494374118,
+      "cumulative_low_cross_number_relative_change": 0.04315482232311675,
+      "energy_tolerance": 0.02,
+      "count_tolerance": 0.03,
+      "receipt": "evidence/runs/R001/ACTUAL_EXIT.json"
+    },
+    "R002": {
+      "status": "PASS_SCOPED",
+      "passed": 13,
+      "total": 13,
+      "actual_process_exit_code": 0,
+      "active_grid_pairs": [
+        [
+          800,
+          1600
+        ],
+        [
+          1600,
+          3200
+        ]
+      ],
+      "canonical_active_nodes": 4800,
+      "cumulative_low_cross_energy_relative_change": 0.013927812405,
+      "cumulative_low_cross_number_relative_change": 0.011529489342,
+      "heat_power_mesh_relative_change": 0.0004890034,
+      "cumulative_heat_mesh_relative_change": 0.0005529144,
+      "independent_time_oracle_active_nodes": 240,
+      "independent_time_oracle_normalized_linf": 2.638818e-12,
+      "exact_branching_toy_max_relative": 1.128773e-14,
+      "receipt": "evidence/runs/R002/ACTUAL_EXIT.json",
+      "tool_session_id": 78368,
+      "final_tool_chunk_id": "66e5a6"
+    },
+    "diagnostics": {
+      "actual_process_exit_code": 0,
+      "checks_passed": 7,
+      "receipt": "evidence/diagnostics/ACTUAL_EXIT.json",
+      "scope": "Same-generator postprocessing of the frozen R002 trajectory; not a new physical validation or separately certified grid limit"
+    },
+    "focused_thread_control": {
+      "status": "PASS_SCOPED_THREAD_CONTROL",
+      "actual_process_exit_code": 0,
+      "tool_session_id": 82000,
+      "final_tool_chunk_id": "36669a",
+      "elapsed_seconds": 76.96671065500414,
+      "canonical_active_nodes": 4800,
+      "actual_propagations": 1,
+      "scientific_suites_rerun": 0,
+      "environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_MAX_ACTIVE_LEVELS": "1"
+      },
+      "native_threadpools": [
+        {
+          "internal_api": "openblas",
+          "num_threads": 1,
+          "version": "0.3.30",
+          "threading_layer": "pthreads"
+        },
+        {
+          "internal_api": "openblas",
+          "num_threads": 1,
+          "version": "0.3.30",
+          "threading_layer": "pthreads"
+        }
+      ],
+      "process_threads": "1",
+      "process_VmHWM": "1143116 kB",
+      "state_normalized_linf_per_tag": [
+        3.3986826035985765e-15,
+        1.0065617007183735e-16
+      ],
+      "source_normalized_linf": 0,
+      "max_compared_observable_relative_error": 0,
+      "predeclared_comparison_tolerance": 1e-11,
+      "physical_candidate_identities_unchanged": true,
+      "initial_resource_admission_failure_preserved": true
+    }
+  },
+  "accepted_results_at_t_1e10_s": {
+    "normalization": "Conditional 0.1-900 eV selected direct-electron input in the stated inherited 1-4 MeV proton source and prescribed bath",
+    "selected_fraction_of_all_active_proton_direct_electron_kinetic_energy": 0.7355293039449105,
+    "injected_energy_J_m3": 9.006312892138682e-33,
+    "active_energy_J_m3": 8.852763049929355e-33,
+    "cumulative_stopping_heat_J_m3": 1.1916005067151402e-34,
+    "stopping_heat_power_J_m3_s": 3.4409953796645942e-44,
+    "low_birth_stopping_heat_power_J_m3_s": 2.4136359539534674e-44,
+    "high_birth_stopping_heat_power_J_m3_s": 1.0273594257111246e-44,
+    "high_birth_total_heat_over_low_birth_heat": 0.42564804523579414,
+    "high_birth_heat_generated_at_E_le_10_eV_J_m3_s": 5.687740015923176e-46,
+    "high_birth_low_energy_heat_over_low_birth_heat": 0.023565028547933894,
+    "same_frozen_operator_terminal_immediate_proxy_J_m3_s": 1.0088259058715158e-42,
+    "causal_heat_power_over_terminal_immediate_proxy": 0.034108911752141674,
+    "diagnostic_claim_limit": "All values are results of the declared finite operator. Ratios are not empirical atomic accuracy claims; heat partition has no separate continuum error certificate."
+  },
+  "gate_dimension_assessment": {
+    "evidence": "Fixed code, primary inputs, retained failure, raw successful output and actual exits support the scoped numerical result; external CGI and atomic consistency gaps remain explicit.",
+    "physical_mathematical_validity": "Finite positive conservative linear branching operator is well defined. Physical calibration beyond its prescribed hybrid ingredients is not established.",
+    "novelty": "Increment over PHYS02A is repeated above-threshold branching and excitation with causal storage and low-band feeding. No literature-first novelty or original FS10 replication is claimed.",
+    "testability": "The stated algebraic, independent-toy, independent-time, inherited-continuum, identity and empirical refinement checks are concrete and have bounded stated scopes.",
+    "robustness": "Unchanged numerical criteria pass after one evidence-driven resolution repair; this is local numerical robustness, not universal discretization or physical uncertainty certification.",
+    "tractability": "Actual local sparse execution and diagnostic receipts demonstrate feasible completion of this specified 4800-node calculation.",
+    "assumptions": "Fixed bath, local inherited source history, truncated source and atomic channels, effective excitation costs, normalized hybrid sharing, leading-log drift and finite cutoff remain active assumptions.",
+    "original_motivation": "Finite-time delay and energy storage are computed while separating total high-birth heat from actual low-energy deposition; the original causal-cascade objective is preserved."
+  },
+  "inherited_gates": {
+    "PHYS02_DELAY": "OPEN",
+    "production_history": "HOLD",
+    "atomic_G02": "UNRESOLVED",
+    "b_grid": "NO_GO",
+    "all_bound": "OPEN",
+    "R17B2B": "NO_CERTIFIED_SOURCE_SHARPENING"
+  },
+  "unresolved_evidence": [
+    "Coherent HI/HeI total/oscillator/sharing atomic representation and excitation target-state costs",
+    "Exact current NIST CGI numerical comparison",
+    "Original FS10 data/code or terminal-yield reproduction",
+    "Source below 0.1 eV and above 900 eV, HeII and omitted excitation channels",
+    "Elastic neutral recoil, thermal diffusion, sub-cutoff thermalization, radiative branching/transport and bath feedback",
+    "Physical accuracy and complete source/redshift/IGM history certificate"
+  ],
+  "primary_sources_actually_read": [
+    {
+      "url": "https://physics.nist.gov/PhysRefData/Ionization/Eqs/latex.html",
+      "location": "Equations 1, 3, 4 and variable definitions",
+      "tool_refs": [
+        "turn69view0",
+        "turn70view0"
+      ]
+    },
+    {
+      "url": "https://physics.nist.gov/PhysRefData/Ionization/intro.html",
+      "location": "B: normalized singly differential cross sections",
+      "tool_refs": [
+        "turn69view1"
+      ]
+    },
+    {
+      "url": "https://backend.orbit.dtu.dk/ws/portalfiles/portal/4857374/Naulin_paper.pdf",
+      "location": "Parsed primary manuscript Table I and Eqs42-47",
+      "tool_refs": [
+        "turn69view2",
+        "turn70view1",
+        "turn70view2"
+      ]
+    },
+    {
+      "url": "https://physics.nist.gov/cgi-bin/Ionization/atom.php?element=He",
+      "location": "He level energies, including 1s2p 21.2180 eV",
+      "tool_refs": [
+        "turn72view0"
+      ]
+    },
+    {
+      "url": "https://arxiv.org/html/1806.04990v1",
+      "location": "Sections 2-3, Eq5, Eq14 and matching discussion",
+      "tool_refs": [
+        "turn72view1",
+        "turn74view0",
+        "turn74view1"
+      ]
+    }
+  ],
+  "supplemental_evidence_identity": {
+    "evidence/diagnostics/OCCUPANCY_AND_PLOT_DATA.npz": {
+      "bytes": 267410,
+      "sha256": "36591c0ec3ddb666334bcf9884b781603e5e1704e0d03335dd0255acae38cee0",
+      "review_mode": "Read-only array/identity audit"
+    },
+    "research/literature/ionization/SOURCE_AUDIT_FINAL_KO.md": {
+      "bytes": 5703,
+      "sha256": "7986fc9e5f117991927411ebae1c1d605db1679c27e22fd180e38624c8a4904a",
+      "review_mode": "Read after packet freeze; closes source-acquisition bookkeeping without changing scientific inputs"
+    },
+    "research/literature/ionization/SOURCE_AUDIT_FINAL.json": {
+      "bytes": 17207,
+      "sha256": "b4ad3311bcba31bf769fc1b58cb03b66d1667d8c497de4558445fecf8f22b976",
+      "review_mode": "Identity only; not relied upon for a new scientific conclusion"
+    }
+  },
+  "disposition": "Final independent gate complete for the original frozen scientific candidate plus the separately pinned narrow runtime supplement. No further code changes or scientific reruns are required for this conditional research promotion. The historical R002 thread-count gap, physical claim ceilings and inherited gates remain explicit; reviewed scientific snapshots must be preserved.",
+  "runtime_supplement": {
+    "relationship": "Additional narrow environment evidence after the original 27-file scientific packet was frozen; no fixed scientific snapshot changed",
+    "manifest": "evidence/thread_control/SUPPLEMENT_MANIFEST.json",
+    "manifest_sha256": "d42aa86b79cbfa0138d3a89bfcc48a47f9397388322c88179aedb23962089989",
+    "file_count": 14,
+    "file_identity_check": "14/14 SHA256 and byte lengths match",
+    "files": {
+      "evidence/thread_control/ACTUAL_EXIT.json": {
+        "bytes": 430,
+        "sha256": "043576910da19a3c108aab9099bbb456c8fcac11b1dd146a0bc0d5d5d5812bf5"
+      },
+      "evidence/thread_control/ATTEMPT01/ACTUAL_EXIT.json": {
+        "bytes": 307,
+        "sha256": "43b41835bea2c65ed4352049fa8dc622b0523a663f5af712a3e5ac2a75526698"
+      },
+      "evidence/thread_control/ATTEMPT01/THREAD_CONTROL_RESULT.json": {
+        "bytes": 348,
+        "sha256": "911c536b64ca157df7f56259b35f11dd47bab7a8750a9de867e2332b0dacb3ca"
+      },
+      "evidence/thread_control/ATTEMPT01/stderr.log": {
+        "bytes": 483,
+        "sha256": "921366c497fa38e4ef088e9e5cf5dd2145c2766408666a346e82a4d7cb1a6cf4"
+      },
+      "evidence/thread_control/ATTEMPT01/stdout.log": {
+        "bytes": 330,
+        "sha256": "44c9224af653d6c02ee2335f98a59d24940873db03ea2c528527a8b86c474efc"
+      },
+      "evidence/thread_control/ATTEMPT01/verify_thread_control_executed.py": {
+        "bytes": 6762,
+        "sha256": "cb499ea448131cfc7559eb9463c1ac00ab24684f44d0ad92efffb27b2426c0d1"
+      },
+      "evidence/thread_control/FOCUSED_CONTRACT.json": {
+        "bytes": 1215,
+        "sha256": "d34bf538e9c8d51b9ba797a4e4f28c19eb1fd23419d8bea492e97f489bb738e9"
+      },
+      "evidence/thread_control/ONE_THREAD_CANONICAL_STATE.npz": {
+        "bytes": 110833,
+        "sha256": "11a72417dd0c20f50f93c9e2b5c9331d97e998de0446faca2a16105f4a064506"
+      },
+      "evidence/thread_control/RESOURCE_ADMISSION_REPAIR.json": {
+        "bytes": 1075,
+        "sha256": "d32afa853c1c2bc861929d62179f4d99c471c971404a8e6a4457a3409338f284"
+      },
+      "evidence/thread_control/THREAD_CONTROL_RESULT.json": {
+        "bytes": 12689,
+        "sha256": "56552775af79735e8b7409531118ad17c7d7540bd6d838a6371057d9f0c03f82"
+      },
+      "evidence/thread_control/stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "evidence/thread_control/stdout.log": {
+        "bytes": 12427,
+        "sha256": "2bb59417407ac2931c23d9d4c146d989ab0dceb2033e365db4826e4f2b2d13f0"
+      },
+      "tests/verify_thread_control.py": {
+        "bytes": 7355,
+        "sha256": "e4b917466a4edc913658f0ac0a4b978d6591c9b4db1c0831090dbabfd0c1ee68"
+      },
+      "research/PROJECT_HPC_ACCURACY_POLICY_KO_SNAPSHOT.md": {
+        "bytes": 4160,
+        "sha256": "987f2f55b6bda02dfe4eefdf82ff57444c0b531ccf73ce8e9010172645e09454"
+      }
+    },
+    "original_R002_native_thread_count": "NOT_RECORDED",
+    "fresh_process_observation_is_not_retroactive_provenance": true,
+    "policy": "Read project AGENTS and the fixed HPC accuracy policy snapshot: BLAS/NumExpr default one thread, preserve precision/tolerances, verify only the changed environment scope.",
+    "preflight_failure": {
+      "status": "FAIL_RESOURCE_ADMISSION_BEFORE_TRANSPORT",
+      "actual_exit_code": 1,
+      "actual_transport_started": false,
+      "executed_script_sha256": "cb499ea448131cfc7559eb9463c1ac00ab24684f44d0ad92efffb27b2426c0d1",
+      "preserved": "evidence/thread_control/ATTEMPT01"
+    },
+    "repair": {
+      "change": "Resource accounting only: count memory.current minus inactive file cache, retain active file cache and original 1 GiB reserve; justify a 2 GiB incremental estimate from one 9,080,055-nonzero generator.",
+      "inspected_script_diff": "Only resource-estimate/admission lines differ from the retained first attempt.",
+      "physical_or_numerical_algorithm_change": false,
+      "comparison_tolerance_change": false,
+      "no_cache_flush_or_other_process_kill_reported": true
+    },
+    "accepted_scope": "Explicit local one-thread operation and same-input final-state/observable reproducibility. Original run thread provenance remains unrecorded; no speedup, NCP64 scaling or new physical claim.",
+    "read_scope": "Policy, contract, original failure and receipt, repaired script and delta, resource note, final result and receipt, raw final stdout/stderr, manifest and saved endpoint arrays."
+  }
+}
+

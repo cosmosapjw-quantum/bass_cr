@@ -1,0 +1,34 @@
+{
+  "schema": "bass-cr-phys02b-prospective-readback-plan.v1",
+  "selected_before_mutation_utc": "2026-10-10T12:29:39.651882+00:00",
+  "tier": "R1",
+  "operations": [
+    "Additive research branch and draft PR based on PHYS02A58c8e1c",
+    "Ordinary fast-forward receipt update on the new branch",
+    "Create-only uniquely named immutable handoff ZIP on existing Drive and Dropbox dossier folders"
+  ],
+  "reason": "Ordinary additive research publication and backup; full scientific production gates remain unchanged. Not a main merge, sealed release, destructive replacement, restore, authority-policy change or explicit raw-content audit.",
+  "github_evidence": [
+    "provider success",
+    "expected commit SHA",
+    "exact destination ref metadata matching expected SHA",
+    "available tree/blob identity from provider response"
+  ],
+  "backup_evidence": [
+    "local source retained",
+    "local SHA256 and size",
+    "provider completed success",
+    "remote object ID/path",
+    "available size and matching-algorithm checksum metadata"
+  ],
+  "integrity_comparison": "Compare only like algorithms; absent provider SHA256 is UNAVAILABLE; missing optional digest alone does not trigger a payload download.",
+  "mismatch_policy": "Stop and investigate affected object; unresolved provenance/size/hash mismatch requires R3, never force an overwrite.",
+  "restore_verification": "NOT_PERFORMED; UPLOAD_VERIFIED is distinct from RESTORE_VERIFIED",
+  "policy_sources": {
+    "base_ref": "58c8e1cda5c8f8ca8b83269cb89899ea40ab91fe",
+    "AGENTS": "https://github.com/cosmosapjw-quantum/bass_cr/blob/58c8e1cda5c8f8ca8b83269cb89899ea40ab91fe/AGENTS.md",
+    "readback_policy": "https://github.com/cosmosapjw-quantum/bass_cr/blob/58c8e1cda5c8f8ca8b83269cb89899ea40ab91fe/docs/READBACK_POLICY.md",
+    "machine_readable_path": ".codex/readback-policy.json",
+    "machine_readable_observation": "404 on this pinned branch; apply the directly read AGENTS and docs policy rather than inventing JSON contents."
+  }
+}
