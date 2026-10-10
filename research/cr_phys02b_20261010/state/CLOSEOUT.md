@@ -6,7 +6,8 @@ EXECUTION_STATUS: ACTUALLY_EXECUTED, R002 PASS_SCOPED 13/13
 SCIENTIFIC_DECISION: PROMOTE_SCOPED, independent decision at2026-10-10T12:30:02Z
 REQUESTED_OUTCOME: PHYS02A 다음의 인과적 전자 cascade 연구 단위를 실제로 수행한다.
 COMPLETION_CRITERIA_MET: 조건부 유한 연구 단위의 유도·구현·수치 검증·독립 판정 완료.
-PUBLICATION_STATUS: PENDING_ACTUAL_REMOTE_WRITE; actual receipts will be stored in publication/.
+PUBLICATION_STATUS: SCIENCE_BRANCH_DRAFT_PR_AND_DUAL_BACKUP_VERIFIED_R1.
+PERSISTENCE_CONFIRMED_AT: 2026-10-10; exact IDs, size and available provider metadata in publication/FINAL_PUBLICATION_RECEIPT.json.
 
 ## Results by evidence status
 
@@ -49,10 +50,13 @@ He의 총률 Q와 인쇄 oscillator Q는 서로 일치하지 않으며, CCC zero
 
 ## Persistence and next minimum action
 
-원격 출판과 백업의 실제 ID·ref·검증 수준은 publication/ 영수증에 기록한다.
-지금의 문서 작성 자체를 원격 저장 성공으로 세지 않는다. GitHub 연구 branch/draft PR,
-새 이름의 Drive/Dropbox 백업은 기존 권한 내에서 수행한다. UPLOAD_VERIFIED와
-RESTORE_VERIFIED를 구분하며 후자는 수행하지 않는다.
+과학 commit929abd7ff981f08ed965e302532af9daac06316f의 연구 branch와 draft PR27을
+실제로 만들고 exact ref를 확인했다. 2,515,533byte의 불변 인계 ZIP을 기존
+Drive/Dropbox 위치에 새 이름으로 업로드했고 양쪽 완료 응답·ID·파일 크기를 확인했다.
+연결 도구의 metadata가 원격 digest를 제공하지 않아 해당 비교는 UNAVAILABLE다.
+원시 payload 재다운로드 없이 사전 선택한 R1으로 UPLOAD_VERIFIED를 기록했다.
+RESTORE_VERIFIED는 주장하지 않는다. 실제 원격 기록과 불변 ZIP digest는 publication/
+영수증에 있고, 최종 receipt commit의 ref 확인은 별도 delivery receipt에 남긴다.
 
 PHYS02_DELAY OPEN; production_history HOLD; atomic_G02 UNRESOLVED;
 b_grid NO_GO; all_bound OPEN; R17B2B NO_CERTIFIED_SOURCE_SHARPENING.
