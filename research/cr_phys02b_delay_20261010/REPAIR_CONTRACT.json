@@ -1,0 +1,13 @@
+{
+  "id": "CR-PHYS02B-CHARACTERISTIC-REPAIR-01",
+  "parent_contract": "CONTRACT.json",
+  "original_validation_sha256": "487bb2efa40ef642731bc8c2edc4018bceb37a18caffd81acb8980cc83f2810c",
+  "scope": "One repair: replace donor-cell Coulomb drift with deterministic cooling characteristics; retain collision formulas, paired daughters, gas, cutoff, impulse/epoch/grid sets and every numerical tolerance.",
+  "method": "Move energy nodes with tau(E)=integral_10^E dE/b(E). Symmetric exact-drag / fixed-stage collision / exact-drag composition; collision uses the moving midpoint energy grid. Heat is the actual energy decrease in each drag substep. Arrived characteristic nodes are inert cutoff reservoirs.",
+  "time_validation": "Same SSPRK2 CFL 0.4 and /2,/4 refinements, now for collision stages on characteristics. Compare with sparse stage exponentials at eight times the base step count; independently compare dense and sparse stage exponentials. This replaces only the inapplicable static donor-cell exponential reference.",
+  "arrival_oracle": {"injection_eV": 20.0, "cutoff_eV": 10.0, "proper_time_s": 94565233303.48772, "post_arrival_active_energy_eV": 0.0},
+  "maximum_repair_closeouts": 1,
+  "production_changes": false,
+  "commit_or_push": false,
+  "full_CR_PHYS02": "HOLD_SOURCE_CONVOLUTION_AND_10_8700_EV_DOMAIN_ABSENT"
+}

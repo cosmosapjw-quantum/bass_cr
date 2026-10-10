@@ -1,0 +1,31 @@
+{
+  "id": "CR-PHYS02B-OLD-CAUSAL-GENERATOR",
+  "type": "conditional_fixed_gas_research_sidecar",
+  "source_commit": "b556d0f0418a0665719fd6da26dcc303466b9659",
+  "source_tree": "c5354117b8a39bfc670e57fed9c0ffd6ebbaeae4",
+  "model": "DarkHistory old-method HI/HeI/HeII excitation, ionization and Coulomb drag; absolute proper seconds; source formulas only, no complete-cooling transfer matrix",
+  "gas": {"nH_m3": 140.0, "Y_He_mass": 0.248, "xHII_per_H": 0.01, "xHeII_per_He": 0.01, "xHeIII_per_He": 0.0, "temperature_K": 100.0},
+  "density_convention": "nHe=nH*Y/(4*(1-Y)); ne=nH*xHII+nHe*(xHeII+2*xHeIII); cm^-3=n_m^-3*1e-6. No upstream default Y or cosmological nH is imported.",
+  "domain_eV": [10.0, 1000.0],
+  "cutoff": "Electrons at/below 10 eV enter an inert unresolved electron-count and kinetic-energy reservoir. This is not prompt heat. No model below cutoff is adopted.",
+  "discretization": "Linear number-and-energy preserving daughter projection; paired ionization daughters E1+E2=E-I; normalized conditional Shull shape exponent 2.1; raw n*sigma*v event rate; nearest-lower-node conservative Coulomb drift",
+  "acceptance": {
+    "impulses_eV": [20.0, 100.0, 1000.0],
+    "times_s": [0.0, 1e10, 1e11, 1e12, 1e13],
+    "grid_intervals": [128, 256, 512],
+    "daughter_quadrature_orders": [8, 12],
+    "number_energy_ledger_relative": 2e-11,
+    "quadrature_observable_energy_fraction": 1e-8,
+    "grid_observable_energy_fraction": 0.02,
+    "grid_fine_difference_must_decrease": true,
+    "time_method": "SSPRK2 steps with max step*max_exit<=0.4, refinements /2 and /4, compared with sparse exponential action",
+    "time_observable_energy_fraction": 0.0002,
+    "time_fine_difference_must_decrease": true,
+    "t0_deposited_energy": 0.0,
+    "negative_population_allowed": false,
+    "off_exact_unchanged": true
+  },
+  "hard_limits": {"maximum_grid_intervals": 512, "maximum_time_s": 1e13, "maximum_SSPRK2_steps": 65536, "repair_rounds": 1, "review_rounds": 1},
+  "excluded": ["production provider modification", "CR proton source convolution", "gas feedback", "cosmological expansion", "inverse Compton", "bremsstrahlung", "diffuse photon transport", "complete thermalization", "full CR-PHYS02 closure", "physical/global IGM history admission"],
+  "next_on_pass": "Independent review and a separately bounded source convolution/extension contract; retain full CR history HOLD"
+}
