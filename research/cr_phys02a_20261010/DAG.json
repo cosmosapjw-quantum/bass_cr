@@ -1,0 +1,144 @@
+{
+  "schema": "research-dag.v2",
+  "updated_utc": "2026-10-10T11:25:00.406652+00:00",
+  "current_work_unit": "CR-PHYS02A-CAUSAL-SUBTHRESHOLD",
+  "parent_base_commit": "e41e18873af438ef989ff44f505fe2665118fdec",
+  "nodes": [
+    {
+      "id": "CR-PHYS01",
+      "state": "IMPLEMENTED_SCOPED",
+      "owner": "bass_cr+rei_bianchi",
+      "requires": [],
+      "changed": false
+    },
+    {
+      "id": "CR-PHYS02-DELAY",
+      "state": "OPEN",
+      "owner": "bass_cr",
+      "requires": [
+        "CR-PHYS01"
+      ],
+      "completed_components": [
+        "CR-PHYS02A-CAUSAL-SUBTHRESHOLD"
+      ],
+      "admission": false,
+      "remaining": [
+        "CR-PHYS02B-RATE-BRANCHING",
+        "CR-PHYS02C-HIGH-ENERGY",
+        "CR-PHYS02D-PHOTON-DELAY",
+        "CR-PHYS02A-THERMAL-MATCH"
+      ],
+      "accept": "causal full electron/photon energy transport or independently justified quasistatic applicability in the declared source/state; no turn-on shortcut"
+    },
+    {
+      "id": "CR-PHYS02A-CAUSAL-SUBTHRESHOLD",
+      "state": "PROMOTED_SCOPED",
+      "owner": "bass_cr",
+      "requires": [
+        "CR-PHYS01"
+      ],
+      "outputs": [
+        "direct 0.1–10eV ramp source",
+        "conditional classical Coulomb stopping clock",
+        "power/cumulative/active/cutoff ledger"
+      ],
+      "limits": [
+        "fixed state",
+        "no incoming higher-energy cascade",
+        "no physical accuracy certificate"
+      ],
+      "decision": "review/INDEPENDENT_DECISION.json"
+    },
+    {
+      "id": "CR-PHYS02B-RATE-BRANCHING",
+      "state": "READY",
+      "owner": "bass_cr",
+      "requires": [
+        "CR-PHYS02A-CAUSAL-SUBTHRESHOLD"
+      ],
+      "priority_basis": "10–1000 eV =71.069493% of direct secondary kinetic input;100–1000 eV=42.345830%",
+      "accept": "source-pinned absolute H/He electron-impact rates, ionization/excitation branching, causal energy/number generator and outgoing low-energy boundary flux; terminal and energy/time convergence checked"
+    },
+    {
+      "id": "CR-PHYS02A-THERMAL-MATCH",
+      "state": "READY",
+      "owner": "bass_cr",
+      "requires": [
+        "CR-PHYS02A-CAUSAL-SUBTHRESHOLD"
+      ],
+      "accept": "explicit near-thermal kinetic/bath matching and bounded role of neutral/ion exchange, quantum/classical crossover and diffusion; no cutoff-energy disposal"
+    },
+    {
+      "id": "CR-PHYS02C-HIGH-ENERGY",
+      "state": "WAITING",
+      "owner": "bass_cr",
+      "requires": [
+        "CR-PHYS02B-RATE-BRANCHING"
+      ],
+      "accept": ">=1keV to inherited ejection endpoints and upper cascade feed, with disjoint source/energy coverage; direct input24.461890%"
+    },
+    {
+      "id": "CR-PHYS02D-PHOTON-DELAY",
+      "state": "WAITING",
+      "owner": "bass_cr+rei_bianchi",
+      "requires": [
+        "CR-PHYS02B-RATE-BRANCHING"
+      ],
+      "accept": "He-excitation ionizing-photon number/energy reservoir, transport and reabsorption without double counting terminal yields"
+    },
+    {
+      "id": "CR-PHYS03-COMPOSITION",
+      "state": "READY",
+      "owner": "bass_cr+atomic donors",
+      "requires": [
+        "CR-PHYS01"
+      ],
+      "accept": "source-pinned independent H/He fractions and T/abundance support"
+    },
+    {
+      "id": "CR-PHYS04-LOSSES",
+      "state": "READY",
+      "owner": "bass_cr",
+      "requires": [
+        "CR-PHYS01"
+      ],
+      "accept": "proton Coulomb/excitation/HeII and source-energy tail coverage; disjoint energy ledger"
+    },
+    {
+      "id": "CR-PHYS05-RECEIVER",
+      "state": "WAITING",
+      "owner": "rei_bianchi",
+      "requires": [
+        "CR-PHYS02-DELAY",
+        "CR-PHYS03-COMPOSITION"
+      ],
+      "accept": "state-dependent opt-in delayed adapter, separate suprathermal and thermal electron counts, fresh native build receipt"
+    },
+    {
+      "id": "CR-PHYS06-HISTORY",
+      "state": "WAITING",
+      "owner": "rei_bianchi",
+      "requires": [
+        "CR-PHYS04-LOSSES",
+        "CR-PHYS05-RECEIVER"
+      ],
+      "accept": "matched FLRW/Bianchi history, positivity/number/energy closure and separate convergence budgets"
+    },
+    {
+      "id": "CR-PHYS07-BASS",
+      "state": "WAITING",
+      "owner": "bass",
+      "requires": [
+        "CR-PHYS06-HISTORY"
+      ],
+      "accept": "new exact-source electron snapshots; no reuse of CR-off warm receipt"
+    },
+    {
+      "id": "ATOMIC-ORIGINAL",
+      "state": "PRESERVED_PARALLEL",
+      "owner": "BASS_HE+WU088_HH+bass_cr",
+      "requires": [],
+      "accept": "original precision gates retained; no automatic RCT/HH activation"
+    }
+  ]
+}
