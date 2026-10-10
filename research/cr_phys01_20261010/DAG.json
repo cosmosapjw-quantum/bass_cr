@@ -1,0 +1,13 @@
+{
+  "schema": "research-dag.v1",
+  "nodes": [
+    {"id":"CR-PHYS01","state":"IMPLEMENTED_SCOPED","owner":"bass_cr+rei_bianchi","requires":[],"outputs":["charged injection","primary-secondary kernel","actual local receiver"]},
+    {"id":"CR-PHYS02-DELAY","state":"READY","owner":"bass_cr","requires":["CR-PHYS01"],"accept":"causal e− energy transport or independently justified quasistatic applicability; no turn-on shortcut"},
+    {"id":"CR-PHYS03-COMPOSITION","state":"READY","owner":"bass_cr+atomic donors","requires":["CR-PHYS01"],"accept":"source-pinned independent H/He fractions and T/abundance support"},
+    {"id":"CR-PHYS04-LOSSES","state":"READY","owner":"bass_cr","requires":["CR-PHYS01"],"accept":"Coulomb/excitation/HeII/energy-tail collision coverage and disjoint energy ledger"},
+    {"id":"CR-PHYS05-RECEIVER","state":"WAITING","owner":"rei_bianchi","requires":["CR-PHYS02-DELAY","CR-PHYS03-COMPOSITION"],"accept":"state-dependent opt-in source adapter and fresh native build receipt"},
+    {"id":"CR-PHYS06-HISTORY","state":"WAITING","owner":"rei_bianchi","requires":["CR-PHYS04-LOSSES","CR-PHYS05-RECEIVER"],"accept":"matched FLRW/Bianchi history with positivity, number/energy closure and separate convergence budgets"},
+    {"id":"CR-PHYS07-BASS","state":"WAITING","owner":"bass","requires":["CR-PHYS06-HISTORY"],"accept":"new exact-source electron snapshots; no reuse of CR-off warm receipt"},
+    {"id":"ATOMIC-ORIGINAL","state":"PRESERVED_PARALLEL","owner":"BASS_HE+WU088_HH+bass_cr","requires":[],"accept":"original precision gates retained; no automatic RCT/HH activation"}
+  ]
+}
