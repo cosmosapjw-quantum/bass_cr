@@ -1,0 +1,42 @@
+{
+  "id": "CR-PHYS02C-NIST-TABLE01",
+  "status": "FROZEN_BEFORE_FIRST_RUN",
+  "base_commit": "c471d455d0516385c94d6418c2b3bf583a0e717f",
+  "base_tree": "87cb43f59fa5e3579625da9860e0b973a0fc5f74",
+  "type": "source_backed_atomic_cross_section_component_only",
+  "source": {
+    "title": "Stone, Kim and Desclaux, J. Res. NIST 107, 327-337 (2002)",
+    "url": "https://nvlpubs.nist.gov/nistpubs/jres/107/4/j74sto.pdf",
+    "sha256": "2492e6923503515bc6bf310da043eb64f72f3b2e609991fa037065a8afc966d1",
+    "tables": [1, 2],
+    "printed_pages": [329, 330]
+  },
+  "transitions": [
+    {"id": "HI_1s_2p", "initial": "H I 1s 2S", "final": "H I 2p 2P", "excitation_energy_eV": "10.204"},
+    {"id": "HeI_1s2_1S_1s2p_1P", "initial": "He I 1s2 1S", "final": "He I 1s2p 1P", "excitation_energy_eV": "21.218"}
+  ],
+  "energy_domain_eV": [1000.0, 3000.0],
+  "table_nodes_eV": [1000.0, 1500.0, 2000.0, 3000.0],
+  "interpolation": "Piecewise linear in incident kinetic energy E and cross section sigma; exact stored value at each node. No extrapolation, clipping, fallback or interpolation in log variables.",
+  "units": {"source": "angstrom^2", "output": "cm^2", "conversion_factor": "1e-16"},
+  "metadata": "Every result has an explicit transition ID, initial/final state, source-tabulated excitation energy, incident energy, units, source SHA and component-only claim.",
+  "acceptance": {
+    "table_entries": 8,
+    "midpoint_entries": 6,
+    "midpoint_energies_eV": [1250.0, 1750.0, 2500.0],
+    "reference": "Independent literal source-table fixtures and decimal midpoint/unit arithmetic",
+    "floating_comparison_relative_tolerance": 1e-14,
+    "positive_cross_sections_at_checked_points": true,
+    "inclusive_domain_endpoints": true,
+    "out_of_domain_nonfinite_nonnumeric_error": true,
+    "unknown_transition_error": true,
+    "transition_and_excitation_energy_exact": true,
+    "local_pdf_and_table_hash_match": true,
+    "prior_tracked_files_unchanged": true
+  },
+  "limits": {"initial_campaigns": 1, "targeted_repairs": 1, "independent_review_rounds": 1, "solver_intervals": 0, "maximum_wall_s": 30, "parallel_processes": 1, "new_dependencies": false},
+  "preserved": ["PR24 production provider", "P02B", "P05", "P02C endpoint source", "all historical failures and thresholds"],
+  "holds": ["model-error budget", "interpolation-error bound relative to the physical cross section", "existing 23s closure replacement", "kernel connection", "gas evolution", "full CR/IGM history", "global scientific admission"],
+  "not_adopted": "No change to the existing 19.819614683951094 eV HeI 23s closure. The table's 21.218 eV singlet transition is separately named. This component returns cross sections, not a density/velocity-weighted rate in s^-1.",
+  "PASS_next_action": "Parent-owned independent component review, then local recovery package/scoped publication; a separately declared model/low-energy interface contract is required before kernel use."
+}
