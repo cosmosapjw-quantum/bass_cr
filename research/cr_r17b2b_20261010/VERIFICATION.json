@@ -1,0 +1,192 @@
+{
+  "new_unique_unit_tests": 15,
+  "targeted_assertion_RED_mutants": 8,
+  "unit_GREEN": true,
+  "new_interval_RHS_independent_donor_values": 5,
+  "new_interval_RHS_independent_donor_jacobian_entries": 25,
+  "independent_MP_values": 4,
+  "independent_MP_gradients": 16,
+  "independent_MP_Hessian_entries": 64,
+  "point_interval_inclusion_corners": 8,
+  "MPFR_whole_homotopy_checks": 85,
+  "MPFR_shares_new_physical_RHS": true,
+  "R16B_shared_AD_check_used": false,
+  "new_surrogate_forward_backward_cases": 12,
+  "max_relative_gap": 2.6090930980744826e-15,
+  "finite_dose_cases": 3,
+  "negative_memory_control_count": 1,
+  "auxiliary_quadrature_radii": [
+    {
+      "auxiliary_midpoints_per_cell": 16,
+      "eta": 1,
+      "source": "same continuous Sdb represented only for diagnostics",
+      "exact_midpoint_W1_global_u": "183369457536414429305163900296937455477467/3402823669209384634633746074317682114560000000000",
+      "clock_realification_error": "0",
+      "mass_realification_error": "799862400185/5192296858534827628530496329220096",
+      "independent_quadrature_gas_forcing_bound": [
+        "1.3823564303221424504237889932667483091045794694338067780137047089280106556927926E-10",
+        "1.3823564303221424504237889932667483091045794694338067780137047089280106556927929E-10"
+      ],
+      "independent_tau_quadrature_radius": [
+        "4.3100086270255229212014161149916994160375925106767965074673291379055538850572811E-19",
+        "4.3100086270255229212014161149916994160375925106767965074673291379055538850572832E-19"
+      ],
+      "point_ODE_integration_error": "NOT_ENCLOSED; diagnostics cannot be promoted to interval truth",
+      "proof": "Exact midpoint integral |b-bmid| and full-birth absorption/heat Lipschitz majorant; directed causal gas contraction",
+      "physical_source_plan_changed": false,
+      "auxiliary_mass_perturbation_contraction": [
+        "0.0013409569883603781043952516061237299041702501784533008606854058208922857961240063",
+        "0.0013409569883603781043952516061237299041702501784533008606854058208922857961240067"
+      ]
+    },
+    {
+      "auxiliary_midpoints_per_cell": 32,
+      "eta": 1,
+      "source": "same continuous Sdb represented only for diagnostics",
+      "exact_midpoint_W1_global_u": "183369457536414429305163900296937455477467/6805647338418769269267492148635364229120000000000",
+      "clock_realification_error": "0",
+      "mass_realification_error": "799862400185/5192296858534827628530496329220096",
+      "independent_quadrature_gas_forcing_bound": [
+        "6.9117821516107320101496862243899698517495804627227900611117425872170446573162927E-11",
+        "6.9117821516107320101496862243899698517495804627227900611117425872170446573162936E-11"
+      ],
+      "independent_tau_quadrature_radius": [
+        "2.1550043135127676208992446666664078181010919240675681197321141369526583025720551E-19",
+        "2.1550043135127676208992446666664078181010919240675681197321141369526583025720562E-19"
+      ],
+      "point_ODE_integration_error": "NOT_ENCLOSED; diagnostics cannot be promoted to interval truth",
+      "proof": "Exact midpoint integral |b-bmid| and full-birth absorption/heat Lipschitz majorant; directed causal gas contraction",
+      "physical_source_plan_changed": false,
+      "auxiliary_mass_perturbation_contraction": [
+        "0.0013409569883603781043952516061237299041702501784533008606854058208922857961240063",
+        "0.0013409569883603781043952516061237299041702501784533008606854058208922857961240067"
+      ]
+    }
+  ],
+  "diagnostics_not_whole_eta_or_birth_proof": true,
+  "final_commands": [
+    {
+      "name": "TESTS",
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/root/bass_cr_ncp_r17b2b/research/cr_r17b2b_20261010/tests"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "MUTANTS",
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "/root/bass_cr_ncp_r17b2b/research/cr_r17b2b_20261010/mutation_checks.py",
+        "--output",
+        "/root/bass_cr_r17b2b_recovery_20261010/fresh/mutants"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "BOUNDS",
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "/root/bass_cr_ncp_r17b2b/research/cr_r17b2b_20261010/run_bounds.py",
+        "--output",
+        "/root/bass_cr_r17b2b_recovery_20261010/fresh/results/BOUNDS.json"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "INDEPENDENT",
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "/root/bass_cr_ncp_r17b2b/research/cr_r17b2b_20261010/independent_check.py",
+        "--output",
+        "/root/bass_cr_r17b2b_recovery_20261010/fresh/results/INDEPENDENT.json"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "MPFR",
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "/root/bass_cr_ncp_r17b2b/research/cr_r17b2b_20261010/mpfr_check.py",
+        "--output",
+        "/root/bass_cr_r17b2b_recovery_20261010/fresh/results/MPFR.json"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "QUADRATURE",
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "/root/bass_cr_ncp_r17b2b/research/cr_r17b2b_20261010/quadrature_bound.py",
+        "--output",
+        "/root/bass_cr_r17b2b_recovery_20261010/fresh/results/QUADRATURE.json"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "DIAGNOSTIC",
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "/root/bass_cr_ncp_r17b2b/research/cr_r17b2b_20261010/diagnostic.py",
+        "--output",
+        "/root/bass_cr_r17b2b_recovery_20261010/fresh/results/DIAGNOSTIC.json"
+      ],
+      "exit": 0
+    }
+  ],
+  "final_bounds_independent_bytes_identical": true,
+  "peak_RSS_KiB": {
+    "DIAGNOSTIC": 81256,
+    "MPFR": 34816,
+    "INDEPENDENT": 34816,
+    "MUTANTS": 19456,
+    "TESTS": 20992,
+    "QUADRATURE": 18432,
+    "BOUNDS": 17920
+  },
+  "coordinator_cpu": 0,
+  "worker_cpu": 1,
+  "memory_reserve_bytes": 21474836480,
+  "new_surrogate_science_unique_trajectories": 7,
+  "new_surrogate_science_development_and_fresh_executed_trajectories": 14,
+  "source_homotopy_point_backgrounds_unique": 4,
+  "old_nominal_or_parent_suite_runs": 0,
+  "native_runs": 0,
+  "independent_human_or_agent_review": false,
+  "proof_assistant": false,
+  "failures_preserved": [
+    "logs/01_RED.log",
+    "logs/06_MPFR.log",
+    "logs/07_MPFR_GREEN.log",
+    "failures/mpfr_before_dispatch_fix.py",
+    "failures/mpfr_before_jet_dispatch_fix.py",
+    "failures/mutants"
+  ],
+  "development_thread_initialization": "initial independent donor point inclusion imported default BLAS threads; final script and fresh harness force1thread; original log05 retained",
+  "physical_production": "HOLD"
+}

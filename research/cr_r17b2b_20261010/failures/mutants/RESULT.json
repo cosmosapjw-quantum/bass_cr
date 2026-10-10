@@ -1,0 +1,93 @@
+{
+  "status": "8_TARGETED_RED_MUTANTS_REJECTED",
+  "cases": [
+    {
+      "name": "source_corruption",
+      "test": "test_contract.test_wrong_bytes",
+      "command": [
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "-c",
+        "import sys,unittest\nsys.path.insert(0,'/root/bass_cr_ncp_r17b2b/research/cr_r17b2b_20261010/tests')\nimport test_contract as t\nold=t.load_contract;t.load_contract=lambda **kw:old()\nr=unittest.TextTestRunner(verbosity=2).run(unittest.TestSuite([t.ContractTests('test_wrong_bytes')]))\nsys.exit(0 if r.wasSuccessful() else 1)\n"
+      ],
+      "exit": 1
+    },
+    {
+      "name": "clock_corruption",
+      "test": "test_contract.test_wrong_clock",
+      "command": [
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "-c",
+        "import sys,unittest\nsys.path.insert(0,'/root/bass_cr_ncp_r17b2b/research/cr_r17b2b_20261010/tests')\nimport test_contract as t\nold=t.load_contract;t.load_contract=lambda **kw:old()\nr=unittest.TextTestRunner(verbosity=2).run(unittest.TestSuite([t.ContractTests('test_wrong_clock')]))\nsys.exit(0 if r.wasSuccessful() else 1)\n"
+      ],
+      "exit": 1
+    },
+    {
+      "name": "channel_corruption",
+      "test": "test_contract.test_wrong_channel",
+      "command": [
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "-c",
+        "import sys,unittest\nsys.path.insert(0,'/root/bass_cr_ncp_r17b2b/research/cr_r17b2b_20261010/tests')\nimport test_contract as t\nold=t.load_contract;t.load_contract=lambda **kw:old()\nr=unittest.TextTestRunner(verbosity=2).run(unittest.TestSuite([t.ContractTests('test_wrong_channel')]))\nsys.exit(0 if r.wasSuccessful() else 1)\n"
+      ],
+      "exit": 1
+    },
+    {
+      "name": "injection_energy_corruption",
+      "test": "test_contract.test_corrupt_injection_energy",
+      "command": [
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "-c",
+        "import sys,unittest\nsys.path.insert(0,'/root/bass_cr_ncp_r17b2b/research/cr_r17b2b_20261010/tests')\nimport test_contract as t\nold=t.load_contract;t.load_contract=lambda **kw:old()\nr=unittest.TextTestRunner(verbosity=2).run(unittest.TestSuite([t.ContractTests('test_corrupt_injection_energy')]))\nsys.exit(0 if r.wasSuccessful() else 1)\n"
+      ],
+      "exit": 1
+    },
+    {
+      "name": "independent_parameter_falsely_cancelled",
+      "test": "test_contract.test_same_box_independent_channels_not_same_physics",
+      "command": [
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "-c",
+        "import sys,unittest\nsys.path.insert(0,'/root/bass_cr_ncp_r17b2b/research/cr_r17b2b_20261010/tests')\nimport test_contract as t\nt.channel_jump_orders=lambda *a,**k:dict(J012=[0,0,0],J3=None)\nr=unittest.TextTestRunner(verbosity=2).run(unittest.TestSuite([t.ContractTests('test_same_box_independent_channels_not_same_physics')]))\nsys.exit(0 if r.wasSuccessful() else 1)\n"
+      ],
+      "exit": 1
+    },
+    {
+      "name": "missing_J3_zero_fill",
+      "test": "test_peano_gate.test_unreported_third_kink",
+      "command": [
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "-c",
+        "import sys,unittest\nsys.path.insert(0,'/root/bass_cr_ncp_r17b2b/research/cr_r17b2b_20261010/tests')\nimport test_peano_gate as t\nt.peano_transfer=lambda e:0\nr=unittest.TextTestRunner(verbosity=2).run(unittest.TestSuite([t.PeanoGateTests('test_unreported_third_kink')]))\nsys.exit(0 if r.wasSuccessful() else 1)\n"
+      ],
+      "exit": 1
+    },
+    {
+      "name": "nominal_homotopy",
+      "test": "test_peano_gate.test_nominal_only",
+      "command": [
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "-c",
+        "import sys,unittest\nsys.path.insert(0,'/root/bass_cr_ncp_r17b2b/research/cr_r17b2b_20261010/tests')\nimport test_peano_gate as t\nt.peano_transfer=lambda e:0\nr=unittest.TextTestRunner(verbosity=2).run(unittest.TestSuite([t.PeanoGateTests('test_nominal_only')]))\nsys.exit(0 if r.wasSuccessful() else 1)\n"
+      ],
+      "exit": 1
+    },
+    {
+      "name": "toy_J3_misadopted",
+      "test": "test_peano_gate.test_toy_third_jump",
+      "command": [
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "-c",
+        "import sys,unittest\nsys.path.insert(0,'/root/bass_cr_ncp_r17b2b/research/cr_r17b2b_20261010/tests')\nimport test_peano_gate as t\nt.peano_transfer=lambda e:0\nr=unittest.TextTestRunner(verbosity=2).run(unittest.TestSuite([t.PeanoGateTests('test_toy_third_jump')]))\nsys.exit(0 if r.wasSuccessful() else 1)\n"
+      ],
+      "exit": 1
+    }
+  ]
+}
