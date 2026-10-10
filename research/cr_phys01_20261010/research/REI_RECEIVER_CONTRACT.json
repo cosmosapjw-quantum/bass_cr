@@ -1,0 +1,94 @@
+{
+  "schema": "cr-deposition-local-receiver.v1",
+  "status": "IMPLEMENTED_FINAL_GEOMETRY_BOUND",
+  "receiver_path": "rust/rei_microphysics/src/axisym_cr_deposition.rs",
+  "pin_path": "rust/rei_microphysics/src/axisym_cr_deposition_pin.rs",
+  "base_commit": "8722f3ab587399700d96d300b617f0f37f1d831a",
+  "closure": "FS10_LOCAL_DEPOSITION_PROMPT_EXCITATION_AND_CONTINUUM_ESCAPE",
+  "identity_fields": [
+    "provider_id",
+    "manifest_sha256",
+    "packet_sha256",
+    "closure"
+  ],
+  "gas": [
+    "time_s",
+    "n_h_m3",
+    "n_he_m3",
+    "xi",
+    "temperature_k",
+    "y_he_mass_fraction"
+  ],
+  "array_fields": {
+    "primary_rate_m3_s": [
+      "HI",
+      "HeI"
+    ],
+    "primary_threshold_j": [
+      "HI",
+      "HeI"
+    ],
+    "secondary_rate_m3_s": [
+      "HI",
+      "HeI",
+      "HeII"
+    ],
+    "secondary_threshold_j": [
+      "HI",
+      "HeI",
+      "HeII"
+    ]
+  },
+  "scalar_fields": [
+    "ionization_power_j_m3_s",
+    "raw_heat_power_j_m3_s",
+    "heat_power_j_m3_s",
+    "heat_correction_j_m3_s",
+    "excitation_escape_power_j_m3_s",
+    "continuum_escape_power_j_m3_s",
+    "modelled_ionization_loss_power_j_m3_s",
+    "full_injection_power_j_m3_s",
+    "table_raw_residual_j_m3_s",
+    "table_correction_bound_j_m3_s"
+  ],
+  "raw_residual_sign": "raw_heat + ionization + excitation_escape + continuum_escape - modelled_ionization_loss",
+  "raw_heat_semantics": "Chosen interpolation heat before bounded closure projection: includes separately recorded threshold-anchor interpolation correction; provider audit preserves actual raw table heat and threshold correction independently.",
+  "composition_status": "Y_He=0.248 is an adopted nominal primordial scenario; original FS10 Monte Carlo abundance is not independently specified, so transplantation is approximate, not exact abundance matching.",
+  "local_state_status": "100 K, xi=0.01, HeIII=0; source redshift8 held locally, FS10 redshift10 terminal yield used under low-density approximation, no full history.",
+  "numerical_projection": "heat_correction=-raw_residual; heat=raw_heat+heat_correction. Named bounded numerical energy-closure projection; not physical uncertainty or merely print-rounding.",
+  "projection_bound": "parent-selected 1e-4 times secondary-electron energy power at xi=0.01, exact source-bound scalar supplied in packet",
+  "protected": [
+    "No change to SourceBoundConditional warm HM12 model",
+    "No change to axisym coupled 128 EPS conservation guard",
+    "No injected projectile baryons added to ambient gas",
+    "No cold FT03 evaluation or full history",
+    "Raw defect and correction remain in returned audit",
+    "Prompt-radiative escape closure does not reinject unspecified photons"
+  ],
+  "acceptance": [
+    "Source identities and every numeric value match the acquired compiled fixture bitwise",
+    "Proper gas state and time match fixture, xHII=xHeII=xi and HeIII=0, minor isotopes zero",
+    "Ionization power equals separate primary/secondary event threshold products",
+    "Declared correction bound passes before existing strict coupled power guard",
+    "ON calls actual axisym_coupled_derivative; OFF calls provider zero times",
+    "Local source baryon and charge conservation, expected temperature response including particle-number change",
+    "Identity/state/threshold/power/correction/domain negative controls",
+    "Native example returns actual source packet and derivative audit"
+  ],
+  "tests": "Focused new Rust tests plus existing axisym coupling and source/contract regressions; independent provider arithmetic remains parent-owned",
+  "publication": "Parent owns commit/push; this worker performs no Git mutation",
+  "actual_packet_sha256": "1bb0d4e1c4c71a409ca170e8741fabd17fabe02195b86fe24a06875712d0e373",
+  "evidence": [
+    "../evidence/rei_native/TARGETED_TESTS.json",
+    "../evidence/rei_native/NATIVE_EXECUTION.json",
+    "../evidence/rei_native/NATIVE_OUTPUT.json"
+  ],
+  "actual_manifest_sha256": "79835c5eaa891f37f663c1852d6035ee446a25778763164cfea2d20531cdd901",
+  "geometry_binding": {
+    "H_s": 3.3e-17,
+    "shear_s": 3.3e-18,
+    "a_rel": "exp(H*t)",
+    "b": "s*t"
+  },
+  "final_evidence": "evidence/rei_native/FINAL_NEW_TESTS.json + NATIVE_EXECUTION.json"
+}

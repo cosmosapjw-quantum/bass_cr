@@ -1,0 +1,19 @@
+{
+  "schema": "cr-physical-provider-handoff.v1",
+  "task_id": "CR-PHYS01",
+  "old_blocker": "NO_PHYSICAL_PROVIDER",
+  "new_state": "CONDITIONAL_PHYSICAL_COMPONENT_AVAILABLE",
+  "production_history": "HOLD",
+  "component": "SN proton injection + constant-axisym collisionless population + Rudd H/He ionization + FS10 terminal secondary yields + native REI local derivative",
+  "source_population_eV": [10000, 1000000000000000],
+  "modelled_collision_eV": [1000000, 4000000],
+  "source_normalization": "full spectrum, not active window",
+  "raw_source_projection": "explicit bounded numerical heat projection, not physical error certification",
+  "read_first": ["REPORT_KO.md", "state/SCIENTIFIC_CONTRACT.json", "evidence/SOURCE_MANIFEST.json", "evidence/CR_PACKET.json", "review/INDEPENDENT_REVIEW.json", "publication/PUBLICATION.json"],
+  "entrypoints": {"provider": "src/provider.py", "comparison": "tests/check_provider.py", "figure": "tests/plot_component.py", "receiver": "rei_bianchi/rust/rei_microphysics/src/axisym_cr_deposition.rs"},
+  "do_not": ["replace CR with photon/heat/CX", "deposit unmodelled tail as heat", "renormalize source on 1–4MeV", "claim causal deposition for the 317year turn-on", "claim table MC abundance is known", "promote warm HM12 or atomic production gates", "reuse old binary approval after source changes"],
+  "next_parallel_tasks": ["CR-PHYS02-DELAY", "CR-PHYS03-COMPOSITION", "CR-PHYS04-LOSSES"],
+  "next_dependent_task": "CR-PHYS05-RECEIVER",
+  "prior_exact_atomic_lanes": "preserved; optional extension, not prerequisite for this component",
+  "chat_thread_delivery": "published repo handoffs; no claim of direct private chat writes"
+}

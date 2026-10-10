@@ -1,0 +1,125 @@
+{
+  "schema": "fs10_independent_review_v1",
+  "reviewer": "independent_fs10_acquisition_agent",
+  "reviewed_file": "cr_provider_20261010/src/fs10.py",
+  "sha256": "b1c3ea07ce4074bd8a07fb94f8e4cfe43e9e7cebf4b191d9c673e3f3ea49aebc",
+  "verdict": "PASS_DECLARED_FINITE_ADAPTER",
+  "contract": "xi=.01; approximate thresholds; fixed1e-4E source heat projection explicitly not rounding-only; linear channel energies/counts; separate threshold corrections; terminal sub10eV heat; reject highE",
+  "tests": [
+    {
+      "name": "source_pin_and_xi_contract",
+      "passed": true
+    },
+    {
+      "name": "source_knot_channels_preserved_except_declared_heat",
+      "passed": true,
+      "source_count": 258
+    },
+    {
+      "name": "source_projection_declared_bound_and_value",
+      "passed": true,
+      "max_relative_defect": 9.525291230401016e-05,
+      "bound": 0.0001,
+      "classification": "BOUNDED_NUMERICAL_HEAT_CLOSURE_PROJECTION_NOT_PRINTED_ROUNDING_ONLY"
+    },
+    {
+      "name": "raw_named_fields_correct",
+      "passed": true
+    },
+    {
+      "name": "scalar_vector_values_agree",
+      "passed": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "two_dimensional_array_preserves_shape",
+      "passed": true
+    },
+    {
+      "name": "threshold_anchor_HI",
+      "passed": true,
+      "counts": [
+        0.0,
+        0.0,
+        5.5554553225965465e-18
+      ]
+    },
+    {
+      "name": "threshold_anchor_HeI",
+      "passed": true,
+      "counts": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "threshold_anchor_HeII",
+      "passed": true,
+      "counts": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "sub10eV_resolved_heat_only",
+      "passed": true
+    },
+    {
+      "name": "interpolated_energy_positivity_and_separate_corrections",
+      "passed": true,
+      "probes": 10274,
+      "maximum_absolute_closure_eV": 1.8189894035458565e-12,
+      "maximum_absolute_correction_split_eV": 0.0
+    },
+    {
+      "name": "nonthreshold_midpoint_linear_energies_and_counts",
+      "passed": true
+    },
+    {
+      "name": "reject_negative",
+      "passed": true
+    },
+    {
+      "name": "reject_nan",
+      "passed": true
+    },
+    {
+      "name": "reject_positive_inf",
+      "passed": true
+    },
+    {
+      "name": "reject_above_upper",
+      "passed": true
+    },
+    {
+      "name": "reject_other_xi_0.001",
+      "passed": true
+    },
+    {
+      "name": "reject_other_xi_0.1",
+      "passed": true
+    },
+    {
+      "name": "reject_other_xi_nan",
+      "passed": true
+    },
+    {
+      "name": "reject_modified_source_bytes",
+      "passed": true
+    }
+  ],
+  "failed_test_names": [],
+  "limits": [
+    "Only fixed xHII=xHeII=.01, xHeIII=0 and stated terminal kernel tested; not full physical MC, proton source, finite-cascade or arbitrary-composition validation.",
+    "Original table helium abundance remains uncertified.",
+    "Approximate declared 13.6/24.6/54.4 eV constants retained; projection explicitly numerical, not original-source rounding correction.",
+    "At exact E=10.2 eV, original excitation and Ly-alpha are retained; E<10.2 excitation is zero. Approximate threshold convention is not a new resolved atomic calculation.",
+    "raw_counts are internally used for raw event residual but are not separately returned; raw fion/fheat/fexc and energy values are returned.",
+    "electron_loss_timescale_estimate is outside this bounded review; it is only a documented approximation, not a cascade timing proof."
+  ],
+  "modified_provider_code": false,
+  "python": "3.12.14",
+  "numpy": "2.3.5"
+}

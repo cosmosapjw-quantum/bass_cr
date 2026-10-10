@@ -1,0 +1,69 @@
+{
+  "schema": "cr-physical-provider.contract.v1",
+  "task": "CR-PHYS01",
+  "authorization": "2026-10-10 user requested blocker resolution and repo-specific push; prior no-push superseded",
+  "harness": "GPT-6 Astra research and coding v4.0.0",
+  "runtime_model": "UNKNOWN",
+  "objective": "Source-pinned nonzero charged-particle injection, transport and H/He primary-secondary ionization/excitation/heat connected to actual REI derivative",
+  "claim_ceiling": "conditional physical source component on stated common domain; not a complete CR population, cold coupled history, warm-HM12 update, or continuous certificate",
+  "species": [
+    "CR proton reservoir",
+    "H I",
+    "H II",
+    "He I",
+    "He II",
+    "He III",
+    "secondary electron"
+  ],
+  "source": {
+    "spectrum": "Leite2017 momentum power law alpha2.2, K10keV..1PeV",
+    "normalization": "MD14 Eq15 Salpeter SFRD times Eq16 corecollapse kCC=.0068/Msun times 1e51erg times .1 efficiency times fescape1; scenario not observational inference",
+    "no_active_window_renormalization": true
+  },
+  "active_collision_window_eV": [
+    1000000.0,
+    4000000.0
+  ],
+  "transport": "Exact homogeneous constant H,s collisionless characteristics over dt1e10 s; instantaneous ionization-loss operator on prescribed source-produced CR snapshot. Thin ionization-loss age indicator evaluated; full collision feedback and finite secondary-cascade delay NOT solved. The terminal response is not causal deposition at dt1e10 after turn-on.",
+  "deposition": "Rudd differential proton ionization H/He via pinned GPLv3 CRIPTIC; total-cross-section formula corrected by exact SDCS integral. FS10 xi=.01 response uses nominal Y=.248 primordial-mixture transplantation; original MC abundance not recovered. Cold T100K local terminal cascade with z8 source and low-density adoption of z10 response, not exact table-state reproduction.",
+  "closure": "Separate primary/secondary counts and thresholds; threshold-aware piecewise-linear interpolation; fixed1e-4 secondary-energy bounded numerical heat-closure projection, not physical uncertainty or a simple printed-rounding claim. Raw table heat, threshold change, preprojection heat and projection retained. Sub13.6eV excitation radiation leaves local gas energy ledger; no ionizing-photon reinjection.",
+  "geometry": "non-tilted axisymmetric Bianchi I, Hperp=H-s Hparallel=H+2s; local gas rest tetrad",
+  "units": "source internals eV and proper SI, all receiver powers J m^-3 s^-1, proper time s; comoving SFRD converted once",
+  "receiver": "new opt-in AxisymLocalSources boundary on REI101, exact packet/state binding, frozen HM12 CR=OFF unchanged",
+  "invariants": [
+    "baryon number of ambient gas",
+    "charge including thermalized secondaries",
+    "modeled projectile ionization-loss energy equals ionization+heat+excitation escape",
+    "zero/off callback not called",
+    "FLRW momentum limit",
+    "positivity and no out-of-domain extrapolation"
+  ],
+  "acceptance": {
+    "ledger_relative_tolerance": "existing REI 128 machine epsilon, unchanged",
+    "quadrature": "independent analytic moments and resolution comparison; actual tolerance set before final probe",
+    "independent_review": "separate agent not involved in implementation or verification design"
+  },
+  "failure_semantics": "retain first failed receipts, reject nonfinite/domain/source identity mismatch; no source substitution or automated claim promotion",
+  "excluded": [
+    "Coulomb proton losses",
+    "primary proton excitation",
+    "hadronic/alpha/nuclear channels",
+    "low energy charge exchange",
+    "full arbitrary H/He ionization manifold",
+    "whole EoR integration",
+    "observational first scientific history plot"
+  ],
+  "publishing": {
+    "code_repositories": [
+      "bass_cr",
+      "rei_bianchi"
+    ],
+    "sync_only_if_needed": [
+      "BASS_HE",
+      "WU088_HH",
+      "bass",
+      "rec_bianchi"
+    ],
+    "no_force_push": true
+  }
+}

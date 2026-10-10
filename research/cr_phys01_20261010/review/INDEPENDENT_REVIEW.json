@@ -1,0 +1,226 @@
+{
+  "schema": "cr-phys01-independent-review.v1",
+  "created_utc": "2026-10-10T10:39:51.519678+00:00",
+  "task": "CR-PHYS01",
+  "reviewer": "/root/axi_independent_review",
+  "actual_runtime_model": "UNKNOWN",
+  "selected_harness": "GPT-6 Astra research/coding v4.0.0",
+  "harness_gate": [
+    "09_independent_diff_review",
+    "10_promote_revert_closeout"
+  ],
+  "independence": {
+    "implemented_candidate": false,
+    "designed_verification": false,
+    "edited_candidate": false,
+    "reused_prior_review_as_certification": false,
+    "activities": "Source/diff/evidence review; findings sent to owners; reviewed owner repairs and actual receipts; reviewer only wrote review artifacts and checked byte identities."
+  },
+  "verdict": "PROMOTE",
+  "scope": "CONDITIONAL_PHYSICAL_COMPONENT_AVAILABLE",
+  "blocker_transition": {
+    "old": "NO_PHYSICAL_PROVIDER",
+    "new": "CONDITIONAL_PHYSICAL_COMPONENT_AVAILABLE",
+    "closed": "Source-pinned nonzero charged-particle injection, collisionless Bianchi transport, atomic primary-secondary ionization/excitation/heat component and native REI derivative.",
+    "not_closed": "Causal full-CR loss/deposition history and evolving IGM production admission."
+  },
+  "scoped_decisions": [
+    {
+      "claim": "Leite/MD14 full-source normalized proton injection",
+      "decision": "PROMOTE",
+      "level": "LITERATURE_SUPPORTED_AND_IMPLEMENTATION_VERIFIED"
+    },
+    {
+      "claim": "Constant non-tilted axisymmetric Bianchi-I collisionless transport",
+      "decision": "PROMOTE",
+      "level": "DERIVED_AND_BOUNDED_NUMERICALLY_CHECKED"
+    },
+    {
+      "claim": "Rudd H/He single-ionization + FS10 fixed-xi terminal response",
+      "decision": "PROMOTE",
+      "level": "SOURCE_PINNED_CONDITIONAL_MODEL_COMPONENT"
+    },
+    {
+      "claim": "Exact compiled packet with gas/time/geometry-bound native REI local derivative",
+      "decision": "PROMOTE",
+      "level": "IMPLEMENTATION_VERIFIED_AT_ONE_SCENARIO"
+    },
+    {
+      "claim": "Complete CR stopping, causal cascade history and evolving IGM production admission",
+      "decision": "HOLD",
+      "level": "NOT_ESTABLISHED"
+    }
+  ],
+  "scenario": {
+    "H_s": 3.3e-17,
+    "active_proton_eV": [
+      1000000.0,
+      4000000.0
+    ],
+    "age_order": 8,
+    "dt_s": 10000000000.0,
+    "energy_order": 48,
+    "mu_order": 8,
+    "n_h_m3": 140.0,
+    "shear_s": 3.3e-18,
+    "temperature_k": 100.0,
+    "xi": 0.01,
+    "y_he_mass_fraction": 0.248,
+    "z_source": 8.0
+  },
+  "geometry_gauge": "a(source_birth)=1 and beta(source_birth)=0 for local characteristic snapshot; this local normalization is distinct from the cosmological a0=1 used once for comoving/proper source conversion.",
+  "source_support_eV": [
+    10000.0,
+    1000000000000000.0
+  ],
+  "active_proton_support_eV": [
+    1000000.0,
+    4000000.0
+  ],
+  "cascade_support_eV": [
+    0,
+    9937.21
+  ],
+  "cascade_xHII": 0.01,
+  "cascade_xHeII_per_He": 0.01,
+  "cascade_xHeIII": 0,
+  "packet_identity": "1bb0d4e1c4c71a409ca170e8741fabd17fabe02195b86fe24a06875712d0e373",
+  "manifest_identity": "79835c5eaa891f37f663c1852d6035ee446a25778763164cfea2d20531cdd901",
+  "identity_checks": {
+    "manifest_file_hashes_match": true,
+    "canonical_manifest_identity_matches": true,
+    "canonical_packet_identity_matches": true,
+    "final_native_source_hashes_match": true
+  },
+  "findings": [
+    {
+      "id": "CRIR-01",
+      "severity": "BLOCKING_FOR_SOURCE_BOUND_RECEIVER",
+      "status": "RESOLVED",
+      "finding": "ON receiver originally accepted geometry unrelated to the CR transport background.",
+      "repair": "Pinned constant H,s and birth-normalized a=exp(Ht), beta=s*t; ON validates all four geometry values. Native ON/OFF now share geometry; source-only temperature is isolated algebraically.",
+      "evidence": [
+        "evidence/rei_native/GEOMETRY_REVIEW_FINDING.json",
+        "evidence/rei_native/FINAL_NEW_TESTS.json",
+        "evidence/rei_native/NATIVE_OUTPUT.json"
+      ]
+    },
+    {
+      "id": "CRIR-02",
+      "severity": "CLAIM_CORRECTION",
+      "status": "RESOLVED",
+      "finding": "Initial contract used original-abundance and finite-print wording stronger than actual evidence.",
+      "repair": "Explicit Y=.248 primordial transplant with unrecovered original abundance; bounded numerical projection, not merely print rounding."
+    },
+    {
+      "id": "CRIR-03",
+      "severity": "HANDOFF_AMBIGUITY",
+      "status": "RESOLVED",
+      "finding": "Earlier MEDEA 3000 eV / raw-data no-correction notes could be mistaken for the final FS10 contract.",
+      "repair": "Supersession notices and metadata direct final use to FS10 xi=.01 and separately recorded projection."
+    },
+    {
+      "id": "CRIR-04",
+      "severity": "CLAIM_CORRECTION",
+      "status": "RESOLVED",
+      "finding": "A node-sampled loss-age maximum was named a bound without a trajectory supremum proof.",
+      "repair": "Renamed sampled_fractional_ionization_loss_age_estimate with explicit non-certificate semantics; no numerical value changed."
+    }
+  ],
+  "unresolved_in_scope_blocking_findings": [],
+  "validation_summary": {
+    "injection_tests": 14,
+    "initial_rust_focused_tests": 19,
+    "final_changed_rust_tests": 7,
+    "unaffected_existing_rust_regressions": 13,
+    "native_exit_code": 0,
+    "solver_intervals": 0,
+    "analytic_vs_adaptive_comparisons": 30,
+    "max_convolution_relative_difference": 2.0585222929864587e-13,
+    "max_refinement_relative_difference": 1.4384969678946773e-06,
+    "refinement_threshold": 2e-06,
+    "ledger_tolerance": "unchanged 128*f64EPS for the declared source event-energy ledger",
+    "oracle_dependence": "Independent integration algorithm shares physical coefficients and FS10 interpolation; native Decimal70 checks share the provider packet. Neither is an independent physical calibration.",
+    "final_provider_change": "Only sampled-estimate audit label/semantics changed after the numerical convolution check; physics/numerical formulas and rates unchanged."
+  },
+  "claim_ceiling": [
+    "Instantaneous terminal operator applied to a prescribed CR snapshot; not causal deposition after dt=1e10 s turn-on.",
+    "Unmodeled outside-band interactions remain CR storage; full injection power is not gas heat.",
+    "YHe=.248 and redshift8 adoption of a z10 table are explicit approximations; original table abundance is not certified.",
+    "Separate approximate primary/secondary thresholds form a provider event ledger, not certification of one exact chemical internal-energy state function.",
+    "The 1e-4 secondary-power numerical projection bound does not bound physical-model, threshold-interpolation, table statistical or composition uncertainty.",
+    "The loss-age indicator is a sampled-node estimate, not a rigorous trajectory-wide bound.",
+    "Ambient event baryon/charge conservation does not close source CR baryons, compensating electrons/return currents, or all reservoirs.",
+    "No Coulomb proton loss, primary excitation, HeII target impact ionization, hadronic/nuclear channels, spatial/magnetic transport, arbitrary ionization fractions, gas feedback or full history is admitted.",
+    "No independent observational accuracy certificate or detected anisotropic IGM signal is established."
+  ],
+  "read_primary_sources": [
+    {
+      "url": "https://arxiv.org/pdf/1703.09337",
+      "scope": "Eq23-24 spectrum/normalization and cutoffs directly retrieved; candidate pins v1."
+    },
+    {
+      "url": "https://arxiv.org/html/1403.0007v3",
+      "scope": "Eq15-16 source fit and Salpeter kCC directly retrieved."
+    },
+    {
+      "url": "https://arxiv.org/pdf/0910.4410v1",
+      "scope": "Section2 terminal channels, section4 helium reabsorption and section6.1 timescale limitations directly retrieved."
+    },
+    {
+      "url": "https://bitbucket.org/krumholz/criptic/src/e169dc2e906cf51d5c6a1bba47c10bf3d61c3d92/Src/Losses/Ionization.H",
+      "scope": "Web open failed; actual local clone HEAD and source code read. Source hash retained below."
+    }
+  ],
+  "candidate_sha256": {
+    "src/injection.py": "c5eda0e60302339af1bbdd0603ae1cd8a8921d9e6489c22d954e0bc92968c27d",
+    "src/rudd.py": "757e4c8b33618ad6ef88f422919fe813654454c836f0942cf9792be133e8eac2",
+    "src/fs10.py": "b1c3ea07ce4074bd8a07fb94f8e4cfe43e9e7cebf4b191d9c673e3f3ea49aebc",
+    "src/provider.py": "77e40d7a4b33716b1b12c852c3b45f5cf61938ba38af53b85e67c424f615f10b",
+    "src/GPL-3.0.txt": "41e12baa526725790efb94a78045f4c0b03fe7acac5e2e6eab737d4cded7be22",
+    "src/RUDD_NOTICE.md": "f608e8592ec10faf26a8cfe66f5041783166b8d0bee13f31583f91e817740003",
+    "state/SCIENTIFIC_CONTRACT.json": "97e2870072caace715cad738731adf68577aa59269c2ab53f0f908bc439144bd",
+    "research/REI_RECEIVER_CONTRACT.json": "91b0c35fd3ece0d60e0b2d7e1c37dca20ed836af8f14703f5c390d00e9f00f0b",
+    "research/INJECTION_MODEL_KO.md": "89c550a49d992e3bc7855c90f2bd1043e249f431ba255e6e3af50f6d345561e7",
+    "research/INJECTION_SOURCES.json": "63487062fd3d99ce2d2657a1d27a5718dea3aadaa5908557a5937fb30a26983b",
+    "research/PROVIDER_SOURCES.json": "684d310ca1bfce0f24c6443234ebf86860f0e8a9897c1304b40900f65df35815",
+    "research/DEPOSITION_PROVIDER_SELECTION_KO.md": "607c6835f047025aa232f3c1e05702c7d3b5e5187e4ae757bb0b09e6c5c7106d",
+    "research/FS10_ACQUISITION_KO.md": "ec78e6b14489ff1f205410878cbb69011428f81326fbbcb58d59dbe4fcbdfb83",
+    "research/FS10_THRESHOLD_AUDIT_KO.md": "b312455568d47d58abf28922f5175b99a286a10f90e84b695102e1a0f27055f3",
+    "tests/test_injection.py": "b617c173d957b6715e4d41644a9ecfb880d82101b2c685774641fbd43740acd3",
+    "tests/check_provider.py": "56afc96ae66e7d62d21e67699d2779c6496a100b0a165c430daa679efe31cc20",
+    "repos/rei_bianchi/rust/rei_microphysics/src/lib.rs": "2ff5e9370020f7154a083591996f98c43ff65e598842b2dc92450220d68fa153",
+    "repos/rei_bianchi/rust/rei_microphysics/src/axisym_cr_deposition.rs": "5f672ec60a1bcb110cc91dd4d1a21217913c002a65d9282f484d2880d7e0bdd3",
+    "repos/rei_bianchi/rust/rei_microphysics/src/axisym_cr_deposition_pin.rs": "f4bbfc598d2111f163cb4d8154b4a4267d1e4e3cce7b441d66c5e492ac1cfc3b",
+    "repos/rei_bianchi/rust/rei_microphysics/tests/axisym_cr_deposition.rs": "23c91002e4058345e468cd97133ae274e6c652f3a898aa3ead22ccb7b84efde5",
+    "repos/rei_bianchi/rust/rei_microphysics/examples/cr_deposition_probe.rs": "f070d0549fa388d3152a35c3a5555dee7db26c04adb96a39c4151e0476f019fc",
+    "vendor/fs10/21cmfast/src/py21cmfast/_data/x_int_tables/log_xi_-2.0.dat": "59a4b1c0467402d65062976d6ca0cae0e810f881b5c2c4b5fe0c82595386571d",
+    "vendor/fs10/21cmfast/LICENSE": "c52f0305c717368f40216f33a67ec18fbd4495bbd8af6a3aefd00e481663ad2c",
+    "repos/criptic/Src/Losses/Ionization.H": "4a8159fa836c3b9663efaf213dc67195679a12d4b58dd6d42e697ef64b389556"
+  },
+  "evidence_sha256": {
+    "evidence/CR_PACKET.json": "bb62be7ede32d43ece48d119903b542b2fc32f5be839cf40842ea559d02f0755",
+    "evidence/SOURCE_MANIFEST.json": "a0088feddcd1ed8932e19b50935f5726a08af831bdd65e28cbbd757ed3bc0565",
+    "evidence/PROVIDER_AUDIT.json": "9d902597aab1c39ae321350c0585230225e70c9b377005d42ac14fbded6f0d97",
+    "evidence/PROVIDER_VERIFICATION.json": "dbaa4a1ab994a1273bcc44faa0d5e17bd49fa877bf7370b659897465228c2822",
+    "evidence/INJECTION_TRANSPORT_CHECK.json": "935f0e9048a562408eef24cc7577c165894856572fc0bc8cada13bb47597c7c2",
+    "evidence/WOLFRAM_MOMENTS.json": "fb6d91a0a8891fc8ff4eafcfbf1fdd906ba7ab993165ac0ee819cd5f9841492a",
+    "research/RUDD_KERNEL_CHECK.json": "e7df21874ecfadd8c9544e3aabe08d95c798757233deadb6292f11fc28c91118",
+    "research/FS10_ACQUISITION.json": "d29d9adb44072f91aac50cf6414a8c304274bcdedf71877e6fb8dd411935dadf",
+    "research/FS10_LOADER_VALIDATION.json": "3c96e71b1256d67dfc0bf33df6aad23342d62db5f1243e8155e88fc4f1438ea8",
+    "research/FS10_INDEPENDENT_REVIEW.json": "0ebf71e44a946e34a3cfe4349db24602fd729006362cc80ea6e67f9cac8e97e2",
+    "research/FS10_THRESHOLD_AUDIT.json": "a03db8dfa8b4f217226f87a9cc665aff64d4b3cbbc01a8e4529daafeecd109b8",
+    "evidence/rei_native/FINAL_NEW_TESTS.json": "ef0e9cb48b38746491d9b0de0415ac61db78f5b40e3eed3636760a95b5c8bab9",
+    "evidence/rei_native/NATIVE_EXECUTION.json": "2dc0889121b770d06149470f89d9a55fc28235387c2449bb0ba2d7efc3805cf6",
+    "evidence/rei_native/NATIVE_OUTPUT.json": "3a602c1d6929b53993c37528e8a9e9960b5dab087fc4468db67ea9de7bc2c972",
+    "evidence/rei_native/GEOMETRY_REVIEW_FINDING.json": "866e6988351fb4d9f8fffce0a1820692276c7ca41cce493787e1689b26deadda",
+    "evidence/rei_native/before_geometry_binding_fix/TARGETED_TESTS.json": "5b70e716dd6bd99b34153ad14aaea2c9bf37fe7b39a5df4d46a996adf60ecfb4",
+    "evidence/rei_native/final_new_tests.stdout.log": "db88666a42843ba02a28397e214c7ab75398cd78c3fd0e0d3d0fe556b6d2f91c",
+    "evidence/rei_native/final_new_tests.stderr.log": "2ede6241cfc889fdddcb8b9938c31ee6a853809f5c96702c5ea08ed9ef73b270",
+    "evidence/rei_native/native_probe.stdout.log": "9319d4289d3e36931bdc09a45df0623dd4cf0dda021d70e8c9356ce6628db24c",
+    "evidence/rei_native/native_probe.stderr.log": "25d4a23d6485043cb58e52c188b2c09cb073a4da5baabd07628c054f28e15663"
+  },
+  "human_review_sha256": "a807a21d5ef96c882a143cadefafcf43888f108512fbf7a56ce4bb50aec23b01",
+  "hash_scope": "Relative paths refer to this review package root. Hashes attest byte identity, not scientific correctness or authority. Publishing copies may relocate paths only if original identities are preserved.",
+  "publishing": "Reviewer did not commit, push or merge. This scientific decision is not a publication receipt; user authorization and owner publication evidence remain separate."
+}

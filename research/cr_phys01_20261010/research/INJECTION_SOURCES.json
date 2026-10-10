@@ -1,0 +1,328 @@
+{
+  "schema_version": "1.0",
+  "created_utc": "2026-10-10",
+  "task": "CR physical-source input blocker: selected proton injection plus atomic impact-ionization channel",
+  "runtime_identity": "UNKNOWN",
+  "harness": "Astra research v4 claim-state discipline as assigned by parent; not a runtime-model attestation",
+  "selected_source_model": {
+    "id": "CRP_L17_MD14_v1",
+    "type": "core_collapse_supernova_protons",
+    "energy_variable": "proton_kinetic_energy",
+    "energy_support_eV": [
+      10000,
+      1000000000000000
+    ],
+    "alpha_momentum": 2.2,
+    "pivot_kinetic_eV": 1000000000,
+    "epsilon_proton": 0.1,
+    "E_SN_J": 1e+44,
+    "escape_fraction": 1,
+    "escape_fraction_status": "selected_full_escape_scenario_not_measured",
+    "SFRD_id": "MD14_eq15_Salpeter",
+    "k_CC_per_Msun": 0.0068,
+    "IMF": "Salpeter 0.1--100 Msun; CC progenitor 8--40 Msun per MD14 Eq16",
+    "SFRD_formula": "0.015*(1+z_v)^2.7/(1+((1+z_v)/2.9)^5.6)",
+    "SFRD_units": "Msun yr^-1 comoving Mpc^-3",
+    "source_shape": "g(K)=beta(K)^(-1)*[K(K+2M)/(K0(K0+2M))]^(-alpha/2)",
+    "beta": "sqrt(K*(K+2M))/(K+M); M=mp*c^2",
+    "normalization": "C=Q_proper/integral(K*g(K),Kmin,Kmax)",
+    "Q_proper": "a^-3*epsilon_p*fescape*ESN*kCC*psi(z_v)/(year_seconds*Mpc_m^3)",
+    "redshift_clock": "z_v=a^-1-1 volume scale factor; not directional observed redshift",
+    "high_z_status": "MD14 source fit uses observations approximately through z~8; higher-z evaluation explicitly an extrapolation",
+    "initial_CR": "N_p(K,mu,t0)=0 for controlled source turn-on; not an ancestral cosmological CR claim",
+    "target_IC": "inherit authoritative REI branch gas/abundance/temperature IC; runtime must record",
+    "angular_source": "q/(4*pi) per sr, or q/2 after azimuth integration",
+    "whole_spectrum_renormalization_required": true,
+    "renormalize_to_active_deposition_band": false
+  },
+  "provider": {
+    "id": "CRIPTIC_RUDD_H_HE_IONIZATION_1_10MEV_v1",
+    "commit": "e169dc2e906cf51d5c6a1bba47c10bf3d61c3d92",
+    "source_path": "Src/Losses/Ionization.H",
+    "source_url": "https://bitbucket.org/krumholz/criptic/src/e169dc2e906cf51d5c6a1bba47c10bf3d61c3d92/Src/Losses/Ionization.H",
+    "license": "GPL-3.0-only port; upstream README says GPL v3.0; full license bundled",
+    "local_code": "src/rudd.py",
+    "local_license": "src/GPL-3.0.txt",
+    "selected_proton_window_eV": [
+      1000000,
+      10000000
+    ],
+    "window_status": "research support gate within published code's MeV regime; not an externally certified accuracy interval",
+    "runtime_may_select_subset": true,
+    "targets": [
+      "neutral atomic H",
+      "neutral atomic He"
+    ],
+    "excluded_targets": [
+      "H2",
+      "He+",
+      "He++",
+      "isotope-resolved targets"
+    ],
+    "channel": "single impact ionization only",
+    "SDCS": "dSigma/dW=A_s/I_s*(F1+F2*w)/(1+w)^3; w=W/I_s; A_s=4*pi*a0^2*N_s*(R/I_s)^2",
+    "endpoint": "Wmax=4*(me/mp)*K-I_s; upstream nonrelativistic prescription, not exact relativistic kinematics",
+    "H": {
+      "N": 1,
+      "I_eV": 13.605693122994,
+      "F1": "7/(3*t)",
+      "F2": "1/t",
+      "model": "upstream Williams-limit approximation, not molecular-H2 empirical fit"
+    },
+    "He": {
+      "N": 2,
+      "I_eV": 24.59,
+      "A1": 1.02,
+      "B1": 2.4,
+      "C1": 0.7,
+      "D1": 1.15,
+      "E1": 0.7,
+      "A2": 0.84,
+      "B2": 6,
+      "C2": 0.7,
+      "D2": 0.5
+    },
+    "F1": "A1*ln(1+t)/(t+B1/t)+C1*t^(D1/2)/(1+E1*t^(D1/2+2))",
+    "F2": "[1/(C2*t^(D2/2))+1/(A2/t+B2/t^2)]^-1",
+    "t": "(me/mp)*K/I_s",
+    "inherited_discrepancy": {
+      "location": "CRIPTIC Eq26 and C++ total ionization cross section",
+      "upstream_term": "F2*wmax/[2*(1+wmax)^2]",
+      "SDCS_integrated_term": "F2*wmax^2/[2*(1+wmax)^2]",
+      "decision": "integrate differential Eq24; correct missing square; retain original function as evidence-only comparator",
+      "stopping_Eq25": "unchanged and consistent with SDCS"
+    },
+    "table_matching": {
+      "candidate_energy_eV": [
+        10.2,
+        3000
+      ],
+      "authority": "Other agent's MEDEA/DarkHistory TABLE_AUDIT and root integration choose actual admissible state/energy domain",
+      "unmatched_low": "explicit secondary energy reservoir; not heat without separate thermalization closure",
+      "unmatched_high": "explicit secondary electron reservoir",
+      "outside_proton_window": "full transported/unresolved CR population, no deletion"
+    },
+    "omitted_physics": [
+      "direct proton excitation",
+      "Coulomb stopping on free electrons",
+      "charge exchange and energetic-neutral transport",
+      "He+ target ionization",
+      "hadronic pion channels",
+      "magnetic confinement/self-generated waves",
+      "ejected-electron angular distribution"
+    ],
+    "provider_status": "IMPLEMENTED_BOUNDED_CHECK_PASS_NOT_COMPLETE_CR_MODEL",
+    "API": [
+      "active_proton_mask(proton_eV)",
+      "proton_speed_m_s(proton_eV)",
+      "dsigma_dW_m2_per_eV(proton_eV,electron_eV,target)",
+      "cross_section_moments(proton_eV,target,lower_eV=0,upper_eV=None)"
+    ]
+  },
+  "conservation_contract": {
+    "primary_rate": "R_s=n_s*integral(N_p(K,Omega)*v_p(K)*sigma_s(K),dK dOmega)",
+    "secondary_source": "Qe(W)=sum_s n_s*integral(N_p*v_p*dSigma_s/dW,dK dOmega)",
+    "stopping": "b_p,ion=sum_s n_s*v_p*integral((I_s+W)*dSigma_s/dW,dW)",
+    "energy_ledger": "proton_ionization_loss = primary_binding + secondary_low + secondary_supported + secondary_high",
+    "secondary_table_input": "W only; primary binding I_s not included again",
+    "dimensions": {
+      "q_p": "m^-3 s^-1 eV^-1 proper",
+      "N_p": "m^-3 eV^-1 sr^-1 proper",
+      "Q_e": "m^-3 s^-1 eV^-1 proper",
+      "dsigma_dW": "m^2 eV^-1",
+      "moment_loss": "m^2 eV"
+    },
+    "number_charge": "Source protons require explicit thermal acceleration transfer or external baryon+compensating electron/return-current closure. Tracer approximation must quantify nCR/nB and not claim exact baryon conservation.",
+    "geometry": "dotK=-K*(K+2M)/(K+M)*(H+s*(3mu^2-1)); dotmu=-3s*mu*(1-mu^2); proper conservative PDE includes 3H",
+    "no_silent_heat": [
+      "unmatched electron energy",
+      "inactive proton energy",
+      "geometry work",
+      "unimplemented loss channels"
+    ]
+  },
+  "sources": [
+    {
+      "id": "L17",
+      "title": "Do Cosmic Rays Heat the Early Intergalactic Medium?",
+      "authors": "Leite, Evoli, D'Angelo, Ciardi, Sigl, Ferrara",
+      "year": 2017,
+      "version": "arXiv1703.09337v1, 27Mar2017",
+      "doi": "10.1093/mnras/stx805",
+      "url": "https://arxiv.org/pdf/1703.09337v1",
+      "read_scope": "Original PDF sections3.1--3.3, Eqs19--35; source normalization, Bethe/Coulomb loss, ionization/heating approximation",
+      "adopted": "Eqs23--24 source shape and 10keV--1PeV support, alpha2.2,epsilon0.1,ESN1e51erg",
+      "not_adopted": "Original Larson IMF ~0.01 SN/Msun; all-channel H/He deposition using W-value closure",
+      "limit": "Excitation losses explicitly omitted in heating; no full species-resolved H/He cascade",
+      "classification": "primary simulation research",
+      "web_refs": [
+        "turn255view0",
+        "turn264view0",
+        "turn264view1",
+        "turn297view0"
+      ]
+    },
+    {
+      "id": "MD14",
+      "title": "Cosmic Star Formation History",
+      "authors": "Madau and Dickinson",
+      "year": 2014,
+      "version": "arXiv1403.0007v3,13Jun2014",
+      "doi": "10.1146/annurev-astro-081811-125615",
+      "url": "https://arxiv.org/pdf/1403.0007v3",
+      "read_scope": "Original pp47--48,Eqs15--16 and IMF/SFR extrapolation discussion",
+      "adopted": "Author's empirical SFRD fit and its matching Salpeter CC conversion0.0068/Msun",
+      "classification": "Review article, but specific Eq15 fit and Eq16 normalization are author's own primary prescription",
+      "limit": "Historical baseline; not claimed latest observational posterior; highz extrapolation",
+      "web_refs": [
+        "turn260view0",
+        "turn265view3",
+        "turn297view1"
+      ]
+    },
+    {
+      "id": "KCS22",
+      "title": "Cosmic Ray Interstellar Propagation Tool using Ito Calculus (criptic): software for simultaneous calculation of cosmic ray transport and observational signatures",
+      "authors": "Krumholz, Crocker, Sampson",
+      "year": 2022,
+      "version": "arXiv2207.13838v2,19Sep2022",
+      "doi": "10.1093/mnras/stac2562",
+      "url": "https://arxiv.org/pdf/2207.13838v2",
+      "read_scope": "Original section2.3.3,Eqs22--32 and Coulomb section2.3.4; Table1 channel scope",
+      "adopted": "Proton SDCS Eq24 and conservative stopping Eq23,25",
+      "not_adopted": "Eq26 uncorrected total cross section; isotropic spatial transport as Bianchi solution; MeV electron approximation as lowenergy cascade",
+      "limit": "Eq26 missing-square discrepancy documented from direct integration",
+      "web_refs": [
+        "turn272view0",
+        "turn283view2",
+        "turn297view3"
+      ]
+    },
+    {
+      "id": "CRIPTIC_CODE",
+      "title": "CRIPTIC author source",
+      "url": "https://bitbucket.org/krumholz/criptic/",
+      "commit": "e169dc2e906cf51d5c6a1bba47c10bf3d61c3d92",
+      "branch": "master",
+      "repository_updated_on": "2026-10-01T05:36:21.544057+00:00",
+      "read_scope": [
+        "README.md license paragraph",
+        "GPL-3.0.txt",
+        "Src/Losses/Ionization.H atomic coefficient table/F1/F2/loss and total cross section",
+        "Src/Utils/Constants.H unit conventions"
+      ],
+      "acquisition": "Root public clone; independently read source and HEAD locally",
+      "license": "GNU GPL version3.0",
+      "adopted": "Atomic H/He exact parameter selection and formula port, with explicit corrected integral",
+      "evidence": "research/RUDD_KERNEL_CHECK.json contains source and port sha256"
+    },
+    {
+      "id": "R92",
+      "title": "Electron production in proton collisions with atoms and molecules: energy distributions",
+      "authors": "M.E.Rudd,Y.-K.Kim,D.H.Madison,T.J.Gay",
+      "year": 1992,
+      "doi": "10.1103/RevModPhys.64.441",
+      "url": "https://doi.org/10.1103/RevModPhys.64.441",
+      "author_page": "https://digitalcommons.unl.edu/physicsgay/36/",
+      "read_scope": "Author repository metadata and indexed author-PDF excerpt around Eq40--48/TableV; full PDF fetch failed",
+      "adopted": "Only through inspected modern author code and primary CRIPTIC equations; full original PDF reading not claimed",
+      "original_fulltext_status": "NOT_RETRIEVED",
+      "web_refs": [
+        "turn265view1",
+        "turn285search27"
+      ]
+    },
+    {
+      "id": "JCE07",
+      "title": "Cosmic rays and the primordial gas",
+      "authors": "Jasche,Ciardi,Ensslin",
+      "year": 2007,
+      "version": "arXiv0705.4541v1",
+      "doi": "10.1111/j.1365-2966.2007.12058.x",
+      "url": "https://arxiv.org/pdf/0705.4541v1",
+      "read_scope": "Sections4.2,5.1--5.3 and selected6; Table2Wvalues and heating approximation",
+      "adopted": false,
+      "reason": "W-value plus generic secondary multiplicity is not complete species-resolved excitation/heat closure; naive H multiplicity reused for He makes negative heat",
+      "web_refs": [
+        "turn265view0",
+        "turn267view1",
+        "turn267view2",
+        "turn297view2"
+      ]
+    }
+  ],
+  "tool_failures": [
+    {
+      "tool": "web",
+      "url": "https://digitalcommons.unl.edu/cgi/viewcontent.cgi?article=1037&context=physicsgay",
+      "error": "403 original Rudd download"
+    },
+    {
+      "tool": "web",
+      "url": "https://www.physics.unl.edu/~tgay/publications/papers/Rudd%20et%20al.%20-%201992%20-%20Electron%20production%20in%20proton%20collisions%20with%20atom.pdf",
+      "error": "timeout"
+    },
+    {
+      "tool": "urllib",
+      "url": "https://www.physics.unl.edu/~tgay/publications/papers/Rudd%20et%20al.%20-%201992%20-%20Electron%20production%20in%20proton%20collisions%20with%20atom.pdf",
+      "error": "HTTP502"
+    },
+    {
+      "tool": "web",
+      "url": "https://api.bitbucket.org/2.0/repositories/krumholz/criptic",
+      "error": "internal fetch failure; public urllib API retrieval subsequently succeeded"
+    },
+    {
+      "tool": "web",
+      "url": "https://core.ac.uk/download/pdf/188112802.pdf",
+      "error": "internal fetch failure"
+    }
+  ],
+  "scispace": {
+    "used": true,
+    "purpose": "Literature discovery for CR SN injection and transport sources",
+    "raw_artifact": "research/SCISPACE_INJECTION_RAW.json",
+    "caution": "Discovery metadata dates may be wrong; primary arXiv/publisher metadata controls cited year/version"
+  },
+  "checks": {
+    "kernel": "research/RUDD_KERNEL_CHECK.json",
+    "full_IGM_runtime_performed_by_this_subtask": false,
+    "git_mutations_by_this_subtask": false
+  },
+  "claims": [
+    {
+      "id": "CRS1",
+      "statement": "A concrete physical SN proton source is selected",
+      "state": "MODEL_SELECTED_SOURCE_VERIFIED"
+    },
+    {
+      "id": "CRS2",
+      "statement": "Atomic H/He single-ionization kernel is source-pinned and implemented",
+      "state": "IMPLEMENTED_BOUNDED_CHECK_PASS"
+    },
+    {
+      "id": "CRS3",
+      "statement": "Kernel secondary energy and primary binding moments sum conservatively",
+      "state": "NUMERICALLY_CHECKED_AT_BOUNDED_SAMPLES"
+    },
+    {
+      "id": "CRS4",
+      "statement": "Full cosmic-ray physical-loss closure is complete",
+      "state": "NOT_CLAIMED"
+    },
+    {
+      "id": "CRS5",
+      "statement": "Whole IGM evolution is validated",
+      "state": "PENDING_PARENT_RUNTIME"
+    }
+  ],
+  "final_selection_supersession": {
+    "selected": "FS10 xi=.01 terminal kernel, 0..9937.21eV including subthreshold heat closure",
+    "legacy_table_matching": "MEDEA discussion is superseded candidate metadata",
+    "authority": "PROVIDER_SOURCES.json and src/fs10.py",
+    "active_combined_proton_window_eV": [
+      1000000.0,
+      4000000.0
+    ]
+  }
+}

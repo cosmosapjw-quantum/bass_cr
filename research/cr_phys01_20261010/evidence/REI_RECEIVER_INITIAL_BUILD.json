@@ -1,0 +1,31 @@
+{
+  "phase": "implementation",
+  "first_failure": {
+    "layer": "RUNTIME_ENVIRONMENT",
+    "command": "rustfmt --edition 2021 new module/tests/example",
+    "exit_code": 1,
+    "stderr": "error: rustfmt is not installed for the toolchain stable-x86_64-unknown-linux-gnu",
+    "code_change_on_failure": false
+  },
+  "cargo_check": {
+    "exit_code": 0
+  },
+  "cargo_test_no_run": {
+    "exit_code": 0,
+    "targets": [
+      "axisym_cr_deposition",
+      "cr_deposition_probe"
+    ]
+  },
+  "actual_ON_test": "PENDING_ACQUIRED_SOURCE_PACKET",
+  "repository_commit_or_push": false,
+  "environment_repair": {
+    "command": "rustup component add rustfmt",
+    "exit_code": 0,
+    "scope": "isolated supplied task toolchain"
+  },
+  "targeted_rustfmt": {
+    "exit_code": 0,
+    "scope": "four newly added Rust source/test/example files"
+  }
+}

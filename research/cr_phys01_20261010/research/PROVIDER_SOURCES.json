@@ -1,0 +1,191 @@
+{
+  "schema": "charged_particle_deposition_provider_sources_v1",
+  "date_utc": "2026-10-10",
+  "runtime_model": "UNKNOWN",
+  "harness": "user-selected GPT-6 Astra research/coding v4.0.0; runtime identity not inferred",
+  "selected_provider": "FS10 source-pinned secondary-electron terminal cascade table, fixed xHII=xHeII_per_He=0.01",
+  "source_provider": false,
+  "primary_proton_provider": false,
+  "actual_implementation": "../src/fs10.py",
+  "claim_ceiling": "conditional quasistatic terminal yields in source-defined primordial mixture; no causal turn-on, arbitrary composition, full CR transport or final IGM promotion",
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://cosmicdawn.astro.ucla.edu/codes_and_tools.html",
+      "read_scope": "official elecinterp description and download link",
+      "support": "author-released electron deposition tables/C; current public download supersedes original on-request abstract",
+      "tool": "web primary page"
+    },
+    {
+      "id": "S1T",
+      "url": "https://cosmicdawn.astro.ucla.edu/elec_interp.tar",
+      "sha256": "e9760d637b5bd97fe981cb459a7e2d733692a9f9f8deb9a757224b14be632101",
+      "bytes": 310272,
+      "local": "../vendor/fs10/elec_interp.tar",
+      "license": "no separate LICENSE file in official tar",
+      "actual_bytes_acquired": true
+    },
+    {
+      "id": "S2",
+      "url": "https://arxiv.org/pdf/0910.4410",
+      "version_read": "arXiv v1, 2009-10-23; published MNRAS 404,1869 (2010)",
+      "read_scope": "sections 2, 6.1-6.3, 7, note 6; Eqs8-10",
+      "support": "electron cascade physical manifold, channels, excluded primary event, timescale approximations",
+      "limits": "density/Coulomb log, omitted ICS, static medium, complete helium photon reabsorption"
+    },
+    {
+      "id": "D1",
+      "url": "https://github.com/21cmfast/21cmFAST/tree/c01373543fb83a721c48cdcbcd0a08ea53afe78c/src/py21cmfast/_data/x_int_tables",
+      "commit": "c01373543fb83a721c48cdcbcd0a08ea53afe78c",
+      "license": "MIT repository distribution; original data author separate license not documented in official tar",
+      "acquisition_ledger": "FS10_ACQUISITION.json",
+      "raw_bytes_verified": true,
+      "official_comparison": "14 tables agree except terminal newline",
+      "artifact_files": 17
+    },
+    {
+      "id": "D2",
+      "url": "https://github.com/hongwanliu/DarkHistory/tree/7a09f1991b0028cf00ec386bdea81b963f78794f/darkhistory/low_energy",
+      "commit": "7a09f1991b0028cf00ec386bdea81b963f78794f",
+      "tree": "32ab51525baf4b7425c522ef09ad4468682cc5b0",
+      "license": "MIT repository distribution; no separately documented original MEDEA dataset license",
+      "acquisition_ledger": "DARKHISTORY_ACQUISITION.json",
+      "raw_bytes_verified": true,
+      "artifact_files": 10,
+      "artifact_total_bytes": 19723,
+      "read_scope": "all eight raw numeric tables; lowE_electrons.py; LICENSE",
+      "limitations": [
+        "sparse energy grid",
+        "single aggregate He ionization energy channel",
+        "ionization manifold and exact abundance metadata limitations",
+        "opening docstring continuum-first but Returns section heat-first; named-column adapter required",
+        "upstream positive floor changes threshold zeros"
+      ]
+    },
+    {
+      "id": "S3",
+      "url": "https://arxiv.org/html/1904.09296v1",
+      "version_read": "v1",
+      "read_scope": "III.4 and III.6.2, Eq45",
+      "support": "MEDEA low-energy electron terminal table use and composition limitations"
+    },
+    {
+      "id": "S4",
+      "url": "https://arxiv.org/pdf/2303.07366",
+      "version_read": "returned current PDF; no immutable revision inferred",
+      "read_scope": "II.A-C, Fig1, comparison discussion",
+      "support": "upgraded low-energy electron cooling; MEDEA rare-channel noise and sparse energy-grid limitation"
+    },
+    {
+      "id": "S5",
+      "url": "https://arxiv.org/pdf/0911.1125",
+      "version_read": "v2",
+      "read_scope": "2.1 low-energy processes and composition",
+      "support": "original equal H/He ionization assumption",
+      "limits": "YHe=.248 in paper is not proof that bundled yp024 table used same value"
+    },
+    {
+      "id": "D3",
+      "url": "https://github.com/hongwanliu/DarkHistory/blob/b556d0f0418a0665719fd6da26dcc303466b9659/darkhistory/electrons/elec_cooling.py",
+      "commit": "b556d0f0418a0665719fd6da26dcc303466b9659",
+      "branch": "lowengelec_upgrade",
+      "tree": "c5354117b8a39bfc670e57fed9c0ffd6ebbaeae4",
+      "license": "MIT",
+      "inspection_record": "DARKHISTORY_UPGRADE_INSPECTION.json",
+      "actual_execution": "NOT_RUN",
+      "limits": [
+        "xHeII is nHeII/nH",
+        "no independent HeIII parameter",
+        "internal LCDM approximate electron temperature",
+        "default external ICS/excitation h5 inputs needed"
+      ]
+    },
+    {
+      "id": "S6",
+      "url": "https://s3.cern.ch/inspire-prod-files-2/2dbcc1af795ec577cd1ac937fc2b3dd8",
+      "publication": "PoS(ICRC2015)518",
+      "read_scope": "abstract and section2, Eqs2.19-2.22",
+      "support": "proton/electron differential ionization and secondary source construction",
+      "limits": "presented steady local loss closure is H2 molecular gas; public web-interface does not establish downloadable executable source license",
+      "paper_license": "CC BY-NC-SA per paper footer",
+      "code_license": null
+    },
+    {
+      "id": "SCISPACE",
+      "local_record": "SCISPACE_DISCOVERY.json",
+      "role": "discovery only; primary sources independently read"
+    }
+  ],
+  "admissible_implementation": {
+    "composition": {
+      "xHII": 0.01,
+      "xHeII_per_He": 0.01,
+      "xHeIII": 0.0,
+      "helium_mass_fraction": null,
+      "mixture_status": "source-defined primordial mixture; exact generating YHe not certified"
+    },
+    "header": {
+      "z": 10,
+      "T_K": 100
+    },
+    "source_energy_eV": [
+      10,
+      9937.21
+    ],
+    "subthreshold_heat_eV": [
+      0,
+      10
+    ],
+    "subthreshold_conditions": "positive ionized fraction; terminal Coulomb-only closure; no prompt causal-start claim",
+    "interpolation": "linear channel energies and counts; ionization threshold anchors; no xi interpolation",
+    "declared_approximate_secondary_thresholds_eV": [
+      13.6,
+      24.6,
+      54.4
+    ],
+    "source_projection": "heat-only bounded numerical energy closure, not printed-rounding-only",
+    "fixed_max_source_projection_over_E": 0.0001,
+    "raw_max_fraction_sum_residual": 3.2000000000032e-05,
+    "raw_max_count_energy_residual_over_E": 9.525291230401016e-05,
+    "threshold_interpolation_correction": "reported separately from source numerical projection",
+    "out_of_domain": "raise ValueError; no high-energy extrapolation, no arbitrary-x mapping",
+    "validation": "FS10_LOADER_VALIDATION.json"
+  },
+  "closure_gaps": [
+    {
+      "id": "CR_SOURCE_AND_SDCS",
+      "status": "separate upstream work",
+      "scope": "actual proton injection, primary cross sections, secondary electron production; not supplied by this table"
+    },
+    {
+      "id": "FS10_GENERATOR_YHE",
+      "status": "unresolved",
+      "value": null,
+      "consequence": "do not certify exact match to an arbitrary receiver YHe"
+    },
+    {
+      "id": "CAUSAL_CASCADE",
+      "status": "conditional",
+      "consequence": "terminal kernel requires old/quasistatic reservoir; E/b estimates do not bound full delay including photons"
+    },
+    {
+      "id": "ICS_HIGH_END",
+      "status": "conditional",
+      "consequence": "at z10 xi.01 9.94keV atomic E/b divided by ICS time is about .087; no universal percent-accuracy claim"
+    },
+    {
+      "id": "ARBITRARY_HHE",
+      "status": "rejected by current adapter",
+      "consequence": "independent ion fractions and HeIII require new solver or new table coordinates"
+    }
+  ],
+  "quarantines": [
+    "xi=1e-4 inconsistent He header",
+    "three 2.138/2.318 x-coordinate mismatches",
+    "old C silent energy/x clipping",
+    "unverified pure photon or pure heat replacement for proton provider"
+  ],
+  "review_status": "PASS_DECLARED_FINITE_ADAPTER by separate child reviewer; 20 checks, 10274 off-grid probes; final full scientific promotion remains root responsibility",
+  "external_push": "NOT_PERFORMED_BY_THIS_AGENT",
+  "independent_review": "FS10_INDEPENDENT_REVIEW.json"
+}
