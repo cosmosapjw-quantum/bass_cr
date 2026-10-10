@@ -1,0 +1,357 @@
+{
+  "schema": "bass_cr.phys02b.ionization.source_audit.v1",
+  "date": "2026-10-10",
+  "status": "SOURCE_AUDIT_COMPLETE_WITH_OPEN_EXTERNAL_VALIDATION_ITEMS",
+  "scope": "Literature and source-acquisition audit only; no physical calibration admission, candidate design, numerical implementation, or independent final verdict.",
+  "actual_host_identity": "GPT-6 Astra, host developer declaration; no model switch",
+  "harness": "GPT-6 Astra research v4.0.0",
+  "source_identity": "Current NIST SRD 107 formulas and orbital tables plus published rounded Mueller et al. 2009 BED oscillator-strength coefficients; not FS10 original code or table bytes.",
+  "pinned_runtime_input_path": "/workspace/scratch/584ff08e1634/bass_cr_work/research/cr_phys02b_20261010/inputs/NIST_IONIZATION.json",
+  "pinned_runtime_input_snapshot": {
+    "schema": "cr-phys02b-ionization-input.v1",
+    "adopted_before_first_model_run_utc": "2026-10-10T12:01:26.407612+00:00",
+    "total_cross_section": "NIST Eq1 generalized BEB with Q (BEQ in Muller2009 terminology), n=1; modern CODATA2022 a0 central value and NIST R=13.6057 eV.",
+    "sharing": "NIST Eq3 raw BED slow-electron shape with printed Muller2009 TableI coefficients, normalized to the adopted generalized BEB total per NIST introB procedure. This is an explicitly specified research combination, not a byte-exact clone of the NIST CGI.",
+    "coefficient_source": {
+      "title": "Source formulation for electron-impact ionization for fluid plasma simulations",
+      "authors": "Muller, Holland, Tynan, Yu and Naulin",
+      "year": 2009,
+      "doi": "10.1088/0741-3335/51/10/105014",
+      "url": "https://backend.orbit.dtu.dk/ws/portalfiles/portal/4857374/Naulin_paper.pdf",
+      "locations": "Table I p12 of manuscript (PDF page index12), Eqs42-48 pp13-14",
+      "retrieval": "Full PDF read through web; Table I visually checked through screenshot. Local direct byte download403, so no original PDF SHA is claimed.",
+      "web_refs": [
+        "turn63view0",
+        "turn64view0",
+        "turn64view2",
+        "turn66view0"
+      ],
+      "rounding": "Retain printed four-decimal coefficients; do not substitute remembered extra digits."
+    },
+    "species": {
+      "HI": {
+        "B_eV": 13.6057,
+        "U_eV": 13.6057,
+        "N": 1.0,
+        "Q": 0.5668,
+        "coefficients": [
+          -0.0225,
+          1.1775,
+          -0.4626,
+          0.089,
+          0.0
+        ]
+      },
+      "HeI": {
+        "B_eV": 24.587,
+        "U_eV": 39.51,
+        "N": 2.0,
+        "Q": 0.8841,
+        "coefficients": [
+          0.0,
+          8.2401,
+          -10.4769,
+          3.965,
+          -0.0446
+        ]
+      }
+    },
+    "coefficient_powers": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "Ni_rule": "Integral of the adopted printed polynomial on w in [0,infinity], sum(c_k/(k-1)); not copied separately from a rounded K_BED table.",
+    "sharing_domain_source": "Muller2009 Eq47: slower electron W in [0,(T-B)/2]; both daughters retained in cascade. Lee et al2026 Eq2.13 independently states double counting above the half-energy boundary.",
+    "domain_sources": [
+      {
+        "url": "https://backend.orbit.dtu.dk/ws/portalfiles/portal/4857374/Naulin_paper.pdf",
+        "location": "Eq47 and preceding paragraph"
+      },
+      {
+        "url": "https://www.cambridge.org/core/journals/journal-of-plasma-physics/article/collision-operator-for-electron-runaway-in-cold-weakly-ionised-plasmas/55452E4C69E1DB5C490E18B46213D046",
+        "location": "Eqs2.6,2.13 and paragraph following; 2026"
+      }
+    ],
+    "NIST_urls": {
+      "equations": "https://physics.nist.gov/PhysRefData/Ionization/Eqs/latex.html",
+      "normalization_statement": "https://physics.nist.gov/PhysRefData/Ionization/intro.html",
+      "HI_parameters": "https://physics.nist.gov/cgi-bin/Ionization/ion_data.php?differential=Y&id=HI&initial=&ision=I",
+      "HeI_parameters": "https://physics.nist.gov/cgi-bin/Ionization/ion_data.php?differential=Y&id=HeI&initial=&ision=I"
+    },
+    "reference_points": [],
+    "CGI_numerical_comparison": "NOT_EVALUATED_HTTP500_ON_TOTAL_ENDPOINTS_AND_DIFFERENTIAL_FORM_UNAVAILABLE",
+    "closed_total_reference": "Independent adaptive integration of published symmetric BEQ SDCS, Muller2009 Eqs42,43,44 first expression, K=2-Q; this uses different algebra from NIST Eq1.",
+    "physical_accuracy": "UNRESOLVED; no claim to reproduce original FS10 Monte Carlo or current NIST CGI numeric bytes."
+  },
+  "local_input_read_status": "READ_EXISTING_PINNED_JSON; unmodified",
+  "interim_record_corrected": {
+    "schema": "bass_cr.phys02b.ionization.source_acquisition.v1",
+    "status": "PARTIAL_SOURCE_EVIDENCE",
+    "role": "source_acquisition_only_no_candidate_design_or_final_admission",
+    "actual_host_model": "GPT-6 Astra per host developer declaration",
+    "research_harness": "GPT-6 Astra research v4.0.0",
+    "date": "2026-10-10",
+    "original_http_pdf_bytes_acquired": false,
+    "complete_nist_cgi_sdcs_response_acquired": false,
+    "source_identity": "Current NIST SRD107 and primary BED publications; not FS10 original table/code bytes",
+    "orbital_parameters": [
+      {
+        "target": "HI",
+        "orbital": "1s",
+        "B_eV": 13.6057,
+        "U_eV": 13.6057,
+        "N": 1,
+        "Q": 0.5668,
+        "n": 1,
+        "double_ionization": false,
+        "url": "https://physics.nist.gov/cgi-bin/Ionization/ion_data.php?differential=Y&id=HI&initial=&ision=I",
+        "ref": "turn29view3",
+        "evidence": "actual_web_open_extracted_table",
+        "notes": "NIST model B must not silently be replaced by spectroscopic H ionization potential."
+      },
+      {
+        "target": "HeI",
+        "orbital": "1s",
+        "B_eV": 24.587,
+        "U_eV": 39.51,
+        "N": 2,
+        "Q": 0.8841,
+        "n": 1,
+        "double_ionization": false,
+        "url": "https://physics.nist.gov/cgi-bin/Ionization/ion_data.php?differential=Y&id=HeI&initial=&ision=I",
+        "ref": "turn29view2",
+        "evidence": "actual_web_open_extracted_table"
+      }
+    ],
+    "equations": {
+      "nist_latex_url": "https://physics.nist.gov/PhysRefData/Ionization/Eqs/latex.html",
+      "definitions": {
+        "t": "T/B",
+        "u": "U/B",
+        "w": "W/B",
+        "y": "1/(1+w)",
+        "S": "4*pi*a0^2*N*(R/B)^2",
+        "a0_angstrom": 0.52918,
+        "R_eV": 13.6057,
+        "Ni": "integral_0^infinity(df/dw) dw"
+      },
+      "total_beb_general_Q": "S/(t+(u+1)/n) * [Q*ln(t)/2*(1-1/t^2) + (2-Q)*(1-1/t-ln(t)/(t+1))]",
+      "unnormalized_bed_sdcs_per_eV": "S/(B*(t+(u+1)/n)) * {[(Ni/N)-2]/(t+1) * [1/(w+1)+1/(t-w)] + [2-(Ni/N)]*[1/(w+1)^2+1/(t-w)^2] + ln(t)/(N*(w+1))*(df/dw)}",
+      "nist_polynomial": "df/dw = a*y^2+b*y^3+c*y^4+d*y^5+e*y^6",
+      "nist_normalization_statement": "Intro section B says resulting d_sigma/dW is normalized to match total ionization cross section; actual CGI implementation not yet obtained.",
+      "stone_kim2005_primary_url": "https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=840766",
+      "stone_kim2005_refs": [
+        "turn40view1",
+        "turn36view1"
+      ],
+      "raw_bed_total": "S/(t+u+1) * [D(t)*ln(t)+(2-Ni/N)*(1-1/t-ln(t)/(t+1))]",
+      "raw_bed_D": "D(t)=(1/N)*integral_0^((t-1)/2) [(df/dw)/(w+1)] dw",
+      "slow_ejected_electron_domain": "0 <= W <= (T-B)/2",
+      "second_electron_kinetic_energy": "T-B-W",
+      "source_read_status": "NIST equations and Stone/Kim2005 full 3-page PDF extraction read; raw BED total generally differs from generalized-Q BEB total."
+    },
+    "oscillator_coefficients": {
+      "HI": {
+        "status": "MISSING",
+        "Ni": null,
+        "polynomial": null
+      },
+      "HeI": {
+        "status": "READ_IN_PRIMARY_AUTHOR_PDF_SEARCH_INDEX_EXTRACTION; PDF_OPEN_FAILED",
+        "primary_url": "https://www3.nd.edu/~johnson/Publications/ykim.pdf",
+        "ref": "turn42search15",
+        "publication": "Kim, Johnson, Rudd (2000), Physical Review A 61, 034702, DOI 10.1103/PhysRevA.61.034702",
+        "paper_eq6": "df/dw = a*y^3 + b*y^4 + c*y^5 + d*y^6",
+        "paper_coefficients": {
+          "a": 8.24012,
+          "b": -10.4769,
+          "c": 3.96496,
+          "d": -0.0445976
+        },
+        "coefficients_by_power": {
+          "2": 0,
+          "3": 8.24012,
+          "4": -10.4769,
+          "5": 3.96496,
+          "6": -0.0445976
+        },
+        "B_eV": 24.587,
+        "U_eV": 39.51,
+        "N": 2,
+        "Ni": {
+          "status": "DERIVABLE_FROM_FIT_NOT_YET_COMPUTED",
+          "formula": "8.24012/2 -10.4769/3 +3.96496/4 -0.0445976/5"
+        },
+        "domain_evidence": "Indexed PDF body explicitly explains upper limit in Eqs3 and4 chosen to avoid double counting due to Mott symmetry.",
+        "caveat": "Do not label these as current NIST CGI coefficients until independently read from live CGI or full primary PDF."
+      }
+    },
+    "blockers": [
+      {
+        "path": "direct Python urllib to NIST",
+        "result": "HTTP403 after approx15 seconds; no source bytes downloaded"
+      },
+      {
+        "path": "NIST ion_data.php total=Y for H/He",
+        "result": "HTTP500 or tool inaccessible; differential=Y parameter table works"
+      },
+      {
+        "path": "APS1994 PDF and harvest fulltext",
+        "result": "tool inaccessible"
+      },
+      {
+        "path": "UNL1994 article1026 PDF",
+        "result": "HTTP403; landing page accessible"
+      },
+      {
+        "path": "UNL2000 article1034 PDF",
+        "result": "HTTP403; landing page accessible"
+      },
+      {
+        "path": "NotreDame primary2000 PDF direct web open",
+        "result": "tool inaccessible; search index provides equation6 and parameters"
+      },
+      {
+        "path": "cloud browser NIST form",
+        "result": "createBrowserTab remained pending about 911 seconds, then parent interrupted the agent turn; no page or form response acquired. This was not a user interruption."
+      }
+    ],
+    "redistribution": {
+      "NIST_SRD107": "DATABASE_SPECIFIC_TERMS_NOT_YET_READ; do not assume public domain because NIST.gov",
+      "Kim_Rudd1994": "UNL landing states copyright American Physical Society; used by permission",
+      "Kim_Johnson_Rudd2000": "UNL landing states copyright American Physical Society; used by permission",
+      "Stone_Kim2005": "Paper footer explicitly says US Government work, public domain in USA"
+    },
+    "next_required": [
+      "Recover H continuum oscillator-strength fit or exact primary analytic oscillator strength.",
+      "Read He full PDF or NIST CGI coefficients for source byte-level verification.",
+      "Read database-specific redistribution terms.",
+      "Capture source-form/table response if possible without another blocking browser attempt."
+    ]
+  },
+  "root_resolution": {
+    "provenance_status": "Parent independently read full primary-author PDF and Table I screenshot. This subagent records parent evidence and the pinned JSON, without claiming a new direct PDF read.",
+    "publication": "Mueller et al. (2009), Source formulation for electron-impact ionization, DOI 10.1088/0741-3335/51/10/105014",
+    "url": "https://backend.orbit.dtu.dk/ws/portalfiles/portal/4857374/Naulin_paper.pdf",
+    "parent_web_refs": [
+      "turn63view0",
+      "turn66view0"
+    ],
+    "read_location_by_parent": "Full author PDF; Table I, PDF page 12; equations 42-48 and slow-electron upper-half convention",
+    "polynomial_convention": "df/dw = c2*y^2+c3*y^3+c4*y^4+c5*y^5+c6*y^6; y=1/(1+w), w=W/B",
+    "HI": {
+      "status": "RESOLVED_BY_ROOT_PRIMARY_PDF_AND_PINNED_INPUT",
+      "printed_coefficients_c2_to_c6": [
+        -0.0225,
+        1.1775,
+        -0.4626,
+        0.089,
+        0
+      ],
+      "previous_missing_status": "Historical interim missing; no longer unresolved for the selected published-coefficient model"
+    },
+    "HeI": {
+      "status": "RESOLVED_BY_ROOT_PRIMARY_PDF_AND_PINNED_INPUT",
+      "printed_coefficients_c2_to_c6": [
+        0,
+        8.2401,
+        -10.4769,
+        3.965,
+        -0.0446
+      ]
+    },
+    "energy_partition": "0 <= W <= (T-B)/2 for the slower outgoing electron; the other outgoing electron has kinetic energy T-B-W. This avoids double counting the indistinguishable electron pair.",
+    "model_interpretation": "Fixed BEQ/general-Q BEB absolute total cross section with normalized conditional BED shape using the published rounded polynomial coefficients. This is a conditional hybrid closure, not exact reproduction of current NIST CGI outputs."
+  },
+  "open_items": [
+    {
+      "id": "NIST_CGI_NUMERICAL_POINT",
+      "status": "NOT_EVALUATED",
+      "reason": "NIST total=Y requests returned HTTP500 or tool-inaccessible responses; differential=Y parameter table was readable but no completed T/W SDCS calculation response was acquired. No empirical CGI equality is asserted."
+    },
+    {
+      "id": "HE_TOTAL_SHAPE_MIXED_Q",
+      "status": "OPEN_SOURCE_MODEL_DIFFERENCE",
+      "parent_reported_values": {
+        "NIST_Q": 0.8841,
+        "printed_fit_implied_Q": 0.9130416667,
+        "printed_fit_Ni": 1.61008,
+        "printed_K_BED": 1.186
+      },
+      "interpretation": "The published rounded He polynomial implies a dipole moment different from the pinned NIST Q. Parent also reports printed K_BED is not exactly consistent with polynomial Ni. These values were supplied by the parent; this source-finalization step performs no new computation. Normalization defines a hybrid shape-total pairing; it does not remove the provenance difference."
+    },
+    {
+      "id": "ORIGINAL_SOURCE_BYTES",
+      "status": "PARTIAL",
+      "reason": "This subagent obtained actual web extraction responses and source equations/constant tables, not original FS10 bytes, exact NIST server source code, or full HTTP/PDF bytes. The independent author-PDF evidence acquired by root is separately identified."
+    },
+    {
+      "id": "DATABASE_REDISTRIBUTION_TERMS",
+      "status": "NOT_VERIFIED",
+      "reason": "No database-specific NIST SRD107 redistribution license was successfully audited in this subtask. Do not infer public-domain status merely from a nist.gov host."
+    },
+    {
+      "id": "ATOMIC_PHYSICAL_CALIBRATION",
+      "status": "NOT_ESTABLISHED_BY_THIS_AUDIT",
+      "reason": "Source closure and numerical consistency tests do not constitute independent physical calibration of the new hybrid transport model."
+    }
+  ],
+  "rights_observations": {
+    "Kim_Rudd_1994_and_Kim_Johnson_Rudd_2000": "Author repository landing pages state APS copyright and used by permission; no broad redistribution permission established.",
+    "Stone_Kim_2005": "Article footer explicitly states a US Government work in the public domain in the USA.",
+    "Mueller_2009": "Primary-author repository pointer and factual coefficients recorded; no new full-text redistribution claim made."
+  },
+  "directly_read_source_highlights": [
+    {
+      "url": "https://physics.nist.gov/cgi-bin/Ionization/ion_data.php?differential=Y&id=HI&initial=&ision=I",
+      "ref": "turn29view3",
+      "data": "H 1s: B=13.6057 eV,U=13.6057 eV,N=1,Q=0.5668,n=1; double ionization No."
+    },
+    {
+      "url": "https://physics.nist.gov/cgi-bin/Ionization/ion_data.php?differential=Y&id=HeI&initial=&ision=I",
+      "ref": "turn29view2",
+      "data": "He 1s: B=24.5870 eV,U=39.5100 eV,N=2,Q=0.8841,n=1; double ionization No."
+    },
+    {
+      "url": "https://physics.nist.gov/PhysRefData/Ionization/Eqs/latex.html",
+      "refs": [
+        "turn11view3",
+        "turn24search16"
+      ],
+      "data": "Official generalized-Q BEB total and BED SDCS equations, including energy and dimensional factors."
+    },
+    {
+      "url": "https://physics.nist.gov/PhysRefData/Ionization/intro.html",
+      "refs": [
+        "turn9view2",
+        "turn38search1",
+        "turn42search0"
+      ],
+      "data": "Defines B,U,N,Q,S,t,u,w,Ni and polynomial y. Describes SDCS normalization to the total. Nonrelativistic limitation T>10 keV excluded; generic model accuracy statement is not a per-target rigorous uncertainty certificate."
+    },
+    {
+      "url": "https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=840766",
+      "refs": [
+        "turn36view1",
+        "turn40view1"
+      ],
+      "data": "Stone and Kim 2005 three-page primary publication extraction: BEB/BED distinction, BED total D(t) integral to (t-1)/2, resonances unresolved, public-domain USA footer."
+    },
+    {
+      "url": "https://www3.nd.edu/~johnson/Publications/ykim.pdf",
+      "ref": "turn42search15",
+      "data": "Primary-author PDF search-index body gave He2000 coefficients with extra printed digits and double-counting rationale. Direct PDF open failed. Runtime instead pins Mueller2009 rounded Table I values."
+    }
+  ],
+  "stopping_record": {
+    "additional_search": "STOPPED_BY_PARENT_DIRECTION",
+    "additional_browser": "NOT_USED_AFTER_PARENT_STOP",
+    "additional_numerical_calculation": "NONE",
+    "source_input_modification": "NONE",
+    "subagents_spawned_by_this_agent": "NONE",
+    "completion_meaning": "Available evidence and access failures are closed into a source audit; unresolved comparisons remain explicitly open."
+  }
+}

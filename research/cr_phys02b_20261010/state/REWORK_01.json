@@ -1,0 +1,18 @@
+{
+  "time_utc": "2026-10-10T12:03:00.446127+00:00",
+  "state": "REWORK_IN_PROGRESS",
+  "failure": "ENERGY_MESH_REFINEMENT",
+  "first_run": "evidence/runs/R001/NUMERICAL_RESULT.json",
+  "classification": "NUMERICAL_DISCRETIZATION",
+  "observed": {
+    "low_cross_energy_relative_change": 0.05126664494374118,
+    "low_cross_number_relative_change": 0.04315482232311675
+  },
+  "fixed_tolerance": {
+    "low_cross_energy": 0.02,
+    "low_cross_number": 0.03
+  },
+  "diagnosis": "Downward drift and near10eV birth/daughter projection yield a first-order boundary flux approximation. Global channel ledgers already converged; boundary diagnostic needs finer energy mesh.",
+  "repair": "Continue predeclared doubling of low and high cells: (800,1600) then (1600,3200); retain physics, source and all tolerances.",
+  "no_retrospective_tolerance_change": true
+}

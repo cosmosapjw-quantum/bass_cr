@@ -1,0 +1,146 @@
+{
+  "schema": "bass_cr.phys02b.ionization.source_acquisition.v1",
+  "status": "PARTIAL_SOURCE_EVIDENCE",
+  "role": "source_acquisition_only_no_candidate_design_or_final_admission",
+  "actual_host_model": "GPT-6 Astra per host developer declaration",
+  "research_harness": "GPT-6 Astra research v4.0.0",
+  "date": "2026-10-10",
+  "original_http_pdf_bytes_acquired": false,
+  "complete_nist_cgi_sdcs_response_acquired": false,
+  "source_identity": "Current NIST SRD107 and primary BED publications; not FS10 original table/code bytes",
+  "orbital_parameters": [
+    {
+      "target": "HI",
+      "orbital": "1s",
+      "B_eV": 13.6057,
+      "U_eV": 13.6057,
+      "N": 1,
+      "Q": 0.5668,
+      "n": 1,
+      "double_ionization": false,
+      "url": "https://physics.nist.gov/cgi-bin/Ionization/ion_data.php?differential=Y&id=HI&initial=&ision=I",
+      "ref": "turn29view3",
+      "evidence": "actual_web_open_extracted_table",
+      "notes": "NIST model B must not silently be replaced by spectroscopic H ionization potential."
+    },
+    {
+      "target": "HeI",
+      "orbital": "1s",
+      "B_eV": 24.587,
+      "U_eV": 39.51,
+      "N": 2,
+      "Q": 0.8841,
+      "n": 1,
+      "double_ionization": false,
+      "url": "https://physics.nist.gov/cgi-bin/Ionization/ion_data.php?differential=Y&id=HeI&initial=&ision=I",
+      "ref": "turn29view2",
+      "evidence": "actual_web_open_extracted_table"
+    }
+  ],
+  "equations": {
+    "nist_latex_url": "https://physics.nist.gov/PhysRefData/Ionization/Eqs/latex.html",
+    "definitions": {
+      "t": "T/B",
+      "u": "U/B",
+      "w": "W/B",
+      "y": "1/(1+w)",
+      "S": "4*pi*a0^2*N*(R/B)^2",
+      "a0_angstrom": 0.52918,
+      "R_eV": 13.6057,
+      "Ni": "integral_0^infinity(df/dw) dw"
+    },
+    "total_beb_general_Q": "S/(t+(u+1)/n) * [Q*ln(t)/2*(1-1/t^2) + (2-Q)*(1-1/t-ln(t)/(t+1))]",
+    "unnormalized_bed_sdcs_per_eV": "S/(B*(t+(u+1)/n)) * {[(Ni/N)-2]/(t+1) * [1/(w+1)+1/(t-w)] + [2-(Ni/N)]*[1/(w+1)^2+1/(t-w)^2] + ln(t)/(N*(w+1))*(df/dw)}",
+    "nist_polynomial": "df/dw = a*y^2+b*y^3+c*y^4+d*y^5+e*y^6",
+    "nist_normalization_statement": "Intro section B says resulting d_sigma/dW is normalized to match total ionization cross section; actual CGI implementation not yet obtained.",
+    "stone_kim2005_primary_url": "https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=840766",
+    "stone_kim2005_refs": [
+      "turn40view1",
+      "turn36view1"
+    ],
+    "raw_bed_total": "S/(t+u+1) * [D(t)*ln(t)+(2-Ni/N)*(1-1/t-ln(t)/(t+1))]",
+    "raw_bed_D": "D(t)=(1/N)*integral_0^((t-1)/2) [(df/dw)/(w+1)] dw",
+    "slow_ejected_electron_domain": "0 <= W <= (T-B)/2",
+    "second_electron_kinetic_energy": "T-B-W",
+    "source_read_status": "NIST equations and Stone/Kim2005 full 3-page PDF extraction read; raw BED total generally differs from generalized-Q BEB total."
+  },
+  "oscillator_coefficients": {
+    "HI": {
+      "status": "MISSING",
+      "Ni": null,
+      "polynomial": null
+    },
+    "HeI": {
+      "status": "READ_IN_PRIMARY_AUTHOR_PDF_SEARCH_INDEX_EXTRACTION; PDF_OPEN_FAILED",
+      "primary_url": "https://www3.nd.edu/~johnson/Publications/ykim.pdf",
+      "ref": "turn42search15",
+      "publication": "Kim, Johnson, Rudd (2000), Physical Review A 61, 034702, DOI 10.1103/PhysRevA.61.034702",
+      "paper_eq6": "df/dw = a*y^3 + b*y^4 + c*y^5 + d*y^6",
+      "paper_coefficients": {
+        "a": 8.24012,
+        "b": -10.4769,
+        "c": 3.96496,
+        "d": -0.0445976
+      },
+      "coefficients_by_power": {
+        "2": 0,
+        "3": 8.24012,
+        "4": -10.4769,
+        "5": 3.96496,
+        "6": -0.0445976
+      },
+      "B_eV": 24.587,
+      "U_eV": 39.51,
+      "N": 2,
+      "Ni": {
+        "status": "DERIVABLE_FROM_FIT_NOT_YET_COMPUTED",
+        "formula": "8.24012/2 -10.4769/3 +3.96496/4 -0.0445976/5"
+      },
+      "domain_evidence": "Indexed PDF body explicitly explains upper limit in Eqs3 and4 chosen to avoid double counting due to Mott symmetry.",
+      "caveat": "Do not label these as current NIST CGI coefficients until independently read from live CGI or full primary PDF."
+    }
+  },
+  "blockers": [
+    {
+      "path": "direct Python urllib to NIST",
+      "result": "HTTP403 after approx15 seconds; no source bytes downloaded"
+    },
+    {
+      "path": "NIST ion_data.php total=Y for H/He",
+      "result": "HTTP500 or tool inaccessible; differential=Y parameter table works"
+    },
+    {
+      "path": "APS1994 PDF and harvest fulltext",
+      "result": "tool inaccessible"
+    },
+    {
+      "path": "UNL1994 article1026 PDF",
+      "result": "HTTP403; landing page accessible"
+    },
+    {
+      "path": "UNL2000 article1034 PDF",
+      "result": "HTTP403; landing page accessible"
+    },
+    {
+      "path": "NotreDame primary2000 PDF direct web open",
+      "result": "tool inaccessible; search index provides equation6 and parameters"
+    },
+    {
+      "path": "cloud browser NIST form",
+      "result": "createBrowserTab hung911 seconds then aborted by parent/user; no page or form response acquired"
+    }
+  ],
+  "redistribution": {
+    "NIST_SRD107": "DATABASE_SPECIFIC_TERMS_NOT_YET_READ; do not assume public domain because NIST.gov",
+    "Kim_Rudd1994": "UNL landing states copyright American Physical Society; used by permission",
+    "Kim_Johnson_Rudd2000": "UNL landing states copyright American Physical Society; used by permission",
+    "Stone_Kim2005": "Paper footer explicitly says US Government work, public domain in USA"
+  },
+  "next_required": [
+    "Recover H continuum oscillator-strength fit or exact primary analytic oscillator strength.",
+    "Read He full PDF or NIST CGI coefficients for source byte-level verification.",
+    "Read database-specific redistribution terms.",
+    "Capture source-form/table response if possible without another blocking browser attempt."
+  ]
+}
+
