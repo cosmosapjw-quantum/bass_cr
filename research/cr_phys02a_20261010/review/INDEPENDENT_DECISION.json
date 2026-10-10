@@ -1,0 +1,234 @@
+{
+  "schema": "cr-phys02a-independent-decision.v1",
+  "task": "CR-PHYS02A-CAUSAL-SUBTHRESHOLD",
+  "reviewer": {
+    "agent_id": "/root/phys02_decision_review",
+    "role": "INDEPENDENT_FINAL_DECISION_REVIEWER",
+    "candidate_generation_participation": false,
+    "implementation_participation": false,
+    "validation_design_participation": false,
+    "original_literature_audit_participation": false,
+    "review_scope": "fixed artifacts, derivation/code/evidence/primary-source checks; no new candidate design",
+    "model_declared_by_host": "GPT-6 Astra Pro",
+    "model_or_effort_override_requested": false,
+    "runtime_model_observed": "UNKNOWN",
+    "runtime_effort_observed": "UNKNOWN"
+  },
+  "gate_verdict": "PROMOTE",
+  "promoted_scope": "Derived and numerically checked direct-ejection 0.1–10 eV classical superthermal leading-log Coulomb-only continuous slowing in the prescribed homogeneous bath, at the fixed PHYS01 source and local ramp Qe=tA, 0<=t<=1e10 s.",
+  "claim_status": [
+    "derived",
+    "literature-supported",
+    "numerically checked",
+    "implementation-verified"
+  ],
+  "claim_ceiling": {
+    "physical_accuracy_certified": false,
+    "full_secondary_cascade": false,
+    "near_thermal_equilibrium": false,
+    "actual_IGM_history": false,
+    "parent_PHYS02_delay_admission": false,
+    "parent_PHYS02_state": "OPEN",
+    "production_history": "HOLD",
+    "original_atomic_gates": "PRESERVED"
+  },
+  "blocking_findings": [],
+  "actual_review_checks": [
+    "Read fixed contract, derivation, report, implementation, tests, full numerical result and raw current/previous stdout/stderr.",
+    "Independently opened Khrapak2020 PDF pp.1–3, Eq6/cutoff/conditions; FS10 HTML sections5–6, Eq5/12 and instantaneous-deposition assumptions.",
+    "Checked reduced mass, SI conversion, sign, energy-clock Ei derivative and units.",
+    "Checked causal ramp power and cumulative formulas, derivative relation and cutoff number/energy/flux bookkeeping.",
+    "Checked imported parent source code and actual byte hashes/sizes against manifest without rerunning parent suites.",
+    "Compared current source/test hashes with execution result and current stdout/result agreement.",
+    "Read independent forward ODE and separate storage integral code plus their reported results; did not design or rerun scientific suite.",
+    "Checked fixed time series, convergence and sampled Bianchi source error against recorded scoped thresholds.",
+    "Read retained pre-cutoff-flux evidence; same scientific values/checks preserved and two new explicit flux outputs added.",
+    "Read final fixed-density guard and its negative test; reconstructing the pre-change bytes after removing only this delta reproduced the previously reviewed SHA-256 of both source and test.",
+    "Checked final execution receipt exit_code=0 and every receipt file hash/size; final stdout and numerical result agree. Receipt records owner-observed tool acknowledgement chunk 4e806a; reviewer did not rerun the suite.",
+    "Confirmed the immutable parent CR_PACKET copy matches imported bytes and SHA/git blob identity; independently evaluated the report's scale ratio 0.07049798025544476."
+  ],
+  "scientific_suite_executions_by_reviewer": 0,
+  "prior_PHYS01_suite_executions_by_reviewer": 0,
+  "review_completed_utc": "2026-10-10T11:21:36.210431+00:00",
+  "verdict": "PROMOTE_SCOPED",
+  "parent_commit": "e41e18873af438ef989ff44f505fe2665118fdec",
+  "parent_tree": "1cf4f13e561f30e0418a50342b3a58c8917fa4ff",
+  "fixed_target_files": {
+    "state/SCIENTIFIC_CONTRACT.json": {
+      "sha256": "125effef877f952499cb9f15b7655c51644c1221bdc07bcd7c58f60a7d25922a",
+      "size_bytes": 4332
+    },
+    "research/DERIVATION_KO.md": {
+      "sha256": "28c10b0c6e1c0b349c62cb6f2bd84680e9e904bff83dfe556d7320515850a88a",
+      "size_bytes": 11480
+    },
+    "REPORT_KO.md": {
+      "sha256": "e8be0d47777fb7ec1a8a41deb53f7e2eae30c228700b7cc4dfe5043c0d6e23c5",
+      "size_bytes": 10404
+    },
+    "src/causal_subthreshold.py": {
+      "sha256": "2259506b74c16027fda69b479cb1039b0888e19c5f8dcf400273892aba6f39f9",
+      "size_bytes": 11785
+    },
+    "tests/verify_causal.py": {
+      "sha256": "86e3a10cabfb490cd81053902c464042557897f04e6ffce8b0e5d5d249f17075",
+      "size_bytes": 10192
+    },
+    "evidence/NUMERICAL_RESULT.json": {
+      "sha256": "4e210fb042c8b4d92fd8577b30af78686500de8d7b7ea89be5baeea6564ee1f8",
+      "size_bytes": 13605
+    },
+    "evidence/verification_stdout.log": {
+      "sha256": "e136bdbdea0cde21b507bb6dcaeb29e84843b822b2e7d4343bef48ad163f2d79",
+      "size_bytes": 2444
+    },
+    "evidence/verification_stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "evidence/EXECUTION_RECEIPT.json": {
+      "sha256": "4300178c2eede985a001192e043708fddfb5cf2084b66958b4524bc9c53c3e51",
+      "size_bytes": 2068
+    },
+    "evidence/NUMERICAL_RESULT_PRE_CUTOFF_FLUX.json": {
+      "sha256": "aa750ea7b44ba0557e0478fd13c283b49393bdc2c3d0c369d214a7cea0b4e35f",
+      "size_bytes": 12845
+    },
+    "evidence/verification_pre_cutoff_flux_stdout.log": {
+      "sha256": "911b7a66e67631738f7343db163e0cdf3b521fb3549858ee35ddb68571cc5f60",
+      "size_bytes": 2315
+    },
+    "evidence/NUMERICAL_RESULT_PRE_FIXED_DENSITY.json": {
+      "sha256": "c902b29236568109a687076afac6f7c8a2cef9ef2477bfad55c6e7592d75d37c",
+      "size_bytes": 13605
+    },
+    "evidence/verification_pre_fixed_density_stdout.log": {
+      "sha256": "a5ab142ed246abb20c146f886ca511e988814929d7e17630e78fe24194ac71d4",
+      "size_bytes": 2444
+    },
+    "research/literature/SOURCE_AUDIT.md": {
+      "sha256": "2d1b20fcf5733f71648fec00b11be7ec6d267b7d0fcd66adf4891a00c577791b",
+      "size_bytes": 10763
+    },
+    "inputs/PARENT_SOURCE_MANIFEST.json": {
+      "sha256": "cdd712e7a62bc856e2dc8336fe4385cf85a316213bd5568554d41c585e198c39",
+      "size_bytes": 351
+    },
+    "inputs/PARENT_CR_PACKET.json": {
+      "sha256": "bb62be7ede32d43ece48d119903b542b2fc32f5be839cf40842ea559d02f0755",
+      "size_bytes": 1427
+    },
+    "inputs/PARENT_REFERENCE_PROVENANCE.json": {
+      "sha256": "1befa0c4268814363e549a1196fa20488859d6a4a92e514f166c773cf5bbf213",
+      "size_bytes": 494
+    }
+  },
+  "fixed_target_manifest_canonical_sha256": "b9b8c5d688b592db49e425cc236520d0467aeb6ed52400915e875536263fbc1d",
+  "manifest_hash_encoding": "SHA-256 of UTF-8 json.dumps(fixed_target_files,sort_keys=True,separators=(',',':'))",
+  "promotion_bound_to_scientific_payload": true,
+  "editorial_status_note": "REPORT_KO.md was reviewed at the recorded SHA. Replacing pending-review wording with this actual decision is an editorial closeout and does not require a new scientific review.",
+  "identity_scope_note": "Parent SHA-256, byte size and git blob SHA were checked against the imported parent manifest. No fresh remote checkout/remote commit proof was performed by this reviewer.",
+  "identity_delta_checks": {
+    "guard_only_core_delta_verified": true,
+    "guard_only_test_delta_verified": true,
+    "execution_receipt_matches_all_artifacts": true,
+    "final_numerical_time_series_and_original_checks_unchanged": true,
+    "parent_packet_sha256": "bb62be7ede32d43ece48d119903b542b2fc32f5be839cf40842ea559d02f0755"
+  },
+  "resolved_findings": [
+    {
+      "id": "DR-01",
+      "layer": "IMPLEMENTATION",
+      "original_severity": "NONBLOCKING_FOR_FIXED_RESULT",
+      "finding": "The original constructor accepted arbitrary positive electron density despite a fixed-study state contract.",
+      "owner_resolution": "Added exact canonical DEFAULT_NE_M3 restriction and n_e_m3=1.0 rejection test.",
+      "review_status": "CLOSED_BY_BOUNDED_DELTA_AND_RECORDED_EXECUTION",
+      "scientific_equations_changed": false
+    },
+    {
+      "id": "DR-02",
+      "layer": "EVIDENCE_AUTHORITY",
+      "original_severity": "DOCUMENTATION_PROVENANCE_GAP",
+      "finding": "The initial evidence directory did not preserve the process exit acknowledgement claimed in the report.",
+      "owner_resolution": "Added EXECUTION_RECEIPT.json for final actual tool execution, exit_code 0, command/cwd/chunk and artifact hashes.",
+      "review_status": "CLOSED_WITH_OWNER_OBSERVED_TOOL_RECEIPT",
+      "reviewer_independent_scientific_rerun": false
+    }
+  ],
+  "limits": [
+    {
+      "id": "L-CLASSICAL",
+      "status": "unresolved",
+      "text": "At 10 eV kappa/(hbar*v)=1.1664; strong classical/quantum asymptotic separation is absent. This is a conditional classical leading-log evaluation, not a physical accuracy certificate."
+    },
+    {
+      "id": "L-THERMAL",
+      "status": "unresolved",
+      "text": "At the 0.1 eV cutoff E/(k_B*T)=11.6045; no thermal equilibrium or complete bath/neutral/ion equilibration is established. Cutoff residual is not heat."
+    },
+    {
+      "id": "L-BATH",
+      "status": "conjectural",
+      "text": "Prescribed bath and Coulomb-only drift are closure assumptions. Neutral energy transfer, electron-ion exchange, Fokker-Planck diffusion, magnetic effects and actual plasma feedback are omitted. The neutral-frequency condition is not an independently quantified physical admission."
+    },
+    {
+      "id": "L-LOCAL",
+      "status": "numerically checked",
+      "text": "Ramp source is the leading local H*t approximation. The 6.929996788504416e-7 difference is a three-time source-coefficient sample comparison, not a uniform interval error bound or exact Bianchi electron history."
+    },
+    {
+      "id": "L-SOURCE",
+      "status": "unresolved",
+      "text": "Only electrons born directly at 0.1–10 eV in 1–4 MeV proton impact collisions are included. Higher-energy cascade feed, photons, near-thermal matching and remaining proton/electron tails are unresolved."
+    },
+    {
+      "id": "L-VALIDATION",
+      "status": "implementation-verified",
+      "text": "The independent ODE shares the physical closure/constants; source checks share inherited inputs. Agreement establishes bounded implementation/numerical consistency, not external physical validation. The integrated ledger by subtraction alone would be insufficient; separate ODE storage integrals provide an additional check at four cases."
+    },
+    {
+      "id": "L-COMPARISON",
+      "status": "derived",
+      "text": "The 0.07049798025544476 comparison uses parent terminal heat as a scale. It is neither the complete heating suppression nor a rigorous lower bound."
+    }
+  ],
+  "gate_assessment": {
+    "evidence": "SUFFICIENT_FOR_SCOPED_RESEARCH_COMPONENT",
+    "physical_and_mathematical_validity": "DERIVATION_AND_IMPLEMENTATION_CONSISTENT_WITH_DECLARED_CLOSURE",
+    "novelty": "NOT_ESTABLISHED_AND_NOT_REQUIRED_FOR_THIS_NEXT_RESEARCH_COMPONENT",
+    "testability": "ACTUAL_RECORDED_ODE_QUADRATURE_SOURCE_BOUNDARY_CHECKS",
+    "robustness": "BOUNDED_FIXED_STATE_AND_SAMPLED_TIMES_ONLY",
+    "tractability": "NEW_LIGHTWEIGHT_VERIFICATION_RECORDED; NO_INHERITED_SUITE_RERUN",
+    "assumptions": "EXPLICIT_AND_NOT_PROMOTED_TO_GENERAL_PHYSICAL_ACCURACY",
+    "original_motivation": "PRESERVED: CR_SOURCE_TO_CAUSAL_SECONDARY_STOPPING"
+  },
+  "accepted_numerical_summary": {
+    "time_s": 10000000000,
+    "stopping_heat_power_J_m3_s": 2.4153106337927854e-44,
+    "instantaneous_heat_to_terminal_selected_ratio": 0.22076456108841425,
+    "cumulative_deposited_fraction": 0.1557633958967886,
+    "active_kinetic_fraction": 0.8388935286567958,
+    "cutoff_residual_fraction": 0.005343075446415363,
+    "parent_terminal_heat_scale_ratio": 0.07049798025544476,
+    "recorded_checks_passed": 9,
+    "recorded_checks_total": 9,
+    "owner_observed_exit_code": 0,
+    "reviewer_scientific_rerun_performed": false
+  },
+  "primary_sources_independently_opened": [
+    {
+      "url": "https://arxiv.org/pdf/2006.00128",
+      "version": "v1",
+      "read_scope": "pp.1–3; Eq6, Eq11, reduced mass, cutoff and collisionless/superthermal conditions",
+      "relation": "supports_and_limits"
+    },
+    {
+      "url": "https://arxiv.org/html/0910.4410v1",
+      "version": "v1",
+      "read_scope": "sections5–6; Eq5, Eq12, time-scale and instantaneous-deposition assumptions",
+      "relation": "supports_and_limits"
+    }
+  ],
+  "next_action": "Owner may close CR-PHYS02A as a scoped research component and continue the declared CR-PHYS02B rate/branching work. No production receiver/history admission, main merge or external publication authority is conferred by this scientific decision."
+}
+

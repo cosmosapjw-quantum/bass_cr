@@ -1,0 +1,196 @@
+{
+  "schema": "cr-delay-source-audit.v1",
+  "task": "CR-PHYS02-DELAY",
+  "role": "independent evidence acquisition and source-condition audit; no candidate design or final decision",
+  "date_utc": "2026-10-10",
+  "model_label": "GPT-6 Astra",
+  "model_label_source": "host developer declaration",
+  "model_switch_performed": false,
+  "sources": [
+    {
+      "id": "FS10",
+      "author": "S. R. Furlanetto and S. J. Stoever",
+      "title": "Secondary ionization and heating by fast electrons",
+      "arxiv_version": "0910.4410v1",
+      "url": "https://arxiv.org/pdf/0910.4410v1",
+      "doi": "10.1111/j.1365-2966.2010.16401.x",
+      "read_scope": "PDF pp2-5 sections2-6.3; p10 table/code discussion and references; screenshots pp4-5; arXiv metadata",
+      "web_refs": [
+        "turn2view0",
+        "turn3view0",
+        "turn3view2",
+        "turn4view0",
+        "turn4view1",
+        "turn18view1"
+      ],
+      "claim_supports": [
+        "terminal_yields_not_time_resolved",
+        "local_loss_timescale_E_over_b",
+        "1keV_is_atomic_cross_section_switch",
+        "density_independent_yields_do_not_imply_density_independent_times",
+        "T100K_not_Fs10_fixed_MC_input"
+      ],
+      "equations": [
+        5,
+        8,
+        9,
+        12
+      ],
+      "limits": [
+        "Eq12 high-speed quantum expression states energy greater than about13.7eV; footnote5 discusses low-energy approximation",
+        "Eq9 uses Bethe approximation and freezes its logarithmic factor at1keV",
+        "Compact zeta_e density law and explicit plasma-frequency formula disagree algebraically",
+        "Printed Eq11 was not adopted as a computational formula",
+        "MC actual implementation identity not acquired in this audit"
+      ]
+    },
+    {
+      "id": "K20",
+      "author": "Sergey A. Khrapak",
+      "title": "Reduction of the Coulomb logarithm due to electron-neutral collisions",
+      "arxiv_version": "2006.00128v1",
+      "url": "https://arxiv.org/pdf/2006.00128v1",
+      "doi": "10.1103/PhysRevE.101.061202",
+      "read_scope": "PDF pp1-3 Eq4-6 and11; assumptions; arXiv metadata",
+      "web_refs": [
+        "turn17view0",
+        "turn18view0"
+      ],
+      "claim_supports": [
+        "classical_superthermal_leading_log_stopping_closure",
+        "neutral_collision_correction_negligible_when_nu_less_omega_p"
+      ],
+      "equations": [
+        4,
+        6,
+        11
+      ],
+      "limits": [
+        "ideal electron gas; immobile neutralizing background",
+        "classical superthermal test particle; constant neutral collision frequency",
+        "effect of electron deceleration on induced force neglected",
+        "electron-ion momentum transfer excluded",
+        "Eq11 binary momentum-force estimate has8pi whereas Eq6 stopping formula has4pi",
+        "does not supply whole-cascade delay or certified thermalization at cutoff"
+      ]
+    },
+    {
+      "id": "CCC",
+      "author": "CCC database authors",
+      "title": "CCC Data Base for atomic targets",
+      "url": "https://atom.curtin.edu.au/CCC-WWW/",
+      "read_scope": "official landing page; H original paper abstract only",
+      "web_refs": [
+        "turn5view0",
+        "turn6view3"
+      ],
+      "claim_supports": [
+        "primary_atomic_cross_section_acquisition_path"
+      ],
+      "limits": [
+        "current H/He archives are2026 versions and not demonstrated FS10 original bytes",
+        "ZIP contents and numerical cross sections not acquired"
+      ]
+    },
+    {
+      "id": "NIST",
+      "author": "NIST Electron-Impact Cross Section Database",
+      "title": "Introduction, formulae, H/He species pages",
+      "url": "https://physics.nist.gov/PhysRefData/Ionization/intro.html",
+      "equation_url": "https://physics.nist.gov/PhysRefData/Ionization/Eqs/latex.html",
+      "species_urls": [
+        "https://physics.nist.gov/cgi-bin/Ionization/atom.php?element=H",
+        "https://physics.nist.gov/cgi-bin/Ionization/atom.php?element=He"
+      ],
+      "read_scope": "introduction; Latex equations1-6; species thresholds; references",
+      "web_refs": [
+        "turn9view2",
+        "turn11view3",
+        "turn6view0",
+        "turn6view1",
+        "turn6view2"
+      ],
+      "claim_supports": [
+        "electron_impact_total_and_differential_formulas_available",
+        "atomic_ionization_thresholds"
+      ],
+      "limits": [
+        "actual total-data endpoints returned500",
+        "BEB/BED is a different model from CCC",
+        "no orbital parameters or numerical rates adopted"
+      ]
+    }
+  ],
+  "derived_source_issues": [
+    {
+      "id": "FS12_ZETA",
+      "status": "derived",
+      "relation": "limits",
+      "formula": "ln(2E/(hbar*omega_p)) == ln(4E/zeta_e) requires zeta_e=2*hbar*omega_p proportional sqrt(n_e); printed compact zeta proportional n_e cannot be identical",
+      "scope": "arxiv_v1_printed_internal_inconsistency",
+      "not_claimed": [
+        "actual MC wrong",
+        "table correction identified",
+        "published erratum existence"
+      ]
+    },
+    {
+      "id": "K20_CLASSICAL_MARGIN",
+      "status": "derived",
+      "relation": "limits",
+      "formula": "k_C/(hbar*v)=sqrt(Rydberg/E); at10eV about1.17, not asymptotically large",
+      "scope": "root proposed conditional1..10eV subcomponent"
+    },
+    {
+      "id": "CUTOFF_NOT_THERMALIZED",
+      "status": "derived",
+      "relation": "limits",
+      "formula": "Ecut/(kBT)=0.1/(8.617333262e-5*100)=11.60",
+      "scope": "Ecut=.1eV residual must remain explicit; no full thermalization claim"
+    },
+    {
+      "id": "CLOCK_UNIDENTIFIABLE",
+      "status": "derived",
+      "relation": "limits",
+      "statement": "Integrated terminal yields do not identify a time kernel or its moments; imposing exponential delay is an additional assumption."
+    },
+    {
+      "id": "EQUAL_MASS_BINARY_ENERGY_MOMENTUM",
+      "status": "derived",
+      "relation": "supports",
+      "formula": "For a cold equal-mass target, delta_p_parallel=m*v*(1-cos(chi))/2 and delta_E=m*v^2*(1-cos(chi))/4, hence energy_loss_rate=(v/2)*binary_momentum_drag. Eq11 coefficient8pi thus yields energy-loss coefficient4pi, consistent with v*Eq6.",
+      "scope": "separate two-body kinematic check, not validation of full Fokker-Planck operator"
+    }
+  ],
+  "blocked_primary_reading": [
+    {
+      "url": "https://doi.org/10.1016/0032-0633(71)90071-7",
+      "detail": "Schunk-Hays1971 publisher HTML/PDF403"
+    },
+    {
+      "url": "https://deepblue.lib.umich.edu/bitstream/2027.42/33734/1/0000248.pdf",
+      "detail": "repository access failed"
+    },
+    {
+      "url": "https://deepblue.lib.umich.edu/bitstream/2027.42/33736/1/0000251.pdf",
+      "detail": "low-energy note repository access failed"
+    }
+  ],
+  "contextual_not_adopted": {
+    "url": "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2011JA017280",
+    "web_ref": "turn14view0",
+    "scope": "section3 para17 thermal-electron collision discussion",
+    "reason": "Swartz empirical stopping formula calibration at IGM density unverified"
+  },
+  "diagnostic": {
+    "source_file": "coulomb_timescale_diagnostic.py",
+    "result_file": "coulomb_timescale_diagnostic.json",
+    "command": "python3 delay_literature/coulomb_timescale_diagnostic.py",
+    "actual_exit_code": 0,
+    "kind": "local Coulomb-only E/b; not total cascade"
+  },
+  "decisions": {
+    "candidate_design_performed": false,
+    "final_promotion_decision_performed": false
+  }
+}

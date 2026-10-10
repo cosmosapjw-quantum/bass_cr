@@ -1,0 +1,34 @@
+{
+  "schema": "cr-phys02a-handoff.v1",
+  "task": "CR-PHYS02A-CAUSAL-SUBTHRESHOLD",
+  "state": "PROMOTE_SCOPED",
+  "parent_delay_admission": false,
+  "production_history": "HOLD",
+  "new_branch": "research/cr-phys02a-causal-subthreshold-20261010",
+  "base_branch": "research/cr-physical-provider-20261010",
+  "base_commit": "e41e18873af438ef989ff44f505fe2665118fdec",
+  "read_first": [
+    "REPORT_KO.md",
+    "START_CODEX_HANDOFF_KO.md",
+    "state/SCIENTIFIC_CONTRACT.json",
+    "state/CLAIM_GATE.json",
+    "review/INDEPENDENT_DECISION.json",
+    "evidence/EXECUTION_RECEIPT.json",
+    "DAG.json"
+  ],
+  "next_minimal_action": "CR-PHYS02B-RATE-BRANCHING: source-pinned10–1000eV absolute collision rates and causal generator with downward boundary flux",
+  "implemented_entrypoint": "src/causal_subthreshold.py",
+  "verification_entrypoint": "tests/verify_causal.py",
+  "unchanged_prior_suites_rerun": false,
+  "harness": "GPT-6 Astra research/coding v4.0.0",
+  "original_motivation": "real CR proton source to causal gas deposition",
+  "prohibited_inferences": [
+    "full heat suppression from7.05% scale comparison",
+    "thermalization from0.1eV cutoff",
+    "full secondary delay admission",
+    "physical error certificate from quadrature or ODE agreement",
+    "production receiver/history admission"
+  ],
+  "publication_receipts": "publication/",
+  "backup_verification_policy": "ordinary create-only R1; upload verification is not restore verification"
+}
