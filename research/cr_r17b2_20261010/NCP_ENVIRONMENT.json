@@ -1,0 +1,224 @@
+{
+  "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "initial_cpu_affinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63
+  ],
+  "execution": {
+    "coordinator_cpu": 0,
+    "worker_cpu": 1,
+    "memory_reserve_bytes": 21474836480,
+    "worker_RLIMIT_AS": 111268560896,
+    "host_mem_total_bytes": 135050559488,
+    "host_mem_available_bytes": 132743397376,
+    "cgroup_ancestors": [
+      {
+        "path": "/sys/fs/cgroup/user.slice/user-0.slice/session-2.scope",
+        "cpu.max": "max 100000",
+        "memory.max": "max",
+        "memory.current": "4100861952"
+      },
+      {
+        "path": "/sys/fs/cgroup/user.slice/user-0.slice",
+        "cpu.max": "max 100000",
+        "memory.max": "max",
+        "memory.current": "4246609920"
+      },
+      {
+        "path": "/sys/fs/cgroup/user.slice",
+        "cpu.max": "max 100000",
+        "memory.max": "max",
+        "memory.current": "4246745088"
+      },
+      {
+        "path": "/sys/fs/cgroup",
+        "cpuset.cpus.effective": "0-63"
+      }
+    ],
+    "commands": [
+      {
+        "name": "TESTS",
+        "command": [
+          "/usr/bin/time",
+          "-v",
+          "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "/root/bass_cr_ncp_r17b2/research/cr_r17b2_20261010/tests"
+        ],
+        "exit": 0,
+        "elapsed_s": 0.3246317119997002,
+        "log": "/root/bass_cr_r17b2_recovery_20261010/final_fresh/logs/TESTS.log"
+      },
+      {
+        "name": "MUTANTS",
+        "command": [
+          "/usr/bin/time",
+          "-v",
+          "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+          "-B",
+          "/root/bass_cr_ncp_r17b2/research/cr_r17b2_20261010/mutation_checks.py",
+          "--output",
+          "/root/bass_cr_r17b2_recovery_20261010/final_fresh/mutants"
+        ],
+        "exit": 0,
+        "elapsed_s": 0.8084829849999551,
+        "log": "/root/bass_cr_r17b2_recovery_20261010/final_fresh/logs/MUTANTS.log"
+      },
+      {
+        "name": "BOUNDS",
+        "command": [
+          "/usr/bin/time",
+          "-v",
+          "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+          "-B",
+          "/root/bass_cr_ncp_r17b2/research/cr_r17b2_20261010/run_bounds.py",
+          "--output",
+          "/root/bass_cr_r17b2_recovery_20261010/final_fresh/results/BOUNDS.json"
+        ],
+        "exit": 0,
+        "elapsed_s": 0.09598209999967366,
+        "log": "/root/bass_cr_r17b2_recovery_20261010/final_fresh/logs/BOUNDS.log"
+      },
+      {
+        "name": "MPFR_BOUNDS",
+        "command": [
+          "/usr/bin/time",
+          "-v",
+          "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+          "-B",
+          "/root/bass_cr_ncp_r17b2/research/cr_r17b2_20261010/mpfr_bounds.py",
+          "--output",
+          "/root/bass_cr_r17b2_recovery_20261010/final_fresh/results/MPFR_BOUNDS.json"
+        ],
+        "exit": 0,
+        "elapsed_s": 0.1422283819997574,
+        "log": "/root/bass_cr_r17b2_recovery_20261010/final_fresh/logs/MPFR_BOUNDS.log"
+      },
+      {
+        "name": "INDEPENDENT",
+        "command": [
+          "/usr/bin/time",
+          "-v",
+          "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+          "-B",
+          "/root/bass_cr_ncp_r17b2/research/cr_r17b2_20261010/independent_check.py",
+          "--output",
+          "/root/bass_cr_r17b2_recovery_20261010/final_fresh/results/INDEPENDENT.json"
+        ],
+        "exit": 0,
+        "elapsed_s": 0.42304479999984324,
+        "log": "/root/bass_cr_r17b2_recovery_20261010/final_fresh/logs/INDEPENDENT.log"
+      },
+      {
+        "name": "DIAGNOSTIC_N8",
+        "command": [
+          "/usr/bin/time",
+          "-v",
+          "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+          "-B",
+          "/root/bass_cr_ncp_r17b2/research/cr_r17b2_20261010/diagnostic.py",
+          "--n",
+          "8",
+          "--output",
+          "/root/bass_cr_r17b2_recovery_20261010/final_fresh/results/DIAGNOSTIC_N8.json"
+        ],
+        "exit": 0,
+        "elapsed_s": 9.018096454999977,
+        "log": "/root/bass_cr_r17b2_recovery_20261010/final_fresh/logs/DIAGNOSTIC_N8.log"
+      },
+      {
+        "name": "DIAGNOSTIC_N16",
+        "command": [
+          "/usr/bin/time",
+          "-v",
+          "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+          "-B",
+          "/root/bass_cr_ncp_r17b2/research/cr_r17b2_20261010/diagnostic.py",
+          "--n",
+          "16",
+          "--output",
+          "/root/bass_cr_r17b2_recovery_20261010/final_fresh/results/DIAGNOSTIC_N16.json"
+        ],
+        "exit": 0,
+        "elapsed_s": 14.870646440999735,
+        "log": "/root/bass_cr_r17b2_recovery_20261010/final_fresh/logs/DIAGNOSTIC_N16.log"
+      }
+    ]
+  },
+  "no_fast_math": true,
+  "no_uncontrolled_parallel_reductions": true,
+  "thread_environment": {
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1"
+  },
+  "NCP64_scaling_claim": false
+}

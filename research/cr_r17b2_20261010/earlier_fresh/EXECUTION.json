@@ -1,0 +1,105 @@
+{
+  "coordinator_cpu": 0,
+  "worker_cpu": 1,
+  "memory_reserve_bytes": 21474836480,
+  "worker_RLIMIT_AS": 113575723008,
+  "host_mem_total_bytes": 135050559488,
+  "commands": [
+    {
+      "name": "TESTS",
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/root/bass_cr_ncp_r17b2/research/cr_r17b2_20261010/tests"
+      ],
+      "exit": 0,
+      "elapsed_s": 0.34728516999985004,
+      "log": "/root/bass_cr_r17b2_recovery_20261010/fresh/logs/TESTS.log"
+    },
+    {
+      "name": "MUTANTS",
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "/root/bass_cr_ncp_r17b2/research/cr_r17b2_20261010/mutation_checks.py",
+        "--output",
+        "/root/bass_cr_r17b2_recovery_20261010/fresh/mutants"
+      ],
+      "exit": 0,
+      "elapsed_s": 0.8338913120001052,
+      "log": "/root/bass_cr_r17b2_recovery_20261010/fresh/logs/MUTANTS.log"
+    },
+    {
+      "name": "BOUNDS",
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "/root/bass_cr_ncp_r17b2/research/cr_r17b2_20261010/run_bounds.py",
+        "--output",
+        "/root/bass_cr_r17b2_recovery_20261010/fresh/results/BOUNDS.json"
+      ],
+      "exit": 0,
+      "elapsed_s": 0.09817124200026228,
+      "log": "/root/bass_cr_r17b2_recovery_20261010/fresh/logs/BOUNDS.log"
+    },
+    {
+      "name": "INDEPENDENT",
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "/root/bass_cr_ncp_r17b2/research/cr_r17b2_20261010/independent_check.py",
+        "--output",
+        "/root/bass_cr_r17b2_recovery_20261010/fresh/results/INDEPENDENT.json"
+      ],
+      "exit": 0,
+      "elapsed_s": 0.42850579099967945,
+      "log": "/root/bass_cr_r17b2_recovery_20261010/fresh/logs/INDEPENDENT.log"
+    },
+    {
+      "name": "DIAGNOSTIC_N8",
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "/root/bass_cr_ncp_r17b2/research/cr_r17b2_20261010/diagnostic.py",
+        "--n",
+        "8",
+        "--output",
+        "/root/bass_cr_r17b2_recovery_20261010/fresh/results/DIAGNOSTIC_N8.json"
+      ],
+      "exit": 0,
+      "elapsed_s": 8.87421896800015,
+      "log": "/root/bass_cr_r17b2_recovery_20261010/fresh/logs/DIAGNOSTIC_N8.log"
+    },
+    {
+      "name": "DIAGNOSTIC_N16",
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "/root/bass_cr_ncp_r17b2/research/cr_r17b2_20261010/diagnostic.py",
+        "--n",
+        "16",
+        "--output",
+        "/root/bass_cr_r17b2_recovery_20261010/fresh/results/DIAGNOSTIC_N16.json"
+      ],
+      "exit": 0,
+      "elapsed_s": 14.742673916000058,
+      "log": "/root/bass_cr_r17b2_recovery_20261010/fresh/logs/DIAGNOSTIC_N16.log"
+    }
+  ]
+}

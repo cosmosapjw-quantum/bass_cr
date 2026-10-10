@@ -1,0 +1,113 @@
+{
+  "status": "ALL_9_MUTANTS_REJECTED",
+  "cases": [
+    {
+      "name": "wrong_source_bytes",
+      "exit": 1,
+      "expected": "focused assertion failure",
+      "test": "test_backend.BackendTests.test_source_bytes",
+      "command": [
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "-c",
+        "import sys,unittest\nsys.path.insert(0,'/root/bass_cr_ncp_r17b2/research/cr_r17b2_20261010/tests')\nimport test_backend as t\noriginal=t.load_pins; t.load_pins=lambda **kw:original()\nsuite=unittest.TestSuite([t.BackendTests('test_source_bytes')])\nr=unittest.TextTestRunner(verbosity=2).run(suite)\nsys.exit(0 if r.wasSuccessful() else 1)\n"
+      ]
+    },
+    {
+      "name": "wrong_clock",
+      "exit": 1,
+      "expected": "focused assertion failure",
+      "test": "test_backend.BackendTests.test_clock",
+      "command": [
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "-c",
+        "import sys,unittest\nsys.path.insert(0,'/root/bass_cr_ncp_r17b2/research/cr_r17b2_20261010/tests')\nimport test_backend as t\noriginal=t.load_pins; t.load_pins=lambda **kw:original()\nsuite=unittest.TestSuite([t.BackendTests('test_clock')])\nr=unittest.TextTestRunner(verbosity=2).run(suite)\nsys.exit(0 if r.wasSuccessful() else 1)\n"
+      ]
+    },
+    {
+      "name": "lost_mass_mismatch",
+      "exit": 1,
+      "expected": "focused assertion failure",
+      "test": "test_backend.BackendTests.test_mass_mismatch",
+      "command": [
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "-c",
+        "import sys,unittest\nsys.path.insert(0,'/root/bass_cr_ncp_r17b2/research/cr_r17b2_20261010/tests')\nimport test_backend as t\noriginal=t.load_pins; t.load_pins=lambda **kw:dict(original(**kw),mass_mismatch=0)\nsuite=unittest.TestSuite([t.BackendTests('test_mass_mismatch')])\nr=unittest.TextTestRunner(verbosity=2).run(suite)\nsys.exit(0 if r.wasSuccessful() else 1)\n"
+      ]
+    },
+    {
+      "name": "incorrect_local_global",
+      "exit": 1,
+      "expected": "focused assertion failure",
+      "test": "test_backend.BackendTests.test_local_global",
+      "command": [
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "-c",
+        "import sys,unittest\nsys.path.insert(0,'/root/bass_cr_ncp_r17b2/research/cr_r17b2_20261010/tests')\nimport test_backend as t\nt.local_derivatives=lambda v,h,total:v\nsuite=unittest.TestSuite([t.BackendTests('test_local_global')])\nr=unittest.TextTestRunner(verbosity=2).run(suite)\nsys.exit(0 if r.wasSuccessful() else 1)\n"
+      ]
+    },
+    {
+      "name": "unreported_kink",
+      "exit": 1,
+      "expected": "focused assertion failure",
+      "test": "test_backend.BackendTests.test_unreported_kink",
+      "command": [
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "-c",
+        "import sys,unittest\nsys.path.insert(0,'/root/bass_cr_ncp_r17b2/research/cr_r17b2_20261010/tests')\nimport test_backend as t\nt.require_proof=lambda e:None\nsuite=unittest.TestSuite([t.BackendTests('test_unreported_kink')])\nr=unittest.TextTestRunner(verbosity=2).run(suite)\nsys.exit(0 if r.wasSuccessful() else 1)\n"
+      ]
+    },
+    {
+      "name": "nominal_only_homotopy",
+      "exit": 1,
+      "expected": "focused assertion failure",
+      "test": "test_backend.BackendTests.test_nominal_only",
+      "command": [
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "-c",
+        "import sys,unittest\nsys.path.insert(0,'/root/bass_cr_ncp_r17b2/research/cr_r17b2_20261010/tests')\nimport test_backend as t\nt.require_proof=lambda e:None\nsuite=unittest.TestSuite([t.BackendTests('test_nominal_only')])\nr=unittest.TextTestRunner(verbosity=2).run(suite)\nsys.exit(0 if r.wasSuccessful() else 1)\n"
+      ]
+    },
+    {
+      "name": "frozen_gas_replacement",
+      "exit": 1,
+      "expected": "focused assertion failure",
+      "test": "test_backend.BackendTests.test_frozen_gas",
+      "command": [
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "-c",
+        "import sys,unittest\nsys.path.insert(0,'/root/bass_cr_ncp_r17b2/research/cr_r17b2_20261010/tests')\nimport test_backend as t\nt.require_proof=lambda e:None\nsuite=unittest.TestSuite([t.BackendTests('test_frozen_gas')])\nr=unittest.TextTestRunner(verbosity=2).run(suite)\nsys.exit(0 if r.wasSuccessful() else 1)\n"
+      ]
+    },
+    {
+      "name": "lost_survival_memory",
+      "exit": 1,
+      "expected": "focused assertion failure",
+      "test": "test_backend.BackendTests.test_memory_feedback",
+      "command": [
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "-c",
+        "import sys,unittest\nsys.path.insert(0,'/root/bass_cr_ncp_r17b2/research/cr_r17b2_20261010/tests')\nimport test_backend as t\nt.memory_response=lambda p,m:t.I(0)\nsuite=unittest.TestSuite([t.BackendTests('test_memory_feedback')])\nr=unittest.TextTestRunner(verbosity=2).run(suite)\nsys.exit(0 if r.wasSuccessful() else 1)\n"
+      ]
+    },
+    {
+      "name": "lost_companion_feedback",
+      "exit": 1,
+      "expected": "focused assertion failure",
+      "test": "test_functional.FunctionalTests.test_companion_current_response_participates",
+      "command": [
+        "/root/bass_cr_r17b2_recovery_20261010/venv/bin/python",
+        "-B",
+        "-c",
+        "import sys,unittest\nsys.path.insert(0,'/root/bass_cr_ncp_r17b2/research/cr_r17b2_20261010/tests')\nimport test_functional as t\noriginal=t.tangent_functional; t.tangent_functional=lambda *a:original(*a[:-1],lambda f:(t.I(0),t.I(0)))\nsuite=unittest.TestSuite([t.FunctionalTests('test_companion_current_response_participates')])\nr=unittest.TextTestRunner(verbosity=2).run(suite)\nsys.exit(0 if r.wasSuccessful() else 1)\n"
+      ]
+    }
+  ]
+}

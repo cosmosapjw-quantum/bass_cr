@@ -1,0 +1,21 @@
+test_local_global (test_backend.BackendTests.test_local_global) ... FAIL
+
+======================================================================
+FAIL: test_local_global (test_backend.BackendTests.test_local_global)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/root/bass_cr_ncp_r17b2/research/cr_r17b2_20261010/tests/test_backend.py", line 15, in test_local_global
+    self.assertEqual([float(v.lo) for v in local_derivatives([I(1)]*5,2,10)],[1,.2,.04,.008,.0016])
+AssertionError: Lists differ: [1.0, 1.0, 1.0, 1.0, 1.0] != [1, 0.2, 0.04, 0.008, 0.0016]
+
+First differing element 1:
+1.0
+0.2
+
+- [1.0, 1.0, 1.0, 1.0, 1.0]
++ [1, 0.2, 0.04, 0.008, 0.0016]
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (failures=1)
