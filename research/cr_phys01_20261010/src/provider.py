@@ -14,10 +14,9 @@ import math
 import numpy as np
 from injection import InjectionModel, transport_population, EV_J
 import rudd
-from fs10 import FS10Table, IONIZATION_EV, PROJECTION_REL_BOUND, DATA_RELATIVE
+from fs10 import FS10Table, IONIZATION_EV, PROJECTION_REL_BOUND
 
 ROOT = Path(__file__).resolve().parents[1]
-PROVIDER_ID = 'CRP_L17_MD14_RUDD_FS10_XI001_CONDITIONAL_V1'
 CHANNELS = ['heat_eV','raw_heat_eV','excitation_eV','source_projection_correction_eV',
             'threshold_interpolation_correction_eV','HI','HeI','HeII','lya_count']
 
@@ -46,10 +45,14 @@ def convolve_secondary(proton_eV, target, table):
                                        left[None,:], right[None,:])
     return moments['sigma_m2'] @ intercept + moments['secondary_eV_m2'] @ slope
 
-def source_manifest(scenario):
+def provider_id_for_xi(xi):
+    return f'CRP_L17_MD14_RUDD_FS10_XI{round(100*xi):03d}_CONDITIONAL_V1'
+
+
+def source_manifest(scenario, table):
     files = [Path('src')/n for n in ('injection.py','rudd.py','fs10.py','provider.py')]
-    files += [Path(DATA_RELATIVE)]
-    return {'schema':'cr-source-manifest.v1', 'provider_id':PROVIDER_ID,
+    files += [Path(table.relative_path)]
+    return {'schema':'cr-source-manifest.v1', 'provider_id':provider_id_for_xi(scenario['xi']),
             'files':{str(p):hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in files},
             'scenario':scenario,
             'sources':{'injection':'https://arxiv.org/abs/1703.09337v1',
@@ -64,17 +67,17 @@ def source_manifest(scenario):
 def canonical_hash(obj):
     return hashlib.sha256(json.dumps(obj,sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest()
 
-def build_packet(energy_order=48, age_order=8, mu_order=8):
+def build_packet(energy_order=48, age_order=8, mu_order=8, xi=0.01):
     # Explicit local scenario: no claim that a cold xi=.01 gas at z8 is a
     # fitted cosmological solution. nH is a declared proper density parameter.
     scenario = {'z_source':8.0,'dt_s':1e10,'H_s':3.3e-17,'shear_s':3.3e-18,
-                'n_h_m3':140.0,'y_he_mass_fraction':.248,'xi':.01,'temperature_k':100.0,
+                'n_h_m3':140.0,'y_he_mass_fraction':.248,'xi':float(xi),'temperature_k':100.0,
                 'active_proton_eV':[1e6,4e6],
                 'energy_order':energy_order,'age_order':age_order,'mu_order':mu_order}
     model = InjectionModel(z_snapshot=scenario['z_source'])
     pop = transport_population(model,scenario['dt_s'],scenario['H_s'],scenario['shear_s'],
                                age_order=age_order,mu_order=mu_order,energy_order=energy_order)
-    table = FS10Table()
+    table = FS10Table(scenario['xi'])
     K,N = pop['nodes']['kinetic_eV'],pop['nodes']['number_density_m3']
     nH = scenario['n_h_m3']; Y = scenario['y_he_mass_fraction']; nHe=nH*Y/(4*(1-Y))
     rates=[]; vectors=[]; losses=[]; sec_powers=[]; thin=[]
@@ -102,8 +105,8 @@ def build_packet(energy_order=48, age_order=8, mu_order=8):
     bound=PROJECTION_REL_BOUND*secondary_power
     if abs(correction)>bound or corrected_heat<0 or sum(thin)>1e-3:
         raise ValueError('PROJECTION_OR_THIN_LOSS_DOMAIN')
-    manifest=source_manifest(scenario)
-    packet={'provider_id':PROVIDER_ID,'manifest_sha256':canonical_hash(manifest),
+    manifest=source_manifest(scenario, table)
+    packet={'provider_id':provider_id_for_xi(scenario['xi']),'manifest_sha256':canonical_hash(manifest),
             'closure':'FS10_LOCAL_DEPOSITION_PROMPT_EXCITATION_AND_CONTINUUM_ESCAPE',
             'gas':{'time_s':scenario['dt_s'],'n_h_m3':nH,'n_he_m3':nHe,
                    'xi':scenario['xi'],'temperature_k':scenario['temperature_k'],

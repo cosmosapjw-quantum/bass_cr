@@ -1,0 +1,30 @@
+test_characteristic_continuum_arrival_and_drag_moments (test_causal_generator.CausalGeneratorTests.test_characteristic_continuum_arrival_and_drag_moments) ... ok
+test_density_helium_and_clock_units (test_causal_generator.CausalGeneratorTests.test_density_helium_and_clock_units) ... ok
+test_domain_fail_closed (test_causal_generator.CausalGeneratorTests.test_domain_fail_closed) ... ok
+test_generator_number_energy_and_metzler (test_causal_generator.CausalGeneratorTests.test_generator_number_energy_and_metzler) ... ok
+test_impulse_causality_positive_evolution_and_ledgers (test_causal_generator.CausalGeneratorTests.test_impulse_causality_positive_evolution_and_ledgers) ... FAIL
+test_nested_grid (test_causal_generator.CausalGeneratorTests.test_nested_grid) ... ok
+test_off_is_exact_and_cutoff_is_not_heat (test_causal_generator.CausalGeneratorTests.test_off_is_exact_and_cutoff_is_not_heat) ... FAIL
+test_pair_branching_and_cutoff_moments (test_causal_generator.CausalGeneratorTests.test_pair_branching_and_cutoff_moments) ... ok
+test_source_bytes_and_raw_rate_parity (test_causal_generator.CausalGeneratorTests.test_source_bytes_and_raw_rate_parity) ... ok
+
+======================================================================
+FAIL: test_impulse_causality_positive_evolution_and_ledgers (test_causal_generator.CausalGeneratorTests.test_impulse_causality_positive_evolution_and_ledgers)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/cosmosapjw/bass_cr_worktrees/cr-physical-provider-20261010/research/cr_phys02b_delay_20261010/tests/test_causal_generator.py", line 110, in test_impulse_causality_positive_evolution_and_ledgers
+    self.assertAlmostEqual(float(slope[-3] / c.coulomb_loss(100., self.g.gas)),
+AssertionError: 0.9999895903122192 != 1.0 within 5 places (1.0409687780765786e-05 difference)
+
+======================================================================
+FAIL: test_off_is_exact_and_cutoff_is_not_heat (test_causal_generator.CausalGeneratorTests.test_off_is_exact_and_cutoff_is_not_heat)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/cosmosapjw/bass_cr_worktrees/cr-physical-provider-20261010/research/cr_phys02b_delay_20261010/tests/test_causal_generator.py", line 133, in test_off_is_exact_and_cutoff_is_not_heat
+    self.assertTrue(np.array_equal(y, cutoff))
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 9 tests in 4.472s
+
+FAILED (failures=2)

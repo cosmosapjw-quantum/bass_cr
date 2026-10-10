@@ -1,0 +1,7 @@
+# Failure preservation
+
+First campaign exited 0 under an insufficient aggregate moment predicate. After the first campaign, before independent review, the validator changed from max(abs(actual-expected))/max(abs(expected)) across both moments to max of separate abs(actual_i-expected_i)/abs(expected_i), with absolute zero-reference handling. The second campaign exited 0. This is the one contract-preserving validator repair/follow-up; no acceptance tolerance changed.
+
+FIRST_RAW_ARTIFACT_NOT_RETAINED: the first campaign VALIDATION.json was overwritten by the second campaign. Its complete original raw artifact is unavailable and is not reconstructed. First implementation identity e9bb0cc0aee0f55810df81bcaff06b2b9f233b623a1cc6683f32fc748d4443fc and measured first campaign wall 0.1617725469986908 s survive in EXECUTION.json/tool record. The available second artifact is preserved as PRE_REVIEW_VALIDATION.json and VALIDATION.json.
+
+Astra review returned HOLD: accepted boundary included invalid low energies; source/cohort time had no 1e13 s upper limit; event counters allowed fractional values; projected cutoff N/E used n,n+1 instead of actual P02B n+7,n+8; manufactured 500 eV fixture was outside the boundary contract. Review-authorized targeted closeout restricts 978.782<E<=1000 eV, time 0..1e13 s, integer counters, fixes actual reservoir layout, and uses admissible 989.797 eV fixture. One targeted validation writes VALIDATION_REPAIRED.json without replacing old evidence. P02B physics remains unexecuted.

@@ -1,0 +1,32 @@
+{
+  "id": "CR-PHYS02C-NIST-EXCITATION-KERNEL01",
+  "status": "FROZEN_BEFORE_FIRST_RUN",
+  "base_commit": "db4a8e4d2eca26054ad52e840915f41577cdb28b",
+  "implementation_role": "lower-tier contract-preserving worker",
+  "planning_and_review_role": "Astra",
+  "scope": "fixed-bath two-NIST-transition excitation-only finite event graph",
+  "bath": {"temperature_K": 100, "nH_m3": 140, "Y": 0.248, "xHII_per_H": 0.01, "xHeII_per_He": 0.01, "xHeIII_per_He": 0},
+  "rate_conversion_amendment": {
+    "approved_by": "Astra via controller before implementation",
+    "C_cm_s": 29979245800.0,
+    "ME_eV": 510998.9461,
+    "velocity": "C*sqrt(1-1/(1+E/ME)^2)",
+    "nHe_m3": "nH*Y/[4*(1-Y)]",
+    "nHI_cm3": "1e-6*nH*(1-xHII_per_H)",
+    "nHeI_cm3": "1e-6*nHe*(1-xHeII_per_He-xHeIII_per_He)",
+    "rate_s_inverse": "n_target_cm3*sigma_cm2*v_cm_s"
+  },
+  "active_domain_eV": "(1000,3000]",
+  "crossing_reservoir": "E<=1000, retain actual residual energy and number; no heat assignment",
+  "channels": {"HI_1s_2p": 10.204, "HeI_1s2_1S_1s2p_1P": 21.218},
+  "graph": "E_meV=E0_meV-10204*m-21218*n; exact integer arithmetic, no projection",
+  "impulses_eV": [1000.001, 1015, 1500, 2000, 3000],
+  "epochs_s": [0, 10000000000, 100000000000, 1000000000000, 10000000000000],
+  "limits": {"states_per_impulse": 10000, "campaign_wall_s": 120, "initial_campaigns": 1, "targeted_repairs": 1},
+  "acceptance": {"nonnegative": true, "OFF_and_t0": true, "number_and_energy_ledger_relative": 2e-11, "uniformization_tail": 1e-13, "sparse_vs_uniformization_observable_over_E0": 1e-10, "1000.001_analytic_oracle": true},
+  "omitted": ["ionization", "Coulomb", "HeII excitation", "other transitions", "gas feedback"],
+  "model_errors": "UNKNOWN_NOT_MEASURED",
+  "P02B_interface": "HOLD: crossing number/energy is not a low-energy spectrum or adopted P02B interface",
+  "global_admission": "HOLD",
+  "PASS_next_action": "Independent Astra scoped review; controller backup/publication decision"
+}

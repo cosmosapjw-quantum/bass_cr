@@ -1,0 +1,13 @@
+{
+  "id": "CR-PHYS04b-COULOMB-LOSS",
+  "type": "bounded_instantaneous_diagnostic",
+  "scope": "Proton Coulomb energy transfer to free plasma electrons for the existing collisionless PHYS01 population, final proton energies 1..10 MeV",
+  "scenario": {"dt_s": 10000000000.0, "H_s": 3.3e-17, "shear_s": 3.3e-18, "n_h_m3": 140.0, "y_he_mass_fraction": 0.248, "x_hii": 0.01, "x_heii": 0.01, "x_heiii": 0.0, "temperature_k": 100.0},
+  "upstream_commit": "e169dc2e906cf51d5c6a1bba47c10bf3d61c3d92",
+  "formula": "CRIPTIC Coulomb.H proton CGS stopping number; corrected SI coefficient e^2 omega_p^2/(4 pi eps0 v)",
+  "acceptance": {"orders": [[48, 8, 8], [64, 12, 12]], "refinement_relative": 0.000002, "cgs_si_relative": 3e-14, "interval_additivity_relative": 3e-13},
+  "budgets": {"validation_campaigns": 1, "focused_test_runs": 2, "targeted_repair_rounds": 1, "solver_intervals": 0, "campaign_wall_limit_s": 60},
+  "positive_transition": "Independent scoped review then publish the diagnostic; retain full CR-PHYS04 losses and CR-PHYS02 delay as HOLD",
+  "preserved": ["PHYS01 production provider", "REI receiver", "CR-PHYS04a tail diagnostic", "frozen scientific tolerances"],
+  "excluded": ["thermal heat partition", "ionization or excitation counts", "secondary electron spectrum", "causal delay", "collisional population feedback", "complete proton stopping", "history", "global scientific admission"]
+}

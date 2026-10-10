@@ -1,0 +1,16 @@
+{
+  "id": "CR-PHYS02C-NIST-TABLE01-DAG",
+  "nodes": [
+    {"id": "EXACT_NIST_SOURCE", "status": "PASS", "evidence": "SOURCE_MANIFEST.json; sources/j74sto.pdf"},
+    {"id": "FROZEN_COMPONENT_CONTRACT", "status": "PASS", "requires": ["EXACT_NIST_SOURCE"], "evidence": "CONTRACT.json"},
+    {"id": "SEPARATE_TABLE_PROVIDER", "status": "IMPLEMENTED", "requires": ["FROZEN_COMPONENT_CONTRACT"], "evidence": "nist_table.py"},
+    {"id": "FOCUSED_COMPONENT_VALIDATION", "status": "PASS_SCOPED", "requires": ["SEPARATE_TABLE_PROVIDER"], "tests": 9, "table_entries": 8, "midpoints": 6, "solver_intervals": 0, "evidence": "evidence/VALIDATION.json"},
+    {"id": "INDEPENDENT_REVIEW", "status": "PASS_SCOPED", "requires": ["FOCUSED_COMPONENT_VALIDATION"], "evidence": "evidence/INDEPENDENT_REVIEW.json"},
+    {"id": "LOCAL_BACKUP_AND_SCOPED_PUBLICATION", "status": "READY", "requires": ["INDEPENDENT_REVIEW"], "owner": "parent"},
+    {"id": "KERNEL_CONNECTION", "status": "HOLD", "missing": ["declared singlet channel adoption", "low-energy old-closure interface contract", "high-energy response numerical contract"]},
+    {"id": "PHYSICAL_MODEL_ERROR", "status": "HOLD_NOT_MEASURED"},
+    {"id": "FULL_CR_IGM_HISTORY", "status": "HOLD"}
+  ],
+  "next_minimum_action": "Parent-owned recovery package/scoped publication; then explicit model/interface decision, with no solver execution or implicit model adoption",
+  "global_scientific_admission": "HOLD"
+}

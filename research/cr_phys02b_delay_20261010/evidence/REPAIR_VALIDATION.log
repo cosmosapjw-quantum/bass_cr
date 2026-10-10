@@ -1,0 +1,103 @@
+{
+  "id": "CR-PHYS02B-OLD-CAUSAL-GENERATOR",
+  "status": "PASS_SCOPED",
+  "command": [
+    "/usr/bin/python3",
+    "research/cr_phys02b_delay_20261010/validate.py",
+    "research/cr_phys02b_delay_20261010/evidence/REPAIR_VALIDATION.json"
+  ],
+  "environment": {
+    "python": "3.12.3",
+    "numpy": "2.4.2",
+    "scipy": "1.17.0"
+  },
+  "inputs": {
+    "CONTRACT.json": "82cd628b0cb4f29f785f3df00b760999aa022b72f6f365d7108758cc8094fda4",
+    "REPAIR_CONTRACT.json": "6cfc9037d10eaaf9bb208e0687481a71aa255ccaad951827112b5aeda75030c5",
+    "SOURCE_MANIFEST.json": "e803089f05c46fa3d054b0172914a524244df1aaf32045c4eefa35c136efa2cb",
+    "causal_generator.py": "ea72b12d07bc500cb7c917c5e500325c6864da77cdd90637ddceab7aeddfa0da",
+    "validate.py": "35f4d5cd258c443c6ce41dfa943aa06d081a16e8aa255ce50ff3cc48bf5a7f8a"
+  },
+  "scope": "Fixed-gas conditional old-method finite-generator impulse experiment only",
+  "checks": {
+    "grid": true,
+    "time": true,
+    "quadrature": true,
+    "ledgers": true,
+    "nonnegative": true,
+    "t0_causal": true,
+    "off": true,
+    "continuum_arrival": true
+  },
+  "full_CR_PHYS02": "HOLD_SOURCE_CONVOLUTION_AND_10_8700_EV_DOMAIN_ABSENT",
+  "global_scientific_admission": "HOLD",
+  "grid_refinement": {
+    "channel_order": [
+      "active",
+      "binding",
+      "excitation",
+      "heat",
+      "cutoff"
+    ],
+    "max_energy_fraction_differences": [
+      0.003588908797511725,
+      0.0009953045562633156
+    ],
+    "observed_order": 1.8503353084361223
+  },
+  "time_refinement": {
+    "time_s": 100000000000.0,
+    "grid_intervals": 128,
+    "steps": [
+      321,
+      642,
+      1284
+    ],
+    "reference_steps": 2568,
+    "method": "Characteristic drag with midpoint collision stages; SSPRK2 vs refined sparse exponential, same-stage dense/sparse parity",
+    "maximum_energy_fraction_errors": [
+      2.7754186320361197e-05,
+      1.5212774461259572e-07,
+      8.373765097990926e-09
+    ],
+    "observed_orders": [
+      7.511278295920299,
+      4.183263033363739
+    ],
+    "sparse_dense_max_energy_fraction": 3.126388037344441e-15
+  },
+  "quadrature_refinement": {
+    "orders": [
+      8,
+      12
+    ],
+    "time_s": 100000000000.0,
+    "maximum_energy_fraction_difference": 1.6867227259353967e-10
+  },
+  "ledger": {
+    "maximum_energy_relative_error": 4.9960036108132044e-15,
+    "maximum_number_absolute_error": 4.263256414560601e-14,
+    "minimum_population_or_reservoir": 0.0
+  },
+  "continuum_arrival_oracle": {
+    "injection_eV": 20.0,
+    "expected_proper_time_s": 94565233303.48772,
+    "computed_proper_time_s": 94565233303.52797,
+    "relative_time_difference": 4.25659507641285e-13,
+    "post_arrival_active_energy_eV": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "exit_code": 0,
+  "measured_process_cpu_s": 383.423912465,
+  "measured_process_wall_s": 383.6551164939883,
+  "unmeasured_overhead": "UNKNOWN_NOT_ZERO"
+}

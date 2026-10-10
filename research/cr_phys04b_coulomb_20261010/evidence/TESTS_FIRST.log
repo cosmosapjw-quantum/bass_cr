@@ -1,0 +1,28 @@
+test_cgs_si_positive_parity (test_coulomb_ledger.CoulombTests.test_cgs_si_positive_parity) ... FAIL
+test_charge_neutrality_includes_he_electrons (test_coulomb_ledger.CoulombTests.test_charge_neutrality_includes_he_electrons) ... FAIL
+test_domain_fail_closed (test_coulomb_ledger.CoulombTests.test_domain_fail_closed) ... ok
+test_exact_source_bytes (test_coulomb_ledger.CoulombTests.test_exact_source_bytes) ... ok
+test_interval_additivity_and_refinement (test_coulomb_ledger.CoulombTests.test_interval_additivity_and_refinement) ... ok
+test_upstream_mks_is_negative_control (test_coulomb_ledger.CoulombTests.test_upstream_mks_is_negative_control) ... ok
+test_zero_ne_age_and_off (test_coulomb_ledger.CoulombTests.test_zero_ne_age_and_off) ... ok
+
+======================================================================
+FAIL: test_cgs_si_positive_parity (test_coulomb_ledger.CoulombTests.test_cgs_si_positive_parity)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/cosmosapjw/bass_cr_worktrees/cr-physical-provider-20261010/research/cr_phys04b_coulomb_20261010/tests/test_coulomb_ledger.py", line 29, in test_cgs_si_positive_parity
+    self.assertLessEqual(float(np.max(np.abs(cgs/si-1))), 3e-14)
+AssertionError: 8.026912468039882e-14 not less than or equal to 3e-14
+
+======================================================================
+FAIL: test_charge_neutrality_includes_he_electrons (test_coulomb_ledger.CoulombTests.test_charge_neutrality_includes_he_electrons)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/cosmosapjw/bass_cr_worktrees/cr-physical-provider-20261010/research/cr_phys04b_coulomb_20261010/tests/test_coulomb_ledger.py", line 53, in test_charge_neutrality_includes_he_electrons
+    self.assertEqual(ne, 1.4 + .01*n_he)
+AssertionError: 1.5154255319148937 != 1.5154255319148935
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.201s
+
+FAILED (failures=2)

@@ -1,0 +1,14 @@
+{
+  "id": "CR-PHYS02C-NIST-EXCITATION-KERNEL01",
+  "nodes": [
+    {"id": "NIST-TABLE01", "status": "REUSED_SCOPED_COMPONENT", "path": "../cr_phys02c_nist_table_20261010"},
+    {"id": "FROZEN_KERNEL_CONTRACT", "status": "PASS", "owner": "Astra", "rate_amendment": "approved before implementation"},
+    {"id": "KERNEL_IMPLEMENTATION", "status": "PASS", "owner": "lower tier"},
+    {"id": "FOCUSED_TESTS", "status": "PASS", "count": 5},
+    {"id": "25_ROW_CAMPAIGN", "status": "PASS_SCOPED", "initial_campaigns": 1, "repairs": 0},
+    {"id": "INDEPENDENT_REVIEW", "status": "PASS_SCOPED", "owner": "Astra", "depends_on": ["25_ROW_CAMPAIGN"], "evidence": "evidence/INDEPENDENT_REVIEW.json"},
+    {"id": "BACKUP_PUBLICATION", "status": "READY", "depends_on": ["INDEPENDENT_REVIEW"]},
+    {"id": "P02B_INTERFACE", "status": "HOLD", "reason": "crossing reservoir contains number and residual energy; no adopted low-energy spectral/interface contract"},
+    {"id": "FULL_CR_IGM_HISTORY", "status": "HOLD", "reason": "other channels, gas feedback, source convolution and model error remain unmeasured"}
+  ]
+}
