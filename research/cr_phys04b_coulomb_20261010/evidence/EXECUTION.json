@@ -1,0 +1,43 @@
+{
+  "base_commit": "c55cd78bade16d95bf140456c6036b406c9356ea",
+  "branch": "research/cr-phys03-fs10-xi01-20261010",
+  "implementation_context": "isolated existing worktree; original checkout untouched",
+  "harness_selection": "User explicitly requested PHYS-MATH v4.0.0; research-code-task with scientific/numerical-validation instructions read. Package choice does not change runtime model.",
+  "bounded_rules": "HARNESS_UNAVAILABLE: /home/cosmosapjw/.codex/bounded-work-harness/RULES.md absent; explicit finite contract used without reconstructing missing rules",
+  "tests": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 timeout 60s python3 -B -m unittest discover -s research/cr_phys04b_coulomb_20261010/tests -v",
+      "log": "TESTS_FIRST.log",
+      "exit": 1,
+      "passed": 5,
+      "failed": 2,
+      "runtime_reported_by_unittest_s": 0.201,
+      "first_failures": [
+        {"test": "test_cgs_si_positive_parity", "observed_relative": 8.026912468039882e-14, "unchanged_bound": 3e-14, "cause": "Transcription of derived Gaussian charge as 4.803204713877645e-10 instead of 4.8032047138777412e-10"},
+        {"test": "test_charge_neutrality_includes_he_electrons", "actual": 1.5154255319148937, "expected": 1.5154255319148935, "cause": "Exact floating equality test compares differently grouped arithmetic; false FAIL, not physical-state mismatch"}
+      ]
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 timeout 60s python3 -B -m unittest discover -s research/cr_phys04b_coulomb_20261010/tests -v",
+      "log": "TESTS_REPAIRED.log",
+      "exit": 0,
+      "passed": 7,
+      "failed": 0,
+      "runtime_reported_by_unittest_s": 0.180,
+      "targeted_repair": "Correct Gaussian charge digits, replace two false exact ne comparisons with 3e-15 absolute tolerance. CGS/SI 3e-14, refinement 2e-6, and interval additivity 3e-13 unchanged."
+    }
+  ],
+  "campaign": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 timeout 60s python3 -B research/cr_phys04b_coulomb_20261010/coulomb_ledger.py --validation --output research/cr_phys04b_coulomb_20261010/evidence/VALIDATION.json",
+    "exit": 0,
+    "receipt": "VALIDATION.json",
+    "result": "PASS_SCOPED",
+    "measured_process_cpu_s": 0.178975534,
+    "measured_wall_s": 0.17898328404407948
+  },
+  "unmeasured_overhead": "UNKNOWN_NOT_ZERO",
+  "solver_intervals": 0,
+  "independent_review": "PENDING_PARENT_REVIEW",
+  "publication": "NOT_PERFORMED_BY_IMPLEMENTER",
+  "scientific_admission": "HOLD"
+}
