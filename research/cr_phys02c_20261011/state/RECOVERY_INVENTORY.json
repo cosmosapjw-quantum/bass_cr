@@ -1,0 +1,823 @@
+{
+  "schema": "cr-phys02c-recovery-inventory.v1",
+  "created_utc": "2026-10-10T17:16:10.373810+00:00",
+  "classification": "RUNTIME_INTERRUPTION_RECOVERY",
+  "observed_before_recovery": {
+    "visible_workspace_empty": true,
+    "prior_study_exists": false,
+    "prior_harness_exists": false,
+    "basis": "Actual local inventory on2026-10-10T17:14UTC; no transcript-only file assumptions"
+  },
+  "archives": [
+    {
+      "filename": "physmath-research-harness-gpt6-astra-v4.0.0-20260908.zip",
+      "bytes": 70628,
+      "sha256": "dae76c90f2e5d691bcdd595dadbe470bacacba3bb2a036ff9788ffe7d3bfabb7",
+      "destination": "/workspace/scratch/584ff08e1634/harness"
+    },
+    {
+      "filename": "physmath-coding-harness-gpt6-astra-v4.0.0-20260908.zip",
+      "bytes": 63509,
+      "sha256": "dc99e7ab2f9629dcce3ec0758d97e19acc5b645f86e208d1b338bb6430ff8d7a",
+      "destination": "/workspace/scratch/584ff08e1634/coding_harness"
+    },
+    {
+      "filename": "CR_PHYS02B_20261010_929abd7f_HANDOFF.zip",
+      "bytes": 2515533,
+      "sha256": "d6ddf6b9e1c677f624053b6a3ffdb23061a2c20808ee9ec9c3d971abd1266dd9",
+      "destination": "/workspace/scratch/584ff08e1634/bass_cr_work"
+    }
+  ],
+  "archive_manifest_entries_verified": 124,
+  "restored_source_commit": "929abd7ff981f08ed965e302532af9daac06316f",
+  "last_final_commit_from_durable_receipt": "b5b0f2244311a6e46692da55e75db6d04d3ef305",
+  "reviewed_science_status": "Original published PHYS02B, source/evidence bytes restored; unchanged science suite not rerun",
+  "runtime_process_inventory": "    PID    PPID COMMAND\n      1       0 supervisord\n      3       1 rsync\n      4       1 sync_share.sh\n      5       1 sync_share.sh\n      6       1 caas-prefix-tra\n      7       1 sites-preview\n     75       4 inotifywait\n    118       1 codex\n    194       1 codex\n  15657       5 sleep\n  15659       1 codex-linux-san\n  15660       1 codex-linux-san\n  15670     194 bwrap\n  15671   15670 codex-linux-san\n  15672   15670 codex-linux-san\n  15677   15670 codex\n  15678   15677 bash\n  15681   15678 python3\n  15682   15681 ps\n",
+  "files": [
+    {
+      "path": "BUNDLE_NOTE_KO.md",
+      "bytes": 1736,
+      "sha256": "47dac47ed2634535cc37ae328ba3ffb99c34435b174ced7c209858c14d604b23",
+      "mtime_utc": "2026-10-10T17:16:10.341109+00:00"
+    },
+    {
+      "path": "research/cr_phys01_20261010/src/injection.py",
+      "bytes": 16626,
+      "sha256": "c5eda0e60302339af1bbdd0603ae1cd8a8921d9e6489c22d954e0bc92968c27d",
+      "mtime_utc": "2026-10-10T17:16:10.341328+00:00"
+    },
+    {
+      "path": "research/cr_phys01_20261010/src/rudd.py",
+      "bytes": 6584,
+      "sha256": "757e4c8b33618ad6ef88f422919fe813654454c836f0942cf9792be133e8eac2",
+      "mtime_utc": "2026-10-10T17:16:10.341418+00:00"
+    },
+    {
+      "path": "research/cr_phys02a_20261010/LICENSE",
+      "bytes": 28846,
+      "sha256": "41e12baa526725790efb94a78045f4c0b03fe7acac5e2e6eab737d4cded7be22",
+      "mtime_utc": "2026-10-10T17:16:10.341588+00:00"
+    },
+    {
+      "path": "research/cr_phys02a_20261010/REPORT_KO.md",
+      "bytes": 10691,
+      "sha256": "c07280a981ebe35ade3356244490dd9bec55fd6b72358ee9a7e8230b12e34663",
+      "mtime_utc": "2026-10-10T17:16:10.341777+00:00"
+    },
+    {
+      "path": "research/cr_phys02a_20261010/inputs/PARENT_SOURCE_MANIFEST.json",
+      "bytes": 351,
+      "sha256": "cdd712e7a62bc856e2dc8336fe4385cf85a316213bd5568554d41c585e198c39",
+      "mtime_utc": "2026-10-10T17:16:10.341877+00:00"
+    },
+    {
+      "path": "research/cr_phys02a_20261010/research/DERIVATION_KO.md",
+      "bytes": 11480,
+      "sha256": "28c10b0c6e1c0b349c62cb6f2bd84680e9e904bff83dfe556d7320515850a88a",
+      "mtime_utc": "2026-10-10T17:16:10.342022+00:00"
+    },
+    {
+      "path": "research/cr_phys02a_20261010/src/causal_subthreshold.py",
+      "bytes": 11785,
+      "sha256": "2259506b74c16027fda69b479cb1039b0888e19c5f8dcf400273892aba6f39f9",
+      "mtime_utc": "2026-10-10T17:16:10.342214+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/DERIVATION_KO.md",
+      "bytes": 19986,
+      "sha256": "9b2653348ffeeb7882216ebc38c2cec254754871a65f2c159ad7f5ca4a228500",
+      "mtime_utc": "2026-10-10T17:16:10.342588+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/FILE_MANIFEST.json",
+      "bytes": 25229,
+      "sha256": "d849244fd552fa7c7e3ba0208e1b0dfa21f5051c44e4f2fdb79e34f5b863a690",
+      "mtime_utc": "2026-10-10T17:16:10.342779+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/HANDOFF.json",
+      "bytes": 2975,
+      "sha256": "b1684e7dc6af26b075a8fc29da7b44ceb9d0a1bd35f8cf38601d126133292eb9",
+      "mtime_utc": "2026-10-10T17:16:10.342878+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/LICENSE",
+      "bytes": 28846,
+      "sha256": "41e12baa526725790efb94a78045f4c0b03fe7acac5e2e6eab737d4cded7be22",
+      "mtime_utc": "2026-10-10T17:16:10.343018+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/README.md",
+      "bytes": 1432,
+      "sha256": "98f04ac4969fce48da9dd745ec0479458806c115d6d59d90c186b88ae15a1d6c",
+      "mtime_utc": "2026-10-10T17:16:10.343074+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/REPORT_KO.md",
+      "bytes": 24075,
+      "sha256": "26076420b89e2bd1f791c2df0cc614cc6e1f99ef9eb597b16a26a03a9b45351f",
+      "mtime_utc": "2026-10-10T17:16:10.343359+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/START_CODEX_HANDOFF_KO.md",
+      "bytes": 8715,
+      "sha256": "a62b6cc12863ea368c0d97e79e1ef4252d207e8362290b58bfa0b06996f46e06",
+      "mtime_utc": "2026-10-10T17:16:10.343480+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/THIRD_PARTY_NOTICES.md",
+      "bytes": 1692,
+      "sha256": "71d9b94742d19699a4c9b5c8da5c066d1ce6e6cc970bfcac5e6088d8158e7973",
+      "mtime_utc": "2026-10-10T17:16:10.343539+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/EXECUTION_MANIFEST.json",
+      "bytes": 12795,
+      "sha256": "fb262ff836e7f4e9e432ec017c42cb4ffae472641df398b5a84a4a854cc11617",
+      "mtime_utc": "2026-10-10T17:16:10.343646+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/diagnostics/ACTUAL_EXIT.json",
+      "bytes": 712,
+      "sha256": "378131e99b1b5c60293f01ead0b4a9a6202fa42e4fbcfe440034fbd601a373fe",
+      "mtime_utc": "2026-10-10T17:16:10.344040+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/diagnostics/DIAGNOSTIC_MANIFEST.json",
+      "bytes": 1347,
+      "sha256": "9e957516a9b9596bcd8087d442489c0532c5cdca71304c2529962efb52c0d725",
+      "mtime_utc": "2026-10-10T17:16:10.344114+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/diagnostics/DIAGNOSTIC_RESULT.json",
+      "bytes": 12597,
+      "sha256": "f5c7cb418d50ffbcca35eaf11f08e7d09b65be45c021ff0f167b5b4988a50429",
+      "mtime_utc": "2026-10-10T17:16:10.344200+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/diagnostics/OCCUPANCY_AND_PLOT_DATA.npz",
+      "bytes": 267410,
+      "sha256": "36591c0ec3ddb666334bcf9884b781603e5e1704e0d03335dd0255acae38cee0",
+      "mtime_utc": "2026-10-10T17:16:10.344405+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/diagnostics/VISUAL_QA.json",
+      "bytes": 765,
+      "sha256": "3a63f107dce1aa73156989e8f5ad1c34a00bbc0865d320569ca30d4041cd9945",
+      "mtime_utc": "2026-10-10T17:16:10.345250+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/diagnostics/canonical_diagnostics.png",
+      "bytes": 466984,
+      "sha256": "d7108b8bdb21452ba215c293ad7a11eb65f2d411fca6f740045f94ffde67a76a",
+      "mtime_utc": "2026-10-10T17:16:10.346595+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/diagnostics/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mtime_utc": "2026-10-10T17:16:10.346595+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/diagnostics/stdout.log",
+      "bytes": 3125,
+      "sha256": "4919670c58167d314753aeef9c712bc19c523ea29d61fcca662fe0623fc6a111",
+      "mtime_utc": "2026-10-10T17:16:10.348442+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/independent_oracles_preflight.json",
+      "bytes": 10597,
+      "sha256": "994d1cb8cbe5b2c0259bc966e3e9cb755f51c0ddce613a375a9a96937d00fbbe",
+      "mtime_utc": "2026-10-10T17:16:10.348549+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/independent_oracles_preflight.log",
+      "bytes": 10624,
+      "sha256": "f00b6ae4f4692da48fca54554795289073ccdce5eddd1f6f796a95aed0b1b706",
+      "mtime_utc": "2026-10-10T17:16:10.348616+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/runs/R001/ACTUAL_EXIT.json",
+      "bytes": 221,
+      "sha256": "dc73f7522fb8e01db2b7b1550842cd70718244b3a603a95daea567fd62f6ea1e",
+      "mtime_utc": "2026-10-10T17:16:10.348840+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/runs/R001/CANONICAL_SPECTRUM.npz",
+      "bytes": 259412,
+      "sha256": "b71da193b8f585b3b3d5dae2d01e04dc120d4ab2fe2b678b64b39f054b4157d8",
+      "mtime_utc": "2026-10-10T17:16:10.348976+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/runs/R001/NUMERICAL_RESULT.json",
+      "bytes": 169902,
+      "sha256": "df31b011a73b18ce4654c685cb7e5f98b8390387225f97648c4ea1c16f0ec792",
+      "mtime_utc": "2026-10-10T17:16:10.350075+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/runs/R001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mtime_utc": "2026-10-10T17:16:10.350075+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/runs/R001/stdout.log",
+      "bytes": 27416,
+      "sha256": "1f6d1e63bf4b88b44ce9a2d44154713af2df6355134b0dbdf9f6448d4d90b6b5",
+      "mtime_utc": "2026-10-10T17:16:10.350729+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/runs/R002/ACTUAL_EXIT.json",
+      "bytes": 274,
+      "sha256": "7d1c94e7a03097cfd0d94c9e705997b22e2114690ba6233ce663924bba9e5482",
+      "mtime_utc": "2026-10-10T17:16:10.350956+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/runs/R002/CANONICAL_SPECTRUM.npz",
+      "bytes": 987130,
+      "sha256": "30c3b7cad8e089cbee4b290307049d85cfcf5f90c93be1a019008e0dcd623ffd",
+      "mtime_utc": "2026-10-10T17:16:10.351454+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/runs/R002/NUMERICAL_RESULT.json",
+      "bytes": 169912,
+      "sha256": "1f2ebaef36c1d77ae4fcab83ef81f0618060a701eaebb5db611307aa8b090ced",
+      "mtime_utc": "2026-10-10T17:16:10.352787+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/runs/R002/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mtime_utc": "2026-10-10T17:16:10.352787+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/runs/R002/stdout.log",
+      "bytes": 27408,
+      "sha256": "0293d66d6db64b6741e5d2ad8f9fa4a5271ee05f1da1a9907119b04e2947341a",
+      "mtime_utc": "2026-10-10T17:16:10.353435+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/thread_control/ACTUAL_EXIT.json",
+      "bytes": 430,
+      "sha256": "043576910da19a3c108aab9099bbb456c8fcac11b1dd146a0bc0d5d5d5812bf5",
+      "mtime_utc": "2026-10-10T17:16:10.353666+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/thread_control/ATTEMPT01/ACTUAL_EXIT.json",
+      "bytes": 307,
+      "sha256": "43b41835bea2c65ed4352049fa8dc622b0523a663f5af712a3e5ac2a75526698",
+      "mtime_utc": "2026-10-10T17:16:10.353866+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/thread_control/ATTEMPT01/THREAD_CONTROL_RESULT.json",
+      "bytes": 348,
+      "sha256": "911c536b64ca157df7f56259b35f11dd47bab7a8750a9de867e2332b0dacb3ca",
+      "mtime_utc": "2026-10-10T17:16:10.353917+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/thread_control/ATTEMPT01/stderr.log",
+      "bytes": 483,
+      "sha256": "921366c497fa38e4ef088e9e5cf5dd2145c2766408666a346e82a4d7cb1a6cf4",
+      "mtime_utc": "2026-10-10T17:16:10.353986+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/thread_control/ATTEMPT01/stdout.log",
+      "bytes": 330,
+      "sha256": "44c9224af653d6c02ee2335f98a59d24940873db03ea2c528527a8b86c474efc",
+      "mtime_utc": "2026-10-10T17:16:10.354030+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/thread_control/ATTEMPT01/verify_thread_control_executed.py",
+      "bytes": 6762,
+      "sha256": "cb499ea448131cfc7559eb9463c1ac00ab24684f44d0ad92efffb27b2426c0d1",
+      "mtime_utc": "2026-10-10T17:16:10.354098+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/thread_control/FOCUSED_CONTRACT.json",
+      "bytes": 1215,
+      "sha256": "d34bf538e9c8d51b9ba797a4e4f28c19eb1fd23419d8bea492e97f489bb738e9",
+      "mtime_utc": "2026-10-10T17:16:10.354143+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/thread_control/ONE_THREAD_CANONICAL_STATE.npz",
+      "bytes": 110833,
+      "sha256": "11a72417dd0c20f50f93c9e2b5c9331d97e998de0446faca2a16105f4a064506",
+      "mtime_utc": "2026-10-10T17:16:10.354271+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/thread_control/RESOURCE_ADMISSION_REPAIR.json",
+      "bytes": 1075,
+      "sha256": "d32afa853c1c2bc861929d62179f4d99c471c971404a8e6a4457a3409338f284",
+      "mtime_utc": "2026-10-10T17:16:10.354681+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/thread_control/SUPPLEMENT_MANIFEST.json",
+      "bytes": 2529,
+      "sha256": "d42aa86b79cbfa0138d3a89bfcc48a47f9397388322c88179aedb23962089989",
+      "mtime_utc": "2026-10-10T17:16:10.354880+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/thread_control/THREAD_CONTROL_RESULT.json",
+      "bytes": 12689,
+      "sha256": "56552775af79735e8b7409531118ad17c7d7540bd6d838a6371057d9f0c03f82",
+      "mtime_utc": "2026-10-10T17:16:10.354985+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/thread_control/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mtime_utc": "2026-10-10T17:16:10.354985+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/evidence/thread_control/stdout.log",
+      "bytes": 12427,
+      "sha256": "2bb59417407ac2931c23d9d4c146d989ab0dceb2033e365db4826e4f2b2d13f0",
+      "mtime_utc": "2026-10-10T17:16:10.355055+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/CCC_USED_CHANNELS.json",
+      "bytes": 25150,
+      "sha256": "75ef5831e777d723c0c2aeac9330ee8c15097e33a18eca0764fe116256aea3a1",
+      "mtime_utc": "2026-10-10T17:16:10.355536+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/NIST_IDENTITY.json",
+      "bytes": 194,
+      "sha256": "019d1ec6f3c20cce1d3b7847e96dccb1063b1298fad88152193c0c9c83e65f98",
+      "mtime_utc": "2026-10-10T17:16:10.355810+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/NIST_IONIZATION.json",
+      "bytes": 3519,
+      "sha256": "85efc3e0deea31d06a252505e201d6a729bc50dea679c7990e0353da2af740f2",
+      "mtime_utc": "2026-10-10T17:16:10.355898+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/PARENT_SOURCE_MANIFEST.json",
+      "bytes": 794,
+      "sha256": "e6463f62176d1bac1a454c61539d7c17030a6601dd46aa117f0e123bf52813bc",
+      "mtime_utc": "2026-10-10T17:16:10.355945+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HI/2P.1S",
+      "bytes": 29393,
+      "sha256": "f7e7caf062deed79f9a9a0afcb79038bb90ae27a7556cb70b6fee10f4c9b950f",
+      "mtime_utc": "2026-10-10T17:16:10.356107+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HI/2S.1S",
+      "bytes": 29393,
+      "sha256": "8b2511790642ae278b896cc328f591c06c1854d88de44c0b7fdcbf9a4d7ed9fe",
+      "mtime_utc": "2026-10-10T17:16:10.356319+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HI/3D.1S",
+      "bytes": 16783,
+      "sha256": "a673f3ee46fa901ef227b7ed322563367032b54b4845752283d02b037743dd2d",
+      "mtime_utc": "2026-10-10T17:16:10.356469+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HI/3P.1S",
+      "bytes": 16783,
+      "sha256": "595f6a9adf18b0de162362e1b2c06018732fba7da198bc80cc08287661175f1b",
+      "mtime_utc": "2026-10-10T17:16:10.356621+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HI/3S.1S",
+      "bytes": 16783,
+      "sha256": "d7199d81c0d2c13b4a77c64317fb7ee0fe12947149c7c5f80b4df1833e3013d3",
+      "mtime_utc": "2026-10-10T17:16:10.356980+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HI/4D.1S",
+      "bytes": 14418,
+      "sha256": "891309d6ed0fe57c4bec337943e29aff8bc9413bed0cc79a95c04a786d292de2",
+      "mtime_utc": "2026-10-10T17:16:10.357096+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HI/4F.1S",
+      "bytes": 14418,
+      "sha256": "99d3d21995d2f190b2d2d7b932f7443230ca5fb7d82d563ae4c985097d878506",
+      "mtime_utc": "2026-10-10T17:16:10.357182+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HI/4P.1S",
+      "bytes": 14418,
+      "sha256": "f5f66a08c0552224584b48813da9dfa75c95064b3eaccdcdef1a96cf4a258be3",
+      "mtime_utc": "2026-10-10T17:16:10.357258+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HI/4S.1S",
+      "bytes": 14418,
+      "sha256": "5e8ab53b720613adeba67dd5dc720d1f06f0bf6bf995b6614cb4eadd5acb1d0e",
+      "mtime_utc": "2026-10-10T17:16:10.357332+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HI/README",
+      "bytes": 676,
+      "sha256": "f48aa3eee41e3dd78c887218b64e097490fb50c17b5b15840a701cc9ef984ece",
+      "mtime_utc": "2026-10-10T17:16:10.357375+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HeI/README",
+      "bytes": 822,
+      "sha256": "37cd0551a52732e194fa52311e7162aad2f48f2bd7f1c0c0f8948ae04b7783f1",
+      "mtime_utc": "2026-10-10T17:16:10.357448+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HeI/s2P.s1S",
+      "bytes": 19817,
+      "sha256": "28f4d8581e4a4da0deed0cec329ba3d1f1e6126c87ded3a6c3dc3507347cfbc6",
+      "mtime_utc": "2026-10-10T17:16:10.357584+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HeI/s2S.s1S",
+      "bytes": 24819,
+      "sha256": "07b506ccaa204ae148dcebb337e7f16a4609b7532b0f0eefbc21f5a65e8f6b5c",
+      "mtime_utc": "2026-10-10T17:16:10.357686+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HeI/s3D.s1S",
+      "bytes": 13778,
+      "sha256": "1b64588543231a88a9949e4177bdc902559ee7a4c173a12050554ce0118c1782",
+      "mtime_utc": "2026-10-10T17:16:10.357815+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HeI/s3P.s1S",
+      "bytes": 13656,
+      "sha256": "2aeeb858fabd74ce04c7a2b5d71720c7c51988f51e36fd61b6c0750b7881fb4a",
+      "mtime_utc": "2026-10-10T17:16:10.357893+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HeI/s3S.s1S",
+      "bytes": 14632,
+      "sha256": "fac68d469574c7526e751f864551b785e82d855664e69d406e72fcf1284603e3",
+      "mtime_utc": "2026-10-10T17:16:10.357968+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HeI/s4D.s1S",
+      "bytes": 8410,
+      "sha256": "d8ea7038653e19155a5b06cb89e9cdfaaf63ba0033b0c2a767679f202f845ad9",
+      "mtime_utc": "2026-10-10T17:16:10.358028+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HeI/s4F.s1S",
+      "bytes": 8410,
+      "sha256": "ebe54df26f2b33faad8ac28e79bfde125382c40ae1f1e6c0110201e7e1b1d6e4",
+      "mtime_utc": "2026-10-10T17:16:10.358085+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HeI/s4P.s1S",
+      "bytes": 8349,
+      "sha256": "c892ad1744f0cb74276960cd55372f98db80a178dbb55d7ef22157dcc165ebd7",
+      "mtime_utc": "2026-10-10T17:16:10.358140+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HeI/s4S.s1S",
+      "bytes": 8776,
+      "sha256": "273b795c176eda8c0c4ed9db671a831d0b3e16e332e2699b82a4f771854215cb",
+      "mtime_utc": "2026-10-10T17:16:10.358204+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HeI/t2P.s1S",
+      "bytes": 22074,
+      "sha256": "76cb01b364d7acc311d25cf167e690c0379cbb77b169a94f0ef7f12b9690e355",
+      "mtime_utc": "2026-10-10T17:16:10.358285+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HeI/t2S.s1S",
+      "bytes": 26893,
+      "sha256": "00be7058838f84d72f9d6a6b60b99c380792fb70192826261a0664bff32b57c2",
+      "mtime_utc": "2026-10-10T17:16:10.358535+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HeI/t3D.s1S",
+      "bytes": 13778,
+      "sha256": "93eec91398497c009e1c399f91433a1e3d32b2b7ee49e0a178588bf04930954d",
+      "mtime_utc": "2026-10-10T17:16:10.358644+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HeI/t3P.s1S",
+      "bytes": 14144,
+      "sha256": "ab928436b64854a7d441adc752faefb7d7ae6a3099210aa9d35dd13d80cc9bef",
+      "mtime_utc": "2026-10-10T17:16:10.358760+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HeI/t3S.s1S",
+      "bytes": 15486,
+      "sha256": "bff6f6f1e84fb85890bd7140ddc9c41042c7f6a17bdb24cd872c699068e6d7ff",
+      "mtime_utc": "2026-10-10T17:16:10.358851+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HeI/t4D.s1S",
+      "bytes": 8410,
+      "sha256": "7d73bfc5465ac49a29696293b0ca1a3fee4d503db71ca6cdc9735b1fa94a24cc",
+      "mtime_utc": "2026-10-10T17:16:10.358948+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HeI/t4F.s1S",
+      "bytes": 8410,
+      "sha256": "a2e3a2daef0f05d48345fadca57a55836624d4908b6d80127ba628cd2154d976",
+      "mtime_utc": "2026-10-10T17:16:10.359010+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HeI/t4P.s1S",
+      "bytes": 8593,
+      "sha256": "176ebb0e86a51b4bcce2753a3d1e6f03ea166c7e83b2bb7558493afed0fa9c70",
+      "mtime_utc": "2026-10-10T17:16:10.359066+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/inputs/ccc/HeI/t4S.s1S",
+      "bytes": 8776,
+      "sha256": "0bd60c86cdcf39a81ede5c235ffefd4604d89f933122375c34d14bd314877d50",
+      "mtime_utc": "2026-10-10T17:16:10.359121+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/publication/READBACK_PLAN.json",
+      "bytes": 2010,
+      "sha256": "437cf1a4317e21e15b9d1f0d9bfdbd0c4413238f348a919daf24956a5a163340",
+      "mtime_utc": "2026-10-10T17:16:10.359335+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/publication/SCIENCE_PUBLICATION_RECEIPT.json",
+      "bytes": 3230,
+      "sha256": "c72c64eb059c10f43e5d0fa2efa14c0ace19d527739ca9652eaf7cecb74f8eb6",
+      "mtime_utc": "2026-10-10T17:16:10.359401+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/requirements.txt",
+      "bytes": 67,
+      "sha256": "fad71a2b9faf97517c831491763eae84515621926627f2bff976d01c3cf4521d",
+      "mtime_utc": "2026-10-10T17:16:10.359447+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/research/PROJECT_HPC_ACCURACY_POLICY_KO_SNAPSHOT.md",
+      "bytes": 4160,
+      "sha256": "987f2f55b6bda02dfe4eefdf82ff57444c0b531ccf73ce8e9010172645e09454",
+      "mtime_utc": "2026-10-10T17:16:10.359766+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/research/literature/CCC_H_I_acquisition.json",
+      "bytes": 351049,
+      "sha256": "1febb62b1e9b45943a0dbb6997d9f01ee195f39b22bce7ddedde7b9736aca949",
+      "mtime_utc": "2026-10-10T17:16:10.360019+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/research/literature/CCC_He_I_acquisition.json",
+      "bytes": 102535,
+      "sha256": "10d2fc3f316cb805164b304283788e00e4493deb142b62d11bc49b523672863f",
+      "mtime_utc": "2026-10-10T17:16:10.360866+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/research/literature/CCC_SOURCE_AUDIT.json",
+      "bytes": 8447,
+      "sha256": "8c6d6751e2056dfe85daddb532d18a376f7415ecf404b18b739e1fe4b01d93ad",
+      "mtime_utc": "2026-10-10T17:16:10.361150+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/research/literature/CCC_SOURCE_AUDIT_KO.md",
+      "bytes": 10720,
+      "sha256": "7d9ce467b2929d466712068e194a89bf85db4f448af2994b6dcfafc0c4965572",
+      "mtime_utc": "2026-10-10T17:16:10.361412+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/research/literature/CCC_SOURCE_REPRODUCTION_RESULT.json",
+      "bytes": 6567,
+      "sha256": "4db2cfca79f477a32f2e46b422e8305dced13a04cfb4c7aad0a0df21c79031b5",
+      "mtime_utc": "2026-10-10T17:16:10.361508+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/research/literature/CCC_TARGET_ENERGY_METADATA_CHECK.json",
+      "bytes": 11349,
+      "sha256": "134c7afada4fca3db1809dc45982622c60096a4a48b3dbf357b0b2b0bef929d8",
+      "mtime_utc": "2026-10-10T17:16:10.361584+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/research/literature/ionization/SOURCE_AUDIT_FINAL.json",
+      "bytes": 17207,
+      "sha256": "b4ad3311bcba31bf769fc1b58cb03b66d1667d8c497de4558445fecf8f22b976",
+      "mtime_utc": "2026-10-10T17:16:10.361862+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/research/literature/ionization/SOURCE_AUDIT_FINAL_KO.md",
+      "bytes": 5703,
+      "sha256": "7986fc9e5f117991927411ebae1c1d605db1679c27e22fd180e38624c8a4904a",
+      "mtime_utc": "2026-10-10T17:16:10.361951+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/research/literature/ionization/source_acquisition_interim.json",
+      "bytes": 5835,
+      "sha256": "7ffc83bcf6afb5db7f28e11b16c77d7a3c4e6ec6a33b6d766ca7269d95080066",
+      "mtime_utc": "2026-10-10T17:16:10.362216+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/review/DERIVATION_REVIEWED_SNAPSHOT_KO.md",
+      "bytes": 19986,
+      "sha256": "9b2653348ffeeb7882216ebc38c2cec254754871a65f2c159ad7f5ca4a228500",
+      "mtime_utc": "2026-10-10T17:16:10.362430+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/review/FINAL_DECISION.json",
+      "bytes": 32787,
+      "sha256": "3d8b4dffed91bc0db8c107aa9e57c3e57561b2ace6c960d4b32fce12e83faf76",
+      "mtime_utc": "2026-10-10T17:16:10.362659+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/review/INDEPENDENT_REVIEW_KO.md",
+      "bytes": 21081,
+      "sha256": "7282df6570f52ba5414f8cba307a0c971615b812eb86ea020c814d048524c7d7",
+      "mtime_utc": "2026-10-10T17:16:10.362934+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/review/POST_REVIEW_DOCUMENT_UPDATES.json",
+      "bytes": 3989,
+      "sha256": "54e777c73df2c8bfad929f071114f51398fe808977bdec9f1d40dcca3a4af047",
+      "mtime_utc": "2026-10-10T17:16:10.362995+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/review/REPORT_REVIEWED_SNAPSHOT_KO.md",
+      "bytes": 22319,
+      "sha256": "c2d1c5e91df168a83c0531fac1aeea6c80a8d1d24b90481c20a0120172088acb",
+      "mtime_utc": "2026-10-10T17:16:10.363279+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/review/REVIEW_PACKET.json",
+      "bytes": 5253,
+      "sha256": "0c32320b708ab6296e3d7777f656b81dfa0f39906fce9ac5c28cb88fe311219e",
+      "mtime_utc": "2026-10-10T17:16:10.363390+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/review/state_snapshot/DECISION_LOG.md",
+      "bytes": 2943,
+      "sha256": "83f8526d81cd3529829f08a18cbe1f25797addfdd1eeebe51b21e2cde6396f74",
+      "mtime_utc": "2026-10-10T17:16:10.363607+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/review/state_snapshot/EVIDENCE_LEDGER.md",
+      "bytes": 3350,
+      "sha256": "e484b1e244fd52b42cd86f2b321d548034ef5ecb1b61f3ee8ed1a77434ced8dc",
+      "mtime_utc": "2026-10-10T17:16:10.363856+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/review/state_snapshot/HYPOTHESIS_GRAPH.md",
+      "bytes": 3193,
+      "sha256": "c8377023550e0cfe9fef8c11ba6719c668f2edd4adfc732d09b600e5e6ad7887",
+      "mtime_utc": "2026-10-10T17:16:10.363996+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/review/state_snapshot/NEGATIVE_RESULTS.md",
+      "bytes": 2950,
+      "sha256": "fec1144e00a95286d096b40cffd5014afadca22cf8595a56e6887a0e19fea4ec",
+      "mtime_utc": "2026-10-10T17:16:10.364127+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/review/state_snapshot/RESEARCH_STATE.md",
+      "bytes": 2695,
+      "sha256": "191d8859df56e66e0cf1bcc1320003c8f1aa8acb23994a110605325076940cd3",
+      "mtime_utc": "2026-10-10T17:16:10.364186+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/src/causal_cascade.py",
+      "bytes": 19115,
+      "sha256": "d87a9cc122125b2d37b47f261f57eab698baa59e07a6b21723860f39313c7b72",
+      "mtime_utc": "2026-10-10T17:16:10.364344+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/state/CLAIM_GATE.json",
+      "bytes": 2038,
+      "sha256": "69457193b44dbcd3cbc34c1ef17336245cbd4df427f2cfd811462d13bec1387f",
+      "mtime_utc": "2026-10-10T17:16:10.364454+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/state/CLOSEOUT.json",
+      "bytes": 957,
+      "sha256": "9926808478e3a262a9c8cbdf44d43d44a822008cfadb7b9b7705aa3209dc095d",
+      "mtime_utc": "2026-10-10T17:16:10.364582+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/state/CLOSEOUT.md",
+      "bytes": 5063,
+      "sha256": "a00483a8d8d5cce2706fd3914812f86c0b7e0de9f5e22c9dc28032b76775630c",
+      "mtime_utc": "2026-10-10T17:16:10.364671+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/state/DECISION_LOG.md",
+      "bytes": 3242,
+      "sha256": "f26518975ef403dda2a07721f1475dd5da7dcb74c78c3dcefd5c14a932771053",
+      "mtime_utc": "2026-10-10T17:16:10.364768+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/state/EVIDENCE_LEDGER.md",
+      "bytes": 3675,
+      "sha256": "5df5c457d50b688c5481868cbf959da61bf9dbab6c6eca9c45db3a192c76ab18",
+      "mtime_utc": "2026-10-10T17:16:10.364916+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/state/HYPOTHESIS_GRAPH.md",
+      "bytes": 3182,
+      "sha256": "054b6828935663488da2434ada8984ff3b1c218be4150f94a6fafa61ffeab2b4",
+      "mtime_utc": "2026-10-10T17:16:10.364999+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/state/NEGATIVE_RESULTS.md",
+      "bytes": 3394,
+      "sha256": "a36dcf4e44a926348cbc42a10104701f99134eeba6d66dfcca77e92015531dda",
+      "mtime_utc": "2026-10-10T17:16:10.365055+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/state/RESEARCH_STATE.md",
+      "bytes": 3305,
+      "sha256": "96e17a86a6b9d2f834de667259c2d2b658a2509918f4f0f086b9ce7719d683ee",
+      "mtime_utc": "2026-10-10T17:16:10.365107+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/state/REWORK_01.json",
+      "bytes": 854,
+      "sha256": "952af31db78dbf7edefc6f1b0ced636904066b3f3aed672005b91a9c6bff181a",
+      "mtime_utc": "2026-10-10T17:16:10.365146+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/state/REWORK_RESOLUTION.json",
+      "bytes": 522,
+      "sha256": "cad8118cd269c764de831e465b1baa33b8ca819d8ef736cf5115c86b269d9c92",
+      "mtime_utc": "2026-10-10T17:16:10.365210+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/state/SCIENTIFIC_CONTRACT.json",
+      "bytes": 7223,
+      "sha256": "a63ba177161db9b9adfa30dce39fdde05a108a05f505d56e8bd09c8bd441075b",
+      "mtime_utc": "2026-10-10T17:16:10.365282+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/state/SOURCE_COMPLETION_ADDENDUM.json",
+      "bytes": 2110,
+      "sha256": "717c931ea3c174e134816e04536f5eb9b80466db1f6addb56f042aa7af969562",
+      "mtime_utc": "2026-10-10T17:16:10.365330+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/tests/analyze_canonical.py",
+      "bytes": 23497,
+      "sha256": "382465c4169b7f11c2e50acc0979963274e07d71ef1d20ba7dc1ef906b21bd8a",
+      "mtime_utc": "2026-10-10T17:16:10.365498+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/tests/independent_oracles.py",
+      "bytes": 18485,
+      "sha256": "d3c6bdcd27c80e3b5ff72558cb65608b168de5cb9c13a990147103a8fb155942",
+      "mtime_utc": "2026-10-10T17:16:10.365628+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/tests/verify_cascade.py",
+      "bytes": 16904,
+      "sha256": "28ffa8391f6786ac7348846c8a6c461ec4f4e9694c86d7f7deccf6a146373e52",
+      "mtime_utc": "2026-10-10T17:16:10.365893+00:00"
+    },
+    {
+      "path": "research/cr_phys02b_20261010/tests/verify_thread_control.py",
+      "bytes": 7355,
+      "sha256": "e4b917466a4edc913658f0ac0a4b978d6591c9b4db1c0831090dbabfd0c1ee68",
+      "mtime_utc": "2026-10-10T17:16:10.366010+00:00"
+    }
+  ],
+  "remote_current_ref": "Agent directly checked current b5b0f224 exact ref; source record to follow",
+  "remaining_recovery": "Restore last operational closeout/receipt documents from exact final commit; no missing numerical outputs in bundle.",
+  "restored_final_operational_files": [
+    {
+      "path": "research/cr_phys02b_20261010/state/CLOSEOUT.json",
+      "sha256": "5944f4746fd28542030e1e31d792bfdf2601639318da1500d33b05ddf526ddd4",
+      "bytes": 1081
+    },
+    {
+      "path": "research/cr_phys02b_20261010/state/RESEARCH_STATE.md",
+      "sha256": "96e17a86a6b9d2f834de667259c2d2b658a2509918f4f0f086b9ce7719d683ee",
+      "bytes": 3305
+    },
+    {
+      "path": "research/cr_phys02b_20261010/state/CLOSEOUT.md",
+      "sha256": "7c95a054977c3394d705e93d1b6328a4a2440df8e9eb52420c6d81767f4784e0",
+      "bytes": 5490
+    },
+    {
+      "path": "research/cr_phys02b_20261010/publication/ARCHIVE_IDENTITY.json",
+      "sha256": "237f93468b23775a84c2271f7ea776996a55be39b3bb7709c8127c5869ff41bc",
+      "bytes": 771
+    },
+    {
+      "path": "research/cr_phys02b_20261010/publication/RECEIPT_COMMIT_MANIFEST.json",
+      "sha256": "d3e9d70a555eb5e3137d382fd2c6d6ed842807ddc71c3a9667654765c8cae86e",
+      "bytes": 2256
+    },
+    {
+      "path": "research/cr_phys02b_20261010/publication/SCIENCE_PUBLICATION_RECEIPT.json",
+      "sha256": "c72c64eb059c10f43e5d0fa2efa14c0ace19d527739ca9652eaf7cecb74f8eb6",
+      "bytes": 3230
+    },
+    {
+      "path": "research/cr_phys02b_20261010/publication/FINAL_PUBLICATION_RECEIPT.json",
+      "sha256": "bd329efada2c9895bff520fa5aa2dec75a82000d95793a6c9d9a793f661038b1",
+      "bytes": 4120
+    }
+  ],
+  "final_operational_identity_check": "research/context/FINAL_OPERATIONAL_IDENTITY_CHECK.json",
+  "recovery_complete_utc": "2026-10-10T17:24:26.068524+00:00"
+}

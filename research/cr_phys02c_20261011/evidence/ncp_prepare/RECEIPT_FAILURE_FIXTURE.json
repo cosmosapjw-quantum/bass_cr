@@ -1,0 +1,40 @@
+{
+  "status": "PASS_OPERATIONAL_ONLY",
+  "transport_executed": false,
+  "NCP_executed": false,
+  "fixture": "Temporary isolated script overrides admission/resourceprobe to trigger missing reference before any numerical import; all temporary files removed",
+  "actual_subprocess_exit": 1,
+  "actual_receipt": {
+    "end_utc": "2026-10-10T17:32:32Z",
+    "provenance": {
+      "command": [
+        "/tmp/tmp_lhmfzp8/ncp/launch_refinement.py",
+        "--execute",
+        "--run-dir",
+        "/tmp/tmp_lhmfzp8/run"
+      ],
+      "cwd": "/workspace/scratch/584ff08e1634/bass_cr_work/research/cr_phys02c_20261011",
+      "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+      "code_config_identities": {
+        "ncp/NCP_EXECUTION_CONTRACT.json": {
+          "bytes": 144,
+          "sha256": "56abe9b943bbd0963464798a837959495ce81d78217a6f8d872be8a000eeb464"
+        },
+        "ncp/launch_refinement.py": {
+          "bytes": 10659,
+          "sha256": "aafec952378d05d4e3590a6a50d2004cf93d06c4c1f13324ba251d9bef44983a"
+        },
+        "ncp/ops.py": {
+          "bytes": 7633,
+          "sha256": "833fc9bc444c547227493a7499af22d2350a66712bf89f138d737e7b45752d17"
+        }
+      }
+    },
+    "start_utc": "2026-10-10T17:32:32Z",
+    "actual_exit": 1,
+    "status": "OPERATIONAL_FAILURE",
+    "exception": "Traceback (most recent call last):\n  File \"/tmp/tmp_lhmfzp8/ncp/launch_refinement.py\", line 116, in <module>\n    try:sys.exit(main())\n                 ^^^^^^\n  File \"/tmp/tmp_lhmfzp8/ncp/launch_refinement.py\", line 98, in main\n    if q.stat().st_size!=pin['bytes'] or sha(q)!=pin['sha256']:raise ValueError('REFERENCE_IDENTITY_MISMATCH')\n       ^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py\", line 840, in stat\n    return os.stat(self, follow_symlinks=follow_symlinks)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmp_lhmfzp8/missing_fixture_result.json'\n",
+    "transport_calls_started": "SEE_ACTUAL_RESULTS_OR_RESERVATIONS; NOT_INFERRED"
+  },
+  "actual_stderr": "Traceback (most recent call last):\n  File \"/tmp/tmp_lhmfzp8/ncp/launch_refinement.py\", line 116, in <module>\n    try:sys.exit(main())\n                 ^^^^^^\n  File \"/tmp/tmp_lhmfzp8/ncp/launch_refinement.py\", line 98, in main\n    if q.stat().st_size!=pin['bytes'] or sha(q)!=pin['sha256']:raise ValueError('REFERENCE_IDENTITY_MISMATCH')\n       ^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py\", line 840, in stat\n    return os.stat(self, follow_symlinks=follow_symlinks)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmp_lhmfzp8/missing_fixture_result.json'\n"
+}

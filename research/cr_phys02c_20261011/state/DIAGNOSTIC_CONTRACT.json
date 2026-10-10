@@ -1,0 +1,25 @@
+{
+  "schema": "cr-phys02c-diagnostic-contract.v1",
+  "state": "FROZEN_BEFORE_DIAGNOSTIC_COMPUTATION",
+  "purpose": "Explain the new versus legacy representation difference and distinguish all high-birth heat from high-birth heat actually emitted while E<=10 eV. Postprocessing only, no transport rerun, no changed science admission threshold.",
+  "parent_contract_sha256": "e0445ecbf052a3441f6203f9e0463defcf0c24c0ee018a67e112d338991f47ee",
+  "legacy_spectrum": {"path":"../cr_phys02b_20261010/evidence/runs/R002/CANONICAL_SPECTRUM.npz","sha256":"30c3b7cad8e089cbee4b290307049d85cfcf5f90c93be1a019008e0dcd623ffd","bytes":987130},
+  "new_spectrum": "evidence/runs/R001/SPECTRUM_fullBED_4800.npz, only after actual PASS; freeze actual hash in execution manifest before running diagnostic",
+  "new_result": "evidence/runs/R001/NUMERICAL_RESULT.json, only after completion; freeze actual hash in execution manifest before running diagnostic",
+  "heat_formula": "P[tag,mask]=scale_eV_m3*e_J_per_eV*sum_j_in_mask [b(E_j)/E_j * z_final[j,tag]], because inherited energy-weighted state z=E*N/scale and Coulomb is the sole heat ledger input.",
+  "masks": {"all":"all4800activeelectronnodes","low":"E<=10eV","high":"E>10eV"},
+  "tag_definition": ["direct_0p1_10","direct_10_900"],
+  "identity_check": "Same E arrays and physical scale in old/new; summed per-tag all-mask heat equals saved heat ledger power to relative1e-11. A failed check is reported; no adjustment of data.",
+  "reported_ratios": ["high-birth total heat power/direct-low-birth total heat power", "high-birth low-mask heat power/direct-low-birth total heat power", "new versus legacy percent for these same quantities"],
+  "figure": {
+    "format": "standalone scientific PNG and PDF with editable generation script; exact numeric plot-data JSON",
+    "panels": [
+      "H and He ionization total sigma_fullBED/sigma_legacy minus1 as percent, incident energies from1.001*B to900, log energy axis; physical representation comparison, not errorbars",
+      "Paired model delta as percent of matching legacy value at2400 and4800 nodes for heat_power, heat, binding_HI, binding_HeI, ionizations_HI, ionizations_HeI, low_cross_energy, low_cross_number, cutoff_energy, cutoff_number"
+    ],
+    "annotation": "Fixedbath, selected0.1–900eV source, T=1e10s; two-grid changes are empirical, no physical error certificate; inheritedglobalgates unchanged",
+    "claim_rule": "Do not mark unchanged direct-low roundoff deltas as physical effects or treat tiny relative changes of conserved injected quantities as new physics. Use exact values in machine file and sensible significant figures in prose."
+  },
+  "budget": {"transport_calls":0,"diagnostic_wall_s":60,"BLAS_threads":1,"max_preallocated_numeric_size":"few thousand energies; noGbuild"},
+  "final_review": "Include diagnostic inputs/code/actualexit/figure identity in independent final review packet."
+}

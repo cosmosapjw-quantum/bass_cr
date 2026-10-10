@@ -1,0 +1,135 @@
+--- ncp/ops.py before
++++ ncp/ops.py after
+@@ -16,38 +16,108 @@
+     try:return pathlib.Path(p).read_text().strip()
+     except OSError:return None
+ 
+-def probe(root):
+-    mem={}
+-    for line in (read('/proc/meminfo') or '').splitlines():
+-        k,v=line.split(':',1);mem[k]=int(v.strip().split()[0])*1024
+-    cgroup={p:read('/sys/fs/cgroup/'+p) for p in ('cpu.max','cpuset.cpus.effective','memory.max','memory.current')}
+-    # Resolve the current process's delegated cgroup, when the mount is not namespace-rooted.
+-    for line in (read('/proc/self/cgroup') or '').splitlines():
+-        if line.startswith('0::'):
+-            base=pathlib.Path('/sys/fs/cgroup')/line[3:].lstrip('/')
+-            for p in cgroup:
+-                value=read(base/p)
+-                if value is not None:cgroup[p]=value
+-    limit=cgroup['memory.max']; current=cgroup['memory.current']
+-    bounded=min(mem.get('MemTotal',0),int(limit)) if limit and limit!='max' else mem.get('MemTotal',0)
+-    remaining=bounded-int(current) if current and limit and limit!='max' else mem.get('MemAvailable',0)
+-    available=min(mem.get('MemAvailable',0),remaining)
+-    reserve=max(int(bounded*.125),GIB)
+-    working=max(0,available-reserve)
+-    status=read('/proc/self/status') or ''
++def mount_unescape(value):
++    import re
++    return re.sub(r'\\([0-7]{3})',lambda m:chr(int(m.group(1),8)),value)
++
++def cgroup2_hierarchy(proc_root='/proc'):
++    """Resolve current membership and every visible ancestor up to mount root.
++
++    Missing or ambiguous mapping raises; it never falls back to /sys/fs/cgroup.
++    """
++    proc=pathlib.Path(proc_root)
++    membership=read(proc/'self/cgroup');mountinfo=read(proc/'self/mountinfo')
++    if membership is None or mountinfo is None:raise ValueError('CGROUP_MEMBERSHIP_OR_MOUNTINFO_UNREADABLE')
++    members=[line[3:] for line in membership.splitlines() if line.startswith('0::')]
++    if len(members)!=1:raise ValueError('CGROUP2_MEMBERSHIP_NOT_UNIQUE')
++    member=pathlib.PurePosixPath(members[0])
++    if not member.is_absolute() or '..' in member.parts:raise ValueError('CGROUP_MEMBERSHIP_UNSAFE')
++    mappings=[]
++    for line in mountinfo.splitlines():
++        fields=line.split()
++        try:split=fields.index('-')
++        except ValueError:continue
++        if len(fields)<=split+1 or fields[split+1]!='cgroup2':continue
++        if len(fields)<6:raise ValueError('CGROUP2_MOUNTINFO_MALFORMED')
++        mountroot=pathlib.PurePosixPath(mount_unescape(fields[3]));mountpoint=pathlib.Path(mount_unescape(fields[4]))
++        if not mountroot.is_absolute() or '..' in mountroot.parts or not mountpoint.is_absolute():raise ValueError('CGROUP2_MOUNT_PATH_UNSAFE')
++        if not member.is_relative_to(mountroot):continue
++        base=mountpoint.joinpath(*member.relative_to(mountroot).parts)
++        if not base.is_dir() or not mountpoint.is_dir():continue
++        if base.resolve()!=base or mountpoint.resolve()!=mountpoint:raise ValueError('CGROUP2_SYMLINK_OR_UNRESOLVED_PATH')
++        mappings.append((len(mountroot.parts),mountroot,mountpoint,base))
++    if not mappings:raise ValueError('CGROUP2_MEMBERSHIP_MOUNT_MAPPING_UNRESOLVED')
++    # A nested visible mount is narrower; use the broadest matching mount to
++    # inspect the most visible ancestors. Ambiguous equally broad views HOLD.
++    depth=min(x[0] for x in mappings);chosen=[x for x in mappings if x[0]==depth]
++    distinct={(str(x[1]),str(x[2]),str(x[3])) for x in chosen}
++    if len(distinct)!=1:raise ValueError('CGROUP2_MEMBERSHIP_MOUNT_MAPPING_AMBIGUOUS')
++    _,mountroot,mountpoint,base=chosen[0]
++    ancestors=[];p=base
++    while True:
++        values={name:read(p/name) for name in ('cpu.max','memory.max','memory.current')}
++        if any(v is None for v in values.values()):raise ValueError('CGROUP2_ANCESTOR_LIMIT_UNREADABLE '+str(p))
++        ancestors.append({'path':str(p),'values':values})
++        if p==mountpoint:break
++        p=p.parent
++        if not p.is_relative_to(mountpoint):raise ValueError('CGROUP2_ANCESTOR_WALK_ESCAPED_MOUNT')
++    cpuset=read(base/'cpuset.cpus.effective')
++    if cpuset is None or not cpuset:raise ValueError('CGROUP2_EFFECTIVE_CPUSET_UNREADABLE')
++    cpus=set()
++    for part in cpuset.split(','):
++        pair=part.split('-')
++        if len(pair)==1:cpus.add(int(pair[0]))
++        elif len(pair)==2:
++            lo,hi=map(int,pair)
++            if lo<0 or hi<lo:raise ValueError('CGROUP2_CPUSET_INVALID')
++            cpus.update(range(lo,hi+1))
++        else:raise ValueError('CGROUP2_CPUSET_INVALID')
++    if not cpus or min(cpus)<0:raise ValueError('CGROUP2_CPUSET_INVALID')
++    return {'membership':str(member),'mount_root':str(mountroot),'mount_point':str(mountpoint),'leaf':str(base),'inspection_scope':'ALL_READABLE_VISIBLE_ANCESTORS_TO_MOUNT_ROOT','ancestors':ancestors,'effective_cpuset':cpuset,'effective_cpuset_cpus':sorted(cpus)}
++
++def effective_capacity(mem,hierarchy):
++    total=mem.get('MemTotal');host_available=mem.get('MemAvailable')
++    if not isinstance(total,int) or total<=0 or not isinstance(host_available,int) or host_available<0:raise ValueError('HOST_MEMORY_CAPACITY_UNREADABLE')
++    limits=[total];headrooms=[host_available];quotas=[]
++    for row in hierarchy['ancestors']:
++        vals=row['values'];cpu=vals['cpu.max'].split()
++        if len(cpu)!=2 or int(cpu[1])<=0:raise ValueError('CGROUP2_CPU_QUOTA_INVALID')
++        if cpu[0]!='max':
++            q=int(cpu[0])
++            if q<=0:raise ValueError('CGROUP2_CPU_QUOTA_INVALID')
++            quotas.append(q/int(cpu[1]))
++        current=int(vals['memory.current'])
++        if current<0:raise ValueError('CGROUP2_MEMORY_USAGE_INVALID')
++        if vals['memory.max']!='max':
++            limit=int(vals['memory.max'])
++            if limit<=0:raise ValueError('CGROUP2_MEMORY_LIMIT_INVALID')
++            limits.append(limit);headrooms.append(max(0,limit-current))
++    bounded=min(limits);available=min(headrooms);reserve=max(int(bounded*.125),GIB)
++    return {'bounded_memory_bytes':bounded,'available_before_reserve_bytes':available,'reserve_bytes':reserve,'available_working_bytes':max(0,available-reserve),'cpu_quota':min(quotas) if quotas else None}
++
++def probe(root,proc_root='/proc'):
++    mem={};capacity={};hierarchy=None;error=None
++    try:
++        for line in (read(pathlib.Path(proc_root)/'meminfo') or '').splitlines():
++            k,v=line.split(':',1);mem[k]=int(v.strip().split()[0])*1024
++        hierarchy=cgroup2_hierarchy(proc_root);capacity=effective_capacity(mem,hierarchy)
++    except (ValueError,OSError,IndexError) as e:error=str(e)
++    status=read(pathlib.Path(proc_root)/'self/status') or ''
+     rss=next((x.split(':',1)[1].strip() for x in status.splitlines() if x.startswith('VmRSS:')),None)
++    affinity=sorted(os.sched_getaffinity(0));effective=sorted(set(affinity)&set(hierarchy['effective_cpuset_cpus'])) if hierarchy else []
+     topology=[]
+-    for cpu in sorted(os.sched_getaffinity(0)):
++    for cpu in effective:
+         base=f'/sys/devices/system/cpu/cpu{cpu}/topology/'
+         topology.append({'cpu':cpu,'core_id':read(base+'core_id'),'package_id':read(base+'physical_package_id')})
+-    quota=cgroup['cpu.max']; quota_cpu=None
+-    if quota and quota.split()[0]!='max':quota_cpu=int(quota.split()[0])/int(quota.split()[1])
+     live=0
+-    for p in pathlib.Path('/proc').iterdir():
++    for p in pathlib.Path(proc_root).iterdir():
+         if p.name.isdigit():
+             st=read(p/'status') or ''
+             if '\nUid:\t'+str(os.getuid())+'\t' in st:live+=1
+-    return {'utc':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'affinity_cpus':sorted(os.sched_getaffinity(0)), 'cpu_quota':quota_cpu,'cgroup':cgroup,'topology':topology,'load_average':os.getloadavg(),'same_uid_process_count_no_commandlines':live,'coordinator_pid':os.getpid(),'coordinator_RSS':rss,'memory_host_bytes':mem,'bounded_memory_bytes':bounded,'available_before_reserve_bytes':available,'reserve_bytes':reserve,'available_working_bytes':working,'estimated_peak_bytes':8*GIB,'minimum_working_bytes':12*GIB,'free_disk_bytes':shutil.disk_usage(root).free,'admitted':working>=12*GIB and shutil.disk_usage(root).free>=8*GIB and bool(os.sched_getaffinity(0)) and (quota_cpu is None or quota_cpu>=1),'thread_environment':{k:os.environ[k] for k in ('OPENBLAS_NUM_THREADS','MKL_NUM_THREADS','OMP_NUM_THREADS','NUMEXPR_NUM_THREADS','OMP_MAX_ACTIVE_LEVELS')}}
++    disk=shutil.disk_usage(root).free
++    admitted=error is None and capacity['available_working_bytes']>=12*GIB and disk>=8*GIB and bool(effective) and (capacity['cpu_quota'] is None or capacity['cpu_quota']>=1)
++    reason=error or (None if admitted else 'INSUFFICIENT_EFFECTIVE_MEMORY_CPU_OR_DISK')
++    return {'utc':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'status':'ADMITTED_RESOURCE_ONLY' if admitted else 'HOLD','reason':reason,'capacity_established':error is None,'affinity_cpus':affinity,'effective_allowed_cpus':effective,'cgroup_hierarchy':hierarchy,'cgroup':hierarchy['ancestors'][0]['values'] if hierarchy else None,'topology':topology,'load_average':os.getloadavg(),'same_uid_process_count_no_commandlines':live,'coordinator_pid':os.getpid(),'coordinator_RSS':rss,'memory_host_bytes':mem,**capacity,'estimated_peak_bytes':8*GIB,'minimum_working_bytes':12*GIB,'free_disk_bytes':disk,'admitted':admitted,'thread_environment':{k:os.environ[k] for k in ('OPENBLAS_NUM_THREADS','MKL_NUM_THREADS','OMP_NUM_THREADS','NUMEXPR_NUM_THREADS','OMP_MAX_ACTIVE_LEVELS')}}
+ 
+ def entries(manifest):
+     data=manifest.get('files',manifest.get('entries',manifest.get('payload')))

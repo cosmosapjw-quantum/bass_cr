@@ -1,0 +1,268 @@
+{
+  "schema": "cr-phys02c-remote-authority-and-ncp-survey.v1",
+  "observed_utc": "2026-10-10T17:18:14Z",
+  "audit_role": "Read-only remote context and policy audit, requested local evidence snapshots. No scientific implementation or execution.",
+  "adopted_authority": {
+    "repository": "cosmosapjw-quantum/bass_cr",
+    "branch": "research/cr-phys02b-causal-cascade-20261010",
+    "pr": 27,
+    "pr_state": "OPEN_DRAFT",
+    "head_sha": "b5b0f2244311a6e46692da55e75db6d04d3ef305",
+    "tree_sha": "a5b6bae83f002b7e0e944bb8e185d7d93e09f973",
+    "science_sha": "929abd7ff981f08ed965e302532af9daac06316f",
+    "science_tree": "0a8ff5cf5ab0496d73e80a8434d1f7813df5b01c",
+    "receipt_only_successor": true,
+    "main_sha": "77237751bdd2aed5934bf7fc3bc626d631a09058",
+    "science_subset_adopted_from": "929abd7ff981f08ed965e302532af9daac06316f",
+    "operation_snapshot_directory": "adopted_b5b0f224/research/cr_phys02b_20261010",
+    "remote_ref_match": true,
+    "scientific_next": "CR-PHYS02C-ATOMIC-CONSISTENCY"
+  },
+  "parallel_branch": {
+    "branch": "research/cr-phys03-fs10-xi01-20261010",
+    "pr": 25,
+    "head_sha": "5a95e976aef0e2b1e399174c120c9d23c5d4d930",
+    "tree_sha": "e0b7f52329196cfc4beaa5348f5d0adb3071f9b9",
+    "base_branch": "research/cr-physical-provider-20261010",
+    "base_sha": "e41e18873af438ef989ff44f505fe2665118fdec",
+    "remote_ref_match": true,
+    "actual_commit_count": 13,
+    "pr_body_is_stale_as_complete_scope": true,
+    "pr_body_describes_only": "FS10 xi=.1 composition knot",
+    "actual_additional_units": [
+      "cr_phys04a_tail_20261010",
+      "cr_phys04b_coulomb_20261010",
+      "cr_phys02b_delay_20261010",
+      "cr_phys05_source_convolution_20261010",
+      "cr_phys02c_source_20261010",
+      "cr_phys02c_nist_table_20261010",
+      "cr_phys02c_nist_kernel_20261010",
+      "cr_phys02c_crossing_flux_20261010",
+      "cr_phys02c_cohort_adapter_20261010",
+      "cr_phys02c_conditional_response_20261010",
+      "cr_phys02c_continuous_convolution_20261010"
+    ],
+    "automatic_adoption": false,
+    "reason": "A different parent and low-energy P02B closure; similarly named units do not identify our PHYS02B CCC27 0.1–900eV operator."
+  },
+  "overlap_determination": {
+    "nist_table": {
+      "path": "research/cr_phys02c_nist_table_20261010/",
+      "title": "Stone, Kim and Desclaux, J. Res. NIST107,327–337(2002)",
+      "source_url": "https://nvlpubs.nist.gov/nistpubs/jres/107/4/j74sto.pdf",
+      "source_sha256": "2492e6923503515bc6bf310da043eb64f72f3b2e609991fa037065a8afc966d1",
+      "table_sha256": "68ed530440bedd7c91851fd941c82857786126d8a4f358d5cad4dcb8c9ef9a54",
+      "incident_nodes_eV": [
+        1000,
+        1500,
+        2000,
+        3000
+      ],
+      "incident_domain_eV": [
+        1000,
+        3000
+      ],
+      "channels": [
+        {
+          "id": "HI_1s_2p",
+          "excitation_eV": 10.204
+        },
+        {
+          "id": "HeI_1s2_1S_1s2p_1P",
+          "excitation_eV": 21.218
+        }
+      ],
+      "interpolation": "linear E/sigma; no extrapolation",
+      "scope": "source-backed two-transition component only",
+      "potential_use": "Primary bibliography and these two printed channel energies; cross sections cannot be imported into0.1–900eV domain.",
+      "does_not_resolve": [
+        "He ionization BEQ/BED Q mismatch",
+        "CCC27 effective threshold-to-target-state energy mapping",
+        "all HI/HeI n2..4 excitation costs",
+        "physical cross-section interpolation/model-error budget"
+      ],
+      "primary_pdf_fetched_this_audit": false
+    },
+    "nist_kernel": {
+      "path": "research/cr_phys02c_nist_kernel_20261010/",
+      "scope": "fixed100K bath two-transition excitation-only event graph on(1000,3000]eV",
+      "bath": "nH140m^-3,Y=.248,xHII=xHeII=.01,xHeIII=0",
+      "energy_graph": "integer meV, E=E0−10.204m−21.218n",
+      "crossing": "E<=1000 retained as residual energy+count, not heat",
+      "omitted": [
+        "ionization",
+        "Coulomb",
+        "HeII excitation",
+        "other transitions",
+        "gas feedback"
+      ],
+      "reported_decision": "PASS_SCOPED",
+      "automatic_import": false
+    },
+    "continuous_convolution": {
+      "path": "research/cr_phys02c_continuous_convolution_20261010/",
+      "scope": "one initial1000.001eV electron in fixed100K gas for0..1e10s",
+      "source": "analytic first-crossing source from NIST HI2p/HeIsinglet",
+      "residual_eV": [
+        989.797,
+        978.783
+      ],
+      "downstream_P02B_sha256": "ea72b12d07bc500cb7c917c5e500325c6864da77cdd90637ddceab7aeddfa0da",
+      "upstream_packet_sha256": "df8b917a4fffe665e698d32f1ccf7763200d150f565c24e63a72f33a82da6005",
+      "old_He23s_downstream_kept_separate": true,
+      "our_CCC27_low_energy_operator": false,
+      "reported_decision": "PASS_SCOPED",
+      "actual_evolves_reported": 1552,
+      "not_rerun_this_audit": true,
+      "execution_accounting": "PARTIAL_EXECUTION_ACCOUNTING; measured core CPU excludes assembly/coordinator, aggregate3600sCPU NOT_CERTIFIED; actual5 processes=4science+1coordinator",
+      "holds": [
+        "physical/global history",
+        "volumetric CR injection",
+        "evolving gas",
+        "continuous error upper bound"
+      ],
+      "automatic_import": false
+    }
+  },
+  "policies": {
+    "adopted_paths": [
+      "AGENTS.md",
+      "docs/CHATGPT_CODEX_DIVISION_OF_LABOR_KO.md",
+      "docs/HPC_ACCURACY_POLICY_KO.md",
+      "docs/READBACK_POLICY.md",
+      "docs/CLAIM_POLICY.md"
+    ],
+    "missing_machine_policy": {
+      "path": ".codex/readback-policy.json",
+      "status": "404_AT_ADOPTED_PIN",
+      "action": "Use actual AGENTS and prose policy; do not invent machine config."
+    },
+    "default_main_agents": {
+      "path": "AGENTS.md",
+      "ref": "77237751bdd2aed5934bf7fc3bc626d631a09058",
+      "status": "404",
+      "implication": "Use adopted research branch instructions, not absent main instructions."
+    },
+    "new_parallel_routing": {
+      "source_ref": "5a95e976aef0e2b1e399174c120c9d23c5d4d930",
+      "path": "docs/ASTRA_TIER_ROUTING_POLICY.md",
+      "git_blob_sha": "d4b9c9f70579917e85a640928476e7f9ceca04bc",
+      "agreed_scope_claimed_by_source": "owner policy effective2026-10-10 for new bounded units",
+      "role_split": "Astra theory/source/domain/DAG/contract/blocker/review/publication; lower-tier frozen-contract implementation/tests/evidence/routine reports and pre-authorized repair; return ambiguous physical choices to Astra",
+      "absent_from_adopted_pin": true,
+      "parent_action": "Explicitly decide prospective applicability; preserve current science parent rather than automatically merging another branch."
+    },
+    "readback": "R1 ordinary new additive branch/draftPR/create-only backup after provider ACK+exactref/ID+available size/hash; R3 for recovery/trust import/overwrites/provenance conflict/explicitcontentaudit. UPLOAD_VERIFIED differs from RESTORE_VERIFIED.",
+    "division": "Deliver implemented tested code before NCP; local Codex focused exact-source review, necessary same-scope repair and bounded changed-host execution. Do not rerun unchanged old suites solely because checkout/restore/handoff occurs.",
+    "claim": "Norm/ledger/hash/test count/source spread do not establish atomic or global physical accuracy. Keep model definition/code verification/solution validation/formal bound/real-world validation distinct."
+  },
+  "ncp": {
+    "actual_live_environment": "NOT_INSPECTED",
+    "target": "Advertised64CPU/128GB or policy128GiB; actual cpuset/cgroup/topology/quota/RAM/disk must govern.",
+    "do_not_assume": "User Ryzen5900X64GB desktop equals NCP; advertised vCPU equals physical cores; previous host observation equals current admission.",
+    "admission_fields": [
+      "host/kernel",
+      "lscpu topology",
+      "affinity/cpuset",
+      "cgroup cpu.max and memory.max/current",
+      "MemAvailable",
+      "filesystem and free disk",
+      "Python/NumPy/SciPy/compiler/MPI identity",
+      "BLAS/OMP/MKL/NumExpr thread controls",
+      "concurrent project/process occupancy without assuming idle"
+    ],
+    "memory_reserve": "Policy:12.5% and minimum1GiB; at128GiB reserve>=16GiB. Separate old NCP runbook suggests16–24GiB. Include coordinator and measured peakRSS before large run.",
+    "cpu": "rank*threads <=actualadmittedCPU includingcoordinator; defaultBLAS/NumExpr1, nestedOMP off. For small one-column cascade choose bounded serial or few independent cases rather than64 ranks.",
+    "arithmetic": "FP64; preservequadrature/tolerances/batchandaccumulationorder. No Ofast/fast-math/reassociation/mixedprecision/non-deterministicfloatingMPIreductions; FMAcontractofffornativebackend unlessseparatelyadmitted.",
+    "native": "New source/native/resource manifest for backendchange; march=native onlytarget-nodebuildwithaccuracycheck. OldG02/G03authorizationnotreusable.",
+    "credentials": "ChatGPT connector credentials do not imply localNCPgit/rcloneauth. Inspect existing configured capability without requesting secret disclosure.",
+    "historical_host_context": {
+      "source_pr": "https://github.com/cosmosapjw-quantum/BASS_HE/pull/14",
+      "source_sha": "ff3035e0d240da53293cb2e15b97050cd5a25c47",
+      "date": "2026-09-28",
+      "host": "NAVERCloud c64-g3_HIGH_CPU",
+      "usable_CPUs_reported": 64,
+      "effective_memory_bytes_reported": 135050530816,
+      "path": "/srv/bass-he",
+      "disk": "100GB CB1 root/dev/vda2 ext4; no separatedata mount",
+      "current_admission": false
+    },
+    "old_runbook": {
+      "path": "research/ncp_bass_cr_handoff_20261008/RUNBOOK_KO.md",
+      "scope": "CR-XTHREAD-R15 FT03fixedbirthThomson opticaltau; otherGrackle/G02backlogs separate",
+      "role": "Operational bootstrap/provenance/resource/return pattern only",
+      "reuse_old_science_commands_or_four_ZIPs_for_PHYS02C": false
+    },
+    "suggested_return_files": [
+      "SOURCE_BINDING.json",
+      "EXECUTION.json",
+      "VERIFICATION.json",
+      "RESULTS.json",
+      "CLAIM_GATE.json",
+      "RECOVERY_INVENTORY.json",
+      "NEXT_HANDOFF_KO.md",
+      "detachedDELIVERY_RECEIPT.json"
+    ],
+    "new_execution_budget": "Parent must freeze currentPHYS02C executablecontract; no budget inherited from oldR15/G02/peerHHnativecontracts.",
+    "new_host_parity_status": "NOT_RUN_IN_THIS_AUDIT"
+  },
+  "cross_repositories": [
+    {
+      "repo": "BASS_HE",
+      "branch": "research/shared-c64-crossrepo-20260928",
+      "sha": "8fc3fb14dd33da10efa86c97c4beb9b0d12eeaad",
+      "path": "docs/atomic_reionization_handoff_20261004_v1/threads/BASS_HE/runs/HE-E13C4-LOCAL-REMAINDER-ENCLOSURE_20261010/",
+      "decision": "PASS_SCOPED",
+      "decision_time": "2026-10-10T13:46:49.097205+00:00",
+      "scope": "six exact-lift local fixed-gas photon corrections with separateincomingzero",
+      "note": "Predecision stateREVIEW_PENDING is preserved; finalINDEPENDENT_REVIEW governs finaldecision.",
+      "actual_atomic_photon_heat_recoil": null,
+      "physical": "HOLD",
+      "production": "HOLD",
+      "NCP": "NOT_RUN",
+      "use": "context-only; no electronimpactinput"
+    },
+    {
+      "repo": "WU088_HH",
+      "branch": "research/hh-energy06d-birth-tv-20261010",
+      "sha": "36b479d509d28aade8db6c8df6a1f8e9edf1a677",
+      "path": "research/r31ao_unequal_ladder/hh_phys04_ordered_quartic_20261010_v1/",
+      "decision": "PROMOTE_SCOPED",
+      "scope": "source-orderedquartic,pure-remapopacity,andmanufacturedreduced-BEmixedsensitivity",
+      "actual_native_finite_mixed_sign": null,
+      "native_budget": 0,
+      "physical": "HOLD",
+      "production": "HOLD",
+      "use": "context-only; notnewatomiccollisionrates"
+    },
+    {
+      "repo": "rei_bianchi",
+      "branch": "research/cold-conditional-ivp01-20261011",
+      "sha": "51da705e4f24bd201444ac3e81db495b50a7d8f7",
+      "pr": 109,
+      "path": "research/cold_conditional_ivp01_20261011/",
+      "scope": "fourcoldsourcepinnedFLRWconditionalintervals,HIIcaseARR+prescribedCMBCompton,neutralHe,zerophotons",
+      "holds": [
+        "CR",
+        "heliumreactions",
+        "Bianchi",
+        "radiationbackreaction",
+        "physicalcontinuum",
+        "globaladmission"
+      ],
+      "use": "context-only; noadoptedCRreceiverhistory"
+    }
+  ],
+  "audit_failures": [
+    {
+      "kind": "local_evidence_transfer_wrapper",
+      "issue": "Firstall-filesexec_commandargumentlisttoolarge; exec-serverrejectedbeforechildcreation",
+      "effect": "No science/no remote mutation; no localfilesfromfailedcommand",
+      "repair": "Same exactfetchedcontents serializedin8boundedbatches, eachactualexit0; verifyGitblobSHAafterwriting."
+    }
+  ],
+  "science_runs": 0,
+  "remote_mutations": 0,
+  "new_physical_inputs_adopted": 0,
+  "all_other_repositories_read_only": true
+}

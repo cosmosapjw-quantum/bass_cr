@@ -1,0 +1,52 @@
+{
+  "schema": "cr-phys02c-actual-process-receipt.v1",
+  "actual_exit_code": 0,
+  "command": [
+    "env",
+    "OPENBLAS_NUM_THREADS=1",
+    "MKL_NUM_THREADS=1",
+    "OMP_NUM_THREADS=1",
+    "NUMEXPR_NUM_THREADS=1",
+    "OMP_MAX_ACTIVE_LEVELS=1",
+    "python",
+    "research/cr_phys02c_20261011/tests/run_targeted.py",
+    "--atomic-only",
+    "--run-dir",
+    "research/cr_phys02c_20261011/evidence/runs/A001"
+  ],
+  "start_utc": "2026-10-10T17:29:35.485094+00:00",
+  "end_utc": "2026-10-10T17:29:35.594843+00:00",
+  "peak_RSS_KiB": 64248,
+  "identities": {
+    "state/SCIENTIFIC_CONTRACT.json": {
+      "sha256": "e0445ecbf052a3441f6203f9e0463defcf0c24c0ee018a67e112d338991f47ee",
+      "bytes": 11719
+    },
+    "inputs/PARENT_IDENTITY.json": {
+      "sha256": "a733b00ed6da96c9c05bcb80ac9b64d12bb48b742fe5c7738debe8faddb63c50",
+      "bytes": 7108
+    },
+    "inputs/FULL_BED_INPUTS.json": {
+      "sha256": "60ea3e3de0f791484215ede2abe6850a734c88c8aa79dd2bd3ef08b8dc64bbb0",
+      "bytes": 1058
+    },
+    "src/coherent_bed.py": {
+      "sha256": "30e6e043859c3b2014429c5860314e5e6a833381141469eac24cd6293c43acca",
+      "bytes": 4094
+    },
+    "tests/run_targeted.py": {
+      "sha256": "8b86749819172a7174815a10368909f0d6ab988fafc1c5294ecef7ec07f87024",
+      "bytes": 15950
+    }
+  },
+  "streams": {
+    "ATOMIC_A001.stdout": {
+      "sha256": "4bcc19f935f4d9526fbdaf3855270adf6ac9bb79c5a6915dd4593432ee80967e",
+      "bytes": 5630
+    },
+    "ATOMIC_A001.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  }
+}

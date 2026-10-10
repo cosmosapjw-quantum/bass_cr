@@ -1,0 +1,117 @@
+{
+  "schema": "cr-phys02c-ncp-execution.v1",
+  "state": "PREPARED_NOT_EXECUTED",
+  "scientific_contract_path": "state/SCIENTIFIC_CONTRACT.json",
+  "scientific_contract_sha256": "e0445ecbf052a3441f6203f9e0463defcf0c24c0ee018a67e112d338991f47ee",
+  "worker": {
+    "assigned_role": "lower-tier contract-preserving implementation/evidence assembly",
+    "requested_model_route": "gpt-6.1-sol",
+    "observed_host_identity": "GPT-6 Astra Pro",
+    "actual_runtime_model": "UNVERIFIED_CONFLICTING_METADATA",
+    "scientific_authority": "No Astra scientific authority or independent-review claim"
+  },
+  "task_id": "CR-PHYS02C-NCP-MATCHED-THIRD-GRID",
+  "grid": [
+    3200,
+    6400
+  ],
+  "models_in_order": [
+    "fullBED",
+    "legacy_BEQ_BED"
+  ],
+  "reference_grid": [
+    1600,
+    3200
+  ],
+  "reference_combined_cells": 4800,
+  "same_physics": {
+    "source": "Unchanged parent ElectronSource; proton birth support 1-4 MeV, selected electron energy 0.1-900 eV, Q_e(W,t)=t A(W), initially empty, T=1e10 s.",
+    "birth_tags_eV": [
+      [
+        0.1,
+        10.0
+      ],
+      [
+        10.0,
+        900.0
+      ]
+    ],
+    "bath": "Exactly inherited nH=140 m^-3, YHe=.248, xHII=xHeII=.01, xHeIII=0, Tgas=100 K prescribed bath; no feedback.",
+    "transport": "Reuse hash-checked parent Cascade unchanged, including classical/quantum Coulomb min closure with quantum_constant=0, projection, source quadrature, time propagator, and ledgers.",
+    "excitation": "Exactly the same 27 checked CCC raw tables and native first-zero effective costs, linear interpolation, native zero rows, no extrapolation. Their spectroscopic/Hamiltonian interpretation is separately audited; no relabeling or energy-axis shift in this comparison.",
+    "ionization_daughters": "W and E-B-W, 0<=W<=(E-B)/2; one extra electron, binding energy B retained separately.",
+    "atomic_change_only": "Replace AtomicData.ionization objects with compatible full-BED ionization objects. Parent science files must not be edited."
+  },
+  "precision": "FP64; no fast-math/Ofast/reassociation",
+  "tolerances": {
+    "source_moment_relative": 1e-10,
+    "source_D_relative": 1e-10,
+    "SDCS_total_relative": 2e-08,
+    "sharing_quadrature_relative": 2e-08,
+    "generator_energy_number_relative": 5e-12,
+    "propagated_ledger_relative": 1e-09,
+    "positivity_absolute_normalized": 1e-12,
+    "mesh_channel_relative": 0.02,
+    "mesh_cutoff_and_low_boundary_count_relative": 0.03,
+    "terminal_ledger_relative": 1e-09
+  },
+  "validation_rows": [
+    "PINNED_PARENT_AND_NEW_INPUT_IDENTITIES",
+    "H_ANALYTIC_OSCILLATOR_THRESHOLD_MOMENTS_AND_D_ORACLES",
+    "HE_PRINTED_COEFFICIENT_MOMENTS_AND_ANALYTIC_D",
+    "FULL_BED_TOTAL_VERSUS_INDEPENDENT_ADAPTIVE_SDCS_INTEGRAL",
+    "ATOMIC_POSITIVITY_THRESHOLD_AND_SCOPED_DOMAIN",
+    "NEW_GENERATOR_ENERGY_NUMBER_AND_METZLER",
+    "NEW_PROPAGATED_LEDGER_AND_POSITIVITY",
+    "TWO_GRID_CHANNEL_CONVERGENCE_WITH_FROZEN_TOLERANCES",
+    "NUMERICAL_SHARING_NORMALIZATION_NEAR_UNITY",
+    "SAME_OPERATOR_TERMINAL_LEDGER",
+    "PAIRED_PHYSICAL_REPRESENTATION_DELTAS_WITH_EMPIRICAL_RESOLUTION_STATUS"
+  ],
+  "paired_delta_diagnostic": "For each nonzero paired delta Delta, report r=abs(Delta_fine-Delta_coarse)/abs(Delta_fine). Empirically resolved iff r<1/3 and signs agree. This is a two-grid diagnostic, not a certified error bound or significance test; unresolved rows remain unresolved.",
+  "resources": {
+    "state": "PREPARED_NOT_EXECUTED_ON_NCP",
+    "self_contained": "Bundle NCP start prompt, frozen contract, code, all parent source/raw inputs and saved comparison evidence, source citations, dependency specification, resource admission, exact commands and return collector. No additional user attachment required.",
+    "next_bounded_task": "Conditional paired third-grid refinement at (3200,6400), full BED and legacy BEQ/BED sequentially, matched against saved4800 results, only if next DAG admits this numerical task. Exact same physics/precision/tolerances. No64-rank sweep.",
+    "hardware": "Advertised64CPU128GB is context only. Detect actual affinity/quota, RAM, free disk and live load; one process with thread1 by default, reserve12.5% minimum1GiB. Do not assume remote credentials from ChatGPT connector access.",
+    "minimum_available_working_memory_GiB": 12,
+    "refinement_estimated_peak_GiB": 8,
+    "transport_wall_budget_s": 3600,
+    "maximum_transport_calls": 2,
+    "publication": "Collect actual results and typed checks, then request independent Astra decision. Do not auto-promote global gates or edit production. Preserve dirty work and use isolated extraction/worktree."
+  },
+  "thread_environment": {
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_MAX_ACTIVE_LEVELS": "1"
+  },
+  "one_authorized_repair": "One targeted contract-preserving implementation/interface/shape bug or quadrature-order increase up to256 if an unchanged atomic integral tolerance fails; retain first run. No physical coefficient, energy cost, cutoff, tolerance or grid change. Anything beyond returns to Astra.",
+  "global_gates": {
+    "PHYS02_DELAY": "OPEN",
+    "production_history": "HOLD",
+    "atomic_G02": "UNRESOLVED",
+    "b_grid": "NO_GO",
+    "all_bound": "OPEN",
+    "R17B2B": "NO_CERTIFIED_SOURCE_SHARPENING"
+  },
+  "global_promotion": "FORBIDDEN_AUTOMATICALLY; independent Astra decision required",
+  "admission": "state/NEXT_DAG.json task READY, exact contract SHA, unchanged inherited_gates, hash-bound review decision PASS_SCOPED/PROMOTE_SCOPED with both independence booleans true",
+  "readback": "ordinary immutable backup upload R1; downloaded restore R3 actual archive/full inner hashes",
+  "dependency_file": "requirements.txt",
+  "reference_results": {
+    "fullBED": "evidence/runs/R001/NUMERICAL_RESULT.json",
+    "legacy": "../cr_phys02b_20261010/evidence/runs/R002/NUMERICAL_RESULT.json"
+  },
+  "reference_result_identities": {
+    "fullBED": {
+      "bytes": 86974,
+      "sha256": "36ea403320bcc711c4955de55e2a7e9f65c2deaf851a882bd9581585fb857624"
+    },
+    "legacy": {
+      "sha256": "1f2ebaef36c1d77ae4fcab83ef81f0618060a701eaebb5db611307aa8b090ced",
+      "bytes": 169912
+    }
+  }
+}

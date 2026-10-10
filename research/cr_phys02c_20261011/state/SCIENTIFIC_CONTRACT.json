@@ -1,0 +1,182 @@
+{
+  "schema": "cr-phys02c-atomic-consistency-contract.v1",
+  "unit": "CR-PHYS02C-ATOMIC-CONSISTENCY",
+  "state": "FROZEN_BEFORE_CANDIDATE_IMPLEMENTATION_AND_TRANSPORT",
+  "frozen_utc": "2026-10-10T17:26:17.803361+00:00",
+  "owner": "/root",
+  "scientific_model_identity": "GPT-6 Astra Pro, host metadata",
+  "harness": {
+    "research": "4.0.0",
+    "coding": "4.0.0",
+    "model_performance": "NOT_EVALUATED"
+  },
+  "objective": "Determine the finite-time cascade response to replacing the inherited BEQ-total/normalized-BED-shape ionization representation by a full BED model whose slow-electron distribution and total rate use the same primary-source oscillator strength. Preserve the inherited source, bath, transport, excitation effective model, and all global gates.",
+  "authority": {
+    "repository": "cosmosapjw-quantum/bass_cr",
+    "adopted_head": "b5b0f2244311a6e46692da55e75db6d04d3ef305",
+    "adopted_science": "929abd7ff981f08ed965e302532af9daac06316f",
+    "branch": "research/cr-phys02c-atomic-consistency-20261011",
+    "publication": "additive research branch, draft PR, create-only dual backup; no main merge",
+    "parallel_science_imported": false
+  },
+  "tier_routing": {
+    "policy": "research/context/ASTRA_TIER_ROUTING_POLICY.md",
+    "policy_source_head": "5a95e976aef0e2b1e399174c120c9d23c5d4d930",
+    "policy_git_blob": "d4b9c9f70579917e85a640928476e7f9ceca04bc",
+    "adoption": "Prospective operational routing only; no scientific authority imported from the parallel branch.",
+    "Astra": "theory, source/domain, physical model, contract, independent final review, admission/publication decision",
+    "lower_tier": "mechanical implementation, targeted execution, evidence assembly and NCP scripts under this frozen contract; actual worker model recorded without asserting Astra identity",
+    "escalation": "Missing input, ambiguous physics or channel mapping, changed tolerance/domain, or more than one repair returns to Astra before action."
+  },
+  "pinned_inputs": {
+    "parent_manifest": "inputs/PARENT_IDENTITY.json",
+    "parent_manifest_sha256": "a733b00ed6da96c9c05bcb80ac9b64d12bb48b742fe5c7738debe8faddb63c50",
+    "independent_source_oracle": "research/ionization_sources/SOURCE_ALGEBRA_RESULT.json",
+    "independent_source_oracle_sha256": "7eb9d5abfa9eec757475194aaaee5b0660d8a493fc30b0891cb7b356a1c2ffa3",
+    "parent_contract": "../cr_phys02b_20261010/state/SCIENTIFIC_CONTRACT.json",
+    "legacy_paired_results": "../cr_phys02b_20261010/evidence/runs/R002/NUMERICAL_RESULT.json"
+  },
+  "fixed_physics": {
+    "source": "Unchanged parent ElectronSource; proton birth support 1-4 MeV, selected electron energy 0.1-900 eV, Q_e(W,t)=t A(W), initially empty, T=1e10 s.",
+    "birth_tags_eV": [
+      [
+        0.1,
+        10.0
+      ],
+      [
+        10.0,
+        900.0
+      ]
+    ],
+    "bath": "Exactly inherited nH=140 m^-3, YHe=.248, xHII=xHeII=.01, xHeIII=0, Tgas=100 K prescribed bath; no feedback.",
+    "transport": "Reuse hash-checked parent Cascade unchanged, including classical/quantum Coulomb min closure with quantum_constant=0, projection, source quadrature, time propagator, and ledgers.",
+    "excitation": "Exactly the same 27 checked CCC raw tables and native first-zero effective costs, linear interpolation, native zero rows, no extrapolation. Their spectroscopic/Hamiltonian interpretation is separately audited; no relabeling or energy-axis shift in this comparison.",
+    "ionization_daughters": "W and E-B-W, 0<=W<=(E-B)/2; one extra electron, binding energy B retained separately.",
+    "atomic_change_only": "Replace AtomicData.ionization objects with compatible full-BED ionization objects. Parent science files must not be edited."
+  },
+  "full_BED": {
+    "variables": "t=E/B, u=U/B, w=W/B, y=1/(1+w), S=4*pi*a0^2*N*(13.6057/B)^2, parent a0=5.29177210544e-11 m",
+    "moment_Ni": "Ni=integral_0^infinity g(w) dw",
+    "moment_Q_diagnostic": "Qdf=(2/N)*integral_0^infinity g(w)/(1+w) dw; diagnostic only, NOT substituted into the BEQ total",
+    "K": "2-Ni/N",
+    "D": "D(t)=(1/N)*integral_0^((t-1)/2) g(w)/(1+w) dw",
+    "SDCS": "S/[B*(t+u+1)] * {K*[1/(1+w)^2+1/(t-w)^2-(1/(1+w)+1/(t-w))/(t+1)] + log(t)*g(w)/[N*(1+w)]}",
+    "total": "sigma=S/(t+u+1)*[D(t)*log(t)+K*(1-1/t-log(t)/(t+1))] for E>B; zero for 0<=E<=B",
+    "normalization": "No external physical BEQ/BEB renormalization. Parent daughter quadrature normalization is retained only as a measured numerical correction to this same integral.",
+    "HI": {
+      "B_eV": 13.6057,
+      "U_eV": 13.6057,
+      "N": 1,
+      "g": "(128/3)*exp[-4*atan(sqrt(w))/sqrt(w)] / [(1+w)^4 * (1-exp(-2*pi/sqrt(w)))]",
+      "g_at_zero": "128/(3*exp(4))",
+      "Ni": "0.43499584932514801259832562569039603180653769862624",
+      "Qdf": "0.56682443191033904178643632014098937270906506686167",
+      "D_implementation": "FP64 Gauss-Legendre order128 on the finite slow-half interval, checked at independent 50-digit oracle points. No old polynomial outside its validity range.",
+      "source": "Rohrmann and Vera Rueda 2022 arXiv:2208.02111v2 Eqs5,9,10 and Table1. epsilon=1+w in Rydberg units; nonrelativistic Coulomb dipole oscillator strength, not exact electron-impact scattering."
+    },
+    "HeI": {
+      "B_eV": 24.587,
+      "U_eV": 39.51,
+      "N": 2,
+      "g": "8.24012*y^3 - 10.4769*y^4 + 3.96496*y^5 - 0.0445976*y^6",
+      "coefficients_k2_to_k6": [
+        0,
+        8.24012,
+        -10.4769,
+        3.96496,
+        -0.0445976
+      ],
+      "Ni": "1.61008048",
+      "Qdf": "0.91304073333333333333333333333333333333333333333333",
+      "D_implementation": "(1/N)*sum_k c_k/k * [1-(2/(t+1))^k], using expm1/log1p near threshold",
+      "source": "Kim, Johnson and Rudd 2000 Phys Rev A61,034702 Eqs1-6, DOI10.1103/PhysRevA.61.034702; original printed precision",
+      "transcription_resolution": "Additive binary plus dipole formula as NIST Eq3 and the integrated total identity. Do not claim a discovered publisher erratum for the multiplication glyph in the PDF."
+    },
+    "numerical_stability": "Use expm1 for exponential differences, atan(sqrt(w))/sqrt(w) continuous value1 at w=0, and exact threshold limit. Do not suppress negative/nonfinite density or silently clip physical rates.",
+    "legacy_interpretation": "NIST explicitly allows normalized BED sharing with a separate BEB/BEQ total. The inherited hybrid is a distinct conditional representation, not proven algebraically invalid. Q=.8841 lineage and current CGI equivalence remain unverified."
+  },
+  "numerics": {
+    "precision": "FP64; no fast-math/Ofast/reassociation",
+    "local_grids": [
+      [
+        800,
+        1600
+      ],
+      [
+        1600,
+        3200
+      ]
+    ],
+    "source_order": 8,
+    "sharing_order": 4,
+    "raw_integral_order": 128,
+    "endpoint_samples": 2,
+    "same_operator_terminal": "One sparse resolvent per new grid for the inherited output vector; no time evolution outside T.",
+    "paired_comparison": "Compare each new grid to matching saved legacy R002 grid. Do not rerun unchanged legacy transport locally.",
+    "diagnostic": "For each nonzero paired delta Delta, report r=abs(Delta_fine-Delta_coarse)/abs(Delta_fine). Empirically resolved iff r<1/3 and signs agree. This is a two-grid diagnostic, not a certified error bound or significance test; unresolved rows remain unresolved.",
+    "off_or_time_oracles": "Do not rerun unchanged parent suites. Check changed atomic domain and generator/propagated ledgers on the new candidate; source/propagator validity inherited with scope."
+  },
+  "tolerances": {
+    "source_moment_relative": 1e-10,
+    "source_D_relative": 1e-10,
+    "SDCS_total_relative": 2e-08,
+    "sharing_quadrature_relative": 2e-08,
+    "generator_energy_number_relative": 5e-12,
+    "propagated_ledger_relative": 1e-09,
+    "positivity_absolute_normalized": 1e-12,
+    "mesh_channel_relative": 0.02,
+    "mesh_cutoff_and_low_boundary_count_relative": 0.03,
+    "terminal_ledger_relative": 1e-09
+  },
+  "validation_rows": [
+    "PINNED_PARENT_AND_NEW_INPUT_IDENTITIES",
+    "H_ANALYTIC_OSCILLATOR_THRESHOLD_MOMENTS_AND_D_ORACLES",
+    "HE_PRINTED_COEFFICIENT_MOMENTS_AND_ANALYTIC_D",
+    "FULL_BED_TOTAL_VERSUS_INDEPENDENT_ADAPTIVE_SDCS_INTEGRAL",
+    "ATOMIC_POSITIVITY_THRESHOLD_AND_SCOPED_DOMAIN",
+    "NEW_GENERATOR_ENERGY_NUMBER_AND_METZLER",
+    "NEW_PROPAGATED_LEDGER_AND_POSITIVITY",
+    "TWO_GRID_CHANNEL_CONVERGENCE_WITH_FROZEN_TOLERANCES",
+    "NUMERICAL_SHARING_NORMALIZATION_NEAR_UNITY",
+    "SAME_OPERATOR_TERMINAL_LEDGER",
+    "PAIRED_PHYSICAL_REPRESENTATION_DELTAS_WITH_EMPIRICAL_RESOLUTION_STATUS"
+  ],
+  "resources": {
+    "local_transport_calls": 2,
+    "local_total_transport_wall_budget_s": 900,
+    "estimated_peak_memory_GiB": 2,
+    "processes": 1,
+    "BLAS_OPENMP_NUMEXPR_threads": 1,
+    "environment": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_MAX_ACTIVE_LEVELS": "1"
+    },
+    "admission": "Record actual cpuset/cgroup quota and memory current/limit, actual BLAS threads and process/RSS; reserve max(12.5% of bounded memory,1GiB), include coordinator; stop before large allocation if unavailable.",
+    "first_failure": "Preserve complete actual exception/stderr/exit and input/code identities. Missing dependency before numerical execution is operational and does not consume a transport call.",
+    "one_authorized_repair": "One targeted contract-preserving implementation/interface/shape bug or quadrature-order increase up to256 if an unchanged atomic integral tolerance fails; retain first run. No physical coefficient, energy cost, cutoff, tolerance or grid change. Anything beyond returns to Astra."
+  },
+  "ncp_handoff": {
+    "state": "PREPARED_NOT_EXECUTED_ON_NCP",
+    "self_contained": "Bundle NCP start prompt, frozen contract, code, all parent source/raw inputs and saved comparison evidence, source citations, dependency specification, resource admission, exact commands and return collector. No additional user attachment required.",
+    "next_bounded_task": "Conditional paired third-grid refinement at (3200,6400), full BED and legacy BEQ/BED sequentially, matched against saved4800 results, only if next DAG admits this numerical task. Exact same physics/precision/tolerances. No64-rank sweep.",
+    "hardware": "Advertised64CPU128GB is context only. Detect actual affinity/quota, RAM, free disk and live load; one process with thread1 by default, reserve12.5% minimum1GiB. Do not assume remote credentials from ChatGPT connector access.",
+    "minimum_available_working_memory_GiB": 12,
+    "refinement_estimated_peak_GiB": 8,
+    "transport_wall_budget_s": 3600,
+    "maximum_transport_calls": 2,
+    "publication": "Collect actual results and typed checks, then request independent Astra decision. Do not auto-promote global gates or edit production. Preserve dirty work and use isolated extraction/worktree."
+  },
+  "inherited_gates": {
+    "PHYS02_DELAY": "OPEN",
+    "production_history": "HOLD",
+    "atomic_G02": "UNRESOLVED",
+    "b_grid": "NO_GO",
+    "all_bound": "OPEN",
+    "R17B2B": "NO_CERTIFIED_SOURCE_SHARPENING"
+  },
+  "claim_ceiling": "Source-defined coherent nonrelativistic full-BED conditional cascade comparison at fixed bath and selected source. Numeric convergence and rate-shape identity do not certify physical cross sections, full atomic completeness, spectral threshold accuracy, or production history.",
+  "completion": "Candidate passes targeted contract, distinct final Astra decision maker reviews frozen packet, report/DAG/state/failures/handoff updated, additive research publication and dual backups completed with executable NCP prompt inside."
+}
