@@ -1,5 +1,27 @@
 # BASS_CR project harness
 
+## Tiered Astra / implementation routing (owner instruction, 2026-10-10)
+
+Apply [docs/ASTRA_TIER_ROUTING_POLICY.md](docs/ASTRA_TIER_ROUTING_POLICY.md)
+to every new bounded research unit and repair. Astra is the high-tier owner of
+scientific planning, contract/model decisions, source/domain research,
+independent review, blocker classification, and publication/admission
+decisions. It must not be the default implementation worker once a bounded
+contract is frozen.
+
+Delegate mechanical implementation, focused tests, evidence assembly, routine
+documentation updates, and contract-preserving repair execution to a lower-tier
+worker. The lower tier must stop and return control to Astra on an ambiguous
+physical choice, frozen-contract conflict, new source/domain issue, substantive
+failure, or requested scope expansion. Astra then decides the next bounded
+contract or HOLD and independently reviews the result. Direct Astra coding is
+allowed only when the owner explicitly requests it or when a lower-tier worker
+cannot safely act after returning a documented technical blocker.
+
+This routing changes cost allocation, not scientific gates: exact identities,
+first-failure preservation, claim ceilings, independent review, backup, and
+publication requirements remain in force.
+
 ## Selective remote verification (owner policy, 2026-09-22)
 
 Apply [.codex/readback-policy.json](.codex/readback-policy.json) and
