@@ -1,0 +1,13 @@
+{
+  "id": "CR-PHYS02C-SOURCE01-DAG",
+  "nodes": [
+    {"id": "FROZEN_PR24_INTAKE", "status": "PASS", "evidence": "SOURCE_MANIFEST.json; hashes checked before module loading"},
+    {"id": "ENDPOINT_AWARE_SOURCE", "requires": ["FROZEN_PR24_INTAKE"], "status": "PASS_SCOPED", "evidence": "evidence/REPAIR_VALIDATION.json"},
+    {"id": "INDEPENDENT_REVIEW", "requires": ["ENDPOINT_AWARE_SOURCE"], "status": "PASS_SCOPED", "evidence": "evidence/INDEPENDENT_REVIEW.json"},
+    {"id": "LOCAL_BACKUP_AND_SCOPED_PUBLICATION", "requires": ["INDEPENDENT_REVIEW"], "status": "READY", "owner": "parent"},
+    {"id": "CR_PHYS02C_HIGH_ENERGY_RESPONSE", "requires": ["ENDPOINT_AWARE_SOURCE", "PINNED_HIGH_ENERGY_RESPONSE_CONTRACT"], "status": "HOLD", "missing": ["source-backed electron degradation/secondary response above 1000eV", "time and energy discretization contract", "matching to existing low-energy kernel"]},
+    {"id": "FULL_CR_IGM_HISTORY", "status": "HOLD", "missing": ["high-energy response", "low-energy cutoff response", "gas feedback", "cold atomic/thermal provider and accepted initial/background contract"]}
+  ],
+  "PASS_transition": "Source numerical checks -> independent review -> recovery package and scoped publication -> next response research gate",
+  "global_scientific_admission": "HOLD"
+}

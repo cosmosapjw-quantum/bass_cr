@@ -1,0 +1,10 @@
+{
+  "id": "CR-PHYS02C-SOURCE01-REFERENCE-REPAIR01",
+  "first_failure": "evidence/VALIDATION.json: RAW_SDCS_ADAPTIVE_PARITY 8.099279321817133e-10 > 2e-10",
+  "diagnosis": "The raw reference subtracts log(Kmax)-log(Kmin) for a ~4 eV interval near 4 MeV. The candidate uses a stable log1p interval and GL64/96 already agrees at 9.65e-16. Only the reference-coordinate evaluation is repaired.",
+  "change": "Raw SDCS adaptive reference uses K=Kmin+(Kmax-Kmin)*u on u in [0,1], retaining the exact support interval and SDCS call",
+  "preserve": ["endpoint_source.py", "validate.py", "tests/test_endpoint_source.py", "evidence/VALIDATION.json", "all source sample energies", "2e-10 parity tolerance", "all other frozen acceptance rows"],
+  "acceptance": {"raw_SDCS_parity_relative": 2e-10, "near_endpoint_constant_integrand_relative": 2e-15, "focused_regression_exit": 0},
+  "budgets": {"repair_campaigns": 1, "wall_s": 120, "adaptive_subintervals": 100, "production_changes": 0},
+  "claim_ceiling": "Source-only, same physical scope; independent review still required"
+}
