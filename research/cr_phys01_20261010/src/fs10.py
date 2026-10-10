@@ -12,9 +12,26 @@ import numpy as np
 SPECIES = ('HI', 'HeI', 'HeII')
 IONIZATION_EV = np.array([13.6, 24.6, 54.4])
 PROJECTION_REL_BOUND = 1.0e-4  # fixed before the integration probe
-DATA_SHA256 = '59a4b1c0467402d65062976d6ca0cae0e810f881b5c2c4b5fe0c82595386571d'
 DATA_COMMIT = 'c01373543fb83a721c48cdcbcd0a08ea53afe78c'
-DATA_RELATIVE = 'vendor/fs10/21cmfast/src/py21cmfast/_data/x_int_tables/log_xi_-2.0.dat'
+TABLES = {
+    0.01: {
+        'relative_path': 'vendor/fs10/21cmfast/src/py21cmfast/_data/x_int_tables/log_xi_-2.0.dat',
+        'sha256': '59a4b1c0467402d65062976d6ca0cae0e810f881b5c2c4b5fe0c82595386571d',
+        'header': (0.99, 0.99, 0.01, 10.0, 100.0),
+    },
+    0.1: {
+        'relative_path': 'vendor/fs10/21cmfast/src/py21cmfast/_data/x_int_tables/log_xi_-1.0.dat',
+        'sha256': '3a83d09a3741d11f7d667156d8bd2a6d026fb7f624cbea98e58b789b0a9deea5',
+        'header': (0.9, 0.9, 0.1, 10.0, 100.0),
+    },
+}
+
+
+def table_config(xhii):
+    """Return one explicitly acquired FS10 composition knot; never interpolate xi."""
+    if not np.isfinite(xhii) or float(xhii) not in TABLES:
+        raise ValueError('OUT_OF_DOMAIN: implemented compositions are xHII=xHeII in {.01,.1}, xHeIII=0')
+    return TABLES[float(xhii)]
 
 
 class FS10Table:
@@ -27,13 +44,20 @@ class FS10Table:
     """
 
     def __init__(self, xhii=0.01, data_path=None):
-        if not np.isfinite(xhii) or xhii != 0.01:
-            raise ValueError('OUT_OF_DOMAIN: implemented composition is xHII=xHeII=0.01, xHeIII=0')
+        config = table_config(xhii)
         self.xhii = float(xhii)
-        self.path = Path(data_path) if data_path is not None else Path(__file__).resolve().parents[1] / DATA_RELATIVE
+        self.relative_path = config['relative_path']
+        self.path = Path(data_path) if data_path is not None else Path(__file__).resolve().parents[1] / self.relative_path
         payload = self.path.read_bytes()
-        if hashlib.sha256(payload).hexdigest() != DATA_SHA256:
+        if hashlib.sha256(payload).hexdigest() != config['sha256']:
             raise ValueError('SOURCE_HASH_MISMATCH')
+        header = payload.splitlines()
+        try:
+            declared = tuple(float(v) for v in header[1].decode('ascii').split())
+        except (IndexError, UnicodeDecodeError, ValueError) as exc:
+            raise ValueError('INVALID_SOURCE_HEADER') from exc
+        if declared != config['header']:
+            raise ValueError('SOURCE_HEADER_MISMATCH')
         rows = np.loadtxt(self.path, skiprows=3)
         if rows.shape != (258, 9) or not np.all(np.isfinite(rows)) or np.any(rows < 0):
             raise ValueError('INVALID_SOURCE_ROWS')
@@ -57,8 +81,9 @@ class FS10Table:
         if np.any(10.2 * rows[:, 4] > self._exc + 2e-5 * E):
             raise ValueError('LYA_EXCEEDS_EXCITATION_BUDGET')
         self.audit = {
-            'source_commit': DATA_COMMIT, 'source_sha256': DATA_SHA256,
-            'source_xHII': 0.01, 'source_xHeII_per_He': 0.01, 'source_xHeIII': 0.0,
+            'source_commit': DATA_COMMIT, 'source_sha256': config['sha256'],
+            'source_relative_path': self.relative_path,
+            'source_xHII': self.xhii, 'source_xHeII_per_He': self.xhii, 'source_xHeIII': 0.0,
             'source_header_z': 10.0, 'source_header_T_K': 100.0,
             'helium_abundance': 'TABLE_GENERATION_VALUE_NOT_CERTIFIED; original example nHe/(nH+nHe)=0.08',
             'energy_domain_eV': [float(E[0]), float(E[-1])],
