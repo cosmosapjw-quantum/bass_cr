@@ -1,0 +1,154 @@
+{
+  "schema": "CR_PHYS02D_ENDPOINT_FORMULAE_V1",
+  "role": "ASTRA_THEORY_CONTRIBUTOR_NOT_FINAL_REVIEWER",
+  "status": "CANDIDATE_FOR_ROOT_CONTRACT",
+  "primary_evidence_class": "derived",
+  "physical_scope": {
+    "equation": "dx/dt=L*x+a*alpha*t; x(0)=0; P_heat=h^T*x",
+    "interval": "0 <= t <= T",
+    "L": "fixed, Metzler, Hurwitz; ACTIVE block only",
+    "a": "fixed nonnegative injected energy shape",
+    "h": "fixed nonnegative heat-rate functional",
+    "direct_heat_feedthrough": 0,
+    "boundary": "cutoff kinetic energy is a separate absorber; not heat",
+    "reference_H0": "h^T*(-L)^(-1)*a; frozen-operator mathematical terminal reference",
+    "outside_interval_cosmic_history": "NOT_ADMITTED",
+    "normalized_delay": "K(tau)/H0 weights eventual heat energy, not electron lifetime"
+  },
+  "scalar_inputs": {
+    "T": {
+      "unit": "s",
+      "condition": "finite > 0"
+    },
+    "P_heat": {
+      "unit": "J m^-3 s^-1",
+      "condition": "finite >= 0"
+    },
+    "Q_heat": {
+      "unit": "J m^-3",
+      "condition": "finite >= 0; cumulative Coulomb heat at T"
+    },
+    "P_inst": {
+      "unit": "J m^-3 s^-1",
+      "condition": "finite > 0; exactly alpha*T*H0"
+    },
+    "provenance": "Exact source/model/tag/grid/run identity and field map required; no transcript-only numbers"
+  },
+  "formulas": {
+    "R": "P_heat/P_inst",
+    "S": "2*Q_heat/(T*P_inst)",
+    "X": "max(1-tau/T,0)",
+    "D": "min(tau,T)",
+    "R_semantic": "E[X]",
+    "S_semantic": "E[X^2]",
+    "capped_mean_over_T": "1-R",
+    "capped_second_raw_over_T2": "1-2*R+S",
+    "capped_variance_over_T2": "S-R^2",
+    "ramp_weighted_current_heat_age_over_T": "1-S/R; only R>0",
+    "heat_rate_deficit_relative_to_instant": "1-R",
+    "integrated_heat_deficit_relative_to_instant": "1-S",
+    "heat_rate_error_relative_to_actual": "(1-R)/R; only R>0",
+    "minimum_heat_kernel_mass_before_T": "R^2/S; only S>0",
+    "tag_combination_weights": "P_inst_tag/sum_tags(P_inst_tag)"
+  },
+  "moment_compatibility": [
+    "0 <= R <= 1",
+    "R^2 <= S <= R"
+  ],
+  "cdf_dual_bounds": {
+    "u_fractions": [
+      "1/4",
+      "1/2",
+      "3/4"
+    ],
+    "c": "1-u",
+    "F": "Pr(tau <= u*T) = Pr(X >= c); finite-matrix kernel continuous",
+    "lower_polynomial": "qL(x)=x*(x-c)/(1-c)",
+    "upper_polynomial": "qU(x)=x*(1+c-x)/c",
+    "lower": "max(0,(S-c*R)/(1-c))",
+    "upper": "min(1,((1+c)*R-S)/c)",
+    "half_time": [
+      "max(0,2*S-R)",
+      "min(1,3*R-2*S)"
+    ],
+    "proof_scope": "rigorous for exact positive normalized kernel",
+    "optimality": "not claimed; only R^2/S at T is sharp over general nonnegative measures",
+    "numerical_input_error": "not enclosed by theorem; mesh differences remain empirical"
+  },
+  "counterexample": {
+    "interior": "0<R<1 and R^2<S<R",
+    "minimum_F_family": {
+      "p": "R^2/S",
+      "delay_atoms": [
+        "T*(1-S/R)",
+        "B >= T"
+      ],
+      "weights": [
+        "p",
+        "1-p"
+      ],
+      "mean": "T*(1-R)+(1-p)*(B-T)"
+    },
+    "no_tail_family": {
+      "X_atoms": [
+        "(R-S)/(1-R)",
+        "1"
+      ],
+      "mass_at_X1": "(S-R^2)/(1-2*R+S)",
+      "F_before_T": 1,
+      "mean": "T*(1-R)"
+    },
+    "identifiability": "Endpoint R,S alone do not identify uncapped mean, tail shape or sufficiently high quantiles; complete L,a,h would identify the frozen model",
+    "boundary_exceptions": "S=R^2 degeneracy; R=S=0; S=R; inspect separately"
+  },
+  "next_ncp_suggestions": {
+    "status": "PROSPECTIVE_ROOT_OWNS_FINAL_CONTRACT",
+    "same_energy_grid_as_actual_parent": true,
+    "fourth_energy_grid": "NOT_REQUIRED_NOT_AUTHORIZED_BY_THIS_DERIVATION",
+    "new_pulse_calls_max": 2,
+    "old_ramp_reruns": 0,
+    "IC": "active x(0)=a; heat ledger initially 0; no subsequent source",
+    "requested_cdf": "Q_heat_pulse(u*T)/H0 at fixed u",
+    "moment_solves": [
+      "M*v1=a",
+      "M*v2=v1",
+      "M*v3=v2"
+    ],
+    "moment_outputs": [
+      "H0=h^T*v1",
+      "H1=h^T*v2",
+      "H2=2*h^T*v3"
+    ],
+    "dimensionless_G_conversion": "Hn=n!*T0^n*g_heat^T*(-G_active)^(-(n+1))*a",
+    "never_invert": "full G with absorber ledger zero eigenvalues",
+    "avoid": "Recovering small pulse response by cancellation Ta-M*x_ramp/alpha",
+    "CDF_computation": "Read nonnegative accumulated pulse heat; no subtraction of terminal yields near F=0",
+    "full_state_IC": "Use original source_vectors including initial direct cutoff ledgers/internal counters; source heat component must remain 0"
+  },
+  "acceptance_suggestions": {
+    "science_G_builds_this_endpoint_unit": 0,
+    "science_transport_calls_this_endpoint_unit": 0,
+    "identity_checks": "read immutable saved scalar evidence; compare exact prior run identities",
+    "raw_slacks": [
+      "R",
+      "1-R",
+      "S",
+      "R-S",
+      "S-R^2"
+    ],
+    "silent_clipping": false,
+    "roundoff_tolerance": "ROOT_MUST_FREEZE_BEFORE_REAL_DATA_EVALUATION",
+    "conditioning": {
+      "capped_mean": "(1+R)/abs(1-R)",
+      "current_heat_age": "(R+S)/abs(R-S)",
+      "capped_variance": "(S+R^2)/abs(S-R^2)"
+    },
+    "grid_comparison": "Use already available 4800/9600 diagnostics; descriptive not rigorous error enclosure",
+    "claim_ceiling": [
+      "No new cosmic time history",
+      "No atomic completeness closure",
+      "No production release",
+      "Independent final review required"
+    ]
+  }
+}

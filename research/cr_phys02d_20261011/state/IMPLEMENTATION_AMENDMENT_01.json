@@ -1,0 +1,43 @@
+{
+  "schema": "cr-phys02d-bounded-implementation-amendment.v1",
+  "id": "ASTRA-IMPLEMENTATION-01",
+  "approved_utc": "2026-10-10T22:32:26.550418+00:00",
+  "owner": "ROOT_ASTRA",
+  "scientific_contract_sha256": "bc05614e9812f616c4a4bb45805e4c0359a171813f7329794b0c10c3bf37dde2",
+  "ncp_contract_sha256": "9dd8b098d828fcad5ddd5138afd29e9dce4805e26fbac897bd4c9a07779e8ff9",
+  "scientific_equations_tolerances_inputs_or_budgets_changed": false,
+  "classified_causes": [
+    {
+      "worker": "endpoint",
+      "cause": "Figure connected discrete theorem bounds by straight lines; an interpolated lower segment is not derived",
+      "class": "PRESENTATION_SEMANTICS",
+      "authorized_fix": "From persisted RESULT only, show separate interval marks at u=.25,.5,.75 without joining times; list F(T) [lower,100%] in explicit text. Keep ancestry panel. Preserve first figure bytes in evidence/figures/initial_connected_bounds before replacing. No scalar recomputation."
+    },
+    {
+      "worker": "ncp",
+      "cause": "Propagated constant cutoff ledger had FP64 difference1.1102230246251565e-16; test used unjustified bitwise equality outside initial state",
+      "class": "TEST_ORACLE_ASSERTION",
+      "authorized_fix": "Require exact array_equal initial cutoff at u0; propagated values compare existing contract rtol2e-10/atol5e-13. No candidate physics/tolerance change."
+    },
+    {
+      "worker": "ncp",
+      "cause": "Saved NPZ time_s is exact vector [0,1e10], candidate attempted scalar conversion",
+      "class": "INPUT_SCHEMA_INTERFACE",
+      "authorized_fix": "Require exact shape(2,) and array_equal [0,T0], preserve saved source vectors and times; reject other shapes/endpoints. Test real-file loading only, no G."
+    },
+    {
+      "worker": "ncp",
+      "cause": "Return collector covered direct pins but not entire transitive scientific dependency payload",
+      "class": "HANDOFF_DEPENDENCY_COVERAGE",
+      "authorized_fix": "Require and verify inputs/DEPENDENCY_PAYLOAD_MANIFEST.json relative to repository root in admission; collector includes exact all listed files preserving repository-relative path under dependency_payload. Include current study src/ncp/state/inputs/review and actual selected run, first failures, all actual adapters. Preserve Git/backup distinction for eecb sibling receipts."
+    }
+  ],
+  "dependency_manifest_sha256": "dd64b4b187ea9b12c147e2d6d50d71b2f94c61e43a2ad1d77bc4b486b6ca68f3",
+  "validation_budget": "Only affected failed cutoff test, NPZ schema loading, changed collector/admission identity checks, and rendering from saved output; <=30s additional toy/operational time. No broad prior suite and no physical G/transport. More failures escalate with concrete cause.",
+  "first_failures": "Retain all original logs, exit records, and code hashes; no overwritten run directories",
+  "endpoint_evaluation_runs_remain": 1,
+  "NCP_physical_builds_calls_remain": [
+    0,
+    0
+  ]
+}

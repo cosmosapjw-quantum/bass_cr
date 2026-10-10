@@ -1,0 +1,88 @@
+{
+  "role": "INDEPENDENT_ASTRA",
+  "actual_host_model": "GPT-6 Astra Pro per developer metadata",
+  "model_override": "not exposed; inherited host",
+  "independent_of_candidate_design": true,
+  "independent_of_implementation": true,
+  "decision": "INTERIM_HOLD_PREPARED_NCP_CODE",
+  "scientific_status": "No endpoint theoretical or numerical blocker found; NCP physical result not executed",
+  "findings": [
+    {
+      "id": "N1",
+      "class": "NUMERICAL_OUTPUT_CONTRACT",
+      "path": "src/pulse_response.py",
+      "finding": "No explicit CDF versus endpoint dual-bound comparisons or outputs despite frozen required output. Existing CDF range/monotonicity and R/S compatibility alone do not supply that row.",
+      "scope": "Prepared code only; use existing equations/tolerances and already sampled data."
+    },
+    {
+      "id": "O1",
+      "class": "OPERATIONAL_TEST_ORACLE",
+      "path": "tests/test_ncp_ops.py",
+      "finding": "Two tests assume the live candidate lacks frozen payload/review; assertions fail after correct READY freeze.",
+      "scope": "Use controlled incomplete or mismatched fixture for HOLD checks."
+    },
+    {
+      "id": "O2",
+      "class": "OPERATIONAL_EVIDENCE",
+      "path": "ncp/launch_pulse.py",
+      "finding": "After a successfully created fresh run directory, coordinator exceptions in reservation/pipe/log/child launch can exit without ACTUAL_EXIT receipt; outer catch only prints.",
+      "scope": "Durable classified failure receipt for owned fresh directory, preserve original exception and do not write into pre-existing run."
+    },
+    {
+      "id": "O3",
+      "class": "HANDOFF_RECONSTRUCTION_OBSERVATION",
+      "path": "ncp/collect_return.py",
+      "finding": "Theory, endpoint evidence, tests, REPORT and START are omitted while final decision will hash them; including decision-bound files would make returned independent review reconstructible.",
+      "scope": "Completeness observation; root to classify under self-contained handoff."
+    }
+  ],
+  "confirmed_properties": [
+    "G=T0*L and b*u ramp imply J1 SI scale*EV_J/T0, J2 SI scale*EV_J",
+    "Uncapped first/second moments use active inverse with T0 and 2*T0^2 factors",
+    "Pinned 9600 NPZ terminal_yields shape is (9611,2); initial source heat exactly zero",
+    "Pulse source uses full-state vector including cutoff and internal counter ledgers",
+    "Final corrected figure has separated discrete intervals, no interpolated CDF-bound claims",
+    "Persisted endpoint RESULT unchanged across export/presentation repairs"
+  ],
+  "scope_counts": {
+    "candidate_edits": 0,
+    "physical_G_builds": 0,
+    "physical_transport_calls": 0,
+    "old_suite_reruns": 0,
+    "whole_endpoint_reevaluations": 0
+  },
+  "reviewed_current_code_identities": {
+    "src/endpoint_analysis.py": {
+      "bytes": 10193,
+      "sha256": "1314a261770ad55bfb9dbf8e068d6e4a58afef6567778da980d124f5a8cbab9f"
+    },
+    "src/pulse_response.py": {
+      "bytes": 4800,
+      "sha256": "83bacecda3425d37d6bb5b9fadcfde56b2da288cb47f733592c3cd4a61094d79"
+    },
+    "ncp/launch_pulse.py": {
+      "bytes": 11564,
+      "sha256": "f930328e67d1ca6918301be46f5152d3b13ee1fcbcd2967266b07b00472c9e24"
+    },
+    "ncp/collect_return.py": {
+      "bytes": 2482,
+      "sha256": "22701d51e53532bc699ab9e7b1f22b542223b7e6c0b6e8aa254036dba461a30a"
+    },
+    "tests/test_ncp_ops.py": {
+      "bytes": 3687,
+      "sha256": "21dcfc44fcb8fa75b21588a245338323ac97dcd8086ce8be08df90e34e5243e2"
+    },
+    "state/SCIENTIFIC_CONTRACT.json": {
+      "bytes": 7265,
+      "sha256": "bc05614e9812f616c4a4bb45805e4c0359a171813f7329794b0c10c3bf37dde2"
+    },
+    "ncp/NCP_EXECUTION_CONTRACT.json": {
+      "bytes": 6783,
+      "sha256": "9dd8b098d828fcad5ddd5138afd29e9dce4805e26fbac897bd4c9a07779e8ff9"
+    },
+    "evidence/endpoint/RESULT.json": {
+      "bytes": 36544,
+      "sha256": "0fc14f741d1236eac28110ca1df1309747e8f25d5104adfac88ce067172fe3ed"
+    }
+  }
+}

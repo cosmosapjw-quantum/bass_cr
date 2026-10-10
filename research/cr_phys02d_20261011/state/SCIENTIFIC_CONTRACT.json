@@ -1,0 +1,138 @@
+{
+  "schema": "cr-phys02d-scientific-contract.v1",
+  "unit": "CR-PHYS02D-HEAT-DELAY-MOMENTS",
+  "frozen_utc": "2026-10-10T22:26:02.549018+00:00",
+  "owner_role": "ASTRA_THEORY_AND_ACCEPTANCE",
+  "status": "FROZEN_BEFORE_NEW_ENDPOINT_EVALUATION",
+  "base_commit": "f98ed974c3f3158dabd16cd854ecc5e04b9f5b31",
+  "base_tree": "ae9c5ea98edd724423bfa8cb79db976908d1c123",
+  "input_manifest": {
+    "path": "inputs/INPUT_IDENTITIES.json",
+    "sha256": "fdc6eaa7813ff22585668a5e0fe629ca7e7b3912cbcfb68050a30542f9a09978"
+  },
+  "derivation_identity": {
+    "path": "research/theory_contribution/DERIVATION_CANDIDATE_KO.md",
+    "sha256": "0918d56254b085ef50a7134a9578ab07d73e38cdc025854b0c1cc32b0494cd0c",
+    "root_disposition": "APPROVED_FOR_THIS_BOUNDED_CONTRACT; final review remains independent"
+  },
+  "research_question": "What heat-energy delay information is identifiable from the stored terminal ramp heat rate and integrated heat; what additional same-grid pulse observables resolve the remaining frozen-operator information?",
+  "physical_scope": {
+    "time_end_s": 10000000000.0,
+    "year_s": 31557600,
+    "coordinate": "u=t/T0; T0=1e10 s; prior endpoint u=1",
+    "state": "energy-weighted active electrons plus inherited nonnegative ledgers",
+    "equation": "dx/dt=L*x+alpha*t*b; x(0)=0; P=h^T*x",
+    "source": "exact inherited two birth spectra and linear ramp; no new physical source history",
+    "kernel": "K(tau)=h^T*exp(L*tau)*b >= 0; h heat rate only; no direct source heat",
+    "L": "fixed Metzler Hurwitz active block; never invert full ledger generator",
+    "terminal_reference": "H0=h^T*(-L)^(-1)*b; same frozen operator mathematical continuation only",
+    "preserved": [
+      "source normalization and domains",
+      "H/He fixed bath and abundances",
+      "Coulomb stopping and cutoffs",
+      "fullBED and legacy atomic identities",
+      "CCC native labels, thresholds, energy-axis semantics",
+      "FP64 precision, quadrature, accumulation conventions"
+    ],
+    "heat_age_semantics": "age since original source-electron injection of energy heating now; not daughter lifetime, stopping time, or uncapped mean lag"
+  },
+  "endpoint_field_map": {
+    "rows": "six model x grid rows: legacy and fullBED at 2400,4800,9600",
+    "tags": [
+      "direct_0p1_10",
+      "direct_10_900",
+      "selected_total"
+    ],
+    "selected_normalized_R": "metrics_normalized.heat_power / metrics_normalized.terminal_heat_power",
+    "selected_normalized_S": "2*metrics_normalized.heat / metrics_normalized.terminal_heat_power (only prior endpoint u=1)",
+    "SI_P": "final.components.TAG.heat_power_J_m3_s",
+    "SI_Q": "final.components.TAG.heat_J_m3",
+    "T": "final.time_s must equal 1e10 exactly",
+    "explicit_SI_Pinst": "same_operator_terminal.terminal_heat_power_at_T_J_m3_s where present; legacy4800 top-level canonical value",
+    "missing_legacy2400_SI_Pinst": "reconstruct from same row: P_SI * terminal_heat_power_normalized / heat_power_normalized; explicitly label reconstructed; cross-check 2*injected_energy_J_m3/T*terminal_heat_power_normalized",
+    "legacy_label": "explicitly assign legacy from identity-pinned legacy input, never infer model from absent field",
+    "normalized_scalar_meaning": "selected_total only; do not assign terminal fractions to individual birth tags"
+  },
+  "formulas": {
+    "R": "P/Pinst = E[(1-tau/T)_+]",
+    "S": "2*Q/(T*Pinst) = E[(1-tau/T)_+^2]",
+    "compatibility": "0<=R<=1 and R^2<=S<=R",
+    "clipped_mean_s": "T*(1-R)",
+    "clipped_second_moment_s2": "T^2*(1-2*R+S)",
+    "clipped_variance_s2": "T^2*(S-R^2)",
+    "current_heat_ancestry_mean_s": "T-2*Q/P = T*(1-S/R) for P>0",
+    "cdf_T_lower": "R^2/S for S>0; zero if R=S=0; upper bound1",
+    "cdf_u": "u in [1/4,1/2,3/4], c=1-u: max(0,(S-c*R)/(1-c)) <= F(u*T) <= min(1,((1+c)*R-S)/c)",
+    "cdf_semantics": "fraction of eventual heat energy for a pulse by lag u*T, normalized with frozen terminal heat; R is not this CDF",
+    "infinite_moments": "Hn=n!*T0^n*g_heat*(-G_active)^(-(n+1))*b_active",
+    "uncapped_mean": "not identifiable from R,S alone; do not fabricate point estimate"
+  },
+  "acceptance": {
+    "dimensionless_compatibility_absolute": 2e-12,
+    "SI_normalized_relative": 2e-12,
+    "float64_Decimal_relative": 2e-12,
+    "float64_Decimal_absolute_dimensionless": 2e-14,
+    "exact_measure_oracle": "Fraction equalities exactly true",
+    "decimal_oracle_precision": 90,
+    "decimal_oracle_absolute_limit": "1e-60",
+    "cdf_dual_exact": "pointwise polynomial inequalities on [0,1], exact Fraction boundary and representative atom tests",
+    "grid_and_runtime_comparison": "report all raw differences; no new convergence threshold, no certification from mesh differences",
+    "edge_handling": "nonfinite, negative P/Q, nonpositive T fail; zero terminal yield returns typed UNDEFINED; P=Q=0 has undefined current-heat age; raw negative variance retained and std undefined; no silent repair or NaN replacement",
+    "conditioning": [
+      "(1+R)/abs(1-R)",
+      "(R+S)/abs(R-S)",
+      "(S+R^2)/abs(S-R^2)"
+    ]
+  },
+  "execution_budgets": {
+    "new_physical_G_builds_in_ChatGPT": 0,
+    "new_physical_transport_calls_in_ChatGPT": 0,
+    "prior_science_suites_rerun": 0,
+    "endpoint_analysis_runs_max": 1,
+    "endpoint_analysis_wall_s_max": 90,
+    "targeted_toy_and_operational_test_wall_s_max": 120,
+    "small_test_max_active_states": 8,
+    "preauthorized_repair": "at most one targeted contract-preserving implementation repair per worker after a concrete first failure, preserve failure evidence; further failure requires Astra cause classification and explicit bounded amendment; no physics/tolerance changes"
+  },
+  "code_ownership": {
+    "root_Astra": [
+      "theory",
+      "contract",
+      "claim ceiling",
+      "final admission and publication decisions"
+    ],
+    "analysis_lower_tier": [
+      "src/endpoint_analysis.py",
+      "tests/test_endpoint_analysis.py",
+      "evidence/endpoint",
+      "evidence/figures"
+    ],
+    "ncp_lower_tier": [
+      "src/pulse_response.py",
+      "ncp/* except frozen contract",
+      "tests/test_pulse_response.py",
+      "tests/test_ncp_ops.py",
+      "evidence/toy",
+      "evidence/ncp_validation"
+    ],
+    "independent_Astra": "separate from candidate derivation, implementation, acceptance design"
+  },
+  "inherited_gates": {
+    "PHYS02_DELAY": "OPEN",
+    "production_history": "HOLD",
+    "atomic_G02": "UNRESOLVED",
+    "b_grid": "NO_GO",
+    "all_bound": "OPEN",
+    "R17B2B": "NO_CERTIFIED_SOURCE_SHARPENING",
+    "CCC_2026_exporter_identity": "SOURCE_IDENTITY_UNRESOLVED"
+  },
+  "claim_ceiling": [
+    "new finite-window heat-delay semantics and exact positive-kernel inequalities",
+    "stored FP64 endpoints numerically analyzed; input errors not rigorously enclosed",
+    "current age for all 18 tags and selected moments for six rows",
+    "two-model endpoint differences are empirical, not a source uncertainty distribution",
+    "4800 to 9600 comparison changes numerical runtime as well as energy grid",
+    "same-grid pulse and resolvent code locally toy-verified; actual physical NCP run remains NOT_EXECUTED",
+    "no production, global PHYS02_DELAY, CCC, atomic completeness, NCP64 scaling, or fourth-grid promotion"
+  ]
+}

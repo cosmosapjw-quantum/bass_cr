@@ -1,0 +1,33 @@
+{
+  "schema": "cr-phys02d-bounded-implementation-amendment.v1",
+  "id": "ASTRA-IMPLEMENTATION-02",
+  "approved_utc": "2026-10-10T22:39:50.983407+00:00",
+  "owner": "ROOT_ASTRA",
+  "basis": "Independent reviewer findings N1,O1,O2 and return review completeness",
+  "scientific_contract_sha256": "bc05614e9812f616c4a4bb45805e4c0359a171813f7329794b0c10c3bf37dde2",
+  "ncp_contract_sha256": "9dd8b098d828fcad5ddd5138afd29e9dce4805e26fbac897bd4c9a07779e8ff9",
+  "physics_inputs_tolerances_and_call_budgets_changed": false,
+  "authorized_fixes": [
+    {
+      "id": "N1",
+      "cause": "Existing exact CDF inequalities required by contract were not explicitly compared/reported against saved ramp moments",
+      "scope": "For each model selected_total use pinned paired9600 saved metrics R=Pnorm/Hnorm,S=2Qnorm/Hnorm; compare pulse CDF at exact u=.25,.5,.75,1 with existing inequalities at frozen abs tolerance1e-9. Save raw R,S, source reference identity/field paths, lower/upper/actual/slacks/pass for all4times. No need new tag-specific acceptance. Generic CDF check function toy tests only; no G."
+    },
+    {
+      "id": "O1",
+      "cause": "Two tests assumed live checkout stays pending and would fail after READY freeze",
+      "scope": "Isolate HOLD fixture with mock/temporary identity mismatch, never require actual final tree to remain incomplete. Verify standardlib plan retains no NumPy/SciPy. Actual source/admission methods unchanged except required fixes."
+    },
+    {
+      "id": "O2",
+      "cause": "Coordinator exceptions after fresh mkdir can leave no ACTUAL_EXIT; deadline starts after preparation",
+      "scope": "Start monotonic deadline at execute coordinator entry, count preparation toward3600s, use remaining budget for child. After successfully creating own fresh directory record structured actual exit on coordinator exceptions, including traceback, command/cwd/start/end UTC/elapsed/observed child exit and reservation counts without calling them completed calls. Clean up only owned child process group if needed. Never write into a pre-existing run. Terminal receipt overhead explicitly separate if beyond deadline. Inject Popen failure in tiny mocked test, no physical child."
+    },
+    {
+      "id": "R1",
+      "cause": "Return did not include all new unit files bound by independent decision",
+      "scope": "Include every safe study-relative reviewed_files entry from actual independent decision (once present) preserving study-relative names under a clearly documented prefix. Include new study REPORT,START,theory,endpoint evidence,tests plus code/state/inputs/review. Prefer all frozen FILE_MANIFEST payload at source_unit/<studyrelative>, verify where applicable, while preserving existing run/dependency payload. Include README or restore-layout manifest explaining how to overlay dependency_payload repository paths and source_unit into research/cr_phys02d_20261011. Do not invent an independent PASS fixture for publication; collector test fixtures are explicitly synthetic."
+    }
+  ],
+  "verification": "Only affected CDF-bound unit cases including injected violation, prepared/live-state-independent plan tests, injected coordinator startup failure and existing-dir preservation, changed collector coverage. <=45s additional small tests. Preserve all earlier receipts. No scientificG/pulse calls in this environment."
+}

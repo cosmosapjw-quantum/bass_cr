@@ -1,0 +1,55 @@
+{
+  "schema": "cr-phys02d-dag.v1",
+  "updated_utc": "2026-10-10T22:52:35.572782+00:00",
+  "scientific_contract_sha256": "bc05614e9812f616c4a4bb45805e4c0359a171813f7329794b0c10c3bf37dde2",
+  "inherited_gates": {
+    "PHYS02_DELAY": "OPEN",
+    "production_history": "HOLD",
+    "atomic_G02": "UNRESOLVED",
+    "b_grid": "NO_GO",
+    "all_bound": "OPEN",
+    "R17B2B": "NO_CERTIFIED_SOURCE_SHARPENING",
+    "CCC_2026_exporter_identity": "SOURCE_IDENTITY_UNRESOLVED"
+  },
+  "tasks": [
+    {
+      "id": "CR-PHYS02D-HEAT-DELAY-MOMENTS",
+      "status": "PASS_SCOPED",
+      "depends_on": [
+        "PR30_ACTUAL_PAIRED_9600",
+        "PR31_CCC_IDENTITY_HOLD_PRESERVED"
+      ],
+      "independent_review": {
+        "path": "review/INDEPENDENT_DECISION.json",
+        "sha256": "de87adb85e2a3f31ba09f10d06e1d5af88198967ca653ba1d21455e44509192e"
+      },
+      "actual_endpoint_evaluations": 1,
+      "new_physical_G_builds": 0,
+      "new_physical_transport_calls": 0
+    },
+    {
+      "id": "CR-PHYS02D-NCP-PULSE-RESPONSE",
+      "status": "READY",
+      "execution_status": "PREPARED_NOT_EXECUTED",
+      "depends_on": [
+        "CR-PHYS02D-HEAT-DELAY-MOMENTS"
+      ],
+      "max_transport_calls": 2,
+      "max_G_builds": 2,
+      "total_wall_s": 3600,
+      "grid_cells": [
+        3200,
+        6400
+      ],
+      "models_in_order": [
+        "fullBED",
+        "legacy"
+      ],
+      "independent_review": {
+        "path": "review/INDEPENDENT_DECISION.json",
+        "sha256": "de87adb85e2a3f31ba09f10d06e1d5af88198967ca653ba1d21455e44509192e"
+      },
+      "actual_run_admission": "Still requires exact actual numerical runtime and effective resources"
+    }
+  ]
+}
