@@ -1,0 +1,12 @@
+{
+  "id": "CR-PHYS04a-TAIL-LEDGER",
+  "type": "bounded_diagnostic",
+  "scope": "Instantaneous neutral-H/He Rudd ionization losses of the prescribed collisionless CR population in 4..10 MeV",
+  "proton_split_eV": [4000000.0, 4567804.2094395505, 4572846.425549054, 10000000.0],
+  "secondary_split_eV": 9937.21,
+  "scenario": {"dt_s": 10000000000.0, "H_s": 3.3e-17, "shear_s": 3.3e-18, "n_h_m3": 140.0, "y_he_mass_fraction": 0.248, "xi": 0.01, "temperature_k": 100.0},
+  "acceptance": {"orders": [[48, 8, 8], [64, 12, 12]], "maximum_channel_relative_difference": 0.000002, "moment_additivity_relative": 3e-13, "direct_SDCS_relative": 2e-10},
+  "preserved": ["production build_packet 1..4 MeV guard", "production receiver", "all historical evidence"],
+  "excluded": ["thermal deposition", "FS10 extrapolation", "causal electron cascade", "collision feedback", "complete proton stopping", "cosmological history", "global scientific admission"],
+  "failure_policy": "Preserve raw unsplit refinement failure, apply only the stated proton-boundary split, then one focused validation and independent parent review"
+}
