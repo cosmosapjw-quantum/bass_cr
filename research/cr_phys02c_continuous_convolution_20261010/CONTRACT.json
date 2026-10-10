@@ -1,0 +1,20 @@
+{
+  "id": "CR-PHYS02C-CONTINUOUS-CROSSING-CONVOLUTION01",
+  "authority": "Astra frozen contract and final grid512 birth-order clarification via parent",
+  "role": "lower-tier implementation; Astra independent review pending",
+  "HARNESS_UNAVAILABLE": true,
+  "scope": "conditional fixed-Gas 100K per initial 1000.001 eV upstream electron, elapsed gas-proper seconds 0..1e10",
+  "p02b_sha256": "ea72b12d07bc500cb7c917c5e500325c6864da77cdd90637ddceab7aeddfa0da",
+  "packet_sha256": "df8b917a4fffe665e698d32f1ccf7763200d150f565c24e63a72f33a82da6005",
+  "upstream": "analytic first crossing; F_j=lambda_j exp(-(lambda_H+lambda_He)t); packet identity/endpoints only",
+  "residual_eV": [989.797, 978.783],
+  "upstream_excitation_eV": [10.204, 21.218],
+  "projection": "fresh P02B project_daughters for each grid; two independent residual columns",
+  "quadrature": "Gauss-Legendre birth nodes on panels split at T-cooling_time(grid node); observe each age grid before weighted sum",
+  "campaign": [{"grid":128,"order":32,"calls":160},{"grid":256,"order":32,"calls":320},{"grid":512,"order":16,"calls":304},{"grid":512,"order":32,"calls":608}],
+  "reference": {"grid":128,"order":32,"method":"SSPRK2","calls":160,"steps":"max(128,ceil(age*rho/0.2))","step_cap":256},
+  "limits": {"nonzero_evolve_calls":1552,"columns_per_call":2,"processes":4,"threads_per_process":1,"aggregate_wall_s":1800,"aggregate_cpu_s":3600,"repair_authorized":false},
+  "acceptance": {"birth512_order16_32_all_observables_relative":3e-6,"grid_separate_energy_scaled_Ucross":0.02,"grid_difference_must_decrease":true,"time_separate_energy_scaled_Ucross":2e-4,"source_and_ledgers_relative":2e-11,"finite_nonnegative":true},
+  "ledger": {"branch_number":"Nactive+Ncutoff-sum(Cion)=Cj","branch_energy":"Uactive+Ucutoff+Ubinding+UCoulomb+sum(Uexc_down)=Ej*Cj","total_number":"S+Nactive+Ncutoff-Nion=1","total_energy":"E0*S+sum(Udown)+DeltaH*CH+DeltaHe*CHe=E0"},
+  "claim_ceiling": "conditional hybrid closure; upstream NIST singlet and downstream old23s retain separate labels; cutoff unallocated; physical/global history HOLD"
+}
