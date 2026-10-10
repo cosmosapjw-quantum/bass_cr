@@ -1,0 +1,21 @@
+--- baseline/ncp/launch_refinement.py
++++ adapter/launch_refinement.py
+@@ -3,6 +3,7 @@
+ import os
+ for k in ('OPENBLAS_NUM_THREADS','MKL_NUM_THREADS','OMP_NUM_THREADS','NUMEXPR_NUM_THREADS','OMP_MAX_ACTIVE_LEVELS'):os.environ[k]='1'
+ import argparse, importlib.util,json,pathlib,signal,subprocess,sys,time,traceback
++import ops as operational_ops
+ from ops import sha,verify,probe
+ STUDY=pathlib.Path(__file__).resolve().parents[1]
+ SHA='e0445ecbf052a3441f6203f9e0463defcf0c24c0ee018a67e112d338991f47ee'
+@@ -10,8 +11,8 @@
+ 
+ def utc():return time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime())
+ def provenance():
+-    files=[STUDY/'state/SCIENTIFIC_CONTRACT.json',STUDY/'ncp/NCP_EXECUTION_CONTRACT.json',STUDY/'ncp/launch_refinement.py',STUDY/'ncp/ops.py',STUDY/'src/coherent_bed.py',STUDY/'tests/run_targeted.py']
+-    return {'command':sys.argv,'cwd':str(pathlib.Path.cwd()),'python':sys.version,'code_config_identities':{str(x.relative_to(STUDY)):{'bytes':x.stat().st_size,'sha256':sha(x)} for x in files if x.is_file()}}
++    files=[STUDY/'state/SCIENTIFIC_CONTRACT.json',STUDY/'ncp/NCP_EXECUTION_CONTRACT.json',STUDY/'ncp/launch_refinement.py',STUDY/'ncp/ops.py',pathlib.Path(__file__).resolve(),pathlib.Path(operational_ops.__file__).resolve(),STUDY/'src/coherent_bed.py',STUDY/'tests/run_targeted.py']
++    return {'command':sys.argv,'cwd':str(pathlib.Path.cwd()),'python':sys.version,'operational_adapter':{'launcher':str(pathlib.Path(__file__).resolve()),'imported_ops':str(pathlib.Path(operational_ops.__file__).resolve()),'baseline_launcher':str(STUDY/'ncp/launch_refinement.py'),'baseline_ops':str(STUDY/'ncp/ops.py')},'code_config_identities':{str(x.relative_to(STUDY)):{'bytes':x.stat().st_size,'sha256':sha(x)} for x in files if x.is_file()}}
+ def load(p):return json.loads(pathlib.Path(p).read_text())
+ def dump(p,d):p.write_text(json.dumps(d,indent=2,allow_nan=False)+'\n')
+ def admission():
