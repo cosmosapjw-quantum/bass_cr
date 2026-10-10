@@ -1,0 +1,23 @@
+{
+  "unit": "CR_NONAUTONOMOUS_PRESCRIBED_DENSITY01",
+  "authority": "Parent Astra frozen contract; lower-tier implementation only",
+  "base_commit": "5a95e976aef0e2b1e399174c120c9d23c5d4d930",
+  "allowed_paths": ["research/cr_nonautonomous_prescribed_density01_20261011/"],
+  "bath": "REI PR109 native id0 n32 physical epochs0/1 at tau0,2.5e13; linear proper nHI=y2,nHII=y3,nHeI=y11 in absolute tau; derived nH,xHII,Y; HeII/III0; Gas100K; stored cold temperatures NOT_USED",
+  "model": "Conditional per initial electron; no density feedback, dilution or a^3 rescaling. Cutoff nonthermal unresolved reservoir; excitation is not heat/photon transport.",
+  "step": "Carry current grid; midpoint absolute bath, half characteristic drag/heat, midpoint collision, half characteristic drag/heat using postcollision populations; no evolve restart",
+  "grid_intervals": 128,
+  "impulses_eV": [20,100,1000],
+  "duration_s": 10000000000000,
+  "observers": [0,0.25,0.5,0.75,1],
+  "cases": {"main_sparse_steps":[128,256,512],"daughter_order12_sparse_steps":512,"independent_SSPRK2_order8_steps":4096,"constant_continuation_sparse_steps":512,"legacy_P02B_sparse_steps":512},
+  "analytic": "neutral100K ne0 q=1+tau/T; 16 steps each; born0 ageT/2 clock5T/8; bornT/2 ageT/2 clock7T/8; compare direct sparse action",
+  "ledgers": ["Nactive+Ncutoff-sum Cion=1","Uactive+Ucutoff+sum I_s Cion+sum Delta_s Cexc+Qcoul=E0"],
+  "acceptance": {"ledger_analytic":2e-11,"main_energy_channels_vs_E0":2e-4,"main_refinement":"errors128>errors256>errors512 vs SSPRK2","quadrature":1e-8,"legacy_continuation":2e-4,"SSPRK2_CFL":0.4,"finite_nonnegative":"no clipping","HeII_structural_zero":0},
+  "controls": ["t0/OFF identity","zero initial deposited energy","cold temperature rejected","zero HeII","analytic absolute bath clock"],
+  "limits": {"campaigns":1,"processes":1,"threads":1,"wall_s":900,"CPU_s":900,"maximum_response_steps_per_reference":4096,"maximum_reference_actions":8192,"maximum_total_macrosteps":6560,"maximum_total_block_actions":10658,"columns":3,"repairs":0,"reruns":0},
+  "clarification_history": [{"id":"CONTRACT_CLARIFICATION_R1","original_conflict":"maximum_stages_per_reference7000 contradicts SSPRK2 4096 macrosteps requiring8192 RHS calls","Astra_resolution":"stages mean RHS/exponential actions; SSPRK2 4096 macrosteps8192 actions; campaign6560 macrosteps10658 block actions;3 energies share one block action with3-column workload reported separately; legacy one shared512-step timeline with observations0/128/256/384/512 and characteristic grids computed from original generator.grid at absolute elapsed times"}],
+  "harness_status": "HARNESS_UNAVAILABLE: /home/cosmosapjw/.codex/bounded-work-harness/RULES.md absent",
+  "stop": "First substantive failure preserved and returned to Astra; no repair/rerun",
+  "claim_ceiling": ["independent Astra review pending","physical thermal-bath coupling HOLD","radiation transport HOLD","physical continuum HOLD","global admission HOLD"]
+}

@@ -1,0 +1,16 @@
+{
+  "unit": "CR_NONAUTONOMOUS_PRESCRIBED_DENSITY01_REPAIR01",
+  "authority": "Astra-approved single bounded repair-closeout; lower-tier mechanical execution",
+  "base_commit": "5a95e976aef0e2b1e399174c120c9d23c5d4d930",
+  "base_tree": "e0b7f52329196cfc4beaa5348f5d0adb3071f9b9",
+  "allowed_paths": ["research/cr_nonautonomous_prescribed_density01_20261011/repair01/"],
+  "preserved_inputs": {"../RESULTS.json":"ee26c7f4386779c4f2bb2508b2ccec6df1465da7a9b6848ff807ba2e61f6fd8e","../validate.py":"985c155cfe9109e757c7a9785caf619e097b3d44e5c59907fe12f1d53556d110","../CONTRACT.json":"4db788aeb4af86d36c9425e481fabac2f7c20f7a820e2eec246b0a64712215fb"},
+  "calculation": "Reuse unchanged original midpoint bath, carried-grid half-drag/collision/half-drag calculation, grid128, three impulses20/100/1000eV, 100K, original units and ledgers. Reuse saved SSPRK4096 and sparse512 observations.",
+  "ordered_cases": ["constant512","legacy512 shared timeline","sparse1024","sparse2048","daughter12/2048"],
+  "acceptance": {"constant_legacy_max_normalized_channel_difference":0.0002,"refinement":"error512 > error1024 > error2048; error2048 <= 0.0002 against saved SSPRK4096","daughter_max_normalized_channel_difference":1e-8,"ledger_tolerance":2e-11,"finite_nonnegative":"no clipping","HeII_structural_zero":0},
+  "limits": {"processes":1,"threads":1,"cpu_s":360,"wall_s":360,"macro_block_actions":6144,"column_actions":18432,"runs":1,"repairs":0},
+  "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 -B research/cr_nonautonomous_prescribed_density01_20261011/repair01/validate_refinement.py",
+  "harness_status": "HARNESS_UNAVAILABLE: /home/cosmosapjw/.codex/bounded-work-harness/RULES.md absent",
+  "stop": "Preserve first failure, no repair or rerun, no commit or push; return raw identities and results to Astra",
+  "claim_ceiling": "Only prescribed-bath retained100K numerical experiment. Cold physical operator, thermal feedback, continuum and global admission HOLD. Independent Astra review required."
+}
