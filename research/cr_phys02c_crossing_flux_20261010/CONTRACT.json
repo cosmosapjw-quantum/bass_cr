@@ -1,0 +1,16 @@
+{
+  "id": "CR-PHYS02C-NIST-CROSSING-FLUX01",
+  "status": "FROZEN_BEFORE_FIRST_RUN",
+  "base_commit": "b157c7873851a9cc0f455786b607ad9fcfbaa168",
+  "planning_review": "Astra", "implementation": "lower tier",
+  "kernel_sha256": "df549203e197eb04a77c7a97c76ff74d64a97e819f138fcca88b28416d070b50",
+  "graph_bath_transitions": "unchanged pinned NIST excitation kernel",
+  "partition": "A:E>1000eV; B:E<=1000eV; F_B=Q_BA*p_A",
+  "impulses_eV": [1000.001,1015,1500,2000,3000],
+  "epochs_s": [0,1e10,1e11,1e12,1e13],
+  "limits": {"campaign_wall_s":120,"states_per_impulse":10000,"repairs":1},
+  "acceptance": {"finite_nonnegative":true,"boundary_eV":"978.782<E<=1000","OFF":0,"t0_cumulative":0,"number_energy_flow":2e-11,"sparse_uniformization_flux":1e-10,"analytic_1000_001":true,"slab_Gauss16_32_increment_refinement":2e-11},
+  "scope": "typed impulse response crossing packet; energy unallocated; NIST HeI singlet separate",
+  "excluded": ["volume normalization","bin width","interpolation","P02B execution/coupling","physical history"],
+  "global_admission":"HOLD"
+}
