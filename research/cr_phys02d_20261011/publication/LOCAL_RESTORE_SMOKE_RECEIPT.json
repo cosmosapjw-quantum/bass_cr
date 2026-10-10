@@ -1,0 +1,270 @@
+{
+  "schema": "cr-phys02d-clean-local-restore-plan.v1",
+  "status": "PASS_LOCAL_RESTORE_AND_INPUT_ADMISSION",
+  "science_commit": "6ed83ff61aff24fe51ff0370736f70e0e52893f8",
+  "archive": "CR_PHYS02D_20261011_6ed83ff6_HANDOFF.zip",
+  "archive_sha256": "100e0cf1fec443067b74aed9f8d508f1daae1d117bf9005f57ebcd68e1cf2673",
+  "archive_bytes": 4903951,
+  "fresh_destination": "/workspace/scratch/584ff08e1634/phys02d_publish_work/clean_restore_6ed83ff6",
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "/workspace/scratch/584ff08e1634/bass_cr_work/research/cr_phys02d_20261011/ncp/ops.py",
+        "extract",
+        "/workspace/scratch/584ff08e1634/phys02d_publish_work/CR_PHYS02D_20261011_6ed83ff6_HANDOFF.zip",
+        "/workspace/scratch/584ff08e1634/phys02d_publish_work/clean_restore_6ed83ff6",
+        "--archive-sha256",
+        "100e0cf1fec443067b74aed9f8d508f1daae1d117bf9005f57ebcd68e1cf2673"
+      ],
+      "cwd": "/workspace/scratch/584ff08e1634/phys02d_publish_work",
+      "started_utc": "2026-10-10T22:57:43.459439+00:00",
+      "actual_exit": 0,
+      "wall_seconds": 0.17807171599997673,
+      "stdout_path": "RESTORE_EXTRACT.stdout.json",
+      "stderr_path": "RESTORE_EXTRACT.stderr.log",
+      "stdout_sha256": "edd0a1d179396cf2d2bc5da9c82cf53b12f01775ce3e86e0cc96f8120332f3d0",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "python3",
+        "ncp/launch_pulse.py",
+        "--plan"
+      ],
+      "cwd": "/workspace/scratch/584ff08e1634/phys02d_publish_work/clean_restore_6ed83ff6/research/cr_phys02d_20261011",
+      "started_utc": "2026-10-10T22:57:43.638320+00:00",
+      "actual_exit": 0,
+      "wall_seconds": 0.15831067800172605,
+      "stdout_path": "RESTORE_PLAN.stdout.json",
+      "stderr_path": "RESTORE_PLAN.stderr.log",
+      "stdout_sha256": "32f0ee04e935c9a0f28b30c2f4c02f84901217e208ecf51d6a63470a1e84fb8d",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "actual_plan": {
+    "state": "PREPARED_NOT_EXECUTED",
+    "utc": "2026-10-10T22:57:43Z",
+    "command": [
+      "ncp/launch_pulse.py",
+      "--plan"
+    ],
+    "cwd": "/workspace/scratch/584ff08e1634/phys02d_publish_work/clean_restore_6ed83ff6/research/cr_phys02d_20261011",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "physical_G_builds": 0,
+    "pulse_calls": 0,
+    "resource_probe": {
+      "utc": "2026-10-10T22:57:43Z",
+      "status": "HOLD",
+      "reason": "INSUFFICIENT_EFFECTIVE_MEMORY_CPU_OR_DISK",
+      "capacity_established": true,
+      "affinity_cpus": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "effective_allowed_cpus": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "cgroup_hierarchy": {
+        "membership": "/",
+        "mount_root": "/",
+        "mount_point": "/sys/fs/cgroup",
+        "leaf": "/sys/fs/cgroup",
+        "inspection_scope": "ALL_READABLE_VISIBLE_ANCESTORS_TO_MOUNT_ROOT",
+        "ancestors": [
+          {
+            "path": "/sys/fs/cgroup",
+            "is_true_cgroup2_root": true,
+            "values": {
+              "cpu.max": "800000 100000",
+              "memory.max": "8589934592",
+              "memory.current": "225095680"
+            }
+          }
+        ],
+        "effective_cpuset": "0-8",
+        "effective_cpuset_cpus": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "effective_cpuset_source": "/sys/fs/cgroup",
+        "cpuset_disabled_descendants": []
+      },
+      "cgroup": {
+        "cpu.max": "800000 100000",
+        "memory.max": "8589934592",
+        "memory.current": "225095680"
+      },
+      "topology": [
+        {
+          "cpu": 0,
+          "core_id": "0",
+          "package_id": "0"
+        },
+        {
+          "cpu": 1,
+          "core_id": "1",
+          "package_id": "0"
+        },
+        {
+          "cpu": 2,
+          "core_id": "2",
+          "package_id": "0"
+        },
+        {
+          "cpu": 3,
+          "core_id": "3",
+          "package_id": "0"
+        },
+        {
+          "cpu": 4,
+          "core_id": "4",
+          "package_id": "0"
+        },
+        {
+          "cpu": 5,
+          "core_id": "5",
+          "package_id": "0"
+        },
+        {
+          "cpu": 6,
+          "core_id": "6",
+          "package_id": "0"
+        },
+        {
+          "cpu": 7,
+          "core_id": "7",
+          "package_id": "0"
+        },
+        {
+          "cpu": 8,
+          "core_id": "8",
+          "package_id": "0"
+        }
+      ],
+      "load_average": [
+        0.1416015625,
+        0.16015625,
+        0.265625
+      ],
+      "same_uid_process_count_no_commandlines": 19,
+      "coordinator_pid": 7,
+      "coordinator_RSS": "14012 kB",
+      "memory_host_bytes": {
+        "MemTotal": 10475843584,
+        "MemFree": 9962364928,
+        "MemAvailable": 9869193216,
+        "Buffers": 9773056,
+        "Cached": 62267392,
+        "SwapCached": 0,
+        "Active": 25026560,
+        "Inactive": 131317760,
+        "Active(anon)": 106496,
+        "Inactive(anon)": 114716672,
+        "Active(file)": 24920064,
+        "Inactive(file)": 16601088,
+        "Unevictable": 30638080,
+        "Mlocked": 0,
+        "SwapTotal": 0,
+        "SwapFree": 0,
+        "Dirty": 15994880,
+        "Writeback": 0,
+        "AnonPages": 115040256,
+        "Mapped": 71667712,
+        "Shmem": 12288,
+        "KReclaimable": 68255744,
+        "Slab": 122798080,
+        "SReclaimable": 68255744,
+        "SUnreclaim": 54542336,
+        "KernelStack": 3551232,
+        "PageTables": 4882432,
+        "SecPageTables": 0,
+        "NFS_Unstable": 0,
+        "Bounce": 0,
+        "WritebackTmp": 0,
+        "CommitLimit": 5237919744,
+        "Committed_AS": 467697664,
+        "VmallocTotal": 35184372087808,
+        "VmallocUsed": 4841472,
+        "VmallocChunk": 0,
+        "Percpu": 4276224,
+        "AnonHugePages": 0,
+        "ShmemHugePages": 0,
+        "ShmemPmdMapped": 0,
+        "FileHugePages": 0,
+        "FilePmdMapped": 0,
+        "Balloon": 0,
+        "HugePages_Total": 0,
+        "HugePages_Free": 0,
+        "HugePages_Rsvd": 0,
+        "HugePages_Surp": 0,
+        "Hugepagesize": 2097152,
+        "Hugetlb": 0,
+        "DirectMap4k": 310378496,
+        "DirectMap2M": 9552527360,
+        "DirectMap1G": 11811160064
+      },
+      "bounded_memory_bytes": 8589934592,
+      "available_before_reserve_bytes": 8364838912,
+      "reserve_bytes": 1073741824,
+      "available_working_bytes": 7291097088,
+      "cpu_quota": 8.0,
+      "estimated_peak_bytes": 8589934592,
+      "minimum_working_bytes": 12884901888,
+      "free_disk_bytes": 28970168320,
+      "admitted": false,
+      "thread_environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_MAX_ACTIVE_LEVELS": "1"
+      }
+    },
+    "admission": {
+      "payload_verification": {
+        "verified_entries": 359,
+        "manifest_sha256": "5bc21ed14a9cf6a02cb5db661e151067984abea57cc6273930aa057bf8d4d87b",
+        "tier": "R3_ACTUAL_LOCAL_PAYLOAD_HASH_VERIFICATION"
+      },
+      "review_sha256": "de87adb85e2a3f31ba09f10d06e1d5af88198967ca653ba1d21455e44509192e",
+      "input_count": 11,
+      "dependency_verification": {
+        "verified_entries": 259,
+        "manifest_sha256": "dd64b4b187ea9b12c147e2d6d50d71b2f94c61e43a2ad1d77bc4b486b6ca68f3",
+        "tier": "R3_ACTUAL_LOCAL_PAYLOAD_HASH_VERIFICATION"
+      }
+    },
+    "admission_status": "READY"
+  },
+  "scope": {
+    "local_archive_full_byte_restore": true,
+    "remote_download_restore": false,
+    "new_physical_G_builds": 0,
+    "new_physical_pulse_calls": 0,
+    "resource_admitted": false,
+    "physical_execution": "NOT_EXECUTED"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-m",
+    "unittest",
+    "-v",
+    "test_pulse_response.PulseTests.test_saved_cdf_bounds_and_violation",
+    "test_ncp_ops.OperationalTests.test_plan_standardlib_hold",
+    "test_ncp_ops.OperationalTests.test_dependency_manifest_and_npz_schema",
+    "test_ncp_ops.OperationalTests.test_injected_startup_failure_and_no_overwrite",
+    "test_ncp_ops.OperationalTests.test_fresh_guard_and_collector"
+  ],
+  "cwd": "/workspace/scratch/584ff08e1634/bass_cr_work/research/cr_phys02d_20261011/tests",
+  "start_unix": 1791672070.8113873,
+  "end_unix": 1791672071.79911,
+  "elapsed_s": 0.9877228736877441,
+  "exit": 1,
+  "stdout": "",
+  "stderr": "test_saved_cdf_bounds_and_violation (test_pulse_response.PulseTests.test_saved_cdf_bounds_and_violation) ... ok\ntest_plan_standardlib_hold (test_ncp_ops.OperationalTests.test_plan_standardlib_hold) ... ok\ntest_dependency_manifest_and_npz_schema (test_ncp_ops.OperationalTests.test_dependency_manifest_and_npz_schema) ... ok\ntest_injected_startup_failure_and_no_overwrite (test_ncp_ops.OperationalTests.test_injected_startup_failure_and_no_overwrite) ... ok\ntest_fresh_guard_and_collector (test_ncp_ops.OperationalTests.test_fresh_guard_and_collector) ... ERROR\n\n======================================================================\nERROR: test_fresh_guard_and_collector (test_ncp_ops.OperationalTests.test_fresh_guard_and_collector)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/584ff08e1634/bass_cr_work/research/cr_phys02d_20261011/tests/test_ncp_ops.py\", line 16, in test_fresh_guard_and_collector\n    a=collect_return.collect(ROOT,run,base/'returns');b=collect_return.collect(ROOT,run,base/'returns');self.assertNotEqual(a['path'],b['path'])\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/584ff08e1634/bass_cr_work/research/cr_phys02d_20261011/ncp/collect_return.py\", line 37, in collect\n    manifestpath=root/name;verify(root,manifestpath);payload['frozen_payload/'+name]=manifestpath\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/584ff08e1634/bass_cr_work/research/cr_phys02d_20261011/ncp/ops.py\", line 165, in verify\n    if failures:raise ValueError('Manifest verification FAILED; do not trust any partial success: '+repr(failures))\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Manifest verification FAILED; do not trust any partial success: ['research/cr_phys02b_20261010/state/CLOSEOUT.json', 'research/cr_phys02b_20261010/state/CLOSEOUT.md']\n\n----------------------------------------------------------------------\nRan 5 tests in 0.527s\n\nFAILED (errors=1)\n",
+  "scope": "ASTRA-IMPLEMENTATION-02 affected tests only; no physical G or transport"
+}

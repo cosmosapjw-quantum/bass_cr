@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_pulse_response.py",
+    "-v"
+  ],
+  "cwd": "/workspace/scratch/584ff08e1634/bass_cr_work/research/cr_phys02d_20261011",
+  "start_unix": 1791671369.2134154,
+  "end_unix": 1791671369.7022712,
+  "elapsed_s": 0.48885607719421387,
+  "exit": 1,
+  "stdout": "",
+  "stderr": "test_direct_cutoff_preserved (test_pulse_response.PulseTests.test_direct_cutoff_preserved) ... FAIL\ntest_equal_erlang (test_pulse_response.PulseTests.test_equal_erlang) ... ok\ntest_invalid_and_zero_yield (test_pulse_response.PulseTests.test_invalid_and_zero_yield) ... ok\ntest_one_pole (test_pulse_response.PulseTests.test_one_pole) ... ok\ntest_time_scaling (test_pulse_response.PulseTests.test_time_scaling) ... ok\ntest_two_stage_unequal (test_pulse_response.PulseTests.test_two_stage_unequal) ... ok\n\n======================================================================\nFAIL: test_direct_cutoff_preserved (test_pulse_response.PulseTests.test_direct_cutoff_preserved)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/584ff08e1634/bass_cr_work/research/cr_phys02d_20261011/tests/test_pulse_response.py\", line 31, in test_direct_cutoff_preserved\n    r=self.run_toy(cutoff=.25);np.testing.assert_array_equal(r['pulse_states'][:,2,:],np.full((17,2),.25));self.assertLess(np.max(np.abs(r['energy_residuals'])),5e-13)\n                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/testing/_private/utils.py\", line 1054, in assert_array_equal\n    assert_array_compare(operator.__eq__, actual, desired, err_msg=err_msg,\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/testing/_private/utils.py\", line 919, in assert_array_compare\n    raise AssertionError(msg)\nAssertionError: \nArrays are not equal\n\nMismatched elements: 28 / 34 (82.4%)\nMax absolute difference among violations: 1.11022302e-16\nMax relative difference among violations: 4.4408921e-16\n ACTUAL: array([[0.25, 0.25],\n       [0.25, 0.25],\n       [0.25, 0.25],...\n DESIRED: array([[0.25, 0.25],\n       [0.25, 0.25],\n       [0.25, 0.25],...\n\n----------------------------------------------------------------------\nRan 6 tests in 0.075s\n\nFAILED (failures=1)\n"
+}

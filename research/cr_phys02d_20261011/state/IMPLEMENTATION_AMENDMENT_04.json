@@ -1,0 +1,13 @@
+{
+  "schema": "cr-phys02d-bounded-implementation-amendment.v1",
+  "id": "ASTRA-IMPLEMENTATION-04",
+  "approved_utc": "2026-10-10T22:46:11.909318+00:00",
+  "owner": "ROOT_ASTRA",
+  "scientific_contract_sha256": "bc05614e9812f616c4a4bb45805e4c0359a171813f7329794b0c10c3bf37dde2",
+  "ncp_contract_sha256": "9dd8b098d828fcad5ddd5138afd29e9dce4805e26fbac897bd4c9a07779e8ff9",
+  "cause": "Source inspection: collector writes RESTORE_LAYOUT.json and README_RESTORE.txt after manifest creation, leaving two undeclared archive payload entries",
+  "class": "RETURN_MANIFEST_EXACT_ENTRY_COVERAGE",
+  "authorized_fix": "Compute exact UTF8 metadata bytes before RETURN_MANIFEST construction and include their bytes/SHA256 in files; only RETURN_MANIFEST itself excluded. Preserve originalpaths/currentunitsource and scientific contract. Return files count includes these two metadata files. Clarify restore verification: RETURN manifest, restored study FILE manifest, repository-relative dependency manifest; archived frozen_payload/BUNDLE is original provenance, not assertion all originalbundle-root files are present.",
+  "targeted_validation": "One collector fixture <=15s with exact ZIP entry set equality to manifest files plus RETURN_MANIFEST and every listed entry byte/hash; no new physicalG/pulse, no other suite. Preserve prior receipts and code identity.",
+  "physics_inputs_tolerances_or_budgets_changed": false
+}
