@@ -1,0 +1,14 @@
+{
+  "task": "CR-PHYS05",
+  "nodes": [
+    {"id": "INTAKE", "state": "PASS", "evidence": "SOURCE_MANIFEST.json"},
+    {"id": "CONTRACT", "state": "PASS", "depends_on": ["INTAKE"], "evidence": "EXECUTION_CONTRACT.json; earlier incomplete intake retained in CONTRACT.json"},
+    {"id": "IMPLEMENT", "state": "IMPLEMENTED", "depends_on": ["CONTRACT"]},
+    {"id": "FOCUSED_TESTS", "state": "PASS", "count": 8, "depends_on": ["IMPLEMENT"], "evidence": "evidence/TESTS.json"},
+    {"id": "VALIDATE_FIRST", "state": "FAIL_BIRTH_TIME_CONVERGENCE", "depends_on": ["IMPLEMENT"], "evidence": "evidence/VALIDATION.json"},
+    {"id": "ONE_REPAIR", "state": "PASS_SCOPED", "depends_on": ["VALIDATE_FIRST"], "evidence": "evidence/REPAIR_VALIDATION.json", "cohorts": 1392, "remaining_repair_rounds": 0},
+    {"id": "INDEPENDENT_REVIEW", "state": "PASS_SCOPED", "depends_on": ["ONE_REPAIR"], "evidence": "evidence/INDEPENDENT_REVIEW.json"}
+  ],
+  "next_minimum_action": "Scoped publication; then a separate domain/interface contract for unresolved source bands, cutoff response or gas feedback. Full-domain descendants remain HOLD.",
+  "full_CR_history": "HOLD"
+}

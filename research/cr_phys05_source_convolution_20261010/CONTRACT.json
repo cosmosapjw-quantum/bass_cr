@@ -1,0 +1,25 @@
+{
+  "id": "CR-PHYS05-DIRECT-BORN-10-1000EV-CONVOLUTION",
+  "status": "CONTRACT_INCOMPLETE",
+  "base_commit": "6445f9a3b7aec08cd3d966e86bf58841bb498f22",
+  "base_tree": "dd030453f5aeaad9e84e7cf914c855926fbe7c2a",
+  "scope": "Fixed-bath conditional convolution of direct 10-1000 eV Rudd electrons with the source-pinned P02B characteristic kernel",
+  "gas": {"temperature_K": 100.0, "nH_m3": 140.0, "Y_He_mass": 0.248, "xHII_per_H": 0.01, "xHeII_per_He": 0.01, "xHeIII_per_He": 0.0},
+  "source": {"model": "Qe(W,t)=t*A(W)", "proton_window_eV": [1000000.0, 4000000.0], "electron_window_eV": [10.0, 1000.0], "time_end_s": 10000000000.0, "source_redshift": 8.0, "full_proton_source_window_eV": [10000.0, 1000000000000000.0]},
+  "preserve": ["direct electron source number and energy partitions below 10, 10-1000, and above 1000 eV", "cohort observables use each cohort's own characteristic energy grid", "cutoff number and energy remain unresolved; no feed into P02A", "primary binding energy remains separate", "production provider unchanged"],
+  "inherited_PR26_checks": {
+    "source_and_energy_quadrature_orders": [64, 96],
+    "source_and_energy_quadrature_relative": 2e-7,
+    "source_separation_vs_direct_sdcs_relative": 2e-10,
+    "direct_source_partition_relative": 2e-12,
+    "ramp_vs_bianchi_samples_relative": 3e-6,
+    "bianchi_sampling_orders": {"energy": 48, "proton_age": 8, "mu": 8},
+    "bianchi_sampling_times_s": [2500000000.0, 5000000000.0, 10000000000.0]
+  },
+  "inherited_P02B_kernel_checks": {"number_energy_ledger_relative": 2e-11, "time_stored_history_energy_fraction_at_1e11s": 2e-4, "grid_energy_fraction": 0.02, "grid_intervals": [128, 256, 512]},
+  "missing": ["explicit electron-cohort birth-time quadrature nodes/rule and refinement levels", "predeclared birth-time convolution error metric and tolerance"],
+  "missing_reason": "PR26 evaluates its ramp response through analytic birth-time integration transformed to an energy integral. Its order-8 proton-age diagnostic is not an electron-cohort birth-time convolution grid. No such refinement pair is recorded in the inspected contract, implementation, verifier or numerical result.",
+  "execution_permission": "Do not implement or execute convolution until a new bounded contract supplies the missing birth-time rule and acceptance criterion.",
+  "hard_limits": {"repair_closeouts": 1, "production_changes": false, "commit_or_push": false},
+  "claim_ceiling": "CONTRACT_INCOMPLETE; no new convolution result or physical history claim"
+}

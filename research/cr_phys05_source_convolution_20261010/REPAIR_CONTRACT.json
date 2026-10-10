@@ -1,0 +1,18 @@
+{
+  "id": "CR-PHYS05-BIRTH-PANEL-REPAIR-01",
+  "parent_contract": "EXECUTION_CONTRACT.json",
+  "first_failure_sha256": "700abc957650d92c9d1f2b178baccaffc33c160268b4a45b3a53ee928441484a",
+  "authorization": "Parent explicitly approved one final repair-closeout with frozen 1392-cohort cap before new results.",
+  "change": "Split [0,T] at birth times T-tau(E_node) for existing P02B grid nodes whose deterministic cutoff-arrival ages lie strictly between zero and T. Apply the same Gauss-Legendre orders on each panel. No other breakpoint or physics modification.",
+  "preserved": ["gas", "raw source", "kernel SHA", "source orders64/96", "birth orders16/32", "all observable definitions", "birth-time tolerance3e-6", "grid tolerance0.02 and decreasing criterion", "number/energy ledger2e-11", "cutoff remains unresolved"],
+  "cases": [
+    {"grid_intervals": 128, "panels": 5, "birth_order": 32, "cohorts": 160},
+    {"grid_intervals": 256, "panels": 10, "birth_order": 32, "cohorts": 320},
+    {"grid_intervals": 512, "panels": 19, "birth_order": 16, "cohorts": 304},
+    {"grid_intervals": 512, "panels": 19, "birth_order": 32, "cohorts": 608}
+  ],
+  "grid_rerun_reason": "Paneling changes the birth integration rule, so coarse grid results must use the same repaired rule for comparable grid evidence.",
+  "original_birth8_to16": "Retained first-attempt diagnostic; no new order or refinement pair added",
+  "resource_limit": {"cohorts": 1392, "processes": 4, "BLAS_threads_per_process": 1, "observed_online_CPUs": 24, "repair_rounds": 1, "further_adjustments": false},
+  "next": "Independent parent review if all checks pass; otherwise HOLD with exact remaining failure. No additional repair."
+}
