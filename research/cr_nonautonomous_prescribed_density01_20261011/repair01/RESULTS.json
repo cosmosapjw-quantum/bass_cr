@@ -1,0 +1,2001 @@
+{
+  "unit": "CR_NONAUTONOMOUS_PRESCRIBED_DENSITY01_REPAIR01",
+  "status": "IMPLEMENTED_VALIDATION_PASS_PENDING_ASTRA",
+  "base": "5a95e976aef0e2b1e399174c120c9d23c5d4d930",
+  "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 -B research/cr_nonautonomous_prescribed_density01_20261011/repair01/validate_refinement.py",
+  "requested_role": "lower-tier implementation/execution",
+  "observed_model": "NOT_OBSERVED",
+  "checks": {
+    "pin:/home/cosmosapjw/bass_cr_worktrees/cr-physical-provider-20261010/research/cr_phys02b_delay_20261010/causal_generator.py": {
+      "pass": true,
+      "evidence": "ea72b12d07bc500cb7c917c5e500325c6864da77cdd90637ddceab7aeddfa0da"
+    },
+    "pin:/home/cosmosapjw/bass_cr_worktrees/cr-physical-provider-20261010/research/cr_phys02b_delay_20261010/SOURCE_MANIFEST.json": {
+      "pass": true,
+      "evidence": "e803089f05c46fa3d054b0172914a524244df1aaf32045c4eefa35c136efa2cb"
+    },
+    "pin:/tmp/rei-cold-conditional-ivp01-20261011/research/cold_conditional_ivp01_20261011/evidence/RESULTS.json": {
+      "pass": true,
+      "evidence": "0c00898ab15025cae874b026e52ecc99a357496a5db5c230f8d39a834a8b5818"
+    },
+    "pin:/tmp/rei-cold-conditional-ivp01-20261011/research/cold_conditional_ivp01_20261011/CONTRACT.json": {
+      "pass": true,
+      "evidence": "f7f90c9c0160a8f3d9c2367b53d508543cc4ac0b85ebc8a27f98062b4c297173"
+    },
+    "pin:/tmp/rei-cold-conditional-ivp01-20261011/research/cold_conditional_ivp01_20261011/independent_review.json": {
+      "pass": true,
+      "evidence": "7ac2643da76771b7a48aa0357b4fd7ab574e4c5d9d92f3d807f1375436947fb7"
+    },
+    "saved_reference_epoch_times": {
+      "pass": true,
+      "evidence": null
+    },
+    "finite_nonnegative": {
+      "pass": true,
+      "evidence": {
+        "minimum": 0.0
+      }
+    },
+    "ledger": {
+      "pass": true,
+      "evidence": {
+        "E0": 1000.0,
+        "N": 1.0000000000001208,
+        "U": 999.9999999999716
+      }
+    },
+    "HeII_structural_zero": {
+      "pass": true,
+      "evidence": null
+    },
+    "constant_legacy": {
+      "pass": true,
+      "evidence": 7.605027718682322e-15
+    },
+    "main_refinement": {
+      "pass": true,
+      "evidence": [
+        0.0013005337775715692,
+        0.00027616669288110796,
+        7.32986996518914e-05
+      ]
+    },
+    "daughter_quadrature": {
+      "pass": true,
+      "evidence": 3.853476537862832e-09
+    },
+    "preserved:/home/cosmosapjw/bass_cr_worktrees/cr-physical-provider-20261010/research/cr_nonautonomous_prescribed_density01_20261011/RESULTS.json": {
+      "pass": true,
+      "evidence": null
+    },
+    "preserved:/home/cosmosapjw/bass_cr_worktrees/cr-physical-provider-20261010/research/cr_nonautonomous_prescribed_density01_20261011/validate.py": {
+      "pass": true,
+      "evidence": null
+    },
+    "preserved:/home/cosmosapjw/bass_cr_worktrees/cr-physical-provider-20261010/research/cr_nonautonomous_prescribed_density01_20261011/CONTRACT.json": {
+      "pass": true,
+      "evidence": null
+    }
+  },
+  "cases": {
+    "constant512": {
+      "steps": 512,
+      "order": 8,
+      "method": "sparse",
+      "constant_bath": true,
+      "observations": [
+        {
+          "tau": 0.0,
+          "rows": [
+            {
+              "active_electron_number": 1.0,
+              "active_energy_eV": 20.0,
+              "ionization_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 0.0,
+              "excitation_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "excitation_energy_eV": 0.0,
+              "coulomb_heat_eV": 0.0,
+              "cutoff_electron_number": 0.0,
+              "cutoff_energy_eV": 0.0,
+              "minimum_state": 0.0,
+              "number_ledger": 1.0,
+              "energy_ledger_eV": 20.0
+            },
+            {
+              "active_electron_number": 1.0,
+              "active_energy_eV": 100.0,
+              "ionization_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 0.0,
+              "excitation_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "excitation_energy_eV": 0.0,
+              "coulomb_heat_eV": 0.0,
+              "cutoff_electron_number": 0.0,
+              "cutoff_energy_eV": 0.0,
+              "minimum_state": 0.0,
+              "number_ledger": 1.0,
+              "energy_ledger_eV": 100.0
+            },
+            {
+              "active_electron_number": 1.0,
+              "active_energy_eV": 1000.0,
+              "ionization_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 0.0,
+              "excitation_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "excitation_energy_eV": 0.0,
+              "coulomb_heat_eV": 0.0,
+              "cutoff_electron_number": 0.0,
+              "cutoff_energy_eV": 0.0,
+              "minimum_state": 0.0,
+              "number_ledger": 1.0,
+              "energy_ledger_eV": 1000.0
+            }
+          ]
+        },
+        {
+          "tau": 2500000000000.0,
+          "rows": [
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                0.3639097136562094,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 4.948548782827,
+              "excitation_counts": [
+                0.6358919255449911,
+                0.0,
+                0.0
+              ],
+              "excitation_energy_eV": 6.485280749756149,
+              "coulomb_heat_eV": 0.6323192566097169,
+              "cutoff_electron_number": 1.363909713656201,
+              "cutoff_energy_eV": 7.933851210807058,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999917,
+              "energy_ledger_eV": 19.999999999999922
+            },
+            {
+              "active_electron_number": 2.3897300108787044e-81,
+              "active_energy_eV": 3.1955297940851123e-80,
+              "ionization_counts": [
+                2.9543526761240546,
+                0.08796388353933611,
+                0.0
+              ],
+              "binding_energy_eV": 42.3369382624622,
+              "excitation_counts": [
+                3.447681622928828,
+                0.026636896915809834,
+                0.0
+              ],
+              "excitation_energy_eV": 35.68985656499453,
+              "coulomb_heat_eV": 2.5585514006155448,
+              "cutoff_electron_number": 4.042316559663366,
+              "cutoff_energy_eV": 19.414653771927433,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999756,
+              "energy_ledger_eV": 99.9999999999997
+            },
+            {
+              "active_electron_number": 2.1932776524885676e-28,
+              "active_energy_eV": 3.0523701498354307e-27,
+              "ionization_counts": [
+                31.19878131955969,
+                1.7100271289059108,
+                0.0
+              ],
+              "binding_energy_eV": 466.29508949101336,
+              "excitation_counts": [
+                33.91310004449372,
+                0.4395922666170825,
+                0.0
+              ],
+              "excitation_energy_eV": 354.58260374607937,
+              "coulomb_heat_eV": 17.99462202906695,
+              "cutoff_electron_number": 33.908808448465685,
+              "cutoff_energy_eV": 161.12768473383142,
+              "minimum_state": 0.0,
+              "number_ledger": 1.0000000000000853,
+              "energy_ledger_eV": 999.9999999999909
+            }
+          ]
+        },
+        {
+          "tau": 5000000000000.0,
+          "rows": [
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                0.3639097136562061,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 4.948548782826956,
+              "excitation_counts": [
+                0.6358919255449921,
+                0.0,
+                0.0
+              ],
+              "excitation_energy_eV": 6.48528074975616,
+              "coulomb_heat_eV": 0.6323192566097193,
+              "cutoff_electron_number": 1.3639097136561948,
+              "cutoff_energy_eV": 7.933851210807075,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999887,
+              "energy_ledger_eV": 19.999999999999908
+            },
+            {
+              "active_electron_number": 2.7689124329846446e-207,
+              "active_energy_eV": 3.773159883403255e-206,
+              "ionization_counts": [
+                2.954352676124037,
+                0.08796388353933683,
+                0.0
+              ],
+              "binding_energy_eV": 42.33693826246198,
+              "excitation_counts": [
+                3.4476816229288443,
+                0.026636896915809706,
+                0.0
+              ],
+              "excitation_energy_eV": 35.68985656499469,
+              "coulomb_heat_eV": 2.558551400615539,
+              "cutoff_electron_number": 4.042316559663343,
+              "cutoff_energy_eV": 19.414653771927416,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999689,
+              "energy_ledger_eV": 99.99999999999963
+            },
+            {
+              "active_electron_number": 5.77188348144612e-73,
+              "active_energy_eV": 7.996100653066511e-72,
+              "ionization_counts": [
+                31.198781319559643,
+                1.7100271289059061,
+                0.0
+              ],
+              "binding_energy_eV": 466.2950894910126,
+              "excitation_counts": [
+                33.913100044493696,
+                0.4395922666170803,
+                0.0
+              ],
+              "excitation_energy_eV": 354.5826037460791,
+              "coulomb_heat_eV": 17.994622029066857,
+              "cutoff_electron_number": 33.90880844846572,
+              "cutoff_energy_eV": 161.1276847338313,
+              "minimum_state": 0.0,
+              "number_ledger": 1.000000000000167,
+              "energy_ledger_eV": 999.99999999999
+            }
+          ]
+        },
+        {
+          "tau": 7500000000000.0,
+          "rows": [
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                0.36390971365620445,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 4.948548782826933,
+              "excitation_counts": [
+                0.6358919255449869,
+                0.0,
+                0.0
+              ],
+              "excitation_energy_eV": 6.4852807497561065,
+              "coulomb_heat_eV": 0.6323192566097116,
+              "cutoff_electron_number": 1.3639097136561782,
+              "cutoff_energy_eV": 7.933851210806949,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999738,
+              "energy_ledger_eV": 19.9999999999997
+            },
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                2.9543526761240084,
+                0.08796388353933651,
+                0.0
+              ],
+              "binding_energy_eV": 42.33693826246159,
+              "excitation_counts": [
+                3.4476816229287914,
+                0.02663689691580949,
+                0.0
+              ],
+              "excitation_energy_eV": 35.68985656499415,
+              "coulomb_heat_eV": 2.5585514006155172,
+              "cutoff_electron_number": 4.042316559663305,
+              "cutoff_energy_eV": 19.414653771927235,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999605,
+              "energy_ledger_eV": 99.9999999999985
+            },
+            {
+              "active_electron_number": 2.9950065583807666e-117,
+              "active_energy_eV": 3.743699070879643e-116,
+              "ionization_counts": [
+                31.19878131955935,
+                1.7100271289059013,
+                0.0
+              ],
+              "binding_energy_eV": 466.2950894910085,
+              "excitation_counts": [
+                33.91310004449346,
+                0.4395922666170752,
+                0.0
+              ],
+              "excitation_energy_eV": 354.5826037460766,
+              "coulomb_heat_eV": 17.994622029066743,
+              "cutoff_electron_number": 33.908808448465564,
+              "cutoff_energy_eV": 161.12768473382943,
+              "minimum_state": 0.0,
+              "number_ledger": 1.000000000000309,
+              "energy_ledger_eV": 999.9999999999812
+            }
+          ]
+        },
+        {
+          "tau": 10000000000000.0,
+          "rows": [
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                0.3639097136562026,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 4.948548782826908,
+              "excitation_counts": [
+                0.6358919255449839,
+                0.0,
+                0.0
+              ],
+              "excitation_energy_eV": 6.485280749756075,
+              "coulomb_heat_eV": 0.6323192566097108,
+              "cutoff_electron_number": 1.3639097136561849,
+              "cutoff_energy_eV": 7.933851210806974,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999822,
+              "energy_ledger_eV": 19.99999999999967
+            },
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                2.954352676124017,
+                0.08796388353933686,
+                0.0
+              ],
+              "binding_energy_eV": 42.33693826246171,
+              "excitation_counts": [
+                3.4476816229288083,
+                0.026636896915809612,
+                0.0
+              ],
+              "excitation_energy_eV": 35.68985656499432,
+              "coulomb_heat_eV": 2.5585514006155115,
+              "cutoff_electron_number": 4.0423165596632975,
+              "cutoff_energy_eV": 19.41465377192719,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999436,
+              "energy_ledger_eV": 99.99999999999874
+            },
+            {
+              "active_electron_number": 4.0274608816075934e-162,
+              "active_energy_eV": 5.0540130187060616e-161,
+              "ionization_counts": [
+                31.198781319559462,
+                1.7100271289059301,
+                0.0
+              ],
+              "binding_energy_eV": 466.2950894910107,
+              "excitation_counts": [
+                33.913100044493696,
+                0.4395922666170793,
+                0.0
+              ],
+              "excitation_energy_eV": 354.5826037460791,
+              "coulomb_heat_eV": 17.994622029066786,
+              "cutoff_electron_number": 33.90880844846579,
+              "cutoff_energy_eV": 161.12768473383005,
+              "minimum_state": 0.0,
+              "number_ledger": 1.000000000000398,
+              "energy_ledger_eV": 999.9999999999866
+            }
+          ]
+        }
+      ],
+      "maximum_collision_cfl": 0.0,
+      "wall_s_at_completion": 13.567420708015561
+    },
+    "legacy512": {
+      "shared_timeline_steps": 512,
+      "observations": [
+        {
+          "tau": 0.0,
+          "rows": [
+            {
+              "active_electron_number": 1.0,
+              "active_energy_eV": 20.0,
+              "ionization_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 0.0,
+              "excitation_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "excitation_energy_eV": 0.0,
+              "coulomb_heat_eV": 0.0,
+              "cutoff_electron_number": 0.0,
+              "cutoff_energy_eV": 0.0,
+              "minimum_state": 0.0,
+              "number_ledger": 1.0,
+              "energy_ledger_eV": 20.0
+            },
+            {
+              "active_electron_number": 1.0,
+              "active_energy_eV": 100.0,
+              "ionization_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 0.0,
+              "excitation_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "excitation_energy_eV": 0.0,
+              "coulomb_heat_eV": 0.0,
+              "cutoff_electron_number": 0.0,
+              "cutoff_energy_eV": 0.0,
+              "minimum_state": 0.0,
+              "number_ledger": 1.0,
+              "energy_ledger_eV": 100.0
+            },
+            {
+              "active_electron_number": 1.0,
+              "active_energy_eV": 1000.0,
+              "ionization_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 0.0,
+              "excitation_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "excitation_energy_eV": 0.0,
+              "coulomb_heat_eV": 0.0,
+              "cutoff_electron_number": 0.0,
+              "cutoff_energy_eV": 0.0,
+              "minimum_state": 0.0,
+              "number_ledger": 1.0,
+              "energy_ledger_eV": 1000.0
+            }
+          ]
+        },
+        {
+          "tau": 2500000000000.0,
+          "rows": [
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                0.3639097136562094,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 4.948548782827,
+              "excitation_counts": [
+                0.6358919255449887,
+                0.0,
+                0.0
+              ],
+              "excitation_energy_eV": 6.485280749756125,
+              "coulomb_heat_eV": 0.6323192566096695,
+              "cutoff_electron_number": 1.363909713656207,
+              "cutoff_energy_eV": 7.9338512108071,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999977,
+              "energy_ledger_eV": 19.999999999999893
+            },
+            {
+              "active_electron_number": 2.3897300108843346e-81,
+              "active_energy_eV": 3.195529794090571e-80,
+              "ionization_counts": [
+                2.954352676124048,
+                0.08796388353933603,
+                0.0
+              ],
+              "binding_energy_eV": 42.336938262462105,
+              "excitation_counts": [
+                3.4476816229288207,
+                0.02663689691580988,
+                0.0
+              ],
+              "excitation_energy_eV": 35.68985656499446,
+              "coulomb_heat_eV": 2.558551400615632,
+              "cutoff_electron_number": 4.042316559663381,
+              "cutoff_energy_eV": 19.4146537719275,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999964,
+              "energy_ledger_eV": 99.99999999999969
+            },
+            {
+              "active_electron_number": 2.193277652489494e-28,
+              "active_energy_eV": 3.0523701498349292e-27,
+              "ionization_counts": [
+                31.198781319559778,
+                1.7100271289059146,
+                0.0
+              ],
+              "binding_energy_eV": 466.2950894910146,
+              "excitation_counts": [
+                33.91310004449397,
+                0.4395922666170829,
+                0.0
+              ],
+              "excitation_energy_eV": 354.582603746082,
+              "coulomb_heat_eV": 17.99462202906671,
+              "cutoff_electron_number": 33.90880844846576,
+              "cutoff_energy_eV": 161.12768473383142,
+              "minimum_state": 0.0,
+              "number_ledger": 1.000000000000071,
+              "energy_ledger_eV": 999.9999999999948
+            }
+          ]
+        },
+        {
+          "tau": 5000000000000.0,
+          "rows": [
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                0.363909713656209,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 4.948548782826995,
+              "excitation_counts": [
+                0.6358919255449872,
+                0.0,
+                0.0
+              ],
+              "excitation_energy_eV": 6.485280749756109,
+              "coulomb_heat_eV": 0.6323192566096721,
+              "cutoff_electron_number": 1.3639097136562066,
+              "cutoff_energy_eV": 7.933851210807108,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999976,
+              "energy_ledger_eV": 19.999999999999883
+            },
+            {
+              "active_electron_number": 2.7689124330203557e-207,
+              "active_energy_eV": 3.773159883450973e-206,
+              "ionization_counts": [
+                2.954352676124027,
+                0.08796388353933685,
+                0.0
+              ],
+              "binding_energy_eV": 42.33693826246184,
+              "excitation_counts": [
+                3.4476816229288265,
+                0.02663689691580969,
+                0.0
+              ],
+              "excitation_energy_eV": 35.68985656499451,
+              "coulomb_heat_eV": 2.5585514006156242,
+              "cutoff_electron_number": 4.042316559663336,
+              "cutoff_energy_eV": 19.414653771927526,
+              "minimum_state": 0.0,
+              "number_ledger": 0.999999999999972,
+              "energy_ledger_eV": 99.9999999999995
+            },
+            {
+              "active_electron_number": 5.77188348147356e-73,
+              "active_energy_eV": 7.996100653102025e-72,
+              "ionization_counts": [
+                31.198781319559828,
+                1.71002712890591,
+                0.0
+              ],
+              "binding_energy_eV": 466.2950894910152,
+              "excitation_counts": [
+                33.91310004449405,
+                0.4395922666170809,
+                0.0
+              ],
+              "excitation_energy_eV": 354.5826037460827,
+              "coulomb_heat_eV": 17.994622029066605,
+              "cutoff_electron_number": 33.90880844846565,
+              "cutoff_energy_eV": 161.12768473383107,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999147,
+              "energy_ledger_eV": 999.9999999999957
+            }
+          ]
+        },
+        {
+          "tau": 7500000000000.0,
+          "rows": [
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                0.3639097136562093,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 4.9485487828269985,
+              "excitation_counts": [
+                0.6358919255449834,
+                0.0,
+                0.0
+              ],
+              "excitation_energy_eV": 6.485280749756071,
+              "coulomb_heat_eV": 0.6323192566096667,
+              "cutoff_electron_number": 1.363909713656195,
+              "cutoff_energy_eV": 7.933851210807041,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999858,
+              "energy_ledger_eV": 19.999999999999776
+            },
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                2.954352676124011,
+                0.08796388353933711,
+                0.0
+              ],
+              "binding_energy_eV": 42.336938262461636,
+              "excitation_counts": [
+                3.4476816229287928,
+                0.026636896915809484,
+                0.0
+              ],
+              "excitation_energy_eV": 35.689856564994166,
+              "coulomb_heat_eV": 2.55855140061562,
+              "cutoff_electron_number": 4.042316559663335,
+              "cutoff_energy_eV": 19.41465377192746,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999862,
+              "energy_ledger_eV": 99.99999999999889
+            },
+            {
+              "active_electron_number": 2.9950065583775805e-117,
+              "active_energy_eV": 3.7436990708777717e-116,
+              "ionization_counts": [
+                31.19878131955968,
+                1.7100271289059144,
+                0.0
+              ],
+              "binding_energy_eV": 466.29508949101324,
+              "excitation_counts": [
+                33.91310004449407,
+                0.43959226661707845,
+                0.0
+              ],
+              "excitation_energy_eV": 354.5826037460829,
+              "coulomb_heat_eV": 17.99462202906657,
+              "cutoff_electron_number": 33.90880844846548,
+              "cutoff_energy_eV": 161.12768473383056,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999998863,
+              "energy_ledger_eV": 999.9999999999933
+            }
+          ]
+        },
+        {
+          "tau": 10000000000000.0,
+          "rows": [
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                0.3639097136562057,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 4.9485487828269505,
+              "excitation_counts": [
+                0.635891925544978,
+                0.0,
+                0.0
+              ],
+              "excitation_energy_eV": 6.485280749756016,
+              "coulomb_heat_eV": 0.6323192566096665,
+              "cutoff_electron_number": 1.3639097136561975,
+              "cutoff_energy_eV": 7.933851210807077,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999918,
+              "energy_ledger_eV": 19.99999999999971
+            },
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                2.954352676124011,
+                0.08796388353933685,
+                0.0
+              ],
+              "binding_energy_eV": 42.33693826246163,
+              "excitation_counts": [
+                3.4476816229287865,
+                0.026636896915809602,
+                0.0
+              ],
+              "excitation_energy_eV": 35.6898565649941,
+              "coulomb_heat_eV": 2.5585514006156123,
+              "cutoff_electron_number": 4.042316559663331,
+              "cutoff_energy_eV": 19.414653771927405,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999836,
+              "energy_ledger_eV": 99.99999999999875
+            },
+            {
+              "active_electron_number": 4.02746088161323e-162,
+              "active_energy_eV": 5.054013018710169e-161,
+              "ionization_counts": [
+                31.198781319559735,
+                1.7100271289059312,
+                0.0
+              ],
+              "binding_energy_eV": 466.29508949101444,
+              "excitation_counts": [
+                33.91310004449444,
+                0.4395922666170801,
+                0.0
+              ],
+              "excitation_energy_eV": 354.5826037460867,
+              "coulomb_heat_eV": 17.994622029066615,
+              "cutoff_electron_number": 33.90880844846571,
+              "cutoff_energy_eV": 161.1276847338305,
+              "minimum_state": 0.0,
+              "number_ledger": 1.0000000000000497,
+              "energy_ledger_eV": 999.9999999999984
+            }
+          ]
+        }
+      ]
+    },
+    "sparse1024": {
+      "steps": 1024,
+      "order": 8,
+      "method": "sparse",
+      "constant_bath": false,
+      "observations": [
+        {
+          "tau": 0.0,
+          "rows": [
+            {
+              "active_electron_number": 1.0,
+              "active_energy_eV": 20.0,
+              "ionization_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 0.0,
+              "excitation_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "excitation_energy_eV": 0.0,
+              "coulomb_heat_eV": 0.0,
+              "cutoff_electron_number": 0.0,
+              "cutoff_energy_eV": 0.0,
+              "minimum_state": 0.0,
+              "number_ledger": 1.0,
+              "energy_ledger_eV": 20.0
+            },
+            {
+              "active_electron_number": 1.0,
+              "active_energy_eV": 100.0,
+              "ionization_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 0.0,
+              "excitation_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "excitation_energy_eV": 0.0,
+              "coulomb_heat_eV": 0.0,
+              "cutoff_electron_number": 0.0,
+              "cutoff_energy_eV": 0.0,
+              "minimum_state": 0.0,
+              "number_ledger": 1.0,
+              "energy_ledger_eV": 100.0
+            },
+            {
+              "active_electron_number": 1.0,
+              "active_energy_eV": 1000.0,
+              "ionization_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 0.0,
+              "excitation_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "excitation_energy_eV": 0.0,
+              "coulomb_heat_eV": 0.0,
+              "cutoff_electron_number": 0.0,
+              "cutoff_energy_eV": 0.0,
+              "minimum_state": 0.0,
+              "number_ledger": 1.0,
+              "energy_ledger_eV": 1000.0
+            }
+          ]
+        },
+        {
+          "tau": 2500000000000.0,
+          "rows": [
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                0.36420755340477307,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 4.952598893252534,
+              "excitation_counts": [
+                0.6353839724440138,
+                0.0002100486118477527,
+                0.0
+              ],
+              "excitation_energy_eV": 6.484263363213655,
+              "coulomb_heat_eV": 0.6117639860656725,
+              "cutoff_electron_number": 1.364207553404757,
+              "cutoff_energy_eV": 7.951373757468091,
+              "minimum_state": 0.0,
+              "number_ledger": 0.999999999999984,
+              "energy_ledger_eV": 19.999999999999954
+            },
+            {
+              "active_electron_number": 2.4158590035365505e-81,
+              "active_energy_eV": 3.237373913755682e-80,
+              "ionization_counts": [
+                2.953605166500002,
+                0.08796004178616317,
+                0.0
+              ],
+              "binding_energy_eV": 42.32667895326715,
+              "excitation_counts": [
+                3.449216886135078,
+                0.026633031282925355,
+                0.0
+              ],
+              "excitation_energy_eV": 35.70543766208686,
+              "coulomb_heat_eV": 2.5761599477352446,
+              "cutoff_electron_number": 4.041565208286174,
+              "cutoff_energy_eV": 19.39172343691017,
+              "minimum_state": 0.0,
+              "number_ledger": 1.0000000000000098,
+              "energy_ledger_eV": 99.99999999999942
+            },
+            {
+              "active_electron_number": 2.223323693822467e-28,
+              "active_energy_eV": 3.103407609931812e-27,
+              "ionization_counts": [
+                31.196630132089847,
+                1.7100212723172505,
+                0.0
+              ],
+              "binding_energy_eV": 466.26569302786163,
+              "excitation_counts": [
+                33.932373837777064,
+                0.4395666821666705,
+                0.0
+              ],
+              "excitation_energy_eV": 354.77866460377714,
+              "coulomb_heat_eV": 18.032106747089966,
+              "cutoff_electron_number": 33.90665140440703,
+              "cutoff_energy_eV": 160.92353562126803,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999325,
+              "energy_ledger_eV": 999.9999999999967
+            }
+          ]
+        },
+        {
+          "tau": 5000000000000.0,
+          "rows": [
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                0.3642075534047715,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 4.952598893252514,
+              "excitation_counts": [
+                0.6353839724440129,
+                0.00021004861184775273,
+                0.0
+              ],
+              "excitation_energy_eV": 6.484263363213646,
+              "coulomb_heat_eV": 0.6117639860656736,
+              "cutoff_electron_number": 1.3642075534047502,
+              "cutoff_energy_eV": 7.951373757468081,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999787,
+              "energy_ledger_eV": 19.999999999999915
+            },
+            {
+              "active_electron_number": 2.9180115604902078e-207,
+              "active_energy_eV": 4.009354609328239e-206,
+              "ionization_counts": [
+                2.9536051664999965,
+                0.08796004178616257,
+                0.0
+              ],
+              "binding_energy_eV": 42.32667895326706,
+              "excitation_counts": [
+                3.4492168861350696,
+                0.026633031282925382,
+                0.0
+              ],
+              "excitation_energy_eV": 35.70543766208677,
+              "coulomb_heat_eV": 2.576159947735238,
+              "cutoff_electron_number": 4.041565208286163,
+              "cutoff_energy_eV": 19.39172343691016,
+              "minimum_state": 0.0,
+              "number_ledger": 1.000000000000004,
+              "energy_ledger_eV": 99.99999999999923
+            },
+            {
+              "active_electron_number": 6.118861198663036e-73,
+              "active_energy_eV": 8.560579206570085e-72,
+              "ionization_counts": [
+                31.196630132089883,
+                1.7100212723172452,
+                0.0
+              ],
+              "binding_energy_eV": 466.2656930278619,
+              "excitation_counts": [
+                33.93237383777706,
+                0.4395666821666698,
+                0.0
+              ],
+              "excitation_energy_eV": 354.778664603777,
+              "coulomb_heat_eV": 18.032106747090005,
+              "cutoff_electron_number": 33.90665140440687,
+              "cutoff_energy_eV": 160.92353562126763,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999997478,
+              "energy_ledger_eV": 999.9999999999966
+            }
+          ]
+        },
+        {
+          "tau": 7500000000000.0,
+          "rows": [
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                0.36420755340477035,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 4.952598893252498,
+              "excitation_counts": [
+                0.6353839724440092,
+                0.00021004861184775142,
+                0.0
+              ],
+              "excitation_energy_eV": 6.484263363213609,
+              "coulomb_heat_eV": 0.6117639860656694,
+              "cutoff_electron_number": 1.36420755340474,
+              "cutoff_energy_eV": 7.951373757468006,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999696,
+              "energy_ledger_eV": 19.999999999999783
+            },
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                2.9536051664999805,
+                0.08796004178616199,
+                0.0
+              ],
+              "binding_energy_eV": 42.32667895326683,
+              "excitation_counts": [
+                3.449216886135047,
+                0.02663303128292518,
+                0.0
+              ],
+              "excitation_energy_eV": 35.70543766208653,
+              "coulomb_heat_eV": 2.5761599477352166,
+              "cutoff_electron_number": 4.041565208286132,
+              "cutoff_energy_eV": 19.39172343691,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999893,
+              "energy_ledger_eV": 99.99999999999858
+            },
+            {
+              "active_electron_number": 3.313711167954604e-117,
+              "active_energy_eV": 4.234028356423863e-116,
+              "ionization_counts": [
+                31.19663013208969,
+                1.710021272317231,
+                0.0
+              ],
+              "binding_energy_eV": 466.26569302785896,
+              "excitation_counts": [
+                33.93237383777669,
+                0.43956668216666767,
+                0.0
+              ],
+              "excitation_energy_eV": 354.7786646037732,
+              "coulomb_heat_eV": 18.032106747089966,
+              "cutoff_electron_number": 33.906651404406695,
+              "cutoff_energy_eV": 160.92353562126584,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999997726,
+              "energy_ledger_eV": 999.999999999988
+            }
+          ]
+        },
+        {
+          "tau": 10000000000000.0,
+          "rows": [
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                0.3642075534047702,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 4.952598893252495,
+              "excitation_counts": [
+                0.6353839724440101,
+                0.00021004861184775324,
+                0.0
+              ],
+              "excitation_energy_eV": 6.484263363213618,
+              "coulomb_heat_eV": 0.6117639860656714,
+              "cutoff_electron_number": 1.3642075534047402,
+              "cutoff_energy_eV": 7.9513737574680565,
+              "minimum_state": 0.0,
+              "number_ledger": 0.99999999999997,
+              "energy_ledger_eV": 19.99999999999984
+            },
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                2.953605166499975,
+                0.08796004178616172,
+                0.0
+              ],
+              "binding_energy_eV": 42.32667895326675,
+              "excitation_counts": [
+                3.449216886135069,
+                0.026633031282925244,
+                0.0
+              ],
+              "excitation_energy_eV": 35.705437662086766,
+              "coulomb_heat_eV": 2.57615994773521,
+              "cutoff_electron_number": 4.041565208286148,
+              "cutoff_energy_eV": 19.391723436910148,
+              "minimum_state": 0.0,
+              "number_ledger": 1.0000000000000107,
+              "energy_ledger_eV": 99.99999999999888
+            },
+            {
+              "active_electron_number": 4.83678280100471e-162,
+              "active_energy_eV": 6.3054721375247345e-161,
+              "ionization_counts": [
+                31.196630132089876,
+                1.7100212723172374,
+                0.0
+              ],
+              "binding_energy_eV": 466.2656930278617,
+              "excitation_counts": [
+                33.932373837776915,
+                0.43956668216666867,
+                0.0
+              ],
+              "excitation_energy_eV": 354.77866460377555,
+              "coulomb_heat_eV": 18.032106747090044,
+              "cutoff_electron_number": 33.90665140440688,
+              "cutoff_energy_eV": 160.92353562126695,
+              "minimum_state": 0.0,
+              "number_ledger": 0.999999999999762,
+              "energy_ledger_eV": 999.9999999999942
+            }
+          ]
+        }
+      ],
+      "maximum_collision_cfl": 0.0,
+      "wall_s_at_completion": 52.000101749028545
+    },
+    "sparse2048": {
+      "steps": 2048,
+      "order": 8,
+      "method": "sparse",
+      "constant_bath": false,
+      "observations": [
+        {
+          "tau": 0.0,
+          "rows": [
+            {
+              "active_electron_number": 1.0,
+              "active_energy_eV": 20.0,
+              "ionization_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 0.0,
+              "excitation_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "excitation_energy_eV": 0.0,
+              "coulomb_heat_eV": 0.0,
+              "cutoff_electron_number": 0.0,
+              "cutoff_energy_eV": 0.0,
+              "minimum_state": 0.0,
+              "number_ledger": 1.0,
+              "energy_ledger_eV": 20.0
+            },
+            {
+              "active_electron_number": 1.0,
+              "active_energy_eV": 100.0,
+              "ionization_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 0.0,
+              "excitation_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "excitation_energy_eV": 0.0,
+              "coulomb_heat_eV": 0.0,
+              "cutoff_electron_number": 0.0,
+              "cutoff_energy_eV": 0.0,
+              "minimum_state": 0.0,
+              "number_ledger": 1.0,
+              "energy_ledger_eV": 100.0
+            },
+            {
+              "active_electron_number": 1.0,
+              "active_energy_eV": 1000.0,
+              "ionization_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 0.0,
+              "excitation_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "excitation_energy_eV": 0.0,
+              "coulomb_heat_eV": 0.0,
+              "cutoff_electron_number": 0.0,
+              "cutoff_energy_eV": 0.0,
+              "minimum_state": 0.0,
+              "number_ledger": 1.0,
+              "energy_ledger_eV": 1000.0
+            }
+          ]
+        },
+        {
+          "tau": 2500000000000.0,
+          "rows": [
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                0.3643016625086625,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 4.953878615870615,
+              "excitation_counts": [
+                0.635289177718246,
+                0.00021081777087666976,
+                0.0
+              ],
+              "excitation_energy_eV": 6.483311823223295,
+              "coulomb_heat_eV": 0.6066043302582887,
+              "cutoff_electron_number": 1.3643016625086593,
+              "cutoff_energy_eV": 7.956205230647656,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999967,
+              "energy_ledger_eV": 19.999999999999858
+            },
+            {
+              "active_electron_number": 2.4171820144670624e-81,
+              "active_energy_eV": 3.2391468147036746e-80,
+              "ionization_counts": [
+                2.9534182216840765,
+                0.08795910539908287,
+                0.0
+              ],
+              "binding_energy_eV": 42.32411380066558,
+              "excitation_counts": [
+                3.4474151191472426,
+                0.02663034482923213,
+                0.0
+              ],
+              "excitation_energy_eV": 35.68700870895184,
+              "coulomb_heat_eV": 2.58096211100241,
+              "cutoff_electron_number": 4.04137732708315,
+              "cutoff_energy_eV": 19.407915379379507,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999907,
+              "energy_ledger_eV": 99.99999999999935
+            },
+            {
+              "active_electron_number": 2.2247671745597663e-28,
+              "active_energy_eV": 3.1053734994389452e-27,
+              "ionization_counts": [
+                31.19632288796725,
+                1.7100198687540336,
+                0.0
+              ],
+              "binding_energy_eV": 466.2614805241025,
+              "excitation_counts": [
+                33.92299763930125,
+                0.43956457897482576,
+                0.0
+              ],
+              "excitation_energy_eV": 354.68299773989077,
+              "coulomb_heat_eV": 18.044442635928316,
+              "cutoff_electron_number": 33.906342756721415,
+              "cutoff_energy_eV": 161.0110791000699,
+              "minimum_state": 0.0,
+              "number_ledger": 1.000000000000135,
+              "energy_ledger_eV": 999.9999999999916
+            }
+          ]
+        },
+        {
+          "tau": 5000000000000.0,
+          "rows": [
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                0.3643016625086589,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 4.9538786158705665,
+              "excitation_counts": [
+                0.6352891777182416,
+                0.00021081777087666607,
+                0.0
+              ],
+              "excitation_energy_eV": 6.48331182322325,
+              "coulomb_heat_eV": 0.6066043302582841,
+              "cutoff_electron_number": 1.3643016625086508,
+              "cutoff_energy_eV": 7.956205230647577,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999919,
+              "energy_ledger_eV": 19.999999999999677
+            },
+            {
+              "active_electron_number": 2.919137447862091e-207,
+              "active_energy_eV": 4.0109015811611114e-206,
+              "ionization_counts": [
+                2.9534182216840565,
+                0.08795910539908214,
+                0.0
+              ],
+              "binding_energy_eV": 42.32411380066528,
+              "excitation_counts": [
+                3.4474151191472058,
+                0.0266303448292318,
+                0.0
+              ],
+              "excitation_energy_eV": 35.68700870895146,
+              "coulomb_heat_eV": 2.580962111002393,
+              "cutoff_electron_number": 4.0413773270830795,
+              "cutoff_energy_eV": 19.407915379379354,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999409,
+              "energy_ledger_eV": 99.9999999999985
+            },
+            {
+              "active_electron_number": 6.12253525039425e-73,
+              "active_energy_eV": 8.56566138056254e-72,
+              "ionization_counts": [
+                31.196322887967053,
+                1.710019868753996,
+                0.0
+              ],
+              "binding_energy_eV": 466.26148052409894,
+              "excitation_counts": [
+                33.922997639300945,
+                0.4395645789748189,
+                0.0
+              ],
+              "excitation_energy_eV": 354.6829977398875,
+              "coulomb_heat_eV": 18.044442635928128,
+              "cutoff_electron_number": 33.90634275672102,
+              "cutoff_energy_eV": 161.01107910006834,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999716,
+              "energy_ledger_eV": 999.999999999983
+            }
+          ]
+        },
+        {
+          "tau": 7500000000000.0,
+          "rows": [
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                0.3643016625086568,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 4.953878615870537,
+              "excitation_counts": [
+                0.6352891777182401,
+                0.00021081777087666485,
+                0.0
+              ],
+              "excitation_energy_eV": 6.483311823223235,
+              "coulomb_heat_eV": 0.6066043302582796,
+              "cutoff_electron_number": 1.3643016625086544,
+              "cutoff_energy_eV": 7.956205230647518,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999976,
+              "energy_ledger_eV": 19.99999999999957
+            },
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                2.953418221684029,
+                0.08795910539908201,
+                0.0
+              ],
+              "binding_energy_eV": 42.32411380066491,
+              "excitation_counts": [
+                3.4474151191471676,
+                0.026630344829231743,
+                0.0
+              ],
+              "excitation_energy_eV": 35.687008708951076,
+              "coulomb_heat_eV": 2.5809621110023846,
+              "cutoff_electron_number": 4.041377327083056,
+              "cutoff_energy_eV": 19.40791537937924,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999454,
+              "energy_ledger_eV": 99.99999999999761
+            },
+            {
+              "active_electron_number": 3.3139221588896034e-117,
+              "active_energy_eV": 4.234300571144483e-116,
+              "ionization_counts": [
+                31.19632288796678,
+                1.7100198687539812,
+                0.0
+              ],
+              "binding_energy_eV": 466.26148052409485,
+              "excitation_counts": [
+                33.92299763930082,
+                0.43956457897481616,
+                0.0
+              ],
+              "excitation_energy_eV": 354.68299773988616,
+              "coulomb_heat_eV": 18.0444426359281,
+              "cutoff_electron_number": 33.90634275672062,
+              "cutoff_energy_eV": 161.0110791000668,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999998614,
+              "energy_ledger_eV": 999.999999999976
+            }
+          ]
+        },
+        {
+          "tau": 10000000000000.0,
+          "rows": [
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                0.36430166250865936,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 4.953878615870572,
+              "excitation_counts": [
+                0.6352891777182409,
+                0.000210817770876665,
+                0.0
+              ],
+              "excitation_energy_eV": 6.483311823223243,
+              "coulomb_heat_eV": 0.6066043302582851,
+              "cutoff_electron_number": 1.3643016625086544,
+              "cutoff_energy_eV": 7.956205230647529,
+              "minimum_state": 0.0,
+              "number_ledger": 0.999999999999995,
+              "energy_ledger_eV": 19.99999999999963
+            },
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                2.953418221684038,
+                0.08795910539908218,
+                0.0
+              ],
+              "binding_energy_eV": 42.32411380066503,
+              "excitation_counts": [
+                3.4474151191471476,
+                0.02663034482923163,
+                0.0
+              ],
+              "excitation_energy_eV": 35.68700870895086,
+              "coulomb_heat_eV": 2.5809621110023713,
+              "cutoff_electron_number": 4.041377327083051,
+              "cutoff_energy_eV": 19.4079153793792,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999307,
+              "energy_ledger_eV": 99.99999999999747
+            },
+            {
+              "active_electron_number": 4.836519569429706e-162,
+              "active_energy_eV": 6.305135310116856e-161,
+              "ionization_counts": [
+                31.196322887966566,
+                1.7100198687539747,
+                0.0
+              ],
+              "binding_energy_eV": 466.2614805240918,
+              "excitation_counts": [
+                33.92299763930097,
+                0.43956457897481643,
+                0.0
+              ],
+              "excitation_energy_eV": 354.6829977398877,
+              "coulomb_heat_eV": 18.044442635928114,
+              "cutoff_electron_number": 33.90634275672062,
+              "cutoff_energy_eV": 161.01107910006655,
+              "minimum_state": 0.0,
+              "number_ledger": 1.0000000000000746,
+              "energy_ledger_eV": 999.9999999999742
+            }
+          ]
+        }
+      ],
+      "maximum_collision_cfl": 0.0,
+      "wall_s_at_completion": 102.89184434100753
+    },
+    "daughter12_2048": {
+      "steps": 2048,
+      "order": 12,
+      "method": "sparse",
+      "constant_bath": false,
+      "observations": [
+        {
+          "tau": 0.0,
+          "rows": [
+            {
+              "active_electron_number": 1.0,
+              "active_energy_eV": 20.0,
+              "ionization_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 0.0,
+              "excitation_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "excitation_energy_eV": 0.0,
+              "coulomb_heat_eV": 0.0,
+              "cutoff_electron_number": 0.0,
+              "cutoff_energy_eV": 0.0,
+              "minimum_state": 0.0,
+              "number_ledger": 1.0,
+              "energy_ledger_eV": 20.0
+            },
+            {
+              "active_electron_number": 1.0,
+              "active_energy_eV": 100.0,
+              "ionization_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 0.0,
+              "excitation_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "excitation_energy_eV": 0.0,
+              "coulomb_heat_eV": 0.0,
+              "cutoff_electron_number": 0.0,
+              "cutoff_energy_eV": 0.0,
+              "minimum_state": 0.0,
+              "number_ledger": 1.0,
+              "energy_ledger_eV": 100.0
+            },
+            {
+              "active_electron_number": 1.0,
+              "active_energy_eV": 1000.0,
+              "ionization_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 0.0,
+              "excitation_counts": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "excitation_energy_eV": 0.0,
+              "coulomb_heat_eV": 0.0,
+              "cutoff_electron_number": 0.0,
+              "cutoff_energy_eV": 0.0,
+              "minimum_state": 0.0,
+              "number_ledger": 1.0,
+              "energy_ledger_eV": 1000.0
+            }
+          ]
+        },
+        {
+          "tau": 2500000000000.0,
+          "rows": [
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                0.3643016625086646,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 4.953878615870643,
+              "excitation_counts": [
+                0.6352891777182481,
+                0.00021081777087667,
+                0.0
+              ],
+              "excitation_energy_eV": 6.483311823223317,
+              "coulomb_heat_eV": 0.6066043302582903,
+              "cutoff_electron_number": 1.3643016625086584,
+              "cutoff_energy_eV": 7.956205230647696,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999938,
+              "energy_ledger_eV": 19.999999999999943
+            },
+            {
+              "active_electron_number": 2.417182017785879e-81,
+              "active_energy_eV": 3.2391468191510574e-80,
+              "ionization_counts": [
+                2.9534182219168734,
+                0.0879591054117677,
+                0.0
+              ],
+              "binding_energy_eV": 42.3241138041431,
+              "excitation_counts": [
+                3.4474151192327818,
+                0.026630344832333775,
+                0.0
+              ],
+              "excitation_energy_eV": 35.6870087098857,
+              "coulomb_heat_eV": 2.5809621107410377,
+              "cutoff_electron_number": 4.041377327328676,
+              "cutoff_energy_eV": 19.407915375229642,
+              "minimum_state": 0.0,
+              "number_ledger": 1.0000000000000342,
+              "energy_ledger_eV": 99.99999999999949
+            },
+            {
+              "active_electron_number": 2.224770712993449e-28,
+              "active_energy_eV": 3.1053784646551063e-27,
+              "ionization_counts": [
+                31.19632308577557,
+                1.7100198916578913,
+                0.0
+              ],
+              "binding_energy_eV": 466.26148377710297,
+              "excitation_counts": [
+                33.92299771660069,
+                0.4395645842825987,
+                0.0
+              ],
+              "excitation_energy_eV": 354.68299863344384,
+              "coulomb_heat_eV": 18.04444234285125,
+              "cutoff_electron_number": 33.906342977433596,
+              "cutoff_energy_eV": 161.011075246594,
+              "minimum_state": 0.0,
+              "number_ledger": 1.000000000000135,
+              "energy_ledger_eV": 999.999999999992
+            }
+          ]
+        },
+        {
+          "tau": 5000000000000.0,
+          "rows": [
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                0.3643016625086628,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 4.953878615870619,
+              "excitation_counts": [
+                0.6352891777182401,
+                0.0002108177708766664,
+                0.0
+              ],
+              "excitation_energy_eV": 6.483311823223235,
+              "coulomb_heat_eV": 0.6066043302582845,
+              "cutoff_electron_number": 1.3643016625086504,
+              "cutoff_energy_eV": 7.956205230647614,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999876,
+              "energy_ledger_eV": 19.99999999999975
+            },
+            {
+              "active_electron_number": 2.9191374708194415e-207,
+              "active_energy_eV": 4.010901612704564e-206,
+              "ionization_counts": [
+                2.9534182219168503,
+                0.08795910541176678,
+                0.0
+              ],
+              "binding_energy_eV": 42.32411380414277,
+              "excitation_counts": [
+                3.447415119232701,
+                0.026630344832333407,
+                0.0
+              ],
+              "excitation_energy_eV": 35.68700870988487,
+              "coulomb_heat_eV": 2.580962110741021,
+              "cutoff_electron_number": 4.041377327328609,
+              "cutoff_energy_eV": 19.407915375229454,
+              "minimum_state": 0.0,
+              "number_ledger": 0.999999999999992,
+              "energy_ledger_eV": 99.99999999999812
+            },
+            {
+              "active_electron_number": 6.122559166565194e-73,
+              "active_energy_eV": 8.565694878662647e-72,
+              "ionization_counts": [
+                31.19632308577525,
+                1.710019891657858,
+                0.0
+              ],
+              "binding_energy_eV": 466.2614837770978,
+              "excitation_counts": [
+                33.92299771660024,
+                0.43956458428258927,
+                0.0
+              ],
+              "excitation_energy_eV": 354.682998633439,
+              "coulomb_heat_eV": 18.044442342851017,
+              "cutoff_electron_number": 33.90634297743316,
+              "cutoff_energy_eV": 161.01107524659184,
+              "minimum_state": 0.0,
+              "number_ledger": 1.0000000000000497,
+              "energy_ledger_eV": 999.9999999999798
+            }
+          ]
+        },
+        {
+          "tau": 7500000000000.0,
+          "rows": [
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                0.36430166250865975,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 4.953878615870577,
+              "excitation_counts": [
+                0.635289177718236,
+                0.00021081777087666437,
+                0.0
+              ],
+              "excitation_energy_eV": 6.483311823223193,
+              "coulomb_heat_eV": 0.6066043302582845,
+              "cutoff_electron_number": 1.3643016625086446,
+              "cutoff_energy_eV": 7.956205230647562,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999849,
+              "energy_ledger_eV": 19.999999999999616
+            },
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                2.953418221916822,
+                0.08795910541176674,
+                0.0
+              ],
+              "binding_energy_eV": 42.32411380414238,
+              "excitation_counts": [
+                3.4474151192326845,
+                0.026630344832333175,
+                0.0
+              ],
+              "excitation_energy_eV": 35.68700870988471,
+              "coulomb_heat_eV": 2.580962110741024,
+              "cutoff_electron_number": 4.041377327328597,
+              "cutoff_energy_eV": 19.40791537522946,
+              "minimum_state": 0.0,
+              "number_ledger": 1.0000000000000084,
+              "energy_ledger_eV": 99.99999999999756
+            },
+            {
+              "active_electron_number": 3.3139426369348715e-117,
+              "active_energy_eV": 4.2343267421698436e-116,
+              "ionization_counts": [
+                31.196323085775084,
+                1.7100198916578382,
+                0.0
+              ],
+              "binding_energy_eV": 466.261483777095,
+              "excitation_counts": [
+                33.92299771659989,
+                0.4395645842825862,
+                0.0
+              ],
+              "excitation_energy_eV": 354.6829986334354,
+              "coulomb_heat_eV": 18.04444234285098,
+              "cutoff_electron_number": 33.906342977433006,
+              "cutoff_energy_eV": 161.01107524659048,
+              "minimum_state": 0.0,
+              "number_ledger": 1.0000000000000817,
+              "energy_ledger_eV": 999.9999999999718
+            }
+          ]
+        },
+        {
+          "tau": 10000000000000.0,
+          "rows": [
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                0.36430166250866247,
+                0.0,
+                0.0
+              ],
+              "binding_energy_eV": 4.9538786158706145,
+              "excitation_counts": [
+                0.6352891777182366,
+                0.00021081777087666442,
+                0.0
+              ],
+              "excitation_energy_eV": 6.483311823223199,
+              "coulomb_heat_eV": 0.6066043302582895,
+              "cutoff_electron_number": 1.364301662508656,
+              "cutoff_energy_eV": 7.956205230647592,
+              "minimum_state": 0.0,
+              "number_ledger": 0.9999999999999934,
+              "energy_ledger_eV": 19.999999999999694
+            },
+            {
+              "active_electron_number": 0.0,
+              "active_energy_eV": 0.0,
+              "ionization_counts": [
+                2.9534182219168392,
+                0.08795910541176741,
+                0.0
+              ],
+              "binding_energy_eV": 42.32411380414263,
+              "excitation_counts": [
+                3.4474151192326623,
+                0.026630344832333005,
+                0.0
+              ],
+              "excitation_energy_eV": 35.68700870988447,
+              "coulomb_heat_eV": 2.580962110741017,
+              "cutoff_electron_number": 4.041377327328619,
+              "cutoff_energy_eV": 19.407915375229425,
+              "minimum_state": 0.0,
+              "number_ledger": 1.0000000000000124,
+              "energy_ledger_eV": 99.99999999999756
+            },
+            {
+              "active_electron_number": 4.836560662265974e-162,
+              "active_energy_eV": 6.305188889339964e-161,
+              "ionization_counts": [
+                31.19632308577502,
+                1.71001989165784,
+                0.0
+              ],
+              "binding_energy_eV": 466.2614837770942,
+              "excitation_counts": [
+                33.92299771659997,
+                0.43956458428258516,
+                0.0
+              ],
+              "excitation_energy_eV": 354.6829986334362,
+              "coulomb_heat_eV": 18.044442342851074,
+              "cutoff_electron_number": 33.90634297743298,
+              "cutoff_energy_eV": 161.01107524659,
+              "minimum_state": 0.0,
+              "number_ledger": 1.0000000000001208,
+              "energy_ledger_eV": 999.9999999999716
+            }
+          ]
+        }
+      ],
+      "maximum_collision_cfl": 0.0,
+      "wall_s_at_completion": 157.42007147200638
+    }
+  },
+  "total_response_steps": 6144,
+  "block_actions": 6144,
+  "columns_per_action": 3,
+  "independent_review": "PENDING",
+  "global_scientific_admission": "HOLD",
+  "preserved_original_inputs": {
+    "/home/cosmosapjw/bass_cr_worktrees/cr-physical-provider-20261010/research/cr_nonautonomous_prescribed_density01_20261011/RESULTS.json": "ee26c7f4386779c4f2bb2508b2ccec6df1465da7a9b6848ff807ba2e61f6fd8e",
+    "/home/cosmosapjw/bass_cr_worktrees/cr-physical-provider-20261010/research/cr_nonautonomous_prescribed_density01_20261011/validate.py": "985c155cfe9109e757c7a9785caf619e097b3d44e5c59907fe12f1d53556d110",
+    "/home/cosmosapjw/bass_cr_worktrees/cr-physical-provider-20261010/research/cr_nonautonomous_prescribed_density01_20261011/CONTRACT.json": "4db788aeb4af86d36c9425e481fabac2f7c20f7a820e2eec246b0a64712215fb"
+  },
+  "reused_controls": "Original t0/OFF, zero initial energy, cold guard, analytic absolute-clock results retained; not rerun",
+  "environment": {
+    "python": "3.12.3",
+    "numpy": "2.4.2",
+    "scipy": "1.17.0",
+    "threads": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1"
+    }
+  },
+  "driver_sha256": "5cf48cdc5bc432cfd0cfeac4e36f8db2bfc60dcd6bf23f9acedb888fdfe6ed7e",
+  "contract_sha256": "347b150626b155c4d5d7be843d2ea7ec072001d2e039b686451fa410c1b30407",
+  "wall_s": 157.5595795280533,
+  "cpu_s": 155.365482809,
+  "source_manifest_verified": {
+    "upstream": "https://github.com/hongwanliu/DarkHistory",
+    "commit": "b556d0f0418a0665719fd6da26dcc303466b9659",
+    "tree": "c5354117b8a39bfc670e57fed9c0ffd6ebbaeae4",
+    "files": {
+      "vendor/darkhistory/physics.py": "650921615259888cc2c74edc1c6a15b20e6c693054f192276014b72cba5b4836",
+      "vendor/darkhistory/config.py": "36dd925eac60c53d90ea03b53b5ae80d246a122b47d7c36aa3ff307245832ac3",
+      "vendor/darkhistory/electrons/elec_cooling.py": "73116b7eec2ccd965b56d554b0c47ff66fc61e4b51f0153fa4e32b865a2fa0e4",
+      "vendor/darkhistory/spec/spectools.py": "f3e7a1bdb620831d67ac7f8217eeace304691e5562a717dae9739d0b2eba9678",
+      "vendor/darkhistory/spec/spectra.py": "bf746f96ce9ed44683e2a6273875bcaa4cbb0f07212d5385154ef40afb9c606d",
+      "vendor/darkhistory/spec/spectrum.py": "2441863460a5d0ea89bda2f04cac7815e948a3f7fed1898f262117dbf6f9eddc",
+      "vendor/darkhistory/LICENSE": "47d651f9d28c6bbf7d4697b29394ff688079d36182ef6141fccc4acc3206a88a"
+    },
+    "source_use": "Only the physics.py old-method raw rate formulas and conditional outgoing-electron shape are translated. The complete-cooling matrix and its diagonal removal/row normalization are not executed or adopted.",
+    "density_override": "Use the frozen proper gas densities in CONTRACT.json instead of upstream default cosmology, nH or YHe. xHeII is per helium locally, whereas upstream elec_cooling uses nHeII/nH."
+  },
+  "bath_input": {
+    "epochs": [
+      [
+        0.047619047619047616,
+        0.0,
+        1735.693249186644,
+        0.35517519413910814,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        138.03894675994147,
+        0.0,
+        0.0,
+        3.6477944432860557e-19,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.04775329053857571,
+        0.0,
+        1721.0964535141989,
+        0.35207611332623956,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        136.87806088473062,
+        0.0,
+        0.0,
+        3.5972665944964717e-19,
+        1.2208620057887993e-08,
+        2.6600457208036036e-26,
+        -4.999117058804372e-27,
+        2.2116036967269183e-25
+      ]
+    ],
+    "tau_s": [
+      0.0,
+      25000000000000.0
+    ],
+    "density_columns": [
+      2,
+      3,
+      11
+    ],
+    "stored_cold_temperature": "NOT_USED",
+    "temperature_k": 100.0,
+    "normalization": "per initial electron; no a^3 or dilution"
+  },
+  "column_actions": 18432
+}
