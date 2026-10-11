@@ -1,0 +1,272 @@
+{
+  "schema": "cr-phys02d-independent-actual-return-decision.v1",
+  "decision": "HOLD",
+  "decision_utc": "2026-10-11T00:32:22.098632+00:00",
+  "reviewer_role": "INDEPENDENT_ASTRA_REQUESTED",
+  "reviewer_identity": {
+    "task": "/root/phys02d_failure_review",
+    "requested_model": "gpt-6-astra",
+    "backend_identity": "NOT_INDEPENDENTLY_VERIFIED",
+    "independent_of_execution": true,
+    "independent_of_candidate_implementation": true,
+    "independent_of_acceptance_design": true
+  },
+  "science_commit": "6ed83ff61aff24fe51ff0370736f70e0e52893f8",
+  "publication_commit": "a2486869dba5c2d43257c13e33a31b66752d5e10",
+  "run_dir": "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_RESTORE_20261011T002628Z_0b7ab12389ba43329cdbcf2834a1c237/research/cr_phys02d_20261011/evidence/runs/PULSE_20261011T002745Z_0a8fe53f104a412cab0cbb858934675e",
+  "contract_verdict": "FAILED_ACTUAL_EXECUTION; failure preservation and no-retry handling verified",
+  "quality_verdict": "HOLD_EXACT_GRID_REPRODUCIBILITY_BLOCKER; no scientific numerical result available",
+  "actual_execution": {
+    "status": "FIRST_FAILURE_PRESERVED",
+    "actual_exit": 1,
+    "command": [
+      "ncp/launch_pulse.py",
+      "--execute",
+      "--run-dir",
+      "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_RESTORE_20261011T002628Z_0b7ab12389ba43329cdbcf2834a1c237/research/cr_phys02d_20261011/evidence/runs/PULSE_20261011T002745Z_0a8fe53f104a412cab0cbb858934675e"
+    ],
+    "cwd": "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_RESTORE_20261011T002628Z_0b7ab12389ba43329cdbcf2834a1c237/research/cr_phys02d_20261011",
+    "start_utc": "2026-10-11T00:27:45Z",
+    "end_utc": "2026-10-11T00:29:29Z",
+    "elapsed_s": 103.79789273899951,
+    "observed_child_exit": 1,
+    "build_reservations": 1,
+    "pulse_reservations": 0,
+    "reservation_counts_are_completed_calls": false,
+    "deadline_s": 3600,
+    "receipt_recording_started_after_deadline": false,
+    "receipt_recording_overhead_classification": "TERMINAL_RECEIPT_IO_OUTSIDE_CHILD_BUDGET"
+  },
+  "call_accounting": {
+    "execute_invocations": 1,
+    "build_reservations": 1,
+    "pulse_reservations": 0,
+    "reservation_counts_are_completed_calls": false,
+    "fullBED_constructor_returned": "VERIFIED_BY_CONTROL_FLOW_AND_TRACEBACK_AT_POST_CONSTRUCTOR_GUARD",
+    "fullBED_G_persisted": false,
+    "pulse_calls": 0,
+    "legacy_constructor_started": false,
+    "additional_authorized_builds": 0,
+    "additional_authorized_transport_calls": 0
+  },
+  "failure": {
+    "classification": "SAVED_GRID_EXACT_IDENTITY_MISMATCH",
+    "location": "ncp/launch_pulse.py:74",
+    "message": "ValueError: STORED_SOURCE_GRID_FIELDS_MISMATCH",
+    "severity": "blocking",
+    "confidence": "high",
+    "mechanism": "Exact array_equal check fails between reconstructed energy nodes and identity-pinned saved energy_eV. All other conditions in the compound guard pass in both saved files.",
+    "underlying_runtime_cause": "UNRESOLVED; CPU SIMD dispatch/libm or platform details are hypotheses, not established facts.",
+    "not_established": [
+      "physical model failure",
+      "pulse accuracy or inaccuracy",
+      "same-operator equivalence of reconstructed G",
+      "scientific acceptability of one-ULP node changes"
+    ]
+  },
+  "independent_checks": {
+    "method": "Read immutable evidence; verify hashes; evaluate AST-isolated energy_grid function only with NumPy under pinned venv, without importing scientific module or constructing Cascade.",
+    "probe_command": "/root/bass_cr_phys02d_ncp_20261011/venv/bin/python - [inline AST-isolated energy_grid probe]",
+    "probe_exit": 0,
+    "runtime_versions_recorded": {
+      "python": "3.12.3",
+      "numpy": "2.4.2",
+      "scipy": "1.17.0",
+      "reported_blas_threads": 1
+    },
+    "direct_input_hashes_verified": 11,
+    "prepared_review_file_bindings_verified": 74,
+    "models_checked": [
+      "fullBED",
+      "legacy"
+    ],
+    "required_npz_fields": "PASS_BOTH",
+    "time_s": "exact [0,1e10], shape (2,), PASS_BOTH",
+    "source_vectors_shape": [
+      9611,
+      2
+    ],
+    "birth_tags": [
+      "direct_0p1_10",
+      "direct_10_900"
+    ],
+    "energy_nodes": 9600,
+    "unequal_nodes_per_model": 340,
+    "max_absolute_difference_eV": 1.1368683772161603e-13,
+    "max_ulp_difference": 1,
+    "saved_energy_sha256": "6a76d3539115003b046a5861baca89b0a4ff966564627e04d9f6e8bc86be8292",
+    "rebuilt_energy_sha256": "870cfd5f3f2656371d5fad59e4b24f4b7aa051546b9d78f4f3a9de3197fcc0a4",
+    "physical_G_builds_by_reviewer": 0,
+    "physical_transport_calls_by_reviewer": 0,
+    "prior_suite_reruns_by_reviewer": 0,
+    "return_archive": {
+      "archive_path": "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_RESTORE_20261011T002628Z_0b7ab12389ba43329cdbcf2834a1c237/research/cr_phys02d_20261011/evidence/returns/PULSE_20261011T002745Z_0a8fe53f104a412cab0cbb858934675e/CR_PHYS02D_PULSE_RETURN_20261011T002929Z_4d020fd63a0c41d1979b6c8ed29b1153.zip",
+      "archive_sha256": "e0110de4981b18d94625560061058c75f3c70b897be421a217e55e33a5b50fa3",
+      "payload_files_verified": 369,
+      "exact_zip_entries": 370,
+      "all_bytes_and_sha256_match": true
+    }
+  },
+  "wrapper_interpretation": {
+    "wrapper_shell_exit": 0,
+    "actual_launcher_exit": 1,
+    "collector_exit": 0,
+    "reason": "Provided wrapper records the failed execution and successfully collects evidence without propagating launcher exit. Wrapper exit zero is not numerical success."
+  },
+  "bounded_amendment_request": {
+    "status": "PROPOSED_ONLY_NOT_AUTHORIZED_OR_IMPLEMENTED",
+    "purpose": "Recover strict saved-grid reconstruction or prove an exact runtime grid path before any renewed physical reservation.",
+    "permitted_future_design_options": [
+      "A narrowly reviewed saved-grid constructor interface that validates pinned NPZ identity and exact FP64 nodes, installs the saved E before every grid-dependent constructor calculation and G construction, and preserves inherited source vectors, ledger map, atomics, quadrature and accumulation. Never replace E after G construction.",
+      "Alternatively establish a pinned runtime grid-evaluation path that reproduces the complete saved energy array exactly for both NPZ files; matching Python/NumPy/SciPy version strings alone is insufficient. Record the actual path and relevant binary/platform provenance."
+    ],
+    "required_prebuild_checks": [
+      "Compare complete E arrays and hashes before any physical constructor; retain exact array_equal gate.",
+      "Validate both NPZ identities, fields, times, source shapes and birth tags with no G or pulse.",
+      "Use only targeted tiny/mock tests to establish constructor ordering, rejection of mismatched grid/input identity, and unchanged source/ledger handling; budget must be explicitly set by amendment owner.",
+      "Independently review amended implementation, identity manifests and acceptance coverage, then issue a fresh bounded execution authorization if warranted."
+    ],
+    "prohibited": [
+      "No allclose or tolerance relaxation for E",
+      "No editing saved E, sources, NPZ files or scientific inputs",
+      "No automatic physical retry or reuse of unused old reservation capacity",
+      "No patching frozen study files under this decision",
+      "No old scientific suites or ramp reruns",
+      "No claiming exact-grid equality alone proves all G entries or physics equivalence"
+    ],
+    "preserve": [
+      "All first-failure evidence, original frozen contracts and amendments",
+      "All numerical acceptance tolerances and scientific assumptions",
+      "All seven inherited gates"
+    ],
+    "additional_G_builds_authorized": 0,
+    "additional_transport_calls_authorized": 0
+  },
+  "decisions_by_scope": {
+    "prior_preparation_approval": "HISTORICAL_PREPARATION_ONLY; does not certify failed actual run",
+    "actual_ncp_physical_execution": "FAILED_BEFORE_PULSE",
+    "new_pulse_cdf_or_infinite_moment_results": "UNAVAILABLE",
+    "continuation": "HOLD_PENDING_SEPARATE_BOUNDED_AMENDMENT_AND_REVIEW"
+  },
+  "inherited_gates": {
+    "PHYS02_DELAY": "OPEN",
+    "production_history": "HOLD",
+    "atomic_G02": "UNRESOLVED",
+    "b_grid": "NO_GO",
+    "all_bound": "OPEN",
+    "R17B2B": "NO_CERTIFIED_SOURCE_SHARPENING",
+    "CCC_2026_exporter_identity": "SOURCE_IDENTITY_UNRESOLVED"
+  },
+  "claim_ceiling": [
+    "Failure evidence and exact-grid mismatch diagnosis only.",
+    "No pulse CDF, lag moment, resolvent, conservation or ramp cross-check result was produced or accepted.",
+    "No production, global PHYS02_DELAY closure, atomic/CCC identity, b-grid, all-bound, R17B2B, scaling or fourth-grid promotion."
+  ],
+  "reviewed_evidence": {
+    "/root/bass_cr_phys02d_ncp_20261011/GRID_DIAGNOSTIC.json": {
+      "bytes": 4445,
+      "sha256": "05ff866750d2433bc9e7feba0361a7a2664070968c87da12613beb0c2fc02d0c"
+    },
+    "/root/bass_cr_phys02d_ncp_20261011/GIT_IDENTITY.json": {
+      "bytes": 1114,
+      "sha256": "19b68d349eaeec77a4c95dd58cef6cdd26265ce9c205b785235e04350c5afe1a"
+    },
+    "/root/bass_cr_phys02d_ncp_20261011/PUBLICATION_BINDING.json": {
+      "bytes": 594,
+      "sha256": "e70a206fef41d7a3a1cde8c8ca72e760df6f8f137c0d8c69155e4a9e325d3f93"
+    },
+    "/root/bass_cr_phys02d_ncp_20261011/execute_wrapper.py": {
+      "bytes": 3018,
+      "sha256": "dcac92db0d1e87d86a4caca1fe5999a9613cb13a07287346d26f0a56552c9e51"
+    },
+    "/root/bass_cr_phys02d_ncp_20261011/WRAPPER.stderr.log": {
+      "bytes": 837,
+      "sha256": "39051b1f49253e9ddc4b2bf532ba8bac1c2bb951a9c2b036a0a4321425a79ac9"
+    },
+    "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_RESTORE_20261011T002628Z_0b7ab12389ba43329cdbcf2834a1c237/research/cr_phys02d_20261011/state/SCIENTIFIC_CONTRACT.json": {
+      "bytes": 7265,
+      "sha256": "bc05614e9812f616c4a4bb45805e4c0359a171813f7329794b0c10c3bf37dde2"
+    },
+    "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_RESTORE_20261011T002628Z_0b7ab12389ba43329cdbcf2834a1c237/research/cr_phys02d_20261011/ncp/NCP_EXECUTION_CONTRACT.json": {
+      "bytes": 6783,
+      "sha256": "9dd8b098d828fcad5ddd5138afd29e9dce4805e26fbac897bd4c9a07779e8ff9"
+    },
+    "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_RESTORE_20261011T002628Z_0b7ab12389ba43329cdbcf2834a1c237/research/cr_phys02d_20261011/review/INDEPENDENT_DECISION.json": {
+      "bytes": 18748,
+      "sha256": "de87adb85e2a3f31ba09f10d06e1d5af88198967ca653ba1d21455e44509192e"
+    },
+    "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_RESTORE_20261011T002628Z_0b7ab12389ba43329cdbcf2834a1c237/research/cr_phys02d_20261011/ncp/launch_pulse.py": {
+      "bytes": 13245,
+      "sha256": "65b9e02c826eccfd92b56f51e6c81be3b2cf51194b7bcfd19d7b1f173efffe85"
+    },
+    "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_RESTORE_20261011T002628Z_0b7ab12389ba43329cdbcf2834a1c237/research/cr_phys02d_20261011/src/pulse_response.py": {
+      "bytes": 5954,
+      "sha256": "6aef11bd0dbdf8f2236c92164be9e13ff15820cb4572c8168dea77fbfe51cef0"
+    },
+    "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_RESTORE_20261011T002628Z_0b7ab12389ba43329cdbcf2834a1c237/research/cr_phys02b_20261010/src/causal_cascade.py": {
+      "bytes": 19115,
+      "sha256": "d87a9cc122125b2d37b47f261f57eab698baa59e07a6b21723860f39313c7b72"
+    },
+    "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_RESTORE_20261011T002628Z_0b7ab12389ba43329cdbcf2834a1c237/research/cr_phys02d_20261011/evidence/runs/PULSE_20261011T002745Z_0a8fe53f104a412cab0cbb858934675e/ACTUAL_EXIT.json": {
+      "bytes": 907,
+      "sha256": "d79d2b4ef9f67aab788a94a72bd89325a2666b011eca00f486a1a48b4472d972"
+    },
+    "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_RESTORE_20261011T002628Z_0b7ab12389ba43329cdbcf2834a1c237/research/cr_phys02d_20261011/evidence/runs/PULSE_20261011T002745Z_0a8fe53f104a412cab0cbb858934675e/BUILD_1_RESERVATION.json": {
+      "bytes": 130,
+      "sha256": "6567dbe45e28a1e0108811177ab04a1c063638e8d94a9ffead1efa69aa3b6522"
+    },
+    "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_RESTORE_20261011T002628Z_0b7ab12389ba43329cdbcf2834a1c237/research/cr_phys02d_20261011/evidence/runs/PULSE_20261011T002745Z_0a8fe53f104a412cab0cbb858934675e/PLAN_AND_ADMISSION.json": {
+      "bytes": 13172,
+      "sha256": "9f945dc654369e87160aa1e8ac3088eb8ec6c370e1b09a3c002b7d4c04d2ed0e"
+    },
+    "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_RESTORE_20261011T002628Z_0b7ab12389ba43329cdbcf2834a1c237/research/cr_phys02d_20261011/evidence/runs/PULSE_20261011T002745Z_0a8fe53f104a412cab0cbb858934675e/RESERVATION.json": {
+      "bytes": 473,
+      "sha256": "3e4404535ace91ac247330e1e71ebd1b7f770decec68437a0b95df6fca162d9d"
+    },
+    "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_RESTORE_20261011T002628Z_0b7ab12389ba43329cdbcf2834a1c237/research/cr_phys02d_20261011/evidence/runs/PULSE_20261011T002745Z_0a8fe53f104a412cab0cbb858934675e/RESOURCE_BEFORE_BUILD_1.json": {
+      "bytes": 10606,
+      "sha256": "59c965afc7599f70b777eec38e7298fa6e63d5a5695afd16feee480d0b8f00c4"
+    },
+    "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_RESTORE_20261011T002628Z_0b7ab12389ba43329cdbcf2834a1c237/research/cr_phys02d_20261011/evidence/runs/PULSE_20261011T002745Z_0a8fe53f104a412cab0cbb858934675e/RUNTIME.json": {
+      "bytes": 458,
+      "sha256": "534ba935ea86c889dfe8ac1e57230b4f6da7def9645c7b792dc066176b61b913"
+    },
+    "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_RESTORE_20261011T002628Z_0b7ab12389ba43329cdbcf2834a1c237/research/cr_phys02d_20261011/evidence/runs/PULSE_20261011T002745Z_0a8fe53f104a412cab0cbb858934675e/stderr.log": {
+      "bytes": 1520,
+      "sha256": "e67ffb42a77575c0ed2b9a060a61f9e578471299b8376ea158897b313d025fea"
+    },
+    "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_RESTORE_20261011T002628Z_0b7ab12389ba43329cdbcf2834a1c237/research/cr_phys02d_20261011/evidence/runs/PULSE_20261011T002745Z_0a8fe53f104a412cab0cbb858934675e/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_LOCAL_RECEIPTS_PULSE_20261011T002745Z_0a8fe53f104a412cab0cbb858934675e/LOCAL_EXECUTE_RECEIPT.json": {
+      "bytes": 832,
+      "sha256": "b6444d76f887fd1a25a28a5f0f8999884f67f5480f6a13c1a863d222004e65de"
+    },
+    "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_LOCAL_RECEIPTS_PULSE_20261011T002745Z_0a8fe53f104a412cab0cbb858934675e/LOCAL_COLLECT_RECEIPT.json": {
+      "bytes": 466,
+      "sha256": "0dd82d811cebb671d8164ca194b6ec365d1414111b1698e6a02e3cebd13db030"
+    },
+    "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_LOCAL_RECEIPTS_PULSE_20261011T002745Z_0a8fe53f104a412cab0cbb858934675e/COLLECT.stdout.json": {
+      "bytes": 416,
+      "sha256": "1e8b5239476e2b3a07597e142f95b11ca74f070a1e2d5780d311f0610dd2bf64"
+    },
+    "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_RESTORE_20261011T002628Z_0b7ab12389ba43329cdbcf2834a1c237/research/cr_phys02d_20261011/state/IMPLEMENTATION_AMENDMENT_01.json": {
+      "bytes": 2938,
+      "sha256": "4c49d017bde9bb01042e80f737b3c21e1547f60ff1e28ae3363419f897c366df"
+    },
+    "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_RESTORE_20261011T002628Z_0b7ab12389ba43329cdbcf2834a1c237/research/cr_phys02d_20261011/state/IMPLEMENTATION_AMENDMENT_02.json": {
+      "bytes": 3371,
+      "sha256": "01286c123cd56f2b697d44dded6d333ec085ccf7020402314e531809b0c087e6"
+    },
+    "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_RESTORE_20261011T002628Z_0b7ab12389ba43329cdbcf2834a1c237/research/cr_phys02d_20261011/state/IMPLEMENTATION_AMENDMENT_03.json": {
+      "bytes": 1250,
+      "sha256": "718a22c4fd59c9a2df9ba055cc848e8ded6dfd71618c7393e0e1016723b89651"
+    },
+    "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_RESTORE_20261011T002628Z_0b7ab12389ba43329cdbcf2834a1c237/research/cr_phys02d_20261011/state/IMPLEMENTATION_AMENDMENT_04.json": {
+      "bytes": 1413,
+      "sha256": "905ca2670272a05b2761c9b4f683ec01dce76a70be49e46a4e32d8f2b20fc257"
+    }
+  },
+  "binding_limit": "Bound to these immutable artifacts and first automatic return ZIP. Any later recollection or publication requires separate byte/readback verification; it does not turn this HOLD into PASS."
+}

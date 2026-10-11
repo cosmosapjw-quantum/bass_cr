@@ -1,0 +1,300 @@
+{
+  "status": "FIRST_FAILURE_PRESERVED",
+  "science_status": "NO_NEW_PULSE_RESULT",
+  "science_commit": "6ed83ff61aff24fe51ff0370736f70e0e52893f8",
+  "publication_receipt_head": "a2486869dba5c2d43257c13e33a31b66752d5e10",
+  "run_dir": "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_RESTORE_20261011T002628Z_0b7ab12389ba43329cdbcf2834a1c237/research/cr_phys02d_20261011/evidence/runs/PULSE_20261011T002745Z_0a8fe53f104a412cab0cbb858934675e",
+  "execution": {
+    "status": "FIRST_FAILURE_PRESERVED",
+    "actual_exit": 1,
+    "command": [
+      "ncp/launch_pulse.py",
+      "--execute",
+      "--run-dir",
+      "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_RESTORE_20261011T002628Z_0b7ab12389ba43329cdbcf2834a1c237/research/cr_phys02d_20261011/evidence/runs/PULSE_20261011T002745Z_0a8fe53f104a412cab0cbb858934675e"
+    ],
+    "cwd": "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_RESTORE_20261011T002628Z_0b7ab12389ba43329cdbcf2834a1c237/research/cr_phys02d_20261011",
+    "start_utc": "2026-10-11T00:27:45Z",
+    "end_utc": "2026-10-11T00:29:29Z",
+    "elapsed_s": 103.79789273899951,
+    "observed_child_exit": 1,
+    "build_reservations": 1,
+    "pulse_reservations": 0,
+    "reservation_counts_are_completed_calls": false,
+    "deadline_s": 3600,
+    "receipt_recording_started_after_deadline": false,
+    "receipt_recording_overhead_classification": "TERMINAL_RECEIPT_IO_OUTSIDE_CHILD_BUDGET"
+  },
+  "wrapper_exit": 0,
+  "wrapper_exit_is_not_numerical_success": true,
+  "one_execute_invocation": true,
+  "physical_G_builds_started": 1,
+  "fullBED_constructor_returned_before_guard": true,
+  "saved_G_available": false,
+  "pulse_calls": 0,
+  "legacy_started": false,
+  "prior_ramp_calls": 0,
+  "prior_science_suite_runs": 0,
+  "peak_RSS_KiB": 4149932,
+  "runtime": {
+    "python": "3.12.3",
+    "numpy": "2.4.2",
+    "scipy": "1.17.0",
+    "threadpools": [
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "filepath": "/root/bass_cr_phys02d_ncp_20261011/venv/lib/python3.12/site-packages/numpy.libs/libscipy_openblas64_-096271d3.so",
+        "version": "0.3.31.dev",
+        "threading_layer": "pthreads",
+        "architecture": "SkylakeX"
+      }
+    ]
+  },
+  "resource": {
+    "admitted": true,
+    "affinity_cpus": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63
+    ],
+    "cpu_quota": null,
+    "bounded_memory_bytes": 135050559488,
+    "available_working_bytes": 115415068672,
+    "reserve_bytes": 16881319936,
+    "free_disk_bytes": 53410402304
+  },
+  "models": {
+    "fullBED": {
+      "CDF": null,
+      "infinite_moments": null,
+      "saved_ramp_residuals": null,
+      "status": "G_BUILT_INPUT_GRID_GUARD_FAILED_BEFORE_PULSE"
+    },
+    "legacy": {
+      "CDF": null,
+      "infinite_moments": null,
+      "saved_ramp_residuals": null,
+      "status": "NOT_STARTED"
+    }
+  },
+  "first_failure": "STORED_SOURCE_GRID_FIELDS_MISMATCH",
+  "identified_failing_predicate": "np.array_equal(cascade.E, saved energy_eV)",
+  "grid_diagnostic": {
+    "diagnostic_scope": "Grid-expression evaluation only; no Cascade constructor, G build or pulse",
+    "runtime": {
+      "python": "3.12.3",
+      "numpy": "2.4.2"
+    },
+    "expected_size": 9611,
+    "models": {
+      "fullBED": {
+        "checks": {
+          "required_fields": true,
+          "energy_array_equal": false,
+          "time_shape": true,
+          "time_array_equal": true,
+          "source_shape": true,
+          "birth_tags": true
+        },
+        "energy_mismatch_count": 340,
+        "max_absolute_energy_difference_eV": 1.1368683772161603e-13,
+        "first_mismatches": [
+          {
+            "index": 3235,
+            "saved_hex": "0x1.4833fa15755cep+3",
+            "rebuilt_hex": "0x1.4833fa15755cdp+3",
+            "difference_eV": -1.7763568394002505e-15
+          },
+          {
+            "index": 3238,
+            "saved_hex": "0x1.48e562d57f8b1p+3",
+            "rebuilt_hex": "0x1.48e562d57f8b0p+3",
+            "difference_eV": -1.7763568394002505e-15
+          },
+          {
+            "index": 3242,
+            "saved_hex": "0x1.49d283b5e464ap+3",
+            "rebuilt_hex": "0x1.49d283b5e4649p+3",
+            "difference_eV": -1.7763568394002505e-15
+          },
+          {
+            "index": 3251,
+            "saved_hex": "0x1.4bea7f82579d6p+3",
+            "rebuilt_hex": "0x1.4bea7f82579d5p+3",
+            "difference_eV": -1.7763568394002505e-15
+          },
+          {
+            "index": 3277,
+            "saved_hex": "0x1.520a1570d8c25p+3",
+            "rebuilt_hex": "0x1.520a1570d8c24p+3",
+            "difference_eV": -1.7763568394002505e-15
+          },
+          {
+            "index": 3305,
+            "saved_hex": "0x1.58c29c4109019p+3",
+            "rebuilt_hex": "0x1.58c29c4109018p+3",
+            "difference_eV": -1.7763568394002505e-15
+          },
+          {
+            "index": 3319,
+            "saved_hex": "0x1.5c2ba8bc476a6p+3",
+            "rebuilt_hex": "0x1.5c2ba8bc476a5p+3",
+            "difference_eV": -1.7763568394002505e-15
+          },
+          {
+            "index": 3340,
+            "saved_hex": "0x1.615973a20476fp+3",
+            "rebuilt_hex": "0x1.615973a20476ep+3",
+            "difference_eV": -1.7763568394002505e-15
+          }
+        ],
+        "saved_energy_sha256": "6a76d3539115003b046a5861baca89b0a4ff966564627e04d9f6e8bc86be8292",
+        "rebuilt_energy_sha256": "870cfd5f3f2656371d5fad59e4b24f4b7aa051546b9d78f4f3a9de3197fcc0a4"
+      },
+      "legacy": {
+        "checks": {
+          "required_fields": true,
+          "energy_array_equal": false,
+          "time_shape": true,
+          "time_array_equal": true,
+          "source_shape": true,
+          "birth_tags": true
+        },
+        "energy_mismatch_count": 340,
+        "max_absolute_energy_difference_eV": 1.1368683772161603e-13,
+        "first_mismatches": [
+          {
+            "index": 3235,
+            "saved_hex": "0x1.4833fa15755cep+3",
+            "rebuilt_hex": "0x1.4833fa15755cdp+3",
+            "difference_eV": -1.7763568394002505e-15
+          },
+          {
+            "index": 3238,
+            "saved_hex": "0x1.48e562d57f8b1p+3",
+            "rebuilt_hex": "0x1.48e562d57f8b0p+3",
+            "difference_eV": -1.7763568394002505e-15
+          },
+          {
+            "index": 3242,
+            "saved_hex": "0x1.49d283b5e464ap+3",
+            "rebuilt_hex": "0x1.49d283b5e4649p+3",
+            "difference_eV": -1.7763568394002505e-15
+          },
+          {
+            "index": 3251,
+            "saved_hex": "0x1.4bea7f82579d6p+3",
+            "rebuilt_hex": "0x1.4bea7f82579d5p+3",
+            "difference_eV": -1.7763568394002505e-15
+          },
+          {
+            "index": 3277,
+            "saved_hex": "0x1.520a1570d8c25p+3",
+            "rebuilt_hex": "0x1.520a1570d8c24p+3",
+            "difference_eV": -1.7763568394002505e-15
+          },
+          {
+            "index": 3305,
+            "saved_hex": "0x1.58c29c4109019p+3",
+            "rebuilt_hex": "0x1.58c29c4109018p+3",
+            "difference_eV": -1.7763568394002505e-15
+          },
+          {
+            "index": 3319,
+            "saved_hex": "0x1.5c2ba8bc476a6p+3",
+            "rebuilt_hex": "0x1.5c2ba8bc476a5p+3",
+            "difference_eV": -1.7763568394002505e-15
+          },
+          {
+            "index": 3340,
+            "saved_hex": "0x1.615973a20476fp+3",
+            "rebuilt_hex": "0x1.615973a20476ep+3",
+            "difference_eV": -1.7763568394002505e-15
+          }
+        ],
+        "saved_energy_sha256": "6a76d3539115003b046a5861baca89b0a4ff966564627e04d9f6e8bc86be8292",
+        "rebuilt_energy_sha256": "870cfd5f3f2656371d5fad59e4b24f4b7aa051546b9d78f4f3a9de3197fcc0a4"
+      }
+    }
+  },
+  "physics_source_tolerances_or_adapter_edits": 0,
+  "automatic_retry": false,
+  "independent_actual_review": {
+    "decision": "HOLD",
+    "sha256": "ca5f3b8baba7605b5f857aef437b41ba61cfeea2facc1d00c4183e8c3e7534b4",
+    "physical_retry_authorized": false
+  },
+  "gates": {
+    "PHYS02_DELAY": "OPEN",
+    "production_history": "HOLD",
+    "atomic_G02": "UNRESOLVED",
+    "b_grid": "NO_GO",
+    "all_bound": "OPEN",
+    "R17B2B": "NO_CERTIFIED_SOURCE_SHARPENING",
+    "CCC_2026_exporter_identity": "SOURCE_IDENTITY_UNRESOLVED"
+  }
+}
