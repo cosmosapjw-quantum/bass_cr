@@ -1,0 +1,253 @@
+{
+  "schema": "cr-phys02h-independent-parallel-local-decision.v1",
+  "unit": "CR-PHYS02H-PARALLEL-OPERATOR-LOCAL-QUALIFICATION",
+  "status": "PASS_SCOPED",
+  "decision_utc": "2026-10-11T09:04:30.249067+00:00",
+  "reviewer": {
+    "agent": "/root/phys02h_decision_review",
+    "independent_of_candidate_design": true,
+    "independent_of_acceptance_design": true,
+    "independent_of_implementation": true,
+    "producer_imports": [],
+    "harness": "Source-bound canonical Astra v4.0.0",
+    "exact_backend_alias": "MODEL_UNRESOLVED",
+    "backend_attestation": "NOT_AVAILABLE"
+  },
+  "independent_of_implementation": true,
+  "parallel_local_admitted": true,
+  "ncp_preparation_admitted": false,
+  "execution_manifest_sha256": null,
+  "contract_sha256": "a49b1fa88c86d46c4e37cdb7ba37fbd44e5fa05511febc3a3089ab5ed5331dc4",
+  "parallel_source_sha256": "3a7e89f158339712a2c1109b2599d3062fff21a1ab99fadf4f906f5375e3bfbd",
+  "pilot_plan_sha256": "069398cddac9ac4ac4dc7a9f67fc0fdcebb47fe794418623b2c536770706220c",
+  "pilot_result_sha256": "7546b4b8e04adae6f2d033c562ce7c3cfbf52a23ba54b0c655881276e19ada5a",
+  "evidence": {
+    "state/SCIENTIFIC_CONTRACT.json": {
+      "bytes": 8474,
+      "sha256": "a49b1fa88c86d46c4e37cdb7ba37fbd44e5fa05511febc3a3089ab5ed5331dc4"
+    },
+    "src/parallel_operator.py": {
+      "bytes": 17568,
+      "sha256": "3a7e89f158339712a2c1109b2599d3062fff21a1ab99fadf4f906f5375e3bfbd"
+    },
+    "scripts/run_parallel_pilot.py": {
+      "bytes": 6423,
+      "sha256": "b431a553880c27777ea0afbe60658bcd0cb1a7a5ddc7cfbf1a0bfd66c6a88454"
+    },
+    "tests/test_parallel_operator.py": {
+      "bytes": 2605,
+      "sha256": "549d35d6f8b70d4e1e9ba90b1c1071646646435b8103a7341b9fbeb9beca3ef0"
+    },
+    "evidence/parallel/PILOT_PLAN.json": {
+      "bytes": 9085,
+      "sha256": "069398cddac9ac4ac4dc7a9f67fc0fdcebb47fe794418623b2c536770706220c"
+    },
+    "evidence/parallel/pilot/RESULT.json": {
+      "bytes": 112108,
+      "sha256": "7546b4b8e04adae6f2d033c562ce7c3cfbf52a23ba54b0c655881276e19ada5a"
+    },
+    "evidence/parallel/SUMMARY.json": {
+      "bytes": 4900,
+      "sha256": "556a5c9da48d45571e1c337a4cc5d03d8978b2b8bedefd85d358ab9bc70ae87e"
+    },
+    "evidence/parallel/REPORT.md": {
+      "bytes": 5913,
+      "sha256": "df3993a563fb191f412adb83ae1323bbb143224e53ec9c5c91a870e32484fcf3"
+    },
+    "evidence/parallel/pilot.ACTUAL_EXIT.json": {
+      "bytes": 398,
+      "sha256": "56185ec7990422c8a2f80ec9c8c7ef9636dea6fcf0c59bd45802d0c2fbae22a7"
+    },
+    "evidence/parallel/tests.ACTUAL_EXIT.json": {
+      "bytes": 175,
+      "sha256": "6931d8d6bfe6fbd539af5567233ac808675dee5a26f09201b0e9f2cef8671fc2"
+    },
+    "evidence/parallel/tests.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence/parallel/tests.stderr": {
+      "bytes": 652,
+      "sha256": "9a8c40817ceacbed2ce979d23eea8f13d8a1aaf963a021ea1c4126dea859f499"
+    },
+    "review/parallel/INDEPENDENT_PAYLOAD_CHECK.py": {
+      "bytes": 15633,
+      "sha256": "32084ffff7d9e868b1c057a1cde86a9b26a0f1e14b414e4a4f84b2e899a74ff1"
+    },
+    "review/parallel/INDEPENDENT_PAYLOAD_RECEIPT.json": {
+      "bytes": 8540,
+      "sha256": "4c5e3d414f857c35222f36ffe326f0212ad8508243b7ba1a8e7d764b1431752f"
+    },
+    "review/parallel/INDEPENDENT_INPUT_INVENTORY.json": {
+      "bytes": 57563,
+      "sha256": "ed0d76abfc9231a7e32680c18abb8ab140db5d6bc133af6f178c101640ca596f"
+    },
+    "review/parallel/INDEPENDENT_PAYLOAD_STDOUT.txt": {
+      "bytes": 100,
+      "sha256": "e6daf238aa883faafa29c3ba9804892d43413f9c317c02f01d1b5ee6184ced1d"
+    },
+    "review/parallel/INDEPENDENT_PAYLOAD_STDERR.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "review/parallel/INDEPENDENT_PARALLEL_REVIEW_KO.md": {
+      "bytes": 11582,
+      "sha256": "08cc379e7fb2bd1405cc28b3c05ffb915c01a0a4313c392c4d693c48c77b2b69"
+    }
+  },
+  "input_inventory_entries": 278,
+  "claim_ceiling": [
+    "DERIVED_SOURCE_SPECIFIC_COLUMN_INDEPENDENCE",
+    "IMPLEMENTATION_VERIFIED_LOCAL_RAW_CSC_RATES_DIAGNOSTICS_PARITY",
+    "MEASURED_LOCAL_TIMINGS_AND_LIFETIME_RSS_WITH_DECLARED_SCOPE"
+  ],
+  "admitted_statement": "The source-pinned AST restriction and ordered raw CSC concatenation preserve the actual 240-state full and frozen 16-of-9600-column reference results for both models and both repetitions. No full9600 result is admitted.",
+  "proof_checks": {
+    "source_and_input_pins": true,
+    "parent_generator_and_transitive_project_sharing_read": true,
+    "within_column_arithmetic_preserved": true,
+    "precomputation_preserved": true,
+    "AST_restoration_exact": true,
+    "disjoint_sorted_column_partition": true,
+    "global_column_order": true,
+    "no_floating_interworker_reduction": true,
+    "no_duplicate_sparse_entries_to_coalesce": true,
+    "raw_CSC_constructor_storage_check": true,
+    "rate_vector_byte_parity": true,
+    "diagnostic_sequence_exact": true,
+    "immutable_energy": true,
+    "new_implementation_identity_not_old_method_binding": true
+  },
+  "AST_proof": {
+    "original_AST_sha256": "4ecb18cfe02877ff343f3a35f238ef1462b1b21e45b11c0e03356587c43c8761",
+    "restricted_AST_sha256": "bbc4b497f9f3b7ccef179162854bb2592e1effed38962f6c33324deebf61b669"
+  },
+  "independent_read_only_execution": {
+    "start_utc": "2026-10-11T09:01:57.813073+00:00",
+    "end_utc": "2026-10-11T09:01:58.519571+00:00",
+    "execution_count": 1,
+    "timeout_s": 60,
+    "actual_exit": 0,
+    "status": "PASS_READ_ONLY_PARALLEL_PAYLOAD_CHECK",
+    "wall_s": 0.7065293189953081,
+    "checks": {
+      "payloads": 24,
+      "npy_arrays": 216,
+      "same_input_candidate_pairs": 16,
+      "raw_array_pair_comparisons": 180,
+      "repeat_reference_pairs": 4,
+      "stored_column_occurrences": 3968,
+      "diagnostic_records": 4592,
+      "stored_worker_proofs": 44
+    },
+    "reviewer_new_physical_calls": {
+      "G": 0,
+      "F_retry": 0,
+      "pulse": 0,
+      "expm": 0,
+      "resolvent": 0,
+      "linear_solve": 0,
+      "pilot_rerun": 0,
+      "old_suite_rerun": 0
+    }
+  },
+  "producer_actual_counts": {
+    "logical_small_builds": 16,
+    "logical_selected_builds": 8,
+    "logical_total": 24,
+    "actual_generator_invocations": 52,
+    "actual_original_unrestricted_generators": 4,
+    "actual_serial_restricted_generators": 4,
+    "actual_partial_worker_generators": 44,
+    "full9600_complete_builds": 0
+  },
+  "producer_time": {
+    "inner_wall_s": 65.1954210200056,
+    "external_wall_s": 66.28473584199673,
+    "interpretation": "Nested scopes; do not add"
+  },
+  "tests": {
+    "actual_exit": 0,
+    "test_methods_passed": 4,
+    "actual_process_wall_s": 2.038648337998893,
+    "reviewer_rerun": false,
+    "known_generator_invocations": 6,
+    "canceled_sibling_generator_entry_unobserved_bound": [
+      0,
+      1
+    ],
+    "injected_failure": "Expected runtime-control test before injected child generator; not a scientific pilot failure",
+    "repair_cycles_used": 0
+  },
+  "resource_scope": {
+    "actual_quota_cpus": 8,
+    "actual_affinity_inventory_cpus": 9,
+    "actual_memory_limit_bytes": 8589934592,
+    "maximum_computation_workers": 4,
+    "coordinator_processes": 1,
+    "minimum_reserve_bytes": 2147483648,
+    "recorded_admission_inequalities_passed": true,
+    "worker_peakRSS_max_bytes": 132059136,
+    "coordinator_peakRSS_max_bytes": 132059136,
+    "simultaneous_total_RSS_measured": false,
+    "support_resource_tracker_RSS_included": false,
+    "per_build_RSS_delta_claim": false,
+    "scope_limit": "No simultaneous-total sampler; resource_tracker support process not included; no full-grid or NCP resource inference."
+  },
+  "performance_decision": "NO_LOCAL_SPEEDUP_ESTABLISHED; small and selected workloads are slower with spawn candidates. Full9600 and NCP64 performance remain NOT_RUN.",
+  "not_admitted": [
+    "Independent physics correctness oracle",
+    "Prior operator or E/F checkpoint adoption",
+    "F operator mismatch cause or error-size inference",
+    "Full9600 operator parity or peak memory",
+    "NCP64 speedup or MPI execution",
+    "NCP launcher or execution-preparation admission",
+    "Retrying previous F allocation",
+    "G frontier or any solve/propagation"
+  ],
+  "blocking_findings": [],
+  "scope_findings": [
+    {
+      "id": "PARH-S01",
+      "classification": "limits",
+      "finding": "Shared original arithmetic is intentional and disclosed; this validates restriction and assembly, not the source physics."
+    },
+    {
+      "id": "PARH-S02",
+      "classification": "limits",
+      "finding": "Stored shape9611x9611 in selected payloads contains only16 evaluated columns; full9600 complete builds remain0."
+    },
+    {
+      "id": "PARH-S03",
+      "classification": "performance",
+      "finding": "No local speedup is present. Equal column-count tiles are not proved equal-cost; global performance/load balance requires the separate full-scale qualification."
+    },
+    {
+      "id": "PARH-S04",
+      "classification": "resource_scope",
+      "finding": "Worker/coordinator lifetime peakRSS excludes the resource_tracker support process and does not measure simultaneous total usage. Future aggregate NCP admission must account for root/lane/support separately."
+    },
+    {
+      "id": "PARH-S05",
+      "classification": "runtime_provenance",
+      "finding": "Observed local Python3.12.14/NumPy2.3.5/OpenBLAS0.3.30/SkylakeX differs from old F runtime. Local pair parity does not diagnose old data-hash mismatch."
+    },
+    {
+      "id": "PARH-S06",
+      "classification": "counter_provenance",
+      "finding": "Pilot count52 is exact; targeted test canceled sibling entry0or1 remains unobserved and is not merged into an exact global count."
+    }
+  ],
+  "inherited_gates": {
+    "F": "HOLD_OPERATOR_BINDING_UNRESOLVED",
+    "G_frontier": "BLOCKED_BY_F_OPERATOR_BINDING_HOLD",
+    "PHYS02_DELAY": "OPEN",
+    "production_history": "HOLD",
+    "atomic_G02": "UNRESOLVED",
+    "b_grid": "NO_GO",
+    "all_bound": "OPEN",
+    "R17B2B": "NO_CERTIFIED_SOURCE_SHARPENING",
+    "CCC_2026_exporter_identity": "SOURCE_IDENTITY_UNRESOLVED"
+  },
+  "next_binding": "This file and the separate exact-scalar decision may be bound by a later independent NCP preparation decision for an exact frozen execution manifest. This local decision alone grants no NCP execution admission."
+}

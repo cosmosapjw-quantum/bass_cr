@@ -1,0 +1,521 @@
+{
+  "schema": "cr-phys02h-independent-ncp-preparation-decision.v2",
+  "unit": "CR-PHYS02H-NCP-FULL9600-COLUMN-PARALLEL-QUALIFICATION",
+  "status": "PASS_SCOPED",
+  "independent_of_implementation": true,
+  "ncp_preparation_admitted": true,
+  "execution_manifest_sha256": "14f9ad1319146c72d13b1e30583dc27d3b9272c8d23913e63467782fa57b35ec",
+  "execution_manifest": {
+    "path": "ncp/EXECUTION_SOURCE_MANIFEST.json",
+    "bytes": 4745,
+    "sha256": "14f9ad1319146c72d13b1e30583dc27d3b9272c8d23913e63467782fa57b35ec"
+  },
+  "created_utc": "2026-10-11T09:41:05.567040+00:00",
+  "scope": "Independent initial frozen preparation review plus a bounded follow-up of the root-authorized H01-H05 cleanup/collection correction and directly affected PID namespace mapping. Admission applies only to the exact v2 execution manifest, not to an actual NCP result.",
+  "reviewer": {
+    "task": "/root/phys02h_decision_review",
+    "candidate_participation": false,
+    "acceptance_design_participation": false,
+    "implementation_participation": false,
+    "production_source_edits": 0,
+    "workflow": "Source-bound canonical Astra v4.0.0",
+    "host_model_label": "GPT-6 Astra Pro (host declaration)",
+    "exact_backend_alias": "MODEL_UNRESOLVED",
+    "backend_attestation_available": false,
+    "prior_explicit_model_route_failure": "Parent reported explicit gpt-6-astra routing rejected before execution because the requested/default effort was unsupported. That attempted reviewer executed nothing; retained as routing/runtime evidence only."
+  },
+  "review_method": {
+    "initial": "Static review plus one own-formula nonphysical mocked failure-boundary execution, preserved under initial_manifest_hold.",
+    "followup": "Read-only source diff, AST structure, content-pin and manifest binding checks, and inspection of stored producer fixture sources, stderr, lifecycle observations and receipts.",
+    "followup_new_fixtures": 0,
+    "followup_producer_imports": 0,
+    "followup_old_test_reruns": 0,
+    "followup_new_physical_calls": 0,
+    "followup_full_payload_rehash": false,
+    "producer_fixture_results_are_not_independent_physical_oracles": true
+  },
+  "prior_scoped_decisions_unchanged": {
+    "exact_scalar": {
+      "path": "review/exact/INDEPENDENT_EXACT_DECISION.json",
+      "bytes": 8464,
+      "sha256": "51d7f9c85c590b75de9d110110108f2ba66f189a34c2b665dde656b62a827392",
+      "status": "PASS_SCOPED",
+      "unit": "CR-PHYS02H-EXACT-RECORDED-MOMENT-CERTIFICATES",
+      "scope": "Existing separate scoped decision, unchanged and not rerun."
+    },
+    "parallel_local": {
+      "path": "review/parallel/INDEPENDENT_PARALLEL_DECISION.json",
+      "bytes": 10395,
+      "sha256": "6781c218148f586351e0978ae1133de4923eceb2930d4a8f7ca8bd866744c84d",
+      "status": "PASS_SCOPED",
+      "unit": "CR-PHYS02H-PARALLEL-OPERATOR-LOCAL-QUALIFICATION",
+      "scope": "Existing separate scoped decision, unchanged and not rerun."
+    }
+  },
+  "initial_hold_preserved": {
+    "path": "review/ncp/initial_manifest_hold/INDEPENDENT_NCP_DECISION.json",
+    "bytes": 5552,
+    "sha256": "5df1eacb0b69d3ce63e9011ca5cdb6008426ff009e4533242646c66a13cb10f4",
+    "status": "HOLD",
+    "execution_manifest_sha256": "0a0281dccbbae4f53a167bdb0af421c2cf760f0ca0926c9be08f716887aab280",
+    "report": {
+      "path": "review/ncp/initial_manifest_hold/REVIEW_KO.md",
+      "bytes": 7083,
+      "sha256": "971a83572c96530a4961fa029b0d26bd140385a24e15aa5835021d6a08284c8e"
+    },
+    "initial_independent_evidence": {
+      "path": "review/ncp/initial_manifest_hold/INDEPENDENT_BOUNDARY_RECEIPT.json",
+      "bytes": 3049,
+      "sha256": "e53d25e8255d62e4a8fbbce31f73c062cc503fff4b3c22679780f59c60a5e0ca"
+    },
+    "old_source_not_relabelled_as_pass": true
+  },
+  "blocking_findings": [],
+  "resolved_initial_findings": [
+    {
+      "id": "NCP-H01",
+      "prior_status": "BLOCKING",
+      "status": "RESOLVED_IN_V2_PREPARATION_SCOPE",
+      "location": "run_and_collect.py:execute_and_collect finally and cancel_owned_sessions",
+      "resolution": "Cleanup runs regardless of qualifier poll state, before collection, with generated nonce/run ownership discovery and a second cleanup pass.",
+      "evidence": "Final nonphysical dead-qualifier fixture observes both live orphan sessions GONE and leaves the unrelated session alive."
+    },
+    {
+      "id": "NCP-H02",
+      "prior_status": "BLOCKING",
+      "status": "RESOLVED_IN_V2_PREPARATION_SCOPE",
+      "location": "run_and_collect.py:control_json and collect",
+      "resolution": "Malformed control JSON is preserved as payload with warnings; invalid binding is not adopted as admission; available raw values remain collectable.",
+      "evidence": "Malformed START, READY and fallback manifest/raw-byte preservation fixture passed in the first cleanup batch. This collection code is unchanged by namespace repair; final orphan fixture also preserves malformed START/READY/events and raw bytes."
+    },
+    {
+      "id": "NCP-H03",
+      "prior_status": "BLOCKING",
+      "status": "RESOLVED_IN_V2_PREPARATION_SCOPE",
+      "location": "run_and_collect.py:cancel_owned_sessions event parsing",
+      "resolution": "First science cancellation precedes metadata parsing; malformed event lines produce warnings without aborting later event handling, terminal receipt or collection.",
+      "evidence": "Final live orphan fixture combines a malformed first event with a valid event and an unregistered owned session, and checks successful cleanup and exact raw/event preservation."
+    },
+    {
+      "id": "NCP-H04",
+      "prior_status": "BLOCKING",
+      "status": "RESOLVED_IN_V2_PREPARATION_SCOPE",
+      "location": "qualify_parallel.py:register_session and execute lane/comparator spawns",
+      "resolution": "Both numerical lanes and comparators receive durable ownership events; nonce/run discovery also covers the Popen-to-event-append failure interval.",
+      "evidence": "Static reads of both spawn call sites and final all-new-sessions ownership-event fixture plus the unregistered-session orphan fixture."
+    },
+    {
+      "id": "NCP-H05",
+      "prior_status": "BLOCKING",
+      "status": "RESOLVED_IN_V2_PREPARATION_SCOPE",
+      "location": "run_and_collect.py:cancel_owned_sessions before qualifier wait(timeout=8)",
+      "resolution": "Owned science is signaled and residual science groups killed before qualifier-only evidence grace. A subsequent cleanup precedes collection.",
+      "evidence": "Injected-clock nonphysical fixture observes LIVE to ZOMBIE before the 8-second root wait branch. No actual 900-second or physical execution was performed."
+    }
+  ],
+  "source_binding": {
+    "direct_pins_checked": 19,
+    "direct_pins_matching": 19,
+    "changed_direct_files": [
+      "research/cr_phys02h_20261011/ncp/qualify_parallel.py",
+      "research/cr_phys02h_20261011/ncp/run_and_collect.py"
+    ],
+    "unchanged_direct_pins": 17,
+    "input_and_dependency_binding": {
+      "h_manifest": {
+        "bytes": 103894,
+        "sha256": "f5af93b53159fe189d2a0d0b78670b07c707f298927029ccfb5e39c25598bc2d"
+      },
+      "h_manifest_pinned_by_execution_manifest": true,
+      "h_files_count": 549,
+      "f_manifest": {
+        "bytes": 137355,
+        "sha256": "248ad97e6417c3ba88bcbbfcb662f6fe65464e63eba6183421770ba06d41a341"
+      },
+      "f_manifest_pinned_by_execution_manifest": true,
+      "f_files_count": 538,
+      "h_pins_f_manifest": true,
+      "all_538_expected_content_identities_equal": true,
+      "f_entries_present_in_h_manifest": 538,
+      "identity_comparison_fields": [
+        "bytes",
+        "sha256"
+      ],
+      "f_git_blob_sha_metadata_preserved_but_not_part_of_content_pin_comparison": true
+    },
+    "scientific_contract_sha256": "a49b1fa88c86d46c4e37cdb7ba37fbd44e5fa05511febc3a3089ab5ed5331dc4",
+    "physical_source_and_inputs_changed": false,
+    "full_H549_and_F538_rehash_by_this_followup": false,
+    "actual_launcher_requires_full_manifest_verification": true
+  },
+  "namespace_correction": {
+    "status": "PASS_SCOPED",
+    "diagnosis": "Current syscall PID namespace differs from the mounted ancestor procfs view; raw numeric /proc paths and ancestor PGIDs are not actionable identities.",
+    "mapping": "Require exact active PID namespace inode, then use matched NSpid/NSpgid/NSsid terminal components for syscalls; retain ancestor/proc path/start-tick evidence separately.",
+    "ownership": "Current UID plus per-launch nonce and exact run marker across matching live session/group members; arbitrary event PIDs are not signal authority.",
+    "direct_impacts": [
+      "wrapper parent route",
+      "durable session ownership registration",
+      "owned group cancellation",
+      "current process RSS membership"
+    ],
+    "ambiguous_or_unreadable_mapping": "Preserve typed HOLD/warnings; no ancestor-PID fallback or unverified unrelated-process kill.",
+    "prior_rss_observations_not_reinterpreted": true,
+    "first_cleanup_failure_instant_child_state": "NOT_OBSERVED",
+    "final_fixture_lifecycle_observations": [
+      {
+        "fixture": "dead_qualifier_orphan",
+        "before": {
+          "lifecycle": "LIVE",
+          "kernel_identity": {
+            "pid": 8,
+            "process_group": 8,
+            "session_id": 8,
+            "start_ticks": 7664975,
+            "uid": 0,
+            "state": "S",
+            "pid_namespace": "pid:[4026532347]",
+            "proc_directory": "/proc/197439",
+            "ancestor_proc_pid": 197439,
+            "ancestor_process_group": 197439,
+            "ancestor_session_id": 197439,
+            "namespace_ids": {
+              "NSpid": [
+                197439,
+                8
+              ],
+              "NSpgid": [
+                197439,
+                8
+              ],
+              "NSsid": [
+                197439,
+                8
+              ]
+            }
+          }
+        },
+        "after": {
+          "pid": 8,
+          "lifecycle": "GONE"
+        }
+      },
+      {
+        "fixture": "dead_qualifier_orphan",
+        "before": {
+          "lifecycle": "LIVE",
+          "kernel_identity": {
+            "pid": 9,
+            "process_group": 9,
+            "session_id": 9,
+            "start_ticks": 7664975,
+            "uid": 0,
+            "state": "S",
+            "pid_namespace": "pid:[4026532347]",
+            "proc_directory": "/proc/197440",
+            "ancestor_proc_pid": 197440,
+            "ancestor_process_group": 197440,
+            "ancestor_session_id": 197440,
+            "namespace_ids": {
+              "NSpid": [
+                197440,
+                9
+              ],
+              "NSpgid": [
+                197440,
+                9
+              ],
+              "NSsid": [
+                197440,
+                9
+              ]
+            }
+          }
+        },
+        "after": {
+          "pid": 9,
+          "lifecycle": "GONE"
+        }
+      },
+      {
+        "fixture": "watchdog_before_root_grace",
+        "before": {
+          "lifecycle": "LIVE",
+          "kernel_identity": {
+            "pid": 12,
+            "process_group": 12,
+            "session_id": 12,
+            "start_ticks": 7665032,
+            "uid": 0,
+            "state": "S",
+            "pid_namespace": "pid:[4026532347]",
+            "proc_directory": "/proc/197443",
+            "ancestor_proc_pid": 197443,
+            "ancestor_process_group": 197443,
+            "ancestor_session_id": 197443,
+            "namespace_ids": {
+              "NSpid": [
+                197443,
+                12
+              ],
+              "NSpgid": [
+                197443,
+                12
+              ],
+              "NSsid": [
+                197443,
+                12
+              ]
+            }
+          }
+        },
+        "after": {
+          "pid": 12,
+          "lifecycle": "ZOMBIE",
+          "kernel_identity": {
+            "pid": 12,
+            "process_group": 12,
+            "session_id": 12,
+            "start_ticks": 7665032,
+            "uid": 0,
+            "state": "Z",
+            "pid_namespace": "pid:[4026532347]",
+            "proc_directory": "/proc/197443",
+            "ancestor_proc_pid": 197443,
+            "ancestor_process_group": 197443,
+            "ancestor_session_id": 197443,
+            "namespace_ids": {
+              "NSpid": [
+                197443,
+                12
+              ],
+              "NSpgid": [
+                197443,
+                12
+              ],
+              "NSsid": [
+                197443,
+                12
+              ]
+            }
+          }
+        }
+      }
+    ]
+  },
+  "producer_evidence": {
+    "first_cleanup_attempt": {
+      "receipt": {
+        "path": "evidence/ncp_validation/CLEANUP_CORRECTION_TEST_RECEIPT.json",
+        "bytes": 2226,
+        "sha256": "c29cda7aaed89036eb18af0ec2b413981d2f0a4d39404c4a9d694920d8fd04d2"
+      },
+      "tests": 8,
+      "passed": 6,
+      "failed": 1,
+      "errors": 1,
+      "actual_exit": 1,
+      "wall_s": 1.9462923259998206,
+      "failed_source_and_diagnostics_preserved": true,
+      "first_failure_instant_child_state": "NOT_OBSERVED"
+    },
+    "namespace_affected_attempt": {
+      "receipt": {
+        "path": "evidence/ncp_validation/NAMESPACE_REPAIR_TEST_RECEIPT.json",
+        "bytes": 5053,
+        "sha256": "b37f99785c2130da086ba77cb4c5c58ce5ffa9cad6bf69b00bf17e1f56bbda39"
+      },
+      "cases": [
+        "test_dead_qualifier_orphans_malformed_event_and_unregistered_comparator",
+        "test_all_new_sessions_receive_ownership_events",
+        "test_watchdog_cancels_science_before_unresponsive_root_grace",
+        "test_direct_execution_requires_verified_watchdog_route",
+        "test_wrapper_child_environment_identifies_only_actual_watchdog_parent",
+        "test_namespace_identity_and_memory_accounting_use_actionable_ids"
+      ],
+      "tests": 6,
+      "passed": 6,
+      "failed": 0,
+      "errors": 0,
+      "actual_exit": 0,
+      "wall_s": 1.7256605110014789,
+      "actual_fixture_python": "3.12.14",
+      "source_identities_match_frozen_sources": true,
+      "scope": "Injected nonphysical process/raw-value and directly affected ownership/RSS fixtures; not actual NCP numerical runtime admission."
+    },
+    "initial_nonphysical_independent_attempt": {
+      "actual_exit": 0,
+      "wall_s": 0.054009059007512406,
+      "execution_count": 1,
+      "cases": 6,
+      "new_OS_children": 0,
+      "new_physical_calls": 0
+    },
+    "unchanged_earlier_suites_not_rerun": true
+  },
+  "preserved_contract_checks": {
+    "whole_science_wall_s": 900,
+    "logical_full_G_max": 8,
+    "column_evaluations_max": 76800,
+    "repetitions": 2,
+    "automatic_retry": 0,
+    "shared_durable_reservations_before_launch": true,
+    "fresh_run_required": true,
+    "no_cross_run_reset_permission": true,
+    "existing_H_run_check": "Handoff obligation before launch; not a claimed global registry.",
+    "threads_per_numerical_pool": 1,
+    "maximum_cpu_capacity": 64,
+    "effective_fixed_process_slots": 6,
+    "max_workers_per_model": 29,
+    "target_capacity_layout": "wrapper1 + qualifier1 + lane2 + spawn support2 + worker58 =64",
+    "memory": "Actual bounded/available memory; reserve max(16GiB,1/8); paired reference24GiB; candidate parents4GiB + workers*512MiB + support64MiB + wrapper64MiB.",
+    "output_disk_min_GiB": 16,
+    "required_numeric_versions": {
+      "python": "3.12.3",
+      "numpy": "2.4.2",
+      "scipy": "1.17.0"
+    },
+    "same_runtime_raw_comparisons": 6,
+    "historical_identity_comparison_is_informational": true,
+    "performance": "Two same-input build-and-persist repetitions and median ratio only; PERFORMANCE_NOT_IMPROVED if slower; no extra sweep.",
+    "partial_raw_and_failures_preserved": true,
+    "whole_owned_group_cleanup_before_collection": true
+  },
+  "claim_ceiling": {
+    "preparation": "Source-pinned operational preparation for a finite full9600 same-runtime serial/column-parallel qualification.",
+    "actual_NCP_execution_admitted_by_this_result": false,
+    "actual_full9600_equivalence_established": false,
+    "NCP_performance_or_64CPU_scaling_established": false,
+    "physical_model_validated": false,
+    "old_F_operator_binding_closed": false,
+    "actual_result_requires_fresh_independent_review": true
+  },
+  "actual_execution_counts": {
+    "NCP_qualification_runs": 0,
+    "full9600_builds_in_this_preparation": 0,
+    "physical_calls_by_this_followup": 0,
+    "new_fixtures_by_this_followup": 0,
+    "old_suites_rerun_by_this_followup": 0,
+    "pulse": 0,
+    "expm": 0,
+    "resolvent": 0,
+    "linear_solve": 0,
+    "F_retry": 0,
+    "G_frontier": 0
+  },
+  "inherited_gates": {
+    "F": "HOLD_OPERATOR_BINDING_UNRESOLVED",
+    "G_frontier": "BLOCKED_BY_F_OPERATOR_BINDING_HOLD",
+    "PHYS02_DELAY": "OPEN",
+    "production_history": "HOLD",
+    "atomic_G02": "UNRESOLVED",
+    "b_grid": "NO_GO",
+    "all_bound": "OPEN",
+    "R17B2B": "NO_CERTIFIED_SOURCE_SHARPENING",
+    "CCC_2026_exporter_identity": "SOURCE_IDENTITY_UNRESOLVED"
+  },
+  "consulted_root_documents": {
+    "scope": "NCP promise/code consistency as read; not general scientific, publication or helper implementation approval.",
+    "documents": {
+      "REPORT_KO.md": {
+        "bytes": 18670,
+        "sha256": "19c81cdcdcbfc749c43267244bed5a48256bcb8e4e5fab196f8905ad0e3ef19e"
+      },
+      "START_NCP_CODEX_KO.md": {
+        "bytes": 13598,
+        "sha256": "265bba641b191e100e2ecc34c224b4871acb337b472bf59d4470d01ecc8e3570"
+      }
+    },
+    "NCP_promises_consistent_as_read": true
+  },
+  "exclusions": [
+    "Actual NCP run or returned raw result approval",
+    "Actual NCP speedup, memory aggregate or 64CPU scaling",
+    "Physical model, grid convergence, production history or prior source/operator gate closure",
+    "Publication, upload/backup, remote identity verification or restore success",
+    "Restore/publication helper implementation and execution",
+    "Outer package completeness, external START location/IDs, Git commit/tree authority",
+    "READY and other root metadata created or changed after this review"
+  ],
+  "next_required": [
+    "Bind this decision actual bytes/SHA with the exact v2 execution manifest and H input manifest in READY without a review/manifest self-reference cycle.",
+    "Verify complete restored source/input payload and actual runtime/resources at NCP admission.",
+    "Confirm no already-consumed or active H run before a first single wrapper execution; do not reset budget using a new directory.",
+    "Preserve success/failure raw values, reservations, partials, process/runtime/resource observations and actual collection manifest/receipt/logs.",
+    "Submit actual returned NCP results for a separate independent decision; retain all inherited gates."
+  ],
+  "evidence": {
+    "ncp/qualify_parallel.py": {
+      "bytes": 46532,
+      "sha256": "d9c393190a4930ca2749cc3bde9a6b75767481ee57cf727e03f05a3a212fb8b7"
+    },
+    "ncp/run_and_collect.py": {
+      "bytes": 19018,
+      "sha256": "c5d7ecd7c68082062a4ecf02092911c085c96d618347502725fc548dd6a80a06"
+    },
+    "tests/test_ncp_qualification.py": {
+      "bytes": 31796,
+      "sha256": "fe710252588b5cc13516ee3a8e3bfd260617bcf602c8248b4343f4f9d74e66f2"
+    },
+    "state/SCIENTIFIC_CONTRACT.json": {
+      "bytes": 8474,
+      "sha256": "a49b1fa88c86d46c4e37cdb7ba37fbd44e5fa05511febc3a3089ab5ed5331dc4"
+    },
+    "ncp/NCP_EXECUTION_CONTRACT.json": {
+      "bytes": 5514,
+      "sha256": "c47efd512545ef1862343889a7056b1c8dcd112137ef20c561e58460315ffd6f"
+    },
+    "ncp/NCP_RESOURCE_AMENDMENT.json": {
+      "bytes": 1450,
+      "sha256": "6c1b014cd66724bf85901c0644536b20ad6d01ce4dc793b6681698a00242c22f"
+    },
+    "ncp/NCP_WRAPPER_ACCOUNTING_AMENDMENT.json": {
+      "bytes": 2002,
+      "sha256": "95eb9e33bbdc5f277123c7b2fa221e0f79b0d42ca191062fabdccc0ee8dca144"
+    },
+    "inputs/INPUT_IDENTITIES.json": {
+      "bytes": 103894,
+      "sha256": "f5af93b53159fe189d2a0d0b78670b07c707f298927029ccfb5e39c25598bc2d"
+    },
+    "review/ncp/V2_DIRECT_PIN_READ_RECEIPT.json": {
+      "bytes": 12792,
+      "sha256": "64a6ca4a5c73a367779b7279f6d811585e131bc07e624cf1a004711beb75b97c"
+    },
+    "review/ncp/V2_STATIC_DELTA_RECEIPT.json": {
+      "bytes": 3041,
+      "sha256": "6afc7c502c664f9f7ceb6c14f0405fa190b2423f3725e6cccf9ab16551bd4747"
+    },
+    "review/ncp/REVIEW_KO.md": {
+      "bytes": 16760,
+      "sha256": "29ba4420b41cf1f028f19666c503620416b1ed295ef92782d097594e11c02c8f"
+    },
+    "evidence/ncp_validation/NAMESPACE_REPAIR_TEST_RECEIPT.json": {
+      "bytes": 5053,
+      "sha256": "b37f99785c2130da086ba77cb4c5c58ce5ffa9cad6bf69b00bf17e1f56bbda39"
+    },
+    "evidence/ncp_validation/NAMESPACE_REPAIR_TEST_RUNNER.py": {
+      "bytes": 2882,
+      "sha256": "8cff865477bf414e620dfc87a0e6372de55dea9ec0db6cf1ce5435c4c3c34849"
+    },
+    "evidence/ncp_validation/NAMESPACE_REPAIR_STDOUT.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence/ncp_validation/NAMESPACE_REPAIR_STDERR.txt": {
+      "bytes": 1162,
+      "sha256": "cdd3690e590ff33088a044318814085ab0367f76bf5297ebbfd642d1f8846f10"
+    },
+    "evidence/ncp_validation/CLEANUP_CORRECTION_TEST_RECEIPT.json": {
+      "bytes": 2226,
+      "sha256": "c29cda7aaed89036eb18af0ec2b413981d2f0a4d39404c4a9d694920d8fd04d2"
+    },
+    "evidence/ncp_validation/CLEANUP_CORRECTION_STDERR.txt": {
+      "bytes": 2876,
+      "sha256": "f0e9b4d456f4a68dc1790fa9e0d98ee3f3e10dc6ce3bdb13eb298dc343d1d4a0"
+    },
+    "evidence/ncp_validation/pre_namespace_mapping_correction/DIAGNOSIS_AND_PRESERVED_IDENTITIES.json": {
+      "bytes": 1500,
+      "sha256": "876c3d9c57f4d46f590bfe234b92430577581ef2df1eb701c35ef60edf75a42b"
+    }
+  }
+}

@@ -1,0 +1,185 @@
+{
+  "command": [
+    "timeout",
+    "120s",
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "/workspace/scratch/584ff08e1634/bass_cr_work/research/cr_phys02h_20261011/evidence/ncp_validation/NAMESPACE_REPAIR_TEST_RUNNER.py"
+  ],
+  "cases": [
+    "test_dead_qualifier_orphans_malformed_event_and_unregistered_comparator",
+    "test_all_new_sessions_receive_ownership_events",
+    "test_watchdog_cancels_science_before_unresponsive_root_grace",
+    "test_direct_execution_requires_verified_watchdog_route",
+    "test_wrapper_child_environment_identifies_only_actual_watchdog_parent",
+    "test_namespace_identity_and_memory_accounting_use_actionable_ids"
+  ],
+  "utc_started": "2026-10-11T09:32:33.140236+00:00",
+  "utc_finished": "2026-10-11T09:32:34.866100+00:00",
+  "wall_s": 1.7256605110014789,
+  "exit_code": 0,
+  "tests_run": 6,
+  "failures": [],
+  "errors": [],
+  "fixture_lifecycle_observations": [
+    {
+      "fixture": "dead_qualifier_orphan",
+      "before": {
+        "lifecycle": "LIVE",
+        "kernel_identity": {
+          "pid": 8,
+          "process_group": 8,
+          "session_id": 8,
+          "start_ticks": 7664975,
+          "uid": 0,
+          "state": "S",
+          "pid_namespace": "pid:[4026532347]",
+          "proc_directory": "/proc/197439",
+          "ancestor_proc_pid": 197439,
+          "ancestor_process_group": 197439,
+          "ancestor_session_id": 197439,
+          "namespace_ids": {
+            "NSpid": [
+              197439,
+              8
+            ],
+            "NSpgid": [
+              197439,
+              8
+            ],
+            "NSsid": [
+              197439,
+              8
+            ]
+          }
+        }
+      },
+      "after": {
+        "pid": 8,
+        "lifecycle": "GONE"
+      }
+    },
+    {
+      "fixture": "dead_qualifier_orphan",
+      "before": {
+        "lifecycle": "LIVE",
+        "kernel_identity": {
+          "pid": 9,
+          "process_group": 9,
+          "session_id": 9,
+          "start_ticks": 7664975,
+          "uid": 0,
+          "state": "S",
+          "pid_namespace": "pid:[4026532347]",
+          "proc_directory": "/proc/197440",
+          "ancestor_proc_pid": 197440,
+          "ancestor_process_group": 197440,
+          "ancestor_session_id": 197440,
+          "namespace_ids": {
+            "NSpid": [
+              197440,
+              9
+            ],
+            "NSpgid": [
+              197440,
+              9
+            ],
+            "NSsid": [
+              197440,
+              9
+            ]
+          }
+        }
+      },
+      "after": {
+        "pid": 9,
+        "lifecycle": "GONE"
+      }
+    },
+    {
+      "fixture": "watchdog_before_root_grace",
+      "before": {
+        "lifecycle": "LIVE",
+        "kernel_identity": {
+          "pid": 12,
+          "process_group": 12,
+          "session_id": 12,
+          "start_ticks": 7665032,
+          "uid": 0,
+          "state": "S",
+          "pid_namespace": "pid:[4026532347]",
+          "proc_directory": "/proc/197443",
+          "ancestor_proc_pid": 197443,
+          "ancestor_process_group": 197443,
+          "ancestor_session_id": 197443,
+          "namespace_ids": {
+            "NSpid": [
+              197443,
+              12
+            ],
+            "NSpgid": [
+              197443,
+              12
+            ],
+            "NSsid": [
+              197443,
+              12
+            ]
+          }
+        }
+      },
+      "after": {
+        "pid": 12,
+        "lifecycle": "ZOMBIE",
+        "kernel_identity": {
+          "pid": 12,
+          "process_group": 12,
+          "session_id": 12,
+          "start_ticks": 7665032,
+          "uid": 0,
+          "state": "Z",
+          "pid_namespace": "pid:[4026532347]",
+          "proc_directory": "/proc/197443",
+          "ancestor_proc_pid": 197443,
+          "ancestor_process_group": 197443,
+          "ancestor_session_id": 197443,
+          "namespace_ids": {
+            "NSpid": [
+              197443,
+              12
+            ],
+            "NSpgid": [
+              197443,
+              12
+            ],
+            "NSsid": [
+              197443,
+              12
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "first_cleanup_failure_instant_child_state": "NOT_OBSERVED",
+  "source_identities": {
+    "ncp/qualify_parallel.py": {
+      "bytes": 46532,
+      "sha256": "d9c393190a4930ca2749cc3bde9a6b75767481ee57cf727e03f05a3a212fb8b7"
+    },
+    "ncp/run_and_collect.py": {
+      "bytes": 19018,
+      "sha256": "c5d7ecd7c68082062a4ecf02092911c085c96d618347502725fc548dd6a80a06"
+    },
+    "tests/test_ncp_qualification.py": {
+      "bytes": 31796,
+      "sha256": "fe710252588b5cc13516ee3a8e3bfd260617bcf602c8248b4343f4f9d74e66f2"
+    }
+  },
+  "python": "3.12.14",
+  "actual_full_G_builds": 0,
+  "actual_physical_columns": 0,
+  "physical_pulse_calls": 0,
+  "old_suite_reruns": 0,
+  "assignment": "root-authorized bounded namespace/proc-view implementation repair",
+  "model_assignment": "requested gpt-6.1-sol; no backend attestation"
+}

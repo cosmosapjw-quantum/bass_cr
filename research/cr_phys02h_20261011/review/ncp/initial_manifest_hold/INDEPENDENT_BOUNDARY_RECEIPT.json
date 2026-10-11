@@ -1,0 +1,85 @@
+{
+  "schema": "cr-phys02h-independent-ncp-boundary-check.v1",
+  "start_utc": "2026-10-11T09:12:30.119517+00:00",
+  "command": [
+    "research/cr_phys02h_20261011/review/ncp/initial_manifest_hold/INDEPENDENT_NONPHYSICAL_BOUNDARY_CHECK.py"
+  ],
+  "timeout_s": 60,
+  "execution_count": 1,
+  "script_sha256": "a81a1679e5513f9d84f9d826c910b551ee8042e7c76f448a9f3e7c646c96c8e2",
+  "frozen_execution_manifest_sha256": "0a0281dccbbae4f53a167bdb0af421c2cf760f0ca0926c9be08f716887aab280",
+  "cases": [
+    {
+      "case": "qualifier_already_died_with_logged_separate_lane",
+      "qualifier_returncode": -9,
+      "owned_group_kill_calls": 0,
+      "collection_calls": 1,
+      "finding": "Collection starts without cleaning the recorded lane group."
+    },
+    {
+      "case": "truncated_START.json",
+      "error": {
+        "type": "JSONDecodeError",
+        "message": "Expecting property name enclosed in double quotes: line 2 column 1 (char 2)"
+      },
+      "raw_partial_exists": true,
+      "archive_created": false,
+      "finding": "Malformed metadata aborts collection instead of preserving raw evidence."
+    },
+    {
+      "case": "truncated_READY",
+      "error": {
+        "type": "JSONDecodeError",
+        "message": "Expecting property name enclosed in double quotes: line 2 column 1 (char 2)"
+      },
+      "raw_partial_exists": true,
+      "archive_created": false,
+      "finding": "Malformed metadata aborts collection instead of preserving raw evidence."
+    },
+    {
+      "case": "truncated_EXECUTION_MANIFEST",
+      "error": {
+        "type": "JSONDecodeError",
+        "message": "Expecting property name enclosed in double quotes: line 2 column 1 (char 2)"
+      },
+      "raw_partial_exists": true,
+      "archive_created": false,
+      "finding": "Malformed metadata aborts collection instead of preserving raw evidence."
+    },
+    {
+      "case": "truncated_INPUT_MANIFEST",
+      "error": {
+        "type": "JSONDecodeError",
+        "message": "Expecting property name enclosed in double quotes: line 2 column 1 (char 2)"
+      },
+      "raw_partial_exists": true,
+      "archive_created": false,
+      "finding": "Malformed metadata aborts collection instead of preserving raw evidence."
+    },
+    {
+      "case": "malformed_process_event_before_valid_owned_group",
+      "error": {
+        "type": "JSONDecodeError",
+        "message": "Expecting property name enclosed in double quotes: line 1 column 2 (char 1)"
+      },
+      "later_owned_group_kill_calls": 0,
+      "collection_calls": 0,
+      "terminal_wrapper_receipt_created": false,
+      "deadline_is_mocked": true,
+      "finding": "One malformed event blocks later cleanup and failure collection."
+    }
+  ],
+  "reproduced_cases": 6,
+  "new_OS_children": 0,
+  "new_physical_calls": 0,
+  "producer_test_reruns": 0,
+  "runtime_modules_absent": [
+    "numpy",
+    "scipy",
+    "parallel_operator"
+  ],
+  "status": "BLOCKING_FAILURE_BOUNDARIES_REPRODUCED",
+  "actual_exit": 0,
+  "end_utc": "2026-10-11T09:12:30.173534+00:00",
+  "wall_s": 0.054009059007512406
+}

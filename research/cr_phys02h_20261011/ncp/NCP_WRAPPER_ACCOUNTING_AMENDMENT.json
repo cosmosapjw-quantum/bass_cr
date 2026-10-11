@@ -1,0 +1,23 @@
+{
+  "schema": "cr-phys02h-ncp-wrapper-accounting-amendment.v1",
+  "status": "FROZEN_BEFORE_NCP_EXECUTION_AND_FINAL_EXECUTION_MANIFEST",
+  "amends": ["ncp/NCP_EXECUTION_CONTRACT.json", "ncp/NCP_RESOURCE_AMENDMENT.json"],
+  "reason": "Root integration of final wrapper source observes one persistent run_and_collect watchdog process in addition to the qualify_parallel root. Earlier fixed5 and peak63 omitted this watchdog. Count it explicitly; preserve both earlier contracts and the initially tested source.",
+  "overrides": {
+    "wrapper_watchdog_processes": 1,
+    "root_coordinators": 1,
+    "lane_coordinators": 2,
+    "spawn_support_processes": 2,
+    "total_fixed_cpu_slots": 6,
+    "workers_per_model_cpu_cap": "floor((min(64,actual_allowed_cpu_capacity)-6)/2)",
+    "workers_per_model_max": 29,
+    "total_fixed_wrapper_memory_bytes": 67108864,
+    "total_fixed_support_memory_bytes": 67108864,
+    "candidate_memory": "two lane parents + two*workers_per_model*512MiB +64MiB support +64MiB wrapper within actual available working memory; root is covered by retained reserve; paired reference24GiB and reserve requirement unchanged"
+  },
+  "actual_64cpu_layout": "wrapper1 + qualifier root1 + lane2 + support2 + workers29*2 =64 reserved slots; no spare-slot guarantee",
+  "actual_63cpu_layout": "workers28*2 +6 fixed =62 reserved slots",
+  "source_binding": "Input and execution manifests, independent NCP preparation decision, and READY must pin this amendment. Even a direct qualifier call uses the conservative wrapper-inclusive admission.",
+  "correction_authorization": "Root permits one bounded implementation/accounting correction with preserved original source and affected fixture checks <=120s. No scalar or local scientific pilot rerun and no actual full9600 execution here.",
+  "unchanged": "Scientific equations, raw exact parity acceptance, original inputs, two repetitions,8 logical builds,76800 columns,900s cumulative command, no retry and inherited HOLDs remain unchanged."
+}
