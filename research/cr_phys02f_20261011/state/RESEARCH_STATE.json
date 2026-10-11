@@ -1,0 +1,80 @@
+{
+  "schema": "cr-phys02f-research-state.v1",
+  "task": "CR-PHYS02F-TAIL-CENSORING-AND-RESIDENCE",
+  "phase": "FROZEN_FOR_PUBLICATION",
+  "baseline_actual_status": "PR35 actualpulse2/2 completed PASS_SCOPED, consumed",
+  "current_results": {
+    "tail_scalar_analysis": "NUMERICALLY_CHECKED_SAVED_9600",
+    "exact_theory_toy": {
+      "identities": 63,
+      "runs": 1,
+      "exit": 0
+    },
+    "scalar_tests": {
+      "distinct": 4,
+      "first_exit": 0
+    },
+    "actual_analysis": {
+      "runs": 1,
+      "exit": 0,
+      "wall_s": 1.65775
+    },
+    "ncp_targeted_tests": {
+      "distinct_rows": 12,
+      "executions": 24,
+      "commands": 3,
+      "subprocess_wall_s": 1.903915392,
+      "first_failure": "COLLECTOR_TEST_FIXTURE_GLOBAL_SHA_MOCK",
+      "repair": "pinconstantfixture; finaltargetedclosure8PASS"
+    },
+    "new_physical_G": 0,
+    "new_physical_pulse": 0,
+    "new_expm": 0
+  },
+  "ncp_task": "CR-PHYS02F-NCP-ADJOINT-RESIDENCE",
+  "ncp_status": "READY_FRESH_BUDGET_PENDING_DETACHED_ARCHIVE_GATE_AND_ACTUAL_NCP_CHECKS",
+  "claim_ceiling": [
+    "Current analysis derived/numerically checked from actual saved9600 only.",
+    "Kernel-weighted heat delays; not particle lifetimes, delayed fractions of all source energy, or cosmological production times.",
+    "Conditional continuation of the frozen finite operator; long-time bath validity not established.",
+    "CDF is heat-normalized; kernel_per_s itself is unnormalized and requires H0 division for density.",
+    "Grid convergence and continuum tail stability remain UNRESOLVED.",
+    "NCP residence diagnostics prepared/tested only until actual execution return."
+  ],
+  "inherited_gates": {
+    "PHYS02_DELAY": "OPEN",
+    "production_history": "HOLD",
+    "atomic_G02": "UNRESOLVED",
+    "b_grid": "NO_GO",
+    "all_bound": "OPEN",
+    "R17B2B": "NO_CERTIFIED_SOURCE_SHARPENING",
+    "CCC_2026_exporter_identity": "SOURCE_IDENTITY_UNRESOLVED"
+  },
+  "decision_pointer": "review/INDEPENDENT_DECISION.json",
+  "evidence_pointers": [
+    "evidence/analysis/RESULTS_SUMMARY.json",
+    "evidence/analysis/NUMERICAL_ARTIFACT.json",
+    "research/theory/EXACT_TOY_RUN_RECEIPT.json",
+    "evidence/ncp_validation/WORKER_RESULT.json",
+    "evidence/ncp_validation/CLOSURE_EXIT.json"
+  ],
+  "completion_pending": [
+    "final source publication",
+    "one clean final ZIP restore + stdlib plan",
+    "create-only dual backup"
+  ],
+  "future_actual_NCP": "NOT_EXECUTED",
+  "decision": "PASS_SCOPED",
+  "independent_review": {
+    "path": "review/INDEPENDENT_DECISION.json",
+    "bytes": 27105,
+    "sha256": "46a432333374b85a77cfd5bd1d4c266123c2188335f4621549fdbdbad80870c2"
+  },
+  "review_saved_arithmetic": {
+    "commands": 1,
+    "comparisons": 516,
+    "exit": 0,
+    "maximum_fraction_of_scalar_tolerance": 0.0007511332161403407,
+    "candidate_analysis_rerun": false
+  }
+}

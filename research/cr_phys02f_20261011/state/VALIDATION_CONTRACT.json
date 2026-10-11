@@ -1,0 +1,31 @@
+{
+  "schema": "cr-phys02f-validation.v1",
+  "scalar_finite_positive": "Reject nonfinite, negative yield, nonpositive T, incompatible moments beyond frozen tolerances; exact zero-probability events return UNDEFINED_ZERO_EVENT_PROBABILITY without NaN or division.",
+  "moment_compatibility_absolute": 2e-12,
+  "scalar_identity_relative": 2e-12,
+  "scalar_identity_absolute_dimensionless": 2e-14,
+  "decimal_precision": 80,
+  "decimal_vs_fp64_relative": 2e-12,
+  "exact_fraction": "Exact rational tests of censoring, event decomposition, mixture total variance, zero-probability edges; no shared implementation oracle.",
+  "adjoint_scaled_residual": 5e-11,
+  "adjoint_relative_nonnegative": 2e-12,
+  "physical_scalar_crosschecks_relative": 5e-10,
+  "physical_scalar_crosschecks_absolute_normalized": 1e-12,
+  "no_silent_negative_variance": "Raw negative variance retained; std null plus typed issue unless an actually positive variance exists; significant negative fails.",
+  "operator_match": "Before any resolvent reservation compare exact CSC shape, nnz, all three raw array SHA256s, saved E and parent method object identity to PR35 completed G. Mismatch typed OPERATOR_IDENTITY_MISMATCH; no fallback, no solves.",
+  "graph_structure": "Check Metzler active block, exact upper triangularity, negative active diagonal, nonnegative heat row, absorbing ledgers; never solve full generator.",
+  "adjoint_oracle": "Small <=8 active states; exact Fraction upper triangular reference and independent forward/adjoint identity, optional analytic density integrals. Test q0, q1, q2, w, v and bin partition.",
+  "scope": "Physical checks in NCP are same-operator identities and mechanistic diagnostic of named9600 only; neither independent physical validation nor mesh convergence.",
+  "tests": [
+    "TC01 exact censoring and mixture identities",
+    "TC02 offline two-model analysis once with Decimal independent arithmetic",
+    "TC03 typed degenerate/malformed input",
+    "TA01 exact small active adjoint/forward oracle",
+    "TA02 bin conservation and no clipping",
+    "TA03 corrupted pulse/source/G identity fail-before-resolvent",
+    "TO01 stdlib admission and unspent distinct budget",
+    "TO02 reservation/completion and wrapper exit propagation",
+    "TO03 collector self-contained exact membership",
+    "TO04 clean final archive restore and plan (no numerical import or G)"
+  ]
+}

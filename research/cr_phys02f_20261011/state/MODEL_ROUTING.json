@@ -1,0 +1,68 @@
+{
+  "schema": "cr-phys02f-model-routing.v1",
+  "root_host_label": "GPT-6 Astra Pro",
+  "label_source": "Current developer metadata",
+  "router_exact_alias_match": false,
+  "alias_issue": "Pro suffix is not a registered exact alias; no substring or suffix normalization used",
+  "harness_selection_basis": "Continuation of already adopted exact GPT-6 Astra v4.0.0 project harness; canonical package bytes verified from prior complete handoff; next bounded math independent of unresolved exact alias",
+  "execution_model_independently_verified": false,
+  "model_switched_by_router": false,
+  "cost_or_performance_claim": "NOT_EVALUATED",
+  "research_package": {
+    "library_file_id": "libfile_07a54bff29548191bb87edd4bbe9cc73",
+    "sha256": "dae76c90f2e5d691bcdd595dadbe470bacacba3bb2a036ff9788ffe7d3bfabb7"
+  },
+  "coding_package": {
+    "library_file_id": "libfile_b1f31b28c0688191a06a4ae8f943d862",
+    "sha256": "dc99e7ab2f9629dcce3ec0758d97e19acc5b645f86e208d1b338bb6430ff8d7a"
+  },
+  "entrypoints_read": [
+    "harness/START_HERE.md",
+    "harness/PROJECT_INSTRUCTIONS.md",
+    "harness/prompts/00_integrated_work_run.md",
+    "harness/docs/MODEL_ROUTING.md",
+    "harness/prompts/phases/06_physics_math_validation.md",
+    "harness/prompts/phases/07_verification_design.md",
+    "harness/prompts/phases/08_external_decision_gate.md",
+    "coding_harness/START_HERE.md",
+    "coding_harness/AGENTS.md",
+    "coding_harness/SCIENTIFIC_CONTRACT.md",
+    "coding_harness/docs/MODEL_ROUTING.md",
+    "coding_harness/prompts/01_deep_once.md"
+  ],
+  "coding_package_structure_check": {
+    "command": [
+      "python3",
+      "/workspace/scratch/584ff08e1634/coding_harness/tools/validate_harness.py",
+      "--json"
+    ],
+    "actual_exit": 0,
+    "package_structure": "PASS",
+    "scientific_acceptance": "NOT_EVALUATED",
+    "model_performance": "NOT_EVALUATED"
+  },
+  "workers": {
+    "phys02f_tail_analysis_impl": {
+      "requested_model": "gpt-6.1-sol",
+      "role": "CONTRACT_PRESERVING_IMPLEMENTATION",
+      "basis": "existing project Astra tier routing policy",
+      "backend_identity": "NOT_INDEPENDENTLY_VERIFIED"
+    },
+    "phys02f_ncp_impl": {
+      "requested_model": "gpt-6.1-sol",
+      "role": "CONTRACT_PRESERVING_IMPLEMENTATION",
+      "basis": "existing project Astra tier routing policy",
+      "backend_identity": "NOT_INDEPENDENTLY_VERIFIED"
+    },
+    "phys02f_tail_theory": {
+      "role": "ASTRA_THEORY_CONTRIBUTOR",
+      "candidate_contributor": true
+    },
+    "phys02f_remote_intake": {
+      "role": "ASTRA_SOURCE_INTAKE_AND_LATER_INDEPENDENT_REVIEW",
+      "candidate_contributor": false,
+      "acceptance_designer": false,
+      "implementation_contributor": false
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "schema": "cr-phys02f-numerical-convention-clarification.v1",
+  "owner": "root scientific acceptance owner",
+  "recorded_utc": "2026-10-11 05:36:47 UTC",
+  "trigger": "Independent review found that the frozen adjoint_relative_nonnegative key names only the coefficient, while the inherited implementation includes a unit scale floor.",
+  "scientific_contract_sha256": "b50c316e91ebea6b1d0e5a43367b1cb31ae8836af328521fb366af9f54e35ccf",
+  "validation_contract_sha256": "aa346614c4c444bac423eabd286939a4a1d2db20c0bb8e19281608f0ac778896",
+  "interpretation_status": "Explicit owner clarification before any actual PHYS02F NCP physics execution; subject to independent review.",
+  "generic_solve_nonnegative": {
+    "objects": ["q0", "q1", "q2", "w", "v"],
+    "coefficient": 2e-12,
+    "scale": "max(1, max(abs(result))) over every entry of each returned vector or multi-RHS matrix, in its declared dimensionless coordinates",
+    "reject_if": "min(result) < -2e-12 * max(1, max(abs(result)))",
+    "kind": "Mixed absolute/relative numerical guard, not a purely relative tolerance.",
+    "retention": "Retain signed values and residuals. Never clip or replace negative entries. This guard does not establish a relative accuracy claim for entries close to zero."
+  },
+  "q0_separate_physical_bound": {
+    "reject_if": "min(q0) < -2e-12 or max(q0) > 1 + 2e-12",
+    "kind": "Absolute physical range guard, in addition to generic solve residual and nonnegativity guards."
+  },
+  "unchanged": [
+    "All five frozen contract/input/dependency bytes and SHA256 identities",
+    "All candidate source, tests, saved numerical evidence and numerical thresholds",
+    "Solve scaled residual ceiling 5e-11",
+    "Scalar and bin crosscheck absolute 1e-12 plus relative 5e-10 in normalized coordinates",
+    "No clipping, fixed operator identity and inherited scientific claim limits"
+  ],
+  "additional_execution": "None. This resolves a naming ambiguity in existing code; it does not respond to a failed physical result or authorize another run.",
+  "actual_PHYS02F_physical_G_builds_so_far": 0,
+  "actual_PHYS02F_physical_solve_calls_so_far": 0
+}
