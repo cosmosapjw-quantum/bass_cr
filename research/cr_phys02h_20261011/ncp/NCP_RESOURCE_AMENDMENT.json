@@ -1,0 +1,20 @@
+{
+  "schema":"cr-phys02h-ncp-resource-amendment.v1",
+  "status":"FROZEN_BEFORE_NCP_EXECUTION",
+  "amends":"ncp/NCP_EXECUTION_CONTRACT.json",
+  "reason":"Completed local spawn pilot exposes multiprocessing resource-tracker support process, which is outside worker/coordinator ru_maxrss. Account for both model-lane support processes explicitly in NCP CPU and memory admission; preserve original contract as initial record.",
+  "overrides":{
+    "root_coordinators":1,
+    "lane_coordinators":2,
+    "spawn_support_processes":2,
+    "total_fixed_cpu_slots":5,
+    "workers_per_model_cpu_cap":"floor((min(64,actual_allowed_cpu_capacity)-5)/2)",
+    "workers_per_model_max":29,
+    "support_process_memory_bytes_each":33554432,
+    "total_fixed_support_memory_bytes":67108864,
+    "candidate_memory":"two lane parents + two*workers_per_model*512MiB +64MiB support within actual available working memory; reference lanes keep original24GiB aggregate minimum"
+  },
+  "unchanged":"Logical build/column/time budgets, atomic and numerical semantics, actual comparison criterion, no retry and inherited HOLDs remain unchanged.",
+  "source_binding":"Execution-source manifest and NCP_READY independent review must pin this amendment. Launcher plan must display effective5fixed slots and actualworker count; no64CPU or128GiB assumption from label.",
+  "actual_64cpu_layout":"root1 + lane2 + support2 + workers29*2 =63 reserved slots, at least1 CPU slot spare"
+}

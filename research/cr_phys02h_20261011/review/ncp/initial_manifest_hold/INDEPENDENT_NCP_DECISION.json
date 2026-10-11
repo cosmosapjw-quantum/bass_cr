@@ -1,0 +1,122 @@
+{
+  "schema": "cr-phys02h-independent-ncp-decision.v1",
+  "unit": "CR-PHYS02H-NCP-FULL9600-COLUMN-PARALLEL-QUALIFICATION",
+  "status": "HOLD",
+  "decision_utc": "2026-10-11T09:14:37.170542+00:00",
+  "independent_of_implementation": true,
+  "ncp_preparation_admitted": false,
+  "execution_manifest_sha256": "0a0281dccbbae4f53a167bdb0af421c2cf760f0ca0926c9be08f716887aab280",
+  "reviewer": {
+    "agent": "/root/phys02h_decision_review",
+    "candidate_participation": false,
+    "acceptance_design_participation": false,
+    "implementation_participation": false,
+    "workflow": "Source-bound canonical Astra v4.0.0",
+    "exact_backend_alias": "MODEL_UNRESOLVED"
+  },
+  "blocking_findings": [
+    {
+      "id": "NCP-H01",
+      "severity": "blocking",
+      "kind": "runtime_cleanup",
+      "location": "run_and_collect.py:execute_and_collect finally",
+      "finding": "Already-dead qualifier skips cleanup of separately owned logged lane groups before collection.",
+      "evidence": "Mock returncode -9 yields killpg0 and collect1."
+    },
+    {
+      "id": "NCP-H02",
+      "severity": "blocking",
+      "kind": "failure_collection",
+      "location": "run_and_collect.py:collect metadata parsing",
+      "finding": "Truncated START, READY, execution manifest or input manifest raises JSONDecodeError and prevents archiving available raw failure/partial values.",
+      "evidence": "Four independent literal malformed-JSON fixtures; no archive created."
+    },
+    {
+      "id": "NCP-H03",
+      "severity": "blocking",
+      "kind": "runtime_cleanup_and_collection",
+      "location": "run_and_collect.py:PROCESS_EVENTS.jsonl loop in finally",
+      "finding": "One malformed event blocks later valid group cleanup, terminal wrapper receipt and collection.",
+      "evidence": "Mock timeout with malformed first line then valid group gives killpg0, collect0 and no wrapper terminal receipt."
+    },
+    {
+      "id": "NCP-H04",
+      "severity": "blocking",
+      "kind": "persistent_process_ownership",
+      "location": "qualify_parallel.py:execute comparator Popen",
+      "finding": "Fresh comparator process groups are not appended to PROCESS_EVENTS and cannot be recovered by the wrapper after abrupt root death.",
+      "evidence": "Static source read: numerical lanes log Popen process_group; comparator block does not."
+    },
+    {
+      "id": "NCP-H05",
+      "severity": "blocking",
+      "kind": "deadline_enforcement",
+      "location": "run_and_collect.py:qualifier terminate then wait(timeout=8)",
+      "finding": "If root cannot clean up, science groups may continue through the root grace after the900s deadline.",
+      "evidence": "Static source read: logged lane-group fallback kill occurs after root wait."
+    }
+  ],
+  "independent_nonphysical_evidence": {
+    "start_utc": "2026-10-11T09:12:30.119517+00:00",
+    "end_utc": "2026-10-11T09:12:30.173534+00:00",
+    "status": "BLOCKING_FAILURE_BOUNDARIES_REPRODUCED",
+    "actual_exit": 0,
+    "wall_s": 0.054009059007512406,
+    "execution_count": 1,
+    "timeout_s": 60,
+    "reproduced_cases": 6,
+    "new_OS_children": 0,
+    "new_physical_calls": 0,
+    "producer_test_reruns": 0
+  },
+  "evidence": {
+    "ncp/EXECUTION_SOURCE_MANIFEST.json": {
+      "bytes": 4181,
+      "sha256": "0a0281dccbbae4f53a167bdb0af421c2cf760f0ca0926c9be08f716887aab280"
+    },
+    "ncp/qualify_parallel.py": {
+      "bytes": 39180,
+      "sha256": "7a986b12852ad6163ad2808ac47239ff43e64e584b6e414a700bb03754b75ec3"
+    },
+    "ncp/run_and_collect.py": {
+      "bytes": 10198,
+      "sha256": "31955b87e51cffbbaf6e671b8f6e016c0622fe51d24c2cf00f00cd363d49112b"
+    },
+    "tests/test_ncp_qualification.py": {
+      "bytes": 18862,
+      "sha256": "4e297c87f4ae6c43e3fa3caf3d62949091216b24bc453de1e73f64e40061d050"
+    },
+    "INDEPENDENT_NONPHYSICAL_BOUNDARY_CHECK.py": {
+      "bytes": 7230,
+      "sha256": "a81a1679e5513f9d84f9d826c910b551ee8042e7c76f448a9f3e7c646c96c8e2"
+    },
+    "INDEPENDENT_BOUNDARY_RECEIPT.json": {
+      "bytes": 3049,
+      "sha256": "e53d25e8255d62e4a8fbbce31f73c062cc503fff4b3c22679780f59c60a5e0ca"
+    },
+    "INDEPENDENT_BOUNDARY_STDOUT.txt": {
+      "bytes": 103,
+      "sha256": "a9d78e76ef4edf15902e3a43789ca2695083ccc4b4f75b97e0d70aa154e9419e"
+    },
+    "INDEPENDENT_BOUNDARY_STDERR.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "DIRECT_PIN_READ_RECEIPT.json": {
+      "bytes": 6343,
+      "sha256": "ccfd16b530f31a18b177ca1d68b47851119e99169e7e68b7d02f8207a8aad1c4"
+    },
+    "REVIEW_KO.md": {
+      "bytes": 7083,
+      "sha256": "971a83572c96530a4961fa029b0d26bd140385a24e15aa5835021d6a08284c8e"
+    }
+  },
+  "prior_scoped_decisions_unchanged": {
+    "exact_scalar": "51d7f9c85c590b75de9d110110108f2ba66f189a34c2b665dde656b62a827392",
+    "parallel_local": "6781c218148f586351e0978ae1133de4923eceb2930d4a8f7ca8bd866744c84d"
+  },
+  "actual_NCP_qualification_runs": 0,
+  "actual_full9600_builds_by_reviewer": 0,
+  "scope": "Initial frozen NCP preparation packet only. Preserve this HOLD and original source; any corrected preparation uses a new execution manifest and a separate scoped decision. Publication, backup restore/helper execution and root postreview metadata are not approved by this record.",
+  "required_followup": "Implementation worker repairs only existing cleanup/collection/deadline obligations, preserves initial failures, and supplies affected nonphysical fixture evidence plus a new frozen execution manifest. No scalar/local/physics rerun is required."
+}

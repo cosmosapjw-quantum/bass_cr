@@ -1,0 +1,13 @@
+{
+  "schema": "cr-phys02h-independent-finding-correction.v1",
+  "status": "ROOT_AUTHORIZED_BOUNDED_IMPLEMENTATION_REPAIR",
+  "reviewed_initial_execution_manifest": {"path":"ncp/EXECUTION_SOURCE_MANIFEST.json", "sha256":"0a0281dccbbae4f53a167bdb0af421c2cf760f0ca0926c9be08f716887aab280"},
+  "finding": "Independent reviewer found that watchdog cleanup of recorded lane process groups only runs while qualifier root is alive. If qualifier already died by SIGKILL/OOM/abnormal exit, owned lane/worker sessions can remain alive during collection.",
+  "required_behavior": "Before collection, clean up the owned groups for this fresh execution regardless of qualifier exit state. Do not indiscriminately kill other processes. Preserve actual failure, exits, recorded group evidence and partial values. Malformed control records must be preserved as typed collection limitations without preventing raw evidence collection.",
+  "preservation": "Initial frozen execution manifest and exact initial candidate code/test bytes are retained. Revised manifest is separately versioned for a scoped independent follow-up. Earlier tests, observed warning, accounting corrections and first HOLD finding remain visible.",
+  "scope": "One additional lower-worker correction admitted by root under the scientific contract's escalation rule. It fulfills the original failure cleanup/collection requirement; it does not relax scientific acceptance.",
+  "affected_verification": "One bounded <=120s nonphysical fixture batch for already-dead qualifier with surviving owned group and malformed control-record/raw-value collection, plus only directly affected mocked paths. No old suite, exact analysis or local scientific pilot rerun.",
+  "unchanged": {"inputs_files":549,"NCP_wall_s":900,"NCP_logical_full_builds":8,"NCP_column_evaluations":76800,"NCP_automatic_retry":0,"full9600_builds_here":0,"new_pulse":0,"new_expm":0,"new_solve":0,"F_retry":0},
+  "authority": "Existing user authorization to complete the research/handoff and developer authorization to fix reversible work; no additional user approval is required for this contract-conforming repair.",
+  "independent_followup_required": true
+}

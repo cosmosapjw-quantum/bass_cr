@@ -1,0 +1,97 @@
+{
+  "schema": "cr-phys02h-ncp-v2-independent-static-delta-read.v1",
+  "utc": "2026-10-11T09:37:47.647331+00:00",
+  "scope": "Read-only AST and persisted evidence identity comparison; no producer import or execution.",
+  "definition_deltas": {
+    "ncp/qualify_parallel.py": {
+      "new_top_level_definitions": [
+        "kernel_process_identity",
+        "proc_namespace_identity",
+        "process_lifecycle",
+        "register_session",
+        "require_wrapper"
+      ],
+      "changed_existing_top_level_definitions": [
+        "execute",
+        "monitor_check",
+        "process_measurements"
+      ],
+      "unchanged_existing_top_level_definitions": [
+        "Budget",
+        "Hold",
+        "admission",
+        "append_durable",
+        "bound_sources",
+        "candidate_build",
+        "check_deadline",
+        "cleanup_groups",
+        "compare_lanes",
+        "contract",
+        "counts",
+        "file_identity",
+        "historical_comparisons",
+        "lane",
+        "load_builder",
+        "load_ops",
+        "main",
+        "plan",
+        "runtime_preflight",
+        "safe_relative",
+        "sha",
+        "sync_dir",
+        "tile_worker",
+        "utc",
+        "verify_job",
+        "verify_manifest",
+        "verify_pin",
+        "wait_lanes",
+        "write_new"
+      ],
+      "removed_top_level_definitions": []
+    },
+    "ncp/run_and_collect.py": {
+      "new_top_level_definitions": [
+        "cancel_owned_sessions",
+        "control_json",
+        "owned_session_groups"
+      ],
+      "changed_existing_top_level_definitions": [
+        "collect",
+        "execute_and_collect"
+      ],
+      "unchanged_existing_top_level_definitions": [
+        "main"
+      ],
+      "removed_top_level_definitions": []
+    }
+  },
+  "final_fixture_source_identities_match": {
+    "ncp/qualify_parallel.py": true,
+    "ncp/run_and_collect.py": true,
+    "tests/test_ncp_qualification.py": true
+  },
+  "failed_intermediate_source_and_evidence_preserved": {
+    "ncp/qualify_parallel.py": true,
+    "ncp/run_and_collect.py": true,
+    "tests/test_ncp_qualification.py": true,
+    "evidence/ncp_validation/CLEANUP_CORRECTION_TEST_RECEIPT.json": true,
+    "evidence/ncp_validation/CLEANUP_CORRECTION_STDERR.txt": true
+  },
+  "initial_hold_sources_identical_to_pre_cleanup_correction": {
+    "ncp/EXECUTION_SOURCE_MANIFEST.json": true,
+    "ncp/qualify_parallel.py": true,
+    "ncp/run_and_collect.py": true,
+    "tests/test_ncp_qualification.py": true
+  },
+  "current_namespace_fixture_cases": [
+    "test_dead_qualifier_orphans_malformed_event_and_unregistered_comparator",
+    "test_all_new_sessions_receive_ownership_events",
+    "test_watchdog_cancels_science_before_unresponsive_root_grace",
+    "test_direct_execution_requires_verified_watchdog_route",
+    "test_wrapper_child_environment_identifies_only_actual_watchdog_parent",
+    "test_namespace_identity_and_memory_accounting_use_actionable_ids"
+  ],
+  "actual_followup_independent_fixture_runs": 0,
+  "actual_physical_calls": 0,
+  "actual_ncp_runs": 0
+}

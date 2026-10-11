@@ -1,0 +1,28 @@
+{
+  "schema": "cr-phys02h-root-namespace-repair-authorization.v1",
+  "status": "ROOT_AUTHORIZED_MINIMAL_DIRECTLY_AFFECTED_REPAIR",
+  "authorization_record": "Transcription of the already-issued root collaboration instruction. Its exact tool timestamp is not reconstructed here.",
+  "diagnosis_evidence": "evidence/ncp_validation/pre_namespace_mapping_correction/DIAGNOSIS_AND_PRESERVED_IDENTITIES.json",
+  "preserved_failed_batch": "evidence/ncp_validation/CLEANUP_CORRECTION_TEST_RECEIPT.json",
+  "finding": "The current PID namespace used by os.getpid/killpg differs from the ancestor namespace exposed by mounted procfs. Accessing /proc/<syscall PID> or signalling a procfs-namespace PGID does not identify the intended process. The first affected batch had six passes, one failure and one error.",
+  "allowed_repair": [
+    "Use /proc/self, PID-namespace inode and NSpid/NSpgid/NSsid to distinguish syscall namespace identities from ancestor procfs paths.",
+    "Apply that mapping consistently to owned-process discovery, parent route validation, environment/command-line reads, process-group signalling and observed process states.",
+    "Correct directly affected process_measurements group matching and wrapper RSS lookups; preserve their actual observation scope.",
+    "Preserve ambiguous or unobserved mappings as typed HOLD/warnings. Never signal unrelated namespaces or process groups."
+  ],
+  "verification_limit": "One <=120-second batch containing only the two failed cases and directly affected cleanup/watchdog/guard/session-registration/memory-accounting cases. No scalar rerun, scientific pilot rerun, complete old suite, NCP full9600 or independent-review fixture rerun.",
+  "preservation": "Keep the first failed source/test bytes, first failed batch and diagnosis. Report new fixture before/after states as alive, zombie or gone when observed. The original failed fixture's state at failure remains NOT_OBSERVED.",
+  "measurement_limit": "Corrected future observation does not upgrade earlier sampled worker/coordinator lifetime RSS into measured concurrent total process memory.",
+  "unchanged": {
+    "input_files": 549,
+    "NCP_whole_command_wall_s": 900,
+    "NCP_logical_full_builds": 8,
+    "NCP_column_evaluations": 76800,
+    "automatic_retry": 0,
+    "physical_source_changes": 0,
+    "full9600_builds_here": 0
+  },
+  "authority": "Root escalation allowed by SCIENTIFIC_CONTRACT.json and existing user instruction to complete the research and concrete NCP handoff. No further user permission is required for this reversible contract-conforming correction.",
+  "independent_final_manifest_review_required": true
+}

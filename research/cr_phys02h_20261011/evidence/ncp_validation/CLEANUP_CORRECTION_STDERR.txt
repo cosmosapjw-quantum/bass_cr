@@ -1,0 +1,30 @@
+test_direct_execution_requires_verified_watchdog_route (test_ncp_qualification.NCPQualificationTests.test_direct_execution_requires_verified_watchdog_route) ... ok
+test_malformed_control_files_do_not_block_raw_collection (test_ncp_qualification.NCPQualificationTests.test_malformed_control_files_do_not_block_raw_collection) ... ok
+test_dead_qualifier_orphans_malformed_event_and_unregistered_comparator (test_ncp_qualification.NCPQualificationTests.test_dead_qualifier_orphans_malformed_event_and_unregistered_comparator) ... FAIL
+test_watchdog_cancels_science_before_unresponsive_root_grace (test_ncp_qualification.NCPQualificationTests.test_watchdog_cancels_science_before_unresponsive_root_grace) ... ok
+test_all_new_sessions_receive_ownership_events (test_ncp_qualification.NCPQualificationTests.test_all_new_sessions_receive_ownership_events) ... ERROR
+test_injected_eight_build_schedule_fresh_runs_and_accounting (test_ncp_qualification.NCPQualificationTests.test_injected_eight_build_schedule_fresh_runs_and_accounting) ... ok
+test_wrapper_child_environment_identifies_only_actual_watchdog_parent (test_ncp_qualification.NCPQualificationTests.test_wrapper_child_environment_identifies_only_actual_watchdog_parent) ... ok
+test_failed_partial_counts_and_collection_contains_values_after_deadline (test_ncp_qualification.NCPQualificationTests.test_failed_partial_counts_and_collection_contains_values_after_deadline) ... ok
+
+======================================================================
+ERROR: test_all_new_sessions_receive_ownership_events (test_ncp_qualification.NCPQualificationTests.test_all_new_sessions_receive_ownership_events)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/584ff08e1634/bass_cr_work/research/cr_phys02h_20261011/tests/test_ncp_qualification.py", line 340, in test_all_new_sessions_receive_ownership_events
+    self.assertEqual(event['kernel_identity']['session_id'],process.pid)
+                     ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+KeyError: 'session_id'
+
+======================================================================
+FAIL: test_dead_qualifier_orphans_malformed_event_and_unregistered_comparator (test_ncp_qualification.NCPQualificationTests.test_dead_qualifier_orphans_malformed_event_and_unregistered_comparator)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/584ff08e1634/bass_cr_work/research/cr_phys02h_20261011/tests/test_ncp_qualification.py", line 279, in test_dead_qualifier_orphans_malformed_event_and_unregistered_comparator
+    self.assertTrue(set(children).issubset(signaled))
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 8 tests in 1.562s
+
+FAILED (failures=1, errors=1)
