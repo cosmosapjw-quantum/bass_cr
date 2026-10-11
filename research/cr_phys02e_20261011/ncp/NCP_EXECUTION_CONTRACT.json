@@ -1,0 +1,215 @@
+{
+  "schema": "cr-phys02e-ncp-contract.v1",
+  "task": "CR-PHYS02E-NCP-SAVED-GRID-PULSE",
+  "new_authorization_identity": "PHYS02E_FRESH_REVIEW_BOUND_BATCH_20261011",
+  "authority": "Current user continuation request; executable admission remains HOLD until a new independent PASS_SCOPED is bound in NEXT_DAG. This is not reuse of PHYS02D reservation.",
+  "models_in_order": [
+    "fullBED",
+    "legacy"
+  ],
+  "grid_cells": [
+    3200,
+    6400
+  ],
+  "max_G_builds": 2,
+  "max_pulse_calls": 2,
+  "whole_coordinator_wall_s": 3600,
+  "runtime": {
+    "python": "3.12.3",
+    "numpy": "2.4.2",
+    "scipy": "1.17.0",
+    "numeric_threads": 1
+  },
+  "plan": "stdlib only; input/manifest/review/DAG verification and resource probe; exit0 is not admission",
+  "preflight": "explicit numerical-only --preflight option plus same mandatory worker preflight before BUILD_1. Both NPZ checked before any atomics/Cascade. Exact runtime is required in NCP preflight/worker. Targeted preparation tests record their actual different host runtime separately.",
+  "execution": "One unique run directory, private coordinator child capability, append/create-only reservations and terminal receipts; own children only, no retry",
+  "NPZ_fields": [
+    "energy_eV",
+    "state_normalized",
+    "source_vectors",
+    "terminal_yields",
+    "physical_energy_scale_eV_m3",
+    "time_s",
+    "birth_tags"
+  ],
+  "source_contract": {
+    "schema": "cr-phys02d-ncp-execution-contract.v1",
+    "task_id": "CR-PHYS02D-NCP-PULSE-RESPONSE",
+    "scientific_contract_sha256": "bc05614e9812f616c4a4bb45805e4c0359a171813f7329794b0c10c3bf37dde2",
+    "status_at_preparation": "PREPARED_NOT_EXECUTED",
+    "models_in_order": [
+      "fullBED",
+      "legacy"
+    ],
+    "grid_cells": [
+      3200,
+      6400
+    ],
+    "nodes": 9600,
+    "time_scale_s": 10000000000.0,
+    "pulse_sample_u": [
+      0.0,
+      0.0625,
+      0.125,
+      0.1875,
+      0.25,
+      0.3125,
+      0.375,
+      0.4375,
+      0.5,
+      0.5625,
+      0.625,
+      0.6875,
+      0.75,
+      0.8125,
+      0.875,
+      0.9375,
+      1.0
+    ],
+    "birth_tags": [
+      "direct_0p1_10",
+      "direct_10_900"
+    ],
+    "input_manifest": "inputs/INPUT_IDENTITIES.json",
+    "input_manifest_sha256": "fdc6eaa7813ff22585668a5e0fe629ca7e7b3912cbcfb68050a30542f9a09978",
+    "operator_constructor": "exact inherited Cascade(3200,6400, atomic=CoherentAtomic or legacy AtomicData); same defaults including sharing_order=4",
+    "source_initial_state": "use identity-pinned matching 9600 NPZ source_vectors INCLUDING direct cutoff and internal-counter entries; verify source heat row exactly0 and rebuilt energy_eV array_equal to saved",
+    "NPZ_fields": [
+      "energy_eV",
+      "state_normalized",
+      "source_vectors",
+      "terminal_yields",
+      "physical_energy_scale_eV_m3",
+      "time_s",
+      "birth_tags"
+    ],
+    "pulse_augmentation": "full inherited G plus J1_prime=y_heat and J2_prime=J1, both initial0; no subsequent injection; one expm_multiply call per model over 17 times u0..1 with two birth columns",
+    "reference_relations": {
+      "pulse_cdf": "y_heat(u)/H0 for each birth column and selected sum",
+      "J1_endpoint": "same normalized ramp heat_power at u1; selected J1 vs stored metrics_normalized.heat_power",
+      "J2_endpoint": "same normalized ramp heat at u1; selected J2 vs stored metrics_normalized.heat",
+      "SI_J1": "J1*physical_energy_scale_eV_m3*EV_J/T0",
+      "SI_J2": "J2*physical_energy_scale_eV_m3*EV_J",
+      "moment_resolvent": "A=-G_active; w0=A^-1*b_active; w1=A^-1*w0; w2=A^-1*w1; H0=g_heat*w0; mean_s=T0*(g_heat*w1)/H0; second_s2=2*T0^2*(g_heat*w2)/H0",
+      "solver": "FP64 scipy.sparse.linalg.spsolve_triangular(lower=False) after exact upper-triangular and negative diagonal checks; no full G inverse",
+      "crosscheck_label": "pulse-integrator vs saved ramp is an algebraic same-operator check, not independent physical validation"
+    },
+    "budgets": {
+      "physical_operator_builds_max": 2,
+      "pulse_expm_calls_max": 2,
+      "model_order": [
+        "fullBED",
+        "legacy"
+      ],
+      "coordinator_total_wall_s": 3600,
+      "prior_ramp_evolve_calls": 0,
+      "prior_science_suites_rerun": 0,
+      "new_energy_grids": 0,
+      "fourth_grid": "NOT_AUTHORIZED",
+      "selected_output": "sum of two birth columns; no third transport",
+      "retry": "no automatic physical rerun; preserve failed call reservation and partial files; Astra classifies first failure before any further budget"
+    },
+    "runtime": {
+      "python_version": "3.12.3",
+      "numpy_version": "2.4.2",
+      "scipy_version": "1.17.0",
+      "thread_count": 1,
+      "require_exact_numerical_versions_before_physical_build": true,
+      "precision": "float64",
+      "fastmath": false,
+      "global_environment_install": "NOT_AUTHORIZED; use already matching or isolated existing environment",
+      "local_toy_version_difference": "allowed and recorded; does not establish physical-environment equivalence"
+    },
+    "resource_admission": {
+      "ops_source_input_key": "NCP_resource_adapter",
+      "copy_unchanged_sha256": "8360e9f123bfc5814507728d6f946acd5109daaff2b475048d7c6ff586a4f2e7",
+      "minimum_working_GiB": 12,
+      "estimated_peak_GiB": 8,
+      "reserve": "max(12.5% of most restrictive visible bounded memory,1 GiB)",
+      "minimum_free_disk_GiB": 8,
+      "effective_CPU_min": 1,
+      "check_before_each_build": true,
+      "true_cgroup2_root_absence": "allowed only as already implemented in exact returned adapter; nonroot missing limits stay HOLD",
+      "NCP64_scaling": "NOT_EVALUATED"
+    },
+    "tolerances": {
+      "saved_ramp_relative": 1e-09,
+      "saved_terminal_relative": 1e-09,
+      "normalized_ledger_absolute": 5e-10,
+      "nonnegative_scaled_absolute": 2e-12,
+      "cdf_and_moment_bound_absolute": 1e-09,
+      "active_solve_scaled_residual": 5e-11,
+      "toy_oracle_relative": 2e-10,
+      "toy_oracle_absolute": 5e-13
+    },
+    "new_output_fields": [
+      "actual runtime and code/config/input hashes",
+      "all build/pulse reservations and counts",
+      "F(uT) for 17 u by birth and selected",
+      "kernel(u) with 1/s units",
+      "frozen H0, mean lag_s, second moment_s2, variance_s2",
+      "current ramp ancestry age and clipped moments for reference",
+      "CDF vs endpoint bounds",
+      "same-operator saved-ramp J1/J2 relative residuals",
+      "pulse energy ledger conservation and nonnegativity",
+      "active resolvent residuals and positivity",
+      "actual exits including HOLD/timeout/failure",
+      "partial results and exact return manifest"
+    ],
+    "admission_requirements": [
+      "scientific and NCP contract exact hashes",
+      "input identities and frozen payload manifest valid",
+      "DAG task READY and hash-bound independent PASS_SCOPED",
+      "independent reviewer not candidate designer/implementer",
+      "fresh run directory; no dirty overwrite",
+      "nontransferable coordinator reservation",
+      "actual one-thread numerical pools",
+      "effective current resources admitted"
+    ],
+    "local_verification_scope": [
+      "analytic one-pole",
+      "unequal two-stage cascade and equal-rate Erlang-2",
+      "time units and exact pulse full-state initial cutoff ledgers",
+      "zero heat yield returns typed undefined or explicit zero-yield status",
+      "non-Metzler, non-Hurwitz, wrong source heat reject",
+      "plan imports no NumPy/SciPy",
+      "identity and review mismatches HOLD",
+      "cgroup adapter inherited behavior is copied unchanged",
+      "fresh-directory guard and durable collector preserve failed run"
+    ],
+    "return_collection": "create-only unique ZIP includes actual run, all new src/ncp/state/inputs/review, exact dependency identities, any operational adapters, first-failure logs and return manifest; no secret or unrelated host/process commandline collection",
+    "inherited_gates": {
+      "PHYS02_DELAY": "OPEN",
+      "production_history": "HOLD",
+      "atomic_G02": "UNRESOLVED",
+      "b_grid": "NO_GO",
+      "all_bound": "OPEN",
+      "R17B2B": "NO_CERTIFIED_SOURCE_SHARPENING",
+      "CCC_2026_exporter_identity": "SOURCE_IDENTITY_UNRESOLVED"
+    },
+    "interpretation_limits": [
+      "infinite moments condition on frozen mathematical operator; no cosmic history beyond interval",
+      "new pulse moments at 9600 only; no pulse mesh-convergence claim",
+      "actual physical run cannot PASS here without returned command/exit/evidence"
+    ]
+  },
+  "source_contract_import_scope": "All unchanged physical definitions, normalization, sampling and tolerance clauses apply; old task/status/budget/source paths do not transfer. This wrapper explicitly overrides task, input constructor and code identities only.",
+  "resources": {
+    "working_memory_after_reserve_min_GiB": 12,
+    "free_disk_min_GiB": 8,
+    "effective_CPU_min": 1,
+    "reserve": "max(12.5 percent bounded memory, 1 GiB)",
+    "adapter": "unchanged ncp/ops.py"
+  },
+  "returns": "Whole new source unit, all current dependency files including prior actual failure, exact manifest with every entry except self, original sidecars, actual raw result/failure, code/operational adapters. Preserve all previous evidence and scientific HOLD.",
+  "independent_review_required_for_actual_return": true,
+  "inherited_gates": {
+    "PHYS02_DELAY": "OPEN",
+    "production_history": "HOLD",
+    "atomic_G02": "UNRESOLVED",
+    "b_grid": "NO_GO",
+    "all_bound": "OPEN",
+    "R17B2B": "NO_CERTIFIED_SOURCE_SHARPENING",
+    "CCC_2026_exporter_identity": "SOURCE_IDENTITY_UNRESOLVED"
+  }
+}

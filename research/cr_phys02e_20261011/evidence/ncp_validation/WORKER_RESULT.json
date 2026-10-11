@@ -1,0 +1,100 @@
+{
+  "schema": "cr-phys02e-worker-result.v1",
+  "role": "CONTRACT_PRESERVING_NCP_IMPLEMENTATION",
+  "requested_backend": "gpt-6.1-sol",
+  "actually_exposed_model_metadata": "Developer identifies GPT-6 Astra Pro; no independent backend/usage/cost metadata was exposed",
+  "model_cost_claim": null,
+  "status": "IMPLEMENTATION_VERIFIED_SCOPED_REVIEW_PENDING",
+  "phase": "validate",
+  "changed_files": {
+    "ncp/launch_pulse.py": {
+      "bytes": 14275,
+      "sha256": "ea55b67d49a67cfc017cf7507c6f5edac1a61e70ebb73d45391cb9b4512c8a92"
+    },
+    "ncp/collect_return.py": {
+      "bytes": 4984,
+      "sha256": "d41b5a0ce6499465ddb883544839394af52d96bc6a4b001d57351270ee5f5cbd"
+    },
+    "ncp/run_and_collect.py": {
+      "bytes": 3308,
+      "sha256": "dbf25ac7cce30dd33feb831a66d2ec5ab5b38de257db422d3f11e87d45509997"
+    },
+    "ncp/ops.py": {
+      "bytes": 13630,
+      "sha256": "8360e9f123bfc5814507728d6f946acd5109daaff2b475048d7c6ff586a4f2e7"
+    },
+    "src/pulse_response.py": {
+      "bytes": 5954,
+      "sha256": "6aef11bd0dbdf8f2236c92164be9e13ff15820cb4572c8168dea77fbfe51cef0"
+    },
+    "tests/test_ncp_saved_grid.py": {
+      "bytes": 14132,
+      "sha256": "9943b1b4debb405ce2cc3f607335f194ec129476d0c79c0f22ab207ea23941b7"
+    }
+  },
+  "contract_identities": {
+    "SCI": "863d13aea1dfceba35709f43c6411bad50a8980a660698ad86510ad237dcf6a8",
+    "NCP": "ac5d177fba4b67d83db38260b820a0e6fc289345edc434a437490ae8bb6cdb21",
+    "VALIDATION": "8b98196569c12d277087a1cc90ae77eab42ad1430b8f09b9c37c05b77c6dede4",
+    "INPUT": "30bb5000dcade9a7818e14273f105ca5d5c658665462b6ef8984e846f24a1b96",
+    "DEP": "e04ea95cf8cfc7aef26292c9bd8ed9fb538980f9912d9c04cf97172d8496208e"
+  },
+  "actual_validation": {
+    "schema": "cr-phys02e-targeted-ncp-validation.v1",
+    "test_ids": [
+      "SG06",
+      "SG07",
+      "SG08",
+      "SG09"
+    ],
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_ncp_saved_grid.py",
+      "-v"
+    ],
+    "cwd": "/workspace/scratch/584ff08e1634/bass_cr_work/research/cr_phys02e_20261011",
+    "start_utc": "2026-10-11T01:03:56Z",
+    "elapsed_s": 1.1393371969970758,
+    "actual_exit": 0,
+    "timeout_s": 30,
+    "timed_out": false,
+    "runtime_python": "3.12.14",
+    "physical_G_builds": 0,
+    "physical_pulse_calls": 0,
+    "old_suite_reruns": 0,
+    "classification": "TARGETED_IMPLEMENTATION_ONLY_NO_SCIENTIFIC_PASS",
+    "runtime_actual": {
+      "python": "3.12.14",
+      "numpy": "2.3.5",
+      "scipy": "1.17.0"
+    },
+    "identity_checks": {
+      "pulse_engine_byte_identical": true,
+      "ops_byte_identical": true,
+      "postpulse_body_byte_identical": true
+    }
+  },
+  "first_targeted_failure": null,
+  "repair_budget_used": false,
+  "physical_G_builds": 0,
+  "physical_pulse_calls": 0,
+  "old_suite_reruns": 0,
+  "independent_review": "PENDING_ROOT_ASTRA",
+  "scientific_PASS": false,
+  "live_DAG_modified": false,
+  "old_units_modified": false,
+  "notes": [
+    "Eight isolated SG06\u201309 tests pass; mock G and pulse prefix only; full actual 409-entry dependency payload tested in temporary collector fixture.",
+    "Both saved source preflight precedes atomic/Cascade imports and first BUILD reservation; strict postconstructor np.array_equal remains.",
+    "Completion receipts record existing CSC array identities and inherited method binding; reservation count never means completed builds.",
+    "Wrapper execute and collection each called once; archive has authoritative ACTUAL_EXIT and wrapper execute receipt; collection and final sidecars written afterward bind actual exits and archive metadata.",
+    "Actual local Python/NumPy differ from NCP exact requirement; no physical execution authorized or performed.",
+    "Read-only optional git diff stat reported workspace is not a git repository; identity checks and source comparisons succeeded separately."
+  ]
+}

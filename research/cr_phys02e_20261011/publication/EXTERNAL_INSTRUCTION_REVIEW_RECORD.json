@@ -1,0 +1,154 @@
+{
+  "schema": "cr-phys02e-external-instruction-review.v1",
+  "created_utc": "2026-10-11T01:24:08.667890+00:00",
+  "reviewer_role": "INDEPENDENT_ASTRA",
+  "reviewer_task": "/root/phys02e_remote_intake",
+  "review_kind": "BOUNDED_FINAL_EXTERNAL_START_INSTRUCTION_REVIEW",
+  "decision": "PASS_SCOPED_EXTERNAL_INSTRUCTIONS",
+  "scope": "Full external start text and three local publication receipts were compared for copyable handoff, exact identity bindings, attachment-free recovery, fresh bounded NCP scope and truthful verification claims. This is not a new scientific review or NCP certification.",
+  "model_identity": {
+    "host_label": "GPT-6 Astra Pro",
+    "actual_backend_independently_verified": false
+  },
+  "input_files": {
+    "CR_PHYS02E_20261011_eceec9a0_NCP_START_KO.md": {
+      "bytes": 19002,
+      "sha256": "8a75a787fafbd7191ec34286ab854ced31b8a2e8c578dbcd3ac790c2ff252c21"
+    },
+    "ARCHIVE_ASSEMBLY_RECEIPT.json": {
+      "bytes": 1429,
+      "sha256": "0f97cc4cfec6968da38890f538a1d3ac1fb8fd63f39dc1136d49c1ecc44329ae"
+    },
+    "LOCAL_RESTORE_SMOKE_RECEIPT.json": {
+      "bytes": 6232,
+      "sha256": "866b26631750168740354898279a360ecf31bed66ee339f09e28c30ed38665ed"
+    },
+    "SCIENCE_COMMIT_RECEIPT.json": {
+      "bytes": 1601,
+      "sha256": "9c0e3c99807f1f3bc2440962f6d418eb834da611321e1d79d70412be37f10450"
+    }
+  },
+  "science_identity": {
+    "repository": "cosmosapjw-quantum/bass_cr",
+    "commit": "eceec9a0c65f44c3d8b785194b9e40c8ee23b590",
+    "git_tree": "dd128beae138522e8d40e4db6783f6aaae43e983",
+    "parent_commit": "20c2e6de7c58c3690efca6322489b811c99f3e99",
+    "parent_git_tree": "d47ad3e29b96953aae45570c6bdb6f4a71bfc7dc",
+    "branch": "research/cr-phys02e-saved-grid-admission-20261011",
+    "draft_pr": 34,
+    "file_manifest_sha256": "052350dd1b12ed566886dbd68427fb5f91947c6feec946deebf7df24c2569324",
+    "dependency_manifest_sha256": "e04ea95cf8cfc7aef26292c9bd8ed9fb538980f9912d9c04cf97172d8496208e",
+    "frozen_independent_decision_sha256": "d1635fcac407f02a4c2af4c84d3a30575eea9928dbad3e831d9975bc5ac7a843"
+  },
+  "archive_identity": {
+    "name": "CR_PHYS02E_20261011_eceec9a0_HANDOFF.zip",
+    "bytes": 10510880,
+    "sha256": "28f91c7bccb0649124b71d51313f9d278fdc5ab48b1f9a1f3c3037de205ea133",
+    "entries": 483,
+    "payload_entries": 482,
+    "new_unit_entries": 68,
+    "dependency_entries": 409,
+    "bundle_manifest_sha256": "05c1eb44d4cc78cd79efe097d26d6d636105d60b9fba584644a1788deaabbdfe"
+  },
+  "backup_locators": {
+    "provenance": "Actual provider acknowledgements supplied by root and quoted in the reviewed external start. This reviewer made no independent remote query, download or raw remote ZIP readback.",
+    "drive": {
+      "file_id": "1vXrURpI15GfezJShUkoY-S72WwV8prPM",
+      "folder_id": "1pkohlay5eIfFJsBwPZ_yn2jIZONZjesI",
+      "acknowledged_bytes": 10510880
+    },
+    "dropbox": {
+      "file_id": "id:BSpOijBcT10AAAAAAD4AjQ",
+      "rev": "65d865de55df20af03d47",
+      "path": "/BASS_DERIVATION_DOSSIERS_20260912/CR_PHYS02E_20261011_eceec9a0_HANDOFF.zip",
+      "acknowledged_bytes": 10510880
+    },
+    "independent_remote_verification_by_this_reviewer": false,
+    "remote_archive_restore_claimed": false
+  },
+  "checks": [
+    {
+      "id": "EXT01",
+      "status": "PASS_SCOPED",
+      "finding": "The supplied copyable prompt identifies both existing backup locations and the exact self-contained archive; the user need not attach additional files."
+    },
+    {
+      "id": "EXT02",
+      "status": "PASS_SCOPED",
+      "finding": "Science commit, tree, parent, branch, draft PR, archive byte count and SHA256, BUNDLE and FILE manifests, dependency manifest and frozen independent decision agree with the reviewed local receipts."
+    },
+    {
+      "id": "EXT03",
+      "status": "PASS_SCOPED",
+      "finding": "Recovery instructions preserve existing dirty work, use an isolated restore and a fresh run directory, and require archive and exact manifest checks before proceeding."
+    },
+    {
+      "id": "EXT04",
+      "status": "PASS_SCOPED",
+      "finding": "The only proposed numerical task is a new PHYS02E reservation: fullBED then legacy, saved 9600-node grid, at most 2 G builds, 2 pulses and 3600 seconds. The consumed PHYS02D reservation is not reused and no automatic retry or old full suite is authorized."
+    },
+    {
+      "id": "EXT05",
+      "status": "PASS_SCOPED",
+      "finding": "Actual NCP admission requires the pinned Python 3.12.3, NumPy 2.4.2 and SciPy 1.17.0 environment, numerical pool 1, resources admitted, --plan READY and both NPZ preflight checks before one run_and_collect.py invocation. Failure stops the dependent action."
+    },
+    {
+      "id": "EXT06",
+      "status": "PASS_SCOPED",
+      "finding": "Strict saved-grid construction and equality remain required. allclose, post-G grid replacement, source reprojection and tolerance relaxation are prohibited by the instructions."
+    },
+    {
+      "id": "EXT07",
+      "status": "PASS_SCOPED",
+      "finding": "The return procedure retains actual execution and collection exits. It includes the return ZIP, external WRAPPER_COLLECTION_EXIT.json and WRAPPER_ACTUAL_EXIT.json, external logs/setup and a family manifest; wrapper post-collection receipts are honestly outside the ZIP."
+    },
+    {
+      "id": "EXT08",
+      "status": "PASS_SCOPED",
+      "finding": "Provider acknowledgements are described at their actual R1 level. Missing provider checksums are UNAVAILABLE and no remote raw ZIP restoration is asserted. The SG10 result is explicitly a local restore and standard-library admission check, with resources not admitted and no numerical runtime certification."
+    },
+    {
+      "id": "EXT09",
+      "status": "PASS_SCOPED",
+      "finding": "The historical internal HOLD and pending SG10 text is explained in relation to the final frozen READY packet and later external local-restore receipt. Post-freeze evidence remains outside the ZIP, avoiding a self-referential hash cycle."
+    },
+    {
+      "id": "EXT10",
+      "status": "PASS_SCOPED",
+      "finding": "The instructions keep all seven upper scientific gates unchanged and require a future independent scientific review of the actual NCP return before any scientific promotion. Create-only dual-backup return and additive draft Git return preserve source history."
+    }
+  ],
+  "sg10_assessment": {
+    "source": "LOCAL_RESTORE_SMOKE_RECEIPT.json; actual local execution performed by root, receipt read by this reviewer",
+    "status": "PASS_SCOPED_LOCAL_RESTORE",
+    "actual_plan_exit": 0,
+    "plan_admission": "READY",
+    "local_resource_admitted": false,
+    "numerical_runtime_certified": false,
+    "elapsed_seconds": 0.436464058002457,
+    "G_builds": 0,
+    "pulses": 0,
+    "accepted_scope": "Local final ZIP restoration, exact entry and SHA256 verification, and standard-library plan admission only.",
+    "actual_NCP_execution_status": "NOT_EXECUTED_BY_THIS_PREPARATION_OR_REVIEW"
+  },
+  "material_blockers": [],
+  "science_promotion_authorized": false,
+  "upper_gates_changed": false,
+  "publication_claim_limit": "This decision reviews the external start contents and cited local receipts. It does not independently attest remote byte restoration or publication of this external start or subsequent receipt commit.",
+  "activity_limits": {
+    "new_scientific_tests": 0,
+    "new_physical_G_builds": 0,
+    "new_pulses": 0,
+    "network_calls": 0,
+    "frozen_source_edits": 0,
+    "science_review_edits": 0,
+    "authorized_write": "publication/EXTERNAL_INSTRUCTION_REVIEW_RECORD.json only"
+  },
+  "remaining_actual_NCP_gates": [
+    "Verify recovered archive and manifests on NCP.",
+    "Confirm exact pinned runtime and resources admitted on NCP.",
+    "Pass both NPZ preflight checks, then invoke the fresh bounded wrapper once.",
+    "Preserve execution and collection exits and return-family evidence.",
+    "Obtain a new independent scientific review of the actual return."
+  ]
+}

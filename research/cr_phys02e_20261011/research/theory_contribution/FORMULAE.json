@@ -1,0 +1,175 @@
+{
+  "schema": "cr-phys02e-saved-grid-theory.v1",
+  "role": "THEORY_CONTRIBUTOR",
+  "independent_final_review": false,
+  "acceptance_design": false,
+  "execution_authorization": false,
+  "coordinates": {
+    "active": "U_i=E_i*N_i",
+    "active_units": "eV m^-3",
+    "energy_ledgers_units": "eV m^-3",
+    "number_ledgers_units": "m^-3",
+    "normalized_active_and_energy": "U/U0",
+    "normalized_number": "N/U0, units eV^-1",
+    "time": "u=t/T0; T0=1e10 s; G=T0*A"
+  },
+  "assumptions": [
+    "fixed gas and original scoped atomic model per lane",
+    "strictly ordered positive active E with unchanged CUT, SPLIT, UPPER and source tag meanings",
+    "same E used for all grid-dependent construction, projection and number functionals",
+    "exact arithmetic for mathematical identities; actual FP64 residuals require their own evidence",
+    "ionization sharing weights nonnegative and sum exactly to one for the algebraic derivation",
+    "whole saved source vectors retained, including cutoff and counters"
+  ],
+  "formulae": [
+    {
+      "id": "F01",
+      "status": "derived",
+      "name": "energy_functional",
+      "formula": "ell_E^T U=sum(active U)+heat+binding_HI+binding_HeI+excitation_HI+excitation_HeI+cutoff_energy",
+      "units": "eV m^-3",
+      "excluded": "low_cross diagnostics and all number ledgers"
+    },
+    {
+      "id": "F02",
+      "status": "derived",
+      "name": "ionization_corrected_number",
+      "formula": "ell_N(E)^T U=sum(U_i/E_i)+cutoff_number-ionizations_HI-ionizations_HeI",
+      "units": "m^-3",
+      "meaning": "injected free-electron number after accounting for new ionization electrons"
+    },
+    {
+      "id": "F03",
+      "status": "derived",
+      "name": "barycentric_projection",
+      "formula": "lambda=(W-E_l)/(E_u-E_l); N_l=p*(1-lambda); N_u=p*lambda; N_l+N_u=p; E_l*N_l+E_u*N_u=p*W"
+    },
+    {
+      "id": "F04",
+      "status": "derived",
+      "name": "cutoff",
+      "formula": "W<=C: cutoff_number=p, cutoff_energy=p*W; C<W<E_1: lower barycentric count at C goes into separate cutoff ledgers; no heat transfer"
+    },
+    {
+      "id": "F05",
+      "status": "derived",
+      "name": "drift_column",
+      "formula": "d=b_stop(E_j)/(E_j-E_prev); A_col=-d*e_j+(d/E_j)*Pi_E(E_prev,1)+d*(E_j-E_prev)/E_j*e_heat",
+      "coefficient_units": "s^-1 for active/energy rows; (eV s)^-1 for number rows"
+    },
+    {
+      "id": "F06",
+      "status": "derived",
+      "name": "column_conservation",
+      "formula": "ell_E^T G=0; ell_N(E)^T G=0",
+      "limitation": "structural exact-arithmetic identity, not a measured production residual"
+    },
+    {
+      "id": "F07",
+      "status": "derived",
+      "name": "ramp_ledger",
+      "formula": "dy/du=G*y+u*b, y(0)=0 implies ell^T y(u)=u^2*ell^T b/2"
+    },
+    {
+      "id": "F08",
+      "status": "derived",
+      "name": "post_construction_patch_defect",
+      "formula": "ell_N(E_new)^T G(E_old)=[ell_N(E_new)-ell_N(E_old)]^T G(E_old)",
+      "condition": "original ell_N(E_old)^T G(E_old)=0"
+    },
+    {
+      "id": "F09",
+      "status": "derived",
+      "name": "two_active_toy",
+      "formula": "E1=1 eV; E2=2 eV; d=1 s^-1; A_col2=(d/2,-d,d/2); E2_new=2 eV+epsilon; residual=d*epsilon/[(2 eV)*(2 eV+epsilon)]",
+      "number_residual_units": "(eV s)^-1",
+      "energy_residual": 0,
+      "is_physical_G": false
+    },
+    {
+      "id": "F10",
+      "status": "derived",
+      "name": "one_ulp_toy",
+      "formula": "epsilon=2^-51 eV gives residual=1/9007199254740994 (eV s)^-1",
+      "limitation": "not a bound on actual G or a statement of scientific acceptability"
+    },
+    {
+      "id": "F11",
+      "status": "derived",
+      "name": "coordinate_transformation",
+      "formula": "y_new=S*y; G_new=S*G*S^-1; b_new=S*b; ell_new^T=ell^T*S^-1",
+      "limitation": "patching node labels alone does not perform this transformation; E also parametrizes physical rates"
+    },
+    {
+      "id": "F12",
+      "status": "conditional first-order expansion",
+      "name": "drift_sensitivity",
+      "formula": "delta_d/d approximately delta_b/b - (delta_E_j-delta_E_prev)/(E_j-E_prev)",
+      "assumptions": [
+        "smooth local stopping function",
+        "small perturbations relative to relevant scales"
+      ],
+      "limitation": "no certified operator or observable error bound follows without additional estimates"
+    }
+  ],
+  "constructor_dependency_map": {
+    "project": [
+      "brackets",
+      "barycentric weights",
+      "energy coordinate conversion",
+      "low crossing masks"
+    ],
+    "_sharing": [
+      "nodes",
+      "reflected knots",
+      "quadrature panels"
+    ],
+    "_generator": [
+      "speed",
+      "stopping",
+      "atomic rates",
+      "drift spacing",
+      "project",
+      "sharing",
+      "energy denominators"
+    ],
+    "source_vectors": [
+      "cell edges",
+      "source quadrature",
+      "project"
+    ],
+    "functionals": [
+      "inverse node energies for number ledger"
+    ]
+  },
+  "preserved_conditionally": [
+    "saved source coordinate interpretation",
+    "original drift, atomic, source, cutoff and ledger definitions",
+    "exact-arithmetic conservation structure"
+  ],
+  "not_proved_by_exact_E": [
+    "bitwise identity of full G",
+    "bounded delta_G",
+    "unchanged physical observables",
+    "atomic or CCC scientific validity",
+    "scientific PASS or authorization for physical retry"
+  ],
+  "known_actual_failure": {
+    "source": "bound PR33 independent actual-return decision",
+    "status": "HOLD",
+    "mismatched_nodes_per_model": 340,
+    "max_ulp_reported": 1,
+    "underlying_runtime_cause": "UNRESOLVED",
+    "failed_G_persisted": false,
+    "pulse_calls": 0
+  },
+  "work_limits": {
+    "physical_G_builds": 0,
+    "physical_pulse_calls": 0,
+    "scientific_imports": 0,
+    "old_suite_reruns": 0,
+    "toy_check_invocations_authorized": 1,
+    "toy_timeout_s": 5
+  },
+  "counterexample_check": "exact_toy_check.py; actual outcome recorded separately in TOY_CHECK_RECEIPT.json"
+}

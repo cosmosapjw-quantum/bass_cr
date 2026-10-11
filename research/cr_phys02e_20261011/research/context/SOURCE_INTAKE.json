@@ -1,0 +1,759 @@
+{
+  "schema": "PHYS02E_SOURCE_INTAKE_v1",
+  "repo": "cosmosapjw-quantum/bass_cr",
+  "pulls": [
+    {
+      "number": 33,
+      "title": "bass_cr: return PHYS02D pulse grid identity first failure",
+      "state": "open",
+      "draft": true,
+      "updated_at": "2026-10-11T00:35:06Z",
+      "head": {
+        "ref": "research/cr-phys02d-ncp-pulse-return-20261011",
+        "sha": "20c2e6de7c58c3690efca6322489b811c99f3e99"
+      },
+      "base": {
+        "ref": "research/cr-phys02d-heat-delay-moments-20261011",
+        "sha": "a2486869dba5c2d43257c13e33a31b66752d5e10"
+      },
+      "html_url": "https://github.com/cosmosapjw-quantum/bass_cr/pull/33",
+      "body": "The single authorized PHYS02D pulse execution stopped after the fullBED G constructor returned and before any pulse call. The exact saved/rebuilt energy-grid guard rejected 340 of 9,600 nodes, each at most one ULP (maximum 1.1368683772161603e-13 eV). Inputs, tolerances, scientific code and the original resource adapter remain unchanged; no automatic retry occurred.\n\nThis additive return preserves actual exit 1, wall 103.797892739 s, raw stderr/stdout, reservations, runtime/resources, independent HOLD review and the bounded amendment request. Legacy never started; CDF, moments and ramp residuals are unavailable. All seven inherited gates remain unchanged. Wrapper exit 0 records completed failure collection, not numerical success.\n\nValidation: exact science/publication ancestry retained; 359 original bundle payloads and 259 dependencies verified; final return ZIP exact entry set/CRC/all 397 payload identities verified and restored into a new layout, including 87 unit-manifest entries and 74 preparation-review bindings. Actual runtime Python 3.12.3, NumPy 2.4.2, SciPy 1.17.0, numerical threads 1. No old ramp suite or extra G/pulse calls.\n\nFinal immutable ZIP: 5,350,251 bytes, SHA256 `2400e9a4350d03379b12fdad00c8990c93099011dfc95530b02ae2c26e8dc4c5`. [Drive archive](https://drive.google.com/file/d/18RE6v7GmGE33x1uQaFsLcvEac7Jcnd6E/view), Dropbox `id:BSpOijBcT10AAAAAAD3-1Q`, rev `65d85bb5eb64b0af03d47`. Archive and short summary completed on both providers at R1 (ACK/ID/name/size/rev/path); remote SHA256 is unavailable and remote payload readback was not performed. Full detached metadata receipts are included in `research/cr_phys02d_ncp_return_20261011/DELIVERY_RECEIPT.json`.\n\nStacked draft against the original PHYS02D preparation branch; no merge or scientific promotion requested.\n"
+    },
+    {
+      "number": 32,
+      "title": "CR-PHYS02D: heat-delay moments and same-grid pulse handoff",
+      "state": "open",
+      "draft": true,
+      "updated_at": "2026-10-10T23:03:43Z",
+      "head": {
+        "ref": "research/cr-phys02d-heat-delay-moments-20261011",
+        "sha": "a2486869dba5c2d43257c13e33a31b66752d5e10"
+      },
+      "base": {
+        "ref": "research/ccc-source-identity-hold-20261011",
+        "sha": "f98ed974c3f3158dabd16cd854ecc5e04b9f5b31"
+      },
+      "html_url": "https://github.com/cosmosapjw-quantum/bass_cr/pull/32",
+      "body": "## 연구 질문\n\n기존 paired 9,600점 ramp 계산은 완료됐지만, 순간 열률비가 어떤 지연 통계인지와 pulse 누적분율을 구분할 필요가 있었습니다. 이 PR은 저장된 결과에서 유한창 지연 모멘트를 도출하고, 남은 frozen-operator 정보를 측정할 다음 pulse 작업을 준비합니다.\n\n## 변경과 결과\n\n- 양의 고정 커널에서 R=E[X], S=E[X²], X=(1−τ/T)+를 유도합니다. 현재 가열의 원천 나이는 T−2Q/P, clipped mean은 T(1−R)입니다.\n- 기존 legacy/fullBED의 2,400·4,800·9,600점 JSON을 한 번 분석합니다. 여섯 selected 행과 18개 birth-tag 행, SI/Decimal 교차검사, CDF 경계를 보존합니다.\n- fullBED 9,600점 현재 평균 원천 나이: **97.419429 yr**. Pulse의 F(T/2) exact-model 경계: **1.316618–5.520554%**. F(T) 하계: **4.936104%**. Uncapped mean은 endpoint 두 값만으로 식별되지 않습니다.\n- 같은 9,600점에서 fullBED 다음 legacy의 pulse 코드·active resolvent·엄격한 실행/반환 manifest를 준비합니다. 최대 새 G 2회, pulse 2회, 전체 3600 s입니다.\n\n## 검증과 실패 기록\n\n직접 유도, 정확한 Fraction 측도와 Decimal90 oracle, endpoint targeted tests, 작은 one-pole/직렬cascade/Erlang-2 및 운영 fixture를 사용했습니다. 초기 CSV export, sparse shape, propagated cutoff assertion, collector manifest 실패는 원본 그대로 남고 제한된 수정만 수행했습니다. 수치 입력·물리식·허용값은 바뀌지 않았습니다.\n\n이번 준비에서 실제 물리 G/수송/과거 suite 재실행은 **0/0/0**입니다. NCP pulse의 실제 물리 실행은 **PREPARED_NOT_EXECUTED**이며, 실행 결과에는 새 독립 판정이 필요합니다. 후보 설계·구현과 독립된 Astra review 및 정확한 reviewed_files는 연구 단위 review/에 있습니다.\n\n## 계보와 범위\n\nBase: PR #31, f98ed974c3f3158dabd16cd854ecc5e04b9f5b31. 신규 변경은 research/cr_phys02d_20261011/에 한정됩니다. 원래 PR30의 실제 반환과 실패/adapter를 재사용하며, eecb9bd 후기영수증 sibling 계보는 구분합니다.\n\n4,800→9,600점 비교에는 Python/NumPy 변화도 포함되므로 순수 격자 오차 인증으로 읽지 않습니다. PHYS02_DELAY OPEN, production_history HOLD, atomic_G02 UNRESOLVED, b_grid NO_GO, all_bound OPEN, R17B2B NO_CERTIFIED_SOURCE_SHARPENING, CCC SOURCE_IDENTITY_UNRESOLVED를 유지합니다.\n\n## 전달\n\nREPORT_KO.md, START_NCP_CODEX_KO.md, ncp/README_KO.md를 시작점으로 사용합니다. 완전 ZIP과 standalone NCP start를 기존 Drive/Dropbox에 새 파일로 게시했고, 실제 영수증과 한 번의 clean restore/plan 결과를 receipt-only commit에 추가했습니다. main merge와 force push는 수행하지 않습니다.\n\n## 실제 게시 identity와 복원 확인\n\n- Science commit: `6ed83ff61aff24fe51ff0370736f70e0e52893f8` (신규 science/preparation 88 files)\n- Receipt-only head: `a2486869dba5c2d43257c13e33a31b66752d5e10` (신규 publication 13 files, 원본 science 88 files 및 immutable ZIP unchanged)\n- Independent decision: **PASS_SCOPED**, SHA256 `de87adb85e2a3f31ba09f10d06e1d5af88198967ca653ba1d21455e44509192e`\n- ZIP: `CR_PHYS02D_20261011_6ed83ff6_HANDOFF.zip`, **4903951 bytes**, SHA256 `100e0cf1fec443067b74aed9f8d508f1daae1d117bf9005f57ebcd68e1cf2673`\n- [Drive 완전 ZIP](https://drive.google.com/file/d/1H3Gn3xb7InyPuXCQKxQtQ1_m02e2OnIW/view?usp=drivesdk); Dropbox `/BASS_DERIVATION_DOSSIERS_20260912/CR_PHYS02D_20261011_6ed83ff6_HANDOFF.zip`, ID `id:BSpOijBcT10AAAAAAD36cQ`, rev `65d8467123fdc0af03d47`.\n- Start: `CR_PHYS02D_20261011_6ed83ff6_NCP_START_KO.md`, **17801 bytes**, SHA256 `da066f54a1c5e8b630c8f87bbae607954161affb95f79b0b2fb1ad15ce492197`\n- [Drive NCP start](https://drive.google.com/file/d/1EE11a-gepxjyDELoo8syXZj2k9WY3Lxo/view?usp=drivesdk); Dropbox `/BASS_DERIVATION_DOSSIERS_20260912/CR_PHYS02D_20261011_6ed83ff6_NCP_START_KO.md`, ID `id:BSpOijBcT10AAAAAAD36kw`, rev `65d84714cb8b90af03d47`.\n\n총 4개 업로드가 실제 완료됐고 ID/name/bytes/path metadata가 일치했습니다. 원격 검증은 R1 metadata이며 provider checksum이 반환되지 않아 **UNAVAILABLE**로 기록했습니다. 원격 ZIP 재다운로드 복원은 수행하지 않았습니다.\n\n동일 로컬 ZIP에서 360 entries의 CRC/전체 내부 bytes·SHA256을 확인한 뒤 새 폴더에 한 번 복원했습니다. 복원 후 stdlib `--plan` actual exit 0, 전체 payload 359 및 inherited 259 검증, `admission_status=READY`였습니다. 현재 8 GiB cgroup에서는 resource **HOLD**, 실제 물리 G/pulse **0/0**입니다. 정확한 runtime과 자원이 맞는 NCP에서만 준비된 단일 pulse 작업을 실행합니다.\n\n실제 백업 식별자가 들어간 `publication/NCP_START_WITH_BACKUP_IDS_KO.md`와 `publication/PUBLICATION_INDEX_KO.md`로 추가 사용자 첨부 없이 이어갑니다. `publication/DUAL_BACKUP_RECEIPT.json`과 `LOCAL_RESTORE_SMOKE_RECEIPT.json`이 실제 영수증입니다.\n"
+    },
+    {
+      "number": 31,
+      "title": "research: CCC dataset source identity HOLD closeout",
+      "state": "open",
+      "draft": true,
+      "updated_at": "2026-10-10T18:53:26Z",
+      "head": {
+        "ref": "research/ccc-source-identity-hold-20261011",
+        "sha": "f98ed974c3f3158dabd16cd854ecc5e04b9f5b31"
+      },
+      "base": {
+        "ref": "research/cr-phys02c-paired-9600-closeout-20261011",
+        "sha": "55a97935c5f589e1857e0de595263c94dc52ce53"
+      },
+      "html_url": "https://github.com/cosmosapjw-quantum/bass_cr/pull/31"
+    },
+    {
+      "number": 30,
+      "title": "research: close scoped PHYS02C paired 9600 execution",
+      "state": "open",
+      "draft": true,
+      "updated_at": "2026-10-10T18:43:40Z",
+      "head": {
+        "ref": "research/cr-phys02c-paired-9600-closeout-20261011",
+        "sha": "55a97935c5f589e1857e0de595263c94dc52ce53"
+      },
+      "base": {
+        "ref": "research/cr-phys02c-atomic-consistency-20261011",
+        "sha": "eecb9bdceb40ff8dbb84feba969d1eec6555970f"
+      },
+      "html_url": "https://github.com/cosmosapjw-quantum/bass_cr/pull/30"
+    },
+    {
+      "number": 29,
+      "title": "research: prescribed-density CR continuation with scoped numerical review",
+      "state": "open",
+      "draft": true,
+      "updated_at": "2026-10-10T18:01:35Z",
+      "head": {
+        "ref": "research/cr-nonautonomous-prescribed-density01-20261011",
+        "sha": "125025cf09b5268e92179d71a83ca11874e69c2f"
+      },
+      "base": {
+        "ref": "research/cr-phys03-fs10-xi01-20261010",
+        "sha": "5a95e976aef0e2b1e399174c120c9d23c5d4d930"
+      },
+      "html_url": "https://github.com/cosmosapjw-quantum/bass_cr/pull/29"
+    },
+    {
+      "number": 28,
+      "title": "research: PHYS02C coherent H/He BED comparison and self-contained NCP handoff",
+      "state": "open",
+      "draft": true,
+      "updated_at": "2026-10-10T17:57:03Z",
+      "head": {
+        "ref": "research/cr-phys02c-atomic-consistency-20261011",
+        "sha": "eecb9bdceb40ff8dbb84feba969d1eec6555970f"
+      },
+      "base": {
+        "ref": "research/cr-phys02b-causal-cascade-20261010",
+        "sha": "b5b0f2244311a6e46692da55e75db6d04d3ef305"
+      },
+      "html_url": "https://github.com/cosmosapjw-quantum/bass_cr/pull/28"
+    },
+    {
+      "number": 25,
+      "title": "CR-PHYS03: pin FS10 xi=0.1 composition knot",
+      "state": "open",
+      "draft": true,
+      "updated_at": "2026-10-10T14:42:13Z",
+      "head": {
+        "ref": "research/cr-phys03-fs10-xi01-20261010",
+        "sha": "5a95e976aef0e2b1e399174c120c9d23c5d4d930"
+      },
+      "base": {
+        "ref": "research/cr-physical-provider-20261010",
+        "sha": "e41e18873af438ef989ff44f505fe2665118fdec"
+      },
+      "html_url": "https://github.com/cosmosapjw-quantum/bass_cr/pull/25"
+    },
+    {
+      "number": 27,
+      "title": "CR-PHYS02B: 인과적 H/He 전자 cascade와 scoped 독립 판정",
+      "state": "open",
+      "draft": true,
+      "updated_at": "2026-10-10T12:40:55Z",
+      "head": {
+        "ref": "research/cr-phys02b-causal-cascade-20261010",
+        "sha": "b5b0f2244311a6e46692da55e75db6d04d3ef305"
+      },
+      "base": {
+        "ref": "research/cr-phys02a-causal-subthreshold-20261010",
+        "sha": "58c8e1cda5c8f8ca8b83269cb89899ea40ab91fe"
+      },
+      "html_url": "https://github.com/cosmosapjw-quantum/bass_cr/pull/27"
+    },
+    {
+      "number": 26,
+      "title": "CR-PHYS02A: causal stopping of directly ejected low-energy electrons",
+      "state": "open",
+      "draft": true,
+      "updated_at": "2026-10-10T11:31:53Z",
+      "head": {
+        "ref": "research/cr-phys02a-causal-subthreshold-20261010",
+        "sha": "58c8e1cda5c8f8ca8b83269cb89899ea40ab91fe"
+      },
+      "base": {
+        "ref": "research/cr-physical-provider-20261010",
+        "sha": "e41e18873af438ef989ff44f505fe2665118fdec"
+      },
+      "html_url": "https://github.com/cosmosapjw-quantum/bass_cr/pull/26"
+    },
+    {
+      "number": 24,
+      "title": "CR-PHYS01: 실제 proton injection·H/He secondary deposition provider",
+      "state": "open",
+      "draft": true,
+      "updated_at": "2026-10-10T10:47:52Z",
+      "head": {
+        "ref": "research/cr-physical-provider-20261010",
+        "sha": "e41e18873af438ef989ff44f505fe2665118fdec"
+      },
+      "base": {
+        "ref": "research/cr-r17b2-source-kernel-20261010",
+        "sha": "b5b81d0ec0b8eef6ff7f756615185aa4388f522a"
+      },
+      "html_url": "https://github.com/cosmosapjw-quantum/bass_cr/pull/24"
+    },
+    {
+      "number": 23,
+      "title": "Draft: CR-off reionization handoff and preserved atomic lane",
+      "state": "open",
+      "draft": true,
+      "updated_at": "2026-10-08T11:58:04Z",
+      "head": {
+        "ref": "research/r4q-gap-closure-20261001",
+        "sha": "58295e59e1c1815832a26769b05a3b5fcb96b47b"
+      },
+      "base": {
+        "ref": "main",
+        "sha": "77237751bdd2aed5934bf7fc3bc626d631a09058"
+      },
+      "html_url": "https://github.com/cosmosapjw-quantum/bass_cr/pull/23"
+    },
+    {
+      "number": 22,
+      "title": "research(r4p0a): accept B0 preparation and derive selected-span rate diagnostics",
+      "state": "open",
+      "draft": true,
+      "updated_at": "2026-09-30T10:11:33Z",
+      "head": {
+        "ref": "research/r4p0a-b0-tail-rate-20260930",
+        "sha": "432010f2afd5305ca63933056f50584c01e4e524"
+      },
+      "base": {
+        "ref": "codex/r4p0-tail-basis-preflight-20260930",
+        "sha": "f7b5eef95895f299327562859ce0b278ffa8679c"
+      },
+      "html_url": "https://github.com/cosmosapjw-quantum/bass_cr/pull/22"
+    }
+  ],
+  "refs": [
+    {
+      "ref": "refs/heads/research/cr-phys02d-heat-delay-moments-20261011",
+      "node_id": "REF_kwDOUjtnhtoAOnJlZnMvaGVhZHMvcmVzZWFyY2gvY3ItcGh5czAyZC1oZWF0LWRlbGF5LW1vbWVudHMtMjAyNjEwMTE",
+      "url": "https://api.github.com/repos/cosmosapjw-quantum/bass_cr/git/refs/heads/research/cr-phys02d-heat-delay-moments-20261011",
+      "object": {
+        "sha": "a2486869dba5c2d43257c13e33a31b66752d5e10",
+        "type": "commit",
+        "url": "https://api.github.com/repos/cosmosapjw-quantum/bass_cr/git/commits/a2486869dba5c2d43257c13e33a31b66752d5e10"
+      }
+    },
+    {
+      "ref": "refs/heads/research/cr-phys02d-ncp-pulse-return-20261011",
+      "node_id": "REF_kwDOUjtnhtoAOHJlZnMvaGVhZHMvcmVzZWFyY2gvY3ItcGh5czAyZC1uY3AtcHVsc2UtcmV0dXJuLTIwMjYxMDEx",
+      "url": "https://api.github.com/repos/cosmosapjw-quantum/bass_cr/git/refs/heads/research/cr-phys02d-ncp-pulse-return-20261011",
+      "object": {
+        "sha": "20c2e6de7c58c3690efca6322489b811c99f3e99",
+        "type": "commit",
+        "url": "https://api.github.com/repos/cosmosapjw-quantum/bass_cr/git/commits/20c2e6de7c58c3690efca6322489b811c99f3e99"
+      }
+    }
+  ],
+  "head_commit": {
+    "sha": "20c2e6de7c58c3690efca6322489b811c99f3e99",
+    "tree": {
+      "sha": "d47ad3e29b96953aae45570c6bdb6f4a71bfc7dc",
+      "url": "https://api.github.com/repos/cosmosapjw-quantum/bass_cr/git/trees/d47ad3e29b96953aae45570c6bdb6f4a71bfc7dc"
+    },
+    "parents": [
+      {
+        "sha": "716c64216c7af2056b0c5bae415f2a2584420335",
+        "url": "https://api.github.com/repos/cosmosapjw-quantum/bass_cr/git/commits/716c64216c7af2056b0c5bae415f2a2584420335",
+        "html_url": "https://github.com/cosmosapjw-quantum/bass_cr/commit/716c64216c7af2056b0c5bae415f2a2584420335"
+      }
+    ],
+    "message": "[skip ci] record PHYS02D return branch and draft PR33 receipts"
+  },
+  "payload_commit": {
+    "sha": "716c64216c7af2056b0c5bae415f2a2584420335",
+    "tree": {
+      "sha": "773bab5f52462cd5ba866fbbc5ce14798dbe4d3a",
+      "url": "https://api.github.com/repos/cosmosapjw-quantum/bass_cr/git/trees/773bab5f52462cd5ba866fbbc5ce14798dbe4d3a"
+    },
+    "parents": [
+      {
+        "sha": "a2486869dba5c2d43257c13e33a31b66752d5e10",
+        "url": "https://api.github.com/repos/cosmosapjw-quantum/bass_cr/git/commits/a2486869dba5c2d43257c13e33a31b66752d5e10",
+        "html_url": "https://github.com/cosmosapjw-quantum/bass_cr/commit/a2486869dba5c2d43257c13e33a31b66752d5e10"
+      }
+    ],
+    "message": "[skip ci] return PHYS02D pulse first failure and verified dual backups"
+  },
+  "file_entries": [
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/BASS_CR_NCP_CR_PHYS02D_RETURN_KO.md",
+      "git_blob_sha1": "87bf5b0ef0cf32195e067a3ac17c537890382d35",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/DELIVERY_RECEIPT.json",
+      "git_blob_sha1": "03843af0ccb5692778bd5f036cc94910abf606f6",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/EXECUTION_SUMMARY.json",
+      "git_blob_sha1": "a8ef6e37366f5703ff5a143a01c7c4575756e38a",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/EXECUTION_SUMMARY_KO.md",
+      "git_blob_sha1": "8056d0c340cc7e1674d141f10c20f8d55bcd839d",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/FINAL_COLLECTION_RECEIPT.json",
+      "git_blob_sha1": "56566b10ef25f4944a155ed0e0823e4793080a9e",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/FINAL_RETURN_VERIFICATION.json",
+      "git_blob_sha1": "400901e2200c1b300e47baf25a77f3cabd9c4b68",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/GIT_IDENTITY.json",
+      "git_blob_sha1": "3acafe05be5c5083163c32d543f55f820e497ffd",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/GIT_RETURN_PAYLOAD_MANIFEST.json",
+      "git_blob_sha1": "00721ffd742d99aa23201835206a0eb8e78d1320",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/INDEPENDENT_ACTUAL_RETURN_DECISION.json",
+      "git_blob_sha1": "f25e540ac1bb98758d4c9b9f0c042f7e038b56fa",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/INDEPENDENT_ACTUAL_RETURN_REVIEW.md",
+      "git_blob_sha1": "5a73cbbc4763d91cb546a5d172df1f4f77f15c8f",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/PUBLICATION_RECEIPT.json",
+      "git_blob_sha1": "6c23d255b0431e329f433e9f0f8b8f709fcd3640",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/RETURN_MANIFEST.json",
+      "git_blob_sha1": "e95bb8c0b114043f9a54d2e20f29d6c4aa633881",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/SOURCE_RECOVERY_RECEIPT.json",
+      "git_blob_sha1": "d55ee3489787afe07a79d384d4ee363e934c2012",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/ACTUAL_EXIT.json",
+      "git_blob_sha1": "d57f7618daebdb5a868394ea39a05040ea5e4a4c",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/BUILD_1_RESERVATION.json",
+      "git_blob_sha1": "3f9a41a5ba257bff4ef86ed272043a8e547b69c7",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/PLAN_AND_ADMISSION.json",
+      "git_blob_sha1": "700a4adb4dce148e9b9c9bdb42effe98a7a8b5bb",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/RESERVATION.json",
+      "git_blob_sha1": "ba885bb6106c07f1757139aba5aef4f19b7d2ead",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/RESOURCE_BEFORE_BUILD_1.json",
+      "git_blob_sha1": "a81aafce46bd1917c20cd1d5347d155c7a33baa6",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/RUNTIME.json",
+      "git_blob_sha1": "d9b2945657e50b132d2be4705de73e3c5d61da19",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/ENV_INSTALL.log",
+      "git_blob_sha1": "22dbfcbc3d3acca73540ab957e62a40042ce6453",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/EXECUTION_SUMMARY.json",
+      "git_blob_sha1": "a8ef6e37366f5703ff5a143a01c7c4575756e38a",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/EXECUTION_SUMMARY_KO.md",
+      "git_blob_sha1": "8056d0c340cc7e1674d141f10c20f8d55bcd839d",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/FIRST_RETURN_RECEIPT.json",
+      "git_blob_sha1": "adbab908cbce87b9e8d68e8fd120f69e449cdd27",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/FIRST_RETURN_VERIFICATION.json",
+      "git_blob_sha1": "75a33c5096ff1db13f401fbb34377407b25e2c13",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/GIT_IDENTITY.json",
+      "git_blob_sha1": "3acafe05be5c5083163c32d543f55f820e497ffd",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/GRID_DIAGNOSTIC.json",
+      "git_blob_sha1": "8335edb03d12e2c5ede0af817bb0d46c033686b9",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/INDEPENDENT_ACTUAL_RETURN_DECISION.json",
+      "git_blob_sha1": "f25e540ac1bb98758d4c9b9f0c042f7e038b56fa",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/INDEPENDENT_ACTUAL_RETURN_REVIEW.md",
+      "git_blob_sha1": "5a73cbbc4763d91cb546a5d172df1f4f77f15c8f",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/NCP_START_KO.md",
+      "git_blob_sha1": "7f826e32e9d970e19ee7f2ac21b98330b4014285",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/OWNED_RESOURCE_SAMPLES.jsonl",
+      "git_blob_sha1": "785ecdaef493b84c40b2597a88ac2ee02c0c655d",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/PLAN_PRECHECK.json",
+      "git_blob_sha1": "3a435f4bdb39f095cbd576510e6d36ce8ca9a20d",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/PUBLICATION_BINDING.json",
+      "git_blob_sha1": "8db445e97af8a0ebd0cf266374c90a191199b687",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/RESTORE_RECEIPT_20261011T002628Z_7418b464d29c40eb956a433c67db90f2.json",
+      "git_blob_sha1": "b202c9e67a1ed65ab15f4f9b01e9fcb0ab53b42d",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/SOURCE_RECOVERY_RECEIPT.json",
+      "git_blob_sha1": "d55ee3489787afe07a79d384d4ee363e934c2012",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/TERMINAL_CONFIRMATION.json",
+      "git_blob_sha1": "8c8d6ac51e750a539ba1f57b42214fca79906912",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/WRAPPER.stderr.log",
+      "git_blob_sha1": "6a5bee4357c74f08927e7b111a981e52c749797a",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/WRAPPER.stdout.log",
+      "git_blob_sha1": "ea792fcee4fb8a7b712ffc58a89cde7cd14f4941",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/execute_wrapper.py",
+      "git_blob_sha1": "ad40c61b7ab8eca2feec130abaadf768036c20ec",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/monitor.py",
+      "git_blob_sha1": "a1864a59480b5b0e6e3db66c276c8b41395cd73d",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/verify_return.py",
+      "git_blob_sha1": "f3521877d4e314f4a3e25ce7c18b012117345182",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/wrapper.template.py",
+      "git_blob_sha1": "62115126747971398851ae53dbba66f21ea15a2d",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/wrapper_receipts/COLLECT.stderr.log",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/wrapper_receipts/COLLECT.stdout.json",
+      "git_blob_sha1": "adbab908cbce87b9e8d68e8fd120f69e449cdd27",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/wrapper_receipts/LOCAL_COLLECT_RECEIPT.json",
+      "git_blob_sha1": "f4eb20a1b96144d920e56da0ea03a686475d8ea7",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/wrapper_receipts/LOCAL_EXECUTE_RECEIPT.json",
+      "git_blob_sha1": "775b5cd7f6514a477922a129eaf7a8c8ae8be975",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/wrapper_receipts/PLAN.stderr.log",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/wrapper_receipts/PLAN.stdout.json",
+      "git_blob_sha1": "b5be8e9c723dcf961fbcf0c6fc1453d413329b50",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/stderr.log",
+      "git_blob_sha1": "014203a5deaa956c82c727fd46ebeebe8cf98747",
+      "status": "added"
+    },
+    {
+      "path": "research/cr_phys02d_ncp_return_20261011/actual_run/stdout.log",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "status": "added"
+    }
+  ],
+  "drive_return_zip": {
+    "id": "18RE6v7GmGE33x1uQaFsLcvEac7Jcnd6E",
+    "name": "CR_PHYS02D_PULSE_RETURN_20261011T003258Z_024b083109e648b38db699d06436f5e5.zip",
+    "size": "5350251",
+    "parent_ids": [
+      "1pkohlay5eIfFJsBwPZ_yn2jIZONZjesI"
+    ],
+    "url": "https://drive.google.com/file/d/18RE6v7GmGE33x1uQaFsLcvEac7Jcnd6E/view?usp=drivesdk",
+    "md5Checksum": "UNAVAILABLE",
+    "sha1Checksum": "UNAVAILABLE",
+    "sha256Checksum": "UNAVAILABLE",
+    "modified_time": "2026-10-11T00:33:29.306Z"
+  },
+  "drive_return_summary": {
+    "id": "1y8tqVcpIokIlt8Dmk7eGKpUc6Npu70_p",
+    "name": "CR_PHYS02D_NCP_EXECUTION_20261011T003258Z_024b0831_KO.md",
+    "size": "3583",
+    "parent_ids": [
+      "1pkohlay5eIfFJsBwPZ_yn2jIZONZjesI"
+    ],
+    "url": "https://drive.google.com/file/d/1y8tqVcpIokIlt8Dmk7eGKpUc6Npu70_p/view?usp=drivesdk",
+    "md5Checksum": "UNAVAILABLE",
+    "sha1Checksum": "UNAVAILABLE",
+    "sha256Checksum": "UNAVAILABLE",
+    "modified_time": "2026-10-11T00:33:32.860Z"
+  },
+  "dropbox_return_zip": {
+    "metadata_type": "file",
+    "id": "id:BSpOijBcT10AAAAAAD3-1Q",
+    "name": "CR_PHYS02D_PULSE_RETURN_20261011T003258Z_024b083109e648b38db699d06436f5e5.zip",
+    "size": 5350251,
+    "rev": "65d85bb5eb64b0af03d47",
+    "path_display": "/BASS_DERIVATION_DOSSIERS_20260912/CR_PHYS02D_PULSE_RETURN_20261011T003258Z_024b083109e648b38db699d06436f5e5.zip",
+    "client_modified": "2026-10-11T00:33:34Z",
+    "server_modified": "2026-10-11T00:33:35Z"
+  },
+  "dropbox_return_summary": {
+    "metadata_type": "file",
+    "id": "id:BSpOijBcT10AAAAAAD3-1A",
+    "name": "CR_PHYS02D_NCP_EXECUTION_20261011T003258Z_024b0831_KO.md",
+    "size": 3583,
+    "rev": "65d85bb5794d80af03d47",
+    "path_display": "/BASS_DERIVATION_DOSSIERS_20260912/CR_PHYS02D_NCP_EXECUTION_20261011T003258Z_024b0831_KO.md",
+    "client_modified": "2026-10-11T00:33:34Z",
+    "server_modified": "2026-10-11T00:33:35Z"
+  },
+  "related_he": [
+    {
+      "number": 19,
+      "title": "Record reviewed E13C5 selected first2 branch cover",
+      "state": "open",
+      "draft": true,
+      "updated_at": "2026-10-11T00:48:12Z",
+      "head": {
+        "ref": "research/e13c5-first2-branch-cover-20261011",
+        "sha": "2085aee95970d95f9b91610bd28e0dc5d0948aab"
+      },
+      "body": "The incoming-state and energy-anchor enclosure now covers 12 selected captured paths across OFF/KF/GM and four nodes, retaining all chronological carries and seams. The task contains 36 segments: three reviewed OFF700 records are reused and 33 are newly computed.\n\nIndependent Astra review approved PASS_SCOPED after checking source identities, 5490 finite ordered intervals, 144 zero-containing ledger intervals, carries, representation records and controls. One bounded execution exited 0 in 34.60 s; no solver rerun or core-code change occurred.\n\nScope is the finite enclosure of these selected paths with fixed gas interpolation, masks, source branches and energy anchors. Full first2, physical/production admission, new gas evolution, photon/heat/recoil and receiver adoption remain HOLD. This draft is stacked on PR18 and is not a merge request.\n",
+      "html_url": "https://github.com/cosmosapjw-quantum/BASS_HE/pull/19"
+    },
+    {
+      "number": 20,
+      "title": "Record reviewed full first-two-step finite enclosure",
+      "state": "open",
+      "draft": true,
+      "updated_at": "2026-10-10T23:02:27Z",
+      "head": {
+        "ref": "research/e13c5-full-first2-reviewed-20261011",
+        "sha": "0633ec2c9aed37593b9f1c05abc7156727408583"
+      },
+      "body": "The selected PR19 branch cover left most captured nodes unenclosed. This change\nrecords a single completed finite enclosure over all 2440 nodes in OFF/KF/GM\nfor the first two captured steps, with frozen gas interpolation, masks, source\nbranches and energy seams. Fresh independent Astra review returned PASS_SCOPED.\n\nValidation: 7320 unique paths, 14652 segments (14616 new; 36 reused), 58608\nzero-containing prefix/per-step ledger checks, independent weighted reductions,\n2351508 finite ordered intervals and nonnegative endpoint lower bounds. Primary\nexit 0; wall 3:54:41; CPU 13954.73 s; maximum RSS 98484 KiB. No repair or rerun.\n\nThe 292932850-byte raw PATHS output and all 23 pinned inputs are in the verified\nlocal recovery archive, SHA-256\n`1f7fbb6e3f40e69b083943e12976f0d17f4327da6f8db83c997b2aabbb442076`.\nGit includes compact source, immutable execution receipts and additive review.\n\nPhysical/global/production admission, cosmological continuum convergence, new\ngas evolution, actual photon/heat/recoil delivery and receiver adoption remain\nHOLD. This draft stacks on PR19; no automatic merge.\n",
+      "html_url": "https://github.com/cosmosapjw-quantum/BASS_HE/pull/20"
+    },
+    {
+      "number": 18,
+      "title": "Publish source-bound E13C5 OFF700 incoming and anchor pilot",
+      "state": "open",
+      "draft": true,
+      "updated_at": "2026-10-10T17:27:11Z",
+      "head": {
+        "ref": "research/he-e13c5-off700-publication-20261011",
+        "sha": "48f648cd905cd8c232ae43abe97745ac6a96dec2"
+      },
+      "body": "Publishes the recovered OFF700 three-segment incoming/anchor pilot and its existing scoped Astra review. The first toy failure, authorized toy-only repair source, raw results, checkpoint, and historical report/review are copied byte-for-byte from the verified recovery archive.\n\nThe publication is based on delivery commit `8fc3fb14dd33da10efa86c97c4beb9b0d12eeaad`. Source binding is `VERIFIED_GIT_PROJECTION_PLUS_ARCHIVE_MANIFEST_BINDING`: all 139 projected archive files and all 303 archive manifest payload hashes verify; the exact 141-entry core contains two declared Git-only packaging sidecars. Nested archive dependencies are not claimed present in PR17. Replay uses the verified full recovery archive's original sibling layout.\n\nValidation: immutable core/tree and manifest/lock identities match; task-only additive diff; 13 pilot files are byte-identical; diff check passes. No scientific replay, native run, gas evolution, six-control replay, full-path expansion, or merge. Existing PASS_SCOPED covers only the three fixed captured-path segments. Full-path, physical, production and receiver-adoption claims remain HOLD; recipient ACK remains separate.\n\nHistorical pending/publication-blocker statements are retained as recorded; the new source-binding sidecar supersedes their source materialization blocker only.\n",
+      "html_url": "https://github.com/cosmosapjw-quantum/BASS_HE/pull/18"
+    }
+  ],
+  "related_hh": [
+    {
+      "number": 35,
+      "title": "PHYS06: energy-coordinate structure and uniform mixed-rectangle certification",
+      "state": "open",
+      "draft": false,
+      "updated_at": "2026-10-10T23:11:52Z",
+      "head": {
+        "ref": "research/hh-phys06-energy-uniform-mixed-20261011",
+        "sha": "baf23360627bc1c6d10aac5317052f23edafd1b1"
+      },
+      "body": "## Why\nPHYS05 left actual finite HH-by-birth interaction and paired step defects open. Point mixed coefficients cannot certify a finite parameter rectangle, and energy reduction must preserve the source's stored density and heat leaves.\n\n## Changes\n- Derive the exact-real energy coordinate, direct HH cancellation, fixed-stock photo Hessian, and source normalization/rounded heat-leaf corrections.\n- Add a conditional uniform implicit-family theorem, full mixed chain, finite-rectangle integral identity, paired difference identity, and exact rational reference implementation.\n- Include frozen-source diagnostics, original run/failure records, independent PROMOTE_SCOPED review, source/harness snapshots, and seven bounded NCP implementation tasks with six new nonnative test targets.\n- Provide a sealed 107-file package and detached delivery receipt/start/index under the delivery prefix; backup identifiers are added after actual upload acknowledgements.\n\n## Validation and scope\nThe recorded first reference run passed 275 assertions and 17 intentional rejection cases. Frozen-input diagnostics passed 198 group and 6 aggregate exact equalities; source coefficient corrections are retained. Independent review matched all 100 frozen candidate file hashes. Published core blobs and sizes match all 107 local files.\n\nP06-C01–C07 are promoted only within derived/reference/archived-component scope. Actual W, finite I_h, paired mixed scheme defect, uniform native root/tube, and continuous/time remainder remain null and HOLD. Actual native endpoints, native roots/points, IVP, and historical-suite replays remain 0. This additive research PR targets the existing PHYS05 branch; it does not merge or alter the NCP work branch.",
+      "html_url": "https://github.com/cosmosapjw-quantum/WU088_HH/pull/35"
+    },
+    {
+      "number": 34,
+      "title": "HH PHYS05: exact endpoint-free remap and photo component identities",
+      "state": "open",
+      "draft": true,
+      "updated_at": "2026-10-10T17:16:28Z",
+      "head": {
+        "ref": "research/hh-phys05-endpoint-free-20261011",
+        "sha": "4ea15a082f9358e28af35e30a392585f4e4383c9"
+      },
+      "body": "This adds an endpoint-free exact-rational checker and preserved results for the frozen PHYS04 active photon quotient. An independent Astra review approved PASS_SCOPED for the remap/reduced-photo component identities: 18,817 scalar equalities have zero residual, including signed directions, direct formal BE transport isolation, and quotient derivatives.\n\nOne checker invocation completed with exit 0; no native, root, IVP, history, atomic, or old-suite execution was performed. Actual mixed response W, root/parameter-family existence, regularity tubes, finite mixed remainders, and history/continuum admission remain HOLD. Gas-only polynomial witnesses certify algebraic cancellation only.\n\nRaw stdout/stderr, the frozen contract, exact arrays, run ledger, and independent review are retained. A verified full-history recovery bundle was created locally before publication.\n",
+      "html_url": "https://github.com/cosmosapjw-quantum/WU088_HH/pull/34"
+    },
+    {
+      "number": 33,
+      "title": "R31AO: authority-compliant unequal order ladder",
+      "state": "open",
+      "draft": true,
+      "updated_at": "2026-10-08T11:56:26Z",
+      "head": {
+        "ref": "research/r31ao-unequal-order-ladder-20260930",
+        "sha": "c455875643a34639f57b24dda2f8d60155addd6c"
+      },
+      "body": "## Scope\nAdditive research/preflight design on R31AN. No science node or new order computation is executed.\n\n## Main change\nThe blocked equal-ratio B144-B192-B256 ladder is replaced by a source-authority-compliant B128-B160-B192 ladder already covered by the recovered frozen source contract:\n- OD unchanged guard allows n<=192.\n- JVP frozen grids exist for 128,160,192.\n- exact-weight source declares intended frozen B96--B192 range.\n- B256 remains outside unchanged OD authority.\n- B144 lacks the frozen JVP grid.\n\nNo producer/source modification is proposed.\n\n## Unequal-ratio analysis\nUnder the conditional scalar/fixed-error-direction model Q_n=Q_inf+C n^-p,\n\nrho=d128160/d160192\n=((5/4)^p-1)/(1-(5/6)^p).\n\nWolfram verifies this function is strictly increasing for p>0, with lower endpoint\nlog(5/4)/log(6/5)=1.2239010857415446...\n\nThus:\n- rho <= threshold: positive-p power model incompatible normwise.\n- rho > threshold: unique positive p exists.\n\nConditional formulas:\nE192=d160192/((6/5)^p-1)\nE160=d160192/(1-(5/6)^p).\n\nThese are always conditional asymptotic diagnostics, not rigorous source bounds. Matrix spectral-norm increments additionally require stable error direction.\n\n## Future bounded preflight\nNCP should:\n1. reverify grid/source authority,\n2. inventory any existing z=0.75 B128/B160 complete OD+JVP outputs,\n3. prelock raw unequal-order comparator and direction diagnostics,\n4. prelock finite-order primary+secondary verdict replay across B128/B160/B192,\n5. if B128/B160 outputs are missing and authority is closed, create a one-shot scope for exactly those two new orders,\n6. execute zero science commands in the preflight.\n\nB192 existing z=0.75 output is reused.\n\n## Claim ceiling\nSOURCE_ACCURACY_BOUND_UNAVAILABLE and rigorous-reference certification remain open even if the finite-order ladder is clean. No interval enclosure, special-function bound, roundoff certificate, or assembly bound is created here.\n\nFresh helper tests: 6 PASS. No merge requested.\n\n## 2026-10-04: external-atomic fastest-track handoff\n\n[Codex 시작문](https://github.com/cosmosapjw-quantum/WU088_HH/blob/11f126f7acfb2d99c7570eb533981e9dc6404c00/docs/atomic_reionization_handoff_20261004_v1/threads/WU088_HH/CODEX_START_KO.md) · [공통 계획](https://github.com/cosmosapjw-quantum/WU088_HH/blob/11f126f7acfb2d99c7570eb533981e9dc6404c00/docs/atomic_reionization_handoff_20261004_v1/RESEARCH_PROGRAM_KO.md) · [이번 게시 commit](https://github.com/cosmosapjw-quantum/WU088_HH/commit/11f126f7acfb2d99c7570eb533981e9dc6404c00)\n\n외부 HH 계수 family, 3000K 분기, 동일 원자 감도 campaign 수락 계약 및 original lane 보존. 유한 reference 검사 34개 통과; 과학 적분과 production admission은 미실행. REI-F09가 유일한 우주론 감도 실행자이며 HH-F3는 같은 결과를 평가합니다.\n\n전역 DAG 31개 노드의 비순환성·단일 감도 소유자·legacy 재호출 조건을 독립 검토했습니다. [Drive 백업 폴더](https://drive.google.com/drive/folders/1zzbClTE3qzz8gaiQwopXJqVk9ZGBawYZ), Dropbox 동일명 폴더 및 publication 영수증으로 전달합니다. 이번 게시가 기존 과학 HOLD/OPEN gate를 승격하지 않습니다.\n\n\n### 최종 전달 확인\n[Codex 시작문](https://github.com/cosmosapjw-quantum/WU088_HH/blob/673c44ce687fc49c5420baa856086d3e2dc56c18/docs/atomic_reionization_handoff_20261004_v1/threads/WU088_HH/CODEX_START_KO.md) · [Drive/Dropbox 확인 영수증](https://github.com/cosmosapjw-quantum/WU088_HH/blob/673c44ce687fc49c5420baa856086d3e2dc56c18/docs/atomic_reionization_handoff_20261004_v1/publication/DELIVERY_RECEIPT.json)\n\n주요 8개 파일의 양쪽 저장 완료 및 ID/크기 readback 확인. 새 원격 전체 복구 검사는 미수행. 현재 PR은 draft이며 병합하지 않았습니다.\n\n\n## REI-REC-BASS-SYNC02-20261005 additive return\n\n[고정 handoff](https://github.com/cosmosapjw-quantum/WU088_HH/blob/32d1a31aef47aaa64b373ca2d89cb709abe578c0/docs/research_sync/REI-REC-BASS-SYNC02-20261005/HANDOFF_KO.md) · [central reviewed packet](https://github.com/cosmosapjw-quantum/rei_bianchi/blob/7c10471375837b85d58ec39fe1e8242429b74700/docs/research_sync/REI-REC-BASS-SYNC02-20261005/README_KO.md)\n\n두 연구 루프와 scoped independent review 결과, DAG/low-cost entry를 additive docs로 전달합니다. 동시 HH FLRW06 native167scalar/6invalid 반환은 같은 완료 finite gate로 수신했으며 중복 milestone으로 세지 않습니다. HH optional parked/S0 OFF/legacy24 of289·265unbounded·epsilon null·B22 OPEN을 유지합니다. 현재 HH 계산을 재개하지 않고 owner opt-in 또는 실제 HH consumer 변경만 새 trigger로 둡니다. 기존 draft/owner 상태 파일은 유지합니다. Git 전달과 직접 채팅 전달, recipient ACK는 별개이며 ACK는 pending입니다.\n\n최종 백업 게시 완료: [immutable ZIP](https://github.com/cosmosapjw-quantum/rei_bianchi/blob/7c5469101f8d6ef027c8c3119cc5c053e15ba1d9/docs/research_sync/REI-REC-BASS-SYNC02-20261005/REI_REC_BASS_SYNC02_20261005_v1.zip) · [delivery pointer](https://github.com/cosmosapjw-quantum/WU088_HH/blob/0d80ff00880569dca9db2e19d0719ad316165eef/docs/research_sync/REI-REC-BASS-SYNC02-20261005/DELIVERY_POINTER.json) · [Drive](https://drive.google.com/drive/folders/158v8JmrvSCd7lq4qMwpXTDaJ7mvmFDXz). ZIP SHA256 `774c07fec25a9d08779ac17d1ddf866872c3e05b9d9c4e34cf4808cc59d86b4b`, 2,655,641 bytes. 기존 science commit7c104713은 ZIP 게시 전 snapshot이며 최종 archive/report commit은7c546910입니다. Dropbox 동시 백업 경로는 DELIVERY_POINTER.json에 있습니다. 수신 ACK/과학 판정은 변경하지 않습니다.\n\n---\n### SYNC03 cross-repo return — 2026-10-07\n\n[Thread-specific return](https://github.com/cosmosapjw-quantum/WU088_HH/tree/649ecb06321d3f7956fc13902666f062dfcde50c/docs/research_sync/REI-REC-BASS-SYNC03-20261007) · [Central source-pinned result and DAG](https://github.com/cosmosapjw-quantum/rei_bianchi/tree/34765f5cc35169b5e8718571f3c01777cd28aec7/docs/research_sync/REI-REC-BASS-SYNC03-20261007)\n\nTwo ordered research loops completed: actual F08 → exact BASS receiver (6 histories, 112000 cells), independent Decimal/rational verification, then conditional endpoint-linear Δτ transfer. T2 Δτ = 3.44222649e-12; conditional interval [3.25112368e-12, 3.63332931e-12]. Physical/continuum admission remains separate.\n\nLatest synchronization supersedes stale F08 pending / F04E next / HH parked entries: HE RCT02 reference histories and CR-F0-R2 fixed-box source-step are complete in their stated scopes; actual receiver/cosmological owner integration remains reserved. Source modules, old failures and original atomic lane remain preserved. Repository handoff publication is not direct ChatGPT recipient execution ACK.\n",
+      "html_url": "https://github.com/cosmosapjw-quantum/WU088_HH/pull/33"
+    }
+  ],
+  "receipt_written_at_utc": "2026-10-11T00:49:10.659833+00:00",
+  "retrieved_file_identities": [
+    {
+      "path": "/workspace/scratch/584ff08e1634/phys02e_work/intake/pr33/EXECUTION_SUMMARY.json",
+      "source_path": "research/cr_phys02d_ncp_return_20261011/EXECUTION_SUMMARY.json",
+      "source_commit": "20c2e6de7c58c3690efca6322489b811c99f3e99",
+      "bytes": 8886,
+      "sha256": "5553bf026eae124d1b921b173cae0148721198c2736ef041be5098258b717d87",
+      "git_blob_sha1": "a8ef6e37366f5703ff5a143a01c7c4575756e38a",
+      "git_blob_matches_PR33_files": true
+    },
+    {
+      "path": "/workspace/scratch/584ff08e1634/phys02e_work/intake/pr33/INDEPENDENT_ACTUAL_RETURN_DECISION.json",
+      "source_path": "research/cr_phys02d_ncp_return_20261011/INDEPENDENT_ACTUAL_RETURN_DECISION.json",
+      "source_commit": "20c2e6de7c58c3690efca6322489b811c99f3e99",
+      "bytes": 16115,
+      "sha256": "ca5f3b8baba7605b5f857aef437b41ba61cfeea2facc1d00c4183e8c3e7534b4",
+      "git_blob_sha1": "f25e540ac1bb98758d4c9b9f0c042f7e038b56fa",
+      "git_blob_matches_PR33_files": true
+    },
+    {
+      "path": "/workspace/scratch/584ff08e1634/phys02e_work/intake/pr33/actual_run/ACTUAL_EXIT.json",
+      "source_path": "research/cr_phys02d_ncp_return_20261011/actual_run/ACTUAL_EXIT.json",
+      "source_commit": "20c2e6de7c58c3690efca6322489b811c99f3e99",
+      "bytes": 907,
+      "sha256": "d79d2b4ef9f67aab788a94a72bd89325a2666b011eca00f486a1a48b4472d972",
+      "git_blob_sha1": "d57f7618daebdb5a868394ea39a05040ea5e4a4c",
+      "git_blob_matches_PR33_files": true
+    },
+    {
+      "path": "/workspace/scratch/584ff08e1634/phys02e_work/intake/pr33/actual_run/operational_sidecars/GRID_DIAGNOSTIC.json",
+      "source_path": "research/cr_phys02d_ncp_return_20261011/actual_run/operational_sidecars/GRID_DIAGNOSTIC.json",
+      "source_commit": "20c2e6de7c58c3690efca6322489b811c99f3e99",
+      "bytes": 4445,
+      "sha256": "05ff866750d2433bc9e7feba0361a7a2664070968c87da12613beb0c2fc02d0c",
+      "git_blob_sha1": "8335edb03d12e2c5ede0af817bb0d46c033686b9",
+      "git_blob_matches_PR33_files": true
+    },
+    {
+      "path": "/workspace/scratch/584ff08e1634/phys02e_work/intake/pr33/DELIVERY_RECEIPT.json",
+      "source_path": "research/cr_phys02d_ncp_return_20261011/DELIVERY_RECEIPT.json",
+      "source_commit": "20c2e6de7c58c3690efca6322489b811c99f3e99",
+      "bytes": 13012,
+      "sha256": "4bc707b9d3290605fa1ff2e820e5ad54c131b35a2df0f47da09d987885068179",
+      "git_blob_sha1": "03843af0ccb5692778bd5f036cc94910abf606f6",
+      "git_blob_matches_PR33_files": true
+    },
+    {
+      "path": "/workspace/scratch/584ff08e1634/phys02e_work/intake/pr33/PUBLICATION_RECEIPT.json",
+      "source_path": "research/cr_phys02d_ncp_return_20261011/PUBLICATION_RECEIPT.json",
+      "source_commit": "20c2e6de7c58c3690efca6322489b811c99f3e99",
+      "bytes": 1797,
+      "sha256": "18f5d8109a481c84151f8923f01852425a7897c511e719e366edbd7e9c55e3f7",
+      "git_blob_sha1": "6c23d255b0431e329f433e9f0f8b8f709fcd3640",
+      "git_blob_matches_PR33_files": true
+    },
+    {
+      "path": "/workspace/scratch/584ff08e1634/phys02e_work/intake/pr33/INDEPENDENT_ACTUAL_RETURN_REVIEW.md",
+      "source_path": "research/cr_phys02d_ncp_return_20261011/INDEPENDENT_ACTUAL_RETURN_REVIEW.md",
+      "source_commit": "20c2e6de7c58c3690efca6322489b811c99f3e99",
+      "bytes": 2555,
+      "sha256": "170e9a958bf3958829f0791601079f56dbc490cc584adf13de70e4abcb54ff7e",
+      "git_blob_sha1": "5a73cbbc4763d91cb546a5d172df1f4f77f15c8f",
+      "git_blob_matches_PR33_files": true
+    },
+    {
+      "path": "/workspace/scratch/584ff08e1634/phys02e_work/intake/pr33/actual_run/stderr.log",
+      "source_path": "research/cr_phys02d_ncp_return_20261011/actual_run/stderr.log",
+      "source_commit": "20c2e6de7c58c3690efca6322489b811c99f3e99",
+      "bytes": 1520,
+      "sha256": "e67ffb42a77575c0ed2b9a060a61f9e578471299b8376ea158897b313d025fea",
+      "git_blob_sha1": "014203a5deaa956c82c727fd46ebeebe8cf98747",
+      "git_blob_matches_PR33_files": true
+    },
+    {
+      "path": "/workspace/scratch/584ff08e1634/phys02e_work/intake/pr33/RETURN_MANIFEST.json",
+      "source_path": "research/cr_phys02d_ncp_return_20261011/RETURN_MANIFEST.json",
+      "source_commit": "20c2e6de7c58c3690efca6322489b811c99f3e99",
+      "bytes": 80527,
+      "sha256": "85939a2d8da08f98caf653178d5ef7980ba8e52fb1a1a01268f8718f566347cb",
+      "git_blob_sha1": "e95bb8c0b114043f9a54d2e20f29d6c4aa633881",
+      "git_blob_matches_authoritative_tree_or_PR_files": true
+    },
+    {
+      "path": "/workspace/scratch/584ff08e1634/phys02e_work/intake/policy/AGENTS.md",
+      "source_path": "AGENTS.md",
+      "source_commit": "20c2e6de7c58c3690efca6322489b811c99f3e99",
+      "bytes": 8087,
+      "sha256": "2df3fe76118b9287a16ad8ee5e2c2e544281ca0cb99568752fff832784d249ce",
+      "git_blob_sha1": "75274768eb74c2d5558a5bfc1d5bc0eb72de681f",
+      "git_blob_matches_authoritative_tree_or_PR_files": true
+    }
+  ],
+  "observed_no_later_than_utc": "2026-10-11T00:49:10.659833+00:00",
+  "scope": "READ_ONLY_SOURCE_INTAKE; no candidate, acceptance, implementation, G or pulse work",
+  "related_repositories_triage": "Recent HE PR19/20 and HH PR35 metadata do not provide an exact-grid CR input or new directly required dependency; not imported. This is a scoped metadata triage, not an exhaustive scientific audit.",
+  "policy_check": {
+    "checked_at_utc": "2026-10-11T00:51:20.404171+00:00",
+    "main_ref": "77237751bdd2aed5934bf7fc3bc626d631a09058",
+    "root_AGENTS_blob": "75274768eb74c2d5558a5bfc1d5bc0eb72de681f",
+    "root_codex_tree_entry_present": false,
+    "codex_contents_response": "NOT_FOUND_404",
+    "codex_readback_policy_response": "NOT_FOUND_404",
+    "tier_policy_in_root_codex": "NOT_FOUND; no positive assertion of contents",
+    "docs_policy_entries": [
+      {
+        "path": "docs/CHATGPT_CODEX_DIVISION_OF_LABOR_KO.md",
+        "sha": "733ede5e85f16fa6ffd1706db83aa501e846091a",
+        "size": 1946,
+        "type": "file"
+      },
+      {
+        "path": "docs/CLAIM_POLICY.md",
+        "sha": "2e259e196e2dbf1eeb49dba0a707c0c42bc4e3b8",
+        "size": 2183,
+        "type": "file"
+      },
+      {
+        "path": "docs/HPC_ACCURACY_POLICY_KO.md",
+        "sha": "e4bf4488896a62cab82c9d96ff32c51dd3b4969b",
+        "size": 4160,
+        "type": "file"
+      },
+      {
+        "path": "docs/READBACK_POLICY.md",
+        "sha": "702af95e30010e86551ecb66e5840c0810f86f37",
+        "size": 4380,
+        "type": "file"
+      }
+    ],
+    "PR33_modifications_to_inherited_policy": "NONE; all 49 PR files are added within new return directory"
+  }
+}
