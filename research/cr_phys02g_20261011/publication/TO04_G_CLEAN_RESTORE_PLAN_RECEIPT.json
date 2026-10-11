@@ -1,0 +1,83 @@
+{
+  "schema": "cr-phys02g-clean-restore-plan-receipt.v1",
+  "started_utc": "2026-10-11T07:09:58Z",
+  "helper_sha256": "fb3c967aa5f50c9c4ad874ff045d6a77ffa14f4e76d7fb010d1cbba96119b76c",
+  "status": "IMPLEMENTATION_VERIFIED_G_CLEAN_RESTORE_WAITING_PLAN_PENDING_ROOT_ACCEPTANCE",
+  "physics_execution": {
+    "G": 0,
+    "pulse": 0,
+    "expm": 0,
+    "solves": 0,
+    "numerical_preflight": 0,
+    "test_suites": 0
+  },
+  "prior_F_restore_runs": 0,
+  "zip": {
+    "path": "/workspace/scratch/584ff08e1634/phys02g_publish_work/CR_PHYS02G_20261011_0ad3be0f_HANDOFF.zip",
+    "bytes": 27795932,
+    "sha256": "21c60d3d3f7193f2e957f17f2b610a306d0d85eaed08c90a52c0da8c5a1e602b"
+  },
+  "bindings": {
+    "science_commit": "0ad3be0fec018fbd638063ffd4bf4d0cf2ef8525",
+    "science_tree": "b4ba1be466d5d62ab7572076387113d2277948ff",
+    "bundle_manifest_sha256": "2a80fd0812be72b5358a443854e00eed1331f3e3a0b5a9f6608fa5216c9b5aba",
+    "unit_manifest_sha256": "5bc6cfed11a1e29271347f039168f10d4339dd21a0c0874e156e3a6c77dac727",
+    "frozen_contract_sha256": {
+      "state/SCIENTIFIC_CONTRACT.json": "517dd569f2e0d0857b37e33a5d90da6475978ab1a43374f3dfbe0323ffb35832",
+      "state/VALIDATION_CONTRACT.json": "259d6964154cc190050761db092c9edd5499649867f822003db8afdfa42d9aba",
+      "ncp/NCP_EXECUTION_CONTRACT.json": "06a06f865bba44ce93cc3bcf905cf95440de0978e87ee76529d2f440c6065856",
+      "inputs/INPUT_IDENTITIES.json": "748076a5628c5a64ad4a057f96c58fd9b54da70dfef9d90e64823234c2df47c9",
+      "inputs/F_BACKUP_DEPENDENCY.json": "984cb304788d9de7b89fd79d1bd1cf1daa57d12c5e63f5b1267a53743e22740f"
+    },
+    "nested_F": {
+      "path": "dependency_payload/CR_PHYS02F_20261011_39e27281_HANDOFF.zip",
+      "bytes": 26927005,
+      "sha256": "9d91d2971eab2db05e0039fe1fc2a5827086a28d585e792d56f6851840e6ebef",
+      "whole_archive_verified": true,
+      "unpacked": false,
+      "prior_F_TO04_not_rerun": true
+    }
+  },
+  "restore": {
+    "destination": "/workspace/scratch/584ff08e1634/phys02g_publish_work/core_clean_restore",
+    "files": 141,
+    "all_entry_hashes_verified": true,
+    "exact_membership_verified": true
+  },
+  "plan": {
+    "command_argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "/workspace/scratch/584ff08e1634/phys02g_publish_work/core_clean_restore/research/cr_phys02g_20261011/ncp/postprocess_frontier.py",
+      "--plan"
+    ],
+    "cwd": "/workspace/scratch/584ff08e1634/phys02g_publish_work/core_clean_restore",
+    "python_executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "python_version": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "started_utc": "2026-10-11T07:09:58Z",
+    "timeout_s": 60,
+    "invocations": 1,
+    "F_family_argument": null,
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "stdout": "{\n  \"status\": \"WAITING_FOR_F_ACTUAL_RETURN\",\n  \"state\": \"PREPARED_NOT_EXECUTED\",\n  \"source_admission\": {\n    \"status\": \"PREPARED_SOURCE_ADMITTED\",\n    \"review_sha256\": \"9dd9c623fdd881667b6692ea8c3c9fbac08d545ba821fe33f66c2dbd38322002\",\n    \"manifest_sha256\": \"5bc6cfed11a1e29271347f039168f10d4339dd21a0c0874e156e3a6c77dac727\",\n    \"actual_F_review_required\": true\n  },\n  \"actual_postprocess_reservations\": 0,\n  \"physical_G_calls\": 0,\n  \"linear_solve_calls\": 0,\n  \"pulse_calls\": 0,\n  \"expm_calls\": 0\n}\n",
+    "stderr": "",
+    "actual_exit": 0,
+    "ended_utc": "2026-10-11T07:09:59Z",
+    "wall_s": 0.20647972900769673,
+    "parsed_plan": {
+      "status": "WAITING_FOR_F_ACTUAL_RETURN",
+      "state": "PREPARED_NOT_EXECUTED",
+      "source_admission": {
+        "status": "PREPARED_SOURCE_ADMITTED",
+        "review_sha256": "9dd9c623fdd881667b6692ea8c3c9fbac08d545ba821fe33f66c2dbd38322002",
+        "manifest_sha256": "5bc6cfed11a1e29271347f039168f10d4339dd21a0c0874e156e3a6c77dac727",
+        "actual_F_review_required": true
+      },
+      "actual_postprocess_reservations": 0,
+      "physical_G_calls": 0,
+      "linear_solve_calls": 0,
+      "pulse_calls": 0,
+      "expm_calls": 0
+    }
+  },
+  "ended_utc": "2026-10-11T07:09:59Z"
+}

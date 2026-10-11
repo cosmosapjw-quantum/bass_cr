@@ -1,0 +1,100 @@
+{
+  "schema": "cr-phys02f-controller-pointer.v1",
+  "recorded_utc": "2026-10-11T06:43:37.064657+00:00",
+  "task": "CR-PHYS02F-NCP-ADJOINT-RESIDENCE",
+  "status": "FIRST_FAILURE_PRESERVED_OPERATOR_IDENTITY_MISMATCH",
+  "fresh_root": "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa",
+  "source": "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/source",
+  "run": "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/run",
+  "return": "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/return",
+  "external_logs": "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/external_logs",
+  "previous_readonly_events": "/tmp/CR_PHYS02F_LOWER_EXECUTION_EVENTS_20261011.jsonl",
+  "previous_readonly_outcome": "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/external_logs/prior_readonly_outcome.json",
+  "commands_and_exits": {
+    "plan": {
+      "command": [
+        "/usr/bin/python3",
+        "research/cr_phys02f_20261011/ncp/launch_residence.py",
+        "--plan"
+      ],
+      "actual_exit": 0,
+      "receipt": "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/external_logs/plan.receipt.json",
+      "stdout": "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/external_logs/plan.stdout",
+      "stderr": "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/external_logs/plan.stderr"
+    },
+    "preflight": {
+      "command": [
+        "/usr/bin/python3",
+        "research/cr_phys02f_20261011/ncp/launch_residence.py",
+        "--preflight"
+      ],
+      "actual_exit": 0,
+      "receipt": "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/external_logs/preflight.receipt.json",
+      "stdout": "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/external_logs/preflight.stdout",
+      "stderr": "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/external_logs/preflight.stderr"
+    },
+    "wrapper": {
+      "command": [
+        "/usr/bin/python3",
+        "research/cr_phys02f_20261011/ncp/run_and_collect.py",
+        "--run-dir",
+        "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/run",
+        "--out",
+        "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/return"
+      ],
+      "actual_exit": 1,
+      "receipt": "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/external_logs/wrapper.receipt.json",
+      "stdout": "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/external_logs/wrapper.stdout",
+      "stderr": "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/external_logs/wrapper.stderr"
+    }
+  },
+  "coordinator_exit": 1,
+  "wrapper_execute_exit": 1,
+  "wrapper_collection_exit": 0,
+  "wrapper_actual_exit": 1,
+  "counts": {
+    "build_reservations": 1,
+    "completed_G_builds": 1,
+    "resolvent_reservations": 0,
+    "completed_resolvent_blocks": 0,
+    "triangular_solve_reservations": 0,
+    "completed_triangular_solve_calls": 0,
+    "actual_triangular_solve_calls_bounds": [
+      0,
+      0
+    ],
+    "pulse_calls": 0,
+    "expm_calls": 0
+  },
+  "failure": {
+    "type": "OPERATOR_IDENTITY_MISMATCH",
+    "raw_stderr": "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/run/stderr.log",
+    "current_G_completion": "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/run/G_COMPLETION_1.json",
+    "current_G_completion_sha256": "5190e333ca53badb0539e41a0acd408953ff3a7f7764a2e3366258002b8c32a5",
+    "reference_G_completion": "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/source/research/cr_phys02e_ncp_return_20261011/actual_run/G_COMPLETION_1.json",
+    "mismatch_field": "operator_identity.G.arrays.data.raw_C_sha256",
+    "current": "8e33e916c4a24d57c9dad0f82ef046a81a818437e64cafb2e580d4c8809ea3fa",
+    "reference": "6bd1d6aeeaccf4cc717229e3f9beff0cf072a157c844dd75ba2353be5f15f4cd"
+  },
+  "return_archive": {
+    "path": "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/return/CR_PHYS02F_RESIDENCE_RETURN_20261011T064255Z_6016d88094b143b6a8bba0ff688c7939.zip",
+    "bytes": 30587901,
+    "sha256": "f64b263fd8dd99121d3114a66a2a70616b383cbd5ce0823acd45f9893babdd8d",
+    "files": 659
+  },
+  "return_family_manifest": "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/return/RETURN_FAMILY_MANIFEST.json",
+  "return_family_manifest_sha256": "c525ea5cac31c2b4340a57069b773cdf85eb4910bf3644ce3731f55dc4d65440",
+  "wrapper_sidecars": [
+    "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/return/WRAPPER_COLLECTION_EXIT.json",
+    "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/return/WRAPPER_ACTUAL_EXIT.json"
+  ],
+  "runtime_observation": "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/external_logs/host_probe.json",
+  "requested_executor": "gpt-6-sol/medium",
+  "transport_selected": "NOT_EXPOSED_BY_THIS_CLIENT",
+  "observed_client": "Codex API session; model metadata not independently exposed",
+  "backend_identity": "NOT_INDEPENDENTLY_OBSERVED",
+  "science_commit": "39e272815ef13069d7c54fa8c50eab4103f14a79",
+  "science_tree": "a0d6229b92092ee055ffe54ba5a9563c7f904aab",
+  "scientific_admission": "HOLD_PENDING_FRESH_INDEPENDENT_ASTRA_REVIEW",
+  "original_preparation_deadline_utc": "2026-10-11T07:01:49Z"
+}
