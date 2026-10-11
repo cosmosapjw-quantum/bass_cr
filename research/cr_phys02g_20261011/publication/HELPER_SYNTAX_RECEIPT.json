@@ -1,0 +1,35 @@
+{
+  "schema": "cr-phys02g-publication-helper-syntax.v1",
+  "started_utc": "2026-10-11T06:45:24.483335+00:00",
+  "ended_utc": "2026-10-11T06:45:24.596369+00:00",
+  "wall_s": 0.11303855400183238,
+  "checks": [
+    {
+      "file": "assemble.py",
+      "sha256": "e76b1cff8ff5f2d990b7d8ee008491b0d23fce3b57408310b1fb3eecdf5365a0",
+      "syntax": "COMPILED_IN_MEMORY",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "/workspace/scratch/584ff08e1634/phys02g_publish_work/assemble.py",
+        "--help"
+      ],
+      "actual_exit": 0,
+      "stdout": "usage: assemble.py [-h] [--repo REPO] [--output OUTPUT]\n                   {freeze-unit,prepare-git,bundle} ...\n\nCreate-only PHYS02G publication preparation. No remote writes or numerics.\n\npositional arguments:\n  {freeze-unit,prepare-git,bundle}\n\noptions:\n  -h, --help            show this help message and exit\n  --repo REPO\n  --output OUTPUT\n",
+      "stderr": ""
+    },
+    {
+      "file": "restore_plan.py",
+      "sha256": "61999d49cba2a3d8d6406d6c6cc0ab04ee93ccc506950a41d248cecb5db0d2b9",
+      "syntax": "COMPILED_IN_MEMORY",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "/workspace/scratch/584ff08e1634/phys02g_publish_work/restore_plan.py",
+        "--help"
+      ],
+      "actual_exit": 0,
+      "stdout": "usage: restore_plan.py [-h] --zip ZIP --dest DEST --receipt RECEIPT\n\nStdlib-only exact G outer restore and missing-F --plan; no F unpack/numerics.\n\noptions:\n  -h, --help         show this help message and exit\n  --zip ZIP\n  --dest DEST\n  --receipt RECEIPT\n",
+      "stderr": ""
+    }
+  ],
+  "scope": "Syntax and argument parser only; no freeze, prepare-git, bundle, restore, plan, scientific analysis, or tests executed"
+}

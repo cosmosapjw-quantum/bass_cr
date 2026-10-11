@@ -1,0 +1,216 @@
+{
+  "schema": "cr-phys02g-publication-binding-decision.v1",
+  "created_utc": "2026-10-11T07:25:56.168815+00:00",
+  "decision": "PASS_SCOPED_PUBLICATION_BINDING",
+  "reviewer_agent": "/root/phys02g_final_handoff_review",
+  "reviewer_role": "INDEPENDENT_ASTRA",
+  "independent_of_candidate_design": true,
+  "independent_of_acceptance_design": true,
+  "independent_of_implementation": true,
+  "backend_attestation": "NOT_INDEPENDENTLY_OBSERVED",
+  "scope": "One final factual check of concrete external START, current action, backup and assembly receipts, outer manifest/membership and five selected text payloads. No whole archive rehash, provider remote readback, R3 restore, core plan or numerical repetition.",
+  "external_start": {
+    "path": "CR_PHYS02G_20261011_0ad3be0f_NCP_START_KO.md",
+    "bytes": 10621,
+    "sha256": "54af74dde0dbaa69a1a65173f1fdc533a8d100d0ec633c69e40c863de582e44c",
+    "scope": "Full factual handoff content and metadata"
+  },
+  "archive": {
+    "name": "CR_PHYS02G_20261011_0ad3be0f_WITH_F_HOLD_HANDOFF.zip",
+    "bytes": 58470931,
+    "sha256": "2920fd78632ba41dce1f2d428db328862d4ad121f1b97bc746962ae847117707",
+    "bundle_manifest_sha256": "1ec3c042a86008a59f4867a179980b5e3f59783c6b8d372d99c6b453566c4e18",
+    "payload_files": 79,
+    "zip_entries": 80,
+    "actual_local_stat_bytes": 58470931,
+    "whole_sha_basis": "Previously completed OUTER_ASSEMBLY_RECEIPT; whole archive not rehashed by this reviewer"
+  },
+  "outer_manifest": {
+    "path": "BUNDLE_MANIFEST.json",
+    "bytes": 22457,
+    "sha256": "1ec3c042a86008a59f4867a179980b5e3f59783c6b8d372d99c6b453566c4e18",
+    "schema": "cr-phys02g-late-f-hold-envelope.v1",
+    "actual_manifest_read_and_hashed": true,
+    "payload_files": 79,
+    "zip_entries": 80,
+    "duplicate_entries": 0,
+    "exact_manifest_payload_plus_self_membership": true,
+    "git_publication_snapshot_payload_files": 47
+  },
+  "selected_archived_text_bindings": {
+    "README_CURRENT_NCP_KO.md": {
+      "bytes": 5732,
+      "sha256": "6748eaabb1145c40f8c4085f4bdbb42299fbbb7e3d7c106f1c940d262de90109",
+      "actual_archived_member_read": true,
+      "matches_manifest_bytes_and_sha256": true,
+      "equals_current_local_bytes": true
+    },
+    "late_f/CURRENT_NEXT_ACTION.json": {
+      "bytes": 2876,
+      "sha256": "ebda4caf69536ebcd32b3c87cb0fbb7f4dddbe912ff2224ef3442ae20172a18e",
+      "actual_archived_member_read": true,
+      "matches_manifest_bytes_and_sha256": true,
+      "equals_current_local_bytes": true
+    },
+    "late_f/NCP_READONLY_DIAGNOSTIC_CONTRACT.json": {
+      "bytes": 5357,
+      "sha256": "eebca369dbb01b6ad678e110866f919bdd07c7692850330df55f3deab99df0ba",
+      "actual_archived_member_read": true,
+      "matches_manifest_bytes_and_sha256": true,
+      "equals_current_local_bytes": true
+    },
+    "late_f/FINAL_READONLY_HANDOFF_DECISION.json": {
+      "bytes": 18115,
+      "sha256": "ba4d6e012a2522cce97c9c9acf9f9976c380d0cba0f4a60aaa306998a8a0b1e2",
+      "actual_archived_member_read": true,
+      "matches_manifest_bytes_and_sha256": true,
+      "equals_current_local_bytes": true
+    },
+    "late_f/LATE_F_INTEGRATION_KO.md": {
+      "bytes": 6555,
+      "sha256": "c7a0b3d058384cb0bef05a93f4f2dc6a6ffd420b6f95938c07379dcbb4ffb90b",
+      "actual_archived_member_read": true,
+      "matches_manifest_bytes_and_sha256": true,
+      "equals_current_local_bytes": true
+    }
+  },
+  "nested_archive_layers": {
+    "G_core": {
+      "path": "payload/CR_PHYS02G_20261011_0ad3be0f_HANDOFF.zip",
+      "bytes": 27795932,
+      "sha256": "21c60d3d3f7193f2e957f17f2b610a306d0d85eaed08c90a52c0da8c5a1e602b",
+      "inner_schema": "cr-phys02g-self-contained-bundle.v1",
+      "current_check": "Outer manifest/header length and external START agree; payload not reread"
+    },
+    "failed_F": {
+      "path": "payload/CR_PHYS02F_LOCAL_OPERATOR_BINDING_HOLD_REMOTE_20261011T0700Z.tar.gz",
+      "bytes": 30522967,
+      "sha256": "0b6d54f5811f4f8ee651a79e734c9dddf37a722133bd51acad3fcf16c110a4e5",
+      "numeric_zip_sha256": "f64b263fd8dd99121d3114a66a2a70616b383cbd5ce0823acd45f9893babdd8d",
+      "current_check": "Outer manifest/header length and external START agree; payload not reread; original family and external sidecars explicitly required"
+    }
+  },
+  "provider_receipt_binding": {
+    "basis": "Root recorded R1 upload ACK and exact returned metadata in DUAL_BACKUP_RECEIPT; this reviewer checked its content against START and assembly identity without repeating connector calls",
+    "drive": {
+      "id": "1TrNu23r3VfhvPGjesqATWFpthvhVjTcB",
+      "name": "CR_PHYS02G_20261011_0ad3be0f_WITH_F_HOLD_HANDOFF.zip",
+      "size": 58470931,
+      "parent_ids": [
+        "1pkohlay5eIfFJsBwPZ_yn2jIZONZjesI"
+      ],
+      "url": "https://drive.google.com/file/d/1TrNu23r3VfhvPGjesqATWFpthvhVjTcB/view?usp=drivesdk",
+      "success": true,
+      "checksum": "NOT_PROVIDED_BY_METADATA_TOOL"
+    },
+    "dropbox": {
+      "id": "id:BSpOijBcT10AAAAAAD4I9A",
+      "name": "CR_PHYS02G_20261011_0ad3be0f_WITH_F_HOLD_HANDOFF.zip",
+      "size": 58470931,
+      "path_display": "/BASS_DERIVATION_DOSSIERS_20260912/CR_PHYS02G_20261011_0ad3be0f_WITH_F_HOLD_HANDOFF.zip",
+      "ns_path": "ns:183516487//BASS_DERIVATION_DOSSIERS_20260912/CR_PHYS02G_20261011_0ad3be0f_WITH_F_HOLD_HANDOFF.zip",
+      "rev": "65d8b6ea41a810af03d47",
+      "success": true,
+      "checksum": "NOT_PROVIDED_BY_METADATA_TOOL"
+    },
+    "local_SHA_is_provider_checksum": false,
+    "provider_checksum": "NOT_PROVIDED_BY_METADATA_TOOL",
+    "new_outer_remote_R3": "NOT_PERFORMED_OR_CLAIMED"
+  },
+  "checks": [
+    {
+      "id": "PB-01",
+      "status": "PASS",
+      "finding": "External START names only CR-PHYS02G-NCP-OPERATOR-PROVENANCE-INTAKE as current work. Total diagnostic command window is 180 s, with conditional at most one 90 s saved-array comparison inside that window and both original exact-bound persisted CSC arrays required."
+    },
+    {
+      "id": "PB-02",
+      "status": "PASS",
+      "finding": "Known F allocation remains consumed after one completed G build; execute/collect/wrapper exits remain 1/0/1. Old first-run, allowance reuse, retry and legacy successor paths are explicitly inapplicable. G frontier remains blocked and all new G/resolvent/solve/pulse/expm/F-retry/G-frontier calls are zero."
+    },
+    {
+      "id": "PB-03",
+      "status": "PASS",
+      "finding": "CURRENT_NEXT_ACTION binds the exact read-only contract eebca369... and independent decision ba4d6e01...; the actual archived bytes match those identities. Current read-only readiness does not activate the separate unconsumed G frontier preparation budget."
+    },
+    {
+      "id": "PB-04",
+      "status": "PASS",
+      "finding": "External START distinguishes the 58,470,931-byte outer envelope and its late-F manifest from the 27,795,932-byte G inner core and 30,522,967-byte original failed-F tar. Original 41/47 plus four missing and two staged differences are preserved separately from the 47/47 Git snapshot."
+    },
+    {
+      "id": "PB-05",
+      "status": "PASS_R1_SCOPE",
+      "finding": "Archive identity, exact provider IDs, Drive parent, Dropbox path/revision and both 58,470,931-byte sizes agree across START and receipt. Unavailable provider checksum is explicit. The local archive SHA and provider R1 do not claim remote raw-byte restoration or recipient execution."
+    },
+    {
+      "id": "PB-06",
+      "status": "PASS_NO_SELF_REFERENCE",
+      "finding": "START pins science commit and names the publication branch/PR without inventing a future C2 head. The recipient must inspect the then-current actual branch head, verify descent from C1 and publication-only intervening changes, and create an additive return branch/draft PR."
+    },
+    {
+      "id": "PB-07",
+      "status": "PASS_PRESERVED_CEILINGS",
+      "finding": "Prior G cached PASS_SCOPED and G-R01 endpoint limitation remain. Missing CSC values must stay MISSING_PERSISTED_OPERATOR_VALUES. Runtime dispatch differences do not establish cause or error magnitude; no cache adoption or physics promotion follows from intake."
+    }
+  ],
+  "publication_state_at_review": {
+    "complete_outer_upload": "RECORDED_R1_ON_BOTH_PROVIDERS",
+    "external_START_upload": "PENDING_ROOT_ACTION",
+    "publication_C2_commit": "PENDING_ROOT_ACTION",
+    "unknown_future_IDs_or_head_preattested": false,
+    "permission_conclusion": "Concrete unchanged START is eligible for authorized publication; actual START upload and C2 identities must be recorded after mutation"
+  },
+  "read_files": {
+    "CR_PHYS02G_20261011_0ad3be0f_NCP_START_KO.md": {
+      "bytes": 10621,
+      "sha256": "54af74dde0dbaa69a1a65173f1fdc533a8d100d0ec633c69e40c863de582e44c",
+      "scope": "Full factual handoff content and metadata"
+    },
+    "DUAL_BACKUP_RECEIPT.json": {
+      "bytes": 2029,
+      "sha256": "ced49d505fea96f67fe31de4f31ecc493c53ce01075c07cfde6f8cf941142626",
+      "scope": "Full factual handoff content and metadata"
+    },
+    "OUTER_ASSEMBLY_RECEIPT.json": {
+      "bytes": 1200,
+      "sha256": "ba3172b9d869b802d274c98ce18ef207ea6b021d5d39041166924f512d4d9b04",
+      "scope": "Full factual handoff content and metadata"
+    },
+    "README_CURRENT_NCP_KO.md": {
+      "bytes": 5732,
+      "sha256": "6748eaabb1145c40f8c4085f4bdbb42299fbbb7e3d7c106f1c940d262de90109",
+      "scope": "Full factual handoff content and metadata"
+    },
+    "late_f/CURRENT_NEXT_ACTION.json": {
+      "bytes": 2876,
+      "sha256": "ebda4caf69536ebcd32b3c87cb0fbb7f4dddbe912ff2224ef3442ae20172a18e",
+      "scope": "Full factual handoff content and metadata"
+    }
+  },
+  "actions_here": {
+    "whole_archive_rehashes": 0,
+    "outer_manifest_and_membership_reads": 1,
+    "selected_text_payload_reads": 5,
+    "nested_archive_payload_reads": 0,
+    "remote_calls": 0,
+    "R3_restores": 0,
+    "core_plans": 0,
+    "source_module_imports": 0,
+    "test_suites": 0,
+    "numerical_comparisons": 0,
+    "G_builds": 0,
+    "resolvents": 0,
+    "linear_solves": 0,
+    "pulse": 0,
+    "expm": 0,
+    "F_retries": 0,
+    "G_frontier_runs": 0,
+    "source_START_contract_or_review_edits": 0,
+    "new_publication_review_files": 2
+  },
+  "material_blockers_for_concrete_publication_binding": [],
+  "future_F": "HOLD_OPERATOR_BINDING_UNRESOLVED",
+  "future_G_frontier": "BLOCKED_BY_F_OPERATOR_BINDING_HOLD",
+  "scientific_promotion": false
+}

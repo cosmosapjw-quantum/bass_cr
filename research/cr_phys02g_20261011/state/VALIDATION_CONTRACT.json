@@ -1,0 +1,42 @@
+{
+  "schema": "cr-phys02g-validation.v1",
+  "status": "FROZEN_BEFORE_NEW_ANALYSIS_OR_IMPLEMENTATION",
+  "math": "Direct proof plus exact Fraction finite-support witnesses for generic nonnegative survival bounds; strict event endpoints, zero variance, zero mean, zero event probability, and residual positive-support endpoint explicit. No asymptotic witness incorrectly called an attained extremum.",
+  "scalar_compatibility": "Require finite H0>0, T>0, p in[0,1], nonnegative means and raw second moments, v>=0 exactly in working arithmetic; no negative clipping. q=0 typed UNDEFINED_ZERO_TAIL and survival0; positive q with incompatible moment is error.",
+  "float_vs_decimal80": {
+    "absolute_probability": 2e-14,
+    "relative": 2e-12,
+    "time_dimensionless_scale_s": 10000000000
+  },
+  "input_and_mixture_consistency": {
+    "absolute_normalized": 2e-14,
+    "relative": 2e-12
+  },
+  "envelope_invariants": "Keep raw L,U; require0<=L<=U<=1 and nonincreasing except endpoint mathematical downward jump permitted; intersection cannot widen component constraints; report signed tolerance checks without replacing any value.",
+  "sharpness_scope": "Each generic L/U sharp over all nonnegative laws for exact first two moments only. Mixture/intersection/positive-support/phase-type constrained global sharpness not claimed.",
+  "horizon_brackets": "At each requested f>p, report conservative lower t_lo with L(t_lo)>1-f and upper t_hi with U(t_hi)<=1-f plus raw endpoint values, bisection brackets and <=80 iterations per endpoint. At discontinuity t=T use exact1-p. No extrapolated/interpolated CDF or point quantile. Upper search begins2*mu/(1-f), lower upper search beyond max relevant component mean+T; double at most64 times if needed.",
+  "ncp_saved_moment_crosscheck": {
+    "absolute_normalized": 1e-12,
+    "relative": 5e-10,
+    "scales": [
+      "H0",
+      "T0",
+      "T0^2"
+    ]
+  },
+  "frontier_compatibility": "q0,q1,q2,xT,b must be finite nonnegative exactly for new probability representation; any negative input or negative state variance returns typed FRONTIER_MOMENT_NOT_PROBABILITY_COMPATIBLE without clipping. q0=0 requires q1=q2=0, and zero weight is skipped with explicit count. No silent floor for small q0.",
+  "frontier_identity": "From actual F archive, exact NPZ bytes are return-manifest bound; compare saved E,b_active,xT to hash-bound F dependency input/pulse arrays exactly. Verify source FILE_MANIFEST and five frozen contract/input manifests; G parity/reservation/completion/runtime/actual exit from F records; not independent scientific approval.",
+  "ncp_frontier_checks": "Weighted state first and second residual moments and mass must match F own and cached E/F scalars separately for birth columns and selected, normalized tolerance fixed above. State->birth->pooled envelope dominance checked with signed2e-12 probability tolerance, not substituted for values.",
+  "test_rows": [
+    "M01 exact rational bounds/witnesses/strict endpoints",
+    "C01 cached two-model one-shot analysis with independent Decimal80 scalar/bounds oracle",
+    "C02 degenerate and malformed input typed behavior",
+    "C03 monotonicity/intersection/bisection endpoint evidence",
+    "N01 synthetic <=8-state frontier moments/mixture and zero state",
+    "N02 malformed moments and corrupt family/source rejected before numerical postprocess",
+    "N03 standard-library plan missing-F returns WAITING and cannot execute",
+    "N04 create-only output/reservation/actual failure evidence and deadline",
+    "P01 complete final archive exact member/hash verification and clean stdlib plan; no old suite rerun"
+  ],
+  "repair": "One targeted contract-preserving repair per implementation worker after a concrete first failure, preserving raw first logs. Further changes require root cause classification and bounded amendment before new run."
+}

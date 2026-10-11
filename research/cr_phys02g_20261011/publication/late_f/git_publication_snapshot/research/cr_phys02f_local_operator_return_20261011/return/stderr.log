@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/source/research/cr_phys02f_20261011/ncp/launch_residence.py", line 186, in <module>
+    try:sys.exit(main())
+                 ^^^^^^
+  File "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/source/research/cr_phys02f_20261011/ncp/launch_residence.py", line 138, in main
+    return worker(pathlib.Path(a.run_dir).resolve(),a.capability_fd)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/source/research/cr_phys02f_20261011/ncp/launch_residence.py", line 119, in worker
+    parity=engine.operator_parity(identity,ref)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/source/research/cr_phys02f_20261011/src/residence.py", line 47, in operator_parity
+    if current.get('G')!=reference.get('G') or current.get('energy_eV')!=reference.get('energy_eV'): fail('OPERATOR_IDENTITY_MISMATCH')
+                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/source/research/cr_phys02f_20261011/src/residence.py", line 13, in fail
+    def fail(reason): raise ResidenceError(reason)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+phys02f_residence.ResidenceError: OPERATOR_IDENTITY_MISMATCH

@@ -1,0 +1,84 @@
+{
+  "schema": "cr-phys02g-readonly-operator-diagnostic-contract.v1",
+  "created_utc": "2026-10-11 07:13:27 UTC",
+  "task": "CR-PHYS02G-NCP-OPERATOR-PROVENANCE-INTAKE",
+  "owner": "ROOT_ASTRA",
+  "status": "PREPARED_READ_ONLY_PENDING_SCOPED_REVIEW",
+  "reason": "Concurrent actual F failed at exact operator binding. This task preserves and compares existing evidence; it grants no physics retry.",
+  "input_identities": {
+    "G_science_commit": "0ad3be0fec018fbd638063ffd4bf4d0cf2ef8525",
+    "G_science_tree": "b4ba1be466d5d62ab7572076387113d2277948ff",
+    "G_preparation_review_sha256": "9dd9c623fdd881667b6692ea8c3c9fbac08d545ba821fe33f66c2dbd38322002",
+    "F_actual_PR": 37,
+    "F_actual_head": "a490ab7af8e7b1b4db9a604293867df8e6d035dd",
+    "F_actual_tree": "73e5941c887d5ce395fd019cf6722adde086b9f4",
+    "F_actual_archive_bytes": 30522967,
+    "F_actual_archive_sha256": "0b6d54f5811f4f8ee651a79e734c9dddf37a722133bd51acad3fcf16c110a4e5",
+    "F_numeric_zip_sha256": "f64b263fd8dd99121d3114a66a2a70616b383cbd5ce0823acd45f9893babdd8d",
+    "reference_G_data_sha256": "6bd1d6aeeaccf4cc717229e3f9beff0cf072a157c844dd75ba2353be5f15f4cd",
+    "current_G_data_sha256": "8e33e916c4a24d57c9dad0f82ef046a81a818437e64cafb2e580d4c8809ea3fa",
+    "reference_G_shape": [
+      9611,
+      9611
+    ],
+    "reference_G_nnz": 36193027
+  },
+  "actual_F": {
+    "status": "HOLD_OPERATOR_BINDING_UNRESOLVED",
+    "consumed": true,
+    "G_reserved": 1,
+    "G_completed": 1,
+    "resolvent": 0,
+    "triangular_solves": 0,
+    "pulse": 0,
+    "expm": 0,
+    "retry": 0,
+    "execute_exit": 1,
+    "collect_exit": 0,
+    "wrapper_exit": 1,
+    "coordinator_wall_s": 107.95417293399805,
+    "wrapper_wall_s": 109.79041895002592,
+    "nested_times_not_additive": true
+  },
+  "allowed_actions": [
+    "Read only the named F/E/G source, return receipts, runtime provenance and already existing related host caches; do not execute a source file during intake.",
+    "Preserve the actual runtime/executable/library paths and file hashes, CPU capabilities and recorded versus currently observed BLAS dispatch. Query only relevant nonsecret runtime variables. Do not force another CPU dispatch or install/replace libraries.",
+    "Locate already preserved reference and failed-current CSC arrays, if present, using the recorded run/cache paths. Hash and record file/member names, source provenance and raw little-endian C-order data/indices/indptr identities. An unbound cache is only a candidate input.",
+    "If both original persisted CSC arrays are available and individually bound to the exact recorded identities, perform at most one bounded saved-array comparison. Compare structure first; retain exact nonzero-difference count, first differing coordinate/index, maximum absolute difference, relative error with explicitly zero-aware denominator, and ULP distance for finite same-sign entries. Preserve signed differences; categorize zero/sign/nonfinite separately. No clipping, tolerance admission, reassembly or solves.",
+    "If either value array is unavailable, return MISSING_PERSISTED_OPERATOR_VALUES and exact search scope. Fingerprint differences alone cannot yield error magnitude or root cause.",
+    "Preserve all first errors, actual command/UTC/wall/exit/output and code identities. Submit new scoped independent review. Existing F failure and G frontier block remain regardless of metadata intake completion."
+  ],
+  "limits": {
+    "diagnostic_window_s": 180,
+    "saved_array_comparison_runs": 1,
+    "saved_array_comparison_wall_s": 90,
+    "comparison_block_entries_max": 262144,
+    "G_builds": 0,
+    "resolvent_blocks": 0,
+    "linear_solves": 0,
+    "pulse": 0,
+    "expm": 0,
+    "F_retry": 0,
+    "G_frontier_postprocess": 0,
+    "install_or_environment_reconfiguration": 0,
+    "force_CPU_dispatch": 0,
+    "source_mutations": 0,
+    "reviewed_source_or_archive_restoration": "Create-only source materialization is allowed; copy/transfer time and source integrity verification are recorded separately from the 180-second diagnostic command window."
+  },
+  "acceptance": {
+    "completion": "A byte-bound, scoped read-only evidence record with actual exits and an independent assessment; incomplete original values must remain typed missing.",
+    "not_accepted": "No physical or numerical equivalence follows from provenance matching, a small measured difference or metadata-only success. No new tolerance, reference SHA replacement, old budget reset, or cached G adoption.",
+    "future_F_or_G_execution": "Requires a separate named finite scientific contract with immutable adopted operator/source, acceptance criteria and cumulative remaining budget, independently reviewed before any build/solve/postprocess.",
+    "current_G_frontier": "BLOCKED_BY_F_OPERATOR_BINDING_HOLD; G's original one-run/90s preparation remains unconsumed and inactive."
+  },
+  "inherited_gates": {
+    "PHYS02_DELAY": "OPEN",
+    "production_history": "HOLD",
+    "atomic_G02": "UNRESOLVED",
+    "b_grid": "NO_GO",
+    "all_bound": "OPEN",
+    "R17B2B": "NO_CERTIFIED_SOURCE_SHARPENING",
+    "CCC_2026_exporter_identity": "SOURCE_IDENTITY_UNRESOLVED"
+  },
+  "delivery": "Complete original failed F family, exact source archives, original failure review, new intake outputs and review must travel together. Do not publish unrelated archive metadata contents."
+}

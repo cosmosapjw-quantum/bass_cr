@@ -1,0 +1,12 @@
+# CR-PHYS02F actual failure independent decision
+
+Decision: HOLD_OPERATOR_BINDING_UNRESOLVED.
+Reviewer: /root/astra_cr_phys02c_execution_review, existing Astra-ultra task; requested/legacy model label is not independently observed backend identity. Read-only four commands, no code changes/calculation/re-execution. Controller transcribes the review result, not a new self-review.
+
+At launch_residence.py:119 -> residence.py:47, frozen pulse xT and rebuilt G exact-operator binding failed. Shape, nnz, indices, indptr, saved E and method bindings matched; G.data raw SHA differed: current8e33e916c4a24d57c9dad0f82ef046a81a818437e64cafb2e580d4c8809ea3fa vs reference6bd1d6aeeaccf4cc717229e3f9beff0cf072a157c844dd75ba2353be5f15f4cd. Both use frozen saved-grid adapter/fullBED atomic provider. Reference OpenBLAS dispatch SkylakeX vs current Haswell is observed provenance difference, NOT demonstrated cause or numerical error size. Root cause UNRESOLVED; numerical equivalence/roundoff-only/scientific-integrity failure NOT_ESTABLISHED.
+
+Although generated numerically, G is an exact frozen input to the cached-pulse/resolvent claim in this contract. Keep parity gate; do not replace reference SHA or loosen tolerance. No reference CSC values in current return, only fingerprints. Minimal next input: actual original numerical-library/CPU-dispatch provenance and original stored CSC values if available. Without values no numerical difference comparison. Original-environment reconstruction is a candidate for a NEW finite authorization/allocation, not a retry here; never force unsupported CPU dispatch.
+
+Counts: G reservation/completion1/1; resolvent0; solves0; pulse0; expm0. execute1/finalcollect0/wrapper1 are actual exits. Coordinator elapsed107.95417293399805s and wrapper109.79041895002592s are nested, not additive; coordinator elapsed is not isolated constructor time. No residence result. Retry0; no automatic legacy/fullBED successor despite nominal unused G allowance. Independent HH READY may continue.
+
+Approve failure preservation/local recovery/limited additive failure-return publication only. Include ZIP f64b263fd8dd99121d3114a66a2a70616b383cbd5ce0823acd45f9893babdd8d, external wrapper sidecars, raw stderr, runtime/execution receipts and pointer. Preserve reference and historical results; record backup/publication/remote readback separately. Global scientific HOLD and inherited ceilings unchanged. No further physical execution approved.

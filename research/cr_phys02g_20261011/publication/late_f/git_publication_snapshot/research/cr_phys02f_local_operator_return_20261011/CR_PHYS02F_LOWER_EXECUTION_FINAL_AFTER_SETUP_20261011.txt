@@ -1,0 +1,13 @@
+**F execution stopped at the frozen operator parity gate.** The fullBED G build completed, but its CSC `data` SHA differed from the PR35 reference. The launcher raised `OPERATOR_IDENTITY_MISMATCH` before reserving a resolvent or solve. No retry or source change was made.
+
+| Command, run once each | Actual exit |
+|---|---:|
+| `/usr/bin/python3 research/cr_phys02f_20261011/ncp/launch_residence.py --plan` | 0; `READY` |
+| `/usr/bin/python3 research/cr_phys02f_20261011/ncp/launch_residence.py --preflight` | 0 |
+| `/usr/bin/python3 research/cr_phys02f_20261011/ncp/run_and_collect.py --run-dir …/run --out …/return` | 1; execute 1, final collect 0 |
+
+The wrapper ran from 06:41:06 to 06:42:56 UTC. **Consumed F counts:** G reserved/completed **1/1**; resolvent blocks **0**; triangular solves **0**; pulse **0**; expm **0**. The current CSC `data` SHA is `8e33e916…ea3fa`; the reference is `6bd1d6ae…f15f4cd`. Shape, indices, indptr, saved E, and method bindings matched.
+
+The recovered source is at [source](/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/source), raw execution records at [run](/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/run), and the collected failure return at [return](/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/return). The controller handoff is [POINTER.json](/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/external_logs/POINTER.json); raw command output and exits are beside it. The return ZIP is **30,587,901 bytes**, SHA256 `f64b263fd8dd99121d3114a66a2a70616b383cbd5ce0823acd45f9893babdd8d`. No numerical residence result was produced.
+
+The host probe observed Python 3.12.3, NumPy 2.4.2, SciPy 1.17.0, one OpenBLAS thread, 14,410,289,152 bytes working RAM after reserve, 311,643,226,112 bytes free disk, and 24 effective CPUs. Executor requested: `gpt-6-sol/medium`; transport-selected identity was not exposed; backend identity remains `NOT_INDEPENDENTLY_OBSERVED`. Scientific admission remains **HOLD** pending fresh independent Astra review of this failure.
