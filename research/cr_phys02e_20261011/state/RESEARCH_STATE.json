@@ -1,0 +1,67 @@
+{
+  "schema": "cr-phys02e-research-state.v1",
+  "created_utc": "2026-10-11T01:07:50.374658+00:00",
+  "task": "CR-PHYS02E-SAVED-GRID-SEMANTIC-ADMISSION",
+  "phase": "PREPARATION_CLOSEOUT",
+  "status": "PASS_SCOPED_PREPARATION",
+  "base_commit": "20c2e6de7c58c3690efca6322489b811c99f3e99",
+  "prior_actual_return": {
+    "task": "CR-PHYS02D-NCP-PULSE-RESPONSE",
+    "actual_exit": 1,
+    "wall_s": 103.79789273899951,
+    "completed_G_constructors": 1,
+    "pulse_calls": 0,
+    "failure": "STORED_SOURCE_GRID_FIELDS_MISMATCH",
+    "differing_nodes": 340,
+    "nodes": 9600,
+    "max_ULP": 1,
+    "max_abs_eV": 1.1368683772161603e-13,
+    "old_budget": "CONSUMED_NO_RETRY",
+    "G_persisted": false,
+    "underlying_runtime_grid_cause": "UNRESOLVED"
+  },
+  "new_local_execution": {
+    "saved_grid_tests": 7,
+    "ncp_tests": 8,
+    "theory_exact_identities": 13,
+    "actual_exit_codes": [
+      0,
+      0,
+      0
+    ],
+    "physical_G_builds": 0,
+    "physical_pulse_calls": 0,
+    "old_suite_reruns": 0,
+    "first_failure": null,
+    "repairs": 0,
+    "local_versions": {
+      "python": "3.12.14",
+      "numpy": "2.3.5",
+      "scipy": "1.17.0"
+    },
+    "NCP_runtime_certification": false
+  },
+  "inherited_gates": {
+    "PHYS02_DELAY": "OPEN",
+    "production_history": "HOLD",
+    "atomic_G02": "UNRESOLVED",
+    "b_grid": "NO_GO",
+    "all_bound": "OPEN",
+    "R17B2B": "NO_CERTIFIED_SOURCE_SHARPENING",
+    "CCC_2026_exporter_identity": "SOURCE_IDENTITY_UNRESOLVED"
+  },
+  "next_task": "CR-PHYS02E-NCP-SAVED-GRID-PULSE",
+  "next_task_status": "READY_REQUIRES_DETACHED_PUBLICATION_GATE_AND_ACTUAL_NCP_ADMISSION",
+  "claim_ceiling": [
+    "Strict saved-grid input route and its targeted validation only",
+    "Exact E and method/source identity do not establish bytewise G parity across runtimes or scientific accuracy",
+    "No new pulse numerical results before actual NCP return",
+    "No production/global delay/CCC/atomic/b-grid/all-bound/scaling promotion"
+  ],
+  "closed_utc": "2026-10-11T01:16:22.000347+00:00",
+  "independent_review": {
+    "path": "review/INDEPENDENT_DECISION.json",
+    "sha256": "d1635fcac407f02a4c2af4c84d3a30575eea9928dbad3e831d9975bc5ac7a843"
+  },
+  "publication_SG10": "PENDING_POST_FREEZE_DETACHED_RECEIPT"
+}

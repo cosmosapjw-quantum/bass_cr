@@ -1,0 +1,98 @@
+{
+  "schema": "cr-phys02e-saved-grid-contract.v1",
+  "unit": "CR-PHYS02E-SAVED-GRID-SEMANTIC-ADMISSION",
+  "created_utc": "2026-10-11T00:56:11.632411+00:00",
+  "owner": "GPT-6 Astra Pro, host developer metadata",
+  "model_harness": "gpt6-astra v4.0.0",
+  "authority": {
+    "current_user_request": "Continue the next physics research loop and provide NCP local Codex handoff, 2026-10-11 09:46:56 Asia/Seoul",
+    "existing_scope": "ChatGPT implements/tests/packages; additive Git draft PR and established dual backups. A distinct new reviewed NCP task is prepared; the prior failed reservation is never reused.",
+    "prior_proposal_is_not_authorization": true,
+    "local_actual_physics_authorized": false
+  },
+  "base_commit": "20c2e6de7c58c3690efca6322489b811c99f3e99",
+  "base_tree": "d47ad3e29b96953aae45570c6bdb6f4a71bfc7dc",
+  "base_branch": "research/cr-phys02d-ncp-pulse-return-20261011",
+  "failed_unit": "research/cr_phys02d_ncp_return_20261011",
+  "failed_decision_sha256": "ca5f3b8baba7605b5f857aef437b41ba61cfeea2facc1d00c4183e8c3e7534b4",
+  "prior_science_contract_sha256": "bc05614e9812f616c4a4bb45805e4c0359a171813f7329794b0c10c3bf37dde2",
+  "question": "Install the identity-pinned source energy grid before every grid-dependent constructor calculation, preserving the inherited energy-coordinate operator equations and strict same-grid pulse comparison.",
+  "evidence_classes": {
+    "derived": [
+      "Energy coordinates x_j=E_j*n_j; common E binding for source/operator/number functional",
+      "Counterexample: energy conservation can survive post-G E reassignment while number conservation fails"
+    ],
+    "implementation_verified": "pending actual targeted tests",
+    "unresolved": [
+      "Underlying SIMD/libm cause of old one-ULP grid reconstruction difference",
+      "All-entry old/new G equivalence",
+      "Actual pulse CDF and uncapped moments"
+    ]
+  },
+  "invariants": {
+    "units": "SI, energy grid in eV; retain all inherited physical constants and T_END=1e10 s",
+    "grid_cells": [
+      3200,
+      6400
+    ],
+    "energy_shape": [
+      9600
+    ],
+    "energy_dtype": "little-endian IEEE754 float64",
+    "energy_C_order_raw_sha256": "6a76d3539115003b046a5861baca89b0a4ff966564627e04d9f6e8bc86be8292",
+    "cut_eV": 0.1,
+    "split_eV": 10.0,
+    "upper_eV": 900.0,
+    "source_shape": [
+      9611,
+      2
+    ],
+    "birth_tags": [
+      "direct_0p1_10",
+      "direct_10_900"
+    ],
+    "time_s": [
+      0.0,
+      10000000000.0
+    ],
+    "source_vectors": "Exact complete stored arrays; retain cutoff and counters, heat initial exactly zero; no reproject/regenerate",
+    "operator": "Inherited Cascade._generator, project, _sharing, functionals and all physical methods unchanged and inherited directly",
+    "atomic_models": "fullBED coherent_bed.AtomicData then legacy causal_cascade.AtomicData, exact inherited sources",
+    "quadrature_and_FP": "Existing FP64/order/accumulation unchanged",
+    "pulse_engine": "Byte-identical CR-PHYS02D src/pulse_response.py; all previous moment/CDF/reference tolerances unchanged",
+    "resource_adapter": "Byte-identical prior ops.py",
+    "allclose_for_grid": "FORBIDDEN; preserve exact array_equal and digest checks",
+    "old_studies": "No edits to existing B/C/D or actual-return units"
+  },
+  "chosen_design": {
+    "new_constructor": "Explicit factory/subclass of source-pinned parent.Cascade. Validate/copy/read-protect exact saved E before setting size/indices/atomic/mesh and before inherited _generator. Do not call parent constructor because it regenerates grid. Preserve all original non-E initializer assignments; delegate all numerical methods unchanged.",
+    "preflight": "Load and validate BOTH pinned NPZ inputs fully before importing/constructing atomics/Cascade or spending any BUILD reservation. Validate identities, exact E agreement/hash/shape/dtype/monotonic bounds/split, source/time/tags/terminal_yields/scale and source heat zero. No numerical G or pulse.",
+    "method_binding": "Record/check inherited numerical methods are parent method objects. No production monkeypatch/global grid replacement, no post-G E rewrite.",
+    "constructor_guard": "Keep exact post-construction grid check as an additional guard.",
+    "operator_receipt": "After each completed G constructor persist grid/method binding and sparse CSC shape/nnz/dtypes/raw array hashes without mutating G or claiming old G parity. Do not add raw-G persistence requirement.",
+    "wrapper": "Provide run_and_collect.py propagating actual nonzero launcher exit even when collect succeeds; report collection failure separately; preserve first failure, no auto-retry."
+  },
+  "local_budget": {
+    "physical_G_builds": 0,
+    "physical_pulse_calls": 0,
+    "old_suite_reruns": 0,
+    "implementation_targeted_batch_wall_s": 30,
+    "one_targeted_repair": "One contract-preserving repair for local shape/import/file/manifest/plumbing defect; record original failure. New theory/tolerance/domain/input decisions return to Astra.",
+    "theory_oracle": "One exact-Fraction analytic toy execution <=5 s; analytic toy matrices not a physical G."
+  },
+  "inherited_gates": {
+    "PHYS02_DELAY": "OPEN",
+    "production_history": "HOLD",
+    "atomic_G02": "UNRESOLVED",
+    "b_grid": "NO_GO",
+    "all_bound": "OPEN",
+    "R17B2B": "NO_CERTIFIED_SOURCE_SHARPENING",
+    "CCC_2026_exporter_identity": "SOURCE_IDENTITY_UNRESOLVED"
+  },
+  "claim_ceiling": [
+    "Strict saved-grid input route and its targeted validation only",
+    "Exact E and method/source identity do not establish bytewise G parity across runtimes or scientific accuracy",
+    "No new pulse numerical results before actual NCP return",
+    "No production/global delay/CCC/atomic/b-grid/all-bound/scaling promotion"
+  ]
+}

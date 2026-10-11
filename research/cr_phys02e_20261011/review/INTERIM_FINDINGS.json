@@ -1,0 +1,68 @@
+{
+  "schema": "cr-phys02e-independent-interim-review.v1",
+  "reviewer_role": "INDEPENDENT_ASTRA",
+  "reviewer_task": "/root/phys02e_remote_intake",
+  "phase": "review",
+  "decision": "SUPERSEDED_BY_FINAL_INDEPENDENT_DECISION",
+  "independence": {
+    "candidate_generation": false,
+    "candidate_design": false,
+    "acceptance_construction": false,
+    "implementation": false,
+    "prior_role": "Read-only source intake; facts and exact source identities only"
+  },
+  "material_blockers_observed_so_far": [],
+  "findings": [
+    {
+      "id": "D1",
+      "classification": "DOCUMENT_RENDERING",
+      "severity": "nonblocking_for_prepared_code",
+      "path": "research/theory_contribution/DERIVATION_KO.md",
+      "observed": "Many inline expressions have an ordinary opening parenthesis and an escaped closing math delimiter, for example (N_i\\) and (E_j\\).",
+      "requested_resolution": "Document owner corrects inline delimiter syntax while preserving mathematical content. This reviewer does not edit candidate prose or scientific code.",
+      "status_at_first_report": "OPEN",
+      "status": "RESOLVED_BY_DOCUMENT_OWNER",
+      "resolution": {
+        "path": "research/theory_contribution/DOCUMENT_FORMAT_CORRECTION.json",
+        "derivation_sha256": "e5f303912f43100952facfce0d19ea78c06de91f04855dfa156fb453471f8044",
+        "scientific_changes": false,
+        "numeric_reruns": 0
+      }
+    },
+    {
+      "id": "D2",
+      "classification": "DOCUMENT_DIMENSIONAL_PRECISION",
+      "severity": "nonblocking_for_prepared_code; resolve before report binding",
+      "path": "REPORT_KO.md",
+      "observed": "Calling G=T_END A dimensionless without qualification conflicts with mixed energy/number coordinate dimensions; energy-to-count entries retain eV^-1.",
+      "requested_resolution": "Describe G as the generator rescaled to u=t/T_END and retain the mixed coordinate dimensions, consistent with the detailed theory.",
+      "status_at_first_report": "OPEN",
+      "status": "RESOLVED_BY_DOCUMENT_OWNER",
+      "resolution": {
+        "report_sha256": "121723a772dfea2ab9649ad94259d1281a7ef09bfeff9368c95818b4a75d81df",
+        "code_contract_or_numerical_changes": false
+      }
+    },
+    {
+      "id": "D3",
+      "classification": "DOCUMENT_EXECUTION_ORDER",
+      "severity": "nonblocking_for_prepared_code; resolve before report binding",
+      "path": "REPORT_KO.md",
+      "observed": "The report phrase can imply atomics are constructed before the BUILD reservation, whereas the implementation preflights both sources, reserves BUILD, then imports/constructs atomics and the saved-grid cascade.",
+      "requested_resolution": "State the actual order; code and contracts stay unchanged.",
+      "status_at_first_report": "OPEN",
+      "status": "RESOLVED_BY_DOCUMENT_OWNER",
+      "resolution": {
+        "report_sha256": "121723a772dfea2ab9649ad94259d1281a7ef09bfeff9368c95818b4a75d81df",
+        "code_contract_or_numerical_changes": false
+      }
+    }
+  ],
+  "pending": [
+    "SG10: root post-freeze final archive local restore and stdlib plan; actual NCP runtime/resource and physical return remain separate."
+  ],
+  "reviewer_physical_G_builds": 0,
+  "reviewer_physical_pulse_calls": 0,
+  "reviewer_prior_suite_reruns": 0,
+  "reviewer_new_scientific_probe_executions": 0
+}

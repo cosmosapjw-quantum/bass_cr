@@ -1,0 +1,94 @@
+{
+  "schema": "cr-phys02e-worker-result.v1",
+  "worker": "phys02e_saved_grid_impl",
+  "status": "IMPLEMENTATION_VERIFIED_SCOPED",
+  "stage": "implement/validate/document",
+  "independent_decision": "NOT_ISSUED",
+  "requested_worker_model": "gpt-6.1-sol",
+  "host_developer_model_label": "GPT-6 Astra Pro",
+  "backend_model_identity_independently_verified": false,
+  "model_note": "Requested label differs from inherited host developer label. No inferred usage or cost claims.",
+  "usage": null,
+  "cost": null,
+  "owned_files": [
+    "src/saved_grid.py",
+    "tests/test_saved_grid.py",
+    "evidence/saved_grid/*"
+  ],
+  "protected_files_modified": false,
+  "api": [
+    "preflight_saved_inputs(study:Path, identities:dict)->(bundles,receipt)",
+    "make_saved_grid_cascade(parent_module,energy_eV,*,atomic)->cascade",
+    "grid_fingerprint(E)->JSON-serializable identity",
+    "operator_identity(cascade)->JSON-serializable CSC/binding identity"
+  ],
+  "validation_rows": [
+    "SG01",
+    "SG02",
+    "SG03",
+    "SG04",
+    "SG05"
+  ],
+  "targeted_tests": {
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_saved_grid.py",
+      "-v"
+    ],
+    "cwd": "/workspace/scratch/584ff08e1634/bass_cr_work/research/cr_phys02e_20261011",
+    "actual_exit": 0,
+    "wall_s": 0.6785329550039023,
+    "tests": 7,
+    "original_failure": null,
+    "repairs": 0,
+    "original_logs": [
+      "evidence/saved_grid/RUN01.stdout.txt",
+      "evidence/saved_grid/RUN01.stderr.txt"
+    ],
+    "receipt": "evidence/saved_grid/RUN01.json"
+  },
+  "runtime_versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  },
+  "physical_G_builds": 0,
+  "physical_pulse_calls": 0,
+  "old_suite_reruns": 0,
+  "theory_toy_executions": 1,
+  "theory_toy_wall_s_upper_bound": 0.6785329550039023,
+  "claim_ceiling": [
+    "Exact identity-pinned saved-grid preflight and mocked constructor/projection plumbing only.",
+    "No physical operator or pulse run.",
+    "No bytewise old/new G parity or scientific/global promotion.",
+    "Self-review only; independent gate remains root-owned."
+  ],
+  "scope_notes": [
+    "All seven required NPZ fields retained as immutable exact copies, including complete source/cutoff/counter entries.",
+    "Both complete NPZ files hashed before any np.load; preflight imports no SciPy or physical source.",
+    "Actual inherited parent methods exercised only project/functionals with isolated mocked _generator.",
+    "Typed rejection covers one-ULP saved E, wrong second file, invalid field shape/dtype/nonfinite/bounds/time/tags/heat/scale.",
+    "No parent constructor or energy_grid call; exact saved E is immutable before one mock generator call.",
+    "CSC arrays hashed with memoryview, no conversion or mutation."
+  ],
+  "hashes": {
+    "src/saved_grid.py": "4b44db624642272ed6f6cfa112488857996c242c8624cdc98a65b29d5212c35d",
+    "tests/test_saved_grid.py": "9df4d946c84c4100fa121f1cba38d0f81628a26f4ae2d3c3d7b5c76ed493c0b6",
+    "state/SCIENTIFIC_CONTRACT.json": "863d13aea1dfceba35709f43c6411bad50a8980a660698ad86510ad237dcf6a8",
+    "ncp/NCP_EXECUTION_CONTRACT.json": "ac5d177fba4b67d83db38260b820a0e6fc289345edc434a437490ae8bb6cdb21",
+    "state/VALIDATION_CONTRACT.json": "8b98196569c12d277087a1cc90ae77eab42ad1430b8f09b9c37c05b77c6dede4",
+    "inputs/INPUT_IDENTITIES.json": "30bb5000dcade9a7818e14273f105ca5d5c658665462b6ef8984e846f24a1b96"
+  },
+  "evidence_sha256": {
+    "INPUT_PREFLIGHT_RECEIPT.json": "30cd44e9cf6ecaa3e5cde7b943ee54404d84ba65c2695b1331142fe6baffc9aa",
+    "RUN01.json": "66e85fa53042671e9953fd6cf7efb70b8f59d6ee7707d41f7faf191d6ae350b9",
+    "RUN01.stderr.txt": "ebb153302248c0fa78de8d2c8fd97c74c2348baf8168c924fe271f92ff415ea0",
+    "RUN01.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}
