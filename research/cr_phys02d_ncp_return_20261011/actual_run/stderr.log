@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_RESTORE_20261011T002628Z_0b7ab12389ba43329cdbcf2834a1c237/research/cr_phys02d_20261011/ncp/launch_pulse.py", line 139, in <module>
+    try:sys.exit(main())
+                 ^^^^^^
+  File "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_RESTORE_20261011T002628Z_0b7ab12389ba43329cdbcf2834a1c237/research/cr_phys02d_20261011/ncp/launch_pulse.py", line 98, in main
+    return worker(pathlib.Path(a.run_dir).resolve(),a.capability_fd)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/bass_cr_phys02d_ncp_20261011/CR_PHYS02D_RESTORE_20261011T002628Z_0b7ab12389ba43329cdbcf2834a1c237/research/cr_phys02d_20261011/ncp/launch_pulse.py", line 74, in worker
+    if any(k not in data for k in fields) or not np.array_equal(cascade.E,data['energy_eV']) or data['time_s'].shape!=(2,) or not np.array_equal(data['time_s'],np.array([0.,1e10])) or data['source_vectors'].shape!=(cascade.size,2) or data['birth_tags'].tolist()!=['direct_0p1_10','direct_10_900']:raise ValueError('STORED_SOURCE_GRID_FIELDS_MISMATCH')
+                                                                                                                                                                                                                                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: STORED_SOURCE_GRID_FIELDS_MISMATCH
