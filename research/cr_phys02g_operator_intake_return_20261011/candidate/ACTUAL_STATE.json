@@ -1,0 +1,430 @@
+{
+  "schema": "cr-phys02g-actual-provenance-candidate-state.v1",
+  "created_utc": "2026-10-11T08:23:26.690648+00:00",
+  "task": "CR-PHYS02G-NCP-OPERATOR-PROVENANCE-INTAKE",
+  "author_agent": "/root/g_intake_candidate_astra",
+  "role": "CANDIDATE_FACTUAL_INTERPRETATION_NOT_INDEPENDENT_FINAL_REVIEW",
+  "state": "MISSING_PERSISTED_OPERATOR_VALUES",
+  "scope_qualification": "NOT_FOUND_IN_QUERIED_LOCATIONS; no global absence claim",
+  "metadata_intake": "RECORDED_COMPLETED_WITH_PRESERVED_INITIAL_OMISSION_AND_SAME_WINDOW_SUPPLEMENT",
+  "independent_final_review": "PENDING",
+  "F": "HOLD_OPERATOR_BINDING_UNRESOLVED",
+  "G_frontier": "BLOCKED_BY_F_OPERATOR_BINDING_HOLD",
+  "scientific_promotion": false,
+  "physics_execution_authorized": false,
+  "model_identity": {
+    "requested_model_label": "GPT-6 Astra",
+    "requested_role": "Astra candidate/contract interpretation",
+    "requested_effort": "NOT_SUPPLIED_IN_THIS_DELEGATION",
+    "observed_developer_label": "Codex, an agent based on GPT-6",
+    "transport_selected_backend": "NOT_EXPOSED_IN_THIS_TASK",
+    "independently_observed_backend": "NOT_ATTESTED",
+    "router_alias_from_observed_label": "MODEL_UNRESOLVED",
+    "harness_selection_basis": "Parent-assigned Astra role and supplied canonical Astra v4.0.0; not backend authentication"
+  },
+  "actual_diagnostic_timing": {
+    "main_supervisor": {
+      "command": [
+        "/root/bass_cr_phys02d_ncp_20261011/venv/bin/python",
+        "/root/CR_PHYS02G_PROVENANCE_20261011T081115Z_c57c4a/tools/intake_readonly.py",
+        "--root",
+        "/root/CR_PHYS02G_PROVENANCE_20261011T081115Z_c57c4a",
+        "--out",
+        "/root/CR_PHYS02G_PROVENANCE_20261011T081115Z_c57c4a/diagnostic"
+      ],
+      "cwd": "/root/CR_PHYS02G_PROVENANCE_20261011T081115Z_c57c4a",
+      "start_utc": "2026-10-11T08:19:34.739130+00:00",
+      "timeout_s": 180,
+      "environment_override": null,
+      "source_code_sha256": "93c8516d0c0112a47021ed1da0b39d0ccc348fefd8869be488b17fd7634a028a",
+      "compare_code_sha256": "3c7348a19bccb09fdfc3de8c282be9f5213b148411945fccde38fc55786b5b0d",
+      "actual_exit": 0,
+      "timed_out": false,
+      "end_utc": "2026-10-11T08:19:36.707447+00:00",
+      "wall_s": 1.9683409490007762
+    },
+    "main_inner_wall_s": 1.8627022189994022,
+    "supplement_supervisor": {
+      "command": [
+        "/root/bass_cr_phys02d_ncp_20261011/venv/bin/python",
+        "/root/CR_PHYS02G_PROVENANCE_20261011T081115Z_c57c4a/tools/intake_supplement.py",
+        "--root",
+        "/root/CR_PHYS02G_PROVENANCE_20261011T081115Z_c57c4a",
+        "--out",
+        "/root/CR_PHYS02G_PROVENANCE_20261011T081115Z_c57c4a/diagnostic"
+      ],
+      "cwd": "/root/CR_PHYS02G_PROVENANCE_20261011T081115Z_c57c4a",
+      "start_utc": "2026-10-11T08:21:01.653203+00:00",
+      "same_window_start": "2026-10-11T08:19:34.739130+00:00",
+      "remaining_window_s_at_start": 93.0859649181366,
+      "source_code_sha256": "7cfb2a9f1f591de7858e532ee2fcea35d956c3efd3a23b8506b22b1d17f38d1b",
+      "not_a_physics_retry": true,
+      "actual_exit": 0,
+      "timed_out": false,
+      "end_utc": "2026-10-11T08:21:01.817706+00:00",
+      "wall_s": 0.16452974499952688,
+      "total_window_elapsed_s": 87.07860255241394
+    },
+    "supplement_inner_wall_s": 0.026099019998582662,
+    "total_window_elapsed_s": 87.07860255241394,
+    "limit_s": 180,
+    "same_clock_used": true,
+    "interpretation": "Main and supplement are two recorded commands inside the same 180-second diagnostic window; total includes intervening time, not a new allocation. Nested inner/supervisor times are not added.",
+    "source_restore_transfer_separate": true
+  },
+  "preserved_first_omission": {
+    "main_record": {
+      "bytes": 72899,
+      "sha256": "ff5bad1d1dfbf352b59002347510fe43576671cb3c2416e66ff5abad14831636",
+      "semantic_scope": "Relevant status/counters/timing/provenance/search fields; repeated full library inventory not independently revalidated."
+    },
+    "reason": "First intake omitted a recorded --run-dir whose basename was actual_run_<timestamp>. Original omission preserved.",
+    "main_scoped_roots": [
+      "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/run"
+    ],
+    "omitted_root_found_in_main_recorded_paths": "/root/CR_PHYS02E_NCP_20261011_0412/actual_run_20261011T0418Z",
+    "main_search_exhaustive_raw": true,
+    "interpretation": "The true field only describes the selector-produced main scoped list. It does not prove complete coverage of all recorded paths or host-wide absence. Supplement supplies the omitted recorded E run inventory.",
+    "original_main_bytes_overwritten": false,
+    "implementation_changes_by_this_author": false
+  },
+  "queried_original_run_scopes": [
+    {
+      "root": "/root/CR_PHYS02E_NCP_20261011_0412/actual_run_20261011T0418Z",
+      "root_presence": {
+        "bytes": 4096,
+        "kind": "directory",
+        "path": "/root/CR_PHYS02E_NCP_20261011_0412/actual_run_20261011T0418Z"
+      },
+      "entries_recorded": 23,
+      "regular_files": 23,
+      "file_limit_reached": false,
+      "time_limit_reached": false
+    },
+    {
+      "root": "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/run",
+      "root_presence": {
+        "error": "FileNotFoundError: [Errno 2] No such file or directory: '/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/run'",
+        "path": "/tmp/CR-PHYS02F-EXECUTION-20261011.euer7hqa/run"
+      },
+      "entries_recorded": 1,
+      "regular_files": 0,
+      "file_limit_reached": false,
+      "time_limit_reached": false
+    }
+  ],
+  "E_saved_NPZ_inventory": [
+    {
+      "archive_member_count": 5,
+      "archive_members": [
+        {
+          "bytes": 264,
+          "compressed_bytes": 264,
+          "crc32": "8b163d46",
+          "name": "sample_u.npy"
+        },
+        {
+          "bytes": 2614320,
+          "compressed_bytes": 2614320,
+          "crc32": "2b45018b",
+          "name": "pulse_states.npy"
+        },
+        {
+          "bytes": 672,
+          "compressed_bytes": 672,
+          "crc32": "8ad0e7b5",
+          "name": "integrator_states.npy"
+        },
+        {
+          "bytes": 76928,
+          "compressed_bytes": 76928,
+          "crc32": "add7cb3a",
+          "name": "energy_eV.npy"
+        },
+        {
+          "bytes": 153904,
+          "compressed_bytes": 153904,
+          "crc32": "ad4ad643",
+          "name": "source_vectors.npy"
+        }
+      ],
+      "bytes": 2846750,
+      "kind": "file",
+      "path": "/root/CR_PHYS02E_NCP_20261011_0412/actual_run_20261011T0418Z/PULSE_fullBED_9600.npz",
+      "sha256": "52a582b3caf7a26929a5f7dda11a332ba87a933154f9f4cdd2b1346213306128"
+    },
+    {
+      "archive_member_count": 5,
+      "archive_members": [
+        {
+          "bytes": 264,
+          "compressed_bytes": 264,
+          "crc32": "8b163d46",
+          "name": "sample_u.npy"
+        },
+        {
+          "bytes": 2614320,
+          "compressed_bytes": 2614320,
+          "crc32": "c3bedfa5",
+          "name": "pulse_states.npy"
+        },
+        {
+          "bytes": 672,
+          "compressed_bytes": 672,
+          "crc32": "b5719a71",
+          "name": "integrator_states.npy"
+        },
+        {
+          "bytes": 76928,
+          "compressed_bytes": 76928,
+          "crc32": "add7cb3a",
+          "name": "energy_eV.npy"
+        },
+        {
+          "bytes": 153904,
+          "compressed_bytes": 153904,
+          "crc32": "ad4ad643",
+          "name": "source_vectors.npy"
+        }
+      ],
+      "bytes": 2846750,
+      "kind": "file",
+      "path": "/root/CR_PHYS02E_NCP_20261011_0412/actual_run_20261011T0418Z/PULSE_legacy_9600.npz",
+      "sha256": "3c44da3a46f8387b7f13fecea4036b22842461de588d489dffe3642990f8d761"
+    }
+  ],
+  "persisted_operator_conclusion": {
+    "reference": "No original CSC data/indices/indptr payload identified in the 23-file recorded E run inventory. Two NPZ member inventories contain sample_u, pulse_states, integrator_states, energy_eV and source_vectors. No array values loaded by this interpretation.",
+    "failed_current": "Original recorded F run directory returned FileNotFoundError. Preserved failure return supplies fingerprints, not original CSC values.",
+    "both_exactly_bound_original_CSC_pairs_available": false,
+    "saved_array_comparison_runs": 0,
+    "saved_array_comparison_status": "NOT_EXECUTED_NO_BOUND_PAIR",
+    "unbound_cache_adoption": false,
+    "global_search_or_absence_proven": false
+  },
+  "provenance": {
+    "current_python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+    "current_executable": {
+      "bytes": 8020928,
+      "kind": "file",
+      "path": "/usr/bin/python3.12",
+      "sha256": "1643dacd9feaedc58f3cc581e4d22577dfe25c09b10282936186ccf0f2e61118"
+    },
+    "current_invocation_symlink": {
+      "bytes": 7,
+      "kind": "symlink",
+      "path": "/root/bass_cr_phys02d_ncp_20261011/venv/bin/python",
+      "target": "python3"
+    },
+    "current_numpy_metadata_version": "2.4.2",
+    "current_scipy_metadata_version": "1.17.0",
+    "current_blas_dispatch": "NOT_OBSERVED_WITHOUT_NUMERICAL_IMPORT",
+    "historical_reference_runtime": {
+      "python": "3.12.3",
+      "numpy": "2.4.2",
+      "scipy": "1.17.0",
+      "threadpools": [
+        {
+          "user_api": "blas",
+          "internal_api": "openblas",
+          "num_threads": 1,
+          "prefix": "libscipy_openblas",
+          "filepath": "/root/bass_cr_phys02d_ncp_20261011/venv/lib/python3.12/site-packages/numpy.libs/libscipy_openblas64_-096271d3.so",
+          "version": "0.3.31.dev",
+          "threading_layer": "pthreads",
+          "architecture": "SkylakeX"
+        }
+      ]
+    },
+    "historical_failed_F_runtime": {
+      "python": "3.12.3",
+      "numpy": "2.4.2",
+      "scipy": "1.17.0",
+      "threadpools": [
+        {
+          "user_api": "blas",
+          "internal_api": "openblas",
+          "num_threads": 1,
+          "prefix": "libscipy_openblas",
+          "filepath": "/home/cosmosapjw/.local/lib/python3.12/site-packages/numpy.libs/libscipy_openblas64_-096271d3.so",
+          "version": "0.3.31.dev",
+          "threading_layer": "pthreads",
+          "architecture": "Haswell"
+        }
+      ]
+    },
+    "current_openblas_file_observations_by_exact_path": [
+      {
+        "bytes": 25364017,
+        "kind": "file",
+        "path": "/root/bass_cr_phys02d_ncp_20261011/venv/lib/python3.12/site-packages/numpy.libs/libscipy_openblas64_-096271d3.so",
+        "sha256": "c0f0784c075afdeb2d57cb78e6225221f7c97ef8d03e512b3c98e105054e73c2"
+      },
+      {
+        "bytes": 24805561,
+        "kind": "file",
+        "path": "/root/bass_cr_phys02d_ncp_20261011/venv/lib/python3.12/site-packages/scipy.libs/libscipy_openblas-6cdc3b4a.so",
+        "sha256": "8fb864c29cac4b25f6e2c139491ea96f2724dde42d51394f84e9c4a622e34790"
+      }
+    ],
+    "historical_F_library_path_status": "NOT_FOUND_IN_QUERIED_LOCATIONS according to main recorded_paths",
+    "historical_library_binary_hashes": "NOT_RECORDED_IN_ORIGINAL_RUNTIME_RECORDS",
+    "interpretation": "Current file hashes bind observed bytes at current intake, not historic byte equality. Historical SkylakeX/Haswell dispatch is a provenance difference only. Current CPU features and metadata versions do not identify active BLAS dispatch or causal responsibility.",
+    "wheel_hash_scope": "Result field wheel_sha256 accompanies WHEEL metadata text; do not promote it to a whole wheel archive hash.",
+    "library_grouping_scope": "Repeated path entries are deduplicated here by exact path only; distribution grouping is not proof of ownership or original loading."
+  },
+  "operator_fingerprints": {
+    "failed_current": "8e33e916c4a24d57c9dad0f82ef046a81a818437e64cafb2e580d4c8809ea3fa",
+    "reference": "6bd1d6aeeaccf4cc717229e3f9beff0cf072a157c844dd75ba2353be5f15f4cd"
+  },
+  "unresolved": {
+    "root_cause": "UNRESOLVED",
+    "different_entry_count": "NOT_MEASURED",
+    "maximum_absolute_or_relative_difference": "NOT_MEASURED_WITHOUT_BOUND_VALUES",
+    "ULP_difference": "NOT_MEASURED",
+    "roundoff_only": "NOT_ESTABLISHED",
+    "numerical_equivalence": "NOT_ESTABLISHED",
+    "physical_equivalence_or_nonequivalence": "NOT_ESTABLISHED",
+    "original_executable_or_library_equality": "NOT_ESTABLISHED"
+  },
+  "historical_F": {
+    "F": "HOLD_OPERATOR_BINDING_UNRESOLVED",
+    "F_observed_allocation_consumed": true,
+    "F_G_reserved": 1,
+    "F_G_completed": 1,
+    "F_resolvent": 0,
+    "F_triangular_solves": 0,
+    "F_pulse": 0,
+    "F_expm": 0,
+    "F_retry": 0,
+    "F_execute_exit": 1,
+    "F_collect_exit": 0,
+    "F_wrapper_exit": 1,
+    "G_frontier": "BLOCKED_BY_F_OPERATOR_BINDING_HOLD",
+    "G_actual_frontier_runs": 0,
+    "global_execution_inventory_complete": false
+  },
+  "execution_counters_this_intake_main": {
+    "F_retry": 0,
+    "G_builds": 0,
+    "G_frontier": 0,
+    "expm": 0,
+    "linear_solves": 0,
+    "pulse": 0,
+    "resolvent": 0,
+    "saved_comparison": 0
+  },
+  "execution_counters_this_intake_supplement": {
+    "F_retry": 0,
+    "G_builds": 0,
+    "G_frontier": 0,
+    "expm": 0,
+    "linear_solves": 0,
+    "pulse": 0,
+    "resolvent": 0,
+    "saved_comparison": 0
+  },
+  "old_G_allowance": {
+    "status": "BLOCKED_BY_F_OPERATOR_BINDING_HOLD",
+    "consumed": false,
+    "max_runs": 1,
+    "wall_s": 90,
+    "active_authorization": false
+  },
+  "inherited_gates": {
+    "PHYS02_DELAY": "OPEN",
+    "production_history": "HOLD",
+    "atomic_G02": "UNRESOLVED",
+    "b_grid": "NO_GO",
+    "all_bound": "OPEN",
+    "R17B2B": "NO_CERTIFIED_SOURCE_SHARPENING",
+    "CCC_2026_exporter_identity": "SOURCE_IDENTITY_UNRESOLVED"
+  },
+  "G_R01": {
+    "preserved": true,
+    "FP64_working_endpoint_checks": "10/10 passed in original saved evaluation",
+    "exact_decimal_token_endpoint_direction_differences": "8/10 at approximately 1e-17 probability margins",
+    "claim_ceiling": "Not certified exact-input enclosures or physical uncertainty intervals; no new numerical evaluation here"
+  },
+  "minimal_missing_inputs": [
+    "Original reference CSC data/indices/indptr values bound to the recorded reference identities and original-run provenance.",
+    "Original failed-current CSC data/indices/indptr values bound to the recorded failed-current identities and original-run provenance.",
+    "Historic executable/library binary provenance sufficient for any causal claim; current matching versions and one existing old path are insufficient."
+  ],
+  "next_action": "Return the frozen bounded evidence and obtain fresh independent review. No further cache/host search, comparison, reconstruction, retry or frontier execution is authorized by this candidate state. Future physics requires its separate finite reviewed contract and cumulative budget.",
+  "read_files": {
+    "diagnostic/RESULT.json": {
+      "bytes": 72899,
+      "sha256": "ff5bad1d1dfbf352b59002347510fe43576671cb3c2416e66ff5abad14831636",
+      "semantic_scope": "Relevant status/counters/timing/provenance/search fields; repeated full library inventory not independently revalidated."
+    },
+    "diagnostic/ACTUAL_COMMAND_EXIT.json": {
+      "bytes": 795,
+      "sha256": "1ad43fa6d7f8f8939fe6e42494f5cbe3e778c73dd3d9860ef188bb0df3265529",
+      "semantic_scope": "Full frozen JSON record read."
+    },
+    "diagnostic/SUPPLEMENT_RESULT.json": {
+      "bytes": 10601,
+      "sha256": "73217418cb91516f5bdeda1e0cb1078aeed048af557e9e7f03b25991275e4d5b",
+      "semantic_scope": "Full frozen JSON record read."
+    },
+    "diagnostic/SUPPLEMENT_ACTUAL_COMMAND_EXIT.json": {
+      "bytes": 841,
+      "sha256": "91fc143abeebad005279ef6f308e1adb5252c9c540918327c36cf2020b82d7f2",
+      "semantic_scope": "Full frozen JSON record read."
+    },
+    "e_return_numeric/actual_run/RUNTIME.json": {
+      "bytes": 458,
+      "sha256": "534ba935ea86c889dfe8ac1e57230b4f6da7def9645c7b792dc066176b61b913",
+      "semantic_scope": "Full frozen JSON record read."
+    },
+    "f_actual_original/F/run/RUNTIME.json": {
+      "bytes": 441,
+      "sha256": "1e7f250e003c9929b03284599720494471bb7bfdbb1829832f4fd3d0d662392f",
+      "semantic_scope": "Full frozen JSON record read."
+    },
+    "e_return_numeric/actual_run/G_COMPLETION_1.json": {
+      "bytes": 2583,
+      "sha256": "9f152a1f475a2f102b2c068a468da7be770f387a7992da79b06ac45b3f8e936c",
+      "semantic_scope": "Full frozen JSON record read."
+    },
+    "f_actual_original/F/run/G_COMPLETION_1.json": {
+      "bytes": 2562,
+      "sha256": "5190e333ca53badb0539e41a0acd408953ff3a7f7764a2e3366258002b8c32a5",
+      "semantic_scope": "Full frozen JSON record read."
+    },
+    "f_actual_original/F/run/ACTUAL_EXIT.json": {
+      "bytes": 1037,
+      "sha256": "fefebf150b480e7e8d432319c5211d57fd319ea028dcfb4b27506b074aaaf996",
+      "semantic_scope": "Full frozen JSON record read."
+    },
+    "f_actual_original/F/return/WRAPPER_COLLECTION_EXIT.json": {
+      "bytes": 421,
+      "sha256": "6c79bcbaa7256e49bd3bc68dc0fb1f274beaaa321bb10dde2980d383e2984114",
+      "semantic_scope": "Full frozen JSON record read."
+    },
+    "candidate/CANDIDATE_CONTRACT_ADOPTION.json": {
+      "bytes": 18551,
+      "sha256": "f9f753653234c05ea408bef385abd05f89e8bcb27ca3fd6812245a6d68eb2b87",
+      "semantic_scope": "Full frozen JSON record read."
+    }
+  },
+  "performed_by_this_interpretation": {
+    "read_frozen_result_and_archived_records_only": true,
+    "new_host_or_cache_queries": 0,
+    "new_diagnostic_commands": 0,
+    "numerical_or_source_imports": 0,
+    "G_builds": 0,
+    "resolvents": 0,
+    "linear_solves": 0,
+    "pulse": 0,
+    "expm": 0,
+    "F_retry": 0,
+    "G_frontier": 0,
+    "saved_array_comparisons": 0,
+    "tests": 0,
+    "implementation_updates": 0,
+    "new_candidate_artifacts": 2
+  },
+  "final_independent_review_eligibility": false
+}
