@@ -1,0 +1,127 @@
+{
+  "schema": "cr-phys02g-scientific-contract.v1",
+  "unit": "CR-PHYS02G-MOMENT-ENVELOPES-AND-FRONTIER-STRATIFICATION",
+  "status": "FROZEN_BEFORE_NEW_ANALYSIS_OR_IMPLEMENTATION",
+  "frozen_utc": "2026-10-11T06:35:26.160445+00:00",
+  "base_commit": "b21009893b93ed9b7e4af22ac4f480fe4b8e5c4b",
+  "base_tree": "63cd76b80393f3d9c506dec7c80eda8925df39e3",
+  "base_branch": "research/cr-phys02f-tail-residence-20261011",
+  "objective": "Determine defensible heat-release horizon intervals and tail probability envelopes from existing actual E/F saved moments; prepare state-frontier stratification using forthcoming F adjoints with zero additional operator/solver calls.",
+  "original_motivation": "Preserve source ancestry and causal heat release in fixed-bath truncated CR cascade; avoid treating a large mean as a deposition time or assuming a parametric long tail.",
+  "current_actual_source": "Actual E pulse PR35; approved F cached scalar derivation PR36. F actual return NOT_OBSERVED_IN_GITHUB_AND_QUERIED_BACKUPS; unpublished/local execution and current budget consumption UNKNOWN.",
+  "selection": "Independent cached-scalar node can advance while F actual execution remains pending/unknown. No duplicate F budget. F q0/q1/q2/xT arrays will refine moments by physical frontier state without a new G/solve/pulse.",
+  "constants": {
+    "T0_s": 10000000000,
+    "year_s": 31557600,
+    "models": [
+      "fullBED",
+      "legacy"
+    ],
+    "birth_tags": [
+      "direct_0p1_10",
+      "direct_10_900"
+    ],
+    "saved_grid_cells": [
+      3200,
+      6400
+    ],
+    "fractions": [
+      0.5,
+      0.9,
+      0.95,
+      0.99,
+      0.999
+    ],
+    "diagnostic_horizons_years": [
+      1000,
+      10000,
+      30000,
+      100000,
+      300000,
+      1000000
+    ],
+    "curve_grid": "241 log-spaced points from T to1e6 years plus T and exact diagnostic horizons; no physics sampling"
+  },
+  "definitions": {
+    "measure": "dF=K(tau)d tau/H0 with H0>0, tau>=0. Heat-normalized probability; finite-rate kernel has no atom at0 orT.",
+    "survival": "P(tau>t)=1-F(t)",
+    "generic_moments": "X>=0;a=E X;b=E X^2;v=b-a²",
+    "generic_lower": "a>0,v>0: L(x)=(a-x)^2/(v+(a-x)^2) for0<=x<a, else0",
+    "generic_upper": "a>0,v>0: U(x)=1 for0<=x<=a; a/x for a<x<b/a; v/(v+(x-a)^2) forx>=b/a",
+    "deterministic": "v=0 and b=a²: survival1 ifx<a else0; a=b=0 allowed; a=0,b>0 invalid",
+    "tail": "q=1-p; aT=[mu-T(1-R)]/q; bT=[m2-2Tmu+T²(1-S)]/q",
+    "tail_endpoint": "For physical residual X=(tau-T)|tau>T, x=0 survival1 exactly, hence full survivalq at t=T; generic lower at0 must not replace knownq.",
+    "birth_weights": "w_j=H0_j/sumH0; survival mixture=Σw_j P_j",
+    "pooled_residual": "q*L/U(t-T;aT,bT)",
+    "birth_residual": "Σ_j w_j q_j L/U(t-T;aT_j,bT_j)",
+    "intersection": "max(unconditional selected lower, pooled residual lower,birth residual lower), min of corresponding uppers; at t=T return selectedq exactly, record mixture consistency separately",
+    "frontier_kernel": "k_i(r)=h^T exp(-Ar/T0)e_i/T0; ∫k_i=q0_i,∫r k_i=T0 q1_i,∫r² k_i=2T0² q2_i",
+    "frontier_state": "q0_i>0:a_i=T0 q1_i/q0_i,b_i=2T0² q2_i/q0_i",
+    "frontier_weights": "alpha_ij=q0_i*xT_ij/H0_j; selected alpha_i=q0_i*Σ_jxT_ij/Σ_jH0_j; sums are tail probability, not normalized conditional weights",
+    "frontier_envelope": "Σ_i alpha_i L/U(t-T;a_i,b_i); atT exactly mass; intersect with earlier constraints. Positive semigroup gives exact measure mixture.",
+    "quantile": "Q_f=inf{t:F(t)>=f}; report enclosing endpoints from survival envelopes, not fitted/extrapolated point estimates."
+  },
+  "invariants": [
+    "Physical G, E mesh, precision, source/atomic fits, source energy/ancestry and accumulation untouched.",
+    "No G, pulse, expm or linear solve in G analysis or postprocess.",
+    "No clipping, no lognormal/exponential tail fit, no CDF extrapolation, no production-history or continuum claims.",
+    "Previous failed/successful E and pending F evidence and budgets retained."
+  ],
+  "inputs_manifest": "inputs/INPUT_IDENTITIES.json",
+  "validation_contract_sha256": "259d6964154cc190050761db092c9edd5499649867f822003db8afdfa42d9aba",
+  "budgets": {
+    "assistant_actual_cached_analysis_runs": 1,
+    "assistant_actual_cached_analysis_wall_s": 90,
+    "assistant_exact_toy_runs": 1,
+    "assistant_targeted_tests_wall_s_per_worker": 120,
+    "max_toy_states_or_atoms": 8,
+    "physical_G": 0,
+    "physical_pulse": 0,
+    "expm": 0,
+    "linear_solves": 0,
+    "prior_suite_reruns": 0,
+    "ncp_frontier_postprocess_runs": 1,
+    "ncp_frontier_postprocess_wall_s": 90,
+    "prior_F_budget": "NO_NEW_AUTHORIZATION; verify actual local reservation/completion before following original F pending contract exactly once if genuinely unspent"
+  },
+  "ownership": {
+    "root_Astra": [
+      "candidate",
+      "contracts",
+      "interpretation",
+      "publication/admission"
+    ],
+    "theory_Astra": "phys02g_moment_theory contributes candidate, not independent reviewer",
+    "analysis_lower": [
+      "src/moment_bounds.py",
+      "src/cached_analysis.py",
+      "tests/test_moment_bounds.py",
+      "evidence/analysis",
+      "evidence/figures"
+    ],
+    "ncp_lower": [
+      "src/frontier.py",
+      "ncp/postprocess_frontier.py",
+      "tests/test_frontier.py",
+      "tests/test_frontier_ops.py",
+      "evidence/ncp_validation"
+    ],
+    "independent_Astra": "phys02g_remote_intake source-intake-only; independent of candidate/acceptance/implementation"
+  },
+  "inherited_gates": {
+    "PHYS02_DELAY": "OPEN",
+    "production_history": "HOLD",
+    "atomic_G02": "UNRESOLVED",
+    "b_grid": "NO_GO",
+    "all_bound": "OPEN",
+    "R17B2B": "NO_CERTIFIED_SOURCE_SHARPENING",
+    "CCC_2026_exporter_identity": "SOURCE_IDENTITY_UNRESOLVED"
+  },
+  "claim_ceiling": [
+    "DERIVED mathematical inequalities plus NUMERICALLY_CHECKED evaluation of saved FP64 moments only.",
+    "Exact-input moment bounds are not certified forward-error bounds, physical uncertainty bands, or grid/continuum guarantees. Decimal80 checks rounding arithmetic of recorded scalar strings only.",
+    "State frontier refinement PREPARED_NOT_EXECUTED until actual F arrays and new scoped independent review.",
+    "Finite frozen operator continuation is conditional; long-time fixed bath validity unresolved.",
+    "Model differences empirical; overlap of envelopes does not prove same underlying kernel."
+  ]
+}

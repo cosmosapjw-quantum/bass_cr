@@ -1,0 +1,24 @@
+{
+  "schema": "cr-phys02g-convention-clarifications.v1",
+  "timing": "Before any G targeted tests or cached actual analysis; no actual F arrays or failure seen",
+  "scientific_contract_sha256": "517dd569f2e0d0857b37e33a5d90da6475978ab1a43374f3dfbe0323ffb35832",
+  "five_frozen_contract_files_changed": false,
+  "clarifications": [
+    {
+      "domain": "Generic nonnegative moment bounds",
+      "statement": "a=b=0 is valid delta0; exact survival is0 for allx>=0."
+    },
+    {
+      "domain": "Physical residual withq>0, or frontier heat-conditioned state withq0>0",
+      "statement": "Finite-rate positive heat-delay kernel and conditioningtau>T imply strictly positive delay and mean. Exact nonpositive mean in a positive-weight physical conditional adapter is incompatible and returns typed error; do not replace it by delta0 or clip."
+    },
+    {
+      "domain": "Plots",
+      "statement": "The exact known survival atT is an anchor. The moment LOWER envelope may jump down immediately to the right; this is loss of information in the bound, not a physical CDF jump."
+    },
+    {
+      "domain": "Claim scope",
+      "statement": "Unit uses moment constraints as exact mathematical inputs but savedFP64 numbers have no certified forward/physical error interval. Decimal80 comparison checks arithmetic of recorded strings only."
+    }
+  ]
+}

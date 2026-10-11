@@ -1,0 +1,38 @@
+{
+  "schema": "cr-phys02g-ncp-contract.v1",
+  "task": "CR-PHYS02G-NCP-FRONTIER-ENVELOPE",
+  "status": "WAITING_FOR_F_ACTUAL_RETURN_AND_G_REVIEW",
+  "physical_G_calls": 0,
+  "linear_solve_calls": 0,
+  "pulse_calls": 0,
+  "expm_calls": 0,
+  "max_postprocess_runs": 1,
+  "total_wall_s": 90,
+  "required_runtime": {
+    "python": "3.12.3",
+    "numpy": "2.4.2",
+    "scipy_installed_version": "1.17.0",
+    "numerical_pools": 1
+  },
+  "commands": [
+    "python ncp/postprocess_frontier.py --plan",
+    "python ncp/postprocess_frontier.py --plan --f-family-dir ABS_EXISTING_F_FAMILY",
+    "python ncp/postprocess_frontier.py --execute --f-family-dir ABS_EXISTING_F_FAMILY --out ABS_NEW_G_OUTPUT --ledger-dir ABS_STABLE_G_LEDGER"
+  ],
+  "plan": "stdlib only, no numerical imports, actual postprocess reservation0; missing F family returns WAITING_FOR_F_ACTUAL_RETURN, never READY merely on exit0. Must verify own frozen contracts, file/review identity when finalized.",
+  "family_input": "Original F wrapper outdir with RETURN_FAMILY_MANIFEST.json. If inside outer family, locate exact inner original family after manifest verification. Require exact listed files+manifest, safe relative paths/no symlinks, exactly1 numerical ZIP. Verify every family bytes/SHA and every ZIP entry+RETURN_MANIFEST exact membership before any np.load. ZIP max uncompressed512MiB; np.load allow_pickle=False. Never trust self-described hash alone to replace frozen source pins.",
+  "f_source_pins": "inputs/INPUT_IDENTITIES.json files map exact F FILE_MANIFEST, review, five contract/input/dependency manifests and F residence/launcher/collector/wrapper source; verify knownF FILE_MANIFEST entries under source_unit and required dependency input pointers.",
+  "f_success_requirements": [
+    "WRAPPER_ACTUAL_EXIT actual/execute/collection exit all0, execute_calls=collection_calls=1, retry false",
+    "external WRAPPER_EXECUTE and COLLECTION actual_exit0; internal actual_run WRAPPER_EXECUTE exact external match; internal ACTUAL_EXIT actual_exit0",
+    "NUMERICAL_RESULT completed_G=2, completed_blocks=2, actual_triangular_solve_calls=10, pulse/expm0, models fullBED thenlegacy",
+    "F recorded runtime exact pinned versions/pool1; G runtime same exact versions/pool1 before np.load",
+    "G parity files and completed reservation logs for both models recorded; source scientific scope is not promoted by metadata checks"
+  ],
+  "array_requirements": "For each model exactly9600 E and q arrays, xT/b shape(9600,2), allfloat64 finite; required arrays from original F result; exact E/b/xT agreement with frozen source and pulse arrays from RETURN_MANIFEST.dependencies matched against known F INPUT_IDENTITIES. Strict nonnegative probability representation; typed invalid if negative or variance<0, no clipping/fallback.",
+  "checks": "Frozen validation contract state-frontier mass,1st/2nd moments; reference original F RESULT and cached approved F moments; birth and selected separately; preserve signed residuals and dominance limits.",
+  "output": "Create-only output outside source and F family. Pre-numerics global reservation file in explicit stable ledger named hash(task+scientific contract hash+F numerical ZIP sha). Reject existing reservation; no automatic retry/transfer. Actual UTC/start/end/wall/command/runtime/source/code IDs and partial failure logs preserved; full JSON results+small plotting data and RETURN_MANIFEST with source-unit and actual input family identity. Retain original F full family for enclosing return; do not overwrite or claim it is inside G output if only linked.",
+  "deadline": "Coordinator owns one worker child process with90s deadline and kill/actual exit reporting. No hidden F subprocess or scipy.sparse import. Exactly one execution reservation.",
+  "review": "A new independent Astra review of actual F return plus G postprocess required for actual numerical claim; prepared G review does not approve future raw data.",
+  "F_gate": "Current remote absence is not proof of unspent budget. Inspect actual NCP host run/reservation/return before invoking original F; if already running wait for existing run, completed use existing family, failed/spent do not retry without new explicit bounded amendment. G creates no new F execution authority."
+}

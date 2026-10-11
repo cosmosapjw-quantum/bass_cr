@@ -1,0 +1,257 @@
+{
+  "schema": "bass-cr-phys02g-factual-status.v1",
+  "observed_at_utc": "2026-10-11T06:28:13.504956+00:00",
+  "latest_pr": 36,
+  "latest_source_commit": "b21009893b93ed9b7e4af22ac4f480fe4b8e5c4b",
+  "latest_source_tree": "63cd76b80393f3d9c506dec7c80eda8925df39e3",
+  "published_actual_f_return_status": "NOT_OBSERVED_IN_GITHUB",
+  "unpublished_or_external_execution_status": "UNKNOWN",
+  "new_f_physical_result_available_in_current_source": false,
+  "new_f_actual_budget_consumption": "UNKNOWN_OUTSIDE_RECORDED_SOURCE; published F preparation says consumed=false",
+  "published_dag_task": {
+    "id": "CR-PHYS02F-NCP-ADJOINT-RESIDENCE",
+    "status": "READY",
+    "max_G_builds": 2,
+    "max_resolvent_blocks": 2,
+    "max_triangular_solve_calls": 10,
+    "max_pulse_calls": 0,
+    "total_wall_s": 900,
+    "grid_cells": [
+      3200,
+      6400
+    ],
+    "independent_review": {
+      "path": "review/INDEPENDENT_DECISION.json",
+      "bytes": 27105,
+      "sha256": "46a432333374b85a77cfd5bd1d4c266123c2188335f4621549fdbdbad80870c2"
+    },
+    "consumed": false,
+    "admission_scope": "Prepared fresh fixed-operator task only; external final archive restore gate and actual NCP runtime/resource/G/solve/independent-return checks still required",
+    "max_expm_calls": 0
+  },
+  "source_recorded_preparation": {
+    "current_results": {
+      "tail_scalar_analysis": "NUMERICALLY_CHECKED_SAVED_9600",
+      "exact_theory_toy": {
+        "identities": 63,
+        "runs": 1,
+        "exit": 0
+      },
+      "scalar_tests": {
+        "distinct": 4,
+        "first_exit": 0
+      },
+      "actual_analysis": {
+        "runs": 1,
+        "exit": 0,
+        "wall_s": 1.65775
+      },
+      "ncp_targeted_tests": {
+        "distinct_rows": 12,
+        "executions": 24,
+        "commands": 3,
+        "subprocess_wall_s": 1.903915392,
+        "first_failure": "COLLECTOR_TEST_FIXTURE_GLOBAL_SHA_MOCK",
+        "repair": "pinconstantfixture; finaltargetedclosure8PASS"
+      },
+      "new_physical_G": 0,
+      "new_physical_pulse": 0,
+      "new_expm": 0
+    },
+    "future_actual_NCP": "NOT_EXECUTED",
+    "new_actual_NCP_execution": false
+  },
+  "prior_independent_decision": {
+    "path": "research/cr_phys02f_20261011/review/INDEPENDENT_DECISION.json",
+    "bytes": 27105,
+    "sha256": "46a432333374b85a77cfd5bd1d4c266123c2188335f4621549fdbdbad80870c2",
+    "decision": "PASS_SCOPED",
+    "scientific_decision": "PASS_SCOPED_DERIVED_SAVED9600_SCALAR_ANALYSIS_AND_PREPARED_ADJOINT_RESIDENCE",
+    "actual_NCP_execution": false,
+    "not_authority_for_actual_return": true
+  },
+  "published_new_ncp_execution_contract": {
+    "models": [
+      "fullBED",
+      "legacy"
+    ],
+    "grid": [
+      3200,
+      6400
+    ],
+    "max_G_builds": 2,
+    "max_resolvent_blocks": 2,
+    "max_triangular_solve_calls": 10,
+    "solves_per_block": 5,
+    "max_pulse_calls": 0,
+    "max_expm_calls": 0,
+    "wall_s": 900,
+    "automatic_retry": false,
+    "assistant_physical_calls": 0,
+    "source_constructor": "Reuse identity-pinned E/saved_grid.py unchanged; use prior E inputs to resolve inherited_cascade and inherited_atomic; source_vectors are exact stored arrays, no source recreation."
+  },
+  "published_new_ncp_runtime_contract": {
+    "python": "3.12.3",
+    "numpy": "2.4.2",
+    "scipy": "1.17.0",
+    "all_pools_threads": 1,
+    "omp_max_active_levels": 1,
+    "resource_adapter": "copy exact E/ncp/ops.py unchanged SHA8360e9f123bfc5814507728d6f946acd5109daaff2b475048d7c6ff586a4f2e7",
+    "resource_thresholds": "Existing probe: actual topology+cgroup memory reserve and working>=12GiB,disk>=8GiB,cpus>=1; no remote sizes assumed."
+  },
+  "published_TO04_status": "PASS_CLEAN_RESTORE_AND_STDLIB_READY_PLAN",
+  "published_TO04_NCP_runtime_resource": "NOT_EXECUTED",
+  "frozen_state_vs_later_publication": "Core RESEARCH_STATE has historical publication-pending notes; later publication/PUBLICATION_STATUS and TO04/backup receipts close publication and local restore. This does not close actual NCP execution.",
+  "inherited_gates": {
+    "PHYS02_DELAY": "OPEN",
+    "production_history": "HOLD",
+    "atomic_G02": "UNRESOLVED",
+    "b_grid": "NO_GO",
+    "all_bound": "OPEN",
+    "R17B2B": "NO_CERTIFIED_SOURCE_SHARPENING",
+    "CCC_2026_exporter_identity": "SOURCE_IDENTITY_UNRESOLVED"
+  },
+  "existing_backup_evidence_scope": "Read Git-bound previously completed R1 backup receipts only; no new provider metadata or remote file-body read by this intake agent.",
+  "handoff_backup": {
+    "schema": "cr-phys02f-zip-backup-receipt.v1",
+    "recorded_utc": "2026-10-11 05:48:31 UTC",
+    "status": "COMPLETED_R1_PROVIDER_METADATA_MATCH",
+    "file_name": "CR_PHYS02F_20261011_39e27281_HANDOFF.zip",
+    "local_identity": {
+      "bytes": 26927005,
+      "sha256": "9d91d2971eab2db05e0039fe1fc2a5827086a28d585e792d56f6851840e6ebef"
+    },
+    "science_commit": "39e272815ef13069d7c54fa8c50eab4103f14a79",
+    "science_tree": "a0d6229b92092ee055ffe54ba5a9563c7f904aab",
+    "drive": {
+      "upload_success": true,
+      "id": "1hkwsY7bLpazBTjyhzdfzRv08302t4g-Z",
+      "url": "https://drive.google.com/file/d/1hkwsY7bLpazBTjyhzdfzRv08302t4g-Z/view?usp=drivesdk",
+      "parent_id": "1pkohlay5eIfFJsBwPZ_yn2jIZONZjesI",
+      "name": "CR_PHYS02F_20261011_39e27281_HANDOFF.zip",
+      "bytes": 26927005,
+      "provider_sha256": "UNAVAILABLE_IN_TOOL_METADATA",
+      "provider_md5": "UNAVAILABLE_IN_TOOL_METADATA"
+    },
+    "dropbox": {
+      "upload_status": "completed",
+      "id": "id:BSpOijBcT10AAAAAAD4HpQ",
+      "rev": "65d8a1cbfda5c0af03d47",
+      "path_display": "/BASS_DERIVATION_DOSSIERS_20260912/CR_PHYS02F_20261011_39e27281_HANDOFF.zip",
+      "name": "CR_PHYS02F_20261011_39e27281_HANDOFF.zip",
+      "bytes": 26927005,
+      "provider_content_hash": "UNAVAILABLE_IN_TOOL_METADATA"
+    },
+    "collision_check": {
+      "query": "CR_PHYS02F_20261011_39e27281",
+      "drive_results": 0,
+      "dropbox_results": 0
+    },
+    "verification": {
+      "tier": "R1",
+      "successful_provider_acknowledgements": true,
+      "exact_ids_and_size_match": true,
+      "available_metadata_hashes": "Not exposed; no remote SHA256 attributed",
+      "raw_remote_zip_downloaded_for_readback": false,
+      "local_TO04_restore": "632 entries verified, all payload bytes/SHA matched and one stdlib plan READY; distinct from remote byte restore"
+    },
+    "mutations": "Create-only new unique files; no overwrite, no shared-permission changes"
+  },
+  "start_backup": {
+    "schema": "cr-phys02f-start-backup-receipt.v1",
+    "recorded_utc": "2026-10-11 05:54:56 UTC",
+    "status": "COMPLETED_R1_PROVIDER_METADATA_MATCH",
+    "file_name": "CR_PHYS02F_20261011_39e27281_NCP_START_KO.md",
+    "local_identity": {
+      "bytes": 15289,
+      "sha256": "f842eedb49c257dc9aceca2beeac400997af2e88d3ab9615247a8cf0f55eba3a"
+    },
+    "drive": {
+      "upload_success": true,
+      "id": "1CX83EGVqw9eixtmzIlzCjUckzP9f9BZF",
+      "url": "https://drive.google.com/file/d/1CX83EGVqw9eixtmzIlzCjUckzP9f9BZF/view?usp=drivesdk",
+      "parent_id": "1pkohlay5eIfFJsBwPZ_yn2jIZONZjesI",
+      "name": "CR_PHYS02F_20261011_39e27281_NCP_START_KO.md",
+      "bytes": 15289,
+      "provider_sha256": "UNAVAILABLE_IN_TOOL_METADATA",
+      "provider_md5": "UNAVAILABLE_IN_TOOL_METADATA"
+    },
+    "dropbox": {
+      "upload_status": "completed",
+      "id": "id:BSpOijBcT10AAAAAAD4Htw",
+      "rev": "65d8a3551881e0af03d47",
+      "path_display": "/BASS_DERIVATION_DOSSIERS_20260912/CR_PHYS02F_20261011_39e27281_NCP_START_KO.md",
+      "name": "CR_PHYS02F_20261011_39e27281_NCP_START_KO.md",
+      "bytes": 15289,
+      "provider_content_hash": "UNAVAILABLE_IN_TOOL_METADATA"
+    },
+    "external_start_review": {
+      "path": "EXTERNAL_START_REVIEW.json",
+      "bytes": 10987,
+      "sha256": "57adadcd777fe86f5e59276494fd6a3e44ec9985eb0c1e4444603420fb8b2c67",
+      "decision": "PASS_SCOPED_EXTERNAL_START_IDENTITY_AND_INSTRUCTIONS",
+      "local_identity_checks": 21,
+      "not_another_scientific_review": true
+    },
+    "verification": {
+      "tier": "R1",
+      "successful_provider_acknowledgements": true,
+      "exact_ids_and_size_match": true,
+      "raw_remote_start_downloaded_for_readback": false,
+      "checksum_scope": "Known local reviewed start SHA256; remote metadata does not expose SHA256"
+    },
+    "mutations": "Create-only unique start file in both established folders; no replacement or permission change"
+  },
+  "prior_analysis_results": {
+    "fullBED": {
+      "T_years": 316.8808781402895,
+      "early_heat_probability": 0.06390638042977166,
+      "tail_heat_probability": 0.9360936195702283,
+      "early_conditional_mean_years": 147.36970757376864,
+      "tail_conditional_mean_years": 15714.855562037008,
+      "tail_remaining_mean_years": 15397.974683896717,
+      "uncapped_mean_years": 14719.99388868659,
+      "early_raw_first_mean_contribution_years": 9.417864596033462,
+      "tail_raw_first_mean_contribution_years": 14710.576024090557,
+      "low_birth_fractions": {
+        "eventual": 0.10590809200378494,
+        "early": 0.6762666994180443,
+        "tail": 0.06697015525815808,
+        "mean_share": 0.0037830907415479656
+      }
+    },
+    "legacy": {
+      "T_years": 316.8808781402895,
+      "early_heat_probability": 0.06376934057435844,
+      "tail_heat_probability": 0.9362306594256415,
+      "early_conditional_mean_years": 147.3471854182007,
+      "tail_conditional_mean_years": 16089.864257421841,
+      "tail_remaining_mean_years": 15772.983379281552,
+      "uncapped_mean_years": 15073.220456644718,
+      "early_raw_first_mean_contribution_years": 9.396232849606383,
+      "tail_raw_first_mean_contribution_years": 15063.82422379511,
+      "low_birth_fractions": {
+        "eventual": 0.10572235508267341,
+        "early": 0.6765314363981897,
+        "tail": 0.06684292046591288,
+        "mean_share": 0.003687958471401255
+      }
+    }
+  },
+  "mutations": {
+    "remote": 0,
+    "historical_source_overwrite": 0,
+    "new_source_recovery_files": 0,
+    "receipt_files_created": true
+  },
+  "scientific_computation": {
+    "G": 0,
+    "triangular_solver": 0,
+    "pulse": 0,
+    "expm": 0,
+    "tests": 0,
+    "candidate_design": false,
+    "acceptance_design": false
+  },
+  "fresh_semantic_science_decision": "NOT_PERFORMED_BY_INTAKE"
+}
