@@ -1,0 +1,431 @@
+{
+  "schema": "bass_cr.qe_source_lineage.v1",
+  "role": "candidate_source_analyst_not_final_decision_reviewer",
+  "created_utc": "2026-10-12T11:38:10.348643+00:00",
+  "repository": "/workspace/scratch/18ee842bf84f/bass_cr",
+  "commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+  "objective": "Read-only parameter-level identity of PHYS01 proton source, PHYS02 local electron source and actual paired9600 birth vectors",
+  "methods": {
+    "git_blob_read": true,
+    "json_parse": true,
+    "npz_metadata_scalar_parse": true,
+    "raw_array_hash": true,
+    "new_physics_computation": false,
+    "source_spectrum_recomputed": false,
+    "new_array_sum_for_normalization": false,
+    "generator_build": false,
+    "time_propagation": false,
+    "old_suites_rerun": false,
+    "repository_mutation": false
+  },
+  "harness": {
+    "model_identity": "GPT-6 Astra Pro (host developer metadata)",
+    "version": "4.0.0",
+    "core_read": [
+      "START_HERE.md",
+      "PROJECT_INSTRUCTIONS.md",
+      "state/RESEARCH_STATE.md",
+      "docs/MODEL_ROUTING.md"
+    ],
+    "state_note": "Read state is NOT_RUN template, not evidence of previous research."
+  },
+  "records": [
+    {
+      "id": "INJ",
+      "git_path": "research/cr_phys01_20261010/src/injection.py",
+      "commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "git_blob_sha1": "331bd0998c3fa330320b8007b16a581a21ac250a",
+      "sha256": "c5eda0e60302339af1bbdd0603ae1cd8a8921d9e6489c22d954e0bc92968c27d",
+      "bytes": 16626,
+      "read_scope": "lines 1–210, 213–237, 263–359; InjectionModel and transport_population",
+      "purpose": "proton defaults, complete support, normalization, proper units, exact collisionless population",
+      "source_relation": "supports",
+      "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4ca5a90de79c8fb82a25fd9e83615bec0dfa870b/research/cr_phys01_20261010/src/injection.py"
+    },
+    {
+      "id": "RUDD",
+      "git_path": "research/cr_phys01_20261010/src/rudd.py",
+      "commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "git_blob_sha1": "2065324d037956167d041ab886b5787939821e70",
+      "sha256": "757e4c8b33618ad6ef88f422919fe813654454c836f0942cf9792be133e8eac2",
+      "bytes": 6584,
+      "read_scope": "lines 1–89, 115–156; TARGETS, proton_speed_m_s, rudd_factors, secondary_max_eV, cross_section_moments",
+      "purpose": "neutral H/He ionization; SI-eV units; endpoint and excluded nuclear/isotope reactions",
+      "source_relation": "supports",
+      "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4ca5a90de79c8fb82a25fd9e83615bec0dfa870b/research/cr_phys01_20261010/src/rudd.py"
+    },
+    {
+      "id": "P01",
+      "git_path": "research/cr_phys01_20261010/src/provider.py",
+      "commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "git_blob_sha1": "5587a3136ae6441a96ec98ca9ae6ffa3a84262e7",
+      "sha256": "77e40d7a4b33716b1b12c852c3b45f5cf61938ba38af53b85e67c424f615f10b",
+      "bytes": 9220,
+      "read_scope": "lines 1–143; build_packet and convolve_secondary",
+      "purpose": "actual source constructor and primary/secondary terminal bookkeeping",
+      "source_relation": "supports",
+      "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4ca5a90de79c8fb82a25fd9e83615bec0dfa870b/research/cr_phys01_20261010/src/provider.py"
+    },
+    {
+      "id": "P01MAN",
+      "git_path": "research/cr_phys01_20261010/evidence/SOURCE_MANIFEST.json",
+      "commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "git_blob_sha1": "4cfe85bb3901958bda9e5cbc8b4b9615178d0cfe",
+      "sha256": "a0088feddcd1ed8932e19b50935f5726a08af831bdd65e28cbbd757ed3bc0565",
+      "bytes": 1741,
+      "read_scope": "full JSON",
+      "purpose": "PHYS01 source digest and snapshot scenario",
+      "source_relation": "supports",
+      "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4ca5a90de79c8fb82a25fd9e83615bec0dfa870b/research/cr_phys01_20261010/evidence/SOURCE_MANIFEST.json"
+    },
+    {
+      "id": "P01AUD",
+      "git_path": "research/cr_phys01_20261010/evidence/PROVIDER_AUDIT.json",
+      "commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "git_blob_sha1": "d62e8cbc5b2fa80c33dd6eb074aec15ede4ff5e4",
+      "sha256": "9d902597aab1c39ae321350c0585230225e70c9b377005d42ac14fbded6f0d97",
+      "bytes": 4232,
+      "read_scope": "JSON keys and source block only",
+      "purpose": "stored actual source defaults and proper/comoving power",
+      "source_relation": "supports",
+      "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4ca5a90de79c8fb82a25fd9e83615bec0dfa870b/research/cr_phys01_20261010/evidence/PROVIDER_AUDIT.json"
+    },
+    {
+      "id": "A",
+      "git_path": "research/cr_phys02a_20261010/src/causal_subthreshold.py",
+      "commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "git_blob_sha1": "af22197ed980d215001eeeceae640c0d07e3d1f5",
+      "sha256": "2259506b74c16027fda69b479cb1039b0888e19c5f8dcf400273892aba6f39f9",
+      "bytes": 11785,
+      "read_scope": "lines 1–273; DirectElectronSource, bianchi_coefficients, aggregate",
+      "purpose": "Qe=tA, fixed neutral densities, constructor and scope",
+      "source_relation": "supports",
+      "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4ca5a90de79c8fb82a25fd9e83615bec0dfa870b/research/cr_phys02a_20261010/src/causal_subthreshold.py"
+    },
+    {
+      "id": "ADER",
+      "git_path": "research/cr_phys02a_20261010/research/DERIVATION_KO.md",
+      "commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "git_blob_sha1": "2f9548f4061e4f1dce26fd57cd4664e6fe9bfe11",
+      "sha256": "28c10b0c6e1c0b349c62cb6f2bd84680e9e904bff83dfe556d7320515850a88a",
+      "bytes": 11480,
+      "read_scope": "lines 1–170",
+      "purpose": "A(W) source equation and local Ht approximation",
+      "source_relation": "supports",
+      "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4ca5a90de79c8fb82a25fd9e83615bec0dfa870b/research/cr_phys02a_20261010/research/DERIVATION_KO.md"
+    },
+    {
+      "id": "AMAN",
+      "git_path": "research/cr_phys02a_20261010/inputs/PARENT_SOURCE_MANIFEST.json",
+      "commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "git_blob_sha1": "c5a0d11e5fba99417f162955c32b6d233779ecca",
+      "sha256": "cdd712e7a62bc856e2dc8336fe4385cf85a316213bd5568554d41c585e198c39",
+      "bytes": 351,
+      "read_scope": "full JSON",
+      "purpose": "PHYS01 injection/Rudd immutable digest lineage",
+      "source_relation": "supports",
+      "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4ca5a90de79c8fb82a25fd9e83615bec0dfa870b/research/cr_phys02a_20261010/inputs/PARENT_SOURCE_MANIFEST.json"
+    },
+    {
+      "id": "ARES",
+      "git_path": "research/cr_phys02a_20261010/evidence/NUMERICAL_RESULT.json",
+      "commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "git_blob_sha1": "768987342d0010908fe52f285649e5428a7eae3d",
+      "sha256": "4e210fb042c8b4d92fd8577b30af78686500de8d7b7ea89be5baeea6564ee1f8",
+      "bytes": 13605,
+      "read_scope": "top-level keys; details.source_approximation_samples, semantics and direct_electron_source_bands",
+      "purpose": "stored sampled source approximation, not interval bound",
+      "source_relation": "supports",
+      "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4ca5a90de79c8fb82a25fd9e83615bec0dfa870b/research/cr_phys02a_20261010/evidence/NUMERICAL_RESULT.json"
+    },
+    {
+      "id": "B",
+      "git_path": "research/cr_phys02b_20261010/src/causal_cascade.py",
+      "commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "git_blob_sha1": "2e20dffb20ea81225fce6b38c7bcdb941f016839",
+      "sha256": "d87a9cc122125b2d37b47f261f57eab698baa59e07a6b21723860f39313c7b72",
+      "bytes": 19115,
+      "read_scope": "lines 1–428 read; relevant 24–39, 49–60, 77–110, 215–220, 358–369, 402–427",
+      "purpose": "ElectronSource, selected source normalization, fixed bath, energy grid, SI scale",
+      "source_relation": "supports",
+      "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4ca5a90de79c8fb82a25fd9e83615bec0dfa870b/research/cr_phys02b_20261010/src/causal_cascade.py"
+    },
+    {
+      "id": "BMAN",
+      "git_path": "research/cr_phys02b_20261010/inputs/PARENT_SOURCE_MANIFEST.json",
+      "commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "git_blob_sha1": "9fe531cf555968d8f55d60dbeefe0bc72625d42d",
+      "sha256": "e6463f62176d1bac1a454c61539d7c17030a6601dd46aa117f0e123bf52813bc",
+      "bytes": 794,
+      "read_scope": "full JSON",
+      "purpose": "A plus injection/Rudd hash chain",
+      "source_relation": "supports",
+      "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4ca5a90de79c8fb82a25fd9e83615bec0dfa870b/research/cr_phys02b_20261010/inputs/PARENT_SOURCE_MANIFEST.json"
+    },
+    {
+      "id": "C",
+      "git_path": "research/cr_phys02c_20261011/src/coherent_bed.py",
+      "commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "git_blob_sha1": "b737f9a71ab6d8e6bd8577672df44b52f4740da9",
+      "sha256": "30e6e043859c3b2014429c5860314e5e6a833381141469eac24cd6293c43acca",
+      "bytes": 4094,
+      "read_scope": "full 66 lines",
+      "purpose": "checks parent manifest; fullBED atomic change; ElectronSource and Cascade aliases",
+      "source_relation": "supports",
+      "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4ca5a90de79c8fb82a25fd9e83615bec0dfa870b/research/cr_phys02c_20261011/src/coherent_bed.py"
+    },
+    {
+      "id": "CCON",
+      "git_path": "research/cr_phys02c_20261011/state/SCIENTIFIC_CONTRACT.json",
+      "commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "git_blob_sha1": "8dcd3abf6b9131d1bdbc3203c6bc7b10e1665b2b",
+      "sha256": "e0445ecbf052a3441f6203f9e0463defcf0c24c0ee018a67e112d338991f47ee",
+      "bytes": 11719,
+      "read_scope": "lines 1–145; especially fixed_physics and numerics",
+      "purpose": "explicit preserved source, fixed xi=.01 bath, exclusions",
+      "source_relation": "supports",
+      "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4ca5a90de79c8fb82a25fd9e83615bec0dfa870b/research/cr_phys02c_20261011/state/SCIENTIFIC_CONTRACT.json"
+    },
+    {
+      "id": "CMAN",
+      "git_path": "research/cr_phys02c_20261011/inputs/PARENT_IDENTITY.json",
+      "commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "git_blob_sha1": "3fa6293c83008f4a4872dd7e26a5fc71ca98e632",
+      "sha256": "a733b00ed6da96c9c05bcb80ac9b64d12bb48b742fe5c7738debe8faddb63c50",
+      "bytes": 7108,
+      "read_scope": "JSON header; file entries for source code and parent contract",
+      "purpose": "transitive source hash binding",
+      "source_relation": "supports",
+      "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4ca5a90de79c8fb82a25fd9e83615bec0dfa870b/research/cr_phys02c_20261011/inputs/PARENT_IDENTITY.json"
+    },
+    {
+      "id": "CRUN",
+      "git_path": "research/cr_phys02c_20261011/tests/run_targeted.py",
+      "commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "git_blob_sha1": "e1dabc0f7b41aaacb32cdedb0e8f84545b22d3f4",
+      "sha256": "8b86749819172a7174815a10368909f0d6ab988fafc1c5294ecef7ec07f87024",
+      "bytes": 15950,
+      "read_scope": "full 158 lines; relevant 8–16, 83–111, 134–156",
+      "purpose": "actual constructor, quadratures, grids, physical scale serialization",
+      "source_relation": "supports",
+      "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4ca5a90de79c8fb82a25fd9e83615bec0dfa870b/research/cr_phys02c_20261011/tests/run_targeted.py"
+    },
+    {
+      "id": "CR001",
+      "git_path": "research/cr_phys02c_20261011/evidence/runs/R001/NUMERICAL_RESULT.json",
+      "commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "git_blob_sha1": "5ffc3df3c25dd3b226e69ebb5e4536a92aca87c9",
+      "sha256": "36ea403320bcc711c4955de55e2a7e9f65c2deaf851a882bd9581585fb857624",
+      "bytes": 86974,
+      "read_scope": "top-level keys, coverage, 4800 injected energy/number, grid identities",
+      "purpose": "stored prior source coverage; not relabelled as 9600 coverage",
+      "source_relation": "supports",
+      "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4ca5a90de79c8fb82a25fd9e83615bec0dfa870b/research/cr_phys02c_20261011/evidence/runs/R001/NUMERICAL_RESULT.json"
+    },
+    {
+      "id": "C9600LAUNCH",
+      "git_path": "research/cr_phys02c_paired_9600_closeout_20261011/raw/ncp_operational_adapter_20261011/launch_refinement.py",
+      "commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "git_blob_sha1": "23b60ca45d996d4b8fbfda8eee714cde2093886c",
+      "sha256": "6ede08c6398bd3556b0168832b18dc59d4cbe938e3c4172109be49188613426b",
+      "bytes": 10904,
+      "read_scope": "full 120 lines; relevant 13–15, 37–57",
+      "purpose": "execution-bound source=api.cc.ElectronSource(), same source passed to paired models",
+      "source_relation": "supports",
+      "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4ca5a90de79c8fb82a25fd9e83615bec0dfa870b/research/cr_phys02c_paired_9600_closeout_20261011/raw/ncp_operational_adapter_20261011/launch_refinement.py"
+    },
+    {
+      "id": "C9600RESULT",
+      "git_path": "research/cr_phys02c_paired_9600_closeout_20261011/raw/THIRD_GRID_LOCAL_20261011_EXEC01/NUMERICAL_RESULT.json",
+      "commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "git_blob_sha1": "557beaf4ffa339d487f5ec9386932a9b7a222e81",
+      "sha256": "0b33ad9af1be50297e54fa8b38570471c35b5e342ce771d834bb576458a91500",
+      "bytes": 75490,
+      "read_scope": "provenance, status, actual_exit, transport count, grid identities, final.components.*.injected fields",
+      "purpose": "actual constructor source identities, paired source output and scale",
+      "source_relation": "supports",
+      "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4ca5a90de79c8fb82a25fd9e83615bec0dfa870b/research/cr_phys02c_paired_9600_closeout_20261011/raw/THIRD_GRID_LOCAL_20261011_EXEC01/NUMERICAL_RESULT.json"
+    },
+    {
+      "id": "C9600EXIT",
+      "git_path": "research/cr_phys02c_paired_9600_closeout_20261011/raw/THIRD_GRID_LOCAL_20261011_EXEC01/ACTUAL_EXIT.json",
+      "commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "git_blob_sha1": "e4aa5454778b7cc702dd752a84b49a463224d7d0",
+      "sha256": "352ff1c4a40069a42e724ec7fd4da578108f237add4465632abe20d74f34bb2a",
+      "bytes": 9794,
+      "read_scope": "provenance, actual_child_exit, coordinator_exit, timeout, status",
+      "purpose": "actual execution receipt only; no new run",
+      "source_relation": "supports",
+      "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4ca5a90de79c8fb82a25fd9e83615bec0dfa870b/research/cr_phys02c_paired_9600_closeout_20261011/raw/THIRD_GRID_LOCAL_20261011_EXEC01/ACTUAL_EXIT.json"
+    },
+    {
+      "id": "C9600FULL",
+      "git_path": "research/cr_phys02c_paired_9600_closeout_20261011/raw/THIRD_GRID_LOCAL_20261011_EXEC01/SPECTRUM_fullBED_9600.npz",
+      "commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "git_blob_sha1": "27984234f115453779a585ad8bfeb11c6736bb7d",
+      "sha256": "7ee8c1eff7f58cd7175a9bcd3968a27ef065f0e983f05e609dc875f5f06112cc",
+      "bytes": 217754,
+      "read_scope": "allow_pickle=False parse of physical scale/time/tags and array shapes/dtypes; raw C hash for E and source; stored E boundary entries",
+      "purpose": "saved fullBED source identity and amplitude",
+      "source_relation": "supports",
+      "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4ca5a90de79c8fb82a25fd9e83615bec0dfa870b/research/cr_phys02c_paired_9600_closeout_20261011/raw/THIRD_GRID_LOCAL_20261011_EXEC01/SPECTRUM_fullBED_9600.npz"
+    },
+    {
+      "id": "C9600LEG",
+      "git_path": "research/cr_phys02c_paired_9600_closeout_20261011/raw/THIRD_GRID_LOCAL_20261011_EXEC01/SPECTRUM_legacy_9600.npz",
+      "commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "git_blob_sha1": "6a36b1fb91e9282cf4feca545d93be57766b6c3b",
+      "sha256": "a3f81dbbd86c1d0521f962db8a2ee2ed158f613f3f7a069caccbda9c964acda6",
+      "bytes": 217716,
+      "read_scope": "same restricted metadata/raw-hash parse as C9600FULL",
+      "purpose": "saved legacy source identity and amplitude",
+      "source_relation": "supports",
+      "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4ca5a90de79c8fb82a25fd9e83615bec0dfa870b/research/cr_phys02c_paired_9600_closeout_20261011/raw/THIRD_GRID_LOCAL_20261011_EXEC01/SPECTRUM_legacy_9600.npz"
+    },
+    {
+      "id": "CPULSE",
+      "git_path": "research/cr_phys02d_20261011/src/pulse_response.py",
+      "commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "git_blob_sha1": "6ed7fdcf9fd2e070ed9de8a0f9fd7faeb70259e7",
+      "sha256": "6aef11bd0dbdf8f2236c92164be9e13ff15820cb4572c8168dea77fbfe51cef0",
+      "bytes": 5954,
+      "read_scope": "source/normalization/function line index only",
+      "purpose": "pointer only; full kernel-chain interpretation delegated to parent",
+      "source_relation": "contextual",
+      "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4ca5a90de79c8fb82a25fd9e83615bec0dfa870b/research/cr_phys02d_20261011/src/pulse_response.py"
+    },
+    {
+      "id": "CACHE",
+      "git_path": "research/cr_plan_reset_20261012/results/CACHED_RESPONSE.json",
+      "commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "git_blob_sha1": "895d713ea9794c40e82c771f7ba4639ffab1a3ce",
+      "sha256": "60747f9da89e3596bfeb93a4ec14a1bb58a33bca3a09629fc092f254839f3b7b",
+      "bytes": 21699,
+      "read_scope": "top-level schema, assumptions and representation_policy only",
+      "purpose": "scope/context; M0 detailed response lineage delegated to parent",
+      "source_relation": "contextual",
+      "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4ca5a90de79c8fb82a25fd9e83615bec0dfa870b/research/cr_plan_reset_20261012/results/CACHED_RESPONSE.json"
+    }
+  ],
+  "actual_9600_source_identity": {
+    "runtime": {
+      "result_status": "PASS_SCOPED",
+      "actual_exit": 0,
+      "transport_calls_started": 2,
+      "actual_child_exit": 0,
+      "coordinator_exit": 0,
+      "timeout": false
+    },
+    "call_chain": [
+      "C9600LAUNCH.worker line51: source=api.cc.ElectronSource()",
+      "CRUN line15: cc=bed.parent; lines88–89 shared fixed-bath Cascade and source_vectors(order=8)",
+      "C lines13–18 check/import B; lines65–66 aliases",
+      "B.ElectronSource lines77–88: DirectElectronSource(proton_order=64)",
+      "A.DirectElectronSource lines182–195: InjectionModel(enabled=True), neutral=.99, nH=140, Y=.248",
+      "INJ.InjectionModel lines132–141 actual retained defaults"
+    ],
+    "physical_energy_scale_eV_m3": 1.1242596728743301e-13,
+    "time_s": [
+      0.0,
+      10000000000.0
+    ],
+    "birth_tags": [
+      "direct_0p1_10",
+      "direct_10_900"
+    ],
+    "energy_eV": {
+      "shape": [
+        9600
+      ],
+      "dtype": "float64",
+      "raw_C_sha256": "6a76d3539115003b046a5861baca89b0a4ff966564627e04d9f6e8bc86be8292",
+      "stored_entries": {
+        "index0": 0.10309375000000001,
+        "index3199": 10.0,
+        "index3200": 10.007033424904009,
+        "index9599": 900.0
+      }
+    },
+    "source_vectors": {
+      "shape": [
+        9611,
+        2
+      ],
+      "dtype": "float64",
+      "raw_C_sha256": "07dd0fa81154f5aecaf262b00c2adfada21ebc9b2a2dba59703e03e3f5dab609",
+      "same_raw_hash_for_both_models": true
+    },
+    "constructor_default_binding_basis": "actual receipt pins executed launcher and run API; transitive frozen imports and constructors determine defaults; no standalone runtime dump of every InjectionModel constructor argument in 9600 receipt",
+    "eta_scalar": {
+      "status": "NOT_DIRECTLY_FOUND_IN_READ_JSON",
+      "recomputed": false
+    }
+  },
+  "scope_limits": [
+    "Parameter-level source identity is not a final physical promotion decision.",
+    "The exact PHYS01 Bianchi terminal packet and PHYS02 local ramp source have different time semantics and electron response operators.",
+    "Fixed xi=.01 bath is not the separate xi=.1 native knot.",
+    "Coverage scalar in CR001 is a prior2400/4800 execution record, not newly recomputed9600 coverage.",
+    "Parent owns the detailed D/E/F→M0 response-chain binding and final source-to-observable decision."
+  ],
+  "stored_source_coverage": {
+    "source_id": "CR001",
+    "git_path": "research/cr_phys02c_20261011/evidence/runs/R001/NUMERICAL_RESULT.json",
+    "json_pointer": "/coverage",
+    "raw_sha256": "36ea403320bcc711c4955de55e2a7e9f65c2deaf851a882bd9581585fb857624",
+    "copied_without_recalculation": {
+      "all_direct_A_energy_eV_m3_s2": 1.5285042578786697e-33,
+      "band_A_energy_eV_m3_s2": {
+        "below_cutoff": 1.674709854087335e-38,
+        "direct_low": 6.828624650684662e-35,
+        "direct_high_selected": 1.0559734263674833e-33,
+        "unselected_900_1000": 3.0326802746639703e-35,
+        "unselected_above_1000": 3.7390103515915917e-34
+      },
+      "band_fractions_of_all_direct": {
+        "below_cutoff": 1.0956527241942894e-05,
+        "direct_low": 0.04467520856083024,
+        "direct_high_selected": 0.6908540953840803,
+        "unselected_900_1000": 0.019840836288365117,
+        "unselected_above_1000": 0.2446189032394824
+      },
+      "selected_fraction_of_all_direct": 0.7355293039449105,
+      "minimum_sampled_proton_ejection_endpoint_eV": 2154.927725029828,
+      "selected_injected_energy_at_T_J_m3": 9.006312892138674e-33
+    },
+    "source_constructor_mesh_independence": {
+      "code_paths": [
+        "research/cr_phys02c_20261011/tests/run_targeted.py lines145–146",
+        "research/cr_phys02b_20261010/src/causal_cascade.py lines77–110",
+        "research/cr_phys02a_20261010/src/causal_subthreshold.py lines219–225",
+        "research/cr_phys02c_paired_9600_closeout_20261011/raw/ncp_operational_adapter_20261011/launch_refinement.py lines51–56"
+      ],
+      "reason": "R001 constructs ElectronSource() and evaluates coverage before the electron grid loop; the source integral uses only fixed proton nodes, source weights and Rudd moments. The same constructor is execution-bound in actual9600.",
+      "R001_and_9600_same_scientific_contract_parent_and_source_api_hashes": true,
+      "verified_R001_identity_entries": {
+        "state/SCIENTIFIC_CONTRACT.json": {
+          "sha256": "e0445ecbf052a3441f6203f9e0463defcf0c24c0ee018a67e112d338991f47ee",
+          "bytes": 11719
+        },
+        "inputs/PARENT_IDENTITY.json": {
+          "sha256": "a733b00ed6da96c9c05bcb80ac9b64d12bb48b742fe5c7738debe8faddb63c50",
+          "bytes": 7108
+        },
+        "inputs/FULL_BED_INPUTS.json": {
+          "sha256": "60ea3e3de0f791484215ede2abe6850a734c88c8aa79dd2bd3ef08b8dc64bbb0",
+          "bytes": 1058
+        },
+        "src/coherent_bed.py": {
+          "sha256": "30e6e043859c3b2014429c5860314e5e6a833381141469eac24cd6293c43acca",
+          "bytes": 4094
+        },
+        "tests/run_targeted.py": {
+          "sha256": "8b86749819172a7174815a10368909f0d6ab988fafc1c5294ecef7ec07f87024",
+          "bytes": 15950
+        }
+      }
+    },
+    "denominator": "kinetic energy of all direct electrons ejected by admitted1–4MeV proton impacts; excludes primary target binding and is not full10keV–1PeV CR injected energy",
+    "numerical_certification": "Recorded source/proton-quadrature result; no new continuous or physical-accuracy certificate"
+  }
+}

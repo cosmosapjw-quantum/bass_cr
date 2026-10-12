@@ -1,0 +1,88 @@
+{
+  "schema": "cr-source-binding-contract.v1",
+  "unit": "CR-RUX-M1B-SOURCE-BINDING-20261012",
+  "created_utc": "2026-10-12T11:36:21.356351+00:00",
+  "base_commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+  "objective": "Bind the executed Q_e(W,t)=t A(W) source to the stored M0 heat moments; recover SI endpoint power and cumulative heat; derive an explicit fixed-bath thermal relevance scale and energy-budget envelope.",
+  "selected_scenario": {
+    "owner": "BASS_CR existing PHYS02C/E fixed-bath application",
+    "time_s": "10000000000",
+    "n_H_m3": "140",
+    "helium_mass_fraction_Y": "0.248",
+    "xi": "0.01",
+    "temperature_K": "100",
+    "electron_birth_window_eV": [
+      "0.1",
+      "900"
+    ],
+    "birth_tags_eV": [
+      [
+        "0.1",
+        "10"
+      ],
+      [
+        "10",
+        "900"
+      ]
+    ],
+    "proton_collision_window_eV": [
+      "1000000",
+      "4000000"
+    ],
+    "source_history": "Q_e(W,t)=t A(W) on [0,T], zero initial nonthermal population",
+    "bath": "fixed composition and density; inherited fullBED/CCC operator",
+    "source_amplitude_authority": "executed physical_energy_scale_eV_m3=T^2*A_E, not a terminal FS10 heat packet"
+  },
+  "notation": {
+    "A_E": "integral W*A(W)dW over the selected birth window, eV m^-3 s^-2",
+    "energy_scale": "T^2*A_E, eV m^-3",
+    "q_star": "T*A_E*eV_J, J m^-3 s^-1",
+    "H0": "dimensionless eventual heat fraction for the same normalized source and operator",
+    "R": "early linear source response/H0",
+    "S": "early quadratic source response/H0",
+    "calorimetric_delta_T": "cumulative heat divided by fixed-composition C_V; no coupled temperature history is inferred"
+  },
+  "claims_to_evaluate": [
+    "physical source amplitude and selected/birth normalization identity",
+    "P(T)=q_star H0 R and E_heat(T)=q_star T H0 S/2",
+    "same-source prompt approximation error in absolute SI units",
+    "positive energy-only envelope for omitted birth energies, if full source energy is recorded",
+    "actual consumer compatibility and remaining selected-observable fields"
+  ],
+  "validation": {
+    "arithmetic": "exact decimal rational or 50-digit Decimal calculations",
+    "stored_output_oracle": "compare independently computed SI quantities to preserved 9600 paired-run outputs, tolerance 1e-12 relative for reused heating values",
+    "independent_decision": "reviewer not involved in candidate generation or validation design",
+    "coverage": "source dimensional identity, zero amplitude, exact birth sum, energy budget, scope of consumer binding"
+  },
+  "authorization_and_budget": {
+    "user_request": "next research loop",
+    "local_light_postprocessing": "authorized",
+    "new_generator_builds": 0,
+    "new_transport_or_pulse_solves": 0,
+    "NCP_dispatch": 0,
+    "historical_suite_reruns": 0,
+    "old_F_retry": 0,
+    "ordinary_draft_branch_and_backup": "standing authorization, R1 receipt"
+  },
+  "acceptance": "A constructive fixed-bath application with source-backed numbers, reproducible derivation/code/results, an independent scoped decision, and a DAG that advances the completed binding while retaining unprovided consumer tolerances as unknown.",
+  "source_error_boundary": "Arithmetic exactness applies to recorded decimals. Atomic-model, source-window, leading-local approximation, mesh and physical-history errors retain their original evidence limits.",
+  "harness": {
+    "family": "GPT-6 Astra",
+    "research_version": "4.0.0",
+    "coding_version": "4.0.0",
+    "model_basis": "trusted host developer metadata",
+    "research_zip_sha256": "dae76c90f2e5d691bcdd595dadbe470bacacba3bb2a036ff9788ffe7d3bfabb7",
+    "coding_zip_sha256": "dc99e7ab2f9629dcce3ec0758d97e19acc5b645f86e208d1b338bb6430ff8d7a"
+  },
+  "amendments": [
+    {
+      "id": "A1_SECONDARY_EVENT_LOCAL_RESPONSE",
+      "created_utc": "2026-10-12T11:39:31.834206+00:00",
+      "reason": "Consumer source equation includes the particle-number contribution to thermal energy; heat/Cv will be named a calorimetric rate, and same-operator stored secondary ionization events will supply an explicitly incremental local response.",
+      "additional_formula": "Tdot_secondary=[P_heat-(3/2)kB*Tgas*(S_HI+S_HeI)]/Cv at frozen coefficients",
+      "scope": "Additional ionizations caused by degradation of injected secondary electrons; primary proton birth-ionization and complete receiver history remain separate.",
+      "new_heavy_work": 0
+    }
+  ]
+}

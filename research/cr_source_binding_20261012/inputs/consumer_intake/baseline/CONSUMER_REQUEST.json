@@ -1,0 +1,134 @@
+{
+  "schema": "cr-consumer-request.v2",
+  "status": "SCOPED_SNAPSHOT_IDENTIFIED_FULL_HISTORY_BINDING_OPEN",
+  "intake": "inputs/consumer_intake/CONSUMER_INTAKE.json",
+  "actual_bound_snapshot": {
+    "time_s": 10000000000,
+    "n_h_m3": 140,
+    "n_he_m3": 11.542553191489361,
+    "temperature_k": 100,
+    "y_he_mass_fraction": 0.248,
+    "exact_composition_knots": [
+      0.01,
+      0.1
+    ],
+    "manifold": "x_HII = x_HeII = xi, x_HeIII = 0",
+    "H_s": 3.3e-17,
+    "shear_s": 3.3e-18,
+    "geometry": "a_relative=exp(H*time), b=shear*time; same snapshot geometry enforced.",
+    "source_manifest_scenario_z": 8,
+    "active_proton_window_eV": [
+      1000000,
+      4000000
+    ],
+    "closure": "FS10_LOCAL_DEPOSITION_PROMPT_EXCITATION_AND_CONTINUUM_ESCAPE",
+    "interpolation_across_xi": false,
+    "general_evolving_gas_or_geometry": false,
+    "source_refs": [
+      "pr110_cr_module",
+      "pr110_cr_pin",
+      "phys01_manifest"
+    ]
+  },
+  "source_lineage": {
+    "source_ref": "cr_phys01_injection",
+    "file_sha256": "c5eda0e60302339af1bbdd0603ae1cd8a8921d9e6489c22d954e0bc92968c27d",
+    "matches_recorded_rei_manifest_file_digest": true,
+    "q_semantics": "Angle-integrated proton dN/(proper m^3 s dK), isotropic birth dmu/2",
+    "source_model": "CRP_L17_MD14_v1",
+    "fixed_window_time_behavior": "Implementation holds the chosen source/MD14 snapshot and H/shear fixed; zero initial CR population; integrates injection birth ages over 0..dt.",
+    "spectral_shape": "beta(K)^(-1) [p(K)/p(K0)]^(-alpha), K0=1 GeV",
+    "source_normalization_window_eV": [
+      10000,
+      1000000000000000
+    ],
+    "normalization": "Full source energy integral; never renormalize to the 1..4 MeV collision window.",
+    "observed_defaults": {
+      "z_snapshot": 8,
+      "alpha": 2.2,
+      "cr_efficiency": 0.1,
+      "escape_fraction": 1,
+      "supernova_energy_J": 1e+44,
+      "k_cc_per_solar_mass": 0.0068,
+      "normalization_order": 128
+    },
+    "observed_default_values_are_actual_constructor_receipt": false,
+    "default_values_scope": "Defaults from byte-bound producer source; exact actual constructor arguments not separately read in this bounded intake.",
+    "proper_conversion": "Comoving injection power times (1+z_snapshot)^3",
+    "m0_scalar_q_automatically_identified_with_proton_q": false
+  },
+  "m0_kernel_binding": "UNRESOLVED_DIFFERENT_RESPONSE_QUANTITY",
+  "required_future_fields": [
+    "Selected downstream CR-on history with actual source amplitude/waveform, prehistory and evolving bath/time map.",
+    "Actual source-constructor metadata for the chosen run beyond compiled source defaults.",
+    "Identity and normalization map from this proton terminal snapshot to the M0 selected_record/birth_defined cascade kernel.",
+    "Named observable error tolerance, denominator and CR heating contribution fraction.",
+    "Physical delay/transport/cascade validity over a coupled history."
+  ],
+  "error_budget": {
+    "downstream_absolute": null,
+    "downstream_relative": null,
+    "downstream_denominator": null,
+    "downstream_cr_heating_contribution_fraction": null,
+    "explicit_consumer_error_budget_bound": false,
+    "table_projection_bound_is_physical_error_budget": false,
+    "recorded_finite_refinement_diagnostics_are_global_error_budget": false
+  },
+  "CR_off": {
+    "status": "LOCAL_OFF_CONTRACT_IMPLEMENTED_AND_HISTORICAL_EXECUTION_EVIDENCE_IMPORTED",
+    "no_patch_justified": true,
+    "existing_behavior": {
+      "enabled_false": "All AxisymLocalSources entries remain exactly zero; provider closure is not evaluated; result.audit=None.",
+      "total_derivative_zero": false,
+      "geometry_terms": "Expansion/dilution/thermal work remain in the returned derivative.",
+      "enabled_true_missing_or_invalid": "Typed ForwardError or missing authority; no CR-on-to-zero fallback observed in this receiver.",
+      "on_unsupported_xi": "MissingAuthority(CR_PACKET_COMPOSITION_NOT_PINNED)"
+    },
+    "source_inspection": {
+      "current_module_sha256": "c5461915caf2595a4053f33c026ff1fcaec7b4ab7914188ee5e56535a6f562ba",
+      "current_test_sha256": "9346ed29ae929719c1faeaa67f534c119c2055cda396dc448a90ff06ea840a32",
+      "source_ref": "pr110_cr_module",
+      "negative_control_ref": "pr110_cr_tests",
+      "negative_control": "off_calls_provider_zero_times_and_preserves_geometry_only"
+    },
+    "historical_actual_execution": {
+      "source_ref": "phys01_execution",
+      "source_module_sha256": "5f672ec60a1bcb110cc91dd4d1a21217913c002a65d9282f484d2880d7e0bdd3",
+      "historical_module_retrieved_and_digest_matches": true,
+      "binary_sha256": "376b20bb80ebb95b66140c04e90073ff4a572af3a102f777f6d574bdfeb1a8bc",
+      "binary_bytes": 7821520,
+      "exit_code": 0,
+      "solver_intervals": 0,
+      "off_no_call": true,
+      "raw_test_stdout_ref": "phys01_final_tests",
+      "tests_passed": 7,
+      "tests_failed": 0
+    },
+    "subsequent_scoped_validation": {
+      "source_ref": "phys03_validation",
+      "tests_passed": 8,
+      "tests_failed": 0,
+      "native_probe_off_provider_calls": 0,
+      "solver_intervals": 0,
+      "observation": "Saved validation summary; no new binary execution or global CI result claimed."
+    },
+    "limited_current_to_executed_source_comparison": {
+      "public_cr_deposition_derivative_complete_function_byte_identical": true,
+      "off_negative_control_function_byte_identical": true,
+      "whole_module_byte_identical": false,
+      "source_ref": "OFF_BRANCH_COMPARISON.json",
+      "meaning": "OFF function and control are preserved exactly. This does not certify a current whole-project executable."
+    },
+    "production_whole_history": {
+      "status": "NOT_BOUND_BY_SELECTED_EVIDENCE",
+      "latest_integrated_handoff_ref": "pr110_c12_handoff",
+      "current_selected_execution_cr_provider_count": null,
+      "current_selected_execution_cr_source_zero_receipt": null,
+      "latest_pr_body_claim": "CR/RCT OFF_NONCOMPLETION",
+      "body_claim_is_call_counter_execution_receipt": false,
+      "follow_up": "When the receiver owner executes a specifically selected production scenario, bind its existing CR-off branch and record the source-zero/provider-call-zero receipt there. Do not add a replacement local wrapper or rerun old component tests for this intake."
+    }
+  },
+  "missing_CR_on_policy": "TYPED_UNAVAILABLE; missing data is not zero",
+  "physical_closure_sufficiency": false
+}

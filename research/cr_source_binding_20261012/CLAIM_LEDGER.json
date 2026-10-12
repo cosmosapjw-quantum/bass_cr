@@ -1,0 +1,114 @@
+{
+  "unit": "CR-RUX-M1B-SOURCE-BINDING-20261012",
+  "decision": "PROMOTE_SCOPED",
+  "claims": [
+    {
+      "id": "SB-01",
+      "decision": "PROMOTE",
+      "claim": "Actual Qe(W,t)=t A(W), proper-volume units and source amplitude are bound to saved 9600/M0 records.",
+      "evidence_status": [
+        "derived",
+        "implementation-verified",
+        "numerically checked"
+      ],
+      "conditions": "Pinned full-spectrum proton normalization, active 1-4 MeV collision source, selected 0.1-900 eV electron births, fixed xi=.01 bath and zero initial stock.",
+      "sources": [
+        "SRC-INJ",
+        "SRC-A",
+        "SRC-B",
+        "SRC-C",
+        "SRC-C9600LAUNCH",
+        "SRC-CRUN",
+        "SRC-ELAUNCH"
+      ]
+    },
+    {
+      "id": "SB-02",
+      "decision": "PROMOTE",
+      "claim": "P(T)=q_star H0 R and E_heat(T)=q_star T H0 S/2 with recorded source scale; same-operator prompt errors in SI.",
+      "evidence_status": [
+        "derived",
+        "numerically checked"
+      ],
+      "conditions": "Same linear source, heat-only passive causal kernel, original energy-normalized b; p is not the ramp response coefficient.",
+      "sources": [
+        "SRC-EPULSE",
+        "SRC-ELAUNCH",
+        "SRC-E_FULL",
+        "SRC-E_LEGACY",
+        "review/REFERENCE_RESULT.json"
+      ]
+    },
+    {
+      "id": "SB-03",
+      "decision": "PROMOTE",
+      "claim": "Already-weighted birth columns add without a second energy-fraction factor; same band-shape amplitude changes can be reused.",
+      "evidence_status": [
+        "derived",
+        "implementation-verified",
+        "numerically checked"
+      ],
+      "conditions": "Common original selected source scale; nonnegative amplitudes; unchanged bath and within-band spectral shape; normalized delay moments use heat-yield weights.",
+      "sources": [
+        "SRC-B",
+        "SRC-CACHECODE",
+        "review/REFERENCE_RESULT.json"
+      ]
+    },
+    {
+      "id": "SB-04",
+      "decision": "PROMOTE",
+      "claim": "A2 explicit cutoff energy-and-number thermal join is an internally consistent fixed-volume closure candidate.",
+      "evidence_status": [
+        "derived",
+        "numerically checked"
+      ],
+      "conditions": "P_th=P_heat+P_cut; S_thermal=S_cut; active nonthermal energy/number remain separate; actual stored cutoff energy and source-inclusive rates; prescribed frozen transport outputs. Not empirical proof of subcutoff thermalization or deployed receiver.",
+      "formulas": [
+        "N_birth+N_secondary=N_active+N_cut",
+        "C_V*Tdot=P_heat+P_cut-(3/2)kB*T_g*S_cut",
+        "DeltaT=[E_heat+E_cut-(3/2)kB*T_g0*N_cut]/[C_V0+(3/2)kB*N_cut]"
+      ],
+      "sources": [
+        "SRC-B",
+        "DERIVATION_KO.md section6",
+        "review/REFERENCE_RESULT.json"
+      ]
+    },
+    {
+      "id": "SB-05",
+      "decision": "PROMOTE",
+      "claim": "Cumulative outside-energy and calorimetric upper envelopes for the same recorded active-proton source.",
+      "evidence_status": [
+        "derived",
+        "numerically checked"
+      ],
+      "conditions": "Zero outside initial stock; passive source-attributed kinetic energy; no borrowed bath energy; selected response fixed; nonnegative incoming thermal particle number. No general instantaneous-power bound or positive lower bound on DeltaT.",
+      "sources": [
+        "SRC-B",
+        "SRC-CR001",
+        "review/COVERAGE_IDENTITY_NOTE.json",
+        "DERIVATION_KO.md section7"
+      ]
+    },
+    {
+      "id": "SB-06",
+      "decision": "HOLD",
+      "claim": "Automatic actual REI adoption, CR-on history or error-budget admission.",
+      "reason": "Selected observable, absolute/relative tolerance and reference denominator are null; the existing FS10 terminal receiver is a different output/particle-counting contract."
+    },
+    {
+      "id": "SB-07",
+      "decision": "HOLD",
+      "claim": "Physical input-accuracy certificate, cutoff independence, source/atomic/continuum/mesh validity or cosmological irrelevance.",
+      "reason": "Exact arithmetic and stored-record agreement add no such evidence. Original scientific gates remain."
+    },
+    {
+      "id": "SB-08",
+      "decision": "HOLD",
+      "claim": "All-free event-only expression as a completed alternative receiver closure.",
+      "reason": "Active energy reference and complete primary birth energy/count accounting are not closed; final DERIVATION explicitly excludes this interpretation."
+    }
+  ],
+  "source": "review/DECISION.json"
+}

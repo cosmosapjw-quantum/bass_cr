@@ -1,0 +1,47 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Action completed."
+    }
+  ],
+  "structuredContent": {
+    "url": "https://github.com/cosmosapjw-quantum/rei_bianchi/pull/97",
+    "number": 97,
+    "state": "open",
+    "merged": false,
+    "mergeable": true,
+    "draft": true,
+    "body": "## Scope\n\nIntegrates four reviewed source lines without rewriting their ancestry:\n\n- PR96 conditional warm HM12/Bianchi-I physical-provider research (`528bb69a...`)\n- PR94 positive-energy/zero-temperature underflow guard (`2ee78d59...`)\n- PR95 current-field selected-He closure recomputation (`73bd78d0...`)\n- PR98 production `SourceBoundConditional` route (`c168e578...`), merged as a sibling while preserving PR94/95\n\nThe historical PR96 commit and source manifest are not rewritten. Original PR98 changed sealed `RESEARCH_DAG.json` and marked P01 complete without sufficient source-to-binary proof. This integration restores that sealed file byte-for-byte to the PR96 manifest value and P01 `ready`; PR98's original commit/report remain preserved in Git as non-authoritative producer evidence. This branch adds an integration report, machine validation, one bounded identical-input compatibility run, and a precise Codex handoff.\n\n## Validation\n\n- historical PR96 commit `528bb69a...`: 87/87 payload hashes PASS, including NPZ datasets\n- original PR98 commit `c168e578...`: 86/87 because sealed `RESEARCH_DAG.json` became `7a6ecb...`\n- current integrated tree after corrective restoration: all 87 PR96-manifest-listed payloads pass; `RESEARCH_DAG.json` is again manifest value `012f742...`. PR98-added files are outside that historical manifest and are bound by the Git evidence commit and integration checksum set instead.\n- HM12 intake: 10 passed\n- merged native conditional consumer: 6 passed\n- PR94 axisym coupling: 5 passed\n- PR95 adapter: 4 passed\n- merged PR98 Rust conditional: 8 passed\n- merged PR98 Python boundary: 5 passed\n- post-merge contract/coupling: 6 + 5 passed\n- saved outputs from one fixed `0..1e11 s`, 2904-node, 17-epoch interval: new same-input compatibility checks using PR96's pre-existing targets `SCOPED_PASS`; max state relative difference `4.56e-13`\n\nThe initial byte-exact array comparison is retained as FAIL with roundoff-scale deviations. The observed environments differ in Python (3.12.14 to 3.12.3) and NumPy (2.3.5 to 2.4.2), while SciPy 1.17.0 is unchanged; causation was not isolated. Corrected saved-data checks restore PR96's per-epoch pressure scaling and field threshold, and explicitly pass exact saved time/mu/weight identity, finite/positive state, ionic fraction and temperature domains. No new solver run, 11-history rerun or parameter scan was performed for the correction.\n\n## Claim ceiling\n\nThis is a conditional warm H/He HM12 lane. CR/RCT/HH are OFF. It is not a cold primordial-IGM/REC IC result, a low-energy cosmic-ray deposition result, production `PhysicalHistory`, or global EoR admission. Production source remains fail-closed. PR95 still retains `64*EPSILON`, naive summation, and a relative mutable REC path; those are not selected physical policies.\n\nRemote PR94/95 and integration PR97 CI failures are inherited formatting failures with tests skipped; targeted local results above are not a whole-CI PASS.\n\nPR98 producer JSON/NPZ raw bytes were recovered locally and match its reported SHA-256 values. The matching 3,288,066-byte Dropbox recovery archive (`9a82f25e...`, provider ID `BSpOijBcT10AAAAAAD3sHQ`) was independently statically inspected by the parent worker and contains both outputs, resolving artifact availability. It lacks the production binary, clean-build transcript and P01 command/stdout/stderr receipt, so execution remains uncertified. The Python entrypoint accepts an arbitrary `--binary`, records source/binary hashes only after integration, and Rust `BIND` verifies identity strings rather than files/build provenance. Future execution is explicitly blocked pending a clean source-pinned build receipt and prelaunch executable/source hash check. No new solver run was performed while integrating PR98.\n\nFresh PR99/`d6ad8b73...` diffuse-screen results are not merged or adopted. Its finite-grid cap is only a frozen diagnostic, and its validation-recorded `screen_diffuse.py` hash does not match the committed blob. It remains HOLD pending run-source identity resolution; this integration did not rerun it.\n\n",
+    "title": "research: integrate physical provider with safety guards",
+    "base": "research/physical-provider-20261010",
+    "base_sha": "528bb69a24ce9345efec78c6d406d3c392e2671d",
+    "head": "codex/physical-provider-integration-20261010",
+    "head_sha": "1400093cdd121d8e6adb51ffeb360102a48653bf",
+    "head_repo_id": 1322787769,
+    "head_repo_full_name": "cosmosapjw-quantum/rei_bianchi",
+    "merge_commit_sha": "568f98cee26ea6fa3b78e17cf85932ef8b3c183a",
+    "user": {
+      "login": "cosmosapjw-quantum",
+      "name": "cosmosapjw-quantum",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/58155957?v=4",
+      "id": 58155957
+    },
+    "requested_reviewers": null,
+    "requested_team_reviewers": null,
+    "diff": null,
+    "comments": null,
+    "created_at": "2026-10-10T07:02:25Z",
+    "updated_at": "2026-10-11T08:33:58Z",
+    "closed_at": null,
+    "merged_at": null,
+    "commits": 16,
+    "changed_files": 102,
+    "additions": 9582,
+    "deletions": 1201,
+    "display_url": "https://github.com/cosmosapjw-quantum/rei_bianchi/pull/97",
+    "display_title": "research: integrate physical provider with safety guards"
+  },
+  "isError": false
+}

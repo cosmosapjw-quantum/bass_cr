@@ -1,0 +1,309 @@
+{
+  "schema": "cr-source-binding-final-handoff-mechanical-check.v1",
+  "created_utc": "2026-10-12T12:13:35.022387+00:00",
+  "started_utc": "2026-10-12T12:13:35.013942+00:00",
+  "checker": "/root/dag_audit",
+  "role": "Bounded mechanical handoff check; candidate-derivation collaborator, not independent scientific decision reviewer",
+  "unit": "CR-RUX-M1B-SOURCE-BINDING-20261012",
+  "status": "PASS",
+  "scientific_decision": {
+    "path": "review/DECISION.json",
+    "status": "PROMOTE_SCOPED",
+    "sha256": "43a7111f8324437942f773dc57e12fad219d8c7183b160d09af3a1dbdce8f24d",
+    "not_reopened": true
+  },
+  "mandatory_checks": {
+    "approved_core_hashes_match": true,
+    "historical_manifest_verified_with_snapshot_resolution": true,
+    "post_review_document_bindings_match": true,
+    "global_inherited_nodes_unchanged": true,
+    "local_dag_acyclic_and_references_valid": true,
+    "entrypoint_paths_exist": true,
+    "no_concurrent_input_changes": true
+  },
+  "approved_core": {
+    "contract": {
+      "path": "CONTRACT.json",
+      "sha256": "55c7630675b9de175215413ba0273e4a2db3af3154d7dc307aa2f58016a324cc",
+      "matches": true
+    },
+    "code": {
+      "path": "evaluate_source_binding.py",
+      "sha256": "0c9e1454d162f8d4c744fa8a7b11265db4e671d2f8270a2b547bbb175d41c964",
+      "matches": true
+    },
+    "result": {
+      "path": "results/SOURCE_BOUND_RESPONSE.json",
+      "sha256": "dd4ed10b5ecd3aea8a8710b5190c9d7da4085834713bc72ae2cc37915cc97f27",
+      "matches": true
+    },
+    "derivation": {
+      "path": "DERIVATION_KO.md",
+      "sha256": "9c85133521984c48c11ad13d62e96b4a741ce78139c73f5da65ea01746bf47a2",
+      "matches": true
+    },
+    "manifest": {
+      "path": "CANDIDATE_MANIFEST.json",
+      "sha256": "28b63802e061e8141bb9d7668765c574472064a5cbbfe42c693563d5e984bc2c",
+      "matches": true
+    }
+  },
+  "historical_manifest": {
+    "entries_checked": 81,
+    "entries_resolved_to_reviewed_snapshots": [
+      {
+        "original": "NEXT_DAG.json",
+        "checked": "review/executed_documents/NEXT_DAG.json"
+      },
+      {
+        "original": "PLAN_KO.md",
+        "checked": "review/executed_documents/PLAN_KO.md"
+      },
+      {
+        "original": "SOURCE_BINDING_MAP.json",
+        "checked": "review/executed_documents/SOURCE_BINDING_MAP.json"
+      }
+    ],
+    "unmodified_current_entries_checked": 78,
+    "failures": [],
+    "note": "Current post-review bookkeeping documents are checked against POST_REVIEW_DOCUMENT_BINDING, while original reviewed document bytes satisfy the historical manifest. The overlay snapshot is separately bound, not a manifest member."
+  },
+  "post_review_document_binding": {
+    "path": "review/POST_REVIEW_DOCUMENT_BINDING.json",
+    "sha256": "c0f9c193c5180467206b2482d0f9a17ba838eb5ce5d677662be240c94cd4e62f",
+    "decision_hash_matches": true,
+    "documents": [
+      {
+        "path": "NEXT_DAG.json",
+        "reviewed_snapshot": {
+          "path": "review/executed_documents/NEXT_DAG.json",
+          "sha256": "37196db858d4e9857ddc1032c3431e2b339c7a9463a8938bd6b208ad614a6808",
+          "matches": true
+        },
+        "current": {
+          "path": "NEXT_DAG.json",
+          "sha256": "dee41de2a03685ec46c28a6cebee01ed5e839db6d98eb9b871a5f3e12176cacc",
+          "matches": true
+        },
+        "historical_manifest_entry_present": true,
+        "manifest_agrees_when_present": true
+      },
+      {
+        "path": "PLAN_KO.md",
+        "reviewed_snapshot": {
+          "path": "review/executed_documents/PLAN_KO.md",
+          "sha256": "fed7263cc3cbda4ce77d953a848cc1c329abfb0afe6d2a44d4a898874aeae1df",
+          "matches": true
+        },
+        "current": {
+          "path": "PLAN_KO.md",
+          "sha256": "11ebce6f85929b73ac9de6bef1bbbae948682ab5d0c305d9c74ab3788f023b59",
+          "matches": true
+        },
+        "historical_manifest_entry_present": true,
+        "manifest_agrees_when_present": true
+      },
+      {
+        "path": "SOURCE_BINDING_MAP.json",
+        "reviewed_snapshot": {
+          "path": "review/executed_documents/SOURCE_BINDING_MAP.json",
+          "sha256": "e56b070e85e5a8921415d3b76b38a2abdb39f46555105be9dee9828ad5c00d87",
+          "matches": true
+        },
+        "current": {
+          "path": "SOURCE_BINDING_MAP.json",
+          "sha256": "d1ea5187062f18dd4b38556c13f2c0f3622ee4413979d3fcab3ca8d85398b75c",
+          "matches": true
+        },
+        "historical_manifest_entry_present": true,
+        "manifest_agrees_when_present": true
+      },
+      {
+        "path": "REI_ATOMIC_REUSE_DAG_CR_OVERLAY_20261012.json",
+        "reviewed_snapshot": {
+          "path": "review/executed_documents/REI_ATOMIC_REUSE_DAG_CR_OVERLAY_20261012.json",
+          "sha256": "99a0c4f606a57e87c0913b7baa503cf6ab81a126aa92c78ddef1fd42de1a709b",
+          "matches": true
+        },
+        "current": {
+          "path": "REI_ATOMIC_REUSE_DAG_CR_OVERLAY_20261012.json",
+          "sha256": "f570176f7895790b58bb1a9b1c0fa128c6d255c52c596ac02bed1101b17871c6",
+          "matches": true
+        },
+        "historical_manifest_entry_present": false,
+        "manifest_agrees_when_present": true
+      }
+    ]
+  },
+  "global_dag": {
+    "global_node_count": 19,
+    "inherited_node_count": 19,
+    "nodes_exact_structural_equality": true,
+    "main_nodes_unchanged": true,
+    "optional_nodes_unchanged": true,
+    "inherited_copy_hash_matches": true,
+    "supplied_parent_dag_hash_unchanged": true,
+    "global_states_promoted_false": true
+  },
+  "local_dag": {
+    "nodes": 22,
+    "hard_dependency_edges": 32,
+    "duplicate_ids": [],
+    "missing_dependencies": [],
+    "cyclic_or_blocked_nodes": [],
+    "topological_order": [
+      "CR_PAIRED_ENERGY_ION_CUTOFF_LEDGER",
+      "CR_RUX00_AUTHORITY",
+      "F_BINDING_AND_G_FRONTIER",
+      "H_EXISTING_RUN_COLLECTION",
+      "H_NCP_FULL9600",
+      "M0_CACHED_ONSET_RESPONSE",
+      "M4_TARGETED_CR_EXTENSION",
+      "CR_RUX03_OWNER_REUSE",
+      "M0_QUADRATIC_RESPONSE",
+      "M1_CONSUMER_SCOPE_INTAKE",
+      "M1_ELECTRON_SOURCE_BINDING",
+      "M3_LOCAL_CR_OFF_CONTRACT",
+      "CR_SCENARIO_SOURCE_BINDING",
+      "CR_THERMAL_RELEVANCE_CUTOFF_CLOSURE",
+      "M2_RESPONSE_ERROR_MAP",
+      "M3_SELECTED_HISTORY_OFF_RECEIPT",
+      "CR_PROCESS_RELEVANCE",
+      "CR_THERMAL_NONTHERMAL_ACCOUNTING",
+      "M1_CONSUMER_ERROR_BUDGET",
+      "M2_PHYSICAL_CLOSURE_DECISION",
+      "M1_REI_SOURCE_ADOPTION",
+      "RUX13_MATCHED_HISTORY_EFFECT"
+    ],
+    "conditional_requirements_checked": [
+      {
+        "dependency": "M1_CONSUMER_ERROR_BUDGET",
+        "node": "CR_PROCESS_RELEVANCE",
+        "condition": "quantified_CR_irrelevance_claimed",
+        "literal_requirement": "M1_CONSUMER_ERROR_BUDGET"
+      },
+      {
+        "dependency": "CR_THERMAL_RELEVANCE_CUTOFF_CLOSURE",
+        "node": "CR_THERMAL_NONTHERMAL_ACCOUNTING",
+        "condition": "cutoff_join_selected",
+        "literal_requirement": "CR_THERMAL_RELEVANCE_CUTOFF_CLOSURE independent scoped acceptance"
+      }
+    ],
+    "cycles_including_recognized_conditional_edges": [],
+    "next_here_ids_exist": true
+  },
+  "entrypoint_paths": {
+    "unique_existing_references_checked": 40,
+    "checked_paths": [
+      "../cr_rux_m1_m3_20261012/ATOM_OWNER_MATRIX.json",
+      "../cr_rux_m1_m3_20261012/DERIVATION_KO.md",
+      "../cr_rux_m1_m3_20261012/RATE_DOMAIN_MAP.json",
+      "../cr_rux_m1_m3_20261012/inputs/QUADRATIC_RESPONSE.json",
+      "../cr_rux_m1_m3_20261012/results/RESPONSE_ERROR_MAP.json",
+      "../cr_rux_m1_m3_20261012/review/DECISION.json",
+      "DERIVATION_KO.md",
+      "HANDOFF.json",
+      "NEXT_DAG.json",
+      "PLAN_KO.md",
+      "REI_ATOMIC_REUSE_DAG_CR_OVERLAY_20261012.json",
+      "REPORT_KO.md",
+      "SOURCE_BINDING_MAP.json",
+      "START_NCP_CODEX_KO.md",
+      "evidence/POSTPROCESS_ACTUAL_EXECUTION.json",
+      "evidence/attempt01/FAILURE_AND_REPAIR.json",
+      "inputs/CACHED_RESPONSE.json",
+      "inputs/CONSUMER_REQUEST.json",
+      "inputs/INHERITED_DAG.json",
+      "inputs/INHERITED_OVERLAY.json",
+      "inputs/PAIRED_RECORD.json",
+      "inputs/PULSE_RECORD.json",
+      "inputs/SOURCE_COVERAGE_RECORD.json",
+      "inputs/SOURCE_MANIFEST.json",
+      "inputs/consumer_intake/INTAKE_KO.md",
+      "inputs/consumer_intake/SOURCE_IDENTITY.json",
+      "inputs/consumer_intake/baseline/CONSUMER_INTAKE.json",
+      "inputs/consumer_intake/baseline/OFF_BRANCH_COMPARISON.json",
+      "inputs/math_intake/SOURCE_INVENTORY.json",
+      "inputs/source_lineage/SOURCE_FINDINGS_KO.md",
+      "latex/report.pdf",
+      "publication/",
+      "results/SOURCE_BINDING_SUMMARY.png",
+      "results/SOURCE_BOUND_RESPONSE.json",
+      "review/COVERAGE_IDENTITY_NOTE.json",
+      "review/DECISION.json",
+      "review/FINAL_CANDIDATE_IDENTITY_CHECK.json",
+      "review/POST_REVIEW_DOCUMENT_BINDING.json",
+      "review/REVIEW_KO.md",
+      "state/RESEARCH_STATE.json"
+    ],
+    "missing": [],
+    "planned_future_outputs_not_required_to_exist": [
+      {
+        "node": "CR_PROCESS_RELEVANCE",
+        "status": "READY_ON_SELECTED_SCENARIO",
+        "path": "future/CR_PROCESS_RELEVANCE.json",
+        "exists_now": false
+      },
+      {
+        "node": "M1_CONSUMER_ERROR_BUDGET",
+        "status": "UNBOUND_TO_SELECTED_OBSERVABLE",
+        "path": "future/CR_OBSERVABLE_BUDGET.json",
+        "exists_now": false
+      },
+      {
+        "node": "M2_PHYSICAL_CLOSURE_DECISION",
+        "status": "CONDITIONAL",
+        "path": "future/CR_CLOSURE_DECISION.json",
+        "exists_now": false
+      },
+      {
+        "node": "M3_SELECTED_HISTORY_OFF_RECEIPT",
+        "status": "CONDITIONAL_ON_RECEIVER_EXECUTION",
+        "path": "future/SELECTED_RECEIVER_CR_OFF_RECEIPT.json",
+        "exists_now": false
+      },
+      {
+        "node": "M4_TARGETED_CR_EXTENSION",
+        "status": "CONDITIONAL_INDEPENDENT_LANE",
+        "path": "future/TARGETED_CR_EXECUTION_CONTRACT.json",
+        "exists_now": false
+      },
+      {
+        "node": "RUX13_MATCHED_HISTORY_EFFECT",
+        "status": "CONDITIONAL_DOWNSTREAM",
+        "path": "future/CR_EFFECT_ON_EOR.json",
+        "exists_now": false
+      },
+      {
+        "node": "CR_SCENARIO_SOURCE_BINDING",
+        "status": "READY_TO_BIND_SELECTED_SCENARIO",
+        "path": "future/SELECTED_CR_SCENARIO_SOURCE.json",
+        "exists_now": false
+      },
+      {
+        "node": "CR_THERMAL_NONTHERMAL_ACCOUNTING",
+        "status": "READY_ON_SELECTED_SCENARIO",
+        "path": "future/THERMAL_PARTICLE_ACCOUNTING.json",
+        "exists_now": false
+      },
+      {
+        "node": "M1_REI_SOURCE_ADOPTION",
+        "status": "PENDING_DOWNSTREAM_ACTUAL_ADOPTION",
+        "path": "future/REI_CR_SOURCE_ADOPTION.json",
+        "exists_now": false
+      }
+    ],
+    "external_archive_ids_and_unstarted_workloads": "Not dereferenced or executed; outside this check."
+  },
+  "document_findings": [],
+  "concurrent_changes": [],
+  "actions": {
+    "scientific_code_execution": 0,
+    "scientific_calculation": 0,
+    "old_test_or_suite_rerun": 0,
+    "kernel_build_or_transport_run": 0,
+    "scientific_file_edits": 0,
+    "network_calls": 0,
+    "only_output": "evidence/FINAL_HANDOFF_MECHANICAL_CHECK.json"
+  }
+}

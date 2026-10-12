@@ -1,0 +1,253 @@
+{
+  "schema": "cr-source-binding-independent-decision.v1",
+  "created_utc": "2026-10-12T12:03:09.202917+00:00",
+  "unit": "CR-RUX-M1B-SOURCE-BINDING-20261012",
+  "decision": "PROMOTE",
+  "status": "PROMOTE_SCOPED",
+  "reviewer": "/root/independent_review",
+  "independence": {
+    "candidate_generation": false,
+    "owner_validation_design": false,
+    "independent_reference_designed_and_run_by_reviewer": true,
+    "prior_context": "Reviewer had read historical BASS_CR evidence in a separate report review; did not generate this source-binding/A2 candidate.",
+    "helper": "/root/independent_review/thermal_ledger_audit, read-only logical audit, no execution or edits"
+  },
+  "harness": {
+    "family": "GPT-6 Astra",
+    "research_version": "4.0.0",
+    "coding_version": "4.0.0",
+    "selection_basis": "trusted host developer label GPT-6 Astra Pro",
+    "backend_independently_attested": false,
+    "template_state_is_execution_evidence": false
+  },
+  "frozen_candidate": {
+    "manifest_path": "CANDIDATE_MANIFEST.json",
+    "manifest_sha256": "28b63802e061e8141bb9d7668765c574472064a5cbbfe42c693563d5e984bc2c",
+    "files": 81,
+    "all_manifest_entries_match": true,
+    "contract_sha256": "55c7630675b9de175215413ba0273e4a2db3af3154d7dc307aa2f58016a324cc",
+    "code_sha256": "0c9e1454d162f8d4c744fa8a7b11265db4e671d2f8270a2b547bbb175d41c964",
+    "result_sha256": "dd4ed10b5ecd3aea8a8710b5190c9d7da4085834713bc72ae2cc37915cc97f27",
+    "derivation_sha256": "9c85133521984c48c11ad13d62e96b4a741ce78139c73f5da65ea01746bf47a2",
+    "identity_receipt": "review/FINAL_CANDIDATE_IDENTITY_CHECK.json"
+  },
+  "approved_scope_ko": "동일 고정 source/bath의 단위 결속, 저장 scalar 산술, 두 birth 열의 올바른 재사용, A2의 명시적 thermal cutoff join 후보와 누적 source-energy 상계를 연구·보고 단계에 재사용한다. 실제 consumer 채택·물리 입력 정확도·cutoff thermalization 실증·전역 이력은 승인하지 않는다.",
+  "claims": [
+    {
+      "id": "SB-01",
+      "decision": "PROMOTE",
+      "claim": "Actual Qe(W,t)=t A(W), proper-volume units and source amplitude are bound to saved 9600/M0 records.",
+      "evidence_status": [
+        "derived",
+        "implementation-verified",
+        "numerically checked"
+      ],
+      "conditions": "Pinned full-spectrum proton normalization, active 1-4 MeV collision source, selected 0.1-900 eV electron births, fixed xi=.01 bath and zero initial stock.",
+      "sources": [
+        "SRC-INJ",
+        "SRC-A",
+        "SRC-B",
+        "SRC-C",
+        "SRC-C9600LAUNCH",
+        "SRC-CRUN",
+        "SRC-ELAUNCH"
+      ]
+    },
+    {
+      "id": "SB-02",
+      "decision": "PROMOTE",
+      "claim": "P(T)=q_star H0 R and E_heat(T)=q_star T H0 S/2 with recorded source scale; same-operator prompt errors in SI.",
+      "evidence_status": [
+        "derived",
+        "numerically checked"
+      ],
+      "conditions": "Same linear source, heat-only passive causal kernel, original energy-normalized b; p is not the ramp response coefficient.",
+      "sources": [
+        "SRC-EPULSE",
+        "SRC-ELAUNCH",
+        "SRC-E_FULL",
+        "SRC-E_LEGACY",
+        "review/REFERENCE_RESULT.json"
+      ]
+    },
+    {
+      "id": "SB-03",
+      "decision": "PROMOTE",
+      "claim": "Already-weighted birth columns add without a second energy-fraction factor; same band-shape amplitude changes can be reused.",
+      "evidence_status": [
+        "derived",
+        "implementation-verified",
+        "numerically checked"
+      ],
+      "conditions": "Common original selected source scale; nonnegative amplitudes; unchanged bath and within-band spectral shape; normalized delay moments use heat-yield weights.",
+      "sources": [
+        "SRC-B",
+        "SRC-CACHECODE",
+        "review/REFERENCE_RESULT.json"
+      ]
+    },
+    {
+      "id": "SB-04",
+      "decision": "PROMOTE",
+      "claim": "A2 explicit cutoff energy-and-number thermal join is an internally consistent fixed-volume closure candidate.",
+      "evidence_status": [
+        "derived",
+        "numerically checked"
+      ],
+      "conditions": "P_th=P_heat+P_cut; S_thermal=S_cut; active nonthermal energy/number remain separate; actual stored cutoff energy and source-inclusive rates; prescribed frozen transport outputs. Not empirical proof of subcutoff thermalization or deployed receiver.",
+      "formulas": [
+        "N_birth+N_secondary=N_active+N_cut",
+        "C_V*Tdot=P_heat+P_cut-(3/2)kB*T_g*S_cut",
+        "DeltaT=[E_heat+E_cut-(3/2)kB*T_g0*N_cut]/[C_V0+(3/2)kB*N_cut]"
+      ],
+      "sources": [
+        "SRC-B",
+        "DERIVATION_KO.md section6",
+        "review/REFERENCE_RESULT.json"
+      ]
+    },
+    {
+      "id": "SB-05",
+      "decision": "PROMOTE",
+      "claim": "Cumulative outside-energy and calorimetric upper envelopes for the same recorded active-proton source.",
+      "evidence_status": [
+        "derived",
+        "numerically checked"
+      ],
+      "conditions": "Zero outside initial stock; passive source-attributed kinetic energy; no borrowed bath energy; selected response fixed; nonnegative incoming thermal particle number. No general instantaneous-power bound or positive lower bound on DeltaT.",
+      "sources": [
+        "SRC-B",
+        "SRC-CR001",
+        "review/COVERAGE_IDENTITY_NOTE.json",
+        "DERIVATION_KO.md section7"
+      ]
+    },
+    {
+      "id": "SB-06",
+      "decision": "HOLD",
+      "claim": "Automatic actual REI adoption, CR-on history or error-budget admission.",
+      "reason": "Selected observable, absolute/relative tolerance and reference denominator are null; the existing FS10 terminal receiver is a different output/particle-counting contract."
+    },
+    {
+      "id": "SB-07",
+      "decision": "HOLD",
+      "claim": "Physical input-accuracy certificate, cutoff independence, source/atomic/continuum/mesh validity or cosmological irrelevance.",
+      "reason": "Exact arithmetic and stored-record agreement add no such evidence. Original scientific gates remain."
+    },
+    {
+      "id": "SB-08",
+      "decision": "HOLD",
+      "claim": "All-free event-only expression as a completed alternative receiver closure.",
+      "reason": "Active energy reference and complete primary birth energy/count accounting are not closed; final DERIVATION explicitly excludes this interpretation."
+    }
+  ],
+  "criteria": {
+    "evidence": "Code, immutable historical receipts, preserved input scalars and current results were directly traced with explicit read scopes; SHA identity is not itself validity.",
+    "physical_math_validity": "Dimensions, ramp time factors, birth weighting, number/energy conservation and thermal denominator are consistent within the declared assumptions.",
+    "novelty": "New local source-to-observable unit binding and explicit thermal closure application; no claim of globally novel response or thermodynamic theorem, new physical experiment or new atomic information.",
+    "testability": "Exact atomic-delay and open-calorimeter examples discriminate the principal normalization/counting errors; raw J1/J2 provide a separate recorded-data route.",
+    "robustness": "Strictly limited to preserved source, bath, operator, original amplitude and initial condition; numerical/physical input uncertainty remains inherited.",
+    "tractability": "Completed with lightweight scalar postprocessing and no new heavy work; selected source reuse is actionable.",
+    "assumptions": "Passive stationary response only where invoked, zero prehistory, same frozen bath and spectral shape; A2 is a defined closure candidate.",
+    "original_motivation": "Provides a concrete physical normalization and bounded thermal relevance calculation while retaining the actual consumer budget as unknown rather than substituting a different global question."
+  },
+  "reference_execution": {
+    "receipt": "review/REFERENCE_ACTUAL_EXECUTION.json",
+    "receipt_sha256": "5ce9784e5b6b2da6130af3e032893f782e0981f1d2ef89d1e913b4110b8c6859",
+    "source_sha256": "0933e57c780c46446ab27b7608b4319a56c75a80e5f477b5b614c3b61d141069",
+    "plan_sha256": "8d002c084d0698ab6ff597a6633d12d9ab1fd0773e43c0f7cd92ffc9f9d5dd45",
+    "result_sha256": "694b4e211f2ff9af7e1b965d26d4761bdb274ae282f220038f673951aec0cc6b",
+    "runs": 1,
+    "checks_passed": 30,
+    "checks_failed": 0,
+    "exit_code": 0,
+    "elapsed_seconds": 0.03056660998845473,
+    "input_bytes_unchanged": true,
+    "candidate_import_or_execution": false,
+    "interpretation": "Independent implementation and exact toy inputs; actual-record checks share historical physical inputs and do not independently validate that physics."
+  },
+  "owner_execution_reviewed": {
+    "receipt": "evidence/POSTPROCESS_ACTUAL_EXECUTION.json",
+    "receipt_sha256": "dcab151e9d528d768df62a4c5c71e67c950bcfae543fd62e8968ff7c3a353a69",
+    "exit_code": 0,
+    "elapsed_seconds": 0.03819547200691886,
+    "checks": 37,
+    "failed_checks": [],
+    "maximum_relative_stored_record_difference": "4.4955189295068785330881761129126368734100685000447E-14",
+    "meaning": "Arithmetic consistency after unit/normalization conversion only, not an input-physics accuracy certificate.",
+    "first_failure_preserved": "evidence/attempt01/FAILURE_AND_REPAIR.json",
+    "historical_A1_event_projection": "evidence/a1_event_projection/"
+  },
+  "clarifications": [
+    {
+      "id": "RCL-01",
+      "status": "RESOLVED_BY_OWNER_WORDING_ONLY",
+      "issue": "T_0 used for both horizon and initial gas temperature; final text now T_g,0 for gas."
+    },
+    {
+      "id": "RCL-02",
+      "status": "RESOLVED_BY_OWNER_WORDING_ONLY",
+      "issue": "All-free event projection must not be promoted as completed energy-consistent alternative receiver; final text explicitly excludes it."
+    },
+    {
+      "id": "RCL-03",
+      "status": "PROVENANCE_DISTINCTION_RECORDED_NO_NUMERIC_CONFLICT",
+      "issue": "Evaluator uses B R002 coverage input while derivation cites C R001; whole identities differ but coverage subobjects including recorded decimals match."
+    }
+  ],
+  "blocking_findings": [],
+  "remaining_gates": {
+    "actual_REI_source_adoption": "PENDING_DOWNSTREAM_ACTUAL_ADOPTION",
+    "consumer_budget": {
+      "observable": null,
+      "absolute_tolerance": null,
+      "relative_tolerance": null,
+      "reference_denominator": null,
+      "binding_scope": "Executed BASS_CR fixed-bath electron source; REI selected CR-on history remains unprovided"
+    },
+    "cutoff_physical_validation": "UNRESOLVED",
+    "frozen_source_and_atomic_physical_accuracy": "NOT_NEWLY_CERTIFIED",
+    "F_operator_binding": "HOLD",
+    "G_frontier": "BLOCKED",
+    "PHYS02_DELAY": "OPEN",
+    "production_history": "HOLD",
+    "atomic_G02": "UNRESOLVED",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO"
+  },
+  "new_review_work_counts": {
+    "reference_scalar_execution": 1,
+    "source_quadrature": 0,
+    "generator": 0,
+    "transport": 0,
+    "pulse": 0,
+    "resolvent": 0,
+    "NCP": 0,
+    "old_suite": 0,
+    "candidate_evaluator": 0
+  },
+  "report_pdf_scope": "Final report/PDF still authoring and is not a mandatory reviewed artifact of this scientific decision. It must retain the approved scope above.",
+  "postdecision_bookkeeping": "Owner may record this bounded decision in status/entrypoints and publication receipts while preserving frozen scientific evidence and the manifest reviewed here. Scientific code/result/claim changes require a new targeted review.",
+  "review_artifacts": {
+    "report": {
+      "path": "review/REVIEW_KO.md",
+      "sha256": "987c3e3c918b1f4f18fed8a62513908dc41c734ddcd34128e0ad2403ec03fc8f"
+    },
+    "direct_sources": {
+      "path": "review/SOURCE_READ_INVENTORY.json",
+      "sha256": "5e2e07eff6b8946926c56f4364214e93d4eab260ed3e21db42e37717495d277f"
+    },
+    "git_read_commands": {
+      "path": "review/SOURCE_READ_EXECUTIONS.json",
+      "sha256": "6d0aa51aa6b51f55252bd67345ef6dd8ee6bae151a61acdf4e4946beccb29829"
+    },
+    "coverage_note": {
+      "path": "review/COVERAGE_IDENTITY_NOTE.json",
+      "sha256": "c8056f6efdd876ed39458805ae68e2859522ef79fb02833fdfc6df3fcd69c973"
+    },
+    "helper_note": {
+      "path": "review/THERMAL_LEDGER_SECOND_READING.json",
+      "sha256": "89e47156abc9ceac43c52dd56ce2c61a86536edc4ddc4fd53b63d5c4779689ba"
+    }
+  }
+}

@@ -1,6 +1,10 @@
 # BASS cosmic-ray charge exchange
 
-## 현재 연구 루프 — CR 재사용 DAG와 M1–M3, 2026-10-12
+## 현재 연구 루프 — 실제 전자 주입원과 cutoff 열적 편입, 2026-10-12
+
+[현재 보고서](research/cr_source_binding_20261012/REPORT_KO.md), [계획](research/cr_source_binding_20261012/PLAN_KO.md), [DAG](research/cr_source_binding_20261012/NEXT_DAG.json), [handoff](research/cr_source_binding_20261012/HANDOFF.json)를 먼저 읽는다. 실제 Qe=tA의 SI source binding, cutoff 에너지·입자수의 열적 편입 후보 및 누적 에너지 예산이 독립 PROMOTE_SCOPED를 받았다. 다음은 실제 선택 scenario/source, total/active/thermal 전자수 및 관측량 허용오차의 결속이다. 전역 REI 채택은 별도이며 새 NCP 작업은 없다. 아래는 보존한 이전 단계다.
+
+## 이전 연구 루프 — CR 재사용 DAG와 M1–M3, 2026-10-12
 
 [현재 보고서](research/cr_rux_m1_m3_20261012/REPORT_KO.md), [재편 계획](research/cr_rux_m1_m3_20261012/PLAN_KO.md), [DAG](research/cr_rux_m1_m3_20261012/NEXT_DAG.json), [handoff](research/cr_rux_m1_m3_20261012/HANDOFF.json)를 먼저 읽는다. M0와 이차 응답은 재사용했고, M1의 실제 소비자 snapshot 조사·M2의 양수성 보존 finite-age 오차 지도·M3의 국소 OFF 근거 재사용을 완료했다. 다음 here 작업은 `M1_ELECTRON_SOURCE_BINDING`과 실제 소비자의 오차 예산 연결이다. 전역 RUX 상태는 승격하지 않았고 새 NCP dispatch는 0이다. 아래 M0/plan-reset 항목은 보존한 이전 단계다.
 
