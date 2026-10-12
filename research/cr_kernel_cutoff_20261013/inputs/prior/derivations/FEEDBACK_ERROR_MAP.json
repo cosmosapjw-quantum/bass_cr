@@ -1,0 +1,88 @@
+{
+  "schema": "bass-cr-feedback-error-map.v1",
+  "unit_id": "CR-THEORY-FEEDBACK-20261013",
+  "proof": "derivations/FEEDBACK_THEOREMS_KO.md",
+  "status": "DERIVED_AWAITING_INDEPENDENT_REVIEW",
+  "distinction": {
+    "algebraic_target": "exact fixed point of the named frozen-donor capacity map",
+    "physical_target": "exact endpoint of the declared continuous finite reaction ODE",
+    "combined_collision_geometry_target": "use the complete finite vector-field residual or an explicitly bounded splitting error"
+  },
+  "algebraic_certificate": {
+    "required": [
+      "z in K",
+      "Phi_h(K) subset K",
+      "0<=q<1",
+      "N_true,N_z>=N_min>0"
+    ],
+    "norm": "weighted_infinity_a",
+    "residual": "rho=norm(Phi_h(z)-z)",
+    "evaluation_error": "epsilon_eval>=norm(exact Phi evaluation - computed Phi evaluation)",
+    "state_bound": "(rho+epsilon_eval)/(1-q)",
+    "eos_factor": "a_U/(c_v*N_min)+T(z)*a_N/N_min",
+    "temperature_bound": "eos_factor*state_bound",
+    "iterate_old": "error(z_k)<=norm(z_{k+1}-z_k)/(1-q)",
+    "iterate_new": "error(z_{k+1})<=q*norm(z_{k+1}-z_k)/(1-q)",
+    "target": "discrete_self_consistent_endpoint"
+  },
+  "rate_perturbation_certificate": {
+    "required": [
+      "same initial state, event columns, step and support",
+      "f and fhat bounded on same K",
+      "exact map contraction q<1"
+    ],
+    "inputs": "e_r>=sup_K abs(f_r-fhat_r), common F_r and common denominator lower m_r",
+    "load_error": "e_c_i=sum_r C_ir*e_r",
+    "denominator_error": "e_d_r=sum_{i:C_ir>0} e_c_i/y_n_i",
+    "extent_error": "e_xi_r=h*e_r/m_r+h^2*F_r*e_d_r/m_r^2",
+    "map_error": "E_map=max_i sum_r abs(S_ir)*e_xi_r/a_i",
+    "residual": "rho_hat=norm(Phi_hat(z)-z)",
+    "state_bound": "(rho_hat+E_map+epsilon_eval)/(1-q)",
+    "temperature_bound": "eos_factor*state_bound",
+    "target": "exact_coefficient_discrete_endpoint"
+  },
+  "physical_endpoint_certificate": {
+    "required": [
+      "h>0",
+      "same initial state unless supplied initial_error",
+      "computed z and actual path in convex K",
+      "G has uniform state Lipschitz L>=0 and time Lipschitz Lt>=0"
+    ],
+    "reconstruction": "eta(s)=y_n+s*(z-y_n)/h",
+    "endpoint_defect": "D_end=norm((z-y_n)/h-G(z,t_n+h))",
+    "step_increment": "Delta=norm(z-y_n)",
+    "A": "expm1(L*h)/L if L>0; h if L=0",
+    "B": "((L*h-1)*exp(L*h)+1)/L^2 if L>0; h^2/2 if L=0",
+    "B_integral": "integral_0^h exp(L*(h-s))*(h-s) ds",
+    "B_simple_upper": "exp(L*h)*h^2/2",
+    "B_small_argument_series": "h^2*(1/2+(L*h)/3+(L*h)^2/8+(L*h)^3/30+...)",
+    "state_bound": "exp(L*h)*initial_error+A*D_end+B*(L*Delta/h+Lt)",
+    "temperature_bound": "(a_U/(c_v*N_min)+T(z)*a_N/N_min)*state_bound",
+    "target": "continuous_reaction_ODE_endpoint",
+    "iteration_error_handling": "Included through the actual z and physical endpoint residual; do not add the same algebraic error twice.",
+    "geometric_extension": "Add known geometric field and its time dependence to G,L,Lt for a total-field reconstruction certificate."
+  },
+  "local_consistency": {
+    "matching_condition": "f_r(y_n;y_n,t_star)=R_r(y_n,t_star)",
+    "map_Euler_remainder_bound": "h^2*(L_fS*M_f+C_cap+theta_time*L_Gt)",
+    "exact_ODE_Euler_remainder_bound": "h^2*(L_G*M_G+L_Gt)/2",
+    "one_step_state_error": "sum of the two displayed remainder bounds",
+    "zero_donor": "R_r(y_n)=0 and local Lipschitz rates imply missed birth-enabled extent O(h^2)"
+  },
+  "domain_guards": {
+    "discrete_temperature": "T_floor=U_n/(2*c_v*Nmax); T_ceiling=Etotal/(c_v*Nmin); h*C_U_proposal<=U_n",
+    "continuous_temperature": "h*C_U_physical<=U_n/2",
+    "discrete_electron_floor": "if N_e_n>0 and n_e=N_e/V_star, h*C_e_proposal<=N_e_n gives n_e_plus>=N_e_n/(2*V_star)",
+    "continuous_electron_floor": "h*C_e_physical<=N_e_n/2",
+    "absent_species": "Omit fraction descriptors with zero total nuclei",
+    "singular_rates": "Positive temperature/density domain or an explicit regular extension with the smoothness actually used",
+    "coulomb_logarithm": "For B(n)=K*n*log(C/sqrt(n)) with K,C>0 use 0<n_lo<=n<=n_hi<C^2."
+  },
+  "prescribed_expansion": {
+    "gamma": "(V_plus/V_minus)^(-2/3)",
+    "thermal_state": "U_plus=gamma*U_minus; N_plus=N_minus",
+    "endpoint_temperature_error": "B_T_plus=gamma*B_T_minus",
+    "thermal_work_ledger": "Delta_W=U_minus-U_plus",
+    "condition": "same prescribed volume factors for the two compared states"
+  }
+}

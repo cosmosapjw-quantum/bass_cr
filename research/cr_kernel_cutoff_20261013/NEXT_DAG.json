@@ -1,0 +1,2306 @@
+{
+  "schema": "bass-cr-research-dag.v1",
+  "unit": "CR-THEORY-KERNEL-CUTOFF-20261013",
+  "date_utc": "2026-10-12",
+  "scope_repository": "cosmosapjw-quantum/bass_cr",
+  "status": "PROMOTE_SCOPED",
+  "current_request": "Next theoretical loop with SciSpace, Exa, Wolfram and xAct.",
+  "skill_protocol": "physmath-research-loop embedded 1.0.0",
+  "base_science_commit": "0e4bb9ca3bd60b20747231111ebe44e77b62c21c",
+  "prior_git_branch_head": "1f32987b2cc3eb521b4e09c736873ce21e9657a4",
+  "global_states_promoted": false,
+  "nodes": [
+    {
+      "id": "M0_CACHED_ONSET_RESPONSE",
+      "status": "COMPLETE_REUSED_UNCHANGED",
+      "depends_on": [],
+      "work": "Retain existing exact onset response",
+      "outputs": [
+        "inputs/CACHED_RESPONSE.json"
+      ]
+    },
+    {
+      "id": "M0_QUADRATIC_RESPONSE",
+      "status": "COMPLETE_REUSED_UNCHANGED",
+      "depends_on": [
+        "M0_CACHED_ONSET_RESPONSE"
+      ],
+      "work": "Retain quadratic response/cone bounds; no rerun",
+      "outputs": [
+        "../cr_rux_m1_m3_20261012/inputs/QUADRATIC_RESPONSE.json"
+      ]
+    },
+    {
+      "id": "CR_RUX00_AUTHORITY",
+      "status": "COMPLETE_SCOPED_INTAKE",
+      "depends_on": [],
+      "work": "Reuse pinned BASS source records and freshly checked exact REI heads; no global authority transition",
+      "outputs": [
+        "inputs/SOURCE_MANIFEST.json",
+        "inputs/consumer_intake/SOURCE_IDENTITY.json"
+      ],
+      "maps_to": [
+        "RUX00"
+      ]
+    },
+    {
+      "id": "M1_CONSUMER_SCOPE_INTAKE",
+      "status": "COMPLETE_SCOPED_SNAPSHOT_IDENTIFIED",
+      "depends_on": [
+        "CR_RUX00_AUTHORITY"
+      ],
+      "work": "Current receiver head and snapshot are unchanged; downstream selected CR-on history, observable and budget remain unprovided",
+      "outputs": [
+        "inputs/consumer_intake/SOURCE_IDENTITY.json",
+        "inputs/consumer_intake/INTAKE_KO.md",
+        "inputs/CONSUMER_REQUEST.json"
+      ],
+      "global_history_admission": false
+    },
+    {
+      "id": "CR_RUX03_OWNER_REUSE",
+      "status": "COMPLETE_SCOPED_CONTRACT_INVENTORY",
+      "depends_on": [
+        "CR_RUX00_AUTHORITY"
+      ],
+      "work": "Use existing primary photon event and native CR packet definitions in their own units/owners",
+      "outputs": [
+        "../cr_rux_m1_m3_20261012/ATOM_OWNER_MATRIX.json",
+        "../cr_rux_m1_m3_20261012/RATE_DOMAIN_MAP.json"
+      ],
+      "maps_to": [
+        "RUX03"
+      ],
+      "global_owner_adoption": false
+    },
+    {
+      "id": "M2_RESPONSE_ERROR_MAP",
+      "status": "COMPLETE_CONTROLLED_DIAGNOSTIC",
+      "depends_on": [
+        "M0_QUADRATIC_RESPONSE"
+      ],
+      "work": "Positive finite-age closure and exact recorded-moment budget map; no old evaluator or G",
+      "outputs": [
+        "../cr_rux_m1_m3_20261012/DERIVATION_KO.md",
+        "../cr_rux_m1_m3_20261012/results/RESPONSE_ERROR_MAP.json"
+      ],
+      "review": "../cr_rux_m1_m3_20261012/review/DECISION.json",
+      "physical_sufficiency": false
+    },
+    {
+      "id": "M3_LOCAL_CR_OFF_CONTRACT",
+      "status": "COMPLETE_REUSED_WITH_PINNED_HISTORICAL_EVIDENCE",
+      "depends_on": [
+        "CR_RUX00_AUTHORITY"
+      ],
+      "work": "Preserved OFF function and negative control; existing source-bound execution; no repair justified",
+      "outputs": [
+        "inputs/consumer_intake/baseline/OFF_BRANCH_COMPARISON.json",
+        "inputs/consumer_intake/baseline/CONSUMER_INTAKE.json"
+      ],
+      "current_whole_binary_verified": false
+    },
+    {
+      "id": "CR_PROCESS_RELEVANCE",
+      "status": "READY_ON_SELECTED_SCENARIO",
+      "depends_on": [
+        "CR_SCENARIO_SOURCE_BINDING",
+        "CR_RUX03_OWNER_REUSE"
+      ],
+      "work": "Use source-bound heat/energy/ion/cutoff ledgers for the selected range. An explicit CR_OFF_SCOPED baseline is allowed; quantified irrelevance or a claimed required-process screen needs the named observable tolerance. A tiny fixed-bath scale does not alone select OFF.",
+      "outputs": [
+        "future/CR_PROCESS_RELEVANCE.json"
+      ],
+      "external_inputs": [
+        "actual selected source/scenario and physical scope"
+      ],
+      "maps_to": [
+        "RUX03_CR_SCREEN"
+      ],
+      "required_if": {
+        "quantified_CR_irrelevance_claimed": [
+          "M1_CONSUMER_ERROR_BUDGET"
+        ]
+      }
+    },
+    {
+      "id": "M1_ELECTRON_SOURCE_BINDING",
+      "status": "COMPLETE_EXECUTED_FIXED_BATH_XI001",
+      "depends_on": [
+        "M0_CACHED_ONSET_RESPONSE",
+        "CR_PAIRED_ENERGY_ION_CUTOFF_LEDGER",
+        "CR_RUX00_AUTHORITY"
+      ],
+      "work": "BASS_CR executed fixed-bath xi=.01 source binding completed: Qe=t*A(W), selected/birth energy normalization, proper-clock basis and SI response; downstream REI adoption remains a separate pending node",
+      "outputs": [
+        "results/SOURCE_BOUND_RESPONSE.json",
+        "evidence/POSTPROCESS_ACTUAL_EXECUTION.json"
+      ],
+      "acceptance": "37 stored-record arithmetic/normalization checks PASS and independent 30-check reference PASS; PROMOTE_SCOPED in review/DECISION.json; exact scope in CONTRACT.json.",
+      "maps_to": [
+        "RUX13_BIND"
+      ],
+      "scope": "T=1e10 s; fixed 100 K, nH=140 m^-3, Y=.248, xi=.01; electron 0.1..900 eV in two birth tags; proton 1..4 MeV",
+      "source_quantity": "q_star=T*A_E*eV_J; not terminal FS10 heating",
+      "endpoint_power_formula": "P_heat(T)=q_star*H0*R",
+      "cumulative_heat_formula": "E_heat(T)=q_star*T*H0*S/2",
+      "response_example": {
+        "model": "fullBED",
+        "representation": "selected_record",
+        "q_star_J_m3_s": "1.8012625784277353046228834E-42",
+        "heat_power_J_m3_s": "3.4427310257273833336420435557419545568846016611406E-44",
+        "cumulative_heat_J_m3": "1.1921620918578547376488293702289529404598598914134E-34"
+      },
+      "downstream_adoption_node": "M1_REI_SOURCE_ADOPTION",
+      "mapping_satisfies_global_node": false
+    },
+    {
+      "id": "M1_CONSUMER_ERROR_BUDGET",
+      "status": "UNBOUND_TO_SELECTED_OBSERVABLE",
+      "depends_on": [
+        "CR_SCENARIO_SOURCE_BINDING",
+        "CR_THERMAL_NONTHERMAL_ACCOUNTING"
+      ],
+      "work": "Bind a named observable and units, source range, thermal particle convention, absolute tolerance and any relative tolerance with its positive denominator; keep unprovided values null",
+      "outputs": [
+        "future/CR_OBSERVABLE_BUDGET.json"
+      ],
+      "not_equal": [
+        "gas ionization xi",
+        "supernova CR efficiency",
+        "selected heat/reference thermal-energy diagnostic",
+        "table heat-projection bound",
+        "stored-record comparison tolerance"
+      ],
+      "current_values": {
+        "observable": null,
+        "absolute_tolerance": null,
+        "relative_tolerance": null,
+        "reference_denominator": null,
+        "binding_scope": "Executed BASS_CR fixed-bath electron source; REI selected CR-on history remains unprovided"
+      }
+    },
+    {
+      "id": "M2_PHYSICAL_CLOSURE_DECISION",
+      "status": "CONDITIONAL",
+      "depends_on": [
+        "M1_ELECTRON_SOURCE_BINDING",
+        "CR_SCENARIO_SOURCE_BINDING",
+        "CR_THERMAL_NONTHERMAL_ACCOUNTING",
+        "M1_CONSUMER_ERROR_BUDGET",
+        "M2_RESPONSE_ERROR_MAP"
+      ],
+      "work": "Select the already exact t*A(W)/quadratic response for a matching fixed operator; use a residual/curvature bound only for a separately admitted source. Compare the selected thermal/ionization observable with its own tolerance.",
+      "outputs": [
+        "future/CR_CLOSURE_DECISION.json"
+      ]
+    },
+    {
+      "id": "M3_SELECTED_HISTORY_OFF_RECEIPT",
+      "status": "CONDITIONAL_ON_RECEIVER_EXECUTION",
+      "depends_on": [
+        "M3_LOCAL_CR_OFF_CONTRACT"
+      ],
+      "work": "Receiver owner records source0/provider-calls0 in the selected actual history; reuse unchanged component evidence",
+      "outputs": [
+        "future/SELECTED_RECEIVER_CR_OFF_RECEIPT.json"
+      ],
+      "owner": "rei_bianchi",
+      "external_inputs": [
+        "selected physical receiver execution"
+      ],
+      "blocks_CR_light_research": false
+    },
+    {
+      "id": "M4_TARGETED_CR_EXTENSION",
+      "status": "CONDITIONAL_INDEPENDENT_LANE",
+      "depends_on": [],
+      "work": "Only a named missing physical domain/output or explicit independent CR question activates new work",
+      "outputs": [
+        "future/TARGETED_CR_EXECUTION_CONTRACT.json"
+      ],
+      "activation": "consumer deficiency OR explicit independent CR scientific question; preserves original atomic aim",
+      "maps_to": [
+        "RUX13"
+      ]
+    },
+    {
+      "id": "RUX13_MATCHED_HISTORY_EFFECT",
+      "status": "CONDITIONAL_DOWNSTREAM",
+      "depends_on": [
+        "M1_REI_SOURCE_ADOPTION",
+        "M2_PHYSICAL_CLOSURE_DECISION"
+      ],
+      "work": "Compare matched ON/OFF histories only in admitted domain with energy bookkeeping",
+      "outputs": [
+        "future/CR_EFFECT_ON_EOR.json"
+      ],
+      "external_inputs": [
+        "RUX11 source-backed baseline and error ledger"
+      ],
+      "maps_to": [
+        "RUX13"
+      ]
+    },
+    {
+      "id": "H_NCP_FULL9600",
+      "status": "DEFERRED_OPTIONAL",
+      "depends_on": [],
+      "work": "No automatic dispatch; original source and 8-build/76800-column/900-second/no-retry contract retained",
+      "outputs": [],
+      "activation": "A fresh specific science/performance need, actual resource admission and reconciled reservations"
+    },
+    {
+      "id": "H_EXISTING_RUN_COLLECTION",
+      "status": "CONDITIONAL_ON_ACTUAL_UNCOLLECTED_RUN",
+      "depends_on": [],
+      "work": "Collect actual outstanding run if evidenced; no repetitive absence queries and no new execution",
+      "outputs": [],
+      "actual_unpublished_run": "UNKNOWN_NOT_INSPECTED_HERE"
+    },
+    {
+      "id": "F_BINDING_AND_G_FRONTIER",
+      "status": "BLOCKED_IN_OWN_LANE",
+      "depends_on": [],
+      "work": "Original operator-binding failure and dependent frontier retained; no F retry or historical operator adoption",
+      "outputs": []
+    },
+    {
+      "id": "CR_PAIRED_ENERGY_ION_CUTOFF_LEDGER",
+      "status": "COMPLETE_REUSED_UNCHANGED",
+      "depends_on": [],
+      "owner": "bass_cr",
+      "work": "Retain same-operator selected/birth heat, ionization, excitation, active stock, cutoff energy and cutoff number; no transport or generator rerun",
+      "outputs": [
+        "inputs/PAIRED_RECORD.json",
+        "inputs/PULSE_RECORD.json",
+        "inputs/SOURCE_COVERAGE_RECORD.json"
+      ],
+      "identity_manifest": "inputs/SOURCE_MANIFEST.json"
+    },
+    {
+      "id": "CR_SCENARIO_SOURCE_BINDING",
+      "status": "READY_TO_BIND_SELECTED_SCENARIO",
+      "depends_on": [
+        "M1_ELECTRON_SOURCE_BINDING",
+        "M1_CONSUMER_SCOPE_INTAKE",
+        "CR_RUX03_OWNER_REUSE"
+      ],
+      "owner": "bass_cr with selected application owner",
+      "work": "Attach the already calculated source-bound heat and cutoff ledgers to one actually selected scenario; explicitly retain or change the proton/electron windows, amplitude/time history, bath, clock, initial stock and process owners",
+      "outputs": [
+        "future/SELECTED_CR_SCENARIO_SOURCE.json"
+      ],
+      "acceptance": "Actual selection and exact source identity, not defaults or an invented request; same-range reuse or a precisely stated incompatible/missing range",
+      "do_not_require": [
+        "new H or F run",
+        "full atomic completion",
+        "completed downstream whole history"
+      ]
+    },
+    {
+      "id": "CR_THERMAL_RELEVANCE_CUTOFF_CLOSURE",
+      "status": "PROMOTED_SCOPED_CUTOFF_JOIN_AND_ENERGY_ENVELOPE",
+      "depends_on": [
+        "M1_ELECTRON_SOURCE_BINDING",
+        "CR_PAIRED_ENERGY_ION_CUTOFF_LEDGER"
+      ],
+      "owner": "root implementation and independent reviewer",
+      "work": "Evaluate the fixed-bath thermal relevance and the explicit cutoff thermalization candidate using saved energy and number ledgers",
+      "evidence": "results/SOURCE_BOUND_RESPONSE.json",
+      "json_pointer": "/rows/*/cutoff_thermal_join",
+      "result_sha256": "dd4ed10b5ecd3aea8a8710b5190c9d7da4085834713bc72ae2cc37915cc97f27",
+      "candidate_equations": {
+        "thermal_power": "P_th=P_heat+P_cut",
+        "thermal_electron_source": "S_thermal=S_cut",
+        "thermal_increment": "Delta_n_e_thermal=N_cut",
+        "active_stock": "N_active remains a separate nonthermal population"
+      },
+      "example_fullBED_selected_record": {
+        "thermal_energy_added_J_m3": "1.2216035010174495596488293702289529404598598914134E-34",
+        "thermal_power_added_J_m3_s": "3.5205035062099014936420435557419545568846016611406E-44",
+        "thermal_electron_increment_m3": "1.8382904526169294E-16",
+        "thermal_electron_source_m3_s": "4.856271926903935E-26",
+        "particle_number_energy_correction_J_m3": "3.8070508126726664387709E-37",
+        "local_Tdot_frozen_coeff_K_s": "1.1074696107648691484927120951917990428446391173240E-23",
+        "linearized_delta_T_frozen_coeff_K": "3.8418834731514848028353161616548960491154125705385E-14",
+        "delta_T_prescribed_energy_algebra_K": "3.8418834731514847982210531433747455728705463904618E-14",
+        "energy_only_calorimetric_delta_T_K": "3.8538938921309419939011408908459618738446036363632E-14",
+        "heat_capacity_fractional_change": "1.2010418979457191065824729191065824729191065824729E-18",
+        "scope": "Candidate cutoff thermalization closure; nonthermal active stock is separate; prescribed transport outputs are reused"
+      },
+      "acceptance": "Independent scoped decision on cutoff energy/number ownership and prescribed frozen-coefficient meaning; no automatic one-temperature receiver adoption",
+      "candidate_not_accepted_yet": false,
+      "downstream_physical_admission": false,
+      "research_acceptance": "PROMOTE_SCOPED",
+      "review": "review/DECISION.json"
+    },
+    {
+      "id": "CR_THERMAL_NONTHERMAL_ACCOUNTING",
+      "status": "READY_ON_SELECTED_SCENARIO",
+      "depends_on": [
+        "CR_SCENARIO_SOURCE_BINDING",
+        "CR_PAIRED_ENERGY_ION_CUTOFF_LEDGER"
+      ],
+      "owner": "bass_cr with receiver EOS/source owner",
+      "work": "Choose the thermalization boundary and write the total/thermal/nonthermal electron counts explicitly before using a temperature equation",
+      "required_decisions": [
+        "Declare whether the observable is fixed-Cv calorimetric heat or a thermal population with explicit cutoff joining",
+        "For the cutoff-join candidate use P_th=P_heat+P_cut and S_thermal=S_cut; energy crosses the boundary once",
+        "Keep ionization-produced total electrons distinct from thermal electrons; retain N_active between total and thermal counts in the matched selected-source sector",
+        "Separate primary proton birth ionization, injected nonthermal electron number and secondary degradation ionizations; reuse the matched number ledger and declare any additional reservoir or transport term",
+        "Do not replace thermal source by total ionization source while active nonthermal electrons remain; do not insert the candidate as an automatic one-temperature receiver term"
+      ],
+      "outputs": [
+        "future/THERMAL_PARTICLE_ACCOUNTING.json"
+      ],
+      "required_if": {
+        "cutoff_join_selected": [
+          "CR_THERMAL_RELEVANCE_CUTOFF_CLOSURE independent scoped acceptance"
+        ]
+      },
+      "acceptance": "An explicit source/sink and particle-count convention that retains active stock and prevents double counting; the selected observable uses the same convention"
+    },
+    {
+      "id": "M1_REI_SOURCE_ADOPTION",
+      "status": "PENDING_DOWNSTREAM_ACTUAL_ADOPTION",
+      "depends_on": [
+        "M1_ELECTRON_SOURCE_BINDING",
+        "CR_SCENARIO_SOURCE_BINDING",
+        "CR_THERMAL_NONTHERMAL_ACCOUNTING",
+        "M1_CONSUMER_ERROR_BUDGET",
+        "M2_PHYSICAL_CLOSURE_DECISION"
+      ],
+      "owner": "rei_bianchi with bass_cr source handoff",
+      "work": "Bind the accepted source/thermal convention and budget to an actually selected receiver call-site and scenario; retain source/history identity in the receiver-owned artifact",
+      "outputs": [
+        "future/REI_CR_SOURCE_ADOPTION.json"
+      ],
+      "current_receiver_status": "SCOPED_SNAPSHOT_IDENTIFIED_FULL_HISTORY_BINDING_OPEN",
+      "current_receiver_head": "17f8d0daa72e0f76a49cde01b110f650a6688c42",
+      "native_FS10_terminal_packet_to_M0_mapping": "Not inferred; standalone BASS source binding does not replace the existing exact native packet",
+      "blocks_standalone_fixed_bath_research": false,
+      "maps_to": [
+        "RUX13_BIND"
+      ],
+      "mapping_satisfies_global_node": false
+    },
+    {
+      "id": "CR_THEORY_MOVING_CUTOFF",
+      "status": "ACCEPTED_CONDITIONAL_DERIVATION",
+      "depends_on": [
+        "CR_THERMAL_RELEVANCE_CUTOFF_CLOSURE",
+        "CR_PAIRED_ENERGY_ION_CUTOFF_LEDGER"
+      ],
+      "owner": "bass_cr theory",
+      "work": "Construct signed moving-boundary number, energy and momentum transfer with Bianchi pressure work, daughter energy and a selected thermal closure",
+      "outputs": [
+        "derivations/MOVING_CUTOFF_KO.md"
+      ],
+      "proof": {
+        "path": "derivations/MOVING_CUTOFF_KO.md",
+        "sha256": "9a46a0dfa6cd1b7e172ddee45c3ac812c47bad55ee87933666e02f87e14148ab",
+        "locations": "MC13, MC20, MC24-MC37"
+      },
+      "completed_results": [
+        "General moving-domain moment identity and inner-boundary sign",
+        "Exact cancellation for a common kinetic partition",
+        "Subcutoff daughter energy/number and source-ghost correspondence",
+        "Thermal particle source, expansion work and finite conservative relabeling"
+      ],
+      "acceptance": "PROMOTE_SCOPED",
+      "final_review": {
+        "path": "review/DECISION.json",
+        "decision": "PROMOTE_SCOPED",
+        "sha256": "dc1b9219bafea096f5e83bcb240622c3e031de87035b3ed80dcba85a0bc732c5",
+        "accepted_utc": "2026-10-12T15:22:53.658982+00:00"
+      }
+    },
+    {
+      "id": "CR_THEORY_THERMAL_EXCESS",
+      "status": "ACCEPTED_CONDITIONAL_DERIVATION",
+      "depends_on": [
+        "CR_THERMAL_RELEVANCE_CUTOFF_CLOSURE",
+        "M1_ELECTRON_SOURCE_BINDING"
+      ],
+      "owner": "bass_cr theory",
+      "work": "Complete the all-free representation using active thermal-reference energy and stress, including primary birth and secondary event counts",
+      "outputs": [
+        "derivations/THERMAL_EXCESS_KO.md"
+      ],
+      "proof": {
+        "path": "derivations/THERMAL_EXCESS_KO.md",
+        "sha256": "f5ed4a9f88aace5d74dfa69973dc5e71b97d37d27e9b952739ba2423e3c9bf30",
+        "locations": "T.2-T.11, T.14-T.18"
+      },
+      "completed_results": [
+        "u_ex=u_A-(3/2)k_B T n_A and Pi_ex=Pi_A-k_B T n_A I",
+        "Exact equivalence of thermal and total-moment temperature equations",
+        "Comoving packet EOS inversion and analytic birth/addition/adiabatic examples"
+      ],
+      "acceptance": "PROMOTE_SCOPED",
+      "final_review": {
+        "path": "review/DECISION.json",
+        "decision": "PROMOTE_SCOPED",
+        "sha256": "dc1b9219bafea096f5e83bcb240622c3e031de87035b3ed80dcba85a0bc732c5",
+        "accepted_utc": "2026-10-12T15:22:53.658982+00:00"
+      }
+    },
+    {
+      "id": "CR_THEORY_COLLISION_CLOCK",
+      "status": "ACCEPTED_CONDITIONAL_DERIVATION",
+      "depends_on": [
+        "CR_PAIRED_ENERGY_ION_CUTOFF_LEDGER",
+        "M1_ELECTRON_SOURCE_BINDING"
+      ],
+      "owner": "bass_cr theory",
+      "work": "Reuse the fixed finite generator in a comoving collision clock and split the actual Coulomb density logarithm into a fixed correction matrix",
+      "outputs": [
+        "derivations/COLLISION_CLOCK_KO.md"
+      ],
+      "proof": {
+        "path": "derivations/COLLISION_CLOCK_KO.md",
+        "source_at_preparation": "../theory_work/collision_clock/COLLISION_CLOCK_DERIVATION_KO.md",
+        "sha256": "280b027c5c284f3d8608ba8ff968fb5a6fad5a939d7c956eec69ca0e37e60fdb",
+        "locations": "CC1-CC6; equations 3.5, 5.4, 6.5, 7.3-7.8",
+        "integration_status": "Integrated into final reviewed manuscript; exact proof digest preserved"
+      },
+      "completed_results": [
+        "X=Vx and tau=integral a dt, with transformed source V s/a",
+        "Physical-rate versus comoving-ledger normalization",
+        "G_phys(d)=d G_phys(1)-(d log d/2) C0 in the declared positive-Coulomb-log domain",
+        "Coefficient-weighted residual and scalar-clock choice"
+      ],
+      "acceptance": "PROMOTE_SCOPED",
+      "final_review": {
+        "path": "review/DECISION.json",
+        "decision": "PROMOTE_SCOPED",
+        "sha256": "dc1b9219bafea096f5e83bcb240622c3e031de87035b3ed80dcba85a0bc732c5",
+        "accepted_utc": "2026-10-12T15:22:53.658982+00:00"
+      }
+    },
+    {
+      "id": "CR_THEORY_RESIDUAL_TEMPERATURE_CERTIFICATE",
+      "status": "ACCEPTED_CONDITIONAL_DERIVATION",
+      "depends_on": [
+        "CR_THEORY_COLLISION_CLOCK",
+        "CR_THEORY_THERMAL_EXCESS"
+      ],
+      "owner": "bass_cr theory",
+      "work": "Map noncommuting coefficient/source residuals through passive energy and comoving thermal energy/count into an endpoint temperature certificate",
+      "outputs": [
+        "derivations/COLLISION_CLOCK_KO.md",
+        "derivations/THERMAL_EXCESS_KO.md"
+      ],
+      "proof_references": [
+        {
+          "path": "derivations/COLLISION_CLOCK_KO.md",
+          "locations": "CC3-CC5, equations 5.4 and 6.5; coefficient bounds in section 7"
+        },
+        {
+          "path": "derivations/THERMAL_EXCESS_KO.md",
+          "locations": "T.17-T.22: finite packet, temperature bound and cumulative deposition through expansion"
+        }
+      ],
+      "completed_results": [
+        "Duhamel error bound without requiring commutation",
+        "Augmented passive energy and heat ledger bound",
+        "Temperature error <= energy error/(cv Nmin)+T_hat count error/Nmin",
+        "T.19-T.22 integrate complete thermal deposition through prescribed expansion before the temperature bound"
+      ],
+      "acceptance": "PROMOTE_SCOPED",
+      "final_review": {
+        "path": "review/DECISION.json",
+        "decision": "PROMOTE_SCOPED",
+        "sha256": "dc1b9219bafea096f5e83bcb240622c3e031de87035b3ed80dcba85a0bc732c5",
+        "accepted_utc": "2026-10-12T15:22:53.658982+00:00"
+      }
+    },
+    {
+      "id": "CR_THEORY_RECEIVER_INTERFACE",
+      "status": "ACCEPTED_SCOPED_IMPLEMENTATION",
+      "depends_on": [
+        "CR_THEORY_THERMAL_EXCESS"
+      ],
+      "owner": "bass_cr theory implementation",
+      "work": "Expose pure thermal-transfer, total-moment, finite-packet EOS and temperature-error formulas with exact rational support",
+      "outputs": [
+        "receiver_interface.py"
+      ],
+      "sha256": "4c8a23e81c2babe56765b4ffc97a1b2771966b01f99fba6bc84a71a62848c868",
+      "equation_references": [
+        "T.6",
+        "T.11",
+        "T.17",
+        "T.18"
+      ],
+      "targeted_execution": "results/THEORY_CHECKS.json",
+      "acceptance": "PROMOTE_SCOPED",
+      "final_review": {
+        "path": "review/DECISION.json",
+        "decision": "PROMOTE_SCOPED",
+        "sha256": "dc1b9219bafea096f5e83bcb240622c3e031de87035b3ed80dcba85a0bc732c5",
+        "accepted_utc": "2026-10-12T15:22:53.658982+00:00"
+      }
+    },
+    {
+      "id": "CR_THEORY_TARGETED_VERIFICATION",
+      "status": "PASS_15_OF_15",
+      "depends_on": [
+        "CR_THEORY_MOVING_CUTOFF",
+        "CR_THEORY_THERMAL_EXCESS",
+        "CR_THEORY_COLLISION_CLOCK",
+        "CR_THEORY_RESIDUAL_TEMPERATURE_CERTIFICATE",
+        "CR_THEORY_RECEIVER_INTERFACE"
+      ],
+      "owner": "root targeted analytic and lightweight checks",
+      "work": "Check exact rational discriminants, pinned scalar stopping coefficients and one dimensionless noncommuting cascade",
+      "outputs": [
+        "checks/run_theory_checks.py",
+        "results/THEORY_CHECKS.json",
+        "results/TOY_EVOLUTION.csv"
+      ],
+      "result_sha256": "ce4d0fc25fbe89449ac5efe2ba61f01daf8a07afb1a18efb3eb676bbd832c13f",
+      "passes": 15,
+      "total": 15,
+      "elapsed_seconds": 0.016807850988698192,
+      "execution_scope": "exact rational analytic fixtures; source-pinned stopping coefficients; one noncommuting 8-state dimensionless IVP",
+      "new_full_generator_builds": 0,
+      "remote_science_jobs": 0,
+      "acceptance_scope": "Owner execution accepted in the independent analytical review; no reviewer reruns",
+      "acceptance": "PROMOTE_SCOPED",
+      "final_review": {
+        "path": "review/DECISION.json",
+        "decision": "PROMOTE_SCOPED",
+        "sha256": "dc1b9219bafea096f5e83bcb240622c3e031de87035b3ed80dcba85a0bc732c5",
+        "accepted_utc": "2026-10-12T15:22:53.658982+00:00"
+      },
+      "candidate_author_symbolic_checks": {
+        "passes": 21,
+        "total": 21,
+        "path": "results/CLOCK_SYMBOLIC_CHECKS.json",
+        "sha256": "9d8fb2b392be36098f1af7df7a8ed0b51ad715aecc7e995052fbfdbbd448b964",
+        "independent_reviewer_execution": false
+      }
+    },
+    {
+      "id": "CR_THEORY_INTEGRATED_ACCEPTANCE",
+      "status": "PROMOTE_SCOPED",
+      "depends_on": [
+        "CR_THEORY_MOVING_CUTOFF",
+        "CR_THEORY_THERMAL_EXCESS",
+        "CR_THEORY_COLLISION_CLOCK",
+        "CR_THEORY_RESIDUAL_TEMPERATURE_CERTIFICATE",
+        "CR_THEORY_RECEIVER_INTERFACE",
+        "CR_THEORY_TARGETED_VERIFICATION"
+      ],
+      "owner": "independent reviewer and root integrator",
+      "work": "Bind completed proofs, targeted execution and final scope to the integrated theory decision and manuscript",
+      "outputs": [
+        "review/DECISION.json"
+      ],
+      "acceptance": "PROMOTE_SCOPED",
+      "status_update_owner": "root",
+      "final_review": {
+        "path": "review/DECISION.json",
+        "decision": "PROMOTE_SCOPED",
+        "sha256": "dc1b9219bafea096f5e83bcb240622c3e031de87035b3ed80dcba85a0bc732c5",
+        "accepted_utc": "2026-10-12T15:22:53.658982+00:00"
+      }
+    },
+    {
+      "id": "CR_THEORY_SELF_CONSISTENT_FEEDBACK",
+      "status": "ACCEPTED_CONDITIONAL_CONSTRUCTION",
+      "depends_on": [
+        "CR_THEORY_INTEGRATED_ACCEPTANCE"
+      ],
+      "owner": "bass_cr feedback theory and implementation",
+      "work": "Construct the shared event-capacity step and self-consistent temperature/H-He coefficients with explicit domain, contraction, EOS error, covariant geometry and bounded driver.",
+      "outputs": [
+        "derivations/EVENT_STEP_DERIVATION_KO.md",
+        "derivations/FEEDBACK_THEOREMS_KO.md",
+        "derivations/COVARIANT_GEOMETRY_KO.md",
+        "derivations/FEEDBACK_ASSUMPTIONS.json",
+        "derivations/FEEDBACK_ERROR_MAP.json",
+        "event_capacity_step.py",
+        "feedback_solver.py",
+        "results/EVENT_CHECKS.json",
+        "results/FEEDBACK_DRIVER_CHECKS.json",
+        "results/SYMBOLIC_CHECKS.json"
+      ],
+      "first_construction": "Completed in the event, feedback and covariant geometry derivations; the initial READY object is preserved in the prior copy and preservation record.",
+      "proof_obligations": [
+        "Represent G(T,composition,density)=sum_k r_k D_k on a declared domain with nonnegative rates and conserved event weights",
+        "Use the same event increments for active energy, atomic energy, thermal energy and particle counts",
+        "Close coefficient/EOS feedback and prove a local step condition preserving positive counts and energy",
+        "Use coefficient residual and thermal EOS bounds to select a step or iteration tolerance"
+      ],
+      "application_relation": "General theory and analytic discriminants proceed from stated assumptions; actual scenario coupling uses the preserved CR_SCENARIO_SOURCE_BINDING and M1_REI_SOURCE_ADOPTION nodes",
+      "heavy_execution_planned": false,
+      "accepted_claim_ids": [
+        "FB1",
+        "FB2",
+        "FB3",
+        "FB4",
+        "FB5",
+        "FB6",
+        "FB7"
+      ],
+      "proof_obligation_status": "COMPLETE_UNDER_DECLARED_CONDITIONS",
+      "completed_results": [
+        "Fixed H/He event columns with common number, charge, chemical and kinetic energy extents",
+        "Nonnegative rational capacity map and a positive thermal coefficient domain",
+        "Explicit coefficient/EOS Lipschitz constants, local unique fixed point and bounded Picard convergence",
+        "Algebraic and physical endpoint defect certificates mapped to temperature",
+        "Exact covariant moment projection and prescribed Bianchi I momentum/thermal geometry step",
+        "First-order reaction and regular collision-geometry consistency under the named smoothness conditions",
+        "Exact-arithmetic reference event map and bounded feedback driver with focused executed checks"
+      ],
+      "final_review": {
+        "path": "review/DECISION.json",
+        "decision": "PROMOTE_SCOPED",
+        "status": "PASS",
+        "sha256": "cc21267a75ee22e8d777d1cdbb89efa89ffdcd57f1d35fb56429fd9e4dc0e142",
+        "accepted_utc": "2026-10-12T21:21:17.041223+00:00"
+      },
+      "evidence": [
+        {
+          "path": "derivations/EVENT_STEP_DERIVATION_KO.md",
+          "bytes": 17234,
+          "sha256": "024e90821ae522538261b2a42505061932722fc018c2d5f4604c14a638ed7336"
+        },
+        {
+          "path": "derivations/FEEDBACK_THEOREMS_KO.md",
+          "bytes": 25402,
+          "sha256": "0cbf68003f3ddfd1c5b0db75999d43592a5857a6749a96f4a16ef5558521f8f6"
+        },
+        {
+          "path": "derivations/COVARIANT_GEOMETRY_KO.md",
+          "bytes": 18130,
+          "sha256": "3d88585cb9dda8847a27b7dbb49a716dc1a927895ead98d37951015850e6b719"
+        },
+        {
+          "path": "event_capacity_step.py",
+          "bytes": 8935,
+          "sha256": "3683f0577263c2c7113593f6e3085b886b65b44101d438f6dd53f9762848e85c"
+        },
+        {
+          "path": "feedback_solver.py",
+          "bytes": 9629,
+          "sha256": "ae144a05c2699515bb72138efd401ccb18113cb43fe9348a85cf214a499b8828"
+        },
+        {
+          "path": "results/EVENT_CHECKS.json",
+          "bytes": 3979,
+          "sha256": "e8f732fb26b73a15ddd995533e68e70866fcfb33d4b7531d26071c2ea4e6c2f4"
+        },
+        {
+          "path": "results/FEEDBACK_DRIVER_CHECKS.json",
+          "bytes": 3433,
+          "sha256": "e724e9bb5b2c83f36f89569b42dc5cde42aa4971c712126c8650bc2e2e0ae3d3"
+        },
+        {
+          "path": "results/SYMBOLIC_CHECKS.json",
+          "bytes": 5407,
+          "sha256": "a09c4e7d7cd57d5da1307d81f399299e1daccd95b087a882054c368025b235dd"
+        }
+      ],
+      "scope": "Finite constructive reaction family; prescribed geometric evolution; local regular feedback domain with supplied or derived contraction bounds."
+    },
+    {
+      "id": "CR_THEORY_KERNEL_EVENT_ADAPTER",
+      "status": "ACCEPTED_SCOPED_CONSTRUCTION",
+      "depends_on": [
+        "CR_THEORY_SELF_CONSISTENT_FEEDBACK"
+      ],
+      "owner": "bass_cr next theory loop",
+      "work": "Bind the actual electron energy grid and daughter kernels to positive conserving event columns, including energy and number closure, then compute coefficient derivative bounds on the admitted thermal/composition domain.",
+      "outputs": [
+        "derivations/KERNEL_EVENT_ADAPTER_KO.md",
+        "kernel_event_adapter.py",
+        "inputs/KERNEL_SOURCE_BINDING.json",
+        "results/KERNEL_ADAPTER_CHECKS.json",
+        "results/SHARING_CAPACITY_CHECKS.json"
+      ],
+      "first_construction": "Select one pinned actual active-energy row and its daughter distribution; construct nonnegative event weights matching parent, daughter, threshold, heat and count moments.",
+      "completion_criteria": [
+        "Actual grid/kernel identity and the chosen reaction family are explicit",
+        "Event columns preserve the same nuclei, charge and energy rows",
+        "The daughter representation matches its declared count and energy moments",
+        "Coefficient positivity and derivative bounds are computable on the named domain",
+        "The adapter supplies the current shared extent and feedback driver without changing event ownership"
+      ],
+      "external_scenario_required": false,
+      "heavy_execution_planned": false,
+      "accepted_claims": [
+        "KC1",
+        "KC2",
+        "KC7"
+      ]
+    },
+    {
+      "id": "CR_THEORY_THERMAL_CUTOFF_FEEDBACK",
+      "status": "ACCEPTED_CONDITIONAL_CONSTRUCTION",
+      "depends_on": [
+        "CR_THEORY_SELF_CONSISTENT_FEEDBACK",
+        "CR_THEORY_MOVING_CUTOFF"
+      ],
+      "owner": "bass_cr next theory loop",
+      "work": "Derive a temperature-dependent implicit cutoff/boundary map and its shape derivative while preserving the number, energy and EOS transfer identities.",
+      "outputs": [
+        "derivations/THERMAL_CUTOFF_FEEDBACK_KO.md",
+        "thermal_cutoff_solver.py",
+        "derivations/COVARIANT_CUTOFF_KO.md",
+        "results/THERMAL_CUTOFF_CHECKS.json",
+        "results/SYMBOLIC_CHECKS.json"
+      ],
+      "first_construction": "Use E_c(T)=chi*k_B*T with the retained moving-boundary flux, derive the temperature derivative of the discrete transfer map, and close one regular implicit thermal update.",
+      "completion_criteria": [
+        "The cutoff function, traces and direction of transfer are specified",
+        "Boundary number and actual energy are counted once",
+        "The cutoff shape derivative and resulting thermal Jacobian or contraction coefficient are derived",
+        "A regular positive-count/temperature case is constructed and checked"
+      ],
+      "external_scenario_required": false,
+      "heavy_execution_planned": false,
+      "accepted_claims": [
+        "KC3",
+        "KC4",
+        "KC5",
+        "KC6",
+        "KC7"
+      ]
+    },
+    {
+      "id": "CR_FEEDBACK_SELECTED_APPLICATION",
+      "status": "CONDITIONAL",
+      "depends_on": [
+        "CR_THEORY_SELF_CONSISTENT_FEEDBACK",
+        "CR_THEORY_KERNEL_EVENT_ADAPTER",
+        "CR_SCENARIO_SOURCE_BINDING",
+        "M1_CONSUMER_ERROR_BUDGET"
+      ],
+      "owner": "bass_cr with selected application owner",
+      "work": "Apply the accepted feedback construction and actual-kernel adapter to a selected source/history and its thermal or ionization observable budget.",
+      "outputs": [
+        "future/FEEDBACK_SELECTED_APPLICATION.json"
+      ],
+      "external_inputs": [
+        "Actual selected source/scenario and immutable history identity",
+        "Named observable, units and absolute/relative tolerance with valid reference denominator"
+      ],
+      "activation": "All four named dependencies are satisfied in the selected receiver scope.",
+      "global_history_admission": false,
+      "heavy_execution_planned": false
+    },
+    {
+      "id": "CR_THEORY_COUPLED_BRANCH_SOLVER",
+      "status": "READY",
+      "depends_on": [
+        "CR_THEORY_KERNEL_EVENT_ADAPTER",
+        "CR_THEORY_THERMAL_CUTOFF_FEEDBACK"
+      ],
+      "owner": "bass_cr next theory loop",
+      "work": "Construct a coupled actual-kernel coefficient/cutoff solver with certified descriptor self-map and explicit branch transitions when reactions change the raw atomic inventory.",
+      "first_construction": "Use the pinned HI/HeI subfamily, retain lower atoms, form CP.3 event moments, bind interval rate bounds and one threshold-separated branch; then construct a crossing update and its branch-selection rule.",
+      "completion_criteria": [
+        "One actual source-pinned coupled endpoint and domain",
+        "Temperature/density/species residual budget from CP.12–15",
+        "Conservative atom crossing and explicit branch ownership",
+        "Targeted new verification only"
+      ],
+      "external_scenario_required": false,
+      "heavy_execution_planned": false
+    },
+    {
+      "id": "CR_THEORY_GEOMETRY_KERNEL_REBIND",
+      "status": "READY",
+      "depends_on": [
+        "CR_THEORY_KERNEL_EVENT_ADAPTER",
+        "CR_THEORY_THERMAL_CUTOFF_FEEDBACK",
+        "CR_THEORY_MOVING_CUTOFF"
+      ],
+      "owner": "bass_cr next theory loop",
+      "work": "Rebind the actual event energies and rate domain after the admitted Bianchi redshift stage, with count/energy transfer and an explicit interpolation error.",
+      "first_construction": "Propagate one source-pinned parent energy under prescribed redshift and construct its daughter projector and effective threshold on the new energies.",
+      "completion_criteria": [
+        "Actual new-energy event identity",
+        "No double counting of geometry work or cutoff flux",
+        "Bounded grid/energy representation error in the named domain"
+      ],
+      "external_scenario_required": false,
+      "heavy_execution_planned": false
+    }
+  ],
+  "edges": [
+    {
+      "from": "M0_CACHED_ONSET_RESPONSE",
+      "to": "M0_QUADRATIC_RESPONSE"
+    },
+    {
+      "from": "CR_RUX00_AUTHORITY",
+      "to": "M1_CONSUMER_SCOPE_INTAKE"
+    },
+    {
+      "from": "CR_RUX00_AUTHORITY",
+      "to": "CR_RUX03_OWNER_REUSE"
+    },
+    {
+      "from": "M0_QUADRATIC_RESPONSE",
+      "to": "M2_RESPONSE_ERROR_MAP"
+    },
+    {
+      "from": "CR_RUX00_AUTHORITY",
+      "to": "M3_LOCAL_CR_OFF_CONTRACT"
+    },
+    {
+      "from": "CR_SCENARIO_SOURCE_BINDING",
+      "to": "CR_PROCESS_RELEVANCE"
+    },
+    {
+      "from": "CR_RUX03_OWNER_REUSE",
+      "to": "CR_PROCESS_RELEVANCE"
+    },
+    {
+      "from": "M0_CACHED_ONSET_RESPONSE",
+      "to": "M1_ELECTRON_SOURCE_BINDING"
+    },
+    {
+      "from": "CR_PAIRED_ENERGY_ION_CUTOFF_LEDGER",
+      "to": "M1_ELECTRON_SOURCE_BINDING"
+    },
+    {
+      "from": "CR_RUX00_AUTHORITY",
+      "to": "M1_ELECTRON_SOURCE_BINDING"
+    },
+    {
+      "from": "CR_SCENARIO_SOURCE_BINDING",
+      "to": "M1_CONSUMER_ERROR_BUDGET"
+    },
+    {
+      "from": "CR_THERMAL_NONTHERMAL_ACCOUNTING",
+      "to": "M1_CONSUMER_ERROR_BUDGET"
+    },
+    {
+      "from": "M1_ELECTRON_SOURCE_BINDING",
+      "to": "M2_PHYSICAL_CLOSURE_DECISION"
+    },
+    {
+      "from": "CR_SCENARIO_SOURCE_BINDING",
+      "to": "M2_PHYSICAL_CLOSURE_DECISION"
+    },
+    {
+      "from": "CR_THERMAL_NONTHERMAL_ACCOUNTING",
+      "to": "M2_PHYSICAL_CLOSURE_DECISION"
+    },
+    {
+      "from": "M1_CONSUMER_ERROR_BUDGET",
+      "to": "M2_PHYSICAL_CLOSURE_DECISION"
+    },
+    {
+      "from": "M2_RESPONSE_ERROR_MAP",
+      "to": "M2_PHYSICAL_CLOSURE_DECISION"
+    },
+    {
+      "from": "M3_LOCAL_CR_OFF_CONTRACT",
+      "to": "M3_SELECTED_HISTORY_OFF_RECEIPT"
+    },
+    {
+      "from": "M1_REI_SOURCE_ADOPTION",
+      "to": "RUX13_MATCHED_HISTORY_EFFECT"
+    },
+    {
+      "from": "M2_PHYSICAL_CLOSURE_DECISION",
+      "to": "RUX13_MATCHED_HISTORY_EFFECT"
+    },
+    {
+      "from": "M1_ELECTRON_SOURCE_BINDING",
+      "to": "CR_SCENARIO_SOURCE_BINDING"
+    },
+    {
+      "from": "M1_CONSUMER_SCOPE_INTAKE",
+      "to": "CR_SCENARIO_SOURCE_BINDING"
+    },
+    {
+      "from": "CR_RUX03_OWNER_REUSE",
+      "to": "CR_SCENARIO_SOURCE_BINDING"
+    },
+    {
+      "from": "M1_ELECTRON_SOURCE_BINDING",
+      "to": "CR_THERMAL_RELEVANCE_CUTOFF_CLOSURE"
+    },
+    {
+      "from": "CR_PAIRED_ENERGY_ION_CUTOFF_LEDGER",
+      "to": "CR_THERMAL_RELEVANCE_CUTOFF_CLOSURE"
+    },
+    {
+      "from": "CR_SCENARIO_SOURCE_BINDING",
+      "to": "CR_THERMAL_NONTHERMAL_ACCOUNTING"
+    },
+    {
+      "from": "CR_PAIRED_ENERGY_ION_CUTOFF_LEDGER",
+      "to": "CR_THERMAL_NONTHERMAL_ACCOUNTING"
+    },
+    {
+      "from": "M1_ELECTRON_SOURCE_BINDING",
+      "to": "M1_REI_SOURCE_ADOPTION"
+    },
+    {
+      "from": "CR_SCENARIO_SOURCE_BINDING",
+      "to": "M1_REI_SOURCE_ADOPTION"
+    },
+    {
+      "from": "CR_THERMAL_NONTHERMAL_ACCOUNTING",
+      "to": "M1_REI_SOURCE_ADOPTION"
+    },
+    {
+      "from": "M1_CONSUMER_ERROR_BUDGET",
+      "to": "M1_REI_SOURCE_ADOPTION"
+    },
+    {
+      "from": "M2_PHYSICAL_CLOSURE_DECISION",
+      "to": "M1_REI_SOURCE_ADOPTION"
+    },
+    {
+      "from": "CR_THERMAL_RELEVANCE_CUTOFF_CLOSURE",
+      "to": "CR_THEORY_MOVING_CUTOFF"
+    },
+    {
+      "from": "CR_PAIRED_ENERGY_ION_CUTOFF_LEDGER",
+      "to": "CR_THEORY_MOVING_CUTOFF"
+    },
+    {
+      "from": "CR_THERMAL_RELEVANCE_CUTOFF_CLOSURE",
+      "to": "CR_THEORY_THERMAL_EXCESS"
+    },
+    {
+      "from": "M1_ELECTRON_SOURCE_BINDING",
+      "to": "CR_THEORY_THERMAL_EXCESS"
+    },
+    {
+      "from": "CR_PAIRED_ENERGY_ION_CUTOFF_LEDGER",
+      "to": "CR_THEORY_COLLISION_CLOCK"
+    },
+    {
+      "from": "M1_ELECTRON_SOURCE_BINDING",
+      "to": "CR_THEORY_COLLISION_CLOCK"
+    },
+    {
+      "from": "CR_THEORY_COLLISION_CLOCK",
+      "to": "CR_THEORY_RESIDUAL_TEMPERATURE_CERTIFICATE"
+    },
+    {
+      "from": "CR_THEORY_THERMAL_EXCESS",
+      "to": "CR_THEORY_RESIDUAL_TEMPERATURE_CERTIFICATE"
+    },
+    {
+      "from": "CR_THEORY_THERMAL_EXCESS",
+      "to": "CR_THEORY_RECEIVER_INTERFACE"
+    },
+    {
+      "from": "CR_THEORY_MOVING_CUTOFF",
+      "to": "CR_THEORY_TARGETED_VERIFICATION"
+    },
+    {
+      "from": "CR_THEORY_THERMAL_EXCESS",
+      "to": "CR_THEORY_TARGETED_VERIFICATION"
+    },
+    {
+      "from": "CR_THEORY_COLLISION_CLOCK",
+      "to": "CR_THEORY_TARGETED_VERIFICATION"
+    },
+    {
+      "from": "CR_THEORY_RESIDUAL_TEMPERATURE_CERTIFICATE",
+      "to": "CR_THEORY_TARGETED_VERIFICATION"
+    },
+    {
+      "from": "CR_THEORY_RECEIVER_INTERFACE",
+      "to": "CR_THEORY_TARGETED_VERIFICATION"
+    },
+    {
+      "from": "CR_THEORY_MOVING_CUTOFF",
+      "to": "CR_THEORY_INTEGRATED_ACCEPTANCE"
+    },
+    {
+      "from": "CR_THEORY_THERMAL_EXCESS",
+      "to": "CR_THEORY_INTEGRATED_ACCEPTANCE"
+    },
+    {
+      "from": "CR_THEORY_COLLISION_CLOCK",
+      "to": "CR_THEORY_INTEGRATED_ACCEPTANCE"
+    },
+    {
+      "from": "CR_THEORY_RESIDUAL_TEMPERATURE_CERTIFICATE",
+      "to": "CR_THEORY_INTEGRATED_ACCEPTANCE"
+    },
+    {
+      "from": "CR_THEORY_RECEIVER_INTERFACE",
+      "to": "CR_THEORY_INTEGRATED_ACCEPTANCE"
+    },
+    {
+      "from": "CR_THEORY_TARGETED_VERIFICATION",
+      "to": "CR_THEORY_INTEGRATED_ACCEPTANCE"
+    },
+    {
+      "from": "CR_THEORY_INTEGRATED_ACCEPTANCE",
+      "to": "CR_THEORY_SELF_CONSISTENT_FEEDBACK"
+    },
+    {
+      "from": "CR_THEORY_SELF_CONSISTENT_FEEDBACK",
+      "to": "CR_THEORY_KERNEL_EVENT_ADAPTER"
+    },
+    {
+      "from": "CR_THEORY_SELF_CONSISTENT_FEEDBACK",
+      "to": "CR_THEORY_THERMAL_CUTOFF_FEEDBACK"
+    },
+    {
+      "from": "CR_THEORY_MOVING_CUTOFF",
+      "to": "CR_THEORY_THERMAL_CUTOFF_FEEDBACK"
+    },
+    {
+      "from": "CR_THEORY_SELF_CONSISTENT_FEEDBACK",
+      "to": "CR_FEEDBACK_SELECTED_APPLICATION"
+    },
+    {
+      "from": "CR_THEORY_KERNEL_EVENT_ADAPTER",
+      "to": "CR_FEEDBACK_SELECTED_APPLICATION"
+    },
+    {
+      "from": "CR_SCENARIO_SOURCE_BINDING",
+      "to": "CR_FEEDBACK_SELECTED_APPLICATION"
+    },
+    {
+      "from": "M1_CONSUMER_ERROR_BUDGET",
+      "to": "CR_FEEDBACK_SELECTED_APPLICATION"
+    },
+    {
+      "from": "CR_THEORY_KERNEL_EVENT_ADAPTER",
+      "to": "CR_THEORY_COUPLED_BRANCH_SOLVER"
+    },
+    {
+      "from": "CR_THEORY_THERMAL_CUTOFF_FEEDBACK",
+      "to": "CR_THEORY_COUPLED_BRANCH_SOLVER"
+    },
+    {
+      "from": "CR_THEORY_KERNEL_EVENT_ADAPTER",
+      "to": "CR_THEORY_GEOMETRY_KERNEL_REBIND"
+    },
+    {
+      "from": "CR_THEORY_THERMAL_CUTOFF_FEEDBACK",
+      "to": "CR_THEORY_GEOMETRY_KERNEL_REBIND"
+    },
+    {
+      "from": "CR_THEORY_MOVING_CUTOFF",
+      "to": "CR_THEORY_GEOMETRY_KERNEL_REBIND"
+    }
+  ],
+  "new_theory_node_ids": [
+    "CR_THEORY_COUPLED_BRANCH_SOLVER",
+    "CR_THEORY_GEOMETRY_KERNEL_REBIND"
+  ],
+  "next_here": [
+    "CR_THEORY_COUPLED_BRANCH_SOLVER",
+    "CR_THEORY_GEOMETRY_KERNEL_REBIND"
+  ],
+  "next_theoretical_task_after_acceptance": "CR_THEORY_COUPLED_BRANCH_SOLVER",
+  "downstream_application_nodes": [
+    "CR_SCENARIO_SOURCE_BINDING",
+    "CR_THERMAL_NONTHERMAL_ACCOUNTING",
+    "M1_CONSUMER_ERROR_BUDGET",
+    "M1_REI_SOURCE_ADOPTION",
+    "CR_FEEDBACK_SELECTED_APPLICATION"
+  ],
+  "standalone_theory_authorization": {
+    "source": "Current explicit user request on 2026-10-13 Asia/Seoul",
+    "activation_matches_prior_node": "M4_TARGETED_CR_EXTENSION",
+    "scenario_or_observable_budget_dependency": false,
+    "meaning": "The two next constructive theory tasks use the accepted finite feedback theory; selected application continues to require its own scenario and observable budget."
+  },
+  "preservation": {
+    "immediate_prior_nodes": 33,
+    "current_nodes": 35,
+    "selected_updated_nodes": [
+      "CR_THEORY_KERNEL_EVENT_ADAPTER",
+      "CR_THEORY_THERMAL_CUTOFF_FEEDBACK"
+    ],
+    "unchanged_prior_nodes": 31,
+    "immediate_prior_edges": 60,
+    "prior_edges_retained": true,
+    "new_edges": 5,
+    "parent_dag_sha256": "9fdeca1b2e52f7615de329e4bf2f5230767476bab32a236861423feae1e3dc6e",
+    "prior_unit": "CR-THEORY-FEEDBACK-20261013"
+  },
+  "reference_resolution": {
+    "rule": "New selected/result paths are relative to this unit. Other inherited node paths retain their own prior unit origin.",
+    "immediate_prior": {
+      "repository_path": "research/cr_feedback_step_20261013",
+      "commit": "1f32987b2cc3eb521b4e09c736873ce21e9657a4",
+      "dag_sha256": "9fdeca1b2e52f7615de329e4bf2f5230767476bab32a236861423feae1e3dc6e"
+    },
+    "unchanged_ancestral_resolution": {
+      "rule": "Node-relative references use the origin group below. Absolute URLs keep their given identity. Historical metadata retains its historical unit-relative meaning.",
+      "original_source_nodes": {
+        "node_ids": [
+          "M0_CACHED_ONSET_RESPONSE",
+          "M0_QUADRATIC_RESPONSE",
+          "CR_RUX00_AUTHORITY",
+          "M1_CONSUMER_SCOPE_INTAKE",
+          "CR_RUX03_OWNER_REUSE",
+          "M2_RESPONSE_ERROR_MAP",
+          "M3_LOCAL_CR_OFF_CONTRACT",
+          "CR_PROCESS_RELEVANCE",
+          "M1_ELECTRON_SOURCE_BINDING",
+          "M1_CONSUMER_ERROR_BUDGET",
+          "M2_PHYSICAL_CLOSURE_DECISION",
+          "M3_SELECTED_HISTORY_OFF_RECEIPT",
+          "M4_TARGETED_CR_EXTENSION",
+          "RUX13_MATCHED_HISTORY_EFFECT",
+          "H_NCP_FULL9600",
+          "H_EXISTING_RUN_COLLECTION",
+          "F_BINDING_AND_G_FRONTIER",
+          "CR_PAIRED_ENERGY_ION_CUTOFF_LEDGER",
+          "CR_SCENARIO_SOURCE_BINDING",
+          "CR_THERMAL_RELEVANCE_CUTOFF_CLOSURE",
+          "CR_THERMAL_NONTHERMAL_ACCOUNTING",
+          "M1_REI_SOURCE_ADOPTION"
+        ],
+        "relative_path_base": "https://github.com/cosmosapjw-quantum/bass_cr/blob/5fc11143679fe1950133b1e268ac3dd248f6429b/research/cr_source_binding_20261012/",
+        "source_unit": "CR-RUX-M1B-SOURCE-BINDING-20261012",
+        "source_science_commit": "5fc11143679fe1950133b1e268ac3dd248f6429b"
+      },
+      "prior_theory_nodes": {
+        "node_ids": [
+          "CR_THEORY_MOVING_CUTOFF",
+          "CR_THEORY_THERMAL_EXCESS",
+          "CR_THEORY_COLLISION_CLOCK",
+          "CR_THEORY_RESIDUAL_TEMPERATURE_CERTIFICATE",
+          "CR_THEORY_RECEIVER_INTERFACE",
+          "CR_THEORY_TARGETED_VERIFICATION",
+          "CR_THEORY_INTEGRATED_ACCEPTANCE"
+        ],
+        "relative_path_base": "https://github.com/cosmosapjw-quantum/bass_cr/blob/2495662e86a69ed822ec192685c3e9e0e68e1255/research/cr_thermal_evolution_20261012/",
+        "source_unit": "CR-THEORY-THERMAL-EVOLUTION-20261012",
+        "source_science_commit": "2495662e86a69ed822ec192685c3e9e0e68e1255",
+        "selected_local_copies": "inputs/prior/"
+      },
+      "current_nodes": {
+        "node_ids": [
+          "CR_THEORY_SELF_CONSISTENT_FEEDBACK",
+          "CR_THEORY_KERNEL_EVENT_ADAPTER",
+          "CR_THEORY_THERMAL_CUTOFF_FEEDBACK",
+          "CR_FEEDBACK_SELECTED_APPLICATION"
+        ],
+        "relative_path_base": ".",
+        "source_unit": "CR-THEORY-FEEDBACK-20261013",
+        "planned_output_prefix": "future/"
+      },
+      "historical_preservation_resolution": "preservation.historical_prior_preservation is copied unchanged from inputs/prior/NEXT_DAG.json; its local relative paths belong to the prior thermal-evolution unit."
+    },
+    "current_nodes": [
+      "CR_THEORY_KERNEL_EVENT_ADAPTER",
+      "CR_THEORY_THERMAL_CUTOFF_FEEDBACK",
+      "CR_THEORY_COUPLED_BRANCH_SOLVER",
+      "CR_THEORY_GEOMETRY_KERNEL_REBIND"
+    ],
+    "prior_feedback_nodes": {
+      "node_ids": [
+        "CR_THEORY_SELF_CONSISTENT_FEEDBACK",
+        "CR_FEEDBACK_SELECTED_APPLICATION"
+      ],
+      "relative_path_base": "https://github.com/cosmosapjw-quantum/bass_cr/blob/1f32987b2cc3eb521b4e09c736873ce21e9657a4/research/cr_feedback_step_20261013/",
+      "source_unit": "CR-THEORY-FEEDBACK-20261013"
+    }
+  },
+  "global_overlay_snapshot": {
+    "schema": "rei_reuse_successor_dag.cr_overlay.v3",
+    "date": "2026-10-12",
+    "purpose": "Re-use existing atomic data and coupled codes; fast source-backed EoR FLRW/Bianchi-I results",
+    "authority": "User-requested bass_cr source-binding planning overlay; inherited global node execution states and downstream receiver status are unchanged",
+    "evidence_boundary": "Adds executed BASS_CR fixed-bath xi=.01 Qe=t*A(W) SI binding and current consumer intake. The explicit cutoff-join research candidate and cumulative energy envelope are PROMOTE_SCOPED under review/DECISION.json. All global RUX nodes retain their inherited states.",
+    "reuse_of_done": "F08 synthetic paired history, SYNC02/03 receiver diagnostics, scoped BASS_HE/CR/HH results are inputs; not new physical EoR proof",
+    "repositories": [
+      {
+        "name": "rei_bianchi",
+        "url": "https://github.com/cosmosapjw-quantum/rei_bianchi",
+        "role": "primary coupled runtime; physical EoR owner"
+      },
+      {
+        "name": "rec_bianchi",
+        "url": "https://github.com/cosmosapjw-quantum/rec_bianchi",
+        "role": "initial/recombination-history provider"
+      },
+      {
+        "name": "BASS_HE",
+        "url": "https://github.com/cosmosapjw-quantum/BASS_HE",
+        "role": "helium and atomic source/rate authority"
+      },
+      {
+        "name": "bass_cr",
+        "url": "https://github.com/cosmosapjw-quantum/bass_cr",
+        "role": "absorption/heating; opt-in CR physical corrections"
+      },
+      {
+        "name": "bass",
+        "url": "https://github.com/cosmosapjw-quantum/bass",
+        "role": "polarized photon transport, Thomson tau/visibility"
+      },
+      {
+        "name": "WU088_HH",
+        "url": "https://github.com/cosmosapjw-quantum/WU088_HH",
+        "role": "HH event and response conditional research"
+      },
+      {
+        "name": "htt_base",
+        "url": "https://github.com/cosmosapjw-quantum/htt_base",
+        "role": "historical/regression reference only"
+      }
+    ],
+    "source_registry": [
+      {
+        "id": "S01",
+        "role": "runtime",
+        "source": "Dropbox",
+        "path": "/bianchi/rei_bianchi/rust/rei_microphysics/src/",
+        "evidence": "Existing Rust modules including atomic_provider, homogeneous_rates, coupled_primary, axisym_radiation, paired_runtime, axisym_coupling"
+      },
+      {
+        "id": "S02",
+        "role": "retained_output",
+        "source": "Dropbox",
+        "path": "/bianchi/rei_bianchi/runs/rei_fastest_v1/paired/",
+        "evidence": "F08 synthetic 15 histories, 248000 accepted trials, short 1e13 s prescribed interval"
+      },
+      {
+        "id": "S03",
+        "role": "original_dag",
+        "source": "Dropbox",
+        "path": "/bianchi/rei_bianchi/docs/atomic_reionization_handoff_20261004_v1/",
+        "evidence": "2026-10-04 historical GLOBAL_DAG; execution state is historical and not current runtime truth"
+      },
+      {
+        "id": "S04",
+        "role": "cross_repo_validation",
+        "source": "Dropbox",
+        "path": "/bianchi/rei_bianchi/docs/research_sync/REI-REC-BASS-SYNC02-20261005/",
+        "evidence": "scoped actual REC-REI-BASS connection with audit"
+      },
+      {
+        "id": "S05",
+        "role": "atomic_handoff",
+        "source": "Dropbox",
+        "path": "/BASS_DERIVATION_DOSSIERS_20260912/ATOMIC_REIONIZATION_HANDOFF_20261004_v1/",
+        "evidence": "archives for source/closure and physical-input handoff"
+      },
+      {
+        "id": "S06",
+        "role": "physical_input_candidate",
+        "source": "Dropbox",
+        "path": "/BASS_DERIVATION_DOSSIERS_20260912/ATOMIC_REIONIZATION_HANDOFF_20261004_v1/REI_BIANCHI_PHYSICAL_INPUT_HANDOFF_20261010_v2.tar",
+        "evidence": "Exists, internal physical admission NOT VERIFIED"
+      },
+      {
+        "id": "S07",
+        "role": "physical_input_candidate",
+        "source": "Dropbox",
+        "path": "/BASS_DERIVATION_DOSSIERS_20260912/REI_PHYSINPUT_P01_PRODUCTION_20261010_c168e578.tar.gz",
+        "evidence": "Exists, internal contents/admission NOT VERIFIED"
+      },
+      {
+        "id": "S08",
+        "role": "physical_input_candidate",
+        "source": "Dropbox",
+        "path": "/BASS_DERIVATION_DOSSIERS_20260912/REI_PHYSINPUT_P02A_20261010_8a80fa9.tar.gz",
+        "evidence": "Exists, internal contents/admission NOT VERIFIED"
+      },
+      {
+        "id": "S09",
+        "role": "physical_input_candidate",
+        "source": "Dropbox",
+        "path": "/BASS_DERIVATION_DOSSIERS_20260912/REI_PHYSINPUT_P03A_20261010_d6ad8b7.tar.gz",
+        "evidence": "Exists, internal contents/admission NOT VERIFIED"
+      },
+      {
+        "id": "S10",
+        "role": "physical_input_candidate",
+        "source": "Dropbox",
+        "path": "/BASS_DERIVATION_DOSSIERS_20260912/REI_P03A_SOURCE_DELTA_20261010_05c45c3.tar.gz",
+        "evidence": "Exists, internal contents/admission NOT VERIFIED"
+      },
+      {
+        "id": "S11",
+        "role": "blocker_evidence",
+        "source": "Dropbox",
+        "path": "/BASS_DERIVATION_DOSSIERS_20260912/REI_N2_LOCAL_INPUT_RESEARCH_20261010_v1/RECEIPT.md",
+        "evidence": "N2 HOLD: Bianchi-I background, IC, spectrum, source histories, energy/source closures and executable provider binding missing in assessed input"
+      },
+      {
+        "id": "S12",
+        "role": "existing_component_evidence",
+        "source": "Dropbox",
+        "path": "/BASS_DERIVATION_DOSSIERS_20260912/REI_AXI05_COUPLED_COMPOSITION_20261010_v1/RECEIPT.md",
+        "evidence": "scoped local derivative composition PASS; full cosmology HOLD"
+      },
+      {
+        "id": "S13",
+        "role": "precision_atomic",
+        "source": "Dropbox",
+        "path": "/BASS_DERIVATION_DOSSIERS_20260912/BASS_HE_E13C10_REPORT_KO_20261012.md",
+        "evidence": "selected finite-interval bound improvement; physical/continuum/production HOLD"
+      },
+      {
+        "id": "S14",
+        "role": "precision_atomic",
+        "source": "Dropbox",
+        "path": "/BASS_DERIVATION_DOSSIERS_20260912/WU088_HH_R31S_NCP_REDESIGN_20260928/WU088_HH_OBSERVABLE_FIRST_PLAN_NCP_HANDOFF_20261012_v1.md",
+        "evidence": "HH PHYS11 preserved, observable-first plan, no heavy job ready"
+      },
+      {
+        "id": "S15",
+        "role": "atomic_point_adapter",
+        "source": "Google Drive",
+        "path": "https://drive.google.com/file/d/16y6OFZJF9fkcU31Qr-rTsAJGjEojwgJB/view",
+        "evidence": "BASS_CR point photon-stock PASS, wide propagated error PARTIAL"
+      },
+      {
+        "id": "S16",
+        "role": "cross_repo_validation",
+        "source": "Google Drive",
+        "path": "https://drive.google.com/drive/folders/1JIh1a-WtEZG-ahzN6rk-9PECVSVxljo5",
+        "evidence": "SYNC03 conditional finite-cell tau and visibility"
+      },
+      {
+        "id": "S17",
+        "role": "atomic_restore",
+        "source": "Google Drive",
+        "path": "https://docs.google.com/document/d/13AYaC3mEKz_EFMR5p4htnD039vUGwgA_weSOa6SuOMk/edit",
+        "evidence": "EoR MICRO-0 H/He rate families and conservation-tested reference/auditor recovered"
+      },
+      {
+        "id": "CRX01",
+        "role": "existing_primary_photon_event_interface",
+        "source": "GitHub",
+        "repository": "cosmosapjw-quantum/bass_cr",
+        "commit": "767273fec673ac0877dc4833da4bef147ae04c40",
+        "path": "research/fastest_rejoin_20261007/cr_off_igm_bridge.rs",
+        "evidence": "Existing point bridge; unit/owner definitions and historical scoped execution; whole-history adoption not claimed"
+      },
+      {
+        "id": "CRX02",
+        "role": "native_hard_particle_snapshot_provider",
+        "source": "GitHub",
+        "repository": "cosmosapjw-quantum/bass_cr",
+        "commit": "767273fec673ac0877dc4833da4bef147ae04c40",
+        "path": "research/cr_phys01_20261010/evidence/CR_PACKET.json",
+        "evidence": "Conditional PHYS01 terminal packet exists; not a delayed/evolving-history provider"
+      },
+      {
+        "id": "CRX03",
+        "role": "retained_fixed_kernel_moments",
+        "source": "GitHub",
+        "repository": "cosmosapjw-quantum/bass_cr",
+        "commit": "767273fec673ac0877dc4833da4bef147ae04c40",
+        "path": "research/cr_m0_quadratic_20261012/",
+        "evidence": "M0 exact quadratic endpoint response retained; no rerun or cosmological promotion"
+      },
+      {
+        "id": "CRX04",
+        "role": "actual_receiver_and_off_contract",
+        "source": "GitHub",
+        "repository": "cosmosapjw-quantum/rei_bianchi",
+        "commit": "17f8d0daa72e0f76a49cde01b110f650a6688c42",
+        "path": "rust/rei_microphysics/src/axisym_cr_deposition.rs",
+        "evidence": "Two exact composition knots and preserved OFF function; historical source-bound execution imported, current full-history runtime not certified"
+      },
+      {
+        "id": "CRX05",
+        "role": "new_controlled_closure_error_map",
+        "source": "GitHub",
+        "path": "research/cr_rux_m1_m3_20261012/results/RESPONSE_ERROR_MAP.json",
+        "evidence": "Positive finite-age closure, exact recorded-moment arithmetic; actual consumer error budget not bound",
+        "repository": "cosmosapjw-quantum/bass_cr",
+        "commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b"
+      },
+      {
+        "id": "CRX06",
+        "role": "executed_fixed_bath_source_bound_response_and_cutoff_candidate",
+        "source": "this_bass_cr_unit",
+        "repository": "cosmosapjw-quantum/bass_cr",
+        "branch": "research/cr-source-binding-20261012",
+        "commit": null,
+        "path": "results/SOURCE_BOUND_RESPONSE.json",
+        "sha256": "dd4ed10b5ecd3aea8a8710b5190c9d7da4085834713bc72ae2cc37915cc97f27",
+        "evidence": "37 stored-record arithmetic checks and 30 independent reference checks PASS; fixed-bath source binding, explicit cutoff-join research candidate and cumulative source-energy envelope PROMOTE_SCOPED; actual receiver adoption remains separate.",
+        "publication_identity": "Scientific bytes bound by sha256; publication commit is recorded in publication/ receipts to avoid a self-referential commit hash."
+      },
+      {
+        "id": "CRX07",
+        "role": "current_bounded_REI_consumer_intake",
+        "source": "this_bass_cr_unit",
+        "path": "inputs/consumer_intake/SOURCE_IDENTITY.json",
+        "sha256": "177779ee7956ef269565c60e881bd75b83799d551243f7f74a9aee1a5ac383a4",
+        "receiver_repository": "cosmosapjw-quantum/rei_bianchi",
+        "receiver_commit": "17f8d0daa72e0f76a49cde01b110f650a6688c42",
+        "evidence": "Relevant CR heads unchanged; no newly supplied selected CR-on observable/source/bath/clock/absolute budget in the checked scope"
+      },
+      {
+        "id": "CRX08",
+        "role": "retained_paired_energy_ionization_and_cutoff_number_ledger",
+        "source": "GitHub",
+        "repository": "cosmosapjw-quantum/bass_cr",
+        "commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+        "path": "research/cr_phys02c_paired_9600_closeout_20261011/raw/THIRD_GRID_LOCAL_20261011_EXEC01/NUMERICAL_RESULT.json",
+        "local_path": "inputs/PAIRED_RECORD.json",
+        "sha256": "0b33ad9af1be50297e54fa8b38570471c35b5e342ce771d834bb576458a91500",
+        "evidence": "Existing fullBED/legacy and birth-tag outputs; preserve heat, binding, excitation, active stock, cutoff energy and cutoff number; no old solver rerun"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "RUX00",
+        "title": "Authority inventory and non-duplication lock",
+        "depends_on": [],
+        "lane": "MAIN",
+        "execution_owner": "rei_bianchi",
+        "sources": [
+          "S01",
+          "S02",
+          "S03",
+          "S04",
+          "S16",
+          "S15",
+          "CRX01",
+          "CRX02",
+          "CRX03",
+          "CRX04"
+        ],
+        "artifact": "SOURCE_AUTHORITY_LOCK.json and RETAINED_RESULTS.json",
+        "acceptance_gate": "Inspect exact branch heads, commit/tree/blob SHA and per-source claims; identify previously PASS nodes and stale 2026-10-04 pending records",
+        "fail_closed_or_stop": "No re-run of F08/SYNC02/SYNC03 or completed atomic precision work; report unknown refs rather than infer",
+        "runtime_route": "LOCAL",
+        "optional": false,
+        "status": "PROPOSED_NOT_EXECUTED",
+        "notes": "Reuse 2026-10-04 GLOBAL_DAG/PR_PLAN as historic requirements; new DAG is a successor overlay."
+      },
+      {
+        "id": "RUX01",
+        "title": "Publish retained scientific diagnostics without recomputation",
+        "depends_on": [
+          "RUX00"
+        ],
+        "lane": "QUICK_RESULT",
+        "execution_owner": "rei_bianchi",
+        "sources": [
+          "S02",
+          "S04",
+          "S16"
+        ],
+        "artifact": "plots/retained_F08_SY3_diagnostics and ERROR_LEDGER.json",
+        "acceptance_gate": "Reproduce figures from saved curves and finite-cell tau, label synthetic/conditional and source/observer tail limitations; numerical checks refer to retained receipts",
+        "fail_closed_or_stop": "No claim of physical EoR, continuum sign or sky anisotropy; no fresh full science rerun",
+        "runtime_route": "LOCAL",
+        "optional": false,
+        "status": "PROPOSED_NOT_EXECUTED",
+        "notes": ""
+      },
+      {
+        "id": "RUX02",
+        "title": "Physical-input archives: exact intake and admission",
+        "depends_on": [
+          "RUX00"
+        ],
+        "lane": "MAIN",
+        "execution_owner": "rei_bianchi",
+        "sources": [
+          "S06",
+          "S07",
+          "S08",
+          "S09",
+          "S10",
+          "S11"
+        ],
+        "artifact": "PHYSICAL_INPUT_ADMISSION.json",
+        "acceptance_gate": "Cross-check each file SHA/internal manifests against N2 missing fields: Bianchi background/epoch, hydrogen/helium initial abundances and temperature, spectrum/source history, closures and executable callback",
+        "fail_closed_or_stop": "If any mandatory field is null or only synthetic, mark PHYSICAL_HOLD with exact missing fields; do not fabricate values",
+        "runtime_route": "LOCAL",
+        "optional": false,
+        "status": "PROPOSED_NOT_EXECUTED",
+        "notes": ""
+      },
+      {
+        "id": "RUX03",
+        "title": "Atomic process and opacity ownership registry",
+        "depends_on": [
+          "RUX00"
+        ],
+        "lane": "MAIN",
+        "execution_owner": "rei_bianchi",
+        "sources": [
+          "S01",
+          "S05",
+          "S13",
+          "S15",
+          "S17",
+          "CRX01",
+          "CRX02",
+          "CRX04"
+        ],
+        "artifact": "ATOM_OWNER_MATRIX.json + RATE_DOMAIN_MAP.json",
+        "acceptance_gate": "Distinct HI/HeI/HeII cross sections and binding cutoffs; case A explicit recombination photons XOR case B OTS; local HI absorption XOR effective MFP overlap; proper/comoving, photon/energy, frame and units verified",
+        "fail_closed_or_stop": "Fail on double-counting, unknown/unsupported rates, missing heating, incompatible source domains, HE excited-state differential spectrum misuse",
+        "runtime_route": "LOCAL",
+        "optional": false,
+        "status": "PROPOSED_NOT_EXECUTED",
+        "notes": " CR baseline photoabsorption/photoheating reuse is distinct from optional hard-particle deposition. Already integrated photon bins carry no extra 4pi/dE/a^-3/dt. Distinguish cm^-3/erg/H from SI native packet units."
+      },
+      {
+        "id": "RUX04",
+        "title": "Physical EoR scenario freeze (FLRW and Bianchi pair)",
+        "depends_on": [
+          "RUX02",
+          "RUX03",
+          "RUX03_CR_SCREEN"
+        ],
+        "lane": "MAIN",
+        "execution_owner": "rei_bianchi",
+        "sources": [
+          "S06",
+          "S07",
+          "S08",
+          "S09",
+          "S10",
+          "S17"
+        ],
+        "artifact": "PHYSICAL_SCENARIO_LOCK.json",
+        "acceptance_gate": "One identified, source-backed cosmological initial epoch and background (aV, directional shear), consistent H/He IC, T, source spectrum including explicit He-ionization claim support or narrowed claim, emissivity/escape/clumping assumptions with provenance",
+        "fail_closed_or_stop": "No post-hoc tuning of source, normalization, shear, IC or closure after inspecting pair; no claims from S0 13.7 eV fixture",
+        "runtime_route": "LOCAL",
+        "optional": false,
+        "status": "PROPOSED_NOT_EXECUTED",
+        "notes": "",
+        "required_if": {
+          "cr_processes_enabled": [
+            "RUX13_BIND"
+          ]
+        }
+      },
+      {
+        "id": "RUX05",
+        "title": "Reuse primary microstep on first FLRW physical interval",
+        "depends_on": [
+          "RUX04"
+        ],
+        "lane": "MAIN",
+        "execution_owner": "rei_bianchi",
+        "sources": [
+          "S01",
+          "S04",
+          "S12"
+        ],
+        "artifact": "FIRST_FLRW_PHYSICAL_INTERVAL.json + conservation ledger",
+        "acceptance_gate": "Use existing coupled_primary/microstep; same-event photons and ions, nuclei/charge/energy, positivity, owner checks, independent check at fixed physical inputs",
+        "fail_closed_or_stop": "Fail-closed on missing data, case/opacity mismatch, precision/unit errors; do not reimplement solver",
+        "runtime_route": "LOCAL",
+        "optional": false,
+        "status": "PROPOSED_NOT_EXECUTED",
+        "notes": "",
+        "required_if": {
+          "cr_processes_enabled": [
+            "RUX13_BIND"
+          ]
+        }
+      },
+      {
+        "id": "RUX06",
+        "title": "Reuse Bianchi-I geodesic/energy remap and angular cells",
+        "depends_on": [
+          "RUX04"
+        ],
+        "lane": "MAIN",
+        "execution_owner": "rei_bianchi",
+        "sources": [
+          "S01",
+          "S02"
+        ],
+        "artifact": "BI_TRANSPORT_REGRESSION.json",
+        "acceptance_gate": "Exact directional characteristic energy relation, photon number and frequency-face flux telescoping, FLRW sigma->0 limit, frame conventions and KMS not assumed",
+        "fail_closed_or_stop": "Do not claim microphysical coupling, new history or physical result from collisionless transport tests",
+        "runtime_route": "LOCAL",
+        "optional": false,
+        "status": "PROPOSED_NOT_EXECUTED",
+        "notes": ""
+      },
+      {
+        "id": "RUX07",
+        "title": "First physical Bianchi-I coupled interval",
+        "depends_on": [
+          "RUX05",
+          "RUX06"
+        ],
+        "lane": "MAIN",
+        "execution_owner": "rei_bianchi",
+        "sources": [
+          "S01",
+          "S12"
+        ],
+        "artifact": "FIRST_BI_PHYSICAL_COUPLED_INTERVAL.json",
+        "acceptance_gate": "Same source/history/IC and frozen rates as FLRW, couple actual angular RT to same-event absorption/HHe chemistry/thermal power; energy and group-boundary ledgers closed",
+        "fail_closed_or_stop": "Fail on nonconvergence, conservation breach, missing time carry or source/opacity owner conflict; no prediction from a manufactured fixture",
+        "runtime_route": "LOCAL",
+        "optional": false,
+        "status": "PROPOSED_NOT_EXECUTED",
+        "notes": "",
+        "required_if": {
+          "cr_processes_enabled": [
+            "RUX13_BIND"
+          ]
+        }
+      },
+      {
+        "id": "RUX08",
+        "title": "Source-backed multi-epoch FLRW EoR history",
+        "depends_on": [
+          "RUX05"
+        ],
+        "lane": "MAIN",
+        "execution_owner": "rei_bianchi",
+        "sources": [
+          "S01",
+          "S07",
+          "S08",
+          "S09"
+        ],
+        "artifact": "FLRW_EOR_HISTORY.csv + convergence and model ledger",
+        "acceptance_gate": "Evolve selected source-backed history over declared reionization epoch, species fractions/temperature/photons, causal photon inventory, post-overlap sink handling, independent FLRW reference/limit",
+        "fail_closed_or_stop": "No QV=xHII relabeling, no cosmological extrapolation beyond provider/source domain",
+        "runtime_route": "LOCAL",
+        "optional": false,
+        "status": "PROPOSED_NOT_EXECUTED",
+        "notes": ""
+      },
+      {
+        "id": "RUX09",
+        "title": "Matched Bianchi-I/FLRW EoR history",
+        "depends_on": [
+          "RUX07",
+          "RUX08"
+        ],
+        "lane": "MAIN",
+        "execution_owner": "rei_bianchi",
+        "sources": [
+          "S01",
+          "S02",
+          "S16"
+        ],
+        "artifact": "PAIRED_EOR_HISTORY.csv + DIFFERENCE_ERROR_LEDGER.json",
+        "acceptance_gate": "Same cosmological source and closure, directional photon remap, time/angle/energy refinements, explicit shears; separation of background/history vs shear transport effect",
+        "fail_closed_or_stop": "Do not interpret numerical contrast as observationally novel if source/closure systematic larger or unconstrained",
+        "runtime_route": "NCP_IF_MEASURED_HEAVY",
+        "optional": false,
+        "status": "PROPOSED_NOT_EXECUTED",
+        "notes": ""
+      },
+      {
+        "id": "RUX10",
+        "title": "CMB receiver optical depth and visibility",
+        "depends_on": [
+          "RUX09"
+        ],
+        "lane": "MAIN",
+        "execution_owner": "bass",
+        "sources": [
+          "S04",
+          "S16"
+        ],
+        "artifact": "TAU_VISIBILITY_SOURCE_BACKED.json + plots",
+        "acceptance_gate": "Bind proper ne(t) from genuine physical paired history into existing BASS time/visibility API; observer-tail explicit; FLRW and non-tilted limits checked",
+        "fail_closed_or_stop": "No arbitrary tail=0 as physical total tau; do not imply full polarized CMB sky result",
+        "runtime_route": "LOCAL",
+        "optional": false,
+        "status": "PROPOSED_NOT_EXECUTED",
+        "notes": ""
+      },
+      {
+        "id": "RUX11",
+        "title": "Scientific plot and observational-claim screening",
+        "depends_on": [
+          "RUX08",
+          "RUX09",
+          "RUX10"
+        ],
+        "lane": "MAIN",
+        "execution_owner": "rei_bianchi",
+        "sources": [
+          "S02",
+          "S16"
+        ],
+        "artifact": "FIGURE_SET + CLAIM_LEDGER.json",
+        "acceptance_gate": "Source-backed xHII,xHeII,xHeIII,Tg,Gamma,photons, delta observables, tau/visibility; uncertainties split numeric, atomic, source, geometry, spatial closure",
+        "fail_closed_or_stop": "Publication gate fails for unconstrained cosmological input, unmatched source, missing uncertainty or false QV claim",
+        "runtime_route": "LOCAL",
+        "optional": false,
+        "status": "PROPOSED_NOT_EXECUTED",
+        "notes": "",
+        "consumed_artifacts": [
+          "RUX08.FLRW_EOR_HISTORY",
+          "RUX09.PAIRED_EOR_HISTORY",
+          "RUX10.TAU_VISIBILITY_SOURCE_BACKED"
+        ]
+      },
+      {
+        "id": "RUX12",
+        "title": "HE precision sensitivity import, when material",
+        "depends_on": [
+          "RUX11"
+        ],
+        "lane": "OPTIONAL_ATOMIC",
+        "execution_owner": "BASS_HE",
+        "sources": [
+          "S13",
+          "S17"
+        ],
+        "artifact": "HE_EFFECT_ON_EOR.json",
+        "acceptance_gate": "Only if process and temperature/source domain relevant; consume rates, event moments or bounded perturbations with provider authority; run matched ON/OFF sensitivity in rei once",
+        "fail_closed_or_stop": "Do not promote E13C10 finite interval width to physical model error; no 2440-path replay without need",
+        "runtime_route": "NCP_IF_MEASURED_HEAVY",
+        "optional": true,
+        "status": "PROPOSED_NOT_EXECUTED",
+        "notes": ""
+      },
+      {
+        "id": "RUX13",
+        "title": "CR hard-particle process extension, when material",
+        "depends_on": [
+          "RUX11",
+          "RUX13_BIND"
+        ],
+        "lane": "OPTIONAL_ATOMIC",
+        "execution_owner": "bass_cr",
+        "sources": [
+          "S15",
+          "CRX02",
+          "CRX03",
+          "CRX04",
+          "CRX05"
+        ],
+        "artifact": "CR_EFFECT_ON_EOR.json",
+        "acceptance_gate": "Only if deposition/hard particle/temperature observables require, with native rate owner and supported point outputs",
+        "fail_closed_or_stop": "CR OFF remains legitimate baseline; full wide propagated numerical certificate OPEN",
+        "runtime_route": "NCP_IF_MEASURED_HEAVY",
+        "optional": true,
+        "status": "PROPOSED_NOT_EXECUTED",
+        "notes": " Matched-history sensitivity stays after baseline figures; relevance and native source/domain binding happen earlier. S15 alone is not evidence for a native hard-particle provider."
+      },
+      {
+        "id": "RUX14",
+        "title": "HH chemistry/spectral response, when material",
+        "depends_on": [
+          "RUX11"
+        ],
+        "lane": "OPTIONAL_ATOMIC",
+        "execution_owner": "WU088_HH",
+        "sources": [
+          "S14"
+        ],
+        "artifact": "HH_EFFECT_ON_EOR.json",
+        "acceptance_gate": "Bind named HH processes to stoichiometric network, threshold heating, domain; local sensitivity first, actual matched histories only if needed",
+        "fail_closed_or_stop": "Singlet ion-pair not replaced by free-electron LCS; native root/continuum unfinished; no ungrounded HH promotion",
+        "runtime_route": "NCP_IF_MEASURED_HEAVY",
+        "optional": true,
+        "status": "PROPOSED_NOT_EXECUTED",
+        "notes": ""
+      },
+      {
+        "id": "RUX15",
+        "title": "Patchiness/spatial topology extension",
+        "depends_on": [
+          "RUX11"
+        ],
+        "lane": "FUTURE_SPATIAL",
+        "execution_owner": "rei_bianchi",
+        "sources": [
+          "S03"
+        ],
+        "artifact": "QM_QV_RT_EXTENSION_PLAN.json",
+        "acceptance_gate": "Declare density–ionization correlation, topology and spatial RT/IGM opacity source if QV, 21cm power or spatial sky inference claimed",
+        "fail_closed_or_stop": "Homogeneous xHII alone cannot be relabeled QV nor predict patchy 21cm spectrum",
+        "runtime_route": "NCP_IF_MEASURED_HEAVY",
+        "optional": true,
+        "status": "PROPOSED_NOT_EXECUTED",
+        "notes": ""
+      },
+      {
+        "id": "RUX16",
+        "title": "Physical promotion and reproducible release",
+        "depends_on": [
+          "RUX11"
+        ],
+        "lane": "RELEASE",
+        "execution_owner": "rei_bianchi",
+        "sources": [
+          "S03",
+          "S11",
+          "S16"
+        ],
+        "artifact": "PHYSICAL_CLAIM_DECISION.json + final charts + reproducibility manifest",
+        "acceptance_gate": "Numerical convergence; source/model errors and physical assumptions; independent trusted checks, source/license/provenance, passed observable gate; actual repo commit and checksum receipts if published",
+        "fail_closed_or_stop": "Keep physical/continuum/production HOLD until own acceptance; optional precision/spatial results may remain open",
+        "runtime_route": "LOCAL",
+        "optional": false,
+        "status": "PROPOSED_NOT_EXECUTED",
+        "notes": "",
+        "required_if": {
+          "cr_processes_enabled": [
+            "RUX13_BIND",
+            "RUX13"
+          ],
+          "he_precision_claimed": [
+            "RUX12"
+          ],
+          "hh_processes_enabled": [
+            "RUX14"
+          ],
+          "spatial_topology_claimed": [
+            "RUX15"
+          ]
+        }
+      },
+      {
+        "id": "RUX03_CR_SCREEN",
+        "title": "Select CR process relevance before scenario freeze",
+        "depends_on": [
+          "RUX02",
+          "RUX03"
+        ],
+        "lane": "MAIN",
+        "execution_owner": "rei_bianchi with bass_cr source evidence",
+        "sources": [
+          "CRX01",
+          "CRX02",
+          "CRX04"
+        ],
+        "artifact": "CR_PROCESS_RELEVANCE.json",
+        "acceptance_gate": "Record selected source and process owners. CR_OFF_SCOPED is allowed; CR_ON records required energy/time/bath processes before the physical scenario is frozen.",
+        "fail_closed_or_stop": "A required unmodelled process narrows/holds that physical scenario; unknown source is not zero. A packet at a single bath knot does not admit a whole history.",
+        "runtime_route": "LOCAL",
+        "optional": false,
+        "status": "PROPOSED_NOT_EXECUTED"
+      },
+      {
+        "id": "RUX13_BIND",
+        "title": "Bind selected hard-particle source and native/cascade domain",
+        "depends_on": [
+          "RUX02",
+          "RUX03_CR_SCREEN"
+        ],
+        "lane": "OPTIONAL_CR",
+        "execution_owner": "bass_cr with receiver owner",
+        "sources": [
+          "CRX02",
+          "CRX03",
+          "CRX04",
+          "CRX05"
+        ],
+        "artifact": "CR_SOURCE_KERNEL_BINDING.json + CR_DOMAIN_ADMISSION.json",
+        "acceptance_gate": "Bind proton/electron spectral and time-basis identity, normalization, gas state, energy channels, existing operator/kernel scope and a heating/observable error budget. Existing PHYS01/03 packet is reused only at its admitted knots.",
+        "fail_closed_or_stop": "Shared injection lineage does not permit multiplication of FS10 terminal heat by M0 p. Do not fabricate a consumer history, interpolate xi without an admitted model, or rerun atomic precision by default.",
+        "runtime_route": "LOCAL",
+        "optional": true,
+        "status": "PROPOSED_NOT_EXECUTED",
+        "activation": "Selected scenario enables CR or explicitly requests a standalone CR application"
+      }
+    ],
+    "parallel_fast_lane": [
+      "RUX01"
+    ],
+    "optional": [
+      "RUX12",
+      "RUX13",
+      "RUX14",
+      "RUX15",
+      "RUX13_BIND"
+    ],
+    "execution_policy": {
+      "local_first": "Light derivations, source/ABI/units/owner audit, analytic and saved-result tests are local",
+      "NCP": "Only demonstrably heavy outstanding independent histories parameter sweep, source-validated spatial RT or expensive bounded error; do not dispatch idle 64-core tasks",
+      "no_new_heavy_until": [
+        "RUX04 PASS",
+        "RUX07 PASS",
+        "measured wall/CPU/RSS or justified heavy scaling"
+      ],
+      "mutation": "This overlay is published only within bass_cr; downstream adoption/execution belongs to the named receiver owner",
+      "validation_tiers": "ACK != BYTE_RESTORE != SCIENTIFIC_PASS != PHYSICAL_ADMISSION",
+      "heavy_scope": "Original no_new_heavy_until applies to coupled EoR execution. Explicit independent CR science/performance work retains its separate original contract and budgets."
+    },
+    "parent_dag_sha256": "2508158361442bba6c828b3a02141c56051d80bbe4546cb31a07544f5c0b79fa",
+    "supplied_evidence_boundary": "Paths and documents inspected; archive payloads for P01/P02/P03/v2 not unpacked/admitted in this run; no scientific code/tests executed",
+    "main_nodes": [
+      "RUX00",
+      "RUX02",
+      "RUX03",
+      "RUX04",
+      "RUX05",
+      "RUX06",
+      "RUX07",
+      "RUX08",
+      "RUX09",
+      "RUX10",
+      "RUX11",
+      "RUX16",
+      "RUX03_CR_SCREEN"
+    ],
+    "scheduling": "Use dependency readiness, including required_if for the selected claim. main_nodes is membership, not a serial queue or measured critical path.",
+    "immediate_parent_overlay": {
+      "path": "inputs/INHERITED_OVERLAY.json",
+      "sha256": "ebdc4a0c4834911c480e84b1aafd4602cb914b9754a435ca4f1e1edd9e1dc740",
+      "base_commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "original_supplied_dag_sha256": "2508158361442bba6c828b3a02141c56051d80bbe4546cb31a07544f5c0b79fa"
+    },
+    "local_plan": "NEXT_DAG.json",
+    "global_states_promoted": false,
+    "consumer_status_unchanged": "SCOPED_SNAPSHOT_IDENTIFIED_FULL_HISTORY_BINDING_OPEN",
+    "current_CR_budget": {
+      "observable": null,
+      "absolute_tolerance": null,
+      "relative_tolerance": null,
+      "reference_denominator": null,
+      "binding_scope": "Executed BASS_CR fixed-bath electron source; REI selected CR-on history remains unprovided"
+    },
+    "local_execution_budget": {
+      "generator_builds": 0,
+      "transport_solves": 0,
+      "pulse_calls": 0,
+      "source_quadratures": 0,
+      "H_runs": 0,
+      "F_retries": 0,
+      "old_suite_reruns": 0
+    },
+    "CR_local_progress": {
+      "M1_ELECTRON_SOURCE_BINDING": {
+        "status": "COMPLETE_EXECUTED_FIXED_BATH_XI001",
+        "evidence": "CRX06",
+        "arithmetic_checks_passed": 37,
+        "scope": "Executed BASS_CR source and fixed bath only; no REI receiver adoption or global gate closure"
+      },
+      "M1_REI_SOURCE_ADOPTION": {
+        "status": "PENDING_DOWNSTREAM_ACTUAL_ADOPTION",
+        "evidence": "CRX07",
+        "blocks_standalone_CR_application": false
+      },
+      "CR_THERMAL_RELEVANCE_CUTOFF_CLOSURE": {
+        "status": "PROMOTED_SCOPED_CUTOFF_JOIN_AND_ENERGY_ENVELOPE",
+        "evidence": "CRX06",
+        "json_pointer": "/rows/*/cutoff_thermal_join",
+        "equations": [
+          "P_th=P_heat+P_cut",
+          "S_thermal=S_cut"
+        ],
+        "accounting": "Keep N_active separate; total ionization electron number is not automatically thermal electron number",
+        "one_temperature_drop_in_admitted": false
+      }
+    },
+    "CR_next_science": [
+      "Bind the already executed source-bound heat/cutoff ledger to one actual scenario and source range",
+      "Choose total/thermal/nonthermal particle counting and cutoff energy ownership",
+      "Bind the named observable, its units and absolute/relative tolerance and denominator"
+    ],
+    "local_support_mapping": {
+      "RUX03_CR_SCREEN": {
+        "sources": [
+          "CRX06",
+          "CRX07",
+          "CRX08"
+        ],
+        "meaning": "Fixed-bath scale can inform a source-specific relevance decision; it does not choose CR OFF or admit the global scenario"
+      },
+      "RUX13_BIND": {
+        "sources": [
+          "CRX06",
+          "CRX07",
+          "CRX08"
+        ],
+        "completed_part": "BASS fixed-bath source normalization and SI response",
+        "pending_part": "Actual downstream scenario, thermal convention, observable budget and receiver adoption"
+      }
+    },
+    "source_registry_relocation": {
+      "CRX05": "Earlier-unit relative result pointer made repository-relative; evidence and scientific scope unchanged"
+    },
+    "final_independent_decision": {
+      "path": "review/DECISION.json",
+      "status": "PROMOTE_SCOPED",
+      "sha256": "43a7111f8324437942f773dc57e12fad219d8c7183b160d09af3a1dbdce8f24d",
+      "global_receiver_adoption": false
+    }
+  },
+  "consumer_budget": {
+    "observable": null,
+    "absolute_tolerance": null,
+    "relative_tolerance": null,
+    "reference_denominator": null,
+    "binding_scope": "Executed BASS_CR fixed-bath electron source; REI selected CR-on history remains unprovided"
+  },
+  "consumer_status_unchanged": "SCOPED_SNAPSHOT_IDENTIFIED_FULL_HISTORY_BINDING_OPEN",
+  "preserved_scientific_gates": {
+    "F_operator_binding": "HOLD",
+    "G_frontier": "BLOCKED",
+    "PHYS02_DELAY": "OPEN",
+    "production_history": "HOLD",
+    "atomic_G02": "UNRESOLVED",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO"
+  },
+  "current_execution_evidence": {
+    "kernel": "results/KERNEL_ADAPTER_CHECKS.json",
+    "sharing": "results/SHARING_CAPACITY_CHECKS.json",
+    "cutoff": "results/THERMAL_CUTOFF_CHECKS.json",
+    "wolfram_xact": "results/SYMBOLIC_CHECKS.json",
+    "new_full_generator_builds": 0,
+    "new_physical_ODE_integrations": 0,
+    "NCP_jobs": 0,
+    "prior_scientific_checks_rerun": 0
+  },
+  "scheduling_change": {
+    "previous": [
+      "CR_THEORY_KERNEL_EVENT_ADAPTER",
+      "CR_THEORY_THERMAL_CUTOFF_FEEDBACK"
+    ],
+    "current": "Complete both selected constructive theory nodes; advance coupled atomic-branch solve and actual-energy geometry rebind.",
+    "application": "The selected-application source/scenario and observable-budget dependencies retain their prior state.",
+    "preserved_scientific_gates": true
+  },
+  "acceptance_update": {
+    "path": "review/DECISION.json",
+    "decision": "PROMOTE_SCOPED",
+    "sha256": "34764f655e13537e074a1ca725ff3bc8f674b38200dc420da4e58ff3320017ff"
+  },
+  "new_NCP_dispatch": false,
+  "date_kst": "2026-10-13",
+  "created_utc": "2026-10-12T23:18:48.950429+00:00",
+  "calendar_timezone": "Asia/Seoul",
+  "added_node_ids": [
+    "CR_THEORY_COUPLED_BRANCH_SOLVER",
+    "CR_THEORY_GEOMETRY_KERNEL_REBIND"
+  ],
+  "parallel_next_theoretical_task": "CR_THEORY_GEOMETRY_KERNEL_REBIND",
+  "historical_progress_metadata": {
+    "standalone_theory_authorization": {
+      "source": "Current explicit user theory-loop request on 2026-10-12",
+      "activation_matches_prior_node": "M4_TARGETED_CR_EXTENSION",
+      "scenario_or_observable_budget_dependency": false,
+      "meaning": "The user selected a standalone theory question; scenario/source/budget inputs remain dependencies of actual downstream application."
+    },
+    "scheduling_change": {
+      "previous": "Prior next_here listed selected scenario, thermal accounting and observable budget for application.",
+      "basis": "Current explicit standalone theory-loop request plus the prior M4 independent-question activation.",
+      "current": "Run general open derivations and receiver algebra now; retain the original selected-application node states.",
+      "changed_dependencies": "Only new theory nodes and their next theoretical task; prior local/global node objects are unchanged."
+    },
+    "acceptance_update": {
+      "path": "review/DECISION.json",
+      "decision": "PROMOTE_SCOPED",
+      "sha256": "dc1b9219bafea096f5e83bcb240622c3e031de87035b3ed80dcba85a0bc732c5",
+      "accepted_utc": "2026-10-12T15:22:53.658982+00:00"
+    },
+    "current_execution_evidence": {
+      "path": "results/THEORY_CHECKS.json",
+      "sha256": "ce4d0fc25fbe89449ac5efe2ba61f01daf8a07afb1a18efb3eb676bbd832c13f",
+      "passes": 15,
+      "total": 15,
+      "method": "exact rational analytic fixtures; source-pinned stopping coefficients; one noncommuting 8-state dimensionless IVP",
+      "elapsed_seconds": 0.016807850988698192,
+      "code_sha256": {
+        "checks/run_theory_checks.py": "0be5b9f62a6eee82aaa7ffeb12fa77ff9ae275623938f778cd48695d799dfd2b",
+        "receiver_interface.py": "4c8a23e81c2babe56765b4ffc97a1b2771966b01f99fba6bc84a71a62848c868",
+        "inputs/prior_code/causal_cascade.py": "d87a9cc122125b2d37b47f261f57eab698baa59e07a6b21723860f39313c7b72"
+      },
+      "new_full_generator_builds": 0,
+      "remote_science_jobs": 0,
+      "candidate_author_symbolic_checks": {
+        "passes": 21,
+        "total": 21,
+        "path": "results/CLOCK_SYMBOLIC_CHECKS.json",
+        "reviewer_reruns": 0
+      }
+    },
+    "reference_resolution": {
+      "new_nodes": "Paths relative to this theory unit.",
+      "inherited_nodes": {
+        "node_ids": [
+          "M0_CACHED_ONSET_RESPONSE",
+          "M0_QUADRATIC_RESPONSE",
+          "CR_RUX00_AUTHORITY",
+          "M1_CONSUMER_SCOPE_INTAKE",
+          "CR_RUX03_OWNER_REUSE",
+          "M2_RESPONSE_ERROR_MAP",
+          "M3_LOCAL_CR_OFF_CONTRACT",
+          "CR_PROCESS_RELEVANCE",
+          "M1_ELECTRON_SOURCE_BINDING",
+          "M1_CONSUMER_ERROR_BUDGET",
+          "M2_PHYSICAL_CLOSURE_DECISION",
+          "M3_SELECTED_HISTORY_OFF_RECEIPT",
+          "M4_TARGETED_CR_EXTENSION",
+          "RUX13_MATCHED_HISTORY_EFFECT",
+          "H_NCP_FULL9600",
+          "H_EXISTING_RUN_COLLECTION",
+          "F_BINDING_AND_G_FRONTIER",
+          "CR_PAIRED_ENERGY_ION_CUTOFF_LEDGER",
+          "CR_SCENARIO_SOURCE_BINDING",
+          "CR_THERMAL_RELEVANCE_CUTOFF_CLOSURE",
+          "CR_THERMAL_NONTHERMAL_ACCOUNTING",
+          "M1_REI_SOURCE_ADOPTION"
+        ],
+        "relative_path_base": "https://github.com/cosmosapjw-quantum/bass_cr/blob/5fc11143679fe1950133b1e268ac3dd248f6429b/research/cr_source_binding_20261012/",
+        "source_unit": "CR-RUX-M1B-SOURCE-BINDING-20261012",
+        "local_selected_inputs": "inputs/prior/",
+        "meaning": "Inherited node paths retain their original unit-relative meaning; the original objects are unedited."
+      }
+    },
+    "immediate_prior_acceptance": {
+      "path": "review/DECISION.json",
+      "decision": "PROMOTE_SCOPED",
+      "status": "PASS",
+      "sha256": "cc21267a75ee22e8d777d1cdbb89efa89ffdcd57f1d35fb56429fd9e4dc0e142",
+      "accepted_utc": "2026-10-12T21:21:17.041223+00:00"
+    }
+  },
+  "completed_selected_nodes": [
+    "CR_THEORY_KERNEL_EVENT_ADAPTER",
+    "CR_THEORY_THERMAL_CUTOFF_FEEDBACK"
+  ],
+  "selected_theory_node_ids": [
+    "CR_THEORY_KERNEL_EVENT_ADAPTER",
+    "CR_THEORY_THERMAL_CUTOFF_FEEDBACK"
+  ],
+  "historical_prior_preservation": {
+    "historical_prior_preservation": {
+      "prior_local_dag": {
+        "path": "inputs/prior/NEXT_DAG.json",
+        "sha256": "dee41de2a03685ec46c28a6cebee01ed5e839db6d98eb9b871a5f3e12176cacc",
+        "bytes": 20999,
+        "nodes": 22,
+        "node_ids": [
+          "M0_CACHED_ONSET_RESPONSE",
+          "M0_QUADRATIC_RESPONSE",
+          "CR_RUX00_AUTHORITY",
+          "M1_CONSUMER_SCOPE_INTAKE",
+          "CR_RUX03_OWNER_REUSE",
+          "M2_RESPONSE_ERROR_MAP",
+          "M3_LOCAL_CR_OFF_CONTRACT",
+          "CR_PROCESS_RELEVANCE",
+          "M1_ELECTRON_SOURCE_BINDING",
+          "M1_CONSUMER_ERROR_BUDGET",
+          "M2_PHYSICAL_CLOSURE_DECISION",
+          "M3_SELECTED_HISTORY_OFF_RECEIPT",
+          "M4_TARGETED_CR_EXTENSION",
+          "RUX13_MATCHED_HISTORY_EFFECT",
+          "H_NCP_FULL9600",
+          "H_EXISTING_RUN_COLLECTION",
+          "F_BINDING_AND_G_FRONTIER",
+          "CR_PAIRED_ENERGY_ION_CUTOFF_LEDGER",
+          "CR_SCENARIO_SOURCE_BINDING",
+          "CR_THERMAL_RELEVANCE_CUTOFF_CLOSURE",
+          "CR_THERMAL_NONTHERMAL_ACCOUNTING",
+          "M1_REI_SOURCE_ADOPTION"
+        ],
+        "canonical_node_objects_sha256": "9774d03ca7d41912e89b7632b7662a12ebc2307d42fdbbe473cf264b4649d85c"
+      },
+      "prior_global_overlay": {
+        "source_archive_member": "cr_source_binding_20261012/REI_ATOMIC_REUSE_DAG_CR_OVERLAY_20261012.json",
+        "source_url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/5fc11143679fe1950133b1e268ac3dd248f6429b/research/cr_source_binding_20261012/REI_ATOMIC_REUSE_DAG_CR_OVERLAY_20261012.json",
+        "sha256": "f570176f7895790b58bb1a9b1c0fa128c6d255c52c596ac02bed1101b17871c6",
+        "bytes": 32977,
+        "nodes": 19,
+        "canonical_node_objects_sha256": "1142e786f2e01c9bc454a10d36c144ea326f486a27ea0c518bc424ca2cc21fc8",
+        "embedded_snapshot_field": "global_overlay_snapshot"
+      },
+      "source_archive": {
+        "sha256": "632995c3926a738878e4268ec1993817e40062fe84161d39200e21155957f301",
+        "bytes": 29117171,
+        "members": 178,
+        "recovery_record": "inputs/RECOVERY.json"
+      },
+      "prior_local_node_objects_preserved_exactly": true,
+      "global_overlay_object_preserved_exactly": true,
+      "global_nodes_preserved": 19,
+      "source_identity": "Read actual recovered JSON and previous science-publication receipt; archived hashes and original node objects retained."
+    },
+    "prior_local_dag": {
+      "path": "inputs/prior/NEXT_DAG.json",
+      "bytes": 74579,
+      "sha256": "1aff8d42765fceb3e214f28b12a1596f7546d8583da1840b455313b0d3780af6",
+      "source_science_commit": "2495662e86a69ed822ec192685c3e9e0e68e1255",
+      "source_branch_head": "3bac8c6d00da0ae2eabc3cb7ba16acd64ec1c54e",
+      "nodes": 30,
+      "edges": 53,
+      "canonical_node_objects_sha256": "82079b7e223979dab66ad15559289c6ae118841c620e56efa736babb5babb314"
+    },
+    "prior_node_count": 30,
+    "unchanged_prior_node_count": 29,
+    "unchanged_prior_node_ids": [
+      "M0_CACHED_ONSET_RESPONSE",
+      "M0_QUADRATIC_RESPONSE",
+      "CR_RUX00_AUTHORITY",
+      "M1_CONSUMER_SCOPE_INTAKE",
+      "CR_RUX03_OWNER_REUSE",
+      "M2_RESPONSE_ERROR_MAP",
+      "M3_LOCAL_CR_OFF_CONTRACT",
+      "CR_PROCESS_RELEVANCE",
+      "M1_ELECTRON_SOURCE_BINDING",
+      "M1_CONSUMER_ERROR_BUDGET",
+      "M2_PHYSICAL_CLOSURE_DECISION",
+      "M3_SELECTED_HISTORY_OFF_RECEIPT",
+      "M4_TARGETED_CR_EXTENSION",
+      "RUX13_MATCHED_HISTORY_EFFECT",
+      "H_NCP_FULL9600",
+      "H_EXISTING_RUN_COLLECTION",
+      "F_BINDING_AND_G_FRONTIER",
+      "CR_PAIRED_ENERGY_ION_CUTOFF_LEDGER",
+      "CR_SCENARIO_SOURCE_BINDING",
+      "CR_THERMAL_RELEVANCE_CUTOFF_CLOSURE",
+      "CR_THERMAL_NONTHERMAL_ACCOUNTING",
+      "M1_REI_SOURCE_ADOPTION",
+      "CR_THEORY_MOVING_CUTOFF",
+      "CR_THEORY_THERMAL_EXCESS",
+      "CR_THEORY_COLLISION_CLOCK",
+      "CR_THEORY_RESIDUAL_TEMPERATURE_CERTIFICATE",
+      "CR_THEORY_RECEIVER_INTERFACE",
+      "CR_THEORY_TARGETED_VERIFICATION",
+      "CR_THEORY_INTEGRATED_ACCEPTANCE"
+    ],
+    "updated_prior_node_ids": [
+      "CR_THEORY_SELF_CONSISTENT_FEEDBACK"
+    ],
+    "prior_selected_ready_node": {
+      "source_path": "inputs/prior/NEXT_DAG.json",
+      "canonical_node_sha256": "88c388ba68bb9ae860334d0b1eb8e347aeb82b270c5fc93acf992263e367313c",
+      "object": {
+        "id": "CR_THEORY_SELF_CONSISTENT_FEEDBACK",
+        "status": "READY",
+        "depends_on": [
+          "CR_THEORY_INTEGRATED_ACCEPTANCE"
+        ],
+        "owner": "bass_cr next theory loop",
+        "work": "Construct a positive conservative step with self-consistent T/composition feedback using fixed event matrices and variable nonnegative rate coefficients",
+        "outputs": [
+          "future/SELF_CONSISTENT_FEEDBACK_DERIVATION_KO.md",
+          "future/FEEDBACK_STEP_CONTRACT.json"
+        ],
+        "first_construction": "Choose coupled state (thermal count/energy, H/He populations, active energy vector), then derive one frozen-coefficient positive conservative step and its EOS update",
+        "proof_obligations": [
+          "Represent G(T,composition,density)=sum_k r_k D_k on a declared domain with nonnegative rates and conserved event weights",
+          "Use the same event increments for active energy, atomic energy, thermal energy and particle counts",
+          "Close coefficient/EOS feedback and prove a local step condition preserving positive counts and energy",
+          "Use coefficient residual and thermal EOS bounds to select a step or iteration tolerance"
+        ],
+        "application_relation": "General theory and analytic discriminants proceed from stated assumptions; actual scenario coupling uses the preserved CR_SCENARIO_SOURCE_BINDING and M1_REI_SOURCE_ADOPTION nodes",
+        "heavy_execution_planned": false
+      }
+    },
+    "prior_edges_preserved": 53,
+    "global_overlay_object_preserved_exactly": true,
+    "global_nodes_preserved": 19,
+    "global_overlay_canonical_sha256": "8ef1e2b4218aac99cb98440b8e8a46fe82677e5d578d06f0bca20c547ce714c3",
+    "source_identity": "Current prior-copy bytes match inputs/PRIOR_REUSE.json; structural comparison retains 29 unedited node objects, 53 edges and the entire global overlay.",
+    "structural_check": "results/DAG_CHECKS.json"
+  }
+}

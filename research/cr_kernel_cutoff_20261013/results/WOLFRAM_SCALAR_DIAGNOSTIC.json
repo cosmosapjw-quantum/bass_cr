@@ -1,0 +1,12 @@
+{
+  "code": "ClearAll[tt,dd,yy];\nphi=(1+dd+2tt^2)/(3(1+tt)/2);\nqp=824012/100000-(104769/10000)yy+(396496/100000)yy^2-(445976/10000000)yy^3;\ndp=Together[D[phi,tt]]; dq=Expand[D[qp,yy]];\n<|\"DerivativeOutsideQuantifier\"->dp,\"HeliumDerivativeOutsideQuantifier\"->dq,\n\"InlineDerivativeQuantifier\"->Resolve[ForAll[{tt,dd},3/4<=tt<=5/4&&-5/32<=dd<=3/32,0<D[phi,tt]<=233/243],Reals],\n\"PrecomputedDerivativeQuantifier\"->Resolve[ForAll[{tt,dd},3/4<=tt<=5/4&&-5/32<=dd<=3/32,0<dp<=233/243],Reals],\n\"LiteralDerivativeQuantifier\"->Resolve[ForAll[{tt,dd},3/4<=tt<=5/4&&-5/32<=dd<=3/32,0<4/3-2(3+dd)/(3(1+tt)^2)<=233/243],Reals],\n\"HeliumPrecomputed\"->Resolve[ForAll[{yy},0<=yy<=1,dq<0&&qp>=1052239/625000],Reals],\n\"DirectEndpoints\"->{(dp/.{tt->5/4,dd->-5/32}),qp/.yy->1,dq/.yy->1}|>",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Out[1]= <|\"DerivativeOutsideQuantifier\" -> (2*(-1 - dd + 4*tt + 2*tt^2))/(3*(1 + tt)^2), \"HeliumDerivativeOutsideQuantifier\" -> -104769/10000 + (24781*yy)/3125 - (167241*yy^2)/1250000, \"InlineDerivativeQuantifier\" -> False, \"PrecomputedDerivativeQuantifier\" -> True, \"LiteralDerivativeQuantifier\" -> True, \"HeliumPrecomputed\" -> True, \"DirectEndpoints\" -> {233/243, 1052239/625000, -1675483/625000}|>"
+      }
+    ],
+    "isError": false
+  }
+}
