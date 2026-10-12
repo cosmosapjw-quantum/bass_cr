@@ -1,0 +1,21 @@
+{
+  "schema": "independent-review-operations.v1",
+  "non_scientific_events": [
+    {
+      "action": "git status/diff probe",
+      "exit_code": 128,
+      "result": "Candidate is a file snapshot without .git; no mutations or science",
+      "resolution": "Review candidate paths and pinned originals; actual future Git tree belongs to publication receipt"
+    },
+    {
+      "action": "first review metadata assembly",
+      "exit_code": 1,
+      "error": "AssertionError at inline script line 57 before DECISION.json write",
+      "cause": "Unqualified README.md lookup compared harness member to bass_cr source metadata",
+      "resolution": "Restricted repository source metadata comparison to historical_bass_cr archive namespace; all actual H members and both archive hashes agree",
+      "candidate_writes": 0,
+      "numeric_reference_reruns": 0
+    }
+  ],
+  "scientific_effect": 0
+}

@@ -1,8 +1,13 @@
 # BASS cosmic-ray charge exchange
 
+## 현재 개발계획 — 2026-10-12
+
+[CR 과학 산출물 우선 계획](research/cr_plan_reset_20261012/PLAN_AND_RESULTS_KO.md), [현재 DAG](research/cr_plan_reset_20261012/NEXT_DAG.json), [현재 handoff](research/cr_plan_reset_20261012/HANDOFF.json)를 먼저 읽는다. 아직 시작하지 않은 PHYS02H 전체9600 NCP qualification의 자동 실행은 보류됐다. 기존 cached response 해석과 관측량별 오차·domain을 우선하며, CR-off 기준 응용은 full CR 원자 연구의 완료를 기다리지 않는다. 이미 진행·완료한 NCP run은 원래 예산과 결과를 수집한다. 이 변경은 frozen H evidence/contract와 inherited physical gates를 바꾸지 않는다.
+
+
 H+ + H(1s) charge transfer의 단일 전자, 비상대론적, fixed-target/straight-line point-Coulomb 모형을 다루는 연구 저장소다. Nichols 비공개 코드나 raw data의 byte reproduction을 주장하지 않는다.
 
-## 현재 통합: foundation rebuild + local test-only
+## 역사적 통합: foundation rebuild + local test-only
 
 `cr/r3m29-spatial-discretization-discriminator-20260924`의 `8e1d49e5ef6af70bb47d9238e64cda68ea0f5c4f`에서 CP3 연구 구성품과 bounded two-center S/H/D 모듈을 독립 sidecar로 통합했다. 기존 `cr_repro`, configs, R3M10-29 결과와 numerical source digest는 변경하지 않았다.
 

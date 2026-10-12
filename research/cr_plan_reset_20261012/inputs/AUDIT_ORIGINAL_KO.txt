@@ -1,0 +1,450 @@
+## 1. 총평: 현재 `rei_bianchi`에는 개발 전략상의 구조적 문제가 있다
+
+내 판단은 `rei_bianchi`의 개발 지연이 주로 물리학 자체의 난도 때문이 아니라, 목표 설정·의존성 설계·검증 정책에서 비롯된다는 것이야. 특히 독립적으로 수행할 수 있는 연구들을 하나의 거대한 통합 시스템의 선행조건으로 묶으면서, 실제 scientific output보다 통합 검증과 인프라 구축에 더 많은 자원을 소비하고 있어.
+
+다만 CAMB/CLASS와의 비교에는 중요한 차이가 있어. 이들 solver는 재이온화의 미시적 물리를 매번 처음부터 푸는 것이 아니라, 검증된 근사나 주어진 이온화 이력을 이용한다. 반면 현재 `rei_bianchi`는 비등방 배경, 광자 수송, H/He 원자물리, 복사 피드백, 보존법칙 검증을 동시에 완성하려는 방향으로 확장되어 왔어.
+
+더 중요한 것은, 우리가 실제로 필요한 것보다 훨씬 강한 조건을 첫 번째 연구 성과의 합격 기준으로 삼았다는 점이야.
+
+최근 GitHub 기록을 확인하면서 세 가지 문제를 발견했어.
+
+- 이미 2026년 10월 10일 PR #104에서 \\(z=20\to4\\)의 축약 재이온화 이력, 수치 수렴 검사, scientific plot을 확보했지만, 전체 원자물리 및 수송 모델이 아니라는 이유로 이것을 연구의 주력 경로로 충분히 활용하지 않았어.
+- PR #110에서는 24-field native H/He evolution과 정밀한 photon/source 적분으로 범위가 확대되었고, 좁은 스펙트럼 오차 기준과 photon-number 보존 기준을 통과시키기 위한 추가 개발이 계속 발생했어.
+- BASS, CR, RCT, HH 등의 별도 원자물리 연구를 지원 도구로 두기보다 `rei_bianchi`의 물리적 완성을 위한 필수 선행단계처럼 취급하면서, 한 프로젝트의 미완료가 다른 프로젝트의 진전을 막는 구조가 형성됐어.
+
+이것은 단순한 최적화 문제가 아니야. 연구 목표의 위계가 뒤집힌 문제에 가깝다고 봐.
+
+아래에서는 어떤 복잡성은 반드시 유지해야 하고, 어떤 부분은 과감하게 개발의 중심에서 내려야 하는지 구분하겠어.
+
+## 2. CAMB/CLASS/FlexRT가 빠른 진짜 이유
+
+세 코드는 서로 다른 수준에서 물리적 복잡성을 줄이고 있어.
+
+| 구분      | CAMB / CLASS               | FlexRT                   | 현재 `rei_bianchi` native                         |
+| ------- | -------------------------- | ------------------------ | ----------------------------------------------- |
+| 주된 계산   | CMB Boltzmann 진화           | IGM 복사수송                 | Bianchi 배경 + 광자·가스 결합                           |
+| 재이온화 이력 | 주로 prescribed \\(x_e(z)\\) | 광원과 수송에 따른 계산            | 광원·수송·이온화·열진화 결합                                |
+| 원자물리    | 재결합은 유효모형, 재이온화는 주로 매개변수화  | 효과적인 흡수율·subgrid closure | 다양한 native atomic provider                      |
+| 미해상도 물리 | 매개변수로 흡수                   | 사전 보정된 subgrid model     | 직접 계산 또는 정밀 provider 연결 시도                      |
+| 정확도 목표  | 최종 CMB 관측량                 | 재이온화 형태·통계량              | 국소 rate, photon moment, Jacobian, 보존량, 전구간 이력 등 |
+| 강점      | 문제에 필요한 최소 물리              | 조절 가능한 fidelity          | 원리적으로 높은 확장성                                    |
+| 구조적 약점  | 재이온화 예측력 제한                | subgrid 모형 의존성           | 과도한 결합 및 계산 비용                                  |
+
+### CAMB/CLASS는 재이온화를 풀지 않아도 CMB를 계산할 수 있다
+
+CAMB의 기본 재이온화 모델은
+
+\\[ x_e(z)=x\_{\rm residual} +\frac{x\_{\rm rei}-x\_{\rm residual}}{2} \left[1+\tanh\left( \frac{(1+z\_{\rm rei})^{3/2}-(1+z)^{3/2}} {\Delta_y}\right)\right] \\]
+
+형식에 helium 재이온화 항을 추가해 사용해.
+
+즉 \\(\Gamma\_{\rm HI}\\), 광전자 에너지 분포, 재결합 광자의 재흡수를 계산하지 않고도 \\(\dot\kappa= a n_e\sigma_T\\)를 얻어서 Boltzmann hierarchy에 투입할 수 있어.
+
+CLASS도 기본적으로 `reio_camb`를 사용하고, `reio_inter` 등의 방법으로 외부에서 계산한 \\(x_e(z)\\)를 입력할 수 있어. RECFAST/HyRec은 주로 초기 우주의 recombination을 위한 것이지, 재이온화 전 과정의 완전한 원자 계산을 매번 수행하기 위한 장치가 아니야.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://github.com\&sz=32)
+
+GitHub
+
++2
+
+
+
+### FlexRT는 필요한 복잡성을 계산 밖으로 옮긴다
+
+FlexRT는 CAMB와 달리 실제 복사수송을 계산하므로 비교 대상에 더 가까워.
+
+하지만 FlexRT가 취하는 중요한 전략은 미해상도 IGM 물리를 대규모 simulation 안에서 반복해서 해결하지 않는 것이야.
+
+예를 들어 ionized IGM의 opacity를 적절한 mean-free-path closure로 표현하고, ray splitting/merging을 이용해서 각도 자유도를 제어해. 일부 연구에서는 12개 방향과 소수의 에너지 bin을 선택하고, 추가 정확도가 필요한 물리만 더 높은 해상도로 처리해.
+
+이런 근사는 정교한 고해상도 계산으로 보정되기도 하지만, 그 계산을 매번 다시 수행할 필요는 없어. FlexRT 논문은 이러한 선택으로 특정 구성에서 계산 비용을 수 자릿수 줄일 수 있다고 설명해.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://arxiv.org\&sz=32)
+
+arxiv.org
+
++2
+
+
+
+물론 FlexRT가 절대적으로 가벼운 코드는 아니야. \\(200^3\\) 규모의 RT grid와 외부 cosmological density field를 사용하는 연구도 있어. 우리가 주목해야 하는 것은 절대 실행시간보다는 비싼 미시물리를 매 simulation step의 의무로 만들지 않는 설계야.
+
+이 점이 현재 프로젝트와 가장 큰 차이야.
+
+## 3. 실제 `rei_bianchi` 개발 로그가 보여주는 병목
+
+근거: 2026년 10월 10\~12일 GitHub PR #104, #110, #112, #113 및 source-pinned 연구 보고서. 새 native 계산을 수행한 판정이 아니라 저장소 기록에 대한 감사.
+
+축약된 재이온화 모델의 실행
+
+# 3.21초
+
+14개 이력 × 16,384 구간의 순수 적분시간 합계. PR #104
+
+최신 native 구간의 시도당 시간
+
+# 19.78초
+
+PR #110의 C12 저장 진단에서 측정한 평균, 최근 구간 한정
+
+축약 모델의 계산 범위
+
+## \\(z=20\to4\\)
+
+전구간 적분 및 독립 DOP853 비교 완료
+
+C12R14 native 상태
+
+## 129개 중 1개
+
+목표 출력 epoch 중 도달한 수, \\(z\simeq15.83\\)
+
+서로 다른 물리 모형이므로 위 시간을 직접적인 성능 배율로 해석해서는 안 돼. 그러나 연구 성과를 얻기 위한 비용이 어디에서 폭증하고 있는지는 보여줘.
+
+### 병목 A. 미시적 정밀도를 과학적 목적보다 앞세운다
+
+PR #110에서는 source quadrature의 0.1% 수렴 조건, photon-number residual \\(10^{-9}\\), 국소 positivity, native Jacobian, 시간 적분의 consistency 등을 검사해 왔어.
+
+검증 그 자체가 잘못된 것은 아니야. 실제로 초기에 200 eV로 절단한 스펙트럼이 He II heating의 상당 부분을 누락한다는 사실을 발견한 것은 중요한 성과였어. 그런 오차는 보존해야 할 물리적 정보를 잃게 하므로 수정이 필요해.
+
+문제는 검증의 정밀도를 결정하는 기준이 최종 물리량이 아니라 개별 계산 요소가 되었다는 점이야.
+
+예를 들어 어떤 원자 rate의 상대오차를 \\(10^{-4}\\)까지 낮추더라도, 광원 escape fraction과 clumping factor의 불확실성이 훨씬 크다면 그것이 최종 \\(Q\_{\rm HII}(z)\\)의 물리적 신뢰도를 실질적으로 개선한다고 보장할 수 없어.
+
+PR #104의 결과만 보더라도,
+
+| 모형 변화                        | \\(\Delta\tau\_{20\to4}\\) |
+| ---------------------------- | -------------------------- |
+| 초기 shear \\(s/H=0.1\\)       | \\(-2.61\times10^{-5}\\)   |
+| \\(f\_{\rm esc}:0.2\to0.1\\) | \\(-1.272\times10^{-2}\\)  |
+| \\(f\_{\rm esc}:0.2\to0.3\\) | \\(+8.69\times10^{-3}\\)   |
+| Clumping \\(C:3\to5\\)       | \\(-3.95\times10^{-3}\\)   |
+| 온도 \\(T:20000\to10000\\) K   | \\(-4.66\times10^{-3}\\)   |
+
+여기서 shear 효과는 선택된 astrophysical parameter 변화보다 100배 이상 작아.
+
+따라서 현재의 우선순위는 원자율을 계속 정밀화하는 것보다 shear response가 천체물리적 불확실성 속에서 식별 가능한지 확인하는 것이어야 해.
+
+### 병목 B. 시간 적분의 stiffness 문제를 원자물리 정확도 문제와 함께 다룬다
+
+C12 기록은 더 직접적인 진단을 제공해.
+
+후반부에서 시간 간격은 약 15.36배 감소했으며, step controller의 주요 limiter는 `GammaHI_s`였어. 마지막 full-step과 two-half-step 차이는 주로 13.6\~14.65 eV 부근의 HI threshold cell에서 발생했어.
+
+저장된 기록에서 이 cell 하나가 \\(\Gamma\_{\rm HI}\\) 차이의 약 99.91%를 설명해.
+
+또한 해당 구간에서는 \\(h\kappa\\)가 약 5\~8이었고, source injection과 attenuation을 분할하는 방식에서 stiff order reduction이 발생했을 가능성이 제기되어 있어.
+
+이 경우 중요한 질문은 더 높은 에너지 해상도가 필요한지가 아니라 다음이야.
+
+\\[ \boxed{ \text{Stiff absorption을 왜 매번 명시적으로 시간 분해해야 하는가?} } \\]
+
+선택한 reduced closure에서 계수가 일정한 한 구간을 생각하면,
+
+\\[ \frac{dN\_\gamma}{dt}=S\_\gamma-\kappa N\_\gamma \\]
+
+의 정확한 국소 적분은
+
+\\[ N\_\gamma(t+h) =e^{-\kappa h}N\_\gamma(t) +\frac{S\_\gamma}{\kappa}(1-e^{-\kappa h}) \\]
+
+이야.
+
+이 방식은 \\(h\kappa\gg1\\)에서도 양성을 보존하고, 단순한 명시적 step restriction을 피할 수 있어. 단, \\(\kappa\\)가 가스 상태와 강하게 결합하거나 source가 시간에 따라 변하면 frozen-coefficient 오차를 별도 평가해야 하므로 전체 native 문제의 완전한 해법은 아니야.
+
+이것이 보여주는 핵심은 물리 모델을 더 크게 만드는 것과 수치 알고리즘을 개선하는 것은 별개의 작업이라는 점이야.
+
+현재는 두 문제가 너무 자주 하나의 개발 루프로 합쳐져 있어.
+
+### 병목 C. 과학 연구보다 검증·전달 인프라가 빠르게 증식하고 있다
+
+PR #110은 누적된 stacked 변경에서 1,500개 이상의 파일과 대량의 추가 행을 기록하고 있어. 이 수치는 소스 코드뿐 아니라 연구 증거, checkpoints, 보고서 등을 포함하므로 코드 자체가 그만큼 비대해졌다는 뜻은 아니야.
+
+하지만 하나의 과학적 목표를 위해 상당한 관리 비용이 발생한다는 것은 분명해.
+
+현재 개발 구조에는 다음 순환이 나타나.
+
+새 원자물리·수치 문제 발견
+
+새 연구 lane, contract, DAG, PR 생성
+
+국소 검증, 독립 리뷰, durable checkpoint, 이중백업
+
+실제 native 통합에서 새 interface·accuracy blocker 발생
+
+다음 연구 lane으로 반복
+
+각 단계는 개별적으로는 합리적이야. 그러나 전체 과정에서는 검증을 위한 증거 생산이 새로운 계산과 과학적 발견보다 더 높은 우선순위를 차지하는 현상이 생겼어.
+
+기존의 provenance, immutable evidence, 실패 보존 정책을 폐기하자는 이야기는 아니야. 문제는 모든 작은 연구 단위에 동일한 수준의 생산·승격·전달 절차를 적용하는 데 있어.
+
+특히 로컬 실행기, GitHub, 두 개의 백업 provider, 여러 관련 repo 사이의 자료 전파가 매번 중요한 경로에 놓이면 과학적 계산과 무관한 지연이 누적돼.
+
+이 부분은 이전 연구 루프들을 설계하면서 나 역시 충분히 엄격하게 통제하지 못했어. 국소 gate를 추가하는 것과 전체 연구를 실제로 전진시키는 것을 구분했어야 했는데, 전자를 반복적으로 강화한 측면이 있어.
+
+## 4. 더 근본적인 문제: 지금 계산하는 Bianchi 효과가 우리가 원했던 Bianchi 물리인가?
+
+이 부분은 실행시간 문제보다 중요하다고 생각해.
+
+현재 PR #104에서 얻은 재이온화 변화는 물리적으로 의미 있는 축약 모델의 결과지만, 비등방 광자 수송이 재이온화에 미치는 영향을 계산한 결과는 아니야.
+
+오히려 현 단계에서 얻은 효과의 상당 부분은 평균 팽창률 변화로 설명할 수 있어.
+
+### 4.1 평균 팽창률만 사용하면 Bianchi-I shear는 stiff fluid와 퇴화한다
+
+현재 사용한 LRS Bianchi-I 배경은
+
+\\[ a\_\perp=ae^{-b},\qquad a\_\parallel=ae^{2b}, \qquad s=\dot b \\]
+
+이고,
+
+\\[ H^2=H\_{\rm fid}^2 \left(\Omega_m a^{-3}+\Omega\_\Lambda\right) +s_0^2a^{-6}. \\]
+
+마지막 항은 FLRW에서 상태방정식 \\(w=1\\)인 유효 stiff fluid를 도입했을 때의 배경 팽창률과 동일하게 표현돼.
+
+\\[ \rho\_{\sigma,\mathrm{eff}} =\frac{3s_0^2}{8\pi G}a^{-6}. \\]
+
+이제 scalar filling-factor equation이
+
+\\[ \frac{dQ}{d\ln a} =\frac{S(a)-R(a)Q}{H(a)} \\]
+
+이고 Thomson optical depth가
+
+\\[ \frac{d\tau}{d\ln a} =\frac{c\sigma_Tn_e(a)}{H(a)} \\]
+
+라면, 같은 \\(H(a)\\), \\(S(a)\\), \\(R(a)\\), 초기조건을 가진 두 배경은 동일한 \\(Q(a)\\)와 \\(\tau(a)\\)를 생성해.
+
+이것은 ODE 해의 유일성에서 바로 따라와.
+
+따라서 현재의 isotropic, mean-volume scalar model만으로는 Bianchi shear와 그에 상응하는 FLRW 유효 stiff component를 구분할 수 없어. 이는 해당 축약 모형에 대한 직접 유도이고, Bianchi 물리 전체에 대한 no-go 정리는 아니야.
+
+현재 PR #104에서 \\(s/H\\)의 부호를 반전해도 scalar 결과가 같다는 검증은 이 해석과 일치해.
+
+### 4.2 그렇다면 진짜 Bianchi 물리는 어디에 있는가?
+
+광자의 전파 방향과 스펙트럼 진화에 있어.
+
+Bianchi-I에서 광자 에너지는, 병진 Killing 대칭에 의해 보존되는 공변 공간운동량 \\(k_i\\)를 사용하면
+
+\\[ E(t)=c\sqrt{\sum\_{i=1}^{3}\frac{k_i^2}{a_i(t)^2}} \\]
+
+로 주어져. 같은 순간에도 방향에 따라 redshift가 달라질 수 있다는 뜻이야.
+
+따라서 비등방 연구에 본질적인 대상은 단지 \\(Q\_{\rm HII}(z)\\)가 아니라
+
+\\[ f\_\gamma(t,E,\mathbf n),\qquad \Gamma\_{\rm HI}(t,\mathbf n),\qquad J_E(t,\mathbf n) \\]
+
+같은 방향 의존적인 복사장 또는 그 각도 모멘트야.
+
+국소적으로 등방적인 가스의 총 이온화율은 이 복사장을 각도 적분한 결과로 얻어지고, 광자 수송에서 생긴 anisotropic multipoles는 별도로 분석할 수 있어.
+
+여기에 편광 Thomson scattering까지 결합하면 원래 연구했던 Bianchi Boltzmann transport와 직접 연결돼.
+
+즉 중요한 분기점은 다음이야.
+
+배경의 비등방성이 scalar reionization history를 바꾸는 효과와 비등방 광자 수송이 재이온화 및 CMB 관측량을 바꾸는 효과를 분리해야 해.
+
+전자는 이미 경량 계산으로 연구할 수 있어. 후자를 위해 필요한 것은 우선 각도별 Liouville/Thomson 계산이지, 반드시 정밀한 atomic cascade 전체가 아니야.
+
+## 5. 내가 권하는 개발 구조의 근본적인 변경
+
+현재 여러 연구 프로젝트를 하나의 full physical solver에 수렴시키려는 구조를 바꾸고, 서로 다른 수준의 물리 모형을 독립적인 scientific product로 인정하는 방향이 적절해.
+
+공통 Bianchi background / time map
+
+\\(H(t),\\,\sigma\_{ab}(t)\\), geodesic 및 tetrad
+
+Track A: 경량 재이온화
+
+Effective H/He chemistry
+
+Filling-factor history
+
+Astrophysical sensitivity
+
+Track B: Bianchi 수송
+
+Prescribed \\(x_e(t)\\)
+
+Directional Liouville
+
+Thomson polarization
+
+Track C: 최소 결합 Bianchi reionization
+
+A의 이온화 이력 + B의 복사 수송 + 선택적 피드백
+
+Track D: full native high-fidelity
+
+BASS · CR · RCT · HH · detailed H/He · 확장 피드백
+
+선택적 고정밀 비교 및 별도 연구 경로
+
+핵심은 Track D를 Track A, B, C의 완료 조건으로 두지 않는 것이야.
+
+### Track A: 이미 완성된 경량 모델을 살려야 한다
+
+[PR #104](https://github.com/cosmosapjw-quantum/rei_bianchi/pull/104)는 폐기할 예비 결과가 아니야. 재이온화의 평균 이력과 astrophysical parameter sensitivity를 계산하는 독립적인 실험 환경으로 유지할 가치가 있어.
+
+다만 이것의 한계도 분명해. He photon budget과 열진화가 없고, source model에 의존하며, 아직 직접적인 비등방 광자 수송 효과가 없어.
+
+따라서 여기서는 외부 관측에서 사용되는 재이온화 모델을 재현하고, shear에 의한 background-only response가 관측 가능한 크기인지 정량화하는 것을 목표로 삼으면 돼.
+
+### Track B: CAMB/CLASS 방식으로 Bianchi 수송을 먼저 완성한다
+
+가장 먼저 prescribed \\(x_e(z)\\)와 \\(T_b(z)\\)를 투입해서 기존 Bianchi Liouville 및 polarized Thomson kernel을 실행하는 것이 좋아.
+
+여기서 필요한 정확한 원자물리 입력은 주로 자유전자 밀도
+
+\\[ n_e(t)=n_H(t)x_e(t) \\]
+
+및 Thomson opacity야.
+
+복잡한 이온화 네트워크 없이도 편광, 방향별 redshift, optical depth의 정의, Bianchi shear와 관측 CMB multipoles의 결합을 계산할 수 있어.
+
+이렇게 하면 기존 Bianchi Boltzmann 연구에서 이미 얻은 성과를 가장 직접적으로 사용할 수 있어.
+
+### Track C: 최소한의 물리적 coupling부터 시작한다
+
+이 단계에서 비로소 복사장이 gas ionization과 상호작용하도록 만들면 돼.
+
+필요한 energy dependence는 처음부터 수백 개 bin을 보유하는 대신, 각 species에 대한 유효 photoionization 및 heating moment로 축약할 수 있어.
+
+\\[ \Gamma_s(t)= \int\_{E_s}^{\infty} \frac{4\pi J_E(t)}{E}\sigma_s(E)\\,dE, \\]
+
+\\[ \mathcal H_s(t)= \int\_{E_s}^{\infty} \frac{4\pi J_E(t)}{E} \sigma_s(E)(E-E_s)\\,dE. \\]
+
+여기서 \\(J_E\\)는 에너지당 평균 specific intensity이고, \\(\mathcal H_s\\)는 표적 입자 하나당 photoheating rate야.
+
+이를 미리 계산한 moment table 또는 적응형 다중군 모델로 전달하면 원자물리의 매 step 전체 재계산을 피할 수 있어.
+
+다만 이번 native 개발에서 확인한 He II heating 누락을 반복해서는 안 돼. 고에너지 tail을 축약하려면 단순히 자르는 게 아니라 해당 moment에 대한 오차한계를 확보해야 해.
+
+### Track D: full native 물리는 연구 가치를 잃지 않는다
+
+BASS의 재결합 광자, He cascade, RCT, CR, HH 네트워크 자체가 불필요하다는 뜻은 아니야.
+
+이들은 정확한 emission spectrum, nonlocal feedback, 고에너지 광전자, 정밀 energy conservation이 주요 연구 대상일 때 중요한 별도 과학 문제야.
+
+그러나 일반적인 재이온화 이력이나 첫 번째 Bianchi 수송 계산을 얻기 위해 이 전부를 선행 해결하는 것은 불합리해.
+
+## 6. 검증 정책도 바꿔야 한다
+
+나는 현재 기준을 단순히 완화하는 것에는 반대해. 대신 무엇을 검증하기 위한 오차인지 명확히 해야 해.
+
+현재는 코드의 모든 내부 구성요소가 가능한 한 정확해야 한다는 암묵적인 목표가 있어. 이것을 최종 관측량 중심의 error budget으로 바꿀 필요가 있어.
+
+| 검증 범주         | 새로운 원칙                                            |
+| ------------- | ------------------------------------------------- |
+| 기본 물리 항등식     | positivity, 핵수·광자수 bookkeeping, 단위·부호 검증은 계속 엄격하게 |
+| 수치적 정확도       | 계산 요소 전체의 일률적 수렴이 아니라 목표 관측량의 수렴                  |
+| 모델 정확도        | closure를 바꿨을 때 예측량이 얼마나 달라지는지 평가                  |
+| 고정밀 원자 계산     | 해당 원자 과정이 목표량에 유의미한 영향을 줄 때만                      |
+| 독립 검토         | 주요 scientific claim·알고리즘 교체·승격 시 수행               |
+| checkpoint/백업 | 긴 계산과 중요한 상태 전이 중심으로 사용                           |
+
+예를 들어 현재 \\(s/H=0.1\\)에서 얻은
+
+\\[ |\Delta\tau|\simeq2.6\times10^{-5} \\]
+
+를 10%의 수치적 상대정확도로 해석하고자 한다면 paired response의 수치오차는 대략 \\(2.6\times10^{-6}\\)보다 작아야 해.
+
+반면 동일한 실험에서 모든 photoionization energy bin의 상대오차를 무조건 \\(10^{-4}\\)까지 줄여야 하는 것은 아니야.
+
+이 두 기준은 서로 다른 수학적 조건이야.
+
+더구나 shear response를 FLRW 기준에 대한 perturbation으로 계산하면 \\(\tau\_{\rm Bianchi}\\)와 \\(\tau\_{\rm FLRW}\\)를 각각 매우 정밀하게 계산한 다음 차분하는 대신, response equation을 직접 적분할 수도 있어.
+
+실제로 현재 reduced model에서 유도한
+
+\\[ w'+B_Fw=-\frac12KQ_F' \\]
+
+가 이런 접근의 첫 사례야.
+
+여기서는 정확도 문제를 전체 상태공간에서 해결하는 것이 아니라, 연구 대상인 response에 투영해서 해결해. 이러한 goal-oriented 접근을 Bianchi angular kernel로 확장하는 것이 대규모 atomic 계산의 정밀도를 반복해서 올리는 것보다 생산적일 수 있어.
+
+물론 full native 검증이 나중에 필요해지는 경우에는 기존의 엄격한 기준을 유지하면 돼.
+
+## 7. 지금 당장 어떤 개발을 중단하고 무엇을 진행해야 할까?
+
+현재 repo에 실제로 존재하는 작업을 기준으로 우선순위를 다시 매기면 다음과 같아.
+
+| 기존 작업                              | 판정        | 조정 방향                            |
+| ---------------------------------- | --------- | -------------------------------- |
+| PR #104 reduced history            | 유지·우선 활용  | 기준 결과와 plot 확립, Bianchi 효과 해석    |
+| PR #110 full 24-field H/He history | 일시 동결 권고  | 현재 오류·checkpoint 보존, 핵심 경로에서는 제외 |
+| C12 HI threshold stiffness         | 고립된 수치 연구 | frozen-state 결함 분석까지만 우선 수행      |
+| BASS·CR·RCT·HH                     | 비차단 병렬 연구 | interface와 결과만 공급, 전체 완료 대기 금지   |
+| Bianchi Liouville/Thomson          | 최우선       | prescribed history 기반 실행부터       |
+| 복사수송–이온화 feedback                  | 다음 핵심 단계  | 유효 모멘트로 시작한 뒤 필요에 따라 확장          |
+| 대규모 NCP 원자물리 계산                    | 조건부       | 실제 sensitivity가 필요성을 입증했을 때만     |
+
+특히 [PR #110](https://github.com/cosmosapjw-quantum/rei_bianchi/pull/110)의 full history는 현재 별도 numerical research target으로 다루는 것이 더 합리적이야.
+
+해당 개발이 실패했다는 의미는 아니야. 실제로 복잡한 coupling과 수치 불안정성에 관한 유용한 결과들이 나왔어. 다만 그 결과가 바로 지금 필요한 연구 성과를 얻기 위한 필수 경로라는 판단은 재검토해야 해.
+
+64코어 NCP를 더 효율적으로 사용하는 방법도 단일 adaptive solver의 실행 시간을 무조건 줄이는 것보다, 독립적인 closure·emissivity·Bianchi response 실험을 병렬 처리하는 데 있을 가능성이 커. 단일 시간 적분의 stiffness는 코어를 많이 준다고 자동으로 해결되지 않으니까.
+
+## 8. 재설계 이후의 최초 마일스톤
+
+나는 다음 순서를 권해.
+
+1
+
+기존 결과의 과학적 기준선 고정
+
+PR #104의 FLRW 및 shear \\(Q(z),\tau(z)\\)를 재사용하고, 기존 CAMB/CLASS의 prescribed-history 결과와 비교할 기준 데이터를 정의해. 이미 통과한 수치 검증을 반복할 필요는 없어.
+
+2
+
+Bianchi 수송의 첫 독립적인 scientific plot
+
+고정 \\(x_e(z)\\) 아래에서 Bianchi-I photon spectrum 또는 low-\\(\ell\\) anisotropy를 계산해. 여기서는 원자물리 network와의 결합을 요구하지 않아.
+
+3
+
+최소 H/He chemistry coupling
+
+공개된 재결합·광이온화 근사와 spectrum moments를 사용해서 \\(Q,T_b,J_E\\)의 피드백을 추가해. 같은 배경에서 one-way와 two-way coupling을 비교해.
+
+4
+
+Bianchi 특유의 효과에 대한 식별성 판정
+
+방향별 스펙트럼 및 편광 신호가 단순한 평균 팽창률 수정, emissivity 변화, clumping 변화와 구분되는지 확인해. 구분되지 않으면 해당 observable의 novelty claim을 보류하고 다른 관측량으로 이동해.
+
+5
+
+Full native 재개 여부 결정
+
+가장 큰 모델 오차의 원인을 정량화하고, 정밀 원자물리가 그것을 실질적으로 줄일 수 있다는 근거가 확인된 경우에만 Track D를 다시 핵심 경로에 올려.
+
+여기서 성공 조건은 더 이상 모든 원자물리 provider가 `PASS`를 받는 것이 아니야.
+
+기존에 재현 가능한 물리 결과 하나, 그 결과에서 새롭게 확인한 Bianchi-specific effect 하나, 그리고 그 효과의 불확실성과 한계를 명확히 제시하는 것이 1차 목표여야 해.
+
+## 9. 최종 판단
+
+현재의 `rei_bianchi`는 두 개의 서로 다른 연구 프로그램이 뒤섞여 있어.
+
+하나는 Bianchi cosmology에서 재이온화와 광자 수송이 어떻게 달라지는지를 규명하는 우주론 연구야.
+
+다른 하나는 매우 정교하고 보존법칙을 엄격히 준수하는 범용 복사·원자물리 solver를 처음부터 구현하는 계산물리 연구야.
+
+둘 다 가치가 있지만, 첫 번째 연구가 두 번째 연구의 완성을 기다릴 이유는 없어.
+
+CAMB/CLASS와 FlexRT에서 배워야 할 것은 단순히 원자물리를 생략하라는 것이 아니야. 연구 목적에 필요한 정확도의 물리를 고르고, closure를 명시하며, 높은 fidelity가 필요한 경우에만 복잡성을 추가하라는 거야.
+
+현 상태에서 내가 내릴 개발 전략 판정은 다음과 같아.
+
+권고: `SCIENTIFIC_FAST_TRACK_RESET`
+
+- Full native H/He/CR/RCT/HH 통합을 1차 scientific output의 선행조건에서 해제한다.
+- 검증을 통과한 축약 모형과 Bianchi Liouville/Thomson 계산을 우선하고, 양쪽을 최소 interface로 결합한다.
+- 기존의 엄격한 물리 검증과 durable checkpoint는 보존하되, 과학적 의사결정과 무관한 반복 절차는 줄인다.
+
+이 변경은 기존 개발을 버리는 것이 아니라, 연구의 주력 경로를 다시 과학적 질문에 맞추는 것이야.
+
+현재 상황에서 가장 필요한 것은 더 많은 원자 계산을 위한 컴퓨팅 자원이 아니라, 어떤 정확한 물리 질문을 풀기 위해 그 계산이 필요한지를 먼저 결정하는 것이야.
+
+그리고 내가 보기에는, 지금은 full native solver를 계속 확장하는 것보다 기존의 Bianchi transport 기술과 이미 확보한 재이온화 이력을 연결해 최초의 비등방 재이온화 관측량을 만드는 방향이 훨씬 높은 연구 수익을 줄 가능성이 커. 다만 그 관측량의 비퇴화성과 유의미한 크기는 아직 검증해야 할 핵심 가설로 남아 있어.

@@ -1,5 +1,10 @@
 # BASS_CR project harness
 
+## 현재 개발계획 — 2026-10-12
+
+[CR 과학 산출물 우선 계획](research/cr_plan_reset_20261012/PLAN_AND_RESULTS_KO.md), [현재 DAG](research/cr_plan_reset_20261012/NEXT_DAG.json), [현재 handoff](research/cr_plan_reset_20261012/HANDOFF.json)를 먼저 읽는다. 아직 시작하지 않은 PHYS02H 전체9600 NCP qualification의 자동 실행은 보류됐다. 기존 cached response 해석과 관측량별 오차·domain을 우선하며, CR-off 기준 응용은 full CR 원자 연구의 완료를 기다리지 않는다. 이미 진행·완료한 NCP run은 원래 예산과 결과를 수집한다. 이 변경은 frozen H evidence/contract와 inherited physical gates를 바꾸지 않는다.
+
+
 ## Selective remote verification (owner policy, 2026-09-22)
 
 Apply [.codex/readback-policy.json](.codex/readback-policy.json) and

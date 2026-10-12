@@ -1,0 +1,58 @@
+{
+  "schema": "cr-phys02h-next-dag.v1",
+  "created_utc": "2026-10-11T09:41:43.745130+00:00",
+  "completed_nodes": [
+    "PR39_PR40_SCOPED_INTAKE",
+    "EXACT_MOMENT_CERTIFICATES",
+    "LOCAL_COLUMN_ASSEMBLY_PILOT",
+    "INDEPENDENT_LOCAL_DECISIONS",
+    "INDEPENDENT_NCP_PREPARATION"
+  ],
+  "next_nodes": [
+    {
+      "id": "H_COMPLETE_HANDOFF_PUBLICATION",
+      "owner": "root",
+      "work": "Actual additive science commit/draft PR, complete new outer, one blank restore and wrapper plan, create-only dual backups and START.",
+      "scientific_calls": 0,
+      "evidence": "publication receipts outside the frozen unit manifest"
+    },
+    {
+      "id": "H_NCP_FULL9600",
+      "owner": "NCP local Codex",
+      "depends_on": [
+        "H_COMPLETE_HANDOFF_PUBLICATION"
+      ],
+      "admission": "Exact NCP_READY binding, actual runtime/resources and unconsumed same-unit reservation.",
+      "work": "Two models x two repetitions x original serial reference and parallel candidate. Preserve all raw values and failures.",
+      "budgets": {
+        "logical_full_builds": 8,
+        "column_evaluations": 76800,
+        "whole_command_wall_s": 900,
+        "automatic_retry": 0
+      }
+    },
+    {
+      "id": "H_NCP_INDEPENDENT_RESULT_DECISION",
+      "owner": "independent reviewer",
+      "depends_on": [
+        "H_NCP_FULL9600"
+      ],
+      "work": "Assess actual source/runtime binding, exact parity, cumulative budgets, values, exits and measured performance separately."
+    },
+    {
+      "id": "F_BINDING_AND_FUTURE_FRONTIER_DECISION",
+      "owner": "root Astra",
+      "depends_on": [
+        "H_NCP_INDEPENDENT_RESULT_DECISION"
+      ],
+      "status": "NOT_AUTHORIZED_FOR_EXECUTION_BY_THIS_UNIT",
+      "work": "Decide whether a newly reviewed operator can support a separate binding contract. Original F HOLD and G frontier block persist."
+    }
+  ],
+  "prohibited_automatic_edges": [
+    "NCP result -> F retry",
+    "NCP result -> pulse/expm/solve",
+    "NCP timing -> scaling sweep",
+    "fresh parity -> adoption of historical checkpoint"
+  ]
+}
