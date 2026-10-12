@@ -1,0 +1,51 @@
+{
+  "unit": "CR_THEORY_MOVING_CUTOFF_20261012",
+  "geometry": "Diagonal Bianchi I, physical orthonormal momenta, geodesic hypersurface-normal observer; theta and shear retained",
+  "kinetic_balance_assumptions": [
+    "W_c(t)>0 C1; finite moments; cutoff traces; no flux at infinity",
+    "proper-volume number density f; source q per proper time and proper volume",
+    "continuous momentum drift -K p + F_col; jumps represented by an event-rate measure",
+    "arbitrary angular stress in exact moments; parity-even sufficient for zero bulk momentum thermal closure"
+  ],
+  "thermal_closure_assumptions": [
+    "nonrelativistic ideal nuclei plus thermal-electron gas at common T",
+    "nuclei conserved apart from proper-volume dilution",
+    "active-electron pressure tensor is retained separately",
+    "two-way interface has a chosen lower-distribution trace and a common upwind relative flux"
+  ],
+  "primary_formulas": {
+    "number_flux": "S_cd = integral (Wc_dot - b(Wc,Omega)) g_upwind dOmega",
+    "energy_flux": "P_c = Wc*S_cd + J_cE; S_c=S_cd+J_cN",
+    "active_number": "D_t n_A + theta*n_A = Q_AN + R_secondary - S_c",
+    "active_energy": "D_t U_A + theta*U_A + K:Pi_A = Q_AE - P_h - L_at - P_c",
+    "thermal_temperature": "Cv*Tdot + Pth*theta = Ph+Pc+Q_BE+Q_other - ebar_th*(Sc+Q_BN)",
+    "finite_reclassification": "Delta N=int(w0,w1)gbar; Delta U=int(w0,w1)W*gbar; signed",
+    "stored_cutoff_mapping": "S_cut_stored=S_c+Q_BN; P_cut_stored=P_c+Q_BE, including source projection ghost"
+  },
+  "old_numerical_data_reused": "identity and ledger interpretation only; no recomputation",
+  "needed_for_evolving_cutoff": [
+    "chosen W_c(t) and derivative",
+    "current angular cutoff trace and continuous drift",
+    "active pressure tensor",
+    "daughter number and actual-energy jump moments",
+    "source-projection split if old stored total cutoff is decomposed",
+    "thermal density/temperature and Bianchi theta/K",
+    "lower trace if relative drift carries particles into active domain"
+  ],
+  "completed_proofs": [
+    "moving-domain general moment identity",
+    "opposite-sign interface cancellation",
+    "branching number/energy decomposition",
+    "thermal number-change and expansion-work equation",
+    "temperature-linked cutoff implicit coefficient conditional on an upwind branch",
+    "finite conservative relabeling"
+  ],
+  "review_priority": [
+    "inner-sphere outward normal sign",
+    "daughter multiplicity and actual energy",
+    "thermal count contribution",
+    "temperature-dependent cutoff implicit coefficient",
+    "source ghost counting"
+  ],
+  "independent_review_status": "PENDING_PARENT_REVIEW"
+}

@@ -1,0 +1,624 @@
+--- candidate/CONTRACT.json
++++ final/CONTRACT.json
+@@ -70,5 +70,11 @@
+     "theory_lane": "Current explicit user instruction activates independent constructive theory; no scenario/budget prerequisite for conditional proofs",
+     "global_gate_change": false
+   },
+-  "status": "PENDING_FINAL_REVIEW"
++  "status": "COMPLETE_SCOPED_THEORY",
++  "final_review": {
++    "path": "review/DECISION.json",
++    "decision": "PROMOTE_SCOPED",
++    "sha256": "dc1b9219bafea096f5e83bcb240622c3e031de87035b3ed80dcba85a0bc732c5",
++    "accepted_utc": "2026-10-12T15:22:53.658982+00:00"
++  }
+ }
+--- candidate/CLAIMS.json
++++ final/CLAIMS.json
+@@ -14,7 +14,9 @@
+         "MC30",
+         "MC37"
+       ],
+-      "status": "PENDING_FINAL_REVIEW"
++      "status": "ACCEPTED_CONDITIONAL_DERIVATION",
++      "review_conditions": "Prescribed Bianchi I comoving geodesic frame, well-defined moments and cutoff traces; drift and actual jump daughters separately counted; exact kinetic repartition distinguished from the declared thermal closure and reverse upwind trace.",
++      "review": "review/DECISION.json"
+     },
+     {
+       "id": "TH2",
+@@ -26,7 +28,9 @@
+         "T.10",
+         "T.11"
+       ],
+-      "status": "PENDING_FINAL_REVIEW"
++      "status": "ACCEPTED_CONDITIONAL_DERIVATION",
++      "review_conditions": "Thermal nuclei plus thermal electrons share the nonrelativistic ideal-gas EOS, n_th > 0; active energy and full stress retained; all event, direct source, chemical and heat increments assigned once.",
++      "review": "review/DECISION.json"
+     },
+     {
+       "id": "TH3",
+@@ -37,7 +41,9 @@
+         "CC2",
+         "1.2a"
+       ],
+-      "status": "PENDING_FINAL_REVIEW"
++      "status": "ACCEPTED_CONDITIONAL_DERIVATION",
++      "review_conditions": "Fixed finite operator with common positive scalar rate, positive absolutely continuous prescribed volume, compatible transformed source and output rows; SI number-output conversion retained.",
++      "review": "review/DECISION.json"
+     },
+     {
+       "id": "TH4",
+@@ -48,7 +54,9 @@
+         "3.3",
+         "3.5"
+       ],
+-      "status": "PENDING_FINAL_REVIEW"
++      "status": "ACCEPTED_CONDITIONAL_DERIVATION",
++      "review_conditions": "The source-pinned stopping prescription on a fixed finite grid, fixed composition and redistribution, uniform density scaling and strictly positive shifted Coulomb logarithms.",
++      "review": "review/DECISION.json"
+     },
+     {
+       "id": "TH5",
+@@ -61,7 +69,9 @@
+         "6.6",
+         "7.5"
+       ],
+-      "status": "PENDING_FINAL_REVIEW"
++      "status": "ACCEPTED_CONDITIONAL_DERIVATION",
++      "review_conditions": "Fixed positive energy weights, stated Metzler and weighted-column inequalities, complete disjoint energy ledgers, bounded coefficient/source residuals and nonnegative normalized source shapes; number outputs bounded separately.",
++      "review": "review/DECISION.json"
+     },
+     {
+       "id": "TH6",
+@@ -70,7 +80,9 @@
+       "equations": [
+         "CC6"
+       ],
+-      "status": "PENDING_FINAL_REVIEW"
++      "status": "ACCEPTED_CONDITIONAL_DERIVATION",
++      "review_conditions": "The displayed coefficient-based residual upper bound, fixed event matrices and a prescribed positive admissible scalar-clock interval; clipped weighted median and zero-weight case included.",
++      "review": "review/DECISION.json"
+     },
+     {
+       "id": "TH7",
+@@ -82,8 +94,17 @@
+         "T.21",
+         "T.22"
+       ],
+-      "status": "PENDING_FINAL_REVIEW"
++      "status": "ACCEPTED_CONDITIONAL_DERIVATION",
++      "review_conditions": "Common prescribed expansion history, a uniform-in-time bound for the same complete cumulative thermal deposition, positive thermal-count lower bound; simplified bound additionally requires expansion and nondecreasing deposition bound.",
++      "review": "review/DECISION.json"
+     }
+   ],
+-  "new_astrophysical_history": false
++  "new_astrophysical_history": false,
++  "status": "COMPLETE_SCOPED_THEORY",
++  "final_review": {
++    "path": "review/DECISION.json",
++    "decision": "PROMOTE_SCOPED",
++    "sha256": "dc1b9219bafea096f5e83bcb240622c3e031de87035b3ed80dcba85a0bc732c5",
++    "accepted_utc": "2026-10-12T15:22:53.658982+00:00"
++  }
+ }
+--- candidate/NEXT_DAG.json
++++ final/NEXT_DAG.json
+@@ -3,7 +3,7 @@
+   "unit": "CR-THEORY-THERMAL-EVOLUTION-20261012",
+   "date_utc": "2026-10-12",
+   "scope_repository": "cosmosapjw-quantum/bass_cr",
+-  "status": "PENDING_FINAL_REVIEW",
++  "status": "COMPLETE_SCOPED_THEORY",
+   "current_request": "Use physmath-research-loop for the next theory loop; summarize assumptions/evidence and perform open derivations and constructions.",
+   "skill_protocol": "physmath-research-loop embedded 1.0.0",
+   "base_science_commit": "5fc11143679fe1950133b1e268ac3dd248f6429b",
+@@ -387,7 +387,7 @@
+     },
+     {
+       "id": "CR_THEORY_MOVING_CUTOFF",
+-      "status": "DERIVATION_COMPLETE_PENDING_FINAL_REVIEW",
++      "status": "ACCEPTED_CONDITIONAL_DERIVATION",
+       "depends_on": [
+         "CR_THERMAL_RELEVANCE_CUTOFF_CLOSURE",
+         "CR_PAIRED_ENERGY_ION_CUTOFF_LEDGER"
+@@ -408,11 +408,17 @@
+         "Subcutoff daughter energy/number and source-ghost correspondence",
+         "Thermal particle source, expansion work and finite conservative relabeling"
+       ],
+-      "acceptance": "PENDING_FINAL_REVIEW"
++      "acceptance": "PROMOTE_SCOPED",
++      "final_review": {
++        "path": "review/DECISION.json",
++        "decision": "PROMOTE_SCOPED",
++        "sha256": "dc1b9219bafea096f5e83bcb240622c3e031de87035b3ed80dcba85a0bc732c5",
++        "accepted_utc": "2026-10-12T15:22:53.658982+00:00"
++      }
+     },
+     {
+       "id": "CR_THEORY_THERMAL_EXCESS",
+-      "status": "DERIVATION_COMPLETE_PENDING_FINAL_REVIEW",
++      "status": "ACCEPTED_CONDITIONAL_DERIVATION",
+       "depends_on": [
+         "CR_THERMAL_RELEVANCE_CUTOFF_CLOSURE",
+         "M1_ELECTRON_SOURCE_BINDING"
+@@ -432,11 +438,17 @@
+         "Exact equivalence of thermal and total-moment temperature equations",
+         "Comoving packet EOS inversion and analytic birth/addition/adiabatic examples"
+       ],
+-      "acceptance": "PENDING_FINAL_REVIEW"
++      "acceptance": "PROMOTE_SCOPED",
++      "final_review": {
++        "path": "review/DECISION.json",
++        "decision": "PROMOTE_SCOPED",
++        "sha256": "dc1b9219bafea096f5e83bcb240622c3e031de87035b3ed80dcba85a0bc732c5",
++        "accepted_utc": "2026-10-12T15:22:53.658982+00:00"
++      }
+     },
+     {
+       "id": "CR_THEORY_COLLISION_CLOCK",
+-      "status": "DERIVATION_COMPLETE_PENDING_FINAL_REVIEW",
++      "status": "ACCEPTED_CONDITIONAL_DERIVATION",
+       "depends_on": [
+         "CR_PAIRED_ENERGY_ION_CUTOFF_LEDGER",
+         "M1_ELECTRON_SOURCE_BINDING"
+@@ -451,7 +463,7 @@
+         "source_at_preparation": "../theory_work/collision_clock/COLLISION_CLOCK_DERIVATION_KO.md",
+         "sha256": "280b027c5c284f3d8608ba8ff968fb5a6fad5a939d7c956eec69ca0e37e60fdb",
+         "locations": "CC1-CC6; equations 3.5, 5.4, 6.5, 7.3-7.8",
+-        "integration_status": "Completed branch proof; manuscript path reserved for root integration"
++        "integration_status": "Integrated into final reviewed manuscript; exact proof digest preserved"
+       },
+       "completed_results": [
+         "X=Vx and tau=integral a dt, with transformed source V s/a",
+@@ -459,11 +471,17 @@
+         "G_phys(d)=d G_phys(1)-(d log d/2) C0 in the declared positive-Coulomb-log domain",
+         "Coefficient-weighted residual and scalar-clock choice"
+       ],
+-      "acceptance": "PENDING_FINAL_REVIEW"
++      "acceptance": "PROMOTE_SCOPED",
++      "final_review": {
++        "path": "review/DECISION.json",
++        "decision": "PROMOTE_SCOPED",
++        "sha256": "dc1b9219bafea096f5e83bcb240622c3e031de87035b3ed80dcba85a0bc732c5",
++        "accepted_utc": "2026-10-12T15:22:53.658982+00:00"
++      }
+     },
+     {
+       "id": "CR_THEORY_RESIDUAL_TEMPERATURE_CERTIFICATE",
+-      "status": "DERIVATION_COMPLETE_PENDING_FINAL_REVIEW",
++      "status": "ACCEPTED_CONDITIONAL_DERIVATION",
+       "depends_on": [
+         "CR_THEORY_COLLISION_CLOCK",
+         "CR_THEORY_THERMAL_EXCESS"
+@@ -481,19 +499,26 @@
+         },
+         {
+           "path": "derivations/THERMAL_EXCESS_KO.md",
+-          "locations": "T.17-T.18, including expansion-work contribution"
++          "locations": "T.17-T.22: finite packet, temperature bound and cumulative deposition through expansion"
+         }
+       ],
+       "completed_results": [
+         "Duhamel error bound without requiring commutation",
+         "Augmented passive energy and heat ledger bound",
+-        "Temperature error <= energy error/(cv Nmin)+T_hat count error/Nmin"
+-      ],
+-      "acceptance": "PENDING_FINAL_REVIEW"
++        "Temperature error <= energy error/(cv Nmin)+T_hat count error/Nmin",
++        "T.19-T.22 integrate complete thermal deposition through prescribed expansion before the temperature bound"
++      ],
++      "acceptance": "PROMOTE_SCOPED",
++      "final_review": {
++        "path": "review/DECISION.json",
++        "decision": "PROMOTE_SCOPED",
++        "sha256": "dc1b9219bafea096f5e83bcb240622c3e031de87035b3ed80dcba85a0bc732c5",
++        "accepted_utc": "2026-10-12T15:22:53.658982+00:00"
++      }
+     },
+     {
+       "id": "CR_THEORY_RECEIVER_INTERFACE",
+-      "status": "IMPLEMENTED_TARGETED_CHECKS_PASS",
++      "status": "ACCEPTED_SCOPED_IMPLEMENTATION",
+       "depends_on": [
+         "CR_THEORY_THERMAL_EXCESS"
+       ],
+@@ -510,7 +535,13 @@
+         "T.18"
+       ],
+       "targeted_execution": "results/THEORY_CHECKS.json",
+-      "acceptance": "PENDING_FINAL_REVIEW"
++      "acceptance": "PROMOTE_SCOPED",
++      "final_review": {
++        "path": "review/DECISION.json",
++        "decision": "PROMOTE_SCOPED",
++        "sha256": "dc1b9219bafea096f5e83bcb240622c3e031de87035b3ed80dcba85a0bc732c5",
++        "accepted_utc": "2026-10-12T15:22:53.658982+00:00"
++      }
+     },
+     {
+       "id": "CR_THEORY_TARGETED_VERIFICATION",
+@@ -536,11 +567,25 @@
+       "execution_scope": "exact rational analytic fixtures; source-pinned stopping coefficients; one noncommuting 8-state dimensionless IVP",
+       "new_full_generator_builds": 0,
+       "remote_science_jobs": 0,
+-      "acceptance_scope": "Actual targeted execution; theorem review is the next independent acceptance node"
++      "acceptance_scope": "Owner execution accepted in the independent analytical review; no reviewer reruns",
++      "acceptance": "PROMOTE_SCOPED",
++      "final_review": {
++        "path": "review/DECISION.json",
++        "decision": "PROMOTE_SCOPED",
++        "sha256": "dc1b9219bafea096f5e83bcb240622c3e031de87035b3ed80dcba85a0bc732c5",
++        "accepted_utc": "2026-10-12T15:22:53.658982+00:00"
++      },
++      "candidate_author_symbolic_checks": {
++        "passes": 21,
++        "total": 21,
++        "path": "results/CLOCK_SYMBOLIC_CHECKS.json",
++        "sha256": "9d8fb2b392be36098f1af7df7a8ed0b51ad715aecc7e995052fbfdbbd448b964",
++        "independent_reviewer_execution": false
++      }
+     },
+     {
+       "id": "CR_THEORY_INTEGRATED_ACCEPTANCE",
+-      "status": "PENDING_FINAL_REVIEW",
++      "status": "PROMOTE_SCOPED",
+       "depends_on": [
+         "CR_THEORY_MOVING_CUTOFF",
+         "CR_THEORY_THERMAL_EXCESS",
+@@ -554,12 +599,18 @@
+       "outputs": [
+         "review/DECISION.json"
+       ],
+-      "acceptance": "Independent derivation review of signs, assumptions, event accounting, passivity domain, transformed source and observable-error map; root records final decision",
+-      "status_update_owner": "root"
++      "acceptance": "PROMOTE_SCOPED",
++      "status_update_owner": "root",
++      "final_review": {
++        "path": "review/DECISION.json",
++        "decision": "PROMOTE_SCOPED",
++        "sha256": "dc1b9219bafea096f5e83bcb240622c3e031de87035b3ed80dcba85a0bc732c5",
++        "accepted_utc": "2026-10-12T15:22:53.658982+00:00"
++      }
+     },
+     {
+       "id": "CR_THEORY_SELF_CONSISTENT_FEEDBACK",
+-      "status": "READY_AFTER_THEORY_ACCEPTANCE",
++      "status": "READY",
+       "depends_on": [
+         "CR_THEORY_INTEGRATED_ACCEPTANCE"
+       ],
+@@ -805,7 +856,7 @@
+     "CR_THEORY_SELF_CONSISTENT_FEEDBACK"
+   ],
+   "next_here": [
+-    "CR_THEORY_INTEGRATED_ACCEPTANCE"
++    "CR_THEORY_SELF_CONSISTENT_FEEDBACK"
+   ],
+   "next_theoretical_task_after_acceptance": "CR_THEORY_SELF_CONSISTENT_FEEDBACK",
+   "downstream_application_nodes": [
+@@ -1756,7 +1807,13 @@
+       "inputs/prior_code/causal_cascade.py": "d87a9cc122125b2d37b47f261f57eab698baa59e07a6b21723860f39313c7b72"
+     },
+     "new_full_generator_builds": 0,
+-    "remote_science_jobs": 0
++    "remote_science_jobs": 0,
++    "candidate_author_symbolic_checks": {
++      "passes": 21,
++      "total": 21,
++      "path": "results/CLOCK_SYMBOLIC_CHECKS.json",
++      "reviewer_reruns": 0
++    }
+   },
+   "scheduling_change": {
+     "previous": "Prior next_here listed selected scenario, thermal accounting and observable budget for application.",
+@@ -1764,6 +1821,11 @@
+     "current": "Run general open derivations and receiver algebra now; retain the original selected-application node states.",
+     "changed_dependencies": "Only new theory nodes and their next theoretical task; prior local/global node objects are unchanged."
+   },
+-  "acceptance_update": "Root updates only the new theory acceptance statuses and publication evidence after final independent review.",
++  "acceptance_update": {
++    "path": "review/DECISION.json",
++    "decision": "PROMOTE_SCOPED",
++    "sha256": "dc1b9219bafea096f5e83bcb240622c3e031de87035b3ed80dcba85a0bc732c5",
++    "accepted_utc": "2026-10-12T15:22:53.658982+00:00"
++  },
+   "new_NCP_dispatch": false
+ }
+--- candidate/PLAN_KO.md
++++ final/PLAN_KO.md
+@@ -1,6 +1,6 @@
+ # BASS_CR 이론 연구계획: 열적 진화와 충돌 시계의 연결
+ 
+-현재 단위는 **CR-THEORY-THERMAL-EVOLUTION-20261012**다. 사용자가 명시한 이론 연구 요청에 따라 고정 배경의 A2 cutoff 편입 결과에서 출발해, 움직이는 분할면·all-free 회계·진화 배경에서의 연산자 재사용을 구성했다. 통합 채택 상태는 **PENDING_FINAL_REVIEW**이며, 최종 독립 판정 후 root가 새 이론 노드들의 상태를 갱신한다.
++현재 단위는 **CR-THEORY-THERMAL-EVOLUTION-20261012**다. 사용자가 명시한 이론 연구 요청에 따라 고정 배경의 A2 cutoff 편입 결과에서 출발해, 움직이는 분할면·all-free 회계·진화 배경에서의 연산자 재사용을 구성했다. 통합 채택 상태는 **PROMOTE_SCOPED**다. 독립 판정 review/DECISION.json에서 TH1–TH7을 명시된 가정 아래 승인했으며, 다음 이론 노드는 READY로 갱신했다.
+ 
+ ## 이번에 구성한 결과
+ 
+@@ -9,11 +9,11 @@
+ | 움직이는 cutoff | derivations/MOVING_CUTOFF_KO.md: MC13의 일반 모멘트식, MC20의 내부 이관 상쇄, daughter 실제 에너지, Bianchi stress work, source ghost 대응 |
+ | thermal–all-free 회계의 동치 | derivations/THERMAL_EXCESS_KO.md: T.7–T.11의 active 기준에너지·stress와 열용량 결합, primary birth·secondary ionization 회계 |
+ | 정확한 충돌 시계와 Coulomb 보정 | derivations/COLLISION_CLOCK_KO.md: CC1–CC2의 부피·시간 변환, 식 3.5의 고정 행렬 보정, 실제 PHYS02 계수의 정의역 |
+-| residual에서 온도까지의 상계 | CC3–CC5의 양의 에너지·Duhamel 상계와 T.17–T.18의 thermal energy/count → temperature 사상 |
++| residual에서 온도까지의 상계 | CC3–CC5의 양의 에너지·Duhamel 상계와 T.17–T.22의 누적 침적 → 팽창 후 thermal energy/count → temperature 사상 |
+ | 가벼운 receiver 구현 | receiver_interface.py: transfer·total moment·comoving packet EOS·temperature error의 네 함수, 정확한 Fraction 연산 지원 |
+ | 판별 검산 | results/THEORY_CHECKS.json: **15/15 PASS**. 해석 예제, 기존 함수에서 추출한 stopping 계수, 한 개의 무차원 비가환 cascade를 사용한 실제 실행 |
+ 
+-계산은 0.0168초였고 새 full generator나 원격 과학 실행은 0회다. 검산은 birth만 있는 경우의 온도 보존, 입자 편입과 역이관, 단열 팽창, energy/count 오차 상계, 전단 일, 실제 Coulomb 밀도항, 비가환 residual 전달을 구별한다. 일반 정리는 각 유도문의 명시적 증명으로 검토한다.
++계산은 0.0168초였고 새 full generator나 원격 과학 실행은 0회다. 검산은 birth만 있는 경우의 온도 보존, 입자 편입과 역이관, 단열 팽창, energy/count 오차 상계, 전단 일, 실제 Coulomb 밀도항, 비가환 residual 전달을 구별한다. 두 단계 cascade의 후보 저자 Wolfram 기호 검산도 21/21 PASS다. 독립 검토자는 각 유도문과 실제 결과를 읽고 별도 해석으로 심사했으며 검산 재실행은 0회다.
+ 
+ ## 바로 다음 이론 작업: T·조성 피드백을 포함한 양의 보존 step
+ 
+--- candidate/REPORT_KO.md
++++ final/REPORT_KO.md
+@@ -76,7 +76,7 @@
+ | 방법 | 결과와 의미 |
+ |---|---|
+ | 정확 유리수 보존·EOS 예제와 작은 진화 문제 | 15/15 통과 |
+-| 두 단계 cascade의 독립적인 정확 기호 대수 | Wolfram Language 21/21 통과 |
++| 두 단계 cascade의 정확 기호 대수 | Wolfram Language 21/21 통과 |
+ | 원 stopping 식의 밀도 보정 | 5 energies × 3 densities × 2 prescriptions, 30개 coefficient |
+ | 비가환 two-channel evolution | dimensionless 8-state IVP 1회 |
+ | 별도 검토자의 해석적 검토 | 세 분과와 온도 certificate의 proof·단위·source 대응 확인 |
+--- candidate/latex/manuscript.md
++++ final/latex/manuscript.md
+@@ -94,7 +94,7 @@
+ 
+ 이 유도의 첫 부분은 같은 kinetic distribution을 두 영역으로 나누는 정확한 모멘트 항등식이다. 마지막 부분은 아래쪽 전자를 공통 온도의 비상대론적 열적 집단으로 편입하는 명시적 closure에 대한 온도 방정식을 구성한다. 해당 closure를 사용하는 조건과 추가 입력은 §8에 모았다.
+ 
+-## 1. 정의와 전제
++## 정의와 전제
+ 
+ 1. 계량 부호는 \((-+++ )\), 시간 \(t\)는 Bianchi I의 수직 관측자의 proper time이다. 먼저 \(ds^2=-c^2dt^2+\sum_i a_i^2(t)(dx^i)^2\)를 사용한다. 직교 정규틀의 팽창 텐서는 \(K_{ij}=H_i\delta_{ij}\), \(H_i=\dot a_i/a_i\), \(\theta=\mathrm{tr}K\), \(\sigma_{ij}=K_{ij}-\theta\delta_{ij}/3\)다. 이 \(K\)는 팽창률 부호를 사용한다.
+ 2. \(\boldsymbol p\)는 해당 틀에서 측정한 물리적 3-momentum이다. 전자 질량을 \(m_e\)라 하면
+@@ -111,7 +111,7 @@
+ 
+ 단위는 본문에서 \(W,W_c\)에 joule, \(t\)에 second, 길이에 metre를 쓴다. eV 표를 사용할 때 \(W_J=\epsilon_{\rm eV}W_{\rm eV}\), \(g_J=g_{\rm eV}/\epsilon_{\rm eV}\)로 변환한다. \(\epsilon_{\rm eV}=1.602176634\times10^{-19}\,\mathrm{J/eV}\).
+ 
+-## 2. Bianchi I 운동량과 연속 수송식
++## Bianchi I 운동량과 연속 수송식
+ 
+ 공간 병진 대칭으로 보존되는 covariant momentum을 \(P_i\)라 하면 물리적 성분은 \(p_i=P_i/a_i\)다. 따라서 자유 전자는
+ 
+@@ -176,7 +176,7 @@
+ 
+ 이 식은 전자 각도분포의 등방성을 요구하지 않는다. \(pv=W(W+2m_ec^2)/(W+m_ec^2)\)이므로 비상대론적 극한에서 \(\mathrm{tr}\Pi_A\to2U_A\), 초상대론적 극한에서는 \(\mathrm{tr}\Pi_A\to U_A\)를 얻는다.
+ 
+-## 3. 움직이는 cutoff의 일반 모멘트 정리
++## 움직이는 cutoff의 일반 모멘트 정리
+ 
+ \(M_{\psi,A}=\int_A\psi(t,\boldsymbol p)f\,d^3p\)라 하자. cutoff sphere의 반지름은
+ 
+@@ -261,7 +261,7 @@
+ 
+ \(S_{c,d}>0\)는 아래쪽 이관, \(S_{c,d}<0\)는 active 영역으로의 이관을 뜻한다. cutoff가 내려가거나 수축 방향의 geodesic blue shift가 우세하면 아래쪽 분포의 trace가 실제 입력이 된다.
+ 
+-## 4. 두 kinetic 영역에서의 정확한 상쇄
++## 두 kinetic 영역에서의 정확한 상쇄
+ 
+ 하부 영역 \(B\)에 같은 계산을 적용하면 (MC13)의 경계항이 양의 부호로 들어간다. 따라서 수·에너지·momentum 각각에서
+ 
+@@ -276,7 +276,7 @@
+ 
+ 여기서 분할에 독립적인 양은 동일한 \(f\)의 두 적분을 더한 총 모멘트다. §6에서는 하부 분포를 선택한 열적 방정식으로 표현하며, 그 표현에서 얻는 온도와 stress는 하부 closure 및 interface trace에 따라 정해진다.
+ 
+-## 5. Branching collision의 daughter ledger
++## Branching collision의 daughter ledger
+ 
+ active parent의 상태 \(x\)에서 충돌 outcome \(\chi\)가 발생하는 event-rate measure를 \(d\Gamma(x,\chi)\)라 하자. outcome은 daughter 전자들 \(\{\boldsymbol p_j\}_{j=1}^{\nu}\)와 매질에 남은 에너지를 정한다. 각 event에서
+ 
+@@ -333,7 +333,7 @@
+ 
+ 이온화 문턱을 \(I\), 두 daughter 에너지를 \(6.36\,\mathrm{eV}\)와 \(0.04\,\mathrm{eV}\)로 정한 한 event를 보자. parent 에너지는 \(I+6.40\,\mathrm{eV}\), cutoff는 \(0.10\,\mathrm{eV}\)다. 추가 전자는 하나이고 active daughter도 하나이므로 active 수 변화는 0이다. active 에너지 변화는 \(-I-0.04\,\mathrm{eV}\), 원자 ledger는 \(+I\), 하부 ledger는 \(+0.04\,\mathrm{eV}\)로 정확히 합이 0이다. 이 event의 \(J_{c,E}/J_{c,N}\)는 \(0.04\,\mathrm{eV}\)다. 이 대수 예는 daughter 에너지와 경계의 연속 수송 에너지를 구별하는 판별식이다.
+ 
+-## 6. 열적 편입 closure와 팽창 중의 온도 방정식
++## 열적 편입 closure와 팽창 중의 온도 방정식
+ 
+ 하부 전자를 nuclei와 공통 온도 \(T\)의 비상대론적 이상기체에 편입한다고 정하자. \(n_g=n_{\rm nuc}+n_{e,\rm th}\),
+ 
+@@ -424,7 +424,7 @@
+ 
+ 이 식은 cutoff가 \(T\)의 함수일 때 경계 이동과 온도 갱신을 같은 implicit residual에서 풀 수 있게 한다. 분포 trace와 upwind 선택도 같은 상대 속도 \(b-\dot W_c\)를 사용한다. 해당 branch의 bracket 계수가 0이 아닌 구간에서 \(\dot T\)에 대해 대수적으로 풀 수 있다.
+ 
+-## 7. 유한 cutoff 변경을 위한 정확한 재분배
++## 유한 cutoff 변경을 위한 정확한 재분배
+ 
+ 한 순간의 분포를 고정하고 cutoff를 \(w_0\)에서 \(w_1\)로 옮기면, active에서 하부로 넘기는 signed 양은
+ 
+@@ -440,7 +440,7 @@
+ 
+ 예를 들어 \(\bar g=g_0\)가 일정하고 cutoff가 \(0.1\)에서 \(0.2\,\mathrm{eV}\)로 이동하면 \(\Delta N_c=0.1g_0\), \(\Delta U_c=0.015g_0\,\mathrm{eV}\)다. 이관된 집단의 평균 에너지는 양 끝점의 평균 \(0.15\,\mathrm{eV}\)로 정해진다.
+ 
+-## 8. 기존 BASS_CR 결과와의 연결 및 다음 입력
++## 기존 BASS_CR 결과와의 연결 및 다음 입력
+ 
+ 기존 A2 ledger는 고정 \(W_c=0.1\,\mathrm{eV}\), 고정 배경에서 저장한 \(S_c,P_c\)를 사용한다. 이론식의 대응은 다음과 같다.
+ 
+@@ -473,7 +473,7 @@
+ 
+ 이번 결과의 새 기여는 기존 고정 cutoff의 \((S_c,P_c)\)를 움직이는 분할면·Bianchi stress work·jump daughter·thermal particle count가 함께 닫히는 하나의 interface로 연결한 데 있다. 기존 수송 실행이나 source 진폭 계산은 반복하지 않았다.
+ 
+-## 9. 검토용 판별 지점
++## 검토용 판별 지점
+ 
+ - 고정 cutoff, \(b<0\): \(S_{c,d}=-\int bg_c>0\)이고 active 수가 감소한다.
+ - 순수 분할면 상승, \(b=0\): \(S_{c,d}=\dot W_c\bar g_c>0\)이며 하부 영역 증가량과 같다.
+@@ -485,7 +485,7 @@
+ 
+ 이 판별식들은 위 증명의 부호·차원·분할 대응을 직접 확인한다. 독립 검토자는 (MC13)의 inner normal 부호, (MC24)의 daughter multiplicity, (MC30)의 열적 입자수 항, (MC35)의 implicit coefficient를 우선 검토할 수 있다.
+ 
+-## 10. 원전과 근거 상태
++## 원전과 근거 상태
+ 
+ 1. Ho Lee and Ernesto Nungesser, *Bianchi I solutions of the Einstein–Boltzmann system with a positive cosmological constant*, arXiv:1705.07009, DOI:10.1063/1.4985935. 원문 PDF https://arxiv.org/pdf/1705.07009 를 2026-10-12 열람했다. §1.1의 orthonormal/covariant momentum 대응, §3의 kinetic energy-momentum tensor와 covariant momentum에서의 homogeneous Boltzmann 식을 확인했다. 본문의 물리 momentum·명시적 c·움직이는 kinetic-energy cutoff 식은 여기서 직접 유도했다.
+ 2. P. Lidström, *Moving regions in Euclidean space and Reynolds’ transport theorem*, Mathematics and Mechanics of Solids 16(4), 366–380 (2011), DOI:10.1177/1081286510393805. https://journals.sagepub.com/doi/10.1177/1081286510393805 에서 서지와 abstract를 2026-10-12 확인했다. 본문의 움직이는 경계 공식은 §3에서 적분 미분과 부분적분으로 직접 증명했다.
+@@ -503,7 +503,7 @@
+ 그 DERIVATION_KO.md §6.4에 남은 all-free 기준에너지와 primary birth 회계를 닫는다.
+ 이전 source/result는 inputs/RECOVERY.json 및 inputs/prior/에 결속했다.
+ 
+-## 1. 가정, 상태, 단위
++## 가정, 상태, 단위
+ 
+ - **T1 기하와 기준계.** 주어진 Bianchi I 배경의 comoving geodesic cell을 쓴다.
+   고유시간은 $t$, 물리 부피는 $V(t)>0$, $\theta=\dot V/V$다.
+@@ -544,7 +544,7 @@
+ 모멘트법의 배경은 Sarbach–Zannias (2013), Bianchi I의 momentum measure는
+ Lee–Nungesser (2017/2018)를 참조한다. 아래 식은 주어진 모멘트 방정식에서 직접 유도한다.
+ 
+-## 2. 두 부문의 입자수와 kinetic energy 방정식
++## 두 부문의 입자수와 kinetic energy 방정식
+ 
+ active collision 한 사건의 parent 에너지를 $W$, 모든 전자 daughter의 에너지를 $W_r$라 두자.
+ $W-\sum_rW_r$는 매질로 향하는 총 energy debit이다. 이를 채택한 직접 jump heat와
+@@ -604,7 +604,7 @@
+ 새 입자에 기존 온도의 평균 에너지 $e(T)$를 배정한 뒤의 에너지 차가 온도 변화에 기여한다.
+ 입자수 source는 열 source와 함께 진화한다.
+ 
+-## 3. all-free 표현을 완결하는 상태변수
++## all-free 표현을 완결하는 상태변수
+ 
+ 모든 자유전자를 세는 receiver에 다음 변수와 tensor를 둔다.
+ 
+@@ -673,7 +673,7 @@
+ $u_{\rm ex}$를 별도 상태로 보관하더라도 (T.7)의 제약을 지킨다.
+ 간결한 상태는 $(n_{\rm all},T,\text{active state})$이며 $n_A,u_A,u_{\rm ex}$를 여기서 평가한다.
+ 
+-## 4. pressure work와 cutoff의 의미
++## pressure work와 cutoff의 의미
+ 
+ $M=m_ec^2$라 두면 상대론적 kinetic energy의 운동량·속도 곱은
+ 
+@@ -697,7 +697,7 @@
+ $E_c=\chi k_BT$는 $J_N$에도 $\dot T$를 넣어 경계밀도 결합을 만든다.
+ moving-cutoff 유도에서 이 추가 항을 전개한다.
+ 
+-## 5. 판별력이 있는 직접 구성
++## 판별력이 있는 직접 구성
+ 
+ ### 예 A: active birth만 있는 구간
+ 
+@@ -760,7 +760,7 @@
+ $S_c>0$일 때 장시간 온도는 $[W_j+P_0/S_c]/c_v$로 접근한다.
+ 새 particle energy와 thermal reference의 차를 보여주는 해석해다.
+ 
+-## 6. 계산 인터페이스
++## 계산 인터페이스
+ 
+ 입력은 같은 시각의 $n_{\rm all},T,n_A,u_A,\Pi_A,\theta,K$와 source·transfer ledgers다.
+ 
+@@ -792,7 +792,7 @@
+ signed $u_{\rm ex}$를 passive energy norm에 넣지 않는다.
+ active energy·heat 오차와 number 오차를 별도로 EOS에 전달한다.
+ 
+-## 7. 온도 오차로 이어지는 상계
++## 온도 오차로 이어지는 상계
+ 
+ 같은 시각의 thermal counts가 $N,\widehat N\ge N_{\min}>0$,
+ energies가 $U,\widehat U\ge0$이고
+@@ -821,7 +821,7 @@
+ 허용오차의 수치값과 무관하게 위 구성과 증명은 명시한 가정 아래에서 완결된다.
+ 
+ 
+-## 8. 팽창 중의 누적 deposition certificate를 온도로 전달하기
++## 팽창 중의 누적 deposition certificate를 온도로 전달하기
+ 
+ T2의 단원자 기체에서는 입자수가 변하더라도
+ $p_{\rm th}=2u_{\rm th}/3$이다.
+@@ -902,7 +902,7 @@
+ 
+ 각 정리는 아래의 유한 에너지 격자와 물질 셀 모델에 대한 직접 증명이다. 기존 PHYS02C/E 실행의 단위·source·행렬 정의를 재사용한다. 이번 기여는 실제 BASS_CR normalization, Coulomb prescription, source envelope, energy/number output의 명시적 연결이다.
+ 
+-## 1. 기존 BASS_CR 좌표와의 정확한 대응
++## 기존 BASS_CR 좌표와의 정확한 대응
+ 
+ 재사용 원문은 복원된 CR-RUX-M1B-SOURCE-BINDING-20261012의 DERIVATION_KO.md §4와 원 causal_cascade.py다. 출처 경로와 SHA256은 SOURCE_READ_RECORD.json에 둔다.
+ 
+@@ -948,7 +948,7 @@
+ 
+ 아래의 일반 \(w>0\) 표기는 다른 에너지 좌표에도 같은 증명을 쓰기 위한 것이다. 입자수 좌표 \(y_j\)를 쓰면 \(x_j=W_jy_j\), \(D=\operatorname{diag}W_j\), \(L_x=DL_yD^{-1}\), \(w_y=(W_j)\), \(w_x=\mathbf1\)의 정확한 대응이 있다.
+ 
+-## 2. 충돌 시계의 가정과 정리
++## 충돌 시계의 가정과 정리
+ 
+ 고정 유한 구간 \(I=[t_i,T]\)에서 물질 셀의 상대 proper volume을 \(V(t)>0\), \(V(t_i)=1\)로 정한다. \(V\)는 절대연속이며
+ 
+@@ -1083,7 +1083,7 @@
+ 
+ 기존 \(H_0,R,S\)는 한 source family와 horizon에서 얻은 kernel 적분값이다. 새로운 \(V,a,q\)의 재사용 입력은 (2.9)의 kernel 또는 필요한 적분 모멘트다. 변환된 \(Vq/a\)가 원 ramp와 같은 family에 속하면 원 모멘트를 연결하고, 다른 시간 모양이면 (2.10)–(2.11)의 가중 적분을 평가한다.
+ 
+-## 3. 원 PHYS02 Coulomb 처방의 밀도 의존성을 고정 행렬로 분리
++## 원 PHYS02 Coulomb 처방의 밀도 의존성을 고정 행렬로 분리
+ 
+ 원 causal_cascade.py의 lines 200–212는 \(n_{e0}\)에서
+ 
+@@ -1163,7 +1163,7 @@
+ 
+ 입력 배경에 따른 단열 kinetic-energy drift, 상대 species density 변화 또는 다른 rate shape 변화가 있으면 각 항을 \(\Delta\)에 더한다. 부피 희석 \(-\Theta I\)는 §2의 변수 변환으로 처리하고, kinetic energy의 이동은 이 \(\Delta\)에 들어간다. 두 작용은 원 energy cell에 미치는 효과가 다르다.
+ 
+-## 4. 양의 에너지 가중치와 시간 의존 전파의 추정
++## 양의 에너지 가중치와 시간 의존 전파의 추정
+ 
+ active 좌표에 대해 \(w_i>0\)를 고정하고
+ 
+@@ -1205,7 +1205,7 @@
+ 
+ 행렬 원소가 적분 가능하고 (4.2)가 거의 모든 시각에서 성립하면 같은 적분 증명을 적용한다. \(\beta\le0\)이면 에너지 norm이 수축한다.
+ 
+-## 5. 비가환 변화와 source mismatch에 대한 Duhamel 정리
++## 비가환 변화와 source mismatch에 대한 Duhamel 정리
+ 
+ 같은 부피 함수 \(V\)를 사용하는 실제계와 reference를
+ 
+@@ -1295,7 +1295,7 @@
+ 
+ 한 에너지 구간의 source를 생략한 경우에는 그 source의 주입 에너지가 \(\eta\)에 직접 들어간다. 이로써 이전 루프의 선택 구간 밖 에너지 예산을 같은 식에 연결한다.
+ 
+-## 6. 누적 heat까지 포함하는 더 직접적인 에너지 추정
++## 누적 heat까지 포함하는 더 직접적인 에너지 추정
+ 
+ actual heat row를 \(h(t)^T\), reference를 \(a(t)h_0^T\)로 두고 source의 direct heat 성분을 각각 \(s_h,\widehat s_h\)로 둔다.
+ 
+@@ -1382,7 +1382,7 @@
+ 
+ 여기서 \(E_X(t)\)는 (5.4) 또는 (6.5)의 state error 상계다. cutoff number에는 에너지 norm의 0 weight 대신 필요한 number observable의 계수를 명시한다.
+ 
+-## 7. 반응 계수만으로 계산하는 상계와 충돌 시계 선택
++## 반응 계수만으로 계산하는 상계와 충돌 시계 선택
+ 
+ 고정 에너지 전달 행렬 \(B_k\)와 비음 반응률 \(r_k(t)\)에 대해
+ 
+@@ -1468,7 +1468,7 @@
+ 
+ reference energy envelope (5.2)는 \(a\)에 독립적이다. 따라서 이 pointwise 선택은 passivity에 기반한 (6.5)의 **명시한 계수 상계**의 적분도 최소화한다. 실제 observable error를 직접 최적화하려면 출력의 sensitivity를 추가 입력으로 사용한다.
+ 
+-## 8. 정확한 두 단계 cascade 판별 예제
++## 정확한 두 단계 cascade 판별 예제
+ 
+ 고에너지 \(2E\)와 저에너지 \(E\)의 입자수 좌표 \(y=(y_1,y_2)^T\)를 사용한다. \(w=(2E,E)^T\), 입사 shape \(b=(1/(2E),0)^T\)다.
+ 
+@@ -1562,7 +1562,7 @@
+ 
+ \(T=t_*\)에서 이 상계와 누적 source energy \(7q_0t_*/3\)의 비율은 \(\frac{11}{14}\delta_0t_*\)다. 비가환 반응률 변화도 지정한 source와 coefficient envelope만으로 직접 제한된다.
+ 
+-## 9. 구현에 넘길 최소 입력과 다음 연결
++## 구현에 넘길 최소 입력과 다음 연결
+ 
+ 정리 CC1–CC2의 입력은 원 \(L_0,h_0,b_j\), \(V(t)\), \(a(t)\), physical source \(s(t)\), 초기 active stock이다. 사용할 energy/cutoff/number output row와 source의 직접 sink 성분도 함께 유지한다. 내부 시간의 단위 변환은 \(L_0=L_u/T_0\), \(h_0=h_u/T_0\)로 고정한다.
+ 
+@@ -1579,7 +1579,7 @@
+ 
+ thermal/nonthermal 상태변수의 에너지식과 moving cutoff 조건은 같은 루프의 별도 분과에서 결합한다. 여기서는 그 연결에 필요한 physical heat rate와 energy/number ledger를 분리해서 제공한다.
+ 
+-## 10. 검토와 실행 상태
++## 검토와 실행 상태
+ 
+ - R1–R3: 유한 cascade, proper-time/material-volume convention, positive energy space, source 계보를 명시했다.
+ - R4–R5: 충돌 시계, 실제 Coulomb 한 행렬 보정, Duhamel energy/heat certificate, coefficient-optimal clock을 직접 구성·증명했다.
+@@ -1601,7 +1601,7 @@
+ | 방법 | 결과와 의미 |
+ |---|---|
+ | 정확 유리수 보존·EOS 예제와 작은 진화 문제 | 15/15 통과 |
+-| 두 단계 cascade의 독립적인 정확 기호 대수 | Wolfram Language 21/21 통과 |
++| 두 단계 cascade의 정확 기호 대수 | Wolfram Language 21/21 통과 |
+ | 원 stopping 식의 밀도 보정 | 5 energies × 3 densities × 2 prescriptions, 30개 coefficient |
+ | 비가환 two-channel evolution | dimensionless 8-state IVP 1회 |
+ | 별도 검토자의 해석적 검토 | 세 분과와 온도 certificate의 proof·단위·source 대응 확인 |

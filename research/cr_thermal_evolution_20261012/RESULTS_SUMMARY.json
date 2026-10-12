@@ -1,0 +1,356 @@
+{
+  "schema": "bass-cr-theory-delivery-results.v1",
+  "unit": "CR-THEORY-THERMAL-EVOLUTION-20261012",
+  "status": "COMPLETE_SCOPED_THEORY",
+  "decision": "PROMOTE_SCOPED",
+  "claims": [
+    {
+      "id": "TH1",
+      "claim": "Moving-boundary number, energy and momentum balance",
+      "file": "derivations/MOVING_CUTOFF_KO.md",
+      "equations": [
+        "MC13",
+        "MC20",
+        "MC25",
+        "MC26",
+        "MC30",
+        "MC37"
+      ],
+      "decision": "ACCEPTED_CONDITIONAL_DERIVATION",
+      "conditions": "Prescribed Bianchi I comoving geodesic frame, well-defined moments and cutoff traces; drift and actual jump daughters separately counted; exact kinetic repartition distinguished from the declared thermal closure and reverse upwind trace."
+    },
+    {
+      "id": "TH2",
+      "claim": "Thermal/all-free exact excess-energy equivalence",
+      "file": "derivations/THERMAL_EXCESS_KO.md",
+      "equations": [
+        "T.7",
+        "T.9",
+        "T.10",
+        "T.11"
+      ],
+      "decision": "ACCEPTED_CONDITIONAL_DERIVATION",
+      "conditions": "Thermal nuclei plus thermal electrons share the nonrelativistic ideal-gas EOS, n_th > 0; active energy and full stress retained; all event, direct source, chemical and heat increments assigned once."
+    },
+    {
+      "id": "TH3",
+      "claim": "Exact common-factor collision clock and physical output mapping",
+      "file": "derivations/COLLISION_CLOCK_KO.md",
+      "equations": [
+        "CC1",
+        "CC2",
+        "1.2a"
+      ],
+      "decision": "ACCEPTED_CONDITIONAL_DERIVATION",
+      "conditions": "Fixed finite operator with common positive scalar rate, positive absolutely continuous prescribed volume, compatible transformed source and output rows; SI number-output conversion retained."
+    },
+    {
+      "id": "TH4",
+      "claim": "Source-pinned density/Coulomb generator decomposition",
+      "file": "derivations/COLLISION_CLOCK_KO.md",
+      "equations": [
+        "3.2",
+        "3.3",
+        "3.5"
+      ],
+      "decision": "ACCEPTED_CONDITIONAL_DERIVATION",
+      "conditions": "The source-pinned stopping prescription on a fixed finite grid, fixed composition and redistribution, uniform density scaling and strictly positive shifted Coulomb logarithms."
+    },
+    {
+      "id": "TH5",
+      "claim": "Noncommuting energy and deposition residual bounds",
+      "file": "derivations/COLLISION_CLOCK_KO.md",
+      "equations": [
+        "CC3",
+        "CC4",
+        "CC5",
+        "6.6",
+        "7.5"
+      ],
+      "decision": "ACCEPTED_CONDITIONAL_DERIVATION",
+      "conditions": "Fixed positive energy weights, stated Metzler and weighted-column inequalities, complete disjoint energy ledgers, bounded coefficient/source residuals and nonnegative normalized source shapes; number outputs bounded separately."
+    },
+    {
+      "id": "TH6",
+      "claim": "Residual-bound minimizing constrained scalar clock",
+      "file": "derivations/COLLISION_CLOCK_KO.md",
+      "equations": [
+        "CC6"
+      ],
+      "decision": "ACCEPTED_CONDITIONAL_DERIVATION",
+      "conditions": "The displayed coefficient-based residual upper bound, fixed event matrices and a prescribed positive admissible scalar-clock interval; clipped weighted median and zero-weight case included."
+    },
+    {
+      "id": "TH7",
+      "claim": "Deposition to expanding thermal energy and temperature certificate",
+      "file": "derivations/THERMAL_EXCESS_KO.md",
+      "equations": [
+        "T.18",
+        "T.20",
+        "T.21",
+        "T.22"
+      ],
+      "decision": "ACCEPTED_CONDITIONAL_DERIVATION",
+      "conditions": "Common prescribed expansion history, a uniform-in-time bound for the same complete cumulative thermal deposition, positive thermal-count lower bound; simplified bound additionally requires expansion and nondecreasing deposition bound."
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "T1",
+      "statement": "Prescribed homogeneous comoving geodesic Bianchi I cell; even momentum distribution, anisotropic stress allowed; no unlisted spatial or electromagnetic work."
+    },
+    {
+      "id": "T2",
+      "statement": "Thermal nuclei and thermal electrons share nonrelativistic monatomic ideal-gas temperature; n_th>0; active population separately resolved."
+    },
+    {
+      "id": "T3",
+      "statement": "Positive regular kinetic distribution or consistent finite energy state; trace and moments exist; prescribed positive moving cutoff, reverse-transfer trace specified if used."
+    },
+    {
+      "id": "T4",
+      "statement": "Number and actual kinetic energy are exchanged once through drift, jump daughters and direct source; chemical/excitation/radiative debits have explicit ownership."
+    },
+    {
+      "id": "C1",
+      "statement": "Exact collision-clock theorem uses fixed finite operator and common positive rate factor; density changes in the actual Coulomb prescription use explicit residual C0."
+    },
+    {
+      "id": "C2",
+      "statement": "Fixed grid, composition, atomic redistribution and stopping prescription for G(d); all local Coulomb logs remain positive."
+    },
+    {
+      "id": "E1",
+      "statement": "Weighted energy bounds use positive energy weights and the stated Metzler/column inequalities; number and repeated diagnostics treated separately."
+    },
+    {
+      "id": "E2",
+      "statement": "Endpoint temperature bound uses common expansion history, lower positive thermal count, and a bound for the same complete thermal deposition quantity."
+    }
+  ],
+  "independent_review": {
+    "path": "review/DECISION.json",
+    "sha256": "dc1b9219bafea096f5e83bcb240622c3e031de87035b3ed80dcba85a0bc732c5",
+    "open_blocking_findings": 0,
+    "closed_findings": [
+      "TR-01",
+      "CR-01",
+      "CR-02",
+      "CR-03"
+    ],
+    "reviewer_scientific_executions": 0
+  },
+  "owner_executed_checks": {
+    "unit": "CR-THEORY-THERMAL-EVOLUTION-20261012",
+    "method": "exact rational analytic fixtures; source-pinned stopping coefficients; one noncommuting 8-state dimensionless IVP",
+    "passes": 15,
+    "total": 15,
+    "cases": [
+      {
+        "name": "active_birth_preserves_thermal_temperature",
+        "passed": true,
+        "value": "0",
+        "expected": "0"
+      },
+      {
+        "name": "continuous_packet_matches_rational_solution",
+        "passed": true,
+        "value": "1",
+        "expected": "1"
+      },
+      {
+        "name": "adiabatic_T_scales_as_V_minus_two_thirds",
+        "passed": true,
+        "value": "-1",
+        "expected": "-1"
+      },
+      {
+        "name": "finite_packet_and_reverse_transfer_conserve_energy",
+        "passed": true,
+        "added_temperature": "11/3",
+        "removed_temperature": "3"
+      },
+      {
+        "name": "temperature_error_bound_has_exact_saturating_example",
+        "passed": true,
+        "bound": "2",
+        "actual_error": "2"
+      },
+      {
+        "name": "receiver_rejects_nonphysical_endpoint_or_undefined_heat_capacity",
+        "passed": true,
+        "rejected": 4
+      },
+      {
+        "name": "finite_cutoff_strip_conserves_actual_energy",
+        "passed": true,
+        "transferred_number": "1/10",
+        "transferred_energy_eV": "3/200",
+        "mean_energy_eV": "3/20"
+      },
+      {
+        "name": "subcutoff_daughter_energy_and_number_close",
+        "passed": true,
+        "secondary_count": 1,
+        "active_count_change": 0,
+        "join_energy_eV": "1/25",
+        "cutoff_eV": "1/10"
+      },
+      {
+        "name": "anisotropic_pressure_work_keeps_shear",
+        "passed": true,
+        "full_work": "21",
+        "isotropic_part": "70/3",
+        "shear_part": "-7/3"
+      },
+      {
+        "name": "actual_stopping_density_log_decomposition",
+        "passed": true,
+        "max_relative_difference": 2.6865747820368525e-16,
+        "energies_eV": [
+          0.1,
+          1.0,
+          10.0,
+          100.0,
+          900.0
+        ],
+        "density_factors": [
+          0.2,
+          1.0,
+          4.0
+        ],
+        "min_Coulomb_log_at_cutoff": {
+          "0.0": 25.957306703806783,
+          "-0.5": 25.957306703806783
+        },
+        "prior_source_sha256": "d87a9cc122125b2d37b47f261f57eab698baa59e07a6b21723860f39313c7b72",
+        "executed_scope": "two extracted original functions; 30 coefficient values"
+      },
+      {
+        "name": "toy_passivity_and_noncommutation",
+        "passed": true,
+        "commutator": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.5,
+            0.0
+          ]
+        ],
+        "augmented_C0_norm": 2.0
+      },
+      {
+        "name": "exact_collision_clock_matches_independent_toy_IVP",
+        "passed": true,
+        "max_absolute_error": 1.115496583992126e-12,
+        "time_map": "tau=1-exp(-t)",
+        "nfev": 197
+      },
+      {
+        "name": "noncommuting_Duhamel_certificate_covers_toy_state_and_heat",
+        "passed": true,
+        "largest_error_minus_bound": 0.0,
+        "endpoint_error": 0.06991553248830631,
+        "endpoint_bound": 0.26424111765711533,
+        "scope": "65-point numerical diagnostic; theorem supplies continuous bound"
+      },
+      {
+        "name": "deposition_to_expanding_thermal_energy_to_temperature",
+        "passed": true,
+        "endpoint_thermal_energy_error": 0.010496505174731219,
+        "thermal_energy_bound": 0.3222814580782103,
+        "temperature_error": 0.005248252587365609,
+        "temperature_bound": 0.16114072903910515
+      },
+      {
+        "name": "proper_rate_integral_and_parcel_heat_have_distinct_volume_basis",
+        "passed": true,
+        "integral_proper_rate": 0.3359490712340276,
+        "parcel_heat": 0.46853639461338437
+      }
+    ],
+    "runtime": {
+      "python": "3.12.14",
+      "numpy": "2.3.5",
+      "scipy": "1.17.0",
+      "elapsed_seconds": 0.016807850988698192,
+      "ivp_method": "DOP853",
+      "rtol": 1e-11,
+      "atol": 1e-13
+    },
+    "code_sha256": {
+      "checks/run_theory_checks.py": "0be5b9f62a6eee82aaa7ffeb12fa77ff9ae275623938f778cd48695d799dfd2b",
+      "receiver_interface.py": "4c8a23e81c2babe56765b4ffc97a1b2771966b01f99fba6bc84a71a62848c868",
+      "inputs/prior_code/causal_cascade.py": "d87a9cc122125b2d37b47f261f57eab698baa59e07a6b21723860f39313c7b72"
+    },
+    "reused_prior_transport_runs": 0,
+    "new_full_generator_builds": 0,
+    "remote_science_jobs": 0
+  },
+  "candidate_author_symbolic_checks": {
+    "checks": {
+      "collision_clock_derivative": true,
+      "material_volume_derivative": true,
+      "transformed_source_jacobian": true,
+      "proper_volume_ode": true,
+      "comoving_ode": true,
+      "physical_heat_output": true,
+      "parcel_heat_derivative": true,
+      "parcel_total_energy": true,
+      "zero_initial_stock": true,
+      "zero_initial_heat": true,
+      "reference_energy_balance": true,
+      "source_energy_normalization": true,
+      "noncommuting_reactions": true,
+      "noncommutator_nonzero": true,
+      "residual_integral": true,
+      "endpoint_physical_heat": true,
+      "endpoint_parcel_heat": true,
+      "endpoint_input_energy": true,
+      "relative_certificate": true,
+      "source_jacobian_negative_control": true,
+      "heat_prefactor_negative_control": true
+    },
+    "check_count": 21,
+    "passed_count": 21,
+    "status": "PASS",
+    "heavy_runs": 0,
+    "method": "Wolfram Language exact symbolic algebra",
+    "script": "verify_analytic_case.wl",
+    "execution_scope": "Two-stage analytic toy only",
+    "environment_observation": "System Python and primary-runtime Python both lacked sympy; imports failed before any check. WolframContext returned internal error. Direct Wolfram Language evaluation succeeded once."
+  },
+  "complete_report": {
+    "path": "latex/report.pdf",
+    "sha256": "2598a5be7739465505c356aa6a15bb7f4aa4cfeb2f9ec9d2ea7e8238196924b3",
+    "bytes": 258887,
+    "pages": 32,
+    "source": "latex/report.tex"
+  },
+  "source_binding": {
+    "branch": "research/cr-source-binding-20261012",
+    "commit": "0e706a7ce2fbd6c23fa79e94de8a47cfabb19258",
+    "science_commit": "5fc11143679fe1950133b1e268ac3dd248f6429b",
+    "archive_sha256": "632995c3926a738878e4268ec1993817e40062fe84161d39200e21155957f301"
+  },
+  "next_theory": {
+    "node": "CR_THEORY_SELF_CONSISTENT_FEEDBACK",
+    "status": "READY",
+    "construction": "Positive conservative coupled thermal/active/H-He step with shared event increments, EOS feedback and coefficient-based local residual control."
+  },
+  "provenance": {
+    "candidate_manifest": {
+      "path": "review/CANDIDATE_MANIFEST.json",
+      "sha256": "f63c832e8b9ab2e40092cc2d0c0f2b27c4a10448e925754febd9b845afbc9eb2",
+      "bytes": 2261
+    },
+    "post_review_binding": {
+      "path": "review/POST_REVIEW_BINDING.json",
+      "sha256": "fe4fd99b7cfc59ce11bf2b5a3604b3af505e7d0f3980306bb389fe40d20fb0fe",
+      "bytes": 5964
+    },
+    "publication_receipts": "GITHUB_SCIENCE_PUBLICATION.json and DELIVERY_RECEIPTS.json are appended after publication"
+  }
+}
