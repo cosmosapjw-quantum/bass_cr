@@ -1,5 +1,9 @@
 # BASS_CR project harness
 
+## 현재 이론 연구 루프 — 열적 진화와 충돌 시계, 2026-10-12
+
+[현재 보고서](research/cr_thermal_evolution_20261012/REPORT_KO.md), [전체 PDF](research/cr_thermal_evolution_20261012/latex/report.pdf), [계획](research/cr_thermal_evolution_20261012/PLAN_KO.md), [DAG](research/cr_thermal_evolution_20261012/NEXT_DAG.json), [handoff](research/cr_thermal_evolution_20261012/HANDOFF.json)를 먼저 읽는다. 이동 cutoff, thermal/all-free 초과에너지의 정확한 동치, 공통 충돌 시계, 실제 Coulomb 밀도 잔차와 온도 오차 연결 TH1–TH7이 독립 PROMOTE_SCOPED를 받았다. 명시된 가정 아래 이론을 완결했다. 다음 이론 작업은 T·H/He 조성 피드백을 포함하는 양의 보존적 한 step 구성이다. 사용자의 명시적 이론 요청은 일반 유도·구성의 근거이며 실제 scenario 선택과 수치 오차 예산은 해당 응용 경로에서 결속한다. 검산과 원 근거의 identity를 재사용하고 조건 변화가 없는 이전 실행을 반복하지 않는다. 아래는 보존한 이전 단계다.
+
 ## 현재 연구 루프 — 실제 전자 주입원과 cutoff 열적 편입, 2026-10-12
 
 [현재 보고서](research/cr_source_binding_20261012/REPORT_KO.md), [계획](research/cr_source_binding_20261012/PLAN_KO.md), [DAG](research/cr_source_binding_20261012/NEXT_DAG.json), [handoff](research/cr_source_binding_20261012/HANDOFF.json)를 먼저 읽는다. 실제 Qe=tA의 SI source binding, cutoff 에너지·입자수의 열적 편입 후보 및 누적 에너지 예산이 독립 PROMOTE_SCOPED를 받았다. 다음은 실제 선택 scenario/source, total/active/thermal 전자수 및 관측량 허용오차의 결속이다. 전역 REI 채택은 별도이며 새 NCP 작업은 없다. 아래는 보존한 이전 단계다.
@@ -136,3 +140,4 @@ reporting only; original numerical functions, inputs and native binaries remain.
 Use FINAL_STATE.json and the report for current state; RUN_STATE.json preserves
 the original pre-execution record. G02 remains UNRESOLVED, production HOLD,
 capture false, all_bound OPEN and b_grid NO_GO; no MPI/NCP64 scaling is claimed.
+

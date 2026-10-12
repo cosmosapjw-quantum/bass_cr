@@ -1,0 +1,342 @@
+{
+  "schema": "bass-cr-theory-independent-decision.v1",
+  "unit": "CR-THEORY-THERMAL-EVOLUTION-20261012",
+  "created_utc": "2026-10-12T15:16:21.614384+00:00",
+  "reviewer": "/root/theory_independent_review",
+  "decision": "PROMOTE_SCOPED",
+  "status": "PASS",
+  "summary": "Accept TH1–TH7 as complete conditional theoretical results, with the inspected receiver implementation and narrowly scoped executed checks. No blocking scientific finding remains.",
+  "policy": {
+    "skill": "physmath-research-loop",
+    "policy_version": "1.0.0",
+    "approved_design": "v0.2 (2026-10-12)",
+    "read_scope": [
+      "SKILL.md",
+      "RESEARCH_POLICY.md",
+      "THEORY_LOOP.md R1–R10",
+      "EVIDENCE_AND_HANDOFF.md",
+      "RUNTIME_AND_LEGACY.md"
+    ]
+  },
+  "frozen_candidate": {
+    "manifest_path": "review/CANDIDATE_MANIFEST.json",
+    "manifest_sha256": "f63c832e8b9ab2e40092cc2d0c0f2b27c4a10448e925754febd9b845afbc9eb2",
+    "manifest_bytes": 2261,
+    "file_count": 13,
+    "all_13_sizes_and_hashes_verified_before_presentation_edits": true,
+    "files": [
+      {
+        "path": "REPORT_KO.md",
+        "bytes": 12064,
+        "sha256": "e6febcbed01b9099d747997754d57eb4c3f4f110922e8bf00a53e01bbabba90b"
+      },
+      {
+        "path": "CONTRACT.json",
+        "bytes": 3625,
+        "sha256": "71d847e5180bd86338c502d827c2b07c35ce14d2bdbcdd2bb6ae394f28d74e4a"
+      },
+      {
+        "path": "derivations/MOVING_CUTOFF_KO.md",
+        "bytes": 22381,
+        "sha256": "9a46a0dfa6cd1b7e172ddee45c3ac812c47bad55ee87933666e02f87e14148ab"
+      },
+      {
+        "path": "derivations/THERMAL_EXCESS_KO.md",
+        "bytes": 15920,
+        "sha256": "f5ed4a9f88aace5d74dfa69973dc5e71b97d37d27e9b952739ba2423e3c9bf30"
+      },
+      {
+        "path": "derivations/COLLISION_CLOCK_KO.md",
+        "bytes": 27355,
+        "sha256": "280b027c5c284f3d8608ba8ff968fb5a6fad5a939d7c956eec69ca0e37e60fdb"
+      },
+      {
+        "path": "receiver_interface.py",
+        "bytes": 8426,
+        "sha256": "4c8a23e81c2babe56765b4ffc97a1b2771966b01f99fba6bc84a71a62848c868"
+      },
+      {
+        "path": "checks/run_theory_checks.py",
+        "bytes": 10472,
+        "sha256": "0be5b9f62a6eee82aaa7ffeb12fa77ff9ae275623938f778cd48695d799dfd2b"
+      },
+      {
+        "path": "checks/verify_analytic_case.wl",
+        "bytes": 2037,
+        "sha256": "b37a067ee47ad1b4c06a8ab5a9fe7111354f5a38c3fd63e06de0bffee98593ce"
+      },
+      {
+        "path": "results/THEORY_CHECKS.json",
+        "bytes": 4239,
+        "sha256": "ce4d0fc25fbe89449ac5efe2ba61f01daf8a07afb1a18efb3eb676bbd832c13f"
+      },
+      {
+        "path": "results/CLOCK_SYMBOLIC_CHECKS.json",
+        "bytes": 1220,
+        "sha256": "9d8fb2b392be36098f1af7df7a8ed0b51ad715aecc7e995052fbfdbbd448b964"
+      },
+      {
+        "path": "NEXT_DAG.json",
+        "bytes": 72279,
+        "sha256": "baa0184d6428a1d47ad33b8b80aac1994d72744cfb077f4421986f4f7b98c3df"
+      },
+      {
+        "path": "PLAN_KO.md",
+        "bytes": 4942,
+        "sha256": "2c441f3099ed1754863c2a29685edb818f2acfe83b4ad9cafa5fca96bd355971"
+      },
+      {
+        "path": "latex/manuscript.md",
+        "bytes": 77776,
+        "sha256": "574db49ea63018d5b939df87486e182a5c449b25cd5b6a85656becf3f454b695"
+      }
+    ],
+    "combined_manuscript_exact_concatenation_verified": true,
+    "combined_manuscript_construction": "REPORT_KO.md split at # 새 검산과 독립 검토, with the three reviewed derivations inserted in moving-cutoff / thermal-excess / collision-clock order and clearpage separators.",
+    "final_scientific_scope": "Frozen equations, proofs, assumptions, source/code interfaces and executed scientific evidence listed here."
+  },
+  "accepted_claims": [
+    {
+      "id": "TH1",
+      "claim": "Moving-boundary number, energy and momentum balance",
+      "file": "derivations/MOVING_CUTOFF_KO.md",
+      "equations": [
+        "MC13",
+        "MC20",
+        "MC25",
+        "MC26",
+        "MC30",
+        "MC37"
+      ],
+      "decision": "ACCEPTED_CONDITIONAL_DERIVATION",
+      "conditions": "Prescribed Bianchi I comoving geodesic frame, well-defined moments and cutoff traces; drift and actual jump daughters separately counted; exact kinetic repartition distinguished from the declared thermal closure and reverse upwind trace."
+    },
+    {
+      "id": "TH2",
+      "claim": "Thermal/all-free exact excess-energy equivalence",
+      "file": "derivations/THERMAL_EXCESS_KO.md",
+      "equations": [
+        "T.7",
+        "T.9",
+        "T.10",
+        "T.11"
+      ],
+      "decision": "ACCEPTED_CONDITIONAL_DERIVATION",
+      "conditions": "Thermal nuclei plus thermal electrons share the nonrelativistic ideal-gas EOS, n_th > 0; active energy and full stress retained; all event, direct source, chemical and heat increments assigned once."
+    },
+    {
+      "id": "TH3",
+      "claim": "Exact common-factor collision clock and physical output mapping",
+      "file": "derivations/COLLISION_CLOCK_KO.md",
+      "equations": [
+        "CC1",
+        "CC2",
+        "1.2a"
+      ],
+      "decision": "ACCEPTED_CONDITIONAL_DERIVATION",
+      "conditions": "Fixed finite operator with common positive scalar rate, positive absolutely continuous prescribed volume, compatible transformed source and output rows; SI number-output conversion retained."
+    },
+    {
+      "id": "TH4",
+      "claim": "Source-pinned density/Coulomb generator decomposition",
+      "file": "derivations/COLLISION_CLOCK_KO.md",
+      "equations": [
+        "3.2",
+        "3.3",
+        "3.5"
+      ],
+      "decision": "ACCEPTED_CONDITIONAL_DERIVATION",
+      "conditions": "The source-pinned stopping prescription on a fixed finite grid, fixed composition and redistribution, uniform density scaling and strictly positive shifted Coulomb logarithms."
+    },
+    {
+      "id": "TH5",
+      "claim": "Noncommuting energy and deposition residual bounds",
+      "file": "derivations/COLLISION_CLOCK_KO.md",
+      "equations": [
+        "CC3",
+        "CC4",
+        "CC5",
+        "6.6",
+        "7.5"
+      ],
+      "decision": "ACCEPTED_CONDITIONAL_DERIVATION",
+      "conditions": "Fixed positive energy weights, stated Metzler and weighted-column inequalities, complete disjoint energy ledgers, bounded coefficient/source residuals and nonnegative normalized source shapes; number outputs bounded separately."
+    },
+    {
+      "id": "TH6",
+      "claim": "Residual-bound minimizing constrained scalar clock",
+      "file": "derivations/COLLISION_CLOCK_KO.md",
+      "equations": [
+        "CC6"
+      ],
+      "decision": "ACCEPTED_CONDITIONAL_DERIVATION",
+      "conditions": "The displayed coefficient-based residual upper bound, fixed event matrices and a prescribed positive admissible scalar-clock interval; clipped weighted median and zero-weight case included."
+    },
+    {
+      "id": "TH7",
+      "claim": "Deposition to expanding thermal energy and temperature certificate",
+      "file": "derivations/THERMAL_EXCESS_KO.md",
+      "equations": [
+        "T.18",
+        "T.20",
+        "T.21",
+        "T.22"
+      ],
+      "decision": "ACCEPTED_CONDITIONAL_DERIVATION",
+      "conditions": "Common prescribed expansion history, a uniform-in-time bound for the same complete cumulative thermal deposition, positive thermal-count lower bound; simplified bound additionally requires expansion and nondecreasing deposition bound."
+    }
+  ],
+  "implementation_scope": {
+    "file": "receiver_interface.py",
+    "accepted_functions": [
+      "thermal_transfer_tdot",
+      "total_moment_tdot",
+      "advance_thermal_packet",
+      "temperature_error_bound"
+    ],
+    "evidence": "Source inspection, independent equation correspondence and owner-executed exact rational discriminants. This is a thermal receiver interface, not a completed self-consistent cosmological solver."
+  },
+  "independence": {
+    "candidate_generation": false,
+    "owner_validation_design": false,
+    "reviewer_scientific_executions": 0,
+    "analytic_methods": [
+      "Independent Heaviside distribution differentiation of the moving-domain moments",
+      "Exact inverse substitution including dT/dt in active excess energy and anisotropic stress work",
+      "Direct finite-dimensional positive-propagator and Duhamel argument without commutation",
+      "Weighted-L1 column and complete augmented-energy ledger argument",
+      "Scalar subgradient derivation of the constrained weighted median",
+      "Stieltjes integration by parts from cumulative deposition to expanding thermal energy",
+      "Exact EOS difference identity with a positive particle-count lower bound"
+    ],
+    "read_scope": [
+      "Full final moving-cutoff derivation, with final source-ghost and exact-partition versus thermal-closure amendments",
+      "Full final thermal-excess derivation T.1–T.22",
+      "Full final collision-clock derivation including the strengthened exact two-stage example",
+      "Full receiver_interface.py and run_theory_checks.py; complete 15-check result",
+      "Complete Wolfram verification script, normalized 21-check result and raw successful result",
+      "Pinned stopping, projection/source-ghost and finite generator source slices",
+      "REPORT_KO.md, CONTRACT.json, PLAN_KO.md, new eight DAG nodes and next-theory/application scope",
+      "Frozen manifest identity and exact combined-manuscript construction"
+    ],
+    "review_artifact_digests_are_not_new_scientific_runs": true
+  },
+  "executed_evidence_reviewed": {
+    "owner_focused_checks": {
+      "passed": 15,
+      "total": 15,
+      "result": "results/THEORY_CHECKS.json",
+      "scope": "Exact rational thermal/cutoff/pressure discriminants, 30 source-pinned scalar stopping coefficients and one 8-state dimensionless noncommuting IVP.",
+      "stopping_coefficient_max_relative_residual": 2.6865747820368525e-16,
+      "toy_reference_max_error": 1.115496583992126e-12,
+      "toy_state_plus_heat_error": 0.06991553248830631,
+      "toy_state_plus_heat_bound": 0.26424111765711533,
+      "toy_temperature_error": 0.005248252587365609,
+      "toy_temperature_bound": 0.16114072903910515
+    },
+    "candidate_author_symbolic_checks": {
+      "passed": 21,
+      "total": 21,
+      "script": "checks/verify_analytic_case.wl",
+      "result": "results/CLOCK_SYMBOLIC_CHECKS.json",
+      "scope": "One successful Wolfram evaluation of the exact two-stage example, source Jacobian, physical heat prefactor, energy ledger, noncommutator and residual integrals.",
+      "independent_reviewer_execution": false
+    },
+    "reviewer_reruns": 0,
+    "new_full_generator_builds": 0,
+    "new_transport_runs": 0,
+    "new_NCP_jobs": 0,
+    "old_suites_repeated": 0
+  },
+  "closed_findings": [
+    {
+      "id": "TR-01",
+      "finding": "Continuous versus direct jump heat ownership needed a common definition across the thermal and moving-cutoff branches.",
+      "resolution": "Thermal T4 and section 2 now define the total medium debit as declared heat plus the remaining chemical/excitation/radiative loss; jump heat is included in P_h.",
+      "status": "CLOSED"
+    },
+    {
+      "id": "CR-01",
+      "finding": "Energy-coordinate physical scaling cannot be reused unchanged for number-output rows.",
+      "resolution": "Equation 1.2a and the D_SI similarity transformation explicitly provide G_u,Nact/(T0 epsilon_eV), with the corresponding direct number source.",
+      "status": "CLOSED"
+    },
+    {
+      "id": "CR-02",
+      "finding": "The weighted-median clock minimizer must enforce the admissible interval.",
+      "resolution": "CC6 clips a weighted median to the interval and states the all-zero-weight case.",
+      "status": "CLOSED"
+    },
+    {
+      "id": "CR-03",
+      "finding": "The normalized source-shape residual estimate requires nonnegative shapes.",
+      "resolution": "The source estimate explicitly assumes b and b_hat nonnegative, with positive-weight normalization and nonnegative amplitudes.",
+      "status": "CLOSED"
+    }
+  ],
+  "open_blocking_findings": [],
+  "prior_evidence_reused": {
+    "science_commit": "5fc11143679fe1950133b1e268ac3dd248f6429b",
+    "publication_head": "0e706a7ce2fbd6c23fa79e94de8a47cfabb19258",
+    "archive_sha256": "632995c3926a738878e4268ec1993817e40062fe84161d39200e21155957f301",
+    "source_bound_response_sha256": "dd4ed10b5ecd3aea8a8710b5190c9d7da4085834713bc72ae2cc37915cc97f27",
+    "reviewed_prior_scope": "Prior DERIVATION sections 6 and 8, full prior contract and decision; source-coordinate, stopping and projection correspondence. Existing scientific result was reused, not re-executed."
+  },
+  "primary_source_read_scope": [
+    {
+      "source": "Sarbach and Zannias, arXiv:1303.2899v1",
+      "url": "https://arxiv.org/pdf/1303.2899",
+      "read": "Convention page 3; Proposition 6 and equations 62–63, pages 20–21; collision invariant equation 76, page 24.",
+      "use": "Kinetic moment conservation context. Actual multiplying-electron ledger is derived directly in the candidate."
+    },
+    {
+      "source": "Thomas and Pfrommer, arXiv:1805.11092",
+      "url": "https://arxiv.org/pdf/1805.11092",
+      "read": "Section 6.3, equations 125–131; thermal EOS equation 7.",
+      "use": "Conservation and frame/order context in a distinct cosmic-ray model."
+    },
+    {
+      "source": "Soderlind 2006, DOI 10.1007/s10543-006-0069-9",
+      "url": "https://link.springer.com/article/10.1007/s10543-006-0069-9",
+      "read": "Official metadata, abstract and references; author repository metadata. No readable full-paper theorem text obtained.",
+      "use": "Historical background only. All finite-dimensional bounds in this decision were checked by direct derivation."
+    }
+  ],
+  "contribution_assessment": {
+    "established_methods_reused": [
+      "Moving-domain kinetic moments",
+      "Thermodynamic change of variables",
+      "Time change for a common-factor linear generator",
+      "Variation of constants and positive-system weighted norms",
+      "Weighted-median L1 minimization"
+    ],
+    "accepted_BASS_CR_contribution": "Explicit moving-cutoff/event/source interfaces, completion of the thermal-reference excess state and its inverse, source-specific Coulomb density decomposition with correct number units, and a complete conditional deposition-to-temperature certificate.",
+    "global_novelty_claim_reviewed": false
+  },
+  "dag_scope": {
+    "new_local_theory_claims_accepted": true,
+    "new_node_count_reviewed": 8,
+    "global_states_promoted": false,
+    "next_theoretical_task": "CR_THEORY_SELF_CONSISTENT_FEEDBACK",
+    "next_construction": "Positive conservative coupled thermal/active/H-He step with shared event increments, EOS feedback and coefficient-based local residual control.",
+    "actual_application_nodes_preserved": [
+      "CR_SCENARIO_SOURCE_BINDING",
+      "CR_THERMAL_NONTHERMAL_ACCOUNTING",
+      "M1_CONSUMER_ERROR_BUDGET",
+      "M1_REI_SOURCE_ADOPTION"
+    ]
+  },
+  "post_review_binding": {
+    "owner": "/root",
+    "required_record": "review/POST_REVIEW_BINDING.json",
+    "permitted_without_new_scientific_review": [
+      "DAG/PLAN/CLAIMS/CONTRACT status transition reflecting this decision while preserving the frozen candidate identity",
+      "PDF figure-width adjustment",
+      "Removal of duplicate manual numerical prefixes from rendered subsection headings",
+      "REPORT table attribution correction from 두 단계 cascade의 독립적인 정확 기호 대수 to 두 단계 cascade의 정확 기호 대수",
+      "Consequent manuscript/LaTeX/PDF rebuild and publication/backup receipt updates"
+    ],
+    "condition": "Record final byte identities and the exact presentation/status diff; retain this frozen manifest and scientific provenance. Equation, assumption, scientific code or result changes require targeted review of that change.",
+    "pdf_visual_qa": "Owned by root integrator and outside this scientific decision."
+  }
+}
