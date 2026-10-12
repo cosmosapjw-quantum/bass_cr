@@ -1,0 +1,231 @@
+{
+  "schema": "bass-cr-theory-results.v1",
+  "unit": "CR-THEORY-FEEDBACK-20261013",
+  "created_utc": "2026-10-12T21:32:55.266704+00:00",
+  "status": "COMPLETE_CONDITIONAL_THEORY",
+  "decision": "PROMOTE_SCOPED",
+  "review_status": "PASS",
+  "accepted_claims": [
+    {
+      "id": "FB1",
+      "claim": "Common event extents preserve nonnegativity, strictly positive retained stocks and every LS=0 invariant",
+      "proof_files": [
+        "derivations/EVENT_STEP_DERIVATION_KO.md",
+        "derivations/FEEDBACK_THEOREMS_KO.md"
+      ],
+      "locations": [
+        "ES-A/ES-B",
+        "FP.7–FP.9"
+      ],
+      "conditions": "Finite fixed event matrix, finite nonnegative proposals, finite h>=0, common extent in every reservoir, initially absent consumed stocks disable only incident events.",
+      "decision": "ACCEPTED_CONDITIONAL_DERIVATION",
+      "basis": "Independent direct proof review with candidate-author targeted execution where applicable"
+    },
+    {
+      "id": "FB2",
+      "claim": "Explicit 12-state 10-event H/He family closes nuclei, charge, active/thermal/chemical/radiative energy and finite-packet EOS",
+      "proof_files": [
+        "derivations/EVENT_STEP_DERIVATION_KO.md",
+        "examples/H_HE_EVENT_FAMILY.json"
+      ],
+      "locations": [
+        "H/He event construction",
+        "ES.5–ES.10",
+        "ES.19"
+      ],
+      "conditions": "Fixed current energy channels, negligible heavy-nucleus recoil, declared ground-state thresholds and capture energy quadrature, nonrelativistic ideal thermal nuclei/electrons, positive nuclei count. No numerical accuracy claim for a complete atomic kernel.",
+      "decision": "ACCEPTED_CONDITIONAL_DERIVATION",
+      "basis": "Independent direct proof review with candidate-author targeted execution where applicable"
+    },
+    {
+      "id": "FB3",
+      "claim": "Explicit positive-temperature compact self-map has a fixed point; verified q<1 implies uniqueness, feasible Picard convergence and explicit step selection",
+      "proof_files": [
+        "derivations/FEEDBACK_THEOREMS_KO.md",
+        "derivations/FEEDBACK_ASSUMPTIONS.json"
+      ],
+      "locations": [
+        "FP1–FP3",
+        "FP.12–FP.27"
+      ],
+      "conditions": "Domain-wide finite continuous nonnegative rates; positive-temperature floor from U0>0 and h*cUbar<=U0, or actual continuous zero-temperature extension; optional density/electron floors; supplied global rate and derivative bounds; q computed in the declared scaled norm.",
+      "decision": "ACCEPTED_CONDITIONAL_DERIVATION",
+      "basis": "Independent direct proof review with candidate-author targeted execution where applicable"
+    },
+    {
+      "id": "FB4",
+      "claim": "Algebraic/map perturbation and actual physical endpoint-defect certificates give explicit state and EOS temperature bounds",
+      "proof_files": [
+        "derivations/FEEDBACK_THEOREMS_KO.md",
+        "derivations/FEEDBACK_ERROR_MAP.json"
+      ],
+      "locations": [
+        "FP4",
+        "FP6",
+        "FP.28–FP.31",
+        "FP.38–FP.42"
+      ],
+      "conditions": "Same reference map, state norm, positive count floor and count variation scale. Physical certificate additionally uses actual G, space/time Lipschitz bounds, a convex reconstruction domain and a physical path retained in that domain. Map approximation error is supplied separately.",
+      "decision": "ACCEPTED_CONDITIONAL_DERIVATION",
+      "basis": "Independent direct proof review with candidate-author targeted execution where applicable"
+    },
+    {
+      "id": "FB5",
+      "claim": "Frozen-donor shared-capacity map is first-order consistent with the declared reaction ODE with explicit local O(h^2) terms",
+      "proof_files": [
+        "derivations/FEEDBACK_THEOREMS_KO.md"
+      ],
+      "locations": [
+        "FP5",
+        "FP.32–FP.37"
+      ],
+      "conditions": "Initial proposal equals physical propensity, regular support and locally Lipschitz time/state dependence, physical quasipositivity and path retention. Initial zero donor rates vanish. Uniform initial-boundary estimates need donor cancellation or positive floors; global order additionally requires stability.",
+      "decision": "ACCEPTED_CONDITIONAL_DERIVATION",
+      "basis": "Independent direct proof review with candidate-author targeted execution where applicable"
+    },
+    {
+      "id": "FB6",
+      "claim": "Covariant projections, exact prescribed Bianchi subflows and signed stress work compose into a positive first-order collision–geometry stage",
+      "proof_files": [
+        "derivations/COVARIANT_GEOMETRY_KO.md"
+      ],
+      "locations": [
+        "CG.1–CG.11",
+        "CG.L1"
+      ],
+      "conditions": "Signature (-+++), unit timelike comoving frame, proper seconds and explicit c, prescribed positive diagonal scale factors, even active packets, ideal isotropic thermal closure. Current angular chart represents input exactly with C0=Id and the same continuous collision angular closure. Time accuracy needs locally Lipschitz H_i/rates, regular threshold support, resolved crossings and stability. Subsequent stages bind actual transported directions/energies or a conservative remap.",
+      "decision": "ACCEPTED_CONDITIONAL_DERIVATION",
+      "basis": "Independent direct proof review with candidate-author targeted execution where applicable"
+    },
+    {
+      "id": "FB7",
+      "claim": "Exact neutral scalar feedback fixture has extent 1/4, c_v*T/E0=7/10, q=170/841, E=6E0, Q=0 and physical extent defect -17*kappa0/128",
+      "proof_files": [
+        "derivations/FEEDBACK_THEOREMS_KO.md"
+      ],
+      "locations": [
+        "FP7",
+        "FP.44–FP.51"
+      ],
+      "conditions": "Specified one-event affine state segment, declared temperature/composition rate family and h*kappa0=4/17. Global scalar q<=5/24 belongs to this fixture, not arbitrary reaction networks.",
+      "decision": "ACCEPTED_CONDITIONAL_DERIVATION",
+      "basis": "Independent direct proof review with candidate-author targeted execution where applicable"
+    }
+  ],
+  "accepted_reference_implementations": [
+    "event_capacity_step.py",
+    "feedback_solver.py"
+  ],
+  "review": {
+    "path": "review/DECISION.json",
+    "bytes": 29007,
+    "sha256": "cc21267a75ee22e8d777d1cdbb89efa89ffdcd57f1d35fb56429fd9e4dc0e142"
+  },
+  "open_blocking_findings": [],
+  "assumptions": {
+    "contract_snapshot": "CONTRACT.json",
+    "details": "derivations/FEEDBACK_ASSUMPTIONS.json",
+    "note": "Candidate CONTRACT/CLAIMS bytes are frozen; final acceptance is carried by DECISION and this results record."
+  },
+  "execution": {
+    "python_named_checks": 11,
+    "event_checks": 9,
+    "feedback_driver_checks": 2,
+    "wolfram_named_groups": 23,
+    "wolfram_scalar_zero_residuals": 25,
+    "xact_groups": 4,
+    "wolfram_kernel": "15.0.1 for Linux x86 (64-bit) (July 2, 2026)",
+    "xTensor": "1.3.0",
+    "xPerm": "1.2.4",
+    "xCore": "0.6.10",
+    "xPerm_backend": "supported pure Wolfram Language, $xpermQ=False",
+    "previous_scientific_suite_reruns": 0,
+    "independent_scientific_reruns": 0,
+    "new_ODE_integrations": 0,
+    "full_atomic_kernel_runs": 0,
+    "NCP_jobs": 0
+  },
+  "exact_fixture": {
+    "scope": "Neutral dimensionless H-type illustrative event family, not a measured hydrogen threshold or physical scenario prediction",
+    "eta": "4/17",
+    "extent": "1/4",
+    "scaled_temperature": "7/10",
+    "q": "170/841",
+    "state": [
+      "3/4",
+      "3/4",
+      "5/4",
+      "1/2",
+      "7/4"
+    ],
+    "energy_over_E0": "6",
+    "charge_over_e": "0",
+    "physical_extent_endpoint_defect_over_kappa0": "-17/128",
+    "driver": {
+      "status": "CONVERGED",
+      "iterations": 15,
+      "map_evaluations": 16,
+      "visited_states_with_exact_invariants": 17,
+      "all_invariant_residuals": "0",
+      "initial_iterate_is_base": true,
+      "declared_q": "170/841",
+      "q_proof_authority": "caller supplied verified contraction/domain/scale bounds; driver checks numeric range and visited-state membership",
+      "temperature_tolerance_K": "1/1000000000000",
+      "temperature_error_K_exact": "1220703125/19406043838318474479811",
+      "temperature_error_K_float": 6.290324474015892e-14,
+      "certified_temperature_error_K_exact": "616652868126330433066050757844066641100342697600000000000000/2667672084680781880112317606552611041519549470645950845256726175434060169",
+      "certified_temperature_error_K_float": 2.31157671764639e-13,
+      "state_error_norm_exact": "30517578125/310496701413120005739476",
+      "state_error_bound_exact": "14443786717918530491478000000000000000/137466044439892110539385001145621831953105882634179",
+      "map_residual_norm_exact": "17174538309058894758000000000000000/204867428375398078300126678309421508126834400349",
+      "physical_endpoint_rate_defect_norm_float": 0.13281250000059278,
+      "physical_endpoint_defect_scope": "supplied continuous reaction vector field, endpoint rate defect",
+      "physical_endpoint_defect_units": "scaled state per proper second"
+    },
+    "limited_exit": {
+      "status": "MAX_ITERATIONS",
+      "iterations": 1,
+      "map_evaluations": 2,
+      "visited_states_with_exact_invariants": 3,
+      "all_invariant_residuals": "0",
+      "returned_feasible": true,
+      "accepted_extent_exact": "6/29",
+      "temperature_error_K_exact": "1/35",
+      "certified_temperature_error_K_exact": "449616/4513817",
+      "temperature_tolerance_K": "1/1000000000000000000000000000000",
+      "convergence_claim": false,
+      "physical_defect_returned_separately": true
+    }
+  },
+  "dag": {
+    "path": "NEXT_DAG.json",
+    "nodes": 33,
+    "edges": 60,
+    "selected_node": "CR_THEORY_SELF_CONSISTENT_FEEDBACK",
+    "selected_status": "ACCEPTED_CONDITIONAL_CONSTRUCTION",
+    "next_here": [
+      "CR_THEORY_KERNEL_EVENT_ADAPTER",
+      "CR_THEORY_THERMAL_CUTOFF_FEEDBACK"
+    ],
+    "other_prior_nodes_preserved": 29,
+    "prior_edges_preserved": 53,
+    "entire_global_snapshot_preserved": true
+  },
+  "literature": {
+    "primary_comparison_papers": 4,
+    "record": "LITERATURE_KO.md",
+    "sources": "SOURCES.json",
+    "tools": [
+      "SciSpace",
+      "Exa"
+    ]
+  },
+  "report": {
+    "path": "latex/report.pdf",
+    "bytes": 282852,
+    "sha256": "c59a4af210ac195438f6d37b924d1fd494ddf5fb6a059d7090e89e83f9d5aa76"
+  },
+  "report_pages": 33,
+  "proof_and_evidence_manifest": "review/CANDIDATE_MANIFEST.json",
+  "publication_and_delivery": "PUBLICATION.json, DELIVERY.json and HANDOFF.json are the subsequent provider acknowledgement records; this science result is immutable."
+}

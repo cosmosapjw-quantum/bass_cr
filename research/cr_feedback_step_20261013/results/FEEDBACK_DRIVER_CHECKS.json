@@ -1,0 +1,81 @@
+{
+  "schema": "bass-cr-feedback-driver-checks.v1",
+  "unit_id": "CR-THEORY-FEEDBACK-20261013",
+  "author": "/root/feedback_fixed_point",
+  "scope": "New bounded Picard driver and thermal-certificate wiring on reused exact FP7 oracle",
+  "status": "PASS",
+  "checks_passed": 2,
+  "checks_total": 2,
+  "arithmetic": "Python Fraction; SI k_B retained; E0=(3/2)*k_B*(1 K)",
+  "runtime": {
+    "python": "3.12.14",
+    "elapsed_seconds": 0.004361103998235194,
+    "scientific_ODE_solvers": 0,
+    "NCP_jobs": 0,
+    "previous_scientific_checks_repeated": 0,
+    "symbolic_checks_repeated": 0
+  },
+  "source_hashes": {
+    "feedback_solver.py": {
+      "bytes": 9629,
+      "sha256": "ae144a05c2699515bb72138efd401ccb18113cb43fe9348a85cf214a499b8828"
+    },
+    "event_capacity_step.py": {
+      "bytes": 8935,
+      "sha256": "3683f0577263c2c7113593f6e3085b886b65b44101d438f6dd53f9762848e85c"
+    },
+    "checks/run_feedback_checks.py": {
+      "bytes": 8805,
+      "sha256": "553db24afda3217858f0cbfb20ad507dc290755fc58c289eafca306aa61e9c9a"
+    },
+    "derivations/FEEDBACK_THEOREMS_KO.md": {
+      "bytes": 25402,
+      "sha256": "0cbf68003f3ddfd1c5b0db75999d43592a5857a6749a96f4a16ef5558521f8f6"
+    }
+  },
+  "checks": [
+    {
+      "name": "converged_capacity_picard_temperature_connection",
+      "status": "PASS",
+      "details": {
+        "status": "CONVERGED",
+        "iterations": 15,
+        "map_evaluations": 16,
+        "visited_states_with_exact_invariants": 17,
+        "all_invariant_residuals": "0",
+        "initial_iterate_is_base": true,
+        "declared_q": "170/841",
+        "q_proof_authority": "caller supplied verified contraction/domain/scale bounds; driver checks numeric range and visited-state membership",
+        "temperature_tolerance_K": "1/1000000000000",
+        "temperature_error_K_exact": "1220703125/19406043838318474479811",
+        "temperature_error_K_float": 6.290324474015892e-14,
+        "certified_temperature_error_K_exact": "616652868126330433066050757844066641100342697600000000000000/2667672084680781880112317606552611041519549470645950845256726175434060169",
+        "certified_temperature_error_K_float": 2.31157671764639e-13,
+        "state_error_norm_exact": "30517578125/310496701413120005739476",
+        "state_error_bound_exact": "14443786717918530491478000000000000000/137466044439892110539385001145621831953105882634179",
+        "map_residual_norm_exact": "17174538309058894758000000000000000/204867428375398078300126678309421508126834400349",
+        "physical_endpoint_rate_defect_norm_float": 0.13281250000059278,
+        "physical_endpoint_defect_scope": "supplied continuous reaction vector field, endpoint rate defect",
+        "physical_endpoint_defect_units": "scaled state per proper second"
+      }
+    },
+    {
+      "name": "honest_max_iterations_with_feasible_state",
+      "status": "PASS",
+      "details": {
+        "status": "MAX_ITERATIONS",
+        "iterations": 1,
+        "map_evaluations": 2,
+        "visited_states_with_exact_invariants": 3,
+        "all_invariant_residuals": "0",
+        "returned_feasible": true,
+        "accepted_extent_exact": "6/29",
+        "temperature_error_K_exact": "1/35",
+        "certified_temperature_error_K_exact": "449616/4513817",
+        "temperature_tolerance_K": "1/1000000000000000000000000000000",
+        "convergence_claim": false,
+        "physical_defect_returned_separately": true
+      }
+    }
+  ]
+}

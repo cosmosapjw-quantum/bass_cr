@@ -1,0 +1,193 @@
+{
+  "schema": "bass-cr-symbolic-evidence.v1",
+  "unit": "CR-THEORY-FEEDBACK-20261013",
+  "status": "PASS",
+  "recorded_utc": "2026-10-12T21:13:07.703649+00:00",
+  "executor": "Wolfram connector stateless kernel",
+  "kernel": "15.0.1 for Linux x86 (64-bit) (July 2, 2026)",
+  "xTensor": "1.3.0 (2025-12-29)",
+  "xPerm": "1.2.4 (2025-12-29)",
+  "xperm_backend": "Wolfram Language, $xpermQ=False, supported package switch",
+  "canonical_calls": 3,
+  "passes": 23,
+  "total_check_groups": 23,
+  "scalar_residual_count": 25,
+  "groups": [
+    {
+      "group": "xact",
+      "source": {
+        "path": "checks/wolfram_xact_checks.wl",
+        "bytes": 2330,
+        "sha256": "a41703128b289d6c7640270ba3ca640ea73b6e60ddd0104399eeaccbce20986e"
+      },
+      "raw_output": {
+        "path": "results/WOLFRAM_XACT_RAW.json",
+        "bytes": 1806,
+        "sha256": "201e2d17e13701415289cd4a7bfe03e635113872c019a2a446424fd158520ab1"
+      },
+      "checks": [
+        {
+          "id": "OrthogonalityResidual",
+          "residual": "\"0\"",
+          "status": "PASS"
+        },
+        {
+          "id": "TraceResidual",
+          "residual": "\"0\"",
+          "status": "PASS"
+        },
+        {
+          "id": "EnergyProjectionResidual",
+          "residual": "\"0\"",
+          "status": "PASS"
+        },
+        {
+          "id": "NumberCurrentResidual",
+          "residual": "\"0\"",
+          "status": "PASS"
+        }
+      ],
+      "passes": 4,
+      "total": 4
+    },
+    {
+      "group": "feedback",
+      "source": {
+        "path": "checks/wolfram_feedback_checks.wl",
+        "bytes": 1669,
+        "sha256": "a7b42d2f04652e704865371e41d14a339d005d93f86a76ff569891885540c001"
+      },
+      "raw_output": {
+        "path": "results/WOLFRAM_FEEDBACK_RAW.json",
+        "bytes": 1241,
+        "sha256": "0950bec490860c74b59d73be64d1f7f89463cbb3a62b5e221f587c789bdc0036"
+      },
+      "checks": [
+        {
+          "id": "FP7_rate_reduction",
+          "residual": "0",
+          "status": "PASS"
+        },
+        {
+          "id": "FP7_fixed_point",
+          "residual": "0",
+          "status": "PASS"
+        },
+        {
+          "id": "FP7_temperature",
+          "residual": "0",
+          "status": "PASS"
+        },
+        {
+          "id": "FP7_charge",
+          "residual": "0",
+          "status": "PASS"
+        },
+        {
+          "id": "FP7_energy",
+          "residual": "0",
+          "status": "PASS"
+        },
+        {
+          "id": "FP7_q_at_step",
+          "residual": "0",
+          "status": "PASS"
+        },
+        {
+          "id": "FP7_global_q_bound_identity",
+          "residual": "0",
+          "status": "PASS"
+        },
+        {
+          "id": "FP7_derivative",
+          "residual": "0",
+          "status": "PASS"
+        },
+        {
+          "id": "FP7_actual_endpoint_defect",
+          "residual": "0",
+          "status": "PASS"
+        },
+        {
+          "id": "FP7_EOS_derivative",
+          "residual": "0",
+          "status": "PASS"
+        },
+        {
+          "id": "FP6_A_integral",
+          "residual": "0",
+          "status": "PASS"
+        },
+        {
+          "id": "FP6_B_integral",
+          "residual": "0",
+          "status": "PASS"
+        },
+        {
+          "id": "FP6_A_zero_limit",
+          "residual": "0",
+          "status": "PASS"
+        },
+        {
+          "id": "FP6_B_zero_limit",
+          "residual": "0",
+          "status": "PASS"
+        }
+      ],
+      "passes": 14,
+      "total": 14
+    },
+    {
+      "group": "geometry",
+      "source": {
+        "path": "checks/wolfram_geometry_checks.wl",
+        "bytes": 1296,
+        "sha256": "2a79daf4f05859134ef6b3169bcb417f010b04d732e5d0f024b43a8a350db994"
+      },
+      "raw_output": {
+        "path": "results/WOLFRAM_GEOMETRY_RAW.json",
+        "bytes": 576,
+        "sha256": "e7bafc0bed4f57a3841bc679d3176db15218f874ffa81dc9c98ece378cbab5c3"
+      },
+      "checks": [
+        {
+          "id": "CG5_covariant_momentum",
+          "residual": "{0, 0, 0}",
+          "status": "PASS"
+        },
+        {
+          "id": "CG6_relativistic_kinetic_work",
+          "residual": "0",
+          "status": "PASS"
+        },
+        {
+          "id": "CG8_thermal_pressure_work",
+          "residual": "0",
+          "status": "PASS"
+        },
+        {
+          "id": "CG7_diagonal_stress_split",
+          "residual": "0",
+          "status": "PASS"
+        },
+        {
+          "id": "CG9_total_work_ledger",
+          "residual": "0",
+          "status": "PASS"
+        }
+      ],
+      "passes": 5,
+      "total": 5
+    }
+  ],
+  "candidate_author_execution": true,
+  "independent_reviewer_execution": false,
+  "warning_resolution": {
+    "feedback": "The Limit evaluations emitted intermediate Power::infy/Infinity::indet messages. Both removable-singularity limits returned exact zero residual; FP.40 supplies the analytic continuous definitions.",
+    "xact": "Earlier native permutation path left metric covariant derivative undefined. The supported pure-WL path completed definitions and all four canonical checks. Source hashes are checked before loading."
+  },
+  "new_ODE_integrations": 0,
+  "new_atomic_kernel_runs": 0,
+  "NCP_jobs": 0,
+  "counting": "23 named checks; the covariant momentum check has 3 zero components. Earlier setup diagnostics are recorded separately and not counted as extra scientific passes."
+}

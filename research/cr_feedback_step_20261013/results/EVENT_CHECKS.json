@@ -1,0 +1,140 @@
+{
+  "schema": "bass-cr-exact-event-checks.v1",
+  "unit_id": "CR-THEORY-FEEDBACK-20261013",
+  "status": "PASS",
+  "passed": 9,
+  "total": 9,
+  "method": "Python standard-library Fraction exact-rational arithmetic",
+  "attribution": "event-construction author",
+  "independent_reviewer_execution": false,
+  "scope": "finite algebraic event family and reference capacity map",
+  "atomic_threshold_data": "dimensionless rational fixture; not measured H/He thresholds",
+  "full_atomic_kernel_runs": 0,
+  "scientific_ODE_integrations": 0,
+  "NCP_jobs": 0,
+  "elapsed_seconds": 0.007321325996599626,
+  "python": "3.12.14",
+  "checks": [
+    {
+      "id": "ES01_column_invariants",
+      "pass": true,
+      "detail": {
+        "event_columns": 10,
+        "invariant_rows": 4,
+        "exact_zero_residuals": 40
+      }
+    },
+    {
+      "id": "ES02_shared_all_channel_capacity",
+      "pass": true,
+      "detail": {
+        "step_size": "1000000000000",
+        "initial_charge_over_e": "0",
+        "initial_total_energy": "103",
+        "all_four_linear_invariants": "exactly unchanged",
+        "minimum_final_positive_stock_scaled_by_initial": 0.5714285714295816
+      }
+    },
+    {
+      "id": "ES03_zero_donor_local_support",
+      "pass": true,
+      "detail": {
+        "inactive_zero_donor_events": [
+          "impact_H",
+          "thermal_ionize_H"
+        ],
+        "unrelated_helium_and_terminal_channels": "positive extents"
+      }
+    },
+    {
+      "id": "ES04_shared_thermal_energy_capacity",
+      "pass": true,
+      "detail": {
+        "initial_thermal_energy": "1/1000",
+        "final_thermal_energy": 7.633079171637684e-08,
+        "all_six_endothermic_channels": "share the same U_th consumption load"
+      }
+    },
+    {
+      "id": "ES05_zero_energy_with_heating",
+      "pass": true,
+      "detail": {
+        "scope": "algebraic support-boundary check for the proposal-to-state map",
+        "zero_energy_consumers": "inactive",
+        "exothermic_channels": "active"
+      }
+    },
+    {
+      "id": "ES06_ionization_EOS_packet",
+      "pass": true,
+      "detail": {
+        "initial_temperature": "2",
+        "final_temperature": "242/133",
+        "finite_packet_identity_residual": "0",
+        "thermal_particle_increment": "66/127"
+      }
+    },
+    {
+      "id": "ES07_capture_mean_energy_temperature",
+      "pass": true,
+      "detail": {
+        "captured_energy_per_event": "3",
+        "initial_U_over_Nth": "3",
+        "temperature_before_and_after": "2",
+        "photon_energy_per_event": "6",
+        "energy_invariant_residual": "0"
+      }
+    },
+    {
+      "id": "ES08_nonlinear_binary_first_order",
+      "pass": true,
+      "detail": {
+        "continuous_exact_extent": "h/(1+h)",
+        "discrete_extent": "h/(1+2*h)",
+        "exact_local_error": "h^2/((1+h)*(1+2*h))",
+        "values": [
+          {
+            "h": "1/8",
+            "actual_error": "1/90",
+            "closed_formula_error": "1/90"
+          },
+          {
+            "h": "1/16",
+            "actual_error": "1/306",
+            "closed_formula_error": "1/306"
+          },
+          {
+            "h": "1/32",
+            "actual_error": "1/1122",
+            "closed_formula_error": "1/1122"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ES09_zero_step_and_physical_input_contract",
+      "pass": true,
+      "detail": {
+        "zero_step": "identity",
+        "negative_step_and_rate_rejected": 2
+      }
+    }
+  ],
+  "identity_manifest": [
+    {
+      "path": "event_capacity_step.py",
+      "bytes": 8935,
+      "sha256": "3683f0577263c2c7113593f6e3085b886b65b44101d438f6dd53f9762848e85c"
+    },
+    {
+      "path": "checks/run_event_checks.py",
+      "bytes": 8173,
+      "sha256": "8421de464decc2c3c42d8293196d9571da8dcd6c675f8d68e8b7c1ddf1302c08"
+    },
+    {
+      "path": "examples/H_HE_EVENT_FAMILY.json",
+      "bytes": 6648,
+      "sha256": "93353e1d2d26bac5706daac597cda5108358aff7b2ed46dc0b62373f59e6e965"
+    }
+  ]
+}

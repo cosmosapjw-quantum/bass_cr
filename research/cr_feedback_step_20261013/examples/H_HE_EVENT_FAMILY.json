@@ -1,0 +1,275 @@
+{
+  "schema": "bass-cr-fixed-event-family.v1",
+  "unit_id": "CR-THEORY-FEEDBACK-20261013",
+  "evidence_status": "derived_finite_energy_channel_model",
+  "source": "derivations/EVENT_STEP_DERIVATION_KO.md",
+  "implementation": "event_capacity_step.py",
+  "frame": {
+    "time": "proper time",
+    "volume": "fixed positive proper cell volume V_star during reaction substep",
+    "counts": "comoving cell particle counts",
+    "energy": "SI joule"
+  },
+  "model_assumptions": [
+    "ground-state H/He chemistry",
+    "nonrelativistic monatomic thermal bath",
+    "negligible heavy-nucleus recoil in specified energy channels",
+    "fixed active energy grid during reaction substep",
+    "fixed positive capture-energy quadrature nodes",
+    "nonnegative locally regular reaction coefficients"
+  ],
+  "parameters": {
+    "E_c": {
+      "unit": "J",
+      "domain": ">0"
+    },
+    "I_H": {
+      "unit": "J",
+      "domain": ">0"
+    },
+    "I_HeI": {
+      "unit": "J",
+      "domain": ">0"
+    },
+    "I_HeII": {
+      "unit": "J",
+      "domain": ">0"
+    },
+    "epsilon_capture_H": {
+      "unit": "J",
+      "domain": ">0"
+    },
+    "epsilon_capture_HeI": {
+      "unit": "J",
+      "domain": ">0"
+    },
+    "epsilon_capture_HeII": {
+      "unit": "J",
+      "domain": ">0"
+    },
+    "k_B": {
+      "unit": "J/K",
+      "exact_SI": "1.380649e-23"
+    }
+  },
+  "definitions": {
+    "E_L": "2*E_c",
+    "epsilon_s": "E_c/2",
+    "E_A_H": "E_L+I_H+epsilon_s",
+    "E_A_HeI": "E_L+I_HeI+epsilon_s",
+    "E_A_HeII": "E_L+I_HeII+epsilon_s",
+    "N_th": "HI+HII+HeI+HeII+HeIII+e_th",
+    "T": "U_th/((3/2)*k_B*N_th)"
+  },
+  "state_order": [
+    "A_H",
+    "A_HeI",
+    "A_HeII",
+    "A_L",
+    "HI",
+    "HII",
+    "HeI",
+    "HeII",
+    "HeIII",
+    "e_th",
+    "U_th",
+    "E_rad"
+  ],
+  "state_units": {
+    "A_H": "count",
+    "A_HeI": "count",
+    "A_HeII": "count",
+    "A_L": "count",
+    "HI": "count",
+    "HII": "count",
+    "HeI": "count",
+    "HeII": "count",
+    "HeIII": "count",
+    "e_th": "count",
+    "U_th": "J",
+    "E_rad": "J"
+  },
+  "events": [
+    {
+      "id": "impact_H",
+      "increment": {
+        "A_H": -1,
+        "A_L": 1,
+        "HI": -1,
+        "HII": 1,
+        "e_th": 1,
+        "U_th": "epsilon_s"
+      },
+      "proposal": "k_impact_H(z)*A_H_n*HI_n/V_star",
+      "coefficient_unit": "m^3/s"
+    },
+    {
+      "id": "impact_HeI",
+      "increment": {
+        "A_HeI": -1,
+        "A_L": 1,
+        "HeI": -1,
+        "HeII": 1,
+        "e_th": 1,
+        "U_th": "epsilon_s"
+      },
+      "proposal": "k_impact_HeI(z)*A_HeI_n*HeI_n/V_star",
+      "coefficient_unit": "m^3/s"
+    },
+    {
+      "id": "impact_HeII",
+      "increment": {
+        "A_HeII": -1,
+        "A_L": 1,
+        "HeII": -1,
+        "HeIII": 1,
+        "e_th": 1,
+        "U_th": "epsilon_s"
+      },
+      "proposal": "k_impact_HeII(z)*A_HeII_n*HeII_n/V_star",
+      "coefficient_unit": "m^3/s"
+    },
+    {
+      "id": "thermalize_L",
+      "increment": {
+        "A_L": -1,
+        "e_th": 1,
+        "U_th": "E_L"
+      },
+      "proposal": "nu_L(z)*A_L_n",
+      "coefficient_unit": "1/s"
+    },
+    {
+      "id": "thermal_ionize_H",
+      "increment": {
+        "HI": -1,
+        "HII": 1,
+        "e_th": 1,
+        "U_th": "-I_H"
+      },
+      "proposal": "k_CI_H(z)*e_th_n*HI_n/V_star",
+      "coefficient_unit": "m^3/s"
+    },
+    {
+      "id": "thermal_ionize_HeI",
+      "increment": {
+        "HeI": -1,
+        "HeII": 1,
+        "e_th": 1,
+        "U_th": "-I_HeI"
+      },
+      "proposal": "k_CI_HeI(z)*e_th_n*HeI_n/V_star",
+      "coefficient_unit": "m^3/s"
+    },
+    {
+      "id": "thermal_ionize_HeII",
+      "increment": {
+        "HeII": -1,
+        "HeIII": 1,
+        "e_th": 1,
+        "U_th": "-I_HeII"
+      },
+      "proposal": "k_CI_HeII(z)*e_th_n*HeII_n/V_star",
+      "coefficient_unit": "m^3/s"
+    },
+    {
+      "id": "recombine_H",
+      "increment": {
+        "HI": 1,
+        "HII": -1,
+        "e_th": -1,
+        "U_th": "-epsilon_capture_H",
+        "E_rad": "I_H+epsilon_capture_H"
+      },
+      "proposal": "alpha_H(z)*e_th_n*HII_n/V_star",
+      "coefficient_unit": "m^3/s"
+    },
+    {
+      "id": "recombine_HeI",
+      "increment": {
+        "HeI": 1,
+        "HeII": -1,
+        "e_th": -1,
+        "U_th": "-epsilon_capture_HeI",
+        "E_rad": "I_HeI+epsilon_capture_HeI"
+      },
+      "proposal": "alpha_HeI(z)*e_th_n*HeII_n/V_star",
+      "coefficient_unit": "m^3/s"
+    },
+    {
+      "id": "recombine_HeII",
+      "increment": {
+        "HeII": 1,
+        "HeIII": -1,
+        "e_th": -1,
+        "U_th": "-epsilon_capture_HeII",
+        "E_rad": "I_HeII+epsilon_capture_HeII"
+      },
+      "proposal": "alpha_HeII(z)*e_th_n*HeIII_n/V_star",
+      "coefficient_unit": "m^3/s"
+    }
+  ],
+  "invariant_rows": {
+    "H_nuclei": {
+      "HI": 1,
+      "HII": 1
+    },
+    "He_nuclei": {
+      "HeI": 1,
+      "HeII": 1,
+      "HeIII": 1
+    },
+    "charge_over_e": {
+      "A_H": -1,
+      "A_HeI": -1,
+      "A_HeII": -1,
+      "A_L": -1,
+      "HII": 1,
+      "HeII": 1,
+      "HeIII": 2,
+      "e_th": -1
+    },
+    "total_energy": {
+      "A_H": "E_A_H",
+      "A_HeI": "E_A_HeI",
+      "A_HeII": "E_A_HeII",
+      "A_L": "E_L",
+      "HII": "I_H",
+      "HeII": "I_HeI",
+      "HeIII": "I_HeI+I_HeII",
+      "U_th": 1,
+      "E_rad": 1
+    }
+  },
+  "map": {
+    "negative_increment": "C_ir=max(-S_ir,0)",
+    "zero_donor_support": "If C_ir>0 and y_i_n=0 then effective f_r=0 for that event only.",
+    "shared_load": "c_i=sum_r(C_ir*f_r)",
+    "denominator_rate": "d_r=sum_{i:C_ir>0}(c_i/y_i_n) for active events",
+    "extent": "xi_r=h*f_r/(1+h*d_r)",
+    "endpoint": "y_new=y_n+S*xi",
+    "fixed_point": "z=endpoint(z;y_n)",
+    "strict_lower_bound": "y_new_i >= y_n_i/(1+h*c_i/y_n_i)>0 when y_n_i>0",
+    "conservation": "L*S=0 implies L*y_new=L*y_n"
+  },
+  "regularity": {
+    "feedback": "coefficients evaluated at endpoint candidate; base mass-action donor factors are frozen",
+    "consistency": "f_r(y_n;y_n)=physical propensity_r(y_n)",
+    "time_order": "first order under stated regularity and solver-residual conditions",
+    "capture_quadrature": "positive fixed kinetic-energy nodes; alpha_l(T)=omega_l*F_MB(epsilon_l;T)*v_l*sigma_l"
+  },
+  "discriminating_check_parameters": {
+    "kind": "dimensionless exact-rational algebraic fixture",
+    "atomic_threshold_data": false,
+    "cutoff_energy": "2",
+    "I_H": "3",
+    "I_HeI": "5",
+    "I_HeII": "7",
+    "capture_H": "1",
+    "capture_HeI": "2",
+    "capture_HeII": "3",
+    "k_B": "1",
+    "warning": "These rational threshold ratios are a symbolic test fixture, not measured H/He atomic data."
+  }
+}
+
