@@ -1,0 +1,29 @@
+{
+  "schema": "bass-cr-execution-observations.v1",
+  "unit": "CR-THEORY-KERNEL-CUTOFF-20261013",
+  "observations": [
+    {
+      "id": "ENV-WCTX",
+      "kind": "service_environment",
+      "observation": "WolframContext returned MCP -32603 Internal error once.",
+      "impact": "Context discovery unavailable; subsequent Wolfram Language and xAct evaluation succeeded.",
+      "raw": "results/WOLFRAM_XACT_RAW.json",
+      "resolved_for_task": true
+    },
+    {
+      "id": "HARNESS-QD",
+      "kind": "implementation_evaluation_scope",
+      "observation": "Inline D inside ForAll yielded False for two quantified inequalities in attempt01 while all 21 algebraic residuals were zero.",
+      "diagnosis": "Precomputed derivatives and explicit literal derivatives both return True; direct endpoint gives 233/243 and helium derivative -1675483/625000.",
+      "correction": "Compute derivatives before entering ForAll; re-evaluate the changed canonical scalar batch once.",
+      "preserved": [
+        "results/WOLFRAM_SCALAR_ATTEMPT01_RAW.json",
+        "results/WOLFRAM_SCALAR_DIAGNOSTIC.json"
+      ],
+      "final": "results/WOLFRAM_SCALAR_RAW.json",
+      "status": "CLOSED"
+    }
+  ],
+  "prior_suite_reruns": 0,
+  "new_diagnostic_justified_canonical_reexecution": 1
+}

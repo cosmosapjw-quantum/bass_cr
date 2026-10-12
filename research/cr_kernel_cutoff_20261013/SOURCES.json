@@ -1,0 +1,313 @@
+{
+  "schema": "bass-cr-primary-source-review.v1",
+  "unit": "CR-THEORY-KERNEL-CUTOFF-20261013",
+  "created_utc": "2026-10-12T22:46:31.877580+00:00",
+  "reviewer": "/root/feedback_literature_review",
+  "status": "PRIMARY_PASSAGES_REVIEWED",
+  "candidate_review_status": "PROMOTE_SCOPED_PASS_KC1_KC7",
+  "independence": {
+    "candidate_generation": false,
+    "candidate_check_design": false,
+    "scientific_reruns": 0
+  },
+  "search_summary": {
+    "scispace": {
+      "calls": 2,
+      "questions": [
+        "Which conservative positive discretizations of electron-impact ionization preserve electron number and total kinetic plus ionization energy when the two outgoing daughter electrons are deposited onto a finite energy grid?",
+        "How do kinetic and thermal electron models conserve particle number and energy when their separation energy depends on temperature, and what implicit temperature closure or moving-boundary effective heat capacity is derived?"
+      ],
+      "returned_paper_records": 20
+    },
+    "exa": {
+      "search_calls": 5,
+      "requested_results": 29,
+      "fetch_calls": 2,
+      "fulltext_urls_requested": 4
+    },
+    "generic_web": {
+      "metadata_open_batches": 1,
+      "arxiv_metadata_pages": 4
+    },
+    "selected_primary_papers": 4,
+    "scope": "Targeted conservation and thermalization comparison; no exhaustive audit or global novelty claim"
+  },
+  "sources": [
+    {
+      "id": "L1",
+      "authors": [
+        "Hai P. Le",
+        "Jean-Luc Cambier"
+      ],
+      "title": "Conservative algorithms for non-Maxwellian plasma kinetics",
+      "year": 2017,
+      "journal": "Physics of Plasmas",
+      "volume": "24",
+      "article": "122105",
+      "doi": "10.1063/1.4998242",
+      "arxiv": "1711.05946v1",
+      "url": "https://doi.org/10.1063/1.4998242",
+      "read_url": "https://ar5iv.labs.arxiv.org/html/1711.05946",
+      "metadata_url": "https://arxiv.org/abs/1711.05946",
+      "web_ref": "turn30view0",
+      "passages_reviewed": [
+        "II.1 equations 7–8",
+        "II.2 standard discretization",
+        "III.1 equations 16–19",
+        "III.3 equations 39–55",
+        "V time integration"
+      ],
+      "method": "Separate density/energy bin moments; integrate differential energy transfer and place two daughters at representative transfer energy.",
+      "applied": "Conservative collision moment representation as context.",
+      "conditions": [
+        "Homogeneous isotropic electrons, static heavy atoms",
+        "Finite moment expansion and given differential cross section",
+        "Linearized implicit integration has a separately reported small conservation error"
+      ],
+      "not_imported": [
+        "General positivity of polynomial moment states",
+        "Exact finite-step conservation theorem for the authors linearized solver",
+        "Sharp temperature-dependent cutoff closure"
+      ],
+      "raw_records": [
+        "inputs/literature/SCISPACE_01.json",
+        "inputs/literature/EXA_SEARCH_01.json",
+        "inputs/literature/EXA_FETCH_01.json",
+        "inputs/literature/WEB_METADATA_01.json"
+      ],
+      "evidence_state": "literature-supported",
+      "relationship": "contextual",
+      "candidate_proof_dependency": "No general theorem imported; the new candidate is independently reviewed from its actual equations and assumptions."
+    },
+    {
+      "id": "L2",
+      "authors": [
+        "Stefan Mijin",
+        "Abetharan Antony",
+        "Fulvio Militello",
+        "Robert J. Kingham"
+      ],
+      "title": "SOL-KiT—Fully implicit code for kinetic simulation of parallel electron transport in the tokamak Scrape-Off Layer",
+      "year": 2021,
+      "preprint_year": 2020,
+      "journal": "Computer Physics Communications",
+      "volume": "258",
+      "article": "107600",
+      "doi": "10.1016/j.cpc.2020.107600",
+      "arxiv": "2003.00769v1",
+      "url": "https://doi.org/10.1016/j.cpc.2020.107600",
+      "read_url": "https://ar5iv.labs.arxiv.org/html/2003.00769",
+      "metadata_url": "https://arxiv.org/abs/2003.00769",
+      "web_ref": "turn30view1",
+      "passages_reviewed": [
+        "2.1.3 equations 42–47 and ionization approximation",
+        "3.6.1–3.6.3 equations 81–94",
+        "4.2 conservation tests before integrated-test subsection"
+      ],
+      "method": "Two moment constraints determine bracketing two-absorber weights; positive pair partitions repair inverse-process connectivity.",
+      "applied": "Positive conservative energy-grid redistribution comparison.",
+      "conditions": [
+        "Small electron/atom mass ratio, stationary neutral background",
+        "Target energy bracketed by each absorber pair",
+        "Fixed grid and transition data",
+        "Ionization secondary assigned to the lowest velocity cell"
+      ],
+      "not_imported": [
+        "Accurate general two-daughter differential ionization kernel",
+        "Sheath cutoff as a thermal/nonthermal interface",
+        "BASS_CR finite event feedback positivity"
+      ],
+      "raw_records": [
+        "inputs/literature/EXA_SEARCH_02.json",
+        "inputs/literature/EXA_SEARCH_05.json",
+        "inputs/literature/EXA_FETCH_01.json",
+        "inputs/literature/WEB_METADATA_01.json"
+      ],
+      "evidence_state": "literature-supported",
+      "relationship": "contextual",
+      "candidate_proof_dependency": "No general theorem imported; the new candidate is independently reviewed from its actual equations and assumptions."
+    },
+    {
+      "id": "L3",
+      "authors": [
+        "L. F. Ricketson",
+        "M. S. Rosin",
+        "R. E. Caflisch",
+        "A. M. Dimits"
+      ],
+      "title": "An entropy based thermalization scheme for hybrid simulations of Coulomb collisions",
+      "year": 2014,
+      "preprint_year": 2013,
+      "journal": "Journal of Computational Physics",
+      "volume": "273",
+      "pages": "77–99",
+      "doi": "10.1016/j.jcp.2014.04.059",
+      "arxiv": "1301.5678v1",
+      "url": "https://doi.org/10.1016/j.jcp.2014.04.059",
+      "read_url": "https://www.math.ucla.edu/~caflisch/Pubs/Pubs2013-2014/RicketsonEntropyHybridJCP2014.pdf",
+      "metadata_url": "https://arxiv.org/abs/1301.5678",
+      "web_ref": "turn30view2",
+      "passages_reviewed": [
+        "3 equations 16–20",
+        "4 equations 21–35",
+        "6 algorithm steps 1–4 and beginning of 6.1"
+      ],
+      "method": "Maxwellian plus kinetic split; relative-entropy thermalization criterion; matching density, momentum and energy moments.",
+      "applied": "Separate moment-conserving thermal transfer from distribution approximation error.",
+      "conditions": [
+        "Spatially homogeneous single-species Landau–Fokker–Planck model",
+        "Initially nonnegative Maxwellian/kinetic decomposition",
+        "Simplified criterion uses small particle-to-bulk mass and approximation stated by authors"
+      ],
+      "not_imported": [
+        "Sharp E_c(T) interface derivative",
+        "General implicit EOS heat-capacity or uniqueness theorem",
+        "Ionization daughter dynamics"
+      ],
+      "raw_records": [
+        "inputs/literature/EXA_SEARCH_03.json",
+        "inputs/literature/EXA_SEARCH_05.json",
+        "inputs/literature/EXA_FETCH_02.json",
+        "inputs/literature/WEB_METADATA_01.json"
+      ],
+      "evidence_state": "literature-supported",
+      "relationship": "contextual",
+      "candidate_proof_dependency": "No general theorem imported; the new candidate is independently reviewed from its actual equations and assumptions."
+    },
+    {
+      "id": "L4",
+      "authors": [
+        "Robert L. Singleton Jr.",
+        "Lowell S. Brown"
+      ],
+      "title": "The energy partitioning of non-thermal particles in a plasma: or the Coulomb logarithm revisited",
+      "year": 2008,
+      "doi": "10.1088/0741-3335/50/12/124016",
+      "arxiv": "0805.4402v1",
+      "report_number": "LA-UR-08-3394",
+      "url": "https://doi.org/10.1088/0741-3335/50/12/124016",
+      "read_url": "https://ar5iv.labs.arxiv.org/html/0805.4402",
+      "metadata_url": "https://arxiv.org/abs/0805.4402",
+      "web_ref": "turn30view3",
+      "passages_reviewed": [
+        "I equations 1–4",
+        "III equations 19–26"
+      ],
+      "method": "Fokker–Planck source solution split into accumulating Maxwellian and stationary nonthermal part; final particle retains thermal energy.",
+      "applied": "Thermalized particle energy ownership and finite-temperature deposition comparison.",
+      "conditions": [
+        "Common prescribed background temperature measured in energy units",
+        "Dilute source; homogeneous isotropic steady injection after turn-on",
+        "Highly ionized plasma and stated BPS coupling expansion"
+      ],
+      "not_imported": [
+        "Evolving-background implicit EOS",
+        "Moving E_c(T) effective heat capacity",
+        "H/He atomic ionization or relativistic packet closure"
+      ],
+      "raw_records": [
+        "inputs/literature/EXA_SEARCH_04.json",
+        "inputs/literature/EXA_FETCH_02.json",
+        "inputs/literature/WEB_METADATA_01.json"
+      ],
+      "evidence_state": "literature-supported",
+      "relationship": "contextual",
+      "candidate_proof_dependency": "No general theorem imported; the new candidate is independently reviewed from its actual equations and assumptions."
+    }
+  ],
+  "retrieval_observations": [
+    {
+      "class": "search_relevance",
+      "record": "inputs/literature/SCISPACE_02.json",
+      "observation": "Several results concern semiconductor, quantum or unrelated plasma-temperature models. These are not used as evidence for a moving kinetic/thermal cutoff."
+    },
+    {
+      "class": "bibliographic_deduplication",
+      "observation": "SciSpace returned repository and journal duplicates, including repository dates differing from original publication. Original arXiv/publisher dates and titles determine source identity."
+    },
+    {
+      "class": "display_date",
+      "record": "inputs/literature/EXA_FETCH_01.json",
+      "observation": "The fetched Le–Cambier ar5iv page displays August 8, 2026. Original arXiv submission and journal reference both identify the 2017 paper; displayed page date is not used as publication date."
+    },
+    {
+      "class": "bounded_extraction",
+      "observation": "Exa text retrieval was bounded at 90000 or 75000 characters per URL. Only the explicitly listed complete passages were treated as read; no claim of reading all benchmark sections or appendices."
+    }
+  ],
+  "failed_tool_requests": [],
+  "scope_exclusions": [
+    "No source read here supplies the candidate-specific sharp E_c(T) effective-heat-capacity theorem. That is a direct-proof obligation, not a literature-wide absence claim.",
+    "Landau elastic discretizations and moving-velocity meshes found during discovery were not pursued because the four selected sources suffice for this narrow comparison."
+  ],
+  "raw_records": [
+    {
+      "path": "inputs/literature/EXA_FETCH_01.json",
+      "bytes": 186131,
+      "sha256": "774ba5ceb746d3090cf376edda588f60f004f236dc8a839a37ea97233b702d74"
+    },
+    {
+      "path": "inputs/literature/EXA_FETCH_02.json",
+      "bytes": 103760,
+      "sha256": "d60d87aa32ad9b766d9582d641be3f88863d770a1d0c98a19f493dd08e554edb"
+    },
+    {
+      "path": "inputs/literature/EXA_SEARCH_01.json",
+      "bytes": 45896,
+      "sha256": "cf04320a31411dd2d7f6c66a23851aabd921213651551618dd48fdbfc0ce98d2"
+    },
+    {
+      "path": "inputs/literature/EXA_SEARCH_02.json",
+      "bytes": 53371,
+      "sha256": "c43d2e6ff8e65ca1908d8c3b859d886baa4d06d1ef7855a5996bbbbb6df18bcd"
+    },
+    {
+      "path": "inputs/literature/EXA_SEARCH_03.json",
+      "bytes": 17968,
+      "sha256": "6e13c29366dc6b7e1982aa726531a63f6cb83c4e907584ea57971710426cde07"
+    },
+    {
+      "path": "inputs/literature/EXA_SEARCH_04.json",
+      "bytes": 25333,
+      "sha256": "5efc02b413bbd1b985993b2da6a8b59553d8230805dce4cb85ecf56984afcd95"
+    },
+    {
+      "path": "inputs/literature/EXA_SEARCH_05.json",
+      "bytes": 7434,
+      "sha256": "a6294b1f49ff712c76786438fcb772d186588a3a0ce643c8b3eda2f8cc9cd9b3"
+    },
+    {
+      "path": "inputs/literature/SCISPACE_01.json",
+      "bytes": 39010,
+      "sha256": "21808a091f5451e0e72a3df97a06dcd256483fc8606d7ca98b2525bc78468219"
+    },
+    {
+      "path": "inputs/literature/SCISPACE_02.json",
+      "bytes": 40776,
+      "sha256": "6f35cf7c6b2a118d9d952cabd8dedfcfa5ebb9322e21f484d74a8162f8915034"
+    },
+    {
+      "path": "inputs/literature/WEB_METADATA_01.json",
+      "bytes": 27783,
+      "sha256": "de1e481af5e524e9b49d91030eb1d1f119dabab612f65e7ebcf12b19740e5f14"
+    }
+  ],
+  "candidate_review": {
+    "decision": "PROMOTE_SCOPED",
+    "status": "PASS",
+    "claims": [
+      "KC1",
+      "KC2",
+      "KC3",
+      "KC4",
+      "KC5",
+      "KC6",
+      "KC7"
+    ],
+    "reviewer": "/root/feedback_literature_review",
+    "decision_path": "review/DECISION.json",
+    "review_path": "review/REVIEW_KO.md",
+    "scope": "Four primary comparisons are contextual. Candidate proofs/code were independently read; no global novelty or new no-go theorem is adopted.",
+    "scientific_reruns_by_reviewer": 0
+  }
+}

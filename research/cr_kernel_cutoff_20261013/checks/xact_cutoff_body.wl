@@ -1,0 +1,22 @@
+$DefInfoQ=False;
+DefManifold[Man,4,{aa,bb,cc,dd,ee,ff,ii,jj}];
+DefMetric[-1,gg[-aa,-bb],DG,{";","D"}];
+DefTensor[u[aa],Man];DefTensor[Temp[],Man];DefTensor[sg[],Man];
+DefTensor[cur[aa],Man];DefTensor[tot[aa,bb],Man,Symmetric[{aa,bb}]];
+DefTensor[mom[aa],Man];DefTensor[dens[],Man];DefTensor[phi[],Man];
+DefTensor[eflux[],Man];DefScalarFunction[gate];
+DefConstantSymbol[cs];DefConstantSymbol[mm];
+DefConstantSymbol[kb];DefConstantSymbol[ch];
+norm=MakeRule[{u[aa]u[-aa],-1},MetricOn->All,ContractMetrics->True];
+dnorm=MakeRule[{u[aa]DG[-bb][u[-aa]],0},MetricOn->All,ContractMetrics->True];
+simp[expr_]:=FixedPoint[ToCanonical[ContractMetric[Expand[#]]] /.Join[norm,dnorm]&,expr,8];
+currentProduct=simp[DG[-aa][gate[phi[]]cur[aa]]-gate[phi[]]DG[-aa][cur[aa]]-Derivative[1][gate][phi[]]cur[aa]DG[-aa][phi[]]];
+currentPartition=simp[DG[-aa][gate[phi[]]cur[aa]+(1-gate[phi[]])cur[aa]]-DG[-aa][cur[aa]]];
+stressProduct=simp[DG[-aa][gate[phi[]]tot[aa,bb]]-gate[phi[]]DG[-aa][tot[aa,bb]]-Derivative[1][gate][phi[]]tot[aa,bb]DG[-aa][phi[]]];
+cutEnergy=ch kb Temp[];
+boundaryVector=((cutEnergy+mm cs^2)/cs)sg[]u[bb]+(gg[bb,aa]+u[bb]u[aa])mom[-aa];
+kineticBoundary=simp[-cs u[-bb]boundaryVector-mm cs^2 sg[]-cutEnergy sg[]];
+massSubtraction=simp[-cs u[-bb]DG[-aa][tot[aa,bb]-mm cs^2 dens[]u[aa]u[bb]]+cs u[-bb]DG[-aa][tot[aa,bb]]+mm cs^2 DG[-aa][cs dens[]u[aa]]];
+cutoffSource=simp[cs dens[]u[aa]DG[-aa][cutEnergy]-eflux[]-(ch kb dens[]cs u[aa]DG[-aa][Temp[]]-eflux[])];
+residuals={currentProduct,currentPartition,stressProduct,kineticBoundary,massSubtraction,cutoffSource};
+<|"Kernel"->System`$Version,"xTensorVersion"->xAct`xTensor`$Version,"xPermVersion"->xAct`xPerm`$Version,"MathLink"->xAct`xPerm`$xpermQ,"PackageSHA256"->actualHashes,"CurrentSelectorProduct"->ToString[currentProduct,InputForm],"CurrentPartitionCancellation"->ToString[currentPartition,InputForm],"StressSelectorProduct"->ToString[stressProduct,InputForm],"BoundaryKineticEnergyAfterRestMass"->ToString[kineticBoundary,InputForm],"RestMassCurrentSubtraction"->ToString[massSubtraction,InputForm],"TemperatureCutoffCurrent"->ToString[cutoffSource,InputForm],"AllZero"->And@@(TrueQ[#===0]&/@residuals)|>

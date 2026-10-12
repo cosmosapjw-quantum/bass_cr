@@ -1,5 +1,9 @@
 # BASS_CR project harness
 
+## 현재 이론 연구 루프 — 실제 kernel과 온도 의존 cutoff, 2026-10-13
+
+[현재 보고서](research/cr_kernel_cutoff_20261013/latex/manuscript.md), [전체 PDF](research/cr_kernel_cutoff_20261013/latex/report.pdf), [계획](research/cr_kernel_cutoff_20261013/PLAN_KO.md), [DAG](research/cr_kernel_cutoff_20261013/NEXT_DAG.json), [handoff](research/cr_kernel_cutoff_20261013/HANDOFF.json)를 먼저 읽는다. 실제 saved 9600-grid의 HI/HeI kernel 양의 사건 adapter와 같은 parent–target family sharing 보존, 온도 의존 cutoff의 유한 count·energy 분할, 연속 root·오차 certificate, 원자 branch의 유한 구성, 공변 경계 source와 fixed-reconstruction coupled feedback KC1–KC7이 독립 PROMOTE_SCOPED / PASS를 받았다. 가정과 적용 범위는 CONTRACT.json과 CLAIMS.json에 결속한다. 다음 이론 작업은 실제 coupled branch solver의 self-map·오차·crossing 선택 구성과 prescribed geometry 이후 현재 에너지에 대한 kernel 재결속이다. 선택 scenario/source·관측량 오차 예산은 기존 응용 node에서 결속한다. 이전 근거의 identity를 재사용하며, 조건 변화가 없는 과학 suite를 반복하지 않는다. 아래 이전 정책과 물리 채택 경계는 원문 그대로 보존한다.
+
 ## 현재 이론 연구 루프 — 온도·H/He 자기일관적 사건 step, 2026-10-13
 
 [현재 보고서](research/cr_feedback_step_20261013/latex/manuscript.md), [전체 PDF](research/cr_feedback_step_20261013/latex/report.pdf), [계획](research/cr_feedback_step_20261013/PLAN_KO.md), [DAG](research/cr_feedback_step_20261013/NEXT_DAG.json), [handoff](research/cr_feedback_step_20261013/HANDOFF.json)를 먼저 읽는다. 공통 사건 extent의 비음성·선형 보존, 12-state/10-event H/He 구성, 양의 온도 domain과 고정점 존재·수축, 반복 및 물리 endpoint defect의 온도 오차, 공변 xAct 투영과 prescribed Bianchi 합성, 정확한 비선형 사례 FB1–FB7 및 두 reference 구현이 독립 PROMOTE_SCOPED / PASS를 받았다. 모든 주장은 명시된 유한 사건·rate-domain·angular closure·정칙 시간 조건에 결속된다. 다음 이론 작업은 실제 atomic kernel의 현재 parent/daughter 에너지에 대한 양의 사건 adapter와 온도 의존 cutoff의 implicit 경계 응답이다. 선택 scenario/source와 관측량 오차 예산은 해당 응용 node에서 결속한다. 기존 과학 실행과 원 근거의 identity를 재사용하고 조건 변화 없는 실행을 반복하지 않는다. 아래는 보존한 이전 단계다.

@@ -1,0 +1,209 @@
+{
+  "schema": "bass-cr-post-review-binding.v1",
+  "unit": "CR-THEORY-KERNEL-CUTOFF-20261013",
+  "checked_utc": "2026-10-12T23:16:11.184365+00:00",
+  "reviewer": "/root/feedback_literature_review",
+  "status": "PASS",
+  "scope": "Read-only immutable-file identity and permitted CONTRACT/CLAIMS status/reference update verification; distribution-scope declaration.",
+  "scientific_reexecution": {
+    "new_runs": 0,
+    "prior_suite_reruns": 0,
+    "method": "Read file bytes and JSON; compare SHA256, size, exact snapshot changes and normalized scientific-body hashes."
+  },
+  "decision": {
+    "path": "review/DECISION.json",
+    "bytes": 36019,
+    "sha256": "34764f655e13537e074a1ca725ff3bc8f674b38200dc420da4e58ff3320017ff"
+  },
+  "review": {
+    "path": "review/REVIEW_KO.md",
+    "bytes": 27696,
+    "sha256": "af4dac697b676db8b062e73cf1cc56312d43a6338a400644c91835a001842f12"
+  },
+  "candidate_manifest": {
+    "path": "review/CANDIDATE_MANIFEST.json",
+    "bytes": 19531,
+    "sha256": "2433638461d90e7e6d24a8ac5c855f37caadd8597c0734162f1f01785b173fb4"
+  },
+  "immutable_file_verification": {
+    "expected_files": 72,
+    "present_files": 72,
+    "matching_sha256_and_bytes": 72,
+    "missing": [],
+    "mismatches": [],
+    "status": "PASS",
+    "decision_manifest_binding_matches": true,
+    "decision_review_binding_matches": true
+  },
+  "metadata_verification": [
+    {
+      "live_file": {
+        "path": "CONTRACT.json",
+        "bytes": 5647,
+        "sha256": "291387c0357d651fa23951b6f6d6d7a9abc159c87404c237f7a84d8116d068b3"
+      },
+      "frozen_snapshot": {
+        "path": "review/candidate_metadata/CONTRACT.json",
+        "bytes": 5665,
+        "sha256": "852182587c44109eeebc26ce91627e827d96b068c82dab3503066c95fa40949d"
+      },
+      "scientific_body_sha256": "81f7adc680964ec7ea2289933e51ea5b1d0f649a7bf0d367e9a5362043741d77",
+      "expected_scientific_body_sha256": "81f7adc680964ec7ea2289933e51ea5b1d0f649a7bf0d367e9a5362043741d77",
+      "scientific_body_unchanged": true,
+      "only_permitted_paths_changed": true,
+      "actual_changes": [
+        {
+          "json_pointer": "/status",
+          "before": "PENDING_FINAL_INDEPENDENT_REVIEW",
+          "after": "PROMOTE_SCOPED"
+        }
+      ]
+    },
+    {
+      "live_file": {
+        "path": "CLAIMS.json",
+        "bytes": 4954,
+        "sha256": "6a81173c4cf812e74dd0393729e184ab33845722721c8d8bd8a084a44d98f3d7"
+      },
+      "frozen_snapshot": {
+        "path": "review/candidate_metadata/CLAIMS.json",
+        "bytes": 5098,
+        "sha256": "ee0b368ae79360246d509ad1150433246c46fea5ff7dd3db41347f5012d1e904"
+      },
+      "scientific_body_sha256": "bd401eb7b482ce95fcbcd5304e6cc3f26434ca20db011611286ca9edcb009758",
+      "expected_scientific_body_sha256": "bd401eb7b482ce95fcbcd5304e6cc3f26434ca20db011611286ca9edcb009758",
+      "scientific_body_unchanged": true,
+      "only_permitted_paths_changed": true,
+      "actual_changes": [
+        {
+          "json_pointer": "/claims/0/status",
+          "before": "PENDING_FINAL_INDEPENDENT_REVIEW",
+          "after": "PROMOTE_SCOPED"
+        },
+        {
+          "json_pointer": "/claims/1/status",
+          "before": "PENDING_FINAL_INDEPENDENT_REVIEW",
+          "after": "PROMOTE_SCOPED"
+        },
+        {
+          "json_pointer": "/claims/2/status",
+          "before": "PENDING_FINAL_INDEPENDENT_REVIEW",
+          "after": "PROMOTE_SCOPED"
+        },
+        {
+          "json_pointer": "/claims/3/status",
+          "before": "PENDING_FINAL_INDEPENDENT_REVIEW",
+          "after": "PROMOTE_SCOPED"
+        },
+        {
+          "json_pointer": "/claims/4/status",
+          "before": "PENDING_FINAL_INDEPENDENT_REVIEW",
+          "after": "PROMOTE_SCOPED"
+        },
+        {
+          "json_pointer": "/claims/5/status",
+          "before": "PENDING_FINAL_INDEPENDENT_REVIEW",
+          "after": "PROMOTE_SCOPED"
+        },
+        {
+          "json_pointer": "/claims/6/status",
+          "before": "PENDING_FINAL_INDEPENDENT_REVIEW",
+          "after": "PROMOTE_SCOPED"
+        },
+        {
+          "json_pointer": "/status",
+          "before": "PENDING_FINAL_INDEPENDENT_REVIEW",
+          "after": "PROMOTE_SCOPED"
+        }
+      ]
+    }
+  ],
+  "total_allowed_changed_paths": 9,
+  "workflow_context_observed": {
+    "DAG": {
+      "path": "NEXT_DAG.json",
+      "bytes": 95478,
+      "sha256": "9fbf7479e9ceee3153dd85fb3dca3735a9ffae67e4fe74278981f4778e6d7b4d"
+    },
+    "status": "PROMOTE_SCOPED",
+    "acceptance_update": {
+      "path": "review/DECISION.json",
+      "decision": "PROMOTE_SCOPED",
+      "sha256": "34764f655e13537e074a1ca725ff3bc8f674b38200dc420da4e58ff3320017ff"
+    },
+    "note": "DAG is mutable acceptance/planning metadata; it is not one of the immutable science proof files."
+  },
+  "distribution_scope": {
+    "classification": "PACKAGING_ONLY_NO_SCIENTIFIC_CANDIDATE_CHANGE",
+    "local_candidate_cache_status": "All 11 external-literature retrieval cache files remain present and identical to their frozen hashes.",
+    "excluded_from_git_and_distribution_archive": [
+      "inputs/literature/"
+    ],
+    "excluded_file_count": 11,
+    "excluded_files": [
+      {
+        "path": "inputs/literature/EXA_FETCH_01.json",
+        "bytes": 186131,
+        "sha256": "774ba5ceb746d3090cf376edda588f60f004f236dc8a839a37ea97233b702d74"
+      },
+      {
+        "path": "inputs/literature/EXA_FETCH_02.json",
+        "bytes": 103760,
+        "sha256": "d60d87aa32ad9b766d9582d641be3f88863d770a1d0c98a19f493dd08e554edb"
+      },
+      {
+        "path": "inputs/literature/EXA_SEARCH_01.json",
+        "bytes": 45896,
+        "sha256": "cf04320a31411dd2d7f6c66a23851aabd921213651551618dd48fdbfc0ce98d2"
+      },
+      {
+        "path": "inputs/literature/EXA_SEARCH_02.json",
+        "bytes": 53371,
+        "sha256": "c43d2e6ff8e65ca1908d8c3b859d886baa4d06d1ef7855a5996bbbbb6df18bcd"
+      },
+      {
+        "path": "inputs/literature/EXA_SEARCH_03.json",
+        "bytes": 17968,
+        "sha256": "6e13c29366dc6b7e1982aa726531a63f6cb83c4e907584ea57971710426cde07"
+      },
+      {
+        "path": "inputs/literature/EXA_SEARCH_04.json",
+        "bytes": 25333,
+        "sha256": "5efc02b413bbd1b985993b2da6a8b59553d8230805dce4cb85ecf56984afcd95"
+      },
+      {
+        "path": "inputs/literature/EXA_SEARCH_05.json",
+        "bytes": 7434,
+        "sha256": "a6294b1f49ff712c76786438fcb772d186588a3a0ce643c8b3eda2f8cc9cd9b3"
+      },
+      {
+        "path": "inputs/literature/ROOT_PRIMARY_OPEN.json",
+        "bytes": 27251,
+        "sha256": "2bdceb776160bc9bc1286e99aa1ae6662973e30994932b83323db4ecdbf0c1b1"
+      },
+      {
+        "path": "inputs/literature/SCISPACE_01.json",
+        "bytes": 39010,
+        "sha256": "21808a091f5451e0e72a3df97a06dcd256483fc8606d7ca98b2525bc78468219"
+      },
+      {
+        "path": "inputs/literature/SCISPACE_02.json",
+        "bytes": 40776,
+        "sha256": "6f35cf7c6b2a118d9d952cabd8dedfcfa5ebb9322e21f484d74a8162f8915034"
+      },
+      {
+        "path": "inputs/literature/WEB_METADATA_01.json",
+        "bytes": 27783,
+        "sha256": "de1e481af5e524e9b49d91030eb1d1f119dabab612f65e7ebcf12b19740e5f14"
+      }
+    ],
+    "reason": "External-paper retrieval cache contains third-party source text; distribution retains source URLs, queries/result counts, byte sizes and SHA256 through an external-reference index.",
+    "external_reference_index_path": "EXTERNAL_REFERENCE_INDEX.json",
+    "external_reference_index_present_at_check": false,
+    "external_reference_index_identity_at_check": null,
+    "archive_dependency_semantics": "The 72-file candidate manifest describes the exact local reviewed candidate. A distribution archive omitting these 11 external caches must declare them external dependencies and must not claim to contain all 72 candidate file bodies.",
+    "included_science_scope": "Own derivations, reference code, actual Wolfram outputs, kernel input grid/data and review bindings remain within the intended science distribution.",
+    "distribution_assembly_verification": "Not performed here; root will bind the completed external-reference index and archive member list in packaging/publication records."
+  },
+  "result": "The reviewed science and exact candidate evidence are unchanged. Live claim/contract modifications are confined to permitted acceptance-status fields. Packaging exclusions do not alter the local scientific decision."
+}
