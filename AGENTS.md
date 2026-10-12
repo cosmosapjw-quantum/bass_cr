@@ -1,5 +1,9 @@
 # BASS_CR project harness
 
+## 현재 연구 루프 — CR 재사용 DAG와 M1–M3, 2026-10-12
+
+[현재 보고서](research/cr_rux_m1_m3_20261012/REPORT_KO.md), [재편 계획](research/cr_rux_m1_m3_20261012/PLAN_KO.md), [DAG](research/cr_rux_m1_m3_20261012/NEXT_DAG.json), [handoff](research/cr_rux_m1_m3_20261012/HANDOFF.json)를 먼저 읽는다. M0와 이차 응답은 재사용했고, M1의 실제 소비자 snapshot 조사·M2의 양수성 보존 finite-age 오차 지도·M3의 국소 OFF 근거 재사용을 완료했다. 다음 here 작업은 `M1_ELECTRON_SOURCE_BINDING`과 실제 소비자의 오차 예산 연결이다. 전역 RUX 상태는 승격하지 않았고 새 NCP dispatch는 0이다. 아래 M0/plan-reset 항목은 보존한 이전 단계다.
+
 ## M0 후속 결과 — 2026-10-12
 
 현재 완료 결과는 [이차 주입 이력의 가열 응답](research/cr_m0_quadratic_20261012/README_KO.md)이다. [현재 handoff](research/cr_m0_quadratic_20261012/HANDOFF.json)와 [다음 DAG](research/cr_m0_quadratic_20261012/NEXT_DAG.json)를 먼저 읽는다. 원 M0 COMPLETE와 감사 반영 계획을 유지하며, 다음 here 작업은 M1/M2/M3다. 이번 M0를 위한 NCP 작업은 없고 완료된 계산을 재실행하지 않는다.

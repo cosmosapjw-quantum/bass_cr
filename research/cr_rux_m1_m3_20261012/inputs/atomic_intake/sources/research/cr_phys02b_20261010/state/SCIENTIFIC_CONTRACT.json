@@ -1,0 +1,149 @@
+{
+  "schema": "cr-phys02b-scientific-coding-contract.v1",
+  "frozen_utc": "2026-10-10T11:51:51.254768+00:00",
+  "state": "FROZEN_BEFORE_NEW_MODEL_IMPLEMENTATION_AND_FINAL_NUMERICS",
+  "owner": "/root",
+  "model": "GPT-6 Astra Pro",
+  "model_identity_source": "host developer metadata",
+  "harness": {
+    "research": "4.0.0",
+    "coding": "4.0.0",
+    "model_performance": "NOT_EVALUATED"
+  },
+  "objective": "Actual causal repeated electron-impact H/HeI ionization and n2..4 excitation plus Coulomb energy drift for the inherited proton-born electron source. Resolve finite-time storage and flux into the previously treated low-energy band.",
+  "authority": "Current next bass_cr physics-loop request and prior PHYS02A handoff; inherited research-branch/draft-PR and create-only dual-backup authorization; no main merge.",
+  "source": {
+    "parent_head": "58c8e1cda5c8f8ca8b83269cb89899ea40ab91fe",
+    "normalization_proton_eV": [
+      10000.0,
+      1000000000000000.0
+    ],
+    "active_proton_eV": [
+      1000000.0,
+      4000000.0
+    ],
+    "electron_eV": [
+      0.1,
+      900.0
+    ],
+    "birth_tags_eV": [
+      [
+        0.1,
+        10.0
+      ],
+      [
+        10.0,
+        900.0
+      ]
+    ],
+    "history": "Q_e(W,t)=t*A(W), t in [0,1e10] s, initially empty; unchanged leading local H*t source approximation.",
+    "high_W_extension": "Rational Rudd coefficient representation only while all source proton ejection endpoints exceed W; direct-SDCS check required. Old 10 eV public guard unchanged."
+  },
+  "bath": {
+    "nH_m3": 140.0,
+    "Y_He": 0.248,
+    "xHII": 0.01,
+    "xHeII": 0.01,
+    "xHeIII": 0.0,
+    "temperature_K": 100.0,
+    "nHe_m3": 11.542553191489361,
+    "ne_m3": 1.5154255319148937,
+    "H_s": 3.3e-17,
+    "shear_s": 3.3e-18,
+    "state": "prescribed, not evolved"
+  },
+  "atomic_model": {
+    "excitation_channels": 27,
+    "excitation_source": "inputs/CCC_USED_CHANNELS.json",
+    "excitation_cost": "native first-zero marker adopted effective model cost; no experimental spectroscopy certificate",
+    "excitation_interpolation": "linear in E and sigma; native zero rows retained, no extrapolation",
+    "ionization": "NIST BEB total with normalized BED slow-electron energy-sharing shape, per NIST intro B and equations 1,3,4; exact coefficients and CGI normalization/domain must be pinned before final execution.",
+    "ionization_daughters": "W and E-B-W, with W in [0,(E-B)/2]; one extra free electron per event",
+    "photon_semantics": "excitation energy retained in separate atomic-excitation/radiation reservoirs by species; radiative branching/photon count/reabsorption not solved"
+  },
+  "coulomb": {
+    "closure": "superthermal equal-electron leading-log continuous slowing down into prescribed bath",
+    "b_eV_s": "4*pi*kappa^2*ne/(me*v*e) * min(Lclassical,Lquantum)",
+    "Lclassical": "ln(v*E_J/(kappa*omega_p))",
+    "Lquantum": "ln(2*E_J/(hbar*omega_p))",
+    "omega_p": "sqrt(ne*e^2/(epsilon0*me))",
+    "matched_low_energy": "exactly retains PHYS02A classical log below 10 eV",
+    "preselected_sensitivity": "replace Lquantum by Lquantum - 1/2; model sensitivity, not certified physical error",
+    "reference": "FS10 Eq12, Krommes2018 Eqs5,14 and classical/quantum matching discussion; dynamic bmax from inherited fast stopping closure"
+  },
+  "numerics": {
+    "variables": "energy-weighted electron nodes E_j*N_j plus disjoint absorbing energy reservoirs and number/low-boundary counters",
+    "projection": "nonnegative piecewise linear in energy, preserves electron count and energy; below 0.1 eV retain actual kinetic energy; near-cutoff grid projection documented",
+    "drift": "downward first-order conservative jump approximation; rate b(E_j)/(E_j-E_prev), heat is energy difference",
+    "birth_projection": "cell-split Gauss quadrature and same energy/count-conserving projection",
+    "ionization_projection": "BED quadrature split at all daughter projection knots; both daughters retained; discrete normalization correction recorded separately from physical NIST normalization",
+    "time": "sparse matrix exponential of source-ramp augmented linear system; initially zero; u=t/1e10",
+    "baseline_grids": [
+      [
+        200,
+        400
+      ],
+      [
+        400,
+        800
+      ]
+    ],
+    "refinement_if_needed": "double cells until fixed tolerances are met; no tolerance relaxation",
+    "low_grid": "uniform from ghost cutoff0.1 to10, upper endpoints active",
+    "high_grid": "geometric10 to900",
+    "precision": "FP64",
+    "terminal_reference": "mathematical resolvent of same frozen generator, not an evolution outside the source validity window"
+  },
+  "tolerances": {
+    "source_shape_relative": 1e-11,
+    "source_energy_relative": 1e-10,
+    "NIST_CGI_relative": 0.0005,
+    "ionization_quadrature_relative": 2e-08,
+    "generator_energy_number_relative": 5e-12,
+    "propagated_ledger_relative": 1e-09,
+    "positivity_absolute_normalized": 1e-12,
+    "mesh_channel_relative": 0.02,
+    "mesh_cutoff_and_low_boundary_count_relative": 0.03,
+    "analytic_low_heat_relative": 0.01,
+    "analytic_low_cutoff_relative": 0.03,
+    "time_oracle_normalized_linf": 2e-09,
+    "exact_branching_toy_relative": 2e-11,
+    "terminal_ledger_relative": 1e-09
+  },
+  "validation_plan": [
+    "PARENT_SOURCE_AND_ATOMIC_IDENTITY",
+    "SOURCE_HIGH_W_AND_COVERAGE",
+    "NIST_NORMALIZATION_SHARING_DOMAIN",
+    "GENERATOR_ENERGY_AND_NUMBER",
+    "CAUSALITY_POSITIVITY_AND_OFF",
+    "EXACT_SINGLE_EVENT_RAMP_ORACLE",
+    "INDEPENDENT_TIME_PROPAGATOR",
+    "INHERITED_LOW_CONTINUUM_LIMIT",
+    "ENERGY_MESH_REFINEMENT",
+    "IONIZATION_PROJECTION_QUADRATURE",
+    "SAME_OPERATOR_TERMINAL_LIMIT",
+    "COULOMB_PRESCRIPTION_SENSITIVITY"
+  ],
+  "reference_independence": "Parent analytic Ei low solution independently derived previously; direct Rudd SDCS versus coefficient path; source table/CGI versus implemented equations; exact branching toy; solve_ivp shares generator and tests time propagation only; refinement shares physics and does not certify physical accuracy.",
+  "exclusions": [
+    "direct source below0.1 or above900 eV",
+    "HeII impact channels",
+    "excitation n>=5 and continuum/resonance completeness",
+    "elastic neutral recoil and thermal energy diffusion",
+    "thermalization after0.1 eV",
+    "radiative branching/photon transport/reabsorption",
+    "gas or ionization feedback",
+    "source redshift/time approximation certificate",
+    "full history or production admission"
+  ],
+  "inherited_gates": {
+    "PHYS02_DELAY": "OPEN",
+    "production_history": "HOLD",
+    "atomic_G02": "UNRESOLVED",
+    "b_grid": "NO_GO",
+    "all_bound": "OPEN",
+    "R17B2B": "NO_CERTIFIED_SOURCE_SHARPENING"
+  },
+  "failure_and_completion": "Preserve first failures, source identity and actual exits. New candidate must pass scoped tests and actual independent final decision; missing atomic coefficients/domain is BLOCKED rather than invented. Numerical convergence is empirical, not a physical error certificate. Complete report, DAG, state, handoff and authorized publication/backups.",
+  "budget": "Lightweight local Python/SciPy; no new paid or HPC jobs; use evidence-driven mesh/quadrature repair as needed."
+}

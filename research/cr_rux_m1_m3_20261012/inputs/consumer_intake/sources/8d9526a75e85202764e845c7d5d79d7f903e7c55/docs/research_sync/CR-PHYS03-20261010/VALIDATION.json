@@ -1,0 +1,24 @@
+{
+  "schema": "cr-phys03-receiver-validation.v1",
+  "state": "PASS_SCOPED",
+  "commands": [
+    "cargo test --offline --locked --manifest-path rust/rei_microphysics/Cargo.toml --test axisym_cr_deposition",
+    "cargo run --offline --locked --manifest-path rust/rei_microphysics/Cargo.toml --example cr_deposition_probe -- 0.1"
+  ],
+  "results": {"receiver_tests_passed": 8, "receiver_tests_failed": 0, "native_probe": "PASS"},
+  "native_probe_checks": {
+    "provider_id": "CRP_L17_MD14_RUDD_FS10_XI010_CONDITIONAL_V1",
+    "packet_sha256": "2ecb1413c93f5cbc9ab64689ac17c191020320c9734138ea4bfaf291e10b6d46",
+    "matched_geometry": true,
+    "off_provider_calls": 0,
+    "solver_intervals": 0,
+    "corrected_energy_residual_j_m3_s": -2.7879108444817915e-58
+  },
+  "format_scope": "Changed CR files pass rustfmt --check; repository-wide cargo fmt --check still reports inherited unrelated files.",
+  "independent_review": {
+    "outcome": "PASS_SCOPED",
+    "native_source_temperature_k_s": 5.227520148437686e-22,
+    "adaptive_quadrature_max_relative_error": 2.6700607813472553e-13,
+    "resolution_max_secondary_rate_relative_change": 5.676127295604269e-8
+  }
+}

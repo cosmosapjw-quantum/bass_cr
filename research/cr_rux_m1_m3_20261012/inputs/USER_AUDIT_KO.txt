@@ -1,0 +1,209 @@
+이번 개발 DAG는 기존 물리·수치 결과를 최대한 재사용해서 실제 Bianchi 재이온화 결과를 얻는 것을 목표로 할게.
+
+2026년 10월 12일 기준으로 GitHub 연결 저장소 7개와 Dropbox의 주요 원본 경로를 확인했어. 특히 10월 4일의 기존 `GLOBAL_DAG.json`은 계획 당시 상태이므로, 이후 완료된 F08·SYNC02·SYNC03 등의 작업을 반영하는 successor DAG를 별도로 정의하는 것이 맞아.
+
+## 1. 참고할 GitHub 저장소
+
+### A. 우리 연구의 핵심 저장소
+
+| 우선순위 | Repository                                                       | 역할                                                                      |
+| ---- | ---------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| P0   | [rei_bianchi](https://github.com/cosmosapjw-quantum/rei_bianchi) | 주 개발 저장소. 비평형 H/He 화학, 광자 수송, Bianchi 배경, 전체 이력과 관측량 결합                 |
+| P0   | [rec_bianchi](https://github.com/cosmosapjw-quantum/rec_bianchi) | 초기 이온화·전자·온도 history, Peebles/HyRec 계열 참조                               |
+| P0   | [BASS_HE](https://github.com/cosmosapjw-quantum/BASS_HE)         | H/He 재결합·원자 전이·반응률·가열·고정밀 계산                                            |
+| P0   | [bass_cr](https://github.com/cosmosapjw-quantum/bass_cr)         | 광자 흡수·가열, hard-particle collision, 비평형 반응 확장                            |
+| P1   | [bass](https://github.com/cosmosapjw-quantum/bass)               | Bianchi photon transport, Thomson scattering, optical depth, visibility |
+| P1   | [WU088_HH](https://github.com/cosmosapjw-quantum/WU088_HH)       | HH 반응·단면적·에너지 수지·원자율 sensitivity                                        |
+| P2   | [htt_base](https://github.com/cosmosapjw-quantum/htt_base)       | 기존 Bianchi/tetrad 구현 및 과거 BASS 기반 코드 참조                                 |
+
+P0은 최초 physical EoR 계산에 직접 필요한 자료, P1은 관측량 결합 또는 고급 반응 확장, P2는 회귀 검증을 위한 역사적 자료라는 뜻이야.
+
+모든 저장소의 기본 branch는 `main`이지만, 연구용 최신 산출물이 반드시 `main`에 반영되어 있다는 뜻은 아니야. 실제 source/claim authority는 각 산출물에 기록된 commit/tree SHA와 해당 PR의 head를 기준으로 확정해야 해. 기존 문서에 나타나는 `cosmosapjw`와 이번에 확인된 `cosmosapjw-quantum` 경로도 혼동하지 않는 것이 좋아.
+
+### B. 참고할 외부 연구용 저장소
+
+| Repository                                                                                 | 가져올 개념과 방법                                                   |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------ |
+| [Grackle](https://github.com/grackle-project/grackle)                                      | H/He 비평형 화학, 냉각·가열 계수, 표 기반 microphysics                     |
+| [C2-Ray H+He](https://github.com/garrelt/C2-Ray3Dm1D_Helium)                               | Photon-conserving ionization front, hydrogen–helium RT 및 반응망 |
+| [pyC2Ray](https://github.com/cosmic-reionization/pyC2Ray)                                  | 빠른 RT 구현과 chemistry–RT 분리, 성능 비교                             |
+| [HyRec-2](https://github.com/nanoomlee/HYREC-2)                                            | Recombination 초기조건과 helium atomic history                    |
+| [CAMB](https://github.com/cmbant/CAMB) · [CLASS](https://github.com/lesgourg/class_public) | 표준 \\(x_e(z)\\), \\(\tau\\), visibility와 FLRW 회귀 비교          |
+
+특히 H/He를 포함한 C2-Ray 원본은 우리의 species-resolved photon ledger에 직접적인 참고 대상이야. 현재 공개 pyC2Ray의 문서상 helium과 multifrequency UV 확장은 미완료 항목으로 표시되어 있으므로, pyC2Ray만으로 모든 H/He 물리 검증을 대신하지는 않을 거야.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://github.com\&sz=32)
+
+GitHub
+
++3
+
+
+
+## 2. 우선 확인할 Dropbox 경로
+
+아래는 Dropbox에서 실제 존재를 확인한 경로들이야. `/`로 시작하는 경로는 Dropbox 루트 기준이며, NCP local Codex에서는 동일 경로의 파일 identity를 확인해 사용하면 돼.
+
+### A. 핵심 코드 및 통합 증거
+
+1. 현재 연구 코드
+   ```
+   /bianchi/rei_bianchi/rust/rei_microphysics/src/
+   ```
+   필독: `atomic_provider.rs`, `homogeneous_rates.rs`, `coupled_primary.rs`, `angular_photons.rs`, `axisym_radiation.rs`, `paired_runtime.rs`, `axisym_coupling.rs`, `he_rct.rs`.
+2. 실행된 FLRW/Bianchi paired history
+   ```
+   /bianchi/rei_bianchi/runs/rei_fastest_v1/paired/
+   ```
+   필독: `campaign_summary.json`, `paired_history.csv`, `difference_error_ledger.json`, `source_manifest.json`. 기존 15개 계산 이력을 우선 재사용해.
+3. 기존 원자물리 통합 연구 프로그램
+   ```
+   /bianchi/rei_bianchi/docs/atomic_reionization_handoff_20261004_v1/
+   ```
+   필독: `00_READ_FIRST_KO.md`, `GLOBAL_DAG.json`, `TASK_CARDS.jsonl`, `PR_PLAN.json`, `PROGRAM.json`, `EXECUTION_STATE.json`.
+4. REC–REI–BASS 실제 결합 검증
+   ```
+   /bianchi/rei_bianchi/docs/research_sync/REI-REC-BASS-SYNC02-20261005/
+   ```
+   필독: `README_KO.md`, `loop1/`, `loop2/`, `state/`, `review/`.
+5. SYNC03 후속 BASS 관측량 [Google Drive SYNC03 자료 폴더](https://drive.google.com/drive/folders/1JIh1a-WtEZG-ahzN6rk-9PECVSVxljo5)
+
+   `SYNC03_REPORT_KO.md`, `SYNC03_DAG.json`, `SYNC03_LOW_COST_ENTRY.json`, `REI_REC_BASS_SYNC03_20261007_v1.zip`을 우선 확인해. 이 결과는 기존 F08 전자 이력을 BASS의 \\(\tau\\) 계산에 연결한 범위 한정 검증이야.
+
+### B. 상세 원자물리와 physical input
+
+6. 원자물리 전체 handoff 및 REI/CR/HE 공용 자료
+   ```
+   /BASS_DERIVATION_DOSSIERS_20260912/
+     ATOMIC_REIONIZATION_HANDOFF_20261004_v1/
+   ```
+   `START_HERE_KO.md`, `INDEX.json`, `REI_BIANCHI_PHYSICAL_INPUT_HANDOFF_20261010_v2.tar`, `REI_PHYS19_COUPLED_BIRTH_RESPONSE_20261010.zip`, `BASS_CR_FASTEST_BRIDGE_20261007_v1.zip` 등을 포함해.
+7. Bianchi 물리 입력 후보
+   ```
+   /BASS_DERIVATION_DOSSIERS_20260912/
+     REI_PHYSINPUT_P01_PRODUCTION_20261010_c168e578.tar.gz
+     REI_PHYSINPUT_P02A_20261010_8a80fa9.tar.gz
+     REI_PHYSINPUT_P03A_20261010_d6ad8b7.tar.gz
+     REI_P03A_SOURCE_DELTA_20261010_05c45c3.tar.gz
+   ```
+   이 파일들의 존재는 확인했지만, 내부 입력이 실제 cosmological admission을 통과하는지는 별도로 확인해야 해.
+8. 기존 physical-input blocker 판단
+   ```
+   /BASS_DERIVATION_DOSSIERS_20260912/
+     REI_N2_LOCAL_INPUT_RESEARCH_20261010_v1/RECEIPT.md
+   ```
+   이전에 누락됐다고 판정된 background, IC, source history, closure를 검토할 때 출발점으로 삼아.
+9. BASS_HE 최신 수치·광자·가열 연구
+   ```
+   /BASS_DERIVATION_DOSSIERS_20260912/
+     BASS_HE_E13C10_REPORT_KO_20261012.md
+     BASS_HE_E13C10_NCP_LOCAL_CODEX_HANDOFF_KO_20261012.md
+   ```
+   기존 2,440개 유한 경로의 결과와 국소 포함구간 개선을 재사용하되, 이것을 전체 physical accuracy 보증으로 해석하지 않아야 해.
+10. WU088_HH 반응과 observable-first 계획
+    ```
+    /BASS_DERIVATION_DOSSIERS_20260912/
+      WU088_HH_R31S_NCP_REDESIGN_20260928/
+    ```
+    필독: `WU088_HH_OBSERVABLE_FIRST_PLAN_NCP_HANDOFF_20261012_v1.md`, PHYS 시리즈 보고서·결과 패키지.
+11. BASS_CR 광이온화·가열 진단 [BASS_CR Wide point diagnostic](https://drive.google.com/file/d/16y6OFZJF9fkcU31Qr-rTsAJGjEojwgJB/view)
+
+    기존 182 panel·5,824 quadrature point를 사용한 순간 광자 stock 진단과 그 제한을 우선 확인해.
+
+이렇게 정리하면 주 경로의 실제 코드와 과학 증거는 A1–A5, 새로운 physical input의 후보는 B6–B8, 고급 원자물리 확장과 검증은 B9–B11로 분리돼.
+
+## 3. 새로운 개발 DAG
+
+전체 구조는 17개 작업 노드로 구성했어. 그중 12개가 주 연구 경로, 1개가 기존 결과 재활용 경로, 4개가 조건부 확장이야.
+
+### REI Atomic-Reuse Successor DAG
+
+계획 확정 전
+
+\#chatgpt-mermaid-\_r_125\_{font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";font-size:16px;fill:rgb(237, 237, 237);}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#chatgpt-mermaid-\_r_125\_ .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#chatgpt-mermaid-\_r_125\_ .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#chatgpt-mermaid-\_r_125\_ .error-icon{fill:rgb(48, 48, 48);}#chatgpt-mermaid-\_r_125\_ .error-text{fill:rgb(237, 237, 237);stroke:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_125\_ .edge-thickness-normal{stroke-width:1px;}#chatgpt-mermaid-\_r_125\_ .edge-thickness-thick{stroke-width:3.5px;}#chatgpt-mermaid-\_r_125\_ .edge-pattern-solid{stroke-dasharray:0;}#chatgpt-mermaid-\_r_125\_ .edge-thickness-invisible{stroke-width:0;fill:none;}#chatgpt-mermaid-\_r_125\_ .edge-pattern-dashed{stroke-dasharray:3;}#chatgpt-mermaid-\_r_125\_ .edge-pattern-dotted{stroke-dasharray:2;}#chatgpt-mermaid-\_r_125\_ .marker{fill:rgb(175, 175, 175);stroke:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_125\_ .marker.cross{stroke:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_125\_ svg{font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";font-size:16px;}#chatgpt-mermaid-\_r_125\_ p{margin:0;}#chatgpt-mermaid-\_r_125\_ .label{font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";color:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_125\_ .cluster-label text{fill:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_125\_ .cluster-label span{color:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_125\_ .cluster-label span p{background-color:transparent;}#chatgpt-mermaid-\_r_125\_ .label text,#chatgpt-mermaid-\_r_125\_ span{fill:rgb(237, 237, 237);color:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_125\_ .node rect,#chatgpt-mermaid-\_r_125\_ .node circle,#chatgpt-mermaid-\_r_125\_ .node ellipse,#chatgpt-mermaid-\_r_125\_ .node polygon,#chatgpt-mermaid-\_r_125\_ .node path{fill:rgb(19, 33, 54);stroke:rgb(31, 78, 148);stroke-width:1px;}#chatgpt-mermaid-\_r_125\_ .rough-node .label text,#chatgpt-mermaid-\_r_125\_ .node .label text,#chatgpt-mermaid-\_r_125\_ .image-shape .label,#chatgpt-mermaid-\_r_125\_ .icon-shape .label{text-anchor:middle;}#chatgpt-mermaid-\_r_125\_ .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#chatgpt-mermaid-\_r_125\_ .rough-node .label,#chatgpt-mermaid-\_r_125\_ .node .label,#chatgpt-mermaid-\_r_125\_ .image-shape .label,#chatgpt-mermaid-\_r_125\_ .icon-shape .label{text-align:center;}#chatgpt-mermaid-\_r_125\_ .node.clickable{cursor:pointer;}#chatgpt-mermaid-\_r_125\_ .root .anchor path{fill:rgb(175, 175, 175)!important;stroke-width:0;stroke:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_125\_ .arrowheadPath{fill:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_125\_ .edgePath .path{stroke:rgb(175, 175, 175);stroke-width:1px;}#chatgpt-mermaid-\_r_125\_ .flowchart-link{stroke:rgb(175, 175, 175);fill:none;}#chatgpt-mermaid-\_r_125\_ .edgeLabel{background-color:rgb(14, 14, 14);text-align:center;}#chatgpt-mermaid-\_r_125\_ .edgeLabel p{background-color:rgb(14, 14, 14);}#chatgpt-mermaid-\_r_125\_ .edgeLabel rect{opacity:0.5;background-color:rgb(14, 14, 14);fill:rgb(14, 14, 14);}#chatgpt-mermaid-\_r_125\_ .labelBkg{background-color:rgba(14, 14, 14, 0.5);}#chatgpt-mermaid-\_r_125\_ .cluster rect{fill:rgb(48, 48, 48);stroke:rgba(255, 255, 255, 0.15);stroke-width:1px;}#chatgpt-mermaid-\_r_125\_ .cluster text{fill:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_125\_ .cluster span{color:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_125\_ div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";font-size:12px;background:rgb(48, 48, 48);border:1px solid rgba(255, 255, 255, 0.15);border-radius:2px;pointer-events:none;z-index:100;}#chatgpt-mermaid-\_r_125\_ .flowchartTitleText{text-anchor:middle;font-size:18px;fill:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_125\_ rect.text{fill:none;stroke-width:0;}#chatgpt-mermaid-\_r_125\_ .icon-shape,#chatgpt-mermaid-\_r_125\_ .image-shape{background-color:rgb(14, 14, 14);text-align:center;}#chatgpt-mermaid-\_r_125\_ .icon-shape p,#chatgpt-mermaid-\_r_125\_ .image-shape p{background-color:rgb(14, 14, 14);padding:2px;}#chatgpt-mermaid-\_r_125\_ .icon-shape .label rect,#chatgpt-mermaid-\_r_125\_ .image-shape .label rect{opacity:0.5;background-color:rgb(14, 14, 14);fill:rgb(14, 14, 14);}#chatgpt-mermaid-\_r_125\_ .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#chatgpt-mermaid-\_r_125\_ .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#chatgpt-mermaid-\_r_125\_ .node .neo-node{stroke:rgb(31, 78, 148);}#chatgpt-mermaid-\_r_125\_ [data-look="neo"].node rect,#chatgpt-mermaid-\_r_125\_ [data-look="neo"].cluster rect,#chatgpt-mermaid-\_r_125\_ [data-look="neo"].node polygon{stroke:url(#chatgpt-mermaid-\_r_125\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_125\_ [data-look="neo"].swimlane.cluster rect{filter:none;}#chatgpt-mermaid-\_r_125\_ [data-look="neo"].node path{stroke:url(#chatgpt-mermaid-\_r_125\_-gradient);stroke-width:1px;}#chatgpt-mermaid-\_r_125\_ [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_125\_ [data-look="neo"].node .neo-line path{stroke:rgb(31, 78, 148);filter:none;}#chatgpt-mermaid-\_r_125\_ [data-look="neo"].node circle{stroke:url(#chatgpt-mermaid-\_r_125\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_125\_ [data-look="neo"].node circle .state-start{fill:#000000;}#chatgpt-mermaid-\_r_125\_ [data-look="neo"].icon-shape .icon{fill:url(#chatgpt-mermaid-\_r_125\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_125\_ [data-look="neo"].icon-shape .icon-neo path{stroke:url(#chatgpt-mermaid-\_r_125\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_125\_ .node text{font-size:14px;font-weight:600;letter-spacing:normal;fill:rgb(232, 232, 232);}#chatgpt-mermaid-\_r_125\_ .edgeLabels text{font-size:13px;font-weight:600;letter-spacing:-0.08px;fill:rgb(232, 232, 232);}#chatgpt-mermaid-\_r_125\_ .node tspan[font-weight="normal"],#chatgpt-mermaid-\_r_125\_ .edgeLabels tspan[font-weight="normal"]{font-weight:600;}#chatgpt-mermaid-\_r_125\_ .edgeLabel .label rect{opacity:1;rx:13px;ry:13px;fill:rgb(19, 19, 19);stroke:rgb(47, 47, 47);stroke-width:1px;}#chatgpt-mermaid-\_r_125\_ .node rect,#chatgpt-mermaid-\_r_125\_ .node circle,#chatgpt-mermaid-\_r_125\_ .node ellipse,#chatgpt-mermaid-\_r_125\_ .node polygon,#chatgpt-mermaid-\_r_125\_ .node path{fill:rgb(24, 24, 24);stroke:rgba(255, 255, 255, 0.1);stroke-width:1px;}#chatgpt-mermaid-\_r_125\_ .node rect{rx:16px;ry:16px;}#chatgpt-mermaid-\_r_125\_ .node.mermaid-decision .label-container{fill:rgb(19, 19, 19);stroke:rgb(47, 47, 47);stroke-dasharray:2,2;}#chatgpt-mermaid-\_r_125\_ .edgePaths .flowchart-link{stroke:rgb(175, 175, 175);stroke-width:1px;stroke-linecap:round;stroke-linejoin:round;}#chatgpt-mermaid-\_r_125\_ .marker{fill:rgb(175, 175, 175);stroke:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_125\_ :root{--mermaid-font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";}#chatgpt-mermaid-\_r_125\_ .retained rect{fill:rgb(220, 236, 227)!important;stroke:rgb(40, 118, 75)!important;color:rgb(22, 61, 41)!important;}#chatgpt-mermaid-\_r_125\_ .retained polygon{fill:rgb(220, 236, 227)!important;stroke:rgb(40, 118, 75)!important;color:rgb(22, 61, 41)!important;}#chatgpt-mermaid-\_r_125\_ .retained ellipse{fill:rgb(220, 236, 227)!important;stroke:rgb(40, 118, 75)!important;color:rgb(22, 61, 41)!important;}#chatgpt-mermaid-\_r_125\_ .retained circle{fill:rgb(220, 236, 227)!important;stroke:rgb(40, 118, 75)!important;color:rgb(22, 61, 41)!important;}#chatgpt-mermaid-\_r_125\_ .retained path{fill:rgb(220, 236, 227)!important;stroke:rgb(40, 118, 75)!important;color:rgb(22, 61, 41)!important;}#chatgpt-mermaid-\_r_125\_ .retained tspan{fill:rgb(22, 61, 41)!important;}#chatgpt-mermaid-\_r_125\_ .gate rect{fill:rgb(247, 230, 190)!important;stroke:rgb(160, 113, 32)!important;color:rgb(89, 62, 12)!important;}#chatgpt-mermaid-\_r_125\_ .gate polygon{fill:rgb(247, 230, 190)!important;stroke:rgb(160, 113, 32)!important;color:rgb(89, 62, 12)!important;}#chatgpt-mermaid-\_r_125\_ .gate ellipse{fill:rgb(247, 230, 190)!important;stroke:rgb(160, 113, 32)!important;color:rgb(89, 62, 12)!important;}#chatgpt-mermaid-\_r_125\_ .gate circle{fill:rgb(247, 230, 190)!important;stroke:rgb(160, 113, 32)!important;color:rgb(89, 62, 12)!important;}#chatgpt-mermaid-\_r_125\_ .gate path{fill:rgb(247, 230, 190)!important;stroke:rgb(160, 113, 32)!important;color:rgb(89, 62, 12)!important;}#chatgpt-mermaid-\_r_125\_ .gate tspan{fill:rgb(89, 62, 12)!important;}#chatgpt-mermaid-\_r_125\_ .research rect{fill:rgb(220, 232, 247)!important;stroke:rgb(83, 123, 176)!important;color:rgb(21, 59, 105)!important;}#chatgpt-mermaid-\_r_125\_ .research polygon{fill:rgb(220, 232, 247)!important;stroke:rgb(83, 123, 176)!important;color:rgb(21, 59, 105)!important;}#chatgpt-mermaid-\_r_125\_ .research ellipse{fill:rgb(220, 232, 247)!important;stroke:rgb(83, 123, 176)!important;color:rgb(21, 59, 105)!important;}#chatgpt-mermaid-\_r_125\_ .research circle{fill:rgb(220, 232, 247)!important;stroke:rgb(83, 123, 176)!important;color:rgb(21, 59, 105)!important;}#chatgpt-mermaid-\_r_125\_ .research path{fill:rgb(220, 232, 247)!important;stroke:rgb(83, 123, 176)!important;color:rgb(21, 59, 105)!important;}#chatgpt-mermaid-\_r_125\_ .research tspan{fill:rgb(21, 59, 105)!important;}#chatgpt-mermaid-\_r_125\_ .optional rect{fill:rgb(233, 233, 233)!important;stroke:rgb(136, 136, 136)!important;color:rgb(68, 68, 68)!important;}#chatgpt-mermaid-\_r_125\_ .optional polygon{fill:rgb(233, 233, 233)!important;stroke:rgb(136, 136, 136)!important;color:rgb(68, 68, 68)!important;}#chatgpt-mermaid-\_r_125\_ .optional ellipse{fill:rgb(233, 233, 233)!important;stroke:rgb(136, 136, 136)!important;color:rgb(68, 68, 68)!important;}#chatgpt-mermaid-\_r_125\_ .optional circle{fill:rgb(233, 233, 233)!important;stroke:rgb(136, 136, 136)!important;color:rgb(68, 68, 68)!important;}#chatgpt-mermaid-\_r_125\_ .optional path{fill:rgb(233, 233, 233)!important;stroke:rgb(136, 136, 136)!important;color:rgb(68, 68, 68)!important;}#chatgpt-mermaid-\_r_125\_ .optional tspan{fill:rgb(68, 68, 68)!important;}RUX00 기존 자산·권한 동결RUX01 기존 F08/SYNC03 결과활용RUX02 Physical inputadmissionRUX03 원자율·opacity owner확정RUX04 EoR scenario 고정RUX05 FLRW 첫 physicalintervalRUX06 Bianchi-I photontransportRUX07 Bianchi-I 첫 coupledintervalRUX08 FLRW EoR full historyRUX09 Bianchi/FLRW pairedhistoryRUX10 BASS opticaldepth/visibilityRUX11 Scientific plots +error budgetRUX16 Physical claim gateRUX12 HE precisionRUX13 CR extensionRUX14 HH extensionRUX15 Spatial/21cmextension
+
+색상은 작업의 역할을 구분할 뿐 PASS 상태를 뜻하지 않아. 기존 결과는 별도 증거로 보존되며, 신규 successor 노드들은 아직 실행되지 않았어.
+
+### 3.1 실제 개발 작업과 acceptance gate
+
+| 작업 ID   | 내용                                    | 핵심 완료조건                                                                        |
+| ------- | ------------------------------------- | ------------------------------------------------------------------------------ |
+| `RUX00` | 전체 source·claim authority 동결          | 기존 결과의 commit/SHA/상태 확인, 중복 작업 제거                                              |
+| `RUX01` | 저장된 F08·SYNC03 결과 재활용                 | 기존 CSV·오차 장부로 즉시 scientific diagnostic 산출                                      |
+| `RUX02` | Physical input admission              | 실제 Bianchi background, IC, photon spectrum, source history, closure 완비         |
+| `RUX03` | 원자·광자 사건 owner registry               | Case A/B, HI opacity, recombination photons, energy ledger 중복 없음               |
+| `RUX04` | 하나의 물리적 EoR scenario 확정               | Source-backed emissivity, H/He initial history, shear, 적용범위 고정                 |
+| `RUX05` | FLRW 첫 coupled interval               | 기존 반응망 재사용, nuclei/charge/photon/energy 보존                                     |
+| `RUX06` | Bianchi-I 수송 연결                       | 방향별 적색편이, frequency-face flux, FLRW 극한 검증                                      |
+| `RUX07` | Bianchi-I 첫 physical coupled interval | 실제 광자–기체–온도 결합, 동일 source 비교                                                   |
+| `RUX08` | FLRW EoR history                      | \\(x\_{\mathrm{HII}},x\_{\mathrm{HeII}},x\_{\mathrm{HeIII}},T_g,\Gamma_s\\) 계산 |
+| `RUX09` | Bianchi/FLRW 전체 비교                    | 같은 원자·광원 조건의 paired histories와 수렴성                                             |
+| `RUX10` | BASS 관측량 결합                           | Actual \\(n_e(t)\\)를 이용한 \\(\tau\\), visibility                                |
+| `RUX11` | Scientific plots와 error budget        | Numerical, atomic, source, geometry 불확실성 분리                                    |
+| `RUX16` | Physical claim 및 재현성 gate             | 물리적 입력·수치 검증·관측량 오차에 맞는 주장 범위 확정                                               |
+
+`RUX02`와 `RUX03`는 병렬로 진행할 수 있어. 마찬가지로 `RUX05`와 `RUX06`, 이후 `RUX07`과 `RUX08`의 독립된 부분도 병렬화할 수 있어.
+
+가장 중요한 새로운 의존성 규칙은 다음이야.
+
+\\[ \boxed{ \text{HE/CR/HH 정밀 원자물리의 완결} \not\Rightarrow \text{첫 EoR history의 필수 선행조건} } \\]
+
+대신 물리적 민감도나 source domain이 해당 채널을 요구한다면 `RUX12–14`를 호출해.
+
+### 3.2 별도 유지할 정밀 연구
+
+| 노드      | 연구                               | 활성화 조건                                                |
+| ------- | -------------------------------- | ----------------------------------------------------- |
+| `RUX12` | BASS_HE 정밀율·가열 상계                | 해당 원자채널이 \\(x_e,T_g,\tau\\) 오차 예산에 의미 있는 기여를 할 때      |
+| `RUX13` | BASS_CR hard-particle·deposition | Hard photon, secondary electron 등 해당 과정이 실제 모델에 포함될 때 |
+| `RUX14` | WU088_HH reaction/sensitivity    | HH 반응의 온도·에너지·종 수지에 대한 관측량 민감도를 평가할 필요가 있을 때          |
+| `RUX15` | 비균질 IGM, \\(Q_M/Q_V\\), 21 cm    | Global one-zone model을 넘어 spatial topology를 예측할 때     |
+
+이들은 폐기되는 작업이 아니라 각자 독립적인 연구 가치를 유지하면서 REI에 필요할 때 연결되는 확장 경로야.
+
+## 4. PR 및 실행 분업
+
+실제 구현을 진행할 때는 다음 순서로 PR을 나누는 것이 좋겠어.
+
+| PR 묶음        | 담당                                                    | 실행 환경                  |
+| ------------ | ----------------------------------------------------- | ---------------------- |
+| `REI-RUX-01` | RUX00–03, source admission 및 기존 결과 재활용                | ChatGPT/경량 local       |
+| `REI-RUX-02` | RUX04–05, physical scenario 및 첫 FLRW coupled interval | 경량 local               |
+| `REI-RUX-03` | RUX06–07, Bianchi characteristic와 첫 결합 interval       | 경량 local               |
+| `REI-RUX-04` | RUX08–09, source-backed history 및 paired convergence  | Local 우선, 중량 작업만 NCP   |
+| `REI-RUX-05` | RUX10–11·16, BASS 관측량과 scientific claim               | 경량 분석 및 필요한 수치 적분      |
+| 별도 선택 PR     | RUX12–15                                              | 효과와 실행비용이 확인된 경우에만 NCP |
+
+이 PR 명칭은 제안이며, 아직 실제 GitHub PR을 만들거나 기존 PR 번호에 배정한 것은 아니야.
+
+64 core / 128 GB NCP는 첫 단계부터 사용할 필요가 없어. 미완성 physical provider를 대규모로 실행해도 science gate는 전진하지 않으니까. 실제 EoR 전체 history의 parameter scan, 독립적인 수많은 수송 이력 또는 충분히 무거운 convergence 작업이 준비됐을 때만 NCP에 넘기는 구조로 작성했어.
+
+## 5. 실행 가능한 DAG·Handoff 파일
+
+아래 세 파일을 생성하고, 17개 노드의 ID 유일성, dependency 존재 여부, cycle 부재를 프로그램으로 확인했어.
+
+REI_ATOMIC_REUSE_DAG_20261012.json
+
+Machine-readable DAG, 17개 노드, dependency, inputs, output, acceptance, blocker, 실행환경
+
+열기&#x20;
+
+전체 개발 계획서
+
+Repository registry, Dropbox 경로, Mermaid DAG, 17개 작업의 상세 실행·중단 기준
+
+NCP/local Codex 시작 프롬프트
+
+기존 AGENTS·SSOT 보존, 물리 입력 감사, source binding, 계산 분업 및 반환 계약
+
+파일 작성 및 DAG 구조 검사는 완료됐지만 GitHub push, NCP 실행, 새로운 physics validation은 아직 시행하지 않았어.
+
+## 6. 바로 시작할 위치
+
+이번 DAG에서는 처음부터 원자물리 전체를 재검토하지 않아. 가장 먼저 할 일은 `RUX00 → RUX02/RUX03`이야.
+
+특히 기존 `REI_BIANCHI_PHYSICAL_INPUT_HANDOFF_20261010_v2.tar`와 `REI_PHYSINPUT_P01/P02A/P03A`의 내부 데이터를 읽고, 10월 10일의 N2 입력 누락 판정이 실제로 해소됐는지 확인하는 것을 첫 번째 결정적 작업으로 정했어.
+
+그것이 통과하면 이미 존재하는 `coupled_primary.rs`와 Bianchi photon transport를 연결해 첫 source-backed H/He physical interval을 진행하는 것이 다음 목표야.
+
+이 방식이라면 이미 완료된 F08·SYNC03·HE·CR·HH 연구를 모두 보존하면서도, 재이온화의 본래 목적인 물리적 이온화 history와 Bianchi 효과 계산을 다시 중심에 둘 수 있어.

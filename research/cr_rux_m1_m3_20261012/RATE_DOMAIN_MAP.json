@@ -1,0 +1,56 @@
+{
+  "schema": "cr-rux-domain-map.v1",
+  "primary_photon_bridge": {
+    "actual_sigma_and_binding_owner": "source-pinned AtomicProvider; thresholds/cutoffs are not silently copied or equated",
+    "provider_numeric_domain_reaudited_here": false,
+    "consumer_temperature_domain": "source-specific; no FT03-to-IGM extrapolation"
+  },
+  "terminal_CR_packet": {
+    "time_s": 10000000000,
+    "n_h_m3": 140,
+    "n_he_m3": 11.542553191489361,
+    "temperature_k": 100,
+    "y_he_mass_fraction": 0.248,
+    "exact_composition_knots": [
+      0.01,
+      0.1
+    ],
+    "manifold": "x_HII = x_HeII = xi, x_HeIII = 0",
+    "H_s": 3.3e-17,
+    "shear_s": 3.3e-18,
+    "geometry": "a_relative=exp(H*time), b=shear*time; same snapshot geometry enforced.",
+    "source_manifest_scenario_z": 8,
+    "active_proton_window_eV": [
+      1000000,
+      4000000
+    ],
+    "closure": "FS10_LOCAL_DEPOSITION_PROMPT_EXCITATION_AND_CONTINUUM_ESCAPE",
+    "interpolation_across_xi": false,
+    "general_evolving_gas_or_geometry": false,
+    "source_refs": [
+      "pr110_cr_module",
+      "pr110_cr_pin",
+      "phys01_manifest"
+    ]
+  },
+  "causal_M0": {
+    "T_s": "10000000000",
+    "source_model": "fixed PHYS02 moment record, selected and birth representations separate",
+    "electron_energy_window_eV": [
+      "0.1",
+      "900"
+    ],
+    "bath": "inherited xi=.01,T100 K,nH140 m^-3 prescribed bath; no xi=.1 or evolving-bath transfer",
+    "excluded": [
+      "unknown source history",
+      "new age/density scaling",
+      "new spectral family",
+      "post-T curve",
+      "HeII-impact extension",
+      "coupled feedback"
+    ],
+    "source_compatibility": "Shared injection/Rudd file digests establish lineage; full spectral/kernel/normalization identity remains to be bound"
+  },
+  "physical_consumer_admission": "OPEN",
+  "numeric_truth_error": "NOT_BOUNDED_BY_RECORDED_FRACTION_ARITHMETIC"
+}

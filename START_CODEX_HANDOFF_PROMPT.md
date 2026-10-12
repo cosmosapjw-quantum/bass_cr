@@ -1,4 +1,10 @@
-# 현재 시작점 — M0 이차 주입 응답 완료, 2026-10-12
+# 현재 시작점 — CR 재사용 DAG와 M1–M3 완료, 2026-10-12
+
+`research/cr_rux_m1_m3_20261012/`의 `START_NCP_CODEX_KO.md`, `REPORT_KO.md`, `PLAN_KO.md`, `HANDOFF.json`, `NEXT_DAG.json`, `review/DECISION.json`을 먼저 읽어라. M0와 이차 응답, 이번 M2 계산 및 기존 국소 CR OFF 검사를 반복하지 마라. 다음 here 작업은 실제 electron source–kernel 정규화 연결과 관측량 오차 예산이다. 현재 새 NCP job은 없고 H 전체9600은 DEFERRED_OPTIONAL이다. 아래 시작문들은 이전 단계의 기록으로 보존한다.
+
+---
+
+# 이전 시작점 — M0 이차 주입 응답 완료, 2026-10-12
 
 `research/cr_m0_quadratic_20261012/`의 `README_KO.md`, `HANDOFF.json`, `NEXT_DAG.json`, `START_NCP_CODEX_KO.md`를 먼저 읽어라. 기존 M0와 이번 후속 계산은 완료됐고 다음 here 작업은 M1/M2/M3다. 새 NCP dispatch는0이다.
 
