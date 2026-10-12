@@ -1,5 +1,9 @@
 # BASS_CR project harness
 
+## 현재 이론 연구 루프 — 온도·H/He 자기일관적 사건 step, 2026-10-13
+
+[현재 보고서](research/cr_feedback_step_20261013/latex/manuscript.md), [전체 PDF](research/cr_feedback_step_20261013/latex/report.pdf), [계획](research/cr_feedback_step_20261013/PLAN_KO.md), [DAG](research/cr_feedback_step_20261013/NEXT_DAG.json), [handoff](research/cr_feedback_step_20261013/HANDOFF.json)를 먼저 읽는다. 공통 사건 extent의 비음성·선형 보존, 12-state/10-event H/He 구성, 양의 온도 domain과 고정점 존재·수축, 반복 및 물리 endpoint defect의 온도 오차, 공변 xAct 투영과 prescribed Bianchi 합성, 정확한 비선형 사례 FB1–FB7 및 두 reference 구현이 독립 PROMOTE_SCOPED / PASS를 받았다. 모든 주장은 명시된 유한 사건·rate-domain·angular closure·정칙 시간 조건에 결속된다. 다음 이론 작업은 실제 atomic kernel의 현재 parent/daughter 에너지에 대한 양의 사건 adapter와 온도 의존 cutoff의 implicit 경계 응답이다. 선택 scenario/source와 관측량 오차 예산은 해당 응용 node에서 결속한다. 기존 과학 실행과 원 근거의 identity를 재사용하고 조건 변화 없는 실행을 반복하지 않는다. 아래는 보존한 이전 단계다.
+
 ## 현재 이론 연구 루프 — 열적 진화와 충돌 시계, 2026-10-12
 
 [현재 보고서](research/cr_thermal_evolution_20261012/REPORT_KO.md), [전체 PDF](research/cr_thermal_evolution_20261012/latex/report.pdf), [계획](research/cr_thermal_evolution_20261012/PLAN_KO.md), [DAG](research/cr_thermal_evolution_20261012/NEXT_DAG.json), [handoff](research/cr_thermal_evolution_20261012/HANDOFF.json)를 먼저 읽는다. 이동 cutoff, thermal/all-free 초과에너지의 정확한 동치, 공통 충돌 시계, 실제 Coulomb 밀도 잔차와 온도 오차 연결 TH1–TH7이 독립 PROMOTE_SCOPED를 받았다. 명시된 가정 아래 이론을 완결했다. 다음 이론 작업은 T·H/He 조성 피드백을 포함하는 양의 보존적 한 step 구성이다. 사용자의 명시적 이론 요청은 일반 유도·구성의 근거이며 실제 scenario 선택과 수치 오차 예산은 해당 응용 경로에서 결속한다. 검산과 원 근거의 identity를 재사용하고 조건 변화가 없는 이전 실행을 반복하지 않는다. 아래는 보존한 이전 단계다.

@@ -1,0 +1,206 @@
+{
+  "schema_version": 1,
+  "unit_id": "CR-THEORY-FEEDBACK-20261013",
+  "status": "PRIMARY_PASSAGES_REVIEWED",
+  "checked_at_local_date": "2026-10-13",
+  "timezone": "Asia/Seoul",
+  "reviewer": "/root/feedback_literature_review",
+  "independence": {
+    "candidate_generation": false,
+    "candidate_check_design": false,
+    "role": "Primary-source review followed by independent review of frozen candidate"
+  },
+  "search_summary": {
+    "scispace": {
+      "calls": 1,
+      "question": "Which positivity-preserving and conservative time integration methods have rigorous proofs for chemical reaction networks with multiple reactants, and how do reaction-based modified Patankar methods enforce stoichiometric conservation?",
+      "returned_papers": 10,
+      "status": "completed"
+    },
+    "exa": {
+      "search_calls": 4,
+      "numResults_sum": 26,
+      "fetch_calls": 4,
+      "search_angles": [
+        "reaction-based positivity and stoichiometry",
+        "non-equilibrium H/He thermal chemistry",
+        "targeted bibliographic verification"
+      ],
+      "status": "completed"
+    },
+    "selected_primary_papers": 4,
+    "scope": "Targeted comparison of proof conditions and thermo-chemical coupling; no exhaustive novelty claim"
+  },
+  "sources": [
+    {
+      "id": "L1",
+      "authors": [
+        "Jianhua Pan",
+        "Yu-Yen Chen",
+        "Liang-Shih Fan"
+      ],
+      "title": "Second-order unconditional positive preserving schemes for non-equilibrium reactive flows with mass and mole balance",
+      "year": 2021,
+      "journal": "Journal of Computational Physics",
+      "volume": "441",
+      "article": "110477",
+      "doi": "10.1016/j.jcp.2021.110477",
+      "arxiv": "2006.08549",
+      "url": "https://doi.org/10.1016/j.jcp.2021.110477",
+      "read_url": "https://ar5iv.labs.arxiv.org/html/2006.08549",
+      "publisher_url": "https://www.sciencedirect.com/science/article/abs/pii/S0021999121003727",
+      "retrieval": "Exa full-text fetch of ar5iv author preprint; publisher metadata/search result cross-check",
+      "passages_reviewed": [
+        "Sections 2-3, process-based common weights and order conditions",
+        "Section 4, Conjecture 1 and Theorems 1-2",
+        "Section 5, internal energy treated as a reactant or product"
+      ],
+      "evidence_state": "literature-supported",
+      "relationship": "contextual",
+      "applied": [
+        "Shared reaction weight preserves per-reaction stoichiometric increments",
+        "Thermal energy can enter the reaction-resource accounting"
+      ],
+      "conditional_scope": [
+        "General multi-reactant positive-solution existence/uniqueness is Conjecture 1 in the read preprint",
+        "Theorem 1: one reactant in each reaction",
+        "Theorem 2: one multi-reactant reaction without products plus linear single-reactant reactions",
+        "General evidence includes numerical sampling"
+      ],
+      "our_proof_dependency": "No imported general positivity theorem; current candidate must supply its own construction/proof"
+    },
+    {
+      "id": "L2",
+      "authors": [
+        "Stefan Kopecz",
+        "Andreas Meister"
+      ],
+      "title": "On Order Conditions for modified Patankar-Runge-Kutta schemes",
+      "year": 2017,
+      "arxiv": "1702.04589",
+      "doi": "10.48550/arXiv.1702.04589",
+      "url": "https://arxiv.org/abs/1702.04589",
+      "read_url": "https://arxiv.org/pdf/1702.04589",
+      "retrieval": "Exa PDF full-text fetch and arXiv abstract metadata",
+      "web_ref": "turn24view1",
+      "passages_reviewed": [
+        "Definitions 1.1-1.2 and 2.1",
+        "Lemmas 2.6-2.7",
+        "Theorems 3.3-3.4"
+      ],
+      "evidence_state": "literature-supported",
+      "relationship": "supports",
+      "applied": [
+        "Positive inverse via strictly column-diagonally-dominant M-matrix",
+        "Conservation via matched production and destruction flows"
+      ],
+      "conditional_scope": [
+        "p_ij=d_ji for conservative pairwise production-destruction system",
+        "Nonnegative Runge-Kutta coefficients",
+        "Positive Patankar denominators independent of the corresponding unknown stage",
+        "Order requires separate denominator consistency conditions"
+      ],
+      "our_proof_dependency": "Comparison for frozen linear map; candidate's event and nonlinear feedback proof is checked directly"
+    },
+    {
+      "id": "L3",
+      "authors": [
+        "U. Ziegler"
+      ],
+      "title": "A chemical reaction network solver for the astrophysics code NIRVANA",
+      "year": 2016,
+      "journal": "Astronomy & Astrophysics",
+      "volume": "586",
+      "article": "A82",
+      "doi": "10.1051/0004-6361/201527262",
+      "url": "https://doi.org/10.1051/0004-6361/201527262",
+      "read_url": "https://www.aanda.org/articles/aa/full_html/2016/02/aa27262-15/aa27262-15.html",
+      "retrieval": "Exa official full HTML and official abstract metadata",
+      "passages_reviewed": [
+        "Sections 2.1-2.2, equations (3)-(13)",
+        "Section 3, GRK4(3)T source integrator"
+      ],
+      "evidence_state": "literature-supported",
+      "relationship": "supports",
+      "applied": [
+        "Temperature source includes particle-number derivative",
+        "Reaction and thermal source terms share reactant abundance products"
+      ],
+      "conditional_scope": [
+        "Fixed gamma ideal-gas EOS",
+        "Fixed-volume reaction substep",
+        "Electron density follows charge balance of included chemical species"
+      ],
+      "our_proof_dependency": "Thermal EOS comparison; active-thermal split and cutoff ownership use prior accepted BASS_CR theory"
+    },
+    {
+      "id": "L4",
+      "authors": [
+        "Daniel R. Reynolds",
+        "John C. Hayes",
+        "Pascal Paschos",
+        "Michael L. Norman"
+      ],
+      "title": "Self-Consistent Solution of Cosmological Radiation-Hydrodynamics and Chemical Ionization",
+      "year": 2009,
+      "doi": "10.1016/j.jcp.2009.06.006",
+      "arxiv": "0901.1110v3",
+      "url": "https://doi.org/10.1016/j.jcp.2009.06.006",
+      "read_url": "https://arxiv.org/pdf/0901.1110",
+      "retrieval": "Exa and web PDF full text",
+      "web_ref": "turn22view3",
+      "passages_reviewed": [
+        "Section 2.1, mutual rate-temperature-opacity dependence",
+        "Sections 3.2-3.2.4, equations (19)-(43)"
+      ],
+      "evidence_state": "literature-supported",
+      "relationship": "contextual",
+      "applied": [
+        "Joint implicit chemistry-energy residual",
+        "Separate physical variable scaling and local microphysics blocks"
+      ],
+      "conditional_scope": [
+        "Cosmological hydrodynamics and flux-limited diffusion radiation model",
+        "Line-search inexact Newton with specified tolerance and scaled variables",
+        "Local species/energy block coupled to spatial radiation block"
+      ],
+      "our_proof_dependency": "Methodological context; candidate uses its own finite-dimensional map and contraction conditions"
+    }
+  ],
+  "retrieval_observations": [
+    {
+      "class": "retrieval_format",
+      "target": "https://arxiv.org/pdf/2006.08549",
+      "observation": "Exa returned bibliographic record rather than proof text",
+      "resolution": "Read full author-preprint HTML through Exa ar5iv URL"
+    },
+    {
+      "class": "environment",
+      "tool": "generic_web",
+      "targets": [
+        "arxiv PDF 2006.08549",
+        "arxiv PDF 1702.04589",
+        "A&A official HTML/PDF",
+        "ScienceDirect publisher"
+      ],
+      "observation": "DisabledError, 503, or 403 in generic web fetch",
+      "resolution": "Primary passages obtained through Exa; failed generic fetches not cited"
+    },
+    {
+      "class": "retrieval_quality",
+      "tool": "generic_web_system1",
+      "observation": "One verification query batch returned unrelated pages",
+      "resolution": "Discarded; Exa publisher metadata and full texts retained"
+    }
+  ],
+  "exclusions": [
+    {
+      "arxiv": "astro-ph/9608041",
+      "reason": "Discovery and abstract only; four closer primary sources suffice for this bounded comparison"
+    }
+  ],
+  "candidate_review_status": "COMPLETE_ACCEPTED_SCOPED",
+  "candidate_review_decision": "review/DECISION.json",
+  "candidate_review_scope": "FB1–FB7, event_capacity_step.py, feedback_solver.py; explicit CONTRACT A1–A9 and feedback domain assumptions retained",
+  "candidate_review_completed_utc": "2026-10-12T21:21:17.041223+00:00"
+}
