@@ -1,0 +1,99 @@
+{
+  "schema": "cr-current-plan-dag.v1",
+  "created_utc": "2026-10-12T06:20:10.086462+00:00",
+  "nodes": [
+    {
+      "id": "M0_CACHED_ONSET_RESPONSE",
+      "status": "COMPLETE",
+      "owner": "ChatGPT",
+      "depends_on": [],
+      "outputs": [
+        "results/CACHED_RESPONSE.json",
+        "results/CACHED_RESPONSE.tsv",
+        "results/CACHED_RESPONSE.png",
+        "evidence/ACTUAL_EXECUTION.json"
+      ],
+      "claim": "Exact recorded-moment response functionals; fixed kernel only"
+    },
+    {
+      "id": "M1_CONSUMER_SCOPE",
+      "status": "READY",
+      "owner": "ChatGPT",
+      "depends_on": [
+        "M0_CACHED_ONSET_RESPONSE"
+      ],
+      "work": "Resolve existing consumer q(t), spectral shape, bath/domain, CR fraction, normalization, observable and error budget",
+      "output": "CONSUMER_REQUEST.json updated with actual pinned evidence; no fabricated source"
+    },
+    {
+      "id": "M2_RESPONSE_ERROR_MAP",
+      "status": "READY_CONTROLLED_SCOPE",
+      "owner": "ChatGPT",
+      "depends_on": [
+        "M0_CACHED_ONSET_RESPONSE"
+      ],
+      "conditional_input": "Use M1 when actual consumer is bound; otherwise explicitly declared controlled fixed-kernel histories",
+      "work": "Use saved mu,p,R,S to compare instantaneous, first-delay correction and source-curvature/tail bounds; no new G",
+      "output": "Observable/error map with actual source domain and sufficiency decision"
+    },
+    {
+      "id": "M3_CR_OFF_RECEIVER_STATUS",
+      "status": "READY_READ_ONLY_INTAKE",
+      "owner": "ChatGPT in bass_cr; downstream receiver owner executes integration",
+      "depends_on": [],
+      "work": "Read actual CR-off source=0/provider-calls=0 evidence at receiver; if missing, deliver minimal interface fix with targeted test",
+      "output": "Source-pinned receiver status; do not equate spec with implementation"
+    },
+    {
+      "id": "M4_TARGETED_CR_EXTENSION",
+      "status": "CONDITIONAL",
+      "owner": "ChatGPT design/light execution; NCP only admitted heavy execution",
+      "depends_on": [],
+      "activation": "Concrete consumer deficiency or explicit independent CR research question",
+      "work": "Extend only missing physics/domain under a fresh numerical and cost contract; preserve original atomic gates"
+    },
+    {
+      "id": "H_NCP_FULL9600",
+      "status": "DEFERRED_OPTIONAL",
+      "owner": "NCP local Codex",
+      "depends_on": [],
+      "activation": "HANDOFF.ncp.reactivation_conditions and original H contract; current new dispatch=false",
+      "work": "Original8build/900s qualification only if specifically activated; no budget reset"
+    },
+    {
+      "id": "H_EXISTING_RUN_COLLECTION",
+      "status": "CONDITIONAL_ON_ACTUAL_RUN",
+      "owner": "NCP local Codex",
+      "depends_on": [],
+      "work": "If existing run found, preserve actual status/reservation and collect without new science"
+    },
+    {
+      "id": "F_BINDING_AND_G_FRONTIER",
+      "status": "BLOCKED_IN_OWN_LANE",
+      "owner": "CR science owner",
+      "depends_on": [],
+      "work": "Preserve old binding failure; no automatic F retry or historical checkpoint adoption"
+    }
+  ],
+  "removed_mandatory_edges": [
+    {
+      "from": "H_NCP_FULL9600",
+      "to": "first CR scientific output"
+    },
+    {
+      "from": "F_BINDING_AND_G_FRONTIER",
+      "to": "recorded-moment response interpretation"
+    },
+    {
+      "from": "full CR atomic completion",
+      "to": "CR-off/prescribed-history REI baseline"
+    }
+  ],
+  "prohibited_automatic_edges": [
+    "H preparation PASS -> NCP execute",
+    "new parity -> original F closure",
+    "NCP result -> F retry/solve/pulse/G frontier",
+    "controlled CR response -> cosmological or Bianchi-specific claim"
+  ],
+  "scope": "Current bass_cr schedule; no claim of mutating downstream repo DAGs"
+}

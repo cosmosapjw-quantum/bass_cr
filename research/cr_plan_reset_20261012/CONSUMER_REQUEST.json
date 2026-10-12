@@ -1,0 +1,27 @@
+{
+  "schema": "cr-consumer-request.v1",
+  "status": "UNBOUND_TO_ACTUAL_CONSUMER_IN_THIS_CHANGE",
+  "purpose": "Use existing consumer evidence to decide necessary CR fidelity before heavy execution",
+  "required": {
+    "source_history": "q(t), zero/nonzero prehistory, source age and time coordinate",
+    "source_spectrum": "spectral shape and its time dependence; normalization and energy domain",
+    "bath": "density, temperature, ionization state, background/time map and their variation",
+    "observable": "heating rate/cumulative heating or a named downstream observable",
+    "error_budget": "absolute/relative budget with denominator; signal and CR contribution if applicable",
+    "source_identity": "repo/commit/path/hash of actual consumer scenario"
+  },
+  "available_recorded_scope": {
+    "T_s": "10000000000",
+    "kernel": "fixed finite model from pinned cache",
+    "representations": [
+      "selected_record",
+      "birth_defined"
+    ]
+  },
+  "CR_off_requirement": {
+    "source_terms": 0,
+    "provider_calls": 0
+  },
+  "CR_on_missing_data_behavior": "TYPED_UNAVAILABLE; never replace missing CR-on with zero",
+  "next_action": "Resolve current existing consumer files before asking user; controlled diagnostic may proceed with explicit scope"
+}

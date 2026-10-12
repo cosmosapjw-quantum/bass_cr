@@ -1,3 +1,11 @@
+# 현재 START — CR 계획 조정, 2026-10-12
+
+이 branch의 현재 시작문은 [research/cr_plan_reset_20261012/START_NCP_CODEX_KO.md](research/cr_plan_reset_20261012/START_NCP_CODEX_KO.md)다. 현재 새 NCP 과학 dispatch는0이다. 먼저 기존 run/reservation을 확인하고 필요한 수집을 이어받는다. 아직 시작하지 않은 H 전체9600 실행 및 아래 foundation 테스트를 자동 실행하지 않는다. 경량 분석·수정·검증은 ChatGPT에서 수행한다.
+
+아래 원문은 2026-09-25 foundation 작업의 역사적 시작문으로 보존한다. 그 작업을 별도로 재개하라는 명시적 요청이 있을 때만 해당 계약을 적용한다.
+
+---
+
 # START: BASS_CR local test operator
 
 ROLE=LOCAL_CODEX_TEST_OPERATOR_ONLY
