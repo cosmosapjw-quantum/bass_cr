@@ -1,3 +1,9 @@
+# 현재 시작점 — M0 이차 주입 응답 완료, 2026-10-12
+
+`research/cr_m0_quadratic_20261012/`의 `README_KO.md`, `HANDOFF.json`, `NEXT_DAG.json`, `START_NCP_CODEX_KO.md`를 먼저 읽어라. 기존 M0와 이번 후속 계산은 완료됐고 다음 here 작업은 M1/M2/M3다. 새 NCP dispatch는0이다.
+
+---
+
 # 현재 START — CR 계획 조정, 2026-10-12
 
 이 branch의 현재 시작문은 [research/cr_plan_reset_20261012/START_NCP_CODEX_KO.md](research/cr_plan_reset_20261012/START_NCP_CODEX_KO.md)다. 현재 새 NCP 과학 dispatch는0이다. 먼저 기존 run/reservation을 확인하고 필요한 수집을 이어받는다. 아직 시작하지 않은 H 전체9600 실행 및 아래 foundation 테스트를 자동 실행하지 않는다. 경량 분석·수정·검증은 ChatGPT에서 수행한다.

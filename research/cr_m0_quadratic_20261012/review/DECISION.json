@@ -1,0 +1,228 @@
+{
+  "schema": "cr-m0-independent-decision.v1",
+  "unit": "CR-M0-QUADRATIC-RESPONSE-20261012",
+  "decision": "PASS_SCOPED",
+  "decision_role": "INDEPENDENT_DECISION_REVIEWER",
+  "reviewer": "/root/m0_independent_decision",
+  "review_completed_utc": "2026-10-12T07:15:20.777665+00:00",
+  "scope": "New mathematical derivation, exact arithmetic postprocessing, interpretation, actual producer failure and graphics-only recovery for the frozen quadratic-response candidate",
+  "independence": {
+    "candidate_generation_participation": false,
+    "candidate_derivation_design_participation": false,
+    "producer_implementation_participation": false,
+    "candidate_files_modified": false,
+    "reference_method": "Independent stdlib Fraction calculation in the (1-x,x) Bernstein basis; root enclosures checked by determinant signs rather than reusing the producer's root constructor",
+    "producer_imported": false,
+    "producer_rerun": false,
+    "review_recursion": 0
+  },
+  "harness": {
+    "host_label": "GPT-6 Astra Pro",
+    "family": "GPT-6 Astra",
+    "selection_basis": "Developer-provided current host model metadata",
+    "kind": "research",
+    "version": "4.0.0",
+    "archive_sha256": "dae76c90f2e5d691bcdd595dadbe470bacacba3bb2a036ff9788ffe7d3bfabb7",
+    "read_entries": [
+      "START_HERE.md",
+      "PROJECT_INSTRUCTIONS.md",
+      "docs/MODEL_ROUTING.md",
+      "state/RESEARCH_STATE.md",
+      "prompts/phases/05_independent_adversarial_review.md"
+    ],
+    "current_state_read": "state/RESEARCH_STATE.json",
+    "archive_state_is_unexecuted_template": true,
+    "model_performance_attestation": false
+  },
+  "candidate_identity": {
+    "base_commit": "ae2d246d7e9037e000b00cd89991beb6f837f2ee",
+    "manifest": "REVIEW_INPUT_MANIFEST.json",
+    "manifest_sha256": "e1dd63ee9b46614afa5808f68e6887c345b29e3241a309b1fd0225834da3bbf6",
+    "manifest_core_files": 31,
+    "all_recorded_bytes_and_sha256_match": true,
+    "input_sha256": "60747f9da89e3596bfeb93a4ec14a1bb58a33bca3a09629fc092f254839f3b7b",
+    "result_sha256": "def1a5d78637baf2def371108690bcf0cf35f6b5c6b49442ced613f1aef762c7",
+    "manifest_itself_and_review_outputs_not_counted_in_31": true,
+    "remote_commit_publication_not_attested": true
+  },
+  "findings": [
+    {
+      "id": "MATH_QUADRATIC_CONE_AND_RANGE",
+      "role": "DEFENDED",
+      "evidence_status": [
+        "derived",
+        "numerically checked"
+      ],
+      "result": "The nonnegative degree<=2 cone decomposition, Rayleigh-quotient range, bubble extension, endpoint attainment and all intermediate ratios are valid under A_legacy positive definite and B_legacy>0.",
+      "blocking": false
+    },
+    {
+      "id": "RISING_CLASS",
+      "role": "DEFENDED",
+      "evidence_status": [
+        "derived",
+        "numerically checked"
+      ],
+      "result": "For f(1)=1, nonnegative nondecreasing quadratics are exactly 0<=a<=b<=1; convex hull vertices 1, 2x-x^2, x^2 give the exact ratio extrema.",
+      "blocking": false
+    },
+    {
+      "id": "EXACT_OUTWARD_CERTIFICATES",
+      "role": "DEFENDED",
+      "evidence_status": [
+        "numerically checked"
+      ],
+      "result": "Four rational PSD inequalities passed in the independent Bernstein basis; four stored eigenvalue brackets passed exact determinant-sign checks; four rational square witnesses are admissible and lie inside their corresponding algebraic-root brackets.",
+      "blocking": false
+    },
+    {
+      "id": "ENDPOINTS_UNITS_AND_U3",
+      "role": "DEFENDED",
+      "evidence_status": [
+        "derived",
+        "numerically checked"
+      ],
+      "result": "Endpoint atoms, zero prehistory, shutdown amplitude normalization, zero denominators and degenerate kernels are kept separate. Decline/pulse endpoint values and the equal-pRS/different-U3 counterexample are correct.",
+      "blocking": false
+    },
+    {
+      "id": "FIRST_EXECUTION_FAILURE",
+      "role": "INFORMATIVE_FAILURE",
+      "evidence_status": [
+        "implementation-verified"
+      ],
+      "result": "The original producer remains exit 1 after JSON/TSV persistence due to mathtext syntax at first savefig. Preserved source, stderr, traceback line and output hashes are mutually consistent.",
+      "blocking": false
+    },
+    {
+      "id": "GRAPHICS_RECOVERY",
+      "role": "DEFENDED",
+      "evidence_status": [
+        "implementation-verified"
+      ],
+      "result": "The renderer-only recovery exited 0. The numeric producer prefix and receipt suffix are unchanged; final integrated evaluator was not reexecuted and receives no new end-to-end execution claim.",
+      "blocking": false
+    },
+    {
+      "id": "CLAIM_CEILING_AND_NEXT_DAG",
+      "role": "DEFENDED",
+      "evidence_status": [
+        "implementation-verified"
+      ],
+      "result": "Original M0 completion, F binding HOLD, H budgets and NCP dispatch=0 are preserved in candidate instructions. M1/M2/M3 are the correct next scoped work; current remote NCP state is not reviewed.",
+      "blocking": false
+    }
+  ],
+  "accepted_numeric_display": {
+    "definition": "100*(P_fullBED/P_legacy-1), percent; same source and representation",
+    "representations": [
+      "selected_record",
+      "birth_defined"
+    ],
+    "all_nonnegative_degree_le_2_outward_percent": [
+      "0.016303",
+      "0.065394"
+    ],
+    "nonnegative_nondecreasing_f1_eq_1_outward_percent": [
+      "0.019389",
+      "0.039147"
+    ],
+    "rising_minimum_source": "x^2",
+    "rising_maximum_source": "1",
+    "all_class_exact_extrema": "Generalized eigenvalues attained by algebraic squared-linear sources; B_full/B_legacy lies strictly inside for both representations",
+    "printed_decimal_endpoints_are_outward_bounds_not_exact_extrema": true
+  },
+  "independent_reference": {
+    "actual_invocations": 1,
+    "actual_exit_code": 0,
+    "external_wall_s": 0.03784373699454591,
+    "timeout": false,
+    "wall_limit_s": 60,
+    "script": "review/REFERENCE_CHECK.py",
+    "script_sha256": "1cf31bb2ae4a66e0fc61543e3c4f81e5fd2ff58e9de0f3683b8627db7c9ec7f9",
+    "launcher": "review/REFERENCE_LAUNCHER.py",
+    "actual_execution": "review/ACTUAL_EXECUTION.json",
+    "stdout": "review/REFERENCE.stdout.txt",
+    "stderr": "review/REFERENCE.stderr.txt",
+    "result": "review/REFERENCE_RESULT.json",
+    "result_sha256": "2cf38a2a3c3f681503d5297a10844dbc87728674c2b15633a2b86b80d2aa5b9c",
+    "counts": {
+      "Bernstein_PSD_certificates": 4,
+      "algebraic_root_brackets": 4,
+      "rational_square_witnesses": 4,
+      "named_responses": 24,
+      "TSV_rows": 24,
+      "old_96_packet_suite_runs": 0,
+      "producer_imports": 0,
+      "producer_reruns": 0,
+      "new_CR_generator": 0,
+      "CR_linear_solve": 0,
+      "pulse_propagation": 0,
+      "expm": 0,
+      "resolvent": 0,
+      "F_retry": 0,
+      "NCP_dispatch": 0
+    }
+  },
+  "producer_provenance": {
+    "actual_original_invocations_recorded": 1,
+    "original_actual_exit_code": 1,
+    "original_external_wall_s": 0.5617769189993851,
+    "graphics_recovery_invocations_recorded": 1,
+    "graphics_actual_exit_code": 0,
+    "graphics_external_wall_s": 1.4970884500071406,
+    "exact_arithmetic_reruns": 0,
+    "first_failure_rewritten_as_success": false,
+    "standalone_arithmetic_wall_s": null,
+    "original_executed_source": "evidence/attempt01/evaluate_quadratic_response.py",
+    "original_executed_source_sha256": "650073d3ecfd4852513989eb213d29c9b58d76977473a1d05bca2c35b7356122",
+    "final_evaluator_end_to_end_reexecution": false
+  },
+  "visual_review": {
+    "PNG_directly_inspected": true,
+    "four_panels_labels_units_and_scope_readable": true,
+    "plot_sampling_used_to_certify_uniform_range": false,
+    "PDF_separate_render_review": false
+  },
+  "preserved": {
+    "original_M0": "COMPLETE_REUSED_UNCHANGED",
+    "new_M0": "VALID_BOUNDED_INTERPRETATION_CONTINUATION",
+    "F_binding": "HOLD_OPERATOR_BINDING_UNRESOLVED",
+    "G_frontier": "BLOCKED_BY_F_OPERATOR_BINDING_HOLD",
+    "H_max_logical_builds": 8,
+    "H_max_columns": 76800,
+    "H_whole_command_wall_s": 900,
+    "H_automatic_retry": 0,
+    "PHYS02_DELAY": "OPEN",
+    "production_history": "HOLD",
+    "atomic_G02": "UNRESOLVED",
+    "b_grid": "NO_GO",
+    "all_bound": "OPEN",
+    "new_NCP_dispatch": false
+  },
+  "promotion": {
+    "production": false,
+    "cosmological": false,
+    "Bianchi_specific": false,
+    "physical_truth_error_bound": false,
+    "arbitrary_history_error_bound": false,
+    "historical_F_closure": false,
+    "NCP_execution_approval": false
+  },
+  "excluded_from_review": [
+    "Physical input, atomic-rate, mesh and kernel correctness of inherited cached records",
+    "Old scientific suites and the old 96-packet reference suite",
+    "Remote publication, branch/PR commit success and backup completeness",
+    "Current NCP local run/reservation/collection state",
+    "Quadratic cumulative heating without U3 and the post-T heating curve",
+    "Final evaluator as a newly executed complete program"
+  ],
+  "blocking_findings": [],
+  "required_candidate_changes": [],
+  "next_actions": [
+    "M1_CONSUMER_SCOPE",
+    "M2_RESPONSE_ERROR_MAP",
+    "M3_CR_OFF_RECEIVER_STATUS"
+  ],
+  "review_complete": true
+}

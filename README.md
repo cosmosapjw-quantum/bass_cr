@@ -1,5 +1,10 @@
 # BASS cosmic-ray charge exchange
 
+## M0 후속 결과 — 2026-10-12
+
+현재 완료 결과는 [이차 주입 이력의 가열 응답](research/cr_m0_quadratic_20261012/README_KO.md)이다. [현재 handoff](research/cr_m0_quadratic_20261012/HANDOFF.json)와 [다음 DAG](research/cr_m0_quadratic_20261012/NEXT_DAG.json)를 먼저 읽는다. 원 M0 COMPLETE와 감사 반영 계획을 유지하며, 다음 here 작업은 M1/M2/M3다. 이번 M0를 위한 NCP 작업은 없고 완료된 계산을 재실행하지 않는다.
+
+
 ## 현재 개발계획 — 2026-10-12
 
 [CR 과학 산출물 우선 계획](research/cr_plan_reset_20261012/PLAN_AND_RESULTS_KO.md), [현재 DAG](research/cr_plan_reset_20261012/NEXT_DAG.json), [현재 handoff](research/cr_plan_reset_20261012/HANDOFF.json)를 먼저 읽는다. 아직 시작하지 않은 PHYS02H 전체9600 NCP qualification의 자동 실행은 보류됐다. 기존 cached response 해석과 관측량별 오차·domain을 우선하며, CR-off 기준 응용은 full CR 원자 연구의 완료를 기다리지 않는다. 이미 진행·완료한 NCP run은 원래 예산과 결과를 수집한다. 이 변경은 frozen H evidence/contract와 inherited physical gates를 바꾸지 않는다.
