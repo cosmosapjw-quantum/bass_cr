@@ -1,0 +1,498 @@
+{
+  "schema": "cr-source-binding-current-dag.v1",
+  "scope_repository": "cosmosapjw-quantum/bass_cr",
+  "base_commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+  "global_overlay": "REI_ATOMIC_REUSE_DAG_CR_OVERLAY_20261012.json",
+  "global_states_promoted": false,
+  "nodes": [
+    {
+      "id": "M0_CACHED_ONSET_RESPONSE",
+      "status": "COMPLETE_REUSED_UNCHANGED",
+      "depends_on": [],
+      "work": "Retain existing exact onset response",
+      "outputs": [
+        "inputs/CACHED_RESPONSE.json"
+      ]
+    },
+    {
+      "id": "M0_QUADRATIC_RESPONSE",
+      "status": "COMPLETE_REUSED_UNCHANGED",
+      "depends_on": [
+        "M0_CACHED_ONSET_RESPONSE"
+      ],
+      "work": "Retain quadratic response/cone bounds; no rerun",
+      "outputs": [
+        "../cr_rux_m1_m3_20261012/inputs/QUADRATIC_RESPONSE.json"
+      ]
+    },
+    {
+      "id": "CR_RUX00_AUTHORITY",
+      "status": "COMPLETE_SCOPED_INTAKE",
+      "depends_on": [],
+      "work": "Reuse pinned BASS source records and freshly checked exact REI heads; no global authority transition",
+      "outputs": [
+        "inputs/SOURCE_MANIFEST.json",
+        "inputs/consumer_intake/SOURCE_IDENTITY.json"
+      ],
+      "maps_to": [
+        "RUX00"
+      ]
+    },
+    {
+      "id": "M1_CONSUMER_SCOPE_INTAKE",
+      "status": "COMPLETE_SCOPED_SNAPSHOT_IDENTIFIED",
+      "depends_on": [
+        "CR_RUX00_AUTHORITY"
+      ],
+      "work": "Current receiver head and snapshot are unchanged; downstream selected CR-on history, observable and budget remain unprovided",
+      "outputs": [
+        "inputs/consumer_intake/SOURCE_IDENTITY.json",
+        "inputs/consumer_intake/INTAKE_KO.md",
+        "inputs/CONSUMER_REQUEST.json"
+      ],
+      "global_history_admission": false
+    },
+    {
+      "id": "CR_RUX03_OWNER_REUSE",
+      "status": "COMPLETE_SCOPED_CONTRACT_INVENTORY",
+      "depends_on": [
+        "CR_RUX00_AUTHORITY"
+      ],
+      "work": "Use existing primary photon event and native CR packet definitions in their own units/owners",
+      "outputs": [
+        "../cr_rux_m1_m3_20261012/ATOM_OWNER_MATRIX.json",
+        "../cr_rux_m1_m3_20261012/RATE_DOMAIN_MAP.json"
+      ],
+      "maps_to": [
+        "RUX03"
+      ],
+      "global_owner_adoption": false
+    },
+    {
+      "id": "M2_RESPONSE_ERROR_MAP",
+      "status": "COMPLETE_CONTROLLED_DIAGNOSTIC",
+      "depends_on": [
+        "M0_QUADRATIC_RESPONSE"
+      ],
+      "work": "Positive finite-age closure and exact recorded-moment budget map; no old evaluator or G",
+      "outputs": [
+        "../cr_rux_m1_m3_20261012/DERIVATION_KO.md",
+        "../cr_rux_m1_m3_20261012/results/RESPONSE_ERROR_MAP.json"
+      ],
+      "review": "../cr_rux_m1_m3_20261012/review/DECISION.json",
+      "physical_sufficiency": false
+    },
+    {
+      "id": "M3_LOCAL_CR_OFF_CONTRACT",
+      "status": "COMPLETE_REUSED_WITH_PINNED_HISTORICAL_EVIDENCE",
+      "depends_on": [
+        "CR_RUX00_AUTHORITY"
+      ],
+      "work": "Preserved OFF function and negative control; existing source-bound execution; no repair justified",
+      "outputs": [
+        "inputs/consumer_intake/baseline/OFF_BRANCH_COMPARISON.json",
+        "inputs/consumer_intake/baseline/CONSUMER_INTAKE.json"
+      ],
+      "current_whole_binary_verified": false
+    },
+    {
+      "id": "CR_PROCESS_RELEVANCE",
+      "status": "READY_ON_SELECTED_SCENARIO",
+      "depends_on": [
+        "CR_SCENARIO_SOURCE_BINDING",
+        "CR_RUX03_OWNER_REUSE"
+      ],
+      "work": "Use source-bound heat/energy/ion/cutoff ledgers for the selected range. An explicit CR_OFF_SCOPED baseline is allowed; quantified irrelevance or a claimed required-process screen needs the named observable tolerance. A tiny fixed-bath scale does not alone select OFF.",
+      "outputs": [
+        "future/CR_PROCESS_RELEVANCE.json"
+      ],
+      "external_inputs": [
+        "actual selected source/scenario and physical scope"
+      ],
+      "maps_to": [
+        "RUX03_CR_SCREEN"
+      ],
+      "required_if": {
+        "quantified_CR_irrelevance_claimed": [
+          "M1_CONSUMER_ERROR_BUDGET"
+        ]
+      }
+    },
+    {
+      "id": "M1_ELECTRON_SOURCE_BINDING",
+      "status": "COMPLETE_EXECUTED_FIXED_BATH_XI001",
+      "depends_on": [
+        "M0_CACHED_ONSET_RESPONSE",
+        "CR_PAIRED_ENERGY_ION_CUTOFF_LEDGER",
+        "CR_RUX00_AUTHORITY"
+      ],
+      "work": "BASS_CR executed fixed-bath xi=.01 source binding completed: Qe=t*A(W), selected/birth energy normalization, proper-clock basis and SI response; downstream REI adoption remains a separate pending node",
+      "outputs": [
+        "results/SOURCE_BOUND_RESPONSE.json",
+        "evidence/POSTPROCESS_ACTUAL_EXECUTION.json"
+      ],
+      "acceptance": "37 stored-record arithmetic/normalization checks PASS and independent 30-check reference PASS; PROMOTE_SCOPED in review/DECISION.json; exact scope in CONTRACT.json.",
+      "maps_to": [
+        "RUX13_BIND"
+      ],
+      "scope": "T=1e10 s; fixed 100 K, nH=140 m^-3, Y=.248, xi=.01; electron 0.1..900 eV in two birth tags; proton 1..4 MeV",
+      "source_quantity": "q_star=T*A_E*eV_J; not terminal FS10 heating",
+      "endpoint_power_formula": "P_heat(T)=q_star*H0*R",
+      "cumulative_heat_formula": "E_heat(T)=q_star*T*H0*S/2",
+      "response_example": {
+        "model": "fullBED",
+        "representation": "selected_record",
+        "q_star_J_m3_s": "1.8012625784277353046228834E-42",
+        "heat_power_J_m3_s": "3.4427310257273833336420435557419545568846016611406E-44",
+        "cumulative_heat_J_m3": "1.1921620918578547376488293702289529404598598914134E-34"
+      },
+      "downstream_adoption_node": "M1_REI_SOURCE_ADOPTION",
+      "mapping_satisfies_global_node": false
+    },
+    {
+      "id": "M1_CONSUMER_ERROR_BUDGET",
+      "status": "UNBOUND_TO_SELECTED_OBSERVABLE",
+      "depends_on": [
+        "CR_SCENARIO_SOURCE_BINDING",
+        "CR_THERMAL_NONTHERMAL_ACCOUNTING"
+      ],
+      "work": "Bind a named observable and units, source range, thermal particle convention, absolute tolerance and any relative tolerance with its positive denominator; keep unprovided values null",
+      "outputs": [
+        "future/CR_OBSERVABLE_BUDGET.json"
+      ],
+      "not_equal": [
+        "gas ionization xi",
+        "supernova CR efficiency",
+        "selected heat/reference thermal-energy diagnostic",
+        "table heat-projection bound",
+        "stored-record comparison tolerance"
+      ],
+      "current_values": {
+        "observable": null,
+        "absolute_tolerance": null,
+        "relative_tolerance": null,
+        "reference_denominator": null,
+        "binding_scope": "Executed BASS_CR fixed-bath electron source; REI selected CR-on history remains unprovided"
+      }
+    },
+    {
+      "id": "M2_PHYSICAL_CLOSURE_DECISION",
+      "status": "CONDITIONAL",
+      "depends_on": [
+        "M1_ELECTRON_SOURCE_BINDING",
+        "CR_SCENARIO_SOURCE_BINDING",
+        "CR_THERMAL_NONTHERMAL_ACCOUNTING",
+        "M1_CONSUMER_ERROR_BUDGET",
+        "M2_RESPONSE_ERROR_MAP"
+      ],
+      "work": "Select the already exact t*A(W)/quadratic response for a matching fixed operator; use a residual/curvature bound only for a separately admitted source. Compare the selected thermal/ionization observable with its own tolerance.",
+      "outputs": [
+        "future/CR_CLOSURE_DECISION.json"
+      ]
+    },
+    {
+      "id": "M3_SELECTED_HISTORY_OFF_RECEIPT",
+      "status": "CONDITIONAL_ON_RECEIVER_EXECUTION",
+      "depends_on": [
+        "M3_LOCAL_CR_OFF_CONTRACT"
+      ],
+      "work": "Receiver owner records source0/provider-calls0 in the selected actual history; reuse unchanged component evidence",
+      "outputs": [
+        "future/SELECTED_RECEIVER_CR_OFF_RECEIPT.json"
+      ],
+      "owner": "rei_bianchi",
+      "external_inputs": [
+        "selected physical receiver execution"
+      ],
+      "blocks_CR_light_research": false
+    },
+    {
+      "id": "M4_TARGETED_CR_EXTENSION",
+      "status": "CONDITIONAL_INDEPENDENT_LANE",
+      "depends_on": [],
+      "work": "Only a named missing physical domain/output or explicit independent CR question activates new work",
+      "outputs": [
+        "future/TARGETED_CR_EXECUTION_CONTRACT.json"
+      ],
+      "activation": "consumer deficiency OR explicit independent CR scientific question; preserves original atomic aim",
+      "maps_to": [
+        "RUX13"
+      ]
+    },
+    {
+      "id": "RUX13_MATCHED_HISTORY_EFFECT",
+      "status": "CONDITIONAL_DOWNSTREAM",
+      "depends_on": [
+        "M1_REI_SOURCE_ADOPTION",
+        "M2_PHYSICAL_CLOSURE_DECISION"
+      ],
+      "work": "Compare matched ON/OFF histories only in admitted domain with energy bookkeeping",
+      "outputs": [
+        "future/CR_EFFECT_ON_EOR.json"
+      ],
+      "external_inputs": [
+        "RUX11 source-backed baseline and error ledger"
+      ],
+      "maps_to": [
+        "RUX13"
+      ]
+    },
+    {
+      "id": "H_NCP_FULL9600",
+      "status": "DEFERRED_OPTIONAL",
+      "depends_on": [],
+      "work": "No automatic dispatch; original source and 8-build/76800-column/900-second/no-retry contract retained",
+      "outputs": [],
+      "activation": "A fresh specific science/performance need, actual resource admission and reconciled reservations"
+    },
+    {
+      "id": "H_EXISTING_RUN_COLLECTION",
+      "status": "CONDITIONAL_ON_ACTUAL_UNCOLLECTED_RUN",
+      "depends_on": [],
+      "work": "Collect actual outstanding run if evidenced; no repetitive absence queries and no new execution",
+      "outputs": [],
+      "actual_unpublished_run": "UNKNOWN_NOT_INSPECTED_HERE"
+    },
+    {
+      "id": "F_BINDING_AND_G_FRONTIER",
+      "status": "BLOCKED_IN_OWN_LANE",
+      "depends_on": [],
+      "work": "Original operator-binding failure and dependent frontier retained; no F retry or historical operator adoption",
+      "outputs": []
+    },
+    {
+      "id": "CR_PAIRED_ENERGY_ION_CUTOFF_LEDGER",
+      "status": "COMPLETE_REUSED_UNCHANGED",
+      "depends_on": [],
+      "owner": "bass_cr",
+      "work": "Retain same-operator selected/birth heat, ionization, excitation, active stock, cutoff energy and cutoff number; no transport or generator rerun",
+      "outputs": [
+        "inputs/PAIRED_RECORD.json",
+        "inputs/PULSE_RECORD.json",
+        "inputs/SOURCE_COVERAGE_RECORD.json"
+      ],
+      "identity_manifest": "inputs/SOURCE_MANIFEST.json"
+    },
+    {
+      "id": "CR_SCENARIO_SOURCE_BINDING",
+      "status": "READY_TO_BIND_SELECTED_SCENARIO",
+      "depends_on": [
+        "M1_ELECTRON_SOURCE_BINDING",
+        "M1_CONSUMER_SCOPE_INTAKE",
+        "CR_RUX03_OWNER_REUSE"
+      ],
+      "owner": "bass_cr with selected application owner",
+      "work": "Attach the already calculated source-bound heat and cutoff ledgers to one actually selected scenario; explicitly retain or change the proton/electron windows, amplitude/time history, bath, clock, initial stock and process owners",
+      "outputs": [
+        "future/SELECTED_CR_SCENARIO_SOURCE.json"
+      ],
+      "acceptance": "Actual selection and exact source identity, not defaults or an invented request; same-range reuse or a precisely stated incompatible/missing range",
+      "do_not_require": [
+        "new H or F run",
+        "full atomic completion",
+        "completed downstream whole history"
+      ]
+    },
+    {
+      "id": "CR_THERMAL_RELEVANCE_CUTOFF_CLOSURE",
+      "status": "PROMOTED_SCOPED_CUTOFF_JOIN_AND_ENERGY_ENVELOPE",
+      "depends_on": [
+        "M1_ELECTRON_SOURCE_BINDING",
+        "CR_PAIRED_ENERGY_ION_CUTOFF_LEDGER"
+      ],
+      "owner": "root implementation and independent reviewer",
+      "work": "Evaluate the fixed-bath thermal relevance and the explicit cutoff thermalization candidate using saved energy and number ledgers",
+      "evidence": "results/SOURCE_BOUND_RESPONSE.json",
+      "json_pointer": "/rows/*/cutoff_thermal_join",
+      "result_sha256": "dd4ed10b5ecd3aea8a8710b5190c9d7da4085834713bc72ae2cc37915cc97f27",
+      "candidate_equations": {
+        "thermal_power": "P_th=P_heat+P_cut",
+        "thermal_electron_source": "S_thermal=S_cut",
+        "thermal_increment": "Delta_n_e_thermal=N_cut",
+        "active_stock": "N_active remains a separate nonthermal population"
+      },
+      "example_fullBED_selected_record": {
+        "thermal_energy_added_J_m3": "1.2216035010174495596488293702289529404598598914134E-34",
+        "thermal_power_added_J_m3_s": "3.5205035062099014936420435557419545568846016611406E-44",
+        "thermal_electron_increment_m3": "1.8382904526169294E-16",
+        "thermal_electron_source_m3_s": "4.856271926903935E-26",
+        "particle_number_energy_correction_J_m3": "3.8070508126726664387709E-37",
+        "local_Tdot_frozen_coeff_K_s": "1.1074696107648691484927120951917990428446391173240E-23",
+        "linearized_delta_T_frozen_coeff_K": "3.8418834731514848028353161616548960491154125705385E-14",
+        "delta_T_prescribed_energy_algebra_K": "3.8418834731514847982210531433747455728705463904618E-14",
+        "energy_only_calorimetric_delta_T_K": "3.8538938921309419939011408908459618738446036363632E-14",
+        "heat_capacity_fractional_change": "1.2010418979457191065824729191065824729191065824729E-18",
+        "scope": "Candidate cutoff thermalization closure; nonthermal active stock is separate; prescribed transport outputs are reused"
+      },
+      "acceptance": "Independent scoped decision on cutoff energy/number ownership and prescribed frozen-coefficient meaning; no automatic one-temperature receiver adoption",
+      "candidate_not_accepted_yet": false,
+      "downstream_physical_admission": false,
+      "research_acceptance": "PROMOTE_SCOPED",
+      "review": "review/DECISION.json"
+    },
+    {
+      "id": "CR_THERMAL_NONTHERMAL_ACCOUNTING",
+      "status": "READY_ON_SELECTED_SCENARIO",
+      "depends_on": [
+        "CR_SCENARIO_SOURCE_BINDING",
+        "CR_PAIRED_ENERGY_ION_CUTOFF_LEDGER"
+      ],
+      "owner": "bass_cr with receiver EOS/source owner",
+      "work": "Choose the thermalization boundary and write the total/thermal/nonthermal electron counts explicitly before using a temperature equation",
+      "required_decisions": [
+        "Declare whether the observable is fixed-Cv calorimetric heat or a thermal population with explicit cutoff joining",
+        "For the cutoff-join candidate use P_th=P_heat+P_cut and S_thermal=S_cut; energy crosses the boundary once",
+        "Keep ionization-produced total electrons distinct from thermal electrons; retain N_active between total and thermal counts in the matched selected-source sector",
+        "Separate primary proton birth ionization, injected nonthermal electron number and secondary degradation ionizations; reuse the matched number ledger and declare any additional reservoir or transport term",
+        "Do not replace thermal source by total ionization source while active nonthermal electrons remain; do not insert the candidate as an automatic one-temperature receiver term"
+      ],
+      "outputs": [
+        "future/THERMAL_PARTICLE_ACCOUNTING.json"
+      ],
+      "required_if": {
+        "cutoff_join_selected": [
+          "CR_THERMAL_RELEVANCE_CUTOFF_CLOSURE independent scoped acceptance"
+        ]
+      },
+      "acceptance": "An explicit source/sink and particle-count convention that retains active stock and prevents double counting; the selected observable uses the same convention"
+    },
+    {
+      "id": "M1_REI_SOURCE_ADOPTION",
+      "status": "PENDING_DOWNSTREAM_ACTUAL_ADOPTION",
+      "depends_on": [
+        "M1_ELECTRON_SOURCE_BINDING",
+        "CR_SCENARIO_SOURCE_BINDING",
+        "CR_THERMAL_NONTHERMAL_ACCOUNTING",
+        "M1_CONSUMER_ERROR_BUDGET",
+        "M2_PHYSICAL_CLOSURE_DECISION"
+      ],
+      "owner": "rei_bianchi with bass_cr source handoff",
+      "work": "Bind the accepted source/thermal convention and budget to an actually selected receiver call-site and scenario; retain source/history identity in the receiver-owned artifact",
+      "outputs": [
+        "future/REI_CR_SOURCE_ADOPTION.json"
+      ],
+      "current_receiver_status": "SCOPED_SNAPSHOT_IDENTIFIED_FULL_HISTORY_BINDING_OPEN",
+      "current_receiver_head": "17f8d0daa72e0f76a49cde01b110f650a6688c42",
+      "native_FS10_terminal_packet_to_M0_mapping": "Not inferred; standalone BASS source binding does not replace the existing exact native packet",
+      "blocks_standalone_fixed_bath_research": false,
+      "maps_to": [
+        "RUX13_BIND"
+      ],
+      "mapping_satisfies_global_node": false
+    }
+  ],
+  "next_here": [
+    "CR_SCENARIO_SOURCE_BINDING",
+    "CR_THERMAL_NONTHERMAL_ACCOUNTING",
+    "M1_CONSUMER_ERROR_BUDGET"
+  ],
+  "new_NCP_dispatch": false,
+  "prohibited_automatic_edges": [
+    "full atomic completion -> CR-off baseline",
+    "H preparation -> H dispatch",
+    "new diagnostic -> F binding recovery",
+    "PHYS01 terminal heat -> multiply by M0 p",
+    "M3 component evidence -> current whole-history execution",
+    "BASS fixed-bath source binding complete -> REI actual source adoption",
+    "stored-record arithmetic PASS -> physical source/model error certification",
+    "cutoff thermal-join candidate -> one-temperature receiver drop-in",
+    "total ionization electron source -> thermal particle source while N_active is retained",
+    "small source-attributed calorimetric scale -> CR OFF or global irrelevance without selected scenario and tolerance"
+  ],
+  "scheduler": "Use dependency readiness and the selected physical claim. Source binding and the explicit cutoff-join research candidate have scoped independent acceptance; actual REI adoption and global RUX gates remain separate.",
+  "unit": "CR-RUX-M1B-SOURCE-BINDING-20261012",
+  "branch": "research/cr-source-binding-20261012",
+  "plan_status": "FINAL_AFTER_SCOPED_INDEPENDENT_PROMOTION",
+  "consumer_status_unchanged": "SCOPED_SNAPSHOT_IDENTIFIED_FULL_HISTORY_BINDING_OPEN",
+  "evidence": {
+    "source_bound_response": {
+      "path": "results/SOURCE_BOUND_RESPONSE.json",
+      "sha256": "dd4ed10b5ecd3aea8a8710b5190c9d7da4085834713bc72ae2cc37915cc97f27",
+      "status": "PASS_RECORDED_SOURCE_BINDING",
+      "checks_passed": 37,
+      "checks_failed": 0,
+      "maximum_relative_stored_record_difference": "4.4955189295068785330881761129126368734100685000447E-14",
+      "comparison_tolerance": "1e-12 on stored-record unit/normalization comparisons; not a physical error budget"
+    },
+    "consumer_intake": {
+      "path": "inputs/consumer_intake/SOURCE_IDENTITY.json",
+      "sha256": "177779ee7956ef269565c60e881bd75b83799d551243f7f74a9aee1a5ac383a4",
+      "rei_head": "17f8d0daa72e0f76a49cde01b110f650a6688c42",
+      "new_CR_on_selection_or_budget_received": false
+    },
+    "inherited_dag": {
+      "path": "inputs/INHERITED_DAG.json",
+      "sha256": "0ce52b6528ec26545d396a0382611cccba412a4b0495c0bbb4c336c3ef96ee9a"
+    },
+    "source_manifest": "inputs/SOURCE_MANIFEST.json",
+    "execution": "evidence/POSTPROCESS_ACTUAL_EXECUTION.json",
+    "preserved_initial_failure": "evidence/attempt01/FAILURE_AND_REPAIR.json"
+  },
+  "selected_BASS_application": {
+    "owner": "BASS_CR existing PHYS02C/E fixed-bath application",
+    "time_s": "10000000000",
+    "n_H_m3": "140",
+    "helium_mass_fraction_Y": "0.248",
+    "xi": "0.01",
+    "temperature_K": "100",
+    "electron_birth_window_eV": [
+      "0.1",
+      "900"
+    ],
+    "birth_tags_eV": [
+      [
+        "0.1",
+        "10"
+      ],
+      [
+        "10",
+        "900"
+      ]
+    ],
+    "proton_collision_window_eV": [
+      "1000000",
+      "4000000"
+    ],
+    "source_history": "Q_e(W,t)=t A(W) on [0,T], zero initial nonthermal population",
+    "bath": "fixed composition and density; inherited fullBED/CCC operator",
+    "source_amplitude_authority": "executed physical_energy_scale_eV_m3=T^2*A_E, not a terminal FS10 heat packet"
+  },
+  "consumer_budget": {
+    "observable": null,
+    "absolute_tolerance": null,
+    "relative_tolerance": null,
+    "reference_denominator": null,
+    "binding_scope": "Executed BASS_CR fixed-bath electron source; REI selected CR-on history remains unprovided"
+  },
+  "currently_under_review": [],
+  "independent_decision": {
+    "owner": "root-appointed independent reviewer",
+    "status": "PROMOTE_SCOPED",
+    "expected_artifact": "review/DECISION.json",
+    "source_binding_execution_is_not_global_physical_admission": true
+  },
+  "new_heavy_execution_budget": {
+    "generator_builds": 0,
+    "transport_solves": 0,
+    "pulse_calls": 0,
+    "source_quadratures": 0,
+    "H_runs": 0,
+    "F_retries": 0,
+    "old_suite_reruns": 0
+  },
+  "preserved_scientific_gates": {
+    "F_operator_binding": "HOLD",
+    "G_frontier": "BLOCKED",
+    "PHYS02_DELAY": "OPEN",
+    "production_history": "HOLD",
+    "atomic_G02": "UNRESOLVED",
+    "all_bound": "OPEN",
+    "b_grid": "NO_GO"
+  },
+  "final_independent_decision": {
+    "path": "review/DECISION.json",
+    "status": "PROMOTE_SCOPED",
+    "sha256": "43a7111f8324437942f773dc57e12fad219d8c7183b160d09af3a1dbdce8f24d",
+    "global_receiver_adoption": false
+  }
+}

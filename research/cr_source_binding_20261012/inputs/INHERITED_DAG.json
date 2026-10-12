@@ -1,0 +1,245 @@
+{
+  "schema": "cr-rux-current-dag.v2",
+  "scope_repository": "cosmosapjw-quantum/bass_cr",
+  "base_commit": "767273fec673ac0877dc4833da4bef147ae04c40",
+  "global_overlay": "REI_ATOMIC_REUSE_DAG_CR_OVERLAY_20261012.json",
+  "global_states_promoted": false,
+  "nodes": [
+    {
+      "id": "M0_CACHED_ONSET_RESPONSE",
+      "status": "COMPLETE_REUSED_UNCHANGED",
+      "depends_on": [],
+      "work": "Retain existing exact onset response",
+      "outputs": [
+        "inputs/CACHED_RESPONSE.json"
+      ]
+    },
+    {
+      "id": "M0_QUADRATIC_RESPONSE",
+      "status": "COMPLETE_REUSED_UNCHANGED",
+      "depends_on": [
+        "M0_CACHED_ONSET_RESPONSE"
+      ],
+      "work": "Retain quadratic response/cone bounds; no rerun",
+      "outputs": [
+        "inputs/QUADRATIC_RESPONSE.json"
+      ]
+    },
+    {
+      "id": "CR_RUX00_AUTHORITY",
+      "status": "COMPLETE_SCOPED_INTAKE",
+      "depends_on": [],
+      "work": "Current CR base and selected REI/provider source identities",
+      "outputs": [
+        "inputs/SOURCE_MANIFEST.json",
+        "inputs/INTAKE_IMPORTS.json"
+      ],
+      "maps_to": [
+        "RUX00"
+      ]
+    },
+    {
+      "id": "M1_CONSUMER_SCOPE_INTAKE",
+      "status": "COMPLETE_SCOPED_SNAPSHOT_IDENTIFIED",
+      "depends_on": [
+        "CR_RUX00_AUTHORITY"
+      ],
+      "work": "Reuse actual PHYS01/03 snapshot and source lineage; preserve unbound full-history fields",
+      "outputs": [
+        "CONSUMER_REQUEST.json"
+      ],
+      "global_history_admission": false
+    },
+    {
+      "id": "CR_RUX03_OWNER_REUSE",
+      "status": "COMPLETE_SCOPED_CONTRACT_INVENTORY",
+      "depends_on": [
+        "CR_RUX00_AUTHORITY"
+      ],
+      "work": "Use existing primary photon event and native CR packet definitions in their own units/owners",
+      "outputs": [
+        "ATOM_OWNER_MATRIX.json",
+        "RATE_DOMAIN_MAP.json"
+      ],
+      "maps_to": [
+        "RUX03"
+      ],
+      "global_owner_adoption": false
+    },
+    {
+      "id": "M2_RESPONSE_ERROR_MAP",
+      "status": "COMPLETE_CONTROLLED_DIAGNOSTIC",
+      "depends_on": [
+        "M0_QUADRATIC_RESPONSE"
+      ],
+      "work": "Positive finite-age closure and exact recorded-moment budget map; no old evaluator or G",
+      "outputs": [
+        "DERIVATION_KO.md",
+        "results/RESPONSE_ERROR_MAP.json",
+        "results/RESPONSE_ERROR_MAP.png"
+      ],
+      "review": "review/DECISION.json",
+      "physical_sufficiency": false
+    },
+    {
+      "id": "M3_LOCAL_CR_OFF_CONTRACT",
+      "status": "COMPLETE_REUSED_WITH_PINNED_HISTORICAL_EVIDENCE",
+      "depends_on": [
+        "CR_RUX00_AUTHORITY"
+      ],
+      "work": "Preserved OFF function and negative control; existing source-bound execution; no repair justified",
+      "outputs": [
+        "inputs/consumer_intake/OFF_BRANCH_COMPARISON.json",
+        "inputs/consumer_intake/CONSUMER_INTAKE.json"
+      ],
+      "current_whole_binary_verified": false
+    },
+    {
+      "id": "CR_PROCESS_RELEVANCE",
+      "status": "READY_ON_SELECTED_SCENARIO",
+      "depends_on": [
+        "M1_CONSUMER_SCOPE_INTAKE",
+        "CR_RUX03_OWNER_REUSE"
+      ],
+      "work": "Decide baseline CR OFF or explicitly required processes from selected source before physical scenario freeze",
+      "outputs": [
+        "future/CR_PROCESS_RELEVANCE.json"
+      ],
+      "external_inputs": [
+        "selected RUX02/RUX04 source/scenario"
+      ],
+      "maps_to": [
+        "RUX03_CR_SCREEN"
+      ]
+    },
+    {
+      "id": "M1_ELECTRON_SOURCE_BINDING",
+      "status": "NEXT_LIGHTWEIGHT_BINDING_RESEARCH",
+      "depends_on": [
+        "M1_CONSUMER_SCOPE_INTAKE",
+        "M0_QUADRATIC_RESPONSE",
+        "CR_RUX03_OWNER_REUSE"
+      ],
+      "work": "Bind inherited Qe(W,t)=t A(W), selected/birth normalization, energy windows and target time basis to one actual selected receiver request; obtain missing fields from existing source before any new atomic work",
+      "outputs": [
+        "future/CR_SOURCE_KERNEL_BINDING.json"
+      ],
+      "acceptance": "Explicit compatible or incompatible identity map; no terminal-FS10-to-M0 rescaling",
+      "maps_to": [
+        "RUX13_BIND"
+      ]
+    },
+    {
+      "id": "M1_CONSUMER_ERROR_BUDGET",
+      "status": "UNBOUND_TO_SELECTED_OBSERVABLE",
+      "depends_on": [
+        "M1_CONSUMER_SCOPE_INTAKE"
+      ],
+      "work": "Bind actual observable, absolute/relative tolerance, denominator and H0*qstar/P_ref",
+      "outputs": [
+        "future/CR_OBSERVABLE_BUDGET.json"
+      ],
+      "not_equal": [
+        "xi ionization knot",
+        "source CR efficiency",
+        "actual CR heating fraction"
+      ]
+    },
+    {
+      "id": "M2_PHYSICAL_CLOSURE_DECISION",
+      "status": "CONDITIONAL",
+      "depends_on": [
+        "M1_ELECTRON_SOURCE_BINDING",
+        "M1_CONSUMER_ERROR_BUDGET",
+        "M2_RESPONSE_ERROR_MAP"
+      ],
+      "work": "Use exact cached quadratic functional first; general source needs admitted residual/curvature bound and compatible fixed kernel",
+      "outputs": [
+        "future/CR_CLOSURE_DECISION.json"
+      ]
+    },
+    {
+      "id": "M3_SELECTED_HISTORY_OFF_RECEIPT",
+      "status": "CONDITIONAL_ON_RECEIVER_EXECUTION",
+      "depends_on": [
+        "M3_LOCAL_CR_OFF_CONTRACT"
+      ],
+      "work": "Receiver owner records source0/provider-calls0 in the selected actual history; reuse unchanged component evidence",
+      "outputs": [
+        "future/SELECTED_RECEIVER_CR_OFF_RECEIPT.json"
+      ],
+      "owner": "rei_bianchi",
+      "external_inputs": [
+        "selected physical receiver execution"
+      ],
+      "blocks_CR_light_research": false
+    },
+    {
+      "id": "M4_TARGETED_CR_EXTENSION",
+      "status": "CONDITIONAL_INDEPENDENT_LANE",
+      "depends_on": [],
+      "work": "Only a named missing physical domain/output or explicit independent CR question activates new work",
+      "outputs": [
+        "future/TARGETED_CR_EXECUTION_CONTRACT.json"
+      ],
+      "activation": "consumer deficiency OR explicit independent CR scientific question; preserves original atomic aim",
+      "maps_to": [
+        "RUX13"
+      ]
+    },
+    {
+      "id": "RUX13_MATCHED_HISTORY_EFFECT",
+      "status": "CONDITIONAL_DOWNSTREAM",
+      "depends_on": [
+        "M2_PHYSICAL_CLOSURE_DECISION"
+      ],
+      "work": "Compare matched ON/OFF histories only in admitted domain with energy bookkeeping",
+      "outputs": [
+        "future/CR_EFFECT_ON_EOR.json"
+      ],
+      "external_inputs": [
+        "RUX11 source-backed baseline and error ledger"
+      ],
+      "maps_to": [
+        "RUX13"
+      ]
+    },
+    {
+      "id": "H_NCP_FULL9600",
+      "status": "DEFERRED_OPTIONAL",
+      "depends_on": [],
+      "work": "No automatic dispatch; original source and 8-build/76800-column/900-second/no-retry contract retained",
+      "outputs": [],
+      "activation": "A fresh specific science/performance need, actual resource admission and reconciled reservations"
+    },
+    {
+      "id": "H_EXISTING_RUN_COLLECTION",
+      "status": "CONDITIONAL_ON_ACTUAL_UNCOLLECTED_RUN",
+      "depends_on": [],
+      "work": "Collect actual outstanding run if evidenced; no repetitive absence queries and no new execution",
+      "outputs": [],
+      "actual_unpublished_run": "UNKNOWN_NOT_INSPECTED_HERE"
+    },
+    {
+      "id": "F_BINDING_AND_G_FRONTIER",
+      "status": "BLOCKED_IN_OWN_LANE",
+      "depends_on": [],
+      "work": "Original operator-binding failure and dependent frontier retained; no F retry or historical operator adoption",
+      "outputs": []
+    }
+  ],
+  "next_here": [
+    "M1_ELECTRON_SOURCE_BINDING",
+    "CR_PROCESS_RELEVANCE",
+    "M1_CONSUMER_ERROR_BUDGET"
+  ],
+  "new_NCP_dispatch": false,
+  "prohibited_automatic_edges": [
+    "full atomic completion -> CR-off baseline",
+    "H preparation -> H dispatch",
+    "new diagnostic -> F binding recovery",
+    "PHYS01 terminal heat -> multiply by M0 p",
+    "M3 component evidence -> current whole-history execution"
+  ],
+  "scheduler": "Dependency readiness; explicit activation of conditional nodes. COMPLETE_SCOPED does not satisfy a different global physical gate."
+}
