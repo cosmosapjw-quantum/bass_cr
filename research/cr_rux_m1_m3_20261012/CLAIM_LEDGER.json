@@ -1,0 +1,77 @@
+{
+  "schema": "cr-rux-claim-ledger.v1",
+  "unit": "CR-RUX-M1-M3-REUSE-20261012",
+  "independent_scope_decision": "review/DECISION.json",
+  "claims": [
+    {
+      "id": "C01",
+      "claim": "M0 and quadratic results reused without rerun",
+      "status": "reused",
+      "evidence": "inputs/CACHED_RESPONSE.json; inputs/QUADRATIC_RESPONSE.json",
+      "ceiling": "Original recorded-model scope unchanged"
+    },
+    {
+      "id": "C02",
+      "claim": "Actual PHYS01/03 native terminal snapshot and current receiver exist",
+      "status": "source_inspected",
+      "evidence": "CONSUMER_REQUEST.json; inputs/consumer_intake/SOURCE_IDENTITY.json",
+      "ceiling": "Exact composition knots, no whole-history domain admission"
+    },
+    {
+      "id": "C03",
+      "claim": "Shared proton source lineage does not establish terminal-packet/M0-kernel normalization identity",
+      "status": "source_inspected_and_inferred",
+      "evidence": "CONSUMER_REQUEST.json; inputs/atomic_intake/CR_ATOMIC_REUSE_FINDINGS.json",
+      "ceiling": "Full electron/source binding unresolved; terminal heat times p prohibited"
+    },
+    {
+      "id": "C04",
+      "claim": "Conditional mean-delay closure is positive and affine exact with C2 error coefficient (S-R^2/p)/2",
+      "status": "derived",
+      "evidence": "DERIVATION_KO.md",
+      "ceiling": "Fixed nonnegative causal kernel, q(0) retained, fixed bath/spectrum/T; C2 needed for bound"
+    },
+    {
+      "id": "C05",
+      "claim": "C1/Cplus is 3.5649576737839967 for fullBED selected recorded inputs",
+      "status": "numerically_checked_recorded_arithmetic",
+      "evidence": "results/RESPONSE_ERROR_MAP.json; evidence/M2_POSTPROCESS_ACTUAL_EXECUTION.json",
+      "ceiling": "Bound coefficient ratio; not speedup or universal actual-error improvement"
+    },
+    {
+      "id": "C06",
+      "claim": "Quadratic-rise one-delay error is about 22.7604 percent of retained actual CR heating",
+      "status": "numerically_checked_recorded_arithmetic",
+      "evidence": "results/RESPONSE_ERROR_MAP.json",
+      "ceiling": "Exact quadratic formula is preferred; no physical adequacy claim"
+    },
+    {
+      "id": "C07",
+      "claim": "New implementation satisfies the bounded reference checks",
+      "status": "implementation_checked",
+      "evidence": "evidence/TARGETED_CHECKS_ACTUAL_EXECUTION.json; review/INDEPENDENT_REFERENCE_ACTUAL_EXECUTION.json",
+      "ceiling": "One owner targeted run and one independent reference; original input physics not independently certified"
+    },
+    {
+      "id": "C08",
+      "claim": "Local CR OFF source-zero/provider-no-call contract is preserved",
+      "status": "source_inspected_with_reused_historical_execution",
+      "evidence": "inputs/consumer_intake/OFF_BRANCH_COMPARISON.json; CONSUMER_REQUEST.json",
+      "ceiling": "Current whole binary/history not executed or certified; geometry derivative persists"
+    },
+    {
+      "id": "C09",
+      "claim": "Revised global dependencies admit baseline OFF without optional CR extension and require binding for ON",
+      "status": "structure_checked",
+      "evidence": "REI_ATOMIC_REUSE_DAG_CR_OVERLAY_20261012.json; evidence/DAG_VALIDATION.json",
+      "ceiling": "Global execution states remain PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "id": "C10",
+      "claim": "Physical closure sufficiency, EoR observables, production and old F/H gates are not promoted",
+      "status": "open_or_hold",
+      "evidence": "NEXT_DAG.json; HANDOFF.json",
+      "ceiling": "Actual full history, source normalization and observable budget remain unbound"
+    }
+  ]
+}

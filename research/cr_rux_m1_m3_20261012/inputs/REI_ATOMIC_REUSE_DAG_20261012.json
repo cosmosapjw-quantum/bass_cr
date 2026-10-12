@@ -1,0 +1,562 @@
+{
+  "schema": "rei_reuse_successor_dag.v1",
+  "date": "2026-10-12",
+  "purpose": "Re-use existing atomic data and coupled codes; fast source-backed EoR FLRW/Bianchi-I results",
+  "authority": "Proposed successor planning overlay, NOT a mutation or replacement of 2026-10-04 global DAG",
+  "evidence_boundary": "Paths and documents inspected; archive payloads for P01/P02/P03/v2 not unpacked/admitted in this run; no scientific code/tests executed",
+  "reuse_of_done": "F08 synthetic paired history, SYNC02/03 receiver diagnostics, scoped BASS_HE/CR/HH results are inputs; not new physical EoR proof",
+  "repositories": [
+    {
+      "name": "rei_bianchi",
+      "url": "https://github.com/cosmosapjw-quantum/rei_bianchi",
+      "role": "primary coupled runtime; physical EoR owner"
+    },
+    {
+      "name": "rec_bianchi",
+      "url": "https://github.com/cosmosapjw-quantum/rec_bianchi",
+      "role": "initial/recombination-history provider"
+    },
+    {
+      "name": "BASS_HE",
+      "url": "https://github.com/cosmosapjw-quantum/BASS_HE",
+      "role": "helium and atomic source/rate authority"
+    },
+    {
+      "name": "bass_cr",
+      "url": "https://github.com/cosmosapjw-quantum/bass_cr",
+      "role": "absorption/heating; opt-in CR physical corrections"
+    },
+    {
+      "name": "bass",
+      "url": "https://github.com/cosmosapjw-quantum/bass",
+      "role": "polarized photon transport, Thomson tau/visibility"
+    },
+    {
+      "name": "WU088_HH",
+      "url": "https://github.com/cosmosapjw-quantum/WU088_HH",
+      "role": "HH event and response conditional research"
+    },
+    {
+      "name": "htt_base",
+      "url": "https://github.com/cosmosapjw-quantum/htt_base",
+      "role": "historical/regression reference only"
+    }
+  ],
+  "source_registry": [
+    {
+      "id": "S01",
+      "role": "runtime",
+      "source": "Dropbox",
+      "path": "/bianchi/rei_bianchi/rust/rei_microphysics/src/",
+      "evidence": "Existing Rust modules including atomic_provider, homogeneous_rates, coupled_primary, axisym_radiation, paired_runtime, axisym_coupling"
+    },
+    {
+      "id": "S02",
+      "role": "retained_output",
+      "source": "Dropbox",
+      "path": "/bianchi/rei_bianchi/runs/rei_fastest_v1/paired/",
+      "evidence": "F08 synthetic 15 histories, 248000 accepted trials, short 1e13 s prescribed interval"
+    },
+    {
+      "id": "S03",
+      "role": "original_dag",
+      "source": "Dropbox",
+      "path": "/bianchi/rei_bianchi/docs/atomic_reionization_handoff_20261004_v1/",
+      "evidence": "2026-10-04 historical GLOBAL_DAG; execution state is historical and not current runtime truth"
+    },
+    {
+      "id": "S04",
+      "role": "cross_repo_validation",
+      "source": "Dropbox",
+      "path": "/bianchi/rei_bianchi/docs/research_sync/REI-REC-BASS-SYNC02-20261005/",
+      "evidence": "scoped actual REC-REI-BASS connection with audit"
+    },
+    {
+      "id": "S05",
+      "role": "atomic_handoff",
+      "source": "Dropbox",
+      "path": "/BASS_DERIVATION_DOSSIERS_20260912/ATOMIC_REIONIZATION_HANDOFF_20261004_v1/",
+      "evidence": "archives for source/closure and physical-input handoff"
+    },
+    {
+      "id": "S06",
+      "role": "physical_input_candidate",
+      "source": "Dropbox",
+      "path": "/BASS_DERIVATION_DOSSIERS_20260912/ATOMIC_REIONIZATION_HANDOFF_20261004_v1/REI_BIANCHI_PHYSICAL_INPUT_HANDOFF_20261010_v2.tar",
+      "evidence": "Exists, internal physical admission NOT VERIFIED"
+    },
+    {
+      "id": "S07",
+      "role": "physical_input_candidate",
+      "source": "Dropbox",
+      "path": "/BASS_DERIVATION_DOSSIERS_20260912/REI_PHYSINPUT_P01_PRODUCTION_20261010_c168e578.tar.gz",
+      "evidence": "Exists, internal contents/admission NOT VERIFIED"
+    },
+    {
+      "id": "S08",
+      "role": "physical_input_candidate",
+      "source": "Dropbox",
+      "path": "/BASS_DERIVATION_DOSSIERS_20260912/REI_PHYSINPUT_P02A_20261010_8a80fa9.tar.gz",
+      "evidence": "Exists, internal contents/admission NOT VERIFIED"
+    },
+    {
+      "id": "S09",
+      "role": "physical_input_candidate",
+      "source": "Dropbox",
+      "path": "/BASS_DERIVATION_DOSSIERS_20260912/REI_PHYSINPUT_P03A_20261010_d6ad8b7.tar.gz",
+      "evidence": "Exists, internal contents/admission NOT VERIFIED"
+    },
+    {
+      "id": "S10",
+      "role": "physical_input_candidate",
+      "source": "Dropbox",
+      "path": "/BASS_DERIVATION_DOSSIERS_20260912/REI_P03A_SOURCE_DELTA_20261010_05c45c3.tar.gz",
+      "evidence": "Exists, internal contents/admission NOT VERIFIED"
+    },
+    {
+      "id": "S11",
+      "role": "blocker_evidence",
+      "source": "Dropbox",
+      "path": "/BASS_DERIVATION_DOSSIERS_20260912/REI_N2_LOCAL_INPUT_RESEARCH_20261010_v1/RECEIPT.md",
+      "evidence": "N2 HOLD: Bianchi-I background, IC, spectrum, source histories, energy/source closures and executable provider binding missing in assessed input"
+    },
+    {
+      "id": "S12",
+      "role": "existing_component_evidence",
+      "source": "Dropbox",
+      "path": "/BASS_DERIVATION_DOSSIERS_20260912/REI_AXI05_COUPLED_COMPOSITION_20261010_v1/RECEIPT.md",
+      "evidence": "scoped local derivative composition PASS; full cosmology HOLD"
+    },
+    {
+      "id": "S13",
+      "role": "precision_atomic",
+      "source": "Dropbox",
+      "path": "/BASS_DERIVATION_DOSSIERS_20260912/BASS_HE_E13C10_REPORT_KO_20261012.md",
+      "evidence": "selected finite-interval bound improvement; physical/continuum/production HOLD"
+    },
+    {
+      "id": "S14",
+      "role": "precision_atomic",
+      "source": "Dropbox",
+      "path": "/BASS_DERIVATION_DOSSIERS_20260912/WU088_HH_R31S_NCP_REDESIGN_20260928/WU088_HH_OBSERVABLE_FIRST_PLAN_NCP_HANDOFF_20261012_v1.md",
+      "evidence": "HH PHYS11 preserved, observable-first plan, no heavy job ready"
+    },
+    {
+      "id": "S15",
+      "role": "atomic_point_adapter",
+      "source": "Google Drive",
+      "path": "https://drive.google.com/file/d/16y6OFZJF9fkcU31Qr-rTsAJGjEojwgJB/view",
+      "evidence": "BASS_CR point photon-stock PASS, wide propagated error PARTIAL"
+    },
+    {
+      "id": "S16",
+      "role": "cross_repo_validation",
+      "source": "Google Drive",
+      "path": "https://drive.google.com/drive/folders/1JIh1a-WtEZG-ahzN6rk-9PECVSVxljo5",
+      "evidence": "SYNC03 conditional finite-cell tau and visibility"
+    },
+    {
+      "id": "S17",
+      "role": "atomic_restore",
+      "source": "Google Drive",
+      "path": "https://docs.google.com/document/d/13AYaC3mEKz_EFMR5p4htnD039vUGwgA_weSOa6SuOMk/edit",
+      "evidence": "EoR MICRO-0 H/He rate families and conservation-tested reference/auditor recovered"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "RUX00",
+      "title": "Authority inventory and non-duplication lock",
+      "depends_on": [],
+      "lane": "MAIN",
+      "execution_owner": "rei_bianchi",
+      "sources": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S16"
+      ],
+      "artifact": "SOURCE_AUTHORITY_LOCK.json and RETAINED_RESULTS.json",
+      "acceptance_gate": "Inspect exact branch heads, commit/tree/blob SHA and per-source claims; identify previously PASS nodes and stale 2026-10-04 pending records",
+      "fail_closed_or_stop": "No re-run of F08/SYNC02/SYNC03 or completed atomic precision work; report unknown refs rather than infer",
+      "runtime_route": "LOCAL",
+      "optional": false,
+      "status": "PROPOSED_NOT_EXECUTED",
+      "notes": "Reuse 2026-10-04 GLOBAL_DAG/PR_PLAN as historic requirements; new DAG is a successor overlay."
+    },
+    {
+      "id": "RUX01",
+      "title": "Publish retained scientific diagnostics without recomputation",
+      "depends_on": [
+        "RUX00"
+      ],
+      "lane": "QUICK_RESULT",
+      "execution_owner": "rei_bianchi",
+      "sources": [
+        "S02",
+        "S04",
+        "S16"
+      ],
+      "artifact": "plots/retained_F08_SY3_diagnostics and ERROR_LEDGER.json",
+      "acceptance_gate": "Reproduce figures from saved curves and finite-cell tau, label synthetic/conditional and source/observer tail limitations; numerical checks refer to retained receipts",
+      "fail_closed_or_stop": "No claim of physical EoR, continuum sign or sky anisotropy; no fresh full science rerun",
+      "runtime_route": "LOCAL",
+      "optional": false,
+      "status": "PROPOSED_NOT_EXECUTED",
+      "notes": ""
+    },
+    {
+      "id": "RUX02",
+      "title": "Physical-input archives: exact intake and admission",
+      "depends_on": [
+        "RUX00"
+      ],
+      "lane": "MAIN",
+      "execution_owner": "rei_bianchi",
+      "sources": [
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11"
+      ],
+      "artifact": "PHYSICAL_INPUT_ADMISSION.json",
+      "acceptance_gate": "Cross-check each file SHA/internal manifests against N2 missing fields: Bianchi background/epoch, hydrogen/helium initial abundances and temperature, spectrum/source history, closures and executable callback",
+      "fail_closed_or_stop": "If any mandatory field is null or only synthetic, mark PHYSICAL_HOLD with exact missing fields; do not fabricate values",
+      "runtime_route": "LOCAL",
+      "optional": false,
+      "status": "PROPOSED_NOT_EXECUTED",
+      "notes": ""
+    },
+    {
+      "id": "RUX03",
+      "title": "Atomic process and opacity ownership registry",
+      "depends_on": [
+        "RUX00"
+      ],
+      "lane": "MAIN",
+      "execution_owner": "rei_bianchi",
+      "sources": [
+        "S01",
+        "S05",
+        "S13",
+        "S15",
+        "S17"
+      ],
+      "artifact": "ATOM_OWNER_MATRIX.json + RATE_DOMAIN_MAP.json",
+      "acceptance_gate": "Distinct HI/HeI/HeII cross sections and binding cutoffs; case A explicit recombination photons XOR case B OTS; local HI absorption XOR effective MFP overlap; proper/comoving, photon/energy, frame and units verified",
+      "fail_closed_or_stop": "Fail on double-counting, unknown/unsupported rates, missing heating, incompatible source domains, HE excited-state differential spectrum misuse",
+      "runtime_route": "LOCAL",
+      "optional": false,
+      "status": "PROPOSED_NOT_EXECUTED",
+      "notes": ""
+    },
+    {
+      "id": "RUX04",
+      "title": "Physical EoR scenario freeze (FLRW and Bianchi pair)",
+      "depends_on": [
+        "RUX02",
+        "RUX03"
+      ],
+      "lane": "MAIN",
+      "execution_owner": "rei_bianchi",
+      "sources": [
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S17"
+      ],
+      "artifact": "PHYSICAL_SCENARIO_LOCK.json",
+      "acceptance_gate": "One identified, source-backed cosmological initial epoch and background (aV, directional shear), consistent H/He IC, T, source spectrum including explicit He-ionization claim support or narrowed claim, emissivity/escape/clumping assumptions with provenance",
+      "fail_closed_or_stop": "No post-hoc tuning of source, normalization, shear, IC or closure after inspecting pair; no claims from S0 13.7 eV fixture",
+      "runtime_route": "LOCAL",
+      "optional": false,
+      "status": "PROPOSED_NOT_EXECUTED",
+      "notes": ""
+    },
+    {
+      "id": "RUX05",
+      "title": "Reuse primary microstep on first FLRW physical interval",
+      "depends_on": [
+        "RUX04"
+      ],
+      "lane": "MAIN",
+      "execution_owner": "rei_bianchi",
+      "sources": [
+        "S01",
+        "S04",
+        "S12"
+      ],
+      "artifact": "FIRST_FLRW_PHYSICAL_INTERVAL.json + conservation ledger",
+      "acceptance_gate": "Use existing coupled_primary/microstep; same-event photons and ions, nuclei/charge/energy, positivity, owner checks, independent check at fixed physical inputs",
+      "fail_closed_or_stop": "Fail-closed on missing data, case/opacity mismatch, precision/unit errors; do not reimplement solver",
+      "runtime_route": "LOCAL",
+      "optional": false,
+      "status": "PROPOSED_NOT_EXECUTED",
+      "notes": ""
+    },
+    {
+      "id": "RUX06",
+      "title": "Reuse Bianchi-I geodesic/energy remap and angular cells",
+      "depends_on": [
+        "RUX04"
+      ],
+      "lane": "MAIN",
+      "execution_owner": "rei_bianchi",
+      "sources": [
+        "S01",
+        "S02"
+      ],
+      "artifact": "BI_TRANSPORT_REGRESSION.json",
+      "acceptance_gate": "Exact directional characteristic energy relation, photon number and frequency-face flux telescoping, FLRW sigma->0 limit, frame conventions and KMS not assumed",
+      "fail_closed_or_stop": "Do not claim microphysical coupling, new history or physical result from collisionless transport tests",
+      "runtime_route": "LOCAL",
+      "optional": false,
+      "status": "PROPOSED_NOT_EXECUTED",
+      "notes": ""
+    },
+    {
+      "id": "RUX07",
+      "title": "First physical Bianchi-I coupled interval",
+      "depends_on": [
+        "RUX05",
+        "RUX06"
+      ],
+      "lane": "MAIN",
+      "execution_owner": "rei_bianchi",
+      "sources": [
+        "S01",
+        "S12"
+      ],
+      "artifact": "FIRST_BI_PHYSICAL_COUPLED_INTERVAL.json",
+      "acceptance_gate": "Same source/history/IC and frozen rates as FLRW, couple actual angular RT to same-event absorption/HHe chemistry/thermal power; energy and group-boundary ledgers closed",
+      "fail_closed_or_stop": "Fail on nonconvergence, conservation breach, missing time carry or source/opacity owner conflict; no prediction from a manufactured fixture",
+      "runtime_route": "LOCAL",
+      "optional": false,
+      "status": "PROPOSED_NOT_EXECUTED",
+      "notes": ""
+    },
+    {
+      "id": "RUX08",
+      "title": "Source-backed multi-epoch FLRW EoR history",
+      "depends_on": [
+        "RUX05"
+      ],
+      "lane": "MAIN",
+      "execution_owner": "rei_bianchi",
+      "sources": [
+        "S01",
+        "S07",
+        "S08",
+        "S09"
+      ],
+      "artifact": "FLRW_EOR_HISTORY.csv + convergence and model ledger",
+      "acceptance_gate": "Evolve selected source-backed history over declared reionization epoch, species fractions/temperature/photons, causal photon inventory, post-overlap sink handling, independent FLRW reference/limit",
+      "fail_closed_or_stop": "No QV=xHII relabeling, no cosmological extrapolation beyond provider/source domain",
+      "runtime_route": "LOCAL",
+      "optional": false,
+      "status": "PROPOSED_NOT_EXECUTED",
+      "notes": ""
+    },
+    {
+      "id": "RUX09",
+      "title": "Matched Bianchi-I/FLRW EoR history",
+      "depends_on": [
+        "RUX07",
+        "RUX08"
+      ],
+      "lane": "MAIN",
+      "execution_owner": "rei_bianchi",
+      "sources": [
+        "S01",
+        "S02",
+        "S16"
+      ],
+      "artifact": "PAIRED_EOR_HISTORY.csv + DIFFERENCE_ERROR_LEDGER.json",
+      "acceptance_gate": "Same cosmological source and closure, directional photon remap, time/angle/energy refinements, explicit shears; separation of background/history vs shear transport effect",
+      "fail_closed_or_stop": "Do not interpret numerical contrast as observationally novel if source/closure systematic larger or unconstrained",
+      "runtime_route": "NCP_IF_MEASURED_HEAVY",
+      "optional": false,
+      "status": "PROPOSED_NOT_EXECUTED",
+      "notes": ""
+    },
+    {
+      "id": "RUX10",
+      "title": "CMB receiver optical depth and visibility",
+      "depends_on": [
+        "RUX09"
+      ],
+      "lane": "MAIN",
+      "execution_owner": "bass",
+      "sources": [
+        "S04",
+        "S16"
+      ],
+      "artifact": "TAU_VISIBILITY_SOURCE_BACKED.json + plots",
+      "acceptance_gate": "Bind proper ne(t) from genuine physical paired history into existing BASS time/visibility API; observer-tail explicit; FLRW and non-tilted limits checked",
+      "fail_closed_or_stop": "No arbitrary tail=0 as physical total tau; do not imply full polarized CMB sky result",
+      "runtime_route": "LOCAL",
+      "optional": false,
+      "status": "PROPOSED_NOT_EXECUTED",
+      "notes": ""
+    },
+    {
+      "id": "RUX11",
+      "title": "Scientific plot and observational-claim screening",
+      "depends_on": [
+        "RUX08",
+        "RUX09",
+        "RUX10"
+      ],
+      "lane": "MAIN",
+      "execution_owner": "rei_bianchi",
+      "sources": [
+        "S02",
+        "S16"
+      ],
+      "artifact": "FIGURE_SET + CLAIM_LEDGER.json",
+      "acceptance_gate": "Source-backed xHII,xHeII,xHeIII,Tg,Gamma,photons, delta observables, tau/visibility; uncertainties split numeric, atomic, source, geometry, spatial closure",
+      "fail_closed_or_stop": "Publication gate fails for unconstrained cosmological input, unmatched source, missing uncertainty or false QV claim",
+      "runtime_route": "LOCAL",
+      "optional": false,
+      "status": "PROPOSED_NOT_EXECUTED",
+      "notes": ""
+    },
+    {
+      "id": "RUX12",
+      "title": "HE precision sensitivity import, when material",
+      "depends_on": [
+        "RUX11"
+      ],
+      "lane": "OPTIONAL_ATOMIC",
+      "execution_owner": "BASS_HE",
+      "sources": [
+        "S13",
+        "S17"
+      ],
+      "artifact": "HE_EFFECT_ON_EOR.json",
+      "acceptance_gate": "Only if process and temperature/source domain relevant; consume rates, event moments or bounded perturbations with provider authority; run matched ON/OFF sensitivity in rei once",
+      "fail_closed_or_stop": "Do not promote E13C10 finite interval width to physical model error; no 2440-path replay without need",
+      "runtime_route": "NCP_IF_MEASURED_HEAVY",
+      "optional": true,
+      "status": "PROPOSED_NOT_EXECUTED",
+      "notes": ""
+    },
+    {
+      "id": "RUX13",
+      "title": "CR hard-particle process extension, when material",
+      "depends_on": [
+        "RUX11"
+      ],
+      "lane": "OPTIONAL_ATOMIC",
+      "execution_owner": "bass_cr",
+      "sources": [
+        "S15"
+      ],
+      "artifact": "CR_EFFECT_ON_EOR.json",
+      "acceptance_gate": "Only if deposition/hard particle/temperature observables require, with native rate owner and supported point outputs",
+      "fail_closed_or_stop": "CR OFF remains legitimate baseline; full wide propagated numerical certificate OPEN",
+      "runtime_route": "NCP_IF_MEASURED_HEAVY",
+      "optional": true,
+      "status": "PROPOSED_NOT_EXECUTED",
+      "notes": ""
+    },
+    {
+      "id": "RUX14",
+      "title": "HH chemistry/spectral response, when material",
+      "depends_on": [
+        "RUX11"
+      ],
+      "lane": "OPTIONAL_ATOMIC",
+      "execution_owner": "WU088_HH",
+      "sources": [
+        "S14"
+      ],
+      "artifact": "HH_EFFECT_ON_EOR.json",
+      "acceptance_gate": "Bind named HH processes to stoichiometric network, threshold heating, domain; local sensitivity first, actual matched histories only if needed",
+      "fail_closed_or_stop": "Singlet ion-pair not replaced by free-electron LCS; native root/continuum unfinished; no ungrounded HH promotion",
+      "runtime_route": "NCP_IF_MEASURED_HEAVY",
+      "optional": true,
+      "status": "PROPOSED_NOT_EXECUTED",
+      "notes": ""
+    },
+    {
+      "id": "RUX15",
+      "title": "Patchiness/spatial topology extension",
+      "depends_on": [
+        "RUX11"
+      ],
+      "lane": "FUTURE_SPATIAL",
+      "execution_owner": "rei_bianchi",
+      "sources": [
+        "S03"
+      ],
+      "artifact": "QM_QV_RT_EXTENSION_PLAN.json",
+      "acceptance_gate": "Declare density–ionization correlation, topology and spatial RT/IGM opacity source if QV, 21cm power or spatial sky inference claimed",
+      "fail_closed_or_stop": "Homogeneous xHII alone cannot be relabeled QV nor predict patchy 21cm spectrum",
+      "runtime_route": "NCP_IF_MEASURED_HEAVY",
+      "optional": true,
+      "status": "PROPOSED_NOT_EXECUTED",
+      "notes": ""
+    },
+    {
+      "id": "RUX16",
+      "title": "Physical promotion and reproducible release",
+      "depends_on": [
+        "RUX11"
+      ],
+      "lane": "RELEASE",
+      "execution_owner": "rei_bianchi",
+      "sources": [
+        "S03",
+        "S11",
+        "S16"
+      ],
+      "artifact": "PHYSICAL_CLAIM_DECISION.json + final charts + reproducibility manifest",
+      "acceptance_gate": "Numerical convergence; source/model errors and physical assumptions; independent trusted checks, source/license/provenance, passed observable gate; actual repo commit and checksum receipts if published",
+      "fail_closed_or_stop": "Keep physical/continuum/production HOLD until own acceptance; optional precision/spatial results may remain open",
+      "runtime_route": "LOCAL",
+      "optional": false,
+      "status": "PROPOSED_NOT_EXECUTED",
+      "notes": ""
+    }
+  ],
+  "main_critical_path": [
+    "RUX00",
+    "RUX02",
+    "RUX03",
+    "RUX04",
+    "RUX05",
+    "RUX06",
+    "RUX07",
+    "RUX08",
+    "RUX09",
+    "RUX10",
+    "RUX11",
+    "RUX16"
+  ],
+  "parallel_fast_lane": [
+    "RUX01"
+  ],
+  "optional": [
+    "RUX12",
+    "RUX13",
+    "RUX14",
+    "RUX15"
+  ],
+  "execution_policy": {
+    "local_first": "Light derivations, source/ABI/units/owner audit, analytic and saved-result tests are local",
+    "NCP": "Only demonstrably heavy outstanding independent histories parameter sweep, source-validated spatial RT or expensive bounded error; do not dispatch idle 64-core tasks",
+    "no_new_heavy_until": [
+      "RUX04 PASS",
+      "RUX07 PASS",
+      "measured wall/CPU/RSS or justified heavy scaling"
+    ],
+    "mutation": "No branch/PR/push/backup performed by preparation of this DAG",
+    "validation_tiers": "ACK != BYTE_RESTORE != SCIENTIFIC_PASS != PHYSICAL_ADMISSION"
+  }
+}

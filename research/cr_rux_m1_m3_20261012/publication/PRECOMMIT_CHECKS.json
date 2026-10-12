@@ -1,0 +1,26 @@
+{
+  "schema": "cr-rux-precommit.v1",
+  "created_utc": "2026-10-12T08:11:46.614552+00:00",
+  "status": "PASS_AUTHORED_CODE_AND_DOCS; IMMUTABLE_FORMAT_NOTES_PRESERVED",
+  "all_staged_paths_in_scope": true,
+  "staged_file_count_before_receipt": 135,
+  "candidate_manifest_files_unchanged": 120,
+  "default_whitespace_check_exit": 2,
+  "default_whitespace_note": "Byte-preserved intake files include extra terminal blank lines, and the new saved TSV uses csv-writer CRLF. No source/evidence bytes were normalized after independent review.",
+  "default_whitespace_raw": "PRECOMMIT_BYTE_FORMAT_NOTES.txt",
+  "authored_code_docs_whitespace_check": {
+    "command": [
+      "git",
+      "diff",
+      "--cached",
+      "--check",
+      "--",
+      ".",
+      ":(exclude)research/cr_rux_m1_m3_20261012/inputs/**",
+      ":(exclude)research/cr_rux_m1_m3_20261012/results/RESPONSE_ERROR_MAP.tsv"
+    ],
+    "exit_code": 0
+  },
+  "bounded_credential_pattern_scan": "NO_MATCHES_IN_NEW_UNIT; private-key, GitHub/OpenAI-token, URL credential and signed-query patterns inspected",
+  "science_rerun": false
+}

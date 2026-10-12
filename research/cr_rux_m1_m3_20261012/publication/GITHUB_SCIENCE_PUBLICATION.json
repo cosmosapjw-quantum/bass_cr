@@ -1,0 +1,175 @@
+{
+  "provider": "GitHub",
+  "route": "connected GitHub blob/tree/commit/branch/PR tools after HTTPS git push authentication failure",
+  "repository": "cosmosapjw-quantum/bass_cr",
+  "local_unpublished_commit": "0955d257a85719a649e2423a163d2384f5f834d6",
+  "published_commit": "dfdef60b4967466f2dccabbba6bbdad9ad7cd068",
+  "published_tree": "391a83d5f1c784728c09b4656c0e594375657f6f",
+  "base_commit": "767273fec673ac0877dc4833da4bef147ae04c40",
+  "tree_byte_identity_matches_reviewed_local_tree": true,
+  "blob_results": [
+    {
+      "path": "research/cr_rux_m1_m3_20261012/evidence/graphics_initial/RESPONSE_ERROR_MAP.pdf",
+      "expected_sha": "1731f8aa52096e5047da42bbf98596cf0e41ab3b",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Action completed."
+          }
+        ],
+        "structuredContent": {
+          "sha": "1731f8aa52096e5047da42bbf98596cf0e41ab3b"
+        },
+        "isError": false
+      }
+    },
+    {
+      "path": "research/cr_rux_m1_m3_20261012/evidence/graphics_initial/RESPONSE_ERROR_MAP.png",
+      "expected_sha": "e8ee5b8fc8d131a2b98a7a7b35b3ea0e71ebd6ef",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Action completed."
+          }
+        ],
+        "structuredContent": {
+          "sha": "e8ee5b8fc8d131a2b98a7a7b35b3ea0e71ebd6ef"
+        },
+        "isError": false
+      }
+    },
+    {
+      "path": "research/cr_rux_m1_m3_20261012/results/RESPONSE_ERROR_MAP.pdf",
+      "expected_sha": "6a3bf1bf671c1fa5dc13bb2121a47b4ab90833f2",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Action completed."
+          }
+        ],
+        "structuredContent": {
+          "sha": "6a3bf1bf671c1fa5dc13bb2121a47b4ab90833f2"
+        },
+        "isError": false
+      }
+    },
+    {
+      "path": "research/cr_rux_m1_m3_20261012/results/RESPONSE_ERROR_MAP.png",
+      "expected_sha": "260008c1add2956eb8dbef41f88e483d398da933",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Action completed."
+          }
+        ],
+        "structuredContent": {
+          "sha": "260008c1add2956eb8dbef41f88e483d398da933"
+        },
+        "isError": false
+      }
+    }
+  ],
+  "tree_result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "sha": "391a83d5f1c784728c09b4656c0e594375657f6f"
+    },
+    "isError": false
+  },
+  "commit_result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "sha": "dfdef60b4967466f2dccabbba6bbdad9ad7cd068"
+    },
+    "isError": false
+  },
+  "branch_result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "branch": "research/cr-rux-m1-m3-reuse-20261012"
+    },
+    "isError": false
+  },
+  "pull_request": {
+    "url": "https://github.com/cosmosapjw-quantum/bass_cr/pull/44",
+    "number": 44,
+    "state": "open",
+    "merged": false,
+    "mergeable": false,
+    "draft": true,
+    "body": "## 문제와 연구 목적\n\n첨부 RUX DAG에는 현재 M0 응답과 실제 native CR receiver의 상태가 충분히 반영되지 않았습니다. CR 과정의 필요성과 source/domain 연결을 baseline 이후까지 미루면 필요한 물리와 기존 결과를 늦게 구분하게 됩니다.\n\n## 변경과 결과\n\n- 기존 M0/이차 결과를 재사용하고, `P+=H0*p*q(T*R/p)` 및 C2 곡률 오차 상계를 유도·구현했습니다. fullBED selected 기록의 상계 계수는 finite-age 첫 보정 대비 약 3.565배 작습니다. 이차 증가 이력의 실제 CR 가열 대비 오차는 아직 약 22.76%이며, 이차 이력에는 기존 정확식을 우선 사용합니다.\n- 실제 PHYS01/03 native snapshot과 source 계보를 연결했습니다. M1의 full-history 정규화와 관측량 예산은 OPEN으로 유지합니다. terminal FS10 heating에 M0 p를 곱하는 변환은 허용하지 않습니다.\n- 보존된 CR OFF 함수와 과거 실행 근거를 재사용했습니다. 새 receiver patch는 필요하지 않으며 최신 전체 history의 OFF 영수증은 그 실제 실행에 연결해야 합니다.\n- RUX03_CR_SCREEN과 RUX13_BIND, CR ON 선행조건, 선택한 물리 주장에 따른 RUX16 조건부 의존성을 추가했습니다. 전역 노드의 실행 상태는 변경하지 않았습니다.\n- 한국어 보고서·재편 계획·source/owner/domain map·검토 및 재개 문서를 추가하고 root 시작점을 갱신했습니다.\n\n## 검증과 범위\n\n새 targeted 검사 7개, 새 saved-moment postprocess 1회(4개 기록, 24개 이력 비교, 180개 조건부 budget), 별도 Fraction 기준 계산 1회가 exit 0으로 완료되었습니다. 독립 범위 판정과 frozen manifest는 `research/cr_rux_m1_m3_20261012/review/DECISION.json` 및 `CANDIDATE_MANIFEST.json`을 참조합니다. DAG 구조 검사는 cycle/source/conditional dependency를 확인하며 물리 검증이 아닙니다.\n\n기존 M0·과거 receiver suite·새 G/solve/pulse/expm·NCP 실행은 0입니다. 새 EoR 또는 production 승격은 없고 F/H 및 기존 physical gate를 보존했습니다. 다른 저장소는 변경하지 않았습니다.\n\nBase는 PR43의 `research/cr-m0-quadratic-response-20261012`이며, 이 PR은 검토용 draft입니다. 생성되는 현재 단위 archive와 create-only 백업의 R1 receipt는 후속 publication commit에 기록합니다.\n",
+    "title": "CR M1–M3: 실제 소비자 재사용과 finite-age 가열 오차 지도, RUX DAG 재편",
+    "base": "research/cr-m0-quadratic-response-20261012",
+    "base_sha": "767273fec673ac0877dc4833da4bef147ae04c40",
+    "head": "research/cr-rux-m1-m3-reuse-20261012",
+    "head_sha": "dfdef60b4967466f2dccabbba6bbdad9ad7cd068",
+    "head_repo_id": 1379624838,
+    "head_repo_full_name": "cosmosapjw-quantum/bass_cr",
+    "merge_commit_sha": null,
+    "user": {
+      "login": "cosmosapjw-quantum",
+      "name": "cosmosapjw-quantum",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/58155957?v=4",
+      "id": 58155957
+    },
+    "requested_reviewers": null,
+    "requested_team_reviewers": null,
+    "diff": null,
+    "comments": null,
+    "created_at": "2026-10-12T08:14:44Z",
+    "updated_at": "2026-10-12T08:14:44Z",
+    "closed_at": null,
+    "merged_at": null,
+    "commits": 1,
+    "changed_files": 137,
+    "additions": 24195,
+    "deletions": 1,
+    "display_url": "https://github.com/cosmosapjw-quantum/bass_cr/pull/44",
+    "display_title": "CR M1–M3: 실제 소비자 재사용과 finite-age 가열 오차 지도, RUX DAG 재편"
+  },
+  "verification_tier": "R1_PROVIDER_ACK_AND_CONTENT_ADDRESSED_IDENTITY",
+  "raw_file_readback": false,
+  "remote_ref_read": {
+    "command": [
+      "git",
+      "ls-remote",
+      "--heads",
+      "origin",
+      "refs/heads/research/cr-rux-m1-m3-reuse-20261012"
+    ],
+    "exit_code": 0,
+    "stdout": "dfdef60b4967466f2dccabbba6bbdad9ad7cd068\trefs/heads/research/cr-rux-m1-m3-reuse-20261012\n",
+    "matched": true
+  },
+  "local_adoption": {
+    "current_branch": "research/cr-rux-m1-m3-reuse-20261012",
+    "current_head": "dfdef60b4967466f2dccabbba6bbdad9ad7cd068",
+    "unpublished_commit_preserved_at": "local/cr-rux-review-20261012",
+    "fetch_filter": "blob:none",
+    "purpose": "Adopt connector-created commit metadata; not a remote raw-file readback",
+    "initial_tracking_switch_exit": 128,
+    "initial_stderr": "Not retained by initial wrapper",
+    "resolution": "Existing single-branch clone fetch specification did not cover the new ref; added only this branch to the local fetch specification, then tracking checkout succeeded.",
+    "resolution_exit": 0
+  }
+}

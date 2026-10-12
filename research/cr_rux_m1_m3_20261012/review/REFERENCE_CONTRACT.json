@@ -1,0 +1,48 @@
+{
+  "schema": "cr-independent-reference-contract.v1",
+  "reviewer": "/root/independent_review",
+  "harness": "GPT-6 Astra v4.0.0",
+  "identity_basis": "host developer metadata",
+  "candidate_generation_participation": false,
+  "owner_validation_design_participation": false,
+  "reference_design_participation": true,
+  "execution_budget": {
+    "independent_reference_invocations": 1,
+    "old_evaluator": 0,
+    "owner_suite": 0,
+    "G": 0,
+    "propagation": 0,
+    "NCP": 0
+  },
+  "concrete_risks": [
+    "delay/source-time reversal or mass-normalization loss",
+    "wrong factor or sign in curvature coefficients",
+    "zero prehistory incorrectly deleting q(0)",
+    "current source shutoff incorrectly setting delayed response zero",
+    "normalization by current heating rather than H0*qstar or declared positive reference",
+    "new packet arithmetic or representation-key mismatch",
+    "moments falsely interpreted as unique kernel"
+  ],
+  "fixed_sources_sha256": {
+    "CONTRACT.json": "6b49c9de4ed8b408f16087ee86cff6957046d91a8e66c821501ca275de659da3",
+    "DERIVATION_KO.md": "eebdb09b374ecde5f9cbf4ef6f0081819fcb61d0aef25ef63e7ae5c6310ec0ad",
+    "finite_age_closure.py": "08c8714d7d952ec746beaf505a95b54e9511944f351e20c30f7185fd5073995e",
+    "evaluate_error_map.py": "d4c4aff1939515b5915dcb8b5ed68f2fb9b08224916d4226a5b36c6d2ab90404",
+    "test_finite_age_closure.py": "3e26cfb80f897719388780ce55d6021a296f1f3f8c7ba8f09ddd837f0a093f1a",
+    "inputs/CACHED_RESPONSE.json": "60747f9da89e3596bfeb93a4ec14a1bb58a33bca3a09629fc092f254839f3b7b",
+    "inputs/QUADRATIC_RESPONSE.json": "def1a5d78637baf2def371108690bcf0cf35f6b5c6b49442ced613f1aef762c7",
+    "inputs/SOURCE_MANIFEST.json": "fcc4741e4775159696fcff8ccc30a7272cc3a0dc6db3bf8389f0a9e2933ecbe2",
+    "results/RESPONSE_ERROR_MAP.json": "81086d99eab0574f774f0434edb7308672eec17e4222bdd8031136386b95b3da"
+  },
+  "reference_paths": [
+    "review/independent_reference.py",
+    "review/run_independent_reference.py"
+  ],
+  "allowed_output_directory": "review/",
+  "not_in_scope": [
+    "actual EoR inputs or source binding",
+    "past F/H gates",
+    "physical input or discretization error certification",
+    "production or NCP scaling"
+  ]
+}

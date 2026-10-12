@@ -1,0 +1,222 @@
+{
+  "schema": "bass_cr.atomic_reuse_source_findings.v1",
+  "role": "DAG_DESIGN_COLLABORATOR_SOURCE_INTAKE_NOT_DECISION_REVIEWER",
+  "pin": {
+    "repository": "cosmosapjw-quantum/bass_cr",
+    "commit": "767273fec673ac0877dc4833da4bef147ae04c40"
+  },
+  "work_performed": {
+    "source_reads": true,
+    "git_blob_materialization": true,
+    "file_identity_hashing": true,
+    "scientific_calculations": false,
+    "old_suite_rerun": false,
+    "repository_file_mutation": false,
+    "global_REI_nodes_executed": false
+  },
+  "evidence_status": "Existing source/code/receipt claims were read and exactly pinned; reported historical scientific verification was not independently re-executed in this intake.",
+  "usable_lanes": [
+    {
+      "id": "CR_BASELINE_PHOTON_IGM",
+      "source_keys": [
+        "bridge",
+        "bridge_code"
+      ],
+      "status": "EXISTING_POINT_INTERFACE_AND_REPORTED_SCOPED_NATIVE_PASS",
+      "purpose": "Feed existing H/He photon absorption and per-absorber heating into native igm_point_rhs; CR OFF path needs no CR precision campaign",
+      "inputs": {
+        "frame": "gas rest tetrad",
+        "density": "proper nH,nHe in cm^-3",
+        "energy": "eV",
+        "photon_nodes": "bin-integrated and already angular-weighted photons/H"
+      },
+      "outputs": {
+        "Gamma": "s^-1, absorber order HI/HeI/HeII",
+        "heat": "erg absorber^-1 s^-1",
+        "photon_loss": "photons H^-1 s^-1",
+        "absorbed_power": "erg H^-1 s^-1"
+      },
+      "ownership": {
+        "cross_sections": "passed AtomicProvider",
+        "thresholds_constants": "existing HHeModel controlled_fixture constants owner; fit threshold and binding energy not conflated",
+        "photo_same_event": "cr_off_igm_bridge",
+        "chemistry_thermal_EOS_CMB": "igm_point_rhs",
+        "injection_redshift_dt_stage": "caller outside bridge"
+      },
+      "forbidden_double_count": [
+        "extra 4pi,dE,a^-3,dt on already integrated photon counts",
+        "adding photoheat again after igm_point_rhs",
+        "replacing unsupported CR ON with zeros"
+      ],
+      "claim_limits": [
+        "point bridge, not global receiver adoption",
+        "not a time-integrated cosmological history",
+        "not a uniform atomic-rate physical certificate"
+      ]
+    },
+    {
+      "id": "CR_FULL_POINT_RHS",
+      "source_keys": [
+        "point"
+      ],
+      "status": "FULL_POINT_SOURCE_DIFFERENCE_CHECKED__CONTINUOUS_FLOW_AND_ERROR_OPEN",
+      "purpose": "Reuse actual full native point RHS including nonphoto changes at 24 matched mode/epoch pairs",
+      "claim_limits": [
+        "96 combined point calls are retained and must not be rerun",
+        "point differences are not future temperature ordering or trajectory defect bounds",
+        "physical admission and observer tail are absent"
+      ]
+    },
+    {
+      "id": "CR_FT03_FINITE_MACRO_TIME_CERTIFICATE",
+      "source_keys": [
+        "r16b",
+        "r17b2"
+      ],
+      "status": "R16B_CONDITIONAL_TIME_CERTIFICATE_RETAINED__R17B2_NO_NEW_CERTIFIED_SOURCE_SHARPENING",
+      "purpose": "Retain the fixed-birth FT03 conditional optical-depth time-error bound and source budget for its own model",
+      "domain": {
+        "proper_time_s": [
+          0,
+          1250000000
+        ],
+        "cells": 32,
+        "births": 6,
+        "variant": 0
+      },
+      "R16B_time_interval": [
+        "1.93952149246122105640334464568857077003923403510713337451052e-17",
+        "2.00673392521469305112644147185875600842764948764166993310174e-17"
+      ],
+      "R16B_combined_interval": [
+        "9.17748492461221051e-18",
+        "3.02850692521469334e-17"
+      ],
+      "claim_limits": [
+        "not the same object as an instantaneous stock diagnostic or generic IGM chemistry history",
+        "no transfer from FT03 derivative-moment model to newer Grackle-subset point RHS",
+        "R17B2 high birth-derivative tubes and one-sided jumps still lack a source-sharpening certificate",
+        "observer tail and physical atomic accuracy excluded"
+      ]
+    },
+    {
+      "id": "CR_CONDITIONAL_HARD_PARTICLE_COMPONENT",
+      "source_keys": [
+        "phys01",
+        "phys01_contract",
+        "packet",
+        "receiver"
+      ],
+      "status": "CONDITIONAL_PHYSICAL_COMPONENT_AVAILABLE",
+      "purpose": "Existing SN proton injection to H/He primary ionization plus FS10 terminal secondary channels and native REI derivative packet",
+      "provider_id": "CRP_L17_MD14_RUDD_FS10_XI001_CONDITIONAL_V1",
+      "packet_protocol_sha256": "1bb0d4e1c4c71a409ca170e8741fabd17fabe02195b86fe24a06875712d0e373",
+      "manifest_protocol_sha256": "79835c5eaa891f37f663c1852d6035ee446a25778763164cfea2d20531cdd901",
+      "units": "proper SI; event rates m^-3 s^-1; powers J m^-3 s^-1; proper time s",
+      "domain": {
+        "nH_m3": 140,
+        "nHe_m3": 11.542553191489361,
+        "xHII": 0.01,
+        "xHeII": 0.01,
+        "xHeIII": 0,
+        "temperature_K": 100,
+        "H_s": 3.3e-17,
+        "shear_s": 3.3e-18,
+        "snapshot_age_s": 10000000000.0,
+        "active_proton_eV": [
+          1000000.0,
+          4000000.0
+        ],
+        "normalization_proton_eV": [
+          10000.0,
+          1000000000000000.0
+        ]
+      },
+      "claim_limits": [
+        "quasistatic terminal local component; delay_admission=false",
+        "source-produced collisionless proton snapshot; no collision feedback",
+        "native solver interval count is zero",
+        "arbitrary ionization fractions or changed gas state not admitted by this packet",
+        "exact original FS10 helium abundance unresolved; source z8 adopts table z10 under low-density approximation",
+        "only modeled 1-4MeV ionization-loss power is receiver external_power, not full injected CR power",
+        "excitation escape is retained; do not reinject already internally reabsorbed helium ionizing photons",
+        "ionization binding enters once; only secondary electron kinetic energy enters cascade"
+      ]
+    }
+  ],
+  "PHYS01_PHYS02_M0_identity": {
+    "classification": "SHARED_PROTON_SOURCE_LINEAGE__DISTINCT_RESPONSE_OPERATOR_AND_OBSERVABLE",
+    "shared_source_file_hashes_recorded_in_manifests": {
+      "injection.py": "c5eda0e60302339af1bbdd0603ae1cd8a8921d9e6489c22d954e0bc92968c27d",
+      "rudd.py": "757e4c8b33618ad6ef88f422919fe813654454c836f0942cf9792be133e8eac2"
+    },
+    "PHYS02A": {
+      "source": "Qe(W,t)=t A(W), leading local Np=t qp approximation; initially empty",
+      "electron_window_eV": [
+        0.1,
+        10
+      ],
+      "physics": "Coulomb-only causal stopping in fixed bath; cutoff residual is not heat",
+      "parent_commit": "e41e18873af438ef989ff44f505fe2665118fdec"
+    },
+    "PHYS02B": {
+      "source": "same inherited proton-born A(W) with t-ramp, not a constant source",
+      "electron_window_eV": [
+        0.1,
+        900
+      ],
+      "birth_tags_eV": [
+        [
+          0.1,
+          10
+        ],
+        [
+          10,
+          900
+        ]
+      ],
+      "bath": "same prescribed nH140m^-3,Y.248,xi.01,T100K; not evolved",
+      "physics": "repeated electron-impact HI/HeI ionization, n2..4 excitation, Coulomb drift; excitation reservoirs retained without reconstructed photon spectrum",
+      "parent_commit": "58c8e1cda5c8f8ca8b83269cb89899ea40ab91fe",
+      "excludes": [
+        "HeII electron-impact channels",
+        "gas/ionization feedback",
+        "radiative branching/reabsorption",
+        "direct source outside selected electron window"
+      ]
+    },
+    "M0": {
+      "cached_response_sha256": "60747f9da89e3596bfeb93a4ec14a1bb58a33bca3a09629fc092f254839f3b7b",
+      "physical_record_origin_sha256": "dfdca59ca0b4131c6143fe3cf0e402a7b18efb113a9af9bcc82a66696f5ec6f5",
+      "physical_record_path": "research/cr_phys02g_20261011/inputs/F_CACHED_NUMERICAL_ARTIFACT.json",
+      "physical_record_origin_commit": "8d80abde76f6c259cac031353d1928fccb5f191c",
+      "scope": "Fixed nonnegative causal linear heating kernel, original H0 normalization, selected_record and birth_defined distinct; endpoint quadratic-history response; no new physical kernel accuracy claim"
+    },
+    "prohibited_inference": "Do not multiply the PHYS01 FS10 terminal heat packet by an M0 response fraction merely because bath/scenario values overlap. Electron spectrum, atomic operator, source history, selected energy window and H0 normalization must match an explicit consumer contract."
+  },
+  "attached_S15_status": {
+    "claim_in_attachment": "point photon-stock PASS, wide propagated error PARTIAL",
+    "current_intake": "S15 Drive document itself was not fetched; no new claim about its 182-panel or 5824-point payload identity. The exact photon-IGM point interface and later scoped time certificates above provide stronger bounded reuse pointers without converting S15 wide error into PASS."
+  },
+  "DAG_changes_supported": [
+    "Add baseline CR photon-IGM reuse artifact to RUX03 independently of optional RUX13 precision campaign.",
+    "Add PHYS01 provider and exact packet/source contract as an available conditional RUX13 input; do not report NO_PHYSICAL_PROVIDER.",
+    "Keep early source/domain relevance screening before first coupled physical scenario; perform optional matched-history sensitivity only after exact compatible history exists.",
+    "Keep FT03 temporal/source certificate, photon point rates, FS10 terminal packet, and M0 delayed-kernel moments as separate claim types.",
+    "No global REI RUX node is marked executed or PASS by this bass_cr intake."
+  ],
+  "source_paths": {
+    "bridge": "docs/fastest_track_resume_20261007_v1/CR_F0_IGM_PHOTON_BRIDGE_KO.md",
+    "bridge_code": "research/fastest_rejoin_20261007/cr_off_igm_bridge.rs",
+    "point": "research/fastest_rejoin_20261008/full_point_source/RETURN.json",
+    "r16b": "research/cr_r16b_20261009/R16B_REPORT_KO.md",
+    "r17b2": "research/cr_r17b2_20261010/BASS_CR_NCP_R17B2_RETURN_KO.md",
+    "phys01": "research/cr_phys01_20261010/REPORT_KO.md",
+    "phys01_contract": "research/cr_phys01_20261010/state/SCIENTIFIC_CONTRACT.json",
+    "packet": "research/cr_phys01_20261010/evidence/CR_PACKET.json",
+    "receiver": "research/cr_phys01_20261010/research/REI_RECEIVER_CONTRACT.json",
+    "phys02a": "research/cr_phys02a_20261010/state/SCIENTIFIC_CONTRACT.json",
+    "phys02b": "research/cr_phys02b_20261010/state/SCIENTIFIC_CONTRACT.json",
+    "m0": "research/cr_m0_quadratic_20261012/CONTRACT.json"
+  }
+}

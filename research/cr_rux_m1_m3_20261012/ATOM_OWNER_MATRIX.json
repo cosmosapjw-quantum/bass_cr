@@ -1,0 +1,80 @@
+{
+  "schema": "cr-rux-atom-owner-matrix.v1",
+  "status": "SCOPED_SOURCE_CONTRACT_INVENTORY_NOT_GLOBAL_ADOPTION",
+  "source_inventory": "inputs/atomic_intake/SOURCE_INVENTORY.json",
+  "owners": [
+    {
+      "process": "primary HI/HeI/HeII photon absorption",
+      "source": "CRX01",
+      "input": "gas-rest proper nH/nHe [cm^-3], E [eV], already bin-integrated and angular-weighted photons/H",
+      "output": "Gamma [s^-1], heat [erg/absorber/s], photon loss [photons/H/s], absorbed energy [erg/H/s]",
+      "owner": "cr_off_igm_bridge + selected AtomicProvider for cross sections; igm_point_rhs for gas chemistry/thermal response",
+      "same_event": [
+        "photon removal",
+        "primary ion creation",
+        "binding energy",
+        "photoelectron excess energy"
+      ],
+      "forbidden_extra_factors": [
+        "4pi",
+        "dE",
+        "a^-3",
+        "dt"
+      ],
+      "scope_note": "Those measures are already integrated in this input convention; this is not a rule for arbitrary spectral-density inputs"
+    },
+    {
+      "process": "source injection, redshift and integration stage",
+      "owner": "receiver caller",
+      "source": "CRX01",
+      "do_not_duplicate": "No source birth, redshift or timestep hidden inside instantaneous absorption bridge"
+    },
+    {
+      "process": "PHYS01/03 hard-particle terminal deposition",
+      "source": "CRX02/CRX04",
+      "owner": "source-pinned Rudd/FS10 packet then native cr_deposition_derivative",
+      "units": "events m^-3 s^-1; powers J m^-3 s^-1",
+      "scope": "two exact xi composition knots at prescribed bath/time/geometry; no interpolation or full history",
+      "energy_partition": [
+        "ionization internal energy",
+        "thermal heat",
+        "excitation escape",
+        "continuum escape"
+      ],
+      "modelled_loss_is_full_proton_injection": false
+    },
+    {
+      "process": "causal electron heating delay",
+      "source": "CRX03/CRX05",
+      "owner": "PHYS02 recorded fixed-bath operator/moment model",
+      "input_basis": "proton-born electron source; Qe(W,t)=t A(W) in inherited local source approximation",
+      "units": "existing H0 source normalization; explicit seconds; not an SI rate packet until normalization is bound",
+      "use": "exact quadratic endpoint functional or certified conditional C2 closure; only at T=1e10 s",
+      "terminal_packet_times_p_allowed": false
+    },
+    {
+      "process": "optional CR OFF",
+      "source": "CRX04",
+      "owner": "native receiver enabled=false branch",
+      "source_terms": 0,
+      "provider_calls": 0,
+      "scope": "local component with preserved function and historical test evidence",
+      "geometry_derivative_zero": false,
+      "baseline_primary_photoheating_disabled": false
+    },
+    {
+      "process": "recombination and unresolved HI opacity",
+      "owner": "selected REI scenario",
+      "choice": "Case A plus explicit recombination photons or Case B OTS for the same photons; local HI absorption or effective MFP for the same absorber events",
+      "allowed": "Explicitly disjoint domains/populations with a documented partition",
+      "global_choice_made_here": false
+    }
+  ],
+  "exact_unit_conversions": {
+    "cm^-3_to_m^-3": "multiply by 1000000",
+    "erg_to_J": "multiply by 1e-7",
+    "photons_per_H_to_proper_number_density": "multiply by actual proper nH in the chosen volume units"
+  },
+  "retained_atomic_findings": "inputs/atomic_intake/CR_ATOMIC_REUSE_FINDINGS.json",
+  "wide_S15_payload_read_here": false
+}
