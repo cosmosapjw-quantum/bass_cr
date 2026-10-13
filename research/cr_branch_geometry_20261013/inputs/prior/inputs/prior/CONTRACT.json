@@ -1,0 +1,84 @@
+{
+  "schema": "bass-cr-theory-loop-contract.v1",
+  "unit": "CR-THEORY-FEEDBACK-20261013",
+  "mode": "THEORY",
+  "skill": "physmath-research-loop",
+  "policy_version": "1.0.0 / approved design v0.2 (2026-10-12)",
+  "started_utc": "2026-10-12T20:49:00+00:00",
+  "date_local": "2026-10-13",
+  "timezone": "Asia/Seoul",
+  "baseline": {
+    "branch": "research/cr-thermal-evolution-20261012",
+    "branch_head": "3bac8c6d00da0ae2eabc3cb7ba16acd64ec1c54e",
+    "science_commit": "2495662e86a69ed822ec192685c3e9e0e68e1255",
+    "archive_sha256": "6793495e997ac8d1d17b705ab3dab3b8e8908fb39ed9f5bf5ad95ee9a6a4a72d",
+    "reuse_manifest": "inputs/PRIOR_REUSE.json"
+  },
+  "question": "Construct the next positive conservative finite reaction step with self-consistent temperature and H/He coefficient feedback; bind covariant energy/current identities through actual Wolfram+xAct execution.",
+  "selected_prior_dag_node": "CR_THEORY_SELF_CONSISTENT_FEEDBACK",
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "A collision substep uses a fixed finite event matrix S, current physical packet energies, nonnegative initial comoving populations and thermal/radiation energy, and exact invariant rows L with LS=0."
+    },
+    {
+      "id": "A2",
+      "statement": "The ground-state H/He family neglects heavy-nucleus recoil energy; active packets may be realized in equal ±p pairs. Recombination uses fixed positive captured-energy quadrature nodes with temperature-dependent nonnegative weights. Current collision data include fixed nonnegative angular weights and opposite momentum pairs representing the input state exactly, or packet-indexed event columns. The same angular rule defines the continuous collision field."
+    },
+    {
+      "id": "A3",
+      "statement": "Thermal nuclei and thermal electrons share a nonrelativistic monatomic ideal temperature; c_v=3 k_B/2, Nthermal=Nnuc+Ne, Nnuc>0. Active electrons retain their own kinetic-energy inventory."
+    },
+    {
+      "id": "A4",
+      "statement": "Proposal donors are evaluated at the initial state; temperature, composition and declared density coefficients are evaluated at the trial collision endpoint. At the initial point proposals equal the declared physical propensity."
+    },
+    {
+      "id": "A5",
+      "statement": "Rates are finite continuous nonnegative on the constructed compact convex domain. T-singular rates use U0>0 and h cUbar<=U0; uniqueness/Picard requires the computed scaled-norm q<1. Initial zero donors disable only incident events."
+    },
+    {
+      "id": "A6",
+      "statement": "Physical-ODE error bounds additionally require local Lipschitz vector field, quasipositivity on accessible domain boundaries, bounded time variation, and retention of the physical path in the same domain (sufficient h cUphysbar<=U0/2)."
+    },
+    {
+      "id": "A7",
+      "statement": "Any Coulomb-log coefficient is restricted to its declared positive interval 0<n_lo<=n<=n_hi<C^2. The selected count functional, volume, derivative bounds and interval self-map must be supplied together."
+    },
+    {
+      "id": "A8",
+      "statement": "Geometry is prescribed diagonal Bianchi I with positive scale factors, metric (-+++), proper time in seconds and explicit c. Thermal geometry maintains isotropic monatomic ideal-fluid closure; active shear stress is retained."
+    },
+    {
+      "id": "A9",
+      "statement": "One Lie step uses a regular fixed threshold/channel branch; O(h^2) local time error requires locally Lipschitz H_i and rate time dependence. Crossings require resolved crossing/flux treatment. Each subsequent collision rebinds actual parent/daughter energies or a conservative remap. Collision and geometry compose on this common packet state, with C_0 equal to the identity in the current chart; next-stage directions are the actually transported directions."
+    }
+  ],
+  "assumption_details": "derivations/FEEDBACK_ASSUMPTIONS.json",
+  "acceptance": [
+    "Explicit finite common-event construction and positivity/invariant proof",
+    "Computable temperature-domain, existence, contraction and EOS feedback bounds",
+    "Separate algebraic residual and physical endpoint-defect temperature certificates",
+    "Actual xAct tensor and Wolfram exact scalar checks",
+    "Reference capacity/Picard implementation with targeted execution and independent source review",
+    "Complete LaTeX/PDF, additive DAG update, source-bound handoff"
+  ],
+  "evidence_reuse": {
+    "prior_scientific_hashes_verified": 8,
+    "previous_science_reruns": 0
+  },
+  "execution": {
+    "Wolfram_symbolic_groups": 23,
+    "Wolfram_scalar_residuals": 25,
+    "event_reference_checks": 9,
+    "feedback_driver_checks": 2,
+    "full_atomic_kernel_runs": 0,
+    "new_ODE_integrations": 0,
+    "NCP_jobs": 0
+  },
+  "publication": {
+    "mode": "additive draft branch and PR; preserve prior branch and main",
+    "backup_tier": "R1 provider completion/identity/available integrity metadata"
+  },
+  "status": "CANDIDATE_FOR_INDEPENDENT_INTEGRATED_REVIEW"
+}

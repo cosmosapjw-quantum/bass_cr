@@ -1,0 +1,98 @@
+{
+  "schema": "bass-cr-claims.v1",
+  "unit": "CR-THEORY-KERNEL-CUTOFF-20261013",
+  "status": "PENDING_FINAL_INDEPENDENT_REVIEW",
+  "claims": [
+    {
+      "id": "KC1",
+      "title": "Actual saved-grid positive paired event representation",
+      "scope": "PHYS02C HI/HeI and declared PHYS02B projector/effective excitation/stopping family.",
+      "result": "Positive daughter weights, exact nuclei/charge/kinetic-chemical-excitation energy columns and original fixed-bath generator correspondence; same-parent-and-target-family ionization sharing is preserved by a common capacity denominator under the actual grid gap bound.",
+      "derivation": "derivations/KERNEL_EVENT_ADAPTER_KO.md",
+      "equations": "KA.5–18, KA.25–29",
+      "evidence": [
+        "inputs/KERNEL_SOURCE_BINDING.json",
+        "results/KERNEL_ADAPTER_CHECKS.json",
+        "results/SHARING_CAPACITY_CHECKS.json"
+      ],
+      "status": "PENDING_FINAL_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "KC2",
+      "title": "Actual composition and thermal-bath derivative binding",
+      "scope": "Fixed parent energies, positive Coulomb-log domain and declared cold-target model.",
+      "result": "Trial neutral density enters atomic proposal; stopping b=alpha*n*L, b_prime=alpha*(L-1/2), b_second=-alpha/(2n), yielding explicit rate Lipschitz bounds.",
+      "derivation": "derivations/KERNEL_EVENT_ADAPTER_KO.md",
+      "equations": "KA.13, KA.19–24, KA.28",
+      "evidence": [
+        "results/KERNEL_ADAPTER_CHECKS.json",
+        "results/WOLFRAM_SCALAR_RAW.json"
+      ],
+      "status": "PENDING_FINAL_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "KC3",
+      "title": "Finite temperature-cutoff EOS with a computable error certificate",
+      "scope": "Common positive inventory; continuous or bounded piecewise-continuous cutoff density, bracket and C_eff>=m>0.",
+      "result": "Signed finite 0th/1st transfer, unique positive root, h=0 identity, residual/data-to-temperature bound and local moving-boundary consistency.",
+      "derivation": "derivations/THERMAL_CUTOFF_FEEDBACK_KO.md",
+      "equations": "TCF.2–35",
+      "evidence": [
+        "results/THERMAL_CUTOFF_CHECKS.json",
+        "results/WOLFRAM_SCALAR_RAW.json"
+      ],
+      "status": "PENDING_FINAL_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "KC4",
+      "title": "Finite atomic branch construction and energy continuation",
+      "scope": "Positive base inventory, finite retained atoms and thermal equality ownership; chi>=3/2 for existence/continuation theorem.",
+      "result": "Enumerate all algebraic branches; finite forward construction; inherited-branch heating/cooling scan preserves positive inventories and h=0 identity, including nonmonotone candidate temperature and multiple roots.",
+      "derivation": "derivations/THERMAL_CUTOFF_FEEDBACK_KO.md",
+      "equations": "TCF.36–46",
+      "evidence": [
+        "results/THERMAL_CUTOFF_CHECKS.json"
+      ],
+      "status": "PENDING_FINAL_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "KC5",
+      "title": "Covariant moving-boundary current and rest-mass energy bridge",
+      "scope": "Declared spectral balance/traces/endpoint conditions; comoving number closure for scalar rest-mass subtraction.",
+      "result": "S_c=j_c^a nabla_a E_c-F_c; opposite number/energy boundary sources cancel; rest-mass subtraction yields E_c*S_c with explicit c factors.",
+      "derivation": "derivations/COVARIANT_CUTOFF_KO.md",
+      "equations": "CV.1–10",
+      "evidence": [
+        "results/WOLFRAM_XACT_RAW.json"
+      ],
+      "status": "PENDING_FINAL_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "KC6",
+      "title": "Event-to-cutoff coupled feedback gain and error bound",
+      "scope": "Uniform root bracket, C_eff>=m>0 and descriptor self-map; smooth spectrum with trial-z-independent fixed linear reconstruction, or a fixed atomic prefix branch.",
+      "result": "Event moment imbalance nu_U-cv*T*nu_N gives thermal feedback gain; computable descriptor q<1 gives uniqueness and inner/outer residual bounds.",
+      "derivation": "derivations/COVARIANT_CUTOFF_KO.md",
+      "equations": "CP.1–15",
+      "evidence": [
+        "results/WOLFRAM_SCALAR_RAW.json",
+        "inputs/prior/derivations/FEEDBACK_THEOREMS_KO.md"
+      ],
+      "status": "PENDING_FINAL_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "KC7",
+      "title": "Reference implementations and exact constructive examples",
+      "scope": "Source-pinned small event families, exact rational box/prefix algorithms and explicitly constructed test inventories.",
+      "result": "17 actual-energy event witnesses, conservative positive capacity stress case, certified heating/cooling roots and atomic finite scans; these are scoped implementation checks.",
+      "derivation": "kernel_event_adapter.py; thermal_cutoff_solver.py",
+      "equations": "KA §10; TCF.31–46",
+      "evidence": [
+        "results/KERNEL_ADAPTER_CHECKS.json",
+        "results/THERMAL_CUTOFF_CHECKS.json",
+        "results/SHARING_CAPACITY_CHECKS.json"
+      ],
+      "status": "PENDING_FINAL_INDEPENDENT_REVIEW"
+    }
+  ]
+}

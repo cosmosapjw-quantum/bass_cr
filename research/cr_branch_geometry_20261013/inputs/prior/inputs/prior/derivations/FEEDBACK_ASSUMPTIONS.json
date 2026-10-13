@@ -1,0 +1,317 @@
+{
+  "schema": "bass-cr-feedback-assumptions.v1",
+  "unit_id": "CR-THEORY-FEEDBACK-20261013",
+  "author": "/root/feedback_fixed_point",
+  "status": "DERIVED_AWAITING_INDEPENDENT_REVIEW",
+  "proof": "derivations/FEEDBACK_THEOREMS_KO.md",
+  "reused_results": [
+    {
+      "unit": "CR-THEORY-THERMAL-EVOLUTION-20261012",
+      "file": "derivations/THERMAL_EXCESS_KO.md",
+      "equations": [
+        "T.7",
+        "T.9",
+        "T.10",
+        "T.11",
+        "T.14",
+        "T.18",
+        "T.20"
+      ],
+      "scope": "Exact thermal/all-free EOS and energy/count transfer; endpoint temperature difference"
+    }
+  ],
+  "conventions": {
+    "metric_signature": "(-,+,+,+)",
+    "time": "proper time [s]",
+    "state_counts": "comoving cell particle counts",
+    "state_energies": "cell energies [J]",
+    "volume": "physical cell volume [m^3]",
+    "temperature": "kelvin",
+    "heat_capacity_per_particle": "c_v=3*k_B/2",
+    "active_bin_energies": "fixed W_j>0 [J] during collision substep"
+  },
+  "assumptions": [
+    {
+      "id": "FP-A1",
+      "statement": "Finite nonnegative state with fixed event columns S and nonnegative rate functions; common event extent multiplies every state and ledger increment.",
+      "equations": [
+        "FP.1",
+        "FP.2",
+        "FP.8"
+      ]
+    },
+    {
+      "id": "FP-A2",
+      "statement": "H nuclei, He nuclei, charge/e and kinetic+chemical+radiative energy rows annihilate S; positive active energies and nonnegative chemical/radiation energy conventions give a compact invariant state set.",
+      "equations": [
+        "FP.10",
+        "FP.11"
+      ]
+    },
+    {
+      "id": "FP-A3",
+      "statement": "N_thermal=N_H+N_He+N_e; N_H+N_He>0. Active electron counts are excluded from thermal EOS. All free electron representation uses the prior exact excess-energy state.",
+      "equations": [
+        "FP.3"
+      ]
+    },
+    {
+      "id": "FP-A4",
+      "statement": "Proposal f_r(z;y_n)=kappa_r(T(z),fractions(z),selected target density(z),t_star)*B_r(y_n,V_star); initial donor factors are fixed during one solve and coefficient dependence is evaluated at candidate endpoint.",
+      "equations": [
+        "FP.4",
+        "FP.5"
+      ]
+    },
+    {
+      "id": "FP-A5",
+      "statement": "f_r(y_n;y_n)=physical_rate_r(y_n,t_star); every zero-capacity event disabled at initial support has vanishing physical rate there. Frozen zero-reactant proposals are defined as zero before any singular coefficient evaluation.",
+      "equations": [
+        "FP.6",
+        "FP.35"
+      ],
+      "used_by": [
+        "FP5"
+      ]
+    },
+    {
+      "id": "FP-A6",
+      "statement": "Coefficients are nonnegative and continuous on the named compact domain K for existence; finite Lipschitz or derivative bounds are supplied for unique fixed point and explicit contraction.",
+      "equations": [
+        "FP.13",
+        "FP.17",
+        "FP.19",
+        "FP.21"
+      ],
+      "used_by": [
+        "FP2",
+        "FP3",
+        "FP4"
+      ]
+    },
+    {
+      "id": "FP-A7",
+      "statement": "For U_n>0 choose T_floor=U_n/(2*c_v*N_max), T_ceiling=E_total/(c_v*N_min). Domain map condition h*C_U_proposal<=U_n. Additional positive density floors use corresponding retained donor bounds.",
+      "equations": [
+        "FP.12",
+        "FP.15",
+        "FP.16"
+      ],
+      "used_by": [
+        "FP2",
+        "FP3"
+      ]
+    },
+    {
+      "id": "FP-A8",
+      "statement": "For U_n=0 use coefficients continuously defined at T=0; positive-temperature singular rate families use FP-A7. At zero electron density, existence via continuous extension and contraction via bounded derivatives are separate hypotheses.",
+      "equations": [
+        "FP.17"
+      ],
+      "used_by": [
+        "FP2",
+        "FP3"
+      ]
+    },
+    {
+      "id": "FP-A9",
+      "statement": "Positive fixed state scales a_i define mixed-unit weighted infinity norm. Computed q<1 is required for unique fixed point, geometric Picard convergence and algebraic residual certificate.",
+      "equations": [
+        "FP.18",
+        "FP.24",
+        "FP.27"
+      ],
+      "used_by": [
+        "FP3",
+        "FP4"
+      ]
+    },
+    {
+      "id": "FP-A10",
+      "statement": "Physical ODE rates locally Lipschitz in an open neighborhood of K, quasipositive at accessible nonnegative boundaries within that regular domain and preserve the same linear invariants; explicit state/time Lipschitz and speed bounds hold along the compared paths.",
+      "equations": [
+        "FP.32",
+        "FP.33",
+        "FP.34"
+      ],
+      "used_by": [
+        "FP5",
+        "FP6"
+      ]
+    },
+    {
+      "id": "FP-A11",
+      "statement": "Physical ODE path inside positive-temperature box can be ensured by h*C_U_physical<=U_n/2 and analogous density conditions; linear reconstruction remains in convex K.",
+      "equations": [
+        "FP.34",
+        "FP.38"
+      ],
+      "used_by": [
+        "FP6"
+      ]
+    },
+    {
+      "id": "FP-A12",
+      "statement": "Expansion is prescribed and common to compared states. Collision-step certificate is multiplied by gamma=(V_plus/V_minus)^(-2/3) under a following exact thermal geometric substep. Full split accuracy uses its actual combined residual.",
+      "equations": [
+        "FP.43"
+      ]
+    }
+  ],
+  "zero_population_handling": {
+    "zero_negative_donor": "Disable only incident consuming event for this step; denominator sums use fixed positive initial donor support.",
+    "zero_frozen_reactant": "Set proposal to zero before coefficient evaluation.",
+    "species_group_absent": "If N_H=0 or N_He=0 omit the corresponding fractions and reactions; no division by absent nuclei.",
+    "zero_thermal_energy": "Use a regular rate family continuously defined at T=0 or a positive initial thermal energy domain.",
+    "zero_target_electron_density": "For B(n)=K*n*log(C/sqrt(n)), positive coefficient and derivative domain is 0<n_lo<=n<=n_hi<C^2. The continuous n=0 extension supports existence when applicable; contraction uses positive density bounds or a regular rate family.",
+    "h_zero": "Map equals initial state; no endpoint physical rate defect division by h is formed.",
+    "new_donor_created": "Proposal support is rebuilt from the accepted state at the next step; its within-step reaction extent is O(h^2) under local Lipschitz rates."
+  },
+  "formulas": {
+    "capacity_consumption": "C_ir=max(-S_ir,0)",
+    "load": "c_i=sum_r C_ir*f_r",
+    "denominator_rate": "d_r=sum_{i:C_ir>0} c_i/y_n_i",
+    "extent": "xi_r=h*f_r/(1+h*d_r)",
+    "map": "Phi_h(z)=y_n+S*xi(z)",
+    "protected_stock": "y_plus_i>=y_n_i/(1+h*c_i/y_n_i) when y_n_i>0",
+    "nuclei_floor": "N_min=N_H+N_He",
+    "thermal_count_ceiling": "N_max=N_min+N_H+2*N_He-Q0",
+    "energy_ceiling": "U<=E_total",
+    "scaled_norm": "max_i |v_i|/a_i",
+    "eos_lipschitz": "L_T=a_U/(c_v*N_min)+T_ceiling*a_N/N_min",
+    "proposal_lipschitz": "L_r=B_r(y_n,V_star)*sum_alpha K_ralpha*L_alpha",
+    "load_lipschitz": "L_c_i=sum_r C_ir*L_r",
+    "denominator_lipschitz": "D_r=sum_{i:C_ir>0} L_c_i/y_n_i",
+    "denominator_lower_bound": "m_r=1+h*inf_K d_r>=1",
+    "extent_lipschitz": "M_r=h*L_r/m_r+h^2*F_r*D_r/m_r^2",
+    "contraction": "q=max_i sum_r |S_ir|*M_r/a_i",
+    "conservative_q_bound": "q<=h*A+h^2*B",
+    "sufficient_h_contraction": "2*q_target/(A+sqrt(A^2+4*B*q_target)) if B>0; q_target/A if B=0,A>0; unlimited if A=B=0"
+  },
+  "conditional_claims": [
+    {
+      "id": "FP1",
+      "status": "derived",
+      "statement": "All capacity-map outputs and fixed-point iterates are nonnegative and preserve every declared linear event invariant exactly.",
+      "equations": [
+        "FP.7",
+        "FP.8",
+        "FP.9"
+      ]
+    },
+    {
+      "id": "FP2",
+      "status": "derived",
+      "statement": "Explicit thermal/density bounds construct a compact invariant domain for continuous coefficient feedback and a fixed point exists.",
+      "equations": [
+        "FP.12",
+        "FP.15",
+        "FP.16",
+        "FP.17"
+      ]
+    },
+    {
+      "id": "FP3",
+      "status": "derived",
+      "statement": "Computable coefficient constants give q<1, unique endpoint on K and convergence of feasible Picard iterates.",
+      "equations": [
+        "FP.21",
+        "FP.24",
+        "FP.25",
+        "FP.27"
+      ]
+    },
+    {
+      "id": "FP4",
+      "status": "derived",
+      "statement": "Algebraic residual, evaluation error and approximate coefficient error give an endpoint and temperature certificate.",
+      "equations": [
+        "FP.28",
+        "FP.29",
+        "FP.30",
+        "FP.31"
+      ]
+    },
+    {
+      "id": "FP5",
+      "status": "derived",
+      "statement": "Under matching initial physical rates and zero-support compatibility, the frozen donor capacity step is first-order consistent and has a computable O(h^2) local difference from the continuous reaction ODE.",
+      "equations": [
+        "FP.35",
+        "FP.36",
+        "FP.37"
+      ]
+    },
+    {
+      "id": "FP6",
+      "status": "derived",
+      "statement": "Actual endpoint vector-field defect plus state/time Lipschitz constants bounds the continuous ODE endpoint and temperature error by an explicit reconstruction integral.",
+      "equations": [
+        "FP.39",
+        "FP.40",
+        "FP.41",
+        "FP.42"
+      ]
+    },
+    {
+      "id": "FP7",
+      "status": "derived",
+      "statement": "Neutral one-event temperature/composition feedback fixture has an exact rational endpoint, global scalar contraction and a distinct exact physical time defect.",
+      "equations": [
+        "FP.44",
+        "FP.49",
+        "FP.50",
+        "FP.51"
+      ]
+    }
+  ],
+  "analytic_fixture": {
+    "label": "neutral_hydrogen_feedback",
+    "state_order": [
+      "A",
+      "H0",
+      "Hplus",
+      "e_thermal",
+      "U_over_E0"
+    ],
+    "initial_state": [
+      "1",
+      "1",
+      "1",
+      "0",
+      "1"
+    ],
+    "event_column": [
+      "-1",
+      "-1",
+      "1",
+      "2",
+      "3"
+    ],
+    "active_energy": "4*E0",
+    "ionization_energy": "E0",
+    "nuclei_count": "2",
+    "charge_over_e": "0",
+    "total_energy": "6*E0",
+    "dimensionless_temperature": "theta=c_v*T/E0=(1+3*x)/(2+2*x)",
+    "hydrogen_ion_fraction": "(1+x)/2",
+    "coefficient": "kappa/kappa0=(1+theta)*2*ion_fraction",
+    "normalized_proposal": "F(x)=(3+5*x)/2",
+    "map": "psi(x)=eta*F(x)/(1+2*eta*F(x))",
+    "eta": "4/17",
+    "exact_extent": "1/4",
+    "exact_endpoint": [
+      "3/4",
+      "3/4",
+      "5/4",
+      "1/2",
+      "7/4"
+    ],
+    "exact_theta": "7/10",
+    "contraction_at_eta": "170/841",
+    "universal_scalar_q_upper": "5/24",
+    "physical_rate": "kappa0*F(x)*(1-x)^2",
+    "physical_endpoint_extent_defect": "-17*kappa0/128",
+    "execution_status": "ROOT_OWNS_ACTUAL_WOLFRAM_CHECKS"
+  }
+}

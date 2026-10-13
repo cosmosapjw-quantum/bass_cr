@@ -1,0 +1,42 @@
+(* New BG scalar identities. Constants have symbolic SI units; the final
+   constructed momentum example is explicitly dimensionless. *)
+ClearAll["Global`*"];
+ass=rr>0&&ww>=0&&qq2>=0&&lo<xx<up&&cv>0&&nn>0&&aa>0&&al>0;
+stableEnergy=FullSimplify[qq2/(Sqrt[rr^2+qq2]+rr)-(Sqrt[rr^2+qq2]-rr),rr>0&&qq2>=0];
+shell=FullSimplify[(Sqrt[rr^2+qq2]-rr)(Sqrt[rr^2+qq2]+rr)-qq2];
+nonrelRemainder=Together[ww(ww+2rr)/(ww+rr)-2ww+ww^2/(ww+rr)];
+massless=Together[(ww(ww+2rr)/(ww+rr)/.rr->0)-ww];
+pc2[t_]:=p1^2/a1[t]^2+p2^2/a2[t]^2+p3^2/a3[t]^2;
+energy[t_]:=Sqrt[rr^2+pc2[t]];
+bianchiDerivative=FullSimplify[D[energy[t]-rr,t]+(a1'[t]p1^2/a1[t]^3+a2'[t]p2^2/a2[t]^3+a3'[t]p3^2/a3[t]^3)/energy[t]];
+identityMap=FullSimplify[(Sqrt[rr^2+r1^2*p1^2+r2^2*p2^2+r3^2*p3^2]-rr/.{r1->1,r2->1,r3->1})-(Sqrt[rr^2+p1^2+p2^2+p3^2]-rr)];
+beta=(xx-lo)/(up-lo);
+baryCount=Together[(1-beta)+beta-1];
+baryEnergy=Together[(1-beta)lo+beta up-xx];
+baryVariance=Together[(1-beta)lo^2+beta up^2-xx^2-(xx-lo)(up-xx)];
+absoluteDistance=Together[(1-beta)(xx-lo)+beta(up-xx)-2(xx-lo)(up-xx)/(up-lo)];
+varianceMaximum=Together[(up-lo)^2/4-(xx-lo)(up-xx)-(xx-(lo+up)/2)^2];
+branchJump=Together[(uu+ww*aa)/(cv(nn+aa))-uu/(cv*nn)-aa(ww-uu/nn)/(cv(nn+aa))];
+thresholdJump=Together[((uu+ww*aa)/(cv(nn+aa))-uu/(cv*nn)/.uu->cv*nn*ww/al)-aa*ww*(1-cv/al)/(cv(nn+aa))];
+fi=ap*(x0-x)/(1+bp*ap*(x0-x));
+ionDerivative=Together[D[fi,x]+ap/(1+bp*ap*(x0-x))^2];
+poly=bp*ap*x^2-(1+ap+bp*ap*x0)*x+ap*x0;
+fixedPolynomial=Together[(x-fi)(1+bp*ap*(x0-x))+poly];
+bigb=1+ap+bp*ap*x0;disc=bigb^2-4bp*ap^2*x0;
+smallRoot=2ap*x0/(bigb+Sqrt[disc]);
+rootCheck=FullSimplify[poly/.x->smallRoot,ap>0&&bp>0&&x0>0];
+discriminantIdentity=Expand[disc-((bp*ap*x0-ap)^2+1+2ap+2bp*ap*x0)];
+tt=(cv*n0*t0+eps*x+delta*s)/(cv*(n0+x));
+temperatureX=Together[D[tt,x]-(n0*(eps-cv*t0)-delta*s)/(cv*(n0+x)^2)];
+temperatureS=Together[D[tt,s]-delta/(cv*(n0+x))];
+lam=astop*(ne0+x)*(ll0-Log[(ne0+x)/ne0]/2);
+lambdaDerivative=FullSimplify[D[lam,x]-astop*(ll0-Log[(ne0+x)/ne0]/2-1/2),ne0>0&&x>=0];
+lambdaSecond=FullSimplify[D[lam,{x,2}]+astop/(2(ne0+x)),ne0>0&&x>=0];
+stopDerivative=FullSimplify[D[hp*lam/(1+hp*lam),x]-hp*D[lam,x]/(1+hp*lam)^2];
+logTransformDerivative=Together[D[2ArcTanh[x/(2ne0+x)],x]-1/(ne0+x)];
+hInverse=s*vol/(kap*parent*(target-s)*(1-s*(1/parent+1/target)));
+ff=kap*parent*(target-s)/vol;
+inverseExtent=Together[hInverse*ff/(1+hInverse*ff*(1/parent+1/target))-s];
+residuals=<|"StableMassiveEnergy"->stableEnergy,"MassShell"->shell,"NonrelativisticRemainder"->nonrelRemainder,"MasslessLimit"->massless,"BianchiIDerivative"->bianchiDerivative,"IdentityGeometryMap"->identityMap,"BarycentricCount"->baryCount,"BarycentricEnergy"->baryEnergy,"BarycentricQuadraticDefect"->baryVariance,"LipschitzDistance"->absoluteDistance,"VarianceUpperBoundIdentity"->varianceMaximum,"AtomicBranchJump"->branchJump,"ThresholdBranchJump"->thresholdJump,"IonMapDerivative"->ionDerivative,"FixedPointPolynomial"->fixedPolynomial,"StableSmallRoot"->rootCheck,"DiscriminantPositiveDecomposition"->discriminantIdentity,"TemperatureDerivativeX"->temperatureX,"TemperatureDerivativeS"->temperatureS,"StoppingFirstDerivative"->lambdaDerivative,"StoppingSecondDerivative"->lambdaSecond,"StoppingMapDerivative"->stopDerivative,"LogRatioTransformDerivative"->logTransformDerivative,"InverseReactionExtent"->inverseExtent|>;
+inequalities=<|"NonnegativeMassiveEnergy"->FullSimplify[qq2/(Sqrt[rr^2+qq2]+rr)>=0,rr>0&&qq2>=0],"BarycentricWeightsPositive"->FullSimplify[0<beta<1,lo<xx<up],"ThresholdJumpNonnegative"->FullSimplify[aa*ww*(1-cv/al)/(cv(nn+aa))>=0,aa>=0&&ww>0&&nn>0&&al>=cv>0],"DimensionlessMomentumNotExactlyPreserved"->TrueQ[(Sqrt[21]+Sqrt[69])/2<Sqrt[44]]|>;
+<|"Kernel"->$Version,"Residuals"->Map[ToString[#,InputForm]&,residuals],"Inequalities"->inequalities,"AllZero"->And@@(TrueQ[#===0]&/@Values[residuals]),"AllInequalitiesTrue"->And@@(TrueQ[#]&/@Values[inequalities])|>
