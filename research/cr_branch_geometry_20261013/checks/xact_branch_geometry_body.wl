@@ -1,0 +1,28 @@
+$DefInfoQ=False;
+DefManifold[Man,4,{aa,bb,cc,dd,ee,ff,ii,jj}];
+DefMetric[-1,gg[-aa,-bb],DG,{";","D"}];
+DefTensor[nn[aa],Man];DefTensor[qq[aa],Man];DefTensor[pp[aa],Man];
+DefTensor[acc[aa],Man];DefTensor[en[],Man];DefTensor[hh[],Man];
+DefTensor[kk[-aa,-bb],Man,Symmetric[{-aa,-bb}]];
+DefTensor[sig[-aa,-bb],Man,Symmetric[{-aa,-bb}]];
+DefTensor[rot[-aa,-bb],Man,Antisymmetric[{-aa,-bb}]];
+DefConstantSymbol[cs];DefConstantSymbol[mm];DefConstantSymbol[kb];
+norm=MakeRule[{nn[aa]nn[-aa],-1},MetricOn->All,ContractMetrics->True];
+spatialQ=MakeRule[{nn[aa]qq[-aa],0},MetricOn->All,ContractMetrics->True];
+spatialA=MakeRule[{nn[aa]acc[-aa],0},MetricOn->All,ContractMetrics->True];
+spatialK=MakeRule[{nn[aa]kk[-aa,-bb],0},MetricOn->All,ContractMetrics->True];
+spatialS=MakeRule[{nn[aa]sig[-aa,-bb],0},MetricOn->All,ContractMetrics->True];
+rules=Join[norm,spatialQ,spatialA,spatialK,spatialS];
+simp[expr_]:=FixedPoint[ToCanonical[ContractMetric[Expand[#]]] /.rules&,expr,10];
+pd[a_]:=en[]nn[a]/cs+qq[a];
+observerEnergy=simp[-cs nn[-aa]pd[aa]-en[]];
+massShell=simp[pd[aa]pd[-aa]+en[]^2/cs^2-qq[aa]qq[-aa]];
+observerClock=simp[-nn[-aa]pd[aa]/cs-en[]/cs^2];
+geodesicProduct=simp[pp[aa]DG[-aa][-cs nn[-bb]pp[bb]]+cs pp[aa]pp[bb]DG[-aa][nn[-bb]]+cs nn[-bb]pp[aa]DG[-aa][pp[bb]]];
+normalDerivative=-nn[-aa]acc[-bb]+kk[-aa,-bb]/cs;
+normalContraction=simp[pd[aa]pd[bb]normalDerivative-en[]acc[-aa]qq[aa]/cs-kk[-aa,-bb]qq[aa]qq[bb]/cs];
+observerWork=simp[-cs^3 pd[aa]pd[bb]normalDerivative/en[]+cs^2 acc[-aa]qq[aa]+cs^2 kk[-aa,-bb]qq[aa]qq[bb]/en[]];
+shearSplit=simp[qq[aa]qq[bb](hh[](gg[-aa,-bb]+nn[-aa]nn[-bb])+sig[-aa,-bb])-hh[]qq[aa]qq[-aa]-sig[-aa,-bb]qq[aa]qq[bb]];
+frameRotation=simp[rot[-aa,-bb]qq[aa]qq[bb]];
+residuals={observerEnergy,massShell,observerClock,geodesicProduct,normalContraction,observerWork,shearSplit,frameRotation};
+<|"Kernel"->System`$Version,"xTensorVersion"->xAct`xTensor`$Version,"xPermVersion"->xAct`xPerm`$Version,"MathLink"->xAct`xPerm`$xpermQ,"PackageSHA256"->actualHashes,"ObserverEnergy"->ToString[observerEnergy,InputForm],"MassShellDecomposition"->ToString[massShell,InputForm],"ObserverClock"->ToString[observerClock,InputForm],"GeodesicProductRule"->ToString[geodesicProduct,InputForm],"NormalDerivativeContraction"->ToString[normalContraction,InputForm],"ObserverEnergyWork"->ToString[observerWork,InputForm],"ExpansionShearSplit"->ToString[shearSplit,InputForm],"AntisymmetricFrameWork"->ToString[frameRotation,InputForm],"AllZero"->And@@(TrueQ[#===0]&/@residuals)|>

@@ -1,0 +1,98 @@
+{
+  "schema": "bass-cr-claims.v1",
+  "unit": "CR-THEORY-BRANCH-GEOMETRY-20261013",
+  "status": "CANDIDATE_REVIEW_PENDING",
+  "claims": [
+    {
+      "id": "BG1",
+      "title": "Actual fixed-branch coupled endpoint",
+      "scope": "Constructed HI sharing contribution plus separate stopping edge on the stated two-extent domain.",
+      "result": "A strict self-map with q <= 31/100000 < 1 has one endpoint in this branch; T and ne are reconstructed from the common event state.",
+      "derivation": "derivations/COUPLED_BRANCH_KO.md",
+      "equations": "CB fixed-point/self-map derivation",
+      "evidence": [
+        "examples/COUPLED_BRANCH_INPUT.json",
+        "results/COUPLED_BRANCH_CHECKS.json"
+      ],
+      "status": "PROPOSED_FOR_REVIEW"
+    },
+    {
+      "id": "BG2",
+      "title": "Finite-model endpoint error certificate",
+      "scope": "The source finite-parameter logarithmic stopping model and exact rational endpoint arithmetic.",
+      "result": "An 8-term positive log enclosure and fixed-point defect bound certify extent, temperature and cutoff errors; physical/time/source errors are not set to zero.",
+      "derivation": "derivations/COUPLED_BRANCH_KO.md",
+      "equations": "CB log/residual derivation",
+      "evidence": [
+        "results/COUPLED_BRANCH_CHECKS.json",
+        "results/WOLFRAM_SCALAR_RAW.json"
+      ],
+      "status": "PROPOSED_FOR_REVIEW"
+    },
+    {
+      "id": "BG3",
+      "title": "Finite scan with reaction-changing atom weights",
+      "scope": "Finite fixed support, nonnegative weights, positive base EOS and chi>=3/2.",
+      "result": "Starting from an inherited branch, the endpoint repair scan terminates in at most M additions or removals, preserves count/energy partition and supplies the threshold jump formula.",
+      "derivation": "derivations/REACTION_BRANCH_KO.md",
+      "equations": "RB.1–9",
+      "evidence": [
+        "reaction_branch_continuation.py",
+        "results/WOLFRAM_SCALAR_RAW.json"
+      ],
+      "status": "PROPOSED_FOR_REVIEW"
+    },
+    {
+      "id": "BG4",
+      "title": "Source-bound created-atom crossing construction",
+      "scope": "Actual HI j4762/sharing38 contribution, constructed neutral inventory, chi=4 and extent path [0,1/2].",
+      "result": "The created first-node atom crosses at s=1/4; all four invariants and the self-consistent extent equation hold exactly. At s=1/5 two EOS branches exist and the inherited branch selects continuation.",
+      "derivation": "derivations/REACTION_BRANCH_KO.md",
+      "equations": "RB.10–18",
+      "evidence": [
+        "results/REACTION_BRANCH_CHECKS.json"
+      ],
+      "status": "PROPOSED_FOR_REVIEW"
+    },
+    {
+      "id": "BG5",
+      "title": "Covariant massive Bianchi energy and work",
+      "scope": "Geodesic synchronous Bianchi normal; finite exact direction map specialized to diagonal Bianchi I.",
+      "result": "dW/dt=−c²Kqq/E, its shear form and Bianchi-I momentum map are derived; packet energy work and proper-volume dilution are distinguished from heat/cutoff transfer.",
+      "derivation": "derivations/COVARIANT_GEOMETRY_KO.md",
+      "equations": "BG.1–14",
+      "evidence": [
+        "results/WOLFRAM_XACT_RAW.json",
+        "results/WOLFRAM_SCALAR_RAW.json",
+        "results/GEOMETRY_REBIND_CHECKS.json"
+      ],
+      "status": "PROPOSED_FOR_REVIEW"
+    },
+    {
+      "id": "BG6",
+      "title": "Actual moved-energy HI/HeI event rebind",
+      "scope": "Pinned original source formulas evaluated at the represented moved parent energy in source domain.",
+      "result": "New sharing, thresholds, source rates and daughter projections are bound to the same moved parent with exact finite event ledgers; lower trace and support guards are explicit.",
+      "derivation": "derivations/GEOMETRY_REBIND_KO.md",
+      "equations": "GR geometry/rebind derivation",
+      "evidence": [
+        "examples/GEOMETRY_REBIND_WITNESS.json",
+        "results/GEOMETRY_REBIND_CHECKS.json"
+      ],
+      "status": "PROPOSED_FOR_REVIEW"
+    },
+    {
+      "id": "BG7",
+      "title": "Conservative energy projection and scoped weak error",
+      "scope": "Positive barycentric map and regular test functions on the declared within-cell source interval.",
+      "result": "Count/first energy moment are exact; explicit Lipschitz/C2 bounds include a source HeI rate example. Arbitrary momentum/stress exactness and smooth bounds across threshold are not claimed.",
+      "derivation": "derivations/GEOMETRY_REBIND_KO.md",
+      "equations": "GR representation/error derivation",
+      "evidence": [
+        "results/GEOMETRY_REBIND_CHECKS.json",
+        "results/WOLFRAM_SCALAR_RAW.json"
+      ],
+      "status": "PROPOSED_FOR_REVIEW"
+    }
+  ]
+}

@@ -1,0 +1,248 @@
+{
+  "schema": "bass-cr-coupled-branch-input.v1",
+  "unit_id": "CR-THEORY-BRANCH-GEOMETRY-20261013",
+  "baseline_git_commit": "c450b00108dc05885a25d0d9c042cdcfe41bd659",
+  "state_status": "CONSTRUCTION: neutral finite stock, not an archived physical evolution",
+  "model_scope": "Actual selected HI quadrature subchannel plus separate actual stopping edge",
+  "source_reuse": "KC1-KC7 accepted source/kernel evidence; only current construction parameters evaluated",
+  "source_files": [
+    {
+      "path": "inputs/prior/kernel_event_adapter.py",
+      "bytes": 15328,
+      "sha256": "55d4447a49b3314d23d919e15b48e3ba82902bd16e4480ffde0eb8d8f82577f5"
+    },
+    {
+      "path": "inputs/prior/inputs/KERNEL_SOURCE_BINDING.json",
+      "bytes": 7502,
+      "sha256": "c28913d251ddbc8631eb39aa0221e20915d271006c6c8ca15ac98e28ec8c80a0"
+    },
+    {
+      "path": "inputs/prior/inputs/kernel_sources/research/cr_phys02b_20261010/src/causal_cascade.py",
+      "bytes": 19115,
+      "sha256": "d87a9cc122125b2d37b47f261f57eab698baa59e07a6b21723860f39313c7b72"
+    },
+    {
+      "path": "inputs/prior/inputs/kernel_sources/research/cr_phys02c_20261011/src/coherent_bed.py",
+      "bytes": 4094,
+      "sha256": "30e6e043859c3b2014429c5860314e5e6a833381141469eac24cd6293c43acca"
+    },
+    {
+      "path": "inputs/prior/inputs/kernel_sources/research/cr_phys02c_paired_9600_closeout_20261011/raw/THIRD_GRID_LOCAL_20261011_EXEC01/SPECTRUM_fullBED_9600.npz",
+      "bytes": 217754,
+      "sha256": "7ee8c1eff7f58cd7175a9bcd3968a27ef065f0e983f05e609dc875f5f06112cc"
+    },
+    {
+      "path": "inputs/prior/inputs/prior/event_capacity_step.py",
+      "bytes": 8935,
+      "sha256": "3683f0577263c2c7113593f6e3085b886b65b44101d438f6dd53f9762848e85c"
+    }
+  ],
+  "saved_grid_raw_sha256": "6a76d3539115003b046a5861baca89b0a4ff966564627e04d9f6e8bc86be8292",
+  "parameters_exact": {
+    "EV_J": "801088317/5000000000000000000000000000",
+    "k_B": "1380649/100000000000000000000000000000",
+    "c_v": "4141947/200000000000000000000000000000",
+    "volume_m3": "1",
+    "step_s": "100000000000000",
+    "chi": "20",
+    "T0_K": "100",
+    "N0_thermal": "349159527599772835/2251799813685248",
+    "X0_HI": "4876553971512115/35184372088832",
+    "n_e0_m3": "6824869860839651/4503599627370496",
+    "x_max": "1/20",
+    "s_max": "1",
+    "T_box_max_K": "502/5",
+    "k_ion_m3_s": "9753838808155329299124992396709/2923003274661805551606033143660971297080352964608",
+    "slow_daughter_eV": "7346212106714387/72057594037927936",
+    "stop_delta_eV": "27866022694355/9007199254740992",
+    "stop_L0": "4139315579311335/140737488355328",
+    "stop_alpha": "4782089654909901/618970019642690137449562112",
+    "stop_A": "4782089654909901/1914938498269576461025280",
+    "stop_lambda0_exact_sinv": "27019084047009293900203431692465338957394937117/242747293673157282992763386957990195779045491136790528"
+  },
+  "source_rate_rounding": {
+    "semantics": "Finite source alpha and L0 interpreted as exact binary rationals; logarithm evaluated with rational enclosures",
+    "source_stopping_lambda0_sinv": 1.1130539763458145e-07,
+    "rational_model_baseline_relative_difference": 1.189060915473204e-16
+  },
+  "events": {
+    "ion": {
+      "name": "ion:HI:4762:38",
+      "kind": "ionization",
+      "species": "HI",
+      "parent": {
+        "index": 4762,
+        "W_eV": 30.00976971818039,
+        "W_eV_exact_binary_rational": "8446999232516975/281474976710656"
+      },
+      "probability": 0.00019359060355166532,
+      "coefficient": 3.336923667758757e-18,
+      "coefficient_unit": "m^3/s",
+      "raw_daughters_eV": [
+        0.10194917280817987,
+        16.30212054537221
+      ],
+      "raw_daughters_eV_exact": [
+        "7346212106714387/72057594037927936",
+        "1174691584215795053/72057594037927936"
+      ],
+      "active_daughters": [
+        {
+          "index": 0,
+          "W_eV": 0.10309375000000001,
+          "A_count": 0.6300356551692494,
+          "A_count_exact": "140452702921593/222928181554840"
+        },
+        {
+          "index": 3894,
+          "W_eV": 16.301160463877856,
+          "A_count": 0.9162619735128789,
+          "A_count_exact": "756980683680659/826161846244096"
+        },
+        {
+          "index": 3895,
+          "W_eV": 16.312625762674944,
+          "A_count": 0.08373802648712113,
+          "A_count_exact": "69181162563437/826161846244096"
+        }
+      ],
+      "subcut_actual": {
+        "count": 0.0,
+        "energy_eV": 0.0
+      },
+      "cutoff_ghost": {
+        "count": 0.3699643448307506,
+        "energy_eV": 0.03699643448307506
+      },
+      "thermal_electron_increment": 0.3699643448307506,
+      "thermal_U_increment_J": 5.9274822870094735e-21,
+      "separate_source_heat_eV": 0.0,
+      "chemical_or_excitation_reservoir_eV": 13.6057,
+      "column_exact": {
+        "A:0": "140452702921593/222928181554840",
+        "A:3895": "69181162563437/826161846244096",
+        "A:3894": "756980683680659/826161846244096",
+        "A:4762": "-1",
+        "e_th": "82475478633247/222928181554840",
+        "U_th": "238042774853762368894355693023358597703/40159171015230388143920880025600000000000000000000000000000",
+        "HI": "-1",
+        "HII": "1"
+      }
+    },
+    "stop": {
+      "name": "drift:290",
+      "kind": "drift",
+      "species": null,
+      "parent": {
+        "index": 290,
+        "W_eV": 1.00028125,
+        "W_eV_exact_binary_rational": "2252433132382847/2251799813685248"
+      },
+      "probability": 1.0,
+      "coefficient": 1.1130539763458145e-07,
+      "coefficient_unit": "1/s",
+      "raw_daughters_eV": [
+        0.9971875
+      ],
+      "raw_daughters_eV_exact": [
+        "8981866506837033/9007199254740992"
+      ],
+      "active_daughters": [
+        {
+          "index": 289,
+          "W_eV": 0.9971875,
+          "A_count": 1.0,
+          "A_count_exact": "1"
+        }
+      ],
+      "subcut_actual": {
+        "count": 0.0,
+        "energy_eV": 0.0
+      },
+      "cutoff_ghost": {
+        "count": 0.0,
+        "energy_eV": 0.0
+      },
+      "thermal_electron_increment": 0.0,
+      "thermal_U_increment_J": 4.95673396143751e-22,
+      "separate_source_heat_eV": 0.0030937500000000062,
+      "chemical_or_excitation_reservoir_eV": 0.0,
+      "column_exact": {
+        "A:289": "1",
+        "A:290": "-1",
+        "U_th": "4464629044340930470107/9007199254740992000000000000000000000000000"
+      }
+    }
+  },
+  "initial_state_exact": {
+    "HI": "4876553971512115/35184372088832",
+    "HII": "15832069115580643/4503599627370496",
+    "HeI": "100514077870263/8796093022208",
+    "HeII": "0",
+    "A:0": "0",
+    "A:289": "0",
+    "A:290": "1",
+    "A:3894": "0",
+    "A:3895": "0",
+    "A:4762": "1",
+    "e_th": "6824869860839651/4503599627370496",
+    "U_th": "289240051572659258921949/900719925474099200000000000000000000000000",
+    "E_exc_HI": "0",
+    "E_exc_HeI": "0"
+  },
+  "invariant_rows_exact": {
+    "H_nuclei": {
+      "HI": "1",
+      "HII": "1"
+    },
+    "He_nuclei": {
+      "HeI": "1",
+      "HeII": "1"
+    },
+    "charge_over_e": {
+      "A:0": "-1",
+      "A:289": "-1",
+      "A:290": "-1",
+      "A:3894": "-1",
+      "A:3895": "-1",
+      "A:4762": "-1",
+      "e_th": "-1",
+      "HII": "1",
+      "HeII": "1"
+    },
+    "energy_J": {
+      "A:0": "2975517417632464990495989/180143985094819840000000000000000000000000000",
+      "A:289": "7195268323480747759243461/45035996273704960000000000000000000000000000",
+      "A:290": "1804397867175613102898499/11258999068426240000000000000000000000000000",
+      "A:3894": "1837844304633611282563731/703687441776640000000000000000000000000000",
+      "A:3895": "3678273877247602626204909/1407374883553280000000000000000000000000000",
+      "A:4762": "270671695955092607067243/56294995342131200000000000000000000000000",
+      "HII": "1227159664415945013631473/562949953421312000000000000000000000000000",
+      "HeII": "5544032036020718976124983/1407374883553280000000000000000000000000000",
+      "U_th": "1",
+      "E_exc_HI": "1",
+      "E_exc_HeI": "1"
+    }
+  },
+  "raw_energies_eV_exact": {
+    "A:0": "3714343792673817/36028797018963968",
+    "A:289": "8981866506837033/9007199254740992",
+    "A:290": "2252433132382847/2251799813685248",
+    "A:3894": "2294184380963343/140737488355328",
+    "A:3895": "4591595956638577/281474976710656",
+    "A:4762": "8446999232516975/281474976710656"
+  },
+  "thermal_raw_keys": [
+    "A:0"
+  ],
+  "branch": {
+    "last_thermal_grid_index": 22,
+    "lower_energy_eV_exact": "1541638447444263/9007199254740992",
+    "upper_energy_eV_exact": "784752235069309/4503599627370496",
+    "initial_active_donor_keys": [
+      "A:4762",
+      "A:290"
+    ],
+    "ownership_policy": "Fixed initial donor mask and fixed thermal prefix; classify the same immutable raw output"
+  }
+}
