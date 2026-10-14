@@ -1,0 +1,86 @@
+{
+  "schema": "bass_cr.optimized_c5_benchmark.v1",
+  "mode": "same numerical inputs & reference decisions",
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.39",
+  "cpu_count": 24,
+  "repeats": 5,
+  "compress": [
+    {
+      "name": "48_to32",
+      "n_initial": 48,
+      "n_final": 32,
+      "status": "PASS",
+      "reference_median_s": 0.00455786,
+      "heap_median_s": 0.000609219,
+      "speedup_scan_over_heap": 7.481480387184248,
+      "exact_parity": true
+    },
+    {
+      "name": "96_to48",
+      "n_initial": 96,
+      "n_final": 48,
+      "status": "PASS",
+      "reference_median_s": 0.023495242000000003,
+      "heap_median_s": 0.0026577740000000003,
+      "speedup_scan_over_heap": 8.84019559225126,
+      "exact_parity": true
+    },
+    {
+      "name": "240_to32",
+      "n_initial": 240,
+      "n_final": 32,
+      "status": "PASS",
+      "reference_median_s": 0.19007609,
+      "heap_median_s": 0.005517711000000001,
+      "speedup_scan_over_heap": 34.4483591112329,
+      "exact_parity": true
+    },
+    {
+      "name": "384_to192",
+      "n_initial": 384,
+      "n_final": 192,
+      "status": "PASS",
+      "reference_median_s": 0.385080305,
+      "heap_median_s": 0.00636527,
+      "speedup_scan_over_heap": 60.49708889018062,
+      "exact_parity": true
+    }
+  ],
+  "batched": [
+    {
+      "rays": 8,
+      "packets": 384,
+      "scalar_median_s": 0.000735397,
+      "numpy_median_s": 0.000234612,
+      "speedup_scalar_over_numpy": 3.134524235759467,
+      "max_event_rel": 0.0,
+      "max_heat_rel": 0.0
+    },
+    {
+      "rays": 64,
+      "packets": 3072,
+      "scalar_median_s": 0.005723439,
+      "numpy_median_s": 0.0012706380000000001,
+      "speedup_scalar_over_numpy": 4.504382050591907,
+      "max_event_rel": 1.5864004784276134e-16,
+      "max_heat_rel": 2.6491333315438807e-16,
+      "two_process_median_s": 0.004108682000000001,
+      "speedup_scalar_over_two_process": 1.393010946089281,
+      "pool_setup_s": 0.0019256839295849204
+    },
+    {
+      "rays": 256,
+      "packets": 12288,
+      "scalar_median_s": 0.023414940000000002,
+      "numpy_median_s": 0.004794587,
+      "speedup_scalar_over_numpy": 4.883619798743875,
+      "max_event_rel": 3.138329481610646e-16,
+      "max_heat_rel": 3.699662380835355e-16,
+      "two_process_median_s": 0.013463363,
+      "speedup_scalar_over_two_process": 1.739159822103883,
+      "pool_setup_s": 0.001215002965182066
+    }
+  ],
+  "caution": "Measured times are environment- and input-specific; no full native RT or chemistry solver was run."
+}
