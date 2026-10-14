@@ -1,0 +1,11 @@
+# SOURCE07 C3 supplier integration (not owner admission)
+
+Validated source: bass_cr PR66, branch research/cr-c5-budgeted-cohort-20261015, modules under research/cr_c5_budgeted_cohorts_20261015/src. Actual Ubuntu tests 61/61, not a full cosmological run. ZIP v2 SHA256 4fdb31c07b156e40949ea2a7c28fd21f9c15cb8bec77688c17eb8a7bf1a9992c.
+
+Owner inspection 2026-10-15 01:09 KST: rei_bianchi head 6cbdb57010a79eb3bbbc6a54b7f1a75d466702fd has **already built** optional rust/rei_microphysics/src/axbi_q_reference.rs, the 48 source cells x 8 angular rays, frozen H/He absorption and SOURCE07 C2 tests. NEXT_C3.json calls for comparing bounded physical-energy packets with fixed-q grid, preserving owner source Jacobian R*J exactly once, and handling photon energy up to 432.2293723204678 eV. Do not reimplement these features or touch existing AX08/AX11/AX12.
+
+The updated compressed_cohorts.py supports positive Verner-domain physical packet energies through 50000 eV, including 432.229 eV, in a controlled frozen-neutral packet compressor. 61 tests cover 100eV source, 432eV packet redshift, invalid >50keV energies, rate/heat local bounds and transactional budget HOLD. The initial frozen_source() remains the older 13.6–100eV fixture and MUST NOT replace the owner's actual q-ray source.
+
+Suggested scoped owner trial: supply each real q-ray lane's (current physical energy_eV, count_per_H) output from the owner reference to CompressedCohortTransport; never merge across ray, age or different owner clocks without a proven transform. Choose a forecast redshift tube based on actual geometry and neutrals/dt from that same current source. Compare each species's BE events and binding/excess heat against unmerged owner packets, and record any budget HOLD. In a later separately versioned source model, only after matched data, test changing neutrals, physical redshift, and chemistry. Existing 49-node output and original source ID remain immutable.
+
+Supplier status READY_FOR_SCOPED_OWNER_REVIEW, not owner SOURCE07 C3 scientific PASS. The analytical event/heat bound is local, evaluated in float, not an outward directed continuum or full-history error certificate. Next owner run requires its own source identity and authorization.
