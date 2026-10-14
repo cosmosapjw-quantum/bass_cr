@@ -1,0 +1,72 @@
+{
+  "schema": "bass_cr.c5_threshold_transport.v1",
+  "date_kst": "2026-10-15",
+  "parent_pr": 64,
+  "parent_head": "26ac3b4eb6cbe792101c09ab48b3562dab8c5249",
+  "selected_stage": "C5_IMPLEMENTATION",
+  "local_verified": {
+    "tests_passed": 35,
+    "tests_failed": 0,
+    "old_production_runs": 0,
+    "new_native_Rust_feature_runs": 0,
+    "wolfram_scalar_zeros": 5,
+    "xTensor_zeros": 5,
+    "offline_benchmark": "16,32,64,128 initial source + 16,32,64 redshift + 3-step ledgers"
+  },
+  "nodes": [
+    {
+      "id": "C5_TAGGED_THRESHOLD_RT",
+      "status": "COMPLETE_SCOPED",
+      "evidence": "src/threshold_rt.py (archive)"
+    },
+    {
+      "id": "C6_TESTS",
+      "status": "PASS",
+      "evidence": "tests/test_threshold_rt.py (archive)"
+    },
+    {
+      "id": "C7_PHYSICS_COMPONENT",
+      "status": "SCOPED_PASS",
+      "evidence": "results/BENCHMARK.json (archive)"
+    },
+    {
+      "id": "C7_NONCOMMUTATION",
+      "status": "COUNTEREXAMPLE_FOUND",
+      "evidence": "E25eV→r.98→24.5eV; P R P HeI sigma_eff 2.3282054176483962e-18 vs P R zero"
+    },
+    {
+      "id": "CR_NEXT_COMPRESSED_THRESHOLD_SAFE_TRANSPORT",
+      "status": "READY_FOR_NEXT_CODING",
+      "objective": "Bounded-memory conservative advection/absorption spectral representation with correct threshold rates over repeated redshift, compared to no-rebin cohort control",
+      "requires": [
+        "C7_NONCOMMUTATION"
+      ]
+    },
+    {
+      "id": "REI_OWNER_FROZEN_SOURCE_NATIVE_REVIEW",
+      "status": "READY_FOR_OWNER_REVIEW_ONLY",
+      "owner_scientific_admission": "NOT_ISSUED",
+      "owner_AX11_ready": false,
+      "objective": "Versioned source separately; never patch ongoing signed-shear or T1 experiments without changed-source approval"
+    },
+    {
+      "id": "BASS_CR_LANDAU_FINE_CONSTITUTIVE_ADJOINT",
+      "status": "PENDING_SEPARATE_LANE",
+      "objective": "Preserve PR64 signed boundary trace and PR62 coarse continuum interval. Full C1 continuous constitutive reconstruction and nonlinear adjoint not completed by current code step."
+    }
+  ],
+  "artifact": {
+    "name": "BASS_CR_CODING_LOOP_20261015_SOURCE.zip",
+    "bytes": 223075,
+    "sha256": "2c858d46471438e4107a1dd13faad8fbbc388a25976c0a0b48897ba7bbbc3673",
+    "drive_id": "131gI1H9zVvt-9SYhPPszTGbBzVq31zSo",
+    "dropbox_id": "id:BSpOijBcT10AAAAAAD7LtA",
+    "verification": "LOCAL+RELOCATED_SHA18_PASS_TEST35_PASS_REMOTE_ACK_SIZE_ONLY"
+  },
+  "source_files_sha256": {
+    "src/threshold_rt.py": "c0f7cb00071c5285b6ca3f7e2f5c88e4a56436bb98c1af19a38d8b847363ff66",
+    "src/benchmark.py": "1c097ddf7947a37adcb3576e67d043839b8c1986291a84a25421aae6c3c52e2d",
+    "tests/test_threshold_rt.py": "6522ef5c1655ef05401c0eeeffd43a3b3b509aadb32c8e51222272da6b76af23"
+  },
+  "preserve": "Do not silently switch original MD14 source or owner AXBI states; active Codex files, original binaries, and any prior Landau coefficient/solver remain unmodified."
+}
