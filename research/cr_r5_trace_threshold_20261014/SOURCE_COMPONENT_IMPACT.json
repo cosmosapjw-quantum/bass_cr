@@ -1,0 +1,62 @@
+{
+  "schema": "bass_cr.native_axbi_threshold_source_only.v1",
+  "model": "MD14_Z002_FESC_BB50K_13P6_100_V1",
+  "source_temperature_K": 50000,
+  "channels": {
+    "HI": 13.6,
+    "HeI": 24.59,
+    "HeII": 54.42
+  },
+  "baseline": "continuous source-integrated Verner cross-section and source-integrated sigma*(E-chi)_+; not actual history",
+  "rows": [
+    {
+      "n": 16,
+      "HeI_sigma_original_pct": 10.408539922655379,
+      "HeI_sigma_tagged_pct": 0.07428703827994099,
+      "HeII_sigma_original_pct": 38.59411959855543,
+      "HeII_sigma_tagged_pct": 0.11710885158655593,
+      "HeI_photoheat_original_pct": -0.369935100665586,
+      "HeII_photoheat_original_pct": -0.805740120894749
+    },
+    {
+      "n": 32,
+      "HeI_sigma_original_pct": 5.117103876849227,
+      "HeI_sigma_tagged_pct": 0.018580523669542437,
+      "HeII_sigma_original_pct": 17.829887114859332,
+      "HeII_sigma_tagged_pct": 0.02939483199766446,
+      "HeI_photoheat_original_pct": -0.0925756,
+      "HeII_photoheat_original_pct": -0.2024047
+    },
+    {
+      "n": 64,
+      "HeI_sigma_original_pct": 2.536692348159164,
+      "HeI_sigma_tagged_pct": 0.004645677874304255,
+      "HeII_sigma_original_pct": 8.572902058825994,
+      "HeII_sigma_tagged_pct": 0.007356087685139734,
+      "HeI_photoheat_original_pct": -0.0231496,
+      "HeII_photoheat_original_pct": -0.0506621
+    },
+    {
+      "n": 128,
+      "HeI_sigma_original_pct": null,
+      "HeI_sigma_tagged_pct": 0.0011614536408410814,
+      "HeII_sigma_original_pct": null,
+      "HeII_sigma_tagged_pct": 0.0018394835981538904,
+      "HeI_photoheat_original_pct": -0.0057878,
+      "HeII_photoheat_original_pct": -0.0126693
+    }
+  ],
+  "verification": "Actual native Rust AxbiSource plus AtomicProvider cross-sections; candidate proposed chi-minus/chi-plus arithmetic; independent Python/SciPy integration",
+  "native_max_relative_discrepancy": 1.824021255247489e-13,
+  "source_sha256": {
+    "axbi_driver": "92bc6ca1540c927cde7452d218f666882ecdd651558b151b31e9a6a8e2d92c8f",
+    "axbi_sources": "606e3c2ec367dd9951ebbf2f53486f2232b49c0218896d66d8dc13dd5ee83bfe",
+    "atomic_provider": "b0b572d3940a7a1f740e09d5f43c60236ec61511e8bdbcc68e60395ec7e107d3"
+  },
+  "cautions": [
+    "No claim of full photoionization-rate/ion fraction error",
+    "No claim that tagged scheme is implemented in original Rust transport",
+    "He isotope count error and direct excess photoheat error are different",
+    "Current rei_bianchi signed sources and history unchanged"
+  ]
+}

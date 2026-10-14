@@ -1,0 +1,78 @@
+{
+  "schema": "bass_cr.r5_tail_trace_threshold.next.v1",
+  "date": "2026-10-14",
+  "parent_commit": "6da1d99643660974a48da3677658a4a37b6f5392",
+  "scientific_status": "R5_PARTIAL_FINE_CONTINUUM_BOUND; NATIVE_THRESHOLD_SOURCE_COMPONENT_DONE",
+  "nodes": [
+    {
+      "id": "NT_CONTINUUM_SIGNED_BOUNDARY_TRACE",
+      "status": "COMPLETE_SCOPED",
+      "evidence": [
+        "results/WEAK_BOUNDARY_TRACE.json",
+        "src/tail_trace.py"
+      ],
+      "limit": "Signed time weak boundary flux, NOT absolute flux/finite-grid reflection"
+    },
+    {
+      "id": "NT_EQUILIBRATED_FINITE_VOLUME_FLUX",
+      "status": "COMPLETE_SCOPED",
+      "evidence": [
+        "results/FLUX_LIFT.json",
+        "src/fv_flux_lift.py"
+      ],
+      "limit": "Continuous affine face flux, piecewise constant density has open nonlinear constitutive mismatch"
+    },
+    {
+      "id": "NT_CONTINUOUS_RADIAL_CONSTITUTIVE_ADJOINT",
+      "status": "READY",
+      "prerequisites": [
+        "NT_CONTINUUM_SIGNED_BOUNDARY_TRACE",
+        "NT_EQUILIBRATED_FINITE_VOLUME_FLUX"
+      ],
+      "task": "Positive C1/C2 count-and-energy reconstruction plus nonlinear Landau constitutive residual, boundary trace, adjoint and propagated true finite-time microkelvin readout."
+    },
+    {
+      "id": "CR_REI_NATIVE_THRESHOLD_PROBE",
+      "status": "IMPLEMENTATION_VERIFIED_COMPONENT",
+      "evidence": [
+        "validation/RUST_NATIVE_STDOUT.txt",
+        "results/NATIVE_COMPARISON.json",
+        "results/HEATING_SCAN.json"
+      ]
+    },
+    {
+      "id": "CR_REI_TAGGED_SOURCE_CANDIDATE",
+      "status": "CONSTRUCTED_SCOPED",
+      "evidence": [
+        "src/tagged_source.py",
+        "src/native_threshold_tag.rs"
+      ],
+      "limit": "No full RT/chemistry/thermal ledger or owner source adoption"
+    },
+    {
+      "id": "CR_REI_OWNER_LEDGER_REVIEW",
+      "status": "READY_FOR_OWNER_REVIEW_NOT_OWNER_DAG_READY",
+      "prerequisites": [
+        "CR_REI_NATIVE_THRESHOLD_PROBE"
+      ],
+      "task": "Owner approved native redshift/absorption/heating ledger test with source-specific chi-minus/chi-plus states and separate source/version identity. Preserve original signed run evidence."
+    }
+  ],
+  "retained_parent_coarse_C_temperature_K": [
+    "101.30796502966",
+    "101.40851150782"
+  ],
+  "new_continuum_fine_C_error": null,
+  "owner_AX11_AX12_status": "PENDING",
+  "original_axbi_source_modified": false,
+  "original_axbi_solver_launches": 0,
+  "native_subagents": "NOT_RUN",
+  "archive": {
+    "name": "BASS_CR_R5_TRACE_THRESHOLD_20261014_SOURCE.zip",
+    "sha256": "ed9aeae9615175abddf20f98042d99da1893f33014168f2fd851ed1732200c47",
+    "bytes": 1350111,
+    "drive_id": "1maOxNoiK3hSRRKsYNe7RU3Qb9DtmbcQe",
+    "dropbox_id": "id:BSpOijBcT10AAAAAAD7J7A",
+    "verification": "R1_PROVIDER_ACK_SIZE_PARENT_NOT_REMOTE_FULL_RESTORE"
+  }
+}
