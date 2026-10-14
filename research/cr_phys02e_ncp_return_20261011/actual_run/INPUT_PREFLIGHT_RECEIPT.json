@@ -1,0 +1,172 @@
+{
+  "schema": "cr-phys02e-saved-input-preflight.v1",
+  "inputs": {
+    "fullBED": {
+      "identity_key": "fullBED_9600_npz",
+      "path": "../cr_phys02c_paired_9600_closeout_20261011/raw/THIRD_GRID_LOCAL_20261011_EXEC01/SPECTRUM_fullBED_9600.npz",
+      "bytes": 217754,
+      "sha256": "7ee8c1eff7f58cd7175a9bcd3968a27ef065f0e983f05e609dc875f5f06112cc"
+    },
+    "legacy": {
+      "identity_key": "legacy_9600_npz",
+      "path": "../cr_phys02c_paired_9600_closeout_20261011/raw/THIRD_GRID_LOCAL_20261011_EXEC01/SPECTRUM_legacy_9600.npz",
+      "bytes": 217716,
+      "sha256": "a3f81dbbd86c1d0521f962db8a2ee2ed158f613f3f7a069caccbda9c964acda6"
+    }
+  },
+  "arrays": {
+    "fullBED": {
+      "energy_eV": {
+        "shape": [
+          9600
+        ],
+        "dtype": "<f8",
+        "raw_C_sha256": "6a76d3539115003b046a5861baca89b0a4ff966564627e04d9f6e8bc86be8292"
+      },
+      "state_normalized": {
+        "shape": [
+          2,
+          9611,
+          2
+        ],
+        "dtype": "<f8",
+        "raw_C_sha256": "d05d1f41f58786b753d4bae58f59fffc07ffe47d0bc434e74abf1d408ae76f67"
+      },
+      "source_vectors": {
+        "shape": [
+          9611,
+          2
+        ],
+        "dtype": "<f8",
+        "raw_C_sha256": "07dd0fa81154f5aecaf262b00c2adfada21ebc9b2a2dba59703e03e3f5dab609"
+      },
+      "terminal_yields": {
+        "shape": [
+          9611,
+          2
+        ],
+        "dtype": "<f8",
+        "raw_C_sha256": "09f331671b93b69f711b4632c21009f11e919b9b1df19650fc0a99d177805015"
+      },
+      "physical_energy_scale_eV_m3": {
+        "shape": [],
+        "dtype": "<f8",
+        "raw_C_sha256": "ac06eb133915b70a6abf8f42d0ab30caade46e564c4b12afc8334cb2e5946da1"
+      },
+      "time_s": {
+        "shape": [
+          2
+        ],
+        "dtype": "<f8",
+        "raw_C_sha256": "fdb4067a8555e88d1da6b4b92ebbdd6f97c5a3bf953f27469e9028d99c54f9c7"
+      },
+      "birth_tags": {
+        "shape": [
+          2
+        ],
+        "dtype": "<U13",
+        "raw_C_sha256": "606553008046f970fc672d711d3e045dbf467c420ef1448be78b35d5f098e51e"
+      }
+    },
+    "legacy": {
+      "energy_eV": {
+        "shape": [
+          9600
+        ],
+        "dtype": "<f8",
+        "raw_C_sha256": "6a76d3539115003b046a5861baca89b0a4ff966564627e04d9f6e8bc86be8292"
+      },
+      "state_normalized": {
+        "shape": [
+          2,
+          9611,
+          2
+        ],
+        "dtype": "<f8",
+        "raw_C_sha256": "c106b20818b01f4731090b60389120f4884722a1afd78790cedb6172641e7357"
+      },
+      "source_vectors": {
+        "shape": [
+          9611,
+          2
+        ],
+        "dtype": "<f8",
+        "raw_C_sha256": "07dd0fa81154f5aecaf262b00c2adfada21ebc9b2a2dba59703e03e3f5dab609"
+      },
+      "terminal_yields": {
+        "shape": [
+          9611,
+          2
+        ],
+        "dtype": "<f8",
+        "raw_C_sha256": "0803f35966b49890c05f937211827cd82db612362983cc410d05d8f239b49a8c"
+      },
+      "physical_energy_scale_eV_m3": {
+        "shape": [],
+        "dtype": "<f8",
+        "raw_C_sha256": "ac06eb133915b70a6abf8f42d0ab30caade46e564c4b12afc8334cb2e5946da1"
+      },
+      "time_s": {
+        "shape": [
+          2
+        ],
+        "dtype": "<f8",
+        "raw_C_sha256": "fdb4067a8555e88d1da6b4b92ebbdd6f97c5a3bf953f27469e9028d99c54f9c7"
+      },
+      "birth_tags": {
+        "shape": [
+          2
+        ],
+        "dtype": "<U13",
+        "raw_C_sha256": "606553008046f970fc672d711d3e045dbf467c420ef1448be78b35d5f098e51e"
+      }
+    }
+  },
+  "checks": {
+    "both_file_identities": true,
+    "all_required_fields": true,
+    "exact_saved_grid_digest": true,
+    "exact_two_model_grid": true,
+    "source_heat_initial_zero": true,
+    "read_only_copies": true,
+    "cut_eV": 0.1,
+    "split_eV": 10.0,
+    "upper_eV": 900.0,
+    "grid_cells": [
+      3200,
+      6400
+    ],
+    "time_s": [
+      0.0,
+      10000000000.0
+    ],
+    "birth_tags": [
+      "direct_0p1_10",
+      "direct_10_900"
+    ]
+  },
+  "runtime_versions": {
+    "python": "3.12.3",
+    "numpy": "2.4.2",
+    "scipy": "1.17.0"
+  },
+  "physical_G_builds": 0,
+  "physical_pulse_calls": 0,
+  "runtime": {
+    "python": "3.12.3",
+    "numpy": "2.4.2",
+    "scipy": "1.17.0",
+    "threadpools": [
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "filepath": "/root/bass_cr_phys02d_ncp_20261011/venv/lib/python3.12/site-packages/numpy.libs/libscipy_openblas64_-096271d3.so",
+        "version": "0.3.31.dev",
+        "threading_layer": "pthreads",
+        "architecture": "SkylakeX"
+      }
+    ]
+  }
+}

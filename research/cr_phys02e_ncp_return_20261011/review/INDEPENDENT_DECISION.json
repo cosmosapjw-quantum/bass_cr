@@ -1,0 +1,566 @@
+{
+  "schema": "cr-phys02e-actual-independent-review.v1",
+  "created_utc": "2026-10-11T05:05:48.980345+00:00",
+  "task": "CR-PHYS02E-NCP-SAVED-GRID-PULSE",
+  "decision": "PASS_SCOPED",
+  "scientific_decision": "PASS_SCOPED_FROZEN_9600_OPERATOR_NUMERICAL_RESULT",
+  "reviewer_role": "INDEPENDENT_ASTRA_REQUESTED",
+  "reviewer_agent": "/root/independent_astra_return_review",
+  "independent_of_implementation": true,
+  "independent_of_candidate_design": true,
+  "model_metadata": {
+    "requested_model": "gpt-6-astra",
+    "available_host_developer_label": "GPT-6",
+    "backend_model_identity_independently_verified": false,
+    "limitation": "Host instructions do not expose an exact independently authenticated Astra backend identity; requested role is separate from observed metadata."
+  },
+  "source_science_commit": "eceec9a0c65f44c3d8b785194b9e40c8ee23b590",
+  "publication_receipt_commit": "3bb1bc143486417e58234d51e9ea76d786ecfc25",
+  "handoff_zip": {
+    "bytes": 10510880,
+    "sha256": "28f91c7bccb0649124b71d51313f9d278fdc5ab48b1f9a1f3c3037de205ea133"
+  },
+  "frozen_family_manifest": {
+    "path": "family/RETURN_FAMILY_MANIFEST.json",
+    "bytes": 3593,
+    "sha256": "56273489b960aaa28f92f6571ea700d205141252687d5482647d4ec6c8fcde6d"
+  },
+  "return_zip": {
+    "path": "return/CR_PHYS02E_PULSE_RETURN_20261011T050252Z_2a67cd12f0d0447c9e0214ff6ee9ea7e.zip",
+    "bytes": 8993823,
+    "sha256": "5048c325175a1c472a252ff1eddcea3c4d622c7611f5bd261c4a9b3258c24b4a"
+  },
+  "family_envelope": {
+    "path": "CR_PHYS02E_RETURN_FAMILY_56273489b960aaa2.zip",
+    "bytes": 8910030,
+    "sha256": "ba2241b95c591acaafe09bc181395bb65840d12f366e41f2e3df97d2cb333fc1"
+  },
+  "identity_verification": {
+    "family_payload_files": 17,
+    "envelope_entries": 18,
+    "return_payload_files": 520,
+    "return_exact_entries": 521,
+    "all_payload_bytes_and_sha256_match": true,
+    "actual_run_files_matching_archive": 21,
+    "frozen_source_files_match": 67,
+    "identity_is_not_physical_correctness": true
+  },
+  "execution": {
+    "status": "AWAITING_INDEPENDENT_ASTRA_REVIEW",
+    "actual_exit": 0,
+    "command": [
+      "/root/CR_PHYS02E_NCP_20261011_0412/source/research/cr_phys02e_20261011/ncp/launch_pulse.py",
+      "--execute",
+      "--run-dir",
+      "/root/CR_PHYS02E_NCP_20261011_0412/actual_run_20261011T0418Z"
+    ],
+    "cwd": "/root/CR_PHYS02E_NCP_20261011_0412/source/research/cr_phys02e_20261011",
+    "start_utc": "2026-10-11T04:17:31Z",
+    "end_utc": "2026-10-11T05:02:51Z",
+    "elapsed_s": 2720.582633553,
+    "observed_child_exit": 0,
+    "build_reservations": 2,
+    "pulse_reservations": 2,
+    "completed_G_builds": 2,
+    "reservation_counts_are_completed_calls": false,
+    "deadline_s": 3600,
+    "receipt_recording_started_after_deadline": false,
+    "receipt_recording_overhead_classification": "TERMINAL_RECEIPT_IO_OUTSIDE_CHILD_BUDGET"
+  },
+  "wrapper": {
+    "actual_exit": 0,
+    "execute_exit": 0,
+    "collection_exit": 0,
+    "return_archive": {
+      "path": "/root/CR_PHYS02E_NCP_20261011_0412/return/CR_PHYS02E_PULSE_RETURN_20261011T050252Z_2a67cd12f0d0447c9e0214ff6ee9ea7e.zip",
+      "bytes": 8993823,
+      "sha256": "5048c325175a1c472a252ff1eddcea3c4d622c7611f5bd261c4a9b3258c24b4a",
+      "files": 520
+    },
+    "execute_calls": 1,
+    "collection_calls": 1,
+    "automatic_retry": false,
+    "collection_receipt_written_after_archive": true,
+    "scientific_status": "INDEPENDENT_ASTRA_REVIEW_REQUIRED"
+  },
+  "runtime": {
+    "python": "3.12.3",
+    "numpy": "2.4.2",
+    "scipy": "1.17.0",
+    "threadpools": [
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "filepath": "/root/bass_cr_phys02d_ncp_20261011/venv/lib/python3.12/site-packages/numpy.libs/libscipy_openblas64_-096271d3.so",
+        "version": "0.3.31.dev",
+        "threading_layer": "pthreads",
+        "architecture": "SkylakeX"
+      }
+    ]
+  },
+  "completed_counts": {
+    "G_reservations": 2,
+    "G_completions": 2,
+    "pulse_reservations": 2,
+    "pulse_completions_supported_by_RESULT_NPZ_and_successful_child": 2,
+    "first_failure": null,
+    "automatic_retry": false,
+    "old_suite_reruns": 0
+  },
+  "reviewer_execution": {
+    "physical_G_builds": 0,
+    "pulse_calls": 0,
+    "tests_or_preflight": 0,
+    "source_code_imports": 0,
+    "read_only_npz_inspection": true,
+    "posthoc_stored_array_arithmetic": true,
+    "new_solver_or_oracle_runs": 0
+  },
+  "validation": {
+    "fullBED": {
+      "status": "PASS_SCOPED",
+      "selected": {
+        "status": "DEFINED",
+        "H0": 0.5590872090008833,
+        "cdf": [
+          0.0,
+          0.005118100248431208,
+          0.009901740911845574,
+          0.014467758614558329,
+          0.01886383192894221,
+          0.0231181595450735,
+          0.027249933944272862,
+          0.03127328973086185,
+          0.03519917896068141,
+          0.03903638923577002,
+          0.04279217114896461,
+          0.04647263266601467,
+          0.05008299947348551,
+          0.05362780365359874,
+          0.05711101963570271,
+          0.06053616546365855,
+          0.06390638042977166
+        ],
+        "kernel_per_s": [
+          4.834516880747931e-12,
+          4.4000258637508795e-12,
+          4.1723473024105454e-12,
+          4.003303418503029e-12,
+          3.865697003819784e-12,
+          3.7484405827343314e-12,
+          3.645711923006971e-12,
+          3.554008303567593e-12,
+          3.47101891418295e-12,
+          3.395129150816316e-12,
+          3.3251684997225528e-12,
+          3.2602444419297852e-12,
+          3.199660987910813e-12,
+          3.1428650228617707e-12,
+          3.089407142284398e-12,
+          3.0389167093418206e-12,
+          2.991084232975017e-12
+        ],
+        "mean_lag_s": 464527679141.6159,
+        "second_moment_s2": 6.799207767364772e+23,
+        "variance_s2": 4.6413481204778114e+23,
+        "J1": 0.01911287708387543,
+        "J2": 0.006618480315615367,
+        "R": 0.0341858600521931,
+        "S": 0.023676021232690768,
+        "clipped_mean_s": 9658141399.47807,
+        "clipped_second_s2": 9.553043011283046e+19,
+        "clipped_variance_s2": 2.2507348205182636e+18,
+        "current_ramp_ancestry_mean_s": 3074323361.6052036
+      },
+      "saved_ramp_relative_residuals": {
+        "heat_power": 7.624010312135936e-15,
+        "heat": 3.80049334623202e-15,
+        "terminal": 1.171875694229924e-15
+      },
+      "saved_ramp_tolerance": 1e-09,
+      "active_solve_max_scaled_residual": 2.621566463217463e-16,
+      "active_solve_tolerance": 5e-11,
+      "energy_max_abs_residual": 2.5646151868841116e-14,
+      "energy_tolerance": 5e-10,
+      "minimum_state": 0.0,
+      "nonnegative_scaled_tolerance": 2e-12,
+      "CDF_bound_checks": {
+        "saved_R": 0.034185860052192825,
+        "saved_S": 0.023676021232690664,
+        "source_reference": {
+          "input_key": "paired_9600",
+          "path": "../cr_phys02c_paired_9600_closeout_20261011/raw/THIRD_GRID_LOCAL_20261011_EXEC01/NUMERICAL_RESULT.json",
+          "bytes": 75490,
+          "sha256": "0b33ad9af1be50297e54fa8b38570471c35b5e342ce771d834bb576458a91500",
+          "row_label": "fullBED",
+          "R_fields": [
+            "metrics_normalized.heat_power",
+            "metrics_normalized.terminal_heat_power"
+          ],
+          "S_fields": [
+            "metrics_normalized.heat",
+            "metrics_normalized.terminal_heat_power"
+          ]
+        },
+        "absolute_tolerance": 1e-09,
+        "checks": [
+          {
+            "u": 0.25,
+            "lower": 0.0,
+            "upper": 0.04819897847819571,
+            "actual": 0.01886383192894221,
+            "lower_slack": 0.01886383192894221,
+            "upper_slack": 0.0293351465492535,
+            "pass": true
+          },
+          {
+            "u": 0.5,
+            "lower": 0.013166182413188503,
+            "upper": 0.055205537691197154,
+            "actual": 0.03519917896068141,
+            "lower_slack": 0.022032996547492904,
+            "upper_slack": 0.020006358730515747,
+            "pass": true
+          },
+          {
+            "u": 0.75,
+            "lower": 0.020172741626189945,
+            "upper": 0.07622521533020146,
+            "actual": 0.05008299947348551,
+            "lower_slack": 0.029910257847295566,
+            "upper_slack": 0.02614221585671595,
+            "pass": true
+          },
+          {
+            "u": 1.0,
+            "lower": 0.049361039847965166,
+            "upper": 1.0,
+            "actual": 0.06390638042977166,
+            "lower_slack": 0.014545340581806496,
+            "upper_slack": 0.9360936195702283,
+            "pass": true
+          }
+        ],
+        "pass": true
+      },
+      "moment_and_variance_bounds": "Producer guards passed; stored summaries finite, positive and within declared bounds",
+      "expm_calls": 1
+    },
+    "legacy": {
+      "status": "PASS_SCOPED",
+      "selected": {
+        "status": "DEFINED",
+        "H0": 0.5600694339688331,
+        "cdf": [
+          0.0,
+          0.00510899450588846,
+          0.009883874385647922,
+          0.01444128983999487,
+          0.01882884930649565,
+          0.023074712970617643,
+          0.027198048980370978,
+          0.031212975320267292,
+          0.03513043212973167,
+          0.038959198195460974,
+          0.042706517423577846,
+          0.04637849262328225,
+          0.04998034546904423,
+          0.053516604899898346,
+          0.05699124287657656,
+          0.0604077755071406,
+          0.06376934057435844
+        ],
+        "kernel_per_s": [
+          4.834516880747931e-12,
+          4.399797894226537e-12,
+          4.171912205282094e-12,
+          4.0026749016224004e-12,
+          3.864885822209708e-12,
+          3.747455729783422e-12,
+          3.644561185519819e-12,
+          3.5526985755189068e-12,
+          3.4695563951673083e-12,
+          3.3935194815043695e-12,
+          3.3234168585773187e-12,
+          3.258355617368385e-12,
+          3.197639434113452e-12,
+          3.140714903776497e-12,
+          3.087132367086185e-12,
+          3.0365209615065765e-12,
+          2.9885709944546327e-12
+        ],
+        "mean_lag_s": 475674661882.6113,
+        "second_moment_s2": 7.182009121564077e+23,
+        "variance_s2": 4.919345281992711e+23,
+        "J1": 0.019107936370857843,
+        "J2": 0.0066171972682748026,
+        "R": 0.034117084796884606,
+        "S": 0.023629917531414642,
+        "clipped_mean_s": 9658829152.031155,
+        "clipped_second_s2": 9.553957479376455e+19,
+        "clipped_variance_s2": 2.2465942056376827e+18,
+        "current_ramp_ancestry_mean_s": 3073875545.9046717
+      },
+      "saved_ramp_relative_residuals": {
+        "heat_power": 4.103504407401098e-14,
+        "heat": 3.827445627273169e-14,
+        "terminal": 2.216644174654893e-15
+      },
+      "saved_ramp_tolerance": 1e-09,
+      "active_solve_max_scaled_residual": 2.680721864673479e-16,
+      "active_solve_tolerance": 5e-11,
+      "energy_max_abs_residual": 5.218048215738236e-15,
+      "energy_tolerance": 5e-10,
+      "minimum_state": 0.0,
+      "nonnegative_scaled_tolerance": 2e-12,
+      "CDF_bound_checks": {
+        "saved_R": 0.03411708479688328,
+        "saved_S": 0.023629917531413788,
+        "source_reference": {
+          "input_key": "paired_9600",
+          "path": "../cr_phys02c_paired_9600_closeout_20261011/raw/THIRD_GRID_LOCAL_20261011_EXEC01/NUMERICAL_RESULT.json",
+          "bytes": 75490,
+          "sha256": "0b33ad9af1be50297e54fa8b38570471c35b5e342ce771d834bb576458a91500",
+          "row_label": "legacy",
+          "R_fields": [
+            "metrics_normalized.heat_power",
+            "metrics_normalized.terminal_heat_power"
+          ],
+          "S_fields": [
+            "metrics_normalized.heat",
+            "metrics_normalized.terminal_heat_power"
+          ]
+        },
+        "absolute_tolerance": 1e-09,
+        "checks": [
+          {
+            "u": 0.25,
+            "lower": 0.0,
+            "upper": 0.04809997448417594,
+            "actual": 0.01882884930649565,
+            "lower_slack": 0.01882884930649565,
+            "upper_slack": 0.02927112517768029,
+            "pass": true
+          },
+          {
+            "u": 0.5,
+            "lower": 0.013142750265944296,
+            "upper": 0.05509141932782227,
+            "actual": 0.03513043212973167,
+            "lower_slack": 0.021987681863787377,
+            "upper_slack": 0.0199609871980906,
+            "pass": true
+          },
+          {
+            "u": 0.75,
+            "lower": 0.020134195109590625,
+            "upper": 0.07606575385876124,
+            "actual": 0.04998034546904423,
+            "lower_slack": 0.029846150359453604,
+            "upper_slack": 0.026085408389717013,
+            "pass": true
+          },
+          {
+            "u": 1.0,
+            "lower": 0.049258550034731466,
+            "upper": 1.0,
+            "actual": 0.06376934057435844,
+            "lower_slack": 0.014510790539626978,
+            "upper_slack": 0.9362306594256415,
+            "pass": true
+          }
+        ],
+        "pass": true
+      },
+      "moment_and_variance_bounds": "Producer guards passed; stored summaries finite, positive and within declared bounds",
+      "expm_calls": 1
+    }
+  },
+  "raw_npz_readback": {
+    "both_models": {
+      "pulse_shape": [
+        17,
+        9611,
+        2
+      ],
+      "integrator_shape": [
+        17,
+        2,
+        2
+      ],
+      "all_arrays_finite": true,
+      "saved_E_exact": true,
+      "saved_source_exact": true,
+      "initial_state_exact": true,
+      "integrator_initial_zero": true,
+      "minimum_raw_state": 0.0,
+      "CDF_to_JSON_max_abs": 0.0,
+      "J1_J2_to_JSON_max_abs": 0.0
+    },
+    "energy_ledger_direct_sum_max_abs": {
+      "fullBED": 2.842170943040401e-14,
+      "legacy": 4.9960036108132044e-15
+    },
+    "energy_direct_sum_vs_report_max_abs": 2.7755575615628914e-15,
+    "summation_note": "Direct array reduction has different accumulation order from producer einsum; both are far below unchanged 5e-10 ledger gate."
+  },
+  "resources": {
+    "fullBED": {
+      "admitted": true,
+      "reserve_bytes": 16881320448,
+      "available_working_bytes": 115692015104,
+      "free_disk_bytes": 52775706624
+    },
+    "legacy": {
+      "admitted": true,
+      "reserve_bytes": 16881320448,
+      "available_working_bytes": 115610652160,
+      "free_disk_bytes": 52281815040
+    }
+  },
+  "inherited_gates": {
+    "PHYS02_DELAY": "OPEN",
+    "production_history": "HOLD",
+    "atomic_G02": "UNRESOLVED",
+    "b_grid": "NO_GO",
+    "all_bound": "OPEN",
+    "R17B2B": "NO_CERTIFIED_SOURCE_SHARPENING",
+    "CCC_2026_exporter_identity": "SOURCE_IDENTITY_UNRESOLVED"
+  },
+  "material_scientific_blockers": [],
+  "claim_ceiling": [
+    "Numerically checked actual fullBED and legacy saved 9600 energy grid, frozen source/operator, two birth columns and selected sum at 17 times up to 1e10 s.",
+    "Resolvent uncapped moments are conditional on the frozen mathematical operator and are not cosmic-history predictions.",
+    "Saved-ramp and terminal agreement is algebraic same-operator consistency, not independent physical validation.",
+    "No pulse mesh convergence, full old/new G byte parity, production promotion, global delay closure, CCC identity resolution or NCP64 scaling claim.",
+    "kernel_per_s is unnormalized heat response h*y/T0; conditional CDF derivative requires division by H0."
+  ],
+  "reviewed_evidence": {
+    "actual_run_20261011T0418Z/ACTUAL_EXIT.json": {
+      "bytes": 807,
+      "sha256": "45e1a4ce7b6218b7435e215ea52b2a27cc14e804763e3a4b38be4757d36b9608"
+    },
+    "actual_run_20261011T0418Z/BUILD_1_RESERVATION.json": {
+      "bytes": 130,
+      "sha256": "2b03c1c27bee2368e52d4b32e23617ccd5f6cd8fdbd89fda29ea225f16a5dab5"
+    },
+    "actual_run_20261011T0418Z/BUILD_2_RESERVATION.json": {
+      "bytes": 129,
+      "sha256": "9a7933ce4d9eaad597b5c18c4571babe9c3b4baacec81a4d1f9f36529a51b064"
+    },
+    "actual_run_20261011T0418Z/G_COMPLETION_1.json": {
+      "bytes": 2583,
+      "sha256": "9f152a1f475a2f102b2c068a468da7be770f387a7992da79b06ac45b3f8e936c"
+    },
+    "actual_run_20261011T0418Z/G_COMPLETION_2.json": {
+      "bytes": 2483,
+      "sha256": "8dd5f6ca08a8164a340cbb3152b4b658c113bb34b184a7ddeb873f9c68b3dd57"
+    },
+    "actual_run_20261011T0418Z/INPUT_PREFLIGHT_RECEIPT.json": {
+      "bytes": 4618,
+      "sha256": "2e71d7fec0d53ad7ce48addbb0980476af575e7549885982b6e16ceaf7e5aede"
+    },
+    "actual_run_20261011T0418Z/NUMERICAL_RESULT.json": {
+      "bytes": 20629,
+      "sha256": "c53f3def63b9fe15002c32b361614ee2fef8e2dfd1dbcea078d56320bc706019"
+    },
+    "actual_run_20261011T0418Z/PLAN_AND_ADMISSION.json": {
+      "bytes": 13031,
+      "sha256": "85f5c9e1128f149e456487fec807610a92672c20a704b81fa1dca48b0da6b3e5"
+    },
+    "actual_run_20261011T0418Z/PULSE_1_RESERVATION.json": {
+      "bytes": 132,
+      "sha256": "0dba8adb0437ac9e68f5881473b435022a1968c450d7745218900ee138ee60f8"
+    },
+    "actual_run_20261011T0418Z/PULSE_2_RESERVATION.json": {
+      "bytes": 131,
+      "sha256": "d5520793c332ca5c69aafcbf0bb77d716b697eb531133931c10b5fd31647d0f8"
+    },
+    "actual_run_20261011T0418Z/PULSE_fullBED_9600.npz": {
+      "bytes": 2846750,
+      "sha256": "52a582b3caf7a26929a5f7dda11a332ba87a933154f9f4cdd2b1346213306128"
+    },
+    "actual_run_20261011T0418Z/PULSE_legacy_9600.npz": {
+      "bytes": 2846750,
+      "sha256": "3c44da3a46f8387b7f13fecea4036b22842461de588d489dffe3642990f8d761"
+    },
+    "actual_run_20261011T0418Z/RESERVATION.json": {
+      "bytes": 330,
+      "sha256": "6755affd5fa1efe9d3e374882e82b86b4bf39ff7172252b929027c7c34f7aab8"
+    },
+    "actual_run_20261011T0418Z/RESOURCE_BEFORE_BUILD_1.json": {
+      "bytes": 10599,
+      "sha256": "746f7067c09f496c5ac6eaf45f95135b8791469386ef1eb543ecfa535f94c80b"
+    },
+    "actual_run_20261011T0418Z/RESOURCE_BEFORE_BUILD_2.json": {
+      "bytes": 10588,
+      "sha256": "46f9493d55858e1f1bda0d42060a07e32715fb0ade1e22e2d0f364a07d640ba5"
+    },
+    "actual_run_20261011T0418Z/RESULT_fullBED.json": {
+      "bytes": 8650,
+      "sha256": "96942b80ff6ac2aea261cfdd71fec216c2099c4afece173b225fa6cebcc321f1"
+    },
+    "actual_run_20261011T0418Z/RESULT_legacy.json": {
+      "bytes": 8661,
+      "sha256": "7ed2533a1dd3999713c9d5e676971719a59231f6cda1315ee2d276d9c0cb5d82"
+    },
+    "actual_run_20261011T0418Z/RUNTIME.json": {
+      "bytes": 458,
+      "sha256": "534ba935ea86c889dfe8ac1e57230b4f6da7def9645c7b792dc066176b61b913"
+    },
+    "actual_run_20261011T0418Z/WRAPPER_ACTUAL_EXIT.json": {
+      "bytes": 538,
+      "sha256": "f8038e98c0a7a85248a8cb308ab92f1c45b3ece0e3f3c13e3158bea185435b1a"
+    },
+    "actual_run_20261011T0418Z/WRAPPER_COLLECTION_EXIT.json": {
+      "bytes": 407,
+      "sha256": "8b76f3d8d83fee36e51c39c76eb95ffed4bc9d0879f1940bedbaecf15cd8d7cc"
+    },
+    "actual_run_20261011T0418Z/WRAPPER_EXECUTE_EXIT.json": {
+      "bytes": 487,
+      "sha256": "aa9dc5300c3d3763f78ebc22eb88ad1dddce572cf5469e20d9e991d60662e849"
+    },
+    "actual_run_20261011T0418Z/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actual_run_20261011T0418Z/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "source/research/cr_phys02e_20261011/state/SCIENTIFIC_CONTRACT.json": {
+      "bytes": 5769,
+      "sha256": "863d13aea1dfceba35709f43c6411bad50a8980a660698ad86510ad237dcf6a8"
+    },
+    "source/research/cr_phys02e_20261011/ncp/NCP_EXECUTION_CONTRACT.json": {
+      "bytes": 9605,
+      "sha256": "ac5d177fba4b67d83db38260b820a0e6fc289345edc434a437490ae8bb6cdb21"
+    },
+    "source/research/cr_phys02e_20261011/state/VALIDATION_CONTRACT.json": {
+      "bytes": 2204,
+      "sha256": "8b98196569c12d277087a1cc90ae77eab42ad1430b8f09b9c37c05b77c6dede4"
+    },
+    "source/research/cr_phys02e_20261011/inputs/INPUT_IDENTITIES.json": {
+      "bytes": 4666,
+      "sha256": "30bb5000dcade9a7818e14273f105ca5d5c658665462b6ef8984e846f24a1b96"
+    },
+    "source/research/cr_phys02e_20261011/state/NEXT_DAG.json": {
+      "bytes": 1427,
+      "sha256": "9cbef28fc1ac737afc07713b61026b99782fbe3e1561baf0c3d62fccb213cfaa"
+    },
+    "source/research/cr_phys02e_20261011/review/INDEPENDENT_DECISION.json": {
+      "bytes": 18255,
+      "sha256": "d1635fcac407f02a4c2af4c84d3a30575eea9928dbad3e831d9975bc5ac7a843"
+    },
+    "source/research/cr_phys02e_20261011/src/pulse_response.py": {
+      "bytes": 5954,
+      "sha256": "6aef11bd0dbdf8f2236c92164be9e13ff15820cb4572c8168dea77fbfe51cef0"
+    },
+    "source/research/cr_phys02e_20261011/ncp/launch_pulse.py": {
+      "bytes": 14275,
+      "sha256": "ea55b67d49a67cfc017cf7507c6f5edac1a61e70ebb73d45391cb9b4512c8a92"
+    }
+  }
+}
