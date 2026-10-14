@@ -1,0 +1,20 @@
+{
+  "schema":"bass-cr-compressed-photon-transport-coding-v1",
+  "source_parent":{"repo":"cosmosapjw-quantum/bass_cr","pr":65,"head":"438a36a4529ead5192896941cfcac196301b36cc","original_archive_sha256":"2c858d46471438e4107a1dd13faad8fbbc388a25976c0a0b48897ba7bbbc3673"},
+  "date_kst":"2026-10-15",
+  "selected_node":"CR_NEXT_COMPRESSED_THRESHOLD_SAFE_TRANSPORT",
+  "execution_stage":"C5 IMPLEMENTATION WITH LOCAL C6 C7 SUPPORT",
+  "status":"LOCAL_BOUNDED_FROZEN_NEUTRAL_IMPLEMENTED",
+  "nodes":[
+    {"id":"CR_COMPRESSED_COHORT_CODE","status":"COMPLETE_SCOPED","files":["src/compressed_cohorts.py","src/compression_benchmark.py"],"claim":"Exact count and first-energy moment under nonnegative merges; explicit threshold/forecast/boundary hold; local analytical derivative upper evaluated in floating arithmetic"},
+    {"id":"CR_COMPRESSED_COHORT_TEST","status":"PASS_58_TESTS","files":["tests/test_compressed_cohorts.py","tests/test_threshold_rt.py"]},
+    {"id":"CR_FROZEN_BE_COMPRESSION_BOUND","status":"MODEL_SCOPE_PASS","model":"n=(1e-3,8e-5,2e-5) cm^-3, dt=1e9 s, redshift forecast [.99,1]","claim":"One-step frozen-neutral species events and heat bounds; no coupled history or directed proof"},
+    {"id":"CR_MULTI_STEP_MERGE_COMPARISON","status":"EMPIRICAL_COMPONENT_PASS","claim":"four-step raw cohort 240 vs compressed32 after injections; no full history/global error bound"},
+    {"id":"CR_DIRECTED_FLOAT_COMPRESSION_CERT","status":"PENDING","objective":"Make all floating output bounds directed/outward and prove full finite-horizon certification for frozen-neutral step"},
+    {"id":"CR_DYNAMIC_BIANCHI_COMPRESSED_ADVECTION","status":"PENDING","objective":"Couple to moving Bianchi characteristics, arbitrary source epochs, changing neutral gas/radiative opacity and signed RT. Compare independent native solver with identity-locked production source"},
+    {"id":"REI_OWNER_SOURCE_VERSIONED_EXPERIMENT","status":"READY_FOR_OWNER_REVIEW_NOT_PRODUCTION","objective":"Review and select explicit new source/model ID; do not modify AX08 or AX11/AX12 until owner scientific decision"},
+    {"id":"BASS_CR_LANDAU_CONTINUUM_FINE_ADJOINT","status":"PENDING_SEPARATE_LANE","objective":"Resume PR64 open continuum nonlinear constitutive trace and adjoint; not supplied by this photon compression task"}
+  ],
+  "preserve":["rei_bianchi CR/RCT/HH OFF","rei_bianchi active Codex worktree","original atomic/F/G/b-grid","previous BASS_CR source and continuum coarse certificate"],
+  "native_subagent":"NOT_RUN_NO_RUNTIME_TOOL"
+}
