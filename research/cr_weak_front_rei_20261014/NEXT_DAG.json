@@ -1,0 +1,46 @@
+{
+  "schema": "bass_cr.weak_front_rei_next.v1",
+  "date_kst": "2026-10-14",
+  "parent_commit": "aa2705dc3e35a03920e2cd5e7efc32ef9fe43c77",
+  "source_archive": {
+    "name": "BASS_CR_WEAK_FRONT_REI_SUPPORT_20261014_SOURCE.zip",
+    "sha256": "6ff9634f6673741bcf8d9f59804de4a2200c217b4625fb4a39d4b43f6d437e62",
+    "bytes": 1424921,
+    "drive_id": "1Ayfi_xx62RhXKMvWJF-HhNEiKzL5KTzZ",
+    "dropbox_id": "id:BSpOijBcT10AAAAAAD6bIQ",
+    "remote_verification": "R1_NOT_FULL_REMOTE_RESTORE"
+  },
+  "nodes": [
+    {
+      "id": "NT_WEAK_CUT_SLAB_RECONSTRUCTION",
+      "status": "COMPLETE_SCOPED",
+      "claims": "20 saved 5000s linear-time slabs versus exact-real finite-volume nonlinear Landau cut-count flux; 55dps interval, not IVP/continuum forward error"
+    },
+    {
+      "id": "NT_CONTINUOUS_RADIAL_ADJOINT_BOUNDARY",
+      "status": "READY",
+      "requires": [
+        "NT_WEAK_CUT_SLAB_RECONSTRUCTION"
+      ],
+      "objective": "Build C1 radial conservative reconstruction, complete continuous kinetic residual, reflecting boundary trace, source-specific nonlinear forward/adjoint remainder and finite-time true observable interval."
+    },
+    {
+      "id": "CR_REI_THRESHOLD_SOURCE_DIAGNOSTIC",
+      "status": "COMPLETE_SCOPED",
+      "claims": "Baseline source-stage Verner positive projection crossing HeI/HeII thresholds independently reproduced; not a final abundance/history error."
+    },
+    {
+      "id": "CR_REI_THRESHOLD_OWNER_REVIEW",
+      "status": "READY_FOR_OWNER_REVIEW_AND_SCOPED_TEST",
+      "requires": [
+        "CR_REI_THRESHOLD_SOURCE_DIAGNOSTIC"
+      ],
+      "owner": "rei_bianchi",
+      "objective": "Test the same source-weighted sigma using pinned native Rust source; review threshold-safe one-sided state or a distinct matched-source control. Do not touch live AX08 or silently change AX11/AX12 state.",
+      "owner_DAG_ready": false
+    }
+  ],
+  "physical_obligations": "CR/RCT/HH remain OFF for primary rei_bianchi runs; original source law and scenario unchanged",
+  "test_command": "python -m unittest discover -s tests -v",
+  "native_subagents": "NOT_RUN"
+}
