@@ -1,0 +1,52 @@
+{
+  "schema": "cr-phys02f-dag.v1",
+  "scientific_contract_sha256": "b50c316e91ebea6b1d0e5a43367b1cb31ae8836af328521fb366af9f54e35ccf",
+  "inherited_gates": {
+    "PHYS02_DELAY": "OPEN",
+    "production_history": "HOLD",
+    "atomic_G02": "UNRESOLVED",
+    "b_grid": "NO_GO",
+    "all_bound": "OPEN",
+    "R17B2B": "NO_CERTIFIED_SOURCE_SHARPENING",
+    "CCC_2026_exporter_identity": "SOURCE_IDENTITY_UNRESOLVED"
+  },
+  "tasks": [
+    {
+      "id": "CR-PHYS02E-NCP-SAVED-GRID-PULSE",
+      "status": "COMPLETED_PASS_SCOPED_ACTUAL_9600",
+      "actual_return_commit": "459018cffc3d57dcf8670997b4029fb6891e8101",
+      "consumed": true
+    },
+    {
+      "id": "CR-PHYS02F-TAIL-CENSORING-AND-RESIDENCE",
+      "status": "COMPLETED_PASS_SCOPED",
+      "independent_review": {
+        "path": "review/INDEPENDENT_DECISION.json",
+        "bytes": 27105,
+        "sha256": "46a432333374b85a77cfd5bd1d4c266123c2188335f4621549fdbdbad80870c2"
+      }
+    },
+    {
+      "id": "CR-PHYS02F-NCP-ADJOINT-RESIDENCE",
+      "status": "READY",
+      "max_G_builds": 2,
+      "max_resolvent_blocks": 2,
+      "max_triangular_solve_calls": 10,
+      "max_pulse_calls": 0,
+      "total_wall_s": 900,
+      "grid_cells": [
+        3200,
+        6400
+      ],
+      "independent_review": {
+        "path": "review/INDEPENDENT_DECISION.json",
+        "bytes": 27105,
+        "sha256": "46a432333374b85a77cfd5bd1d4c266123c2188335f4621549fdbdbad80870c2"
+      },
+      "consumed": false,
+      "admission_scope": "Prepared fresh fixed-operator task only; external final archive restore gate and actual NCP runtime/resource/G/solve/independent-return checks still required",
+      "max_expm_calls": 0
+    }
+  ],
+  "owner_bound_utc": "2026-10-11T05:43:29.476075+00:00"
+}

@@ -1,0 +1,44 @@
+{
+  "schema": "cr-phys02f-independent-review-execution.v1",
+  "reviewer": "/root/phys02f_remote_intake",
+  "command": [
+    "python3",
+    "/workspace/scratch/584ff08e1634/phys02f_independent_review/review_saved_evidence.py",
+    "--repo",
+    "/workspace/scratch/584ff08e1634/bass_cr_work",
+    "--out",
+    "/workspace/scratch/584ff08e1634/phys02f_independent_review/REVIEW_SAVED_EVIDENCE_RESULT.json"
+  ],
+  "cwd": "/workspace/scratch/584ff08e1634",
+  "tool": "exec_command",
+  "observed_actual_exit": 0,
+  "tool_wall_time_seconds": 0.358570282,
+  "started_utc": "2026-10-11T05:37:42.713456+00:00",
+  "ended_utc": "2026-10-11T05:37:43.136094+00:00",
+  "script_elapsed_s": 0.4226884270028677,
+  "review_runs": 1,
+  "physical_G_builds": 0,
+  "triangular_solve_calls": 0,
+  "candidate_test_runs": 0,
+  "candidate_analysis_reruns": 0,
+  "expm_calls": 0,
+  "pulse_calls": 0,
+  "preflight_calls": 0,
+  "actual_NCP_execution": false,
+  "scope": "Read immutable files, independent Decimal80 formula comparison and stored NPZ inspection only. Candidate modules were not imported.",
+  "script": {
+    "path": "review/REVIEW_SAVED_EVIDENCE_CHECK.py",
+    "bytes": 9600,
+    "sha256": "0736537d63b0cc756b81d1b123fd6eb450fb292e2758ba92f88e10cdca7548f5"
+  },
+  "result": {
+    "path": "review/REVIEW_SAVED_EVIDENCE_RESULT.json",
+    "bytes": 124909,
+    "sha256": "73e1135f22b53f3f2ff55917b4116595e5c22a98b97225719e81231d6fbfe306"
+  },
+  "other_review_actions": [
+    "Static source/contracts/tests/evidence/doc reads through exec_command, all read commands exit0; no product execution.",
+    "One view_image read of TAIL_DIAGNOSTICS.png; PDF identity verified by bytes, no independent PDF render.",
+    "Primary-source limited reads of DTU report section3 formulas and SciPy1.17 triangular-solve API."
+  ]
+}

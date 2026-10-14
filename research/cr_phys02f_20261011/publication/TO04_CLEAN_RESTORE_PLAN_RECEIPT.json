@@ -1,0 +1,100 @@
+{
+  "schema": "cr-phys02f-clean-restore-plan-receipt.v1",
+  "started_utc": "2026-10-11T05:46:04Z",
+  "helper_sha256": "f42dbc752c312894991c51f98a285ffd30bbac5e1bb42de2c09e3902994ed678",
+  "status": "IMPLEMENTATION_VERIFIED_RESTORE_AND_READY_PLAN_PENDING_ROOT_ACCEPTANCE",
+  "physics_execution": {
+    "G": 0,
+    "pulse": 0,
+    "expm": 0,
+    "numerical_preflight": 0,
+    "test_suites": 0
+  },
+  "zip": {
+    "path": "/workspace/scratch/584ff08e1634/phys02f_publish_work/CR_PHYS02F_20261011_39e27281_HANDOFF.zip",
+    "bytes": 26927005,
+    "sha256": "9d91d2971eab2db05e0039fe1fc2a5827086a28d585e792d56f6851840e6ebef"
+  },
+  "bundle_manifest": {
+    "sha256": "3fae031ded7d1760f11fe6936f660227c55135c6068ce11a0dd73c8551a31ede",
+    "schema": "cr-phys02f-self-contained-bundle.v1",
+    "payload_files": 631
+  },
+  "bindings": {
+    "science_commit": "39e272815ef13069d7c54fa8c50eab4103f14a79",
+    "science_tree": "a0d6229b92092ee055ffe54ba5a9563c7f904aab",
+    "base_commit": "459018cffc3d57dcf8670997b4029fb6891e8101",
+    "base_tree": "00eb09b38344b8103bd7eca411469404177d902d",
+    "unit_manifest_sha256": "40d54d7d0ab27dad73fc4b0e5d47502b609f38515417cbe6dd823db33c25f4fa",
+    "dependency_manifest_sha256": "248ad97e6417c3ba88bcbbfcb662f6fe65464e63eba6183421770ba06d41a341",
+    "contract_identities": {
+      "state/SCIENTIFIC_CONTRACT.json": "b50c316e91ebea6b1d0e5a43367b1cb31ae8836af328521fb366af9f54e35ccf",
+      "ncp/NCP_EXECUTION_CONTRACT.json": "5c7517dcc08796f61ca811c7a5922622e0a2c5ff9be16312bbb1a768aa7db1f8",
+      "state/VALIDATION_CONTRACT.json": "aa346614c4c444bac423eabd286939a4a1d2db20c0bb8e19281608f0ac778896",
+      "inputs/INPUT_IDENTITIES.json": "4f5a871e3995fa7f18f3dae0e4da8ca1f150814bbb3a6d71e997f6fdeaff3def",
+      "inputs/DEPENDENCY_PAYLOAD_MANIFEST.json": "248ad97e6417c3ba88bcbbfcb662f6fe65464e63eba6183421770ba06d41a341"
+    },
+    "decision": {
+      "path": "research/cr_phys02f_20261011/review/INDEPENDENT_DECISION.json",
+      "sha256": "46a432333374b85a77cfd5bd1d4c266123c2188335f4621549fdbdbad80870c2",
+      "decision": "PASS_SCOPED"
+    },
+    "science_receipt_sha256": "c99077feee5d496ffe033baf518e2cff7d99a0d4d85e7583644002c099663ee3"
+  },
+  "restore": {
+    "destination": "/workspace/scratch/584ff08e1634/phys02f_publish_work/clean_restore_39e27281",
+    "files": 632,
+    "exact_membership_verified": true,
+    "all_payload_size_sha_verified": true
+  },
+  "plan": {
+    "command_argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "/workspace/scratch/584ff08e1634/phys02f_publish_work/clean_restore_39e27281/research/cr_phys02f_20261011/ncp/launch_residence.py",
+      "--plan"
+    ],
+    "cwd": "/workspace/scratch/584ff08e1634/phys02f_publish_work/clean_restore_39e27281",
+    "python_executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "python_version": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "timeout_s": 60,
+    "invocations": 1,
+    "started_utc": "2026-10-11T05:46:04Z",
+    "stdout": "{\n  \"state\": \"PREPARED_NOT_EXECUTED\",\n  \"utc\": \"2026-10-11T05:46:05Z\",\n  \"command\": [\n    \"/workspace/scratch/584ff08e1634/phys02f_publish_work/clean_restore_39e27281/research/cr_phys02f_20261011/ncp/launch_residence.py\",\n    \"--plan\"\n  ],\n  \"cwd\": \"/workspace/scratch/584ff08e1634/phys02f_publish_work/clean_restore_39e27281\",\n  \"python\": \"3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]\",\n  \"physical_G_builds\": 0,\n  \"pulse_calls\": 0,\n  \"resource_probe\": {\n    \"status\": \"NOT_PROBED_BY_STDLIB_PLAN\"\n  },\n  \"admission\": {\n    \"payload_verification\": {\n      \"path\": \"/workspace/scratch/584ff08e1634/phys02f_publish_work/clean_restore_39e27281/research/cr_phys02f_20261011/FILE_MANIFEST.json\",\n      \"verification\": {\n        \"verified_entries\": 88,\n        \"manifest_sha256\": \"40d54d7d0ab27dad73fc4b0e5d47502b609f38515417cbe6dd823db33c25f4fa\",\n        \"tier\": \"R3_ACTUAL_LOCAL_PAYLOAD_HASH_VERIFICATION\"\n      }\n    },\n    \"review_sha256\": \"46a432333374b85a77cfd5bd1d4c266123c2188335f4621549fdbdbad80870c2\",\n    \"input_count\": 18,\n    \"dependency_count\": 538\n  },\n  \"admission_status\": \"READY\"\n}\n",
+    "stderr": "",
+    "exit_code": 0,
+    "ended_utc": "2026-10-11T05:46:05Z",
+    "wall_s": 0.21184585799346678,
+    "parsed_plan": {
+      "state": "PREPARED_NOT_EXECUTED",
+      "utc": "2026-10-11T05:46:05Z",
+      "command": [
+        "/workspace/scratch/584ff08e1634/phys02f_publish_work/clean_restore_39e27281/research/cr_phys02f_20261011/ncp/launch_residence.py",
+        "--plan"
+      ],
+      "cwd": "/workspace/scratch/584ff08e1634/phys02f_publish_work/clean_restore_39e27281",
+      "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+      "physical_G_builds": 0,
+      "pulse_calls": 0,
+      "resource_probe": {
+        "status": "NOT_PROBED_BY_STDLIB_PLAN"
+      },
+      "admission": {
+        "payload_verification": {
+          "path": "/workspace/scratch/584ff08e1634/phys02f_publish_work/clean_restore_39e27281/research/cr_phys02f_20261011/FILE_MANIFEST.json",
+          "verification": {
+            "verified_entries": 88,
+            "manifest_sha256": "40d54d7d0ab27dad73fc4b0e5d47502b609f38515417cbe6dd823db33c25f4fa",
+            "tier": "R3_ACTUAL_LOCAL_PAYLOAD_HASH_VERIFICATION"
+          }
+        },
+        "review_sha256": "46a432333374b85a77cfd5bd1d4c266123c2188335f4621549fdbdbad80870c2",
+        "input_count": 18,
+        "dependency_count": 538
+      },
+      "admission_status": "READY"
+    }
+  },
+  "resource_status": "NOT_PROBED_BY_STDLIB_PLAN",
+  "ended_utc": "2026-10-11T05:46:05Z"
+}

@@ -1,0 +1,144 @@
+{
+  "schema": "cr-phys02f-ncp-execution.v1",
+  "task": "CR-PHYS02F-NCP-ADJOINT-RESIDENCE",
+  "authority": "Continuation requested2026-10-11; new finite contract, requires new independent reviewed READY; consumed PHYS02E authorization not reused.",
+  "scientific_contract_sha256": "b50c316e91ebea6b1d0e5a43367b1cb31ae8836af328521fb366af9f54e35ccf",
+  "validation_contract_sha256": "aa346614c4c444bac423eabd286939a4a1d2db20c0bb8e19281608f0ac778896",
+  "input_manifest_sha256": "4f5a871e3995fa7f18f3dae0e4da8ca1f150814bbb3a6d71e997f6fdeaff3def",
+  "dependency_manifest_sha256": "248ad97e6417c3ba88bcbbfcb662f6fe65464e63eba6183421770ba06d41a341",
+  "execution": {
+    "models": [
+      "fullBED",
+      "legacy"
+    ],
+    "grid": [
+      3200,
+      6400
+    ],
+    "max_G_builds": 2,
+    "max_resolvent_blocks": 2,
+    "max_triangular_solve_calls": 10,
+    "solves_per_block": 5,
+    "max_pulse_calls": 0,
+    "max_expm_calls": 0,
+    "wall_s": 900,
+    "automatic_retry": false,
+    "assistant_physical_calls": 0,
+    "source_constructor": "Reuse identity-pinned E/saved_grid.py unchanged; use prior E inputs to resolve inherited_cascade and inherited_atomic; source_vectors are exact stored arrays, no source recreation."
+  },
+  "runtime": {
+    "python": "3.12.3",
+    "numpy": "2.4.2",
+    "scipy": "1.17.0",
+    "all_pools_threads": 1,
+    "omp_max_active_levels": 1,
+    "resource_adapter": "copy exact E/ncp/ops.py unchanged SHA8360e9f123bfc5814507728d6f946acd5109daaff2b475048d7c6ff586a4f2e7",
+    "resource_thresholds": "Existing probe: actual topology+cgroup memory reserve and working>=12GiB,disk>=8GiB,cpus>=1; no remote sizes assumed."
+  },
+  "admission": {
+    "stdlib_plan": true,
+    "plan_exit0_is_not_READY": true,
+    "requires": [
+      "Exact5contract identities and all538deps/18directinputs",
+      "Current unit FILE_MANIFEST or correctcurrent BUNDLE; do not accept inherited root E/BUNDLE_MANIFEST accidentally",
+      "NEXT_DAG READY for this task with exact budget+scientificcontract binding",
+      "New independent PASS_SCOPED record, independent of candidate/design/acceptance/implementation, exactcontract/code/input/dependency hashes",
+      "No prior-run reuse; fresh run dir outside source and separate return dir"
+    ],
+    "review_required_code": [
+      "src/residence.py",
+      "src/tail_analysis.py",
+      "ncp/launch_residence.py",
+      "ncp/ops.py",
+      "ncp/collect_return.py",
+      "ncp/run_and_collect.py"
+    ]
+  },
+  "preflight": {
+    "whole_file_order": "All18identitychecks at admission. For immutableNPZ processing, verify bothsource NPZ and bothpulse NPZ fullbytehash BEFORE load; Epreflight verifies source pair. Allsource+pulse semantic checks complete before any physical import/BUILDreservation.",
+    "pulse_required_fields": [
+      "sample_u",
+      "pulse_states",
+      "integrator_states",
+      "energy_eV",
+      "source_vectors"
+    ],
+    "shapes": {
+      "sample_u": [
+        17
+      ],
+      "pulse_states": [
+        17,
+        9611,
+        2
+      ],
+      "integrator_states": [
+        17,
+        2,
+        2
+      ],
+      "energy_eV": [
+        9600
+      ],
+      "source_vectors": [
+        9611,
+        2
+      ]
+    },
+    "dtype": "<f8 C contiguous, allfinite",
+    "source_match": "array_equal eachpulse E and source_vectors to immutable Esource bundle; pulse_states[0]==source_vectors; integrator_states[0]==0; sample_u exactly linspace(0,1,17); preserve rawpositive/signed values no clipping",
+    "frozen_state": "All5fields copied into immutable bytes-backed arrays. xT=pulse_states[-1,:9600,:] with exact u=1. Include fieldrawhashes in receipt.",
+    "pulse_nonnegative": "Reject states< -2e-12*max(1,maxabs source); do not clamp. Reject nonfinite; existing producer validation retained.",
+    "G": "After exactlyone constructor permodel, compare G shape/nnz/format and datatypes/raw Csha256 of data,indices,indptr to exactPR35 G completion, plus exactsavedE fingerprint; require all current inheritedmethodbinding same_parent_object true andsame method names asreference. Record constructor completion even ifparityfails; parityfail consumesbuild but prohibits resolvent."
+  },
+  "algorithm": {
+    "active_only": true,
+    "adjoint_rhs": [
+      "h",
+      "q0",
+      "q1"
+    ],
+    "forward_rhs": [
+      "b_active (2columns)",
+      "xT_active (2columns)"
+    ],
+    "solver": "scipy.sparse.linalg.spsolve_triangular; A.T lower=True, A upper=False; no fullledger inverse.",
+    "validation": "Use scientificcontract tolerances unchanged; scaledresidual eachsolve. q0 bound[0,1] up to2e-12 due energy law; no clipping. Adjointmoments compared to savedbothbirthcolumns+selected. Tail raw/excessmoments fromq(xT) compared to frozen scalarformula. Record signed/abs/relative differences. q0*w andq0*v partition exactly into6bins; scalar sums pass same5e-10 rel+1e-12normalized gates.",
+    "outputs": [
+      "RESULT_model.json scalar+birth+selected+bins+signedresiduals+solve counts",
+      "RESIDENCE_model_9600.npz energy_eV,q0,q1,q2,w,v,xT,b_active,per_state_first_moment,per_state_remaining_first_moment,per_state_tail_heat; meaningfulunits metadata inJSON",
+      "NUMERICAL_RESULT.json allmodels andactualcounts"
+    ],
+    "physical_interpretation": "Eventual heat-weighted residence contribution, not localheatdeposition distribution or daughter lifetime. Tail frontier distribution q0*xT/H0 separate from future residence q0*v. Fullfrozenmodeldiagnostic only."
+  },
+  "coordinator": {
+    "capability": "Private inherited pipe nontransferable coordinator PID/run identity, same Emechanism",
+    "reservation_order": "Freshcoordinator => exactruntime and allNPZpreflight => modelresource => BUILD_i_RESERVED => construct => G_COMPLETION_i => parityreceipt => RESOLVENT_i_RESERVED => 5solves andcrosschecks => RESOLVENT_i_COMPLETION.",
+    "deadline": "900s from --execute entry including coordinator prep; terminate ownedprocessgroup ontimeout. Count Greservations and completedG separately; report completedresolvent/actualsolves fromdurableevidence. No inferred completion fromreservation.",
+    "partial_failure": "Preserve firstfailure/rawlogs and anycompletedmodel. Do not rerun remainingbudget automatically; collect once thenreturn."
+  },
+  "wrapper": {
+    "command": "python ncp/run_and_collect.py --run-dir FRESH_ABSOLUTE_OUTSIDE_SOURCE --out SEPARATE_RETURN_DIR",
+    "execute_calls": 1,
+    "collect_finally_calls": 1,
+    "exit": "Execute fail -> nonzero even ifcollectpasses; execute0collectfail ->nonzero. No success disguised bycollection.",
+    "external_sidecars": [
+      "WRAPPER_COLLECTION_EXIT.json",
+      "WRAPPER_ACTUAL_EXIT.json"
+    ],
+    "return_family": "Bind numericalZIP+mandatory externalsidecars+externalenv/logs+manifest; collector cannotclaimcontains sidecars writtenafterarchive."
+  },
+  "collection": {
+    "payload": "Entire currentFunit and exact538deps; actualrun; exactinput copies; manifests; rootrestore instructions. Preserve source relativity; no symlinkescape/no arbitraryfileinclusion. Returnmanifest excludes onlyitself, allpayloadsizehash.",
+    "publication": "Newadditive Gitreturnbranch/draftPR andcreate-onlyDrive+Dropbox returnfamily. Includeexact runtime/startend/actualexits/counters/hash/receipt. R1metadata default; no re-readbody unless concreteR3trigger. New independentAstra review actualreturn required."
+  },
+  "preparation": {
+    "test_budget_wall_s": 120,
+    "small_state_max": 8,
+    "physicalG": 0,
+    "physicalpulse": 0,
+    "independent_oracle": "Fraction matrix solve for 3-state triangular generator and closed-form/series analytic kernel; wrongpulse/G fixtures failbeforephysics; wrapper 1/0 exits andcollector dummy paths.",
+    "no_prior_suites": true
+  },
+  "claim_ceiling": "Prepared/tested, not actual NCP executed. SameexactG rawstorage parity whenobserved, not widerphysicsvalidation. Gridconvergence andproduction unchanged."
+}

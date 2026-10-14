@@ -1,0 +1,3 @@
+# Preserved failures and limitations
+
+PHYS02D actual grid mismatch failure remains in pinned dependency payload. PHYS02E actual batch succeeded and is consumed. F first NCP targeted test failed because collector fixture mocked the full SHA function; actualfailure/source/logs preserved and constant-only fixture repair passed. Post-test integration and concrete bin/manifest/counter/pulse validation gaps were closed under TARGETED_COMPLETION_AMENDMENT with exactly one final targeted invocation. No actual physical G/pulse call occurred here. Long-time bath validity, energy-grid convergence and production gates remain unresolved.

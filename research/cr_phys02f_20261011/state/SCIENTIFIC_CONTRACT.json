@@ -1,0 +1,190 @@
+{
+  "schema": "cr-phys02f-scientific-contract.v1",
+  "unit": "CR-PHYS02F-TAIL-CENSORING-AND-RESIDENCE",
+  "status": "FROZEN_BEFORE_NEW_ANALYSIS_OR_IMPLEMENTATION",
+  "frozen_utc": "2026-10-11 05:18:24 UTC",
+  "base_commit": "459018cffc3d57dcf8670997b4029fb6891e8101",
+  "base_tree": "00eb09b38344b8103bd7eca411469404177d902d",
+  "base_branch": "research/cr-phys02e-ncp-return-20261011t0418z",
+  "objective": "Quantify early/tail heat-delay moments and birth mixture from actual PHYS02E frozen9600 return; prepare adjoint residence attribution that identifies energy regions carrying the mean delay without new time propagation.",
+  "original_motivation": "Preserve source-electron ancestry and causal heat release in the fixed-bath truncated CR electron cascade, while explaining large uncapped lag and keeping production claims separate.",
+  "selection_reason": "Actual PR35 pulse completed; F(T) and uncapped moments available. Cached scalar decomposition is executable here. G was not persisted, so energy residence attribution requires a fresh, separately budgeted two-model reconstruction and exact parity to PR35 G identities. Energy-grid convergence remains OPEN and is not silently substituted for attribution.",
+  "constants": {
+    "time_scale_s": 10000000000,
+    "year_s": 31557600,
+    "grid_cells": [
+      3200,
+      6400
+    ],
+    "energy_interval_eV": [
+      0.1,
+      900
+    ],
+    "birth_tags": [
+      "direct_0p1_10",
+      "direct_10_900"
+    ],
+    "residence_bin_edges_eV": [
+      0.1,
+      1,
+      10,
+      30,
+      100,
+      300,
+      900
+    ]
+  },
+  "definitions": {
+    "probability_measure": "dF=K(tau)dtau/H0 on tau>=0; H0>0; no direct heat at tau=0; finite-operator exponential density has no atom at T",
+    "p": "F(T)",
+    "R": "E[(1-tau/T)_+]",
+    "S": "E[(1-tau/T)_+^2]",
+    "mu": "E[tau]",
+    "m2": "E[tau^2]",
+    "early_raw_m1_s": "T*(p-R)",
+    "early_raw_m2_s2": "T^2*(p-2R+S)",
+    "tail_probability": "1-p",
+    "tail_raw_m1_s": "mu-T*(p-R)",
+    "tail_raw_m2_s2": "m2-T^2*(p-2R+S)",
+    "early_conditional": "divide early raw moments by p; variance=second-mean^2",
+    "tail_conditional": "divide tail raw moments by 1-p; variance=second-mean^2",
+    "tail_residual_mean_s": "[mu-T*(1-R)]/(1-p)",
+    "tail_residual_second_s2": "[m2-2*T*mu+T^2*(1-S)]/(1-p)",
+    "eventual_birth_weight": "H0_j/sum H0_j",
+    "early_birth_weight": "H0_j*p_j/sum H0_k*p_k",
+    "tail_birth_weight": "H0_j*(1-p_j)/sum H0_k*(1-p_k)",
+    "mean_share": "H0_j*mu_j/sum H0_k*mu_k",
+    "total_variance": "sum w_j*(variance_j+(mu_j-mu_selected)^2)",
+    "early_and_tail_variance": "law of total variance for early/tail conditional distributions",
+    "model_difference": "raw difference fullBED-legacy and signed relative (fullBED-legacy)/legacy where legacy nonzero; empirical model comparison, no uncertainty distribution",
+    "active_operator": "A=-G[:n,:n], upper triangular, positive diagonal, nonpositive offdiagonal; active block is dimensionless in u=t/T0. Complete G includes mixed ledger units.",
+    "heat_row": "h=G[heat,:n] scaled to u; normalized energy coordinates",
+    "adjoint": "A.T q0=h; A.T q1=q0; A.T q2=q1",
+    "forward": "A w=b_active; A v=x_active(T)",
+    "adjoint_moments": "H0=q0.b; H1=T0*q1.b; H2=2*T0^2*q2.b",
+    "tail_excess": "Htail=q0.xT; Eex1=T0*q1.xT; Eex2=2*T0^2*q2.xT",
+    "residence_contribution": "per-state contribution T0*q0_i*w_ij to unnormalized H1_j; sum exactly H1_j mathematically; normalize H0_j for seconds",
+    "residual_residence_contribution": "T0*q0_i*v_ij to unnormalized tail excess first moment; normalize Htail_j for remaining conditional seconds",
+    "source_energy_tail_at_T": "q0_i*xT_ij gives eventual tail heat associated with active energy coordinate at T; distinct from residence weighting and heat deposition energy",
+    "bins": "(lo,hi] right-closed partitions of saved E; all states exactly once; label numeric edges, no atomic-threshold interpretation"
+  },
+  "invariants": [
+    "All prior source, atomic identities, gas, cutoffs, source normalization, precision, quadrature, accumulation order and physical G constructor preserved.",
+    "Only new diagnostic representation; no evolution beyond T, long-tail sampling, physical source history change, or G modification.",
+    "No rate, heat, count, or tail clipping. Retain signed residuals; a tolerance does not replace values.",
+    "Old PHYS02D failed attempt and consumed PHYS02E successful one-shot retained; no retry authorization reuse."
+  ],
+  "input_manifest": "inputs/INPUT_IDENTITIES.json",
+  "dependency_manifest": "inputs/DEPENDENCY_PAYLOAD_MANIFEST.json",
+  "validation": {
+    "scalar_finite_positive": "Reject nonfinite, negative yield, nonpositive T, incompatible moments beyond frozen tolerances; exact zero-probability events return UNDEFINED_ZERO_EVENT_PROBABILITY without NaN or division.",
+    "moment_compatibility_absolute": 2e-12,
+    "scalar_identity_relative": 2e-12,
+    "scalar_identity_absolute_dimensionless": 2e-14,
+    "decimal_precision": 80,
+    "decimal_vs_fp64_relative": 2e-12,
+    "exact_fraction": "Exact rational tests of censoring, event decomposition, mixture total variance, zero-probability edges; no shared implementation oracle.",
+    "adjoint_scaled_residual": 5e-11,
+    "adjoint_relative_nonnegative": 2e-12,
+    "physical_scalar_crosschecks_relative": 5e-10,
+    "physical_scalar_crosschecks_absolute_normalized": 1e-12,
+    "no_silent_negative_variance": "Raw negative variance retained; std null plus typed issue unless an actually positive variance exists; significant negative fails.",
+    "operator_match": "Before any resolvent reservation compare exact CSC shape, nnz, all three raw array SHA256s, saved E and parent method object identity to PR35 completed G. Mismatch typed OPERATOR_IDENTITY_MISMATCH; no fallback, no solves.",
+    "graph_structure": "Check Metzler active block, exact upper triangularity, negative active diagonal, nonnegative heat row, absorbing ledgers; never solve full generator.",
+    "adjoint_oracle": "Small <=8 active states; exact Fraction upper triangular reference and independent forward/adjoint identity, optional analytic density integrals. Test q0, q1, q2, w, v and bin partition.",
+    "scope": "Physical checks in NCP are same-operator identities and mechanistic diagnostic of named9600 only; neither independent physical validation nor mesh convergence.",
+    "tests": [
+      "TC01 exact censoring and mixture identities",
+      "TC02 offline two-model analysis once with Decimal independent arithmetic",
+      "TC03 typed degenerate/malformed input",
+      "TA01 exact small active adjoint/forward oracle",
+      "TA02 bin conservation and no clipping",
+      "TA03 corrupted pulse/source/G identity fail-before-resolvent",
+      "TO01 stdlib admission and unspent distinct budget",
+      "TO02 reservation/completion and wrapper exit propagation",
+      "TO03 collector self-contained exact membership",
+      "TO04 clean final archive restore and plan (no numerical import or G)"
+    ]
+  },
+  "budgets": {
+    "assistant_physical_G": 0,
+    "assistant_physical_pulse": 0,
+    "assistant_offline_analysis_runs": 1,
+    "assistant_offline_analysis_wall_s": 90,
+    "assistant_targeted_toy_and_ops_wall_s": 120,
+    "small_toy_active_max": 8,
+    "prior_suites_rerun": 0,
+    "one_targeted_repair": "One contract-preserving repair per worker on concrete first failure, preserve rawfirst; further correction requires Astra cause classification and bounded amendment, not automatic rerun."
+  },
+  "ncp": {
+    "task": "CR-PHYS02F-NCP-ADJOINT-RESIDENCE",
+    "status": "HOLD_PENDING_INDEPENDENT_REVIEW",
+    "max_G_builds": 2,
+    "max_resolvent_blocks": 2,
+    "solves_per_block": 5,
+    "max_triangular_solve_calls": 10,
+    "max_expm_calls": 0,
+    "max_pulse_calls": 0,
+    "models_in_order": [
+      "fullBED",
+      "legacy"
+    ],
+    "wall_s": 900,
+    "grid_cells": [
+      3200,
+      6400
+    ],
+    "runtime": {
+      "python": "3.12.3",
+      "numpy": "2.4.2",
+      "scipy": "1.17.0",
+      "all_numerical_threadpools": 1
+    },
+    "working_memory_after_reserve_min_GiB": 12,
+    "disk_free_min_GiB": 8,
+    "cpu_min": 1,
+    "reserve": "max(12.5% bounded memory,1GiB) using actual topology/cgroup"
+  },
+  "ownership": {
+    "root_Astra": [
+      "candidate selection",
+      "scientific contract",
+      "acceptance",
+      "interpretation",
+      "admission/publication decision"
+    ],
+    "analysis_worker_lower": [
+      "src/tail_analysis.py",
+      "tests/test_tail_analysis.py",
+      "evidence/analysis",
+      "evidence/figures"
+    ],
+    "ncp_worker_lower": [
+      "src/residence.py",
+      "ncp/* except frozen contracts",
+      "tests/test_residence.py",
+      "tests/test_ncp_residence.py",
+      "evidence/residence",
+      "evidence/ncp_validation"
+    ],
+    "theory_contributor": "phys02f_tail_theory: candidate; ineligible as independent reviewer",
+    "independent_reviewer": "phys02f_remote_intake: source intake only so far, no design/acceptance/implementation"
+  },
+  "inherited_gates": {
+    "PHYS02_DELAY": "OPEN",
+    "production_history": "HOLD",
+    "atomic_G02": "UNRESOLVED",
+    "b_grid": "NO_GO",
+    "all_bound": "OPEN",
+    "R17B2B": "NO_CERTIFIED_SOURCE_SHARPENING",
+    "CCC_2026_exporter_identity": "SOURCE_IDENTITY_UNRESOLVED"
+  },
+  "claim_ceiling": [
+    "Current analysis derived/numerically checked from actual saved9600 only.",
+    "Kernel-weighted heat delays; not particle lifetimes, delayed fractions of all source energy, or cosmological production times.",
+    "Conditional continuation of the frozen finite operator; long-time bath validity not established.",
+    "CDF is heat-normalized; kernel_per_s itself is unnormalized and requires H0 division for density.",
+    "Grid convergence and continuum tail stability remain UNRESOLVED.",
+    "NCP residence diagnostics prepared/tested only until actual execution return."
+  ]
+}
