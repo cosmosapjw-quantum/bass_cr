@@ -96,8 +96,8 @@ def one_step_pair_bounds(
     nn=_validate_neutrals(neutrals_cm3,dt_s)
     if not (0<min_future_redshift_ratio<=1 and isfinite(min_future_redshift_ratio)):
         raise ValueError('forecast redshift must be within (0,1]')
-    if not(0<e1<=e2<=SOURCE_EDGES[-1] and n1>=0 and n2>=0):
-        raise ValueError('nonnegative ordered photon cohorts in frozen support required')
+    if not(0<e1<=e2<=50000. and n1>=0 and n2>=0):
+        raise ValueError('nonnegative ordered photon cohorts in Verner fit support required')
     if not all(isfinite(x) for x in (e1,e2,n1,n2)):
         raise ValueError('nonfinite photon cohort')
     total=n1+n2
@@ -145,6 +145,8 @@ class CompressedCohortTransport(CohortTransport):
     """
     def __init__(self,cohorts:Sequence[tuple[float,float]],max_cohorts:int=32):
         super().__init__(cohorts)
+        if any(e>50000. for e,_ in self.cohorts):
+            raise ValueError('above Verner 50keV support')
         if isinstance(max_cohorts,bool) or not isinstance(max_cohorts,int) or max_cohorts<1:
             raise ValueError('max_cohorts must be a positive integer')
         self.max_cohorts=max_cohorts
@@ -222,11 +224,29 @@ class CompressedCohortTransport(CohortTransport):
         return certificate
 
     def redshift(self,energy_ratio:float):
-        result=super().redshift(energy_ratio)
-        # Previously evaluated one-step certificate does not promise a bound on
-        # future dynamically changed/absorbed/compressed states.
+        """Redshift physical energies including separately versioned high-energy
+        SOURCE07 q-reference rays (up to its supplied 432.23 eV). No angular
+        Jacobian is applied here: the q-ray producer owns that factor exactly once.
+        """
+        if not isfinite(energy_ratio) or energy_ratio<=0:
+            raise ValueError('invalid redshift factor')
+        before=self.moments();next_state=[];bound_n=bound_u=0.
+        for energy,n in self.cohorts:
+            shifted=energy*energy_ratio
+            if shifted<SOURCE_EDGES[0]:
+                bound_n+=n;bound_u+=n*shifted
+            elif shifted>50000.:
+                raise ValueError('above Verner fit energy domain')
+            else:
+                next_state.append((shifted,n))
+        self.cohorts=next_state
+        after=self.moments()
+        work=before[1]-after[1]-bound_u
         self.last_certificate=None
-        return result
+        return {'boundary_count':bound_n,'boundary_energy_eV':bound_u,
+                'photon_work_eV':work,
+                'number_residual':before[0]-after[0]-bound_n,
+                'energy_residual_eV':before[1]-after[1]-bound_u-work}
 
     def absorb_backward_euler(self,neutrals_cm3:Sequence[float],dt_s:float):
         result=super().absorb_backward_euler(neutrals_cm3,dt_s)
@@ -245,7 +265,7 @@ def frozen_be_readout(cohorts,neutrals_cm3,dt_s,ratio=1.):
     for E,n in cohorts:
         e=ratio*E
         if e<SOURCE_EDGES[0]:continue
-        if e>SOURCE_EDGES[-1]:raise ValueError('forecast above support')
+        if e>50000.:raise ValueError('forecast above Verner energy support')
         rates=[dt_s*C_CM_S*d*verner(name,e) for d,name in zip(nn,ION_NAMES)]
         n1=n/(1+sum(rates))
         for k,rate in enumerate(rates):
