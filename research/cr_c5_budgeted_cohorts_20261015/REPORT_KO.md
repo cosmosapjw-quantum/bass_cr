@@ -78,3 +78,11 @@ Count·energy/source redshift/photochemistry ledgers within floating tolerance. 
 - 전역 full nonlinear REI ODE/history, transport error proof, moving angular Bianchi, physical electron collision calibration, QCD/atomic provider update, external independent scientific review, native subagent: NOT_RUN.
 
 **다음 실행:** 같은 source ID의 별도 시험에서 일련의 absorption coefficient·He ionization fronts와 고정-grid transport 비교, 실제 한 단계 유한율 spectrum error estimator의 directed-rounding 검증, 필요하면 적응형 horizon revalidation. 실제 owner AX11/12 gate는 달라지지 않는다.
+
+## 6. v2: 실제 SOURCE07 C3 q-reference 입력과의 접속
+
+기존 구현 v1은 `frozen_source()`의 최대100 eV로 packet energy support를 함께 묶어두어 **새로운** `rei_bianchi` SOURCE07 C3의 움직이는 방향 photon ray에 필요한 **432.2293723204678 eV**를 다루지 못했다. 원 Codex `research/source07_c2_q_reference_20261015/NEXT_C3.json`를 **2026-10-15 01:09 KST 실제 working tree**에서 읽어 발견한 결함이다. Source07 C2는 각도8, source-cell48, 384 ray packet, 원 source injection에 Bianchi `R*J`를 정확히 한번 적용, collisionless k_i 운반 및 proper neutral frozen absorption reference를 이미 제공한다. 기존 implementation 또는 그 테스트를 반복·복제하지 않고, 이 압축기는 그 packet producer가 출력한 **(현재 physical energy, normalized count)** tuple만 소비한다.
+
+v2에서는 Verner 공식 적용범위 **50 keV**까지의 cohort energy와 frozen-neutral error-estimator 및 `redshift`를 허용했다. 내부 source identity는 여전히 13.6–100 eV의 기존 50,000K source이며, **별도 q-ray 소스가 입력될 때는 source_model_id, source clock, angular Jacobian, per-ray geometry가 owner 소유**다. 이 코드가 자동으로 q-ray energies/weights를 계산하지 않는다. 새 테스트 3개에서 실제 432.2293723204678eV 경계의 packet이 보존적으로 redshift하고, 400–432eV 보간 후보가 local event+heat bound 안에 있음을 확인했다. 50keV 초과의 입력/적색편이는 명시적 ValueError와 transactionality로 처리한다.
+
+이로써 SOUR​​CE07 C3의 **고에너지 에너지 support에 대한 인터페이스 blocker를 컴포넌트 단계에서 해소**했다. 그러나 Bianchi 각도/생성시각 source와 실시간 chemistry connection을 구현한 것 또는 AXBI의 완료된 새로운 DAG gate는 아니다. 원 AX08 signed history와 AX11/AX12 실행은 owner가 계속한다. Tests v2: **61 passed**.
