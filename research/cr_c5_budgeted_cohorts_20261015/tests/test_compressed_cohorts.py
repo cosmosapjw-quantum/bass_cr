@@ -146,3 +146,38 @@ def test_repeated_injection_explicit_hold_keeps_old_state():
     with pytest.raises(CompressionHold):
         x.inject_and_compress([(e,.1*n) for e,n in frozen_source(16)],NEUTRALS,1e9,.98,.0001,.01)
     assert x.cohorts==old
+
+
+def test_high_energy_q_ray_432eV_can_redshift_without_100ev_clip():
+    # Actual SOURCE07 C3 contract requires energy support up to 432.229... eV.
+    src=[(432.2293723204678,.3),(420.,.1)]
+    x=CompressedCohortTransport(src,max_cohorts=2)
+    old=x.moments()
+    led=x.redshift(.995)
+    assert x.moments()[0]==pytest.approx(old[0])
+    assert x.moments()[1]==pytest.approx(old[1]*.995,rel=5e-15)
+    assert abs(led['number_residual'])<1e-14
+    assert abs(led['energy_residual_eV'])<1e-12
+    assert all(e>100 for e,_ in x.cohorts)
+
+
+def test_high_energy_verner_rate_and_compression_same_forecast_bound():
+    src=[(400.,.15),(415.,.1),(432.2293723204678,.25)]
+    x=CompressedCohortTransport(src,max_cohorts=2)
+    out=x.compress(NEUTRALS,1e9,.99,1.,100.)
+    assert out.final_cohorts==2 and out.merges==1
+    for ratio in [1.,.999,.995,.99]:
+        exact=frozen_be_readout(src,NEUTRALS,1e9,ratio)
+        comp=frozen_be_readout(x.cohorts,NEUTRALS,1e9,ratio)
+        for k in range(3):
+            assert abs(comp[0][k]-exact[0][k])<=out.event_absolute_bounds[k]
+            assert abs(comp[1][k]-exact[1][k])<=out.heat_absolute_bounds_eV[k]
+
+
+def test_above_50kev_fit_raises_without_state_mutation():
+    with pytest.raises(ValueError):
+        CompressedCohortTransport([(50001.,1.)],max_cohorts=1)
+    x=CompressedCohortTransport([(49999.,1.)],max_cohorts=1)
+    before=list(x.cohorts)
+    with pytest.raises(ValueError):x.redshift(1.0001)
+    assert x.cohorts==before
