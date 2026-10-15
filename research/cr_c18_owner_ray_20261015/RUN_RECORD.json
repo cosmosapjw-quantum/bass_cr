@@ -1,0 +1,186 @@
+{
+  "schema": "BASS_CR_C18_ACTUAL_RUST_AXBI_RAY_STOCK_REACTION_RUN_V1",
+  "user_date_kst": "2026-10-15",
+  "parent_commit": "1c15983e86909c44620201f2da2a63dddef6b2e1",
+  "owner_head": "0fcb2dddf5de6b583c2e00f150abff0b2afb6315",
+  "owner_sha256": {
+    "rust/rei_microphysics/src/axbi_driver.rs": "92bc6ca1540c927cde7452d218f666882ecdd651558b151b31e9a6a8e2d92c8f",
+    "rust/rei_microphysics/src/axbi_sources.rs": "606e3c2ec367dd9951ebbf2f53486f2232b49c0218896d66d8dc13dd5ee83bfe",
+    "rust/rei_microphysics/src/igm_thermal.rs": "30515d96270ec73a37829ba298513a42112991168479d3cb40f33b67fd469ab2",
+    "rust/rei_microphysics/src/igm_state.rs": "1651b00a517d67aaa71b38d3c69af6413570adfc38b591a3ed25284f039e0ae0",
+    "rust/rei_microphysics/src/axbi_background.rs": "65f10dced178aa85bb1c92da0b35350a0eec2d3d3de05630c900b5df4ec1e254",
+    "research/axbi_goal_20261014/runs/flrw/32d11e733155/ZERO/config.cfg": "b83ac8f4e93704b249f08e2114501db56e3e5de039b99056c7c10efa9a782e41",
+    "research/axbi_goal_20261014/runs/flrw/32d11e733155/ZERO/checkpoint.txt": "67510e5502f5c82fcda0c2f074358499dded0ca082bb24180bbafdf14e77a7a3",
+    "research/axbi_goal_20261014/report/full_progress_32d11e733155/snapshot_20261014T083357015083Z/SHEAR_PLUS/config.cfg": "b9a8bdeaf61a68839e23486fa8ad0740fe1318c55cbc7f522e11cacbb4ff21c0",
+    "research/axbi_goal_20261014/report/full_progress_32d11e733155/snapshot_20261014T083357015083Z/SHEAR_PLUS/checkpoint.txt": "241e17e18d72c18e1e1f42202fd706e672939504cfc912755e8e490920b5ee68",
+    "rust/rei_microphysics/src/atomic_provider.rs": "b0b572d3940a7a1f740e09d5f43c60236ec61511e8bdbcc68e60395ec7e107d3",
+    "rust/rei_microphysics/src/hhe_events.rs": "c100b08e034089c2d67b2102769ccdd51f1d29a2f388d6bb2dfe7984af93b290",
+    "rust/rei_microphysics/src/lib.rs": "318600a1e3ace40247aaffda5dd25ffe34eafae50dbb49db5886389e14485e50",
+    "rust/rei_microphysics/Cargo.toml": "e04b3802c2555b612305bb900e1e9d509c2a4039a6deacf20d65ddf7e5249407"
+  },
+  "native_Rust_source_recompiled_and_read_checkpoint": true,
+  "owner_cargo_target_outside_original_repo": true,
+  "native_source_ray_weights_once": true,
+  "state_epochs_DIFFER_NOT_CONTROLLED_SHEAR_COMPARISON": true,
+  "unit_contract": "proper s, cm^-3, eV/H and source photon/H/s; Rust photo gamma and heat per absorber",
+  "tests": {
+    "cases": "C18+C17+C16",
+    "observed": "56 passed",
+    "exit_code": 0,
+    "receipt": "results/TEST_RECEIPT.log"
+  },
+  "cases": {
+    "ZERO": {
+      "a": 0.08873654701704167,
+      "N_per_H": 1.649933353054249e-06,
+      "photoevents": [
+        2.3391629414038972e-07,
+        2.0425434764630007e-08,
+        1.4338060867592457e-11
+      ],
+      "heating_eV_per_H": [
+        1.397422249388897e-06,
+        1.2180825423710554e-07,
+        5.3780778604082205e-11
+      ],
+      "photon_balance": 1.5881867761018131e-22,
+      "energy_balance_eV_per_H": 1.0164395367051604e-20
+    },
+    "SHEAR_PLUS": {
+      "a": 0.06657701074547755,
+      "N_per_H": 2.7963611369315995e-07,
+      "photoevents": [
+        1.0249253480799078e-07,
+        8.9118843946562e-09,
+        1.4561774415762537e-12
+      ],
+      "heating_eV_per_H": [
+        6.072909668042752e-07,
+        5.320709912520091e-08,
+        5.459028866237994e-12
+      ],
+      "photon_balance": -1.3234889800848443e-23,
+      "energy_balance_eV_per_H": 8.470329472543003e-22
+    }
+  },
+  "point_Rust_igm_rhs": "native photo events cm3/s and photo_input erg/cm3/s numerically cross checked",
+  "benchmark": {
+    "FLRW_64x48_median_s": 0.044372669071890414,
+    "FLRW_32x24_median_s": 0.009792349068447948,
+    "BI_64x48_median_s": 0.0471322339726612,
+    "BI_32x24_median_s": 0.010223641991615295,
+    "validated_scope": "two actual AXBI checkpoint states only"
+  },
+  "science_gate": "PASS_SCOPED_NATIVE_PHOTO_INPUT__FULL_REI_EOR_HOLD",
+  "source_owner_mutated": false,
+  "native_subagent": "NOT_RUN_NO_DISPATCH",
+  "Codex": "NOT_USED",
+  "python_version": "3.12.3",
+  "artifacts": [
+    {
+      "path": "NEXT_DAG.json",
+      "sha256": "ae3b3f34d35e46425cbe5cce880828de35b7d38167fcaca421219470de31601b",
+      "bytes": 1102
+    },
+    {
+      "path": "OWNER_LOCK.json",
+      "sha256": "242ea863c935f930aaaab6afd9a5021205031db04b804342765a30da3d08500b",
+      "bytes": 2144
+    },
+    {
+      "path": "README_KO.md",
+      "sha256": "1594a26e915e051b089dbf113c93a0973fef7f02adeb70f6f3739c56f54a6fd7",
+      "bytes": 2634
+    },
+    {
+      "path": "REI_SOURCE07_HANDOFF_KO.md",
+      "sha256": "2b110aead23164d157e3e8b83d4816d4140231a23a5c7023feceec44ae97769b",
+      "bytes": 2339
+    },
+    {
+      "path": "docs/THEORY_KO.md",
+      "sha256": "021146ca6ab643f1d1f4762f3534ac3262df70c93bca4bb41a2bda8060980d09",
+      "bytes": 4741
+    },
+    {
+      "path": "results/AXBI_PLUS_native.tsv",
+      "sha256": "4d90dcad0577414e8836a049913a3d1e59783a781aaa3f77116afd12ee9db2f5",
+      "bytes": 29640
+    },
+    {
+      "path": "results/AXBI_SHEAR_PLUS_rust_point_rhs.tsv",
+      "sha256": "e8f581f643c7add5c5cdec2c771dfe575f04ec8fa4866eb1a1d6acd09e3a3384",
+      "bytes": 729
+    },
+    {
+      "path": "results/AXBI_ZERO_native.tsv",
+      "sha256": "1b6e1bd0a24f5119bd0ab395752530d09df2e50f329f8786c1fd98ca307a9db6",
+      "bytes": 29527
+    },
+    {
+      "path": "results/AXBI_ZERO_rust_point_rhs.tsv",
+      "sha256": "067f81d76141a5dadad5744cd281db68e7a2863b84970bcdc25ce024379440bd",
+      "bytes": 729
+    },
+    {
+      "path": "results/OWNER_FIXED_GAS_TIME_SWEEP.json",
+      "sha256": "b157c24dc215ab544dff061c94b059a53e64aa1610be97a90f5753f300a17763",
+      "bytes": 4496
+    },
+    {
+      "path": "results/OWNER_LOCAL_PHOTO_INPUT.json",
+      "sha256": "3c644b2089113c90672fc98329076c102fe4c8afc1ddaa063678340a7adf570d",
+      "bytes": 4547
+    },
+    {
+      "path": "results/OWNER_POINT_RHS_PARITY.json",
+      "sha256": "73e733fb2bd674eb2e73ed2a7c869fd1682b47d5e1c13b36a733408edae02bd8",
+      "bytes": 1309
+    },
+    {
+      "path": "results/PERFORMANCE.json",
+      "sha256": "32688c2373248110df3234996b6a867d290055fafcd8b029fddc34f5be7982ca",
+      "bytes": 2492
+    },
+    {
+      "path": "results/REAL_AXBI_HHE_TIME_SENSITIVITY.png",
+      "sha256": "2a9a93f86ad6ce5962fffa9497022fef506a4533d8ef0700e515df0556ac068e",
+      "bytes": 135620
+    },
+    {
+      "path": "results/TEST_RECEIPT.log",
+      "sha256": "1fdfc6537b418b26c448b4bee01817e9da6cbe3f4c1597abf35512e107928e22",
+      "bytes": 114
+    },
+    {
+      "path": "src/owner_adapter.py",
+      "sha256": "7cf8beb1a43fd3631410676a56bebe9a88c8395c23c7a9d046b5538788207ce1",
+      "bytes": 7003
+    },
+    {
+      "path": "src/owner_photo_rhs.rs",
+      "sha256": "fd5fad4dc14ede8d94d444f16f30577f3f0816f81b2fa89b74c882b34bd11cc4",
+      "bytes": 2223
+    },
+    {
+      "path": "src/owner_ray_export.rs",
+      "sha256": "4c8c5758b90dac3188df3641dbb1132471b3c9e9a527854d7114e0b99a31e3c6",
+      "bytes": 4286
+    },
+    {
+      "path": "src/run_native.sh",
+      "sha256": "93b99ae4f63c3c5e50a12efc64755712b255e094c581b8a586baefcb76b49aca",
+      "bytes": 1826
+    },
+    {
+      "path": "src/verify_point_rhs.py",
+      "sha256": "dd930f6467c421be55103080b8c9bc7f10b83c50a0b94cbd9bf784b68e18a257",
+      "bytes": 3049
+    },
+    {
+      "path": "tests/test_owner_ray_adapter.py",
+      "sha256": "424ed2f26d22d1f415395f6311425312f4413a0bf475df4ddffd1ce7897fbcf5",
+      "bytes": 4213
+    }
+  ]
+}
