@@ -1,0 +1,93 @@
+{
+  "schema": "BASS_CR_REI_HEII_C11_RUN_RECORD_V1",
+  "date_kst": "2026-10-15",
+  "original_baseline_commit": "669cbebe5e0a4383d7999aa354a3f320eff39fd2",
+  "owner_repository_commit": "0fcb2dddf5de6b583c2e00f150abff0b2afb6315",
+  "owner_repository_branch": "codex/rux-science-delivery-20261014",
+  "owner_sha256": {
+    "age": "f8a7d7ecbf7b839ef138c024384bed0fa16ec6889a332ef2ade2dc7c9d47b72b",
+    "emission": "43f7805703f08516b2b4b8e686b097b1c38e2140ac06b556e7de07159cf42b06",
+    "scenario": "07aa11d2d3fd47d2ed95e9d9161f6205e4d9ba386c27ad43d2b298fcd86d1696"
+  },
+  "python": "3.12.3",
+  "tests": {
+    "command": "REI_BIANCHI_ROOT=<owner> PYTHONPATH=<C11,C10,C5> OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 -m pytest -q C11/tests C10/tests -p no:cacheprovider",
+    "receipt": "results/TEST_RECEIPT.log",
+    "observed": "53 passed",
+    "exit_code": 0
+  },
+  "performance": {
+    "median_scalar_seconds": 0.19450395298190415,
+    "median_batched_seconds": 0.0688041370594874,
+    "measured_kernel_ratio": 2.8269223522669558,
+    "median_q_3_process_seconds": {
+      "1": 0.36235275107901543,
+      "2": 0.6602471619844437,
+      "3": 0.6012718579731882
+    }
+  },
+  "physics_admission": "HOLD",
+  "owner_mutation": "NONE",
+  "artifacts": [
+    {
+      "file": "NEXT_DAG.json",
+      "sha256": "f521c9eb7c9b26eabba51096b5c243ddd8de702923ffa2240ee73caf635cbfc4",
+      "bytes": 966
+    },
+    {
+      "file": "README_KO.md",
+      "sha256": "c99acde174647a5d67e37b0cbbcf04f98ef8075f6f03f888a402101e1a445341",
+      "bytes": 2741
+    },
+    {
+      "file": "REI_SOURCE07_C8_HANDOFF_KO.md",
+      "sha256": "aff7ab360da213973e750cc67aa2c36a8a3c63996bcaf24bcb9479241e9e6ed9",
+      "bytes": 3670
+    },
+    {
+      "file": "docs/THEORY_KO.md",
+      "sha256": "da6afe4ffbf6c680de6cfdb082aef1ea5bae9459f49feb8a26b71f7ee7e29abd",
+      "bytes": 4497
+    },
+    {
+      "file": "results/HEII_HOLDOUT_ERRORS.png",
+      "sha256": "95f08a1f4c338eb4823cdd395bee60d610a0591af73fa181a4478e4598ab3934",
+      "bytes": 56683
+    },
+    {
+      "file": "results/REI_HEII_AGE_REFERENCE.json",
+      "sha256": "d49cb3a56748f85456423f98b338e10ecef536cab10a1cc255e7ef3ad275cd4a",
+      "bytes": 37915
+    },
+    {
+      "file": "results/TEST_RECEIPT.log",
+      "sha256": "e930964d104d137908e022bd8f55b37ffa25dbac731b6714a8f575107eee10f4",
+      "bytes": 113
+    },
+    {
+      "file": "results/VECTORIZED_PARALLEL_BENCHMARK.json",
+      "sha256": "b7fe44a5cb0cad444342d7000977e50fcbe31bd65eb6eccc3bec8f45c5ba2db6",
+      "bytes": 1525
+    },
+    {
+      "file": "src/benchmark.py",
+      "sha256": "98f1501196599a219d1720699d3663d70b96a02958707392e112d15c1ee6347b",
+      "bytes": 2637
+    },
+    {
+      "file": "src/owner_age_bridge.py",
+      "sha256": "d7d4167169d72ec4bd9a5bde29106643f8c88cc9c315647f44265cc1f4574596",
+      "bytes": 12225
+    },
+    {
+      "file": "src/plot_error.py",
+      "sha256": "aa76a7f48b22afc510d35dcce9671e6bd07ccf96db67271d2397988e2edabe92",
+      "bytes": 1114
+    },
+    {
+      "file": "tests/test_owner_age_bridge.py",
+      "sha256": "bf5df1922dc5066232e77e1dc1043ab3c5e378b2416163aa1cf81b00a0811edd",
+      "bytes": 3160
+    }
+  ]
+}
