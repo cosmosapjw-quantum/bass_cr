@@ -1,0 +1,38 @@
+{
+  "schema": "BASS_CR_C17_DOUBLE_CLOUD_BACKUP_ACTUAL_READBACK_V1",
+  "date_utc": "2026-10-15T10:20:18.430199+00:00",
+  "git_commit": "b2345cbca8732caaafde880486bbe52d2ecc5864",
+  "archive_name": "BASS_CR_REI_C17_20261015_b2345cbca873.tar.gz",
+  "archive_sha256": "0f0bc61ddee2c7c33ac2585102e4c3a2bddb1c7df6d1ed7549ca782b4a1e3088",
+  "archive_bytes": 261740,
+  "offline_restore": "170 passed, 69 internal SHA-256 hashes matched",
+  "targets": {
+    "dropbox": {
+      "destination": "dbx:BASS_DERIVATION_DOSSIERS_20260912/bass_cr/BASS_CR_REI_C17_20261015_b2345cbca873.tar.gz",
+      "expected_sha256": "0f0bc61ddee2c7c33ac2585102e4c3a2bddb1c7df6d1ed7549ca782b4a1e3088",
+      "expected_bytes": 261740,
+      "actual_sha256": "0f0bc61ddee2c7c33ac2585102e4c3a2bddb1c7df6d1ed7549ca782b4a1e3088",
+      "actual_bytes": 261740,
+      "status": "VERIFIED_SHA256_AND_BYTES"
+    },
+    "google_drive": {
+      "destination": "gdrv:BASS_DERIVATION_DOSSIERS_20260912/bass_cr/BASS_CR_REI_C17_20261015_b2345cbca873.tar.gz",
+      "expected_sha256": "0f0bc61ddee2c7c33ac2585102e4c3a2bddb1c7df6d1ed7549ca782b4a1e3088",
+      "expected_bytes": 261740,
+      "status": "UPLOAD_FAILED",
+      "failure_tail": "e' of service 'drive.googleapis.com' for consumer 'project_number:202264815644'.\nDetails:\n[\n  {\n    \"@type\": \"type.googleapis.com/google.rpc.ErrorInfo\",\n    \"domain\": \"googleapis.com\",\n    \"metadata\": {\n      \"consumer\": \"projects/202264815644\",\n      \"quota_limit\": \"defaultPerMinutePerProject\",\n      \"quota_limit_value\": \"840000\",\n      \"quota_location\": \"global\",\n      \"quota_metric\": \"drive.googleapis.com/default\",\n      \"quota_unit\": \"1/min/{project}\",\n      \"service\": \"drive.googleapis.com\"\n    },\n    \"reason\": \"RATE_LIMIT_EXCEEDED\"\n  },\n  {\n    \"@type\": \"type.googleapis.com/google.rpc.Help\",\n    \"links\": [\n      {\n        \"description\": \"Request a higher quota limit.\",\n        \"url\": \"https://cloud.google.com/docs/quotas/help/request_increase\"\n      }\n    ]\n  }\n]\n, rateLimitExceeded\n"
+    }
+  },
+  "alternate_gdrive_intake": {
+    "route": "Dropbox-to-Google Drive via ChatGPT Files",
+    "dropbox_materialized_sha256": "0f0bc61ddee2c7c33ac2585102e4c3a2bddb1c7df6d1ed7549ca782b4a1e3088",
+    "status": "FAILED",
+    "error": "files.manage_library upload returned container_session_expired",
+    "policy": "Do not treat unverified or failed upload as second cloud backup"
+  },
+  "independent_offline_restore_details": {
+    "tests": "170 passed",
+    "archive_files_hashed": 69,
+    "sha256_identity": "MATCHED"
+  }
+}
