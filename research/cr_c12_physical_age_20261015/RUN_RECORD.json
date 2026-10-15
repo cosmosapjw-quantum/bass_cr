@@ -1,0 +1,158 @@
+{
+  "schema": "BASS_CR_C12_REI_PHYSICAL_AGE_RUN_RECORD_V1",
+  "execution_date_kst": "2026-10-15",
+  "scope": "Independent source-weighted short local photon reservoir coupled H-He-photoheat, not full reionization",
+  "original_bass_cr_parent_commit": "43db96b8457842c4bbc945f5b9e4c14f2f831d9f",
+  "input_owner_rei_bianchi_commit": "0fcb2dddf5de6b583c2e00f150abff0b2afb6315",
+  "owner_mutation": "NONE",
+  "fixed_input_sha256": {
+    "age": "f8a7d7ecbf7b839ef138c024384bed0fa16ec6889a332ef2ade2dc7c9d47b72b",
+    "emission": "43f7805703f08516b2b4b8e686b097b1c38e2140ac06b556e7de07159cf42b06",
+    "scenario": "07aa11d2d3fd47d2ed95e9d9161f6205e4d9ba386c27ad43d2b298fcd86d1696"
+  },
+  "runtime_versions": {
+    "python": "3.12.3"
+  },
+  "thread_settings": {
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1"
+  },
+  "native_subagent": "NOT_RUN_NO_HOST_DELEGATION",
+  "os_parallelism": "spawn process pool in compare_ode; 1/2/3 processes",
+  "tests": {
+    "observed": "66 passed",
+    "command": "REI_BIANCHI_ROOT=<readonly-owner> PYTHONPATH=<C12,C11,C10,C5> OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 -m pytest -q -p no:cacheprovider C12/tests C11/tests C10/tests",
+    "exit_code": 0,
+    "receipt": "results/TEST_RECEIPT.log"
+  },
+  "source_photons_per_H_q0": 4.446590310533141,
+  "source_age_quadrature_max_relative_difference": 2.5966729748676488e-15,
+  "emitted_energy_QUADPACK_max_relative_difference": 3.1543561009980256e-15,
+  "time_convergence_observed_orders": {
+    "frozen": [
+      1.0253077824824364,
+      1.012422126193305,
+      1.006154942163089,
+      1.0030636558348847
+    ],
+    "midpoint": [
+      2.036371375337401,
+      2.018136928549297,
+      2.0090561042795945,
+      2.004530047597886
+    ]
+  },
+  "compression": {
+    "source_age_n": 48,
+    "positive_age_one": 8,
+    "positive_age_three": 13,
+    "max_abs_HI_fraction_three_vs_full_DOP853": 1.2105871860512707e-12,
+    "max_abs_T_K_three_vs_full_DOP853": 1.3862518244422972e-08,
+    "numeric_training_moment_residual_gate": 1e-10,
+    "not_universal_error_certificate": true
+  },
+  "performance_q_three_medians_seconds": {
+    "1": 2.570643651066348,
+    "2": 2.209066951996647,
+    "3": 1.6899646759266034
+  },
+  "scientific_gate": "EXPLORATORY_NUMERICALLY_CHECKED_NO_PHYSICAL_EOR_ADMISSION",
+  "next_ready": "Use true transported source-aged photon stocks including R*J, prior opacity, evolving recombination/cooling and independent radiation-history reference",
+  "artifacts": [
+    {
+      "relative_path": "NEXT_DAG.json",
+      "bytes": 1287,
+      "sha256": "9aa4be64c2d58b5b5131d0694d88f2a7894d2c5be122e452b42345d984ef6804"
+    },
+    {
+      "relative_path": "README_KO.md",
+      "bytes": 5973,
+      "sha256": "126d84c317bdf01c3d5f3a054634fe024ed8a14e604be55c445340364a3289ee"
+    },
+    {
+      "relative_path": "REI_SOURCE07_C8_HANDOFF_KO.md",
+      "bytes": 2954,
+      "sha256": "e95bc05d01fe71e95ec3cb83754a62c393a91b1d89fc804e2d9b24f3a42e3c81"
+    },
+    {
+      "relative_path": "docs/THEORY_KO.md",
+      "bytes": 6120,
+      "sha256": "0024cef0e30aea8b582981306c76472e201efb5c1937ad463b11a465a61d1eb9"
+    },
+    {
+      "relative_path": "results/PARALLEL_BENCHMARK.json",
+      "bytes": 698,
+      "sha256": "a8bb830ace7ba44d68c3df88ca1f4a2cbe6c20560351e624d59c979ca93c1815"
+    },
+    {
+      "relative_path": "results/PILOT.json",
+      "bytes": 138797,
+      "sha256": "dc083aa15976989ee9be7405baf52fcbbc364ad8fa2d6f848ced05f1dd47cb28"
+    },
+    {
+      "relative_path": "results/PILOT_PRUNED.json",
+      "bytes": 138883,
+      "sha256": "0e99d5c3443c50456677e9a63838ec0a184cbd4de2fe15540b42849f4cacc820"
+    },
+    {
+      "relative_path": "results/SCIENTIFIC_VALIDATION.json",
+      "bytes": 8346,
+      "sha256": "db72b8fc2d50d20a90dbd62a4e2f8b83afababd1d5c828da24b2c2eadd2296ab"
+    },
+    {
+      "relative_path": "results/SOURCE_WEIGHTED_DOP853.json",
+      "bytes": 8452,
+      "sha256": "fcdd7877d33142ac58696ab07745316c763f3c02eaf81ebc755f8644e54c50d6"
+    },
+    {
+      "relative_path": "results/TEST_RECEIPT.log",
+      "bytes": 113,
+      "sha256": "d1d1f5b3a754685cd234255f10b8994081e9e927e6de975bb7aeb7e8f62026f8"
+    },
+    {
+      "relative_path": "results/TIME_CONVERGENCE.png",
+      "bytes": 77313,
+      "sha256": "c7c8a62df95ab8b9517406eb80a48e8a5d60bdee8db11ef7bd5e5bb68f844b6f"
+    },
+    {
+      "relative_path": "src/benchmark_parallel.py",
+      "bytes": 2246,
+      "sha256": "a0eac5f33fc45ccf0f8264015e00536ba69e62374adc3217b9eb4ffa1aa0a539"
+    },
+    {
+      "relative_path": "src/compare_ode.py",
+      "bytes": 3782,
+      "sha256": "f949f396b0910a9bcb65c891b870225173882c0240102834846338e9ad994c9b"
+    },
+    {
+      "relative_path": "src/continuum_oracle.py",
+      "bytes": 1450,
+      "sha256": "2655e1bf9d99000921f11318b010d85b35edd65c401c426267bfb059499ca58a"
+    },
+    {
+      "relative_path": "src/independent_ode.py",
+      "bytes": 2258,
+      "sha256": "3d0b112c4591531b79280634f095e0cf2baab3bf2dbdeda01005cf16665a1eed"
+    },
+    {
+      "relative_path": "src/physical_age.py",
+      "bytes": 14600,
+      "sha256": "fd7b729cd9872c018c7c60ed89dafdc1d856f6451ebb8d6e536fe3925d3d0641"
+    },
+    {
+      "relative_path": "src/plot_convergence.py",
+      "bytes": 1091,
+      "sha256": "df8f996903ed01991c246ee2c4097da51a8e50c8db60833cd3f7580ef64aa434"
+    },
+    {
+      "relative_path": "src/validate.py",
+      "bytes": 4724,
+      "sha256": "b779b6e9443e457085eb14ab43c57aeb961391d2fa7e95a4020412f7af5e99d0"
+    },
+    {
+      "relative_path": "tests/test_physical_age.py",
+      "bytes": 6040,
+      "sha256": "da8f1eb41116a6b77df3b01d102512942f6df86bf68e6537c687ff4e7596c2a7"
+    }
+  ]
+}
