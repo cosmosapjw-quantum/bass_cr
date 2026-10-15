@@ -1,0 +1,121 @@
+{
+  "schema": "BASS_CR_C13_SOURCE_BORN_TRANSPORT_RUN_RECORD_V1",
+  "date_kst": "2026-10-15",
+  "source_git_base": "8b516d7321c746eeeef0c56dda35f05d9e1b2896",
+  "owner_rei_git_read_only": "0fcb2dddf5de6b583c2e00f150abff0b2afb6315",
+  "owner_input_sha256": {
+    "age": "f8a7d7ecbf7b839ef138c024384bed0fa16ec6889a332ef2ade2dc7c9d47b72b",
+    "emission": "43f7805703f08516b2b4b8e686b097b1c38e2140ac06b556e7de07159cf42b06",
+    "scenario": "07aa11d2d3fd47d2ed95e9d9161f6205e4d9ba386c27ad43d2b298fcd86d1696"
+  },
+  "owner_igm_rates_sha256": "310164e620617f3089d488bd1f9668996b4a4cbd191383e45303def176ef81cf",
+  "runtime_python": "3.12.3",
+  "omp_blas_single_thread": true,
+  "native_subagent": "NOT_RUN_NO_HOST_DISPATCH",
+  "test_command": "REI_BIANCHI_ROOT=<owner> PYTHONPATH=<C13,C12,C11,C10,C5> OPENBLAS_NUM_THREADS=OMP_NUM_THREADS=1 python3 -m pytest -q -p no:cacheprovider C13/tests C12/tests C11/tests C10/tests",
+  "test_receipt": "results/TEST_RECEIPT.log",
+  "observed_tests": "85 passed",
+  "test_exit_code": 0,
+  "science": {
+    "source_64step_max_relative_error": 1.7761147985323822e-06,
+    "q0_midpoint32": {
+      "n_emitted_per_H": 0.11243562770570208,
+      "xHI_end": 0.8021355432672646,
+      "T_end_K": 6623.831906158636,
+      "photon_residual": -5.551115123125783e-17,
+      "energy_residual_eV_per_H": -4.996003610813204e-16
+    },
+    "gas_time_order_gate": "HOLD_FIRST_ORDER_LIKE",
+    "thermal_closure": "TOY_ELECTRON_RECOMB_ESCAPE",
+    "physical_history_admission": false
+  },
+  "benchmark": {
+    "kernel_scalar_median_s": 0.0038729149382561445,
+    "kernel_vector_median_s": 0.00018969806842505932,
+    "kernel_speed_ratio": 20.41620650336853,
+    "q_process_medians_s": {
+      "1": 1.5036362900864333,
+      "2": 1.407706373021938,
+      "3": 1.0902844400843605
+    }
+  },
+  "owner_tree_mutated": false,
+  "artifact_manifest": [
+    {
+      "path": "FAILURE_LEDGER.json",
+      "sha256": "f6f5de26e65016ec87bd5f20fc3711f5f50909c85e9494c186331b8a70aef1f3",
+      "size": 2235
+    },
+    {
+      "path": "NEXT_DAG.json",
+      "sha256": "ec51c974772f9b4883e8a850ac52ab9fddf7541792d54f5135af3cb34869194a",
+      "size": 1213
+    },
+    {
+      "path": "README_KO.md",
+      "sha256": "974cf2c5a8d7d043dde681614243b070a1f4f1b13fe82e138bd9395eb2efefe1",
+      "size": 2672
+    },
+    {
+      "path": "docs/THEORY_KO.md",
+      "sha256": "a21134d4abebbe6631e6dca0d0810d2119f5183577ebf6889d2075642dfd17f6",
+      "size": 5764
+    },
+    {
+      "path": "results/BENCHMARK.json",
+      "sha256": "c77c7e0cfa852cd8f630dbc6005397dd565e2e022fa06d39af823494ef4c66e4",
+      "size": 923
+    },
+    {
+      "path": "results/PILOT_Q0.json",
+      "sha256": "e5da8669b391d48fe6c1aa3c7572011a0a7f5fd40cf06e39b2c8abca9442adc7",
+      "size": 8421
+    },
+    {
+      "path": "results/PILOT_Q0_GAUSS2.json",
+      "sha256": "8722438c16f70c0e3eae885c7e3c0dcf7f5105433d072ad1ceb4e5f9ad837df7",
+      "size": 8420
+    },
+    {
+      "path": "results/SOURCE_CONVERGENCE.png",
+      "sha256": "9e67e02cff67660ee1aa308b6bae2552e15a14a95d20976cb00f92b60cdb1eb6",
+      "size": 60989
+    },
+    {
+      "path": "results/TEST_RECEIPT.log",
+      "sha256": "6080cc1b422fa95c8695536c156795d0fbedfbc112dd9220732b422f38d387af",
+      "size": 193
+    },
+    {
+      "path": "results/VALIDATION.json",
+      "sha256": "cf4755ddc3397736d1c7fcce296aaed46b460a5e66f543f7083756fde89912dd",
+      "size": 6257
+    },
+    {
+      "path": "src/benchmark.py",
+      "sha256": "4a92f0d1a95753bf70de326776d192d3ba25b12f4e60eae4da7256dadceb2c7b",
+      "size": 4301
+    },
+    {
+      "path": "src/plot_results.py",
+      "sha256": "cb5c4fedc3c334d8ed9f0fee536d77a5327c681eaeb8801d30285aefaa0181d9",
+      "size": 890
+    },
+    {
+      "path": "src/transport.py",
+      "sha256": "b04c75c9437d7925329a6eedb29a0fa341d31f049aece628bd3ff1a98cf6727c",
+      "size": 17054
+    },
+    {
+      "path": "src/validate.py",
+      "sha256": "b22b8f850f96b77bac42e44ee4f38790e72a4ef4499235c6f4f6cf14e1bedc52",
+      "size": 3637
+    },
+    {
+      "path": "tests/test_transport.py",
+      "sha256": "a4b721e64fe01d9c952632701ac94aeba385d78765bf93a665bd95dae4a756c8",
+      "size": 8254
+    }
+  ],
+  "cloud_backup_receipt": "POST_COMMIT_BACKUP_RECEIPT.json (separate future commit)"
+}

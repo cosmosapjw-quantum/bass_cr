@@ -1,0 +1,44 @@
+{
+ "schema":"CR_C13_FAILURE_LEDGER_V1",
+ "observed_and_closed":[
+  {
+   "type":"TEST_SOURCE_SYNTAX",
+   "mechanism":"Python test generated escaped Rust lifetime quotation incorrectly",
+   "effect":"Collection error before physics tests",
+   "fix":"Use double-quoted Python literal in Rust harness",
+   "retest":"All 19 C13 and 85 combined pytest cases passed",
+   "closed":true
+  },
+  {
+   "type":"RUST_EDITION_ENVIRONMENT",
+   "mechanism":"standalone rustc default edition did not resolve owner source Process enum imports",
+   "effect":"7 source-compiled rate parity tests initially failed to compile",
+   "fix":"Build standalone harness with rustc --edition=2021, unchanged original owner Rust source",
+   "retest":"7 sampled T rates matched the actual Rust coefficient source",
+   "closed":true
+  }
+ ],
+ "unresolved":[
+  {
+   "type":"NUMERICAL_TEMPORAL_ORDER",
+   "mechanism":"Coupled gas xHI/T approach across increasingly resolved birth and opacity steps exhibits first-order-like convergence, despite second-order source birth quadrature",
+   "consequence":"Do not promote C13 updater to production or assert global second-order accuracy",
+   "minimal_next_action":"Compare continuous in-step emission and fully coupled stiff ODE to isolate photo opacity/gas splitting and 5500K owner K2 discontinuity",
+   "gate":"SCIENTIFIC_HOLD"
+  },
+  {
+   "type":"PHYSICAL_THERMAL_CLOSURE",
+   "mechanism":"Case-A RR rate subset is owner-matched but free-electron escape thermal loss is a toy closure; full Grackle cooling, OTS and secondary ionization missing",
+   "consequence":"Gas temperature is a scenario diagnostic not physical reionization prediction",
+   "minimal_next_action":"Bind owner igm_thermal source and verify full heating/cooling plus radiation escape",
+   "gate":"PHYSICAL_HOLD"
+  },
+  {
+   "type":"TRANSPORT_SCOPE",
+   "mechanism":"Birth-direction photon number cohort, no canonical owner current-frame R*J flux mapping, no spatial ray tracing/actual source photon age stocks",
+   "consequence":"Cannot infer SOURCE07 C8 owner science admission or AX08 milestones",
+   "minimal_next_action":"Compare to actual owner age-resolved q transport at fixed supplied angular clock and gas",
+   "gate":"INTERFACE_HOLD"
+  }
+ ]
+}
