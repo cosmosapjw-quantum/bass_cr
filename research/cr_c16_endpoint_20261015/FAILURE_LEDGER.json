@@ -1,0 +1,37 @@
+{
+  "schema": "C16_SCIENCE_ERRORS_REPAIR_AND_SCOPE_V1",
+  "closed": [
+    {
+      "defect": "event-split temporal grid created an extra point but loop used original base n",
+      "impact": "last time interval omitted and false apparent first-order result",
+      "repair": "iterate len(xgrid)-1 and test actual_subintervals==base+one crossing",
+      "status": "FIXED_AND_REGRESSION_TESTED"
+    },
+    {
+      "defect": "naive smooth source-opacity interpolation straddled real HI 13.6eV sigma threshold",
+      "impact": "large irregular errors vs independent Radau",
+      "repair": "find root and partition time with one-sided Verner rates",
+      "status": "SCOPED_NUMERICALLY_CHECKED"
+    }
+  ],
+  "open": [
+    {
+      "defect": "fast endpoint approximation can deviate >100% on packets with strong threshold jump or lambda_end=0",
+      "impact": "not automatically suitable as physical production operator",
+      "next": "optical quadrature path with threshold partition and separate error gate",
+      "status": "HOLD_FAST_PRODUCTION"
+    },
+    {
+      "defect": "species-wise branching of photons under time-variable opacity is approximate",
+      "impact": "photon total conserved but H/He allocation global accuracy not independently proved",
+      "next": "integrate species reaction time-distribution and coupled chemistry",
+      "status": "OPEN"
+    },
+    {
+      "defect": "owner SOURCE07 age-tagged R J_Omega photon stock not connected",
+      "impact": "cannot infer actual H/He/Tg reionization history",
+      "next": "read owner transport runtime and bind physical photons with frame test",
+      "status": "HOLD"
+    }
+  ]
+}
