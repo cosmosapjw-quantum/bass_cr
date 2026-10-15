@@ -32,6 +32,15 @@ class OneElectronAOCC:
         self._index_by_atomic={int(a):i for i,a in enumerate(keep)}
         if 0 not in self._index_by_atomic: raise RuntimeError('ground state not retained')
         self.target_ground=self._index_by_atomic[0]
+        # Selection and eigenvector submatrices are time-independent.
+        self._block_specs=[]
+        for label in ('T','P'):
+            for g in self.groups:
+                selected=[(i,a-g['sl'].start) for i,(L,a) in enumerate(self.basis)
+                          if L==label and g['sl'].start<=a<g['sl'].stop]
+                if selected:
+                    rows,cols=map(list,zip(*selected))
+                    self._block_specs.append((label,rows,g,g['C'][:,cols]))
     def center(self,label,t): return np.zeros(3) if label=='T' else np.array([self.b,0.,self.v*t])
     def kvec(self,label): return np.zeros(3) if label=='T' else np.array([0.,0.,self.v])
     def velocity(self,label): return np.zeros(3) if label=='T' else np.array([0.,0.,self.v])
@@ -58,14 +67,9 @@ class OneElectronAOCC:
         # Evaluate each primitive shell pair once, then contract all retained states.
         # matrix_reference preserves the original per-state loop for parity tests.
         blocks=[]
-        for label in ('T','P'):
-            for g in self.groups:
-                selected=[(i,a-g['sl'].start) for i,(L,a) in enumerate(self.basis)
-                          if L==label and g['sl'].start<=a<g['sl'].stop]
-                if not selected: continue
-                rows,cols=map(list,zip(*selected))
-                sh=Shell(g['exps'],g['pow'],self.center(label,t),self.kvec(label))
-                blocks.append((label,rows,g['C'][:,cols],sh,self.phase(label,t)))
+        for label,rows,g,coeff in self._block_specs:
+            sh=Shell(g['exps'],g['pow'],self.center(label,t),self.kvec(label))
+            blocks.append((label,rows,coeff,sh,self.phase(label,t)))
         O=np.zeros((self.nb,self.nb),complex);H=np.zeros_like(O);D=np.zeros_like(O)
         projectile=self.center('P',t)
         for L,rows,ca,sha,pha in blocks:
