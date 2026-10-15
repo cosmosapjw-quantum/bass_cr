@@ -1,0 +1,37 @@
+{
+  "schema": "BASS_CR_C15_SPECIFIC_SCIENTIFIC_OBLIGATIONS_V1",
+  "resolved": [
+    {
+      "item": "midpoint-birth omission of continuously arriving source in high opacity",
+      "resolution": "C14 positive Duhamel applied with source number and gas predictor in C15",
+      "evidence": "VALIDATION.json local photon survivor comparison"
+    },
+    {
+      "item": "unnecessary zero-weight source packets",
+      "resolution": "exact-zero-only packet pruning; no numerical threshold",
+      "evidence": "matched output tests and benchmark"
+    }
+  ],
+  "open": [
+    {
+      "item": "last photon survivor has first-order-like grid convergence",
+      "evidence": "successive-grid slope approximately 0.98 to 1.00 even without RR",
+      "consequence": "do not claim uniformly second-order radiation stock",
+      "next_action": "endpoint-weighted positive nonautonomous source opacity quadrature; benchmark against independent variable-opacity integral"
+    },
+    {
+      "item": "owner 5500K recombination coefficient branch crossed in one strong-source gas history",
+      "evidence": "xHI grid slope degrades at n=128 to 256, compared to smooth below/above branch cases",
+      "consequence": "full thermal/ionization time gate HOLD",
+      "next_action": "isolate branch and integrate original full igm_thermal owner physics with discontinuity-aware timestepping"
+    },
+    {
+      "item": "real owner SOURCE07 ray/angle R J_Omega stock not ingested",
+      "evidence": "C15 reads pinned owner source spectrum and geometry but not canonical Rust spatial photon stocks",
+      "consequence": "not a reionization history or transport production solver",
+      "next_action": "derive explicit frame/clock/source packet adapter and test on owner transported-ray outputs"
+    }
+  ],
+  "native_subagent": "NOT_RUN_NO_DISPATCH",
+  "owner_repo_mutation": "NONE"
+}
