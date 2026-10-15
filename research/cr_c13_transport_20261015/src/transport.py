@@ -143,34 +143,55 @@ def alpha_owner_rr(T:float)->np.ndarray:
     return np.array([hrr,he2,he3])
 
 
-def recombine_case_a(g:Gas,delta_t:float,nH:float,nHe:float)->tuple[Gas,np.ndarray,float]:
-    """Exact frozen-electron-rate 3-state sequential helium recombination.
+def recombine_case_a(g:Gas,delta_t:float,nH:float,nHe:float,
+                     ne_method:str="frozen")->tuple[Gas,np.ndarray,float]:
+    """Positive exact-Markov H/He RR with selected electron-density time centering.
 
-    Recombination photons ESCAPE the tracked ionizing packet reservoir.
-    Thermal loss is electron translational energy ~3/2 kBT per
-    recombination event; explicitly a toy closure rather than the full
-    source Grackle recombination cooling coefficient.
+    The "frozen" option is the original C13 scheme. The "midpoint" option
+    solves a scalar implicit electron-density consistency condition. At a
+    given n_e midpoint, H/He are propagated by exactly the same matrix
+    exponential as C13; positivity and all stage ledgers are preserved.
+    nH, nHe and T are frozen at the OWNER segment midpoint. This addresses
+    *one* numerical defect only, not the entire cosmological time error.
     """
     if delta_t<=0:return g,np.zeros(3),0.
+    if ne_method not in ("frozen","midpoint"):
+        raise ValueError("unknown electron time-centering method")
     y=nHe/nH
-    ne=nH*g.electrons_per_h(y)
-    a=alpha_owner_rr(g.temp_K)*ne*delta_t
-    h_old=1.-g.xhi
-    h_new=h_old*np.exp(-a[0])
-    x1,x2,x3=g.xhei,g.xheii,g.xheiii
-    x3_new=x3*np.exp(-a[2])
-    if abs(a[1]-a[2])<1e-8:
-        x2_new=np.exp(-a[1])*(x2+a[2]*x3)
+    xe_start=g.electrons_per_h(y)
+    coeff=alpha_owner_rr(g.temp_K)*nH*delta_t
+
+    def propagate(xe:float)->Gas:
+        a=coeff*xe
+        hii0=1.-g.xhi
+        hii_end=hii0*np.exp(-a[0])
+        x1,x2,x3=g.xhei,g.xheii,g.xheiii
+        x3_end=x3*np.exp(-a[2])
+        if abs(a[1]-a[2])<1e-8:
+            x2_end=np.exp(-a[1])*(x2+a[2]*x3)
+        else:
+            x2_end=x2*np.exp(-a[1])+x3*a[2]*(
+                np.exp(-a[2])-np.exp(-a[1]))/(a[1]-a[2])
+        return Gas(1.-hii_end,1.-x2_end-x3_end,x2_end,x3_end,g.temp_K)
+
+    if ne_method=="frozen" or xe_start==0:
+        xe_effective=xe_start
     else:
-        x2_new=x2*np.exp(-a[1])+x3*a[2]*(
-            np.exp(-a[2])-np.exp(-a[1]))/(a[1]-a[2])
-    x1_new=1-x2_new-x3_new
-    events=np.array([h_old-h_new,y*(x1_new-x1),y*(x3-x3_new)])
+        # Electron abundance falls monotonically under pure Case-A RR,
+        # so x_e^mid = [x_e(initial)+x_e(final(x_e^mid))]/2 has a
+        # bracket [0,x_e(initial)]. Brent finds the unique physical
+        # branch without clamping any species or changing rates.
+        from scipy.optimize import brentq
+        xe_effective=brentq(
+            lambda x:x-.5*(xe_start+propagate(x).electrons_per_h(y)),
+            0.,xe_start,xtol=2e-14,rtol=9e-16)
+    updated=propagate(xe_effective)
+    events=np.array([(1.-g.xhi)-(1.-updated.xhi),
+                     y*(updated.xhei-g.xhei),
+                     y*(g.xheiii-updated.xheiii)])
     if np.any(events<-2e-13):
         raise AssertionError("negative recombination events")
     events=np.maximum(events,0.)
-    updated=Gas(1-h_new,x1_new,x2_new,x3_new,g.temp_K)
-    # If T stays constant, removed free electron heat must escape.
     thermal_escape=1.5*K_B_EV_PER_K*g.temp_K*float(np.sum(events))
     old_u=g.thermal_energy_ev_per_h(y)
     new_u=updated.thermal_energy_ev_per_h(y)
@@ -207,7 +228,7 @@ def vector_photo_reactions(photons:np.ndarray, energy_eV:np.ndarray,
 
 def segment(ns:dict,stock:PhotonStock,gas:Gas,
             a0:float,a1:float,q:float,
-            recombination:bool,ledger:dict)->Gas:
+            recombination:bool,ledger:dict,rr_ne_method:str="frozen")->Gas:
     """Advance existing photon packets through one *half* epoch substep."""
     model=ns["model"]
     mid=math.sqrt(a0*a1)
@@ -240,7 +261,7 @@ def segment(ns:dict,stock:PhotonStock,gas:Gas,
     gas=gas_adiabatic(gas,a0,mid)
     redshift(mid)
     if recombination:
-        gas,recs,therm=recombine_case_a(gas,dt/2,nH,nHe)
+        gas,recs,therm=recombine_case_a(gas,dt/2,nH,nHe,ne_method=rr_ne_method)
         ledger["recomb_events_per_H"]+=recs
         ledger["recomb_thermal_escape_eV_per_H"]+=therm
 
@@ -263,7 +284,7 @@ def segment(ns:dict,stock:PhotonStock,gas:Gas,
         ledger["photo_heat_eV_per_H"]+=heats
 
     if recombination:
-        gas,recs,therm=recombine_case_a(gas,dt/2,nH,nHe)
+        gas,recs,therm=recombine_case_a(gas,dt/2,nH,nHe,ne_method=rr_ne_method)
         ledger["recomb_events_per_H"]+=recs
         ledger["recomb_thermal_escape_eV_per_H"]+=therm
     redshift(a1)
@@ -274,13 +295,15 @@ def segment(ns:dict,stock:PhotonStock,gas:Gas,
 def integrate(ns:dict,q:float,nstep:int=32,a0:float=.1,a1:float=.11,
               gas0:Gas|None=None,recombination:bool=True,
               nmu:int=8,ne:int=8,source_scale:float=1.,
-              source_rule:str="midpoint") -> dict:
+              source_rule:str="midpoint",rr_ne_method:str="frozen") -> dict:
     """Age-resolved injection and transport using the exact owner source curve."""
     if gas0 is None:gas0=Gas(.9,.85,.15,0.,4000.)
     if nstep<2 or not (0<a0<a1<=.2) or source_scale<0:
         raise ValueError("invalid time/source domain")
     if source_rule not in {"midpoint","gauss2"}:
         raise ValueError("source_rule must be midpoint or gauss2")
+    if rr_ne_method not in {"frozen","midpoint"}:
+        raise ValueError("rr_ne_method must be frozen or midpoint")
     model=ns["model"]
     stock=PhotonStock.empty()
     gas=gas0
@@ -309,16 +332,20 @@ def integrate(ns:dict,q:float,nstep:int=32,a0:float=.1,a1:float=.11,
         last=astart
         for xn,wn in zip(emission_x,emission_w):
             birth=np.exp(.5*(xi[i]+xi[i+1])+.5*(xi[i+1]-xi[i])*xn)
-            gas=segment(ns,stock,gas,last,birth,q,recombination,ledger)
+            gas=segment(ns,stock,gas,last,birth,q,recombination,ledger,rr_ne_method)
             source_count=source_scale*.5*(xi[i+1]-xi[i])*wn*(
                     model.rate(birth)/model.hubble(birth,q))
-            cohort=make_birth_cohort(ns,birth,q,source_count,nmu,ne)
-            stock.append(cohort)
-            ledger["source_emitted_photons_per_H"]+=source_count
-            ledger["source_emitted_energy_eV_per_H"]+=float(
-                np.dot(cohort.photons_per_H,cohort.birth_energy_eV))
+            # No source implies no emitted photon cohort. Avoid building
+            # zero-mass source packets that would otherwise consume O(Nstep)
+            # memory and O(Nstep^2) work across pure-recombination tests.
+            if source_count:
+                cohort=make_birth_cohort(ns,birth,q,source_count,nmu,ne)
+                stock.append(cohort)
+                ledger["source_emitted_photons_per_H"]+=source_count
+                ledger["source_emitted_energy_eV_per_H"]+=float(
+                    np.dot(cohort.photons_per_H,cohort.birth_energy_eV))
             last=birth
-        gas=segment(ns,stock,gas,last,aend,q,recombination,ledger)
+        gas=segment(ns,stock,gas,last,aend,q,recombination,ledger,rr_ne_method)
         history.append((aend,gas.xhi,gas.xhei,gas.xheii,gas.xheiii,gas.temp_K,
                         float(sum(stock.photons_per_H))))
     nfinal=float(np.sum(stock.photons_per_H))
@@ -343,6 +370,7 @@ def integrate(ns:dict,q:float,nstep:int=32,a0:float=.1,a1:float=.11,
        "q":q,"nsteps":nstep,"a0":a0,"a1":a1,
        "source_scale":source_scale,"recombination":recombination,
        "source_quadrature":source_rule,
+       "recombination_electron_centering":rr_ne_method,
        "gas_initial":gas0.__dict__.copy(),"gas_final":gas.__dict__.copy(),
        "output_photon_packets":stock.count,
        "packet_memory_bytes":stock.byte_count(),
@@ -381,10 +409,12 @@ if __name__=="__main__":
     parser.add_argument("--a1",type=float,default=.11)
     parser.add_argument("--no-recomb",action="store_true")
     parser.add_argument("--source-rule",choices=("midpoint","gauss2"),default="midpoint")
+    parser.add_argument("--rr-ne",choices=("frozen","midpoint"),default="frozen")
     args=parser.parse_args()
     ns=owner_namespace(args.owner)
     result=integrate(ns,args.q,args.nsteps,args.a0,args.a1,
-                     recombination=not args.no_recomb,source_rule=args.source_rule)
+                     recombination=not args.no_recomb,source_rule=args.source_rule,
+                     rr_ne_method=args.rr_ne)
     args.out.parent.mkdir(exist_ok=True,parents=True)
     args.out.write_text(json.dumps(result,indent=2)+"\n")
     print(json.dumps({
