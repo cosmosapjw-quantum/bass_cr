@@ -73,7 +73,7 @@ class OneElectronAOCC:
                 ph=np.conj(pha)*phb
                 S0=ca.T@overlap(sha,shb)@cb
                 H0=ca.T@(kinetic(sha,shb)+nuclear(sha,shb,[0,0,0])+nuclear(sha,shb,projectile))@cb
-                D0=ca.T@moving_ket_overlap(sha,shb,self.velocity(R))@cb
+                D0=(ca.T@moving_ket_overlap(sha,shb,self.velocity(R))@cb) if R=='P' else np.zeros_like(S0)
                 if R=='P': D0+=(-0.5j*self.v*self.v)*S0
                 ix=np.ix_(rows,cols)
                 O[ix]=ph*S0;H[ix]=ph*H0;D[ix]=ph*D0
