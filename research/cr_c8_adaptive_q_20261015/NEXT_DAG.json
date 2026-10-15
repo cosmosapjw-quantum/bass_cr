@@ -1,0 +1,75 @@
+{
+  "schema": "bass_cr.adaptive_q_shape_envelope.next.v1",
+  "date_kst": "2026-10-15",
+  "parent_pr": 70,
+  "parent_head": "6898f3dd0ab5acff066fb0239339ec44c8d70398",
+  "selected_node": "CR_ADAPTIVE_Q_GRID_FROM_ENVELOPE_WIDTH",
+  "nodes": [
+    {
+      "id": "CR_ADAPTIVE_Q_GRID_FROM_ENVELOPE_WIDTH",
+      "status": "IMPLEMENTED_SCOPED_AND_VALIDATED",
+      "source": "src/adaptive_q.py",
+      "gate": "only genuine packet oracle or recorded true child moments, conditioned one frozen gas/clock"
+    },
+    {
+      "id": "CR_HEI_PRIORITY_REFINEMENT",
+      "status": "PASS_SCOPED_128_BINS",
+      "numbers": "SOURCE_HEI_FOCUSED.json, source width 5.487881294736694e-11 count/H vs target 1e-10"
+    },
+    {
+      "id": "CR_TWO_AGE_HARDENED_ORACLE",
+      "status": "PASS_SCOPED",
+      "numbers": "HARDENED_HEI_FOCUSED.json, adaptive96 width 3.505860277307208e-11 vs uniform96 7.320522708019616e-11"
+    },
+    {
+      "id": "CR_PACKET_PREFIX_OPT",
+      "status": "BENCHMARKED",
+      "numbers": "PREFIX_BENCHMARK.json; 150 exact Fraction moment queries, not full solver"
+    },
+    {
+      "id": "CR_Q_RAY_PROCESS_PARALLEL",
+      "status": "BENCHMARKED_COLD",
+      "numbers": "PARALLEL_BENCHMARK.json; identical output; cache cleared before jobs"
+    },
+    {
+      "id": "REI_SOURCE07_C8_TRUE_CHILD_MOMENT_OWNER_INTAKE",
+      "status": "READY_FOR_SCOPED_OWNER_REVIEW",
+      "scope": "source/age oracle required, no parent N/U reclosure, q direction-age-clock owner"
+    },
+    {
+      "id": "REI_C8_FULL_EVOLVING_GAS",
+      "status": "OWNER_PENDING",
+      "reason": "true source history source Jacobian, time-varying gas/Tgas coupling and bounded shape memory not executed here"
+    },
+    {
+      "id": "BASS_CR_LANDAU_FINE_ADJOINT",
+      "status": "UNCHANGED_PENDING_SEPARATE_LANE"
+    }
+  ],
+  "locks": {
+    "source_id": "MD14_Z002_FESC_BB50K_13P6_100_V1_NATIVE48",
+    "R_Jacobian": "OWNED_BY_REI",
+    "proper_time": "seconds",
+    "photo_fit_eV": [
+      13.6,
+      24.59,
+      54.42
+    ],
+    "binding_eV": [
+      13.598434599702,
+      24.587389011,
+      54.41776
+    ],
+    "normal_signature": "(-+++)",
+    "CR_RCT_HH": "OFF"
+  },
+  "provenance": {
+    "parent_math": "moment_envelopes.py PR70 original hash preserved",
+    "science": "exact dyadic oracle with conditional original outer interval bound",
+    "numerical": "binary64 source sample plus Fraction sums, original Decimal/mp.iv outer template",
+    "full_EoR_accuracy": null,
+    "native_subagents": "NOT_RUN",
+    "codex": "NOT_USED"
+  },
+  "next_task": "Integrate verified owner C8 age/subband moments rather than manufactured oracle; source-specific matched q-boundary refinement pilot then short changing proper gas/Tg and system error budget. No owner old-run/checkpoint overwrite."
+}
