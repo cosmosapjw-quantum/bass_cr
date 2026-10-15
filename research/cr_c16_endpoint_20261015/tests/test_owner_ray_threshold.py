@@ -1,11 +1,13 @@
 """Actual pinned owner Verner threshold-crossing regression against Radau."""
 from pathlib import Path
+import os
 import numpy as np
 import pytest
 from owner_age_bridge import owner_namespace,source_identity
 from owner_ray_benchmark import experiment
 
-ROOT=Path("/home/cosmosapjw/Dropbox/bianchi/rei_bianchi")
+ROOT=Path(os.environ.get("REI_BIANCHI_ROOT",
+                         "/home/cosmosapjw/Dropbox/bianchi/rei_bianchi"))
 
 
 def test_HI_14eV_threshold_has_exact_FLRW_crossing_and_extra_interval():
