@@ -1,0 +1,13 @@
+{
+ "schema":"C21D_FIRST_MATERIAL_FAILURE_V1",
+ "phase":"C5 before tracked final version",
+ "observed":"C21D_COUPLED_NONLINEAR_HOLD",
+ "raw_event_residual_per_H":7.08099778679683e-10,
+ "observed_optimizer_termination":"gtol satisfied without physical event gate",
+ "original_optimizer_u":[0.000868049738,0.00697351673,3.98673453e-8],
+ "op_id":"source-on three-ion photo endpoint root; one inactive HeII photo support channel",
+ "cause":"Structurally no occupied photon can ionize HeII at this slab. Lower-bounded optimizer approaches but does not exactly represent zero channel, causing false residual despite gradient stopping.",
+ "repair":"Omit channels with all occupied photon hazard coefficients identically zero; reconstruct their event unknown as exact zero. Keep original solver residual acceptance and reject nonconverged results.",
+ "verification":"32 C21D tests pass; inactive channel exact zero under both BE and EXP; physical event conservation and independent Radau checks pass.",
+ "claim":"This is a mathematical solver implementation defect, not evidence of original native owner defect."
+}
