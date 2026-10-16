@@ -1,4 +1,4 @@
-"""C21D same-IC photo-only, source-age-positive ENDPOINT-BE and frozen-end exponential controls.
+"""C21D same-IC photo-only, source-age-positive ENDPOINT-BE, frozen-end exponential, and midpoint-exposure exponential controls.
 
 Research-only mathematical alternatives to native PreparedAbsorption; the compiled
 owner is neither invoked nor claimed equivalent. Provenance: pinned C21C original
@@ -76,14 +76,14 @@ def one_absorber_endpoint(photon:float, absorber:float, kdt:float,
 
 def evaluate_frozen_endpoint(photons:np.ndarray, atom0:np.ndarray,
                              k:np.ndarray, dt:float,
-                             mode:Literal['BE','EXP']):
+                             mode:Literal['BE','EXP','MIDEXP']):
     """Coupled nonlinear endpoint absorber root and exact per-event gas mapping.
 
     5 atom states: HI,HII,HeI,HeII,HeIII. k[r,j] in per-total-H photon
     hazard coefficient (s^-1) per unit absorber_j. The total photon absorption
     for a photo channel is allocated as competing risks, not two photons.
     """
-    if mode not in ('BE','EXP') or dt<=0 or not math.isfinite(dt):raise ValueError('mode/dt')
+    if mode not in ('BE','EXP','MIDEXP') or dt<=0 or not math.isfinite(dt):raise ValueError('mode/dt')
     photons=np.asarray(photons,dtype=float);atom0=np.asarray(atom0,dtype=float)
     k=np.asarray(k,dtype=float)
     if photons.ndim!=1 or atom0.shape!=(5,) or k.shape!=(len(photons),3):raise ValueError('shape')
@@ -106,9 +106,13 @@ def evaluate_frozen_endpoint(photons:np.ndarray, atom0:np.ndarray,
             np1=photons/(1+tau)
             species=dt*(np1[:,None]*k)*a[None,:]
         else:
+            # MIDEXP uses a *physical time* midpoint absorber exposure
+            # approximation, not the Strang pseudo-time subreaction exposure.
+            aa=.5*(atom0[[0,2,3]]+a) if mode=='MIDEXP' else a
+            tau=dt*(k@aa)
             loss=photons*(-np.expm1(-tau))
-            weights=np.divide(k*a[None,:], (k@a)[:,None],
-                              out=np.zeros_like(k),where=(k@a)[:,None]>0)
+            weights=np.divide(k*aa[None,:], (k@aa)[:,None],
+                              out=np.zeros_like(k),where=(k@aa)[:,None]>0)
             species=loss[:,None]*weights
             np1=photons-loss
         return ev, a, np1, species
@@ -189,7 +193,7 @@ def _stage(s:State,end_x:float,cohorts:tuple[Cohort,...],opacity_scale:float,mod
     _state_validation(s)
 
 
-def run_common_ic(mode:Literal['BE','EXP'],steps_per_birth:int,
+def run_common_ic(mode:Literal['BE','EXP','MIDEXP'],steps_per_birth:int,
                   x0=math.log(1/12),dx=.025,opacity_scale=.001):
     """Same IC, source impulses, q, true cutoff and FLRW background as C21C Radau."""
     if steps_per_birth<1 or steps_per_birth>MAX_HARD_STEPS or not (0<dx<.1) or opacity_scale<0:
@@ -246,7 +250,7 @@ def compare_grid(ns=(2,4,8,16,32,64),dx=.025,opacity_scale=.001):
     j=len(ref.cohorts)
     truth=np.r_[ref.yfinal[:j],ref.yfinal[j:j+5],ref.yfinal[j+5]]
     data=[]
-    for mode in ['BE','EXP']:
+    for mode in ['BE','EXP','MIDEXP']:
         cases=[]
         for n in ns:
             v=run_common_ic(mode,n,dx=dx,opacity_scale=opacity_scale)
@@ -256,7 +260,7 @@ def compare_grid(ns=(2,4,8,16,32,64),dx=.025,opacity_scale=.001):
         for a,b in zip(cases,cases[1:]):
             a['next_error_order']=math.log(a['state_max_abs_error_vs_radau']/b['state_max_abs_error_vs_radau'],2)
         data.append(dict(mode=mode,cases=cases))
-    return dict(schema='C21D_SAME_IC_THREE_LANES_PHOTO_ONLY_V1',
+    return dict(schema='C21D_SAME_IC_RAD_AU_BE_END_EXP_MID_EXP_V2',
                 ref=dict(source_n=ref.source_n,source_u=ref.source_u,events=ref.endpoint_rates.events_H,
                          exposure=ref.exposures,endpoint_rate=ref.endpoint_rates.gamma_endpoint_s,
                          exposure_rate=ref.endpoint_rates.gamma_exposure_s,
