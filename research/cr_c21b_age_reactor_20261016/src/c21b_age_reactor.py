@@ -313,24 +313,35 @@ class PhotonReactor:
             s.source_u+=n*e
 
     def advance(self,s:State,end_x:float,nsteps:int,source_on=True,split_thresholds=True)->State:
+        """Atomic state transition: a failed step never changes caller state.
+
+        Retain the original caller-owned packet list and ledgers until the entire
+        finite block validates. The reactor's birth counter is restored on error.
+        """
         if not isinstance(nsteps,int) or not 1<=nsteps<=1024:
             raise ValueError("bad nsteps")
         if not math.isfinite(end_x) or end_x<=s.x:raise ValueError("end epoch")
-        initial_x=s.x
-        for step in range(nsteps):
-            x0=initial_x+(end_x-initial_x)*step/nsteps
-            x1=initial_x+(end_x-initial_x)*(step+1)/nsteps
-            if abs(s.x-x0)>3e-12:raise RuntimeError("step alignment")
-            if source_on:
-                mid=(x0+x1)/2
-                half=(x1-x0)/2
-                left=mid-half/math.sqrt(3)
-                right=mid+half/math.sqrt(3)
-                for xb in (left,right):
-                    self._segment(s,s.x,xb,split_thresholds)
-                    self._birth(s,xb,half)
-                self._segment(s,s.x,x1,split_thresholds)
-            else:
-                self._segment(s,s.x,x1,split_thresholds)
-        s.validation()
-        return s
+        start_x=s.x
+        trial=s.clone()
+        old_serial=self._serial
+        try:
+            for step in range(nsteps):
+                x0=start_x+(end_x-start_x)*step/nsteps
+                x1=start_x+(end_x-start_x)*(step+1)/nsteps
+                if abs(trial.x-x0)>3e-12:raise RuntimeError("step alignment")
+                if source_on:
+                    mid=(x0+x1)/2
+                    half=(x1-x0)/2
+                    left=mid-half/math.sqrt(3)
+                    right=mid+half/math.sqrt(3)
+                    for xb in (left,right):
+                        self._segment(trial,trial.x,xb,split_thresholds)
+                        self._birth(trial,xb,half)
+                    self._segment(trial,trial.x,x1,split_thresholds)
+                else:
+                    self._segment(trial,trial.x,x1,split_thresholds)
+            trial.validation()
+        except Exception:
+            self._serial=old_serial
+            raise
+        return trial
