@@ -192,3 +192,35 @@ def test_invalid_time_and_state_rejection():
     with pytest.raises(ValueError):r.advance(s,x+.01,0)
     with pytest.raises(ValueError):initial_state(x,fractions=(.1,.8,.5))
     with pytest.raises(ValueError):md14_rate_per_total_h_s(math.log(1/3))
+
+
+def test_transaction_isolation_and_checkpoint_reuse():
+    x=math.log(1/12)
+    source=initial_state(x,8500.,(.2,.2,.01),((60.,.001),))
+    before=source.clone()
+    r=PhotonReactor(energy_nodes=1,opacity_scale=.01)
+    evolved=r.advance(source,x+.001,4,source_on=True)
+    assert evolved.x>source.x
+    assert source.x==before.x
+    assert source.atoms==before.atoms
+    assert source.thermal_ev==before.thermal_ev
+    assert source.number_photons()==before.number_photons()
+    assert source.source_n==0.0
+    assert_closure(evolved)
+
+
+def test_invalid_late_source_rollback_and_birth_counter():
+    x=math.log(1/12)
+    attempts=[0]
+    def failure_source(t):
+        attempts[0]+=1
+        if attempts[0]>=3:raise RuntimeError('manufactured late source defect')
+        return 2e-17
+    r=PhotonReactor(energy_nodes=1,source=failure_source)
+    old=initial_state(x)
+    for k in range(2):
+        if k==1:attempts[0]=0
+        with pytest.raises(RuntimeError,match='late source defect'):
+            r.advance(old,x+.01,4,source_on=True)
+        assert old.x==x and len(old.photons)==0 and old.source_n==0
+        assert r._serial==0
