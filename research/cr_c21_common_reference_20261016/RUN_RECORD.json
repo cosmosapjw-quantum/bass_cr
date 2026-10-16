@@ -1,0 +1,36 @@
+{
+  "schema": "C21_SANDBOX_RESEARCH_RUN_V1",
+  "date_kst": "2026-10-16",
+  "execution_platform": "ChatGPT sandbox (not user Ubuntu/NCP)",
+  "base_science": "bass_cr C20 PR74 caf587b3edf4e27d038c6a918419be498d7d389c; rei_bianchi PR150 head 4e2f0682fb605c6aa940bd756d9869e67b6ded0b",
+  "selection": "R5/R7 and C5/C6/C7/C8, with source reading and finite documentation",
+  "python_test": {
+    "command": "PYTHONPATH=. OPENBLAS_NUM_THREADS=1 python -m pytest -q -p no:cacheprovider tests",
+    "result": "PASS_21_OF_21",
+    "path": "evidence/TEST_PASS.log",
+    "environment": "Python 3.13, NumPy 2.3.5, SciPy 1.17.0, pytest 9.0.2"
+  },
+  "wolfram_symbolic": {
+    "status": "PASS_4_OF_4",
+    "residuals": [0,0,0,0],
+    "scope": "q physical/ref map, energy moment map, frozen E^-3 opacity, conservation of attenuation",
+    "xAct": "NOT_RUN"
+  },
+  "first_numeric_defect": {
+    "status": "RESOLVED_WITH_CONSTRUCTIVE_VARIABLE_CHANGE",
+    "first_measured_stiff_source_GL2_ledger_residual_eV_per_H": 3.1395549588128516e-12,
+    "repaired_GL2_ledger_residual_eV_per_H": -3.2582354153504877e-16,
+    "correction": "positive cumulative optical-depth u integration replaces inaccurate direct-x boundary-layer quadrature; no tolerance widening"
+  },
+  "science_admission": {
+    "common_q_adapter": "DERIVED_SCOPED_FLRW",
+    "verner_source_shape_bias": "MEASURED_INSTANTANEOUS_SOURCE_ONLY",
+    "analytic_Eminus3_toy": "NUMERICALLY_CHECKED_AGAINST_INDEPENDENT_RADAU",
+    "C21_live_native_recombination": "NOT_RUN",
+    "C21_full_EOR": "HOLD"
+  },
+  "native_subagent": "NOT_RUN_NO_NATIVE_DISPATCH_TOOLS",
+  "local_Codex": "NOT_USED",
+  "NCP_external_execution_this_unit": "NOT_RUN",
+  "requires_actual_C21_807a_owner_read": true
+}
