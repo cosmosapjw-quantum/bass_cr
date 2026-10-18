@@ -25,7 +25,7 @@ fn prepared_point(fields: &[&str]) -> Result<String, String> {
     let prepared=d.transport.prepare(&state,&geom).map_err(|e|format!("DOMAIN {e:?}"))?;
     let nh=nh0/a.powi(3);let nhe=nhe0/a.powi(3);
     let absorbers=[nh*(1.0-x),nhe*(1.0-y-z),nhe*y];
-    let out=prepared.evaluate_for_cell_count(d.transport.cell_count(),absorbers,nh,dt).map_err(|e|format!("DOMAIN {e:?}"))?;
+    let out=prepared.evaluate(absorbers,nh,dt).map_err(|e|format!("DOMAIN {e:?}"))?;
     let (n1,u1)=d.transport.inventory(&out.state,&geom).map_err(|e|format!("DOMAIN {e:?}"))?;
     let mut vals=vec![n1,u1];
     for i in 0..3 {vals.push(out.photo.gamma_s[i]*absorbers[i]/nh*dt);}

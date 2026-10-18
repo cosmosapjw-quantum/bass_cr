@@ -197,7 +197,7 @@ def run_history(f:Fixture,subdivisions:int,provider,mode='FULLMID',output:Path|N
     return result
 
 
-def run_reference(f:Fixture,provider,rtol=2e-10,atol=2e-13,max_cohorts=128):
+def _run_reference_population(f:Fixture,provider,rtol=2e-10,atol=2e-13,max_cohorts=128):
     """Independent Radau continuous photon+gas ODE; not discrete-event solver."""
     f.validate();M=len(f.q)
     if M>max_cohorts:raise DomainError('RADAU_DENSE_COHORT_BUDGET')
@@ -236,6 +236,18 @@ def run_reference(f:Fixture,provider,rtol=2e-10,atol=2e-13,max_cohorts=128):
     result.update(schema='C21E_CONTINUOUS_RADAU_REFERENCE_V1',fixture_sha256=f.digest,microphysics=provider.kind,nfev=nfev,wall_s=time.monotonic()-start,
                   status='PASS_SCOPED_CONTINUOUS_IVP',independence='Independent time integration and continuous photo RHS; identical microphysics kernel')
     return result
+
+
+
+def run_reference(f:Fixture,provider,rtol=2e-10,atol=2e-13,max_cohorts=128,coordinates='optical-depth'):
+    """Selectable mathematically equivalent reference; no silent fallback."""
+    if coordinates=='population':
+        result=_run_reference_population(f,provider,rtol,atol,max_cohorts)
+        result['reference_coordinates']='population'
+        return result
+    if coordinates!='optical-depth':raise DomainError('REFERENCE_COORDINATE_SELECTION')
+    from reference_tau import run_reference_tau
+    return run_reference_tau(f,provider,rtol,atol,max_cohorts)
 
 
 def native_point_parity(binary:Path,f:Fixture,output:Path):
@@ -278,6 +290,7 @@ def main():
     p.add_argument('--steps',type=int,nargs='+',default=[8,16,32,64])
     p.add_argument('--modes',nargs='+',choices=list(MODES),default=list(MODES))
     p.add_argument('--no-reference',action='store_true');p.add_argument('--cpu',type=int)
+    p.add_argument('--reference-coordinates',choices=['optical-depth','population'],default='optical-depth')
     p.add_argument('--max-native-calls',type=int,default=20000);p.add_argument('--call-timeout',type=float,default=15.)
     args=p.parse_args()
     if args.micro=='native' and (args.native is None or not args.native.is_file()):p.error('--micro native requires compiled --native')
@@ -301,7 +314,7 @@ def main():
         reference=None;rows=[]
         if not args.no_reference:
             micro=provider(args.out/'reference_process')
-            try:reference=run_reference(f,micro)
+            try:reference=run_reference(f,micro,coordinates=args.reference_coordinates)
             finally:
                 if isinstance(micro,NativeMicro):micro.close()
             write_json(args.out/'radau.json',reference)
