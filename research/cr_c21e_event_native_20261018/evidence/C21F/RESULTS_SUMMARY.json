@@ -1,0 +1,140 @@
+{
+  "schema": "C21F_FRESH_COORDINATE_RESULTS_V1",
+  "date": "2026-10-18",
+  "parent_code": "1ee8cb5a3377381de35b6b9a0e3b8dc1cfb12f41",
+  "native_run": false,
+  "tests": 56,
+  "cases": [
+    {
+      "fixture_sha256": "befb0c8a7a113ff0efccc450af05b1157592a8d91cc7e994cfdfd2768905cc65",
+      "a0": 0.09,
+      "dx": 0.0001,
+      "opacity_scale": 0.001,
+      "runs": {
+        "population": {
+          "status": "SUCCESS",
+          "energy_defect_eV_H": 5.755698990876114e-16,
+          "number_defect_H": -6.071532165918825e-18,
+          "min_photons_H": 5.6781981146958255e-06,
+          "max_optical_depth": -1,
+          "underflowed_cohorts": 0,
+          "nfev": 174
+        },
+        "tau": {
+          "status": "SUCCESS",
+          "energy_defect_eV_H": 1.2105464539309031e-15,
+          "number_defect_H": 3.0357660829594124e-18,
+          "min_photons_H": 5.6781981146958205e-06,
+          "max_optical_depth": 0.08366135721375105,
+          "underflowed_cohorts": 0,
+          "nfev": 191
+        },
+        "tau_tight": {
+          "status": "SUCCESS",
+          "energy_defect_eV_H": 1.2209141372052958e-15,
+          "number_defect_H": 3.0357660829594124e-18,
+          "min_photons_H": 5.6781981146958205e-06,
+          "max_optical_depth": 0.08366135721375108,
+          "underflowed_cohorts": 0,
+          "nfev": 253
+        }
+      },
+      "tight_tolerance_difference": {
+        "max_fraction": 1.734723475976807e-18,
+        "thermal_eV_H": 0.0,
+        "temperature_K": 0.0,
+        "max_photon_H": 0.0
+      }
+    },
+    {
+      "fixture_sha256": "e135c56090998b37e00319dd5bf9f6b2b45d042f18b34b71fcf9fcbae2a358a9",
+      "a0": 0.09,
+      "dx": 0.0001,
+      "opacity_scale": 1.0,
+      "runs": {
+        "population": {
+          "status": "FAILURE",
+          "error": "RADAU_INTERNAL_NEGATIVE_PHOTON",
+          "type": "DomainError"
+        },
+        "tau": {
+          "status": "SUCCESS",
+          "energy_defect_eV_H": -9.671419091609014e-13,
+          "number_defect_H": 5.727363028285026e-14,
+          "min_photons_H": 6.503015836519248e-38,
+          "max_optical_depth": 81.3572695402592,
+          "underflowed_cohorts": 0,
+          "nfev": 3072
+        },
+        "tau_tight": {
+          "status": "SUCCESS",
+          "energy_defect_eV_H": -4.57619036523145e-15,
+          "number_defect_H": 2.498001805406602e-16,
+          "min_photons_H": 6.503015836535421e-38,
+          "max_optical_depth": 81.35726954025671,
+          "underflowed_cohorts": 0,
+          "nfev": 9508
+        }
+      },
+      "tight_tolerance_difference": {
+        "max_fraction": 5.4262150328554526e-14,
+        "thermal_eV_H": 1.4788170688007085e-13,
+        "temperature_K": 4.2382453102618456e-10,
+        "max_photon_H": 1.0598076236045806e-17
+      }
+    },
+    {
+      "fixture_sha256": "763985a523a94015325a7da6a9bbc1009ff0acd5178fa28da4f42a79e3d7a1b9",
+      "a0": 0.09,
+      "dx": 0.001,
+      "opacity_scale": 1.0,
+      "runs": {
+        "population": {
+          "status": "FAILURE",
+          "error": "RADAU_INTERNAL_NEGATIVE_PHOTON",
+          "type": "DomainError"
+        },
+        "tau": {
+          "status": "SUCCESS",
+          "energy_defect_eV_H": -4.572445657982627e-12,
+          "number_defect_H": 1.3904849494039695e-13,
+          "min_photons_H": 0.0,
+          "max_optical_depth": 812.7417072751642,
+          "underflowed_cohorts": 1,
+          "nfev": 5309
+        },
+        "tau_tight": {
+          "status": "SUCCESS",
+          "energy_defect_eV_H": -1.1514703104312414e-14,
+          "number_defect_H": -7.632783294297951e-17,
+          "min_photons_H": 0.0,
+          "max_optical_depth": 812.7417072751064,
+          "underflowed_cohorts": 1,
+          "nfev": 16427
+        }
+      },
+      "tight_tolerance_difference": {
+        "max_fraction": 3.2729374765949615e-13,
+        "thermal_eV_H": 1.991518061572606e-12,
+        "temperature_K": 1.0528310667723417e-08,
+        "max_photon_H": 4.660004698878737e-20
+      }
+    }
+  ],
+  "pipeline": [
+    {
+      "subdivisions_per_event_interval": 8,
+      "normalized_state_error": 4.430678209772886e-05,
+      "temperature_K": 10192.314323278097,
+      "energy_defect_eV_H": 1.1959308157227354e-14,
+      "number_defect_H": -6.938893903907228e-18
+    },
+    {
+      "subdivisions_per_event_interval": 16,
+      "normalized_state_error": 1.1908171711298204e-05,
+      "temperature_K": 10192.045856976378,
+      "energy_defect_eV_H": 4.251757857598329e-14,
+      "number_defect_H": 0.0
+    }
+  ]
+}
