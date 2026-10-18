@@ -242,7 +242,7 @@ def native_point_parity(binary:Path,f:Fixture,output:Path):
     """Actual PreparedAbsorption delta-point identity, NOT full driver parity."""
     from native_micro import OWNER
     a=1./21.;g=np.asarray(f.gas0);dt=1e9
-    Evals=(13.59,13.60,24.58,24.59,54.41,54.42,80.)
+    Evals=(13.60,13.61,24.58,24.59,54.41,54.42,80.)
     args=[];expected=[]
     for E in Evals:
         args.append('ABSORB\t'+'\t'.join(format(float(x),'.17e') for x in (a,dt,f.nh0,f.nh0*f.Y,*g[:3],E,1e-5)))
