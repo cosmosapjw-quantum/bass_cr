@@ -1,0 +1,28 @@
+{
+  "schema":"C21E_SCOPED_MANUFACTURED_RESULT_V1",
+  "date":"2026-10-18",
+  "source_commit":"22623f990f781668dd30dc1a5ea4ac59214cfd0a",
+  "fixture_sha256":"4ed2272547654852408ffbd5151c154e027067afcb8dd447c543575f71608c0f",
+  "cases":12,
+  "microphysics":"MANUFACTURED_CONSERVATIVE_MICRO_NOT_GRACKLE",
+  "source":"fixed two GL2 birth times; manufactured three-energy spectrum; original MD14 rate clock and Verner fits",
+  "tests":{"passed":43,"command":"PYTHONPATH=src python -m pytest -q tests -p no:cacheprovider","wall_s":7.53,"runtime":"Python3.13.5 NumPy2.3.5 SciPy1.17.0 pytest9.0.2"},
+  "subdivisions":[8,16,32,64],
+  "thermal_abs_error_eV_H":{
+    "BE":[0.00045110236840861795,0.0002276519649133668,0.00011436271514009277,0.00005731703422529044],
+    "MIDPHOTO_ENDMICRO":[0.0000034246286244599133,0.0000017687463678139892,0.0000008984907253761776,0.00000045277562166212704],
+    "FULLMID":[0.00000022690569467798127,0.00000005673835556940787,0.000000014185331353999686,0.0000000035463669778579288]
+  },
+  "normalized_state_orders":{
+    "BE":[0.9866249489897706,0.9932131344204721,0.9965809104174903],
+    "MIDPHOTO_ENDMICRO":[0.9532203616729603,0.9771516685398701,0.9887073289702254],
+    "FULLMID":[1.9996965738088746,1.999924487222512,1.9999861117250775]
+  },
+  "n64_max_fraction_error":{"BE":2.922724720808012e-5,"MIDPHOTO_ENDMICRO":2.446841865511029e-7,"FULLMID":1.354404643993945e-9},
+  "n64_temperature_abs_error_K":{"BE":0.12973817818783573,"MIDPHOTO_ENDMICRO":0.0010496866671019234,"FULLMID":0.000011649419320747256},
+  "max_cumulative_energy_defect_eV_H":1.566033815212503e-14,
+  "max_cumulative_photon_defect_H":5.204170427930421e-17,
+  "limits":{"native_compiler":"NOT_RUN_NO_RUSTC","native_Grackle":"NOT_RUN","native_PreparedAbsorption_point":"AUTHORED_NOT_RUN","source_age_refinement":"NOT_RUN_FIXED_GLOBAL_GL2","spectral_refinement":"NOT_RUN","full_EOR":"HOLD"},
+  "error_norm":"max(fraction absolute errors, thermal absolute error divided by initial thermal energy); never take an untyped maximum of fractions and eV",
+  "raw_evidence":"Full phase/final ZIP retains smooth_matrix SUMMARY, Radau, per-case results, accepted_steps.jsonl, dimensional ANALYSIS and initial failure logs. Published compact table has identical measurements; JSON packaging is distinct."
+}
