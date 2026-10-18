@@ -1,37 +1,56 @@
-# Codex/NCP: 기존 C21E 컴파일·제한 실행
+# Codex/NCP handoff v2: C21F는 게시·원격 백업 완료
 
-`$physmath-research-loop`를 사용한다. 사용자에게 다운로드·업로드를 요구하지 않고 GitHub를 직접 읽는다.
+$physmath-research-loop를 사용해 bass_cr C21F의 이미 구현된 코드를 native 환경에서 컴파일·실행해줘. 사용자에게 파일 다운로드, 첨부 또는 내장 패치 적용을 요구하지 마. 아래 GitHub commit을 직접 확보해.
 
-고정 구현: cosmosapjw-quantum/bass_cr@**1ee8cb5a3377381de35b6b9a0e3b8dc1cfb12f41**. Branch research/cr-c21e-event-native-20261018, PR80. 경로 research/cr_c21e_event_native_20261018. 최신 RELEASE_NOTE.md, DAG.json, DELIVERY_RECEIPT.json을 읽되 소스는 위 고정 commit의 isolated worktree를 사용한다. 이전22623f99 대신 native 입력범위 교정이 포함된1ee8cb5a를 사용한다.
+## 권위 기준
 
-Native owner: cosmosapjw-quantum/rei_bianchi@6ea2b1b4b3875c9163cafc45efe720afded43fc4. 기존 dirty 작업·C21 epoch bridge·PR78 캠페인·watcher·checkpoint를 훼손하지 않는다. 완료한 C21C/C21D 연구를 중복 수행하지 않는다.
+- Repo: cosmosapjw-quantum/bass_cr
+- Draft PR: https://github.com/cosmosapjw-quantum/bass_cr/pull/81
+- Branch: research/cr-c21f-recovered-release-20261018
+- 실행 commit: f8359232df8d0dd4fe91fcdabeb6701eb06089ba
+- 작업 경로: research/cr_c21e_event_native_20261018/
+- Parent PR80: 82c71000fccf0e353534080efbbf4eff7f31ac4c
+- Native owner: cosmosapjw-quantum/rei_bianchi@6ea2b1b4b3875c9163cafc45efe720afded43fc4
 
-## 이미 구현된 것과 남은 일
+먼저 PR81의 실제 최신 상태, C21F_RELEASE.md, C21F_PUBLICATION_RECEIPT.json, DAG_C21F.json과 백업 경로에서 더 새로운 native 결과를 확인해. 이후 doc-only commit과 위 실행 commit을 구별해. 이미 native 결과가 있으면 source/fixture/raw SHA를 확인하고 재실행하지 마.
 
-Integrated-event nonlinear gas solver, persistent Rust nonphoto point bridge, native MD14 density/source exporter, PreparedAbsorption delta-point comparator, chronological source-age transport, continuous Radau, analysis, build_native.sh와 run_ncp.sh가 모두 작성됐다. Python44/44 및 제조 source-on12case가 검증됐으며 최종 Drive/Dropbox 복원도44/44다. Rust는 샌드박스에 컴파일러가 없어 미컴파일 상태다. NCP에서 알고리즘을 새로 구현하지 말고 컴파일·필요한 최소 API/문법 수정·실제 실행을 진행한다. 최초 실패와 수정SHA·표적 검산을 보존하고 과학적 허용오차는 완화하지 않는다.
+이전 research/cr-c21f-optical-depth-reference-20261018@7905762c63dcdd40f107ff33e3d19ca26c33bca1은 중간 게시본이다. 보존하되 자동 merge하지 마. 최종 복구본은 PR81이다. C21E의 기존 CODEX/RELEASE_NOTE/manifest와 ZIP 안의 미게시 상태 문구는 역사 기록이며, 현재 C21F_RELEASE와 이 v2 프롬프트가 게시 상태를 대체한다.
 
-## 직접 실행
+## 수정·검증 범위
 
-현재 NCP process/CPU affinity/load/RAM을 확인해 한CPU를 할당한다. CPU55는 별도 연구에 사용됐으므로 현재 소유권 확인 전 사용하지 않는다. /root/.cargo/bin을 PATH에 추가한다. 기존 Python 모듈이 없으면 worktree 전용 venv에서 requirements.txt를 설치한다.
+공개 PreparedAbsorption.evaluate 호출 교정, 동일 연속방정식의 optical-depth Radau, Y=0 고정 He unknown 제거, 명시적인 population 대조 경로가 모두 반영되어 있다. 광자 clipping, epsilon floor, silent fallback은 없다. Underflow는 log-survivor와 함께 기록한다. 네 핵심 변경 파일과 study runner는 최종 복구 ZIP과 Git blob이 일치한다.
 
-작업 경로에서 다음 명령을 직접 실행한다. NEW_OUTPUT은 실제 새 타임스탬프로 생성하고 CPU는 조사 후 정한다.
+원본 ZIP/패치 복원 검산에 이어 게시 재시도에서 56/56 Python tests를 다시 통과했다. Native Rust와 Grackle 실행은 아직 NOT_RUN이며, 제조 nonphoto rates/3-energy fixed-GL2 결과를 native 정확도로 바꾸지 마. 과거 APPLY_C21F_FULL.py나 내장 패치를 이미 수정된 PR81 위에 다시 적용하지 마.
+
+## 실행
+
+기존 작업·watcher·dirty files·checkpoint를 보존하고, 새 isolated worktree를 사용해. 현재 NCP CPU/RAM/affinity/process를 직접 읽고 한 개 CPU를 할당해. 과거 CPU55 campaign 소유권 확인 전 해당 CPU를 사용하지 않는다.
+
+기존 repo가 있으면 git fetch 후 위 commit으로 새 worktree를 만들고, 없으면 사용자 권한으로 GitHub를 clone해. 정확한 실행 commit을 checkout한 뒤 작업 경로에서 다음 기존 실행기를 사용해.
 
 ```bash
-bash run_ncp.sh NEW_OUTPUT "$CPU" /existing/rei_bianchi/git/repository
+export PATH="$HOME/.cargo/bin:$PATH"
+# CPU와 OUT은 실제 확인한 할당 CPU 및 아직 존재하지 않는 새 출력 경로다.
+# 필요한 numpy/scipy/pytest는 기존 환경 또는 isolated venv/requirements.txt를 사용한다.
+bash run_ncp.sh "$OUT" "$CPU" "$EXISTING_OWNER_REPO"
 ```
 
-마지막 인자는 선택이며 생략하면 원본SHA를 자동fetch한다. 실행기는 dirty 파일이 아닌 git archive의 원본commit을 내보내고 rlib/bridge를 빌드한다. 이어서3Rust tests,44portable tests,7native delta-point controls,세 clock의 공통IC native/Radau 행렬,실제MD14 native12cell-source 행렬,오차 분석을 수행한다. build/native-call/matrix 시간·호출 상한을 지킨다. 기존 출력경로는 사용하지 않는다.
+마지막 owner repo 인자는 선택이다. 생략하면 실행기가 정확한 owner를 별도로 fetch한다. 실행기는 git archive의 고정 소스를 빌드하며 기존 owner working files를 수정하지 않는다. 핵심 알고리즘은 이미 구현돼 있으므로 새 기능 개발을 시작하지 마. 실제 compiler/API 오류에 필요한 최소 수정은 최초 오류·diff·새 commit과 표적 테스트로 보존한다. 물리 변경은 작은 호환성 수정으로 숨기지 않는다.
 
-## 유지할 물리 계약
+원본 Rust tests, PreparedAbsorption delta-point 대조, 공통 explicit-IC native/Radau 행렬 및 native MD14 cell-source 행렬을 실행해. 오류가 나면 FAILURE.json과 부분 accepted_steps/native_points를 보존한다. 기존 run_ncp.sh는 오류에서 중단할 수 있으므로 새 출력 경로 없이 전체를 덮어써 재실행하지 마. 독립 사례가 남아 있으면 조건을 바꾸지 않고 별도 새 경로에서 실행할 수 있다.
 
-원본 igm_point_rhs는 photo=0,h=0. 광자 손실·광전리·photoheat는 integrated event solver, CI/RR/DR/cooling/escape/CMB는 원본native RHS 소유다. 적분된 사건수로 잔차를 구성하며 Gamma=L/(dt*Aend) 또는 exposureGamma의 무수정 대입을 사용하지 않는다. Newton+energy 동시 gate, rollback, structural-zero helium, fit/binding 문턱의 차이, q=aE/qref=21q, 단한번의 geometry work를 유지한다.
+Native photo=0,h=0 소유권, integrated events, Newton+energy 동시 gate, rollback, fit threshold/binding 구분, q=aE와 qref=21q를 유지해. 광학깊이와 population 변수의 같은 rtol/atol은 같은 물리 오차가 아니므로 observables와 보존수지를 따로 검사해. Explicit fixture는 checkpoint 시각 재해석이 아니다.
 
-첫 행렬은 explicit gas/제조3energy/opacity.001, 둘째는 explicit gas/원본MD14 cell source/opacity1이다. checkpoint를 다른 시각으로 재해석하지 않는다. 두 행렬을 동일 production 캠페인으로 합치지 않는다. GL2 source birth grid가 고정되어 있어 시간 정제를 age 수렴으로 표시하지 않는다. PreparedAbsorption delta parity는 전체 driver 동등성이 아니다.
+## 완료된 백업과 새 결과 반환
 
-## 실패와 반환
+과학 아카이브 BASS_CR_C21F_NATIVE_PREFLIGHT_TAU_20261018.zip: 394429 bytes, 102 payloads.
+SHA256: 4bd711063c1d8d4e7724da693f8e021fd6742f5a1edfda3cbecd12f0956ed768
+Drive: https://drive.google.com/file/d/1jeaxLIO24gJDyhLvTUvAMTBcX0HogL3O/view
+Dropbox: /bass_cr/C21/BASS_CR_C21F_NATIVE_PREFLIGHT_TAU_20261018.zip
+Dropbox ID: id:BSpOijBcT10AAAAAAD_Mug
+Library: /BASS_DERIVATION_DOSSIERS_20260912/bass_cr/BASS_CR_C21F_NATIVE_PREFLIGHT_TAU_20261018.zip
+세 사본의 raw SHA/ZIP CRC/102개 payload 해시는 실제 재다운로드로 확인됐다. 이 기존 파일은 덮어쓰거나 중복 백업하지 마.
 
-Native compiler/API failure는 원시 로그를 보존하고 최소 수정 후 해당검사를 재실행한다. midpoint 큰step의 positivity 실패, 원본RHS domain, strict Radau 내부 음수, timeout은 clip/tolerance완화로 숨기지 않는다. fixed-grid lane을 HOLD로 남기고 나머지 독립 완료 결과를 반환한다.
+새 native 산출물만 별도 Draft PR/evidence commit 및 Dropbox·Drive create-only 백업으로 보존하고 원격 재다운로드 SHA/manifest를 검사해. 반환에는 source/binary/toolchain SHA, tests, CPU/RSS/time, SUMMARY/ANALYSIS/Radau, fixture/source export, accepted_steps/native_points, FAILURE와 RETURN_TO_CHATGPT를 포함해.
 
-RETURN_TO_CHATGPT.json, FAILURE.json, SUMMARY/ANALYSIS/Radau, fixture/source export, native point와 accepted-step raw, source/binary/toolchain SHA를 저장한다. 새 실제native 결과만 additive Draft PR/evidence commit 및 기존 bass_cr Dropbox·Google Drive에 create-only 백업하고 full-byte readback+manifest를 검증한다. 사용자에게 추가 구현 프롬프트나 수동파일 준비를 요청하지 않는다.
-
-Native science는 실제 통과한 범위만 PASS. full48, source-age/spectral/angular 수렴, CaseB, signed Bianchi, fullEoR는 이번 실행으로 자동 승격하지 않는다.
+Full48, source-age/spectral/angular convergence, Case B, signed Bianchi와 full EoR는 해당 실제 검증 전까지 HOLD다. 준비·게시·백업 완료와 native 과학 검증을 구별해.
