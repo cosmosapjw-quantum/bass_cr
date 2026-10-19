@@ -1,0 +1,192 @@
+{
+  "schema": "C21F_NATIVE_ASSESSMENT_DAG_V1",
+  "date_utc": "2026-10-19",
+  "source_execution_commit": "f8359232df8d0dd4fe91fcdabeb6701eb06089ba",
+  "source_pr81_doc_head": "249d9b29b0adc5a8cf615a9999065aff26ff6900",
+  "native_evidence_head": "c4a502e0c931a201edfa3c7046f7a91230c2278f",
+  "native_owner": "cosmosapjw-quantum/rei_bianchi@6ea2b1b4b3875c9163cafc45efe720afded43fc4",
+  "execution_code_changed": false,
+  "old_evidence_repeated": false,
+  "nodes": [
+    {
+      "id": "c21f_release",
+      "depends_on": [],
+      "science_status": "IMPLEMENTATION_VERIFIED_REUSED",
+      "publication": {
+        "status": "PUBLISHED_PR81",
+        "url": "https://github.com/cosmosapjw-quantum/bass_cr/pull/81"
+      },
+      "backup": {
+        "status": "REUSED_PREVIOUS_SIX_COPY_READBACK",
+        "date": "2026-10-18"
+      },
+      "evidence": [
+        "inputs/authority/C21F_EXECUTABLE_MANIFEST_PR81_249d9.json"
+      ]
+    },
+    {
+      "id": "native_run",
+      "depends_on": [
+        "c21f_release"
+      ],
+      "science_status": "EXECUTED_SCOPED_TWO_FIXED_FIXTURES_REUSED",
+      "publication": {
+        "status": "PUBLISHED_PR82",
+        "url": "https://github.com/cosmosapjw-quantum/bass_cr/pull/82"
+      },
+      "backup": {
+        "status": "FRESH_METADATA_PLUS_PRIOR_PR82_BYTE_READBACK_RECEIPT",
+        "archive_bytes_freshly_read": false
+      },
+      "evidence": [
+        "https://github.com/cosmosapjw-quantum/bass_cr/tree/c4a502e0c931a201edfa3c7046f7a91230c2278f/research/cr_c21e_event_native_20261018/evidence/C21F_NATIVE_NCP_20261018T1358Z"
+      ]
+    },
+    {
+      "id": "fresh_intake",
+      "depends_on": [
+        "native_run"
+      ],
+      "science_status": "SOURCE17_AND_RAW167_TEXT_BYTE_IDENTITIES_VERIFIED",
+      "manifest_coverage": {
+        "total_entries": 168,
+        "freshly_verified_text_payloads": 166,
+        "binary_bytes_unverified": 2,
+        "manifest_itself_separately_verified": true
+      },
+      "evidence": [
+        "EVIDENCE_INTAKE_RECEIPT.json",
+        "inputs/receipts/"
+      ]
+    },
+    {
+      "id": "point_audit",
+      "depends_on": [
+        "fresh_intake"
+      ],
+      "science_status": "NUMERICALLY_CHECKED_SAVED_POINT_IDENTITIES",
+      "request_response_pairs": 27140,
+      "violations": 0,
+      "evidence": [
+        "audit_native_points.py",
+        "native_point_audit/POINT_AUDIT.json"
+      ]
+    },
+    {
+      "id": "terminal_and_step_analysis",
+      "depends_on": [
+        "fresh_intake"
+      ],
+      "science_status": "IMPLEMENTATION_VERIFIED_AND_NUMERICALLY_CHECKED",
+      "histories": 24,
+      "references": 2,
+      "accepted_steps": 2160,
+      "new_tests": 5,
+      "evidence": [
+        "analyze_native_evidence.py",
+        "results/ASSESSMENT.json",
+        "validation/VALIDATION_RECEIPT.json"
+      ]
+    },
+    {
+      "id": "local_defect",
+      "depends_on": [
+        "c21f_release"
+      ],
+      "science_status": "DERIVED_WITH_STATED_SMOOTHNESS_AND_STABILITY_ASSUMPTIONS",
+      "evidence": [
+        "INDEPENDENT_REVIEW_KO.md"
+      ]
+    },
+    {
+      "id": "cancellation_assessment",
+      "depends_on": [
+        "local_defect",
+        "terminal_and_step_analysis"
+      ],
+      "science_status": "SUPPORTED_SCOPED_BY_SIGNED_RAW_AND_REFERENCE_FREE_DIFFERENCES",
+      "evidence": [
+        "results/thermal_cancellation.csv",
+        "figures/FIGURE_DATA.json",
+        "README_KO.md"
+      ]
+    },
+    {
+      "id": "cross_review",
+      "depends_on": [
+        "point_audit",
+        "terminal_and_step_analysis",
+        "local_defect",
+        "cancellation_assessment"
+      ],
+      "science_status": "PASS_SCOPED_INDEPENDENT_REVIEW",
+      "evidence": [
+        "INDEPENDENT_REVIEW_KO.md"
+      ]
+    },
+    {
+      "id": "new_assessment_delivery",
+      "depends_on": [
+        "cross_review"
+      ],
+      "science_status": "ANALYSIS_COMPLETE",
+      "publication": {
+        "status": "RECEIPT_BOUND",
+        "receipt": "PUBLICATION_RECEIPT.json",
+        "url": "https://github.com/cosmosapjw-quantum/bass_cr/pull/83"
+      },
+      "backup": {
+        "status": "RECEIPT_BOUND",
+        "receipt": "BACKUP_RECEIPT.json"
+      },
+      "delivery_status": "RESOLVED_BY_PUBLICATION_AND_BACKUP_RECEIPTS",
+      "evidence": [
+        "RESEARCH_LOOP_KO.md",
+        "handoff/NEW_CHAT_C21F_NATIVE_ASSESSMENT_KO.md"
+      ]
+    },
+    {
+      "id": "current_ncp_inventory",
+      "depends_on": [],
+      "status": "BLOCKED_SERVICE_MONTHLY_QUOTA",
+      "current_campaign_status": "NOT_OBSERVED",
+      "historical_resource_logs_not_current": true,
+      "no_new_job_launched": true
+    },
+    {
+      "id": "reference_tolerance_ladder",
+      "depends_on": [
+        "current_ncp_inventory",
+        "cancellation_assessment"
+      ],
+      "status": "READY_DESIGN_NATIVE_EXECUTION_NOT_RUN",
+      "scope": "Same fixtures and source; compare new stricter references to saved baseline; retain physical state/log-survivor/ledger differences"
+    },
+    {
+      "id": "new_native_levels",
+      "depends_on": [
+        "current_ncp_inventory",
+        "reference_tolerance_ladder"
+      ],
+      "status": "CONDITIONAL_READY_NOT_RUN",
+      "scope": "Only new native_source FULLMID and MIDPHOTO_ENDMICRO n=128/256 if needed; do not repeat old levels"
+    }
+  ],
+  "holds": {
+    "Full48": "HOLD_UNTIL_INDEPENDENT_VALIDATION",
+    "source_age": "HOLD_UNTIL_INDEPENDENT_VALIDATION",
+    "spectral": "HOLD_UNTIL_INDEPENDENT_VALIDATION",
+    "angular": "HOLD_UNTIL_INDEPENDENT_VALIDATION",
+    "Case_B": "HOLD_UNTIL_INDEPENDENT_VALIDATION",
+    "signed_Bianchi": "HOLD_UNTIL_INDEPENDENT_VALIDATION",
+    "full_EoR": "HOLD_UNTIL_INDEPENDENT_VALIDATION",
+    "standalone_Grackle_driver_parity": "HOLD_UNTIL_INDEPENDENT_VALIDATION"
+  },
+  "preservation": [
+    "No automatic merge of historical branches",
+    "No original source or immutable raw changes",
+    "No original 56-test or native matrix rerun",
+    "New artifacts only; create-only output and backup",
+    "No dirty-file/watcher/checkpoint modification"
+  ]
+}

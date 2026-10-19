@@ -1,0 +1,392 @@
+{
+  "schema": "C21F_ASSESSMENT_PUBLICATION_TREE_VERIFICATION_V1",
+  "created_utc": "2026-10-19T05:34:09+00:00",
+  "status": "PASS_PROVIDER_TREE_BINDING_FROM_FROZEN_UPLOAD",
+  "scope": {
+    "operation": "Independently reconstruct the complete Git tree for the original 42-file PR83 content publication from the saved complete PR82 recursive tree and the frozen original upload payload.",
+    "fresh_provider_file_readback": false,
+    "fresh_provider_tree_or_commit_fetch_by_this_auditor": false,
+    "provider_identity_source": "Parent agent reported successful provider publication and commit/tree identity in its delegation message. This receipt independently recomputes and matches that reported tree SHA; it does not claim a second remote readback.",
+    "upload_is_original_frozen_payload": true,
+    "later_working_directory_DAG_or_document_changes_used": false,
+    "old_source_or_raw_evidence_bytes_reread": false,
+    "no_claim_of_fresh_native_binary_or_archive_readback": true,
+    "remote_mutations": 0,
+    "remote_execution_launches": 0
+  },
+  "publication": {
+    "repository": "cosmosapjw-quantum/bass_cr",
+    "pull_request": 83,
+    "pull_request_url": "https://github.com/cosmosapjw-quantum/bass_cr/pull/83",
+    "branch": "research/cr-c21f-native-assessment-20261019",
+    "content_commit": "a15933c3c47bc18fc70f8e2ac7f93c74f18618a1",
+    "reported_parent_commit": "c4a502e0c931a201edfa3c7046f7a91230c2278f",
+    "provider_reported_tree_sha": "647e95aed42fb4fea068bdb761f88541a3590de3",
+    "independently_recomputed_tree_sha": "647e95aed42fb4fea068bdb761f88541a3590de3",
+    "tree_sha_match": true,
+    "new_directory": "research/cr_c21f_native_assessment_20261019"
+  },
+  "input_files": [
+    {
+      "path": "/workspace/scratch/4d2e4c44b70c/github_intake_context.json",
+      "bytes": 5466759,
+      "sha256": "5f9fd1d66c4fdaab9dd2eea100068057c9260a3244116e13d2bddbc0522c858c",
+      "selector": "pr82_tree.value.structuredContent.content"
+    },
+    {
+      "path": "/workspace/scratch/4d2e4c44b70c/github_assessment_upload.json",
+      "bytes": 2537694,
+      "sha256": "4ae587ccc1aa9878e44199b4f3c69ed276afdf3266831c196bca5381d17bba8c",
+      "selector": "all 42 frozen original upload entries, including their original content"
+    }
+  ],
+  "method": [
+    "Reject truncated recursive trees, duplicate or invalid paths, and additions outside the designated previously absent directory.",
+    "Reconstruct every baseline tree bottom-up using Git directory-name sorting, canonical octal modes, UTF-8 names, NUL delimiters, raw 20-byte child hashes, and the Git tree object header.",
+    "Verify every supplied baseline nonroot tree hash and independently reconstruct the known PR82 root tree.",
+    "Decode the original upload content as declared (40 UTF-8 and 2 base64 entries); recompute Git blob SHA-1 with the blob object header and verify all 42 declared byte lengths and blob hashes.",
+    "Add exactly those 42 blobs to the baseline tree, retain every prior leaf path/mode/blob, and reconstruct all resulting trees.",
+    "Compare the reconstructed root tree to the provider tree SHA reported for the immutable original content commit. No live working-directory artifact content and no later DAG edits are used."
+  ],
+  "baseline_verification": {
+    "commit": "c4a502e0c931a201edfa3c7046f7a91230c2278f",
+    "recursive_response_top_sha": "c4a502e0c931a201edfa3c7046f7a91230c2278f",
+    "recursive_response_top_sha_is_root_tree": false,
+    "root_tree_expected": "af9db874c235a4140d93d02d1cc9320586fce533",
+    "root_tree_recomputed": "af9db874c235a4140d93d02d1cc9320586fce533",
+    "recursive_tree_truncated": false,
+    "recursive_entries": 8811,
+    "blob_entries": 7394,
+    "nonroot_tree_entries": 1417,
+    "all_recomputed_tree_objects_including_root": 1418,
+    "nonroot_tree_hash_mismatches": []
+  },
+  "retention": {
+    "existing_blob_paths_retained_with_identical_mode_and_hash": 7394,
+    "existing_blob_count": 7394,
+    "existing_blob_changes_or_deletions": [],
+    "existing_nonroot_directory_paths_retained": 1417,
+    "missing_existing_directory_paths": [],
+    "unchanged_existing_tree_objects_including_root": 1416,
+    "changed_existing_ancestor_trees": [
+      {
+        "path": "(root)",
+        "before": "af9db874c235a4140d93d02d1cc9320586fce533",
+        "after": "647e95aed42fb4fea068bdb761f88541a3590de3"
+      },
+      {
+        "path": "research",
+        "before": "73fc6c1106a2ca00ffba2cc602515562f8f3e4f8",
+        "after": "b76477e95bb6713c5412f14fb48f3e91cfd4c22f"
+      }
+    ],
+    "explanation": "All prior blob entries are retained exactly. The existing root and research directory hashes necessarily change because the new assessment subtree is added; all other existing tree hashes remain identical."
+  },
+  "new_content": {
+    "added_blob_count": 42,
+    "added_blob_bytes": 2291430,
+    "declared_upload_blob_and_size_checks": 42,
+    "new_directory_count": 10,
+    "new_directory_tree_hashes": [
+      {
+        "path": "research/cr_c21f_native_assessment_20261019",
+        "git_tree": "9f1d0a5a44ce9e37d10ab7fe29a071cf0f177079"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/figures",
+        "git_tree": "aaebc432b81cfb80842b318bbaf407d0bd49b8f1"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/handoff",
+        "git_tree": "ce3c12d7afb916969022ab024e0373bcbf052ac6"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/inputs",
+        "git_tree": "4edd5c80a3767a86efe0c1bf78ce0e1c56c0a070"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/inputs/authority",
+        "git_tree": "86129adbdbaf0d4f514cbe6814b43f544ac05def"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/inputs/receipts",
+        "git_tree": "18b60363bcb5db0d2ff0ee5a699c9ace2ddb979a"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/native_point_audit",
+        "git_tree": "396a21ad9071dc67ed19966718aa9ad236da607a"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/results",
+        "git_tree": "75b7ff54fdd8910dd8e1458602f3f025ed951b3c"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/tests",
+        "git_tree": "07375576deaafdd3fb3e6fd05949ec21271a3f65"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/validation",
+        "git_tree": "16bc5e403a244179893aabb8939471e0bc4a60b7"
+      }
+    ],
+    "total_resulting_blob_count": 7436,
+    "total_resulting_tree_objects_including_root": 1428,
+    "files": [
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/ARTIFACT_MANIFEST.json",
+        "mode": "100644",
+        "bytes": 9780,
+        "git_blob": "e3627e8bc4d71999308b055f2e58e357a3edfb7b"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/DAG_C21F_ASSESSMENT.json",
+        "mode": "100644",
+        "bytes": 5950,
+        "git_blob": "7451895654eade9fe267b358214c29cfb28a44d7"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/EVIDENCE_INTAKE_KO.md",
+        "mode": "100644",
+        "bytes": 5017,
+        "git_blob": "3adf8c60aa1a07275baffa02e7aefedceb8f029e"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/EVIDENCE_INTAKE_RECEIPT.json",
+        "mode": "100644",
+        "bytes": 306950,
+        "git_blob": "1064c71a64ac3ab5849d72ce2be372fce59f4aaf"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/INDEPENDENT_REVIEW_KO.md",
+        "mode": "100644",
+        "bytes": 27432,
+        "git_blob": "b78386c1b9f25e9770b890eb2ed4dc42b3f92377"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/README.md",
+        "mode": "100644",
+        "bytes": 1788,
+        "git_blob": "c3c95c85010f33d86ac8eb96db5c79e7369eddcc"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/README_KO.md",
+        "mode": "100644",
+        "bytes": 19854,
+        "git_blob": "3675518194b4ab74e6c9257d178f1b46cac16b4a"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/REPRODUCE.md",
+        "mode": "100644",
+        "bytes": 4237,
+        "git_blob": "00954c479c34be58d60b45c2833246b83031701d"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/RESEARCH_LOOP_KO.md",
+        "mode": "100644",
+        "bytes": 4936,
+        "git_blob": "aa184a80a50ad1ca86a00d3f79cc88b6e5e6ea08"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/analyze_native_evidence.py",
+        "mode": "100644",
+        "bytes": 44305,
+        "git_blob": "ad13d5a32a36ac4a3e359b8f401a128b5e3ee537"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/audit_native_points.py",
+        "mode": "100644",
+        "bytes": 26224,
+        "git_blob": "4fc709ac499e6d4f7933af387ca5ef4746268b94"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/figures/FIGURE_DATA.json",
+        "mode": "100644",
+        "bytes": 9878,
+        "git_blob": "7be0bba4bce9601688850b34c04c7733b0416999"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/figures/hybrid_signed_cancellation.png",
+        "mode": "100644",
+        "bytes": 166372,
+        "git_blob": "5671a14dd3ca1f2872fb5adf9d83428823821d6d"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/figures/hybrid_signed_cancellation.svg",
+        "mode": "100644",
+        "bytes": 81804,
+        "git_blob": "ebbe5a36696def502a465f7482b90c8abdc26fc3"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/figures/time_refinement.png",
+        "mode": "100644",
+        "bytes": 154339,
+        "git_blob": "df4226ae5d3460c0857bb6e8e64cb09a6cffb4c7"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/figures/time_refinement.svg",
+        "mode": "100644",
+        "bytes": 90979,
+        "git_blob": "c079241c81e81b4440c00a45a52d11463bbd1952"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/handoff/NEW_CHAT_C21F_NATIVE_ASSESSMENT_KO.md",
+        "mode": "100644",
+        "bytes": 5233,
+        "git_blob": "f814a4abb812089e72c9184aee52fbb8979048e3"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/inputs/authority/C21F_EXECUTABLE_MANIFEST_PR81_249d9.json",
+        "mode": "100644",
+        "bytes": 3789,
+        "git_blob": "5b47bd9a4427d99acbf5582fb1b7775dbb49e396"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/inputs/receipts/intake_receipts_01.json",
+        "mode": "100644",
+        "bytes": 10880,
+        "git_blob": "1d3fc19a7083ac8b77e7ffdace4061969bc591fd"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/inputs/receipts/intake_receipts_02.json",
+        "mode": "100644",
+        "bytes": 14397,
+        "git_blob": "4257ce321a6f69706da2f5a688b9e43f0e333589"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/inputs/receipts/intake_receipts_03.json",
+        "mode": "100644",
+        "bytes": 18433,
+        "git_blob": "638a63256e025e95393b28d1d39bf68e081859ba"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/inputs/receipts/intake_receipts_04.json",
+        "mode": "100644",
+        "bytes": 16006,
+        "git_blob": "13bce1fafd5a8839e80afb12d5718d325e988fb6"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/inputs/receipts/intake_receipts_05.json",
+        "mode": "100644",
+        "bytes": 2630,
+        "git_blob": "6fd4fc71a7b2714fd0748472cfcfb587db5fb870"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/inputs/receipts/intake_receipts_06.json",
+        "mode": "100644",
+        "bytes": 2687,
+        "git_blob": "b2918e34e13c4d30e4d3c5af8fbf6d55a38071ed"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/inputs/receipts/intake_receipts_07.json",
+        "mode": "100644",
+        "bytes": 2283,
+        "git_blob": "18b87f2c0341739ac65601807a75e66a3d8d34c8"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/inputs/receipts/intake_receipts_08.json",
+        "mode": "100644",
+        "bytes": 2336,
+        "git_blob": "0f1bc5cbf4311de201a1f902ea157bf6b9b515ee"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/make_figures.py",
+        "mode": "100644",
+        "bytes": 5771,
+        "git_blob": "00db5a48888ee59bc2707f348362ed52c5762e6f"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/native_point_audit/POINT_AUDIT.json",
+        "mode": "100644",
+        "bytes": 248465,
+        "git_blob": "f7fe6af82dc24c8a901e9e8b916024400821cce2"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/native_point_audit/POINT_AUDIT_KO.md",
+        "mode": "100644",
+        "bytes": 3392,
+        "git_blob": "b7d3f907df2d6a5c1cee8083599d301f79d2a773"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/results/ASSESSMENT.json",
+        "mode": "100644",
+        "bytes": 834569,
+        "git_blob": "9ce3c117657361dc58ddaf644f6d4d3e97aa87d3"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/results/PRODUCT_HASHES.json",
+        "mode": "100644",
+        "bytes": 980,
+        "git_blob": "49ab5103648eb1c1d32f7c98e2e7fe21dbed6b8c"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/results/balances_and_metrics.csv",
+        "mode": "100644",
+        "bytes": 4668,
+        "git_blob": "009132b69937bed95cef017d22b18aa475af17f7"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/results/component_errors.csv",
+        "mode": "100644",
+        "bytes": 84245,
+        "git_blob": "bd6b1ddda4951b9f3a5eaad9d86a4132032b7df2"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/results/reference_free_orders.csv",
+        "mode": "100644",
+        "bytes": 57371,
+        "git_blob": "324da2082ca4c5257f066939a1ef331667cc1387"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/results/thermal_cancellation.csv",
+        "mode": "100644",
+        "bytes": 1111,
+        "git_blob": "0c440b175a7a48474372fba637c42ad736442354"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/tests/test_analyzer.py",
+        "mode": "100644",
+        "bytes": 5156,
+        "git_blob": "ccc8ee554f88f000b3d437ac698163740df5cedf"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/validation/COMMANDS.md",
+        "mode": "100644",
+        "bytes": 1649,
+        "git_blob": "e27a051f78cc89ddb127a8291cae4990931fdf97"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/validation/VALIDATION_RECEIPT.json",
+        "mode": "100644",
+        "bytes": 4280,
+        "git_blob": "7eb528b1355c0498b05feddd00a287457d7171e5"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/validation/analyzer_stderr.log",
+        "mode": "100644",
+        "bytes": 0,
+        "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/validation/analyzer_stdout.log",
+        "mode": "100644",
+        "bytes": 373,
+        "git_blob": "528499df5ea0b3f0899324d1d38da47be6a29952"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/validation/tests_stderr.log",
+        "mode": "100644",
+        "bytes": 881,
+        "git_blob": "e9913a4e3162a36dd29c10e8df0355f60e496859"
+      },
+      {
+        "path": "research/cr_c21f_native_assessment_20261019/validation/tests_stdout.log",
+        "mode": "100644",
+        "bytes": 0,
+        "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      }
+    ]
+  },
+  "failure_count": 0,
+  "failures": [],
+  "receipt_creation": "This JSON is a new create-only local artifact for subsequent publication. It is not part of the 42-file content commit whose tree is checked here."
+}
