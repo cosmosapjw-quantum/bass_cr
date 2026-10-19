@@ -1,0 +1,348 @@
+{
+  "schema": "BASS_CR_C21G_DAG_V1",
+  "unit": "C21G_REFERENCE_REFINEMENT_20261019",
+  "recorded_at_utc": "2026-10-19T08:57:48.069727+00:00",
+  "repository": "cosmosapjw-quantum/bass_cr",
+  "repository_path": "research/cr_c21g_reference_refinement_20261019",
+  "parent": {
+    "pr": 83,
+    "head": "d780c2c53f869c914add1d5492312d0bc507f976",
+    "baseline_execution": "f8359232df8d0dd4fe91fcdabeb6701eb06089ba",
+    "native_owner": "6ea2b1b4b3875c9163cafc45efe720afded43fc4",
+    "raw_evidence": "../cr_c21e_event_native_20261018/evidence/C21F_NATIVE_NCP_20261018T1358Z"
+  },
+  "c21g_execution_commit": null,
+  "final_receipt_commit": null,
+  "publication": {
+    "status": "NOT_YET_PUBLISHED",
+    "commit": null,
+    "receipt": "PUBLICATION_RECEIPT.json"
+  },
+  "backup": {
+    "status": "NOT_YET_BACKED_UP",
+    "receipt": "BACKUP_RECEIPT.json"
+  },
+  "source_change_scope": {
+    "modified_existing_source": [
+      "research/cr_c21e_event_native_20261018/src/reference_tau.py"
+    ],
+    "new_unit_runtime": [
+      "campaign_contract.py",
+      "diagnostics.py",
+      "run_campaign.py",
+      "analyze_campaign.py",
+      "verify_analytic_reference.py"
+    ],
+    "native_kernel_modified": false,
+    "source_fixture_modified": false,
+    "original_native_execution_repeated": false
+  },
+  "scientific_state": {
+    "analytic_derivations": "COMPLETE_CONDITIONAL_MATH",
+    "new_manufactured_cases": 9,
+    "new_manufactured_status": "PASS",
+    "new_native_reference_status": "NOT_RUN",
+    "new_native_refinement_status": "NOT_RUN",
+    "global_error_bound": null,
+    "zero_crossing_forecast": null,
+    "coefficient_diagnostic": "Native thermal Ahat negative over reused8/16/32 pairs; n^-2 drift not established. Common thermal Bhat unstable."
+  },
+  "nodes": [
+    {
+      "id": "N00_CURRENT_INTAKE",
+      "status": "COMPLETE_SCOPED_METADATA_INTAKE",
+      "depends_on": [],
+      "evidence": [
+        "evidence/intake/BACKUP_DELTA_INTAKE_20261019T0800Z.json",
+        "evidence/intake/REMOTE_QUOTA_INTAKE.json"
+      ],
+      "meaning": "현재 provider 목록·metadata와 root GitHub 확인을 사용. 새 C21F native 미발견은 조회 범위에 한정한다.",
+      "publication": {
+        "status": "NOT_YET_PUBLISHED",
+        "commit": null,
+        "receipt": "PUBLICATION_RECEIPT.json"
+      },
+      "backup": {
+        "status": "NOT_YET_BACKED_UP",
+        "receipt": "BACKUP_RECEIPT.json"
+      }
+    },
+    {
+      "id": "N01_REFERENCE_ERROR_THEORY",
+      "status": "COMPLETE_CONDITIONAL_MATH",
+      "depends_on": [
+        "N00_CURRENT_INTAKE"
+      ],
+      "evidence": [
+        "theory/THEORY_REFERENCE_ERROR_KO.md",
+        "theory/LITERATURE_INTAKE.json",
+        "theory/WOLFRAM_VERIFICATION.json"
+      ],
+      "meaning": "Tau–photon/EOS 항등식, 조건부 bound, residual/stability 의무, 두-scale coefficient 유도.",
+      "publication": {
+        "status": "NOT_YET_PUBLISHED",
+        "commit": null,
+        "receipt": "PUBLICATION_RECEIPT.json"
+      },
+      "backup": {
+        "status": "NOT_YET_BACKED_UP",
+        "receipt": "BACKUP_RECEIPT.json"
+      }
+    },
+    {
+      "id": "N02_REFERENCE_CONTROL_PATCH",
+      "status": "IMPLEMENTED_TARGETED_TESTS_PASS",
+      "depends_on": [
+        "N01_REFERENCE_ERROR_THEORY"
+      ],
+      "evidence": [
+        "../cr_c21e_event_native_20261018/src/reference_tau.py",
+        "evidence/tests/reference_patch/"
+      ],
+      "meaning": "새 vector/scalar control·reduced atol·counter/grid 진단. 새 집중검사 9/9 PASS.",
+      "publication": {
+        "status": "NOT_YET_PUBLISHED",
+        "commit": null,
+        "receipt": "PUBLICATION_RECEIPT.json"
+      },
+      "backup": {
+        "status": "NOT_YET_BACKED_UP",
+        "receipt": "BACKUP_RECEIPT.json"
+      }
+    },
+    {
+      "id": "N03_INDEPENDENT_DIAGNOSTICS",
+      "status": "IMPLEMENTED_TARGETED_TESTS_PASS",
+      "depends_on": [
+        "N01_REFERENCE_ERROR_THEORY"
+      ],
+      "evidence": [
+        "diagnostics.py",
+        "tests/test_diagnostics.py",
+        "evidence/tests/diagnostics/"
+      ],
+      "meaning": "독립 endpoint·ledger·order 진단, 새 집중검사 9/9 PASS.",
+      "publication": {
+        "status": "NOT_YET_PUBLISHED",
+        "commit": null,
+        "receipt": "PUBLICATION_RECEIPT.json"
+      },
+      "backup": {
+        "status": "NOT_YET_BACKED_UP",
+        "receipt": "BACKUP_RECEIPT.json"
+      }
+    },
+    {
+      "id": "N04_EXECUTION_ORCHESTRATION",
+      "status": "IMPLEMENTED_TARGETED_TESTS_PASS",
+      "depends_on": [
+        "N02_REFERENCE_CONTROL_PATCH",
+        "N03_INDEPENDENT_DIAGNOSTICS"
+      ],
+      "evidence": [
+        "campaign_contract.py",
+        "run_campaign.py",
+        "analyze_campaign.py",
+        "tests/test_campaign.py",
+        "evidence/tests/campaign/",
+        "tests/test_analysis_binding.py",
+        "evidence/tests/analysis_binding/"
+      ],
+      "meaning": "14 orchestration +3 external analysis-anchor tests PASS; fixed8+4 native plan; native execution NOT_RUN.",
+      "publication": {
+        "status": "NOT_YET_PUBLISHED",
+        "commit": null,
+        "receipt": "PUBLICATION_RECEIPT.json"
+      },
+      "backup": {
+        "status": "NOT_YET_BACKED_UP",
+        "receipt": "BACKUP_RECEIPT.json"
+      }
+    },
+    {
+      "id": "N05_ANALYTIC_LIGHT_VALIDATION",
+      "status": "COMPLETE_SCOPED_MANUFACTURED_PASS",
+      "depends_on": [
+        "N02_REFERENCE_CONTROL_PATCH",
+        "N03_INDEPENDENT_DIAGNOSTICS"
+      ],
+      "evidence": [
+        "verify_analytic_reference.py",
+        "evidence/analytic_reference/ANALYTIC_REFERENCE_CHECK.json"
+      ],
+      "meaning": "새 제조9 cases PASS, 1.9097576049971394s. binary64 analytic 비교. Native 아님; 두 stiff case의 mesh cap inactive.",
+      "publication": {
+        "status": "NOT_YET_PUBLISHED",
+        "commit": null,
+        "receipt": "PUBLICATION_RECEIPT.json"
+      },
+      "backup": {
+        "status": "NOT_YET_BACKED_UP",
+        "receipt": "BACKUP_RECEIPT.json"
+      }
+    },
+    {
+      "id": "N06_INDEPENDENT_REVIEW_AND_SMOKE",
+      "status": "COMPLETE_SCOPED_REVIEW_AND_WIRING_SMOKE_PASS",
+      "depends_on": [
+        "N04_EXECUTION_ORCHESTRATION",
+        "N05_ANALYTIC_LIGHT_VALIDATION"
+      ],
+      "evidence": [
+        "evidence/review/SCIENCE_REVIEW_KO.md",
+        "evidence/tests/wiring_smoke/"
+      ],
+      "meaning": "S1-S4 closed;3 manufactured worker jobs operational COMPLETE,4.494274969001708s; no native execution.",
+      "publication": {
+        "status": "NOT_YET_PUBLISHED",
+        "commit": null,
+        "receipt": "PUBLICATION_RECEIPT.json"
+      },
+      "backup": {
+        "status": "NOT_YET_BACKED_UP",
+        "receipt": "BACKUP_RECEIPT.json"
+      }
+    },
+    {
+      "id": "N07_NATIVE_REFERENCE_LADDER",
+      "status": "NOT_RUN",
+      "depends_on": [
+        "N06_INDEPENDENT_REVIEW_AND_SMOKE"
+      ],
+      "evidence": [
+        "run_campaign.py",
+        "EXECUTION_MANIFEST.json",
+        "handoff/CODEX_HANDOFF_KO.md"
+      ],
+      "meaning": "새 두fixture×L1/L2/L3/L3M=8 jobs. 현재 NCP inventory unverified, remote calls 0.",
+      "publication": {
+        "status": "NOT_YET_PUBLISHED",
+        "commit": null,
+        "receipt": "PUBLICATION_RECEIPT.json"
+      },
+      "backup": {
+        "status": "NOT_YET_BACKED_UP",
+        "receipt": "BACKUP_RECEIPT.json"
+      },
+      "readiness": "READY_DEPENDS_ON_LIVE_NCP_INVENTORY_AND_ALLOCATED_CPU"
+    },
+    {
+      "id": "N08_NATIVE_POST_CANCELLATION_REFINEMENT",
+      "status": "NOT_RUN_CONDITIONAL",
+      "depends_on": [
+        "N07_NATIVE_REFERENCE_LADDER"
+      ],
+      "evidence": [
+        "run_campaign.py",
+        "analyze_campaign.py",
+        "campaign_contract.py"
+      ],
+      "meaning": "새 native_source FULLMID/hybrid n128,256=4 jobs; 8references operational COMPLETE AND native pilot READY.",
+      "publication": {
+        "status": "NOT_YET_PUBLISHED",
+        "commit": null,
+        "receipt": "PUBLICATION_RECEIPT.json"
+      },
+      "backup": {
+        "status": "NOT_YET_BACKED_UP",
+        "receipt": "BACKUP_RECEIPT.json"
+      }
+    },
+    {
+      "id": "N09_CODE_DELIVERY",
+      "status": "READY_FOR_PUSH_AND_CREATE_ONLY_BACKUP",
+      "depends_on": [
+        "N06_INDEPENDENT_REVIEW_AND_SMOKE"
+      ],
+      "evidence": [
+        "PUBLICATION_RECEIPT.json",
+        "BACKUP_RECEIPT.json",
+        "EXECUTION_MANIFEST.json",
+        "handoff/CODEX_HANDOFF_KO.md"
+      ],
+      "meaning": "이 코드 단위 전달. Native 실행 완료와 독립; 실제 commit/provider 응답으로만 완료 갱신.",
+      "publication": {
+        "status": "NOT_YET_PUBLISHED",
+        "commit": null,
+        "receipt": "PUBLICATION_RECEIPT.json"
+      },
+      "backup": {
+        "status": "NOT_YET_BACKED_UP",
+        "receipt": "BACKUP_RECEIPT.json"
+      }
+    }
+  ],
+  "execution_contract": {
+    "reference_jobs": 8,
+    "conditional_history_jobs": 4,
+    "maximum_new_jobs": 12,
+    "max_concurrent_jobs": 1,
+    "protected_cpu_ids": [
+      55
+    ],
+    "wall_timeout_s_per_job": 300,
+    "max_native_calls_per_job": 200000,
+    "max_reference_rhs_evaluations": 200000,
+    "native_call_timeout_s": 15,
+    "output_policy": "CREATE_ONLY",
+    "reuse_policy": "COMPLETED_C21G_MATCHING_SIGNATURE_AND_HASH_VERIFIED_PAYLOAD_ONLY",
+    "history_opening_rule": {
+      "all_eight_reference_jobs_operationally_complete": true,
+      "native_source_reference_sensitivity": "REF_READY_FOR_BOUNDED_REFINEMENT",
+      "common_ic_budget_failure_blocks_native_refinement": false,
+      "common_ic_execution_failure_blocks_native_refinement": true
+    },
+    "reference_baseline_reused": "L0",
+    "new_tiers": [
+      "L1",
+      "L2",
+      "L3",
+      "L3M"
+    ],
+    "new_history_subdivisions": [
+      128,
+      256
+    ],
+    "new_history_modes": [
+      "FULLMID",
+      "MIDPHOTO_ENDMICRO"
+    ],
+    "old_matrix_jobs_repeated": []
+  },
+  "runtime_dependency": {
+    "status": "CURRENT_NCP_INVENTORY_UNVERIFIED",
+    "fresh_observed_remote_calls_left_pct": 0,
+    "native_jobs_started": 0,
+    "remote_mutations": 0,
+    "next_action": "Discover current campaign/resource state and allocate one CPU other than55; use actual verified binary/location and frozen C21G execution commit."
+  },
+  "independent_review": {
+    "status": "PASS_SCOPED_SCIENTIFIC_CODE_REVIEW_CLOSED_S1_S4",
+    "review": "evidence/review/SCIENCE_REVIEW_KO.md",
+    "tests_not_all_red_first": true
+  },
+  "holds": [
+    "Full48",
+    "source-age",
+    "spectral",
+    "angular",
+    "Case B",
+    "signed Bianchi",
+    "full EoR",
+    "standalone Grackle driver parity",
+    "rigorous native global error certification"
+  ],
+  "status_update_policy": "Completed scientific/code nodes retain separate delivery state. Change native execution only from actual new job receipts; publication/backup only from provider acknowledgements. Preserve previous artifacts.",
+  "branch": "research/cr-c21g-reference-refinement-20261019",
+  "verification": {
+    "reference_patch_unittest": 9,
+    "diagnostics_unittest": 9,
+    "campaign_unittest": 14,
+    "analysis_binding_unittest": 3,
+    "analytic_cases": 9,
+    "wiring_smoke_jobs": 3,
+    "wiring_smoke_wall_s": 4.494274969001708,
+    "native_jobs_started": 0,
+    "all_tests_red_first": false
+  }
+}

@@ -1,0 +1,205 @@
+{
+  "policy": {
+    "schema": "C21G_BOUNDED_REFERENCE_REFINEMENT_POLICY_V1",
+    "baseline_execution_commit": "f8359232df8d0dd4fe91fcdabeb6701eb06089ba",
+    "assessment_head": "d780c2c53f869c914add1d5492312d0bc507f976",
+    "native_owner": "6ea2b1b4b3875c9163cafc45efe720afded43fc4",
+    "fixtures": [
+      "common_ic",
+      "native_source"
+    ],
+    "reference_tiers": [
+      {
+        "name": "L1",
+        "rtol": 2e-11,
+        "atol_scale": 2e-14,
+        "max_step_divisor": 8.0
+      },
+      {
+        "name": "L2",
+        "rtol": 2e-12,
+        "atol_scale": 2e-15,
+        "max_step_divisor": 8.0
+      },
+      {
+        "name": "L3",
+        "rtol": 2e-13,
+        "atol_scale": 2e-16,
+        "max_step_divisor": 8.0
+      },
+      {
+        "name": "L3M",
+        "rtol": 2e-13,
+        "atol_scale": 2e-16,
+        "max_step_divisor": 16.0
+      }
+    ],
+    "new_native_subdivisions": [
+      128,
+      256
+    ],
+    "new_native_modes": [
+      "FULLMID",
+      "MIDPHOTO_ENDMICRO"
+    ],
+    "max_native_calls_per_job": 200000,
+    "max_reference_rhs_evaluations": 200000,
+    "native_call_timeout_s": 15.0,
+    "wall_timeout_s_per_job": 300.0,
+    "max_concurrent_jobs": 1,
+    "protected_cpu_ids": [
+      55
+    ],
+    "pilot_agreement_budgets": {
+      "common_ic": {
+        "gas_normalized": 1e-14,
+        "photon_max_abs_H": 1e-14,
+        "log_survivor_max_abs": 1e-10
+      },
+      "native_source": {
+        "gas_normalized": 1e-10,
+        "photon_max_abs_H": 1e-12,
+        "log_survivor_max_abs": 1e-08
+      }
+    },
+    "budget_meaning": "Predeclared endpoint comparison resolution for this bounded pilot; not a physical acceptance gate or certified error bound.",
+    "global_error_bound": null,
+    "reference_ready_rule": "All reference jobs complete; native_source endpoint differences L1-L2, L2-L3 and L3-L3M meet each pilot budget. Mesh-cap inactivity is reported separately.",
+    "holds": [
+      "Full48",
+      "source-age",
+      "spectral",
+      "angular",
+      "Case B",
+      "signed Bianchi",
+      "full EoR",
+      "standalone Grackle driver parity"
+    ]
+  },
+  "references": [
+    {
+      "id": "common_ic_reference_L1",
+      "fixture": "common_ic",
+      "kind": "reference",
+      "tier": {
+        "name": "L1",
+        "rtol": 2e-11,
+        "atol_scale": 2e-14,
+        "max_step_divisor": 8.0
+      }
+    },
+    {
+      "id": "common_ic_reference_L2",
+      "fixture": "common_ic",
+      "kind": "reference",
+      "tier": {
+        "name": "L2",
+        "rtol": 2e-12,
+        "atol_scale": 2e-15,
+        "max_step_divisor": 8.0
+      }
+    },
+    {
+      "id": "common_ic_reference_L3",
+      "fixture": "common_ic",
+      "kind": "reference",
+      "tier": {
+        "name": "L3",
+        "rtol": 2e-13,
+        "atol_scale": 2e-16,
+        "max_step_divisor": 8.0
+      }
+    },
+    {
+      "id": "common_ic_reference_L3M",
+      "fixture": "common_ic",
+      "kind": "reference",
+      "tier": {
+        "name": "L3M",
+        "rtol": 2e-13,
+        "atol_scale": 2e-16,
+        "max_step_divisor": 16.0
+      }
+    },
+    {
+      "id": "native_source_reference_L1",
+      "fixture": "native_source",
+      "kind": "reference",
+      "tier": {
+        "name": "L1",
+        "rtol": 2e-11,
+        "atol_scale": 2e-14,
+        "max_step_divisor": 8.0
+      }
+    },
+    {
+      "id": "native_source_reference_L2",
+      "fixture": "native_source",
+      "kind": "reference",
+      "tier": {
+        "name": "L2",
+        "rtol": 2e-12,
+        "atol_scale": 2e-15,
+        "max_step_divisor": 8.0
+      }
+    },
+    {
+      "id": "native_source_reference_L3",
+      "fixture": "native_source",
+      "kind": "reference",
+      "tier": {
+        "name": "L3",
+        "rtol": 2e-13,
+        "atol_scale": 2e-16,
+        "max_step_divisor": 8.0
+      }
+    },
+    {
+      "id": "native_source_reference_L3M",
+      "fixture": "native_source",
+      "kind": "reference",
+      "tier": {
+        "name": "L3M",
+        "rtol": 2e-13,
+        "atol_scale": 2e-16,
+        "max_step_divisor": 16.0
+      }
+    }
+  ],
+  "conditional_histories": [
+    {
+      "id": "native_source_FULLMID_128",
+      "fixture": "native_source",
+      "kind": "history",
+      "mode": "FULLMID",
+      "subdivisions": 128
+    },
+    {
+      "id": "native_source_MIDPHOTO_ENDMICRO_128",
+      "fixture": "native_source",
+      "kind": "history",
+      "mode": "MIDPHOTO_ENDMICRO",
+      "subdivisions": 128
+    },
+    {
+      "id": "native_source_FULLMID_256",
+      "fixture": "native_source",
+      "kind": "history",
+      "mode": "FULLMID",
+      "subdivisions": 256
+    },
+    {
+      "id": "native_source_MIDPHOTO_ENDMICRO_256",
+      "fixture": "native_source",
+      "kind": "history",
+      "mode": "MIDPHOTO_ENDMICRO",
+      "subdivisions": 256
+    }
+  ],
+  "old_runs_repeated": [],
+  "maximum_new_jobs": 12,
+  "source_directory": "/workspace/scratch/4d2e4c44b70c/c21g_work/upstream/c21f",
+  "baseline_directory": "/workspace/scratch/4d2e4c44b70c/c21g_work/unit/baseline",
+  "created_at_utc": "2026-10-19T08:54:47.565654+00:00",
+  "native_status": "NOT_RUN"
+}

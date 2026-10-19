@@ -1,0 +1,453 @@
+{
+  "job": {
+    "id": "smoke_reference_L1",
+    "fixture": "manufactured_smoke",
+    "kind": "reference",
+    "tier": {
+      "name": "L1",
+      "rtol": 2e-11,
+      "atol_scale": 2e-14,
+      "max_step_divisor": 8.0
+    }
+  },
+  "source_directory": "/workspace/scratch/4d2e4c44b70c/c21g_work/upstream/c21f",
+  "baseline_directory": "/workspace/scratch/4d2e4c44b70c/c21g_work/unit/baseline",
+  "fixture": {
+    "x0": -2.4079456086518722,
+    "dx": 1e-07,
+    "nh0": 1.8981984507140266e-07,
+    "Y": 0.0,
+    "gas0": [
+      0.2,
+      0.0,
+      0.0,
+      1.318451989108212
+    ],
+    "q": [
+      1.2419999999999998,
+      2.2319999999999998,
+      4.949999999999999,
+      1.3590000287190496,
+      2.3490000496402117,
+      4.9500001046058095,
+      1.3590001071809548,
+      2.349000185259796,
+      4.950000390394206
+    ],
+    "birth": [
+      -2.4079456086518722,
+      -2.4079456086518722,
+      -2.4079456086518722,
+      -2.4079455875193854,
+      -2.4079455875193854,
+      -2.4079455875193854,
+      -2.407945529784359,
+      -2.407945529784359,
+      -2.407945529784359
+    ],
+    "amounts": [
+      0.014,
+      0.01,
+      0.008,
+      5.979073463086364e-09,
+      8.968610194629545e-09,
+      1.494768365771591e-08,
+      5.979074980670586e-09,
+      8.968612471005878e-09,
+      1.4947687451676463e-08
+    ],
+    "opacity_scale": 0.0003,
+    "source_identity": "PINNED_PR79_MD14_RATE_MANUFACTURED_3_ENERGY_GAS",
+    "scope": "FLRW_EXPLICIT_TEST_IC_NOT_CHECKPOINT"
+  },
+  "input_identity": {
+    "schema": "C21G_VERIFIED_INPUTS_V1",
+    "manifest_path": "/workspace/scratch/4d2e4c44b70c/c21g_work/unit/EXECUTION_MANIFEST.json",
+    "manifest_sha256": "7b14b62a20714fc66216ebd9d446af1ed1a05de889447ec410158b52e5923fed",
+    "policy_sha256": "372cd979e2e613bfa7bba56cc38111a1b4f8e84702146fe5fb0ce312ac15974c",
+    "c21f_runtime_files": {
+      "src/event_coupler.py": {
+        "bytes": 10655,
+        "sha256": "24386145f4337b2e01a32219a56ec2446080e4aa4a679a8f956a3eb7ff2ab819"
+      },
+      "src/native_micro.py": {
+        "bytes": 5109,
+        "sha256": "ce27acea344604c08159e08d6e703f66a85d51f0729b4e30aa2248a3337ecc27"
+      },
+      "src/reference_tau.py": {
+        "bytes": 11653,
+        "sha256": "714c40a4e3a0577784e6a754b95cdb34b247cb2e529953a375c74a43efafc3e0"
+      },
+      "src/run_experiment.py": {
+        "bytes": 20173,
+        "sha256": "71fb34d6ae5ca843868a2b666a0e7f93ee330c5bedc6c7191220e8060f4869fc"
+      },
+      "vendor/pr79/c21d_trilane.py": {
+        "bytes": 13498,
+        "sha256": "22d4c355353721cd0dff00a401f15a18b9d6fdfda8dc0bdfaab753a3c1c044c0"
+      },
+      "vendor/pr79/exposure_contract.py": {
+        "bytes": 9115,
+        "sha256": "b30cefb2fdce72f813f70fc42a29f2dc67516e73c18f4907737341fcf8ec9407"
+      },
+      "vendor/pr79/radau_exposure_oracle.py": {
+        "bytes": 7132,
+        "sha256": "23895d81e50791135c689db5b6a180fcb23e05ef8cb76e271c65b189cf3fe428"
+      },
+      "native/native_point.rs": {
+        "bytes": 8305,
+        "sha256": "3812cf4fec625fdec32e47d737bec8e0306cc538372c5a2cf801d2b0cf590e2d"
+      },
+      "build_native.sh": {
+        "bytes": 2582,
+        "sha256": "917ca6620ff5d9ad85cb1a783b3ebbc3b87db7dd58f11c7b500bd1dce35dcf82"
+      },
+      "run_ncp.sh": {
+        "bytes": 3563,
+        "sha256": "b451bf1a2400920d9b2861eed7f65e718342df1afd0f1c15a7a8a8d127b3b22b"
+      }
+    },
+    "c21g_runtime_files": {
+      "campaign_contract.py": {
+        "bytes": 9534,
+        "sha256": "fb450ad1d00c35e73e99d52c868f2c1a70d1ef71ab1ae83a08ed0e6c0dc00451"
+      },
+      "run_campaign.py": {
+        "bytes": 33012,
+        "sha256": "d844dec3be1cb397d48db319cd84a5f2314011db0cd0443d3d704d6252080275"
+      },
+      "diagnostics.py": {
+        "bytes": 17612,
+        "sha256": "a27eb840afaf657334f251db807f8631b7f6252bd3da63382c1b6d93060424bd"
+      },
+      "analyze_campaign.py": {
+        "bytes": 12418,
+        "sha256": "3e4cf60c6f4b11c2c8bcc3bd4ca6f5d1532f57e66f848d5d427f57eaa4f4d022"
+      }
+    },
+    "baseline_files": {
+      "common_ic/fixture.json": {
+        "bytes": 1007,
+        "sha256": "bcfb3d5a8b4d5c8153247712eb1c3d127c4410e2455f6106bf60720642d0f060"
+      },
+      "common_ic/radau.json": {
+        "bytes": 2678,
+        "sha256": "f7d2129e1659044fee576a06f9e87be163bf06116ed96017e63cee5607a52677"
+      },
+      "common_ic/SUMMARY.json": {
+        "bytes": 28727,
+        "sha256": "35347fa41c8d906ff28830b06088eae20f5e5473d81f8b8cd7785bd82ea80ed2"
+      },
+      "native_source/fixture.json": {
+        "bytes": 2390,
+        "sha256": "fb33c66c9d26009ceb4d593b221481c0743320e4c657365971910b8294ef986e"
+      },
+      "native_source/radau.json": {
+        "bytes": 4044,
+        "sha256": "fbd53d07df476480a292e490411cd914c0d401fc117b76b6511193673a89bd57"
+      },
+      "native_source/SUMMARY.json": {
+        "bytes": 35608,
+        "sha256": "c2805d0ea90f75ba7bdd4bff33c011c730ed7d430521e716a4201305b0d966ac"
+      }
+    },
+    "fixtures": {
+      "common_ic": {
+        "sha256": "befb0c8a7a113ff0efccc450af05b1157592a8d91cc7e994cfdfd2768905cc65",
+        "cohorts": 9,
+        "scales": {
+          "values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.4229641197648433,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            5.390224966566528,
+            5.390224966566528,
+            5.390224966566528,
+            5.390224966566528,
+            5.390224966566528
+          ],
+          "thermal_eV_H": 1.4229641197648433,
+          "energy_eV_H": 5.390224966566528,
+          "definition": "tau/fraction:1; number ledger:1 per H; thermal:w0; energy ledger:w0+initial binding+all fixed birth photon energy",
+          "state_order": "tau[M],gas[4],photo[3],ci[3],rr[3],dr,escape,cmb,photon_work,gas_work,heat",
+          "state_floor_applied": false
+        }
+      },
+      "native_source": {
+        "sha256": "c562971cf0fcab251fc96b7634f5e7aefab87377652a98be3ba4256a23a9d781",
+        "cohorts": 27,
+        "scales": {
+          "values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.4229641197648433,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            5.3891441069602815,
+            5.3891441069602815,
+            5.3891441069602815,
+            5.3891441069602815,
+            5.3891441069602815
+          ],
+          "thermal_eV_H": 1.4229641197648433,
+          "energy_eV_H": 5.3891441069602815,
+          "definition": "tau/fraction:1; number ledger:1 per H; thermal:w0; energy ledger:w0+initial binding+all fixed birth photon energy",
+          "state_order": "tau[M],gas[4],photo[3],ci[3],rr[3],dr,escape,cmb,photon_work,gas_work,heat",
+          "state_floor_applied": false
+        }
+      }
+    },
+    "global_error_bound": null
+  },
+  "native_identity": null,
+  "payload_directory": "/workspace/scratch/4d2e4c44b70c/c21g_work/wiring_smoke/jobs/smoke_reference_L1/payload",
+  "micro": "manufactured",
+  "native_binary": null,
+  "cpu": null,
+  "policy": {
+    "schema": "C21G_BOUNDED_REFERENCE_REFINEMENT_POLICY_V1",
+    "baseline_execution_commit": "f8359232df8d0dd4fe91fcdabeb6701eb06089ba",
+    "assessment_head": "d780c2c53f869c914add1d5492312d0bc507f976",
+    "native_owner": "6ea2b1b4b3875c9163cafc45efe720afded43fc4",
+    "fixtures": [
+      "common_ic",
+      "native_source"
+    ],
+    "reference_tiers": [
+      {
+        "name": "L1",
+        "rtol": 2e-11,
+        "atol_scale": 2e-14,
+        "max_step_divisor": 8.0
+      },
+      {
+        "name": "L2",
+        "rtol": 2e-12,
+        "atol_scale": 2e-15,
+        "max_step_divisor": 8.0
+      },
+      {
+        "name": "L3",
+        "rtol": 2e-13,
+        "atol_scale": 2e-16,
+        "max_step_divisor": 8.0
+      },
+      {
+        "name": "L3M",
+        "rtol": 2e-13,
+        "atol_scale": 2e-16,
+        "max_step_divisor": 16.0
+      }
+    ],
+    "new_native_subdivisions": [
+      128,
+      256
+    ],
+    "new_native_modes": [
+      "FULLMID",
+      "MIDPHOTO_ENDMICRO"
+    ],
+    "max_native_calls_per_job": 200000,
+    "max_reference_rhs_evaluations": 200000,
+    "native_call_timeout_s": 15.0,
+    "wall_timeout_s_per_job": 300.0,
+    "max_concurrent_jobs": 1,
+    "protected_cpu_ids": [
+      55
+    ],
+    "pilot_agreement_budgets": {
+      "common_ic": {
+        "gas_normalized": 1e-14,
+        "photon_max_abs_H": 1e-14,
+        "log_survivor_max_abs": 1e-10
+      },
+      "native_source": {
+        "gas_normalized": 1e-10,
+        "photon_max_abs_H": 1e-12,
+        "log_survivor_max_abs": 1e-08
+      }
+    },
+    "budget_meaning": "Predeclared endpoint comparison resolution for this bounded pilot; not a physical acceptance gate or certified error bound.",
+    "global_error_bound": null,
+    "reference_ready_rule": "All reference jobs complete; native_source endpoint differences L1-L2, L2-L3 and L3-L3M meet each pilot budget. Mesh-cap inactivity is reported separately.",
+    "holds": [
+      "Full48",
+      "source-age",
+      "spectral",
+      "angular",
+      "Case B",
+      "signed Bianchi",
+      "full EoR",
+      "standalone Grackle driver parity"
+    ]
+  },
+  "signature": "9ccdccea9f9313951a62c7d71858d2b377ac1ce6f2b4f62151b2b46106642e72",
+  "signature_data": {
+    "job": {
+      "id": "smoke_reference_L1",
+      "fixture": "manufactured_smoke",
+      "kind": "reference",
+      "tier": {
+        "name": "L1",
+        "rtol": 2e-11,
+        "atol_scale": 2e-14,
+        "max_step_divisor": 8.0
+      }
+    },
+    "fixture": {
+      "x0": -2.4079456086518722,
+      "dx": 1e-07,
+      "nh0": 1.8981984507140266e-07,
+      "Y": 0.0,
+      "gas0": [
+        0.2,
+        0.0,
+        0.0,
+        1.318451989108212
+      ],
+      "q": [
+        1.2419999999999998,
+        2.2319999999999998,
+        4.949999999999999,
+        1.3590000287190496,
+        2.3490000496402117,
+        4.9500001046058095,
+        1.3590001071809548,
+        2.349000185259796,
+        4.950000390394206
+      ],
+      "birth": [
+        -2.4079456086518722,
+        -2.4079456086518722,
+        -2.4079456086518722,
+        -2.4079455875193854,
+        -2.4079455875193854,
+        -2.4079455875193854,
+        -2.407945529784359,
+        -2.407945529784359,
+        -2.407945529784359
+      ],
+      "amounts": [
+        0.014,
+        0.01,
+        0.008,
+        5.979073463086364e-09,
+        8.968610194629545e-09,
+        1.494768365771591e-08,
+        5.979074980670586e-09,
+        8.968612471005878e-09,
+        1.4947687451676463e-08
+      ],
+      "opacity_scale": 0.0003,
+      "source_identity": "PINNED_PR79_MD14_RATE_MANUFACTURED_3_ENERGY_GAS",
+      "scope": "FLRW_EXPLICIT_TEST_IC_NOT_CHECKPOINT"
+    },
+    "fixture_sha256": "e04b3167394131672d3bff2bfea7988ec1c513d16a22af5bea009d2d2ee1f153",
+    "input_manifest_sha256": "7b14b62a20714fc66216ebd9d446af1ed1a05de889447ec410158b52e5923fed",
+    "input_identity_sha256": "6057e40a69be369b1a39bf485417bbaa9974d4f5c4f442b8df8397d5ef9d58d7",
+    "runtime": {
+      "python": "3.12.14",
+      "numpy": "2.3.5",
+      "scipy": "1.17.0"
+    },
+    "micro": "manufactured",
+    "binary_sha256": null,
+    "expected_execution": {
+      "kind": "reference",
+      "cohorts": 9,
+      "x0": -2.4079456086518722,
+      "x1": -2.4079455086518724,
+      "schema": "C21F_OPTICAL_DEPTH_RADAU_REFERENCE_V1",
+      "status": "PASS_SCOPED_CONTINUOUS_IVP",
+      "rtol": 2e-11,
+      "atol": [
+        2e-14,
+        2e-14,
+        2e-14,
+        2e-14,
+        2e-14,
+        2e-14,
+        2e-14,
+        2e-14,
+        2e-14,
+        2e-14,
+        2e-14,
+        2e-14,
+        2.636903978216424e-14,
+        2e-14,
+        2e-14,
+        2e-14,
+        2e-14,
+        2e-14,
+        2e-14,
+        2e-14,
+        2e-14,
+        2e-14,
+        2e-14,
+        9.838682404047153e-14,
+        9.838682404047153e-14,
+        9.838682404047153e-14,
+        9.838682404047153e-14,
+        9.838682404047153e-14
+      ],
+      "max_step_divisor": 8.0,
+      "max_evaluations": 200000
+    }
+  }
+}

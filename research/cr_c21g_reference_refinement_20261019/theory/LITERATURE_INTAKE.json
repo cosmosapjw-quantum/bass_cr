@@ -1,0 +1,142 @@
+{
+  "schema": "C21G_BOUNDED_REFERENCE_ERROR_LITERATURE_INTAKE_V1",
+  "created_utc": "2026-10-19T08:10:08Z",
+  "author_role": "independent_reference_theory_agent",
+  "scope": "Fixed C21F cohort IVP; local Radau tolerances, endpoint error, coordinate transformations, and reference-free refinement diagnostics",
+  "native_execution_performed": false,
+  "baseline_head": "d780c2c53f869c914add1d5492312d0bc507f976",
+  "queries": [
+    {
+      "service": "Exa",
+      "query": "Official SciPy documentation for scipy.integrate.Radau local error tolerance rtol atol embedded formula and solve_ivp component-wise absolute tolerances",
+      "objective": "Find the official SciPy primary documentation and implementation: exact local error control, embedded order, component-wise atol and dense output. Exclude tutorials and secondary blogs.",
+      "num_results_requested": 3,
+      "status": "SUCCESS",
+      "initial_result_version": "1.18.0 current documentation",
+      "followup": "Fetched version-pinned 1.17.0 documentation and source separately"
+    },
+    {
+      "service": "SciSpace",
+      "search_question": "For stiff ordinary differential equations solved with adaptive Radau IIA methods, when can local error tolerances or convergence under tighter tolerances be used to assess global error in endpoint observables, and what additional stability or adjoint information is needed for a rigorous global error bound?",
+      "status": "SUCCESS",
+      "result_count": 10,
+      "selected_result": {
+        "id": "1rse4j1crd",
+        "title": "A Posteriori Error Estimation and Global Error Control for Ordinary Differential Equations by the Adjoint Method",
+        "authors": ["Yang Cao", "Linda R. Petzold"],
+        "doi": "10.1137/S1064827503420969",
+        "scispace_reported_year": 2005,
+        "author_pdf_verified_year": 2004,
+        "metadata_discrepancy": "Year corrected to the original article and institutional repository; not silently accepted from the index"
+      }
+    },
+    {
+      "service": "Exa",
+      "query": "Yang Cao Linda Petzold A Posteriori Error Estimation and Global Error Control for Ordinary Differential Equations by the Adjoint Method 10.1137 S1064827503420969 PDF author",
+      "objective": "Retrieve original paper or author-hosted PDF/official journal page, not a review. Need the mathematical relation between residual, adjoint sensitivity and endpoint error and its assumptions.",
+      "num_results_requested": 3,
+      "status": "SUCCESS"
+    }
+  ],
+  "primary_sources": [
+    {
+      "id": "SCIPY_RADAU_117_DOC",
+      "url": "https://docs.scipy.org/doc/scipy-1.17.0/reference/generated/scipy.integrate.Radau.html",
+      "owner": "SciPy",
+      "version": "1.17.0",
+      "retrieval": "Exa web_fetch_exa success",
+      "supported_claims": [
+        "The solution method is fifth-order Radau IIA with a third-order embedded error estimator.",
+        "Absolute tolerances may be scalar or component arrays.",
+        "The dense output uses a cubic collocation polynomial."
+      ],
+      "claim_limit": "Documentation describes local tolerance control, not a certified endpoint error bound for the C21F physical observables."
+    },
+    {
+      "id": "SCIPY_RADAU_117_SOURCE",
+      "url": "https://github.com/scipy/scipy/blob/v1.17.0/scipy/integrate/_ivp/radau.py",
+      "owner": "SciPy",
+      "version": "v1.17.0",
+      "retrieval": "Exa web_fetch_exa success",
+      "supported_claims": [
+        "The endpoint scale uses the component-wise maximum magnitude of the old and new solution.",
+        "Acceptance uses the imported norm on the scaled embedded error.",
+        "The finite-difference Jacobian receives absolute tolerance as its component threshold."
+      ]
+    },
+    {
+      "id": "SCIPY_COMMON_117_SOURCE",
+      "url": "https://github.com/scipy/scipy/blob/v1.17.0/scipy/integrate/_ivp/common.py",
+      "owner": "SciPy",
+      "version": "v1.17.0",
+      "retrieval": "Exa web_fetch_exa success",
+      "supported_claims": [
+        "The norm used by the adaptive solver is root mean square, not maximum norm.",
+        "Relative tolerance below 100 machine epsilon is raised by the implementation.",
+        "A non-scalar atol must match the dimension of the actual integrated state."
+      ],
+      "derived_implication": "A scalar normalized estimator can reach square root of the dynamic state dimension while the RMS remains at most one; this does not define a component-wise maximum bound."
+    },
+    {
+      "id": "CAO_PETZOLD_2004",
+      "url": "https://people.cs.vt.edu/~ycao/publication/siam_42096.pdf",
+      "institutional_url": "https://escholarship.org/content/qt3c59x9vs/qt3c59x9vs.pdf?v=lg",
+      "doi_url": "https://doi.org/10.1137/S1064827503420969",
+      "authors": ["Yang Cao", "Linda Petzold"],
+      "year": 2004,
+      "journal": "SIAM Journal on Scientific Computing",
+      "volume": 26,
+      "issue": 2,
+      "pages": "359-374",
+      "electronic_publication_date": "2004-12-22",
+      "retrieval": "Exa search located the author and institutional originals; Exa fetch read the author PDF through sections 2 and 3",
+      "supported_claims": [
+        "Global error assessment requires information about both discretization perturbations and their amplification by the differential equation.",
+        "Adjoint equations can weight residuals for endpoint observables.",
+        "Using a nonlinear approximate trajectory introduces a remainder and accuracy assumptions."
+      ],
+      "claim_limit": "The paper supports the error-estimation framework. Its existence does not certify the current native solve or an empirical tolerance ladder."
+    }
+  ],
+  "repository_sources_read": [
+    {
+      "path": "research/cr_c21e_event_native_20261018/src/reference_tau.py",
+      "git_blob_sha": "6f4e400fc0c21210f3decf5dd75c11ac826c7a39",
+      "head": "d780c2c53f869c914add1d5492312d0bc507f976",
+      "read_scope": "complete file",
+      "findings": [
+        "Existing wrapper validates only scalar tolerances.",
+        "Y=0 removes the two helium fraction unknowns through a dynamic index array.",
+        "Existing endpoint one-sided evaluation uses a fixed 1e-9 cell-width offset.",
+        "Positive underflowed populations retain finite log-survivor values."
+      ]
+    },
+    {
+      "path": "research/cr_c21e_event_native_20261018/src/run_experiment.py",
+      "git_blob_sha": "78cbec1a0c97a71259b31a1bda542e6e4783961f",
+      "head": "d780c2c53f869c914add1d5492312d0bc507f976",
+      "read_scope": "complete file"
+    },
+    {
+      "path": "research/cr_c21e_event_native_20261018/src/event_coupler.py",
+      "git_blob_sha": "24bd8c886cc8397c20ae3680e1e8c8d15b4d73ad",
+      "head": "d780c2c53f869c914add1d5492312d0bc507f976",
+      "read_scope": "lines 1-130 via connector",
+      "findings": [
+        "T=w/[1.5 kB (1+Y+x+Y(y+2z))].",
+        "Strict gas domain implies 1+Y <= EOS denominator factor <= 2+3Y."
+      ]
+    }
+  ],
+  "new_constructive_results": [
+    "Exact fixed-amplitude log-survivor and photon difference identities, including log-domain absolute difference.",
+    "Exact EOS temperature difference and conditional coordinate-error bounds.",
+    "Conditional residual/transition/adjoint expressions with event restart terms.",
+    "Conditional order intervals distinguished from empirical reference sensitivity intervals.",
+    "Reference-free orders and leading hybrid-minus-FULLMID coefficients from n,2n without extrapolated crossing claims."
+  ],
+  "global_error_bound": null,
+  "native_absolute_accuracy_certificate": "NOT_ESTABLISHED",
+  "new_native_result_status": "NOT_RUN",
+  "publication_backup_status": "Awaiting root create-only checkpoint; no GitHub or backup mutation performed by this agent"
+}
