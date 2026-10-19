@@ -1,0 +1,579 @@
+{
+  "schema": "C21G_EXACT_MANUFACTURED_REFERENCE_CHECK_V1",
+  "status": "PASS",
+  "started_at_utc": "2026-10-19T08:24:42.370698+00:00",
+  "wall_s": 1.9097576049971394,
+  "runtime": {
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  },
+  "native_science": false,
+  "C21F_reexecution": false,
+  "model": "tau prime=k; N=A exp(-tau); photo prime=kN; thermal prime=QkN-mu*w; escape prime=mu*w. Dimensionless manufactured time.",
+  "scope": "Exact numerical workbench; no H/He absorber feedback, cosmology, source births or native microphysics.",
+  "cases": [
+    {
+      "kappa": 80.0,
+      "mu": 0.3,
+      "tier": {
+        "name": "L1",
+        "rtol": 2e-11,
+        "atol_scale": 2e-14,
+        "max_step_divisor": 8.0
+      },
+      "exact": {
+        "tau": 80.0,
+        "log_survivor": -83.44201937618242,
+        "photon_H": 5.775524441105302e-37,
+        "thermal_eV_H": 1.1799180041823998,
+        "photo_H": 0.032,
+        "loss_eV_H": 0.41208199581760013,
+        "formula_branch": "EXPONENTIAL_CONVOLUTION"
+      },
+      "actual": {
+        "optical_depth": 80.00000000000003,
+        "log_survivor": -83.44201937618244,
+        "photon_H": 5.775524441105137e-37,
+        "thermal_eV_H": 1.1799180041823765,
+        "photo_H": 0.03199999999999525,
+        "loss_eV_H": 0.4120819958175931
+      },
+      "number_defect_H": -4.7531423241764514e-15,
+      "energy_defect_eV_H": -3.036459972349803e-14,
+      "underflowed_positive_cohort": false,
+      "finite_log_survivor_retained": true,
+      "accepted_steps": 639,
+      "nfev": 4484,
+      "njev": 2,
+      "nlu": 68,
+      "actual_rhs_evaluations": 4497,
+      "wall_s": 0.08949596699676476,
+      "grid_sha256": "8b2d1d3eead4aa84258f09cf8297e3abf06665957678c165801c318e6ced57b6",
+      "test_budgets": {
+        "number_H": 1e-11,
+        "energy_eV_H": 1e-10,
+        "thermal_eV_H": 2e-10,
+        "log_survivor": 2e-09
+      },
+      "checks": {
+        "number_closure": true,
+        "energy_closure": true,
+        "thermal_accuracy": true,
+        "log_accuracy": true
+      },
+      "status": "PASS_EXACT_MANUFACTURED_CHECKS",
+      "native_science": false,
+      "difference_from_binary64_analytic_evaluation": {
+        "optical_depth": 2.842170943040401e-14,
+        "log_survivor": -2.842170943040401e-14,
+        "photon_absolute_H": 1.645420774650508e-50,
+        "thermal_eV_H": -2.3314683517128287e-14,
+        "photo_H": -4.7531423241764514e-15,
+        "loss_eV_H": -7.049916206369744e-15
+      },
+      "analytic_evaluation_precision": "binary64; a difference near machine precision is not a certified real-arithmetic error bound"
+    },
+    {
+      "kappa": 80.0,
+      "mu": 0.3,
+      "tier": {
+        "name": "L2",
+        "rtol": 2e-12,
+        "atol_scale": 2e-15,
+        "max_step_divisor": 8.0
+      },
+      "exact": {
+        "tau": 80.0,
+        "log_survivor": -83.44201937618242,
+        "photon_H": 5.775524441105302e-37,
+        "thermal_eV_H": 1.1799180041823998,
+        "photo_H": 0.032,
+        "loss_eV_H": 0.41208199581760013,
+        "formula_branch": "EXPONENTIAL_CONVOLUTION"
+      },
+      "actual": {
+        "optical_depth": 79.9999999999998,
+        "log_survivor": -83.44201937618222,
+        "photon_H": 5.775524441106451e-37,
+        "thermal_eV_H": 1.1799180041823973,
+        "photo_H": 0.03199999999999969,
+        "loss_eV_H": 0.4120819958175994
+      },
+      "number_defect_H": -3.122502256758253e-16,
+      "energy_defect_eV_H": -3.164135620181696e-15,
+      "underflowed_positive_cohort": false,
+      "finite_log_survivor_retained": true,
+      "accepted_steps": 1132,
+      "nfev": 7935,
+      "njev": 2,
+      "nlu": 70,
+      "actual_rhs_evaluations": 7948,
+      "wall_s": 0.15580408299865667,
+      "grid_sha256": "aaec9541642292d0ba227341e325c517c30c564d3bd2f58e35292b8dcbc40669",
+      "test_budgets": {
+        "number_H": 1e-11,
+        "energy_eV_H": 1e-10,
+        "thermal_eV_H": 2e-10,
+        "log_survivor": 2e-09
+      },
+      "checks": {
+        "number_closure": true,
+        "energy_closure": true,
+        "thermal_accuracy": true,
+        "log_accuracy": true
+      },
+      "status": "PASS_EXACT_MANUFACTURED_CHECKS",
+      "native_science": false,
+      "difference_from_binary64_analytic_evaluation": {
+        "optical_depth": -1.9895196601282805e-13,
+        "log_survivor": 1.9895196601282805e-13,
+        "photon_absolute_H": 1.1492888253396441e-49,
+        "thermal_eV_H": -2.4424906541753444e-15,
+        "photo_H": -3.122502256758253e-16,
+        "loss_eV_H": -7.216449660063518e-16
+      },
+      "analytic_evaluation_precision": "binary64; a difference near machine precision is not a certified real-arithmetic error bound"
+    },
+    {
+      "kappa": 80.0,
+      "mu": 0.3,
+      "tier": {
+        "name": "L3",
+        "rtol": 2e-13,
+        "atol_scale": 2e-16,
+        "max_step_divisor": 8.0
+      },
+      "exact": {
+        "tau": 80.0,
+        "log_survivor": -83.44201937618242,
+        "photon_H": 5.775524441105302e-37,
+        "thermal_eV_H": 1.1799180041823998,
+        "photo_H": 0.032,
+        "loss_eV_H": 0.41208199581760013,
+        "formula_branch": "EXPONENTIAL_CONVOLUTION"
+      },
+      "actual": {
+        "optical_depth": 79.9999999999999,
+        "log_survivor": -83.44201937618232,
+        "photon_H": 5.775524441105876e-37,
+        "thermal_eV_H": 1.1799180041824002,
+        "photo_H": 0.03200000000000018,
+        "loss_eV_H": 0.4120819958176001
+      },
+      "number_defect_H": 1.8041124150158794e-16,
+      "energy_defect_eV_H": 3.885780586188048e-16,
+      "underflowed_positive_cohort": false,
+      "finite_log_survivor_retained": true,
+      "accepted_steps": 2009,
+      "nfev": 14074,
+      "njev": 2,
+      "nlu": 70,
+      "actual_rhs_evaluations": 14087,
+      "wall_s": 0.2981938400043873,
+      "grid_sha256": "573d1f5b109ba078f3440fddfebe8e81c5ce4d7f4c3f2bcb4e4df3e0e848d545",
+      "test_budgets": {
+        "number_H": 1e-11,
+        "energy_eV_H": 1e-10,
+        "thermal_eV_H": 2e-10,
+        "log_survivor": 2e-09
+      },
+      "checks": {
+        "number_closure": true,
+        "energy_closure": true,
+        "thermal_accuracy": true,
+        "log_accuracy": true
+      },
+      "status": "PASS_EXACT_MANUFACTURED_CHECKS",
+      "native_science": false,
+      "difference_from_binary64_analytic_evaluation": {
+        "optical_depth": -9.947598300641403e-14,
+        "log_survivor": 9.947598300641403e-14,
+        "photon_absolute_H": 5.746444126698221e-50,
+        "thermal_eV_H": 4.440892098500626e-16,
+        "photo_H": 1.8041124150158794e-16,
+        "loss_eV_H": -5.551115123125783e-17
+      },
+      "analytic_evaluation_precision": "binary64; a difference near machine precision is not a certified real-arithmetic error bound"
+    },
+    {
+      "kappa": 80.0,
+      "mu": 0.3,
+      "tier": {
+        "name": "L3M",
+        "rtol": 2e-13,
+        "atol_scale": 2e-16,
+        "max_step_divisor": 16.0
+      },
+      "exact": {
+        "tau": 80.0,
+        "log_survivor": -83.44201937618242,
+        "photon_H": 5.775524441105302e-37,
+        "thermal_eV_H": 1.1799180041823998,
+        "photo_H": 0.032,
+        "loss_eV_H": 0.41208199581760013,
+        "formula_branch": "EXPONENTIAL_CONVOLUTION"
+      },
+      "actual": {
+        "optical_depth": 79.9999999999999,
+        "log_survivor": -83.44201937618232,
+        "photon_H": 5.775524441105876e-37,
+        "thermal_eV_H": 1.1799180041824002,
+        "photo_H": 0.03200000000000018,
+        "loss_eV_H": 0.4120819958176001
+      },
+      "number_defect_H": 1.8041124150158794e-16,
+      "energy_defect_eV_H": 3.885780586188048e-16,
+      "underflowed_positive_cohort": false,
+      "finite_log_survivor_retained": true,
+      "accepted_steps": 2009,
+      "nfev": 14074,
+      "njev": 2,
+      "nlu": 70,
+      "actual_rhs_evaluations": 14087,
+      "wall_s": 0.32012139099970227,
+      "grid_sha256": "573d1f5b109ba078f3440fddfebe8e81c5ce4d7f4c3f2bcb4e4df3e0e848d545",
+      "test_budgets": {
+        "number_H": 1e-11,
+        "energy_eV_H": 1e-10,
+        "thermal_eV_H": 2e-10,
+        "log_survivor": 2e-09
+      },
+      "checks": {
+        "number_closure": true,
+        "energy_closure": true,
+        "thermal_accuracy": true,
+        "log_accuracy": true
+      },
+      "status": "PASS_EXACT_MANUFACTURED_CHECKS",
+      "native_science": false,
+      "difference_from_binary64_analytic_evaluation": {
+        "optical_depth": -9.947598300641403e-14,
+        "log_survivor": 9.947598300641403e-14,
+        "photon_absolute_H": 5.746444126698221e-50,
+        "thermal_eV_H": 4.440892098500626e-16,
+        "photo_H": 1.8041124150158794e-16,
+        "loss_eV_H": -5.551115123125783e-17
+      },
+      "analytic_evaluation_precision": "binary64; a difference near machine precision is not a certified real-arithmetic error bound"
+    },
+    {
+      "kappa": 800.0,
+      "mu": 0.3,
+      "tier": {
+        "name": "L1",
+        "rtol": 2e-11,
+        "atol_scale": 2e-14,
+        "max_step_divisor": 8.0
+      },
+      "exact": {
+        "tau": 800.0,
+        "log_survivor": -803.4420193761824,
+        "photon_H": 0.0,
+        "thermal_eV_H": 1.1794359662467795,
+        "photo_H": 0.032,
+        "loss_eV_H": 0.4125640337532204,
+        "formula_branch": "EXPONENTIAL_CONVOLUTION"
+      },
+      "actual": {
+        "optical_depth": 800.0000000000008,
+        "log_survivor": -803.4420193761832,
+        "photon_H": 0.0,
+        "thermal_eV_H": 1.1794359662467377,
+        "photo_H": 0.031999999999990945,
+        "loss_eV_H": 0.412564033753206
+      },
+      "number_defect_H": -9.055256544598933e-15,
+      "energy_defect_eV_H": -5.617728504603292e-14,
+      "underflowed_positive_cohort": true,
+      "finite_log_survivor_retained": true,
+      "accepted_steps": 663,
+      "nfev": 4652,
+      "njev": 2,
+      "nlu": 82,
+      "actual_rhs_evaluations": 4666,
+      "wall_s": 0.10675846200319938,
+      "grid_sha256": "7e0383855a667a48cc93b996b4b1bbbd14668e1079c592f53764ba90610601bf",
+      "test_budgets": {
+        "number_H": 1e-11,
+        "energy_eV_H": 1e-10,
+        "thermal_eV_H": 2e-10,
+        "log_survivor": 2e-09
+      },
+      "checks": {
+        "number_closure": true,
+        "energy_closure": true,
+        "thermal_accuracy": true,
+        "log_accuracy": true
+      },
+      "status": "PASS_EXACT_MANUFACTURED_CHECKS",
+      "native_science": false,
+      "difference_from_binary64_analytic_evaluation": {
+        "optical_depth": 7.958078640513122e-13,
+        "log_survivor": -7.958078640513122e-13,
+        "photon_absolute_H": 0.0,
+        "thermal_eV_H": -4.1744385725905886e-14,
+        "photo_H": -9.055256544598933e-15,
+        "loss_eV_H": -1.4432899320127035e-14
+      },
+      "analytic_evaluation_precision": "binary64; a difference near machine precision is not a certified real-arithmetic error bound"
+    },
+    {
+      "kappa": 800.0,
+      "mu": 0.3,
+      "tier": {
+        "name": "L2",
+        "rtol": 2e-12,
+        "atol_scale": 2e-15,
+        "max_step_divisor": 8.0
+      },
+      "exact": {
+        "tau": 800.0,
+        "log_survivor": -803.4420193761824,
+        "photon_H": 0.0,
+        "thermal_eV_H": 1.1794359662467795,
+        "photo_H": 0.032,
+        "loss_eV_H": 0.4125640337532204,
+        "formula_branch": "EXPONENTIAL_CONVOLUTION"
+      },
+      "actual": {
+        "optical_depth": 800.0000000000009,
+        "log_survivor": -803.4420193761833,
+        "photon_H": 0.0,
+        "thermal_eV_H": 1.1794359662467757,
+        "photo_H": 0.031999999999999154,
+        "loss_eV_H": 0.41256403375321915
+      },
+      "number_defect_H": -8.465450562766819e-16,
+      "energy_defect_eV_H": -5.051514762044462e-15,
+      "underflowed_positive_cohort": true,
+      "finite_log_survivor_retained": true,
+      "accepted_steps": 1174,
+      "nfev": 8229,
+      "njev": 2,
+      "nlu": 86,
+      "actual_rhs_evaluations": 8243,
+      "wall_s": 0.17176628999732202,
+      "grid_sha256": "2917c7e72bc98c54ae3bd078ab538c339a6c31576d49cc5141f35422535d4987",
+      "test_budgets": {
+        "number_H": 1e-11,
+        "energy_eV_H": 1e-10,
+        "thermal_eV_H": 2e-10,
+        "log_survivor": 2e-09
+      },
+      "checks": {
+        "number_closure": true,
+        "energy_closure": true,
+        "thermal_accuracy": true,
+        "log_accuracy": true
+      },
+      "status": "PASS_EXACT_MANUFACTURED_CHECKS",
+      "native_science": false,
+      "difference_from_binary64_analytic_evaluation": {
+        "optical_depth": 9.094947017729282e-13,
+        "log_survivor": -9.094947017729282e-13,
+        "photon_absolute_H": 0.0,
+        "thermal_eV_H": -3.774758283725532e-15,
+        "photo_H": -8.465450562766819e-16,
+        "loss_eV_H": -1.27675647831893e-15
+      },
+      "analytic_evaluation_precision": "binary64; a difference near machine precision is not a certified real-arithmetic error bound"
+    },
+    {
+      "kappa": 800.0,
+      "mu": 0.3,
+      "tier": {
+        "name": "L3",
+        "rtol": 2e-13,
+        "atol_scale": 2e-16,
+        "max_step_divisor": 8.0
+      },
+      "exact": {
+        "tau": 800.0,
+        "log_survivor": -803.4420193761824,
+        "photon_H": 0.0,
+        "thermal_eV_H": 1.1794359662467795,
+        "photo_H": 0.032,
+        "loss_eV_H": 0.4125640337532204,
+        "formula_branch": "EXPONENTIAL_CONVOLUTION"
+      },
+      "actual": {
+        "optical_depth": 799.9999999999983,
+        "log_survivor": -803.4420193761807,
+        "photon_H": 0.0,
+        "thermal_eV_H": 1.179435966246779,
+        "photo_H": 0.03199999999999992,
+        "loss_eV_H": 0.4125640337532206
+      },
+      "number_defect_H": -8.326672684688674e-17,
+      "energy_defect_eV_H": -2.7755575615628914e-16,
+      "underflowed_positive_cohort": true,
+      "finite_log_survivor_retained": true,
+      "accepted_steps": 2083,
+      "nfev": 14592,
+      "njev": 2,
+      "nlu": 90,
+      "actual_rhs_evaluations": 14606,
+      "wall_s": 0.348552463001397,
+      "grid_sha256": "54dab940cd1a3033a98554d0fb8e0a205f7270a9a52159ff46a76bd06e6af211",
+      "test_budgets": {
+        "number_H": 1e-11,
+        "energy_eV_H": 1e-10,
+        "thermal_eV_H": 2e-10,
+        "log_survivor": 2e-09
+      },
+      "checks": {
+        "number_closure": true,
+        "energy_closure": true,
+        "thermal_accuracy": true,
+        "log_accuracy": true
+      },
+      "status": "PASS_EXACT_MANUFACTURED_CHECKS",
+      "native_science": false,
+      "difference_from_binary64_analytic_evaluation": {
+        "optical_depth": -1.7053025658242404e-12,
+        "log_survivor": 1.7053025658242404e-12,
+        "photon_absolute_H": 0.0,
+        "thermal_eV_H": -4.440892098500626e-16,
+        "photo_H": -8.326672684688674e-17,
+        "loss_eV_H": 1.6653345369377348e-16
+      },
+      "analytic_evaluation_precision": "binary64; a difference near machine precision is not a certified real-arithmetic error bound"
+    },
+    {
+      "kappa": 800.0,
+      "mu": 0.3,
+      "tier": {
+        "name": "L3M",
+        "rtol": 2e-13,
+        "atol_scale": 2e-16,
+        "max_step_divisor": 16.0
+      },
+      "exact": {
+        "tau": 800.0,
+        "log_survivor": -803.4420193761824,
+        "photon_H": 0.0,
+        "thermal_eV_H": 1.1794359662467795,
+        "photo_H": 0.032,
+        "loss_eV_H": 0.4125640337532204,
+        "formula_branch": "EXPONENTIAL_CONVOLUTION"
+      },
+      "actual": {
+        "optical_depth": 799.9999999999983,
+        "log_survivor": -803.4420193761807,
+        "photon_H": 0.0,
+        "thermal_eV_H": 1.179435966246779,
+        "photo_H": 0.03199999999999992,
+        "loss_eV_H": 0.4125640337532206
+      },
+      "number_defect_H": -8.326672684688674e-17,
+      "energy_defect_eV_H": -2.7755575615628914e-16,
+      "underflowed_positive_cohort": true,
+      "finite_log_survivor_retained": true,
+      "accepted_steps": 2083,
+      "nfev": 14592,
+      "njev": 2,
+      "nlu": 90,
+      "actual_rhs_evaluations": 14606,
+      "wall_s": 0.3801414920017123,
+      "grid_sha256": "54dab940cd1a3033a98554d0fb8e0a205f7270a9a52159ff46a76bd06e6af211",
+      "test_budgets": {
+        "number_H": 1e-11,
+        "energy_eV_H": 1e-10,
+        "thermal_eV_H": 2e-10,
+        "log_survivor": 2e-09
+      },
+      "checks": {
+        "number_closure": true,
+        "energy_closure": true,
+        "thermal_accuracy": true,
+        "log_accuracy": true
+      },
+      "status": "PASS_EXACT_MANUFACTURED_CHECKS",
+      "native_science": false,
+      "difference_from_binary64_analytic_evaluation": {
+        "optical_depth": -1.7053025658242404e-12,
+        "log_survivor": 1.7053025658242404e-12,
+        "photon_absolute_H": 0.0,
+        "thermal_eV_H": -4.440892098500626e-16,
+        "photo_H": -8.326672684688674e-17,
+        "loss_eV_H": 1.6653345369377348e-16
+      },
+      "analytic_evaluation_precision": "binary64; a difference near machine precision is not a certified real-arithmetic error bound"
+    },
+    {
+      "kappa": 0.3,
+      "mu": 0.3,
+      "tier": {
+        "name": "L3",
+        "rtol": 2e-13,
+        "atol_scale": 2e-16,
+        "max_step_divisor": 8.0
+      },
+      "exact": {
+        "tau": 0.3,
+        "log_survivor": -3.74201937618241,
+        "photon_H": 0.023706183061814982,
+        "thermal_eV_H": 1.079816638465672,
+        "photo_H": 0.008293816938185029,
+        "loss_eV_H": 0.3699462631634381,
+        "formula_branch": "EXACT_RESONANT_LIMIT"
+      },
+      "actual": {
+        "optical_depth": 0.3,
+        "log_survivor": -3.74201937618241,
+        "photon_H": 0.023706183061814982,
+        "thermal_eV_H": 1.079816638465672,
+        "photo_H": 0.00829381693818503,
+        "loss_eV_H": 0.36994626316343826
+      },
+      "number_defect_H": 1.214306433183765e-17,
+      "energy_defect_eV_H": 2.220446049250313e-16,
+      "underflowed_positive_cohort": false,
+      "finite_log_survivor_retained": true,
+      "accepted_steps": 223,
+      "nfev": 1569,
+      "njev": 2,
+      "nlu": 20,
+      "actual_rhs_evaluations": 1582,
+      "wall_s": 0.03826120399753563,
+      "grid_sha256": "28077e64403df1cec7f61cef1828fcad7109d969408749af10dcf57092ebb23a",
+      "test_budgets": {
+        "number_H": 1e-11,
+        "energy_eV_H": 1e-10,
+        "thermal_eV_H": 2e-10,
+        "log_survivor": 2e-09
+      },
+      "checks": {
+        "number_closure": true,
+        "energy_closure": true,
+        "thermal_accuracy": true,
+        "log_accuracy": true
+      },
+      "status": "PASS_EXACT_MANUFACTURED_CHECKS",
+      "native_science": false,
+      "difference_from_binary64_analytic_evaluation": {
+        "optical_depth": 0.0,
+        "log_survivor": 0.0,
+        "photon_absolute_H": 0.0,
+        "thermal_eV_H": 0.0,
+        "photo_H": 1.734723475976807e-18,
+        "loss_eV_H": 1.6653345369377348e-16
+      },
+      "analytic_evaluation_precision": "binary64; a difference near machine precision is not a certified real-arithmetic error bound"
+    }
+  ],
+  "mesh_cap_checks": {
+    "80.0": "MESH_CAP_INACTIVE",
+    "800.0": "MESH_CAP_INACTIVE"
+  },
+  "figure": {
+    "width_mm": 181.864,
+    "layout": "two columns",
+    "zero_error_floor": false,
+    "panel_b": "Synthetic true errors coarse=1,fine=0.25; shifted reference changes their apparent order."
+  },
+  "metadata_revision": {
+    "reason": "Clarify binary64 analytic evaluation and coincident finest plotted points; no numerical values changed and no ODE rerun.",
+    "original_numeric_record_sha256": "21d55fa5b6b7269ef39f99b1036ceb36877da897e4a7eae0ce0c41df53f9c572"
+  }
+}
