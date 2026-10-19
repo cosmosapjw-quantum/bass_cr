@@ -4,12 +4,18 @@
 ROLE=C21G_BOUNDED_NATIVE_EXECUTOR
 REPOSITORY=cosmosapjw-quantum/bass_cr
 BRANCH=research/cr-c21g-reference-refinement-20261019
+PR=https://github.com/cosmosapjw-quantum/bass_cr/pull/84
+EXECUTION_COMMIT=e742d44f605c51c06615451774ba90af8f41f622
+EXECUTION_MANIFEST_SHA256=7b14b62a20714fc66216ebd9d446af1ed1a05de889447ec410158b52e5923fed
 UNIT=research/cr_c21g_reference_refinement_20261019
 PARENT_ASSESSMENT=d780c2c53f869c914add1d5492312d0bc507f976
 PARENT_PR=https://github.com/cosmosapjw-quantum/bass_cr/pull/83
 NATIVE_OWNER=cosmosapjw-quantum/rei_bianchi@6ea2b1b4b3875c9163cafc45efe720afded43fc4
 EXPECTED_REUSED_BINARY_SHA256=1e7265185960cd91c3c589057b3e29d191d83bce95e59d803a399f9eb234ad40
 NEW_NATIVE_STATUS=NOT_RUN
+CODE_DELIVERY=PUBLISHED_PR84_AND_BACKED_UP_THREE_PROVIDERS
+BACKUP_ZIP=BASS_CR_C21G_REFERENCE_REFINEMENT_20261019T090925Z.zip
+BACKUP_ZIP_SHA256=fde4cfab228eadc007c1104d9afc18064e1f7d7ee1c1f5892d5af5878f28ecbd
 
 목표:
 이미 구현된 C21G reference ladder 8개와 조건부 native_source 시간 정련
@@ -20,6 +26,9 @@ NEW_NATIVE_STATUS=NOT_RUN
 0. 현재 상태를 먼저 읽어라.
 실제 GitHub HEAD·새 PR·백업에서 이 인계 이후 결과가 있는지 확인한다.
 이 문서 작성 시점의 NOT_RUN을 최신 상태로 가정하지 않는다.
+현재 Dropbox /bass_cr/C21 접근이 실패하여 이번 ZIP은 실제 확인된
+/BASS_DERIVATION_DOSSIERS_20260912/bass_cr에 새로 저장했다.
+과거 백업이 없었다거나 삭제됐다고 추정하지 말고 현재 영수증을 읽는다.
 PUBLICATION_RECEIPT.json에서 실제 실행 commit을 읽고
 EXECUTION_MANIFEST.json, README_KO.md, DAG_C21G.json,
 REPRODUCE.md, theory/THEORY_REFERENCE_ERROR_KO.md를 읽는다.

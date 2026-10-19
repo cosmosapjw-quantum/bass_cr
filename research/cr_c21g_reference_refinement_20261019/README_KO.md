@@ -2,7 +2,7 @@
 
 C21G는 C21F의 고정 fixture와 native nonphoto kernel을 유지하면서, reference의 수치 민감도를 관측하고 hybrid–FULLMID 차이의 leading coefficient를 분리하는 작업이다. 필요한 이론·실행기·분석기를 구현하고 새 소프트웨어 검사 35개, 제조 analytic 9 cases, 제조 wiring smoke 3 jobs를 검증했다. **새 C21G native reference 8개와 조건부 정련 4개는 아직 `NOT_RUN`**이다. 현재 원격 실행 도구의 가용 호출량이 0이라 NCP의 실제 자원·campaign를 확인하지 못했다.
 
-문서 작성 시점의 게시·백업 상태는 `NOT_YET_PUBLISHED` / `NOT_YET_BACKED_UP`이다. 최종 전달은 `PUBLICATION_RECEIPT.json`, `BACKUP_RECEIPT.json`, [DAG_C21G.json](DAG_C21G.json)의 실제 응답으로 갱신한다. 새 실행 결과의 완료와 코드 전달 완료는 별개다.
+[Draft PR84](https://github.com/cosmosapjw-quantum/bass_cr/pull/84) 게시와 새 ZIP의 세 저장처 create-only 백업을 완료했다. 실제 commit·provider ID·크기·검증 수준은 `PUBLICATION_RECEIPT.json`, `BACKUP_RECEIPT.json`, [DAG_C21G.json](DAG_C21G.json)에 기록했다. 새 native 실행 결과의 완료와 코드 전달 완료는 별개다.
 
 ## 1. 재개 기준과 새 결과 확인
 
@@ -126,3 +126,13 @@ Analytic IVP는 무차원 시간에서 (\tau'=\kappa), (N=Ae^{-\tau}), (P'=\kapp
 - [DAG_C21G.json](DAG_C21G.json): 상태·의존성·게시·백업.
 - [CODEX_HANDOFF_KO.md](handoff/CODEX_HANDOFF_KO.md): 실제 자원 발견부터 시작하는 실행 인계.
 - `EXECUTION_MANIFEST.json`: 실행 코드와 재사용 fixture/baseline의 정확한 SHA.
+
+## 게시 checkpoint
+
+[Draft PR84](https://github.com/cosmosapjw-quantum/bass_cr/pull/84)에 게시했다. 실행 코드 commit은 `e742d44f605c51c06615451774ba90af8f41f622`이며, native 실행은 아직 NOT_RUN이다. 게시 후 90개 변경 파일의 Git blob을 모두 대조했다. 새 백업 응답과 최종 DAG는 현재 branch의 publication/backup receipt에 기록했다.
+
+## 새 백업
+
+`BASS_CR_C21G_REFERENCE_REFINEMENT_20261019T090925Z.zip` — 389239 bytes, 92 payloads, SHA256 `fde4cfab228eadc007c1104d9afc18064e1f7d7ee1c1f5892d5af5878f28ecbd`. 로컬 전체 CRC·payload 바이트·manifest 검증과 세 제공처 생성 응답 및 크기를 확인했다. 세 제공처 ZIP 전체를 다시 내려받아 바이트 검증한 것은 아니다. ZIP 내부의 백업 대기는 제작 시점 기록이며, 현재 PR84 영수증이 전달 상태의 기준이다.
+
+Dropbox에서는 현재 `/bass_cr/C21`과 과거 PR83 file ID의 조회가 NOT_FOUND였으므로, 실제 확인한 `/BASS_DERIVATION_DOSSIERS_20260912/bass_cr` 폴더에 새 ZIP만 추가했다. 이 접근 불일치로 과거 백업의 존재를 부정하거나 삭제를 추정하지 않는다. 기존 폴더·파일·archive는 변경하지 않았다.

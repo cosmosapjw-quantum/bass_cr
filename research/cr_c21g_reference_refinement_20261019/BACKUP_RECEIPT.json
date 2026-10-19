@@ -1,9 +1,112 @@
 {
   "schema": "C21G_BACKUP_RECEIPT_V1",
-  "status": "AWAITING_CREATE_ONLY_NEW_CHECKPOINT_BACKUP",
-  "artifact": null,
-  "providers": [],
-  "historical_backups_unchanged": true,
+  "status": "COMPLETE_CREATE_ONLY_THREE_PROVIDER_ACKS",
+  "artifact": {
+    "name": "BASS_CR_C21G_REFERENCE_REFINEMENT_20261019T090925Z.zip",
+    "bytes": 389239,
+    "payloads": 92,
+    "sha256": "fde4cfab228eadc007c1104d9afc18064e1f7d7ee1c1f5892d5af5878f28ecbd",
+    "md5": "b6a6dc50dbeddb9b8166504ed1b115d6",
+    "dropbox_content_hash_computed_locally": "6d56dcdba2dc83640587782f6a9774b80eb80786b7afd511625fac9cf9c80e67"
+  },
+  "local_validation": {
+    "status": "PASS_ALL_CRC_AND_PAYLOAD_BYTES",
+    "all_payloads_crc": "PASS",
+    "all_payload_bytes_equal_source": true,
+    "payload_manifest_verified": true,
+    "core_payloads": 82,
+    "all_core_hashes_verified": true
+  },
+  "verification_level": "R2_LOCAL_PAYLOAD_MANIFEST_PLUS_PROVIDER_ACK_METADATA; NOT_THREE_STORE_FULL_BYTE_READBACK",
+  "fresh_provider_archive_downloads": 0,
+  "provider_checksum_fields_returned": false,
+  "providers": [
+    {
+      "provider": "Google Drive",
+      "status": "CREATED_SUCCESS",
+      "file_id": "1yVrIBZD1pwlOu-mhVLMbOqywqOm0LrXG",
+      "url": "https://drive.google.com/file/d/1yVrIBZD1pwlOu-mhVLMbOqywqOm0LrXG/view?usp=drivesdk",
+      "parent_id": "1V4ZQza59dWVC7apeRz9P1TL66eaVYyJy",
+      "bytes_from_fresh_metadata": 389239,
+      "modified_time": "2026-10-19T09:17:04.448Z",
+      "create_only": true,
+      "fresh_archive_sha256_computed": false
+    },
+    {
+      "provider": "Dropbox",
+      "status": "COMPLETED",
+      "file_id": "id:BSpOijBcT10AAAAAAD_Qog",
+      "path": "ns:183516487//BASS_DERIVATION_DOSSIERS_20260912/bass_cr/BASS_CR_C21G_REFERENCE_REFINEMENT_20261019T090925Z.zip",
+      "path_display": "/BASS_DERIVATION_DOSSIERS_20260912/bass_cr/BASS_CR_C21G_REFERENCE_REFINEMENT_20261019T090925Z.zip",
+      "bytes_from_ack": 389239,
+      "bytes_from_fresh_metadata": 389239,
+      "rev": "65e2e056f8f1c0af03d47",
+      "modified_time": "2026-10-19T09:20:12Z",
+      "create_only": true,
+      "fresh_archive_sha256_computed": false
+    },
+    {
+      "provider": "ChatGPT Library",
+      "status": "SUCCEEDED",
+      "library_file_id": "libfile_4ffaf36b24a08191ac188a2566cf3459",
+      "file_id": "file_0000000035c0820ea41f918af05e572e",
+      "path": "/BASS_DERIVATION_DOSSIERS_20260912/bass_cr/BASS_CR_C21G_REFERENCE_REFINEMENT_20261019T090925Z.zip",
+      "version": 0,
+      "bytes_from_ack": 389239,
+      "local_identity_applied": true,
+      "create_only": true,
+      "fresh_archive_sha256_computed": false
+    }
+  ],
+  "dropbox_path_resolution": {
+    "initial_attempt": "/bass_cr/C21/BASS_CR_C21G_REFERENCE_REFINEMENT_20261019T090925Z.zip",
+    "initial_error": "PARENT_NOT_FOUND",
+    "initial_upload_created_file": false,
+    "subsequent_current_read_observations": [
+      {
+        "path": "ns:183516487//bass_cr/C21",
+        "result": "NOT_FOUND"
+      },
+      {
+        "file_id": "id:BSpOijBcT10AAAAAAD_Ppw",
+        "result": "NOT_FOUND"
+      },
+      {
+        "search": "C21F title",
+        "native_raw_archive": "id:BSpOijBcT10AAAAAAD_NlA",
+        "native_raw_archive_visible": true
+      }
+    ],
+    "grounded_existing_project_folder": "ns:183516487//BASS_DERIVATION_DOSSIERS_20260912/bass_cr",
+    "grounded_folder_file_id": "id:BSpOijBcT10AAAAAAD8NgA",
+    "directory_listing_completed": true,
+    "preexisting_new_zip_name": false,
+    "action": "Create new ZIP in the currently observed existing project dossier folder; no old folder/file was moved, recreated, overwritten or deleted.",
+    "historical_claim": "Current lookup discrepancy does not establish that prior backups never existed or were deleted. Preserve earlier receipts and raw intake.",
+    "retry_type": "Diagnosed different existing destination, not an unchanged blind retry"
+  },
+  "publication": {
+    "pr": 84,
+    "url": "https://github.com/cosmosapjw-quantum/bass_cr/pull/84",
+    "branch": "research/cr-c21g-reference-refinement-20261019",
+    "content_commit": "e742d44f605c51c06615451774ba90af8f41f622",
+    "postupload_receipt_scope": "Documentation and delivery DAG only; runtime code/evidence remain frozen."
+  },
+  "dag_delivery": {
+    "status": "NEW_C21G_CODE_AND_COMPLETED_LOCAL_STAGES_PUBLISHED_AND_BACKED_UP",
+    "covered_completed_nodes": [
+      "N00_CURRENT_INTAKE",
+      "N01_REFERENCE_ERROR_THEORY",
+      "N02_REFERENCE_CONTROL_PATCH",
+      "N03_INDEPENDENT_DIAGNOSTICS",
+      "N04_EXECUTION_ORCHESTRATION",
+      "N05_ANALYTIC_LIGHT_VALIDATION",
+      "N06_INDEPENDENT_REVIEW_AND_SMOKE"
+    ],
+    "native_nodes": "Executable contracts backed up; native results NOT_RUN"
+  },
+  "archive_snapshot_policy": "The immutable ZIP contains PR84 publication acknowledgement and packaging-time DAG. Postupload provider acknowledgements and current delivery states are canonical in current PR84 branch receipts.",
   "native_jobs_status": "NOT_RUN",
-  "receipt_continuation": "Current branch receipt supersedes this historical packaging-time delivery status after real provider acknowledgements."
+  "global_error_bound": null,
+  "historical_backups_unchanged": true
 }
