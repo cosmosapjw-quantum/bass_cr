@@ -1,0 +1,111 @@
+{
+  "schema": "C21H_CALLBACK_INDEPENDENT_UNIT_TESTS_V1",
+  "label": "initial",
+  "started_utc": "2026-10-19T13:00:08.524355+00:00",
+  "ended_utc": "2026-10-19T13:00:09.869799+00:00",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/workspace/scratch/4d2e4c44b70c/c21h_work/unit/evidence/python_tests/run_record.py",
+    "initial"
+  ],
+  "cwd": "/workspace/scratch/4d2e4c44b70c/c21h_work/unit",
+  "environment": {
+    "C21F_SOURCE_DIR": "/workspace/scratch/4d2e4c44b70c/c21g_work/upstream/c21f",
+    "C21G_UNIT_DIR": "/workspace/scratch/4d2e4c44b70c/c21g_work/unit",
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "scipy": "1.17.0",
+  "adapter_sha256_before": "5a18ab7766cb0b1ecef8abe0c320ee55a1ff615267a4e44846fd05dee67ed1ed",
+  "adapter_sha256_after": "5a18ab7766cb0b1ecef8abe0c320ee55a1ff615267a4e44846fd05dee67ed1ed",
+  "test_source_sha256": "6bc99c45e28ad816c66627ec85a8cd97788cb32619d280537c4fd62852864150",
+  "pinned_reference_sha256": "714c40a4e3a0577784e6a754b95cdb34b247cb2e529953a375c74a43efafc3e0",
+  "tests_run": 12,
+  "failure_entries": 0,
+  "error_entries": 1,
+  "skipped": 0,
+  "exit_code": 1,
+  "wall_s": 1.3451934490003623,
+  "test_times": [
+    {
+      "test": "test_optical_adapter.OpticalAdapterTests.test_analytic_tau_jacobian_against_original_rhs_centered_difference",
+      "wall_s": 1.158144357999845
+    },
+    {
+      "test": "test_optical_adapter.OpticalAdapterTests.test_derivative_weights_represented_quadratic_and_invalid_nodes",
+      "wall_s": 0.00045160299487179145
+    },
+    {
+      "test": "test_optical_adapter.OpticalAdapterTests.test_fifteen_passive_columns_are_exact_and_rhs_invariant",
+      "wall_s": 0.004442320001544431
+    },
+    {
+      "test": "test_optical_adapter.OpticalAdapterTests.test_fixed_scaling_preserves_wrms_and_return_trace_contract",
+      "wall_s": 0.008013511003809981
+    },
+    {
+      "test": "test_optical_adapter.OpticalAdapterTests.test_gas_boundary_uses_admissible_one_sided_nodes",
+      "wall_s": 0.014596222004911397
+    },
+    {
+      "test": "test_optical_adapter.OpticalAdapterTests.test_gas_jacobian_against_independent_original_rhs_stencil",
+      "wall_s": 0.0062684500007890165
+    },
+    {
+      "test": "test_optical_adapter.OpticalAdapterTests.test_inactive_and_zero_amount_cohorts_have_exact_zero_tau_columns",
+      "wall_s": 0.006553407998580951
+    },
+    {
+      "test": "test_optical_adapter.OpticalAdapterTests.test_invalid_states_nodes_and_provider_errors_are_not_fallbacks",
+      "wall_s": 0.002497646004485432
+    },
+    {
+      "test": "test_optical_adapter.OpticalAdapterTests.test_partial_time_flat_branches_and_interior_polynomial",
+      "wall_s": 0.0016730450006434694
+    },
+    {
+      "test": "test_optical_adapter.OpticalAdapterTests.test_partial_time_matches_independent_original_rhs_difference",
+      "wall_s": 0.002552927006036043
+    },
+    {
+      "test": "test_optical_adapter.OpticalAdapterTests.test_private_import_preserves_public_module_and_pinned_source",
+      "wall_s": 0.003496231001918204
+    },
+    {
+      "test": "test_optical_adapter.OpticalAdapterTests.test_y_zero_removes_exact_helium_unknowns_and_tolerances",
+      "wall_s": 0.004155839000304695
+    }
+  ],
+  "log": {
+    "path": "/workspace/scratch/4d2e4c44b70c/c21h_work/unit/evidence/python_tests/initial.log",
+    "bytes": 4202,
+    "sha256": "c4412d409e54d366a3c38afbef60c47e87f2c20d1bf55e9d14a62728f0f91e35"
+  },
+  "metrics": {
+    "tau_jacobian": {
+      "maximum_absolute_difference": 2.6034863154222876e-10,
+      "maximum_magnitude": 3.2736139885972984,
+      "difference_over_maximum_magnitude": 7.952942297078368e-11
+    },
+    "one_sided_gas_columns": 4,
+    "gas_jacobian": {
+      "maximum_absolute_difference": 2.018277101001331e-09,
+      "maximum_magnitude": 313.96966285655026,
+      "difference_over_maximum_magnitude": 6.42825514617781e-12
+    },
+    "partial_time": {
+      "maximum_absolute_difference": 8.29977039984442e-06,
+      "maximum_magnitude": 257.7577574590317,
+      "difference_over_maximum_magnitude": 3.2199885976908354e-08
+    }
+  },
+  "native_execution": false,
+  "ode_integration": false,
+  "old_suites_rerun": false,
+  "counting_note": "12 unittest methods; subtests share each method count. Fresh tests on new adapter, not an all-red-first claim. Original RHS captured by explicit pre-integrator stop; manufactured microphysics. One mocked Rust return trace tests mapping only."
+}

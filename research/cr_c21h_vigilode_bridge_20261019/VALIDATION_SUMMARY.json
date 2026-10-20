@@ -1,0 +1,109 @@
+{
+  "schema": "C21H_VALIDATION_SUMMARY_V1",
+  "created_at_utc": "2026-10-19T13:53:15.585698+00:00",
+  "status": "LOCAL_IMPLEMENTATION_AND_MANUFACTURED_VALIDATION_COMPLETE",
+  "runtime_manifest": {
+    "bytes": 2490,
+    "sha256": "7d1e521aa78ffc1be2cac66d26863b2a542d67a7d856e8711e8b60f8252df6fb"
+  },
+  "binary_sha256": "a11d3ab01474f9d1a88df51c9cd6d7910ca59b3443814fd39699ed959cb64048",
+  "actual_build_mode": "LOCAL_PATH_OVERRIDE_OF_VERIFIED_IDENTICAL_GIT_SOURCE",
+  "tests": [
+    {
+      "name": "Python optical callbacks",
+      "unique_methods": 13,
+      "status": "PASS_SCOPED_REUSE",
+      "evidence": [
+        "evidence/python_tests/SUMMARY.json",
+        "evidence/python_tests/trace_after_transport_changes.json",
+        "evidence/pilot_tests/SUMMARY_v2.json"
+      ],
+      "scope": "12 initial unique contracts with 2 affected reruns, one targeted trace rerun after transport changes, then 1 added short-cell regression. No all-13 run claimed."
+    },
+    {
+      "name": "Python pilot contracts",
+      "unique_methods": 13,
+      "status": "PASS_SCOPED_REUSE",
+      "evidence": [
+        "evidence/pilot_tests/SUMMARY_v2.json",
+        "evidence/pilot_tests/FINAL_PLAN02_ADDENDUM.json"
+      ],
+      "scope": "No solver/native/affinity execution. Final plan02 one affected test PASS; other unchanged evidence reused."
+    },
+    {
+      "name": "Rust unit tests",
+      "unique_cases_final": 10,
+      "status": "PASS_ACTUAL",
+      "evidence": [
+        "evidence/rust_bridge_20261019/test_03.receipt.json",
+        "evidence/rust_bridge_20261019/test_03.stdout"
+      ]
+    },
+    {
+      "name": "Actual Rust binary protocol and analytic IVPs",
+      "unique_cases_final": 16,
+      "status": "PASS_ACTUAL",
+      "evidence": [
+        "evidence/rust_bridge_20261019/blackbox_03/SUMMARY.json",
+        "evidence/rust_bridge_20261019/MANUFACTURED_RESULT_SUMMARY.json"
+      ],
+      "scope": "2 backends x 8 cases; preserve 11/12 initial, repaired 12/12, then 2 failing epoch regressions before final 16/16."
+    },
+    {
+      "name": "Build receipt contracts",
+      "unique_cases_final": 3,
+      "status": "PASS_TOOL_STUBS",
+      "evidence": [
+        "rust_bridge/test_build_receipt.py",
+        "evidence/rust_bridge_20261019/build_receipt_contract_01/SUMMARY.json"
+      ],
+      "scope": "Synthetic Cargo/rustc process stubs; actual compiler evidence is recorded separately."
+    }
+  ],
+  "compilation": {
+    "rust": "1.94.1",
+    "cargo_lock_generation": "PASS_CANONICAL_GIT_PIN",
+    "actual_check": "PASS",
+    "actual_build": "PASS",
+    "source_and_lock_binding": [
+      "evidence/rust_bridge_20261019/COMPILE_SOURCE_BINDING.json",
+      "evidence/rust_bridge_20261019/ACTUAL_BUILD_LOCK_BINDING.json"
+    ],
+    "disk_limited_initial_attempt": "STOPPED_BEFORE_TYPECHECK; retained separately"
+  },
+  "final_plan": {
+    "status": "READY_EXECUTABLE_INPUTS_VERIFIED",
+    "path": "evidence/wiring/plan_02"
+  },
+  "final_wiring": {
+    "status": "PASS",
+    "actual_jobs": 4,
+    "segments_total": 12,
+    "path": "evidence/wiring/FINAL_WIRING_SUMMARY.json",
+    "native_calls": 0
+  },
+  "independent_review": {
+    "status": "FINDINGS_CLOSED",
+    "evidence": [
+      "evidence/review/SCIENCE_ADAPTER_REVIEW.md",
+      "evidence/review/RUN_PILOT_REVIEW.md"
+    ],
+    "post_review_manifest_admission": "evidence/VALIDATION_FINAL_SOURCE_CHECK.json"
+  },
+  "scientific_interpretation": "Fixed-coordinate algebra and manufactured diagnostic checks support the adapter contract. They do not establish C21H native accuracy, native convergence, benchmark superiority or a global bound.",
+  "global_error_bound": null,
+  "new_native_execution": "NOT_RUN",
+  "NCP_current_resources": "UNVERIFIED_CURRENT_NCP; connector remaining remote calls was 0%",
+  "all_tests_red_first": false,
+  "old_C21F_56_or_C21G_35_suite_rerun": false,
+  "old_native_matrix_rerun": false,
+  "next_ready": "Fresh NCP inventory, locked bridge build and 4 bounded base jobs; each corresponding fd_half requires its completed matching base.",
+  "hold": [
+    "Full48",
+    "source-age/spectral/angular",
+    "Case B",
+    "signed Bianchi",
+    "full EoR",
+    "standalone Grackle driver parity"
+  ]
+}

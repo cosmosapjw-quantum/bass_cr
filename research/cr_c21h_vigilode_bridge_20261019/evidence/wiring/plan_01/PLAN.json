@@ -1,0 +1,41 @@
+{
+  "schema": "C21H_PILOT_CONTRACT_V1",
+  "fixtures": [
+    "common_ic",
+    "native_source"
+  ],
+  "methods": [
+    "vigilode-rodas5p",
+    "diffsol-bdf"
+  ],
+  "rtol": 2e-11,
+  "atol_multiplier": 2e-14,
+  "max_step_divisor": 8.0,
+  "wall_s_per_job": 300.0,
+  "max_original_rhs_calls_per_job": 200000,
+  "max_concurrency": 1,
+  "protected_cpu_ids": [
+    55
+  ],
+  "variants": [
+    "base",
+    "fd_half"
+  ],
+  "base_jobs": 4,
+  "conditional_fd_jobs": 4,
+  "fd_followup_rule": "Only after the corresponding base job completes; halve both explicit derivative probe scales and preserve both outputs.",
+  "comparison_reference": "Pinned C21F L0 endpoint first; verified completed C21G higher-tolerance receipts may be added as new assessments.",
+  "C21G_reference_ladder": "REMAINS_READY; do not rerun a completed matching job or substitute these candidates for C21G receipts",
+  "interpretation": "Independent integration-method/derivative sensitivity candidate; no native science promotion from process completion.",
+  "global_error_bound": null,
+  "holds": [
+    "Full48",
+    "source-age",
+    "spectral",
+    "angular",
+    "Case B",
+    "signed Bianchi",
+    "full EoR",
+    "standalone Grackle driver parity"
+  ]
+}

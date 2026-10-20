@@ -1,0 +1,59 @@
+{
+  "case": "wrong_id",
+  "method": "diffsol-bdf",
+  "status": "PASS",
+  "error": null,
+  "exit_code": 1,
+  "wall_seconds": 0.003387641001609154,
+  "manufactured": true,
+  "native_chemistry_executed": false,
+  "config": {
+    "protocol": "C21H_V1",
+    "dimension": 2,
+    "t0": 0.0,
+    "t1": 0.02,
+    "y0": [
+      1.0,
+      1.0
+    ],
+    "rtol": 1e-07,
+    "atol": 1e-10,
+    "h0": 1e-05,
+    "h_min": 1e-15,
+    "h_max": 0.004,
+    "max_steps": 10000,
+    "method": "diffsol-bdf"
+  },
+  "result": {
+    "callback_failure": "RPC id mismatch: expected 1, received 2",
+    "complete_output": false,
+    "error": "Diffsol callback aborted: RPC id mismatch: expected 1, received 2",
+    "ok": false,
+    "pending_request": {
+      "id": 1,
+      "op": "rhs",
+      "t": 0.0,
+      "type": "request",
+      "y": [
+        1.0,
+        1.0
+      ]
+    },
+    "protocol": "C21H_V1",
+    "rpc_counters": {
+      "diffsol_jacobian_cache_hits": 0,
+      "diffsol_jvp_calls": 0,
+      "jacobian_requests": 0,
+      "partial_t_requests": 0,
+      "requests_attempted": 1,
+      "responses_validated": 0,
+      "rhs_requests": 1
+    },
+    "type": "result"
+  },
+  "files": {
+    "stdin.jsonl": "6d1d6a7137be5690c8fff41645a252e57f60755665ee666cdd5855494a5b160f",
+    "stdout.jsonl": "b1b9faa737762261a0d64387eff2c76ee55f767e7338a4b7ee76f27651826ced",
+    "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

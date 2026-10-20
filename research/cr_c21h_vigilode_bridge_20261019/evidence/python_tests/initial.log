@@ -1,0 +1,42 @@
+test_analytic_tau_jacobian_against_original_rhs_centered_difference (test_optical_adapter.OpticalAdapterTests.test_analytic_tau_jacobian_against_original_rhs_centered_difference) ... ok
+test_derivative_weights_represented_quadratic_and_invalid_nodes (test_optical_adapter.OpticalAdapterTests.test_derivative_weights_represented_quadratic_and_invalid_nodes) ... ok
+test_fifteen_passive_columns_are_exact_and_rhs_invariant (test_optical_adapter.OpticalAdapterTests.test_fifteen_passive_columns_are_exact_and_rhs_invariant) ... ok
+test_fixed_scaling_preserves_wrms_and_return_trace_contract (test_optical_adapter.OpticalAdapterTests.test_fixed_scaling_preserves_wrms_and_return_trace_contract) ... ok
+test_gas_boundary_uses_admissible_one_sided_nodes (test_optical_adapter.OpticalAdapterTests.test_gas_boundary_uses_admissible_one_sided_nodes) ... 
+  test_gas_boundary_uses_admissible_one_sided_nodes (test_optical_adapter.OpticalAdapterTests.test_gas_boundary_uses_admissible_one_sided_nodes) (gas=(0.31, 0.8, 0.2)) ... ERROR
+test_gas_jacobian_against_independent_original_rhs_stencil (test_optical_adapter.OpticalAdapterTests.test_gas_jacobian_against_independent_original_rhs_stencil) ... ok
+test_inactive_and_zero_amount_cohorts_have_exact_zero_tau_columns (test_optical_adapter.OpticalAdapterTests.test_inactive_and_zero_amount_cohorts_have_exact_zero_tau_columns) ... ok
+test_invalid_states_nodes_and_provider_errors_are_not_fallbacks (test_optical_adapter.OpticalAdapterTests.test_invalid_states_nodes_and_provider_errors_are_not_fallbacks) ... ok
+test_partial_time_flat_branches_and_interior_polynomial (test_optical_adapter.OpticalAdapterTests.test_partial_time_flat_branches_and_interior_polynomial) ... ok
+test_partial_time_matches_independent_original_rhs_difference (test_optical_adapter.OpticalAdapterTests.test_partial_time_matches_independent_original_rhs_difference) ... ok
+test_private_import_preserves_public_module_and_pinned_source (test_optical_adapter.OpticalAdapterTests.test_private_import_preserves_public_module_and_pinned_source) ... ok
+test_y_zero_removes_exact_helium_unknowns_and_tolerances (test_optical_adapter.OpticalAdapterTests.test_y_zero_removes_exact_helium_unknowns_and_tolerances) ... ok
+
+======================================================================
+ERROR: test_gas_boundary_uses_admissible_one_sided_nodes (test_optical_adapter.OpticalAdapterTests.test_gas_boundary_uses_admissible_one_sided_nodes) (gas=(0.31, 0.8, 0.2))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/4d2e4c44b70c/c21h_work/unit/tests/test_optical_adapter.py", line 205, in test_gas_boundary_uses_admissible_one_sided_nodes
+    jacobian=cb.jacobian(t,u/cb.scales)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/4d2e4c44b70c/c21h_work/unit/optical_adapter.py", line 138, in jacobian
+    u = self.physical(t, z); full = self.full(u); base = self.original(t, u)
+                                                         ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/4d2e4c44b70c/c21h_work/unit/optical_adapter.py", line 106, in original
+    result = np.asarray(self.fun(float(t), np.asarray(u, float)), float)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/4d2e4c44b70c/c21g_work/upstream/c21f/src/reference_tau.py", line 127, in reduced_rhs
+    return rhs(x,full)[dynamic]
+           ^^^^^^^^^^^
+  File "/workspace/scratch/4d2e4c44b70c/c21g_work/upstream/c21f/src/reference_tau.py", line 103, in rhs
+    micro=provider(math.exp(xx),gv,f.nh0,f.Y);micro.validate(f.Y)
+                                              ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/4d2e4c44b70c/c21g_work/upstream/c21f/src/event_coupler.py", line 86, in validate
+    if min(*ci,*rr,self.dr_h_s,self.escaped_ev_h_s)<0:raise ProviderFailure('MICRO_NEGATIVE_EVENT_OR_ESCAPE')
+                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+event_coupler.ProviderFailure: MICRO_NEGATIVE_EVENT_OR_ESCAPE
+
+----------------------------------------------------------------------
+Ran 12 tests in 1.213s
+
+FAILED (errors=1)

@@ -1,0 +1,107 @@
+{
+  "schema": "C21H_MANUFACTURED_RUST_RESULT_SUMMARY_V1",
+  "rows": [
+    {
+      "method": "vigilode-rodas5p",
+      "case": "stiff_linear",
+      "max_absolute_final_error": 1.4752121981053426e-14,
+      "internal_steps": 54,
+      "accepted_grid_length": 55,
+      "roundoff_step_restarts": [],
+      "status": "PASS",
+      "scientific_scope": "manufactured bridge IVP only"
+    },
+    {
+      "method": "vigilode-rodas5p",
+      "case": "nonautonomous",
+      "max_absolute_final_error": 2.220446049250313e-16,
+      "internal_steps": 13,
+      "accepted_grid_length": 14,
+      "roundoff_step_restarts": [],
+      "status": "PASS",
+      "scientific_scope": "manufactured bridge IVP only"
+    },
+    {
+      "method": "vigilode-rodas5p",
+      "case": "epoch_segment",
+      "max_absolute_final_error": 1.1102230246251565e-16,
+      "internal_steps": 9,
+      "accepted_grid_length": 10,
+      "roundoff_step_restarts": [],
+      "status": "PASS",
+      "scientific_scope": "manufactured bridge IVP only"
+    },
+    {
+      "method": "vigilode-rodas5p",
+      "case": "epoch_ulp",
+      "max_absolute_final_error": 0.0,
+      "internal_steps": 1,
+      "accepted_grid_length": 2,
+      "roundoff_step_restarts": [],
+      "status": "PASS",
+      "scientific_scope": "manufactured bridge IVP only"
+    },
+    {
+      "method": "diffsol-bdf",
+      "case": "stiff_linear",
+      "max_absolute_final_error": 3.994603038782771e-11,
+      "internal_steps": 207,
+      "accepted_grid_length": 208,
+      "roundoff_step_restarts": [],
+      "status": "PASS",
+      "scientific_scope": "manufactured bridge IVP only"
+    },
+    {
+      "method": "diffsol-bdf",
+      "case": "nonautonomous",
+      "max_absolute_final_error": 7.633571552645435e-11,
+      "internal_steps": 32,
+      "accepted_grid_length": 33,
+      "roundoff_step_restarts": [],
+      "status": "PASS",
+      "scientific_scope": "manufactured bridge IVP only"
+    },
+    {
+      "method": "diffsol-bdf",
+      "case": "epoch_segment",
+      "max_absolute_final_error": 4.440892098500626e-16,
+      "internal_steps": 18,
+      "accepted_grid_length": 19,
+      "roundoff_step_restarts": [
+        {
+          "cause": "public StopTimeAtCurrentTime for a strictly later represented time",
+          "h": 4.440892098500626e-16,
+          "prior_h": 1.3207803739589963e-09,
+          "restart_order": 1,
+          "t": -2.407945587519386,
+          "target": -2.4079455875193854
+        }
+      ],
+      "status": "PASS",
+      "scientific_scope": "manufactured bridge IVP only"
+    },
+    {
+      "method": "diffsol-bdf",
+      "case": "epoch_ulp",
+      "max_absolute_final_error": 0.0,
+      "internal_steps": 1,
+      "accepted_grid_length": 2,
+      "roundoff_step_restarts": [
+        {
+          "cause": "public StopTimeAtCurrentTime for a strictly later represented time",
+          "h": 4.440892098500626e-16,
+          "prior_h": 4.440892098500626e-16,
+          "restart_order": 1,
+          "t": -2.407945587519386,
+          "target": -2.4079455875193854
+        }
+      ],
+      "status": "PASS",
+      "scientific_scope": "manufactured bridge IVP only"
+    }
+  ],
+  "binary_sha256": "a11d3ab01474f9d1a88df51c9cd6d7910ca59b3443814fd39699ed959cb64048",
+  "comparison_rule": "analytic endpoint checks only; tolerance inputs do not imply equal achieved error",
+  "performance_ranking": "NOT_EVALUATED",
+  "native_chemistry_executed": false
+}

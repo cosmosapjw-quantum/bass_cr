@@ -1,0 +1,59 @@
+{
+  "case": "callback_failure",
+  "method": "diffsol-bdf",
+  "status": "PASS",
+  "error": null,
+  "exit_code": 1,
+  "wall_seconds": 0.0035156290032318793,
+  "manufactured": true,
+  "native_chemistry_executed": false,
+  "config": {
+    "protocol": "C21H_V1",
+    "dimension": 2,
+    "t0": 0.0,
+    "t1": 0.02,
+    "y0": [
+      1.0,
+      1.0
+    ],
+    "rtol": 1e-07,
+    "atol": 1e-10,
+    "h0": 1e-05,
+    "h_min": 1e-15,
+    "h_max": 0.004,
+    "max_steps": 10000,
+    "method": "diffsol-bdf"
+  },
+  "result": {
+    "callback_failure": "parent rejected request 1: NATIVE_SENTINEL_REJECTION",
+    "complete_output": false,
+    "error": "Diffsol callback aborted: parent rejected request 1: NATIVE_SENTINEL_REJECTION",
+    "ok": false,
+    "pending_request": {
+      "id": 1,
+      "op": "rhs",
+      "t": 0.0,
+      "type": "request",
+      "y": [
+        1.0,
+        1.0
+      ]
+    },
+    "protocol": "C21H_V1",
+    "rpc_counters": {
+      "diffsol_jacobian_cache_hits": 0,
+      "diffsol_jvp_calls": 0,
+      "jacobian_requests": 0,
+      "partial_t_requests": 0,
+      "requests_attempted": 1,
+      "responses_validated": 0,
+      "rhs_requests": 1
+    },
+    "type": "result"
+  },
+  "files": {
+    "stdin.jsonl": "9cdba7f3fe182d9fd998b182bb612d5d6da0779249080a7e466cd7fba6a8f985",
+    "stdout.jsonl": "505a852127ace8bc5b5722e94dee0c6602664146f96f389d6379fc7a9ef5d429",
+    "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

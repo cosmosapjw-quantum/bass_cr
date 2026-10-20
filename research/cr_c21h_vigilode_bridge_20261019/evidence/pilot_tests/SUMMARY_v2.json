@@ -1,0 +1,137 @@
+{
+  "schema": "C21H_NO_EXECUTION_PILOT_TEST_SUMMARY_V2",
+  "created_utc": "2026-10-19T13:31:10.303076+00:00",
+  "result": "PASS_ALL_SELECTED_CONTRACTS",
+  "pilot_unique_methods": 13,
+  "new_optical_regression_unique_methods": 1,
+  "method_executions_this_task": 15,
+  "execution_records": [
+    {
+      "label": "helpers_and_shortcell",
+      "tests_run": 11,
+      "failures": 0,
+      "errors": 0,
+      "exit_code": 0,
+      "wall_s": 0.8146152980043553,
+      "source_bytes_stable_during_test": true
+    },
+    {
+      "label": "main_admission",
+      "tests_run": 3,
+      "failures": 0,
+      "errors": 0,
+      "exit_code": 0,
+      "wall_s": 0.9479044000036083,
+      "source_bytes_stable_during_test": true
+    },
+    {
+      "label": "plan_portable",
+      "tests_run": 1,
+      "failures": 0,
+      "errors": 0,
+      "exit_code": 0,
+      "wall_s": 1.000009431001672,
+      "source_bytes_stable_during_test": true
+    }
+  ],
+  "per_file_final_records": {
+    "tests/test_run_pilot.py": {
+      "bytes": 21783,
+      "sha256": "12702bee4b054b8b8757b21e7980440b2587ff5b80c057a926b7292401d98c30"
+    },
+    "tests/test_optical_adapter.py": {
+      "bytes": 18753,
+      "sha256": "a1f54b07ecaa4b4e3357988a9f2ae9666ce5919613bf0d31e697cc7d1c19cb16"
+    },
+    "run_pilot.py": {
+      "bytes": 15363,
+      "sha256": "6f344f60d26a0ddb7bb205255cb767fdc230062bf60c56aae1ce58f5ef258f6c"
+    },
+    "optical_adapter.py": {
+      "bytes": 21058,
+      "sha256": "53c8644b64f937fcca022c5307295d8666de8aee6c07244d139be139badcb387"
+    },
+    "EXECUTION_MANIFEST.json": {
+      "bytes": 2201,
+      "sha256": "84c1bef91941a0603a2268d10774a8f93a080b22274206ec2e448bfc3322970b"
+    }
+  },
+  "coverage": [
+    "Own runtime bytes and VigilODE commit; absolute/traversal manifest path rejection",
+    "All payloads including nested JOB_RECEIPT.json; only terminal root receipt excluded; symlink rejection",
+    "Completed base variant and command/fixture SHA/method binding",
+    "Exact source/input/bridge/native identity and raw payload binding",
+    "Pinned actual C21G manifest plus C21F source and baseline fixture/raw bytes; mutations only in temporary copies",
+    "Wrong C21G import aliases rejected",
+    "Synthetic native build record binary/wrapper/archive byte binding; no native binary executed",
+    "Native call timeout min(15,remaining), pre-call expiry, post-call expiry, original provider error propagation",
+    "Completed real plan reused; existing directory rejected and all original plan payload hashes preserved",
+    "Smoke/native missing bridge preserved as explicit FAILED receipt with nonexecution flags",
+    "Native build receipt, source/binary identity, fresh thread process, protected CPU and affinity membership gates before any process",
+    "Short dx=1e-7 callback clamp equals represented endpoints; original RHS equal at 3 points, endpoint partial_t zero, strictly interior time FD nodes, insufficient represented nodes explicit failure"
+  ],
+  "original_input_files_checked": 16,
+  "original_input_bytes_unchanged": true,
+  "native_execution": false,
+  "ode_integration": false,
+  "affinity_mutation": false,
+  "old_35_56_or_full_12_suites_rerun": false,
+  "all_red_first_claim": false,
+  "source_version_note": "10 helper methods passed initially and did not change. All 3 main methods then passed after adjusting the still-unrun plan test to reuse existing plan_01. Only the plan method subsequently changed to treat historical manifest_path as host-location provenance and compare every other identity field exactly; that 1 affected method passed on rerun. Final coverage is 13 pilot unique methods plus 1 new optical method, with 15 method executions. No fresh all-13/all-14 run claimed.",
+  "snapshot_note": "helpers_test_source.py reconstructs and hash-checks the helper-run version; main_test_source.py is an exact byte copy of the successfully tested main-admission version taken before the portability edit. All original logs and receipts remain unchanged.",
+  "completed_plan_reuse": {
+    "path": "/workspace/scratch/4d2e4c44b70c/c21h_work/unit/evidence/wiring/plan_01",
+    "payloads": {
+      "C21H_SOURCE_IDENTITY.json": {
+        "bytes": 1293,
+        "sha256": "a504fb4703e9c1a276bd9375e6dbdd5340a5792f39d99da38980dc08ba725e5d"
+      },
+      "INPUT_IDENTITY.json": {
+        "bytes": 5695,
+        "sha256": "56246d812260da90c907de651040cf051e60f552f6c6da1c3d4b333611ce02e4"
+      },
+      "PLAN.json": {
+        "bytes": 1221,
+        "sha256": "ef4a721424cbb5695bfb6eae84c729cbfd39c310d89de1eb321c6ac6f4cb3505"
+      },
+      "PLAN_RECEIPT.json": {
+        "bytes": 123,
+        "sha256": "9bba753ef179513cfa1eb2e06ddba968289fe6eda8e06eedb1cb6c67eb84be94"
+      }
+    }
+  },
+  "new_optical_metric": {
+    "fixture_dx": 1e-07,
+    "first_cell_width": 2.113248687152236e-08,
+    "left_equals_lo": true,
+    "right_equals_hi": true,
+    "original_rhs_equal_at_three_points": true,
+    "endpoint_partial_time_zero": true,
+    "fd_nodes_strictly_interior": true,
+    "insufficient_represented_nodes_explicitly_rejected": true,
+    "ode_integration": false
+  },
+  "prior_targeted_trace_recheck": {
+    "path": "evidence/python_tests/trace_after_transport_changes.json",
+    "record": {
+      "bytes": 2491,
+      "sha256": "5a2f02a43b0b88941e2d6786562104fb0a362334550d837a957d79a7bc02ff04"
+    },
+    "result": "PASS one selected mocked return-trace method; not counted in this 14-method run summary"
+  },
+  "scientific_interpretation": "Mock provenance/resource contracts and manufactured callback algebra only. Does not establish native science acceptance, solver convergence, wall-time performance, or an error bound.",
+  "global_error_bound": null,
+  "supersedes_summary_for_final_source_and_execution_counts": "SUMMARY.json",
+  "portability_change": {
+    "method": "test_plan_verifies_real_pins_and_preserves_existing_output",
+    "reason": "Historical INPUT_IDENTITY.manifest_path records the original host absolute location; requiring the same current absolute path would reject otherwise byte-identical evidence on another host.",
+    "comparison": "Recorded manifest path must remain absolute; all other fields, including complete manifest SHA and every pinned payload record, compare exactly. Runtime and EXECUTION_MANIFEST unchanged.",
+    "scope": "Source-code change verified in the current sandbox only; no second-host execution claimed."
+  },
+  "stage_status": {
+    "local_test_evidence": "COMPLETE",
+    "publication": "PARENT_INTEGRATION_PENDING",
+    "backup": "PARENT_INTEGRATION_PENDING",
+    "DAG": "PILOT_CONTRACT_TESTS_PASS; NATIVE_AND_SCIENTIFIC_GATES_UNCHANGED"
+  }
+}
