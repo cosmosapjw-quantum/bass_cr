@@ -128,3 +128,20 @@ A scratch loss after validation was recovered from the retained exact
 content bytes and independently pinned inputs. All 78 SHA256 and Git blob
 identities matched, with zero analysis, test, IVP or native reruns for that
 recovery. The publication records preserve the actual recovery evidence.
+
+## Delivery backup and final handoff
+
+The research delivery snapshot at D1 `e04b19669b1542b4537448c764d1dc02ebc8b7b6` is saved create-only
+in all three designated stores. See `publication/DELIVERY_BACKUP_RECEIPT.json`.
+
+- Archive: `BASS_CR_C21J_RESEARCH_DELIVERY_20261020T173607Z.zip`
+- Bytes: 3495267; members: 135; payloads: 134.
+- SHA256: `b3f867d40f2f760e5f61168a1bec858d2c9a1dba646e7b56d015c569283a1ae8`.
+
+Read [the full new-thread handoff](C21J_NEXT_THREAD_PROMPT_KO_20261020.md),
+[the concrete NCP handoff](NCP_C21J_FINAL_PROMPT_KO_20261020.md), and
+[the full research and closeout report](C21J_CLOSEOUT_REPORT_KO_20261020.md).
+The final external `C21J_PUBLICATION_CLOSEOUT_RECEIPT_20261020.json` binds the
+actual final document head and the later document-only closeout ZIP without
+a self-hash cycle. Apply `publication/DELTA_MANIFEST_D2.json` only to matching
+D1 document base hashes. Native exact remains NOT_RUN / NOT_EVALUATED.

@@ -1,0 +1,95 @@
+{
+  "schema": "C21J_EXTERNAL_LATE_DELTA_REFRESH_PUBLIC_V1",
+  "status": "NO_NEW_EXTERNAL_C21_RESULT_OR_RECEIPT_CANDIDATES_OBSERVED_IN_SPECIFIED_METADATA_SCOPE",
+  "observed_from_utc": "2026-10-20T20:43:36.351Z",
+  "observed_through_utc": "2026-10-20T20:44:02.740Z",
+  "modification_cutoff_utc": "2026-10-20T17:22:00Z",
+  "providers": {
+    "library": {
+      "folder_id": "6ad11b977ee08191a1b593655cb6913c",
+      "folder": "/BASS_DERIVATION_DOSSIERS_20260912/bass_cr",
+      "query": "Direct children, modified_after cutoff; no title or file-type filter.",
+      "pages_read": 1,
+      "requested_limit": 100,
+      "items_returned": 1,
+      "items_after_cutoff": 1,
+      "pagination_complete": true,
+      "new_external_candidate_count": 0
+    },
+    "drive": {
+      "folder_id": "1V4ZQza59dWVC7apeRz9P1TL66eaVYyJy",
+      "query": "Bounded direct-child metadata listing; C21 title and cutoff applied to returned metadata.",
+      "pages_read": 1,
+      "requested_scan_limit": 100,
+      "items_returned": 58,
+      "items_after_cutoff": 1,
+      "pagination_complete": null,
+      "pagination_note": "The folder-list response exposes no continuation/completeness field. The result is limited to returned entries.",
+      "preceding_failed_request": {
+        "tool": "google_drive_search",
+        "status": "HTTP_400_INVALID_ARGUMENT",
+        "reason": "Invalid q expression contains(name, 'C21'). This failed call supplies no absence evidence.",
+        "fallback_reason": "The search request also exposed a default MIME filter excluding ZIP/gzip/octet-stream/JSON; the bounded folder listing covers returned entries of those types."
+      },
+      "new_external_candidate_count": 0
+    },
+    "dropbox": {
+      "folder": "/BASS_DERIVATION_DOSSIERS_20260912/bass_cr",
+      "query": "C21 title-only request in specified folder; last_modified_after cutoff requested, max_results 100.",
+      "pages_read": 1,
+      "items_returned": 13,
+      "items_after_cutoff": 1,
+      "pagination_complete": true,
+      "provider_has_more": false,
+      "filter_note": "The provider returned 12 pre-cutoff records despite the requested date filter. Classification uses each returned last_modified value; those older records were excluded. No content was fetched.",
+      "new_external_candidate_count": 0
+    }
+  },
+  "excluded_own_delivery": {
+    "name": "BASS_CR_C21J_RESEARCH_DELIVERY_20261020T173607Z.zip",
+    "exclusion_basis": "Current root C21J delivery backup, explicitly excluded from new external research results.",
+    "observed_metadata": {
+      "library": [
+        {
+          "name": "BASS_CR_C21J_RESEARCH_DELIVERY_20261020T173607Z.zip",
+          "id": "libfile_7f604c8e9d1081919c828e9a8fc97cd4",
+          "file_id": "file_000000005a88820ba56ff654e3927b65",
+          "modified_at": "2026-10-20T17:37:02.073358Z",
+          "size_bytes": 3495267
+        }
+      ],
+      "drive": [
+        {
+          "name": "BASS_CR_C21J_RESEARCH_DELIVERY_20261020T173607Z.zip",
+          "id": "1VUN3oQO_U3VHB3n7PDcdmudhsKwt5QPj",
+          "modified_at": "2026-10-20T20:40:32.223Z",
+          "size_bytes": 3495267
+        }
+      ],
+      "dropbox": [
+        {
+          "name": "BASS_CR_C21J_RESEARCH_DELIVERY_20261020T173607Z.zip",
+          "id": "id:BSpOijBcT10AAAAAAD_aDQ",
+          "modified_at": "2026-10-20T20:40:46Z",
+          "size_bytes": 3495267
+        }
+      ]
+    }
+  },
+  "new_external_candidates": [],
+  "activity": {
+    "metadata_calls": 4,
+    "successful_metadata_calls": 3,
+    "failed_metadata_calls": 1,
+    "remote_content_reads": 0,
+    "downloads": 0,
+    "science_executions": 0,
+    "hash_rechecks": 0
+  },
+  "global_error_bound": null,
+  "scope_limits": [
+    "Metadata and modification timestamps classify candidates only; no file-byte identity or scientific result was re-evaluated.",
+    "Library and Drive direct children were inspected; Dropbox results are limited to the specified-folder C21 search and its exposed pagination.",
+    "No claim of absence across other folders, accounts, conversations, Git branches, NCP disk, unpublished work, or results not discoverable by these bounded calls."
+  ]
+}
