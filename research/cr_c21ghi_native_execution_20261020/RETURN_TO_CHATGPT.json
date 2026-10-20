@@ -1,0 +1,37 @@
+{
+  "schema": "C21GHI_NCP_RETURN_V1",
+  "status": "NATIVE_SELECTION_COMPLETE_PUBLISHED_DRAFT_PR_DUAL_BACKUP_METADATA_VERIFIED",
+  "repository": "cosmosapjw-quantum/bass_cr",
+  "worktree_content_commit": "fe6bbaec2de5032b938aed0713623b9618ba70e6",
+  "latest_document_head_at_intake": "26ab505dac2bfcb0cfd3d049f22bc408f4c86241",
+  "source_changed": false,
+  "compatibility_patch": null,
+  "ncp": {
+    "allocated_affinity_cpu": 62,
+    "protected_cpu_55_used": false,
+    "max_concurrent_jobs": 1,
+    "memory_available_at_admission_gib_approx": 121.4,
+    "disk_free_after_build_gib_approx": 7.7,
+    "watcher_or_other_research_stopped": false
+  },
+  "build": {
+    "first_attempt": "TIMEOUT_300S_NO_COMPILER_ERROR_OR_BINARY",
+    "successful_attempt": "PASS_RUST_1.94.1_CARGO_LOCKED_JOBS_1",
+    "successful_build_receipt": "build_success/BUILD_RECEIPT.json",
+    "bridge_sha256": "717c477cc3df7f7964faaaf11e9f50643ba59a0bde31cecdb62ed592a37dce30",
+    "bridge_bytes": 4888736,
+    "vigilode_commit": "8a8bd409b1d96c7b7421f496d229e119fd3d284e",
+    "diffsol": "0.17.1",
+    "elapsed_cargo_report": "7m 01s"
+  },
+  "native_tests": {
+    "H_common_ic_vigilode_base": {"status": "COMPLETE", "job_wall_s": 1.2116977100085933, "max_rss_kib": 85560, "accepted_steps": 36, "actual_rhs_native_calls": 823},
+    "I_common_ic_vigilode_vectorized_base": {"status": "COMPLETE", "job_wall_s": 1.4319355220068246, "max_rss_kib": 85812, "accepted_steps": 36, "actual_rhs_native_calls": 823},
+    "I_common_ic_vigilode_vectorized_fd_half": {"status": "COMPLETE", "job_wall_s": 1.434721386001911, "max_rss_kib": 85920, "accepted_steps": 36, "actual_rhs_native_calls": 823}
+  },
+  "result_interpretation": "For the selected manufactured common_ic fixture, I matched H's binary64 endpoints and did not reduce native calls; the one measured I base job wall was 18.1% longer. FD-half endpoint differences are recorded; none are global error bounds.",
+  "next_dag": "Complete other H rows/G reference ladder only if separately required; evaluate whether repeated matched performance measurements justify another I mode. Current full native MD14/full-EoR gates remain HOLD.",
+  "publication": {"status": "PUBLISHED_OPEN_DRAFT_PR", "pr": 87, "url": "https://github.com/cosmosapjw-quantum/bass_cr/pull/87", "content_commit": "0f2d195aee3c08b372d020bcd6caba87db64a83c"},
+  "dual_backup": {"status": "COMPLETE_CREATE_ONLY", "archive": "C21GHI_NATIVE_EXECUTION_20261020T112300Z.tar.gz", "sha256": "2722e479b6205015a68f1393b8c537d21e63201bb57efd3cf850fe74e4668de3", "bytes": 2568680, "drive_id": "1AlRBZ__ZoRYe7MwFE3QbMIvmOHGcKR1u", "dropbox_id": "id:BSpOijBcT10AAAAAAD_T4A", "remote_byte_readback": false, "local_restore": "155/155 payload SHA256 pass"},
+  "global_error_bound": null
+}
