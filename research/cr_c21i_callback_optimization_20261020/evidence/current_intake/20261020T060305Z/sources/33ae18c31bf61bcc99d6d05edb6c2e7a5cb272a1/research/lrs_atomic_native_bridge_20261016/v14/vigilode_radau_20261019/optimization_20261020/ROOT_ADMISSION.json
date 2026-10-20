@@ -1,0 +1,37 @@
+{
+  "schema": "rei-lrs-optimization-root-admission-v1",
+  "completed_utc": "2026-10-20 05:59:05 UTC",
+  "owner": "/root (Astra)",
+  "independent_review": "review/C9_VERDICT.json",
+  "decision": "ADMIT_FINITE_NATIVE_EQUIVALENCE_AND_SCOPED_COST_OBSERVATIONS",
+  "production_scientific_admission": "NOT_ISSUED",
+  "baseline_scientific_source": "d87ba9ca25acb8a2a032154fa23057b45acd6207",
+  "vigilode_source": "8a8bd409b1d96c7b7421f496d229e119fd3d284e",
+  "candidate_binary_sha256": "24f9d38e56d3380e830478b8afe7760b2f44fff7ab60167ed14aa668ae7f4ac0",
+  "batch_binary_sha256": "b0a2f47e58d0b5d94804ac919c257be81503f55874ece5e82901349a6533b096",
+  "admitted": {
+    "implementation": "Explicit cell-cache option; original rates/node arithmetic, native base and VigilODE bytes preserved",
+    "equivalence": "19 existing settings; independent 329983 scalar/shape paths equal, finite; signed-zero bit equality not tested",
+    "focused_rust_tests": 10,
+    "existing_python_runner_tests": 4,
+    "delivery_forward_smoke": "fixed Radau N2 cell-cache/profile actual exit0 and original fields equal",
+    "serial_performance": "Five AB/BA interleaved pairs for each fixed/birth/disabled Radau N16, same candidate binary and CPU0, matched physical outputs; all samples retained",
+    "parallelism": "Pinned Rayon local pool reused in separate batch binary; 36 initial and 27 interleaved child outputs equal; 3 jobs, max effective width3; interleaved median width1/2=1.71405 and width1/4=1.92038 are observations with temporal drift",
+    "memory": "Four small-C fork/exec/wait4 samples: legacy6400/6396 KiB, cache6552/6456 KiB; descriptive only"
+  },
+  "not_admitted": [
+    "RSS reduction",
+    "Universal/single-history parallel scaling",
+    "33.8x elapsed speedup from per-Jacobian preparation count",
+    "New source-on all-channel order or general 5th order",
+    "Uniform stiff accuracy",
+    "General positivity",
+    "CaseB/fullEoR/signedBianchi",
+    "Positive CMB/nonzero boundary coverage",
+    "Continuous/global certificate",
+    "New NCP optimization execution"
+  ],
+  "native_ncp_this_cycle": "NOT_RUN_NO_REQUESTED_KEY_OR_REMOTE_CONNECTOR",
+  "verification_complete": true,
+  "next": "Publish normal source and evidence, whole-file dual backup readback, final delivery pointers; no further optional campaign"
+}

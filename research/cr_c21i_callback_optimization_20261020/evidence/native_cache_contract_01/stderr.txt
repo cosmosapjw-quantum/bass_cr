@@ -1,0 +1,243 @@
+test_binary_and_build_files_are_immutable_during_the_lease (__main__.NativeAdmissionTests.test_binary_and_build_files_are_immutable_during_the_lease) ... ERROR
+test_closed_dead_and_replaced_or_closed_streams_rejected (__main__.NativeAdmissionTests.test_closed_dead_and_replaced_or_closed_streams_rejected) ... ERROR
+test_context_mutation_contract_mutation_and_config_drift_fail (__main__.NativeAdmissionTests.test_context_mutation_contract_mutation_and_config_drift_fail) ... ERROR
+test_deadline_expired_hit_and_any_deadline_rebinding_fail (__main__.NativeAdmissionTests.test_deadline_expired_hit_and_any_deadline_rebinding_fail) ... ERROR
+test_exact_bare_and_private_budgeted_class_contracts (__main__.NativeAdmissionTests.test_exact_bare_and_private_budgeted_class_contracts) ... 
+  test_exact_bare_and_private_budgeted_class_contracts (__main__.NativeAdmissionTests.test_exact_bare_and_private_budgeted_class_contracts) (wrapper=False) ... ERROR
+  test_exact_bare_and_private_budgeted_class_contracts (__main__.NativeAdmissionTests.test_exact_bare_and_private_budgeted_class_contracts) (wrapper=True) ... ERROR
+test_failed_and_nonfinite_values_never_enter_existing_exact_cache (__main__.NativeAdmissionTests.test_failed_and_nonfinite_values_never_enter_existing_exact_cache) ... ERROR
+test_helper_preserves_fresh_import_thread_order (__main__.NativeAdmissionTests.test_helper_preserves_fresh_import_thread_order) ... ok
+test_inner_outer_and_process_replacement_rejected (__main__.NativeAdmissionTests.test_inner_outer_and_process_replacement_rejected) ... ERROR
+test_nth_success_and_cached_hit_allowed_n_plus_one_miss_original_rejection (__main__.NativeAdmissionTests.test_nth_success_and_cached_hit_allowed_n_plus_one_miss_original_rejection) ... ERROR
+test_owner_provenance_command_and_process_receipt_binding (__main__.NativeAdmissionTests.test_owner_provenance_command_and_process_receipt_binding) ... FAIL
+test_post_admission_class_method_and_instance_override_rejected (__main__.NativeAdmissionTests.test_post_admission_class_method_and_instance_override_rejected) ... ERROR
+test_timeout_changes_are_allowed_but_invalid_values_and_counter_reset_fail (__main__.NativeAdmissionTests.test_timeout_changes_are_allowed_but_invalid_values_and_counter_reset_fail) ... ERROR
+test_unknown_subclass_and_preexisting_monkeypatch_rejected (__main__.NativeAdmissionTests.test_unknown_subclass_and_preexisting_monkeypatch_rejected) ... ok
+test_vectorized_default_needs_no_admission_exact_requires_one (__main__.NativeAdmissionTests.test_vectorized_default_needs_no_admission_exact_requires_one) ... ok
+
+======================================================================
+ERROR: test_binary_and_build_files_are_immutable_during_the_lease (__main__.NativeAdmissionTests.test_binary_and_build_files_are_immutable_during_the_lease)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/tests/test_native_cache_contract.py", line 314, in test_binary_and_build_files_are_immutable_during_the_lease
+    _, guard = self.admitted()
+               ^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/tests/test_native_cache_contract.py", line 131, in admitted
+    return admit.admit_native_cache(provider or self.provider, self.provenance,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 229, in admit_native_cache
+    wrapper = _ClassBinding(provider, "BudgetedNativeMicro", BUDGET_SOURCE_SHA256)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 168, in __init__
+    _fail("PROVIDER_METHOD_CHANGED")
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 63, in _fail
+    raise NativeCacheAdmissionError("C21I_NATIVE_CACHE_" + reason)
+c21i_native_contract_tests.NativeCacheAdmissionError: C21I_NATIVE_CACHE_PROVIDER_METHOD_CHANGED
+
+======================================================================
+ERROR: test_closed_dead_and_replaced_or_closed_streams_rejected (__main__.NativeAdmissionTests.test_closed_dead_and_replaced_or_closed_streams_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/tests/test_native_cache_contract.py", line 224, in test_closed_dead_and_replaced_or_closed_streams_rejected
+    _, guard = self.admitted()
+               ^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/tests/test_native_cache_contract.py", line 131, in admitted
+    return admit.admit_native_cache(provider or self.provider, self.provenance,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 229, in admit_native_cache
+    wrapper = _ClassBinding(provider, "BudgetedNativeMicro", BUDGET_SOURCE_SHA256)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 168, in __init__
+    _fail("PROVIDER_METHOD_CHANGED")
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 63, in _fail
+    raise NativeCacheAdmissionError("C21I_NATIVE_CACHE_" + reason)
+c21i_native_contract_tests.NativeCacheAdmissionError: C21I_NATIVE_CACHE_PROVIDER_METHOD_CHANGED
+
+======================================================================
+ERROR: test_context_mutation_contract_mutation_and_config_drift_fail (__main__.NativeAdmissionTests.test_context_mutation_contract_mutation_and_config_drift_fail)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/tests/test_native_cache_contract.py", line 337, in test_context_mutation_contract_mutation_and_config_drift_fail
+    contract, guard = self.admitted()
+                      ^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/tests/test_native_cache_contract.py", line 131, in admitted
+    return admit.admit_native_cache(provider or self.provider, self.provenance,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 229, in admit_native_cache
+    wrapper = _ClassBinding(provider, "BudgetedNativeMicro", BUDGET_SOURCE_SHA256)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 168, in __init__
+    _fail("PROVIDER_METHOD_CHANGED")
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 63, in _fail
+    raise NativeCacheAdmissionError("C21I_NATIVE_CACHE_" + reason)
+c21i_native_contract_tests.NativeCacheAdmissionError: C21I_NATIVE_CACHE_PROVIDER_METHOD_CHANGED
+
+======================================================================
+ERROR: test_deadline_expired_hit_and_any_deadline_rebinding_fail (__main__.NativeAdmissionTests.test_deadline_expired_hit_and_any_deadline_rebinding_fail)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/tests/test_native_cache_contract.py", line 285, in test_deadline_expired_hit_and_any_deadline_rebinding_fail
+    contract, guard = self.admitted()
+                      ^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/tests/test_native_cache_contract.py", line 131, in admitted
+    return admit.admit_native_cache(provider or self.provider, self.provenance,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 229, in admit_native_cache
+    wrapper = _ClassBinding(provider, "BudgetedNativeMicro", BUDGET_SOURCE_SHA256)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 168, in __init__
+    _fail("PROVIDER_METHOD_CHANGED")
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 63, in _fail
+    raise NativeCacheAdmissionError("C21I_NATIVE_CACHE_" + reason)
+c21i_native_contract_tests.NativeCacheAdmissionError: C21I_NATIVE_CACHE_PROVIDER_METHOD_CHANGED
+
+======================================================================
+ERROR: test_exact_bare_and_private_budgeted_class_contracts (__main__.NativeAdmissionTests.test_exact_bare_and_private_budgeted_class_contracts) (wrapper=False)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/tests/test_native_cache_contract.py", line 166, in test_exact_bare_and_private_budgeted_class_contracts
+    contract, guard = self.admitted(provider)
+                      ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/tests/test_native_cache_contract.py", line 131, in admitted
+    return admit.admit_native_cache(provider or self.provider, self.provenance,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 239, in admit_native_cache
+    native_binding = _ClassBinding(native, "NativeMicro", NATIVE_SOURCE_SHA256)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 168, in __init__
+    _fail("PROVIDER_METHOD_CHANGED")
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 63, in _fail
+    raise NativeCacheAdmissionError("C21I_NATIVE_CACHE_" + reason)
+c21i_native_contract_tests.NativeCacheAdmissionError: C21I_NATIVE_CACHE_PROVIDER_METHOD_CHANGED
+
+======================================================================
+ERROR: test_exact_bare_and_private_budgeted_class_contracts (__main__.NativeAdmissionTests.test_exact_bare_and_private_budgeted_class_contracts) (wrapper=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/tests/test_native_cache_contract.py", line 166, in test_exact_bare_and_private_budgeted_class_contracts
+    contract, guard = self.admitted(provider)
+                      ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/tests/test_native_cache_contract.py", line 131, in admitted
+    return admit.admit_native_cache(provider or self.provider, self.provenance,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 229, in admit_native_cache
+    wrapper = _ClassBinding(provider, "BudgetedNativeMicro", BUDGET_SOURCE_SHA256)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 168, in __init__
+    _fail("PROVIDER_METHOD_CHANGED")
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 63, in _fail
+    raise NativeCacheAdmissionError("C21I_NATIVE_CACHE_" + reason)
+c21i_native_contract_tests.NativeCacheAdmissionError: C21I_NATIVE_CACHE_PROVIDER_METHOD_CHANGED
+
+======================================================================
+ERROR: test_failed_and_nonfinite_values_never_enter_existing_exact_cache (__main__.NativeAdmissionTests.test_failed_and_nonfinite_values_never_enter_existing_exact_cache)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/tests/test_native_cache_contract.py", line 357, in test_failed_and_nonfinite_values_never_enter_existing_exact_cache
+    contract, guard = self.admitted()
+                      ^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/tests/test_native_cache_contract.py", line 131, in admitted
+    return admit.admit_native_cache(provider or self.provider, self.provenance,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 229, in admit_native_cache
+    wrapper = _ClassBinding(provider, "BudgetedNativeMicro", BUDGET_SOURCE_SHA256)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 168, in __init__
+    _fail("PROVIDER_METHOD_CHANGED")
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 63, in _fail
+    raise NativeCacheAdmissionError("C21I_NATIVE_CACHE_" + reason)
+c21i_native_contract_tests.NativeCacheAdmissionError: C21I_NATIVE_CACHE_PROVIDER_METHOD_CHANGED
+
+======================================================================
+ERROR: test_inner_outer_and_process_replacement_rejected (__main__.NativeAdmissionTests.test_inner_outer_and_process_replacement_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/tests/test_native_cache_contract.py", line 206, in test_inner_outer_and_process_replacement_rejected
+    _, guard = self.admitted()
+               ^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/tests/test_native_cache_contract.py", line 131, in admitted
+    return admit.admit_native_cache(provider or self.provider, self.provenance,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 229, in admit_native_cache
+    wrapper = _ClassBinding(provider, "BudgetedNativeMicro", BUDGET_SOURCE_SHA256)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 168, in __init__
+    _fail("PROVIDER_METHOD_CHANGED")
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 63, in _fail
+    raise NativeCacheAdmissionError("C21I_NATIVE_CACHE_" + reason)
+c21i_native_contract_tests.NativeCacheAdmissionError: C21I_NATIVE_CACHE_PROVIDER_METHOD_CHANGED
+
+======================================================================
+ERROR: test_nth_success_and_cached_hit_allowed_n_plus_one_miss_original_rejection (__main__.NativeAdmissionTests.test_nth_success_and_cached_hit_allowed_n_plus_one_miss_original_rejection)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/tests/test_native_cache_contract.py", line 262, in test_nth_success_and_cached_hit_allowed_n_plus_one_miss_original_rejection
+    contract, guard = self.admitted()
+                      ^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/tests/test_native_cache_contract.py", line 131, in admitted
+    return admit.admit_native_cache(provider or self.provider, self.provenance,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 229, in admit_native_cache
+    wrapper = _ClassBinding(provider, "BudgetedNativeMicro", BUDGET_SOURCE_SHA256)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 168, in __init__
+    _fail("PROVIDER_METHOD_CHANGED")
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 63, in _fail
+    raise NativeCacheAdmissionError("C21I_NATIVE_CACHE_" + reason)
+c21i_native_contract_tests.NativeCacheAdmissionError: C21I_NATIVE_CACHE_PROVIDER_METHOD_CHANGED
+
+======================================================================
+ERROR: test_post_admission_class_method_and_instance_override_rejected (__main__.NativeAdmissionTests.test_post_admission_class_method_and_instance_override_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/tests/test_native_cache_contract.py", line 193, in test_post_admission_class_method_and_instance_override_rejected
+    _, guard = self.admitted()
+               ^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/tests/test_native_cache_contract.py", line 131, in admitted
+    return admit.admit_native_cache(provider or self.provider, self.provenance,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 229, in admit_native_cache
+    wrapper = _ClassBinding(provider, "BudgetedNativeMicro", BUDGET_SOURCE_SHA256)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 168, in __init__
+    _fail("PROVIDER_METHOD_CHANGED")
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 63, in _fail
+    raise NativeCacheAdmissionError("C21I_NATIVE_CACHE_" + reason)
+c21i_native_contract_tests.NativeCacheAdmissionError: C21I_NATIVE_CACHE_PROVIDER_METHOD_CHANGED
+
+======================================================================
+ERROR: test_timeout_changes_are_allowed_but_invalid_values_and_counter_reset_fail (__main__.NativeAdmissionTests.test_timeout_changes_are_allowed_but_invalid_values_and_counter_reset_fail)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/tests/test_native_cache_contract.py", line 243, in test_timeout_changes_are_allowed_but_invalid_values_and_counter_reset_fail
+    _, guard = self.admitted()
+               ^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/tests/test_native_cache_contract.py", line 131, in admitted
+    return admit.admit_native_cache(provider or self.provider, self.provenance,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 229, in admit_native_cache
+    wrapper = _ClassBinding(provider, "BudgetedNativeMicro", BUDGET_SOURCE_SHA256)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 168, in __init__
+    _fail("PROVIDER_METHOD_CHANGED")
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py", line 63, in _fail
+    raise NativeCacheAdmissionError("C21I_NATIVE_CACHE_" + reason)
+c21i_native_contract_tests.NativeCacheAdmissionError: C21I_NATIVE_CACHE_PROVIDER_METHOD_CHANGED
+
+======================================================================
+FAIL: test_owner_provenance_command_and_process_receipt_binding (__main__.NativeAdmissionTests.test_owner_provenance_command_and_process_receipt_binding)
+----------------------------------------------------------------------
+c21i_native_contract_tests.NativeCacheAdmissionError: C21I_NATIVE_CACHE_PROVIDER_METHOD_CHANGED
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/tests/test_native_cache_contract.py", line 305, in test_owner_provenance_command_and_process_receipt_binding
+    with self.assertRaisesRegex(admit.NativeCacheAdmissionError, "EXACT_SINGLE_BINARY_COMMAND_REQUIRED"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "EXACT_SINGLE_BINARY_COMMAND_REQUIRED" does not match "C21I_NATIVE_CACHE_PROVIDER_METHOD_CHANGED"
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.116s
+
+FAILED (failures=1, errors=11)

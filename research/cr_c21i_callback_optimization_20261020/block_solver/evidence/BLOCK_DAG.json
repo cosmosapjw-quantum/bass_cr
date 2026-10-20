@@ -1,0 +1,68 @@
+{
+  "schema": "C21I_BLOCK_DAG_V1",
+  "recorded_at_utc": "2026-10-20T05:54:54.867695+00:00",
+  "scope": "standalone block kernel subgraph only",
+  "nodes": [
+    {
+      "id": "B1",
+      "kind": "theory",
+      "status": "DERIVED",
+      "evidence": "evidence/THEORY_CODE_MAPPING.json"
+    },
+    {
+      "id": "B2",
+      "kind": "implementation",
+      "status": "IMPLEMENTED",
+      "evidence": "src/lib.rs",
+      "depends_on": [
+        "B1"
+      ]
+    },
+    {
+      "id": "B3",
+      "kind": "focused_verification",
+      "status": "PASS_SCOPED",
+      "evidence": "evidence/attempt_01/TEST_RECEIPT.json",
+      "depends_on": [
+        "B2"
+      ]
+    },
+    {
+      "id": "B4",
+      "kind": "manufactured_kernel_benchmark",
+      "status": "COMPLETE_SCOPED",
+      "evidence": "evidence/BENCHMARK_SUMMARY.json",
+      "depends_on": [
+        "B3"
+      ]
+    },
+    {
+      "id": "B5",
+      "kind": "independent_source_raw_review",
+      "status": "PASS_SCOPED",
+      "evidence": "evidence/independent_review_01/BLOCK_INDEPENDENT_RAW_REVIEW.json",
+      "depends_on": [
+        "B4"
+      ]
+    },
+    {
+      "id": "B6",
+      "kind": "c21h_backend_integration",
+      "status": "NOT_IMPLEMENTED",
+      "depends_on": [
+        "B5"
+      ]
+    },
+    {
+      "id": "B7",
+      "kind": "native_performance",
+      "status": "NOT_EVALUATED",
+      "depends_on": [
+        "B6"
+      ]
+    }
+  ],
+  "publication": "parent receipt owns actual commit/ref/PR state",
+  "backup": "parent receipt owns provider ACK state",
+  "global_error_bound": null
+}

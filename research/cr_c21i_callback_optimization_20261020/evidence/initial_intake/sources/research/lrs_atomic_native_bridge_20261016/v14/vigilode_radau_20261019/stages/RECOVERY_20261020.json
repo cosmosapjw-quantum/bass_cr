@@ -1,0 +1,131 @@
+{
+  "schema": "rei.lrs.vigilode.recovery.20261020.1",
+  "date_utc": "2026-10-20",
+  "scope": "Restore completed C10/C11, reproduce missing prepare-only and saved-result readback, correct stale handoff; no new scientific cycle",
+  "base_delivery_head": "46a29285ad7095959bb0e5b5a10dab0fec97501f",
+  "source_publication_sha": "d87ba9ca25acb8a2a032154fa23057b45acd6207",
+  "ncp_evidence_commit": "09bfe94bc270623b014bc6db78c59211152739aa",
+  "ncp_delivery_commit": "46a29285ad7095959bb0e5b5a10dab0fec97501f",
+  "source": "https://github.com/cosmosapjw-quantum/rei_bianchi/tree/d87ba9ca25acb8a2a032154fa23057b45acd6207/research/lrs_atomic_native_bridge_20261016/v14/vigilode_radau_20261019",
+  "ncp_execution_receipt": "../ncp_20261019T171038Z/NCP_EXECUTION_RECEIPT.json",
+  "ncp_delivery": "NCP_DELIVERY_20261019.json",
+  "immutable_c10_delivery": "FINAL_DELIVERY.json",
+  "report": "../recovery_20261020/RECOVERY_REPORT_KO.md",
+  "this_host": {
+    "native_runs": 0,
+    "builds": 0,
+    "dependency_installs": 0,
+    "prepare_only": {
+      "status": "PASS_PREPARED_VERIFIED",
+      "exit_code": 0,
+      "native_baseline_files": 152,
+      "vigilode_files": 477,
+      "native_append_bytes": 173,
+      "wall_s": 0.5670953820008435,
+      "native_compile": "NOT_RUN",
+      "scientific_cases": "NOT_RUN"
+    },
+    "published_host_compare": {
+      "status": "PASS",
+      "exit_code": 0,
+      "output_byte_identical_to_archived_NCP_VS_SANDBOX": true
+    },
+    "strict_finite_packed_ieee64_readback": {
+      "status": "PASS",
+      "cases": 19,
+      "raw_numeric_leaves": 316540,
+      "endpoint_numeric_leaves": 209,
+      "refinement_numeric_leaves": 435,
+      "empirical_numeric_leaves": 323,
+      "raw_timing_leaves_skipped": 38,
+      "timing_filter_substrings": [
+        "wall",
+        "elapsed",
+        "utc",
+        "seconds"
+      ],
+      "nonfinite_leaves": 0,
+      "packed_ieee64_mismatches": 0,
+      "structural_mismatches": 0,
+      "signed_zero_included": true
+    },
+    "case_transcript_readback": {
+      "cases": 19,
+      "all_exit_code_zero": true,
+      "all_truncated_false": true,
+      "all_stdout_stderr_sha256_match": true
+    }
+  },
+  "historical_ncp_result": {
+    "matrix_exit_code": 0,
+    "completed_same_unique_settings": 19,
+    "failed_or_truncated": 0,
+    "focused_tests_pass": 7,
+    "native_rhs": 38840,
+    "native_wall_s": 15.824811033,
+    "native_process_wall_s": 19.061708406108664,
+    "binary_sha256": "6f0a5382dd10f03850e78e83d91d7930b374c622895f5538316cc21f84e74d12",
+    "first_three_launchers": "EXIT1_BEFORE_NATIVE_STALE_ORIGIN_REMOTE_REF",
+    "fourth_launcher": {
+      "exit_code": 1,
+      "prepare_and_run_exit_code": 0,
+      "analyzer_exit_code": 1,
+      "cause": "system Python matplotlib missing after native matrix completed"
+    },
+    "analysis_only_venv_rerun_exit_code": 0,
+    "compatibility_fix": "explicit fetch refspec; analysis-only venv; no scientific source change",
+    "analysis_only_venv_rerun_exit_code_provenance": {
+      "reported_by": "../ncp_20261019T171038Z/NCP_EXECUTION_RECEIPT.json",
+      "corroboration": "saved analysis_r2 stdout summary and empty stderr",
+      "separate_rerun_EXIT_CODE_file_observed": false
+    }
+  },
+  "binary_receipts": {
+    "sandbox": "FINAL_DELIVERY.json",
+    "ncp": "../ncp_20261019T171038Z/NCP_EXECUTION_RECEIPT.json"
+  },
+  "restored_archives": {
+    "C10": {
+      "filename": "REI_LRS_V14_VIGILODE_C10_20261019T141050Z.tar.gz",
+      "bytes": 59621285,
+      "sha256": "7d709bcb82476fbfa11b8b68654319173740480686633b1e7d7e8b7f7e02812c",
+      "verified_files": 1300,
+      "current_full_get_provider": "Dropbox"
+    },
+    "C11": {
+      "filename": "REI_LRS_V14_VIGILODE_NCP_C11_20261019T171038Z.tar.gz",
+      "bytes": 50236168,
+      "sha256": "bcb4526ccb14584161f479faeb4dcd8db3656f5dc7966693c75085419e958995",
+      "verified_payload_checks": 175,
+      "Drive_id": "1u4Wq5K1JjtoslPn-TNIMF60JA7q8fEbK",
+      "Dropbox_id": "id:BSpOijBcT10AAAAAAD_R2Q",
+      "current_full_get_provider": "Drive",
+      "historical_readback": "DUAL_FULL_READBACK_RETAINED;NOT_BOTH_RETRIEVED_TODAY"
+    }
+  },
+  "raw_preservation": "C10/C11 original source, raw, transcript and historical receipts read-only; immutable C10 FINAL_DELIVERY unchanged",
+  "settings_count_policy": "same19 discrete settings across hosts; not38 unique settings",
+  "scientific_holds": [
+    "GENERAL_SOURCE_ON_ORDER",
+    "HeIII_ENDPOINT_SINGLE_ORDER",
+    "UNIFORM_STIFF",
+    "GENERAL_POSITIVITY",
+    "CASE_B",
+    "FULL_EOR",
+    "SIGNED_BIANCHI",
+    "POSITIVE_CMB_NONZERO_BOUNDARY"
+  ],
+  "production_scientific_admission": "NOT_ISSUED",
+  "publication": {
+    "remote_ack_receipt": "RECOVERY_REMOTE_ACK.json",
+    "status": "SEE_REMOTE_ACK_RECEIPT",
+    "scope": "Actual Git publication, archive/provider acknowledgements and dual readback completion, if achieved, are recorded in the small final receipt. This pointer does not predict completion."
+  },
+  "documentation_review": {
+    "reviewer_receipt": "../recovery_20261020/evidence/REVIEW_20261020.json",
+    "review_scope": "Separate Astra-agent documentation/evidence review; not fresh theory or different-model-family scientific review",
+    "reviewer_decision": "CONDITIONAL_ACCEPTANCE_REQUIRING_R1_R2",
+    "root_resolution": "ROOT_ACCEPTED_EXACT_R1_R2_REVISIONS_AFTER_DIRECT_INSPECTION",
+    "additional_reviewer_passes": 0
+  }
+}

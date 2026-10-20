@@ -1,0 +1,73 @@
+{
+  "schema": "C21I_NATIVE_CACHE_ADMISSION_SUMMARY_V1",
+  "recorded_at_utc": "2026-10-20T06:24:51.731411+00:00",
+  "status": "PASS_SCOPED_STUB_VERIFIED_HELPER",
+  "api": "admit_native_cache(provider, native_provenance, fixture_identity, source_identity) -> (contract, guard)",
+  "runtime_source": {
+    "native_cache_contract.py": {
+      "bytes": 21580,
+      "sha256": "c94c506aacf9bf86765e6a58ced7d005ed50d8999f7f0dd6232df9159b7bd097"
+    }
+  },
+  "tests": {
+    "tests/test_native_cache_contract.py": {
+      "bytes": 18280,
+      "sha256": "0e7ad9a39fc8972dd60e11b1563ee7cc451b15e4401f8594a0bc66985e6f6ce3"
+    }
+  },
+  "focused_tests": {
+    "unique_contracts": 14,
+    "latest_full_run_passed": 14,
+    "latest_full_run_failed": 0,
+    "actual_run_attempts": 3,
+    "history": [
+      "evidence/native_cache_contract_01/RECEIPT.json",
+      "evidence/native_cache_contract_02/RECEIPT.json",
+      "evidence/native_cache_contract_03/RECEIPT.json"
+    ],
+    "original_failures_and_source_snapshots_preserved": true,
+    "red_first_science_claim": false,
+    "prior_c21h_c21f_c21g_suites_rerun": 0
+  },
+  "test_execution_boundary": "Exact original Python provider/wrapper classes, synthetic provenance files and fake process/streams/preloaded protocol only; NativeMicro.__init__ and Popen never called.",
+  "import_order": "helper imports stdlib only; fresh H NUMPY_ALREADY_IMPORTED false and H thread setup preserved in focused test",
+  "budget_policy": "Nth actual success and exact hit at calls==max_calls allowed; original NativeMicro blocks N+1 miss; calls>max or decreasing calls rejected; no deadline extension",
+  "live_guard": {
+    "per_callback": [
+      "exact class/method/global binding",
+      "provider/inner/process/PID/command/poll/stream/selector identity",
+      "open/alive state",
+      "finite timeout<=15",
+      "immutable deadline/cap",
+      "monotone calls<=cap",
+      "deep source/fixture/provenance/contract JSON identity",
+      "unchanged canonical file path+dev/inode/size/mtime_ns/ctime_ns/mode"
+    ],
+    "file_hash_scope": "admission SHA256 and terminal guard(full_hash=True), plus inherited full source/native runner postchecks; not percallback binary hashing"
+  },
+  "independent_review": {
+    "receipt": "evidence/native_cache_independent_review_01/REVIEW_RECEIPT.json",
+    "bytes": 3415,
+    "sha256": "52be06d9e31f83cd7e538fb161204d75d4f61ec9b1ade86346a5f58540c603ae",
+    "report": "evidence/native_cache_independent_review_01/REVIEW_KO.md",
+    "new_execution": false,
+    "scope": "fresh source-verified runner context; existing14stub raw and current source identity review"
+  },
+  "native_execution": "NOT_RUN",
+  "native_process_started": false,
+  "rust_execution": "NOT_RUN",
+  "ode_integration": "NOT_RUN",
+  "native_performance": "NOT_EVALUATED",
+  "state_axes": {
+    "execution": "helper IMPLEMENTED;14 focused stub contracts PASS; independent source/raw review complete",
+    "publication": "no GitHub writes by this subtask; parent receipt owns actual commit/ref/PR",
+    "backup": "no provider ACK by this subtask; parent create-only delivery receipt owns current storage",
+    "dag": "owner source review -> helper admission/guards -> focused stub verification -> independent review complete; runner integration/NCP/native separate parent nodes"
+  },
+  "limits": [
+    "No OS attestation or proof against all preexisting arbitrary Python library monkeypatches.",
+    "Guard cost has not been promoted to native speedup; real native timing must include context/stat guard overhead.",
+    "Class/code namespace checks verified on actual Python3.12.14; inspect actual NCP interpreter before compatibility changes."
+  ],
+  "global_error_bound": null
+}

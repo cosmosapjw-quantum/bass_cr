@@ -1,0 +1,87 @@
+{
+  "schema": "rei.lrs.recovery.task_b.review.20261020.1",
+  "reviewed_utc": "2026-10-20T02:48:30Z",
+  "reviewer": {
+    "agent": "/root/recovery20_drive",
+    "role": "Separate Astra-agent read-only review of lower-coder Task B documentation patches",
+    "implemented_reviewed_patch": false,
+    "different_model_scientific_review": false,
+    "prior_role": "Recovered and verified C11 archive/source/log evidence"
+  },
+  "scope": {
+    "base_head": "46a29285ad7095959bb0e5b5a10dab0fec97501f",
+    "allowed_files": 8,
+    "new_scientific_work": 0,
+    "native_runs": 0,
+    "builds": 0,
+    "tests": 0,
+    "patch_mutations": 0,
+    "uploads": 0,
+    "review_passes": 1
+  },
+  "decision": "CONDITIONAL_ACCEPTANCE_PENDING_R1_EVIDENCE_WORDING_AND_R2_POINTER_CORRECTION; NATIVE_COMPLETION_AND_SCIENTIFIC_SCOPE_PASS; ROOT_WILL_INSPECT_EXACT_CORRECTIONS_WITHOUT_SECOND_REVIEW_PASS",
+  "findings": [
+    {
+      "id": "R1",
+      "severity": "Documentation evidence wording",
+      "blocks": "Publication of the unqualified analysis-rerun exit-code statement; does not block accepting the native matrix completion",
+      "locations": [
+        "research/lrs_atomic_native_bridge_20261016/v14/vigilode_radau_20261019/CODEX_NCP_EXECUTE_KO.md: new launcher paragraph",
+        "research/lrs_atomic_native_bridge_20261016/v14/vigilode_radau_20261019/recovery_20261020/RECOVERY_REPORT_KO.md: launcher paragraph",
+        "research/lrs_atomic_native_bridge_20261016/v14/vigilode_radau_20261019/stages/RECOVERY_20261020.json: historical_ncp_result.analysis_only_venv_rerun_exit_code"
+      ],
+      "observed": "The patch states analysis-only venv rerun exit 0 without its evidence provenance. NCP_EXECUTION_RECEIPT attempts[4] reports exit 0 and CSV/JSON agreement; actual analysis_r2.stdout contains the complete 19-case summary and analysis_r2.stderr is empty. No separate analysis rerun EXIT_CODE file was observed in the recovered payload.",
+      "requested_fix": "Preserve value 0 but label it receipt-reported; cite actual stdout and empty stderr and explicitly say no separate rerun EXIT_CODE file was observed. Qualify the CSV/JSON agreement as receipt-reported unless independently checked. No rerun or new audit needed."
+    },
+    {
+      "id": "R2",
+      "severity": "Minor stale explanatory pointer",
+      "blocks": "None; correct in the same bounded documentation edit",
+      "location": "research/lrs_atomic_native_bridge_20261016/v14/stages/FINAL_DELIVERY.json: historical_field_scope.independent_agent_review",
+      "observed": "It still says the current separate-agent review is recorded in latest_continuation, although that record was moved intact to prior_continuations and the new NCP latest_continuation has no independent_agent_review field.",
+      "requested_fix": "Point the explanatory string to the preserved C10 prior_continuations record. Do not change historical review status or invent a new scientific review."
+    }
+  ],
+  "passed_checks": [
+    "Exactly eight mirrored Markdown/JSON status files; no Rust, SOURCE_DELTA, immutable C10 FINAL_DELIVERY or runner patch.",
+    "Top-level original code anchor, archive, inherited tests, 84 histories, 7056 rows, targeted tests and execution archive fields remain unchanged.",
+    "All old prior_continuations are preserved; the old C10 latest_continuation is preserved verbatim in prior_continuations.",
+    "Current NCP pointer selects NCP_DELIVERY_20261019.json; source d87ba9c, evidence 09bfe94, C11 delivery 46a2928 and NCP executable identity match recovered evidence.",
+    "Locked/offline build, focused 1+6 tests, 19 matrix exits 0, RHS 38840, native wall 15.824811033 and process wall 19.061708406108664 match C11.",
+    "Four launcher exits 1 are distinguished from prepare_and_run exit 0; the explicit branch fetch refspec exactly matches the successful historical compatibility fix.",
+    "Prepare-only timing/counts and unchanged host_compare outcome match lower-coder saved command outcomes.",
+    "Readback counts 316540 raw, 209 endpoint, 435 refinement, 323 empirical leaves; 38 timing leaves excluded; finite/packed IEEE64 scope and signed-zero counts match RECOVERY_NUMERIC_READBACK.json.",
+    "C10 Dropbox and C11 Drive current full reads are distinguished from historical dual-provider readbacks; backup bytes/hashes match recovery records.",
+    "Same 19 settings are not recounted as 38; original 84, manufactured 76, Python 57 and previous projection/SSPRK2 results remain historical.",
+    "General source-on order, HeIII single order, uniform stiff, general positivity, Case B, full EoR, signed Bianchi and positive-CMB/nonzero-boundary HOLDs remain; production admission NOT_ISSUED.",
+    "Pending recovery push and backup states are honestly pending in the reviewed patch."
+  ],
+  "evidence_read": [
+    "github/AGENTS.md",
+    "coder/PATCH_MANIFEST.json",
+    "coder/PATCH_VALIDATION.json",
+    "coder/DOC_STATUS_PATCH.diff",
+    "coder/patches/ (all eight mirrored files)",
+    "coder/prepare.command_outcome.json",
+    "coder/host_compare.command_outcome.json",
+    "coder/RECOVERY_NUMERIC_READBACK.json",
+    "coder/HOST_COMPARE_RECOVERED.json (saved output)",
+    "dropbox/C10_READBACK.json",
+    "dropbox/C10_RESTORE_VERIFICATION.json",
+    "drive/C11_RAW_VERIFICATION.json (prior completed transport verification reused)",
+    "restored_c11/.../NCP_EXECUTION_RECEIPT.json",
+    "restored_c11/.../tools/launcher_r1_to_r4.diff",
+    "restored_c11/.../payload/analysis_r2.stdout",
+    "restored_c11/.../payload/analysis_r2.stderr",
+    "github/.../v14/stages/FINAL_DELIVERY.json"
+  ],
+  "provenance_limits": [
+    "No new native execution, independent theory derivation or C9 scientific audit was performed in this review.",
+    "Lower-coder numerical readback is inspected as saved evidence; not rerun by this reviewer.",
+    "The reviewer did not independently re-fetch GitHub HEAD during this task; root owns GitHub provenance and publication.",
+    "Historical links unavailable in the selective restore are inherited; PATCH_VALIDATION reports no introduced missing relative links. Their absence locally is not proof of repository absence.",
+    "This is a separate agent review, not a different-model-family scientific review.",
+    "The mandatory fix is a small evidence-provenance clarification; no added governance or audit layer is required."
+  ],
+  "next_action": "Lower coder should apply R1 and the small R2 pointer correction; root may check only that targeted diff and then publish/back up the completed recovery. Preserve C10/C11 raw and all failed launcher records."
+}

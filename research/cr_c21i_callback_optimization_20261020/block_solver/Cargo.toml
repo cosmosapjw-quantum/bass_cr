@@ -1,0 +1,23 @@
+[package]
+name = "c21i-block-solver"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.94.1"
+publish = false
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "block-benchmark"
+path = "src/bin/benchmark.rs"
+
+[dependencies]
+
+[profile.release]
+opt-level = 3
+lto = false
+codegen-units = 1
+panic = "unwind"
+
+[workspace]

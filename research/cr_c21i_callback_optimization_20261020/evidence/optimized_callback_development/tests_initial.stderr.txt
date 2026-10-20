@@ -1,0 +1,33 @@
+test_cache_hits_do_not_bypass_domain_or_live_guards (__main__.OptimizedCallbackTests.test_cache_hits_do_not_bypass_domain_or_live_guards) ... ok
+test_cache_keys_include_t_u_ulp_signed_zero_and_passive_bits (__main__.OptimizedCallbackTests.test_cache_keys_include_t_u_ulp_signed_zero_and_passive_bits) ... ok
+test_cache_retains_cross_operation_base_and_has_bounded_lru (__main__.OptimizedCallbackTests.test_cache_retains_cross_operation_base_and_has_bounded_lru) ... ok
+test_cache_values_and_jacobian_results_cannot_alias_future_calls (__main__.OptimizedCallbackTests.test_cache_values_and_jacobian_results_cannot_alias_future_calls) ... ok
+test_cell_clamps_short_cells_and_represented_fd_nodes_match (__main__.OptimizedCallbackTests.test_cell_clamps_short_cells_and_represented_fd_nodes_match) ... ok
+test_exact_y_zero_underflow_and_structural_signed_zeros (__main__.OptimizedCallbackTests.test_exact_y_zero_underflow_and_structural_signed_zeros) ... ok
+test_exceptions_and_nonfinite_results_never_enter_cache (__main__.OptimizedCallbackTests.test_exceptions_and_nonfinite_results_never_enter_cache) ... ok
+test_frozen_manifest_and_runtime_bytes_are_enforced (__main__.OptimizedCallbackTests.test_frozen_manifest_and_runtime_bytes_are_enforced) ... ok
+test_gas_boundaries_and_inherited_helium_failure_are_preserved (__main__.OptimizedCallbackTests.test_gas_boundaries_and_inherited_helium_failure_are_preserved) ... ERROR
+test_generic_stateful_callback_is_not_cached_by_default (__main__.OptimizedCallbackTests.test_generic_stateful_callback_is_not_cached_by_default) ... ok
+test_large_cohort_bitwise_assembly_and_three_term_rounding (__main__.OptimizedCallbackTests.test_large_cohort_bitwise_assembly_and_three_term_rounding) ... ok
+test_new_closure_fixture_cell_and_changed_scope_cannot_reuse_cache (__main__.OptimizedCallbackTests.test_new_closure_fixture_cell_and_changed_scope_cannot_reuse_cache) ... ok
+test_private_driver_binding_reuses_original_event_loop_and_trace_contract (__main__.OptimizedCallbackTests.test_private_driver_binding_reuses_original_event_loop_and_trace_contract) ... ok
+test_vectorized_jacobian_bitwise_for_y_zero_helium_and_existing_fixtures (__main__.OptimizedCallbackTests.test_vectorized_jacobian_bitwise_for_y_zero_helium_and_existing_fixtures) ... ok
+
+======================================================================
+ERROR: test_gas_boundaries_and_inherited_helium_failure_are_preserved (__main__.OptimizedCallbackTests.test_gas_boundaries_and_inherited_helium_failure_are_preserved)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/tests/test_optimized_callbacks.py", line 170, in test_gas_boundaries_and_inherited_helium_failure_are_preserved
+    self.assert_bits(old.jacobian(t, z), new.jacobian(t, z))
+                     ^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21h_vigilode_bridge_20261019/optical_adapter.py", line 158, in jacobian
+    first, second, kind = self.gas_nodes(u, j)
+                          ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21h_vigilode_bridge_20261019/optical_adapter.py", line 134, in gas_nodes
+    raise AdapterError("NO_ADMISSIBLE_GAS_FD_STENCIL")
+_c21i_frozen_c21h_d51e5a5ab250445aaf3a5c31656196ac.AdapterError: NO_ADMISSIBLE_GAS_FD_STENCIL
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.193s
+
+FAILED (errors=1)

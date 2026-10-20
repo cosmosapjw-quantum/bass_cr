@@ -1,0 +1,59 @@
+{
+  "affinity": [
+    0,
+    1
+  ],
+  "batch_thread_count": 2,
+  "clock_scope": "operation: callback only; batch: both tasks and loop/instrumentation; threaded batch includes executor creation/dispatch/join/shutdown",
+  "cohorts": [
+    9,
+    64,
+    128
+  ],
+  "cold_does_not_mean": "CPU cache flush or new Python interpreter per operation",
+  "counter_acceptance": "actual original RHS closure counter delta equals callback original_rhs_evaluations delta",
+  "global_error_bound": null,
+  "helium": [
+    0.0,
+    0.08130135170951498
+  ],
+  "larger_fixture": "replicate original nine q/birth cohorts and divide each original amount by its replication count",
+  "max_original_rhs_per_closure": 200000,
+  "modes": [
+    "original",
+    "vectorized",
+    "vectorized_exact"
+  ],
+  "native_chemistry": "NOT_RUN",
+  "new_rust_binary_execution": "NOT_RUN",
+  "numerical_acceptance": "all measured output arrays bitwise identical to independently evaluated original callback at each exact point",
+  "ode_solver": "NOT_RUN",
+  "operations_in_order": [
+    "jacobian",
+    "rhs",
+    "partial_t"
+  ],
+  "points_per_task": 3,
+  "protected_cpu_ids": [
+    55
+  ],
+  "provider": "exact unchanged ManufacturedMicro class, no stateful subclass; independent instance per task",
+  "publication": "root-managed, not inferred by this harness",
+  "regimes": {
+    "cold_sequence": "fresh empty callback cache; three distinct represented state/time pairs",
+    "warm_identical_point": "one separately recorded untimed warmup triplet; three identical-point triplets"
+  },
+  "registered_at_utc": "2026-10-20T06:15:18.267929+00:00",
+  "repeats": 3,
+  "schedules": [
+    "serial_two_callbacks",
+    "two_thread_batch"
+  ],
+  "schema": "C21I_CALLBACK_COMPONENT_BENCHMARK_CONTRACT_V1",
+  "setup_scope": "private source load, original driver capture and callback construction recorded separately; warmup separately",
+  "source": "actual original source-pinned first-cell RHS closure, intercepted before solve_ivp",
+  "tasks_per_batch": 2,
+  "timing_claim_ceiling": "manufactured local callback components and two-task batch only; synthetic request order, not observed trajectory cache rate",
+  "total_wall_limit_s": 90.0,
+  "worker_count": 1
+}

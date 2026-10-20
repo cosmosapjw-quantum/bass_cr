@@ -1,0 +1,476 @@
+{
+  "schema": "C21I_BLOCK_BENCH_ANALYSIS_V1",
+  "status": "PASS_SCOPED",
+  "scope": "manufactured linear algebra prototype",
+  "native_performance": "NOT_EVALUATED",
+  "c21h_backend_integrated": false,
+  "global_error_bound": null,
+  "solve_record_count": 312,
+  "jvp_record_count": 240,
+  "unique_solutions_independently_checked": 12,
+  "reported_max_backward_error": 9.19443718189947e-16,
+  "independent_python_fsum_max_backward_error": 9.19443718189947e-16,
+  "max_component_difference_over_one_plus_dense_magnitude": 7.178140495689429e-16,
+  "jvp_bitwise_identical_within_case": true,
+  "groups": [
+    {
+      "M": 9,
+      "G": 2,
+      "L": 15,
+      "N": 26,
+      "cold_factorization": {
+        "schur": {
+          "count": 5,
+          "median_ns": 1252,
+          "min_ns": 741,
+          "max_ns": 3526,
+          "mean_ns": 1560.6,
+          "stdev_ns": 1127.6111031734301
+        },
+        "dense_reference": {
+          "count": 5,
+          "median_ns": 8813,
+          "min_ns": 7762,
+          "max_ns": 12049,
+          "mean_ns": 9128.2,
+          "stdev_ns": 1695.8569220308652
+        },
+        "ratio_of_medians_dense_over_schur": 7.039137380191693
+      },
+      "warm_reuse": {
+        "schur": {
+          "count": 20,
+          "median_ns": 511.0,
+          "min_ns": 471,
+          "max_ns": 761,
+          "mean_ns": 536.85,
+          "stdev_ns": 72.31457231029616
+        },
+        "dense_reference": {
+          "count": 20,
+          "median_ns": 892.0,
+          "min_ns": 881,
+          "max_ns": 992,
+          "mean_ns": 898.95,
+          "stdev_ns": 23.243505035080002
+        },
+        "ratio_of_medians_dense_over_schur": 1.74559686888454
+      },
+      "jvp": {
+        "structured_jvp_into": {
+          "count": 20,
+          "median_ns": 151.0,
+          "min_ns": 140,
+          "max_ns": 591,
+          "mean_ns": 186.8,
+          "stdev_ns": 100.01084151757064
+        },
+        "dense_matvec_into": {
+          "count": 20,
+          "median_ns": 300.5,
+          "min_ns": 290,
+          "max_ns": 350,
+          "mean_ns": 305.5,
+          "stdev_ns": 15.769724491135404
+        },
+        "ratio_of_medians_dense_over_structured": 1.990066225165563
+      },
+      "cache": {
+        "M": 9,
+        "G": 2,
+        "requests": 21,
+        "hits": 20,
+        "factorization_attempts": 1,
+        "factorization_failures": 0,
+        "structured_f64": 205,
+        "dense_f64": 676
+      }
+    },
+    {
+      "M": 64,
+      "G": 2,
+      "L": 15,
+      "N": 81,
+      "cold_factorization": {
+        "schur": {
+          "count": 5,
+          "median_ns": 2835,
+          "min_ns": 2433,
+          "max_ns": 4837,
+          "mean_ns": 3221,
+          "stdev_ns": 1009.3698529280533
+        },
+        "dense_reference": {
+          "count": 5,
+          "median_ns": 161815,
+          "min_ns": 158019,
+          "max_ns": 204650,
+          "mean_ns": 171888.2,
+          "stdev_ns": 19835.616695731947
+        },
+        "ratio_of_medians_dense_over_schur": 57.07760141093475
+      },
+      "warm_reuse": {
+        "schur": {
+          "count": 20,
+          "median_ns": 2414.0,
+          "min_ns": 2303,
+          "max_ns": 4527,
+          "mean_ns": 2660.9,
+          "stdev_ns": 621.8060198452484
+        },
+        "dense_reference": {
+          "count": 20,
+          "median_ns": 6134.0,
+          "min_ns": 6079,
+          "max_ns": 227885,
+          "mean_ns": 17396.15,
+          "stdev_ns": 49545.7500564935
+        },
+        "ratio_of_medians_dense_over_schur": 2.5410107705053853
+      },
+      "jvp": {
+        "structured_jvp_into": {
+          "count": 20,
+          "median_ns": 881.0,
+          "min_ns": 841,
+          "max_ns": 1002,
+          "mean_ns": 884.95,
+          "stdev_ns": 40.624694330833854
+        },
+        "dense_matvec_into": {
+          "count": 20,
+          "median_ns": 3405.5,
+          "min_ns": 3385,
+          "max_ns": 4327,
+          "mean_ns": 3456.85,
+          "stdev_ns": 206.0685310125838
+        },
+        "ratio_of_medians_dense_over_structured": 3.865493757094211
+      },
+      "cache": {
+        "M": 64,
+        "G": 2,
+        "requests": 21,
+        "hits": 20,
+        "factorization_attempts": 1,
+        "factorization_failures": 0,
+        "structured_f64": 1250,
+        "dense_f64": 6561
+      }
+    },
+    {
+      "M": 256,
+      "G": 2,
+      "L": 15,
+      "N": 273,
+      "cold_factorization": {
+        "schur": {
+          "count": 5,
+          "median_ns": 12059,
+          "min_ns": 9945,
+          "max_ns": 15083,
+          "mean_ns": 12595.2,
+          "stdev_ns": 2043.525434145609
+        },
+        "dense_reference": {
+          "count": 5,
+          "median_ns": 6872874,
+          "min_ns": 6497195,
+          "max_ns": 9177009,
+          "mean_ns": 7636937.4,
+          "stdev_ns": 1311730.309609525
+        },
+        "ratio_of_medians_dense_over_schur": 569.9373082345137
+      },
+      "warm_reuse": {
+        "schur": {
+          "count": 20,
+          "median_ns": 14026.0,
+          "min_ns": 13571,
+          "max_ns": 42344,
+          "mean_ns": 15498.65,
+          "stdev_ns": 6329.852549001854
+        },
+        "dense_reference": {
+          "count": 20,
+          "median_ns": 67667.0,
+          "min_ns": 66100,
+          "max_ns": 96646,
+          "mean_ns": 71249.25,
+          "stdev_ns": 9071.984480139654
+        },
+        "ratio_of_medians_dense_over_schur": 4.824397547411949
+      },
+      "jvp": {
+        "structured_jvp_into": {
+          "count": 20,
+          "median_ns": 4587.0,
+          "min_ns": 4327,
+          "max_ns": 4737,
+          "mean_ns": 4577.95,
+          "stdev_ns": 111.42213471865973
+        },
+        "dense_matvec_into": {
+          "count": 20,
+          "median_ns": 55880.0,
+          "min_ns": 55734,
+          "max_ns": 80512,
+          "mean_ns": 58286.7,
+          "stdev_ns": 7200.344319983301
+        },
+        "ratio_of_medians_dense_over_structured": 12.182254196642686
+      },
+      "cache": {
+        "M": 256,
+        "G": 2,
+        "requests": 21,
+        "hits": 20,
+        "factorization_attempts": 1,
+        "factorization_failures": 0,
+        "structured_f64": 4898,
+        "dense_f64": 74529
+      }
+    },
+    {
+      "M": 9,
+      "G": 4,
+      "L": 15,
+      "N": 28,
+      "cold_factorization": {
+        "schur": {
+          "count": 5,
+          "median_ns": 2243,
+          "min_ns": 1963,
+          "max_ns": 4206,
+          "mean_ns": 2577.6,
+          "stdev_ns": 934.3558208733972
+        },
+        "dense_reference": {
+          "count": 5,
+          "median_ns": 14883,
+          "min_ns": 14151,
+          "max_ns": 118840,
+          "mean_ns": 35746.2,
+          "stdev_ns": 46458.32322307812
+        },
+        "ratio_of_medians_dense_over_schur": 6.635309852875613
+      },
+      "warm_reuse": {
+        "schur": {
+          "count": 20,
+          "median_ns": 1252.0,
+          "min_ns": 1112,
+          "max_ns": 1432,
+          "mean_ns": 1256.45,
+          "stdev_ns": 97.68557238728542
+        },
+        "dense_reference": {
+          "count": 20,
+          "median_ns": 1422.0,
+          "min_ns": 1332,
+          "max_ns": 1492,
+          "mean_ns": 1413.1,
+          "stdev_ns": 47.9022030039494
+        },
+        "ratio_of_medians_dense_over_schur": 1.1357827476038338
+      },
+      "jvp": {
+        "structured_jvp_into": {
+          "count": 20,
+          "median_ns": 331.0,
+          "min_ns": 270,
+          "max_ns": 521,
+          "mean_ns": 339.1,
+          "stdev_ns": 59.95428082692415
+        },
+        "dense_matvec_into": {
+          "count": 20,
+          "median_ns": 460.0,
+          "min_ns": 430,
+          "max_ns": 481,
+          "mean_ns": 457.1,
+          "stdev_ns": 15.900678568770845
+        },
+        "ratio_of_medians_dense_over_structured": 1.3897280966767371
+      },
+      "cache": {
+        "M": 9,
+        "G": 4,
+        "requests": 21,
+        "hits": 20,
+        "factorization_attempts": 1,
+        "factorization_failures": 0,
+        "structured_f64": 283,
+        "dense_f64": 784
+      }
+    },
+    {
+      "M": 64,
+      "G": 4,
+      "L": 15,
+      "N": 83,
+      "cold_factorization": {
+        "schur": {
+          "count": 5,
+          "median_ns": 6269,
+          "min_ns": 5869,
+          "max_ns": 7492,
+          "mean_ns": 6418,
+          "stdev_ns": 626.8903412878524
+        },
+        "dense_reference": {
+          "count": 5,
+          "median_ns": 252271,
+          "min_ns": 250659,
+          "max_ns": 447797,
+          "mean_ns": 291386.6,
+          "stdev_ns": 87454.89372985368
+        },
+        "ratio_of_medians_dense_over_schur": 40.241027277077684
+      },
+      "warm_reuse": {
+        "schur": {
+          "count": 20,
+          "median_ns": 5002.0,
+          "min_ns": 4848,
+          "max_ns": 5378,
+          "mean_ns": 5027.05,
+          "stdev_ns": 127.97428812481292
+        },
+        "dense_reference": {
+          "count": 20,
+          "median_ns": 7746.0,
+          "min_ns": 7642,
+          "max_ns": 27421,
+          "mean_ns": 8757.7,
+          "stdev_ns": 4394.188124521322
+        },
+        "ratio_of_medians_dense_over_schur": 1.5485805677728908
+      },
+      "jvp": {
+        "structured_jvp_into": {
+          "count": 20,
+          "median_ns": 1462.0,
+          "min_ns": 1272,
+          "max_ns": 1773,
+          "mean_ns": 1452.1,
+          "stdev_ns": 113.70363138208772
+        },
+        "dense_matvec_into": {
+          "count": 20,
+          "median_ns": 4196.5,
+          "min_ns": 4166,
+          "max_ns": 27892,
+          "mean_ns": 5420.1,
+          "stdev_ns": 5290.425641019624
+        },
+        "ratio_of_medians_dense_over_structured": 2.8703830369357046
+      },
+      "cache": {
+        "M": 64,
+        "G": 4,
+        "requests": 21,
+        "hits": 20,
+        "factorization_attempts": 1,
+        "factorization_failures": 0,
+        "structured_f64": 1548,
+        "dense_f64": 6889
+      }
+    },
+    {
+      "M": 256,
+      "G": 4,
+      "L": 15,
+      "N": 275,
+      "cold_factorization": {
+        "schur": {
+          "count": 5,
+          "median_ns": 21342,
+          "min_ns": 19500,
+          "max_ns": 22153,
+          "mean_ns": 20941.4,
+          "stdev_ns": 1316.3636655575085
+        },
+        "dense_reference": {
+          "count": 5,
+          "median_ns": 8632595,
+          "min_ns": 8406043,
+          "max_ns": 8869574,
+          "mean_ns": 8610540,
+          "stdev_ns": 202951.47725010526
+        },
+        "ratio_of_medians_dense_over_schur": 404.4885671445975
+      },
+      "warm_reuse": {
+        "schur": {
+          "count": 20,
+          "median_ns": 18132.5,
+          "min_ns": 16555,
+          "max_ns": 18949,
+          "mean_ns": 18145.45,
+          "stdev_ns": 498.4602053482198
+        },
+        "dense_reference": {
+          "count": 20,
+          "median_ns": 69480.0,
+          "min_ns": 68453,
+          "max_ns": 71068,
+          "mean_ns": 69453.45,
+          "stdev_ns": 565.7384066305223
+        },
+        "ratio_of_medians_dense_over_schur": 3.8317937405211637
+      },
+      "jvp": {
+        "structured_jvp_into": {
+          "count": 20,
+          "median_ns": 5418.0,
+          "min_ns": 5208,
+          "max_ns": 5608,
+          "mean_ns": 5403.7,
+          "stdev_ns": 121.33342490839036
+        },
+        "dense_matvec_into": {
+          "count": 20,
+          "median_ns": 56721.0,
+          "min_ns": 56585,
+          "max_ns": 111509,
+          "mean_ns": 62859.15,
+          "stdev_ns": 13783.672355649445
+        },
+        "ratio_of_medians_dense_over_structured": 10.468992248062015
+      },
+      "cache": {
+        "M": 256,
+        "G": 4,
+        "requests": 21,
+        "hits": 20,
+        "factorization_attempts": 1,
+        "factorization_failures": 0,
+        "structured_f64": 5964,
+        "dense_f64": 75625
+      }
+    }
+  ],
+  "input_artifact_sha256": {
+    "cache_stats.csv": "b1312d2b1d980b8a3221b87e9463d1ae3890aabd8ddad90b86eebbc33e23bf17",
+    "contract.json": "f3e99800a87a6e40ec4461da3f4ce609ef6af6022c7ca05e38ef5b36a25b9066",
+    "input_m256_g2.csv": "1da6594cae1e8a9db9dc99d10f690a529d4169cb63006e68bded559b14a5eaa3",
+    "input_m256_g4.csv": "07e18a17add50f4ab3d9c11ed0e96bef70c06adfab500575a878bfdbe5939293",
+    "input_m64_g2.csv": "91063e9ada734b64b54ca8de6ef89c870fd092dcb9ea22bc3577d6f9ddc56109",
+    "input_m64_g4.csv": "ec3ea6f0985028197dc1416251660180ceacb6e8a1eff4cf683406ef4af37529",
+    "input_m9_g2.csv": "99d7664386228aae6a5dd469222e9d47c6d21c898bbb5689eebdce9772c527de",
+    "input_m9_g4.csv": "e7db5e14dbae5390dea26fdbc7c377281e4be1cd9ce4184655e9d4f99da2d0c5",
+    "jvp_outputs.jsonl": "dcbad32eeac290894256a42b53b73e7f3fca1d855fa88ce7769f582f2e2ba6bd",
+    "jvp_repeats.csv": "8da6cda105ad07be3b0ca4ba440d3bd7d5d7e67b6cd139951c42015831b0c72f",
+    "solutions.jsonl": "218d0c430796e7c659f3a1953e7286b5d98612ea37eb2e935b7a9ff034837ca4",
+    "solve_repeats.csv": "f98583d7b6409a79b2b850622cc9a4b0c04ca79b0b3c851f67e37908db2d653d"
+  },
+  "limits": [
+    "One current host; CPU0 affinity is not exclusive allocation.",
+    "Sub-microsecond timings and outliers require the raw dispersion; no universal speedup claim.",
+    "Cold means fresh factorization, not cache flushing or process startup.",
+    "Warm uses a deliberately fixed matrix, not a measured C21H Jacobian/shift reuse distribution.",
+    "The dense comparator is scalar reference code, not Faer/LAPACK or a deployed solver."
+  ]
+}
