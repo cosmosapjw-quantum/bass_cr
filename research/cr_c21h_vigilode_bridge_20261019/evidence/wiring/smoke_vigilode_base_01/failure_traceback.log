@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/4d2e4c44b70c/c21h_work/unit/run_pilot.py", line 152, in main
+    binary=args.bridge.resolve(); bridge_identity={"path":str(binary),**file_record(binary)}
+                                                                        ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/4d2e4c44b70c/c21h_work/unit/run_pilot.py", line 48, in file_record
+    return {"bytes":p.stat().st_size,"sha256":file_hash(p)}
+                    ^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 840, in stat
+    return os.stat(self, follow_symlinks=follow_symlinks)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/dev/shm/c21h_bridge_build_20261019/target/debug/bass-cr-c21h-rust-bridge'

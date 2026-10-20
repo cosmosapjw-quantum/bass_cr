@@ -1,0 +1,23 @@
+[package]
+name = "bass-cr-c21h-rust-bridge"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.94.1"
+publish = false
+
+[dependencies]
+rodas5p-core = { git = "https://github.com/cosmosapjw-quantum/vigilode", rev = "8a8bd409b1d96c7b7421f496d229e119fd3d284e" }
+rodas5p-integrators = { git = "https://github.com/cosmosapjw-quantum/vigilode", rev = "8a8bd409b1d96c7b7421f496d229e119fd3d284e", default-features = false }
+diffsol = { version = "=0.17.1", default-features = false, features = ["faer"] }
+serde = { version = "=1.0.229", features = ["derive"] }
+serde_json = { version = "=1.0.151", features = ["float_roundtrip"] }
+
+[profile.release]
+opt-level = 3
+lto = false
+codegen-units = 16
+# Diffsol's callback trait has no Result return. The owned executable catches
+# only its typed RPC abort before emitting an explicit failed result.
+panic = "unwind"
+
+[workspace]

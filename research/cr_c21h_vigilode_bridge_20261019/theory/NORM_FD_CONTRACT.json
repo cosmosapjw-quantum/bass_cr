@@ -1,0 +1,155 @@
+{
+  "schema": "C21H_NORM_AND_DERIVATIVE_CONTRACT_V1",
+  "generated_utc": "2026-10-19",
+  "evidence_status": "DERIVED_AND_PRIMARY_SOURCE_CHECKED",
+  "workflow_version": "1.0.0",
+  "original_reference": {
+    "repository": "cosmosapjw-quantum/bass_cr",
+    "commit": "e742d44f605c51c06615451774ba90af8f41f622",
+    "path": "research/cr_c21e_event_native_20261018/src/reference_tau.py",
+    "sha256": "714c40a4e3a0577784e6a754b95cdb34b247cb2e529953a375c74a43efafc3e0"
+  },
+  "native_owner": {
+    "repository": "cosmosapjw-quantum/rei_bianchi",
+    "commit": "6ea2b1b4b3875c9163cafc45efe720afded43fc4"
+  },
+  "state": {
+    "full_order": "tau[M],gas[4],photo[3],ci[3],rr[3],dr,escape,cmb,photon_work,gas_work,heat",
+    "full_dimension": "M+19",
+    "helium_zero_removes_full_indices": [
+      "M+1",
+      "M+2"
+    ],
+    "active_dimension": "M+19-(2 if Y==0 else 0)",
+    "passive_ledger_columns": 15,
+    "passive_ledgers_in_error_control": true
+  },
+  "scaling": {
+    "source": "C21G campaign_contract.fixture_scales",
+    "time_independent": true,
+    "state_independent": true,
+    "physical_from_scaled": "y=D*z",
+    "rhs": "Fz=D^-1*Fy(x,D*z)",
+    "jacobian": "Jz=D^-1*Jy*D",
+    "partial_x": "Fz_x=D^-1*Fy_x",
+    "atol_physical": "alpha*diag(D)",
+    "atol_scaled": "alpha",
+    "thermal_scale": "w0",
+    "energy_scale": "w0+initial_binding_energy+all_fixed_birth_photon_energy",
+    "state_floor_applied": false,
+    "equivalence_scope": "same physical states, transformed error vector, same active coordinate set, same backend weight convention; exact algebra, not equal floating-point trajectories"
+  },
+  "backend_norms": {
+    "vigilode": {
+      "denominator": "alpha+rtol*max(abs(z_old),abs(z_new))",
+      "aggregate": "sqrt(sum_i((e_i/denom_i)^2)/n)",
+      "implementation": "rodas5p-core/src/norms.rs; fast driver uses scalar atol",
+      "same_control_numbers_imply_same_achieved_accuracy": false,
+      "source_read_commit": "0bab431e1031f86eb3ddb44371240bce49ae2376",
+      "source_execution_commit": "8a8bd409b1d96c7b7421f496d229e119fd3d284e",
+      "needed_sources_identical": "norms.rs, problem.rs, adaptive.rs, rodas5p_fast.rs; Git blob and SHA256 match COMPILE_SOURCE_BINDING.json"
+    },
+    "diffsol": {
+      "version": "0.17.1",
+      "linear_algebra_dependency": "diffsol-la 0.2.0 (Cargo requirement, actual resolved closure recorded by build receipt)",
+      "denominator": "alpha+rtol*abs(z_current)",
+      "aggregate": "sum_i((e_i/denom_i)^2)/n for one Faer batch",
+      "method_error_constant": "BDF order-specific error_const2",
+      "sources": [
+        "https://docs.rs/diffsol/0.17.1/src/diffsol/ode_solver/bdf.rs.html",
+        "https://docs.rs/crate/diffsol/0.17.1/source/Cargo.toml",
+        "https://docs.rs/diffsol-la/0.2.0/src/diffsol_la/vector/faer_serial.rs.html"
+      ],
+      "trait_documentation_correction": "Generic trait formula omits 1/n; actual Faer source is used.",
+      "same_control_numbers_imply_same_achieved_accuracy": false
+    }
+  },
+  "jacobian": {
+    "photon_tau_columns": "analytic model derivatives; dN_i/dtau_j=-delta_ij*N_i",
+    "tau_rows_wrt_tau": "zero",
+    "gas_fraction_rows_wrt_tau_i": "-event_fractions(r_i,Y)/H",
+    "thermal_row_wrt_tau_i": "-sum_s(r_is*(E_i-B_s))/H",
+    "photo_rows_wrt_tau_i": "-r_i/H",
+    "heat_ledger_wrt_tau_i": "-sum_s(r_is*(E_i-B_s))/H",
+    "photon_work_wrt_tau_i": "-N_i*E_i",
+    "all_other_rows_wrt_tau": "zero",
+    "passive_columns": "exact zero",
+    "gas_columns": "finite difference of unchanged full RHS/provider in physical domain",
+    "all_analytic_claim": false,
+    "block_structure": "[[0,A,0],[B,C,0],[P,Q,0]]",
+    "schur_identity": {
+      "status": "DERIVED; no implementation/speed claim",
+      "equation": "(I_G-c*C-c^2*B*A)*k_g=b_g+c*B*b_tau",
+      "back_substitution": [
+        "k_tau=b_tau+c*A*k_g",
+        "k_ledger=b_ledger+c*P*k_tau+c*Q*k_g"
+      ],
+      "condition": "Schur matrix nonsingular",
+      "gas_dimension": "4 if Y>0 else 2"
+    }
+  },
+  "finite_difference": {
+    "method": "quadratic interpolant derivative on three distinct represented nodes",
+    "actual_offsets": [
+      "h1=x1-x0",
+      "h2=x2-x0"
+    ],
+    "weights": [
+      "-(h1+h2)/(h1*h2)",
+      "h2/(h1*(h2-h1))",
+      "-h1/(h2*(h2-h1))"
+    ],
+    "difference_form": "((h2/h1)*(F1-F0)-(h1/h2)*(F2-F0))/(h2-h1)",
+    "moments": [
+      0,
+      1,
+      0
+    ],
+    "third_moment": "-h1*h2",
+    "zero_span_or_duplicate_nodes": "explicit derivative-domain/time-resolution failure; never zero-column fallback",
+    "gas_domain": {
+      "hydrogen_fraction": "[0,1]",
+      "helium_ii_fraction": "[0,1-helium_iii]",
+      "helium_iii_fraction": "[0,1-helium_ii]",
+      "thermal": "(0,+infinity)"
+    },
+    "time_domain": {
+      "interval": "[lo,hi]",
+      "L": "lo+1e-9*(hi-lo)",
+      "U": "hi-1e-9*(hi-lo)",
+      "represented_admissibility": "lo<=L<U<=hi; binary64 rounding may give L==lo or U==hi; do not force a different epoch with nextafter",
+      "rhs_epoch": "min(max(x,L),U)",
+      "plateau_partial": "exact zero for x<L or x>U",
+      "corner_convention": "zero at represented x==L or x==U (plateau-side branch)",
+      "interior_nodes": "all nodes lie strictly inside (L,U); fail explicitly if distinct represented nodes cannot be formed",
+      "do_not_cross_events": true
+    },
+    "step_size_numbers": {
+      "gas_relative": "float64_epsilon**(1/3)",
+      "gas_nominal": "fd_relative*max(abs(u_j),D_j)",
+      "time_fd_fraction": 0.0001,
+      "time_nominal": "time_fd_fraction*(hi-lo)",
+      "halving_levels": 24,
+      "stencil_preference": "central then domain-valid one-sided",
+      "time_nodes": "strictly inside (L,U)",
+      "domain_failure": "explicit; no dummy derivative"
+    },
+    "conditional_error_bound": "abs(h1*h2)/6*sup|F'''| + sum_j|w_j|*|function_evaluation_error_j|, assuming C3 on stencil interval",
+    "error_bound_values_computed": false
+  },
+  "comparison": {
+    "runtime_status_separate": true,
+    "physics_budget_separate": true,
+    "numerical_convergence_separate": true,
+    "common_output_schedule_required_for_timing": true,
+    "matched_achieved_accuracy_required_for_speed_rank": true,
+    "pinned_RHS_plus_grid_provenance_required": true,
+    "global_error_bound": null
+  },
+  "execution": {
+    "new_native": "NOT_RUN",
+    "native_global_order": "UNRESOLVED_PENDING_NATIVE_LADDERS",
+    "formal_symbolic_checks": "see WOLFRAM_VERIFICATION.json",
+    "sandbox_adapter_checks": "see final implementation test receipts"
+  }
+}

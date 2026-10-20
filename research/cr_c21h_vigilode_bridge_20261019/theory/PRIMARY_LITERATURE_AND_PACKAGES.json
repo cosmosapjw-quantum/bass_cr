@@ -1,0 +1,108 @@
+{
+  "schema": "C21H_PRIMARY_LITERATURE_AND_PACKAGE_INTAKE_V1",
+  "date_utc": "2026-10-19",
+  "discovery_tools": [
+    "SciSpace",
+    "Exa"
+  ],
+  "adoption_rule": "Research conclusions use original paper or official package source; discovery summaries are not authoritative.",
+  "paper": {
+    "title": "Construction of Rosenbrock\u2013Wanner method Rodas5P and numerical benchmarks within the Julia Differential Equations package",
+    "author": "Gerd Steinebach",
+    "year": 2023,
+    "journal": "BIT Numerical Mathematics",
+    "volume": 63,
+    "article": 27,
+    "doi": "10.1007/s10543-023-00967-x",
+    "url": "https://link.springer.com/article/10.1007/s10543-023-00967-x",
+    "published": "2023-04-17",
+    "scispace_id": "29rf1tye",
+    "read_sections": [
+      "1 equations 1.1\u20131.4",
+      "2 additional order conditions discussion"
+    ],
+    "supports": [
+      "Nonautonomous ROW stages include explicit h^2*gamma_i*f_t.",
+      "F_y and f_t are derivatives at the step start.",
+      "Exact smooth-problem classical order must be separated from stiff order reduction, inexact-Jacobian effects, and nonsmooth event/clamp behavior."
+    ],
+    "adopted_method_claim": "Existing Rodas5P method is reused; no new integrator or no-go claim."
+  },
+  "packages": [
+    {
+      "name": "VigilODE",
+      "repository": "cosmosapjw-quantum/vigilode",
+      "read_paths": [
+        "crates/rodas5p-core/src/norms.rs",
+        "crates/rodas5p-integrators/src/problem.rs",
+        "crates/rodas5p-integrators/src/adaptive.rs",
+        "crates/rodas5p-integrators/src/rodas5p_fast.rs",
+        "Cargo.toml"
+      ],
+      "decision": "Apply original fast stiff backend with explicit RHS/Jacobian/partial-time callbacks.",
+      "read_commit": "0bab431e1031f86eb3ddb44371240bce49ae2376",
+      "execution_commit": "8a8bd409b1d96c7b7421f496d229e119fd3d284e",
+      "needed_source_binding": "Four math/observer source files independently cross-checked identical in READ_SOURCE_MANIFEST.json and COMPILE_SOURCE_BINDING.json"
+    },
+    {
+      "name": "Diffsol",
+      "version": "0.17.1",
+      "urls": [
+        "https://docs.rs/diffsol/0.17.1/diffsol/",
+        "https://docs.rs/diffsol/0.17.1/diffsol/ode_solver/builder/struct.OdeBuilder.html",
+        "https://docs.rs/diffsol/0.17.1/src/diffsol/ode_solver/bdf.rs.html",
+        "https://docs.rs/crate/diffsol/0.17.1/source/Cargo.toml"
+      ],
+      "features_checked": [
+        "BDF/NDF stiff solver",
+        "Faer matrix backend",
+        "RHS/JVP closures",
+        "scalar/vector absolute tolerances",
+        "stop-time API",
+        "solver statistics"
+      ],
+      "decision": "Apply as independent stiff algorithm comparator with same original RHS; historical 0.16.1 A07 result remains separate."
+    },
+    {
+      "name": "diffsol-la",
+      "version": "0.2.0",
+      "url": "https://docs.rs/diffsol-la/0.2.0/src/diffsol_la/vector/faer_serial.rs.html",
+      "checked": "squared_norm_body uses current-state weighted mean square for one batch; 1/n verified in implementation."
+    },
+    {
+      "name": "faer",
+      "version": "0.24.4",
+      "url": "https://docs.rs/faer/0.24.4/faer/",
+      "role": "Pinned VigilODE workspace linear algebra dependency; actual Diffsol resolved version recorded separately",
+      "decision": "Reuse dense linear algebra; no GPU/sparse acceleration claim for M+19-sized system."
+    },
+    {
+      "name": "ode_solvers",
+      "version": "official latest docs read, not added dependency",
+      "url": "https://docs.rs/ode_solvers/latest/ode_solvers/",
+      "checked": [
+        "Dopri5 explicit RK",
+        "Dop853 explicit RK",
+        "RK4"
+      ],
+      "decision": "Not selected as a primary stiff comparator in this bounded task."
+    }
+  ],
+  "discovery_corrections": [
+    {
+      "item": "Diffsol norm source location",
+      "observation": "Diffsol 0.17.1 re-exports linear algebra from diffsol-la. Guessed old in-crate vector URLs returned CRAWL_NOT_FOUND.",
+      "resolution": "Read actual Cargo requirement and diffsol-la 0.2.0 Faer source."
+    },
+    {
+      "item": "Diffsol generic norm trait text",
+      "observation": "Generic documentation prints sum while actual Faer implementation divides by nstates.",
+      "resolution": "Document weighted mean-square implementation and its current-state denominator."
+    },
+    {
+      "item": "Version matching",
+      "observation": "Search latest snippets can mix diffsol-la 0.1.1 title with newer content.",
+      "resolution": "Use pinned 0.2.0 source required by actual Diffsol0.17.1 Cargo metadata."
+    }
+  ]
+}

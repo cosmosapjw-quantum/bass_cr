@@ -1,0 +1,272 @@
+{
+  "schema": "C21H_VIGILODE_LATE_DELTA_V1",
+  "observed_date_utc": "2026-10-19",
+  "status": "PUBLISHED_SMALL_RECEIPTS_READ_AND_GIT_BLOB_VERIFIED",
+  "repository": "cosmosapjw-quantum/vigilode",
+  "publication_head": "9f80e38dd6c7e5cf002d2436f6cf5fb2cc372858",
+  "pull_request": 71,
+  "run_id": "39257390707",
+  "bounded_scope": "Seven small published receipts/reports only. No execution, source restoration, patch application, large models/references/raw restoration, or C21H source pin change.",
+  "delta_context_reused_from_parent": {
+    "status": "PARENT_FRESH_GITHUB_COMPARE_REUSED_NOT_REPEATED",
+    "base": "ac1cd2a4738c2441c92e5fdae5f70aba35e53544",
+    "head": "9f80e38dd6c7e5cf002d2436f6cf5fb2cc372858",
+    "commits": 5,
+    "changed_path_scope": "research/strict_solver_comparison_20261019/",
+    "production_crate_changes": 0
+  },
+  "source": {
+    "declared_execution_commit": "87df9b071c3a3a7828e999e553a088af5860d274",
+    "repair_receipt": [
+      {
+        "path": "scripts/campaign.py",
+        "status": "APPLIED",
+        "before_blob": "467b2c1e51b35b60f856c8e9aba77d38fda2b1a0",
+        "after_blob": "64f8b7cff75c1c1bd14749699bb3e9b9a424f0a7",
+        "after_sha256": "6da98c3baf586aeabc14ad18afa06b5e1d371f1d9a4551a8269212a7d022977c"
+      },
+      {
+        "path": "src/main.rs",
+        "status": "APPLIED",
+        "before_blob": "fd804cb73450a6506b95a18040722f3d2e72c42e",
+        "after_blob": "165b4da0acaed7f683d942debdc4fc335ac6ba03",
+        "after_sha256": "4308cd33647953f76a6dc50a09c192e975219763b73abc9fc7b0661f9c623eb2"
+      }
+    ],
+    "execution_identity_interpretation": "Declared commit plus the two APPLIED campaign repairs; do not identify the run as an unmodified checkout of the declared commit.",
+    "after_repair_source_bytes_independently_read": false,
+    "source_closure_or_build_independently_reproduced": false,
+    "c21h_pinned_vigilode_commit_unchanged": "8a8bd409b1d96c7b7421f496d229e119fd3d284e",
+    "automatic_patch_or_merge_applied": false
+  },
+  "execution": {
+    "evidence_level": "REPORTED_IN_BLOB_VERIFIED_PUBLISHED_RECEIPTS",
+    "exit_status": {
+      "exit_code": 0,
+      "stage": "complete"
+    },
+    "summary": {
+      "R_up_le_1": 262,
+      "R_up_le_10": 543,
+      "arm_accuracy": {
+        "diffsol-bdf": {
+          "R_up_le_1": 39,
+          "admitted": 252,
+          "cells": 252
+        },
+        "netlib-dvode": {
+          "R_up_le_1": 16,
+          "admitted": 252,
+          "cells": 252
+        },
+        "vigilode-fast": {
+          "R_up_le_1": 207,
+          "admitted": 252,
+          "cells": 252
+        }
+      },
+      "complete_paired_comparisons": 96,
+      "global_error_guarantee": false,
+      "planned_accuracy_cells": 756,
+      "production_promotion": false,
+      "retained_accuracy_cells": 756,
+      "selection_status": {
+        "HOLD_MISSING_ACCURACY_ARM": 4,
+        "READY": 32
+      },
+      "status": "COMPLETED_BOUNDED_CAMPAIGN",
+      "status_counts": {
+        "ok": 756
+      },
+      "structurally_admitted": 756,
+      "timing_authority": "diagnostic_shared_runner",
+      "timing_processes": 1152,
+      "valid_timing_processes": 1152
+    },
+    "earlier_run": {
+      "run_id": "39255702592",
+      "blocker": {
+        "error": "Object of type int32 is not JSON serializable",
+        "error_type": "TypeError",
+        "status": "BLOCKED"
+      }
+    },
+    "rerun_performed_in_this_intake": false,
+    "is_c21h_native_or_ncp_evidence": false
+  },
+  "accuracy": {
+    "evidence_level": "SUMMARY_REPORTED_NOT_RAW_ACCURACY_RECOMPUTED",
+    "per_arm_reported": {
+      "diffsol-bdf": {
+        "R_up_le_1": 39,
+        "admitted": 252,
+        "cells": 252
+      },
+      "netlib-dvode": {
+        "R_up_le_1": 16,
+        "admitted": 252,
+        "cells": 252
+      },
+      "vigilode-fast": {
+        "R_up_le_1": 207,
+        "admitted": 252,
+        "cells": 252
+      }
+    },
+    "total_reported_R_up_le_1": 262,
+    "total_reported_R_up_le_10": 543,
+    "structurally_admitted_is_not_accuracy_target_pass": true,
+    "reference_radius_description_reported": "Empirical Radau ladder versus independent LSODA difference; not rigorous forward-error certification.",
+    "report_interpretation": "R_up>1 is observed grid/global tolerance miss, not automatically a violation of a solver's local error-control specification.",
+    "accuracy_csv_read": false,
+    "accuracy_csv_sha256_independently_verified": false,
+    "reference_or_fixture_raw_sha256_independently_verified": false,
+    "full_solver_raw_read": false,
+    "global_error_guarantee": false
+  },
+  "timing": {
+    "evidence_level": "PUBLISHED_REPORT_ROWS_COUNTED_NO_RAW_TIMING_REANALYSIS",
+    "authority_reported": "diagnostic_shared_runner",
+    "valid_processes_reported": 1152,
+    "paired_comparisons_reported": 96,
+    "report_rows_counted": 96,
+    "achieved_accuracy_labels_counted": {
+      "same_target_only": 84,
+      "matched_achieved_factor2": 12
+    },
+    "ratio_definition_reported": "baseline_time/candidate_time; above one means shorter candidate observed time",
+    "confidence_interval_scope_reported": "95 percent pointwise, without multiple-comparison adjustment",
+    "selection_policy_reported": "Largest input tolerance passing all three initial-step factors, selected by accuracy rather than minimum timing",
+    "output_policy_reported": "VigilODE fast fits steps to requested output times; Diffsol and DVODE may use dense output",
+    "backend_difference_reported": "Diffsol FaerLU dense path versus DVODE Brusselator banded path",
+    "new_allocation_or_callgrind_evidence": false,
+    "production_performance_promotion": false
+  },
+  "parity": {
+    "evidence_level": "PUBLISHED_FIELDS_READ_MAXIMA_RECOMPUTED_NO_NEW_PARITY_EXECUTION",
+    "rows": 12,
+    "case_names": [
+      "robertson",
+      "hires",
+      "van-der-pol-mu1000",
+      "brusselator-1d-50",
+      "brusselator-1d-200",
+      "pivot-linear"
+    ],
+    "field_maxima": {
+      "rhs": 2.0770189841780673e-16,
+      "jac": 0,
+      "complex_step_jvp": 7.384999274592463e-14
+    },
+    "scope": "Benchmark sample parity only; not C21H native chemistry, source/fixture closure, or full-trajectory validation"
+  },
+  "c21h_decision": {
+    "candidate_vigilode_rodas5p": "RETAIN_PINNED_CANDIDATE",
+    "candidate_diffsol_bdf": "RETAIN_INDEPENDENT_COMPARISON_CANDIDATE",
+    "historical_failures": "Preserve historical failures; the new reported bounded campaign completed for all three arms.",
+    "native_science_promotion": false,
+    "c21h_native_ncp_execution": "NOT_RUN_BY_THIS_INTAKE",
+    "c21g_reference_ladder": "UNCHANGED",
+    "global_error_bound": null,
+    "holds_unchanged": [
+      "Full48",
+      "source-age",
+      "spectral",
+      "angular",
+      "Case B",
+      "signed Bianchi",
+      "full EoR",
+      "standalone Grackle driver parity"
+    ]
+  },
+  "preservation": {
+    "small_source_payloads": 7,
+    "total_raw_payload_bytes": 14953,
+    "git_blob_matches": true,
+    "sha256_computed_for_each_small_source_payload": true,
+    "raw_utf8_payloads_embedded": true,
+    "new_artifacts_create_only": true,
+    "c21h_publication": "PENDING_PARENT_PUBLICATION",
+    "c21h_backup": "PENDING_PARENT_BACKUP",
+    "dag": "LATE_RESULT_INTAKE_DONE; NO_NATIVE_OR_SCIENCE_PROMOTION"
+  },
+  "sources": [
+    {
+      "relative_path": "39257390707/SUMMARY.json",
+      "url": "https://github.com/cosmosapjw-quantum/vigilode/blob/9f80e38dd6c7e5cf002d2436f6cf5fb2cc372858/research/strict_solver_comparison_20261019/runs/39257390707/SUMMARY.json",
+      "github_blob_sha": "4e0c5cb426b5dca256184f672a6a765f6a7bfbc3",
+      "encoding": "utf-8",
+      "bytes": 830,
+      "sha256": "e47426b78699b58b402ffdc9b1c70ca475c30113d5e7b1aaa6bf00b8ec49d505",
+      "git_blob_recomputed": "4e0c5cb426b5dca256184f672a6a765f6a7bfbc3",
+      "git_blob_matches": true,
+      "raw_text": "{\n  \"R_up_le_1\": 262,\n  \"R_up_le_10\": 543,\n  \"arm_accuracy\": {\n    \"diffsol-bdf\": {\n      \"R_up_le_1\": 39,\n      \"admitted\": 252,\n      \"cells\": 252\n    },\n    \"netlib-dvode\": {\n      \"R_up_le_1\": 16,\n      \"admitted\": 252,\n      \"cells\": 252\n    },\n    \"vigilode-fast\": {\n      \"R_up_le_1\": 207,\n      \"admitted\": 252,\n      \"cells\": 252\n    }\n  },\n  \"complete_paired_comparisons\": 96,\n  \"global_error_guarantee\": false,\n  \"planned_accuracy_cells\": 756,\n  \"production_promotion\": false,\n  \"retained_accuracy_cells\": 756,\n  \"selection_status\": {\n    \"HOLD_MISSING_ACCURACY_ARM\": 4,\n    \"READY\": 32\n  },\n  \"status\": \"COMPLETED_BOUNDED_CAMPAIGN\",\n  \"status_counts\": {\n    \"ok\": 756\n  },\n  \"structurally_admitted\": 756,\n  \"timing_authority\": \"diagnostic_shared_runner\",\n  \"timing_processes\": 1152,\n  \"valid_timing_processes\": 1152\n}\n"
+    },
+    {
+      "relative_path": "39257390707/REPORT_KO.md",
+      "url": "https://github.com/cosmosapjw-quantum/vigilode/blob/9f80e38dd6c7e5cf002d2436f6cf5fb2cc372858/research/strict_solver_comparison_20261019/runs/39257390707/REPORT_KO.md",
+      "github_blob_sha": "ede85a8541c0af52ca93f0158d5d019d1ae896a7",
+      "encoding": "utf-8",
+      "bytes": 11808,
+      "sha256": "105c5e53efe715ac3d8a972f3c3800483f0ac7c567d0fa33348d27ebaaabdceb",
+      "git_blob_recomputed": "ede85a8541c0af52ca93f0158d5d019d1ae896a7",
+      "git_blob_matches": true,
+      "raw_text": "# 동일 호스트 VigilODE / Diffsol / Netlib DVODE 비교\n\n이 보고서는 저장된 새 원자료에서 생성했다. 공유 GitHub runner의 시간은 diagnostic이며 생산 성능 승격 근거로 사용하지 않는다.\n\n## 실행 및 정확도\n\n```json\n{\n  \"status\": \"COMPLETED_BOUNDED_CAMPAIGN\",\n  \"planned_accuracy_cells\": 756,\n  \"retained_accuracy_cells\": 756,\n  \"status_counts\": {\n    \"ok\": 756\n  },\n  \"structurally_admitted\": 756,\n  \"R_up_le_1\": 262,\n  \"R_up_le_10\": 543,\n  \"arm_accuracy\": {\n    \"vigilode-fast\": {\n      \"cells\": 252,\n      \"admitted\": 252,\n      \"R_up_le_1\": 207\n    },\n    \"diffsol-bdf\": {\n      \"cells\": 252,\n      \"admitted\": 252,\n      \"R_up_le_1\": 39\n    },\n    \"netlib-dvode\": {\n      \"cells\": 252,\n      \"admitted\": 252,\n      \"R_up_le_1\": 16\n    }\n  },\n  \"selection_status\": {\n    \"READY\": 32,\n    \"HOLD_MISSING_ACCURACY_ARM\": 4\n  },\n  \"timing_processes\": 1152,\n  \"valid_timing_processes\": 1152,\n  \"complete_paired_comparisons\": 96,\n  \"timing_authority\": \"diagnostic_shared_runner\",\n  \"global_error_guarantee\": false,\n  \"production_promotion\": false\n}\n```\n\n## 정확도 목표별 paired 시간비\n\n값은 baseline/candidate이며 1보다 크면 candidate의 측정 시간이 짧다. 실제 오차비가 2를 초과하는 경우 same-target 조건일 뿐 matched-achieved 비교가 아니다. 95% 구간은 pointwise이며 다중비교 보정되지 않았다.\n\n|문제|격자|목표|Baseline|Candidate|시간비|95% 구간|정확도 정합성|\n|---|---|---:|---|---|---:|---|---|\n|robertson|endpoint|1e-04|netlib-dvode|vigilode-fast|2.775|2.771, 2.785|same_target_only|\n|robertson|endpoint|1e-04|diffsol-bdf|vigilode-fast|3.118|3.111, 3.123|same_target_only|\n|robertson|endpoint|1e-04|netlib-dvode|diffsol-bdf|0.893|0.890, 0.895|same_target_only|\n|robertson|endpoint|1e-06|netlib-dvode|vigilode-fast|2.931|2.915, 2.955|same_target_only|\n|robertson|endpoint|1e-06|diffsol-bdf|vigilode-fast|2.148|2.144, 2.153|same_target_only|\n|robertson|endpoint|1e-06|netlib-dvode|diffsol-bdf|1.365|1.360, 1.371|same_target_only|\n|robertson|endpoint|1e-08|netlib-dvode|vigilode-fast|2.354|2.351, 2.360|matched_achieved_factor2|\n|robertson|endpoint|1e-08|diffsol-bdf|vigilode-fast|1.535|1.532, 1.541|matched_achieved_factor2|\n|robertson|endpoint|1e-08|netlib-dvode|diffsol-bdf|1.533|1.527, 1.540|matched_achieved_factor2|\n|robertson|uniform101|1e-04|netlib-dvode|vigilode-fast|0.706|0.704, 0.708|same_target_only|\n|robertson|uniform101|1e-04|diffsol-bdf|vigilode-fast|0.811|0.809, 0.811|same_target_only|\n|robertson|uniform101|1e-04|netlib-dvode|diffsol-bdf|0.870|0.869, 0.874|same_target_only|\n|robertson|uniform101|1e-06|netlib-dvode|vigilode-fast|1.202|1.197, 1.204|same_target_only|\n|robertson|uniform101|1e-06|diffsol-bdf|vigilode-fast|1.414|1.412, 1.419|same_target_only|\n|robertson|uniform101|1e-06|netlib-dvode|diffsol-bdf|0.848|0.846, 0.851|same_target_only|\n|robertson|uniform101|1e-08|netlib-dvode|vigilode-fast|1.935|1.933, 1.939|same_target_only|\n|robertson|uniform101|1e-08|diffsol-bdf|vigilode-fast|1.699|1.694, 1.703|same_target_only|\n|robertson|uniform101|1e-08|netlib-dvode|diffsol-bdf|1.139|1.136, 1.144|same_target_only|\n|hires|endpoint|1e-04|netlib-dvode|vigilode-fast|1.468|1.465, 1.471|same_target_only|\n|hires|endpoint|1e-04|diffsol-bdf|vigilode-fast|2.408|2.400, 2.414|same_target_only|\n|hires|endpoint|1e-04|netlib-dvode|diffsol-bdf|0.610|0.608, 0.612|same_target_only|\n|hires|endpoint|1e-06|netlib-dvode|vigilode-fast|1.789|1.784, 1.791|same_target_only|\n|hires|endpoint|1e-06|diffsol-bdf|vigilode-fast|1.626|1.622, 1.629|same_target_only|\n|hires|endpoint|1e-06|netlib-dvode|diffsol-bdf|1.099|1.092, 1.104|same_target_only|\n|hires|endpoint|1e-08|netlib-dvode|vigilode-fast|1.410|1.407, 1.415|same_target_only|\n|hires|endpoint|1e-08|diffsol-bdf|vigilode-fast|1.305|1.302, 1.312|same_target_only|\n|hires|endpoint|1e-08|netlib-dvode|diffsol-bdf|1.080|1.078, 1.082|same_target_only|\n|hires|uniform101|1e-04|netlib-dvode|vigilode-fast|0.838|0.836, 0.839|same_target_only|\n|hires|uniform101|1e-04|diffsol-bdf|vigilode-fast|1.380|1.373, 1.384|same_target_only|\n|hires|uniform101|1e-04|netlib-dvode|diffsol-bdf|0.608|0.606, 0.610|same_target_only|\n|hires|uniform101|1e-06|netlib-dvode|vigilode-fast|1.375|1.370, 1.378|same_target_only|\n|hires|uniform101|1e-06|diffsol-bdf|vigilode-fast|1.255|1.252, 1.263|same_target_only|\n|hires|uniform101|1e-06|netlib-dvode|diffsol-bdf|1.095|1.093, 1.096|same_target_only|\n|hires|uniform101|1e-08|netlib-dvode|vigilode-fast|0.691|0.688, 0.696|same_target_only|\n|hires|uniform101|1e-08|diffsol-bdf|vigilode-fast|0.809|0.807, 0.814|same_target_only|\n|hires|uniform101|1e-08|netlib-dvode|diffsol-bdf|0.853|0.851, 0.855|same_target_only|\n|van-der-pol-mu1000|endpoint|1e-04|netlib-dvode|vigilode-fast|1.846|1.833, 1.855|same_target_only|\n|van-der-pol-mu1000|endpoint|1e-04|diffsol-bdf|vigilode-fast|2.242|2.224, 2.246|same_target_only|\n|van-der-pol-mu1000|endpoint|1e-04|netlib-dvode|diffsol-bdf|0.825|0.822, 0.829|same_target_only|\n|van-der-pol-mu1000|endpoint|1e-06|netlib-dvode|vigilode-fast|2.114|2.107, 2.118|same_target_only|\n|van-der-pol-mu1000|endpoint|1e-06|diffsol-bdf|vigilode-fast|3.275|3.262, 3.285|same_target_only|\n|van-der-pol-mu1000|endpoint|1e-06|netlib-dvode|diffsol-bdf|0.646|0.643, 0.649|same_target_only|\n|van-der-pol-mu1000|uniform101|1e-04|netlib-dvode|vigilode-fast|1.968|1.964, 1.969|same_target_only|\n|van-der-pol-mu1000|uniform101|1e-04|diffsol-bdf|vigilode-fast|2.709|2.705, 2.717|same_target_only|\n|van-der-pol-mu1000|uniform101|1e-04|netlib-dvode|diffsol-bdf|0.726|0.721, 0.727|same_target_only|\n|van-der-pol-mu1000|uniform101|1e-06|netlib-dvode|vigilode-fast|2.682|2.670, 2.687|same_target_only|\n|van-der-pol-mu1000|uniform101|1e-06|diffsol-bdf|vigilode-fast|3.890|3.885, 3.904|same_target_only|\n|van-der-pol-mu1000|uniform101|1e-06|netlib-dvode|diffsol-bdf|0.688|0.685, 0.690|same_target_only|\n|brusselator-1d-50|endpoint|1e-04|netlib-dvode|vigilode-fast|0.387|0.381, 0.388|same_target_only|\n|brusselator-1d-50|endpoint|1e-04|diffsol-bdf|vigilode-fast|2.489|2.479, 2.507|same_target_only|\n|brusselator-1d-50|endpoint|1e-04|netlib-dvode|diffsol-bdf|0.155|0.154, 0.156|same_target_only|\n|brusselator-1d-50|endpoint|1e-06|netlib-dvode|vigilode-fast|0.395|0.393, 0.398|same_target_only|\n|brusselator-1d-50|endpoint|1e-06|diffsol-bdf|vigilode-fast|1.832|1.824, 1.838|same_target_only|\n|brusselator-1d-50|endpoint|1e-06|netlib-dvode|diffsol-bdf|0.215|0.214, 0.217|same_target_only|\n|brusselator-1d-50|endpoint|1e-08|netlib-dvode|vigilode-fast|0.520|0.518, 0.520|same_target_only|\n|brusselator-1d-50|endpoint|1e-08|diffsol-bdf|vigilode-fast|1.560|1.554, 1.563|same_target_only|\n|brusselator-1d-50|endpoint|1e-08|netlib-dvode|diffsol-bdf|0.333|0.332, 0.334|same_target_only|\n|brusselator-1d-50|uniform101|1e-04|netlib-dvode|vigilode-fast|0.187|0.186, 0.196|same_target_only|\n|brusselator-1d-50|uniform101|1e-04|diffsol-bdf|vigilode-fast|1.358|1.351, 1.364|same_target_only|\n|brusselator-1d-50|uniform101|1e-04|netlib-dvode|diffsol-bdf|0.138|0.137, 0.143|same_target_only|\n|brusselator-1d-50|uniform101|1e-06|netlib-dvode|vigilode-fast|0.362|0.361, 0.365|matched_achieved_factor2|\n|brusselator-1d-50|uniform101|1e-06|diffsol-bdf|vigilode-fast|1.397|1.396, 1.410|matched_achieved_factor2|\n|brusselator-1d-50|uniform101|1e-06|netlib-dvode|diffsol-bdf|0.259|0.257, 0.261|matched_achieved_factor2|\n|brusselator-1d-200|endpoint|1e-04|netlib-dvode|vigilode-fast|0.149|0.146, 0.150|matched_achieved_factor2|\n|brusselator-1d-200|endpoint|1e-04|diffsol-bdf|vigilode-fast|7.838|7.677, 7.941|matched_achieved_factor2|\n|brusselator-1d-200|endpoint|1e-04|netlib-dvode|diffsol-bdf|0.019|0.019, 0.019|matched_achieved_factor2|\n|brusselator-1d-200|endpoint|1e-06|netlib-dvode|vigilode-fast|0.156|0.153, 0.157|same_target_only|\n|brusselator-1d-200|endpoint|1e-06|diffsol-bdf|vigilode-fast|5.377|5.307, 5.389|same_target_only|\n|brusselator-1d-200|endpoint|1e-06|netlib-dvode|diffsol-bdf|0.029|0.029, 0.029|same_target_only|\n|brusselator-1d-200|endpoint|1e-08|netlib-dvode|vigilode-fast|0.206|0.205, 0.208|same_target_only|\n|brusselator-1d-200|endpoint|1e-08|diffsol-bdf|vigilode-fast|3.512|3.487, 3.539|same_target_only|\n|brusselator-1d-200|endpoint|1e-08|netlib-dvode|diffsol-bdf|0.059|0.059, 0.059|same_target_only|\n|brusselator-1d-200|uniform101|1e-04|netlib-dvode|vigilode-fast|0.077|0.076, 0.077|same_target_only|\n|brusselator-1d-200|uniform101|1e-04|diffsol-bdf|vigilode-fast|4.006|3.973, 4.029|same_target_only|\n|brusselator-1d-200|uniform101|1e-04|netlib-dvode|diffsol-bdf|0.019|0.019, 0.019|same_target_only|\n|brusselator-1d-200|uniform101|1e-06|netlib-dvode|vigilode-fast|0.152|0.150, 0.154|matched_achieved_factor2|\n|brusselator-1d-200|uniform101|1e-06|diffsol-bdf|vigilode-fast|3.476|3.439, 3.519|matched_achieved_factor2|\n|brusselator-1d-200|uniform101|1e-06|netlib-dvode|diffsol-bdf|0.044|0.044, 0.044|matched_achieved_factor2|\n|pivot-linear|endpoint|1e-04|netlib-dvode|vigilode-fast|2.578|2.569, 2.587|same_target_only|\n|pivot-linear|endpoint|1e-04|diffsol-bdf|vigilode-fast|5.092|5.082, 5.124|same_target_only|\n|pivot-linear|endpoint|1e-04|netlib-dvode|diffsol-bdf|0.506|0.505, 0.507|same_target_only|\n|pivot-linear|endpoint|1e-06|netlib-dvode|vigilode-fast|4.608|4.587, 4.623|same_target_only|\n|pivot-linear|endpoint|1e-06|diffsol-bdf|vigilode-fast|6.925|6.904, 6.943|same_target_only|\n|pivot-linear|endpoint|1e-06|netlib-dvode|diffsol-bdf|0.664|0.663, 0.668|same_target_only|\n|pivot-linear|endpoint|1e-08|netlib-dvode|vigilode-fast|5.173|5.160, 5.190|same_target_only|\n|pivot-linear|endpoint|1e-08|diffsol-bdf|vigilode-fast|8.134|8.105, 8.174|same_target_only|\n|pivot-linear|endpoint|1e-08|netlib-dvode|diffsol-bdf|0.637|0.633, 0.638|same_target_only|\n|pivot-linear|uniform101|1e-04|netlib-dvode|vigilode-fast|0.448|0.446, 0.449|same_target_only|\n|pivot-linear|uniform101|1e-04|diffsol-bdf|vigilode-fast|0.873|0.871, 0.874|same_target_only|\n|pivot-linear|uniform101|1e-04|netlib-dvode|diffsol-bdf|0.513|0.511, 0.515|same_target_only|\n|pivot-linear|uniform101|1e-06|netlib-dvode|vigilode-fast|0.762|0.756, 0.763|same_target_only|\n|pivot-linear|uniform101|1e-06|diffsol-bdf|vigilode-fast|1.156|1.151, 1.158|same_target_only|\n|pivot-linear|uniform101|1e-06|netlib-dvode|diffsol-bdf|0.658|0.655, 0.661|same_target_only|\n|pivot-linear|uniform101|1e-08|netlib-dvode|vigilode-fast|1.162|1.158, 1.164|same_target_only|\n|pivot-linear|uniform101|1e-08|diffsol-bdf|vigilode-fast|1.826|1.823, 1.834|same_target_only|\n|pivot-linear|uniform101|1e-08|netlib-dvode|diffsol-bdf|0.635|0.632, 0.637|same_target_only|\n\n## 제한\n\n- Netlib 원본 Fortran DVODE와 Rust 두 solver는 동일 실행파일 및 공통 RHS/Jacobian 수식을 사용한다. Python wrapper callback 비용은 timing에 포함되지 않는다.\n- VigilODE fast는 요청 시각에 step을 맞추고 Diffsol/DVODE는 dense output을 사용할 수 있다. 출력 시각 계약은 같으나 내부 출력 알고리즘은 다르다.\n- E_up 및 R_up의 reference radius는 Radau ladder와 독립 LSODA의 경험적 차이이며 엄밀한 전방오차 인증이 아니다.\n- R_up>1은 관측된 격자/global tolerance miss이며 local tolerance만 제어하는 solver의 명세 위반으로 자동 분류하지 않는다.\n- 각 arm에서 초기 step 배율 세 가지를 모두 통과한 가장 큰 입력 tolerance를 accuracy만으로 선택했다. timing 최솟값을 골라 승자를 만들지 않았다.\n- Diffsol의 FaerLU dense matrix 경로와 DVODE의 Brusselator banded 경로를 명시적으로 구분한다. 이 결과는 특정 solver+backend 구성 비교이며 방법론 일반의 순위가 아니다.\n- 새 allocation/Callgrind 측정은 이 캠페인에 포함되지 않는다. 기존 자료의 수치를 새 호스트 결과와 섞지 않는다.\n"
+    },
+    {
+      "relative_path": "39257390707/PARITY.json",
+      "url": "https://github.com/cosmosapjw-quantum/vigilode/blob/9f80e38dd6c7e5cf002d2436f6cf5fb2cc372858/research/strict_solver_comparison_20261019/runs/39257390707/PARITY.json",
+      "github_blob_sha": "da942e3505a793a159c7ec327d60832a728c9180",
+      "encoding": "utf-8",
+      "bytes": 1567,
+      "sha256": "a2c11e845254bdd5c010a7fc40fb024732881c86867a109528c687803653f621",
+      "git_blob_recomputed": "da942e3505a793a159c7ec327d60832a728c9180",
+      "git_blob_matches": true,
+      "raw_text": "[\n  {\n    \"case\": \"robertson\",\n    \"complex_step_jvp\": 0.0,\n    \"jac\": 0.0,\n    \"rhs\": 0.0,\n    \"sample\": 0\n  },\n  {\n    \"case\": \"robertson\",\n    \"complex_step_jvp\": 3.8439898398059507e-16,\n    \"jac\": 0.0,\n    \"rhs\": 0.0,\n    \"sample\": 1\n  },\n  {\n    \"case\": \"hires\",\n    \"complex_step_jvp\": 1.839966581745169e-16,\n    \"jac\": 0.0,\n    \"rhs\": 0.0,\n    \"sample\": 0\n  },\n  {\n    \"case\": \"hires\",\n    \"complex_step_jvp\": 1.839966581745169e-16,\n    \"jac\": 0.0,\n    \"rhs\": 0.0,\n    \"sample\": 1\n  },\n  {\n    \"case\": \"van-der-pol-mu1000\",\n    \"complex_step_jvp\": 5.814824914266852e-17,\n    \"jac\": 0.0,\n    \"rhs\": 0.0,\n    \"sample\": 0\n  },\n  {\n    \"case\": \"van-der-pol-mu1000\",\n    \"complex_step_jvp\": 1.347913105281654e-16,\n    \"jac\": 0.0,\n    \"rhs\": 0.0,\n    \"sample\": 1\n  },\n  {\n    \"case\": \"brusselator-1d-50\",\n    \"complex_step_jvp\": 1.6629744453453592e-15,\n    \"jac\": 0.0,\n    \"rhs\": 0.0,\n    \"sample\": 0\n  },\n  {\n    \"case\": \"brusselator-1d-50\",\n    \"complex_step_jvp\": 1.930615517690886e-15,\n    \"jac\": 0.0,\n    \"rhs\": 0.0,\n    \"sample\": 1\n  },\n  {\n    \"case\": \"brusselator-1d-200\",\n    \"complex_step_jvp\": 7.34532702537713e-14,\n    \"jac\": 0.0,\n    \"rhs\": 0.0,\n    \"sample\": 0\n  },\n  {\n    \"case\": \"brusselator-1d-200\",\n    \"complex_step_jvp\": 7.384999274592463e-14,\n    \"jac\": 0.0,\n    \"rhs\": 0.0,\n    \"sample\": 1\n  },\n  {\n    \"case\": \"pivot-linear\",\n    \"complex_step_jvp\": 0.0,\n    \"jac\": 0.0,\n    \"rhs\": 0.0,\n    \"sample\": 0\n  },\n  {\n    \"case\": \"pivot-linear\",\n    \"complex_step_jvp\": 0.0,\n    \"jac\": 0.0,\n    \"rhs\": 2.0770189841780673e-16,\n    \"sample\": 1\n  }\n]\n"
+    },
+    {
+      "relative_path": "39257390707/EXEC_SOURCE_COMMIT.txt",
+      "url": "https://github.com/cosmosapjw-quantum/vigilode/blob/9f80e38dd6c7e5cf002d2436f6cf5fb2cc372858/research/strict_solver_comparison_20261019/runs/39257390707/EXEC_SOURCE_COMMIT.txt",
+      "github_blob_sha": "6cded567eca9a9ce9e2f7375e63c23dd58be5f33",
+      "encoding": "utf-8",
+      "bytes": 41,
+      "sha256": "63d38b5ae119cf4ee8b756cef96d48721811604e1a2c907e23668b7c9cf1f904",
+      "git_blob_recomputed": "6cded567eca9a9ce9e2f7375e63c23dd58be5f33",
+      "git_blob_matches": true,
+      "raw_text": "87df9b071c3a3a7828e999e553a088af5860d274\n"
+    },
+    {
+      "relative_path": "39257390707/SOURCE_REPAIR_RECEIPT.json",
+      "url": "https://github.com/cosmosapjw-quantum/vigilode/blob/9f80e38dd6c7e5cf002d2436f6cf5fb2cc372858/research/strict_solver_comparison_20261019/runs/39257390707/SOURCE_REPAIR_RECEIPT.json",
+      "github_blob_sha": "485f47213ee88831f264a46d5f2c340b65fa3e35",
+      "encoding": "utf-8",
+      "bytes": 557,
+      "sha256": "8f41b0ac287000ea26a57d735ab581e39f93983a9d1edf5323e339afb10eb284",
+      "git_blob_recomputed": "485f47213ee88831f264a46d5f2c340b65fa3e35",
+      "git_blob_matches": true,
+      "raw_text": "[\n  {\n    \"path\": \"scripts/campaign.py\",\n    \"status\": \"APPLIED\",\n    \"before_blob\": \"467b2c1e51b35b60f856c8e9aba77d38fda2b1a0\",\n    \"after_blob\": \"64f8b7cff75c1c1bd14749699bb3e9b9a424f0a7\",\n    \"after_sha256\": \"6da98c3baf586aeabc14ad18afa06b5e1d371f1d9a4551a8269212a7d022977c\"\n  },\n  {\n    \"path\": \"src/main.rs\",\n    \"status\": \"APPLIED\",\n    \"before_blob\": \"fd804cb73450a6506b95a18040722f3d2e72c42e\",\n    \"after_blob\": \"165b4da0acaed7f683d942debdc4fc335ac6ba03\",\n    \"after_sha256\": \"4308cd33647953f76a6dc50a09c192e975219763b73abc9fc7b0661f9c623eb2\"\n  }\n]\n"
+    },
+    {
+      "relative_path": "39257390707/EXIT_STATUS.json",
+      "url": "https://github.com/cosmosapjw-quantum/vigilode/blob/9f80e38dd6c7e5cf002d2436f6cf5fb2cc372858/research/strict_solver_comparison_20261019/runs/39257390707/EXIT_STATUS.json",
+      "github_blob_sha": "fd81971894f322817dbe1fb59a8120b9cbee3782",
+      "encoding": "utf-8",
+      "bytes": 35,
+      "sha256": "99373cfb52620d095c751335bc3c66b4b82c3e867505bf48e42b471fc9d29d73",
+      "git_blob_recomputed": "fd81971894f322817dbe1fb59a8120b9cbee3782",
+      "git_blob_matches": true,
+      "raw_text": "{\"exit_code\":0,\"stage\":\"complete\"}\n"
+    },
+    {
+      "relative_path": "39255702592/BLOCKER.json",
+      "url": "https://github.com/cosmosapjw-quantum/vigilode/blob/9f80e38dd6c7e5cf002d2436f6cf5fb2cc372858/research/strict_solver_comparison_20261019/runs/39255702592/BLOCKER.json",
+      "github_blob_sha": "abde3179c633659679e08514e825ea577f9f4cfc",
+      "encoding": "utf-8",
+      "bytes": 115,
+      "sha256": "c44bb8629f7d26653e177d8fdcd1a6efbb344be5c85860155025168256f792ad",
+      "git_blob_recomputed": "abde3179c633659679e08514e825ea577f9f4cfc",
+      "git_blob_matches": true,
+      "raw_text": "{\n  \"error\": \"Object of type int32 is not JSON serializable\",\n  \"error_type\": \"TypeError\",\n  \"status\": \"BLOCKED\"\n}\n"
+    }
+  ]
+}

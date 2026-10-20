@@ -1,0 +1,177 @@
+{
+  "case": "epoch_segment",
+  "method": "diffsol-bdf",
+  "status": "PASS",
+  "error": null,
+  "exit_code": 0,
+  "wall_seconds": 0.010767111998575274,
+  "manufactured": true,
+  "native_chemistry_executed": false,
+  "config": {
+    "protocol": "C21H_V1",
+    "dimension": 1,
+    "t0": -2.4079456086518722,
+    "t1": -2.4079455875193854,
+    "y0": [
+      0.5
+    ],
+    "rtol": 2e-11,
+    "atol": 2e-14,
+    "h0": 6.603902147350738e-10,
+    "h_min": 4.440892098500626e-16,
+    "h_max": 2.641560858940295e-09,
+    "max_steps": 10000,
+    "method": "diffsol-bdf"
+  },
+  "result": {
+    "accepted_grid_complete": true,
+    "accepted_grid_origin": "direct Diffsol state after each successful step call",
+    "accepted_states": [
+      [
+        0.5
+      ],
+      [
+        0.5000000006603902
+      ],
+      [
+        0.5000000013207804
+      ],
+      [
+        0.5000000026415607
+      ],
+      [
+        0.5000000039623411
+      ],
+      [
+        0.5000000052831215
+      ],
+      [
+        0.5000000066039019
+      ],
+      [
+        0.5000000079246822
+      ],
+      [
+        0.5000000092454626
+      ],
+      [
+        0.500000010566243
+      ],
+      [
+        0.5000000118870234
+      ],
+      [
+        0.5000000132078037
+      ],
+      [
+        0.5000000145285841
+      ],
+      [
+        0.5000000158493645
+      ],
+      [
+        0.5000000171701449
+      ],
+      [
+        0.5000000184909252
+      ],
+      [
+        0.5000000198117056
+      ],
+      [
+        0.500000021132486
+      ],
+      [
+        0.5000000211324864
+      ]
+    ],
+    "accepted_times": [
+      -2.4079456086518722,
+      -2.407945607991482,
+      -2.4079456073310914,
+      -2.407945606010311,
+      -2.4079456046895307,
+      -2.4079456033687503,
+      -2.40794560204797,
+      -2.4079456007271896,
+      -2.407945599406409,
+      -2.407945598085629,
+      -2.4079455967648484,
+      -2.407945595444068,
+      -2.4079455941232877,
+      -2.4079455928025073,
+      -2.407945591481727,
+      -2.4079455901609466,
+      -2.407945588840166,
+      -2.407945587519386,
+      -2.4079455875193854
+    ],
+    "callback_failure": null,
+    "complete_output": true,
+    "counters": {
+      "number_of_error_test_failures": 0,
+      "number_of_linear_solver_setups": 4,
+      "number_of_linear_solver_setups_from_checkpoint": 1,
+      "number_of_linear_solver_setups_from_error_test_fail": 0,
+      "number_of_linear_solver_setups_from_first_convergence_fail": 0,
+      "number_of_linear_solver_setups_from_second_convergence_fail": 0,
+      "number_of_linear_solver_setups_from_step_success": 3,
+      "number_of_nonlinear_solver_fails": 0,
+      "number_of_nonlinear_solver_iterations": 18,
+      "number_of_steps": 18
+    },
+    "diffsol_version": "0.17.1",
+    "h_max_policy": "rolling hard-stop cap, independent of output grid",
+    "initial_step_policy": "explicit h0 through public new_without_initialise; no out-of-segment estimate probe",
+    "internal_steps": 18,
+    "jacobian_policy": "parent full Jacobian; exact (t,y) bit cache for JVP",
+    "max_observed_step": 1.3207803739589963e-09,
+    "max_steps_semantics": "outer accepted-step calls; internal retries in solver counters",
+    "message": "success",
+    "method": "diffsol-bdf",
+    "ok": true,
+    "output_clipped_steps": 0,
+    "output_policy": "BDF interpolation of accepted intervals; exact final stop",
+    "pending_request": null,
+    "precision": "binary64",
+    "protocol": "C21H_V1",
+    "roundoff_step_restarts": [
+      {
+        "cause": "public StopTimeAtCurrentTime for a strictly later represented time",
+        "h": 4.440892098500626e-16,
+        "prior_h": 1.3207803739589963e-09,
+        "restart_order": 1,
+        "t": -2.407945587519386,
+        "target": -2.4079455875193854
+      }
+    ],
+    "rpc_counters": {
+      "diffsol_jacobian_cache_hits": 0,
+      "diffsol_jvp_calls": 1,
+      "jacobian_requests": 1,
+      "partial_t_requests": 0,
+      "requests_attempted": 20,
+      "responses_validated": 20,
+      "rhs_requests": 19
+    },
+    "states": [
+      [
+        0.5
+      ],
+      [
+        0.5000000211324864
+      ]
+    ],
+    "success": true,
+    "times": [
+      -2.4079456086518722,
+      -2.4079455875193854
+    ],
+    "type": "result"
+  },
+  "files": {
+    "stdin.jsonl": "4121f8afdde8774ee9531593081d2f66a1e5f6437f4b18495370f2466df1cce4",
+    "stdout.jsonl": "964483a54238aac423b70b113f8f272591fcf8ca77dbda05d55dfde84161c321",
+    "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

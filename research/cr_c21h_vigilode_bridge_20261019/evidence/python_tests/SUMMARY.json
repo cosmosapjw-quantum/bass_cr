@@ -1,0 +1,57 @@
+{
+  "schema": "C21H_OPTICAL_CALLBACK_TEST_SUMMARY_V1",
+  "status": "PASS_SCOPED_12_UNIQUE_METHODS",
+  "created_utc": "2026-10-19T13:03:44.519742+00:00",
+  "adapter_sha256": "5a18ab7766cb0b1ecef8abe0c320ee55a1ff615267a4e44846fd05dee67ed1ed",
+  "test_source_sha256": "4665e7e0aa6fc9a441a7fe79dfd133d3a81ff47a054a385984dbb9e165a38e52",
+  "unique_methods": 12,
+  "method_executions": 14,
+  "initial": {
+    "receipt": "initial.json",
+    "tests_run": 12,
+    "exit_code": 1,
+    "error_entries": 1,
+    "reason": "Boundary fixture y=.8,z=.2 exposes the preserved inherited neutral-fraction FP64 arithmetic and manufactured-provider rejection."
+  },
+  "final_affected": {
+    "receipt": "corrected_boundary.json",
+    "tests_run": 2,
+    "exit_code": 0
+  },
+  "unchanged_test_evidence_reused": [
+    "test_optical_adapter.OpticalAdapterTests.test_analytic_tau_jacobian_against_original_rhs_centered_difference",
+    "test_optical_adapter.OpticalAdapterTests.test_derivative_weights_represented_quadratic_and_invalid_nodes",
+    "test_optical_adapter.OpticalAdapterTests.test_fifteen_passive_columns_are_exact_and_rhs_invariant",
+    "test_optical_adapter.OpticalAdapterTests.test_fixed_scaling_preserves_wrms_and_return_trace_contract",
+    "test_optical_adapter.OpticalAdapterTests.test_gas_jacobian_against_independent_original_rhs_stencil",
+    "test_optical_adapter.OpticalAdapterTests.test_inactive_and_zero_amount_cohorts_have_exact_zero_tau_columns",
+    "test_optical_adapter.OpticalAdapterTests.test_partial_time_flat_branches_and_interior_polynomial",
+    "test_optical_adapter.OpticalAdapterTests.test_partial_time_matches_independent_original_rhs_difference",
+    "test_optical_adapter.OpticalAdapterTests.test_private_import_preserves_public_module_and_pinned_source",
+    "test_optical_adapter.OpticalAdapterTests.test_y_zero_removes_exact_helium_unknowns_and_tolerances"
+  ],
+  "affected_tests_reexecuted": [
+    "test_optical_adapter.OpticalAdapterTests.test_gas_boundary_uses_admissible_one_sided_nodes",
+    "test_optical_adapter.OpticalAdapterTests.test_invalid_states_nodes_and_provider_errors_are_not_fallbacks"
+  ],
+  "initial_test_source": "initial_test_source.py",
+  "initial_source_recovery": "Reconstructed by reversing the exact two test edits; SHA256 matches the source hash recorded before the initial execution. Raw initial log/receipt unchanged.",
+  "native_execution": false,
+  "ode_integration": false,
+  "old_C21F_or_C21G_suites_rerun": false,
+  "red_first_claim": false,
+  "inherited_boundary_issue": {
+    "y": 0.8,
+    "z": 0.2,
+    "left_associative_neutral_fraction": -5.551115123125783e-17,
+    "state_valid": true,
+    "provider_failure_preserved": true,
+    "source_modified": false,
+    "clipping_or_fallback": false
+  },
+  "closed_root_findings": [
+    "physical callback scaling overflow/invalid gas rejected even in flat time branches",
+    "declared native linear-solver work counter propagated without silent zero fallback"
+  ],
+  "remaining_scope": "Tests use manufactured conservative microphysics, a pre-integrator-captured actual C21G RHS, and an explicitly mocked return trace. They do not certify native Rust/Grackle execution or convergence."
+}

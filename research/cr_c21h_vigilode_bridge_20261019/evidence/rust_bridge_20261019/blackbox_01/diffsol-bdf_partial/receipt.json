@@ -1,0 +1,98 @@
+{
+  "case": "partial",
+  "method": "diffsol-bdf",
+  "status": "PASS",
+  "error": null,
+  "exit_code": 1,
+  "wall_seconds": 0.004436407994944602,
+  "manufactured": true,
+  "native_chemistry_executed": false,
+  "config": {
+    "protocol": "C21H_V1",
+    "dimension": 2,
+    "t0": 0.0,
+    "t1": 0.02,
+    "y0": [
+      1.0,
+      1.0
+    ],
+    "rtol": 1e-07,
+    "atol": 1e-10,
+    "h0": 1e-05,
+    "h_min": 1e-15,
+    "h_max": 0.004,
+    "max_steps": 1,
+    "method": "diffsol-bdf"
+  },
+  "result": {
+    "accepted_grid_complete": false,
+    "accepted_grid_origin": "direct Diffsol state after each successful step call",
+    "accepted_states": [
+      [
+        1.0,
+        1.0
+      ],
+      [
+        0.9999999623751707,
+        0.999962375170752
+      ]
+    ],
+    "accepted_times": [
+      0.0,
+      3.762482924791492e-08
+    ],
+    "callback_failure": null,
+    "complete_output": false,
+    "counters": {
+      "number_of_error_test_failures": 0,
+      "number_of_linear_solver_setups": 1,
+      "number_of_linear_solver_setups_from_checkpoint": 1,
+      "number_of_linear_solver_setups_from_error_test_fail": 0,
+      "number_of_linear_solver_setups_from_first_convergence_fail": 0,
+      "number_of_linear_solver_setups_from_second_convergence_fail": 0,
+      "number_of_linear_solver_setups_from_step_success": 0,
+      "number_of_nonlinear_solver_fails": 0,
+      "number_of_nonlinear_solver_iterations": 1,
+      "number_of_steps": 1
+    },
+    "diffsol_version": "0.17.1",
+    "h_max_policy": "rolling hard-stop cap, independent of output grid",
+    "internal_steps": 1,
+    "jacobian_policy": "parent full Jacobian; exact (t,y) bit cache for JVP",
+    "max_observed_step": 3.762482924791492e-08,
+    "max_steps_semantics": "outer accepted-step calls; internal retries in solver counters",
+    "message": "maximum step count reached",
+    "method": "diffsol-bdf",
+    "ok": true,
+    "output_clipped_steps": 0,
+    "output_policy": "BDF interpolation of accepted intervals; exact final stop",
+    "pending_request": null,
+    "precision": "binary64",
+    "protocol": "C21H_V1",
+    "rpc_counters": {
+      "diffsol_jacobian_cache_hits": 1,
+      "diffsol_jvp_calls": 2,
+      "jacobian_requests": 1,
+      "partial_t_requests": 0,
+      "requests_attempted": 4,
+      "responses_validated": 4,
+      "rhs_requests": 3
+    },
+    "states": [
+      [
+        1.0,
+        1.0
+      ]
+    ],
+    "success": false,
+    "times": [
+      0.0
+    ],
+    "type": "result"
+  },
+  "files": {
+    "stdin.jsonl": "0581ec41dbff0b08fa495490aec8e7235196abd93278b7e54c706a6d946fb4cb",
+    "stdout.jsonl": "e1f34fe1dfa80237aa585ca5472506a2d680f35490015ba340a5de2be336b865",
+    "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}
