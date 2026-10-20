@@ -1,0 +1,142 @@
+{
+  "schema": "C21J_INDEPENDENT_CHANGED_GATE_REVIEW_V2",
+  "status": "PASS_SCOPED",
+  "observed_at_utc": "2026-10-20T13:37:35.983534+00:00",
+  "reviewer": "/root/github_delta_intake",
+  "scope": "Independent review and focused unittest probes of new C21J evidence-admission gates only",
+  "implementation_files_owned_and_modified_by_reviewer": [
+    "/workspace/scratch/9979d80514d6/bass_cr_pinned/research/cr_c21j_native_trace_replay_20261020/tests/test_replay_contract.py",
+    "/workspace/scratch/9979d80514d6/bass_cr_pinned/research/cr_c21j_native_trace_replay_20261020/tests/test_trace_admission.py"
+  ],
+  "source_implementation_modified_by_reviewer": false,
+  "file_identities": {
+    "/workspace/scratch/9979d80514d6/bass_cr_pinned/research/cr_c21j_native_trace_replay_20261020/replay_callbacks.py": {
+      "bytes": 20173,
+      "sha256": "7c855b9983c575042a18754687696a039bef31f5711c455f774b70c03bae52c1"
+    },
+    "/workspace/scratch/9979d80514d6/bass_cr_pinned/research/cr_c21j_native_trace_replay_20261020/analyze_native_trace.py": {
+      "bytes": 30150,
+      "sha256": "e2d8fff3acf4a867391de7247781d2ffe6d3a93ed0ba5c78b26876b911c00b9c"
+    },
+    "/workspace/scratch/9979d80514d6/bass_cr_pinned/research/cr_c21j_native_trace_replay_20261020/INPUT_PINS.json": {
+      "bytes": 16640,
+      "sha256": "ac339fc832ccc2e4b177034151a6adcf1510d82646b0c7e04d68bfc2be7aea90"
+    },
+    "/workspace/scratch/9979d80514d6/bass_cr_pinned/research/cr_c21j_native_trace_replay_20261020/tests/test_replay_contract.py": {
+      "bytes": 13916,
+      "sha256": "97c42818b0fdd35c49a02eb50614213f0a2856c8172d2c8ed6c0c9c3260d2104"
+    },
+    "/workspace/scratch/9979d80514d6/bass_cr_pinned/research/cr_c21j_native_trace_replay_20261020/tests/test_trace_admission.py": {
+      "bytes": 4963,
+      "sha256": "96fad6c518d77bf7a6509cd5b0d3b2c16ec5d62ec463e98be1e2f3f5ea096756"
+    }
+  },
+  "source_file_mtimes_utc": {
+    "bass_cr_pinned/research/cr_c21j_native_trace_replay_20261020/replay_callbacks.py": "2026-10-20T13:28:50.716144+00:00",
+    "bass_cr_pinned/research/cr_c21j_native_trace_replay_20261020/analyze_native_trace.py": "2026-10-20T13:33:05.062046+00:00",
+    "bass_cr_pinned/research/cr_c21j_native_trace_replay_20261020/tests/test_replay_contract.py": "2026-10-20T13:34:25.719905+00:00",
+    "bass_cr_pinned/research/cr_c21j_native_trace_replay_20261020/tests/test_trace_admission.py": "2026-10-20T13:36:47.239181+00:00",
+    "c21hi_new_work/independent_review/TRACE_ADMISSION_TEST_ATTEMPT01.json": "2026-10-20T13:36:45.991152+00:00"
+  },
+  "fixture_authority": {
+    "execution_source_commit": "fe6bbaec2de5032b938aed0713623b9618ba70e6",
+    "native_return_document_head": "d3eaf596e46be4f994723fb742237a7399c290ed",
+    "native_archive_sha256": "2722e479b6205015a68f1393b8c537d21e63201bb57efd3cf850fe74e4668de3",
+    "input_pins_raw_sha256": "ac339fc832ccc2e4b177034151a6adcf1510d82646b0c7e04d68bfc2be7aea90",
+    "input_pins_canonical_sha256": "5c741dcaf415961d09bb4f1bf10c9dad600c0af3d0791e18750655b006957fea",
+    "package_payload_manifest_sha256": "40d61253fb5535435373c07150ff554ff708796902076168e171fb1f9301125a",
+    "return_root": "/workspace/scratch/9979d80514d6/c21hi_external_intake/native_archive/C21GHI_NATIVE_EXECUTION_20261020",
+    "real_rpc_fixture": "evidence/I_common_ic_vigilode_vectorized_base/segments/segment_000",
+    "real_rpc_request_response_pairs": 155,
+    "raw_archive_embedded_in_tests": false
+  },
+  "findings": [
+    {
+      "id": "C9-J1",
+      "severity": "P2",
+      "status": "CLOSED_IN_REVIEWED_VERSION",
+      "original_issue": "Replay verify_inputs accepted self-declared source/return maps and contradictory provenance, including empty maps.",
+      "fix": "Raw INPUT_PINS file SHA is checked by run before verification or execution; verify_inputs checks provenance fields and canonical JSON authority before every required file.",
+      "evidence": [
+        "Authentic fixed 24-source/60-return set verifies exactly 84 entries.",
+        "Empty/reduced maps, contradictory metadata, changed expected file record, extra path, and extra claim are rejected.",
+        "Same-size source byte drift is rejected by the subsequent payload gate.",
+        "Canonical-equivalent raw pin reformat is rejected before verify_inputs or output creation."
+      ]
+    },
+    {
+      "id": "C9-J2",
+      "severity": "P2",
+      "status": "CLOSED_IN_REVIEWED_VERSION",
+      "original_issue": "Replay rpc_pairs accepted matched prefixes without a terminal and full streams with failed terminal results.",
+      "fix": "RPC admission requires fixed hello, expected config, ordered paired supported operations, successful complete terminal matching result, exact counts, and no post-terminal traffic.",
+      "evidence": [
+        "Frozen 155-pair segment accepted with default sibling config/result and with explicit expected records.",
+        "Truncated matched prefix, missing/failed/incomplete terminal and post-terminal traffic are rejected.",
+        "Hello/config identity, signed zero in config and terminal state, operation/id/shape, result counters, duplicate JSON keys and nonfinite constants are checked by focused rejection probes."
+      ]
+    },
+    {
+      "id": "C9-J3",
+      "severity": "P2",
+      "status": "CLOSED_IN_REVIEWED_VERSION",
+      "original_issue": "Trace analyzer recorded hashes from arbitrary return inputs and compared selected payloads only with a self-supplied job receipt, without a frozen raw-input authority.",
+      "fix": "CLI supplies a fixed SHA for the 155-entry package payload manifest, and every return Inputs.read checks membership and payload hash. The five original source pins remain separate.",
+      "evidence": [
+        "Authentic manifest admits the pinned public job receipt.",
+        "A self-consistent replacement manifest is rejected; CLI rejects it before job analysis.",
+        "A same-size changed job receipt is rejected before JSON parsing; an unlisted file is rejected.",
+        "All three LIVE_INVENTORY paths in the manifest are rejected before any payload read_bytes call."
+      ]
+    }
+  ],
+  "verification": [
+    {
+      "suite": "test_replay_contract.py",
+      "methods": 16,
+      "final_status": "PASS",
+      "command": "C21J_NATIVE_RETURN=/workspace/scratch/9979d80514d6/c21hi_external_intake/native_archive/C21GHI_NATIVE_EXECUTION_20261020 python3 -m unittest discover -s /workspace/scratch/9979d80514d6/bass_cr_pinned/research/cr_c21j_native_trace_replay_20261020/tests -p test_replay_contract.py -v",
+      "actual_tool_result": {
+        "chunk_id": "9ad877",
+        "wall_time_seconds": 1.473412102,
+        "exit_code": 0,
+        "original_token_count": 713,
+        "output": "test_authentic_pin_authority_verifies_the_complete_required_input_set (test_replay_contract.ReplayContractTests.test_authentic_pin_authority_verifies_the_complete_required_input_set) ... ok\ntest_complete_frozen_rpc_is_accepted_with_sibling_config_and_result (test_replay_contract.ReplayContractTests.test_complete_frozen_rpc_is_accepted_with_sibling_config_and_result) ... ok\ntest_complete_rpc_accepts_explicit_expected_records_without_siblings (test_replay_contract.ReplayContractTests.test_complete_rpc_accepts_explicit_expected_records_without_siblings) ... ok\ntest_conflicting_provenance_metadata_is_rejected (test_replay_contract.ReplayContractTests.test_conflicting_provenance_metadata_is_rejected) ... ok\ntest_duplicate_json_keys_and_nonfinite_constants_are_rejected (test_replay_contract.ReplayContractTests.test_duplicate_json_keys_and_nonfinite_constants_are_rejected) ... ok\ntest_duplicate_terminal_and_post_terminal_traffic_are_rejected (test_replay_contract.ReplayContractTests.test_duplicate_terminal_and_post_terminal_traffic_are_rejected) ... ok\ntest_failed_or_incomplete_terminal_is_rejected_even_if_result_agrees (test_replay_contract.ReplayContractTests.test_failed_or_incomplete_terminal_is_rejected_even_if_result_agrees) ... ok\ntest_hello_and_config_identity_and_order_are_required (test_replay_contract.ReplayContractTests.test_hello_and_config_identity_and_order_are_required) ... ok\ntest_matched_prefix_and_missing_terminal_cannot_pass (test_replay_contract.ReplayContractTests.test_matched_prefix_and_missing_terminal_cannot_pass) ... ok\ntest_missing_and_empty_required_maps_are_rejected (test_replay_contract.ReplayContractTests.test_missing_and_empty_required_maps_are_rejected) ... ok\ntest_pairing_operation_id_and_dimension_failures_are_rejected (test_replay_contract.ReplayContractTests.test_pairing_operation_id_and_dimension_failures_are_rejected) ... ok\ntest_real_same_size_source_byte_drift_is_rejected_after_authority_check (test_replay_contract.ReplayContractTests.test_real_same_size_source_byte_drift_is_rejected_after_authority_check) ... ok\ntest_rebinding_a_hash_or_path_cannot_redefine_pin_authority (test_replay_contract.ReplayContractTests.test_rebinding_a_hash_or_path_cannot_redefine_pin_authority) ... ok\ntest_run_rejects_reformatted_pin_bytes_before_any_execution (test_replay_contract.ReplayContractTests.test_run_rejects_reformatted_pin_bytes_before_any_execution) ... ok\ntest_terminal_counters_must_account_for_every_observed_pair (test_replay_contract.ReplayContractTests.test_terminal_counters_must_account_for_every_observed_pair) ... ok\ntest_terminal_must_match_result_including_signed_zero (test_replay_contract.ReplayContractTests.test_terminal_must_match_result_including_signed_zero) ... ok\n\n----------------------------------------------------------------------\nRan 16 tests in 1.222s\n\nOK\n"
+      }
+    },
+    {
+      "suite": "test_trace_admission.py",
+      "methods": 6,
+      "final_status": "PASS",
+      "command": "C21J_NATIVE_RETURN=/workspace/scratch/9979d80514d6/c21hi_external_intake/native_archive/C21GHI_NATIVE_EXECUTION_20261020 python3 -m unittest discover -s /workspace/scratch/9979d80514d6/bass_cr_pinned/research/cr_c21j_native_trace_replay_20261020/tests -p test_trace_admission.py -v",
+      "actual_tool_result": {
+        "chunk_id": "0fb19f",
+        "wall_time_seconds": 0.033371601,
+        "exit_code": 0,
+        "original_token_count": 283,
+        "output": "test_authentic_manifest_admits_the_pinned_public_receipt (test_trace_admission.TraceAdmissionTests.test_authentic_manifest_admits_the_pinned_public_receipt) ... ok\ntest_cli_rejects_replaced_manifest_before_any_job_analysis (test_trace_admission.TraceAdmissionTests.test_cli_rejects_replaced_manifest_before_any_job_analysis) ... ok\ntest_counterfeit_self_consistent_manifest_cannot_replace_authority (test_trace_admission.TraceAdmissionTests.test_counterfeit_self_consistent_manifest_cannot_replace_authority) ... ok\ntest_private_inventory_payload_is_rejected_before_opening (test_trace_admission.TraceAdmissionTests.test_private_inventory_payload_is_rejected_before_opening) ... ok\ntest_same_size_changed_job_receipt_is_rejected_before_json_parsing (test_trace_admission.TraceAdmissionTests.test_same_size_changed_job_receipt_is_rejected_before_json_parsing) ... ok\ntest_unlisted_file_cannot_become_an_admitted_return_input (test_trace_admission.TraceAdmissionTests.test_unlisted_file_cannot_become_an_admitted_return_input) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.009s\n\nOK\n"
+      }
+    }
+  ],
+  "final_unique_test_methods_passed": 22,
+  "retained_test_development_history": {
+    "artifact": "/workspace/scratch/9979d80514d6/c21hi_new_work/independent_review/TRACE_ADMISSION_TEST_ATTEMPT01.json",
+    "status": "TEST_FIXTURE_ASSUMPTION_FAILURE_CORRECTED",
+    "explanation": "The first privacy probe expected one LIVE_INVENTORY manifest path; the frozen manifest has three. The test now checks each without opening any private payload. All other five initial analyzer admission tests passed.",
+    "implementation_change_needed_for_this_failure": false
+  },
+  "execution": {
+    "new_native_chemistry_calls": 0,
+    "new_IVP_solves": 0,
+    "old_physics_suite_runs": 0,
+    "manufactured_benchmark_runs": 0,
+    "full_four_case_replay_cohort_runs_by_reviewer": 0,
+    "native_process_admission_tested": false
+  },
+  "interpretation": {
+    "result": "The evidence-admission findings are closed in the identified new diagnostic versions, on the fixed captured native return.",
+    "native_cache_on_performance": "NOT_EVALUATED_BY_THIS_REVIEW",
+    "global_error_bound": null,
+    "science_HOLD_unchanged": true
+  }
+}

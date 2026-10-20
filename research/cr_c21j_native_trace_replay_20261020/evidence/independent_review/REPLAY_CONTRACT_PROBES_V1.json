@@ -1,0 +1,70 @@
+{
+  "schema": "C21J_INDEPENDENT_REPLAY_CONTRACT_PROBES_V1",
+  "source_sha256": "b9d4bd483fa624b14095bbd426fabc945659418bd7700298e14ccadac1e8189c",
+  "input_pins_sha256": "ac339fc832ccc2e4b177034151a6adcf1510d82646b0c7e04d68bfc2be7aea90",
+  "new_native_calls": 0,
+  "new_IVP_solves": 0,
+  "cases": [
+    {
+      "name": "empty_pin_maps",
+      "expected": "Reject incomplete authority/empty maps before declaring fixed-source identity",
+      "actual": {
+        "returned": []
+      }
+    },
+    {
+      "name": "contradictory_pin_metadata",
+      "expected": "Reject contradiction between configured pins and fixed source/return commits",
+      "actual": {
+        "returned": 84
+      }
+    },
+    {
+      "name": "matched_prefix_without_terminal",
+      "expected": "Reject incomplete RPC stream, including matching-prefix-only truncation",
+      "actual": {
+        "returned": 1
+      }
+    },
+    {
+      "name": "failed_terminal_result",
+      "expected": "Reject unsuccessful recorded terminal result",
+      "actual": {
+        "returned": 155
+      }
+    },
+    {
+      "name": "signed_zero_bits",
+      "expected": "Both true; IEEE signed-zero distinction is preserved",
+      "actual": {
+        "returned": {
+          "scalar_distinct": true,
+          "structure_distinct": true
+        }
+      }
+    },
+    {
+      "name": "conflicting_exact_native_replies",
+      "expected": "Reject duplicate exact requests with different replies",
+      "actual": {
+        "exception": "ReplayError",
+        "message": "INCONSISTENT_EXACT_NATIVE_REPLY"
+      }
+    },
+    {
+      "name": "missing_native_reply",
+      "expected": "Reject query absent from immutable table",
+      "actual": {
+        "exception": "ReplayError",
+        "message": "RECORDED_NATIVE_POINT_MISSING 949a9a89fbc972896a9e73aa3b23e8c9012c781b2d9b2a5daea161d7d76b63ae"
+      }
+    },
+    {
+      "name": "complete_original_rpc",
+      "expected": "155 original replies",
+      "actual": {
+        "returned": 155
+      }
+    }
+  ]
+}

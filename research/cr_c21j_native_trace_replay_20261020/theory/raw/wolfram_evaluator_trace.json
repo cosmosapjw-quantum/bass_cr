@@ -1,0 +1,27 @@
+{
+  "spec": {
+    "key": "wolfram_evaluator_trace",
+    "name": "mcp__codex_apps__wolfram_wolframlanguageevaluator",
+    "args": {
+      "code": "ClearAll[b, tau1, tau2, kap, aNeutral, hubble, en, bind]; assumptions = b > 0 && kap > 0 && aNeutral > 0 && hubble > 0 && tau2 > tau1 && Element[{b, tau1, tau2, kap, aNeutral, hubble, en, bind}, Reals]; photoDelta = FullSimplify[b kap aNeutral (Exp[-tau2]-Exp[-tau1])/hubble, Assumptions -> assumptions]; photoNonzero = FullSimplify[photoDelta < 0, Assumptions -> assumptions]; heatRatioIdentity = FullSimplify[(en-bind) photoDelta - b kap aNeutral (en-bind) (Exp[-tau2]-Exp[-tau1])/hubble]; th = 12116977100085933/10^16; ti = 14319355220068246/10^16; nh = 5604552090517245/10^17; ni = 5898441682802513/10^17; dn = 7200388237833977/10^18; <|\"photoDelta\" -> photoDelta, \"photoStrictlyNegative\" -> photoNonzero, \"heatLedgerIdentityResidual\" -> heatRatioIdentity, \"nativeInputKeyTauDerivative\" -> D[{aa, nH0, nHe0, fH, fHe1, fHe2, w}, tau1], \"timingAccounting\" -> N[<|\"IminusH_s\" -> ti-th, \"IoverH\" -> ti/th, \"H_loggedNative_fraction\" -> nh/th, \"I_loggedNative_fraction\" -> ni/ti, \"nativeKeyDuplicateCountFraction\" -> 100/823, \"nativeKeyDuplicateInterval_fractionOfI\" -> dn/ti, \"nativeKeyDuplicateInterval_fractionOfNative\" -> dn/ni, \"nativeKeyDuplicateInterval_fractionOfGap\" -> dn/(ti-th), \"IminusDuplicateLoggedNative_s\" -> ti-dn, \"IminusAllLoggedNative_s\" -> ti-ni, \"requiredFractionOfIToReachH\" -> 1-th/ti, \"gapRemainingAfterDuplicateNativeAccounting_s\" -> ti-th-dn, \"gapRemainingAfterAllNativeAccounting_s\" -> ti-th-ni|>, 25]|>",
+      "timeConstraint": 20
+    }
+  },
+  "outcome": {
+    "status": "fulfilled",
+    "value": {
+      "requested_at_utc": "2026-10-20T13:19:30.009Z",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Out[1]= <|\"photoDelta\" -> (aNeutral*b*kap*(-Cosh[tau1] + Cosh[tau2] + Sinh[tau1] - Sinh[tau2]))/hubble, \"photoStrictlyNegative\" -> Cosh[tau2] + Sinh[tau1] < Cosh[tau1] + Sinh[tau2], \"heatLedgerIdentityResidual\" -> 0, \"nativeInputKeyTauDerivative\" -> {0, 0, 0, 0, 0, 0, 0}, \"timingAccounting\" -> <|\"IminusH_s\" -> 0.2202378119982313`25., \"IoverH\" -> 1.18175969978243945379071448690097817648`25., \"H_loggedNative_fraction\" -> 0.04625371529733680684131638378500403035`25., \"I_loggedNative_fraction\" -> 0.0411920899520390628754255557964294783`25., \"nativeKeyDuplicateCountFraction\" -> 0.12150668286755771567436208991494532199`25., \"nativeKeyDuplicateInterval_fractionOfI\" -> 0.00502843048948377158373299231028480332`25., \"nativeKeyDuplicateInterval_fractionOfNative\" -> 0.12207272064463089061991938671437332237`25., \"nativeKeyDuplicateInterval_fractionOfGap\" -> 0.03269369674764023873174671427558879133`25., \"IminusDuplicateLoggedNative_s\" -> 1.424735133768990623`25., \"IminusAllLoggedNative_s\" -> 1.37295110517879947`25., \"requiredFractionOfIToReachH\" -> 0.15380428002063464929573216968662946978`25., \"gapRemainingAfterDuplicateNativeAccounting_s\" -> 0.213037423760397323`25., \"gapRemainingAfterAllNativeAccounting_s\" -> 0.16125339517020617`25.|>|>"
+          }
+        ],
+        "structuredContent": null,
+        "isError": false
+      },
+      "completed_at_utc": "2026-10-20T13:19:38.217Z"
+    }
+  }
+}

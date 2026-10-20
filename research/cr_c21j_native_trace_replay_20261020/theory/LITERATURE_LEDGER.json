@@ -1,0 +1,193 @@
+{
+  "schema": "C21J_EXACT_CACHE_LITERATURE_LEDGER_V1",
+  "created_at_utc": "2026-10-20T13:37:03.389606+00:00",
+  "question": "Which exact-input, scope, purity and error-contract conditions distinguish finite native trace memoization/replay from approximate nearby-state tabulation?",
+  "searches_and_reads": [
+    {
+      "key": "scispace_isat",
+      "tool": "mcp__codex_apps__scispace_search_papers",
+      "arguments": {
+        "searchQuestion": "What assumptions and error-control mechanisms distinguish Stephen B. Pope's 1997 in situ adaptive tabulation of chemical kinetics from exact memoization of identical floating-point inputs, especially when embedding chemistry in an adaptive ODE solver?"
+      },
+      "requested_at_utc": "2026-10-20T13:17:20.336Z",
+      "completed_at_utc": "2026-10-20T13:17:26.565Z",
+      "raw_file": "raw/scispace_isat.json",
+      "isError": false,
+      "raw_record_sha256": "648f22b8cdf81016b6df5bbf9b492a668a1433e541de643b9f9e22bee024a93b",
+      "response_json_canonical_sha256": "bba7d4acc3365eb9302b8649e0e849c6d834a12a1e8c8f404213d8daf46332ac",
+      "response_hash_serialization": "UTF-8 JSON; ensure_ascii=false, sort_keys=true, separators comma/colon; provider result object only",
+      "raw_delivery_policy": "SCRATCH_RESEARCH_ONLY_NOT_FOR_GIT_OR_DELIVERY_ZIP"
+    },
+    {
+      "key": "scispace_pope_original",
+      "tool": "mcp__codex_apps__scispace_search_papers",
+      "arguments": {
+        "searchQuestion": "Which original 1997 paper by Stephen B. Pope introduced 'Computationally efficient implementation of combustion chemistry using in situ adaptive tabulation', and what are its reaction-mapping, linear-retrieval, and tabulation-error assumptions?"
+      },
+      "requested_at_utc": "2026-10-20T13:20:34.433Z",
+      "completed_at_utc": "2026-10-20T13:20:43.213Z",
+      "raw_file": "raw/scispace_pope_original.json",
+      "isError": false,
+      "raw_record_sha256": "61806c05ae069cce829753d0f70db513cf8cfa206d5eb179bf4162704377f36b",
+      "response_json_canonical_sha256": "62399ce14f174692cba6a5b1ab7b8820a6ca3c94ce9cab5191427312d7be11e9",
+      "response_hash_serialization": "UTF-8 JSON; ensure_ascii=false, sort_keys=true, separators comma/colon; provider result object only",
+      "raw_delivery_policy": "SCRATCH_RESEARCH_ONLY_NOT_FOR_GIT_OR_DELIVERY_ZIP"
+    },
+    {
+      "key": "exa_search_exact_cache",
+      "tool": "mcp__codex_apps__exa_web_search_exa",
+      "arguments": {
+        "query": "Find primary sources or official Python documentation explaining exact function memoization with least-recently-used cache, deterministic pure functions, hashable full arguments, and why memoization should not cache functions with side effects. I am auditing an ODE callback whose full IEEE-754 state key differs from a smaller chemistry subroutine input key.",
+        "objective": "Prioritize official Python functools documentation and original memoization sources. Exclude programming tutorials, AI blogs, and generic marketing. Extract full-argument key and side-effect/purity requirements relevant to exact callback reuse.",
+        "numResults": 3
+      },
+      "requested_at_utc": "2026-10-20T13:17:20.336Z",
+      "completed_at_utc": "2026-10-20T13:17:25.039Z",
+      "raw_file": "raw/exa_search_exact_cache.json",
+      "isError": false,
+      "raw_record_sha256": "3e7e1b9f45ea4c71448261b3db7f9d0719858654d2b95ab1d586cc148c0c5dc1",
+      "response_json_canonical_sha256": "6d3c69f69033a6c884f850050c1efedd82abb167ae0064f0e76178782c033ab8",
+      "response_hash_serialization": "UTF-8 JSON; ensure_ascii=false, sort_keys=true, separators comma/colon; provider result object only",
+      "raw_delivery_policy": "SCRATCH_RESEARCH_ONLY_NOT_FOR_GIT_OR_DELIVERY_ZIP"
+    },
+    {
+      "key": "exa_search_pope_primary",
+      "tool": "mcp__codex_apps__exa_web_search_exa",
+      "arguments": {
+        "query": "Stephen B Pope 1997 Computationally efficient implementation of combustion chemistry using in situ adaptive tabulation PDF primary original paper Cornell GACM 1997 207 220",
+        "objective": "Find the original 1997 Combustion Theory and Modelling paper or author-hosted PDF. Extract reaction mapping local linear approximation and user-specified error tolerance; no global trajectory-error or exact memoization claims. Exclude third-party summaries.",
+        "numResults": 3
+      },
+      "requested_at_utc": "2026-10-20T13:19:30.009Z",
+      "completed_at_utc": "2026-10-20T13:19:34.570Z",
+      "raw_file": "raw/exa_search_pope_primary.json",
+      "isError": false,
+      "raw_record_sha256": "0d86ade3aba02ea472e5ba454868ed245f6078dc5e313679bb61fa5d8989b160",
+      "response_json_canonical_sha256": "65d750f947605da50da6bbe6f2b7ae00b86bef46ad8788c210722a0c50302e2d",
+      "response_hash_serialization": "UTF-8 JSON; ensure_ascii=false, sort_keys=true, separators comma/colon; provider result object only",
+      "raw_delivery_policy": "SCRATCH_RESEARCH_ONLY_NOT_FOR_GIT_OR_DELIVERY_ZIP"
+    },
+    {
+      "key": "exa_fetch_python",
+      "tool": "mcp__codex_apps__exa_web_fetch_exa",
+      "arguments": {
+        "urls": [
+          "https://docs.python.org/3/library/functools.html"
+        ],
+        "maxCharacters": 24000
+      },
+      "requested_at_utc": "2026-10-20T13:19:30.009Z",
+      "completed_at_utc": "2026-10-20T13:19:31.460Z",
+      "raw_file": "raw/exa_fetch_python.json",
+      "isError": false,
+      "raw_record_sha256": "6fe264b8757cfff6c96a63a3bfe9335027419cd56a1d0100d2704733ef8cc89b",
+      "response_json_canonical_sha256": "8425a6ff9be0ce9581f916b732da58b7149a3ffba593ead5f5294ac658bfd98a",
+      "response_hash_serialization": "UTF-8 JSON; ensure_ascii=false, sort_keys=true, separators comma/colon; provider result object only",
+      "raw_delivery_policy": "SCRATCH_RESEARCH_ONLY_NOT_FOR_GIT_OR_DELIVERY_ZIP"
+    },
+    {
+      "key": "exa_fetch_pope",
+      "tool": "mcp__codex_apps__exa_web_fetch_exa",
+      "arguments": {
+        "urls": [
+          "https://tcg.mae.cornell.edu/pubs/Pope_CTM_97.pdf",
+          "https://docs.python.org/3.12/library/functools.html"
+        ],
+        "maxCharacters": 42000
+      },
+      "requested_at_utc": "2026-10-20T13:20:34.433Z",
+      "completed_at_utc": "2026-10-20T13:20:35.743Z",
+      "raw_file": "raw/exa_fetch_pope.json",
+      "isError": false,
+      "raw_record_sha256": "399eeac7047f2d22b99b9d98d36061ebf9de59efd49cb0d2311ce66532ce72a7",
+      "response_json_canonical_sha256": "be5b64fd393d7c60ffbde89492c167975d3d077103760f02ee6f570518c4f7ad",
+      "response_hash_serialization": "UTF-8 JSON; ensure_ascii=false, sort_keys=true, separators comma/colon; provider result object only",
+      "raw_delivery_policy": "SCRATCH_RESEARCH_ONLY_NOT_FOR_GIT_OR_DELIVERY_ZIP"
+    }
+  ],
+  "counts": {
+    "SciSpace_search_calls": 2,
+    "SciSpace_results_returned_per_call": 10,
+    "Exa_search_calls": 2,
+    "Exa_ranked_results_requested_per_call": 3,
+    "Exa_fetch_calls": 2,
+    "accepted_primary_sources": 2
+  },
+  "accepted_primary_sources": [
+    {
+      "id": "P1",
+      "kind": "official documentation",
+      "title": "functools — Higher-order functions and operations on callable objects",
+      "version_path": "3.12",
+      "url": "https://docs.python.org/3.12/library/functools.html",
+      "actual_read_raw": "raw/exa_fetch_pope.json",
+      "read_sections": [
+        "lru_cache; cache; suitability of memoization for repeated identical arguments and side-effect/impurity limits"
+      ],
+      "used_for": "Conceptual exact memoization only; no attribution of the project binary64 byte key or live guard proof to Python docs.",
+      "not_used_for": [
+        "Project-specific cache key identity",
+        "Native purity proof",
+        "Adaptive ODE trajectory error bound",
+        "Measured performance"
+      ]
+    },
+    {
+      "id": "P2",
+      "kind": "original research paper, author-hosted PDF",
+      "authors": [
+        "S. B. Pope"
+      ],
+      "title": "Computationally efficient implementation of combustion chemistry using in situ adaptive tabulation",
+      "journal": "Combustion Theory and Modelling",
+      "volume": 1,
+      "year": 1997,
+      "pages": "41–63",
+      "url": "https://tcg.mae.cornell.edu/pubs/Pope_CTM_97.pdf",
+      "doi": "10.1080/713665229",
+      "alternate_publisher_doi": "10.1088/1364-7830/1/1/006",
+      "SciSpace_id": "334grv4o21",
+      "SciSpace_rank_in_second_query": 4,
+      "actual_read_raw": "raw/exa_fetch_pope.json",
+      "read_sections": [
+        "Introduction and reaction-mapping definition",
+        "Section 4 in situ adaptive tabulation",
+        "Local linear approximation equation (49)",
+        "Accuracy region/retrieval scaled-error conditions"
+      ],
+      "fetch_character_cap_per_url": 42000,
+      "read_limit": "PDF fetch is capped; no claim to have read text beyond returned content. Relevant sections and equation (49) are in the returned text.",
+      "used_for": "Different nearby composition queries use a local linear reaction-mapping approximation under a retrieval-error criterion; comparison to literal identical-input reuse.",
+      "not_used_for": [
+        "Transfer of original combustion speedup to BASS",
+        "Global BASS ODE error bound",
+        "Literature novelty or a new no-go claim"
+      ]
+    }
+  ],
+  "coverage_and_nonuse": [
+    {
+      "query": "scispace_isat",
+      "finding": "Returned 10 candidate papers but not the original title; broad/derivative results not used as authority.",
+      "followup": "Exact-title/author question located original paper; then original author PDF actually read using Exa."
+    },
+    {
+      "query": "exa_fetch_python",
+      "finding": "Unversioned /3/ documentation can move between releases; kept as retrieval history.",
+      "followup": "Fetched /3.12/ official documentation in exa_fetch_pope and used that version path."
+    },
+    {
+      "query": "exa_search_pope_primary",
+      "finding": "Search text included a mistaken extra bibliographic fragment (GACM 1997 207 220); returned actual primary PDF was checked and correct journal/page metadata adopted.",
+      "followup": "Correct metadata is Combustion Theory and Modelling 1 (1997) 41–63."
+    }
+  ],
+  "novelty_claim": "NONE: source-specific trace/cost diagnosis; no assertion that memoization, LRU stack properties, or ISAT distinction are new mathematics.",
+  "new_strong_no_go_claim": false,
+  "publication_policy": {
+    "publish_this_ledger": true,
+    "include_third_party_fulltext_or_bulk_abstract_raw_in_git_or_delivery_zip": false,
+    "raw_locations_mean": "Private scratch audit locations, not a promise of inclusion in the public repository or deliverable archive.",
+    "publishable_summary": "Two source metadata records, queries/times, response identities and concise adopted-claim summaries."
+  }
+}

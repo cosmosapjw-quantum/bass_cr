@@ -1,0 +1,27 @@
+{
+  "spec": {
+    "key": "wolfram_sign_refinement",
+    "name": "mcp__codex_apps__wolfram_wolframlanguageevaluator",
+    "args": {
+      "code": "ClearAll[d, t, b, k, a, h]; <|\"positiveShiftExpCondition\" -> Reduce[d > 0 && 1-Exp[-d] > 0, d, Reals], \"expShiftIdentity\" -> FullSimplify[Exp[-(t+d)]-Exp[-t]-Exp[-t]*(Exp[-d]-1), Assumptions -> Element[{t,d},Reals]], \"normalizedPhotoDifferenceAtPositiveUnitParameters\" -> FullSimplify[Exp[-(0+Log[2])]-Exp[0]], \"photoDifferenceDerivativeWithRespectToShift\" -> D[Exp[-d]-1,d], \"exactHalfPopulationExample\" -> {Exp[0],Exp[-Log[2]]}|>",
+      "timeConstraint": 15
+    }
+  },
+  "outcome": {
+    "status": "fulfilled",
+    "value": {
+      "requested_at_utc": "2026-10-20T13:20:34.433Z",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Out[1]= <|\"positiveShiftExpCondition\" -> d > 0, \"expShiftIdentity\" -> 0, \"normalizedPhotoDifferenceAtPositiveUnitParameters\" -> -1/2, \"photoDifferenceDerivativeWithRespectToShift\" -> -E^(-d), \"exactHalfPopulationExample\" -> {1, 1/2}|>"
+          }
+        ],
+        "structuredContent": null,
+        "isError": false
+      },
+      "completed_at_utc": "2026-10-20T13:20:43.373Z"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "schema": "C21J_INDEPENDENT_REPLAY_REVIEW_V1",
+  "reviewed_source_sha256": "b9d4bd483fa624b14095bbd426fabc945659418bd7700298e14ccadac1e8189c",
+  "reviewed_input_pins_sha256": "ac339fc832ccc2e4b177034151a6adcf1510d82646b0c7e04d68bfc2be7aea90",
+  "created_at_utc": "2026-10-20T13:25:41.352496+00:00",
+  "status": "CHANGES_REQUESTED_SCOPED_CONTRACTS",
+  "existing_valid_replay_status": "Not contradicted by these findings; actual pinned/default input report already PASS_SCOPED",
+  "findings": [
+    {
+      "id": "C9-J1",
+      "priority": "P2",
+      "target": "verify_inputs and --input-pins / report source identity",
+      "evidence": "Empty maps returned []; contradictory source/return metadata returned84verified paths. REPLAY_CONTRACT_PROBES_V1.json cases1-2.",
+      "impact": "Caller-selected pins can omit validation or claim an unrelated snapshot while report prints fixed source/return SHAs.",
+      "minimal_fix": "Validate authority, schema, expected source/return snapshot and exact required file coverage; bind the vetted pin file/records to immutable published source and return, include its identity in report.",
+      "status": "OPEN"
+    },
+    {
+      "id": "C9-J2",
+      "priority": "P2",
+      "target": "rpc_pairs and consume_saved_segment",
+      "evidence": "Matched prefix without terminal accepted1pair; terminal success/ok=false accepted155pairs. REPLAY_CONTRACT_PROBES_V1.json cases3-4.",
+      "impact": "Parser does not distinguish complete successful RPC stream from truncated or failed stream; trusted current file hashes protect this particular run but the reusable replay contract is under-checked.",
+      "minimal_fix": "Require exactly one valid hello/config, ordered request/response pairs, one successful terminal and EOF; verify recorded config and terminal result against the separate pinned segment files.",
+      "status": "OPEN"
+    }
+  ],
+  "checked_valid_properties": [
+    "Exact native ASCII request keys and duplicate-success reply consistency",
+    "Missing reply rejection",
+    "Reuse of pinned NativeMicro call/parser/checks without process constructor",
+    "No saved trace presented as a fresh ODE solve in exported report",
+    "scipy.integrate.solve_ivp and subprocess.Popen temporarily forbidden by main run",
+    "Shape+binary64 byte comparison includes signed zero",
+    "Three core module origins guarded by inherited H private_reference",
+    "Immutable-table admission distinguished from live native-provider admission",
+    "Saved endpoints consumed to independently reconstruct only selected physical summaries",
+    "Current report keeps new_native_calls/new_IVP_solves at0 and global_error_bound null"
+  ],
+  "validation_actions": {
+    "probes": 8,
+    "whole_replay_runs": 0,
+    "old_suites": 0,
+    "native_calls": 0,
+    "IVP_solves": 0,
+    "root_source_edits": 0
+  },
+  "artifacts": [
+    "replay_contract_probes_v1.py",
+    "REPLAY_CONTRACT_PROBES_V1.json",
+    "prefix_without_terminal_v1.jsonl",
+    "failed_terminal_v1.jsonl",
+    "reviewed_replay_callbacks_v1.py"
+  ]
+}

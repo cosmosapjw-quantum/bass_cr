@@ -1,0 +1,38 @@
+{
+  "schema": "C21J_PACKET_STATIC_VALIDATION_V1",
+  "result": "PASS_STATIC_ONLY",
+  "methods": [
+    "bash -n run_exact_once.sh",
+    "Read-only Python AST, frozen source/authority/archive hash checks"
+  ],
+  "source_files_changed_by_validation": false,
+  "shell_launcher_executed": false,
+  "prelaunch_executed": false,
+  "frozen_runner_executed": false,
+  "native_processes_started": 0,
+  "native_chemistry_calls": 0,
+  "ode_integrations": 0,
+  "passes": {
+    "shell_syntax": true,
+    "corrected_static_check": true
+  },
+  "preserved_check_attempts": [
+    {
+      "path": "validation/raw/bash_n.tool_result.json",
+      "meaning": "Actual exec_command result; syntax only"
+    },
+    {
+      "path": "validation/raw/static_check_attempt_01.tool_result.json",
+      "meaning": "The analysis-only flag extraction regex omitted digits, falsely parsed --c21g-unit as --c. The launcher was not executed. This validator defect was corrected; no runtime source changed."
+    },
+    {
+      "path": "validation/raw/static_check_attempt_02.tool_result.json",
+      "meaning": "Corrected digit-aware flag extraction and the final source/policy/artifact checks passed"
+    }
+  ],
+  "output_stream_scope": "exec_command supplied one output field. Its bytes are preserved as combined_output.txt; separate stdout/stderr are not claimed.",
+  "actual_exact_native_execution": "NOT_RUN",
+  "actual_exact_native_performance": "NOT_EVALUATED",
+  "ncp_current_availability": "NOT_OBSERVED_IN_THIS_TASK",
+  "global_error_bound": null
+}

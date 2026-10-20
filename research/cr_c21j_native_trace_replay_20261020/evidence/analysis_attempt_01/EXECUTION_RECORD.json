@@ -1,0 +1,28 @@
+{
+  "schema": "C21HI_TRACE_ANALYSIS_EXECUTION_RECORD_V1",
+  "recorded_at_utc": "2026-10-20T13:25:49.912290+00:00",
+  "scope": "Only new saved-native trace analysis and focused tests; no ODE, native process, old suite, or manufactured benchmark",
+  "executions": [
+    {
+      "command": "python3 -m unittest -v test_native_trace.py",
+      "cwd": "/workspace/scratch/9979d80514d6/c21hi_new_work/native_trace_analysis",
+      "exit_code": 0,
+      "tests_run": 9,
+      "test_framework_reported_seconds": 0.002,
+      "result": "PASS_SCOPED",
+      "source_sha256": {
+        "analyze_native_trace.py": "74c11b69adccc77fae001e6243aadbde478229594d705261d1125748ce50f16f",
+        "test_native_trace.py": "cf0eb52627a89525910a77498e4cc8f928dd592dc8a060c1240d1265845d14f7"
+      }
+    },
+    {
+      "command": "python3 analyze_native_trace.py --archive /workspace/scratch/9979d80514d6/c21hi_external_intake/native_archive/C21GHI_NATIVE_EXECUTION_20261020 --source-root /workspace/scratch/9979d80514d6/bass_cr_pinned/research --out /workspace/scratch/9979d80514d6/c21hi_new_work/native_trace_analysis/result_20261020",
+      "cwd": "/workspace/scratch/9979d80514d6/c21hi_new_work/native_trace_analysis",
+      "exit_code": 0,
+      "tool_reported_wall_seconds": 0.34047583,
+      "result": "PASS_SCOPED",
+      "native_calls_executed_by_analysis": 0,
+      "result_file": "result_20261020/ANALYSIS.json"
+    }
+  ]
+}
