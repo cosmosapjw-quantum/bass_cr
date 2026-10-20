@@ -4,7 +4,7 @@
 
 이 단위는 C21H의 원 RHS·event driver·정확한 Y=0 축소·15개 장부·오차 척도를 그대로 사용하면서, cohort Jacobian의 Python 반복과 중복된 원 RHS 계산을 줄인다. 실제 구현은 `optimized_adapter.py`, native 성공값 재사용의 출처·수명 계약은 `native_cache_contract.py`, 실행 연결은 `run_optimized_pilot.py`다. 별도 `block_solver/`에는 구조화 JVP와 Schur 선형해법을 구현했다. 이 Rust 커널은 현재 C21H backend에는 연결하지 않았다.
 
-현재 게시 상태의 권위는 `PUBLICATION_RECEIPT.json`, 보존 상태는 `BACKUP_RECEIPT.json`과 최종 외부 delivery receipt, 연구·실행 상태는 `DAG_C21I.json`이다. 로컬 commit과 원격 GitHub content commit을 구분한다. C21H의 최신 `create_tree` 응답은 `user rejected MCP tool call`이었으며, 상세 이유나 tree SHA가 없었다. C21I의 원격 write는 시도하지 않았다.
+현재 게시 상태의 권위는 `PUBLICATION_RECEIPT.json`, 보존 상태는 `BACKUP_RECEIPT.json`과 최종 외부 delivery receipt, 연구·실행 상태는 `DAG_C21I.json`이다. 로컬 commit과 원격 GitHub content commit을 구분한다. 현재 C21H/PR85 content `40ea4bbd5b2eb1b0c82f8ec9d5fdc1c6324e44f8`와 C21I/PR86 content `fe6bbaec2de5032b938aed0713623b9618ba70e6`의 실제 게시를 확인했다. 이전 `user rejected MCP tool call`과 미게시 기록은 해당 시점의 역사이며 유지한다. 새 C10은 문서 호환·게시·보존 마감만 수행했고 runtime 및 과학 실행을 추가하지 않았다.
 
 `native_chemistry=NOT_RUN`, `native_performance=NOT_EVALUATED`, `global_error_bound=null`이다. Full48, source-age/spectral/angular, Case B, signed Bianchi, full EoR, standalone Grackle driver parity의 HOLD를 유지한다.
 

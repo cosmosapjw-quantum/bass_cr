@@ -2,7 +2,7 @@
 
 ## 현재 상태와 역할
 
-이 단위의 실제 게시 여부는 `PUBLICATION_RECEIPT.json`, runtime identity는 `EXECUTION_MANIFEST.json`, 완료 검증은 `VALIDATION_SUMMARY.json`, 연구·native 의무는 `DAG_C21I.json`에서 읽는다. 최신 외부 delivery receipt가 제작 시점 ZIP의 pending 상태를 대체한다. **현재 C21H의 최신 create_tree는 user rejected MCP tool call이었고, C21H/I remote content commit·PR은 확인되지 않았다.** 이 문서는 게시 완료 뒤 실행할 준비된 계약이며 `status=PUBLISHED` guard를 제거하는 허가가 아니다.
+이 단위의 실제 게시 여부는 `PUBLICATION_RECEIPT.json`, runtime identity는 `EXECUTION_MANIFEST.json`, 완료 검증은 `VALIDATION_SUMMARY.json`, 연구·native 의무는 `DAG_C21I.json`에서 읽는다. 최신 외부 delivery receipt가 제작 시점 ZIP의 pending 상태를 대체한다. **현재 C21H/PR85 content `40ea4bbd5b2eb1b0c82f8ec9d5fdc1c6324e44f8`, C21I/PR86 content `fe6bbaec2de5032b938aed0713623b9618ba70e6`가 실제 게시됐다.** 최신 두 publication receipt를 content checkout 밖에 보존해 기존 `status=PUBLISHED` guard와 함께 사용한다. 과거 `user rejected MCP tool call`은 역사 기록이며 실제 게시 성공의 근거로 해석하지 않는다. H/I native chemistry는 계속 `NOT_RUN`이다.
 
 ```text
 ROLE=C21I_BOUNDED_NATIVE_EXECUTOR
