@@ -112,3 +112,19 @@ source remains the published C21I content, not this diagnostic's source.
 Use the separately supplied NCP packet and the existing H/I publication guards.
 G's reference ladder remains an independent contract. The completed H and I
 base/FD-half jobs do not need repeating for this node.
+
+## Publication observation — 2026-10-20
+
+Published as [draft PR88](https://github.com/cosmosapjw-quantum/bass_cr/pull/88),
+content commit `55e6569a8f816e13babe4165f0fef3655f7299a3`, directly after PR87
+head `d3eaf596e46be4f994723fb742237a7399c290ed`. The 78 original content
+blobs matched their expected paths, modes, byte counts and Git hashes.
+See `publication/CONTENT_PUBLICATION_RECEIPT.json`. The content manifest
+binds that fixed content commit. Later document changes use explicit base
+SHA256 entries in `publication/DELTA_MANIFEST_D1.json`; they do not reapply
+the original scientific source, tests, native raw or prior execution history.
+
+A scratch loss after validation was recovered from the retained exact
+content bytes and independently pinned inputs. All 78 SHA256 and Git blob
+identities matched, with zero analysis, test, IVP or native reruns for that
+recovery. The publication records preserve the actual recovery evidence.

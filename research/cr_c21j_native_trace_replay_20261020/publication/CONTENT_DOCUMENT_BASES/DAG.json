@@ -1,0 +1,188 @@
+{
+  "schema": "C21J_RESEARCH_DAG_V1",
+  "as_of_utc": "2026-10-20T13:52:30.839616+00:00",
+  "state_role": "Research completion before publication; later publication/backup receipt advances only those axes.",
+  "source_commit": "fe6bbaec2de5032b938aed0713623b9618ba70e6",
+  "native_return_commit": "d3eaf596e46be4f994723fb742237a7399c290ed",
+  "nodes": [
+    {
+      "id": "C21F_EXISTING_PUBLICATION",
+      "depends_on": [],
+      "execution": "REUSED_EXISTING_COMPLETE",
+      "science": "EXISTING_HOLD",
+      "performance": "EXISTING_VERDICT",
+      "global_error_bound": null,
+      "publication": "PUBLISHED_DRAFT",
+      "backup": "REUSED_EXISTING_RECEIPTS"
+    },
+    {
+      "id": "C21G_INDEPENDENT_REFERENCE",
+      "depends_on": [
+        "C21F_EXISTING_PUBLICATION"
+      ],
+      "execution": "NOT_RUN_REFERENCE_8_PLUS_CONDITIONAL_4",
+      "science": "HOLD",
+      "performance": "NOT_EVALUATED",
+      "global_error_bound": null,
+      "publication": "PUBLISHED_CONTRACT",
+      "backup": "REUSED_EXISTING_RECEIPTS",
+      "automatic_submission": false
+    },
+    {
+      "id": "C21I_IMPLEMENTATION_AND_MANUFACTURED",
+      "depends_on": [
+        "C21F_EXISTING_PUBLICATION"
+      ],
+      "execution": "REUSED_COMPLETE_32_MANUFACTURED_PLUS_2_FD_NATIVE_ZERO",
+      "science": "SCOPED_TESTS_REUSED",
+      "performance": "SPEEDUP_NOT_ESTABLISHED",
+      "global_error_bound": null,
+      "publication": "PUBLISHED_DRAFT_PR86",
+      "backup": "REUSED_THREE_PROVIDER_CLOSEOUT"
+    },
+    {
+      "id": "PR87_H_COMMON_IC_NATIVE",
+      "depends_on": [
+        "C21I_IMPLEMENTATION_AND_MANUFACTURED"
+      ],
+      "execution": "COMPLETE_HISTORICAL_823_NATIVE_CALLS",
+      "science": "COMMON_IC_SCOPED_ONLY",
+      "performance": "SINGLE_OBSERVATION",
+      "global_error_bound": null,
+      "publication": "PUBLISHED_DRAFT_PR87",
+      "backup": "THREE_STORES_AVAILABLE_WITH_NEW_LIBRARY_COPY"
+    },
+    {
+      "id": "PR87_I_VECTORIZED_NATIVE",
+      "depends_on": [
+        "C21I_IMPLEMENTATION_AND_MANUFACTURED",
+        "PR87_H_COMMON_IC_NATIVE"
+      ],
+      "execution": "COMPLETE_HISTORICAL_823_NATIVE_CALLS",
+      "science": "COMMON_IC_SCOPED_ONLY",
+      "performance": "SPEEDUP_NOT_ESTABLISHED",
+      "global_error_bound": null,
+      "publication": "PUBLISHED_DRAFT_PR87",
+      "backup": "THREE_STORES_AVAILABLE_WITH_NEW_LIBRARY_COPY"
+    },
+    {
+      "id": "PR87_I_VECTORIZED_FD_HALF",
+      "depends_on": [
+        "PR87_I_VECTORIZED_NATIVE"
+      ],
+      "execution": "COMPLETE_HISTORICAL_823_NATIVE_CALLS",
+      "science": "FD_SENSITIVITY_OBSERVED_NOT_ERROR_BOUND",
+      "performance": "SINGLE_OBSERVATION",
+      "global_error_bound": null,
+      "publication": "PUBLISHED_DRAFT_PR87",
+      "backup": "THREE_STORES_AVAILABLE_WITH_NEW_LIBRARY_COPY"
+    },
+    {
+      "id": "C21J_FULL_TRACE_ANALYSIS",
+      "depends_on": [
+        "PR87_H_COMMON_IC_NATIVE",
+        "PR87_I_VECTORIZED_NATIVE",
+        "PR87_I_VECTORIZED_FD_HALF"
+      ],
+      "execution": "COMPLETE_SAVED_TRACE_ONLY",
+      "science": "PASS_SCOPED_69_OF_823_FULL_KEY_HITS",
+      "performance": "OPPORTUNITY_ONLY",
+      "global_error_bound": null,
+      "publication": "PENDING_CONTENT_PUBLICATION",
+      "backup": "PENDING_NEW_DELIVERY_ARCHIVE",
+      "new_native_calls": 0,
+      "new_IVP_solves": 0
+    },
+    {
+      "id": "C21J_EXACT_CALLBACK_REPLAY",
+      "depends_on": [
+        "C21J_FULL_TRACE_ANALYSIS",
+        "C21I_IMPLEMENTATION_AND_MANUFACTURED"
+      ],
+      "execution": "COMPLETE_FOUR_SAVED_CASES",
+      "science": "PASS_SCOPED_REPLY_BITS_FD_NODES_AND_RECONSTRUCTION",
+      "performance": "NOT_A_NATIVE_BENCHMARK",
+      "global_error_bound": null,
+      "publication": "PENDING_CONTENT_PUBLICATION",
+      "backup": "PENDING_NEW_DELIVERY_ARCHIVE",
+      "new_native_calls": 0,
+      "new_IVP_solves": 0
+    },
+    {
+      "id": "C21J_FOCUSED_ADMISSION_REVIEW",
+      "depends_on": [
+        "C21J_FULL_TRACE_ANALYSIS",
+        "C21J_EXACT_CALLBACK_REPLAY"
+      ],
+      "execution": "COMPLETE_9_RECONSTRUCTION_16_RPC_6_ARCHIVE_TEST_METHODS",
+      "science": "PASS_SCOPED_J1_J2_J3_CLOSED",
+      "performance": "NOT_EVALUATED",
+      "global_error_bound": null,
+      "publication": "PENDING_CONTENT_PUBLICATION",
+      "backup": "PENDING_NEW_DELIVERY_ARCHIVE",
+      "repeated_nine_test_capture_is_not_nine_more_unique_tests": true
+    },
+    {
+      "id": "C21J_SELECTIVE_NATIVE_EXACT_BASE",
+      "depends_on": [
+        "C21J_FOCUSED_ADMISSION_REVIEW",
+        "PR87_I_VECTORIZED_NATIVE"
+      ],
+      "execution": "NOT_RUN",
+      "science": "HOLD",
+      "performance": "NOT_EVALUATED",
+      "global_error_bound": null,
+      "publication": "PREPARED_PACKET_PENDING_PUBLICATION",
+      "backup": "PENDING_NEW_DELIVERY_ARCHIVE",
+      "current_ncp_resources": "NOT_OBSERVED_THIS_TURN",
+      "maximum_new_jobs": 1,
+      "source_commit": "fe6bbaec2de5032b938aed0713623b9618ba70e6",
+      "selected": "common_ic/vigilode-rodas5p/vectorized_exact/base"
+    },
+    {
+      "id": "C21J_EXACT_FD_HALF",
+      "depends_on": [
+        "C21J_SELECTIVE_NATIVE_EXACT_BASE"
+      ],
+      "execution": "NOT_RUN_NOT_AUTOMATICALLY_SUBMITTED",
+      "science": "HOLD",
+      "performance": "NOT_EVALUATED",
+      "global_error_bound": null,
+      "publication": "EXISTING_MATCHING_MODE_PARENT_CONTRACT_REUSED",
+      "backup": "NOT_APPLICABLE_UNRUN",
+      "requires_matching_exact_complete_base": true
+    }
+  ],
+  "holds": [
+    "Full48",
+    "full native MD14 source matrix",
+    "source-age convergence",
+    "spectral convergence",
+    "angular convergence",
+    "Case B",
+    "signed Bianchi",
+    "full EoR",
+    "standalone full-driver parity"
+  ],
+  "preservation": {
+    "CPU55": "PROTECTED",
+    "original_source_test_raw": "UNCHANGED",
+    "old_failures_and_historical_NOT_PUBLISHED": "PRESERVED",
+    "C21G_independence": true,
+    "automatic_merge": false,
+    "force_push": false,
+    "global_error_bound": null
+  },
+  "publication": {
+    "status": "PENDING_CONTENT_PUBLICATION",
+    "content_commit": null,
+    "document_head": null,
+    "pr": null
+  },
+  "backup": {
+    "status": "PENDING_NEW_DELIVERY_ARCHIVE",
+    "create_only": true,
+    "native_return_third_store": "COMPLETE_NEW_LIBRARY_OBJECT"
+  },
+  "global_error_bound": null
+}
