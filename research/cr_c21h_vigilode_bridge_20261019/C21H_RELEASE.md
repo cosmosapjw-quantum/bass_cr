@@ -1,6 +1,8 @@
 # C21H release: 원본 RHS를 재사용하는 두 Rust stiff 적분 경로
 
-> 현재 게시 중단: 새 명시적 push 지시 후의 create_tree594개 재시도도 user rejected MCP tool call을 반환했고 tree SHA가 없었다. commit·branch·PR 생성은 실행하지 않았다. 최신 상태는 `PUBLICATION_RECEIPT.json`을 따른다. 원래 8개 runtime source는 변경하지 않았다. 현재 환경의 locked 실제 재컴파일과 복원 근거는 새 영수증에 보존하며 native chemistry/NCP는 NOT_RUN이다.
+> 현재 게시 완료: C21H는 draft PR85, content commit `40ea4bbd5b2eb1b0c82f8ec9d5fdc1c6324e44f8`로 실제 게시됐다. 최신 `PUBLICATION_RECEIPT.json`의 content commit과 문서 head를 구분한다. H8 source 및 실행 manifest는 동일하며 native chemistry/NCP는 `NOT_RUN`이다. 새 문서 변경분의 백업 ACK는 `C21HI_PUBLICATION_CLOSEOUT_RECEIPT_20261020.json`가 기록한다.
+
+> 역사 기록 — 게시 완료 이전의 중단: 새 명시적 push 지시 후의 create_tree594개 재시도도 user rejected MCP tool call을 반환했고 tree SHA가 없었다. commit·branch·PR 생성은 실행하지 않았다. 최신 상태는 `PUBLICATION_RECEIPT.json`을 따른다. 원래 8개 runtime source는 변경하지 않았다. 현재 환경의 locked 실제 재컴파일과 복원 근거는 새 영수증에 보존하며 native chemistry/NCP는 NOT_RUN이다.
 
 > 역사 기록 — 재지시 이전의 2026-10-20 게시 요청: 새 create_tree도 `user rejected MCP tool call`을 반환했다. 원격 tree SHA·commit·branch·PR은 확인되지 않았고 현재 게시 상태는 `PUBLICATION_RECEIPT.json`을 따른다. 원 과학 source·검증은 유지되며 최신 실행/복구 증거는 별도 create-only 백업에 보존한다.
 ## 현재 판정
