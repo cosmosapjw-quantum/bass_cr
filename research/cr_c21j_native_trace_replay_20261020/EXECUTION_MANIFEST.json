@@ -1,0 +1,71 @@
+{
+  "schema": "C21J_EXECUTION_MANIFEST_V1",
+  "task": "cr_c21j_native_trace_replay_20261020",
+  "status": "COMPLETE_SCOPED_DIAGNOSTIC_EXECUTION",
+  "native_execution_source_commit": "fe6bbaec2de5032b938aed0713623b9618ba70e6",
+  "return_document_head": "d3eaf596e46be4f994723fb742237a7399c290ed",
+  "runtime_files": {
+    "analyze_native_trace.py": {
+      "bytes": 30150,
+      "sha256": "e2d8fff3acf4a867391de7247781d2ffe6d3a93ed0ba5c78b26876b911c00b9c",
+      "git_blob_sha1": "06e00ab531975d038b51bb523e5d1b251f17fdba"
+    },
+    "replay_callbacks.py": {
+      "bytes": 20173,
+      "sha256": "7c855b9983c575042a18754687696a039bef31f5711c455f774b70c03bae52c1",
+      "git_blob_sha1": "69813a3c3d046b2aa6aaf165a123db6f2da504f3"
+    },
+    "INPUT_PINS.json": {
+      "bytes": 16640,
+      "sha256": "ac339fc832ccc2e4b177034151a6adcf1510d82646b0c7e04d68bfc2be7aea90",
+      "git_blob_sha1": "2d67d5c6cc69c97619b3f3b7e15fcb2509fab6c5"
+    },
+    "ncp/run_exact_once.sh": {
+      "bytes": 4990,
+      "sha256": "eebc27e9b2863d6b6aad99cbc88e01ca1f5b4a6d80de8ef8de094fd872069e0f",
+      "git_blob_sha1": "c2f70e8e75a01aa1ec5b664c1f1dc957ce223a4c"
+    }
+  },
+  "test_files": {
+    "tests/test_native_trace.py": {
+      "bytes": 5753,
+      "sha256": "cf0eb52627a89525910a77498e4cc8f928dd592dc8a060c1240d1265845d14f7",
+      "git_blob_sha1": "8b2e1790fd5bd53210f30e92eb5598344afe7a0b"
+    },
+    "tests/test_replay_contract.py": {
+      "bytes": 13916,
+      "sha256": "97c42818b0fdd35c49a02eb50614213f0a2856c8172d2c8ed6c0c9c3260d2104",
+      "git_blob_sha1": "8651aa988ee5f771d0de4514d36f9f36a1471831"
+    },
+    "tests/test_trace_admission.py": {
+      "bytes": 4963,
+      "sha256": "96fad6c518d77bf7a6509cd5b0d3b2c16ec5d62ec463e98be1e2f3f5ea096756",
+      "git_blob_sha1": "f5467fcf9c2792e041d92920bd9c444e63b3423b"
+    }
+  },
+  "new_native_calls": 0,
+  "new_IVP_solves": 0,
+  "executions": [
+    {
+      "kind": "SAVED_TRACE_ANALYSIS",
+      "status": "PASS_SCOPED",
+      "report": "evidence/analysis_attempt_02/ANALYSIS.json"
+    },
+    {
+      "kind": "CALLBACK_REPLAY",
+      "status": "PASS_SCOPED",
+      "report": "evidence/replay_attempt_02/REPLAY_REPORT.json"
+    },
+    {
+      "kind": "NCP_LAUNCHER",
+      "status": "STATIC_VALIDATION_ONLY_NOT_EXECUTED",
+      "report": "ncp/STATIC_VALIDATION_RECEIPT.json"
+    }
+  ],
+  "validation_summary": "VALIDATION_SUMMARY.json",
+  "global_error_bound": null,
+  "whole_native_return_archive_hash_verified_at_intake": true,
+  "source_files_unchanged": true,
+  "historical_attempts_retained": true,
+  "scientific_runtime_code_rewrite": false
+}

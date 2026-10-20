@@ -1,0 +1,208 @@
+{
+  "schema": "C21J_NATIVE_TRACE_THEORY_R_LOOP_V1",
+  "created_at_utc": "2026-10-20T13:37:03.389606+00:00",
+  "unit": "Finite native trace exact RHS cache conditions, constructive diagnosis and cost interpretation",
+  "parent_task": "/root",
+  "agent": "/root/external_delta_intake",
+  "stages": [
+    {
+      "stage": "R1",
+      "title": "연구 위치·계약",
+      "status": "COMPLETE_SCOPED",
+      "new": [
+        "PR87 actual native trace로 exact-mode 판단 범위를 유한 trace, reply equality, timing 해석으로 한정"
+      ],
+      "reused": [
+        "원 물리·event·Y=0·장부·오차계약 및 사용자 권한"
+      ],
+      "evidence": [
+        "NATIVE_TRACE_EXACT_CACHE_NOTE_KO.md sections 1–2",
+        "SOURCE_IDENTITY.json"
+      ]
+    },
+    {
+      "stage": "R2",
+      "title": "근거·재사용",
+      "status": "COMPLETE_SCOPED",
+      "new": [
+        "SciSpace original-paper 식별",
+        "Exa official/author source 실제 읽기",
+        "새 native full trace/timer 원자료 연결"
+      ],
+      "reused": [
+        "C21I prior report section 4의 비용식",
+        "기존 Schur, exact-key/guard/copy 구현 및 focused/manufactured 결과",
+        "PR87 raw 3jobs/native2469 기록"
+      ],
+      "evidence": [
+        "LITERATURE_LEDGER.json",
+        "SOURCE_IDENTITY.json",
+        "../native_trace_analysis/result_20261020/ANALYSIS.json"
+      ]
+    },
+    {
+      "stage": "R3",
+      "title": "주장·전제 정렬",
+      "status": "COMPLETE_SCOPED",
+      "new": [
+        "finite successful trace, frozen cell scope, full-key/native projection 정의",
+        "table provider admission과 live native admission 분리",
+        "수치 solver contract와 외부 counters/runtime state 분리"
+      ],
+      "reused": [
+        "full physical t/u bit-key, successful-only cache, domain/scaling conventions"
+      ],
+      "evidence": [
+        "NATIVE_TRACE_EXACT_CACHE_NOTE_KO.md sections 2–7"
+      ]
+    },
+    {
+      "stage": "R4",
+      "title": "가설·표현 탐색",
+      "status": "COMPLETE_SCOPED",
+      "new": [
+        "native100과 full69을 비교하는 projection/reuse-distance 표현",
+        "active cohort tau 변화의 구체적 반례",
+        "nested timer 대신 선택된 hit 비용합 표현"
+      ],
+      "reused": [
+        "기존 component-vs-total 비용 모델"
+      ],
+      "evidence": [
+        "NATIVE_TRACE_EXACT_CACHE_NOTE_KO.md sections 3–5 and 9"
+      ]
+    },
+    {
+      "stage": "R5",
+      "title": "구성적 유도",
+      "status": "COMPLETE_SCOPED",
+      "new": [
+        "LRU reuse-distance 불변식 증명",
+        "full-hit subset of native-hit 보조정리 증명",
+        "native key 동일/광자 장부 도함수 상이 반례",
+        "adaptive 수치 동일성 조건부 귀납 정리",
+        "새69-hit break-even 식"
+      ],
+      "reused": [
+        "기존 optical RHS와 exact cache 구현식; Schur 재유도 없음"
+      ],
+      "evidence": [
+        "NATIVE_TRACE_EXACT_CACHE_NOTE_KO.md sections 3–5, 7, 9"
+      ]
+    },
+    {
+      "stage": "R6",
+      "title": "독립 검증",
+      "status": "COMPLETE_SCOPED",
+      "new": [
+        "Wolfram의 새 항등식·부호 refinement·차원·exact-rational 수치 검산",
+        "passive ledger 값은 RHS 입력 의존성이 아니라는 source 교정",
+        "V2 독립 focused review16+6 PASS 및 C9-J1/J2/J3 CLOSED를 실제 raw 결과로 확인; 테스트 fixture-count 실패는 원기록보존"
+      ],
+      "reused": [
+        "root/다른 agent의 fixed-input 실제 full key 복원 및 replay",
+        "기존 원 코드 focused 검증"
+      ],
+      "evidence": [
+        "raw/wolfram_context.json",
+        "raw/wolfram_evaluator_trace.json",
+        "raw/wolfram_sign_refinement.json",
+        "raw/wolfram_full_key_timing_dimensions.json",
+        "../independent_review/REPLAY_REVIEW_V1.json",
+        "../independent_review/REPLAY_REVIEW_V2.json",
+        "../independent_review/RUN_FOCUSED_GATE_TESTS.md",
+        "../independent_review/TRACE_ADMISSION_TEST_ATTEMPT01.json"
+      ],
+      "open_dependency": null
+    },
+    {
+      "stage": "R7",
+      "title": "판별 검증",
+      "status": "COMPLETE_FOR_FINITE_TRACE_THEORY_UNIT",
+      "new": [
+        "새 full69/823 및 native100/823 결과를 직접 읽어 연결",
+        "네 실제 callback replay case와 표에 주입된 native 응답 해석 확인",
+        "Wolfram actual evaluator3calls",
+        "gate 보완 후 analysis/replay attempt02 실제 보고서를 읽어 동일69/754 및네casePASS확인",
+        "root changed-gate analysis/replay actual exit0 두실행 재사용; 추가 과학계산 없음"
+      ],
+      "reused": [
+        "native jobs는 새로 실행하지 않고 PR87 raw 사용"
+      ],
+      "evidence": [
+        "../native_trace_analysis/result_20261020/ANALYSIS.json",
+        "../replay_attempt_01/REPLAY_REPORT.json",
+        "RAW_TOOL_INDEX.json",
+        "../analysis_attempt_02/ANALYSIS.json",
+        "../replay_attempt_02/REPLAY_REPORT.json",
+        "../ROOT_FOCUSED_EXECUTIONS.json"
+      ],
+      "new_native_calls": 0,
+      "new_IVP_solves": 0,
+      "not_run_obligation": "실제 native exact performance는 NOT_EVALUATED; finite trace 판정의 필수조건으로 새적분을 추가하지 않음."
+    },
+    {
+      "stage": "R8",
+      "title": "결과 판정",
+      "status": "COMPLETE_SCOPED",
+      "new": [
+        "기회 수69와 callback numerical equality를 확보",
+        "actual live exact performance 및 global ODE bound는 미확보로 유지"
+      ],
+      "reused": [
+        "science HOLD/global_error_bound=null"
+      ],
+      "new_strong_no_go_claim": false,
+      "NG1_NG7": "NOT_INVOKED: 새로운 strong no-go를 성과로 채택하지 않음.",
+      "evidence": [
+        "NATIVE_TRACE_EXACT_CACHE_NOTE_KO.md sections 1 and 9–10"
+      ]
+    },
+    {
+      "stage": "R9",
+      "title": "정식 결과·코딩 연결",
+      "status": "COMPLETE_SCOPED",
+      "new": [
+        "완전성·authority·exact native table·수치 reply 계약을 명세",
+        "bitwise equality의 conditional adaptive 의미와 timer scope 기록"
+      ],
+      "reused": [
+        "원 함수와 parser/FD 연산순서; 새physics/backend/key축소 구현 없음"
+      ],
+      "evidence": [
+        "NATIVE_TRACE_EXACT_CACHE_NOTE_KO.md",
+        "LITERATURE_LEDGER.json",
+        "SOURCE_IDENTITY.json"
+      ]
+    },
+    {
+      "stage": "R10",
+      "title": "종료·재개",
+      "status": "SUBTASK_DELIVERED_PARENT_CLOSEOUT_PENDING",
+      "new": [
+        "현재 attempt02/V2 리뷰와 원 attempt01/V1·test-development failure를 별도 identity로 보존",
+        "문헌 원문을 Git/제공ZIP에서 제외하고 query/time/URL/SHA/짧은요약으로 publication ledger구성",
+        "부모의 게시·백업·DAG 영수증으로 마감연결; 이론 및 focused 검증 의무 완료"
+      ],
+      "reused": [
+        "원성공/실패raw보존과 create-only 게시·백업정책"
+      ],
+      "evidence": [
+        "RAW_TOOL_INDEX.json",
+        "SOURCE_IDENTITY.json",
+        "NATIVE_TRACE_EXACT_CACHE_NOTE_KO.md section 10"
+      ],
+      "publication_by_this_child": "NOT_PERFORMED",
+      "backup_upload_by_this_child": "NOT_PERFORMED",
+      "DAG": "C21I frozen source + PR87 immutable native return -> full trace/LRU + exact response table -> callback replay; timer raw -> distinct cost-accounting branch",
+      "remaining_parent_closeout": "Publication/backup receipts and final DAG only for this finite-trace unit. Actual live native exact performance remains a separate NOT_EVALUATED claim, not silently completed."
+    }
+  ],
+  "global_error_bound": null,
+  "new_strong_no_go_claim": false,
+  "new_native_calls": 0,
+  "new_IVP_solves": 0,
+  "remote_mutations_by_this_theory_unit": 0,
+  "updated_at_utc": "2026-10-20T13:42:54.652474+00:00",
+  "theory_unit_status": "COMPLETE_SCOPED_FROZEN_FOR_PARENT_COPY"
+}

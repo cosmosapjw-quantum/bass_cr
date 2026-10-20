@@ -1,0 +1,11 @@
+{
+  "classification": "TEST_FIXTURE_ASSUMPTION_FAILURE_NOT_IMPLEMENTATION_FAILURE",
+  "note": "Privacy test expected one excluded LIVE_INVENTORY path; frozen manifest contains three. No private payload was opened; assertion stopped before read call. All five other admission tests passed.",
+  "result": {
+    "chunk_id": "ca3316",
+    "wall_time_seconds": 0.05018444,
+    "exit_code": 1,
+    "original_token_count": 441,
+    "output": "test_authentic_manifest_admits_the_pinned_public_receipt (test_trace_admission.TraceAdmissionTests.test_authentic_manifest_admits_the_pinned_public_receipt) ... ok\ntest_cli_rejects_replaced_manifest_before_any_job_analysis (test_trace_admission.TraceAdmissionTests.test_cli_rejects_replaced_manifest_before_any_job_analysis) ... ok\ntest_counterfeit_self_consistent_manifest_cannot_replace_authority (test_trace_admission.TraceAdmissionTests.test_counterfeit_self_consistent_manifest_cannot_replace_authority) ... ok\ntest_private_inventory_payload_is_rejected_before_opening (test_trace_admission.TraceAdmissionTests.test_private_inventory_payload_is_rejected_before_opening) ... FAIL\ntest_same_size_changed_job_receipt_is_rejected_before_json_parsing (test_trace_admission.TraceAdmissionTests.test_same_size_changed_job_receipt_is_rejected_before_json_parsing) ... ok\ntest_unlisted_file_cannot_become_an_admitted_return_input (test_trace_admission.TraceAdmissionTests.test_unlisted_file_cannot_become_an_admitted_return_input) ... ok\n\n======================================================================\nFAIL: test_private_inventory_payload_is_rejected_before_opening (test_trace_admission.TraceAdmissionTests.test_private_inventory_payload_is_rejected_before_opening)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/9979d80514d6/bass_cr_pinned/research/cr_c21j_native_trace_replay_20261020/tests/test_trace_admission.py\", line 82, in test_private_inventory_payload_is_rejected_before_opening\n    self.assertEqual(len(private_names), 1)\nAssertionError: 3 != 1\n\n----------------------------------------------------------------------\nRan 6 tests in 0.012s\n\nFAILED (failures=1)\n"
+  }
+}

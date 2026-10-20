@@ -1,0 +1,41 @@
+{
+  "schema": "C21J_ROOT_FOCUSED_EXECUTIONS_V1",
+  "reason": "Only the new C21J authority/protocol gates changed; frozen native/ODE source and original manufactured/native executions are reused.",
+  "executions": [
+    {
+      "job": {
+        "key": "analysis_attempt_02",
+        "cmd": "python3 bass_cr_pinned/research/cr_c21j_native_trace_replay_20261020/analyze_native_trace.py --archive c21hi_external_intake/native_archive/C21GHI_NATIVE_EXECUTION_20261020 --source-root bass_cr_pinned/research --out c21hi_new_work/analysis_attempt_02"
+      },
+      "started": "2026-10-20 13:34:35 UTC",
+      "finished": "2026-10-20 13:34:38 UTC",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "6733f1",
+        "wall_time_seconds": 0.310502533,
+        "exit_code": 0,
+        "original_token_count": 86,
+        "output": "{\n  \"status\": \"PASS_SCOPED\",\n  \"output\": \"c21hi_new_work/analysis_attempt_02/ANALYSIS.json\",\n  \"native_calls_executed_by_this_analysis\": 0,\n  \"full_key_hits\": [\n    69,\n    69,\n    69\n  ],\n  \"H_I_full_state_and_ledgers_equal\": true,\n  \"H_I_complete_accepted_traces_equal\": true,\n  \"I_FDhalf_max_fixed_scale_change\": 2.0285682709290226e-15\n}\n"
+      }
+    },
+    {
+      "job": {
+        "key": "replay_attempt_02",
+        "cmd": "python3 bass_cr_pinned/research/cr_c21j_native_trace_replay_20261020/replay_callbacks.py --repo bass_cr_pinned --native-return c21hi_external_intake/native_archive/C21GHI_NATIVE_EXECUTION_20261020 --out c21hi_new_work/replay_attempt_02"
+      },
+      "started": "2026-10-20 13:34:35 UTC",
+      "finished": "2026-10-20 13:34:38 UTC",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "d9d2ec",
+        "wall_time_seconds": 2.564987378,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    }
+  ],
+  "new_native_calls": 0,
+  "new_IVP_solves": 0,
+  "old_suite_or_manufactured_runs": 0
+}

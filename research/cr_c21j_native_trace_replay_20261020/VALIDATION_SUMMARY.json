@@ -1,0 +1,132 @@
+{
+  "schema": "C21J_VALIDATION_SUMMARY_V1",
+  "as_of_utc": "2026-10-20T13:52:30.839616+00:00",
+  "status": "PASS_SCOPED",
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  },
+  "final_programs": {
+    "analyze_native_trace.py": {
+      "bytes": 30150,
+      "sha256": "e2d8fff3acf4a867391de7247781d2ffe6d3a93ed0ba5c78b26876b911c00b9c"
+    },
+    "replay_callbacks.py": {
+      "bytes": 20173,
+      "sha256": "7c855b9983c575042a18754687696a039bef31f5711c455f774b70c03bae52c1"
+    },
+    "INPUT_PINS.json": {
+      "bytes": 16640,
+      "sha256": "ac339fc832ccc2e4b177034151a6adcf1510d82646b0c7e04d68bfc2be7aea90"
+    }
+  },
+  "new_native_calls": 0,
+  "new_IVP_solves": 0,
+  "old_physics_suite_runs": 0,
+  "old_manufactured_runs": 0,
+  "analysis": {
+    "jobs": 3,
+    "expanded_native_matches": [
+      823,
+      823,
+      823
+    ],
+    "full_key_hits": [
+      69,
+      69,
+      69
+    ],
+    "full_key_misses": [
+      754,
+      754,
+      754
+    ],
+    "H_I_complete_accepted_traces_equal": true,
+    "H_I_endpoint_and_ledgers_equal": true,
+    "I_FDhalf_max_fixed_scale_change": 2.0285682709290226e-15,
+    "source_and_raw_unchanged": true
+  },
+  "replay": {
+    "cases": [
+      {
+        "job": "I_common_ic_vigilode_vectorized_base",
+        "mode": "original_H",
+        "status": "PASS_SCOPED",
+        "rpc_replies": 472,
+        "binary64_values": 40432,
+        "recorded_provider_queries": 823
+      },
+      {
+        "job": "I_common_ic_vigilode_vectorized_base",
+        "mode": "vectorized",
+        "status": "PASS_SCOPED",
+        "rpc_replies": 472,
+        "binary64_values": 40432,
+        "recorded_provider_queries": 823
+      },
+      {
+        "job": "I_common_ic_vigilode_vectorized_base",
+        "mode": "vectorized_exact",
+        "status": "PASS_SCOPED",
+        "rpc_replies": 472,
+        "binary64_values": 40432,
+        "recorded_provider_queries": 754
+      },
+      {
+        "job": "I_common_ic_vigilode_vectorized_fd_half",
+        "mode": "vectorized_exact",
+        "status": "PASS_SCOPED",
+        "rpc_replies": 472,
+        "binary64_values": 40432,
+        "recorded_provider_queries": 754
+      }
+    ],
+    "source_files": 24,
+    "return_files": 60,
+    "input_files_unchanged": true,
+    "native_process_admission_verified": false
+  },
+  "focused_tests": {
+    "reconstruction": {
+      "unique_test_methods": 9,
+      "current_final_source_capture": "evidence/FINAL_RECONSTRUCTION_TESTS.json",
+      "status": "PASS",
+      "initial_attempt": "summary-only; original transcript unavailable; retained as such"
+    },
+    "rpc_admission": {
+      "unique_test_methods": 16,
+      "status": "PASS"
+    },
+    "archive_admission": {
+      "unique_test_methods": 6,
+      "status": "PASS"
+    },
+    "fresh_complete_physics_suite_claim": false
+  },
+  "independent_findings": [
+    {
+      "id": "C9-J1",
+      "status": "CLOSED_IN_REVIEWED_VERSION"
+    },
+    {
+      "id": "C9-J2",
+      "status": "CLOSED_IN_REVIEWED_VERSION"
+    },
+    {
+      "id": "C9-J3",
+      "status": "CLOSED_IN_REVIEWED_VERSION"
+    }
+  ],
+  "native_exact_execution": "NOT_RUN",
+  "native_exact_performance": "NOT_EVALUATED",
+  "general_wall_speedup": "NOT_ESTABLISHED",
+  "global_error_bound": null,
+  "evidence": [
+    "evidence/analysis_attempt_02/ANALYSIS.json",
+    "evidence/replay_attempt_02/REPLAY_REPORT.json",
+    "evidence/independent_review/REPLAY_REVIEW_V2.json",
+    "evidence/ROOT_FOCUSED_EXECUTIONS.json",
+    "evidence/FINAL_RECONSTRUCTION_TESTS.json"
+  ]
+}
