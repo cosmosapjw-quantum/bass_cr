@@ -1,0 +1,233 @@
+{
+  "schema": "C21I_CALLBACK_IMPLEMENTATION_SCOPED_RECEIPT_V1",
+  "observed_at_utc": "2026-10-20T05:50:07.219317+00:00",
+  "status": "FOCUSED_TESTS_PASS_AWAIT_INDEPENDENT_REVIEW_CLOSE",
+  "implementation_source": {
+    "optimized_adapter.py": {
+      "bytes": 20343,
+      "sha256": "bb73bfa9bd865f60eefeed55dbd05df076a9856544345595beb914676105396e"
+    },
+    "tests/test_optimized_callbacks.py": {
+      "bytes": 27093,
+      "sha256": "00b106e2d4146bd8c7b1f2eeb43649d55e75eabaf3bf6661daff3f1e9db16586"
+    }
+  },
+  "unique_contracts": 18,
+  "fresh_full_final_suite_run": false,
+  "scoped_contract_evidence": {
+    "test_vectorized_jacobian_bitwise_for_y_zero_helium_and_existing_fixtures": [
+      {
+        "evidence": "tests_deadline_review_fix.stderr.txt",
+        "result": "ok"
+      },
+      {
+        "evidence": "tests_initial.stderr.txt",
+        "result": "ok"
+      }
+    ],
+    "test_large_cohort_bitwise_assembly_and_three_term_rounding": [
+      {
+        "evidence": "tests_initial.stderr.txt",
+        "result": "ok"
+      }
+    ],
+    "test_exact_y_zero_underflow_and_structural_signed_zeros": [
+      {
+        "evidence": "tests_initial.stderr.txt",
+        "result": "ok"
+      }
+    ],
+    "test_gas_boundaries_and_inherited_helium_failure_are_preserved": [
+      {
+        "evidence": "tests_initial.stderr.txt",
+        "result": "ERROR"
+      },
+      {
+        "evidence": "tests_targeted_r1.stderr.txt",
+        "result": "ok"
+      }
+    ],
+    "test_cell_clamps_short_cells_and_represented_fd_nodes_match": [
+      {
+        "evidence": "tests_initial.stderr.txt",
+        "result": "ok"
+      }
+    ],
+    "test_cache_keys_include_t_u_ulp_signed_zero_and_passive_bits": [
+      {
+        "evidence": "tests_initial.stderr.txt",
+        "result": "ok"
+      }
+    ],
+    "test_cache_retains_cross_operation_base_and_has_bounded_lru": [
+      {
+        "evidence": "tests_deadline_review_fix.stderr.txt",
+        "result": "ok"
+      },
+      {
+        "evidence": "tests_initial.stderr.txt",
+        "result": "ok"
+      }
+    ],
+    "test_cache_values_and_jacobian_results_cannot_alias_future_calls": [
+      {
+        "evidence": "tests_initial.stderr.txt",
+        "result": "ok"
+      }
+    ],
+    "test_exceptions_and_nonfinite_results_never_enter_cache": [
+      {
+        "evidence": "tests_initial.stderr.txt",
+        "result": "ok"
+      }
+    ],
+    "test_cache_hits_do_not_bypass_domain_or_live_guards": [
+      {
+        "evidence": "tests_initial.stderr.txt",
+        "result": "ok"
+      },
+      {
+        "evidence": "tests_targeted_r1.stderr.txt",
+        "result": "ok"
+      }
+    ],
+    "test_new_closure_fixture_cell_and_changed_scope_cannot_reuse_cache": [
+      {
+        "evidence": "tests_initial.stderr.txt",
+        "result": "ok"
+      }
+    ],
+    "test_generic_stateful_callback_is_not_cached_by_default": [
+      {
+        "evidence": "tests_initial.stderr.txt",
+        "result": "ok"
+      }
+    ],
+    "test_frozen_manifest_and_runtime_bytes_are_enforced": [
+      {
+        "evidence": "tests_initial.stderr.txt",
+        "result": "ok"
+      }
+    ],
+    "test_fixture_snapshot_owns_mutable_lists_without_changing_json_scalar_types": [
+      {
+        "evidence": "tests_new_guards.stderr.txt",
+        "result": "ok"
+      }
+    ],
+    "test_run_wrapper_provider_closed_deadline_and_exit_checks_precede_hits": [
+      {
+        "evidence": "tests_deadline_review_fix.stderr.txt",
+        "result": "ok"
+      },
+      {
+        "evidence": "tests_new_guards.stderr.txt",
+        "result": "ok"
+      }
+    ],
+    "test_callback_postguards_reject_late_evaluations_and_cache_hits": [
+      {
+        "evidence": "tests_deadline_review_fix.stderr.txt",
+        "result": "ok"
+      }
+    ],
+    "test_run_wrapper_entry_deadline_includes_setup_final_result_and_readback": [
+      {
+        "evidence": "tests_deadline_review_fix.stderr.txt",
+        "result": "ok"
+      },
+      {
+        "evidence": "tests_remaining_budget_fix.stderr.txt",
+        "result": "ok"
+      }
+    ],
+    "test_private_driver_binding_reuses_original_event_loop_and_trace_contract": [
+      {
+        "evidence": "tests_deadline_review_fix.stderr.txt",
+        "result": "ok"
+      },
+      {
+        "evidence": "tests_initial.stderr.txt",
+        "result": "ok"
+      },
+      {
+        "evidence": "tests_remaining_budget_fix.stderr.txt",
+        "result": "ok"
+      },
+      {
+        "evidence": "tests_targeted_r1.stderr.txt",
+        "result": "ok"
+      }
+    ]
+  },
+  "validation_scope": "Actual Python callback execution and manufactured original RHS; original event-loop tool stubs; no actual Rust, native or ODE solver run",
+  "historical_error": "Initial He-simplex vertex expectation failed in unchanged original callback itself; retained and corrected to require the inherited failure. Not an optimizer defect. Independent deadline defects are separately preserved by reviewer and corrected.",
+  "source_changes_scope": "Only new C21I optimized_adapter.py and focused tests; no C21H/F/G scientific source edits by implementation agent.",
+  "global_error_bound": null,
+  "execution_status": "LOCAL_IMPLEMENTATION_AND_FOCUSED_VALIDATION_COMPLETE",
+  "publication_status": "NOT_PUBLISHED",
+  "backup_status": "ROOT_PENDING_DELIVERY",
+  "dag_status": "AWAIT_REVIEW_AND_ROOT_INTEGRATION",
+  "evidence_identity": {
+    "tests_deadline_review_fix.outcome.json": {
+      "bytes": 1519,
+      "sha256": "86660c91049572bd568406dc8ea60e189a2c04e0aaa038a9721575cb495f2d3b"
+    },
+    "tests_deadline_review_fix.stderr.txt": {
+      "bytes": 1174,
+      "sha256": "9c5be3c170343c291d2c7dc0085923d7f6ce896c49bcdf13b650b3a017fad519"
+    },
+    "tests_deadline_review_fix.stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests_initial.outcome.json": {
+      "bytes": 215,
+      "sha256": "48adbbff03a48eaec73d54e4314e827ebbb9d1d217272d26b8f24710d96d9303"
+    },
+    "tests_initial.stderr.txt": {
+      "bytes": 3563,
+      "sha256": "028f2ce3227a760a648f67be8cb850b7edf06f72badfadfa15024d6d9e1b882c"
+    },
+    "tests_initial.stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests_new_guards.outcome.json": {
+      "bytes": 573,
+      "sha256": "d7b57326b91dec591960006a0371183243c580f3c38e0f8af755ed3e6836f2c6"
+    },
+    "tests_new_guards.stderr.txt": {
+      "bytes": 474,
+      "sha256": "5826100f0292eebe0d628cf379d018c0f44337802fbf9072c39835361abb5b18"
+    },
+    "tests_new_guards.stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests_remaining_budget_fix.outcome.json": {
+      "bytes": 941,
+      "sha256": "239bc0c425c7cc6d1cce2ded7393526b722094ec34de3822c5542b9d8a161c32"
+    },
+    "tests_remaining_budget_fix.stderr.txt": {
+      "bytes": 474,
+      "sha256": "b14f58b8cf2f7358663b26025e6da1b8db3b5763cca4400ce2e6cb514201ae32"
+    },
+    "tests_remaining_budget_fix.stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests_targeted_r1.outcome.json": {
+      "bytes": 683,
+      "sha256": "2d17844928da5e098c1b79243051be9266de6ceb3d9eac3ace3505f0e4c4d49d"
+    },
+    "tests_targeted_r1.stderr.txt": {
+      "bytes": 599,
+      "sha256": "2a0f97d2324c1e280b92047275e09fe70f214ccba3fd85ea7129464804724f85"
+    },
+    "tests_targeted_r1.stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

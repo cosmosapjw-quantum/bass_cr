@@ -1,0 +1,450 @@
+{
+  "schema": "C21H_JOB_RECEIPT_V1",
+  "started_at": "2026-10-20T07:13:27.192750+00:00",
+  "execution": "COMPLETE",
+  "source_identity": {
+    "manifest": {
+      "bytes": 2490,
+      "sha256": "7d1e521aa78ffc1be2cac66d26863b2a542d67a7d856e8711e8b60f8252df6fb"
+    },
+    "runtime_files": {
+      "optical_adapter.py": {
+        "bytes": 21058,
+        "sha256": "53c8644b64f937fcca022c5307295d8666de8aee6c07244d139be139badcb387"
+      },
+      "run_pilot.py": {
+        "bytes": 15363,
+        "sha256": "6f344f60d26a0ddb7bb205255cb767fdc230062bf60c56aae1ce58f5ef258f6c"
+      },
+      "requirements.txt": {
+        "bytes": 97,
+        "sha256": "5658b6455896d47a13f0b03a99a5d59828882435d7a919ebc0909e549c100565"
+      },
+      "rust_bridge/Cargo.toml": {
+        "bytes": 865,
+        "sha256": "96c388f8b5d92b11a255afd550e7e13284a7b3083e533474f1d57d16715bcc6b"
+      },
+      "rust_bridge/Cargo.lock": {
+        "bytes": 42739,
+        "sha256": "d30f7f6437b7704f845ba85f8206c94810fbd4ec1a48db9cba06b7b77604c892"
+      },
+      "rust_bridge/src/main.rs": {
+        "bytes": 31673,
+        "sha256": "19728487a6ad3e34058b52bccdae99c2026cd110c82b3f937e3c731f2931ea89"
+      },
+      "rust_bridge/build_bridge.sh": {
+        "bytes": 3947,
+        "sha256": "a870c9f60f241b18839398c44ebe4cfc3d95644b5c8209239a00a511581e497a"
+      },
+      "rust_bridge/test_bridge_protocol.py": {
+        "bytes": 10553,
+        "sha256": "8b4cbb0424c8a6a167ad25265d8490d90cc069af8ededb6e4d2309ea21446354"
+      }
+    },
+    "C21I_SOURCE_IDENTITY": {
+      "schema": "C21I_SOURCE_IDENTITY_V1",
+      "optimization": "vectorized_exact",
+      "manifest": {
+        "bytes": 831,
+        "sha256": "f868b23a3188e959e60b79ffc8974ae399a28d63228a79b18c2da3c40f0cb9ec"
+      },
+      "runtime_files": {
+        "run_optimized_pilot.py": {
+          "bytes": 14719,
+          "sha256": "1a3f4d9066bedc3a8d7466723e8f344fa451c0c6a85c48bf0efe03210d6d8a43"
+        },
+        "optimized_adapter.py": {
+          "bytes": 20343,
+          "sha256": "bb73bfa9bd865f60eefeed55dbd05df076a9856544345595beb914676105396e"
+        },
+        "native_cache_contract.py": {
+          "bytes": 21580,
+          "sha256": "c94c506aacf9bf86765e6a58ced7d005ed50d8999f7f0dd6232df9159b7bd097"
+        }
+      },
+      "c21h_manifest_sha256": "7d1e521aa78ffc1be2cac66d26863b2a542d67a7d856e8711e8b60f8252df6fb"
+    }
+  },
+  "input_identity": {
+    "schema": "C21G_VERIFIED_INPUTS_V1",
+    "manifest_path": "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21g_reference_refinement_20261019/EXECUTION_MANIFEST.json",
+    "manifest_sha256": "7b14b62a20714fc66216ebd9d446af1ed1a05de889447ec410158b52e5923fed",
+    "policy_sha256": "372cd979e2e613bfa7bba56cc38111a1b4f8e84702146fe5fb0ce312ac15974c",
+    "c21f_runtime_files": {
+      "src/event_coupler.py": {
+        "bytes": 10655,
+        "sha256": "24386145f4337b2e01a32219a56ec2446080e4aa4a679a8f956a3eb7ff2ab819"
+      },
+      "src/native_micro.py": {
+        "bytes": 5109,
+        "sha256": "ce27acea344604c08159e08d6e703f66a85d51f0729b4e30aa2248a3337ecc27"
+      },
+      "src/reference_tau.py": {
+        "bytes": 11653,
+        "sha256": "714c40a4e3a0577784e6a754b95cdb34b247cb2e529953a375c74a43efafc3e0"
+      },
+      "src/run_experiment.py": {
+        "bytes": 20173,
+        "sha256": "71fb34d6ae5ca843868a2b666a0e7f93ee330c5bedc6c7191220e8060f4869fc"
+      },
+      "vendor/pr79/c21d_trilane.py": {
+        "bytes": 13498,
+        "sha256": "22d4c355353721cd0dff00a401f15a18b9d6fdfda8dc0bdfaab753a3c1c044c0"
+      },
+      "vendor/pr79/exposure_contract.py": {
+        "bytes": 9115,
+        "sha256": "b30cefb2fdce72f813f70fc42a29f2dc67516e73c18f4907737341fcf8ec9407"
+      },
+      "vendor/pr79/radau_exposure_oracle.py": {
+        "bytes": 7132,
+        "sha256": "23895d81e50791135c689db5b6a180fcb23e05ef8cb76e271c65b189cf3fe428"
+      },
+      "native/native_point.rs": {
+        "bytes": 8305,
+        "sha256": "3812cf4fec625fdec32e47d737bec8e0306cc538372c5a2cf801d2b0cf590e2d"
+      },
+      "build_native.sh": {
+        "bytes": 2582,
+        "sha256": "917ca6620ff5d9ad85cb1a783b3ebbc3b87db7dd58f11c7b500bd1dce35dcf82"
+      },
+      "run_ncp.sh": {
+        "bytes": 3563,
+        "sha256": "b451bf1a2400920d9b2861eed7f65e718342df1afd0f1c15a7a8a8d127b3b22b"
+      }
+    },
+    "c21g_runtime_files": {
+      "campaign_contract.py": {
+        "bytes": 9534,
+        "sha256": "fb450ad1d00c35e73e99d52c868f2c1a70d1ef71ab1ae83a08ed0e6c0dc00451"
+      },
+      "run_campaign.py": {
+        "bytes": 33012,
+        "sha256": "d844dec3be1cb397d48db319cd84a5f2314011db0cd0443d3d704d6252080275"
+      },
+      "diagnostics.py": {
+        "bytes": 17612,
+        "sha256": "a27eb840afaf657334f251db807f8631b7f6252bd3da63382c1b6d93060424bd"
+      },
+      "analyze_campaign.py": {
+        "bytes": 12418,
+        "sha256": "3e4cf60c6f4b11c2c8bcc3bd4ca6f5d1532f57e66f848d5d427f57eaa4f4d022"
+      }
+    },
+    "baseline_files": {
+      "common_ic/fixture.json": {
+        "bytes": 1007,
+        "sha256": "bcfb3d5a8b4d5c8153247712eb1c3d127c4410e2455f6106bf60720642d0f060"
+      },
+      "common_ic/radau.json": {
+        "bytes": 2678,
+        "sha256": "f7d2129e1659044fee576a06f9e87be163bf06116ed96017e63cee5607a52677"
+      },
+      "common_ic/SUMMARY.json": {
+        "bytes": 28727,
+        "sha256": "35347fa41c8d906ff28830b06088eae20f5e5473d81f8b8cd7785bd82ea80ed2"
+      },
+      "native_source/fixture.json": {
+        "bytes": 2390,
+        "sha256": "fb33c66c9d26009ceb4d593b221481c0743320e4c657365971910b8294ef986e"
+      },
+      "native_source/radau.json": {
+        "bytes": 4044,
+        "sha256": "fbd53d07df476480a292e490411cd914c0d401fc117b76b6511193673a89bd57"
+      },
+      "native_source/SUMMARY.json": {
+        "bytes": 35608,
+        "sha256": "c2805d0ea90f75ba7bdd4bff33c011c730ed7d430521e716a4201305b0d966ac"
+      }
+    },
+    "fixtures": {
+      "common_ic": {
+        "sha256": "befb0c8a7a113ff0efccc450af05b1157592a8d91cc7e994cfdfd2768905cc65",
+        "cohorts": 9,
+        "scales": {
+          "values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.4229641197648433,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            5.390224966566528,
+            5.390224966566528,
+            5.390224966566528,
+            5.390224966566528,
+            5.390224966566528
+          ],
+          "thermal_eV_H": 1.4229641197648433,
+          "energy_eV_H": 5.390224966566528,
+          "definition": "tau/fraction:1; number ledger:1 per H; thermal:w0; energy ledger:w0+initial binding+all fixed birth photon energy",
+          "state_order": "tau[M],gas[4],photo[3],ci[3],rr[3],dr,escape,cmb,photon_work,gas_work,heat",
+          "state_floor_applied": false
+        }
+      },
+      "native_source": {
+        "sha256": "c562971cf0fcab251fc96b7634f5e7aefab87377652a98be3ba4256a23a9d781",
+        "cohorts": 27,
+        "scales": {
+          "values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.4229641197648433,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            5.3891441069602815,
+            5.3891441069602815,
+            5.3891441069602815,
+            5.3891441069602815,
+            5.3891441069602815
+          ],
+          "thermal_eV_H": 1.4229641197648433,
+          "energy_eV_H": 5.3891441069602815,
+          "definition": "tau/fraction:1; number ledger:1 per H; thermal:w0; energy ledger:w0+initial binding+all fixed birth photon energy",
+          "state_order": "tau[M],gas[4],photo[3],ci[3],rr[3],dr,escape,cmb,photon_work,gas_work,heat",
+          "state_floor_applied": false
+        }
+      }
+    },
+    "global_error_bound": null
+  },
+  "variant": "base",
+  "command": "smoke",
+  "thread_environment": {
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "RAYON_NUM_THREADS": "1"
+  },
+  "method": "vigilode-rodas5p",
+  "fixture_name": "manufactured_wiring_Y0",
+  "native_executed": false,
+  "native_identity": null,
+  "native_process_started": false,
+  "native_launch_attempted": false,
+  "physics": "LEDGER_RESIDUALS_RECORDED_IN_RESULT; NATIVE_ACCEPTANCE_SEPARATE",
+  "numerics": "MANUFACTURED_WIRING; SEE_INDEPENDENT_ANALYTIC_VALIDATION",
+  "global_error_bound": null,
+  "bridge_identity": {
+    "path": "/workspace/scratch/da42c813ee8c/builds/c21h_bridge_baseline_03/release/bass-cr-c21h-rust-bridge",
+    "bytes": 4660352,
+    "sha256": "202f4d93b94602f6649f427237afd6513b8fd933ae828cbd7a3cc1e90f7af934"
+  },
+  "bridge_build_receipt": {
+    "path": "/workspace/scratch/da42c813ee8c/builds/c21h_bridge_baseline_03/BUILD_RECEIPT.json",
+    "bytes": 2928,
+    "sha256": "800291c2e51424dd01afdef5f64672343fb167b9dd97a38f8c7b1210b0584c73"
+  },
+  "fixture_sha256": "e04b3167394131672d3bff2bfea7988ec1c513d16a22af5bea009d2d2ee1f153",
+  "microphysics": "MANUFACTURED_CONSERVATIVE_MICRO_NOT_GRACKLE",
+  "finished_at": "2026-10-20T07:13:27.385230+00:00",
+  "wall_s": 0.19247550800355384,
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "scipy": "1.17.0",
+  "payload_files": {
+    "C21H_SOURCE_IDENTITY.json": {
+      "bytes": 2116,
+      "sha256": "a4f4da17e3aa9b46df0b242af9ffb5751d15a1d6c8741ec05e2db5665342fd0f"
+    },
+    "C21I_SOURCE_IDENTITY.json": {
+      "bytes": 751,
+      "sha256": "63d3255b4541e296abdc373939b2d5b54d7feb57d5042da981084d5d5fb64fbf"
+    },
+    "INDEPENDENT_BALANCES.json": {
+      "bytes": 2097,
+      "sha256": "594545570b458a0f77a52f3c5d10532a20447f612eae89a92675cfd4fdbb2ef9"
+    },
+    "INPUT_IDENTITY.json": {
+      "bytes": 5735,
+      "sha256": "10088bc518ace91eefd4882442c703ba9fb4f97ef7e0cb86c47702808c93d6e4"
+    },
+    "PLAN.json": {
+      "bytes": 1221,
+      "sha256": "ef4a721424cbb5695bfb6eae84c729cbfd39c310d89de1eb321c6ac6f4cb3505"
+    },
+    "fixture.json": {
+      "bytes": 987,
+      "sha256": "a2e9ebd256266e215b9ed215068692ff66d965226f82e7d52ccf3bab5cc09de4"
+    },
+    "result.json": {
+      "bytes": 57658,
+      "sha256": "2e5ba15e568dfaa59bdf5ce4a1951e4363c31facf7fb199f837b5f78ce5c11ef"
+    },
+    "segments/segment_000/binary.json": {
+      "bytes": 212,
+      "sha256": "81f316adc285cf05f0cc6f98184536cd51c251b7c4343b28f13d944003ec44d6"
+    },
+    "segments/segment_000/config.json": {
+      "bytes": 541,
+      "sha256": "f733f9c34cb034320ea6cbfc07cdfa9ed4f5fd4337a820cdbe3e7d88901cf666"
+    },
+    "segments/segment_000/derivative_nodes.json": {
+      "bytes": 5345,
+      "sha256": "c5d69b340d341069d19934f8fc5d95144ad23554021d999a7924ec860be7a577"
+    },
+    "segments/segment_000/process_exit.json": {
+      "bytes": 95,
+      "sha256": "c95c9f5de505808ca14d98d0c70a65935277fdf43c395abc7eb6781e371eaad1"
+    },
+    "segments/segment_000/receipt.json": {
+      "bytes": 1226,
+      "sha256": "619bb67b90d2abbc5c4614da83b2115cbc0e84043a654b84d9b8132fe2fa5756"
+    },
+    "segments/segment_000/result.json": {
+      "bytes": 8788,
+      "sha256": "5fc48a6432d8a603cd9311810396468bd2cf89d6b2659ef3a97822d5c4217f85"
+    },
+    "segments/segment_000/rpc.jsonl": {
+      "bytes": 119115,
+      "sha256": "720c83ef72bf6323e2ef153ccb029e2770615a033b959844b46438f3f41fddde"
+    },
+    "segments/segment_000/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "segments/segment_001/binary.json": {
+      "bytes": 212,
+      "sha256": "81f316adc285cf05f0cc6f98184536cd51c251b7c4343b28f13d944003ec44d6"
+    },
+    "segments/segment_001/config.json": {
+      "bytes": 775,
+      "sha256": "98ef95f8c89e7037d39221bfc79e907d9dd43446c89466a7b81e8b61c58090ba"
+    },
+    "segments/segment_001/derivative_nodes.json": {
+      "bytes": 5346,
+      "sha256": "794a2bc46da0d1e842bd4dfd4d72c2b894853d33d1e88479e48e6fee8915d7e8"
+    },
+    "segments/segment_001/process_exit.json": {
+      "bytes": 96,
+      "sha256": "2f7769a1c66b56f1db6ebd60f531fed9507c65465eb8411d988a6d2e82994263"
+    },
+    "segments/segment_001/receipt.json": {
+      "bytes": 1226,
+      "sha256": "f9048555690c9b7e120f8497789c4cd519e6c99c592fc73cf6afa189124a924d"
+    },
+    "segments/segment_001/result.json": {
+      "bytes": 9810,
+      "sha256": "7a5380426ebd1821aee521ee37a2458f9fe11b64c2643493686a1b394786b69c"
+    },
+    "segments/segment_001/rpc.jsonl": {
+      "bytes": 132314,
+      "sha256": "76f9647fd542751a83dd33c5fc0f67943d35980318dceb72b260fcab7f86ce67"
+    },
+    "segments/segment_001/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "segments/segment_002/binary.json": {
+      "bytes": 212,
+      "sha256": "81f316adc285cf05f0cc6f98184536cd51c251b7c4343b28f13d944003ec44d6"
+    },
+    "segments/segment_002/config.json": {
+      "bytes": 833,
+      "sha256": "9168727f6e712af3a9ee3bd85ed628c111561b39f7f02828138ccd2261fa17a3"
+    },
+    "segments/segment_002/derivative_nodes.json": {
+      "bytes": 5342,
+      "sha256": "e9a0ff88cec8ee66ea3e874be9788b70d23665c277a888601a368789adefa967"
+    },
+    "segments/segment_002/process_exit.json": {
+      "bytes": 96,
+      "sha256": "47d559b00fd7d737f7f807310eab8ea2334e8879e38813c177f30dcfef656234"
+    },
+    "segments/segment_002/receipt.json": {
+      "bytes": 1226,
+      "sha256": "6ab65931aa3c911ed9cd2646f0f8d2b1f6697af361fcecd3b0330a8bd45711f2"
+    },
+    "segments/segment_002/result.json": {
+      "bytes": 10473,
+      "sha256": "43b3e1c740b02fbb78812a5ddf73c7b582faa466f586f24c589f23e8f96e1c17"
+    },
+    "segments/segment_002/rpc.jsonl": {
+      "bytes": 144402,
+      "sha256": "77b4bfd42f8c2fed3cf7f74690c4562f8046877a8ed6c06f4a054b1840e4d457"
+    },
+    "segments/segment_002/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "c21i_runner": {
+    "optimization": "vectorized_exact",
+    "source_identity": {
+      "schema": "C21I_SOURCE_IDENTITY_V1",
+      "optimization": "vectorized_exact",
+      "manifest": {
+        "bytes": 831,
+        "sha256": "f868b23a3188e959e60b79ffc8974ae399a28d63228a79b18c2da3c40f0cb9ec"
+      },
+      "runtime_files": {
+        "run_optimized_pilot.py": {
+          "bytes": 14719,
+          "sha256": "1a3f4d9066bedc3a8d7466723e8f344fa451c0c6a85c48bf0efe03210d6d8a43"
+        },
+        "optimized_adapter.py": {
+          "bytes": 20343,
+          "sha256": "bb73bfa9bd865f60eefeed55dbd05df076a9856544345595beb914676105396e"
+        },
+        "native_cache_contract.py": {
+          "bytes": 21580,
+          "sha256": "c94c506aacf9bf86765e6a58ced7d005ed50d8999f7f0dd6232df9159b7bd097"
+        }
+      },
+      "c21h_manifest_sha256": "7d1e521aa78ffc1be2cac66d26863b2a542d67a7d856e8711e8b60f8252df6fb"
+    }
+  }
+}

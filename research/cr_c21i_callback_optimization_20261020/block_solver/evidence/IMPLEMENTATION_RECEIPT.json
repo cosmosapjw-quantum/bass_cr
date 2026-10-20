@@ -1,0 +1,119 @@
+{
+  "schema": "C21I_BLOCK_IMPLEMENTATION_RECEIPT_V1",
+  "recorded_at_utc": "2026-10-20T05:54:54.867695+00:00",
+  "status": "PASS_SCOPED_STANDALONE_KERNEL",
+  "implementation_kind": "New zero-dependency Rust structured JVP and shifted Schur linear algebra prototype",
+  "compiled_source_identity": {
+    "Cargo.toml": {
+      "bytes": 312,
+      "sha256": "e37321d043bfbbf6c9b8d2b0b0e265df4ea8b284c893c85a368e57bc3a55515b"
+    },
+    "Cargo.lock": {
+      "bytes": 161,
+      "sha256": "17849065fc96875cc40588d5a5cf7c84926374d3b22a35c80275884cef294be0"
+    },
+    "src/lib.rs": {
+      "bytes": 17443,
+      "sha256": "82ed908a32e0c9d2d57decdcfbda8c05241f6f176b533f6ae6fd455ebff5ac67"
+    },
+    "src/bin/benchmark.rs": {
+      "bytes": 8214,
+      "sha256": "43acfaea74f602f0d104ef2949cc1c3b39207319f5131c7c37f9cfcc05249de6"
+    },
+    "validation/reference.rs": {
+      "bytes": 5144,
+      "sha256": "67a0cf5acc7f8ad54926efa994f7bcb676a63d37ff6ed6229a190dd6ee7dbd33"
+    },
+    "tests/contracts.rs": {
+      "bytes": 12074,
+      "sha256": "be193fac212ec4ec44ea4846626831ae5d0be7cfaf6d633683844a6e46335b23"
+    }
+  },
+  "current_sources_match_tests_benchmark_review": true,
+  "toolchain": {
+    "rustc": "1.94.1 (e408947bf 2026-03-25)",
+    "cargo": "1.94.1 (29ea6fb6a 2026-03-24)",
+    "rustflags": "-C linker-features=-lld",
+    "dependency_count": 0,
+    "locked": true,
+    "offline": true,
+    "compile_jobs": 1,
+    "test_threads": 1,
+    "archive_signature_verified": false,
+    "external_receipts": {
+      "intake_current/runtime/rust_install_receipt.json": {
+        "bytes": 633,
+        "sha256": "185667a77801472efe33cec3988b886dc0390372ebea3f242e551e72095d9e72"
+      },
+      "intake_current/runtime/rust_probe_corrected_receipt.json": {
+        "bytes": 1640,
+        "sha256": "9c146a58cbbcdb702df9c6f67720e3060c283749f8816599fe42b72637f66e06"
+      },
+      "intake_current/runtime/system_linker_probe.json": {
+        "bytes": 680,
+        "sha256": "5b05851e89089fade8170d40b1e2ee0252be2cfdaae20b9a9a895d9747bab4da"
+      },
+      "intake_current/runtime/bridge_final_BUILD_RECEIPT.json": {
+        "bytes": 2928,
+        "sha256": "800291c2e51424dd01afdef5f64672343fb167b9dd97a38f8c7b1210b0584c73"
+      }
+    }
+  },
+  "validation": {
+    "actual_rust_contract_tests_passed": 12,
+    "failed": 0,
+    "attempts": 1,
+    "red_first_claimed": false,
+    "historical_c21h_tests_rerun": 0,
+    "test_receipt": "evidence/attempt_01/TEST_RECEIPT.json",
+    "test_scope": "new standalone block solver contracts only"
+  },
+  "benchmark": {
+    "run_receipt": "evidence/BENCHMARK_RUN_RECEIPT.json",
+    "summary": "evidence/BENCHMARK_SUMMARY.json",
+    "solve_rows": 312,
+    "jvp_rows": 240,
+    "m_cases": [
+      9,
+      64,
+      256
+    ],
+    "g_cases": [
+      2,
+      4
+    ],
+    "ledger": 15,
+    "workers": 1,
+    "affinity": [
+      0
+    ],
+    "exclusive_cpu": false,
+    "binary_bytes": 568400,
+    "binary_sha256": "e0059fe109f9e99189a6048575f688c10fd1b7e6536e8840b663087adb89f41e",
+    "reported_max_full_backward_error": 9.19443718189947e-16,
+    "comparator": "independent scalar dense partial-pivot reference, not Faer/LAPACK/deployed backend"
+  },
+  "independent_review": {
+    "report": "evidence/independent_review_01/BLOCK_CODE_REVIEW_KO.md",
+    "raw": "evidence/independent_review_01/BLOCK_INDEPENDENT_RAW_REVIEW.json",
+    "status": "PASS_SCOPED_EXISTING_MANUFACTURED_RAW",
+    "unique_solutions": 12,
+    "covered_solve_rows": 312,
+    "decimal_digits": 100,
+    "max_decimal_backward_error": "9.459365491798047691722160006682187563894560263542073124890899501398296410472702539571990745844107851E-16",
+    "new_rust_native_benchmark_runs": 0,
+    "not_a_directed_rounding_enclosure": true
+  },
+  "state_axes": {
+    "execution": "STANDALONE_KERNEL_IMPLEMENTED_TESTED_BENCHMARKED_REVIEWED",
+    "publication": "NO_GITHUB_WRITE_BY_THIS_SUBTASK; parent final receipt determines delivery",
+    "backup": "NO_PROVIDER_ACK_BY_THIS_SUBTASK; parent create-only delivery pending at receipt creation",
+    "dag": "theory -> implementation -> focused contracts -> manufactured kernel benchmark -> independent source/raw review COMPLETE; backend integration/native evaluation PENDING"
+  },
+  "github_write_calls_by_this_subtask": 0,
+  "c21h_backend_integrated": false,
+  "native_chemistry": "NOT_RUN",
+  "native_performance": "NOT_EVALUATED",
+  "ncp_current_resources": "NOT_OBSERVED_BY_THIS_SUBTASK",
+  "global_error_bound": null
+}

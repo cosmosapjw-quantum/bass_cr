@@ -1,0 +1,51 @@
+{
+  "schema": "C21I_PAIRED_PILOT_REVIEW_FINDINGS_V1",
+  "recorded_at_utc": "2026-10-20T06:59:20.148745+00:00",
+  "before_source": {
+    "bytes": 13457,
+    "sha256": "3b2bbc4a470f25c7469ce2c2da8265f935640d502b3e034fea450f240dd073f4"
+  },
+  "stage_scope": "C9 independent source review; observed C5/C6 bounded failure-accounting repair authorized by root",
+  "skill_context_used": {
+    "root_message": "Actual 1.3.0 C9+bounded C5/C6; one verification and at most one independent pass; smallest repair; old raw preserved; no forced theorem",
+    "read_files": {
+      "/root/.codex/plugins/cache/created-by-me-remote/physmath-research-loop/1.3.0/skills/physmath-research-loop/SKILL.md": {
+        "bytes": 7060,
+        "sha256": "ccb300f5b871e7e9df2ce289bc4533f4121a335b36a3b67bfa86742ca930d3a5"
+      },
+      "/root/.codex/plugins/cache/created-by-me-remote/physmath-research-loop/1.3.0/skills/physmath-research-loop/references/CODING_LOOP.md": {
+        "bytes": 4458,
+        "sha256": "b9e3d6217c243590683bee2ddfe5bb63293206c188b70137a6380e4765442c60"
+      },
+      "/root/.codex/plugins/cache/created-by-me-remote/physmath-research-loop/1.3.0/skills/physmath-research-loop/references/POLICY_INTEGRATION.md": {
+        "bytes": 7991,
+        "sha256": "a844f7c6d30bc7075d81bde0595b023d2a824c71250f826ce364f9a54bfc1cd0"
+      }
+    }
+  },
+  "findings": [
+    {
+      "id": "PP1",
+      "effect": "TimeoutExpired/OSError or collect exception loses started attempt row and wall cost",
+      "correction": "create-only initial attempt; perattempt Popen/failure receipt; retain wall and partial collection error"
+    },
+    {
+      "id": "PP2",
+      "effect": "subprocess.run timeout kills Python only; Rust segment has its own session",
+      "correction": "observe verified /proc parent+starttime descendants; pidfd-safe owned cleanup and receipt"
+    },
+    {
+      "id": "PP3",
+      "effect": "COMPLETE JSON with nonzero runner exit or native flag/segment failure can still pass summary",
+      "correction": "explicit operational success gates and planned attempt cardinality/uniqueness"
+    },
+    {
+      "id": "PP4",
+      "effect": "finally identity() may itself raise and suppress terminal receipt",
+      "correction": "record terminal identity failure independently and always write harness receipt and failure cost"
+    }
+  ],
+  "scientific_formula_changes": 0,
+  "native_execution": "NOT_RUN",
+  "paired_32_jobs": "NOT_RUN"
+}

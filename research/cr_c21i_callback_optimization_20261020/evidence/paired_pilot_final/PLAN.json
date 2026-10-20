@@ -1,0 +1,53 @@
+{
+  "affinity_before": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "alpha": 2e-14,
+  "at": "2026-10-20T07:13:14.577980+00:00",
+  "baseline_note": "c21h_original runs unchanged H. baseline is I instrumentation/guard baseline.",
+  "cleanup_scope": "only Popen root and observed /proc parent+start-time descendants, signaled with verified pidfd; Rust may use a different session",
+  "cpu": 2,
+  "exclusive_allocation_verified": false,
+  "first_observation": "fresh process; OS cache not flushed and binary previously built/run",
+  "fixture": "unchanged H smoke Y0 M9 dx1e-7 full28/integrated26",
+  "global_error_bound": null,
+  "later_observations": "fresh Python and fresh Rust segment processes, cache order rotated",
+  "max_concurrent_jobs": 1,
+  "max_step_divisor": 8,
+  "methods": [
+    "vigilode-rodas5p",
+    "diffsol-bdf"
+  ],
+  "modes": [
+    "c21h_original",
+    "baseline",
+    "vectorized",
+    "vectorized_exact"
+  ],
+  "monitor_affinity": [
+    3
+  ],
+  "monitor_cpu": 3,
+  "native_chemistry": false,
+  "rounds": 4,
+  "rtol": 2e-11,
+  "thread_environment": {
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "RAYON_NUM_THREADS": "1"
+  },
+  "timeout_context": "inherited H job budget 300s plus 30s outer grace; timed-out attempts retained and campaign stops",
+  "timeout_s": 330,
+  "timing_scope": "process_wall includes launch, fixed 25ms ownership-observation polling and owned cleanup; job/reference clocks remain separate",
+  "wire_note": "logged wrapper bytes are actual file bytes; received message sizes are canonical reserialization estimates"
+}

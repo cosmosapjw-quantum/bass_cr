@@ -1,0 +1,769 @@
+{
+  "recorded_at_utc": "2026-10-20T03:50:08.979Z",
+  "status": "fulfilled",
+  "value": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Found 10 relevant papers on 'How can Rosenbrock and BDF solvers exploit a Jacobian with optical-depth variables, two to four nonlinear gas variables, and passive integral variables using block Schur complements, matrix-free Jacobian vector products, or low rank coupling while preserving the full error norm?'.\n\n\n1. Rosenbrock-Krylov Methods for Large Systems of Differential Equations\n   ID: sfmmpb932dx1\n   2022 · Tranquilli, Paul, Sandu, Adrian\n   DOI: 10.48550/arxiv.1305.5481\n   Abstract: This paper develops a new class of Rosenbrock-type integrators based on a Krylov space solution of the linear systems. The new family, called Rosenbrock-Krylov (Rosenbrock-K), is well suited for solving large scale systems of ODEs or semi-discrete PDEs. The time discretization and the Krylov space approximation are treated as a single computational process, and the Krylov space properties are an integral part of the new Rosenbrock-K order condition theory developed herein. Consequently, Rosenbrock-K methods require a small number of basis vectors determined solely by the temporal order of accuracy. The subspace size is independent of the ODE under consideration, and there is no need to monitor the errors in linear system solutions at each stage. Numerical results show favorable properties of Rosenbrock-K methods when compared to current Rosenbrock and Rosenbrock-W schemes. \n\n2. Rosenbrock-W methods for stochastic Galerkin systems\n   ID: ade306nhtl\n   2023 · Roland Pulch, Adrian Sandu · Journal of Computational and Applied Mathematics\n   DOI: 10.1016/j.cam.2023.115527\n   Abstract: The stochastic Galerkin approach is a widely used method for quantifying uncertainty in dynamical systems. A polynomial chaos expansion of physical variables is used to represent uncertainty. Thus the evolution equations for the dynamics of physical quantities are replaced by evolution equations for the polynomial chaos coefficients. The dimension of the stochastic Galerkin system is m times larger than the dimension of the original physical system, where m is the number of polynomial chaos coefficients. The cost of implicit time integration methods, required for stiff dynamical systems, increases considerably, for example, by a factor m3 when direct linear solvers are used. This work studies efficient implicit methods for the time integration of stiff stochastic Galerkin systems consisting of ordinary differential equations. Linearly-implicit Rosenbrock–Wanner schemes are considered. A block-diagonal approximation of the Jacobian of the stochastic Galerkin system is employed, where the diagonal blocks are the Jacobian of the physical system, evaluated at the mean solution value. We perform a theoretical study of numerical stability for this approximation, using a stochastic extension of the Dahlquist test equation, and propose a concept of linear stochastic Galerkin stability. A rigorous analysis is done for methods of order one and two. A third-order scheme is designed to investigate the stability properties by numerical experiments. Numerical results confirm the theoretical findings. \n\n3. Adaptive Krylov-Type Time Integration Methods.\n   ID: 3yhjjz8uc0\n   2019 · Paul Tranquilli, Ross Glandon, Adrian Sandu · arXiv: Numerical Analysis\n   Abstract: The Rosenbrock-Krylov family of time integration schemes is an extension of Rosenbrock-W methods that employs a specific Krylov based approximation of the linear system solutions arising within each stage of the integrator. This work proposes an extension of Rosenbrock-Krylov methods to address stability questions which arise for methods making use of inexact linear system solution strategies. Two approaches for improving the stability and efficiency of Rosenbrock-Krylov methods are proposed, one through direct control of linear system residuals and the second through a novel extension of the underlying Krylov space to include stage right hand side vectors. Rosenbrock-Krylov methods employing the new approaches show a substantial improvement in computational efficiency relative to prior implementations.\n\n4. Benchmarking stiff ODE solvers for atmorspheric chemistry problems II: Rosenbrock solvers\n   ID: 2nzre8z76k\n   1996 · Adrian Sandu, Jan Verwer, Joke Blom · Report - Department of Numerical Mathematics\n   Abstract: In the numerical simulation of atmospheric transport-chemistry processes, a major task is the integration of the stiff systems of ordinary differential equations describing the chemical transformations. It is therefore of interest to systematically search for stiff solvers which can be identified as close to optimal for atmospheric applications. In this paper we continue our investigation from [20] and compare eight solvers on a set of seven box-models used in present day models. The focus is on Rosenbrock solvers. These turn out to be very well suited for our application when they are provided with highly efficient sparse matrix techniques to economize on the linear algebra. Two of the Rosenbrock solvers tested are from the literature, viz. RODAS and ROS4, and two are new and developed for this benchmark, viz. RODAS3 and ROS3.\n\n5. Biorthogonal Rosenbrock-Krylov time discretization methods\n   ID: 7pg4eyzyfn65\n   2022 · Glandon, Ross, Tranquilli, Paul, Sandu, Adrian\n   DOI: 10.48550/arxiv.1908.10531\n   Abstract: Many scientific applications require the solution of large initial-value problems, such as those produced by the method of lines after semi-discretization in space of partial differential equations. The computational cost of implicit time discretizations is dominated by the solution of nonlinear systems of equations at each time step. In order to decrease this cost, the recently developed Rosenbrock-Krylov (ROK) time integration methods extend the classical linearly-implicit Rosenbrock(-W) methods, and make use of a Krylov subspace approximation to the Jacobian computed via an Arnoldi process. Since the ROK order conditions rely on the construction of a single Krylov space, no restarting of the Arnoldi process is allowed, and the iterations quickly become expensive with increasing subspace dimensions. This work extends the ROK framework to make use of the Lanczos biorthogonalization procedure for constructing Jacobian approximations. The resulting new family of methods is named biorthogonal ROK (BOROK). The Lanczos procedure's short two-term recurrence allows BOROK methods to utilize larger subspaces for the Jacobian approximation, resulting in increased numerical stability of the time integration at a reduced computational cost. Adaptive subspace size selection and basis extension procedures are also developed for the new schemes. Numerical experiments show that for stiff problems, where a large subspace used to approximate the Jacobian is required for stability, the BOROK methods outperform the original ROK methods. \n\n6. Rosenbrock--Krylov Methods for Large Systems of Differential Equations\n   ID: 4rcy3h0vhm\n   2014 · Paul Tranquilli, Adrian Sandu · SIAM Journal on Scientific Computing\n   DOI: 10.1137/130923336\n   Abstract: This paper develops a new class of Rosenbrock-type integrators based on a Krylov space solution of linear systems. The new family, called Rosenbrock--Krylov (Rosenbrock-K), is well suited for solving large-scale systems of ODEs or semidiscrete PDEs. The time discretization and the Krylov space approximation are treated as a single computational process, and the Krylov space properties are an integral part of the new Rosenbrock-K order condition theory developed herein. Consequently, Rosenbrock-K methods require a small number of basis vectors determined solely by the temporal order of accuracy. The subspace size is independent of the ODE under consideration, and there is no need to monitor the errors in linear system solutions at each stage. Numerical results show favorable properties of Rosenbrock-K methods when compared to current Rosenbrock and Rosenbrock-W schemes.\n\n7. Performance assessment of exponential Rosenbrock methods for large systems of ODEs\n   ID: 4ooqlmdlo1\n   2013 · Elliot J. Carr, Timothy J. Moroney, Ian Turner · Anziam Journal\n   DOI: 10.21914/ANZIAMJ.V54I0.6331\n   Abstract: This paper studies time integration methods for large stiff systems of ordinary differential equations (ODEs) of the form u'(t) = g(u(t)). For such problems, implicit methods generally outperform explicit methods, since the time step is usually less restricted by stability constraints. Recently, however, explicit so-called exponential integrators have become popular for stiff problems due to their favourable stability properties. These methods use matrix-vector products involving exponential-like functions of the Jacobian matrix, which can be approximated using Krylov subspace methods that require only matrix-vector products with the Jacobian. In this paper, we implement exponential integrators of second, third and fourth order and demonstrate that they are competitive with well-established approaches based on the backward differentiation formulas and a preconditioned Newton-Krylov solution strategy.\n\n8. Rosenbrock-Krylov Methods for Large Systems of Differential Equations\n   ID: 1eohvzsjbx\n   2013 · Paul Tranquilli, Adrian Sandu · arXiv: Numerical Analysis\n   DOI: 10.1137/130923336\n   Abstract: This paper develops a new class of Rosenbrock-type integrators based on a Krylov space solution of the linear systems. The new family, called Rosenbrock-Krylov (Rosenbrock-K), is well suited for solving large scale systems of ODEs or semi-discrete PDEs. The time discretization and the Krylov space approximation are treated as a single computational process, and the Krylov space properties are an integral part of the new Rosenbrock-K order condition theory developed herein. Consequently, Rosenbrock-K methods require a small number of basis vectors determined solely by the temporal order of accuracy. The subspace size is independent of the ODE under consideration, and there is no need to monitor the errors in linear system solutions at each stage. Numerical results show favorable properties of Rosenbrock-K methods when compared to current Rosenbrock and Rosenbrock-W schemes.\n\n9. EPIRK- W and EPIRK- K Time Discretization Methods\n   ID: 7612aaht0l\n   2019 · Mahesh Narayanamurthi, Paul Tranquilli, Adrian Sandu · Journal of Scientific Computing\n   DOI: 10.1007/S10915-018-0761-3\n   Abstract: Exponential integrators are special time discretization methods where the traditional linear system solves used by implicit schemes are replaced with computing the action of matrix exponential-like functions on a vector. A very general formulation of exponential integrators is offered by the Exponential Propagation Iterative methods of Runge–Kutta type (EPIRK) family of schemes. The use of Jacobian approximations is an important strategy to drastically reduce the overall computational costs of implicit schemes while maintaining the quality of their solutions. This paper extends the EPIRK class to allow the use of inexact Jacobians as arguments of the matrix exponential-like functions. Specifically, we develop two new families of methods: EPIRK-W integrators that can accommodate any approximation of the Jacobian, and EPIRK-K integrators that rely on a specific Krylov-subspace projection of the exact Jacobian. Classical order conditions theories are constructed for these families. Practical EPIRK-W methods of order three and EPIRK-K methods of order four are developed. Numerical experiments indicate that the methods proposed herein are computationally favorable when compared to a representative state-of-the-art exponential integrator, and a Rosenbrock–Krylov integrator.\n\n10. Second-order robust parallel integrators for dynamical low-rank approximation\n   ID: 4jzf964ftp\n   2024 · Jonas Kusch · arXiv.org\n   DOI: 10.48550/arxiv.2403.02834\n   Abstract: Due to its reduced memory and computational demands, dynamical low-rank approximation (DLRA) has sparked significant interest in multiple research communities. A central challenge in DLRA is the development of time integrators that are robust to the curvature of the manifold of low-rank matrices. Recently, a parallel robust time integrator that permits dynamic rank adaptation and enables a fully parallel update of all low-rank factors was introduced. Despite its favorable computational efficiency, the construction as a first-order approximation to the augmented basis-update&Galerkin integrator restricts the parallel integrator's accuracy to order one. In this work, an extension to higher order is proposed by a careful basis augmentation before solving the matrix differential equations of the factorized solution. A robust error bound with an improved dependence on normal components of the vector field together with a norm preservation property up to small terms is derived. These analytic results are complemented and demonstrated through a series of numerical experiments."
+      }
+    ],
+    "structuredContent": {
+      "searchTerm": "How can Rosenbrock and BDF solvers exploit a Jacobian with optical-depth variables, two to four nonlinear gas variables, and passive integral variables using block Schur complements, matrix-free Jacobian vector products, or low rank coupling while preserving the full error norm?",
+      "papers": [
+        {
+          "id": 4092789913,
+          "title": "Rosenbrock-Krylov Methods for Large Systems of Differential Equations",
+          "is_archived": false,
+          "full_slug": "rosenbrock-krylov-methods-for-large-systems-of-differential-sfmmpb932dx1",
+          "journal": null,
+          "conference_series": null,
+          "date": "2022-03-11T00:00:00Z",
+          "is_oa": null,
+          "publication_type": "Repository",
+          "doi": "10.48550/arxiv.1305.5481",
+          "unique_id": "sfmmpb932dx1",
+          "abstract": "This paper develops a new class of Rosenbrock-type integrators based on a Krylov space solution of the linear systems. The new family, called Rosenbrock-Krylov (Rosenbrock-K), is well suited for solving large scale systems of ODEs or semi-discrete PDEs. The time discretization and the Krylov space approximation are treated as a single computational process, and the Krylov space properties are an integral part of the new Rosenbrock-K order condition theory developed herein. Consequently, Rosenbrock-K methods require a small number of basis vectors determined solely by the temporal order of accuracy. The subspace size is independent of the ODE under consideration, and there is no need to monitor the errors in linear system solutions at each stage. Numerical results show favorable properties of Rosenbrock-K methods when compared to current Rosenbrock and Rosenbrock-W schemes. ",
+          "authors": {
+            "total": 2,
+            "data": [
+              {
+                "display_name": "Tranquilli, Paul",
+                "full_slug": null
+              },
+              {
+                "display_name": "Sandu, Adrian",
+                "full_slug": null
+              }
+            ]
+          },
+          "affiliations": {
+            "total": 0,
+            "data": []
+          },
+          "metrics": {
+            "citations": {
+              "total": null
+            }
+          },
+          "tldr": null,
+          "podcast": null,
+          "podcast_generation_allowed": true,
+          "entity_type": "PAPER"
+        },
+        {
+          "id": 4020465031,
+          "title": "Rosenbrock-W methods for stochastic Galerkin systems",
+          "is_archived": false,
+          "full_slug": "rosenbrock-w-methods-for-stochastic-galerkin-systems-ade306nhtl",
+          "journal": {
+            "display_name": "Journal of Computational and Applied Mathematics",
+            "official_page": "https://www.journals.elsevier.com/journal-of-computational-and-applied-mathematics",
+            "issn": "0377-0427",
+            "alias": null,
+            "id": 165473669,
+            "slug": "journal-of-computational-and-applied-mathematics",
+            "unique_id": "3maydt35",
+            "full_slug": "journal-of-computational-and-applied-mathematics-3maydt35"
+          },
+          "conference_series": null,
+          "date": "2023-08-01T00:00:00Z",
+          "is_oa": null,
+          "publication_type": "Journal Article",
+          "doi": "10.1016/j.cam.2023.115527",
+          "unique_id": "ade306nhtl",
+          "abstract": "The stochastic Galerkin approach is a widely used method for quantifying uncertainty in dynamical systems. A polynomial chaos expansion of physical variables is used to represent uncertainty. Thus the evolution equations for the dynamics of physical quantities are replaced by evolution equations for the polynomial chaos coefficients. The dimension of the stochastic Galerkin system is m times larger than the dimension of the original physical system, where m is the number of polynomial chaos coefficients. The cost of implicit time integration methods, required for stiff dynamical systems, increases considerably, for example, by a factor m3 when direct linear solvers are used. This work studies efficient implicit methods for the time integration of stiff stochastic Galerkin systems consisting of ordinary differential equations. Linearly-implicit Rosenbrock–Wanner schemes are considered. A block-diagonal approximation of the Jacobian of the stochastic Galerkin system is employed, where the diagonal blocks are the Jacobian of the physical system, evaluated at the mean solution value. We perform a theoretical study of numerical stability for this approximation, using a stochastic extension of the Dahlquist test equation, and propose a concept of linear stochastic Galerkin stability. A rigorous analysis is done for methods of order one and two. A third-order scheme is designed to investigate the stability properties by numerical experiments. Numerical results confirm the theoretical findings. ",
+          "authors": {
+            "total": 2,
+            "data": [
+              {
+                "display_name": "Roland Pulch",
+                "id": 2034271688,
+                "slug": "roland-pulch",
+                "unique_id": "2qb5c06prx",
+                "full_slug": "roland-pulch-2qb5c06prx",
+                "affiliation_full_slug": "university-of-greifswald-10dh6lfi"
+              },
+              {
+                "display_name": "Adrian Sandu",
+                "id": 2160076523,
+                "slug": "adrian-sandu",
+                "unique_id": "4bvz0bigvs",
+                "full_slug": "adrian-sandu-4bvz0bigvs",
+                "affiliation_full_slug": "virginia-tech-1qdxqc03"
+              }
+            ]
+          },
+          "affiliations": {
+            "total": 2,
+            "data": [
+              {
+                "display_name": "University of Greifswald",
+                "city": "Greifswald",
+                "region": null,
+                "country": "Germany",
+                "id": 36522303,
+                "slug": "university-of-greifswald",
+                "unique_id": "10dh6lfi",
+                "full_slug": "university-of-greifswald-10dh6lfi"
+              },
+              {
+                "display_name": "Virginia Tech",
+                "city": "Blacksburg",
+                "region": "Virginia",
+                "country": "United States",
+                "id": 859038795,
+                "slug": "virginia-tech",
+                "unique_id": "1qdxqc03",
+                "full_slug": "virginia-tech-1qdxqc03"
+              }
+            ]
+          },
+          "metrics": {
+            "citations": {
+              "total": 1
+            }
+          },
+          "tldr": "This study develops efficient implicit time integration methods for stiff stochastic Galerkin systems, focusing on linearly-implicit Rosenbrock-Wanner schemes with a block-diagonal Jacobian approximation, and investigates their numerical stability and performance.",
+          "podcast": null,
+          "podcast_generation_allowed": true,
+          "entity_type": "PAPER"
+        },
+        {
+          "id": 2978218631,
+          "title": "Adaptive Krylov-Type Time Integration Methods.",
+          "is_archived": false,
+          "full_slug": "adaptive-krylov-type-time-integration-methods-3yhjjz8uc0",
+          "journal": {
+            "display_name": "arXiv: Numerical Analysis",
+            "official_page": null,
+            "issn": null,
+            "alias": null,
+            "id": 2595313807,
+            "slug": "arxiv-numerical-analysis",
+            "unique_id": "36dm9vah",
+            "full_slug": "arxiv-numerical-analysis-36dm9vah"
+          },
+          "conference_series": null,
+          "date": "2019-10-06T00:00:00Z",
+          "is_oa": true,
+          "publication_type": "Posted Content",
+          "doi": null,
+          "unique_id": "3yhjjz8uc0",
+          "abstract": "The Rosenbrock-Krylov family of time integration schemes is an extension of Rosenbrock-W methods that employs a specific Krylov based approximation of the linear system solutions arising within each stage of the integrator. This work proposes an extension of Rosenbrock-Krylov methods to address stability questions which arise for methods making use of inexact linear system solution strategies. Two approaches for improving the stability and efficiency of Rosenbrock-Krylov methods are proposed, one through direct control of linear system residuals and the second through a novel extension of the underlying Krylov space to include stage right hand side vectors. Rosenbrock-Krylov methods employing the new approaches show a substantial improvement in computational efficiency relative to prior implementations.",
+          "authors": {
+            "total": 3,
+            "data": [
+              {
+                "display_name": "Paul Tranquilli",
+                "id": 2056172202,
+                "slug": "paul-tranquilli",
+                "unique_id": "4w312rq7tu",
+                "full_slug": "paul-tranquilli-4w312rq7tu",
+                "affiliation_full_slug": "lawrence-livermore-national-laboratory-jmxular0"
+              },
+              {
+                "display_name": "Ross Glandon",
+                "id": 2228782190,
+                "slug": "ross-glandon",
+                "unique_id": "3ml5qdr5jr",
+                "full_slug": "ross-glandon-3ml5qdr5jr",
+                "affiliation_full_slug": "virginia-tech-1qdxqc03"
+              },
+              {
+                "display_name": "Adrian Sandu",
+                "id": 2160076523,
+                "slug": "adrian-sandu",
+                "unique_id": "4bvz0bigvs",
+                "full_slug": "adrian-sandu-4bvz0bigvs",
+                "affiliation_full_slug": "virginia-tech-1qdxqc03"
+              }
+            ]
+          },
+          "affiliations": {
+            "total": 2,
+            "data": [
+              {
+                "display_name": "Lawrence Livermore National Laboratory",
+                "city": "Livermore",
+                "region": "California",
+                "country": "United States",
+                "id": 1282311441,
+                "slug": "lawrence-livermore-national-laboratory",
+                "unique_id": "jmxular0",
+                "full_slug": "lawrence-livermore-national-laboratory-jmxular0"
+              },
+              {
+                "display_name": "Virginia Tech",
+                "city": "Blacksburg",
+                "region": "Virginia",
+                "country": "United States",
+                "id": 859038795,
+                "slug": "virginia-tech",
+                "unique_id": "1qdxqc03",
+                "full_slug": "virginia-tech-1qdxqc03"
+              }
+            ]
+          },
+          "fulltext_url": "https://arxiv.org/pdf/1910.02514v1",
+          "fulltext_url_no_follow": true,
+          "paper_urls": {
+            "order": [
+              "Html",
+              "Others"
+            ],
+            "data": {
+              "Html": [
+                "https://dblp.uni-trier.de/db/journals/corr/corr1910.html#abs-1910-02514",
+                "https://arxiv.org/abs/1910.02514"
+              ],
+              "Others": [
+                "http://dblp.uni-trier.de/db/journals/corr/corr1910.html#abs-1910-02514"
+              ]
+            },
+            "is_show": true
+          },
+          "metrics": {
+            "citations": {
+              "total": 4
+            }
+          },
+          "tldr": "Two approaches for improving the stability and efficiency of Rosenbrock-Krylov methods are proposed, one through direct control of linear system residuals and the second through a novel extension of the underlying Krylov space to include stage right hand side vectors.",
+          "podcast": null,
+          "podcast_generation_allowed": true,
+          "entity_type": "PAPER"
+        },
+        {
+          "id": 2527212776,
+          "title": "Benchmarking stiff ODE solvers for atmorspheric chemistry problems II: Rosenbrock solvers",
+          "is_archived": false,
+          "full_slug": "benchmarking-stiff-ode-solvers-for-atmorspheric-chemistry-2nzre8z76k",
+          "journal": {
+            "display_name": "Report - Department of Numerical Mathematics",
+            "official_page": null,
+            "issn": "0169-0388",
+            "alias": null,
+            "id": 2764639761,
+            "slug": "report-department-of-numerical-mathematics",
+            "unique_id": "12456ltj",
+            "full_slug": "report-department-of-numerical-mathematics-12456ltj"
+          },
+          "conference_series": null,
+          "date": "1996-01-01T00:00:00Z",
+          "is_oa": true,
+          "publication_type": "Journal Article",
+          "doi": null,
+          "unique_id": "2nzre8z76k",
+          "abstract": "In the numerical simulation of atmospheric transport-chemistry processes, a major task is the integration of the stiff systems of ordinary differential equations describing the chemical transformations. It is therefore of interest to systematically search for stiff solvers which can be identified as close to optimal for atmospheric applications. In this paper we continue our investigation from [20] and compare eight solvers on a set of seven box-models used in present day models. The focus is on Rosenbrock solvers. These turn out to be very well suited for our application when they are provided with highly efficient sparse matrix techniques to economize on the linear algebra. Two of the Rosenbrock solvers tested are from the literature, viz. RODAS and ROS4, and two are new and developed for this benchmark, viz. RODAS3 and ROS3.",
+          "authors": {
+            "total": 5,
+            "data": [
+              {
+                "display_name": "Adrian Sandu",
+                "id": 2160076523,
+                "slug": "adrian-sandu",
+                "unique_id": "4bvz0bigvs",
+                "full_slug": "adrian-sandu-4bvz0bigvs"
+              },
+              {
+                "display_name": "Jan Verwer",
+                "id": 2789920413,
+                "slug": "jan-verwer",
+                "unique_id": "398gg4lpjr",
+                "full_slug": "jan-verwer-398gg4lpjr"
+              },
+              {
+                "display_name": "Joke Blom",
+                "id": 2126007267,
+                "slug": "joke-blom",
+                "unique_id": "55yxh0y4ka",
+                "full_slug": "joke-blom-55yxh0y4ka"
+              },
+              {
+                "display_name": "E.J. Spee",
+                "id": 2943020303,
+                "slug": "e-j-spee",
+                "unique_id": "2p4u79icr3",
+                "full_slug": "e-j-spee-2p4u79icr3"
+              },
+              {
+                "display_name": "Greg Carmichael",
+                "id": 2155624799,
+                "slug": "greg-carmichael",
+                "unique_id": "31295ia1w8",
+                "full_slug": "greg-carmichael-31295ia1w8"
+              }
+            ]
+          },
+          "affiliations": {
+            "total": 0,
+            "data": []
+          },
+          "fulltext_url": null,
+          "fulltext_url_no_follow": true,
+          "paper_urls": {
+            "order": [
+              "Html"
+            ],
+            "data": {
+              "Html": [
+                "https://www.narcis.nl/publication/RecordID/oai:cwi.nl:10743"
+              ]
+            },
+            "is_show": true
+          },
+          "metrics": {
+            "citations": {
+              "total": null
+            }
+          },
+          "tldr": "The focus is on Rosenbrock solvers, which turn out to be very well suited for the application when they are provided with highly efficient sparse matrix techniques to economize on the linear algebra.",
+          "podcast": null,
+          "podcast_generation_allowed": true,
+          "entity_type": "PAPER"
+        },
+        {
+          "id": 4097030861,
+          "title": "Biorthogonal Rosenbrock-Krylov time discretization methods",
+          "is_archived": false,
+          "full_slug": "biorthogonal-rosenbrock-krylov-time-discretization-methods-7pg4eyzyfn65",
+          "journal": null,
+          "conference_series": null,
+          "date": "2022-02-27T00:00:00Z",
+          "is_oa": null,
+          "publication_type": "Repository",
+          "doi": "10.48550/arxiv.1908.10531",
+          "unique_id": "7pg4eyzyfn65",
+          "abstract": "Many scientific applications require the solution of large initial-value problems, such as those produced by the method of lines after semi-discretization in space of partial differential equations. The computational cost of implicit time discretizations is dominated by the solution of nonlinear systems of equations at each time step. In order to decrease this cost, the recently developed Rosenbrock-Krylov (ROK) time integration methods extend the classical linearly-implicit Rosenbrock(-W) methods, and make use of a Krylov subspace approximation to the Jacobian computed via an Arnoldi process. Since the ROK order conditions rely on the construction of a single Krylov space, no restarting of the Arnoldi process is allowed, and the iterations quickly become expensive with increasing subspace dimensions. This work extends the ROK framework to make use of the Lanczos biorthogonalization procedure for constructing Jacobian approximations. The resulting new family of methods is named biorthogonal ROK (BOROK). The Lanczos procedure's short two-term recurrence allows BOROK methods to utilize larger subspaces for the Jacobian approximation, resulting in increased numerical stability of the time integration at a reduced computational cost. Adaptive subspace size selection and basis extension procedures are also developed for the new schemes. Numerical experiments show that for stiff problems, where a large subspace used to approximate the Jacobian is required for stability, the BOROK methods outperform the original ROK methods. ",
+          "authors": {
+            "total": 3,
+            "data": [
+              {
+                "display_name": "Glandon, Ross",
+                "full_slug": null
+              },
+              {
+                "display_name": "Tranquilli, Paul",
+                "full_slug": null
+              },
+              {
+                "display_name": "Sandu, Adrian",
+                "full_slug": null
+              }
+            ]
+          },
+          "affiliations": {
+            "total": 0,
+            "data": []
+          },
+          "metrics": {
+            "citations": {
+              "total": null
+            }
+          },
+          "tldr": null,
+          "podcast": null,
+          "podcast_generation_allowed": true,
+          "entity_type": "PAPER"
+        },
+        {
+          "id": 2051430428,
+          "title": "Rosenbrock--Krylov Methods for Large Systems of Differential Equations",
+          "is_archived": false,
+          "full_slug": "rosenbrock-krylov-methods-for-large-systems-of-differential-4rcy3h0vhm",
+          "journal": {
+            "display_name": "SIAM Journal on Scientific Computing",
+            "official_page": "http://www.siam.org/journals/sisc.php",
+            "issn": "1064-8275",
+            "alias": [
+              "SIAM Journal on Scientific Computing"
+            ],
+            "id": 165512578,
+            "slug": "siam-journal-on-scientific-computing",
+            "unique_id": "162j53kf",
+            "full_slug": "siam-journal-on-scientific-computing-162j53kf"
+          },
+          "conference_series": null,
+          "date": "2014-06-26T00:00:00Z",
+          "is_oa": true,
+          "publication_type": "Journal Article",
+          "doi": "10.1137/130923336",
+          "unique_id": "4rcy3h0vhm",
+          "abstract": "This paper develops a new class of Rosenbrock-type integrators based on a Krylov space solution of linear systems. The new family, called Rosenbrock--Krylov (Rosenbrock-K), is well suited for solving large-scale systems of ODEs or semidiscrete PDEs. The time discretization and the Krylov space approximation are treated as a single computational process, and the Krylov space properties are an integral part of the new Rosenbrock-K order condition theory developed herein. Consequently, Rosenbrock-K methods require a small number of basis vectors determined solely by the temporal order of accuracy. The subspace size is independent of the ODE under consideration, and there is no need to monitor the errors in linear system solutions at each stage. Numerical results show favorable properties of Rosenbrock-K methods when compared to current Rosenbrock and Rosenbrock-W schemes.",
+          "authors": {
+            "total": 2,
+            "data": [
+              {
+                "display_name": "Paul Tranquilli",
+                "id": 2056172202,
+                "slug": "paul-tranquilli",
+                "unique_id": "4w312rq7tu",
+                "full_slug": "paul-tranquilli-4w312rq7tu"
+              },
+              {
+                "display_name": "Adrian Sandu",
+                "id": 2160076523,
+                "slug": "adrian-sandu",
+                "unique_id": "4bvz0bigvs",
+                "full_slug": "adrian-sandu-4bvz0bigvs"
+              }
+            ]
+          },
+          "affiliations": {
+            "total": 0,
+            "data": []
+          },
+          "fulltext_url": null,
+          "fulltext_url_no_follow": true,
+          "paper_urls": {
+            "order": [
+              "Html"
+            ],
+            "data": {
+              "Html": [
+                "https://epubs.siam.org/doi/abs/10.1137/130923336",
+                "https://ui.adsabs.harvard.edu/abs/2013arXiv1305.5481T/abstract"
+              ]
+            },
+            "is_show": true
+          },
+          "metrics": {
+            "citations": {
+              "total": 53
+            }
+          },
+          "tldr": "A new class of Rosenbrock-type integrators based on a Krylov space solution of linear systems, called Rosen Brock--Krylov (Rosenbrok-K), is well suited for solving large-scale systems of ODEs or semidiscrete PDEs.",
+          "podcast": null,
+          "podcast_generation_allowed": true,
+          "entity_type": "PAPER"
+        },
+        {
+          "id": 2109663055,
+          "title": "Performance assessment of exponential Rosenbrock methods for large systems of ODEs",
+          "is_archived": false,
+          "full_slug": "performance-assessment-of-exponential-rosenbrock-methods-for-4ooqlmdlo1",
+          "journal": {
+            "display_name": "Anziam Journal",
+            "official_page": "http://journals.cambridge.org/ANZ",
+            "issn": "1446-1811",
+            "alias": [
+              "Australian & New Zealand industrial and applied mathematics journal",
+              "Australian and New Zealand industrial and applied mathematics journal"
+            ],
+            "id": 109939064,
+            "slug": "anziam-journal",
+            "unique_id": "3tgtd1bz",
+            "full_slug": "anziam-journal-3tgtd1bz"
+          },
+          "conference_series": null,
+          "date": "2013-05-12T00:00:00Z",
+          "is_oa": true,
+          "publication_type": "Journal Article",
+          "doi": "10.21914/ANZIAMJ.V54I0.6331",
+          "unique_id": "4ooqlmdlo1",
+          "abstract": "This paper studies time integration methods for large stiff systems of ordinary differential equations (ODEs) of the form u'(t) = g(u(t)). For such problems, implicit methods generally outperform explicit methods, since the time step is usually less restricted by stability constraints. Recently, however, explicit so-called exponential integrators have become popular for stiff problems due to their favourable stability properties. These methods use matrix-vector products involving exponential-like functions of the Jacobian matrix, which can be approximated using Krylov subspace methods that require only matrix-vector products with the Jacobian. In this paper, we implement exponential integrators of second, third and fourth order and demonstrate that they are competitive with well-established approaches based on the backward differentiation formulas and a preconditioned Newton-Krylov solution strategy.",
+          "authors": {
+            "total": 3,
+            "data": [
+              {
+                "display_name": "Elliot J. Carr",
+                "id": 2121830636,
+                "slug": "elliot-j-carr",
+                "unique_id": "5fwpyrftgl",
+                "full_slug": "elliot-j-carr-5fwpyrftgl",
+                "affiliation_full_slug": "queensland-university-of-technology-2x7zzq5j"
+              },
+              {
+                "display_name": "Timothy J. Moroney",
+                "id": 2293825651,
+                "slug": "timothy-j-moroney",
+                "unique_id": "1truw70vh1",
+                "full_slug": "timothy-j-moroney-1truw70vh1",
+                "affiliation_full_slug": "queensland-university-of-technology-2x7zzq5j"
+              },
+              {
+                "display_name": "Ian Turner",
+                "id": 2107878728,
+                "slug": "ian-turner",
+                "unique_id": "123hgwzhx2",
+                "full_slug": "ian-turner-123hgwzhx2",
+                "affiliation_full_slug": "queensland-university-of-technology-2x7zzq5j"
+              }
+            ]
+          },
+          "affiliations": {
+            "total": 1,
+            "data": [
+              {
+                "display_name": "Queensland University of Technology",
+                "city": "Brisbane",
+                "region": "Queensland",
+                "country": "Australia",
+                "id": 160993911,
+                "slug": "queensland-university-of-technology",
+                "unique_id": "2x7zzq5j",
+                "full_slug": "queensland-university-of-technology-2x7zzq5j"
+              }
+            ]
+          },
+          "fulltext_url": "/pdf/performance-assessment-of-exponential-rosenbrock-methods-for-4ooqlmdlo1.pdf",
+          "fulltext_url_no_follow": false,
+          "paper_urls": {
+            "order": [
+              "Pdf",
+              "Html"
+            ],
+            "data": {
+              "Html": [
+                "https://eprints.qut.edu.au/54569/",
+                "https://journal.austms.org.au/ojs/index.php/ANZIAMJ/article/view/6331"
+              ],
+              "Pdf": [
+                "https://journal.austms.org.au/ojs/index.php/ANZIAMJ/article/view/6331/1660"
+              ]
+            },
+            "is_show": true
+          },
+          "metrics": {
+            "citations": {
+              "total": 1
+            }
+          },
+          "tldr": "In this article, a time integration method for large stiff ODEs of the form u'(t) = g(u(t)) is proposed, where the time step is usually less restricted by stability constraints.",
+          "podcast": null,
+          "podcast_generation_allowed": true,
+          "entity_type": "PAPER"
+        },
+        {
+          "id": 3103803253,
+          "title": "Rosenbrock-Krylov Methods for Large Systems of Differential Equations",
+          "is_archived": false,
+          "full_slug": "rosenbrock-krylov-methods-for-large-systems-of-differential-1eohvzsjbx",
+          "journal": {
+            "display_name": "arXiv: Numerical Analysis",
+            "official_page": null,
+            "issn": null,
+            "alias": null,
+            "id": 2595313807,
+            "slug": "arxiv-numerical-analysis",
+            "unique_id": "36dm9vah",
+            "full_slug": "arxiv-numerical-analysis-36dm9vah"
+          },
+          "conference_series": null,
+          "date": "2013-05-23T00:00:00Z",
+          "is_oa": true,
+          "publication_type": "Journal Article",
+          "doi": "10.1137/130923336",
+          "unique_id": "1eohvzsjbx",
+          "abstract": "This paper develops a new class of Rosenbrock-type integrators based on a Krylov space solution of the linear systems. The new family, called Rosenbrock-Krylov (Rosenbrock-K), is well suited for solving large scale systems of ODEs or semi-discrete PDEs. The time discretization and the Krylov space approximation are treated as a single computational process, and the Krylov space properties are an integral part of the new Rosenbrock-K order condition theory developed herein. Consequently, Rosenbrock-K methods require a small number of basis vectors determined solely by the temporal order of accuracy. The subspace size is independent of the ODE under consideration, and there is no need to monitor the errors in linear system solutions at each stage. Numerical results show favorable properties of Rosenbrock-K methods when compared to current Rosenbrock and Rosenbrock-W schemes.",
+          "authors": {
+            "total": 2,
+            "data": [
+              {
+                "display_name": "Paul Tranquilli",
+                "id": 2056172202,
+                "slug": "paul-tranquilli",
+                "unique_id": "4w312rq7tu",
+                "full_slug": "paul-tranquilli-4w312rq7tu"
+              },
+              {
+                "display_name": "Adrian Sandu",
+                "id": 2160076523,
+                "slug": "adrian-sandu",
+                "unique_id": "4bvz0bigvs",
+                "full_slug": "adrian-sandu-4bvz0bigvs"
+              }
+            ]
+          },
+          "affiliations": {
+            "total": 0,
+            "data": []
+          },
+          "fulltext_url": "https://arxiv.org/pdf/1305.5481",
+          "fulltext_url_no_follow": true,
+          "paper_urls": {
+            "order": [
+              "Html"
+            ],
+            "data": {
+              "Html": [
+                "https://arxiv.org/abs/1305.5481"
+              ]
+            },
+            "is_show": true
+          },
+          "metrics": {
+            "citations": {
+              "total": 39
+            }
+          },
+          "tldr": "In this paper, a new class of Rosenbrock-type integrators based on a Krylov space solution of the linear systems was developed. But the method requires a small number of basis vectors determined solely by the temporal order of accuracy, and there is no need to monitor the errors in linear system solutions at each stage.",
+          "podcast": null,
+          "podcast_generation_allowed": true,
+          "entity_type": "PAPER"
+        },
+        {
+          "id": 2582624052,
+          "title": "EPIRK- W and EPIRK- K Time Discretization Methods",
+          "is_archived": false,
+          "full_slug": "epirk-w-and-epirk-k-time-discretization-methods-7612aaht0l",
+          "journal": {
+            "display_name": "Journal of Scientific Computing",
+            "official_page": "https://www.springer.com/journal/10915",
+            "issn": "0885-7474",
+            "alias": null,
+            "id": 151550017,
+            "slug": "journal-of-scientific-computing",
+            "unique_id": "102qdcew",
+            "full_slug": "journal-of-scientific-computing-102qdcew"
+          },
+          "conference_series": null,
+          "date": "2019-01-01T00:00:00Z",
+          "is_oa": true,
+          "publication_type": "Journal Article",
+          "doi": "10.1007/S10915-018-0761-3",
+          "unique_id": "7612aaht0l",
+          "abstract": "Exponential integrators are special time discretization methods where the traditional linear system solves used by implicit schemes are replaced with computing the action of matrix exponential-like functions on a vector. A very general formulation of exponential integrators is offered by the Exponential Propagation Iterative methods of Runge–Kutta type (EPIRK) family of schemes. The use of Jacobian approximations is an important strategy to drastically reduce the overall computational costs of implicit schemes while maintaining the quality of their solutions. This paper extends the EPIRK class to allow the use of inexact Jacobians as arguments of the matrix exponential-like functions. Specifically, we develop two new families of methods: EPIRK-W integrators that can accommodate any approximation of the Jacobian, and EPIRK-K integrators that rely on a specific Krylov-subspace projection of the exact Jacobian. Classical order conditions theories are constructed for these families. Practical EPIRK-W methods of order three and EPIRK-K methods of order four are developed. Numerical experiments indicate that the methods proposed herein are computationally favorable when compared to a representative state-of-the-art exponential integrator, and a Rosenbrock–Krylov integrator.",
+          "authors": {
+            "total": 4,
+            "data": [
+              {
+                "display_name": "Mahesh Narayanamurthi",
+                "id": 2581126303,
+                "slug": "mahesh-narayanamurthi",
+                "unique_id": "40o1tgdf15",
+                "full_slug": "mahesh-narayanamurthi-40o1tgdf15",
+                "affiliation_full_slug": "virginia-tech-1qdxqc03"
+              },
+              {
+                "display_name": "Paul Tranquilli",
+                "id": 2056172202,
+                "slug": "paul-tranquilli",
+                "unique_id": "4w312rq7tu",
+                "full_slug": "paul-tranquilli-4w312rq7tu",
+                "affiliation_full_slug": "virginia-tech-1qdxqc03"
+              },
+              {
+                "display_name": "Adrian Sandu",
+                "id": 2160076523,
+                "slug": "adrian-sandu",
+                "unique_id": "4bvz0bigvs",
+                "full_slug": "adrian-sandu-4bvz0bigvs",
+                "affiliation_full_slug": "virginia-tech-1qdxqc03"
+              },
+              {
+                "display_name": "Mayya Tokman",
+                "id": 2433816297,
+                "slug": "mayya-tokman",
+                "unique_id": "4krx4pzk5a",
+                "full_slug": "mayya-tokman-4krx4pzk5a",
+                "affiliation_full_slug": "university-of-california-merced-ci30pkg3"
+              }
+            ]
+          },
+          "affiliations": {
+            "total": 2,
+            "data": [
+              {
+                "display_name": "Virginia Tech",
+                "city": "Blacksburg",
+                "region": "Virginia",
+                "country": "United States",
+                "id": 859038795,
+                "slug": "virginia-tech",
+                "unique_id": "1qdxqc03",
+                "full_slug": "virginia-tech-1qdxqc03"
+              },
+              {
+                "display_name": "University of California, Merced",
+                "city": "Merced",
+                "region": "California",
+                "country": "United States",
+                "id": 156087764,
+                "slug": "university-of-california-merced",
+                "unique_id": "ci30pkg3",
+                "full_slug": "university-of-california-merced-ci30pkg3"
+              }
+            ]
+          },
+          "fulltext_url": null,
+          "fulltext_url_no_follow": true,
+          "paper_urls": {
+            "order": [
+              "Html",
+              "Others"
+            ],
+            "data": {
+              "Html": [
+                "https://dblp.uni-trier.de/db/journals/corr/corr1701.html#NarayanamurthiT17",
+                "https://arxiv.org/abs/1701.06528"
+              ],
+              "Others": [
+                "https://link.springer.com/content/pdf/10.1007%2Fs10915-018-0761-3.pdf"
+              ]
+            },
+            "is_show": true
+          },
+          "metrics": {
+            "citations": {
+              "total": 24
+            }
+          },
+          "tldr": "The EPIRK class is extended to allow the use of inexact Jacobians as arguments of the matrix exponential-like functions, and two new families of methods are developed that can accommodate any approximation of the Jacobian, andEPIRK-K integrators that rely on a specific Krylov-subspace projection of the exact Jacobian.",
+          "podcast": null,
+          "podcast_generation_allowed": true,
+          "entity_type": "PAPER"
+        },
+        {
+          "id": 4023133351,
+          "title": "Second-order robust parallel integrators for dynamical low-rank approximation",
+          "is_archived": false,
+          "full_slug": "second-order-robust-parallel-integrators-for-dynamical-low-4jzf964ftp",
+          "journal": {
+            "display_name": "arXiv.org",
+            "official_page": null,
+            "issn": "2331-8422",
+            "alias": [
+              "ArXiv"
+            ],
+            "id": 4000147193,
+            "slug": "arxiv-org",
+            "unique_id": "bl5k1ptr",
+            "full_slug": "arxiv-org-bl5k1ptr"
+          },
+          "conference_series": null,
+          "date": "2024-03-05T00:00:00Z",
+          "is_oa": null,
+          "publication_type": "Journal Article",
+          "doi": "10.48550/arxiv.2403.02834",
+          "unique_id": "4jzf964ftp",
+          "abstract": "Due to its reduced memory and computational demands, dynamical low-rank approximation (DLRA) has sparked significant interest in multiple research communities. A central challenge in DLRA is the development of time integrators that are robust to the curvature of the manifold of low-rank matrices. Recently, a parallel robust time integrator that permits dynamic rank adaptation and enables a fully parallel update of all low-rank factors was introduced. Despite its favorable computational efficiency, the construction as a first-order approximation to the augmented basis-update&Galerkin integrator restricts the parallel integrator's accuracy to order one. In this work, an extension to higher order is proposed by a careful basis augmentation before solving the matrix differential equations of the factorized solution. A robust error bound with an improved dependence on normal components of the vector field together with a norm preservation property up to small terms is derived. These analytic results are complemented and demonstrated through a series of numerical experiments.",
+          "authors": {
+            "total": 1,
+            "data": [
+              {
+                "display_name": "Jonas Kusch",
+                "full_slug": null
+              }
+            ]
+          },
+          "affiliations": {
+            "total": 0,
+            "data": []
+          },
+          "metrics": {
+            "citations": {
+              "total": null
+            }
+          },
+          "tldr": "Second-order robust parallel integrators for dynamical low-rank approximation enable accurate and efficient computations with improved accuracy compared to first-order approximations.",
+          "podcast": null,
+          "podcast_generation_allowed": true,
+          "entity_type": "PAPER"
+        }
+      ]
+    },
+    "isError": false
+  }
+}
+

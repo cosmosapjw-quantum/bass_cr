@@ -1,0 +1,135 @@
+{
+  "schema": "C21I_RUNNER_INDEPENDENT_BOUNDARY_PROBES_V1",
+  "started_at_utc": "2026-10-20T07:07:58.372945+00:00",
+  "scope": "New runner integration only; previous 12 runner contracts reused without rerun; no native/Rust/ODE",
+  "private_h_budgeted_class": {
+    "status": "PASS_SCOPED",
+    "private_module_absent_from_sys_modules": true,
+    "source_sha256": "6f344f60d26a0ddb7bb205255cb767fdc230062bf60c56aae1ce58f5ef258f6c",
+    "source_defined_class_check_before_and_after_bind": true,
+    "native_constructor_calls": 0,
+    "native_calls": 0
+  },
+  "admission_consumes_remaining_budget": {
+    "status": "PASS_SCOPED",
+    "initial_time": 100.0,
+    "original_provider_deadline": 108.0,
+    "supplied_remaining_wall_s": 10.0,
+    "setup_elapsed": 3.0,
+    "terminal_full_hash_elapsed": 0.0,
+    "final_time": 103.0,
+    "events": [
+      "admission",
+      "optimizer_stub",
+      "terminal_full_hash"
+    ],
+    "observed_optimizer_wall_s": 5.0,
+    "expected_success": true,
+    "error": null,
+    "native_processes": 0,
+    "native_calls": 0,
+    "ODE_calls": 0
+  },
+  "admission_exhaustion_rejects_before_optimizer": {
+    "status": "PASS_SCOPED",
+    "initial_time": 100.0,
+    "original_provider_deadline": 108.0,
+    "supplied_remaining_wall_s": 10.0,
+    "setup_elapsed": 9.0,
+    "terminal_full_hash_elapsed": 0.0,
+    "final_time": 109.0,
+    "events": [
+      "admission",
+      "terminal_full_hash"
+    ],
+    "observed_optimizer_wall_s": null,
+    "expected_success": false,
+    "error": {
+      "class": "OptimizedPilotError",
+      "message": "C21I_ORIGINAL_JOB_WALL_EXCEEDED"
+    },
+    "native_processes": 0,
+    "native_calls": 0,
+    "ODE_calls": 0
+  },
+  "terminal_hash_cannot_cross_original_deadline": {
+    "status": "PASS_SCOPED",
+    "initial_time": 100.0,
+    "original_provider_deadline": 108.0,
+    "supplied_remaining_wall_s": 10.0,
+    "setup_elapsed": 3.0,
+    "terminal_full_hash_elapsed": 5.0,
+    "final_time": 108.0,
+    "events": [
+      "admission",
+      "optimizer_stub",
+      "terminal_full_hash"
+    ],
+    "observed_optimizer_wall_s": 5.0,
+    "expected_success": false,
+    "error": {
+      "class": "OptimizedPilotError",
+      "message": "C21I_ORIGINAL_JOB_WALL_EXCEEDED"
+    },
+    "native_processes": 0,
+    "native_calls": 0,
+    "ODE_calls": 0
+  },
+  "source_before": [
+    {
+      "path": "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/run_optimized_pilot.py",
+      "bytes": 14719,
+      "sha256": "1a3f4d9066bedc3a8d7466723e8f344fa451c0c6a85c48bf0efe03210d6d8a43"
+    },
+    {
+      "path": "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/optimized_adapter.py",
+      "bytes": 20343,
+      "sha256": "bb73bfa9bd865f60eefeed55dbd05df076a9856544345595beb914676105396e"
+    },
+    {
+      "path": "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py",
+      "bytes": 21580,
+      "sha256": "c94c506aacf9bf86765e6a58ced7d005ed50d8999f7f0dd6232df9159b7bd097"
+    },
+    {
+      "path": "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/EXECUTION_MANIFEST.json",
+      "bytes": 831,
+      "sha256": "f868b23a3188e959e60b79ffc8974ae399a28d63228a79b18c2da3c40f0cb9ec"
+    },
+    {
+      "path": "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21h_vigilode_bridge_20261019/run_pilot.py",
+      "bytes": 15363,
+      "sha256": "6f344f60d26a0ddb7bb205255cb767fdc230062bf60c56aae1ce58f5ef258f6c"
+    }
+  ],
+  "source_after": [
+    {
+      "path": "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/run_optimized_pilot.py",
+      "bytes": 14719,
+      "sha256": "1a3f4d9066bedc3a8d7466723e8f344fa451c0c6a85c48bf0efe03210d6d8a43"
+    },
+    {
+      "path": "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/optimized_adapter.py",
+      "bytes": 20343,
+      "sha256": "bb73bfa9bd865f60eefeed55dbd05df076a9856544345595beb914676105396e"
+    },
+    {
+      "path": "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/native_cache_contract.py",
+      "bytes": 21580,
+      "sha256": "c94c506aacf9bf86765e6a58ced7d005ed50d8999f7f0dd6232df9159b7bd097"
+    },
+    {
+      "path": "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21i_callback_optimization_20261020/EXECUTION_MANIFEST.json",
+      "bytes": 831,
+      "sha256": "f868b23a3188e959e60b79ffc8974ae399a28d63228a79b18c2da3c40f0cb9ec"
+    },
+    {
+      "path": "/workspace/scratch/da42c813ee8c/bass_cr/research/cr_c21h_vigilode_bridge_20261019/run_pilot.py",
+      "bytes": 15363,
+      "sha256": "6f344f60d26a0ddb7bb205255cb767fdc230062bf60c56aae1ce58f5ef258f6c"
+    }
+  ],
+  "source_identity_unchanged": true,
+  "finished_at_utc": "2026-10-20T07:07:58.474460+00:00",
+  "status": "PASS_SCOPED"
+}
