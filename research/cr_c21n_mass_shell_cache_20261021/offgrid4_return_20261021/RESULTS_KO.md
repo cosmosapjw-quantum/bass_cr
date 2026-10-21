@@ -46,3 +46,10 @@ full reionization, CMB 및 full cosmological accuracy는 계속 HOLD다.
 
 증거 반환 Draft PR은 [PR #94](https://github.com/cosmosapjw-quantum/bass_cr/pull/94)이며
 과학 content/문서 head `a517d475d34a37b50d8f0eb7c4f7749dce67520a`를 기준으로 한다.
+
+백업 archive `BASS_CR_C21N_OFFGRID4_EXECUTION_20261021T131024Z_PR94.tar.gz`
+(10,537,696 bytes, SHA-256 `f623e5dd9203646815467bf720c846b368168fbef3a6b537baebbe240cfc5a60`)를
+Dropbox와 Google Drive에 각각 새 파일로 저장했다. 두 곳에서 다시 다운로드해 크기와
+SHA-256를 재확인했고 tar.gz 목록/CRC 검증도 통과했다. 상세 ACK는
+`BACKUP_RECEIPT.json`이다. 이 증거 아카이브에는 자기 자신을 검증하는 해당 영수증 파일만
+포함되지 않으며, 영수증은 PR evidence branch에 추가 커밋으로 보존된다.
