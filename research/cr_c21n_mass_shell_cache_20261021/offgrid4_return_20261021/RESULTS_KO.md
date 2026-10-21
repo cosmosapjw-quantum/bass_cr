@@ -43,3 +43,6 @@ full reionization, CMB 및 full cosmological accuracy는 계속 HOLD다.
 
 기계 판독 가능한 원시 실행·검산 자료는 같은 디렉터리의 `raw/`, `analysis/`,
 `RETURN_TO_CHATGPT.json`, `DAG_OFFGRID4.json`에 있다.
+
+증거 반환 Draft PR은 [PR #94](https://github.com/cosmosapjw-quantum/bass_cr/pull/94)이며
+과학 content/문서 head `a517d475d34a37b50d8f0eb7c4f7749dce67520a`를 기준으로 한다.
