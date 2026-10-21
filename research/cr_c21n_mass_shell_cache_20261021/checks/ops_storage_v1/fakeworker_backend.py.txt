@@ -1,0 +1,12 @@
+"""OPERATIONAL TEST DOUBLE: no build/RHS/integrate calls."""
+import numpy as np
+from builder import IndependentStressBuilder
+def solve_case(template, s, pm, pr):
+    prepared = template.momentum_factory
+    assert prepared.identity()['schema'] == 'C21N_PREPARED_MOMENTUM_V1'
+    assert all(not a.flags.writeable for a in prepared._arrays.values())
+    value = s + pm + pr
+    return ({'endpoint': {'synthetic_value': value}, 'nfev': 0,
+             'solver_wall_s': 0., 'global_error_bound': None,
+             'cached_builder_import_verified': True, 'scientific_ODE_calls': 0},
+            {'synthetic': np.array([value], dtype=np.float64)})

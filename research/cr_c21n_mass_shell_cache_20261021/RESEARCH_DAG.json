@@ -1,0 +1,127 @@
+{
+  "schema": "C21N_RESEARCH_DAG_V1",
+  "recorded_utc": "2026-10-21T12:43:59.903357+00:00",
+  "base_commit": "645a7f1a960be10e10574a819d7fb35a4511d9fa",
+  "physics_source": "3b85dedce84d37b3e165da00685a8a984950aafe",
+  "global_error_bound": null,
+  "prior_C21F_through_K_history": "PRESERVED_UNMODIFIED",
+  "nodes": [
+    {
+      "id": "C21K",
+      "state": "COMPLETE_SCOPED_INHERITED"
+    },
+    {
+      "id": "C21L81_COMPONENTS",
+      "state": "COMPLETE_SCOPED",
+      "publication": "PR90 e954467132eef864a0fb86ba5de44f90f76b08e0",
+      "source_unchanged": true
+    },
+    {
+      "id": "C21M26_PLUS_CENTER",
+      "state": "COMPLETE_SCOPED",
+      "publication": "PR91 b78a943e5d7ae341bbfe84f742a06a4ac36d0e43"
+    },
+    {
+      "id": "NCP98",
+      "state": "COMPLETE_SCOPED_ACCEPTED",
+      "publication": "PR92 645a7f1a960be10e10574a819d7fb35a4511d9fa",
+      "identity": "7f89b12adbeee64a70832e633ae563584bc2a68f6ac433dc56f759a1946eb718",
+      "corrections": "intake/NCP98_CORRECTION_RECORD.json"
+    },
+    {
+      "id": "COMBINED125",
+      "state": "COMPLETE_SCOPED",
+      "depends_on": [
+        "C21M26_PLUS_CENTER",
+        "NCP98"
+      ]
+    },
+    {
+      "id": "C21N_THEORY",
+      "state": "COMPLETE_SCOPED",
+      "depends_on": [
+        "COMBINED125"
+      ]
+    },
+    {
+      "id": "C21N_DERIVATIVE125",
+      "state": "COMPLETE_SCOPED",
+      "depends_on": [
+        "C21N_THEORY",
+        "COMBINED125"
+      ]
+    },
+    {
+      "id": "C21N_PREPARED_CONSTRUCTOR",
+      "state": "IMPLEMENTED_PASS_SCOPED",
+      "full_trajectory_rerun": "NOT_RUN",
+      "speedup": null
+    },
+    {
+      "id": "C21N_SHARED_RUNNER",
+      "state": "IMPLEMENTED_PASS_SCOPED",
+      "depends_on": [
+        "C21N_PREPARED_CONSTRUCTOR"
+      ],
+      "real_science_ODE": 0
+    },
+    {
+      "id": "OFFGRID4_INPUTS",
+      "state": "PREPARED_VALIDATED",
+      "depends_on": [
+        "C21N_THEORY",
+        "C21N_SHARED_RUNNER"
+      ],
+      "grid_sha256": "2a74af40c5508fc332dd3671955ad2dda6fc3e8de51bc61dcc3730a6798913b5"
+    },
+    {
+      "id": "OFFGRID4_EXECUTION",
+      "state": "NOT_RUN",
+      "depends_on": [
+        "OFFGRID4_INPUTS"
+      ],
+      "NCP_live_resources": "RECHECK_AT_EXECUTION"
+    },
+    {
+      "id": "C21N_PUBLICATION",
+      "state": "PUBLISHED_DRAFT",
+      "content_commit": "5ecb8a6c4961302b7066b06278e72ecd2d77f8c9",
+      "PR": "https://github.com/cosmosapjw-quantum/bass_cr/pull/93",
+      "document_commit": "THIS_DOCUMENT_COMMIT"
+    },
+    {
+      "id": "C21N_BACKUP",
+      "state": "PARTIAL_PROVIDER_ACK_2_OF_3",
+      "archive_name": "BASS_CR_C21N_RESEARCH_DELIVERY_20261021T122801Z.zip",
+      "sha256": "df874b53da8eb3e434500a3e7196626755304850556939d0e93e5f41cd96c524",
+      "Library": "ACK_COMPLETED",
+      "Dropbox": "ACK_COMPLETED",
+      "Google_Drive": "REQUEST_PENDING_NO_ACK",
+      "receipt": "BACKUP_RECEIPT.json",
+      "download_byte_revalidation": "NOT_PERFORMED_FOR_NEW_ARCHIVE"
+    },
+    {
+      "id": "GENERAL_TRIAXIAL_FULL_REIONIZATION_CMB",
+      "state": "HOLD"
+    },
+    {
+      "id": "CONTINUOUS_REMAINDER_GLOBAL_ERROR",
+      "state": "NOT_ESTABLISHED",
+      "global_error_bound": null
+    },
+    {
+      "id": "PERFORMANCE_CAMPAIGN",
+      "state": "NOT_RUN",
+      "speedup": "UNMEASURED",
+      "memory_improvement": "UNMEASURED",
+      "scaling64": "UNMEASURED"
+    },
+    {
+      "id": "C21N_DOCUMENT_CLOSEOUT",
+      "state": "PUBLISHED_WITH_THIS_DOCUMENT_COMMIT",
+      "doc_backup": "POST_COMMIT_ARCHIVE_RECORDED_EXTERNALLY"
+    }
+  ],
+  "content_commit": "5ecb8a6c4961302b7066b06278e72ecd2d77f8c9",
+  "document_authority": "THIS_DOCUMENT_COMMIT; exact SHA in external final authority receipt"
+}

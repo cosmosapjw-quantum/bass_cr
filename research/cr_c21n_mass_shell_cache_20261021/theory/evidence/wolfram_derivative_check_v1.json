@@ -1,0 +1,20 @@
+{
+  "request": {
+    "code": "ClearAll[eta,b,v,m,u0,w0,q,mu,kt,hh,ss,pis,hlog,beta,pm0];\nu=u0 Exp[-2 eta+2 b]; w=w0 Exp[-2 eta-4 b];\nee=Sqrt[m^2+u+w]; wt=Exp[-3 eta];\ndAlong[f_]:=D[f,eta]+v D[f,b];\nrho=wt ee; pp=wt u/(2 ee); pa=wt w/ee; pi=(pa-pp)/3;\ndu=(-2+2 v)u; dw=(-2-4 v)w; de=(du+dw)/(2 ee);\npredRho=wt(-3 ee+de);\npredPp=wt((-3 u+du)/(2 ee)-u de/(2 ee^2));\npredPa=wt((-3 w+dw)/ee-w de/ee^2);\nassum=m>0&&u0>=0&&w0>=0&&Element[{eta,b,v},Reals];\nchecks=FullSimplify[{dAlong[rho]-predRho,dAlong[pp]-predPp,dAlong[pa]-predPa,dAlong[rho]+3(rho+(2pp+pa)/3)+6v pi},Assumptions->assum];\ninitialPi=Exp[-5 eta] q^2(3mu^2-1)/(6 Sqrt[m^2+Exp[-2 eta]q^2]);\npi0=initialPi/.eta->0;\ninitialChecks=FullSimplify[{(D[initialPi,eta]/.eta->0)-(-5+q^2/(m^2+q^2))pi0,(D[initialPi,eta]/.eta->0)+4pi0+m^2 q^2(3mu^2-1)/(6(m^2+q^2)^(3/2))},Assumptions->m>0&&q>0&&Element[mu,Reals]];\nshearIdentity=FullSimplify[Sqrt[6](-3ss+kt pis/hh)/hh-Sqrt[6]ss hlog/hh-(Sqrt[6]kt pis/hh^2-(3+hlog)Sqrt[6]ss/hh),Assumptions->hh>0];\njet=-(1-beta)pm0/2;\n<|\"mass_shell_derivative_residuals\"->checks,\"initial_redshift_residuals\"->initialChecks,\"normalized_shear_identity_residual\"->shearIdentity,\"ideal_S_eta2_coefficient\"->jet,\"SI_identity_residual\"->FullSimplify[(8 Pi g/c^2)/hh^2-(8 Pi g/c^4)/(hh/c)^2,Assumptions->c>0&&hh>0]|>",
+    "timeConstraint": 45
+  },
+  "result": {
+    "status": "fulfilled",
+    "value": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Out[1]= <|\"mass_shell_derivative_residuals\" -> {0, 0, 0, 0}, \"initial_redshift_residuals\" -> {0, 0}, \"normalized_shear_identity_residual\" -> 0, \"ideal_S_eta2_coefficient\" -> ((-1 + beta)*pm0)/2, \"SI_identity_residual\" -> 0|>"
+        }
+      ],
+      "structuredContent": null,
+      "isError": false
+    }
+  },
+  "observed_utc": "2026-10-21T11:07:40.108Z"
+}

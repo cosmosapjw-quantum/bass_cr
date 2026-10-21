@@ -1,0 +1,38 @@
+{
+  "analysis_or_plot_regenerations_by_reviewer": 0,
+  "checks": {
+    "CSV_existing_input_comparison": "25 rows times9 endpoint quantities, numeric maximum difference0; all25 coordinate pairs unique",
+    "PDF_separate_raster_visual_audit": "NOT_RUN_BY_THIS_REVIEWER",
+    "PNG_direct_visual_read": "PASS; all six panels directly inspected",
+    "axes": "columns Pm0 ascending left to right, rows Pr0 ascending bottom to top, each -2,-1,0,1,2 times1e-4",
+    "cancellation": "dimensionless 1-abs(Pm+Pr)/(abs(Pm)+abs(Pr)); bounded display0..1; central FP-only exclusion",
+    "center": "FP center hatched only in cancellation panel; signed/norm tiny endpoint values and raw CSV cancellation0 retained",
+    "input_slice": "25 existing requested S0=0 cases; all endpoints a=0.2 (z=4)",
+    "interpolation": "no new physical interpolation; imshow nearest sampled-cell rendering",
+    "norm_panel": "Pi_tot=abs(Ptot), nonnegative scale, distinct from signed total and from Pi_m+Pi_r",
+    "radiation": "existing photon plus massless-neutrino combined sector",
+    "signed_panels": "S, Pm, Pr, Ptot retain signs with symmetric zero-centered colour scales; panel-specific colourbars shown",
+    "source_output_binding": "all input/source/output SHA256 and producer sizes checked"
+  },
+  "findings": [],
+  "global_error_bound": null,
+  "input_sha256": "d73ab77a1304ee566c3dad3a12bf2f2123f7a70e5b5a6a66e1efd7e375ab992b",
+  "limitations": [
+    "Colour scales differ by physical panel and must be read with each shown colourbar.",
+    "PNG review is of this25-cell preliminary slice; no inference about unsampled parameter values.",
+    "Producer RECEIPT remains GENERATED_PENDING_VISUAL_REVIEW as historical state; this independent sidecar records completion."
+  ],
+  "new_ODE_integrations": 0,
+  "observed_utc": "2026-10-21T11:32:09.726861+00:00",
+  "outputs": {
+    "RECEIPT.json": "f2d453c43741c2fc1ec71104d9f5683165411167dddaad675dc0e6228098e5e2",
+    "component_slice_S0_zero.pdf": "38f34099bdaa2a10f86d1be6344914fc17ad2e9b874a7519c98f21b281d7e44f",
+    "component_slice_S0_zero.png": "95aa4931fdaad77199a08ef8467fb5f2c609e573b380d3e4c591d505c685d1dd",
+    "endpoints_S0_zero.csv": "1ce3294a7e5ba8ac9f99682a7fb679adddf32a8a40aa4019b0bb3a2c06f6e890"
+  },
+  "producer_receipt_sha256": "f2d453c43741c2fc1ec71104d9f5683165411167dddaad675dc0e6228098e5e2",
+  "reviewer": "theory_literature agent, independent of plot author",
+  "schema": "C21N_INDEPENDENT_COMPONENT_PLOT_REVIEW_V1",
+  "source_sha256": "0ba024e2727c583270ff64afab6c995112ecc177c914b614a363b8bbd7d28f36",
+  "status": "PASS_SCOPED"
+}

@@ -1,0 +1,17 @@
+{
+  "request": {
+    "code": "ClearAll[eta,m,q,pm0,pr0,h,h0,h1,s];\ntm=pm0 Exp[-5eta]Sqrt[m^2+q^2]/Sqrt[m^2+Exp[-2eta]q^2];\ntr=pr0 Exp[-4eta];\npt=(h0/h[eta])^2(tm+tr);\nsub={h[0]->h0,Derivative[1][h][0]->h0 h1};\np0=FullSimplify[pt/.eta->0/.sub,Assumptions->h0>0&&m>0&&q>0];\np1=FullSimplify[D[pt,eta]/.eta->0/.sub,Assumptions->h0>0&&m>0&&q>0];\nrhs=pt-(3+Derivative[1][h][eta]/h[eta])s[eta];\ns2=FullSimplify[D[rhs,eta]/.eta->0/.{s[0]->0,Derivative[1][s][0]->p0}/.sub,Assumptions->h0>0&&m>0&&q>0];\nidealP1=FullSimplify[p1/.pr0->-pm0];\nidealS2=FullSimplify[s2/.pr0->-pm0];\n<|\"actual_offset_P0\"->p0,\"actual_offset_Pprime0\"->p1,\"Sprime0_when_S0_zero\"->p0,\"Ssecond0_when_S0_zero\"->s2,\"ideal_Pprime0\"->idealP1,\"ideal_Ssecond0\"->idealS2,\"ideal_jet_identity_residual\"->FullSimplify[idealS2+(1-q^2/(m^2+q^2))pm0],\"actual_offset_identity_residual\"->FullSimplify[s2-(p1-(3+h1)p0)]|>",
+    "timeConstraint": 30
+  },
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Out[1]= <|\"actual_offset_P0\" -> pm0 + pr0, \"actual_offset_Pprime0\" -> -2*(2 + h1)*(pm0 + pr0) - (m^2*pm0)/(m^2 + q^2), \"Sprime0_when_S0_zero\" -> pm0 + pr0, \"Ssecond0_when_S0_zero\" -> -((7 + 3*h1)*(pm0 + pr0)) - (m^2*pm0)/(m^2 + q^2), \"ideal_Pprime0\" -> -((m^2*pm0)/(m^2 + q^2)), \"ideal_Ssecond0\" -> -((m^2*pm0)/(m^2 + q^2)), \"ideal_jet_identity_residual\" -> 0, \"actual_offset_identity_residual\" -> 0|>"
+      }
+    ],
+    "structuredContent": null,
+    "isError": false
+  },
+  "observed_utc": "2026-10-21T11:08:47.397Z"
+}
