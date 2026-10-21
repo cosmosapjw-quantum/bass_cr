@@ -4,6 +4,9 @@
 - fixed REI source: `3b85dedce84d37b3e165da00685a8a984950aafe`
 - NCP98 run identity: `7f89b12adbeee64a70832e633ae563584bc2a68f6ac2a60139b98efacb01c05a`
 - grid SHA-256: `768643862b317ba3d159af6503ebb80141028dc8c671fdb00a9d0a68b32fde04`
+- source manifest SHA-256: `cf0997cbd89806dc7ec7b99982829e9b14f0612518bca56967c96e83fed5ea90`
+- runner SHA-256: `af472ce77a12ef3bb78cec5a46ec05f4dc44324c2c28ce429d2e3c50957f0b65`
+- toolchain: Python 3.12.3 / NumPy 2.3.5 / SciPy 1.17.0
 - additive content commit: `ee62f86f7df02d7e4b9baccfa107d76254c68ac4`
 - document commit: Git history entry following the content commit; see `NCP98_DAG.json` and PR #92.
 - state: 98 new cases complete; combined 125-point read-only analysis complete; independent raw/physics/PNG review PASS_SCOPED.

@@ -10,7 +10,13 @@
 기존 26개와 C21L 중심 1개는 재적분하지 않았다.
 
 정제 run identity는 `7f89b12adbeee64a70832e633ae563584bc2a68f6ac2a60139b98efacb01c05a`, grid SHA-256은
-`768643862b317ba3d159af6503ebb80141028dc8c671fdb00a9d0a68b32fde04`다. 98/98 완료, 실패 0이다.
+`768643862b317ba3d159af6503ebb80141028dc8c671fdb00a9d0a68b32fde04`다. 고정 source commit은
+`3b85dedce84d37b3e165da00685a8a984950aafe`, source manifest SHA-256은
+`cf0997cbd89806dc7ec7b99982829e9b14f0612518bca56967c96e83fed5ea90`다. 실행 핵심 코드 SHA-256은
+builder `7fb15e89403817812588e189c013d45d200864f0076351c7c84bf77667520f0f`, shared_resources
+`ad642904d7c9334a4c650702ab792ecc49c7dcca2b542fbf8315bd318ec58795`, shared_runner
+`af472ce77a12ef3bb78cec5a46ec05f4dc44324c2c28ce429d2e3c50957f0b65`다. Python 3.12.3,
+NumPy 2.3.5, SciPy 1.17.0을 사용했다. 98/98 완료, 실패 0이다.
 원시 per-case `history.npz`, `RESULT.json`, `COMPLETE.json`, 전체 manifest, event, resource 및 반환 영수증을
 보존했다. 전체 run payload는 `runs/ncp_refinement98_20261021/`에 있다.
 
