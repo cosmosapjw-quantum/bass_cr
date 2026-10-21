@@ -1,0 +1,360 @@
+{
+  "schema": "bass_cr.research_dag.closeout.v1",
+  "artifact_kind": "DOCUMENT_ONLY_CLOSEOUT",
+  "date_utc": "2026-10-21",
+  "unit": "C21L_COMPONENT_CLOSEOUT",
+  "repository": "https://github.com/cosmosapjw-quantum/bass_cr",
+  "branch": "research/cr-c21l-rei-sigma-pi-pilot-20261021",
+  "pr": "https://github.com/cosmosapjw-quantum/bass_cr/pull/90",
+  "identities": {
+    "original_content_commit": "60a3f1cb0d8f0875820d18c0d10c448d480334c4",
+    "component_content_commit": "17244259d25f793a25e0874443a28806e7c31d17",
+    "fixed_rei_source_commit": "3b85dedce84d37b3e165da00685a8a984950aafe",
+    "original_run_identity": "0090e1549b21b07e46001de2bf9cb2eab9bf0cba87ffe3d4d824ba117fecb44a",
+    "parent_c21k_document_commit": "dc1c0c0721b74454958e5d16264c24ec465ba1d8",
+    "document_commit": null,
+    "document_commit_binding": "외부 최종 게시 영수증에서 확정한다. 문서 본문에 자기 commit SHA를 생성하지 않는다.",
+    "source_manifest_sha256": "cf0997cbd89806dc7ec7b99982829e9b14f0612518bca56967c96e83fed5ea90",
+    "components81_npz_sha256": "e6f274ee9719692051169561a7e9b1cc9a6efaa80b2ed55c3b58a6f45e371941",
+    "run_manifest_sha256": "ccd2aae712b7e3844c8fb684ccdd3a924eb28606b1563c530da131c5ae5d1784"
+  },
+  "states": {
+    "EXECUTION": "COMPLETE_SCOPED_COMPONENT_POSTPROCESSING_NEW_ODE_0",
+    "PUBLICATION": "CONTENT_AND_THIS_DOCUMENT_COMMIT_PUBLISHED_DRAFT",
+    "BACKUP": "LIBRARY_DOWNLOADED_BYTES_VERIFIED_DROPBOX_ACK_DRIVE_UNKNOWN",
+    "DAG": "COMPLETE_SCOPED_SCIENCE_PUBLICATION_DRIVE_BACKUP_OPEN"
+  },
+  "science_scope": {
+    "geometry": "non-tilted collisionless LRS Bianchi I",
+    "redshift_start": 20,
+    "redshift_end": 4,
+    "cases": 81,
+    "saved_times_per_case": 101,
+    "state_components": 40,
+    "initial_matter_anisotropy_A": 0,
+    "independent_initial_matter_radiation_sweep": false,
+    "new_ode_integrations_in_component_stage": 0,
+    "physical_source_reassigned_to_new_branch": false,
+    "original_raw_modified": false,
+    "full_frobenius_convention": "sigma=diag(-s,-s,2s), pi_X=diag(-pi_s,X,-pi_s,X,2*pi_s,X), pi_s,X=Delta p_X/3; norms=sqrt(6)*abs(scalar).",
+    "signed_full_coordinates": "S=sqrt(6)*s/H; P_X=sqrt(6)*(8*pi*G/c^2)*pi_s,X/H^2 with H in s^-1 and stress in J/m^3.",
+    "si_einstein_coupling_correspondence": "(8*pi*G/c^2)/H^2 = (8*pi*G/c^4)/(H/c)^2",
+    "half_contraction_conversion": "full=sqrt(2)*half",
+    "radiation": [
+      "photon",
+      "source-present massless neutrino"
+    ],
+    "species_absence": "isotropic dust stress=0 follows source assumptions; absent UV and unavailable independently evolved gas are not invented as present zero-valued species.",
+    "total_stress": "Add signed tensors first; Pi_tot is the norm of their sum, generally not Pi_m+Pi_r.",
+    "zero_cancellation_denominator": "UNDEFINED with explicit mask/NaN; no raw clipping"
+  },
+  "endpoint_ensemble_maximum_full_norms_z4": {
+    "Sigma": 0.00481987955610218,
+    "Pi_m": 3.828814781835141e-06,
+    "Pi_r": 0.00029216326786315474,
+    "Pi_tot": 0.00029587955662661403,
+    "scope": "이 81-case ensemble만의 최대값이며 각 최대값의 case는 다를 수 있다. 보편적 상계가 아니다."
+  },
+  "validation": {
+    "status": "PASS_SCOPED",
+    "independent_tensor_si_full_half_saved_state_count": 8181,
+    "source_field_recheck": {
+      "case_count": 81,
+      "states_per_case": 3,
+      "state_count": 243,
+      "scalar_array_fields_per_state": 13,
+      "method": "assert_allclose(rtol=0, atol=0)",
+      "maximum_numeric_difference": 0,
+      "explicit_fp64_bytes_or_signed_zero_comparison": false
+    },
+    "external_path_byte_reproduction": {
+      "output_artifacts": 11,
+      "types": [
+        "CSV",
+        "NPZ",
+        "PNG",
+        "PDF",
+        "manifest"
+      ],
+      "raw_origins": [
+        "fixed Git raw",
+        "separately downloaded and restored original Drive archive raw"
+      ],
+      "comparison": "BYTE_IDENTICAL",
+      "new_ode_integrations": 0
+    },
+    "historical_three_case_full_trajectory_bitwise_evidence": "PRESERVED_FROM_ORIGINAL_RUN_NOT_REEXECUTED",
+    "vendor_source_hashes_verified": 9,
+    "direct_png_visual_reviews": 3,
+    "separate_pdf_raster_review": "NOT_RUN",
+    "scope_clarification": {
+      "path": "component_split_20261021/CHECK_SCOPE_CLARIFICATION.json",
+      "change_type": "DOCUMENT_ONLY",
+      "new_source_field_evaluations": 0,
+      "new_tests": 0,
+      "new_ode_integrations": 0,
+      "published_historical_review_report_raw_changed": false
+    },
+    "evidence": [
+      "component_split_20261021/REVIEW_COMPONENTS.json",
+      "component_split_20261021/PATH_REPRODUCTION_CHECK.json",
+      "component_split_20261021/results_final_v4/SUMMARY.json"
+    ]
+  },
+  "backup": {
+    "schema": "BASS_CR_C21LM_NORMALIZED_BACKUP_RECEIPT_V1",
+    "created_utc": "2026-10-21T08:36:59.240058+00:00",
+    "status": "LIBRARY_BYTES_VERIFIED_DROPBOX_ACK_DRIVE_UNKNOWN",
+    "artifact": {
+      "file_name": "BASS_CR_C21LM_RESEARCH_DELIVERY_20261021T082802Z.zip",
+      "size_bytes": 17539759,
+      "local_sha256": "e0592be2859b7db606ec5a2ca008015c5ab02a3b2ff09fdd97fafe209cfe167a",
+      "C21L_component_content_commit": "17244259d25f793a25e0874443a28806e7c31d17",
+      "C21M_content_commit": "659c94312eb9c12ebb987de934459c12a63d67b0",
+      "git_tree": "3cafd22daf5b14946cbf0e41210065c04eccbb6f",
+      "repository_files": 634,
+      "unit_counts": {
+        "C21L": 371,
+        "C21M": 263
+      },
+      "archive_files": 642,
+      "local_manifest_blob_size_sha256_crc_verification": "PASS"
+    },
+    "providers": {
+      "library": {
+        "status": "ACK_SUCCEEDED",
+        "library_file_id": "libfile_9ec015516fd48191bf149640f43bea7a",
+        "file_id": "file_00000000f3788230a0c02e9e912e7b38",
+        "path": "/BASS_DERIVATION_DOSSIERS_20260912/bass_cr/BASS_CR_C21LM_RESEARCH_DELIVERY_20261021T082802Z.zip",
+        "provider_size_bytes": 17539759,
+        "provider_size_matches_local": true,
+        "provider_sha256": null,
+        "provider_sha256_status": "NOT_RETURNED",
+        "version_number": 0,
+        "local_identity_xattrs": "APPLIED_HELPER_EXIT_0",
+        "ack_file": "LIBRARY_UPLOAD_ACK.json",
+        "download_verification": {
+          "status": "DOWNLOADED_BYTES_VERIFIED",
+          "size_bytes": 17539759,
+          "computed_sha256": "e0592be2859b7db606ec5a2ca008015c5ab02a3b2ff09fdd97fafe209cfe167a",
+          "matches_local": true,
+          "receipt_file": "LIBRARY_DOWNLOAD_REVALIDATION.json"
+        }
+      },
+      "dropbox": {
+        "status": "ACK_COMPLETED",
+        "file_id": "id:BSpOijBcT10AAAAAAD_fqQ",
+        "path_display": "/BASS_DERIVATION_DOSSIERS_20260912/bass_cr/BASS_CR_C21LM_RESEARCH_DELIVERY_20261021T082802Z.zip",
+        "provider_size_bytes": 17539759,
+        "provider_size_matches_local": true,
+        "provider_sha256": null,
+        "provider_sha256_status": "NOT_RETURNED",
+        "ack_file": "DROPBOX_UPLOAD_COMPLETION_1.json",
+        "download_verification": {
+          "status": "NOT_PERFORMED"
+        }
+      },
+      "google_drive": {
+        "status": "UNKNOWN_NO_ACK",
+        "file_id": null,
+        "provider_size_bytes": null,
+        "provider_sha256": null,
+        "provider_sha256_status": "NOT_RETURNED",
+        "ack_file": null,
+        "interruption_receipt": "DRIVE_INTERRUPTION.json",
+        "exec_cell_id": null,
+        "operation_id_returned": false,
+        "tool_observation": "aborted by user after 320.0s; provider response not returned",
+        "download_verification": {
+          "status": "NOT_PERFORMED"
+        },
+        "exact_title_metadata_search_observation": {
+          "observed_utc": "2026-10-21T08:33:46.889Z",
+          "result_count": 0,
+          "scope": "specified parent folder and exact file name",
+          "does_not_establish": "global absence or upload failure"
+        }
+      }
+    },
+    "prior_stageB": {
+      "file_name": "BASS_CR_C21L_COMPONENT_DELIVERY_20261021T080501Z.zip",
+      "google_drive": "AMBIGUOUS_NO_ACK",
+      "dropbox": "NOT_CALLED",
+      "library": "NOT_CALLED",
+      "repeated_upload": false,
+      "coverage": "combined archive includes the same Git-bound C21L371 files plus C21M263",
+      "receipt": "provenance/STAGEB_PROVIDER_INTERRUPTION.json inside combined ZIP",
+      "original_local_verification": "provenance/STAGEB_LOCAL_ZIP_VERIFICATION.json inside combined ZIP",
+      "raw_receipt_relative_paths": "STAGEB_PROVIDER_INTERRUPTION.json preserves its original StageB directory context; its LOCAL_ZIP_VERIFICATION.json does not denote the new combined receipt."
+    },
+    "scope": {
+      "new_scientific_ode_calls_for_backup": 0,
+      "performance_benchmark": false,
+      "all_three_provider_success_claimed": false,
+      "private_transfer_urls_or_async_tokens_in_this_receipt": false,
+      "global_error_bound": null
+    }
+  },
+  "nodes": [
+    {
+      "id": "C21K",
+      "status": "COMPLETE_SCOPED",
+      "instruction": "Preserve existing theory, source, optimization and publication evidence."
+    },
+    {
+      "id": "C21L_ORIGINAL_81",
+      "status": "COMPLETE_SCOPED",
+      "new_execution": false,
+      "source": "3b85dedce84d37b3e165da00685a8a984950aafe"
+    },
+    {
+      "id": "C21L_ORIGINAL_PRELIMINARY_PLOTS",
+      "status": "COMPLETE_SCOPED"
+    },
+    {
+      "id": "C21L_ORIGINAL_CONTENT_PR90",
+      "status": "PUBLISHED_DRAFT",
+      "commit": "60a3f1cb0d8f0875820d18c0d10c448d480334c4"
+    },
+    {
+      "id": "C21L_COMPONENT_RECONSTRUCTION",
+      "status": "COMPLETE_SCOPED",
+      "original_unpublished_files_recovered": false,
+      "reconstruction_origin": "unchanged fixed 81-case raw",
+      "new_ode_integrations": 0
+    },
+    {
+      "id": "C21L_COMPONENT_FOCUSED_REVIEW",
+      "status": "PASS_SCOPED"
+    },
+    {
+      "id": "C21L_EXTERNAL_PATH_ANALYZER",
+      "status": "FOCUSED_VERIFIED",
+      "artifact_byte_comparisons": 11
+    },
+    {
+      "id": "C21L_COMPONENT_CONTENT_PR90",
+      "status": "PUBLISHED_DRAFT",
+      "commit": "17244259d25f793a25e0874443a28806e7c31d17",
+      "original_files": 340,
+      "component_files": 31,
+      "total_science_content_files": 371
+    },
+    {
+      "id": "C21L_SCOPE_CLARIFICATION_DOCUMENT",
+      "status": "PUBLISHED_IN_THIS_DOCUMENT_COMMIT",
+      "historical_evidence_mutated": false
+    },
+    {
+      "id": "C21L_DOCUMENT_CLOSEOUT",
+      "status": "PUBLISHED_IN_THIS_DOCUMENT_COMMIT",
+      "self_commit_binding": "external final publication receipt"
+    },
+    {
+      "id": "C21L_FINAL_BACKUP",
+      "status": "TWO_PROVIDER_ACK_LIBRARY_BYTES_VERIFIED_DRIVE_OPEN",
+      "does_not_block_already_completed_science": true
+    },
+    {
+      "id": "C21M_INDEPENDENT_BUILDER_AND_PILOT27",
+      "status": "COMPLETE_SCOPED",
+      "new_ode_integrations": 26,
+      "reused_c21l_cases": 1,
+      "content_commit": "659c94312eb9c12ebb987de934459c12a63d67b0",
+      "pr": "https://github.com/cosmosapjw-quantum/bass_cr/pull/91"
+    },
+    {
+      "id": "OPTIONAL_NCP_REFINEMENT98",
+      "status": "NOT_RUN",
+      "preparation": "IC_FOCUSED_VERIFIED",
+      "required_for_first_pilot_completion": false
+    },
+    {
+      "id": "NCP_ACTUAL_EXECUTION",
+      "status": "NOT_RUN",
+      "resources": "UNOBSERVED",
+      "current_sandbox_ssh_key": "ABSENT"
+    },
+    {
+      "id": "GENERAL_TRIAXIAL_FULL_REIONIZATION_CMB",
+      "status": "HOLD"
+    },
+    {
+      "id": "DRIVE_BACKUP_RECONCILIATION",
+      "status": "OPEN_AMBIGUOUS_NO_ACK",
+      "remote_file_absence_claimed": false,
+      "blocks_completed_science": false
+    }
+  ],
+  "edges": [
+    [
+      "C21K",
+      "C21L_ORIGINAL_81"
+    ],
+    [
+      "C21L_ORIGINAL_81",
+      "C21L_ORIGINAL_PRELIMINARY_PLOTS"
+    ],
+    [
+      "C21L_ORIGINAL_PRELIMINARY_PLOTS",
+      "C21L_ORIGINAL_CONTENT_PR90"
+    ],
+    [
+      "C21L_ORIGINAL_81",
+      "C21L_COMPONENT_RECONSTRUCTION"
+    ],
+    [
+      "C21L_COMPONENT_RECONSTRUCTION",
+      "C21L_COMPONENT_FOCUSED_REVIEW"
+    ],
+    [
+      "C21L_COMPONENT_RECONSTRUCTION",
+      "C21L_EXTERNAL_PATH_ANALYZER"
+    ],
+    [
+      "C21L_COMPONENT_FOCUSED_REVIEW",
+      "C21L_COMPONENT_CONTENT_PR90"
+    ],
+    [
+      "C21L_EXTERNAL_PATH_ANALYZER",
+      "C21L_COMPONENT_CONTENT_PR90"
+    ],
+    [
+      "C21L_COMPONENT_CONTENT_PR90",
+      "C21L_SCOPE_CLARIFICATION_DOCUMENT"
+    ],
+    [
+      "C21L_SCOPE_CLARIFICATION_DOCUMENT",
+      "C21L_DOCUMENT_CLOSEOUT"
+    ],
+    [
+      "C21L_COMPONENT_CONTENT_PR90",
+      "C21L_FINAL_BACKUP"
+    ],
+    [
+      "C21L_ORIGINAL_81",
+      "C21M_INDEPENDENT_BUILDER_AND_PILOT27"
+    ],
+    [
+      "C21M_INDEPENDENT_BUILDER_AND_PILOT27",
+      "OPTIONAL_NCP_REFINEMENT98"
+    ]
+  ],
+  "historical_preservation": {
+    "units": [
+      "C21F",
+      "C21G",
+      "C21H",
+      "C21I",
+      "C21J",
+      "C21K"
+    ],
+    "source_pass_scope_hold_failed_raw_historical_not_published": "UNCHANGED"
+  },
+  "global_error_bound": null,
+  "document_finalization_actions": {
+    "new_science_ode": 0,
+    "science_source_or_raw_changes": 0,
+    "git_publication_binding": "actual commit/ref receipt external to this self-referential document"
+  }
+}

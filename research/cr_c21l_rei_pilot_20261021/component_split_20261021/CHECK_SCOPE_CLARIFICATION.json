@@ -1,0 +1,36 @@
+{
+  "clarification_reason": "An interim prose update used bitwise too loosely for the 243 numeric-equality check; later C21M report/closeout should use the precise wording above.",
+  "distinctions": [
+    {
+      "approved_wording": "exact numeric equality at the 243 checked saved states, maximum difference zero",
+      "claim": "243 source-field reconstructions",
+      "evidence": "REVIEW_COMPONENTS.json",
+      "precise_scope": "81 cases times start/middle/end; 13 scalar/array fields checked using assert_allclose(rtol=0,atol=0); maximum numerical difference 0. No explicit signed-zero or byte-pattern comparison was performed in that review."
+    },
+    {
+      "claim": "11 postprocessing artifacts across input/output paths",
+      "evidence": "PATH_REPRODUCTION_CHECK.json",
+      "precise_scope": "Separate file byte/SHA reproducibility check; remains a byte-identity claim."
+    },
+    {
+      "claim": "3 original-versus-reuse full trajectories",
+      "evidence": "../checks/CHECKS.json three_full_baseline_vs_reuse_solutions",
+      "precise_scope": "Inherited historical check records all_full_history_arrays_bitwise_equal for three representative cases. Not rerun or enlarged by this clarification."
+    }
+  ],
+  "global_error_bound": null,
+  "historical_artifacts_modified": false,
+  "new_ODE_integrations": 0,
+  "new_source_field_evaluations": 0,
+  "observed_utc": "2026-10-21T08:10:41.250304+00:00",
+  "published_component_content": "17244259d25f793a25e0874443a28806e7c31d17",
+  "published_report_assessment": "Existing component REPORT_KO.md does not state that the 243 field check was bitwise. Existing REVIEW_COMPONENTS.json states counts and numerical differences, without a bitwise claim. Their bytes need no correction.",
+  "schema": "C21L_DOCUMENT_ONLY_CHECK_SCOPE_CLARIFICATION_V1",
+  "scope": "Clarify independent 243 saved-state source-field equality wording; preserve published evidence bytes.",
+  "status": "CLARIFIED_NO_SCIENCE_CHANGE",
+  "unchanged_evidence_sha256": {
+    "REPORT_KO.md": "6416c50b9f5e8d03a6940ab9e84b479d38889f1fc1313a871acd128838d6e84c",
+    "REVIEW_COMPONENTS.json": "169cd6cf58ef386f3074fdb471ae6badfc68d3e5a53e22f92eca06420e7ec1ce",
+    "parent_checks_CHECKS.json": "a928f08133d2e357362f89063029f39560d4de7513107d749346347ebcbcfc8b"
+  }
+}

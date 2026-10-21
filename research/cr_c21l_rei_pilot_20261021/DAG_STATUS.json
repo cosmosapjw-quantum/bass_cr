@@ -1,0 +1,208 @@
+{
+  "schema": "C21L_DAG_V1",
+  "updated_utc": "2026-10-21T05:53:20.531034+00:00",
+  "science": "ACCEPTED_SCOPED_EXPLORATORY_LRS_COLLISIONLESS_PILOT",
+  "execution": {
+    "pilot81": "COMPLETE_81_OF_81",
+    "baseline_pairs": "PASS_BITWISE_3_PAIRS_6_IVPS",
+    "repair": "PASS_3_GROUPS_0_PHYSICAL_IVPS",
+    "NCP": "NOT_RUN",
+    "NCP_capacity": "UNKNOWN"
+  },
+  "publication": {
+    "state": "READY_TO_PUBLISH",
+    "parent": "dc1c0c0721b74454958e5d16264c24ec465ba1d8",
+    "branch": "research/cr-c21l-rei-sigma-pi-pilot-20261021"
+  },
+  "backup": {
+    "state": "PENDING_CREATE_ONLY_DELIVERY",
+    "stores": [
+      "Drive",
+      "Dropbox",
+      "Library"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "intake",
+      "state": "COMPLETE_SCOPED_1215_BRANCH_METADATA_150_LATEST_PRS"
+    },
+    {
+      "id": "theory",
+      "state": "COMPLETE_SCOPED"
+    },
+    {
+      "id": "implementation",
+      "state": "COMPLETE"
+    },
+    {
+      "id": "focused_checks",
+      "state": "PASS"
+    },
+    {
+      "id": "pilot81",
+      "state": "COMPLETE"
+    },
+    {
+      "id": "review_and_repair",
+      "state": "CLOSED"
+    },
+    {
+      "id": "publication",
+      "state": "PENDING"
+    },
+    {
+      "id": "backup",
+      "state": "PENDING"
+    },
+    {
+      "id": "NCP_run",
+      "state": "NOT_RUN_CAPACITY_UNKNOWN"
+    },
+    {
+      "id": "full_HHe_triaxial",
+      "state": "OUTSIDE_CURRENT_UNIT_HOLD"
+    }
+  ],
+  "edges": [
+    [
+      "intake",
+      "theory"
+    ],
+    [
+      "theory",
+      "implementation"
+    ],
+    [
+      "implementation",
+      "focused_checks"
+    ],
+    [
+      "focused_checks",
+      "pilot81"
+    ],
+    [
+      "pilot81",
+      "review_and_repair"
+    ],
+    [
+      "review_and_repair",
+      "publication"
+    ],
+    [
+      "publication",
+      "backup"
+    ],
+    [
+      "review_and_repair",
+      "NCP_run"
+    ]
+  ],
+  "R_stages": [
+    {
+      "id": "R1",
+      "label": "연구 위치·계약",
+      "state": "COMPLETE_SCOPED"
+    },
+    {
+      "id": "R2",
+      "label": "근거·재사용",
+      "state": "COMPLETE_SCOPED"
+    },
+    {
+      "id": "R3",
+      "label": "주장·전제 정렬",
+      "state": "COMPLETE_SCOPED"
+    },
+    {
+      "id": "R4",
+      "label": "가설·표현 탐색",
+      "state": "COMPLETE_SCOPED"
+    },
+    {
+      "id": "R5",
+      "label": "구성적 유도",
+      "state": "COMPLETE_SCOPED"
+    },
+    {
+      "id": "R6",
+      "label": "독립 검증",
+      "state": "COMPLETE_SCOPED"
+    },
+    {
+      "id": "R7",
+      "label": "판별 검증",
+      "state": "COMPLETE_SCOPED"
+    },
+    {
+      "id": "R8",
+      "label": "결과 판정",
+      "state": "COMPLETE_SCOPED"
+    },
+    {
+      "id": "R9",
+      "label": "정식 결과·코딩 연결",
+      "state": "COMPLETE_SCOPED"
+    },
+    {
+      "id": "R10",
+      "label": "종료·재개",
+      "state": "PACKAGING_IN_PROGRESS"
+    }
+  ],
+  "C_stages": [
+    {
+      "id": "C1",
+      "label": "목표·baseline",
+      "state": "COMPLETE_SCOPED"
+    },
+    {
+      "id": "C2",
+      "label": "식–데이터–코드",
+      "state": "COMPLETE_SCOPED"
+    },
+    {
+      "id": "C3",
+      "label": "수치 설계",
+      "state": "COMPLETE_SCOPED"
+    },
+    {
+      "id": "C4",
+      "label": "실행 DAG·자원",
+      "state": "COMPLETE_SCOPED"
+    },
+    {
+      "id": "C5",
+      "label": "구현",
+      "state": "COMPLETE_SCOPED"
+    },
+    {
+      "id": "C6",
+      "label": "구현 검증",
+      "state": "COMPLETE_SCOPED"
+    },
+    {
+      "id": "C7",
+      "label": "과학 검증",
+      "state": "COMPLETE_SCOPED"
+    },
+    {
+      "id": "C8",
+      "label": "수치·재현성",
+      "state": "SCOPED_REPRODUCIBILITY_COMPLETE_NEW_CONVERGENCE_AND_BENCHMARK_NOT_RUN"
+    },
+    {
+      "id": "C9",
+      "label": "독립 검토",
+      "state": "COMPLETE_SCOPED"
+    },
+    {
+      "id": "C10",
+      "label": "판정·인계",
+      "state": "PACKAGING_IN_PROGRESS"
+    }
+  ],
+  "global_error_bound": null,
+  "inherited_HOLDs": "PRESERVED",
+  "historical_runs": "NO_REPLAY"
+}

@@ -1,0 +1,25 @@
+{
+  "class": "environment_or_path",
+  "scientific_inputs_unchanged": true,
+  "physical_ODE_runs": 0,
+  "events": [
+    {
+      "action": "process inventory",
+      "status": "failed",
+      "reason": "ps: fatal library error, lookup self",
+      "resolution": "direct /proc pid and comm snapshot"
+    },
+    {
+      "action": "candidate postprocessing output finalize",
+      "status": "failed",
+      "reason": "FileExistsError at OUTPUT_MANIFEST.json in reused results candidate path after prior candidate relocation",
+      "resolution": "create-only fresh results_final_v4, old candidate paths excluded from published content"
+    },
+    {
+      "action": "external-input path reproduction attempt",
+      "status": "failed",
+      "reason": "FileNotFoundError: incorrect backup extracted-root path supplied",
+      "resolution": "resolved actual extracted path by rg; rerun postprocessing only"
+    }
+  ]
+}

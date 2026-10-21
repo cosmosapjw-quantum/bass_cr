@@ -1,0 +1,74 @@
+execution_site_and_CPUplan PASS
+legacy_and_failed_state_preservation PASS
+actual_worker_queued_restart_test_double PASS
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "execution_site_and_CPUplan",
+      "status": "PASS",
+      "details": {
+        "sites": {
+          "unspecified": {
+            "execution_site": "unspecified",
+            "execution_site_basis": "operator-declared; not automatic attestation",
+            "NCP_execution": null,
+            "observed_hostname": "af4832b34a81",
+            "observed_platform": "Linux-6.18.55-x86_64-with-glibc2.39"
+          },
+          "sandbox": {
+            "execution_site": "sandbox",
+            "execution_site_basis": "operator-declared; not automatic attestation",
+            "NCP_execution": false,
+            "observed_hostname": "af4832b34a81",
+            "observed_platform": "Linux-6.18.55-x86_64-with-glibc2.39"
+          },
+          "ncp": {
+            "execution_site": "ncp",
+            "execution_site_basis": "operator-declared; not automatic attestation",
+            "NCP_execution": true,
+            "observed_hostname": "af4832b34a81",
+            "observed_platform": "Linux-6.18.55-x86_64-with-glibc2.39"
+          },
+          "other": {
+            "execution_site": "other",
+            "execution_site_basis": "operator-declared; not automatic attestation",
+            "NCP_execution": false,
+            "observed_hostname": "af4832b34a81",
+            "observed_platform": "Linux-6.18.55-x86_64-with-glibc2.39"
+          }
+        },
+        "default_manifest_identity": "691d7bc9c7dcf9ffd35dca4cca77ebeaa36aebdd90f9e8d26c2ca8e132779938",
+        "sandbox_manifest_identity": "9889da46303d09147b46e7fa735b7d6d96003f0bc9f2a7cad0270e88e83124fa",
+        "synthetic_NCP63_request_admitted_workers": 62,
+        "physical_ODE_runs": 0
+      }
+    },
+    {
+      "name": "legacy_and_failed_state_preservation",
+      "status": "PASS",
+      "details": {
+        "old_v1_reservation_stays_incomplete": true,
+        "failed_never_requeued": true,
+        "mismatched_identity_rejected": true
+      }
+    },
+    {
+      "name": "actual_worker_queued_restart_test_double",
+      "status": "PASS",
+      "details": {
+        "actual_processes": 2,
+        "first_exit": -15,
+        "resumed_exit": 0,
+        "interrupted_case": "INCOMPLETE_preserved_not_retried",
+        "queued_case": "COMPLETE_after_known_unstarted_resume",
+        "test_double": true,
+        "physical_ODE_runs": 0,
+        "cpu": 1
+      }
+    }
+  ],
+  "physical_ODE_runs": 0,
+  "original_81_results_modified": false,
+  "global_error_bound": null
+}

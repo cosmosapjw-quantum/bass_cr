@@ -1,0 +1,123 @@
+{
+  "checks": [
+    {
+      "details": {
+        "immutable_files_verified": 9
+      },
+      "name": "source_byte_identity",
+      "status": "PASS"
+    },
+    {
+      "details": {
+        "c_squared_and_Frobenius_checked": true,
+        "signed_stress_cancellation": true
+      },
+      "name": "normalizations_signed_cancellation",
+      "status": "PASS"
+    },
+    {
+      "details": {
+        "independent_state_arrays": true,
+        "shared_immutable_operators": true,
+        "state_width": 40
+      },
+      "name": "template_independence",
+      "status": "PASS"
+    },
+    {
+      "details": {
+        "bitwise_samples": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.2,
+            0.001
+          ],
+          [
+            1.4350845252893227,
+            -0.04
+          ],
+          [
+            1.0,
+            0.04
+          ]
+        ]
+      },
+      "name": "moment_common_subexpression_bitwise",
+      "status": "PASS"
+    },
+    {
+      "details": [
+        {
+          "P0": 0.001,
+          "S0": -0.04,
+          "all_full_history_arrays_bitwise_equal": true,
+          "diagnostics": {
+            "Einstein_H2_constraint_max_relative": 2.220446049250313e-16,
+            "massive_comoving_number_max_relative": 4.440892098500626e-16,
+            "max_initial_mapping_error": 1.3877787807814457e-17,
+            "min_massive_cell_number": 1.491026203638869e-30,
+            "radiation_number_max_abs": 0.0
+          },
+          "max_abs_difference": 0.0,
+          "nfev": 209
+        },
+        {
+          "P0": 0.0,
+          "S0": 0.0,
+          "all_full_history_arrays_bitwise_equal": true,
+          "diagnostics": {
+            "Einstein_H2_constraint_max_relative": 2.220446049250313e-16,
+            "massive_comoving_number_max_relative": 4.440892098500626e-16,
+            "max_initial_mapping_error": 5.620146577618562e-35,
+            "min_massive_cell_number": 1.491026203638869e-30,
+            "radiation_number_max_abs": 0.0
+          },
+          "max_abs_difference": 0.0,
+          "nfev": 92
+        },
+        {
+          "P0": -0.00075,
+          "S0": 0.02,
+          "all_full_history_arrays_bitwise_equal": true,
+          "diagnostics": {
+            "Einstein_H2_constraint_max_relative": 2.220446049250313e-16,
+            "massive_comoving_number_max_relative": 4.440892098500626e-16,
+            "max_initial_mapping_error": 1.0408340855860843e-17,
+            "min_massive_cell_number": 1.491026203638869e-30,
+            "radiation_number_max_abs": 0.0
+          },
+          "max_abs_difference": 0.0,
+          "nfev": 194
+        }
+      ],
+      "name": "three_full_baseline_vs_reuse_solutions",
+      "status": "PASS"
+    },
+    {
+      "details": {
+        "CPU55_excluded": true,
+        "held_lease_skipped": true,
+        "memory_floor": true,
+        "quota_includes_coordinator": true
+      },
+      "name": "resource_arithmetic_and_lease",
+      "status": "PASS"
+    },
+    {
+      "details": {
+        "completed_only_resume": true,
+        "failed_not_retried": true,
+        "identity_mismatch_rejected": true,
+        "partial_explicit": true
+      },
+      "name": "partial_result_resume_identity",
+      "status": "PASS"
+    }
+  ],
+  "global_error_bound": null,
+  "scope": "focused implementation parity/resource/recovery checks; no convergence or global certification claim",
+  "status": "PASS"
+}

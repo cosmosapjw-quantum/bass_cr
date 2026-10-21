@@ -1,0 +1,78 @@
+{
+  "schema": "C21L_INDEPENDENT_REVIEW_V1",
+  "reviewer_task": "/root/rei_pilot_intake",
+  "reviewer_role": "fresh implementation reviewer; prior read-only REI source intake, no implementation construction",
+  "selected_stages": "C9/R6",
+  "skill_context_used": {
+    "version": "1.3.0",
+    "instructions": [
+      "POLICY_INTEGRATION",
+      "SUBAGENT_MODE",
+      "THEORY_LOOP:R6",
+      "CODING_LOOP:C9"
+    ]
+  },
+  "scope": "one read-only review of frozen implementation contract, parent theory, current adapter/runner/resources/plotter and saved focused/pilot results",
+  "reviewed_code": {
+    "adapter.py": "5461a5062f99f9b1b9569b7cc4c0dadeaad1fd2f3a11ee37777f27ec9479e317",
+    "runner.py": "3f565c09d360e25b6c9643e2e14f77757af81b60ff6b4ecdef69d4add52e37b3",
+    "resources.py": "ae7174ff23ae461d2ad3a86baa847c2d5fc5713f2fd850affcec4f1d24c657c0",
+    "plotter.py": "5fc0f28b9b12680c1b704f2bbe3b951eaa254bba48366b7260446a517bc8170a",
+    "focused_checks.py": "5a1d0521a10b8f49151dac8a64b8eb19958faca6911302203301efe35e810c87"
+  },
+  "scientific_result": "ACCEPTED_SCOPED_EXPLORATORY_LRS_COLLISIONLESS_PILOT",
+  "saved_artifact_check": {
+    "case_count": 81,
+    "saved_rows": 8181,
+    "source_files_matched": 9,
+    "max_Sigma_F_difference": 1.3877787807814457e-17,
+    "max_Pi_F_difference": 4.336808689942018e-19,
+    "max_initial_mapping_error": 1.3877787807814457e-17,
+    "max_radiation_number_error": 0.0,
+    "min_massive_cell_number": 1.491026203638869e-30,
+    "max_Hconstraint_relative": 2.220446049250313e-16,
+    "case_id_count": 81,
+    "cpu_ids": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "max_abs_k": 0.3350198243063604,
+    "NCP_execution": false,
+    "new_ODE_runs": 0,
+    "new_benchmarks": 0,
+    "status": "SAVED_ARTIFACTS_MATCH_SCOPED_PHYSICAL_MAP"
+  },
+  "optimization_admission": "exact expression and reduction order retained; worker-local immutable shared template; saved three full trajectory bitwise comparisons support tested finite scope; no measured speed claim",
+  "publication_readiness": "SCIENTIFIC_RAW_AND_PLOTS_READY; NCP_RUNNER_REQUIRES_TWO_TARGETED_REPAIRS",
+  "findings": [
+    {
+      "id": "C21L-R1",
+      "classification": "BLOCK_NOW_FOR_NCP_RUNTIME_PROVENANCE",
+      "file": "runner.py aggregate; resources.py admit",
+      "evidence": "aggregate writes NCP_execution False unconditionally; admit returns scope SANDBOX_NON_NCP unconditionally",
+      "impact": "The same delivered runner executed on NCP would label actual NCP results as sandbox/non-NCP. Existing saved sandbox result labels are correct.",
+      "smallest_repair": "Explicit declared execution site in CLI/runtime record, hostname and actual host observations; derive resource/summary label consistently. Do not rewrite current81 raw receipts. Preserve original executed adapter/runner/resources identity if runtime file changes."
+    },
+    {
+      "id": "C21L-R2",
+      "classification": "BLOCK_NOW_FOR_PARTIAL_CAMPAIGN_RESUME",
+      "file": "runner.py run queue reservation; resume_status",
+      "evidence": "All pending case directories and RESERVATION files are created before jobs execute. On timeout, unstarted queued cases remain INCOMPLETE. Resume only adds MISSING to pending, so they are permanently skipped.",
+      "impact": "An interrupted campaign cannot complete never-attempted queued cases via advertised resume, even though those are not failed attempts. Existing81 completed cases unaffected.",
+      "smallest_repair": "Distinguish QUEUED/NOT_STARTED from STARTED/INCOMPLETE using a worker-owned durable start marker before physics; resume only known-unstarted cases and preserve all attempted incomplete/failed raw. Alternatively dispatch lazily so unstarted cases remain missing. Focused interruption/resume check only; do not rerun81."
+    }
+  ],
+  "nonblocking_observations": [
+    "CPU55 exclusion, coordinator slot, ancestor cgroup limits, memory reserve and cooperative per-CPU lock behavior match the intended sharing scope. Per-CPU load is a point-in-time observation, not control of unmanaged jobs.",
+    "Teardown uses per-worker waits, so timeout includes extra worker-count-dependent grace. This does not invalidate current completed pilot; do not call it a hard total-wall debit cap.",
+    "Output timestamp filenames are timezone-unsuffixed local representations. Preserve them; do not relabel as UTC/Z without conversion.",
+    "Hamiltonian diagnostic is algebraic consistency; no independent global error bound or full-HHe/tri-axial claim."
+  ],
+  "new_ivp_runs": 0,
+  "new_benchmark_runs": 0,
+  "additional_check": "single saved-array/source integrity readback command, exit0, wall0.35045s",
+  "global_error_bound": null,
+  "next_action": "Parent-authorized bounded repair of R1/R2; targeted regression only, then confirm exact diffs and close this same review episode."
+}

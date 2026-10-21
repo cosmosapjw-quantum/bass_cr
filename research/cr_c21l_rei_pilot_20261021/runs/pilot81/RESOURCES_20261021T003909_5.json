@@ -1,0 +1,84 @@
+{
+  "coordinator_cpu": 0,
+  "lease_directory": "/tmp/bass_cpu_leases",
+  "observations": [
+    {
+      "capacity": {
+        "coordinator_budget_bytes": 268435456,
+        "cpu_candidates": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "cpu_slots_including_coordinator": 8,
+        "maximum_workers": 4,
+        "memory_reserve_bytes": 1073741824,
+        "memory_worker_slots": 8,
+        "worker_budget_bytes": 536870912
+      },
+      "idle_threshold": 0.35,
+      "load_fraction": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 0.0,
+        "3": 0.0,
+        "4": 0.0,
+        "5": 0.0,
+        "6": 0.0,
+        "7": 0.0,
+        "8": 0.0
+      },
+      "snapshot": {
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "allowed_cpus": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "cgroups": [
+          {
+            "cpu.max": "800000 100000",
+            "cpuset.cpus.effective": "0-8",
+            "memory.current": "2648772608",
+            "memory.max": "8589934592",
+            "path": "/sys/fs/cgroup"
+          }
+        ],
+        "memory_available": 5941161984,
+        "memory_limit": 8589934592,
+        "protected_cpu": 55,
+        "quota": 8.0
+      }
+    }
+  ],
+  "scope": "SANDBOX_NON_NCP",
+  "unmanaged_jobs": "observed only; cooperative leases cover clients using same directory",
+  "worker_cpus": [
+    1,
+    2,
+    3,
+    4
+  ]
+}
