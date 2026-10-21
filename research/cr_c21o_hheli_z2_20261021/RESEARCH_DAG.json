@@ -1,14 +1,14 @@
 {
   "schema": "C21O_RESEARCH_DAG_V1",
-  "stage": "CONTENT_READY",
+  "stage": "DOCUMENT_CLOSEOUT_READY",
   "execution": "COMPLETE_SCOPED_51_OF_51",
-  "publication": "BRANCH_CREATED_CONTENT_PENDING",
-  "backup": "NEW_DELIVERY_PENDING",
+  "publication": "CONTENT_PUBLISHED_DRAFT_DOCUMENT_READY",
+  "backup": "TWO_PROVIDER_ACK_DRIVE_UNKNOWN_NO_ACK",
   "next": [
-    "content_commit",
-    "provider_backup_ACK",
-    "document_commit",
-    "authority_closeout"
+    "document_commit_and_ref_verification",
+    "small_document_closeout_backup",
+    "future_Drive_exact_name_reconciliation",
+    "next_full_physical_closure_contract"
   ],
   "global_error_bound": null,
   "nodes": [
@@ -79,18 +79,18 @@
     },
     {
       "id": "C21O_content_publication",
-      "status": "OPEN",
-      "scope": "Remote branch created; content commit pending"
+      "status": "PUBLISHED_DRAFT",
+      "scope": "PR96; content6b6db06e8148e6826a2d5bf7dbc53d362126ca62;308file identities and tree verified"
     },
     {
       "id": "C21O_provider_backups",
-      "status": "OPEN",
-      "scope": "Create-only new delivery and actual ACK pending"
+      "status": "COMPLETE_SCOPED_TWO_ACKS_DRIVE_UNKNOWN",
+      "scope": "28,473,836B mainZIP;Library+DropboxACK;DriveUNKNOWN_NO_ACK;providerreadbackNOT_RUN"
     },
     {
       "id": "C21O_document_closeout",
-      "status": "OPEN",
-      "scope": "After content and provider evidence"
+      "status": "READY_TO_PUBLISH",
+      "scope": "Document delta and actual main ACK prepared; final document SHA and ref publication recorded externally after this commit"
     },
     {
       "id": "C21O_NCP_actual_execution",
@@ -116,7 +116,14 @@
       "id": "general_triaxial_tilted_CMB_polarized_extension",
       "status": "HOLD",
       "scope": "Outside currentLRSscope"
+    },
+    {
+      "id": "C21O_Drive_main_delivery_reconciliation",
+      "status": "OPEN_UNKNOWN_NO_ACK",
+      "scope": "One upload request had no provider response; no remote absence claim; reconcile exact filename before any retry"
     }
   ],
-  "historical_policy": "Do not alter C21F/G/H/I/J/K source, HOLD, failure/raw, historicalNOT_PUBLISHED."
+  "historical_policy": "Do not alter C21F/G/H/I/J/K source, HOLD, failure/raw, historicalNOT_PUBLISHED.",
+  "final_authority_rule": "After document commit, external final authority supplies actual document head, ref verification and closeout backup ACK. No self-referential commit SHA.",
+  "main_backup_receipt": "backups/MAIN_DELIVERY_RECEIPT.json"
 }

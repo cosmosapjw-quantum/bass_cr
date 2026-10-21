@@ -43,6 +43,8 @@ H1/D/T는 q=0,1, He3/He4는 q=0,1,2, Li6/Li7는 q=0,1,2,3, 자유 n까지 총 21
 
 Signed 초기 좌표는 S0∈{-0.6,-0.3,0,0.3,0.6}, Pm0∈{-5e-4,0,5e-4}, Pr0∈{-1.2e-3,0,1.2e-3}다. 5×3×3=45개이고 각 초기조건의 양성·정규화·Hamiltonian constraint를 확인했다. A를 바꿀 때 massive distribution과 normalization을 함께 재생성했다. |S0|=0.6에서 Pm의 허용 구간은 약 [-0.00064259,0.00128519], Pr은 ±0.00140328이므로 선택 격자는 검증된 범위 안에 있다.
 
+원 C21M/N builder의 angular family는 matter W=1+A P2(mu), radiation W=1+k P2(mu)다. Matter의 continuum 양성 범위 A∈[-1,2]를 사용하고 radiation은 원 source의 더 좁은 |k|≤0.5 계약을 유지한다. 초기 photon/neutrino에는 공통 k_gamma=k_nu를 주므로 Pm와 Pr은 독립이지만 photon과 neutrino의 초기 quadrupole까지 서로 독립인 격자는 아니다. 두 radiation sector의 이후 stress는 각각 저장한다. Continuum의 <P2²>=1/5 관계는 pressure moment의 기준식이며, 실제 target 역상은 고정 finite-volume quadrature의 fields로 평가한다.
+
 UV는 10,20,40,60,100,150eV cohort, soft/hard tanh 이력과 지정 T(z)를 사용한다. 선언된 external UV는 별·복사전달 결과가 아니며, 60eV soft photon은 HeII 문턱을 넘는다. 따라서 그림의 이른 HeIII 전이는 실제 우주 helium 재이온화 시점의 추정이 아니다. LiI의 중간 재결합 증가는 LiII 초기조건과 낮은 처방 T, UV turn-on 이전의 RR에 대한 조건부 응답이다.
 
 62-state L8 모델은 FP64 BDF, rtol=3e-11, scaled atol=3e-13으로 z20→2의 eta 균등 201개 시각을 저장했다. L12는 78 states다. 추가 6개는 FLRW Radau 1개, 양·음 extreme L12 2개, Thomson-off 1개, 초기 Pm=−Pr 상쇄 2개다. 원 C21L의 DOP853/tolerance/끝점은 수정하지 않았다.
@@ -90,7 +92,7 @@ z20→2 Thomson 누적 optical depth는 0.07477690819–0.07493000527이다. 이
 
 ## 게시·백업·DAG
 
-현재 content 준비 시점: EXECUTION=51/51 COMPLETE_SCOPED, PUBLICATION=새 branch 생성/content 준비, BACKUP=새 version 배송 준비, DAG=content→provider ACK→document closeout. 실제 content/document SHA와 ACK는 후속 `publication/`·`backups/` 영수증에서 확정한다. 자기 자신을 포함하는 ZIP/SHA를 만들지 않으며 main delivery와 closeout authority를 분리한다.
+2026-10-21 15:55 UTC 마감 근거: EXECUTION=51/51 COMPLETE_SCOPED, PUBLICATION=content `6b6db06e8148e6826a2d5bf7dbc53d362126ca62` / draft PR96 게시 완료, BACKUP=Library·Dropbox 실제 ACK와 동일 크기 확인 / Drive UNKNOWN_NO_ACK다. 308개 게시 파일의 Git blob SHA와 local bytes를 모두 대조했다. Main ZIP은 28,473,836 bytes, SHA256 `5741bcac7943e91cdacd8ca15cd8c34ff8a83b7b08b6d8a6bfad31cdb5b2c781`이다. Provider download/readback은 NOT_RUN이며, local ZIP·복원 검사와 구분한다. Drive는 329.7초 동안 응답하지 않은 도구 호출 이후 unknown으로 보존하고 중복 업로드하지 않았다. 실제 document head와 별도 closeout ZIP ACK는 이 문서 commit 이후 external authority로 고정한다. 과학 실행 원본과 main ZIP은 변경하지 않는다.
 
 전체 thermal/UV/stellar/nuclear feedback, 추가 isotope/Be7/molecules, 일반 triaxial/tilted/CMB polarization 확장은 이 pilot에서 완료하지 않았다. NCP actual C21O execution=NOT_RUN이고 이 51-case pilot의 완료 조건에는 필요하지 않다. 새 host에서 원 완료 계산을 다시 실행하는 대신 우선 저장 결과를 읽고 새로운 물리 입력 또는 미완료 작업만 별도 run으로 진행한다.
 

@@ -4,8 +4,12 @@
 
 ## 복사할 작업 지시
 
+확정된 science content는 `6b6db06e8148e6826a2d5bf7dbc53d362126ca62`, draft PR은 [96](https://github.com/cosmosapjw-quantum/bass_cr/pull/96)이다. 새 main 배송본은 `BASS_CR_C21O_HHELI_Z2_RESEARCH_DELIVERY_20261021T154615Z.zip`, 28,473,836 bytes, SHA256 `5741bcac7943e91cdacd8ca15cd8c34ff8a83b7b08b6d8a6bfad31cdb5b2c781`이다. provider ACK는 `backups/MAIN_DELIVERY_RECEIPT.json`에 별도로 기록한다.
+
 ```text
 cosmosapjw-quantum/bass_cr의 research/cr-c21o-hheli-z2-sandbox-20261021을 읽고, publication/CONTENT_PUBLICATION_RECEIPT.json과 RESEARCH_DAG.json으로 최신 content/document 권위를 확인하라. 현재 unit은 research/cr_c21o_hheli_z2_20261021/이다.
+
+확정 science content=6b6db06e8148e6826a2d5bf7dbc53d362126ca62, draft PR96. Document head는 최종 external authority와 실제 ref를 대조하며 과거 content SHA로 바꾸지 말라.
 
 원 source는 REI3b85dedce84d37b3e165da00685a8a984950aafe, C21O execution identity는 c60d734b0ed8cc7d1a147e181da27c282e3f47be90f8b0eb1d65c030faabea0f다. 기존 C21L81, C21M/N125+4, 외부NCP98/4, C21O45+6를 재실행하거나 provenance를 변경하지 말라.
 
@@ -46,3 +50,7 @@ python "$C21O/run_sandbox.py" run \
 Lease formats는 `resource_control.py` docstring에 있다. Unknown/malformed 명시 lease는 빈 lease로 취급하지 않는다. 이 모듈은 read-only admission이고 전역 atomic reservation 시스템을 새로 만든 것이 아니므로 site의 기존 lease와 scheduler를 따른다. Source/input 또는 host별 path를 고치면 변경 source를 별도로 게시·검증하고 기존 원 실행 identity를 유지한다.
 
 현재 한정된 검증에서 전체 62×62 Jacobian이 다 검사됐다고 쓰지 않는다. 62×61 columns만 검사했고 invariant u=0 column은 제외다. BDF/Radau 최대 절대 차이1.8418e-9(local scale ratio858.47), 선택 L8/L12 common radiation modes2.0780e-4를 보존하라. 작은 stress difference만으로 full hierarchy convergence를 선언하지 말라.
+
+## Main backup 마감 상태
+
+Library `libfile_c44d3555829481919287affc7c541856`, Dropbox `id:BSpOijBcT10AAAAAAD_hoQ`는 실제 ACK와 28,473,836-byte 크기를 확인했다. Drive는 1회 요청의 성공응답이 없어 `UNKNOWN_NO_ACK`다. 정확한 파일명과 parent folder `1V4ZQza59dWVC7apeRz9P1TL66eaVYyJy`를 대조하기 전 중복 업로드하지 않는다. 세 provider의 download byte 재검증은 NOT_RUN이다. 새 closeout 문서/권위 ZIP이 있으면 main ZIP과 함께 읽는다.

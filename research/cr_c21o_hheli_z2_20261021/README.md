@@ -4,6 +4,8 @@
 
 Read [REPORT_KO.md](REPORT_KO.md), [PHYSICAL_CONTRACT_KO.md](PHYSICAL_CONTRACT_KO.md), and [RESEARCH_DAG.json](RESEARCH_DAG.json) before interpretation. Current plots are in `analysis_v2/`; `analysis_v1/` and its analyzer snapshot are retained as historical artifacts. All 51 individual raw arrays and execution receipts are under `runs/`.
 
+Published content: [`6b6db06e8148e6826a2d5bf7dbc53d362126ca62`](https://github.com/cosmosapjw-quantum/bass_cr/commit/6b6db06e8148e6826a2d5bf7dbc53d362126ca62), [draft PR96](https://github.com/cosmosapjw-quantum/bass_cr/pull/96). The separate document closeout records actual backup responses. `publication/FETCHED_CONTENT_VERIFICATION.json` verifies all 308 published file identities against the local bytes, and confirms no historical science files changed.
+
 ## Model and numerical identity
 
 - 20 atomic charge populations: H1 I–II, D I–II, T I–II, He3 I–III, He4 I–III, Li6 I–IV and Li7 I–IV; plus free neutron. Free electrons are an algebraic charge sum.
