@@ -1,0 +1,117 @@
+{
+  "executed_focused_checks": {
+    "ODE_integrations": 0,
+    "cases": [
+      "swapped_completed_case_is_rejected_before_any_dispatch",
+      "worker_identity_mismatch_is_rejected_before_affinity_or_science"
+    ],
+    "command": "python3 -B tests/test_runner.py",
+    "exit_code": 0,
+    "identity": "monkeypatched small fixture values; production identity() not executed",
+    "raw_fixture": "EXPLICIT_TEST_DOUBLE_NOT_A_SCIENTIFIC_NPZ",
+    "remote_calls": 0,
+    "scientific_constructors": 0,
+    "scientific_imports": "explicit test doubles",
+    "tests_passed": 2,
+    "tests_run": 2,
+    "wall_seconds_reported_by_unittest": 0.109,
+    "worker_processes": 0
+  },
+  "findings": [
+    {
+      "finding": "A valid same-source completed receipt copied into a different target directory could pass because case coordinates were not compared.",
+      "id": "OPS01",
+      "original_severity": "P0",
+      "resolution": "COMPLETE admission now compares recorded.case exactly against current target and also checks receipt source/history links.",
+      "status": "RESOLVED_SCOPED",
+      "validation": "Negative fixture with all hashes valid but wrong case is rejected before admission or scientific constructors; fixture files unchanged."
+    },
+    {
+      "finding": "Worker initialization previously did not compare actual worker source identity to parent manifest.",
+      "id": "OPS02",
+      "original_severity": "P1",
+      "resolution": "Initializer checks expected source before affinity; run_case checks actual source before integration and after raw output.",
+      "status": "RESOLVED_SCOPED",
+      "validation": "Initializer mismatch negative fixture rejects before affinity and constructors; pre/post-case guards statically reviewed only."
+    },
+    {
+      "finding": "A single adaptive gate could admit multiple new tasks although it budgeted one additional worker.",
+      "id": "OPS03",
+      "original_severity": "P1",
+      "resolution": "At most one task is submitted per gate and a fresh resource observation is taken before next admission.",
+      "status": "RESOLVED_SCOPED",
+      "validation": "Changed dispatch control flow statically reviewed; no worker processes or ODE invoked."
+    },
+    {
+      "finding": "Recorded Python/NumPy/SciPy versions were not checked on resume.",
+      "id": "OPS04",
+      "original_severity": "P1",
+      "resolution": "Exact version comparison now rejects resume runtime mismatch.",
+      "status": "RESOLVED_SCOPED",
+      "validation": "Changed version comparison statically reviewed; separate version fixture not run."
+    }
+  ],
+  "global_error_bound": null,
+  "historical_test_harness_failure": {
+    "cause": "Root had added an AtomicNetwork21 import; initial fixtures had not yet stubbed that scientific module.",
+    "classification": "TEST_HARNESS_IMPORT_STUB_OMISSION; production guards not exercised",
+    "errors": 2,
+    "exception": "ModuleNotFoundError: No module named 'atomic_network'",
+    "failed_test_source_sha256": "ac5600378e6ca31f047d039fc502aafa78afbfd346a1bb0195674706782d7a45",
+    "failed_test_source_size_bytes": 4519,
+    "failed_test_source_text": "\"\"\"Two negative operational fixtures. All scientific imports are test doubles.\n\nNo ODE, constructor, worker process or resource-admission execution is allowed.\nThe artificial history bytes are deliberately not a scientific NPZ artifact.\n\"\"\"\nimport hashlib\nimport importlib.util\nimport json\nimport os\nfrom pathlib import Path\nimport sys\nimport tempfile\nimport types\nimport unittest\nfrom unittest.mock import Mock, patch\n\n\ndef load_runner_with_science_forbidden():\n    modules = {}\n    for name in (\"numpy\", \"scipy\", \"coupled_model\", \"resource_control\"):\n        modules[name] = types.ModuleType(name)\n    modules[\"numpy\"].__version__ = \"fixture-numpy\"\n    modules[\"scipy\"].__version__ = \"fixture-scipy\"\n    factory = Mock(side_effect=AssertionError(\"SCIENCE_CONSTRUCTOR_FORBIDDEN_IN_OPS_FIXTURE\"))\n    modules[\"coupled_model\"].CoupledFactory = factory\n    for name, value in {\"RTOL\": 3e-11, \"ATOL\": 3e-13, \"N_OUTPUT\": 201,\n                        \"Z_START\": 20., \"Z_END\": 2.}.items():\n        setattr(modules[\"coupled_model\"], name, value)\n    for name in (\"choose_workers\", \"observe_resources\", \"dispatch_allowed\"):\n        setattr(modules[\"resource_control\"], name,\n                Mock(side_effect=AssertionError(\"ADMISSION_FORBIDDEN_BEFORE_NEGATIVE_REJECTION\")))\n    path = Path(__file__).resolve().parents[1] / \"run_sandbox.py\"\n    spec = importlib.util.spec_from_file_location(\"c21o_runner_operational_fixture\", path)\n    module = importlib.util.module_from_spec(spec)\n    with patch.dict(sys.modules, modules), patch.dict(os.environ):\n        spec.loader.exec_module(module)\n    return module, factory\n\n\nclass RunnerNegativeFixtures(unittest.TestCase):\n    def test_swapped_completed_case_is_rejected_before_any_dispatch(self):\n        runner, factory = load_runner_with_science_forbidden()\n        identity = {\"identity_sha256\": \"FIXTURE_SOURCE_NO_SCIENCE\"}\n        target = {\"case_id\": \"case0\", \"signed_sigma\": 0., \"signed_pi_m\": 0.,\n                  \"signed_pi_r\": 0., \"ellmax\": 8, \"method\": \"BDF\", \"thomson\": True}\n        wrong_case = dict(target, case_id=\"case1\", signed_sigma=.2)\n        grid = {\"schema\": \"C21O_CASE_GRID_V1\", \"cases\": [target]}\n        with tempfile.TemporaryDirectory() as td:\n            base = Path(td)\n            output = base / \"run\"\n            case_dir = output / \"cases\" / \"case0\"\n            case_dir.mkdir(parents=True)\n            (base / \"grid.json\").write_text(json.dumps(grid))\n            (output / \"MANIFEST.json\").write_text(json.dumps({\n                \"source\": identity, \"grid\": grid, \"python\": sys.version,\n                \"numpy\": \"fixture-numpy\", \"scipy\": \"fixture-scipy\"}))\n            raw = b\"EXPLICIT_TEST_DOUBLE_NOT_A_SCIENTIFIC_NPZ\"\n            (case_dir / \"history.npz\").write_bytes(raw)\n            raw_sha = hashlib.sha256(raw).hexdigest()\n            receipt = {\"case\": wrong_case, \"source_identity_sha256\": identity[\"identity_sha256\"],\n                       \"history_sha256\": raw_sha}\n            (case_dir / \"RECEIPT.json\").write_text(json.dumps(receipt))\n            (case_dir / \"COMPLETE.json\").write_text(json.dumps({\n                \"source_identity_sha256\": identity[\"identity_sha256\"],\n                \"history_sha256\": raw_sha,\n                \"receipt_sha256\": runner.sha256(case_dir / \"RECEIPT.json\")}))\n            before = {str(p.relative_to(base)): p.read_bytes() for p in base.rglob(\"*\") if p.is_file()}\n            with patch.object(runner, \"identity\", return_value=identity):\n                with self.assertRaisesRegex(RuntimeError, \"COMPLETED_CASE_BYTE_MISMATCH:case0\"):\n                    runner.run(base / \"grid.json\", output, requested=2, resume=True)\n            after = {str(p.relative_to(base)): p.read_bytes() for p in base.rglob(\"*\") if p.is_file()}\n            self.assertEqual(before, after)\n            runner.choose_workers.assert_not_called()\n            factory.assert_not_called()\n\n    def test_worker_identity_mismatch_is_rejected_before_affinity_or_science(self):\n        runner, factory = load_runner_with_science_forbidden()\n        with patch.object(runner, \"identity\", return_value={\"identity_sha256\": \"ACTUAL_FIXTURE_SOURCE\"}), \\\n                patch.object(runner.os, \"sched_setaffinity\") as affinity:\n            with self.assertRaisesRegex(RuntimeError, \"WORKER_SOURCE_IDENTITY_MISMATCH\"):\n                runner.worker_init([0, 1], \"DIFFERENT_EXPECTED_FIXTURE_SOURCE\")\n            affinity.assert_not_called()\n        factory.assert_not_called()\n\n\nif __name__ == \"__main__\":\n    unittest.main(verbosity=2)\n",
+    "repair": "Added forbidden-constructor AtomicNetwork21 stub and explicit assert_not_called checks.",
+    "tests_run": 2
+  },
+  "limits": [
+    "No physical accuracy, scientific history, full reionization or NCP execution certification is issued by this operations review.",
+    "No hard ODE runtime deadline or emergency process cleanup was exercised in this runner review.",
+    "Available resources and cooperative lease metadata are observations, not atomic reservations or enforced memory quotas.",
+    "Compiled numerical libraries are recorded by runtime version, not independently binary-hashed.",
+    "No performance benchmark, speedup claim or broad regression suite was run."
+  ],
+  "original_runner_sha256": "668c192b5c7b3f8e5d2973ef101cfd1c45aee1737ff2421a7e567df9ff0549a5",
+  "resource_module_scope": {
+    "independent_resource_validation": "NOT_RUN_BY_THIS_REVIEWER",
+    "previous_author_fixture_result": "9 focused resource fixtures PASS; not rerun in independent runner review",
+    "review_type": "SELF_REVIEW_ONLY"
+  },
+  "reviewed_at_utc": "2026-10-21T15:11:15.923534+00:00",
+  "reviewed_files": [
+    {
+      "path": "run_sandbox.py",
+      "sha256": "99057bdf88129c353d474aeae7a709d27f909f6f4eb64dd8d0deb9a56bf66bce",
+      "size_bytes": 15307
+    },
+    {
+      "path": "resource_control.py",
+      "sha256": "5b87e4a5fbe32c21ec8391a1f432895e13064a86b7a404cc55652606607cf5c7",
+      "size_bytes": 23257
+    },
+    {
+      "path": "tests/test_runner.py",
+      "sha256": "039cc643a5d3610444f93cd8a71e1f21aa8956d5e483093436657bdc3988949e",
+      "size_bytes": 4780
+    },
+    {
+      "path": "tests/test_resources.py",
+      "sha256": "d006d0a19c47a6f2f0ed3e9eb1d7adcc52eb84b482b59219131513ab31338888",
+      "size_bytes": 8210
+    }
+  ],
+  "reviewer": "backup_intake subagent; run_sandbox.py independent reviewer; resource_control.py author self-review only",
+  "schema": "C21O_INDEPENDENT_OPERATIONS_REVIEW_V1",
+  "static_review_scope": [
+    "Create-only run directories, per-case directories, JSON x-mode and raw NPZ xb-mode.",
+    "Resume requires source identity and complete input grid equality; completed raw and receipt hashes are checked.",
+    "Existing incomplete case directories are held and not automatically retried.",
+    "Worker count caps tasks and source-group factories are local to each worker by ellmax.",
+    "Numerical thread environment is set to one before NumPy/SciPy imports.",
+    "Coordinator pins to admitted coordinator CPU; workers pin to admitted worker CPUs; adaptive resource API uses admitted CPUs instead of coordinator-only affinity.",
+    "New dispatch uses bounded active futures and one fresh observation per newly submitted task.",
+    "No-active resource waiting is bounded to 60 seconds; completed and failed artifacts are preserved.",
+    "Direct source files are hashed; C21N builder, C21L adapter and atomic-provider loaders separately verify pinned parent dependency bytes.",
+    "Atomic model metadata and kinetic configuration are included in source identity."
+  ],
+  "status": "PASS_SCOPED"
+}
