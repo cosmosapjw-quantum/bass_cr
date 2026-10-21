@@ -35,7 +35,9 @@ def equal_grid_plots(output,rows):
         if len(differences)>1 and not np.allclose(differences,differences[0],rtol=1e-12,atol=1e-15):
             raise ValueError('PLOT_REQUIRES_EQUAL_STRESS_SPACING')
     plt.rcParams.update({'font.size':10,'pdf.fonttype':42})
-    fig,panels=plt.subplots(len(axes[0]),2,squeeze=False,figsize=(11,3.65*len(axes[0])+.5),constrained_layout=True)
+    # Wider panels and smaller cell labels keep the five-point refinement grid
+    # legible in both raster and vector exports.
+    fig,panels=plt.subplots(len(axes[0]),2,squeeze=False,figsize=(16,4.2*len(axes[0])+.5),constrained_layout=True)
     for column,channel in enumerate(('P_tot_signed_F_end','S_signed_F_end')):
         matrices=[np.array([[table[s,m,r][channel] for m in axes[1]] for r in axes[2]]) for s in axes[0]]
         limit=max(float(np.max(abs(matrix))) for matrix in matrices) or 1.
@@ -49,7 +51,7 @@ def equal_grid_plots(output,rows):
             ax.tick_params(axis='x',labelrotation=25)
             for y in range(len(axes[2])):
                 for x in range(len(axes[1])):
-                    ax.text(x,y,f'{matrix[y,x]:+.2e}',ha='center',va='center',fontsize=8,
+                    ax.text(x,y,f'{matrix[y,x]:+.2e}',ha='center',va='center',fontsize=5,
                             color='white' if abs(matrix[y,x])>.65*limit else '#101010')
         fig.colorbar(im,ax=panels[:,column],shrink=.8,label=(r'$P_{\rm tot}(z=4)$' if column==0 else r'$S(z=4)$'))
     reused=sum(r['origin']=='REUSED_C21L_TRAJECTORY' for r in rows)

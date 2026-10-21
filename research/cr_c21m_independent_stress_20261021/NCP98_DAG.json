@@ -1,0 +1,79 @@
+{
+  "schema": "bass_cr.c21m.ncp98.dag.v1",
+  "unit": "C21M_OPTIONAL_NCP98_REFINEMENT",
+  "science_content_commit": "659c94312eb9c12ebb987de934459c12a63d67b0",
+  "fixed_native_source_commit": "3b85dedce84d37b3e165da00685a8a984950aafe",
+  "grid_sha256": "768643862b317ba3d159af6503ebb80141028dc8c671fdb00a9d0a68b32fde04",
+  "states": {
+    "EXECUTION": "98_NEW_CASES_COMPLETE_SCOPED; 26_PREVIOUS_CASES_AND_1_CENTER_REUSED_WITHOUT_REINTEGRATION",
+    "PUBLICATION": "ADDITIVE_CONTENT_COMMIT_EE62F86; SEPARATE_DOCUMENT_COMMIT; DRAFT_PR",
+    "BACKUP": "DROPBOX_AND_GOOGLE_DRIVE_CREATE_ONLY_UPLOAD_ACK_AND_REMOTE_SHA256_READBACK_PASS",
+    "DAG": "NCP98_OPTIONAL_REFINEMENT_COMPLETE_SCOPED; NEXT_INDEPENDENT_VERIFICATION_REQUIRED"
+  },
+  "run": {
+    "run_id": "c21m_ncp_refinement98_z20_z4_20261021",
+    "identity": "7f89b12adbeee64a70832e633ae563584bc2a68f6ac2a60139b98efacb01c05a",
+    "completed": 98,
+    "failed": 0,
+    "source_state_count": 40,
+    "saved_samples_per_case": 101,
+    "precision": "FP64",
+    "solver": "DOP853",
+    "rtol": 3e-11,
+    "atol": 3e-13,
+    "global_error_bound": null
+  },
+  "combined_analysis": {
+    "unique_coordinates": 125,
+    "new_run_cases": 124,
+    "reused_center_cases": 1,
+    "analysis_ode_solves": 0,
+    "endpoint_signed_ranges": {
+      "S_signed_F": [-0.0014449836382490454, 0.0014445706731321458],
+      "P_m_signed_F": [-0.00001243674355429252, 0.000012574783729509532],
+      "P_r_signed_F": [-0.00006299231787166938, 0.00006344480064794384],
+      "P_tot_signed_F": [-0.00007519532477721574, 0.00007577499571350794]
+    },
+    "scoped_check_maxima": {
+      "initial_axis_abs_error": 1.734723475976807e-18,
+      "hamiltonian_relative": 2.220446049250313e-16,
+      "massive_comoving_number_relative": 4.440892098500626e-16
+    },
+    "global_error_bound": null
+  },
+  "resource_observation": {
+    "cpu55_used": false,
+    "coordinator_cpu": 0,
+    "assigned_worker_cpus": 61,
+    "numerical_library_threads": 1,
+    "elapsed_wall_seconds": 13.18,
+    "max_rss_kib": 112792,
+    "performance_benchmark": false
+  },
+  "next_nodes": [
+    {
+      "node": "NCP98_PDF_RENDER_REVIEW",
+      "status": "OPTIONAL_REVIEW_REMAINS",
+      "required_before_pdf_only_publication": true,
+      "details": "PNG independently visually reviewed. PDF SHA and artifact manifest verified, but a separate PDF rendering review was not available."
+    },
+    {
+      "node": "TIME_SOURCE_AGE_SPECTRAL_ANGULAR_CONVERGENCE",
+      "status": "HOLD",
+      "details": "NCP98 is an initial-condition grid refinement, not time/source-age/spectral/angular convergence."
+    },
+    {
+      "node": "GENERAL_TRIAXIAL_GEOMETRY",
+      "status": "HOLD"
+    },
+    {
+      "node": "FULL_REIONIZATION_AND_CMB",
+      "status": "HOLD"
+    },
+    {
+      "node": "GLOBAL_NUMERICAL_ERROR_BOUND",
+      "status": "HOLD_NULL",
+      "value": null
+    }
+  ]
+}
