@@ -1,0 +1,414 @@
+{
+  "schema": "C21K_LITERATURE_LEDGER_V1",
+  "recorded_utc": "2026-10-20T21:33:38.816292+00:00",
+  "primary_sources_only": true,
+  "sources": [
+    {
+      "id": "L1",
+      "title": "Bounds for Certain Multiprocessing Anomalies",
+      "author": "R. L. Graham",
+      "year": 1966,
+      "doi": "10.1002/j.1538-7305.1966.tb01709.x",
+      "urls": [
+        "https://www.nokia.com/bell-labs/publications-and-media/publications/bounds-for-certain-multiprocessing-anomalies/",
+        "https://ia801900.us.archive.org/27/items/bstj45-9-1563/bstj45-9-1563_text.pdf"
+      ],
+      "read_scope": "Original scanned article model and theorem/proof sections, conclusions; official Bell Labs bibliographic record.",
+      "adopted": "Identical-processor precedence/list model and chain idle-time bound; current note derives W/P and L explicitly.",
+      "not_claimed": "No direct bound on a memory-blocked or quota-throttled NCP implementation; no empirical NCP speedup."
+    },
+    {
+      "id": "L2",
+      "title": "functools — Python 3.12 official documentation",
+      "urls": [
+        "https://docs.python.org/3.12/library/functools.html"
+      ],
+      "read_scope": "lru_cache, key types and mutable/pure-result caveats.",
+      "adopted": "General memoization contract background; motivates explicit owned-result handling.",
+      "not_claimed": "Python generic argument equality is not our typed binary64 bit-key proof."
+    },
+    {
+      "id": "L3",
+      "title": "Floating-Point Arithmetic: Issues and Limitations — Python 3.12 official documentation",
+      "urls": [
+        "https://docs.python.org/3.12/tutorial/floatingpoint.html"
+      ],
+      "read_scope": "Binary representation and per-operation rounding discussion.",
+      "adopted": "Background only; original operation order is independently derived from source."
+    },
+    {
+      "id": "L4",
+      "title": "Control Group v2 — official Linux kernel documentation",
+      "urls": [
+        "https://docs.kernel.org/admin-guide/cgroup-v2.html"
+      ],
+      "read_scope": "cpuset.cpus/effective and memory.current/max definitions, byte units.",
+      "adopted": "Read effective granted resources, quota and memory admission at runtime.",
+      "not_claimed": "No actual present NCP resource values are inferred from documentation."
+    },
+    {
+      "id": "L5",
+      "title": "“Memo” Functions and Machine Learning",
+      "author": "Donald Michie",
+      "year": 1968,
+      "doi": "10.1038/218019a0",
+      "urls": [
+        "https://www.nature.com/articles/218019a0"
+      ],
+      "read_scope": "Publisher abstract and bibliographic metadata via Exa; web opener hit an inaccessible Nature identity redirect.",
+      "adopted": "Historical memoization antecedent only.",
+      "not_claimed": "Full article read or detailed source-specific theorem support."
+    },
+    {
+      "id": "X1",
+      "title": "Compile-time function memoization",
+      "authors": [
+        "Arjun Suresh",
+        "Erven Rohou",
+        "André Seznec"
+      ],
+      "year": 2017,
+      "doi": "10.1145/3033019.3033024",
+      "urls": [
+        "https://hal.inria.fr/hal-01423811/document"
+      ],
+      "read_scope": "SciSpace discovery metadata; Exa original-document fetch failed SOURCE_NOT_AVAILABLE.",
+      "adopted": false,
+      "not_claimed": "Full paper findings were not used."
+    }
+  ],
+  "queries_and_reads": [
+    {
+      "path": "raw_private/exa_compiletime_memo_read.json",
+      "bytes": 578,
+      "sha256": "dc6c18c3eb589284bf76aeedad34dbb64becde0e1b4cad82a4e93598011b5b59",
+      "result_canonical_json_sha256": "7454db1c085ebe91f9577c5eaae46aa82ca128477bde516f7d3e4c6aaadecfd1",
+      "tool": "mcp__codex_apps__exa_web_fetch_exa",
+      "request": {
+        "urls": [
+          "https://hal.inria.fr/hal-01423811/document"
+        ],
+        "maxCharacters": 18000
+      },
+      "started_utc": "2026-10-20 21:25:25 UTC",
+      "completed_utc": "2026-10-20 21:25:27 UTC",
+      "observation_date_utc": null,
+      "isError": true,
+      "exception": null,
+      "public_math_result": false,
+      "copyright_handling": "Private analysis only; do not package source text/abstracts/context snippets"
+    },
+    {
+      "path": "raw_private/exa_graham_original.json",
+      "bytes": 10763,
+      "sha256": "c06e176ca57386b43484fa334f7e92767cceb7a20eb8ef79040848a0c386ae0c",
+      "result_canonical_json_sha256": "1f145d0c48428f870b4dd7b4558f2f2885d169572cd3f78d551bc42d7f9a643a",
+      "tool": "mcp__codex_apps__exa_web_search_exa",
+      "request": {
+        "query": "Original Ronald L Graham 1966 Bounds for Certain Multiprocessing Anomalies Bell System Technical Journal paper precedence tasks identical processors list scheduling 2 minus 1 over m original PDF DOI",
+        "objective": "Locate the original 1966 paper or its official publisher record or author-hosted copy. Extract exact bibliographic identity and scheduling assumptions. Exclude lecture-note-only sources and third-party summaries as evidence.",
+        "numResults": 3
+      },
+      "started_utc": "2026-10-20 21:19:44 UTC",
+      "completed_utc": "2026-10-20 21:20:17 UTC",
+      "observation_date_utc": null,
+      "isError": false,
+      "exception": null,
+      "public_math_result": false,
+      "copyright_handling": "Private analysis only; do not package source text/abstracts/context snippets"
+    },
+    {
+      "path": "raw_private/exa_graham_read.json",
+      "bytes": 12017,
+      "sha256": "91a69c503681ac3a490b73f103e73e67fb44e532bc4ab27326da9fb0fd782403",
+      "result_canonical_json_sha256": "ddc3aa726f0fd2c6484af21b23c46de3812b3d84d3c671e803c4fa20eef01b88",
+      "tool": "mcp__codex_apps__exa_web_fetch_exa",
+      "request": {
+        "urls": [
+          "https://ia801900.us.archive.org/27/items/bstj45-9-1563/bstj45-9-1563_text.pdf",
+          "https://www.nokia.com/bell-labs/publications-and-media/publications/bounds-for-certain-multiprocessing-anomalies/"
+        ],
+        "maxCharacters": 20000
+      },
+      "started_utc": "2026-10-20 21:23:57 UTC",
+      "completed_utc": "2026-10-20 21:23:58 UTC",
+      "observation_date_utc": null,
+      "isError": false,
+      "exception": null,
+      "public_math_result": false,
+      "copyright_handling": "Private analysis only; do not package source text/abstracts/context snippets"
+    },
+    {
+      "path": "raw_private/exa_memo_original.json",
+      "bytes": 2379,
+      "sha256": "b76e5f4845c3665ad8d95e08a607d7bf5135c4ea0b994aa7385182ffeb1d85fa",
+      "result_canonical_json_sha256": "f42e5bcabb43daab7eb596ed5fcefccca2891fe46eb88d0882c96065d2f38d6b",
+      "tool": "mcp__codex_apps__exa_web_search_exa",
+      "request": {
+        "query": "Donald Michie Memo Functions and Machine Learning Nature 1968 volume 218 pages 19 22 original article",
+        "objective": "Find the original Nature publisher record for Michie 1968, with DOI and original abstract/description. Use original sources only, and do not infer modern numerical exactness claims from title.",
+        "numResults": 2
+      },
+      "started_utc": "2026-10-20 21:19:44 UTC",
+      "completed_utc": "2026-10-20 21:20:17 UTC",
+      "observation_date_utc": null,
+      "isError": false,
+      "exception": null,
+      "public_math_result": false,
+      "copyright_handling": "Private analysis only; do not package source text/abstracts/context snippets"
+    },
+    {
+      "path": "raw_private/exa_michie_read.json",
+      "bytes": 19080,
+      "sha256": "f8acbd5392ef978959f690d2901db18046723d9841a36c3aff2318e96a93099b",
+      "result_canonical_json_sha256": "eb499e8da329562e0c0771a5613d53323408f0818c29209d850d6b9d01449165",
+      "tool": "mcp__codex_apps__exa_web_fetch_exa",
+      "request": {
+        "urls": [
+          "https://www.nature.com/articles/218019a0",
+          "https://docs.python.org/3.12/library/functools.html"
+        ],
+        "maxCharacters": 15000
+      },
+      "started_utc": "2026-10-20 21:23:57 UTC",
+      "completed_utc": "2026-10-20 21:23:58 UTC",
+      "observation_date_utc": null,
+      "isError": false,
+      "exception": null,
+      "public_math_result": false,
+      "copyright_handling": "Private analysis only; do not package source text/abstracts/context snippets"
+    },
+    {
+      "path": "raw_private/exa_official_runtime_contracts.json",
+      "bytes": 11370,
+      "sha256": "e9aa09c8c7451363390fc68e89c9547b8789eae03e281d45d2440bb5c64eff33",
+      "result_canonical_json_sha256": "98b6ad10ef860ebdb2c59694ba042522543d43b3f210f5d25484e1a85dbbcd36",
+      "tool": "mcp__codex_apps__exa_web_search_exa",
+      "request": {
+        "query": "Official Python 3.12 functools lru_cache documentation pure functions mutable return values thread safety and Linux kernel cgroup v2 cpuset.cpus.effective memory.max documentation",
+        "objective": "Identify official Python and Linux kernel documentation for cached mutable results, exact argument reuse, allowed CPU sets, and cgroup memory limits. These are engineering premises for per-process memoization and bounded independent-job scheduling.",
+        "numResults": 3
+      },
+      "started_utc": "2026-10-20 21:19:44 UTC",
+      "completed_utc": "2026-10-20 21:20:17 UTC",
+      "observation_date_utc": null,
+      "isError": false,
+      "exception": null,
+      "public_math_result": false,
+      "copyright_handling": "Private analysis only; do not package source text/abstracts/context snippets"
+    },
+    {
+      "path": "raw_private/scispace_exact_memoization.json",
+      "bytes": 46166,
+      "sha256": "669771fb0c6a610bede255e78100621f4dd1416f3bfcdbcc552f8b1d400c4185",
+      "result_canonical_json_sha256": "579d9a0aa69500e2595c6da22f91b07ae3c239f8a7729582b98539c99ec64fee",
+      "tool": "mcp__codex_apps__scispace_search_papers",
+      "request": {
+        "searchQuestion": "Which original papers introduced exact memoization or memo functions, especially Donald Michie's 1968 'Memo Functions and Machine Learning', and distinguish reuse of deterministic function values for identical arguments from approximate tabulation? I am analyzing a fixed numerical ODE program in which an opacity coefficient depends only on a fixed fixture and exact epoch, and do not need approximate chemistry interpolation methods."
+      },
+      "started_utc": "2026-10-20 21:19:44 UTC",
+      "completed_utc": "2026-10-20 21:20:17 UTC",
+      "observation_date_utc": null,
+      "isError": false,
+      "exception": null,
+      "public_math_result": false,
+      "copyright_handling": "Private analysis only; do not package source text/abstracts/context snippets"
+    },
+    {
+      "path": "raw_private/scispace_graham_precedence.json",
+      "bytes": 49801,
+      "sha256": "7212e67b2f4470aafe1d3e84c5837aa888e63985d8d40509cca78b2e0b37b119",
+      "result_canonical_json_sha256": "34784b9c49f425450768fddde14ac1dedaab86627daf1d5a4265fa07e6e14faa",
+      "tool": "mcp__codex_apps__scispace_search_papers",
+      "request": {
+        "searchQuestion": "Which original papers by Ronald L. Graham establish bounds for nonpreemptive list scheduling of precedence-constrained jobs on identical processors, particularly the 1966 'Bounds for Certain Multiprocessing Anomalies' and the work/critical-path bound underlying the 2-1/m approximation ratio? I need the original paper identity and the exact assumptions, rather than modern application benchmarks."
+      },
+      "started_utc": "2026-10-20 21:19:44 UTC",
+      "completed_utc": "2026-10-20 21:20:17 UTC",
+      "observation_date_utc": null,
+      "isError": false,
+      "exception": null,
+      "public_math_result": false,
+      "copyright_handling": "Private analysis only; do not package source text/abstracts/context snippets"
+    },
+    {
+      "path": "raw_private/web_graham_body.json",
+      "bytes": 20760,
+      "sha256": "9a7449a71da5e456a9f67bd427c341c1a705f48226b22d43b86372cbd20713c9",
+      "result_canonical_json_sha256": "3ede08a087e1147e686811d6879e5675bfeec80c0cd8fc6099238614f090749a",
+      "tool": "mcp__codex_apps__search_service_web_run",
+      "request": {
+        "open": [
+          {
+            "ref_id": "turn3view1",
+            "lineno": 180
+          },
+          {
+            "ref_id": "turn3view1",
+            "lineno": 420
+          }
+        ],
+        "response_length": "long"
+      },
+      "started_utc": "2026-10-20 21:26:11 UTC",
+      "completed_utc": "2026-10-20 21:26:13 UTC",
+      "observation_date_utc": null,
+      "isError": false,
+      "exception": null,
+      "public_math_result": false,
+      "copyright_handling": "Private analysis only; do not package source text/abstracts/context snippets"
+    },
+    {
+      "path": "raw_private/web_open_primary.json",
+      "bytes": 33126,
+      "sha256": "5612cbd2217bbf5ec5e7fc2dedb0ce26a69c327ba97d1ba4d648d9ddfcc45822",
+      "result_canonical_json_sha256": "99a85291329484b3398ba83681bc0ea1383a227e4ea6a1b79c9a9e138e2d61fa",
+      "tool": "mcp__codex_apps__search_service_web_run",
+      "request": {
+        "open": [
+          {
+            "ref_id": "https://www.nokia.com/bell-labs/publications-and-media/publications/bounds-for-certain-multiprocessing-anomalies/"
+          },
+          {
+            "ref_id": "https://www.nature.com/articles/218019a0"
+          },
+          {
+            "ref_id": "https://docs.python.org/3.12/library/functools.html"
+          },
+          {
+            "ref_id": "https://docs.kernel.org/admin-guide/cgroup-v2.html"
+          }
+        ],
+        "response_length": "long"
+      },
+      "started_utc": null,
+      "completed_utc": null,
+      "observation_date_utc": "2026-10-20",
+      "isError": false,
+      "exception": null,
+      "public_math_result": false,
+      "copyright_handling": "Private analysis only; do not package source text/abstracts/context snippets"
+    },
+    {
+      "path": "raw_private/web_primary_precision.json",
+      "bytes": 33644,
+      "sha256": "a299258c652a72cc934af5587bf9cc4028b35bd726bd9a90271425baf633a160",
+      "result_canonical_json_sha256": "eb0fed26084f6c90db347ebf1102cbf0b386ca404b7ce7ffab350f5e2b234124",
+      "tool": "mcp__codex_apps__search_service_web_run",
+      "request": {
+        "find": [
+          {
+            "ref_id": "turn2view2",
+            "pattern": "mutable"
+          },
+          {
+            "ref_id": "turn2view3",
+            "pattern": "cpuset.cpus.effective"
+          },
+          {
+            "ref_id": "turn2view3",
+            "pattern": "memory.max"
+          },
+          {
+            "ref_id": "turn2view3",
+            "pattern": "memory.current"
+          }
+        ],
+        "open": [
+          {
+            "ref_id": "https://docs.python.org/3.12/tutorial/floatingpoint.html"
+          },
+          {
+            "ref_id": "https://ia801900.us.archive.org/27/items/bstj45-9-1563/bstj45-9-1563_text.pdf"
+          }
+        ],
+        "response_length": "long"
+      },
+      "started_utc": "2026-10-20 21:25:25 UTC",
+      "completed_utc": "2026-10-20 21:25:27 UTC",
+      "observation_date_utc": null,
+      "isError": false,
+      "exception": null,
+      "public_math_result": false,
+      "copyright_handling": "Private analysis only; do not package source text/abstracts/context snippets"
+    },
+    {
+      "path": "raw_wolfram/wolfram_context.json",
+      "bytes": 1804,
+      "sha256": "b92658551409add7def40748b84119d5e71baac0ef646fab0b17cce87fb55968",
+      "result_canonical_json_sha256": "3d35e396fc0dcbbe18b38d0a9260c01ff1b7a13eb847ea4cbfc218730483fae2",
+      "tool": "mcp__codex_apps__wolfram_wolframcontext",
+      "request": {
+        "context": "We are extending a frozen numerical astrophysics ODE program without changing its equations or tolerances. For a fixed immutable fixture, E_i(x)=q_i exp(-x), K_ij(x)=s c n_H0 exp(-3 x) sigma_j(E_i(x)), and H(x)=H0 sqrt(Omega_m exp(-3x)+Omega_r exp(-4x)+Omega_L) are independent of gas, optical depth and ledger state. We want to memoize only exact typed binary64 clamped epoch values, preserving original floating-point evaluation on misses and returning owned array copies on hits. We need symbolic checks of functional independence, dimensions, epoch sensitivity and a cost break-even identity; this is not a proof about floating-point implementation. Separately, independent bounded native jobs form a precedence DAG. For unit-processor jobs on P identical processors, total work W and critical path L give lower bound max(W/P,L) and greedy list-scheduling bound W/P+(1-1/P)L. Actual admission must honor CPU affinity/cgroup sets excluding protected CPU55, current allocation, memory limits and nested thread ceilings. Please provide relevant Wolfram Language tools for exact symbolic differentiation, inequality simplification, finite counterexamples and dimension checking. We will not run new native chemistry or ODE integrations in this theory task."
+      },
+      "started_utc": "2026-10-20 21:19:44 UTC",
+      "completed_utc": "2026-10-20 21:20:17 UTC",
+      "observation_date_utc": null,
+      "isError": true,
+      "exception": null,
+      "public_math_result": false,
+      "copyright_handling": "Private analysis only; do not package source text/abstracts/context snippets"
+    },
+    {
+      "path": "raw_wolfram/wolfram_context_retry.json",
+      "bytes": 8614,
+      "sha256": "42ef85e4b7f025eb7ebe396cfbb36e841f7aadedb7c4c0f7431770def54f28a5",
+      "result_canonical_json_sha256": "7a586bf51f242c5881e34ca2dff4909ddd84ec408759ddabdd5c00d2c9656070",
+      "tool": "mcp__codex_apps__wolfram_wolframcontext",
+      "request": {
+        "context": "We are proving exact memoization and common-subexpression reuse for epoch-only opacity coefficients in a deterministic binary64 scientific ODE program, and bounding independent-job DAG scheduling makespan. Please provide symbolic algebra and floating-point caveats; no new simulation is requested. We will verify derivatives, break-even identities, and a finite scheduling counterexample."
+      },
+      "started_utc": "2026-10-20 21:23:57 UTC",
+      "completed_utc": "2026-10-20 21:24:16 UTC",
+      "observation_date_utc": null,
+      "isError": false,
+      "exception": null,
+      "public_math_result": false,
+      "copyright_handling": "Private analysis only; do not package source text/abstracts/context snippets"
+    },
+    {
+      "path": "raw_wolfram/wolfram_epoch_cse_cost_check.json",
+      "bytes": 2347,
+      "sha256": "5361e798e4cff2e9551aa706bbc3a8ba7913f715631563b3b063540ceb90b992",
+      "result_canonical_json_sha256": "fadc512d4495c44d7387e876f5f708ff568fc7e23537ae59228346979a7d421a",
+      "tool": "mcp__codex_apps__wolfram_wolframlanguageevaluator",
+      "request": {
+        "code": "Clear[x,q,delta,om,orr,ol,h0,s,c,n,ee,v,mul,h,kk,z,sigma,cq,ch,cm,cs,nb,nh,cnew,clook,ccopy,cstore,pm,w,l];\nh[x_]:=h0 Sqrt[om Exp[-3 x]+orr Exp[-4 x]+ol];\nkk[x_]:=s c n Exp[-3 x] sigma[q Exp[-x]];\norigTree=mul[mul[mul[mul[s,c],n],ee],v];\nfactoredTree=With[{aa=mul[mul[s,c],n]},With[{bb=mul[aa,ee]},mul[bb,v]]];\nbaseCost=(nb+nh)cq;\nmemoCost=nb cnew+(nb+nh)clook+nh ccopy+nb cstore;\n<|\"energy_ratio\"->FullSimplify[q Exp[-(x+delta)]/(q Exp[-x]),Assumptions->q>0&&Element[{x,delta},Reals]],\"H_derivative\"->FullSimplify[D[h[x],x]],\"opacity_derivative\"->D[kk[x],x],\"CSE_same_order_operation_tree\"->SameQ[origTree,factoredTree],\"CSE_tree\"->origTree,\"gain_identity\"->Expand[baseCost-memoCost],\"payload_LRU16_opacity_M9_bytes\"->16*8*(9+3*9),\"payload_LRU16_opacity_M128_bytes\"->16*8*(128+3*128),\"payload_LRU16_optional_H_bytes\"->16*8,\"coefficient_counts_vectorized\"->{859,329,859-329},\"coefficient_counts_exact\"->{790,329,790-329},\"residual_overlaps\"->((859-790)==(530-461)),\"epoch_ratio_factor\"->FullSimplify[Exp[-(x+delta)]/Exp[-x]],\"q_permutation_changes_rows\"->({q,2 q} Exp[-x]!={2 q,q} Exp[-x])|>",
+        "timeConstraint": 30
+      },
+      "started_utc": "2026-10-20 21:24:51 UTC",
+      "completed_utc": "2026-10-20 21:24:59 UTC",
+      "observation_date_utc": null,
+      "isError": false,
+      "exception": null,
+      "public_math_result": true,
+      "copyright_handling": "Our query/math result allowed"
+    },
+    {
+      "path": "raw_wolfram/wolfram_schedule_dimension_check.json",
+      "bytes": 2517,
+      "sha256": "03612c9ebc1027bb8bf0c16f9733d4cc6fa0fd6cda4d36ce6ab8e4bb32e3bffc",
+      "result_canonical_json_sha256": "cdd31155bea45ba1184f53b8d532240def8843af1c964e2dc3602943d3212be2",
+      "tool": "mcp__codex_apps__wolfram_wolframlanguageevaluator",
+      "request": {
+        "code": "Clear[listLoads,aa,ll,pp,q,x];listLoads[ds_List,pp_Integer]:=Fold[Function[{st,t},ReplacePart[st,First[Ordering[st,1]]->Min[st]+t]],ConstantArray[0,pp],ds]; rate=UnitSimplify[\\[FreeformPrompt][\"1 centimeter per second\"] \\[FreeformPrompt][\"1 per cubic centimeter\"] \\[FreeformPrompt][\"1 square centimeter\"]]; <|\"short_first_loads\"->listLoads[{1,1,1,3},2],\"long_first_loads\"->listLoads[{3,1,1,1},2],\"both_work\"->{Total[{1,1,1,3}],Total[{3,1,1,1}]},\"both_critical_path\"->{Max[{1,1,1,3}],Max[{3,1,1,1}]},\"list_bound_case_work_dominates\"->FullSimplify[aa+(1-1/pp)ll<=(2-1/pp)aa,Assumptions->aa>=ll&&ll>0&&pp>=1&&Element[{aa,ll,pp},Reals]],\"list_bound_case_chain_dominates\"->FullSimplify[aa+(1-1/pp)ll<=(2-1/pp)ll,Assumptions->ll>=aa&&aa>0&&pp>=1&&Element[{aa,ll,pp},Reals]],\"permutation_first_row_difference\"->FullSimplify[q Exp[-x]!=2q Exp[-x],Assumptions->q>0&&Element[x,Reals]],\"opacity_units\"->rate,\"opacity_over_H_units\"->UnitSimplify[rate/\\[FreeformPrompt][\"1 per second\"]],\"hypothetical_cpu_set_0_through_63_minus55\"->Length[DeleteCases[Range[0,63],55]],\"opacity_exp_calls_M9_old_new\"->{1+3*9,2},\"opacity_exp_calls_M81_old_new\"->{1+3*81,2}|>",
+        "timeConstraint": 30
+      },
+      "started_utc": "2026-10-20 21:25:25 UTC",
+      "completed_utc": "2026-10-20 21:25:39 UTC",
+      "observation_date_utc": null,
+      "isError": false,
+      "exception": null,
+      "public_math_result": true,
+      "copyright_handling": "Our query/math result allowed"
+    }
+  ],
+  "coverage_notes": [
+    "SciSpace two semantic searches executed. Graham 1966 was not directly returned; Exa original and Bell Labs record filled that gap.",
+    "Modern OR-precedence/resource papers in discovery results were not substituted for the present simple AND-precedence theorem.",
+    "A broad web search gave irrelevant results; they were not adopted and no authoritative claim relies on them.",
+    "Wolfram context first call failed internally; retry succeeded but its No Results Found items were not used as literature.",
+    "Evaluator1 left a symbolic vector inequality unevaluated; evaluator2 checked first-row inequality with q>0 and returned True."
+  ],
+  "publication_policy": "Include query/time/URL/read-scope/raw hashes and own summaries. Exclude full paper text, bulk abstracts, and context documentation snippets. Two evaluator query+math-result raws are allowed."
+}

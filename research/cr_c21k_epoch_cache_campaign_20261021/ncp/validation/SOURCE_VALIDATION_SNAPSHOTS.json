@@ -1,0 +1,85 @@
+{
+  "actual_calls": [
+    {
+      "raw": "ATTEMPT_05_RAW.txt",
+      "source_snapshot": "source_at_33_test_call",
+      "status": "PASS",
+      "tests": 33
+    },
+    {
+      "coverage": "Reject readable marker without production owned-process observation",
+      "raw": "TRACKER_GATE_FOCUSED_RAW.txt",
+      "source_snapshot": "final_code_snapshot",
+      "status": "PASS",
+      "tests": 1
+    }
+  ],
+  "final_code_snapshot": {
+    "make_campaign.py": {
+      "bytes": 20953,
+      "sha256": "8f2a8cd2b3aa50d7f5991d0ae69fb9f4a171cf4010cb5d08619e722f3f5fa543"
+    },
+    "scheduler.py": {
+      "bytes": 33596,
+      "sha256": "495f469faf432cba3764781e545d5711b7ba4f652c778b3aaa57589c64f04928"
+    },
+    "test_make_campaign.py": {
+      "bytes": 7864,
+      "sha256": "5c115e67c9e5ff2e3f36f01d97915b8980d297a8529934e8540445162b7011f2"
+    },
+    "test_scheduler.py": {
+      "bytes": 15461,
+      "sha256": "3af83e32beb73e2b0f41dee023c3eeb8bc2ccfd78dc1321f84e1cb84927c4c87"
+    }
+  },
+  "global_error_bound": null,
+  "post_33_test_changes": [
+    {
+      "after": "        try:\n            before = process_identity(child.pid)\n            observed = owned_processes(token).get(child.pid)\n            after = process_identity(child.pid)\n        except (OSError, ValueError, IndexError) as exc:\n            raise AdmissionError('OWNED_PROCESS_TRACKER_UNAVAILABLE: no native job launched') from exc\n        if (observed is None or before['start_ticks'] != observed['start_ticks']\n            or before['start_ticks'] != after['start_ticks']\n            or observed['state'] in ('Z', 'X', 'x')\n            or type(observed['rss_bytes']) is not int or observed['rss_bytes'] <= 0):\n            raise AdmissionError('OWNED_PROCESS_TRACKER_NOT_VERIFIED: no native job launched')\n",
+      "before": "",
+      "file": "scheduler.py"
+    },
+    {
+      "after": "    def test_readable_marker_without_production_tracker_is_rejected(self):\n        marker=b'BASS_C21K_ATTEMPT_TOKEN=fixed-capability-test\\0'\n        with patch.object(s.secrets,'token_hex',return_value='fixed-capability-test'), \\\n             patch.object(Path,'read_bytes',return_value=marker), \\\n             patch.object(s,'process_identity',return_value={'start_ticks':1,'state':'S','rss_bytes':4096}), \\\n             patch.object(s,'owned_processes',return_value={}):\n            with self.assertRaisesRegex(s.AdmissionError,'TRACKER_NOT_VERIFIED'):\n                s.verify_process_observation()\n\n",
+      "before": "",
+      "file": "test_scheduler.py"
+    },
+    {
+      "after": "        if binding.get('native_build_dir') and not Path(binding['native_build_dir']).is_absolute():\n            raise AdmissionError('ABSOLUTE_NATIVE_BUILD_DIRECTORY_REQUIRED')\n        reuse=binding.get('g_reuse_directories',[])\n        if not isinstance(reuse,list) or any(not isinstance(p,str) or not Path(p).is_absolute() for p in reuse):\n            raise AdmissionError('ABSOLUTE_G_REUSE_DIRECTORIES_REQUIRED')\n        binding['g_reuse_directories']=[str(Path(p).resolve()) for p in reuse]\n",
+      "before": "",
+      "file": "make_campaign.py"
+    },
+    {
+      "after": "        external[hkey]['fd_parent_context_compatible']=not bytes_changed and not changes\n        for node in external.values():\n            node['current_context_compatibility_scope']='Matching native/bridge bytes and fixed scientific inputs; original H FD absolute-path context is reported separately.'\n",
+      "before": "",
+      "file": "make_campaign.py"
+    },
+    {
+      "after": "            'G_internal_maximum':12,'G_conditional':4,'nominal_FD_conditional':19,\n            'additional_control_FD':sum(j.get('variant')=='fd_half' and j['job_id'].endswith('_context_control') for j in jobs)},\n",
+      "before": "            'G_internal_maximum':12,'G_conditional':4,'FD_conditional':19},\n",
+      "file": "make_campaign.py"
+    }
+  ],
+  "remaining_integration_boundary": "Actual bound published checkout, build admission and real NCP process observation are not exercised by the synthetic focused tests.",
+  "schema": "C21K_NCP_SOURCE_VALIDATION_SNAPSHOTS_V1",
+  "source_at_33_test_call": {
+    "make_campaign.py": {
+      "bytes": 20017,
+      "sha256": "812750cd2cc28c60fd44a590afc33955e98c69a3844dd886713d7fbdc0e70a50"
+    },
+    "scheduler.py": {
+      "bytes": 32890,
+      "sha256": "f0dc581c70d1b38c01e93b5282fe17295d07f62832a671268881d44972708dca"
+    },
+    "test_make_campaign.py": {
+      "bytes": 7864,
+      "sha256": "5c115e67c9e5ff2e3f36f01d97915b8980d297a8529934e8540445162b7011f2"
+    },
+    "test_scheduler.py": {
+      "bytes": 14858,
+      "sha256": "23594cc42e356f6979be8788c155a9d5822b9ab88b0b3ebbb7e5e318e246ffaa"
+    }
+  },
+  "source_hash_capture_method": "Reconstructed exactly by reversing the single recorded post-33-tests review patch; not falsely represented as a contemporaneous pre-test hash capture. No historical program was rerun.",
+  "whole_34_test_suite_run": false
+}

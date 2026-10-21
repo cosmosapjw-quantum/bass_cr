@@ -1,0 +1,104 @@
+{
+  "schema": "C21K_DEPENDENCY_CONTROL_SCOPE_DECISION_V2",
+  "recorded_utc": "2026-10-20T22:52:10.001439+00:00",
+  "authority": "Root current user-scope decision: do not assume old Rust binaries exist; accept a valid reused build or verified locked rebuild under unchanged source and owner pins, and prepare only the changed-dependency controls here.",
+  "supersedes_scope_limitation_of": "FD_CONTEXT_REPAIR_ADDENDUM.json (path-only branch remains valid; it is no longer the complete control inventory)",
+  "nominal_accounting_unchanged": {
+    "logical_scientific_slots": 52,
+    "historical_completed_evidence": 3,
+    "nominal_pending_maximum": 49,
+    "historical_pending": 21,
+    "current_operational_expansion": 28
+  },
+  "ordered_exclusive_control_branches": [
+    {
+      "condition": "Native and bridge bytes match the historical verified bytes, and the original H FD-parent context and payload match.",
+      "controls": 0,
+      "maximum_new_attempts": 49,
+      "maximum_top_level_pending_nodes_with_G_container": 38,
+      "historical_complete": 3,
+      "current_matching_historical_nodes": 3
+    },
+    {
+      "condition": "Native and bridge bytes match, but the current original H FD-parent context differs and no supplied matching complete base passes the unchanged verifier.",
+      "controls": 1,
+      "control_ids": [
+        "H_common_ic_vigilode_rodas5p_base_context_control"
+      ],
+      "control_kind": [
+        "base"
+      ],
+      "maximum_new_attempts": 50,
+      "maximum_top_level_pending_nodes_with_G_container": 39,
+      "historical_complete": 3,
+      "reason": "Minimum current-context H base for the pending H FD; do not repeat the already-complete I pair for path relocation alone."
+    },
+    {
+      "condition": "Native or bridge binary bytes differ, but the original source/owner/build-provenance admission succeeds under the frozen pins.",
+      "controls": 3,
+      "control_ids": [
+        "H_common_ic_vigilode_rodas5p_base_context_control",
+        "I_common_ic_vigilode_rodas5p_vectorized_base_context_control",
+        "I_common_ic_vigilode_rodas5p_vectorized_fd_half_context_control"
+      ],
+      "control_kind": [
+        "base",
+        "base",
+        "fd_half"
+      ],
+      "maximum_new_attempts": 52,
+      "maximum_top_level_pending_nodes_with_G_container": 41,
+      "historical_complete": 3,
+      "current_matching_historical_nodes": 0,
+      "exclusive_of_path_only_branch": true,
+      "reason": "These three historical scientific slots need current-build comparison evidence. The old raw and COMPLETE records remain historical; no source/mode/fixture grid expansion is introduced."
+    }
+  ],
+  "control_dependency_rules": [
+    "A current H control replaces only matching current-context dependencies/references; it does not alter the old H receipt.",
+    "The current I vectorized FD control depends on its newly COMPLETE current I vectorized base, and passes the unchanged original FD verifier.",
+    "H/I/K cross-lane comparison evidence is soft; it does not block otherwise independent native jobs. Same-lane FD parents remain hard.",
+    "The binary-change branch already contains H base, so never add a fourth path-only H control.",
+    "Every additional control is explicit in the manifest, has one distinct create-only output directory and at most one attempted execution. Failed/interrupted/timed-out attempts remain terminal; failed raw is retained.",
+    "Historical evidence-integrity verification and current-build matching admission are separate statuses. Valid old raw must not be relabeled as current-build evidence.",
+    "A source or owner pin change remains BLOCKED. A valid different binary hash does not grant a new source/physics or tolerance scope."
+  ],
+  "raw_attempt_breakdown": {
+    "no_control": {
+      "base_or_reference": 26,
+      "conditional_FD": 19,
+      "conditional_G_history": 4,
+      "total": 49
+    },
+    "path_only": {
+      "base_or_reference": 27,
+      "conditional_FD": 19,
+      "conditional_G_history": 4,
+      "total": 50
+    },
+    "valid_binary_changed": {
+      "base_or_reference": 28,
+      "conditional_FD": 20,
+      "conditional_G_history": 4,
+      "total": 52
+    }
+  },
+  "original_build_admission_to_preserve": {
+    "native": "Use the original G known-binary branch or its valid-build provenance branch, including owner_commit/build_exit/input_sha256/owner_source.tar and binary identity; do not invent a NATIVE_BUILD_RECEIPT.json filename requirement.",
+    "bridge": "Use original H bridge build receipt, compiled source pins, binary_sha256, VigilODE commit, Diffsol version and successful build checks.",
+    "runtime_source": "Pinned unchanged H/I/F/G bytes, exact published K source closure and actual H→I→K ancestry; no dirty manifest self-authority."
+  },
+  "limits": {
+    "current_NCP_resources_not_observed_by_this_reviewer": true,
+    "native_execution_by_this_reviewer": 0,
+    "tests_by_this_reviewer": 0,
+    "global_error_bound": null,
+    "protected_cpu_ids": [
+      55
+    ],
+    "native_speedup_established": false,
+    "scientific_HOLD_preserved": true
+  },
+  "performance_comparability": "Current-build control admission is not a performance result. Compare measured jobs only after actual source, build, controls, environment, affinity and timers are recorded; old host timings are not silently promoted to a matched current-environment speedup.",
+  "implementation_status": "Scope decision only; scheduler/binder focused implementation and independent review still pending."
+}

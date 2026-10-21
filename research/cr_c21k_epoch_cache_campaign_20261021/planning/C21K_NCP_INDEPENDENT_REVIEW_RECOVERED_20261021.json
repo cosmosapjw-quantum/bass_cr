@@ -1,0 +1,275 @@
+{
+  "schema": "C21K_NCP_INDEPENDENT_REVIEW_RECOVERY_V1",
+  "recorded_utc": "2026-10-21T01:27:20.754863+00:00",
+  "status": "RECOVERED_PRIOR_PASS_SCOPED",
+  "prior_review_status": "PASS_SCOPED",
+  "prior_material_open_findings": 0,
+  "scope": "Recover the conclusion of the already completed C9 independent review and its bounded repair episode. The reviewed work was the prepared NCP scheduler, manifest builder, exact backlog and dependency controls, and historical evidence admission helper. No new research, review cycle, test or scientific suite was run to create this recovery record.",
+  "recovery_provenance": {
+    "identity_status": "RECONSTRUCTED_SUCCESSOR_NOT_BYTE_IDENTICAL_TO_LOST_ORIGINAL",
+    "lost_original": {
+      "name": "C21K_NCP_INDEPENDENT_REVIEW.json",
+      "bytes": 12095,
+      "sha256": "dc521c2c3f90a58048e9d8a9049ae998b74313e064d2f68715cd9d422f3b9c1d"
+    },
+    "cause": "A later GitHub create_tree call hung and was aborted without ACK; original scratch and functions stores were no longer available. Parent reported no commit/ref/PR publication calls made.",
+    "basis": "Prior review creation messages, final code/manifest identity notifications, actual validation facts recorded in the same conversation, and the restored original backlog V1. This document restates those historical observations; it does not fabricate a lost raw file or original timestamp.",
+    "unknown_original_recorded_utc": true,
+    "byte_identity_limitation": "This recovery document has a new timestamp and wording. It must not be represented as matching the lost original review SHA.",
+    "applicability": "The historical PASS_SCOPED applies to the three program byte identities below. A different recovered program cannot inherit this verdict by filename alone. The runtime agent reports original program and three test file hashes matched after recovery; parent is recording that separate byte-recovery evidence.",
+    "raw_validation_recovery": "The old raw validations were actually read before reset. Availability or byte restoration of each raw file after reset is a separate recovery fact, not assumed by this receipt."
+  },
+  "policy_context_used": {
+    "requested_skill": "physmath-research-loop",
+    "parent_supplied_plugin_at_original_closeout": "PhysMath 1.3.0, c39/physmath-research-loop",
+    "used_excerpt": "Distinguish BYTE/CONTENT/scientific identity; reuse original proofs/suites and verify changed dependencies only; repair only current-task defects and proceed to publication after resolution.",
+    "provenance": "Parent supplied the current excerpt at the prior closeout and previous research-policy context was reused. No claim of a new full skill/policy read during recovery."
+  },
+  "reviewed_program_bytes": {
+    "scheduler.py": {
+      "bytes": 33596,
+      "sha256": "495f469faf432cba3764781e545d5711b7ba4f652c778b3aaa57589c64f04928"
+    },
+    "make_campaign.py": {
+      "bytes": 20953,
+      "sha256": "8f2a8cd2b3aa50d7f5991d0ae69fb9f4a171cf4010cb5d08619e722f3f5fa543"
+    },
+    "prepare_historical_evidence.py": {
+      "bytes": 8985,
+      "sha256": "6822cb69e2b70a5fe808ed8e167e57b501752f6eb2a0b5e2969678fb2c215163"
+    }
+  },
+  "historical_core_snapshot": {
+    "name": "NCP_CODE_MANIFEST.json",
+    "sha256": "ebaa4dcd216c06d1a85b979893dc231a49a11d0696f5a7892ea2887e8aa5fa37",
+    "payload_files": 25,
+    "payload_bytes": 303917,
+    "all_25_file_records_independently_read_and_hashed_before_helper": true,
+    "meaning": "Earlier core-only snapshot, retained as historical evidence. It is not the later expanded packet manifest."
+  },
+  "historical_expanded_packet_manifest_at_closeout": {
+    "name": "NCP_CODE_MANIFEST.json",
+    "bytes": 5936,
+    "sha256": "8f5f36f45e6ff89f4fb43912926d6706924e5266ec01c0ef60ae6bbaa9d7dca5",
+    "payload_files": 34,
+    "payload_bytes": 327621,
+    "scope": "Final expanded metadata identity recorded after the staging-helper repair; unchanged scheduler/builder and new helper program hashes are the historical review authority. A newly reconstructed metadata packet requires its own distinct content identity."
+  },
+  "scope_accounting": {
+    "logical_slots": 52,
+    "original_complete_preserved": 3,
+    "nominal_pending": 49,
+    "historical_explicit_or_conditional_pending": 21,
+    "current_user_operational_extension": 28,
+    "lanes_pending": {
+      "H": 7,
+      "I": 14,
+      "G": 12,
+      "K": 16
+    },
+    "nominal_components": {
+      "base_or_reference": 26,
+      "FD": 19,
+      "conditional_G_histories": 4
+    },
+    "top_level_nominal_new_nodes": 38,
+    "original_G_internal_logical_jobs": 12,
+    "original_G_top_level_container_nodes": 1,
+    "exclusive_dependency_control_branches": [
+      {
+        "condition": "Same native/bridge bytes and admitted matching H FD context",
+        "additional": 0,
+        "new_raw_maximum": 49,
+        "new_top_level_maximum": 38
+      },
+      {
+        "condition": "Same bytes but H FD absolute path/context differs",
+        "additional": 1,
+        "new_raw_maximum": 50,
+        "new_top_level_maximum": 39
+      },
+      {
+        "condition": "Verified changed native/bridge bytes under unchanged source/owner pins",
+        "additional": 3,
+        "new_raw_maximum": 52,
+        "new_top_level_maximum": 41
+      }
+    ],
+    "controls_3": [
+      "H common_ic/VigilODE base",
+      "I common_ic/VigilODE vectorized base",
+      "Same I vectorized FD"
+    ],
+    "no_fourth_control": "The three-control branch already includes the H path/context repair.",
+    "historical_identity": "Original completed3 remain historical COMPLETE in all branches; changed valid build bytes make them current_matching=false.",
+    "scope_boundaries": "I baseline8 is excluded as H-control duplication. Other-repository HOLD, Full48 and unprepared physics/source grids are outside the current request. CPU capacity is not a reason to add scientific work.",
+    "conditional_semantics": "Prepared maximum, not a claim every conditional row will run. Original FD selection and G numerical readiness gates remain."
+  },
+  "closed_findings": [
+    {
+      "id": "C9-K-NCP-01",
+      "finding": "Launch admitted jobs without reserving their full memory budgets.",
+      "resolution": "Reserve each active worker memory budget before launch and include owned-process RSS. Actual observed budget overshoot ends that attempt.",
+      "status": "CLOSED_IN_ORIGINAL_REVIEW"
+    },
+    {
+      "id": "C9-K-NCP-02",
+      "finding": "killpg alone could leave setsid grandchildren, including after leader exit.",
+      "resolution": "Use owned token plus PID/start-ticks tracking and subreaper behavior. Cleanup owned descendants after leader exit; forced cleanup even after leader exit0 yields FAILED, not COMPLETE.",
+      "status": "CLOSED_IN_ORIGINAL_REVIEW"
+    },
+    {
+      "id": "C9-K-NCP-03",
+      "finding": "Comparison predecessors could block scientifically independent jobs.",
+      "resolution": "H→I and I→K comparison evidence is soft. Same-lane/fixture/backend/mode FD parent remains hard.",
+      "status": "CLOSED_IN_ORIGINAL_REVIEW"
+    },
+    {
+      "id": "C9-K-NCP-04",
+      "finding": "Current mutable manifest or HEAD alone did not establish fixed source authority.",
+      "resolution": "Pin original H/I/G manifest SHA, K committed blobs/publication/ancestry, full runtime and baseline closure, and scheduler/builder/inventory/control-decision input identities. Distinguish source content from documentation head.",
+      "status": "CLOSED_IN_ORIGINAL_REVIEW"
+    },
+    {
+      "id": "C9-K-NCP-05",
+      "finding": "Known-byte-only build admission and a nonexistent native build receipt requirement conflicted with valid locked rebuild.",
+      "resolution": "Reuse original G pinned-owner native-build verification and original H bridge provenance. Apply exclusive dependency-control branches0/1/3; changed source/owner pins remain BLOCKED.",
+      "status": "CLOSED_IN_ORIGINAL_REVIEW"
+    },
+    {
+      "id": "C9-K-NCP-06",
+      "finding": "A superficial /proc marker check did not prove the actual process observer worked.",
+      "resolution": "After CPU lease and pin, production admission checks actual child PID, stable start_ticks, non-zombie state and positive live RSS through owned_processes/process_identity. Unsupported actual observer environment is blocked.",
+      "status": "CLOSED_IN_ORIGINAL_REVIEW"
+    },
+    {
+      "id": "C9-K-NCP-07",
+      "finding": "Optional paths and count/context metadata required precise binding.",
+      "resolution": "Canonicalize optional native-build/G-reuse paths; distinguish nominal FD19 from additional control FD and H fd_parent_context_compatible from binary compatibility.",
+      "status": "CLOSED_IN_ORIGINAL_REVIEW"
+    },
+    {
+      "id": "C9-K-NCP-08",
+      "finding": "The original archive evidence subdirectories contain runner_exit_code.txt sidecars outside the exact receipt payload set, so direct whole-directory admission failed unchanged strict verification.",
+      "resolution": "Add prepare_historical_evidence.py: verify known original archive and receipt pins, preflight tar member paths/duplicates/links/special files, then create-only copy receipt3 and exactly113 named payload files to a separate admission tree. Retain original archive/sidecars unchanged. Scheduler and builder gates remain unchanged.",
+      "status": "CLOSED_IN_ORIGINAL_REVIEW"
+    }
+  ],
+  "actual_validation_read_before_reset": {
+    "scheduler_builder_focused": {
+      "tests": 33,
+      "result": "PASS",
+      "seconds": 1.351,
+      "raw": "validation/ATTEMPT_05_RAW.txt",
+      "raw_bytes": 4189,
+      "raw_sha256": "7ac3b683abef6acfaafda390f52ba2c2ceca5cd23e61d2cf6745781fb1e01def"
+    },
+    "separate_final_tracker_gate": {
+      "tests": 1,
+      "result": "PASS",
+      "seconds": 0.033,
+      "raw": "validation/TRACKER_GATE_FOCUSED_RAW.txt",
+      "raw_bytes": 254,
+      "raw_sha256": "82568e83da164953a417f20e8057d84bac2003840a4421fbd77b1570a1d64d0b"
+    },
+    "whole_34_test_suite_was_not_run": true,
+    "post_33_source_scope": "Later builder optional-path canonicalization and metadata adjustments were statically reviewed. The earlier33 are not asserted to test every later byte verbatim. Source snapshots record that distinction.",
+    "actual_historical_staging": {
+      "positive_executions": 1,
+      "jobs": 3,
+      "named_payload_files": 113,
+      "receipts": 3,
+      "output_files": 116,
+      "output_bytes": 5216823,
+      "unchanged_strict_verify_external_PASS": 3,
+      "native_calls": 0
+    },
+    "staging_negative_focused": {
+      "tests": 2,
+      "result": "PASS",
+      "seconds": 0.009,
+      "cases": [
+        "Create-only refusal for an existing admission root",
+        "One-byte original-archive tamper rejected before creating output"
+      ]
+    },
+    "actual_vs_doubles": "Real subprocesses, affinity, environments, signals, timeout and setsid were exercised. Because local /proc was restricted/virtualized, ownership discovery and process start times used explicit observer doubles. Bound-matrix source/build/publication admission used preverified doubles. These are not actual NCP production observer or resource results.",
+    "earlier_raw_history": "Retain14PASS; the23-test error/7skips record with only its actually captured initial chunk and disclosed missing final raw; the24-test local-proc two-failure record; later24PASS;33PASS; targeted1PASS; actual staging and negative2. Do not recreate a missing output as if it were original raw."
+  },
+  "original_input_identity": {
+    "archive": "C21GHI_NATIVE_EXECUTION_20261020T112300Z.tar.gz",
+    "archive_bytes": 2568680,
+    "archive_sha256": "2722e479b6205015a68f1393b8c537d21e63201bb57efd3cf850fe74e4668de3",
+    "receipt_pins": [
+      {
+        "job": "H_common_ic_vigilode_rodas5p_base",
+        "bytes": 14778,
+        "sha256": "b2ee4310066138f3c9d22cae46ca38d9207f7bdf3ea1a7aadeb3449671cd6654",
+        "named_payload": 36
+      },
+      {
+        "job": "I_common_ic_vigilode_vectorized_base",
+        "bytes": 16853,
+        "sha256": "f82d6603555ffc171e2636f17744d4f4d798f368f3157c4b677635c4bb027a32",
+        "named_payload": 38
+      },
+      {
+        "job": "I_common_ic_vigilode_vectorized_fd_half",
+        "bytes": 17250,
+        "sha256": "60dc2be5dbfcfb95b0078520705a73492cc5149cd1b413a1697d7d29e340ea3d",
+        "named_payload": 39
+      }
+    ],
+    "all_original_named_payload_113_passed_prior_read": true,
+    "partial_replay_subset_warning": "The19 payload files per job in the replay subset are not the full native evidence; never use that subset as native_return_evidence.",
+    "sidecars_preserved": {
+      "filename_each": "runner_exit_code.txt",
+      "count": 3,
+      "bytes_each": 2,
+      "sha256_each": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "admission_root": "Use the helper-created exact named-payload copy; preserve original archive and sidecars without rewriting original receipts.",
+    "content_vs_document": "H content40ea4bbd5b2eb1b0c82f8ec9d5fdc1c6324e44f8 is the actual parent of I contentfe6bbaec2de5032b938aed0713623b9618ba70e6. J content55e6569a8f816e13babe4165f0fef3655f7299a3 is distinct from its final document headfee0d6a3f1b6460a24a1ae60f50ee84971227e5b. A future K published content must come from its actual external publication receipt, not an invented commit or documentation head."
+  },
+  "remaining_operational_boundaries_not_new_code_blockers": [
+    "Actual current NCP owner allocation, CPU/RAM/cgroup limits, host identity and expiry must be observed at runtime; historical64core/128GB is not a live measurement.",
+    "ProtectCPU55, allocate one coordinatorCPU, reserve workerCPU leases and memory, and enforce one thread per worker.",
+    "The actual production /proc ownership/start-time/RSS observer must pass its runtime gate; local doubles do not establish it.",
+    "Bind actual original source closures, published K content, complete historical evidence and valid native/bridge provenance before submission.",
+    "Keep original same-lane FD and G readiness gates; exit0 and comparison availability cannot promote unexecuted science.",
+    "Use create-only attempts and exact-signature/payload resume, preserve terminal failures and raw history, and do not auto-retry.",
+    "No new native science or performance is established by scheduler tests, metadata recovery or historical trace replay."
+  ],
+  "actions_by_this_reviewer_during_original_closeout": {
+    "native_chemistry_calls": 0,
+    "ODE_solves": 0,
+    "old_scientific_suites": 0,
+    "new_test_execution": 0,
+    "remote_probes": 0,
+    "provider_mutations": 0,
+    "scientific_source_edits": 0,
+    "read_only_hash_audits": true
+  },
+  "actions_during_document_recovery": {
+    "native_chemistry_calls": 0,
+    "ODE_solves": 0,
+    "scientific_suites": 0,
+    "tests": 0,
+    "new_review_cycles": 0,
+    "remote_probes": 0,
+    "provider_mutations": 0,
+    "scientific_source_edits": 0,
+    "local_document_reconstruction": true
+  },
+  "separate_stage_status_at_original_closeout": {
+    "review": "PASS_SCOPED",
+    "prepared_code": "READY_FOR_ROOT_FREEZE_AND_PUBLICATION",
+    "new_native_execution": "NOT_RUN",
+    "actual_native_performance": "NOT_EVALUATED",
+    "publication": "ROOT_FINAL_STEP_PENDING",
+    "backup": "ROOT_FINAL_STEP_PENDING",
+    "DAG": "PREPARED_BOUNDED_GRAPH_WITH_CONDITIONAL_GATES"
+  },
+  "global_error_bound": null,
+  "prior_scientific_HOLD": "PRESERVED"
+}
