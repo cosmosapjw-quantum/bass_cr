@@ -1,0 +1,359 @@
+{
+  "NCP_execution": "NOT_RUN",
+  "exact_block_boundary": {
+    "available_bytes": 2239758336,
+    "available_inodes": 8000000,
+    "budget": {
+      "budget_basis": "conservative analytical allowance; no measured storage improvement claim",
+      "budget_scope": "run raw/receipts/coordinator only; exclude later plots and archives",
+      "case_output_budget_bytes": 8388608,
+      "case_output_budget_inodes": 8,
+      "coordinator_output_budget_bytes": 67108864,
+      "coordinator_output_budget_inodes": 32,
+      "missing_directory_inodes": 2,
+      "remaining_cases": 3,
+      "required_available_bytes": 2239758336,
+      "required_available_inodes": 314,
+      "reserve_bytes": 2147483648,
+      "reserve_inodes": 256
+    },
+    "capacity_reserved": false,
+    "observed_utc": "2026-10-21T11:22:53Z",
+    "output_created": false,
+    "output_path": "/tmp/tmp50gpb9xc/new_parent/run",
+    "probed_existing_path": "/tmp/tmp50gpb9xc",
+    "reasons": [],
+    "schema": "C21N_STORAGE_PREFLIGHT_V1",
+    "status": "PASS_SCOPED",
+    "statvfs": {
+      "f_bavail": 546816,
+      "f_bfree": 9000000,
+      "f_blocks": 10000000,
+      "f_bsize": 4096,
+      "f_favail": 8000000,
+      "f_ffree": 9000000,
+      "f_files": 10000000,
+      "f_flag": 0,
+      "f_frsize": 4096
+    },
+    "statvfs_basis": "f_bavail * f_frsize (fallback f_bsize), f_favail",
+    "user_or_project_quota_verified": false,
+    "writable_searchable_existing_directory": true
+  },
+  "existing_metadata_unchanged": true,
+  "fixtures": [
+    {
+      "fixture": "reserved_blocks_not_usable",
+      "observed": {
+        "available_bytes": 0,
+        "available_inodes": 8000000,
+        "budget": {
+          "budget_basis": "conservative analytical allowance; no measured storage improvement claim",
+          "budget_scope": "run raw/receipts/coordinator only; exclude later plots and archives",
+          "case_output_budget_bytes": 8388608,
+          "case_output_budget_inodes": 8,
+          "coordinator_output_budget_bytes": 67108864,
+          "coordinator_output_budget_inodes": 32,
+          "missing_directory_inodes": 2,
+          "remaining_cases": 3,
+          "required_available_bytes": 2239758336,
+          "required_available_inodes": 314,
+          "reserve_bytes": 2147483648,
+          "reserve_inodes": 256
+        },
+        "capacity_reserved": false,
+        "observed_utc": "2026-10-21T11:22:53Z",
+        "output_created": false,
+        "output_path": "/tmp/tmp50gpb9xc/new_parent/run",
+        "probed_existing_path": "/tmp/tmp50gpb9xc",
+        "reasons": [
+          "INSUFFICIENT_AVAILABLE_BYTES"
+        ],
+        "schema": "C21N_STORAGE_PREFLIGHT_V1",
+        "status": "BLOCKED",
+        "statvfs": {
+          "f_bavail": 0,
+          "f_bfree": 9000000,
+          "f_blocks": 10000000,
+          "f_bsize": 4096,
+          "f_favail": 8000000,
+          "f_ffree": 9000000,
+          "f_files": 10000000,
+          "f_flag": 0,
+          "f_frsize": 4096
+        },
+        "statvfs_basis": "f_bavail * f_frsize (fallback f_bsize), f_favail",
+        "user_or_project_quota_verified": false,
+        "writable_searchable_existing_directory": true
+      },
+      "synthetic_statvfs_overrides": {
+        "f_bavail": 0
+      }
+    },
+    {
+      "fixture": "inode_exhaustion",
+      "observed": {
+        "available_bytes": 32768000000,
+        "available_inodes": 0,
+        "budget": {
+          "budget_basis": "conservative analytical allowance; no measured storage improvement claim",
+          "budget_scope": "run raw/receipts/coordinator only; exclude later plots and archives",
+          "case_output_budget_bytes": 8388608,
+          "case_output_budget_inodes": 8,
+          "coordinator_output_budget_bytes": 67108864,
+          "coordinator_output_budget_inodes": 32,
+          "missing_directory_inodes": 2,
+          "remaining_cases": 3,
+          "required_available_bytes": 2239758336,
+          "required_available_inodes": 314,
+          "reserve_bytes": 2147483648,
+          "reserve_inodes": 256
+        },
+        "capacity_reserved": false,
+        "observed_utc": "2026-10-21T11:22:53Z",
+        "output_created": false,
+        "output_path": "/tmp/tmp50gpb9xc/new_parent/run",
+        "probed_existing_path": "/tmp/tmp50gpb9xc",
+        "reasons": [
+          "INSUFFICIENT_AVAILABLE_INODES"
+        ],
+        "schema": "C21N_STORAGE_PREFLIGHT_V1",
+        "status": "BLOCKED",
+        "statvfs": {
+          "f_bavail": 8000000,
+          "f_bfree": 9000000,
+          "f_blocks": 10000000,
+          "f_bsize": 4096,
+          "f_favail": 0,
+          "f_ffree": 9000000,
+          "f_files": 10000000,
+          "f_flag": 0,
+          "f_frsize": 4096
+        },
+        "statvfs_basis": "f_bavail * f_frsize (fallback f_bsize), f_favail",
+        "user_or_project_quota_verified": false,
+        "writable_searchable_existing_directory": true
+      },
+      "synthetic_statvfs_overrides": {
+        "f_favail": 0
+      }
+    },
+    {
+      "fixture": "inode_count_unavailable",
+      "observed": {
+        "available_bytes": 32768000000,
+        "budget": {
+          "budget_basis": "conservative analytical allowance; no measured storage improvement claim",
+          "budget_scope": "run raw/receipts/coordinator only; exclude later plots and archives",
+          "case_output_budget_bytes": 8388608,
+          "case_output_budget_inodes": 8,
+          "coordinator_output_budget_bytes": 67108864,
+          "coordinator_output_budget_inodes": 32,
+          "missing_directory_inodes": 2,
+          "remaining_cases": 3,
+          "required_available_bytes": 2239758336,
+          "required_available_inodes": 314,
+          "reserve_bytes": 2147483648,
+          "reserve_inodes": 256
+        },
+        "capacity_reserved": false,
+        "observed_utc": "2026-10-21T11:22:53Z",
+        "output_created": false,
+        "output_path": "/tmp/tmp50gpb9xc/new_parent/run",
+        "probed_existing_path": "/tmp/tmp50gpb9xc",
+        "reasons": [
+          "AVAILABLE_INODES_UNKNOWN"
+        ],
+        "schema": "C21N_STORAGE_PREFLIGHT_V1",
+        "status": "BLOCKED",
+        "statvfs": {
+          "f_bavail": 8000000,
+          "f_bfree": 9000000,
+          "f_blocks": 10000000,
+          "f_bsize": 4096,
+          "f_favail": 8000000,
+          "f_ffree": 9000000,
+          "f_files": 0,
+          "f_flag": 0,
+          "f_frsize": 4096
+        },
+        "statvfs_basis": "f_bavail * f_frsize (fallback f_bsize), f_favail",
+        "user_or_project_quota_verified": false,
+        "writable_searchable_existing_directory": true
+      },
+      "synthetic_statvfs_overrides": {
+        "f_files": 0
+      }
+    },
+    {
+      "fixture": "read_only_filesystem",
+      "observed": {
+        "available_bytes": 32768000000,
+        "available_inodes": 8000000,
+        "budget": {
+          "budget_basis": "conservative analytical allowance; no measured storage improvement claim",
+          "budget_scope": "run raw/receipts/coordinator only; exclude later plots and archives",
+          "case_output_budget_bytes": 8388608,
+          "case_output_budget_inodes": 8,
+          "coordinator_output_budget_bytes": 67108864,
+          "coordinator_output_budget_inodes": 32,
+          "missing_directory_inodes": 2,
+          "remaining_cases": 3,
+          "required_available_bytes": 2239758336,
+          "required_available_inodes": 314,
+          "reserve_bytes": 2147483648,
+          "reserve_inodes": 256
+        },
+        "capacity_reserved": false,
+        "observed_utc": "2026-10-21T11:22:53Z",
+        "output_created": false,
+        "output_path": "/tmp/tmp50gpb9xc/new_parent/run",
+        "probed_existing_path": "/tmp/tmp50gpb9xc",
+        "reasons": [
+          "FILESYSTEM_READ_ONLY"
+        ],
+        "schema": "C21N_STORAGE_PREFLIGHT_V1",
+        "status": "BLOCKED",
+        "statvfs": {
+          "f_bavail": 8000000,
+          "f_bfree": 9000000,
+          "f_blocks": 10000000,
+          "f_bsize": 4096,
+          "f_favail": 8000000,
+          "f_ffree": 9000000,
+          "f_files": 10000000,
+          "f_flag": 1,
+          "f_frsize": 4096
+        },
+        "statvfs_basis": "f_bavail * f_frsize (fallback f_bsize), f_favail",
+        "user_or_project_quota_verified": false,
+        "writable_searchable_existing_directory": true
+      },
+      "synthetic_statvfs_overrides": {
+        "f_flag": 1
+      }
+    },
+    {
+      "fixture": "statvfs_unavailable",
+      "observed": {
+        "budget": {
+          "budget_basis": "conservative analytical allowance; no measured storage improvement claim",
+          "budget_scope": "run raw/receipts/coordinator only; exclude later plots and archives",
+          "case_output_budget_bytes": 8388608,
+          "case_output_budget_inodes": 8,
+          "coordinator_output_budget_bytes": 67108864,
+          "coordinator_output_budget_inodes": 32,
+          "missing_directory_inodes": 2,
+          "remaining_cases": 3,
+          "required_available_bytes": 2239758336,
+          "required_available_inodes": 314,
+          "reserve_bytes": 2147483648,
+          "reserve_inodes": 256
+        },
+        "capacity_reserved": false,
+        "observation_error": "OSError: SYNTHETIC_STATVFS_UNAVAILABLE",
+        "observed_utc": "2026-10-21T11:22:53Z",
+        "output_created": false,
+        "output_path": "/tmp/tmp50gpb9xc/new_parent/run",
+        "probed_existing_path": "/tmp/tmp50gpb9xc",
+        "reasons": [
+          "STORAGE_OBSERVATION_UNAVAILABLE"
+        ],
+        "schema": "C21N_STORAGE_PREFLIGHT_V1",
+        "status": "BLOCKED",
+        "statvfs_basis": "f_bavail * f_frsize (fallback f_bsize), f_favail",
+        "user_or_project_quota_verified": false,
+        "writable_searchable_existing_directory": true
+      }
+    },
+    {
+      "fixture": "unwritable_ancestor",
+      "observed": {
+        "available_bytes": 32768000000,
+        "available_inodes": 8000000,
+        "budget": {
+          "budget_basis": "conservative analytical allowance; no measured storage improvement claim",
+          "budget_scope": "run raw/receipts/coordinator only; exclude later plots and archives",
+          "case_output_budget_bytes": 8388608,
+          "case_output_budget_inodes": 8,
+          "coordinator_output_budget_bytes": 67108864,
+          "coordinator_output_budget_inodes": 32,
+          "missing_directory_inodes": 2,
+          "remaining_cases": 3,
+          "required_available_bytes": 2239758336,
+          "required_available_inodes": 314,
+          "reserve_bytes": 2147483648,
+          "reserve_inodes": 256
+        },
+        "capacity_reserved": false,
+        "observed_utc": "2026-10-21T11:22:53Z",
+        "output_created": false,
+        "output_path": "/tmp/tmp50gpb9xc/new_parent/run",
+        "probed_existing_path": "/tmp/tmp50gpb9xc",
+        "reasons": [
+          "OUTPUT_ANCESTOR_NOT_WRITABLE"
+        ],
+        "schema": "C21N_STORAGE_PREFLIGHT_V1",
+        "status": "BLOCKED",
+        "statvfs": {
+          "f_bavail": 8000000,
+          "f_bfree": 9000000,
+          "f_blocks": 10000000,
+          "f_bsize": 4096,
+          "f_favail": 8000000,
+          "f_ffree": 9000000,
+          "f_files": 10000000,
+          "f_flag": 0,
+          "f_frsize": 4096
+        },
+        "statvfs_basis": "f_bavail * f_frsize (fallback f_bsize), f_favail",
+        "user_or_project_quota_verified": false,
+        "writable_searchable_existing_directory": false
+      }
+    }
+  ],
+  "global_error_bound": null,
+  "output_and_leases_created": false,
+  "real_local_statvfs_observation": {
+    "available_bytes": 24927244288,
+    "available_inodes": 2040275,
+    "budget": {
+      "budget_basis": "conservative analytical allowance; no measured storage improvement claim",
+      "budget_scope": "run raw/receipts/coordinator only; exclude later plots and archives",
+      "case_output_budget_bytes": 8388608,
+      "case_output_budget_inodes": 8,
+      "coordinator_output_budget_bytes": 67108864,
+      "coordinator_output_budget_inodes": 32,
+      "missing_directory_inodes": 1,
+      "remaining_cases": 3,
+      "required_available_bytes": 2239758336,
+      "required_available_inodes": 313,
+      "reserve_bytes": 2147483648,
+      "reserve_inodes": 256
+    },
+    "capacity_reserved": false,
+    "observed_utc": "2026-10-21T11:22:53Z",
+    "output_created": false,
+    "output_path": "/tmp/tmp50gpb9xc/never_created_output",
+    "probed_existing_path": "/tmp/tmp50gpb9xc",
+    "reasons": [],
+    "schema": "C21N_STORAGE_PREFLIGHT_V1",
+    "status": "PASS_SCOPED",
+    "statvfs": {
+      "f_bavail": 6085753,
+      "f_bfree": 6509279,
+      "f_blocks": 8244676,
+      "f_bsize": 4096,
+      "f_favail": 2040275,
+      "f_ffree": 2040275,
+      "f_files": 2097152,
+      "f_flag": 4102,
+      "f_frsize": 4096
+    },
+    "statvfs_basis": "f_bavail * f_frsize (fallback f_bsize), f_favail",
+    "user_or_project_quota_verified": false,
+    "writable_searchable_existing_directory": true
+  },
+  "scientific_ODE_calls": 0,
+  "status": "PASS_SCOPED"
+}

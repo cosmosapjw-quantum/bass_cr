@@ -1,0 +1,244 @@
+{
+  "schema": "C21N_INDEPENDENT_PHYSICS_REVIEW_V1",
+  "reviewer": "independent collaboration agent /root/external_results",
+  "reviewed_at_utc": "2026-10-21T11:30:08.769235+00:00",
+  "status": "PASS_SCOPED",
+  "blocking_findings": [],
+  "scope": "Independent source-and-algebra review of finite-packet chain rule, physical units, signed Einstein shear jets and exact saved-parameter reconstruction; artifact hash/CSV audit without numerical campaign rerun.",
+  "source_commit": "3b85dedce84d37b3e165da00685a8a984950aafe",
+  "input_bindings": [
+    {
+      "path": "research/cr_c21n_mass_shell_cache_20261021/mass_shell_derivatives.py",
+      "sha256": "db108994e96f268e074778a3e763dddc8ca72799541b670aca11bbc728d6ef7c",
+      "bytes": 8843
+    },
+    {
+      "path": "research/cr_c21n_mass_shell_cache_20261021/analyze_mass_shell_jets.py",
+      "sha256": "104d0100a85255a6a419666875c33ce636b737b6e67b60a12aed85aedbf75043",
+      "bytes": 19841
+    },
+    {
+      "path": "research/cr_c21n_mass_shell_cache_20261021/test_mass_shell_derivatives.py",
+      "sha256": "37b07e8cf73a97c61ab00f28bdfa40fdf4714fcdaaa657f12227a068a96b0180",
+      "bytes": 6803
+    },
+    {
+      "path": "research/cr_c21n_mass_shell_cache_20261021/checks/mass_shell_derivatives_v1.json",
+      "sha256": "693b7daa1720aee37f99466eb28aeaa6935de627a9e0a6932dab9d1dc197e100",
+      "bytes": 15062
+    },
+    {
+      "path": "research/cr_c21n_mass_shell_cache_20261021/analysis_mass_shell125_v2/SUMMARY.json",
+      "sha256": "78462fffecb046509e85e76b1f0d317fd9cf36ab9704fad849bc217404b26356",
+      "bytes": 12894
+    },
+    {
+      "path": "research/cr_c21n_mass_shell_cache_20261021/analysis_mass_shell125_v2/OUTPUT_MANIFEST.json",
+      "sha256": "fc554dcf8c91040517f6891045647223c06ead00b79658a12092acadf8afd77e",
+      "bytes": 1475
+    },
+    {
+      "path": "research/cr_c21n_mass_shell_cache_20261021/analysis_mass_shell125_v2/INPUT_BINDINGS.json",
+      "sha256": "5dd6ac28d422baf4f9e465e7579c2896337b35837c6fad7168b55b36f89ac996",
+      "bytes": 80975
+    },
+    {
+      "path": "research/cr_c21n_mass_shell_cache_20261021/checks/plot_label_delta_science_bytes.json",
+      "sha256": "498d31690d3c18c2102aff5071cd8e511d7361351d67d2517e79d9482081dacf",
+      "bytes": 1585
+    },
+    {
+      "path": "research/cr_c21n_mass_shell_cache_20261021/theory/MASS_SHELL_DERIVATION_KO.md",
+      "sha256": "10651fb7c71bad650f1ed3ca004fed2d0181b81f5960e37df76dd534107b8128",
+      "bytes": 12409
+    },
+    {
+      "path": "research/cr_c21n_mass_shell_cache_20261021/theory/RESULTS_KO.md",
+      "sha256": "c0d402bacd9a8cfd9cfc972597717916fc33e2b523088ece6090d1788e88ed8e",
+      "bytes": 11209
+    },
+    {
+      "path": "research/cr_c21m_independent_stress_20261021/builder.py",
+      "sha256": "7fb15e89403817812588e189c013d45d200864f0076351c7c84bf77667520f0f",
+      "bytes": 12695
+    },
+    {
+      "path": "research/cr_c21l_rei_pilot_20261021/adapter.py",
+      "sha256": "5461a5062f99f9b1b9569b7cc4c0dadeaad1fd2f3a11ee37777f27ec9479e317",
+      "bytes": 6199
+    },
+    {
+      "path": "research/cr_c21l_rei_pilot_20261021/vendor/rei/research/rei_bass_hierarchy_backreaction_20261015/canonical_fv_20261015/canonical_fv.py",
+      "sha256": "91c1641b851aa9580141d4423e2579ced5f11b95aa716b3fc2cb0137df344cc5",
+      "bytes": 13255
+    },
+    {
+      "path": "research/cr_c21l_rei_pilot_20261021/vendor/rei/research/rei_bass_hierarchy_backreaction_20261015/species_hierarchy.py",
+      "sha256": "ced7906b35c26d8d0374ee8ce7f67ceb957b51a63d44e5a2661997b7e46983c5",
+      "bytes": 6083
+    },
+    {
+      "path": "research/cr_c21l_rei_pilot_20261021/vendor/rei/research/rei_bass_hierarchy_backreaction_20261015/lrs_boltzmann.py",
+      "sha256": "06ef834e4cd7adacf01f0ad6e3becc5aea9a493b5b99fd398be82610543984cc",
+      "bytes": 10300
+    }
+  ],
+  "algebra_review": [
+    {
+      "name": "signed_tensor_normalization",
+      "status": "PASS",
+      "identity": "sigma=diag(-s,-s,2s); pi_X=diag(-p_X,-p_X,2p_X), p_X=(p_parallel-p_perp)/3. S=sqrt(6)s/H_t and P_X=sqrt(6)*(8*pi*G/c^2)*p_X/H_t^2. Norms are abs(S),abs(P_X), with sqrt(2) conversion from source half contraction.",
+      "dimensions": "(8*pi*G/c^2)*[J/m^3] has dimensions s^-2; use kappa_E=8*pi*G/c^4 only with H_geom=H_t/c."
+    },
+    {
+      "name": "finite_packet_chain_rule",
+      "status": "PASS",
+      "identity": "u=(exp(-eta)q)^2 exp(2b)(1-mu^2), w=(exp(-eta)q)^2 exp(-4b)mu^2, E=sqrt(M^2+u+w), v=b_eta=s/H. u_eta=(-2+2v)u, w_eta=(-2-4v)w, E_eta=(u_eta+w_eta)/(2E), W_eta=-3W. Applying product/quotient rules reproduces every implemented rho and pressure derivative.",
+      "scope": "Derivative of the mathematical finite packet sum, not the discontinuous FP-rounding map or a continuum-discretization error proof."
+    },
+    {
+      "name": "energy_and_number",
+      "status": "PASS",
+      "identity": "rho_eta+3*(rho+pbar)+6*v*pi_s=0; sigma_ab*pi^ab/H=6*v*pi_s. Canonical packets constant; physical number_eta=-3*number.",
+      "units": "Packet residual is massive reference normalized; radiation residual uses critical-density normalization. Their absolute sizes are not directly comparable error rankings."
+    },
+    {
+      "name": "zero_shear_mass_release",
+      "status": "PASS",
+      "identity": "At exact v=0, pi_s_eta+4*pi_s=-sum[W*M^2*(w-u/2)/(3*E^3)]. Direct sum avoids division by pi_s or A.",
+      "restriction": "The stored mass_release_at_zero_shear expression is a zero-shear contribution evaluated at current eta,b; away from v=0 it is not the whole pi_s derivative."
+    },
+    {
+      "name": "nonzero_A_explanatory_ratio",
+      "status": "PASS",
+      "identity": "For separable FD(q)*(1+A*P2(mu)), b0=v0=0 and A!=0, pi_s_eta=(-5+beta)*pi_s; beta=integral(q^6*f/E^3)/integral(q^4*f/E), 0<beta<1 for positive finite M. Therefore R/Pm=-(1-beta).",
+      "restrictions": [
+        "No ratio at A=0 or floating isotropic residual.",
+        "The implementation differentiates direct fixed-quadrature sums, not this continuum ratio.",
+        "M->0 and nonrelativistic statements are algebraic limits; no forbidden M=0 source execution."
+      ]
+    },
+    {
+      "name": "full_source_derivative",
+      "status": "PASS",
+      "identity": "H^2_eta=H0^2*(-3*dust_norm+mass_pref*rho_eta+rad_energy_eta)+2*s*s_eta. Radiation derivatives include E0_eta/E2_eta from the original photon/neutrino RHS and the explicit -4 dilution. P_X_eta=sqrt(6)*K_t/H^2*(p_X_eta-2*(H_eta/H)*p_X).",
+      "scope": "Original collisionless massive lane requires fm>0, ne_source=None, nu_visc=0; gamma and massless neutrinos remain separate."
+    },
+    {
+      "name": "signed_shear_and_actual_offset",
+      "status": "PASS",
+      "identity": "S_eta=Ptot-(3+h)*S. At exact S0=0, S_etaeta=source_forcing_eta-(3+h)*S_eta; h_eta*S vanishes without a threshold. If epsilon=Ptot0 and b0=0: Ptot_eta=R-(4+2h)*epsilon; S_etaeta=R-(7+3h)*epsilon.",
+      "floating_grouping": "Source-normalized forcing and separately summed SI components are preserved separately, with their floating grouping residual recorded."
+    },
+    {
+      "name": "ideal_vs_actual_jet",
+      "status": "PASS",
+      "identity": "Ideal exact cancellation epsilon=0 gives S_etaeta=R and S(eta)=R*eta^2/2+O(eta^3). Actual curve retains original RHS S_eta0 and S_etaeta0, including all tiny offsets.",
+      "restriction": "initial_cancellation_jet requires exact b0=0 and source y0[2]=0; no norm derivative at zero, eta=0 ratio, third-order coefficient or finite-window bound is supplied."
+    }
+  ],
+  "reconstruction_review": {
+    "baseline": "C21M builder imported by explicit file alias with optimized=False; current C21N factory is not used to reinterpret old data.",
+    "parameters": "A_m, k_gamma, k_nu, source_Sigma_ref_half and source_orientation are read from sealed original result mappings. The old center uses preserved C21L original_mapping and original A=0.",
+    "initial_state_binding": "Analysis compares reconstructed initial_state against actual saved first Y column as FP64 bytes for all125; it does not solve the inverse target problem again.",
+    "raw_binding": "Accepted two runs and fixed reference are loaded through existing sealed loader, combined eta/Y are byte compared to all125 original raw histories, origin/coordinates are checked and identities retained.",
+    "side_effects": "Private shallow source copy contains RHS counter increments; input state copied; original momentum arrays and original object counter audited unchanged.",
+    "create_only": "Output directory must not exist, and files use exclusive creation. No integrate call occurs in derivative or analysis source."
+  },
+  "accepted_existing_checks": {
+    "test_receipt": "checks/mass_shell_derivatives_v1.json",
+    "focused_groups": [
+      {
+        "complex_step_max_absolute_difference": 4.440892098500626e-16,
+        "inputs_unchanged": true,
+        "maximum_energy_conservation_residual": 8.881784197001252e-16,
+        "name": "packet_chain_rule_and_energy_conservation",
+        "original_moment_FP64_bytes": "IDENTICAL",
+        "states": 12
+      },
+      {
+        "forward_difference_order": 4,
+        "max_absolute_difference": 8.741271595447131e-14,
+        "name": "full_source_field_directional_derivative",
+        "source_counter_preserved": true,
+        "states": 3,
+        "step": 0.0002
+      },
+      {
+        "cases": 7,
+        "name": "initial_actual_offset_and_ideal_cancellation_jets",
+        "second_derivative_directional_max_absolute_difference": 5.719938953908932e-15
+      }
+    ],
+    "campaign_receipt": "analysis_mass_shell125_v2/SUMMARY.json",
+    "case_count": 125,
+    "packet_states": 12625,
+    "source_rhs_states": 375,
+    "source_signed_value_comparisons": 2250,
+    "zero_shear_jets": 25,
+    "opposing_nonzero_cases": 4,
+    "maxima": {
+      "initial_Pprime_formula_abs": 2.3852447794681098e-18,
+      "initial_Ssecond_formula_abs": 2.168404344971009e-18,
+      "packet_energy_conservation_abs": 1.0249729701322739e-15,
+      "radiation_energy_conservation_abs": 1.700484371369715e-14,
+      "source_forcing_vs_SI_abs": 1.0842021724855044e-19,
+      "source_shear_identity_abs": 3.469446951953614e-18,
+      "source_signed_fields_abs": 0.0
+    },
+    "equality_scope": "125 initial states and combined eta/Y use byte comparisons; 2250 source signed fields use absolute numeric equality, maximum0, not a new full-trajectory byte check.",
+    "output_manifest_checks": {
+      "files": 9,
+      "status": "ALL_SHA256_AND_BYTES_MATCH"
+    },
+    "csv_row_counts": {
+      "initial_derivatives_125.csv": 125,
+      "zero_shear_jets_25.csv": 25,
+      "source_derivative_samples_375.csv": 375,
+      "opposing_stress_local_comparison.csv": 32
+    }
+  },
+  "observed_local_limit": {
+    "comparison": "Four opposing cases, each eta=0 and first7 positive existing samples; residual=(saved_signed_S-actual_second_order_jet)/saved_signed_S when saved !=0.",
+    "first_positive_eta": 0.014350845252893228,
+    "first_max_absolute_relative_residual": 0.021223365948877245,
+    "last_eta": 0.10045591677025259,
+    "last_max_absolute_relative_residual": 0.15837430650182002,
+    "last_max_absolute_residual": 1.3359691882247187e-07,
+    "CSV_summary_agreement": "Independently read32 rows, recomputed maxima from stored residual fields and checked exact equality to summary.",
+    "zero_ratios": "All eta=0 ratio cells blank; no invented denominator floor.",
+    "conclusion": "The measured2.1223% first-sample and15.8374% last-sample differences deny promotion to a1%-accurate or full-window replacement approximation. These discrete measurements are not a continuous-time error bound."
+  },
+  "roundoff_center": {
+    "actual_Pm0": -2.111149637247e-19,
+    "actual_Pr0": 2.1111496372470007e-19,
+    "actual_Ptot0": 7.493528770158082e-35,
+    "actual_Ptot_prime0": -8.444598548988e-19,
+    "direct_mass_release": -5.340066449508033e-20,
+    "assessment": "The center remains a floating isotropic reference; separately reduced derivatives and direct packet sum differ at roundoff scale. No beta ratio or physical instability is inferred from these tiny quantities, and none is overwritten with zero."
+  },
+  "resolved_document_clarification": {
+    "file": "theory/RESULTS_KO.md",
+    "change": "R/Pm corresponds to -(1-beta); its absolute value corresponds to1-beta. Author corrected this sign wording and math delimiters; diagnostic code and accepted scientific output identity remain unchanged."
+  },
+  "limits": [
+    "Review does not independently rerun12 focused packet states,3 directional checks,7 jet checks or the125-case static campaign.",
+    "No new ODE, benchmark, performance/scaling claim, global continuum proof or C21N full-trajectory equivalence claim.",
+    "Direct PNG/PDF visual inspection is not part of this source/algebra review; root visual review is separate.",
+    "Literature/CAS tool replies are recorded by the theory author; this review independently audits local source/algebra and does not claim a second literature acquisition.",
+    "General triaxial, full reionization/UV/stars and complete CMB extensions remain HOLD."
+  ],
+  "execution": {
+    "new_ODE_solves": 0,
+    "benchmark_runs": 0,
+    "focused_test_reruns": 0,
+    "full_static_campaign_reruns": 0,
+    "artifact_hash_CSV_audit": "PASS"
+  },
+  "publication": "NOT_PERFORMED_BY_REVIEWER",
+  "backup": "NOT_PERFORMED_BY_REVIEWER",
+  "dag": "MASS_SHELL_CHAIN_RULE_AND_INITIAL_SIGNED_JET_REVIEW_PASS_SCOPED; FINITE_WINDOW_REPLACEMENT_NOT_APPROVED",
+  "third_order_coefficient": null,
+  "finite_window_remainder_bound": null,
+  "global_error_bound": null
+}

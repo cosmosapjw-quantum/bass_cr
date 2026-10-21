@@ -1,0 +1,365 @@
+{
+  "schema": "C21N_EXTERNAL_INTAKE_LEDGER_V1",
+  "observed_live_intake_window_utc": "2026-10-21 about10:59-11:13 UTC; exact ref and provider timestamps in linked records",
+  "mode": "READ_ONLY_NO_SCIENCE_EXECUTION",
+  "states": {
+    "EXECUTION": "INTAKE_COMPLETE_SCOPED_NEW_ODE_0",
+    "PUBLICATION": "ADDITIVE_INTAKE_FILES_PREPARED_FOR_C21N_NOT_PUSHED_BY_THIS_AGENT",
+    "BACKUP": "NEW_NCP98_ARCHIVE_DOWNLOADED_ONCE_AND_HASH_VERIFIED_BY_BACKUP_AGENT;_NO_UPLOAD_IN_THIS_INTAKE",
+    "DAG": "NCP98_RETURN_ACCEPTABLE_WITH_EXPLICIT_CORRECTIONS;_FOLLOWUP_SOURCE_REVIEW_SEPARATE"
+  },
+  "coverage": {
+    "previous_live_heads": 1224,
+    "current_live_heads": 1232,
+    "repositories": 7,
+    "new_heads": 8,
+    "changed_heads": 5,
+    "deleted_heads": 0,
+    "full_live_ref_delta": "LIVE_REF_DELTA.json",
+    "all_branch_files_read": false,
+    "unexposed_other_conversations": "UNAVAILABLE",
+    "all_unpublished_results_absent_claim": false
+  },
+  "local_authority": {
+    "PR90": {
+      "head": "e954467132eef864a0fb86ba5de44f90f76b08e0",
+      "content": "17244259d25f793a25e0874443a28806e7c31d17",
+      "state": "open draft unmerged"
+    },
+    "PR91": {
+      "head": "b78a943e5d7ae341bbfe84f742a06a4ac36d0e43",
+      "content": "659c94312eb9c12ebb987de934459c12a63d67b0",
+      "state": "open draft unmerged"
+    },
+    "PR92": {
+      "head": "645a7f1a960be10e10574a819d7fb35a4511d9fa",
+      "content": "ee62f86f7df02d7e4b9baccfa107d76254c68ac4",
+      "first_document": "1d4e7a5d9d505a1b66400bbb1cc626344637fc57",
+      "state": "open draft unmerged",
+      "relation_to_PR91": "ahead3 behind0 merge-baseb78a943e; last commit is source/toolchain metadata only",
+      "git_tree_delta": {
+        "added": 511,
+        "modified": 1,
+        "deleted": 0,
+        "only_modified_file": "research/cr_c21m_independent_stress_20261021/analyze_campaign.py",
+        "change": "Figure width/height and cell-label fontsize; no physics or data calculation changes"
+      },
+      "full_case_source_or_old_raw_changes": 0
+    }
+  },
+  "results": [
+    {
+      "id": "C21M_NCP98",
+      "origin": "https://github.com/cosmosapjw-quantum/bass_cr/pull/92",
+      "head": "645a7f1a960be10e10574a819d7fb35a4511d9fa",
+      "source_commit": "659c94312eb9c12ebb987de934459c12a63d67b0",
+      "physics_commit": "3b85dedce84d37b3e165da00685a8a984950aafe",
+      "canonical_run_identity": "7f89b12adbeee64a70832e633ae563584bc2a68f6ac433dc56f759a1946eb718",
+      "input": "exact prepared98 grid SHA256768643862b317ba3d159af6503ebb80141028dc8c671fdb00a9d0a68b32fde04; five-axis nested125 minus prior27",
+      "solver": {
+        "name": "DOP853",
+        "rtol": 3e-11,
+        "atol": 3e-13,
+        "precision": "FP64",
+        "states": 40,
+        "samples": 101,
+        "redshift": [
+          20,
+          4
+        ],
+        "massive_cells": [
+          24,
+          12
+        ],
+        "gauss_per_cell": 3,
+        "Lmax": 8
+      },
+      "build": {
+        "python": "3.12.3",
+        "numpy": "2.3.5",
+        "scipy": "1.17.0",
+        "new_native_build": "NOT_REPORTED_NOT_REQUIRED_FOR_PYTHON_DRIVER"
+      },
+      "execution": {
+        "site": "operator-declared ncp",
+        "observed_host": "s1a0e5abed09",
+        "start_utc": "2026-10-21T10:50:11Z",
+        "cases": 98,
+        "failures": 0,
+        "assigned_worker_cpus": 61,
+        "coordinator_cpu": 0,
+        "protected_cpu55_used": false,
+        "return_internal_wall_s": 10.29872985102702,
+        "time_command_wall_s": 13.18,
+        "performance_interpretation": "single execution receipt; not benchmark or speedup/scaling evidence"
+      },
+      "validation_here": "Canonical hash,98 metadata/target/seal identities, original frozen source/manifest/vendor15hash comparisons(14distinctfiles); backup agent whole archive SHA and98raw/history seals. No ODE rerun or renewed full physics review.",
+      "historical_independent_review": "Source-bound raw/physics/PNG PASS_SCOPED in PR92, with incorrect transcription of runidentity preserved and corrected by intake; PDF rendering NOT_RUN.",
+      "remaining_findings": "NCP98_CORRECTION_RECORD.json: wrong document identity, LF/CRLF manifest mismatch,614vsactualarchivecount",
+      "decision": "ADOPT_COMPLETED_RAW_SCOPED_USING_CANONICAL_IDENTITY;_DO_NOT_RUN_PREPARED98_AGAIN",
+      "combined_cases": 125
+    },
+    {
+      "id": "HH128_PHYS75",
+      "origin": "https://github.com/cosmosapjw-quantum/WU088_HH/pull/128",
+      "head_and_source": "92f5ab9dba531ebe05909dcb77d3740d2c68c580",
+      "owner_science": "REI198 b140170ce0c58159368b6b81be49ac35ca764851 / physical3b85dedce84d37b3e165da00685a8a984950aafe",
+      "input": "Saved1231collisionless histories(625radiation+600matter+6mixed), separateHH63; three new paired controls in signed-half coordinates recorded below",
+      "new_control_half_targets": [
+        [
+          0.0013,
+          0.00011,
+          -0.00023
+        ],
+        [
+          -0.0021,
+          -0.00017,
+          0.00037
+        ],
+        [
+          0.0007,
+          9e-05,
+          0.00013
+        ]
+      ],
+      "new_control_full_targets": [
+        [
+          0.0018384776310850237,
+          0.00015556349186104048,
+          -0.00032526911934581187
+        ],
+        [
+          -0.0029698484809834997,
+          -0.0002404163056034262,
+          0.0005232590180780452
+        ],
+        [
+          0.0009899494936611666,
+          0.00012727922061357857,
+          0.00018384776310850236
+        ]
+      ],
+      "solver": "DOP853 rtol3e-11 atol3e-13,65samples; original reduced8 vs reconstructed3 coordinates, 6actualIVPs reported",
+      "build": "requirements-tested.txt numpy2.3.5 scipy1.17.0 matplotlib3.10.8; exact executed Python/runtime unavailable from read Git report",
+      "runtime": "ELAPSED_UNAVAILABLE_IN_READ_GIT_RECORDS;_NO_CONTROL_RERUN",
+      "validation": "Reported18focused tests,3pairednewinputs/6IVPs, maxphysicaldifference3.6158685366629445e-11, reconstructed8state2.6991120449793016e-10; directexpm1.1102230246251565e-16; adaptive error norm changed, no bitwise trajectory claim. Native independent-personnel review NOT_RUN per report.",
+      "methods": [
+        "signed same-trajectory shear memory with shared Simpson weights",
+        "E(b)=exp[(b-bi)M]Ei for same constant finiteL8 collisionless matrix"
+      ],
+      "scope_limits": "No C15 UV/Thomson/noncommuting source applicability; no original40state solver replacement adopted here.",
+      "relation_to_C21M125": "control target overlap0; saved external histories remain separate source-bound observations",
+      "decision": "ADOPT_THEORY_AND_IMPLEMENTATION_REFERENCE_ONLY;_PRESERVE_COMPLETED6_CONTROLS_NO_RERUN"
+    },
+    {
+      "id": "HH129_RECOVERY",
+      "origin": "https://github.com/cosmosapjw-quantum/WU088_HH/pull/129",
+      "head": "b76fd4b5d0dfe4850ebde66a8a10f78402d36c00",
+      "source_commit": "251ca2c910355603e0f3268421d825a47193e8ac",
+      "execution": "newODE0; historical standalone8algebra/interface checks rerun reported",
+      "scope": "Supplemental archived trapezoid fallback and delivery recovery, not replacing authoritativeHH128 long-memory analysis",
+      "decision": "PROVENANCE_RECOVERY_ONLY_NO_NEW_SCIENCE_PROMOTION"
+    },
+    {
+      "id": "HH76_S0",
+      "origin": "https://github.com/cosmosapjw-quantum/WU088_HH/tree/f61f23aee6ee70d0710fae2e98fae0f93f2394bb/research/hh_phys76_time_transport_20261021",
+      "head": "f61f23aee6ee70d0710fae2e98fae0f93f2394bb",
+      "parent": "b76fd4b5d0dfe4850ebde66a8a10f78402d36c00",
+      "published_content": "4contract/identityfiles only",
+      "planned_work": "all-node saved-history cumulativeSimpson signedtransport and conditional whole-cell interval response",
+      "execution": "IMPLEMENTATION_AND_RESULTS_NOT_PRESENT_IN_OBSERVED_HEAD",
+      "relation_to_C21N": "Distinct from exact mass-shell initial cancellation derivatives and canonical-grid construction reuse; do not duplicate full shear-memory consumer unnecessarily",
+      "decision": "TRACK_CONCURRENT_CONTRACT"
+    },
+    {
+      "id": "ACCEL01_REI214_BASS177",
+      "origin": [
+        "https://github.com/cosmosapjw-quantum/rei_bianchi/pull/214",
+        "https://github.com/cosmosapjw-quantum/bass/pull/177"
+      ],
+      "heads": [
+        "98fcf3943fa54e089b0292d166c3a47becb5edb8",
+        "4f19e6eaf50e8458d59d27ff47f03e9d8c8b22ca"
+      ],
+      "source_commits": [
+        "526870b3e36ad8354c58c761567b1b37829033b2",
+        "e39219ff4b3df64f979d82b11b5976556dcd00d1"
+      ],
+      "physics_source": "C15 owner80825585f9fe31d2ee0d5af545ada3fa1f52be72, warma.1999→.2; not fixedcollisionlessPR147",
+      "method": "per-model bounded exactbinary64(x,b) three-moment cache, immutable bytes-backed arrays, identity/mass/dtype/shape/strides/layout guard, cache miss calls original evaluator",
+      "verified_reference_sha256": "f9508fa69f838f5c859334fd260c59825ce0a9ddf06c85fe596e49a6cbc1d282",
+      "source_bytes_equal_implementation_and_delivery_refs": true,
+      "executed_cache_source_matches_verification_and_smoke_receipts": true,
+      "validation": "25targetedtests/144kernelpoints/5short2-stepcomparisons;29independentguardprobes reported; onecustom2-step actualworker only. Complete729reruns0.",
+      "custom_input": [
+        -0.00025,
+        -1e-05,
+        -2e-05
+      ],
+      "build": {
+        "python": "3.12.14",
+        "numpy": "2.3.5",
+        "scipy": "1.17.0"
+      },
+      "runtime": "targetedtestwindow08:05:58.713365→08:06:05.119147UTC; singlecustomworker elapsed not reported in read receipt; no benchmark",
+      "source_version_limit": "batch_worker smoke snapshot hashc04a854c... differs from tested/finalvalidator8950be20...; report explicitly preserves executedsource and applies finalvalidator without re-solving. Do not call finalworker entirepath science-rerun verified.",
+      "relation_to_C21N": "Useful immutable-buffer/source-binding principles. This cache reuses C15 state evaluations, while plannedC21N reuses A-independentCanonicalMomentumFV construction data; not directly the same implementation.",
+      "decision": "REUSE_REVIEWED_GUARD_PRINCIPLES;_NO_C15_MODEL_SWAP;_DEDUPE_MIRRORED_PUBLICATIONS"
+    },
+    {
+      "id": "REC116_CLOSEOUT",
+      "origin": "https://github.com/cosmosapjw-quantum/rec_bianchi/pull/116",
+      "previous_head": "d2c0fbb5fa06dfc37db57876bb130ef8a4fa8a5d",
+      "current_ref": "4cffa8a0abdb104a40cac17cfc65593bec909fb3",
+      "change": "seven additions: handoffs,DAG,interpretation,plot/sentinelcounterexample andstage1ACK. Parentendpointmethod already consumed inC21M axisv2.",
+      "new_science_ivp": "NONE_REPORTED",
+      "decision": "REUSE_EXISTING_C21M_ADAPTATION_NO_DUPLICATE_WORK"
+    },
+    {
+      "id": "REC117_Z2",
+      "origin": "https://github.com/cosmosapjw-quantum/rec_bianchi/pull/117",
+      "head": "e79fca7b53aba2e99ea94fe2b4e498056da117be",
+      "published_content": "fourcontract/runtime/source-lockfiles",
+      "physics_source": "3b85dedce84d37b3e165da00685a8a984950aafe",
+      "upstream_git_head": "8b71c13e23202edfce1ee67fb2da552fefb9a583",
+      "reported_snapshot": "237z20→2histories;175nominalgrid=63axis+112mixed,153savedepochs=121prefix+32tail",
+      "snapshot_manifest_sha256": "d7b147aa0293646b068e754a9bf03f2b8e47e3544b405a1ad5bfce366b34143e",
+      "input_axes": {
+        "S0": [
+          0,
+          0.0003,
+          0.001,
+          0.003,
+          0.01,
+          0.03,
+          0.1
+        ],
+        "Pm0": [
+          -0.0003,
+          -0.0001,
+          0,
+          0.0001,
+          0.0003
+        ],
+        "Pr0": [
+          -0.001,
+          -0.0003,
+          0,
+          0.0003,
+          0.001
+        ]
+      },
+      "solver": "source-familyL8,24x12Gauss3 documented; actualnewtail source/runtime/rtol/atol/raw not available in observedGithead",
+      "raw_status_here": "UNAVAILABLE_EXTERNAL_SHARED_WORKSPACE_SNAPSHOT_ONLY",
+      "overlap_nominal_initial_coordinates_with_C21M125": [
+        [
+          0.0,
+          -0.0001,
+          0
+        ],
+        [
+          0.0,
+          0,
+          0
+        ],
+        [
+          0.0,
+          0.0001,
+          0
+        ]
+      ],
+      "overlap_scope": "3nominal targets only; different endpointz2/timegrid and uninspectedadapter mean no bitwiseorfulltrajectorydedupclaim",
+      "decision": "TRACK_REPORTED_COMPLETION_TO_AVOID_REPLAY;_DO_NOT_PROMOTE_UNREAD_RAW_OR_REEXECUTE237"
+    },
+    {
+      "id": "REI199_UNIFIED_CONTRACT",
+      "origin": "https://github.com/cosmosapjw-quantum/rei_bianchi/pull/199",
+      "head": "8b71c13e23202edfce1ee67fb2da552fefb9a583",
+      "previous_head": "964b2e3c098f6e475999a4eddc7a6aa0f8f053cc",
+      "change": "11additive unifiedLRS evidence/contractfiles; latest237tail raw not in thisobservedhead",
+      "body_vs_ref": "PRbody still names964b2e3c ascurrent; actualGithead8b71c13e is child of964b2e3c",
+      "legacy_obligations": "nativeage/time convergenceHOLD, fullCIfailure in source owner scope preserved; do not relabel those asC21M results",
+      "decision": "ACTUAL_REF_AUTHORITY_PLUS_LOCAL_SNAPSHOT_GAP"
+    },
+    {
+      "id": "HE82_COMPLETED_SPLIT_REPORT",
+      "origin": "https://github.com/cosmosapjw-quantum/BASS_HE/pull/82",
+      "previous_head": "9479387545bc4ba29278f3990a83ca20ed2f2a73",
+      "current_head": "048a73de4246f609b1bc14854ea5c48757cb82fd",
+      "source": "fixedPR1473b85dedce84d37b3e165da00685a8a984950aafe; local execution source-binding documents not in observedGithead",
+      "reported_science": "28originalcanonical+12newindependentstress=40unique, view18=12new+6reuse. ExistingHE29reference4/canary1 andC15saved512 reused.",
+      "independent_grid": {
+        "S0": [
+          0,
+          0.03
+        ],
+        "Pm0": [
+          -0.0003,
+          0,
+          0.0003
+        ],
+        "Pr0": [
+          -0.0006,
+          0,
+          0.0006
+        ]
+      },
+      "solver": "40state,101samples,original source quadrature; exact executed manifest absent from observedremote",
+      "build": "EXECUTED_BUILD_UNAVAILABLE_IN_READ_PRIMARY_RECORDS",
+      "runtime": "sandboxmax2workers; new12 solverreported sum.24263320099271368s andwrappersum.602908364009636s, not campaignwall orspeedup",
+      "validation": "reportednew12allgatesPASS,maxinitialmapping1.3877787807814457e-17,N0drift0,minmassivecell9.911137973909939e-31; independentdeltaSCOPED_PASS. Local source/review paths return404 atobservedhead.",
+      "missing_remote_paths": [
+        "data/source_identity.json",
+        "data/reviewed_source_manifest.json"
+      ],
+      "nominal_overlap_with_C21M125": [
+        [
+          0.0,
+          0,
+          0
+        ]
+      ],
+      "new12_target_overlap_with_C21M125": 0,
+      "decision": "ACCEPT_REPORTED_COMPLETION_AND_CODE_METHOD_REFERENCE;_FULL_RAW_INTAKE_UNAVAILABLE;_NO_RERUN"
+    },
+    {
+      "id": "VIGILODE_FVM_SCHUR_REMAP",
+      "origin": "https://github.com/cosmosapjw-quantum/vigilode/tree/5fd6e459a3f67cee90e002821b9b4b740c47475b/research/ncp_followup_20261021",
+      "head": "5fd6e459a3f67cee90e002821b9b4b740c47475b",
+      "source": "C15 inspectedowner80825585f9fe31d2ee0d5af545ada3fa1f52be72; BASS106a0153bf113fa4f0beea9743e84a744b65f424",
+      "physics": "prescribedgeometry,unpolarizedelasticThomson,first-orderFV formulaoracle andanalyticJVP",
+      "validation": "12formulaoraclechecks0failures0errors inBASS_REI_CHECKS.json; separateRustSchur/remapcodeevidence not adopted asphysicalintegration",
+      "solver_build_runtime": "NO_LIVE_BASS_REI_PORT;_EXACT_EXECUTED_PYTHON_BUILD_AND_ORACLE_WALL_UNAVAILABLE_IN_READ_RECORDS",
+      "relation_to_C21M": "Different discretization/scattering and source family; cannot replace fixed40-statecollisionless pilot without another contract",
+      "decision": "REFERENCE_ONLY;_LIVE_PORT_AND_PRODUCTION_HOLD"
+    }
+  ],
+  "deduplication": {
+    "C21L81": "DO_NOT_REPLAY",
+    "C21M26_and_center1": "DO_NOT_REPLAY",
+    "C21M_NCP98": "COMPLETE_RETURN_RECEIVED_DO_NOT_REPLAY",
+    "REI198625_plus600_plus6": "UNCHANGED_PREVIOUSLY_INTAKEN_NO_REPLAY",
+    "warm729_REI213_BASS176": "ONE_MIRRORED_RUN_REUSED",
+    "HH75_new6_controls": "COMPLETE_AUTHOR_REPORTED_NO_REPLAY",
+    "HE82_40unique": "COMPLETE_AUTHOR_REPORTED_NO_REPLAY",
+    "REC237_z2": "REPORTED_COMPLETE_RAW_UNAVAILABLE_NO_AUTOMATIC_REPLAY",
+    "nominal_coordinate_comparison_tolerance": 2e-13,
+    "full_half_conversion": "multiplyallHHhalfcoordinatesbysqrt2beforecomparing"
+  },
+  "new_unit_recommendation": {
+    "unit": "C21N_mass_shell_cache",
+    "parent_basis": "PR92HEAD645a7f1a960be10e10574a819d7fb35a4511d9fa withadditiveidentity/CSVcorrections",
+    "implementation": "Reuse A-independentcanonicalquadratureandimmutableoperatorbuffers while rebuildingA-dependentweightsandnormalization exactly; keep originalmoments,RHS,FP64andinputgrid",
+    "theory": "Initial signed matter/radiation cancellation release from source-bound massive mass-shell moments; distinguish local initialderivative from shear-memorypathattribution",
+    "existing_results_to_consume": "sealed125grid and originalfull40-state101point histories; no newODES needed merely to diagnose savedpaths",
+    "mandatory_scope": "Focused changed-dependency parity/domain/immutability checks only; no benchmark or measuredspeedupclaim; no fullC15/UVsolver substitution"
+  },
+  "unavailable": {
+    "other_unexposed_chats": "UNAVAILABLE",
+    "REC_new237_actual_source_and_raw_in_currentGit": "UNAVAILABLE",
+    "HE82_selected_source_binding_files_atcurrenthead": "HTTP404_UNAVAILABLE",
+    "all_external_control_raw_archives": "NOT_DOWNLOADED_EXCEPT_NEW_NCP98_ONE_ARCHIVE",
+    "liveNCP_resources_duringthisintake": "UNOBSERVED"
+  },
+  "global_error_bound": null
+}

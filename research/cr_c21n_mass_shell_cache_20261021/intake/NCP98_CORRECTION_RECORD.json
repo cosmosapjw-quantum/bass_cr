@@ -1,0 +1,65 @@
+{
+  "schema": "C21N_NCP98_ADDITIVE_CORRECTION_V1",
+  "status": "RAW_SOURCE_IDENTITY_RESOLVED_WITH_DOCUMENT_AND_SERIALIZATION_LIMITS",
+  "authority_pr": "https://github.com/cosmosapjw-quantum/bass_cr/pull/92",
+  "observed_head": "645a7f1a960be10e10574a819d7fb35a4511d9fa",
+  "original_published_documents_modified": false,
+  "raw_files_modified": false,
+  "source_files_modified": false,
+  "findings": [
+    {
+      "id": "NCP98-DOC-IDENTITY",
+      "classification": "DOCUMENT_PROVENANCE_TRANSCRIPTION_CONFLICT",
+      "wrong_published_identity": "7f89b12adbeee64a70832e633ae563584bc2a68f6ac2a60139b98efacb01c05a",
+      "correct_canonical_identity": "7f89b12adbeee64a70832e633ae563584bc2a68f6ac433dc56f759a1946eb718",
+      "affected_document_paths": [
+        "NCP98_EXECUTION_RECEIPT.json",
+        "NCP98_INDEPENDENT_REVIEW.json",
+        "NCP98_REPORT_KO.md",
+        "NCP98_HANDOFF_KO.md"
+      ],
+      "resolution_evidence": [
+        "SHA256 of canonical manifest JSON equals raw stored identity",
+        "raw RETURN.summary identity equals canonical identity",
+        "98 COMPLETE, RESULT, RESERVATION and STARTED identities equal canonical identity",
+        "98 case targets exactly equal the fixed prepared refinement grid",
+        "original source/manifest/vendor hash checks 15/15 pass (14 distinct files)"
+      ],
+      "acceptance": "Reuse sealed raw under canonical identity; preserve wrong original documents and append this correction. Do not claim original erroneous strings are correct."
+    },
+    {
+      "id": "NCP98-CSV-LINE-ENDINGS",
+      "classification": "SERIALIZATION_BYTE_MANIFEST_MISMATCH",
+      "output_manifest_pass_count": 6,
+      "output_manifest_item_count": 7,
+      "file": "analysis_campaign125_20261021/endpoints_campaign.csv",
+      "actual": {
+        "bytes": 100645,
+        "sha256": "640dcf9c9b47770c7a3bfedac92421485357b948a3f7bafc52d2397651d46761",
+        "line_endings": "LF",
+        "LF_count": 126
+      },
+      "manifest_expected": {
+        "bytes": 100771,
+        "sha256": "3f602c0a460d5a0153e532babee441d9e25de55bb07d0075a3dbfd878ffcf361",
+        "line_endings": "CRLF reconstructed in memory"
+      },
+      "resolution": "Only replace LF by CRLF in memory: expected bytes and SHA256 match exactly. This proves the byte difference is the126 newline characters. Original actual CSV is preserved; 7/7 original manifest bytes PASS is not claimed.",
+      "actual_csv_numeric_data_changed": false,
+      "source_written": false
+    },
+    {
+      "id": "NCP98-ARCHIVE-COUNT",
+      "classification": "PUBLISHED_PAYLOAD_COUNT_NOT_REPRODUCED",
+      "published_backup_receipt_payload_files": 614,
+      "observed_extracted_regular_files": 509,
+      "observed_sha256sums_entries": 508,
+      "interpretation": "Use observed archive/member manifest counts; do not repeat614 as verified. Separate backup intake receipt is the authority for archive extraction."
+    }
+  ],
+  "adopted_scope": "98 completed source-matching trajectories plus existing26+center1 form125 distinct nominal coordinates; no reexecution needed. Intake is source/provenance/serialization review, not fresh continuous physics certification.",
+  "old_not_run_status": "Preserve C21M PR91 NOT_RUN as a dated pre-return statement; current C21N DAG may append actual received NCP98 COMPLETE_SCOPED under canonical raw identity.",
+  "new_ode_integrations": 0,
+  "benchmark_runs": 0,
+  "global_error_bound": null
+}

@@ -1,0 +1,84 @@
+{
+  "NCP_execution": "NOT_RUN",
+  "exit_code": 2,
+  "fake_cases_executed": 0,
+  "global_error_bound": null,
+  "no_leases_or_worker_started": true,
+  "observed_return": {
+    "failure": "Traceback (most recent call last):\n  File \"/workspace/scratch/10765dc22dcf/bass_cr/research/cr_c21n_mass_shell_cache_20261021/shared_runner.py\", line 344, in _run_scoped\n    storage.require(output, len(pending))\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/unittest/mock.py\", line 1139, in __call__\n    return self._mock_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/unittest/mock.py\", line 1143, in _mock_call\n    return self._execute_mock_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/unittest/mock.py\", line 1202, in _execute_mock_call\n    raise result\nstorage_preflight.StorageAdmissionError: STORAGE_PREFLIGHT_BLOCKED:SYNTHETIC_DISK_REDUCED_DURING_RESOURCE_WAIT\n",
+    "global_error_bound": null,
+    "own_worker_exit_codes": {},
+    "summary": {
+      "NCP_execution": false,
+      "attempt": "20261021T112456Z_5_55797539932369",
+      "completion_counts": {
+        "NOT_STARTED": 1
+      },
+      "execution_site": "other",
+      "execution_site_basis": "operator-declared; host identity recorded separately",
+      "global_error_bound": null,
+      "identity": "TEST_DOUBLE",
+      "observed_hostname": "af4832b34a81",
+      "observed_platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+      "performance_benchmark": false,
+      "requested_cases": 1,
+      "run_id": "c21n_WAIT_STORAGE_TEST_DOUBLE",
+      "states": {
+        "not_started": "NOT_STARTED"
+      },
+      "status": "PARTIAL"
+    },
+    "wall_seconds": 0.006186938000610098
+  },
+  "scientific_ODE_calls": 0,
+  "scope": "Only newly changed storage check before resource wait; inherited suites not repeated",
+  "source_sha256": {
+    "completed_targets.json": "9e479165aa80eb8321de1e7b4ae4ac05bd25d3de96f1ddfbd9e2f3916deb9749",
+    "shared_resources.py": "ad642904d7c9334a4c650702ab792ecc49c7dcca2b542fbf8315bd318ec58795",
+    "shared_runner.py": "85f9f569a0a6d37ec8c42a6bccdb3e1b24eea537f4acd856331b9954f5915deb",
+    "storage_preflight.py": "af7b9bdb3041f38b9ad7590cdb034c51dc9e5ac6958ed44fd88bcf647ecd69fa"
+  },
+  "status": "PASS_SCOPED",
+  "synthetic_blocked_observation": {
+    "available_bytes": 24904531968,
+    "available_inodes": 2038721,
+    "budget": {
+      "budget_basis": "conservative analytical allowance; no measured storage improvement claim",
+      "budget_scope": "run raw/receipts/coordinator only; exclude later plots and archives",
+      "case_output_budget_bytes": 8388608,
+      "case_output_budget_inodes": 8,
+      "coordinator_output_budget_bytes": 67108864,
+      "coordinator_output_budget_inodes": 32,
+      "missing_directory_inodes": 1,
+      "remaining_cases": 1,
+      "required_available_bytes": 2222981120,
+      "required_available_inodes": 297,
+      "reserve_bytes": 2147483648,
+      "reserve_inodes": 256
+    },
+    "capacity_reserved": false,
+    "observed_utc": "2026-10-21T11:24:56Z",
+    "output_created": false,
+    "output_path": "/tmp/tmpbg04z3cd/out",
+    "probed_existing_path": "/tmp/tmpbg04z3cd",
+    "reasons": [
+      "SYNTHETIC_DISK_REDUCED_DURING_RESOURCE_WAIT"
+    ],
+    "schema": "C21N_STORAGE_PREFLIGHT_V1",
+    "status": "BLOCKED",
+    "statvfs": {
+      "f_bavail": 6080208,
+      "f_bfree": 6503734,
+      "f_blocks": 8244676,
+      "f_bsize": 4096,
+      "f_favail": 2038721,
+      "f_ffree": 2038721,
+      "f_files": 2097152,
+      "f_flag": 4102,
+      "f_frsize": 4096
+    },
+    "statvfs_basis": "f_bavail * f_frsize (fallback f_bsize), f_favail",
+    "user_or_project_quota_verified": false,
+    "writable_searchable_existing_directory": true
+  }
+}
