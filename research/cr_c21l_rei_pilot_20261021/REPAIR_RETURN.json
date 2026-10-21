@@ -1,0 +1,107 @@
+{
+  "schema": "C21L_BOUNDED_REPAIR_RETURN_V1",
+  "findings": [
+    "C21L-R1",
+    "C21L-R2"
+  ],
+  "status": "PASS",
+  "original_pilot_identity": "0090e1549b21b07e46001de2bf9cb2eab9bf0cba87ffe3d4d824ba117fecb44a",
+  "source_archive": "archived_execution_v1",
+  "changed_code_sha256": {
+    "runner.py": "65024794cdef8960eb1272a49a462a48f8f0bc5869deda3a79d297add757a6d5",
+    "resources.py": "12bbda5b1498ca1714429a491113537be36cba03cc558ae46867549f3021c0d3",
+    "repair_checks.py": "a28a72ccdcb0b18cf495703758674f49a5a3ab72b024e86e961d75f9219315fc"
+  },
+  "unchanged_scientific_adapter_sha256": "5461a5062f99f9b1b9569b7cc4c0dadeaad1fd2f3a11ee37777f27ec9479e317",
+  "runtime_identities": {
+    "unspecified": "b5324118085fdd3e431b82bf602856ee92fae1332a7aeae7ff10e3b26c1999d7",
+    "sandbox": "2130237831e08f21331b3744292a437c04c4737f600d36b1ca96d768416b5f1f",
+    "ncp": "11541eb423eecd1a6d7caeb1bc9de5a56456b9f8d762e326644ad1aeda2f046b",
+    "other": "cfc7a4c56835d3379e5ec1b96315049104580462b530d979e9919a20ff646730"
+  },
+  "focused_check_command": "python repair_checks.py --out repair_checks_final",
+  "focused_check_exit": 0,
+  "focused_checks": {
+    "checks": [
+      {
+        "details": {
+          "default_manifest_identity": "b5324118085fdd3e431b82bf602856ee92fae1332a7aeae7ff10e3b26c1999d7",
+          "physical_ODE_runs": 0,
+          "sandbox_manifest_identity": "2130237831e08f21331b3744292a437c04c4737f600d36b1ca96d768416b5f1f",
+          "sites": {
+            "ncp": {
+              "NCP_execution": true,
+              "execution_site": "ncp",
+              "execution_site_basis": "operator-declared; not automatic attestation",
+              "observed_hostname": "af4832b34a81",
+              "observed_platform": "Linux-6.18.55-x86_64-with-glibc2.39"
+            },
+            "other": {
+              "NCP_execution": false,
+              "execution_site": "other",
+              "execution_site_basis": "operator-declared; not automatic attestation",
+              "observed_hostname": "af4832b34a81",
+              "observed_platform": "Linux-6.18.55-x86_64-with-glibc2.39"
+            },
+            "sandbox": {
+              "NCP_execution": false,
+              "execution_site": "sandbox",
+              "execution_site_basis": "operator-declared; not automatic attestation",
+              "observed_hostname": "af4832b34a81",
+              "observed_platform": "Linux-6.18.55-x86_64-with-glibc2.39"
+            },
+            "unspecified": {
+              "NCP_execution": null,
+              "execution_site": "unspecified",
+              "execution_site_basis": "operator-declared; not automatic attestation",
+              "observed_hostname": "af4832b34a81",
+              "observed_platform": "Linux-6.18.55-x86_64-with-glibc2.39"
+            }
+          },
+          "synthetic_NCP63_request_admitted_workers": 62
+        },
+        "name": "execution_site_and_CPUplan",
+        "status": "PASS"
+      },
+      {
+        "details": {
+          "failed_never_requeued": true,
+          "mismatched_identity_rejected": true,
+          "old_v1_reservation_stays_incomplete": true
+        },
+        "name": "legacy_and_failed_state_preservation",
+        "status": "PASS"
+      },
+      {
+        "details": {
+          "actual_processes": 2,
+          "cpu": 4,
+          "first_exit": -15,
+          "interrupted_case": "INCOMPLETE_preserved_not_retried",
+          "physical_ODE_runs": 0,
+          "queued_case": "COMPLETE_after_known_unstarted_resume",
+          "resumed_exit": 0,
+          "test_double": true
+        },
+        "name": "actual_worker_queued_restart_test_double",
+        "status": "PASS"
+      }
+    ],
+    "global_error_bound": null,
+    "original_81_results_modified": false,
+    "physical_ODE_runs": 0,
+    "status": "PASS"
+  },
+  "additional_physical_ODE_runs": 0,
+  "additional81_case_runs": 0,
+  "old_raw_results_modified": false,
+  "source_bytes_modified": false,
+  "changes": [
+    "explicit operator-declared execution site with observed host/platform and null default NCP metadata",
+    "new QUEUED reservation plus worker-owned fsynced STARTED marker; known-unstarted only requeue",
+    "UTC-converted new filenames and bounded global teardown grace",
+    "README describes v1/v2 identity split, site declaration, queued resume and NCP worker cap"
+  ],
+  "global_error_bound": null,
+  "publication_or_scientific_admission": "parent-owned"
+}
