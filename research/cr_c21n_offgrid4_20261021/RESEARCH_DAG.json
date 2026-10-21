@@ -1,6 +1,6 @@
 {
   "schema": "C21N_OFFGRID4_RETURN_DAG_V1",
-  "recorded_utc": "2026-10-21T13:25:30.504789+00:00",
+  "recorded_utc": "2026-10-21T14:03:20.100906+00:00",
   "base_document": "0f45d0a422d79ccead565a8abaab860fcc230687",
   "execution_content": "5ecb8a6c4961302b7066b06278e72ecd2d77f8c9",
   "physics_source": "3b85dedce84d37b3e165da00685a8a984950aafe",
@@ -49,7 +49,9 @@
       "changed_heads": 3,
       "other_conversations": "UNAVAILABLE",
       "receipt": "intake/github/RESUME_INTAKE.json",
-      "global_no_results_claim": false
+      "global_no_results_claim": false,
+      "post_intake_supplement": "external_ncp4/NCP_RETURN_ACCEPTANCE.json",
+      "personal_context_service_actual_retry": "UNAVAILABLE_20261021T134643Z"
     },
     {
       "id": "EXTERNAL_OTHER_LINEAGES",
@@ -79,9 +81,12 @@
       ],
       "new_ODE": 0,
       "saved_states": 404,
-      "field_FP64_bytes": 23836,
-      "RHS_FP64_bytes": 16160,
-      "receipt": "analysis/SUMMARY.json"
+      "receipt": "analysis/SUMMARY.json",
+      "field_FP64_values_compared_bytewise": 23836,
+      "RHS_FP64_values_compared_bytewise": 16160,
+      "field_FP64_byte_count": 190688,
+      "RHS_FP64_byte_count": 129280,
+      "metadata_label_correction": "The content snapshot named FP64 value counts bytes; this document clarifies counts without changing analysis or raw."
     },
     {
       "id": "OFFGRID4_INDEPENDENT_REVIEW",
@@ -109,18 +114,72 @@
     },
     {
       "id": "OFFGRID4_PUBLICATION",
-      "state": "READY_TO_PUBLISH",
+      "state": "PUBLISHED_DRAFT_CONTENT_WITH_THIS_DOCUMENT_CLOSEOUT",
       "branch": "research/cr-c21n-offgrid4-sandbox-20261021",
-      "content_commit": null,
-      "document_commit": null
+      "content_commit": "e7729092abc6edbe74f31d0ed82aa84d5506b8d5",
+      "document_commit": null,
+      "PR": 95,
+      "NCP_return_addendum_commit": "038aa0c8e5790f5c94e596035ea816fbca588a15",
+      "document_commit_resolution": "Exact SHA in final authority receipt after this document publication"
     },
     {
       "id": "OFFGRID4_BACKUP",
-      "state": "NOT_YET_REQUESTED",
-      "archive": null,
-      "Drive": null,
-      "Dropbox": null,
-      "Library": null
+      "state": "TWO_PROVIDER_ACK_COMPLETED_DRIVE_UNKNOWN_NO_ACK",
+      "archive": "BASS_CR_C21N_OFFGRID4_RESEARCH_DELIVERY_20261021T134804Z.zip",
+      "Drive": {
+        "provider": "Google Drive",
+        "status": "UNKNOWN_NO_ACK",
+        "recorded_utc": "2026-10-21T13:53:22.375Z",
+        "file_name": "BASS_CR_C21N_OFFGRID4_RESEARCH_DELIVERY_20261021T134804Z.zip",
+        "object_id": null,
+        "provider_size": null,
+        "provider_sha256": "NOT_RETURNED",
+        "parent_folder_id": "1V4ZQza59dWVC7apeRz9P1TL66eaVYyJy",
+        "upload_calls": 1,
+        "response_observation_elapsed_s": 45.004,
+        "response_observation_budget_seconds": 45,
+        "provider_error_observed": null,
+        "remote_cancellation_invoked": false,
+        "download_byte_revalidation": "NOT_RUN",
+        "note": "Bounded response observation ended without a completed provider ACK; provider-side completion remains unknown. No retry or cancellation was requested.",
+        "local_sha256": "c5ae168f04b0fde9232237e9337e224d5d1380723cead1cda529ba6f3c4a2df9"
+      },
+      "Dropbox": {
+        "provider": "Dropbox",
+        "status": "ACK_COMPLETED",
+        "received_utc": "2026-10-21T13:51:37.181Z",
+        "file_id": "id:BSpOijBcT10AAAAAAD_hjA",
+        "name": "BASS_CR_C21N_OFFGRID4_RESEARCH_DELIVERY_20261021T134804Z.zip",
+        "path": "/BASS_DERIVATION_DOSSIERS_20260912/bass_cr/BASS_CR_C21N_OFFGRID4_RESEARCH_DELIVERY_20261021T134804Z.zip",
+        "size": 38502346,
+        "modified_time": "2026-10-21T13:51:10Z",
+        "local_sha256": "c5ae168f04b0fde9232237e9337e224d5d1380723cead1cda529ba6f3c4a2df9",
+        "provider_sha256": "NOT_RETURNED",
+        "download_byte_revalidation": "NOT_RUN",
+        "verification_level": "R1_PROVIDER_COMPLETION_ACK",
+        "upload_calls": 1
+      },
+      "Library": {
+        "provider": "Library",
+        "status": "ACK_COMPLETED",
+        "received_utc": "2026-10-21T13:50:13.587Z",
+        "library_file_id": "libfile_9c24298a7a6c8191a193dda15106ae81",
+        "file_id": "file_00000000518081fa9dc4bef19fd0e593",
+        "version": 0,
+        "name": "BASS_CR_C21N_OFFGRID4_RESEARCH_DELIVERY_20261021T134804Z.zip",
+        "path": "/BASS_DERIVATION_DOSSIERS_20260912/bass_cr/BASS_CR_C21N_OFFGRID4_RESEARCH_DELIVERY_20261021T134804Z.zip",
+        "directory_id": "6ad11b977ee08191a1b593655cb6913c",
+        "size": 38502346,
+        "provider_sha256": "NOT_RETURNED",
+        "local_sha256": "c5ae168f04b0fde9232237e9337e224d5d1380723cead1cda529ba6f3c4a2df9",
+        "xattrs_applied": true,
+        "xattrs_helper_exit_code": 0,
+        "download_byte_revalidation": "NOT_RUN",
+        "verification_level": "R1_PROVIDER_ACK_AND_LOCAL_XATTRS",
+        "upload_calls": 1
+      },
+      "archive_sha256": "c5ae168f04b0fde9232237e9337e224d5d1380723cead1cda529ba6f3c4a2df9",
+      "later_closeout_addendum": "Final authority receipt binds the later archive and actual provider responses"
     },
     {
       "id": "PRIOR_C21N_DRIVE_RECONCILIATION",
@@ -132,15 +191,29 @@
     },
     {
       "id": "OFFGRID4_NCP_ACTUAL",
-      "state": "NOT_RUN",
-      "NCP_access": "UNAVAILABLE_AUTHORIZED_KEY_ABSENT",
+      "state": "COMPLETE_SCOPED_EXTERNAL_RETURN_ACCEPTED",
+      "NCP_access": "Direct SSH absent in this sandbox; actual NCP raw accepted from pinned PR94",
       "same_completed_four_rerun": "NOT_REQUIRED_AND_REFUSED",
-      "prior_NCP98": "COMPLETE_SCOPED_PRESERVED"
+      "prior_NCP98": "COMPLETE_SCOPED_PRESERVED",
+      "source_PR": 94,
+      "source_head": "92b1b3f5575375580cf8de8039252ac492353b7e",
+      "external_run_identity": "a07a95f85042f9db7df2e3e465288524b458bcb6f190e9d4f01db1869c139360",
+      "receipt": "external_ncp4/NCP_RETURN_ACCEPTANCE.json",
+      "external_completed_cases": 4,
+      "new_ODE_by_intake": 0,
+      "additional_unique_targets": 0,
+      "whole_NPZ_byte_equal_cases": 4,
+      "arrays_compared": 236,
+      "FP64_values_compared": 52520,
+      "historical_NOT_RUN_snapshots": "Preserved at their recorded observation times"
     },
     {
       "id": "NEW_FOLLOWUP_INPUTS",
-      "state": "NOT_SELECTED",
-      "automatic_next_research_cycle": false
+      "state": "NOT_SELECTED_IN_THIS_COMPLETED_UNIT",
+      "automatic_next_research_cycle": false,
+      "next_action": "Continue the next concrete unanswered theory/coding question within the existing user goal; exclude completed129 targets.",
+      "additional_user_approval_gate": false,
+      "selection_required_for": "Change to user-fixed physics/precision/scope only"
     },
     {
       "id": "PERFORMANCE_CAMPAIGN",
@@ -159,5 +232,14 @@
       "state": "HOLD"
     }
   ],
-  "global_error_bound": null
+  "global_error_bound": null,
+  "snapshot": "Final document phase; exact document SHA and later closeout backup ACKs use external final authority receipt.",
+  "unique_targets": 129,
+  "execution_accounting": {
+    "this_thread_sandbox_new_ODE": 4,
+    "external_NCP_completed_ODE": 4,
+    "additional_ODE_by_return_intake": 0,
+    "distinct_new_inputs_across_sites": 4,
+    "old81_or125_replays_by_this_thread": 0
+  }
 }

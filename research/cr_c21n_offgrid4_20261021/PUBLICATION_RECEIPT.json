@@ -1,0 +1,470 @@
+{
+  "schema": "C21N_OFFGRID4_PUBLICATION_PHASES_V1",
+  "recorded_utc": "2026-10-21T14:03:20.100906+00:00",
+  "repository": "cosmosapjw-quantum/bass_cr",
+  "branch": "research/cr-c21n-offgrid4-sandbox-20261021",
+  "draft_PR": 95,
+  "sandbox_content": {
+    "schema": "C21N_OFFGRID4_CONTENT_PUBLICATION_V1",
+    "created_utc": "2026-10-21 13:47:57 UTC",
+    "repository": "cosmosapjw-quantum/bass_cr",
+    "branch": "research/cr-c21n-offgrid4-sandbox-20261021",
+    "pr": 95,
+    "pr_url": "https://github.com/cosmosapjw-quantum/bass_cr/pull/95",
+    "draft": true,
+    "parent": "0f45d0a422d79ccead565a8abaab860fcc230687",
+    "content_commit": "e7729092abc6edbe74f31d0ed82aa84d5506b8d5",
+    "tree": "8649dd405a35f394219e8b65f57608ee7dd58a03",
+    "new_files": 93,
+    "new_payload_bytes": 2530166,
+    "old_unit_changes": 0,
+    "github_blob_acks": 93,
+    "local_git_object_identity": "PASS_SCOPED",
+    "github_exact_branch_head": "PASS_SCOPED",
+    "readback_level": "R1_EXACT_REF_WITH_CREATE_OBJECT_ACKS",
+    "remote_download_byte_verification": "NOT_RUN",
+    "science_status": "PASS_SCOPED",
+    "new_science_ode_cases": 4,
+    "prior_science_ode_replays": 0,
+    "global_error_bound": null,
+    "ack": {
+      "commit": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Action completed."
+          }
+        ],
+        "structuredContent": {
+          "sha": "e7729092abc6edbe74f31d0ed82aa84d5506b8d5"
+        },
+        "isError": false
+      },
+      "tree": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Action completed."
+          }
+        ],
+        "structuredContent": {
+          "sha": "8649dd405a35f394219e8b65f57608ee7dd58a03"
+        },
+        "isError": false
+      },
+      "branch": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Action completed."
+          }
+        ],
+        "structuredContent": {
+          "branch": "research/cr-c21n-offgrid4-sandbox-20261021"
+        },
+        "isError": false
+      },
+      "pr": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Action completed."
+          }
+        ],
+        "structuredContent": {
+          "url": "https://github.com/cosmosapjw-quantum/bass_cr/pull/95",
+          "number": 95,
+          "state": "open",
+          "merged": false,
+          "mergeable": false,
+          "draft": true,
+          "body": "## 연구 목적\nC21N에서 준비해 둔 opposing-stress offgrid 4개 초기조건을 실제 적분하고, 물질·광자·질량 없는 중성미자 stress의 signed amplitude와 full Frobenius norm을 분리해 보존합니다. 기존 125개 완료 입력과 겹치는 실행을 막는 명시적 선행 guard를 추가합니다.\n\n## 변경과 결과\n- 원 REI source `3b85dedce84d37b3e165da00685a8a984950aafe`, frozen 실행 checkout `5ecb8a6c4961302b7066b06278e72ecd2d77f8c9`, FP64 DOP853 rtol=3e-11 / atol=3e-13 유지.\n- 샌드박스에서 새 4/4 case를 z=20→4까지 실행. 기존 81/125 ODE 재실행 0. 28개 raw 파일과 실행 환경·source bindings 보존.\n- 기존 immutable mass-shell geometry cache를 그대로 사용. 새 analyzer, 129개 완료 입력 registry 및 guard, CSV/NPZ, PNG/PDF 3종을 추가.\n- 초기 총 응력의 상쇄가 성분별 진화로 해제되어 shear가 생성됨을 관측. 새4의 z=4 최대값: Sigma=2.1472460270e-5, Pi_m=9.9613142422e-6, Pi_r=4.1139850874e-5, Pi_tot=3.1178536631e-5.\n- 기존125+새4는 129개 불규칙 ensemble. 기존 C21L/M/N 파일 변경 0.\n\n## 검증\n- 404개 저장 상태에서 cached/uncached fields 23,836개 FP64값 및 RHS 16,160개 값의 bytes 일치.\n- Hamiltonian 최대 잔차 2.220446049250313e-16; radiation·matter 보존량과 source normalization 검사.\n- 독립 검토 PASS_SCOPED: source17, raw28, output15/input53 bindings와 저장 수치 대조 및 PNG3 직접 확인. P0=0.\n- 국소 2차 jet의 첫 양의 eta 표본 상대 잔차 최대 2.1223%; eta=0.1004559에서는 15.8374%. 전 구간 대체모형으로 채택하지 않음.\n- guard의 renamed-completed/invalid/duplicate/tampered cases focused 검증. 역사적 runner를 자동 변경하지 않으므로 향후 새 grid에는 guard를 명시적으로 먼저 실행.\n\n## 범위와 상태\nPreliminary non-tilted collisionless LRS Bianchi I. 새로운 NCP 실행은 NOT_RUN이며 완료된4를 NCP에서 중복 실행할 필요는 없습니다. General triaxial/full reionization/CMB는 HOLD, global_error_bound=null. 성능 benchmark 및 64-core scaling 주장은 없습니다.\n\nContent commit: `e7729092abc6edbe74f31d0ed82aa84d5506b8d5`.\n문서 마감과 create-only provider backup 영수증은 후속 document commit에서 분리합니다.\n",
+          "title": "C21N: execute opposing-stress offgrid4 and preserve component trajectories",
+          "base": "research/cr-c21n-mass-shell-cache-20261021",
+          "base_sha": "0f45d0a422d79ccead565a8abaab860fcc230687",
+          "head": "research/cr-c21n-offgrid4-sandbox-20261021",
+          "head_sha": "e7729092abc6edbe74f31d0ed82aa84d5506b8d5",
+          "head_repo_id": 1379624838,
+          "head_repo_full_name": "cosmosapjw-quantum/bass_cr",
+          "merge_commit_sha": null,
+          "user": {
+            "login": "cosmosapjw-quantum",
+            "name": "cosmosapjw-quantum",
+            "email": null,
+            "avatar_url": "https://avatars.githubusercontent.com/u/58155957?v=4",
+            "id": 58155957
+          },
+          "requested_reviewers": null,
+          "requested_team_reviewers": null,
+          "diff": null,
+          "comments": null,
+          "created_at": "2026-10-21T13:46:45Z",
+          "updated_at": "2026-10-21T13:46:45Z",
+          "closed_at": null,
+          "merged_at": null,
+          "commits": 1,
+          "changed_files": 93,
+          "additions": 13408,
+          "deletions": 0,
+          "display_url": "https://github.com/cosmosapjw-quantum/bass_cr/pull/95",
+          "display_title": "C21N: execute opposing-stress offgrid4 and preserve component trajectories"
+        },
+        "isError": false
+      },
+      "exact_ref": {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "6d29a4",
+          "wall_time_seconds": 0.546462639,
+          "exit_code": 0,
+          "original_token_count": 24,
+          "output": "e7729092abc6edbe74f31d0ed82aa84d5506b8d5\trefs/heads/research/cr-c21n-offgrid4-sandbox-20261021\n"
+        }
+      }
+    },
+    "resolved_integration_error": {
+      "action": "update_ref on nonexistent new branch",
+      "result": "422 Reference does not exist; no branch mutation",
+      "resolution": "create_branch using acknowledged immutable commit, then exact ls-remote verification",
+      "evidence": "resume_20261021T1303Z/INITIAL_REF_CREATION_ERROR.json"
+    }
+  },
+  "external_NCP_return_content": {
+    "schema": "C21N_NCP_RETURN_ADDENDUM_PUBLICATION_V1",
+    "recorded_utc": "2026-10-21 14:02:00 UTC",
+    "repository": "cosmosapjw-quantum/bass_cr",
+    "branch": "research/cr-c21n-offgrid4-sandbox-20261021",
+    "pr": 95,
+    "parent": "e7729092abc6edbe74f31d0ed82aa84d5506b8d5",
+    "content_commit": "038aa0c8e5790f5c94e596035ea816fbca588a15",
+    "tree": "0e7d095b0550967ab4ec44fb04a85a8c081fcde2",
+    "new_files": 52,
+    "old_unit_changes": 0,
+    "remote_existing_blobs_reused": 43,
+    "new_blob_acks": 9,
+    "content_blob_acks": [
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/BACKUP_RECEIPT.json",
+        "sha": "d3fc3d0bac37afb092f75400b33901fd6307dd8e",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/DAG_OFFGRID4.json",
+        "sha": "26bc886cb8a75d0b7e4651b1e5d715d4843bbbb2",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/EXECUTION.log",
+        "sha": "39dc4ef2871033461389b1fd9d1e2eb6fc1967ee",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/INDEPENDENT_REVIEW_KO.md",
+        "sha": "0bc98f485450a2117f782e6d25e98cc86f0854cf",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/PLAN.json",
+        "sha": "e532b2855c3dcc7931a8b1b3168efaaf85b7acb5",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/PUBLICATION_RECEIPT.json",
+        "sha": "c829e3a33c0b3ba07d21c8fe7646ed66102c5848",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/RESULTS_KO.md",
+        "sha": "06e8f60c97a0c550355e64c25a59ff2c3f4e4002",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/RETURN_TO_CHATGPT.json",
+        "sha": "9ce5374a144479440d4d343dfa27a0263a38b8b3",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/SHA256SUMS",
+        "sha": "b1faf99e81cec124df8407bfd9cbba7fbf1145a5",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/analysis/INPUT_BINDINGS.json",
+        "sha": "80f523f390501aa60e12ca239d42a93065517f07",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/analysis/OUTPUT_MANIFEST.json",
+        "sha": "493f28be80a69b17a31dd496ff44f11601a51e98",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/analysis/PHYSICS_CHECKS.json",
+        "sha": "2aa013fb1049e2f706b28b4a8f8eec56a47b56ac",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/analysis/SUMMARY.json",
+        "sha": "7d06858ece2fe3168d693fb231293f9f69cae875",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/analysis/offgrid4_endpoints.csv",
+        "sha": "250a6a719fee5c9c80cfdb7d99a7ca64077546b7",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/postprocess_offgrid4.py",
+        "sha": "d6872420581ee2da67b7d5777699f6cc0f3f5a40",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/raw/EVENTS_20261021T131024Z_1428294_296968044871797.jsonl",
+        "sha": "d3c8b123305190ea4c75004bebcddf2bfb04cfb0",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/raw/MANIFEST.json",
+        "sha": "6649bc89882068bc221468b3f8999b7b156d74cc",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/raw/RESOURCES_20261021T131024Z_1428294_296968044871797.json",
+        "sha": "6a4d59c5a338dc69ffe01c7e4e1bd40280919aed",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/raw/RETURN_20261021T131024Z_1428294_296968044871797.json",
+        "sha": "76206d98f60deff522dec5d481a4678dd65ab805",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/raw/STORAGE_20261021T131024Z_1428294_296968044871797.json",
+        "sha": "cb60ab543a138da7e3d22afe4ddde6c51906a5e2",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/raw/SUMMARY_20261021T131024Z_1428294_296968044871797.json",
+        "sha": "d52f0943c09a56d8b7cede60992be5477d9d0a59",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/raw/cases/opp_mn075_rp075/COMPLETE.json",
+        "sha": "65f2a5c5dc4ee81efdeadb8d7b282ff29e60aaa4",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/raw/cases/opp_mn075_rp075/RESERVATION.json",
+        "sha": "46a471f194f6b051a54c30f6179f40899520b5a7",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/raw/cases/opp_mn075_rp075/RESULT.json",
+        "sha": "72dfaf53738a24138f3108f7e95545229237748c",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/raw/cases/opp_mn075_rp075/STARTED.json",
+        "sha": "212ff02bd3a8c41c15fdd7c358a5e827ea2c38e8",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/raw/cases/opp_mn075_rp075/history.npz",
+        "sha": "d44cc9aa2460a0d542c376f06cccf09dffa1d6b7",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/raw/cases/opp_mn175_rp175/COMPLETE.json",
+        "sha": "5c7a7000f383a7b226cf9d56287b0af92433bb81",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/raw/cases/opp_mn175_rp175/RESERVATION.json",
+        "sha": "3f05f1b92efe6330c4a768858151faa16c3ae61c",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/raw/cases/opp_mn175_rp175/RESULT.json",
+        "sha": "55956e7f9d21bf43ebc2f06200efc65fd269a35d",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/raw/cases/opp_mn175_rp175/STARTED.json",
+        "sha": "6dd7d163eac8b4f64e8bfaf2fc9fbaf2d2329fac",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/raw/cases/opp_mn175_rp175/history.npz",
+        "sha": "40f9bb1a1bc3bcdaa08a657f1f7f9e9dacc5ea15",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/raw/cases/opp_mp075_rn075/COMPLETE.json",
+        "sha": "7efb9ca761ce8c2bf0e7696dde77fe51aaaaca99",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/raw/cases/opp_mp075_rn075/RESERVATION.json",
+        "sha": "273de8c38cccfd3c342b2e2a4519c2c1319dd6f9",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/raw/cases/opp_mp075_rn075/RESULT.json",
+        "sha": "72e7fc86a2d65aa2acf423224b3e608935d23619",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/raw/cases/opp_mp075_rn075/STARTED.json",
+        "sha": "14a97c29316d1832172658a16c58b311113eb8d5",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/raw/cases/opp_mp075_rn075/history.npz",
+        "sha": "821ac61ece46a40b2407f088fdafc1a575a151cc",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/raw/cases/opp_mp175_rn175/COMPLETE.json",
+        "sha": "23acc1b9cf2451dbe719b67c5c1971342f8f9eda",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/raw/cases/opp_mp175_rn175/RESERVATION.json",
+        "sha": "4a6832c5108e2a26e5ea76563a3a158198bc7137",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/raw/cases/opp_mp175_rn175/RESULT.json",
+        "sha": "0a53a1772706b495d950db7f035687c309147d6a",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/raw/cases/opp_mp175_rn175/STARTED.json",
+        "sha": "28f623889ec4ec58498422b1470cfed617943f19",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/raw/cases/opp_mp175_rn175/history.npz",
+        "sha": "2187d3aabec8e0e200e7d7dbc97421dae1d1a7b1",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/raw/coordinator.lock",
+        "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/pr94_original/raw/endpoints_20261021T131024Z_1428294_296968044871797.csv",
+        "sha": "513d75c4eded1a571fc09c007f43ef16cd87d965",
+        "basis": "PINNED_PR94_EXISTING_GIT_BLOB"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/ADDENDUM_MANIFEST.json",
+        "sha": "9375be32320dbbe5a981dc459eee5e96e9ba3612",
+        "basis": "CREATE_BLOB_ACK_MATCH"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/ARCHIVAL_COPY_MANIFEST.json",
+        "sha": "c4efcb3c06b3415e2e96f9073378a200547fcdee",
+        "basis": "CREATE_BLOB_ACK_MATCH"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/COMPARISON_ATTEMPT001_FAILURE.json",
+        "sha": "e7b5b3436a5028c9fb620ed8f46b9e97cceb5fa0",
+        "basis": "CREATE_BLOB_ACK_MATCH"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/NCP_RETURN_ACCEPTANCE.json",
+        "sha": "8d3a5fda71e3217489f6474a7c0b63893200a7ed",
+        "basis": "CREATE_BLOB_ACK_MATCH"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/PINNED_EXPORT.json",
+        "sha": "bb98af47c286b06c455e9edf1c98896789ab84b9",
+        "basis": "CREATE_BLOB_ACK_MATCH"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/README_KO.md",
+        "sha": "0364577e4c1bff45211b4d7318cee3ee99e64429",
+        "basis": "CREATE_BLOB_ACK_MATCH"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/ROOT_INTAKE_SCOPE_REVIEW.json",
+        "sha": "06ef9ce9d4ca869787d15729766eb4b9925e9f4f",
+        "basis": "CREATE_BLOB_ACK_MATCH"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/compare_return.py",
+        "sha": "e34b7e3ae1d7e0790d391c623caaacb93d6b4c07",
+        "basis": "CREATE_BLOB_ACK_MATCH"
+      },
+      {
+        "path": "research/cr_c21n_offgrid4_20261021/external_ncp4/compare_return_attempt001.py",
+        "sha": "44e7aa388d1c6d10c3c94e1e8b7524992d49286b",
+        "basis": "CREATE_BLOB_ACK_MATCH"
+      }
+    ],
+    "acks": {
+      "tree": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Action completed."
+          }
+        ],
+        "structuredContent": {
+          "sha": "0e7d095b0550967ab4ec44fb04a85a8c081fcde2"
+        },
+        "isError": false
+      },
+      "commit": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Action completed."
+          }
+        ],
+        "structuredContent": {
+          "sha": "038aa0c8e5790f5c94e596035ea816fbca588a15"
+        },
+        "isError": false
+      },
+      "ref": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Action completed."
+          }
+        ],
+        "structuredContent": {
+          "success": true
+        },
+        "isError": false
+      },
+      "exact_ref": {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "99a8d9",
+          "wall_time_seconds": 0.043208921,
+          "exit_code": 0,
+          "original_token_count": 24,
+          "output": "038aa0c8e5790f5c94e596035ea816fbca588a15\trefs/heads/research/cr-c21n-offgrid4-sandbox-20261021\n"
+        }
+      }
+    },
+    "readback_level": "R1_EXACT_REF_AND_IMMUTABLE_GIT_OBJECT_IDENTITIES",
+    "scope": "Accept external PR94 return with actual source/grid/raw byte bindings; unique targets129 remain; no new ODE",
+    "science_status": "PASS_SCOPED",
+    "acceptance_sha256": "693e439f9d5cc90faab22c39d8dace299b537c49fd45f87306e5538c38e03af5",
+    "global_error_bound": null
+  },
+  "document_phase": {
+    "scope": "This document commit; its actual SHA and exact-ref ACK are bound by the later final authority receipt.",
+    "self_commit_sha": null,
+    "final_authority_filename_pattern": "C21N_OFFGRID4_FINAL_AUTHORITY_RECEIPT_*.json",
+    "no_recursive_self_hash": true
+  },
+  "physics_source": "3b85dedce84d37b3e165da00685a8a984950aafe",
+  "actual_execution_content": "5ecb8a6c4961302b7066b06278e72ecd2d77f8c9",
+  "global_error_bound": null
+}
