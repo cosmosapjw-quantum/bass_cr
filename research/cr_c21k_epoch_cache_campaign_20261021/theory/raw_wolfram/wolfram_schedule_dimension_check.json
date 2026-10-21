@@ -1,0 +1,20 @@
+{
+  "schema": "C21K_THEORY_TOOL_RAW_V1",
+  "tool": "mcp__codex_apps__wolfram_wolframlanguageevaluator",
+  "args": {
+    "code": "Clear[listLoads,aa,ll,pp,q,x];listLoads[ds_List,pp_Integer]:=Fold[Function[{st,t},ReplacePart[st,First[Ordering[st,1]]->Min[st]+t]],ConstantArray[0,pp],ds]; rate=UnitSimplify[\\[FreeformPrompt][\"1 centimeter per second\"] \\[FreeformPrompt][\"1 per cubic centimeter\"] \\[FreeformPrompt][\"1 square centimeter\"]]; <|\"short_first_loads\"->listLoads[{1,1,1,3},2],\"long_first_loads\"->listLoads[{3,1,1,1},2],\"both_work\"->{Total[{1,1,1,3}],Total[{3,1,1,1}]},\"both_critical_path\"->{Max[{1,1,1,3}],Max[{3,1,1,1}]},\"list_bound_case_work_dominates\"->FullSimplify[aa+(1-1/pp)ll<=(2-1/pp)aa,Assumptions->aa>=ll&&ll>0&&pp>=1&&Element[{aa,ll,pp},Reals]],\"list_bound_case_chain_dominates\"->FullSimplify[aa+(1-1/pp)ll<=(2-1/pp)ll,Assumptions->ll>=aa&&aa>0&&pp>=1&&Element[{aa,ll,pp},Reals]],\"permutation_first_row_difference\"->FullSimplify[q Exp[-x]!=2q Exp[-x],Assumptions->q>0&&Element[x,Reals]],\"opacity_units\"->rate,\"opacity_over_H_units\"->UnitSimplify[rate/\\[FreeformPrompt][\"1 per second\"]],\"hypothetical_cpu_set_0_through_63_minus55\"->Length[DeleteCases[Range[0,63],55]],\"opacity_exp_calls_M9_old_new\"->{1+3*9,2},\"opacity_exp_calls_M81_old_new\"->{1+3*81,2}|>",
+    "timeConstraint": 30
+  },
+  "started_utc": "2026-10-20 21:25:25 UTC",
+  "completed_utc": "2026-10-20 21:25:39 UTC",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "During evaluation of In[1]:= [INFO] Interpreted \"1 centimeter per second\" as: Quantity[1, \"Centimeters\"/\"Seconds\"]\nDuring evaluation of In[1]:= [INFO] Interpreted \"1 per cubic centimeter\" as: Quantity[1, 1/\"Centimeters\"^3]\nDuring evaluation of In[1]:= [INFO] Interpreted \"1 square centimeter\" as: Quantity[1, \"Centimeters\"^2]\nDuring evaluation of In[1]:= [INFO] Interpreted \"1 per second\" as: Quantity[1, 1/\"Seconds\"]\n\nOut[1]= <|\"short_first_loads\" -> {2, 4}, \"long_first_loads\" -> {3, 3}, \"both_work\" -> {6, 6}, \"both_critical_path\" -> {3, 3}, \"list_bound_case_work_dominates\" -> True, \"list_bound_case_chain_dominates\" -> True, \"permutation_first_row_difference\" -> True, \"opacity_units\" -> Quantity[1, \"Hertz\"], \"opacity_over_H_units\" -> 1, \"hypothetical_cpu_set_0_through_63_minus55\" -> 63, \"opacity_exp_calls_M9_old_new\" -> {28, 2}, \"opacity_exp_calls_M81_old_new\" -> {244, 2}|>"
+      }
+    ],
+    "structuredContent": null,
+    "isError": false
+  }
+}

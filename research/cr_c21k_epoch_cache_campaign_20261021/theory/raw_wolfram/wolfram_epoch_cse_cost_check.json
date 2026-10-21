@@ -1,0 +1,20 @@
+{
+  "schema": "C21K_THEORY_TOOL_RAW_V1",
+  "tool": "mcp__codex_apps__wolfram_wolframlanguageevaluator",
+  "args": {
+    "code": "Clear[x,q,delta,om,orr,ol,h0,s,c,n,ee,v,mul,h,kk,z,sigma,cq,ch,cm,cs,nb,nh,cnew,clook,ccopy,cstore,pm,w,l];\nh[x_]:=h0 Sqrt[om Exp[-3 x]+orr Exp[-4 x]+ol];\nkk[x_]:=s c n Exp[-3 x] sigma[q Exp[-x]];\norigTree=mul[mul[mul[mul[s,c],n],ee],v];\nfactoredTree=With[{aa=mul[mul[s,c],n]},With[{bb=mul[aa,ee]},mul[bb,v]]];\nbaseCost=(nb+nh)cq;\nmemoCost=nb cnew+(nb+nh)clook+nh ccopy+nb cstore;\n<|\"energy_ratio\"->FullSimplify[q Exp[-(x+delta)]/(q Exp[-x]),Assumptions->q>0&&Element[{x,delta},Reals]],\"H_derivative\"->FullSimplify[D[h[x],x]],\"opacity_derivative\"->D[kk[x],x],\"CSE_same_order_operation_tree\"->SameQ[origTree,factoredTree],\"CSE_tree\"->origTree,\"gain_identity\"->Expand[baseCost-memoCost],\"payload_LRU16_opacity_M9_bytes\"->16*8*(9+3*9),\"payload_LRU16_opacity_M128_bytes\"->16*8*(128+3*128),\"payload_LRU16_optional_H_bytes\"->16*8,\"coefficient_counts_vectorized\"->{859,329,859-329},\"coefficient_counts_exact\"->{790,329,790-329},\"residual_overlaps\"->((859-790)==(530-461)),\"epoch_ratio_factor\"->FullSimplify[Exp[-(x+delta)]/Exp[-x]],\"q_permutation_changes_rows\"->({q,2 q} Exp[-x]!={2 q,q} Exp[-x])|>",
+    "timeConstraint": 30
+  },
+  "started_utc": "2026-10-20 21:24:51 UTC",
+  "completed_utc": "2026-10-20 21:24:59 UTC",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Out[1]= <|\"energy_ratio\" -> E^(-delta), \"H_derivative\" -> -1/2*(h0*(3*E^x*om + 4*orr))/(E^(4*x)*Sqrt[ol + (E^x*om + orr)/E^(4*x)]), \"opacity_derivative\" -> (-3*c*n*s*sigma[q/E^x])/E^(3*x) - (c*n*q*s*Derivative[1][sigma][q/E^x])/E^(4*x), \"CSE_same_order_operation_tree\" -> True, \"CSE_tree\" -> mul[mul[mul[mul[s, c], n], ee], v], \"gain_identity\" -> -(clook*nb) - cnew*nb + cq*nb - cstore*nb - ccopy*nh - clook*nh + cq*nh, \"payload_LRU16_opacity_M9_bytes\" -> 4608, \"payload_LRU16_opacity_M128_bytes\" -> 65536, \"payload_LRU16_optional_H_bytes\" -> 128, \"coefficient_counts_vectorized\" -> {859, 329, 530}, \"coefficient_counts_exact\" -> {790, 329, 461}, \"residual_overlaps\" -> True, \"epoch_ratio_factor\" -> E^(-delta), \"q_permutation_changes_rows\" -> {q/E^x, (2*q)/E^x} != {(2*q)/E^x, q/E^x}|>"
+      }
+    ],
+    "structuredContent": null,
+    "isError": false
+  }
+}

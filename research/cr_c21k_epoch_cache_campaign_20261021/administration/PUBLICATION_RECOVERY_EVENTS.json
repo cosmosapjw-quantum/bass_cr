@@ -1,0 +1,27 @@
+{
+  "schema": "C21K_PUBLICATION_RECOVERY_EVENTS_V1",
+  "recorded_utc": "2026-10-21T04:59:00.432977+00:00",
+  "status": "CONTENT_PUBLISHED_AFTER_SEPARATE_ACKNOWLEDGED_ROOT_REQUESTS",
+  "facts": [
+    "The original128-file tree request returned no ACK before interruption; no commit/ref/PR call followed that unknown result.",
+    "Automated workspace maintenance removed prior scratch and stores. Exact core recovery and missing auxiliary bytes are recorded in the content snapshot.",
+    "A recovered large-blob request, bounded50KB tree request and single-DAG SHA-only tree request returned no ACK through the delegated invocation path. Those events remain UNKNOWN.",
+    "The root invocation of the same single-DAG request returned tree85ed76f7822897f8d5b88553164b47d0a26088ad, matching the locally calculated object.",
+    "Root then received and saved all20 bounded tree-batch ACKs. Final tree32c7a27e1b91cdf769c9c4317285b62ec147b41f matched frozen116 files and unchanged inherited siblings.",
+    "Content commit, branch and PR89 were subsequently acknowledged and their exact ref/parent/tree read back."
+  ],
+  "causal_explanation": "NOT_ESTABLISHED; request-size and invocation-context observations are not a proven service diagnosis.",
+  "unknown_event_records": [
+    "BLOB_STAGE_01_UNKNOWN.json",
+    "TREE116_STAGE_02_UNKNOWN.json",
+    "TREE116_SMALL_STAGE_01_UNKNOWN.json"
+  ],
+  "actual_published_identity": {
+    "content_commit": "bab323983dad5206e162dbfdaefc167f2fabea45",
+    "parent": "fee0d6a3f1b6460a24a1ae60f50ee84971227e5b",
+    "branch": "research/cr-c21k-epoch-cache-campaign-20261021",
+    "pr": 89
+  },
+  "unacknowledged_outcomes_promoted_to_success": false,
+  "scientific_suites_rerun_for_recovery": 0
+}

@@ -1,0 +1,78 @@
+{
+  "schema": "C21K_RESEARCH_EXECUTION_DAG_V1",
+  "recorded_utc": "2026-10-21T04:29:17.770084+00:00",
+  "research_track": {
+    "R1_to_R9": "SCOPED_COMPLETE_WITH_REUSED_EVIDENCE",
+    "R10": "DELIVERABLE_PREPARED_PUBLICATION_AND_BACKUP_SEPARATE",
+    "C1_to_C8": "IMPLEMENTED_AND_FOCUSED_VERIFIED",
+    "C9": "HISTORICAL_PASS_SCOPED_FOR_HASH_MATCHED_FINAL_SOURCE",
+    "C10": "PUBLICATION_AND_BACKUP_IN_PROGRESS"
+  },
+  "science_grid": {
+    "logical_slots": 52,
+    "historical_complete": 3,
+    "nominal_pending": 49,
+    "top_level_pending_processes": 38,
+    "initial_ready_matching_context": 20,
+    "historical_pending": 21,
+    "current_user_scope_extension": 28,
+    "lanes": {
+      "H": {
+        "total": 8,
+        "historical_complete": 1,
+        "pending": 7
+      },
+      "G": {
+        "total": 12,
+        "historical_complete": 0,
+        "pending": 12,
+        "container_processes": 1,
+        "internal_workers": 1
+      },
+      "I": {
+        "total": 16,
+        "historical_complete": 2,
+        "pending": 14
+      },
+      "K": {
+        "total": 16,
+        "historical_complete": 0,
+        "pending": 16
+      }
+    }
+  },
+  "exclusive_controls": {
+    "matching_identity": {
+      "controls": 0,
+      "maximum_attempts": 49
+    },
+    "same_build_changed_H_FD_context": {
+      "controls": 1,
+      "maximum_attempts": 50
+    },
+    "valid_new_build_same_original_owner_source_pins": {
+      "controls": 3,
+      "maximum_attempts": 52
+    }
+  },
+  "hard_dependencies": [
+    "same lane/mode matching base -> FD",
+    "original independent G reference gate -> its four histories"
+  ],
+  "soft_comparisons": [
+    "H -> I",
+    "I -> K"
+  ],
+  "resource_admission": [
+    "actual owner allocation",
+    "CPU55 exclusion and coordinator lease",
+    "actual cgroup v2 quota/cpuset/memory",
+    "process observer capability",
+    "one-thread independent ready scientific jobs"
+  ],
+  "execution": "NO_NEW_NATIVE_OR_IVP_IN_THIS_SESSION",
+  "publication": "SEPARATE_EXTERNAL_PUBLICATION_RECEIPT",
+  "backup": "administration/RECOVERY_CHECKPOINT_BACKUP_RECEIPT.json; final closeout receipt to follow",
+  "holds": "ALL_PRIOR_SCIENTIFIC_HOLD_PRESERVED",
+  "global_error_bound": null
+}
