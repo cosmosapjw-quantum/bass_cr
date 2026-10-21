@@ -1,0 +1,640 @@
+{
+  "schema": "bass_cr.research_dag.closeout.v1",
+  "artifact_kind": "DOCUMENT_ONLY_CLOSEOUT",
+  "date_utc": "2026-10-21",
+  "unit": "C21M_INDEPENDENT_STRESS_FIRST_PILOT",
+  "repository": "https://github.com/cosmosapjw-quantum/bass_cr",
+  "pr": "https://github.com/cosmosapjw-quantum/bass_cr/pull/91",
+  "identities": {
+    "content_commit": "659c94312eb9c12ebb987de934459c12a63d67b0",
+    "science_content_file_count": 263,
+    "fixed_rei_source_commit": "3b85dedce84d37b3e165da00685a8a984950aafe",
+    "c21l_original_content_commit": "60a3f1cb0d8f0875820d18c0d10c448d480334c4",
+    "c21l_component_content_commit": "17244259d25f793a25e0874443a28806e7c31d17",
+    "new_26_run_identity": "ff462f48e264b2032ec50018e9969a6eb1808c7a6fc2a60139b98efacb01c05a",
+    "grid_pilot26_sha256": "273bc0a811c70e0b4fc451d90e1059588e2aaaa5b7c5978e2dc31370febbafcb",
+    "reference_reuse_sha256": "15bdc5b941e153a2ea87af8113e71d7efacc1327e2cabb524ab6c2efcf83d4f9",
+    "reused_center_raw_sha256": "cb521fa1be20fe917fb370a42adabc5fa75eacbd61958c612ab255834ececc5e",
+    "document_commit": null,
+    "document_commit_binding": "외부 최종 게시 영수증에서 확정한다. 본문에 자기 commit SHA를 생성하지 않는다.",
+    "parent_binding_status": "PARENTS_OF_THIS_DOCUMENT_COMMIT_SEE_EXTERNAL_PUBLICATION_RECEIPT",
+    "document_parents": [
+      {
+        "order": 1,
+        "sha": "659c94312eb9c12ebb987de934459c12a63d67b0",
+        "role": "C21M content"
+      },
+      {
+        "order": 2,
+        "sha": "e954467132eef864a0fb86ba5de44f90f76b08e0",
+        "role": "C21L document closeout"
+      }
+    ],
+    "c21l_document_commit": "e954467132eef864a0fb86ba5de44f90f76b08e0"
+  },
+  "states": {
+    "EXECUTION": "FIRST_PILOT27_COMPLETE_SCOPED_26_NEW_1_REUSED",
+    "PUBLICATION": "CONTENT_AND_THIS_DOCUMENT_COMMIT_PUBLISHED_DRAFT",
+    "BACKUP": "LIBRARY_DOWNLOADED_BYTES_VERIFIED_DROPBOX_ACK_DRIVE_UNKNOWN",
+    "DAG": "FIRST_SCIENCE_UNIT_COMPLETE_SCOPED_OPTIONAL_NCP98_NOT_RUN_DRIVE_BACKUP_OPEN"
+  },
+  "science_scope": {
+    "geometry": "non-tilted collisionless LRS Bianchi I",
+    "redshift_start": 20,
+    "redshift_end": 4,
+    "new_ode_case_count": 26,
+    "reused_case_count": 1,
+    "total_pilot_cases": 27,
+    "original_state_components": 40,
+    "saved_times_per_case": 101,
+    "precision": "FP64",
+    "solver": "DOP853",
+    "rtol": 3e-11,
+    "atol": 3e-13,
+    "radiation_multipole_lmax": 8,
+    "massive_grid": {
+      "radial_cells": 24,
+      "angular_cells": 12,
+      "gauss_order_per_cell": 3
+    },
+    "mass_over_Tref": 30,
+    "initial_massive_fraction": 0.1,
+    "signed_full_axes": {
+      "S0": [
+        -0.012,
+        0,
+        0.012
+      ],
+      "Pm0": [
+        -0.0002,
+        0,
+        0.0002
+      ],
+      "Pr0": [
+        -0.0002,
+        0,
+        0.0002
+      ]
+    },
+    "normalization": "Full Frobenius: |sigma|=sqrt(6)|s| and |pi_X|=sqrt(6)|pi_s,X|, pi_s,X=Delta p_X/3. Full=sqrt(2)*half.",
+    "si_coordinate": "P_X=sqrt(6)*(8*pi*G/c^2)*pi_s,X/(H_t^2), with H_t in s^-1; equivalently kappa=8*pi*G/c^4 and H_geom=H_t/c.",
+    "radiation_species": [
+      "photon",
+      "source-present massless neutrino"
+    ],
+    "radiation_initial_condition": "common k with species states and stress outputs separately retained",
+    "builder_contract": "Every A trial rebuilds original CanonicalMomentumFV distribution weights, cell populations and normalization; original RHS/integrator/tolerances remain fixed.",
+    "unavailable_species_not_inserted_as_zero": true,
+    "center_reference": {
+      "case_id": "s04_p04",
+      "original_run_identity": "0090e1549b21b07e46001de2bf9cb2eab9bf0cba87ffe3d4d824ba117fecb44a",
+      "new_ode_integrations": 0,
+      "actual_signed_S0": 0,
+      "actual_signed_Pm0": -2.111149637247e-19,
+      "actual_signed_Pr0": 2.1111496372470007e-19,
+      "actual_total_component_recomputed": 7.493528770158082e-35,
+      "raw_offsets_preserved": true,
+      "new_builder_center_bitwise_identity_claimed": false
+    },
+    "exact_result_replaced_by_surrogate": false
+  },
+  "endpoint_ensemble_maximum_full_norms_z4": {
+    "Sigma": 0.0014449836382490454,
+    "Pi_m": 1.2574783729509532e-05,
+    "Pi_r": 6.344480064794384e-05,
+    "Pi_tot": 7.577499571350794e-05,
+    "scope": "이 27점 ensemble만의 결과이며 보편적 상계가 아니다. C21L과 초기 범위가 달라 성능 또는 성장률 개선으로 비교하지 않는다."
+  },
+  "validation": {
+    "status": "PASS_SCOPED_PUBLICATION_READY",
+    "builder_focused_groups": 6,
+    "builder_test_new_ode_integrations": 0,
+    "maximum_initial_axis_absolute_error": 1.734723475976807e-18,
+    "saved_state_tensor_si_full_half_cancellation_checks": 2626,
+    "maximum_hamiltonian_algebraic_relative_residual": 2.220446049250313e-16,
+    "maximum_massive_comoving_number_relative_residual": 4.440892098500626e-16,
+    "original_unoptimized_source_comparison": {
+      "states": 78,
+      "selection": "start/mid/end of each of 26 new cases",
+      "field_scalars_compared": 4602,
+      "rhs_scalars_compared": 3120,
+      "comparison": "FP64_BYTE_IDENTICAL",
+      "full_trajectory_original_source_ode_reexecution": false
+    },
+    "radiation_angular_positivity": {
+      "angular_nodes": 64,
+      "E_N_values": 672256,
+      "result": "POSITIVE_AT_TESTED_SAVED_STATES_AND_NODES",
+      "continuous_angle_time_proof": false
+    },
+    "direct_png_visual_reviews": 2,
+    "separate_pdf_raster_review": "NOT_RUN",
+    "generic_campaign_analyzer": {
+      "source_sha256": "4e18d20fced075b5baf64148873e07b5583bfa13a3553b077eb2005caab9c3c5",
+      "scope": "existing completed 26+1 reference only",
+      "matching_npz_arrays": 60,
+      "common_csv_values": "IDENTICAL",
+      "duplicate_physical_coordinate_fixture": "REJECTED_BEFORE_OUTPUT",
+      "future125_science_execution_verified": false,
+      "optional_generic_plots_render_review": "NOT_RUN",
+      "new_ode_integrations": 0
+    },
+    "shared_operations": "Focused fake-worker, source binding, lease, bounded queue, resume and resource admission tests; not actual NCP performance verification.",
+    "c21l_comparison_terminology": "243-state field check is exact numeric equality under rtol=atol=0, not an explicit FP64-byte or signed-zero comparison. Historical three-trajectory bytes and 11-file path bytes are separate evidence.",
+    "no_full_ode_global_bound_from_constraint_residual": true,
+    "independent_review_evidence": [
+      "INDEPENDENT_BUILDER_REVIEW.json",
+      "INDEPENDENT_OPERATIONS_REVIEW.json",
+      "INDEPENDENT_PILOT_REVIEW.json",
+      "INDEPENDENT_AXIS_RESPONSE_REVIEW.json",
+      "INDEPENDENT_CLOSEOUT_REVIEW.json"
+    ],
+    "blockers": []
+  },
+  "external_intake": {
+    "advertised_live_branch_refs_scanned": 1224,
+    "repositories_scanned": 7,
+    "scope": "광고된 refs, 관련 PR/source/manifest/review를 감사했다. 모든 branch의 모든 파일이나 비공개 대화를 전수 읽었다는 뜻은 아니다.",
+    "unexposed_conversations_private_returns": "UNAVAILABLE",
+    "globally_no_new_results_claimed": false,
+    "accepted_scoped": [
+      {
+        "origin": "REI PR198",
+        "result_source_commit": "b140170ce0c58159368b6b81be49ac35ca764851",
+        "fixed_physics_source": "3b85dedce84d37b3e165da00685a8a984950aafe",
+        "counts": {
+          "existing_radiation": 625,
+          "new_matter": 600,
+          "mixed": 6
+        },
+        "source_lane": "reduced 8-state, 65 samples, half coordinates converted by sqrt(2)",
+        "local_full_external_raw_reexecution": false,
+        "all_606_external_npz_download_verified": false,
+        "use": "Provenance, source correspondence, known grid dedup and comparison evidence; not relabeled as local 40-state run."
+      },
+      {
+        "origin": "WU088_HH PR127",
+        "cases": 63,
+        "source_lane": "fixed A=0 controls",
+        "use": "Known completed control grid and normalization intake; not independent initial matter sweep."
+      },
+      {
+        "origin": "REI PR213 / BASS PR176",
+        "result_commit": "c8e9f67aa031ffb33a9b0347bdea61dbb01fb746",
+        "cases": 729,
+        "deduplicated_as_one_run": true,
+        "source_lane": "C15 warm H/He/UV/Thomson a=0.1999 to 0.2",
+        "use": "Separate physical lineage; not merged into fixed C21L collisionless source."
+      },
+      {
+        "origin": "REC PR116",
+        "new_science_ode_runs": 0,
+        "use": "Additive axis response reconstruction method adapted retrospectively to local completed 27-case data."
+      },
+      {
+        "origin": "BASS_HE PR82",
+        "use": "Contract/checkpoint intake; no new science promoted."
+      }
+    ]
+  },
+  "axis_response_method_reuse": {
+    "status": "RETROSPECTIVE_DIAGNOSTIC_COMPLETE_SCOPED",
+    "accepted_result_directory": "axis_response_diagnostic_results_v2",
+    "accepted_source_sha256": "4da923759cabf880e3668160d32a7cca48bae29dac3cf119355892df1f3c6589",
+    "preserved_history": [
+      "executed_axis_response_diagnostic_v1.py",
+      "axis_response_diagnostic_results/"
+    ],
+    "formula": "Fhat(S,m,r)=F(S,m,0)+F(S,0,r)-F(S,0,0)",
+    "support_cases": 15,
+    "mixed_held_out_cases": 12,
+    "saved_times": 101,
+    "signed_channels": [
+      "S",
+      "Pm",
+      "Pr",
+      "Ptot"
+    ],
+    "comparisons": 4848,
+    "new_ode_integrations": 0,
+    "fitted_parameters": 0,
+    "all_saved_max_absolute_error": {
+      "S": 1.2601685821147374e-09,
+      "Pm": 1.1647880056851224e-09,
+      "Pr": 1.4831875142125306e-09,
+      "Ptot": 2.5829708926876404e-09
+    },
+    "zero_and_cancellation_policy": "Retain absolute residuals. Do not floor or clip denominators; pointwise relative values undefined at exact zero and can be large near cancellation.",
+    "finite_precision_label": "80-digit stored-float interaction",
+    "independent_fraction_review": {
+      "byte_equal_values": 4836,
+      "exact_zero_values_with_tiny_decimal_artifacts": 12,
+      "maximum_tiny_artifact": 4.4480133056640625e-99
+    },
+    "npz_and_two_csv_v1_v2_comparison": "BYTE_IDENTICAL",
+    "production_surrogate_approved": false,
+    "benchmark_speedup_claim": false,
+    "global_error_bound": null
+  },
+  "optional_ncp_refinement": {
+    "status": "OPTIONAL_NEXT_UNIT_READY",
+    "execution": "NOT_RUN",
+    "required_for_first_pilot_completion": false,
+    "run_id": "c21m_ncp_refinement98_z20_z4_20261021",
+    "grid_path": "grid_ncp_refinement98.json",
+    "grid_sha256": "768643862b317ba3d159af6503ebb80141028dc8c671fdb00a9d0a68b32fde04",
+    "nested_grid_count": 125,
+    "excluded_current_completed_targets": 27,
+    "extra_overlap_with_audited_external_known_targets": 0,
+    "new_case_count": 98,
+    "coordinate_dedup_absolute_tolerance": 2e-13,
+    "half_to_full_conversion_applied_to_external_grids": true,
+    "initial_condition_only_checks": {
+      "cases": 98,
+      "ode_integrations": 0,
+      "maximum_axis_absolute_error": 1.734723475976807e-18,
+      "maximum_hamiltonian_relative_residual": 2.220446049250313e-16,
+      "maximum_normalization_relative_residual": 2.220446049250313e-16,
+      "minimum_matter_weight": 0.7074282019073919,
+      "minimum_radiation_weight": 0.9330122951577747,
+      "minimum_matter_cell_population": 1.157793259790258e-30
+    },
+    "ready_entrypoints": [
+      "ncp_run.sh plan",
+      "ncp_run.sh run",
+      "ncp_run.sh resume",
+      "analyze_campaign.py --run existing26 --run future98 --reference REFERENCE_REUSE.json --output create-only-directory"
+    ],
+    "new_analyzer_implementation_required_for_125": false,
+    "handoff_commands_binding": "CODEX_NCP_HANDOFF_KO.md with exact content SHA and external publication receipt"
+  },
+  "actual_ncp": {
+    "execution": "NOT_RUN",
+    "live_resource_probe": "NOT_RUN",
+    "observed_resources": "UNOBSERVED",
+    "nominal_logical_cpus": 64,
+    "nominal_memory_gb": 128,
+    "current_sandbox_required_private_key": "ABSENT",
+    "ssh_connection_attempt": "NOT_RUN",
+    "worker_upper_bound_for_handoff": 62,
+    "worker_count_guaranteed": false,
+    "protected_cpu": 55,
+    "shared_lease_root": "/tmp/bass_cpu_leases",
+    "required_live_observations": [
+      "host identity",
+      "CPU affinity",
+      "cgroup v1/v2 ancestor CPU quota",
+      "cgroup memory limit",
+      "available RAM",
+      "CPU load",
+      "other owners existing leases"
+    ],
+    "scheduling_contract": "Coordinator resource cost included; science numerical libraries one thread; bounded dispatch on available owned leases; reduce new admission under load; preserve completed create-only results; never kill or overwrite other owners work."
+  },
+  "optimization_scope": {
+    "reused": [
+      "worker-local canonical template and immutable moment data",
+      "existing exact moment common-subexpression reuse",
+      "independent-case multiprocessing",
+      "bounded task dispatch",
+      "source-sealed create-only case output",
+      "resume only never-started cases",
+      "single-thread numerical libraries",
+      "retrospective additive axis method diagnostic"
+    ],
+    "large_benchmark_campaign_performed": false,
+    "measured_speedup_claimed": false,
+    "measured_64_core_scaling_claimed": false,
+    "measured_memory_improvement_claimed": false,
+    "physics_rhs_or_precision_or_tolerance_changed": false
+  },
+  "backup": {
+    "schema": "BASS_CR_C21LM_NORMALIZED_BACKUP_RECEIPT_V1",
+    "created_utc": "2026-10-21T08:36:59.240058+00:00",
+    "status": "LIBRARY_BYTES_VERIFIED_DROPBOX_ACK_DRIVE_UNKNOWN",
+    "artifact": {
+      "file_name": "BASS_CR_C21LM_RESEARCH_DELIVERY_20261021T082802Z.zip",
+      "size_bytes": 17539759,
+      "local_sha256": "e0592be2859b7db606ec5a2ca008015c5ab02a3b2ff09fdd97fafe209cfe167a",
+      "C21L_component_content_commit": "17244259d25f793a25e0874443a28806e7c31d17",
+      "C21M_content_commit": "659c94312eb9c12ebb987de934459c12a63d67b0",
+      "git_tree": "3cafd22daf5b14946cbf0e41210065c04eccbb6f",
+      "repository_files": 634,
+      "unit_counts": {
+        "C21L": 371,
+        "C21M": 263
+      },
+      "archive_files": 642,
+      "local_manifest_blob_size_sha256_crc_verification": "PASS"
+    },
+    "providers": {
+      "library": {
+        "status": "ACK_SUCCEEDED",
+        "library_file_id": "libfile_9ec015516fd48191bf149640f43bea7a",
+        "file_id": "file_00000000f3788230a0c02e9e912e7b38",
+        "path": "/BASS_DERIVATION_DOSSIERS_20260912/bass_cr/BASS_CR_C21LM_RESEARCH_DELIVERY_20261021T082802Z.zip",
+        "provider_size_bytes": 17539759,
+        "provider_size_matches_local": true,
+        "provider_sha256": null,
+        "provider_sha256_status": "NOT_RETURNED",
+        "version_number": 0,
+        "local_identity_xattrs": "APPLIED_HELPER_EXIT_0",
+        "ack_file": "LIBRARY_UPLOAD_ACK.json",
+        "download_verification": {
+          "status": "DOWNLOADED_BYTES_VERIFIED",
+          "size_bytes": 17539759,
+          "computed_sha256": "e0592be2859b7db606ec5a2ca008015c5ab02a3b2ff09fdd97fafe209cfe167a",
+          "matches_local": true,
+          "receipt_file": "LIBRARY_DOWNLOAD_REVALIDATION.json"
+        }
+      },
+      "dropbox": {
+        "status": "ACK_COMPLETED",
+        "file_id": "id:BSpOijBcT10AAAAAAD_fqQ",
+        "path_display": "/BASS_DERIVATION_DOSSIERS_20260912/bass_cr/BASS_CR_C21LM_RESEARCH_DELIVERY_20261021T082802Z.zip",
+        "provider_size_bytes": 17539759,
+        "provider_size_matches_local": true,
+        "provider_sha256": null,
+        "provider_sha256_status": "NOT_RETURNED",
+        "ack_file": "DROPBOX_UPLOAD_COMPLETION_1.json",
+        "download_verification": {
+          "status": "NOT_PERFORMED"
+        }
+      },
+      "google_drive": {
+        "status": "UNKNOWN_NO_ACK",
+        "file_id": null,
+        "provider_size_bytes": null,
+        "provider_sha256": null,
+        "provider_sha256_status": "NOT_RETURNED",
+        "ack_file": null,
+        "interruption_receipt": "DRIVE_INTERRUPTION.json",
+        "exec_cell_id": null,
+        "operation_id_returned": false,
+        "tool_observation": "aborted by user after 320.0s; provider response not returned",
+        "download_verification": {
+          "status": "NOT_PERFORMED"
+        },
+        "exact_title_metadata_search_observation": {
+          "observed_utc": "2026-10-21T08:33:46.889Z",
+          "result_count": 0,
+          "scope": "specified parent folder and exact file name",
+          "does_not_establish": "global absence or upload failure"
+        }
+      }
+    },
+    "prior_stageB": {
+      "file_name": "BASS_CR_C21L_COMPONENT_DELIVERY_20261021T080501Z.zip",
+      "google_drive": "AMBIGUOUS_NO_ACK",
+      "dropbox": "NOT_CALLED",
+      "library": "NOT_CALLED",
+      "repeated_upload": false,
+      "coverage": "combined archive includes the same Git-bound C21L371 files plus C21M263",
+      "receipt": "provenance/STAGEB_PROVIDER_INTERRUPTION.json inside combined ZIP",
+      "original_local_verification": "provenance/STAGEB_LOCAL_ZIP_VERIFICATION.json inside combined ZIP",
+      "raw_receipt_relative_paths": "STAGEB_PROVIDER_INTERRUPTION.json preserves its original StageB directory context; its LOCAL_ZIP_VERIFICATION.json does not denote the new combined receipt."
+    },
+    "scope": {
+      "new_scientific_ode_calls_for_backup": 0,
+      "performance_benchmark": false,
+      "all_three_provider_success_claimed": false,
+      "private_transfer_urls_or_async_tokens_in_this_receipt": false,
+      "global_error_bound": null
+    }
+  },
+  "nodes": [
+    {
+      "id": "C21K",
+      "status": "COMPLETE_SCOPED"
+    },
+    {
+      "id": "C21L_ORIGINAL_81",
+      "status": "COMPLETE_SCOPED",
+      "source": "3b85dedce84d37b3e165da00685a8a984950aafe",
+      "reexecuted": false
+    },
+    {
+      "id": "C21L_COMPONENT_CONTENT",
+      "status": "PUBLISHED_DRAFT",
+      "commit": "17244259d25f793a25e0874443a28806e7c31d17"
+    },
+    {
+      "id": "C21L_DOCUMENT_CLOSEOUT",
+      "status": "PUBLISHED_DRAFT",
+      "document_sha": "e954467132eef864a0fb86ba5de44f90f76b08e0"
+    },
+    {
+      "id": "EXTERNAL_RESULT_INTAKE",
+      "status": "COMPLETE_SCOPED_WITH_UNAVAILABLE_SURFACES",
+      "global_exhaustiveness_claim": false
+    },
+    {
+      "id": "C21M_INITIAL_STRESS_THEORY_BUILDER",
+      "status": "COMPLETE_SCOPED",
+      "new_ode_integrations": 0
+    },
+    {
+      "id": "C21M_GRID_DEDUP",
+      "status": "COMPLETE_SCOPED",
+      "new_targets": 26,
+      "reused_targets": 1
+    },
+    {
+      "id": "C21M_NEW26",
+      "status": "COMPLETE_SCOPED",
+      "run_identity": "ff462f48e264b2032ec50018e9969a6eb1808c7a6fc2a60139b98efacb01c05a"
+    },
+    {
+      "id": "C21L_CENTER_REFERENCE",
+      "status": "REUSED_SEALED_RAW",
+      "new_ode_integrations": 0
+    },
+    {
+      "id": "C21M_PILOT27_ANALYSIS_PLOTS",
+      "status": "COMPLETE_SCOPED"
+    },
+    {
+      "id": "C21M_INDEPENDENT_REVIEW",
+      "status": "PASS_SCOPED_PUBLICATION_READY"
+    },
+    {
+      "id": "C21M_AXIS_METHOD_DIAGNOSTIC_V2",
+      "status": "COMPLETE_SCOPED",
+      "new_ode_integrations": 0,
+      "production_surrogate_approval": false
+    },
+    {
+      "id": "C21M_SHARED_RUNNER",
+      "status": "FOCUSED_VERIFIED",
+      "actual_ncp_validation": false
+    },
+    {
+      "id": "C21M_GENERIC_CAMPAIGN_ANALYZER",
+      "status": "FOCUSED_VERIFIED_ON_COMPLETED27",
+      "new_ode_integrations": 0
+    },
+    {
+      "id": "C21M_CONTENT_PR91",
+      "status": "PUBLISHED_DRAFT",
+      "commit": "659c94312eb9c12ebb987de934459c12a63d67b0"
+    },
+    {
+      "id": "C21M_DOCUMENT_CLOSEOUT",
+      "status": "PUBLISHED_IN_THIS_DOCUMENT_COMMIT",
+      "second_parent": "e954467132eef864a0fb86ba5de44f90f76b08e0"
+    },
+    {
+      "id": "FINAL_COMBINED_BACKUP",
+      "status": "TWO_PROVIDER_ACK_LIBRARY_BYTES_VERIFIED_DRIVE_OPEN",
+      "fixed_science_content_files": 634
+    },
+    {
+      "id": "OPTIONAL_NCP98_IC_PREPARATION",
+      "status": "FOCUSED_VERIFIED_IC_ONLY",
+      "cases": 98,
+      "new_ode_integrations": 0
+    },
+    {
+      "id": "OPTIONAL_NCP98_SCIENCE",
+      "status": "NOT_RUN",
+      "required_for_first_pilot_completion": false
+    },
+    {
+      "id": "NCP_ACTUAL_EXECUTION",
+      "status": "NOT_RUN",
+      "resources": "UNOBSERVED"
+    },
+    {
+      "id": "GENERAL_TRIAXIAL_FULL_REIONIZATION_CMB",
+      "status": "HOLD"
+    },
+    {
+      "id": "DRIVE_BACKUP_RECONCILIATION",
+      "status": "OPEN_AMBIGUOUS_NO_ACK",
+      "does_not_block_completed_science": true,
+      "no_duplicate_upload": true
+    }
+  ],
+  "edges": [
+    [
+      "C21K",
+      "C21L_ORIGINAL_81"
+    ],
+    [
+      "C21L_ORIGINAL_81",
+      "C21L_COMPONENT_CONTENT"
+    ],
+    [
+      "C21L_COMPONENT_CONTENT",
+      "C21L_DOCUMENT_CLOSEOUT"
+    ],
+    [
+      "EXTERNAL_RESULT_INTAKE",
+      "C21M_GRID_DEDUP"
+    ],
+    [
+      "C21M_INITIAL_STRESS_THEORY_BUILDER",
+      "C21M_GRID_DEDUP"
+    ],
+    [
+      "C21M_GRID_DEDUP",
+      "C21M_NEW26"
+    ],
+    [
+      "C21L_ORIGINAL_81",
+      "C21L_CENTER_REFERENCE"
+    ],
+    [
+      "C21M_NEW26",
+      "C21M_PILOT27_ANALYSIS_PLOTS"
+    ],
+    [
+      "C21L_CENTER_REFERENCE",
+      "C21M_PILOT27_ANALYSIS_PLOTS"
+    ],
+    [
+      "C21M_PILOT27_ANALYSIS_PLOTS",
+      "C21M_INDEPENDENT_REVIEW"
+    ],
+    [
+      "C21M_PILOT27_ANALYSIS_PLOTS",
+      "C21M_AXIS_METHOD_DIAGNOSTIC_V2"
+    ],
+    [
+      "C21M_PILOT27_ANALYSIS_PLOTS",
+      "C21M_GENERIC_CAMPAIGN_ANALYZER"
+    ],
+    [
+      "C21M_INDEPENDENT_REVIEW",
+      "C21M_CONTENT_PR91"
+    ],
+    [
+      "C21M_AXIS_METHOD_DIAGNOSTIC_V2",
+      "C21M_CONTENT_PR91"
+    ],
+    [
+      "C21M_GENERIC_CAMPAIGN_ANALYZER",
+      "C21M_CONTENT_PR91"
+    ],
+    [
+      "C21M_SHARED_RUNNER",
+      "C21M_CONTENT_PR91"
+    ],
+    [
+      "C21M_CONTENT_PR91",
+      "C21M_DOCUMENT_CLOSEOUT"
+    ],
+    [
+      "C21L_DOCUMENT_CLOSEOUT",
+      "C21M_DOCUMENT_CLOSEOUT"
+    ],
+    [
+      "C21L_COMPONENT_CONTENT",
+      "FINAL_COMBINED_BACKUP"
+    ],
+    [
+      "C21M_CONTENT_PR91",
+      "FINAL_COMBINED_BACKUP"
+    ],
+    [
+      "C21M_GRID_DEDUP",
+      "OPTIONAL_NCP98_IC_PREPARATION"
+    ],
+    [
+      "OPTIONAL_NCP98_IC_PREPARATION",
+      "OPTIONAL_NCP98_SCIENCE"
+    ],
+    [
+      "C21M_SHARED_RUNNER",
+      "OPTIONAL_NCP98_SCIENCE"
+    ],
+    [
+      "NCP_ACTUAL_EXECUTION",
+      "OPTIONAL_NCP98_SCIENCE"
+    ],
+    [
+      "FINAL_COMBINED_BACKUP",
+      "DRIVE_BACKUP_RECONCILIATION"
+    ]
+  ],
+  "historical_preservation": {
+    "units": [
+      "C21F",
+      "C21G",
+      "C21H",
+      "C21I",
+      "C21J",
+      "C21K"
+    ],
+    "source_pass_scope_hold_failed_raw_historical_not_published": "UNCHANGED"
+  },
+  "global_error_bound": null,
+  "branch": "research/cr-c21m-independent-stress-20261021",
+  "document_finalization": {
+    "new_science_ode": 0,
+    "science_source_or_raw_changes": 0,
+    "content_commit": "659c94312eb9c12ebb987de934459c12a63d67b0",
+    "self_document_binding": "external FINAL_AUTHORITY_RECEIPT.json",
+    "source_manifest_vs_run_manifest_in_C21L": "Distinct hashes and paths; no source identity reassignment."
+  }
+}

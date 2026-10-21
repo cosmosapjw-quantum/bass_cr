@@ -1,0 +1,37 @@
+{
+  "schema": "C21M_SHARED_OPERATIONS_FOCUSED_V4",
+  "observed_utc": "2026-10-21T08:02:52.068868+00:00",
+  "command": "python test_shared_operations.py > checks/shared_operations_focused_v4.log 2>&1",
+  "exit_code": 0,
+  "result": "PASS_SCOPED",
+  "tests": 3,
+  "elapsed_seconds_from_unittest": 0.938,
+  "scientific_ODE_calls": 0,
+  "test_data_class": "OPERATIONAL_TEST_DOUBLE_NO_SCIENCE",
+  "covered": [
+    "cgroup v1/v2 decoding; per-ancestor quota/usage pairing; CPU55; coordinator/pending-task budget; cooperative leases",
+    "create-only markers; missing/queued/started/unsealed/complete separation; completed raw hash tamper rejection",
+    "actual2 spawned fakeworkers/3 fakecases; inflight bound2; external-load dispatch shrink; no-file plan; completed raw no-redispatch",
+    "worker expected source/code mismatch rejection; temporary plotting cache lifecycle and caller environment restoration"
+  ],
+  "files_sha256": {
+    "shared_runner.py": "af472ce77a12ef3bb78cec5a46ec05f4dc44324c2c28ce429d2e3c50957f0b65",
+    "shared_resources.py": "ad642904d7c9334a4c650702ab792ecc49c7dcca2b542fbf8315bd318ec58795",
+    "test_shared_operations.py": "75717c253f47bda8b97c9aa69652112cb6f07cb649eed614a6b1d2f35ab6d93d",
+    "ncp_run.sh": "7f5344e2bbcc3d4595787882da4a4c618868ddf98be32a1c91a1b05491538b4f"
+  },
+  "log_sha256": "8747de64f245c714ef21ceeb493828cff8b05b33411178ce1a67d3d2747ace19",
+  "shell_syntax_check": {
+    "command": "bash -n ncp_run.sh",
+    "exit_code": 0
+  },
+  "prior_logs_retained": [
+    "shared_operations_focused.log",
+    "shared_operations_focused_v2.log",
+    "shared_operations_focused_v3.log"
+  ],
+  "global_error_bound": null,
+  "scientific_validation": "NOT_PERFORMED_BY_OPERATIONAL_CHECKS",
+  "performance_benchmark": false,
+  "reason_for_delta": "Independent review identified optional legacy matplotlib cache writes; worker initialization now enforces coordinator source/code contract."
+}

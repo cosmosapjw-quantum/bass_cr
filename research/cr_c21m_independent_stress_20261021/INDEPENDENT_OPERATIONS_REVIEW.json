@@ -1,0 +1,98 @@
+{
+  "BACKUP": "PENDING_PARENT_VERSIONED_BACKUP",
+  "DAG": "C21M shared operations implementation ready within reviewed scope; NCP actual execution NOT_RUN",
+  "EXECUTION": "OPERATIONAL_FOCUSED_VERIFIED; scientific ODE calls 0",
+  "PUBLICATION": "PENDING_PARENT_CONTENT_COMMIT",
+  "files_sha256": {
+    "ncp_run.sh": "7f5344e2bbcc3d4595787882da4a4c618868ddf98be32a1c91a1b05491538b4f",
+    "shared_resources.py": "ad642904d7c9334a4c650702ab792ecc49c7dcca2b542fbf8315bd318ec58795",
+    "shared_runner.py": "af472ce77a12ef3bb78cec5a46ec05f4dc44324c2c28ce429d2e3c50957f0b65",
+    "test_shared_operations.py": "75717c253f47bda8b97c9aa69652112cb6f07cb649eed614a6b1d2f35ab6d93d"
+  },
+  "findings": [
+    {
+      "id": "OPS_MINOR_PLAN_CACHE",
+      "impact": "No scientific execution, output directory, lease directory, or existing result mutation. The documented no-output/no-lease contract holds; do not claim zero filesystem side effects.",
+      "observed": "On a fresh copied source with MPLCONFIGDIR unset, actual-source plan-only import creates C21L/runtime/mplconfig/fontlist-v390.json.",
+      "resolution": "Final af472ce7 runner confines optional Matplotlib cache to a TemporaryDirectory for the attempt, restores prior MPLCONFIGDIR, and cleans it after return. Code path and focused v4 lifecycle test reviewed; original fresh-source probe retained as pre-fix evidence.",
+      "severity": "minor nonblocking",
+      "status": "RESOLVED_BY_SCOPED_DELTA_REVIEW"
+    }
+  ],
+  "global_error_bound": null,
+  "implementation_focused_test_receipt": {
+    "log_sha256": "8747de64f245c714ef21ceeb493828cff8b05b33411178ce1a67d3d2747ace19",
+    "path": "checks/shared_operations_focused_v4.json",
+    "scientific_ODE_calls": 0,
+    "sha256": "0b669482347f0b65e8225dfb22169687e194087f222a1dedd4264da3c903ff14",
+    "status": "PASS_SCOPED",
+    "tests": 3
+  },
+  "independent_probes": {
+    "actual_source_plan_only": {
+      "exit_code": 0,
+      "lease_exists": false,
+      "new_paths": [
+        "cr_c21l_rei_pilot_20261021/runtime",
+        "cr_c21l_rei_pilot_20261021/runtime/mplconfig",
+        "cr_c21l_rei_pilot_20261021/runtime/mplconfig/fontlist-v390.json"
+      ],
+      "output_exists": false,
+      "probe": "fresh source actual-builder plan-only, no ODE",
+      "stderr": ""
+    },
+    "cleanup_and_resume": {
+      "all_own_leases_reacquired": true,
+      "interrupted_state": "INTERRUPTED_NO_AUTORETRY",
+      "no_automatic_retry": true,
+      "original_affinity_restored": true,
+      "own_worker_exit_codes": {
+        "1": -15
+      },
+      "own_worker_process_gone": true,
+      "performance_benchmark": false,
+      "preserved_started_bytes": true,
+      "resume_return": 2,
+      "scientific_ode_runs": 0,
+      "scientific_raw_created": false,
+      "scope": "independent synthetic worker interruption and resume only",
+      "shared_resources_sha256": "ad642904d7c9334a4c650702ab792ecc49c7dcca2b542fbf8315bd318ec58795",
+      "shared_runner_sha256": "853014ab47e191ad5d7b9b587655aa73dddd0179d94b3b314110dd1ebeff924f",
+      "status": "PASS_SCOPED",
+      "timeout_return": 2,
+      "total_dispatches": 1,
+      "unrelated_sentinel_alive": true
+    }
+  },
+  "limitations": [
+    "Advisory CPU leases coordinate only participants sharing the configured lease directory; unrelated loads are observed and new dispatch is reduced, not controlled.",
+    "CPU quota checks see only mounted memberships and visible ancestors; nominal 64 CPU/128 GiB NCP is not an observed allocation.",
+    "Memory allowance is conservative analytical budgeting, not a measured memory improvement or benchmark.",
+    "The interruption probe verifies configured deadline and own-worker cleanup, not forcible termination of the coordinator by external signals.",
+    "This operational review makes no scientific accuracy, global error, speedup, or scaling claim."
+  ],
+  "narrow_delta_review": {
+    "blocked_findings": [],
+    "new_scientific_ODE_calls": 0,
+    "reviewed_runner_sha256": "af472ce77a12ef3bb78cec5a46ec05f4dc44324c2c28ce429d2e3c50957f0b65",
+    "status": "PASS_SCOPED"
+  },
+  "observed_utc": "2026-10-21T08:03:33.071038+00:00",
+  "performance_benchmark": false,
+  "promotion_blockers": [],
+  "reviewer": "independent non-implementer agent theory_literature",
+  "schema": "C21M_INDEPENDENT_OPERATIONS_REVIEW_V1",
+  "scientific_ODE_calls": 0,
+  "scope": [
+    "Code review of create-only raw and receipt writes, source/grid/software run manifest, completed raw plus receipt SHA checks, never-started versus interrupted resume semantics.",
+    "Code review of bounded worker queues, per-worker immutable initial builder, dynamic dispatch shrink, same-directory advisory leases, protected CPU55, coordinator CPU/memory charge, visible v1/v2 ancestor quota and available-memory accounting.",
+    "Code review of cleanup limited to this coordinator own spawned Process objects and own flock handles; no foreign PID search, termination, overwrite, or lock removal.",
+    "Reused existing three focused operational test groups rather than repeat them. Existing receipt was read; its source hashes represent that earlier tested revision.",
+    "Independent synthetic one-worker deadline interruption and no-retry resume probe; no scientific builder or ODE used.",
+    "Independent actual-source fresh-copy plan-only initial-quadrature probe; no ODE, output directory, or lease directory created.",
+    "NCP shell content-commit equality and tracked production-path diff guard read; actual NCP execution not performed.",
+    "Narrow final delta reviewed: worker checks expected source and builder/runner/resource hashes before READY; temporary plotting cache lifecycle wraps the whole run including cleanup and restores caller environment.",
+    "No unnecessary rerun of the interruption probe after this delta: worker deadline, termination, resume, lease and queue logic is unchanged; final v4 test evidence covers the modified initializer and cache wrapper."
+  ],
+  "status": "PASS_SCOPED"
+}

@@ -1,0 +1,166 @@
+{
+  "schema": "rei.bianchi.matter_radiation.final_independent_review.v1",
+  "date": "2026-10-21",
+  "reviewer": "/root/pilot_independent_review",
+  "requested_role": "Independent nonimplementing Astra review",
+  "observed_identity": "Developer context identifies GPT-6 Astra Pro; no additional runtime model telemetry",
+  "decision": "PASS_SCOPED_PRELIMINARY",
+  "scope": "Decomposition of625 existing histories,600 new initially matter-stressed trajectories,25 explicit historical reference controls and6 new coupled mixed-cancellation trajectories",
+  "did_implement_solver": false,
+  "reviewer_ODE_solves": 0,
+  "blocking_findings": [],
+  "required_repairs": [],
+  "production_admission": "NOT_ISSUED",
+  "reviewed_sha256": {
+    "component_pilot.py": "e2ce8b440765be3a728d8127a4f1085dbc304cabcaa7a5d4e892f92ccabd801e",
+    "plot_components.py": "745521a52fcd7d834579cc8598be032d4054821bfb41d7d23c85f285d4ba6faa",
+    "test_components.py": "1ccf3f5e763711811618e052c6c43892db1020362d53042c6ee5726100f3808f",
+    "run_ncp.sh": "89b9c6a5171c74b8a0edb36d50b832568fb1137aae56611d85e360dc5064cbfe",
+    "CONTRACT_KO.md": "66dd8ada93dd1074f40c847129e71d4a4e6923c07d92510ce03e46ea2775f6fb",
+    "THEORY_KO.md": "5134be23b9efec368a38c751bf60b2349b541a418f5ae04bfea65e9241f295a9"
+  },
+  "raw_audit": {
+    "new_cases": 606,
+    "new_samples": 39390,
+    "old_decomposed_cases": 625,
+    "old_samples": 40625,
+    "references_verified": 25,
+    "new_lanes": {
+      "MATTER_SLICE": 600,
+      "MIXED_CANCELLATION": 6
+    },
+    "max_new_axis_error": 4.336808689942018e-19,
+    "max_new_pressure_recompute_abs_J_m3": 5.169878828456423e-26,
+    "max_new_dimensionless_recompute_abs": 2.168404344971009e-19,
+    "max_old_decomposition_abs": 5.421010862427522e-19,
+    "max_old_component_closure_abs": 4.336808689942018e-19,
+    "max_new_component_closure_abs": 0.0,
+    "max_full_reduced_raw_abs": 1.7031948778173682e-11,
+    "minimum_E0": 0.9998980932241679,
+    "minimum_H": 1.3830359962285339e-17,
+    "minimum_massive_population": 5.485187002940815e-31,
+    "maximum_abs_A_m": 0.8275025625756662,
+    "maximum_abs_k": 0.18946630461100597,
+    "mixed_cases": [
+      {
+        "id": "mixed_s+0_m+1",
+        "signed_Sigma0": 0.0,
+        "initial_component_sum": -2.710505431213761e-19,
+        "initial_sum_component_magnitudes": 0.0007999999999999997,
+        "endpoint_Sigma": 4.908041156489128e-05,
+        "endpoint_signed_Pi_m": 2.2769506379788566e-05,
+        "endpoint_signed_Pi_r": -9.40362719772204e-05,
+        "endpoint_signed_Pi_total": -7.126676559743184e-05
+      },
+      {
+        "id": "mixed_s+0_m-1",
+        "signed_Sigma0": 0.0,
+        "initial_component_sum": 1.0842021724855044e-19,
+        "initial_sum_component_magnitudes": 0.0007999999999999999,
+        "endpoint_Sigma": 4.907894872787359e-05,
+        "endpoint_signed_Pi_m": -2.2767224435398605e-05,
+        "endpoint_signed_Pi_r": 9.402953343988549e-05,
+        "endpoint_signed_Pi_total": 7.126230900448688e-05
+      },
+      {
+        "id": "mixed_s+1_m+1",
+        "signed_Sigma0": 0.004,
+        "initial_component_sum": -1.0842021724855044e-19,
+        "initial_sum_component_magnitudes": 0.0008000000000000001,
+        "endpoint_Sigma": 0.0004085005532989926,
+        "endpoint_signed_Pi_m": 2.233495941649623e-05,
+        "endpoint_signed_Pi_r": -9.924939284976251e-05,
+        "endpoint_signed_Pi_total": -7.691443343326628e-05
+      },
+      {
+        "id": "mixed_s+1_m-1",
+        "signed_Sigma0": 0.004,
+        "initial_component_sum": 0.0,
+        "initial_sum_component_magnitudes": 0.0008000000000000003,
+        "endpoint_Sigma": 0.0005065476472736238,
+        "endpoint_signed_Pi_m": -2.3078835223954772e-05,
+        "endpoint_signed_Pi_r": 8.845279060530251e-05,
+        "endpoint_signed_Pi_total": 6.537395538134774e-05
+      },
+      {
+        "id": "mixed_s-1_m+1",
+        "signed_Sigma0": -0.004,
+        "initial_component_sum": -1.0842021724855044e-19,
+        "initial_sum_component_magnitudes": 0.0008000000000000001,
+        "endpoint_Sigma": 0.0005066542916516476,
+        "endpoint_signed_Pi_m": 2.3205809365651725e-05,
+        "endpoint_signed_Pi_r": -8.881396817038218e-05,
+        "endpoint_signed_Pi_total": -6.560815880473046e-05
+      },
+      {
+        "id": "mixed_s-1_m-1",
+        "signed_Sigma0": -0.004,
+        "initial_component_sum": 0.0,
+        "initial_sum_component_magnitudes": 0.0008000000000000003,
+        "endpoint_Sigma": 0.0004083821964916134,
+        "endpoint_signed_Pi_m": -2.2455342599936184e-05,
+        "endpoint_signed_Pi_r": 9.961803038276676e-05,
+        "endpoint_signed_Pi_total": 7.716268778283057e-05
+      }
+    ],
+    "actual_local_run": {
+      "status": "COMPLETE",
+      "completed": 606,
+      "failed": 0,
+      "consumed_wall_s": 14.977557074002107,
+      "aggregate_child_wall_s": 16.523054625104123
+    },
+    "observed_selected_slots": [
+      6,
+      7,
+      8
+    ],
+    "core_model_sha256": "e2ce8b440765be3a728d8127a4f1085dbc304cabcaa7a5d4e892f92ccabd801e",
+    "review_mode": "read-only static source helper and existing arrays; no ODE solves",
+    "status": "PASS_RAW_AUDIT",
+    "plots_checked": {
+      "heatmap_rows": 676,
+      "mixed_history_rows": 390,
+      "old_history_rows": 260,
+      "all_plot_values_bind_raw": true,
+      "visual_review": "Three PNGs inspected; labels/frame/signs/site/provenance correct"
+    },
+    "receipt_exit_status": {
+      "targeted_tests": 0,
+      "decomposition": 0,
+      "ncp_script_check": 0,
+      "parent_immutability": 0,
+      "new_sweep": 0,
+      "plots": 0,
+      "validation": 0
+    },
+    "ncp_wrapper": "bash -n PASS; inspected sweep606 plus plotting only; no remote execution"
+  },
+  "validation": {
+    "new_original40_reduced8_comparisons": 4,
+    "max_raw_observable_difference": 1.7031948778173682e-11,
+    "max_source_H2_constraint_relative": 2.220446049250313e-16,
+    "max_directional_energy_relative_residual": 1.4810608772742288e-10,
+    "source_number_monopole_deviation": 0.0,
+    "minimum_sampled_angular_brightness": 0.8020344325165379,
+    "result": "All contracted thresholds pass"
+  },
+  "scientific_checks": [
+    "Correct common-frame half-contraction and SI units, separate signed matter/radiation stress and sum before magnitude",
+    "Dust has zero anisotropic stress; massive species remains dynamically coupled; shared gamma/nu valid under collisionless common energy data",
+    "Actual-helper bracket inversion respects positivity and verifies all606 target realizations",
+    "Original625 histories decomposed without ODE; every shared field remains equal to its original array",
+    "All25 old reference controls retain actual old parameters and original identities/hashes; no manufactured new execution",
+    "Six mixed cases are actual coupled solves; initial signed component cancellation does not imply persistent cancellation",
+    "Matter-era formula in THEORY_KO is explicitly a prescribed-dilution approximation, not substituted into the coupled solver"
+  ],
+  "resource_recovery": "Read-only inspection confirms unchanged parent observer,local max8/NCP max64, finite900s/3600s budgets, single BLAS threads,nice10,per-batch observations, exact identity resume, no automatic failed/unfinished retries. All actual receipts reviewed exit0. NCP script syntax passes; remote not executed.",
+  "optimization_reporting_note": "Worker model and energy matrix are reused. Original CanonicalMomentumFV objects/quadrature are reconstructed during A inversion; no cached quadrature-construction or measured speedup claim is supported. This does not affect scoped numerical acceptance.",
+  "claim_limits": [
+    "Fixed positive canonical massive cells and sampled massless brightness are not a global positivity certificate",
+    "No new full quadrature/closure convergence, native HHe, general non-LRS Bianchi, observational admission or production claim",
+    "No detailed benchmark/speedup or measured RSS improvement; NCP64 support is code only",
+    "Previous625 preliminary PASS is preserved, not replayed or promoted"
+  ],
+  "next_action": "Controller may publish and back up the new scoped component results. Final handoff text, if subsequently created, should reference this completed review and preserve the above claim ceiling."
+}
