@@ -1,0 +1,639 @@
+{
+  "schema": "C21M_EXTERNAL_UPTAKE_V1",
+  "verified_at_utc": "2026-10-21T07:50:29.967791+00:00",
+  "reviewer": "external_results",
+  "new_ODE_solves": 0,
+  "global_error_bound": null,
+  "external_receipt_reuse_is_not_new_full_raw_review": true,
+  "PR198": {
+    "current_head": "8bd35af5f11c7ea5945b656be1c013d1c1933498",
+    "source_results_commit": "b140170ce0c58159368b6b81be49ac35ca764851",
+    "upstream_source": "3b85dedce84d37b3e165da00685a8a984950aafe",
+    "fetched_source_checks": {
+      "canonical_fv.py": {
+        "sha256": "91c1641b851aa9580141d4423e2579ced5f11b95aa716b3fc2cb0137df344cc5",
+        "matches_run_identity": true
+      },
+      "lrs_boltzmann.py": {
+        "sha256": "06ef834e4cd7adacf01f0ad6e3becc5aea9a493b5b99fd398be82610543984cc",
+        "matches_run_identity": true
+      },
+      "species_hierarchy.py": {
+        "sha256": "ced7906b35c26d8d0374ee8ce7f67ceb957b51a63d44e5a2661997b7e46983c5",
+        "matches_run_identity": true
+      },
+      "REI_BACKGROUND_FAMILY_LOCK.json": {
+        "sha256": "46f818c2f9de890c72f71fa3cc70366b28c42ca0d65190bd905b6310023e7af0",
+        "matches_run_identity": true
+      }
+    },
+    "component_solver_sha256": "e2ce8b440765be3a728d8127a4f1085dbc304cabcaa7a5d4e892f92ccabd801e",
+    "solver": "DOP853 reduced8-state fixed collisionless LRS; parent original40-state comparisons retained",
+    "initial_conditions": "600 matter-only slice plus6 actual mixed cancellation, half-Sigma<=.004,half-Pim<=.0004; common gamma/nu initial k",
+    "physics": "z20->4, fm=.1,m/Tref30,Gauss3 radial24/angular12,L8,rtol3e-11,atol3e-13,samples65",
+    "environment": {
+      "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+      "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+      "numpy": "2.3.5",
+      "scipy": "1.17.0"
+    },
+    "runtime": {
+      "start_utc": "2026-10-21T06:26:27Z",
+      "outer_elapsed_wall_s": 58.90694055399945,
+      "exit_status": 0,
+      "batch_wall_s": 14.977557074002107,
+      "child_wall_sum_s": 16.523054625104123,
+      "workers": [
+        6,
+        7,
+        8
+      ]
+    },
+    "prior_review": {
+      "scope": "Decomposition of625 existing histories,600 new initially matter-stressed trajectories,25 explicit historical reference controls and6 new coupled mixed-cancellation trajectories",
+      "decision": "PASS_SCOPED_PRELIMINARY",
+      "new_original40_reduced8_comparisons": 4,
+      "max_comparison_abs": 1.7031948778173682e-11,
+      "directional_energy_relative": 1.4810608772742288e-10
+    },
+    "current_checks": [
+      "Current PR HEAD and draft status",
+      "Fetched component+parent code SHA matches run/review; fetched4 upstream vendor files match C21L",
+      "Read actual run/command/validation/independent review",
+      "Fetched6 mixed endpoint rows and matched review values; converted all normalized axes by sqrt(2)"
+    ],
+    "raw_scope": "Full606 NPZ raw files are in upstream backup; Git raw cases directory404. This intake does not claim whole raw download or replay.",
+    "decision": "ACCEPT_EXTERNAL_PRELIMINARY_COLLISIONLESS_RESULTS; reuse initial builder method, keep reduced solver and65samples provenance",
+    "converted_mixed_examples": [
+      {
+        "id": "mixed_s+0_m+1",
+        "initial_signed_full": {
+          "signed_Sigma0": 0.0,
+          "signed_Pi_m0": 0.000565685424949238,
+          "signed_Pi_r0": -0.000565685424949238
+        },
+        "endpoint_full": {
+          "signed_Sigma_F": -6.941018368192255e-05,
+          "Sigma_F": 6.941018368192255e-05,
+          "signed_Pi_m_F": 3.22009447308377e-05,
+          "signed_Pi_r_F": -0.00013298737118519013,
+          "signed_Pi_tot_F": -0.00010078642645435242
+        }
+      },
+      {
+        "id": "mixed_s+0_m-1",
+        "initial_signed_full": {
+          "signed_Sigma0": 0.0,
+          "signed_Pi_m0": -0.000565685424949238,
+          "signed_Pi_r0": 0.000565685424949238
+        },
+        "endpoint_full": {
+          "signed_Sigma_F": 6.94081149179726e-05,
+          "Sigma_F": 6.94081149179726e-05,
+          "signed_Pi_m_F": -3.219771757413284e-05,
+          "signed_Pi_r_F": 0.00013297784145430052,
+          "signed_Pi_tot_F": 0.00010078012388016769
+        }
+      },
+      {
+        "id": "mixed_s+1_m+1",
+        "initial_signed_full": {
+          "signed_Sigma0": 0.005656854249492381,
+          "signed_Pi_m0": 0.000565685424949238,
+          "signed_Pi_r0": -0.000565685424949238
+        },
+        "endpoint_full": {
+          "signed_Sigma_F": 0.0005777070227123487,
+          "Sigma_F": 0.0005777070227123488,
+          "signed_Pi_m_F": 3.158640252186164e-05,
+          "signed_Pi_r_F": -0.00014035983742542943,
+          "signed_Pi_tot_F": -0.0001087734349035678
+        }
+      },
+      {
+        "id": "mixed_s+1_m-1",
+        "initial_signed_full": {
+          "signed_Sigma0": 0.005656854249492381,
+          "signed_Pi_m0": -0.000565685424949238,
+          "signed_Pi_r0": 0.000565685424949238
+        },
+        "endpoint_full": {
+          "signed_Sigma_F": 0.0007163665527625415,
+          "Sigma_F": 0.0007163665527625415,
+          "signed_Pi_m_F": -3.263840177749075e-05,
+          "signed_Pi_r_F": 0.0001250911361037663,
+          "signed_Pi_tot_F": 9.245273432627556e-05
+        }
+      },
+      {
+        "id": "mixed_s-1_m+1",
+        "initial_signed_full": {
+          "signed_Sigma0": -0.005656854249492381,
+          "signed_Pi_m0": 0.000565685424949238,
+          "signed_Pi_r0": -0.000565685424949238
+        },
+        "endpoint_full": {
+          "signed_Sigma_F": -0.0007165173706882936,
+          "Sigma_F": 0.0007165173706882937,
+          "signed_Pi_m_F": 3.2817970330749264e-05,
+          "signed_Pi_r_F": -0.00012560191831472687,
+          "signed_Pi_tot_F": -9.278394798397761e-05
+        }
+      },
+      {
+        "id": "mixed_s-1_m-1",
+        "initial_signed_full": {
+          "signed_Sigma0": -0.005656854249492381,
+          "signed_Pi_m0": -0.000565685424949238,
+          "signed_Pi_r0": 0.000565685424949238
+        },
+        "endpoint_full": {
+          "signed_Sigma_F": -0.0005775396409101538,
+          "Sigma_F": 0.0005775396409101539,
+          "signed_Pi_m_F": -3.175665005256406e-05,
+          "signed_Pi_r_F": 0.0001408811696242038,
+          "signed_Pi_tot_F": 0.00010912451957163975
+        }
+      }
+    ],
+    "differences_from_C21L": [
+      "External source reduction40->8; do not relabel as executed C21L full40",
+      "65 vs101 saved samples",
+      "External half norms versus C21L fullFrobenius",
+      "Smaller initial shear range; original C21L extends full|S0|=.04",
+      "606 is600slice+6mixed, not fullCartesian3D"
+    ],
+    "no_replay": [
+      "old625 external histories",
+      "606 completed external trajectories",
+      "C21L81 trajectories"
+    ]
+  },
+  "PR213": {
+    "current_head": "d32cd99fa19c65aa1ca63dbc8aab8741834270e8",
+    "source_results_commit": "c8e9f67aa031ffb33a9b0347bdea61dbb01fb746",
+    "owner_ref": "80825585f9fe31d2ee0d5af545ada3fa1f52be72",
+    "execution_source": "82372ed8db68085868603d4267a630ed9cde6abb",
+    "science_binding": {
+      "input": "850968d916c96930d2521ef324298d8ac9076131d5f0367e3a2980821bf48930",
+      "source": "9a3a36bf03885245e6910f2d544d13634fb1b82dac45ddcb484efc7ecdb91334",
+      "toolchain": "066b42b92fe697d7bece4ffe9be160cb6db5c56a1e326a158f50c36fcf7df94f"
+    },
+    "coverage": {
+      "aggregate_cases": 729,
+      "aggregate_history_rows": 47385,
+      "false_stored_gates": 0,
+      "manifest_jobs": 243,
+      "raw_cases": 729,
+      "receipt_status_counts": {
+        "PASS": 243
+      },
+      "stored_gates": 5832,
+      "unique_raw_cases": 729,
+      "unique_receipts": 243
+    },
+    "executions": [
+      {
+        "directory": "results/split729/scope/executions/20261021T063012_2cdf0f9682",
+        "finished_at": "2026-10-21T06:30:16.512208+00:00",
+        "job_status_counts": {
+          "PASS": 1
+        },
+        "max_scope_bytes": 4294967296,
+        "max_workers": 1,
+        "maximum_observed_active_jobs": 1,
+        "maximum_observed_scope_bytes": 1533256,
+        "minimum_observed_filesystem_free_bytes": 6737301504,
+        "nested_threads": {
+          "BLIS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "NUMEXPR_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "RAYON_NUM_THREADS": "1",
+          "REI_TRANSPORT_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "observed_cpu_quota_cores": [
+          8.0
+        ],
+        "profile": "sandbox",
+        "profile_limits": {
+          "cpu": 8,
+          "memory_bytes": 8589934592
+        },
+        "started_at": "2026-10-21T06:30:12.946714+00:00",
+        "status": "COMPLETE"
+      },
+      {
+        "directory": "results/split729/scope/executions/20261021T063108_fcb4d8fb80",
+        "finished_at": "2026-10-21T06:33:33.570638+00:00",
+        "job_status_counts": {
+          "PASS": 242,
+          "SKIPPED_PASS": 1
+        },
+        "max_scope_bytes": 4294967296,
+        "max_workers": 8,
+        "maximum_observed_active_jobs": 8,
+        "maximum_observed_scope_bytes": 347938391,
+        "minimum_observed_filesystem_free_bytes": 6366724096,
+        "nested_threads": {
+          "BLIS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "NUMEXPR_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "RAYON_NUM_THREADS": "1",
+          "REI_TRANSPORT_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "observed_cpu_quota_cores": [
+          8.0
+        ],
+        "profile": "sandbox",
+        "profile_limits": {
+          "cpu": 8,
+          "memory_bytes": 8589934592
+        },
+        "started_at": "2026-10-21T06:31:08.817787+00:00",
+        "status": "COMPLETE"
+      }
+    ],
+    "physics": "Warm a=.1999->.2,64steps,L8,source8X8,gas12000K,fm.1,m/T30; HHe/UV source-on and Thomson; radiation gamma+masslessnu+trackedUV",
+    "environment": {
+      "python": "3.12.14",
+      "numpy": "2.3.5",
+      "scipy": "1.17.0",
+      "source": "REPORT_SPLIT_KO.md"
+    },
+    "decision": "ACCEPT_SEPARATE_CONDITIONAL_WARM_LANE; do not merge with collisionless C21L/C21M response",
+    "validation_scope": "Read source adapter, owner25file manifest, execution observations and independent result review; no full raw729 rereview or replay",
+    "useful_reuse": [
+      "Independent alpha_m/alpha_r positivity mapping pattern",
+      "Per-group immutable preparation and bounded resource admission",
+      "Explicit per-sector raw/work cancellation bookkeeping"
+    ],
+    "no_replay": [
+      "729 completed warm cases"
+    ]
+  },
+  "unavailable": [
+    "Unpublished results outside accessed GitHub/backup/conversation sources",
+    "PR198 all606 raw bodies in GitHub(archive rather than Git location)"
+  ],
+  "evidence_files": [
+    {
+      "path": "external_evidence/report198.md",
+      "bytes": 11973,
+      "sha256": "f0f343d1e6fe61d3f4ec4b1c159036208eb88dc19a2ce4a37323e5a5e8e887d3"
+    },
+    {
+      "path": "external_evidence/contract198.md",
+      "bytes": 7940,
+      "sha256": "66dd8ada93dd1074f40c847129e71d4a4e6923c07d92510ce03e46ea2775f6fb"
+    },
+    {
+      "path": "external_evidence/review198.json",
+      "bytes": 8283,
+      "sha256": "96ee36f237d14548bd4139846083f5157f1b980d29f26fddaa8f978bad8764eb"
+    },
+    {
+      "path": "external_evidence/component198.py",
+      "bytes": 19282,
+      "sha256": "e2ce8b440765be3a728d8127a4f1085dbc304cabcaa7a5d4e892f92ccabd801e"
+    },
+    {
+      "path": "external_evidence/parent198.py",
+      "bytes": 16374,
+      "sha256": "4cf3db0a6d2bc4803e87dcffe422faa3ebe9478bf23a16e02a9f16fe5c2e4400"
+    },
+    {
+      "path": "external_evidence/run198.json",
+      "bytes": 4740,
+      "sha256": "f980e1f2889efb58f88b79f3b7a44d63e6e6d1ea69f8099a047c1d2e30a00e29"
+    },
+    {
+      "path": "external_evidence/metrics198.json",
+      "bytes": 9696,
+      "sha256": "912e2dfad3b18ab01629021aca17440f8473b223b2db48b887948ae364138d63"
+    },
+    {
+      "path": "external_evidence/delta198.json",
+      "bytes": 2820,
+      "sha256": "7881d42346d1edefe93c9e0bcc26327ea1030ec627df8b4b6f598c74e770dd4b"
+    },
+    {
+      "path": "external_evidence/command198.json",
+      "bytes": 990,
+      "sha256": "98f5bc7348fbc0111497fb05cceae925472f7aa2e8b0ac72848810f1ff4029e4"
+    },
+    {
+      "path": "external_evidence/selected_endpoints198.csv",
+      "bytes": 4421,
+      "sha256": "d932f1ff5254df84646e1bf4796ffcf27fbfd95e827d6833fcd21ba7b88e7032"
+    },
+    {
+      "path": "external_evidence/contract213.json",
+      "bytes": 5959,
+      "sha256": "edd1a02c5e513e9f86d92b76b48059c347d445e74dc8e6b642ed4bd4d5b6cc80"
+    },
+    {
+      "path": "external_evidence/runtime213.json",
+      "bytes": 80127,
+      "sha256": "b9837575a02382365b24a05fa665254bb809fc2bc6653e76dbdf615aff644302"
+    },
+    {
+      "path": "external_evidence/owner213.json",
+      "bytes": 7684,
+      "sha256": "4d8a95c79b8eb1eaf6d766089a5e7eefc2fa596575962a2126d040808f83eb26"
+    },
+    {
+      "path": "external_evidence/review213.json",
+      "bytes": 156944,
+      "sha256": "891cda1aa6bd038558761fd34b111874daccadb2337dfb6da479b48183c1e414"
+    },
+    {
+      "path": "external_evidence/split213.py",
+      "bytes": 18749,
+      "sha256": "e5cee6270c31e10b244daa8b978a43793d6f8ecc058de81bb45dadc50d8384d0"
+    },
+    {
+      "path": "external_evidence/splitreport213.md",
+      "bytes": 19845,
+      "sha256": "95823ee91a86f39b2c7a0675f9ed5892d568fa5e7ce0f6d80b3c97f755fed527"
+    },
+    {
+      "path": "external_evidence/vendor_canonical198.py",
+      "bytes": 13255,
+      "sha256": "91c1641b851aa9580141d4423e2579ced5f11b95aa716b3fc2cb0137df344cc5"
+    },
+    {
+      "path": "external_evidence/vendor_lrs198.py",
+      "bytes": 10300,
+      "sha256": "06ef834e4cd7adacf01f0ad6e3becc5aea9a493b5b99fd398be82610543984cc"
+    },
+    {
+      "path": "external_evidence/vendor_species198.py",
+      "bytes": 6083,
+      "sha256": "ced7906b35c26d8d0374ee8ce7f67ceb957b51a63d44e5a2661997b7e46983c5"
+    },
+    {
+      "path": "external_evidence/vendor_lock198.json",
+      "bytes": 2552,
+      "sha256": "46f818c2f9de890c72f71fa3cc70366b28c42ca0d65190bd905b6310023e7af0"
+    },
+    {
+      "path": "external_evidence/pr198_metadata.json",
+      "bytes": 61395,
+      "sha256": "2ba097df2073884e9b86487dbf570cbd00bfcbb91be9162efccf7f71edf0a59c"
+    },
+    {
+      "path": "external_evidence/pr213_metadata.json",
+      "bytes": 6535,
+      "sha256": "4d0d9addd2f0793ea39a6de68b320b780430a2c4524dbfcff7c8eeb363db83ef"
+    },
+    {
+      "path": "external_evidence/rec_summary.json",
+      "bytes": 4157,
+      "sha256": "58820d835586921b97ab8a5de13d7e104024965d2e05dca7267f3ef7f77e169d"
+    },
+    {
+      "path": "external_evidence/rec_validation.json",
+      "bytes": 1650,
+      "sha256": "ff1e8e3bd0cb78f9b39659e32db90b9e62f9112121ddf0deb450fe6774fde017"
+    },
+    {
+      "path": "external_evidence/rec_source.py",
+      "bytes": 10080,
+      "sha256": "453eee672e2a6d78bf0f76aa42f5453e68c1066cc561f5fe547be9e30e01e457"
+    },
+    {
+      "path": "external_evidence/hh_sectors.md",
+      "bytes": 4533,
+      "sha256": "b3be41b50c903bcbffebe63a19eeb35f9af7e78c5fd7e03f29c9bf05ef9b4f3b"
+    },
+    {
+      "path": "external_evidence/hh_bridge.py",
+      "bytes": 7589,
+      "sha256": "c28fd107d8d5de0c1781ac0c638ddd1f46b81883cfc10963329a1b66dbf0b371"
+    },
+    {
+      "path": "external_evidence/hh_pilot.py",
+      "bytes": 6911,
+      "sha256": "b13c40f6ef252a8885d10e73520242cf6305300b509c882252d58ea894802d3d"
+    },
+    {
+      "path": "external_evidence/rec_bianchi_116_metadata.json",
+      "bytes": 3274,
+      "sha256": "a3c43053c51e689c6515df52eccd1d3476a13a7a95e5d9ae07c4910d6056d8e1"
+    },
+    {
+      "path": "external_evidence/WU088_HH_127_metadata.json",
+      "bytes": 5628,
+      "sha256": "a7082e74a3cec6979c8820727aab16735d48b2d86d78799f2fa5c278131337d0"
+    },
+    {
+      "path": "external_evidence/BASS_HE_82_metadata.json",
+      "bytes": 2564,
+      "sha256": "e4079523e1f7836ea38a093154eacfe8ce26c33bd43e3be6dafacb0a345d54a1"
+    },
+    {
+      "path": "external_evidence/BASS_176_metadata.json",
+      "bytes": 6445,
+      "sha256": "a1588e5b074273b3203836c04c29b7c28d5790c31b33408c27710abbcd9997c4"
+    }
+  ],
+  "REC_PR116": {
+    "current_head": "d2c0fbb5fa06dfc37db57876bb130ef8a4fa8a5d",
+    "new_ODE_runs": 0,
+    "new_3D_mesh": false,
+    "input_sha256": "c322453eed4c4c236ff19501ea6eca50353d6ebecc604a6cab9647b3a090255c",
+    "same_input_as_REI_PR213": true,
+    "source_sha256": "453eee672e2a6d78bf0f76aa42f5453e68c1066cc561f5fe547be9e30e01e457",
+    "construction": "Fhat(S,m,r)=F(S,m,0)+F(S,0,r)-F(S,0,0)",
+    "support_cases": 153,
+    "withheld_cases": 576,
+    "observables": {
+      "final_signed_Sigma": {
+        "max_abs_error": 1.5612511283791264e-17,
+        "rms_error": 2.9547885000841347e-18,
+        "max_abs_exact_stored_float_interaction": 1.5612511283791264e-17,
+        "comparison_to_display_floor": 5.204170427930421e-05
+      },
+      "final_signed_Pi_m": {
+        "max_abs_error": 2.2970232486929643e-14,
+        "rms_error": 7.591442465167958e-15,
+        "max_abs_exact_stored_float_interaction": 2.297022058793653e-14,
+        "comparison_to_display_floor": 0.07656744162309881
+      },
+      "final_signed_Pi_r": {
+        "max_abs_error": 1.6540805183873353e-14,
+        "rms_error": 5.473720333274038e-15,
+        "max_abs_exact_stored_float_interaction": 1.6540828915685127e-14,
+        "comparison_to_display_floor": 0.05513601727957784
+      },
+      "final_signed_Pi_total": {
+        "max_abs_error": 3.9510982640131203e-14,
+        "rms_error": 1.3065163180381524e-14,
+        "max_abs_exact_stored_float_interaction": 3.9510992377701374e-14,
+        "comparison_to_display_floor": 0.13170327546710403
+      },
+      "final_Tgas_K": {
+        "max_abs_error": 1.0913936421275139e-11,
+        "rms_error": 2.1756174486665446e-12,
+        "max_abs_exact_stored_float_interaction": 1.0913936421275139e-11,
+        "comparison_to_display_floor": null
+      },
+      "final_x_HII": {
+        "max_abs_error": 4.440892098500626e-16,
+        "rms_error": 1.0111121659566547e-16,
+        "max_abs_exact_stored_float_interaction": 4.440892098500626e-16,
+        "comparison_to_display_floor": null
+      },
+      "final_x_HeII": {
+        "max_abs_error": 1.1102230246251565e-16,
+        "rms_error": 5.088522196198634e-17,
+        "max_abs_exact_stored_float_interaction": 1.1102230246251565e-16,
+        "comparison_to_display_floor": null
+      },
+      "final_b": {
+        "max_abs_error": 2.329340604949326e-21,
+        "rms_error": 4.887743761145141e-22,
+        "max_abs_exact_stored_float_interaction": 2.329340604949326e-21,
+        "comparison_to_display_floor": null
+      },
+      "final_H": {
+        "max_abs_error": 3.0814879110195774e-33,
+        "rms_error": 1.041111167951921e-33,
+        "max_abs_exact_stored_float_interaction": 3.0814879110195774e-33,
+        "comparison_to_display_floor": null
+      },
+      "final_elapsed_s": {
+        "max_abs_error": 0.0625,
+        "rms_error": 0.020422379090310055,
+        "max_abs_exact_stored_float_interaction": 0.0625,
+        "comparison_to_display_floor": null
+      }
+    },
+    "validation": {
+      "schema": "rec.rei.axis_reuse.scoped_validation.v1",
+      "actual_executed_source_sha256": "453eee672e2a6d78bf0f76aa42f5453e68c1066cc561f5fe547be9e30e01e457",
+      "input_sha256": "c322453eed4c4c236ff19501ea6eca50353d6ebecc604a6cab9647b3a090255c",
+      "unit_tests": {
+        "command": "python -m unittest -v test_axis_reuse",
+        "exit": 0,
+        "unique_methods": 12,
+        "status": "PASS_SCOPED",
+        "red_attempt": "ModuleNotFoundError before implementation; preserved"
+      },
+      "analysis": {
+        "command": "timeout 180 python axis_reuse.py --csv ../../intake/REI_SPLIT729_CASES.csv --out ../results/axis153_validation",
+        "exit": 0,
+        "limits": {
+          "CPU_s": 60,
+          "wall_s": 180,
+          "address_space_bytes": 2147483648
+        },
+        "gnu_time": {
+          "user_s": 1.12,
+          "system_s": 0.12,
+          "wall_s": 0.84,
+          "maxrss_KiB": 113260
+        },
+        "main_timer": {
+          "CPU_s": 0.12404377899999997,
+          "wall_s": 0.12581780400000753
+        },
+        "timer_scope": "GNU time includes wrapped process startup and termination; main timer excludes imports/startup/final receipt. Different nested scopes are not summed."
+      },
+      "result_summary_sha256": "58820d835586921b97ab8a5de13d7e104024965d2e05dca7267f3ef7f77e169d",
+      "comparison_csv_sha256": "85f76ec6cc1c741e8570a6590d2234fc8e11591ecf40b5fec88db506a41d00f0",
+      "review_method": "Serial PHYS-MATH and PHYS-MATH-CODE checking plus actual Wolfram algebra; no independent agent available",
+      "independent_agent_review": "NOT_RUN_TOOL_NOT_EXPOSED",
+      "validation_design": "Retrospective stored-data comparison. Mixed endpoints excluded from prediction construction, but this is not a preregistered blinded prospective study.",
+      "new_ODE_runs": 0,
+      "new_NCP_jobs": 0,
+      "new_benchmarks": 0,
+      "global_error_bound": null,
+      "production": "NOT_APPROVED"
+    },
+    "decision": "ACCEPT_REUSED_WARM_ENDPOINT_POSTPROCESSING_ONLY",
+    "C21M_reuse": "Possible diagnostic of mixed response after new collisionless data exist. Do not substitute axis reconstruction for exact coupled dynamics or assume warm short-interval residual applies z20->4."
+  },
+  "HH_PR127": {
+    "current_head": "71e925938387b73958c8881a06ef387e6874fafe",
+    "initial_science_source": "56db9f2db0746bf571665ef7ac8e216a9df8c3d8",
+    "upstream_source": "3b85dedce84d37b3e165da00685a8a984950aafe",
+    "completed_control_count_reported": 63,
+    "samples": 81,
+    "norm": "full Frobenius",
+    "source_settings_read": {
+      "massive_A": 0.0,
+      "mass_fraction": 0.1,
+      "mass_over_Tref": 30.0,
+      "L": 8,
+      "rtol": 3e-11,
+      "atol": 3e-13
+    },
+    "signed_Sigma_grid": [
+      0.0,
+      -0.0005,
+      0.0005,
+      -0.001,
+      0.001,
+      -0.002,
+      0.002,
+      -0.004,
+      0.004
+    ],
+    "signed_totalPi_grid": [
+      0.0,
+      -0.00025,
+      0.00025,
+      -0.0005,
+      0.0005,
+      -0.001,
+      0.001
+    ],
+    "new_sector_postprocessing_ODE_runs": 0,
+    "decision": "ACCEPT_SOURCE_CONTRACT_AND_PUBLISHED_SECTOR_REPORT; full63 raw not independently downloaded here",
+    "new_independent_matter_axis": false,
+    "scope": "fixed A_m0 collisionless PR147 control; gamma/nu present; z20->4; no full HHe/UV reionization",
+    "no_replay": "Do not rerun these63 completed input coordinates; overlap with C21L atS0=0 must be deduplicated before counting physical cases."
+  },
+  "HE_PR82": {
+    "current_head": "9479387545bc4ba29278f3990a83ca20ed2f2a73",
+    "decision": "METADATA_ONLY_CONTRACT_CHECKPOINT; proposed28case result under review, not accepted as completed physics from this snapshot",
+    "remaining": "Await actual source/results/receipts before science intake"
+  },
+  "BASS_PR176": {
+    "current_head": "26f4a89a54462c4e7c5705f281f187f33f45166a",
+    "source_results_commit": "25126962530d748c242fdf879833026bbdc90c48",
+    "same_execution_as_REI_PR213": true,
+    "execution_source": "82372ed8db68085868603d4267a630ed9cde6abb",
+    "decision": "MIRROR_DEDUPLICATED; count729 once"
+  },
+  "retrieval_roots": {
+    "PR198": "https://github.com/cosmosapjw-quantum/rei_bianchi/tree/8bd35af5f11c7ea5945b656be1c013d1c1933498/research/rei_bianchi_sigma_pi_pilot_20261021",
+    "PR213": "https://github.com/cosmosapjw-quantum/rei_bianchi/tree/d32cd99fa19c65aa1ca63dbc8aab8741834270e8/research/rei_sigma_pi_pilot_20261021",
+    "REC_PR116": "https://github.com/cosmosapjw-quantum/rec_bianchi/tree/d2c0fbb5fa06dfc37db57876bb130ef8a4fa8a5d/research/rec_rei_axis_reuse_20261021",
+    "HH_PR127": "https://github.com/cosmosapjw-quantum/WU088_HH/tree/71e925938387b73958c8881a06ef387e6874fafe/research/hh_phys74_rei_pilot_20261021",
+    "HE_PR82": "https://github.com/cosmosapjw-quantum/BASS_HE/pull/82",
+    "BASS_PR176": "https://github.com/cosmosapjw-quantum/BASS/pull/176"
+  },
+  "selected_endpoints198_fetch": {
+    "original_path": "research/rei_bianchi_sigma_pi_pilot_20261021/matter_radiation_20261021/results/new_sweep/endpoints.csv",
+    "selected_lines": [
+      [
+        1,
+        1
+      ],
+      [
+        600,
+        607
+      ]
+    ],
+    "local_scope": "header plus8selected rows;6mixed cancellation and2matter boundary rows; not whole319364-byteCSV",
+    "source_branch_commit": "8bd35af5f11c7ea5945b656be1c013d1c1933498"
+  }
+}

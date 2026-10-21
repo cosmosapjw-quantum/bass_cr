@@ -1,0 +1,47 @@
+{
+  "benchmark_runs": 0,
+  "claim_limits": [
+    "Finite-grid retrospective diagnostic only, with all coupled ODE trajectories already present.",
+    "No solver replacement, hidden fitting, new completed scientific trajectories, measured speedup, decoupling theorem, or prospective accuracy bound.",
+    "Full scalar norms are not added; the additive diagnostic applies to signed observables."
+  ],
+  "diagnostic_npz_sha256": "c753f6505dfb0386cc8d939f7658908f9facd8819a6760f936b4dbc1a343801c",
+  "diagnostic_source_sha256": "4da923759cabf880e3668160d32a7cca48bae29dac3cf119355892df1f3c6589",
+  "diagnostic_summary_sha256": "659b35d5c971940791ad11849ba84b88e57160460cb2ec74b1b9213ff0470152",
+  "findings": [
+    {
+      "id": "AXIS_V1_EXACT_LABEL",
+      "resolution": "V1 numerical outputs preserved. V2 explicitly labels finite-precision 80-digit arithmetic; no scientific solver or raw trajectory changed.",
+      "severity": "minor nonblocking",
+      "status": "RESOLVED_BY_V2_SCOPE_LABEL"
+    }
+  ],
+  "global_error_bound": null,
+  "independent_fraction_vs_80digit_interaction": {
+    "byte_equal_values": 4836,
+    "finite_precision_residual_at_exact_zero_count": 12,
+    "interpretation": "The 80-digit Decimal channel has finite-precision residuals below 1e-98 at 12 exact rational zeros. The v2 source and summary now explicitly label high precision rather than exact arithmetic.",
+    "maximum_absolute_difference": 4.4480133056640625e-99,
+    "values_checked": 4848
+  },
+  "input_component_npz_sha256": "7b78b7827889e2ee039a5c0f025dd5ac2fe678bd06bdbcfd8f1dfc198a12b3d1",
+  "interpretation": {
+    "maximum_absolute_residuals": {
+      "P_m_signed_F": 1.1647880056851224e-09,
+      "P_r_signed_F": 1.4831875142125306e-09,
+      "P_tot_signed_F": 2.5829708926876404e-09,
+      "S_signed_F": 1.2601685821147374e-09
+    },
+    "near_cancellation_total_pointwise_relative_max": 5.425310436042429,
+    "relative_error_caveat": "The total-stress pointwise relative maximum exceeds 5 near small actual stress. Do not replace this with a uniform small relative-error or cancellation-accuracy claim.",
+    "shear_residual_over_axis_increment_scale": 2.12061845186732e-05,
+    "shear_scale_caveat": "The total shear-support scale includes initial |S0|=.012; use the separately recorded response-increment scale when discussing response accuracy."
+  },
+  "model_fits": 0,
+  "new_ODE_runs": 0,
+  "review_script_sha256": "c9f6a6938886b9a382c144f03bb0f3a6d87b6d0a46cf95b438cae8ae0b61183a",
+  "reviewer": "independent theory_literature agent, not diagnostic implementer",
+  "scope": "15 support and 12 disjoint held-out mixed trajectories; all 101 stored times and four signed channels; exact rational stored-float interaction checked independently of Decimal implementation.",
+  "status": "PASS_SCOPED",
+  "support_and_held_out_disjoint": true
+}

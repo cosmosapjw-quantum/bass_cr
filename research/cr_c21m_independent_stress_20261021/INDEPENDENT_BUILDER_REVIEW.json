@@ -1,0 +1,160 @@
+{
+  "status": "PASS_SCOPED",
+  "reviewer": "independent theory_literature agent; not builder implementer",
+  "scope": "source-derived initial map and initial fields/RHS; no ODE or benchmark",
+  "new_ODE_integrations": 0,
+  "global_error_bound": null,
+  "builder_sha256": "7fb15e89403817812588e189c013d45d200864f0076351c7c84bf77667520f0f",
+  "test_builder_sha256": "d4d786dc93e6646aab928ef40847f5430101bcf6b42ad55256e1c0f0eaec3611",
+  "review_script_sha256": "915e34a7325394deb1908f4f1357518428524e4ea63e99228526de7933fb13d8",
+  "source_commit": "3b85dedce84d37b3e165da00685a8a984950aafe",
+  "original_integrator_method_identity": true,
+  "static_cases": [
+    {
+      "label": "opposing",
+      "targets": [
+        0.0,
+        0.0004,
+        -0.0004
+      ],
+      "A_m": 0.5851295527389071,
+      "k": -0.1339721942746181,
+      "independent_tensor_axis_errors": [
+        0.0,
+        2.168404344971009e-19,
+        1.6263032587282567e-19
+      ],
+      "source_angular_E2_error": 2.7755575615628914e-17,
+      "massive_pressure_difference_error_J_m3": -1.550963648536927e-25,
+      "signed_shear_equation_error_s_inverse_squared": -1.9148249241999686e-52,
+      "original_rhs_method_identity": true,
+      "state_components": 40
+    },
+    {
+      "label": "matter",
+      "targets": [
+        -0.031,
+        -0.0004,
+        0.0
+      ],
+      "A_m": -0.585223286001882,
+      "k": 0.0,
+      "independent_tensor_axis_errors": [
+        3.469446951953614e-18,
+        1.0842021724855044e-19,
+        0.0
+      ],
+      "source_angular_E2_error": 1.3877787807814457e-17,
+      "massive_pressure_difference_error_J_m3": -1.0339757656912846e-25,
+      "signed_shear_equation_error_s_inverse_squared": -8.552847072295026e-50,
+      "original_rhs_method_identity": true,
+      "state_components": 40
+    },
+    {
+      "label": "radiation",
+      "targets": [
+        0.023,
+        0.0,
+        0.0006
+      ],
+      "A_m": 0.0,
+      "k": 0.20097601079687907,
+      "independent_tensor_axis_errors": [
+        6.938893903907228e-18,
+        2.1109635042206488e-19,
+        1.0842021724855044e-19
+      ],
+      "source_angular_E2_error": 6.9690822041204e-18,
+      "massive_pressure_difference_error_J_m3": -1.9404590315223215e-25,
+      "signed_shear_equation_error_s_inverse_squared": 8.552847072295026e-50,
+      "original_rhs_method_identity": true,
+      "state_components": 40
+    },
+    {
+      "label": "mixed",
+      "targets": [
+        0.017,
+        0.0005,
+        0.0003
+      ],
+      "A_m": 0.7314471722957663,
+      "k": 0.1004839856846074,
+      "independent_tensor_axis_errors": [
+        3.469446951953614e-18,
+        0.0,
+        5.421010862427522e-20
+      ],
+      "source_angular_E2_error": 2.7755575615628914e-17,
+      "massive_pressure_difference_error_J_m3": 2.0679515313825692e-25,
+      "signed_shear_equation_error_s_inverse_squared": 0.0,
+      "original_rhs_method_identity": true,
+      "state_components": 40
+    },
+    {
+      "label": "isotropic",
+      "targets": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "A_m": 0.0,
+      "k": 0.0,
+      "independent_tensor_axis_errors": [
+        0.0,
+        2.1111496372469995e-19,
+        0.0
+      ],
+      "source_angular_E2_error": 6.9690822041204e-18,
+      "massive_pressure_difference_error_J_m3": -1.9404590315223215e-25,
+      "signed_shear_equation_error_s_inverse_squared": 1.4836824602749686e-67,
+      "original_rhs_method_identity": true,
+      "state_components": 40
+    }
+  ],
+  "domain_checks": {
+    "matter_endpoints_A_minus1_plus2": true,
+    "radiation_endpoints_k_plusminus0p5": true,
+    "rejections": [
+      {
+        "target_repr": "(0.0, 0.01, 0.0)",
+        "type": "ValueError",
+        "message": "UNREALIZABLE_MATTER_TARGET: requested 0.01; attainable full signed Pi_m [-0.00068360929323712594, 0.0013672185864742521] for S0=0"
+      },
+      {
+        "target_repr": "(0.0, 0.0, 0.01)",
+        "type": "ValueError",
+        "message": "UNREALIZABLE_RADIATION_TARGET: requested 0.01; source-admitted full signed Pi_r [-0.0014928470872846732, 0.0014928470872846732] with |k|<=0.5"
+      },
+      {
+        "target_repr": "(2.449489742783178, 0.0, 0.0)",
+        "type": "ValueError",
+        "message": "INVALID_FULL_FROBENIUS_TARGET: finite values and |S0|<sqrt(6) required"
+      },
+      {
+        "target_repr": "(0.0, inf, 0.0)",
+        "type": "ValueError",
+        "message": "INVALID_FULL_FROBENIUS_TARGET: finite values and |S0|<sqrt(6) required"
+      }
+    ]
+  },
+  "checks": [
+    "massive FD*(1+A P2) weights, cell masses and energy normalization rebuilt for every A",
+    "actual source Hbase used for full-Frobenius signed shear map",
+    "independent full-tensor SI kappa/(H/c)^2 target reconstruction",
+    "original CanonicalFVSpecies RHS and integrator retained",
+    "initial shear evolution sign and 8*pi*G/c^2 coupling checked directly",
+    "photon/neutrino common k stated, both source sectors separately present",
+    "domain checks preserve source radiation cap and massive positivity",
+    "isotropic physical zero retains raw quadrature roundoff rather than clamping"
+  ],
+  "findings": [],
+  "claim_limits": [
+    "validates initial mapping and original RHS identity, not ODE endpoint accuracy",
+    "global_error_bound remains null",
+    "canonical quadrature and L8 truncation error unchanged",
+    "all existence/domain statements use eta0=b0=0 fixed source family",
+    "component scalar outputs reconstruct exact LRS diagonal tensors; triaxial tensors are outside scope"
+  ],
+  "theory_reference": "theory_intake/THEORY_REVIEW_KO.md",
+  "implementation_test_receipt_sha256": "f9623018cc0230be38b80b81cca37c5dff6b6a9066b88558ea7f45fe1c322525"
+}

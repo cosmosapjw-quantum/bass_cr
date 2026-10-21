@@ -1,0 +1,9 @@
+{
+  "status": "REVIEW_HARNESS_ERROR_FIXED",
+  "scope": "Independent review script; no science ODE or input writes",
+  "error": "TypeError: NumPy boolean subtract while computing a display-only max difference for the analysis cancellation_defined mask",
+  "location": "review_new_pilot.py compare, after all 26 new-case raw tensor/source-field/RHS checks and during comparison with analysis NPZ",
+  "fix": "Compute boolean discrepancy using inequality, retaining all numeric comparison tolerances and assertions.",
+  "scientific_failure": false,
+  "new_ODE_integrations": 0
+}
