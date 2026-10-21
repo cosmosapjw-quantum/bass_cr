@@ -1,0 +1,506 @@
+{
+  "status": "PASS_SCOPED",
+  "reviewer": "independent theory_literature agent, not postprocessor implementer",
+  "method": "full 3x3 tensor contractions and SI kappa/Hgeom construction independent of analyzer; direct original source fields from raw Y; no analyzer call",
+  "scope": {
+    "cases": 81,
+    "all_stored_times": 8181,
+    "original_field_reconstructed_states": 243,
+    "new_ODE_integrations": 0
+  },
+  "source_validation": "all 9 parent manifest files verified via original adapter.verify_source",
+  "source_files": [
+    {
+      "repo": "https://github.com/cosmosapjw-quantum/rei_bianchi",
+      "ref": "3b85dedce84d37b3e165da00685a8a984950aafe",
+      "path": "AGENTS.md",
+      "size": 9351,
+      "sha256": "ab29a05cac922bd393dc04f7f280a0d4e1d7289ae6ea24291f48fd7cf7b2e8eb"
+    },
+    {
+      "repo": "https://github.com/cosmosapjw-quantum/rei_bianchi",
+      "ref": "3b85dedce84d37b3e165da00685a8a984950aafe",
+      "path": "research/rei_bass_hierarchy_backreaction_20261015/canonical_fv_20261015/canonical_fv.py",
+      "size": 13255,
+      "sha256": "91c1641b851aa9580141d4423e2579ced5f11b95aa716b3fc2cb0137df344cc5"
+    },
+    {
+      "repo": "https://github.com/cosmosapjw-quantum/rei_bianchi",
+      "ref": "3b85dedce84d37b3e165da00685a8a984950aafe",
+      "path": "research/rei_bass_hierarchy_backreaction_20261015/lrs_boltzmann.py",
+      "size": 10300,
+      "sha256": "06ef834e4cd7adacf01f0ad6e3becc5aea9a493b5b99fd398be82610543984cc"
+    },
+    {
+      "repo": "https://github.com/cosmosapjw-quantum/rei_bianchi",
+      "ref": "3b85dedce84d37b3e165da00685a8a984950aafe",
+      "path": "research/rei_bass_hierarchy_backreaction_20261015/run_hierarchy.py",
+      "size": 10445,
+      "sha256": "5dcbbf6000b6d20b550b8269e92208a9ee30de64c8148ca7aad97de24229375f"
+    },
+    {
+      "repo": "https://github.com/cosmosapjw-quantum/rei_bianchi",
+      "ref": "3b85dedce84d37b3e165da00685a8a984950aafe",
+      "path": "research/rei_bass_hierarchy_backreaction_20261015/species_hierarchy.py",
+      "size": 6083,
+      "sha256": "ced7906b35c26d8d0374ee8ce7f67ceb957b51a63d44e5a2661997b7e46983c5"
+    },
+    {
+      "repo": "https://github.com/cosmosapjw-quantum/rei_bianchi",
+      "ref": "3b85dedce84d37b3e165da00685a8a984950aafe",
+      "path": "research/rei_bass_hierarchy_backreaction_20261015/suppliers/bass/rei_axbi_background_supplier_20261015/axbi_provider.py",
+      "size": 8745,
+      "sha256": "db980776caf6a467f352ee11f55221ab711001600ef51c06d8e6a3c614903fe3"
+    },
+    {
+      "repo": "https://github.com/cosmosapjw-quantum/rei_bianchi",
+      "ref": "3b85dedce84d37b3e165da00685a8a984950aafe",
+      "path": "research/rei_bass_hierarchy_backreaction_20261015/suppliers/bass/rei_axbi_background_supplier_20261015/source/REI_BACKGROUND_FAMILY_LOCK.json",
+      "size": 2552,
+      "sha256": "46f818c2f9de890c72f71fa3cc70366b28c42ca0d65190bd905b6310023e7af0"
+    },
+    {
+      "repo": "https://github.com/cosmosapjw-quantum/rei_bianchi",
+      "ref": "3b85dedce84d37b3e165da00685a8a984950aafe",
+      "path": "research/rei_bass_hierarchy_backreaction_20261015/suppliers/bass/rei_axbi_initial_stress_20261015/einstein_vlasov.py",
+      "size": 8941,
+      "sha256": "7b7e36d80859233188274bd1b414d0765512807a6f3c0d036d4de1898d870220"
+    },
+    {
+      "repo": "https://github.com/cosmosapjw-quantum/rei_bianchi",
+      "ref": "3b85dedce84d37b3e165da00685a8a984950aafe",
+      "path": "research/rei_sigma_pi_response_20261015/response.py",
+      "size": 10550,
+      "sha256": "75b0341834ecb56c4a9fafa42d38f7da3a1a8fc1678ba6bc7501f6ab79e10adc"
+    }
+  ],
+  "analyzer_sha256": "0b96e5d3659fd1226fbff0411c3ec615d670337b451a8fbffc18ce5fb037d38d",
+  "verifier_sha256": "e12e3d6a710a43f60f2e1ef193d8f6d9cafe41674510137d0c0b74d6429f9aa4",
+  "review_script_sha256": "b1f1377e96f2c3d5638a1478169c1fc234c4c1c3add8d29e233b58bf4b244a1f",
+  "output_npz_sha256": "e6f274ee9719692051169561a7e9b1cc9a6efaa80b2ed55c3b58a6f45e371941",
+  "output_manifest_sha256": "09e86598d038f1099763f70e08d980df65f1498ef19b3555dfb5d0aa9f3e2e88",
+  "max_absolute_differences": {
+    "raw_eta": 0.0,
+    "raw_a": 0.0,
+    "raw_H": 0.0,
+    "raw_s": 0.0,
+    "Sigma_F": 1.3877787807814457e-17,
+    "S_signed_F": 1.3877787807814457e-17,
+    "Sigma_half": 1.0408340855860843e-17,
+    "tensor_m": 0.0,
+    "physical_norm_m": 1.6155871338926322e-27,
+    "Pi_m": 6.776263578034403e-21,
+    "signed_m": 6.776263578034403e-21,
+    "half_m": 5.082197683525802e-21,
+    "dp_m": 0.0,
+    "work_m": 2.802596928649634e-45,
+    "trace_m": 0.0,
+    "endpoint_m": 8.470329472543003e-22,
+    "tensor_gamma": 0.0,
+    "physical_norm_gamma": 1.0339757656912846e-25,
+    "Pi_gamma": 2.168404344971009e-19,
+    "signed_gamma": 2.168404344971009e-19,
+    "half_gamma": 1.6263032587282567e-19,
+    "dp_gamma": 0.0,
+    "work_gamma": 3.587324068671532e-43,
+    "trace_gamma": 0.0,
+    "endpoint_gamma": 5.421010862427522e-20,
+    "tensor_nu": 0.0,
+    "physical_norm_nu": 5.169878828456423e-26,
+    "Pi_nu": 1.6263032587282567e-19,
+    "signed_nu": 1.6263032587282567e-19,
+    "half_nu": 1.6263032587282567e-19,
+    "dp_nu": 0.0,
+    "work_nu": 3.587324068671532e-43,
+    "trace_nu": 0.0,
+    "endpoint_nu": 4.0657581468206416e-20,
+    "tensor_r": 0.0,
+    "physical_norm_r": 1.0339757656912846e-25,
+    "Pi_r": 4.336808689942018e-19,
+    "signed_r": 4.336808689942018e-19,
+    "half_r": 3.2526065174565133e-19,
+    "dp_r": 0.0,
+    "work_r": 7.174648137343064e-43,
+    "trace_r": 0.0,
+    "endpoint_r": 8.131516293641283e-20,
+    "tensor_tot": 0.0,
+    "physical_norm_tot": 2.0679515313825692e-25,
+    "Pi_tot": 4.336808689942018e-19,
+    "signed_tot": 4.336808689942018e-19,
+    "half_tot": 3.2526065174565133e-19,
+    "dp_tot": 0.0,
+    "work_tot": 7.174648137343064e-43,
+    "trace_tot": 0.0,
+    "endpoint_tot": 8.131516293641283e-20,
+    "tensor_rad_sum": 0.0,
+    "tensor_tot_sum": 0.0,
+    "cancellation": 0.0,
+    "source_field_a": 0.0,
+    "source_field_b": 0.0,
+    "source_field_s": 0.0,
+    "source_field_H": 0.0,
+    "source_field_Pi_gamma_J_m3": 0.0,
+    "source_field_Pi_nu_J_m3": 0.0,
+    "source_field_Pi_matter_J_m3": 0.0,
+    "source_field_Pi_radiation_J_m3": 0.0,
+    "source_field_Einstein_H2": 0.0,
+    "source_field_E_gamma": 0.0,
+    "source_field_N_gamma": 0.0,
+    "source_field_E_nu": 0.0,
+    "source_field_N_nu": 0.0
+  },
+  "raw_inputs": [
+    {
+      "case": "s00_p00",
+      "raw_sha256": "fa6689691d312ec3c1b9559f64ae6ae00b9c60ee965605856dcae3937f38431c"
+    },
+    {
+      "case": "s00_p01",
+      "raw_sha256": "3d5321c7f125c41a78d3a6392449af4139121845bdbb5d35b5026ce76f7229eb"
+    },
+    {
+      "case": "s00_p02",
+      "raw_sha256": "e3f069d73bc46b96656249692945e3f9942164f848120972b153c63778e5df34"
+    },
+    {
+      "case": "s00_p03",
+      "raw_sha256": "ffc930e93bd71c2dde55c0d95b261b1ee7e7c5173e214b6595585fb59c8bd86b"
+    },
+    {
+      "case": "s00_p04",
+      "raw_sha256": "73e3222791515a6a1e33b4a6f2ca0ae4b44b394ebbb5b99f9feb491e88a94923"
+    },
+    {
+      "case": "s00_p05",
+      "raw_sha256": "2a3585c585074fce059a5e48076ae656cdaf2659d4fc708eea06155f09d5a738"
+    },
+    {
+      "case": "s00_p06",
+      "raw_sha256": "186b4336ad66e9dce1bae14958cd6e4a0e1c8d4ae98529ff8aa13c16d84d4572"
+    },
+    {
+      "case": "s00_p07",
+      "raw_sha256": "75563cc10a8c5233c1cd348c28d4d34a8d1a9b3077a8c03b661c50673751f3ba"
+    },
+    {
+      "case": "s00_p08",
+      "raw_sha256": "ee538ed1330b74b486afb0716da037aaff65e2facddbd8c03b31fb7390ab97bd"
+    },
+    {
+      "case": "s01_p00",
+      "raw_sha256": "57f2ef4b06adc583544cf14b3036da3a07b4705bfb566728f50821c6609b98fe"
+    },
+    {
+      "case": "s01_p01",
+      "raw_sha256": "1d9a06a0497820b01baad6207b2edeebf77baff9d09471bcf7ebcbdcd6e91d28"
+    },
+    {
+      "case": "s01_p02",
+      "raw_sha256": "abd2d9b2448a9e5d56cf3b0ab54ad109e72e4a188fdf2ef5047a2fc8957dfa6b"
+    },
+    {
+      "case": "s01_p03",
+      "raw_sha256": "da27e579a9f2bad80afa68b3b7cfcaa17fe3ab1fe15f9d574289443bfbca36ae"
+    },
+    {
+      "case": "s01_p04",
+      "raw_sha256": "63eb74d10a484dcfed93305dc3c372f65cd10a97e08ef132b1ae0ba674e50531"
+    },
+    {
+      "case": "s01_p05",
+      "raw_sha256": "cb36d78406cac2e2afad9f0414efbea88172e2faea5d8d3ad5770f53fcdc62ca"
+    },
+    {
+      "case": "s01_p06",
+      "raw_sha256": "18f2b2405b665afa5a9e65624dfb23a86fa0771c7158ddae08bffd5be8679c86"
+    },
+    {
+      "case": "s01_p07",
+      "raw_sha256": "3e23acee71b05c9b0d7d63e78b80093e712c5a3d90426ce67bde0e6e234cdcc5"
+    },
+    {
+      "case": "s01_p08",
+      "raw_sha256": "d0f985c7571e6ed43bceb7cd7c01ace6a2e9a6dbaa7fcebc15da4d63470e11bd"
+    },
+    {
+      "case": "s02_p00",
+      "raw_sha256": "51b60e04954d1cde9b903597400941620c587fd8ac03b84de49b25427e015423"
+    },
+    {
+      "case": "s02_p01",
+      "raw_sha256": "f999f659f0ba1f9bb83fbd8d55eb26e0686dccf6414901b0560864ebe787735c"
+    },
+    {
+      "case": "s02_p02",
+      "raw_sha256": "89d7f0b8fc8a3b029ed5550b9c0504e1930ab6c87ec6222d0b178ee5328bdfc6"
+    },
+    {
+      "case": "s02_p03",
+      "raw_sha256": "8419e718bf850acbfdd32b3c7e2ec63df5ab795f4621e9da603f98b76042624c"
+    },
+    {
+      "case": "s02_p04",
+      "raw_sha256": "cb4ef93cf3b6853995794e2dc22fa9b92c68188da158197b546d1078f7afef38"
+    },
+    {
+      "case": "s02_p05",
+      "raw_sha256": "6ed9ae7a9fc3577df7652e4e725607c5fdfd9cb6ba51d4dfc5732e2786be2049"
+    },
+    {
+      "case": "s02_p06",
+      "raw_sha256": "89049b18eff9ca5549a36314b8d62314ae674cda6362339c5eda9071d7868d59"
+    },
+    {
+      "case": "s02_p07",
+      "raw_sha256": "79971e85be2e59e35e755051f68698d5e4019ea704d3ded75fd65ea74cc86795"
+    },
+    {
+      "case": "s02_p08",
+      "raw_sha256": "042a69c43da9570ef5903a3ed562a95d0f2d85f767845ed4e90f5377d5c2b05e"
+    },
+    {
+      "case": "s03_p00",
+      "raw_sha256": "c4b71f70a1a150a6fb2cbf4f8de01da81216567c15b965e542194dad5e0a61ab"
+    },
+    {
+      "case": "s03_p01",
+      "raw_sha256": "2d86e44ae79efd0299546fcae8955a85cca2ffee8f5ebf57d39ef5e7e6b2c784"
+    },
+    {
+      "case": "s03_p02",
+      "raw_sha256": "6faf3de8a657739e1e18b0bc91347ed696e89997b034ceda796bdb89157baf02"
+    },
+    {
+      "case": "s03_p03",
+      "raw_sha256": "0101fc41b910a248d4e0ea061751e169e30c5c410c2c954123a48c45548f5a0f"
+    },
+    {
+      "case": "s03_p04",
+      "raw_sha256": "74dce3a0ca9753c4bf97f4cbd0ef8f444fbb0559d672f6aacc2e4c9b68295259"
+    },
+    {
+      "case": "s03_p05",
+      "raw_sha256": "b9b5cd5b71e825cecdc00ae5ed0811986f66c9c6311012805ac332ce06daf7fa"
+    },
+    {
+      "case": "s03_p06",
+      "raw_sha256": "3a4e33ae58dbd450a31c3c0763b594d77ef25018b10d6a67ba5ffa318189d6a7"
+    },
+    {
+      "case": "s03_p07",
+      "raw_sha256": "3eeeb1f43eb352c43b0d54a85d4eaed584cd967e4f171bc51e7ea814467ccdf6"
+    },
+    {
+      "case": "s03_p08",
+      "raw_sha256": "4165449cda1638ced87caacea0466bcc9b14dd95af387fc06fcead73695f832a"
+    },
+    {
+      "case": "s04_p00",
+      "raw_sha256": "f43dbd00fe8b1b2136743cc060998c08c71b1161ca5a1b65c8165f8f698fe906"
+    },
+    {
+      "case": "s04_p01",
+      "raw_sha256": "372fa6b7fa4ae63bd6b55838f944b8545d5847d6e44c2623f1dad763debffa20"
+    },
+    {
+      "case": "s04_p02",
+      "raw_sha256": "c49a05b4d90d9719c411eb9427519f7e7ea377d3587370e26aed922a75563678"
+    },
+    {
+      "case": "s04_p03",
+      "raw_sha256": "4dd17389c2285a36451a0ad842334807452896f86d28b9ef6323e1c1157eb99f"
+    },
+    {
+      "case": "s04_p04",
+      "raw_sha256": "cb521fa1be20fe917fb370a42adabc5fa75eacbd61958c612ab255834ececc5e"
+    },
+    {
+      "case": "s04_p05",
+      "raw_sha256": "698a44281204f46431170a70561775fa3db76bc42ceae2500425ee55602380de"
+    },
+    {
+      "case": "s04_p06",
+      "raw_sha256": "c2b815dd228b3db108b44fe3920022bc71ed27b72fa2499da0110a18305df8fd"
+    },
+    {
+      "case": "s04_p07",
+      "raw_sha256": "16390ce9e501ae9a5640c27ebd531ed6d8c9faddf31af40b27475736c7d94542"
+    },
+    {
+      "case": "s04_p08",
+      "raw_sha256": "ca98ae9bb3cbb77529da11f2076aefd98f94af5a60a23fe8e1551f2aa4b04a27"
+    },
+    {
+      "case": "s05_p00",
+      "raw_sha256": "5208a223029c944b3a22a57c86b33165bb0992f4258feda64337e0e3422ed642"
+    },
+    {
+      "case": "s05_p01",
+      "raw_sha256": "4def56dc12960711b224414eaf2499018a96367a9088c8e436807bcb132a8a5c"
+    },
+    {
+      "case": "s05_p02",
+      "raw_sha256": "fe9203db033c2170760191eb4a6abce2d2e8994bc38897a7e43f4eab7ef05444"
+    },
+    {
+      "case": "s05_p03",
+      "raw_sha256": "2e69f8033addea0d8dcbf53b8a6a16344736ef14d109ccbb2c3948d11631dc0e"
+    },
+    {
+      "case": "s05_p04",
+      "raw_sha256": "bb1bcae3af6557e0495313cc0a6575b76c5292b6e0b4cb19178072369a287d86"
+    },
+    {
+      "case": "s05_p05",
+      "raw_sha256": "bd46eda0c61b78073da656d15c2a363a039ad53d55d9cc478e1d36396777a758"
+    },
+    {
+      "case": "s05_p06",
+      "raw_sha256": "69460fb08064fb71e4091c0fc8631f7d68010c1720ad6ecada395f982a95eb23"
+    },
+    {
+      "case": "s05_p07",
+      "raw_sha256": "4d875c4933e111dd4fffa65f1f15e7f1d63dd37f20747b3d3b09602aae84300e"
+    },
+    {
+      "case": "s05_p08",
+      "raw_sha256": "a5617c215bf6b3b9d69ca35362dc57a57dc0c518ba5ec79f71b393edf50e5d6c"
+    },
+    {
+      "case": "s06_p00",
+      "raw_sha256": "bc96fe05e939b68308c34479e2e23f1f2524340e619764a02ca55a0060e731a2"
+    },
+    {
+      "case": "s06_p01",
+      "raw_sha256": "93139c7adb2aa75b83015b6430713920236a66e0a11959fd7fef3270c1510782"
+    },
+    {
+      "case": "s06_p02",
+      "raw_sha256": "8dbd442e901c87e59b895f89478b99a1a0fb885d5f7543adebebda2a7b7ade50"
+    },
+    {
+      "case": "s06_p03",
+      "raw_sha256": "033cea45bfa9bcb94cf42fa08bf30a000f4728ef0237bea62eae3ae7a61d3429"
+    },
+    {
+      "case": "s06_p04",
+      "raw_sha256": "198af1adfe11ed35849d37f6426c30c782d2d65afd60a0ec7c03927fcfdec65c"
+    },
+    {
+      "case": "s06_p05",
+      "raw_sha256": "27f19ac7e94b020eaf8215053d018c02020ffd0cba4ec5d2edccdbc00dc31c1c"
+    },
+    {
+      "case": "s06_p06",
+      "raw_sha256": "9881477181f1d0aad2072b1c544bf32de9382ab54754193abfc73ca5aede433f"
+    },
+    {
+      "case": "s06_p07",
+      "raw_sha256": "a0c86e59e98978f1872781693b62da5c75caf5b43d913cdf3d358fa1d3120a72"
+    },
+    {
+      "case": "s06_p08",
+      "raw_sha256": "dc93765fe5b38ed08b98aef869fc496c4fd4ed71bd15dc9eba1c8a40d9e40958"
+    },
+    {
+      "case": "s07_p00",
+      "raw_sha256": "07ce6c490f8b14c69cf1999a352eb67678e4d0a25ae91aefe1fb3492ddc3f002"
+    },
+    {
+      "case": "s07_p01",
+      "raw_sha256": "766c0a7bfe49ac4d5dbb9c81d4a7b1e5065461b7b732e655f97855092f9d88ab"
+    },
+    {
+      "case": "s07_p02",
+      "raw_sha256": "b35a742dcc763b3ae2577431547b17a8822d5e3f3eb830deaaae359ce0ef87e7"
+    },
+    {
+      "case": "s07_p03",
+      "raw_sha256": "3e17f7519c6b3944cd294eaa677ed4b7ef64edef41724399052088c80fa8b211"
+    },
+    {
+      "case": "s07_p04",
+      "raw_sha256": "5312a9b4f13d23efe294410a858125cd4b2792558efb4e9fbaa09745f6b31ac1"
+    },
+    {
+      "case": "s07_p05",
+      "raw_sha256": "5684b22234254a532f21eab3291c0c2fceeac8dd734c33a1331fbdc5ead6d811"
+    },
+    {
+      "case": "s07_p06",
+      "raw_sha256": "392ad51413ff1b905b67616e2686ef8d7a8759767c47d21fb7b4846a952d615f"
+    },
+    {
+      "case": "s07_p07",
+      "raw_sha256": "362cca85348d0b7f1c84533926d0ccf23b106c6a5c39a5858542b84d8ff2f88d"
+    },
+    {
+      "case": "s07_p08",
+      "raw_sha256": "a509ff507ae6575b1e5c0c7648d203eba93aa901c31737cec39468e97e2a590e"
+    },
+    {
+      "case": "s08_p00",
+      "raw_sha256": "8cd5f0d49f6a1dca5e517315b50ab1598dd2d32a955c64c4fc197aa596965fbe"
+    },
+    {
+      "case": "s08_p01",
+      "raw_sha256": "843b33ca231e64641435a54f1360d6fb398ceb6fbdc1dab0a933c6ac1515e5b3"
+    },
+    {
+      "case": "s08_p02",
+      "raw_sha256": "e3e25a6bd87834c27d51dc5c769f8373ff3997eeb4232306a3185cad62783413"
+    },
+    {
+      "case": "s08_p03",
+      "raw_sha256": "583c04e6bb058f4f7bdf2021002817bf3b87c6606ac02d4d0f3c9573af16153a"
+    },
+    {
+      "case": "s08_p04",
+      "raw_sha256": "9d8a2c4d8e495a30bb798d64f773652d3bf3448cfd343dd0b6de8a0b9b27490b"
+    },
+    {
+      "case": "s08_p05",
+      "raw_sha256": "c440ae7248593311a1a14a2eedbe4b025a495f0e5311c95b8aaebcbe9666e6ca"
+    },
+    {
+      "case": "s08_p06",
+      "raw_sha256": "1273e715874ca2a426ea906ff39e4f882c97a746c7170ab7e2c8fc326ede8ce0"
+    },
+    {
+      "case": "s08_p07",
+      "raw_sha256": "7fff4c784c17444bbf43c0cd27f4165b3ea3fb84daed8e9c341b9df6771c5ca4"
+    },
+    {
+      "case": "s08_p08",
+      "raw_sha256": "6f46ebb009f9bde7b37b1e6f785242314d506bd044c8eda12a04452c5e7b359a"
+    }
+  ],
+  "global_error_bound": null,
+  "findings": [],
+  "visual_review": {
+    "method": "direct view_image inspection of all 3 accepted PNGs",
+    "files": [
+      "component_endpoints.png",
+      "signed_component_histories.png",
+      "norms_and_cancellation.png"
+    ],
+    "status": "PASS_SCOPED",
+    "checks": [
+      "heatmap labels signed P; common symmetric-log color scale across m,r,total",
+      "nonuniform shear values explicitly labeled sampled rows, categorical row position",
+      "history positive/negative branches visible and common limits within each row; no legend/curve overlap",
+      "norm chart uses nonnegative Pi distinct from signed P and hollow total markers",
+      "cancellation mask display Pi_m+Pi_r>1e-12 is explicitly labeled and raw array remains unchanged",
+      "PNG labels and legends readable at inspected native rendering; no clipping"
+    ],
+    "limits": [
+      "not a paper-size typography certification",
+      "PDF not independently rasterized; same matplotlib figure exports observed"
+    ]
+  },
+  "claim_limits": [
+    "postprocessing and source-field reconstruction only; original ODE not rerun",
+    "Hamiltonian is constructed algebraically and not an independent global error estimate",
+    "fixed-A0 81 ensemble remains preliminary LRS collisionless z20-to-z4"
+  ]
+}
