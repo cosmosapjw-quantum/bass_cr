@@ -1,0 +1,200 @@
+{
+  "schema": "rei.unified.dag.v1",
+  "date_kst": "2026-10-21",
+  "unit_id": "UNIFIED_REI_20261021",
+  "authoritative_physics_lanes": [
+    "A_PR198",
+    "B_RECOVERED_PILOT",
+    "C_PR199_AGE",
+    "D_PR213_WARM"
+  ],
+  "source_heads": {
+    "PR198": "8bd35af5f11c7ea5945b656be1c013d1c1933498",
+    "PR199": "964b2e3c098f6e475999a4eddc7a6aa0f8f053cc",
+    "PR213": "d32cd99fa19c65aa1ca63dbc8aab8741834270e8"
+  },
+  "nodes": [
+    {
+      "id": "D0",
+      "status": "complete",
+      "scope": "accessible sources/current runtime and named remote limitations",
+      "publication": "8b71c13e23202edfce1ee67fb2da552fefb9a583_FULL_READBACK_MATCH",
+      "backup": "D0D1_AND_D3_DUAL_FULL_READBACK_VERIFIED"
+    },
+    {
+      "id": "D1",
+      "depends_on": [
+        "D0"
+      ],
+      "status": "complete",
+      "evidence": "Historical recovery:175waspartial35reuse+143not_run; later completion is recorded in D3.",
+      "publication": "8b71c13e23202edfce1ee67fb2da552fefb9a583_FULL_READBACK_MATCH",
+      "backup": "D0D1_AND_D3_DUAL_FULL_READBACK_VERIFIED"
+    },
+    {
+      "id": "D2",
+      "depends_on": [
+        "D1"
+      ],
+      "status": "complete",
+      "evidence": "exact vendor identity,explicit norm/state mapping,independent PHYS_MATH_CONTRACT_REVIEW PASS",
+      "publication": "8b71c13e23202edfce1ee67fb2da552fefb9a583_FULL_READBACK_MATCH",
+      "backup": "D0D1_AND_D3_DUAL_FULL_READBACK_VERIFIED"
+    },
+    {
+      "id": "D3_B1",
+      "depends_on": [
+        "D2"
+      ],
+      "status": "complete",
+      "implementation": "complete",
+      "execution": "143_NEW_COMPLETED_35_EXACT_REUSE",
+      "scope": "140new nominal+3refined,35 exact reuse",
+      "numerical_gate": "PASS_SCOPED_PRELIMINARY",
+      "independent_raw": "PASS",
+      "backup": "FINAL_DUAL_FULL_GET_2900_PAYLOAD_SHA_VERIFIED",
+      "publication": "3a525e3e16f1ba9393818a800327cc58597fd7b5_175_FILES_FULL_READBACK_PASS"
+    },
+    {
+      "id": "D3_B2",
+      "depends_on": [
+        "D3_B1"
+      ],
+      "status": "complete",
+      "execution": "237_UNIQUE_TAILS_COMPLETE",
+      "scope": "237unique saved-state tails z4\u21922,231nominal+6guards",
+      "receipt_recovery": 100,
+      "unattempted_then_run_once": 137,
+      "ODE_retries": 0,
+      "charged_child_s": 100.95804054901964,
+      "child_cap_s": 120,
+      "numerical_gate": "PASS_SCOPED_PRELIMINARY",
+      "independent_raw": "PASS",
+      "backup": "FINAL_DUAL_FULL_GET_2900_PAYLOAD_SHA_VERIFIED",
+      "publication": "3a525e3e16f1ba9393818a800327cc58597fd7b5_175_FILES_FULL_READBACK_PASS"
+    },
+    {
+      "id": "D4",
+      "depends_on": [
+        "D3_B2"
+      ],
+      "status": "complete",
+      "figures": "13PNG_13PDF_and_actualCSVs",
+      "data_only_science_node": "cancellation_turnover_on_saved_histories",
+      "new_IVPs": 0,
+      "publication": "3a525e3e16f1ba9393818a800327cc58597fd7b5_175_FILES_FULL_READBACK_PASS",
+      "backup": "FINAL_DUAL_FULL_GET_2900_PAYLOAD_SHA_VERIFIED"
+    },
+    {
+      "id": "D5",
+      "depends_on": [
+        "D4"
+      ],
+      "status": "complete",
+      "physics_contract": "PASS_SCOPED_EXECUTION_CONTRACT",
+      "code_raw_figure": "PASS_SCOPED_PRELIMINARY",
+      "interpretation": "PASS_SCOPED_DERIVED_AND_NUMERIC_INTERPRETATION",
+      "final_review": "independent_audit/FINAL_REVIEW.json",
+      "final_review_sha256": "9d150941505c8815fefd7d2fbf4cc2d7d97c3a540805745c04a2e2faf51ca0e9",
+      "unresolved_material_findings": 0,
+      "publication": "3a525e3e16f1ba9393818a800327cc58597fd7b5_175_FILES_FULL_READBACK_PASS",
+      "backup": "FINAL_DUAL_FULL_GET_2900_PAYLOAD_SHA_VERIFIED"
+    },
+    {
+      "id": "D6",
+      "depends_on": [
+        "D5"
+      ],
+      "status": "complete",
+      "mode": "additive_expected_head_fast_forward_draft_only",
+      "execution_checkpoint_backup": "D3_DUAL_FULL_READBACK_VERIFIED",
+      "final_publication": "3a525e3e16f1ba9393818a800327cc58597fd7b5",
+      "final_backup": "DUAL_FULL_READBACK_VERIFIED",
+      "final_publication_tree": "d12858ca1caa2496374e87f3fe3f489425eebda9",
+      "published_payload_files": 175,
+      "final_archive_sha256": "7b39d8c8ffa0b61762211295a25d14412de37f6e1a6d163ebf0b93a8337f2251",
+      "final_receipt": "FINAL_DELIVERY_ACK.json",
+      "closing_metadata_identity": "Containing Git commit, independently bound by post-publication transport ACK"
+    },
+    {
+      "id": "D7",
+      "depends_on": [
+        "D6"
+      ],
+      "status": "complete",
+      "prepared_science_node": "cancellation_turnover_on_saved_histories",
+      "prepared_science_new_IVPs": 0,
+      "scientific_decision": "PASS_SCOPED_PRELIMINARY",
+      "completed_followon": "cancellation_turnover_on_saved_histories",
+      "followon_new_IVPs": 0,
+      "evidence": "NEW_SCIENTIFIC_RESULTS_KO.md",
+      "publication": "3a525e3e16f1ba9393818a800327cc58597fd7b5",
+      "backup": "FINAL_DUAL_FULL_READBACK_VERIFIED"
+    },
+    {
+      "id": "D8_LATE_SIGN_CROSSING_SAMPLE_BRACKETS",
+      "depends_on": [
+        "D7"
+      ],
+      "status": "ready_not_run",
+      "scope": "Four late signed-shear reversals at Sigma_F,i=.003; adjacent stored153sample brackets only",
+      "inputs": [
+        "z2_extension/results/cases/*/raw.npz",
+        "NEW_SCIENTIFIC_EVIDENCE.json",
+        "CASE_PROVENANCE_LEDGER_INDEX.json"
+      ],
+      "new_IVPs_allowed": 0,
+      "output": "case/config/raw-bound table of adjacent redshift brackets; no invented continuous zero-crossing times",
+      "publication": "a3cb0606341688affb6aea29990e960e53188d32",
+      "backup": {
+        "archive_sha256": "d5e11690b866d5ccc6245b36c690f6a7d7cf6a1430ece4d034342421ec8ba203",
+        "drive_id": "1zgO5O0k-W206OmslJ8_Sa3XYLkY9IoSH",
+        "dropbox_id": "id:BSpOijBcT10AAAAAAD_gTQ",
+        "both_whole_readback": "PASS"
+      }
+    }
+  ],
+  "closed_evidence_reused": [
+    "PR198_625_606_numerical_gate",
+    "LaneB_91_plus3_C9",
+    "AGE_time8_16_32_histories"
+  ],
+  "prohibited_replays": [
+    "PR1981231fullIVPs",
+    "LaneBoriginal94fullIVPs",
+    "AGEcompleted",
+    "V12remaining100"
+  ],
+  "next_ready": [
+    "D8_LATE_SIGN_CROSSING_SAMPLE_BRACKETS"
+  ],
+  "production_scientific_admission": "NOT_ISSUED",
+  "source_heads_are": "historical intake confirmations; publication identities are separate",
+  "publication_heads": {
+    "intake_PR199": "964b2e3c098f6e475999a4eddc7a6aa0f8f053cc",
+    "D0D2_checkpoint": "8b71c13e23202edfce1ee67fb2da552fefb9a583",
+    "final_source_results": "3a525e3e16f1ba9393818a800327cc58597fd7b5",
+    "final_metadata": "Read containing Git commit or external post-publication transport ACK; not self-embedded",
+    "D8_results": "a3cb0606341688affb6aea29990e960e53188d32"
+  },
+  "pending_scientific_cases": 0,
+  "unfinished_AGE_lane_gates": [
+    "NATIVE_AGE_TIME_CONVERGENCE=HOLD",
+    "NONLINEAR_GRACKLE_RESPONSE_BOUND=NOT_ESTABLISHED"
+  ],
+  "operational_failures_preserved": {
+    "B2_receipt_serialization": 100,
+    "replayed_IVPs": 0
+  },
+  "NCP_execution": "NOT_RUN",
+  "current_goal": "COMPLETE: 175 component nominal points and237uniquez20to2histories",
+  "source_results_ci": {
+    "run_id": 39590742697,
+    "conclusion": "failure",
+    "failed_step": "cargo fmt --check on unchanged Rust paths",
+    "rust_tests": "skipped",
+    "receipt": "CI_POSTPUBLICATION.json"
+  },
+  "theory_loop": "R1_R10_COMPLETE_SCOPED",
+  "coding_loop": "C1_C10_COMPLETE_SCOPED"
+}
