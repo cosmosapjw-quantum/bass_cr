@@ -1,3 +1,7 @@
+## 2026-10-22 KST interruption recovery
+
+[Recovery report](recovery_20261022/RECOVERY_REPORT_KO.md), [current recovery DAG](recovery_20261022/DAG.json), and [executable handoff](recovery_20261022/RESUME_COMMANDS_KO.md) record the actual restore and external-result intake. Original science/source/raw remain unchanged. All 15 postprocessing outputs reproduce byte-for-byte without ODE integration. Historical C/D and backup receipts retain their original meanings; the later external recovery authority binds the actual new commit and provider responses.
+
 # C21O: executable conditional H/He/Li–LRS pilot, z=20 to 2
 
 **45 independent-stress trajectories and 6 additional comparison trajectories completed in the sandbox.** This is a new conditional photoionization/Case-A radiative-recombination–electron–Thomson LRS model. It is not a full nuclear, thermal, stellar or radiation-transfer reionization history. The original C21L 81 and C21M/N campaigns were not rerun or relabeled.
