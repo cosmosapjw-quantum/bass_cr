@@ -1,0 +1,232 @@
+{
+  "schema": "C22D_PREREGISTERED_CONTRACT_V1",
+  "created_utc": "2026-10-22T14:55:06.615595+00:00",
+  "workflow": "physmath-research-loop1.0.0/approval0.2",
+  "parent_C22C_source_identity": "e27e8506473833c6265343406b378bb2e8e260c2e8df6b5ab8537c5d7dfa904d",
+  "parent_local_commit": "286d459f101eaeea0bebfda28bb0a8cfb4ceccf5",
+  "new_problem": "Finite-source H1 ground CI in the dynamic thermal/UV/Compton/H1n2 model with an explicit common hydrogen electronic energy registry; retain21 populations,78full/75active at ellmax8.",
+  "hypotheses": [
+    "CI transfers thermal energy to ionization binding while increasing particle count and changes the subsequent ionization/Thomson history.",
+    "Sharing fresh fields within one RHS and redundant source-moment terms reduces cost without changing per-entry accumulation order or solver tolerances."
+  ],
+  "rate_contract": {
+    "process": "h1_ground_finite_source_collisional_ionization",
+    "table": "CCC_TICS_1S.txt",
+    "sha256": "7a87a2c9f2116ee36c0786b379dac08e1f4d92a49504fe542e6aa71cbb279bae",
+    "rows": 87,
+    "source_energy_eV": [
+      13.6058,
+      968.61
+    ],
+    "first_positive_E_eV": 13.64,
+    "sigma_unit": "a0^2; no pi or extra multiplicity",
+    "adopted_interpolation": "piecewise linear in incident E and sigma; raw energy axis retained",
+    "q": "K*theta^(-3/2)*integral(sigma_PL(E)*E*exp(-E/theta),Eth,Emax);theta=kBT[eV]",
+    "finite_moment": "positive endpoint moments with threshold-scaled exponent; log10 coefficient retained under float64 underflow",
+    "first_gap_sensitivity": "power1.127 vs PL power1 over first0.0342eV only; a separate shape model, not an error theorem",
+    "numerical_T_K": [
+      1.0,
+      100000000.0
+    ],
+    "active_common_T_K": [
+      3.0,
+      20000.0
+    ],
+    "active_lower_endpoint": "strict T>3K inherited RR domain",
+    "density_selector_nHref_cm3_max": 0.01,
+    "physical_interpolation_error": "OPEN",
+    "physical_tail": "UNAVAILABLE; never asserted zero",
+    "conditional_tail": "Requires explicit unproved sigma(E)<=cap for all E>968.61eV; coefficient reported in log10 only",
+    "assumed_physical_sigma_cap": null,
+    "unsupported_species": "UNAVAILABLE, not filled with zero"
+  },
+  "energy_registry": {
+    "name": "Hfamily_CCC13.6058_PI_support_refined_V1",
+    "old_Hfamily_chi_eV": 13.6,
+    "new_Hfamily_chi_eV": 13.6058,
+    "applies_to": [
+      "H1",
+      "D",
+      "T"
+    ],
+    "PI": "Original PH2 coefficients and incident-energy axis retained; HI support refined to E>=13.6058eV; explicit new source approximation",
+    "binding": "New channel increment13.6058 for sharedH family; other increments unchanged",
+    "PI_heat": "(E_gamma-chi)*PI_events",
+    "RR_export": "(chi+fit-implied captured kinetic energy)*RR_events",
+    "RR_number_capture": "Independent old total-RR number and derivative moment fit retained; Milne/LTE consistency OPEN",
+    "CI_loss": "-chi*CI_events in U; +chi*CI_events in binding; no CI escape reservoir",
+    "initial_energy": "Recomputed consistently in all freshly constructed layers",
+    "isotope_energy": "Inherited electronic equality approximation; no reduced-mass isotope shifts claimed",
+    "precision_threshold_caution": {
+      "CCC_table_eV": 13.6058,
+      "NIST_H1_eV": 13.598433,
+      "source_url": "https://physics.nist.gov/PhysRefData/Handbook/Tables/hydrogentable1.htm",
+      "meaning": "CCC source-convention alignment, not a correction to the physical precision H1 threshold; finite-mass/isotope source consistency OPEN"
+    }
+  },
+  "closure": {
+    "reaction": "H1(1s)+e -> H1+ +2e",
+    "r_CI": "ne_cm3*X_H1_ground*q_core/H [events/Href/eta]",
+    "stoichiometry": {
+      "H1_ground": -1,
+      "H1_ion": 1,
+      "electron": 1,
+      "nuclei": 0,
+      "total_gas_particles": 1
+    },
+    "temperature": "T=2U/(3kB*N); N=sum atomic populations+electrons. CI dT/deta=-(2chi/(3kB)+T)*r/N is automatic, not an added correction.",
+    "charge_ledger": "ne/Href+C_RR-C_PI-C_CI-ne_initial=0",
+    "energy_ledger": "U+binding+residentUV+escapedRR+gaswork+UVwork+ComptonBath+escapedH1n2 remains constant for the adopted ODE",
+    "electron_closure": "Single Maxwellian gas temperature imposed; thermalization of PI secondaries and energy-sharing distribution OPEN",
+    "inverse_threebody": "Conditional ground-Saha inverse scale assessed at observed densities, not a supplied all-level inverse network",
+    "isotope_quotient": "H1/D ionization-fraction quotient invalid when H1-only CI enabled; do not reduce those states",
+    "stress": "Non-tilted LRS, full Frobenius, signed sums before norms; atomic gas isotropic and separate nonbaryonic Vlasov",
+    "invariant_face": "Only declared n,T0,T1 exactlyzero coordinates removed from solver; all21 populations retained in output; no clipping",
+    "radiation": "C22C imposed immediate n2 radiative return and perfect escape retained; line transfer/cascade closure OPEN",
+    "full_thermochemical_radiative_closure": "OPEN",
+    "Einstein_trace_feedback": "NOT_INCLUDED;diagnosed separately"
+  },
+  "dominant_omitted_processes": [
+    "physical H1 CI/excitation tails and continuum interpolation error",
+    "higher-n and D/T/He/Li excitation/CI",
+    "all-level three-body recombination and inverse closure",
+    "DR energy/cascades, CX, free-free",
+    "nonthermal secondary electrons",
+    "line trapping/reabsorption, 2s mixing, cascade/spectrum closure",
+    "stellar/nuclear emissivity",
+    "trace thermal/radiative Einstein feedback"
+  ],
+  "optimization": {
+    "production": "one fresh fields evaluation per RHS; ordered common-term source-moment evaluation only if bitwise verified",
+    "forbidden": "temperature rounding/cache across states, altered tolerances/quadrature, fastmath, removing passive ledgers, H1/D quotient",
+    "Horner_candidate": "diagnostic comparison only; not adopted due changed accumulation order",
+    "performance_claim": "measured same-input sandbox microbenchmark only; no whole-trajectory speedup inferred"
+  },
+  "new_runs": {
+    "nominal": {
+      "method": "BDF",
+      "rtol": 3e-11,
+      "atol": 3e-13,
+      "cases": [
+        {
+          "signed_sigma": 0.3,
+          "signed_pi_m": 0.0002,
+          "signed_pi_r": 0.0008,
+          "photon_scale": 1.0,
+          "temperature_K": 300.0,
+          "compton_enabled": true,
+          "Tcmb0_K": 2.7255,
+          "h1_n2_excitation_enabled": true,
+          "energy_registry": "Hfamily_CCC13.6058_PI_support_refined_V1",
+          "name": "registry_control_lrs",
+          "h1_ci_enabled": false
+        },
+        {
+          "signed_sigma": 0.3,
+          "signed_pi_m": 0.0002,
+          "signed_pi_r": 0.0008,
+          "photon_scale": 1.0,
+          "temperature_K": 300.0,
+          "compton_enabled": true,
+          "Tcmb0_K": 2.7255,
+          "h1_n2_excitation_enabled": true,
+          "energy_registry": "Hfamily_CCC13.6058_PI_support_refined_V1",
+          "name": "ci_lrs",
+          "h1_ci_enabled": true
+        },
+        {
+          "signed_sigma": 0.0,
+          "signed_pi_m": 0.0,
+          "signed_pi_r": 0.0,
+          "photon_scale": 1.0,
+          "temperature_K": 300.0,
+          "compton_enabled": true,
+          "Tcmb0_K": 2.7255,
+          "h1_n2_excitation_enabled": true,
+          "energy_registry": "Hfamily_CCC13.6058_PI_support_refined_V1",
+          "name": "ci_flrw",
+          "h1_ci_enabled": true
+        }
+      ]
+    },
+    "reference": {
+      "method": "Radau",
+      "rtol": 3e-12,
+      "atol": 3e-14,
+      "case": {
+        "signed_sigma": 0.3,
+        "signed_pi_m": 0.0002,
+        "signed_pi_r": 0.0008,
+        "photon_scale": 1.0,
+        "temperature_K": 300.0,
+        "compton_enabled": true,
+        "Tcmb0_K": 2.7255,
+        "h1_n2_excitation_enabled": true,
+        "energy_registry": "Hfamily_CCC13.6058_PI_support_refined_V1",
+        "name": "ci_lrs",
+        "h1_ci_enabled": true
+      }
+    },
+    "saved_times": 201,
+    "new_ODE_planned": 4,
+    "old_C21O_C22A_C22B_C22C_ODE_reruns": 0,
+    "NCP_dispatch": 0,
+    "workers_max": 2,
+    "thread_per_worker": 1,
+    "CPU55_protected": true,
+    "coordinator_distinct": true,
+    "resource_and_lease": "fresh observation before eachdispatch, bounded cooperative discovery",
+    "outputs": "create-only new run IDs; source frozen before dispatch"
+  },
+  "preregistered_gates": {
+    "energy_relative_saved_and_accepted_max_abs": 1e-08,
+    "nucleus_max_relative_residual": 1e-10,
+    "charge_and_photon_absolute_normalized": 1e-10,
+    "minimum_scaled_population": -2e-09,
+    "minimum_UV_count_per_H": -2e-11,
+    "minimum_event_count_per_H": -2e-11,
+    "declared_n_T_exact_zero": true,
+    "temperature_max_K": 20000.0,
+    "temperature_strict_min_K": 3.0,
+    "nHref_max_cm3": 0.01,
+    "reference_fields": [
+      "temperature_K",
+      "n_e_cm3",
+      "tau_T",
+      "Sigma_F",
+      "Pi_r_F",
+      "H1_ionized_fraction",
+      "bath_energy_received_eV_per_H",
+      "excitation_escaped_energy_eV_per_H",
+      "H1_CI_events_per_H"
+    ],
+    "reference_scaled_max_difference": 2e-07,
+    "comparison_scale": "max(abs(reference),1e-8*peak,1e-30); cumulative bath/excitation/CI use uniform peak floor1e-30",
+    "light_RHS_energy_relative_tolerance": 2e-14,
+    "light_CI_stoichiometry_relative_tolerance": 5e-12,
+    "same_registry_off_optimized_prefix": "bitwise including signedzero",
+    "physical_full_rate_accuracy": "OPEN"
+  },
+  "scope_failures": {
+    "old_external127_JSON_reintegration": "PRESERVED",
+    "VigilODE_P02_C6": "FAIL_PRESERVED",
+    "HE85_REI219": "historical incomplete campaign retained; newer owner reported scoped claims separate from independently verified raw",
+    "inaccessible_conversations": "UNAVAILABLE",
+    "original_nuclear_network_png": "NOT_RECOVERED_NOT_READ"
+  },
+  "strong_no_go": {
+    "claim": false,
+    "NG1_NG7": "NOT_APPLICABLE: constructive finite-source model; no impossibility theorem from absent data or failed numerical paths"
+  },
+  "HOLD": [
+    "full nuclear highenergy",
+    "general triaxial/tilted/polarized CMB"
+  ],
+  "global_error_bound": null,
+  "stage": {
+    "EXECUTION": "contract and changed source implementation; newODE0",
+    "PUBLICATION": "local C22C commit reused; target remote R; D not yet committed",
+    "BACKUP": "prior C22C two-provider R3 reused; D checkpoint pending; DriveOPEN",
+    "DAG": "C22D contract+lightchecks -> admittednewruns -> analysis -> scoped publication/backup; fullclosureOPEN"
+  }
+}

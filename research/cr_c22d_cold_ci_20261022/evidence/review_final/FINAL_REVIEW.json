@@ -1,0 +1,136 @@
+{
+  "schema": "C22D_FINAL_INDEPENDENT_REVIEW_V1",
+  "utc": "2026-10-22T17:38:44.973959+00:00",
+  "status": "PASS_SCOPED",
+  "blocking_findings_remaining": 0,
+  "reviewer": "/root/c22d_final_review",
+  "additional_static_reviewer": "/root/c22d_final_review/ledger_source_audit",
+  "author_independence": "Neither reviewer implemented the C22D model, CI provider, runner or numerical analyzer.",
+  "runtime_source_identity": "2e065d2ec2605fcee4bd9f6444e90b58f85bbf047f4d1444dfe7e386eb828c72",
+  "executed_analyzer": {
+    "path": "/workspace/scratch/30d955d9ea43/resume_c22c_20261022/recovery/restored_c22b/repository/research/cr_c22d_cold_ci_20261022/analysis_v1/analyzer_executed_v1.py",
+    "sha256": "3391cfd378e76c31c4f3509c395f80ded2b8a6eef7b0487bb7591facffadde5e",
+    "size_bytes": 45148
+  },
+  "array_review": {
+    "path": "/workspace/scratch/30d955d9ea43/c22d_20261022/review_final/SAVED_ARRAY_REVIEW.json",
+    "sha256": "dbf6c5dec50a8f23198fd086a0b15b6b901db6352b74176528eb624704c831b9",
+    "size_bytes": 49784
+  },
+  "array_review_status": "PASS_SCOPED",
+  "array_checks": 298,
+  "array_failures": [],
+  "preserved_saved_points": 804,
+  "preserved_accepted_points": 8047,
+  "runtime_source_files_verified": 42,
+  "original_analysis_artifacts_verified": 28,
+  "static_source_result": {
+    "status": "PASS_SCOPED",
+    "CI_energy": "dU=-chi*r and dbinding=+chi*r; no new escape reservoir",
+    "charge": "Xe+RR-PI-CI-Xe0",
+    "temperature": "N=sum_atomic+Xe; -T*Nprime/N counted once",
+    "state_contract": "21 populations,78full/75solver, only declared n/T0/T1 exact-zero projection",
+    "registry": "13.6058 CCC convention shared by Hfamily binding/PI heat/RR export/CI; old independent RR fits retained",
+    "stress": "signed Pg+Pnu before abs; abs(Pm+Pr); full Frobenius sqrt6; isotropic gas separate Vlasov matter",
+    "isotope_scope": "Old H1/D equal-ion-fraction reduction loses its invariant condition under H1-only CI; no all-quotient no-go"
+  },
+  "claim_scope_findings": [
+    {
+      "id": "SHEAR_EFFECT_UNRESOLVED",
+      "status": "CLOSED_BY_SCOPE_RESTRICTION",
+      "observed_CI_on_off_max": 1.8312615313043068e-11,
+      "observed_on_BDF_Radau_max": 1.6534545260737943e-10,
+      "decision": "Keep numerical acceptance but do not claim resolved CI-induced shear effect; no old-ODE rerun required."
+    },
+    {
+      "id": "FIRST_GAP_FUNCTIONAL_ONLY",
+      "status": "CLOSED_BY_EXISTING_CONTRACT_AND_REVIEW",
+      "fixed_path_change": -1.924669551844893e-05,
+      "PL_trapezoid_vs_ODE_relative_difference": 0.00011534591674577932,
+      "decision": "Same observed mesh functional sensitivity; not precise counter change, feedback trajectory, physical rate error or global bound."
+    },
+    {
+      "id": "FROZEN_METADATA_FALSE_AMBIGUITY",
+      "status": "CLOSED_BY_ADDITIVE_CLARIFICATION",
+      "original": "SUMMARY.failure_scope.all_gate_failures_preserved=false",
+      "clarification": {
+        "analysis_gate_failures_count": 0,
+        "prior_light_failures_preserved": true
+      },
+      "decision": "Do not mutate frozen numerical SUMMARY; preserve original preflight FAIL and diagnostic/replacement evidence."
+    }
+  ],
+  "final_charge_difference": {
+    "absorption_count_per_H": 1.9317880628477724e-14,
+    "recombination_count_per_H": 8.258044039033408e-06,
+    "H1_CI_events_per_H": 7.379740529663675e-06,
+    "electron_per_Href": -8.783034900552988e-07,
+    "charge_ledger_prediction": -8.783034900518523e-07,
+    "closure_difference": -3.446577062377748e-18,
+    "scope": "Net difference of two coupled solutions at final saved eta; no process-isolation causal attribution beyond exact event charge ledger."
+  },
+  "actual_visual_inspection": [
+    {
+      "path": "/workspace/scratch/30d955d9ea43/resume_c22c_20261022/recovery/restored_c22b/repository/research/cr_c22d_cold_ci_20261022/analysis_v1/figures_v2/MATCHED_EFFECTS_AND_REGISTRY.png",
+      "sha256": "b100f62f1770b2bb584b9edd929b3e13d5c49df4afec7fb2ba506649bfe7a554",
+      "size_bytes": 330328,
+      "actual_visual_inspection": "PASS: physical x limits, readable labels and separate scope panels"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/resume_c22c_20261022/recovery/restored_c22b/repository/research/cr_c22d_cold_ci_20261022/analysis_v1/figures_v2/ENERGY_STRESS_AND_CONSERVATION.png",
+      "sha256": "73ac48d47be02a7b8efc09a3884da8a0b98d494470fca3e50e8c44adf307c319",
+      "size_bytes": 455144,
+      "actual_visual_inspection": "PASS: physical x limits, readable labels and separate scope panels"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/resume_c22c_20261022/recovery/restored_c22b/repository/research/cr_c22d_cold_ci_20261022/analysis_v1/figures_v2/STRICT_NINE_FIELD_REFERENCE.png",
+      "sha256": "cb55146830645f0948679030b91c3a29f845edf9ba44f8169507a6298144c22a",
+      "size_bytes": 324168,
+      "actual_visual_inspection": "PASS: physical x limits, readable labels and separate scope panels"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/resume_c22c_20261022/recovery/restored_c22b/repository/research/cr_c22d_cold_ci_20261022/analysis_v1/figures_v2/CI_SOURCE_AND_CONDITIONAL_DIAGNOSTICS.png",
+      "sha256": "9a92e9efdd1f4a7b101e87b603e8f953b21614dcd1236b40a5232cc21222b41a",
+      "size_bytes": 338993,
+      "actual_visual_inspection": "PASS: physical x limits, readable labels and separate scope panels"
+    }
+  ],
+  "figure_repair_receipt": {
+    "path": "/workspace/scratch/30d955d9ea43/resume_c22c_20261022/recovery/restored_c22b/repository/research/cr_c22d_cold_ci_20261022/analysis_v1/figures_v2/RENDER_COMPLETE.json",
+    "sha256": "c8dcd251b9c7eb370cb0fa3d08691297827f7fc80a9aae4edd19e3c1688e22cc",
+    "size_bytes": 8819
+  },
+  "prior_failure_evidence_read": [
+    {
+      "path": "/workspace/scratch/30d955d9ea43/resume_c22c_20261022/recovery/restored_c22b/repository/research/cr_c22d_cold_ci_20261022/evidence/LIGHT_CHECK_ACCEPTANCE.json",
+      "sha256": "28896ab5e7a640cb489255e89f8ff3b8d0b5dec4f50e0f0f7467abcf958fed72",
+      "size_bytes": 1558
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/resume_c22c_20261022/recovery/restored_c22b/repository/research/cr_c22d_cold_ci_20261022/evidence/review_preflight/PREFLIGHT_REVIEW.json",
+      "sha256": "72072e7f9ba7afc7369a833ab15a1ea235331002c81d878bd3c8274a1e18ace3",
+      "size_bytes": 4978
+    }
+  ],
+  "activity": {
+    "new_ODE": 0,
+    "old_ODE_reruns": 0,
+    "RHS_calls": 0,
+    "provider_calls": 0,
+    "science_module_imports": 0,
+    "original_file_mutations": 0
+  },
+  "global_error_bound": null,
+  "strong_no_go_claim": false,
+  "stage": {
+    "EXECUTION": "INDEPENDENT_REVIEW_COMPLETE_SCOPED",
+    "PUBLICATION": "LOCAL_REVIEW_COMPLETE_PARENT_SHIPPING_SEPARATE",
+    "BACKUP": "PARENT_ARCHIVE_PROVIDER_ACK_SEPARATE",
+    "DAG": "C22D finite-source acceptance reviewed; next line-energy/coverage contract; full closure OPEN; high-energy nuclear/general geometry HOLD"
+  },
+  "report": {
+    "path": "/workspace/scratch/30d955d9ea43/c22d_20261022/review_final/FINAL_REVIEW_KO.md",
+    "sha256": "b1e422c81d64754108c57d6271fce4274ccecd8ab149067b1fa05ca66d183a92",
+    "size_bytes": 11692
+  }
+}
