@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "workflow_version": "1.0.0",
+  "unit_id": "c23a_photo_subflow_v1_independent_review",
+  "reviewer": "/root/igm_supply",
+  "source_sha256": "669b6f85f3046118032fab9b75154ca9ccecf6bcdbab75d5be6e40e075203735",
+  "decision": "CHANGES_REQUIRED",
+  "execution": "COMPLETED",
+  "scientific_adoption": "HOLD_V1_NUMERICAL_THRESHOLD_FAILURE",
+  "criteria_preserved": true,
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "required_before_adoption",
+      "class": "numerical_rounding",
+      "object": "_birth_kernel K20 after scaled uniformization and squaring",
+      "evidence": "FAILURES.json",
+      "observed": {
+        "kind": "accuracy",
+        "group": "population",
+        "field": "HeIII",
+        "actual": 0.62766702591859,
+        "reference_80digit": "0.6276670259206363307408193",
+        "absolute_per_inventory": "2.046303829160627262957337e-12",
+        "relative": "3.260174176203047263478259e-12",
+        "relative_criterion_applied": true
+      },
+      "impact": "He inventory, electron/event and independently reconstructed binding ledgers acquire the same rounding inconsistency. The per-event energy formula alone does not detect this.",
+      "minimum_correction": "Evaluate K20 by the derived positive hypoexponential CDF decomposition; retain predeclared criteria and validate the changed implementation."
+    }
+  ],
+  "theory": {
+    "frozen_z_regulated_moments": "consistent conditional source subflow",
+    "threshold_convention": "caller model registry explicit; source numerical threshold remains unresolved",
+    "five_species_scope": "explicit inventory, unsupported extra/missing channels rejected",
+    "finite_photon_reservoir": "not represented",
+    "secondary_energy_partition": "not represented; thermal source assumes the specified moment is assigned to heat",
+    "full_IGM": "not asserted",
+    "global_error_bound": null,
+    "positive_alternative": "derived independently and spot-checked; see ANALYTIC_ALTERNATIVE_CHECK.json"
+  },
+  "execution_summary": {
+    "status": "completed",
+    "exit_code": 0,
+    "source_sha256": "669b6f85f3046118032fab9b75154ca9ccecf6bcdbab75d5be6e40e075203735",
+    "rate_cases": 283,
+    "operator_calls": 1915,
+    "failing_operator_calls": 1,
+    "invalid_input_checks": 28,
+    "invalid_input_failures": 0,
+    "wall_s": 11.074991981004132,
+    "cpu_s": 11.035756485,
+    "cpu_affinity": [
+      4
+    ],
+    "native_threads": 1,
+    "mpmath_dps": 80,
+    "new_ODE": 0,
+    "historical_ODE_reruns": 0,
+    "maxima": {
+      "population_abs_per_inventory": {
+        "value": 2.0463038291606273e-12,
+        "case": "P19_row=40;z=5.81;dt=1e+17;inventory=basis_2",
+        "field": "HeIII"
+      },
+      "population_relative_qualified": {
+        "value": 2.9040758678640826e-11,
+        "case": "theta=1000000;ratio=100000000.0;inventory=basis_2",
+        "field": "HeIII"
+      },
+      "event_abs_per_inventory": {
+        "value": 2.0463038291606273e-12,
+        "case": "P19_row=40;z=5.81;dt=1e+17;inventory=basis_2",
+        "field": "HeII"
+      },
+      "heat_abs_per_energy_scale": {
+        "value": 1.530059797923496e-12,
+        "case": "P19_row=40;z=5.81;dt=1e+17;inventory=basis_2",
+        "field": "heat"
+      },
+      "binding_abs_per_energy_scale": {
+        "value": 2.0463649903188666e-12,
+        "case": "P19_row=40;z=5.81;dt=1e+17;inventory=basis_2",
+        "field": "binding"
+      },
+      "imported_abs_per_energy_scale": {
+        "value": 3.5764900741585395e-12,
+        "case": "P19_row=40;z=5.81;dt=1e+17;inventory=basis_2",
+        "field": "imported"
+      },
+      "thermal_final_abs_per_energy_scale": {
+        "value": 1.5299945120073194e-12,
+        "case": "P19_row=40;z=5.81;dt=1e+17;inventory=basis_2",
+        "field": "thermal_final"
+      },
+      "thermal_final_relative_qualified": {
+        "value": 2.5474797185753215e-12,
+        "case": "theta=1000000;ratio=100000000.0;inventory=basis_2",
+        "field": "thermal_final"
+      },
+      "H_inventory_residual": {
+        "value": 6.797947621484113e-17,
+        "case": "P19_row=0;z=0.0;dt=10000000000.0;inventory=neutral_H_He",
+        "field": "H_inventory"
+      },
+      "He_inventory_residual": {
+        "value": 2.0463075678378573e-12,
+        "case": "P19_row=40;z=5.81;dt=1e+17;inventory=basis_2",
+        "field": "He_inventory"
+      },
+      "charge_event_residual": {
+        "value": 2.0463075678378573e-12,
+        "case": "P19_row=40;z=5.81;dt=1e+17;inventory=basis_2",
+        "field": "charge_event"
+      },
+      "electron_reference_residual": {
+        "value": 2.0461928068581647e-12,
+        "case": "P19_row=40;z=5.81;dt=1e+17;inventory=basis_2",
+        "field": "electron_reference"
+      },
+      "binding_state_residual": {
+        "value": 9.245148429871279e-13,
+        "case": "P19_row=40;z=5.81;dt=1e+17;inventory=basis_2",
+        "field": "binding_state"
+      },
+      "energy_state_residual": {
+        "value": 9.243842711547744e-13,
+        "case": "P19_row=40;z=5.81;dt=1e+17;inventory=basis_2",
+        "field": "energy_state"
+      },
+      "temperature_relative": {
+        "value": 1.6972644800591571e-12,
+        "case": "theta=1000000;ratio=100000000.0;inventory=basis_2",
+        "field": "temperature_K"
+      },
+      "imported_relative_qualified": {
+        "value": 2.0387312438844534e-11,
+        "case": "theta=1000000;ratio=100000000.0;inventory=basis_2",
+        "field": "imported"
+      },
+      "event_relative_qualified": {
+        "value": 2.9040758678640826e-11,
+        "case": "theta=1000000;ratio=100000000.0;inventory=basis_2",
+        "field": "HeII"
+      },
+      "heat_relative_qualified": {
+        "value": 2.1511808932852886e-11,
+        "case": "theta=1000000;ratio=100000000.0;inventory=basis_2",
+        "field": "heat"
+      },
+      "binding_relative_qualified": {
+        "value": 2.000287471718653e-11,
+        "case": "theta=1000000;ratio=100000000.0;inventory=basis_2",
+        "field": "binding"
+      }
+    },
+    "overall_accuracy": "FAIL",
+    "created_utc": "2026-10-22T22:46:09.932513+00:00"
+  },
+  "four_axes": {
+    "EXECUTION": "COMPLETE_SCOPED_REVIEW_WITH_FAILING_IMPLEMENTATION",
+    "PUBLICATION": "PENDING_PARENT_INTEGRATION",
+    "BACKUP": "LOCAL_CREATE_ONLY_EVIDENCE; REMOTE_NOT_RUN_BY_REVIEWER",
+    "DAG": "C9 v1 complete; numerical repair and C9 v2 required"
+  },
+  "historical_ODE_reruns": 0,
+  "new_ODE": 0,
+  "created_utc": "2026-10-22T22:49:31.338962+00:00"
+}

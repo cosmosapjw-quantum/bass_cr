@@ -1,0 +1,123 @@
+{
+  "unit_id": "C23A_FAST_ELECTRON_FINITE_SOURCE",
+  "created_utc": "2026-10-22T22:46:17.037320+00:00",
+  "entries": [
+    {
+      "id": "F01",
+      "class": "environment",
+      "target": "public primary HTTP acquisition under default shell sandbox",
+      "observation": "Operation not permitted",
+      "correction": "read-only public-source network command with require_escalated was approved and completed",
+      "state": "CLOSED",
+      "evidence": "UPSTREAM_DOWNLOAD.json"
+    },
+    {
+      "id": "F02",
+      "class": "implementation",
+      "target": "GitHub symbolic tree request top SHA",
+      "observation": "initial metadata field tree_sha recorded symbolic-ref response SHA equal to commit; assertion against commit.tree failed before content reuse",
+      "correction": "fetch commit metadata, request explicit true tree SHA, verify returned tree and each selected Git blob",
+      "state": "CLOSED",
+      "evidence": [
+        "DarkHistory_REUSE_METADATA.json",
+        "21cmFAST_REUSE_METADATA.json",
+        "DarkHistory_COMMIT_PIN.json",
+        "21cmFAST_COMMIT_PIN.json",
+        "EXTERNAL_REUSE_DOWNLOADS.json"
+      ],
+      "historical_receipt_policy": "initial metadata retained; EXTERNAL_REUSE_DOWNLOADS and COMMIT_PIN supersede tree identity"
+    },
+    {
+      "id": "F03",
+      "class": "input_dependency",
+      "target": "SciSpace automated TLDR for FS2010",
+      "observation": "summary statement excluding collisional ionization contradicts the primary abstract",
+      "correction": "primary journal text supplies physics contract; automated TLDR not adopted",
+      "state": "CLOSED",
+      "evidence": "SCISPACE_DISCOVERY.json"
+    },
+    {
+      "id": "F04",
+      "class": "input_dependency",
+      "target": "FS2010 C ionized grid versus four raw table headers",
+      "observation": "four explicit conflicts in SOURCE_DEFECTS.json",
+      "correction": "preserve bytes; make axis choice explicit; separate last-five high-xi slice",
+      "state": "OPEN_SOURCE_RESOLUTION",
+      "evidence": "c23a_fast_electron_source_audit_20261023_v1/SOURCE_DEFECTS.json"
+    },
+    {
+      "id": "F05",
+      "class": "input_dependency",
+      "target": "reported channel closure and Lya subset roundoff",
+      "observation": "max_abs_sum_defect3.900000000012227e-5; fheatmax1.00001; Lya subset excess4.009093393386471e-8",
+      "correction": "no clipping/renormalization; report signed defect and finite-source bound",
+      "state": "QUANTIFIED_SOURCE_DEFECT",
+      "evidence": "c23a_fast_electron_source_audit_20261023_v1/SOURCE_DEFECTS.json"
+    },
+    {
+      "id": "F06",
+      "class": "implementation",
+      "target": "upstream C header reader",
+      "observation": "char label[]=\" \" has insufficient storage for unbounded fscanf %s header token",
+      "correction": "do not execute upstream C; independently written validated Python parser",
+      "state": "AVOIDED_IN_NEW_IMPLEMENTATION",
+      "evidence": [
+        "upstream/elec_interp.c",
+        "fs2010_operator.py"
+      ]
+    },
+    {
+      "id": "F07",
+      "class": "input_dependency",
+      "target": "paper Table1 versus current archive 3keV response",
+      "observation": "five selected heat fraction comparisons disagree beyond quoted three-digit rounding in several cases",
+      "correction": "preserve both source identities; no silent repair; version/physics difference open",
+      "state": "OPEN_SOURCE_RESOLUTION",
+      "evidence": "c23a_fast_electron_source_audit_20261023_v1/SOURCE_DEFECTS.json"
+    },
+    {
+      "id": "F08",
+      "class": "input_dependency",
+      "target": "numerical He/H and physical gas admission",
+      "observation": "numerical source He/H not located in recovered table/code package; arbitrary 21-state gas does not meet one-axis source contract",
+      "correction": "physical coupling remains unadmitted; finite diagnostic response is complete",
+      "state": "OPEN_PHYSICAL_INPUT",
+      "evidence": [
+        "SOURCE_COVERAGE.json",
+        "fs2010_operator.py"
+      ]
+    },
+    {
+      "id": "F09",
+      "class": "numerics",
+      "target": "first 16-query direct/prepared comparison",
+      "observation": "prepared query faster, but construction amortization not reached for16queries",
+      "correction": "retain original benchmark; predeclare larger same-input paired benchmark with construction and break-even counts",
+      "state": "CLOSED_MEASUREMENT_SCOPE",
+      "evidence": [
+        "c23a_fast_electron_source_audit_20261023_v1/BENCHMARK.json",
+        "c23a_precontraction_timing_20261023_v1/RESULT.json"
+      ]
+    },
+    {
+      "id": "F10",
+      "class": "environment",
+      "target": "repeat journal web open/find at later line offset",
+      "observation": "web retrieval redirect returned Internal Error/non-retryable; no text match",
+      "correction": "Exa fetched same known primary journal URL; Table1 values confirmed",
+      "state": "CLOSED_WITH_SELECTED_CONNECTOR",
+      "evidence": "SOURCE_COVERAGE.json primary_URLs"
+    },
+    {
+      "id": "F11",
+      "class": "input_dependency",
+      "target": "selected DarkHistory legacy lowE module and raw column mapping",
+      "observation": "floor+renormalization observed; complete call-chain correspondence not inspected",
+      "correction": "keep read-only candidate; no full-repository bug claim or numerical adoption",
+      "state": "OPEN_IF_PROVIDER_SELECTED",
+      "evidence": "external_comparison/DarkHistory/darkhistory/low_energy/lowE_electrons.py"
+    }
+  ],
+  "scientific_execution_failures": 0,
+  "old_failures_erased": false
+}

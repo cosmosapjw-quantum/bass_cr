@@ -1,0 +1,140 @@
+{
+  "created_utc": "2026-10-22T22:57:10.983241+00:00",
+  "protocol": [
+    {
+      "path": "/workspace/scratch/30d955d9ea43/project_sources/07-Figure-Residual-Error-Pass.txt",
+      "sha256": "37b64cd6d232b3525a838f2f23a05ca44aa99c6362f0a28b695397fbbffc8e22",
+      "read": true
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/project_sources/08-Figure-Hostile-Audit.txt",
+      "sha256": "46b920c886549a228876ddb7b5651d1a213ff9ad4669843ea4afc3700b4f5bbc",
+      "read": true
+    }
+  ],
+  "figures": [
+    {
+      "name": "p19_source_moments",
+      "v3_image_viewed": true,
+      "view_method": "view_image(detail=original); unchanged v3 PNG/PDF byte equality reuses v2 visual view when applicable",
+      "png": {
+        "bytes": 155217,
+        "sha256": "2ca44acb0ac7c7986e821e5cea0f8c50fe74027ee11bf8933d9e8b992a19c992",
+        "v2_byte_equal": true
+      },
+      "pdf": {
+        "bytes": 22184,
+        "sha256": "0a307a6c77855cbcb23751fd34a4fbffbf7cc681e8fa5e1a0190670dfce1028d",
+        "v2_byte_equal": true
+      },
+      "pdf_width_mm": 183.30316399999998,
+      "legend_pt_at_180mm": 9.81979776410188,
+      "legend_pt_at_90mm": 4.90989888205094,
+      "semantic_status": "PASS_WITH_SCOPE_CAPTION",
+      "180mm_color_verdict": "PASS",
+      "90mm_direct_reduction_verdict": "REVISE_PRINT_LAYOUT"
+    },
+    {
+      "name": "p19_frozen_exposures",
+      "v3_image_viewed": true,
+      "view_method": "view_image(detail=original); unchanged v3 PNG/PDF byte equality reuses v2 visual view when applicable",
+      "png": {
+        "bytes": 144481,
+        "sha256": "88c48ab9f66f6109c1ac0235c94920ec4edf51169be5151105a56fd86e2e22f5",
+        "v2_byte_equal": false
+      },
+      "pdf": {
+        "bytes": 22089,
+        "sha256": "56d4dc880ba1fa606c32482d66d8b8f1d4eb8fc38130fa9b0eb3d1477b5c4234",
+        "v2_byte_equal": false
+      },
+      "pdf_width_mm": 183.30316399999998,
+      "legend_pt_at_180mm": 9.81979776410188,
+      "legend_pt_at_90mm": 4.90989888205094,
+      "semantic_status": "PASS_WITH_SCOPE_CAPTION",
+      "180mm_color_verdict": "PASS",
+      "90mm_direct_reduction_verdict": "REVISE_PRINT_LAYOUT"
+    },
+    {
+      "name": "deposition_moments_and_cost",
+      "v3_image_viewed": true,
+      "view_method": "view_image(detail=original); unchanged v3 PNG/PDF byte equality reuses v2 visual view when applicable",
+      "png": {
+        "bytes": 97443,
+        "sha256": "4577d63b39c5d4ccb86b235c7da6c0e059003cb07a7e3fa37f767221b249be66",
+        "v2_byte_equal": true
+      },
+      "pdf": {
+        "bytes": 18528,
+        "sha256": "d4d6982b73507fcb8fc204b1fa68da877cc52a77c5d95944498341e516525dc8",
+        "v2_byte_equal": true
+      },
+      "pdf_width_mm": 231.56316400000003,
+      "legend_pt_at_180mm": 6.995931356336104,
+      "legend_pt_at_90mm": 3.497965678168052,
+      "semantic_status": "PASS_WITH_SCOPE_CAPTION",
+      "180mm_color_verdict": "PASS",
+      "90mm_direct_reduction_verdict": "REVISE_PRINT_LAYOUT"
+    }
+  ],
+  "findings": [
+    {
+      "id": "FIG-F1",
+      "priority": "P1",
+      "target": "analysis_v2/p19_frozen_exposures top panel",
+      "observation": "upper-right legend overlapped green descending shoulder near z7.5-8.0,27.5-28.5kK",
+      "repair": "parent moved legend to lower right and re-rendered this figure only",
+      "state": "CLOSED_BY_V3_VISUAL_REVIEW"
+    },
+    {
+      "id": "FIG-F2",
+      "priority": "P1 conditional on90mmprinting",
+      "target": "all three figures direct reduction to90mm",
+      "observation": "legend text approx4.91pt in first2 and3.50pt in third",
+      "repair": "publish180mmcolor; use split/reflow and fonts if90mmrequired",
+      "state": "TARGET_WIDTH_SCOPE_FIXED_TO180MM"
+    },
+    {
+      "id": "FIG-F3",
+      "priority": "P2 conditional ongrayscale",
+      "target": "solid orange/green near coincidence in exposure plot",
+      "observation": "curves correctly nearly coincide; color distinguishes them; grayscale may not",
+      "repair": "retain180mmcolor; ifgrayscaleplanned use line styles",
+      "state": "COLOR_PUBLICATION_SCOPE"
+    }
+  ],
+  "CoVe_questions_and_answers": [
+    {
+      "q": "Does z form a time trajectory?",
+      "a": "No. Labels explicitly identify independently frozen background states; caption repeats this."
+    },
+    {
+      "q": "Is H/Gamma a recovered incident spectrum?",
+      "a": "No. It is a ratio of supplied moment rates; caption limits interpretation."
+    },
+    {
+      "q": "Are FS bar sums renormalized?",
+      "a": "No. Code uses saved raw energy channels and stacks them; small closure defects retained."
+    },
+    {
+      "q": "Does timing include construction and all9pairs?",
+      "a": "Yes. plotted direct_over_build_plus_queries from all9 recorded pairs."
+    },
+    {
+      "q": "Is the green feature unobstructed afterrepair?",
+      "a": "Yes. v3lower-right legend occupies a blank region below all right-side curves."
+    },
+    {
+      "q": "Is90mmdirectshrink admissible?",
+      "a": "No. Computed effective legend sizes are4.91pt/3.50pt; use180mmornewlayout."
+    }
+  ],
+  "final_protocol07_verdict": "PASS at180mm color with supplied scope captions",
+  "final_protocol08_verdict": "PASS at180mm color; no P0 semantic mismatch",
+  "four_axes": {
+    "EXECUTION": "visual artifact readback only; science/kernel/ODE reruns0",
+    "PUBLICATION": "analysis_v3 candidate accepted with exact-scope captions",
+    "BACKUP": "review local; root attaches actual durable provider receipts",
+    "DAG": "figure residual finding closed -> root C10 publication/backup"
+  }
+}

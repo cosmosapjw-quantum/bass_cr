@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "workflow_version": "1.0.0",
+  "unit_id": "c23a_photo_subflow_v2_independent_review",
+  "reviewer": "/root/igm_supply",
+  "selected_stage": "C9",
+  "source_sha256": "36af631c24b3d1a2c34c9d7a4f470cbe85334a505e3cbad9ea3228d862c95079",
+  "source_bytes": 7376,
+  "source_unchanged_at_review_close": true,
+  "decision": "PASS_SCOPED",
+  "required_v1_finding": "F1 CLOSED_BY_CHANGED_REPRESENTATION_AND_SAME_CRITERIA_VALIDATION",
+  "execution_summary": {
+    "status": "completed",
+    "exit_code": 0,
+    "source_sha256": "36af631c24b3d1a2c34c9d7a4f470cbe85334a505e3cbad9ea3228d862c95079",
+    "rate_cases": 283,
+    "operator_calls": 1915,
+    "failing_operator_calls": 0,
+    "invalid_input_checks": 28,
+    "invalid_input_failures": 0,
+    "wall_s": 8.626641883995035,
+    "cpu_s": 8.610990611999998,
+    "cpu_affinity": [
+      4
+    ],
+    "native_threads": 1,
+    "mpmath_dps": 80,
+    "new_ODE": 0,
+    "historical_ODE_reruns": 0,
+    "maxima": {
+      "population_abs_per_inventory": {
+        "value": 2.1926257321360939e-16,
+        "case": "theta=1000000;ratio=1e-14;inventory=basis_2",
+        "field": "HeII"
+      },
+      "population_relative_qualified": {
+        "value": 3.6997355532217836e-16,
+        "case": "P19_row=0;z=0.0;dt=100000000000000.0;inventory=basis_0",
+        "field": "HI"
+      },
+      "event_abs_per_inventory": {
+        "value": 9.214070151849478e-17,
+        "case": "theta=100;ratio=0.1;inventory=basis_2",
+        "field": "HeII"
+      },
+      "heat_abs_per_energy_scale": {
+        "value": 8.435232118764861e-17,
+        "case": "P19_row=40;z=5.81;dt=1e+17;inventory=basis_2",
+        "field": "heat"
+      },
+      "binding_abs_per_energy_scale": {
+        "value": 2.274525982990726e-16,
+        "case": "theta=20;ratio=1.0000000000000002;inventory=basis_2",
+        "field": "binding"
+      },
+      "imported_abs_per_energy_scale": {
+        "value": 2.752263339167124e-16,
+        "case": "theta=20;ratio=1.0000000000000002;inventory=basis_2",
+        "field": "imported"
+      },
+      "thermal_final_abs_per_energy_scale": {
+        "value": 8.435232118764861e-17,
+        "case": "P19_row=40;z=5.81;dt=1e+17;inventory=basis_2",
+        "field": "thermal_final"
+      },
+      "thermal_final_relative_qualified": {
+        "value": 2.2631332472587036e-16,
+        "case": "theta=20;ratio=100000000.0;inventory=mixed_H_He",
+        "field": "thermal_final"
+      },
+      "H_inventory_residual": {
+        "value": 6.797947621484113e-17,
+        "case": "P19_row=0;z=0.0;dt=10000000000.0;inventory=neutral_H_He",
+        "field": "H_inventory"
+      },
+      "He_inventory_residual": {
+        "value": 2.192625748406113e-16,
+        "case": "theta=1000000;ratio=1e-14;inventory=basis_2",
+        "field": "He_inventory"
+      },
+      "charge_event_residual": {
+        "value": 2.192625748406113e-16,
+        "case": "theta=1000000;ratio=1e-14;inventory=basis_2",
+        "field": "charge_event"
+      },
+      "electron_reference_residual": {
+        "value": 2.4231469665809976e-16,
+        "case": "theta=20;ratio=1.0000000000000002;inventory=basis_2",
+        "field": "electron_reference"
+      },
+      "binding_state_residual": {
+        "value": 1.5117796793970022e-16,
+        "case": "theta=10;ratio=0.9999999999999998;inventory=basis_2",
+        "field": "binding_state"
+      },
+      "energy_state_residual": {
+        "value": 2.1646388411645758e-16,
+        "case": "theta=10;ratio=0.9999999999999998;inventory=basis_2",
+        "field": "energy_state"
+      },
+      "temperature_relative": {
+        "value": 3.801505968548345e-16,
+        "case": "theta=20;ratio=1e-08;inventory=basis_2",
+        "field": "temperature_K"
+      },
+      "imported_relative_qualified": {
+        "value": 2.6137023326474977e-16,
+        "case": "theta=100;ratio=10.0;inventory=mixed_H_He",
+        "field": "imported"
+      },
+      "event_relative_qualified": {
+        "value": 3.124212898037843e-16,
+        "case": "theta=2;ratio=1e-08;inventory=basis_2",
+        "field": "HeII"
+      },
+      "heat_relative_qualified": {
+        "value": 3.370871501097132e-16,
+        "case": "theta=2;ratio=100000000.0;inventory=basis_2",
+        "field": "heat"
+      },
+      "binding_relative_qualified": {
+        "value": 2.4201067180774767e-16,
+        "case": "theta=4;ratio=100000000.0;inventory=mixed_H_He",
+        "field": "binding"
+      }
+    },
+    "overall_accuracy": "PASS_SCOPED",
+    "created_utc": "2026-10-22T22:49:49.205873+00:00"
+  },
+  "same_input_evidence": "REPAIR_COMPARISON.json",
+  "oracle": {
+    "method": "independently constructed 8x8 generator with five species and three event integrals, mpmath expm",
+    "precision_decimal_digits": 80,
+    "production_kernel_formula_reused": false,
+    "initial_vectors": "five basis populations plus neutral and mixed H/He inventories; additional scale checks",
+    "scope": "finite operator audit; no ODE integration; does not prove a global numerical bound"
+  },
+  "derivation": {
+    "K20": "F(m)+m exp(-m)G(d), m=min(a,b), d=abs(a-b)",
+    "F": "exp(-m) sum(k>=2) m^k/k!",
+    "G": "exp(-d) sum(n>=1) n*d^n/(n+1)!",
+    "proof": "Independent convolution and algebra in REVIEW_KO.md; numerical spot-checks in ../photo_subflow_v1/ANALYTIC_ALTERNATIVE_CHECK.json",
+    "truncation": "F terms n=2..33 and G terms n=1..32; exact-arithmetic tails bounded by a decreasing-term ratio. Float diagnostic does not include rounding and is not a global certificate."
+  },
+  "physics_checks": {
+    "nucleus_conservation": "PASS_SCOPED against independent final populations",
+    "charge_and_events": "PASS_SCOPED against augmented generator and final electron population",
+    "heat": "constant per-channel H_i/Gamma_i multiplied by independent event counts",
+    "binding": "independent state binding B=chi_H*HII+chi_HeI*HeII+(chi_HeI+chi_HeII)*HeIII checked against event binding",
+    "external_energy": "U+B-E_ext ledger checked from final state, not only self-cancelling returned moments",
+    "temperature": "ideal monatomic nonrelativistic U=3 N k_B T/2 with N=nuclei+electrons",
+    "source": "frozen-redshift/proper-volume externally regulated moment source",
+    "inventory": "explicit five-species H/He component; missing/extra species and rates rejected",
+    "source_threshold_convention": "caller model registry is explicit; exact source numerical thresholds unresolved",
+    "secondary_closure": "heat assignment is the adopted local thermal deposition moment; energy-resolved secondary partition not implemented",
+    "finite_radiation_and_full_IGM": "outside component scope",
+    "full21_nuclear_stellar_CR": "outside component scope",
+    "clipping": "none in source; positive analytic evaluation and explicit fixed absorbing state",
+    "critical_unresolved_issue_in_reviewed_scope": null,
+    "global_error_bound": null
+  },
+  "four_axes": {
+    "EXECUTION": "COMPLETE_SCOPED_PASS",
+    "PUBLICATION": "PENDING_PARENT_INTEGRATION; reviewer made no repo mutations",
+    "BACKUP": "LOCAL_CREATE_ONLY_EVIDENCE; remote backup NOT_RUN by reviewer",
+    "DAG": "C9 v2 complete; parent source campaign/publication/backup remain separate nodes"
+  },
+  "next_actions": [
+    "Integrate only source SHA256 stated in this review.",
+    "Preserve v1 failed source, original criterion, failure records and corrective derivation.",
+    "Parent may run the separately authorized bounded P19 source campaign and semigroup comparisons.",
+    "Publish/backup review with actual provider receipts; retain all stated physical adoption boundaries."
+  ],
+  "new_ODE": 0,
+  "historical_ODE_reruns": 0,
+  "created_utc": "2026-10-22T22:52:31.747648+00:00"
+}

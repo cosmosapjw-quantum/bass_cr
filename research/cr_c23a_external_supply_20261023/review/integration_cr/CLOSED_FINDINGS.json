@@ -1,0 +1,87 @@
+{
+  "created_utc": "2026-10-22T22:57:10.970411+00:00",
+  "science_functions_executed": 0,
+  "old_science_reruns": 0,
+  "lease_encoding_guard_actual_AST": "not isinstance(item['cpus'], list) or any((type(c) is not int or c < 0 for c in item['cpus']))",
+  "lease_checks": [
+    {
+      "cpus": [
+        0,
+        1
+      ],
+      "actual_guard_rejects": false
+    },
+    {
+      "cpus": "0-1",
+      "actual_guard_rejects": true
+    },
+    {
+      "cpus": [
+        "1"
+      ],
+      "actual_guard_rejects": true
+    },
+    {
+      "cpus": [
+        true
+      ],
+      "actual_guard_rejects": true
+    },
+    {
+      "cpus": [
+        -1
+      ],
+      "actual_guard_rejects": true
+    },
+    {
+      "cpus": [
+        2
+      ],
+      "actual_guard_rejects": false
+    }
+  ],
+  "resource_guard_actual_AST": "spare is None or memory is None or (not observed.get('memory_observation_complete')) or (spare < 1.2) or (memory < 768 * 1024 ** 2)",
+  "resource_checks": [
+    {
+      "spare": null,
+      "memory": 1000000000,
+      "complete": true,
+      "actual_guard_blocks": true
+    },
+    {
+      "spare": 2,
+      "memory": null,
+      "complete": true,
+      "actual_guard_blocks": true
+    },
+    {
+      "spare": 2,
+      "memory": 1000000000,
+      "complete": false,
+      "actual_guard_blocks": true
+    },
+    {
+      "spare": 2,
+      "memory": 1000000000,
+      "complete": true,
+      "actual_guard_blocks": false
+    },
+    {
+      "spare": 0.1,
+      "memory": 1000000000,
+      "complete": true,
+      "actual_guard_blocks": true
+    }
+  ],
+  "findings": {
+    "CR-C9-F1": "CLOSED",
+    "CR-C9-F2": "CLOSED"
+  },
+  "public_consumer": {
+    "syntax": "PASS",
+    "numerical_execution": "NOT_RUN",
+    "all_required_files_in_public49": true,
+    "missing": [],
+    "python_sha256": "6140de414736080e18c9dc46528f1378b18231ac66502dc917f2f7516ba86f7f"
+  }
+}

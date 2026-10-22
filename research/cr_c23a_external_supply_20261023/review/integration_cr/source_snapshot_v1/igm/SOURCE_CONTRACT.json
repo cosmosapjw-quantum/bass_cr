@@ -1,0 +1,68 @@
+{
+  "schema": "C23A_IGM_SUPPLY_CONTRACT_V1",
+  "created_utc": "2026-10-22T22:36:28.765053+00:00",
+  "source": {
+    "model": "Puchwein_arXiv_1801.04931v1_fiducial",
+    "article": "https://arxiv.org/html/1801.04931v1",
+    "data_url": "https://arxiv.org/src/1801.04931v1/anc/rates_fiducial.txt",
+    "data_sha256": "5b4cca58fcc46e821970c0a5a8cbb188cf2b5e6c00f56d6942588c86806662fe",
+    "data_bytes": 4381,
+    "rows": 59,
+    "redshift_domain": [
+      0,
+      15.1
+    ],
+    "channel_order": [
+      "HI",
+      "HeI",
+      "HeII"
+    ],
+    "ionization_unit": "s^-1 per absorbing target",
+    "heat_unit": "eV s^-1 per absorbing target",
+    "interpretation": "imposed UVB rate moments; non-equilibrium fiducial; not equivalent equilibrium",
+    "source_threshold_numeric_values": null,
+    "source_threshold_status": "NOT_EXPLICIT_IN_RETRIEVED_SOURCE",
+    "Compton_column_contract": null,
+    "Compton_column_status": "REQUIRED_INPUT_UNAVAILABLE_NOT_USED",
+    "source_spectrum": null,
+    "source_spectrum_status": "NOT_RECONSTRUCTED",
+    "extra_species": "FAIL_CLOSED_REQUIRES_EXPLICIT_SOURCE_MAPPING",
+    "source_code_reused": false,
+    "license": "arXiv non-exclusive distribution; no permissive-code-license claim",
+    "global_error_bound": null
+  },
+  "implementation": {
+    "module": "p19_uvb.py",
+    "interpolation": "log(rate) linear in log(1+z), exact node and constant plateau return",
+    "out_of_domain": "ValueError",
+    "missing_rate": "ERROR_NOT_ZERO",
+    "mode": "prescribed_moments",
+    "binding_registry": "caller-required explicit positive HI/HeI/HeII values",
+    "imported_energy": "sum X_i (chi_model_i Gamma_i + H_source_i)",
+    "temperature_equation": "Tdot = 2 Udot/(3 k_B N) - T Ndot/N",
+    "no_internal_radiation_subtraction": true
+  },
+  "admission": {
+    "provider": "PASS_SCOPED",
+    "independent_review": "PENDING_PARENT",
+    "new_ODE": "NOT_RUN",
+    "full21_population_campaign": "NOT_ADMITTED_BY_THIS_PROVIDER_ALONE",
+    "supported_separate_pilot": "explicit H/He inventory, declared external regulator, z within0..15.1, gas T/rate domains retained"
+  },
+  "open_obligations": [
+    "source numeric threshold convention / spectral energy identity",
+    "energy-resolved UV/X-ray spectrum for nonlinear secondary deposition",
+    "Compton column units and target convention",
+    "isotope and Li source coverage",
+    "actual nonthermal CR spectrum and stopping/transport/yields",
+    "nuclear cross sections/fragment yields/Q-values",
+    "stellar ejecta rate/composition/energy",
+    "self-consistent source stress-energy and radiation geometry"
+  ],
+  "four_axes": {
+    "EXECUTION": "source bytes, Wolfram algebra,18 validation checks complete;ODE0",
+    "PUBLICATION": "PENDING_PARENT_INTEGRATION",
+    "BACKUP": "LOCAL_ONLY_PENDING_PARENT_DELIVERY",
+    "DAG": "source/provider READY;independent review and new input;physical coverage obligations OPEN"
+  }
+}
