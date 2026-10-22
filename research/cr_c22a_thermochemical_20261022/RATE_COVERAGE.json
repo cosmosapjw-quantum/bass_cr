@@ -1,0 +1,144 @@
+{
+  "schema": "C22A_ACTUAL_ATOMIC_RATE_ENERGY_COVERAGE_V1",
+  "provider_sha256": "74b2a8c30c62f4a50e7c5c4bcf92cb159549ffcb904a3e423a793169c2f2bb27",
+  "sources": {
+    "VF": "https://www.pa.uky.edu/~verner/rec.html",
+    "HG": "https://arxiv.org/abs/astro-ph/9612232",
+    "Mao": "https://doi.org/10.1051/0004-6361/201629708",
+    "Grackle_blob": "dfbab661e7c45981eed750baebff140849917152"
+  },
+  "rows": [
+    {
+      "process": "ground_valence_photoionization",
+      "ions": [
+        "HI",
+        "HeI",
+        "HeII",
+        "LiI",
+        "LiII",
+        "LiIII"
+      ],
+      "source": "frozen Verner PH1/PH2",
+      "coverage": "ACTIVE_SCOPED",
+      "domain": "E>=adopted threshold; LiI 2s only; continuous PH1 high-energy branch parity checked",
+      "energy": "same-event threshold + immediate photoelectron heat",
+      "omissions": "core/Auger/secondary ionization and nonthermal electron transport"
+    },
+    {
+      "process": "Case_A_RR_number",
+      "ions": [
+        "HI",
+        "HeI",
+        "HeII",
+        "LiI",
+        "LiII",
+        "LiIII"
+      ],
+      "source": "frozen Verner-Ferland six rows",
+      "coverage": "ACTIVE_SCOPED",
+      "temperature_K": [
+        3,
+        1000000000
+      ],
+      "energy": "chi + derived kinetic capture energy exported"
+    },
+    {
+      "process": "RR_kinetic_moment",
+      "source": "L=kBT*(1.5alpha+T alpha'); stable VF analytical derivative",
+      "coverage": "ACTIVE_DERIVED_RATE_FIT_MOMENT",
+      "independent_accuracy": "H finite-grid comparison available; HeIII reference normalization UNRESOLVED; He/Li energy moment data OPEN"
+    },
+    {
+      "process": "H_collisional_ionization",
+      "source": "HG Appendix A / Grackle frozen pointer",
+      "coverage": "DIAGNOSTIC_ONLY",
+      "temperature_K": [
+        10000,
+        1000000000
+      ],
+      "energy": "chi transferred thermal to chemical",
+      "outside_domain": "UNAVAILABLE_NaN_NOT_ZERO"
+    },
+    {
+      "process": "H_excitation",
+      "source": "HG Black/Cen fit / Grackle frozen pointer",
+      "coverage": "DIAGNOSTIC_ONLY",
+      "temperature_K": [
+        5000,
+        500000
+      ],
+      "energy": "escaped line energy under low-density escape assumption",
+      "outside_domain": "UNAVAILABLE_NaN_NOT_ZERO"
+    },
+    {
+      "process": "CMB_Compton",
+      "source": "nonrelativistic Thomson isotropic-blackbody energy exchange",
+      "coverage": "DIAGNOSTIC_ONLY",
+      "Tcmb0_K": 2.7255,
+      "energy": "opposite gas/radiation transfer required before activation",
+      "LRS_note": "imposed isotropic bath diagnostic"
+    },
+    {
+      "process": "dielectronic_recombination",
+      "coverage": "OPEN_NOT_IMPLEMENTED",
+      "zero_substitution": false
+    },
+    {
+      "process": "He_Li_collisional_ionization",
+      "coverage": "OPEN_NOT_IMPLEMENTED",
+      "zero_substitution": false
+    },
+    {
+      "process": "He_Li_excitation",
+      "coverage": "OPEN_NOT_IMPLEMENTED",
+      "zero_substitution": false
+    },
+    {
+      "process": "free_free",
+      "coverage": "OPEN_NOT_IMPLEMENTED",
+      "zero_substitution": false
+    },
+    {
+      "process": "charge_exchange",
+      "coverage": "OPEN_NOT_IMPLEMENTED",
+      "zero_substitution": false
+    },
+    {
+      "process": "molecules_Hminus_H2plus_HD",
+      "coverage": "OPEN_NOT_IMPLEMENTED",
+      "zero_substitution": false
+    },
+    {
+      "process": "stellar_UV_emissivity",
+      "coverage": "OPEN_NOT_IMPLEMENTED",
+      "zero_substitution": false
+    },
+    {
+      "process": "RR_spectral_reabsorption",
+      "coverage": "OPEN_NOT_IMPLEMENTED",
+      "zero_substitution": false
+    },
+    {
+      "process": "anisotropic_spectral_UV_transport",
+      "coverage": "OPEN_NOT_IMPLEMENTED",
+      "zero_substitution": false
+    },
+    {
+      "process": "secondary_photoelectrons",
+      "coverage": "OPEN_NOT_IMPLEMENTED",
+      "zero_substitution": false
+    },
+    {
+      "process": "n_T_beta_and_nuclear",
+      "coverage": "HOLD;declared_zero_parent_only",
+      "requirements": [
+        "nuclear Q",
+        "charge/nucleus accounting",
+        "lepton partition",
+        "thermalization",
+        "valid rate domain"
+      ]
+    }
+  ],
+  "global_error_bound": null
+}

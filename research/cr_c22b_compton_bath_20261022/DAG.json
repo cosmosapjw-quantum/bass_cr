@@ -1,0 +1,125 @@
+{
+  "schema": "C22B_DAG_V1",
+  "created_KST": "2026-10-22T12:36:20.834796+09:00",
+  "nodes": [
+    {
+      "id": "C21O_RECOVERY",
+      "status": "COMPLETE_SCOPED_REUSED",
+      "depends_on": []
+    },
+    {
+      "id": "C22A_CONDITIONAL_SCIENCE",
+      "status": "COMPLETE_SCOPED_REUSED;old_reference_failure_preserved",
+      "depends_on": [
+        "C21O_RECOVERY"
+      ]
+    },
+    {
+      "id": "C22A_PUBLICATION_RETRY",
+      "status": "UNKNOWN_NO_ACK;remoteR",
+      "depends_on": [
+        "C22A_CONDITIONAL_SCIENCE"
+      ]
+    },
+    {
+      "id": "C22A_DRIVE_RETRY",
+      "status": "UNKNOWN_NO_ACK",
+      "depends_on": [
+        "C22A_CONDITIONAL_SCIENCE"
+      ]
+    },
+    {
+      "id": "C22B_OPEN_BATH_CONTRACT",
+      "status": "COMPLETE_SCOPED",
+      "depends_on": [
+        "C22A_CONDITIONAL_SCIENCE"
+      ]
+    },
+    {
+      "id": "C22B_IMPLEMENTATION_AND_RUNS",
+      "status": "COMPLETE_SCOPED_4NEW",
+      "depends_on": [
+        "C22B_OPEN_BATH_CONTRACT"
+      ]
+    },
+    {
+      "id": "C22B_SAVED_DATA_REVIEW",
+      "status": "PASS_SCOPED",
+      "depends_on": [
+        "C22B_IMPLEMENTATION_AND_RUNS"
+      ]
+    },
+    {
+      "id": "C22B_LOCAL_PUBLICATION_BUNDLE",
+      "status": "PREPARING;remotepublicationOPEN",
+      "depends_on": [
+        "C22B_SAVED_DATA_REVIEW"
+      ]
+    },
+    {
+      "id": "C22B_FINAL_BACKUP",
+      "status": "PREPARING;finalauthoritysidecarfollows",
+      "depends_on": [
+        "C22B_SAVED_DATA_REVIEW"
+      ]
+    },
+    {
+      "id": "C22C_ATOMIC_ENERGY_COVERAGE",
+      "status": "OPEN;contractbeforeactivation",
+      "depends_on": [
+        "C22B_SAVED_DATA_REVIEW"
+      ]
+    },
+    {
+      "id": "FULL_SPECTRAL_RADIATION_CLOSURE",
+      "status": "OPEN",
+      "depends_on": [
+        "C22B_OPEN_BATH_CONTRACT",
+        "C22C_ATOMIC_ENERGY_COVERAGE"
+      ]
+    },
+    {
+      "id": "FULL_NUCLEAR_HIGH_ENERGY",
+      "status": "HOLD",
+      "depends_on": []
+    },
+    {
+      "id": "GENERAL_TRIAXIAL_TILTED_POLARIZED_CMB",
+      "status": "HOLD",
+      "depends_on": []
+    }
+  ],
+  "next_contract_obligations": [
+    "Actual coefficients/domain and unavailable semantics for excitation and lowT CI",
+    "Per-reaction charge,nuclear identity and energy conservation",
+    "Excited-state/escape treatment and RR/DR/charge-exchange/bremsstrahlung energy coverage",
+    "H1 versus D/T isotope quotient assumptions and threshold/binding-energy alignment",
+    "Dominant omitted processes along new histories; no off-domain zero substitution",
+    "New source/input/run identity,resource/lease admission and create-only output before future integration"
+  ],
+  "EXECUTION": {
+    "status": "C22B_COMPLETE_SCOPED",
+    "old_ODE": 0
+  },
+  "PUBLICATION": {
+    "status": "OPEN_UNKNOWN_NO_ACK_LOCAL_COMMIT_AND_BUNDLE_TO_FOLLOW",
+    "remote_head_last_observed": "a5e12c5f3e6d323e211d65fefad34060ec07eff0",
+    "remote_PR": 96,
+    "PR_state": "open_draft_unmerged",
+    "remote_read_receipt": "evidence/publication_final_remote_read.json",
+    "write_retry_receipt": "evidence/retry_and_external_intake/GITHUB_PROBE_RECEIPT.json",
+    "write_permission": "UNDETERMINED; no permission denial observed",
+    "publication_complete": false
+  },
+  "BACKUP": {
+    "status": "PRE_TRANSPORT_SCIENCE_SNAPSHOT;checkpoint_R1_COMPLETE_SCOPED",
+    "checkpoint_receipt": "evidence/checkpoint_backup/SUMMARY.json",
+    "checkpoint_Library": "libfile_37025ed8ca548191bf5415f69da10e48",
+    "checkpoint_Dropbox": "id:BSpOijBcT10AAAAAAD_h2Q",
+    "new_final_delivery": "FINAL_AUTHORITY_SIDECAR_TO_FOLLOW",
+    "prior_C22A_Drive_retry": "UNKNOWN_NO_ACK",
+    "historical_C21O_Drive": "OPEN;mainUNKNOWN_NO_ACK,documentNOT_RUN,recoveryNOT_ATTEMPTED",
+    "triple_backup_claim": false
+  },
+  "global_error_bound": null
+}

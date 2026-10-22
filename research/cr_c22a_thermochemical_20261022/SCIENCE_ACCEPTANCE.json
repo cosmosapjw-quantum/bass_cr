@@ -1,0 +1,71 @@
+{
+  "schema": "C22A_ROOT_ACCEPTANCE_V1",
+  "status": "COMPLETE_SCOPED_WITH_RECORDED_REFERENCE_GATE_FAILURE",
+  "execution_identity_sha256": "f5f0f30b1358d79a361045823ec68daeca72c10da3675e7882ccb5775c3053cd",
+  "new_trajectory_attempts": 4,
+  "segmented_solve_ivp_calls": 72,
+  "nominal_completed_cases": 3,
+  "reference_integrated_all_segments": 1,
+  "reference_completed_case_receipts": 0,
+  "old_C21O_ODE_runs": 0,
+  "NCP_runs": 0,
+  "postprocessing_and_analysis_ODE_runs": 0,
+  "accepted_claims": [
+    "event-by-event isotope/charge/photon/thermal-chemical-UV-export-work conservation within the explicitly closed model",
+    "VF fitted rate implies the derived positive Maxwellian capture moment; implementation independently checked",
+    "three new BDF cases meet preregistered finite saved/accepted-mesh gates",
+    "matched six-field comparison with preserved Radau dense states passes the predeclared comparison threshold",
+    "Compton and H-excitation omission diagnostics are large enough to prioritize coupled energy feedback"
+  ],
+  "preserved_failures": [
+    {
+      "id": "RADAU_EXACT_NEUTRON_ZERO",
+      "status": "FAIL_RETAINED",
+      "max_abs_neutron_per_Href": 8.674087365096036e-36,
+      "remedy_this_stage": "saved-only independent diagnostics; original FAILED_PRESERVED unchanged",
+      "reference_accepted_mesh": "UNAVAILABLE;only 201 dense saved states preserved"
+    },
+    {
+      "id": "ANALYSIS_V1",
+      "status": "REJECTED",
+      "findings": [
+        "incorrect secondary redshift tick mapping on symlog parent",
+        "current HISTORY.csv differs from original manifest;443 rows;cause unresolved"
+      ]
+    },
+    {
+      "id": "ANALYSIS_V2",
+      "status": "REJECTED_FOR_FINAL_FIGURES",
+      "findings": [
+        "text collision; finalv3 fixes layout;v2/v3CSV identical"
+      ]
+    },
+    {
+      "id": "GITHUB_CREATE_BLOB_CHECKPOINT",
+      "status": "UNKNOWN_NO_ACK",
+      "actual_blob_acks": 0,
+      "tree_commit_ref_calls": 0,
+      "followup": "expected blob GET404; branch stayed R; Git CLI produced local S but push failed for missing HTTPS credential; alternate inline tree UNKNOWN_NO_ACK; no remote commit/ref mutation"
+    },
+    {
+      "id": "GITHUB_PUBLICATION_ACCESS",
+      "status": "OPEN",
+      "evidence": "evidence/publication_attempts/FINAL_PUBLICATION_STATUS.json"
+    }
+  ],
+  "authoritative_analysis": "analysis_v3",
+  "authoritative_omission_figure": "analysis_omissions_v1",
+  "scope_limits": [
+    "Full thermochemical/radiative/Einstein closure OPEN",
+    "isotropic additional UV closure; general angular/spectral transfer OPEN",
+    "He/Li independent RR energy accuracy OPEN;HeIII reference normalization unresolved",
+    "CI fit outside available temperature domain is UNAVAILABLE, not zero",
+    "no corrected-temperature prediction inferred from omission integrals",
+    "no strong no-go claim; no measured compact33 speedup; no global error bound"
+  ],
+  "EXECUTION": "COMPLETE_SCOPED_WITH_REFERENCE_STRICT_GATE_FAIL_RETAINED",
+  "PUBLICATION": "LOCAL_COMMIT_ONLY_UNPUBLISHED;WRITE_ACCESS_BLOCKED",
+  "BACKUP": "DELIVERY_SNAPSHOT_BEFORE_ACK;SEE_FINAL_AUTHORITY;HISTORICAL_DRIVE_OPEN",
+  "DAG": "C22A_CONDITIONAL_UNIT_COMPLETE;NEXT_COUPLED_COMPTON_AND_ACTUAL_LOW_T_ATOMIC_COVERAGE",
+  "global_error_bound": null
+}
