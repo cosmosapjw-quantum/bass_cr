@@ -1,0 +1,125 @@
+{
+  "schema": "C22B_PREREGISTERED_CONTRACT_V1",
+  "created_utc": "2026-10-22T03:11:13.433501+00:00",
+  "workflow": "physmath-research-loop1.0.0/approval0.2",
+  "parent_C22A_source_identity": "f5f0f30b1358d79a361045823ec68daeca72c10da3675e7882ccb5775c3053cd",
+  "parent_C22A_local_science_commit": "7c796130af14616ab367e734842e941df5dd55f5",
+  "parent_local_handoff_head": "005d30b71fd551c97aa368943c113828e639acf1",
+  "authority_remote_R_last_observed": "a5e12c5f3e6d323e211d65fefad34060ec07eff0",
+  "publication_status": "OPEN;bounded retry no ACK;see retry receipts",
+  "new_problem": "Compton gas feedback to a prescribed isotropic blackbody thermostat with a signed cumulative external-energy ledger;75full states and72active solver coordinates",
+  "hypothesis": "Compton exchange materially alters the conditional thermal/ionization/Thomson history while an equal-opposite bath ledger preserves total event accounting.",
+  "closure": {
+    "metric": "(-,+,+,+)",
+    "geometry": "non-tilted LRS",
+    "stress": "full Frobenius;signed amplitudes summed before norm;atomic gas isotropic;nonbaryonic Vlasov separate",
+    "Tgamma": "Tcmb0*(1+z),Tcmb0=2.7255K",
+    "Q_C": "4*sigma_T*c*a_R*Tgamma^4*n_e*k_B*(Tgamma-T)/(m_e*c^2) [erg cm^-3 s^-1]",
+    "J_C": "Q_C/(H*nHref*eV_erg) [eV/Href per eta]",
+    "equations": [
+      "Uprime=Uprime_C22A+J_C",
+      "L_bath_prime=-J_C",
+      "E_total=U+B+V+E_RR_export+Wgas+WUV+L_bath",
+      "Tprime follows U=(3/2)kB*T*(Nnuc+Ne) including particle-count term"
+    ],
+    "bath_ledger": "signed cumulative boundary energy received by thermostat;not resident CMB energy;no -L_bath expansion term",
+    "CMB_scope": "prescribed isotropic external thermostat approximation;inherited angular CMB retains its existing elastic Thomson evolution;no new radiation density added to Einstein sources;thermodynamic consistency with inherited CMB spectrum OPEN",
+    "regime": "positive T andTgamma;max(kBT,kBTgamma)/(m_e*c^2)<=0.01 explicit nonrelativistic selector,not error bound",
+    "full_thermochemical_radiative_closure": "OPEN"
+  },
+  "invariant_coordinates": {
+    "declared_zero": "n,T0,T1",
+    "unsupported_nonzero_n_T": "fail closed;not erased",
+    "map": "project75state to72active coordinates,then lift with exactly declared constant zeros",
+    "invariance": "removed rhs components must be exactlyzero before projection;full initial inventory checked;no clipping",
+    "historical_C22A_Radau_failure": "FAILED_PRESERVED unchanged"
+  },
+  "new_cosmological_runs": {
+    "nominal": {
+      "method": "BDF",
+      "rtol": 3e-11,
+      "atol": 3e-13,
+      "cases": [
+        {
+          "name": "dark_compton",
+          "signed_sigma": 0.0,
+          "signed_pi_m": 0.0,
+          "signed_pi_r": 0.0,
+          "photon_scale": 0.0,
+          "temperature_K": 300.0,
+          "compton_enabled": true,
+          "Tcmb0_K": 2.7255
+        },
+        {
+          "name": "finite_uv_compton_flrw",
+          "signed_sigma": 0.0,
+          "signed_pi_m": 0.0,
+          "signed_pi_r": 0.0,
+          "photon_scale": 1.0,
+          "temperature_K": 300.0,
+          "compton_enabled": true,
+          "Tcmb0_K": 2.7255
+        },
+        {
+          "name": "finite_uv_compton_lrs",
+          "signed_sigma": 0.3,
+          "signed_pi_m": 0.0002,
+          "signed_pi_r": 0.0008,
+          "photon_scale": 1.0,
+          "temperature_K": 300.0,
+          "compton_enabled": true,
+          "Tcmb0_K": 2.7255
+        }
+      ]
+    },
+    "reference": {
+      "method": "Radau",
+      "rtol": 3e-12,
+      "atol": 3e-14,
+      "case": {
+        "name": "finite_uv_compton_lrs",
+        "signed_sigma": 0.3,
+        "signed_pi_m": 0.0002,
+        "signed_pi_r": 0.0008,
+        "photon_scale": 1.0,
+        "temperature_K": 300.0,
+        "compton_enabled": true,
+        "Tcmb0_K": 2.7255
+      }
+    },
+    "saved_times": 201,
+    "segment_boundaries": "reuse actual energy-threshold endpoint checks",
+    "max_workers": 2,
+    "threads_per_worker": 1,
+    "CPU55": "protected;coordinator distinct",
+    "outputs": "create-only;source frozen before execution",
+    "old_C21O_and_C22A_ODE_reruns": 0
+  },
+  "preregistered_gates": {
+    "energy_relative_saved_and_accepted_max_abs": 1e-08,
+    "nucleus_max_relative_residual": 1e-10,
+    "charge_and_photon_absolute_normalized": 1e-10,
+    "minimum_scaled_population": -2e-09,
+    "minimum_UV_count_per_H": -2e-11,
+    "declared_n_T_exact_zero": true,
+    "reference_fields": [
+      "temperature_K",
+      "n_e_cm3",
+      "tau_T",
+      "Sigma_F",
+      "Pi_r_F",
+      "H1_ionized_fraction",
+      "bath_energy_received_eV_per_H"
+    ],
+    "reference_scaled_max_difference": 2e-07,
+    "comparison_normalization": "max(abs(reference field),1e-8*max_abs(reference field),1e-30);bath uses maxabs reference as uniform scale to avoid cumulative crossing zero",
+    "nonrelativistic_selector_max": 0.01
+  },
+  "atomic_rate_adoption": "C22A fixed photo and RR retained;newliterature lowerT coverage may be diagnostic-only unless fullycontracted before freeze;no unavailable coefficient replaced by zero",
+  "validation_reuse": "C22A immutable raw histories and audits reused;off-mode RHS parity instead of old ODE rerun",
+  "HOLD": [
+    "full nuclear highenergy",
+    "general triaxial/tilted/polarized CMB"
+  ],
+  "global_error_bound": null
+}

@@ -1,0 +1,159 @@
+{
+  "schema": "C22A_PREREGISTERED_CONTRACT_V1",
+  "frozen_before_new_ODE": true,
+  "recorded_utc": "2026-10-22T01:53:00Z",
+  "user_skill": {
+    "name": "physmath-research-loop",
+    "selected_version": "1.0.0",
+    "reason": "explicit user-provided skill; installed 1.3.0 not substituted"
+  },
+  "parent": {
+    "science_C": "6b6db06e8148e6826a2d5bf7dbc53d362126ca62",
+    "historical_D": "f7ca6905729f7d8d36ca0605f7b1dd7ad5595819",
+    "recovery_R": "a5e12c5f3e6d323e211d65fefad34060ec07eff0",
+    "execution_source_identity": "c60d734b0ed8cc7d1a147e181da27c282e3f47be90f8b0eb1d65c030faabea0f"
+  },
+  "new_problem": "74-state finite-initial-UV thermochemical trace-energy model with dynamic common Maxwellian gas temperature; z20_to_2",
+  "hypothesis": "A common event flux can conserve isotope nuclei, charge/photon counts and thermal+chemical+UV+export+expansion energy while coupling new ne to the preserved LRS Thomson sector.",
+  "negative_or_null_result_policy": "Preserve all attempts; ledger PASS does not imply complete atomic/source coverage or astrophysical accuracy.",
+  "physics": {
+    "geometry": "non-tilted LRS",
+    "norm": "full Frobenius",
+    "stress_addition": [
+      "Pr=Pgamma+Pnu",
+      "Ptot=Pm+Pr",
+      "Pi_r=abs(Pr)",
+      "Pi_tot=abs(Ptot)"
+    ],
+    "populations": 21,
+    "atomic_inventory": [
+      "n",
+      "H1:0,1",
+      "D:0,1",
+      "T:0,1",
+      "He3:0,1,2",
+      "He4:0,1,2",
+      "Li6:0,1,2,3",
+      "Li7:0,1,2,3"
+    ],
+    "n_T_initial_zero": "declared inventory, exact invariant face; unsupported positive inputs fail closed",
+    "gas_stress": "isotropic",
+    "UV_stress": "imposed isotropic cohort closure",
+    "matter_stress": "separate nonbaryonic Vlasov",
+    "temperature": "dynamic, common Maxwellian, ideal monatomic gas",
+    "RR": "Case A spontaneous total number-rate; VF-fit-implied kinetic energy moment",
+    "RR_derivative_accuracy": "UNRESOLVED_NOT_CERTIFIED_BY_ALPHA_FIT",
+    "UV_energies_initial_eV": [
+      10,
+      20,
+      40,
+      60,
+      100,
+      150
+    ],
+    "UV_counts_initial_per_H": [
+      0.05,
+      0.25,
+      0.003,
+      0.0002,
+      0.00001,
+      0.000001
+    ],
+    "external_emissivity": 0,
+    "escaped_energy": "cumulative boundary export per Href; no post-escape redshift propagation",
+    "Einstein_trace_energy_feedback": "NOT_INCLUDED;ratio diagnosed",
+    "full_thermochemical_radiative_closure": "OPEN"
+  },
+  "units": {
+    "time_coordinate": "eta=ln(a/a_initial)",
+    "proper_time": "seconds",
+    "H": "s^-1",
+    "density": "cm^-3",
+    "energy": "eV per conserved Href nucleus",
+    "temperature": "K",
+    "photon_inventory": "counts per Href"
+  },
+  "ledger": [
+    "U=1.5*kB*T*(Nnuc+Ne)",
+    "B=sum_i(binding_i*N_i)",
+    "V=sum_g(E_g*G_g), E_g=E_g0*exp(-eta)",
+    "dU/deta=-2U+sum((E-chi)*photo)-sum(kB*T*f_RR*RR)",
+    "dEescaped/deta=sum((chi+kB*T*f_RR)*RR)",
+    "dWgas/deta=2U",
+    "dWUV/deta=V",
+    "U+B+V+Eescaped+Wgas+WUV=constant",
+    "Ne+N_RR-N_abs=constant",
+    "sum_g(G_g)+N_abs=constant"
+  ],
+  "RR_temperature_fit_domain_K": [
+    3,
+    1000000000
+  ],
+  "temperature_domain_note": "fit domain only; not blanket validity of nonrelativistic gas at 1e9 K",
+  "isotope_quotient": "Exact only for same active electronic generator/threshold/energy coefficients, linear electron aggregation, and proportional initial charge vectors for unique weighted reconstruction; isotope-specific CX/shifts/beta/nuclear reopen conditions.",
+  "new_runs": {
+    "nominal": {
+      "method": "BDF",
+      "rtol": 3e-11,
+      "atol": 3e-13,
+      "cases": [
+        "dark_expansion",
+        "finite_uv_flrw",
+        "finite_uv_lrs"
+      ]
+    },
+    "reference": {
+      "method": "Radau",
+      "rtol": 3e-12,
+      "atol": 3e-14,
+      "cases": [
+        "finite_uv_lrs"
+      ]
+    },
+    "old_C21O_runs": 0,
+    "NCP_runs": 0,
+    "grid": "201=zero+geomspace(1e-10,0.02,100)+linspace(0.02,ln(7),101)[1:]",
+    "adaptive_mesh": "also saved; sampled evidence not a global bound",
+    "thresholds": "segment all physical and LiI algorithm boundaries; actual one-sided energy branch checked",
+    "workers_max": 2,
+    "threads_per_worker": 1,
+    "CPU55": "protected",
+    "coordinator": "distinct reserved CPU",
+    "outputs": "create-only new run IDs; never overwrite"
+  },
+  "acceptance_gates": {
+    "scope": "finite saved grid and additional accepted mesh diagnostics only",
+    "max_abs_energy_relative_residual": 2e-8,
+    "max_nucleus_relative_residual": 2e-9,
+    "max_abs_charge_photon_relative_residual": 2e-9,
+    "max_abs_photon_number_relative_residual": 2e-9,
+    "min_population_scaled": -2e-9,
+    "min_UV_counts_per_H": -2e-11,
+    "declared_zero_n_T": "exactly zero",
+    "temperature_inside_adopted_fit_domain": true,
+    "reference_max_abs_difference_over_reference_peak": 2e-7,
+    "reference_fields": [
+      "temperature_K",
+      "n_e_cm3",
+      "tau_T",
+      "Sigma_F",
+      "Pi_r_F",
+      "H1_ionized_fraction"
+    ],
+    "physical_coverage_gate": "never inferred from numerical gates",
+    "global_error_bound": null
+  },
+  "hold": [
+    "full nuclear high-energy",
+    "general triaxial",
+    "tilted flow",
+    "polarized CMB"
+  ],
+  "conversations": "UNAVAILABLE: actual connector error retained",
+  "original_nuclear_network_PNG": "NOT_RECOVERED_NOT_READ",
+  "EXECUTION": "IMPLEMENTATION_AND_FINITE_CHECKS_COMPLETE_SCOPED;NEW_ODE0_AT_CONTRACT",
+  "PUBLICATION": "PENDING_PREEXECUTION_CHECKPOINT",
+  "BACKUP": "PARENT_RECEIPTS_REUSED;NEW_PACKAGE_PENDING;HISTORICAL_DRIVE_OPEN",
+  "DAG": "C22A_CONDITIONAL_PILOT_READY_AFTER_ENDPOINT_PATCH;FULL_CLOSURE_OPEN",
+  "global_error_bound": null
+}

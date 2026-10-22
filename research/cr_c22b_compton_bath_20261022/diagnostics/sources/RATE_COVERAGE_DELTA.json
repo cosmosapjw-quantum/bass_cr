@@ -1,0 +1,136 @@
+{
+  "schema": "C22B_RATE_COVERAGE_DELTA_DRAFT_V1",
+  "created_utc": "2026-10-22T03:12:44.052000+00:00",
+  "parent_unit": "cr_c22a_thermochemical_20261022",
+  "parent_execution_source_identity": "f5f0f30b1358d79a361045823ec68daeca72c10da3675e7882ccb5775c3053cd",
+  "selected_delta": "prescribed_isotropic_CMB_OPEN_bath_with_signed_cumulative_external_ledger",
+  "EXECUTION": "THEORY_AND_COEFFICIENT_ARITHMETIC;ODE0;RHS0",
+  "PUBLICATION": "PENDING_PARENT",
+  "BACKUP": "PENDING_PARENT",
+  "DAG": "COMPTON_OPEN_BATH_CONTRACT_READY;ATOMIC_LOW_T_PARTIAL",
+  "rows": [
+    {
+      "process": "valence_PI_and_CaseA_RR",
+      "status": "REUSE_UNCHANGED_C22A_SIX_ELECTRONIC_ROWS",
+      "new_coverage_claim": false,
+      "RR_energy_moment": "inherited_fit_derivative_not_independent_atomic_energy_accuracy"
+    },
+    {
+      "process": "Compton_open_bath",
+      "status": "PROPOSED_ACTIVE_C22B",
+      "source_refs": [
+        "S1"
+      ],
+      "flux": "Q=4*sigma_T*c*ne*a_R*Tb^4*kB*(Tb-Tg)/(me*c^2)",
+      "units": "erg cm^-3 s^-1; positive gas heating",
+      "per_Href_eta": "J=Q/(H*nHref*1.602176634e-12)",
+      "paired_updates": {
+        "thermal_U_prime": "+J",
+        "signed_external_Lb_prime": "-J"
+      },
+      "bath_T_K": "2.7255*(1+z)",
+      "limits": [
+        "isotropic Planck spectrum imposed",
+        "nonrelativistic Thomson regime",
+        "common Maxwellian gas/electron T",
+        "not self-consistent inherited LRS CMB energy transfer"
+      ],
+      "photon_number_event": "none",
+      "bath_Einstein_source_added": false,
+      "L_b_redshift_term": false,
+      "new_atom_events": false
+    },
+    {
+      "process": "dynamic_finite_blackbody_Compton",
+      "status": "DEFERRED_CONTRACT_ONLY",
+      "energy_equations": [
+        "Eb_prime=-Eb-J",
+        "Wb_prime=Eb"
+      ],
+      "blackbody_photon_source_required": "n_gamma_dot+3H*n_gamma=-3*n_gamma*Q/(4*u_b)",
+      "closure_needed": [
+        "photon production/absorption/rethermalization or spectrum/photon-number closure",
+        "identify replacement/correction of inherited gamma; no duplicate CMB energy",
+        "LRS shear/radiation stress work and angular collision closure"
+      ]
+    },
+    {
+      "process": "H_ground_CI_SW91",
+      "status": "DIAGNOSTIC_ONLY_PARTIAL_PROVIDER_IMPLEMENTED_TABLE_CHECKED",
+      "source_refs": [
+        "S2"
+      ],
+      "domain_K": [
+        2000,
+        100000000.0
+      ],
+      "fit": "reduced Gamma=exp(sum(a_i*(lnT)^i)); actual q=Gamma*exp(-I_1s/(kBT))",
+      "coefficients_a0_to_a6": [
+        -96.1443,
+        37.9523,
+        -7.96885,
+        0.883922,
+        -0.0534513,
+        0.00166344,
+        -2.08888e-05
+      ],
+      "coefficients_units": "Gamma cm3/s, T kelvin",
+      "threshold_status": "SW91_one_Ry=13.605693122994eV; not C22A chemical increment13.6eV; diagnostic-only",
+      "below_2000K": "OPEN_UNAVAILABLE_NOT_ZERO_NOT_EXTRAPOLATED",
+      "activation": "NOT_ACTIVE_C22B",
+      "provider": "atomic_h_sw91.py",
+      "provider_sha256": "f6417b6306f4190bb58e7063d78f3967b4b4d593627928a8bf5bf5d74310f7db",
+      "checks": "SW91_CI_CHECKS.json",
+      "published_table_check": "7 independent Table1 reduced-rate values; maximum relative deviation0.00591638492643054 < author reported fit0.006; no physical/global error bound",
+      "check_revision_receipt": "SW91_LABEL_CORRECTION_RECEIPT.json"
+    },
+    {
+      "process": "H_1s_to_2s_2p_SW91",
+      "status": "DIAGNOSTIC_CANDIDATE_DOMAIN_VERIFIED_TABLE3_COLUMN_ASSIGNMENT_PENDING",
+      "source_refs": [
+        "S2"
+      ],
+      "domain_K": [
+        2000,
+        100000000.0
+      ],
+      "threshold": "0.75Ry",
+      "below_2000K": "OPEN_UNAVAILABLE_NOT_ZERO_NOT_EXTRAPOLATED",
+      "activation": "NOT_ACTIVE_C22B",
+      "verified_source_locations": "Eq16/17 and Table3; actual rate Eq12/13; Table4 is total cooling, not individual excitation rates",
+      "temperature_regions_K": [
+        [
+          2000,
+          60000
+        ],
+        [
+          60000,
+          6000000
+        ],
+        [
+          6000000,
+          100000000
+        ]
+      ],
+      "original_coefficients": "six literal OCR blocks preserved UNASSIGNED in SW91_PRIMARY_ACCESS.json; not admitted for implementation"
+    },
+    {
+      "process": "other_omitted_atomic_and_source_processes",
+      "status": "UNCHANGED_OPEN",
+      "items": [
+        "He/Li CI/excitation",
+        "DR",
+        "charge_exchange",
+        "free_free",
+        "molecules",
+        "secondary_electrons",
+        "RR_reabsorption",
+        "stellar_emissivity",
+        "anisotropic_spectral_UV"
+      ]
+    }
+  ],
+  "full_thermochemical_radiative_Einstein_closure": "OPEN",
+  "strong_no_go_claim": false,
+  "global_error_bound": null
+}
