@@ -13,7 +13,7 @@
 | R7 | 판별 검증 | reused | C23C main18/C9 저장 결과 재사용; 새 수치 실행0 |
 | R8 | 결과 판정 | complete | N4_ADMISSION.json: named consumer/저장18 입력의 CONSUMER_ADMITTED; 독립 판정 근거 연결 |
 | R9 | 정식 결과·코딩 연결 | complete | N4_SCOPE_DECISION_KO.md 및 N4_ADMISSION.json으로 계약 연결 |
-| R10 | 종료·재개 | in_progress | 과학/수신 문서 준비 완료; actual 새 publication/backup 영수증 대기 |
+| R10 | 종료·재개 | complete | A/M 실제 게시 및 독립 scoped 수용 완료. 새 recovery Library/Dropbox R3; Drive UNKNOWN_NO_ACK/R3_NOT_RUN OPEN. 별도 stopping 계약이 다음 실행점 |
 | C1 | 목표·baseline | complete | bass E 및 central0f9 baseline; N4_SCOPE_DECISION_KO.md |
 | C2 | 식–데이터–코드 | reused | SavedSupplier/bind/run_binding 및 저장 CASES.json 대응 |
 | C3 | 수치 설계 | reused | 기존 finite atomic 알고리즘; 새 수치 설계 없음 |
@@ -23,6 +23,6 @@
 | C7 | 과학 검증 | reused | 저장13 exact residual/case 및 C9 raw CSV audit 재사용 |
 | C8 | 수치·재현성 | reused | 기존18 cases, Decimal80 977 comparisons 및 source version 구분 |
 | C9 | 독립 검토 | complete | review/INDEPENDENT_ADMISSION_REVIEW_KO.md 및 JSON; PASS_SCOPED_NEW_ADMISSION_MAPPING |
-| C10 | 판정·인계 | in_progress | scoped admission 완료; packet commit 및 publication/backup 영수증 대기 |
+| C10 | 판정·인계 | complete | delivery/N4_FINAL_AUTHORITY_20261024.json 및 HANDOFF_FINAL_KO.md; science/docs COMPLETE_SCOPED; Drive backup OPEN. 최종 문서 containing commit은 root의 실제 게시 후 외부 결속 |
 
 새 scientific execution/source quadrature/empirical rate/ODE/historical replay는 모두0. 새 수신 mapping은 독립 PASS_SCOPED_NEW_ADMISSION_MAPPING를 받았다. 실제 publication/backup 완료는 별도 영수증으로 기록한다. 다음 별도 물리 단위는 stopping 계약 구성이다.
