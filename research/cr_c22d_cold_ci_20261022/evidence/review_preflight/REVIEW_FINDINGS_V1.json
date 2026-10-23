@@ -1,0 +1,69 @@
+{
+  "schema": "C22D_PREFLIGHT_FINDINGS_V1",
+  "status": "STATIC_PHYSICS_PASS_SCOPED_WITH_DRIVER_PRESERVATION_FIX_PENDING",
+  "author_role": "Independent intake/code reviewer; not C22D runtime author, CI provider author or optimizer author",
+  "scope": "Changed C22D model/contract/driver and CI/kernel links; no inherited campaign reaudit",
+  "activity": {
+    "science_module_imports": 0,
+    "RHS_calls": 0,
+    "ODE_runs": 0,
+    "external_writes": 0
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "targeted runtime evidence preservation",
+      "status": "PARENT_FIX_IN_PROGRESS",
+      "file": "run_pilot.py",
+      "function": "integrate_segmented",
+      "issue": "Endpoint inset and inset-overlap checks execute outside the IntegrationFailure-preserving try. A later segment-preparation failure can lose already accepted partial arrays.",
+      "requested_resolution": "Wrap changed segment-preparation failure in IntegrationFailure with current accepted arrays and segment receipts; fault-inject without ODE and preserve RED/GREEN evidence."
+    },
+    {
+      "id": "F2",
+      "severity": "invalid numerical predicate",
+      "status": "INDEPENDENTLY_DIAGNOSED",
+      "file": "validate_model.py",
+      "issue": "The warm CI test demands 5e-12 relative resolution of a small increment recovered by subtracting two large complete RHS values.",
+      "independent_evidence": "SAVED_ADDITION_REVIEW.json:24/24 exact-input rational additions round bitwise to observed don;24/24 subtractions exact;max0.5ULP addition error.",
+      "resolution_supported": "Preserve original34PASS/2FAIL; replace invalid incremental-relative predicate explicitly by exact-input correctly-rounded addition checks. Do not tune physics, solver tolerances, or choose favorable states."
+    },
+    {
+      "id": "F3",
+      "severity": "failure provenance",
+      "status": "RESOLVED_BY_SNAPSHOT_AND_PARENT_PRESERVATION",
+      "issue": "Original v1 receipt pinned model/CI/kernel but not its validator source.",
+      "resolution": "Original validator snapshot retained in sources_v1/validate_model.py SHA43ab6caa...; parent reports preserving original validator and exact original model SHA."
+    },
+    {
+      "id": "F4",
+      "severity": "physical scope wording",
+      "status": "RESOLVED_IN_REVIEWED_SNAPSHOT",
+      "issue": "13.6058eV aligned CCC table threshold must not be called the corrected physical H1 precision threshold.",
+      "resolution": "model f270c8a... says adopted CCC-aligned model support; contract3146376... includes distinct source-convention/precision-threshold caution. Source consistency only; physical finite-mass/isotope closure remains OPEN."
+    }
+  ],
+  "static_passes": [
+    "PI energy cutoff, CI kinetic loss, binding increments and RR export share the new explicit H-family registry; old total RR/capture fits remain declared approximate inputs.",
+    "AlignedAtomicView wraps the frozen network; A.events calls view.provider.sigma directly. No source atomic configuration or shared threshold/binding array is modified.",
+    "Fresh A/B/C initial-energy references are recomputed bottom-up; D energy includes inherited bath and excitation ledgers once.",
+    "H1 CI physical abundance update conserves nuclei, produces exactly one free electron, exchanges U and binding without escape, and includes temperature particle term through U/(1.5kB N).",
+    "D charge ledger subtracts cumulative CI count; photon-number ledger is unchanged.",
+    "Only declared n/T exactlyzero face is projected; H1/D isotope quotient is not used.",
+    "Transition times delegate to the newly aligned A thresholds, with Li algorithm switch retained. Endpoint branch logic compares actual energy arithmetic and does not mutate state.",
+    "Source freeze, pre/post-case identity and input hashing are explicit; file installation is create-only and run directories refuse reuse.",
+    "CPU55 and coordinator separation, one-thread worker environment, initial/fresh dispatch resource and lease observation are explicit; exclusive CPU lease ownership is not claimed."
+  ],
+  "limitations": [
+    "Target model/code static review is not a four-trajectory execution approval or physical rate-accuracy certificate.",
+    "Driver scientific acceptance remains pending separate saved+accepted-mesh gate evaluation; current preflight review does not claim those gates ran.",
+    "Parent controlled lightchecks are reused as receipts; independent arithmetic review uses saved scalar values only.",
+    "Physical CI tail, continuum interpolation, Maxwellian/thermalization/inverse closure and full thermochemical/radiative energy closure stay OPEN; global_error_bound=null."
+  ],
+  "axes": {
+    "EXECUTION": "ODE0; static review and24saved-scalar rational checks",
+    "PUBLICATION": "review-local only; parent owns publication",
+    "BACKUP": "parent final package pending; no child upload",
+    "DAG": "driver preservation fix and corrected lightcheck receipt pending; physics core no blocking algebraic issue found"
+  }
+}

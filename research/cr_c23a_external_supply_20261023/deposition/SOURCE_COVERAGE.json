@@ -1,0 +1,150 @@
+{
+  "unit_id": "C23A_FAST_ELECTRON_FINITE_SOURCE",
+  "observed_utc": "2026-10-22T22:46:17.037320+00:00",
+  "scope": "Read-only primary acquisition, finite table operator, exact-PL precontraction; no cosmological or chemical ODE",
+  "provider": {
+    "id": "FS2010_current_author_archive",
+    "url": "https://cosmicdawn.astro.ucla.edu/elec_interp.tar",
+    "bytes": 310272,
+    "sha256": "e9760d637b5bd97fe981cb459a7e2d733692a9f9f8deb9a757224b14be632101",
+    "archive_license": "NO_EXPLICIT_LICENSE_LOCATED",
+    "upstream_C_execution": "NOT_RUN"
+  },
+  "finite_data_domain": {
+    "electron_kinetic_energy_eV": [
+      10.0,
+      9937.21
+    ],
+    "energy_nodes": 258,
+    "source_state_rows": 14,
+    "axis_policy_required": true,
+    "axis_policies": {
+      "published_c_axis": "14 supplied C coordinates, four gas-header conflicts exposed",
+      "unambiguous_high_ionization": [
+        0.1,
+        0.5,
+        0.9,
+        0.99,
+        0.999
+      ]
+    },
+    "source_header_z": 10.0,
+    "source_header_T_K": 100.0,
+    "valid_arbitrary_temperature_range_K": null,
+    "source_He_over_H": null,
+    "gas_constraint": "x_HII=x_HeII=xi; x_HeIII=0",
+    "x_e_may_substitute_xi": false,
+    "out_of_domain": "REJECT",
+    "zero_fill_absent_species": false
+  },
+  "channels": {
+    "reported_energy_fractions": [
+      "ionization",
+      "heat",
+      "HI_line_excitation"
+    ],
+    "counts": [
+      "Lya",
+      "HI_ionization",
+      "HeI_ionization",
+      "HeII_ionization"
+    ],
+    "Lya_energy_eV": 10.2,
+    "Lya_ownership": "subset of excitation, not additive energy channel",
+    "primary_binding_ownership": "outside electron kinetic response",
+    "He_excitation_photon_ownership": "reabsorption closure already included in source"
+  },
+  "normalization": {
+    "input": "electrons_per_Href_per_eta_per_eV",
+    "energy_output": "eV_per_Href_per_eta",
+    "count_output": "events_per_Href_per_eta",
+    "eta": "ln(a)",
+    "q_e": "Q_e/(H*n_Href)",
+    "input_family": "nonnegative piecewise-linear finite support",
+    "physical_CR_amplitude": "NOT_SUPPLIED; synthetic diagnostic spectra only",
+    "channel_clip": false,
+    "channel_renormalize": false
+  },
+  "observed_source_defects": "c23a_fast_electron_source_audit_20261023_v1/SOURCE_DEFECTS.json",
+  "measured_reported_energy_defect_bound": 3.900000000012227e-05,
+  "bound_scope": "nonnegative spectral integral of finite interpolated raw channel sum defect only",
+  "global_error_bound": null,
+  "source_vs_caller_obligations": {
+    "source_metadata": [
+      "resolve four low-xi header/C coordinate conflicts",
+      "resolve current archive versus paper Table1 differences",
+      "establish explicit source He/H",
+      "bind secondary count thresholds to reported ionization energy"
+    ],
+    "caller_physics": [
+      "match admitted source gas submanifold",
+      "separate primary binding and post-primary electron injection",
+      "assign absorbed-photon ownership exactly once",
+      "separate thermal CI from fast-electron cascade",
+      "establish loss time relative to medium variation",
+      "establish He photon absorption/escape",
+      "account for significant IC or other omitted losses",
+      "supply dimensional and normalized primary UV/X-ray or CR spectrum"
+    ],
+    "future_atomic_nuclear": [
+      "reaction charge and isotope number conservation",
+      "Q value and atomic binding ownership",
+      "temperature and projectile-energy coverage",
+      "dominant omitted processes",
+      "validated isotope quotient if collapsing isotope states"
+    ]
+  },
+  "omitted_or_unadmitted": [
+    "proton/alpha differential secondary production",
+    "CR transport and source normalization",
+    "molecular H2 chemistry",
+    "metal/Li/D/T isotope-specific response",
+    "dense-gas excited populations and collisional deexcitation",
+    "IC/bremsstrahlung/high-energy showers in this finite response",
+    "spallation and nuclear reactions",
+    "self-consistent thermal/UV/star evolution"
+  ],
+  "selected_external_sources": [
+    {
+      "repo": "21cmfast/21cmFAST",
+      "commit": "72d8a2d23702f1b69fbc85abd25d4592a7bcd3f5",
+      "tree": "e3753fd2fc2ef42c9ca396d4420e382d0714c6d8",
+      "license": "MIT file downloaded",
+      "scope": "14 table files+LICENSE",
+      "mirror_numeric_tokens": "14/14 PASS",
+      "mirror_bytes": "14/14 DIFFERENT terminal newline",
+      "independent_physics_validation": false
+    },
+    {
+      "repo": "hongwanliu/DarkHistory",
+      "commit": "7a09f1991b0028cf00ec386bdea81b963f78794f",
+      "tree": "32ab51525baf4b7425c522ef09ad4468682cc5b0",
+      "license": "MIT file downloaded",
+      "scope": "legacy lowE module+8 small tables+LICENSE",
+      "adoption": "READ_ONLY_CANDIDATE; no execution"
+    }
+  ],
+  "selected_app_usage": {
+    "SciSpace": "ACTUAL_SEARCH; SCISPACE_DISCOVERY.json",
+    "Exa": "ACTUAL_SEARCH_AND_FETCH; EXA_DISCOVERY.json",
+    "Wolfram": "PARENT_TRACK; not invoked by this subagent"
+  },
+  "checks": "c23a_fast_electron_source_audit_20261023_v1/RESULT.json",
+  "same_input_timing": "c23a_precontraction_timing_20261023_v1/RESULT.json",
+  "physical_coupling": "NOT_ADMITTED_SOURCE_AND_CALLER_CONTRACT_OPEN",
+  "new_ODE": 0,
+  "old_ODE_reruns": 0,
+  "external_dispatch": 0,
+  "primary_URLs": [
+    "https://cosmicdawn.astro.ucla.edu/codes_and_tools.html",
+    "https://cosmicdawn.astro.ucla.edu/elec_interp.tar",
+    "https://academic.oup.com/mnras/article/404/4/1869/1083930",
+    "https://arxiv.org/abs/0910.4410",
+    "https://github.com/21cmfast/21cmFAST/tree/72d8a2d23702f1b69fbc85abd25d4592a7bcd3f5",
+    "https://github.com/hongwanliu/DarkHistory/tree/7a09f1991b0028cf00ec386bdea81b963f78794f",
+    "https://arxiv.org/abs/2303.07366",
+    "https://academic.oup.com/mnras/article/404/3/1569/1053924",
+    "https://arxiv.org/abs/2101.05803",
+    "https://iopscience.iop.org/article/10.3847/0004-637X/831/1/18"
+  ]
+}

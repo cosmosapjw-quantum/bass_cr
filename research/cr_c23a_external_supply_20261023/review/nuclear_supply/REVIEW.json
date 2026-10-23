@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "workflow_version": "1.0.0",
+  "unit_id": "c23a_nuclear_supply_independent_C9",
+  "reviewer": "/root/igm_supply",
+  "decision": "PASS_SCOPED",
+  "review_method": [
+    "read fixed code and raw MF8/MT457 DAT records",
+    "independent inequality and dimensional/primitive derivations",
+    "read completed numerical results and resource receipts without executing producer functions",
+    "tiny stdlib exact-rational and SHA/Git-blob checks only"
+  ],
+  "source_packet_manifest_sha256": "f4d667d23e567b1165193ce6a43c6374058fc0d54b41cae40fb5ea8e462c11db",
+  "source_packet_files": 29,
+  "source_packet_bytes": 233841,
+  "completed_run": "c23a_beta_fs2010_coverage_20261023_v1",
+  "dependencies": {
+    "beta_domain_coverage.py": "b96f9e624fd7c43d2f71f8c7ee8e904a3d76c9fd4268830c0ca4e3e16c2fcd97",
+    "run_beta_domain_coverage.py": "b096a5cd40af4b70a7d1afcd8247b7affd5a2eaef33bb612f3880b54b20a37f8",
+    "source/EVALUATED_ENERGY_AND_DOMAIN_CONTRACT.json": "23426695877a9c156a474cc908d1dba7185f87c4e91b8b7b7abd46ee1335562b",
+    "RESULT.json": "e11ac9f223f95d0d6f8d38796e615ffb20d91bc4fd2ac95afc6054a5c763c485"
+  },
+  "checks": [
+    {
+      "id": "SOURCE_IDENTITY",
+      "result": "PASS_SCOPED",
+      "evidence": "READ_AND_ALGEBRA.json",
+      "meaning": "all29 final payloads and7 run pins match; lifetime Git blob independently matches"
+    },
+    {
+      "id": "ENERGY_SEMANTICS",
+      "result": "PASS_SCOPED",
+      "meaning": "legacy central Q/ER/ERAV read from selected primary DAT; old lifetimes not adopted; LCON0 not a continuous spectrum; ER=Q not promoted to a precision endpoint; zero uncertainty remains unresolved physical precision"
+    },
+    {
+      "id": "MOMENT_BOUND",
+      "result": "PASS_SCOPED",
+      "meaning": "independent pointwise proof, sharpness, exact central-value fractions and nonuniqueness witnesses"
+    },
+    {
+      "id": "PHASE_SPACE_DIMENSIONS",
+      "result": "PASS_SCOPED",
+      "meaning": "I_k has energy^(k+5); dimensionless substitution, primitive recurrence and per-primary normalizations agree"
+    },
+    {
+      "id": "SAVED_NUMERICS",
+      "result": "PASS_SCOPED_BY_SOURCE_AND_RECEIPT_REVIEW",
+      "meaning": "24 existing SciPy/mpmath80/analytic comparisons read; reviewer reruns0; same-agent independent methods remain labelled as such"
+    },
+    {
+      "id": "OWNERSHIP_AND_FAIL_CLOSED",
+      "result": "PASS_SCOPED_BY_STATIC_AND_SAVED_RESULT_REVIEW",
+      "meaning": "electron kinetic eV entry point rejects other carriers, total energy and implicit keV; missing/negative/nonfinite energy rejected; tails unresolved and heat/ionization null; no physical spectrum or deposition claim"
+    },
+    {
+      "id": "DOMINANT_OMISSIONS",
+      "result": "PASS_SCOPED",
+      "meaning": "source high-energy tails, corrected spectrum, source frame and charge/atomic state, bath/transport, neutrino/recoil/photon ownership, and production amplitudes remain explicit obligations"
+    }
+  ],
+  "findings": [
+    {
+      "id": "C9-N1",
+      "severity": "scope_clarification",
+      "object": "energy frame and initial-state mapping before physical source adoption",
+      "observation": "support [0,Q] and evaluated mean must use one frame; moving parent/CR boost changes bath-frame support; atomic/molecular/charge states require source mapping",
+      "minimum_correction": "retain fixed code/result and record frame/initial-state/API adoption requirements",
+      "resolution": "CLOSED_AS_DOCUMENTATION_REQUIREMENT; PHYSICAL_ADOPTION_REMAINS_OPEN",
+      "evidence": "../../nuclear_supply/ADOPTION_OBLIGATIONS.json",
+      "evidence_sha256": "b93d450ca09cf4234f3dc85b68586201f4154a1f2ff638f4b76cd1a86a44d474"
+    }
+  ],
+  "blocking_findings": [],
+  "required_code_changes": [],
+  "required_reruns": [],
+  "general_api_scope": "moment_bounds witness construction is scoped to selected n/T inputs; no general-purpose spectrum generator or arbitrary-mean API is approved",
+  "key_result": {
+    "neutron_energy_coverage_upper_exact": "477956945417/23278113841230",
+    "neutron_energy_coverage_upper": 0.020532460175980698,
+    "neutron_outside_energy_lower": 0.9794675398240194,
+    "tritium_energy_coverage_range": [
+      0,
+      1
+    ],
+    "meaning": "conditional fraction of beta electron kinetic energy; not particle fraction, not fraction of total Q deposited as heat"
+  },
+  "scientific_adoption": {
+    "conditional_central_value_bound": "ADMITTED_SCOPED",
+    "Fermi_one_diagnostic": "ADMITTED_AS_ILLUSTRATION",
+    "evaluated_beta_spectrum": "NOT_RECONSTRUCTED",
+    "physical_beta_to_IGM_heating": "NOT_ADMITTED",
+    "nuclear_source_rate_or_amplitude": "NOT_CALCULATED",
+    "initial_n_T_inventory": "UNCHANGED",
+    "full_21_species_network": "NOT_COMPLETED",
+    "high_energy_nuclear_network": "HOLD",
+    "global_error_bound": null
+  },
+  "execution": {
+    "producer_code_calls": 0,
+    "producer_source_API_calls": 0,
+    "quadrature_reruns": 0,
+    "new_ODE": 0,
+    "historical_ODE_reruns": 0,
+    "read_and_exact_rational_wall_s": 0.0070385480066761374,
+    "science_worker_dispatches": 0,
+    "active_leases": 0
+  },
+  "four_axes": {
+    "EXECUTION": "C9 COMPLETE_SCOPED_PASS; read/algebra only",
+    "PUBLICATION": "PARENT_PENDING; reviewer remote mutations0",
+    "BACKUP": "local create-only review; remote receipt parent-owned",
+    "DAG": "source/proof/illustration/saved validation -> C9 COMPLETE -> parent C10; corrected spectrum/frame/transport/ownership OPEN"
+  },
+  "next_actions": [
+    "Integrate this review with the exactly pinned source packet.",
+    "Publish and back up via parent actual provider receipts.",
+    "Reuse completed coverage data; next scientific work requires new corrected spectrum/frame/transport inputs and a new run ID."
+  ],
+  "created_utc": "2026-10-22T23:08:43.062545+00:00"
+}

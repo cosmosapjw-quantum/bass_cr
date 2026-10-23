@@ -1,0 +1,93 @@
+{
+  "schema": "C22D_DAG_V1",
+  "updated_utc": "2026-10-22T17:45:50.818120+00:00",
+  "nodes": [
+    {
+      "id": "C21O_RECOVERY",
+      "status": "COMPLETE_SCOPED_REUSED",
+      "old_ODE_reruns": 0
+    },
+    {
+      "id": "C22ABC",
+      "status": "COMPLETE_SCOPED_REUSED",
+      "old_ODE_reruns": 0
+    },
+    {
+      "id": "C22D_RATE_ENERGY_OPTIMIZATION",
+      "status": "COMPLETE_SCOPED",
+      "evidence": "CONTRACT.json; evidence/theory; evidence/optimization"
+    },
+    {
+      "id": "C22D_NEW4_ANALYSIS",
+      "status": "COMPLETE_SCOPED",
+      "evidence": "SCIENCE_ACCEPTANCE.json"
+    },
+    {
+      "id": "C22D_PUBLICATION_PRESERVATION",
+      "status": "IN_PROGRESS_AT_DOCUMENT_FREEZE",
+      "resolution": "external final authority and terminal receipt"
+    },
+    {
+      "id": "C22E_LINE_KINEMATICS_MISSING_INPUT",
+      "status": "COMPLETE_SCOPED",
+      "evidence": "evidence/line_admission/c22e_line_admission_20261022_v1/LINE_ADMISSION.json"
+    },
+    {
+      "id": "LINE_PHYSICAL_ADMISSION",
+      "status": "OPEN_INPUT_DEPENDENCIES",
+      "requires": [
+        "actual column/geometry/boundary",
+        "A/f/profile convention",
+        "normalized 2gamma spectrum",
+        "RR cascade",
+        "mixing/de-excitation/level source",
+        "secondary electron source coverage"
+      ]
+    },
+    {
+      "id": "FULL_THERMOCHEMICAL_RADIATIVE_CLOSURE",
+      "status": "OPEN"
+    },
+    {
+      "id": "FULL_NUCLEAR_HIGH_ENERGY",
+      "status": "HOLD"
+    },
+    {
+      "id": "GENERAL_TRIAXIAL_TILTED_POLARIZED_CMB",
+      "status": "HOLD"
+    },
+    {
+      "id": "DRIVE_PRESERVATION",
+      "status": "OPEN_UNKNOWN_NO_ACK"
+    }
+  ],
+  "edges": [
+    [
+      "C22ABC",
+      "C22D_RATE_ENERGY_OPTIMIZATION"
+    ],
+    [
+      "C22D_RATE_ENERGY_OPTIMIZATION",
+      "C22D_NEW4_ANALYSIS"
+    ],
+    [
+      "C22D_NEW4_ANALYSIS",
+      "C22D_PUBLICATION_PRESERVATION"
+    ],
+    [
+      "C22D_NEW4_ANALYSIS",
+      "C22E_LINE_KINEMATICS_MISSING_INPUT"
+    ],
+    [
+      "C22E_LINE_KINEMATICS_MISSING_INPUT",
+      "LINE_PHYSICAL_ADMISSION"
+    ],
+    [
+      "LINE_PHYSICAL_ADMISSION",
+      "FULL_THERMOCHEMICAL_RADIATIVE_CLOSURE"
+    ]
+  ],
+  "inaccessible_conversations": "UNAVAILABLE",
+  "original_nuclear_network_png": "NOT_RECOVERED_NOT_READ",
+  "global_error_bound": null
+}

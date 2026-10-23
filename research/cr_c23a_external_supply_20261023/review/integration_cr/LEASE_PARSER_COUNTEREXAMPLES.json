@@ -1,0 +1,39 @@
+{
+  "scope": "pure Python parsing expressions, no CPU or lease mutations",
+  "examples": [
+    {
+      "cpus": [
+        0,
+        1
+      ],
+      "old_expression_detects_conflict": true,
+      "strict_integer_list_admissible": true
+    },
+    {
+      "cpus": "0-1",
+      "old_expression_detects_conflict": false,
+      "strict_integer_list_admissible": false
+    },
+    {
+      "cpus": [
+        "1"
+      ],
+      "old_expression_detects_conflict": false,
+      "strict_integer_list_admissible": false
+    },
+    {
+      "cpus": [
+        true
+      ],
+      "old_expression_detects_conflict": true,
+      "strict_integer_list_admissible": false
+    },
+    {
+      "cpus": [
+        2
+      ],
+      "old_expression_detects_conflict": false,
+      "strict_integer_list_admissible": true
+    }
+  ]
+}

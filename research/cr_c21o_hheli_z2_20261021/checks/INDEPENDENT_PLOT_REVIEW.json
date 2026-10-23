@@ -1,0 +1,274 @@
+{
+  "schema": "C21O_INDEPENDENT_PLOT_REVIEW_V1",
+  "utc": "2026-10-21T15:33:27.928908+00:00",
+  "reviewer": "/root/theory_literature; independent of C21O analyzer and renderer author",
+  "status": "PASS_SCOPED_ARTIFACT_SEMANTICS_AND_RENDERING",
+  "blocking_findings": [],
+  "scope": {
+    "PNG_direct_visual_inspection": 5,
+    "PDF_files_rendered_and_directly_inspected": 2,
+    "PDF_pages_inspected": 2,
+    "PDF_renderer": "pdftoppm -f 1 -singlefile -scale-to 2200 -png; pdfinfo confirmed one page each",
+    "analyzer_executions": 0,
+    "scientific_ODE_runs": 0,
+    "RHS_evaluations": 0,
+    "physics_validation_reruns": 0,
+    "benchmarks": 0,
+    "production_or_old_receipt_mutations": 0,
+    "global_error_bound": null
+  },
+  "source_binding": {
+    "analyzer": {
+      "path": "analyze.py",
+      "bytes": 17251,
+      "sha256": "109f7880f6c676d444fbdeda126bf4723cdb64a249968fafdeaec367895bab3e"
+    },
+    "coupled_model": {
+      "path": "coupled_model.py",
+      "bytes": 15906,
+      "sha256": "6d1c254a5cf68974f9b2509e94dcee78da49beb948b949f56d2836b3d80d9e67"
+    },
+    "atomic_network": {
+      "path": "atomic_network.py",
+      "bytes": 21442,
+      "sha256": "6730e3091de918f693e02e40b0bdf1fefc543a5dcc4de23efd885ca098e2ed5f"
+    },
+    "execution_source_identity_sha256": "c60d734b0ed8cc7d1a147e181da27c282e3f47be90f8b0eb1d65c030faabea0f",
+    "prior_independent_physics_review": {
+      "path": "checks/INDEPENDENT_PHYSICS_REVIEW.json",
+      "bytes": 7688,
+      "sha256": "1f4e879e8d54b93a758a68011a6d0640c4340289fdb7f610217a6e48b44fa457"
+    },
+    "prior_v1_plot_review": {
+      "path": "checks/PLOT_V1_REVIEW.json",
+      "bytes": 639,
+      "sha256": "bb351de0d6594804bda8deff98001d2e3514e5c9c9932e3182898b8d7741116a"
+    },
+    "v1_executed_analyzer_snapshot": {
+      "path": "checks/PLOT_V1_ANALYZER.py.txt",
+      "bytes": 16592,
+      "sha256": "282e4ad947f819d6c3dea3ce19b6c06ee56a8025da2d994f6f03785bfb25ca01"
+    }
+  },
+  "artifact_integrity": {
+    "output_manifest": {
+      "path": "analysis_v2/OUTPUT_MANIFEST.json",
+      "bytes": 2053,
+      "sha256": "6541a348069ffc7a31ac15360cf7cfff915922a092e08af6d9757b4e695ac87e"
+    },
+    "manifest_payloads_independently_hashed": 14,
+    "manifest_payloads_match": true,
+    "v1_v2_scientific_payload_byte_identity": {
+      "ENSEMBLE45.npz": true,
+      "ENDPOINTS45.csv": true,
+      "ION_HISTORY45.csv": true
+    },
+    "endpoint_heatmap_order": "5 signed Sigma groups; within each 3 ascending signed Pm rows x 3 ascending signed Pr columns; origin lower",
+    "all_45_coordinate_order_matches": true,
+    "endpoint_CSV_NPZ_scalar_equalities": 495,
+    "endpoint_fields_checked": [
+      "Sigma_F",
+      "Pi_m_F",
+      "Pi_r_F",
+      "Pi_tot_F",
+      "signed_Sigma_F",
+      "signed_Pi_m_F",
+      "signed_Pi_r_F",
+      "signed_Pi_tot_F",
+      "cancellation_fraction",
+      "n_e_cm3",
+      "tau_T"
+    ],
+    "scalar_equality_definition": "exact parsed numerical equality; no claim about CSV serialization bytes equalling NPZ bytes"
+  },
+  "direct_PNG_verdicts": {
+    "STRESS_EVOLUTION45.png": {
+      "status": "PASS",
+      "observations": [
+        "All four panels display nonnegative full Frobenius norms; separate massive, total radiation, and total stress labels are correct.",
+        "Signed initial shear color key includes legible dark-gray S0=0 curves.",
+        "Radiation and total norms are abs of signed sums, not sums of norms.",
+        "z decreases from20 to2 left-to-right; small symlog linear regions retain zero/FP residuals; no data-floor substitution.",
+        "Prescribed UV/T, Case-A RR, electron-Thomson coupling and L8 conditional scope appear in title."
+      ]
+    },
+    "ION_EVOLUTION21.png": {
+      "status": "PASS",
+      "observations": [
+        "20 atomic charge-state populations plus neutron are tracked; electron panel explicitly uses algebraic charge closure.",
+        "H/D, He3/He4, Li6/Li7 charge indices and row/panel assignments match source array order.",
+        "FLRW line and 45-case min-max band are correctly labeled; a visually narrow band is not an assertion that all histories are identical.",
+        "T and n zero populations are declared initial-parent choices, not unavailable species substituted with zero.",
+        "Scaled abundance labels and shared electronic-rate assumption are explicit."
+      ]
+    },
+    "SIGNED_CANCELLATION.png": {
+      "status": "PASS",
+      "observations": [
+        "Signed component curves, sign of generated shear and cancellation 1-abs(Pm+Pr)/(abs(Pm)+abs(Pr)) are consistent with source.",
+        "The plotted opposing cases use requested Pm0=+/-5e-4, Pr0=-Pm0, S0=0; actual initial FP offsets are retained.",
+        "CMB photon and massless-neutrino signed stresses are separately displayed; radiation norm is not their sum of absolute values.",
+        "The near-overlap of the two cancellation curves does not imply exact sign symmetry."
+      ]
+    },
+    "COUPLING_AND_NUMERICS.png": {
+      "status": "PASS",
+      "observations": [
+        "P_nu is rendered as a single math label without the v1 Python newline defect.",
+        "Optical depth is explicitly accumulated fromz20 and is not optical depth toz0.",
+        "Temperature is marked prescribed; omitted thermal+ionization+UV energy is an instantaneous H^2 diagnostic, not a trajectory bound.",
+        "L8/L12 solid shear and dashed max common ell0..8 radiation-mode differences are both visible, including the larger high-mode discrepancy.",
+        "BDF/Radau is explicitly one FLRW comparison; log display floors are labeled.",
+        "Thomson on/off is explicitly a comparison of different physical models; no solver-accuracy inference is made."
+      ]
+    },
+    "ENDPOINT_SLICES45.png": {
+      "status": "PASS",
+      "observations": [
+        "Five 3x3 slices have x=signed Pr0 and y=signed Pm0, both increasing in the indicated directions.",
+        "Color encodes nonnegative endpoint Sigma(z2), while inputs are signed.",
+        "Two-line scientific labels are readable without overlap.",
+        "Every panel has its own color scale, explicitly disclosed; annotated values, not colors across panels, support quantitative comparison.",
+        "The FLRW-center residual 2.623e-21 is retained instead of forced tozero."
+      ]
+    }
+  },
+  "PDF_raster_review": {
+    "COUPLING_AND_NUMERICS": {
+      "status": "PASS",
+      "page_count": 1,
+      "source": {
+        "path": "analysis_v2/COUPLING_AND_NUMERICS.pdf",
+        "bytes": 55004,
+        "sha256": "5ecee5097782fe1a7e18f74899d538dc2d3785c9cb4d2202d283f1cac12637c5"
+      },
+      "review_raster": {
+        "path": "/workspace/scratch/10765dc22dcf/c21o_intake_20261021/plot_pdf_review_v2/COUPLING_AND_NUMERICS.png",
+        "bytes": 184153,
+        "sha256": "ffd6b8959b83cda14cb571df80523bec61bc66463bc47e4705ecd86035e8dc89"
+      },
+      "observations": "Complete single page directly inspected; axis, legend, math and annotation semantics match the PNG; no clipping, glyph loss or overlapping cell labels found."
+    },
+    "ENDPOINT_SLICES45": {
+      "status": "PASS",
+      "page_count": 1,
+      "source": {
+        "path": "analysis_v2/ENDPOINT_SLICES45.pdf",
+        "bytes": 33196,
+        "sha256": "270a23af82c6a21ec0e7db94060c2fc3f117c1a042f814c44b3fcc177505e9e7"
+      },
+      "review_raster": {
+        "path": "/workspace/scratch/10765dc22dcf/c21o_intake_20261021/plot_pdf_review_v2/ENDPOINT_SLICES45.png",
+        "bytes": 174618,
+        "sha256": "b78e1f327941300968d7f006cfa07a52bfc89ab29ef17544c8a3a9d92a52e1bb"
+      },
+      "observations": "Complete single page directly inspected; axis, legend, math and annotation semantics match the PNG; no clipping, glyph loss or overlapping cell labels found."
+    }
+  },
+  "interpretation_constraints": {
+    "numerical_controls": {
+      "L8_L12_max_common_radiation_mode_abs": 0.00020780155672642546,
+      "L8_L12_max_stress_norm_abs": 8.6328526358731e-11,
+      "BDF_Radau_max_atomic_abs": 1.841773400457214e-09,
+      "BDF_Radau_max_local_scale_ratio": 858.4736789838609,
+      "verdict": "Only selected finite-hierarchy and solver comparisons are established; neither full hierarchy convergence nor a global solver-error bound is established."
+    },
+    "HeIII_early_rise": "The prescribed soft cohort contains60eV photons above54.42eV HeII threshold. An early HeIII rise under this input is not an inferred cosmic HeII-reionization epoch.",
+    "LiI_peak": {
+      "Li7_neutral_scaled_peak": 0.6237606573671297,
+      "z_at_saved_peak": 10.600171033391979,
+      "initial_LiII_fraction": 1.0,
+      "interpretation": "Conditional recombination/ionization response to declared LiII initial state and prescribed UV/T; not a measured or self-consistent cosmic lithium history."
+    },
+    "energy_diagnostic": "The plotted eps_H2 uses saved thermal+ionization+prescribedUV energies relative to instantaneous critical-H energy. It is separate from the200eV-per-baryon diagnostic and does not bound missing reactions or full trajectories.",
+    "model_scope": "Non-tilted homogeneous LRS prescribedUV/T photo+Case-A RR trace-gas chemistry linked through algebraic ne to photon Thomson moments; not full thermochemical/nuclear/stars/UV-transport Einstein prediction."
+  },
+  "trajectory_validation_receipt_read_only": {
+    "receipt": {
+      "path": "checks/TRAJECTORY_VALIDATION.json",
+      "bytes": 593335,
+      "sha256": "02d7a0ac326f9da8a28841b3643312824760a14e89101c07c53351d3bf3856e4"
+    },
+    "reported_status": "PASS_SCOPED",
+    "reported_cases": 51,
+    "reported_saved_states": 10251,
+    "reported_failed_cases": [],
+    "reported_minimum_discrete_radiation_sample": 0.1786649783055616,
+    "reported_max_baryon_relative_residual": 2.6645352591003757e-15,
+    "reported_minimum_scaled_population": 0.0,
+    "reuse_scope": "Reviewer read and bound the existing51-case validator receipt; did not rerun it or count its evaluations as independent review computations.1025 angular nodes at201 saved times are a sampled positivity check, not a continuous theorem."
+  },
+  "outputs_bound": [
+    {
+      "path": "analysis_v2/COUPLING_AND_NUMERICS.pdf",
+      "bytes": 55004,
+      "sha256": "5ecee5097782fe1a7e18f74899d538dc2d3785c9cb4d2202d283f1cac12637c5"
+    },
+    {
+      "path": "analysis_v2/COUPLING_AND_NUMERICS.png",
+      "bytes": 357776,
+      "sha256": "57384bec63a6977e69f65504b7607012edd9b184312cecbbd3246ab764cc2612"
+    },
+    {
+      "path": "analysis_v2/ENDPOINTS45.csv",
+      "bytes": 12460,
+      "sha256": "3f1f896e97a799b2fe6994b26bbce6bd523bc37d0e12c27b3af6f64d3717cb82"
+    },
+    {
+      "path": "analysis_v2/ENDPOINT_SLICES45.pdf",
+      "bytes": 33196,
+      "sha256": "270a23af82c6a21ec0e7db94060c2fc3f117c1a042f814c44b3fcc177505e9e7"
+    },
+    {
+      "path": "analysis_v2/ENDPOINT_SLICES45.png",
+      "bytes": 322197,
+      "sha256": "213fe75d9d50c2f20df2b7b760b40cee362ff5193cd7510c070985faeee0533a"
+    },
+    {
+      "path": "analysis_v2/ENSEMBLE45.npz",
+      "bytes": 2549038,
+      "sha256": "cf3b6107dd86ff4bf83ba967f1342996a74bdb9bf7dbc67aa102f203abcc53a7"
+    },
+    {
+      "path": "analysis_v2/ION_EVOLUTION21.pdf",
+      "bytes": 83281,
+      "sha256": "862c219ba675135e4714ec6d335e9b1c16a5428d425ac9125a48cf350caaa003"
+    },
+    {
+      "path": "analysis_v2/ION_EVOLUTION21.png",
+      "bytes": 415295,
+      "sha256": "70f4c0ce631557638be8836036516ace319298b549525970f2c9373324b42088"
+    },
+    {
+      "path": "analysis_v2/ION_HISTORY45.csv",
+      "bytes": 4604749,
+      "sha256": "4ed069b8435b6fffaa71c6814443e87096b84f1624203374ff0843774754e546"
+    },
+    {
+      "path": "analysis_v2/SIGNED_CANCELLATION.pdf",
+      "bytes": 31123,
+      "sha256": "010c97ee8b5742c59619be144af179d3c3b3e96856b52d36b6f2352b6aa28ab5"
+    },
+    {
+      "path": "analysis_v2/SIGNED_CANCELLATION.png",
+      "bytes": 290279,
+      "sha256": "00f17660346be80679c3d8e2b8a1a83492135c6fef6b56cb2f3a046b126a7fec"
+    },
+    {
+      "path": "analysis_v2/STRESS_EVOLUTION45.pdf",
+      "bytes": 72893,
+      "sha256": "02d14e6d83660372395b5aaece46457a02eafdc34e474ec5da8ab4b9dfcd76fc"
+    },
+    {
+      "path": "analysis_v2/STRESS_EVOLUTION45.png",
+      "bytes": 559996,
+      "sha256": "10308fd632e4e86c3f874bc3c9e2d51c4d45fae2ac863df888f7390b6f2d3dee"
+    },
+    {
+      "path": "analysis_v2/SUMMARY.json",
+      "bytes": 7544,
+      "sha256": "a5e932c65fea9672ded9783f3da08c1e5f9847c5f4caa5c1a37ce44cd53fda59"
+    }
+  ],
+  "next_gate": "No additional ODE, full benchmark, or recursive audit requested by this artifact review. Publication may use this scoped verdict with the stated limitations."
+}

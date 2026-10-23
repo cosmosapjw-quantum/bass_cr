@@ -1,0 +1,173 @@
+{
+  "review_type": "read-only completed-artifact review; no scientific function rerun",
+  "source_file_checks": [
+    {
+      "path": "photo_subflow.py",
+      "match": true
+    },
+    {
+      "path": "run_source_campaign.py",
+      "match": true
+    },
+    {
+      "path": "CONTRACT.json",
+      "match": true
+    },
+    {
+      "path": "igm/p19_uvb.py",
+      "match": true
+    },
+    {
+      "path": "igm/sources/P19V1_rates_fiducial.txt",
+      "match": true
+    },
+    {
+      "path": "runtime/resource_control.py",
+      "match": true
+    }
+  ],
+  "output_manifest_checks": [
+    {
+      "path": "responses.csv",
+      "match": true
+    },
+    {
+      "path": "LEASE.json",
+      "match": true
+    },
+    {
+      "path": "INPUT.json",
+      "match": true
+    },
+    {
+      "path": "SUMMARY.json",
+      "match": true
+    },
+    {
+      "path": "responses.npz",
+      "match": true
+    },
+    {
+      "path": "SOURCE_IDENTITY.json",
+      "match": true
+    },
+    {
+      "path": "RESOURCE_OBSERVED.json",
+      "match": true
+    }
+  ],
+  "input_matches_pinned_contract": true,
+  "identity_root_hash_matches": true,
+  "csv_rows": 826,
+  "unique_exposures": 826,
+  "csv_finite_numeric_fields": true,
+  "resource_observed": {
+    "affinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "allowed_cpus": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "cpu_quota_cores": 8.0,
+    "cpu_quota_spare_cores": 6.26893215784083,
+    "memory_limit_bytes": 8589934592,
+    "memory_available_bytes": 2303217664,
+    "memory_observation_complete": true,
+    "observed_utc": "2026-10-22T22:50:28Z"
+  },
+  "per_cpu_busy": {
+    "0": 0.0,
+    "1": 0.0
+  },
+  "lease": {
+    "schema": "C21_CPU_LEASES_V1",
+    "leases": [
+      {
+        "owner": "c23a_p19_subflow_20261023_v1",
+        "cpus": [
+          0,
+          1
+        ],
+        "pid": 2
+      }
+    ],
+    "observed_other_leases": [
+      {
+        "path": "/tmp/rei-bianchi-cooperative-leases/c23a_igm_photo_subflow_v2_cpu4.json",
+        "sha256": "1d8ee712f0a5012b614eddf573abb176f410e4aa7e7b8ab6ea921e6304664980"
+      }
+    ],
+    "protected_cpu55": true,
+    "coordinator_cpu": 0,
+    "worker_cpu": 1,
+    "native_threads": 1
+  },
+  "lease_released": {
+    "owner": "c23a_p19_subflow_20261023_v1",
+    "released_utc": "2026-10-22T22:50:29.868752+00:00"
+  },
+  "dispatch": {
+    "returncode": 0,
+    "worker_timeout_s": 60,
+    "cpu55_used": false,
+    "coordinator_cpu": 0,
+    "worker_cpu": 1
+  },
+  "summary_without_selected_rows": {
+    "run_id": "c23a_p19_subflow_20261023_v1",
+    "status": "PASS_SCOPED",
+    "finished_utc": "2026-10-22T22:50:29.785804+00:00",
+    "checks": {
+      "declared_new_exposure_count": true,
+      "nonnegative": true,
+      "H_He_inventory": true,
+      "electron_event_count": true,
+      "energy_event_ledger": true,
+      "semigroup": true
+    },
+    "new_source_subflows": 826,
+    "semigroup_comparison_subflows": 1652,
+    "new_cosmological_ODE": 0,
+    "historical_science_reruns": 0,
+    "maximum_inventory_absolute": 1.1102230246251565e-16,
+    "maximum_charge_absolute": 2.220446049250313e-16,
+    "maximum_energy_relative": 9.573613404646192e-17,
+    "maximum_semigroup_population_absolute": 1.1102230246251565e-16,
+    "dose1_neutral_temperature_range_K": [
+      10967.879223766782,
+      17818.763971064564
+    ],
+    "max_frozen_particle_temperature_overestimate_ratio": 2.063691460584768,
+    "time_wall_s": 1.203676858000108,
+    "time_cpu_s": 1.203441613,
+    "worker_affinity": [
+      1
+    ],
+    "thread_env": {
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "BLIS_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    },
+    "global_error_bound": null,
+    "scope": "Independent fixed-redshift response benchmark; exposures may exceed physical cosmic time, and are not time evolution of the IGM"
+  }
+}

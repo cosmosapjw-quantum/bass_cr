@@ -1,0 +1,467 @@
+{
+  "schema": "C22D_THEORY_PROVENANCE_COVERAGE_V1",
+  "created_utc": "2026-10-22T15:05:49.440302+00:00",
+  "workflow": "physmath-research-loop1.0.0/approval0.2",
+  "agent_scope": "ci_theory independent constructive source/energy theory and scalar provider",
+  "authority": "parent finalrun/publication/backup receipt required;this is a theory subartifact",
+  "new_ODE_runs": 0,
+  "completed_ODE_reruns": 0,
+  "frozen_parent_file_mutations": 0,
+  "source_queries": [
+    {
+      "tool": "Exa web_search_exa",
+      "count": 1,
+      "status": "COMPLETED",
+      "scope": "primary CCC/Wannier/SW91 near-threshold sources; discovery only until primary evidence opened",
+      "raw": "retrieval_raw/exa_ci_primary.json"
+    },
+    {
+      "tool": "SciSpace search_papers",
+      "count": 1,
+      "status": "COMPLETED",
+      "scope": "full natural-language atomicH near-threshold question;10hits;Bray2018 discovered and primaryAPS opened",
+      "raw": "retrieval_raw/scispace_ci_primary.json"
+    },
+    {
+      "tool": "Exa web_fetch_exa",
+      "count": 1,
+      "status": "COMPLETED_ABSTRACT_ONLY",
+      "scope": "primary APS Wannier1953 and BartlettStelbovics2004 abstracts with equations;full articles unavailable",
+      "raw": "retrieval_raw/exa_primary_aps_fetch.json"
+    },
+    {
+      "tool": "WolframContext",
+      "count": 1,
+      "status": "FAILED_ENVIRONMENT_TOOL_INTERNAL",
+      "error": "Mcp -32603 Internal error",
+      "raw": "retrieval_raw/wolfram_context.json"
+    },
+    {
+      "tool": "WolframLanguageEvaluator attempt1",
+      "count": 1,
+      "status": "FAILED_QUERY_RECURSIVE_SELF_ASSIGNMENT",
+      "error": "RecursionLimit1024 from td=expression containing td;actual failure preserved",
+      "raw": "retrieval_raw/wolfram_evaluator_attempt1.json"
+    },
+    {
+      "tool": "WolframLanguageEvaluator attempt2",
+      "count": 1,
+      "status": "PASS_SCOPED",
+      "result": "Tdot=−r(2chi+3kT)/(3kN);CIenergy0;charge0;nuclei0;particle+1;gapP1difference0",
+      "raw": "retrieval_raw/wolfram_evaluator_attempt2.json"
+    },
+    {
+      "tool": "web primary retrieval",
+      "status": "MIXED_SCOPED",
+      "success": "CCC author page;APSBray2018;NISTactualH1 page;primarysearchindexedNRL2019/CODATArdyenergy",
+      "failures": "initialdoiURLs inaccessible;newSW91PDFopenfailed butactualoldbytesread;NRLdirectPDF403/MITmirror400timeout;NISTbareCGIillformed/encodedCGIinvalid",
+      "failures_are_physical_obstructions": false
+    }
+  ],
+  "bibliography": [
+    {
+      "id": "CCC_AUTHOR_DATA",
+      "url": "https://atom.curtin.edu.au/CCC-WWW/index.html",
+      "archive": "https://atom.curtin.edu.au/CCC-DB/H/I/ELECTRON_IMPACT/e-H_XSEC_LS.zip",
+      "access": "authorpageopened;existingselectedTICSactualbyteshashed",
+      "claim": "87points+threshold/sourceunitsfromactualselectedtableandREADME",
+      "citation_ref": "turn37view3"
+    },
+    {
+      "id": "SW91",
+      "doi": "10.1086/170587",
+      "url": "https://articles.adsabs.harvard.edu/pdf/1991ApJ...380..302S",
+      "access": "ACTUAL_EXISTING_PRIMARY_PDF_PLUS_PAGES303304_READ",
+      "claim": "finitegap1..1.073Ry,1.179*(E_Ry−1)^1.127*pi*a0^2;CI7coefficientsTable2;fullfit2000..1e8K"
+    },
+    {
+      "id": "WANNIER1953",
+      "doi": "10.1103/PhysRev.90.817",
+      "url": "https://link.aps.org/doi/10.1103/PhysRev.90.817",
+      "access": "PRIMARY_ABSTRACT_READ_FULL_TEXT_UNAVAILABLE",
+      "claim": "1.127neutralatomthresholdpower;ergodicityassumption;notnewrigorousproof",
+      "citation_ref": "turn38search2"
+    },
+    {
+      "id": "BARTLETT_STELBOVICS2004_FULL",
+      "doi": "10.1103/PhysRevLett.93.233201",
+      "url": "https://link.aps.org/doi/10.1103/PhysRevLett.93.233201",
+      "access": "PRIMARY_ABSTRACT_READ_FULL_TEXT_UNAVAILABLE",
+      "claim": "fullSchrodingerECSnear-thresholdresult1.122±.015;notconfusedwithcollinear/TemkinPoetmodels",
+      "citation_ref": "turn38search0"
+    },
+    {
+      "id": "BRAY_ET_AL2018_CCC",
+      "doi": "10.1103/PhysRevLett.121.203401",
+      "url": "https://link.aps.org/doi/10.1103/PhysRevLett.121.203401",
+      "access": "SCISPACE_DISCOVERY_PLUS_PRIMARY_APS_ABSTRACT_OPEN",
+      "claim": "CCCelectronnear-thresholdconsistentwithWannier1.127;notglobalpower-lawprovider",
+      "citation_ref": "turn41view1"
+    },
+    {
+      "id": "NIST_H1_HANDBOOK",
+      "url": "https://physics.nist.gov/PhysRefData/Handbook/Tables/hydrogentable1.htm",
+      "access": "PRIMARY_PAGE_OPEN",
+      "claim": "H1ground109678.7717cm^-1/13.598433eV;CCC13.6058registryisnotprecisionH1energycorrection",
+      "citation_ref": "turn44view0"
+    },
+    {
+      "id": "NIST_CODATA_RY",
+      "url": "https://physics.nist.gov/cuu/Constants/",
+      "access": "PRIMARY_OFFICIAL_SEARCH_INDEX;individualCGIopeninvalid",
+      "claim": "Rinfinityhc=13.605693122990eV usedasdeclaredmodernRyconversion;notSW91historicalextradigits",
+      "citation_ref": "turn39search0"
+    },
+    {
+      "id": "NRL2019",
+      "url": "https://www.nrl.navy.mil/Portals/38/PDF%20Files/NRL_Formulary_2019.pdf",
+      "mirror": "https://library.psfc.mit.edu/catalog/online_pubs/NRL_FORMULARY_19.pdf",
+      "access": "PRIMARY_OFFICIAL_SEARCH_INDEX_READ;DIRECTPDF403;MIRRORTIMEOUT;FULLTEXTNOTREAD",
+      "claim": "electroncollisionrate2.91e-6ne*lnLambda*TeV^-1.5;lnLambda10assumedonly;notnonthermalthermalizationproof",
+      "citation_ref": "turn39search24"
+    }
+  ],
+  "read_source_pins": [
+    {
+      "path": "/workspace/scratch/30d955d9ea43/resume_c22c_20261022/recovery/restored_c22b/repository/research/cr_c22c_h1_excitation_20261022/THEORY_SCOPE_AND_NEXT_CONTRACT_KO.md",
+      "role": "frozen parent theory and C22D obligations, read-only",
+      "size_bytes": 35654,
+      "sha256": "137011657421009fa648f4613d8aba7d6e02fb223ca9def78520696dfcfa5699"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/resume_c22c_20261022/recovery/restored_c22b/repository/research/cr_c22c_h1_excitation_20261022/model.py",
+      "role": "frozen C wrapper, read-only",
+      "size_bytes": 7818,
+      "sha256": "952df25d0cbc7ed5131d4faa4b843384373715be4d179aa8e05612a978ead4a3"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/resume_c22c_20261022/recovery/restored_c22b/repository/research/cr_c22c_h1_excitation_20261022/excitation.py",
+      "role": "reused positive-moment construction, read-only",
+      "size_bytes": 6045,
+      "sha256": "76f7a4ff3b731ac2e84e5631c07501412c5fc6f92d1759f2ce5951a4e52e3938"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/resume_c22c_20261022/recovery/restored_c22b/repository/research/cr_c22b_compton_bath_20261022/model.py",
+      "role": "signed Compton bath and invariant-coordinate interfaces, read-only",
+      "size_bytes": 8637,
+      "sha256": "ec0bc1f300e918329d343ba84e7b26b94081c7b3170a4fa6cc743f5747fa60a8"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/resume_c22c_20261022/recovery/restored_c22b/repository/research/cr_c22a_thermochemical_20261022/model.py",
+      "role": "PI/RR/U/binding and photon support contracts, read-only",
+      "size_bytes": 16517,
+      "sha256": "8e8a8afce20670ef762cc4060e09011f850191ae38efb31f548720a89cc2886f"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/resume_c22c_20261022/recovery/restored_c22b/repository/research/cr_c22a_thermochemical_20261022/rr_energy_moment.py",
+      "role": "VF fit-derived capture moment, read-only",
+      "size_bytes": 1535,
+      "sha256": "59bc1620600d51a1f6b1b703272c4d92a7b38f3d32637de2acf2a04af2c6d2a4"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/resume_c22c_20261022/recovery/restored_c22b/repository/research/cr_c21o_hheli_z2_20261021/atomic_network.py",
+      "role": "21 inventory, common isotope rows and immutable provider, read-only",
+      "size_bytes": 21442,
+      "sha256": "6730e3091de918f693e02e40b0bdf1fefc543a5dcc4de23efd885ca098e2ed5f"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/resume_c22c_20261022/recovery/restored_c22b/repository/research/cr_c21o_hheli_z2_20261021/vendor/atomic/r9_li_thermal_rates.py",
+      "role": "actual PI support/fit and RR equations, read-only",
+      "size_bytes": 6356,
+      "sha256": "74b2a8c30c62f4a50e7c5c4bcf92cb159549ffcb904a3e423a793169c2f2bb27"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/resume_c22c_20261022/theory_work/CCC_TICS_1S.txt",
+      "role": "87-row selected source",
+      "size_bytes": 5754,
+      "sha256": "7a87a2c9f2116ee36c0786b379dac08e1f4d92a49504fe542e6aa71cbb279bae"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/resume_c22c_20261022/theory_work/CCC_TABLE_METADATA.json",
+      "role": "reused source-byte metadata, not new archive audit",
+      "size_bytes": 3441,
+      "sha256": "d2418059b2b8778637888d4efa8b68a25dd87ff117e84ebec6c518039bf9980f"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/resume_c22c_20261022/theory_work/CCC_README.txt",
+      "role": "units,TICS meaning and degenerateLS caution",
+      "size_bytes": 676,
+      "sha256": "f48aa3eee41e3dd78c887218b64e097490fb50c17b5b15840a701cc9ef984ece"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/resume_c22c_20261022/theory_work/CCC_e-H_README.txt",
+      "role": "per-target README",
+      "size_bytes": 580,
+      "sha256": "1d4a324a12f43c0d800cffeb5c4d7500d94e08a85f7bad66e4f80afaacb1f2eb"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/resume_c22c_20261022/theory_work/SW91_primary.pdf",
+      "role": "actual recovered primary PDF reused; no re-download for restoration",
+      "size_bytes": 516514,
+      "sha256": "51f172de2e853154a544ed239bc9bdca7e9a383c5bf86adad58e798b5e858741"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/resume_c22c_20261022/theory_work/SW91_p303.png",
+      "role": "actually visually read this subtask:CI Eq5/6 and units",
+      "size_bytes": 585656,
+      "sha256": "f530019159ed14f6592244766dca0477132b345b8835801b2eda77e6e1b2a84a"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/resume_c22c_20261022/theory_work/SW91_p304.png",
+      "role": "actually visually read this subtask:CI Table2/Eq9/10/domain",
+      "size_bytes": 467451,
+      "sha256": "1c0b4c9f62081ec0c48757cd34f768e2dd019aeab9b76309497c06bdb00c420c"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/resume_c22c_20261022/theory_work/SW91_primary_layout.txt",
+      "role": "text extraction tied to actual PDF",
+      "size_bytes": 45328,
+      "sha256": "32ecae0b846f3647ae8af1ee7b65520f85936fa09fb51e02d700b3f41092b9b4"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/resume_c22c_20261022/theory_work/SOURCE_EVIDENCE.json",
+      "role": "prior retrieval evidence, not silently updated",
+      "size_bytes": 6300,
+      "sha256": "5669596b33f6ba8e7ccd577c3ef2a429ebc9647a3219ab9a594f5de161fc2981"
+    }
+  ],
+  "private_raw_retrieval_pins": [
+    {
+      "path": "/workspace/scratch/30d955d9ea43/c22d_20261022/theory/retrieval_raw/density_primary_search.json",
+      "role": "PRIVATE_INTERMEDIATE_RETRIEVAL_NOT_PUBLIC_PACKAGE",
+      "size_bytes": 23109,
+      "sha256": "a87030c40e33087aa954d69cf7ce75d7206281e2e8090ff0f7e59228642abe5c",
+      "persisted_mtime_utc": "2026-10-22T14:57:51.598307+00:00",
+      "exact_tool_lookup_time_utc": null,
+      "time_qualification": "tool lookup occurred2026-10-22;mtime is persistence time,not falsely asserted exact lookup timestamp"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/c22d_20261022/theory/retrieval_raw/density_source_open.json",
+      "role": "PRIVATE_INTERMEDIATE_RETRIEVAL_NOT_PUBLIC_PACKAGE",
+      "size_bytes": 11787,
+      "sha256": "b6d1e5b9ba9cf5af72335ce1ede7caa0309d3a9492759015f99c6194c53e3e87",
+      "persisted_mtime_utc": "2026-10-22T14:57:52.814248+00:00",
+      "exact_tool_lookup_time_utc": null,
+      "time_qualification": "tool lookup occurred2026-10-22;mtime is persistence time,not falsely asserted exact lookup timestamp"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/c22d_20261022/theory/retrieval_raw/exa_ci_primary.json",
+      "role": "PRIVATE_INTERMEDIATE_RETRIEVAL_NOT_PUBLIC_PACKAGE",
+      "size_bytes": 20012,
+      "sha256": "68bed6059d502a36e2f14fe48133441f223bb4a8d889354fa212c1aa1736722c",
+      "persisted_mtime_utc": "2026-10-22T14:44:00.626683+00:00",
+      "exact_tool_lookup_time_utc": null,
+      "time_qualification": "tool lookup occurred2026-10-22;mtime is persistence time,not falsely asserted exact lookup timestamp"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/c22d_20261022/theory/retrieval_raw/exa_primary_aps_fetch.json",
+      "role": "PRIVATE_INTERMEDIATE_RETRIEVAL_NOT_PUBLIC_PACKAGE",
+      "size_bytes": 7174,
+      "sha256": "39461f17d21897cecb420e9a41d13edceff9aa088cfc1095793b50efdcdf341d",
+      "persisted_mtime_utc": "2026-10-22T14:57:46.854537+00:00",
+      "exact_tool_lookup_time_utc": null,
+      "time_qualification": "tool lookup occurred2026-10-22;mtime is persistence time,not falsely asserted exact lookup timestamp"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/c22d_20261022/theory/retrieval_raw/nist_and_nrl_primary_open.json",
+      "role": "PRIVATE_INTERMEDIATE_RETRIEVAL_NOT_PUBLIC_PACKAGE",
+      "size_bytes": 2620,
+      "sha256": "15f19b94a211f1fc0981118f53c573af8c214c6a9a430ec68cca1354fb8a5d5d",
+      "persisted_mtime_utc": "2026-10-22T15:05:47.895570+00:00",
+      "exact_tool_lookup_time_utc": null,
+      "time_qualification": "tool lookup occurred2026-10-22;mtime is persistence time,not falsely asserted exact lookup timestamp"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/c22d_20261022/theory/retrieval_raw/primary_search_verification.json",
+      "role": "PRIVATE_INTERMEDIATE_RETRIEVAL_NOT_PUBLIC_PACKAGE",
+      "size_bytes": 26811,
+      "sha256": "1cd13ac52ab402c2cea894adb451b4f281ca90c28c06b38e6f7deeb40ab5ca89",
+      "persisted_mtime_utc": "2026-10-22T14:57:49.246421+00:00",
+      "exact_tool_lookup_time_utc": null,
+      "time_qualification": "tool lookup occurred2026-10-22;mtime is persistence time,not falsely asserted exact lookup timestamp"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/c22d_20261022/theory/retrieval_raw/primary_web_ci.json",
+      "role": "PRIVATE_INTERMEDIATE_RETRIEVAL_NOT_PUBLIC_PACKAGE",
+      "size_bytes": 4360,
+      "sha256": "9585dae9e6bf8a52b2e8ad0cea41494a4d96914d423ab8862609a7db42d160e3",
+      "persisted_mtime_utc": "2026-10-22T14:57:50.506360+00:00",
+      "exact_tool_lookup_time_utc": null,
+      "time_qualification": "tool lookup occurred2026-10-22;mtime is persistence time,not falsely asserted exact lookup timestamp"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/c22d_20261022/theory/retrieval_raw/scispace_ci_primary.json",
+      "role": "PRIVATE_INTERMEDIATE_RETRIEVAL_NOT_PUBLIC_PACKAGE",
+      "size_bytes": 54619,
+      "sha256": "b9b734fcc029866ef4232e26f1654033eb1ac5c8ae025d1f86ff3e54b15bdb45",
+      "persisted_mtime_utc": "2026-10-22T14:44:04.006520+00:00",
+      "exact_tool_lookup_time_utc": null,
+      "time_qualification": "tool lookup occurred2026-10-22;mtime is persistence time,not falsely asserted exact lookup timestamp"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/c22d_20261022/theory/retrieval_raw/wolfram_context.json",
+      "role": "PRIVATE_INTERMEDIATE_RETRIEVAL_NOT_PUBLIC_PACKAGE",
+      "size_bytes": 220,
+      "sha256": "1db82a5b8ceed79461bafb1e56573ebfc301450013a922f014101b5b3c2d8e21",
+      "persisted_mtime_utc": "2026-10-22T14:44:05.646441+00:00",
+      "exact_tool_lookup_time_utc": null,
+      "time_qualification": "tool lookup occurred2026-10-22;mtime is persistence time,not falsely asserted exact lookup timestamp"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/c22d_20261022/theory/retrieval_raw/wolfram_evaluator_attempt1.json",
+      "role": "PRIVATE_INTERMEDIATE_RETRIEVAL_NOT_PUBLIC_PACKAGE",
+      "size_bytes": 422,
+      "sha256": "f948d16a2afcbeea073ad4070e147bade64cd04d6dff5f10fe45a096580114b9",
+      "persisted_mtime_utc": "2026-10-22T14:57:42.330756+00:00",
+      "exact_tool_lookup_time_utc": null,
+      "time_qualification": "tool lookup occurred2026-10-22;mtime is persistence time,not falsely asserted exact lookup timestamp"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/c22d_20261022/theory/retrieval_raw/wolfram_evaluator_attempt2.json",
+      "role": "PRIVATE_INTERMEDIATE_RETRIEVAL_NOT_PUBLIC_PACKAGE",
+      "size_bytes": 598,
+      "sha256": "9ab672f6f89779e8dc5047141094bf52fdb79c82d8743a61f32766a9cadb4f01",
+      "persisted_mtime_utc": "2026-10-22T14:57:45.038625+00:00",
+      "exact_tool_lookup_time_utc": null,
+      "time_qualification": "tool lookup occurred2026-10-22;mtime is persistence time,not falsely asserted exact lookup timestamp"
+    }
+  ],
+  "public_artifact_pins": [
+    {
+      "path": "/workspace/scratch/30d955d9ea43/c22d_20261022/theory/ci_finite.py",
+      "role": "PUBLIC_REVIEWABLE_SELECTED_ARTIFACT",
+      "size_bytes": 8350,
+      "sha256": "859cdf616ffa165c9fb3c3372d2202f5449e4b9a74a289a725fe456e26eb55b2"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/c22d_20261022/theory/check_ci_delta.py",
+      "role": "PUBLIC_REVIEWABLE_SELECTED_ARTIFACT",
+      "size_bytes": 14247,
+      "sha256": "b900a2d46e2e05f529519c4693f97a87e1712643d4aa06cec696c39f2409d12b"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/c22d_20261022/theory/CI_THEORY_AND_ADMISSION_KO.md",
+      "role": "PUBLIC_REVIEWABLE_SELECTED_ARTIFACT",
+      "size_bytes": 25243,
+      "sha256": "927424717f18e5f394b89929b638e6243c022b176f8cb8762a680081042d0e8f"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/c22d_20261022/theory/sources/CCC_TICS_1S.txt",
+      "role": "PUBLIC_REVIEWABLE_SELECTED_ARTIFACT",
+      "size_bytes": 5754,
+      "sha256": "7a87a2c9f2116ee36c0786b379dac08e1f4d92a49504fe542e6aa71cbb279bae"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/c22d_20261022/theory/scalar_checks_v1/CI_THEORY_DELTA_NUMERICS.json",
+      "role": "PUBLIC_REVIEWABLE_SELECTED_ARTIFACT",
+      "size_bytes": 27581,
+      "sha256": "b326b48c925dcd17725fd149daf3ce44b7be62348ca9990d34644f6a34dc298c"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/c22d_20261022/theory/scalar_checks_v1/CI_RATE_COMPARISON.csv",
+      "role": "PUBLIC_REVIEWABLE_SELECTED_ARTIFACT",
+      "size_bytes": 3024,
+      "sha256": "dc5a5938c54257ff272fdb356055e1e7fcdd19c2f28f7c723dab29406f51f7c3"
+    }
+  ],
+  "selected_CI_source_identity": "7a87a2c9f2116ee36c0786b379dac08e1f4d92a49504fe542e6aa71cbb279bae",
+  "proposed_HI_chi_eV": 13.6058,
+  "HI_registry_role": "source-consistencyadapter,notprecisionphysicalH1energycorrection",
+  "coverage": [
+    {
+      "process": "H1groundCI",
+      "included": "finiteCCCPLcore+source-pinnedprovider",
+      "unavailable": "continuumphysicalerror/highEphysicaltail",
+      "model_active_T_K": [
+        3,
+        20000
+      ]
+    },
+    {
+      "process": "H1/D/TPI_RRbinding",
+      "included": "commonHI13.6058registryproposed;PH2shapeold/supportnew;alphaRRandcapturefitretained",
+      "qualification": "constitutiveapproximation,nocompletedMilneLTE/isotopeshifts"
+    },
+    {
+      "process": "H1n2excitation",
+      "included": "unchangedC22Cfinitecore/immediateescape",
+      "unavailable": "actuallineescape/2scontinuumspectrum/mixing"
+    },
+    {
+      "process": "D/T/He/LiCIexcitation",
+      "included": false,
+      "status": "UNAVAILABLE_not_zero_filled"
+    },
+    {
+      "process": "threebody_groundinverse",
+      "included": "diagnosticonlyq/Sahaofsamefinitecore",
+      "unavailable": "physicalalllevelcapture/cascade;notupperbound"
+    },
+    {
+      "process": "secondary_nonthermal",
+      "included": "instantMaxwellsingleTclosureimposed",
+      "unavailable": "energysharing/inelasticcompetition/realthermalizationproof"
+    },
+    {
+      "process": "DR_CX_freefree_molecular_highern",
+      "included": false,
+      "status": "OPENsourceenergycoverage"
+    },
+    {
+      "process": "full_thermochemical_radiative",
+      "status": "OPEN"
+    },
+    {
+      "process": "full_nuclear_highenergy_general_tilted_triaxial_polarized_CMB",
+      "status": "HOLD"
+    }
+  ],
+  "new_strong_no_go": "NONE",
+  "NG": {
+    "NG1": {
+      "status": "NOT_APPLICABLE_WITH_REASON",
+      "reason": "No new impossibility/exclusion theorem or sharpness/novelty claim;constructive finite-source model and restricted quotient-information diagnosis."
+    },
+    "NG2": {
+      "status": "NOT_APPLICABLE_WITH_REASON",
+      "reason": "No new impossibility/exclusion theorem or sharpness/novelty claim;constructive finite-source model and restricted quotient-information diagnosis."
+    },
+    "NG3": {
+      "status": "NOT_APPLICABLE_WITH_REASON",
+      "reason": "No new impossibility/exclusion theorem or sharpness/novelty claim;constructive finite-source model and restricted quotient-information diagnosis."
+    },
+    "NG4": {
+      "status": "NOT_APPLICABLE_WITH_REASON",
+      "reason": "No new impossibility/exclusion theorem or sharpness/novelty claim;constructive finite-source model and restricted quotient-information diagnosis."
+    },
+    "NG5": {
+      "status": "NOT_APPLICABLE_WITH_REASON",
+      "reason": "No new impossibility/exclusion theorem or sharpness/novelty claim;constructive finite-source model and restricted quotient-information diagnosis."
+    },
+    "NG6": {
+      "status": "NOT_APPLICABLE_WITH_REASON",
+      "reason": "No new impossibility/exclusion theorem or sharpness/novelty claim;constructive finite-source model and restricted quotient-information diagnosis."
+    },
+    "NG7": {
+      "status": "NOT_APPLICABLE_WITH_REASON",
+      "reason": "No new impossibility/exclusion theorem or sharpness/novelty claim;constructive finite-source model and restricted quotient-information diagnosis."
+    }
+  },
+  "global_error_bound": null,
+  "physical_interpolation_error": "OPEN",
+  "physical_omitted_tail": "OPEN",
+  "adopted_physical_tail_cap": null,
+  "four_axes": {
+    "EXECUTION": "newCIprovider/scalar11T+10failclosedPASS_SCOPED;newODE0;oldODErerun0;changeddependencyreads3oldacceptedsets",
+    "PUBLICATION": "localreviewablefiles;rootintegration/commitPRreceiptneeded",
+    "BACKUP": "parenttransportreadbackreceiptneeded;noexternalbackupperformedbychild",
+    "DAG": "CIregistry/sourcecontractSCOPED;parentnewadapter/newrun;nextlineescape/secondary/otheratomiccoverageOPEN"
+  },
+  "copyright_packaging": "public selected code/numeric tables/metadata/derivation only;exclude raw retrieval full abstracts,paperPDF/pageimages/fullCCCarchive",
+  "limitations": [
+    "No inaccessible chat contents inferred;UNAVAILABLE",
+    "Original nuclear networkPNGnotrecovered/read",
+    "ExistingC21O/C22A/C22B/C22Ccompletion/failurehistorystaysfrozen",
+    "Externalmirrors/sourcesnotmergedwiththisCIensemble"
+  ]
+}

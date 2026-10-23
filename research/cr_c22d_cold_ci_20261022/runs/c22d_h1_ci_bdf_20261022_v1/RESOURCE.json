@@ -1,0 +1,154 @@
+{
+  "CPU55_protected": true,
+  "admission": {
+    "caller_duties": "Apply own affinity and one-thread library settings; bound waits; preserve completed output; never touch another owner's work.",
+    "coordinator_bytes": 805306368,
+    "coordinator_cpu": 0,
+    "coordinator_quota_cores_reserved": 1,
+    "cpu_quota_worker_slots": 5,
+    "eligible_idle_cpus": [
+      0,
+      1,
+      2
+    ],
+    "exclusive_cpu_reservation": false,
+    "hard_worker_cap": 62,
+    "idle_threshold": 0.35,
+    "lease": {
+      "modified": false,
+      "path": null,
+      "reserved_cpus": [],
+      "status": "NOT_REQUESTED"
+    },
+    "max_workers": 2,
+    "memory_budget_basis": "Conservative planning allowance; not measured peak RSS or an enforced cap.",
+    "memory_reserve_bytes": 1073741824,
+    "memory_worker_slots": 2,
+    "numerical_threads_per_worker": 1,
+    "per_worker_bytes": 536870912,
+    "protected_cpus": [
+      55
+    ],
+    "requested_workers": 2,
+    "schema": "C21O_RESOURCE_ADMISSION_V1",
+    "selected_worker_cpus": [
+      1,
+      2
+    ],
+    "snapshot": {
+      "affinity": [
+        0,
+        1,
+        2
+      ],
+      "affinity_observed": true,
+      "allowed_cpus": [
+        0,
+        1,
+        2
+      ],
+      "cgroup_cpuset": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "cgroup_scope": "visible memberships and visible ancestors only",
+      "cgroups": [
+        {
+          "controllers": [],
+          "cpu_limit_observed": true,
+          "cpuset": "0-8",
+          "memory_current_bytes": 5342838784,
+          "memory_headroom_bytes": 3247095808,
+          "memory_limit_bytes": 8589934592,
+          "memory_limit_observed": true,
+          "namespace_root_fallback": false,
+          "path": "/sys/fs/cgroup",
+          "quota_cores": 8.0,
+          "usage_seconds": 27029.959493,
+          "version": 2,
+          "warnings": []
+        }
+      ],
+      "cpu_limit_observed": true,
+      "cpu_quota_cores": 8.0,
+      "cpu_quota_spare_cores": 6.980001005698539,
+      "host_load_average": [
+        1.89794921875,
+        2.693359375,
+        2.68017578125
+      ],
+      "host_mem_available_bytes": 9672269824,
+      "hostname": "b0ab32d68884",
+      "idle_threshold": 0.35,
+      "memory_available_bytes": 3247095808,
+      "memory_limit_bytes": 8589934592,
+      "memory_observation_complete": true,
+      "numerical_thread_environment": {
+        "BLIS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "observed_utc": "2026-10-22T15:24:16Z",
+      "observer_cores": 0.02339712040476557,
+      "observer_pid": 2,
+      "per_cpu_busy": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 0.09090909090909094,
+        "3": 0.0,
+        "4": 0.09090909090909094,
+        "5": 0.0,
+        "6": 0.0,
+        "7": 0.16666666666666663,
+        "8": 1.0
+      },
+      "quota_observations": [
+        {
+          "basis": "matching cgroup counter minus observing process CPU time",
+          "observed_other_and_child_cores": 1.0199989943014607,
+          "path": "/sys/fs/cgroup",
+          "quota_cores": 8.0,
+          "spare_cores": 6.980001005698539
+        }
+      ],
+      "sample_elapsed_seconds": 0.1025574070008588,
+      "sample_requested_seconds": 0.1,
+      "schema": "C21O_RESOURCE_OBSERVATION_V1",
+      "warnings": []
+    },
+    "status": "ADMITTED",
+    "task_count": 3,
+    "workers": 2
+  },
+  "coordinator_distinct_from_workers": true,
+  "exclusive_cpu_reservation": false,
+  "lease_observation": {
+    "discovery": {
+      "directories": [
+        "/tmp",
+        "/tmp/rei-bianchi-cooperative-leases",
+        "/workspace/scratch/30d955d9ea43/resume_c22c_20261022/recovery/restored_c22b",
+        "/workspace/scratch/30d955d9ea43/resume_c22c_20261022/recovery/restored_c22b/repository",
+        "/workspace/scratch/30d955d9ea43/resume_c22c_20261022/recovery/restored_c22b/repository/research/cr_c22d_cold_ci_20261022"
+      ],
+      "errors": [],
+      "paths": [],
+      "scope": "known roots and immediate lease/resource/state subdirectories; not a host-wide scan"
+    },
+    "exclusive_reservation": false,
+    "files": [],
+    "modified": false,
+    "reserved_cpus": []
+  },
+  "run_worker_cap": 2
+}

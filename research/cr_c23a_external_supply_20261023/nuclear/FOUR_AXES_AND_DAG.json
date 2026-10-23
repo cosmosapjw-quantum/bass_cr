@@ -1,0 +1,174 @@
+{
+  "schema": "C23A_BETA_COVERAGE_FOUR_AXES_V1",
+  "recorded_utc": "2026-10-22T23:02:35.665131+00:00",
+  "stages": [
+    {
+      "stage": "N0_REUSE",
+      "recorded_utc": "2026-10-22T23:02:35.665131+00:00",
+      "EXECUTION": "COMPLETE_SCOPED",
+      "detail": "Existing actual Gitblob lifetime input reused; beta ledger/HH81/historical ODE not replayed",
+      "PUBLICATION": "PARENT_PENDING",
+      "BACKUP": "PARENT_PENDING",
+      "DAG": {
+        "next": "N1_SOURCE"
+      },
+      "evidence": [
+        "source/EVALUATED_DECAY_BINDING.json"
+      ]
+    },
+    {
+      "stage": "N1_SOURCE",
+      "recorded_utc": "2026-10-22T23:02:35.665131+00:00",
+      "EXECUTION": "COMPLETE_SCOPED",
+      "detail": "Actual ENDF ZIP2/DAT2 CRC/SHA; historical central energies separated from current lifetimes",
+      "PUBLICATION": "PARENT_PENDING",
+      "BACKUP": "PARENT_PENDING",
+      "DAG": {
+        "next": "N2_THEORY"
+      },
+      "evidence": [
+        "source/PRIMARY_DOWNLOAD_RECEIPT.json",
+        "source/EVALUATED_ENERGY_AND_DOMAIN_CONTRACT.json"
+      ]
+    },
+    {
+      "stage": "N2_THEORY",
+      "recorded_utc": "2026-10-22T23:02:35.665131+00:00",
+      "EXECUTION": "COMPLETE_SCOPED",
+      "detail": "Conditional moment bounds, exact same-moment counterexamples, smooth perturbation proof",
+      "PUBLICATION": "PARENT_PENDING",
+      "BACKUP": "PARENT_PENDING",
+      "DAG": {
+        "next": "N3_IMPLEMENTATION"
+      },
+      "evidence": [
+        "THEORY_AND_CONTRACT.md"
+      ]
+    },
+    {
+      "stage": "N3_IMPLEMENTATION",
+      "recorded_utc": "2026-10-22T23:02:35.665131+00:00",
+      "EXECUTION": "COMPLETE_SCOPED",
+      "detail": "Electron-only kinetic-domain accounting and explicitly illustrative Fermi-one shape",
+      "PUBLICATION": "PARENT_PENDING",
+      "BACKUP": "PARENT_PENDING",
+      "DAG": {
+        "next": "N4_EXECUTION"
+      },
+      "evidence": [
+        "beta_domain_coverage.py"
+      ]
+    },
+    {
+      "stage": "N4_EXECUTION",
+      "recorded_utc": "2026-10-22T23:02:35.665131+00:00",
+      "EXECUTION": "COMPLETE_SCOPED",
+      "detail": "One new CPU5 native1 create-only coverage run;24 moment/interval cross-checks; no ODE",
+      "PUBLICATION": "PARENT_PENDING",
+      "BACKUP": "PARENT_PENDING",
+      "DAG": {
+        "next": "N5_INDEPENDENT_C9"
+      },
+      "evidence": [
+        "c23a_beta_fs2010_coverage_20261023_v1/RESULT.json",
+        "c23a_beta_fs2010_coverage_20261023_v1/INDEPENDENT_MOMENT_CHECKS.json",
+        "c23a_beta_fs2010_coverage_20261023_v1/LEASE_COMPLETE.json"
+      ]
+    },
+    {
+      "stage": "N5_INDEPENDENT_C9",
+      "recorded_utc": "2026-10-22T23:02:35.665131+00:00",
+      "EXECUTION": "PARENT_REVIEW_IN_PROGRESS",
+      "detail": "Independent source/algebra/unit/ownership review delegated by root; no rerun",
+      "PUBLICATION": "PARENT_PENDING",
+      "BACKUP": "PARENT_PENDING",
+      "DAG": {
+        "next": "N6_DELIVERY"
+      },
+      "evidence": [
+        "../review/nuclear_supply/"
+      ]
+    },
+    {
+      "stage": "N6_DELIVERY",
+      "recorded_utc": "2026-10-22T23:02:35.665131+00:00",
+      "EXECUTION": "PARENT_PENDING",
+      "detail": "Parent owns GitHub publication and durable backup/readback",
+      "PUBLICATION": "PARENT_PENDING",
+      "BACKUP": "PARENT_PENDING",
+      "DAG": {
+        "next": "NEXT_PHYSICAL_CONTRACTS_OPEN"
+      },
+      "evidence": [
+        "REPORT_KO.md",
+        "HANDOFF_KO.md"
+      ]
+    }
+  ],
+  "run": {
+    "run_id": "c23a_beta_fs2010_coverage_20261023_v1",
+    "status": "PASS_SCOPED",
+    "lease_status": "RELEASED",
+    "completed_utc": "2026-10-22T22:58:18.061544+00:00",
+    "wall_s": 1.666743216002942,
+    "user_cpu_s": 1.393511,
+    "system_cpu_s": 0.32340199999999997,
+    "peak_rss_kib": 69840,
+    "cpu_id": 5,
+    "affinity_final": [
+      5
+    ],
+    "native_threads_per_worker": 1,
+    "new_ODE_calls": 0,
+    "historical_ODE_calls": 0
+  },
+  "physical_coupling_activated": false,
+  "global_error_bound": null,
+  "progress": {
+    "coverage_gates": [
+      "source pin",
+      "moment contract",
+      "illustrative operator",
+      "numerical validation"
+    ],
+    "complete": 4,
+    "total": 4,
+    "scope": "this coverage subtask only",
+    "global_research_completion_fraction": null
+  },
+  "next_dag": [
+    {
+      "id": "CORRECTED_BETA_SPECTRUM",
+      "status": "OPEN",
+      "reason": "LCON0; mean and support do not determine spectrum; F=1 diagnostic omits corrections"
+    },
+    {
+      "id": "FRAME_AND_INITIAL_STATE_MAPPING",
+      "status": "OPEN",
+      "reason": "mean/Q support ceiling requires the same energy frame; boosted parents require a rest-to-bath transformation and charge/atomic/molecular state contract"
+    },
+    {
+      "id": "FS_BATH_AXIS_CLOSURE",
+      "status": "OPEN_PARENT_AUDIT",
+      "reason": "energy-domain support is not table/bath or energy-closure approval"
+    },
+    {
+      "id": "ELECTRON_TAIL_TRANSPORT",
+      "status": "OPEN",
+      "reason": "low and high tails retained; deposition null, no automatic heat"
+    },
+    {
+      "id": "NEUTRINO_RECOIL_RADIATIVE_OWNERSHIP",
+      "status": "OPEN",
+      "reason": "separate physical channels; toy complement not a real partition"
+    },
+    {
+      "id": "FULL_HIGH_ENERGY_NUCLEAR",
+      "status": "HOLD"
+    },
+    {
+      "id": "GENERAL_TRIAXIAL_TILTED_POLARIZED_CMB",
+      "status": "HOLD"
+    }
+  ]
+}

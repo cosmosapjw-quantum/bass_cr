@@ -1,0 +1,190 @@
+{
+  "schema": "C22C_PREREGISTERED_CONTRACT_V1",
+  "created_utc": "2026-10-22T06:54:33.165104+00:00",
+  "workflow": "physmath-research-loop1.0.0/approval0.2",
+  "parent_C22B_source_identity": "e4e5ce42693d473939e72ac3cd2ade32cd4a342993524df94ccf121eb6afbd52",
+  "parent_local_science_head": "f03fdf71fb2ea995ce16b68d81ef4f47ecb00685",
+  "authority_remote_R_last_observed": "a5e12c5f3e6d323e211d65fefad34060ec07eff0",
+  "new_problem": "H1 ground-state 1s->2s/2p finite CCC table excitation with immediate radiative ground return and cumulative escaped-energy ledger, over preserved C22B;77 full/74 solver states",
+  "hypothesis": "The new retained H1 excitation component lowers the warm thermal peak and changes subsequent ionization/Thomson history; equal-opposite gas/export terms preserve the event energy ledger.",
+  "rate_contract": {
+    "source": "Curtin CCC H I electron-impact August2026 archive, exact selected 2S.1S/2P.1S bytes",
+    "transition_direction": "filename FINAL.INITIAL; ground excitation only",
+    "source_energy_eV": [
+      10.20435,
+      968.6058
+    ],
+    "rows_each": 452,
+    "sigma_unit": "a0^2, NOT pi*a0^2; no extra 2p multiplicity",
+    "interpolation": "piecewise-linear in incident E and sigma between provided rows; chosen source model, continuum interpolation error OPEN",
+    "formula": "q_core=K theta^-3/2 integral_Eth^Emax sigma_bar_PL(E)*E*exp(-E/theta)dE; K=1e6*a0_m^2*sqrt(8*eV_J/(pi*me_kg));theta=kBT[eV]",
+    "mathematical_domain": "T>0; finite-energy contribution only",
+    "float64_provider_temperature_K": [
+      1.0,
+      100000000.0
+    ],
+    "activation_temperature_K": [
+      1.0,
+      20000.0
+    ],
+    "activation_selector": "Explicit scoped cold/warm pilot guard, not a source physical error theorem; Maxwellian nonrelativistic electron distribution",
+    "physical_total": "q_phys=q_core+delta_interpolation+q_tail; latter two not supplied by the core",
+    "tail": "UNAVAILABLE physical tail; no extrapolation or claim of physical zero beyond Emax",
+    "conditional_tail": "ONLY if true 0<=sigma_bar(E)<=assumed_sigma_cap_a0sq for all E>Emax: q_tail<=K*sigma_cap*theta^-1/2*(Emax+theta)*exp(-Emax/theta)",
+    "adopted_physical_sigma_cap": null,
+    "tail_diagnostic": "log10 conditional upper coefficient per 1 a0^2 of explicitly hypothetical cap; not a proven tail bound",
+    "underflow": "preserve log10 q and boolean supported-source float64-underflow; physical positive source is not UNAVAILABLE or asserted zero",
+    "no_zero_fill_for_absent_species": true,
+    "SW91": "newly recovered Table3 used only as source-model comparison in 2000..1e8K; not extrapolated, spliced, or forced to agree"
+  },
+  "closure": {
+    "metric": "(-,+,+,+)",
+    "geometry": "non-tilted LRS",
+    "stress": "full Frobenius, signed Pgamma+Pnu then norm; Pi_tot=abs(Pm+Pr);atomic gas isotropic, nonbaryonic Vlasov separate",
+    "reaction": "H1(1s)+e -> H1(n=2)+e -> H1(1s)+escaped radiation; immediate level elimination and perfect boundary escape imposed",
+    "r_j": "n_e_cm3 * X_H1_ground_per_Href * q_j_cm3_s / H_s^-1 [events/Href/eta]",
+    "equations": [
+      "C2s_prime=r_2s",
+      "C2p_prime=r_2p",
+      "U_prime=U_prime_C22B-DeltaE*(r_2s+r_2p)",
+      "L_exc=DeltaE*(C2s+C2p)",
+      "N_exc_out=C2p+2*C2s",
+      "E_accounted=E_accounted_C22B+L_exc"
+    ],
+    "DeltaE_eV": 10.20435,
+    "species_charge_nuclei_change_per_event": "exact net zero; electron count and ionization binding unchanged",
+    "ledger": "cumulative energy already exported, no redshift/dilution term, no extra resident radiation/Einstein source",
+    "photon_count": "2p one photon,2s two photons with energy sum DeltaE; individual 2s spectrum unresolved and no line absorption or UV-cohort injection",
+    "level_population": "No excited-state population solved; instantaneous radiative-return/perfect-escape boundary idealization, not a measured lifetime hierarchy or cosmological optical-depth result",
+    "isotopes": "H1-only excitation; D/T excitation UNAVAILABLE; no isotope emissivity quotient. Existing charge-state lumpability conditions require matched PI/RR coefficients and shared T/ne and remain separately conditional.",
+    "full_thermochemical_radiative_closure": "OPEN",
+    "dominant_omitted_processes": [
+      "H1 higher-n excitation",
+      "cold CI",
+      "D/T excitation and isotope shifts",
+      "He/Li excitation and core resonances",
+      "DR energy/cascade closure",
+      "CX and free-free",
+      "line trapping/reabsorption and2s mixing",
+      "self-consistent CMB spectral feedback",
+      "stellar/nuclear sources",
+      "trace thermal/radiative Einstein feedback"
+    ]
+  },
+  "invariant_coordinates": {
+    "declared_zero": "n,T0,T1",
+    "unsupported_nonzero_n_T": "fail closed;not erased",
+    "map": "project77full to74active, lifting only exact declared n/T zeros; old failures unchanged",
+    "invariance": "removed rhs components must be exactlyzero before projection;full initial inventory checked;no clipping",
+    "historical_C22A_Radau_failure": "FAILED_PRESERVED unchanged"
+  },
+  "new_cosmological_runs": {
+    "nominal": {
+      "method": "BDF",
+      "rtol": 3e-11,
+      "atol": 3e-13,
+      "cases": [
+        {
+          "name": "dark_excitation",
+          "signed_sigma": 0.0,
+          "signed_pi_m": 0.0,
+          "signed_pi_r": 0.0,
+          "photon_scale": 0.0,
+          "temperature_K": 300.0,
+          "compton_enabled": true,
+          "Tcmb0_K": 2.7255,
+          "h1_n2_excitation_enabled": true
+        },
+        {
+          "name": "finite_uv_excitation_flrw",
+          "signed_sigma": 0.0,
+          "signed_pi_m": 0.0,
+          "signed_pi_r": 0.0,
+          "photon_scale": 1.0,
+          "temperature_K": 300.0,
+          "compton_enabled": true,
+          "Tcmb0_K": 2.7255,
+          "h1_n2_excitation_enabled": true
+        },
+        {
+          "name": "finite_uv_excitation_lrs",
+          "signed_sigma": 0.3,
+          "signed_pi_m": 0.0002,
+          "signed_pi_r": 0.0008,
+          "photon_scale": 1.0,
+          "temperature_K": 300.0,
+          "compton_enabled": true,
+          "Tcmb0_K": 2.7255,
+          "h1_n2_excitation_enabled": true
+        }
+      ]
+    },
+    "reference": {
+      "method": "Radau",
+      "rtol": 3e-12,
+      "atol": 3e-14,
+      "case": {
+        "name": "finite_uv_excitation_lrs",
+        "signed_sigma": 0.3,
+        "signed_pi_m": 0.0002,
+        "signed_pi_r": 0.0008,
+        "photon_scale": 1.0,
+        "temperature_K": 300.0,
+        "compton_enabled": true,
+        "Tcmb0_K": 2.7255,
+        "h1_n2_excitation_enabled": true
+      }
+    },
+    "saved_times": 201,
+    "segment_boundaries": "reuse actual energy-threshold endpoint checks",
+    "max_workers": 2,
+    "threads_per_worker": 1,
+    "CPU55": "protected;coordinator distinct",
+    "outputs": "create-only;source frozen before execution",
+    "old_C21O_and_C22A_ODE_reruns": 0,
+    "old_C21O_C22A_C22B_ODE_reruns": 0
+  },
+  "preregistered_gates": {
+    "energy_relative_saved_and_accepted_max_abs": 1e-08,
+    "nucleus_max_relative_residual": 1e-10,
+    "charge_and_photon_absolute_normalized": 1e-10,
+    "minimum_scaled_population": -2e-09,
+    "minimum_UV_count_per_H": -2e-11,
+    "declared_n_T_exact_zero": true,
+    "reference_fields": [
+      "temperature_K",
+      "n_e_cm3",
+      "tau_T",
+      "Sigma_F",
+      "Pi_r_F",
+      "H1_ionized_fraction",
+      "bath_energy_received_eV_per_H",
+      "excitation_escaped_energy_eV_per_H"
+    ],
+    "reference_scaled_max_difference": 2e-07,
+    "comparison_normalization": "max(abs(reference),1e-8*peak,1e-30); cumulative bath/excitation energy use uniform max(peak,1e-30) scale",
+    "nonrelativistic_selector_max": 0.01,
+    "minimum_excitation_count": -2e-11,
+    "maximum_excitation_temperature_K": 20000.0
+  },
+  "light_checks": {
+    "independent_Decimal_log10_rate_abs_tolerance": 2e-10,
+    "positive_endpoint_moments_relative_tolerance": 2e-12,
+    "energy_event_relative_tolerance": 2e-14,
+    "off_mode_parent_RHS": "bitwise prefix parity on preserved baseline samples, no ODE",
+    "no_pi_or_2p_multiplicity": "verified units against independent SI/Decimal source values",
+    "underflow": "finite log10 rate retained below float64 range",
+    "invalid_inputs": "typed refusal of unsupported species/full-rate requests/domain/negative caps/nonzero nT"
+  },
+  "HOLD": [
+    "full nuclear highenergy",
+    "general triaxial/tilted/polarized CMB"
+  ],
+  "global_error_bound": null,
+  "stage_at_preregistration": {
+    "EXECUTION": "new source arithmetic only; newODE0; oldODE0; implementation/validation pending",
+    "PUBLICATION": "remote prior retry UNKNOWN_NO_ACK; local new unit pending",
+    "BACKUP": "prior release restored exact; Drive retry pending receipt",
+    "DAG": "C22C finite-source H1n2 energy pilot admitted only after independent contract/code checks; full closure OPEN"
+  }
+}

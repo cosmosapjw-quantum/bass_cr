@@ -1,0 +1,577 @@
+{
+  "schema_version": 1,
+  "workflow_version": "1.0.0",
+  "task": "both",
+  "unit_id": "C23A_FAST_ELECTRON_FINITE_SOURCE",
+  "objective": "Construct and validate a reusable finite-energy electron response and exact-PL spectral precontraction from primary source bytes",
+  "scope": "Read-only primary acquisition, finite table operator, exact-PL precontraction; no cosmological or chemical ODE",
+  "status": "in_progress",
+  "status_reason": "Computational unit locally complete; independent parent review/publication/backup handoff pending",
+  "dependencies": [
+    {
+      "id": "D1",
+      "identity": "e9760d637b5bd97fe981cb459a7e2d733692a9f9f8deb9a757224b14be632101",
+      "description": "actual current author archive"
+    },
+    {
+      "id": "D2",
+      "identity": [
+        {
+          "repo": "21cmfast/21cmFAST",
+          "commit": "72d8a2d23702f1b69fbc85abd25d4592a7bcd3f5",
+          "tree": "e3753fd2fc2ef42c9ca396d4420e382d0714c6d8",
+          "license": "MIT file downloaded",
+          "scope": "14 table files+LICENSE",
+          "mirror_numeric_tokens": "14/14 PASS",
+          "mirror_bytes": "14/14 DIFFERENT terminal newline",
+          "independent_physics_validation": false
+        },
+        {
+          "repo": "hongwanliu/DarkHistory",
+          "commit": "7a09f1991b0028cf00ec386bdea81b963f78794f",
+          "tree": "32ab51525baf4b7425c522ef09ad4468682cc5b0",
+          "license": "MIT file downloaded",
+          "scope": "legacy lowE module+8 small tables+LICENSE",
+          "adoption": "READ_ONLY_CANDIDATE; no execution"
+        }
+      ],
+      "description": "selected pinned provider/mirror bytes"
+    },
+    {
+      "id": "D3",
+      "identity": {
+        "fs2010_operator.py": "53c9056908fe9a875c35bb7d8047149d3c45f5d0856aac74ebe84e4248a51809",
+        "audit_fs2010_operator.py": "4b95710c3133883e9fbceec3a42cf95298ba11a3fdf406b950a0bde497cfaaad",
+        "benchmark_precontract.py": "4f6948d19c5eb6203bd636d50fa6c307be07670e4ad84ea91257509095074ef0"
+      },
+      "description": "frozen independent implementation and audit code"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E1",
+      "kind": "source",
+      "locator": "UPSTREAM_DOWNLOAD.json",
+      "scope": "author archive bytes",
+      "dependency_ids": [
+        "D1"
+      ]
+    },
+    {
+      "id": "E2",
+      "kind": "source",
+      "locator": "EXTERNAL_REUSE_DOWNLOADS.json",
+      "scope": "selected pinned external code/data",
+      "dependency_ids": [
+        "D2"
+      ]
+    },
+    {
+      "id": "E3",
+      "kind": "derivation",
+      "locator": "THEORY_AND_SOURCE_CONTRACT_KO.md",
+      "scope": "source ownership, PL integrals and convex bounds",
+      "dependency_ids": [
+        "D1",
+        "D3"
+      ]
+    },
+    {
+      "id": "E4",
+      "kind": "execution",
+      "locator": "c23a_fast_electron_source_audit_20261023_v1/RESULT.json",
+      "scope": "finite source independent audit",
+      "dependency_ids": [
+        "D1",
+        "D3"
+      ]
+    },
+    {
+      "id": "E5",
+      "kind": "execution",
+      "locator": "c23a_precontraction_timing_20261023_v1/RESULT.json",
+      "scope": "paired timing and independent response comparison",
+      "dependency_ids": [
+        "D1",
+        "D3"
+      ]
+    },
+    {
+      "id": "E6",
+      "kind": "counterexample",
+      "locator": "c23a_precontraction_timing_20261023_v1/MOMENT_COUNTEREXAMPLE.json",
+      "scope": "finite table two-moment example",
+      "dependency_ids": [
+        "D1",
+        "D3"
+      ]
+    }
+  ],
+  "stages": [
+    {
+      "id": "R1",
+      "name": "연구 위치·계약",
+      "status": "complete",
+      "evidence_refs": [
+        "E1",
+        "E2"
+      ],
+      "dependency_ids": [
+        "D1",
+        "D3"
+      ],
+      "reason": "Completed within finite-source research unit; see linked derivation and execution evidence.",
+      "EXECUTION": "COMPLETED_SCOPED",
+      "PUBLICATION": "LOCAL_PACKET_FOR_ROOT",
+      "BACKUP": "LOCAL_BYTES; DURABLE_RECEIPT_PENDING_ROOT",
+      "DAG": "R1 -> next dependency; 21-species physical coupling remains separate"
+    },
+    {
+      "id": "R2",
+      "name": "근거·재사용",
+      "status": "complete",
+      "evidence_refs": [
+        "E1",
+        "E2"
+      ],
+      "dependency_ids": [
+        "D1",
+        "D3"
+      ],
+      "reason": "Completed within finite-source research unit; see linked derivation and execution evidence.",
+      "EXECUTION": "COMPLETED_SCOPED",
+      "PUBLICATION": "LOCAL_PACKET_FOR_ROOT",
+      "BACKUP": "LOCAL_BYTES; DURABLE_RECEIPT_PENDING_ROOT",
+      "DAG": "R2 -> next dependency; 21-species physical coupling remains separate"
+    },
+    {
+      "id": "R3",
+      "name": "주장·전제 정렬",
+      "status": "complete",
+      "evidence_refs": [
+        "E3"
+      ],
+      "dependency_ids": [
+        "D1",
+        "D3"
+      ],
+      "reason": "Completed within finite-source research unit; see linked derivation and execution evidence.",
+      "EXECUTION": "COMPLETED_SCOPED",
+      "PUBLICATION": "LOCAL_PACKET_FOR_ROOT",
+      "BACKUP": "LOCAL_BYTES; DURABLE_RECEIPT_PENDING_ROOT",
+      "DAG": "R3 -> next dependency; 21-species physical coupling remains separate"
+    },
+    {
+      "id": "R4",
+      "name": "가설·표현 탐색",
+      "status": "complete",
+      "evidence_refs": [
+        "E3"
+      ],
+      "dependency_ids": [
+        "D1",
+        "D3"
+      ],
+      "reason": "Completed within finite-source research unit; see linked derivation and execution evidence.",
+      "EXECUTION": "COMPLETED_SCOPED",
+      "PUBLICATION": "LOCAL_PACKET_FOR_ROOT",
+      "BACKUP": "LOCAL_BYTES; DURABLE_RECEIPT_PENDING_ROOT",
+      "DAG": "R4 -> next dependency; 21-species physical coupling remains separate"
+    },
+    {
+      "id": "R5",
+      "name": "구성적 유도",
+      "status": "complete",
+      "evidence_refs": [
+        "E3"
+      ],
+      "dependency_ids": [
+        "D1",
+        "D3"
+      ],
+      "reason": "Completed within finite-source research unit; see linked derivation and execution evidence.",
+      "EXECUTION": "COMPLETED_SCOPED",
+      "PUBLICATION": "LOCAL_PACKET_FOR_ROOT",
+      "BACKUP": "LOCAL_BYTES; DURABLE_RECEIPT_PENDING_ROOT",
+      "DAG": "R5 -> next dependency; 21-species physical coupling remains separate"
+    },
+    {
+      "id": "R6",
+      "name": "독립 검증",
+      "status": "complete",
+      "evidence_refs": [
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "dependency_ids": [
+        "D1",
+        "D3"
+      ],
+      "reason": "Completed within finite-source research unit; see linked derivation and execution evidence.",
+      "EXECUTION": "COMPLETED_SCOPED",
+      "PUBLICATION": "LOCAL_PACKET_FOR_ROOT",
+      "BACKUP": "LOCAL_BYTES; DURABLE_RECEIPT_PENDING_ROOT",
+      "DAG": "R6 -> next dependency; 21-species physical coupling remains separate"
+    },
+    {
+      "id": "R7",
+      "name": "판별 검증",
+      "status": "complete",
+      "evidence_refs": [
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "dependency_ids": [
+        "D1",
+        "D3"
+      ],
+      "reason": "Completed within finite-source research unit; see linked derivation and execution evidence.",
+      "EXECUTION": "COMPLETED_SCOPED",
+      "PUBLICATION": "LOCAL_PACKET_FOR_ROOT",
+      "BACKUP": "LOCAL_BYTES; DURABLE_RECEIPT_PENDING_ROOT",
+      "DAG": "R7 -> next dependency; 21-species physical coupling remains separate"
+    },
+    {
+      "id": "R8",
+      "name": "결과 판정",
+      "status": "complete",
+      "evidence_refs": [
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "dependency_ids": [
+        "D1",
+        "D3"
+      ],
+      "reason": "Completed within finite-source research unit; see linked derivation and execution evidence.",
+      "EXECUTION": "COMPLETED_SCOPED",
+      "PUBLICATION": "LOCAL_PACKET_FOR_ROOT",
+      "BACKUP": "LOCAL_BYTES; DURABLE_RECEIPT_PENDING_ROOT",
+      "DAG": "R8 -> next dependency; 21-species physical coupling remains separate"
+    },
+    {
+      "id": "R9",
+      "name": "정식 결과·코딩 연결",
+      "status": "complete",
+      "evidence_refs": [
+        "E3",
+        "E4",
+        "E5"
+      ],
+      "dependency_ids": [
+        "D1",
+        "D3"
+      ],
+      "reason": "Completed within finite-source research unit; see linked derivation and execution evidence.",
+      "EXECUTION": "LOCAL_HANDOFF",
+      "PUBLICATION": "LOCAL_PACKET_FOR_ROOT",
+      "BACKUP": "LOCAL_BYTES; DURABLE_RECEIPT_PENDING_ROOT",
+      "DAG": "R9 -> next dependency; 21-species physical coupling remains separate"
+    },
+    {
+      "id": "R10",
+      "name": "종료·재개",
+      "status": "in_progress",
+      "evidence_refs": [
+        "E3",
+        "E4",
+        "E5"
+      ],
+      "dependency_ids": [
+        "D1",
+        "D3"
+      ],
+      "reason": "Local handoff prepared; remote publication and durable backup receipt are parent-owned pending actions.",
+      "EXECUTION": "LOCAL_HANDOFF",
+      "PUBLICATION": "LOCAL_PACKET_FOR_ROOT",
+      "BACKUP": "LOCAL_BYTES; DURABLE_RECEIPT_PENDING_ROOT",
+      "DAG": "R10 -> next dependency; 21-species physical coupling remains separate"
+    },
+    {
+      "id": "C1",
+      "name": "목표·baseline",
+      "status": "complete",
+      "evidence_refs": [
+        "E1",
+        "E2"
+      ],
+      "dependency_ids": [
+        "D1",
+        "D3"
+      ],
+      "reason": "Completed within finite-source research unit; see linked derivation and execution evidence.",
+      "EXECUTION": "COMPLETED_SCOPED",
+      "PUBLICATION": "LOCAL_PACKET_FOR_ROOT",
+      "BACKUP": "LOCAL_BYTES; DURABLE_RECEIPT_PENDING_ROOT",
+      "DAG": "C1 -> next dependency; 21-species physical coupling remains separate"
+    },
+    {
+      "id": "C2",
+      "name": "식–데이터–코드",
+      "status": "complete",
+      "evidence_refs": [
+        "E1",
+        "E2"
+      ],
+      "dependency_ids": [
+        "D1",
+        "D3"
+      ],
+      "reason": "Completed within finite-source research unit; see linked derivation and execution evidence.",
+      "EXECUTION": "COMPLETED_SCOPED",
+      "PUBLICATION": "LOCAL_PACKET_FOR_ROOT",
+      "BACKUP": "LOCAL_BYTES; DURABLE_RECEIPT_PENDING_ROOT",
+      "DAG": "C2 -> next dependency; 21-species physical coupling remains separate"
+    },
+    {
+      "id": "C3",
+      "name": "수치 설계",
+      "status": "complete",
+      "evidence_refs": [
+        "E3"
+      ],
+      "dependency_ids": [
+        "D1",
+        "D3"
+      ],
+      "reason": "Completed within finite-source research unit; see linked derivation and execution evidence.",
+      "EXECUTION": "COMPLETED_SCOPED",
+      "PUBLICATION": "LOCAL_PACKET_FOR_ROOT",
+      "BACKUP": "LOCAL_BYTES; DURABLE_RECEIPT_PENDING_ROOT",
+      "DAG": "C3 -> next dependency; 21-species physical coupling remains separate"
+    },
+    {
+      "id": "C4",
+      "name": "실행 DAG·자원",
+      "status": "complete",
+      "evidence_refs": [
+        "E3"
+      ],
+      "dependency_ids": [
+        "D1",
+        "D3"
+      ],
+      "reason": "Completed within finite-source research unit; see linked derivation and execution evidence.",
+      "EXECUTION": "COMPLETED_SCOPED",
+      "PUBLICATION": "LOCAL_PACKET_FOR_ROOT",
+      "BACKUP": "LOCAL_BYTES; DURABLE_RECEIPT_PENDING_ROOT",
+      "DAG": "C4 -> next dependency; 21-species physical coupling remains separate"
+    },
+    {
+      "id": "C5",
+      "name": "구현",
+      "status": "complete",
+      "evidence_refs": [
+        "E3"
+      ],
+      "dependency_ids": [
+        "D1",
+        "D3"
+      ],
+      "reason": "Completed within finite-source research unit; see linked derivation and execution evidence.",
+      "EXECUTION": "COMPLETED_SCOPED",
+      "PUBLICATION": "LOCAL_PACKET_FOR_ROOT",
+      "BACKUP": "LOCAL_BYTES; DURABLE_RECEIPT_PENDING_ROOT",
+      "DAG": "C5 -> next dependency; 21-species physical coupling remains separate"
+    },
+    {
+      "id": "C6",
+      "name": "구현 검증",
+      "status": "complete",
+      "evidence_refs": [
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "dependency_ids": [
+        "D1",
+        "D3"
+      ],
+      "reason": "Completed within finite-source research unit; see linked derivation and execution evidence.",
+      "EXECUTION": "COMPLETED_SCOPED",
+      "PUBLICATION": "LOCAL_PACKET_FOR_ROOT",
+      "BACKUP": "LOCAL_BYTES; DURABLE_RECEIPT_PENDING_ROOT",
+      "DAG": "C6 -> next dependency; 21-species physical coupling remains separate"
+    },
+    {
+      "id": "C7",
+      "name": "과학 검증",
+      "status": "complete",
+      "evidence_refs": [
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "dependency_ids": [
+        "D1",
+        "D3"
+      ],
+      "reason": "Completed within finite-source research unit; see linked derivation and execution evidence.",
+      "EXECUTION": "COMPLETED_SCOPED",
+      "PUBLICATION": "LOCAL_PACKET_FOR_ROOT",
+      "BACKUP": "LOCAL_BYTES; DURABLE_RECEIPT_PENDING_ROOT",
+      "DAG": "C7 -> next dependency; 21-species physical coupling remains separate"
+    },
+    {
+      "id": "C8",
+      "name": "수치·재현성",
+      "status": "complete",
+      "evidence_refs": [
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "dependency_ids": [
+        "D1",
+        "D3"
+      ],
+      "reason": "Completed within finite-source research unit; see linked derivation and execution evidence.",
+      "EXECUTION": "COMPLETED_SCOPED",
+      "PUBLICATION": "LOCAL_PACKET_FOR_ROOT",
+      "BACKUP": "LOCAL_BYTES; DURABLE_RECEIPT_PENDING_ROOT",
+      "DAG": "C8 -> next dependency; 21-species physical coupling remains separate"
+    },
+    {
+      "id": "C9",
+      "name": "독립 검토",
+      "status": "in_progress",
+      "evidence_refs": [
+        "E3",
+        "E4",
+        "E5"
+      ],
+      "dependency_ids": [
+        "D1",
+        "D3"
+      ],
+      "reason": "Parent independently reviews frozen code/raw table/actual outputs.",
+      "EXECUTION": "LOCAL_HANDOFF",
+      "PUBLICATION": "LOCAL_PACKET_FOR_ROOT",
+      "BACKUP": "LOCAL_BYTES; DURABLE_RECEIPT_PENDING_ROOT",
+      "DAG": "C9 -> next dependency; 21-species physical coupling remains separate"
+    },
+    {
+      "id": "C10",
+      "name": "판정·인계",
+      "status": "in_progress",
+      "evidence_refs": [
+        "E3",
+        "E4",
+        "E5"
+      ],
+      "dependency_ids": [
+        "D1",
+        "D3"
+      ],
+      "reason": "Local handoff prepared; remote publication and durable backup receipt are parent-owned pending actions.",
+      "EXECUTION": "LOCAL_HANDOFF",
+      "PUBLICATION": "LOCAL_PACKET_FOR_ROOT",
+      "BACKUP": "LOCAL_BYTES; DURABLE_RECEIPT_PENDING_ROOT",
+      "DAG": "C10 -> next dependency; 21-species physical coupling remains separate"
+    }
+  ],
+  "claims": [
+    {
+      "id": "CL1",
+      "statement": "Finite bilinear response and PL spectral contraction reproduce the declared interpolant",
+      "scope": "selected explicit source axis and energy support",
+      "basis": [
+        "derived",
+        "implementation-verified",
+        "numerically checked"
+      ],
+      "evidence_refs": [
+        "E3",
+        "E4",
+        "E5"
+      ],
+      "obligations": [
+        "parent C9 review"
+      ]
+    },
+    {
+      "id": "CL2",
+      "statement": "Two given spectra share count and kinetic-energy moments but have different channel deposition",
+      "scope": "actual downloaded finite response at xi=.1,.5,.9",
+      "basis": [
+        "numerically checked"
+      ],
+      "evidence_refs": [
+        "E6"
+      ],
+      "obligations": [],
+      "strong_no_go": "NOT_CLAIMED"
+    },
+    {
+      "id": "CL3",
+      "statement": "Physical21-state coupling admission remains open",
+      "scope": "source and caller closure requirements in SOURCE_COVERAGE.json",
+      "basis": [
+        "unresolved"
+      ],
+      "evidence_refs": [
+        "E1",
+        "E3",
+        "E4"
+      ],
+      "obligations": [
+        "resolve four low-xi header/C coordinate conflicts",
+        "resolve current archive versus paper Table1 differences",
+        "establish explicit source He/H",
+        "bind secondary count thresholds to reported ionization energy",
+        "match admitted source gas submanifold",
+        "separate primary binding and post-primary electron injection",
+        "assign absorbed-photon ownership exactly once",
+        "separate thermal CI from fast-electron cascade",
+        "establish loss time relative to medium variation",
+        "establish He photon absorption/escape",
+        "account for significant IC or other omitted losses",
+        "supply dimensional and normalized primary UV/X-ray or CR spectrum"
+      ]
+    }
+  ],
+  "executions": [
+    {
+      "id": "X1",
+      "status": "completed",
+      "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 python audit_fs2010_operator.py",
+      "environment": {
+        "CPU": 3,
+        "native_threads": 1,
+        "create_only": true,
+        "lease": "c23a_fast_electron_source_audit_20261023_v1/LEASE_COMPLETE.json"
+      },
+      "evidence_refs": [
+        "E4"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "X2",
+      "status": "completed",
+      "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 python benchmark_precontract.py",
+      "environment": {
+        "CPU": 3,
+        "native_threads": 1,
+        "create_only": true,
+        "lease": "c23a_precontraction_timing_20261023_v1/LEASE_COMPLETE.json"
+      },
+      "evidence_refs": [
+        "E5",
+        "E6"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "failures": "FAILURE_HISTORY.json",
+  "physical_coupling": "NOT_ADMITTED",
+  "global_error_bound": null,
+  "next_actions": [
+    "parent independent review of frozen code and response outputs",
+    "attach actual publication and durable backup receipts",
+    "resolve admitted source physics and ownership before physical RHS coupling"
+  ]
+}

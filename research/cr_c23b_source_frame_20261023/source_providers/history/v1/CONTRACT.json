@@ -1,0 +1,83 @@
+{
+  "schema": "C23B_SPECTRAL_SOURCE_CONTRACT_V1",
+  "objective": "Explicit finite-energy PW19-release photoelectron source and energy partition",
+  "source_provider": "Taira2025 PW19 v1.0.0 subset",
+  "doi": "10.5281/zenodo.15367103",
+  "git_commit": "863c3b7fa73a8510fbf57ee7b75ad1e8c34086de",
+  "archive_sha256": "afd470b9fd934234e7f6e815d6887814a2ff8767e61f0d2a8e6187efde8d0d55",
+  "table_unit_definition": "S(E)=4*pi*nu*J_nu, erg s^-1 cm^-2; spectral energy per dlnE, not integral per bin",
+  "spectra": [
+    {
+      "filename": "z_02.316000.csv",
+      "redshift": 2.316,
+      "bytes": 27989,
+      "sha256": "d95d8c5a4c20b152de66c50b47fdfdf06c30e8ccd01bcaa9b08f11b5880f432a"
+    },
+    {
+      "filename": "z_02.479000.csv",
+      "redshift": 2.479,
+      "bytes": 27966,
+      "sha256": "f93db0bb33dc6b7011cc0490f96253a489e5c7cd20cba99005b1461a3e56a5d1"
+    },
+    {
+      "filename": "z_02.649000.csv",
+      "redshift": 2.649,
+      "bytes": 27993,
+      "sha256": "02648ba3a49c3a46872c638ae2f3cd8d72bb50abe724546b30bf6e969ab9754b"
+    }
+  ],
+  "admitted_redshift_nodes": [
+    2.316,
+    2.479,
+    2.649
+  ],
+  "redshift_interpolation": "NOT_IMPLEMENTED: exact three source nodes only",
+  "energy_interpolation": "log S linear in log photon energy between tabulated positive nodes; declared representation",
+  "atomic_fit": {
+    "provider": "Verner et al.1996 official photo.dat",
+    "sha256": "a53e73b0af4cc6b801aef67b84bd964e3ed8c9c4992f214e4a69dc7e4443f389",
+    "channels": {
+      "HI": [
+        1,
+        1
+      ],
+      "HeI": [
+        2,
+        2
+      ],
+      "HeII": [
+        2,
+        1
+      ]
+    },
+    "thresholds_eV": [
+      13.6,
+      24.59,
+      54.42
+    ],
+    "maximum_photon_eV": 50000,
+    "initial_states": "ground-state atomic ions; no isotope or molecular identification",
+    "isotope_mapping": "OPEN; source symbol HI/HeI/HeII does not resolve H1/D/T or He3/He4"
+  },
+  "electron_source": "per absorbing target per second per electron kinetic eV in bath/rest-target frame, q_i(K)=S(K+chi)*sigma_i(K+chi)/(eV_erg*(K+chi)^2)",
+  "recoil": "zero-recoil target approximation: all excess photon energy to one primary electron; finite recoil correction not implemented",
+  "energy_owner": {
+    "binding": "chi times event count",
+    "primary_electron": "kinetic excess, not pre-added heat",
+    "radiation_absorption": "sum of binding and electron kinetic energy",
+    "secondary_deposition": "NOT_EXECUTED; FS composition unresolved and finite stopping not yet admitted",
+    "above_50000_eV": "photon intensity known, atomic event rate unknown; never zero-filled"
+  },
+  "C23A_D1_identity": "SEPARATE; no inferred byte/model identity or equality with arxiv1801.04931v1 D1",
+  "validation_before_execution": {
+    "Gauss8_vs16_relative": 2e-11,
+    "Gauss16_vs_quad_relative": 2e-11,
+    "energy_ledger_relative": 2e-14,
+    "crosssection_mp80_relative": 2e-14,
+    "source_reformat_relative": 2e-13,
+    "guard_cases_min": 10
+  },
+  "global_error_bound": null,
+  "new_ODE": 0,
+  "historical_reruns": 0
+}

@@ -1,0 +1,60 @@
+{
+  "schema": "C21O_ATOMIC_FOCUSED_STATIC_v1",
+  "status": "PASS_SCOPED",
+  "groups": [
+    {
+      "group": "registry_explicit_approximation_and_source_identity",
+      "status": "PASS",
+      "vendor_files": 7
+    },
+    {
+      "group": "literal_primary_coefficients",
+      "status": "PASS",
+      "photo_values": 36,
+      "RR_values": 24,
+      "RR_max_relative_difference": 0.0,
+      "tolerance_relative": 2e-15
+    },
+    {
+      "group": "initial_abundances_electrons_and_beta_mapping",
+      "status": "PASS",
+      "initial_electrons_per_H": 0.00020000550001000002,
+      "beta_edges": 3
+    },
+    {
+      "group": "positive_generator_invariants_domains_and_LiIV_reachability",
+      "status": "PASS",
+      "redshifts": 6,
+      "energy_partition_max_relative_residual": 2.25193973343092e-16,
+      "LiIV_scope": "positive2-edgegraph_path_and_nonzero_second_Taylor_coefficient;ODE0"
+    },
+    {
+      "group": "analytic_jacobian_and_signed_fresh_rhs",
+      "status": "PASS",
+      "jacobian_entries": 441,
+      "max_entrywise_relative_difference": 4.761257727608273e-16,
+      "max_absolute_difference": 0.0078125,
+      "method": "complex_step_h=1e-30",
+      "complex_step_scope": "fixedH,nHref,T(z),UV(z);all21population_derivatives"
+    },
+    {
+      "group": "bounded_exact_z_cache",
+      "status": "PASS",
+      "redshift_calls": 6,
+      "nextafter_key_checked": true,
+      "coefficient_operator_comparison": "byte_identical",
+      "mutation_guard": "immutable_settings_and_provider_RR_identity",
+      "speedup_claim": null
+    }
+  ],
+  "ODE_runs": 0,
+  "benchmarks": 0,
+  "runtime_seconds": 0.1464742770040175,
+  "source_sha256": {
+    "atomic_network.py": "6730e3091de918f693e02e40b0bdf1fefc543a5dcc4de23efd885ca098e2ed5f",
+    "ATOMIC_SOURCE_MANIFEST.json": "402bd2452f79a88fa060386cfdc6532fd30e6ce8d519c68225fd5204b639f16c",
+    "tests/test_atomic.py": "8864ba93c818a76591ecb8364d64955a6ba4e55442fe5740d6f22f5990f20b4d"
+  },
+  "scope": "static coefficients, finitegenerator, conservation,charge,domain andlocalJacobian checks;not cosmological integration validation",
+  "global_error_bound": null
+}

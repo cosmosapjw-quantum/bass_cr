@@ -1,0 +1,34 @@
+{
+  "schema": "C23A_EXTERNAL_SOURCE_COMPONENT_CONTRACT_V1",
+  "workflow_version": "1.0.0",
+  "approval_protocol_version": "0.2",
+  "source_only_scope": "Explicit H/He five-population fixed-proper-volume, frozen-redshift externally regulated photoionization subflow. No adoption into the original 21-population cosmology.",
+  "initial_conditions": {
+    "neutral": {"populations": {"HI": 1.0, "HII": 0.0, "HeI": 0.083, "HeII": 0.0, "HeIII": 0.0}, "temperature_K": 100.0},
+    "partly_ionized": {"populations": {"HI": 0.5, "HII": 0.5, "HeI": 0.02, "HeII": 0.06, "HeIII": 0.003}, "temperature_K": 10000.0}
+  },
+  "inventory_reference": "one initial hydrogen nucleus; He/H=0.083 is a declared diagnostic component inventory, not the unresolved FS2010 helium normalization",
+  "binding_ev": {"HI": 13.6058, "HeI": 24.59, "HeII": 54.42},
+  "binding_provenance": "C22D explicit model registry; numerical P19 threshold convention is unresolved. These energies define the accounting model and are not a reconstruction of the incident spectrum.",
+  "redshifts": "all 59 P19 arXiv1801.04931v1 fiducial source nodes, 0 through 15.1",
+  "max_rate_duration": [0.0, 0.000001, 0.001, 0.1, 1.0, 10.0, 100.0],
+  "duration_definition": "duration_s = max_rate_duration / max(Gamma_HI,Gamma_HeI,Gamma_HeII); each row is an independent frozen-source exposure, not a cosmological trajectory",
+  "expected_new_source_subflows": 826,
+  "numerical_admission": {"max_rate_duration": 1000000.0, "finite_nonnegative_explicit_inventory": true, "missing_channel": "REJECT", "out_of_source_domain": "REJECT", "population_clipping": false, "renormalization": false},
+  "acceptance_before_run": {
+    "absolute_inventory_residual_per_reference": 0.000000000002,
+    "absolute_charge_event_residual_per_reference": 0.000000000005,
+    "relative_energy_ledger_scale_max_1_ev": 0.00000000000002,
+    "semigroup_absolute_population_per_reference": 0.000000000002,
+    "independent_high_precision_population_absolute": 0.000000000002,
+    "independent_high_precision_event_absolute": 0.000000000005,
+    "independent_relative_above_1e_10": 0.0000000001,
+    "all_outputs_nonnegative_and_finite": true
+  },
+  "not_in_this_component": ["recombination", "collisional ionization", "collisional excitation", "Compton transfer", "secondary electron cascade", "expansion", "finite photon reservoir", "actual stellar emissivity reconstruction", "D/T/Li/isotope rate mapping", "nuclear reactions", "anisotropic atomic stress"],
+  "physics_reuse": "Known positive atomic semigroup and explicit event/energy ownership from prior BASS/REI. Newly authored source-specific implementation, no verbatim donor atomic.py/local.py copy.",
+  "held_scope": ["full nuclear high-energy network", "general triaxial/tilted/polarized CMB"],
+  "historical_ODE_reruns": 0,
+  "new_cosmological_ODE": 0,
+  "global_error_bound": null
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "C23A_EXECUTOR_FAILURE_V1",
+  "recorded_utc": "2026-10-23T01:09:06.082Z",
+  "cwd": "/workspace/scratch/30d955d9ea43",
+  "status": "FAILED",
+  "reported_error": "exec-server connection attempt failed: timed out waiting for exec-server initialize handshake after 10s",
+  "consequences": [
+    "No new local execution or local file save is claimed after this failure",
+    "Interrupted document-publication operations received no ACK; remote branch was checked and still equaled science C",
+    "No science rerun or recovery ODE",
+    "Document publication resumed through available remote Git tools"
+  ],
+  "recovery_sources": {
+    "science_commit": "7643af28c671a7473754a3c2cd0c6e523bd61aac",
+    "main_archive": {
+      "schema": "C23A_LOCAL_RELEASE_RECEIPT_V1",
+      "recorded_utc": "2026-10-22T23:34:46.595129+00:00",
+      "local_path": "/workspace/scratch/30d955d9ea43/c23a_external_sources_20261023/release/BASS_CR_C23A_EXTERNAL_SOURCES_20261023T083445KST.zip",
+      "file_name": "BASS_CR_C23A_EXTERNAL_SOURCES_20261023T083445KST.zip",
+      "size_bytes": 4113907,
+      "sha256": "964c97142d31d0a3b704b226678f736c38682ea5e644a786246aa29f86a6bd30",
+      "payload_files": 438,
+      "payload_bytes": 16645721,
+      "manifest_sha256": "71c5fe9d03e91c1878db221f02e0c4fdf378266920bd859ef641fa49117c3089",
+      "CRC": "ALL_MEMBERS_FULL_READ_PASS",
+      "member_size_SHA256": "ALL_PASS",
+      "parsed_bytes": "SAME_VERIFIED_MEMORY_BYTES",
+      "bad_SHA_rejection": "PASS",
+      "restored_files_this_archive": 0,
+      "new_ODE": 0,
+      "old_ODE_reruns": 0,
+      "PUBLICATION": "7643af28c671a7473754a3c2cd0c6e523bd61aac",
+      "BACKUP": "NOT_ATTEMPTED_AT_LOCAL_SEAL",
+      "DAG": "C10 provider upload and R3 readback next"
+    },
+    "authority": {
+      "file_name": "C23A_FINAL_AUTHORITY_20261023.json",
+      "size_bytes": 26466,
+      "sha256": "6c0dc0013177edf6e8c938e4e5a297d94484199a45aaf26fe68fed440d225f81"
+    }
+  },
+  "source_results_status": "PRESERVED_IN_GIT_AND_VERIFIED_LIBRARY_DROPBOX",
+  "post_failure_document_backup": "GIT_ONLY; not included in the previously sealed science ZIP and not uploaded to Library/Dropbox after environment failure",
+  "gitwire_document_check": "UNAVAILABLE_IN_FAILED_EXECUTOR; exact API ref and affected-document content readback are used and reported separately"
+}

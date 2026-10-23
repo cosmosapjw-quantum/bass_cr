@@ -1,0 +1,133 @@
+{
+  "schema": "C23B_NEXT_DAG_V1",
+  "nodes": [
+    {
+      "id": "N0",
+      "goal": "latest intake and prior final-documents preservation",
+      "status": "COMPLETE_SCOPED",
+      "depends_on": [],
+      "evidence": [
+        "intake/INTAKE_RECEIPT.json",
+        "evidence/C23A_FINAL_DOCUMENTS_PRESERVATION.json"
+      ]
+    },
+    {
+      "id": "N1",
+      "goal": "actual finite3z PW19 photoelectron source",
+      "status": "COMPLETE_SCOPED",
+      "depends_on": [
+        "N0"
+      ],
+      "evidence": [
+        "source_providers/runs/c23b_pw19_spectral_source_20261023_v1/SUMMARY.json"
+      ]
+    },
+    {
+      "id": "N2",
+      "goal": "isotropic massive-electron boost and proper decay clock",
+      "status": "COMPLETE_SCOPED",
+      "depends_on": [
+        "N0"
+      ],
+      "evidence": [
+        "theory/frame_independent/REVIEW_STATUS.json"
+      ]
+    },
+    {
+      "id": "N3",
+      "goal": "positive finite FS contraction and five-fit-label assembly",
+      "status": "COMPLETE_SCOPED",
+      "depends_on": [
+        "N1",
+        "N2"
+      ],
+      "evidence": [
+        "review/integration_c9/REVIEW_KO.md"
+      ]
+    },
+    {
+      "id": "N4",
+      "goal": "low-energy stopping and thermal/nonthermal electron exchange",
+      "status": "OPEN",
+      "depends_on": [
+        "N1",
+        "N3"
+      ],
+      "evidence": [
+        "source_providers/FS_COMPOSITION_CONTRACT.json"
+      ]
+    },
+    {
+      "id": "N5",
+      "goal": "actual atomic-rate and isotope coverage contract",
+      "status": "OPEN",
+      "depends_on": [
+        "N0",
+        "N1"
+      ],
+      "evidence": [
+        "source_providers/ATOMIC_SOURCE_COVERAGE.json",
+        "intake/CR_SOURCE_REUSE.json"
+      ]
+    },
+    {
+      "id": "N6",
+      "goal": "conservative thermochemical and radiative coupling",
+      "status": "OPEN",
+      "depends_on": [
+        "N4",
+        "N5"
+      ],
+      "evidence": [
+        "REPORT_KO.md"
+      ]
+    },
+    {
+      "id": "N7",
+      "goal": "new-input closed-parcel checks then coupled execution",
+      "status": "OPEN",
+      "depends_on": [
+        "N6"
+      ],
+      "evidence": [
+        "README.md"
+      ]
+    },
+    {
+      "id": "N8",
+      "goal": "full high-energy nuclear and general triaxial/tilted/polarized CMB",
+      "status": "HOLD",
+      "depends_on": [],
+      "evidence": [
+        "REPORT_KO.md"
+      ]
+    }
+  ],
+  "next_order": [
+    "N4 and N5 contracts",
+    "implementation",
+    "light validation with new input/source/run identity",
+    "resource+lease admission",
+    "create-only new run",
+    "analysis",
+    "independent review",
+    "publication",
+    "backup byte readback"
+  ],
+  "component_complete_count": 4,
+  "open_count": 4,
+  "hold_count": 1,
+  "counts_are_not_weighted_project_completion": true,
+  "overall_goal_completion_percent": null,
+  "global_error_bound": null,
+  "Drive_preservation": "OPEN; per-artifact receipt controls status",
+  "historical_constraints": [
+    "UNAVAILABLE conversations",
+    "original nuclear PNG NOT_RECOVERED_NOT_READ",
+    "REI220/BASS180 mirror;raw4 PASS_SCOPED only;first127 JSON failure/reintegration preserved",
+    "VigilODE P02 C6FAIL;historical HE85/REI219 unfinished campaigns preserved",
+    "no completed C21O-C23A/NCP51 science reruns",
+    "no cross-ensemble/source mixing;no measured speedup from algebra alone"
+  ],
+  "scientific_delivery": "science C PASS_R1 and main dual R3; final document/transport identity external receipt"
+}

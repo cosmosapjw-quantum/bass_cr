@@ -1,0 +1,119 @@
+{
+  "schema": "C21O_INDEPENDENT_PHYSICS_REVIEW_V1",
+  "reviewer": "/root/theory_literature",
+  "created_utc": "2026-10-21T15:05:38.979635+00:00",
+  "status": "PASS_SCOPED_SOURCE_AND_ALGEBRA",
+  "scope": "One bounded independent read-only source/algebra review; final exact-z atomic cache delta included. NoODE, benchmark, author-test rerun, orproductioncode modification.",
+  "source_sha256": {
+    "atomic_network.py": "6730e3091de918f693e02e40b0bdf1fefc543a5dcc4de23efd885ca098e2ed5f",
+    "coupled_model.py": "6d1c254a5cf68974f9b2509e94dcee78da49beb948b949f56d2836b3d80d9e67",
+    "run_sandbox.py": "b69ac0b982a3db8d87723c1f420306c167656e4b30e0a858192da8203b744bb3",
+    "vendor/atomic/r9_li_thermal_rates.py": "74b2a8c30c62f4a50e7c5c4bcf92cb159549ffcb904a3e423a793169c2f2bb27",
+    "ATOMIC_SOURCE_MANIFEST.json": "402bd2452f79a88fa060386cfdc6532fd30e6ce8d519c68225fd5204b639f16c",
+    "tests/test_atomic.py": "8864ba93c818a76591ecb8364d64955a6ba4e55442fe5740d6f22f5990f20b4d",
+    "../cr_c21n_mass_shell_cache_20261021/builder.py": "5009f638393888f90b1939fdfcb8d386aece2b8f194baa0a54860045756ce274",
+    "../cr_c21n_mass_shell_cache_20261021/mass_shell_derivatives.py": "db108994e96f268e074778a3e763dddc8ca72799541b670aca11bbc728d6ef7c",
+    "../cr_c21l_rei_pilot_20261021/adapter.py": "5461a5062f99f9b1b9569b7cc4c0dadeaad1fd2f3a11ee37777f27ec9479e317",
+    "../cr_c21l_rei_pilot_20261021/vendor/rei/research/rei_bass_hierarchy_backreaction_20261015/canonical_fv_20261015/canonical_fv.py": "91c1641b851aa9580141d4423e2579ced5f11b95aa716b3fc2cb0137df344cc5",
+    "../cr_c21l_rei_pilot_20261021/vendor/rei/research/rei_bass_hierarchy_backreaction_20261015/species_hierarchy.py": "ced7906b35c26d8d0374ee8ce7f67ceb957b51a63d44e5a2661997b7e46983c5",
+    "../cr_c21l_rei_pilot_20261021/vendor/rei/research/rei_bass_hierarchy_backreaction_20261015/lrs_boltzmann.py": "06ef834e4cd7adacf01f0ad6e3becc5aea9a493b5b99fd398be82610543984cc"
+  },
+  "checks": [
+    {
+      "id": "state_registry",
+      "result": "PASS_SCOPED",
+      "evidence": "20 atomic neutral/positive-charge states across7isotopes + free neutron=21; ne algebraic; L8 nk40+21+tau=62; L12 uses56+21+tau=78."
+    },
+    {
+      "id": "normalization_density_units",
+      "result": "PASS_SCOPED",
+      "evidence": "Y_i=scales_i*x_i; nHref0=Omega_b*rhocrit_Jm3/c^2/(m_u*sum_i A_iY_i)/1e6; instantaneous nHref=nHref0/a^3 [cm^-3]; ne=nHref*q.Y. Uses explicit mass-number approximation m_i=A_i*m_u rather than exact isotope masses."
+    },
+    {
+      "id": "charge_baryon_beta",
+      "result": "PASS_SCOPED",
+      "evidence": "PI/RR adjacent charges preserve eachisotope; n->H1_1, T_0->He3_1,T_1->He3_2; eachbeta preservesA andraisesq by1. Charge-neutral electron population therefore increases byone perdecay. Neutron1/meanlife877.75s;Tln2/(12.33Julianyr); historicalconstants andcharge-independentbeta approximation declared."
+    },
+    {
+      "id": "primary_atomic_rates",
+      "result": "PASS_SCOPED",
+      "evidence": "Provider+6officialinputs hash guarded; literalPH2/PH1 andRR coefficient tests read. Mb*1e-18 givescm2; flux c*nphoton [cm^-2s^-1] multipliescm2; RRcm3s^-1 multipliesnecm^-3. LiI usesPH2 below64.39eV and2sPH1above; core omitted. RRproduct-ion labels mapcorrectly;HeIb; isotope-equality optin; noCI/DR/CX/molecules claim."
+    },
+    {
+      "id": "nuclear_support",
+      "result": "PASS_SCOPED",
+      "evidence": "Actual UVcohort energies10,20,40,60,100,150eV belowall six diagram photonuclearthresholds, so channelzero followsfixedspectrum support. Nuclearfusion absentfromselectedclosure, not inferredzero. n/T initialzero isdeclared prior; betas stillimplemented."
+    },
+    {
+      "id": "old40_rhs_and_source",
+      "result": "PASS_SCOPED",
+      "evidence": "Read original CanonicalFVSpecies.rhs; C21O preserves dt/deta,db/deta,scaled-shearforce,du=0 andfourmomentmatrix expressions. Onlyelectronopacity changed tocurrentatomicstate;copiedimmutableSourceLock aend replaced1/3 soxmax=ln7, oldsourceuntouched. BDF isdeclarednewstiffcoupledmodel method; nooldDOP853bitwise trajectoryclaim."
+    },
+    {
+      "id": "tensor_convention",
+      "result": "PASS_SCOPED",
+      "evidence": "Reuses C21N component_fields: sigma diag(-s,-s,2s), stressdiag(-pi_s,-pi_s,2pi_s), fullsigned sqrt6s/H andsqrt6(8piG/c2)pi_s/H2;normabs; pi_s=dp/3. Radiationgamma+nu andsignedtotalsummedbeforeabs. Equivalentto kappa_E=8piG/c4 withHgeom=Ht/c."
+    },
+    {
+      "id": "baryon_no_doublecount",
+      "result": "PASS_SCOPED",
+      "evidence": "Atomicgasrestmass notaddedtoEinsteinenergy; Omega_b normalizesnumberdensity only. Originaldustalreadycontainsbaryons; massiveVlasovfm=.1 retained. gasisotropicpi=0 and thermal/UVexternaltraceclosure explicit. Originalu slotdy3=0 retained."
+    },
+    {
+      "id": "thomson",
+      "result": "PASS_SCOPED",
+      "evidence": "GAMMA_PER_NE=cCGS*sigmaTcm2; Gamma/H dimensionless. PhotonE,N only collide; Thomsoncoeff[0]=0,[2]=.9,otherell1. Neutrinos remaincollisionless. thomson-offcontrol retainsphysical opticaldepth diagnostic while removingmomentfeedback."
+    },
+    {
+      "id": "analytic_jacobian",
+      "result": "PASS_SCOPED_SOURCE_ALGEBRA",
+      "evidence": "hg_b=-3H0^2*pi_m_norm/H; hg_scaledS=Href*s/H; hg_E0species=H0^2Omega/(2Ha4). pgrad_b frompacketdifferentials atb_eta1minus0. Product/quotientrules forv=s/H,Gamma/H andshearforce matchRHS. AtomicJy=P+B+nHref[(q.Y)R+(RY)q^T], then D^-1JyD/H; crossblocks -rhs_atomic/H outerhg andphoton chargegradientincluded; noatomiccontributiontoH bytraceclosure. Full62 finite-difference test ownedbyroot, notrerunhere."
+    },
+    {
+      "id": "exact_rate_cache",
+      "result": "PASS_SCOPED_SOURCE_ALGEBRA",
+      "evidence": "Oneentry binary64zkey; prescribedUV/T onlydependon z; n_e dependence remainsoutsidecache. Config/operator arrays immutable;guard checksproviderRRrows. Cachedrate/operatorbyteidentityauthorchecks read; nointerpolation/speedupclaim."
+    },
+    {
+      "id": "sampled_positivity_and_residual_guard",
+      "result": "PASS_SCOPED_SOURCE_REVIEW",
+      "evidence": "Scientificsavedstateguard checksatomicnonnegativity/baryon,sourceHamiltonian,massive/radiationnumber,1025mu reconstruction ofE/N foursectors,|b|<=1. Finiteangularsampling notglobaltheorem. Noactualnewtrajectory/plotread atthisreviewtime."
+    }
+  ],
+  "P0_findings": [],
+  "nonblocking_observations": [
+    {
+      "id": "mass_convention",
+      "action": "Expose m_i=A_i*m_u approximation inphysicsreport/manifest; do notdescribe normalization as exactatomicmasses."
+    },
+    {
+      "id": "trace_energy_diagnostic",
+      "action": "Current200eVperbaryon diagnostic islabelled thermal/bindingscale; it excludesindependentlyspecifiedUVenergy andisnot aglobalnumericalormissingphysicsbound."
+    },
+    {
+      "id": "worker_source_freeze",
+      "action": "run_sandbox currentlypassesexpectedsourceSHAwithoutworker recomputation. Keepactualsourcefrozen; optionalsmallworker-checkhardening belongsroot/operations, not currentphysicsP0."
+    }
+  ],
+  "author_evidence_read": {
+    "path": "/workspace/scratch/10765dc22dcf/c21o_atomic_focused_v2.json",
+    "sha256": "716661178c5c5a0fc9af07df32993719a6df84de308ea3e155c83209ffa0c7de",
+    "status": "PASS_SCOPED6groups",
+    "author_ODE_runs": 0,
+    "reviewer_reruns": 0,
+    "atomicJacobian441entry_maxrelative": 4.761257727608273e-16
+  },
+  "not_run_by_reviewer": [
+    "full62FDtest",
+    "cosmologicalODE",
+    "performancebenchmark",
+    "plotvisualreview",
+    "PDFseparaterasterreview"
+  ],
+  "pending_actual_results": [
+    "rootfull62FDreceipt",
+    "actualsavedtrajectorydiagnostics",
+    "directPNGreadingonceavailable"
+  ],
+  "global_error_bound": null
+}

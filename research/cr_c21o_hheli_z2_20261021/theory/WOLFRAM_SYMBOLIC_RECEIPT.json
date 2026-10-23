@@ -1,0 +1,14 @@
+{
+  "scope": "Formal tensor contractions, unit restoration and atomic charge/baryon identities; not a numerical trajectory verification.",
+  "code": "Clear[s, pm, pg, pn, H, c, kap, nH, ne, alpha, gam, Y0, Y1];\nsig=DiagonalMatrix[{-s,-s,2s}];\np[x_]:=DiagonalMatrix[{-x,-x,2x}];\nsigma2=Tr[Transpose[sig].sig];\np2=Tr[Transpose[p[pm]].p[pm]];\ntotal2=Tr[Transpose[p[pm+pg+pn]].p[pm+pg+pn]];\nionR={-gam*Y0+alpha*ne*Y1,gam*Y0-alpha*ne*Y1};\nbetaN={-1,0,1,1}; (* n,H0,H+,e- *)\nbetaT0={-1,1,1}; (* T0,He3+,e- *)\n<|\"sigmaFullSquared\"->sigma2,\"matterFullSquared\"->p2,\"totalFullSquared\"->total2,\"shearStressWork\"->Tr[sig.p[pm]],\n\"ionNucleusInvariant\"->Simplify[Total[ionR]],\n\"neutronBaryonInvariant\"->{1,1,1,0}.betaN,\n\"neutronChargeInvariant\"->{0,0,1,-1}.betaN,\n\"tritiumBaryonInvariant\"->{3,3,0}.betaT0,\n\"tritiumChargeInvariant\"->{0,1,-1}.betaT0,\n\"properTimeKappa\"->FullSimplify[(c^2*kap)*Sqrt[6]*pm/H^2]|>",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Symbol::undefined2: Warning: Global symbols \"H, Y0, Y1, Y0, Y1, Y0, Y1, H\" are undefined.\nGeneral::messages: Messages were generated which may indicate errors.\n\nOut[1]= <|\"sigmaFullSquared\" -> 6*s^2, \"matterFullSquared\" -> 6*pm^2, \"totalFullSquared\" -> 2*(-pg - pm - pn)^2 + 4*(pg + pm + pn)^2, \"shearStressWork\" -> 6*pm*s, \"ionNucleusInvariant\" -> 0, \"neutronBaryonInvariant\" -> 0, \"neutronChargeInvariant\" -> 0, \"tritiumBaryonInvariant\" -> 0, \"tritiumChargeInvariant\" -> 0, \"properTimeKappa\" -> (Sqrt[6]*c^2*kap*pm)/H^2|>"
+      }
+    ],
+    "structuredContent": null,
+    "isError": false
+  }
+}

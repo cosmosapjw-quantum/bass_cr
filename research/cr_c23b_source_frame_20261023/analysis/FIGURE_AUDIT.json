@@ -1,0 +1,251 @@
+{
+  "schema": "C23B_FIGURE_HOSTILE_AND_RESIDUAL_AUDIT_V1",
+  "created_utc": "2026-10-23T03:18:01.744582+00:00",
+  "authoritative_run": "c23b_saved_analysis_20261023_v3",
+  "hostile_result": "PASS_SCOPED",
+  "residual_result": "PASS_SCOPED",
+  "protocol_pins": {
+    "07-Figure-Residual-Error-Pass.txt": {
+      "bytes": 3315,
+      "sha256": "37b64cd6d232b3525a838f2f23a05ca44aa99c6362f0a28b695397fbbffc8e22"
+    },
+    "08-Figure-Hostile-Audit.txt": {
+      "bytes": 5183,
+      "sha256": "46b920c886549a228876ddb7b5651d1a213ff9ad4669843ea4afc3700b4f5bbc"
+    }
+  },
+  "initial_ledger": "AUDIT_LEDGER_INITIAL.json",
+  "revision_history": [
+    {
+      "run": "c23b_saved_analysis_20261023_v1",
+      "verdict": "REVISE",
+      "evidence": "AUDIT_V1_FINDINGS.json; all four v1 PNGs actually viewed"
+    },
+    {
+      "run": "c23b_saved_analysis_20261023_v2",
+      "verdict": "MINOR_REVISE",
+      "evidence": "all text boxes inside canvas; actual source-guide crossing of legend text remained"
+    },
+    {
+      "run": "c23b_saved_analysis_20261023_v3",
+      "verdict": "PASS_SCOPED",
+      "evidence": "source legend background repaired; root opened all four final PNGs and reported no further edits needed"
+    }
+  ],
+  "bounded_hostile_questions": [
+    {
+      "question": "Is the source ordinate an evaluated continuous physical spectrum?",
+      "answer": "No. It is the stated energy-weighted histogram of finite positive saved quadrature; sparse empty bins make no continuous-zero claim.",
+      "status": "PASS_SCOPED"
+    },
+    {
+      "question": "Does aggregation preserve saved energy and normalization?",
+      "answer": "Weights retain per-absorbing-target per-proper-second units; histogram sum residual <= 6.5607210040808844e-15 and all derived numerical files are unchanged across revisions.",
+      "status": "PASS_SCOPED"
+    },
+    {
+      "question": "Is finite FS energy coverage presented as physical deposition?",
+      "answer": "No. Captions preserve composition/stopping admission and thermal/radiative closure as open, with global_error_bound null.",
+      "status": "PASS_SCOPED"
+    },
+    {
+      "question": "Are small tails and missing source support hidden?",
+      "answer": "No. Above-FS finite-source fractions are printed; photon-fit support ends at 50 keV; injection from higher photons is unresolved rather than set to zero.",
+      "status": "PASS_SCOPED"
+    },
+    {
+      "question": "Are mean-line and endpoint measures described as evaluated beta spectra?",
+      "answer": "No. Both figures and captions explicitly label mathematical diagnostics with equal rest count/mean and allowed support interval.",
+      "status": "PASS_SCOPED"
+    },
+    {
+      "question": "Does the plot imply interpolation in u or response accuracy?",
+      "answer": "No. Only eight saved u positions per witness are plotted, with no connecting lines and with the categorical spacing and visual offsets disclosed; interpolation_accuracy_claim=false.",
+      "status": "PASS_SCOPED"
+    },
+    {
+      "question": "Are both publication widths actually usable?",
+      "answer": "Yes within visual-review scope. 90 mm source fractions use a table; boost panels are stacked. Minimum recorded text is 8 pt and all visible text boxes are inside the canvas. Root independently inspected all four v3 PNGs.",
+      "status": "PASS_SCOPED"
+    },
+    {
+      "question": "Are C23A D1 and C23B spectra or model conventions mixed?",
+      "answer": "No. Six exact saved C23B CSV/JSON input pins are the only numerical inputs. D1 is not consumed. Fit thresholds are identified as adopted rounded fit parameters.",
+      "status": "PASS_SCOPED"
+    }
+  ],
+  "bounded_residual_questions": [
+    {
+      "question": "Was the v1 clipped y-axis label repaired without shrinking the font?",
+      "answer": "Yes; physical-mm left margins were enlarged; final minimum text is >=8 pt at each width.",
+      "status": "PASS"
+    },
+    {
+      "question": "Do legends, panel titles, axis labels or footers still overlap?",
+      "answer": "None were found in actual v3 PNG review; dedicated bands are used, and source legend has opaque white backing.",
+      "status": "PASS"
+    },
+    {
+      "question": "Can a tiny high-energy fraction be mistaken for exact zero?",
+      "answer": "The high fractions are written numerically in both layouts; the 90 mm plot uses an explicit table.",
+      "status": "PASS"
+    },
+    {
+      "question": "Did any repair change numeric data or rerun physics?",
+      "answer": "The three numerical products are byte-identical across v1-v3; boost PNGs v2-v3 are byte-identical; source/ODE/transform calls remain zero.",
+      "status": "PASS"
+    },
+    {
+      "question": "Was the exported PDF inspected as well as the PNG?",
+      "answer": "PDF page dimensions, text and extracted embedded font bytes were checked. Separate PDF rasterization was NOT_RUN. The actual visual surface was the corresponding Matplotlib PNG, independently reviewed by root.",
+      "status": "PASS_SCOPED_WITH_EXPLICIT_PDF_RASTER_LIMIT"
+    }
+  ],
+  "contrastive_review": {
+    "compared_actual_artifacts": [
+      "v1 source stacked bars at 90 mm",
+      "v2/v3 source reflow table at 90 mm"
+    ],
+    "decision": "Retain numeric table at 90 mm so the 9.4% segment cannot crowd its own label; retain explicit tiny-tail numbers and finite-support/deposition notes because removing them would lose interpretation.",
+    "unrendered_alternative_claim": false
+  },
+  "text_extent_checks": [
+    {
+      "figure": "primary_electron_source_180mm",
+      "width_mm": 180,
+      "outside_canvas_text_count": 0,
+      "minimum_font_pt": 8.4
+    },
+    {
+      "figure": "boost_finite_energy_coverage_180mm",
+      "width_mm": 180,
+      "outside_canvas_text_count": 0,
+      "minimum_font_pt": 8.4
+    },
+    {
+      "figure": "primary_electron_source_90mm",
+      "width_mm": 90,
+      "outside_canvas_text_count": 0,
+      "minimum_font_pt": 8.0
+    },
+    {
+      "figure": "boost_finite_energy_coverage_90mm",
+      "width_mm": 90,
+      "outside_canvas_text_count": 0,
+      "minimum_font_pt": 8.0
+    }
+  ],
+  "embedded_font_checks": [
+    {
+      "pdf": "boost_finite_energy_coverage_180mm.pdf",
+      "embedded_fonts": [
+        {
+          "name": "GCWXDV+DejaVuSans-Oblique",
+          "extension": "ttf",
+          "embedded_bytes": 3480,
+          "sha256": "b6f02bf7a6aac30fbf15883faf6f00499ca40a150ac90a34ba7a9c25c3332dad"
+        },
+        {
+          "name": "BMQQDV+DejaVuSans",
+          "extension": "ttf",
+          "embedded_bytes": 16640,
+          "sha256": "53403c3c4bf3efda20ccbde34e298b2780e18c4015bdb2070511ec58d4267dd6"
+        }
+      ]
+    },
+    {
+      "pdf": "boost_finite_energy_coverage_90mm.pdf",
+      "embedded_fonts": [
+        {
+          "name": "GCWXDV+DejaVuSans-Oblique",
+          "extension": "ttf",
+          "embedded_bytes": 3480,
+          "sha256": "b6f02bf7a6aac30fbf15883faf6f00499ca40a150ac90a34ba7a9c25c3332dad"
+        },
+        {
+          "name": "BMQQDV+DejaVuSans",
+          "extension": "ttf",
+          "embedded_bytes": 16572,
+          "sha256": "c0442ce2799f40b2aa83d9585d03c670419d943d838c50222a5ce498fe0486ac"
+        }
+      ]
+    },
+    {
+      "pdf": "primary_electron_source_180mm.pdf",
+      "embedded_fonts": [
+        {
+          "name": "EVICAO+DejaVuSans-Bold",
+          "extension": "ttf",
+          "embedded_bytes": 4688,
+          "sha256": "45e634d5ec5027db0ffd92310d78cb8228e2349e40014cb7e0d84aaa1f12c03d"
+        },
+        {
+          "name": "GCWXDV+DejaVuSans-Oblique",
+          "extension": "ttf",
+          "embedded_bytes": 3248,
+          "sha256": "81e14c6077073c9be07ee58c045bd3c67b789b8c71578c44150fabdeb080b6d7"
+        },
+        {
+          "name": "BMQQDV+DejaVuSans",
+          "extension": "ttf",
+          "embedded_bytes": 17880,
+          "sha256": "23ad3bffbda7df7ede708d48d16a558109bbe9c46f90d2b2810efb2634b61038"
+        }
+      ]
+    },
+    {
+      "pdf": "primary_electron_source_90mm.pdf",
+      "embedded_fonts": [
+        {
+          "name": "EVICAO+DejaVuSans-Bold",
+          "extension": "ttf",
+          "embedded_bytes": 4688,
+          "sha256": "45e634d5ec5027db0ffd92310d78cb8228e2349e40014cb7e0d84aaa1f12c03d"
+        },
+        {
+          "name": "GCWXDV+DejaVuSans-Oblique",
+          "extension": "ttf",
+          "embedded_bytes": 3248,
+          "sha256": "81e14c6077073c9be07ee58c045bd3c67b789b8c71578c44150fabdeb080b6d7"
+        },
+        {
+          "name": "BMQQDV+DejaVuSans",
+          "extension": "ttf",
+          "embedded_bytes": 18012,
+          "sha256": "17cc6720fdcd3955687808e390a65dcad6fca6a979543dff956922fb5b349c39"
+        }
+      ]
+    }
+  ],
+  "numeric_revision_identity": {
+    "source_histogram_bins.csv": {
+      "v1_v2_v3_byte_identical": true,
+      "bytes": 14580,
+      "sha256": "2f1583de00f79b078546f0bc213bdddd7c433143c0cbe9e5acfd124f63ebf521"
+    },
+    "SOURCE_FRACTIONS.json": {
+      "v1_v2_v3_byte_identical": true,
+      "bytes": 679,
+      "sha256": "78ce35253e70b1afc7c3e519f5853d092791b0984a5a25dedc582b091309f217"
+    },
+    "boost_coverage.csv": {
+      "v1_v2_v3_byte_identical": true,
+      "bytes": 2167,
+      "sha256": "1e036a727cbf7f13c574a0027f574da265a2e01e4bd5d3665c5c33cac5e35523"
+    }
+  },
+  "visual_review": {
+    "child": "Actually viewed all v1/v2 variants and both changed v3 source PNGs; unchanged v3 boost PNGs byte-verified against reviewed v2",
+    "root": "Parent /root confirmed actual opening of all four v3 PNGs; no clipping or overlap; no further edits requested",
+    "pdf_rasterization": "NOT_RUN"
+  },
+  "remaining_blocking_figure_findings": [],
+  "science_scope_limits": [
+    "Finite quadrature histogram only",
+    "No evaluated beta spectrum admission",
+    "No FS gas-composition or stopping closure",
+    "No interpolation-accuracy claim",
+    "No global physical error bound"
+  ],
+  "global_error_bound": null
+}

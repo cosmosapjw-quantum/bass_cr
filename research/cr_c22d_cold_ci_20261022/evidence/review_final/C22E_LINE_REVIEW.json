@@ -1,0 +1,45 @@
+{
+  "schema": "C22E_BOUNDED_LINE_ADMISSION_INDEPENDENT_REVIEW_V1",
+  "utc": "2026-10-22T17:46:14.576054+00:00",
+  "status": "PASS_SCOPED",
+  "blocking_findings": [],
+  "required_claim_corrections": [],
+  "independent_static_reviewer": "/root/c22d_final_review/ledger_source_audit",
+  "handoff_reviewer": "/root/c22d_final_review",
+  "reviewed_files": [
+    {
+      "path": "/workspace/scratch/30d955d9ea43/c22d_20261022/line_admission/diagnose_line_admission.py",
+      "size_bytes": 19254,
+      "sha256": "3aad73943f5dad91a524faefc63e80c20477ba941c094a7a3953ab4d6df2b0e3"
+    },
+    {
+      "path": "/workspace/scratch/30d955d9ea43/c22d_20261022/line_admission/c22e_line_admission_20261022_v1/LINE_ADMISSION.json",
+      "size_bytes": 16305,
+      "sha256": "d9d736dab2f2b686f4eac0101c11bbe8ac05bf2ea1ec0c7803a1de55fea7efbd"
+    }
+  ],
+  "checks": {
+    "directional_expansion": "a_perp=a exp(-b), a_parallel=a exp(2b), s=db/dt => H_perp=H-s, H_parallel=H+2s => H_gamma=H+s(3mu^2-1); correct sign and s^-1 units.",
+    "angle_extrema": "Affine in mu^2 in [0,1]; endpoints give exact directional extrema at each observed time.",
+    "event_rate_units": "eta=ln(a/ai) gives deta/dt=H; events/Href/eta * H = events/Href/s. Href is abundance normalization, distinct from Hubble H.",
+    "signed_fields": "Uses saved signed H and s directly; checks signed_Sigma_F=sqrt(6)*s/H, without inferring sign from norm.",
+    "samples": "804 saved and8047 accepted samples over8 case-mesh pairs.",
+    "null_admission": "All8 physical_admission=REGIME_NOT_ESTABLISHED; lifetime/residence/excitedfraction/destruction/lineopticaldepth/escapeprobability null with missing real sources/geometry.",
+    "scope": "Positive redshift at sampled angular extrema does not establish perfect escape or line closure; no inter-sample bound.",
+    "initial_LRS_ratio": "min/H=0.8775255128608411 and max/H=1.2449489742783177 are consistent with initial signedSigma_F=.3 and s/H=.3/sqrt6."
+  },
+  "activity": {
+    "ODE": 0,
+    "RHS": 0,
+    "provider": 0,
+    "original_mutations": 0,
+    "inspection": "Code/JSON read-only; JSON sample-count sum and elementary symbolic source reasoning, no research runtime import."
+  },
+  "global_error_bound": null,
+  "stage": {
+    "EXECUTION": "BOUNDED_C9_STATIC_REVIEW_COMPLETE_SCOPED",
+    "PUBLICATION": "PARENT_OWNS_FINAL_PACKAGE",
+    "BACKUP": "PARENT_OWNS_PROVIDER_ACK",
+    "DAG": "REGIME_NOT_ESTABLISHED retained; obtain geometry and atomic line/branching/mixing/secondary sources before physical closure admission"
+  }
+}

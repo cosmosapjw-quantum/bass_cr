@@ -1,0 +1,43 @@
+[
+  {
+    "class": "environment",
+    "action": "default sandbox HTTP FG20 author page",
+    "result": "PermissionError(1, Operation not permitted)",
+    "resolution": "approved public read attempted with escalation, received HTTP502",
+    "receipt": "sources/FG20_AUTHOR_PAGE_RECEIPT.json"
+  },
+  {
+    "class": "external_input",
+    "action": "FG20 author page actual HTTP",
+    "result": "HTTP502",
+    "resolution": "authoritative P19v1 alternative source adopted explicitly",
+    "receipt": "sources/FG20_AUTHOR_PAGE_ESCALATED_RECEIPT.json"
+  },
+  {
+    "class": "environment",
+    "action": "BeautifulSoup import",
+    "result": "ModuleNotFoundError: No module named 'bs4'",
+    "resolution": "stdlib HTMLParser used without installing dependencies"
+  },
+  {
+    "class": "environment",
+    "action": "WolframContext",
+    "result": "INTERNAL ERROR",
+    "resolution": "direct Wolfram evaluator used with explicit code; actual outputs preserved",
+    "receipt": "WOLFRAM_RECEIPTS.json"
+  },
+  {
+    "class": "numerical_implementation",
+    "action": "log interpolation of exact plateau",
+    "result": "two same-endpoint rates changed by exp(log(rate));bound assertion failed",
+    "resolution": "exact equal-endpoint branch;rate data and tolerance unchanged;targeted validationv2 PASS",
+    "receipts": [
+      "P19_VALIDATION.json",
+      "P19_VALIDATION_v2.json"
+    ],
+    "old_code": [
+      "p19_uvb_attempt1.py",
+      "validate_p19_attempt1.py"
+    ]
+  }
+]

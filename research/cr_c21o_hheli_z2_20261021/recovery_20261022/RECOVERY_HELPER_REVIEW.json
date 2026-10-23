@@ -1,0 +1,153 @@
+{
+  "schema": "C21O_RECOVERY_HELPER_REVIEW_V1",
+  "scope": "C10 restore helper and exact recovery/reanalysis claims; no new science audit",
+  "reviewer": "/root/resume_guidance",
+  "reviewed_source_sha256": "982d3ab8abbe41bd4c09278a7cfc315e20eb500ec759e9cf32a746a54fa8d0f7",
+  "reviewed_source_path": "/workspace/scratch/10765dc22dcf/resume_20261022/restore_c21o.py",
+  "verdict": "READY_SCOPED_WITH_NONBLOCKING_SOURCE_BUFFER_HARDENING",
+  "blocking_findings": [],
+  "findings": [
+    {
+      "id": "RH1",
+      "severity": "P3",
+      "blocking_relevance": "NONBLOCKING_HARDENING_FOR_FUTURE_REUSE",
+      "location": "checked_members: pinned_bytes(path, role) then zipfile.ZipFile(path)",
+      "observed_defect": "The validated archive bytes are discarded, then the same filesystem path is reopened. Parsing is not bound atomically to the validated buffer if the input is replaced between reads. No such replacement was observed in this run.",
+      "impact": "The generic helper has a check/use race. Existing restored bytes were independently matched below against pinned manifests; this finding does not invalidate current recovered science.",
+      "smallest_correction": "Parse io.BytesIO(pinned_bytes(path, role)) rather than reopening path.",
+      "status": "REPORTED_TO_PARENT"
+    }
+  ],
+  "checks": {
+    "create_only_output": "Existing output rejected; mkdir exist_ok=False and xb research files prevent ordinary overwrite. Metadata directory is created fresh before writes.",
+    "member_traversal": "Absolute paths, .., backslash, colon, duplicate members and symlink members rejected before filesystem writes. Pinned fixed archive input scope.",
+    "manifest_binding": "Members checked against SHA256 and size plus Git blob SHA1 when present; unmanifested payload rejected; CRC checked by zip read.",
+    "overlay_scope": "Pinned document archive contains exactly11 research md/json paths; inspected names are documents/receipts; six replace content and five add. No science source/raw overlay.",
+    "restored_research_files_checked": 327,
+    "restored_research_file_mismatches": [],
+    "git_blob_identities_checked": 316,
+    "output_file_pairs_checked": 15,
+    "output_pairs_all_byte_equal": true,
+    "pairs": [
+      {
+        "name": "COUPLING_AND_NUMERICS.pdf",
+        "byte_equal": true,
+        "both_sha_match_receipt": true,
+        "size_match_receipt": true
+      },
+      {
+        "name": "COUPLING_AND_NUMERICS.png",
+        "byte_equal": true,
+        "both_sha_match_receipt": true,
+        "size_match_receipt": true
+      },
+      {
+        "name": "ENDPOINTS45.csv",
+        "byte_equal": true,
+        "both_sha_match_receipt": true,
+        "size_match_receipt": true
+      },
+      {
+        "name": "ENDPOINT_SLICES45.pdf",
+        "byte_equal": true,
+        "both_sha_match_receipt": true,
+        "size_match_receipt": true
+      },
+      {
+        "name": "ENDPOINT_SLICES45.png",
+        "byte_equal": true,
+        "both_sha_match_receipt": true,
+        "size_match_receipt": true
+      },
+      {
+        "name": "ENSEMBLE45.npz",
+        "byte_equal": true,
+        "both_sha_match_receipt": true,
+        "size_match_receipt": true
+      },
+      {
+        "name": "ION_EVOLUTION21.pdf",
+        "byte_equal": true,
+        "both_sha_match_receipt": true,
+        "size_match_receipt": true
+      },
+      {
+        "name": "ION_EVOLUTION21.png",
+        "byte_equal": true,
+        "both_sha_match_receipt": true,
+        "size_match_receipt": true
+      },
+      {
+        "name": "ION_HISTORY45.csv",
+        "byte_equal": true,
+        "both_sha_match_receipt": true,
+        "size_match_receipt": true
+      },
+      {
+        "name": "OUTPUT_MANIFEST.json",
+        "byte_equal": true,
+        "both_sha_match_receipt": true,
+        "size_match_receipt": true
+      },
+      {
+        "name": "SIGNED_CANCELLATION.pdf",
+        "byte_equal": true,
+        "both_sha_match_receipt": true,
+        "size_match_receipt": true
+      },
+      {
+        "name": "SIGNED_CANCELLATION.png",
+        "byte_equal": true,
+        "both_sha_match_receipt": true,
+        "size_match_receipt": true
+      },
+      {
+        "name": "STRESS_EVOLUTION45.pdf",
+        "byte_equal": true,
+        "both_sha_match_receipt": true,
+        "size_match_receipt": true
+      },
+      {
+        "name": "STRESS_EVOLUTION45.png",
+        "byte_equal": true,
+        "both_sha_match_receipt": true,
+        "size_match_receipt": true
+      },
+      {
+        "name": "SUMMARY.json",
+        "byte_equal": true,
+        "both_sha_match_receipt": true,
+        "size_match_receipt": true
+      }
+    ],
+    "no_ODE_scope": "Helper has no scientific imports/calls. Reanalysis command ran analyze.py against saved runs with exit0; analyze AST has no integrate/solve_ivp/run_case named calls. No ODE executed by reviewer.",
+    "analysis_imports": [
+      "from __future__ import annotations",
+      "import argparse",
+      "import csv",
+      "import hashlib",
+      "import json",
+      "import os",
+      "from pathlib import Path",
+      "import numpy as np",
+      "import matplotlib",
+      "import matplotlib.pyplot as plt",
+      "from matplotlib.lines import Line2D"
+    ],
+    "analysis_integration_named_calls": [],
+    "new_ODE_integrations": 0,
+    "new_builds": 0,
+    "global_error_bound": null
+  },
+  "limitations": [
+    "Review is a focused code/provenance pass, not an adversarial filesystem concurrency test or full scientific validation.",
+    "Current receipt/payload identity was checked; external provider mutation status belongs to separate intake.",
+    "Interrupted partial restore remains a partial fresh directory and requires a different fresh output; helper does not claim transactional rollback."
+  ],
+  "skill_context_used": [
+    "PhysMath Research Loop1.3.0 C10",
+    "POLICY_INTEGRATION typed identity, finite bounded verification, no completed science replay"
+  ],
+  "execution_command": "python read-only manifest/blob/pair comparison and analyze.py AST inspection",
+  "command_exit_code": 0
+}
