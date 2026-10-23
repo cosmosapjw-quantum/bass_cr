@@ -1,0 +1,45 @@
+{
+  "schema": "he38.handoff_acceptance_correction.v1",
+  "created_utc": "2026-10-23T04:33:30.870392+00:00",
+  "status": "CORRECTED_ACKNOWLEDGED_PUBLISHED_AND_INDEPENDENTLY_CLOSED",
+  "finding": "N1A future angular acceptance must distinguish heavy-target electron energy from finite-mass electron-plus-ion energy.",
+  "before": "같은 사건 단면적의 inclusive outgoing measure가 count2,energyE-I 및 D(E)=integral epsilon*P2(coschi)를 함께 공급해야 한다. DDCS의 labels/exchange/slow-electron support와 lab/relative-energy convention을 대조한다.",
+  "after": "같은 사건 단면적과 frame의 inclusive electron measure가 count2를 공급해야 한다. Heavy-target track은 electron energy 합 E-I와 D(E)=integral epsilon*P2(coschi)를 검증한다. Finite-mass track은 count2 electron measure와 ion momentum/energy/STF를 함께 공급하여 total outgoing COM kinetic energy E-I를 검증하고, electron D(E)도 같은 frame에서 정의한다. DDCS의 labels/exchange/slow-electron support와 lab/relative-energy convention을 대조한다.",
+  "physical_identity": "In the outgoing COM, E_e1 + E_e2 + E_p = E-I. Electron-only energy equals E-I only in the stated heavy-target limit.",
+  "affected_files": [
+    "NEXT_DAG.json",
+    "HANDOFF_PROTOCOL.md",
+    "SCIENCE_MANIFEST.json"
+  ],
+  "current_HE38_model_or_numeric_result_changed": false,
+  "new_scientific_execution": 0,
+  "new_IVP": 0,
+  "new_render": 0,
+  "new_benchmark": 0,
+  "original_C10_commit": "6790005d5a0b7b0dceedeedd4f3687b94202ed54",
+  "before_science_manifest_sha256": "e4f252771f259ba069ea3aa0ea9c17a2e06114418d09033c9b0f1f14aed94b97",
+  "after_science_manifest_sha256": "3f007ee7b98ca38ce30968fe6eb9dbd984319186bbd6166c5a021d05ee657ae3",
+  "superseded_final_archive": {
+    "schema": "he38.final_archive_job.v1",
+    "created_utc": "2026-10-23T04:32:17.842413+00:00",
+    "archive": "/tmp/BASS_HE_HE38_FMG_FINAL_20261023T043217Z.tar.gz",
+    "archive_sha256": "0f1749d2e1adb87f3dd697fe6331d945bbda9b279ca2232453113da4a7311733",
+    "archive_size": 1378742,
+    "payload_count": 201,
+    "manifest": "delivery/FINAL_PAYLOAD.json",
+    "science_commit": "6790005d5a0b7b0dceedeedd4f3687b94202ed54",
+    "science_manifest_sha256": "e4f252771f259ba069ea3aa0ea9c17a2e06114418d09033c9b0f1f14aed94b97",
+    "workflow_version": "1.0.0",
+    "approval_version": "0.2",
+    "stages_completed": 20,
+    "stage_archives_acknowledged": 20,
+    "stage_commits_published": 20,
+    "archive_policy": "Full unit at C10 acceptance; final provider ACK and concrete handoffs are delivered by the subsequent metadata commit and external delivery receipt archive, avoiding self-reference.",
+    "upload_status": "PREPARED_NOT_UPLOADED"
+  },
+  "review_author": "Independent HE38 reviewer; final report/handoff read-only audit",
+  "completion_evidence": [
+    "delivery/HANDOFF_CORRECTION_ACK.json",
+    "delivery/HANDOFF_CORRECTION_CLOSURE.json"
+  ]
+}

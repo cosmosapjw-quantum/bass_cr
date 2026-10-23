@@ -1,0 +1,357 @@
+{
+  "schema": "PHYS83_HI_CE_SOURCE_CONTRACT_V1",
+  "prepared_utc": "2026-10-23T03:43:29.019456+00:00",
+  "status": "SOURCE_BOUND_FINITE_HI_1S_2S_2P_SUBSET_READY_FOR_PARENT_ADMISSION",
+  "skill_context_used": {
+    "version": "PhysMath Research Loop1.3.0",
+    "package": "c38/physmath-research-loop",
+    "read_resources": [
+      "SKILL.md",
+      "references/POLICY_INTEGRATION.md",
+      "references/THEORY_LOOP.md"
+    ],
+    "selected_stages": "R2/R3 source research only",
+    "scope_rules": [
+      "primary source facts separated from chosen interpolation and radiation closure",
+      "no old result replay",
+      "no recursive review",
+      "typed byte identity and finite source domain",
+      "native subtask of parent-selected full loop"
+    ]
+  },
+  "candidates": [
+    {
+      "name": "CCC author H I LS cross sections",
+      "decision": "SELECTED",
+      "basis": "Actual state-resolved excitation and reciprocal de-excitation tables with explicit energy and area units, dense near-threshold grid, finite support and machine-readable raw bytes."
+    },
+    {
+      "name": "CHIANTI H I effective collision strengths",
+      "decision": "ALTERNATIVE_NOT_ACTIVATED; radiative A and level metadata adopted separately",
+      "basis": "Official scaled Maxwellian effective strengths from Anderson2000 revised2002; not cross sections. Original correction/source temperature domain and scaling require separate implementation if activated."
+    },
+    {
+      "name": "Benda-Houfek2018 ECS low-energy data",
+      "decision": "DEFERRED",
+      "basis": "Primary authors describe resonance-resolved data below n=4 threshold and detailed-balance consistency; no raw T-matrix data incorporated in this unit."
+    }
+  ],
+  "CCC_archive": {
+    "url": "https://atom.curtin.edu.au/CCC-DB/H/I/ELECTRON_IMPACT/e-H_XSEC_LS.zip",
+    "path": "/tmp/phys83_work_20261023/sources/e-H_XSEC_LS.zip",
+    "bytes": 7010887,
+    "sha256": "57730e72656639e92c47c1b8457db0edac5a69ae93db6c357471a93759af1fc9",
+    "members": 3162,
+    "total_uncompressed_bytes": 26428148
+  },
+  "CCC_public_index": {
+    "url": "https://atom.curtin.edu.au/ccc-db/index.html",
+    "downloaded_sha256": "04a78c3decb5d7ccc57572b143b8409b6ce79a85c43d8c02b6bb046946ca55f9",
+    "declared_hydrogen_dataset": "complete n_i<=9 as at August2026",
+    "archive_HTTP_last_modified": "Mon, 12 Oct 2026 13:11:04 GMT",
+    "note": "Declared data month and observed archive timestamp are distinct metadata; actual snapshot identified by SHA."
+  },
+  "selected_raw_members": {
+    "README": {
+      "member": "README",
+      "path": "/tmp/phys83_work_20261023/sources/CCC_README",
+      "bytes": 676,
+      "sha256": "f48aa3eee41e3dd78c887218b64e097490fb50c17b5b15840a701cc9ef984ece"
+    },
+    "2S.1S": {
+      "member": "2S.1S",
+      "path": "/tmp/phys83_work_20261023/sources/CCC_2S.1S",
+      "bytes": 29393,
+      "sha256": "e8e0092e7be97abe4a90ce100e3101d1f6f225eee2d4ad1ba740f57de819997b"
+    },
+    "2P.1S": {
+      "member": "2P.1S",
+      "path": "/tmp/phys83_work_20261023/sources/CCC_2P.1S",
+      "bytes": 29393,
+      "sha256": "12cf46fa0904a5b227092a0a6a3ae6d8a20c041cf11c2981d3bb8bd1f6ac313d"
+    },
+    "1S.2S": {
+      "member": "1S.2S",
+      "path": "/tmp/phys83_work_20261023/sources/CCC_1S.2S",
+      "bytes": 29366,
+      "sha256": "f4afdbdeccc49a58055ab86750b14ce10dd2091da55bd380a19f3d7a13c337d0"
+    },
+    "1S.2P": {
+      "member": "1S.2P",
+      "path": "/tmp/phys83_work_20261023/sources/CCC_1S.2P",
+      "bytes": 29366,
+      "sha256": "00857e46838c5538da8b047363105b306bc1ba5c827700161749d5d712fa0e5a"
+    }
+  },
+  "additional_source_check_member": {
+    "member": "2.1",
+    "path": "/tmp/phys83_work_20261023/sources/CCC_2.1",
+    "bytes": 22491,
+    "sha256": "b092518e4069dab4d3c8f3cb8c33b3940f45cbb477b4bd8e2a071b317325c7de"
+  },
+  "channel_convention": {
+    "filename_order": "final.initial, confirmed by README and each row header",
+    "excitation_files": {
+      "1s_to_2s": "2S.1S",
+      "1s_to_2p": "2P.1S"
+    },
+    "reverse_files": {
+      "2s_to_1s": "1S.2S",
+      "2p_to_1s": "1S.2P"
+    },
+    "cross_section_unit": "a0^2, integrated state cross section in source LS coupling",
+    "energy_unit": "eV, incident projectile energy relative to initial target state, as shown by header and matched inverse transition coordinates",
+    "third_column": "asym; raw preserved but not used as cross section, thermal energy, rate or uncertainty",
+    "state_degeneracies": {
+      "1s": 2,
+      "2s": 2,
+      "2p_LS_aggregate": 6
+    },
+    "degeneracy_basis": "LS spin multiplicity2 and2L+1; consistency with CHIANTI J=1/2 weights2, J=1/2+3/2 weights2+4 and source reciprocal flux rows",
+    "native_gap_eV_literal": "10.2043500",
+    "native_energy_scale_inference": "10.2043500=0.75*13.6058000 eV; an inferred native Hartree scale27.2116 eV, not a claim of CODATA accuracy or explicit isotope resolution",
+    "mass_precision_status": "Literal finite LS operator retained. No isotope-specific/finite-mass threshold admission. Full1992 paper authorization-walled; do not attribute an unobserved mass convention beyond the source literals.",
+    "excitation_support_eV": [
+      10.20435,
+      968.6058
+    ],
+    "excitation_rows_per_channel": 452,
+    "threshold_row": {
+      "energy_eV": 10.20435,
+      "sigma_a0_squared": 0.0,
+      "origin": "present in source raw file; not generated by this research"
+    },
+    "first_positive_knot_eV": 10.2043885,
+    "reverse_source_rows_per_channel": 451,
+    "reverse_source_support_eV": [
+      3.85e-05,
+      958.40145
+    ],
+    "chosen_model_reverse_support_eV": [
+      0.0,
+      958.40145
+    ],
+    "chosen_model_reverse_support_note": "Finite reciprocal model may extend to0 using source threshold zero and the chosen first-cell interpolation; distinguish this from supplied raw reverse sample support.",
+    "spin_preparation": "Use source sig as the unpolarized spin-averaged channel value in the proposed scalar module; this is the conventional CCC sig interpretation adopted here, not a new spin-resolved source claim. The retained asym column is not activated."
+  },
+  "source_parse_and_reciprocity": {
+    "2S.1S": {
+      "rows": 452,
+      "first": [
+        10.20435,
+        0.0
+      ],
+      "last": [
+        968.6058,
+        0.01863
+      ],
+      "monotone_energy": true,
+      "negative_sigma": 0
+    },
+    "2P.1S": {
+      "rows": 452,
+      "first": [
+        10.20435,
+        0.0
+      ],
+      "last": [
+        968.6058,
+        0.4613
+      ],
+      "monotone_energy": true,
+      "negative_sigma": 0
+    },
+    "1S.2S": {
+      "rows": 451,
+      "first": [
+        3.85e-05,
+        81400.0
+      ],
+      "last": [
+        958.40145,
+        0.01883
+      ],
+      "monotone_energy": true,
+      "negative_sigma": 0
+    },
+    "1S.2P": {
+      "rows": 451,
+      "first": [
+        3.85e-05,
+        32650.0
+      ],
+      "last": [
+        958.40145,
+        0.1554
+      ],
+      "monotone_energy": true,
+      "negative_sigma": 0
+    },
+    "2S_source_reciprocity": {
+      "weights_ratio_upper_lower": 1,
+      "native_delta_eV": 10.20435,
+      "rows_checked": 451,
+      "max_relative_residual": 0.0004623613778456104,
+      "max_shift_absolute_eV": 9.059419880941277e-14,
+      "interpretation": "Source row rounding residual only, not a science rate evaluation"
+    },
+    "2P_source_reciprocity": {
+      "weights_ratio_upper_lower": 3,
+      "native_delta_eV": 10.20435,
+      "rows_checked": 451,
+      "max_relative_residual": 0.0006393194985001571,
+      "max_shift_absolute_eV": 9.059419880941277e-14,
+      "interpretation": "Source row rounding residual only, not a science rate evaluation"
+    }
+  },
+  "print_precision_consistency": {
+    "2S": {
+      "rows": 451,
+      "overlapping_flux_intervals": 451,
+      "nonoverlap_row_indices": [],
+      "interval_assumption": "Each printed positive decimal E and sigma is rounded to nearest last shown digit; half-unit outward decimal intervals. This is a consistency interpretation of print precision, not a physical uncertainty model."
+    },
+    "2P": {
+      "rows": 451,
+      "overlapping_flux_intervals": 451,
+      "nonoverlap_row_indices": [],
+      "interval_assumption": "Each printed positive decimal E and sigma is rounded to nearest last shown digit; half-unit outward decimal intervals. This is a consistency interpretation of print precision, not a physical uncertainty model."
+    }
+  },
+  "allowed_computational_contract": {
+    "status": "PARENT_PROPOSED_DERIVATION_NOT_SCIENCE_EXECUTED_HERE",
+    "kernel": "W(epsilon)=(epsilon+Delta)*sigma_up(epsilon+Delta), positive piecewise linear between source knots; epsilon=E_up-Delta",
+    "reverse": "sigma_down(epsilon)=(g_ground/g_upper)*W(epsilon)/epsilon for epsilon>0, with matched shifted finite support",
+    "important_difference": "Piecewise linear W is a declared interpolation model. It is not piecewise linear sigma_up and not an independent piecewise-linear fit to raw sigma_down.",
+    "Maxwell_detailed_balance": "q_down=(g_ground/g_upper)*exp(Delta/(k_B*T))*q_up for matched kernel/support; evaluate without unstable product where necessary",
+    "outside_support": "Finite operator excludes outside-support contributions; no physical zero-tail or continuum source completeness claim",
+    "temperature_domain": "No T grid or rate values generated by this source task. Parent must freeze scoped T domain. Mathematical finite Maxwell operator exists for T>0; physical source/interpolation uncertainty separate."
+  },
+  "constants": {
+    "a0_m": 5.29177210544e-11,
+    "a0_standard_uncertainty_m": 8.2e-21,
+    "a0_source": "NIST CODATA2022",
+    "NIST_url": "https://physics.nist.gov/cgi-bin/cuu/Value?bohrrada0%7Csearch_for=bohr+radius",
+    "area_conversion": "sigma_cm2=sigma_a0_squared*(100*a0_m)^2",
+    "parent_consistency": "Matches source/vendor/phys81/vendor/ci_finite_c22d.py A0_M; m_e=9.1093837139e-31kg also matches parent. Do not rescale literal CCC energies to updated CODATA Hartree."
+  },
+  "radiative_data": {
+    "database_page": "https://db.chiantidatabase.org/h/h_1.html",
+    "page_ion_version": "11.0.1",
+    "global_database_download_version": "11.0.2 distinct from ion page metadata",
+    "raw_files": {
+      "h_1.elvlc": {
+        "path": "/tmp/phys83_work_20261023/sources/h_1.elvlc",
+        "bytes": 2423,
+        "sha256": "f7286ef6837989eba038b7b055c8db9f4e1ce8a6a0b3270ccc399fd0b2f6a75b",
+        "url": "https://sohoftp.nascom.nasa.gov/solarsoft/packages/chianti/dbase/h/h_1/h_1.elvlc"
+      },
+      "h_1.wgfa": {
+        "path": "/tmp/phys83_work_20261023/sources/h_1.wgfa",
+        "bytes": 6621,
+        "sha256": "f16d0f5033632ce5a3104bfa4dfec9c98fc14bb2e05f682be3468419c9a90179",
+        "url": "https://sohoftp.nascom.nasa.gov/solarsoft/packages/chianti/dbase/h/h_1/h_1.wgfa"
+      },
+      "h_1.scups": {
+        "path": "/tmp/phys83_work_20261023/sources/h_1.scups",
+        "bytes": 9609,
+        "sha256": "c5ae649c2de3d9775e10e3e5313432674a5580a84045f08959aae44b7b4aabdd",
+        "url": "https://sohoftp.nascom.nasa.gov/solarsoft/packages/chianti/dbase/h/h_1/h_1.scups"
+      }
+    },
+    "levels": {
+      "1s_2S1_2": {
+        "index": 1,
+        "g": 2,
+        "observed_cm_minus1": 0.0
+      },
+      "2s_2S1_2": {
+        "index": 2,
+        "g": 2,
+        "observed_cm_minus1": 82258.956
+      },
+      "2p_2P1_2": {
+        "index": 3,
+        "g": 2,
+        "observed_cm_minus1": 82258.921
+      },
+      "2p_2P3_2": {
+        "index": 4,
+        "g": 4,
+        "observed_cm_minus1": 82259.287
+      }
+    },
+    "A_2s_two_photon_per_s": 8.229,
+    "A_2p1_2_to_ground_per_s": 626000000.0,
+    "A_2p3_2_to_ground_per_s": 626000000.0,
+    "also_listed_2s_M1_per_s": 2.496e-06,
+    "zero_wavelength_metadata_trap": "The2s two-photon row has wavelength0 and generic label[autoionizing rate]; actual H I physical interpretation is two-photon radiative decay, confirmed by database attribution and primary Parpia/Johnson1982 abstract. Not autoionization; zero wavelength is a sentinel, not zero energy.",
+    "adopted_branching": "2p emits one photon;2s two-photon channel emits two photons with total adopted energyDelta. A two-photon spectral distribution is not supplied by this A value.",
+    "M1_scope": "If excluded, state that this tiny separately listed branch is omitted; do not falsely claim only possible2s decay.",
+    "radiative_A_primary_sources": [
+      "Wiese,Smith,Glennon1966 NSRDS-NBS4 for oscillator strengths",
+      "Parpia&Johnson1982 PhysRevA26,1142 DOI10.1103/PhysRevA.26.1142 for metastable decay"
+    ],
+    "bibliography_typo": "scups comments contain1972 for PhysRevA26,1142; official wgfa/page and DOI record establish1982. Preserve literal comments; do not propagate incorrect year.",
+    "energy_contract": "For parent proposed approximate degenerate LS module, collisional loss, atomic excitation energy and total emitted energy use the SAME literal CCCDelta10.20435eV. NIST fine-level energies/wavelengths remain metadata, not silently inserted into one side of event accounting."
+  },
+  "source_primary_references": [
+    {
+      "key": "CCC1992",
+      "doi": "10.1103/PhysRevA.46.6995",
+      "url": "https://doi.org/10.1103/PhysRevA.46.6995",
+      "access": "official original abstract read; full text authorization wall respected; actual current data from author database"
+    },
+    {
+      "key": "ParpiaJohnson1982",
+      "doi": "10.1103/PhysRevA.26.1142",
+      "url": "https://doi.org/10.1103/PhysRevA.26.1142",
+      "access": "official original abstract read; quantitative A from official CHIANTI raw file"
+    },
+    {
+      "key": "Anderson2000",
+      "doi": "10.1088/0953-4075/33/6/311",
+      "url": "https://www.adas.ac.uk/docs/h1_rmatrix.pdf",
+      "access": "primaryPDF raw bytes saved; alternative only"
+    },
+    {
+      "key": "Anderson2002Correction",
+      "doi": "10.1088/0953-4075/35/6/701",
+      "url": "https://doi.org/10.1088/0953-4075/35/6/701",
+      "access": "primary abstract corrected tables noted; not implemented"
+    },
+    {
+      "key": "BendaHoufek2018",
+      "doi": "10.1016/j.adt.2017.02.003",
+      "url": "https://utf.mff.cuni.cz/librtfy/papers/0000643/adndt.119.303_benda.houfek.pdf",
+      "access": "author primary text excerpt retrieved; no dataset imported"
+    }
+  ],
+  "reuse_and_license_evidence": {
+    "CCC": "Official author freely downloadable raw dataset and attribution to Bray/Stelbovics. No explicit redistribution/SPDX license found in downloaded index or archive README; do not label it MIT/CC-BY or grant permissions not stated.",
+    "CHIANTI": "Official reference page asks acknowledgement of first database paper and version paper, plus original calculation papers; explicitly discusses incorporating data into other databases with version identification. No separate SPDX license claimed.",
+    "CHIANTI_reference_url": "https://www.chiantidatabase.org/referencing.html",
+    "recommended_public_delivery": "Minimal selected numerical data with full original attribution/provenance; full research receipts and source archive in requested private checkpoint. Do not publish full journal PDFs or treat dataset citation as code license."
+  },
+  "open_obligations": [
+    "Degenerate LS2s↔2p mixing is formally divergent in CCC README; finite splitting, impact-parameter/plasma cutoff, electron/proton mixing require a separate source contract. Omitted mixing is not a proof of physical insignificance.",
+    "High-density quenching/saturation of this selected-star model is a conditional finite-module result until mixing, upper-level ionization, additional excitations and cascades are handled.",
+    "No recoil, isotope splitting, fine-structure-dependent excitation operator or transformed physical H line wavelength has been admitted.",
+    "No two-photon spectral shape, absorption/stimulated terms, Lyman-alpha reprocessing or cosmological transport follows from the A values.",
+    "Finite endpoint and chosenW interpolation give no physical uncertainty enclosure; raw row rounding consistency is distinct from source accuracy."
+  ],
+  "execution": {
+    "Exa_search_calls": 1,
+    "SciSpace_search_calls": 1,
+    "scientific_rate_grid_calls": 0,
+    "ODE_calls": 0,
+    "old_completed_identity_reruns": 0,
+    "source_parse_rows": {
+      "excitation": 904,
+      "reverse": 902
+    },
+    "source_reciprocity_point_checks": 902,
+    "decimal_print_consistency_checks": 902,
+    "restricted_network_attempt": "initial raw fetch denied by sandbox; authorized escalation publicdownload succeeded; no sourceaccess authentication bypass"
+  }
+}

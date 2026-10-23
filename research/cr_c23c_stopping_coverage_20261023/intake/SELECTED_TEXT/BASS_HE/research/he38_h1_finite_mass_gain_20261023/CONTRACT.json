@@ -1,0 +1,48 @@
+{
+  "schema": "he38.scientific_contract.v1",
+  "workflow_version": "1.0.0",
+  "approval_version": "0.2",
+  "unit_id": "HE38-FMG",
+  "objective": "Complete the finite-mass source-coordinate H1 ionization gain, species heat/STF partition and conservative net source; compress original energy sharing to existing Maxwellian moments and implement a bounded sandbox component.",
+  "parent_publication_commit": "b97bccaabc246af5672b2ead8dfa9f08d169da6d",
+  "parent_science_commit": "a5a670968cb1326375f394faa867c6b260c5840d",
+  "parent_science_manifest_sha256": "e5902f8604479ff79d9973e62ab41fca88eba7bc7be41ab8256e5630ffac45e7",
+  "branch": "research/he38-h1-finite-mass-gain-20261023",
+  "scope": [
+    "One ground-H1 electron-impact ionization e+H -> e+e+p",
+    "Le-Cambier2016 exact Jacobi coordinate/mass/energy definitions Eq2-7 and Eq85 labelled energy transfer; explicit uniform G=1/(16pi^2) in those Jacobi directions",
+    "Newtonian additive kinetic masses m_H=m_p+m_e, totalm=m_p+2m_e; binding13.6eV in internal-energy ledger, not kinetic mass defect",
+    "Common temperature/common bulk Maxwell reference with infinitesimal independent electron and neutral-H STF first variations",
+    "Output e/H/p number, heat and STF sources plus total event attachment and physical abundance Jacobian in pure-H21-slot census",
+    "Temperature numerical contract2000..200000K inherited, physical proton massCODATA2022; artificial masses only labelled kinematic controls",
+    "One bounded new diagnostic and actual figure pair; existing HE37 provider formulas and saved rows reused by identity"
+  ],
+  "completion_criteria": [
+    "Primary coordinate/angular convention and source-domain qualification",
+    "Derive exact event number/momentum/energy invariants, species scalar heat,3-by-2STF response and heavy-mass limit",
+    "Derive sharing-moment compression Lambda=beta-theta*alpha and verify independently",
+    "Implement byte-preserved donor reuse and explicit new model identity, domain/zero/representability handling",
+    "Execute only changed-dependency independent controls, bounded numerical diagnostic/cost comparison and actual plots",
+    "Independent scientific/code/figure review;20stage archiveACKs/Git commits and two resumable handoffs"
+  ],
+  "deferred_dependencies": [
+    "Calibrated H1 angular law and physical model-error estimate",
+    "Unequal speciesT/bulk drift and finite anisotropy closure",
+    "Stress allocation into a closed total-gas evolution, thermalization/relaxation timescales",
+    "EvolvingUV/thermal reservoirs and selected RR/DR/CX/additional species",
+    "Nuclear daughtercharge/spectrum/recoil/stopping/thermal-fast census",
+    "New coupled population/T/pi_b/background/metric IVP"
+  ],
+  "execution_limits": {
+    "old_IVP_replays": 0,
+    "old_suite_replays": 0,
+    "new_IVP": 0,
+    "sandbox_only": true,
+    "fast_math": false,
+    "planned_independent_controls_CPU_seconds": 30,
+    "planned_diagnostic_CPU_seconds": 30,
+    "memory_target_MiB": 512
+  },
+  "prior_baseline": "HE32 remains8nuclides21states prescribedUV photo+caseA RR;gas pi_b=0;matter stress nonbaryonic;394completedIVPs reused",
+  "novelty": "Constructive exact-moment extension of an explicitly adopted source model; no world-first or strong no-go claim"
+}
