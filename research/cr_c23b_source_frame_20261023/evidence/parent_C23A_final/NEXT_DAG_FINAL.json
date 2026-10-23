@@ -1,0 +1,253 @@
+{
+  "schema": "C23A_NEXT_DAG_V1",
+  "recorded_utc": "2026-10-23T01:09:06.082Z",
+  "nodes": [
+    {
+      "id": "S0",
+      "name": "intake and recovery",
+      "depends_on": [],
+      "status": "COMPLETE_SCOPED",
+      "contract": "7 known repos/1278 REST refs;74 selected verified blobs;7 draft PRs;C22D285 payload recovery; inaccessible chats UNAVAILABLE",
+      "EXECUTION": "COMPLETE_SCOPED",
+      "PUBLICATION": "PUBLISHED_IN_SCIENCE_COMMIT_7643af28c671a7473754a3c2cd0c6e523bd61aac",
+      "BACKUP": "MAIN_ARCHIVE_LIBRARY_DROPBOX_R3_PASS; DRIVE_UNKNOWN_NO_ACK",
+      "DAG": []
+    },
+    {
+      "id": "S1",
+      "name": "P19 primary source and photo-subflow",
+      "depends_on": [
+        "S0"
+      ],
+      "status": "COMPLETE_SCOPED",
+      "contract": "59z*2inventory*7dose=826 saved exposures; frozen source only",
+      "EXECUTION": "COMPLETE_SCOPED",
+      "PUBLICATION": "PUBLISHED_IN_SCIENCE_COMMIT_7643af28c671a7473754a3c2cd0c6e523bd61aac",
+      "BACKUP": "MAIN_ARCHIVE_LIBRARY_DROPBOX_R3_PASS; DRIVE_UNKNOWN_NO_ACK",
+      "DAG": [
+        "S0"
+      ]
+    },
+    {
+      "id": "S2",
+      "name": "finite electron deposition and spectral precontraction",
+      "depends_on": [
+        "S0"
+      ],
+      "status": "COMPLETE_SCOPED",
+      "contract": "FS2010 table audit; exact PL model; paired construction-inclusive timing; no physical adoption",
+      "EXECUTION": "COMPLETE_SCOPED",
+      "PUBLICATION": "PUBLISHED_IN_SCIENCE_COMMIT_7643af28c671a7473754a3c2cd0c6e523bd61aac",
+      "BACKUP": "MAIN_ARCHIVE_LIBRARY_DROPBOX_R3_PASS; DRIVE_UNKNOWN_NO_ACK",
+      "DAG": [
+        "S0"
+      ]
+    },
+    {
+      "id": "S3",
+      "name": "nuclear beta energy-domain coverage",
+      "depends_on": [
+        "S0",
+        "S2"
+      ],
+      "status": "COMPLETE_SCOPED",
+      "contract": "historical ENDF central energy support and conditional bounds; F=1 diagnostic separated",
+      "EXECUTION": "COMPLETE_SCOPED",
+      "PUBLICATION": "PUBLISHED_IN_SCIENCE_COMMIT_7643af28c671a7473754a3c2cd0c6e523bd61aac",
+      "BACKUP": "MAIN_ARCHIVE_LIBRARY_DROPBOX_R3_PASS; DRIVE_UNKNOWN_NO_ACK",
+      "DAG": [
+        "S0",
+        "S2"
+      ]
+    },
+    {
+      "id": "S4",
+      "name": "independent review and figures",
+      "depends_on": [
+        "S1",
+        "S2",
+        "S3"
+      ],
+      "status": "COMPLETE_SCOPED",
+      "contract": "80-digit reference; source/run readback; algebra/source review;180mm figure review; public dependency smoke",
+      "EXECUTION": "COMPLETE_SCOPED",
+      "PUBLICATION": "PUBLISHED_IN_SCIENCE_COMMIT_7643af28c671a7473754a3c2cd0c6e523bd61aac",
+      "BACKUP": "MAIN_ARCHIVE_LIBRARY_DROPBOX_R3_PASS; DRIVE_UNKNOWN_NO_ACK",
+      "DAG": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "id": "S5",
+      "name": "publication and backup",
+      "depends_on": [
+        "S4"
+      ],
+      "status": "COMPLETE_SCOPED_WITH_DRIVE_OPEN",
+      "contract": "actual publication and two provider R3 complete; no triple-backup claim",
+      "EXECUTION": "DELIVERY_SEALED_AND_VERIFIED",
+      "PUBLICATION": "PUBLISHED_IN_SCIENCE_COMMIT_7643af28c671a7473754a3c2cd0c6e523bd61aac",
+      "BACKUP": "MAIN_ARCHIVE_LIBRARY_DROPBOX_R3_PASS; DRIVE_UNKNOWN_NO_ACK",
+      "DAG": [
+        "S4"
+      ]
+    },
+    {
+      "id": "N1",
+      "name": "source composition and energy conventions",
+      "depends_on": [
+        "S1",
+        "S2",
+        "S3"
+      ],
+      "status": "OPEN",
+      "contract": "P19 thresholds; FS He/H/ionization submanifold; electron source spectrum; initial atomic/molecular state",
+      "EXECUTION": "OPEN",
+      "PUBLICATION": "NO_NEW_CLAIM",
+      "BACKUP": "NOT_APPLICABLE",
+      "DAG": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "id": "N2",
+      "name": "spectra, frame and transport coverage",
+      "depends_on": [
+        "N1"
+      ],
+      "status": "OPEN",
+      "contract": "proper/comoving normalization; boosted parents; beta correction;low/high electron tails;finite stopping",
+      "EXECUTION": "OPEN",
+      "PUBLICATION": "NO_NEW_CLAIM",
+      "BACKUP": "NOT_APPLICABLE",
+      "DAG": [
+        "N1"
+      ]
+    },
+    {
+      "id": "N3",
+      "name": "atomic rate and isotope contract",
+      "depends_on": [
+        "S0",
+        "N1"
+      ],
+      "status": "OPEN",
+      "contract": "CI/RR/DR/CX/lines/molecules;domain/omissions;identical generator and source conditions for quotient",
+      "EXECUTION": "OPEN",
+      "PUBLICATION": "NO_NEW_CLAIM",
+      "BACKUP": "NOT_APPLICABLE",
+      "DAG": [
+        "S0",
+        "N1"
+      ]
+    },
+    {
+      "id": "N4",
+      "name": "admitted thermochemical/radiative coupling",
+      "depends_on": [
+        "N2",
+        "N3"
+      ],
+      "status": "OPEN",
+      "contract": "charge/nuclei/energy;distinct source binding/thermal/cascade/recoil/neutrino/escape owners; expansion and radiation backreaction",
+      "EXECUTION": "OPEN",
+      "PUBLICATION": "NO_NEW_CLAIM",
+      "BACKUP": "NOT_APPLICABLE",
+      "DAG": [
+        "N2",
+        "N3"
+      ]
+    },
+    {
+      "id": "N5",
+      "name": "new-input small validation and campaign",
+      "depends_on": [
+        "N4"
+      ],
+      "status": "NOT_RUN",
+      "contract": "new source identity/run ID;actual resource and lease;worker1thread;create-only outputs",
+      "EXECUTION": "NOT_RUN",
+      "PUBLICATION": "NO_NEW_CLAIM",
+      "BACKUP": "NOT_APPLICABLE",
+      "DAG": [
+        "N4"
+      ]
+    },
+    {
+      "id": "N6",
+      "name": "analysis and publication/backups",
+      "depends_on": [
+        "N5"
+      ],
+      "status": "NOT_RUN",
+      "contract": "affected-unit verification,figures,actual receipts",
+      "EXECUTION": "NOT_RUN",
+      "PUBLICATION": "NO_NEW_CLAIM",
+      "BACKUP": "NOT_APPLICABLE",
+      "DAG": [
+        "N5"
+      ]
+    },
+    {
+      "id": "H1",
+      "name": "full high-energy nuclear",
+      "depends_on": [],
+      "status": "HOLD",
+      "contract": "beyond admitted provider coverage",
+      "EXECUTION": "HOLD",
+      "PUBLICATION": "NO_NEW_CLAIM",
+      "BACKUP": "NOT_APPLICABLE",
+      "DAG": []
+    },
+    {
+      "id": "H2",
+      "name": "general triaxial/tilted/polarized CMB",
+      "depends_on": [],
+      "status": "HOLD",
+      "contract": "outside current non-tilted LRS scope",
+      "EXECUTION": "HOLD",
+      "PUBLICATION": "NO_NEW_CLAIM",
+      "BACKUP": "NOT_APPLICABLE",
+      "DAG": []
+    },
+    {
+      "id": "B0",
+      "name": "historical C21O Drive preservation",
+      "depends_on": [],
+      "status": "OPEN",
+      "contract": "prior UNKNOWN_NO_ACK/NOT_RUN/NOT_ATTEMPTED states retained; new C23A upload cannot close it",
+      "EXECUTION": "OPEN",
+      "PUBLICATION": "NO_NEW_CLAIM",
+      "BACKUP": "OPEN",
+      "DAG": []
+    },
+    {
+      "id": "E0",
+      "name": "sandbox execution capability",
+      "depends_on": [],
+      "status": "OPEN_ENVIRONMENT_FAILED",
+      "EXECUTION": "NOT_AVAILABLE",
+      "PUBLICATION": "remote documentation can proceed",
+      "BACKUP": "existing archive+authority R3 preserved",
+      "DAG": [
+        "before any future N5 run"
+      ],
+      "contract": "Recover a working executor then materialize verified bytes; no completed science reruns"
+    }
+  ],
+  "completion": {
+    "source_science_units_complete": 3,
+    "source_science_units_planned": 3,
+    "full_physical_closure": "OPEN",
+    "overall_percent": null,
+    "reason": "No fixed weighted full-goal denominator"
+  },
+  "global_error_bound": null,
+  "historical_ODE_reruns": 0,
+  "new_cosmological_ODE_runs": 0,
+  "new_NCP_jobs": 0
+}

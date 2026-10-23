@@ -1,0 +1,56 @@
+{
+  "schema": "BASS_CR_C23B_SOURCE_FRAME_CONTRACT_V1",
+  "parent_science_commit": "7643af28c671a7473754a3c2cd0c6e523bd61aac",
+  "parent_terminal_commit": "7291ecc711b087a6525fab25d82a4e235d24b9f1",
+  "objective": "Conservative isotropic electron event boost, finite-table contraction, and explicit primary source ownership",
+  "electron_rest_energy_eV": 510998.95069,
+  "boost_parameter": "u=gamma*beta; gamma=hypot(1,u); gamma-1=u*(u/(gamma+1))",
+  "angular_assumption": "unpolarized isotropic parent-rest electron marginal; rest positive finite atom measure",
+  "source_direction_contract": "isotropic parent axes for scalar source; opposite beams cancel flux only and require stress closure",
+  "kinematic_scope": "per-event massive-electron Lorentz marginal; no high-energy nuclear reaction or stopping calculation",
+  "FS_axis": "unambiguous_high_ionization",
+  "FS_energy_domain_eV": [10.0, 9937.21],
+  "FS_physical_gas_admission": "OPEN: numeric source He/H, current target state, finite stopping, escape, and raw energy defect",
+  "root_new_run": "c23b_boost_and_source_20261023_v2",
+  "previous_attempt": "v1 NOT_RUN_RESOURCE_BLOCKED by a foreign ambiguous lease; no worker started",
+  "boost_u_grid": [0.0, 1e-12, 1e-6, 0.001, 0.05, 0.2, 1.0, 10.0],
+  "xi_queries": [0.1, 0.37, 0.9],
+  "synthetic_rest_measures": [
+    {"id":"tritium_mean_line_diagnostic","energies_eV":[5690.0],"weights":[1.0],"status":"moment-calibrated witness; not evaluated beta spectrum"},
+    {"id":"tritium_endpoints_diagnostic","energies_eV":[0.0,18590.0],"mean_eV":5690.0,"status":"same-mean support witness; not evaluated beta spectrum"},
+    {"id":"neutron_mean_line_diagnostic","energies_eV":[301370.0],"weights":[1.0],"status":"moment-calibrated witness; not evaluated beta spectrum"},
+    {"id":"neutron_endpoints_diagnostic","energies_eV":[0.0,782347.0],"mean_eV":301370.0,"status":"same-mean support witness; not evaluated beta spectrum"},
+    {"id":"finite_table_boundary_calibration","energies_eV":[0.0,10.0,100.0,9937.21,10000.0],"weights":[0.1,0.2,0.3,0.25,0.15],"status":"synthetic numerical calibration"}
+  ],
+  "saved_PW19_atoms": {
+    "relative_path":"../source_providers/runs/c23b_pw19_spectral_source_20261023_v1/photoelectron_atoms.csv",
+    "bytes":1681578,
+    "sha256":"f5bcfe477b8a073341a7496c079e6eb2737f6ca578b884376887b04989e57fc3",
+    "count":32592,
+    "frame":"bath",
+    "units":"electrons_per_target_per_second",
+    "new_source_integration_in_this_run":false,
+    "new_finite_FS_component_contraction":true
+  },
+  "source_assembly_inventory": {
+    "neutral_fit_labels":{"HI":1.0,"HII":0.0,"HeI":0.083,"HeII":0.0,"HeIII":0.0},
+    "mixed_fit_labels":{"HI":0.5,"HII":0.5,"HeI":0.02,"HeII":0.06,"HeIII":0.003}
+  },
+  "acceptance_before_run": {
+    "number_partition_relative":5e-14,
+    "energy_partition_relative":5e-14,
+    "parallelpc_partition_scale_totalenergy":5e-14,
+    "positive_basis_covered_number_relative":5e-14,
+    "positive_basis_covered_energy_relative":5e-14,
+    "saved_source_moment_relative":5e-14,
+    "charge_and_nuclei_relative":5e-14,
+    "primary_energy_ledger_relative":5e-14,
+    "clock_identity_relative":5e-14,
+    "all_basis_weights_nonnegative":true,
+    "tail_heating_must_remain_null":true
+  },
+  "new_cosmological_ODE":0,
+  "completed_calculation_reruns":0,
+  "global_error_bound":null,
+  "overall_goal_completion_percent":null
+}

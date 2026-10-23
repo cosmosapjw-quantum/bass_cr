@@ -1,0 +1,59 @@
+{
+  "schema": "C23B_ATOMIC_SOURCE_COVERAGE_V1",
+  "scope": "three prescribed ground-state H/He primary photoionization channels only",
+  "source_fit": "official Verner96 photo.dat SHAa53e73b0af4cc6b801aef67b84bd964e3ed8c9c4992f214e4a69dc7e4443f389",
+  "supported_channels": [
+    {
+      "channel": "HI",
+      "threshold_eV": 13.6,
+      "maximum_photon_eV": 50000,
+      "electron_count_per_event": 1,
+      "target_charge_increment": 1,
+      "nucleus_count_increment": 0,
+      "energy_equation": "epsilon_photon=chi+K_primary in zero-recoil model",
+      "isotope_identity": "UNRESOLVED_ELEMENTAL_LABEL; no automatic mapping to H1,D,T,He3,He4",
+      "adoption": "FINITE_SOURCE_SCOPED"
+    },
+    {
+      "channel": "HeI",
+      "threshold_eV": 24.59,
+      "maximum_photon_eV": 50000,
+      "electron_count_per_event": 1,
+      "target_charge_increment": 1,
+      "nucleus_count_increment": 0,
+      "energy_equation": "epsilon_photon=chi+K_primary in zero-recoil model",
+      "isotope_identity": "UNRESOLVED_ELEMENTAL_LABEL; no automatic mapping to H1,D,T,He3,He4",
+      "adoption": "FINITE_SOURCE_SCOPED"
+    },
+    {
+      "channel": "HeII",
+      "threshold_eV": 54.42,
+      "maximum_photon_eV": 50000,
+      "electron_count_per_event": 1,
+      "target_charge_increment": 1,
+      "nucleus_count_increment": 0,
+      "energy_equation": "epsilon_photon=chi+K_primary in zero-recoil model",
+      "isotope_identity": "UNRESOLVED_ELEMENTAL_LABEL; no automatic mapping to H1,D,T,He3,He4",
+      "adoption": "FINITE_SOURCE_SCOPED"
+    }
+  ],
+  "temperature_contract": "No Maxwellian averaging: bath-rest target with ground-state population, target thermal velocity and recoil neglected; no finite-T rate coverage implied",
+  "missing_rate_policy": "explicit unsupported/unknown error or null, never absent-species zero fill",
+  "isotope_quotient_conditions": [
+    "same transition generator after mapped charges",
+    "same external source law and normalization",
+    "initial isotope inventories tracked independently",
+    "nuclear reactions/decays that distinguish isotopes excluded or represented separately",
+    "equal thresholds/cross sections require explicit approximation contract and isotope-shift error budget"
+  ],
+  "dominant_omitted_processes": [
+    "CI, radiative and dielectronic recombination",
+    "charge exchange and molecular formation/destruction",
+    "excited/metastable populations and line transfer",
+    "secondary electron ionization/excitation/heating and finite stopping",
+    "photo double ionization, recoil and target thermal motion",
+    "absorption above50000eV and Compton/pair channels",
+    "stellar ejecta or direct nonthermal nuclei source"
+  ],
+  "global_error_bound": null
+}
