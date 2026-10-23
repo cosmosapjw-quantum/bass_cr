@@ -1,0 +1,13 @@
+# Attribution and reuse scope
+
+The BASS_CR repository license governs newly authored repository work. Source-specific licenses and scientific domains remain independent of this manifest.
+
+1. The byte-identical saved photoelectron atoms are derived C23B output, science commit `54477b285e0c712610453bca1408a076af43521d`. Their upstream UV data release is Taira, Kopenhafer & O'Shea (2025), DOI [10.5281/zenodo.15367103](https://doi.org/10.5281/zenodo.15367103), Git `863c3b7fa73a8510fbf57ee7b75ad1e8c34086de`. C23B's retrieved data-release metadata declares CC0. The research paper has a distinct license. This unit does not rerun the converter or quadrature.
+2. C23B's photoionization formula is attributed to Verner et al. (1996), ApJ 465, 487, DOI [10.1086/177435](https://doi.org/10.1086/177435), [official parameter page](https://www.pa.uky.edu/~verner/photo.html). Ground-state stationary-target fit thresholds are a model specification; this unit does not infer exact isotope thresholds or an implicit software license for that website.
+3. Furlanetto & Stoever (2010), MNRAS 404, 1869, [arXiv:0910.4410](https://arxiv.org/abs/0910.4410), supplies the context for the separately retained FS table domain. C23C copies no additional FS table or unlicensed interpolation source. The source-caloric classification is not an FS deposition calculation. Existing C23B/21cmFAST notices stay with their earlier artifacts.
+4. `implementation/vendor/thermal_cutoff_solver.py` is byte-identical to the user's existing BASS_CR KC source at `a5c29ad4070acb931d92d2bec42a927a57f479ca`; the resource controller is byte-identical to C23B. The present work reuses those implementations and existing proofs without a novelty or measured speedup claim.
+5. Selected files from BASS/REI/HE/HH/REC/VigilODE are the user's commit-bound research evidence. They remain separate donor ensembles; copied provider source is not thereby an executed C23C rate provider. Source pins and actual run status govern adoption.
+6. OPEN-ADAS and CCC were researched as future provider candidates. No new raw rate dataset was copied or license inferred. SolarFP ([official repository](https://github.com/solarFP/FP), Apache-2.0) is a candidate stopping implementation, not an adopted or executed component here.
+7. Full external article text and raw search-page bodies are excluded from publication and delivery. Primary links, source status, local derivations and scoped numerical receipts are retained.
+
+Exact SI `k_B = 1.380649e-23 J/K` and `1 eV = 1.602176634e-19 J` follow [NIST SI Section 2](https://www.nist.gov/pml/special-publication-330/sp-330-section-2). Constants are exact; model/rate/truncation errors are not zero by that fact.

@@ -1,0 +1,237 @@
+{
+  "schema": "PHYS82_LI_THRESHOLD_PRIMARY_SOURCE_CONTRACT_v1",
+  "created_utc": "2026-10-23",
+  "scope": "R2-R3 primary-source reuse audit; no scientific numerical model execution; no completed-test rerun",
+  "overall_status": "PARTIAL_SOURCE_IMPROVEMENT; FULL_PHYSICAL_LOW_T_COVERAGE_OPEN",
+  "physical_threshold_eV": "5.39172060034581",
+  "physical_threshold_origin": "Parent PHYS81 corrected isotope/chemical-energy contract, preserved unchanged; not inferred from historical experiment",
+  "baseline_CCC": {
+    "first_energy_eV": "6.00000e+00",
+    "first_sigma_cm2": "5.18148e-17",
+    "finite_support_eV": [
+      "6",
+      "15"
+    ],
+    "source_url": "https://atom.curtin.edu.au/cgi-bin/c4nick.in?element=Li&charge=I&process=ELECTRON_IMPACT&low=2s_dSz2szX2YS&upp=tics_TICSzticszTICS&data_type=cross&cs_unit=cm2",
+    "source_sha256": "ac76cfef7ca94accf4004267323251cfc6c7b6a68bcd0893ef4e634ad2a91ed9",
+    "reference_doi": "10.1103/PhysRevA.49.1066",
+    "threshold_gap": "No retrieved CCC raw point in physical-threshold<E<6eV",
+    "uncertainty": "No pointwise uncertainty in selector"
+  },
+  "experimental_linear_evidence": {
+    "citation": "I. P. Zapesochnyi and I. S. Aleksakhin, Ionization of Alkali Metal Atoms by Slow Electrons, Soviet Physics JETP28(1),41–45(1969); Russian original Zh.Eksp.Teor.Fiz55,76–85(1968)",
+    "url": "https://jetp.ras.ru/cgi-bin/dn/e_028_01_0041.pdf",
+    "web_reference_id": "turn58view0",
+    "doi_status": "No DOI verified; stable primary journal PDF used",
+    "pdf_sha256": "b9932a8413cd8b4f8a7e428a5da536fb8dcd55150c5a63c0747cf960d4742408",
+    "formula_and_data_locations": {
+      "measurement_formula": "Printedp42 Eq(3); absolute cross section derived from ion/electron currents and measured atom density",
+      "absolute_error": "Printedp43 first paragraph",
+      "energy_axis_error": "Printedp43 Results and Discussion",
+      "literal_Li_row": "Printedp44 sole table; visual crop inspected",
+      "near_threshold_comparison": "Printedp45 Section3 and printedp44 Fig8"
+    },
+    "literal_row": {
+      "threshold_eV": "5.39",
+      "peak_energy_eV": "~13.0",
+      "linear_interval_deltaE_eV": "3.4",
+      "slope_mantissa": "0.9",
+      "peak_sigma_1e_minus16_cm2": "4.2"
+    },
+    "literal_slope_header": "Slope of straight segment, 10^-16 cm^-2/V",
+    "header_status": "Original rendered header visibly has negative area exponent. Preserve this literal typography; interpret physically as area per incident-electron eV using cross-section axes (cm^2) and excess-energy definition. This is a dimensional correction, not a located published erratum.",
+    "slope_interpreted_cm2_per_eV": "0.9e-16",
+    "statement_class": "Primary measured finite-resolution near-threshold slope and approximately linear segment",
+    "measurement_limitations": {
+      "final_monochromator_energy_spread_eV": "0.1 for90% of electrons, incident energies1–30eV",
+      "initial_gun_energy_spread_eV": "0.5 for90%, distinct upstream apparatus stage",
+      "graph_energy_axis_uncertainty_eV": "0.1–0.2",
+      "graph_energy_uncertainty_scope": "Measurement-axis uncertainty; no decomposition into calibration/scan-step components. Not physical ionization-energy uncertainty.",
+      "general_relative_curve_spread_percent": "3–5",
+      "near_threshold_relative_error_percent": "<=3 in Section3",
+      "absolute_cross_section_relative_error_percent": "+/-15",
+      "absolute_rms_error_literal": "+12%",
+      "confidence_level": "Not specified",
+      "normalization": "Absolute ion current generally measured at ionization maximum; threshold shapes in Fig8 are relative/arbitrary units. Fig8 theoretical curves normalized at deltaE0 and1eV.",
+      "slope_covariance": "No separate slope standard error or covariance given",
+      "target": "Neutral atoms from effusive metal-vapor beam; no state-selection or quantitative excited-state contamination assay reported in reviewed pages",
+      "isotope": "No Li isotope composition or isotope-specific collision curve identified",
+      "energy_response": "No full response kernel, convolution/deconvolution, or unsmeared pointwise near-threshold table supplied",
+      "data_scope": "Single ionization; authors identify Li process with s-electron removal; residual electronic ground channel follows parent energy-window contract rather than an independently resolved outgoing-state measurement"
+    },
+    "adopted_comparator": {
+      "name": "Recentered historical linear-slope comparator",
+      "formula": "sigma_ZA_recentered(E)=s_ZA*(E-I_physical) for I_physical<=E<=6eV; zero below I_physical; s_ZA=0.9e-16 cm^2/eV",
+      "classification": "Explicitly transported finite-resolution empirical comparator, not raw measured points at corrected isotope threshold",
+      "extra_assumptions": [
+        "Interpret printed slope unit as cm^2/eV",
+        "Transport observed finite-resolution slope to unsmeared near-threshold sigma",
+        "Replace printed reference5.39eV by physical isotope threshold without claiming this corrects instrument calibration",
+        "Do not impose endpoint matching to CCC at6eV; compare endpoint as separate source consistency diagnostic",
+        "Any +/-15% amplitude sensitivity is an assumption motivated by stated absolute-scale error, not a proven pointwise envelope or independent slope confidence interval"
+      ],
+      "activation": "Comparator only; no replacement of admitted CCC nodes; no empirical coverage certificate"
+    }
+  },
+  "threshold_theory": {
+    "wannier_original": {
+      "citation": "G.H.Wannier, Physical Review90,817(1953)",
+      "doi": "10.1103/PhysRev.90.817",
+      "url": "https://journals.aps.org/pr/abstract/10.1103/PhysRev.90.817",
+      "web_reference_id": "turn55view0",
+      "read_status": "Primary abstract read; fulltext authorization wall"
+    },
+    "explicit_exponent": {
+      "citation": "H.Friedrich,W.Ihra,P.Meerwald, Threshold Behaviour of(e,2e) Reactions in Classical and Quantum Mechanics, Australian Journal of Physics52,323–339(1999)",
+      "doi": "10.1071/PH98091",
+      "url": "https://www.publish.csiro.au/ph/pdf/PH98091",
+      "web_reference_id": "turn57view0",
+      "location": "Printedp323 Eq(2), p324 assumptions, p325 Coulomb/scaling discussion",
+      "formula": "nu_W(Z)=1/4*(sqrt((100*Z-9)/(4*Z-1))-1)",
+      "coordinate": "SourceE is excess energy, not incident kinetic energy",
+      "assumptions": "Infinitely heavy Coulomb centerZ plus two outgoing electrons; primary model treats exclusively Coulomb interactions",
+      "Li_transport": "Use long-range residual ionic charge+1 under frozen-core asymptotics, not nuclear charge3",
+      "representation": "Full primary PDF text read through web; direct PDF-byte fetch403; preserved retrieval JSON WEB_WANNIER_FORMULA_PRIMARY_RAW.json"
+    },
+    "peterkop_tsukerman": {
+      "citation": "R.K.Peterkop and P.B.Tsukerman, Soviet Physics JETP31,374–377(1970)",
+      "url": "https://jetp.ras.ru/cgi-bin/dn/e_031_02_0374.pdf",
+      "web_reference_id": "turn52search1",
+      "pdf_sha256": "8d7f59207301226f5d930e7b0b1d7fab75104214861010dac48f624050bcd9c4",
+      "locations": "Printedp374 Eq(1); p375L-dependence; p376 comparison to alkali measurements",
+      "relevance": "Explicitly explains that alkali nonlinearity region may be smaller than in H and was potentially unresolved by Zapesochnyi; finite measured linear behavior does not refute asymptotic Wannier law"
+    },
+    "conditional_family": {
+      "formula": "sigma_pq(E)=sigma6*(6/E)^q*((E-I_physical)/(6-I_physical))^p, I_physical<=E<=6eV",
+      "p_values": [
+        "1",
+        "nu_W(1)"
+      ],
+      "q_values": [
+        "0",
+        "1"
+      ],
+      "status": "Parent-selected four endpoint-matched sensitivity models",
+      "extra_assumptions": "Threshold asymptotic form extended across entire unmeasured interval and normalized at source6eV; q changes regular finite-energy prefactor. Neither interval-wide validity nor envelope coverage comes from Wannier theory."
+    }
+  },
+  "alternative_source_status": [
+    {
+      "source": "IAEA CollisionDBD107424",
+      "url": "https://amdis.iaea.org/db/collisiondb/datasets/107424/",
+      "provenance": "Wutte1997 Eq(1), experimental fit attributed to Lennon1988",
+      "formula": "sigma(E)=1e-13/(E*I)*[A*ln(E/I)+A1*(1-I/E)+A2*(1-I/E)^2+A3*(1-I/E)^3] cm^2, E/I energies in eV",
+      "coefficients": {
+        "A": "0.08500",
+        "A1": "-0.004000",
+        "A2": "0.7570",
+        "A3": "-0.1780",
+        "I_eV": "5.390"
+      },
+      "reported_uncertainty_percent": "10",
+      "reported_fit_precision_percent": "10.0",
+      "x_range": "5.39–[upper endpoint not returned]",
+      "status": "Actual official fitted-function content retrieved by Exa; raw direct HTML403. Historical Bell-like formula with rounded coefficients, not independent new near-threshold empirical points. HOLD_UNACTIVATED"
+    },
+    {
+      "source": "Bell1983 original LiI",
+      "url": "https://srd.nist.gov/jpcrdreprint/1.555700.pdf",
+      "doi": "10.1063/1.555700",
+      "original_coefficients": {
+        "A": "0.0854",
+        "B1": "-0.0040",
+        "B2": "0.7573",
+        "B3": "-0.1779",
+        "I_eV": "5.39"
+      },
+      "source_location": "Table5 printedp910 and uncertainty qualificationp894",
+      "status": "Historical original-table correction reused unchanged; quoted10% reliability does not apply uniformly at threshold (original explicitly greater uncertainty near threshold). No new fit evaluation"
+    },
+    {
+      "source": "OPEN-ADAS type1 lithium",
+      "url": "https://open.adas.ac.uk/download/adf04/lilike/lilike_aug99%5D%5Bli0_t1.dat",
+      "sha256": "73ed2d7198567b7a7627f97f1c574ec64d8829f8f01b697e24a2a9b3f1eaaa12",
+      "coordinates": "X=E/I; dimensionless ionization collision strength. Filetype1, not temperature grid despite website widget.",
+      "parent_threshold_cm_minus1": "43489.0",
+      "ground_state": "level1 1s2 2s1 2S, statistical weight2; S1 +1 transition",
+      "first_X": [
+        "1.00",
+        "1.15",
+        "1.33"
+      ],
+      "first_ground_Omega": [
+        "1.24-08",
+        "5.48-01",
+        "2.07+00"
+      ],
+      "conversion_source": "ADAS-C(24)01 https://www.adas.ac.uk/notes/adas_c24-01.pdf, section3 p4; Omega=g*E/I_H*sigma/(pi*a0^2)",
+      "web_reference_id_conversion": "turn66search1",
+      "status": "No resolved non-threshold sample in the target gap: printedX1.00 is the file nominal threshold with tiny nonzeroOmega, and nextX1.15 exceeds6eV forLi. Filethreshold43489cm^-1 is not the parentphysicalI; do not treat the roundedX1.00 point as a deconvolved independent near-threshold measurement. Comments describe CCC-derived fits, differing from IAEAgroundfit lineage. No code conversion or numerical fit evaluation performed. HOLD_UNACTIVATED",
+      "raw_distribution": "Personal-use source; exclude full .dat from public code/repo publication"
+    },
+    {
+      "source": "OPEN-ADAS type3 lithium",
+      "url": "https://open.adas.ac.uk/download/adf04/lilike/lilike_aug99%5D%5Bli0.dat",
+      "sha256": "6884b33e8b45af407483910834e556ff1eac674223e0e412cdd21f1700c908ad",
+      "coordinate": "TemperatureK; S rows=exp(I/kT)*ionization rate, not sigma(E)",
+      "status": "Retained only for provenance; not inverted into local threshold cross sections"
+    },
+    {
+      "source": "Schweinzer1999",
+      "doi": "10.1006/adnd.1999.0815",
+      "status": "Full article not obtained. Official IAEA Eq2 coefficients retrieved for excitedLi only. Two-page author extended abstract obtained but has no ground coefficients; no fulltext claim.",
+      "extended_abstract_url": "https://www.osti.gov/etdeweb/servlets/purl/20143830",
+      "extended_abstract_sha256": "3c648625e605dc01735d81a0072e83466bffba01bfd9bd927e4cc467c3763391"
+    },
+    {
+      "source": "Bray1994",
+      "doi": "10.1103/PhysRevA.49.1066",
+      "web_reference_id": "turn62view0",
+      "status": "APS abstract read; fulltext authorization wall. AuthorCCC numeric selector reused; no below6eV data in it"
+    },
+    {
+      "source": "NISTBEB Li holdings",
+      "url": "https://physics.nist.gov/cgi-bin/Ionization/atom.php?element=Li",
+      "web_reference_id": "turn55view2",
+      "status": "Official Li holdings list excitation transitions only; no neutralLiionization link/orbitalconstants. Generic BEB formula does not supply missing Li-specific parameters or coverage"
+    },
+    {
+      "source": "Younger1982",
+      "doi": "10.6028/jres.087.006",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6706543/",
+      "status": "Primary article text retrieved by Exa. Distorted-wave model explicitly disagrees with experiment below about10eV; lowest tableu=1.25, modelI2s=5.393eV. Not admissible as threshold empirical closure"
+    }
+  ],
+  "claim_alignment": {
+    "established_literature": [
+      "Published finite-resolution Li straight-segment slope and3.4eV interval",
+      "Asymptotic Wannier neutral-atom exponent and explicit Coulomb-center formula",
+      "Actual official historical fits and ADAS grid coordinates"
+    ],
+    "direct_reconstruction": [
+      "Recentered line formed from printed slope and parent physicalI",
+      "Interpretation of unit-header typo by dimensions"
+    ],
+    "observations": [
+      "CCC source starts6eV",
+      "ADAS type1 has only nominal-thresholdX1.00 before nextsampleX1.15; no resolved interior above-threshold grid across targetgap",
+      "Actual Exa and SciSpace calls returned and saved"
+    ],
+    "hypotheses": [
+      "Uniform extrapolation of slope to unresolved energies",
+      "Four p,q family members across full gap",
+      "Any claimed envelope that contains true sigma"
+    ],
+    "open_obligation": "No retrieved deconvolved isotope-resolved pointwise cross sections or uncertainty enclosure on entire physicalI..6eV; no independent local amplitude bound. Full-rate high-energy tail also outside this source campaign."
+  },
+  "execution": {
+    "scientific_cross_section_evaluations": 0,
+    "rate_quadratures": 0,
+    "ode_ivp": 0,
+    "closed_test_reruns": 0,
+    "remote_mutations": 0,
+    "actual_exa_calls": true,
+    "actual_scispace_calls": true
+  },
+  "public_safe_artifact": "This JSON contains small numeric facts, derived contract, URLs and hashes. Full sourcePDF/images/dat/retrievaltext remain private source evidence."
+}

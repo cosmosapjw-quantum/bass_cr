@@ -1,0 +1,266 @@
+{
+  "schema": "N4_INDEPENDENT_ADMISSION_REVIEW_V1",
+  "reviewed_at_utc": "2026-10-23T19:30:47.787758+00:00",
+  "reviewer": "/root/n4_admission_review",
+  "review_kind": "independent read-only bounded admission-delta review; existing scientific C9 evidence reused",
+  "verdict": "PASS_SCOPED_NEW_ADMISSION_MAPPING",
+  "node": "CR_N4_C23B_CUTOFF_BINDING",
+  "approved_named_consumer": "C23C_FROZEN_FIVE_LABEL_CALORIC_V1",
+  "approved_saved_request_count": 18,
+  "approved_wrapper_status": "COMPLETE_SCOPED",
+  "approved_claim_gate": "CONSUMER_ADMITTED",
+  "blocking_findings": [],
+  "blocking_finding_count": 0,
+  "new_scientific_execution_count": 0,
+  "historical_science_replay_count": 0,
+  "independent_recomputation_of_old_science": false,
+  "scope": "Original N4 source/input/domain/energy-owner mapping to completed C23C, and central N4 wrapper delta only.",
+  "not_admitted": [
+    "CR_N4_STOPPING_KERNEL",
+    "CR_N5_ATOMIC_ISOTOPE_COVERAGE actual rate provider",
+    "CR_N6_CONSERVATIVE_COUPLING",
+    "IGM thermal history",
+    "full21 species rates",
+    "global physical heating or error bound"
+  ],
+  "checks": [
+    {
+      "id": "A1",
+      "status": "PASS",
+      "scope": "Pinned handoff input and producer ownership",
+      "basis": "C23B byte-pinned atoms, five declared fit labels, density/abundance exclusive, proper volume and exposure applied once, bath-frame/proper-time units retained."
+    },
+    {
+      "id": "A2",
+      "status": "PASS",
+      "scope": "KC4 assumptions",
+      "basis": "Nnuc>0, Ne0>=0 imply NB>=Nnuc>0; T0>0 gives UB>0; finite nonnegative source atoms and chi>=3/2 map to fresh-inventory construction. No old-spectrum continuation, KC3 smooth certificate or KC6 uniqueness claim."
+    },
+    {
+      "id": "A3",
+      "status": "PASS",
+      "scope": "Atomic endpoints and caloric EOS",
+      "basis": "thermal [0,Kc], active (Kc,infinity); differential EOS is a smooth-variation identity; actual consumer uses finite B15 temperature change. Binding/radiation/escape excluded from kinetic Uall."
+    },
+    {
+      "id": "A4",
+      "status": "PASS",
+      "scope": "Named consumer admission",
+      "basis": "C23C_FROZEN_FIVE_LABEL_CALORIC_V1 and exactly the saved 18 requests. Wider conditional API is not a complete numerical campaign; future N6/IGM/full21/stopping consumer not admitted."
+    },
+    {
+      "id": "A5",
+      "status": "PASS_REUSED",
+      "scope": "Existing numerical and independent evidence",
+      "basis": "Read stored main18, guard5 and independent Decimal80 RESULT (977 comparisons, 1e-40 criterion, C9-F1 closed), plus original 10 input/output pins. No solver, old18, oldKC, C9 or scientific campaign executed."
+    },
+    {
+      "id": "A6",
+      "status": "PASS",
+      "scope": "Central wrapper preservation",
+      "basis": "Independent JSON diff changes only /nodes/6/plan_status and /nodes/6/observed_completion; all 40 contracts, 39 other wrappers, 7 authorities, 17 edges and original handoff suffix retained. One PR-plan row changes. Original OPEN/NOT_RUN and null budgets remain snapshots."
+    },
+    {
+      "id": "A7",
+      "status": "PASS",
+      "scope": "Budget continuity",
+      "basis": "All 9 historical outcome hashes, dispatch records, worker time fields and three declared subtotals correspond to recovered stored records. Unknown total cost/remaining/currency remain null. CPU index is not CPU time."
+    },
+    {
+      "id": "A8",
+      "status": "PASS",
+      "scope": "Execution/publication/backup boundaries",
+      "basis": "New science 0; actual future packet commit and provider acknowledgement remain pending. Prior Drive UNKNOWN_NO_ACK and Dropbox current metadata versus prior R3 are separated; other conversations UNAVAILABLE and external runtime UNOBSERVED."
+    }
+  ],
+  "reused_authority": {
+    "science_commit": "54c2ff11e8308d45c545679301059bc1fcf268eb",
+    "documents_commit": "6c760dc1f0ce5820263b276fa7263e87c1285bd2",
+    "terminal_commit": "910a9a92e4bf5a9d77b6ff60365d94559f54cbbd",
+    "central_base": "0f9d9df825be1dac9ca9bdf73cdc2e8908bcba17",
+    "main_execution_identity": "c6174a7a78247a1ee89dfeb152444ba49e2094004926bfe0597eb613e30b7faf",
+    "supplier_execution_identity": "277d49a9d48c94f6abf4f28fdef9e3be1d352fbb737a2edaed8ad46f1c260955",
+    "KC_source_commit": "a5c29ad4070acb931d92d2bec42a927a57f479ca"
+  },
+  "reviewed_candidate_bytes": [
+    {
+      "path": "N4_SCOPE_DECISION_KO.md",
+      "bytes": 10099,
+      "sha256": "f93959743cf781e5ab17b289907faad3520abe0dfc99550038e68657be75ca56"
+    },
+    {
+      "path": "N4_ADMISSION.json",
+      "bytes": 4133,
+      "sha256": "161b41045a4bfeaaa0518880a99499491332653707281634eebb63b430e1254f"
+    },
+    {
+      "path": "EVIDENCE_PINS.json",
+      "bytes": 85963,
+      "sha256": "4538ef5b7989af5e109a4f63c799a5e507f2ee93b49f136b0faa3a44c3325f8a"
+    },
+    {
+      "path": "BUDGET_CONTINUITY.json",
+      "bytes": 10301,
+      "sha256": "24e6634210c40621ba0cc371d4241afa525d42a94499d0833b7ea2921b9baa84"
+    },
+    {
+      "path": "LOOP_R1_R10_C1_C10_KO.md",
+      "bytes": 2748,
+      "sha256": "2526b7d1c8b3da72fa8d037a5ad384d9f31aaa7230fd487485f797953e021ee4"
+    },
+    {
+      "path": "HANDOFF_N4_KO.md",
+      "bytes": 2542,
+      "sha256": "b1a6406dfba4544aca50aaf9a18be808da13f7cf489673aff79d9faea50875e9"
+    },
+    {
+      "path": "INDEPENDENT_REVIEW_STATUS.json",
+      "bytes": 171,
+      "sha256": "bdf77be34cd1706212466b96867f9a8e5dc43ffb183b520b0cc3b9eeb74929dd"
+    },
+    {
+      "path": "STRUCTURAL_VERIFICATION.json",
+      "bytes": 476,
+      "sha256": "709dc07eb11315c0b20ab5c368443409d10010046fff431067646eca22a0a079"
+    },
+    {
+      "path": "verify_n4_structure.py",
+      "bytes": 2562,
+      "sha256": "aa75363da0e627e8d88c427d14b74976d003ed9e0f9324534098ddfdfdc698b8"
+    },
+    {
+      "path": "central_patch/DAG.json",
+      "bytes": 213774,
+      "sha256": "2a4804198701dee88902d59593bd064496f9877f8c00712ce7f665a8e343fd41"
+    },
+    {
+      "path": "central_patch/HANDOFF_bass_cr_KO.md",
+      "bytes": 12756,
+      "sha256": "32ce501ebceee1f65a78a902abacf43816372e990c8552c8765fbdecd800ed07"
+    },
+    {
+      "path": "central_patch/PR_PLANS_KO.md",
+      "bytes": 10329,
+      "sha256": "042563b1f45c4e57ce71199dfe3ea6a8fe41c596e430dae07b27cb21fa436cc6"
+    },
+    {
+      "path": "central_patch/returns/CR_N4_C23B_CUTOFF_BINDING_20261024.json",
+      "bytes": 896,
+      "sha256": "491d6c75f37a675e48d4e9cce6d608dc85bdf55eb51a3fe691945947ffdf3708"
+    }
+  ],
+  "reused_original_C9_pins_verified_from_restored_bytes": [
+    {
+      "path": "inputs/photoelectron_atoms.csv",
+      "bytes": 1681578,
+      "sha256": "f5bcfe477b8a073341a7496c079e6eb2737f6ca578b884376887b04989e57fc3"
+    },
+    {
+      "path": "CONTRACT.json",
+      "bytes": 1681,
+      "sha256": "6226af24969b0ab120402106a065b35124937c7c41135fdee829772931e33e26"
+    },
+    {
+      "path": "implementation/source_cutoff_binding.py",
+      "bytes": 11448,
+      "sha256": "acedb6e893f08dc1207c6fc40a63af0f4d21480cbf226e0266b6d8f81b883401"
+    },
+    {
+      "path": "implementation/history/v1/source_cutoff_binding.py",
+      "bytes": 11015,
+      "sha256": "1e1771a0eca01cfdbef109c01774937bd5a23a638ce6f87f3a3d8fa99282e7c1"
+    },
+    {
+      "path": "implementation/vendor/thermal_cutoff_solver.py",
+      "bytes": 17393,
+      "sha256": "427ccb65c8f11d5cbe2035415f2f45abeaca6b23aa818027a09152b2cbfe67f0"
+    },
+    {
+      "path": "runs/c23c_source_cutoff_binding_20261023_v1/CASES.json",
+      "bytes": 114884,
+      "sha256": "c6db8c354c1e85e366f218eb8f0dfe42e99099ea18e370a1cf2062f816d5724d"
+    },
+    {
+      "path": "runs/c23c_source_cutoff_binding_20261023_v1/CUTS.csv",
+      "bytes": 4216,
+      "sha256": "7429023acbc55dd68b342df7010181bcc745231fa8268be61df5e2136883809f"
+    },
+    {
+      "path": "runs/c23c_source_cutoff_binding_20261023_v1/TARGETED_CHECKS.json",
+      "bytes": 1998,
+      "sha256": "94c94cab601c6601451934acaaf50638449b49b0b19bee82a83d41ba59c00492"
+    },
+    {
+      "path": "runs/c23c_source_cutoff_binding_20261023_v1/SOURCE_IDENTITY.json",
+      "bytes": 1734,
+      "sha256": "02d1d61382618b77e0c6ebe8eb922bab8fd6040b6145ad1ba04c1367a4429a05"
+    },
+    {
+      "path": "runs/c23c_source_cutoff_binding_20261023_v1/SUMMARY.json",
+      "bytes": 615,
+      "sha256": "ff5aae0a0779c7dfc16fe92253077fce3555702589facd3726affc13796792b4"
+    }
+  ],
+  "original_C9_pin_match_count": 10,
+  "manifest_check_scope": "New 274-object manifest contains unique paths; six selected new source/contract/code/cases/C9-result entries independently matched bytes. Existing structural verification covers all 274; not repeated as a new independent full manifest audit.",
+  "central_diff_paths": [
+    "/nodes/6/observed_completion",
+    "/nodes/6/plan_status"
+  ],
+  "preserved": {
+    "author_contracts": 40,
+    "other_wrappers": 39,
+    "authorities": 7,
+    "integration_edges": 17,
+    "handoff_body": "BYTE_PRESERVED_SUFFIX",
+    "changed_plan_rows": 1
+  },
+  "budget": {
+    "distinct_historical_runs": 9,
+    "dispatch_wall_sum_s": 27.228573164997215,
+    "worker_wall_known_subtotal_s": 22.34583505801129,
+    "worker_cpu_known_subtotal_s": 11.701636483,
+    "inherited_spend": null,
+    "remaining": null,
+    "currency": null,
+    "subtotals_are_total_project_cost": false
+  },
+  "axes_at_review": {
+    "EXECUTION": "REUSED_SCIENCE_COMPLETE_SCOPED; NEW_SCIENCE_0",
+    "PUBLICATION": "C23C_C_D_E_REUSED; NEW_PACKET_PENDING",
+    "BACKUP": "RECOVERED_C23C_BYTES_REUSED; NEW_PACKET_PROVIDER_ACK_PENDING; PRIOR_DRIVE_UNKNOWN_NO_ACK_RETAINED",
+    "DAG": "N4_WRAPPER_APPROVED_COMPLETE_SCOPED; STOPPING_N5_N6_NOT_PROMOTED"
+  },
+  "post_review_recording": "Parent may record this verdict/reviewer and actual publication or backup receipts in pending metadata/status text, plus the explicitly listed locator/model metadata finalization. This records the completed review and observed delivery; no physics, saved input set, source identity, endpoint rule, other wrapper or original author-contract change is approved. A targeted final structural comparison may confirm that only these fields changed; no old scientific replay or further review loop is needed.",
+  "limits": {
+    "physical_heating": null,
+    "stopping_time": null,
+    "global_error_bound": null,
+    "global_completion_percent": null,
+    "full_conversations": "UNAVAILABLE",
+    "external_runtime": "UNOBSERVED",
+    "nuclear_network_PNG": "NOT_RECOVERED_NOT_READ"
+  },
+  "allowed_finalization_metadata": [
+    {
+      "field": "status, independent_review, receiver_review_status and corresponding handoff/loop status text",
+      "allowed": "Replace pending with this actual PASS_SCOPED_NEW_ADMISSION_MAPPING verdict and reviewer; do not broaden admission scope."
+    },
+    {
+      "field": "packet_commit, publication links/status and backup receipt fields",
+      "allowed": "Use only actually observed immutable commit/provider identities and tier achieved; do not claim unobserved publication or readback."
+    },
+    {
+      "field": "execution_identity.requested_model",
+      "allowed": "Record parent requested gpt-6.1-sol; observed_model remains UNOBSERVED."
+    },
+    {
+      "field": "saved_numeric_approval.case_output_path and canonical locator fields",
+      "allowed": "Add canonical Git path and immutable C23C source/result URL for the same CASES.json bytes; preserve 18-request input contract."
+    },
+    {
+      "field": "EVIDENCE_PINS path-prefix map",
+      "allowed": "Add local-to-repository locator mapping using existing C23C C/D and central 0f9d9df825be1dac9ca9bdf73cdc2e8908bcba17 pins; do not change pinned byte hashes or science identity."
+    }
+  ]
+}

@@ -1,0 +1,304 @@
+{
+  "schema": "PHYS83_NUCLEAR_THERMAL_FAST_OWNERSHIP_V1",
+  "workflow_version": "1.0.0",
+  "unit": "NUCLEAR_THERMAL_FAST_PARTICLE_OWNERSHIP",
+  "status": "DERIVED_CODE_READY_WITH_PHYSICAL_PROVIDERS_OPEN",
+  "scope": [
+    "np_d_gamma",
+    "nd_t_gamma",
+    "pd_h_gamma"
+  ],
+  "scientific_assumptions": {
+    "background": "non-tilted LRS Bianchi I",
+    "signature": "(-,+,+,+)",
+    "frame": "one local normal orthonormal frame for all signed number, energy and tensor sources",
+    "masses": "bare nuclear ground-state rest masses",
+    "thermal_gas": "isotropic nonrelativistic monatomic common-T bath; pi_th=0",
+    "daughter_ownership": "fast-first exclusive population",
+    "free_electron_count_per_capture": 0,
+    "fast_tensor": "separate from thermal gas and from collisionless DM",
+    "HH_R10": "OFF",
+    "production_admission": "NOT_ISSUED"
+  },
+  "parent": {
+    "repository": "cosmosapjw-quantum/WU088_HH",
+    "authority_commit": "ca9d53983459ea08f9992a8a24663e46b7180344",
+    "phys81": "b3ec271a96cb67e583bffa9b61533802838236f9",
+    "path": "research/hh_phys81_atomic_nuclear_source_contract_20261023",
+    "file_pins": [
+      {
+        "path": "theory/NUCLEAR_RECOIL_THEORY_KO.md",
+        "bytes": 16211,
+        "sha256": "566b5cb4f2b704e9553d5aa558372599d65ffe9dcf9dda90ab28ae1cb09eba18"
+      },
+      {
+        "path": "source/nuclear_recoil.py",
+        "bytes": 14385,
+        "sha256": "e8b7ad216113932d0844e424ca6e5e17dd644e07ca883e463c0c6c325c4fcf0e"
+      },
+      {
+        "path": "source_data/NUCLEAR_MASSES_CODATA2022.json",
+        "bytes": 5423,
+        "sha256": "ee87900f698e59029a1aafce3d4184870ccc6fa16a8ba50326bd13a10de60aaf"
+      }
+    ],
+    "reuse": "Read source/theory/mass transcription; no parent function invocation and no completed-identity replay."
+  },
+  "api": {
+    "event_adapter": {
+      "proposed_name": "capture_normal_event",
+      "implemented_here": false,
+      "inputs": {
+        "reaction_id": "one predefined PHYS81 bare-nucleus ground-state channel",
+        "incident_com_kinetic_MeV": "finite >=0, exact E_star=W-(ma+mb)c^2 event input",
+        "beta_normal_vector": "finite 3-vector, norm<1; exact pair CM velocity/c relative to normal frame",
+        "photon_direction_com": "finite unit 3-vector in same spatial tetrad with declared orientation",
+        "ownership": "literal FAST_FIRST or separately requested PROMPT_THERMAL; no implicit zeta->number mapping"
+      },
+      "output_fields": [
+        "photon_energy_normal_MeV",
+        "daughter_kinetic_normal_MeV",
+        "incoming_kinetic_normal_MeV",
+        "photon_momentum_normal_MeV_per_c",
+        "daughter_momentum_normal_MeV_per_c",
+        "delta_N_thermal_by_species",
+        "delta_N_fast_by_species",
+        "delta_rest_MeV",
+        "delta_thermal_MeV",
+        "delta_fast_MeV",
+        "delta_photon_MeV",
+        "energy_residual_MeV",
+        "four_momentum_residual",
+        "source_sha256",
+        "approximation_tags"
+      ],
+      "invariants": [
+        "energy sum zero before numerical roundoff",
+        "baryon and charge preserved over thermal+fast pools",
+        "delta N_e=0",
+        "delta N_nuclear_total=-1",
+        "outgoing on-shell masses",
+        "all kinetic/photon energies nonnegative"
+      ],
+      "numeric_guidance": [
+        "Reuse parent's factored COM energy split rather than subtracting squared masses.",
+        "For near-zero daughter kinetic energy, evaluate c^2 p^2/(epsilon+mc^2) from boosted momentum.",
+        "Do not force residual to zero or use closure remainder as an independent reference."
+      ]
+    },
+    "weighted_average": {
+      "proposed_name": "average_capture_events",
+      "implemented_here": false,
+      "physical_input_provider_status": "OPEN",
+      "input": "nonnegative finite event-rate weights and normal-frame event records from a single declared physical sampling measure",
+      "normalization": "R=sum(weights); when R>0 use the same weights/R for every number and energy component",
+      "zero_rate": "all sources zero; conditional event means null/undefined",
+      "moments": {
+        "A": "<Gamma W>_rxn, energy",
+        "B": "<Gamma/W>_rxn, inverse energy",
+        "D": "<Gamma e_gamma_star beta_dot_direction>_rxn, energy"
+      },
+      "outputs": {
+        "mean_photon": "(A-C^2 B)/2+D",
+        "mean_daughter_kinetic": "(A+C^2 B)/2-D-C",
+        "mean_incoming_kinetic": "A-C_i"
+      },
+      "definitions": {
+        "C": "mc c^2",
+        "C_i": "(ma+mb)c^2",
+        "Q": "C_i-C"
+      },
+      "angular_zero_condition": "D=0 only with a stated conditional angular symmetry, or independently justified isotropic equal-T CM/relative distribution and V-independent rotationally covariant emission kernel.",
+      "precision_rule": "Evaluate stable event quantities where A-C^2 B cancellation matters; preserve sampled quadrature residual without continuum certification."
+    },
+    "ownership": {
+      "FAST_FIRST": {
+        "delta_N_th": -2,
+        "delta_N_fast": 1,
+        "delta_U_th": "-K_in",
+        "delta_U_fast": "K_c",
+        "delta_U_gamma": "E_gamma",
+        "delta_U_rest": "-Q"
+      },
+      "PROMPT_THERMAL": {
+        "delta_N_th": -1,
+        "delta_N_fast": 0,
+        "delta_U_th": "K_c-K_in = Q-E_gamma",
+        "delta_U_fast": "0",
+        "delta_U_gamma": "E_gamma",
+        "delta_U_rest": "-Q",
+        "selection": "alternative closure; not automatically applied"
+      },
+      "STOPPING": {
+        "delta_N_th": 0,
+        "delta_N_fast": 0,
+        "delta_U_th": "+dE_loss",
+        "delta_U_fast": "-dE_loss",
+        "provider_status": "OPEN"
+      },
+      "ASSIMILATION": {
+        "delta_N_th": 1,
+        "delta_N_fast": -1,
+        "delta_U_th": "+K_match",
+        "delta_U_fast": "-K_match",
+        "provider_status": "OPEN"
+      }
+    },
+    "source_assembly": {
+      "thermal_number": "S_nth=-2 sum_r R_r + sum_c J_c plus independently admitted other thermal number sources",
+      "fast_number": "S_nfast,c=R_into_c-J_c plus admitted other population sources",
+      "thermal_energy": "Q_th=-sum_r R_r <K_in>_r + stopping_heat + sum_c J_c <K_match>_c",
+      "temperature": "(3/2)n_th kB Tdot= -n_th kB T Theta + Q_th -(3/2)kB T S_nth",
+      "collisionless_frame": "Rest/kinetic split is an energy ledger; fast stress must be derived from its distribution in the same normal frame."
+    }
+  },
+  "maxwellian_reduction": {
+    "status": "DERIVED_NONRELATIVISTIC_INPUT_STATISTICS_ONLY",
+    "assumptions": [
+      "equal T for both reactants",
+      "zero relative drift",
+      "nondegenerate isotropic Maxwellian bath",
+      "sigma(E) channel-specific with no explicit T dependence for derivative identity",
+      "differentiation under the rate integral is justified",
+      "reaction-selected kinetic support nonrelativistic"
+    ],
+    "symbols": {
+      "M": "ma+mb",
+      "mu": "ma*mb/(ma+mb)",
+      "tau": "kB*T",
+      "E": "mu*g^2/2"
+    },
+    "formulas": {
+      "K": "sqrt(8/(pi*mu))*tau^(-3/2)*integral(E*sigma(E)*exp(-E/tau),E=0..infinity)",
+      "R": "n_a_th*n_b_th*K/(1+delta_ab)",
+      "event_mean_relative_E": "integral(E^2*sigma*exp(-E/tau))/integral(E*sigma*exp(-E/tau))",
+      "derivative_identity": "<E>_rxn=kB*T*(3/2+dlnK/dlnT)",
+      "event_mean_incoming_kinetic": "<K_in>_NR=3/2*kB*T+<E>_rxn=kB*T*(3+dlnK/dlnT)",
+      "fast_first_temperature_source": "Tdot_cap_to_fast=-(2/3)*(R/n_th)*T*dlnK/dlnT"
+    },
+    "separation": "These NR Maxwellian formulas do not by themselves supply an exact relativistic event measure or the normal-frame outgoing moments B,D.",
+    "exact_event_vs_nr_measure": "Keep separate approximation tags. No unspecified mixture is admitted.",
+    "molar_rates": "A provider returning N_A<sigma v> must be divided by N_A before use with number densities."
+  },
+  "source_references": [
+    {
+      "id": "PDG2025_KINEMATICS",
+      "url": "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-kinematics.pdf",
+      "locations": [
+        "49.1",
+        "49.2",
+        "49.16",
+        "49.17"
+      ],
+      "used_for": "boost and exact two-body kinematics; restored c and (-+++) convention",
+      "web_refs": [
+        "turn3view0"
+      ],
+      "basis": "literature-supported"
+    },
+    {
+      "id": "WARSHAW2001_TDF",
+      "url": "https://nuclear.llnl.gov/CNP/tdf/tdf.htm",
+      "title": "The TDF System for Thermonuclear Plasma Reaction Rates, Mean Energies and Two-Body Final State Particle Spectra",
+      "author": "Stephen I. Warshaw",
+      "report": "UCRL-ID-144510",
+      "date": "2001-07-11",
+      "locations": [
+        "section 2",
+        "section 3"
+      ],
+      "used_for": "reaction-selected averages, CM/relative separation and derivative relation; massive-final-state NR partition not adopted for photon",
+      "web_refs": [
+        "turn3view1",
+        "turn6view0"
+      ],
+      "basis": "literature-supported"
+    },
+    {
+      "id": "LONGLAND2010",
+      "url": "https://arxiv.org/pdf/1004.4136",
+      "doi": "10.1016/j.nuclphysa.2010.04.008",
+      "locations": [
+        "section 2 equation (1)"
+      ],
+      "used_for": "channel cross-section Maxwellian rate convention, with N_A units explicitly distinguished",
+      "web_refs": [
+        "turn6view1"
+      ],
+      "basis": "literature-supported"
+    }
+  ],
+  "verification": {
+    "method": "actual Wolfram Language symbolic algebra; independent direct energy/four-vector derivation",
+    "context_calls": 1,
+    "evaluator_calls_completed": 2,
+    "residual_count": 10,
+    "residuals_all_zero": true,
+    "receipts": [
+      "wolfram_symbolic_receipt.json",
+      "wolfram_moment_receipt.json"
+    ],
+    "scope": "symbolic identities under declared assumptions; no nuclear empirical-rate integration or cosmological run",
+    "implementation_status": "NO_NEW_PRODUCTION_ADAPTER_IN_THIS_CHILD",
+    "nuclear_rate_runs": 0,
+    "nuclear_ODE_runs": 0,
+    "stopping_runs": 0,
+    "historical_identity_replays": 0
+  },
+  "next_acceptance_tests": [
+    "Exact energy and momentum conservation from supplied on-shell incoming pair and emitted direction, using independent mass-shell check.",
+    "Cold E*=0, beta=0 recovers parent stored cold energies by data reuse; do not rerun completed parent suite.",
+    "FAST_FIRST and PROMPT_THERMAL counts separately satisfy A/Z stoichiometry and are mutually exclusive.",
+    "Assimilation transfers actual residual energy and one particle from fast to thermal exactly once.",
+    "Supplied positive event weights preserve all linear ledgers; zero-rate output uses null conditional means.",
+    "Synthetic sigma(E)=sigma0 E^s, s>-2 gives Gamma(s+2) rate and <E>=(s+2)kBT.",
+    "Synthetic sigma*v constant leaves T unchanged in fast-first removal; constant sigma gives -T R/(3 n_th).",
+    "Refuse nonfinite or negative weights, malformed directions, beta>=1 and mixed energy/frame/source tags."
+  ],
+  "remaining_obligations": [
+    "channel-specific total/differential nuclear source with supported low-energy domain",
+    "finite-T physical event measure, angular kernel and controlled nonrelativistic/relativistic interface",
+    "fast-product stopping and thermal matching provider",
+    "radiation spectral/geometry transport",
+    "common mass covariance and physical uncertainty",
+    "production adapter implementation and independent runtime verification"
+  ],
+  "claims": [
+    {
+      "id": "EVENT_NORMAL_ENERGY",
+      "basis": [
+        "derived",
+        "symbolically checked"
+      ],
+      "statement": "Same-normal-frame exact two-body event ledger closes with incoming kinetic debit."
+    },
+    {
+      "id": "FAST_THERMAL_OWNERSHIP",
+      "basis": [
+        "derived"
+      ],
+      "statement": "Exclusive fast-first population has delta N_th=-2 and delta N_fast=+1; later assimilation supplies number transfer."
+    },
+    {
+      "id": "FINITE_T_AVERAGING_CONTRACT",
+      "basis": [
+        "derived",
+        "symbolically checked"
+      ],
+      "statement": "A supplied nonnegative event measure maps to scalar sources through A,B,D without losing linear energy conservation."
+    },
+    {
+      "id": "NR_SELECTED_KINETIC",
+      "basis": [
+        "derived",
+        "literature-supported",
+        "symbolically checked"
+      ],
+      "statement": "For specified equal-T NR Maxwellian assumptions, selected incoming kinetic mean is kB*T*(3+dlnK/dlnT)."
+    }
+  ],
+  "strong_no_go": {
+    "status": "NOT_PROPOSED",
+    "reason": "Constructive source/ownership contract; no impossibility or exclusion claim."
+  }
+}

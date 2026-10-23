@@ -1,0 +1,82 @@
+{
+  "normalization_equivalence": "EXACT_PASS",
+  "zero_exposure": "EXACT_PASS",
+  "missing_bath": {
+    "status": "BLOCKED_MISSING_BATH_OR_SOURCE_CONTRACT",
+    "missing_fields": [
+      "initial_temperature_K"
+    ],
+    "physical_heating_eV_per_s": null,
+    "inventory": null
+  },
+  "guards": [
+    {
+      "name": "chi=1.4999",
+      "result": "PASS_REJECTED"
+    },
+    {
+      "name": "chi=NaN",
+      "result": "PASS_REJECTED"
+    },
+    {
+      "name": "initial_temperature_K=0",
+      "result": "PASS_REJECTED"
+    },
+    {
+      "name": "initial_temperature_K=10000.0",
+      "result": "PASS_REJECTED"
+    },
+    {
+      "name": "proper_duration_s=-1",
+      "result": "PASS_REJECTED"
+    },
+    {
+      "name": "proper_duration_s=1e20",
+      "result": "PASS_REJECTED"
+    },
+    {
+      "name": "redshift=2.5",
+      "result": "PASS_REJECTED"
+    },
+    {
+      "name": "frame=parent_rest",
+      "result": "PASS_REJECTED"
+    },
+    {
+      "name": "rate_unit=count",
+      "result": "PASS_REJECTED"
+    },
+    {
+      "name": "initial_electron_model=all_free_already_in_base",
+      "result": "PASS_REJECTED"
+    },
+    {
+      "name": "double_normalization",
+      "result": "PASS_REJECTED"
+    },
+    {
+      "name": "missing_population",
+      "result": "PASS_REJECTED"
+    },
+    {
+      "name": "zero_volume",
+      "result": "PASS_REJECTED"
+    },
+    {
+      "name": "negative_population",
+      "result": "PASS_REJECTED"
+    },
+    {
+      "name": "implicit_float",
+      "result": "PASS_REJECTED"
+    },
+    {
+      "name": "byte_mutation",
+      "result": "PASS_REJECTED"
+    }
+  ],
+  "double_count_mutation_residual": "1109962167144022829292761186512519453/100000000000000000000000000000000000000",
+  "duplicate_heat_mutation_residual_eV": "428848720320177655938917842486336892313405562263/10000000000000000000000000000000000000000000000000",
+  "physical_heating_in_all_cases": null,
+  "source_exactness": "exact rational arithmetic for saved decimal quadrature measure"
+}

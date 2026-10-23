@@ -1,0 +1,60 @@
+{
+  "schema_version": "c23c-provider-backup-receipt-v1",
+  "provider": "Google Drive",
+  "status": "UNKNOWN_NO_ACK",
+  "recorded_utc": "2026-10-23T15:25:20.874891+00:00",
+  "file_name": "BASS_CR_C23C_CUTOFF_COVERAGE_DELIVERY_20261024T001759KST.zip",
+  "source_size_bytes": 4773760,
+  "source_sha256": "b299ecfc0fe06b47fa76557e9faf5a9a15f6f8e4a375f4c2256114e8980abdc9",
+  "source_payload_members": 316,
+  "destination_folder_id": "1V4ZQza59dWVC7apeRz9P1TL66eaVYyJy",
+  "destination_folder_name": "bass_cr",
+  "upload": {
+    "attempts": 1,
+    "operation": "create_new_file",
+    "started_utc": "2026-10-23T15:20:10.395907+00:00",
+    "tool": "mcp__codex_apps__google_drive_upload_file",
+    "file_uri_kind": "absolute_local_path",
+    "ack_received": false,
+    "ack_file_id": null,
+    "ack_size_bytes": null,
+    "cell_id": null,
+    "cell_id_status": "NOT_RETURNED_BY_TOOL_WRAPPER",
+    "observed_terminal_result": "aborted by user after 271.3s",
+    "observed_duration_seconds": 271.3,
+    "planned_wait_bound_seconds": 120,
+    "wait_bound_status": "EXCEEDED_WITHOUT_INTERMEDIATE_YIELD",
+    "interruption_origin": "Parent coordinator interrupted the pending subagent turn after the upload tool did not return an ACK.",
+    "remote_write_outcome": "UNKNOWN",
+    "automatic_approval_review_rejection": false,
+    "repeat_upload_permitted": false,
+    "further_drive_mutations": "STOPPED_FOR_THIS_CONVERSATION"
+  },
+  "metadata_readback": {
+    "status": "NOT_RUN",
+    "reason": "No acknowledged file ID was returned."
+  },
+  "r3_actual_download": {
+    "status": "NOT_RUN",
+    "downloaded_size_bytes": null,
+    "downloaded_sha256": null,
+    "zip_crc": null,
+    "payload_members_verified": null,
+    "reason": "Upload response was absent; remote file identity is unknown."
+  },
+  "scope_notes": [
+    "The pending upload tool returned no usable result or file ID before the coordinator interrupted it.",
+    "Absence of ACK does not prove either upload success or upload failure.",
+    "No duplicate upload, guessed-file download, or further Drive mutation was attempted.",
+    "This is tool response absence, not an automatic approval-review rejection.",
+    "A subsequently received actual ACK may authorize read-only verification of that known file ID.",
+    "No science execution or ODE integration was run in this backup step."
+  ],
+  "EXECUTION": {
+    "new_science_executions": 0,
+    "new_ODE": 0
+  },
+  "PUBLICATION": "ROOT_OWNS_PUBLICATION",
+  "BACKUP": "DRIVE_UNKNOWN_NO_ACK_R3_NOT_RUN",
+  "DAG": "C10_DRIVE_PRESERVATION_OPEN"
+}

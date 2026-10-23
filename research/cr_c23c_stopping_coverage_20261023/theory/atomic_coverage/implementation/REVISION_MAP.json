@@ -1,0 +1,45 @@
+{
+  "schema": "C23C_N5_REVISION_MAP_V2",
+  "created_utc": "2026-10-23T14:52:40.112701+00:00",
+  "parent_execution": "c23c_atomic_contract_20261023_v1",
+  "preserved_sources": "history/v1/PRESERVED_SOURCE.json",
+  "revision": 2,
+  "changes": [
+    {
+      "kind": "representation",
+      "finding": "Weak connectivity is insufficient for constant-offset equivalence",
+      "fix": "rank(G)=n-1 or irreducible; direct general energy-row test unchanged",
+      "targeted_witness": "nearest-neighbor reducible G=((0,1,0),(0,-2,0),(0,1,0)); epsilon_a=(0,13,24), epsilon_b=(0,14,26)"
+    },
+    {
+      "kind": "scope_wording",
+      "finding": "Free-electron kinetic ledger was described as thermal loss without pool assumption",
+      "fix": "Tracked all-free-electron kinetic source; fixed output electron_pool=all_free_kinetic"
+    },
+    {
+      "kind": "input_guard",
+      "finding": "Default recoil zero did not distinguish unknown from explicitly declared zero",
+      "fix": "recoil_eV required; no remainder inference"
+    }
+  ],
+  "targeted_runtime": "PREPARED_ROOT_LEASE_PENDING",
+  "historical_155_replayed": 0,
+  "source_files": [
+    {
+      "path": "atomic_contract.py",
+      "bytes": 11926,
+      "sha256": "6246cff6dcc1bac18dd6f8c47b9e9da11f4d14a8bd342c21d30eee19eee9ca69"
+    },
+    {
+      "path": "verify_atomic_contract.py",
+      "bytes": 9019,
+      "sha256": "4ad46350df554c4fac9a46c7c8f682176d926fad0e868386046f43a196eda9c0"
+    },
+    {
+      "path": "verify_atomic_repair.py",
+      "bytes": 3603,
+      "sha256": "a417fb7976139fea7eeb77afbc30ec47223bf7ca4ae242bd382f2897ea9e3e00"
+    }
+  ],
+  "editing_note": "Two document patch calls failed exact-line matching before a substantive single-paragraph patch; no scientific execution occurred in these editing failures."
+}

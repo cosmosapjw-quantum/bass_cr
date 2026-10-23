@@ -1,0 +1,353 @@
+{
+  "schema": "bass-cr-thermal-cutoff-assumptions.v1",
+  "unit": "CR-THEORY-KERNEL-CUTOFF-20261013",
+  "selected_node": "CR_THEORY_THERMAL_CUTOFF_FEEDBACK",
+  "derivation": "derivations/THERMAL_CUTOFF_FEEDBACK_KO.md",
+  "representation_convention": {
+    "variables": "Comoving counts N and kinetic energies U; rho=dN/dW. Proper-volume dilution is not added to comoving count equations.",
+    "eos": "U=c_v N T; c_v=3 k_B/2; common nonrelativistic monatomic ideal thermal gas.",
+    "cutoff": "c(T)=chi k_B T; c here denotes cutoff energy and not speed of light.",
+    "boundary_ownership": "Thermal owns W=c; active tail is the open interval (c,infinity).",
+    "common_state": "C=N_nuc+N_e,all and E=U_thermal+U_active. Binding/radiation ledgers are held outside cutoff reclassification.",
+    "immutable_solver_data": [
+      "common_count",
+      "common_kinetic_energy",
+      "endpoint_resolved_electron_measure",
+      "reference_cutoff",
+      "unresolved_base_count",
+      "unresolved_base_energy"
+    ],
+    "candidate_update": "Recompute candidate moments from the fixed reference; never accumulate reference-to-candidate transfers repeatedly."
+  },
+  "assumptions": [
+    {
+      "id": "TC-A1",
+      "scope": [
+        "TC1",
+        "TC2",
+        "TC3",
+        "TC4",
+        "TC5",
+        "TC6",
+        "TC7"
+      ],
+      "statement": "Resolved electron measure is nonnegative on W>=0 with finite zeroth and first moments; unresolved base count C-integral(dmu)>=N_nuc>0 and unresolved base energy E-integral(W dmu)>=0.",
+      "computable_inputs": [
+        "C",
+        "E",
+        "N_nuc",
+        "mu total count",
+        "mu total energy"
+      ],
+      "edge_handling": "Zero spectral weights are allowed and omitted from atomic sorted groups. Zero nuclei count is outside the positive-EOS theorem. U_B>0 is required by the atomic continuation implementation."
+    },
+    {
+      "id": "TC-A2",
+      "scope": [
+        "TC1",
+        "TC4"
+      ],
+      "statement": "A downward cutoff move has an explicit retained lower-band measure or atomic inventory consistent with original thermal count/energy. U,N alone do not determine that measure or its boundary trace.",
+      "closure_limit": "A positive moment-compatible reconstruction is a selected closure, not a proof of Maxwellian or physical trace accuracy."
+    },
+    {
+      "id": "TC-A3",
+      "scope": [
+        "TC2",
+        "TC3",
+        "TC4"
+      ],
+      "statement": "The temperature bracket I=[T_minus,T_plus] is positive, contains the reference temperature, and the resolved measure has no atoms within the moving cutoff bracket. Continuous bounded density gives a classical derivative; bounded piecewise continuous density gives the same absolutely-continuous monotonicity and residual theorem using an a.e. derivative bound.",
+      "edge_handling": "At finite density knots use one-sided piecewise derivatives; at atomic crossings use branch arithmetic instead of the smooth derivative."
+    },
+    {
+      "id": "TC-A4",
+      "scope": [
+        "TC2",
+        "TC3"
+      ],
+      "statement": "F(T_minus)<=0<=F(T_plus) and a verified derivative lower bound F_T>=m>0 hold on the bracket.",
+      "explicit_bound": "m=c_v N_min when chi<=3/2; otherwise m=c_v N_min-chi(chi-3/2) k_B^2 T_plus rho_max, or a sharper directly computed minimum.",
+      "failure_behavior": "Do not promote unique root or residual/m certificate when m<=0 or bracket signs fail."
+    },
+    {
+      "id": "TC-A5",
+      "scope": [
+        "TC2"
+      ],
+      "statement": "Picard convergence additionally requires Phi(I) subset I and a verified global q=sup_I |Phi_T|<1.",
+      "off_root_derivative": "Phi_T=alpha rho(c) [c-c_v Phi(T)]/(c_v N).",
+      "failure_behavior": "Bisection with TC-A4 remains available without Picard contraction. The root-only formula cannot be used as an off-root q certificate."
+    },
+    {
+      "id": "TC-A6",
+      "scope": [
+        "TC4"
+      ],
+      "statement": "At h=0 predictor data equal the original inventory and spectrum, c0=alpha T_n, and Ubar_0=c_v T_n Nbar_0. For smooth time consistency the fixed-boundary predictor and spectral moments are C1 in h with Ceff_0>0.",
+      "time_error": "C1 gives correct first derivative and o(h) remainder. A bounded O(h^2) local remainder additionally requires locally Lipschitz first derivatives or C2 data and a predictor of matching order."
+    },
+    {
+      "id": "TC-A7",
+      "scope": [
+        "TC4"
+      ],
+      "statement": "Expansion is prescribed. Counts/spectrum are comoving, and thermal pressure work is -(2/3) theta U. Actual energy drift b_c and jump daughters remain separately source-bound.",
+      "angle_scope": "Use angular-integrated trace and replace b_c rho_c by the angular integral of b_c(Omega)rho_c(Omega) when anisotropic.",
+      "jump_rule": "A daughter born below cutoff carries its actual energy, not the boundary energy.",
+      "upwind_branch": "When lower/upper traces differ, the implicit coefficient is read on a fixed relative-flow sign branch; a sign switch requires rebinding the selected upwind trace."
+    },
+    {
+      "id": "TC-A8",
+      "scope": [
+        "TC6"
+      ],
+      "statement": "Finite atomic measure has sorted distinct energies and positive group weights. T_k=(U_B+prefix energy)/(c_v (N_B+prefix count)) is an admissible branch iff w_k<=alpha T_k<w_(k+1).",
+      "existence": "For chi>=3/2 and U_B>0, starting with k=0 and including the next node while w_(k+1)<=alpha T_k constructs a positive branch in at most M inclusions.",
+      "uniqueness": "No global uniqueness claim. Enumerate all M+1 branches if the complete root set is needed."
+    },
+    {
+      "id": "TC-A9",
+      "scope": [
+        "TC7"
+      ],
+      "statement": "Continuation fixes the atomic spectrum and base count, begins from an initial branch obeying the thermal-equality convention, changes only U_B to U_B+Delta U_B>0, and requires chi>=3/2.",
+      "heating": "Start from the inherited index and include increasing energies. Index is monotone; temperature need not increase at each inclusion.",
+      "cooling": "Remove the highest thermal energy while it lies above cutoff. Under chi>=3/2 the resulting temperature decreases and positivity is retained.",
+      "identity": "Delta U_B=0 makes no transfer on a consistent initial branch.",
+      "regularity": "At chi>3/2 an atomic crossing can create a finite temperature jump. Smooth Ceff or C1-in-time results are not applied to such a crossing."
+    },
+    {
+      "id": "TC-A10",
+      "scope": [
+        "TC3",
+        "TC6",
+        "TC7"
+      ],
+      "statement": "Changing spectrum energies or weights after a general reaction predictor requires a newly bound inventory and a stated branch-selection policy. The pure base-energy continuation theorem is not applied to arbitrary spectral changes.",
+      "feedback_interface": "An outer event-capacity map uses the same initial y0 and fixed initial donor mask for every trial. Branch-local nu_N and nu_U, rate derivative bounds, and Ceff>=m are required for root sensitivity; crossings require the separate atomic branch treatment."
+    }
+  ],
+  "claims": [
+    {
+      "id": "TC1",
+      "formula_tags": [
+        "TCF.4",
+        "TCF.5",
+        "TCF.8",
+        "TCF.10"
+      ],
+      "outcome": "Positive conservative fixed-reference finite cutoff reclassification."
+    },
+    {
+      "id": "TC2",
+      "formula_tags": [
+        "TCF.13",
+        "TCF.15",
+        "TCF.16",
+        "TCF.18"
+      ],
+      "outcome": "Effective heat capacity; explicit local root existence/uniqueness; conditional Picard convergence."
+    },
+    {
+      "id": "TC3",
+      "formula_tags": [
+        "TCF.21",
+        "TCF.23",
+        "TCF.24"
+      ],
+      "outcome": "Algebraic residual and tail/reference input errors mapped to a temperature certificate."
+    },
+    {
+      "id": "TC4",
+      "formula_tags": [
+        "TCF.25",
+        "TCF.26",
+        "TCF.30"
+      ],
+      "outcome": "h=0 identity and correct moving-boundary derivative under consistent fixed-cutoff predictor."
+    },
+    {
+      "id": "TC5",
+      "formula_tags": [
+        "TCF.31",
+        "TCF.33",
+        "TCF.35"
+      ],
+      "outcome": "Nontrivial continuous spectrum with exact heating/cooling endpoints and rational convergence bounds."
+    },
+    {
+      "id": "TC6",
+      "formula_tags": [
+        "TCF.37",
+        "TCF.38",
+        "TCF.39",
+        "TCF.40"
+      ],
+      "outcome": "Finite atomic root enumeration and constructive existence for chi>=3/2; exact packet energy/count bridge."
+    },
+    {
+      "id": "TC7",
+      "formula_tags": [
+        "TCF.41",
+        "TCF.42",
+        "TCF.43"
+      ],
+      "outcome": "Positive conservative atomic heating/cooling branch continuation with finite termination and h=0 identity."
+    }
+  ],
+  "error_map": {
+    "algebraic_temperature": {
+      "inputs": [
+        "signed EOS residual F(T)",
+        "verified m>0",
+        "root bracket"
+      ],
+      "bound": "min(|F|/m, max(T-a,b-T)); at midpoint the second term is (b-a)/2",
+      "evaluation_roundoff": "For an approximate residual, replace |F| with |Fhat|+eta_F. Exact Fraction fixture has eta_F=0 for its declared rational representation."
+    },
+    "data_temperature": {
+      "inputs": [
+        "delta C",
+        "delta E",
+        "sup bracket |delta A_N|",
+        "sup bracket |delta A_E|",
+        "m"
+      ],
+      "bound": "[c_v T_plus (|delta C|+sup|delta A_N|)+|delta E|+sup|delta A_E|]/m",
+      "limitation": "Equality of total spectrum moments does not imply equality of its cutoff-tail moments."
+    },
+    "combined_temperature": "algebraic bound + data bound, under a common admitted bracket and original m>0.",
+    "excluded": [
+      "physical ODE time truncation without separately supplied predictor defect",
+      "unqualified cross-section error",
+      "unknown lower-band reconstruction error",
+      "smooth derivative through atomic threshold jumps"
+    ]
+  },
+  "continuous_fixture": {
+    "units": "epsilon=W/E_star; tau=T/T_star; E_star=k_B T_star",
+    "chi": "4",
+    "cv_dimensionless": "3/2",
+    "spectrum": [
+      {
+        "lower": "3",
+        "upper": "6",
+        "density": "1/4"
+      }
+    ],
+    "common_count": "5/2",
+    "common_energy": "11/2+delta",
+    "reference_cutoff": "4",
+    "nucleus_count": "1",
+    "bracket": [
+      "3/4",
+      "5/4"
+    ],
+    "delta_domain": [
+      "-5/32",
+      "3/32"
+    ],
+    "actual_piecewise_derivative_lower_bound": "1/4",
+    "picard_rectangular_q": "233/243",
+    "exact_cases": [
+      {
+        "name": "heating",
+        "delta": "2/25",
+        "temperature": "6/5",
+        "thermal_count": "11/5",
+        "thermal_energy": "99/25",
+        "signed_count": "1/5",
+        "signed_energy": "22/25"
+      },
+      {
+        "name": "cooling",
+        "delta": "-3/25",
+        "temperature": "4/5",
+        "thermal_count": "9/5",
+        "thermal_energy": "54/25",
+        "signed_count": "-1/5",
+        "signed_energy": "-18/25"
+      },
+      {
+        "name": "zero_step",
+        "delta": "0",
+        "temperature": "1",
+        "thermal_count": "2",
+        "thermal_energy": "3",
+        "signed_count": "0",
+        "signed_energy": "0"
+      }
+    ]
+  },
+  "atomic_fixture": {
+    "units": "same normalized k_B=1 convention",
+    "chi": "4",
+    "cv": "3/2",
+    "base_count": "10",
+    "base_energy": "15",
+    "nucleus_count": "10",
+    "atoms": [
+      {
+        "energy": "5",
+        "count": "1"
+      },
+      {
+        "energy": "9",
+        "count": "1"
+      },
+      {
+        "energy": "30",
+        "count": "1"
+      }
+    ],
+    "initial_thermal_groups": 0,
+    "heating": {
+      "delta_base_energy": "135",
+      "indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "temperatures": [
+        "10",
+        "310/33",
+        "82/9",
+        "388/39"
+      ]
+    },
+    "cooling": {
+      "delta_base_energy": "-135",
+      "indices": [
+        3,
+        2,
+        1,
+        0
+      ],
+      "temperatures": [
+        "118/39",
+        "29/18",
+        "40/33",
+        "1"
+      ]
+    }
+  },
+  "implementation_contract": {
+    "file": "thermal_cutoff_solver.py",
+    "arithmetic": "Exact Fraction input; finite box moments and finite atom prefixes.",
+    "root_solver": "Bounded bisection; exact piecewise-affine F_T minimum checked for the declared box representation.",
+    "nonconvergence": "Return MAX_ITERATIONS with the last candidate, bracket and honest error certificate.",
+    "negative_state_correction": "None; invalid domain or inventory is rejected.",
+    "finite_resource_design": "Bisection limits iteration count and grows midpoint denominator bit-length linearly; atomic prefixes are formed once and scans change a bounded integer index.",
+    "new_checks": "checks/run_thermal_cutoff_checks.py",
+    "result": "results/THERMAL_CUTOFF_CHECKS.json"
+  },
+  "science_scope": {
+    "new_physical_ODE_integrations": 0,
+    "new_NCP_jobs": 0,
+    "old_suite_reruns": 0,
+    "kernel_runtime_qualification": "Not performed by these closure checks.",
+    "external_symbolic_evidence": "Actual Wolfram/xAct checks are executed and recorded by the parent; no duplicate symbolic run is performed in this subtask."
+  }
+}
