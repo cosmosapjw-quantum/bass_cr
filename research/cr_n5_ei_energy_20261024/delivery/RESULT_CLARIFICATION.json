@@ -1,0 +1,36 @@
+{
+  "schema": "N5_EI_RESULT_CLARIFICATION_V1",
+  "created_utc": "2026-10-24 12:42:45 UTC",
+  "type": "RESULT_CLARIFICATION",
+  "original_science_S": "d3d9b0de8796de6e988c0d95540b1dbbe1d1cff3",
+  "original_path": "research/cr_n5_ei_energy_20261024/RESULTS_KO.md",
+  "original_section": "7. 검증과 수용 범위",
+  "original_phrase": "24 RHS는 물리적 확률/시간/reward 16개와 signed reward의 절댓값 경계를 확인하는 8개다.",
+  "correction": "24 RHS는 확률/CE incoming energy/bath reward 16개와 signed bath reward의 절댓값 경계를 확인하는 8개다. 시간 t/v_s/v_p RHS는 독립 MP80 재풀이 대상이 아니다.",
+  "actual_independent_scope_per_finest_case": {
+    "physical_RHS": 8,
+    "fields": [
+      "u_s",
+      "u_p",
+      "u_entry",
+      "r_s+r_p (CE incoming energy)",
+      "H_ee",
+      "H_H1+",
+      "H_He4+",
+      "H_He4++"
+    ],
+    "absolute_bath_reward_bound_RHS": 4,
+    "finest_cases": 2,
+    "total_reference_RHS": 24,
+    "time_RHS_independently_resolved": false
+  },
+  "evidence": "review/C9_REVIEW.json and independent_c9_20261024_v1 oracle",
+  "discovered_by": "independent C9 reviewer during document-only closeout consistency review",
+  "original_science_and_canonical_bytes": "PRESERVED_UNCHANGED",
+  "numerical_results_and_budget": "UNCHANGED",
+  "gate": "NUMERICALLY_CHECKED_SCOPED_CONDITIONAL_EI_FINITE_CHAIN",
+  "no_new_execution": true,
+  "original_C23D_new_ODE0_RESULT_CLARIFICATION": "PRESERVED_UNCHANGED; separate historical issue",
+  "statement_scope": "This corrects report wording, not the independent oracle or its observed counts."
+}
+
