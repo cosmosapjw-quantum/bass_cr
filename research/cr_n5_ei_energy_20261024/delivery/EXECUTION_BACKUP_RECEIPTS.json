@@ -1,0 +1,107 @@
+{
+  "schema": "BASS_CR_N5_EI_EXECUTION_CHECKPOINT_BACKUP_RECEIPT_V1",
+  "created_utc": "2026-10-24T12:02:50Z",
+  "purpose": "Immediate durable preservation of completed controls, primary run and saved-output plot after observed workspace loss; independent C9 excluded while active.",
+  "execution": {
+    "status": "COMPLETED_RUN_DIRECTORIES_CHECKPOINTED",
+    "new_science_by_backup_agent": 0,
+    "old_science_replay": 0,
+    "run_ids": [
+      "n5_ei_energy_controls_20261024_v1",
+      "n5_ei_energy_primary_20261024_v1",
+      "n5_ei_energy_saved_plot_20261024_v1"
+    ],
+    "independent_C9": "NOT_INCLUDED_PENDING_SEPARATE_REVIEW"
+  },
+  "authority": {
+    "repo": "cosmosapjw-quantum/bass_cr",
+    "pull_request": 103,
+    "S0_commit": "b2a305b0897c51d47aedeaf293e10e8746f54742",
+    "S0_tree": "445bd9d0389227132a4b3b322a3d8afea66d2b18",
+    "prepared_v4_source_fingerprint": "ea17062954ac8fba8e9b00c1a2d59e28c2793ed596b9f364beef05f068e39476",
+    "input_manifest_sha256": "390eebaf2535a9269c9225bc554863e327474d20b295cddd5ca1a96da777070f"
+  },
+  "archive": {
+    "name": "BASS_CR_N5_EI_EXECUTION_20261024T120023Z.zip",
+    "bytes": 5668656,
+    "sha256": "1108f41f2434841230f4a9e352fb7f2069d0ec5f5060005c9d59014ac4b79081",
+    "manifest_sha256": "7d7f76c0976e2aac9a4f075281e3e843330eb13bf72d8ec7426a63c3c8eac925",
+    "payloads": 75,
+    "zip_members": 76,
+    "selected_source_stat_stable": true,
+    "local_CRC": "PASS",
+    "local_all_payload_sizes_and_sha256": "PASS"
+  },
+  "backup": {
+    "Library": {
+      "status": "ACK",
+      "tier": "R1",
+      "library_file_id": "libfile_a1ae445950b48191a13269e152ffab50",
+      "file_id": "file_000000006a3c81fab8fce04768ecc7ab",
+      "path": "/BASS/BASS_CR_N5_EI_EXECUTION_20261024T120023Z.zip",
+      "bytes": 5668656,
+      "version": 0,
+      "complete_xattrs_apply_exitcode": 0,
+      "uploads": 1,
+      "remote_whole_sha256": null,
+      "R3": "NOT_RUN"
+    },
+    "Dropbox": {
+      "status": "COMPLETED_ACK",
+      "tier": "R1",
+      "file_id": "id:BSpOijBcT10AAAAAAD_9jA",
+      "path": "/BASS_DERIVATION_DOSSIERS_20260912/bass_cr/BASS_CR_N5_EI_EXECUTION_20261024T120023Z.zip",
+      "bytes": 5668656,
+      "modified_utc": "2026-10-24T12:02:41Z",
+      "uploads": 1,
+      "status_polls": 1,
+      "remote_whole_sha256": null,
+      "R3": "NOT_RUN"
+    },
+    "Drive": {
+      "status": "NOT_ATTEMPTED",
+      "uploads": 0,
+      "R3": "NOT_RUN"
+    },
+    "verification_limit": "Actual provider ACK and matching returned name/size only. Local ZIP verification is not a remote R3. Final canonical remote readback follows independent review."
+  },
+  "dependency": {
+    "name": "BASS_CR_N5_EI_S0_20261024T115728Z.zip",
+    "bytes": 9203048,
+    "sha256": "2026751699e83a893dfc576163d49ccea415597a5d49db4169fbd1e8a536700f",
+    "Library": "libfile_62cae5d50dfc81919391697d8bc58ea1",
+    "Dropbox": "id:BSpOijBcT10AAAAAAD_9ig",
+    "tier": "R1",
+    "contents": "Recovered exact inputs, all unit prepared sources, recovered backup metadata, separate later freshness, recovery and retained failure evidence. Native baseline NPZ inputs not duplicated in execution checkpoint."
+  },
+  "publication": {
+    "S0": "EXACT_REMOTE_R1_PASS",
+    "new_Git_mutation_by_backup_agent": 0
+  },
+  "DAG": {
+    "node": "CR_N5_EI_ENERGY_TRANSFER",
+    "stage": "CONTROLS_PRIMARY_PLOT_EXECUTED_CHECKPOINTED",
+    "independent_review": "PENDING_SEPARATE_OWNER",
+    "parent": "CR_N5_ATOMIC_ISOTOPE_COVERAGE_PARTIAL_OPEN",
+    "N6": "GATED",
+    "N7": "GATED",
+    "global_error_bound": null,
+    "global_completion_percent": null
+  },
+  "preservation": {
+    "prior_unknown_Drive_states": "UNCHANGED",
+    "prior_terminal_Drive_NOT_ATTEMPTED": "UNCHANGED",
+    "failed_freeze_costs_and_recovery_evidence": "PRESERVED_IN_S0_DEPENDENCY",
+    "published_S0_CSV_bytes": "ORIGINAL_CRLF; only local recovery materialization had normalized line endings, subsequently repaired exactly"
+  },
+  "costs": {
+    "wrapper_CPU_s": 0.030440870999999998,
+    "builder_CPU_s": 0.218932106,
+    "local_verify_CPU_s": 0.04926132799999999,
+    "packaging_wall_s": 0.36705223800163367,
+    "provider_transfer_CPU_s": null,
+    "provider_transfer_IO_cost": null,
+    "prior_budget_reset": false,
+    "observed_runtime_model": "UNOBSERVED"
+  }
+}

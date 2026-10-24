@@ -1,0 +1,132 @@
+{
+  "schema": "N5_EI_SCIENCE_CLAIM_GATE_V1",
+  "as_of_utc": "2026-10-24 12:11:05 UTC",
+  "unit": "CR_N5_EI_MAXWELLIAN_ENERGY_EXCHANGE",
+  "parent": "CR_N5_ATOMIC_ISOTOPE_COVERAGE",
+  "consumer": "N5_C23D_H1_HE4_EI_ENERGY_V1",
+  "decision": "NUMERICALLY_CHECKED_SCOPED_CONDITIONAL_EI_FINITE_CHAIN",
+  "status": "COMPLETE_SCOPED",
+  "root": "/root",
+  "contract_sha256": "bfc66b2b84d909813e0c5ef9a2caceea346d494a8e83b0bada43421c9d1f8a39",
+  "source_manifest_digest": "ea17062954ac8fba8e9b00c1a2d59e28c2793ed596b9f364beef05f068e39476",
+  "CASE_sha256": "fefdc1d4148116f8e32bb0f2f33d3d9a3fdd4e97acfa13a06d79ac1a30b16ca9",
+  "scope": {
+    "species": [
+      "H1+",
+      "He4+",
+      "He4++"
+    ],
+    "ion_density_cm3": [
+      0.1,
+      0.02,
+      0.01
+    ],
+    "Ti_K": 10000,
+    "Te_K": 10000,
+    "thermal_ne_cm3": 0.14,
+    "lnLambda_prescribed": 20,
+    "closure": "stationary common-temperature Maxwellian finite-mass ion bath, dilute nonrelativistic leading-log point-charge energy exchange",
+    "conditional_isotope_assignment": true,
+    "source": "reused C23D three384-atom low10eV source populations",
+    "exposure": "10000 proper s defines impulsive population, not continuous chemistry integration",
+    "finite_chain": {
+      "chi": [
+        1.5,
+        3
+      ],
+      "R": [
+        40,
+        80
+      ],
+      "nominal_N": [
+        1024,
+        2048
+      ],
+      "primary_R": 80,
+      "max_actual_nodes": 2480,
+      "first_event": "diagnostic first entry or first H 2S/2P collisional excitation",
+      "upper": "reflecting"
+    },
+    "initial_selection_is_path_ceiling": false,
+    "finite_bath_evolution": false
+  },
+  "evidence": {
+    "R6": "review/THEORY_R6.json",
+    "C6": "runs/n5_ei_energy_controls_20261024_v1/TEST_RESULT.json",
+    "C7_C8": "runs/n5_ei_energy_primary_20261024_v1/RESULT.json",
+    "C9": "review/C9_REVIEW.json",
+    "C9_actual_raw": "review/independent_c9_20261024_v1/run_attempt3/RESULT.json",
+    "root_plot": "review/ROOT_FIGURE_REVIEW.json",
+    "production": "implementation/EXECUTION_LEDGER.json"
+  },
+  "validation": {
+    "controls_pass": 25,
+    "combined_matrix_cases_pass": 8,
+    "primary_RHS": 96,
+    "finite_comparisons_pass": 18,
+    "independent_coefficient_pairs_80d": 55,
+    "independent_reference_RHS_80d": 24,
+    "independent_max_coefficient_error": 3.329476627935646e-15,
+    "independent_max_solution_error": 2.983316599388798e-11,
+    "blocking_findings": 0,
+    "criteria_changed_after_execution": false
+  },
+  "new_work": {
+    "per_ion_generators": 24,
+    "combined_generators": 8,
+    "primary_RHS": 96,
+    "source_atoms": 1152,
+    "source_per_ion_pairs": 3456,
+    "edge_per_ion_pairs": 43578,
+    "plot_per_ion_pairs": 1200,
+    "plot_EE_pairs": 400,
+    "coefficient_validation_quadratures": 3,
+    "coefficient_validation_interval_calls": 9,
+    "independent_reference_RHS": 24,
+    "new_ODE": 0,
+    "source_quadrature": 0,
+    "thermal_rate_provider_quadrature": 0,
+    "old_science_replay": 0
+  },
+  "failures_retained": {
+    "C9_attempt1": "production lease present; prechild rejection, worker0",
+    "C9_attempt2": "missing mpmath startup, worker.030482s, numericalwork0",
+    "repairs": "completed owned plot lease reconciled; existing pinned mpmath wheel zipimport; same oracle/formulas/tolerances",
+    "preexecution_workspace_loss": "cause UNOBSERVED; 53S0 and23inputs recovered exact; source replays0",
+    "first_checkpoint_freeze": "parallel-write source-stat changed; no upload; retained costs"
+  },
+  "not_admitted": [
+    "full stopping kernel",
+    "full atomic/isotope network",
+    "other isotope population contributions",
+    "finite elastic event hazard",
+    "neutral elastic provider",
+    "generic isotope quotient",
+    "dominant omitted-process ranking",
+    "self-consistent screening",
+    "finite-bath ion feedback",
+    "N6 conservative coupling",
+    "N7 new parcel",
+    "full high-energy nuclear",
+    "general triaxial/tilted/polarized CMB"
+  ],
+  "nulls": {
+    "missing_species_rate": null,
+    "elastic_event_hazard": null,
+    "elastic_event_count": null,
+    "dominant_omitted_process_ranking": null,
+    "physical_model_error_bound": null,
+    "global_error_bound": null,
+    "global_completion_percent": null
+  },
+  "original_nuclear_PNG": "NOT_RECOVERED_NOT_READ",
+  "first_entry_interpretation": "diagnostic first entry; not irreversible assimilation or Maxwellization",
+  "energy_owner": "opposite tagged-electron kinetic drift per bath; CE internal reward separate; no duplicate stopping heat",
+  "isotope_quotient": "reuse PQ=QbarP and c^T=cbar^TP; mass-dependent coefficients do not imply elemental quotient admission",
+  "strong_no_go": "NG1-NG7 NOT_APPLICABLE",
+  "EXECUTION": "R1-R9/C1-C9_COMPLETE_SCOPED; delivery stages in progress",
+  "PUBLICATION": "S0_PUBLISHED; scienceS prepared",
+  "BACKUP": "S0_AND_EXECUTION_DUAL_R1_ACK; finalcanonicalR3 pending",
+  "DAG": "EI_CHILD_COMPLETE_SCOPED; N4_N5_PARTIAL_OPEN; N6_N7_PREDECESSOR_GATED"
+}
+
