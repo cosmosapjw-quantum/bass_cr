@@ -1,0 +1,60 @@
+{
+  "unit": "CR_N4_STOPPING_C23B_EE_BRIDGE",
+  "consumer": "C23D_FROZEN_MAXWELL_EE_LOW10_V1",
+  "reviewer": "/root/stopping_physics_review",
+  "status": "PASS_SCOPED_C23D_SOURCE_EE_BRIDGE",
+  "blocking_findings": 0,
+  "review_independence": {
+    "production_code_author": false,
+    "shared_parent_context": true,
+    "blind_review": false,
+    "method": "Primary-source reuse mapping, independent SI/Decimal erf/raw-CSV arithmetic without production numerical imports, read-only code and raw-output review."
+  },
+  "findings": [
+    {
+      "id": "C9-F1",
+      "status": "CLOSED",
+      "object": "portable input paths and missing runtime/runs parents",
+      "repair": "explicit CLI paths, package/repository-relative candidates, create parents then exclusive child run",
+      "evidence": ["mechanical/RELOCATION_SMOKE.json", "mechanical/FRESH_PARENT_SMOKE.json"]
+    },
+    {
+      "id": "C9-F2",
+      "status": "CLOSED",
+      "object": "unqualified new_ODE:0 execution label",
+      "repair": "preserved raw result plus explicit additive clarification and future producer fields",
+      "evidence": ["runs/c23d_source_ee_20261023T220714Z_v1/RESULT_CLARIFICATION.json", "implementation/run_bridge.py"]
+    }
+  ],
+  "independent_reference": {
+    "run": "theory/independent/C23D_C9_reference_run_v1",
+    "reference_code": "theory/independent/C23D_C9_reference.py",
+    "precision_decimal_digits": 80,
+    "comparison_count": 56,
+    "relative_tolerance": 2e-12,
+    "maximum_relative_error": 1.7389330148070301e-15,
+    "cpu_s": 0.2863936,
+    "wall_s": 0.28848147198732477,
+    "maxrss_KiB": 64776,
+    "worker_cpu_index": 1,
+    "native_threads": 1,
+    "new_population_integrations": 0,
+    "old_science_replayed": 0
+  },
+  "admission": {
+    "recommended_gate": "NUMERICALLY_CHECKED_SCOPED",
+    "primary_run": "c23d_source_ee_20261023T220714Z_v1",
+    "required_new_population_trajectories": 3,
+    "actual_new_population_trajectories_total": 4,
+    "supplement": "c23d_source_ee_supplement_20261023T220810Z_v1",
+    "supplement_is_admission_basis": false,
+    "full_CR_N4_STOPPING_KERNEL": "OPEN_PARTIAL",
+    "global_error_bound": null,
+    "full_physical_stopping": null,
+    "new_strong_no_go": false
+  },
+  "execution": "COMPLETE_SCOPED",
+  "publication": "ROOT_PENDING_EXPECTED_SHA",
+  "backup": "ROOT_RECEIPTS_PENDING",
+  "report": "theory/independent/C23D_C9_REVIEW_KO.md"
+}

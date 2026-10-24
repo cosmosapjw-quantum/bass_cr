@@ -1,0 +1,77 @@
+{
+  "schema": "BASS_CR_C23D_DRIVE_BACKUP_RECEIPT_V1",
+  "recorded_at": "2026-10-24T00:48:57.624Z",
+  "artifact": {
+    "name": "BASS_CR_C23D_EE_DELIVERY_20261024T094335KST.zip",
+    "source_path": "/workspace/scratch/30d955d9ea43/cr_stopping_loop_20261024/delivery/BASS_CR_C23D_EE_DELIVERY_20261024T094335KST.zip",
+    "size_bytes": 5989522,
+    "sha256": "c7040ba442a8d3079547c1aeb8dcb60491617c4471638db44ab55c743f19a4b9",
+    "local_identity_verification": "PASS_ACTUAL_LOCAL_BYTES",
+    "science_commit": "d04b2a56adb4a5d55b901420aa544332b41f6dbb",
+    "pull_request": 99
+  },
+  "destination": {
+    "parent_folder_id": "1V4ZQza59dWVC7apeRz9P1TL66eaVYyJy",
+    "new_create_only": true
+  },
+  "attempt": {
+    "count": 1,
+    "tool": "mcp__codex_apps__google_drive_upload_file",
+    "started_at": "2026-10-24T00:45:34.488Z",
+    "file_name": "BASS_CR_C23D_EE_DELIVERY_20261024T094335KST.zip",
+    "file_uri": "/workspace/scratch/30d955d9ea43/cr_stopping_loop_20261024/delivery/BASS_CR_C23D_EE_DELIVERY_20261024T094335KST.zip",
+    "mime_type": "application/zip",
+    "bounded_local_wait_seconds": 160,
+    "local_wait_ended_at": "2026-10-24T00:48:14.490Z",
+    "disposition": "UNKNOWN_NO_ACK",
+    "actual_returned_ack": null,
+    "actual_returned_file_id": null,
+    "explanation": "The single upload promise did not return an ACK before the local 160-second deadline. Local awaiting ended; remote upload outcome remains unknown. No provider rejection, automatic-review rejection, user cancellation, upload success, or upload failure was observed."
+  },
+  "reconciliation": {
+    "count": 1,
+    "request": {
+      "best_effort_fetch": false,
+      "topn": 20,
+      "special_filter_query_str": "name = 'BASS_CR_C23D_EE_DELIVERY_20261024T094335KST.zip' and '1V4ZQza59dWVC7apeRz9P1TL66eaVYyJy' in parents and trashed = false"
+    },
+    "started_at": "2026-10-24T00:48:27.892Z",
+    "returned_at": "2026-10-24T00:48:28.257Z",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Action completed."
+        }
+      ],
+      "structuredContent": {
+        "results": []
+      },
+      "isError": false
+    },
+    "returned_result_count": 0,
+    "interpretation": "No matching file metadata was returned by this exact-name+known-folder query. An empty query does not prove upload failure or global absence."
+  },
+  "readback": {
+    "state": "NOT_RUN",
+    "reason": "No actual returned or reconciled Drive file ID or downloadable byte reference",
+    "size_pass": null,
+    "sha256_pass": null,
+    "zip_crc_pass": null,
+    "manifest_payload_pass": null
+  },
+  "preserved_prior_state": {
+    "n4_drive": "UNKNOWN_NO_ACK_UNCHANGED",
+    "old_n4_resubmitted": false,
+    "c23c_drive": "UNKNOWN_NO_ACK_UNCHANGED"
+  },
+  "stage": {
+    "EXECUTION": "No scientific calculations, no ODE, no repeated historical validation; local source identity only.",
+    "PUBLICATION": "Science commit/PR identity supplied by root; this agent made no repository publication mutation.",
+    "BACKUP": "One new C23D create-only Drive upload attempted; UNKNOWN_NO_ACK. Exact reconciliation query returned 0. Library/Dropbox handled independently by root.",
+    "DAG": "Drive preservation remains OPEN; no science claim promoted by the backup attempt."
+  },
+  "other_remote_mutations": 0,
+  "duplicate_uploads": 0,
+  "private_token_material_saved": false
+}

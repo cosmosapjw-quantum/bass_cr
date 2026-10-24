@@ -1,0 +1,7 @@
+"""Fresh Git-layout launch precondition check with a NONSCIENTIFIC stub child."""
+import pathlib,tempfile,shutil,subprocess,json,hashlib
+U=pathlib.Path(__file__).resolve().parents[1]
+with tempfile.TemporaryDirectory(prefix='c23d_emptyparents_') as tmp:
+ unit=pathlib.Path(tmp)/'research/cr_c23d_finiteT_source_bridge_20261024';impl=unit/'implementation';impl.mkdir(parents=True);shutil.copy2(U/'implementation/dispatch.py',impl/'dispatch.py');(impl/'run_bridge.py').write_text("print('NONSCIENTIFIC_LAUNCH_SMOKE_STUB')\n")
+ assert not (unit/'runs').exists() and not (unit/'runtime').exists();result=subprocess.run(['python',str(impl/'dispatch.py')],capture_output=True,text=True,timeout=10);assert result.returncode==0,(result.stdout,result.stderr);runs=list((unit/'runs').iterdir());assert len(runs)==1;run=runs[0];assert not (unit/'runtime/ACTIVE_LOCAL_LEASE.json').exists();dispatch=json.loads((run/'DISPATCH_COMPLETE.json').read_text());assert dispatch['returncode']==0;assert (run/'STDOUT.txt').read_text().strip()=='NONSCIENTIFIC_LAUNCH_SMOKE_STUB'
+ data={'status':'PASS_FRESH_GIT_LAYOUT_LAUNCH_PRECONDITION','initial_runtime_and_runs_absent':True,'parent_directories_created':True,'unique_child_created_once':True,'exclusive_lease_released':True,'child':'nonscientific print-only stub','scientific_evolution_executed':False,'dispatch_source_sha256':hashlib.sha256((impl/'dispatch.py').read_bytes()).hexdigest(),'exit_code':result.returncode};(U/'mechanical/FRESH_PARENT_SMOKE.json').write_text(json.dumps(data,indent=2)+'\n');print(json.dumps(data))
