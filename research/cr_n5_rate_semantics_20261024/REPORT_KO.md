@@ -30,6 +30,8 @@ h_{\rm CE,max}=2.9189745001395196\times10^{-8}\;\mathrm{s^{-1}}.
 | HE94 science | `d8bae9f7e24ad3494e399f7ab46c4167a5623d48` | Childers2004 DDCS의 한 측정 window |
 | HE94 delivery | `c8f5818c61d14872837abf7e9bc1a73c670ae25c` | 전달 상태의 후속 identity; full HE-ANG는 `SOURCE_INPUT_PENDING` |
 
+마감 freshness 조회(2026-10-24 04:00:22 UTC)에서 WU PR142는 `696eca5cf9f1fcbf722370833535f4144af0a54a`로 전진했다. 최신 return·ledger·handoff에서 PHYS84의 새 numerical child/application은 0이며 WAIT가 유지된다. PHYS85의 Wolfram 중간 생략 응답은 `TRANSPORT_TRUNCATED_REFERENCE_UNVERIFIED`, completed science identity는 null이다. WU PR141과 HE PR94의 HEAD는 위 표와 같다. 정확한 새 원문5개와 Git blob 검증은 `delivery/OWNER_FRESHNESS_FINAL.json`에 결속했다. 과학 입력 snapshot과 canonical ZIP은 그대로 보존했다.
+
 이번 조사 범위는 실제 의존 provider와 최근 CR 변경이다. 사용자가 제시한 00:43 UTC의 7-repo 1306 branches/840 open PR 전체 pagination 기록은 역사적 snapshot으로 보존한다. C23E의 별도 후속 조사 수치는 그 소유자 기록으로 재사용하며, 이번 세션에서 전체 repo metadata 조사를 새로 완료했다고 주장하지 않는다. 별도 전체 대화는 `UNAVAILABLE`, 외부 NCP runtime/lease는 `UNOBSERVED`다.
 
 원본 파일의 repo/commit/path/Git blob/SHA256 대응은 `intake/SOURCE_INDEX_V3.json`, `intake/PHYS83_PINNED_RAW_INTAKE.json`, `inputs/INPUT_MANIFEST.json`에 있다. 실행 전에 30개 고정 입력의 byte identity를 모두 확인했다. PHYS83 constructor의 원본 4개 CCC 표와 vendor도 고정했다. `moments`·`evaluate`는 호출하지 않았고 PHYS84 source consumer도 실행하지 않았다.
