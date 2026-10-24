@@ -1,0 +1,134 @@
+{
+  "schema": "CR_N5_NEUTRAL_CLAIM_GATE_V1",
+  "unit_id": "CR_N5_NEUTRAL_ELASTIC_FINITE_T",
+  "consumer": "N5_C23D_H1_HE4_NEUTRAL_ELASTIC_V1",
+  "gate": "NUMERICALLY_CHECKED_SCOPED_CONDITIONAL_NEUTRAL_FP_FINITE_CHAIN",
+  "science_status": "COMPLETE_SCOPED_CONDITIONAL",
+  "parent_N5": "PARTIAL_OPEN",
+  "parent_N4": "PARTIAL_OPEN",
+  "N6": "PREDECESSOR_GATED",
+  "N7": "PREDECESSOR_GATED",
+  "inputs": {
+    "T_K": 10000,
+    "thermal_ne_cm3": 0.14,
+    "prescribed_lnLambda": 20,
+    "neutral_species": [
+      "H1(1S)",
+      "He4(ground singlet)"
+    ],
+    "neutral_densities_cm3": [
+      0.9,
+      0.07
+    ],
+    "initial_energy_support_eV": {
+      "lower": 0,
+      "upper": 10,
+      "endpoints": "open"
+    },
+    "pulse_exposure_proper_s": 10000,
+    "source_z": [
+      2.316,
+      2.479,
+      2.649
+    ],
+    "chi": [
+      1.5,
+      3
+    ],
+    "upper_R": [
+      40,
+      80
+    ],
+    "nominal_N": [
+      1024,
+      2048
+    ],
+    "raw_MTCS_interpolation": "native piecewise linear with no extrapolation",
+    "closure": "leading heavy-neutral mass-ratio FP; common-T prescribed stationary isotropic Maxwell baths"
+  },
+  "reuse": {
+    "PR103_S": "d3d9b0de8796de6e988c0d95540b1dbbe1d1cff3",
+    "PR103_D": "bdcb576f4202be81b7436726eca6b588029de840",
+    "stored_baseline_arrays": true,
+    "old_science_replay": 0,
+    "source_reprojection": 0
+  },
+  "actual": {
+    "controls": 39,
+    "combined_matrices": 8,
+    "new_neutral_generators": 16,
+    "primary_physical_RHS": 112,
+    "source_integrated_rows": 24,
+    "finite_comparisons": 18,
+    "distinct_saved_source_atoms": 1152,
+    "private_peratom_case_rows": 9216,
+    "independent_physical_RHS": 28,
+    "independent_RHS_includes_t_vs_vp": true,
+    "independent_reward_arithmetic_series": 4,
+    "new_ODE": 0,
+    "source_quadrature": 0,
+    "thermal_quadrature": 0,
+    "old_science_replay": 0
+  },
+  "independent_R6": "PASS_SCOPED_THEORY_AND_FROZEN_CONTRACT",
+  "independent_C9": "PASS_SCOPED_WITH_RETAINED_REVIEWER_DIAGNOSTIC_CORRECTION",
+  "blocking_findings": 0,
+  "findings": "review/ROOT_C9_DISPOSITION_V2.json; original v1/v2/v3 attempts remain recorded",
+  "results": {
+    "noCE_first_entry_delta_s_range": [
+      -18.37538102042,
+      -14.54192178068
+    ],
+    "CE_relative_fraction_range": [
+      -0.00010968749770823294,
+      -0.00010920726758267829
+    ],
+    "neutral_heat_eV_per_selected_range": [
+      0.00006714082312948464,
+      0.00008422366001166073
+    ],
+    "delta_conductance_max": 0.0002152041322792585,
+    "first_entry_interpretation": "diagnostic, not irreversible assimilation or Maxwellization"
+  },
+  "numerical_evidence": {
+    "linear_residual_max": 8.543995955434605e-13,
+    "partition_defect_max": 5.468692165777611e-11,
+    "energy_ledger_defect_max": 2.6268031538159555e-11,
+    "MFPT_backward_residual_max": 1.9878823019649166e-16,
+    "independent_solution_max_norm_relative": 3.061614317105611e-11,
+    "principal_grid_max_relative": 0.00011438936405007788,
+    "boundary_max_relative": 5.3796585828783776e-11,
+    "paired_CE_effect_grid_absolute_difference_max": 1.38208045e-9,
+    "continuum_error_certificate": null
+  },
+  "physical_diagnostics": {
+    "target_speed_theta_over_rE_max_H": 0.00036288038349226496,
+    "target_speed_theta_over_rE_max_He": 0.00009137051773376385,
+    "upper_R80_cold_recoil_diffusion_ratio_bound_H": 0.08709129203814359,
+    "upper_R80_cold_recoil_diffusion_ratio_bound_He": 0.021928924256103325,
+    "interpretation": "Separate leading-order diagnostics, not a global physical error bound."
+  },
+  "unknowns": {
+    "elastic_event_hazard": null,
+    "elastic_event_count": null,
+    "missing_isotope_densities": {
+      "D": null,
+      "T": null,
+      "He3": null,
+      "Li6": null,
+      "Li7": null
+    },
+    "dominant_omitted_process_ranking": null,
+    "global_error_bound": null,
+    "global_completion_percent": null
+  },
+  "next_first_node": "CR_N5_ATOMIC_ISOTOPE_COVERAGE",
+  "no_go_review": {
+    "new_strong_no_go_claim": false,
+    "NG1_to_NG7": "Not applicable to admission of a strong no-go; none is claimed. The finite conditional result and exact unmet physical inputs are stated directly."
+  },
+  "EXECUTION": "COMPLETE_SCOPED",
+  "PUBLICATION": "SCIENCE_S_PENDING",
+  "BACKUP": "S0_AND_EXECUTION_DUAL_ACK_FINAL_R3_PENDING",
+  "DAG": "NEUTRAL_CHILD_COMPLETE_PARENT_N5_PARTIAL_N6_N7_GATED"
+}
