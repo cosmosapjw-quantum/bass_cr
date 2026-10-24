@@ -1,0 +1,248 @@
+{
+  "schema": "N5_EI_INDEPENDENT_C9_FINAL_V1",
+  "utc": "2026-10-24T12:11:28.454581+00:00",
+  "status": "PASS_SCOPED",
+  "recommended_science_gate": "NUMERICALLY_CHECKED_SCOPED_CONDITIONAL_EI_FINITE_CHAIN",
+  "root_admission_separate": true,
+  "unit": "CR_N5_EI_MAXWELLIAN_ENERGY_EXCHANGE",
+  "consumer": "N5_C23D_H1_HE4_EI_ENERGY_V1",
+  "reviewer": "/root/latest_provider_survey",
+  "reviewer_implemented_production": false,
+  "reviewer_executed_production": false,
+  "production_imports": 0,
+  "blocking_findings": 0,
+  "findings": [],
+  "frozen_prepared_source_digest": "ea17062954ac8fba8e9b00c1a2d59e28c2793ed596b9f364beef05f068e39476",
+  "source_and_input_identity": {
+    "source_files": 5,
+    "prepared_input_and_manifest_pins": 24,
+    "INPUT_MANIFEST_entries": 23,
+    "total_frozen_pins_checked": 29,
+    "actual_executed_snapshot_pins_checked": 21,
+    "all_pass": true
+  },
+  "independent_numerical_scope": {
+    "coefficient_reference_pairs": 55,
+    "mpmath_decimal_digits": 80,
+    "matrix_cases": [
+      "chi1.5_R80_N2048",
+      "chi3_R80_N2048"
+    ],
+    "full_nodes_each": 2480,
+    "Decimal_reference_digits": 80,
+    "physical_RHS_per_case": 8,
+    "absolute_bath_bound_RHS_per_case": 4,
+    "reference_RHS_total": 24,
+    "source_ledger_rows": 6,
+    "check_groups_passed": 39,
+    "reference_operator": "exact saved binary64 K and RHS, with high precision arithmetic; no continuum certification"
+  },
+  "metrics": {
+    "coefficient_max_noncancelling_or_relative_error": 3.329476627935646e-15,
+    "matrix_max_noncancelling_or_relative_error": 2.983316599388798e-11,
+    "raw_state_energy_ledger_max_scaled_residual": 2.1684687827917418e-11,
+    "reference_state_energy_ledger_max_scaled_residual": 1.0352726745897608e-11,
+    "source_reference_comparison_max_error": 1.0787749354673106e-11,
+    "source_energy_ledger_max_scaled_residual": 2.6728333419378914e-13,
+    "raw_edge_drift_max_noncancelling_scaled_error": 1.8461831756462488e-16,
+    "matrix_assembly_max_relative_error": 3.512525762141114e-16
+  },
+  "frozen_tolerances": {
+    "independent_comparison": 5e-10,
+    "energy_ledger_scaled": 2e-08,
+    "generator_scaled": 2e-13
+  },
+  "physical_and_semantic_checks": {
+    "exact_declared_charge_residual_cm3": "0",
+    "elastic_nucleus_and_charge_incidence": "zero stoichiometric change for selected elastic EI operator",
+    "bath_energy": "negative full energy drift, including q boundary transition, retained with sign",
+    "source_ledger": "original active denominator, q-projection entry, original inactive energy, CE post-kinetic and internal energy distinct",
+    "exposure": "10000 proper seconds defines initial impulse once; no continuous chemistry integral or extra heat duration",
+    "missing_isotopes_and_elastic_event_hazard_count": "null preserved",
+    "actual_saved_plot": "PASS_SCOPED; actual view_image inspection; exact PNG identity recorded",
+    "first_entry": "not irreversible assimilation or Maxwellization"
+  },
+  "runtime_dependency": {
+    "name": "mpmath",
+    "version": "1.3.0",
+    "license_declared": "BSD",
+    "home_page_declared": "http://mpmath.org/",
+    "source_member": "mpmath-1.3.0.dist-info/LICENSE",
+    "pins": [
+      {
+        "path": "review/independent_c9_20261024_v1/dependencies/mpmath-1.3.0-py3-none-any.whl",
+        "bytes": 536198,
+        "sha256": "a0b2b9fe80bbcd81a6647ff13108738cfb482d481d826cc0e02f5b35e5c88d2c"
+      },
+      {
+        "path": "review/independent_c9_20261024_v1/dependencies/LICENSE_mpmath_1.3.0.txt",
+        "bytes": 1537,
+        "sha256": "c26cae81da4508e5e249985777a33821f183223ebb74d7f8cfbf90fe7eef2fb7"
+      },
+      {
+        "path": "review/independent_c9_20261024_v1/dependencies/METADATA_mpmath_1.3.0.txt",
+        "bytes": 8630,
+        "sha256": "44b66ea444b9c0d19ae94815d356bf047ae6b680c19268b5c265687cd6a81406"
+      }
+    ],
+    "original_owner_dependency_source": "/workspace/scratch/4c25ee00380c/tdcs413_recovery/B1_RESTORED/dependencies/mpmath-1.3.0-py3-none-any.whl",
+    "runtime_dependency_reuse_not_scientific_provider_admission": true,
+    "installation_performed": false,
+    "wheel_CRC": "PASS",
+    "RECORD_SHA256_payloads_verified": 91,
+    "dependency_resolution": "review/independent_c9_20261024_v1/DEPENDENCY_RESOLUTION.json"
+  },
+  "attempts": [
+    {
+      "attempt_path": "review/independent_c9_20261024_v1/run",
+      "classification": "PRE_CHILD_REJECTED_STALE_PRODUCTION_LEASE",
+      "scientific_reference_pairs": 0,
+      "scientific_reference_RHS": 0,
+      "schema": "N5_EI_INDEPENDENT_C9_DISPATCH_V1",
+      "status": "FAILED_RETAINED",
+      "error": {
+        "type": "RuntimeError",
+        "message": "PRODUCTION_LEASE_ACTIVE"
+      },
+      "child_started": false,
+      "returncode": null,
+      "worker_cpu_s": 0.0,
+      "worker_peak_RSS_KiB": null,
+      "coordinator_cpu_s": 0.0010356299999999992,
+      "wall_s": 0.0010406069995951839,
+      "CPU_limit_s": 10,
+      "wall_limit_s": 40,
+      "inherited_known_worker_cpu_s": 24.830244114,
+      "global_spend": null,
+      "remaining": null,
+      "currency": null,
+      "EXECUTION": "FAILED_RETAINED",
+      "PUBLICATION": "ROOT_OWNED",
+      "BACKUP": "ROOT_PENDING",
+      "DAG": "N5_PARTIAL_OPEN_N6_N7_NOT_ACTIVATED"
+    },
+    {
+      "attempt_path": "review/independent_c9_20261024_v1/run_attempt2",
+      "classification": "DEPENDENCY_MISSING_STARTUP",
+      "scientific_reference_pairs": 0,
+      "scientific_reference_RHS": 0,
+      "schema": "N5_EI_INDEPENDENT_C9_DISPATCH_V1",
+      "attempt_id": "n5_ei_energy_independent_c9_20261024_v1_attempt2",
+      "prior_review_worker_cpu_s": 0.0,
+      "prior_review_wall_s": 0.0010406069995951839,
+      "status": "FAILED_RETAINED",
+      "error": null,
+      "child_started": true,
+      "returncode": 1,
+      "worker_cpu_s": 0.030481999999999995,
+      "worker_peak_RSS_KiB": 11828,
+      "coordinator_cpu_s": 0.003602425999999999,
+      "wall_s": 0.035821589997794945,
+      "CPU_limit_s": 10,
+      "wall_limit_s": 39.998959393000405,
+      "inherited_known_worker_cpu_s": 24.830244114,
+      "global_spend": null,
+      "remaining": null,
+      "currency": null,
+      "EXECUTION": "FAILED_RETAINED",
+      "PUBLICATION": "ROOT_OWNED",
+      "BACKUP": "ROOT_PENDING",
+      "DAG": "N5_PARTIAL_OPEN_N6_N7_NOT_ACTIVATED"
+    },
+    {
+      "attempt_path": "review/independent_c9_20261024_v1/run_attempt3",
+      "classification": "SUCCESSFUL_INDEPENDENT_NUMERICAL_REVIEW",
+      "scientific_reference_pairs": 55,
+      "scientific_reference_RHS": 24,
+      "schema": "N5_EI_INDEPENDENT_C9_DISPATCH_V1",
+      "attempt_id": "n5_ei_energy_independent_c9_20261024_v1_attempt3",
+      "prior_review_worker_cpu_s": 0.030481999999999995,
+      "prior_review_wall_s": 0.03686219699739013,
+      "status": "PASS",
+      "error": null,
+      "child_started": true,
+      "returncode": 0,
+      "worker_cpu_s": 1.1242069999999997,
+      "worker_peak_RSS_KiB": 55264,
+      "coordinator_cpu_s": 0.004952764999999998,
+      "wall_s": 1.1709131230018102,
+      "CPU_limit_s": 9,
+      "wall_limit_s": 39.96313780300261,
+      "inherited_known_worker_cpu_s": 24.830244114,
+      "global_spend": null,
+      "remaining": null,
+      "currency": null,
+      "EXECUTION": "PASS",
+      "PUBLICATION": "ROOT_OWNED",
+      "BACKUP": "ROOT_PENDING",
+      "DAG": "N5_PARTIAL_OPEN_N6_N7_NOT_ACTIVATED"
+    }
+  ],
+  "costs": {
+    "review_worker_cpu_s_cumulative": 1.1546889999999996,
+    "review_dispatch_coordinator_cpu_s_cumulative": 0.009590820999999996,
+    "review_attempt_wall_s_cumulative": 1.2077753199992003,
+    "recorded_syntax_and_dependency_preparation_cpu_s": 0.032655035,
+    "syntax_preparation_includes_dependency_check_cost_once": true,
+    "review_worker_CPU_budget_s": 10,
+    "review_wall_budget_s": 40,
+    "inherited_known_worker_cpu_s": 24.830244114,
+    "unmetered_mechanical_read_write_cost_s": null,
+    "global_spend": null,
+    "remaining": null,
+    "currency": null
+  },
+  "resources": {
+    "successful_worker_affinity": [
+      1
+    ],
+    "native_threads": 1,
+    "RLIMIT_AS_bytes": 536870912,
+    "successful_worker_peak_RSS_KiB": 55264,
+    "successful_coordinator_cpu": 8,
+    "requested_model": "inherited_parent_model",
+    "observed_runtime_model": "UNOBSERVED"
+  },
+  "no_replay_counts": {
+    "old_science_replay": 0,
+    "new_ODE": 0,
+    "source_quadrature": 0,
+    "thermal_rate_quadrature": 0,
+    "production_reruns": 0
+  },
+  "scope_limits": [
+    "Selected stationary isotropic equal-temperature H1+/He4+/He4++ Maxwellian Landau model with prescribed lnLambda=20.",
+    "Frozen finite-chain discrete consumer and independent numerical agreement only.",
+    "Full N5 atomic/isotope coverage remains PARTIAL/OPEN; missing physical channels and isotope densities remain null.",
+    "N6 conservative coupling and N7 new parcel not activated.",
+    "No completed physical provider promotion for active WU/HE owners.",
+    "Non-tilted LRS/full Frobenius, signed amplitude/norm/cancellation distinction and atomic isotropic versus nonbaryonic Vlasov separation retained."
+  ],
+  "global_error_bound": null,
+  "global_completion_percent": null,
+  "raw_authority_paths": [
+    "review/independent_c9_20261024_v1/run_attempt3/RESULT.json",
+    "review/independent_c9_20261024_v1/run_attempt3/COEFFICIENTS_80D.json",
+    "review/independent_c9_20261024_v1/run_attempt3/SOURCE_LEDGER_80D.json",
+    "review/independent_c9_20261024_v1/run_attempt3/MP80_REFERENCE_chi1.5_R80_N2048.csv",
+    "review/independent_c9_20261024_v1/run_attempt3/MP80_REFERENCE_chi3_R80_N2048.csv",
+    "review/independent_c9_20261024_v1/PLOT_REVIEW.json"
+  ],
+  "source_paths": [
+    "review/independent_c9_20261024_v1/oracle.py",
+    "review/independent_c9_20261024_v1/launch.py",
+    "review/independent_c9_20261024_v1/launch_attempt2.py",
+    "review/independent_c9_20261024_v1/launch_attempt3.py",
+    "review/independent_c9_20261024_v1/REVIEW_SCOPE.json"
+  ],
+  "retained_failures": [
+    "review/independent_c9_20261024_v1/run/DISPATCH_RECEIPT.json",
+    "review/independent_c9_20261024_v1/run_attempt2/DISPATCH_RECEIPT.json",
+    "review/independent_c9_20261024_v1/run_attempt2/stderr.txt"
+  ],
+  "lease_reconciliation": "delivery/STALE_PLOT_LEASE_RECONCILIATION.json; lingering lease cause UNOBSERVED",
+  "EXECUTION": "INDEPENDENT_C9_COMPLETED_PASS_SCOPED",
+  "PUBLICATION": "ROOT_OWNED_PENDING",
+  "BACKUP": "ROOT_OWNED_PENDING",
+  "DAG": "N5_PARTIAL_OPEN_N6_N7_NOT_ACTIVATED"
+}
