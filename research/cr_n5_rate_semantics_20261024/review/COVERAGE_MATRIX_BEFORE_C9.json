@@ -1,0 +1,1552 @@
+{
+  "schema": "N5_PROVIDER_COVERAGE_MATRIX_V1",
+  "scope": "21 explicit populations; selected current owner returns and earlier conditional models; not an all-history absence claim",
+  "created_utc": "2026-10-24T03:14:15.890735+00:00",
+  "old_coverage_preserved_at": "inputs/reused/C23C_COVERAGE_CONTRACT.json",
+  "providers": [
+    {
+      "id": "PHYS81_CCC_CI_H1",
+      "binding": "H1 neutral->H1+",
+      "source": "sources/PHYS81_PARENT_REGISTRY.json",
+      "source_identity": "sha256:7a87a2c9f2116ee36c0786b379dac08e1f4d92a49504fe542e6aa71cbb279bae",
+      "incident_energy_eV": [
+        "13.6058",
+        "968.61"
+      ],
+      "chemical_binding_eV": "13.598434599702",
+      "cross_section_unit": "a0^2 original; explicit conversion to cm^2",
+      "numerical_T_K": [
+        255,
+        50000
+      ],
+      "physical_accuracy_T_K": null,
+      "admission": "FINITE_OPERATOR_REUSABLE_NOT_FULL_RATE",
+      "isotopes": "D/T transfer NOT_ADMITTED"
+    },
+    {
+      "id": "PHYS81_CCC_CI_He4",
+      "binding": "He4 neutral->He4+",
+      "source": "sources/PHYS81_PARENT_REGISTRY.json",
+      "source_identity": "sha256:5193de2a00d0f0e4dfbec2333caa48048d1ab86907de639b4c084a323c342ec3",
+      "incident_energy_eV": [
+        "24.6",
+        "60"
+      ],
+      "chemical_binding_eV": "24.587389011",
+      "cross_section_unit": "cm^2",
+      "numerical_T_K": [
+        255,
+        50000
+      ],
+      "physical_accuracy_T_K": null,
+      "admission": "FINITE_OPERATOR_REUSABLE_NOT_FULL_RATE",
+      "isotopes": "He3 transfer NOT_ADMITTED; electronic curve with explicit chemical-isotope binding, no isotope-specific cross-section certification"
+    },
+    {
+      "id": "PHYS81_CCC_CI_Li7",
+      "binding": "Li7 neutral->Li7+",
+      "source": "sources/PHYS81_PARENT_REGISTRY.json",
+      "source_identity": "sha256:ac76cfef7ca94accf4004267323251cfc6c7b6a68bcd0893ef4e634ad2a91ed9",
+      "incident_energy_eV": [
+        "6",
+        "15"
+      ],
+      "chemical_binding_eV": "5.39172060034581",
+      "cross_section_unit": "cm^2",
+      "numerical_T_K": [
+        255,
+        50000
+      ],
+      "physical_accuracy_T_K": null,
+      "admission": "FINITE_OPERATOR_REUSABLE_NOT_FULL_RATE",
+      "isotopes": "Li6 transfer NOT_ADMITTED"
+    },
+    {
+      "id": "PHYS82_Li_threshold_family",
+      "binding": "conditional Li7 neutral gap operator",
+      "source": "sources/LI_THRESHOLD_SOURCE_CONTRACT.json",
+      "incident_energy_eV": [
+        "5.39172060034581",
+        "6"
+      ],
+      "admission": "FOUR_ENDPOINT_MATCHED_CONDITIONAL_MODELS_PLUS_SEPARATE_REINTERPRETED_HISTORICAL_SLOPE_COMPARATOR",
+      "physical_accuracy_T_K": null,
+      "physical_uncertainty_enclosure": null,
+      "isotopes": "No isotope-resolved unsmeared empirical source envelope"
+    },
+    {
+      "id": "HE37_LeCambier_HI",
+      "binding": "H1 ground-state CI approximate reference",
+      "source": "sources/HE37_SOURCE_ADMISSION.json",
+      "incident_energy_eV": [
+        "13.6",
+        null
+      ],
+      "upper_bound_meaning": "analytic nonrelativistic approximate kernel; no empirical all-energy accuracy claim",
+      "numerical_T_K": [
+        2000,
+        200000
+      ],
+      "physical_accuracy_T_K": null,
+      "admission": "SOURCE_DEFINED_STATIONARY_HEAVY_ISOTROPIC_MODEL",
+      "differential_angular_accuracy": null,
+      "isotopes": "No other isotope mapping"
+    },
+    {
+      "id": "PHYS83_HI_CE_source",
+      "binding": "source-native LS1s/2s/2p H I finite subset",
+      "source": "inputs/reused/phys83/source_data/HI_CE_SOURCE_CONTRACT.json",
+      "up_energy_eV": [
+        "10.20435",
+        "968.6058"
+      ],
+      "down_model_energy_eV": [
+        "0",
+        "958.40145"
+      ],
+      "source_gap_eV": "10.20435",
+      "numerical_T_K": [
+        255,
+        50000
+      ],
+      "physical_accuracy_T_K": null,
+      "admission": "NUMERICALLY_CHECKED_FINITE_MAXWELL_RATES_132ROWS",
+      "actual_remote_head": "6a2fc5aacb6182a916b9434c316e99e750e8273c",
+      "actual_execution_ledger": "intake/OWNER_RETURN_SUMMARY.json",
+      "zero_wavelength_sentinel": "2s two-photon row wavelength0 is metadata, not zero event energy",
+      "isotopes": "No finite-mass or explicit isotope spectral mapping",
+      "saved_rate_table": "inputs/reused/PHYS83_RATES.csv",
+      "rate_quantity": "MAXWELLIAN_COEFFICIENT_CM3_PER_S",
+      "tagged_rate_from_thermal_coefficient": "REJECT",
+      "new_tagged_child": "N5_C23D_HI_CE_FIRST_EVENT_FINITE_BAND_V1",
+      "supersedes_only": "C23C observed-head NOT_RUN observation; previous snapshot retained"
+    },
+    {
+      "id": "C23B_PW19_VERNER_UV",
+      "binding": "HI/HeI/HeII elemental fit labels, not automatic full21 isotope mapping",
+      "source": "parent C23B authority and source_provider package restored by root",
+      "admission": "REUSE_PARENT_IDENTITY;this_N5_does_not_reexecute_or_requalify_sources",
+      "kinetic_to_heat": "NOT_AUTOMATIC"
+    },
+    {
+      "id": "C21O_CASE_A_RR",
+      "binding": "historical prescribed UV/T model",
+      "source": "user-pinned C21O authority",
+      "admission": "HISTORICAL_MODEL_PRESERVED;not_reevaluated_or_expanded_by_this_N5",
+      "energy_weighted_recombination_moment": "OPEN_FOR_FULL_THERMOCHEMICAL_CLOSURE"
+    },
+    {
+      "id": "PHYS84_HI_INSTANTANEOUS_SOURCE",
+      "status": "NUMERICAL_ADMISSION_WAIT",
+      "source": "inputs/reused/wu84_contract.json",
+      "head": "d5c2c8dbbbd77bc81526dda6e74df534fba3c4e5",
+      "latest_WU_delivery": "1a8f98719fd3ec87d3acbfb27aeda9936b0bc613",
+      "consumer_numeric_payload": null,
+      "ready_code_is_not_admission": true
+    },
+    {
+      "id": "HE94_DDCS20_WINDOW",
+      "status": "NUMERICALLY_CHECKED_CONDITIONAL_WINDOW_ONLY",
+      "source": "inputs/reused/he94_contract.json",
+      "science": "d8bae9f7e24ad3494e399f7ab46c4167a5623d48",
+      "delivery": "c8f5818c61d14872837abf7e9bc1a73c670ae25c",
+      "incident_eV": 20,
+      "outgoing_energy_eV": [
+        3,
+        6
+      ],
+      "theta_deg": [
+        15,
+        120
+      ],
+      "quantity": "ONE_ELECTRON_DOUBLY_DIFFERENTIAL_CROSS_SECTION_WINDOW",
+      "full_event_normalization": null,
+      "joint_secondary_law": null,
+      "parent_HE_ANG": "SOURCE_INPUT_PENDING"
+    },
+    {
+      "id": "HE32_ELEMENTAL_PI_RR",
+      "status": "CONDITIONAL_ELEMENTAL_EQUALITY_MODEL",
+      "source": "inputs/reused/he32_data.json",
+      "thermal_T_K": [
+        3,
+        1000000000.0
+      ],
+      "RR_quantity": "MAXWELLIAN_CASE_A_TOTAL_RR_CM3_PER_S",
+      "isotope_accuracy": null,
+      "tagged_capture_spectrum": null
+    },
+    {
+      "id": "C23E_D43_PI_RR_CX",
+      "status": "NUMERICALLY_CHECKED_SCOPED_REUSED",
+      "science": "8e4e06361d714939513a11f64a27f02822bde2fa",
+      "source": "inputs/reused/C23E_FROZEN_CONTRACT.md",
+      "T_K": [
+        3,
+        200000
+      ],
+      "mapping": "threshold-gated H-equality PI; alphaD=alphaH and conditional capture; kr-preserving PHYS79 D43K CX",
+      "empirical_Milne_pair": null,
+      "quotient": "retain separate D population and delta*nD+ energy"
+    },
+    {
+      "id": "C23D_EE_FIRST_ENTRY",
+      "status": "NUMERICALLY_CHECKED_SCOPED_REUSED",
+      "science": "d04b2a56adb4a5d55b901420aa544332b41f6dbb",
+      "source": "inputs/reused/C23D_MFPT.json",
+      "quantity": "ACTIVE_SOURCE_WEIGHTED_FIRST_ENTRY_MEAN_PROPER_SECONDS",
+      "source_initial_W_eV": [
+        0,
+        10
+      ],
+      "path_upper": "80*k_B*T/eV",
+      "notion": "first entry; no assimilation or Maxwellization claim"
+    },
+    {
+      "id": "HE34_NEUTRAL_VISCOSITY",
+      "status": "EXISTING_DIFFERENT_OBSERVABLE",
+      "source": "inputs/reused/he34_contract.json",
+      "quantity": "NEUTRAL_GAS_FIRST_SONINE_VISCOSITY",
+      "tagged_electron_stopping_conversion": null
+    }
+  ],
+  "population_rows": [
+    {
+      "population": "n:0",
+      "nuclide": "n",
+      "charge": 0,
+      "mass_number": 1,
+      "nuclear_charge": 0,
+      "channels": {
+        "CI": {
+          "status": "NOT_ATOMIC_CHANNEL",
+          "providers": [],
+          "rate_value": null,
+          "reason": "free neutron has separate weak/nuclear owner"
+        },
+        "RR": {
+          "status": "NOT_ATOMIC_CHANNEL",
+          "providers": [],
+          "rate_value": null,
+          "reason": "free neutron has separate weak/nuclear owner"
+        },
+        "DR": {
+          "status": "NOT_ATOMIC_CHANNEL",
+          "providers": [],
+          "rate_value": null,
+          "reason": "free neutron has separate weak/nuclear owner"
+        },
+        "CX": {
+          "status": "NOT_ATOMIC_CHANNEL",
+          "providers": [],
+          "rate_value": null,
+          "reason": "free neutron has separate weak/nuclear owner"
+        },
+        "PI": {
+          "status": "NOT_ATOMIC_CHANNEL",
+          "providers": [],
+          "rate_value": null,
+          "reason": "free neutron has separate weak/nuclear owner"
+        },
+        "neutral_elastic": {
+          "status": "NOT_ATOMIC_CHANNEL",
+          "providers": [],
+          "rate_value": null,
+          "reason": "free neutron has separate weak/nuclear owner"
+        },
+        "bound_bound": {
+          "status": "NOT_ATOMIC_CHANNEL",
+          "providers": [],
+          "rate_value": null,
+          "reason": "free neutron has separate weak/nuclear owner"
+        },
+        "electron_ion": {
+          "status": "NOT_ATOMIC_CHANNEL",
+          "providers": [],
+          "rate_value": null,
+          "reason": "free neutron has separate weak/nuclear owner"
+        }
+      }
+    },
+    {
+      "population": "H1:0",
+      "nuclide": "H1",
+      "charge": 0,
+      "mass_number": 1,
+      "nuclear_charge": 1,
+      "channels": {
+        "CI": {
+          "status": "FINITE_SOURCE_MODEL",
+          "providers": [
+            "PHYS81_CCC_CI_H1"
+          ],
+          "rate_value": null,
+          "reason": "no full physical tail or isotope transfer admitted"
+        },
+        "PI": {
+          "status": "CONDITIONAL_ELEMENTAL_EQUALITY_MODEL",
+          "providers": [
+            "HE32_ELEMENTAL_PI_RR"
+          ],
+          "rate_value": null,
+          "reason": "source thresholds retained separately; model isotope equality does not certify physical isotope accuracy"
+        },
+        "bound_bound": {
+          "status": "FINITE_LS_1S_2S_2P_MODEL",
+          "providers": [
+            "PHYS83_HI_CE_source"
+          ],
+          "rate_value": null,
+          "reason": "internal populations and energy owner required for source evolution"
+        },
+        "RR": {
+          "status": "OUTSIDE_NONNEGATIVE_CHARGE_INVENTORY",
+          "providers": [],
+          "rate_value": null,
+          "reason": "negative ions not part of declared21populations"
+        },
+        "DR": {
+          "status": "OUTSIDE_NONNEGATIVE_CHARGE_INVENTORY",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "electron_ion": {
+          "status": "NOT_AN_ION_TARGET",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "neutral_elastic": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "need electron-neutral momentum-transfer cross section, isotope mass, finite-T target average"
+        },
+        "CX": {
+          "status": "CONDITIONAL_HD_PAIR_ONLY",
+          "providers": [
+            "C23E_D43_PI_RR_CX"
+          ],
+          "rate_value": null,
+          "reason": "D0+H+ and reverse only, not an electron collision clock"
+        }
+      }
+    },
+    {
+      "population": "H1:1",
+      "nuclide": "H1",
+      "charge": 1,
+      "mass_number": 1,
+      "nuclear_charge": 1,
+      "channels": {
+        "CI": {
+          "status": "NOT_APPLICABLE_FULLY_STRIPPED",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "PI": {
+          "status": "NOT_APPLICABLE_FULLY_STRIPPED",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "bound_bound": {
+          "status": "NOT_APPLICABLE_FULLY_STRIPPED",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "RR": {
+          "status": "CONDITIONAL_ELEMENTAL_EQUALITY_MODEL",
+          "providers": [
+            "HE32_ELEMENTAL_PI_RR"
+          ],
+          "rate_value": null,
+          "reason": "thermal average and case A only; not tagged capture hazard"
+        },
+        "DR": {
+          "status": "NOT_APPLICABLE_NO_CORE_ELECTRON",
+          "providers": [],
+          "rate_value": null,
+          "reason": "ordinary two-electron DR requires a bound core electron; no numerical zero substituted"
+        },
+        "electron_ion": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "energy/momentum/diffusion owner required; total Coulomb encounter frequency insufficient"
+        },
+        "neutral_elastic": {
+          "status": "NOT_NEUTRAL_TARGET",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "CX": {
+          "status": "CONDITIONAL_HD_PAIR_ONLY",
+          "providers": [
+            "C23E_D43_PI_RR_CX"
+          ],
+          "rate_value": null,
+          "reason": "D0+H+ and reverse only, not an electron collision clock"
+        }
+      }
+    },
+    {
+      "population": "D:0",
+      "nuclide": "D",
+      "charge": 0,
+      "mass_number": 2,
+      "nuclear_charge": 1,
+      "channels": {
+        "CI": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "no full physical tail or isotope transfer admitted"
+        },
+        "PI": {
+          "status": "CONDITIONAL_ELEMENTAL_EQUALITY_MODEL",
+          "providers": [
+            "C23E_D43_PI_RR_CX"
+          ],
+          "rate_value": null,
+          "reason": "source thresholds retained separately; model isotope equality does not certify physical isotope accuracy"
+        },
+        "bound_bound": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "internal populations and energy owner required for source evolution"
+        },
+        "RR": {
+          "status": "OUTSIDE_NONNEGATIVE_CHARGE_INVENTORY",
+          "providers": [],
+          "rate_value": null,
+          "reason": "negative ions not part of declared21populations"
+        },
+        "DR": {
+          "status": "OUTSIDE_NONNEGATIVE_CHARGE_INVENTORY",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "electron_ion": {
+          "status": "NOT_AN_ION_TARGET",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "neutral_elastic": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "need electron-neutral momentum-transfer cross section, isotope mass, finite-T target average"
+        },
+        "CX": {
+          "status": "CONDITIONAL_HD_PAIR_ONLY",
+          "providers": [
+            "C23E_D43_PI_RR_CX"
+          ],
+          "rate_value": null,
+          "reason": "D0+H+ and reverse only, not an electron collision clock"
+        }
+      }
+    },
+    {
+      "population": "D:1",
+      "nuclide": "D",
+      "charge": 1,
+      "mass_number": 2,
+      "nuclear_charge": 1,
+      "channels": {
+        "CI": {
+          "status": "NOT_APPLICABLE_FULLY_STRIPPED",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "PI": {
+          "status": "NOT_APPLICABLE_FULLY_STRIPPED",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "bound_bound": {
+          "status": "NOT_APPLICABLE_FULLY_STRIPPED",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "RR": {
+          "status": "CONDITIONAL_ELEMENTAL_EQUALITY_MODEL",
+          "providers": [
+            "C23E_D43_PI_RR_CX"
+          ],
+          "rate_value": null,
+          "reason": "thermal average and case A only; not tagged capture hazard"
+        },
+        "DR": {
+          "status": "NOT_APPLICABLE_NO_CORE_ELECTRON",
+          "providers": [],
+          "rate_value": null,
+          "reason": "ordinary two-electron DR requires a bound core electron; no numerical zero substituted"
+        },
+        "electron_ion": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "energy/momentum/diffusion owner required; total Coulomb encounter frequency insufficient"
+        },
+        "neutral_elastic": {
+          "status": "NOT_NEUTRAL_TARGET",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "CX": {
+          "status": "CONDITIONAL_HD_PAIR_ONLY",
+          "providers": [
+            "C23E_D43_PI_RR_CX"
+          ],
+          "rate_value": null,
+          "reason": "D0+H+ and reverse only, not an electron collision clock"
+        }
+      }
+    },
+    {
+      "population": "T:0",
+      "nuclide": "T",
+      "charge": 0,
+      "mass_number": 3,
+      "nuclear_charge": 1,
+      "channels": {
+        "CI": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "no full physical tail or isotope transfer admitted"
+        },
+        "PI": {
+          "status": "CONDITIONAL_ELEMENTAL_EQUALITY_MODEL",
+          "providers": [
+            "HE32_ELEMENTAL_PI_RR"
+          ],
+          "rate_value": null,
+          "reason": "source thresholds retained separately; model isotope equality does not certify physical isotope accuracy"
+        },
+        "bound_bound": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "internal populations and energy owner required for source evolution"
+        },
+        "RR": {
+          "status": "OUTSIDE_NONNEGATIVE_CHARGE_INVENTORY",
+          "providers": [],
+          "rate_value": null,
+          "reason": "negative ions not part of declared21populations"
+        },
+        "DR": {
+          "status": "OUTSIDE_NONNEGATIVE_CHARGE_INVENTORY",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "electron_ion": {
+          "status": "NOT_AN_ION_TARGET",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "neutral_elastic": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "need electron-neutral momentum-transfer cross section, isotope mass, finite-T target average"
+        },
+        "CX": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "target/partner state-resolved exchange source absent from selected intake"
+        }
+      }
+    },
+    {
+      "population": "T:1",
+      "nuclide": "T",
+      "charge": 1,
+      "mass_number": 3,
+      "nuclear_charge": 1,
+      "channels": {
+        "CI": {
+          "status": "NOT_APPLICABLE_FULLY_STRIPPED",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "PI": {
+          "status": "NOT_APPLICABLE_FULLY_STRIPPED",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "bound_bound": {
+          "status": "NOT_APPLICABLE_FULLY_STRIPPED",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "RR": {
+          "status": "CONDITIONAL_ELEMENTAL_EQUALITY_MODEL",
+          "providers": [
+            "HE32_ELEMENTAL_PI_RR"
+          ],
+          "rate_value": null,
+          "reason": "thermal average and case A only; not tagged capture hazard"
+        },
+        "DR": {
+          "status": "NOT_APPLICABLE_NO_CORE_ELECTRON",
+          "providers": [],
+          "rate_value": null,
+          "reason": "ordinary two-electron DR requires a bound core electron; no numerical zero substituted"
+        },
+        "electron_ion": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "energy/momentum/diffusion owner required; total Coulomb encounter frequency insufficient"
+        },
+        "neutral_elastic": {
+          "status": "NOT_NEUTRAL_TARGET",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "CX": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "target/partner state-resolved exchange source absent from selected intake"
+        }
+      }
+    },
+    {
+      "population": "He3:0",
+      "nuclide": "He3",
+      "charge": 0,
+      "mass_number": 3,
+      "nuclear_charge": 2,
+      "channels": {
+        "CI": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "no full physical tail or isotope transfer admitted"
+        },
+        "PI": {
+          "status": "CONDITIONAL_ELEMENTAL_EQUALITY_MODEL",
+          "providers": [
+            "HE32_ELEMENTAL_PI_RR"
+          ],
+          "rate_value": null,
+          "reason": "source thresholds retained separately; model isotope equality does not certify physical isotope accuracy"
+        },
+        "bound_bound": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "internal populations and energy owner required for source evolution"
+        },
+        "RR": {
+          "status": "OUTSIDE_NONNEGATIVE_CHARGE_INVENTORY",
+          "providers": [],
+          "rate_value": null,
+          "reason": "negative ions not part of declared21populations"
+        },
+        "DR": {
+          "status": "OUTSIDE_NONNEGATIVE_CHARGE_INVENTORY",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "electron_ion": {
+          "status": "NOT_AN_ION_TARGET",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "neutral_elastic": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "need electron-neutral momentum-transfer cross section, isotope mass, finite-T target average"
+        },
+        "CX": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "target/partner state-resolved exchange source absent from selected intake"
+        }
+      }
+    },
+    {
+      "population": "He3:1",
+      "nuclide": "He3",
+      "charge": 1,
+      "mass_number": 3,
+      "nuclear_charge": 2,
+      "channels": {
+        "CI": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "no full physical tail or isotope transfer admitted"
+        },
+        "PI": {
+          "status": "CONDITIONAL_ELEMENTAL_EQUALITY_MODEL",
+          "providers": [
+            "HE32_ELEMENTAL_PI_RR"
+          ],
+          "rate_value": null,
+          "reason": "source thresholds retained separately; model isotope equality does not certify physical isotope accuracy"
+        },
+        "bound_bound": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "internal populations and energy owner required for source evolution"
+        },
+        "RR": {
+          "status": "CONDITIONAL_ELEMENTAL_EQUALITY_MODEL",
+          "providers": [
+            "HE32_ELEMENTAL_PI_RR"
+          ],
+          "rate_value": null,
+          "reason": "thermal average and case A only; not tagged capture hazard"
+        },
+        "DR": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "ordinary two-electron DR requires a bound core electron; no numerical zero substituted"
+        },
+        "electron_ion": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "energy/momentum/diffusion owner required; total Coulomb encounter frequency insufficient"
+        },
+        "neutral_elastic": {
+          "status": "NOT_NEUTRAL_TARGET",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "CX": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "target/partner state-resolved exchange source absent from selected intake"
+        }
+      }
+    },
+    {
+      "population": "He3:2",
+      "nuclide": "He3",
+      "charge": 2,
+      "mass_number": 3,
+      "nuclear_charge": 2,
+      "channels": {
+        "CI": {
+          "status": "NOT_APPLICABLE_FULLY_STRIPPED",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "PI": {
+          "status": "NOT_APPLICABLE_FULLY_STRIPPED",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "bound_bound": {
+          "status": "NOT_APPLICABLE_FULLY_STRIPPED",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "RR": {
+          "status": "CONDITIONAL_ELEMENTAL_EQUALITY_MODEL",
+          "providers": [
+            "HE32_ELEMENTAL_PI_RR"
+          ],
+          "rate_value": null,
+          "reason": "thermal average and case A only; not tagged capture hazard"
+        },
+        "DR": {
+          "status": "NOT_APPLICABLE_NO_CORE_ELECTRON",
+          "providers": [],
+          "rate_value": null,
+          "reason": "ordinary two-electron DR requires a bound core electron; no numerical zero substituted"
+        },
+        "electron_ion": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "energy/momentum/diffusion owner required; total Coulomb encounter frequency insufficient"
+        },
+        "neutral_elastic": {
+          "status": "NOT_NEUTRAL_TARGET",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "CX": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "target/partner state-resolved exchange source absent from selected intake"
+        }
+      }
+    },
+    {
+      "population": "He4:0",
+      "nuclide": "He4",
+      "charge": 0,
+      "mass_number": 4,
+      "nuclear_charge": 2,
+      "channels": {
+        "CI": {
+          "status": "FINITE_SOURCE_MODEL",
+          "providers": [
+            "PHYS81_CCC_CI_He4"
+          ],
+          "rate_value": null,
+          "reason": "no full physical tail or isotope transfer admitted"
+        },
+        "PI": {
+          "status": "CONDITIONAL_ELEMENTAL_EQUALITY_MODEL",
+          "providers": [
+            "HE32_ELEMENTAL_PI_RR"
+          ],
+          "rate_value": null,
+          "reason": "source thresholds retained separately; model isotope equality does not certify physical isotope accuracy"
+        },
+        "bound_bound": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "internal populations and energy owner required for source evolution"
+        },
+        "RR": {
+          "status": "OUTSIDE_NONNEGATIVE_CHARGE_INVENTORY",
+          "providers": [],
+          "rate_value": null,
+          "reason": "negative ions not part of declared21populations"
+        },
+        "DR": {
+          "status": "OUTSIDE_NONNEGATIVE_CHARGE_INVENTORY",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "electron_ion": {
+          "status": "NOT_AN_ION_TARGET",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "neutral_elastic": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "need electron-neutral momentum-transfer cross section, isotope mass, finite-T target average"
+        },
+        "CX": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "target/partner state-resolved exchange source absent from selected intake"
+        }
+      }
+    },
+    {
+      "population": "He4:1",
+      "nuclide": "He4",
+      "charge": 1,
+      "mass_number": 4,
+      "nuclear_charge": 2,
+      "channels": {
+        "CI": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "no full physical tail or isotope transfer admitted"
+        },
+        "PI": {
+          "status": "CONDITIONAL_ELEMENTAL_EQUALITY_MODEL",
+          "providers": [
+            "HE32_ELEMENTAL_PI_RR"
+          ],
+          "rate_value": null,
+          "reason": "source thresholds retained separately; model isotope equality does not certify physical isotope accuracy"
+        },
+        "bound_bound": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "internal populations and energy owner required for source evolution"
+        },
+        "RR": {
+          "status": "CONDITIONAL_ELEMENTAL_EQUALITY_MODEL",
+          "providers": [
+            "HE32_ELEMENTAL_PI_RR"
+          ],
+          "rate_value": null,
+          "reason": "thermal average and case A only; not tagged capture hazard"
+        },
+        "DR": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "ordinary two-electron DR requires a bound core electron; no numerical zero substituted"
+        },
+        "electron_ion": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "energy/momentum/diffusion owner required; total Coulomb encounter frequency insufficient"
+        },
+        "neutral_elastic": {
+          "status": "NOT_NEUTRAL_TARGET",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "CX": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "target/partner state-resolved exchange source absent from selected intake"
+        }
+      }
+    },
+    {
+      "population": "He4:2",
+      "nuclide": "He4",
+      "charge": 2,
+      "mass_number": 4,
+      "nuclear_charge": 2,
+      "channels": {
+        "CI": {
+          "status": "NOT_APPLICABLE_FULLY_STRIPPED",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "PI": {
+          "status": "NOT_APPLICABLE_FULLY_STRIPPED",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "bound_bound": {
+          "status": "NOT_APPLICABLE_FULLY_STRIPPED",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "RR": {
+          "status": "CONDITIONAL_ELEMENTAL_EQUALITY_MODEL",
+          "providers": [
+            "HE32_ELEMENTAL_PI_RR"
+          ],
+          "rate_value": null,
+          "reason": "thermal average and case A only; not tagged capture hazard"
+        },
+        "DR": {
+          "status": "NOT_APPLICABLE_NO_CORE_ELECTRON",
+          "providers": [],
+          "rate_value": null,
+          "reason": "ordinary two-electron DR requires a bound core electron; no numerical zero substituted"
+        },
+        "electron_ion": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "energy/momentum/diffusion owner required; total Coulomb encounter frequency insufficient"
+        },
+        "neutral_elastic": {
+          "status": "NOT_NEUTRAL_TARGET",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "CX": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "target/partner state-resolved exchange source absent from selected intake"
+        }
+      }
+    },
+    {
+      "population": "Li6:0",
+      "nuclide": "Li6",
+      "charge": 0,
+      "mass_number": 6,
+      "nuclear_charge": 3,
+      "channels": {
+        "CI": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "no full physical tail or isotope transfer admitted"
+        },
+        "PI": {
+          "status": "CONDITIONAL_ELEMENTAL_EQUALITY_MODEL",
+          "providers": [
+            "HE32_ELEMENTAL_PI_RR"
+          ],
+          "rate_value": null,
+          "reason": "source thresholds retained separately; model isotope equality does not certify physical isotope accuracy"
+        },
+        "bound_bound": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "internal populations and energy owner required for source evolution"
+        },
+        "RR": {
+          "status": "OUTSIDE_NONNEGATIVE_CHARGE_INVENTORY",
+          "providers": [],
+          "rate_value": null,
+          "reason": "negative ions not part of declared21populations"
+        },
+        "DR": {
+          "status": "OUTSIDE_NONNEGATIVE_CHARGE_INVENTORY",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "electron_ion": {
+          "status": "NOT_AN_ION_TARGET",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "neutral_elastic": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "need electron-neutral momentum-transfer cross section, isotope mass, finite-T target average"
+        },
+        "CX": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "target/partner state-resolved exchange source absent from selected intake"
+        }
+      }
+    },
+    {
+      "population": "Li6:1",
+      "nuclide": "Li6",
+      "charge": 1,
+      "mass_number": 6,
+      "nuclear_charge": 3,
+      "channels": {
+        "CI": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "no full physical tail or isotope transfer admitted"
+        },
+        "PI": {
+          "status": "CONDITIONAL_ELEMENTAL_EQUALITY_MODEL",
+          "providers": [
+            "HE32_ELEMENTAL_PI_RR"
+          ],
+          "rate_value": null,
+          "reason": "source thresholds retained separately; model isotope equality does not certify physical isotope accuracy"
+        },
+        "bound_bound": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "internal populations and energy owner required for source evolution"
+        },
+        "RR": {
+          "status": "CONDITIONAL_ELEMENTAL_EQUALITY_MODEL",
+          "providers": [
+            "HE32_ELEMENTAL_PI_RR"
+          ],
+          "rate_value": null,
+          "reason": "thermal average and case A only; not tagged capture hazard"
+        },
+        "DR": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "ordinary two-electron DR requires a bound core electron; no numerical zero substituted"
+        },
+        "electron_ion": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "energy/momentum/diffusion owner required; total Coulomb encounter frequency insufficient"
+        },
+        "neutral_elastic": {
+          "status": "NOT_NEUTRAL_TARGET",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "CX": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "target/partner state-resolved exchange source absent from selected intake"
+        }
+      }
+    },
+    {
+      "population": "Li6:2",
+      "nuclide": "Li6",
+      "charge": 2,
+      "mass_number": 6,
+      "nuclear_charge": 3,
+      "channels": {
+        "CI": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "no full physical tail or isotope transfer admitted"
+        },
+        "PI": {
+          "status": "CONDITIONAL_ELEMENTAL_EQUALITY_MODEL",
+          "providers": [
+            "HE32_ELEMENTAL_PI_RR"
+          ],
+          "rate_value": null,
+          "reason": "source thresholds retained separately; model isotope equality does not certify physical isotope accuracy"
+        },
+        "bound_bound": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "internal populations and energy owner required for source evolution"
+        },
+        "RR": {
+          "status": "CONDITIONAL_ELEMENTAL_EQUALITY_MODEL",
+          "providers": [
+            "HE32_ELEMENTAL_PI_RR"
+          ],
+          "rate_value": null,
+          "reason": "thermal average and case A only; not tagged capture hazard"
+        },
+        "DR": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "ordinary two-electron DR requires a bound core electron; no numerical zero substituted"
+        },
+        "electron_ion": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "energy/momentum/diffusion owner required; total Coulomb encounter frequency insufficient"
+        },
+        "neutral_elastic": {
+          "status": "NOT_NEUTRAL_TARGET",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "CX": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "target/partner state-resolved exchange source absent from selected intake"
+        }
+      }
+    },
+    {
+      "population": "Li6:3",
+      "nuclide": "Li6",
+      "charge": 3,
+      "mass_number": 6,
+      "nuclear_charge": 3,
+      "channels": {
+        "CI": {
+          "status": "NOT_APPLICABLE_FULLY_STRIPPED",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "PI": {
+          "status": "NOT_APPLICABLE_FULLY_STRIPPED",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "bound_bound": {
+          "status": "NOT_APPLICABLE_FULLY_STRIPPED",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "RR": {
+          "status": "CONDITIONAL_ELEMENTAL_EQUALITY_MODEL",
+          "providers": [
+            "HE32_ELEMENTAL_PI_RR"
+          ],
+          "rate_value": null,
+          "reason": "thermal average and case A only; not tagged capture hazard"
+        },
+        "DR": {
+          "status": "NOT_APPLICABLE_NO_CORE_ELECTRON",
+          "providers": [],
+          "rate_value": null,
+          "reason": "ordinary two-electron DR requires a bound core electron; no numerical zero substituted"
+        },
+        "electron_ion": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "energy/momentum/diffusion owner required; total Coulomb encounter frequency insufficient"
+        },
+        "neutral_elastic": {
+          "status": "NOT_NEUTRAL_TARGET",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "CX": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "target/partner state-resolved exchange source absent from selected intake"
+        }
+      }
+    },
+    {
+      "population": "Li7:0",
+      "nuclide": "Li7",
+      "charge": 0,
+      "mass_number": 7,
+      "nuclear_charge": 3,
+      "channels": {
+        "CI": {
+          "status": "FINITE_SOURCE_MODEL",
+          "providers": [
+            "PHYS81_CCC_CI_Li7"
+          ],
+          "rate_value": null,
+          "reason": "no full physical tail or isotope transfer admitted"
+        },
+        "PI": {
+          "status": "CONDITIONAL_ELEMENTAL_EQUALITY_MODEL",
+          "providers": [
+            "HE32_ELEMENTAL_PI_RR"
+          ],
+          "rate_value": null,
+          "reason": "source thresholds retained separately; model isotope equality does not certify physical isotope accuracy"
+        },
+        "bound_bound": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "internal populations and energy owner required for source evolution"
+        },
+        "RR": {
+          "status": "OUTSIDE_NONNEGATIVE_CHARGE_INVENTORY",
+          "providers": [],
+          "rate_value": null,
+          "reason": "negative ions not part of declared21populations"
+        },
+        "DR": {
+          "status": "OUTSIDE_NONNEGATIVE_CHARGE_INVENTORY",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "electron_ion": {
+          "status": "NOT_AN_ION_TARGET",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "neutral_elastic": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "need electron-neutral momentum-transfer cross section, isotope mass, finite-T target average"
+        },
+        "CX": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "target/partner state-resolved exchange source absent from selected intake"
+        }
+      }
+    },
+    {
+      "population": "Li7:1",
+      "nuclide": "Li7",
+      "charge": 1,
+      "mass_number": 7,
+      "nuclear_charge": 3,
+      "channels": {
+        "CI": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "no full physical tail or isotope transfer admitted"
+        },
+        "PI": {
+          "status": "CONDITIONAL_ELEMENTAL_EQUALITY_MODEL",
+          "providers": [
+            "HE32_ELEMENTAL_PI_RR"
+          ],
+          "rate_value": null,
+          "reason": "source thresholds retained separately; model isotope equality does not certify physical isotope accuracy"
+        },
+        "bound_bound": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "internal populations and energy owner required for source evolution"
+        },
+        "RR": {
+          "status": "CONDITIONAL_ELEMENTAL_EQUALITY_MODEL",
+          "providers": [
+            "HE32_ELEMENTAL_PI_RR"
+          ],
+          "rate_value": null,
+          "reason": "thermal average and case A only; not tagged capture hazard"
+        },
+        "DR": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "ordinary two-electron DR requires a bound core electron; no numerical zero substituted"
+        },
+        "electron_ion": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "energy/momentum/diffusion owner required; total Coulomb encounter frequency insufficient"
+        },
+        "neutral_elastic": {
+          "status": "NOT_NEUTRAL_TARGET",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "CX": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "target/partner state-resolved exchange source absent from selected intake"
+        }
+      }
+    },
+    {
+      "population": "Li7:2",
+      "nuclide": "Li7",
+      "charge": 2,
+      "mass_number": 7,
+      "nuclear_charge": 3,
+      "channels": {
+        "CI": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "no full physical tail or isotope transfer admitted"
+        },
+        "PI": {
+          "status": "CONDITIONAL_ELEMENTAL_EQUALITY_MODEL",
+          "providers": [
+            "HE32_ELEMENTAL_PI_RR"
+          ],
+          "rate_value": null,
+          "reason": "source thresholds retained separately; model isotope equality does not certify physical isotope accuracy"
+        },
+        "bound_bound": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "internal populations and energy owner required for source evolution"
+        },
+        "RR": {
+          "status": "CONDITIONAL_ELEMENTAL_EQUALITY_MODEL",
+          "providers": [
+            "HE32_ELEMENTAL_PI_RR"
+          ],
+          "rate_value": null,
+          "reason": "thermal average and case A only; not tagged capture hazard"
+        },
+        "DR": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "ordinary two-electron DR requires a bound core electron; no numerical zero substituted"
+        },
+        "electron_ion": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "energy/momentum/diffusion owner required; total Coulomb encounter frequency insufficient"
+        },
+        "neutral_elastic": {
+          "status": "NOT_NEUTRAL_TARGET",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "CX": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "target/partner state-resolved exchange source absent from selected intake"
+        }
+      }
+    },
+    {
+      "population": "Li7:3",
+      "nuclide": "Li7",
+      "charge": 3,
+      "mass_number": 7,
+      "nuclear_charge": 3,
+      "channels": {
+        "CI": {
+          "status": "NOT_APPLICABLE_FULLY_STRIPPED",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "PI": {
+          "status": "NOT_APPLICABLE_FULLY_STRIPPED",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "bound_bound": {
+          "status": "NOT_APPLICABLE_FULLY_STRIPPED",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "RR": {
+          "status": "CONDITIONAL_ELEMENTAL_EQUALITY_MODEL",
+          "providers": [
+            "HE32_ELEMENTAL_PI_RR"
+          ],
+          "rate_value": null,
+          "reason": "thermal average and case A only; not tagged capture hazard"
+        },
+        "DR": {
+          "status": "NOT_APPLICABLE_NO_CORE_ELECTRON",
+          "providers": [],
+          "rate_value": null,
+          "reason": "ordinary two-electron DR requires a bound core electron; no numerical zero substituted"
+        },
+        "electron_ion": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "energy/momentum/diffusion owner required; total Coulomb encounter frequency insufficient"
+        },
+        "neutral_elastic": {
+          "status": "NOT_NEUTRAL_TARGET",
+          "providers": [],
+          "rate_value": null,
+          "reason": null
+        },
+        "CX": {
+          "status": "MISSING_SELECTED_PROVIDER",
+          "providers": [],
+          "rate_value": null,
+          "reason": "target/partner state-resolved exchange source absent from selected intake"
+        }
+      }
+    }
+  ],
+  "species_missing_policy": "null is unknown; inapplicable is labeled, never assigned a physical rate",
+  "isotope_quotient_reuse": {
+    "number": "G_A(lambda)=Gbar(lambda) for every isotope and every admitted bath state",
+    "binding_energy_source": "epsilon_A^T G_A(lambda)=epsilon_bar^T Gbar(lambda) for every isotope and every admitted bath state",
+    "constant_offset_equivalence": "When common G has rank n-1, including irreducible case",
+    "weakly_connected_suffices": false,
+    "finite_sample_global_certificate": false,
+    "recoil": "Retain isotope-dependent 2*m*M/(m+M)^2 and source-energy coordinate"
+  },
+  "dominant_omissions": [
+    {
+      "process": "electron-neutral elastic energy exchange",
+      "needs": [
+        "momentum-transfer cross section",
+        "target isotope mass/state",
+        "finite-T target averaging",
+        "energy diffusion or justified deterministic limit"
+      ],
+      "dominance": "depends on neutral/ionized composition and bath state; not ranked numerically here"
+    },
+    {
+      "process": "low-energy inelastic",
+      "needs": [
+        "Li neutral ionization threshold/source below10eV",
+        "excited-state deexcitation",
+        "state populations",
+        "secondary-electron distribution"
+      ],
+      "reason": "FS10eV floor is not a universal atomic threshold"
+    },
+    {
+      "process": "RR_DR_energy",
+      "needs": [
+        "rate-weighted captured electron kinetic energy",
+        "branching/cascade photon energy",
+        "Case-A/B owner",
+        "target charge/isotope mapping"
+      ]
+    },
+    {
+      "process": "He_Li_CX",
+      "needs": [
+        "state/product-resolved sources",
+        "isotope-dependent nuclear collision dynamics",
+        "radiation/binding/recoil owners"
+      ]
+    },
+    {
+      "process": "full21_PHOTO",
+      "needs": [
+        "explicit isotope/charge mappings",
+        "Li hard-UV inner-shell channels",
+        "nuclear beta ownership when activated"
+      ]
+    },
+    {
+      "process": "full_thermochemical",
+      "needs": [
+        "thermal_fast_number_exchange",
+        "density_and_temperature_validity",
+        "radiation_absorption_escape",
+        "expansion_and_shear_work",
+        "dominant_omitted_process_assessment"
+      ]
+    }
+  ],
+  "actual_total_competition_rate": null,
+  "global_error_bound": null,
+  "global_completion_percent": null,
+  "N5_parent": "PARTIAL_OPEN",
+  "PHYS84_consumer": "NUMERICAL_ADMISSION_WAIT",
+  "HE_ANG_parent": "SOURCE_INPUT_PENDING"
+}

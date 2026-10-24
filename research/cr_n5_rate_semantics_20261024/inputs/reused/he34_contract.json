@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "workflow_version": "1.0.0",
+  "approval_version": "0.2",
+  "unit_id": "HE34-SCR",
+  "task": "both",
+  "status": "in_progress",
+  "objective": "Derive and implement a certified stiff LRS gas-moment reduction with an exact neutral-H/He viscosity reduction; execute only new bounded diagnostics in the sandbox.",
+  "original_goal_gap": "HE32 completed prescribed-UV photo+caseA RR with pi_b=0. HE33 supplied prescribed-rate mechanical moments. Full calibrated baryonic stress, reactive tensor sources, thermal/source evolution, extra species and metric feedback remain dependencies.",
+  "scope": {
+    "mechanics": "HE33 Q=j=0, N=ln(a/a0), S=s/H, prescribed constant chi=nu_pi/H. Factor a^-5 exactly. Neutral-H/He first Chapman-Enskog viscosity is a separately sourced transport subset; nu_pi=p/eta is hydrodynamic matching, not a transient-operator identity.",
+    "background": "Use saved s07_m03_r03, Sigma_F0=0.6, P_m0=P_r0=0; piecewise-linear signed S from its 201 nodes is the exact input contract for the new diagnostic.",
+    "initial_state": "r0=q0/p0=0, p0>0; logarithmic pressure ratio removes arbitrary scale.",
+    "truncation_certificate": "ratio and log-pressure continuum approximation bounds; floating-point and quadrature checks reported separately.",
+    "transport": "Neutral H/He only, temperature/domain and collision-integral normalization to be verified from original sources.",
+    "no_completion_claim": [
+      "all-mixture B1",
+      "reactive B2",
+      "B3 physical closure",
+      "B4 physical gas source control",
+      "B5 metric feedback"
+    ]
+  },
+  "pins": {
+    "HE32": "16a424b7290f484c57e97c8ed74f81e6d2043782",
+    "HE33": "bb1259b21c7b83b0376a5f7fcbb0c6321918ec90",
+    "HE33_science": "1d7dab57becc5829f0282b88a7516360ccad718a"
+  },
+  "acceptance": {
+    "ratio_abs": 1e-06,
+    "log_pressure_abs": 1e-06,
+    "oracle_reference": "independent SciPy implicit integration of full two-eigenpressure system, tolerance refinement; constant-input CAS/analytic checks",
+    "source_quadrature": "actual reported error estimate or bound, kept separate from continuum certificate",
+    "viscosity_parity_rel": 5e-13,
+    "viscosity_domain": "source-supported interval, no extrapolation",
+    "invalid_inputs": "explicit rejection; no clipping",
+    "performance": "same inputs and declared accuracy; include certificate/quad overhead; no assumed speedup",
+    "numerical_quadrature_estimate_plus_tail_max": 1e-09,
+    "numerical_gate_declared": "Independent code-review correction before first saved-background control: approximation_valid and quadrature_converged, finite error estimate plus analytic tail <=1e-9; separate from 1e-6 continuum tolerance."
+  },
+  "execution": {
+    "old_HE32_IVPs_replayed": 0,
+    "old_HE32_renders_repeated": 0,
+    "old_HE32_benchmarks_repeated": 0,
+    "other_campaigns_replayed": 0,
+    "NCP_jobs": 0,
+    "new_scope": "finite local tests, one existing background with prescribed-rate controls and matched-cost comparison"
+  },
+  "delta_intake": {
+    "after_UTC": "2026-10-22T02:52:00Z",
+    "through_UTC": "2026-10-22T06:36:00Z",
+    "scope": "directly related PHYS79/THERM01/REI221 changes only; not full repo/chat survey"
+  },
+  "policy": {
+    "skill": "physmath-research-loop user package exact references now read",
+    "workflow": "1.0.0",
+    "approval": "0.2",
+    "skillquiver": "execute-durably state outside repo; scientific evidence in unit; dependency-specific reuse"
+  },
+  "parallel_unit": {
+    "PR": 87,
+    "pin": "0868889acebeb4d9b70d38313a9a694d12bf8766",
+    "unit": "research/he34_lorentz_transport_20261022",
+    "relation": "parallel Lorentz Grad-projection transport source; separately namespaced from this sandbox certified-relaxation unit"
+  }
+}

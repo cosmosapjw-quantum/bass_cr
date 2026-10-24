@@ -1,0 +1,313 @@
+{
+  "schema": "WU_HI_CE_INSTANTANEOUS_SOURCE_V1",
+  "frozen_utc": "2026-10-23T19:28:14.164117+00:00",
+  "author_role": "Astra controller: physics, contract and acceptance",
+  "parent_HEAD": "6a2fc5aacb6182a916b9434c316e99e750e8273c",
+  "parent_PR": 140,
+  "parent_unit": "research/hh_phys83_ce_completion_20261023",
+  "parent_scientific_identity": "e09e64848d545d844590c6cc733cc870109d8fa4f3b44bff796afd11c0753d0c",
+  "central_handoff": {
+    "repository": "cosmosapjw-quantum/rei_bianchi",
+    "HEAD": "0f9d9df825be1dac9ca9bdf73cdc2e8908bcba17",
+    "path": "research/orchestration_longterm_20261023/assembly/HANDOFF_WU088_HH_KO.md",
+    "first_node": "WU_CE83_OWNER_COMPLETION",
+    "adoption": "NUMERICALLY_CHECKED_SCOPED_BY_REUSED_OWNER_EVIDENCE",
+    "prospective_recipient": "REI-L1 / research/rei_source_pair_binding/**",
+    "external_consumer_admission": "NOT_ISSUED",
+    "open_binding": "Named REI state and excited-atom reservoir owner, native/detached radiative owner and source/domain/clock binding must be accepted by REI owner."
+  },
+  "question": "Export conservative instantaneous bound-bound H I level, thermal, excited-atom and radiative source columns from immutable saved PHYS83 rates without recalculating rates or trajectories.",
+  "input_pins": {
+    "results/rate_grid.csv": "64e53e02b776db2aee6d67ce03201cbc0b90404d7cdf40e52cccaaecd2fc3017",
+    "CONTRACT.json": "d9eb980df5236e2b2ca3da313813c3ca2b21562f90486f1173d0ea509bc4dcc5",
+    "results/SCIENCE_IDENTITY.json": "ca2ceebb71bff3e682dcf01761e3f5e2770d220a27bf38ac4817d8aad6622d46",
+    "results/COMPLETE.json": "6a69c5552a9a311c14c55575ae1ee058d746fd377a23a21f7636ad3cc7854761"
+  },
+  "source": {
+    "levels": [
+      "1S",
+      "2S",
+      "2P"
+    ],
+    "native_gap_eV": 10.20435,
+    "A_2s_two_photon_s_inv": 8.229,
+    "A_2s_M1_s_inv": 2.496e-06,
+    "A_2p_E1_s_inv": 626000000.0,
+    "rates": "only 66 exact stored float64 temperatures and both upper levels; reject absent T, interpolation and extrapolation",
+    "temperature_domain_K": [
+      255.0,
+      50000.0
+    ],
+    "electron_distribution": "Maxwellian, heavy stationary target, unpolarized LS source-native finite CCC operator",
+    "units": {
+      "density": "cm^-3",
+      "rate": "cm^3 s^-1",
+      "event_intensity": "cm^-3 s^-1",
+      "energy_source": "eV cm^-3 s^-1",
+      "clock": "same normal-frame local proper seconds",
+      "temperature_source": "K s^-1"
+    },
+    "kB_eV_K": 8.617333262145179e-05,
+    "eV_J": 1.602176634e-19,
+    "input_density_range_cm3": [
+      0.0,
+      1e+18
+    ],
+    "Nthermal": "positive finite supplied ideal-gas particle density >= n1s+n2s+n2p+ne and <=1e20; spectator particles allowed",
+    "high_density": "formal finite-star diagnostics only; no physical high-density completeness"
+  },
+  "equations": {
+    "event_order": [
+      "CE_up_2S",
+      "CE_up_2P",
+      "CE_down_2S",
+      "CE_down_2P",
+      "RAD_2S_2gamma",
+      "RAD_2S_M1",
+      "RAD_2P_E1"
+    ],
+    "events": "(ne*n0*q_up_s,ne*n0*q_up_p,ne*ns*q_down_s,ne*np*q_down_p,ns*A2gamma,ns*AM1,np*AE1)",
+    "state_incidence": [
+      [
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        0,
+        -1,
+        0,
+        -1,
+        -1,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        -1,
+        0,
+        0,
+        -1
+      ]
+    ],
+    "thermal_energy_per_event_eV": "Delta*(-1,-1,1,1,0,0,0)",
+    "excitation_energy_per_event_eV": "Delta*(1,1,-1,-1,-1,-1,-1)",
+    "radiation_energy_per_event_eV": "Delta*(0,0,0,0,1,1,1)",
+    "photon_multiplicity": [
+      0,
+      0,
+      0,
+      0,
+      2,
+      1,
+      1
+    ],
+    "particle_sources": "sum level sources=0, electron=0, thermal particle=0, nuclei=0, charge=0",
+    "energy_closure": "Qthermal+dUexc+Qradiation=0; chemical ground-state binding source=0",
+    "temperature_source": "2*Qthermal/(3*kB*Nthermal); instantaneous ideal common-T bath source only, no integration",
+    "thermal_source_sign": "positive means translational gas heating",
+    "spectral_contract": "2gamma event energy is Delta shared by two photons. No monochromatic Delta/2 or spectrum is supplied.",
+    "energy_column_order": [
+      "gas_thermal",
+      "chemical_binding",
+      "atomic_excitation",
+      "radiation_injected",
+      "escaped_radiation",
+      "source_reservoir"
+    ]
+  },
+  "ownership": {
+    "required_radiative_owner": "detached_own_spontaneous",
+    "native_radiative_owner_active": false,
+    "required_excited_state_owner": "explicit_1S_2S_2P",
+    "radiation_routes": [
+      "immediate_escape",
+      "emissivity_handoff"
+    ],
+    "immediate_escape": "Qescaped=Qemitted,Qradiation_injected=0; matches parent's optically thin cell boundary",
+    "emissivity_handoff": "Qradiation_injected=Qemitted,Qescaped=0; source-only export, transport and residence are unimplemented",
+    "diagnostic_not_additional_energy": "Qemitted is diagnostic; add only the selected radiation column to conservation",
+    "forbidden": [
+      "native radiative owner simultaneously active",
+      "both routes active",
+      "chemical binding silently absorbing excitation energy",
+      "implicit ground-only state owner",
+      "dynamic spectrum or coupled trajectory admission"
+    ]
+  },
+  "implementation": {
+    "language": "Python standard library; binary64 source arithmetic, math.fsum for signed sums",
+    "no_parent_kernel_imports": true,
+    "input_guard": "validate all four pinned parent files before use; 132 unique rows=66 paired T; finite positive rates; refuse booleans, NaN/Inf/negative/overflow and positive-event underflow; reject unsupported owner and missing exact T",
+    "numerics": "no clipping, rescaling or enforced-zero residual. Return actual signed energy and nucleus residuals and gross normalization; reject nonfinite outputs.",
+    "output": "versioned JSON records with parent/adapter identity, exact stored T label, supplied state/owner/route, seven event intensities, level derivatives, electron/thermal-particle sources, six energy columns, photon counts, signed temperature source and actual residuals",
+    "persistent_application": "create-only output with COMPLETE and result hash; identity includes source, contract, code, fixtures and dependency pins. Resume must check identity and every result byte before skip; never overwrite a failed or mismatched completion.",
+    "temperature_arithmetic": "Qthermal==0 -> Tdot=0, otherwise (2/(3*kB))*(Qthermal/Nthermal); refuse nonfinite or positive-magnitude underflow output",
+    "positive_product_arithmetic": "Largest-first binary64 products within bounded density/rate domain, reject a positive true product rounding to zero; zero factor returns exact zero. No rate interpolation."
+  },
+  "application": {
+    "maximum_new_runs": 1,
+    "fixtures": [
+      {
+        "id": "vacuum_spectator",
+        "T_K": 255.0,
+        "n1s": 0.0,
+        "n2s": 0.0,
+        "n2p": 0.0,
+        "ne": 0.0,
+        "Nthermal": 1.0
+      },
+      {
+        "id": "cold_ground",
+        "T_K": 255.0,
+        "n1s": 1.0,
+        "n2s": 0.0,
+        "n2p": 0.0,
+        "ne": 1.0,
+        "Nthermal": 2.0
+      },
+      {
+        "id": "warm_ground",
+        "T_K": 10000.0,
+        "n1s": 1.0,
+        "n2s": 0.0,
+        "n2p": 0.0,
+        "ne": 1.0,
+        "Nthermal": 2.0
+      },
+      {
+        "id": "pure_2s_decay",
+        "T_K": 10000.0,
+        "n1s": 0.0,
+        "n2s": 1.0,
+        "n2p": 0.0,
+        "ne": 0.0,
+        "Nthermal": 1.0
+      },
+      {
+        "id": "pure_2p_decay",
+        "T_K": 10000.0,
+        "n1s": 0.0,
+        "n2s": 0.0,
+        "n2p": 1.0,
+        "ne": 0.0,
+        "Nthermal": 1.0
+      },
+      {
+        "id": "mixed_anchor",
+        "T_K": 25370.66308424773,
+        "n1s": 0.7,
+        "n2s": 0.2,
+        "n2p": 0.1,
+        "ne": 100000000.0,
+        "Nthermal": 100000001.0
+      },
+      {
+        "id": "formal_quenching",
+        "T_K": 50000.0,
+        "n1s": 0.25,
+        "n2s": 0.5,
+        "n2p": 0.25,
+        "ne": 1000000000000.0,
+        "Nthermal": 1000000000001.0
+      },
+      {
+        "id": "anchor_ground",
+        "T_K": 25370.66308424773,
+        "n1s": 1.0,
+        "n2s": 0.0,
+        "n2p": 0.0,
+        "ne": 100000000.0,
+        "Nthermal": 100000001.0
+      }
+    ],
+    "routes_per_fixture": 2,
+    "expected_rows": 16,
+    "label": "new bounded algebraic source application from reused rates and explicitly constructed local states; not observed trajectories",
+    "new_rate_evaluations": 0,
+    "new_population_solves": 0,
+    "new_ODE": 0,
+    "historical_replays": 0,
+    "maximum_new_runs_scope": "one real16row source application; interface verification, mocked callback controls and byte-verified completed resume are counted separately; no callback on actual completed resume"
+  },
+  "acceptance": {
+    "reference": "independent exact-rational event incidence and energy arithmetic from literal CSV decimal values, not production helper calls",
+    "signed_sum_error_over_gross": 2e-13,
+    "energy_residual_over_gross": 2e-13,
+    "nuclei_residual_over_gross_event": 2e-13,
+    "zero_fixtures": "exact zero where all corresponding event intensities vanish",
+    "controls": [
+      "reject wrong source hash",
+      "reject absent/interpolated T",
+      "reject native/detached owner conflict",
+      "reject missing excited-state owner",
+      "reject invalid state/Nthermal",
+      "reject unsupported radiation route",
+      "distinguish emitted diagnostic from one owned radiation destination",
+      "2gamma energy not doubled but photon count doubled",
+      "ground cooling with zero instantaneous emission",
+      "pure radiative decay with zero thermal source",
+      "positive underflow and overflow rejection",
+      "create-only identity and corrupted-completion refusal"
+    ],
+    "independent_review": "fresh Astra reads actual diff and raw outcomes before admission/publication",
+    "continuum_certificate": false,
+    "physical_uncertainty_enclosure": false,
+    "positive_event_radiation_photon_relative": 2e-12,
+    "normalizations": {
+      "G_event": "sum of seven nonnegative event intensities",
+      "G_energy": "Delta*G_event",
+      "G_thermal": "Delta*(u_s+u_p+d_s+d_p)",
+      "G_temperature": "(2/(3*kB))*(G_thermal/Nthermal)",
+      "signed_level_derivative_error": "abs(actual-exact reference)/G_event <=2e-13",
+      "signed_energy_column_error": "abs(actual-exact reference)/G_energy <=2e-13",
+      "temperature_error": "abs(actual-exact reference)/G_temperature <=2e-13",
+      "zero_gross": "corresponding actual and reference outputs must be exactly zero",
+      "energy_residual": "abs(sum six owned energy columns)/G_energy <=2e-13",
+      "nuclei_residual": "abs(sum three level sources)/G_event <=2e-13"
+    }
+  },
+  "resources_and_budget": {
+    "inherited_spend": null,
+    "remaining": null,
+    "currency": null,
+    "policy": "unknown is not zero; retain parent campaign and failure receipts; no new heavy launch",
+    "incremental_scope": "bounded standard-library algebra, targeted new-interface verification and one16row application",
+    "cooperative_lease_GiB": 0.5,
+    "workers": 1,
+    "threads": 1,
+    "other_processes_terminated": 0,
+    "external_host_status": "UNOBSERVED",
+    "new_attempt_caps": {
+      "verification_cpu_seconds": 30,
+      "verification_wall_seconds": 60,
+      "application_cpu_seconds": 10,
+      "application_wall_seconds": 20,
+      "resume_cpu_seconds": 10,
+      "resume_wall_seconds": 20,
+      "scope": "per authorized child process; limits do not reset inherited monetary budget or erase previous failed attempts"
+    }
+  },
+  "publication": {
+    "branch": "research/hh-phys84-ce-source-adapter-20261023",
+    "base": "research/hh-phys83-ce-completion-20261023",
+    "mode": "additive Draft, expected-SHA compare-and-swap, no merge",
+    "central_DAG": "additive WU return overlay; original central files unchanged"
+  },
+  "HH_R10": "OFF",
+  "production_admission": "NOT_ISSUED",
+  "contract_revision": 2,
+  "preimplementation_review": {
+    "F1": "Named error denominators and exact zero conventions; six energy columns frozen",
+    "F2": "Per-attempt CPU/wall caps; verification mocks separate from one application",
+    "F3": "Corrected Korean nonnegativity wording and stable temperature division; no physics change",
+    "science_before_revision": 0,
+    "implementation_before_revision": 0
+  }
+}

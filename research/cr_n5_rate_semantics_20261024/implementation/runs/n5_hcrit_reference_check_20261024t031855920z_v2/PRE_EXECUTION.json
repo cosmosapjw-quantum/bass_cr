@@ -1,0 +1,82 @@
+{
+  "run_id": "n5_hcrit_reference_check_20261024t031855920z_v2",
+  "mode": "test",
+  "selected_test": "AlgebraTests.test_hcrit_decimal",
+  "utc": "2026-10-24T03:18:56.133031+00:00",
+  "resource_snapshot": {
+    "cgroup_memory_current": 8187240448,
+    "cgroup_memory_max": 8589934592,
+    "cgroup_memory_selected_stat": {
+      "anon": 158810112,
+      "file": 7713411072,
+      "inactive_file": 1105727488,
+      "file_dirty": 11243520,
+      "file_writeback": 0
+    },
+    "memory_admission": {
+      "headroom_bytes": 402694144,
+      "clean_inactive_file_reclaimable_bytes": 1094483968,
+      "worker_reserve_bytes": 67108864,
+      "required_after_reserve_bytes": 268435456,
+      "available_after_reserve_bytes": 1430069248,
+      "admitted": true
+    },
+    "affinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "cgroup_cpu_max": "800000 100000",
+    "relevant_processes": [
+      {
+        "pid": 202006,
+        "comm": "python3"
+      }
+    ],
+    "coordinator_cpu": 8,
+    "worker_cpu": 0,
+    "native_threads": 1,
+    "cpu_limit_s": 30,
+    "wall_limit_s": 60,
+    "address_space_limit_bytes": 536870912,
+    "external_NCP_lease": "UNOBSERVED"
+  },
+  "source_pins": [
+    {
+      "path": "implementation/decimal_reference.py",
+      "sha256": "c87fd7ab5090296c911c4bed955484040336fe917b08c693cd4f4fb3cd69ece4",
+      "bytes": 3141
+    },
+    {
+      "path": "implementation/dispatcher.py",
+      "sha256": "0a818f4881cbb2b1fae6ffbfc91ae1d58979420596ab6c728bf745d3ea44fa77",
+      "bytes": 8357
+    },
+    {
+      "path": "implementation/n5_semantics.py",
+      "sha256": "90750683e33f6b5a2ddbad245675724c77de501e88acd7c5a246264b91cbe506",
+      "bytes": 13885
+    },
+    {
+      "path": "implementation/run_diagnostic.py",
+      "sha256": "67e117cf4c62688253f066303d1749942f53496d25d4e72a2c891548f2bc7ec2",
+      "bytes": 15066
+    },
+    {
+      "path": "implementation/tests.py",
+      "sha256": "1a1c886e83d4270499fc913637e33858a83ee342d23e4a0ba0c8222d8ac084da",
+      "bytes": 14062
+    }
+  ],
+  "input_manifest_sha256": "37f8c70705e128368c36247379858a8f245bcb6819aab3d977a2c6b0c7dc3016",
+  "inherited_known_lineage_worker_cpu_s": 15.493261114,
+  "global_spend": null,
+  "remaining": null,
+  "currency": null
+}

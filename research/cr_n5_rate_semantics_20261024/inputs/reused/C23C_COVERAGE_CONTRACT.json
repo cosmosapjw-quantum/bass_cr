@@ -1,0 +1,269 @@
+{
+  "schema": "C23C_N5_COVERAGE_CONTRACT_V1",
+  "scope": "New C23C candidate intake and exact bookkeeping. Not an all-history claim that unaudited rates do not exist.",
+  "inventory": {
+    "nuclides": [
+      "n",
+      "H1",
+      "D",
+      "T",
+      "He3",
+      "He4",
+      "Li6",
+      "Li7"
+    ],
+    "charge_counts": [
+      1,
+      2,
+      2,
+      2,
+      3,
+      3,
+      4,
+      4
+    ],
+    "atomic_population_count": 21,
+    "free_electron_total_is_extra_bookkeeping_variable": true,
+    "free_electron_total": "n_e_th+n_e_fast",
+    "initial_zero_policy": "n/T zero allowed only as explicit inventory; no missing-key or missing-provider zero fill"
+  },
+  "required_provider_fields": [
+    "provider_id",
+    "exact_source_identity",
+    "process",
+    "reactants_and_target_state",
+    "products_and_branching",
+    "frame",
+    "incoming_energy_coordinate",
+    "energy_unit",
+    "coefficient_unit",
+    "chemical_binding_defect",
+    "kinematic_threshold_or_null",
+    "source_support_interval",
+    "interpolation_model",
+    "outside_support_status",
+    "numerical_temperature_domain_or_null",
+    "physical_accuracy_temperature_domain_or_null",
+    "density_validity_or_null",
+    "isotope_mapping_and_mass_convention",
+    "event_number_normalization",
+    "kinetic_energy_moments_and_owners",
+    "radiation_owner_and_case_A_B",
+    "recoil_model",
+    "license_and_redistribution_evidence",
+    "scientific_execution_status",
+    "omitted_processes"
+  ],
+  "states": {
+    "missing_provider": "UNAVAILABLE_NULL",
+    "covered_not_evaluated": "SOURCE_COVERED_VALUE_NOT_EVALUATED_NULL",
+    "physical_below_admitted_threshold": "PHYSICAL_THRESHOLD_ZERO",
+    "mathematical_finite_operator_outside": "EXCLUDED_BY_OPERATOR_DEFINITION;physical_rate_unknown",
+    "zero_rate_conditional_mean": "UNDEFINED_NULL"
+  },
+  "providers": [
+    {
+      "id": "PHYS81_CCC_CI_H1",
+      "binding": "H1 neutral->H1+",
+      "source": "sources/PHYS81_PARENT_REGISTRY.json",
+      "source_identity": "sha256:7a87a2c9f2116ee36c0786b379dac08e1f4d92a49504fe542e6aa71cbb279bae",
+      "incident_energy_eV": [
+        "13.6058",
+        "968.61"
+      ],
+      "chemical_binding_eV": "13.598434599702",
+      "cross_section_unit": "a0^2 original; explicit conversion to cm^2",
+      "numerical_T_K": [
+        255,
+        50000
+      ],
+      "physical_accuracy_T_K": null,
+      "admission": "FINITE_OPERATOR_REUSABLE_NOT_FULL_RATE",
+      "isotopes": "D/T transfer NOT_ADMITTED"
+    },
+    {
+      "id": "PHYS81_CCC_CI_He4",
+      "binding": "He4 neutral->He4+",
+      "source": "sources/PHYS81_PARENT_REGISTRY.json",
+      "source_identity": "sha256:5193de2a00d0f0e4dfbec2333caa48048d1ab86907de639b4c084a323c342ec3",
+      "incident_energy_eV": [
+        "24.6",
+        "60"
+      ],
+      "chemical_binding_eV": "24.587389011",
+      "cross_section_unit": "cm^2",
+      "numerical_T_K": [
+        255,
+        50000
+      ],
+      "physical_accuracy_T_K": null,
+      "admission": "FINITE_OPERATOR_REUSABLE_NOT_FULL_RATE",
+      "isotopes": "He3 transfer NOT_ADMITTED; electronic curve with explicit chemical-isotope binding, no isotope-specific cross-section certification"
+    },
+    {
+      "id": "PHYS81_CCC_CI_Li7",
+      "binding": "Li7 neutral->Li7+",
+      "source": "sources/PHYS81_PARENT_REGISTRY.json",
+      "source_identity": "sha256:ac76cfef7ca94accf4004267323251cfc6c7b6a68bcd0893ef4e634ad2a91ed9",
+      "incident_energy_eV": [
+        "6",
+        "15"
+      ],
+      "chemical_binding_eV": "5.39172060034581",
+      "cross_section_unit": "cm^2",
+      "numerical_T_K": [
+        255,
+        50000
+      ],
+      "physical_accuracy_T_K": null,
+      "admission": "FINITE_OPERATOR_REUSABLE_NOT_FULL_RATE",
+      "isotopes": "Li6 transfer NOT_ADMITTED"
+    },
+    {
+      "id": "PHYS82_Li_threshold_family",
+      "binding": "conditional Li7 neutral gap operator",
+      "source": "sources/LI_THRESHOLD_SOURCE_CONTRACT.json",
+      "incident_energy_eV": [
+        "5.39172060034581",
+        "6"
+      ],
+      "admission": "FOUR_ENDPOINT_MATCHED_CONDITIONAL_MODELS_PLUS_SEPARATE_REINTERPRETED_HISTORICAL_SLOPE_COMPARATOR",
+      "physical_accuracy_T_K": null,
+      "physical_uncertainty_enclosure": null,
+      "isotopes": "No isotope-resolved unsmeared empirical source envelope"
+    },
+    {
+      "id": "HE37_LeCambier_HI",
+      "binding": "H1 ground-state CI approximate reference",
+      "source": "sources/HE37_SOURCE_ADMISSION.json",
+      "incident_energy_eV": [
+        "13.6",
+        null
+      ],
+      "upper_bound_meaning": "analytic nonrelativistic approximate kernel; no empirical all-energy accuracy claim",
+      "numerical_T_K": [
+        2000,
+        200000
+      ],
+      "physical_accuracy_T_K": null,
+      "admission": "SOURCE_DEFINED_STATIONARY_HEAVY_ISOTROPIC_MODEL",
+      "differential_angular_accuracy": null,
+      "isotopes": "No other isotope mapping"
+    },
+    {
+      "id": "PHYS83_HI_CE_source",
+      "binding": "source-native LS1s/2s/2p H I finite subset",
+      "source": "sources/HH83_HI_CE_SOURCE_CONTRACT.json",
+      "up_energy_eV": [
+        "10.20435",
+        "968.6058"
+      ],
+      "down_model_energy_eV": [
+        "0",
+        "958.40145"
+      ],
+      "source_gap_eV": "10.20435",
+      "numerical_T_K": [
+        255,
+        50000
+      ],
+      "physical_accuracy_T_K": null,
+      "admission": "SOURCE_THEORY_PREPARED;actual_new_CE_SCIENCE_NOT_RUN_AT_OBSERVED_HEAD",
+      "actual_remote_head": "65c6751d363363cfc15eba0c7debf50eb493c1c9",
+      "actual_execution_ledger": "sources/HH83_EXECUTION_LEDGER.json",
+      "zero_wavelength_sentinel": "2s two-photon row wavelength0 is metadata, not zero event energy",
+      "isotopes": "No finite-mass or explicit isotope spectral mapping"
+    },
+    {
+      "id": "C23B_PW19_VERNER_UV",
+      "binding": "HI/HeI/HeII elemental fit labels, not automatic full21 isotope mapping",
+      "source": "parent C23B authority and source_provider package restored by root",
+      "admission": "REUSE_PARENT_IDENTITY;this_N5_does_not_reexecute_or_requalify_sources",
+      "kinetic_to_heat": "NOT_AUTOMATIC"
+    },
+    {
+      "id": "C21O_CASE_A_RR",
+      "binding": "historical prescribed UV/T model",
+      "source": "user-pinned C21O authority",
+      "admission": "HISTORICAL_MODEL_PRESERVED;not_reevaluated_or_expanded_by_this_N5",
+      "energy_weighted_recombination_moment": "OPEN_FOR_FULL_THERMOCHEMICAL_CLOSURE"
+    }
+  ],
+  "open_coverage": [
+    {
+      "process": "electron-neutral elastic energy exchange",
+      "needs": [
+        "momentum-transfer cross section",
+        "target isotope mass/state",
+        "finite-T target averaging",
+        "energy diffusion or justified deterministic limit"
+      ],
+      "dominance": "depends on neutral/ionized composition and bath state; not ranked numerically here"
+    },
+    {
+      "process": "low-energy inelastic",
+      "needs": [
+        "Li neutral ionization threshold/source below10eV",
+        "excited-state deexcitation",
+        "state populations",
+        "secondary-electron distribution"
+      ],
+      "reason": "FS10eV floor is not a universal atomic threshold"
+    },
+    {
+      "process": "RR_DR_energy",
+      "needs": [
+        "rate-weighted captured electron kinetic energy",
+        "branching/cascade photon energy",
+        "Case-A/B owner",
+        "target charge/isotope mapping"
+      ]
+    },
+    {
+      "process": "He_Li_CX",
+      "needs": [
+        "state/product-resolved sources",
+        "isotope-dependent nuclear collision dynamics",
+        "radiation/binding/recoil owners"
+      ]
+    },
+    {
+      "process": "full21_PHOTO",
+      "needs": [
+        "explicit isotope/charge mappings",
+        "Li hard-UV inner-shell channels",
+        "nuclear beta ownership when activated"
+      ]
+    },
+    {
+      "process": "full_thermochemical",
+      "needs": [
+        "thermal_fast_number_exchange",
+        "density_and_temperature_validity",
+        "radiation_absorption_escape",
+        "expansion_and_shear_work",
+        "dominant_omitted_process_assessment"
+      ]
+    }
+  ],
+  "reuse_permissions": {
+    "CCC": "No explicit redistribution license found in inspected index/README; factual small extracts with attribution, no newly bundled full archive here",
+    "OPEN_ADAS": "Official terms require written permission for redistribution/code bundling; no raw data imported here",
+    "HE_HH_project_code": "User-owned project source inspected for existing contracts; new atomic_contract.py independently written",
+    "new_unlicensed_empirical_table_copies": 0
+  },
+  "isotope_reduction": {
+    "number": "G_A(lambda)=Gbar(lambda) for every isotope and every admitted bath state",
+    "binding_energy_source": "epsilon_A^T G_A(lambda)=epsilon_bar^T Gbar(lambda) for every isotope and every admitted bath state",
+    "constant_offset_equivalence": "When common G has rank n-1, including irreducible case",
+    "weakly_connected_suffices": false,
+    "finite_sample_global_certificate": false,
+    "recoil": "Retain isotope-dependent 2*m*M/(m+M)^2 and source-energy coordinate"
+  },
+  "global_error_bound": null,
+  "full_thermal_network_complete": false,
+  "new_empirical_rate_evaluations": 0,
+  "new_ODE": 0,
+  "full_nuclear_high_energy": "HOLD",
+  "general_triaxial_tilted_polarized_CMB": "HOLD"
+}
