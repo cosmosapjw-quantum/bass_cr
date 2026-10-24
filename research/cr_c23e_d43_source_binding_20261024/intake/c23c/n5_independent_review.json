@@ -1,0 +1,150 @@
+{
+  "schema": "C23C_N5_INDEPENDENT_C9_REVIEW_V1",
+  "created_utc": "2026-10-23T14:56:32.430235+00:00",
+  "reviewer": "/root/c23c_intake",
+  "status": "PASS_SCOPED_FINDINGS_CLOSED",
+  "pass_scope": "One complementary N5 analytic/code review within the C23C C9 independent pass; no review recursion",
+  "independence": "Reviewer did not author the N5 implementation. Root owned both actual verification executions. Reviewer read existing receipts and independently checked exact algebra and source pins.",
+  "skill": {
+    "package": "c38/physmath-research-loop",
+    "version": "1.3.0",
+    "policy": "POLICY_INTEGRATION.md"
+  },
+  "source_pins": [
+    {
+      "path": "theory/atomic_coverage/implementation/atomic_contract.py",
+      "bytes": 11926,
+      "sha256": "6246cff6dcc1bac18dd6f8c47b9e9da11f4d14a8bd342c21d30eee19eee9ca69",
+      "matches_targeted_execution": true
+    },
+    {
+      "path": "theory/atomic_coverage/implementation/verify_atomic_contract.py",
+      "bytes": 9019,
+      "sha256": "4ad46350df554c4fac9a46c7c8f682176d926fad0e868386046f43a196eda9c0",
+      "matches_targeted_execution": true
+    },
+    {
+      "path": "theory/atomic_coverage/implementation/verify_atomic_repair.py",
+      "bytes": 3603,
+      "sha256": "a417fb7976139fea7eeb77afbc30ec47223bf7ca4ae242bd382f2897ea9e3e00",
+      "matches_targeted_execution": true
+    }
+  ],
+  "preserved_executed_sources": [
+    {
+      "path": "theory/atomic_coverage/implementation/history/v1/atomic_contract.py",
+      "original_source_path": "theory/atomic_coverage/implementation/atomic_contract.py",
+      "bytes": 11604,
+      "sha256": "7d48fa79242edc0ffa6f3de5cb5f90eedc226b00c01bcb51e46d28f65c6a89cd",
+      "matches_original_execution": true
+    },
+    {
+      "path": "theory/atomic_coverage/implementation/history/v1/verify_atomic_contract.py",
+      "original_source_path": "theory/atomic_coverage/implementation/verify_atomic_contract.py",
+      "bytes": 8963,
+      "sha256": "1f4f0ddeade692b5829ec12eb50cc78db8857cbe295768f8b2a3f1f14d652a3c",
+      "matches_original_execution": true
+    }
+  ],
+  "original_verification": {
+    "run_id": "c23c_atomic_contract_20261023_v1",
+    "execution_source_identity_sha256": "7c6c53c4fa0fc687e421f0f2afc8f4a7d53fbdf590e1890854c80cf766a4cc75",
+    "assertions": 155,
+    "status": "PASS_SCOPED",
+    "reused_without_replay": true
+  },
+  "targeted_verification": {
+    "run_id": "c23c_atomic_repair_20261023_v2",
+    "execution_source_identity_sha256": "ebbeccb95b0e5f1d4b0defffa313779f73204568aa4b1f281d8f3ef58f88a117",
+    "assertions": 6,
+    "status": "PASS_SCOPED",
+    "summary_path": "runs/c23c_atomic_repair_20261023_v2/SUMMARY.json",
+    "checks": [
+      "omitted_recoil_rejected",
+      "unknown_recoil_rejected",
+      "explicit_zero_recoil_preserves_numeric_ledger",
+      "all_free_kinetic_owner",
+      "supplied_nonzero_recoil",
+      "directed_reducible_weak_connectivity_witness"
+    ],
+    "wall_s": 0.015551989003142808,
+    "cpu_s": 0.015546393999999998,
+    "maxrss_KiB": 13440,
+    "worker_cpu": 1,
+    "native_threads": 1,
+    "cpu55_used": false
+  },
+  "findings": [
+    {
+      "id": "N5-C9-F1",
+      "severity": "MEDIUM",
+      "status": "CLOSED",
+      "scope": "Theorem condition in documentation; general energy-row implementation was already correct",
+      "finding": "Weak connectivity of a directed common generator does not imply that every left-null binding-energy difference is constant.",
+      "minimal_repair": "Require rank(G)=n-1, with irreducibility as a sufficient condition; keep the general exact energy-row comparison unchanged.",
+      "analytical_evidence": "G=((0,1,0),(0,-2,0),(0,1,0)); epsilon_a=(0,13,24), epsilon_b=(0,14,26). Nonconstant offset (0,1,2) has delta^T G=0; both energy rows are (0,-2,0).",
+      "actual_targeted_check": "directed_reducible_weak_connectivity_witness"
+    },
+    {
+      "id": "N5-C9-F2",
+      "severity": "MEDIUM",
+      "status": "CLOSED",
+      "scope": "Energy owner and interpretation",
+      "finding": "A supplied free-electron kinetic-energy contraction was described as thermal loss without an admitted thermalization assumption.",
+      "minimal_repair": "Use tracked all-free-electron kinetic change; return electron_pool=all_free_kinetic and state caller obligations for common frame, source and reaction multiplicity.",
+      "actual_targeted_checks": [
+        "all_free_kinetic_owner",
+        "explicit_zero_recoil_preserves_numeric_ledger"
+      ]
+    },
+    {
+      "id": "N5-C9-F3",
+      "severity": "MEDIUM",
+      "status": "CLOSED",
+      "scope": "Missing-input guard",
+      "finding": "A default recoil energy of zero conflated missing recoil information with an explicitly declared zero-recoil closure.",
+      "minimal_repair": "Make recoil_eV a mandatory keyword, reject None, and require callers to supply either zero or a positive recoil explicitly.",
+      "actual_targeted_checks": [
+        "omitted_recoil_rejected",
+        "unknown_recoil_rejected",
+        "explicit_zero_recoil_preserves_numeric_ledger",
+        "supplied_nonzero_recoil"
+      ]
+    }
+  ],
+  "accepted_scope": [
+    "21 declared populations plus the free-electron ledger coordinate",
+    "13 charge rungs for each of CI, PI and RR with exact isotope, baryon and charge accounting",
+    "Explicit missing-population rejection; declared zero remains valid",
+    "Unknown source support remains null, separately from an explicitly admitted subthreshold zero",
+    "Same-frame all-free-electron supplied-event energy contraction, with explicit recoil",
+    "Stationary-target nonrelativistic finite-mass elastic transfer coefficient",
+    "Independent isotropic zero-drift Maxwellian relative-temperature identity",
+    "Fixed-bath arbitrary-inventory isotope number and chemical-energy source quotient criteria"
+  ],
+  "not_admitted": [
+    "Empirical rate coverage or physical rate evaluation",
+    "Thermalization or a stopping provider",
+    "Full thermochemical/radiative RHS closure",
+    "Physical isotope-rate equivalence at all bath states",
+    "Completion of the HH83 132-rate/324-steady/732-transient campaign"
+  ],
+  "scope_open_not_new_findings": [
+    "Caller must bind physical source, common energy frame and event multiplicity",
+    "Energy pools require explicit thermalization and radiation ownership before insertion into a thermal RHS",
+    "Actual rate validity intervals and omitted-process budgets remain source-specific"
+  ],
+  "new_science_executions_by_reviewer": 0,
+  "historical_155_replayed": 0,
+  "empirical_rate_evaluations": 0,
+  "new_ODE": 0,
+  "global_error_bound": null,
+  "temporal_note": "REVISION_MAP.json records PREPARED_ROOT_LEASE_PENDING at its earlier creation time. The later immutable root run receipt is the actual execution authority; the earlier statement is not rewritten.",
+  "axes": {
+    "EXECUTION": "Original 155 assertions reused; six targeted repair checks actually completed under root resource admission; reviewer ran no scientific campaign",
+    "PUBLICATION": "No external mutation by reviewer; review supplied for parent publication",
+    "BACKUP": "No external backup mutation by reviewer; parent owns delivery and verification",
+    "DAG": "N5 exact inventory/ownership/quotient contract accepted in scope; physical atomic-rate coverage and coupled energy closure remain OPEN"
+  }
+}
+

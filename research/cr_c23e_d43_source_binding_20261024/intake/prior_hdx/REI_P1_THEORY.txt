@@ -1,0 +1,58 @@
+# ISO-COUPLE: H/He/D 열용량을 포함한 source-bound charge-exchange 유한시간 적분
+
+2026-10-17 (Asia/Seoul), DAG ISO-COUPLE 내부 bounded 실험. 지배적인 목표는 핵종 전체 반응망 완성이 아니라, 앞서 검증된 ISO-EOS를 원본 DAtomicProvider·Savin2002 및 배타적 원자/RHS 소유권에 결합하는 것이다.
+
+## 1. 물리 대상과 출처
+
+고정 고유부피의 단일온도 비상대론적 이상기체로서 `IsotopeNumberState` 13개 상태를 유지한다. H⁰+H⁺, D⁰+D⁺ 외의 상태는 **수밀도 고정 spectator**로 취급하지만 질량/핵자수, 자유전자 수 및 열용량 계산에는 참가한다. 기호 `A`는 핵자수, `q`는 이온 전하. `n_e=sum_s q_s n_s` 는 유일한 전자 소유자이고 `n_th=sum_s(1+q_s)n_s`이다. `C_V=3/2 k_B n_th`, `u_th=C_V T`. 바리온 수는 `n_B=sum_s A_s n_s`이다. 단위는 proper m^-3, J m^-3, s, K.
+
+기존 PR150 `DAtomicProvider::new(chi_H_ev,chi_D_ev,threshold_source)`는 두 binding energy와 source label을 소유하며 `defect()`는 `(chi_D-chi_H)*eV_J`를 계산한다. 수치 probe의 delta_chi=0.0037 eV는 실험용 **MANUFACTURED**로, 실제 source-locked isotope threshold 입수로 승격하지 않는다. Savin(2002)의 원본 fit과 원본 operational domain 2.7..200000 K, Grackle3.4.1 H-equality D 원자근사의 출처와 단위 변환은 변경하지 않는다.
+
+## 2. 단일 진행량의 구성
+
+정방향 `H+ + D0 -> H0 + D+` 진행량 xi (m^-3)에 대하여
+
+```
+H0(xi) = H0(0) + xi; HP(xi) = HP(0) - xi
+D0(xi) = D0(0) - xi; DP(xi) = DP(0) + xi
+xi_min = -min(H0(0), DP(0)); xi_max = min(HP(0), D0(0))
+```
+
+Wolfram에서 종순서 (H0,HP,D0,DP)에 대한 `nu=(+1,-1,-1,+1)`와 `(A,q,1+q)` 각 내적이 정확히 영임을 확인했다. He, T, 3He, 중성자 등도 불변이다. 따라서 이 이벤트에서 `n_B`, `n_e`, `n_th` 는 일정하며,
+
+```
+delta_chi = chi_D-chi_H
+u_th(xi) = u_th0 - delta_chi*xi
+T(xi) = u_th(xi)/CV_total
+xi_dot = k_f(T(xi))*(HP0-xi)*(D00-xi)
+         -k_r(T(xi))*(DP0+xi)*(H00+xi)
+```
+
+`delta_u_chemical=delta_chi*xi`, `delta_u_thermal=-delta_chi*xi`, photon/CMB/freefree/escape 이벤트는 정확히 0. 원본 thermal-CX 컴포넌트의 `UnsupportedSpectator`는 유지되며 새 컴포넌트만 별도 opt-in이 가능하다.
+
+## 3. 실제 solver 및 오차 종류
+
+진행량을 `z=xi/max(H0,HP,D0,DP)`로 정규화한 뒤 Heun `(Euler stage, second Euler, convex endpoint)`로 full-step과 two-half-step을 수행한다. 두 결과 차이의 1/3을 국소오차 추정량으로 사용해 accepted two-half-state만 반영한다. 각 중간 단계에서 광원이 아닌 `Savin2002::rates(T)`를 **실제 원본 코드로** 평가하고, domain 2.7..200000 K 및 음의 종·열에너지를 typed error로 거부한다. 화학 변수를 clipping하지 않으며, 실패한 trial은 입력을 mutate하지 않는다.
+
+초기 1차 implicit Euler attempt는 엄격한 local tolerance에서 WorkLimit에 도달했다. Heun으로 교체한 첫 번째 코딩에는 `second_euler=z+h*g1`로 `h*g0`가 누락돼 비물리적인 1/2 기울기가 발생했다. `second_euler=(z+h*g0)+h*g1`로 국소 교정한 뒤 15개 신규 테스트 PASS. 실패와 수정 실체를 evidence에 보존한다. 범위 끝에서 provider temperature crossing은 허용정확도를 내리거나 extrapolate하지 않고 중단된다.
+
+## 4. 단일 이벤트 소유권과 외부 타임스텝 경계
+
+`CxOwnership::AtomicRhs`에서는 원본 `ThermalCxComponent::rhs`가 Savin CX forward/reverse 이벤트를 계산하고, 새 `advance_cx_only`는 즉시 `OwnershipConflict`다. `CxOwnership::ThermalSubstep`에서는 원본 RHS의 CX 채널은 Disabled이고 새 finite-time extent integrator만 CX를 진화시킨다. 두 분기는 상호 배타적이며 photo/CI/RR/CE 사건 장부는 단일 원본 DAtomicRhs로부터만 나온다. 원본 photo spectrum은 `AtomicProvider`/Verner source를 실제로 호출해 입력 생성까지 테스트했으나, 이번 CX-only 적분 루프는 광자 및 비-CX 반응을 **시간 적분하지 않는다.** 따라서 전체 source-on H/He/D coupled solver, photon 경쟁 absorber, CMB/FF 전역 소유권, Bianchi expansion, BI-SIGNED 및 full z20..4 convergence는 HOLD.
+
+## 5. 선행 연구의 상세평형 문제: 독립 관측, 미변경
+
+원래 Savin2002 forward/reverse fit은 `k_f/k_r`이 상세평형 예측 `exp(-42.915K/T)`보다 커지는 온도 영역이 있다. 10000 K에서 source fit은 `k_f/k_r=1.0098937563`, 조건부 상세평형 값은 `0.9957176953`이다. 2015/2016 deuterium ionization-correction 연구는 독립 Savin fit의 이 문제를 지적하고 `k_r,DB = k_f exp(42.915 K/T)`를 사용한다 (DOI 10.1093/mnras/stv2343). 이번 `savin_balance_scan`은 이 둘의 차이를 보여주기만 하며 **원래 Savin rate 함수를 수정하지 않는다**. 두 rate law를 생산 과학용으로 어느 것을 선택할지는 별도 model identity, source-lock과 physical acceptance가 필요하다.
+
+## 6. 양의 입자수와 시간적분의 의미
+
+이산 Heun 후보의 Euler/second Euler/final stage 모두 실제 종밀도와 온도 domain 검사에 통과해야 한다. 이 알고리즘은 continuous positivity theorem이나 stiff stability certificate로 주장하지 않는다. 테스트는 고정 부피 제조된 초기 구성과 시간창에서만 PASS. 비물리 photon double counting을 막았다는 것은 CX-only 이벤트의 0 잔차에 한정된다. 단계별 시간오차, rate fit/model 오차, 초기입력 및 환경/광원 불확실성은 별도 축이다.
+
+### 직접 근거
+
+- Source authority: PR150 `da4bd0b9d112cadb2ec78c49d7dc3e7ab4761ea7` 원본 8 Rust 파일, 각각의 Git blob이 정확히 일치. C07 source archive를 byte-level로 복구.
+- Savin (2002), ApJ 566, 599, DOI https://doi.org/10.1086/324218.
+- Stancil, Lepp & Dalgarno (1998), ApJ, DOI https://doi.org/10.1086/306473.
+- Deuterium ionization correction, MNRAS 455, 1512, DOI https://doi.org/10.1093/mnras/stv2343.
+- Existing ISO-EOS source PR179 `6b0ab93a6f7da030cf096ab5d3d3114285a10d64`.
+
