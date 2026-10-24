@@ -1,0 +1,8 @@
+"""One omitted NEW N256/dtau .01 output; saved new pulse, no source recalculation."""
+import os
+for key in ['OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS','NUMEXPR_NUM_THREADS']:os.environ[key]='1'
+import pathlib,sys,json,time,resource,csv,hashlib
+import numpy as np
+from run_bridge import evolve,write
+from source_ee_bridge import ROOT,load_provider
+resource.setrlimit(resource.RLIMIT_CPU,(120,121));os.sched_setaffinity(0,{0});run=pathlib.Path(sys.argv[1]);prior=ROOT/'cr_stopping_loop_20261024/runs/c23d_source_ee_20261023T220714Z_v1';start=time.perf_counter();cpu=time.process_time();rows=list(csv.DictReader((prior/'ATOMS_2.479.csv').open()));W=np.array([float(x['W_eV']) for x in rows]);pulse=np.array([float(x['pulse_count_cm3']) for x in rows]);a=json.loads((prior/'APPLICABILITY.json').read_text())['anchor'];out=evolve(W,pulse,a['theta_eV'],a['tau_per_s'],load_provider(),256,.01);write(run/'EVOLUTION_N256_DT0.01.json',out);source=pathlib.Path(__file__);write(run/'SOURCE_IDENTITY.json',{'new_script_sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'inherited_run':str(prior),'inherited_pulse_sha256':hashlib.sha256((prior/'ATOMS_2.479.csv').read_bytes()).hexdigest(),'evolve_code_sha256':hashlib.sha256((source.parent/'run_bridge.py').read_bytes()).hexdigest(),'scope':'supplement missing new N256 main dtau0.01 only; no source atom evaluation replay'});write(run/'RESULT.json',{'status':'COMPLETE_NEW_INPUT_SUPPLEMENT_PENDING_REVIEW','wall_s':time.perf_counter()-start,'cpu_s':time.process_time()-cpu,'maxrss_KiB':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,'checks':out['checks'],'new_semidiscrete_EE_source_evolutions':1,'new_coupled_physical_ODE':0,'old_suites_replayed':0});print('supplement complete',flush=True)
