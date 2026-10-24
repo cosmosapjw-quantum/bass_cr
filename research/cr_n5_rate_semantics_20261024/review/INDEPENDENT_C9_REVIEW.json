@@ -1,0 +1,575 @@
+{
+  "schema": "CR_N5_INDEPENDENT_C9_REVIEW_V1",
+  "reviewer": "/root/provider_returns",
+  "reviewed_utc": "2026-10-24T03:29:42.397593+00:00",
+  "verdict": "PASS_WITH_NONBLOCKING_FINDINGS",
+  "scoped_C9_gate": "PASS",
+  "blocking_findings_open": 0,
+  "resolved_findings_count": 3,
+  "nonblocking_findings_count": 2,
+  "independence": {
+    "production_code_author": false,
+    "coverage_matrix_author": false,
+    "theory_author": false,
+    "earlier_role": "read-only provider return/raw source intake",
+    "review_execution": "independent endpoint-only Decimal.from_float reconstruction from saved arrays; no production numerical functions reused",
+    "primary_run_id_received_from": [
+      "/root",
+      "/root/backup_reconcile"
+    ]
+  },
+  "accepted_scope": "CR_N5_PROVIDER_RATE_SEMANTICS_AND_CE_ENVELOPE / N5_C23D_HI_CE_FIRST_EVENT_FINITE_BAND_V1 only",
+  "primary_run_id": "n5_ce_envelope_primary_20261024t031906828z_v1",
+  "review_run_id": "n5_independent_c9_binary64_20261024T032519789383Z_v1",
+  "primary_claim_gate": "NUMERICALLY_CHECKED_SCOPED_CONDITIONAL_DIAGNOSTIC",
+  "source_identity": {
+    "input_manifest_sha256": "37f8c70705e128368c36247379858a8f245bcb6819aab3d977a2c6b0c7dc3016",
+    "verified_frozen_input_files": 30,
+    "primary_executed_source_sha256": {
+      "decimal_reference.py": "c87fd7ab5090296c911c4bed955484040336fe917b08c693cd4f4fb3cd69ece4",
+      "dispatcher.py": "0a818f4881cbb2b1fae6ffbfc91ae1d58979420596ab6c728bf745d3ea44fa77",
+      "n5_semantics.py": "90750683e33f6b5a2ddbad245675724c77de501e88acd7c5a246264b91cbe506",
+      "run_diagnostic.py": "67e117cf4c62688253f066303d1749942f53496d25d4e72a2c891548f2bc7ec2",
+      "tests.py": "1a1c886e83d4270499fc913637e33858a83ee342d23e4a0ba0c8222d8ac084da"
+    },
+    "delivered_source_sha256": {
+      "decimal_reference.py": "c87fd7ab5090296c911c4bed955484040336fe917b08c693cd4f4fb3cd69ece4",
+      "dispatcher.py": "467c8b631a7fd4b9bce547e3f7f552c79c42a6a7e4b1e7038a3d31b4f6d2076f",
+      "n5_semantics.py": "71d7d36f8ec0d02d7e42a27634803c698466b6456c8cf2c69ea7dd43d81c56f8",
+      "run_diagnostic.py": "67e117cf4c62688253f066303d1749942f53496d25d4e72a2c891548f2bc7ec2",
+      "tests.py": "40f97c5393edf255a012d78e3da70beba07b6098fa0ed7bc12474b666e0b5869"
+    },
+    "primary_archive_matches_all_5_execution_source_pins": true,
+    "source_and_output_pins": [
+      {
+        "path": "FROZEN_CONTRACT.md",
+        "bytes": 12048,
+        "sha256": "44560eab640029b0e0c468bd8e318cd1b40dfa9718c51e5b7705fafd67e9b0b8"
+      },
+      {
+        "path": "theory/THEORY_REVIEW.md",
+        "bytes": 26340,
+        "sha256": "9485079b4b269f7ff8bf2a5ce8de102260a97bef47cb23c85f0b59d85201dc4c"
+      },
+      {
+        "path": "intake/COVERAGE_MATRIX.json",
+        "bytes": 54838,
+        "sha256": "fc85f9395e0826c5b4dde116fdea00fa3645a6cc330788c37a569f5a3f996887"
+      },
+      {
+        "path": "intake/PHYS82_CURRENT_CONTRACT.json",
+        "bytes": 2781,
+        "sha256": "450b36883f78b12976dec22e0c4d1435dfb337ad1d74af70b84e8c8ef6df5f13"
+      },
+      {
+        "path": "inputs/INPUT_MANIFEST.json",
+        "bytes": 7472,
+        "sha256": "37f8c70705e128368c36247379858a8f245bcb6819aab3d977a2c6b0c7dc3016"
+      },
+      {
+        "path": "implementation/SCIENCE_INTERPRETATION.json",
+        "bytes": 1122,
+        "sha256": "d4f52c749d6ff26211292a7b0d3e7b9d6ca756ad29e8f52c31ffcb8f49851984"
+      },
+      {
+        "path": "implementation/EXECUTION_LEDGER_FINAL.json",
+        "bytes": 6760,
+        "sha256": "1bb22abc974b4d12fd4f7f743b2061738120c0d90c14c1d89d837616d57d00af"
+      },
+      {
+        "path": "review/COVERAGE_MATRIX_BEFORE_C9.json",
+        "bytes": 51202,
+        "sha256": "3fc128c7955b78c40eb8e4c475000daa5172dd85ccd74406b665f27dc6f15d45"
+      },
+      {
+        "path": "review/COVERAGE_C9_CORRECTION.json",
+        "bytes": 539,
+        "sha256": "b03a1bf17b2f16a74116ccab38f2c10a292e16fbf06e0a46251005b42bf398fe"
+      },
+      {
+        "path": "implementation/repair_history/C9_SELECTOR_REPAIR_RECEIPT.json",
+        "bytes": 2281,
+        "sha256": "bcaf5614cacf438556a7c4a480b8d10e3d781a6eeb70176cc344bf9f49eb8cc1"
+      },
+      {
+        "path": "review/independent_c9_check.py",
+        "bytes": 15702,
+        "sha256": "983b402deb0fb5ea16c99855f0fa63cb4bb918ddb3b66ec867f58af5b057d17b"
+      },
+      {
+        "path": "implementation/decimal_reference.py",
+        "bytes": 3141,
+        "sha256": "c87fd7ab5090296c911c4bed955484040336fe917b08c693cd4f4fb3cd69ece4"
+      },
+      {
+        "path": "implementation/dispatcher.py",
+        "bytes": 8475,
+        "sha256": "467c8b631a7fd4b9bce547e3f7f552c79c42a6a7e4b1e7038a3d31b4f6d2076f"
+      },
+      {
+        "path": "implementation/n5_semantics.py",
+        "bytes": 14979,
+        "sha256": "71d7d36f8ec0d02d7e42a27634803c698466b6456c8cf2c69ea7dd43d81c56f8"
+      },
+      {
+        "path": "implementation/run_diagnostic.py",
+        "bytes": 15066,
+        "sha256": "67e117cf4c62688253f066303d1749942f53496d25d4e72a2c891548f2bc7ec2"
+      },
+      {
+        "path": "implementation/tests.py",
+        "bytes": 16791,
+        "sha256": "40f97c5393edf255a012d78e3da70beba07b6098fa0ed7bc12474b666e0b5869"
+      },
+      {
+        "path": "implementation/runs/n5_ce_envelope_primary_20261024t031906828z_v1/CE_ENVELOPES.json",
+        "bytes": 7843,
+        "sha256": "edf3593eb8ba963107a577dc9b3d6b33ad2cc96ee43a2cd47ff2a5ec92623067"
+      },
+      {
+        "path": "implementation/runs/n5_ce_envelope_primary_20261024t031906828z_v1/CE_FIRST_EVENT_ESTIMATES.json",
+        "bytes": 18732,
+        "sha256": "3166334266fd22e10b4a69b82150d88e390584ede464827d45690598c4f0e3bd"
+      },
+      {
+        "path": "implementation/runs/n5_ce_envelope_primary_20261024t031906828z_v1/CE_PATH_ENDPOINT_SAMPLES.json",
+        "bytes": 199681,
+        "sha256": "61cd8932297d4c8eee0849daac1554cd7623bed96ad9ee619f26c77de9aa20c4"
+      },
+      {
+        "path": "implementation/runs/n5_ce_envelope_primary_20261024t031906828z_v1/DISPATCH_RECEIPT.json",
+        "bytes": 671,
+        "sha256": "da285d4218d72ac4cf94a3f37494d58ae55e2195f561fe782f92f16c7cff85f9"
+      },
+      {
+        "path": "implementation/runs/n5_ce_envelope_primary_20261024t031906828z_v1/HCRIT.json",
+        "bytes": 11176,
+        "sha256": "67df2ca446c0749b515d540eeb2f2d472c7db1e53fe550e73ce36a2666dbe367"
+      },
+      {
+        "path": "implementation/runs/n5_ce_envelope_primary_20261024t031906828z_v1/PRE_EXECUTION.json",
+        "bytes": 2250,
+        "sha256": "1d10e6e1d0e0a1958b5380bc41181e906171da32282a855e96b6960562ae7546"
+      },
+      {
+        "path": "implementation/runs/n5_ce_envelope_primary_20261024t031906828z_v1/RATE_SEMANTIC_ADMISSIONS.json",
+        "bytes": 777,
+        "sha256": "ae16ba390abe19241b756c88bc8f9d7bc60703d3112cbf111ae586718fbc2998"
+      },
+      {
+        "path": "implementation/runs/n5_ce_envelope_primary_20261024t031906828z_v1/RESULT.json",
+        "bytes": 3210,
+        "sha256": "082727d449515941e148c44a92b766ee2969000cb869e174acb8502d1439bb1a"
+      },
+      {
+        "path": "implementation/runs/n5_ce_envelope_primary_20261024t031906828z_v1/SOURCE_ARRAYS_REUSED.json",
+        "bytes": 43670,
+        "sha256": "ab1e8e046eed5a84639503179542c44b0943dd5deaae43d0b79c393604358b14"
+      },
+      {
+        "path": "implementation/runs/n5_ce_envelope_primary_20261024t031906828z_v1/THERMAL_TARGET_COMPARISONS.json",
+        "bytes": 23338,
+        "sha256": "df9447a8acdb4da623c3246f3a15944a3f4e689813862e30671045880773c40c"
+      },
+      {
+        "path": "review/runs/n5_independent_c9_binary64_20261024T032519789383Z_v1/CHECK_RESULT.json",
+        "bytes": 18776,
+        "sha256": "a381c62918e0cee76910a9c7db67340d97077ac44fe1896d9e0376e6a22b8c70"
+      },
+      {
+        "path": "review/runs/n5_independent_c9_binary64_20261024T032519789383Z_v1/PARENT_PROCESS_RECEIPT.json",
+        "bytes": 682,
+        "sha256": "1ee8af4a0d13e96b09e81c82f87590861163b551b46e28791cf4f13dbc8da80e"
+      },
+      {
+        "path": "review/runs/n5_independent_c9_binary64_20261024T032519789383Z_v1/PRE_EXECUTION.json",
+        "bytes": 4532,
+        "sha256": "b862c73d3bcca02dface33570fd48178f69a53e5d74e51aea812ae51a21f7e55"
+      },
+      {
+        "path": "review/runs/n5_independent_c9_binary64_20261024T032519789383Z_v1/REVIEW_RECEIPT.json",
+        "bytes": 695,
+        "sha256": "5aab8398246152d6931f3b652477a67a6f50e3bc69870309cdc96051ac6dd32c"
+      },
+      {
+        "path": "review/INDEPENDENT_C9_REVIEW_PRE_DECIMAL_GUARD.json",
+        "bytes": 26443,
+        "sha256": "ec5788635d5667333b2100fcdbb4df2b9931486985b4bb855cd7e4cee5ea1a90"
+      },
+      {
+        "path": "implementation/EXECUTION_LEDGER_FINAL_V3.json",
+        "bytes": 7784,
+        "sha256": "f4a42bf534b55c1187ad703d94c8b41a9685bad2f6ae96538dbe3fbdaee82fc5"
+      },
+      {
+        "path": "implementation/repair_history/C9_DECIMAL_COERCION_REPAIR_RECEIPT.json",
+        "bytes": 2544,
+        "sha256": "38ed731f1a31b2459567f9a1b438b159fe70f9db480e27dd895422a9a8783a58"
+      },
+      {
+        "path": "implementation/repair_history/pre_decimal_coercion_fix_source/n5_semantics.py",
+        "bytes": 14879,
+        "sha256": "c2892e334808d8deeffaf8b2e4f5a69795ca256813e63b08ded75fdb2880c7e4"
+      },
+      {
+        "path": "implementation/repair_history/pre_decimal_coercion_fix_source/tests.py",
+        "bytes": 16115,
+        "sha256": "72e71a3991129660e5030d4e7faf2807a5100d5da0f23c57ed6a1957fb95f1ee"
+      },
+      {
+        "path": "implementation/runs/n5_c9_decimal_coercion_20261024t032722392z_v1/DISPATCH_RECEIPT.json",
+        "bytes": 705,
+        "sha256": "4ff91395960b5d26908d4417ab554ac84bbe37e49bc3b4add89a1d91e6dab3ac"
+      },
+      {
+        "path": "implementation/runs/n5_c9_decimal_coercion_20261024t032722392z_v1/PRE_EXECUTION.json",
+        "bytes": 2284,
+        "sha256": "81c20bd66d8885ea614e9aaf05543688a2cba65068c2d1bd1b5e4578fcbb7bdd"
+      },
+      {
+        "path": "implementation/runs/n5_c9_decimal_coercion_20261024t032722392z_v1/TEST_RESULT.json",
+        "bytes": 348,
+        "sha256": "fc960c8866a1455f1c6d6163bc51f9ed7180132cef811ee2d7d0a07899b8f2d4"
+      }
+    ],
+    "frozen_inputs": [
+      {
+        "path": "inputs/CASE.json",
+        "bytes": 1521,
+        "sha256": "f4a3ad76a7513d3bf47521b702d34c782dda4f63dbfa9470eb1c6fc3161d9bdf",
+        "git_blob_sha_computed": "90f7a2fb1b75a2514a46e2f20d873f5371c7f6d5"
+      },
+      {
+        "path": "inputs/reused/C23C_COVERAGE_CONTRACT.json",
+        "bytes": 9340,
+        "sha256": "1737d06bc7a747eb540389e27a17cc250e9f06c52492aa17824a2104c42f37e4",
+        "git_blob_sha_computed": "3806a27c172586c78832a1039d83e6be70455498"
+      },
+      {
+        "path": "inputs/reused/C23D_CASE.json",
+        "bytes": 421,
+        "sha256": "107bfddf5df0fd21690e86bff999fbf30809f5a5e55a11237e72e1663962bfc6",
+        "git_blob_sha_computed": "23c9951bafca211c6e3c671cf1dd3b95d0602918"
+      },
+      {
+        "path": "inputs/reused/C23D_MFPT.json",
+        "bytes": 6267,
+        "sha256": "a10aa9df8aa9fa26e0bc37a9c0463d4fd71daf0e7c8eadccede266252db39180",
+        "git_blob_sha_computed": "ccdb7936863f6addb616e3e201391c3ff2f994e0"
+      },
+      {
+        "path": "inputs/reused/C23E_BUDGET_CONTINUITY.json",
+        "bytes": 1275,
+        "sha256": "52f1435468ea45fc15f281ceead4721a8a8e23ac650e37a9a5b48b3a22ccd470",
+        "git_blob_sha_computed": "25d3c858b72e8bd817208760025ac6e8f31143d9"
+      },
+      {
+        "path": "inputs/reused/C23E_FROZEN_CONTRACT.md",
+        "bytes": 11363,
+        "sha256": "bd261f4c1780dcbd86235a804ba0629f06ec205082457b3fbcb1bfa11165d5ba",
+        "git_blob_sha_computed": "c94aa5ee769a6101448f0f21edb2ae910792847c"
+      },
+      {
+        "path": "inputs/reused/C23E_HANDOFF_KO.md",
+        "bytes": 3584,
+        "sha256": "332e397df0d8e4ad91723b9d06cde36cd3fe35d8e326d0df83044a66afb539ae",
+        "git_blob_sha_computed": "e80274320cfbe5504216c69954d2ebe3f56c2a9d"
+      },
+      {
+        "path": "inputs/reused/C23E_NEXT_DAG.json",
+        "bytes": 2532,
+        "sha256": "187960bb08cd813b12c0c95c74935335d18fdd32c0a22f71c04539dfea1d5028",
+        "git_blob_sha_computed": "b1587e9f75a4870e7247fae32eb21989bdf18e05"
+      },
+      {
+        "path": "inputs/reused/C23E_RESULTS_KO.md",
+        "bytes": 5842,
+        "sha256": "178ba8230a52a91b1a60de28bb55f72e074cdf705ecf89fdaddddf796efbd0d2",
+        "git_blob_sha_computed": "451e961a9e51e5f56712750be1a44e2dc180bf7a"
+      },
+      {
+        "path": "inputs/reused/C23E_THEORY_KO.md",
+        "bytes": 11179,
+        "sha256": "c35c8c9d4ef2f5b10a974a3559a14a0ffa8d2069a11d17911170c34294bb452a",
+        "git_blob_sha_computed": "f03240a432662e09a026bbd74cffc2e9743ca447"
+      },
+      {
+        "path": "inputs/reused/OWNER_RETURN_SUMMARY.json",
+        "bytes": 4071,
+        "sha256": "7c569909d28116e62693abdbc474e28dcd3e11b6b9d50f36048cf04c99e74a84",
+        "git_blob_sha_computed": "895212e1f248f84d571e1cd1431b4d5993c962d1"
+      },
+      {
+        "path": "inputs/reused/PHYS83_RATES.csv",
+        "bytes": 46819,
+        "sha256": "64e53e02b776db2aee6d67ce03201cbc0b90404d7cdf40e52cccaaecd2fc3017",
+        "git_blob_sha_computed": "5de4a9f8326fef6002aae8b292e4b18f433a5562"
+      },
+      {
+        "path": "inputs/reused/atomic_contract.py",
+        "bytes": 11926,
+        "sha256": "6246cff6dcc1bac18dd6f8c47b9e9da11f4d14a8bd342c21d30eee19eee9ca69",
+        "git_blob_sha_computed": "e308ceef315e9f40f96fa62c2667253a1283523e"
+      },
+      {
+        "path": "inputs/reused/he32_data.json",
+        "bytes": 3756,
+        "sha256": "b75601081cc55dc63592f8d17ee765976ade29148cab62f29700ca930eff1d90",
+        "git_blob_sha_computed": "c7b178870fa34e55424f2bef16a2d2777cc1c197"
+      },
+      {
+        "path": "inputs/reused/he34_contract.json",
+        "bytes": 3772,
+        "sha256": "a998d4fd84892888296b1ba5ed6d30ed3aba6daf9290cfbfc4624f2338236e81",
+        "git_blob_sha_computed": "4941380e7d30fe5302812a689b89741295a1b63a"
+      },
+      {
+        "path": "inputs/reused/he94_contract.json",
+        "bytes": 7579,
+        "sha256": "72972199b9886740f9a9b1ca0275adda59b29fdad005297b9b806b9261b86b8f",
+        "git_blob_sha_computed": "7885ac951858ca16dbbdcb1be32858efb7538c98"
+      },
+      {
+        "path": "inputs/reused/he94_gate.json",
+        "bytes": 2386,
+        "sha256": "8917f68bff8462654c9bb87fd31082c0c89a4271fd333fc988d0e328c923aa74",
+        "git_blob_sha_computed": "eab0af0e0236eca0d588b8286641cab965d78ad9"
+      },
+      {
+        "path": "inputs/reused/phys83/source/matched_ce.py",
+        "bytes": 14892,
+        "sha256": "475ee6f84c5e19945324859a9c4c5e229d8ab5e92e8658ad5b3da39472c1744e",
+        "git_blob_sha_computed": "aa2b8e4eb4879545bfe6b4cb4a0e7b20513e5ed4"
+      },
+      {
+        "path": "inputs/reused/phys83/source/vendor/ci_finite_c22d.py",
+        "bytes": 8350,
+        "sha256": "859cdf616ffa165c9fb3c3372d2202f5449e4b9a74a289a725fe456e26eb55b2",
+        "git_blob_sha_computed": "08878e3e0ee2761017a650782884a7320dfa3fa3"
+      },
+      {
+        "path": "inputs/reused/phys83/source_data/CCC_1S.2P",
+        "bytes": 29366,
+        "sha256": "00857e46838c5538da8b047363105b306bc1ba5c827700161749d5d712fa0e5a",
+        "git_blob_sha_computed": "2e32c26160fd914b432eb345ef153d933c1c2811"
+      },
+      {
+        "path": "inputs/reused/phys83/source_data/CCC_1S.2S",
+        "bytes": 29366,
+        "sha256": "f4afdbdeccc49a58055ab86750b14ce10dd2091da55bd380a19f3d7a13c337d0",
+        "git_blob_sha_computed": "242c6d28651494832c4ed6879a0a2b6e315d5602"
+      },
+      {
+        "path": "inputs/reused/phys83/source_data/CCC_2P.1S",
+        "bytes": 29393,
+        "sha256": "12cf46fa0904a5b227092a0a6a3ae6d8a20c041cf11c2981d3bb8bd1f6ac313d",
+        "git_blob_sha_computed": "6da8d9083190d8c5fc8309653c5fdc983b3f081f"
+      },
+      {
+        "path": "inputs/reused/phys83/source_data/CCC_2S.1S",
+        "bytes": 29393,
+        "sha256": "e8e0092e7be97abe4a90ce100e3101d1f6f225eee2d4ad1ba740f57de819997b",
+        "git_blob_sha_computed": "606210183a12f6b498c7fdde3d84da7dd967db31"
+      },
+      {
+        "path": "inputs/reused/phys83/source_data/HI_CE_SOURCE_CONTRACT.json",
+        "bytes": 16647,
+        "sha256": "1983e17f57ab5ab0e9f8c5dde1bc679451ca670440fe79d0fec3de4efb4a812b",
+        "git_blob_sha_computed": "c64b9b90a0beab859dac919ba7ffa569f949320c"
+      },
+      {
+        "path": "inputs/reused/wu81_contract.json",
+        "bytes": 2408,
+        "sha256": "d20e465c23defb28e1e0ae321b75e0120d5e0c632e24b9b655d227007fee1821",
+        "git_blob_sha_computed": "aa1a7ebf840ddb2d2dbe7957c10cfdd5600062d7"
+      },
+      {
+        "path": "inputs/reused/wu81_registry.json",
+        "bytes": 8590,
+        "sha256": "2415d357c318f1ff1307239f4f39c8009e6a7005b140c3ec67b492f631097641",
+        "git_blob_sha_computed": "dcb7306ead96802053f557e39e145ed11e3f1e10"
+      },
+      {
+        "path": "inputs/reused/wu83_contract_full.json",
+        "bytes": 6315,
+        "sha256": "d9eb980df5236e2b2ca3da313813c3ca2b21562f90486f1173d0ea509bc4dcc5",
+        "git_blob_sha_computed": "8c60b3a31046f258d011359c25c6048d1e21458e"
+      },
+      {
+        "path": "inputs/reused/wu84_contract.json",
+        "bytes": 12459,
+        "sha256": "01528db5b31bd27cb0a9ae623b92cd0821ac4b42bfb4b3792ce3cc56c6e8280f",
+        "git_blob_sha_computed": "b02dde1609968abc26873f2ab64319df65a0bacf"
+      },
+      {
+        "path": "inputs/reused/wu84_exec.json",
+        "bytes": 4440,
+        "sha256": "6ec9ee673a1ca62793e1e21c31856560641d524d98f880f81c02fd618651e9f8",
+        "git_blob_sha_computed": "312971f12b02da211f95853d96f686893248bb95"
+      },
+      {
+        "path": "inputs/reused/wu84new_wait.json",
+        "bytes": 1440,
+        "sha256": "00a456b3df6855cf16448d80faf78dd57b3560bd78f85ba0eafda7fb3a3e193c",
+        "git_blob_sha_computed": "6f9b36bd719b97b9fba3a2804b028da628e606fe"
+      }
+    ],
+    "pre_decimal_guard_source_sha256": {
+      "decimal_reference.py": "c87fd7ab5090296c911c4bed955484040336fe917b08c693cd4f4fb3cd69ece4",
+      "dispatcher.py": "467c8b631a7fd4b9bce547e3f7f552c79c42a6a7e4b1e7038a3d31b4f6d2076f",
+      "n5_semantics.py": "c2892e334808d8deeffaf8b2e4f5a69795ca256813e63b08ded75fdb2880c7e4",
+      "run_diagnostic.py": "67e117cf4c62688253f066303d1749942f53496d25d4e72a2c891548f2bc7ec2",
+      "tests.py": "72e71a3991129660e5030d4e7faf2807a5100d5da0f23c57ed6a1957fb95f1ee"
+    }
+  },
+  "resolved_findings": [
+    {
+      "id": "C9_R1_REQUIRED_SELECTORS",
+      "severity_at_discovery": "BLOCKING_FOR_ADAPTER_ACCEPTANCE",
+      "object": "implementation/n5_semantics.py:admit_rate",
+      "evidence": "Primary-executed guard admits a synthetic Maxwellian request after removal of temperature_K; owner-declared incident/window selectors had analogous omission bypass. Independent CHECK_RESULT records before admitted=true, after=false, explicit T after=true.",
+      "impact": "Would permit ambiguous scalar use outside mandatory T/E/angular semantics. Primary numeric run always supplied explicit T and is unaffected.",
+      "repair": "Require thermal T, provider-declared T/incident/domain selectors, and tagged energy selector.",
+      "regression_run_id": "n5_c9_selector_regression_20261024t032403142z_v3",
+      "verification": "Changed dependency test only PASS; direct independent before/after witness PASS; arithmetic source unchanged; primary output not rerun.",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "C9_R2_PROVENANCE_RELATIVE_BASE",
+      "severity_at_discovery": "BLOCKING_FOR_PROVENANCE_CLOSURE",
+      "object": "intake/COVERAGE_MATRIX.json PHYS81/82/HE37 source fields",
+      "evidence": "Inherited sources/... paths did not exist relative to this new unit.",
+      "impact": "Reader could not resolve the advertised local source identity.",
+      "repair": "PHYS81 now points to local registry plus named curve/payload identity; PHYS82 has pinned current local owner contract; HE37 points to the exact reused C23C secondary entry and explicitly says raw owner was not refetched. Archival original paths preserved.",
+      "before_sha256": "3fc128c7955b78c40eb8e4c475000daa5172dd85ccd74406b665f27dc6f15d45",
+      "after_sha256": "fc85f9395e0826c5b4dde116fdea00fa3645a6cc330788c37a569f5a3f996887",
+      "verification": "All provider source_local_sha256 fields independently matched local bytes; 21x8 coverage remains unchanged.",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "C9_R3_DECIMAL_CAST_UNDERFLOW",
+      "severity_at_discovery": "NONBLOCKING_GENERAL_API_DEFECT_OUTSIDE_FROZEN_INPUTS",
+      "object": "implementation/n5_semantics.py:real/product",
+      "evidence": "product(Decimal('1e-1000'),1.0) returns 0.0 because conversion to float occurs before product underflow detection.",
+      "impact": "A generic future Decimal caller could silently lose a positive tiny rate. No frozen JSON input or saved binary64 value exercises this edge; present science is unaffected.",
+      "repair": "real() now rejects result==0.0 with original value!=0 before domain checks; no change to positive representable inputs or true zero.",
+      "regression_run_id": "n5_c9_decimal_coercion_20261024t032722392z_v1",
+      "verification": "Reviewed exact two-line guard diff and single targeted test method: +/- tiny Decimal reject; positive/negative exact zero and representable controls pass. Final pre-execution source pins match delivered bytes.",
+      "status": "RESOLVED",
+      "science_reexecuted": false,
+      "historical_independent_witness_code_sha256": "c2892e334808d8deeffaf8b2e4f5a69795ca256813e63b08ded75fdb2880c7e4",
+      "historical_witness_source_archive": "implementation/repair_history/pre_decimal_coercion_fix_source"
+    }
+  ],
+  "nonblocking_findings": [
+    {
+      "id": "C9_N2_RESOURCE_TEXT_SUPERSESSION",
+      "object": "FROZEN_CONTRACT.md revision2 versus final resource paragraph",
+      "evidence": "Revision2 explicitly permits pinned NumPy/SciPy import and512MiB; retained earlier paragraph says256MiB/no heavy libraries. Actual PRE_EXECUTION uses512MiB.",
+      "impact": "No execution mismatch under explicit revision2 precedence, but a later reader could select the stale paragraph.",
+      "minimal_followup": "In a successor contract consolidate the resource paragraph; preserve this frozen version and actual512MiB receipt.",
+      "disposition": "DOCUMENTATION_ONLY_NONBLOCKING"
+    },
+    {
+      "id": "C9_N3_EPSILON_ZERO_LIMIT",
+      "object": "theory/THEORY_REVIEW.md negative cases versus hazard_limit API",
+      "evidence": "Theory negative list says epsilon<=0 rejects; implementation/test accepts epsilon=0 and yields the analytic zero limit. Frozen epsilons are0.01,0.1,0.5.",
+      "impact": "No result is affected; API and prose differ only outside the selected target tolerances.",
+      "minimal_followup": "Specify the zero-limit API extension or reject zero consistently in a future contract.",
+      "disposition": "DOCUMENTATION_ONLY_NONBLOCKING"
+    }
+  ],
+  "reference_repair_audit": {
+    "initial_run": "n5_semantics_tests_20261024t031814026z_v1",
+    "initial_result": "25 methods;24 PASS;1 FAIL retained",
+    "failure_scaled_error": "2.0815086049332446151573850206331245995744804765660922419520994926273276910121434E-12",
+    "frozen_tolerance": "5e-14",
+    "classification": "REFERENCE_INPUT_IDENTITY_MISMATCH near epsilon1; Decimal(str(float)) changed the mathematical input relative to binary64 log1p",
+    "fix": "reference_hazard_limit uses Decimal.from_float for epsilon/mean float inputs; production hazard_limit and selected physical case unchanged",
+    "targeted_recheck": "n5_hcrit_reference_check_20261024t031855920z_v2; selected AlgebraTests.test_hcrit_decimal PASS",
+    "unaffected_initial_test_evidence_reused": 24,
+    "whole_suite_reexecuted": false,
+    "producer_other_reference_semantics": "Product/envelope/first-event producer references use Decimal(str), agreement with nearby saved decimal representations. Their error fields are not a directed-rounding error certificate.",
+    "independent_binary64_resolution": "n5_independent_c9_binary64_20261024T032519789383Z_v1",
+    "source_failure_reconstruction": "Original initial files reconstructed by inverse recorded patch then exact pre-execution SHA match; no execution during reconstruction"
+  },
+  "numerical_review": {
+    "precision_digits": 80,
+    "input_representation": "exact Decimal.from_float of parsed saved binary64",
+    "envelope_algorithm_independent": "positive affine W(E)/sqrt(E) has endpoint maximum; evaluate union knots/clipped endpoints in Decimal, no production slope/intercept/candidate enumeration",
+    "envelopes_verified": 6,
+    "hcrit_rows_verified": 18,
+    "CE_first_event_rows_verified": 18,
+    "thermal_product_rows_verified": 24,
+    "max_envelope_relative_error": "6.4788088431607664306308837776516057825598658389367496113040062983614098217784575E-17",
+    "max_hcrit_or_CE_relative_error": "1.8526686037545815724922375759247678866074281374220089205999394312904972747955807E-16",
+    "max_thermal_relative_error": "1.4183219062934947748440012726888157183737976270573839951293828710777787837827497E-16",
+    "tolerance": "5e-14",
+    "first_entry_mean_and_active_fraction": "all6 contexts match saved R80 C23D rows exactly",
+    "thermal_q": "all24 output rows match the exact T10000 original CSV text for the appropriate level/direction",
+    "zero_domains": "only owner threshold region; missing domains remain null/non-admission",
+    "certificate_status": "numerical agreement only; no directed rounding, no certified source/model/MFPT enclosure",
+    "after_final_guard": "Reuse complete independent binary64 numeric check; final difference is an input-validation guard outside all selected physical values. Its sole affected dependency was checked by the named targeted producer regression."
+  },
+  "semantic_and_physical_review": {
+    "coverage": "21 populations x8 process columns checked; rate_values remain null; supplied finite/conditional models are distinguished from absent or inapplicable channels",
+    "thermal_vs_tagged": "ne*q(T) is per frozen target; n1s*sigma(E)*v(E) is per tagged electron; no density exchange or extra degeneracy multiplication",
+    "closure": "n_H1_1s=.9 cm^-3 is explicitly new prescribed stationary heavy ground target closure; excited densities remain null",
+    "full_path": "q=chi*kBT/eV through80*kBT/eV=68.93866609716143 eV, not the initial0<W<10eV subset",
+    "first_event": "CE-only conditionally Poisson mark along unperturbed frozen EE finite-band path; Jensen survival estimate from active mean; whole-selected multiplied by active fraction; no original-full-pulse claim",
+    "finite_source": "both forward PHYS83 source arrays cover full chosen path; source-native threshold10.20435eV retained",
+    "provider_gates": "PHYS84 NUMERICAL_ADMISSION_WAIT; HE94 conditional DDCS20 window only; HE-ANG SOURCE_INPUT_PENDING",
+    "isotope": "D/T/He3/Li6 source transfers not admitted; conditional elemental PI/RR and C23E D43K separately identified; isotope quotient requires generator and energy observable conditions for all admitted states",
+    "conservation": "No reaction population integration added; event-count/charge/nuclear/energy owner requirements reviewed in theory and existing C23C/C23E mappings reused. No new energy ledger closure claimed.",
+    "unknowns": "CI/RR/DR/CX/neutral-elastic/EI/superelastic competing hazards, total nonEE probability, heat and full stopping time remain null",
+    "scope_preserved": "First entry is not permanent assimilation/Maxwellization; non-tilted LRS/signed vs norm/atomic-isotropic vs Vlasov distinctions preserved; full nuclear/general triaxial/tilted/polarized CMB HOLD; original network PNG unread"
+  },
+  "cost_and_execution_review": {
+    "producer_ledger": "implementation/EXECUTION_LEDGER_FINAL_V3.json",
+    "producer_worker_cpu_s": 0.5689409999999999,
+    "producer_coordinator_cpu_s": 0.014389512999999993,
+    "producer_attempts": 7,
+    "producer_actual_children": 5,
+    "producer_science_campaigns": 1,
+    "selector_prelaunch_lease_rejections": 2,
+    "prelaunch_worker_cpu_s": 0,
+    "prelaunch_RSS_first_receipt_clarified_as_null": true,
+    "independent_review_parent_receipt": "review/runs/n5_independent_c9_binary64_20261024T032519789383Z_v1/PARENT_PROCESS_RECEIPT.json",
+    "independent_review_worker_cpu_s": 0.074879,
+    "independent_review_coordinator_cpu_s": 0.0012568379999999997,
+    "independent_review_peak_rss_kib": 13544,
+    "inherited_known_lineage_worker_cpu_s": 15.493261114,
+    "plot_costs": "parent ledger separately owned; excluded here",
+    "all_unmeasured_intake_reasoning_report_overhead": null,
+    "external_NCP_lease": "UNOBSERVED",
+    "global_spend": null,
+    "remaining": null,
+    "new_ODE": 0,
+    "new_source_quadratures": 0,
+    "provider_rate_replays": 0,
+    "old_science_replays": 0,
+    "review_provider_constructor_executions": 0,
+    "primary_provider_constructor_executions": 2,
+    "primary_constructor_only_not_rate_replay": true,
+    "producer_test_children": 4,
+    "unique_test_methods_passed_after_repairs": 27,
+    "post_review_science_reexecution": false
+  },
+  "required_claim_limits": {
+    "full_N4": "PARTIAL_OPEN",
+    "full_N5": "PARTIAL",
+    "N6_N7": "OPEN_NOT_EXECUTED",
+    "global_error_bound": null,
+    "global_completion_percent": null,
+    "actual_total_nonEE_probability": null
+  },
+  "EXECUTION": "C9_PASS_SCOPED_WITH2_DOCUMENTATION_NONBLOCKING_FINDINGS",
+  "PUBLICATION": "PARENT_OWNED_PENDING_EXPECTED_SHA",
+  "BACKUP": "PARENT_OWNED_PENDING_R3",
+  "DAG": "SCOPED_N5_CHILD_ADMISSIBLE;FULL_N5_PARTIAL;N6_N7_OPEN",
+  "supersedes_for_final_verdict": {
+    "path": "review/INDEPENDENT_C9_REVIEW_PRE_DECIMAL_GUARD.json",
+    "sha256": "ec5788635d5667333b2100fcdbb4df2b9931486985b4bb855cd7e4cee5ea1a90",
+    "reason": "Final narrow Decimal input coercion guard was repaired after the preliminary review snapshot; all prior numerical evidence retained."
+  }
+}

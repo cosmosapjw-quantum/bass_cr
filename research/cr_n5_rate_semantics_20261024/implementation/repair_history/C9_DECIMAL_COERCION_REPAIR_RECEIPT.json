@@ -1,0 +1,41 @@
+{
+  "schema": "N5_C9_DECIMAL_COERCION_REPAIR_V1",
+  "finding": "Nonzero positive/negative Decimal could underflow to binary64 zero during real() coercion",
+  "classification": "NONBLOCKING_GENERAL_API_IMPLEMENTATION_DEFECT",
+  "fix": "Reject result == 0.0 and original value != 0 before domain checks",
+  "primary_science_reexecuted": false,
+  "primary_science_outputs_unchanged": true,
+  "regression_run_id": "n5_c9_decimal_coercion_20261024t032722392z_v1",
+  "regression_status": "PASS",
+  "primary_source_sha256": {
+    "decimal_reference.py": "c87fd7ab5090296c911c4bed955484040336fe917b08c693cd4f4fb3cd69ece4",
+    "dispatcher.py": "0a818f4881cbb2b1fae6ffbfc91ae1d58979420596ab6c728bf745d3ea44fa77",
+    "n5_semantics.py": "90750683e33f6b5a2ddbad245675724c77de501e88acd7c5a246264b91cbe506",
+    "run_diagnostic.py": "67e117cf4c62688253f066303d1749942f53496d25d4e72a2c891548f2bc7ec2",
+    "tests.py": "1a1c886e83d4270499fc913637e33858a83ee342d23e4a0ba0c8222d8ac084da"
+  },
+  "pre_guard_delivered_source_sha256": {
+    "decimal_reference.py": "c87fd7ab5090296c911c4bed955484040336fe917b08c693cd4f4fb3cd69ece4",
+    "dispatcher.py": "467c8b631a7fd4b9bce547e3f7f552c79c42a6a7e4b1e7038a3d31b4f6d2076f",
+    "n5_semantics.py": "c2892e334808d8deeffaf8b2e4f5a69795ca256813e63b08ded75fdb2880c7e4",
+    "run_diagnostic.py": "67e117cf4c62688253f066303d1749942f53496d25d4e72a2c891548f2bc7ec2",
+    "tests.py": "72e71a3991129660e5030d4e7faf2807a5100d5da0f23c57ed6a1957fb95f1ee"
+  },
+  "final_delivered_source_sha256": {
+    "decimal_reference.py": "c87fd7ab5090296c911c4bed955484040336fe917b08c693cd4f4fb3cd69ece4",
+    "dispatcher.py": "467c8b631a7fd4b9bce547e3f7f552c79c42a6a7e4b1e7038a3d31b4f6d2076f",
+    "n5_semantics.py": "71d7d36f8ec0d02d7e42a27634803c698466b6456c8cf2c69ea7dd43d81c56f8",
+    "run_diagnostic.py": "67e117cf4c62688253f066303d1749942f53496d25d4e72a2c891548f2bc7ec2",
+    "tests.py": "40f97c5393edf255a012d78e3da70beba07b6098fa0ed7bc12474b666e0b5869"
+  },
+  "primary_source_archive": "implementation/repair_history/primary_executed_source",
+  "pre_guard_archive": "implementation/repair_history/pre_decimal_coercion_fix_source",
+  "independent_old_witness_code_sha256": "c2892e334808d8deeffaf8b2e4f5a69795ca256813e63b08ded75fdb2880c7e4",
+  "independent_old_witness_preserved": true,
+  "changed_files_from_previous_delivery": [
+    "n5_semantics.py",
+    "tests.py"
+  ],
+  "input_manifest_sha256": "37f8c70705e128368c36247379858a8f245bcb6819aab3d977a2c6b0c7dc3016",
+  "cost_ledger": "implementation/EXECUTION_LEDGER_FINAL_V3.json"
+}
