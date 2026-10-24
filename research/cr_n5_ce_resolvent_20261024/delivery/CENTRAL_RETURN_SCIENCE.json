@@ -1,0 +1,314 @@
+{
+  "schema": "CR_N5_CE_KILLED_GENERATOR_FIRST_EVENT_RETURN_V1",
+  "draft": false,
+  "publishable": true,
+  "created_utc": "2026-10-24T08:00:21Z",
+  "central_base": "83b784dc2facb95e5c2d1c88bf87bc731958b99b",
+  "node": "CR_N5_ATOMIC_ISOTOPE_COVERAGE",
+  "child": "CR_N5_CE_KILLED_GENERATOR_FIRST_EVENT",
+  "status": "COMPLETE_SCOPED",
+  "admission": "NUMERICALLY_CHECKED_SCOPED_CONDITIONAL_FINITE_CHAIN",
+  "consumer": "N5_C23D_HI_CE_RESOLVENT_V1",
+  "science_commit": "896800b4511f323ad3f0b5372b4912fb4770ea98",
+  "science_tree": "f34f6c15713169a1a9800c640e49d3e9eda6dd7d",
+  "documents_commit": null,
+  "branch": "research/cr-n5-ce-resolvent-20261024",
+  "PR": "https://github.com/cosmosapjw-quantum/bass_cr/pull/102",
+  "run_id": "n5_ce_resolvent_native_knot_primary_20261024_v3",
+  "input_id": "n5_ce_resolvent_native_knot_input_20261024_v3",
+  "results_path": "research/cr_n5_ce_resolvent_20261024/REPORT_KO.md",
+  "raw_path": "research/cr_n5_ce_resolvent_20261024/runs/n5_ce_resolvent_native_knot_primary_20261024_v3/",
+  "scope": "First ground-H1 1s->2s/2p CE before cutoff entry in the source-conditioned frozen-Maxwell EE finite chain; finite conditional diagnostic, not full stopping or coupled chemistry.",
+  "fixed_inputs": {
+    "T_K": 10000,
+    "thermal_ne_cm3": 0.14,
+    "prescribed_lnLambda": 20,
+    "n_H1s_cm3": 0.9,
+    "n_H2s_cm3": null,
+    "n_H2p_cm3": null,
+    "clock": "proper seconds",
+    "box": "closed; no escape",
+    "target": "stationary heavy unpolarized ground H1",
+    "pulse_exposure_s": 10000,
+    "exposure_meaning": "impulsive population, not continuous chemistry",
+    "initial_energy_eV": {
+      "lower": 0,
+      "upper": 10,
+      "endpoints": "open"
+    },
+    "source_z": [
+      2.316,
+      2.479,
+      2.649
+    ],
+    "chi": [
+      1.5,
+      3
+    ],
+    "theta_eV": 0.8617333262145178,
+    "CE_gap_eV": 10.20435
+  },
+  "selected_grid_family": "GEOMETRIC_PLUS_NATIVE_CE_KNOTS_V1",
+  "results": {
+    "P_CE_selected_range": [
+      0.00001430274772694351,
+      0.000014642413872659619
+    ],
+    "P_CE_active_range": [
+      0.000022387889315608613,
+      0.00003472631851245922
+    ],
+    "conditional_CE_energy_eV": [
+      11.258871561911278,
+      11.25888224341468
+    ],
+    "conditional_CE_time_proper_s": [
+      590986.2585740857,
+      595977.9397770143
+    ],
+    "interpretation": "first 2S/2P CE before first entry into q in the fixed CE-only marked EE finite chain"
+  },
+  "checks": {
+    "R6": "PASS",
+    "R6_changed_grid": "PASS",
+    "C9": "PASS_SCOPED_NATIVE_KNOT_FINITE_CHAIN",
+    "editorial": "PASS_BLOCKING_0",
+    "matrix_cases": 8,
+    "source_rows": 24,
+    "grid_comparisons": 36,
+    "boundary_comparisons": 18,
+    "max_linear_scaled_residual": 9.465074789479395e-13,
+    "max_partition_abs": 3.0396907213514623e-11,
+    "max_grid_probability_relative_change": 0.0001281093036277632,
+    "max_grid_energy_relative_change": 0.000015120036466400911,
+    "max_grid_time_relative_change": 0.00008522921036606478,
+    "max_boundary_probability_relative_change": 2.4726996662340344e-11,
+    "max_independent_P_E_time_relative_difference": 7.450640259390961e-12,
+    "frozen_thresholds_unchanged": true,
+    "probability_clipping": false
+  },
+  "retained_attempts": {
+    "v1": {
+      "status": "FAILED_VARIABLE_SHADOW; RAW_NOT_RECOVERED_AFTER_WORKSPACE_LOSS",
+      "admitted": false,
+      "Q": 2,
+      "complete": 1,
+      "RHS": 9
+    },
+    "v2": {
+      "status": "FAILED_RETAINED_GRID_COMPARISON",
+      "admitted_family": false,
+      "complete_cases": 12,
+      "RHS": 108,
+      "failed_probability_comparisons": 18
+    },
+    "v3": {
+      "status": "PASS_SELECTED_FAMILY",
+      "Q": 8,
+      "complete": 8,
+      "RHS": 72
+    },
+    "cumulative_actual": {
+      "Q": 22,
+      "complete_cases": 21,
+      "RHS": 189
+    },
+    "exact_retained_raw": {
+      "complete_cases": 20,
+      "RHS": 180
+    }
+  },
+  "budget": {
+    "schema": "N5_CE_RESOLVENT_BUDGET_CONTINUITY_V1",
+    "inherited_known_bounded_worker_cpu_s": 19.209296114,
+    "worker_components": [
+      {
+        "id": "lost_v1_controls",
+        "cpu_s": 0.239278
+      },
+      {
+        "id": "lost_v1_failed_primary",
+        "cpu_s": 0.279477
+      },
+      {
+        "id": "recovery_v2_controls",
+        "cpu_s": 0.358448
+      },
+      {
+        "id": "recovery_v2_primary",
+        "cpu_s": 0.60751
+      },
+      {
+        "id": "native_v3_control",
+        "cpu_s": 0.322367
+      },
+      {
+        "id": "native_v3_primary",
+        "cpu_s": 0.550025
+      },
+      {
+        "id": "independent_v2_Decimal80",
+        "cpu_s": 0.688471
+      },
+      {
+        "id": "independent_v3_Decimal80",
+        "cpu_s": 0.799264
+      },
+      {
+        "id": "saved_output_figure",
+        "cpu_s": 1.776108
+      }
+    ],
+    "new_known_bounded_worker_cpu_s": 5.620948,
+    "known_bounded_worker_lineage_cpu_s": 24.830244114,
+    "independent_review_included_once": 1.487735,
+    "separate_known_root_saved_output_analysis_cpu_s": 0.054974463,
+    "separate_mechanical_samples": {
+      "review_summary_cpu_s": 0.016845157,
+      "freshness_receipt_write_cpu_s": 0.003284493,
+      "final_freshness_copy_cpu_s": 0.003932157,
+      "S0_archive_cpu_s": 0.477434078,
+      "S0_copy_cpu_s": 0.005671543,
+      "V2_raw_archive_child_cpu_s": 0.168369,
+      "V2_raw_archive_coordinator_cpu_s": 0.002129297,
+      "REC133_readonly_download_cpu_s": 0.142911826
+    },
+    "coordinator_and_packaging": "Read per-stage dispatch and backup receipts; samples are not a complete mechanical total. No double-counting of nested worker timers.",
+    "observed_failed_mechanical_actions": [
+      {
+        "kind": "oversized exec argument rejected before child start",
+        "science_started": false,
+        "cpu_s": null
+      },
+      {
+        "kind": "saved-output schema lookup redshift vs z",
+        "science_started": false,
+        "cpu_s": null
+      },
+      {
+        "kind": "read-only suffix inventory missed json import; corrected read succeeded",
+        "science_started": false,
+        "cpu_s": null
+      },
+      {
+        "kind": "Git binary base64 preparation interrupted before any create_blob call; 0 remote uploads; canonical raw publication used",
+        "science_started": false,
+        "cpu_s": null
+      }
+    ],
+    "global_spend": null,
+    "monetary_spend": null,
+    "remaining": null,
+    "currency": null,
+    "unmeasured_remote_CAS_cost": null,
+    "unmeasured_model_and_IO_cost": null,
+    "actual_primary_counts": {
+      "Q_built": 22,
+      "completed_cases": 21,
+      "RHS": 189,
+      "retained_raw_completed_cases": 20,
+      "retained_raw_RHS": 180,
+      "repeated_current_failed_attempt_complete_case": 1,
+      "historical_old_science_replay": 0,
+      "new_ODE": 0,
+      "source_quadrature": 0,
+      "thermal_rate_quadrature": 0,
+      "NCP_dispatch": 0
+    },
+    "scope": "Known bounded worker lineage lower bound, not total project cost. Counts/cost of the lost failed v1 remain charged; no reset."
+  },
+  "reuse": {
+    "PR59": "unchanged frozen EE generator; no old replay",
+    "PHYS83": {
+      "science_commit": "6a2fc5aacb6182a916b9434c316e99e750e8273c",
+      "mode": "constructor arrays only; no moments/evaluate or rate quadrature"
+    },
+    "C23D": {
+      "science": "d04b2a56adb4a5d55b901420aa544332b41f6dbb",
+      "documents": "4a0bbc0ed618ab6eae1b7b2714e366d803186b86",
+      "source": "three saved384-atom sources; no quadrature"
+    },
+    "PR101": {
+      "science": "b8882d026887f375acf90768d4e3740eb03da226",
+      "documents": "b65befa5187d3e1e11574a98dcadd2032831de72",
+      "scope": "standard backward-survival derivation and descriptive uniform-hazard envelope reused"
+    }
+  },
+  "owner_freshness": {
+    "full_metadata_utc": "2026-10-24T07:26:02--07:27:03Z",
+    "branches": 1325,
+    "open_PRs": 859,
+    "collections": 14,
+    "pages": 29,
+    "relevant_HEAD_utc": "2026-10-24T07:46:26Z",
+    "PHYS84": "NUMERICAL_ADMISSION_WAIT",
+    "PHYS86": "new compact exact reference scopedPASS; no physical rate/stopping",
+    "HE_ANG": "SOURCE_INPUT_PENDING; HE96 sparseTDCS scoped only",
+    "REC133": "S2 stored-history envelopePASS; H5INPUT_DEPENDENT_UNCALIBRATED",
+    "new_stopping_provider_count": 0,
+    "receipt_path": "research/cr_n5_ce_resolvent_20261024/delivery/OWNER_FRESHNESS_FINAL.json"
+  },
+  "actual_operation_counts": {
+    "new_primary_Q": 22,
+    "completed_cases": 21,
+    "RHS": 189,
+    "retained_exact_raw_complete_cases": 20,
+    "retained_exact_raw_RHS": 180,
+    "selected_family_Q": 8,
+    "selected_family_RHS": 72,
+    "new_ODE": 0,
+    "source_quadrature": 0,
+    "thermal_rate_quadrature": 0,
+    "historical_old_science_replay": 0,
+    "NCP": 0
+  },
+  "claim_limits": [
+    "Finite-chain arithmetic and frozen finite comparisons only; no certified continuum, infinite-domain or physical error bound.",
+    "Other competing hazards and omitted-process ranking remain null.",
+    "First entry is not irreversible assimilation or Maxwellization; killing is diagnostic termination, not physical electron destruction.",
+    "Internal excitation reward is not final bath heat or escaping-photon energy.",
+    "No D/T/He/Li isotope transfer admission.",
+    "Full N4/N5 remain PARTIAL/OPEN; N6/N7 not activated."
+  ],
+  "missing_other_competing_hazards": null,
+  "dominant_omitted_process_ranking": null,
+  "publication": {
+    "schema": "N5_RESOLVENT_SCIENCE_PUBLICATION_R1_V1",
+    "repository": "cosmosapjw-quantum/bass_cr",
+    "branch": "research/cr-n5-ce-resolvent-20261024",
+    "PR": "https://github.com/cosmosapjw-quantum/bass_cr/pull/102",
+    "commit": "896800b4511f323ad3f0b5372b4912fb4770ea98",
+    "tree": "f34f6c15713169a1a9800c640e49d3e9eda6dd7d",
+    "expected_parent": "21523c93583129763cc8b66f68091bd6e48e81ee",
+    "force": false,
+    "create_tree": "ACK",
+    "create_commit": "ACK",
+    "update_ref": "ACK",
+    "exact_ref_read": "MATCH",
+    "verification": "R1_PASS",
+    "text_files": 211,
+    "binary_publication": "25 actual files/9080788 bytes in release canonical; Git binary calls0/ACK0. Manifest includes locally expected SHA only.",
+    "admission": "NUMERICALLY_CHECKED_SCOPED_CONDITIONAL_FINITE_CHAIN",
+    "science_reexecution_for_publication": 0,
+    "main_branch_merge": false
+  },
+  "backup": {
+    "stage": "FINAL_CANONICAL_PENDING",
+    "S0": "Library libfile_9f0a9452cfbc8191b5d8dbfcba6c2830 / Dropbox id:BSpOijBcT10AAAAAAD_9Sg R1",
+    "v2_raw": "Library libfile_515e40e48564819188cabb0cd189939f / Dropbox id:BSpOijBcT10AAAAAAD_9TA R1",
+    "historical_Drive_unknowns": "PRESERVED; not retransmitted",
+    "raw_binary_transport": "Git0calls/0ACK; canonical release contains actual25binary files",
+    "three_provider_backup_complete": false
+  },
+  "parent_claim": "Full N4/N5 PARTIAL/OPEN; N6/N7 predecessor gates unsatisfied.",
+  "next_first_node": "CR_N5_ATOMIC_ISOTOPE_COVERAGE",
+  "global_error_bound": null,
+  "global_completion_fraction": null,
+  "global_completion_percent": null,
+  "axes": {
+    "EXECUTION": "COMPLETE_SCOPED; independent C9 PASS blocking0",
+    "PUBLICATION": "Science S R1 PASS; this additive central receipt; Draft PR102; no merge",
+    "BACKUP": "Final canonical pending; historical Drive unknown unchanged",
+    "DAG": "Named CE child complete; full N4/N5 PARTIAL/OPEN; N6/N7 gated"
+  }
+}
