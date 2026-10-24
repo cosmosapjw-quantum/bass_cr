@@ -175,3 +175,17 @@ Inherited: non-tilted LRS/full Frobenius, signed amplitudes와 scalar norm/cance
 - 실제 주 run: `runs/c23d_source_ee_20261023T220714Z_v1/`; 보조 run: `runs/c23d_source_ee_supplement_20261023T220810Z_v1/`.
 
 **EXECUTION:** 새 source 연결·MFPT·population evolution 및 targeted 검증 완료; prior replay0. **PUBLICATION:** 실제 commit은 delivery/PUBLICATION_RECEIPTS.json으로 결속. **BACKUP:** artifact별 최종 provider receipt를 참조; 과거 Drive UNKNOWN_NO_ACK 유지. **DAG:** scoped EE 결과와 full stopping PARTIAL/OPEN을 구별.
+
+## 7. 실제 게시·복구·백업 완료 기록
+
+Science commit `d04b2a56adb4a5d55b901420aa544332b41f6dbb`를 별도 [Draft PR99](https://github.com/cosmosapjw-quantum/bass_cr/pull/99)에 expected-SHA/non-force 방식으로 게시하고 실제 REST ref 일치를 확인했다. 이후 metadata 문서의 변경은 science S의 원 결과를 대체하지 않는다. 세션 전환으로 비어 있던 workspace는 별도 보존 publication buffer의 83개 파일로 byte 일치 복원했으며 새 과학 실행은 없었다.
+
+추가 전수 metadata snapshot은 2026-10-24 00:43 UTC, 7개 repo의 branches 1306/open PRs 840이다. 16개 branch 페이지와11개 PR 페이지가 terminal까지 확인됐다. 이 snapshot은 own PR99 생성 직전이다. 전체 이전 inventory는 workspace 전환에서 유실되어 정확한 추가/변경/삭제 delta 대신 순증 +5/+2만 기록했다. WU PHYS84는 NUMERICAL_ADMISSION_WAIT, 새 HE-ANG PR93은 SOURCE_INPUT_PENDING이다. 원 raw 응답은 새 recovery ZIP에 보존했다.
+
+중앙 게시 직전에 HEAD가 HE-ANG 병렬 commit `0d3184538fcf27404d1b88572fc5b7f26432acdb`로 바뀌어 최초 사전 검사가 쓰기 전에 중단됐다. 그 변경을 읽고 보존한 뒤 C23D stopping wrapper만 갱신한 central commit은 `476587d049cc5b265e599fdec45b1026d3bf6b23`이다. 원40계약/다른39wrapper/7authorities/17edges 유지, assemble.py 실행0이다.
+
+새 ZIP `BASS_CR_C23D_EE_DELIVERY_20261024T094335KST.zip`은 5989522 bytes, SHA256 `c7040ba442a8d3079547c1aeb8dcb60491617c4471638db44ab55c743f19a4b9`다. Library와 Dropbox의 실제 재다운로드에서 SHA/size/CRC와125개 payload 검증이 PASS했다. Drive는 새 업로드1회에160초간ACK/ID가 없었고 exact 조회1회도0개였으므로 UNKNOWN_NO_ACK/R3 NOT_RUN을 유지한다. 삼중 백업 완료가 아니다.
+
+최종 위치는 `delivery/FINAL_AUTHORITY.json`, `delivery/HANDOFF_FINAL_KO.md`, provider별 actual receipts다. Immutable ZIP은 science S와 당시 초기 publication/recovery evidence를 담고, 이후 최종 영수증과 중앙 return은 이 후속 문서 commit에 게시한다.
+
+**EXECUTION:** R1–R10/C1–C10 scoped 연구 완료. **PUBLICATION:** science·central 게시 확인, 이 후속 문서 commit에 최종 기록. **BACKUP:** Library/Dropbox R3 PASS; Drive OPEN. **DAG:** 다음 첫 노드 N5 actual rate coverage; 전체 stopping/N6/N7 OPEN.
