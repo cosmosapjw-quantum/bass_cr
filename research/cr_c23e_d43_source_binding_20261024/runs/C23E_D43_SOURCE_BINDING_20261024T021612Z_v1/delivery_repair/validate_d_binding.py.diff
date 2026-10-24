@@ -1,0 +1,18 @@
+--- executed/validate_d_binding.py
++++ delivered/validate_d_binding.py
+@@ -18,13 +18,10 @@
+     for p in sorted((ROOT/'implementation/reuse').rglob('*')):
+         if p.is_file() and p.suffix in ['.py','.dat','.csv','.json']:
+             b=p.read_bytes();manifest.append(dict(path=str(p.relative_to(ROOT)),bytes=len(b),sha256=hashlib.sha256(b).hexdigest(),git_blob=hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest()))
+-    casesfile=ROOT/'intake/c23b/CASES.json';b=casesfile.read_bytes()
+-    if len(b)==25700 and b.endswith(b'\n\n'):b=b[:-1]
++    casesfile=ROOT/'inputs/C23B_CASES_EXACT.json';b=casesfile.read_bytes()
+     check('parent_cases_identity',len(b)==25699 and hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest()=='61bcbc0b44206f496534da6bdffcdfe1731ad063')
+-    exact=ROOT/'inputs/C23B_CASES_EXACT.json'
+-    with exact.open('xb') as f:f.write(b)
+     cases=json.loads(b)
+-    atomspath=Path('/workspace/scratch/30d955d9ea43/n4_resume_transport_20261024/verified_restore/main/repository/research/cr_c23c_stopping_coverage_20261023/inputs/photoelectron_atoms.csv')
++    atomspath=ROOT/'inputs/photoelectron_atoms.csv'
+     ab=atomspath.read_bytes();check('saved_atoms_identity',len(ab)==1681578 and hashlib.sha256(ab).hexdigest()=='f5bcfe477b8a073341a7496c079e6eb2737f6ca578b884376887b04989e57fc3')
+     for name,data in [('parent_cases',b),('saved_atoms',ab)]:manifest.append(dict(path=name,bytes=len(data),sha256=hashlib.sha256(data).hexdigest(),git_blob=hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest()))
+     dump(out/'INPUT_MANIFEST.json',manifest)

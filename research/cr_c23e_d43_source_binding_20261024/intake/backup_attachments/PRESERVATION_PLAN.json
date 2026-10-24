@@ -1,0 +1,69 @@
+{
+  "scope": "C23E_D43_PHOTO_RR_SOURCE_BINDING frozen V2; preservation mechanics only, pending root scientific review and publication decision",
+  "helper_directory": "/workspace/scratch/30d955d9ea43/cr_n5_rate_domain_20261024_private/library_helpers",
+  "helpers": {
+    "upload": "library_upload.py",
+    "transfer_xattrs": "library_file_transfer.py",
+    "download": "library_download.py",
+    "hosted_apps": "library_hosted_apps.py"
+  },
+  "helper_freshness": "All fetched from current c7/library source during current request/run; upload helper newly fetched for this preparation; companions already current-run. Full resources with no next_cursor.",
+  "destinations": {
+    "library_directory_id": "6a6deb5e9bfc8191b1caa87daf0e8d26",
+    "dropbox_directory": "/BASS_DERIVATION_DOSSIERS_20260912/bass_cr/",
+    "drive_parent_folder_id": "1V4ZQza59dWVC7apeRz9P1TL66eaVYyJy"
+  },
+  "planned_artifacts": {
+    "release_zip": {
+      "actual_name": null,
+      "source": "root-finalized canonical ZIP+closed manifest after coder and fresh Astra review",
+      "library_type": "other",
+      "readback_tier": "R3",
+      "checks": [
+        "actual downloaded bytes",
+        "exact size and SHA256 against finalized local ZIP",
+        "ZIP CRC",
+        "closed payload member sizes and SHA256"
+      ],
+      "completed_science_replay": false
+    },
+    "terminal_receipt": {
+      "actual_name": null,
+      "source": "root final authority/terminal receipt containing actual science/publication identities and backup states",
+      "library_type": "other",
+      "readback_tier": "R3 small standalone receipt actual bytes,size,SHA256; must not falsely imply successful backups",
+      "self_reference": "receipt identifies release ZIP and completed preservation evidence; avoid recursive self-hash requirements"
+    }
+  },
+  "needed_calls": [
+    "Once artifacts are final, choose skill-required Library route: one small standalone owned create may use library_create_library_file then transfer apply-xattrs with returned complete xattrs+actual ID in same exec invocation; multi-file batch or >=about50MiB uses current library_upload.py once on ordered uploads stdin JSON with EOF, directory_id per item. Prepared upload tools currently available. Inspect every result.",
+    "Do not call Library prepare_uploads/finalize_uploads separately when using upload helper. It handles preparation, ordered finalization, identity/xattrs.",
+    "For Library R3 after create: resolve current list/search metadata, feed complete unchanged result and exact selection to current library_download.py with private destination, then local ZIP/size/SHA/member checks. No old ZIP download.",
+    "For Dropbox: dropbox_upload_file(source_file=absolute finalized file,destination_path=exact directory+actual filename); if in_progress poll check_upload_file_status. Persist observed ID. Obtain provider-authorized readback through current returned download route, verify bytes and DropboxHash when available.",
+    "For Drive: one bounded new create upload for new artifact only via google_drive_upload_file(file_uri=absolute local file,file_name=actual basename,mime_type=application/zip,parent_folder_id=known ID). Actual ACK/ID required; ambiguity stays UNKNOWN_NO_ACK. Before any retry reconcile exact name+known folder once; no automatic duplicate.",
+    "Terminal receipt uploaded only after bounded release outcomes observed; record returned actual IDs and R3 outcomes, no invented success."
+  ],
+  "historical_states": {
+    "C23D_library_dropbox": "PASS_R3 reused; no redownload",
+    "C23D_drive": "UNKNOWN_NO_ACK preserved; current exact-name folder query returned0, no resubmit",
+    "old_N4_drive": "UNKNOWN_NO_ACK_UNCHANGED",
+    "three_provider_complete": false
+  },
+  "constraints": {
+    "remote_mutations": 0,
+    "uploads_executed": 0,
+    "new_science": 0,
+    "WORK_THREAD_PROMPT_materialization_retry": false,
+    "old_zip_redownload": false
+  },
+  "observed_environment": {
+    "upload_cli_probe": "library_upload.py --help exits2 with usage: library_upload.py < request.json; no write started",
+    "hosted_apps_network": "Earlier current-run download helper failed hosted apps tools/list request failed: network. No retry in this preparation. Upload capability runtime success unverified."
+  },
+  "four_axes": {
+    "EXECUTION": "Mechanical helper preparation only",
+    "PUBLICATION": "No repository or external writes; additive draft PR and central overlay belong to root",
+    "BACKUP": "Plan ready; new artifacts not uploaded",
+    "DAG": "No scientific admission or dependency promotion"
+  }
+}
