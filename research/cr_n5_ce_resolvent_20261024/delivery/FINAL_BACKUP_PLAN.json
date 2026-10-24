@@ -1,0 +1,69 @@
+{
+  "schema": "N5_RESOLVENT_FINAL_BACKUP_PREPARATION_V1",
+  "created_utc": "2026-10-24T07:45:27.533Z",
+  "status": "PREPARED_NOT_FROZEN",
+  "root_freeze_required": true,
+  "unit": "/workspace/scratch/8a9a7ced9771/work/bass_cr/research/cr_n5_ce_resolvent_20261024",
+  "canonical_helper": {
+    "source_commit": "b65befa5187d3e1e11574a98dcadd2032831de72",
+    "source_path": "research/cr_n5_rate_semantics_20261024/delivery/tools/canonical_zip.py",
+    "local_path": "delivery/tools/canonical_zip.py",
+    "sha256": "06e28b41995d7c20de66d7d332d7356938f81fa8e4c6b7394346476337d0fda5",
+    "changed": false
+  },
+  "freeze_policy": {
+    "artifact_name": "BASS_CR_N5_RESOLVENT_DELIVERY_<UTC>.zip",
+    "out_directory": "/workspace/scratch/8a9a7ced9771/checkpoint_artifacts/n5_resolvent_final",
+    "unit_prefix": "research/cr_n5_ce_resolvent_20261024",
+    "create_only": true,
+    "require_root_terminal_C9_and_refinement_decision": true,
+    "scientific_gate_outcome": "Report actual root/review status; archive itself does not grant admission",
+    "active_lease_path": "implementation/.recovery_v2_lease",
+    "active_lease_must_be_absent": true,
+    "no_lease_deletion_by_backup_agent": true,
+    "preserve": [
+      "intake/S0_SURVEY_RECOVERY.zip exact identity",
+      "runs/n5_ce_resolvent_recovery_primary_20261024_v2 and tests with GRID_COMPARISON_FAIL",
+      "delivery/V2_RAW_CHECKPOINT.json existing remote identity",
+      "actual v3 run and independent review outputs",
+      "recovery/loss records",
+      "fixed original C23D/central handoff copies and pins"
+    ],
+    "exclude": [
+      "__pycache__",
+      ".pyc",
+      "mpl_cache",
+      "temporary active runtime lease",
+      "external_read_only_sources/rec133 56 MB archive",
+      "private transfer URLs and helper temporary files"
+    ],
+    "old_primary_v1_raw": "NOT_RECOVERED; preserve observed outcome/cost without fabricated originals"
+  },
+  "Library": {
+    "destination_directory_id": "6a6deb5e9bfc8191b1caa87daf0e8d26",
+    "create": "native create_library_file; complete xattrs applied in same code invocation",
+    "R3": "fresh whole-file materialization for exact returned file_id/library_file_id into a distinct create-only readback directory; canonical helper verifies size/SHA256/CRC/all payloads",
+    "materialization": "Use current native helper only; record whether provider workspace transfer or actual URL GET. Never label metadata as bytes."
+  },
+  "Dropbox": {
+    "destination_parent": "ns:183516487//BASS_DERIVATION_DOSSIERS_20260912/bass_cr",
+    "create": "native upload_file once; poll returned operation until actual completed",
+    "R3": "single-use download_link for exact returned file ID; one full GET per issued link into fresh path; no HEAD/Range probe; canonical helper verifies size/SHA256/CRC/all payloads",
+    "no_blind_retries": true
+  },
+  "Drive": {
+    "destination_folder_id": "1V4ZQza59dWVC7apeRz9P1TL66eaVYyJy",
+    "after": "Library and Dropbox actual-byte R3 PASS",
+    "new_upload_calls": 1,
+    "ack_deadline_seconds": 60,
+    "timeout_state": "UNKNOWN_NO_ACK; server completion/cancellation UNOBSERVED",
+    "if_no_ACK": "one exact final filename + folder + trashed=false reconciliation query; zero results does not prove absence; no retransmission",
+    "R3": "NOT_PLANNED_UNLESS_ROOT_AUTHORIZES_EXTRA_ACTUAL_READBACK",
+    "historical_N4_C23C_C23D_N5_unknowns": "UNCHANGED"
+  },
+  "measurements": "Actual local helper child CPU, coordinator CPU, wall and RSS; network operation timings separately; unmeasured global costs stay null",
+  "EXECUTION": "PREPARATION_ONLY_SCIENCE0",
+  "PUBLICATION": "ROOT_OWNED_NO_MUTATION",
+  "BACKUP": "FINAL_NOT_STARTED",
+  "DAG": "NO_ADMISSION_CHANGE"
+}

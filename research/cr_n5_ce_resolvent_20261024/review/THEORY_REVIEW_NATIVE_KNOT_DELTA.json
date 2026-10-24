@@ -1,0 +1,58 @@
+{
+  "schema": "INDEPENDENT_R6_NATIVE_KNOT_DELTA_V1",
+  "created_utc": "2026-10-24T07:37:37.172466+00:00",
+  "reviewer": "/root/provider_returns",
+  "decision": "PASS_SCOPED_CHANGED_GRID_CONTRACT",
+  "blocking_findings": [],
+  "blocking_count": 0,
+  "reviewed_contract": "work/bass_cr/research/cr_n5_ce_resolvent_20261024/REFINEMENT_CONTRACT_V3.md",
+  "reviewed_contract_sha256": "22437103f7e8ae5203743e178e6f8826528afdfc5d5642302c945b98bb330cb2",
+  "reused_R6": "THEORY_REVIEW.json; matrix/reward/source-projection equations unchanged",
+  "checks": [
+    {
+      "subject": "Changed numerical dependency",
+      "result": "PASS",
+      "basis": "Native forward CE energy knots expose existing W-linear breaks. Union changes grid only, not source interpolation or physical model."
+    },
+    {
+      "subject": "Scope and repeated work",
+      "result": "PASS",
+      "basis": "Eight new cases N1024/2048 bothchi/R, noN512 or old campaigns. Earlier point-grid failure remainsFAILED_RETAINED; newfamily has separateidentity."
+    },
+    {
+      "subject": "Projection and input preservation",
+      "result": "PASS",
+      "basis": "No native forward energy belowDelta, so source below10eVgrid remainsidentical atfixedchi/N. q,10,Delta,U andoriginalactive denominator preserved; no newprojectionadmissionclaim."
+    },
+    {
+      "subject": "Domain",
+      "result": "PASS",
+      "basis": "Onlysource-native knots in finiteband; exactdedup without mergingdistinctknots; same-prefixR40."
+    },
+    {
+      "subject": "Tolerance and conditioning",
+      "result": "PASS_WITH_EXPLICIT_RISK",
+      "basis": "Alloriginalthresholds unchanged. Tinycellsspacing may increase matrixconditioning. New exact-binary64 highprecisionreference relative5e-10 remainsrequired."
+    },
+    {
+      "subject": "Resources and stopping",
+      "result": "PASS",
+      "basis": "Published code/input beforelaunch,1changedtest+1boundedprimary,CPU/AS/lease/cumulativecostpreserved, noautomaticfurtherrepair."
+    }
+  ],
+  "nonblocking_notes": [
+    "Below10eV projection representation is unchanged atfixedchi/N; betweenN1024and2048q-node mass stillchanges andmustnot beignored.",
+    "Nativeknotinclusion addressesa concrete underresolution dependency butdoesnotbyitself establishconvergenceorder, continuumcertificate or solecausality.",
+    "C9 exactmatrixreference testsarithmetic ofrepresentedbinary64matrix; grid/physicalerror remainsseparate."
+  ],
+  "new_scientific_runs_by_reviewer": 0,
+  "review_allocation": {
+    "total_CPU_s": 10,
+    "already_consumed_CPU_s": 0.6884709999999999,
+    "remaining_CPU_s": 9.311529
+  },
+  "EXECUTION": "STATIC_R6_DELTA_PASS",
+  "PUBLICATION": "ROOT_OWNED",
+  "BACKUP": "ROOT_OWNED",
+  "DAG": "Allowfrozenchangedtestandnew8caseprimary; actualC9andgridgatepending;N4/N5partialN6/N7gated"
+}

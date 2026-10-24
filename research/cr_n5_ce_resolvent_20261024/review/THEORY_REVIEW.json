@@ -1,0 +1,167 @@
+{
+  "schema": "CR_N5_CE_RESOLVENT_INDEPENDENT_R6_V1",
+  "created_utc": "2026-10-24T04:55:32.449007+00:00",
+  "reviewer": "/root/provider_returns",
+  "unit": "CR_N5_CE_KILLED_GENERATOR_FIRST_EVENT",
+  "consumer": "N5_C23D_HI_CE_RESOLVENT_V1",
+  "decision": "PASS_SCOPED_R6",
+  "blocking_findings": [],
+  "blocking_count": 0,
+  "resolved_findings": [
+    {
+      "id": "R6-F1",
+      "severity_before": "BLOCKING_BEFORE_EXECUTION",
+      "issue": "Scaled linear residual and zero denominator convention unspecified",
+      "resolution": "Explicit rowwise |Kx-b|/(|K||x|+|b|), zero/zero recorded0 only when residual0; no floor. Same convention for generator conservation.",
+      "state": "CLOSED_IN_REVIEWED_CONTRACT"
+    },
+    {
+      "id": "R6-F2",
+      "severity_before": "BLOCKING_BEFORE_EXECUTION",
+      "issue": "Lambda synthetic controls lacked fixed values, tolerances, channel scaling and budget scope",
+      "resolution": "Fixed exact toy and lambda set, both-channel scaling, small-signal/direct tolerances, explicit single-channel control, primarylambda1 and no production density scan.",
+      "state": "CLOSED_IN_REVIEWED_CONTRACT"
+    },
+    {
+      "id": "R6-F3",
+      "severity_before": "BLOCKING_RESOURCE_CLAIM",
+      "issue": "RSS cap wording could misstate Linux RLIMIT_RSS enforcement",
+      "resolution": "Frozen512MiB address-space RLIMIT_AS plus actual measured peakRSS, rather than a claimed effective RLIMIT_RSS cap.",
+      "state": "CLOSED_IN_REVIEWED_CONTRACT"
+    }
+  ],
+  "concrete_nonblocking_notes": [
+    {
+      "id": "R6-N1",
+      "note": "Event-energy balance is a scoped first-event ledger. A residual from algebraically derived outgoing moment is an arithmetic identity, not an independent physical validation or proof of later bath heat; retain that distinction in results."
+    },
+    {
+      "id": "R6-N2",
+      "note": "R6 examines frozen mathematics and scope. Prepared implementation and primary raw outputs are deliberately outside this decision and need planned C6/C9 gates. Source interpolation, finite-mass corrections, omitted channels and global continuum error remain uncertified."
+    }
+  ],
+  "reviewed_files": [
+    {
+      "path": "/workspace/scratch/8a9a7ced9771/work/bass_cr/research/cr_n5_ce_resolvent_20261024/FROZEN_CONTRACT.md",
+      "bytes": 12255,
+      "sha256": "44b43c42eff4b67a9d3c8ed4d49e53f3cb91c9c29b2413cca2a1761632215d2b"
+    },
+    {
+      "path": "/workspace/scratch/8a9a7ced9771/work/bass_cr/research/cr_n5_ce_resolvent_20261024/THEORY_KO.md",
+      "bytes": 4609,
+      "sha256": "f98660d8288f54248016d1ecdf01627a9162fe99c9b55b924e68910585d971f0"
+    },
+    {
+      "path": "/workspace/scratch/8a9a7ced9771/continuation_survey/WOLFRAM_TWO_STATE_RAW.json",
+      "bytes": 1418,
+      "sha256": "ec213fb1cfdde90c9bc3c43b3e8466f0682ab032a15738dcd096b17e8713eb57"
+    },
+    {
+      "path": "/workspace/scratch/8a9a7ced9771/work/bass_cr/research/cr_n5_rate_semantics_20261024/theory/THEORY_REVIEW.md",
+      "bytes": 26340,
+      "sha256": "9485079b4b269f7ff8bf2a5ce8de102260a97bef47cb23c85f0b59d85201dc4c"
+    },
+    {
+      "path": "/workspace/scratch/8a9a7ced9771/continuation_survey/providers/SOURCE_PINS.json",
+      "bytes": 62827,
+      "sha256": "658f5a97f41c4218d7d5e328f25bab44d7157df875eb89cd905b2d24df66273d"
+    },
+    {
+      "path": "/workspace/scratch/8a9a7ced9771/continuation_survey/providers/OWNER_GATE_SUMMARY.json",
+      "bytes": 17563,
+      "sha256": "5b5485e22784ef361f96e7ff6d73c17a7ff5ea657584ff46d52c11b11d9584eb"
+    },
+    {
+      "path": "/workspace/scratch/8a9a7ced9771/continuation_survey/providers/DUPLICATE_SURVEY.json",
+      "bytes": 3484,
+      "sha256": "790c89a79e03001f85af33da16ea34e5317182a583814c86a767fdbf63a03fa3"
+    }
+  ],
+  "checks": [
+    {
+      "id": "R6-01",
+      "subject": "Existing theory reuse and new contribution",
+      "result": "PASS",
+      "reason": "PR101 section4 already derives backward survival/mark equation. Both new texts explicitly reuse it. New work is channel/source-conditioned finite-chain probabilities and event-energy/time rewards, not a new survival theorem or old MFPT replay."
+    },
+    {
+      "id": "R6-02",
+      "subject": "Column/row generator orientation and absorption",
+      "result": "PASS",
+      "reason": "Q acts on column populations. A=Q[1:,1:] keeps loss to q; G=A.T; a=-G1=Q[0,1:]. K=diag(h)-G is the nonsingular killed-chain M-matrix for this finite absorbing connected birth-death chain."
+    },
+    {
+      "id": "R6-03",
+      "subject": "Probabilities and partition",
+      "result": "PASS",
+      "reason": "Kuc=hc and Kuabs=a are direct positive-RHS solves. K1=h+a gives u2S+u2P+uabs=1. Direct CE solves avoid rare-event cancellation from1-uabs; no probability clipping is allowed."
+    },
+    {
+      "id": "R6-04",
+      "subject": "Energy/time rewards and occupation",
+      "result": "PASS",
+      "reason": "Kr=E hc is unnormalized incident-energy reward. (K+sI)^-1hc derivative gives Kv=uc for event-time reward. Kt=1 is time until mark or entry. Unmarked occupation w=(-G)^-1h bounds total event probability through1-exp(-H)<=H. These are distinct RHS/observables, not recycled continuous MFPT evaluations."
+    },
+    {
+      "id": "R6-05",
+      "subject": "Source projection and denominator",
+      "result": "PASS",
+      "reason": "Only original W>q atoms are projected. q,10eV,Delta knots prevent false initial excitation. Projected q mass gives immediate entry, CE/time0, and remains in original active denominator. Original W<=q contributes0 to selected-population pre-entry CE probability. Count/energy and zero-positive-hazard initial mass checks are frozen."
+    },
+    {
+      "id": "R6-06",
+      "subject": "R40/R80 representation and convergence limits",
+      "result": "PASS",
+      "reason": "The unchanged PR59 provider is reused to assemble new grids. The contract accurately distinguishes old R40 finite-population output from old R80 continuous-MFPT comparison. Common node prefixes and finite grid/boundary comparisons do not assert a certified continuum or unbounded-domain error."
+    },
+    {
+      "id": "R6-07",
+      "subject": "Physical and omitted-process scope",
+      "result": "PASS",
+      "reason": "Fixed Maxwell bath, proper-time, n1s0.9 stationary-heavy H1, pinned PHYS83 constants/native support only. Source exposure is impulsive. Killing is an observable stop, not electron removal or irreversible thermalization. Charge/H1 nuclei/tag count and Delta kinetic-to-internal transfer are consistent. Other hazards and isotope transfer remain null; PHYS84/85/86 and HE full-law work are not implemented."
+    },
+    {
+      "id": "R6-08",
+      "subject": "Lambda controls and toy algebra",
+      "result": "PASS",
+      "reason": "Physical lambda1 only. Frozen synthetic a2,b3,c5,x7,y11 and common-channel lambda0,1e-8,1 plus explicit absent-channel case are charged to bounded tests. Rational formula and small-signal slope match the displayed two-state generator. Five true symbolic identities are visible in the saved raw response. General monotonicity/concavity applies to total CE, not arbitrary individual competing channels."
+    },
+    {
+      "id": "R6-09",
+      "subject": "Numerical admission obligations",
+      "result": "PASS",
+      "reason": "Componentwise residual denominator |K||x|+|b| and exact-zero convention now explicit, as are probability, conservation, source and event-energy gates. Finite-grid/boundary tolerances are fixed; failure retained and no automatic relaxation. Independent C9 will inspect actual arrays and reference solves, not rely on R6."
+    },
+    {
+      "id": "R6-10",
+      "subject": "Resources, provenance and execution authority",
+      "result": "PASS",
+      "reason": "512MiB RLIMIT_AS is now stated separately from measured RSS. CPU0 worker/native thread1, coordinator8, exclusive local lease, cgroup/proc checks, create-only runs, CPU/wall bounds and inherited cost are retained. Theory PASS is not proof of executable compliance or authorization to bypass root/runtime gates."
+    }
+  ],
+  "independence": "Reviewer performed provider raw intake and this static theory/contract review; did not author current theory or implementation and did not execute scientific providers or new primary. Prior N5 C9 is separate.",
+  "execution": {
+    "scientific_runs": 0,
+    "provider_constructor_calls": 0,
+    "provider_moments_calls": 0,
+    "provider_evaluate_calls": 0,
+    "ODEs": 0,
+    "source_quadratures": 0,
+    "rate_quadratures": 0,
+    "new_CAS_calls_by_reviewer": 0,
+    "new_CAS_response": "Existing root-produced five-identity toy response read only",
+    "mechanical_file_reads_hashes_writes": "performed",
+    "mechanical_CPU_seconds": null
+  },
+  "scope_limits": {
+    "full_N4": "PARTIAL_OPEN",
+    "full_N5": "PARTIAL_OPEN",
+    "N6_N7": "NOT_ACTIVATED",
+    "global_error_bound": null,
+    "global_completion_percent": null
+  },
+  "EXECUTION": "INDEPENDENT_STATIC_R6_PASS; science0",
+  "PUBLICATION": "NOT_PERFORMED_BY_REVIEWER",
+  "BACKUP": "ROOT_OWNED; reviewer_upload0",
+  "DAG": "R6 CLOSED_SCOPED; proceed to frozen targeted implementation controls and root-authorized bounded primary; C9 actual-result admission pending"
+}

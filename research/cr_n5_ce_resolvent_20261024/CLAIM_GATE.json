@@ -1,0 +1,149 @@
+{
+  "schema": "N5_CE_RESOLVENT_ROOT_ADMISSION_V1",
+  "created_utc": "2026-10-24T07:49:24Z",
+  "unit": "CR_N5_CE_KILLED_GENERATOR_FIRST_EVENT",
+  "parent": "CR_N5_ATOMIC_ISOTOPE_COVERAGE",
+  "consumer": "N5_C23D_HI_CE_RESOLVENT_V1",
+  "decision": "PASS_SCOPED_NATIVE_KNOT_FINITE_CHAIN",
+  "admission": "NUMERICALLY_CHECKED_SCOPED_CONDITIONAL_FINITE_CHAIN",
+  "scientific_stage": "COMPLETE_SCOPED",
+  "blocking_findings": 0,
+  "primary_run_id": "n5_ce_resolvent_native_knot_primary_20261024_v3",
+  "input_id": "n5_ce_resolvent_native_knot_input_20261024_v3",
+  "selected_grid_family": "GEOMETRIC_PLUS_NATIVE_CE_KNOTS_V1",
+  "preexecution_commit": "21523c93583129763cc8b66f68091bd6e48e81ee",
+  "R_primary": 80,
+  "base_geometric_N_primary": 2048,
+  "actual_R80_node_count": 2480,
+  "inputs": {
+    "T_K": 10000,
+    "thermal_ne_cm3": 0.14,
+    "prescribed_lnLambda": 20,
+    "n_H1s_cm3": 0.9,
+    "n_H2s_cm3": null,
+    "n_H2p_cm3": null,
+    "clock": "proper seconds",
+    "box": "closed; no escape",
+    "target": "stationary heavy unpolarized ground H1",
+    "pulse_exposure_s": 10000,
+    "exposure_meaning": "impulsive population, not continuous chemistry",
+    "initial_energy_eV": {
+      "lower": 0,
+      "upper": 10,
+      "endpoints": "open"
+    },
+    "source_z": [
+      2.316,
+      2.479,
+      2.649
+    ],
+    "chi": [
+      1.5,
+      3
+    ],
+    "theta_eV": 0.8617333262145178,
+    "CE_gap_eV": 10.20435
+  },
+  "results": {
+    "P_CE_selected_range": [
+      0.00001430274772694351,
+      0.000014642413872659619
+    ],
+    "P_CE_active_range": [
+      0.000022387889315608613,
+      0.00003472631851245922
+    ],
+    "conditional_CE_energy_eV": [
+      11.258871561911278,
+      11.25888224341468
+    ],
+    "conditional_CE_time_proper_s": [
+      590986.2585740857,
+      595977.9397770143
+    ],
+    "interpretation": "first 2S/2P CE before first entry into q in the fixed CE-only marked EE finite chain"
+  },
+  "checks": {
+    "R6": "PASS",
+    "R6_changed_grid": "PASS",
+    "C9": "PASS_SCOPED_NATIVE_KNOT_FINITE_CHAIN",
+    "editorial": "PASS_BLOCKING_0",
+    "matrix_cases": 8,
+    "source_rows": 24,
+    "grid_comparisons": 36,
+    "boundary_comparisons": 18,
+    "max_linear_scaled_residual": 9.465074789479395e-13,
+    "max_partition_abs": 3.0396907213514623e-11,
+    "max_grid_probability_relative_change": 0.0001281093036277632,
+    "max_grid_energy_relative_change": 0.000015120036466400911,
+    "max_grid_time_relative_change": 0.00008522921036606478,
+    "max_boundary_probability_relative_change": 2.4726996662340344e-11,
+    "max_independent_P_E_time_relative_difference": 7.450640259390961e-12,
+    "frozen_thresholds_unchanged": true,
+    "probability_clipping": false
+  },
+  "evidence": [
+    "FROZEN_CONTRACT.md",
+    "THEORY_KO.md",
+    "REFINEMENT_CONTRACT_V3.md",
+    "review/THEORY_REVIEW.json",
+    "review/THEORY_REVIEW_NATIVE_KNOT_DELTA.json",
+    "review/INDEPENDENT_C9_REVIEW.json",
+    "intake/final_freshness_0746/COPY_AND_EDITORIAL_REVIEW_RECEIPT.json",
+    "runs/n5_ce_resolvent_native_knot_primary_20261024_v3/RESULT.json",
+    "runs/n5_ce_native_saved_figure_20261024_v3/NUMERIC_EXTRACTION.json"
+  ],
+  "retained": {
+    "v1": {
+      "status": "FAILED_VARIABLE_SHADOW; RAW_NOT_RECOVERED_AFTER_WORKSPACE_LOSS",
+      "admitted": false,
+      "Q": 2,
+      "complete": 1,
+      "RHS": 9
+    },
+    "v2": {
+      "status": "FAILED_RETAINED_GRID_COMPARISON",
+      "admitted_family": false,
+      "complete_cases": 12,
+      "RHS": 108,
+      "failed_probability_comparisons": 18
+    },
+    "v3": {
+      "status": "PASS_SELECTED_FAMILY",
+      "Q": 8,
+      "complete": 8,
+      "RHS": 72
+    },
+    "cumulative_actual": {
+      "Q": 22,
+      "complete_cases": 21,
+      "RHS": 189
+    },
+    "exact_retained_raw": {
+      "complete_cases": 20,
+      "RHS": 180
+    }
+  },
+  "claim_limits": [
+    "Finite-chain arithmetic and frozen finite comparisons only; no certified continuum, infinite-domain or physical error bound.",
+    "Other competing hazards and omitted-process ranking remain null.",
+    "First entry is not irreversible assimilation or Maxwellization; killing is diagnostic termination, not physical electron destruction.",
+    "Internal excitation reward is not final bath heat or escaping-photon energy.",
+    "No D/T/He/Li isotope transfer admission.",
+    "Full N4/N5 remain PARTIAL/OPEN; N6/N7 not activated."
+  ],
+  "actual_new_ODE": 0,
+  "source_quadrature": 0,
+  "thermal_rate_quadrature": 0,
+  "historical_old_science_replay": 0,
+  "NCP_dispatch": 0,
+  "missing_other_hazards": null,
+  "dominant_omitted_process_ranking": null,
+  "physical_source_error_bound": null,
+  "global_error_bound": null,
+  "global_completion_percent": null,
+  "EXECUTION": "COMPLETE_SCOPED",
+  "PUBLICATION": "PREEXECUTION_R1_PASS; final science publication pending",
+  "BACKUP": "S0 and v2 raw R1 ACK; canonical R3 pending; historical Drive unknown preserved",
+  "DAG": "Named CE child complete; full N4/N5 PARTIAL/OPEN; N6/N7 gated"
+}
