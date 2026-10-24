@@ -1,0 +1,158 @@
+{
+  "schema": "INDEPENDENT_BASELINE_RECOVERY_V2_REVIEW_V1",
+  "created_utc": "2026-10-24T07:36:20.865971+00:00",
+  "reviewer": "/root/provider_returns",
+  "primary_run_id": "n5_ce_resolvent_recovery_primary_20261024_v2",
+  "decision": "PASS_CONDITIONAL_FINITE_CHAIN_ARITHMETIC_WITH_GRID_CONSISTENCY_OPEN",
+  "frozen_all_gate_admission": "NOT_GRANTED_GRID_FAIL18",
+  "blocking_for_finite_chain_arithmetic": [],
+  "blocking_for_unqualified_frozen_convergence_admission": [
+    {
+      "id": "C9-GRID-01",
+      "count": 18,
+      "scope": "chi1.5 bothR all3source bothchannels+sum",
+      "criterion": 0.005,
+      "actual_max_relative_probability_change": 0.015397624471633883,
+      "state": "OPEN_RETAINED_PENDING_ROOT_CHANGED_DEPENDENCY_DECISION"
+    }
+  ],
+  "executed_code_pins": [
+    {
+      "path": "implementation/dispatch.py",
+      "bytes": 5749,
+      "sha256": "f00b9c7d11398aef480f74f789edd24609b715494ee15aa5e5f5bf448149adbe",
+      "executed_snapshot_and_current_match": true
+    },
+    {
+      "path": "implementation/engine.py",
+      "bytes": 9168,
+      "sha256": "ee721cf2846a83f0493b798a82a81542b445387fd90b46ce4950a9b5b49fb221",
+      "executed_snapshot_and_current_match": true
+    },
+    {
+      "path": "implementation/primary.py",
+      "bytes": 5453,
+      "sha256": "f66b4f84e1715ae9a170db32b3866afe5d34197155f43382f2d5d6329f401e2e",
+      "executed_snapshot_and_current_match": true
+    },
+    {
+      "path": "implementation/tests.py",
+      "bytes": 4763,
+      "sha256": "ac8186d679fefd1b980fbc41e252f0795c457dfd30b3474cf888c73de1f41637",
+      "executed_snapshot_and_current_match": true
+    }
+  ],
+  "input_manifest_sha256": "0735cb4fbf3f1030184eac1661576c7a8a7283b7f2fa3827efe154f6351b084d",
+  "all_input_files_validated": 15,
+  "all_local_matrix_checks_pass": true,
+  "all_source_projection_and_energy_checks_pass": true,
+  "matrix_metrics_maxima": {
+    "linear_scaled_residual": 4.01579521071643e-15,
+    "partition_max_abs": 7.496225862269057e-13,
+    "probability_min": 5.350085944551466e-11,
+    "probability_max": 0.9999999998542176,
+    "uCE_minus_w_max": -3.497892638380501e-13,
+    "generator_scaled_defect": 5.922233472501025e-17
+  },
+  "independent_reference_run": "n5_c9_exact_binary64_20261024T073509157192Z_v1",
+  "independent_reference_result_SHA256": "1cb8907d589f40929abe252492dde0cd64f39a1445fb239961c5c3f2ecf84208",
+  "independent_reference_counts": {
+    "factorizations": 4,
+    "direct_probability_solves": 4,
+    "energy_reward_solves": 4,
+    "time_reward_solves": 4,
+    "adjoint_source_solves": 6,
+    "provider_imports": 0,
+    "provider_constructors": 0,
+    "ODE": 0,
+    "source_quadrature": 0,
+    "rate_quadrature": 0
+  },
+  "independent_worker_receipt": {
+    "schema": "INDEPENDENT_C9_DISPATCH_V1",
+    "run_id": "n5_c9_exact_binary64_20261024T073509157192Z_v1",
+    "status": "PASS",
+    "child_started": true,
+    "returncode": 0,
+    "error": null,
+    "worker_CPU_s": 0.6884709999999999,
+    "worker_peak_RSS_KiB": 41832,
+    "coordinator_CPU_s": 0.007102742999999998,
+    "wall_s": 0.7222682440001336,
+    "lease_removed": true,
+    "global_spend": null,
+    "remaining_global_budget": null,
+    "EXECUTION": "INDEPENDENT_REFERENCE_ONLY",
+    "PUBLICATION": "NOT_PERFORMED",
+    "BACKUP": "ROOT_OWNED",
+    "DAG": "FINITE_CHAIN_ACCURACY_REVIEW; frozen grid gate remains separate"
+  },
+  "primary_actual": {
+    "schema": "N5_CE_RESOLVENT_RECOVERY_PRIMARY_V2",
+    "status": "FAILED_RETAINED",
+    "physical_input_id": "n5_ce_resolvent_recovery_input_20261024_v2",
+    "run_id": "n5_ce_resolvent_recovery_primary_20261024_v2",
+    "matrix_count": 12,
+    "linear_RHS_count": 108,
+    "source_weighted_rows": 36,
+    "new_ODE": 0,
+    "source_quadrature": 0,
+    "thermal_rate_quadrature": 0,
+    "old_historical_science_replay": 0,
+    "repeated_current_failed_attempt_case_count": 1,
+    "v1_excluded_from_admission": true,
+    "v1_raw_status": "UNRECOVERED_AFTER_WORKSPACE_LOSS",
+    "cumulative_Q_including_failed_v1": 14,
+    "cumulative_complete_cases_including_v1": 13,
+    "cumulative_RHS_including_v1": 117,
+    "constructor_calls": {
+      "__init__": 2,
+      "_load_pinned_blobs": 2,
+      "_parse_table": 4,
+      "_immutable": 22
+    },
+    "process_cpu_s": 0.279979367,
+    "global_error_bound": null,
+    "global_completion_percent": null,
+    "missing_total_non_EE_bound": null,
+    "N5": "PARTIAL/OPEN",
+    "N6_N7": "NOT_ACTIVATED",
+    "scope": "conditional finite-state first-event diagnostic; no post-event evolution, thermal assimilation or continuum/global certificate"
+  },
+  "primary_dispatch": {
+    "schema": "N5_RESOLVENT_RECOVERY_DISPATCH_V2",
+    "run_id": "n5_ce_resolvent_recovery_primary_20261024_v2",
+    "mode": "science",
+    "status": "FAILED_RETAINED",
+    "error": null,
+    "child_started": true,
+    "returncode": 1,
+    "worker_cpu_s": 0.60751,
+    "worker_peak_RSS_KiB": 123824,
+    "coordinator_cpu_s": 0.003381987000000003,
+    "wall_s": 0.62085613499994,
+    "inherited_known_worker_cpu_s": 19.728051114,
+    "global_spend": null,
+    "remaining": null,
+    "currency": null,
+    "requested_model": "gpt-6.1-sol",
+    "observed_runtime_model": "UNOBSERVED",
+    "EXECUTION": "FAILED_RETAINED",
+    "PUBLICATION": "ROOT_OWNED",
+    "BACKUP": "ROOT_PENDING",
+    "DAG": "N5_PARTIAL_OPEN_N6_N7_NOT_ACTIVATED"
+  },
+  "nonblocking_scope_notes": [
+    "Finite-chain source projection is a stated representation; q-boundary mass stays in originalactive denominator.",
+    "Grid-order diagnostics are descriptive; source-threshold/native-knot undersampling is a concrete hypothesis, not exclusivecausalproof.",
+    "Event-energy identity does not establish postevent heating, radiation or assimilation.",
+    "Exact-binary64matrix highprecision comparison is not a physical/source/continuum error certificate.",
+    "Originalfailedv1 raw remainsunrecovered, knownactual2Q1complete9RHS andCPU preserved; onlyv2raw consideredhere."
+  ],
+  "global_error_bound": null,
+  "global_completion_percent": null,
+  "EXECUTION": "INDEPENDENT_REFERENCE1_AND_STATIC_REVIEW",
+  "PUBLICATION": "NOT_PERFORMED_BY_REVIEWER",
+  "BACKUP": "ROOT_OWNED",
+  "DAG": "FINITE_CHAIN_ACCURACY_PASS; GRID_CONSISTENCY_OPEN; N4/N5PARTIAL N6/N7NOT_ACTIVATED"
+}
