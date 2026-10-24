@@ -1,0 +1,52 @@
+{
+  "schema": "CR_N5_NEUTRAL_ROOT_C9_DISPOSITION_V1",
+  "unit_id": "CR_N5_NEUTRAL_ELASTIC_FINITE_T",
+  "status": "PASS_SCOPED_WITH_RETAINED_REVIEWER_DIAGNOSTIC_CORRECTION",
+  "blocking_scientific_findings": 0,
+  "reviewed_evidence": [
+    "FROZEN_CONTRACT.md",
+    "inputs/CASE_V3.json",
+    "review/C9_REPORT.json",
+    "review/C9_RHS_ALIGNMENT.py",
+    "review/n5_neutral_c9_20261025_v2/RESULT.json",
+    "review/n5_neutral_c9_rhs_alignment_20261025_v4/RESULT.json"
+  ],
+  "correction": {
+    "old_rule": "Independent reviewer v2 applied generator tolerance 2e-13 to max signed-reward discrepancy divided by the net signed-reward norm.",
+    "source": "Four RHS.H1neutral/He4neutral diagnostics in retained v2 RESULT.json.",
+    "evidence": "Bath reward -Q^T E contains cancellation. Input CASE_V3.json, committed at S0 f6347bb4ede10df4228642e6628ba08dd6fb2947 before primary execution, separately pins independent comparison 5e-10 and generator 2e-13.",
+    "adopted_rule": "Use the frozen independent comparison gate for independently reconstructed signed reward; use unchanged generator gate on operator arithmetic scaled by its absolute component terms. Keep signed physical reward itself unchanged.",
+    "maximum_signed_net_norm_relative": 4.440586665863845e-13,
+    "maximum_absolute_component_scaled_relative": 1.4259486129731875e-19,
+    "independent_tolerance": 5e-10,
+    "generator_tolerance": 2e-13,
+    "tolerance_values_changed": false,
+    "physical_model_changed": false,
+    "production_code_changed": false,
+    "initial_failure_record_overwritten": false,
+    "affected_scope": "Only classification/scaling of the four reviewer diagnostic comparisons; completed 28 high-precision physical RHS solves are reused, not rerun.",
+    "conclusion": "Both applicable frozen criteria pass. The initial four differently defined diagnostics remain FAIL in their original record; they are not retrospectively relabelled as passing their original test."
+  },
+  "independent_reference": {
+    "precision_decimal_digits": 70,
+    "physical_RHS": 28,
+    "finest_cases": 2,
+    "includes_time_and_conditional_time": true,
+    "production_science_modules_imported": [],
+    "max_solution_norm_relative": 3.061614317105611e-11,
+    "max_reference_backward_residual": 8.772995065482909e-70
+  },
+  "operational_incidents": {
+    "v1": "Missing mpmath: actual child failed before coefficient/linear solve; recovered existing pinned wheel.",
+    "v2": "Complete physical reference with four reviewer diagnostic-definition findings, preserved.",
+    "v3": "Owned stale lease refusal before scientific child; same owner/run/receipt and absent PID checked.",
+    "v4": "Four signed-reward arithmetic checks only; no solver/MTCS replay."
+  },
+  "science_gate": "NUMERICALLY_CHECKED_SCOPED_CONDITIONAL_NEUTRAL_FP_FINITE_CHAIN",
+  "global_error_bound": null,
+  "global_completion_percent": null,
+  "EXECUTION": "C9_ADMITTED_SCOPED",
+  "PUBLICATION": "SCIENCE_COMMIT_PENDING",
+  "BACKUP": "FINAL_CANONICAL_PENDING",
+  "DAG": "N5_NEUTRAL_CHILD_COMPLETE_SCIENCE_PARENT_N5_PARTIAL_N6_N7_GATED"
+}

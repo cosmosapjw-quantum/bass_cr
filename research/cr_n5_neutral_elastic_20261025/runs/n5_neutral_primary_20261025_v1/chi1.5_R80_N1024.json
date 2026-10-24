@@ -1,0 +1,75 @@
+{
+  "generator": {
+    "H1neutral": {
+      "column_scaled_defect": 9.869625432221967e-17,
+      "detailed_balance_edge_defect": 1.8688869892444146e-16
+    },
+    "He4neutral": {
+      "column_scaled_defect": 6.911061412700406e-17,
+      "detailed_balance_edge_defect": 1.8327529554391755e-16
+    },
+    "total": {
+      "column_scaled_defect": 1.1720509328031205e-16,
+      "detailed_balance_edge_defect": 3.04303755741617e-16
+    }
+  },
+  "checks": {
+    "linear_scaled_residual": 5.783703126888016e-13,
+    "linear_rhs_residuals": [
+      2.178236785600451e-13,
+      5.783703126888016e-13,
+      3.976514079566519e-13
+    ],
+    "partition_max_abs": 1.98685512486918e-11,
+    "probability_min": 1.0776860360811387e-10,
+    "probability_max": 0.9999999997068829,
+    "energy_ledger_scaled_residual": 6.622990464558208e-12,
+    "mfpt_poisson_scaled_residual": 1.8104493383911806e-16,
+    "delta_max": 0.0002151206305230779,
+    "mfpt_bound_upper_relative_violation": 0.0,
+    "mfpt_bound_lower_relative_violation": 0.0,
+    "old_bath4_RHS_exact_reuse": true,
+    "old_CE_RHS_exact_reuse": true
+  },
+  "expansion_diagnostics": [
+    {
+      "species": "H1neutral",
+      "max_theta_over_rE": 0.0003628803834922649,
+      "active_q_eV": 1.2925999893217768,
+      "mass_ratio": 1837.152673426
+    },
+    {
+      "species": "He4neutral",
+      "max_theta_over_rE": 9.137051773376386e-05,
+      "active_q_eV": 1.2925999893217768,
+      "mass_ratio": 7296.29954171
+    }
+  ],
+  "pass_scoped": true,
+  "case": "chi1.5_R80_N1024",
+  "chi": 1.5,
+  "R": 80,
+  "N": 1024,
+  "nodes": 1456,
+  "RHS_count": 14,
+  "RHS_types": {
+    "probability_time_incoming_energy": 6,
+    "conditional_time": 2,
+    "bath_reward": 6
+  },
+  "global_error_bound": null,
+  "separate_expansion_diagnostics": [
+    {
+      "species": "H1neutral",
+      "thermal_speed_parameter_max": 0.00036288038349226496,
+      "cold_recoil_second_moment_parameter_max": 0.08709129203814359,
+      "interpretation": "diagnostics only; neither is a proved error bound"
+    },
+    {
+      "species": "He4neutral",
+      "thermal_speed_parameter_max": 9.137051773376385e-05,
+      "cold_recoil_second_moment_parameter_max": 0.021928924256103325,
+      "interpretation": "diagnostics only; neither is a proved error bound"
+    }
+  ]
+}

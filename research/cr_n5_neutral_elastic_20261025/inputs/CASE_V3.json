@@ -1,0 +1,157 @@
+{
+  "schema": "N5_NEUTRAL_ELASTIC_CASE_V3",
+  "input_id": "n5_neutral_elastic_input_20261025_v3",
+  "primary_run_id": "n5_neutral_primary_20261025_v1",
+  "test_run_id": "n5_neutral_controls_20261025_v1",
+  "plot_run_id": "n5_neutral_saved_plot_20261025_v1",
+  "consumer": "N5_C23D_H1_HE4_NEUTRAL_ELASTIC_V1",
+  "theta_eV": 0.8617333262145178,
+  "b_anchor_eV_s": 2.3306698113646996e-05,
+  "anchor_energy_eV": 0.8617333262145178,
+  "T_K": 10000.0,
+  "ne_cm3": 0.14,
+  "lnLambda_ee": 20.0,
+  "pulse_exposure_s": 10000.0,
+  "gap_eV": 10.20435,
+  "chi": [
+    1.5,
+    3
+  ],
+  "R": [
+    40,
+    80
+  ],
+  "grid_N": [
+    1024,
+    2048
+  ],
+  "primary_R": 80,
+  "source_z": [
+    "2.316",
+    "2.479",
+    "2.649"
+  ],
+  "frame": "stationary isotropic bath frame",
+  "clock": "proper seconds",
+  "units": {
+    "E": "eV",
+    "theta": "eV",
+    "mu": "eV/s",
+    "D": "eV^2/s",
+    "density": "cm^-3",
+    "time": "proper s",
+    "source_rate": "cm^-3 s^-1",
+    "pulse_heat": "eV cm^-3"
+  },
+  "closed_box": true,
+  "species": [
+    {
+      "label": "H1+",
+      "n_cm3": 0.1,
+      "Z": 1.0,
+      "r": 1836.152673426,
+      "T_K": 10000.0,
+      "theta_eV": 0.8617333262145178,
+      "lnLambda": 20.0
+    },
+    {
+      "label": "He4+",
+      "n_cm3": 0.02,
+      "Z": 1.0,
+      "r": 7295.29954171,
+      "T_K": 10000.0,
+      "theta_eV": 0.8617333262145178,
+      "lnLambda": 20.0
+    },
+    {
+      "label": "He4++",
+      "n_cm3": 0.01,
+      "Z": 2.0,
+      "r": 7294.29954171,
+      "T_K": 10000.0,
+      "theta_eV": 0.8617333262145178,
+      "lnLambda": 20.0
+    }
+  ],
+  "missing_isotope_densities": {
+    "D": null,
+    "T": null,
+    "He3": null,
+    "Li6": null,
+    "Li7": null
+  },
+  "elastic_event_hazard": null,
+  "elastic_event_count": null,
+  "helium_single_inertia": "alpha mass plus one bound electron; binding mass defect neglected",
+  "tolerances": {
+    "r1": 5e-13,
+    "charge": 2e-15,
+    "generator": 2e-13,
+    "linear": 2e-12,
+    "partition": 2e-08,
+    "probability": 2e-10,
+    "energy": 2e-08,
+    "mfpt": 2e-12,
+    "bound": 2e-10,
+    "grid": 0.005,
+    "grid_ce_relative": 0.01,
+    "grid_ce_absolute_floor": 1e-10,
+    "boundary": 1e-05,
+    "boundary_ce_absolute": 1e-07,
+    "independent": 5e-10
+  },
+  "resources": {
+    "inherited_worker_cpu_s": 29.870022114,
+    "new_unit_total_cpu_s": 60.0,
+    "test_cpu_s": 5,
+    "test_wall_s": 20,
+    "primary_cpu_s": 10,
+    "primary_wall_s": 40,
+    "review_cpu_s": 10,
+    "review_wall_s": 40,
+    "plot_cpu_s": 5,
+    "plot_wall_s": 20,
+    "worker_cpu": 0,
+    "coordinator_cpu": 8,
+    "reviewer_cpu": 1,
+    "native_threads": 1,
+    "RLIMIT_AS_bytes": 536870912
+  },
+  "neutral_species": [
+    {
+      "label": "H1neutral",
+      "n_cm3": 0.9,
+      "r": 1837.152673426,
+      "T_K": 10000.0,
+      "theta_eV": 0.8617333262145178,
+      "input": "inputs/private/PRIVATE_LXCAT_CCC_H_MTCS_20261024.txt",
+      "process_id": 25646,
+      "target": "H(1S)",
+      "row_count": 91,
+      "support_eV": [
+        0.01,
+        1000.0
+      ]
+    },
+    {
+      "label": "He4neutral",
+      "n_cm3": 0.07,
+      "r": 7296.29954171,
+      "T_K": 10000.0,
+      "theta_eV": 0.8617333262145178,
+      "input": "inputs/private/PRIVATE_LXCAT_CCC_He_MTCS_20261024.txt",
+      "process_id": 25758,
+      "target": "He(s1S)",
+      "row_count": 87,
+      "support_eV": [
+        0.1361,
+        1360.6
+      ]
+    }
+  ],
+  "binding_mass_defect": "neglected",
+  "electron_mass_kg": 9.1093837015e-31,
+  "eV_J": 1.602176634e-19,
+  "sub_q_neutral_coefficients": null,
+  "public_policy": "No rawMTCS/densearrays/peratomcoefficients/coefficient-reconstructingplots inGit; privatecanonicalretainsall"
+}

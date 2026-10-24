@@ -1,0 +1,143 @@
+{
+  "schema": "N5_NEUTRAL_R6_INDEPENDENT_ANALYTIC_REVIEW_V1",
+  "recorded_utc": "2026-10-24 21:37:49 UTC",
+  "reviewer": "/root/provider_census_next",
+  "role": "Independent analytic review; no production implementation, no production module import, no scientific numerical execution",
+  "inputs": [
+    {
+      "path": "FROZEN_CONTRACT.md",
+      "bytes": 9566,
+      "sha256": "5f929cd6673a127e4b8b430b7b3a3a30be95e47860aa1a2b57ab9699ac70055d"
+    },
+    {
+      "path": "THEORY_KO.md",
+      "bytes": 5646,
+      "sha256": "9d5e6a45e66021d0c72c50897ebbb67d4e7c0b143019883595a04771aca5fd08"
+    },
+    {
+      "path": "inputs/CASE_V3.json",
+      "bytes": 3669,
+      "sha256": "b072cf90d40c242a405cdad54b719ad4b7b1c6b2ea8ab4b517452401fa71a596",
+      "inspection_scope": "Identity capture only; not an implementation/numerical validation"
+    }
+  ],
+  "methods": [
+    "Independent two-body kinetic-energy change and angular integration",
+    "Gaussian integration-by-parts target average",
+    "Distribution-convention transformation and reverse flux substitution",
+    "Cold event second moment and angular inequality",
+    "Edgewise reversible generator and resolvent Dynkin identity",
+    "Termwise birth-death MFPT comparison"
+  ],
+  "checks": [
+    {
+      "id": "N-R6-01",
+      "target": "Distribution normalization",
+      "result": "PASS_SCOPED_ANALYTIC",
+      "basis": "p=sqrt(E) F0 maps integral sqrt(E)F0 dE=1 to integral p dE=1; flux factor E^2sigma/sqrt(E)=E^(3/2)sigma fixes D=2 epsilon theta E nu_m."
+    },
+    {
+      "id": "N-R6-02",
+      "target": "Independent first moment",
+      "result": "PASS_SCOPED_ANALYTIC",
+      "basis": "From two-body v=V+M/(m+M)g, delta E=mu_red V dot(g'-g); angular integration gives -n mu_red <g sigma_m V dot g>. With V=beta g+u and Gaussian Stein identity, obtain n mu_red[s^2<3f+gf'>-beta<g^2f>]."
+    },
+    {
+      "id": "N-R6-03",
+      "target": "Leading expansion and drift",
+      "result": "PASS_SCOPED_ANALYTIC",
+      "basis": "At fixed incident v, f=v sigma(E) and gf'=f(1+2E sigma'/sigma). Leading finite-temperature recoil yields 2 epsilon nu_m[theta(2+E sigma'/sigma)-E], matching transformed flux."
+    },
+    {
+      "id": "N-R6-04",
+      "target": "Units and convention",
+      "result": "PASS_SCOPED_ANALYTIC",
+      "basis": "n SI m^-3, v m/s, sigma m^2 gives nu s^-1. E/theta in eV gives mu eV/s, D eV^2/s. Exact mechanical first moment is J/s before division by electron-volt conversion. Var(dE)=2Ddt."
+    },
+    {
+      "id": "N-R6-05",
+      "target": "Maxwell zero flux",
+      "result": "PASS_SCOPED_ANALYTIC",
+      "basis": "For p_eq proportional sqrt(E)exp(-E/theta), p_eq'/p_eq=1/(2E)-1/theta; J=-D[p'-p_eq'/p_eq p]=0."
+    },
+    {
+      "id": "N-R6-06",
+      "target": "Cold and mass limits",
+      "result": "PASS_SCOPED_ANALYTIC",
+      "basis": "mu(theta->0)=-2 epsilon E nu_m is leading recoil; exact stationary-target factor2mM/(m+M)^2 differs at higher order. Infinite M or explicit zero density gives zero adopted coefficients. Exact cold recoil variance is not asserted to vanish."
+    },
+    {
+      "id": "N-R6-07",
+      "target": "Omitted angular moment",
+      "result": "PASS_SCOPED_ANALYTIC",
+      "basis": "Exact cold event delta E=-[2mM/(m+M)^2]E(1-cos chi). Thus D_recoil=nu_factor a^2 E^2 sigma2/2; leading ratio to Dthermal is E/(r theta)*sigma2/sigma_m, with0<=sigma2<=2sigma_m. Upper diagnostic2R/r is correct and separate from theta/(r q)."
+    },
+    {
+      "id": "N-R6-08",
+      "target": "Piecewise-linear weak flux",
+      "result": "PASS_SCOPED_ANALYTIC",
+      "basis": "Positive continuous native PLsigma gives positive continuous D, piecewise bounded mu. D' terms cancel in J. At knots weak solution requires flux matching; no delta source or smoothing is needed. Right-sided derivative is diagnostic convention; conductance uses D itself."
+    },
+    {
+      "id": "N-R6-09",
+      "target": "Actual domain and closure",
+      "result": "PASS_SCOPED_ANALYTIC",
+      "basis": "q=1.5theta or3theta to80theta is inside both declared native supports. Heavy-target speed expansion is a local diagnostic; native interpolation variation and recoil diffusion are separate model dependencies. Sub-q source coefficients stay out of scope."
+    },
+    {
+      "id": "N-R6-10",
+      "target": "Reversible generator",
+      "result": "PASS_SCOPED_ANALYTIC",
+      "basis": "New edge rates c/pi_left,c/pi_right with common storedpi give column conservation and detailed balance edgewise. cN=cEE DN/DEE is consistent with inherited common-grid conductance representation. Summing newneutralQ preserves sharedpi."
+    },
+    {
+      "id": "N-R6-11",
+      "target": "Killed resolvent and rewards",
+      "result": "PASS_SCOPED_ANALYTIC",
+      "basis": "Knew=Kold-QN,active^T is correct for column forwardQ. Added q-edge rate enters first-entry RHS. For allspecies a_b=-Q_b^T E, K E=h_CE E+sum_b a_b+q a_entry, establishing the shared stopped reward energy identity."
+    },
+    {
+      "id": "N-R6-12",
+      "target": "Fourteen physical RHS",
+      "result": "PASS_SCOPED_ANALYTIC",
+      "basis": "Six probability/time/incoming-energy RHS +two conditional-time moments +six bath rewards=14percase. Independent numerical review must include all14, includingt/v_s/v_p; not yet performed by this review."
+    },
+    {
+      "id": "N-R6-13",
+      "target": "No-CE MFPT comparison",
+      "result": "PASS_SCOPED_ANALYTIC",
+      "basis": "Birth-death T_i=sum_{k<i} [sum_{j>k}pi_j]/c_k; positive termwise1/(1+delta)<=cold/cnew<=1 yields bound. Requires identicalpi,q,U and noCE; noCE-probability monotonicity follows from this argument."
+    },
+    {
+      "id": "N-R6-14",
+      "target": "Conserved species and quotient",
+      "result": "PASS_SCOPED_ANALYTIC",
+      "basis": "Elastic channels leave electron/target/nucleus/charge counts unchanged. Opposite kinetic reward belongs to prescribed bath. Isotope aggregation needs kinetic and reward descent or explicit fractional closure; inverseM persists even identicalelectronicMTCS."
+    },
+    {
+      "id": "N-R6-15",
+      "target": "Claim boundary and input ownership",
+      "result": "PASS_SCOPED_ANALYTIC",
+      "basis": "MTCS suffices for adopted leading energyoperator; it does not specify finite event count/hazard or exact finite-mass diffusion. RawCCC/LXCat retained private; public integrated results and identities allowed by frozencontract. NG1-NG7 notapplicable; no newno-go proposed."
+    }
+  ],
+  "decision": "PASS_SCOPED_THEORY_AND_FROZEN_CONTRACT",
+  "blocking_findings": 0,
+  "confirmed_limitations": [
+    "Physical approximation error bound null; both theta/(rE) and2E/(rtheta) are diagnostics not certificates",
+    "Piecewise interpolation affects expansion regularity; weak leading operator is the adopted model",
+    "Shared invariantpi requires equalbathT andrestframe/isotropicclosure",
+    "IndependentC9all14RHS remains pending; no numeric pass inferred here",
+    "Database provenance/bytes are separately captured by sourceowner; original Eq27 bibliographic statement not independently retrieved in this review"
+  ],
+  "new_scientific_runs": 0,
+  "new_ODE": 0,
+  "old_science_replay": 0,
+  "production_code_changes": 0,
+  "EXECUTION": "R6_ANALYTIC_COMPLETE; C9_NOT_RUN",
+  "PUBLICATION": "LOCAL_REPORT_FOR_ROOT_ADOPTION; no remote mutation",
+  "BACKUP": "root_checkpoint_pending",
+  "DAG": "SelectedneutralchildmayproceedtofixedC6/C7/C9; fullN4N5PARTIAL_OPEN; N6N7GATED",
+  "global_error_bound": null,
+  "global_completion_percent": null
+}
