@@ -1,0 +1,64 @@
+{
+  "schema": "N5_EI_SELECTED_COVERAGE_DELTA_V1",
+  "prior_coverage": {
+    "source": "PR101 b65befa5187d3e1e11574a98dcadd2032831de72, reused in PR102",
+    "population_rows": 21,
+    "process_columns": 8,
+    "cells": 168,
+    "original_table_modified": false
+  },
+  "proposed_delta": {
+    "node": "CR_N5_EI_MAXWELLIAN_ENERGY_EXCHANGE",
+    "parent": "CR_N5_ATOMIC_ISOTOPE_COVERAGE",
+    "consumer": "N5_C23D_H1_HE4_EI_ENERGY_V1",
+    "state": "DERIVED_SCOPED_NUMERICAL_PENDING",
+    "process": "electron-ion elastic Coulomb energy exchange",
+    "quantity_kind": ["Ito drift eV/s", "energy diffusion eV^2/s", "opposite bath energy reward eV"],
+    "finite_collision_event_hazard_s_inv": null,
+    "populations": [
+      {"isotope":"H1","charge":1,"elemental_source_label":"HII","density_cm3":0.1,"mass_ratio":1836.152673426},
+      {"isotope":"He4","charge":1,"elemental_source_label":"HeII","density_cm3":0.02,"mass_ratio":7295.29954171},
+      {"isotope":"He4","charge":2,"elemental_source_label":"HeIII","density_cm3":0.01,"mass_ratio":7294.29954171}
+    ],
+    "isotope_resolution": "new explicit conditional H1/He4 mass assignment to prior elemental densities; isotope abundances not supplied by old source",
+    "He_plus_inertia": "alpha nucleus plus one electron; binding mass defect neglected only in inertia",
+    "T_K_selected": [10000],
+    "Ti_equals_Te": true,
+    "lnLambda_prescribed": 20,
+    "thermal_ne_cm3": 0.14,
+    "frame": "common bath rest frame; Maxwellian finite-mass charged ions",
+    "clock": "proper seconds",
+    "model": "dilute nonrelativistic leading-log Landau test electron, ionic net point charge",
+    "energy_domain_selected": "0<E<=80*theta; actual source initially0<E<10eV; first-entry grid begins chi*theta",
+    "nuclei_incidence": "zero for each ion; elastic channel",
+    "charge_incidence": "zero including tagged electron",
+    "energy_owner": "each ion bath receives minus the same electron kinetic energy moment; no second stopping heat",
+    "ion_temperature_feedback": false,
+    "ionic_internal_state_change": false,
+    "screening_calculated_self_consistently": false,
+    "physical_model_error_bound": null
+  },
+  "missing_actual_species_contributions": {"D":null,"T":null,"He3":null,"Li6":null,"Li7":null},
+  "other_processes": {
+    "CI":"prior finite-source/gap-tail/secondary-energy obligations unchanged",
+    "RR":"capture-energy/Milne/isotope pair obligations unchanged",
+    "DR":"selected partially stripped-ion numerical provider missing",
+    "CX":"prior conditionalD43K pair reused, missing partners/products unchanged",
+    "neutral_elastic":"tagged electron-neutral momentum/energy kernel still missing",
+    "bound_bound_CE":"PR102 exact saved groundH first-event baseline reused; PHYS84 owner remains numerical-admission wait",
+    "HE_angular":"HE97 continuous PWBE model scoped only; physical accuracy/recoil/consumer open",
+    "nuclear":"PHYS87 active separate neutron-capture owner; not duplicated"
+  },
+  "isotope_quotient": {
+    "reused_condition":"P Q = Qbar P and c^T = cbar^T P",
+    "mass_dependence":"different r changes A(rE/theta)/r; do not merge species merely by charge or elemental label",
+    "general_quotient_admitted":false
+  },
+  "dominant_omitted_process_ranking":null,
+  "global_error_bound":null,
+  "global_completion_percent":null,
+  "N4":"PARTIAL/OPEN",
+  "N5":"PARTIAL/OPEN",
+  "N6":"PREDECESSOR_GATED",
+  "N7":"PREDECESSOR_GATED"
+}
