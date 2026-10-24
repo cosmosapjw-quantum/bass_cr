@@ -1,0 +1,99 @@
+{
+  "schema": "N5_CE_RESOLVENT_BUDGET_CONTINUITY_V1",
+  "inherited_known_bounded_worker_cpu_s": 19.209296114,
+  "worker_components": [
+    {
+      "id": "lost_v1_controls",
+      "cpu_s": 0.239278
+    },
+    {
+      "id": "lost_v1_failed_primary",
+      "cpu_s": 0.279477
+    },
+    {
+      "id": "recovery_v2_controls",
+      "cpu_s": 0.358448
+    },
+    {
+      "id": "recovery_v2_primary",
+      "cpu_s": 0.60751
+    },
+    {
+      "id": "native_v3_control",
+      "cpu_s": 0.322367
+    },
+    {
+      "id": "native_v3_primary",
+      "cpu_s": 0.550025
+    },
+    {
+      "id": "independent_v2_Decimal80",
+      "cpu_s": 0.688471
+    },
+    {
+      "id": "independent_v3_Decimal80",
+      "cpu_s": 0.799264
+    },
+    {
+      "id": "saved_output_figure",
+      "cpu_s": 1.776108
+    }
+  ],
+  "new_known_bounded_worker_cpu_s": 5.620948,
+  "known_bounded_worker_lineage_cpu_s": 24.830244114,
+  "independent_review_included_once": 1.487735,
+  "separate_known_root_saved_output_analysis_cpu_s": 0.054974463,
+  "separate_mechanical_samples": {
+    "review_summary_cpu_s": 0.016845157,
+    "freshness_receipt_write_cpu_s": 0.003284493,
+    "final_freshness_copy_cpu_s": 0.003932157,
+    "S0_archive_cpu_s": 0.477434078,
+    "S0_copy_cpu_s": 0.005671543,
+    "V2_raw_archive_child_cpu_s": 0.168369,
+    "V2_raw_archive_coordinator_cpu_s": 0.002129297,
+    "REC133_readonly_download_cpu_s": 0.142911826
+  },
+  "coordinator_and_packaging": "Read per-stage dispatch and backup receipts; samples are not a complete mechanical total. No double-counting of nested worker timers.",
+  "observed_failed_mechanical_actions": [
+    {
+      "kind": "oversized exec argument rejected before child start",
+      "science_started": false,
+      "cpu_s": null
+    },
+    {
+      "kind": "saved-output schema lookup redshift vs z",
+      "science_started": false,
+      "cpu_s": null
+    },
+    {
+      "kind": "read-only suffix inventory missed json import; corrected read succeeded",
+      "science_started": false,
+      "cpu_s": null
+    },
+    {
+      "kind": "Git binary base64 preparation interrupted before any create_blob call; 0 remote uploads; canonical raw publication used",
+      "science_started": false,
+      "cpu_s": null
+    }
+  ],
+  "global_spend": null,
+  "monetary_spend": null,
+  "remaining": null,
+  "currency": null,
+  "unmeasured_remote_CAS_cost": null,
+  "unmeasured_model_and_IO_cost": null,
+  "actual_primary_counts": {
+    "Q_built": 22,
+    "completed_cases": 21,
+    "RHS": 189,
+    "retained_raw_completed_cases": 20,
+    "retained_raw_RHS": 180,
+    "repeated_current_failed_attempt_complete_case": 1,
+    "historical_old_science_replay": 0,
+    "new_ODE": 0,
+    "source_quadrature": 0,
+    "thermal_rate_quadrature": 0,
+    "NCP_dispatch": 0
+  },
+  "scope": "Known bounded worker lineage lower bound, not total project cost. Counts/cost of the lost failed v1 remain charged; no reset."
+}
