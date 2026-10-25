@@ -1,0 +1,154 @@
+{
+  "schema": "CR_N5_RR_MILNE_INDEPENDENT_R6_V1",
+  "unit": "CR_N5_H1_GROUND_RR_MILNE_FINITE_CHAIN",
+  "reviewer": {
+    "role": "independent theory reviewer",
+    "agent": "/root/current_provider_census",
+    "requested_model": "inherited Astra",
+    "observed_runtime_model": null
+  },
+  "contract": {
+    "path": "research/cr_n5_rr_milne_20261025/FROZEN_CONTRACT.md",
+    "sha256": "f98edd820926fcf4432858f8bdeafdd782a7bc97e9f274e0f849f7c8c5114cd2",
+    "sections_reviewed": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ]
+  },
+  "method": "Read root frozen contract, original PR151 Milne derivation and independently admitted rates/review, actual PR104 case summary and recovered input locations; independent phase-space algebra, finite Markov resolvent proof, signed energy/stoichiometry check. No numerical scientific reruns.",
+  "checks": [
+    {
+      "id": "R6-01",
+      "result": "PASS",
+      "claim": "Existing Milne and Verner results are reused; new contribution is tagged finite-chain RR consumer.",
+      "evidence": "PR151 source code/theory and review plus contract1"
+    },
+    {
+      "id": "R6-02",
+      "result": "PASS",
+      "claim": "Maxwell energy PDF integration of sigma_RR=sigma_PI*(E+I)^2/(d*me*c^2*E) gives C/D thermal Milne coefficient with d=2gion/gatom=1.",
+      "proof": "fE*v=2sqrt(2)*E*exp(-E/kT)/(sqrt(pi)*sqrt(me)*(kT)^1.5); multiplying sigma_RR gives prefactor2sqrt(2)/(d*sqrt(pi)*me^1.5*c^2*(kT)^1.5)=C/D."
+    },
+    {
+      "id": "R6-03",
+      "result": "PASS",
+      "claim": "RR hazard uses n_HII=.1cm^-3 and v in cm/s; cross-section dimensionless factor retains cm^2.",
+      "evidence": "contract2; no ne substitution"
+    },
+    {
+      "id": "R6-04",
+      "result": "PASS",
+      "claim": "The source-native13.6eV threshold and zero-recoil heavy-target convention are explicit; no finite-mass or isotope precision borrowed.",
+      "evidence": "contract2"
+    },
+    {
+      "id": "R6-05",
+      "result": "PASS",
+      "claim": "Stored thermal reference maps by (m_REI/m_consumer)^1.5; no historical quadrature replay.",
+      "proof": "All other source/temperature constants equal, alpha proportional me^-3/2."
+    },
+    {
+      "id": "R6-06",
+      "result": "PASS",
+      "claim": "Spontaneous component does not require an invented photon occupation. Retained photon reward and absent post-capture continuation are distinct from total physical RR.",
+      "evidence": "contract2"
+    },
+    {
+      "id": "R6-07",
+      "result": "PASS",
+      "claim": "Connected finite birth-death active chain with lower first-entry absorption and reflecting upper boundary is transient; adding nonnegative killing preserves nonsingular M-matrix inverse positivity.",
+      "evidence": "PR104 retained chain contract; no new generator"
+    },
+    {
+      "id": "R6-08",
+      "result": "PASS",
+      "claim": "p_RR=K^-1 lambda and marked first moment r_RR=K^-1(lambda*E) are correct; conditional-time moments equal K^-1 p for each terminal event.",
+      "proof": "Integrate exp(-Kt) against hazard, energy-hazard and t*hazard; integral t exp(-Kt)=K^-2."
+    },
+    {
+      "id": "R6-09",
+      "result": "PASS",
+      "claim": "Rare bound w/(1+eta)<=p<=w for w=K0^-1lambda,eta=max(w).",
+      "proof": "Knew*w=lambda+Lambda*w gives w-p=Knew^-1Lambda*w>=0 and <=eta*Knew^-1lambda=eta*p."
+    },
+    {
+      "id": "R6-10",
+      "result": "PASS",
+      "claim": "Stable paired deltaCE and deltat follow resolvent identity and are nonpositive.",
+      "proof": "For K0*uold=b,Knew*unew=b, Knew*(unew-uold)=-Lambda*uold; nonnegative inverse and old positive u imply sign."
+    },
+    {
+      "id": "R6-11",
+      "result": "PASS",
+      "claim": "RR stoichiometry conserves charge and H1 nuclei; photon(E+I) plus atomic internal(-I) equals removed electron kinetic E.",
+      "evidence": "contract4; removal reward not a third reservoir"
+    },
+    {
+      "id": "R6-12",
+      "result": "PASS",
+      "claim": "Old entry/inactive source ownership is retained; RR is integrated only on inherited active paths.",
+      "evidence": "contract3/4"
+    },
+    {
+      "id": "R6-13",
+      "result": "PASS",
+      "claim": "All20RHS percase have distinct declared role; independent conditional-time RHS must derive from independent solved probability vectors.",
+      "evidence": "contract3/5"
+    },
+    {
+      "id": "R6-14",
+      "result": "PASS",
+      "claim": "Real operator sum and rounded binary64 diagonal are distinct. Independent Decimal70 from_float sums and per-RHS relative5e-10 compare intended finite-chain quantities.",
+      "evidence": "contract5/7"
+    },
+    {
+      "id": "R6-15",
+      "result": "PASS",
+      "claim": "Event-scale5e-13 RR ledger criterion tests small component independently of gross2e-8 stopped energy balance.",
+      "evidence": "contract7"
+    },
+    {
+      "id": "R6-16",
+      "result": "PASS",
+      "claim": "Finite grid/domain comparisons are observed numerical diagnostics; global error/completion remain null; N4/N5partial N6/N7gated.",
+      "evidence": "contract5/6"
+    }
+  ],
+  "findings": {
+    "blocking": 0,
+    "resolved": [
+      {
+        "subject": "tiny diagonal addition",
+        "evidence": "Rare lambda increment can be small compared with storedK0diagonal",
+        "impact": "Exact resolvent bound refers to intended real sum; rounded diagonal is an approximation",
+        "minimum_correction": "contract7 requires Decimal(K0)+Decimal(lambda) and reports binary64 addition loss",
+        "status": "CLOSED_IN_CONTRACT"
+      },
+      {
+        "subject": "tiny RR energy sign",
+        "evidence": "Gross stopped-energy tolerance alone may not detect incorrect small RR binding-energy sign",
+        "impact": "Wrong photon/internal ownership could hide",
+        "minimum_correction": "contract7 adds event-scale5e-13 control and wrong-sign mutation",
+        "status": "CLOSED_IN_CONTRACT"
+      }
+    ]
+  },
+  "decision": "PASS_SCOPED_FOR_PRESCRIBED_IMPLEMENTATION_AND_BOUNDED_EXECUTION",
+  "permission": "Proceed with prescribed controls and primary once immutable input preparation/pins and actual resource/lease admission are complete. No relaxation of source/criteria/budget; C9 numerical admission remains pending.",
+  "actual_scientific_execution": 0,
+  "strong_no_go": {
+    "claimed": false,
+    "NG1_NG7": "NOT_APPLICABLE_NO_NEW_NO_GO"
+  },
+  "axes": {
+    "EXECUTION": "R6 analytic review completed; controls/primary pending",
+    "PUBLICATION": "local independent review only",
+    "BACKUP": "local review; checkpoint backup pending root",
+    "DAG": "Dependency-ready N5 scoped RR component; parent N5PARTIAL N6/N7gated"
+  }
+}
