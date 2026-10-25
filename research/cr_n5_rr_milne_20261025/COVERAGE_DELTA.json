@@ -1,0 +1,332 @@
+{
+  "schema": "CR_N5_ADDITIVE_H1_GROUND_SPONTANEOUS_RR_COVERAGE_DELTA_V1",
+  "unit": "CR_N5_H1_GROUND_RR_MILNE_FINITE_CHAIN",
+  "consumer": "N5_C23D_H1_RR_MILNE_V1",
+  "gate": "NUMERICALLY_CHECKED_SCOPED_CONDITIONAL_H1_SPONTANEOUS_RR_FINITE_CHAIN",
+  "operation": "APPEND_SCOPED_COMPONENT_WITHOUT_REPLACING_BASELINE_CELLS",
+  "baseline": {
+    "repo": "cosmosapjw-quantum/bass_cr",
+    "commit": "257007cc708d0db403ec2ff0c741e4a10b6207ab",
+    "path": "research/cr_n5_rate_semantics_20261024/intake/COVERAGE_MATRIX.json",
+    "git_blob": "f3ed21ef7f3a63f5f7480911b9fa53a0cf2c1f04",
+    "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/257007cc708d0db403ec2ff0c741e4a10b6207ab/research/cr_n5_rate_semantics_20261024/intake/COVERAGE_MATRIX.json",
+    "population_count": 21,
+    "process_count": 8,
+    "cell_count": 168,
+    "populations": [
+      "n:0",
+      "H1:0",
+      "H1:1",
+      "D:0",
+      "D:1",
+      "T:0",
+      "T:1",
+      "He3:0",
+      "He3:1",
+      "He3:2",
+      "He4:0",
+      "He4:1",
+      "He4:2",
+      "Li6:0",
+      "Li6:1",
+      "Li6:2",
+      "Li6:3",
+      "Li7:0",
+      "Li7:1",
+      "Li7:2",
+      "Li7:3"
+    ],
+    "processes": [
+      "CI",
+      "RR",
+      "DR",
+      "CX",
+      "PI",
+      "neutral_elastic",
+      "bound_bound",
+      "electron_ion"
+    ],
+    "cell_modifications": 0,
+    "all_original_rate_value_nulls_preserved": true,
+    "baseline_H1_charge1_RR": {
+      "status": "CONDITIONAL_ELEMENTAL_EQUALITY_MODEL",
+      "providers": [
+        "HE32_ELEMENTAL_PI_RR"
+      ],
+      "rate_value": null,
+      "reason": "thermal average and case A only; not tagged capture hazard"
+    }
+  },
+  "component_delta": {
+    "population": "H1:1",
+    "process": "RR",
+    "subchannel": "H1+ + tagged electron -> H1(1s) + photon; spontaneous component",
+    "status": "NUMERICALLY_CHECKED_SCOPED_CONDITIONAL_H1_SPONTANEOUS_RR_FINITE_CHAIN",
+    "rate_kind": "TAGGED_ELECTRON_HAZARD_S_INVERSE_AS_FUNCTION_OF_E",
+    "density_owner": "frozen H1+ target density",
+    "target_density_cm3": 0.1,
+    "thermal_electron_density_cm3": 0.14,
+    "scalar_rate_value": null,
+    "scalar_null_reason": "An energy-dependent hazard and finite-chain event probability are supplied; no context-free total RR scalar is asserted.",
+    "cross_section": "sigma_PI(E+I)*(E+I)^2/[d*m_e*c^2_eV*E]",
+    "hazard": "n_H1plus*100*sqrt(2*E*eV_J/m_e)*sigma_RR_cm2",
+    "binding_eV": 13.6,
+    "electronic_g_bound": 2,
+    "electronic_g_ion": 1,
+    "saha_d": 1,
+    "temperature": {
+      "consumer_baths_K": 10000,
+      "consumer_other_temperature_admission": null,
+      "provider_saved_thermal_sample_K": [
+        100,
+        1000000
+      ],
+      "provider_thermal_scope_not_consumer_temperature_certificate": true
+    },
+    "energies": {
+      "initial_selection_eV": {
+        "lower": 0,
+        "lower_open": true,
+        "upper": 10,
+        "upper_open": true
+      },
+      "theta_eV": 0.8617333262145178,
+      "active_lower_chi": [
+        1.5,
+        3
+      ],
+      "reflecting_upper_R": [
+        40,
+        80
+      ],
+      "source_native_PI_photon_eV": [
+        13.6,
+        50000
+      ],
+      "source_extension_above_support": null,
+      "below_first_entry_continuation": null
+    },
+    "frame": "stationary-heavy-target, zero recoil, nonrelativistic; bath-frame tagged electron energy",
+    "isotope_assignment": "conditional elemental H I source -> H1 ground capture; empirical isotope resolution not certified",
+    "initial_population": "same C23D impulsive source; exposure10000 proper s; no continuous chemistry",
+    "source_provenance": [
+      {
+        "repo": "cosmosapjw-quantum/rei_bianchi",
+        "commit": "8a4f5df46f6e3058f5e685b85cc1cf3c20926368",
+        "path": "research/microphysics_r9_20261015/unit8_remaining_bridges_20261016/spec/LI_THERMAL_THEORY.md"
+      },
+      {
+        "repo": "cosmosapjw-quantum/bass_cr",
+        "commit": "257007cc708d0db403ec2ff0c741e4a10b6207ab",
+        "path": "research/cr_c23b_source_frame_20261023/source_providers/spectral_photo_source.py",
+        "git_blob": "e7d474d5145cb264102206e0403b0aa5916c3140",
+        "photo_table_sha256": "a53e73b0af4cc6b801aef67b84bd964e3ed8c9c4992f214e4a69dc7e4443f389"
+      }
+    ],
+    "outputs": {
+      "primary": "runs/n5_rr_milne_primary_20261025_v1/SOURCE_WEIGHTED_RESULTS.json",
+      "independent": "runs/n5_rr_milne_c9_20261025_v1/RESULT.json",
+      "kinetic_saved_comparison": "runs/n5_rr_milne_kinetic_comparison_20261025_v2/RESULT.json"
+    },
+    "model_omissions": {
+      "photon_occupation": null,
+      "stimulated_hazard": null,
+      "all_level_total_RR": null,
+      "excited_state_cascade": null,
+      "finite_proton_mass_recoil": null,
+      "post_capture_PI_feedback": null
+    }
+  },
+  "already_bound_reused_components": [
+    {
+      "population": "thermal electron bath",
+      "process": "EE",
+      "parent_column": "outside_original_eight_atomic_columns",
+      "authority": "PR59/C23D/PR102/PR103/PR104",
+      "status": "SAVED_DIFFUSIVE_GENERATOR_REUSED",
+      "physical_total_scattering_event_hazard": null
+    },
+    {
+      "populations": [
+        "H1:1",
+        "He4:1",
+        "He4:2"
+      ],
+      "process": "electron_ion",
+      "authority": "PR103 bdcb576f4202be81b7436726eca6b588029de840",
+      "status": "CONDITIONAL_MASS_DEPENDENT_DIFFUSIVE_ENERGY_REWARDS_REUSED",
+      "densities_cm3": [
+        0.1,
+        0.02,
+        0.01
+      ]
+    },
+    {
+      "populations": [
+        "H1:0",
+        "He4:0"
+      ],
+      "process": "neutral_elastic",
+      "authority": "PR104 257007cc708d0db403ec2ff0c741e4a10b6207ab",
+      "status": "CONDITIONAL_LEADING_MASS_RATIO_FP_REUSED",
+      "states": [
+        "ground 1s",
+        "ground singlet"
+      ],
+      "densities_cm3": [
+        0.9,
+        0.07
+      ],
+      "physical_total_elastic_event_hazard": null
+    },
+    {
+      "population": "H1:0",
+      "process": "bound_bound",
+      "authority": "PHYS83/PR102",
+      "status": "SAVED_1S_TO_2S_2P_FIRST_EVENT_CE_REUSED",
+      "ground_density_cm3": 0.9,
+      "gap_eV": 10.20435,
+      "excited_target_populations": null
+    },
+    {
+      "populations": [
+        "D:0",
+        "D:1",
+        "H1:0",
+        "H1:1"
+      ],
+      "process": "PI_RR_CX",
+      "authority": "C23E 8e4e06361d714939513a11f64a27f02822bde2fa",
+      "status": "EXISTING_CONDITIONAL_D43K_SOURCE_MOMENTS_REUSED_NOT_ADDED_AS_NEW_TAGGED_CHANNEL",
+      "new_tagged_hazard": null,
+      "total_RR_plus_ground_RR_addition": "PROHIBITED_DOUBLE_COUNT"
+    }
+  ],
+  "electron_pool_and_energy_owners": {
+    "electron_pool": "tagged source population distinct from prescribed thermal bath; expected event extent is a ledger, not frozen-density feedback",
+    "event_number_delta": {
+      "tagged_free_electron": -1,
+      "H1plus": -1,
+      "H1ground": 1,
+      "photon": 1
+    },
+    "event_energy_eV": {
+      "removed_electron_kinetic": "-E",
+      "retained_photon": "+(E+13.60)",
+      "atomic_internal": "-13.60",
+      "finite_recoil": null
+    },
+    "final_reservoirs": [
+      "six signed EE/EI/neutral bath gains",
+      "first-entry kinetic",
+      "CE outgoing kinetic",
+      "CE atomic internal",
+      "RR retained photon",
+      "RR atomic internal",
+      "unchanged inactive-source kinetic"
+    ],
+    "electron_removal_is_additional_final_reservoir": false,
+    "charge_and_H1_nuclei_conserved": true
+  },
+  "competition": {
+    "operator": "K0=-[Q_EE+Q_EI_H1plus+Q_EI_He4plus+Q_EI_He4doubleplus+Q_neutral_H1+Q_neutral_He4]_active^T+Lambda_CE; Knew=K0+Lambda_RR",
+    "admitted_observables": [
+      "p_RR=Knew^-1 lambda_RR",
+      "r_RR=Knew^-1(lambda_RR*E)",
+      "v_RR=Knew^-1 p_RR",
+      "six signed bath rewards",
+      "stable delta_CE/delta_time"
+    ],
+    "EE_event_hazard": null,
+    "lambda_RR_divided_by_EE_event_rate": null,
+    "all_process_competition_rate": null
+  },
+  "preserved_nulls": {
+    "missing_species_densities": {
+      "D": null,
+      "T": null,
+      "He3": null,
+      "Li6": null,
+      "Li7": null
+    },
+    "CI_full_tagged_kernel": null,
+    "partially_stripped_DR": null,
+    "He_Li_CX": null,
+    "excited_state_populations": null,
+    "dominant_omitted_process_ranking": null,
+    "global_error_bound": null,
+    "global_completion_percent": null
+  },
+  "isotope_quotient": {
+    "number": "P Q = Qbar P for all admitted bath states; common generators alone do not ensure common energy rewards",
+    "energy": "c^T=cbar^T P and appropriate isotope energy-weighted source descent",
+    "recoil": "keep isotope-dependent recoil and source-coordinate conventions; no unchecked reduced-mass substitution",
+    "empirical_H_D_T_He3_He4_Li6_Li7_equivalence": null
+  },
+  "next_candidate": {
+    "status": "CANDIDATE_ONLY_NOT_EXECUTED",
+    "selection": "He4 ground spontaneous RR finite-chain consumer using existing REI151/C23B channels",
+    "channels": [
+      {
+        "reactant": "He4:2 bare ion",
+        "product": "He4:1 ground 1s",
+        "density_cm3": 0.01,
+        "native_fit_I_eV": 54.42,
+        "g_bound": 2,
+        "g_ion": 1,
+        "saha_d": 1
+      },
+      {
+        "reactant": "He4:1 ground 1s",
+        "product": "He4:0 ground singlet",
+        "density_cm3": 0.02,
+        "native_fit_I_eV": 24.59,
+        "g_bound": 1,
+        "g_ion": 2,
+        "saha_d": 4
+      }
+    ],
+    "current_parallel_check": {
+      "observed_utc": "2026-10-25 03:04:08 UTC",
+      "current_CR_branches": 183,
+      "current_CR_branch_pages": [
+        100,
+        83
+      ],
+      "current_open_PRs_reviewed": 10,
+      "source_full_census": "current_intake_20261025/provider_survey/SURVEY_REPORT.json",
+      "source_focused_refresh": "current_intake_20261025/provider_survey/COVERAGE_FRESHNESS.json",
+      "other_active_bound_He_RR_consumer": "NOT_OBSERVED_IN_THIS_SCOPE",
+      "new_CR_H1_RR_branch_owner": "root current unit",
+      "REI151_head": "8a4f5df46f6e3058f5e685b85cc1cf3c20926368",
+      "global_absence_claim": false
+    },
+    "gates": [
+      "refresh owner and actual HEAD before execution",
+      "reuse existing fit/Milne and saved thermal checks without quadrature replay",
+      "freeze conditional He4 mapping and charge/state/density/energy owners",
+      "do not promote total or stimulated RR",
+      "new input/run identity and bounded budget"
+    ],
+    "CI_alternative": "PHYS81 finite H1/He4/Li7 source providers already exist, but source-floor/tail coverage and secondary-electron energy law remain prerequisites; no new CI run here"
+  },
+  "parent_status": {
+    "N4": "PARTIAL_OPEN",
+    "N5": "PARTIAL_OPEN",
+    "N6": "PREDECESSOR_GATED",
+    "N7": "PREDECESSOR_GATED",
+    "PHYS84": "NUMERICAL_ADMISSION_WAIT",
+    "HE_ANG": "SOURCE_INPUT_PENDING"
+  },
+  "synthesis_execution": {
+    "new_numerical_tests": 0,
+    "new_solver_calls": 0,
+    "new_ODE": 0,
+    "new_quadrature": 0,
+    "old_science_replay": 0
+  },
+  "EXECUTION": "SCOPED_RR_CONSUMER_AND_C9_PASS;THIS_COVERAGE_STEP_READ_ONLY_SYNTHESIS",
+  "PUBLICATION": "ROOT_OWNED_PENDING",
+  "BACKUP": "ROOT_OWNED_PENDING",
+  "DAG": "N5_PARTIAL_OPEN_N6_N7_GATED"
+}
