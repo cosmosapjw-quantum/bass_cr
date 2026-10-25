@@ -1,0 +1,69 @@
+{
+  "schema": "CR_HE4_GROUND_RR_CONSUMER_CONTRACT_V1",
+  "node": "CR_HE4_GROUND_RR_CONSUMER_NEXT",
+  "consumer": "CR_HE4_GROUND_RR_ON_H1_SAVED_CHAIN_V1",
+  "frozen_definition": "FROZEN_CONTRACT.md",
+  "inputs": "inputs/INPUT_MANIFEST.json",
+  "config": "inputs/CONFIG.json",
+  "source_provider": {
+    "C23B_repo_commit": "257007cc708d0db403ec2ff0c741e4a10b6207ab",
+    "C23B_module_path": "research/cr_c23b_source_frame_20261023/source_providers/spectral_photo_source.py",
+    "C23B_module_sha256": "71b7e3a6b6f1c68ec15bcb19b98014bc025ef595f53df29703f11e25f36f4a8d",
+    "C23B_native_table_sha256": "a53e73b0af4cc6b801aef67b84bd964e3ed8c9c4992f214e4a69dc7e4443f389",
+    "REI151_commit": "8a4f5df46f6e3058f5e685b85cc1cf3c20926368",
+    "REI151_contract_path": "research/microphysics_r9_20261015/unit8_remaining_bridges_20261016/spec/LI_THERMAL_CONTRACT.json",
+    "model": "Adopted smooth ground-channel Verner96/Milne model",
+    "source_residual_state_resolution": "CONDITIONAL_MODEL_ASSUMPTION",
+    "experimental_isotope_resolution": null
+  },
+  "channel": {
+    "target": "He4:charge1:ground1s",
+    "electron": "tagged_fast",
+    "product": "He4:charge0:ground1s2_singlet",
+    "radiation": "spontaneous_retained",
+    "conditional_target_density_cm3": 0.02,
+    "all_prescribed_HeII_targets_are_ground": true,
+    "I_eV": 24.59,
+    "g_bound": 1,
+    "g_ion": 2,
+    "saha_d": 4,
+    "PI_photon_support_eV": [24.59, 50000.0],
+    "positive_kinetic_energy_required": true,
+    "frame": "stationary_heavy_target_bath",
+    "finite_recoil": false,
+    "conditional_isotope_mapping": "elemental HeI fit -> He4"
+  },
+  "operator": {
+    "baseline": "exact stored PR105 K_diag,K_lower,K_upper",
+    "new": "K_new = K_H1 + diag(lambda_He)",
+    "counting_rule": "H1 and He capture solved together on K_new",
+    "new_primary_cases": 8,
+    "new_primary_RHS": 192,
+    "old_primary_replay": 0,
+    "old_generator_replay": 0,
+    "source_quadrature": 0,
+    "thermal_quadrature": 0,
+    "new_ODE": 0
+  },
+  "unbound": {
+    "HeIII_capture_consumer": null,
+    "actual_photon_occupation": null,
+    "stimulated_RR": null,
+    "all_level_RR": null,
+    "angular_photon_or_recoil_source": null,
+    "post_capture_chemistry_radiation_feedback": null,
+    "global_error_bound": null,
+    "global_completion_percent": null
+  },
+  "parent_gates": {"N4":"PARTIAL_OPEN","N5":"PARTIAL_OPEN","N6":"PREDECESSOR_GATED","N7":"PREDECESSOR_GATED"},
+  "budget": {
+    "authority": "current user request plus root-defined bounded changed-consumer contract",
+    "new_unit_cpu_ceiling_s": 30,
+    "historical_known_lineage_cpu_s": "39.097868524",
+    "C23E_separate_lineage_cpu_s": "15.493261114",
+    "sum_historical_lineages_without_overlap_proof": false,
+    "reuse_unused_historical_allowance": false,
+    "global_remaining": null,
+    "currency": null
+  }
+}

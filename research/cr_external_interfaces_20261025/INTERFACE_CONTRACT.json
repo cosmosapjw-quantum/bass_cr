@@ -1,0 +1,88 @@
+{
+  "schema": "CR_EXTERNAL_INTERFACES_CONTRACT_V1",
+  "unit": "CR_EXTERNAL_INTERFACES_20261025_V1",
+  "base": "8d0a5c375589fbddadc2bb90c8117311c80bad09",
+  "objective": "source-qualified finite scalar distribution/source/event interface and actual C23B/C23E reuse",
+  "scope": {
+    "measure": "finite atomic dK; atom masses already integrated",
+    "frame": "declared isotropic bath frame",
+    "metric": "(-,+,+,+)",
+    "number_unit": "proper m^-3",
+    "rate_unit": "proper m^-3 proper s^-1",
+    "energy_unit": "J; source-native eV retained",
+    "angular_scope": "isotropic ensemble number/energy only; no individual-event angular kernel",
+    "source_native_isotope_mapping": "conditional H1/He4 and C23E D43K model retained",
+    "configured_species_cap": null
+  },
+  "interfaces": [
+    "photon/electron/baryon phase-space population",
+    "per-target/per-volume/per-reference injection",
+    "proper/comoving volume and clock conversion",
+    "single proper constant exposure",
+    "shared extent number/charge/nuclear/energy event",
+    "scalar cascade owner exchange",
+    "signed stopping boundary count/energy flux",
+    "thermal EOS heatcapacity/particle derivative"
+  ],
+  "frozen_acceptance": {
+    "actual_source_pins": "exact bytes/SHA256",
+    "C23B_SI_count_kinetic_relative": 2e-14,
+    "C23E_shared_event_energy_relative": 2e-13,
+    "guard_failures": "explicit refusal; no null-to-zero",
+    "density_exposure": "exactly once",
+    "domain_extensions": "new admission required",
+    "physical_heating_from_partition": false,
+    "momentum_law_from_scalar_RR": false
+  },
+  "verification": {
+    "run": "runs/external_interfaces_v1",
+    "controls": 26,
+    "saved_C23B_atoms": 32592,
+    "C23B_cases": 9,
+    "C23E_saved_points": 18,
+    "C23E_signed_events": 90,
+    "new_source_quadrature": 0,
+    "new_ODE": 0,
+    "old_solver_replay": 0,
+    "targeted_runner_budget_guard": "TARGETED_RUNNER_BUDGET_CHECK.json; 3 groups,4 invalid variants; no source rerun",
+    "independent_review": [
+      "review/C9_EXTERNAL_INTERFACE.json",
+      "review/C9_RUNNER_BUDGET_SUPPLEMENT.json"
+    ],
+    "final_source_version": "contracts.py,consume_saved.py,test_contracts.py exact v1; run_checks.py final budget guard with separate targeted verification"
+  },
+  "budget": {
+    "authority": "current user request for bounded new interface verification; root delegated cap before execution",
+    "new_unit_CPU_cap_s": 30,
+    "wall_per_attempt_s": 60,
+    "RAM_cap_B": 536870912,
+    "native_threads": 1,
+    "actual_new_CPU_s": 0.145485309,
+    "known_PR105_lineage_CPU_s": 39.097868524,
+    "C23E_separate_lineage_CPU_s": 15.493261114,
+    "sum_without_overlap_proof": false,
+    "global_remaining": null,
+    "currency": null,
+    "old_exhausted_allotments_reused": false,
+    "mechanical_budget_guard_CPU_s": 0.0019435209999999967,
+    "total_new_measured_CPU_s": 0.14742883
+  },
+  "claims": {
+    "derived": "dimensioned normalization and shared-extent conservation; EOS derivative",
+    "implementation_verified": "26controls and exactsavedinput adapter pass",
+    "new_microphysics_admission": false,
+    "full_heating_closure": false,
+    "C9": "PASS_SCOPED_INTERFACE_AND_SAVED_SOURCE_CONSUMPTION_WITH_RUNNER_BUDGET_DELTA",
+    "N6": "PREDECESSOR_GATED",
+    "N7": "PREDECESSOR_GATED",
+    "global_completion_percent": null,
+    "global_error_bound": null
+  },
+  "next": [
+    "Bind evaluated external distribution/history with supported species/frame/measure",
+    "Receive source-qualified HE cascade/stopping export or distinct existing scoped provider with its own domain",
+    "Receive WU evaluated beta Q/spectrum/branch/mass/clock plus all energy owners",
+    "Supply molecular and level-dependent caloric EOS when selected",
+    "Root independent review, expectedSHA publication, sourceZIP/dualbackup and DAG update"
+  ]
+}

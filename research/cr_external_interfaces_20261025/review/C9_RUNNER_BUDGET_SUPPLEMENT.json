@@ -1,0 +1,82 @@
+{
+  "schema": "CR_EXTERNAL_C9_RUNNER_BUDGET_SUPPLEMENT_V1",
+  "status": "PASS_SCOPED_RUNNER_ONLY_DELTA",
+  "reviewer": "independent he4_source_audit agent",
+  "observed_utc": "2026-10-25T13:09:10.580763+00:00",
+  "base_HEAD": "8d0a5c375589fbddadc2bb90c8117311c80bad09",
+  "AGENTS_sha256": "8d62d9758fe173263eb3820c7b00ca569193bb7f912fc3d95d145e73d4a40970",
+  "authorization": "Root explicitly authorized one small fail-closed future-run budget fix and targeted mechanical controls after initial independent C9.",
+  "prior_review": {
+    "path": "review/C9_EXTERNAL_INTERFACE.json",
+    "bytes": 10352,
+    "sha256": "a08c17c4767986f388927be3852564a87c917da7d6fdb9532d4151e73ebe0706"
+  },
+  "historical_claim_preserved": "At initial C9 review all four current files matched the v1 executed source. That observation remains historical; the final current runner differs by the reviewed later delta.",
+  "source_version_map": {
+    "v1_executed_runner": {
+      "path": "runs/external_interfaces_v1/EXECUTED_SOURCE/run_checks.py",
+      "bytes": 5542,
+      "sha256": "740bcb9a12727407a9cfaaacbb094951d0fd601bcc017cceb3293135cc0d116e"
+    },
+    "final_current_runner": {
+      "path": "run_checks.py",
+      "bytes": 6238,
+      "sha256": "b64de041a549eb577f4ee733293bc46465e19327b4bd0b264c691b5873c064d3"
+    },
+    "unchanged_science_source": [
+      {
+        "path": "contracts.py",
+        "bytes": 22386,
+        "sha256": "431fc4b54174bcf2fe3bcacba063d0b52810a2e274cdb22429a0d787ef97e07e",
+        "exact_executed_v1_bytes": true
+      },
+      {
+        "path": "consume_saved.py",
+        "bytes": 9670,
+        "sha256": "3e648f7e72e5478d4491facd4d2e5db3d4a0f8b73481f280d855f368d8205ee4",
+        "exact_executed_v1_bytes": true
+      },
+      {
+        "path": "test_contracts.py",
+        "bytes": 12563,
+        "sha256": "694b276f8c43434989837e60a7eba45dc2e89908899c42ff3a4c610c29b8a6e9",
+        "exact_executed_v1_bytes": true
+      }
+    ]
+  },
+  "delta_review": [
+    "Adds math import and prior_attempt_costs; replaces receipt-only glob with examination of every prior run directory except current create-only output.",
+    "Missing receipt produces UNKNOWN_PRIOR_ATTEMPT_BUDGET instead of silently returning omitted cost.",
+    "Boolean, non-real, nonfinite and negative recorded costs are rejected; absent CPU_s is rejected as None.",
+    "Each accepted prior receipt contributes its cost once. A new directory created before a guard rejection remains incomplete and therefore blocks later admission until its cost is resolved.",
+    "No source coefficient, normalization, event owner, numeric tolerance, science input or prior v1 output changed."
+  ],
+  "targeted_mechanical_evidence": {
+    "path": "TARGETED_RUNNER_BUDGET_CHECK.json",
+    "bytes": 546,
+    "sha256": "9444bd19380494a1ae995e738f7a0b8c8781f0e8fee9349d55ca498ea65efde7",
+    "receipt_path": "runs/runner_budget_guard_v1/RECEIPT.json",
+    "receipt_exact_same_bytes": true,
+    "status": "PASS_SCOPED_MECHANICAL_BUDGET_GUARD",
+    "groups": 3,
+    "invalid_variants": 4,
+    "CPU_s": 0.0019435209999999967,
+    "science_replay": 0,
+    "source_quadrature": 0,
+    "ODE": 0
+  },
+  "review_method": "Read-only narrow source diff and receipt inspection plus source-byte identity verification; no reviewer test or old-suite execution.",
+  "current_external_unit_measured_CPU_s": "0.147428830",
+  "cost_components_CPU_s": {
+    "original_scoped_interface_execution": "0.145485309",
+    "targeted_runner_mechanical_check": "0.001943521"
+  },
+  "prior_budgets_reset": false,
+  "physics_C9_conclusion": "PASS_SCOPED_INTERFACE_AND_SAVED_SOURCE_CONSUMPTION retained",
+  "N6": "PREDECESSOR_GATED",
+  "N7": "PREDECESSOR_GATED",
+  "physical_heating_complete": false,
+  "global_remaining": null,
+  "global_completion_percent": null,
+  "global_error_bound": null
+}
