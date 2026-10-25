@@ -1,0 +1,231 @@
+# PHYS79 최종 과학 보고서: 정의역을 보존한 CI/CX와 고립계 열 보존 검증
+
+작성일: 2026-10-22. 연구 단위: COLLISIONAL_SOURCE_DOMAIN_AND_CONSERVATIVE_OPERATOR. 실제 부모는 PHYS78 최종 HEAD 91d0846a940abf7817c900102dab488ff87e6a82이다. 게시 대상은 [Draft PR134](https://github.com/cosmosapjw-quantum/WU088_HH/pull/134), branch research/hh-phys79-collisional-closure-20261022이다. 이 문서의 과학 수치는 저장된 실행·검증 기록을 따른다. S2 과학 commit과 최종 전달 HEAD는 게시 후 실제 delivery receipt로 결속하며, 아직 확인하지 않은 해시를 추정해서 기입하지 않는다.
+
+## 1. 이번에 얻은 결과와 그 의미
+
+PHYS79는 전자충돌 이온화(CI)의 원소별 여섯 계수와 정의역을 확인하고, 이를 동위원소별 **13개 CI 전이**에 연결한 보존적 연산자를 구현했다. 그중 실제 저장 궤적의 온도에서 허용되는 중성 원자 CI **7개 전이**와 D–H 바닥상태 전하교환(CX) **두 방향**을 선택하여 국소 열·이온화 에너지 회계를 닫았다. 모든 슬롯이 등록되어 있다는 사실과 특정 실험에서 모든 전이가 허용된다는 판정을 구분한다. 이번 고온 대조 실험에서 선택된 CI는 H1/D/T I→II, He3/He4 I→II, Li6/Li7 I→II이다. 초기 재고가 0인 T의 사건률은 여전히 0이다. [근거: CONTRACT.json](CONTRACT.json), [코드](source/collisional.py).
+
+변경하지 않은 PHYS78 두 궤적의 **고유 저장 시점 322개**를 읽어 새 연산자의 순간 크기를 계산했다. 정의역 안에서 H I 계열의 CI/PI 사건률 비 최댓값은 P013에서 **1.135462392**, P030에서 **1.481996447**이었다. 중성 CI의 문턱 에너지 냉각을 기존 PI 가열과 비교한 최댓값은 각각 **1.886899693**, **2.455316482**였다. 따라서 해당 저장 상태에서는 CI를 일률적으로 작은 보정이라고 가정할 수 없다. 이 평가는 이미 저장된 상태에 새 항을 대입한 조건부 진단이며, CI를 포함해 다시 푼 우주론 해의 차이를 주지는 않는다. [저장 상태 분석 요약](analysis/saved_operator/SUMMARY.json).
+
+별도로 정의한 고립계에서 **새 ODE 3개**, 즉 물리 대조 실험 2개와 C01의 수치 정련 1개를 완료했다. 실패한 새 ODE는 0개다. C01은 약 25370.66 K에서 24461.95 K로 냉각되면서 H와 Li의 이온화 분율이 변했다. C02는 D의 작은 동위원소 결합에너지 차이가 만드는 **0.206919573 mK** 냉각을 독립 에너지 관계로 확인했다. 고유 경량 시험은 **24/24 PASS**이며, C9의 F1·F2·N1 지적은 수정 후 표적 재검사에서 닫혔다. [실행 요약](results/ISOLATED_SUMMARY.json), [경량 시험](verification/LIGHT_TEST_RECEIPT.json), [C9 재검사](verification/C9_TARGETED_RECHECK.json).
+
+전체 COLLISIONAL_ATOMIC_AND_THERMAL_CLOSURE의 상태는 **PARTIAL_WITH_EXECUTABLE_SUBSET**이다. 저온 CI, He/Li CX 최종상태·방사 에너지, D의 PI/RR 에너지 연결, 재결합에서 z20까지의 초기 전하 계약은 OPEN이다. **HH_R10=OFF, Production admission=NOT_ISSUED**를 유지한다. [DAG_OVERLAY.json](DAG_OVERLAY.json).
+
+## 2. 시작 전에 확인한 실제 identity와 조사 범위
+
+PR133의 실제 branch HEAD는 사용자 전달과 일치하는 91d0846a940abf7817c900102dab488ff87e6a82였고, 직접 부모는 과학·결과 commit b001e69668b2d2c2557b51830f5f732164b56ce0이었다. 두 commit 사이의 실제 차이는 문서·전달 파일 10개이며, 과학 소스·원시 결과·그림의 변경은 없었다. PR128의 92f5ab9dba531ebe05909dcb77d3740d2c68c580은 실제 조상이고, PR129의 b76fd4b5d0dfe4850ebde66a8a10f78402d36c00도 전달된 head와 일치했다. 이 확인에 따라 기존 결과를 보존하고 새로운 단위를 additive descendant로 만들었다. [identity 조사](inventory/IDENTITY_INVENTORY_KO.md).
+
+접근 가능한 repository catalog **51개**, WU088_HH branch ref **142개**, 관련 여섯 repository의 최근 PR metadata **74개**, 별도로 조회한 sibling 실제 ref **7개**를 대조했다. 선택된 sibling report·contract·실행 receipt도 읽었다. 그러나 모든 branch의 모든 파일이나 모든 백업을 조사한 것은 아니며, 접근할 수 없는 비공개 대화 원문을 회수하거나 전수 확인했다고 주장하지 않는다. 예를 들어 REI220의 prescribed-temperature photo/RR/DR 결과, REI219의 passive nuclear 결과, HE85의 고정 온도 결과는 각각 자기 조건 아래의 근거로 남긴다. 이를 PHYS78의 자기일관 열해 또는 이번 CI/CX 에너지 계약으로 자동 승격하지 않았다.
+
+기존 최종 ZIP은 PHYS78_FINAL_20261021_91d0846a940a.zip이며, 전달 SHA256은 3eca5c5f6667af5cb0acf8ac26ad7dd65e77288bb07b05df8336a027547411c4이다. 현재 양쪽 provider metadata의 크기 10,562,602 bytes와 지정 ID를 대조했고, 외부 최종 전달 JSON의 의미 일치도 확인했다. **양쪽 ZIP 전체 bytes·CRC·375 payload SHA 검증 PASS는 2026-10-21의 과거 receipt를 재사용한 것**이다. 이번 intake에서 전체 ZIP을 새로 복원한 것으로 보고하지 않는다. Dropbox의 extracted text에 붙은 끝 LF와 원본 byte identity도 구분했다. [현재 백업 대조](inventory/backup_metadata_current.json), [전달 JSON 비교](inventory/final_json_identity_comparison.json).
+
+## 3. CI 원자료와 온도 정의역
+
+Exa와 SciSpace를 실제로 사용해 문헌을 찾고, 계수는 원저자 표와 원논문으로 확인했다. CI는 Voronov(1997)의 [저자 데이터](https://www.pa.uky.edu/~verner/dima/col/cfit.dat), [열 정의](https://www.pa.uky.edu/~verner/dima/col/cfit.txt), [원래 계산 루틴](https://www.pa.uky.edu/~verner/dima/col/cfit.f)에 따른다. 식은
+
+\[
+k_{\rm CI}(T)=A\frac{1+P\sqrt U}{X+U}U^K e^{-U},
+\qquad U=\frac{dE}{k_BT\ {\rm[eV]}}
+\]
+
+이며 결과 단위는 \(\mathrm{cm^3\,s^{-1}}\)이다.
+
+| 대상 | dE, eV | P | A, cm³/s | X | K | 최저 전자온도, eV | 최고 전자온도, keV |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| H I | 13.6 | 0 | 2.91e−8 | 0.2320 | 0.39 | 1 | 20 |
+| He I | 24.6 | 0 | 1.75e−8 | 0.1800 | 0.35 | 1 | 20 |
+| He II | 54.4 | 1 | 2.05e−9 | 0.2650 | 0.25 | 3 | 20 |
+| Li I | 5.4 | 0 | 1.39e−7 | 0.4380 | 0.41 | 1 | 20 |
+| Li II | 75.6 | 1 | 2.01e−9 | 0.2090 | 0.23 | 4 | 20 |
+| Li III | 122.4 | 1 | 9.60e−10 | 0.5820 | 0.17 | 5 | 20 |
+
+최저 범위는 **eV**, 최고 범위는 **keV**라는 원자료 단위를 그대로 보존했다. 1 eV는 약 11604.52 K이고, PHYS78에서 관찰된 약 25370.7 K는 약 2.18628 eV이다. 따라서 이 온도에서는 H I·He I·Li I의 fit만 허용된다. He II·Li II·Li III의 하한은 각각 약 34813.55, 46418.07, 58022.59 K이며, 현재 두 저장 궤적에서는 한 번도 도달하지 않는다. 약 255–300 K의 차가운 초기 구간도 이 표로 닫히지 않는다. [원자 source 조사](theory/ATOMIC_SOURCES_PHYS79.md).
+
+정의역 밖의 작은 외삽값을 물리적 상한으로 취급하지 않는다. Grackle/Janev 계열의 대안과 수치 floor도 조사했지만, 그 floor 자체가 현재 초기 온도까지의 물리적 유효성을 보장하지는 않는다. 새 연산자는 요청된 반응의 정의역을 검사해 거부하고, 저장 데이터 분석에서는 허용되지 않은 값을 NaN과 false mask로 기록한다. 0으로 채우거나, 그래프의 빈 구간을 연결하거나, 초기 population이 0이라는 이유로 원자료 범위 검사를 생략하지 않는다.
+
+H1/D/T와 각 He·Li isotope의 전자충돌 kinetics는 해당 원소 fit을 공유하는 명시적 근사다. fit의 반올림된 dE와 열 원장의 이온화 문턱도 별개로 보관한다. 원문 표의 수치를 정밀 문턱으로 몰래 교체하면 원래 fit 자체가 바뀌기 때문이다. 숫자와 출처는 [SOURCE_EVIDENCE_EXTRACTED.json](theory/SOURCE_EVIDENCE_EXTRACTED.json)에 남겼다. 이 파일은 **웹 추출문과 수치 전사**이며, 원격 PDF/ASCII 전체 원본 bytes의 새 SHA 검증을 뜻하지 않는다.
+
+## 4. 하나의 화학 에너지 원장과 온도식
+
+상태 \(Y_i=n_i/n_H\)는 기준 H1 핵당 원자·이온 개수이고, 자유전자는 \(x_e=\sum_iq_iY_i\)로 유도한다. 중성 바닥상태를 0으로 둔 누적 이온화 전위 \(\epsilon_i\)를 모든 반응이 공유한다. 화학양론 행렬을 \(S\), 기준 H당 사건률을 \(R_r\)라 하면
+
+\[
+\dot Y=SR,\qquad
+b=\sum_i\epsilon_iY_i,\qquad
+\Delta\epsilon_r=\sum_i\epsilon_iS_{ir},\qquad
+\dot b=\sum_r\Delta\epsilon_rR_r.
+\]
+
+여기서 \(b\)는 이온화에 저장된 양의 에너지다. 무복사 바닥상태 CI/CX에서는
+
+\[
+q_{\rm th}=-\sum_r\Delta\epsilon_rR_r=-\dot b.
+\]
+
+CI \(A^q+e\to A^{q+1}+2e\)는 문턱 \(I\)만큼 열을 소모하고 자유전자를 하나 늘린다. 입사 전자의 총 운동에너지를 모두 냉각으로 빼면, 최종 전자들이 여전히 가진 운동에너지를 잃게 된다. 열에너지식에 추가로 \(3k_BT/2\)를 빼는 것도 옳지 않다. 입자수가 늘어나는 효과는 온도와 열에너지 사이의 관계에서 이미 발생한다. [독립 열 유도](theory/THERMAL_CLOSURE_KO.md).
+
+단일 Maxwellian 온도의 비상대론적 이상기체에서
+
+\[
+N=\sum_iY_i+x_e,\qquad u=\frac32k_BTN,
+\]
+
+이므로 핵수가 보존되는 원자 반응에 대해 \(\dot N=\dot x_e\)이고
+
+\[
+\boxed{\dot u=-2Hu+q_{\rm th}},\qquad
+\boxed{\dot T=-2HT+\frac{2q_{\rm th}}{3k_BN}
+-\frac{T}{N}\dot x_e}.
+\]
+
+이번 고립계는 \(H=0\)이며 \(u\)를 독립적으로 적분하고 \(T\)를 복원한다. 따라서 마지막 입자수 항을 \(u\) 방정식에 다시 넣지 않는다. 코드의 밀도는 \(\mathrm{cm^{-3}}\), 반응계수는 \(\mathrm{cm^3\,s^{-1}}\), 에너지는 eV, 시간은 고유시간 s이다. CI는 \(R=n_Hx_eY_Ak\), 두 중입자 사이 CX는 \(R=n_HY_AY_Bk\)로 계산한다.
+
+CX가 들뜬 생성종이나 광자를 만들면 에너지 원장은 더 필요하다. 탈출 광자 모멘트를 \(Q_\gamma\)라 할 때 열항은 \(-\dot b-Q_\gamma\)이며, 광자 쪽에는 \(+Q_\gamma\)가 들어간다. 총 사건률 하나로 \(Q_\gamma\)가 결정되지는 않는다. Wolfram Language의 실제 검산은 핵수·전하·사건 에너지·입자수 변화와 팽창식을 확인했다. 최초 strict JSON 출력에서 기호를 직렬화하지 못한 실패는 보존하고, InputForm으로 얻은 정확한 영 결과를 별도로 기록했다. [Wolfram receipt](verification/WOLFRAM_RECEIPT.json).
+
+## 5. D–H CX: 원래 fit와 새 상세평형 모형
+
+Savin(2002), ApJ 566, 599의 [원논문](https://arxiv.org/pdf/astro-ph/0109356)은 \(D(1s)+H^+\to D^++H(1s)\)와 역방향을 별도로 fit했다. 온도 K, 반응률 \(\mathrm{cm^3\,s^{-1}}\) 단위에서
+
+\[
+k_{f,\rm raw}
+=2.00\times10^{-10}T^{0.402}e^{-37.1/T}
+-3.31\times10^{-17}T^{1.48},
+\]
+
+\[
+k_{r,\rm raw}
+=2.06\times10^{-10}T^{0.396}e^{-33/T}
++2.03\times10^{-9}T^{-0.332}.
+\]
+
+원래 fit 범위는 2.7–200000 K이며, 두 fit의 보고된 오차는 각각 6%, 4% 미만이다. 그러나 독립적으로 근사된 두 식의 비가 정확한 상세평형을 만족하는 것은 아니다. 이번 활성 모형은 역방향 fit을 유지하고
+
+\[
+k_r=k_{r,\rm raw},\qquad k_f=k_r e^{-43/T}
+\]
+
+로 전방향을 **새로 정의**한다. 중성·이온의 병진 질량을 isotope별 \(A m_p\)로 같게 두고, 바닥상태 전자 degeneracy 비를 1로 정하며, 핵스핀 상쇄와 hyperfine 생략을 명시한 조건부 열역학 모형이다. 이 전방향에 원래 Savin 전방향 fit의 6% 정확도가 그대로 보장된다고 주장하지 않는다. 원래 두 식은 비교용 profile로 유지한다. [D 상세평형 유도](theory/DH_DETAILED_BALANCE_CLOSURE_KO.md), [독립 기호 검산](verification/DH_DB_WOLFRAM_RECEIPT.json).
+
+동시에 전역 전위에 \(I_D-I_H=43k_B{\rm K}=0.003705453302722426\) eV를 적용한다. 전방향은 이 차이만큼 흡열, 역방향은 발열이다. PHYS78의 역사적 isotope-blind 파일은 그대로 보존한다. 향후 PI/RR과 결합할 때는 D의 광자 문턱, 포획·방출 에너지, CI/CX 열 원장이 같은 전위를 사용해야 한다. 현재 CX 열만 기존 PI/RR 장부에 붙여 전체 폐쇄를 선언하는 것은 허용하지 않는다.
+
+## 6. 저장 PHYS78 상태에서의 물리적 크기
+
+분석 대상은 UV scale 1인 P013과 UV scale 2인 P030이다. 각 입력 NPZ와 metadata를 정확한 identity로 고정하고, 원래의 온도·밀도·전하·광자 상태를 바꾸지 않았다. 각 161개 시점 중 중성 CI가 허용된 시점은 P013 **66개**, P030 **63개**다. 두 궤적 모두 여섯 CI 행 전체가 동시에 허용된 시점은 0개다.
+
+| 저장 진단 | P013 | P030 |
+|---|---:|---:|
+| 저장 온도 최댓값, K | 24036.204971 | 25370.663084 |
+| 중성 CI 허용 시점 / 전체 | 66 / 161 | 63 / 161 |
+| H I 행 CI/PI 최댓값 | 1.135462392 | 1.481996447 |
+| H I 행 CI/RR 최댓값 | 7.597779713 | 10.999890288 |
+| 중성 CI 냉각 / PI 가열 최댓값 | 1.886899693 | 2.455316482 |
+| Li I 행 CI/PI 최댓값 | 3132.701883 | 3405.257177 |
+
+원소 행은 같은 전자 전이를 공유하는 isotope의 사건률을 합한 값이다. 예를 들어 H I 행은 H1/D/T의 I→II 묶음이다. 서로 다른 행의 최댓값이 같은 시점에서 발생한다고 해석해서도 안 된다. H I CI/PI가 최대인 시점은 P013에서 \(z\simeq7.64258,\ T\simeq21801.06\) K, P030에서 \(z\simeq8.87970,\ T\simeq22562.39\) K였다. [상세 표와 시점](analysis/saved_operator/SUMMARY.json).
+
+이 결과는 고온 구간의 충돌 항을 다음 결합 단계에서 검토할 충분한 근거다. 하지만 온도·전자·중성 재고가 변하면 모든 사건률도 다시 변한다. 특히 Li의 큰 비는 작은 PI 분모와 작은 원소 재고를 함께 읽어야 하며, 그 수치만으로 Li가 전체 열예산을 지배한다고 결론내릴 수 없다. 같은 궤적의 성분 분석은 species-off 인과 실험이 아니다. 기존 31개 PHYS78 pilot이나 정련 궤적을 재적분하지 않았다.
+
+Li I CI/PI가 최대인 시점의 절대 CI flux는 P013에서 1.16485e−22, P030에서 1.93640e−22 per H/s다. 같은 시점에 Li가 전체 CI threshold cooling에서 차지하는 비율은 각각 4.24570e−7, 3.52160e−7이다. 따라서 큰 상대 사건률과 전체 열예산 기여를 이 두 수치로 구별한다. [원소별 절대 크기](theory/SAVED_TRAJECTORY_FINDINGS_KO.md).
+
+C9 에너지 안정성 수정 때문에 저장 분석을 한 번 의존성 재구축했고, 이전 결과는 history 아래 보존했다. 따라서 후처리 실행은 2회지만 고유 저장 시점은 322개다. 보조 QA의 Li 사건 이름 조회 실패도 기록했다. 이 후처리·QA 회계는 ODE 실패·재실행과 분리한다. [실행 원장](EXECUTION_LEDGER.json), [의존성 비교](analysis/saved_operator/DEPENDENCY_REBUILD_COMPARISON.json).
+
+## 7. 새 고립계 두 실험과 정련
+
+[CONTROL_PLAN.json](inputs/CONTROL_PLAN.json)은 실행 전에 물리조건, 수치조건, 허용오차를 고정했다. 두 실험 모두 일정 고유밀도, \(H=0\), 외부 열욕조 없음, PI/RR 없음의 유한 충돌계다. PHYS78의 isotope 재고는 재사용하지만 전하 초기조건은 이 대조 실험을 위해 별도로 정했다. 원래 z20의 HII/H=2e−4, 다른 존재 isotope 중성 조건을 대신한 우주론 초기조건으로 취급하지 않는다.
+
+C01은 \(n_H=10^{-3}\,\mathrm{cm^{-3}}\), \(T_0=25370.663084\) K, HII/H=0.1에서 시작한다. D 초기 이온분율은 선택한 상세평형 관계로 정하고, 다른 존재 원소는 singly ionized fraction 0.01, 더 높은 전하는 0으로 둔다. 선택한 반응은 중성 CI 7개와 D CX 두 방향이다. 약 **173272.059년** 후 온도는 **24461.949998 K**, HII/H는 **0.1082862247**, DII/D는 **0.1081168888**, Li7II/Li7은 **0.9590421956**이 되었다. 이 결과는 선택한 사건들의 이온화 에너지 소비와 입자수 증가가 함께 만드는 냉각을 보여 준다. [C01 저장 결과 요약](results/ISOLATED_SUMMARY.json).
+
+C02는 \(n_H=1\,\mathrm{cm^{-3}}\), \(T_0=300\) K, HII/H=0.5, DII/D=1e-6에서 **D CX만** 작동시킨다. 약 **305.908521년** 후 DII/D는 **0.4642164994**, HII/H는 **0.4999885803**이며 온도는 **299.9997930804 K**이다. 즉 냉각은 **0.2069195726 mK**다. CX는 총 자유전자수를 바꾸지 않으므로 이 작은 온도 변화는 주로 D 동위원소 전위 차이의 열 교환을 직접 검사한다.
+
+C02에는 전체 에너지 잔차와 독립인 확인을 추가했다. 순전방 반응 extent \(\xi\)에 대해
+
+\[
+T(\xi)=T_0-\frac{2\Delta\epsilon\,\xi}{3k_BN_0}
+\]
+
+이며, 이 온도를 사용하는 상세평형 식의 scalar root를 brentq로 구했다. 이는 추가 ODE가 아니다. 저장 온도와 extent 관계의 최대 차이는 **3.4106051e−13 K**, 최종 D 분율과 평형 root 사이의 거리는 D 재고로 나누어 **3.6354263e−9**였다. 따라서 큰 공통 H 이온화 에너지에 작은 D 열효과가 가려지는 문제를 별도 온도 척도로 확인했다. [실행 전 독립 runner 검토](verification/RUNNER_INDEPENDENT_REVIEW.json).
+
+DOP853은 isotope별 좌표와 초기 열에너지로 상태를 스케일링하고, 각 case에 161개 시점을 저장했다. 기본 rtol/atol은 2e−8/2e−11, C01 정련은 2e−10/2e−13 및 최대 step 1/4이다. 기본·정련의 최대 스케일 상태 차이는 **4.5742934e−15**였다. 이 작은 차이는 제한된 step과 같은 유한계의 저장 격자에서 얻은 수치 일치다. 일반적인 solver 정확도나 연속구간 전역 오차의 인증서로 확장하지 않는다.
+
+## 8. 검증 판정과 C9 수정
+
+경량 시험 24개는 원자료 Decimal 계산, 정확한 isotope·전하 구조, 정의역, 잘못된 입력, D 원래 fit와 새 모형의 구분, 전자수·온도 연쇄법칙, projection 부재와 배열 불변성을 확인했다. 서브테스트를 별개의 고유 시험으로 부풀리지 않았다. 실행은 1회이며 소스 의존성의 전후 해시가 일치한다. 추가 Fraction 검산의 140개 CX 구조는 가능한 화학양론 구조의 시험 수이며, 활성화한 물리 반응률 140개를 뜻하지 않는다. [경량 시험 receipt](verification/LIGHT_TEST_RECEIPT.json), [정확 화학양론](verification/STOICHIOMETRY_EXACT_CHECK.json).
+
+C9 초기 검토의 핵심 검사 29개는 재사용했다. F1은 개별 입력이 유한해도 총 입자수가 overflow될 수 있던 경계였고, 집계값과 반환 열 상태의 유한·양수 검사를 추가했다. F2는 큰 H/D 전위를 \(\epsilon\cdot\dot Y\)로 직접 상쇄할 때 작은 43 K 결손의 유효숫자가 손실되는 문제였다. 권위 있는 반응 에너지 도함수는 작은 \(\Delta\epsilon_r R_r\)를 math.fsum으로 더하도록 바꾸고, 직접 상태 수축은 constituent-energy scale을 가진 독립 진단으로 남겼다. N1은 raw_fit profile에도 상세평형을 암시하던 이름을 중립적 family ID와 별도 closure 필드로 고쳤다.
+
+수정 후 표적 검사 **14개**와 conditioning 상태 **252개**로 F1/F2/N1을 닫았다. 고정 에너지 기준을 느슨하게 바꾸지 않았다. 초기 검토·실패·수정 전 소스는 보존한다. [초기 C9](verification/C9_INITIAL_REVIEW.json), [표적 재검사](verification/C9_TARGETED_RECHECK.json).
+
+| 검증 항목 | 실행 전 고정 기준 | 저장 결과 | 판정 |
+|---|---:|---:|---|
+| isotope 상대 보존오차 | ≤1e−10 | 최대 4.3975027e−15 | PASS |
+| \(u+b\) 상대 보존오차 | ≤2e−10 | 최대 2.6645353e−15 | PASS |
+| 없는 isotope의 절대 변화 | 0 | 0 | PASS |
+| 저장 종의 최솟값 | ≥0 | 0 | PASS |
+| C01 정련 스케일 차이 | ≤1e−6 | 4.5742934e−15 | PASS |
+| C02 extent–온도 오차 | ≤1e−9 K | 3.4106051e−13 K | PASS |
+| C02 최종 평형 거리 / D 재고 | ≤1e−6 | 3.6354263e−9 | PASS |
+| 허용 source 정의역 | 모든 저장 상태 PASS | PASS | PASS |
+
+사건 에너지 잔차는 구성상 보존을 보는 진단이다. 독립 적분한 \(u+b\), scalar 평형, isotope 보존, 정련 비교가 서로 다른 오류 경로를 검사한다. 저장 점에서의 작은 잔차나 sampled quadrature는 continuum certificate가 아니다.
+
+## 9. 실행·자원·재개 회계
+
+새 실행은 공유 cooperative lease 안에서 worker 1개, process당 thread 1개로 진행했다. 실제 solve_ivp 호출 전 durable marker를 기록하고, 실패·부분 완료 identity의 자동 재시도는 막았다. 완료한 동일 identity는 NPZ와 receipt bytes를 확인한 뒤 건너뛴다. 다른 process를 종료하거나 그 소유 lease를 회수하지 않았다. [계획](inputs/CONTROL_PLAN.json), [실제 첫 호출](results/ISOLATED_COMMAND_STDOUT.json).
+
+| 회계 항목 | 이번 단위 |
+|---|---:|
+| 새 고립계 ODE | 3 = 대조 2 + 정련 1 |
+| 실패한 새 ODE | 0 |
+| 새 우주론 ODE | 0 |
+| 완료 동일 identity ODE 재생 | 0 |
+| 재개 확인의 새 ODE / 완료 skip | 0 / 3 |
+| NCP / benchmark | 0 / 0 |
+
+재개 확인에서 세 NPZ의 byte hash가 모두 유지되었다. HH1231, REI729, HH74control63, PHYS78의 완료 identity를 재실행하지 않았다. PHYS78의 과거 ODE34=실패2+pilot31+정련1과 경량 시험35 PASS는 inherited evidence다. 새 경량 시험24, C9 검사, 후처리, plotting, ODE3을 각각 별도로 센다. 초기 실행 경로 오류, Git proxy 연결 실패, JSON 출력 직렬화 문제, 후처리 보조 QA 실패도 과학 ODE 실패와 구분하여 [EXECUTION_LEDGER.json](EXECUTION_LEDGER.json)에 보존했다.
+
+## 10. 그림, 게시와 백업
+
+현재 유효한 새 그림은 **4종 PNG + 4종 PDF**다. [그림 1](figures/01_temperature_and_fit_domains.png)은 저장 온도와 원자료 정의역, [그림 2](figures/02_instantaneous_CI_PI_RR_comparison.png)는 조건부 순간 사건률·열항 비교, [그림 3](figures/03_c01_isolated_CI_CX_control.png)은 C01과 정련, [그림 4](figures/04_c02_isolated_DCX_oracle.png)는 C02의 D 분율과 작은 온도 변화를 보여 준다. 과거 preview 두 family는 history로 남기며 현재 그림 수에 합산하지 않는다. 최종 PNG는 직접 시각 확인했다. PDF는 같은 Matplotlib figure에서 출력했으며 별도 raster 시각검사를 했다고 주장하지 않는다. [저장 진단 그림 manifest](figures/FIGURE_MANIFEST.json), [고립계 그림 manifest](figures/PLOT_CONTROLS_MANIFEST.json).
+
+그림 4의 재구성 표시값 3.6474654e−13 K는 초기 열에너지에서 입자수를 역산해 그린 표시 진단이다. runner의 명시적 입자수로 평가한 acceptance 값 3.4106051e−13 K를 대체하지 않는다. 두 값의 작은 차이는 계산 순서에 따른 부동소수점 효과이며, 원래 판정 기준과 결과를 보존한다.
+
+| 단계 | 확인된 실제 게시 | 백업·전달 상태 |
+|---|---|---|
+| S0 | 77bd3cc5f482804a246a66a8b2f3b631611e3219 | 양쪽 metadata ACK |
+| S1 | b61494393532c42a12c7517408895a5cf38aea29 | 양쪽 metadata ACK |
+| S2 과학 결과 | 338fb7728e8b41f49551200b1f1ba73c047fb90c | 양쪽 전체 bytes SHA256·CRC·156 payload SHA PASS |
+| S3 최종 handoff·전달 | 실제 최종 HEAD는 외부 최종 전달 JSON 및 PR134 body에 결속 | 최종 ZIP은 외부 receipt로 별도 확인 |
+
+PR134는 실제 부모의 additive draft이며 main merge나 force update를 하지 않았다. S0/S1의 원격 검증은 Git blob identity·크기 대조이고, 전체 원격 파일 bytes를 모두 다시 내려받았다는 의미가 아니다. 백업 ACK도 Drive의 반환 ID·크기, Dropbox의 ID·크기·provider content hash 대조 범위를 명시한다. provider content hash와 원 ZIP SHA256, 전체 복원·CRC·payload 검증은 별도 항목이다. S2 과학 commit은 338fb7728e8b41f49551200b1f1ba73c047fb90c이며, S2 ZIP은 양쪽 provider에서 전체 2,531,152 bytes를 새로 복원해 원 ZIP SHA256, CRC, 156 payload SHA를 확인했다. [Drive 전체 복원](delivery/S2_DRIVE_RESTORE_RECEIPT.json), [Dropbox 전체 복원](delivery/S2_DROPBOX_RESTORE_RECEIPT.json), [S2 게시](delivery/S2_PUBLICATION_RECEIPT.json)에 실제 범위를 보존했다. 최종 HEAD와 최종 ZIP/외부 전달 JSON의 ID·SHA·검증 범위는 [전달 위치](delivery/FINAL_DELIVERY_POINTER.json)와 PR134 body에 결속한다. 과학 commit 이후 S3는 전달 문서만 바꾸며 112개 과학 payload를 유지한다. [S0 게시](delivery/S0_PUBLICATION_RECEIPT.json), [S1 게시](delivery/S1_PUBLICATION_RECEIPT.json), [S0 ACK](delivery/S0_BACKUP_ACK.json), [S1 ACK](delivery/S1_BACKUP_ACK.json).
+
+## 11. 남은 물리 의무와 다음 순서
+
+가장 직접적인 다음 일은 약 255–11605 K와 필요한 고전하 구간을 포함하는 **저온 CI source coverage**다. 원자료 cross section을 Maxwellian 적분하거나 적절한 fit를 연결하고, 정확도·단위·중복 채널을 검토해야 한다. 현재 외삽이 작아 보인다는 이유만으로 0을 선언하거나 full z20→2 실행을 승인하지 않는다.
+
+He/Li CX는 다음의 서로 다른 의무를 가진다. [Kingdon–Ferland 1996](https://articles.adsabs.harvard.edu/pdf/1996ApJS..106..205K)의 He 비복사 계수와 6000–100000 K 범위는 확인했지만, underlying Zygelman 채널의 최종상태에 맞춘 에너지 배분은 더 확인해야 한다. Li 비복사 식은 Kimura 원논문·1995 erratum의 수정 계수와 정확한 범위를 확보해야 한다. [Stancil–Zygelman 1996](https://articles.adsabs.harvard.edu/pdf/1996ApJ...472..102S)의 Li 방사 CX는 표가 10–40000 K를 다루더라도 analytic fit의 5% 범위는 20–10000 K이며, 탈출 광자 에너지 모멘트도 별도다. 이 항들은 source inventory에 보존하되 현재 열 연산자에서는 활성화하지 않았다.
+
+그다음 D의 단일 전위를 PI 문턱·RR 방출·CI/CX 에너지에 일관되게 연결하고, RECOMBINATION_TO_Z20_INITIAL_CHARGE_CONTRACT를 해결한다. Li hard-UV는 inner-shell·Auger/branching·spectral energy contract를 먼저 닫는다. Collisional excitation, free-free, Compton, 전체 핵반응·분자·스펙트럼 전달도 기존 OPEN 의무로 유지한다. n/T 또는 LiIII/IV가 기존 입력에서 0이었다는 사실은 모든 생성과정이 물리적으로 금지된다는 뜻이 아니다.
+
+non-tilted LRS Bianchi I, 같은 normal orthonormal frame, reacting gas \(\pi=0\), collisionless DM의 \(\pi_m\) 소유권은 그대로다. matter/radiation의 signed tensor를 먼저 합한 뒤 norm을 취하고, Frobenius norm과 half-contraction norm의 \(\sqrt2\) 관계를 유지한다. 이번 고립계 실험으로 이방성 인과효과, species-off 효과, 전 우주론 범위의 연속 인증을 새로 주장하지 않는다. [보존할 계약](CONTRACT.json), [다음 DAG](DAG_OVERLAY.json).
+
+## 12. 다음 작업자가 사용할 실행 인터페이스
+
+아래 명령은 repository root에서 해당 unit으로 이동한 뒤 사용하는 실제 인터페이스다. 이 보고서를 작성하면서 시험이나 과학 실행을 추가로 수행하지 않았다.
+
+    cd research/hh_phys79_collisional_closure_20261022
+    python source/run_controls.py --help
+    python source/analyze_saved.py --help
+    python source/plot_results.py --help
+    python source/plot_controls.py --help
+
+runner는 인자를 주지 않으면 preflight이며, 명시적 --preflight도 ODE를 만들지 않는다. 실제 실행 flag는 --execute다. **--resume이라는 flag는 없다.** --execute를 같은 출력 경로에 적용하면 완료 identity의 byte 확인과 skip이 자동으로 이루어진다. 이번에는 그 동작을 이미 한 번 확인했으므로 동일 질문을 위해 다시 실행할 필요는 없다.
+
+    python source/run_controls.py --preflight
+    python source/run_controls.py --execute --output results/isolated
+
+이 실행 예시는 인터페이스 설명이며 재실행 지시가 아니다. 다음 단위는 먼저 현재 actual remote ref와 최종 delivery identity, source manifest와 미해결 DAG를 확인한 후 변경된 물리 의무에 필요한 작업만 수행한다. 유도, 코드, 경량 검증, 저장 분석, 새 과학 실행, 게시, 백업, DAG의 상태를 분리해서 이어 간다. 최종 Codex 및 다음-thread handoff에는 실제 S2 과학 commit과 최종 HEAD, 새 실행 3개의 identity 및 기존 완료 재실행 금지를 함께 전달한다.
+
+**현재 과학 판정: source 정의역을 지키는 CI/D-CX 부분망과 그 고립계 검증은 완료했다. 전체 충돌·열·복사 우주론 폐쇄는 OPEN이며, HH_R10=OFF와 Production admission NOT_ISSUED를 유지한다.**
+
+

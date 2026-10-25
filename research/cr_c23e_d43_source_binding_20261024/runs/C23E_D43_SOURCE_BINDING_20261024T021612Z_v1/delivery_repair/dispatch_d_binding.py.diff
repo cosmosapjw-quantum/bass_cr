@@ -1,0 +1,65 @@
+--- executed/dispatch_d_binding.py
++++ delivered/dispatch_d_binding.py
+@@ -2,30 +2,35 @@
+ import os,sys,json,time,subprocess,fcntl,resource,datetime,hashlib
+ from pathlib import Path
+ ROOT=Path(__file__).resolve().parents[1]
+-now=datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ')
+-out=ROOT/'runs'/('C23E_D43_SOURCE_BINDING_'+now+'_v1');out.mkdir(exist_ok=False)
+-aff=sorted(os.sched_getaffinity(0));cpus=[c for c in aff if c!=55]
+-if len(cpus)<2:raise RuntimeError('No separate coordinator/worker CPU')
+-worker=cpus[-1];coord=cpus[0]
+-pre=dict(utc=now,affinity=aff,worker_cpu=worker,coordinator_cpu=coord,cgroup={p:Path(p).read_text() for p in ['/sys/fs/cgroup/cpu.max','/sys/fs/cgroup/memory.max','/sys/fs/cgroup/memory.current']},meminfo=Path('/proc/meminfo').read_text(),processes=subprocess.run(['ps','-eo','pid,comm,pcpu,rss'],capture_output=True,text=True).stdout,requested_executor='lower-tier coding agent',observed_executor='native delegated agent n5_metadata_intake; runtime model identity unobserved',threads=1,wall_cap_s=180,cpu_cap_s=60)
+-(out/'PREFLIGHT.json').write_text(json.dumps(pre,indent=2))
+-lock=open('/tmp/c23e_d43_single_worker.lease','a+');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+-# A fresh local lease, independent of external hosts; no background worker.
+-(out/'LEASE.json').write_text(json.dumps(dict(pid=os.getpid(),worker_cpu=worker,workers=1,status='ACQUIRED')))
+-env=os.environ.copy()
+-for k in ['OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS','BLIS_NUM_THREADS','NUMEXPR_NUM_THREADS','VECLIB_MAXIMUM_THREADS']:env[k]='1'
+-env['PYTHONDONTWRITEBYTECODE']='1'
+-def prepare():
+- os.sched_setaffinity(0,{worker});resource.setrlimit(resource.RLIMIT_CPU,(60,60))
+- # Python scientific environment maps large shared libraries: cap resident observed separately.
+- resource.setrlimit(resource.RLIMIT_AS,(1024**3,1024**3))
+-os.sched_setaffinity(0,{coord})
+-cmd=[sys.executable,str(ROOT/'implementation/validate_d_binding.py'),str(out)]
+-t=time.perf_counter();before=resource.getrusage(resource.RUSAGE_CHILDREN)
+-with (out/'stdout.txt').open('x') as stdout,(out/'stderr.txt').open('x') as stderr:
+- try:r=subprocess.run(cmd,env=env,stdout=stdout,stderr=stderr,preexec_fn=prepare,timeout=180);code=r.returncode
+- except subprocess.TimeoutExpired:code='TIMEOUT'
+-after=resource.getrusage(resource.RUSAGE_CHILDREN)
+-receipt=dict(command=cmd,exit_code=code,wall_s=time.perf_counter()-t,child_cpu_s=after.ru_utime+after.ru_stime-before.ru_utime-before.ru_stime,child_maxrss_KiB=after.ru_maxrss,inherited_known_cpu_s=13.331329114,monetary_spend=None,remaining_budget=None)
+-(out/'EXECUTION_RECEIPT.json').write_text(json.dumps(receipt,indent=2));fcntl.flock(lock,fcntl.LOCK_UN)
+-print(json.dumps(dict(run=str(out),**receipt),indent=2));sys.exit(0 if code==0 else 1)
++
++def main():
++    now=datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ')
++    out=ROOT/'runs'/('C23E_D43_SOURCE_BINDING_'+now+'_v1');out.mkdir(exist_ok=False)
++    aff=sorted(os.sched_getaffinity(0));cpus=[c for c in aff if c!=55]
++    if len(cpus)<2:raise RuntimeError('No separate coordinator/worker CPU')
++    worker=cpus[-1];coord=cpus[0]
++    pre=dict(utc=now,affinity=aff,worker_cpu=worker,coordinator_cpu=coord,cgroup={p:Path(p).read_text() for p in ['/sys/fs/cgroup/cpu.max','/sys/fs/cgroup/memory.max','/sys/fs/cgroup/memory.current']},meminfo=Path('/proc/meminfo').read_text(),processes=subprocess.run(['ps','-eo','pid,comm,pcpu,rss'],capture_output=True,text=True).stdout,requested_executor='lower-tier coding agent',observed_executor='native delegated agent n5_metadata_intake; runtime model identity unobserved',threads=1,wall_cap_s=180,cpu_cap_s=60)
++    (out/'PREFLIGHT.json').write_text(json.dumps(pre,indent=2))
++    lock=open('/tmp/c23e_d43_single_worker.lease','a+');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
++    # A fresh local lease, independent of external hosts; no background worker.
++    (out/'LEASE.json').write_text(json.dumps(dict(pid=os.getpid(),worker_cpu=worker,workers=1,status='ACQUIRED')))
++    env=os.environ.copy()
++    for k in ['OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS','BLIS_NUM_THREADS','NUMEXPR_NUM_THREADS','VECLIB_MAXIMUM_THREADS']:env[k]='1'
++    env['PYTHONDONTWRITEBYTECODE']='1'
++    def prepare():
++     os.sched_setaffinity(0,{worker});resource.setrlimit(resource.RLIMIT_CPU,(60,60))
++     # Python scientific environment maps large shared libraries: cap resident observed separately.
++     resource.setrlimit(resource.RLIMIT_AS,(1024**3,1024**3))
++    os.sched_setaffinity(0,{coord})
++    cmd=[sys.executable,str(ROOT/'implementation/validate_d_binding.py'),str(out)]
++    t=time.perf_counter();before=resource.getrusage(resource.RUSAGE_CHILDREN)
++    with (out/'stdout.txt').open('x') as stdout,(out/'stderr.txt').open('x') as stderr:
++     try:r=subprocess.run(cmd,env=env,stdout=stdout,stderr=stderr,preexec_fn=prepare,timeout=180);code=r.returncode
++     except subprocess.TimeoutExpired:code='TIMEOUT'
++    after=resource.getrusage(resource.RUSAGE_CHILDREN)
++    receipt=dict(command=cmd,exit_code=code,wall_s=time.perf_counter()-t,child_cpu_s=after.ru_utime+after.ru_stime-before.ru_utime-before.ru_stime,child_maxrss_KiB=after.ru_maxrss,inherited_known_cpu_s=13.331329114,monetary_spend=None,remaining_budget=None)
++    (out/'EXECUTION_RECEIPT.json').write_text(json.dumps(receipt,indent=2));fcntl.flock(lock,fcntl.LOCK_UN)
++    print(json.dumps(dict(run=str(out),**receipt),indent=2));sys.exit(0 if code==0 else 1)
++
++if __name__ == '__main__':
++    main()
