@@ -1,0 +1,40 @@
+{
+  "schema": "N5_C9_SELECTOR_REPAIR_V1",
+  "finding": "Required-selector omission could bypass source temperature or finite-window constraints",
+  "classification": "IMPLEMENTATION_VALIDATION_DEFECT",
+  "primary_run_id": "n5_ce_envelope_primary_20261024t031906828z_v1",
+  "primary_numerical_output_reused": true,
+  "science_reexecuted": false,
+  "regression_run_id": "n5_c9_selector_regression_20261024t032403142z_v3",
+  "regression_status": "PASS",
+  "old_executed_source_sha256": {
+    "decimal_reference.py": "c87fd7ab5090296c911c4bed955484040336fe917b08c693cd4f4fb3cd69ece4",
+    "dispatcher.py": "0a818f4881cbb2b1fae6ffbfc91ae1d58979420596ab6c728bf745d3ea44fa77",
+    "n5_semantics.py": "90750683e33f6b5a2ddbad245675724c77de501e88acd7c5a246264b91cbe506",
+    "run_diagnostic.py": "67e117cf4c62688253f066303d1749942f53496d25d4e72a2c891548f2bc7ec2",
+    "tests.py": "1a1c886e83d4270499fc913637e33858a83ee342d23e4a0ba0c8222d8ac084da"
+  },
+  "delivered_source_sha256": {
+    "decimal_reference.py": "c87fd7ab5090296c911c4bed955484040336fe917b08c693cd4f4fb3cd69ece4",
+    "dispatcher.py": "467c8b631a7fd4b9bce547e3f7f552c79c42a6a7e4b1e7038a3d31b4f6d2076f",
+    "n5_semantics.py": "c2892e334808d8deeffaf8b2e4f5a69795ca256813e63b08ded75fdb2880c7e4",
+    "run_diagnostic.py": "67e117cf4c62688253f066303d1749942f53496d25d4e72a2c891548f2bc7ec2",
+    "tests.py": "72e71a3991129660e5030d4e7faf2807a5100d5da0f23c57ed6a1957fb95f1ee"
+  },
+  "changed_source_files": [
+    "dispatcher.py",
+    "n5_semantics.py",
+    "tests.py"
+  ],
+  "preserved_primary_source_directory": "implementation/repair_history/primary_executed_source",
+  "production_arithmetic_changed": false,
+  "changes": {
+    "n5_semantics.py": "Require thermal T, provider-declared T/incident/domains, tagged-energy selector; reject absent or null selectors",
+    "tests.py": "Add targeted missing-selector and unchanged-valid-request regression",
+    "dispatcher.py": "Record child_started and null RSS when no child was launched"
+  },
+  "input_manifest_sha256_primary": "37f8c70705e128368c36247379858a8f245bcb6819aab3d977a2c6b0c7dc3016",
+  "input_manifest_sha256_regression": "37f8c70705e128368c36247379858a8f245bcb6819aab3d977a2c6b0c7dc3016",
+  "input_identity_equal": true,
+  "all_prior_failed_attempts_preserved": true
+}

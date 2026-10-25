@@ -1,0 +1,50 @@
+{
+  "status": "fulfilled",
+  "value": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "url": "https://github.com/cosmosapjw-quantum/bass_cr/pull/99",
+      "number": 99,
+      "state": "open",
+      "merged": false,
+      "mergeable": true,
+      "draft": true,
+      "body": "## 문제와 변경\n\n완료된 C23B 광전자 source를 기존 PR59 유한온도 EE 연산자에 연결하고, 입력·밀도·단위·유효영역을 실제 새 소비자에 결속한다. PR59–64의 완료한 계수·경계 current·MFPT·finite-bath 근거는 재사용했다.\n\n**Science commit:** d04b2a56adb4a5d55b901420aa544332b41f6dbb\n**판정:** C23D_FROZEN_MAXWELL_EE_LOW10_V1 — NUMERICALLY_CHECKED_SCOPED. Full CR_N4_STOPPING_KERNEL은 PARTIAL_OPEN.\n\n## 결과와 검증\n\n- 10000K, thermal ne=.14cm^-3, prescribed lnLambda20, closed box, 0<W<10eV. Exposure10000s로 정의한 impulsive source이며 continuous chemistry integration이 아니다.\n- Source count91.3–91.7%, energy64.5–65.9%를 연결했다. 약24.85%는 초기 bath→electron energy exchange이며 전체 순 EE bath heat는 양수다.\n- Source-weighted active first-entry means 약2.70–2.82e5s. First entry를 irreversible assimilation/Maxwellization으로 해석하지 않는다.\n- 3 primary trajectories의 spatial/time relative differences1.870019e-4/1.471581e-4; MFPT40→80 difference1.865149e-14; count/energy/projection/nonnegative/entropy guards PASS.\n- 독립 Decimal56 comparisons 최대 상대차1.738933e-15<2e-12, C9 blocking0. 경로/빈 parent 및 ODE 표기 findings CLOSED.\n- 실제 새 linear EE ODE primary3+supplement1. 이미 완료된 supplement는 비용에 포함하되 admission에는 사용하지 않았다. Coupled cosmological ODE0, old science replay0, source quadrature0. 원 raw new_ODE:0은 보존하고 additive clarification 제공.\n- Worker CPU0/coordinatorCPU8, native thread1, actual lease/create-only. Independent CPU1 포함 새 측정 workerCPU1.629692631s는 부분합이다.\n- Workspace transition 후83개 exact bytes를 retained publication payload에서 복원했다. 과학 재실행0. 회복 receipt는 document D에 게시했다.\n\n## 범위와 위치\n\n`research/cr_c23d_finiteT_source_bridge_20261024/`의 REPORT_KO, FROZEN_CONTRACT, CLAIM_GATE, LOOP_LEDGER, raw runs, independent review와 README를 참조한다.\n\nNeutral/ion/inelastic 경쟁률, 실제 atomic/isotope coverage, above10eV source, finite bath/escape, full conservative coupling은 OPEN. global_error_bound/global_completion_percent=null.\n\nEXECUTION: COMPLETE_SCOPED | PUBLICATION: expected-SHA/non-force additive draft | BACKUP: Library/Dropbox R3 PASS; Drive UNKNOWN_NO_ACK | DAG: scoped EE child complete; full stopping/N5/N6/N7 open.\n\n## 최종 배송 및 중앙 수신\n\n- Science S: d04b2a56adb4a5d55b901420aa544332b41f6dbb\n- Documents D: 4a0bbc0ed618ab6eae1b7b2714e366d803186b86\n- Central return M2: 476587d049cc5b265e599fdec45b1026d3bf6b23 (actual parent 0d3184538fcf27404d1b88572fc5b7f26432acdb; parallel HE-ANG intake preserved)\n- Git publication: expected-SHA, non-force, actual REST ref equality R1. Original40 contracts/other39wrappers/7authorities/17edges preserved.\n- Canonical ZIP: BASS_CR_C23D_EE_DELIVERY_20261024T094335KST.zip, 5989522 bytes, SHA256 c7040ba442a8d3079547c1aeb8dcb60491617c4471638db44ab55c743f19a4b9;125manifestpayloads/126members.\n- Library libfile_e9772c68ab708191b9af7f613701d487: actual-byte R3 PASS.\n- Dropbox id:BSpOijBcT10AAAAAAD_6wQ: actual-byte R3 PASS.\n- Drive: one upload attempt,160s noACK/ID,one exact-name+folder query0; UNKNOWN_NO_ACK,R3 NOT_RUN. Three-provider completion is not claimed.\n- Latest metadata refresh 2026-10-24T00:43Z:7repos1306branches/840openPRs, before ownPR99 creation. WU PHYS84 numerical admission WAIT; HE-ANG empirical source pending.\n\nFinal handoff: [delivery/HANDOFF_FINAL_KO.md](https://github.com/cosmosapjw-quantum/bass_cr/blob/4a0bbc0ed618ab6eae1b7b2714e366d803186b86/research/cr_c23d_finiteT_source_bridge_20261024/delivery/HANDOFF_FINAL_KO.md).\n\nEXECUTION: R1–R10/C1–C10 scoped unit complete | PUBLICATION: S+D+M2 acknowledged | BACKUP: Library/Dropbox R3 PASS;Drive OPEN | DAG: next CR_N5_ATOMIC_ISOTOPE_COVERAGE;full stopping/N6/N7 OPEN.\n\n### 최종 authority 사본\n\nC23D_FINAL_AUTHORITY_20261024T095555KST.json: 7864 bytes, SHA256 44b47df2e177b275abef1ec7a7a334618b7752f1dc093cb28f1254075c71d623. 실제 S/D/M2와 canonical ZIP provider receipts를 포함한다.\n\n- Library libfile_01c7911daac4819180446847c426da5b — actual-byte R3 PASS.\n- Dropbox id:BSpOijBcT10AAAAAAD_6xA — actual-byte R3 PASS.\n- 이 terminal JSON의 Drive upload는 NOT_ATTEMPTED. Canonical ZIP의 Drive UNKNOWN_NO_ACK를 대체하거나 성공으로 승격하지 않는다.\n",
+      "title": "C23D: bind saved C23B source to finite-temperature EE operator",
+      "base": "research/cr-c23c-cutoff-binding-20261023",
+      "base_sha": "ec0c2cb8cc9feae64fe028ca2a4ea0eb7d79c8f8",
+      "head": "research/cr-c23d-finite-t-source-bridge-20261024",
+      "head_sha": "4a0bbc0ed618ab6eae1b7b2714e366d803186b86",
+      "head_repo_id": 1379624838,
+      "head_repo_full_name": "cosmosapjw-quantum/bass_cr",
+      "merge_commit_sha": "29360af23ab6b9f84d6704c97afdc2fb125e0115",
+      "user": {
+        "login": "cosmosapjw-quantum",
+        "name": "cosmosapjw-quantum",
+        "email": null,
+        "avatar_url": "https://avatars.githubusercontent.com/u/58155957?v=4",
+        "id": 58155957
+      },
+      "requested_reviewers": null,
+      "requested_team_reviewers": null,
+      "diff": null,
+      "comments": null,
+      "created_at": "2026-10-24T00:43:06Z",
+      "updated_at": "2026-10-24T00:57:48Z",
+      "closed_at": null,
+      "merged_at": null,
+      "commits": 2,
+      "changed_files": 98,
+      "additions": 14803,
+      "deletions": 0,
+      "display_url": "https://github.com/cosmosapjw-quantum/bass_cr/pull/99",
+      "display_title": "C23D: bind saved C23B source to finite-temperature EE operator"
+    },
+    "isError": false
+  }
+}

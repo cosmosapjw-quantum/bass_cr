@@ -1,0 +1,99 @@
+{
+  "schema": "PHYS82_CONTRACT_V1",
+  "frozen_before_new_code_and_science_utc": "2026-10-23T02:40:59.839191+00:00",
+  "parent_HEAD": "b3ec271a96cb67e583bffa9b61533802838236f9",
+  "scope": "Li7 threshold-gap conditional source models + prescribed-exposure diagnostic; no coupled cosmological integration",
+  "I_eV": 5.39172060034581,
+  "E0_eV": 6.0,
+  "sigma0_cm2": 5.18148e-17,
+  "table_window_eV": [
+    6,
+    15
+  ],
+  "T_domain_K": [
+    255,
+    50000
+  ],
+  "p_W": "(sqrt(91/3)-1)/4",
+  "models": [
+    {
+      "name": "L0",
+      "p": "1",
+      "q": 0,
+      "amplitude": "CCC endpoint"
+    },
+    {
+      "name": "L1",
+      "p": "1",
+      "q": 1,
+      "amplitude": "CCC endpoint"
+    },
+    {
+      "name": "W0",
+      "p": "p_W",
+      "q": 0,
+      "amplitude": "CCC endpoint"
+    },
+    {
+      "name": "W1",
+      "p": "p_W",
+      "q": 1,
+      "amplitude": "CCC endpoint"
+    },
+    {
+      "name": "ZA1969",
+      "p": "1",
+      "q": 0,
+      "amplitude": "0.9e-16*(E0-I) cm2; independent empirical slope, recentered chemical I"
+    }
+  ],
+  "empirical_slope_cm2_per_eV": 9e-17,
+  "scientific_design": {
+    "temperatures": "sorted union of numpy.geomspace(255,50000,65) and nine saved PHYS81 Li temperatures; exact duplicate endpoints collapsed",
+    "baseline_policy": "reuse nine saved Li rows; evaluate unchanged finite operator only at new temperatures",
+    "exposures_cm3_inverse_s": [
+      1000000000.0,
+      100000000000.0,
+      10000000000000.0
+    ],
+    "profile_outputs": [
+      "gap and total K/logK/mean incident/mean excess/dlogK_dT",
+      "fixed-T fixed-ne ionization probability and gap-only difference"
+    ],
+    "ODE": 0,
+    "benchmark": 0,
+    "historical_completed_identity_reexecution": 0,
+    "plots": [
+      "rates and enhancement",
+      "gap fraction and reaction-weighted energy",
+      "fixed exposure sensitivity"
+    ]
+  },
+  "verification_gates": {
+    "independent_gamma_free_quad_relative": 1e-10,
+    "PL_identity_relative": 1e-10,
+    "finite_difference_scaled_relative": 1e-07,
+    "verification_T_K": [
+      255,
+      777,
+      3200,
+      11000,
+      25370.66308424773,
+      50000
+    ],
+    "numerical_error_is_continuum_certificate": false
+  },
+  "physical_contract": {
+    "Maxwell": "stationary target electron mass; fixed cross section and fixed boundaries",
+    "Wannier": "infinitely heavy residual core Z=1; finite-gap extension conditional",
+    "thermal_sink_per_event_eV": 5.39172060034581,
+    "mean_incoming_is_heat_loss": false,
+    "model_envelope_is_physical_CI": false,
+    "coupled_feedback_error_bound": false,
+    "gap_coverage_physical": "OPEN",
+    "tail_above_15_eV_physical": "OPEN",
+    "gas_anisotropic_stress": 0,
+    "HH_R10": "OFF",
+    "production_admission": "NOT_ISSUED"
+  }
+}

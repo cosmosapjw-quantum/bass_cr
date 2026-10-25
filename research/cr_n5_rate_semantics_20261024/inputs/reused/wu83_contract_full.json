@@ -1,0 +1,161 @@
+{
+  "schema": "PHYS83_CONTINUATION_CONTRACT_V1",
+  "frozen_utc": "2026-10-23T07:32:03.541237+00:00",
+  "status": "PHYSICS_SOURCE_REUSED_IMPLEMENTATION_PENDING",
+  "question": "For the source-native H I LS 1s/2s/2p finite CCC subset, construct matched CE/deexcitation Maxwell kernels and quantify optically thin spontaneous-radiation/atomic-storage/thermal-exchange closure and coronal-reduction error at frozen T/ne.",
+  "parent_HEAD": "ca9d53983459ea08f9992a8a24663e46b7180344",
+  "branch": "research/hh-phys83-ce-completion-20261023",
+  "levels": [
+    "1S",
+    "2S",
+    "2P"
+  ],
+  "ground_degeneracy": 2,
+  "upper_degeneracies": [
+    2,
+    6
+  ],
+  "source_native_gap_eV": [
+    10.20435,
+    10.20435
+  ],
+  "A_per_s": [
+    8.229002496,
+    626000000.0
+  ],
+  "source_contract_SHA256": "1983e17f57ab5ab0e9f8c5dde1bc679451ca670440fe79d0fec3de4efb4a812b",
+  "collision_operator": {
+    "up_rows_per_channel": 452,
+    "reverse_source_rows_per_channel": 451,
+    "upper_incident_eV": 968.6058,
+    "excess_window_eV": [
+      0.0,
+      958.40145
+    ],
+    "interpolation": "W(epsilon)=(epsilon+Delta)*sigma_up(epsilon+Delta), piecewise linear in epsilon and W",
+    "reverse_definition": "epsilon*sigma_down=(g_ground/g_upper)*W; source reverse rows are a printed-precision reciprocity check only",
+    "source_reverse_at_zero": "not tabulated; matched continuous flux endpoint defined by forward threshold W=0",
+    "unit_conversion": "sigma_a0sq*(100*A0_M)^2 -> cm^2",
+    "T_domain_K": [
+      255.0,
+      50000.0
+    ],
+    "finite_support_claim_only": true,
+    "quadrature_per_science_rate": false
+  },
+  "population_closure": {
+    "rates": "a_i=ne*q_up_i, c_i=ne*q_down_i, b_i=c_i+A_i",
+    "equation": "xprime=a-(diag(b)+a*ones^T)*x; p0=1-sum(x)",
+    "T_ne": "prescribed constant; thermal exchange is a ledger, not evolved T",
+    "geometry": "local proper time in same normal orthonormal frame, no expansion during frozen step",
+    "photon_boundary": "optically thin, emitted energy immediately escapes selected cell; no arbitrary residence time",
+    "initial_science_populations": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "thermal_energy": "Qth=-sum Delta_i*(C_up_i-C_down_i)",
+    "atomic_internal_energy": "Uatom=sum Delta_i*x_i",
+    "emitted_escaped_energy": "Egamma=sum Delta_i*C_rad_i",
+    "conservation": "Qth+[Uatom(t)-Uatom(0)]+Egamma=0",
+    "two_photon_energy": "two-photon branch pair totalDelta; separate known2S M1 branch also included. Total2S photon yield is (2*A_2gamma+A_M1)*integral(x_s dt). No monochromatic half-energy spectrum."
+  },
+  "new_science_request": {
+    "T_profile": "61 geomspace temperatures255..50000 plus1000,3000,5000,10000,25370.66308424773;unique sorted ->66",
+    "rate_evaluations": 132,
+    "steady_T_K": [
+      5000.0,
+      10000.0,
+      25370.66308424773,
+      50000.0
+    ],
+    "steady_ne_cm3": "81 geomspace1e-8..1e18",
+    "steady_rows": 324,
+    "transient_T_K": [
+      10000.0,
+      25370.66308424773
+    ],
+    "transient_ne_cm3": [
+      1.0,
+      100000000.0,
+      1000000000000.0
+    ],
+    "times_s": "zero plus121 geomspace1e-12..1e3",
+    "transient_profiles": 6,
+    "transient_rows": 732,
+    "initial_state": "all1S",
+    "new_cosmological_ODE": 0,
+    "benchmark": 0,
+    "resume": "create-only scientific identity; completed identity skipped with0 callbacks"
+  },
+  "validation_gates": {
+    "source_interval_reciprocity": "rounded literal half-last-digit overlap; do not require rawprint1e-12",
+    "independent_M0_M1_relative": 1e-10,
+    "rate_log_balance_absolute": 2e-12,
+    "rate_derivative_scaled": 1e-07,
+    "population_reference_absolute": 2e-12,
+    "population_reference_relative_for_resolved": 1e-08,
+    "event_counts_reference_relative_for_resolved": 1e-08,
+    "normalized_energy_residual": 2e-11,
+    "nuclei_sum_absolute": 2e-13,
+    "negative_populations": "no clipping or silent repair; fail below roundoff-aware declared bound",
+    "owner_guard": "reject enabling native radiative owner with this own-spontaneous module"
+  },
+  "open": [
+    "finite-mass/isotope spectroscopic threshold",
+    "source interpolation accuracy and omitted high tail",
+    "finite-splitting2s2p mixing (CCC LS degenerate divergence)",
+    "higher levels,CI/RR,photoabsorption,stimulated emission,opacity/trapping",
+    "2s two-photon spectrum",
+    "He/Li CE and CX",
+    "coupled thermal/charge/geometry/spectral transport",
+    "nuclear thermal/fast particle ownership and rates/stopping"
+  ],
+  "high_density_interpretation": "formal star-subset quenching/closure diagnostics; not physically complete high-density H I model",
+  "resources": {
+    "cooperative_lease_GiB": 0.5,
+    "workers": 1,
+    "threads": 1,
+    "other_processes_terminated": 0
+  },
+  "HH_R10": "OFF",
+  "production_admission": "NOT_ISSUED",
+  "radiative_branches": [
+    {
+      "upper": "2S",
+      "branch": "two_photon",
+      "A_per_s": 8.229,
+      "photons_per_event": 2,
+      "total_event_energy_eV": 10.20435
+    },
+    {
+      "upper": "2S",
+      "branch": "M1",
+      "A_per_s": 2.496e-06,
+      "photons_per_event": 1,
+      "total_event_energy_eV": 10.20435
+    },
+    {
+      "upper": "2P",
+      "branch": "E1",
+      "A_per_s": 626000000.0,
+      "photons_per_event": 1,
+      "total_event_energy_eV": 10.20435
+    }
+  ],
+  "contract_revision": 2,
+  "preimplementation_revision": "Final source wording and known2S M1 branch adopted before any code or numerical science evaluation; no prior result invalidated.",
+  "continuation_parent_HEAD": "09289300ec2e500806aa2cb82365f00329e41c8c",
+  "parent_PHYS82_HEAD": "ca9d53983459ea08f9992a8a24663e46b7180344",
+  "inherited_contract_SHA256": "afa2dfb19d4cf2dbc0112484cb898372485088f605e809cfbd9920a6955f75fa",
+  "workflow": "User-selected PhysMath1.0.0 full theory->coding; inherited1.3.0 artifacts retained unchanged",
+  "notation_resolution": {
+    "thermal_change_eV": "-sum Delta(C_up-C_down), signed change to translational bath",
+    "heat_withdrawal_eV": "-thermal_change_eV, positive for ground-start",
+    "basis": "Parent CONTRACT Qth names signed change; parent DERIVATION Q_th names positive withdrawal; no equation or physical model changed"
+  },
+  "ownership": {
+    "radiative_owner": "detached_own_spontaneous",
+    "native_radiative_owner_allowed": false
+  }
+}
