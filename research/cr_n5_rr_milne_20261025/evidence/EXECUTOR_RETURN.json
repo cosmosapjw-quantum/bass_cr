@@ -1,0 +1,132 @@
+{
+  "schema": "N5_RR_EXECUTOR_RETURN_V1",
+  "observed_utc": "2026-10-25T02:35:25.450260+00:00",
+  "execution": "PRESCRIBED_EXECUTION_COMPLETED_RAW_OUTCOMES_PASS_PENDING_ROOT_ADMISSION",
+  "controls": {
+    "checks": 19,
+    "status": "PASS"
+  },
+  "primary": {
+    "case_count": 8,
+    "actual_new_RHS": 160,
+    "source_rows": 24,
+    "original_comparisons": 162,
+    "status": "PASS"
+  },
+  "additional_kinetic_comparisons": {
+    "count": 18,
+    "status": "PASS",
+    "run_id": "n5_rr_milne_kinetic_comparison_20261025_v2",
+    "original_primary_unchanged": true
+  },
+  "independent_C9": "Independent reviewer owns admission; completed dispatch PASS,40RHS/72coefficient nodes per independent result",
+  "plot": {
+    "saved_rows": 6,
+    "status": "PASS",
+    "reading": "evidence/PLOT_READING.json"
+  },
+  "raw_sources_preserved": true,
+  "code_pins_final": [
+    {
+      "path": "implementation/compare_saved.py",
+      "bytes": 2662,
+      "sha256": "321582a9f16cb6711bfd975d846d43e46e0597382427440c0152a2f8818bf69f"
+    },
+    {
+      "path": "implementation/controls.py",
+      "bytes": 4338,
+      "sha256": "c7d6b2c3e10d411d692c2e4cd7f6eb5093ad808d3302077e7143207552bbf194"
+    },
+    {
+      "path": "implementation/dispatch.py",
+      "bytes": 7871,
+      "sha256": "47ec82cc668cc6b5975455be528b9bcaa0f35f907ed1ed324dcefe9374f62e2e"
+    },
+    {
+      "path": "implementation/plot_saved.py",
+      "bytes": 2070,
+      "sha256": "6ab1daa80c1fc16c8468f5346b95d9a21279b8ab2d1fa3643b76ca036290981b"
+    },
+    {
+      "path": "implementation/primary.py",
+      "bytes": 4551,
+      "sha256": "1fe62d8e7069ff5dc200f7db18eda3071ed3c392bff746fecdede1dfc389b309"
+    },
+    {
+      "path": "implementation/rr_engine.py",
+      "bytes": 9617,
+      "sha256": "ab8aaa7f51a499ced7f759d16e50db076de47d65e083339a18f3ee1fca2d6005"
+    }
+  ],
+  "budget": {
+    "observed_utc": "2026-10-25T02:35:25.449690+00:00",
+    "attempts": [
+      {
+        "path": "runs/n5_rr_milne_c9_20261025_v1/DISPATCH_RECEIPT.json",
+        "run_id": "n5_rr_milne_c9_20261025_v1",
+        "status": "PASS",
+        "worker_cpu_s": 1.222584,
+        "coordinator_cpu_s": 0.005507436999999997,
+        "wall_s": 1.271532020997256
+      },
+      {
+        "path": "runs/n5_rr_milne_controls_20261025_v1/DISPATCH_RECEIPT.json",
+        "run_id": "n5_rr_milne_controls_20261025_v1",
+        "status": "PASS",
+        "worker_cpu_s": 0.325301,
+        "coordinator_cpu_s": 0.004865886000000003,
+        "wall_s": 0.3704916380083887
+      },
+      {
+        "path": "runs/n5_rr_milne_kinetic_comparison_20261025_v1/DISPATCH_RECEIPT.json",
+        "run_id": "n5_rr_milne_kinetic_comparison_20261025_v1",
+        "status": "FAILED_RETAINED",
+        "worker_cpu_s": 0.0,
+        "coordinator_cpu_s": 3.3138999999998e-05,
+        "wall_s": 3.8798010791651905e-05
+      },
+      {
+        "path": "runs/n5_rr_milne_kinetic_comparison_20261025_v2/DISPATCH_RECEIPT.json",
+        "run_id": "n5_rr_milne_kinetic_comparison_20261025_v2",
+        "status": "PASS",
+        "worker_cpu_s": 0.03018,
+        "coordinator_cpu_s": 0.0048473269999999985,
+        "wall_s": 0.07041181600652635
+      },
+      {
+        "path": "runs/n5_rr_milne_primary_20261025_v1/DISPATCH_RECEIPT.json",
+        "run_id": "n5_rr_milne_primary_20261025_v1",
+        "status": "PASS",
+        "worker_cpu_s": 0.785275,
+        "coordinator_cpu_s": 0.006401959999999998,
+        "wall_s": 0.8222721820056904
+      },
+      {
+        "path": "runs/n5_rr_milne_saved_plot_20261025_v1/DISPATCH_RECEIPT.json",
+        "run_id": "n5_rr_milne_saved_plot_20261025_v1",
+        "status": "PASS",
+        "worker_cpu_s": 2.48019,
+        "coordinator_cpu_s": 0.0066324830000000015,
+        "wall_s": 2.524922096999944
+      }
+    ],
+    "new_unit_worker_cpu_s": 4.8435299999999994,
+    "charged_preflight_cpu_s": 0.01989341,
+    "known_new_unit_charged_cpu_s": 4.863423409999999,
+    "coordinator_cpu_s_separate": 0.028288231999999996,
+    "inherited_known_worker_cpu_s": 34.234445114,
+    "known_lineage_plus_new_charged_cpu_s": 39.097868524000006,
+    "new_unit_ceiling_cpu_s": 60.0,
+    "remaining_within_new_unit_ceiling_cpu_s": 55.13657659,
+    "globaltotal": null,
+    "globalremaining": null,
+    "money": null,
+    "external_NCP": "UNOBSERVED",
+    "mechanical_recovery_network_serialization": "separate; not scientific execution"
+  },
+  "EXECUTION": "COMPLETED_WITH_RETAINED_PRELAUNCH0CPU_FAILURE",
+  "PUBLICATION": "ROOT_OWNED_PENDING",
+  "BACKUP": "ROOT_PENDING",
+  "DAG": "N5_PARTIAL_OPEN_N6_N7_NOT_ACTIVATED",
+  "terminal_boundary": "Old rejected neutral terminal remains separate, unreconstructed and not uploaded"
+}

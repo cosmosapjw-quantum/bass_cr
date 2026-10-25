@@ -1,0 +1,10 @@
+{
+  "schema": "N5_RR_IMPLEMENTATION_AND_INPUT_ACCESS_V1",
+  "current_source": "implementation/*.py are current final source; each runs/*/EXECUTED_SOURCE records exact launched source independently. Earlier PREPARED/source pin manifests remain historical, not overwritten.",
+  "launch": "implementation/dispatch.py copies source into create-only run/EXECUTED_SOURCE and launches saved script with --unit <unit> --output <run> --run-id <id>,cwd=EXECUTED_SOURCE.",
+  "module_import": "primary.py imports rr_engine from launched EXECUTED_SOURCE. rr_engine.provider(unit) loads unit/inputs/reused/c23b/spectral_photo_source.py with importlib and instantiates Verner96.from_table(HI,path.parent/data). It consumes point evaluations only.",
+  "private_inputs": "C5/source caller needs private immutable unit/inputs/reused/pr104/*.npz, c23d/ATOMS_*.csv and c23b/data/verner_photo.dat from authorized checkpoint. Public source repository intentionally omits those bytes; INPUT_MANIFEST pins exact sizes/SHA256.",
+  "controls": "Provider module plain import does not create old quadrature nodes. REI li_thermal_rates.py not imported; no thermal quadrature replay.",
+  "lineage": "Copied immutable inputs are local copies of prior admitted evidence; new consumer source and results distinct.",
+  "global_error_bound": null
+}
