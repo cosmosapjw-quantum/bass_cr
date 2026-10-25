@@ -1,0 +1,190 @@
+{
+  "schema": "CR_EXTERNAL_PROVIDER_REGISTRY_V1",
+  "registry_scope": "Source-specific consumption and explicitly unbound future supplier routes; configured species set is open-ended",
+  "current_owner_snapshots_from_independent_read": [
+    {
+      "repository": "cosmosapjw-quantum/WU088_HH",
+      "PR": 149,
+      "head": "34dd7d1d018abff8a0a4ebd1d3f3579ac46d2fad",
+      "owner_PR": 148,
+      "owner_head": "2912a315aa39e7293000b7b2b8c7cc7a706fea9e",
+      "path": "research/program_expansion_20261025/HANDOFF_KO.md",
+      "scope": "species/reaction registry and evaluated nuclear/weak sources; PHYS91 B1 OPEN and fullPSD condition unresolved; primary/reference/Wolfram remaining0"
+    },
+    {
+      "repository": "cosmosapjw-quantum/rec_bianchi",
+      "PR": 138,
+      "head": "5dd414982c5c9ada97dfdfcc0b77cf83af86d66e",
+      "owner_PR": 137,
+      "owner_head": "ea89c97abeb7a663a813f00e9aadddaf0b32a6a9",
+      "path": "research/program_expansion_20261025/HANDOFF_KO.md",
+      "scope": "level/spectrum/history owner; PB01 scoped result preserved; H5physicalepsilon/H6actualtrace OPEN"
+    },
+    {
+      "repository": "cosmosapjw-quantum/BASS_HE",
+      "PR": 102,
+      "head": "c456b05e0f1c53faa3ae36720826f43e57c06a91",
+      "owner_PR": 101,
+      "owner_head": "28a26f4db951ab9085180e2ecc5d600d981a1f71",
+      "path": "research/program_expansion_20261025/HANDOFF_KO.md",
+      "scope": "HE101 nineteen activities of twenty; C8 OPEN; reserve0; PASS/FAIL/FAIL; physicalfulljointfalse"
+    }
+  ],
+  "providers": [
+    {
+      "id": "C23B_PW19_GROUND_PHOTOELECTRON",
+      "status": "CONSUMED_SCOPED_EXISTING_FINITE_MEASURE",
+      "owner": "bass_cr C23B pinned PW19/Verner provider; REC retains broader spectral/level/history ownership",
+      "source_pin_ids": [
+        "C23B_ATOMS",
+        "C23B_CASES",
+        "C23B_CONTRACT"
+      ],
+      "process": "photoionization",
+      "source_labels": [
+        "HI",
+        "HeI",
+        "HeII"
+      ],
+      "isotope_mapping": {
+        "HI": "H1:0 conditional elemental assignment",
+        "HeI": "He4:0 conditional elemental assignment",
+        "HeII": "He4:1 conditional elemental assignment"
+      },
+      "source_native_thresholds_eV": [
+        13.6,
+        24.59,
+        54.42
+      ],
+      "photon_max_eV": 50000,
+      "redshift_nodes": [
+        2.316,
+        2.479,
+        2.649
+      ],
+      "redshift_interpolation": null,
+      "frame": "bath_frame_rest_target",
+      "angular_scope": "isotropic ensemble only",
+      "mass_model": "stationary_heavy_target_zero_recoil",
+      "physical_heating": null,
+      "above_support_rate": null
+    },
+    {
+      "id": "C23E_D43_SAVED_EVENTS",
+      "status": "CONSUMED_SCOPED_EXISTING_SIGNED_EVENTS",
+      "owner": "bass_cr C23E, consuming WU79 D43K and C22A conditional RR; latest owner8623d7b",
+      "source_pin_ids": [
+        "C23E_CONTRACT",
+        "C23E_SAVED_EVENTS",
+        "C23E_POINT_INPUT",
+        "WU79_AS_BOUND_BY_C23E"
+      ],
+      "upstream_WU79_science": "338fb7728e8b41f49551200b1f1ba73c047fb90c",
+      "upstream_WU79_documents": "3304d16db1dc9bf868c185a8eeb6cc9dbc270e50",
+      "processes": [
+        "H1_PI",
+        "D_PI",
+        "H1_RR",
+        "D_RR",
+        "HD_CX"
+      ],
+      "isotope_model": "threshold-gated H-equality D model, delta=43kB K; sharedH/D thermalRR; empiricalisotoperesolutionunbound",
+      "temperature_joint_domain_K": [
+        3,
+        200000
+      ],
+      "consumed_saved_T_K": [
+        43,
+        300,
+        10000
+      ],
+      "source_native_H_threshold_eV": 13.6,
+      "D_shift": "43*k_B in eV/K; keep original numerical convention",
+      "density_owner": "C23E already volumetric; adapter applies units only",
+      "RR_radiation_owner": "CaseA photons escape",
+      "current_HEAD_payload_identity": "contract and savedpoints exactequal to inherited expansion bytes"
+    },
+    {
+      "id": "WU_EVALUATED_BETA_ROUTE",
+      "owner": "WU088_HH evaluated input; bass_cr Lorentz/pool consumer",
+      "status": "SOURCE_INPUT_PENDING",
+      "process": "beta_injection",
+      "species": null,
+      "evaluated_spectrum": null,
+      "evaluated_Q": null,
+      "evaluated_branching": null,
+      "parent_isomer_charge": null,
+      "daughter": null,
+      "neutrino": null,
+      "recoil": null,
+      "proper_lifetime": null,
+      "mass_convention": null,
+      "source_pins": [],
+      "synthetic_mean_lines": "REUSE_AS_TEST_ONLY_NOT_A_SOURCE"
+    },
+    {
+      "id": "REC_EXTERNAL_SPECTRAL_HISTORY_ROUTE",
+      "owner": "rec_bianchi level/spectral/history provider; bass_cr external source consumer",
+      "status": "SOURCE_INPUT_PENDING_FOR_NEW_ROUTE",
+      "configured_families": [
+        "stellar",
+        "AGN",
+        "thermal",
+        "nonthermal",
+        "line",
+        "continuum"
+      ],
+      "distribution": null,
+      "history": null,
+      "isotope_state_mapping": null,
+      "source_pins": [],
+      "inherited_C23B_three_nodes_preserved": true
+    },
+    {
+      "id": "HE_DIFFERENTIAL_CASCADE_STOPPING_ROUTE",
+      "owner": "BASS_HE differential/finite_mass/angular provider; bass_cr transport and bath-exchange consumer",
+      "status": "SOURCE_INPUT_PENDING",
+      "process": "stopping",
+      "species": null,
+      "energy_support_eV": null,
+      "angular_kernel": null,
+      "finite_mass_kernel": null,
+      "source_pins": [],
+      "HE101_C8": "OPEN",
+      "HE101_reserve": 0,
+      "caloric_partition_is_physical_heating": false
+    },
+    {
+      "id": "EXTERNAL_BARYON_DISTRIBUTION_ROUTE",
+      "owner": "WU species and reactions; HE differential exchange; CR transport",
+      "status": "SOURCE_INPUT_PENDING",
+      "particle_kinds": [
+        "ion",
+        "nucleus",
+        "neutron",
+        "nuclear_product",
+        "molecular_ion",
+        "negative_ion"
+      ],
+      "species_catalog_is_upper_bound": false,
+      "normalization": null,
+      "intensity_or_density": null,
+      "isomer_charge_state": null,
+      "mass_energy_convention": null,
+      "spectrum_direction_history": null,
+      "source_pins": []
+    }
+  ],
+  "unit_preserves": {
+    "N4": "PARTIAL_OPEN",
+    "N5": "PARTIAL_OPEN",
+    "N6": "PREDECESSOR_GATED",
+    "N7": "PREDECESSOR_GATED",
+    "global_completion_percent": null,
+    "global_error_bound": null,
+    "L4_ready": false,
+    "old_Drive_canonical": "UNKNOWN_NO_ACK",
+    "old_Drive_terminal": "NOT_ATTEMPTED"
+  },
+  "review_note": "SourcePin checks verify supplied bytes and recorded review identity; scientific admission remains the responsibility of the pinned independent review, not truthy metadata fields."
+}

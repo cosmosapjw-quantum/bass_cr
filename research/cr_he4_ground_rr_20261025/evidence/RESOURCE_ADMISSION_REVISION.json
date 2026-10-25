@@ -1,0 +1,23 @@
+{
+  "schema": "CR_HE4_RESOURCE_ADMISSION_REVISION_V1",
+  "authority": "Root message explicitly authorizes resource-only correction and distinct controls_v2 under current user request",
+  "old_formula": "headroom + max(inactive_file-dirty-writeback,0) - 1GiB",
+  "new_formula": "Allocate dirty+writeback+shmem+unevictable exclusions to inactive then active once; headroom + clean_inactive + 0.5*clean_active - 1GiB; require512MiB",
+  "reason": "Measured anonymous memory about162MiB, active_file about5.76GiB; excluded evictable clean active cache caused conservative admission refusal. No OOM or worker start occurred.",
+  "old_dispatch_sha256": "b70dc05d151c8fb206f09d32c988eb80c5494e515e2c9049610d70a187066909",
+  "old_controls_sha256": "e34c3aea91695c2e2f44f89e471e6a83885e379d662c265704bbe6b4a9dde902",
+  "previous_run": "cr_he4_rr_controls_20261025_v1",
+  "previous_worker_cpu_s": 0.0,
+  "previous_coordinator_cpu_s": 0.0004700779999999988,
+  "new_run": "cr_he4_rr_controls_20261025_v2",
+  "science_tolerances_changed": false,
+  "scientific_inputs_changed": false,
+  "frozen_contract_changed": false,
+  "new_unit_ceiling_cpu_s": 30,
+  "memory_reserve_bytes": 1073741824,
+  "worker_address_space_bytes": 536870912,
+  "drop_caches_or_kill_unrelated_processes": false,
+  "observed_utc": "2026-10-25T13:02:57.424695+00:00",
+  "new_dispatch_sha256": "80a5a9a27e9d821e3fd0de3e5d4ae6e69d61f604f04db2b73f993a111ce8cb34",
+  "new_controls_sha256": "21a7cc00aafbb07a324deeb3662637c9c674715f1bf6c3ebaa26d39eae7928ed"
+}

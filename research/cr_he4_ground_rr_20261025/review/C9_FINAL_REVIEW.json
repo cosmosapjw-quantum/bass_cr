@@ -1,0 +1,130 @@
+{
+  "schema": "CR_HE4_C9_INDEPENDENT_FINAL_REVIEW_V1",
+  "status": "PASS_SCOPED_CONDITIONAL_SOURCE_FINITE_FIRST_EVENT_CONSUMER",
+  "reviewer": "independent he4_source_audit agent",
+  "observed_utc": "2026-10-25T13:07:14.520203+00:00",
+  "base_HEAD": "8d0a5c375589fbddadc2bb90c8117311c80bad09",
+  "AGENTS_sha256": "8d62d9758fe173263eb3820c7b00ca569193bb7f912fc3d95d145e73d4a40970",
+  "R6_identity_unchanged": true,
+  "reviewed_files": {
+    "review/R6_THEORY.json": {
+      "bytes": 2907,
+      "sha256": "878c9d570e58c88e9ddb3f1f003407b2b86239a5df12a2c3527785ea7e80297e"
+    },
+    "review/C9_FROZEN_REVIEW.json": {
+      "bytes": 1159,
+      "sha256": "0c2daf3e1830bf6051ae3af974c1eb015cb3c65596e0c14f313131776f796f37"
+    },
+    "review/c9_independent.py": {
+      "bytes": 19877,
+      "sha256": "ca3678772217df45519ed932f368b6672e9dea2791736c20ace2061ed1cd010e"
+    },
+    "runs/cr_he4_rr_c9_20261025_v1/RESULT.json": {
+      "bytes": 3362,
+      "sha256": "fa141125a6956d1f81a1329edf3b0227266568bd188148f73c9748247fe376b3"
+    },
+    "runs/cr_he4_rr_c9_20261025_v1/DISPATCH_RECEIPT.json": {
+      "bytes": 1197,
+      "sha256": "203229b1e705acb0fd56b7bc0da9f49c60735d4f4d5d90b1d7be5bcc284a711c"
+    },
+    "runs/cr_he4_rr_c9_20261025_v1/COLUMN_COMPARISONS.json": {
+      "bytes": 18243,
+      "sha256": "11ab77febc8cc5c3320c49b495f559201509cbfd13e81cbeec1fc03d4c204e3c"
+    },
+    "runs/cr_he4_rr_c9_20261025_v1/SELECTED_COEFFICIENTS.json": {
+      "bytes": 53998,
+      "sha256": "71a25547ffaedb5fff30ecbe01ac42e1a4584a5fe9fc5517634f5e2ee13657d0"
+    },
+    "runs/cr_he4_rr_c9_20261025_v1/INDEPENDENT_SOURCE_ROWS.json": {
+      "bytes": 18486,
+      "sha256": "86bbef41a668a4b171abe8d777d323170bca6fd891bff09a470fe0004fa75577"
+    },
+    "runs/cr_he4_rr_c9_20261025_v1/chi1.5_R80_N2048_DECIMAL70.csv": {
+      "bytes": 4600803,
+      "sha256": "c64a3c440c18d212d572dbecdcc6b3c40237583d22a586adf58638077a77e0c2"
+    },
+    "runs/cr_he4_rr_c9_20261025_v1/chi3_R80_N2048_DECIMAL70.csv": {
+      "bytes": 4596366,
+      "sha256": "4bffd2b55d222590ab3a6f1934b4afc9ab462505772ac76401c73b525dbeb178"
+    },
+    "runs/cr_he4_rr_primary_20261025_v1/RESULT.json": {
+      "bytes": 754,
+      "sha256": "e2f9d6a7fa183eb69ef0d1161421aa85c8ab9373897ed0dd9c31d11eaa679ccc"
+    },
+    "runs/cr_he4_rr_controls_20261025_v2/RESULT.json": {
+      "bytes": 2509,
+      "sha256": "dd904b62548b5b7396ec2a393f5611778eee7e68f6e03c99cf6ffff9eae9630f"
+    }
+  },
+  "methods": {
+    "primary_RHS": 192,
+    "independent_RHS": 48,
+    "reference_arithmetic_digits": 70,
+    "independent_coefficient_nodes": 72,
+    "independent_source_rows": 6,
+    "production_module_imports": 0,
+    "intended_new_diagonal": "Decimal.from_float(stored PR105 K_diag) + Decimal.from_float(new He lambda)",
+    "RHS": "independent products and independent conditional-time probabilities",
+    "source": "native HeI row and original Milne degeneracy reconstructed without production coefficient function",
+    "source_projection": "reuse immutable saved projection; no reproject",
+    "independence_limit": "Generic Thomas-elimination method inherited from the earlier independent H1 review; helium coefficients and RHS maps independently implemented. Same pinned physical model and input arrays by design."
+  },
+  "metrics": {
+    "max_per_RHS_relative_infinity_norm_difference": 4.243216244181207e-11,
+    "max_primary_intended_backward_residual": 5.581635810910767e-13,
+    "max_reference_backward_residual": 7.282277758502122e-70,
+    "max_coefficient_relative_difference": 1.1871984093125317e-15,
+    "max_source_observable_relative_difference": 2.086440898036616e-11
+  },
+  "max_RR_event_relative_energy_residual": 5.551052689276213e-17,
+  "criteria": {
+    "per_column_own_norm_relative": 5e-10,
+    "coefficient_relative": 5e-13,
+    "event_energy_relative": 5e-13,
+    "backward_relative": 2e-12,
+    "source_observable_relative": 5e-10
+  },
+  "failed_columns": [],
+  "strongest_failure_modes_resolved_or_scoped": [
+    "Using electron density instead of capturing HeII density would change hazard by factor seven; controls reject substitution and independent source reconstruction uses 0.02 cm^-3.",
+    "Using d=2 instead of native d=4 doubles HeI RR; source-native g_bound=1/g_ion=2 and coefficient reconstruction retain d=4.",
+    "Adding He RR probabilities to separate old H1 solutions would violate shared survival; all H1/HeI channels use common new operator and stable response RHS.",
+    "Rounded new diagonal can lose 100 percent of a local tiny added He hazard. Independent Decimal70 review constructs intended sum from exact stored H1 baseline plus new He hazard and still satisfies own-column and event criteria. This does not remove historical original H1 rounding loss.",
+    "Scalar ground source does not supply angular emission or finite-mass recoil. Conditional smooth residual-state resolution and elemental-to-He4 mapping remain source qualifications.",
+    "Single-added-channel positive resolvent bound is valid here; its componentwise multiplicative form is not licensed for future multiple added channels.",
+    "Energy below an arbitrary cutoff is only caloric partition; physical heating, irreversible assimilation and coupled chemistry/temperature remain unproved."
+  ],
+  "scope": "He+ ground capturing tagged fast electron into He0 ground singlet; source-qualified conditional smooth model; HeIII->HeII remains candidate only.",
+  "controls": "31 focused controls PASS; four synthetic RHS only. Initial controls_v1 memory admission rejection occurred before child and is retained.",
+  "resource_correction": "Root-authorized resource-only clean-active-file headroom correction; science freeze and tolerances unchanged; rejection not erased.",
+  "execution": {
+    "worker_cpu_s": 1.535063,
+    "coordinator_cpu_s": 0.006231391000000003,
+    "wall_s": 1.5737447220017202,
+    "peak_RSS_KiB": 54068,
+    "review_cap_cpu_s": 10,
+    "old_primary_replay": 0,
+    "new_source_quadrature": 0,
+    "new_thermal_quadrature": 0,
+    "new_ODE": 0,
+    "rerun": 0
+  },
+  "historical_budgets": {
+    "PR105_known_lineage_cpu_s": "39.097868524",
+    "C23E_separate_lineage_cpu_s": "15.493261114",
+    "old_allowance_reused": false,
+    "global_remaining": null,
+    "currency": null
+  },
+  "remaining": {
+    "N5": "PARTIAL_OPEN",
+    "N6": "PREDECESSOR_GATED",
+    "N7": "PREDECESSOR_GATED",
+    "global_error_bound": null,
+    "global_completion_percent": null,
+    "physical_heating_complete": false,
+    "old_Drive_canonical": "UNKNOWN_NO_ACK",
+    "old_Drive_terminal": "NOT_ATTEMPTED",
+    "publication_and_backup": "ROOT_OWNED_PENDING"
+  }
+}

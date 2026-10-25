@@ -1,0 +1,34 @@
+{
+  "schema": "CR_EXTERNAL_PREEXECUTION_REVIEW_FIXES_V1",
+  "reviewer": "independent he4_source_audit agent",
+  "timing": "static findings before first execution; fixes included in external_interfaces_v1 executed snapshot",
+  "findings": [
+    {
+      "id": "EXT_R1",
+      "target": "ProperSource/IntegratedSource direct constructors",
+      "observed": "direct construction could bypass normalization/length checks",
+      "fix": "immutable paired tuples, finite/nonnegative checks, exact source/scaling/exposure equality",
+      "validation": "test_direct_source_and_exposure_construction_cannot_bypass_contract; v1 PASS"
+    },
+    {
+      "id": "EXT_R2",
+      "target": "Domain declaration",
+      "observed": "support order/finiteness and bool epoch not validated",
+      "fix": "finite ordered support, explicit immutable epochs and numeric epoch validation",
+      "validation": "test_invalid_domain_definition_rejected; v1 PASS"
+    },
+    {
+      "id": "EXT_R3",
+      "target": "require_physical_provider",
+      "observed": "truthy source/beta strings could be treated as evidence",
+      "fix": "SourcePin objects and actual immutable bytes including independent admission-review pin; beta evidence all pinned",
+      "validation": "test_beta_requires_evaluated_full_event_inputs and missing provider controls; v1 PASS"
+    }
+  ],
+  "retained_boundaries": [
+    "EventBook checks canonicalID uniqueness within onebook; caller preserves IDs across transfers",
+    "massive totalenergy diagnostic restterm is not added to kinetic/binding/heating ledger",
+    "generic algebraic event validation is not microphysical provider admission"
+  ],
+  "raw_science_failures_erased": false
+}
