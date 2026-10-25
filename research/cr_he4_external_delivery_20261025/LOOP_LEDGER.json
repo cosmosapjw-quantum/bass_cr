@@ -78,9 +78,12 @@
     },
     {
       "id": "R10",
-      "status": "pending_delivery",
+      "status": "complete",
       "evidence": [
-        "HANDOFF_KO.md"
+        "HANDOFF_KO.md",
+        "publication/S_RECEIPT.json",
+        "publication/CANONICAL_BACKUP_RECEIPTS.json",
+        "publication/CANONICAL_R3_READBACK.json"
       ]
     },
     {
@@ -159,23 +162,28 @@
     },
     {
       "id": "C10",
-      "status": "pending_delivery",
+      "status": "complete",
       "evidence": [
-        "HANDOFF_KO.md"
+        "HANDOFF_KO.md",
+        "publication/S_RECEIPT.json",
+        "publication/CANONICAL_BACKUP_RECEIPTS.json",
+        "publication/CANONICAL_R3_READBACK.json"
       ]
     }
   ],
   "scientific_gate": "PASS_SCOPED_TWO_UNITS",
   "execution": "COMPLETED",
-  "publication": "PENDING",
-  "backup": "PENDING",
-  "DAG": "LOCAL_UPDATED_CENTRAL_PENDING",
+  "publication": "S_PUBLISHED_R1; D_IS_CONTAINING_COMMIT; subsequent central M actual identity is external final closeout",
+  "backup": "CANONICAL_SOURCE_S_LIBRARY_DROPBOX_DRIVE_R3_PASS",
+  "DAG": "LOCAL_UPDATED; CENTRAL_TWO_NODE_PATCH_AFTER_D_TRACKED_IN_FINAL_CLOSEOUT",
   "strong_no_go": {
-    "new_claim": false,
-    "NG1_NG7": "not_applicable"
+    "new_strong_no_go_claim": false,
+    "NG1_NG7": "No new impossibility or global completion claim is adopted; source/domain limitations are conditional dependencies, not no-go results."
   },
   "failures_preserved": [
     "../cr_he4_ground_rr_20261025/runs/cr_he4_rr_controls_20261025_v1/DISPATCH_RECEIPT.json"
   ],
-  "future_budget_guard": "../cr_external_interfaces_20261025/review/C9_RUNNER_BUDGET_SUPPLEMENT.json"
+  "future_budget_guard": "../cr_external_interfaces_20261025/review/C9_RUNNER_BUDGET_SUPPLEMENT.json",
+  "scoped_activities_completed": 20,
+  "completion_scope_note": "20 activities of the two bounded research/coding units; all-repository physical completion and final cross-repository publication are separate axes."
 }

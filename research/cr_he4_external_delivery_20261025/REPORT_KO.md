@@ -110,6 +110,10 @@ HeIII→HeII ground capture는 다음에 공급자·source/state·밀도·소비
 
 He4 첫 controls_v1은 메모리 admission에서 worker 시작 전에 거절됐다. 당시 source와 receipt를 보존했고, clean active file cache의 50%를 고려하는 보수적 가용량 추정만 교정했다. dirty/writeback/shmem/unevictable을 제외하고 1 GiB reserve와 512 MiB cap을 유지했다. 별도 controls_v2가 통과했으며 물리 계약과 tolerance는 변하지 않았다.
 
-He4 새 worker CPU는 4.189415 s, coordinator는 0.018524602 s, 합계 4.207939602 s로 새 30 s 상한 안에 있다. 입력 복구의 기계적 CPU 0.039411097 s는 별도다. 외부 source 첫 검증 CPU는 0.145485309 s이며 이후 budget-history guard의 기계적 검증은 별도 기록한다. 과거 H1 계보 39.097868524 s와 별도 C23E 15.493261114 s는 그대로 보존하고, 중복 여부가 입증되지 않은 합산을 하지 않는다. global remaining과 currency는 `null`이다.
+He4 새 worker CPU는 4.189415 s, coordinator는 0.018524602 s, 합계 4.207939602 s로 새 30 s 상한 안에 있다. 입력 복구의 기계적 CPU 0.039411097 s는 별도다. 외부 source 첫 검증 CPU는 0.145485309 s이고 budget-history guard의 기계적 검증은 0.001943521 s다. 새 단위 측정 합은 0.147428830 s / 30 s 상한이며 원 실행 및 별도 기계적 검사를 구분해 기록했다. 과거 H1 계보 39.097868524 s와 별도 C23E 15.493261114 s는 그대로 보존하고, 중복 여부가 입증되지 않은 합산을 하지 않는다. global remaining과 currency는 `null`이다.
 
 H1 canonical의 과거 Drive `UNKNOWN_NO_ACK`, terminal `NOT_ATTEMPTED`, 소실·차단된 PR104 terminal 상태는 변경하지 않았다. 이번 source ZIP의 새 성공 응답은 새 파일에만 적용한다. 원 H1 canonical을 복구하면서 18,232,953 bytes, 원 SHA256, ZIP CRC와 164개 manifest payload의 size/SHA256을 실제로 확인했고 과거 과학 계산을 복구 목적으로 재실행하지 않았다.
+
+## 7. 게시와 복원
+
+Source S `4caf4273eefd51f2c605a8667c3533d8489dd0f5`를 expected-parent/non-force로 게시하고 실제 원격 ref를 확인했다. 새 canonical 소스 ZIP은 29,763,489 bytes, SHA256 `7e39930b862a0af5f87e5d3e4dd9d9fa4b37694dda496221e6e311957a087aaa`이며 198 manifest payload를 포함한다. Library·Dropbox·Drive 각각 성공 ACK 후 실제 원시 파일의 size/SHA256/CRC/전체 payload 검증이 R3 PASS다. 이 성공은 새 artifact에만 적용한다. [고정 인계](HANDOFF_KO.md)와 [실제 백업 receipt](publication/CANONICAL_BACKUP_RECEIPTS.json)를 참조한다. 중앙 두 node의 실제 M와 이후 D/M closeout은 별도 최종 artifact 및 PR106의 기록으로 결속한다.
