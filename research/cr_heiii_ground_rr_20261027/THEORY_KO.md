@@ -122,9 +122,9 @@ v_j=\int_0^\infty t e^{-K_1t}b_j\,dt=G_1p_j.
 
 Source μ에서 conditional capture energy는 μᵀr_j/(μᵀp_j), conditional time은
 μᵀv_j/(μᵀp_j)다. 분모가 0이면 conditional quantity는 null이다.
-Mean stopping time은 G1·1이다. 실제 코드에서는 inherited first6와 H1/HeI
-reward8개까지를 그대로 쓰고 새 λ3와 λ3E, 마지막 bath6를 붙여 physical18을
-구성한다. Conditional5, stable4와 w1을 더해 28 RHS/case다.
+Mean stopping time은 G1·1이다. 실제 physical18의 열은 0–5=first6, 6–7=H1 count/kinetic,
+8–9=HeI count/kinetic, 10–11=새 HeIII capture count/kinetic, 12–17=bath6다.
+따라서 6+2+2+2+6=18이며 새 λ3와 λ3E만 두 열로 삽입한다. Conditional5, stable4와 w1을 더해 28 RHS/case다.
 
 이전 terminal sum b_old에 대해 저장 matrix의 closure defect를
 ρ0=K0·1−b_old로 정의한다. 그러면 새 partition은 정확히
@@ -176,7 +176,7 @@ capture 시간이나 평균 stopping 시간을 exposure로 대신 쓰지 않는�
 
 선택 사건의 exact species column은 He4:2 −1, He4:1 +1, e:fast −1,
 photon +1이다. Native heavy basis에서는 ν=e11−e12이며 A11=A12=4,
-q11=1, q12=2다. 고정된 명시적 nb를 공급할 때 a=N3/nb로 놓으면
+q11=1, q12=2다. N3^SI=10⁶ N3 [m⁻³], Ue,3^SI=10⁶ eV_J Ue,3 및 Uγ,3^SI=10⁶ eV_J Uγ,3 [J m⁻³]를 명시한다. 고정된 nb [m⁻³]를 공급할 때 a=N3^SI/nb로 놓으면
 
 \[
 \Delta Y=a\nu,\quad\Delta\zeta=-a,\quad
@@ -198,7 +198,7 @@ Native Z=(Y[21],ζ,w_nt,w_ext,logT)의 w_ext는 signed external photon transfer�
 \Delta Z=(a\nu,-a,-U_{e,3}^{SI}/n_b,0,0)
 \]
 
-와 별도 retained-photon count N3/nb 및 energy Uγ,3/nb port다. Internal energy는
+와 별도 retained-photon count N3^SI/nb 및 energy Uγ,3^SI/nb port다. Internal energy는
 native ionization-energy vector와 ΔY가 이미 소유한다. 같은 binding energy를
 별도 state에 또 넣지 않는다. Closed-box RR의 Δw_ext를 양수로 바꾸어 escape를
 숨기지 않는다. 이 사건의 thermal source energy와 thermal count 변화는 0이다.
