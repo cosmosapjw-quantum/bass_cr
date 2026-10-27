@@ -1,0 +1,7 @@
+# Owner delta at R2/R3
+
+Central owner moved5abe0d19df95→55202663275cd0607c968129b33de805d06f5d8b. Actual DAG comparison retains88nodes/17edges and changes only the BASS B3h-native-finite-absorption node among original node objects. This unit does not edit or execute that BASS owner. CR current contracts and original count authority are unchanged. The parallel REI causal-prefix branch advanced31d088bb→157a4191; it is not this unit's source, budget or merge base.
+
+WU provider-registry moved4ea08eb→06d3acf39acdc385601e4d8e5811c545fb3b934f. Actual AGENTS diff adds molecular dynamic-lift R5 under declaredK,d,pi,h,f, with GL2022 missing destruction pairs and actual consumer still unbound. R4 prior9/24,18/20 final dual ZIP/readback pending; R5 starts9/26. PHYS91remaining0, no physical IVP/Q/activation/mainmerge. Its service-probe failures are past WU observations and are not inherited as CR runtime status. This task's current Python probe passed. No new WU molecular math or runtime allowance is imported into PHYS02 source or PR107 RR.
+
+REC4a8e5410 andHEac6042a6 are unchanged at these nodes. REC AGENTS remains actual404. CR AGENTS raw SHA8d62d9758fe173263eb3820c7b00ca569193bb7f912fc3d95d145e73d4a40970 is unchanged. Previous failed/unknown uploads and project budgets retain their historical status. These bounded owner reads do not expand the recorded personal-conversation/Drive inventory coverage.
