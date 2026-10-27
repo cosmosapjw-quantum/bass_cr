@@ -9,7 +9,7 @@
 
 저장된 PHYS02 전자 source를 실제 source revision, 물리 상태, native energy support, frame, proper clock/volume 정의와 결속하고, 알려진 유한 시간 구간의 입자수·운동에너지 밀도를 계산했다. 일반 photon/electron/baryon 입력 계약과 조건부 RR/native25/retained-photon 연결은 구현했지만, 이번 **실제 입력은 PHYS02 electron source**다. Photon·baryon 입력과 호환 RR의 검사는 synthetic control이다.
 
-저장된 변경 검사는 **103/103**, 실제 출력은 **18행**, 독립 Decimal80 검사는 **153/153 PASS_SCOPED**다. 실제 source에는 같은 donor/recipient 상태의 명시적 $n_b$가 없고, 기존 PR107 RR bath와 온도·frame·target state가 맞지 않는다. 따라서 actual `nb`, `native25`, `rr_return`, `retained_photon_port`는 모두 `null`이다. 이는 필요한 입력이 없다는 판정이며, 미래의 명시적 transport/state 연결을 배제하는 no-go 주장이 아니다. [C6 요약](evidence/C06_RUN_SUMMARY.json), [actual 결과](runs/actual_v1/RESULT.json), [독립 결과](runs/independent_v2/RESULT.json), [물리 일관성 검토](evidence/C07_PHYSICAL_CONSISTENCY.md).
+저장된 변경 검사는 **103/103**, 실제 출력은 **18행**, 독립 Decimal80 검사는 **153/153 PASS_SCOPED**다. 실제 source에는 같은 donor/recipient 상태의 명시적 $n_b$가 없고, 기존 PR107 RR bath와 온도·target state가 맞지 않는다. 두 scalar gas-rest frame 자체의 불일치를 주장하지는 않으며, 실제 연결에는 명시적 frame 결속도 필요하다. C7의 frame mismatch는 `prescribed_gas_rest_frame_scalar`와 `bath_frame_rest_target`라는 기록 ID의 엄격한 동등성 gate를 뜻하며, 실제 상대속도나 boost가 확인되었다는 뜻은 아니다. 따라서 actual `nb`, `native25`, `rr_return`, `retained_photon_port`는 모두 `null`이다. 이는 필요한 입력이 없다는 판정이며, 미래의 명시적 transport/state 연결을 배제하는 no-go 주장이 아니다. [C6 요약](evidence/C06_RUN_SUMMARY.json), [actual 결과](runs/actual_v1/RESULT.json), [독립 결과](runs/independent_v2/RESULT.json), [물리 일관성 검토](evidence/C07_PHYSICAL_CONSISTENCY.md).
 
 ## 2. 실제 source의 identity와 적용 범위
 
@@ -171,10 +171,12 @@ Wolfram은 한정 대수 검산 두 호출로만 사용했다. 첫 호출의 sta
 
 이 단위의 직접 관찰 REC pin `4a8e541030ee2cbd02e26ba671083b705d309d49`, HE pin `ac6042a6b0610b09d0576538767ee0299389a5eb`와 각각의 isotope mapping·유효범위·gate·별도 예산을 유지한다. 다른 공급자의 handoff에 적힌 더 늦은 참조를 직접 검증 없이 이 pin의 대체물로 쓰지 않는다. 개인 대화 전체 검색 unavailable, Drive partial inventory 한계도 그대로다.
 
-## 8. 과학 봉인과 후속 실제 게시·백업·인계
+## 8. 실제 과학 source 게시·백업과 최종 인계
 
-이 초안의 기준선은 기존 완료 단위의 S=`4e72c89b714431eb4c6ae07def777bbf72a5ae4c`, D=`ec463db0c7e5c7fb5070796071c926caa4db6445`, M=`5abe0d19df95db730e3e33bae0373c81ba37ce89`다. 기존 canonical source/closeout ZIP의 R3와 hash/CRC 복구 근거는 재사용한다. [복구 기록](intake/BASELINE_RESTORE.json).
+과학 source S는 `022c163726b814885805bd9a7ab988fe963cda4a`다. [PR109](https://github.com/cosmosapjw-quantum/bass_cr/pull/109)에서19개 단계의 실제 expected-SHA/non-force 게시와 이중 checkpoint를 확인했다. 최종C10 문서D와 중앙M은 각각 실제 후속 receipt로 결속하며, 이 문서가 스스로 자신의 SHA나 미래 M을 만들어 쓰지 않는다. 최종S/D/M과20개단계완료는 PR109최종본문과 CLOSEOUT archive의 DELIVERY_AUTHORITY/HANDOFF를 읽어라.
 
-**본 단위의 최종 S/D/M, source ZIP, dual backup/R3, 중앙 owner-return, 복사용 handoff identity는 아직 이 보고서에서 확정하지 않는다.** Root가 실제 expected-SHA non-force 게시와 provider receipts를 완결한 뒤 이 절을 갱신한다. Pending을 완료로 소급하지 않으며 이전 receipt를 덮어쓰지 않는다.
+Canonical source는 **BASS_CR_PROPER_SOURCE_20261027_022c163726b8.zip**,2737469bytes,SHA256 `d28fc2dc841e0b3804fa2ba47274113839b54868efa0d2c63f28b865a88b9c88`이다.242members/241payloads를 포함한다. Dropbox `id:BSpOijBcT10AAAAAAEDHZg`, [Drive 원본](https://drive.google.com/file/d/1hHv09ZI1-UIKklU4tGxEurxHMpIuVTfd/view)을 각각 실제 fullGET하여 전체archive와 모든payload SHA/CRC R3를통과했다. GitS164publicblobs의원격byte동등성도검증했다. [Source receipt](publication/SOURCE_RELEASE_RECEIPT.json), [dual rawR3](publication/SOURCE_REMOTE_R3.json), [Git R3](publication/S_GIT_R3.json).
 
-다음 물리 연결의 입력 조건은 명확하다. 동일 frame·isotope/state·support의 실제 recipient response와 명시적인 finite/eventual return horizon, 같은 상태의 명시적 $n_b$, 필요할 경우 proper cell volume을 공급해야 한다. 실제 photon/baryon source를 확장하려면 그 source 자체의 revision·history·energy/state ledger가 필요하다. 현재의 유한 injection 계약·수치 일관성 결과만으로 실제 RR, photon deposition, coupled thermal evolution 또는 global physical completion을 채택하지 않는다.
+S의과학내용을다시ZIP으로생성하지않고,D/M및후속영수증은별도closeout에담는다. 기존baselineS4e72c89b714431eb4c6ae07def777bbf72a5ae4c,D ec463db0c7e5c7fb5070796071c926caa4db6445,M5abe0d19df95db730e3e33bae0373c81ba37ce89 및기존canonicalsource/closeout은그대로보존한다.
+
+다음물리연결은 [NEXT_UNIT_CONTRACT.json](NEXT_UNIT_CONTRACT.json)에고정했다. Same-state실제recipientresponse,유한returnhorizon과명시적nb가필요하며,절대volume값은worldtubetotal을요구할때만필요하다. 실제photon/baryon확장에는각source의revision/history/state-energyledger가필요하다. 새예산을따로고정하며현unit잔여를자동이월하지않는다. [다음인계](HANDOFF_KO.md)는C10preimage경계를표시하고,최종게시후복사용완결본은별도closeout및PR최종본문에결속한다.

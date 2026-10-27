@@ -1,3 +1,15 @@
+# Current proper-injection source and final-document priority (2026-10-27)
+
+Read research/cr_proper_injection_20261027/ADMISSION.json, REPORT_KO.md, review/C9_FINAL.json, publication/SOURCE_RELEASE_RECEIPT.json and NEXT_UNIT_CONTRACT.json. Scientific S=022c163726b814885805bd9a7ab988fe963cda4a; PR109 carries the actual final document/central/closeout receipts. New actual PHYS02 electron proper-time history [0,1e10]s at100K yields18rows with103controls+153independent checks. Source ZIP2737469bytes/SHA256d28fc2dc841e0b3804fa2ba47274113839b54868efa0d2c63f28b865a88b9c88 has242members and actual Dropbox/Drive fullGET hash/CRC R3PASS; GitS164publicblobs R3PASS. Do not rebuild that canonical source ZIP with later receipts.
+
+Actual same-state nb/native25/RR/retained-photon/worldtube totals staynull:100K PHYS02 does not match10000K PR107. Photon/baryon ports are typed synthetic controls here. Source Jacobians/target/angle factors occur once; no borrowedPW19/PR236T/nb, no mean-time exposure, no inferred photon spectrum/history. Retained radiation remains separate fromw_ext/heating. Scopedchild1/1 has originalcentral27/88 count effect0;N4/N5partial,N6/N7gated,L4false,globalcompletion/error/budget/currencynull.
+
+New unit charged10.238419/20CPU-s includes preparation/coordinator/tails and both failures. independent_v1 preworker memory refusal0.066297 and uniquev2 tighter256MiB recovery remainrecorded. plot_v1 generated diagnostic files but exceeded its individual reservation; preserveFAILED,do notrerender toobtainPASS or claim hardpreventiveaggregateCPUproof. The earlierHeIII6.988054525/30 and itsC9v1/ownedstalelease/uniquev2history, allUNKNOWN_NO_ACK andotherprojectbudgets remainseparate. No unused allowance carries into the nextunit. Reuse accepted science byidentity; oldH1/HeI/C23E/source replays0.
+
+Fresh current host/owner/AGENTS probes precede each newunit. Parallel PR108 remains itsownowner/work/budget; no implicitcentraladoption. WU35bb7f296abc8ff6c8b38c2c08cc14dd498d4c99 scoped11/26 and primary28/28accessibility do not activatephysicalrate/consumer; itsfullZIPdualR3 remainpending. REC4a8e541030ee2cbd02e26ba671083b705d309d49 andHEac6042a6b0610b09d0576538767ee0299389a5eb gates/isotopes/budgets persist. Privateconversationfullsearch unavailable andDrivepartialinventory limits persist. Existing additive backup/publication/bounded-execution authorization remains; expectedSHA,force=false,no mainmerge.
+
+## Preserved earlier project instructions
+
 # BASS_CR project harness
 
 ## 현재 이론 연구 루프 — 실제 kernel과 온도 의존 cutoff, 2026-10-13
