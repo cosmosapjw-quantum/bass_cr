@@ -1,3 +1,13 @@
+# Current authorized He event-union unit (2026-10-28)
+
+The current user explicitly selected the next full theory R1-R10 and coding C1-C10 with per-stage Git publication, dual backups, central completed/total, and handoff. Apply research/cr_he_event_union_20261028/CONTRACT.json. Unit CR_PHYS02_HE_EVENT_UNION_V1 has its own40 CPU-s cap including preparation, worker, coordinator, failures and plots; no predecessor/foreign budget transfer. Prior PR111 stop rules remain historical for that closed unit.
+
+Preserve actual retained source/attribution bytes, proper finite q=tA history, conditional100K H1/He4 state, explicit nb8750/47 and four birth-energy partitions. The new finite event-measure union and sharp conditional cross-duplicate envelope do not supply actual exclusive He kernels, partnerresponse, protondebit or physical EOS. Fullphysicalnative25 remainsnull. Retainedphotons/RR are separate once-only ports. No main merge. Stagepublication uses expectedSHA forcefalse; canonical SOURCE/CLOSEOUT are create-only with actual dualR3. After this new20-stageunit, autonextOFF.
+
+Read current stage/evidence/budget before execution. Newsource errors or actualfailures are preserved, and unchanged prior science is reused. Current central snapshot28/88 is qualified by actual22a99cb9b1691274e74c122d54521be4f2f51ba5; recheck eachnode. Source/missingwork and physicalcompletion remain distinct.
+
+## Preserved prior instructions
+
 # Current PHYS02 parent-event partial native25 return and stop boundary (2026-10-28 unit)
 
 Read research/cr_parent_event_native25_20261028/ADMISSION.json, REPORT_KO.md, HANDOFF_KO.md, review/C09_INDEPENDENT.json, BUDGET_CLOSEOUT.json and publication/SOURCE_RELEASE_RECEIPT.json. Scientific S=5c50071412964cb42fc06b96acf778ccd1a93e44. The final-delivery location is https://github.com/cosmosapjw-quantum/bass_cr/pull/111 ; actual document D, central M and CLOSEOUT receipts are recorded there after their commits. At this C10 preimage D/M remain null. C09 decision is PASS_SCOPED_PARTIAL_RETURN with zero open blockers. Preserve its exact evidence and the original failed attempts.
