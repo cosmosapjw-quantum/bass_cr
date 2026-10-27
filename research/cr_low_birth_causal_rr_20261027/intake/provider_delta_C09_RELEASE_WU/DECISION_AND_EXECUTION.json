@@ -1,0 +1,20 @@
+{
+  "schema": "WU_R7_CONSTRUCTION_AND_EXECUTION_V1",
+  "selection": {
+    "candidate_plain_gronwall": "Valid but discards the existing finite-block mixing improvement; retained as an internal whole-block envelope.",
+    "candidate_rho_times_everything": "Fails for late forcing; explicit positive two-state counterexample in theory proof section 11.",
+    "selected_causal_feedback": "T=exp(BH)-(1-rho)e1e1^T with uncontracted forcing integral; combines nominal mixing with reaction/reservoir feedback.",
+    "HD_reduction": "Exact H,D,charge invariants yield e=(-1,-1,1,1)*eta and negative one-sided coarse damping."
+  },
+  "execution_dependencies": [
+    {"id":"source_reuse","requires":["R4 native event-map identity","R6 saved source Kbox,H,rho"],"old_science_runs":0},
+    {"id":"production","requires":["theory/THEORY_CODE_MAP.json","verification/PRIMARY_INPUT.json"],"author":"/root/r7_implementation","executor":"/root"},
+    {"id":"independent_reference","requires":["raw/PRIMARY_RESULTS.json","verification/PRIMARY_INPUT.json","verification/REFERENCE_INPUT.json"],"author":"/root/r6_backup_intake","production_import":false},
+    {"id":"symbolic_new_identity","requires":["verification/wolfram_new_checks.wl"],"executor":"Wolfram evaluator","maximum_calls":1},
+    {"id":"independent_adoption","requires":["general proof","production diff","actual new primary/reference/CAS evidence"],"reviewer":"/root/r6_inventory"}
+  ],
+  "bounded_work": {"affine_cases":5,"HD_controls":4,"HD_blocks_each":3,"production_queries_per_block":5,"reference_ODE_clocks_per_block":65,"series_degree":48,"dyadic_bits":256,"new_primary_CPU_cap_s":60,"new_reference_CPU_cap_s":60,"new_CAS_time_cap_s":30},
+  "guard_cases": ["negative coefficient/coupling/source","invalid H/rho","infeasible simplex interval","incompatible initial invariants","missing source/state/clock binding","TIQM/SQM combined variant","zero exponent at zero density","negative consumed-species dependency"],
+  "scope": {"actual_new_physical_IVP":0,"old_science_replay":0,"new_molecular_native_rows":0,"physical_consumer_admission":false},
+  "verification_status": "PLANNED_INPUTS_FROZEN_ACTUAL_RUNS_NOT_YET_EXECUTED"
+}

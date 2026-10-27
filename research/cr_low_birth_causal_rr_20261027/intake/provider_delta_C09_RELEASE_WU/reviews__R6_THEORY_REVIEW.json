@@ -1,0 +1,147 @@
+{
+  "schema": "WU_R7_INDEPENDENT_R6_THEORY_REVIEW_V1",
+  "workflow_stage": "R6 independent theory review; C9 code/results continuation remains separate within the same review pass",
+  "unit_id": "WU_NONLINEAR_EVENT_FEEDBACK_R7",
+  "reviewer": "/root/r6_inventory",
+  "independence": {
+    "authored_theory": false,
+    "authored_production_code": false,
+    "modified_proof_code_or_DAG": false,
+    "adoption_authority": "root"
+  },
+  "decision": "PASS_SCOPED_CONDITIONAL_GENERAL_FINITE_STATE_THEORY",
+  "material_findings": 0,
+  "findings": [],
+  "required_corrections": [],
+  "method": {
+    "actual_review": "Read frozen contract, complete R7 proof, theory-code map and claims. Independently expanded projection and HD error identities by hand, checked all interval inequality directions and the endpoint Duhamel argument, and compared the source-state qualifications with inherited R4 events/species/source rows and the relevant R6 K/full-A distinction.",
+    "numerical_solver_runs": 0,
+    "CAS_runs": 0,
+    "new_scientific_tests": 0,
+    "old_science_replays": 0,
+    "external_writes": 0,
+    "metadata_operations": "Read-only file inspection and SHA256 binding only; local review report writes.",
+    "review_stopping_rule": "One bounded theory pass; no new optional audits or replay requests after the stated proof obligations are satisfied."
+  },
+  "bindings": [
+    {
+      "file": "CONTRACT.json",
+      "sha256": "086da4760daec869f5dcdcb56a6251468f55df8ec5c424354eafd4c1c604dd8f"
+    },
+    {
+      "file": "theory/NONLINEAR_FEEDBACK_PROOF_KO.md",
+      "sha256": "0390132d823cb227a8eeb7f0e8d29157acba5d50a26983d0385e72626a1ea8f3"
+    },
+    {
+      "file": "theory/THEORY_CODE_MAP.json",
+      "sha256": "ebb8a1a17df03d687aeb27cbe6bdcc0fa5138a18c6e3ce381aadf04cbcf5a8b7"
+    },
+    {
+      "file": "theory/CLAIMS.json",
+      "sha256": "33180f8fb447966f68309f48915369f11f75cfd8f491a8116cd3783c8ed1aa81"
+    },
+    {
+      "file": "../provider_registry_molecular_r4_20261027/registry/events.json",
+      "sha256": "2203fcdd7ece309a7b2f9d7587f24009985c88a9d34118ec690d616c28268514"
+    },
+    {
+      "file": "../provider_registry_molecular_r4_20261027/registry/species.json",
+      "sha256": "82139048baed52754d7718d1371e4a6ec2f0ea996b53e4ba463a81db19c66afe"
+    },
+    {
+      "file": "../provider_registry_molecular_r4_20261027/sources/MOLECULAR_SOURCE_PACKET.json",
+      "sha256": "40e2fbd73d451c0c8116b4ca9bd4db4d2e43e4cdf8967988a2fea551f99ce35e"
+    },
+    {
+      "file": "../provider_registry_molecular_r6_20261027/theory/INTERVAL_BLOCK_PROOF_KO.md",
+      "sha256": "643e9c918353c068e648e5c74290a608b9993be487d7f4773278880db1a7c51c"
+    },
+    {
+      "file": "../provider_registry_molecular_r6_20261027/followup/NEXT_INPUT_CONTRACT.json",
+      "sha256": "7298e94a60e9edc67e71e61dc96a1b97b32069cab947b236c84f91718914e9a1"
+    }
+  ],
+  "reviewed_obligations": [
+    {
+      "id": "R7.7-R7.8",
+      "status": "PASS",
+      "basis": "Differentiating r=x-E_lift P x gives -E_lift_dot y, and PK=0, PE_lift=I imply r and all residual forcing remain in kerP. The coarse source difference and delta are retained."
+    },
+    {
+      "id": "R7.9-R7.11",
+      "status": "PASS_CONDITIONAL",
+      "basis": "Mean-value bounds on the declared convex whole-interval box give a,b,c. The l1 matrix measure retains signed diagonal entries and bounds the averaged coarse Jacobian. Monomial alpha_i=0 is treated before powers; zero densities and higher multiplicities are supported."
+    },
+    {
+      "id": "R7.1-R7.13",
+      "status": "PASS_CONDITIONAL",
+      "basis": "Nonexpansiveness supplies the ordinary cooperative comparison V. At the endpoint, Duhamel gives rho*R0 plus the reaction/source integral. Substituting V turns that integral into V1(H)-w01, hence T=exp(BH)-(1-rho)e1e1^T. No block factor multiplies late forcing."
+    },
+    {
+      "id": "R7_T_POSITIVITY",
+      "status": "PASS",
+      "basis": "For Metzler B and a>=0, the solution from e1 has nondecreasing first coordinate, so exp(BH)11>=1. Therefore T11>=rho>=0; other T entries and q are nonnegative even for d<0."
+    },
+    {
+      "id": "R7_INTERIOR_AND_REPETITION",
+      "status": "PASS_CONDITIONAL",
+      "basis": "V(u) bounds interior times separately. T,q apply at valid endpoints; negative d does not justify using the endpoint as an earlier whole-block envelope. The optional weighted contraction estimate requires the separately stated Tp<=theta*p condition."
+    },
+    {
+      "id": "R7.15",
+      "status": "PASS",
+      "basis": "The positive two-state late-source example gives J*(1-exp(-gamma*epsilon))/(gamma*epsilon)>J*exp(-gamma*H) for 0<epsilon<=H. It refutes one incorrect update and is not a strong no-go."
+    },
+    {
+      "id": "R7.17-R7.23",
+      "status": "PASS_CONDITIONAL",
+      "basis": "The H/D/charge rows annihilate the declared exchange direction and have rank3. Matching invariant classes implies e=(-1,-1,1,1)*eta. Product differences yield eta'=-(kf*Um+dbar*Wm)*eta-w*d^T*r. The scalar coordinate has l1 coarse observable factor4."
+    },
+    {
+      "id": "R7.24-R7.28",
+      "status": "PASS_CONDITIONAL",
+      "basis": "The exact HD residual separates -w*Qpi*D*r from F0. Its operator norm is 2*max_i d_i*(1-pi_i); weighted mean absolute deviation is at most Delta_d/2. Whole-block upper and lower bounds produce the displayed a,b,c,d,g with correct inequality directions; d retains damping and is not clipped."
+    },
+    {
+      "id": "R7_NOMINAL_K_BINDING",
+      "status": "PASS_CONDITIONAL",
+      "basis": "K-only rho is valid here because the entire state-dependent reset/destruction term is charged to aR. Absorbing it into the nominal generator requires a certificate for that full family. Same norm, state family, clock and H remain mandatory; state-dependent collider changes cannot be hidden."
+    },
+    {
+      "id": "R7_SOURCE_ENSEMBLE_BINDING",
+      "status": "PASS_SCOPED",
+      "basis": "R4 source labels actually distinguish para-H2(v0,j0) formation and thermal HD(v0,j0..8)/spin-weighted H2 products. The proof explicitly requires a new common-pool/state/branch matching and does not identify the source coefficients as a microscopic reverse pair. TIQM and SQM are alternatives; missing d_i/branch/consumer are not supplied by the theorem."
+    },
+    {
+      "id": "R7.30-R7.32",
+      "status": "PASS_CONDITIONAL",
+      "basis": "The augmented Metzler exponential contains the convolution and avoids B inverse. After the nonnegative shift, each omitted entry is bounded by the scalar norm tail. N+2>z justifies the geometric denominator. An outward rational exp(-sigma*H) upper and exact subtraction preserve the upper direction, including zero/singular B."
+    }
+  ],
+  "existing_assumptions_to_preserve": [
+    "Finite dimension, declared regularity and a convex nonnegative whole-interval enclosure for both trajectories and mean-value segments.",
+    "P constant; nonnegative lift with P E_lift=I; PK=0; locally absolutely continuous lift.",
+    "Nominal K propagation nonexpansive on kerP on every relevant subinterval, plus a valid rho for the same block length H and clock.",
+    "All a,b,c,d,g bounds valid over the entire block; g_e=0 only for the exact same-source coarse ODE.",
+    "HD scalar adapter requires matching initial H/D/charge invariants and identical prescribed time-dependent kf,d,pi; scalar defect must be in span{s}.",
+    "Actual source state/ensemble, rates, branch, density/history and physical consumer remain separately input-pending; no physical admission follows from this conditional theorem.",
+    "Augmented numerical coordinates use explicit scaling, positive-tail truncation satisfies N+2>z, and the exp primitive is outward."
+  ],
+  "code_review_continuation": {
+    "C9_status": "PENDING_PRODUCTION_CODE_AND_SINGLE_PRIMARY_REFERENCE_RESULTS",
+    "next_action": "Check that production enforces or explicitly exposes these existing conditions, preserves exact upper arithmetic and negative d, and that the already contracted discriminating controls and independent reference support the implementation. Do not rerun old science or add recursive audit gates."
+  },
+  "adoption": {
+    "root_only": true,
+    "scientific_code_admission": false,
+    "physical_consumer_admission": false,
+    "DAG_at_review": {
+      "complete": 13,
+      "total": 30
+    },
+    "DAG_modified": false,
+    "new_fundamental_theorem_claim": false,
+    "strong_no_go_claim": false
+  }
+}
+

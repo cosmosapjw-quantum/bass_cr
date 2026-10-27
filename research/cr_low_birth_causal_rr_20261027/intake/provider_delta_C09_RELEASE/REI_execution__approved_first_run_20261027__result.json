@@ -1,0 +1,78 @@
+{
+  "status": "PASS",
+  "source_head": "d91de6299e614520949c5873a9378000ceb1f85c",
+  "approval": "User explicitly approved planning cap16, presentation46 and bounded0.80 CPU jobs.",
+  "planning_prior": "15.077490885",
+  "presentation_prior": "44.990767494",
+  "unmeasured_tool_cost": "UNKNOWN_NOT_ZERO",
+  "jobs": [
+    {
+      "name": "cohort",
+      "cwd": "/workspace/scratch/52cc495a5f0a/rei_finite_history_unit/implementation",
+      "module": "test_cohort_bounds",
+      "expected_tests": 20,
+      "status": "PASS",
+      "source_blobs": {
+        "cohort_bounds.py": "d9d9a435d43fdffa099f0bcdd07890c835a1184d",
+        "test_cohort_bounds.py": "0b7d410fa8cc3543adc5047954e16a9aec300d1d"
+      },
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-S",
+        "-B",
+        "-m",
+        "unittest",
+        "-v",
+        "test_cohort_bounds"
+      ],
+      "wait_status": 0,
+      "user_cpu": 0.076238,
+      "system_cpu": 0.07862899999999999,
+      "cpu_total": 0.15486699999999998,
+      "exit_code": 0,
+      "count_summary_verified": true,
+      "ok_summary_verified": true
+    },
+    {
+      "name": "affine",
+      "cwd": "/workspace/scratch/52cc495a5f0a/rei_finite_history_unit/execution/approved_first_run_20261027/affine_pinned_source",
+      "module": "test_history_bounds",
+      "expected_tests": 16,
+      "status": "PASS",
+      "source_blobs": {
+        "history_bounds.py": "9dac2505626386917d36b85037e3d0686d19d913",
+        "test_history_bounds.py": "50e287438ccdc56a714158ceaa43d79430d6a020"
+      },
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-S",
+        "-B",
+        "-m",
+        "unittest",
+        "-v",
+        "test_history_bounds"
+      ],
+      "wait_status": 0,
+      "user_cpu": 0.100911,
+      "system_cpu": 0.061283,
+      "cpu_total": 0.162194,
+      "exit_code": 0,
+      "count_summary_verified": true,
+      "ok_summary_verified": true
+    }
+  ],
+  "reservation": {
+    "each_child": 0.25,
+    "wrapper": 0.2,
+    "tail": 0.1,
+    "total": 0.8
+  },
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "interpreter": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+  "wrapper_cpu_before_tail": 0.10319799999999998,
+  "tail_cpu_before_final_serialization": 1.0000000000010001e-05,
+  "parent_cpu_before_final_serialization": 0.10321,
+  "child_cpu_total": 0.317061,
+  "measured_total_before_final_serialization": 0.42028099999999996,
+  "final_tail_note": "Final serialization/process exit remains within reserved tail; external final process CPU must be preserved."
+}

@@ -1,0 +1,349 @@
+[
+  {
+    "request": {
+      "repository_full_name": "cosmosapjw-quantum/rec_bianchi",
+      "ref": "8496efcba3518776882eaf25e5dad30741eabbec",
+      "path": "research/rec_h5_native_producer_20261027/FROZEN_CONTRACT.md"
+    },
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Action completed."
+        }
+      ],
+      "structuredContent": {
+        "content": "# R3 frozen claim and input contract\nUnit: REC-H5-NATIVE-REFERENCE01. Frozen before numerical execution.\n\n## Result and truth conditions\nFor every one of the 313 rows in the locked SOURCE_CONTEXT, calculate outward enclosures of the native Wien reference derivatives, whole stored-cell reference curvature, characteristic-query bridge, native-temperature bridge, reference chord and native-to-absolute-interpolant representation bridge. This supplies an actual, source-specific partial H5 observable/reference producer.\n\nAll represented binary64 source scalars are interpreted as exact real numbers. The native constants are kN = float(8.617343e-5) eV/K, T0 from SOURCE_CONTEXT source_identity, and the channel energies from the locked native CSV with Lyman energies from hydrogen.h. Do not replace kN with the SI value or insert a population degeneracy into photon occupation. eta = ln(a), photon occupation f and departure y are dimensionless.\n\n## Primary clock and source locks\nThe H5 row's stored geometric endpoints a,b, recorded query qhat and exact rational alpha=(qhat-a)/(b-a) are primary. These are not replaced by the predecessor's reconstructed native-real clock. The predecessor's results remain valid on their own clock. The R1 README phrase is clarified accordingly; the current candidate already uses the correct clock.\n\n- SOURCE_CONTEXT.json: research/program_expansion_20261025/h5_input_binding/inputs/SOURCE_CONTEXT.json; SHA256 5ccd8955bc9ea7484ddc1fca1dcf8b5a0a789e07c36ce0af3e692b959f002fe8.\n- Native CSV: research/rec_history_geometry_response_20261026/inputs/target_native_snapshot.csv; SHA256 3a95862b9cd4f924d63020f39fc537b371133af6160e88c3409d8c69fc0c34b7.\n- Original history.npz: SHA256 d4f82542e13fed4ff0bb60b17865d8b9de5e090a2366108169c3da7a21fcb4b1. Reuse established routing; no history/native primary rerun.\n- hydrogen.h: research/rec_history_thermo_20261024/vendor/hydrogen.h; SHA256 e89a3a447928cbe31dc273c11c4a8bc7f7a8e297be4a11270e453c101f96ccba.\n- original_hyrec_native.py: SHA256 d7bc38346281951fdd5f2677e25f3b558333124a2319786b9b7afb0ab1f7a89c.\n- The source CSV is a tagged native format (META, VIRTUAL, REAL, etc.), not a rectangular header CSV. VIRTUAL field 2 is energy_eV; META TR_eV_rescaled is the represented native radiation temperature.\n- z=1099.9986525171403 and TRhat=0.25882399309326415 eV retain their exact binary64 meanings. The exact real product kN*T0*(1+z) is a separate quantity.\n\nThe complete 313 bindings retain incoming_index, source_index, cell, prefix, exact endpoints/query, geometric_alpha_exact, samples, nominal incoming and prior anchor radius. Incoming indices 0..310 map to virtual energies; 311,312 to E21,E31. Source 0..310 map to virtual energies; 311,312,313 to E21,E31,E41. Special routes 139->311,270->312,310->313,311->140,312->271 must be checked.\n\n## Frozen formulas and domain\nFor positive E,kN,T0 and a<=q<=b:\nx_E(eta)=E*exp(eta)/(kN*T0), w=exp(-x).\nw'=-x*w; w''=(x*x-x)*w; w'''=(-x^3+3*x*x-x)*w.\nG=f-w; G_f=1; G_ff=G_eta_f=0; G_eta=x*w; G_etaeta=-(x*x-x)*w.\n\nThe scalar occupation norm is abs(delta_f). Its coordinate sensitivity is exactly 1. In abs(delta_f)/s_f the factor would be s_f; full coupled-state K is unspecified.\n\nFor M1_ref=sup_cell abs(w'), candidates are endpoints and x=1 if possibly inside.\nFor M2_ref=sup_cell abs(w''), candidates are endpoints and x=(3+-sqrt(5))/2 if possibly inside. Candidate inclusion uses conservative interval overlap. Monotone reduction to the left endpoint is allowed only after an interval proof x(a)>(3+sqrt(5))/2. The x=1 zero and degenerate cell are handled.\n\nFor source energy Es and target Et:\nqstar=-ln((1+z)*Es/Et); xt=Et/(kN*T0*(1+z)); delta=qhat-qstar.\nBchar=exp(-xt)*expm1(-xt*expm1(delta)).\nBTR=exp(-xt)-exp(-Et/TRhat).\nBtotal=Bchar+BTR=ws(qhat)-exp(-Et/TRhat).\n\nWith alpha from the exact stored geometry:\nJref=(1-alpha)*ws(a)+alpha*ws(b)-ws(qhat).\nabs(Jref)<=M2_ref*(qhat-a)*(b-qhat)/2.\nra=uhat-((1-alpha)*yL+alpha*yR).\nDirectBridge=(uhat+w_native)-((1-alpha)*(yL+ws(a))+alpha*(yR+ws(b)))\n            =ra-Jref-Btotal.\nRbridge=old_anchor_radius + upper_abs(Jref) + upper_abs(Btotal).\nAlso report the conservative curvature-based radius replacing upper_abs(Jref) with its chord bound. Preserve the old absolute anchor radius exactly.\n\n## Reference translation lemma and physical composition\nFor y=f-w and Fy(eta,y)=Ff(eta,y+w)-w', exact-reference defect, state error, fixed-norm state Lipschitz bound and translated tube radius are preserved. This is a conditional algebraic result requiring a supplied Ff and path.\n\nFor the photon coordinate, y''=partial_eta Ff_j + (D_f Ff_j)Ff - w''. Therefore a supplied whole-tube bound on the physical first two terms can be combined with M2_ref. M2_ref alone is not physical M2. The source archive lacks the required all-time xe,xHII,TM,H state trajectory; the target-face CSV is insufficient for the whole-tube defect/stability calculation.\n\n## Numerical enclosure and independent reference\nProduction interval arithmetic uses Decimal precision 80. Exact binary64/Fraction input conversion precedes all rounding. Basic operations are directed FLOOR/CEILING, with all four endpoint products for general multiplication. Monotone exp, ln, sqrt are evaluated correctly rounded at HALF_EVEN and expanded by next_minus/next_plus at that precision. Invalid domain, nonfinite values, overflow, underflow or subnormal results are rejected rather than silently accepted. The rounding dependency is primary Python Decimal documentation; higher precision checks are separate evidence, not the enclosure proof.\n\nAt least precision 120 independently evaluates original point formulas from raw inputs, without importing the production interval formulas or bridge decomposition. It checks interval containment for all actual rows, and the direct absolute interpolant checks signs and cancellation. Useful interval width target: max width/(1e-100+abs(midpoint)) <= 1e-40 for nonzero physical actual-row derived outputs; zero-containing controls use containment without a relative target. A target failure requests diagnosis, not an automatic precision change or physical acceptance.\n\nControls cover both curvature critical points; x=1 and degenerate/invalid domains; characteristic and temperature equality; the convex chord coefficient/sign; an exact quadratic chord; direct versus decomposed bridge; a smooth toy defect translation. C4 freezes exact run commands and smaller execution caps before code execution.\n\n## Typed output and admission boundary\nreference_bounds: actual 313 enclosures when computed.\nphysical_query_bounds, full_state_K, physical_M2, physical_defect, stability_L,\npositive_uniform_ode_tube, initial_error, physical_epsilon,\nphysical_outgoing_bound: null.\nphysical coverage: 0/313; H6/H7 OPEN; L4 false; REI activation false.\nNo new strong no-go or general novelty claim. Original HD gate and all historical budgets/results remain unchanged. These are deterministic reference/representation inputs for conditional H5 composition.\n\n## Completion criteria\nAll 313 exact bindings and source locks pass; analytical extrema and chosen controls pass; production enclosures contain independent reference evaluations; signed direct/decomposed bridge agreement passes; independent Astra review accepts this exact scope; raw outputs, code, source ZIP, actual dual backup receipts, DAG return and handoff are published with expected-SHA semantics.\n",
+        "encoding": "utf-8",
+        "sha": "f4ebe9a73459b911b3d4796c07b5069cf3d8eac8",
+        "display_url": "https://github.com/cosmosapjw-quantum/rec_bianchi/blob/8496efcba3518776882eaf25e5dad30741eabbec/research/rec_h5_native_producer_20261027/FROZEN_CONTRACT.md",
+        "display_title": "FROZEN_CONTRACT.md"
+      },
+      "isError": false
+    }
+  },
+  {
+    "request": {
+      "repository_full_name": "cosmosapjw-quantum/rec_bianchi",
+      "ref": "8496efcba3518776882eaf25e5dad30741eabbec",
+      "path": "research/rec_h5_native_producer_20261027/theory/REVIEW_R6.json"
+    },
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Action completed."
+        }
+      ],
+      "structuredContent": {
+        "content": "{\n  \"schema_version\": 1,\n  \"workflow_version\": \"1.0.0\",\n  \"unit_id\": \"REC-H5-NATIVE-REFERENCE01\",\n  \"review_stage\": \"R6\",\n  \"decision\": \"PASS\",\n  \"reviewer\": \"independently delegated theory reviewer /root/native_reference_review\",\n  \"requested_tier\": \"Astra\",\n  \"runtime_model_identity\": \"NOT_INDEPENDENTLY_OBSERVABLE\",\n  \"scope\": \"Analytical source-specific reference construction and immutable 313-query metadata; implementation/output admission pending\",\n  \"review_note\": \"theory/INDEPENDENT_REVIEW_R6.md\",\n  \"methods\": [\n    \"Direct chain-rule differentiation with x_prime=x\",\n    \"Polynomial stationary-point factorization and endpoint analysis\",\n    \"Exact-reference translation substitution\",\n    \"Independent expansion of direct absolute-interpolant difference\",\n    \"Native C and Python wrapper source reading\",\n    \"Exact-rational standard-library metadata verification over 313 rows\"\n  ],\n  \"source_identities\": {\n    \"research/rec_h5_native_producer_20261027/theory/CONSTRUCTION_CANDIDATES.md\": {\n      \"sha256\": \"dd7401ab7c189d7ce435047f99048ef5cc68b1db6f589a25d3ad255bc1603a9b\",\n      \"bytes\": 16979\n    },\n    \"research/program_expansion_20261025/h5_input_binding/inputs/SOURCE_CONTEXT.json\": {\n      \"sha256\": \"5ccd8955bc9ea7484ddc1fca1dcf8b5a0a789e07c36ce0af3e692b959f002fe8\",\n      \"bytes\": 220122\n    },\n    \"research/program_expansion_20261025/h5_input_binding/inputs/ACTUAL_BOUND_INPUTS.json\": {\n      \"sha256\": \"5b79cd45398148ef938665fcdf17571c4fefa32ddf7d3a50526e8b925899b788\",\n      \"bytes\": 1813\n    },\n    \"research/program_expansion_20261025/h5_input_binding/inputs/DERIVATION.md\": {\n      \"sha256\": \"e4dc39a4d142a5baea3458b8a68ca2d68ce7aed0a1537c6160401c646258169b\",\n      \"bytes\": 10757\n    },\n    \"research/rec_history_thermo_20261024/vendor/hydrogen.c\": {\n      \"sha256\": \"421ad4678a9a2f00d54f72ebb841648f34a95a9892171c07af5f657a3b2a051b\",\n      \"bytes\": 37471\n    },\n    \"research/rec_history_thermo_20261024/vendor/hydrogen.h\": {\n      \"sha256\": \"e89a3a447928cbe31dc273c11c4a8bc7f7a8e297be4a11270e453c101f96ccba\",\n      \"bytes\": 7837\n    },\n    \"research/rec_history_thermo_20261024/vendor/original_hyrec_native.py\": {\n      \"sha256\": \"d7bc38346281951fdd5f2677e25f3b558333124a2319786b9b7afb0ab1f7a89c\",\n      \"bytes\": 22766\n    },\n    \"research/rec_history_thermo_20261024/vendor/full_2012_atomic_source.py\": {\n      \"sha256\": \"1af383a2c596220561ef1c3be6a1bb755a68ee49f2428ed78cbbaf82c5f59578\",\n      \"bytes\": 14381\n    },\n    \"research/rec_history_geometry_response_20261026/inputs/target_native_snapshot.csv\": {\n      \"sha256\": \"3a95862b9cd4f924d63020f39fc537b371133af6160e88c3409d8c69fc0c34b7\",\n      \"bytes\": 141089\n    }\n  },\n  \"checks\": {\n    \"derivative_signs\": \"pass_scoped\",\n    \"finite_extrema_and_singleton_endpoints\": \"pass_scoped\",\n    \"fixed_norm_reference_translation\": \"pass_scoped\",\n    \"characteristic_temperature_split\": \"pass_scoped\",\n    \"chord_anchor_composition\": \"pass_scoped\",\n    \"native_constant_and_degeneracy_mapping\": \"pass_scoped\",\n    \"exact_metadata\": {\n      \"result\": \"pass_scoped\",\n      \"count\": 313,\n      \"fields\": [\n        \"incoming_order\",\n        \"source_routing\",\n        \"strict_cell_containment\",\n        \"causal_endpoint_prefix\",\n        \"geometric_alpha\",\n        \"curvature_coefficient\",\n        \"anchor_representation_radius\"\n      ]\n    }\n  },\n  \"findings\": [\n    {\n      \"id\": \"F01\",\n      \"severity\": \"editorial\",\n      \"status\": \"closed\",\n      \"target\": \"README.md R1 native-real causal grid phrase\",\n      \"evidence\": \"CONSTRUCTION_CANDIDATES.md section 6 uses SOURCE_CONTEXT stored geometric endpoint hex values\",\n      \"impact\": \"Ambiguous primary clock may imply different alpha and anchor\",\n      \"smallest_fix\": \"Identify primary cells as exact reals represented by stored endpoint hex values; reserve native-real-grid comparison for separately labelled output\",\n      \"analytical_candidate_revision_required\": false,\n      \"resolution\": \"FROZEN_CONTRACT.md Primary clock and source locks explicitly selects stored geometric endpoints/query and exact rational alpha; README R1 now matches and labels predecessor native-real grid separately.\"\n    }\n  ],\n  \"execution\": {\n    \"kind\": \"read_only_exact_metadata_review\",\n    \"status\": \"completed\",\n    \"exit_code\": 0,\n    \"cpu_limit_seconds\": 20,\n    \"threads\": 1,\n    \"memory_limit_bytes\": 536870912,\n    \"exact_check_cpu_seconds\": 0.012264342999999997,\n    \"total_review_cpu_seconds\": null,\n    \"total_review_cpu_reason\": \"Read-only shell and serialization overhead not measured; check timing excludes subsequent source hashing\",\n    \"physical_science_runs\": 0,\n    \"old_primary_replays\": 0\n  },\n  \"implementation_obligations\": [\n    \"Verify outward conversions and elementary arithmetic\",\n    \"Verify documented correctly rounded exp/ln/sqrt outward-neighbor treatment\",\n    \"Conservative critical-point overlap inclusion\",\n    \"Independent high-precision point containment and analytic controls\",\n    \"Preserve physical fields null and separate scalar occupation K from full-state K\"\n  ],\n  \"physical_admission\": {\n    \"physical_coverage\": 0,\n    \"query_count\": 313,\n    \"physical_epsilon\": null,\n    \"physical_outgoing_bound\": null,\n    \"full_state_K\": null,\n    \"physical_M2\": null,\n    \"defect\": null,\n    \"stability\": null,\n    \"tube\": null\n  },\n  \"strong_no_go\": \"not_proposed\",\n  \"general_novelty\": \"not_claimed\",\n  \"parent_freeze\": \"R3 FROZEN_CONTRACT.md and corrected README read for targeted F01 closure; prior analytical PASS and candidate identity preserved. Numerical implementation admission remains pending C9.\",\n  \"targeted_closure\": {\n    \"finding\": \"F01\",\n    \"method\": \"Read only FROZEN_CONTRACT.md and changed README R1 clock wording; no analytical campaign or numerical replay\",\n    \"result\": \"pass_scoped\",\n    \"source_identities\": {\n      \"research/rec_h5_native_producer_20261027/FROZEN_CONTRACT.md\": {\n        \"sha256\": \"8c4f3ab92ec34da823cdb3822f505e39bdc20d1fb688476044edfb3fefe68dcc\",\n        \"bytes\": 7424\n      },\n      \"research/rec_h5_native_producer_20261027/README.md\": {\n        \"sha256\": \"d838d5cddfcbfc4464f873637cbe0a456f5e0d5aee8e9c521cdc8f2430d67423\",\n        \"bytes\": 4206\n      }\n    },\n    \"new_scientific_compute\": 0,\n    \"prior_checks_and_budget\": \"unchanged\"\n  }\n}\n",
+        "encoding": "utf-8",
+        "sha": "14da1bd2b0b1790148f507ec305ba234f6e63b77",
+        "display_url": "https://github.com/cosmosapjw-quantum/rec_bianchi/blob/8496efcba3518776882eaf25e5dad30741eabbec/research/rec_h5_native_producer_20261027/theory/REVIEW_R6.json",
+        "display_title": "REVIEW_R6.json"
+      },
+      "isError": false
+    }
+  },
+  {
+    "request": {
+      "repository_full_name": "cosmosapjw-quantum/rec_bianchi",
+      "ref": "8496efcba3518776882eaf25e5dad30741eabbec",
+      "path": "research/rec_h5_native_producer_20261027/theory/WOLFRAM_R7.json"
+    },
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Action completed."
+        }
+      ],
+      "structuredContent": {
+        "content": "{\n  \"stage\": \"R7\",\n  \"tool\": \"Wolfram Language evaluator\",\n  \"time_constraint_s\": 20,\n  \"remote_cpu_s\": \"UNKNOWN_NOT_EXPOSED\",\n  \"input\": \"Clear[x, eta, c, a, b, q, et, es, k, t, z, delta, yl, yr, uh, wa, wb, wq, wn, alpha, ff, ww, ffp, wwp];\\nderivatives = FullSimplify[Table[D[Exp[-c Exp[eta]], {eta,n}], {n,1,3}] /. c -> x Exp[-eta], Assumptions -> x>0];\\ncriticalPolynomial = Factor[Exp[x] D[(x^2-x) Exp[-x],x]];\\ncriticalRoots = Solve[x^2-3x+1==0,x];\\ncharacteristic = FullSimplify[es Exp[-Log[(1+z)es/et]]/(k t)-et/(k t(1+z)),Assumptions->{es>0,et>0,k>0,t>0,z>-1}];\\nbridge = FullSimplify[Exp[-x Exp[delta]]-Exp[-x]-Exp[-x](Exp[-x(Exp[delta]-1)]-1),Assumptions->{x>0,Element[delta,Reals]}];\\nanchor = Expand[(uh+wn)-((1-alpha)(yl+wa)+alpha(yr+wb))-((uh-((1-alpha)yl+alpha yr))-((1-alpha)wa+alpha wb-wq)-(wq-wn))];\\nquadraticChord = Factor[((b-q)/(b-a) a^2+(q-a)/(b-a)b^2-q^2)-((q-a)(b-q))];\\ndefect = Expand[(ffp-wwp)-(ff^2+eta-wwp)-(ffp-(ff^2+eta))];\\n<|\\\"derivatives\\\"->derivatives,\\\"critical_polynomial\\\"->criticalPolynomial,\\\"critical_roots\\\"->criticalRoots,\\\"characteristic_residual\\\"->characteristic,\\\"bridge_residual\\\"->bridge,\\\"anchor_residual\\\"->anchor,\\\"quadratic_chord_residual\\\"->quadraticChord,\\\"toy_defect_residual\\\"->defect|>\",\n  \"actual_output\": {\n    \"content\": [\n      {\n        \"type\": \"text\",\n        \"text\": \"Out[1]= <|\\\"derivatives\\\" -> {-(x/E^x), ((-1 + x)*x)/E^x, -((x*(1 + (-3 + x)*x))/E^x)}, \\\"critical_polynomial\\\" -> -1 + 3*x - x^2, \\\"critical_roots\\\" -> {{x -> (3 - Sqrt[5])/2}, {x -> (3 + Sqrt[5])/2}}, \\\"characteristic_residual\\\" -> 0, \\\"bridge_residual\\\" -> 0, \\\"anchor_residual\\\" -> 0, \\\"quadratic_chord_residual\\\" -> 0, \\\"toy_defect_residual\\\" -> 0|>\"\n      }\n    ],\n    \"structuredContent\": null,\n    \"isError\": false\n  },\n  \"decision\": \"PASS_SCOPED\",\n  \"interpretation\": \"Three derivatives and both curvature roots agree. Exact characteristic, bridge, anchor, quadratic chord and smooth toy defect residuals are all zero. This supports the analytical identities; numerical interval implementation remains a C-loop obligation.\"\n}\n",
+        "encoding": "utf-8",
+        "sha": "17ad1b0314cf568edd1eb4656af222a16129f6c0",
+        "display_url": "https://github.com/cosmosapjw-quantum/rec_bianchi/blob/8496efcba3518776882eaf25e5dad30741eabbec/research/rec_h5_native_producer_20261027/theory/WOLFRAM_R7.json",
+        "display_title": "WOLFRAM_R7.json"
+      },
+      "isError": false
+    }
+  },
+  {
+    "request": {
+      "repository_full_name": "cosmosapjw-quantum/rec_bianchi",
+      "ref": "8496efcba3518776882eaf25e5dad30741eabbec",
+      "path": "research/rec_h5_native_producer_20261027/stages/R7.json"
+    },
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Action completed."
+        }
+      ],
+      "structuredContent": {
+        "content": "{\n  \"id\": \"R7\",\n  \"name\": \"bounded symbolic discriminant execution\",\n  \"status\": \"complete\",\n  \"evidence\": [\n    \"../theory/WOLFRAM_R7.json\",\n    \"../theory/WOLFRAM_R7.wl\"\n  ],\n  \"actual_result\": \"Actual Wolfram run returned expected derivatives/critical roots and five exact zero residuals.\",\n  \"dag\": {\n    \"working_completed_snapshot\": 32,\n    \"shared_completed\": 28,\n    \"total\": 88,\n    \"new_canonical_completed\": 0\n  },\n  \"publication_backup_status\": \"SEE_ACTUAL_STAGE_RECEIPT\",\n  \"next\": \"R8 analytical decision\"\n}\n",
+        "encoding": "utf-8",
+        "sha": "6501a7fef1c0fa74226ce794d64200eee7377e99",
+        "display_url": "https://github.com/cosmosapjw-quantum/rec_bianchi/blob/8496efcba3518776882eaf25e5dad30741eabbec/research/rec_h5_native_producer_20261027/stages/R7.json",
+        "display_title": "R7.json"
+      },
+      "isError": false
+    }
+  },
+  {
+    "request": {
+      "repository_full_name": "cosmosapjw-quantum/rei_bianchi",
+      "ref": "9a19c6f0a0ed5f913a3239b5712100928ddc86dd",
+      "path": "research/rei_expanded_event_consumer/finite_cohort_enclosure_20261027/recovery/FIRST_RUNTIME_ADMISSION.json"
+    },
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Action completed."
+        }
+      ],
+      "structuredContent": {
+        "content": "{\n  \"schema\": \"REI_FIRST_RUNTIME_RECOVERY_ADMISSION_V1\",\n  \"decision\": \"PASS_SCOPED_FIRST_RUNTIME_TESTS_36\",\n  \"review\": \"reviews/FIRST_RUNTIME_INDEPENDENT_REVIEW.md\",\n  \"source_head\": \"d91de6299e614520949c5873a9378000ceb1f85c\",\n  \"cohort_tests\": 20,\n  \"affine_tests\": 16,\n  \"all_pass\": true,\n  \"scientific_child_first_runs\": 2,\n  \"scientific_replays\": 0,\n  \"old_causal_3189_replay\": 0,\n  \"source_blob_checks_before_fork\": true,\n  \"implementation_changes\": 0,\n  \"finite_cohort_stages\": {\n    \"R1_R10\": \"REUSED_COMPLETE\",\n    \"C1_C5\": \"REUSED_COMPLETE\",\n    \"C6\": \"COMPLETE_FIRST20\",\n    \"C7\": \"COMPLETE_EXACT_INFORMATION_SCOPE\",\n    \"C8\": \"COMPLETE_EXACT_ORACLE_AND_MEASURED_RESOURCE_SCOPE\",\n    \"C9\": \"COMPLETE_INDEPENDENT_STORED_RESULT_REVIEW\",\n    \"C10\": \"SOURCE_ZIP_DELIVERY_PENDING\"\n  },\n  \"affine\": \"16 previously unrun methods now PASS; no retroactive claim about unrelated stages\",\n  \"planning\": {\n    \"outer_reported\": \"0.433\",\n    \"display_allowance\": \"0.002\",\n    \"preserved_new_tail\": \"0.10\",\n    \"charged_known_and_reserved\": \"0.535\",\n    \"prior\": \"15.077490885\",\n    \"cumulative_known_and_reserved\": \"15.612490885\",\n    \"approved_ceiling\": \"16\",\n    \"scope\": \"Two first scientific child runs20+16; no old science replay; outer includes children and is not added twice\",\n    \"unknown_cost\": \"UNKNOWN_NOT_ZERO\"\n  },\n  \"resource_this_authorized_job\": \"PASS_WITHIN_APPROVED_MEASURED_AND_RESERVED_ACCOUNT\",\n  \"historical_resource_hold\": \"PRESERVED\",\n  \"physical_gates\": \"UNCHANGED_SOURCE_MATCHING_RECIPIENT_NB_RADII_NATIVE_CLIENT_TUBE\",\n  \"L4_ready\": false,\n  \"global_physical_completion\": null,\n  \"environment_failure\": {\n    \"command\": \"/usr/bin/time\",\n    \"exit\": 127,\n    \"runner_started\": false,\n    \"scientific_tests_started\": false,\n    \"cost\": \"UNKNOWN_NOT_ZERO\",\n    \"correction\": \"Bash builtin time, first actual scientific execution\"\n  },\n  \"source_archive\": \"One approved presentation job follows this frozen publication\",\n  \"DAG\": {\n    \"working\": 33,\n    \"central\": 28,\n    \"total\": 88,\n    \"external_adoption_delta\": 1,\n    \"rei_science_increment\": 0,\n    \"ids\": 88,\n    \"edges\": 17,\n    \"L4_ready\": false,\n    \"global_physical_completion\": null\n  }\n}\n",
+        "encoding": "utf-8",
+        "sha": "c6d9f5ddc4a7d4906744e948875da6a6a4f3c843",
+        "display_url": "https://github.com/cosmosapjw-quantum/rei_bianchi/blob/9a19c6f0a0ed5f913a3239b5712100928ddc86dd/research/rei_expanded_event_consumer/finite_cohort_enclosure_20261027/recovery/FIRST_RUNTIME_ADMISSION.json",
+        "display_title": "FIRST_RUNTIME_ADMISSION.json"
+      },
+      "isError": false
+    }
+  },
+  {
+    "request": {
+      "repository_full_name": "cosmosapjw-quantum/rei_bianchi",
+      "ref": "9a19c6f0a0ed5f913a3239b5712100928ddc86dd",
+      "path": "research/rei_expanded_event_consumer/finite_cohort_enclosure_20261027/execution/approved_first_run_20261027/result.json"
+    },
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Action completed."
+        }
+      ],
+      "structuredContent": {
+        "content": "{\n  \"status\": \"PASS\",\n  \"source_head\": \"d91de6299e614520949c5873a9378000ceb1f85c\",\n  \"approval\": \"User explicitly approved planning cap16, presentation46 and bounded0.80 CPU jobs.\",\n  \"planning_prior\": \"15.077490885\",\n  \"presentation_prior\": \"44.990767494\",\n  \"unmeasured_tool_cost\": \"UNKNOWN_NOT_ZERO\",\n  \"jobs\": [\n    {\n      \"name\": \"cohort\",\n      \"cwd\": \"/workspace/scratch/52cc495a5f0a/rei_finite_history_unit/implementation\",\n      \"module\": \"test_cohort_bounds\",\n      \"expected_tests\": 20,\n      \"status\": \"PASS\",\n      \"source_blobs\": {\n        \"cohort_bounds.py\": \"d9d9a435d43fdffa099f0bcdd07890c835a1184d\",\n        \"test_cohort_bounds.py\": \"0b7d410fa8cc3543adc5047954e16a9aec300d1d\"\n      },\n      \"argv\": [\n        \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python\",\n        \"-S\",\n        \"-B\",\n        \"-m\",\n        \"unittest\",\n        \"-v\",\n        \"test_cohort_bounds\"\n      ],\n      \"wait_status\": 0,\n      \"user_cpu\": 0.076238,\n      \"system_cpu\": 0.07862899999999999,\n      \"cpu_total\": 0.15486699999999998,\n      \"exit_code\": 0,\n      \"count_summary_verified\": true,\n      \"ok_summary_verified\": true\n    },\n    {\n      \"name\": \"affine\",\n      \"cwd\": \"/workspace/scratch/52cc495a5f0a/rei_finite_history_unit/execution/approved_first_run_20261027/affine_pinned_source\",\n      \"module\": \"test_history_bounds\",\n      \"expected_tests\": 16,\n      \"status\": \"PASS\",\n      \"source_blobs\": {\n        \"history_bounds.py\": \"9dac2505626386917d36b85037e3d0686d19d913\",\n        \"test_history_bounds.py\": \"50e287438ccdc56a714158ceaa43d79430d6a020\"\n      },\n      \"argv\": [\n        \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python\",\n        \"-S\",\n        \"-B\",\n        \"-m\",\n        \"unittest\",\n        \"-v\",\n        \"test_history_bounds\"\n      ],\n      \"wait_status\": 0,\n      \"user_cpu\": 0.100911,\n      \"system_cpu\": 0.061283,\n      \"cpu_total\": 0.162194,\n      \"exit_code\": 0,\n      \"count_summary_verified\": true,\n      \"ok_summary_verified\": true\n    }\n  ],\n  \"reservation\": {\n    \"each_child\": 0.25,\n    \"wrapper\": 0.2,\n    \"tail\": 0.1,\n    \"total\": 0.8\n  },\n  \"python\": \"3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]\",\n  \"interpreter\": \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python\",\n  \"wrapper_cpu_before_tail\": 0.10319799999999998,\n  \"tail_cpu_before_final_serialization\": 1.0000000000010001e-05,\n  \"parent_cpu_before_final_serialization\": 0.10321,\n  \"child_cpu_total\": 0.317061,\n  \"measured_total_before_final_serialization\": 0.42028099999999996,\n  \"final_tail_note\": \"Final serialization/process exit remains within reserved tail; external final process CPU must be preserved.\"\n}\n",
+        "encoding": "utf-8",
+        "sha": "af1fe71f7da56cf3e733f6885c90639278ab7cd3",
+        "display_url": "https://github.com/cosmosapjw-quantum/rei_bianchi/blob/9a19c6f0a0ed5f913a3239b5712100928ddc86dd/research/rei_expanded_event_consumer/finite_cohort_enclosure_20261027/execution/approved_first_run_20261027/result.json",
+        "display_title": "result.json"
+      },
+      "isError": false
+    }
+  },
+  {
+    "request": {
+      "repository_full_name": "cosmosapjw-quantum/rei_bianchi",
+      "ref": "9a19c6f0a0ed5f913a3239b5712100928ddc86dd",
+      "path": "research/rei_expanded_event_consumer/finite_cohort_enclosure_20261027/reviews/FIRST_RUNTIME_INDEPENDENT_REVIEW.md"
+    },
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Action completed."
+        }
+      ],
+      "structuredContent": {
+        "content": "# Independent C9 recovery review\n\nReviewer: /root/survey_he_bass. Decision returned in this conversation: PASS_SCOPED_FIRST_RUNTIME_TESTS_36. Blocking findings 0; repairs 0; reviewer scientific/test executions 0.\n\nThe reviewer directly read run_first_tests.py, APPROVAL.json, result.json, outer_time.txt, both stderr files and the two affine pinned source files. The earlier independent cohort static review was reused. Four source Git blobs match the before-fork byte checks and root's already observed public readbacks. Two attempted reviewer connector tree reads returned Transport closed; that metadata failure and UNKNOWN_NOT_ZERO cost are preserved, not called a successful new readback.\n\nCohort 20/20 and affine 16/16 are separate first executions with exit 0, every method ok, no failures/errors/skips, and expected count/OK summaries. New child CPU is 0.15486699999999998 and 0.162194 s, each below 0.25. Parent before final serialization is 0.10321 s, below 0.20. Outer user/system 0.257/0.176 includes children: do not add child CPU again. The explicit user grant is planning ceiling16 and presentation46 with the two bounded0.80 jobs. Prior planning15.077490885 + outer0.433 + display allowance0.002 + retained tail0.10 =15.612490885. Historical budget failures and the pre-run /usr/bin/time exit127 remain recorded. Unmeasured tool/launch/read costs are UNKNOWN_NOT_ZERO.\n\nAdmitted scope is exact-rational implementations in their stated interval/monotonicity information classes. Physical source matching, actual recipient nb, physical error radii, actual native state update and global/L4 completion are not supplied by these tests. Existing causal3189 PASS evidence and PREEXEC/raw sources are reused without execution.\n\nThe reviewer also accepts adopting public BASS PR205 source634c3046ffccc5d00f1ab7588b5834a6eb8053ad into the already existing B3h node. Root directly observed working DAG blobbe666f403d3c2cabdbb120ed0f01407015a4efa0 atd91: B3h was PARTIAL_SOURCE_BOUND_FINITE_DONOR_INPUT_DEPENDENT. Updating its wrapper status to COMPLETE_SCOPED_NATIVE_EFFECTIVE_H_FINITE_TRANSACTION gives working32→33/88; central28/88 is separate. This is external provider adoption+1, REI science original-DAG delta0. Other87 nodes,17edges, original B3h contract and prior observation remain. No extra B3i node increment. BASS S1B final delivery ACK was not publicly observed; source science admission and delivery status remain separate.\n",
+        "encoding": "utf-8",
+        "sha": "10a2a52893ff82bd2335142eccb4788738e6c40b",
+        "display_url": "https://github.com/cosmosapjw-quantum/rei_bianchi/blob/9a19c6f0a0ed5f913a3239b5712100928ddc86dd/research/rei_expanded_event_consumer/finite_cohort_enclosure_20261027/reviews/FIRST_RUNTIME_INDEPENDENT_REVIEW.md",
+        "display_title": "FIRST_RUNTIME_INDEPENDENT_REVIEW.md"
+      },
+      "isError": false
+    }
+  },
+  {
+    "request": {
+      "repository_full_name": "cosmosapjw-quantum/rec_bianchi",
+      "ref": "8496efcba3518776882eaf25e5dad30741eabbec",
+      "path": "research/rec_h5_native_producer_20261027/delivery/stage_receipts/R2.json"
+    },
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Action completed."
+        }
+      ],
+      "structuredContent": {
+        "content": "{\n  \"stage\": \"R2\",\n  \"preflight\": {\n    \"stage\": \"R2\",\n    \"owned\": \"359365a78e4efa3bd6c74f2dd7c1befa5a851cbe\",\n    \"shared\": \"74aff0740d1812c732466563a9c66108a3a4d8fd\",\n    \"agents_same_content\": true,\n    \"parallel\": [\n      {\n        \"number\": 222,\n        \"head\": \"74aff0740d1812c732466563a9c66108a3a4d8fd\",\n        \"branch\": \"research/orchestration-sandbox-20261022\"\n      },\n      {\n        \"number\": 240,\n        \"head\": \"d91de6299e614520949c5873a9378000ceb1f85c\",\n        \"branch\": \"research/rei-causal-prefix-consumer-20261027\"\n      },\n      {\n        \"number\": 239,\n        \"head\": \"c0e76fb13785dd6aab45e056ee54d2b318ca8f41\",\n        \"branch\": \"research/rei-cr-integrated-return-20261027\"\n      }\n    ]\n  },\n  \"git\": {\n    \"repository\": \"cosmosapjw-quantum/rec_bianchi\",\n    \"branch\": \"research/rec-h5-native-producer-20261027\",\n    \"expected_parent\": \"359365a78e4efa3bd6c74f2dd7c1befa5a851cbe\",\n    \"commit\": \"0b67b8f910f827dbf71cdad64c5bf9676a81f77a\",\n    \"tree\": \"48c0824b38d5ee327f4a86df93cebd7c675778c1\",\n    \"force\": false,\n    \"readback\": \"PASS\"\n  },\n  \"prepared\": {\n    \"stage\": \"R2\",\n    \"payload\": \"/workspace/scratch/6104ad84b826/publication_payload/rec_h5_native_20261027/R2.json\",\n    \"manifest\": \"/workspace/scratch/6104ad84b826/publication_payload/rec_h5_native_20261027/R2.manifest.json\",\n    \"archive\": \"/workspace/scratch/6104ad84b826/deliverables/rec_h5_native_20261027/REC_H5_NATIVE_20261027_R2.zip\",\n    \"archive_bytes\": 363374,\n    \"archive_sha256\": \"f0ef43007d33a2f22e21483776c4115cfdb0d00a248cbb2a172eb5bf722e9fd1\",\n    \"files\": 49,\n    \"git_files\": 39,\n    \"git_exclusions\": [\n      {\n        \"path\": \"research/rec_h5_native_producer_20261027/survey/remote/BACKUP_LISTS.json\",\n        \"matching_globs\": [\n          \"*BACKUP_LIST*.json\"\n        ]\n      },\n      {\n        \"path\": \"research/rec_h5_native_producer_20261027/survey/remote/BRANCH_INVENTORY.json\",\n        \"matching_globs\": [\n          \"*BRANCH_INVENTORY.json\"\n        ]\n      },\n      {\n        \"path\": \"research/rec_h5_native_producer_20261027/survey/remote/CENTRAL_STATUS.json\",\n        \"matching_globs\": [\n          \"*CENTRAL_STATUS.json\"\n        ]\n      },\n      {\n        \"path\": \"research/rec_h5_native_producer_20261027/survey/remote/OPEN_PR_INVENTORY.json\",\n        \"matching_globs\": [\n          \"*OPEN_PR_INVENTORY.json\"\n        ]\n      },\n      {\n        \"path\": \"research/rec_h5_native_producer_20261027/survey/remote/REC_RECURSIVE_BACKUP_LIST.json\",\n        \"matching_globs\": [\n          \"*BACKUP_LIST*.json\",\n          \"*REC_RECURSIVE_BACKUP_LIST.json\"\n        ]\n      },\n      {\n        \"path\": \"research/rec_h5_native_producer_20261027/survey/remote/VIGILODE_BACKUP_0.json\",\n        \"matching_globs\": [\n          \"*VIGILODE_BACKUP_*.json\"\n        ]\n      },\n      {\n        \"path\": \"research/rec_h5_native_producer_20261027/survey/remote/VIGILODE_BACKUP_1.json\",\n        \"matching_globs\": [\n          \"*VIGILODE_BACKUP_*.json\"\n        ]\n      },\n      {\n        \"path\": \"research/rec_h5_native_producer_20261027/survey/remote/VIGILODE_BACKUP_2.json\",\n        \"matching_globs\": [\n          \"*VIGILODE_BACKUP_*.json\"\n        ]\n      },\n      {\n        \"path\": \"research/rec_h5_native_producer_20261027/survey/remote/VIGILODE_BACKUP_3.json\",\n        \"matching_globs\": [\n          \"*VIGILODE_BACKUP_*.json\"\n        ]\n      },\n      {\n        \"path\": \"research/rec_h5_native_producer_20261027/survey/remote/VIGILODE_BERNSTEIN_HANDOFF.json\",\n        \"matching_globs\": [\n          \"*VIGILODE_BERNSTEIN_HANDOFF.json\"\n        ]\n      }\n    ],\n    \"omitted_count\": 0,\n    \"zip_crc_and_manifest_sha\": \"PASS\",\n    \"expected_source_head\": \"359365a78e4efa3bd6c74f2dd7c1befa5a851cbe\",\n    \"packaging_cpu_s\": 0.093087432,\n    \"packaging_wall_s\": 0.09375242100213654,\n    \"packaging_max_rss_kib\": 17152,\n    \"unmeasured_process_startup_and_receipt_tail\": \"UNKNOWN_NOT_ZERO\",\n    \"science_execution\": \"NONE\",\n    \"provider_ack\": \"PENDING_ROOT_PUBLICATION\",\n    \"binary_manifest\": \"/workspace/scratch/6104ad84b826/publication_payload/rec_h5_native_20261027/R2.binary-manifest.json\",\n    \"binary_artifact_count\": 0\n  },\n  \"dropbox\": {\n    \"status\": \"completed\",\n    \"file_id\": \"id:BSpOijBcT10AAAAAAEDHzg\",\n    \"path_display\": \"/bianchi/rec_bianchi/20261016/REC_H5_NATIVE_20261027_R2_f0ef43007d33.zip\",\n    \"bytes\": 363374\n  },\n  \"drive\": {\n    \"status\": \"completed\",\n    \"file_id\": \"125sFXohIeD356gtf4hNDYEbh1LU5fn6d\",\n    \"name\": \"REC_H5_NATIVE_20261027_R2_f0ef43007d33.zip\",\n    \"bytes\": 363374\n  },\n  \"actual_status\": \"BOTH_COMPLETED_AND_EXACT_BYTE_SIZE_READBACK\",\n  \"counts\": {\n    \"working_completed\": 32,\n    \"shared_completed\": 27,\n    \"total\": 88,\n    \"new_canonical_completed\": 0\n  }\n}\n",
+        "encoding": "utf-8",
+        "sha": "abf00bcb63b2c0e06905b427331818c965838e3b",
+        "display_url": "https://github.com/cosmosapjw-quantum/rec_bianchi/blob/8496efcba3518776882eaf25e5dad30741eabbec/research/rec_h5_native_producer_20261027/delivery/stage_receipts/R2.json",
+        "display_title": "R2.json"
+      },
+      "isError": false
+    }
+  },
+  {
+    "request": {
+      "repository_full_name": "cosmosapjw-quantum/rec_bianchi",
+      "ref": "8496efcba3518776882eaf25e5dad30741eabbec",
+      "path": "research/rec_h5_native_producer_20261027/delivery/stage_receipts/R3.json"
+    },
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Action completed."
+        }
+      ],
+      "structuredContent": {
+        "content": "{\n  \"stage\": \"R3\",\n  \"preflight\": {\n    \"stage\": \"R3\",\n    \"owned\": \"0b67b8f910f827dbf71cdad64c5bf9676a81f77a\",\n    \"shared\": \"74aff0740d1812c732466563a9c66108a3a4d8fd\",\n    \"agents_same_content\": true,\n    \"parallel\": [\n      {\n        \"number\": 222,\n        \"head\": \"74aff0740d1812c732466563a9c66108a3a4d8fd\",\n        \"branch\": \"research/orchestration-sandbox-20261022\"\n      },\n      {\n        \"number\": 240,\n        \"head\": \"d91de6299e614520949c5873a9378000ceb1f85c\",\n        \"branch\": \"research/rei-causal-prefix-consumer-20261027\"\n      },\n      {\n        \"number\": 239,\n        \"head\": \"c0e76fb13785dd6aab45e056ee54d2b318ca8f41\",\n        \"branch\": \"research/rei-cr-integrated-return-20261027\"\n      }\n    ]\n  },\n  \"git\": {\n    \"repository\": \"cosmosapjw-quantum/rec_bianchi\",\n    \"branch\": \"research/rec-h5-native-producer-20261027\",\n    \"expected_parent\": \"0b67b8f910f827dbf71cdad64c5bf9676a81f77a\",\n    \"commit\": \"ec02e63bf9514f9e5be4e3f96bd2a547738ce278\",\n    \"tree\": \"f5fc9b7e1f75812e43423c235b6aeef9e4300489\",\n    \"force\": false,\n    \"readback\": \"PASS\"\n  },\n  \"prepared\": {\n    \"stage\": \"R3\",\n    \"payload\": \"/workspace/scratch/6104ad84b826/publication_payload/rec_h5_native_20261027/R3.json\",\n    \"manifest\": \"/workspace/scratch/6104ad84b826/publication_payload/rec_h5_native_20261027/R3.manifest.json\",\n    \"archive\": \"/workspace/scratch/6104ad84b826/deliverables/rec_h5_native_20261027/REC_H5_NATIVE_20261027_R3.zip\",\n    \"archive_bytes\": 11803,\n    \"archive_sha256\": \"25a75d34e174b7e2fdd303fcc6dbc427a30bea42533e050226c08facb62e81f2\",\n    \"files\": 6,\n    \"git_files\": 6,\n    \"git_exclusions\": [],\n    \"omitted_count\": 0,\n    \"zip_crc_and_manifest_sha\": \"PASS\",\n    \"expected_source_head\": \"0b67b8f910f827dbf71cdad64c5bf9676a81f77a\",\n    \"packaging_cpu_s\": 0.006581320999999987,\n    \"packaging_wall_s\": 0.006843691000540275,\n    \"packaging_max_rss_kib\": 12032,\n    \"unmeasured_process_startup_and_receipt_tail\": \"UNKNOWN_NOT_ZERO\",\n    \"science_execution\": \"NONE\",\n    \"provider_ack\": \"PENDING_ROOT_PUBLICATION\",\n    \"binary_manifest\": \"/workspace/scratch/6104ad84b826/publication_payload/rec_h5_native_20261027/R3.binary-manifest.json\",\n    \"binary_artifact_count\": 0\n  },\n  \"dropbox\": {\n    \"status\": \"completed\",\n    \"file_id\": \"id:BSpOijBcT10AAAAAAEDH0w\",\n    \"path_display\": \"/bianchi/rec_bianchi/20261016/REC_H5_NATIVE_20261027_R3_25a75d34e174.zip\",\n    \"bytes\": 11803\n  },\n  \"drive\": {\n    \"status\": \"completed\",\n    \"file_id\": \"1aoAB3goZvl58y7VZ9XlzboEIjjmLqE81\",\n    \"name\": \"REC_H5_NATIVE_20261027_R3_25a75d34e174.zip\",\n    \"bytes\": 11803\n  },\n  \"actual_status\": \"BOTH_COMPLETED_AND_EXACT_BYTE_SIZE_READBACK\",\n  \"counts\": {\n    \"working_completed\": 32,\n    \"shared_completed\": 28,\n    \"total\": 88,\n    \"new_canonical_completed\": 0\n  }\n}\n",
+        "encoding": "utf-8",
+        "sha": "d978122ffe82619e3f872f23ec2a819f9cb93993",
+        "display_url": "https://github.com/cosmosapjw-quantum/rec_bianchi/blob/8496efcba3518776882eaf25e5dad30741eabbec/research/rec_h5_native_producer_20261027/delivery/stage_receipts/R3.json",
+        "display_title": "R3.json"
+      },
+      "isError": false
+    }
+  },
+  {
+    "request": {
+      "repository_full_name": "cosmosapjw-quantum/rec_bianchi",
+      "ref": "8496efcba3518776882eaf25e5dad30741eabbec",
+      "path": "research/rec_h5_native_producer_20261027/delivery/stage_receipts/R4.json"
+    },
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Action completed."
+        }
+      ],
+      "structuredContent": {
+        "content": "{\n  \"stage\": \"R4\",\n  \"preflight\": {\n    \"stage\": \"R4\",\n    \"owned\": \"ec02e63bf9514f9e5be4e3f96bd2a547738ce278\",\n    \"shared\": \"74aff0740d1812c732466563a9c66108a3a4d8fd\",\n    \"agents_same_content\": true,\n    \"parallel\": [\n      {\n        \"number\": 222,\n        \"head\": \"74aff0740d1812c732466563a9c66108a3a4d8fd\",\n        \"branch\": \"research/orchestration-sandbox-20261022\"\n      },\n      {\n        \"number\": 240,\n        \"head\": \"d91de6299e614520949c5873a9378000ceb1f85c\",\n        \"branch\": \"research/rei-causal-prefix-consumer-20261027\"\n      },\n      {\n        \"number\": 239,\n        \"head\": \"c0e76fb13785dd6aab45e056ee54d2b318ca8f41\",\n        \"branch\": \"research/rei-cr-integrated-return-20261027\"\n      }\n    ]\n  },\n  \"git\": {\n    \"repository\": \"cosmosapjw-quantum/rec_bianchi\",\n    \"branch\": \"research/rec-h5-native-producer-20261027\",\n    \"expected_parent\": \"ec02e63bf9514f9e5be4e3f96bd2a547738ce278\",\n    \"commit\": \"2f6b311eadf47ae0da06361d3c7f011e54fb6951\",\n    \"tree\": \"f5e5c0dd7f7cf753c497742a9682e1cb92804a14\",\n    \"force\": false,\n    \"readback\": \"PASS\"\n  },\n  \"prepared\": {\n    \"stage\": \"R4\",\n    \"payload\": \"/workspace/scratch/6104ad84b826/publication_payload/rec_h5_native_20261027/R4.json\",\n    \"manifest\": \"/workspace/scratch/6104ad84b826/publication_payload/rec_h5_native_20261027/R4.manifest.json\",\n    \"archive\": \"/workspace/scratch/6104ad84b826/deliverables/rec_h5_native_20261027/REC_H5_NATIVE_20261027_R4.zip\",\n    \"archive_bytes\": 8456,\n    \"archive_sha256\": \"3c4be6ebd66e67ffe91e164f33bc6def85d3db3c428e3b6a2ba2f87d23897bf3\",\n    \"files\": 6,\n    \"git_files\": 6,\n    \"git_exclusions\": [],\n    \"omitted_count\": 0,\n    \"zip_crc_and_manifest_sha\": \"PASS\",\n    \"expected_source_head\": \"ec02e63bf9514f9e5be4e3f96bd2a547738ce278\",\n    \"packaging_cpu_s\": 0.018005634999999992,\n    \"packaging_wall_s\": 0.018010564999713097,\n    \"packaging_max_rss_kib\": 12032,\n    \"unmeasured_process_startup_and_receipt_tail\": \"UNKNOWN_NOT_ZERO\",\n    \"science_execution\": \"NONE\",\n    \"provider_ack\": \"PENDING_ROOT_PUBLICATION\",\n    \"binary_manifest\": \"/workspace/scratch/6104ad84b826/publication_payload/rec_h5_native_20261027/R4.binary-manifest.json\",\n    \"binary_artifact_count\": 0\n  },\n  \"dropbox\": {\n    \"status\": \"completed\",\n    \"file_id\": \"id:BSpOijBcT10AAAAAAEDH1Q\",\n    \"path_display\": \"/bianchi/rec_bianchi/20261016/REC_H5_NATIVE_20261027_R4_3c4be6ebd66e.zip\",\n    \"bytes\": 8456\n  },\n  \"drive\": {\n    \"status\": \"completed\",\n    \"file_id\": \"1YkyugYggAyqRXE52YkdR3ObJEIvOBw9f\",\n    \"name\": \"REC_H5_NATIVE_20261027_R4_3c4be6ebd66e.zip\",\n    \"bytes\": 8456\n  },\n  \"actual_status\": \"BOTH_COMPLETED_AND_EXACT_BYTE_SIZE_READBACK\",\n  \"counts\": {\n    \"working_completed\": 32,\n    \"shared_completed\": 28,\n    \"total\": 88,\n    \"new_canonical_completed\": 0\n  }\n}\n",
+        "encoding": "utf-8",
+        "sha": "d6edafd545e7debbde67ac1c2ed359f2e9421ac1",
+        "display_url": "https://github.com/cosmosapjw-quantum/rec_bianchi/blob/8496efcba3518776882eaf25e5dad30741eabbec/research/rec_h5_native_producer_20261027/delivery/stage_receipts/R4.json",
+        "display_title": "R4.json"
+      },
+      "isError": false
+    }
+  },
+  {
+    "request": {
+      "repository_full_name": "cosmosapjw-quantum/rec_bianchi",
+      "ref": "8496efcba3518776882eaf25e5dad30741eabbec",
+      "path": "research/rec_h5_native_producer_20261027/delivery/stage_receipts/R5.json"
+    },
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Action completed."
+        }
+      ],
+      "structuredContent": {
+        "content": "{\n  \"stage\": \"R5\",\n  \"preflight\": {\n    \"stage\": \"R5\",\n    \"owned\": \"2f6b311eadf47ae0da06361d3c7f011e54fb6951\",\n    \"shared\": \"74aff0740d1812c732466563a9c66108a3a4d8fd\",\n    \"agents_same_content\": true,\n    \"parallel\": [\n      {\n        \"number\": 222,\n        \"head\": \"74aff0740d1812c732466563a9c66108a3a4d8fd\",\n        \"branch\": \"research/orchestration-sandbox-20261022\"\n      },\n      {\n        \"number\": 240,\n        \"head\": \"d91de6299e614520949c5873a9378000ceb1f85c\",\n        \"branch\": \"research/rei-causal-prefix-consumer-20261027\"\n      },\n      {\n        \"number\": 239,\n        \"head\": \"c0e76fb13785dd6aab45e056ee54d2b318ca8f41\",\n        \"branch\": \"research/rei-cr-integrated-return-20261027\"\n      }\n    ]\n  },\n  \"git\": {\n    \"repository\": \"cosmosapjw-quantum/rec_bianchi\",\n    \"branch\": \"research/rec-h5-native-producer-20261027\",\n    \"expected_parent\": \"2f6b311eadf47ae0da06361d3c7f011e54fb6951\",\n    \"commit\": \"c34954c3f48745886e66264880cea4ae55bd942d\",\n    \"tree\": \"3d768322bdbfc5a64fa34c1ccb889b6ee29a2dc0\",\n    \"force\": false,\n    \"readback\": \"PASS\"\n  },\n  \"prepared\": {\n    \"stage\": \"R5\",\n    \"payload\": \"/workspace/scratch/6104ad84b826/publication_payload/rec_h5_native_20261027/R5.json\",\n    \"manifest\": \"/workspace/scratch/6104ad84b826/publication_payload/rec_h5_native_20261027/R5.manifest.json\",\n    \"archive\": \"/workspace/scratch/6104ad84b826/deliverables/rec_h5_native_20261027/REC_H5_NATIVE_20261027_R5.zip\",\n    \"archive_bytes\": 21245,\n    \"archive_sha256\": \"cdaa91928656a6b04281213ca4a093aaa56e5e6da18c82b171e0846def578171\",\n    \"files\": 9,\n    \"git_files\": 9,\n    \"git_exclusions\": [],\n    \"omitted_count\": 0,\n    \"zip_crc_and_manifest_sha\": \"PASS\",\n    \"expected_source_head\": \"2f6b311eadf47ae0da06361d3c7f011e54fb6951\",\n    \"packaging_cpu_s\": 0.018940610999999885,\n    \"packaging_wall_s\": 0.018948482000268996,\n    \"packaging_max_rss_kib\": 12160,\n    \"unmeasured_process_startup_and_receipt_tail\": \"UNKNOWN_NOT_ZERO\",\n    \"science_execution\": \"NONE\",\n    \"provider_ack\": \"PENDING_ROOT_PUBLICATION\",\n    \"binary_manifest\": \"/workspace/scratch/6104ad84b826/publication_payload/rec_h5_native_20261027/R5.binary-manifest.json\",\n    \"binary_artifact_count\": 0\n  },\n  \"dropbox\": {\n    \"status\": \"completed\",\n    \"file_id\": \"id:BSpOijBcT10AAAAAAEDH1g\",\n    \"path_display\": \"/bianchi/rec_bianchi/20261016/REC_H5_NATIVE_20261027_R5_cdaa91928656.zip\",\n    \"bytes\": 21245\n  },\n  \"drive\": {\n    \"status\": \"completed\",\n    \"file_id\": \"1wIoXc7rgA_7uVepUyWkSsE7pcbAYvCkw\",\n    \"name\": \"REC_H5_NATIVE_20261027_R5_cdaa91928656.zip\",\n    \"bytes\": 21245\n  },\n  \"actual_status\": \"BOTH_COMPLETED_AND_EXACT_BYTE_SIZE_READBACK\",\n  \"counts\": {\n    \"working_completed\": 32,\n    \"shared_completed\": 28,\n    \"total\": 88,\n    \"new_canonical_completed\": 0\n  }\n}\n",
+        "encoding": "utf-8",
+        "sha": "74cea1f77de7a771ba8066ae659e0e5f2e5a8fc2",
+        "display_url": "https://github.com/cosmosapjw-quantum/rec_bianchi/blob/8496efcba3518776882eaf25e5dad30741eabbec/research/rec_h5_native_producer_20261027/delivery/stage_receipts/R5.json",
+        "display_title": "R5.json"
+      },
+      "isError": false
+    }
+  },
+  {
+    "request": {
+      "repository_full_name": "cosmosapjw-quantum/rec_bianchi",
+      "ref": "8496efcba3518776882eaf25e5dad30741eabbec",
+      "path": "research/rec_h5_native_producer_20261027/delivery/stage_receipts/R6.json"
+    },
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Action completed."
+        }
+      ],
+      "structuredContent": {
+        "content": "{\n  \"stage\": \"R6\",\n  \"preflight\": {\n    \"stage\": \"R6\",\n    \"owned\": \"c34954c3f48745886e66264880cea4ae55bd942d\",\n    \"shared\": \"74aff0740d1812c732466563a9c66108a3a4d8fd\",\n    \"agents_same_content\": true,\n    \"parallel\": [\n      {\n        \"number\": 222,\n        \"head\": \"74aff0740d1812c732466563a9c66108a3a4d8fd\",\n        \"branch\": \"research/orchestration-sandbox-20261022\"\n      },\n      {\n        \"number\": 240,\n        \"head\": \"d91de6299e614520949c5873a9378000ceb1f85c\",\n        \"branch\": \"research/rei-causal-prefix-consumer-20261027\"\n      },\n      {\n        \"number\": 239,\n        \"head\": \"c0e76fb13785dd6aab45e056ee54d2b318ca8f41\",\n        \"branch\": \"research/rei-cr-integrated-return-20261027\"\n      }\n    ]\n  },\n  \"git\": {\n    \"repository\": \"cosmosapjw-quantum/rec_bianchi\",\n    \"branch\": \"research/rec-h5-native-producer-20261027\",\n    \"expected_parent\": \"c34954c3f48745886e66264880cea4ae55bd942d\",\n    \"commit\": \"be7c6cd3889fb8d17c6a5e4250947c0c024c4abc\",\n    \"tree\": \"d61725ef6a5bd6e419ee2beca6641a2e6b58f4d6\",\n    \"force\": false,\n    \"readback\": \"PASS\"\n  },\n  \"prepared\": {\n    \"stage\": \"R6\",\n    \"payload\": \"/workspace/scratch/6104ad84b826/publication_payload/rec_h5_native_20261027/R6.json\",\n    \"manifest\": \"/workspace/scratch/6104ad84b826/publication_payload/rec_h5_native_20261027/R6.manifest.json\",\n    \"archive\": \"/workspace/scratch/6104ad84b826/deliverables/rec_h5_native_20261027/REC_H5_NATIVE_20261027_R6.zip\",\n    \"archive_bytes\": 17154,\n    \"archive_sha256\": \"827e62220fd7cb35692e1bd979cdbfcba6cec6f315af41f036554ec0b8147858\",\n    \"files\": 9,\n    \"git_files\": 9,\n    \"git_exclusions\": [],\n    \"omitted_count\": 0,\n    \"zip_crc_and_manifest_sha\": \"PASS\",\n    \"expected_source_head\": \"c34954c3f48745886e66264880cea4ae55bd942d\",\n    \"packaging_cpu_s\": 0.011270297999999998,\n    \"packaging_wall_s\": 0.011279970000032336,\n    \"packaging_max_rss_kib\": 12032,\n    \"unmeasured_process_startup_and_receipt_tail\": \"UNKNOWN_NOT_ZERO\",\n    \"science_execution\": \"NONE\",\n    \"provider_ack\": \"PENDING_ROOT_PUBLICATION\",\n    \"binary_manifest\": \"/workspace/scratch/6104ad84b826/publication_payload/rec_h5_native_20261027/R6.binary-manifest.json\",\n    \"binary_artifact_count\": 0\n  },\n  \"dropbox\": {\n    \"status\": \"completed\",\n    \"file_id\": \"id:BSpOijBcT10AAAAAAEDH1w\",\n    \"path_display\": \"/bianchi/rec_bianchi/20261016/REC_H5_NATIVE_20261027_R6_827e62220fd7.zip\",\n    \"bytes\": 17154\n  },\n  \"drive\": {\n    \"status\": \"completed\",\n    \"file_id\": \"1KiytZ51B8_Ax473wo33cVRLC-DcDyh5h\",\n    \"name\": \"REC_H5_NATIVE_20261027_R6_827e62220fd7.zip\",\n    \"bytes\": 17154\n  },\n  \"actual_status\": \"BOTH_COMPLETED_AND_EXACT_BYTE_SIZE_READBACK\",\n  \"counts\": {\n    \"working_completed_snapshot\": 32,\n    \"shared_completed\": 28,\n    \"total\": 88,\n    \"new_canonical_completed\": 0\n  },\n  \"async_resume\": \"Polled existing operation only; no duplicate archive/upload/commit\"\n}\n",
+        "encoding": "utf-8",
+        "sha": "96338ad394cf55b5af3e743179a74349ff364f38",
+        "display_url": "https://github.com/cosmosapjw-quantum/rec_bianchi/blob/8496efcba3518776882eaf25e5dad30741eabbec/research/rec_h5_native_producer_20261027/delivery/stage_receipts/R6.json",
+        "display_title": "R6.json"
+      },
+      "isError": false
+    }
+  },
+  {
+    "request": {
+      "repository_full_name": "cosmosapjw-quantum/rec_bianchi",
+      "ref": "8496efcba3518776882eaf25e5dad30741eabbec",
+      "path": "research/rec_h5_native_producer_20261027/delivery/stage_receipts/R7.json"
+    },
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "GitHub API error 404: {\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/repos/contents#get-repository-content\",\"status\":\"404\"}"
+        }
+      ],
+      "structuredContent": {
+        "error": "GitHub API error 404: {\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/repos/contents#get-repository-content\",\"status\":\"404\"}",
+        "error_code": "NOT_FOUND",
+        "error_data": {
+          "message": "Not Found",
+          "documentation_url": "https://docs.github.com/rest/repos/contents#get-repository-content",
+          "status": "404"
+        }
+      },
+      "isError": true
+    }
+  },
+  {
+    "request": {
+      "repository_full_name": "cosmosapjw-quantum/rei_bianchi",
+      "ref": "9a19c6f0a0ed5f913a3239b5712100928ddc86dd",
+      "path": "research/rei_expanded_event_consumer/finite_cohort_enclosure_20261027/delivery/FINAL_ACK_ACK.json"
+    },
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Action completed."
+        }
+      ],
+      "structuredContent": {
+        "content": "{\n  \"stage\": \"FINAL_ACK\",\n  \"stage_status\": \"NONRECURSIVE_FINAL_ACK_DELIVERY\",\n  \"commit\": \"d91de6299e614520949c5873a9378000ceb1f85c\",\n  \"parent\": \"5a662c2eb53c8cedd98be6f25c525dfa01737c3d\",\n  \"tree\": \"5d245cadd42f3b0ae0ec22ac73a11a2069cc3cf2\",\n  \"expected_sha\": \"5a662c2eb53c8cedd98be6f25c525dfa01737c3d\",\n  \"force\": false,\n  \"backup_format\": \"RAW_MARKDOWN_CHECKPOINT_RESOURCE_HOLD\",\n  \"checkpoint_path\": \"research/rei_expanded_event_consumer/finite_cohort_enclosure_20261027/checkpoints/FINAL_ACK.md\",\n  \"local_path\": \"/workspace/scratch/52cc495a5f0a/rei_finite_history_unit/checkpoints/FINAL_ACK.md\",\n  \"git_blob\": \"d23f23c9ffd364f443cc53995739ba268b95e879\",\n  \"bytes\": 9808,\n  \"sha256\": null,\n  \"sha256_status\": \"NOT_COMPUTED_AFTER_LOCAL_RESOURCE_STOP\",\n  \"ZIP_status\": \"DEFERRED_SEPARATE_BUDGET_GATE\",\n  \"drive\": {\n    \"id\": \"1zJLw65ea3sZSF_u3w-IZ112zZSgncuzw\",\n    \"completed\": true,\n    \"observed_bytes\": 9808\n  },\n  \"dropbox\": {\n    \"id\": \"id:BSpOijBcT10AAAAAAEDHww\",\n    \"status\": \"completed\",\n    \"observed_bytes\": 9808,\n    \"path\": \"/bianchi/research_backups/rei_bianchi/REI_FINITE_COHORT_FINAL_ACK_20261027_d91de6299e61.md\"\n  },\n  \"DAG\": {\n    \"working\": 32,\n    \"central\": 27,\n    \"total\": 88,\n    \"increment\": 0\n  },\n  \"science_runs\": 0,\n  \"local_runtime_executions\": 0,\n  \"cost\": \"UNKNOWN_NOT_ZERO\",\n  \"observed_UTC\": \"2026-10-27 13:35:14 UTC\",\n  \"self_receipt\": \"Published with next stage or one nonrecursive final closeout\"\n}\n",
+        "encoding": "utf-8",
+        "sha": "2d4ece2211e27c449c279cc1af4b9fdde1cfe684",
+        "display_url": "https://github.com/cosmosapjw-quantum/rei_bianchi/blob/9a19c6f0a0ed5f913a3239b5712100928ddc86dd/research/rei_expanded_event_consumer/finite_cohort_enclosure_20261027/delivery/FINAL_ACK_ACK.json",
+        "display_title": "FINAL_ACK_ACK.json"
+      },
+      "isError": false
+    }
+  },
+  {
+    "request": {
+      "repository_full_name": "cosmosapjw-quantum/rei_bianchi",
+      "ref": "9a19c6f0a0ed5f913a3239b5712100928ddc86dd",
+      "path": "research/rei_expanded_event_consumer/finite_cohort_enclosure_20261027/checkpoints/APPROVED_RECOVERY.md"
+    },
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Action completed."
+        }
+      ],
+      "structuredContent": {
+        "content": "",
+        "encoding": "utf-8",
+        "sha": "e22ae8203271555365f0cb2aac393c3584963c1e",
+        "display_url": "https://github.com/cosmosapjw-quantum/rei_bianchi/blob/9a19c6f0a0ed5f913a3239b5712100928ddc86dd/research/rei_expanded_event_consumer/finite_cohort_enclosure_20261027/checkpoints/APPROVED_RECOVERY.md",
+        "display_title": "APPROVED_RECOVERY.md"
+      },
+      "isError": false
+    }
+  }
+]

@@ -1,0 +1,101 @@
+{
+  "schema": "WU_R7_EXECUTION_LEDGER_V1",
+  "science_runs": [
+    {
+      "id": "R7_WOLFRAM_NEW_IDENTITIES",
+      "status": "COMPLETED_WITH_WARNINGS",
+      "started_utc": "2026-10-27T14:10:13.341820+00:00",
+      "tool": "wolfram_wolframlanguageevaluator",
+      "timeConstraint_s": 30,
+      "code_sha256": "addb61ab24b45c372d74f75a6dff2e1cf810aa82d36ee0ef44beda394402b434",
+      "old_science_replay": 0,
+      "finished_utc": "2026-10-27T14:11:25.436615+00:00",
+      "CPU_seconds": 0.2788859999999995,
+      "wall_seconds": 0.276457,
+      "residuals": 24,
+      "zeros": 24,
+      "late_forcing_strict_violation": true,
+      "warnings": [
+        "Power::infy: -- Message text not found -- (1/0)",
+        "Infinity::indet: -- Message text not found -- (0*Infinity)",
+        "Infinity::indet: -- Message text not found -- (0*Infinity)",
+        "General::messages: Messages were generated which may indicate errors."
+      ],
+      "warning_cause": "NOT_ESTABLISHED",
+      "result": "raw/WOLFRAM_RESULT.json",
+      "raw_response_sha256": "6e478ec711d9d704df93ac555814fe6ccb921255780b9c6849a28dce8b5087d0"
+    },
+    {
+      "id": "R7_PRIMARY",
+      "status": "COMPLETED_PASS",
+      "started_utc": "2026-10-27T14:17:26.668304+00:00",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/16df962c9b4e/wu_r7_20261027/worktree/research/provider_registry_molecular_r7_20261027/verification/run_primary.py",
+        "--input",
+        "/workspace/scratch/16df962c9b4e/wu_r7_20261027/worktree/research/provider_registry_molecular_r7_20261027/verification/PRIMARY_INPUT.json",
+        "--output",
+        "/workspace/scratch/16df962c9b4e/wu_r7_20261027/worktree/research/provider_registry_molecular_r7_20261027/raw/PRIMARY_RESULTS.json"
+      ],
+      "CPU_limit_s": 60,
+      "wall_emergency_limit_s": 90,
+      "input_sha256": "3ff9c2535e5c0ce6ffa5e9671de15aad6649e0996cd9b9e275cc290facd8d330",
+      "runner_sha256": "9c77f020b82b8bf8b3868c4f91d8a0e8111aa92d579f1505ca1566098cf95a97",
+      "old_science_replay": 0,
+      "finished_utc": "2026-10-27T14:17:26.908993+00:00",
+      "exit_code": 0,
+      "CPU_seconds": 0.23964100000000002,
+      "wall_seconds": 0.24029072799748974,
+      "result": "raw/PRIMARY_RESULTS.json",
+      "result_sha256": "6eaf3c0eed7968cf4023180e15373a180bb5b1bab2e56cd4a8547387ed337a15",
+      "process_record": "raw/PRIMARY_PROCESS.json"
+    },
+    {
+      "id": "R7_REFERENCE",
+      "status": "COMPLETED_PASS",
+      "started_utc": "2026-10-27T14:18:34.203925+00:00",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/16df962c9b4e/wu_r7_20261027/worktree/research/provider_registry_molecular_r7_20261027/verification/reference_r7.py",
+        "--input",
+        "/workspace/scratch/16df962c9b4e/wu_r7_20261027/worktree/research/provider_registry_molecular_r7_20261027/verification/REFERENCE_INPUT.json",
+        "--output",
+        "/workspace/scratch/16df962c9b4e/wu_r7_20261027/worktree/research/provider_registry_molecular_r7_20261027/raw/REFERENCE_RESULTS.json",
+        "--primary",
+        "/workspace/scratch/16df962c9b4e/wu_r7_20261027/worktree/research/provider_registry_molecular_r7_20261027/raw/PRIMARY_RESULTS.json",
+        "--primary-sha256",
+        "6eaf3c0eed7968cf4023180e15373a180bb5b1bab2e56cd4a8547387ed337a15"
+      ],
+      "CPU_limit_s": 60,
+      "wall_emergency_limit_s": 90,
+      "input_sha256": "2039ddf826beb97b875249bd7a66cfe9c7be087ab746ef56f94e78d613046bf1",
+      "runner_sha256": "ef5b0ada9edd711551aec27cd43718771114c9908526940dea9df1d706b7f083",
+      "old_science_replay": 0,
+      "finished_utc": "2026-10-27T14:18:37.132574+00:00",
+      "exit_code": 0,
+      "CPU_seconds": 4.632575,
+      "wall_seconds": 2.903543188003823,
+      "result": "raw/REFERENCE_RESULTS.json",
+      "result_sha256": "e403c7803c080fd4f26be71a93b782b02d874f80ef11c85a706bea71e2a743cd",
+      "process_record": "raw/REFERENCE_PROCESS.json"
+    }
+  ],
+  "remaining": {
+    "primary": 0,
+    "reference": 0,
+    "Wolfram": 0
+  },
+  "old_R6_remaining": [
+    0,
+    0,
+    0
+  ],
+  "old_PHYS91_remaining": [
+    0,
+    0,
+    0
+  ],
+  "global_remaining": null,
+  "historical_total_CPU_s": null,
+  "old_science_replay": 0
+}
