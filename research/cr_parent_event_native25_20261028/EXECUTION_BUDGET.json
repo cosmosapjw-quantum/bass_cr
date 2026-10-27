@@ -20,8 +20,8 @@
   "AGENTS_sha256": "bf1b921550473363df97f75bbbfc2e839120990f89a330b35da66867695f17b5",
   "host_admission": "evidence/C04_HOST_ADMISSION_c4_v3.json",
   "host_admission_sha256": "6dc9b596059d797a2d87cdf66b5696e7619df305e27c050f79384609da96d4b9",
-  "code_manifest": "evidence/C07_CODE_MANIFEST_V2.json",
-  "code_manifest_sha256": "44f4f08586682704e584986021c69c7309c265fb8ff35a184a48dbc5c3a04fe1",
+  "code_manifest": "evidence/C08_CODE_MANIFEST_V3.json",
+  "code_manifest_sha256": "66c1a4363a1c55df83842904d7a5e307ea492086e3e0b628d7365cd3e405c254",
   "native_threads": 1,
   "worker_memory_bytes": 536870912,
   "minimum_host_memory_reserve_bytes": 1073741824,
@@ -82,10 +82,17 @@
       "worker_cpu_reservation_s": 4,
       "coordinator_cpu_reservation_s": 2.05,
       "selected_memory_limit_bytes": 268435456
+    },
+    {
+      "run_id": "independent_v2",
+      "role": "independent",
+      "worker_cpu_reservation_s": 6,
+      "coordinator_cpu_reservation_s": 2.05,
+      "selected_memory_limit_bytes": 268435456
     }
   ],
-  "prospective_total_reserved_cpu_s": 33.303952,
-  "unallocated_contingency_cpu_s": 6.696047999999998,
+  "prospective_total_reserved_cpu_s": 21.033451,
+  "unallocated_contingency_cpu_s": 18.966549,
   "preventive_aggregate_kernel_hard_cap_proof": false,
   "publication_and_metadata_CPU_s": null,
   "stage_authority": {
@@ -111,46 +118,49 @@
   "preparation_reuse_admission": "evidence/C07_PREPARATION_REUSE_ADMISSION.json",
   "preparation_reuse_admission_sha256": "9417dd4f6713fff96587a6a8d9a0ee01aefd3774d270a68b367dfdc913d36652",
   "prior_budget": {
-    "path": "intake/budget_v1/EXECUTION_BUDGET.json",
-    "bytes": 3914,
-    "sha256": "79e7befb18d6c988dbf776a72c0d0d3448c29302088c7d0f93ec4c5a6b5f95f3"
+    "path": "intake/budget_v2/EXECUTION_BUDGET.json",
+    "bytes": 6043,
+    "sha256": "66090bea5b3e280045752af456ce0e2b2ef393b0ead9617ea53aabb11cf679cb"
   },
-  "allocation_revision": "C07_REVIEWED_RECOVERY_V2",
+  "allocation_revision": "C08_REVIEWED_TARGETED_ORACLE_RECOVERY_V3",
   "original_prospective_total_reserved_cpu_s": 36.25,
   "recovery_plan": {
-    "actual_charged_CPU_s_at_revision": 3.032469,
+    "actual_charged_CPU_s_at_revision": 9.911968,
     "actual_ledger_pin": {
       "path": "evidence/EXECUTION_LEDGER.json",
-      "bytes": 42672,
-      "sha256": "296e540b473931f632de0bea5660028c316a6aacd04fe0bc1ed120900d6eb472"
+      "bytes": 97585,
+      "sha256": "1c54a938d4cc2b6a44f80c568929ce6456dfec76238f7a3d16dfcae7ad0f5816"
     },
     "historical_terminal_run_ids": [
       "prepare_v1",
       "controls_v1",
-      "primary_v1"
+      "primary_v1",
+      "independent_v1",
+      "plot_saved_v1",
+      "controls_v2",
+      "primary_v2"
     ],
     "historical_namespaces_reusable": false,
     "future_named_run_ids": [
-      "controls_v2",
-      "primary_v2",
-      "independent_v1",
-      "plot_saved_v1"
+      "independent_v2"
     ],
-    "future_worker_plus_coordinator_reserve_CPU_s": 27.200000000000003,
+    "future_worker_plus_coordinator_reserve_CPU_s": 8.05,
     "unspent_same_unit_preparation_reserve_CPU_s": 3.0714829999999997,
     "old_or_foreign_transfer": false,
     "tolerances_changed": false,
     "source_fit_projection_repeated": false,
     "current_unit_only": true,
     "independent_static_review": {
-      "path": "review/C07_EXACT_BOUNDARY_REPAIR_REVIEW.json",
-      "bytes": 8079,
-      "sha256": "1aa209251c0a459bde7b1dfbe4c347f37de74084c529382b1044b9516a6b8559"
+      "path": "review/C08_REFERENCE_RECOVERY_STATIC.json",
+      "bytes": 8787,
+      "sha256": "f665a927e7898ab66a70bdbd2723f8e79962d66513113114454de9cb697f15e0"
     },
-    "root_reuse_admission": {
-      "path": "evidence/C07_PREPARATION_REUSE_ADMISSION.json",
-      "bytes": 2423,
-      "sha256": "9417dd4f6713fff96587a6a8d9a0ee01aefd3774d270a68b367dfdc913d36652"
-    }
+    "fresh_preflight": {
+      "path": "intake/preflight/C08_V2.json",
+      "bytes": 167222,
+      "sha256": "fdcfe1359673105633a8e3c1e190436730c2228e954c173cc98f18dc97087706"
+    },
+    "original_3446_successful_checks_reexecuted": false,
+    "targeted_check_count": 4
   }
 }
