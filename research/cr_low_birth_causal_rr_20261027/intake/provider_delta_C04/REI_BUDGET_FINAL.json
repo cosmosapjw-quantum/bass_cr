@@ -1,0 +1,214 @@
+{
+  "schema": "REI_FINITE_COHORT_BUDGET_FINAL_V1",
+  "status": "HOLD_RESOURCE",
+  "original_policy_caps_CPU_s": {
+    "planning": "10",
+    "presentation": "30"
+  },
+  "restored_policy_caps_CPU_s": {
+    "planning": "10",
+    "presentation": "30"
+  },
+  "planning": {
+    "cumulative": "15.077490885",
+    "prior_temporary_cap": "14.99",
+    "new_local_planning_or_scientific_runs": 0,
+    "approval": "SEPARATE_GATE_PENDING"
+  },
+  "presentation": {
+    "inherited_cumulative_and_prior_reservations": "43.787562494",
+    "new_measured_closed_process_CPU_s": "1.103205",
+    "new_final_tail_reservation_CPU_s": "0.10",
+    "total_with_reservations_CPU_s": "44.990767494",
+    "unit_reservation_before_last_close_CPU_s": "1.19",
+    "actual_plus_new_tail_CPU_s": "1.203205",
+    "unit_reservation_exceeded": true,
+    "temporary_cap_history": [
+      "44.99",
+      "44.9999"
+    ],
+    "last_cap_authority": "44.9999 applied prospectively only to close the already running process; strictly below1.5*30; no retroactive PASS",
+    "current_policy_cap": "30",
+    "local_packaging": "STOPPED"
+  },
+  "closed_processes": [
+    {
+      "id": "nonTTY_EOF",
+      "CPU_s": "0.053216",
+      "exit": 0
+    },
+    {
+      "id": "TTYcanonical_decode_stop",
+      "CPU_s": "0.060831",
+      "exit": 0
+    },
+    {
+      "id": "stage_R1_R5",
+      "CPU_s": "0.459954",
+      "exit": 0
+    },
+    {
+      "id": "stage_R6_batchedTTY",
+      "CPU_s": "0.403988",
+      "exit": 0
+    },
+    {
+      "id": "final_helper_startup_budget_refusal",
+      "CPU_s": "0.125216",
+      "exit": 0,
+      "planned_cap": "0.11",
+      "startup_observed": "0.124035",
+      "metadata_operation_started": false
+    }
+  ],
+  "failures_preserved": [
+    "nonTTY immediate EOF before file work",
+    "orchestration store(undefined session_id) error; no science state change",
+    "canonical TTY JSON truncation and JSONDecodeError before file write",
+    "last helper startup exceeded its0.11 reservation; first metadata operation refused"
+  ],
+  "main": {
+    "cumulative": "595.225063",
+    "cap": "600",
+    "instruction": "NO_MORE_IVPs"
+  },
+  "foreign_owner_budgets": "UNCHANGED_NOT_BORROWED",
+  "historical_causal_attempt": {
+    "child": "0.192151",
+    "wrapper": "0.074169",
+    "held_tail": "0.02",
+    "total": "0.286320",
+    "reservation": "0.18",
+    "overrun_preserved": true
+  },
+  "publication": "Existing authorization retained for Git expected-SHA/nonforce and raw source backups",
+  "format_change": "R1-R6 retain actual ZIP/CRC/hash/dual ACK. R7 onward use UTF8 source checkpoints and completed dual raw-file ACK; final whole-unit ZIP remains pending additional presentation budget.",
+  "unknown_cost": "UNKNOWN_NOT_ZERO for connectors, remote services, LLM, patch writes, reviewer unmeasured reads and metadata overhead",
+  "resets": 0,
+  "transfers": 0,
+  "science_as_presentation": false,
+  "new_science_runs": 0,
+  "new_test_runs": 0,
+  "closed": true,
+  "local_helpers": "ALL_CLOSED_NO_FURTHER_LOCAL_PROCESS",
+  "stage_publication": "20 Git checkpoints with20 Drive and20 Dropbox completed ACKs",
+  "source_delivery": "97-file UTF8 bundle completed on both providers; no new local archive process",
+  "future_proposals": {
+    "schema": "REI_FINITE_COHORT_FIRST_EXECUTION_PROPOSAL_V1",
+    "authorization": "PENDING_SEPARATE_USER_BUDGET_APPROVAL",
+    "not_an_execution_record": true,
+    "not_a_budget_reset": true,
+    "planning": {
+      "original_cap_CPU_s": "10",
+      "current_cumulative_CPU_s": "15.077490885",
+      "proposed_absolute_cap_CPU_s": "16",
+      "new_job_reservation_CPU_s": "0.80",
+      "reserved_cumulative_CPU_s": "15.877490885",
+      "parts": {
+        "cohort_child_startup_import_tests_exit": "0.25",
+        "affine_child_startup_import_tests_exit": "0.25",
+        "wrapper_startup_measurement": "0.20",
+        "final_tail": "0.10"
+      }
+    },
+    "jobs": [
+      {
+        "id": "cohort_first20",
+        "test_count": 20,
+        "argv": [
+          "python",
+          "-S",
+          "-B",
+          "-m",
+          "unittest",
+          "-v",
+          "test_cohort_bounds"
+        ],
+        "cwd_relative": "research/rei_expanded_event_consumer/finite_cohort_enclosure_20261027/implementation",
+        "source_pin": "4f3f3678b5a27cdf535a7204b4296306d902376c",
+        "max_CPU_s": "0.25",
+        "max_executions": 1,
+        "production_blob": "d9d9a435d43fdffa099f0bcdd07890c835a1184d",
+        "test_blob": "0b7d410fa8cc3543adc5047954e16a9aec300d1d"
+      },
+      {
+        "id": "affine_first16",
+        "test_count": 16,
+        "argv": [
+          "python",
+          "-S",
+          "-B",
+          "-m",
+          "unittest",
+          "-v",
+          "test_history_bounds"
+        ],
+        "cwd_relative": "research/rei_expanded_event_consumer/affine_history_enclosure_20261027/implementation",
+        "source_pin": "fbb55bcd0c77990b62470862a9f4a70647d0c5c9",
+        "production_blob": "9dac2505626386917d36b85037e3d0686d19d913",
+        "test_blob": "50e287438ccdc56a714158ceaa43d79430d6a020",
+        "max_CPU_s": "0.25",
+        "max_executions": 1
+      }
+    ],
+    "control": {
+      "child_limit": "Fractional CPU control installed before imports/exec; includes interpreter startup. Integer-second-only limit is insufficient.",
+      "measurement": "OS user+system for parent and each child; preserve actual overshoot; wall time separate",
+      "stop": [
+        "First child failure/import error/timeout/budget stop => no second child",
+        "Wrapper reaches0.20 => no new child",
+        "New total reaches0.70 => final0.10 tail only",
+        "No automatic rerun, code repair, limit increase or selected-test reduction"
+      ],
+      "output_directory": "execution/",
+      "raw_outputs": [
+        "cohort_tests.stdout.txt",
+        "cohort_tests.stderr.txt",
+        "affine_tests.stdout.txt",
+        "affine_tests.stderr.txt"
+      ],
+      "receipt": "execution/first_run_result.json"
+    },
+    "acceptance": [
+      "Explicit separate budget approval recorded",
+      "20+16 tests all run;exit0;no failures/errors/skips/unexpected successes",
+      "Per-job reservation and cumulative cap respected",
+      "Exact source/argv/cwd/interpreter and raw outputs/CPU preserved"
+    ],
+    "presentation": {
+      "original_cap_CPU_s": "30",
+      "current_measured_plus_reservations_CPU_s": "44.990767494",
+      "proposed_absolute_cap_CPU_s": "46",
+      "bounded_archive_reservation_CPU_s": "0.80",
+      "reserved_cumulative_CPU_s": "45.790767494",
+      "parts": {
+        "archive_process_including_startup": "0.50",
+        "wrapper_orchestration_measured_local": "0.20",
+        "final_tail": "0.10"
+      },
+      "scope": "One whole-unit source ZIP from final frozen text source bundle and owned files; one SHA256/CRC pass; final delivery update. No scientific module imports or tests in this budget."
+    },
+    "excluded": [
+      "old causal science",
+      "old executed full suite",
+      "attempt01 replay",
+      "new83 whole interval",
+      "NCP",
+      "IVP",
+      "provider solve",
+      "projection",
+      "quadrature",
+      "CAS evaluator"
+    ],
+    "main": "595.225063/600; NO_MORE_IVPs",
+    "foreign_owner_budgets": "UNCHANGED",
+    "unknown_cost": "UNKNOWN_NOT_ZERO",
+    "restore_after_jobs": {
+      "planning": "10",
+      "presentation": "30",
+      "cumulative_spending": "PRESERVED"
+    }
+  },
+  "future_approval": "PENDING_NOT_APPLIED",
+  "old_and_new_unmeasured_cost": "UNKNOWN_NOT_ZERO"
+}

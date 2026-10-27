@@ -2,6 +2,7 @@
 """Changed physics limits and adversarial contracts; no old suite replay."""
 import argparse
 import copy
+from fractions import Fraction
 import json
 import math
 from pathlib import Path
@@ -52,13 +53,19 @@ def scalar_exact(amplitude, removal, t):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--only", help="Run exactly this named control; omit all other control actions.")
     args = parser.parse_args()
     unit = Path(__file__).resolve().parents[1]
     out = args.out.resolve()
     require_runner(unit, out)
     findings = []
+    registered_names = []
 
     def check(name, action, meaning):
+        need(name not in registered_names, "DUPLICATE_CONTROL_NAME:" + name)
+        registered_names.append(name)
+        if args.only is not None and name != args.only:
+            return
         try:
             action()
             findings.append({"name": name, "pass": True, "meaning": meaning})
@@ -142,7 +149,12 @@ def main():
         direct = acut * t * t / 2
         n, occ = solve([0.], [1.], [2.], [3.], [t])
         need(n[0, 0] == occ[0, 0] == 0, "DIRECT_CUTOFF_IS_NOT_ACTIVE")
-        close(.1 * direct, .1 * acut * t * t / 2, 0.)
+        # Exact represented-input oracle; round each final expectation once.
+        # A differently associated floating product is not a zero-tolerance oracle.
+        expected_count = Fraction.from_float(acut) * Fraction.from_float(t) ** 2 / 2
+        expected_energy = Fraction.from_float(.1) * expected_count
+        close(direct, float(expected_count), 0.)
+        close(.1 * direct, float(expected_energy), 0.)
 
     check("direct_cutoff_has_no_active_RR", direct_cutoff,
           "A boundary atom is owned by the unresolved cutoff ledger, not post-boundary physical RR.")
@@ -375,10 +387,14 @@ def main():
 
     check("memory_v2_shmem_clamp_missing_counter", memory_shmem_clamp_and_missing_counter,
           "A non-atomic file<shmem observation is clamped before credit and a missing exclusion counter fails closed.")
+    need(args.only is None or args.only in registered_names, "UNKNOWN_CONTROL_NAME:" + str(args.only))
     result = {"schema": "CR_LOW_BIRTH_CHANGED_CONTROLS_V1", "unit": UNIT_ID,
               "checks": findings, "count": len(findings),
               "passed": sum(row["pass"] for row in findings),
               "all_pass": all(row["pass"] for row in findings),
+              "execution_scope": "selected_control_only" if args.only is not None else "all_controls",
+              "only_requested": args.only, "available_control_count": len(registered_names),
+              "omitted_control_actions": len(registered_names) - len(findings),
               "old_suites_replayed": 0,
               "tests_are": "analytic limits, conservation, finite-bin history, and adversarial physical contracts"}
     write_json(out / "RESULT.json", result)

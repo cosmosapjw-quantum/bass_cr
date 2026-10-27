@@ -1,0 +1,242 @@
+{
+  "schema": "CR_LOW_BIRTH_CHANGED_CONTROLS_V1",
+  "unit": "CR_PHYS02_LOW_BIRTH_CAUSAL_RR_V1",
+  "checks": [
+    {
+      "name": "zero_drift_zero_RR_exact_polynomial",
+      "pass": true,
+      "meaning": "Actual occupancy is the time integral, and zero generator preserves the prescribed ramp."
+    },
+    {
+      "name": "zero_drift_single_capture_analytic",
+      "pass": true,
+      "meaning": "A killed one-state ramp has an independent closed-form state and occupancy."
+    },
+    {
+      "name": "finite_bin_inherits_prior_population",
+      "pass": true,
+      "meaning": "The second bin includes first-bin survivors even when its source clock is absolute."
+    },
+    {
+      "name": "common_competing_H_He_capture",
+      "pass": true,
+      "meaning": "Channel captures partition a single common survival process."
+    },
+    {
+      "name": "zero_RR_drift_number_and_energy",
+      "pass": true,
+      "meaning": "Downward transport splits active energy, cutoff energy and caloric transfer exactly in the represented model."
+    },
+    {
+      "name": "zero_source_exact_zero",
+      "pass": true,
+      "meaning": "No event or state is created without a source."
+    },
+    {
+      "name": "direct_cutoff_has_no_active_RR",
+      "pass": false,
+      "meaning": "A boundary atom is owned by the unresolved cutoff ledger, not post-boundary physical RR.",
+      "error": "ValueError:ANALYTIC_OR_CONSERVATION_DISAGREEMENT"
+    },
+    {
+      "name": "RR_event_baryon_charge_and_energy",
+      "pass": true,
+      "meaning": "Only the RR event updates native25; binding and retained photons are counted once."
+    },
+    {
+      "name": "reject_mixed_frame",
+      "pass": true,
+      "meaning": "The actual response contract refuses this unsupported state or normalization mutation."
+    },
+    {
+      "name": "reject_mixed_state",
+      "pass": true,
+      "meaning": "The actual response contract refuses this unsupported state or normalization mutation."
+    },
+    {
+      "name": "reject_missing_nb",
+      "pass": true,
+      "meaning": "The actual response contract refuses this unsupported state or normalization mutation."
+    },
+    {
+      "name": "reject_mismatched_nb",
+      "pass": true,
+      "meaning": "The actual response contract refuses this unsupported state or normalization mutation."
+    },
+    {
+      "name": "reject_wrong_inventory",
+      "pass": true,
+      "meaning": "The actual response contract refuses this unsupported state or normalization mutation."
+    },
+    {
+      "name": "reject_wrong_isotope_mapping",
+      "pass": true,
+      "meaning": "The actual response contract refuses this unsupported state or normalization mutation."
+    },
+    {
+      "name": "reject_wrong_target_isotope",
+      "pass": true,
+      "meaning": "The actual response contract refuses this unsupported state or normalization mutation."
+    },
+    {
+      "name": "reject_wrong_target_state",
+      "pass": true,
+      "meaning": "The actual response contract refuses this unsupported state or normalization mutation."
+    },
+    {
+      "name": "reject_wrong_product_state",
+      "pass": true,
+      "meaning": "The actual response contract refuses this unsupported state or normalization mutation."
+    },
+    {
+      "name": "reject_wrong_degeneracy",
+      "pass": true,
+      "meaning": "The actual response contract refuses this unsupported state or normalization mutation."
+    },
+    {
+      "name": "reject_stimulated_component",
+      "pass": true,
+      "meaning": "The actual response contract refuses this unsupported state or normalization mutation."
+    },
+    {
+      "name": "reject_native_support_expansion",
+      "pass": true,
+      "meaning": "The actual response contract refuses this unsupported state or normalization mutation."
+    },
+    {
+      "name": "reject_missing_history",
+      "pass": true,
+      "meaning": "The actual response contract refuses this unsupported state or normalization mutation."
+    },
+    {
+      "name": "reject_invented_shutoff",
+      "pass": true,
+      "meaning": "The actual response contract refuses this unsupported state or normalization mutation."
+    },
+    {
+      "name": "reject_second_clock_factor",
+      "pass": true,
+      "meaning": "The actual response contract refuses this unsupported state or normalization mutation."
+    },
+    {
+      "name": "reject_second_volume_factor",
+      "pass": true,
+      "meaning": "The actual response contract refuses this unsupported state or normalization mutation."
+    },
+    {
+      "name": "reject_second_target_factor",
+      "pass": true,
+      "meaning": "The actual response contract refuses this unsupported state or normalization mutation."
+    },
+    {
+      "name": "reject_invented_parent_chemistry",
+      "pass": true,
+      "meaning": "The actual response contract refuses this unsupported state or normalization mutation."
+    },
+    {
+      "name": "reject_invented_worldtube_volume",
+      "pass": true,
+      "meaning": "The actual response contract refuses this unsupported state or normalization mutation."
+    },
+    {
+      "name": "reject_duplicate_birth",
+      "pass": true,
+      "meaning": "Same physical source injection is claimed once."
+    },
+    {
+      "name": "accept_disjoint_bins_same_birth",
+      "pass": true,
+      "meaning": "Shared birth history does not merge disjoint observation events."
+    },
+    {
+      "name": "reject_overlapping_observation_bins",
+      "pass": true,
+      "meaning": "Distinct endpoint hashes cannot conceal overlapping physical return claims."
+    },
+    {
+      "name": "reject_whole_then_split_returns",
+      "pass": true,
+      "meaning": "Cumulative whole-window events cannot be added again through a smaller bin."
+    },
+    {
+      "name": "reject_cumulative_prefix_claim",
+      "pass": true,
+      "meaning": "Prefix diagnostics are not additive return messages."
+    },
+    {
+      "name": "reject_missing_return_registry",
+      "pass": true,
+      "meaning": "A successful claim must participate in an explicit aggregate registry."
+    },
+    {
+      "name": "reject_after_known_history",
+      "pass": true,
+      "meaning": "The recorded source endpoint does not invent later shutoff or returns."
+    },
+    {
+      "name": "event_identity_ignores_producer_revision",
+      "pass": true,
+      "meaning": "Documentation revisions do not create a second physical capture event."
+    },
+    {
+      "name": "reject_photo_support_extension",
+      "pass": true,
+      "meaning": "Finite native photo support is not extrapolated."
+    },
+    {
+      "name": "reject_wrong_photo_species",
+      "pass": true,
+      "meaning": "An elemental fit is not silently mapped onto another isotope/channel."
+    },
+    {
+      "name": "reject_photon_support_extension",
+      "pass": true,
+      "meaning": "Explicit photon atoms remain inside capture-energy plus threshold support."
+    },
+    {
+      "name": "reject_negative_generator",
+      "pass": true,
+      "meaning": "A negative transition rate cannot enter a positive generator."
+    },
+    {
+      "name": "actual_saved_low_source_identity_and_guards",
+      "pass": true,
+      "meaning": "The exact saved low birth tag is selected without any source quadrature or projection replay."
+    },
+    {
+      "name": "memory_v2_zero_headroom_refusal",
+      "pass": true,
+      "meaning": "Zero headroom and zero eligible cache cannot satisfy the unchanged worker plus host reserve."
+    },
+    {
+      "name": "memory_v2_negative_headroom_and_floor",
+      "pass": true,
+      "meaning": "Signed negative headroom survives in the receipt and an odd cache candidate receives floor(C/2) credit."
+    },
+    {
+      "name": "memory_v2_excluded_and_preserved_counters",
+      "pass": true,
+      "meaning": "Shmem, mapped, dirty, writeback and unevictable counters are excluded; all supplied counters and old estimate remain visible."
+    },
+    {
+      "name": "memory_v2_host_cap_and_unlimited_case",
+      "pass": true,
+      "meaning": "A finite cgroup estimate never overrides a smaller host MemAvailable; unlimited cgroups retain the explicit host-only rule."
+    },
+    {
+      "name": "memory_v2_exact_reserve_boundary",
+      "pass": true,
+      "meaning": "Exactly256 MiB plus1 GiB passes; one byte less fails without changing the512 MiB upper cap."
+    },
+    {
+      "name": "memory_v2_shmem_clamp_missing_counter",
+      "pass": true,
+      "meaning": "A non-atomic file<shmem observation is clamped before credit and a missing exclusion counter fails closed."
+    }
+  ],
+  "count": 46,
+  "passed": 45,
+  "all_pass": false,
+  "old_suites_replayed": 0,
+  "tests_are": "analytic limits, conservation, finite-bin history, and adversarial physical contracts"
+}
