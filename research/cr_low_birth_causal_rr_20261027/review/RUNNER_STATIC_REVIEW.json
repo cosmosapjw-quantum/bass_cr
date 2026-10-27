@@ -1,0 +1,161 @@
+{
+  "schema": "CR_LOW_BIRTH_RUNNER_INDEPENDENT_STATIC_REVIEW_V1",
+  "unit": "CR_PHYS02_LOW_BIRTH_CAUSAL_RR_V1",
+  "reviewer": "/root/theory_review",
+  "review_date_utc": "2026-10-27",
+  "verdict": "PASS_SCOPED_STATIC_PENDING_C4_AND_RUNTIME",
+  "blocking_findings_remaining": 0,
+  "author_roles": {
+    "reviewer_authored_theory_and_independent_reference": true,
+    "reviewer_authored_production_math_or_runner": false,
+    "production_and_runner_author": "/root/implementation",
+    "root_owns_C4_host_admission_and_dispatch": true
+  },
+  "scope": [
+    "Failure-inclusive CPU accounting and immutable attempt debit reconciliation",
+    "Separate new40 CPU cap, worker/coordinator/tail admission and no old allowance carry",
+    "Frozen code manifest, exact executed-source snapshot and prelaunch gates",
+    "Owned-process-only termination, descendant reaping and incomplete-accounting gate",
+    "Named run/memory allocations and reference/producer guard/schema compatibility"
+  ],
+  "execution_performed_by_reviewer": {
+    "scientific_workers": 0,
+    "production_imports": 0,
+    "reference_imports": 0,
+    "compilation": 0,
+    "tests": 0,
+    "old_science_replays": 0,
+    "method": "Read source text and metadata; hash files; reason about control flow"
+  },
+  "reviewed_identities": {
+    "runner": {
+      "path": "implementation/run_bounded.py",
+      "bytes": 42369,
+      "sha256": "07c6c78d274654c29910d5be3e91954ee01db2072981147377873478e663ce56"
+    },
+    "resource_proposal": {
+      "path": "implementation/RESOURCE_PROPOSAL.json",
+      "bytes": 2331,
+      "sha256": "c46c5707b81f4f2b16790c825d466a77e532e232d0843ed55f4c9be088c1dc28",
+      "status": "DRAFT_NOT_C4_ADMITTED"
+    },
+    "independent_reference": {
+      "path": "review/independent_reference.py",
+      "bytes": 33201,
+      "sha256": "b02b30515d24a21722475ca522ad79b94609fd2fdc9575ef4978cad076f41db4"
+    },
+    "contract_sha256": "0766fa66e643de2b50d797fa94838cb989e69c8d3aaa47fe8c31673764757210",
+    "local_head_observed_during_read": "c29a712bc03d8fce8d5473a762fac30e7bf82a5b",
+    "old_runner_origin": "Header cites PR109 runner724f816a; this review inspected current new-unit code directly and does not assert an independently verified whole-file diff against missing prior checkout path"
+  },
+  "resolved_findings": [
+    {
+      "id": "RS01",
+      "first_observed_runner_sha256": "2dbcf870a51067c0fd36d34ea059e7e4c94d785e69411d109bee72be84ba1ef2",
+      "finding": "Cleanup killed original process group and previously observed PID/start identities, but a newly adopted escaped descendant could enter the subreaper after the last monitor sample and remain alive while wait4 only waited.",
+      "required_repair": "Rediscover only the coordinator's actual descendant tree during bounded cleanup; capture and verify PID/start identity, kill newly owned descendants, and reap before marking CPU accounting complete.",
+      "repair_reviewed": "terminate_current_owned_descendants is called before waiting and on every bounded reap-loop iteration. It recursively reads child lists rooted at this standalone coordinator and checks start_ticks before sending a signal.",
+      "resolved_in_runner_sha256": "a570b73098b6ad51bcb14e66f8caca2d113db616b3fa551fecb98eddacca48bd",
+      "status": "RESOLVED_STATIC_NO_RUNTIME_PROOF"
+    },
+    {
+      "id": "RS02",
+      "first_observed_runner_sha256": "2dbcf870a51067c0fd36d34ea059e7e4c94d785e69411d109bee72be84ba1ef2",
+      "finding": "The snapshot copy recorded actual copied hashes but did not itself assert equality to each frozen manifest row; a transient parallel edit could make the recorded snapshot differ from the pinned revision even if the final live-file check passed.",
+      "required_repair": "Check copied content byte length and SHA256 against the frozen row before create-only snapshot publication.",
+      "repair_reviewed": "source_snapshot now raises FROZEN_CODE_CHANGED_DURING_SNAPSHOT on any copied content mismatch, before writing the snapshot member. A final manifest verification remains before worker launch.",
+      "resolved_in_runner_sha256": "a570b73098b6ad51bcb14e66f8caca2d113db616b3fa551fecb98eddacca48bd",
+      "status": "RESOLVED_STATIC_NO_RUNTIME_PROOF"
+    },
+    {
+      "id": "RS03",
+      "first_observed_runner_sha256": "a570b73098b6ad51bcb14e66f8caca2d113db616b3fa551fecb98eddacca48bd",
+      "finding": "Named allocation rows declared selected_memory_limit_bytes but execution only enforced the512MiB upper cap, leaving the named256MiB values unbound.",
+      "required_repair": "Treat selected_memory_limit_bytes as frozen per-run allocation; omitted CLI defaults to that value and explicit CLI must equal it.",
+      "repair_reviewed": "load_budget validates each named memory integer within the upper cap; execute_attempt selects the allocation value by default and requires exact equality after CLI parsing.",
+      "resolved_in_runner_sha256": "07c6c78d274654c29910d5be3e91954ee01db2072981147377873478e663ce56",
+      "status": "RESOLVED_STATIC_NO_RUNTIME_PROOF"
+    }
+  ],
+  "static_checks": [
+    {
+      "id": "S01",
+      "result": "PASS",
+      "evidence": "HARD_CAP_S=40, exact unit budget identity, zero unrecorded/inherited baseline, false historical/parallel transfers, and foreign-unit debit rejection. No old ledger is imported."
+    },
+    {
+      "id": "S02",
+      "result": "PASS",
+      "evidence": "Immutable create-only ATTEMPT_DEBITS and fallback PREWORKER_DEBIT paths survive malformed invocation, admission refusal, lock/snapshot/worker/ledger failure. Terminal receipts charge RUSAGE_CHILDREN plus RUSAGE_SELF plus tail."
+    },
+    {
+      "id": "S03",
+      "result": "PASS",
+      "evidence": "Reconciliation groups by explicit attempt_id, rejects conflicting run_id, and selects the largest cumulative debit rather than summing amendments. It verifies stored ledger totals and requires cpu_accounting_complete."
+    },
+    {
+      "id": "S04",
+      "result": "PASS",
+      "evidence": "An unreceipted saved reservation is UNKNOWN_NO_ACK and blocks admission; it is not treated as zero cost. Malformed/foreign/incomplete cost evidence fails closed."
+    },
+    {
+      "id": "S05",
+      "result": "PASS",
+      "evidence": "Locked admission reserves ceil(worker CPU) plus coordinator reserve including tail against measured prior debits. A second reconciliation occurs after snapshots and before launch. Named run CPU reservation must match exactly."
+    },
+    {
+      "id": "S06",
+      "result": "PASS",
+      "evidence": "The draft proposes33 worker seconds plus five0.8 coordinator blocks=37, leaving3 for failures/necessary repair. The0.05 tail is inside each coordinator block, not an uncharged extra. Actual C4 budgets remain root-owned and not yet admitted by this review."
+    },
+    {
+      "id": "S07",
+      "result": "PASS",
+      "evidence": "Exact host receipt SHA and memory_gate PASS, code-manifest bytes/SHA, complete implementation/review .py coverage, no symlink members, snapshot row equality and final live manifest check precede worker launch. Current Python executable, manifest-listed script and owned output path are checked."
+    },
+    {
+      "id": "S08",
+      "result": "PASS",
+      "evidence": "Named memory allocation is exact and bounded by512MiB. Fresh initial/final cgroup-v2 plus conservative clean-inactive memory estimates preserve1GiB host reserve. RLIMIT_AS, integer RLIMIT_CPU, one CPU affinity and one native thread are applied to the worker. Memory estimates explicitly are not guarantees."
+    },
+    {
+      "id": "S09",
+      "result": "PASS",
+      "evidence": "Standalone runner enables subreaping, observes its own descendant tree, monitors worker/coordinator/unit thresholds and60s wall deadline, terminates its owned session/known PID-start identities and newly adopted children, then reaps before complete accounting. No unrelated name-based kill or all-process scan is present."
+    },
+    {
+      "id": "S10",
+      "result": "PASS",
+      "evidence": "Measured worker or coordinator reservation excess marks attempt failed even when worker exits0. Cleanup/accounting errors retain failure receipts; finalization amendments preserve costs. Closed accounting statuses leave unknown totals null."
+    },
+    {
+      "id": "S11",
+      "result": "PASS",
+      "evidence": "Reference guard matches CR_BOUNDED_UNIT/OUTDIR/ATTEMPT_ID and RESERVATION.unit/attempt_id. OUTPUT_SCHEMA matches reference row/NPZ/native25 names. No production imports were added to the independently authored reference."
+    },
+    {
+      "id": "S12",
+      "result": "PASS_WITH_EXPLICIT_LIMIT",
+      "evidence": "Code and proposal explicitly deny a kernel-enforced aggregate CPU proof. Non-atomic /proc polling, cleanup and final bookkeeping can overshoot; actual failure-inclusive receipts remain authoritative. This review does not convert static protective monitoring into hard preventive aggregate-cap proof."
+    }
+  ],
+  "remaining_runtime_validation": [
+    "Root must freeze actual C4 host receipt, exact code manifest and EXECUTION_BUDGET before dispatch.",
+    "Actual preparation/control/primary/reference/plot receipts and any failures must be inspected for finalC9.",
+    "Inspect exact executed snapshots, immutable debits/amendment dedup, complete owned-child accounting and measured total within40.",
+    "Retain each failed attempt or exceeded reservation; no automatic replay or false all-attempt PASS.",
+    "No numerical-science acceptance or full production-math review is issued by this static runner report."
+  ],
+  "preserved_claims": {
+    "hard_preventive_aggregate_CPU_proof": false,
+    "old_PR109_plot_failure_erased": false,
+    "old_PR109_preworker_failure_erased": false,
+    "old_20_or_30_CPU_allowance_carried": false,
+    "parallel_project_budget_carried": false,
+    "central_completed_nodes": 27,
+    "central_total_nodes": 88,
+    "central_effect": 0,
+    "global_physical_completion": null,
+    "global_remaining_budget": null
+  }
+}
