@@ -185,8 +185,14 @@
     },
     {
       "id": "C08",
-      "status": "pending",
-      "evidence_refs": []
+      "status": "complete",
+      "evidence_refs": [
+        "reviews/C8_NUMERICAL_REVIEW.json",
+        "runs/cr_clock_plot_20261027_v2/payload/PLOT_RECEIPT.json",
+        "runs/cr_clock_plot_20261027_v2/DISPATCH_RECEIPT.json",
+        "reviews/C8_LEASE_RETIREMENT.json",
+        "runs/cr_clock_plot_20261027_v1/DISPATCH_RECEIPT.json"
+      ]
     },
     {
       "id": "C09",
@@ -225,6 +231,22 @@
       "evidence": "runs/cr_clock_controls_20261027_v2/DISPATCH_RECEIPT.json"
     },
     {
+      "run_id": "cr_clock_plot_20261027_v1",
+      "mode": "plot",
+      "status": "FAILED_RETAINED",
+      "worker_cpu_s": 0.0,
+      "coordinator_cpu_s": 0.086162841,
+      "evidence": "runs/cr_clock_plot_20261027_v1/DISPATCH_RECEIPT.json"
+    },
+    {
+      "run_id": "cr_clock_plot_20261027_v2",
+      "mode": "plot",
+      "status": "PASS",
+      "worker_cpu_s": 4.19512,
+      "coordinator_cpu_s": 0.179039386,
+      "evidence": "runs/cr_clock_plot_20261027_v2/DISPATCH_RECEIPT.json"
+    },
+    {
       "run_id": "cr_clock_primary_20261027_v1",
       "mode": "primary",
       "status": "PASS",
@@ -260,10 +282,19 @@
         "reviews/C6_RUNTIME_REPAIR.json"
       ],
       "next_action": "closed by independently reviewed procfs self-binding and actual v2 PASS; v1 cost retained"
+    },
+    {
+      "class": "owned_stale_lease",
+      "stage": "C08",
+      "evidence_refs": [
+        "runs/cr_clock_plot_20261027_v1/DISPATCH_RECEIPT.json",
+        "reviews/C8_LEASE_RETIREMENT.json"
+      ],
+      "next_action": "exact terminal primary lease retired after own identity/absent host process/exit0 verification; changed host lifecycle cause unproven; plotv2 passed; failedcost retained"
     }
   ],
   "old_science_replay": 0,
-  "new_science_cpu_s": 13.582793509999998,
+  "new_science_cpu_s": 18.043115737,
   "new_science_cpu_cap_s": 60,
   "gates": {
     "N4": "PARTIAL_OPEN",
@@ -274,5 +305,5 @@
     "global_physical_completion": null,
     "global_error_bound": null
   },
-  "completed_stages": 17
+  "completed_stages": 18
 }
