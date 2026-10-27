@@ -1,0 +1,149 @@
+{
+  "schema": "CR_PROPER_INJECTION_C9_STATIC_V1",
+  "reviewer": "/root/theory_review",
+  "observed_date": "2026-10-27",
+  "local_head": "7699d8d1c437deb19c9a501e52d390906a477ccc",
+  "status": "CHANGES_REQUESTED_BEFORE_EXECUTION",
+  "method": "Static read of producer, original frozen projection/source definitions, independent algebra, and test source. No implementation import or execution.",
+  "independence": {
+    "authored_production": false,
+    "authored_reference": true,
+    "authored_theory_memo": true,
+    "reviewed_production_before_reference_coordinate_repair": true,
+    "reference_imports_production": false,
+    "disclosure": "Reviewer derived initial theoretical contract and wrote independent Decimal reference; did not author ports, controls, actual consumer or runner. Reference coordinate error was found before first execution by checking frozen original Cascade.project/functionals."
+  },
+  "reviewed_files": [
+    {
+      "path": "implementation/ports.py",
+      "sha256": "15fe56160f3c317ed5f8bd327f7120af75b577c7267993ee5a6ece87e0ce54ef"
+    },
+    {
+      "path": "implementation/controls.py",
+      "sha256": "d9964ab0db2d73d0ca392020f821ff3b4603614d6937ea4bb5b1bf792fb7ef1e"
+    },
+    {
+      "path": "implementation/consume_phys02.py",
+      "sha256": "f7626cc1dbca38b7592909b01ddd692ec1b00d8314b702f63441890f74cb5336"
+    },
+    {
+      "path": "implementation/run_bounded.py",
+      "sha256": "bbebe14b69c8d2b9afbc5d54ea6a14a4953d0d33e6c70fb2346e10f640c07d8e"
+    },
+    {
+      "path": "review/independent_reference.py",
+      "sha256": "b529b27f5e816d35d9894f838412483d38c48f777294e3e8f4796e066275d0dc"
+    }
+  ],
+  "findings": [
+    {
+      "id": "C9S01_RETURN_PARTITION_OVERLAP",
+      "status": "CLOSED_STATIC_PENDING_TARGETED_EXECUTION",
+      "classification": "implementation",
+      "target": "ports.py attach_rr_return/_candidate_return_claim",
+      "observed": "Original exact event-ID set could admit total/low or whole/split overlapping returns. Current successful attach requires shared return_registry and compares source family/channel/time/native-birth support overlap before registry mutation.",
+      "impact": "Avoid repeated accounting through different representations or partitions of one physical source event family.",
+      "repair": "Author added mandatory shared registry and overlap controls.",
+      "execution_evidence": null,
+      "controls": [
+        "RR_shared_registry_required",
+        "RR_total_low_overlap",
+        "RR_whole_split_time_overlap",
+        "failed_RR_claim_does_not_mutate_registry",
+        "RR_disjoint_time_returns",
+        "RR_disjoint_birth_returns"
+      ]
+    },
+    {
+      "id": "C9S02_MATCHING_BUT_INCONSISTENT_ISOTOPE_MAPPING",
+      "status": "OPEN",
+      "classification": "implementation",
+      "target": "ports.py validate_source/rr_compatibility/attach_rr_return",
+      "observed": "isotope_mapping is any nonempty string and compatibility only checks equality. A source and response both labelled elemental-He-to-He3 can still declare channel He4III_to_He4II_1s and emit native He4II11/He4III12 updates. No code checks this internal contradiction.",
+      "impact": "General interface can admit isotope mis-mapping despite matching metadata.",
+      "minimal_repair": "Require explicit approved He4 isotope/state mapping for this hard-coded HeIII ground channel (or equivalent typed isotope mapping) and add both-sides-wrong mapping control. Actual PHYS02 mapping is correct; it remains RR gated.",
+      "execution_evidence": null
+    },
+    {
+      "id": "C9S03_PREWORKER_COORDINATOR_COST",
+      "status": "OPEN",
+      "classification": "implementation_resource_accounting",
+      "target": "implementation/run_bounded.py main admission/lock/assert/snapshot path",
+      "observed": "Admission assertions, lock errors and snapshot errors before Popen can exit without receipt/ledger entry. Such a failed coordinator consumes CPU but is absent from charged attempts.",
+      "impact": "New-unit all-attempt budget ledger could omit preworker failures.",
+      "minimal_repair": "Record coordinator-only failure and bounded receipt tail for all admitted runner attempts; alternatively make root-owned external wrapper preserve any failed preworker process resource receipt under this same cap. Do not record unknown cost as zero.",
+      "execution_evidence": null
+    },
+    {
+      "id": "C9S04_REFERENCE_ENERGY_COORDINATES",
+      "status": "CLOSED_STATIC_NOT_RUN",
+      "classification": "reference_implementation",
+      "target": "review/independent_reference.py initial draft",
+      "observed": "Initial unexecuted reference draft treated active B_i as number weight. Original Cascade.project stores B_i=E_i*counts, and functionals use1/E_i for number.",
+      "impact": "Initial draft would compare wrong N/E moments.",
+      "minimal_repair": "Correct reference to Decimal sum(B_i/E_i)+cutoffN and sum(B_i)+cutoffE. Producer already uses correct mapping. Archive old draft with original hash.",
+      "retired_source": "review/reference_drafts/independent_reference_v1_NOT_RUN.py",
+      "retired_sha256": "961c48afcac3eb54b8fe6823bea031efcf36e590de20d25b455d848c2d1d5182",
+      "corrected_sha256": "b529b27f5e816d35d9894f838412483d38c48f777294e3e8f4796e066275d0dc",
+      "prior_reference_executions": 0
+    }
+  ],
+  "positive_static_observations": [
+    {
+      "id": "SOURCE_COORDINATE_MAP",
+      "evidence": "Original causal_cascade.py project out[:n]=E*active_counts; functionals number[:n]=1/E,energy[:n]=1. consume_phys02 uses A_Ni=S*B_i/E_i and A_E=S*(sum active B+cutoffE)."
+    },
+    {
+      "id": "COMMON_SCALE",
+      "evidence": "S=stored physical_energy_scale_eV_m3/T^2; same scale for low/high/selected total, no per-column renormalization."
+    },
+    {
+      "id": "SOURCE_GHOST_AND_DIAGNOSTICS",
+      "evidence": "Cutoff count9608 included; cutoffE9605 checked against0.1*count; low_cross9609/9610 recorded but excluded from injection totals. Original source projection uses native birth tags, so shared E=10 grid nodes do not merge distinct birth partitions."
+    },
+    {
+      "id": "FINITE_HISTORY",
+      "evidence": "Six windows are inside[0,T]; native history Qe=tA is independently pinned. No postT continuation/shutoff, no mean-time exposure."
+    },
+    {
+      "id": "ONCE_ONLY_NORMALIZATION",
+      "evidence": "Actual source uses proper_s/proper_m3 factors1, already_included target density; no extra729,4pi or target density. Source normalized snapshots are verified by canonical raw_input recomputation."
+    },
+    {
+      "id": "NULLS_AND_GATES",
+      "evidence": "Actual source has nb/native25/RR/retained_photon null and PR107 state mismatch refusal. Synthetic particle inputs explicitly marked synthetic_control."
+    },
+    {
+      "id": "RETURN_ACCOUNTING",
+      "evidence": "HeIII event fast=-U,internal=-I*N,retained radiation=U+I*N; w_ext0,physical_heating null, no coupled state update. Native baryon-changing mapping includes quotient denominator."
+    },
+    {
+      "id": "SHORT_WINDOW_STABILITY",
+      "evidence": "_poly_integral uses factored difference of powers; reference uses exact represented boundaries and Decimal factorization."
+    }
+  ],
+  "actual_execution": {
+    "producer": "NOT_RUN_BY_REVIEWER",
+    "independent_reference": "NOT_RUN",
+    "targeted_controls": "NOT_RUN_BY_REVIEWER",
+    "old_source_quadrature": 0,
+    "old_projection": 0,
+    "old_solver": 0
+  },
+  "final_C9_obligations": [
+    "Close C9S02 andC9S03 with exact changed code identity.",
+    "Inspect actual frozen-run receipts/output and independent96 moment checks after rootC4 budget admission.",
+    "Compare source-domain/null/gate/ownership assertions against actual outputs; do not rerun old suites."
+  ],
+  "claims": {
+    "scientific_pass": null,
+    "implementation_pass": null,
+    "global_physical_error": null,
+    "physical_heating_complete": false
+  },
+  "budget": {
+    "local_scientific_workers_started_by_reviewer": 0,
+    "source_sums_executed_by_reviewer": 0,
+    "remote_symbolic_provider_cpu": null
+  }
+}
