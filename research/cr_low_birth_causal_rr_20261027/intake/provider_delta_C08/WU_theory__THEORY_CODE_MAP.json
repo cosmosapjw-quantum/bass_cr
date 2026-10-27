@@ -1,0 +1,276 @@
+{
+  "schema": "WU_R7_THEORY_CODE_MAP_V1",
+  "unit_id": "WU_NONLINEAR_EVENT_FEEDBACK_R7",
+  "author_status": "DERIVED_PENDING_INDEPENDENT_REVIEW_AND_NEW_EXECUTION",
+  "proof": "NONLINEAR_FEEDBACK_PROOF_KO.md",
+  "scientific_runs_by_theory_author": 0,
+  "inherited_budget_reset": false,
+  "notation": {
+    "fine": "x",
+    "coarse": "y=P*x",
+    "coarse_reference": "ybar",
+    "lift": "E_lift(t)",
+    "lift_identity": "P*E_lift=I",
+    "projection": "Q=I-E_lift*P",
+    "residual": "r=x-E_lift*y",
+    "general_error": "Eerr=||y-ybar||_1",
+    "HD_error": "Eerr=abs(eta); eta=X-Xbar; ||y-ybar||_1=4*abs(eta)",
+    "orientation": "column vectors"
+  },
+  "equations": [
+    {
+      "id": "R7.7",
+      "name": "general_projection",
+      "exact": "r'=K*r+(K*E_lift-E_lift_dot)*y+Q*S*a(x)",
+      "inputs": [
+        "P",
+        "E_lift",
+        "E_lift_dot",
+        "K",
+        "S",
+        "propensities"
+      ],
+      "guards": [
+        "P constant",
+        "P*E_lift=I",
+        "P*K=0",
+        "nonnegative state and lift"
+      ]
+    },
+    {
+      "id": "R7.11",
+      "name": "monomial_derivative",
+      "exact": "Jupper[l,i]=k_upper[l]*alpha[i,l]*M[i]^(alpha[i,l]-1)*product_{j!=i} M[j]^alpha[j,l]",
+      "zero_convention": "if alpha[i,l]==0 set derivative exactly0 first; never evaluate a negative exponent at M[i]=0",
+      "assumptions": [
+        "nonnegative integer stoichiometric exponents",
+        "nonnegative exact upper bounds",
+        "state-independent prescribed k(t), or extra k derivatives included separately"
+      ]
+    },
+    {
+      "id": "R7.13",
+      "name": "interior_comparison",
+      "exact": "V(u)=exp(B*u)*w0+integral_0^u exp(B*s)*g ds",
+      "inputs": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "g_r",
+        "g_e",
+        "u",
+        "w0"
+      ],
+      "guards": [
+        "a,b,c>=0",
+        "d real",
+        "g>=0",
+        "w0>=0",
+        "0<=u<=H"
+      ]
+    },
+    {
+      "id": "R7.1",
+      "name": "causal_endpoint",
+      "exact": "T=exp(B*H)-(1-rho)*[[1,0],[0,0]]; q=integral_0^H exp(B*s)*g ds; w_next=T*w0+q",
+      "guards": [
+        "H>0",
+        "0<=rho<=1",
+        "same nominal K family, norm, clock and H as certificate"
+      ],
+      "positivity": "exp(BH)[0,0]>=1 because a>=0; hence T>=0"
+    },
+    {
+      "id": "R7.22",
+      "name": "HD_scalar_error",
+      "exact": "eta'=-(kf*(u+v+ubar+vbar)/2+dbar*(w+X+wbar+Xbar)/2)*eta-w*dot(d,r)",
+      "guards": [
+        "matching initial H/D/charge invariants",
+        "identical declared kf,d,pi in fine and coarse",
+        "coarse defect zero or s*delta_eta"
+      ]
+    },
+    {
+      "id": "R7.26",
+      "name": "HD_residual",
+      "exact": "r'=K_HD*r-w*Qpi*D*r+q0*X+kf*u*v*(alpha-pi)-w*X*(D*pi-pi*dbar)",
+      "aliases": {
+        "q0": "K_HD*pi-pi_dot",
+        "dbar": "dot(d,pi)",
+        "Qpi": "I-pi*ones^T"
+      }
+    },
+    {
+      "id": "R7.28",
+      "name": "HD_safe_coefficients",
+      "exact": {
+        "a": "M_w*h_star",
+        "b": "q_star+k_upper*(M_u+M_v)*theta_star+(M_w+M_X)*v_star",
+        "c": "M_w*Delta_d/2",
+        "d": "-(k_lower*(m_u+m_v)+dbar_lower*(m_w+m_X))",
+        "g_r": "q_star*M_X+k_upper*M_u*M_v*theta_star+M_w*M_X*v_star",
+        "g_e": "coarse_scalar_defect_upper (exact same model:0)"
+      },
+      "auxiliary": {
+        "Delta_d": "max(d_upper)-min(d_lower)",
+        "h_star": "2*max_i(d_upper[i]*(1-pi_lower[i]))",
+        "v_star": "Delta_d/2 is always safe; tighter actual bound optional",
+        "dbar_lower": "min(d_lower) is always safe; tighter actual bound optional",
+        "theta_star": "explicit supplied bound on ||alpha-pi||_1; universal2 permitted only as labeled conditional bound, no alpha default",
+        "q_star": "explicit supplied bound on ||K_HD*pi-pi_dot||_1"
+      }
+    },
+    {
+      "id": "R7.31-R7.32",
+      "name": "positive_exponential_upper",
+      "exact": "Augment M=[[a,b,g_r],[c,d,g_e],[0,0,0]]. sigma>=max(0,-d); C=H*(M+sigma*I)>=0. z=||C||_inf. S_N=sum(C^j/j!,j=0..N). tail=z^(N+1)/(N+1)!/(1-z/(N+2)). exp(HM)<=exp_upper(-sigma*H)*(S_N+tail*ones_matrix).",
+      "guards": [
+        "explicit nondimensional coordinate scales for augmented matrix",
+        "N+2>z",
+        "outward upper primitive for exp(-sigma*H)",
+        "no signed-series truncation claimed as upper"
+      ],
+      "singular_B_supported": true,
+      "alternate_algorithm": "Any algorithm with an equally explicit entrywise upper proof is admissible."
+    }
+  ],
+  "coefficient_api": {
+    "recommended_name": "hd_feedback_coefficients",
+    "arithmetic": "exact rational for supplied interval endpoints and all coefficient arithmetic",
+    "density_box": {
+      "keys": [
+        "u",
+        "v",
+        "w",
+        "X"
+      ],
+      "each": "[nonnegative_lower,finite_upper]",
+      "covers": "both fine aggregated and coarse states over the whole block"
+    },
+    "rate_inputs": {
+      "kf": "[k_lower,k_upper] >=0",
+      "d": "one [lower,upper] per declared HD state; no inferred vector from aggregate rate",
+      "pi": "intervals covering a simplex-valued locally absolutely continuous lift; no automatic renormalization",
+      "q_norm_upper": "required",
+      "branch_distance_upper": "required explicit theta bound or explicitly labeled universal-simplex2",
+      "coarse_scalar_defect_upper": "0 only for exact same-source model; otherwise supplied nonnegative actual defect bound"
+    },
+    "optional_tightening": {
+      "dbar_lower": "must be proven <=d^T*pi for all admissible states",
+      "variation_norm_upper": "must cover ||D*pi-pi*dbar||_1; default mathematical safe bound is Delta/2"
+    },
+    "metadata_required": [
+      "state_ids",
+      "source_variant_selection",
+      "source_map_identity",
+      "positive_box_evidence",
+      "initial_invariant_compatibility",
+      "clock",
+      "time_unit",
+      "density_unit",
+      "nominal_generator_certificate_identity",
+      "nominal_generator_block_H"
+    ],
+    "outputs": [
+      "a",
+      "b",
+      "c",
+      "d",
+      "g_r",
+      "g_e",
+      "Delta_d",
+      "h_star",
+      "v_star",
+      "dbar_lower",
+      "coefficient_units",
+      "assumptions_and_source_scope"
+    ],
+    "reject": [
+      "NaN/infinity",
+      "negative rates or density lower bounds",
+      "lower>upper",
+      "invalid simplex enclosure or state lengths",
+      "silent branch alpha=pi default",
+      "simultaneous TIQM and SQM activation for one physical event",
+      "physical consumer default from synthetic fixture",
+      "incompatible initial invariant class in scalar eta adapter",
+      "K-only rho attached to full L while -wQD feedback omitted"
+    ]
+  },
+  "endpoint_api": {
+    "recommended_name": "block_feedback_upper",
+    "inputs": [
+      "B",
+      "g",
+      "H",
+      "rho",
+      "w0",
+      "declared precision/truncation controls"
+    ],
+    "outputs": [
+      "exp_BH_entrywise_upper",
+      "T_entrywise_upper",
+      "q_entrywise_upper",
+      "w_next_upper",
+      "separate interior evaluator or documented interior upper",
+      "tail_certificate",
+      "source_and_clock_identity"
+    ],
+    "exact_matrix_requirements": [
+      "T>=0",
+      "q>=0",
+      "T11=exp_BH11_upper-1+rho with exact subtraction",
+      "negative d retained",
+      "no inverse of B required"
+    ],
+    "integration_relation": "This is a comparison bound API; it is not itself an invariant-preserving discrete integrator for the fine physical ODE."
+  },
+  "inherited_evidence": [
+    {
+      "file": "../provider_registry_molecular_r4_20261027/registry/events.json",
+      "sha256": "2203fcdd7ece309a7b2f9d7587f24009985c88a9d34118ec690d616c28268514",
+      "reuse": "source-labelled exact event directions; no compiler replay"
+    },
+    {
+      "file": "../provider_registry_molecular_r4_20261027/sources/MOLECULAR_SOURCE_PACKET.json",
+      "sha256": "40e2fbd73d451c0c8116b4ca9bd4db4d2e43e4cdf8967988a2fea551f99ce35e",
+      "reuse": "native source qualification and alternatives; no rate evaluation"
+    },
+    {
+      "file": "../provider_registry_molecular_r6_20261027/theory/INTERVAL_BLOCK_PROOF_KO.md",
+      "sha256": "643e9c918353c068e648e5c74290a608b9993be487d7f4773278880db1a7c51c",
+      "reuse": "nominal generator contraction and exact exponential primitive proofs"
+    },
+    {
+      "file": "../provider_registry_molecular_r6_20261027/followup/NEXT_INPUT_CONTRACT.json",
+      "sha256": "7298e94a60e9edc67e71e61dc96a1b97b32069cab947b236c84f91718914e9a1",
+      "reuse": "explicit state-dependent formation/coarse-source mismatch obligation"
+    }
+  ],
+  "source_binding_limitations": [
+    "R4 formation uses p-H2(v0,j0), whereas GL2022 destruction uses a thermal HD ensemble and spin-weighted H2 products.",
+    "Closed common H2/HD pools require explicit state matching; opposite integer directions do not make the two supplied coefficients a detailed-balance pair.",
+    "Actual branch, destruction vector, collider density/history, clock, initial state and named consumer remain input-pending."
+  ],
+  "discriminating_controls": [
+    "time-dependent lift sign and P*r=0",
+    "H/D/charge invariants and scalar eta reduction",
+    "late forcing counterexample: R(H)=J*(1-exp(-gamma*epsilon))/(gamma*epsilon)>rho*J",
+    "B=0 exact result",
+    "diagonal B with d<0",
+    "nilpotent B^2=0 integral",
+    "singular B and no inverse",
+    "monomial alpha=0 at zero density",
+    "entrywise exp/integral upper versus independent reference",
+    "whole-block versus endpoint bound",
+    "initial invariant mismatch rejection"
+  ],
+  "standards_and_novelty": {
+    "primary_read": "https://arxiv.org/html/2004.11961v2 §2 Definition1 and Jacobian row-space characterization",
+    "distinction": "CLUE constructs exact polynomial lumpings; R7 bounds specified positive-lift residuals and causal finite-block feedback.",
+    "new_fundamental_theorem_claim": false,
+    "strong_no_go_claim": false
+  }
+}
+

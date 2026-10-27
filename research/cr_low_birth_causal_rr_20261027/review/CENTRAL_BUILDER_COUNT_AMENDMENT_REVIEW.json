@@ -1,0 +1,72 @@
+{
+  "schema": "CR_LOW_BIRTH_CENTRAL_BUILDER_COUNT_AMENDMENT_STATIC_REVIEW_V1",
+  "unit": "CR_PHYS02_LOW_BIRTH_CAUSAL_RR_V1",
+  "observed_utc": "2026-10-27T13:53:03.848186+00:00",
+  "reviewer": "/root/source_qualification",
+  "verdict": "PASS_SCOPED_STATIC_CURRENT_COUNT_AMENDMENT",
+  "core_blocking_findings": 0,
+  "open_nonblocking_findings": 0,
+  "reviewed_files": [
+    {
+      "path": "ops/build_central_low_birth.py",
+      "bytes": 61507,
+      "sha256": "30680efa19450e9a0afc0186321c34bbc35b3771380792aa30eaac1779683fca"
+    },
+    {
+      "path": "ops/BUILD_CENTRAL_LOW_BIRTH.md",
+      "bytes": 12734,
+      "sha256": "c2e994ec01e318ae69fa84fd2ce5c4ce596d649008f81cca85594177ec601729"
+    },
+    {
+      "path": "intake/central/CENTRAL_COUNT_BASELINE_74aff0740d18.json",
+      "bytes": 1811,
+      "sha256": "638f0512893e4d7b303a8ad9b22c40cc99acd9c40895fc7b9852955735749456"
+    }
+  ],
+  "prior_review": "review/CENTRAL_BUILDER_STATIC_REVIEW.json",
+  "prior_review_retained_as_historical": true,
+  "independence": {
+    "current_helper_author": false,
+    "prior_proper_builder_author": true,
+    "count_evidence_and_baseline_qualifier": true,
+    "production_science_or_reference_author": false,
+    "method": "Focused source delta review; current helper authored by implementation, actual foreign count input qualified independently from central/source metadata. Not a blind review."
+  },
+  "change_reason": "A real independent central owner update at74aff changed B3h from partial to COMPLETE_SCOPED and explicitly advanced original central count27to28. Fixed27 cannot remain the current output, while old observations must not be rewritten.",
+  "accepted_checks": [
+    "Required --central-count-baseline binds actual CLI centralHEAD and complete DAG SHA256.",
+    "Actual foreign return is pinned by full path/revision/bytes/SHA; path and JSON pointer match the current DAG status_observation.",
+    "Selected full return observation equals the actual DAG observation and names the explicit foreign unit/node, distinct from thisCR target/unit.",
+    "Baseline original_DAG equals both actual return top-level original_DAG and selected observation original_DAG; integer before+effect=completed,total88 are checked.",
+    "Current completed count is read from authority.completed.27 remains historical; status-prefix recount and addingPR23632/88 are refused.",
+    "Owner return must pin baselineSHA and bind current28/88 plus historical27/88, with thisCR count effect0.",
+    "Count baseline and authoritative return are included in immutable-input/collision/end-recheck proof paths.",
+    "One-link removal proof still preserves all existing target fields,87other nodes including newly completedB3h,17edges,topmetadata and priorproper/HeIII. Existing cost-chain/resource-worker failure repairs remain intact."
+  ],
+  "resolved_finding": {
+    "id": "CB-F03",
+    "status": "RESOLVED",
+    "title": "Replace obsolete fixed current27 by pinned authoritative currentcount",
+    "classification": "External factual change after prior static review; not a scientific solver defect",
+    "actual_current_completed": 28,
+    "historical_completed": 27,
+    "total": 88,
+    "foreign_effect": 1,
+    "this_CR_effect": 0
+  },
+  "no_execution": {
+    "helper_import_or_compile": 0,
+    "helper_run": 0,
+    "candidate_creation": 0,
+    "scientific_execution": 0,
+    "old_science_replay": 0,
+    "central_write": 0
+  },
+  "pending": [
+    "Final actual result/C9/sourceS/documentD/sourceR3 evidence",
+    "Fresh finalcentralHEAD check and renewed countbaseline if it changes",
+    "Actualtwofilecandidate/proof independentreview",
+    "Expected-SHA nonforcepublication"
+  ],
+  "source_delivery_limit": "Count admission is qualified separately from BASS final delivery; no future S1B backupACK,20/20 delivery ordualR3 inference."
+}

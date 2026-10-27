@@ -1,0 +1,215 @@
+{
+  "schema": "CR_LOW_BIRTH_CENTRAL_BUILDER_STATIC_REVIEW_V1",
+  "unit": "CR_PHYS02_LOW_BIRTH_CAUSAL_RR_V1",
+  "observed_utc": "2026-10-27T13:46:39.240887+00:00",
+  "reviewer": "/root/source_qualification",
+  "verdict": "PASS_SCOPED_STATIC_METADATA_HELPER",
+  "core_blocking_findings": 0,
+  "open_nonblocking_findings": 0,
+  "independence": {
+    "current_helper_author": false,
+    "production_science_author": false,
+    "numeric_reference_author": false,
+    "disclosure": "Reviewer authored prior proper-unit metadata builder from which current author adapted this file; current helper author is implementation. Prior/source/math review context is disclosed; this is not a blind review."
+  },
+  "reviewed_files": [
+    {
+      "path": "ops/build_central_low_birth.py",
+      "bytes": 54324,
+      "sha256": "8281046ca19a619dd00b2fdd5e53c94b10afc88b11d6ed45c27442952a4a6d4b"
+    },
+    {
+      "path": "ops/BUILD_CENTRAL_LOW_BIRTH.md",
+      "bytes": 10022,
+      "sha256": "47f4e869cf3485939d9c9b68f295622102b3ecb7439e03507492fe4d527d7b24"
+    }
+  ],
+  "actual_preparation_metadata_read": [
+    {
+      "path": "EXECUTION_BUDGET.json",
+      "bytes": 2938,
+      "sha256": "a3d227314d734abbaed459193c727588f6e5784aae5ae38bc5d75352f33382c5",
+      "unit": "CR_PHYS02_LOW_BIRTH_CAUSAL_RR_V1",
+      "status": "FROZEN_C4_ADMITTED",
+      "spent_before_C4_admission": 1.936505
+    },
+    {
+      "path": "evidence/C04_PREPARATION_LEDGER_V2.json",
+      "bytes": 1355,
+      "sha256": "400e3768d6134d00a026835b2c5bc54b8b55489ebde6bd7beb31fcef85b4cac1",
+      "unit": "CR_PHYS02_LOW_BIRTH_CAUSAL_RR_V1",
+      "charged_total_CPU_s": 1.936505,
+      "all_resource_attempts_pass": false
+    },
+    {
+      "path": "evidence/PREWORKER_RESOURCE_COSTS.json",
+      "bytes": 1150,
+      "sha256": "0f8b6dea49f1eac1d775b987a141b8c8a267fce1ab1034fdaca1b3e23c516e9d",
+      "unit": "CR_PHYS02_LOW_BIRTH_CAUSAL_RR_V1",
+      "charged_total_CPU_s": 1.714435,
+      "all_resource_attempts_pass": false
+    },
+    {
+      "path": "evidence/C04_HOST_ADMISSION.json",
+      "bytes": 3044,
+      "sha256": "984ca86fd5540a6ef04b8e198c60aafdf174457b231127d59520d5dd53838519",
+      "unit": "CR_PHYS02_LOW_BIRTH_CAUSAL_RR_V1",
+      "charged_preparation_CPU_s": 0.251963,
+      "memory_gate": "FAIL"
+    },
+    {
+      "path": "evidence/C04_OWNED_CACHE_RECLAIM_V1.json",
+      "bytes": 1489,
+      "sha256": "ffb30038d77a5fc7027f45757ca99e477ff51ed9173a3de0af9de54c224d7efd",
+      "unit": "CR_PHYS02_LOW_BIRTH_CAUSAL_RR_V1",
+      "charged_preparation_CPU_s": 0.198262,
+      "errors": []
+    },
+    {
+      "path": "evidence/C04_RUNTIME_CACHE_RECLAIM_V2.json",
+      "bytes": 1239,
+      "sha256": "3575467864e8fe65e639c6d3b4c1768744e9879261d57121810971cc9923b619",
+      "unit": "CR_PHYS02_LOW_BIRTH_CAUSAL_RR_V1",
+      "charged_preparation_CPU_s": 1.119878,
+      "errors": []
+    },
+    {
+      "path": "evidence/C04_CONTAINER_CACHE_RECLAIM_V3.json",
+      "bytes": 1063,
+      "sha256": "037ff07556649385b1659f89e65094faa4b3edc035a21b3b770ab80263447ce8",
+      "unit": "CR_PHYS02_LOW_BIRTH_CAUSAL_RR_V1",
+      "charged_preparation_CPU_s": 0.14433200000000002,
+      "error": {
+        "type": "OSError",
+        "errno": 30,
+        "message": "[Errno 30] Read-only file system: '/sys/fs/cgroup/memory.reclaim'"
+      }
+    },
+    {
+      "path": "evidence/C04_HOST_ADMISSION_V2.json",
+      "bytes": 5858,
+      "sha256": "15b2c3cdf5acc6d89188bdccef596b5ce8618de9d44eaf999ec96135d8dda477",
+      "unit": "CR_PHYS02_LOW_BIRTH_CAUSAL_RR_V1",
+      "charged_preparation_CPU_s": 0.22207,
+      "memory_gate": "PASS"
+    }
+  ],
+  "checks": [
+    {
+      "id": "CB01",
+      "topic": "Restricted additive scope",
+      "result": "PASS_SCOPED_STATIC",
+      "reason": "Only one link is added to the exact existing external-source target. Original target fields,87other nodes,17edges,all top metadata and original contracts/status are compared after deleting the one added link."
+    },
+    {
+      "id": "CB02",
+      "topic": "Numeric preservation",
+      "result": "PASS_SCOPED_STATIC",
+      "reason": "JSON floats parse as Decimal; serialization and semantic comparison avoid a binary64 roundtrip. Original node order and exact number values remain; whitespace/key formatting may change."
+    },
+    {
+      "id": "CB03",
+      "topic": "Prior and parallel evidence",
+      "result": "PASS_SCOPED_STATIC",
+      "reason": "Prior proper S022c/D8482, N5 HeIII S4e72/Dec463 and entire current B3h node are required and independently covered by preservation checks. The original parent status and N4/N5/N6/N7 gates are unchanged."
+    },
+    {
+      "id": "CB04",
+      "topic": "Current central identities",
+      "result": "PASS_SCOPED_STATIC",
+      "reason": "Root supplies actual central base,S,D and matching owner-return pins. Helper makes no remote HEAD claim, does not hardcode152b as final base, and leaves precommit self-M null. Publisher still needs fresh expected-SHA/nonforce and absent-new-return-path checks."
+    },
+    {
+      "id": "CB05",
+      "topic": "Actual source backup receipt",
+      "result": "PASS_SCOPED_STATIC",
+      "reason": "Two distinct named providers, original full GET200 withoutHEAD/Range, all memberSHA/CRC flags, exact byte/hash/member/manifest identities and unrebuild flag are required. This reads receipts and does not constitute a fresh R3 download."
+    },
+    {
+      "id": "CB06",
+      "topic": "Actual saved-result pins",
+      "result": "PASS_SCOPED_STATIC",
+      "reason": "Primary,controls,independent,execution_ledger,execution_budget,final_review roles each require exact bytes/hash, unique local/repository path and S/D revision. Actual positive matchingnb/source identity, four prefixes/bins and scoped result/claim ceilings are validated."
+    },
+    {
+      "id": "CB07",
+      "topic": "Same-unit preparation-cost chain",
+      "result": "PASS_SCOPED_STATIC",
+      "reason": "The new execution_budget role must be the active local unit EXECUTION_BUDGET.json with FROZEN_C4_ADMITTED,cap40,no historical/parallel transfer. Its SHA-pinned unit-local preparation manifest and each actual receipt must match bytes/hash/unit/finite nonnegative cost. Decimal totals are checked against manifest,budget and runtime baseline at1e-12 CPU s."
+    },
+    {
+      "id": "CB08",
+      "topic": "No cost erasure or double credit",
+      "result": "PASS_SCOPED_STATIC",
+      "reason": "The old baseline==0 rejection is removed. Verified incurred costs become the same-unit baseline plus unique terminal attempt debits, with no old allowance transfer or carry. The preserved1.714435 subtotal and current1.936505 are observed metadata, not hardcoded future totals."
+    },
+    {
+      "id": "CB09",
+      "topic": "Resource and worker failures remain separate",
+      "result": "PASS_SCOPED_STATIC",
+      "reason": "Explicit failed memory_gate or nonemptyerror/errors cannot coexist with resourcePASS. Summary preserves failed preparation receipt paths and worker attempt IDs separately. all_runtime_attempts_pass is resource_pass AND worker_pass. Owner return must match both resource flag and exact failure/baseline pins."
+    },
+    {
+      "id": "CB10",
+      "topic": "Immutable outputs and concurrent-change check",
+      "result": "PASS_SCOPED_STATIC",
+      "reason": "All validations precede create-only outputs. OnlyDAG.json and one exact-byte owner return occur under the new candidate directory; proof is separate. Both direct and nested preparation inputs are covered by collision guards, byte/hash readback and end-of-build unchanged-input checks."
+    },
+    {
+      "id": "CB11",
+      "topic": "Ceilings and actual candidate review",
+      "result": "PASS_SCOPED_STATIC",
+      "reason": "27/88,effect0,L4false,globalnull,noPR236sum,no automaticcarry and hard_preventive_aggregate_cap_proof=false are required. Final sourceS,documentD,actual20stagepublications/dualACK and C9 evidence must exist before candidate build; this static review creates none."
+    }
+  ],
+  "findings": [
+    {
+      "id": "CB-F01",
+      "status": "RESOLVED",
+      "severity_before_fix": "BLOCKING_FOR_ACTUAL_INPUT_COMPATIBILITY",
+      "title": "Do not reject or erase incurred same-unit preparation costs",
+      "previous_behavior": "Required baseline_preparation_cpu_s==0 despite actual C4 preworker/resource costs.",
+      "repair": "Actual active budget -> SHA-pinned preparation manifest -> all receipt identities/costs -> runtime ledger baseline; no arbitrary inherited allowance accepted.",
+      "observed_current_baseline_from_receipts": "1.936505 CPU s; earlier1.714435 subtotal preserved",
+      "verification": "Text and byte identity only; helper not executed."
+    },
+    {
+      "id": "CB-F02",
+      "status": "RESOLVED",
+      "severity_before_fix": "CLAIM_PRECISION",
+      "title": "Do not call all runtime attempts PASS from worker rows alone",
+      "previous_behavior": "all_runtime_attempts_pass depended only on worker terminal statuses, leaving C4 resource refusal outside the combined claim.",
+      "repair": "Separate resource/worker flags; combinedall_runtime requiresboth; explicit failed preparation receipt paths and scientific attempt IDs are preserved separately.",
+      "verification": "Textual propagation through validate_results and validate_owner_return checked; actual final worker verdict remains pending."
+    }
+  ],
+  "helper_executions": 0,
+  "helper_imports_or_compilation": 0,
+  "new_candidates_created": 0,
+  "central_writes": 0,
+  "Git_operations": 0,
+  "source_ZIP_creation": 0,
+  "new_scientific_executions": 0,
+  "old_science_replay": 0,
+  "runtime_caveat_from_root_for_future_C9": {
+    "observed_descendant_count_zero_despite_worker_started": true,
+    "aggregate_polling_validated_on_host": false,
+    "aggregate_preventive_proof": false,
+    "direct_worker_rlimits_and_terminal_accounting": "separate evidence; assess actual receipts atC9",
+    "actual_controls_first_run": "root reports45/46 with a narrow oracle repair; final result and charges not invented here"
+  },
+  "not_accepted_yet": [
+    "Actual final numerical results and C9 integration",
+    "Actual sourceS/documentD/20stage receipts/source dualR3",
+    "Refreshed final central base and two-file candidate proof",
+    "Actual final candidate independent review and nonforce publication"
+  ],
+  "central_context": {
+    "programme_head_latest_root_observed": "152b82cac23fedcb75a9effe0c159bae3d800c01",
+    "completed": 27,
+    "total": 88,
+    "edges": 17,
+    "effect": 0,
+    "not_assumed_final_HEAD": true
+  }
+}
