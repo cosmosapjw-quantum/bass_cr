@@ -1,0 +1,52 @@
+{
+  "unit": "CR_PHYS02_LOW_BIRTH_CAUSAL_RR_V1",
+  "status": "PASS_SCOPED_SYMBOLIC_IDENTITIES_WITH_PRESERVED_LIMIT_WARNINGS",
+  "actual_requests": 3,
+  "max_timeConstraint_s_each": 8,
+  "provider_CPU_s": null,
+  "zero_residuals_returned": 19,
+  "exact_inventory_values_returned": 3,
+  "all_provider_calls_warning_free": false,
+  "warning_class": "W02-removable-pole/rational-limit-evaluation-diagnostics",
+  "warning_disposition": "Out returned eight zero residuals; all original Power::infy/Infinity::indet/General::messages text retained. General finite-time expressions use entire phi functions and independently reviewed analytic limits; no clean-CAS/no-warning assertion and no fourth call.",
+  "checks": [
+    {
+      "request_id": "W01_INVENTORY_AND_THERMAL_BOOKKEEPING",
+      "path": "literature/WOLFRAM_01_RAW.json",
+      "sha256": "59ded5318789fc8c1287397d2c26185a36737ae1796b431377125cf61489080d",
+      "tool_isError": false,
+      "observed_output": "Out[1]= {{8750/47, 2849/1880, 407/50000}, 0, 0, 0}",
+      "zero_residual_count": 3,
+      "exact_inventory_values": [
+        "8750/47",
+        "2849/1880",
+        "407/50000"
+      ],
+      "warnings_preserved": false
+    },
+    {
+      "request_id": "W02_ABSOLUTE_SOURCE_TIME_AND_RR_ONLY_LIMIT",
+      "path": "literature/WOLFRAM_02_RAW.json",
+      "sha256": "2927ead8c3190193cf444be7dcc04948bfe7cfb4d16fbfb87c68da74eec7c61e",
+      "tool_isError": false,
+      "observed_output": "Power::infy: -- Message text not found -- (1/0)\nPower::infy: -- Message text not found -- (0^(-2))\nPower::infy: -- Message text not found -- (1/0)\nPower::infy: -- Message text not found -- (1/0)\nInfinity::indet: -- Message text not found -- (ComplexInfinity + ComplexInfinity)\nInfinity::indet: -- Message text not found -- (0*Infinity)\nInfinity::indet: -- Message text not found -- (0*Infinity)\nInfinity::indet: -- Message text not found -- (0*DirectedInfinity[dd])\nInfinity::indet: -- Message text not found -- (0*DirectedInfinity[dd])\nInfinity::indet: -- Message text not found -- (0*Infinity)\nInfinity::indet: -- Message text not found -- (0*Infinity)\nGeneral::messages: Messages were generated which may indicate errors.\n\nOut[1]= {0, 0, 0, 0, 0, 0, 0, 0}",
+      "zero_residual_count": 8,
+      "exact_inventory_values": [],
+      "warnings_preserved": true
+    },
+    {
+      "request_id": "W03_POISSON_WEIGHT_IDENTITIES",
+      "path": "literature/WOLFRAM_03_RAW.json",
+      "sha256": "f200f82307d67108ed1871b6823195624b16ef641e2aa30d815de6643052a72e",
+      "tool_isError": false,
+      "observed_output": "Out[1]= {0, 0, {0, 0, 0}, 0, 0, 0}",
+      "zero_residual_count": 8,
+      "exact_inventory_values": [],
+      "warnings_preserved": false
+    }
+  ],
+  "old_Wolfram_checks_replayed": 0,
+  "scientific_source_or_operator_executed": false,
+  "independent_theory_review": "R6_THEORY_REVIEW.json",
+  "global_error": null
+}

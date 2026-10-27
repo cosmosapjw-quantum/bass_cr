@@ -1,0 +1,37 @@
+{
+  "query": {
+    "id": "W02_ABSOLUTE_SOURCE_TIME_AND_RR_ONLY_LIMIT",
+    "tool": "mcp__codex_apps__wolfram_wolframlanguageevaluator",
+    "input": {
+      "timeConstraint": 8,
+      "code": "ClearAll[aa,dd,rr,lam,v,z,amp,t,p1,p2]; p1[z_]:=(Exp[z]-1)/z; p2[z_]:=(Exp[z]-1-z)/z^2; rhs=Exp[-lam*rr]*(aa*dd*p1[-lam*dd]+dd^2*p2[-lam*dd]); integ=Integrate[Exp[-lam*(rr+dd-v)]*(aa+v),{v,0,dd},Assumptions->aa>=0&&dd>0&&rr>=0&&lam>0]; window=FullSimplify[integ-rhs,Assumptions->aa>=0&&dd>0&&rr>=0&&lam>0]; zero=FullSimplify[Limit[rhs,lam->0]-(aa*dd+dd^2/2),Assumptions->aa>=0&&dd>0&&rr>=0]; surv=amp*(t/lam-(1-Exp[-lam*t])/lam^2); cap=amp*t^2/2-surv; {window,zero,FullSimplify[D[cap,t]-lam*surv],FullSimplify[cap+surv-amp*t^2/2],FullSimplify[Limit[cap,lam->0]]}; occ=amp*(t^2/(2*lam)-t/lam^2+(1-Exp[-lam*t])/lam^3); {window,zero,FullSimplify[D[cap,t]-lam*surv],FullSimplify[cap+surv-amp*t^2/2],FullSimplify[Limit[cap,lam->0]],FullSimplify[D[occ,t]-surv],FullSimplify[lam*occ-cap],FullSimplify[Limit[occ,lam->0]-amp*t^3/6]}"
+    },
+    "manual_expected": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "claim_scope": "Scalar analytic convolution and zero-rate limits. Matrix formula follows from the entire power series; no assertion of actual RR rates or full-transport approximation error. Actual finite occupancy integral and endpoint capture rate are checked, not conditional mean lifetime."
+  },
+  "actual_result": {
+    "status": "fulfilled",
+    "value": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Power::infy: -- Message text not found -- (1/0)\nPower::infy: -- Message text not found -- (0^(-2))\nPower::infy: -- Message text not found -- (1/0)\nPower::infy: -- Message text not found -- (1/0)\nInfinity::indet: -- Message text not found -- (ComplexInfinity + ComplexInfinity)\nInfinity::indet: -- Message text not found -- (0*Infinity)\nInfinity::indet: -- Message text not found -- (0*Infinity)\nInfinity::indet: -- Message text not found -- (0*DirectedInfinity[dd])\nInfinity::indet: -- Message text not found -- (0*DirectedInfinity[dd])\nInfinity::indet: -- Message text not found -- (0*Infinity)\nInfinity::indet: -- Message text not found -- (0*Infinity)\nGeneral::messages: Messages were generated which may indicate errors.\n\nOut[1]= {0, 0, 0, 0, 0, 0, 0, 0}"
+        }
+      ],
+      "structuredContent": null,
+      "isError": false
+    }
+  },
+  "provider_CPU_s": null,
+  "prior_checks_replayed": false
+}
+
