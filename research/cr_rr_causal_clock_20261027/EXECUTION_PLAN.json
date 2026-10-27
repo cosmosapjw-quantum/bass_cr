@@ -1,0 +1,92 @@
+{
+  "schema": "CR_CLOCK_EXECUTION_PLAN_V1",
+  "unit_id": "CR_RR_CAUSAL_ERLANG_CLOCK_V1",
+  "resources": {
+    "total_cpu_s": 60,
+    "stage_cpu_s": {
+      "controls": 5,
+      "primary": 30,
+      "independent": 15,
+      "plot": 5
+    },
+    "coordinator_cpu_s": 2,
+    "r7_unused_reservation_s": 3,
+    "wall_s": 60,
+    "RLIMIT_AS_bytes": 536870912,
+    "memory_reserve_bytes": 1073741824,
+    "native_threads": 1,
+    "cpus": {
+      "coordinator": 0,
+      "worker": 1,
+      "independent": 2,
+      "plot": 3
+    }
+  },
+  "mode_argv": {
+    "controls": [
+      "implementation/controls.py",
+      "--unit",
+      "{unit}",
+      "--output",
+      "{output}",
+      "--run-id",
+      "{run_id}",
+      "--config",
+      "{config}",
+      "--pins",
+      "{pins}"
+    ],
+    "primary": [
+      "implementation/primary_runner.py",
+      "--unit",
+      "{unit}",
+      "--output",
+      "{output}",
+      "--run-id",
+      "{run_id}",
+      "--config",
+      "{config}",
+      "--pins",
+      "{pins}"
+    ],
+    "independent": [
+      "implementation/reference_runner.py",
+      "--unit",
+      "{unit}",
+      "--output",
+      "{output}",
+      "--run-id",
+      "{run_id}",
+      "--config",
+      "{config}",
+      "--pins",
+      "{pins}"
+    ],
+    "plot": [
+      "implementation/plot_saved.py",
+      "--unit",
+      "{unit}",
+      "--output",
+      "{output}",
+      "--run-id",
+      "{run_id}",
+      "--config",
+      "{config}",
+      "--pins",
+      "{pins}"
+    ]
+  },
+  "native_library": "implementation/libclock_kernel.so",
+  "reference_plan": "REFERENCE_PLAN.json",
+  "primary_result_path": "runs/cr_clock_primary_20261027_v1/payload/RESULT.json",
+  "C4_memory": {
+    "clean_inactive_file_bytes": 2714030080,
+    "conservative_available_bytes": 3134595072,
+    "formula": "min(MemAvailable, memory.max-max(0,memory.current-max(0,inactive_file-file_dirty-file_writeback-shmem)))",
+    "required_bytes": 1610612736,
+    "pass": true,
+    "active_file_or_slab_reclaim_assumed": false
+  },
+  "runtime_scope": "local cloud host only;8CPU quota not NCP64 scaling; scienceworkers + coordinators budgeted, metadata/publication/remote Wolfram separately scoped",
+  "source_pins": "created at C5 after exact implementation is assembled"
+}
