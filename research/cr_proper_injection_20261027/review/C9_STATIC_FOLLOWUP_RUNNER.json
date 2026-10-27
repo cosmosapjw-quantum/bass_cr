@@ -1,0 +1,124 @@
+{
+  "schema": "CR_PROPER_INJECTION_C9_RUNNER_STATIC_FOLLOWUP_V1",
+  "reviewer": "/root/theory_review",
+  "observed_date": "2026-10-27",
+  "local_head": "c2d6fbf217482041874532da0776be4f3c74776c",
+  "status": "STATIC_ACCEPTED_FOR_FROZEN_C4_C5_LAUNCH_GATE",
+  "finding": "C9S03_PREWORKER_COORDINATOR_COST",
+  "finding_status": "CLOSED_STATIC_PENDING_ACTUAL_RECEIPTS",
+  "blocking_static_findings_remaining_in_requested_scope": 0,
+  "scope": "Independent static review of failure-inclusive debit persistence, unique-attempt reconciliation, frozen admission, integer CPU limits, single CPU affinity, memory admission, partial finalization, and saved-result-only plotting. No runtime claim.",
+  "prior_records_preserved": [
+    "review/C9_STATIC.json",
+    "review/C9_STATIC_FOLLOWUP_ISOTOPE.json",
+    "review/reference_drafts/independent_reference_v1_NOT_RUN.py"
+  ],
+  "reviewed_identity": [
+    {
+      "path": "implementation/run_bounded.py",
+      "sha256": "0aedc61a52dd39d1b236c3dfdbe711e4fe8e470867e8447908ac554cb125ff75"
+    },
+    {
+      "path": "implementation/plot_saved.py",
+      "sha256": "8fe8c41d3d29e0fe4a673105751dff06510fdead04a200f215ebb654a97eac18"
+    },
+    {
+      "path": "EXECUTION_BUDGET.json",
+      "sha256": "536ab6322d96d7f08d6673db113168ea0d81f94cbbb7d5e16aa900201e091f15"
+    },
+    {
+      "path": "evidence/C04_HOST_ADMISSION.json",
+      "sha256": "7f01afa83213c5a9022adba54f4bb4cec2f7279acd05de343a59230c1d1e986e"
+    },
+    {
+      "path": "evidence/HOST_RECOVERY_C02.json",
+      "sha256": "3c122b193ca65f2e5c8e7fe6f9c511c843ade02eda67a5aae9a3a41f50b96302"
+    },
+    {
+      "path": "review/independent_reference.py",
+      "sha256": "b529b27f5e816d35d9894f838412483d38c48f777294e3e8f4796e066275d0dc",
+      "review": "Earlier static coordinate/schema review reused unchanged."
+    }
+  ],
+  "static_checks": [
+    {
+      "id": "PREWORKER_COST",
+      "assessment": "Caught argument, budget, lock, admission, output-directory, snapshot and launch failures reach the outer finalizer. The finalizer measures full coordinator RUSAGE_SELF and child RUSAGE_CHILDREN, adds a receipt tail and writes an immutable attempt debit independent of the run directory or ledger lock."
+    },
+    {
+      "id": "DEBIT_DURABILITY_AND_FALLBACK",
+      "assessment": "Complete JSON bytes are flushed and fsynced before create-only hard-link publication. A failed primary debit write uses the independent evidence/PREWORKER_DEBIT path. A failed finalizer attempts an emergency debit; terminal storage failure is explicitly UNSAVED_CPU_DEBIT with a closed gate, not zero cost. This review does not certify recovery from arbitrary host or storage loss."
+    },
+    {
+      "id": "UNIQUE_ATTEMPT_ACCOUNTING",
+      "assessment": "Immutable debit, run receipt and cumulative amendments share attempt_id. Reconciliation selects the maximum cumulative charge for that attempt, checks run_id consistency, and retains contributing paths; it does not sum duplicate representations of one attempt. Distinct failed invocations have unique attempt IDs. Legacy run IDs remain separate."
+    },
+    {
+      "id": "FAILED_PARTIAL_FINALIZATION",
+      "assessment": "The debit is persisted before mutable ledger/status work. Ledger-write failure records a closed accounting-write gate; reconciliation failure produces a create-only closed status with aggregate totals and remaining null. New errors or uncovered accounting time trigger bounded cumulative amendments. Actual receipt tails and final totals still require output inspection."
+    },
+    {
+      "id": "UNKNOWN_NO_ACK",
+      "assessment": "A prior RESERVATION lacking matching cost evidence refuses admission with UNKNOWN_NO_ACK_RESERVATION_REQUIRES_OWNER_RECONCILIATION. The active own attempt/run pair is narrowly exempted during its prelaunch reconciliation. Incomplete owned-child accounting refuses future admission. Unknown prior cost is not inferred as zero."
+    },
+    {
+      "id": "FROZEN_ADMISSION",
+      "assessment": "Worker authorization requires exact unit, cap20, no allowance transfer, one native thread, FROZEN_C4_ADMITTED, and a unit-local PASS host-admission record matching the frozen expected SHA256. Both expected and observed receipt hashes are retained. The exclusive ledger lock and fresh reconciliation precede launch."
+    },
+    {
+      "id": "CPU_LIMIT_AND_AFFINITY",
+      "assessment": "The admission reserves ceil(requested worker CPU) because RLIMIT_CPU uses integer seconds. Actual worker cost exceeding the requested reserve fails. The worker is restricted to one currently allowed CPU, known native thread environment variables are1, and wall timeout is at most60s. The owned process group is killed and reaped using the subreaper path before child CPU is treated as complete."
+    },
+    {
+      "id": "MEMORY_ADMISSION",
+      "assessment": "Initial and final per-attempt reads combine host MemAvailable with cgroup-v2 memory.max/current/stat. Effective available is min(host, max(0,limit-current+max(0,inactive_file-file_dirty-file_writeback))). Active file cache and slab are not added. The fixed512MiB worker address-space limit plus1GiB host reserve is unchanged. Raw counters and both admission snapshots are recorded. The code explicitly labels this non-atomic operational estimate as not a guaranteed lower bound."
+    },
+    {
+      "id": "RECOVERY_SCOPE",
+      "assessment": "HOST_RECOVERY_C02 records an actual current Python probe PASS and continuation of the same Dropbox upload operation. The earlier supplier host failure and initial raw cgroup-headroom refusal remain historical observations; neither is inherited as permanent current host failure. No worker ran in those probes."
+    },
+    {
+      "id": "SAVED_PLOT_ONLY",
+      "assessment": "plot_saved reads saved actual/reference JSON, requires completed independent PASS and a reference pin of the exact actual JSON, checks18 unique tag/window rows and preserved actual null/gate fields, then exports create-only PNG/SVG and a manifest. It imports no production source, NPZ decoder, source provider, quadrature, projection or transport solver. Decimal conversion is for display only; symlog preserves the exact zero window."
+    }
+  ],
+  "final_small_repair_history": {
+    "reviewed_before_repair_runner_sha256": "5223507afc852bb891c0c0a7c8e20e8dd48c2d0f38ebdefde335de5e142af580",
+    "observed": "The frozen budget declared host_admission_sha256, but the runner initially computed the actual digest without comparing the declared expected pin.",
+    "author_repair": "Added lowercase64-hex expected-pin validation and exact actual/expected equality before budget_admitted=True; both hashes retained in receipts.",
+    "status": "CLOSED_STATIC_BEFORE_FIRST_WORKER",
+    "execution_to_find_or_confirm": false
+  },
+  "frozen_envelope": {
+    "unit_CPU_cap_s": 20.0,
+    "worker_memory_bytes": 536870912,
+    "host_memory_reserve_bytes": 1073741824,
+    "coordinator_reserve_per_attempt_s": 0.3,
+    "worker_reservations_s": {
+      "controls_v1": 3.0,
+      "actual_v1": 10.0,
+      "independent_v1": 3.0,
+      "plot_v1": 2.0
+    },
+    "nominal_worker_plus_coordinator_reservations_s": 19.2,
+    "actual_attempt_debits_govern_later_admission": true,
+    "old_or_parallel_allowance_transferred": false,
+    "global_remaining": null,
+    "remote_Wolfram_CPU": null
+  },
+  "independence_and_execution": {
+    "authored_runner_or_other_production": false,
+    "authored_theory_memo_and_independent_reference": true,
+    "production_imported_by_reviewer": false,
+    "compile_or_test_executed_by_reviewer": false,
+    "scientific_workers_started_by_reviewer": 0,
+    "source_array_sums_executed_by_reviewer": 0,
+    "old_science_replays": 0,
+    "runtime_PASS_claimed": false
+  },
+  "remaining_final_C9": [
+    "Inspect actual bounded controls, source consumer, independent-reference and plot outputs and receipts after root-owned execution.",
+    "Verify actual executed source pins, failed-attempt history if any, unique debit accounting and final unit cost against the frozen cap.",
+    "Preserve C9S01/C9S02 runtime checks, original reference draft correction, actual state/nb/RR/retained-photon nulls and all physical claim ceilings."
+  ]
+}
