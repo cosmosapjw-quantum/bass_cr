@@ -1,0 +1,150 @@
+{
+  "schema": "CR_PARENT_C04_ADMISSION_HELPER_STATIC_REVIEW_V1",
+  "unit": "CR_PHYS02_PARENT_EVENT_NATIVE25_V1",
+  "reviewer": "/root/source_qualification",
+  "observed_utc": "2026-10-27T16:42:39.023381+00:00",
+  "verdict": "HOLD_BOUNDED_FINALIZATION_REPAIR",
+  "decision_scope": "One bounded static pass over root-authored ops/admit_c4.py and the existing reviewed runtime/template interfaces. No whole inherited-runner re-audit.",
+  "reviewed_source": {
+    "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/ops/admit_c4.py",
+    "bytes": 15654,
+    "sha256": "52efc8d3553b03284f11f658032204fefb38f21999f425f6db6ea81d320eeec0"
+  },
+  "independence": {
+    "helper_original_author": false,
+    "runtime_author": false,
+    "scientific_production_author": false,
+    "current_changes_authored_by_reviewer": false,
+    "role": "Independent static review; minimal repairs reported to root, no code modified by reviewer."
+  },
+  "blocking_findings": [
+    {
+      "id": "C04-F01",
+      "severity": "current-C4-blocking operational accounting",
+      "location": "main(): cleanup finally and all finalization after measured=cpu(...)",
+      "finding": "The exception boundary ends before host receipt serialization, preparation-ledger/code-manifest/template/budget writes and postwrite checking. A cleanup exception or an OSError/serialization exception/SIGXCPU in this finalization region can escape without a failure debit for the full attempt. A completed host receipt may already exist even though finalization did not finish.",
+      "source_evidence": "The try/except protects admission/probe only; finally proc.wait may raise; host_pin, ledger_pin, code_pin, budget_pin and C04_POSTWRITE_CHECK are outside that handled try.",
+      "minimal_fix": "Use one bounded failure/finalization boundary including cleanup and serialization. Preserve the original host receipt, record any failure and same-attempt cumulative debit without summing the prefix twice, and retain an explicit UNKNOWN/incomplete intent if costs or durable finalization cannot be completed. Do not relabel an unclosed attempt as cpu_accounting_complete."
+    },
+    {
+      "id": "C04-F02",
+      "severity": "current-C4-blocking false admission after explicit refusal",
+      "location": "budget_pin write followed by observed_postwrite_covered_by_tail refusal",
+      "finding": "EXECUTION_BUDGET.json is created with FROZEN_C4_ADMITTED before the tail check. If post_cpu>charged, main returns3 but leaves that executable budget, a completed host receipt and its ledger in place. The pinned runtime load_budget does not inspect C04_POSTWRITE_CHECK, so those bytes can still pass its admission interface despite the helper explicitly refusing.",
+      "source_evidence": "Actual runtime40949ef6 load_budget validates frozen status, pinned host/preparation/code/input records, but has no POSTWRITE_CHECK condition.",
+      "minimal_fix": "On every known failure after this helper creates the active budget, remove it from the executable budget path while preserving its exact bytes under a unique failed-artifact name, or publish the active budget only after the bounded success boundary. Never move or overwrite a pre-existing budget not created by this attempt. Keep the failure and any cost amendment durable."
+    }
+  ],
+  "open_blocking_findings": [
+    "C04-F01",
+    "C04-F02"
+  ],
+  "bounded_correction_requests": [
+    {
+      "id": "C04-C01",
+      "severity": "small preflight claim correction before admission",
+      "location": "preflight validation and source_and_previous_backup_receipts_rechecked assignment",
+      "finding": "The helper accepts all(preflight[guards].values()) and stage C04, then writes source_and_previous_backup_receipts_rechecked=true without testing the preflight source_and_previous_backup_receipt_check field. An empty guards map also passes all().",
+      "minimal_fix": "Require the expected preflight schema/stage, each named owner/central guard to be exactly true, same-unit CR branch/HEAD binding and source_and_previous_backup_receipt_check==PASS before recording that claim. This is a small check against the actual preflight interface, not a new survey."
+    },
+    {
+      "id": "C04-C02",
+      "severity": "failure provenance preservation within F01 repair",
+      "location": "charged>PREPARATION_CAP branch",
+      "finding": "PreparationBudgetExceeded replaces receipt[failure] and loses any earlier source/memory/probe exception on the same attempt.",
+      "minimal_fix": "Retain the earlier failure separately or in an ordered failure list when adding the budget-exceeded reason."
+    }
+  ],
+  "supported_static_checks": [
+    {
+      "topic": "actual runner static-review binding",
+      "assessment": "CORRECT_IN_REVIEWED_SOURCE",
+      "evidence": "Requires matching unit, exact PASS_SCOPED_STATIC_NO_EXECUTION verdict, empty blockers, actual installed run_bounded.py SHA and byte count matching reviewed_source. The independent runtime review pins40949ef638b9cc5f2f079c8a6afb5368bd899b13d31dc56328589dab30246c29/65033bytes."
+    },
+    {
+      "topic": "original input and worker code identity",
+      "assessment": "CORRECT_SCOPED_PATH",
+      "evidence": "Original inputs receive a size check before read and SHA/size validation; code manifest records every direct implementation/*.py and review/*.py and requires all named worker/runner files. This reviewer did not import, compile or execute any of them."
+    },
+    {
+      "topic": "memory scope",
+      "assessment": "CORRECT_CONSERVATIVE_DECLARED_POLICY",
+      "evidence": "Uses RAW_HEADROOM_ONLY_V1, zero reclaim credit, selected256MiB+1GiB reserve; separately visible tighter ancestor views refuse for explicit review. Snapshot is correctly called non-atomic and not a guarantee. No inherited file-LRU policy is imported."
+    },
+    {
+      "topic": "known owned PID probe",
+      "assessment": "CORRECT_SCOPED_PROBE_DESIGN",
+      "evidence": "Popen known PID is directly read from /proc with parent/pgrp and start identity; child is awaited and probe CPU is already part of whole preparation totals. It is a short sleep probe, not a scientific worker. Cleanup exceptions still require F01 repair."
+    },
+    {
+      "topic": "normal-path measured cost and tail",
+      "assessment": "CORRECT_BEFORE_FINALIZATION_GAP",
+      "evidence": "RUSAGE_SELF plus reaped RUSAGE_CHILDREN includes process startup, input/hash work and the probe; tail .05 is separate and charged=fsum(measured,tail). SIGXCPU soft3/hard4 is catchable within the existing try; this is not proof of a hard aggregate bound."
+    },
+    {
+      "topic": "create-only and current-unit boundary",
+      "assessment": "CORRECT_BASIC_BOUNDARY",
+      "evidence": "write_new uses xb; c4_v1 is the only admitted attempt name; no old/parallel budget transfer or old science replay occurs. The single current unit and runtime draft/install separation remain explicit."
+    }
+  ],
+  "interfaces_read": [
+    {
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/review/RUNTIME_STATIC_REVIEW.json",
+      "bytes": 3369,
+      "sha256": "9c9a01435bd63d960f0faaeb98f5cf60f9a2eef8d420825d67ab148cf9aa51d2",
+      "read_scope": "complete scoped independent runtime review"
+    },
+    {
+      "path": "/workspace/scratch/865c84d871b7/next_intake_20261028/consumer/runtime_draft/run_bounded.py",
+      "bytes": 65033,
+      "sha256": "40949ef638b9cc5f2f079c8a6afb5368bd899b13d31dc56328589dab30246c29",
+      "read_scope": "load_budget, contract/input and preparation manifest verification only; not a whole runner re-audit"
+    },
+    {
+      "path": "/workspace/scratch/865c84d871b7/next_intake_20261028/consumer/runtime_draft/EXECUTION_BUDGET_TEMPLATE.json",
+      "bytes": 3430,
+      "sha256": "e076d7c967913bea2e3b156af419b15995df8016d2015427e37699ed556c3e4d",
+      "read_scope": "complete prospective budget and actual evidence interfaces"
+    },
+    {
+      "path": "/workspace/scratch/865c84d871b7/next_intake_20261028/consumer/runtime_draft/C04_HOST_ADMISSION_TEMPLATE.json",
+      "bytes": 2139,
+      "sha256": "22c66aaab3ec05ced1efbea622d9280754065958687ad75dfd36fc20418f5801",
+      "read_scope": "complete host/PID/preparation evidence schema"
+    },
+    {
+      "path": "/workspace/scratch/865c84d871b7/next_intake_20261028/consumer/runtime_draft/C04_PREPARATION_LEDGER_TEMPLATE.json",
+      "bytes": 1143,
+      "sha256": "88a6034b3540f855e692e3414dbcef826c6876089ce25d4e6f82d5f1409bd7d6",
+      "read_scope": "complete cost component and receipt schema"
+    },
+    {
+      "path": "/workspace/scratch/865c84d871b7/next_intake_20261028/consumer/runtime_draft/C04_CODE_MANIFEST_TEMPLATE.json",
+      "bytes": 463,
+      "sha256": "36d4ff54679a6bfc550c96b77c46b276ea5c644776af4fff9668467d316020d8",
+      "read_scope": "complete code coverage/identity schema"
+    },
+    {
+      "path": "/workspace/scratch/865c84d871b7/next_intake_20261028/consumer/runtime_draft/README_KO.md",
+      "bytes": 11262,
+      "sha256": "5149a0403aef3586862d26788a1dc46090da550dc9f1697318306a4f887470cd",
+      "read_scope": "targeted resource/accounting/installation instructions"
+    }
+  ],
+  "remaining_limit": "Static review does not prove actual host memory/PID observation, runtime success, preventive aggregate hard bounds, measured CPU costs or completed C4 admission. Expected source template pins are not substitutes for actual C04 receipts.",
+  "execution": {
+    "helper_runs": 0,
+    "scientific_workers": 0,
+    "imports_of_reviewed_code": 0,
+    "compile_or_tests": 0,
+    "CAS": 0,
+    "old_science_replays": 0,
+    "code_edits": 0,
+    "metadata_CPU_s": null
+  },
+  "scientific_scope_changed": false,
+  "contract_or_tolerances_changed": false,
+  "new_budget_authorized_by_review": false,
+  "AUTO_NEXT_NODE": false,
+  "PASS_transition": "After the single bounded repair is checked statically, root may perform the already-planned fresh C04 admission under its actual preflight; no new scientific unit is authorized."
+}

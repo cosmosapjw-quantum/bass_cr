@@ -1,0 +1,59 @@
+{
+  "schema": "CR_PARENT_EVENT_RUNTIME_TARGETED_STATIC_REVIEW_V1",
+  "unit": "CR_PHYS02_PARENT_EVENT_NATIVE25_V1",
+  "reviewer": "/root/theory_review",
+  "verdict": "PASS_SCOPED_STATIC_NO_EXECUTION",
+  "reviewed_source": {
+    "path": "next_intake_20261028/consumer/runtime_draft/run_bounded.py",
+    "bytes": 65033,
+    "sha256": "40949ef638b9cc5f2f079c8a6afb5368bd899b13d31dc56328589dab30246c29",
+    "actual_local_sha256_read": true
+  },
+  "requested_scope": [
+    "Known Popen PID plus kernel start-time binding, live-unobservable failure and owned-process cleanup",
+    "Invocation lease and unresolved prior attempt UNKNOWN_NO_ACK admission gate",
+    "Pure measured preparation/worker/coordinator costs separated from conservative tails",
+    "Same-unit actual C4 PID probe and preparation receipt binding"
+  ],
+  "findings": [
+    {
+      "id": "PID_BINDING",
+      "status": "PASS_STATIC",
+      "observed": "capture_owned_worker_identity binds Popen.pid, parent PID, process group, session and start_ticks. owned_cpu_estimate explicitly seeds that Popen PID in addition to child enumeration. A live unobservable root worker raises an error. Cleanup discovers only this coordinator's descendants and uses recorded or freshly observed PID/start identities."
+    },
+    {
+      "id": "INVOCATION_LEASE",
+      "status": "PASS_STATIC",
+      "observed": "A create-only invocation lease precedes execute_attempt. Reconciliation excludes only its explicitly active attempt and otherwise requires a same-attempt terminal debit; unresolved lease or saved reservation closes admission as UNKNOWN_NO_ACK. No automatic stale lease deletion is present."
+    },
+    {
+      "id": "MEASURED_TAIL_ACCOUNTING",
+      "status": "PASS_STATIC",
+      "observed": "Preparation charged baseline is checked against separately recorded measured plus tail components. Reconciliation retains the maximum cumulative charged receipt per attempt identity and sums pure measured preparation, worker and coordinator separately from all conservative tails. Receipt amendments and failures remain durable."
+    },
+    {
+      "id": "ACTUAL_C4_BINDING",
+      "status": "PASS_STATIC",
+      "observed": "load_budget requires pinned actual host evidence including a positive Popen PID, start identity, live observation, completed cleanup and finite probe CPU. The exact host receipt must also occur in this unit's verified preparation manifest."
+    }
+  ],
+  "blocking_findings": [],
+  "reviewer_roles": {
+    "runtime_production_author": false,
+    "current_theory_and_independent_numeric_reference_author": true,
+    "production_parent_event_or_control_author": false
+  },
+  "limits": {
+    "whole_inherited_runner_reaudit": false,
+    "code_execution_import_compile_or_test": false,
+    "scientific_workers_started_by_reviewer": 0,
+    "actual_C4_PID_observation_adopted_here": false,
+    "actual_runtime_success_or_peak_memory_proven": false,
+    "preventive_hard_aggregate_CPU_cap_proven": false,
+    "polling": "Non-atomic estimate; final reaped RUSAGE_CHILDREN debit remains the measured accounting authority",
+    "finalization_tail": "Conservative reserve and cumulative amendment accounting, not a mathematical upper bound on every possible future bookkeeping cost",
+    "metadata_CPU_s": null,
+    "old_science_replay": 0,
+    "stage_publication_or_C4_admission_claim": false
+  }
+}

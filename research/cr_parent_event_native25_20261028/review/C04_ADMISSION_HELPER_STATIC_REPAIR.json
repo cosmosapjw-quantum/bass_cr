@@ -1,0 +1,135 @@
+{
+  "schema": "CR_PARENT_C04_ADMISSION_HELPER_BOUNDED_REPAIR_V1",
+  "unit": "CR_PHYS02_PARENT_EVENT_NATIVE25_V1",
+  "author": "/root/source_qualification",
+  "observed_utc": "2026-10-27T16:48:01.043475+00:00",
+  "verdict": "REPAIR_READY_STATIC_NO_EXECUTION",
+  "root_authorized_scope": "Only the previously identified finalization/cleanup accounting, admitted-budget invalidation, maximum-cumulative preparation aggregation and explicit C04 preflight claims.",
+  "prior_static_review": {
+    "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/review/C04_ADMISSION_HELPER_STATIC.json",
+    "bytes": 10066,
+    "sha256": "1c91686a6f15bae9b5797597be6e95947d58c774f139568348fdd4a115fed493"
+  },
+  "prior_source": {
+    "bytes": 15654,
+    "sha256": "52efc8d3553b03284f11f658032204fefb38f21999f425f6db6ea81d320eeec0"
+  },
+  "repaired_source": {
+    "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/ops/admit_c4.py",
+    "bytes": 24086,
+    "sha256": "9823aed1b4ff5be5fa7e9075b58c416360f5ba6e55d1558f9e042827f08ec894"
+  },
+  "original_HOLD_preserved": true,
+  "reviewer_is_author_of_this_bounded_patch": true,
+  "independent_runtime_review_reused": {
+    "runner_sha256": "40949ef638b9cc5f2f079c8a6afb5368bd899b13d31dc56328589dab30246c29",
+    "runner_bytes": 65033,
+    "runtime_modified": false
+  },
+  "exact_delta": [
+    {
+      "location": "write_new",
+      "change": "Optional created_paths is populated only after successful xb open; this identifies newly created budget/intent paths even if a later write fails. All receipts retain create-only writes."
+    },
+    {
+      "location": "record_failure",
+      "change": "New helper preserves an ordered failures list and current failure, rather than losing the original exception when budget/finalization errors occur."
+    },
+    {
+      "location": "cumulative_debit",
+      "change": "New helper records whole-process RUSAGE_SELF plus reaped children, measured and .05 tail separately, same-attempt cumulative sequence and cleanup/accounting flags; over-cap adds a failure without deleting earlier reasons."
+    },
+    {
+      "location": "preparation_ledger",
+      "change": "New helper retains every complete cumulative receipt pin in all_cumulative_records but exposes only maximum charged receipt per attempt (sequence tie-break) in records. Existing runtime therefore sums one chosen debit per attempt. Components must be finite, nonnegative and additive within1e-12. UNKNOWN records/unmatched intents close admission. Sum remains within the original4CPU preparation reserve."
+    },
+    {
+      "location": "C04 preflight",
+      "change": "Requires exact schema/stage, both named guards exactly true, actual CR repository/branch and matching local/owner HEAD, plus source_and_previous_backup_receipt_check==PASS before claiming receipts rechecked."
+    },
+    {
+      "location": "intent/probe cleanup",
+      "change": "Intent write is in the handled admission path. Probe cleanup exceptions are captured; unresolved cleanup cannot produce a completed cost/admission receipt."
+    },
+    {
+      "location": "finalization try",
+      "change": "Host receipt, ledger, code manifest, template/budget, postwrite check and result serialization now share a bounded exception path. Cost is sampled again after the check serialization; observed tail excess raises refusal."
+    },
+    {
+      "location": "owned budget failure path",
+      "change": "Only a budget created by this helper is renamed into a newly created C04_FAILED_FINALIZATION_c4_v1_<time_ns> directory. Its bytes and pin are retained; a pre-existing budget is never moved or overwritten."
+    },
+    {
+      "location": "failure debit",
+      "change": "One create-only amendment_1 records the cumulative current-process cost including failure handling/quarantine. Prefix and amendment are not summed. Earlier receipts, postwrite check and any partial artifacts remain unchanged."
+    },
+    {
+      "location": "UNKNOWN fallback",
+      "change": "If intent ownership, child cleanup, quarantine, failure-debit persistence or measured tail coverage cannot be established, create a unique UNKNOWN_NO_ACK record with terminal/accounting flags false and the measured current-process lower bound. A failed durable write is reported on stderr with the intent retained; no zero-cost claim or new attempt is invented."
+    }
+  ],
+  "static_resolution": [
+    {
+      "finding": "C04-F01",
+      "status": "ADDRESSED_IN_SOURCE",
+      "basis": "Cleanup exceptions and finalization serialization are handled; the finalization failure path emits one cumulative amendment or explicit UNKNOWN."
+    },
+    {
+      "finding": "C04-F02",
+      "status": "ADDRESSED_IN_SOURCE",
+      "basis": "Known postwrite/tail/serialization failure moves this attempt own active budget out of the runtime path before the failure debit. Quarantine failure is explicit UNKNOWN rather than successful admission."
+    },
+    {
+      "finding": "C04-C01",
+      "status": "ADDRESSED_IN_SOURCE",
+      "basis": "Exact named preflight guards/source-backup PASS/owner binding are required."
+    },
+    {
+      "finding": "C04-C02",
+      "status": "ADDRESSED_IN_SOURCE",
+      "basis": "BudgetExceeded and later failures append to preserved failure history."
+    }
+  ],
+  "static_paths_read": [
+    "normal admission/probe success then bounded finalization",
+    "source/memory/runtime-review refusal and ordinary failed receipt",
+    "cleanup failure to explicit UNKNOWN",
+    "host/ledger/code/template/budget serialization failure",
+    "tail excess after budget/check writes",
+    "budget quarantine success or explicit failure",
+    "cumulative amendment write/coverage failure to UNKNOWN",
+    "existing intent or pre-existing budget collision without overwriting historical artifacts"
+  ],
+  "unchanged": [
+    "scientific source/production/reference/controls",
+    "frozen CONTRACT and all scientific tolerances",
+    "new40CPU envelope and4CPU preparation reserve",
+    ".05 preparation tail and3/4 selfCPU soft/hard limits",
+    "RAW_HEADROOM_ONLY_V1/no reclaimed-LRU credit",
+    "known-PID probe semantics",
+    "runtime review SHA/bytes binding and installed-runner requirement",
+    "all historical budgets/failures/UNKNOWN_NO_ACK",
+    "current unit only/AUTO_NEXT_NODE=false"
+  ],
+  "limits": [
+    "This is the patch author static re-read, not an independent test run; root should read this bounded delta before actual C04 admission.",
+    "No helper/runner/scientific import, compile, test or execution occurred.",
+    "Fixed tail and polling do not prove a preventive hard aggregateCPU bound. Uncatchable termination or unavailable durable storage remains owner-reconciled UNKNOWN, not an invented terminal debit.",
+    "Final print/interpreter-exit cost remains inside the declared conservative tail; no mathematical bound on all future bookkeeping is claimed.",
+    "An earlier partial ledger is preserved if finalization fails. There is no active admitted budget from this failed attempt; any unique recovery must explicitly reconcile the maximum cumulative receipts and old artifacts under its remaining same-unit reserve."
+  ],
+  "execution": {
+    "helper_runs": 0,
+    "scientific_workers": 0,
+    "reviewed_code_imports": 0,
+    "compile_or_tests": 0,
+    "CAS": 0,
+    "old_science_replays": 0,
+    "metadata_CPU_s": null
+  },
+  "code_files_modified": [
+    "ops/admit_c4.py"
+  ],
+  "AUTO_NEXT_NODE": false,
+  "actual_C4_admission": false
+}
