@@ -1,0 +1,191 @@
+{
+  "schema": "bass_cr.r2.source_qualification.v1",
+  "prepared_at_utc": "2026-10-27T03:17:30Z",
+  "selected_model": "A: exact stored PR106 HeI K_diag + new HeIII ground-RR diagonal hazard",
+  "scope": "R2 literature reading only; no scientific execution",
+  "primary_sources": [
+    {
+      "id": "P1",
+      "title": "Atomic Data for Astrophysics. II. New Analytic Fits for Photoionization Cross Sections of Atoms and Ions",
+      "authors": [
+        "D. A. Verner",
+        "G. J. Ferland",
+        "K. T. Korista",
+        "D. G. Yakovlev"
+      ],
+      "journal": "ApJ 465, 487 (1996)",
+      "doi": "10.1086/177435",
+      "url": "https://arxiv.org/pdf/astro-ph/9601009",
+      "author_page": "https://www.pa.uky.edu/~verner/photo.html",
+      "locations": [
+        "Section 3, printed pp. 4–5, Eq. (1)",
+        "Table 1, printed p. 21, He II third data row"
+      ],
+      "source_ref": "turn6view2",
+      "retrieval": "Exa full text; web open/find; locally downloaded PDF and visually inspected table render",
+      "pdf_sha256": "f493c884f2c1c7d19a54b0f6df52952bef660d771718c98523b16da339e242e6",
+      "pdf_bytes": 471312,
+      "visual_evidence": "private_reading/verner1996_table1.png",
+      "source_claims": [
+        "ground-state nonrelativistic PI fit",
+        "E and E0 in eV; sigma0 in Mb",
+        "1 Mb = 1e-18 cm^2",
+        "He II Z=2 N=1 native threshold 54.42 eV",
+        "H-/He-like tabulated Emax 50000 eV",
+        "class A hydrogenic fit rms accuracy better than 0.2%"
+      ],
+      "reuse": "Consume exact fixed row and provider; preserve threshold-coefficient pair.",
+      "limits": [
+        "fit rms is not a uniform certified error bound",
+        "not an isotope-specific fit",
+        "does not supply recoil, stimulated RR, excited capture, cascade, stopping, or thermalization"
+      ]
+    },
+    {
+      "id": "P2",
+      "title": "Atomic data for astrophysics. I. Radiative recombination rates for H-like, He-like, Li-like and Na-like ions over a broad range of temperature",
+      "authors": [
+        "D. A. Verner",
+        "G. J. Ferland"
+      ],
+      "journal": "ApJS 103, 467 (1996)",
+      "url": "https://arxiv.org/pdf/astro-ph/9509083",
+      "author_page": "https://www.pa.uky.edu/~verner/rec.html",
+      "locations": [
+        "Section 1, printed pp. 1–3",
+        "Section 2, printed pp. 3–6",
+        "Eq. (4), printed p. 5; Table 1",
+        "Eq. (5), printed p. 5",
+        "Ground/excited partial rates distinction, end of Section 2"
+      ],
+      "source_ref": "turn6view1",
+      "retrieval": "Exa full text; web open/find; author data page",
+      "source_claims": [
+        "RR species names denote the formed species",
+        "ground and excited contributions are separate",
+        "Milne relates ground photoionization and recombination",
+        "total PI without channel resolution may be unsuitable for Milne",
+        "Eq. (4)/Table 1 provide total thermal RR rates"
+      ],
+      "reuse": "Use as channel-definition and ground-vs-total qualification, not as new nonthermal hazard data.",
+      "limits": [
+        "arXiv submission 1995 is not journal publication year 1996",
+        "do not replace pointwise ground cross section with total thermal fit",
+        "no Maxwell integration performed here"
+      ]
+    },
+    {
+      "id": "P3",
+      "title": "Photoionization and Electron-Ion Recombination of n = 1 to Very High n-Values of Hydrogenic Ions",
+      "authors": [
+        "Sultana N. Nahar"
+      ],
+      "journal": "Atoms 9, 73 (2021)",
+      "doi": "10.3390/atoms9040073",
+      "url": "https://www.astronomy.ohio-state.edu/nahar.1/papers/atoms-hyd-pirc.pdf",
+      "locations": [
+        "Section 2.2, printed p. 7, Eqs. (30)–(31)",
+        "Printed p. 8, Eq. (36)"
+      ],
+      "source_ref": "turn6view0",
+      "retrieval": "Exa full text; web open/find; locally downloaded PDF and visually inspected equation render",
+      "pdf_sha256": "74cd34676d9d128a6608863d6dbd33a2dbbaa62839db03c80d426c80e989944b",
+      "pdf_bytes": 490452,
+      "visual_evidence": "private_reading/nahar2021_eq31.png",
+      "source_claims": [
+        "sigma_RR = sigma_PI * (g_bound/g_residual) * photon_energy^2/(2*m_e*c^2*electron_energy)",
+        "statistical weights refer to bound atom and residual ion",
+        "total rate sums contributions of all bound states"
+      ],
+      "reuse": "Explicit detailed-balance source; no replacement of Verner cross-section data.",
+      "limits": [
+        "PDF extraction flattened Eq. (30) fractions; render was used to disambiguate",
+        "E > 0 consumer domain; no artificial rate floor",
+        "single ground state is not total RR"
+      ]
+    },
+    {
+      "id": "P4",
+      "title": "Energy Levels of Singly Ionized Helium (He II)",
+      "institution": "NIST",
+      "url": "https://physics.nist.gov/PhysRefData/Handbook/Tables/heliumtable6.htm",
+      "locations": [
+        "1s ground row: term 2S, J=1/2, level 0 cm^-1"
+      ],
+      "source_ref": "turn6view3",
+      "retrieval": "Exa full-page fetch; web open",
+      "source_claims": [
+        "He II 1s ground J=1/2"
+      ],
+      "reuse": "g_bound=2J+1=2",
+      "limits": [
+        "bare He III electronic weight one is a state-counting application, not directly quoted from this table",
+        "do not replace the native Verner threshold by the NIST limit"
+      ]
+    }
+  ],
+  "mathematical_application": {
+    "statistical_convention": "g_bound=2; g_ion=1; d=2*g_ion/g_bound=1",
+    "electronic_state_counting": "bare ion has one empty-electron state",
+    "isotope_assignment": "CONDITIONAL_ELEMENTAL_HE_TO_HE4",
+    "kinematics": [
+      "stationary-heavy-target",
+      "zero recoil",
+      "nonrelativistic"
+    ],
+    "emission": "spontaneous ground-state RR only",
+    "energy_domain": "E_eV > 0 and E_eV + 54.42 <= 50000; also respect frozen consumer grid",
+    "density_role": "capturing ion n_HeIII, not electron bath density",
+    "fixed_density_project_input_cm3": 0.01,
+    "units": {
+      "photo_input": "eV",
+      "photo_output": "cm^2 after 1e-18 Mb conversion",
+      "electron_speed": "m/s converted by factor 100 to cm/s",
+      "hazard": "s^-1"
+    },
+    "formula": "sigma_RR_cm2 = sigma_PI_cm2(E+I) * (E+I)^2 / (d*(m_e*c^2/q_eV)*E), where E,I in eV",
+    "independent_decimal_baseline": "Decimal(stored_PR106_HeI_K_diag)+Decimal(new_HeIII_hazard)"
+  },
+  "fixed_reuse_sources": [
+    {
+      "role": "native photo table",
+      "commit": "b11b2e9255f2b10fb5582376412e045bd1e9151c",
+      "repo_path": "research/cr_c23e_d43_source_binding_20261024/implementation/reuse/c23b/data/verner_photo.dat",
+      "sha256": "a53e73b0af4cc6b801aef67b84bd964e3ed8c9c4992f214e4a69dc7e4443f389",
+      "git_blob": "754b5ce11cbe662f96394430beeafe3f102f339c",
+      "bytes": 17760
+    },
+    {
+      "role": "fixed photo provider",
+      "commit": "b11b2e9255f2b10fb5582376412e045bd1e9151c",
+      "repo_path": "research/cr_c23b_source_frame_20261023/source_providers/spectral_photo_source.py",
+      "sha256": "71b7e3a6b6f1c68ec15bcb19b98014bc025ef595f53df29703f11e25f36f4a8d",
+      "git_blob": "e7d474d5145cb264102206e0403b0aa5916c3140",
+      "bytes": 10712
+    },
+    {
+      "role": "REI151 d convention",
+      "commit": "8a4f5df46f6e3058f5e685b85cc1cf3c20926368",
+      "repo_path": "research/microphysics_r9_20261015/unit8_remaining_bridges_20261016/spec/LI_THERMAL_CONTRACT.json",
+      "sha256": "ce7ba9f2c4114098ab1f36e3f2da26e4999fb947e742f66d4383cb61855a2aec",
+      "git_blob": "7fb86947fe81496b84e32008c477d3fde52916b2",
+      "HeII_saha_d": 1
+    }
+  ],
+  "native_row": {
+    "Z": 2,
+    "N": 1,
+    "I_eV": 54.42,
+    "Emax_eV": 50000,
+    "E0_eV": 1.72,
+    "sigma0_Mb": 13690,
+    "ya": 32.88,
+    "P": 2.963,
+    "yw": 0,
+    "y0": 0,
+    "y1": 0,
+    "quality_class": "A"
+  },
+  "publication_selection": "Authored qualification note and metadata only. Downloaded papers and renders are private reading evidence, not necessary for public publication."
+}
+

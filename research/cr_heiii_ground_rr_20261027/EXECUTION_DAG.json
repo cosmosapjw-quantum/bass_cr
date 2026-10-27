@@ -1,0 +1,80 @@
+{
+  "schema": "CR_HEIII_EXECUTION_DAG_V1",
+  "central_progress": "27/88",
+  "original_central_node_count": 88,
+  "new_scoped_child_count_effect": 0,
+  "nodes": [
+    {
+      "id": "input_prepare",
+      "stage": "C05",
+      "kind": "exact-byte preparation",
+      "cpu_owner": "misc2",
+      "dependencies": [
+        "frozen_contract",
+        "R6_PASS"
+      ]
+    },
+    {
+      "id": "changed_controls",
+      "stage": "C06",
+      "worker_cpu": 0,
+      "worker_cpu_subcap_s": 5,
+      "dependencies": [
+        "input_prepare"
+      ]
+    },
+    {
+      "id": "primary_224_rhs",
+      "stage": "C07",
+      "worker_cpu": 0,
+      "worker_cpu_subcap_s": 8,
+      "dependencies": [
+        "changed_controls"
+      ]
+    },
+    {
+      "id": "saved_grid_domain_and_figure",
+      "stage": "C08",
+      "worker_cpu": 0,
+      "worker_cpu_subcap_s": 5,
+      "dependencies": [
+        "primary_224_rhs"
+      ]
+    },
+    {
+      "id": "independent_56_rhs",
+      "stage": "C09",
+      "worker_cpu": 2,
+      "worker_cpu_subcap_s": 10,
+      "dependencies": [
+        "primary_224_rhs",
+        "changed_controls",
+        "saved_grid_domain_and_figure"
+      ]
+    },
+    {
+      "id": "scoped_release_and_N5_return",
+      "stage": "C10",
+      "dependencies": [
+        "independent_56_rhs"
+      ]
+    }
+  ],
+  "coordinator_cpu": 8,
+  "worker_concurrency": 1,
+  "native_threads": 1,
+  "RLIMIT_AS_bytes": 536870912,
+  "memory_reserve_bytes": 1073741824,
+  "local_misc_cpu_subcap_s": 2,
+  "unit_total_cpu_ceiling_s": 30,
+  "wall_per_worker_s": 60,
+  "old_science_replays": 0,
+  "MPI_or_NCP_execution": false,
+  "actual_launch_admission": "fresh cgroup/affinity/cache estimator + own create-only lease; not pre-certified by static probe",
+  "failed_attempts_charged": true,
+  "missing_prior_receipt": "UNKNOWN_PRIOR_ATTEMPT_BUDGET",
+  "per_stage_publication": "expected-SHA non-force + immutable checkpoint + dual R2 metadata backup",
+  "source_and_authority_release": "actual scoped R3 readback",
+  "physical_error_bound": null,
+  "L4_ready": false
+}

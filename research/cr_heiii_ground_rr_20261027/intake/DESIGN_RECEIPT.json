@@ -1,0 +1,70 @@
+{
+  "task": "R9/C2 read-only implementation mapping",
+  "source_HEAD": "b11b2e9255f2b10fb5582376412e045bd1e9151c",
+  "branch_observed": "research/cr-heiii-ground-rr-20261027",
+  "science_execution": false,
+  "coefficient_point_calls": 0,
+  "solver_calls": 0,
+  "old_suite_replay": 0,
+  "table_rows_read_as_text": true,
+  "NPZ_read_mode": "ZIP/NPY headers only; no array payload numerical evaluation",
+  "read_sources": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "8d62d9758fe173263eb3820c7b00ca569193bb7f912fc3d95d145e73d4a40970"
+    },
+    {
+      "path": "research/cr_he4_ground_rr_20261025/implementation/he4_engine.py",
+      "sha256": "4d96b4ab15bf3e2e514f2abe7e634a8bbfd1facbf30a6ae6c8725a72f7bae229"
+    },
+    {
+      "path": "research/cr_he4_ground_rr_20261025/implementation/primary.py",
+      "sha256": "2d029920b284eaa6468e37f510e3be6594ddcec77c7b6bc8767970a212d55722"
+    },
+    {
+      "path": "research/cr_he4_ground_rr_20261025/review/c9_independent.py",
+      "sha256": "ca3678772217df45519ed932f368b6672e9dea2791736c20ace2061ed1cd010e"
+    },
+    {
+      "path": "research/cr_he4_ground_rr_20261025/implementation/controls.py",
+      "sha256": "21a7cc00aafbb07a324deeb3662637c9c674715f1bf6c3ebaa26d39eae7928ed"
+    },
+    {
+      "path": "research/cr_he4_ground_rr_20261025/inputs/CONFIG.json",
+      "sha256": "f4364e23d087f951e8b0d96ce98e27b86321fa25454161a743a8979f2962b099"
+    },
+    {
+      "path": "research/cr_he4_ground_rr_20261025/inputs/INPUT_MANIFEST.json",
+      "sha256": "9d8216aedb08ce3e99ae96957ef54974f769fa9b076620291cdced394a7cfdcc"
+    },
+    {
+      "path": "research/cr_external_interfaces_20261025/contracts.py",
+      "sha256": "431fc4b54174bcf2fe3bcacba063d0b52810a2e274cdb22429a0d787ef97e07e"
+    },
+    {
+      "path": "research/cr_external_interfaces_20261025/consume_saved.py",
+      "sha256": "3e648f7e72e5478d4491facd4d2e5db3d4a0f8b73481f280d855f368d8205ee4"
+    }
+  ],
+  "outputs": [
+    "DESIGN_MAPPING_KO.md",
+    "INPUT_ARRAY_HEADERS.json"
+  ],
+  "open_decision": "Root must freeze exact input/budget/acceptance and export type before new execution",
+  "RHS_plan": {
+    "cases": 8,
+    "physical18": 144,
+    "conditional5": 40,
+    "stable_response4": 32,
+    "w1": 8,
+    "total_primary": 224,
+    "independent_2cases": 56
+  },
+  "critical_findings": [
+    "Use stored HeI baseline vectors, not PR105 old vectors, in response4",
+    "New bath slice12:18; fixed nominal N is not active-node count",
+    "Integrated expected events are counts, not Event.extent_m3_s rates",
+    "Independent exact sum uses stored old diagonal plus new hazard, not rounded new diagonal"
+  ],
+  "stage_completion_claim": "Owned by root; this artifact is preparatory mapping only"
+}
