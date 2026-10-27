@@ -1,0 +1,7 @@
+# R10 theory closeout and coding admission boundary
+
+The ten theory nodes are complete only after this node has a postcommit publication and dual-backup receipt. R1 fixed scope/20CPU-second cap; R2 qualified one actual stored proper-time history; R3 claims/domains; R4 selected construction; R5 full measure/integration/quotient/RR/retained-port derivation; R6 independent theory review; R7 bounded Wolfram residuals; R8 scoped conditional decision; R9 executable numerical handoff; R10 this frozen coding boundary.
+
+No local scientific worker has yet executed. Scientific CPU preparation/run/review will be debited by the C4-admitted wrapper. Remote Wolfram provider CPU is unknown, not zero. Existing HeIII6.988054525/30 and parallel budgets remain distinct. The first Wolfram quotient syntax error and unexecuted independent-reference draft error are retained with their corrections; neither is a physics failure nor a reason to replay old science.
+
+Next C1–C10: pinned inputs; equation/code mapping; stable algorithms/error sources; actual host/resource admission; minimal implementation; new synthetic and actual-source runs; physical/source consistency; independent finite-window numerical convergence/reference; independent code/results review; final source ZIP, dualR3, owner-return and handoff. Every node has a fresh preflight, expected-SHA non-force commit and dual checkpoint. Original central27/88,88nodes/17edges,count effect0. Actual physical-state/nb join remains open.
