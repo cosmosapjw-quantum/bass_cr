@@ -119,6 +119,7 @@ Native index와 energy units는 실제 authoritative native25 contract에서 연
 dn_i/dτ+θn_i=R_i,
 dn_b/dτ+θn_b=R_B,
 Y_i=n_i/n_b -> dY_i/dτ=(R_i-Y_i R_B)/n_b.
+The normalization domain is n_b>0 and n_b+Delta n_b>0. If removals are allowed, every final species count must also be nonnegative. For physical baryon addition Delta n_b>=0 the final-denominator condition follows from n_b>0.
 Finite same-volume addition:
 ΔY_i=(Δn_i-Y_i Δn_b)/(n_b+Δn_b).
 따라서 고정 nb의 Δn_i/nb는 baryon-conserving event나 명시적 reference-normalized diagnostic의 식이다.
@@ -202,6 +203,8 @@ Strong no-go의 새로운 성과를 주장하지 않는다.
 원 stored energy source column b_i는 number column이 아니다. S=U*/T_end²로 두면 A_Ni=S*b_i/E_i이고 A_Ei=S*b_i다. cutoff energy와 number는 각각9605/9608행이다. high-born low_cross9609/9610은 existing active projection을 기록한 diagnostics이므로 source 합에서 제외한다. 기존 ionization-counter rows9606/9607은 source에서0임을 실행에서 확인한다. source로 새 chemical event를 추가하지 않는다.
 
 M(a,b)=(b-a)(b+a)/2를 사용하여 N=M*S*(sum b/E+cutoff_N), U_eV=M*S*(sum b+cutoff_E)를 계산한다. 단위는 각각m^-3와eV m^-3이며U_J=eV_J*U_eV다. 여러 segment는 각 proper 시작점의 elapsed time을 사용한다. 일반 degree≤2 polynomial에서 proper rate coefficient는 native c_k*(dt_native/dtau)^(k+1)*(dV_native/dVproper)*n_target(if needed)이다. Timestamp endpoints themselves are explicitly supplied in proper seconds; the Jacobian applies to the polynomial argument and rate measure, not a second time to those endpoints.
+
+다항식 coefficient 변환은 각 segment에서 native elapsed time s=c_tau*(tau-tau_start), c_tau>0인 affine clock이고 c_tau,c_V와 필요한 target density가 상수인 경우에 적용한다. 일반 시간 의존 Jacobian은 앞의 measure 식으로 정의되지만 이 bounded polynomial 구현의 지원 범위에 포함하지 않는다. Native elapsed-time의 영점과 proper segment 시작점은 같은 사건으로 결속한다.
 
 유한 시간 window는[0,T],[0,T/2],[T/2,T],[T/3,2T/3],[T(1-10^-6),T],[T,T]로 고정한다. 두 birth tags와total에 대해18개 finite outputs를 만든다. Zero-width intervals have zero integrated count/energy and a qualified left endpoint rate; their instantaneous rates are not obtained by dividing by zero exposure. No mean capture time enters this contract.
 
