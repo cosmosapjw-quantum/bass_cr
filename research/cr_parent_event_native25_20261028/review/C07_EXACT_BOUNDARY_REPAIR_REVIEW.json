@@ -1,0 +1,181 @@
+{
+  "schema": "CR_PARENT_EVENT_EXACT_BOUNDARY_REPAIR_REVIEW_V1",
+  "unit": "CR_PHYS02_PARENT_EVENT_NATIVE25_V1",
+  "reviewer": "/root/source_qualification",
+  "reviewed_utc": "2026-10-27T17:22:05.089559+00:00",
+  "verdict": "PASS_SCOPED_EXACT_BOUNDARY_REPAIR",
+  "blocking_findings": [],
+  "old_producer_sha256": "69e7068573401db41f8c37797b47e455b684979b4094424d2156c05a126bcc81",
+  "new_consumer_sha256": "16dd17116cab6c60da3881995350ba7f42ad62a35acc6a3f1904ee5bf6a5d037",
+  "new_controls_sha256": "322b68270d4e27d9c970a8452644e552ee584bd7b330f9035fd3ab8e6edc9e2a",
+  "preparation_fit_projection_unchanged": true,
+  "tolerances_unchanged": true,
+  "PRECISION_80_unchanged": true,
+  "contract_and_physical_state_unchanged": true,
+  "scope": "Independent static review of exact old/new production+controls diff and preserved actual preparation/failure evidence. This is a repair-code/reuse decision, not future execution acceptance.",
+  "independence": {
+    "reviewer_authored_production": false,
+    "reviewer_authored_numerical_reference": false,
+    "reviewer_authored_this_repair": false,
+    "reviewer_prior_metadata_helper_repair_author": true,
+    "no_self_review_of_production_repair": true
+  },
+  "reviewed_files": [
+    {
+      "path": "intake/primary_v1_code/parent_event.py",
+      "bytes": 71314,
+      "sha256": "69e7068573401db41f8c37797b47e455b684979b4094424d2156c05a126bcc81"
+    },
+    {
+      "path": "implementation/parent_event.py",
+      "bytes": 80244,
+      "sha256": "16dd17116cab6c60da3881995350ba7f42ad62a35acc6a3f1904ee5bf6a5d037"
+    },
+    {
+      "path": "intake/primary_v1_code/controls.py",
+      "bytes": 22854,
+      "sha256": "6be8624af061a5711063c471e3ea6317ff2dd5e51a805f4358b71d56ccd679dc"
+    },
+    {
+      "path": "implementation/controls.py",
+      "bytes": 24563,
+      "sha256": "322b68270d4e27d9c970a8452644e552ee584bd7b330f9035fd3ab8e6edc9e2a"
+    },
+    {
+      "path": "runs/prepare_v1/EXECUTED_SOURCE/implementation_parent_event.py",
+      "bytes": 71314,
+      "sha256": "69e7068573401db41f8c37797b47e455b684979b4094424d2156c05a126bcc81"
+    },
+    {
+      "path": "runs/prepare_v1/EXECUTED_SOURCE_MANIFEST.json",
+      "bytes": 1036,
+      "sha256": "c31a226c557b53658c084dc260e7a22e17a0b669d78c36258d2565364f355e0a"
+    },
+    {
+      "path": "runs/prepare_v1/PREPARATION.json",
+      "bytes": 28835,
+      "sha256": "da5c18c810f47d501648faf77c398f4f0f91c9da9066c7f38c196e989d2eb39f"
+    },
+    {
+      "path": "runs/prepare_v1/ATTRIBUTION_ARRAYS.npz",
+      "bytes": 233050,
+      "sha256": "1c974c306b50f3deb86df712844f753b4402fb25e5dbc41c9a1de0254bf3ff47"
+    },
+    {
+      "path": "runs/prepare_v1/RECEIPT.json",
+      "bytes": 12006,
+      "sha256": "8131556c011fa8e9d9696b88d62dd16974da2e5906a753bbf2ff9e4406b846e6"
+    },
+    {
+      "path": "runs/primary_v1/FAILED.json",
+      "bytes": 500,
+      "sha256": "2cb70ad610e36eae1602e9cd6a0d1452ec52dbcd7a4f6186adcb1f3cfcebda2f"
+    },
+    {
+      "path": "runs/primary_v1/stderr.txt",
+      "bytes": 2239,
+      "sha256": "eeeeede3fa4271e9649776d3ad74fad8da79ccfd8fa4b5d2d326cd666e8d6e3d"
+    },
+    {
+      "path": "runs/primary_v1/RECEIPT.json",
+      "bytes": 12080,
+      "sha256": "46d92e51fc3c9d4efa338ed63cd2e4ae7758aeb74af6e152207f101e37d5f988"
+    },
+    {
+      "path": "inputs/INPUT_MANIFEST.json",
+      "bytes": 4247,
+      "sha256": "2273f08ac1716d233097d17c73818d39a9337da34712290a4b4171430d24f9b3"
+    },
+    {
+      "path": "CONTRACT.json",
+      "bytes": 10683,
+      "sha256": "01cc2d2835e3ad61c49cd0b68b8c413ebd7e0b8fb5228877804159c4e3f71162"
+    },
+    {
+      "path": "review/C07_BOUNDARY_FAILURE_STATIC.json",
+      "bytes": 10303,
+      "sha256": "73f2aa771c2723fe47547eb7d6f2f83d8a068f34f4163bed96c7ef56bb6174fb"
+    },
+    {
+      "path": "review/C07_EXACT_BOUNDARY_REPAIR.diff",
+      "bytes": 15275,
+      "sha256": "1095b7643ee8251324e2c11bfb48c4532c3bed530fef6ce9ff780e85efd99ef1"
+    }
+  ],
+  "checked_changes": [
+    {
+      "id": "EXACT_FINITE_DECIMAL",
+      "status": "PASS_STATIC",
+      "function": "exact_terminating_decimal",
+      "reason": "For reduced denominator2^a5^b and m=max(a,b), integer coefficient abs(n)*2^(m-a)*5^(m-b) with exponent-m represents n/denominator exactly. Decimal tuple construction is context-independent; nonterminating denominator is refused. Zero/sign are preserved without clipping or tolerance."
+    },
+    {
+      "id": "EXACT_DOMAIN",
+      "status": "PASS_STATIC",
+      "function": "evaluate_family",
+      "reason": "D preserves finite Decimal input; Fraction(p),Fraction(d),Fraction(marginal) then enforce nonnegative parameters and p+2d<=marginal exactly for represented values. No tolerance or physical branch is selected. Existing native-Y arithmetic and species positivity gate remain."
+    },
+    {
+      "id": "CURRENT_AND_PRIOR_FIXTURES",
+      "status": "PASS_STATIC",
+      "function": "consume_selected_parent_event_window",
+      "reason": "d,prior_d and serialized s now use exact terminating rational construction. Same frozen fractions0,1/4,1/2 and actual prior-prefix baseline remain. No fit, source projection, clock factor, state or RR changes."
+    },
+    {
+      "id": "STRICT_REUSE_ADMISSION",
+      "status": "PASS_STATIC",
+      "functions": [
+        "validate_preparation_reuse",
+        "load_preparation"
+      ],
+      "reason": "Same-producer load remains unchanged by default. Only the mismatching producer enters root active-budget-pinned admission with exact fixed old PREPARATION/NPZ/producer, completed preparation receipt, frozen source manifest/contract, exact current consumer/code manifest/executed snapshot and independently pinned review. Exact two allowed run IDs and no prepare replay are required."
+    },
+    {
+      "id": "NO_RELABELLING",
+      "status": "PASS_STATIC",
+      "reason": "Old preparation producer hash is not edited; returned preparation identity adds a separate explicit_consumer_reuse_admission provenance object. Failed primary_v1 and its charges remain immutable."
+    },
+    {
+      "id": "TARGETED_CONTROLS",
+      "status": "PASS_STATIC_NOT_EXECUTED",
+      "reason": "Existing negative/excess control adds strictly positive1e-100 excess that rounded80digit sum could hide. One new control compares dyadic d/s with independent Fraction identities over saved-attribution prefix/bin/prior extents, including exact half and quarter plus nonterminating refusal. No coefficient fit or source quadrature is repeated."
+    },
+    {
+      "id": "UNCHANGED_PREPARATION",
+      "status": "PASS_STATIC",
+      "reason": "Exact diff touches only family domain, added finite-Decimal converter, three closed-fixture expressions, explicit saved-preparation reuse loader and two affected control bodies. identify_coefficients, project_identified_source, run_prepare, source constants, frozen tolerances and all original input bytes are unchanged."
+    }
+  ],
+  "runtime_requirements_not_preclaimed": {
+    "root_admission_actual_pins_required": true,
+    "active_budget_revision_and_code_manifest_required": true,
+    "allowed_run_ids": [
+      "controls_v2",
+      "primary_v2"
+    ],
+    "future_controls_pass": null,
+    "future_primary_pass": null,
+    "future_independent_reference_pass": null,
+    "all_runtime_attempts_pass_must_preserve_false": true
+  },
+  "preserved_diagnosis_limit": "Actual v1 exception/path is recorded; failed operands and fixture label were not stored. This static review does not assert a reproduced specific prefix or rounding direction.",
+  "frozen_nulls": [
+    "actual exclusive He branch point",
+    "unselected partner response/energy/history",
+    "excitation owner",
+    "actual external proton work",
+    "actual full physical native25",
+    "physical heating completion"
+  ],
+  "review_execution": {
+    "scientific_runs": 0,
+    "production_imports": 0,
+    "compile_or_AST_execution": 0,
+    "numerical_recomputation": 0,
+    "CAS": 0,
+    "old_prepare_fit_projection_RR_replays": 0,
+    "metadata_reads_hashes_and_text_diff_only": true,
+    "metadata_CPU_s": null
+  },
+  "AUTO_NEXT_NODE": false
+}

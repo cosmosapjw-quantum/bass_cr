@@ -697,13 +697,38 @@ def native_affine(JH, NHe, CH, CHe):
 def evaluate_family(affine, p, d, *, baseline_Y=None):
     require(p is not None and d is not None, "NO_DEFAULT_ACTUAL_HE_BRANCH")
     p, d, marginal = D(p), D(d), D(affine["marginal_He_electron_count_m3"])
-    require(p >= 0 and d >= 0 and p+2*d <= marginal, "HE_SELECTED_MARGINAL_DOMAIN_REFUSED")
+    p_exact, d_exact, marginal_exact = map(Fraction, (p, d, marginal))
+    require(p_exact >= 0 and d_exact >= 0 and p_exact+2*d_exact <= marginal_exact,
+            "HE_SELECTED_MARGINAL_DOMAIN_REFUSED")
     values = [D(a)+p*D(b)+d*D(c) for a, b, c in zip(affine["intercept_decimal"],
               affine["coefficient_p_decimal"], affine["coefficient_d_decimal"])]
     if baseline_Y is not None:
         require(len(baseline_Y) == 21 and all(D(base)+delta >= 0 for base, delta in zip(baseline_Y, values)),
                 "NEGATIVE_TWO_PART_RECIPIENT_SPECIES_REFUSED")
     return values
+
+
+def exact_terminating_decimal(value):
+    """Represent a finite rational exactly without the active Decimal context.
+
+    Used only for He fixture boundaries/remainders. This does not change the
+    80-digit fit, projection, or ordinary native arithmetic precision.
+    """
+    require(isinstance(value, Fraction), "EXACT_FRACTION_REQUIRED")
+    numerator, denominator = value.numerator, value.denominator
+    twos = fives = 0
+    while denominator % 2 == 0:
+        denominator //= 2
+        twos += 1
+    while denominator % 5 == 0:
+        denominator //= 5
+        fives += 1
+    require(denominator == 1, "NONTERMINATING_DECIMAL_REFUSED")
+    places = max(twos, fives)
+    coefficient = abs(numerator) * 2**(places-twos) * 5**(places-fives)
+    digits = tuple(int(digit) for digit in str(coefficient))
+    # Decimal(tuple) is exact; no division, unary plus, normalize, or quantize.
+    return Decimal((int(numerator < 0), digits, -places))
 
 
 def refuse_unclosed_activation(affine, *, partner_response=None, exclusive_branch=None):
@@ -1011,16 +1036,16 @@ def consume_selected_parent_event_window(retained, prepared, row, index, *, bind
     for label, fraction in (("single_selected_fixture", Fraction(0)),
                             ("mixed_single_double_closed_fixture", Fraction(1, 4)),
                             ("all_selected_pairs_fixture", Fraction(1, 2))):
-        d = NHe*D(fraction)
+        d = exact_terminating_decimal(Fraction(NHe)*fraction)
         base_y = [D(value) for value in baseline["Y_decimal"]]
         if previous_prefix_packet is not None:
             prior_affine = previous_prefix_packet["native_affine_Y"]
-            prior_d = D(prior_affine["marginal_He_electron_count_m3"])*D(fraction)
+            prior_d = exact_terminating_decimal(Fraction(D(prior_affine["marginal_He_electron_count_m3"]))*fraction)
             prior_delta = evaluate_family(prior_affine, 0, prior_d, baseline_Y=base_y)
             base_y = [value+delta for value, delta in zip(base_y, prior_delta)]
         delta = evaluate_family(affine, 0, d, baseline_Y=base_y)
         closed_family.append(to_json({"label": label, "conditional": True,
-            "p_m3": "0", "d_m3": d, "s_m3": NHe-2*d,
+            "p_m3": "0", "d_m3": d, "s_m3": exact_terminating_decimal(Fraction(NHe)-2*Fraction(d)),
             "d_fraction_of_selected_He": str(fraction), "delta_Y_decimal": delta,
             "baseline_Y_decimal": base_y,
             "rounded_endpoint_Y_diagnostic": [float(value+increment) for value, increment in zip(base_y, delta)],
@@ -1093,17 +1118,125 @@ def consume_selected_parent_event_window(retained, prepared, row, index, *, bind
         "physical_heating_complete": False, "absolute_worldtube_totals": None})
 
 
+def validate_preparation_reuse(directory, preparation, preparation_raw, current_code_sha):
+    """Accept one exact saved preparation only under a pinned root admission.
+
+    Legacy same-producer use does not enter this path. A changed consumer is
+    not permission to repeat or silently trust the preparation calculation.
+    """
+    old_code_sha = "69e7068573401db41f8c37797b47e455b684979b4094424d2156c05a126bcc81"
+    old_preparation_sha = "da5c18c810f47d501648faf77c398f4f0f91c9da9066c7f38c196e989d2eb39f"
+    old_arrays_sha = "1c974c306b50f3deb86df712844f753b4402fb25e5dbc41c9a1de0254bf3ff47"
+
+    def local_file(relative):
+        require(isinstance(relative, str), "REUSE_UNIT_LOCAL_PATH_REQUIRED")
+        part = Path(relative)
+        require(not part.is_absolute() and ".." not in part.parts and str(part) == relative,
+                "REUSE_UNIT_LOCAL_PATH_REQUIRED")
+        path = UNIT / part
+        require(path.is_file() and not path.is_symlink() and path.resolve().is_relative_to(UNIT),
+                "REUSE_REGULAR_UNIT_LOCAL_FILE_REQUIRED")
+        return path
+
+    def read_pin(pin, expected_path=None):
+        require(isinstance(pin, dict) and set(pin) == {"path", "bytes", "sha256"}, "REUSE_EXACT_FILE_PIN_REQUIRED")
+        if expected_path is not None:
+            require(pin["path"] == expected_path, "REUSE_PIN_PATH_MISMATCH")
+        raw = local_file(pin["path"]).read_bytes()
+        require(type(pin["bytes"]) is int and len(raw) == pin["bytes"]
+                and hashlib.sha256(raw).hexdigest() == pin["sha256"], "REUSE_FILE_BYTES_OR_SHA_MISMATCH")
+        return raw
+
+    budget_raw = (UNIT / "EXECUTION_BUDGET.json").read_bytes()
+    budget = json.loads(budget_raw)
+    require(budget.get("unit") == UNIT_ID and budget.get("status") == "FROZEN_C4_ADMITTED",
+            "PREPARATION_REUSE_REQUIRES_ACTIVE_CURRENT_BUDGET")
+    admission_path = local_file(budget.get("preparation_reuse_admission"))
+    admission_raw = admission_path.read_bytes()
+    require(hashlib.sha256(admission_raw).hexdigest() == budget.get("preparation_reuse_admission_sha256"),
+            "PREPARATION_REUSE_ADMISSION_NOT_BUDGET_PINNED")
+    admission = json.loads(admission_raw)
+    require(admission.get("schema") == "CR_PARENT_EVENT_PREPARATION_REUSE_ADMISSION_V1"
+            and admission.get("unit") == UNIT_ID and admission.get("template_only") is False
+            and admission.get("decision") == "ADMIT_EXACT_SAVED_PREPARATION_AFTER_DOMAIN_ONLY_REPAIR"
+            and admission.get("root_reviewed") is True,
+            "EXPLICIT_ROOT_PREPARATION_REUSE_ADMISSION_REQUIRED")
+    require(admission.get("change_scope") == "EXACT_FINITE_DECIMAL_HE_BOUNDARY_AND_PREPARATION_REUSE_ONLY"
+            and admission.get("fit_projection_unchanged") is True
+            and admission.get("tolerances_unchanged") is True
+            and admission.get("preparation_reexecuted") is False
+            and admission.get("old_science_replay") == 0, "REUSE_SCOPE_OR_REPLAY_NOT_ADMITTED")
+    require(admission.get("contract_sha256") == CONTRACT_SHA
+            and admission.get("input_manifest_sha256") == MANIFEST_SHA
+            and admission.get("source_input_file_count") == 17
+            and hashlib.sha256((UNIT / "CONTRACT.json").read_bytes()).hexdigest() == CONTRACT_SHA
+            and hashlib.sha256((UNIT / "inputs/INPUT_MANIFEST.json").read_bytes()).hexdigest() == MANIFEST_SHA,
+            "REUSE_FROZEN_CONTRACT_OR_INPUT_CHANGED")
+    out = admitted_output(os.environ.get("CR_BOUNDED_OUTDIR", ""))
+    require(admission.get("allowed_run_ids") == ["controls_v2", "primary_v2"]
+            and out.name in admission["allowed_run_ids"], "REUSE_RUN_ID_NOT_EXPLICITLY_ADMITTED")
+    expected_directory = str(directory.relative_to(UNIT))
+    require(expected_directory == "runs/prepare_v1", "REUSE_ONLY_EXACT_PREPARE_V1")
+    old_raw = read_pin(admission["old_producer"], "intake/primary_v1_code/parent_event.py")
+    new_raw = read_pin(admission["new_consumer"], "implementation/parent_event.py")
+    prepared_raw = read_pin(admission["preparation"], expected_directory + "/PREPARATION.json")
+    arrays_raw = read_pin(admission["arrays"], expected_directory + "/ATTRIBUTION_ARRAYS.npz")
+    prep_receipt_raw = read_pin(admission["preparation_receipt"], expected_directory + "/RECEIPT.json")
+    require(hashlib.sha256(old_raw).hexdigest() == preparation.get("producer_code_sha256") == old_code_sha
+            and hashlib.sha256(new_raw).hexdigest() == current_code_sha
+            and prepared_raw == preparation_raw and hashlib.sha256(prepared_raw).hexdigest() == old_preparation_sha
+            and hashlib.sha256(arrays_raw).hexdigest() == old_arrays_sha,
+            "REUSE_EXACT_OLD_AND_NEW_IDENTITIES_REQUIRED")
+    prep_receipt = json.loads(prep_receipt_raw)
+    require(prep_receipt.get("unit") == UNIT_ID and prep_receipt.get("status") == "completed"
+            and prep_receipt.get("worker_exit_code") == 0 and prep_receipt.get("worker_started") is True
+            and prep_receipt.get("terminal_debit") is True and prep_receipt.get("cpu_accounting_complete") is True,
+            "REUSE_PREPARATION_MUST_HAVE_COMPLETED_ACTUAL_RECEIPT")
+    code_raw = read_pin(admission["code_manifest"])
+    require(admission["code_manifest"]["path"] == budget.get("code_manifest")
+            and hashlib.sha256(code_raw).hexdigest() == budget.get("code_manifest_sha256"),
+            "REUSE_CODE_MANIFEST_NOT_ACTIVE_BUDGET_PIN")
+    code_manifest = json.loads(code_raw)
+    require(code_manifest.get("unit") == UNIT_ID and code_manifest.get("status") == "FROZEN"
+            and code_manifest.get("template_only") is False, "REUSE_FROZEN_CODE_MANIFEST_REQUIRED")
+    new_entries = [r for r in code_manifest["files"] if r["path"] == "implementation/parent_event.py"]
+    require(new_entries == [admission["new_consumer"]], "REUSE_NEW_CONSUMER_NOT_FROZEN_CODE_ENTRY")
+    executed = json.loads((out / "EXECUTED_SOURCE_MANIFEST.json").read_bytes())
+    entries = [r for r in executed if r["path"] == "implementation/parent_event.py"]
+    require(len(entries) == 1 and entries[0].get("snapshot") == "implementation_parent_event.py"
+            and entries[0].get("bytes") == len(new_raw) and entries[0].get("sha256") == current_code_sha
+            and (out / "EXECUTED_SOURCE/implementation_parent_event.py").read_bytes() == new_raw,
+            "REUSE_EXECUTED_CONSUMER_SNAPSHOT_MISMATCH")
+    review_raw = read_pin(admission["independent_review"])
+    review = json.loads(review_raw)
+    require(review.get("schema") == "CR_PARENT_EVENT_EXACT_BOUNDARY_REPAIR_REVIEW_V1"
+            and review.get("unit") == UNIT_ID and review.get("verdict") == "PASS_SCOPED_EXACT_BOUNDARY_REPAIR"
+            and review.get("blocking_findings") == []
+            and review.get("old_producer_sha256") == old_code_sha
+            and review.get("new_consumer_sha256") == current_code_sha
+            and review.get("preparation_fit_projection_unchanged") is True
+            and review.get("tolerances_unchanged") is True, "ACTUAL_INDEPENDENT_REUSE_REVIEW_REQUIRED")
+    return {"admission": file_identity(admission_path, str(admission_path.relative_to(UNIT))),
+            "active_budget_sha256": hashlib.sha256(budget_raw).hexdigest(),
+            "code_manifest": admission["code_manifest"], "independent_review": admission["independent_review"],
+            "old_producer_sha256": old_code_sha, "current_consumer_sha256": current_code_sha,
+            "preparation_reexecuted": False, "fit_projection_unchanged": True}
+
+
 def load_preparation(directory):
     directory = Path(directory).resolve()
     require(directory.parent == UNIT / "runs" and directory.is_dir(), "OWNED_PREPARATION_DIRECTORY_REQUIRED")
     preparation_path = directory / "PREPARATION.json"
-    preparation = json.loads(preparation_path.read_bytes())
+    preparation_raw = preparation_path.read_bytes()
+    preparation = json.loads(preparation_raw)
     require(preparation.get("unit") == UNIT_ID
             and preparation.get("status") == "PASS_SCOPED_MODEL_IDENTIFICATION"
             and all(row["pass"] is True for row in preparation["checks"]),
             "ACTUAL_ACCEPTED_PREPARATION_REQUIRED")
-    require(preparation.get("producer_code_sha256") == hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-            "PREPARATION_PRODUCER_CODE_CHANGED_REQUIRES_EXPLICIT_REVIEW")
+    current_code_sha = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+    reuse = None
+    if preparation.get("producer_code_sha256") != current_code_sha:
+        reuse = validate_preparation_reuse(directory, preparation, preparation_raw, current_code_sha)
     require(preparation["input_identity"]["input_manifest_sha256"] == MANIFEST_SHA,
             "PREPARATION_SOURCE_SCOPE_CHANGED")
     receipt = json.loads((directory / "RECEIPT.json").read_bytes())
@@ -1115,7 +1248,10 @@ def load_preparation(directory):
     raw = (directory / "ATTRIBUTION_ARRAYS.npz").read_bytes()
     require(len(raw) == descriptor["bytes"] and hashlib.sha256(raw).hexdigest() == descriptor["sha256"],
             "PREPARATION_ATTRIBUTION_ARRAY_BYTES_CHANGED")
-    return preparation, raw, file_identity(preparation_path, str(preparation_path.relative_to(UNIT)))
+    identity = file_identity(preparation_path, str(preparation_path.relative_to(UNIT)))
+    if reuse is not None:
+        identity["explicit_consumer_reuse_admission"] = reuse
+    return preparation, raw, identity
 
 
 @high_precision

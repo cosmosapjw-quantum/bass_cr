@@ -225,6 +225,33 @@ def build_controls(p, prepared):
         family = p.native_affine(6, 4, 1, .5)
         for v in ((-1, 0), (0, -1), (3, 1), (0, 3)):
             rejects(lambda v=v: p.evaluate_family(family, *v), "HE_SELECTED_MARGINAL_DOMAIN_REFUSED")
+        # A strictly positive excess must not disappear in an 80-digit sum.
+        rejects(lambda: p.evaluate_family(family, Decimal("1e-100"), Decimal(2)),
+                "HE_SELECTED_MARGINAL_DOMAIN_REFUSED")
+
+    @case("exact_He_half_quarter_boundary_and_prior_extent")
+    def exact_He_boundary():
+        coefficient = p.D(prepared["projection_validation"]["target_totals"]["He"]["number_coefficient_m3_s2"])
+        previous = Decimal(0)
+        for index, endpoint in enumerate(p.TIMES):
+            prefix_marginal = p.finite_source_factor(0, endpoint)*coefficient
+            beginning = 0 if index == 0 else p.TIMES[index-1]
+            bin_marginal = p.finite_source_factor(beginning, endpoint)*coefficient
+            # Real saved-attribution extents, plus the prior-prefix boundary
+            # used by bin fixtures; no coefficient fit/projection is repeated.
+            for marginal in (prefix_marginal, bin_marginal, previous):
+                family = p.native_affine(0, marginal, 0, 0)
+                for fraction in (Fraction(1, 4), Fraction(1, 2)):
+                    expected_d = Fraction(marginal)*fraction
+                    d = p.exact_terminating_decimal(expected_d)
+                    s = p.exact_terminating_decimal(Fraction(marginal)-2*Fraction(d))
+                    ensure(Fraction(d) == expected_d)
+                    ensure(Fraction(s)+2*Fraction(d) == Fraction(marginal) and s >= 0)
+                    if fraction == Fraction(1, 2):
+                        ensure(s == 0)
+                    p.evaluate_family(family, 0, d)
+            previous = prefix_marginal
+        rejects(lambda: p.exact_terminating_decimal(Fraction(1, 3)), "NONTERMINATING_DECIMAL_REFUSED")
 
     @case("mixed_partner_He_baryon_and_charge_ledger")
     def He_partner():

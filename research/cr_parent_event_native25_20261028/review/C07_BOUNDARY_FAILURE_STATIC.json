@@ -1,0 +1,208 @@
+{
+  "schema": "CR_PARENT_PRIMARY_V1_FAILURE_STATIC_REVIEW_V1",
+  "unit_id": "CR_PHYS02_PARENT_EVENT_NATIVE25_V1",
+  "reviewer": "/root/source_qualification",
+  "reviewed_utc": "2026-10-27T17:15:13.164298+00:00",
+  "verdict": "TARGETED_EXACT_REPRESENTATION_REPAIR_DESIGN_SUPPORTED_NO_REPLAY",
+  "scope": "Actual primary_v1 trace/receipts and the affected closed-He fixture/domain/preparation-reuse source paths only; no code execution or numerical reproduction.",
+  "independence": {
+    "production_or_numeric_reference_authored_by_reviewer": false,
+    "repair_code_authored_by_reviewer": false,
+    "earlier_metadata_admission_and_release_helper_patch_author_role": true
+  },
+  "reviewed_files": [
+    {
+      "path": "runs/primary_v1/stderr.txt",
+      "bytes": 2239,
+      "sha256": "eeeeede3fa4271e9649776d3ad74fad8da79ccfd8fa4b5d2d326cd666e8d6e3d"
+    },
+    {
+      "path": "runs/primary_v1/FAILED.json",
+      "bytes": 500,
+      "sha256": "2cb70ad610e36eae1602e9cd6a0d1452ec52dbcd7a4f6186adcb1f3cfcebda2f"
+    },
+    {
+      "path": "runs/primary_v1/RECEIPT.json",
+      "bytes": 12080,
+      "sha256": "46d92e51fc3c9d4efa338ed63cd2e4ae7758aeb74af6e152207f101e37d5f988"
+    },
+    {
+      "path": "runs/primary_v1/EXECUTED_SOURCE_MANIFEST.json",
+      "bytes": 1036,
+      "sha256": "c31a226c557b53658c084dc260e7a22e17a0b669d78c36258d2565364f355e0a"
+    },
+    {
+      "path": "runs/primary_v1/EXECUTED_SOURCE/implementation_parent_event.py",
+      "bytes": 71314,
+      "sha256": "69e7068573401db41f8c37797b47e455b684979b4094424d2156c05a126bcc81"
+    },
+    {
+      "path": "runs/prepare_v1/PREPARATION.json",
+      "bytes": 28835,
+      "sha256": "da5c18c810f47d501648faf77c398f4f0f91c9da9066c7f38c196e989d2eb39f"
+    },
+    {
+      "path": "runs/prepare_v1/ATTRIBUTION_ARRAYS.npz",
+      "bytes": 233050,
+      "sha256": "1c974c306b50f3deb86df712844f753b4402fb25e5dbc41c9a1de0254bf3ff47"
+    },
+    {
+      "path": "runs/prepare_v1/RECEIPT.json",
+      "bytes": 12006,
+      "sha256": "8131556c011fa8e9d9696b88d62dd16974da2e5906a753bbf2ff9e4406b846e6"
+    },
+    {
+      "path": "runs/prepare_v1/EXECUTED_SOURCE_MANIFEST.json",
+      "bytes": 1036,
+      "sha256": "c31a226c557b53658c084dc260e7a22e17a0b669d78c36258d2565364f355e0a"
+    },
+    {
+      "path": "runs/prepare_v1/EXECUTED_SOURCE/implementation_parent_event.py",
+      "bytes": 71314,
+      "sha256": "69e7068573401db41f8c37797b47e455b684979b4094424d2156c05a126bcc81"
+    },
+    {
+      "path": "runs/prepare_v1/EXECUTED_SOURCE/implementation_controls.py",
+      "bytes": 22854,
+      "sha256": "6be8624af061a5711063c471e3ea6317ff2dd5e51a805f4358b71d56ccd679dc"
+    },
+    {
+      "path": "inputs/INPUT_MANIFEST.json",
+      "bytes": 4247,
+      "sha256": "2273f08ac1716d233097d17c73818d39a9337da34712290a4b4171430d24f9b3"
+    },
+    {
+      "path": "CONTRACT.json",
+      "bytes": 10683,
+      "sha256": "01cc2d2835e3ad61c49cd0b68b8c413ebd7e0b8fb5228877804159c4e3f71162"
+    },
+    {
+      "path": "evidence/EXECUTION_LEDGER.json",
+      "bytes": 42672,
+      "sha256": "296e540b473931f632de0bea5660028c316a6aacd04fe0bc1ed120900d6eb472"
+    }
+  ],
+  "actual_failure": {
+    "run_id": "primary_v1",
+    "reason": "HE_SELECTED_MARGINAL_DOMAIN_REFUSED",
+    "trace_path": [
+      "run_primary prefixes",
+      "consume_selected_parent_event_window closed_family loop",
+      "evaluate_family",
+      "HE_SELECTED_MARGINAL_DOMAIN_REFUSED"
+    ],
+    "observed_status": "failed",
+    "worker_exit_code": 1,
+    "worker_CPU_s": 0.154997,
+    "coordinator_CPU_s": 0.142928,
+    "tail_CPU_s": 0.05,
+    "charged_attempt_CPU_s": 0.347925,
+    "unit_charged_as_observed": 3.032469,
+    "cap_s": 40.0,
+    "all_runtime_attempts_pass": false,
+    "failed_operands_and_label_stored": false
+  },
+  "cause_assessment": {
+    "proven_from_trace": "The exact failing guard is p>=0 and d>=0 and p+2*d<=marginal inside evaluate_family, reached from prefix closed-family fixture construction.",
+    "static_mechanism": "NHe*D(Fraction(1,2)) is a context-rounded Decimal product at PRECISION=80. The subsequent p+2*d is context-rounded again. An exact half of a finite80digit Decimal may need81significant digits, and round-to-nearest can place d above the exact boundary.",
+    "logical_counterexample_no_computation_executed": {
+      "context": "80 significant digits, round-half-even",
+      "N": "7 + 3*10^(-79)",
+      "exact_N_over_2": "3.5 + 1.5*10^(-79)",
+      "rounded_d": "3.5 + 2*10^(-79)",
+      "rounded_2d": "7 + 4*10^(-79) > N"
+    },
+    "actual_specific_prefix_or_rounding_direction_proven": false,
+    "no_unlogged_operands_invented": true,
+    "why_domain_only_fraction_patch_insufficient": "If d was already rounded above N/2, exact Fraction comparison correctly still rejects it. Exact fixture creation and exact predicate are both necessary.",
+    "unaffected_accepted_science": "Three-coefficient model identification, original Q8/grid projection and retained source/RR inputs have no causal dependency on the closed-fixture/domain code."
+  },
+  "bounded_repair_design": {
+    "production_author_only": true,
+    "dyadic_fixtures": "Construct d and prior_d for fractions0,1/4,1/2 by exact integer coefficient/exponent Decimal tuple arithmetic or an exact terminating-rational-to-Decimal conversion. No context-rounded multiplication/division; D(Fraction) is not an exact converter here.",
+    "domain_predicate": "After validating finite represented Decimal p,d,NHe, lift them individually with Fraction(Decimal) and compare p>=0,d>=0,p+2*d<=NHe exactly. This is exact admission of represented finite values, not a tolerance increase.",
+    "serialized_s": "Serialize s=NHe-p-2*d from the same exact rational remainder as an exact finite Decimal for these closed fixtures; do not independently round the displayed relation or clip negative residue.",
+    "prior_prefix": "Apply the same exact dyadic construction to prior_d; preserve current-bin starting inventory from the actual prior prefix.",
+    "native_Y_evaluation": "Existing80digit affine numerical evaluation/unchanged scientific tolerances may remain. Exact domain bookkeeping does not certify all downstream arithmetic as exact.",
+    "unchanged": [
+      "PRECISION=80",
+      "All frozen scientific tolerances",
+      "Source canonical values and all preparation/NPZ bytes",
+      "He(s,p,d) necessary-family meaning",
+      "actual exclusive branch/partner/excitation/work/fullphysical point null",
+      "Existing source-time/volume/target factors",
+      "Retained photon separate port"
+    ]
+  },
+  "reviewed_reuse_design": {
+    "must_not_overwrite_old_producer_pin": true,
+    "old_producer_sha256": "69e7068573401db41f8c37797b47e455b684979b4094424d2156c05a126bcc81",
+    "old_producer_snapshot": {
+      "path": "runs/prepare_v1/EXECUTED_SOURCE/implementation_parent_event.py",
+      "bytes": 71314,
+      "sha256": "69e7068573401db41f8c37797b47e455b684979b4094424d2156c05a126bcc81"
+    },
+    "preparation": {
+      "path": "runs/prepare_v1/PREPARATION.json",
+      "bytes": 28835,
+      "sha256": "da5c18c810f47d501648faf77c398f4f0f91c9da9066c7f38c196e989d2eb39f"
+    },
+    "arrays": {
+      "path": "runs/prepare_v1/ATTRIBUTION_ARRAYS.npz",
+      "bytes": 233050,
+      "sha256": "1c974c306b50f3deb86df712844f753b4402fb25e5dbc41c9a1de0254bf3ff47"
+    },
+    "receipt": {
+      "path": "runs/prepare_v1/RECEIPT.json",
+      "bytes": 12006,
+      "sha256": "8131556c011fa8e9d9696b88d62dd16974da2e5906a753bbf2ff9e4406b846e6"
+    },
+    "manifest": {
+      "path": "runs/prepare_v1/EXECUTED_SOURCE_MANIFEST.json",
+      "bytes": 1036,
+      "sha256": "c31a226c557b53658c084dc260e7a22e17a0b669d78c36258d2565364f355e0a"
+    },
+    "input_manifest_sha256": "2273f08ac1716d233097d17c73818d39a9337da34712290a4b4171430d24f9b3",
+    "input_identity_all17_pins_preserved": true,
+    "actual_preparation_status": "PASS_SCOPED_MODEL_IDENTIFICATION",
+    "actual_preparation_runtime_status": "completed",
+    "actual_preparation_worker_exit_code": 0,
+    "required_new_explicit_manifest": [
+      "Exact current unit and original prepare_v1 directory",
+      "Actual immutable preparation/NPZ/receipt/executed-manifest/old-producer bytes+SHA",
+      "Frozen input manifest and full input identity",
+      "Exact repaired consumer source SHA plus independently reviewed diff pin",
+      "Statement that changes are only fixture/domain/reuse admission and leave source-fit/projection-producing code unchanged",
+      "Explicit accepted root/reviewer reuse verdict and no new prepare execution"
+    ],
+    "load_gate": "Keep same-producer default. Only the explicitly pinned reviewed-reuse route may accept the old producer against the exact new consumer; fail closed for any wrong source/data/review/current-code pin. Do not delete producer equality or relabel the old preparation with the new source hash.",
+    "old_fit_projection_reexecution": 0
+  },
+  "minimal_affected_validation_for_root_future_admission": [
+    "A long finite Decimal closed half-boundary fixture and quarter fixture preserve exact Fraction(s+p+2d)=Fraction(NHe); evaluate_family accepts legitimate boundary.",
+    "A representable strictly positive excess beyond NHe remains refused even when smaller than an80digit rounded sum would resolve; negative p/d controls remain strict.",
+    "Prior-prefix dyadic construction follows the same exact rule so bin baseline composition does not reintroduce the failure.",
+    "Accepted exact preparation-reuse manifest and a changed producer/preparation/NPZ/review pin are distinguished; no old prepare or full control campaign replay."
+  ],
+  "admission_limits": {
+    "primary_v1_failure_erased": false,
+    "old_control_results_relabelled": false,
+    "future_primary_v2_success_claimed": false,
+    "future_control_count_or_PASS_invented": false,
+    "root_new_budget_revision_and_unique_runs_required": true,
+    "remaining_budget_transferred": false
+  },
+  "execution_this_review": {
+    "scientific_runs": 0,
+    "numerical_recomputation": 0,
+    "production_imports": 0,
+    "compile_or_AST_execution": 0,
+    "CAS": 0,
+    "Git_or_provider_mutations": 0,
+    "source_fit_or_projection_replay": 0,
+    "metadata_file_reads_and_hashes_only": true,
+    "metadata_CPU_s": null
+  },
+  "single_current_unit_only": true,
+  "AUTO_NEXT_NODE": false
+}
