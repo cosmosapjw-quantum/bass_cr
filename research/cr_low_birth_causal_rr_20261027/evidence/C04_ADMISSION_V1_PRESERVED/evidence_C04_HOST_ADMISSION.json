@@ -1,0 +1,81 @@
+{
+  "schema": "CR_LOW_BIRTH_C4_HOST_ADMISSION_V1",
+  "unit": "CR_PHYS02_LOW_BIRTH_CAUSAL_RR_V1",
+  "memory_gate": "FAIL",
+  "memory": {
+    "observed_utc": "2026-10-27T13:18:58.136111+00:00",
+    "host_MemAvailable_bytes": 8056868864,
+    "cgroup_v2_path": "/sys/fs/cgroup",
+    "cgroup_memory_max_bytes": 8589934592,
+    "cgroup_memory_current_bytes": 8355680256,
+    "cgroup_raw_headroom_bytes": 234254336,
+    "inactive_file_bytes": 623427584,
+    "file_dirty_bytes": 19431424,
+    "file_writeback_bytes": 0,
+    "conservative_clean_inactive_allowance_bytes": 603996160,
+    "cgroup_available_estimate_bytes": 838250496,
+    "host_capped_available_estimate_bytes": 838250496,
+    "required_worker_plus_reserve_bytes": 1342177280,
+    "admission_pass": false,
+    "estimate_formula": "min(host_MemAvailable, max(0, limit-current+max(0,inactive_file-file_dirty-file_writeback)))",
+    "unlimited_cgroup_rule": "host_MemAvailable only when memory.max=max",
+    "non_atomic_counter_snapshot": true,
+    "admission_estimate_not_guarantee": true,
+    "frozen_worker_memory_upper_cap_bytes": 536870912,
+    "selected_worker_memory_limit_bytes": 268435456,
+    "worker_RLIMIT_AS_bytes": 268435456
+  },
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "allowed_CPU_affinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "worker_native_threads": 1,
+  "package_versions": {
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8"
+  },
+  "code_manifest_sha256": "58c3c1eda59d6b5b1844bd2465d5dec0605b1c9897e47713dc856f419d64c3d3",
+  "admission_script_sha256": "3b1028067d33c526d0e0693173250cc47aeb4f2c500bc1f1ce5e5e3d282bd38d",
+  "source_pins_checked": {
+    "files": [
+      {
+        "path": "research/cr_proper_injection_20261027/runs/actual_v1/ACTUAL_SOURCE_RECORDS.json",
+        "bytes": 4394309,
+        "sha256": "8fca44c378844029a72253179e557dfa97f6cca8e0f9d6e677d67919ca3797cf"
+      },
+      {
+        "path": "research/cr_low_birth_causal_rr_20261027/inputs/reused/c23b/data/verner_photo.dat",
+        "bytes": 17760,
+        "sha256": "a53e73b0af4cc6b801aef67b84bd964e3ed8c9c4992f214e4a69dc7e4443f389"
+      },
+      {
+        "path": "research/cr_low_birth_causal_rr_20261027/inputs/reused/c23b/spectral_photo_source.py",
+        "bytes": 10712,
+        "sha256": "71b7e3a6b6f1c68ec15bcb19b98014bc025ef595f53df29703f11e25f36f4a8d"
+      }
+    ],
+    "selected_tag": "direct_0p1_10",
+    "source_replay": 0,
+    "new_coefficient_evaluation": true
+  },
+  "preparation_process_CPU_through_receipt_s": 0.201963,
+  "preparation_receipt_tail_reserve_s": 0.05,
+  "charged_preparation_CPU_s": 0.251963,
+  "preparation_cpu_includes_interpreter_startup": true,
+  "new_scientific_workers_before_admission": 0,
+  "old_science_replays": 0,
+  "provider_CPU_s": null,
+  "global_remaining": null,
+  "aggregate_preventive_CPU_hard_proof": false
+}
