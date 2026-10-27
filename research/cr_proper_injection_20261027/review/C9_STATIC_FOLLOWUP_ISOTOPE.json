@@ -1,0 +1,79 @@
+{
+  "schema": "CR_PROPER_INJECTION_C9_STATIC_FOLLOWUP_V1",
+  "reviewer": "/root/theory_review",
+  "observed_date": "2026-10-27",
+  "local_head": "7699d8d1c437deb19c9a501e52d390906a477ccc",
+  "local_branch": "research/cr-proper-injection-20261027",
+  "prior_report": "review/C9_STATIC.json",
+  "prior_report_preserved": true,
+  "scope": "Necessary static review of the C9S02 isotope qualification repair and corrected independent-reference schema before root-owned execution.",
+  "status": "ISOTOPE_REPAIR_STATIC_ACCEPTED_RUNTIME_PENDING",
+  "reviewed_files": [
+    {
+      "path": "implementation/ports.py",
+      "sha256": "717308252ab86bb4583377eb1a34608339e3fa79576ff397a59f1d57ff6c8a67"
+    },
+    {
+      "path": "implementation/controls.py",
+      "sha256": "bbbc89cccda00194a50a370fb45d80773f90ca94b9b1725935e2a91ff037e779"
+    },
+    {
+      "path": "implementation/consume_phys02.py",
+      "sha256": "f7626cc1dbca38b7592909b01ddd692ec1b00d8314b702f63441890f74cb5336"
+    },
+    {
+      "path": "review/independent_reference.py",
+      "sha256": "b529b27f5e816d35d9894f838412483d38c48f777294e3e8f4796e066275d0dc"
+    }
+  ],
+  "findings": [
+    {
+      "id": "C9S02_MATCHING_BUT_INCONSISTENT_ISOTOPE_MAPPING",
+      "status": "CLOSED_STATIC_PENDING_TARGETED_EXECUTION",
+      "evidence": "attach_rr_return requires source isotope mapping in APPROVED_HE4_MAPPINGS after rr_compatibility has required equal source/response mappings. It separately requires He4 target isotope, 1s final state, ground_spontaneous_only component, and SCALAR_ISOTROPIC_ENSEMBLE_ONLY angular scope. The qualified channel is He4III_to_He4II_1s. These checks precede either ownership registry mutation.",
+      "controls_source": "run_c9_qualification_delta_controls defines both-sides-He3 refusal, wrong/missing target isotope, final state, component and angular scope, and both approved He4 mapping cases. run_controls extends its rows with these delta controls.",
+      "control_count_from_static_enumeration": 11,
+      "execution_evidence": null
+    },
+    {
+      "id": "C9S04_REFERENCE_ENERGY_COORDINATES",
+      "status": "CLOSED_STATIC_NOT_RUN",
+      "corrected_reference_unchanged": true,
+      "retired_draft": "review/reference_drafts/independent_reference_v1_NOT_RUN.py",
+      "retired_draft_preserved": true,
+      "schema_review": "The reference expects the three actual producer tags direct_0p1_10, direct_10_900 and selected_total; the same six expressions construct the binary64 window boundaries. All five comparison field names match integrate_history/consume_phys02 output. The fullBED final/components paths and injected number/energy names match the original saved NUMERICAL_RESULT.json. The zero-width [T,T] row expects zero integrals with the left endpoint rate at T, which matches production logic.",
+      "arithmetic_independence": "Decimal uses original per-column B_i/E_i for number and B_i for energy, cutoffN/cutoffE once, and exact Decimal sum of the two original columns for selected_total. Production rounds per-node total weights to binary64; this is an intentionally independent arithmetic path compared under the frozen 2e-13 tolerance, not an input-history change.",
+      "new_concrete_schema_errors": [],
+      "execution_evidence": null
+    },
+    {
+      "id": "C9S03_PREWORKER_COORDINATOR_COST",
+      "status": "PENDING_RUNNER_REPAIR_REVIEW",
+      "reviewed_in_this_followup": false
+    }
+  ],
+  "identity_checks": {
+    "AGENTS_read": true,
+    "local_head_read": true,
+    "code_hashes_read": true,
+    "git_status": "UNAVAILABLE_IN_THIS_READ: git status triggered a missing promisor-object fetch; shell browser-proxy connection failed. No object was fabricated or fetched by another route.",
+    "remote_head_and_backups": "Root coordinator owns current remote/owner/backup checks; this follow-up makes no new remote or backup claim."
+  },
+  "independence": {
+    "authored_production": false,
+    "authored_reference": true,
+    "authored_theory_memo": true,
+    "production_imported": false
+  },
+  "execution": {
+    "science_workers_started_by_reviewer": 0,
+    "source_array_sums_executed_by_reviewer": 0,
+    "old_science_replays": 0,
+    "runtime_PASS_claimed": false
+  },
+  "remaining_C9": [
+    "Inspect the coordinator preworker accounting repair after the production author completes it.",
+    "Inspect root-owned bounded controls, actual-source and independent-reference outputs and resource receipts.",
+    "Preserve the original static findings and unexecuted reference draft provenance in final C9."
+  ]
+}

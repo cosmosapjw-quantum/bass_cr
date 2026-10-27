@@ -1,0 +1,71 @@
+{
+  "schema": "CR_PROPER_C9_MEMORY_SELECTION_DELTA_REVIEW_V1",
+  "reviewer": "/root/theory_review",
+  "observed_date": "2026-10-27",
+  "local_head": "7f3ad7afeacb5f4d386e54fbc6b80a98d698bc22",
+  "status": "STATIC_ACCEPTED_TIGHTER_PER_ATTEMPT_MEMORY_LIMIT",
+  "scope": "Only the delta from the previously accepted runner0aedc61a to optional per-attempt memory selection within the frozen512MiB maximum, plus direct inspection of the actual independent_v1 preworker-refusal receipts.",
+  "blocking_static_findings": 0,
+  "identities": {
+    "previous_runner_archive": "review/runner_drafts/run_bounded_0aedc61a52dd_PRE_C8_MEMORY_SELECTION.py",
+    "previous_runner_sha256": "0aedc61a52dd39d1b236c3dfdbe711e4fe8e470867e8447908ac554cb125ff75",
+    "current_runner": "implementation/run_bounded.py",
+    "current_runner_sha256": "724f816a9a90edbf8cfd9b582a0c12570aaf65cfecc80583e10f709cf1e5a56f",
+    "unchanged_budget_sha256": "536ab6322d96d7f08d6673db113168ea0d81f94cbbb7d5e16aa900201e091f15",
+    "unchanged_reference_sha256": "51fb4aed18667863b0d0128425973c2691b74228be27c62130232cdcbed36053",
+    "unchanged_host_admission_sha256": "7f01afa83213c5a9022adba54f4bb4cec2f7279acd05de343a59230c1d1e986e"
+  },
+  "static_delta_checks": [
+    "The optional --memory-limit-bytes is parsed as an integer; the selected value must be strictly positive and no larger than the frozen512MiB worker maximum.",
+    "Omission preserves the original512MiB default.",
+    "Both initial and final memory admission use the same selected worker value plus the unchanged1GiB host reserve.",
+    "The worker's actual RLIMIT_AS soft and hard limits both use the selected value.",
+    "Requested value, selected value and frozen upper cap are preserved in receipt fields; successful reservations also identify selected actualRLIMIT_AS.",
+    "The cgroup/host memory formula, operational-estimate qualification, CPU cap, integer CPU admission, affinity, thread policy, budget/host pins, immutable debits and UNKNOWN_NO_ACK gate are unchanged.",
+    "The proposed268435456-byte selection tightens the worker limit; it does not reduce the host reserve or raise any frozen limit. A fresh runtime admission still decides whether an attempt can launch."
+  ],
+  "observed_preworker_failure": {
+    "run_id": "independent_v1",
+    "attempt_id": "attempt_8421dc4557e948cb970f359d0035660e",
+    "classification": "PREWORKER_RESOURCE_ADMISSION_REFUSAL_NOT_NUMERICAL_FAILURE",
+    "debit_path": "evidence/ATTEMPT_DEBITS/attempt_8421dc4557e948cb970f359d0035660e.json",
+    "debit_sha256": "de5c91ea4986f5adada2721bbaffd4dd49679dd075e7df9f035b5e35e0a1133d",
+    "status_path": "evidence/BUDGET_STATUS/attempt_8421dc4557e948cb970f359d0035660e.json",
+    "status_sha256": "a7e80b6c09a71be70035bfa8f011dee942ec5bd39877076f2c2b5da148c2f499",
+    "worker_started": false,
+    "worker_launch_attempted": false,
+    "worker_exit_code": null,
+    "last_stage": "admission",
+    "error": "EFFECTIVE_CGROUP_MEMORY_RESERVE_ADMISSION_DENIED",
+    "available_estimate_bytes": 1380290560,
+    "required_worker_plus_reserve_bytes": 1610612736,
+    "raw_RUSAGE_CHILDREN_s": 0.0037449999999999996,
+    "coordinator_cpu_through_receipt_s": 0.05755199999999999,
+    "receipt_tail_reserve_s": 0.005,
+    "charged_cpu_s": 0.066297,
+    "raw_child_usage_interpretation": "Conservatively charged process/startup overhead despite worker_started=false; not a scientific worker execution and not reset to zero.",
+    "unit_total_after_this_failure_s": 6.81175,
+    "unit_cap_s": 20.0,
+    "unique_attempts_at_observation": 3,
+    "ledger_synchronized": true,
+    "finding_C9S03_evidence": "The actual refusal persisted as an immutable standalone debit and a synchronized budget status, and its charge is retained once in the unit ledger. This supplies runtime evidence for the originally missing preworker-cost path."
+  },
+  "continuation": {
+    "next_unique_reference_run": "independent_v2",
+    "reference_numerical_code_changed": false,
+    "planned_reference_checks": 153,
+    "planned_selected_memory_bytes": 268435456,
+    "prior_reference_worker_executions": 0,
+    "prior_refusal_and_original_C08_preflight_preserved": true,
+    "scientific_tolerances_changed": false,
+    "nb_RR_retained_photon_or_heating_gates_changed": false,
+    "final_C9_remains_pending_actual_reference_and_plot_results": true
+  },
+  "reviewer_execution": {
+    "production_authorship": false,
+    "theory_and_reference_authorship_disclosed": true,
+    "imports_compiles_or_workers_executed": 0,
+    "source_array_sums_executed": 0,
+    "old_science_replays": 0
+  }
+}

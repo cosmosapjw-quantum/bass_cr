@@ -1,0 +1,29 @@
+{
+  "attempt_id": "attempt_5e0aab81443843189bc055f378e56d5e",
+  "run_id": "independent_v2",
+  "prior_charged_cpu_s": 6.81175,
+  "cap_s": 20.0,
+  "memory_admission": {
+    "observed_utc": "2026-10-27T11:02:38.857890+00:00",
+    "host_MemAvailable_bytes": 8195809280,
+    "cgroup_v2_path": "/sys/fs/cgroup",
+    "cgroup_memory_max_bytes": 8589934592,
+    "cgroup_memory_current_bytes": 8475418624,
+    "cgroup_raw_headroom_bytes": 114515968,
+    "inactive_file_bytes": 1366859776,
+    "file_dirty_bytes": 19488768,
+    "file_writeback_bytes": 0,
+    "conservative_clean_inactive_allowance_bytes": 1347371008,
+    "cgroup_available_estimate_bytes": 1461886976,
+    "host_capped_available_estimate_bytes": 1461886976,
+    "required_worker_plus_reserve_bytes": 1342177280,
+    "admission_pass": true,
+    "estimate_formula": "min(host_MemAvailable, max(0, limit-current+max(0,inactive_file-file_dirty-file_writeback)))",
+    "unlimited_cgroup_rule": "host_MemAvailable only when memory.max=max",
+    "non_atomic_counter_snapshot": true,
+    "admission_estimate_not_guarantee": true,
+    "frozen_worker_memory_upper_cap_bytes": 536870912,
+    "selected_worker_memory_limit_bytes": 268435456,
+    "worker_RLIMIT_AS_bytes": 268435456
+  }
+}

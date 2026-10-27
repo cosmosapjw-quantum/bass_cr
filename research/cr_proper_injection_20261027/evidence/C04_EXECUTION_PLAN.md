@@ -1,0 +1,7 @@
+# C4 actual resource admission and fixed local envelope
+
+A fresh Python3.12.14 probe succeeded after the short host disconnection. NumPy and Matplotlib package locations exist without science imports. Actual allowed affinity is recorded; workers use one allowed CPU and one native thread. The admission records host/cgroup memory, the8GiB cgroup limit and a conservative operational clean-inactive-file reclaim estimate.512MiB worker address-space and≥1GiB available host reserve are unchanged. A first raw-unused-byte check refused before any worker; that observation is retained. Subsequent host/cgroup accounting passes without sysctl/cache changes. Hard resource limits and fresh per-run admission remain mandatory.
+
+Separate unit cap20CPU seconds includes Python preparation/imports, workers, coordinator, receipt tails and failures. Named worker reservations: controls_v1=3, actual_v1=10, independent_v1=3, plot_v1=2. With0.3coordinator reserve each, nominal aggregate19.2≤20. Actual debits, including create-only preworker failure records and unresolved-no-ACK gates, govern later admission. No old budget is transferred. RemoteWolfram CPU unavailable remains a separate null.
+
+Scientific execution has not started at this node. C5 must publish the finalized minimal code and its independent static repair review. C6/C8 then execute only these new bounded calculations. Each attempt stores exact executed source hashes and raw outputs. No previous quadrature, projection, source generator, RHS or transport ODE is replayed.

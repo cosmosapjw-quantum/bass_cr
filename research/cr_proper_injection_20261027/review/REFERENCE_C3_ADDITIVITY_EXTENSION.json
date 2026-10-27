@@ -1,0 +1,79 @@
+{
+  "schema": "CR_PROPER_REFERENCE_C3_EXTENSION_V1",
+  "author": "/root/theory_review",
+  "observed_date": "2026-10-27",
+  "local_head_observed_before_edit": "6ec7025141ef3d89e63b1736b6690d1146a129df",
+  "status": "PREPARED_NOT_EXECUTED",
+  "reason": "Add the source/tag, half-window and energy-unit checks already promised in C3 before the first independent_reference worker execution.",
+  "previous_reference": {
+    "sha256": "b529b27f5e816d35d9894f838412483d38c48f777294e3e8f4796e066275d0dc",
+    "archive": "review/reference_drafts/independent_reference_v2_PRE_C3_NOT_RUN.py",
+    "independent_executions": 0,
+    "earlier_energy_coordinate_repair_and_initial_draft_preserved": true
+  },
+  "new_reference": {
+    "path": "review/independent_reference.py",
+    "sha256": "51fb4aed18667863b0d0128425973c2691b74228be27c62130232cdcbed36053",
+    "production_imports_added": false,
+    "source_moment_and_finite_window_arithmetic_changed": false,
+    "uses_saved_producer_rows_for_new_checks": true
+  },
+  "check_plan": [
+    {
+      "group": "original_saved_moments",
+      "count": 6,
+      "relative_limit": "2e-12",
+      "change": "UNCHANGED"
+    },
+    {
+      "group": "independent_fields",
+      "count": 90,
+      "relative_limit": "2e-13",
+      "change": "UNCHANGED"
+    },
+    {
+      "group": "producer_half_window_additivity",
+      "count": 9,
+      "relative_limit": "2e-14",
+      "identity": "For each of three tags, integrated N, eV energy and J energy over [0,T] equal the sum over [0,T/2] and [T/2,T]."
+    },
+    {
+      "group": "producer_source_tag_additivity",
+      "count": 30,
+      "relative_limit": "2e-14",
+      "identity": "For each of six windows and all five saved numerical fields, selected_total equals direct_0p1_10 plus direct_10_900. Endpoint rates are added at the same endpoint."
+    },
+    {
+      "group": "producer_energy_units",
+      "count": 18,
+      "relative_limit": "2e-14",
+      "identity": "For each saved row, coordinate_energy_J_m3 equals coordinate_energy_eV_m3 times exact SI1.602176634e-19 J/eV."
+    }
+  ],
+  "planned_total_checks": 153,
+  "new_checks": 57,
+  "arithmetic_policy": {
+    "precision_digits": 80,
+    "producer_values": "Decimal.from_float of the actual saved binary64 values",
+    "relative_scale": "max(abs(actual),abs(expected))",
+    "expected_zero": "Require actual exactly zero",
+    "absolute_unit_floor": false,
+    "time_window_rate_additivity_claimed": false,
+    "physical_accuracy_improvement_claimed": false
+  },
+  "output_schema": {
+    "rows_and_comparison_field_names": "UNCHANGED",
+    "checks": "Existing flat check list retained, with57 identity checks appended.",
+    "check_groups": "New separate status/count/pass/relative-limit/max-error summaries for all five groups.",
+    "reference_revision_history": "Records prior b529 reference identity and no prior independent execution."
+  },
+  "budget_and_execution": {
+    "owner": "/root",
+    "reserved_worker_cpu_s": 3.0,
+    "unit_cap_changed": false,
+    "reviewer_executed_or_imported_reference": false,
+    "new_checks_run_by_reviewer": false,
+    "old_source_quadrature_projection_or_solver_replay": 0,
+    "result_claim": null
+  }
+}

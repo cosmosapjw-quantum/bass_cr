@@ -1,0 +1,9 @@
+# C8 independent numerical acceptance
+
+The first admitted independent calculation independent_v2 passes153/153 checks:6 original source moments,90 independent Decimal80 field comparisons,9 half-window identities,30 source-tag identities and18 exact-SI energy-unit identities. The denied independent_v1 attempt did not launch the reference. The original tolerances2e-12/2e-13/2e-14 remain unchanged. Check-group maxima are retained verbatim in C08_NUMERICAL_ACCEPTANCE.json.
+
+This verifies the new finite algebraic source contract against the exact stored binary64 inputs. The tiny end window uses the same represented endpoints in both paths. Exact zero is preserved. Decimal precision and algebraic consistency do not quantify or reduce the old source projection, atomic data or physical-model uncertainties. No old scientific computation is repeated.
+
+The optional saved-output plot completed both files and manifest and was visually inspected. Its aggregate measured child CPU exceeded its individual2s reservation and coordinator accounting exceeded0.3s; the runner correctly retains a failed status. The artifacts are diagnostic, with raw JSON authoritative. No optional repeat was made to obtain a PASS. Actual unit aggregate10.238419≤20 includes the failed memory preflight, plot reservation overrun, preparation/coordinator and cumulative receipt amendments. Per-process RLIMIT_CPU is not a proof of a strict aggregate descendant limit; aggregate measured receipts are the authority for this completed unit. Future broader executor use needs its own resource contract.
+
+New scientific acceptance is103/103 controls plus153/153 independent checks,18actual integrated rows. Actual RR/native25/nb/retained returns remain null and globalphysical completion/error/budget/currency remain null. C9 must independently inspect the code/raw outputs and preserve all failure classifications before scientific source sealing.
