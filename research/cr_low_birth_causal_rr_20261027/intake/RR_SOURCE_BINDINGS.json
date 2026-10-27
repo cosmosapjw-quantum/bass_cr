@@ -1,0 +1,150 @@
+{
+  "schema": "CR_NEXT_LOW_BIRTH_RR_READ_ONLY_SOURCE_BINDINGS_V1",
+  "status": "PROSPECTIVE_SCOPE_INPUT_NOT_EXECUTED",
+  "observed_date_utc": "2026-10-27",
+  "proposed_unit_id": "CR_PHYS02_LOW_BIRTH_CAUSAL_RR_V1",
+  "proposed_unit_path": "research/cr_low_birth_causal_rr_20261027",
+  "new_scientific_execution_count": 0,
+  "old_science_replay_count": 0,
+  "existing_repo_head": "8482ed83b14517b709ba6e801f6714cc333e720f",
+  "fetched_prior_rr_ref": "2776752de6952f60d8d690a128f33fec4df2c57b",
+  "provider_files": [
+    {
+      "path": "research/cr_heiii_ground_rr_20261027/inputs/reused/c23b/spectral_photo_source.py",
+      "bytes": 10712,
+      "sha256": "71b7e3a6b6f1c68ec15bcb19b98014bc025ef595f53df29703f11e25f36f4a8d",
+      "git_blob": "e7d474d5145cb264102206e0403b0aa5916c3140",
+      "actual_read": "restored/old_source/research/cr_heiii_ground_rr_20261027/inputs/reused/c23b/spectral_photo_source.py"
+    },
+    {
+      "path": "research/cr_heiii_ground_rr_20261027/inputs/reused/c23b/data/verner_photo.dat",
+      "bytes": 17760,
+      "sha256": "a53e73b0af4cc6b801aef67b84bd964e3ed8c9c4992f214e4a69dc7e4443f389",
+      "git_blob": "754b5ce11cbe662f96394430beeafe3f102f339c",
+      "actual_read": "restored/old_source/research/cr_heiii_ground_rr_20261027/inputs/reused/c23b/data/verner_photo.dat"
+    }
+  ],
+  "prior_rr_files": [
+    {
+      "path": "research/cr_n5_rr_milne_20261025/inputs/CONFIG.json",
+      "sha256": "88fdca65935c33a90e047e2286d045bdd2433793087678c98ffb499c7adee7d2",
+      "git_blob": "0c916fdad47898bdd7be770b260d50a9cfa09003",
+      "saved_as": "remote/H1_RR_CONFIG.json"
+    },
+    {
+      "path": "research/cr_n5_rr_milne_20261025/implementation/rr_engine.py",
+      "sha256": "ab8aaa7f51a499ced7f759d16e50db076de47d65e083339a18f3ee1fca2d6005",
+      "git_blob": "754d78ffa82dd2de3b1fc3ce82394b245284a7f3",
+      "saved_as": "remote/H1_RR_ENGINE.py"
+    },
+    {
+      "path": "research/cr_he4_ground_rr_20261025/inputs/CONFIG.json",
+      "sha256": "f4364e23d087f951e8b0d96ce98e27b86321fa25454161a743a8979f2962b099",
+      "git_blob": "9743f3e801dbbb8af036522436761b1186f754b3",
+      "saved_as": "remote/HEI_RR_CONFIG.json"
+    },
+    {
+      "path": "research/cr_he4_ground_rr_20261025/implementation/he4_engine.py",
+      "sha256": "4d96b4ab15bf3e2e514f2abe7e634a8bbfd1facbf30a6ae6c8725a72f7bae229",
+      "git_blob": "aaf657df01ccfee9e67c9a640b73f04a3c07a108",
+      "saved_as": "remote/HEI_RR_ENGINE.py"
+    },
+    {
+      "path": "research/cr_he4_ground_rr_20261025/review/SOURCE_REVIEW.md",
+      "sha256": "efc6e41502a2825d2ff11216f8fdb7ccdfbf5b8f0acc566e7fce2c58f9f04c8f",
+      "git_blob": "beba304c168c4928b912682e8ed873530be8e92e",
+      "saved_as": "remote/HEI_SOURCE_REVIEW.md"
+    }
+  ],
+  "fit_tuple_keys": ["I_eV", "Emax_eV", "E0_eV", "sigma0_Mb", "ya", "P", "yw", "y0", "y1"],
+  "channels": [
+    {
+      "provider_label": "HI",
+      "Z": 1,
+      "N_bound": 1,
+      "fit_decimal_literals": ["13.60", "50000", ".4298", "54750", "32.88", "2.963", "0", "0", "0"],
+      "target": "H1II",
+      "product": "H1I_1s",
+      "g_bound": 2,
+      "g_ion": 1,
+      "milne_d": 1,
+      "new_target_density_recipe_m_inverse3": ".01*n_H",
+      "native25_product_index": 1,
+      "native25_target_index": 2
+    },
+    {
+      "provider_label": "HeI",
+      "Z": 2,
+      "N_bound": 2,
+      "fit_decimal_literals": ["24.59", "50000", "13.61", "949.2", "1.469", "3.188", "2.039", ".4434", "2.136"],
+      "target": "He4II_1s",
+      "product": "He4I_1s2_singlet",
+      "g_bound": 1,
+      "g_ion": 2,
+      "milne_d": 4,
+      "new_target_density_recipe_m_inverse3": ".01*n_He",
+      "native25_product_index": 10,
+      "native25_target_index": 11,
+      "source_residual_state_resolution": "CONDITIONAL_SMOOTH_GROUND_CHANNEL_MODEL"
+    }
+  ],
+  "common_physics": {
+    "isotope_mapping": "CONDITIONAL_ELEMENTAL_H_TO_H1_HE_TO_HE4",
+    "component": "ground_spontaneous_only",
+    "angular_scope": "scalar",
+    "frame": "gas_rest",
+    "stationary_heavy_target": true,
+    "zero_recoil": true,
+    "nonrelativistic": true,
+    "all_HeII_targets_ground_1s": true,
+    "same_source_and_recipient_temperature_K": 100,
+    "PI_photon_support_upper_eV": 50000,
+    "RR_requires_strict_positive_E": true,
+    "thermal_electron_density_is_RR_target_factor": false,
+    "fit_threshold_replacement_allowed": false,
+    "physical_thermal_completion": false
+  },
+  "formulae": {
+    "PI": "x=epsilon/E0-y0; y=hypot(x,y1); sigma_PI_cm2=1e-18*sigma0*((x-1)^2+yw^2)*y^(P/2-5.5)*(1+sqrt(y/ya))^(-P)",
+    "RR": "sigma_RR_cm2(E)=sigma_PI_cm2(E+I)*(E+I)^2/[d*(me*c^2/eV_J)*E]",
+    "hazard_SI": "lambda=n_target_m_inverse3*sqrt(2*E*eV_J/me)*(1e-4*sigma_RR_cm2)",
+    "source": "Q_e(t)=t*A; 0<=t<=1e10 proper s; outside history unknown",
+    "conditional_nb": "n_H+4*n_He=8750/47 m^-3; explicit new H1/He4 inventory only",
+    "native25_species": "deltaY_product=+N_channel/nb; deltaY_target=-N_channel/nb; delta_nb=0",
+    "native25_rr_only": "delta_zeta=-(N_H+N_He)/nb; delta_w_nt=-(U_H+U_He)*eV_J/nb; delta_w_ext=0; delta_logT=0",
+    "full_source_neutral_native25_closure": null
+  },
+  "source_constants": {
+    "official_scipy_tag": "v1.17.0",
+    "tag_object": "e2f9e521194c114923a9ec47409c14ff1898334a",
+    "commit": "8c75ae75176236f233824e9a0483c26a69e6dfec",
+    "codata_edition": 2022,
+    "electron_mass_kg": "9.1093837139e-31",
+    "epsilon0_F_m_inverse": "8.8541878188e-12",
+    "electron_charge_C": "1.602176634e-19",
+    "eV_J": "1.602176634e-19",
+    "h_J_s": "6.62607015e-34",
+    "hbar_recipe": "h/(2*math.pi)",
+    "c_m_s": "299792458",
+    "codata_file_sha256": "005317bcd5e11a7cf5c51420a0027399a5c6e39149f3a124e22382dc384cd102",
+    "constants_file_sha256": "d4188ff2b4fb05d680c02a4b6e95d0ceb09509c2093e699ce288757e0e561cea",
+    "old_RR_electron_mass_kg": "9.1093837015e-31",
+    "new_coefficient_evaluation_required": true,
+    "historical_fullG_bitwise_recovery_claim": false
+  },
+  "budget_proposal": {
+    "new_unit_cpu_cap_s": 40,
+    "status": "TENTATIVE_NOT_C4_ADMITTED",
+    "includes": ["changed_preparation", "controls", "primary", "independent_reference", "plot", "all_coordinator_and_cleanup_tail"],
+    "old_budget_carry": false,
+    "measured_stiffness_or_new_runtime": null
+  },
+  "scope_limits": [
+    "Only actual saved direct_0p1_10 native birth partition; do not select current E<=10 from selected_total",
+    "No imported PR108/PR107 10000 K numerical response",
+    "No parent-ion chemistry assumption to fill full source native25 closure",
+    "No retained-photon energy transfer to w_ext or physical heating",
+    "Source fit and prior review reused within scope; no old scientific calculation replay",
+    "No scalar or numerical scientific execution performed for this intake"
+  ]
+}
