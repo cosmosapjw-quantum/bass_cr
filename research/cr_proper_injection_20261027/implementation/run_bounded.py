@@ -227,8 +227,11 @@ def load_budget(state):
     state["budget_admitted"] = True
 
 
-def memory_capacity(budget):
+def memory_capacity(budget, worker_memory_bytes=None):
     """Conservative runtime estimate; hard RLIMIT_AS remains independent."""
+    selected = budget["worker_memory_bytes"] if worker_memory_bytes is None else worker_memory_bytes
+    need(type(selected) is int and 0 < selected <= budget["worker_memory_bytes"],
+         "MEMORY_LIMIT_MUST_BE_POSITIVE_AND_WITHIN_FROZEN_UPPER_CAP")
     meminfo = dict(line.split(":", 1) for line in pathlib.Path("/proc/meminfo").read_text().splitlines())
     host_available = int(meminfo["MemAvailable"].split()[0]) * 1024
     root = pathlib.Path("/sys/fs/cgroup")
@@ -246,7 +249,7 @@ def memory_capacity(budget):
     raw_headroom = None if limit is None else limit - current
     cgroup_estimate = None if limit is None else max(0, raw_headroom + clean_inactive)
     available = host_available if limit is None else min(host_available, cgroup_estimate)
-    required = budget["worker_memory_bytes"] + budget["minimum_host_memory_reserve_bytes"]
+    required = selected + budget["minimum_host_memory_reserve_bytes"]
     return {
         "observed_utc": utc_now(), "host_MemAvailable_bytes": host_available,
         "cgroup_v2_path": str(root), "cgroup_memory_max_bytes": limit,
@@ -262,7 +265,9 @@ def memory_capacity(budget):
         "estimate_formula": "min(host_MemAvailable, max(0, limit-current+max(0,inactive_file-file_dirty-file_writeback)))",
         "unlimited_cgroup_rule": "host_MemAvailable only when memory.max=max",
         "non_atomic_counter_snapshot": True, "admission_estimate_not_guarantee": True,
-        "worker_RLIMIT_AS_bytes": budget["worker_memory_bytes"],
+        "frozen_worker_memory_upper_cap_bytes": budget["worker_memory_bytes"],
+        "selected_worker_memory_limit_bytes": selected,
+        "worker_RLIMIT_AS_bytes": selected,
     }
 
 
@@ -302,9 +307,12 @@ def execute_attempt(state, argv):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--cpu-reserve", required=True, type=float)
+    parser.add_argument("--memory-limit-bytes", type=int, default=None,
+                        help="positive per-attempt RLIMIT_AS, at most the frozen worker upper cap")
     parser.add_argument("command", nargs=argparse.REMAINDER)
     args = parser.parse_args(argv)
     state["run_id"] = args.run_id
+    state["requested_memory_limit_bytes"] = args.memory_limit_bytes
     need(RUN_ID.fullmatch(args.run_id) is not None and ".." not in args.run_id,
          "SAFE_UNIQUE_RUN_ID_REQUIRED")
     reserve = finite_nonnegative(args.cpu_reserve, "cpu_reserve")
@@ -316,6 +324,12 @@ def execute_attempt(state, argv):
     state["stage"] = "budget_read"
     load_budget(state)
     budget = state["budget"]
+    state["stage"] = "memory_limit_selection"
+    state["frozen_worker_memory_upper_cap_bytes"] = budget["worker_memory_bytes"]
+    memory_limit = budget["worker_memory_bytes"] if args.memory_limit_bytes is None else args.memory_limit_bytes
+    need(type(memory_limit) is int and 0 < memory_limit <= budget["worker_memory_bytes"],
+         "MEMORY_LIMIT_MUST_BE_POSITIVE_AND_WITHIN_FROZEN_UPPER_CAP")
+    state["selected_worker_memory_limit_bytes"] = memory_limit
     state["stage"] = "ledger_lock"
     EVIDENCE.mkdir(parents=True, exist_ok=True)
     state["lock"] = (EVIDENCE / "SCIENCE_BUDGET.lock").open("a+")
@@ -334,7 +348,7 @@ def execute_attempt(state, argv):
     allowed = os.sched_getaffinity(0)
     need(bool(allowed), "NO_ADMITTED_CPU_AFFINITY")
     slot = min(allowed)
-    memory = memory_capacity(budget)
+    memory = memory_capacity(budget, memory_limit)
     state["memory_admission"] = memory
     need(memory["admission_pass"], "EFFECTIVE_CGROUP_MEMORY_RESERVE_ADMISSION_DENIED")
     state["admission"] = {
@@ -344,7 +358,9 @@ def execute_attempt(state, argv):
         "reserved_coordinator_cpu_s": coordinator_reserve,
         "prior_charged_cpu_s": prior["charged_cpu_s"], "cap_s": HARD_CAP_S,
         "worker_affinity": [slot], "native_threads": 1,
-        "worker_RLIMIT_AS": budget["worker_memory_bytes"],
+        "frozen_worker_memory_upper_cap_bytes": budget["worker_memory_bytes"],
+        "selected_worker_memory_limit_bytes": memory_limit,
+        "worker_RLIMIT_AS": memory_limit,
         "host_available_memory_bytes": memory["host_MemAvailable_bytes"],
         "host_memory_reserve_bytes": budget["minimum_host_memory_reserve_bytes"],
         "wall_timeout_s": budget["wall_per_attempt_s"], "created_utc": utc_now(),
@@ -376,7 +392,7 @@ def execute_attempt(state, argv):
          + max(coordinator_reserve, cpu(resource.RUSAGE_SELF)
                + budget["coordinator_receipt_tail_reserve_s"]) <= HARD_CAP_S,
          "FINAL_UNIT_CPU_ADMISSION_DENIED")
-    final_memory = memory_capacity(budget)
+    final_memory = memory_capacity(budget, memory_limit)
     state["final_memory_admission"] = final_memory
     need(final_memory["admission_pass"], "FINAL_CGROUP_MEMORY_RESERVE_ADMISSION_DENIED")
     atomic_json(out / "FINAL_ADMISSION.json", {
@@ -392,7 +408,7 @@ def execute_attempt(state, argv):
 
     def limits():
         os.sched_setaffinity(0, {slot})
-        resource.setrlimit(resource.RLIMIT_AS, (budget["worker_memory_bytes"],) * 2)
+        resource.setrlimit(resource.RLIMIT_AS, (memory_limit,) * 2)
         resource.setrlimit(resource.RLIMIT_CPU, (worker_limit, worker_limit))
 
     state["stage"] = "worker_launch"
@@ -434,6 +450,9 @@ def make_receipt(state, tail):
         "host_admission_path": state.get("host_admission_path"),
         "host_admission_sha256": state.get("host_admission_sha256"),
         "host_admission_expected_sha256": state.get("host_admission_expected_sha256"),
+        "requested_memory_limit_bytes": state.get("requested_memory_limit_bytes"),
+        "frozen_worker_memory_upper_cap_bytes": state.get("frozen_worker_memory_upper_cap_bytes"),
+        "selected_worker_memory_limit_bytes": state.get("selected_worker_memory_limit_bytes"),
         "memory_admission": state.get("memory_admission"),
         "final_memory_admission": state.get("final_memory_admission"),
         "receipt_kind": "worker_attempt" if state["worker_started"] else "preworker_debit",

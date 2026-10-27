@@ -12,6 +12,11 @@ Canonical producer comparison JSON, if provided, has ``rows`` entries with
 ``tag`` and ``window_s`` plus the five float fields listed in COMPARE_FIELDS.
 Reference numeric outputs are decimal strings.  The comparison uses each
 quantity's own scale, never an absolute unit floor.
+
+Before its first execution, the corrected reference was extended to perform the
+C3-promised saved-producer half-window, source-tag and energy-unit identities.
+The prior unexecuted reference SHA256 is
+b529b27f5e816d35d9894f838412483d38c48f777294e3e8f4796e066275d0dc.
 """
 from __future__ import annotations
 
@@ -35,6 +40,7 @@ TAGS = ("direct_0p1_10", "direct_10_900", "selected_total")
 EV_J = Decimal("1.602176634e-19")
 INDEPENDENT_LIMIT = Decimal("2e-13")
 SAVED_MOMENT_LIMIT = Decimal("2e-12")
+ADDITIVITY_UNIT_LIMIT = Decimal("2e-14")
 COMPARE_FIELDS = (
     "number_m3",
     "coordinate_energy_eV_m3",
@@ -42,6 +48,7 @@ COMPARE_FIELDS = (
     "endpoint_number_rate_m3_s",
     "endpoint_energy_rate_J_m3_s",
 )
+INTEGRATED_FIELDS = COMPARE_FIELDS[:3]
 
 
 def need(condition: bool, code: str) -> None:
@@ -84,6 +91,17 @@ def check_value(check_id: str, actual: Decimal, expected: Decimal,
             "relative_limit": str(limit), "pass": error <= limit}
 
 
+def check_identity(check_id: str, actual: Decimal, expected: Decimal,
+                   group: str) -> dict:
+    """Compare saved finite quantities, with exact handling of a zero identity."""
+    result = check_value(check_id, actual, expected, ADDITIVITY_UNIT_LIMIT)
+    result["group"] = group
+    result["comparison_mode"] = "EXACT_ZERO" if expected == 0 else "OWN_SCALE_RELATIVE"
+    if expected == 0:
+        result["pass"] = actual == 0
+    return result
+
+
 def declared_windows() -> list[tuple[float, float]]:
     """Construct the same actual binary64 boundaries as the producer contract.
 
@@ -104,7 +122,46 @@ def window_key(tag: str, window) -> tuple[str, str, str]:
     return tag, a.hex(), b.hex()
 
 
-def compare_producer(producer_path: Path, rows: list[dict]) -> tuple[list[dict], dict]:
+def saved_producer_identities(values: dict) -> list[dict]:
+    """Use only the saved 18-row producer values already validated by identity.
+
+    Integrals add over disjoint time windows. Endpoint rates add over source
+    birth tags at the same endpoint; they are not time-integrated quantities.
+    The energy-unit check uses the exact SI eV-to-joule conversion constant.
+    """
+    checks = []
+    windows = declared_windows()
+    whole, first_half, second_half = windows[:3]
+    for tag in TAGS:
+        all_values = values[window_key(tag, whole)]
+        first_values = values[window_key(tag, first_half)]
+        second_values = values[window_key(tag, second_half)]
+        for field in INTEGRATED_FIELDS:
+            checks.append(check_identity(
+                "identity:half_window:" + tag + ":" + field,
+                all_values[field], first_values[field] + second_values[field],
+                "producer_half_window_additivity"))
+    for window in windows:
+        low = values[window_key(TAGS[0], window)]
+        high = values[window_key(TAGS[1], window)]
+        total = values[window_key(TAGS[2], window)]
+        boundary_id = ":".join(window_key(TAGS[2], window)[1:])
+        for field in COMPARE_FIELDS:
+            checks.append(check_identity(
+                "identity:source_tags:" + boundary_id + ":" + field,
+                total[field], low[field] + high[field],
+                "producer_source_tag_additivity"))
+    for key, saved in values.items():
+        checks.append(check_identity(
+            "identity:energy_unit:" + ":".join(key),
+            saved["coordinate_energy_J_m3"],
+            saved["coordinate_energy_eV_m3"] * EV_J,
+            "producer_energy_units"))
+    return checks
+
+
+def compare_producer(producer_path: Path, rows: list[dict]
+                     ) -> tuple[list[dict], dict, list[dict]]:
     raw = producer_path.read_bytes()
     producer = json.loads(raw)
     need(isinstance(producer, dict) and isinstance(producer.get("rows"), list),
@@ -112,22 +169,37 @@ def compare_producer(producer_path: Path, rows: list[dict]) -> tuple[list[dict],
     expected = {window_key(row["tag"], row["window_s"]): row for row in rows}
     seen = set()
     checks = []
+    values = {}
     for row in producer["rows"]:
         need(isinstance(row, dict), "PRODUCER_ROW_REQUIRED")
         key = window_key(row.get("tag"), row.get("window_s"))
         need(key in expected and key not in seen, "EXACT_UNIQUE_PRODUCER_ROW_REQUIRED")
         seen.add(key)
         ref = expected[key]
+        values[key] = {}
         for field in COMPARE_FIELDS:
             value = original_float(row.get(field), "producer." + field)
             actual = Decimal.from_float(value)
+            values[key][field] = actual
             wanted = Decimal(ref[field + "_decimal"])
             checks.append(check_value("producer:" + ":".join(key) + ":" + field,
                                       actual, wanted, INDEPENDENT_LIMIT))
     need(seen == set(expected), "MISSING_PRODUCER_REFERENCE_ROWS")
+    identities = saved_producer_identities(values)
     return checks, {"path": str(producer_path), "bytes": len(raw),
                     "sha256": hashlib.sha256(raw).hexdigest(),
-                    "rows": len(seen), "compared_fields_per_row": len(COMPARE_FIELDS)}
+                    "rows": len(seen), "compared_fields_per_row": len(COMPARE_FIELDS)}, identities
+
+
+def check_group_summary(checks: list[dict], limit: Decimal,
+                        *, executed: bool = True) -> dict:
+    return {"status": "NOT_RUN" if not executed else
+            ("PASS" if all(check["pass"] for check in checks) else "FAIL"),
+            "checks": len(checks), "passed": sum(check["pass"] for check in checks),
+            "relative_limit": str(limit),
+            "maximum_relative_error": str(max(
+                (Decimal(check["relative_error"]) for check in checks),
+                default=Decimal(0))) if executed else None}
 
 
 def build_reference(npz_path: Path, original_result_path: Path,
@@ -233,10 +305,23 @@ def build_reference(npz_path: Path, original_result_path: Path,
                                 binary64_decimal(saved[tag]["injected_energy_J_m3"], "saved_energy"),
                                 SAVED_MOMENT_LIMIT),
                 ])
+            saved_checks = list(checks)
             producer_pin = None
+            producer_checks, identity_checks = [], []
             if producer_path is not None:
-                producer_checks, producer_pin = compare_producer(producer_path, rows)
+                producer_checks, producer_pin, identity_checks = compare_producer(producer_path, rows)
                 checks.extend(producer_checks)
+                checks.extend(identity_checks)
+            groups = {
+                "original_saved_moments": check_group_summary(saved_checks, SAVED_MOMENT_LIMIT),
+                "independent_fields": check_group_summary(
+                    producer_checks, INDEPENDENT_LIMIT, executed=producer_path is not None),
+            }
+            for group in ("producer_half_window_additivity",
+                          "producer_source_tag_additivity", "producer_energy_units"):
+                groups[group] = check_group_summary(
+                    [check for check in identity_checks if check["group"] == group],
+                    ADDITIVITY_UNIT_LIMIT, executed=producer_path is not None)
             result = {
                 "schema": "CR_PROPER_INJECTION_DECIMAL80_REFERENCE_V1",
                 "reviewer": "/root/theory_review",
@@ -257,11 +342,20 @@ def build_reference(npz_path: Path, original_result_path: Path,
                 "moments": {tag: {key: str(value) for key, value in mom.items()}
                             for tag, mom in moments.items()},
                 "rows": rows, "checks": checks,
+                "check_groups": groups,
                 "check_count": len(checks),
                 "pass_count": sum(check["pass"] for check in checks),
                 "producer_comparison": "NOT_RUN" if producer_path is None else "COMPLETED",
                 "independent_relative_limit": str(INDEPENDENT_LIMIT),
                 "saved_source_relative_limit": str(SAVED_MOMENT_LIMIT),
+                "additivity_energy_unit_relative_limit": str(ADDITIVITY_UNIT_LIMIT),
+                "producer_identity_zero_rule": "expected zero requires actual exactly zero; no absolute unit floor",
+                "reference_revision_history": {
+                    "prior_corrected_unexecuted_sha256": "b529b27f5e816d35d9894f838412483d38c48f777294e3e8f4796e066275d0dc",
+                    "change": "C3-promised saved-row additivity and energy-unit checks added before first independent execution",
+                    "prior_independent_executions": 0,
+                    "production_imports_added": False,
+                },
                 "old_source_solver_replay": 0,
                 "source_quadrature_replay": 0,
                 "source_projection_replay": 0,
