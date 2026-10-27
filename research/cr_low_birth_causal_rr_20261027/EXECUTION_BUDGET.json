@@ -10,8 +10,8 @@
   "worker_memory_bytes": 536870912,
   "minimum_host_memory_reserve_bytes": 1073741824,
   "wall_per_attempt_s": 60,
-  "coordinator_reserve_per_attempt_s": 0.8,
-  "coordinator_receipt_tail_reserve_s": 0.05,
+  "coordinator_reserve_per_attempt_s": 10,
+  "coordinator_receipt_tail_reserve_s": 5,
   "aggregate_worker_monitor_poll_s": 0.02,
   "aggregate_worker_stop_margin_s": 0.1,
   "per_process_CPU_limit_is_aggregate_hard_proof": false,
@@ -50,11 +50,17 @@
       "worker_cpu_reservation_s": 2,
       "selected_memory_limit_bytes": 268435456,
       "scope": "only direct_cutoff_has_no_active_RR; 45 accepted prior controls reused"
+    },
+    {
+      "run_id": "plot_v2",
+      "worker_cpu_reservation_s": 6,
+      "selected_memory_limit_bytes": 268435456,
+      "scope": "complete missing saved-result PNG/SVG only; no source/coefficient/solver execution"
     }
   ],
-  "nominal_worker_sum_s": 28.0,
-  "nominal_coordinator_reservations_s": 3.2,
-  "unallocated_failure_and_repair_reserve_s": 4.616028000000003,
+  "nominal_worker_sum_s": 6,
+  "nominal_coordinator_reservations_s": 10,
+  "unallocated_failure_and_repair_reserve_s": 7.025959,
   "old_plot_failure_preserved": {
     "unit": "CR_PROPER_INJECTION_RETURN_V1",
     "run_id": "plot_v1",
@@ -82,8 +88,9 @@
     "nominal_coordinator_reservations_s": 4,
     "unallocated_failure_and_repair_reserve_s": 1.0634950000000032
   },
-  "nominal_accounting_basis": "remaining named attempts after immutable actual prepare_v1 and failed controls_v1 debits",
+  "nominal_accounting_basis": "only remaining plot_v2; all prior runs are immutable terminal attempts with actual charged costs",
   "already_charged_at_C6_repair_s": 4.183972,
-  "repair_context": "C06_TARGETED_EXACT_CUTOFF_ORACLE_V2",
-  "preserved_previous_budget": "evidence/C06_FIRST_CONTROL_CONTEXT_PRESERVED/EXECUTION_BUDGET.json"
+  "repair_context": "C08_MISSING_SAVED_PLOT_RECOVERY_V2",
+  "preserved_previous_budget": "evidence/C08_PLOT_V1_CONTEXT_PRESERVED/EXECUTION_BUDGET.json",
+  "already_charged_at_C8_plot_recovery_s": 16.974041
 }
