@@ -1,0 +1,274 @@
+{
+  "schema": "CR_RR_CAUSAL_ERLANG_CLOCK_FORMULA_CONTRACT_V1",
+  "unit": "CR_RR_CAUSAL_ERLANG_CLOCK_V1",
+  "status": "R5_CONSTRUCTIVE_DERIVATION_AWAITING_R6",
+  "scientific_execution_performed": false,
+  "authority": {
+    "task": "Parent authorization for constructive R5 theory only",
+    "intended_repo_path": "research/cr_rr_causal_clock_20261027",
+    "baseline_repository": "cosmosapjw-quantum/bass_cr",
+    "baseline_branch": "research/cr-heiii-ground-rr-20261027",
+    "baseline_D": "ec463db0c7e5c7fb5070796071c926caa4db6445",
+    "baseline_S": "4e72c89b714431eb4c6ae07def777bbf72a5ae4c",
+    "head_observed_utc": "2026-10-27 06:07:40 UTC",
+    "head_changed": false,
+    "AGENTS_sha256": "8d62d9758fe173263eb3820c7b00ca569193bb7f912fc3d95d145e73d4a40970",
+    "parallel_read": "survey_repos/FINAL_REF_REFRESH.json and CURRENT_FRONTIER_KO.md",
+    "parallel_refresh_utc": "2026-10-27T06:02:31Z",
+    "parallel_changed_refs": {
+      "WU": "e9276ea2ba8af2d73197a6852931fcafbf39ddf5",
+      "REC_SYNTHESIS": "f9d2e979939949a9da8c4bcd04d7d83390bd3724"
+    },
+    "parallel_scope_change": "No newly matched current-CR source history; source recovery/theory-handoff deltas; no inherited gate promotion."
+  },
+  "exact_target": {
+    "matrix": "The real matrix whose entries are the exact values represented by the saved binary64 arrays K_diag, K_lower, K_upper in the prior HeIII primary NPZ.",
+    "excluded_matrix": "Unrounded K_HeI_diag + exact lambda_HeII diagonal sum; regenerated continuum or physical operator.",
+    "arrays": [
+      "K_diag",
+      "K_lower",
+      "K_upper",
+      "rhs_physical18",
+      "solution_physical18"
+    ],
+    "reward_columns_zero_based": [
+      {
+        "label": "HII_to_HI_1s",
+        "count": 6,
+        "kinetic": 7,
+        "all_time_count_field": "p_H1",
+        "all_time_kinetic_field": "r_H1"
+      },
+      {
+        "label": "HeII_to_HeI_1s2",
+        "count": 8,
+        "kinetic": 9,
+        "all_time_count_field": "p_HeI",
+        "all_time_kinetic_field": "r_HeI"
+      },
+      {
+        "label": "HeIII_to_HeII_1s",
+        "count": 10,
+        "kinetic": 11,
+        "all_time_count_field": "p_HeII",
+        "all_time_kinetic_field": "r_HeII"
+      }
+    ],
+    "reward_interpretation": "Each saved RHS entry is an exact represented input. Kinetic columns inherit their original lambda*E formation rounding. Do not silently replace them by a new exact product and then reuse old all-time values as if inputs were unchanged.",
+    "source": "Exact saved pr104 source_z projection[1:] for each selected z; projection[0] retained separately as boundary-entry mass with zero RR reward.",
+    "source_weights_nonnegative": true,
+    "source_alternatives_not_history": true,
+    "input_uncertainty": "This finite represented problem does not absorb continuum, grid, native-provider, source-history or isotope-model errors."
+  },
+  "parameters": {
+    "n": "positive integer",
+    "K_units": "s^-1",
+    "T_units": "proper seconds",
+    "gamma_units": "s^-1",
+    "w_units": "cm^-3",
+    "r_count_units": "s^-1",
+    "r_kinetic_units": "eV s^-1",
+    "horizon": "T >= 0; analytic zero and infinity endpoints; finite clocks require 0<T<infinity",
+    "m": "integer >= 1",
+    "delta": "0 < delta < 1",
+    "I": "fixed inherited channel-specific ionization threshold in eV; I >= 0",
+    "clock_design": "gamma_minus=m*(1+delta)/T; gamma_plus=m*(1-delta)/T",
+    "encoded_gamma_rule": "If gamma is rounded before solving, define it by its exact encoded value and recompute a=gamma*T/m. Do not retain ideal delta in the tail formula unless the equality is certified."
+  },
+  "premises": [
+    "K is a real finite tridiagonal Z-matrix: both off-diagonals <=0.",
+    "K is a nonsingular M-matrix; certify using a strict positive witness or rigorous positive tridiagonal pivots.",
+    "For quantitative residual certification choose h_i>0 and beta>0 such that K*h >= beta*h componentwise in exact arithmetic.",
+    "w_i>=0 and r_i>=0; all arrays finite and shape-aligned.",
+    "No substochastic row-sum assumption, p_infinity<=1 assumption, or physical source-time reconstruction."
+  ],
+  "formulas": [
+    {
+      "id": "F01",
+      "name": "semigroup",
+      "expression": "S(t)=exp(-K*t); S(t)>=0; S(t)*h <= exp(-beta*t)*h",
+      "domain": "t>=0"
+    },
+    {
+      "id": "F02",
+      "name": "reward",
+      "expression": "k_r(t)=w^T*S(t)*r; F_r(T)=integral_0^T k_r(t) dt; P_r=w^T*K^-1*r",
+      "conclusions": [
+        "0<=F_r(T)<=P_r",
+        "F_r is continuously differentiable and nondecreasing",
+        "F_r(0)=0",
+        "F_r(T)->P_r as T->infinity"
+      ]
+    },
+    {
+      "id": "F03",
+      "name": "clock_survival",
+      "expression": "Pr[H>t]=exp(-gamma*t)*sum_{j=0}^{m-1}(gamma*t)^j/j!; H~Erlang(m,gamma)",
+      "domain": "m integer>=1, gamma>0"
+    },
+    {
+      "id": "F04",
+      "name": "Erlang_resolvent",
+      "expression": "A_m(gamma)=E[F_r(H)]=sum_{j=0}^{m-1} gamma^j*w^T*(K+gamma*I_n)^(-(j+1))*r"
+    },
+    {
+      "id": "F05",
+      "name": "positive_recurrence",
+      "expression": "B=K+gamma*I_n; z_0=B^-1*r; z_j=gamma*B^-1*z_(j-1); A_m=sum_{j=0}^{m-1}w^T*z_j",
+      "conclusion": "All exact z_j and terms are nonnegative."
+    },
+    {
+      "id": "F06",
+      "name": "Chernoff_upper_clock_tail",
+      "expression": "a_minus=gamma_minus*T/m>1; Pr[H_minus>T]<=Q_minus=exp(m*(log(a_minus)+1-a_minus))"
+    },
+    {
+      "id": "F07",
+      "name": "Chernoff_lower_clock_tail",
+      "expression": "0<a_plus=gamma_plus*T/m<1; Pr[H_plus<T]<=Q_plus=exp(m*(log(a_plus)+1-a_plus))"
+    },
+    {
+      "id": "F08",
+      "name": "ideal_delta_tails",
+      "expression": "Q_minus=exp(m*(log(1+delta)-delta)); Q_plus=exp(m*(log(1-delta)+delta))",
+      "condition": "Exact gamma equality to the ideal clock design is part of the target."
+    },
+    {
+      "id": "F09",
+      "name": "exact_horizon_bracket",
+      "expression": "L=max(0,(A_minus-P_r*Q_minus)/(1-Q_minus)); U=min(P_r,A_plus/(1-Q_plus)); L<=F_r(T)<=U",
+      "condition": "Q_minus,Q_plus are certified upper bounds on the corresponding tail probabilities and lie in [0,1)."
+    },
+    {
+      "id": "F10",
+      "name": "uncertain_horizon_bracket",
+      "expression": "L=max(0,(A_minus_lower-P_upper*q_minus_upper)/(1-q_minus_upper)); U=min(P_upper,A_plus_upper/(1-q_plus_upper))",
+      "condition": "A intervals and P_upper are certified for the same exact K,w,r; q_upper in [0,1); evaluate final endpoints outward."
+    },
+    {
+      "id": "F11",
+      "name": "weighted_norm",
+      "expression": "norm_h(x)=max_i abs(x_i)/h_i; C_w=w^T*h; alpha=beta+gamma; norm_h(B^-1)<=1/alpha"
+    },
+    {
+      "id": "F12",
+      "name": "recurrence_residual",
+      "expression": "rho_0=r-B*zhat_0; rho_j=gamma*zhat_(j-1)-B*zhat_j; norm_h(rho_j)<=eta_j"
+    },
+    {
+      "id": "F13",
+      "name": "propagated_solve_error",
+      "expression": "epsilon_0=eta_0/alpha; epsilon_j=(gamma*epsilon_(j-1)+eta_j)/alpha; abs(z_j-zhat_j)<=epsilon_j*h"
+    },
+    {
+      "id": "F14",
+      "name": "clock_scalar_certificate",
+      "expression": "If abs(Ahat-sum_j w^T*zhat_j)<=d_sum, then abs(A_m-Ahat)<=C_w*sum_j epsilon_j+d_sum",
+      "condition": "All right-hand error quantities bounded upward, including dot products and accumulation."
+    },
+    {
+      "id": "F15",
+      "name": "all_time_certificate",
+      "expression": "rho_inf=r-K*xhat_inf; eta_inf>=norm_h(rho_inf); abs(P_r-Phat)<=C_w*eta_inf/beta+d_inf",
+      "condition": "Phat approximates w^T*xhat_inf with certified scalar error d_inf; xhat_inf may be the unchanged saved solution."
+    },
+    {
+      "id": "F16",
+      "name": "time_bin",
+      "expression": "For 0<=T1<T2, Delta_r=F_r(T2)-F_r(T1); Delta_lower=max(0,L2-U1); Delta_upper=min(P_upper,U2-L1)",
+      "condition": "Certified endpoints for the same inputs; negative proposed upper or lower>upper is a failure, not silently clipped."
+    },
+    {
+      "id": "F17",
+      "name": "bin_signed_ledger",
+      "expression": "N=Delta_count; E=Delta_kinetic; photon=E+I*N; internal=-I*N; fast_electron_kinetic=-E; energy_sum=0"
+    },
+    {
+      "id": "F18",
+      "name": "bin_interval_signs",
+      "expression": "photon in [E_L+I*N_L,E_U+I*N_U]; internal in [-I*N_U,-I*N_L]; fast_electron_kinetic in [-E_U,-E_L]"
+    },
+    {
+      "id": "F19",
+      "name": "SI_conversion",
+      "expression": "count_m3=10^6*count_cm3; energy_J_m3=(10^6*1.602176634e-19)*energy_eV_cm3",
+      "condition": "Exact SI eV_J decimal; final rounding included; convert exactly once."
+    },
+    {
+      "id": "F20",
+      "name": "conditional_bin_average",
+      "expression": "bar_j=Delta/(T2-T1)",
+      "condition": "0<=T1<T2<infinity, properly declared observation bin; label conditional pulse return, not actual continuous injection rate or pointwise rate."
+    },
+    {
+      "id": "F21",
+      "name": "forward_population",
+      "expression": "n(t)=exp(-K^T*t)*n0+integral_0^t exp(-K^T*(t-s))*b(s) ds; j_r(t)=r^T*n(t)"
+    },
+    {
+      "id": "F22",
+      "name": "general_cumulative_source",
+      "expression": "f_r(u)=integral_0^u exp(-K*tau)*r d tau; Y_r(T)=n0^T*f_r(T)+integral_0^T b(s)^T*f_r(T-s) ds",
+      "condition": "b is nonnegative and locally integrable; finite nonnegative vector source measures also allowed with Stieltjes integration."
+    },
+    {
+      "id": "F23",
+      "name": "fixed_shape_source",
+      "expression": "If b(t)=w*q(t), then Y_r(T)=integral_0^T q(s)*F_r(T-s) ds, for zero initial population",
+      "condition": "q>=0, q units s^-1; current q history absent. Scalar saved-pulse kernels only cover supplied fixed shapes, not arbitrary energy-time spectra."
+    },
+    {
+      "id": "F24",
+      "name": "convergent_clock_sequence",
+      "expression": "delta_m->0 and m*delta_m^2->infinity imply L_m(T),U_m(T)->F_r(T)",
+      "condition": "Exact analytic computation; fixed T>0; example delta_m=m^(-1/4) for m>1. Fixed delta alone does not give convergence to F_r(T)."
+    },
+    {
+      "id": "F25",
+      "name": "T_endpoint_limits",
+      "expression": "For fixed m,delta: bracket endpoints ->0 as T->0+; bracket endpoints ->P_r as T->infinity",
+      "condition": "Exact analytic gamma design; exact arithmetic. Numerical certificate widths need not vanish automatically."
+    }
+  ],
+  "numerical_certification_obligations": [
+    "Pin source NPZ hashes and each adopted K, reward, source array identity; do not rebuild hazards.",
+    "Validate finite shape, sign and orientation; source boundary mass is not dropped from the outer pulse ledger.",
+    "Prove a strict positive M-matrix witness or positive exact/rigorously enclosed tridiagonal pivots; floating positive pivots alone are diagnostics.",
+    "For witness h, prove h>0 and a lower beta>0 for min_i (K*h)_i/h_i; retain witness identity and arithmetic mode.",
+    "Define exact target gamma and exact shift K+gamma*I independently of the factorization's rounded diagonal.",
+    "Residuals must be bounded against exact target B and exact intended RHS, including gamma*zhat_previous multiplication.",
+    "Propagate earlier recurrence errors using F13; final-step residual alone is insufficient.",
+    "Enclose each contraction, recurrence error sum and scalar dot/sum roundoff.",
+    "Certify P_upper using unchanged saved solutions plus residuals or a separately bounded valid all-time computation; never assume old binary64 answers exact.",
+    "Tail probabilities must have genuine upper bounds. Rounded log/exp or underflow to zero does not by itself prove q_upper.",
+    "Use actual a=gamma*T/m for rounded gamma; a_minus>1 and 0<a_plus<1 must hold exactly or be rigorously bounded.",
+    "Form all final bracket endpoints and signed linear maps with outward rounding; invalid interval ordering is a failed certificate.",
+    "If only nominal residuals/high-precision agreement are supplied, label numerical evidence diagnostic and keep rigorous floating certificate status unresolved.",
+    "Keep exact finite-K analytical error, arithmetic certificate, and inherited physical/model/grid errors separate."
+  ],
+  "output_scope": {
+    "admitted_candidate_outputs": [
+      "Conditional finite-age RR count",
+      "Conditional finite-age represented kinetic return",
+      "Retained-photon energy ledger",
+      "Finite time-bin bounds",
+      "Conditional bin-averaged return"
+    ],
+    "actual_continuous_injection_history": null,
+    "actual_source_matched_continuous_event_rate_m3_s": null,
+    "inferred_exposure_s": null,
+    "pointwise_instantaneous_return_rate_export": null,
+    "canonical_native_25_row_rhs": null,
+    "donor_recipient_nb_normalization": null,
+    "full_photon_electron_baryon_cascade": false,
+    "physical_heating_complete": false,
+    "N6_N7": "PREDECESSOR_GATED",
+    "no_go": false
+  },
+  "references": {
+    "source_evidence": "../source_frontier/PRIMARY_SOURCES.json",
+    "prior_M0": "https://github.com/cosmosapjw-quantum/bass_cr/blob/ec463db0c7e5c7fb5070796071c926caa4db6445/research/cr_m0_quadratic_20261012/README_KO.md",
+    "primary_Erlang_method": "https://pubsonline.informs.org/doi/abs/10.1287/ijoc.1120.0537",
+    "proof_attribution": "The exact finite-K lemmas and their current source binding are derived here; literature motivates general Markov reward/Erlang methods. No novelty claim."
+  }
+}

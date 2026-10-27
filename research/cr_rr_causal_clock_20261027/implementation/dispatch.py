@@ -289,12 +289,26 @@ def render_command(plan, mode, unit, out, snapshot, run_id):
             *(token.format_map(values) for token in argv[1:])]
 
 
-def process_cpu(pid):
+def worker_identity(nonce):
+    """Bind the child's PID namespace to the procfs mounted in this host."""
+    raw = Path('/proc/self/stat').read_text()
+    proc_pid = int(raw.split(' ', 1)[0])
+    fields = raw[raw.rfind(')') + 2:].split()
+    need(str(proc_pid) == os.readlink('/proc/self'), 'PROC_SELF_IDENTITY_MISMATCH')
+    return {'namespace_pid': os.getpid(), 'proc_pid': proc_pid,
+            'starttime_ticks': int(fields[19]), 'lease_nonce': nonce,
+            'binding': 'child_preexec_actual_proc_self'}
+
+
+def process_cpu(identity):
     try:
-        raw = Path(f"/proc/{pid}/stat").read_text()
+        raw = Path(f"/proc/{identity['proc_pid']}/stat").read_text()
     except FileNotFoundError:
         return None
     fields = raw[raw.rfind(")") + 2:].split()
+    need(int(raw.split(' ', 1)[0]) == identity['proc_pid']
+         and int(fields[19]) == identity['starttime_ticks'],
+         'OWNED_WORKER_PROC_IDENTITY_CHANGED')
     return (int(fields[11]) + int(fields[12])) / os.sysconf("SC_CLK_TCK")
 
 
@@ -330,13 +344,13 @@ def terminate_owned(child, *, grace=.15):
     return not group_alive(child.pid)
 
 
-def watch(child, worker_limit, coordinator_prior, wall_deadline):
+def watch(child, identity, worker_limit, coordinator_prior, wall_deadline):
     while child.poll() is None:
         if time.monotonic() >= wall_deadline - .5:
             raise RuntimeError("OWNED_WORKER_WALL_GUARD")
         if coordinator_prior + time.process_time() >= COORDINATOR_CAP - .02:
             raise RuntimeError("COORDINATOR_CPU_GUARD")
-        observed = process_cpu(child.pid)
+        observed = process_cpu(identity)
         if observed is not None and observed >= worker_limit - .05:
             raise RuntimeError("OWNED_WORKER_CPU_GUARD")
         try:
@@ -425,13 +439,17 @@ def run(args):
             resource.setrlimit(resource.RLIMIT_AS, (AS_LIMIT, AS_LIMIT))
             resource.setrlimit(resource.RLIMIT_CPU, (limit, limit))
             resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
+            writej(out / 'OWNED_WORKER_IDENTITY.json', worker_identity(nonce))
 
         with (out / "stdout.txt").open("x") as stdout, (out / "stderr.txt").open("x") as stderr:
             child_spawn_attempted = True
             child = subprocess.Popen(command, cwd=Path(command[2]).parent, env=environment,
                                      stdout=stdout, stderr=stderr, start_new_session=True, preexec_fn=limits)
             child_reaped = False
-            returncode = watch(child, limit, before_budget["coordinator_cpu_s"], wall_start + WALL_LIMIT)
+            identity = readj(out / 'OWNED_WORKER_IDENTITY.json')
+            need(identity['namespace_pid'] == child.pid and identity['lease_nonce'] == nonce,
+                 'OWNED_WORKER_NAMESPACE_BINDING_MISMATCH')
+            returncode = watch(child, identity, limit, before_budget["coordinator_cpu_s"], wall_start + WALL_LIMIT)
             child_reaped = True
         need(not group_alive(child.pid), "UNEXPECTED_OWNED_DESCENDANT_PROCESS")
         need(returncode == 0, "WORKER_NONZERO_EXIT")

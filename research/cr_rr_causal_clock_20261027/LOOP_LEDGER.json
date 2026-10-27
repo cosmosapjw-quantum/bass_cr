@@ -163,8 +163,15 @@
     },
     {
       "id": "C06",
-      "status": "pending",
-      "evidence_refs": []
+      "status": "complete",
+      "evidence_refs": [
+        "runs/cr_clock_controls_20261027_v1/DISPATCH_RECEIPT.json",
+        "runs/cr_clock_controls_20261027_v2/payload/RESULT.json",
+        "runs/cr_clock_controls_20261027_v2/payload/QUALIFICATION_INDEX.json",
+        "reviews/C6_RUNTIME_REPAIR.json",
+        "reviews/ENVIRONMENT_INTERRUPTION.json",
+        "reviews/C9_PREEXEC_REVIEW.json"
+      ]
     },
     {
       "id": "C07",
@@ -189,7 +196,24 @@
   ],
   "claims": [],
   "checks": [],
-  "executions": [],
+  "executions": [
+    {
+      "run_id": "cr_clock_controls_20261027_v1",
+      "mode": "controls",
+      "status": "FAILED_RETAINED",
+      "worker_cpu_s": 0.0021130000000000003,
+      "coordinator_cpu_s": 0.112583694,
+      "evidence": "runs/cr_clock_controls_20261027_v1/DISPATCH_RECEIPT.json"
+    },
+    {
+      "run_id": "cr_clock_controls_20261027_v2",
+      "mode": "controls",
+      "status": "PASS",
+      "worker_cpu_s": 0.332836,
+      "coordinator_cpu_s": 0.151952666,
+      "evidence": "runs/cr_clock_controls_20261027_v2/DISPATCH_RECEIPT.json"
+    }
+  ],
   "failures": [
     {
       "class": "test_fixture",
@@ -208,10 +232,19 @@
         "publication/R06_RECEIPT.json"
       ],
       "next_action": "closed: Dropbox absentpath confirmed, one fresh upload succeeded; Drive/Library reused"
+    },
+    {
+      "class": "runtime_host_binding",
+      "stage": "C06",
+      "evidence_refs": [
+        "runs/cr_clock_controls_20261027_v1/DISPATCH_RECEIPT.json",
+        "reviews/C6_RUNTIME_REPAIR.json"
+      ],
+      "next_action": "closed by independently reviewed procfs self-binding and actual v2 PASS; v1 cost retained"
     }
   ],
   "old_science_replay": 0,
-  "new_science_cpu_s": null,
+  "new_science_cpu_s": 0.5994853600000001,
   "new_science_cpu_cap_s": 60,
   "gates": {
     "N4": "PARTIAL_OPEN",
@@ -222,5 +255,5 @@
     "global_physical_completion": null,
     "global_error_bound": null
   },
-  "completed_stages": 15
+  "completed_stages": 16
 }
