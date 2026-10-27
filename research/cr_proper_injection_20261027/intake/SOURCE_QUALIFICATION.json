@@ -1,0 +1,544 @@
+{
+  "schema": "CR_ACTUAL_FINITE_HISTORY_SOURCE_QUALIFICATION_V1",
+  "role": "read-only source survey; not independent admission of new adapter",
+  "selection": "PHYS02 actual leading-local Qe=tA history, independent density-space injection moment port",
+  "source_unit": "CR-RUX-M1B-SOURCE-BINDING-20261012",
+  "source_commit_original": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+  "retrieval_commit": "ec463db0c7e5c7fb5070796071c926caa4db6445",
+  "scope": {
+    "proton_source_model": "CRP_L17_MD14_v1",
+    "source_revision": "research/cr_phys01_20261010/src/injection.py at pinned source commit",
+    "proton_energy_coordinate": "kinetic eV",
+    "proton_source_native_support_eV": [
+      "10000",
+      "1000000000000000"
+    ],
+    "proton_impact_consumed_support_eV": [
+      "1000000",
+      "4000000"
+    ],
+    "rudd_provider_admitted_support_eV": [
+      "1000000",
+      "10000000"
+    ],
+    "electron_birth_native_energy_coordinate": "kinetic eV",
+    "electron_selected_support_eV": [
+      "0.1",
+      "900"
+    ],
+    "birth_tags": {
+      "direct_0p1_10": [
+        "0.1",
+        "10"
+      ],
+      "direct_10_900": [
+        "10",
+        "900"
+      ]
+    },
+    "target_native_species": [
+      "neutral atomic H",
+      "neutral atomic He"
+    ],
+    "isotope_resolved_source": false,
+    "permitted_conditional_mapping": "H→H1 and elemental-He→He4 only if explicitly declared; no D/T/He3/Li/state extrapolation",
+    "electron_scalar_source": "angle-integrated energy-only source; electron angular/recoil distribution not supplied",
+    "frame": "local prescribed gas rest frame underlying relative-speed source; no admitted tilted-frame transformation",
+    "volume_unit": "proper m^3",
+    "clock_unit": "proper second",
+    "history_domain_s": [
+      "0",
+      "10000000000"
+    ],
+    "history_law": "Q_e(W,t)=t*A(W); initial nonthermal stock=0; leading local Np=t*qp approximation",
+    "history_after_end": "not supplied; do not infer shutoff or continuation",
+    "history_error_certificate": null,
+    "source_bath": {
+      "T_K": "100",
+      "nH_m3": "140",
+      "YHe_mass_fraction": "0.248",
+      "xHII": "0.01",
+      "xHeII": "0.01",
+      "xHeIII": "0",
+      "nHe_definition": "nH*YHe/[4*(1-YHe)]",
+      "neutral_density_ownership": "nHI=.99*nH and nHeI=.99*nHe already multiplied into A"
+    },
+    "source_z_snapshot": "8",
+    "source_is_frozen_in_window": true,
+    "explicit_nb_m3": null,
+    "recipient_same_state_nb_receipt": null,
+    "native25": null,
+    "photon_history_or_spectrum": null,
+    "retained_photon_port": "separate/unpopulated; absence of photon provider is not a zero-photon physical assertion"
+  },
+  "normalization_ownership": {
+    "qp_definition": "angle-integrated dN/(proper m^3 proper-s dK_eV)",
+    "proton_energy_normalization": "10 keV to 1 PeV; no re-normalization over 1-4 MeV impact window",
+    "comoving_to_proper_factor": "729 already in qp at z=8",
+    "angular_factor": "birth isotropic dmu/2 and phi-integrated; no extra4pi",
+    "target_density_factor": "included once in A; no extra neutral density in injected electron port",
+    "time_factor": "A has m^-3 s^-2 eV^-1; Q=tA supplies one proper time; cumulative N/E has (t1^2-t0^2)/2",
+    "energy_conversion": "eV_J=1.602176634e-19 exact SI conversion once; raw saved injected_energy_J_m3 is already J",
+    "band_normalization": "both birth columns use same selected total energy denominator, not separate band rescaling",
+    "moment_port_only": false,
+    "spectrum_reconstructed_from_moments": false,
+    "moment_port_or_existing_discrete_source_port": "Both available; a discrete source port must reuse stored projection with actual cutoff ledgers, not reconstruct spectrum from moments."
+  },
+  "actual_saved_moments": [
+    {
+      "label": "fullBED",
+      "source_moments": {
+        "direct_0p1_10": {
+          "injected_energy_J_m3": "5.47033142884169e-34",
+          "injected_number_m3": "8.583703187582436e-16"
+        },
+        "direct_10_900": {
+          "injected_energy_J_m3": "8.459279749254517e-33",
+          "injected_number_m3": "8.304211765519884e-16"
+        },
+        "selected_total": {
+          "injected_energy_J_m3": "9.006312892138684e-33",
+          "injected_number_m3": "1.6887914953102317e-15"
+        }
+      },
+      "raw_npz_receipt": {
+        "sha256": "7ee8c1eff7f58cd7175a9bcd3968a27ef065f0e983f05e609dc875f5f06112cc",
+        "bytes": 217754
+      }
+    },
+    {
+      "label": "legacy",
+      "source_moments": {
+        "direct_0p1_10": {
+          "injected_energy_J_m3": "5.47033142884169e-34",
+          "injected_number_m3": "8.583703187582436e-16"
+        },
+        "direct_10_900": {
+          "injected_energy_J_m3": "8.459279749254517e-33",
+          "injected_number_m3": "8.304211765519884e-16"
+        },
+        "selected_total": {
+          "injected_energy_J_m3": "9.006312892138684e-33",
+          "injected_number_m3": "1.6887914953102317e-15"
+        }
+      },
+      "raw_npz_receipt": {
+        "sha256": "a3f81dbbd86c1d0521f962db8a2ee2ed158f613f3f7a069caccbda9c964acda6",
+        "bytes": 217716
+      }
+    }
+  ],
+  "moment_history_mapping": {
+    "N_window_m3": "N_saved(T)*(t1^2-t0^2)/T^2",
+    "U_window_J_m3": "U_saved(T)*(t1^2-t0^2)/T^2",
+    "N_rate_at_t_m3_s": "2*N_saved(T)*t/T^2",
+    "U_rate_at_t_J_m3_s": "2*U_saved(T)*t/T^2",
+    "basis": "derived exact temporal rescaling of saved moments using the already executed declared linear history; original decimal/FP64 finite-source accuracy retained",
+    "new_evaluation_by_this_agent": false
+  },
+  "read_evidence": [
+    {
+      "original_git_path": "research/cr_phys01_20261010/src/injection.py",
+      "source_commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "retrieval_commit": "ec463db0c7e5c7fb5070796071c926caa4db6445",
+      "local_snapshot": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_source_binding_20261012/inputs/source_lineage/sources/research/cr_phys01_20261010/src/injection.py",
+      "bytes": 16626,
+      "sha256": "c5eda0e60302339af1bbdd0603ae1cd8a8921d9e6489c22d954e0bc92968c27d",
+      "current_turn_raw_bytes_read": true
+    },
+    {
+      "original_git_path": "research/cr_phys01_20261010/src/rudd.py",
+      "source_commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "retrieval_commit": "ec463db0c7e5c7fb5070796071c926caa4db6445",
+      "local_snapshot": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_source_binding_20261012/inputs/source_lineage/sources/research/cr_phys01_20261010/src/rudd.py",
+      "bytes": 6584,
+      "sha256": "757e4c8b33618ad6ef88f422919fe813654454c836f0942cf9792be133e8eac2",
+      "current_turn_raw_bytes_read": true
+    },
+    {
+      "original_git_path": "research/cr_phys02a_20261010/src/causal_subthreshold.py",
+      "source_commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "retrieval_commit": "ec463db0c7e5c7fb5070796071c926caa4db6445",
+      "local_snapshot": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_source_binding_20261012/inputs/source_lineage/sources/research/cr_phys02a_20261010/src/causal_subthreshold.py",
+      "bytes": 11785,
+      "sha256": "2259506b74c16027fda69b479cb1039b0888e19c5f8dcf400273892aba6f39f9",
+      "current_turn_raw_bytes_read": true
+    },
+    {
+      "original_git_path": "research/cr_phys02b_20261010/src/causal_cascade.py",
+      "source_commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "retrieval_commit": "ec463db0c7e5c7fb5070796071c926caa4db6445",
+      "local_snapshot": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_source_binding_20261012/inputs/source_lineage/sources/research/cr_phys02b_20261010/src/causal_cascade.py",
+      "bytes": 19115,
+      "sha256": "d87a9cc122125b2d37b47f261f57eab698baa59e07a6b21723860f39313c7b72",
+      "current_turn_raw_bytes_read": true
+    },
+    {
+      "original_git_path": "research/cr_phys02c_20261011/src/coherent_bed.py",
+      "source_commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "retrieval_commit": "ec463db0c7e5c7fb5070796071c926caa4db6445",
+      "local_snapshot": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_source_binding_20261012/inputs/source_lineage/sources/research/cr_phys02c_20261011/src/coherent_bed.py",
+      "bytes": 4094,
+      "sha256": "30e6e043859c3b2014429c5860314e5e6a833381141469eac24cd6293c43acca",
+      "current_turn_raw_bytes_read": true
+    },
+    {
+      "original_git_path": "research/cr_phys02c_20261011/tests/run_targeted.py",
+      "source_commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "retrieval_commit": "ec463db0c7e5c7fb5070796071c926caa4db6445",
+      "local_snapshot": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_source_binding_20261012/inputs/source_lineage/sources/research/cr_phys02c_20261011/tests/run_targeted.py",
+      "bytes": 15950,
+      "sha256": "8b86749819172a7174815a10368909f0d6ab988fafc1c5294ecef7ec07f87024",
+      "current_turn_raw_bytes_read": true
+    },
+    {
+      "original_git_path": "research/cr_phys02c_20261011/state/SCIENTIFIC_CONTRACT.json",
+      "source_commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "retrieval_commit": "ec463db0c7e5c7fb5070796071c926caa4db6445",
+      "local_snapshot": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_source_binding_20261012/inputs/source_lineage/sources/research/cr_phys02c_20261011/state/SCIENTIFIC_CONTRACT.json",
+      "bytes": 11719,
+      "sha256": "e0445ecbf052a3441f6203f9e0463defcf0c24c0ee018a67e112d338991f47ee",
+      "current_turn_raw_bytes_read": true
+    },
+    {
+      "original_git_path": "research/cr_phys02c_paired_9600_closeout_20261011/raw/ncp_operational_adapter_20261011/launch_refinement.py",
+      "source_commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "retrieval_commit": "ec463db0c7e5c7fb5070796071c926caa4db6445",
+      "local_snapshot": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_source_binding_20261012/inputs/source_lineage/sources/research/cr_phys02c_paired_9600_closeout_20261011/raw/ncp_operational_adapter_20261011/launch_refinement.py",
+      "bytes": 10904,
+      "sha256": "6ede08c6398bd3556b0168832b18dc59d4cbe938e3c4172109be49188613426b",
+      "current_turn_raw_bytes_read": true
+    },
+    {
+      "original_git_path": "research/cr_phys02c_paired_9600_closeout_20261011/raw/THIRD_GRID_LOCAL_20261011_EXEC01/NUMERICAL_RESULT.json",
+      "source_commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "retrieval_commit": "ec463db0c7e5c7fb5070796071c926caa4db6445",
+      "local_snapshot": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_source_binding_20261012/inputs/source_lineage/sources/research/cr_phys02c_paired_9600_closeout_20261011/raw/THIRD_GRID_LOCAL_20261011_EXEC01/NUMERICAL_RESULT.json",
+      "bytes": 75490,
+      "sha256": "0b33ad9af1be50297e54fa8b38570471c35b5e342ce771d834bb576458a91500",
+      "current_turn_raw_bytes_read": true
+    },
+    {
+      "original_git_path": "research/cr_phys02c_paired_9600_closeout_20261011/raw/THIRD_GRID_LOCAL_20261011_EXEC01/ACTUAL_EXIT.json",
+      "source_commit": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+      "retrieval_commit": "ec463db0c7e5c7fb5070796071c926caa4db6445",
+      "local_snapshot": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_source_binding_20261012/inputs/source_lineage/sources/research/cr_phys02c_paired_9600_closeout_20261011/raw/THIRD_GRID_LOCAL_20261011_EXEC01/ACTUAL_EXIT.json",
+      "bytes": 9794,
+      "sha256": "352ff1c4a40069a42e724ec7fd4da578108f237add4465632abe20d74f34bb2a",
+      "current_turn_raw_bytes_read": true
+    }
+  ],
+  "binding_evidence": [
+    {
+      "git_path": "research/cr_source_binding_20261012/inputs/source_lineage/SOURCE_FINDINGS_KO.md",
+      "bytes": 11803,
+      "sha256": "c1f944a64f7cb102f0ec79d8ce6bacab5954c3579d55f431170f3b206a383971",
+      "current_turn_raw_bytes_read": true
+    },
+    {
+      "git_path": "research/cr_source_binding_20261012/inputs/source_lineage/SOURCE_INVENTORY.json",
+      "bytes": 23397,
+      "sha256": "5468516e50e3753a098d9ad90a766ffa88e47e5d33a2c5b92c522e24c0760b29",
+      "current_turn_raw_bytes_read": true
+    },
+    {
+      "git_path": "research/cr_source_binding_20261012/results/SOURCE_BOUND_RESPONSE.json",
+      "bytes": 34250,
+      "sha256": "dd4ed10b5ecd3aea8a8710b5190c9d7da4085834713bc72ae2cc37915cc97f27",
+      "current_turn_raw_bytes_read": true
+    },
+    {
+      "git_path": "research/cr_source_binding_20261012/HANDOFF.json",
+      "bytes": 4029,
+      "sha256": "0c5225f15aa67ac290c309fcd16530e2b3799960022977b12166c657a8c65c3a",
+      "current_turn_raw_bytes_read": true
+    }
+  ],
+  "raw_array_recovery": {
+    "in_pinned_git_tree": true,
+    "path_prefix": "research/cr_phys02c_paired_9600_closeout_20261011/raw/THIRD_GRID_LOCAL_20261011_EXEC01/",
+    "fullBED": {
+      "filename": "SPECTRUM_fullBED_9600.npz",
+      "bytes": 217754,
+      "sha256": "7ee8c1eff7f58cd7175a9bcd3968a27ef065f0e983f05e609dc875f5f06112cc"
+    },
+    "legacy": {
+      "filename": "SPECTRUM_legacy_9600.npz",
+      "bytes": 217716,
+      "sha256": "a3f81dbbd86c1d0521f962db8a2ee2ed158f613f3f7a069caccbda9c964acda6"
+    },
+    "current_turn_npz_raw_bytes_read_by_this_agent": true,
+    "source_vectors_shape": [
+      9611,
+      2
+    ],
+    "source_vectors_raw_C_sha256_prior_receipt": "07dd0fa81154f5aecaf262b00c2adfada21ebc9b2a2dba59703e03e3f5dab609",
+    "energy_raw_C_sha256_prior_receipt": "6a76d3539115003b046a5861baca89b0a4ff966564627e04d9f6e8bc86be8292",
+    "prior_heiii_canonical_zip_contains_phys02": false,
+    "recovery_action": "Root sparse checkout recovered exact NPZ bytes; this source agent read metadata and array byte hashes only.",
+    "observed_default_fetch_failure": "browser-proxy connection failed during lazy promisor blob fetch; not a runtime capability failure",
+    "recovery_completed_by_parent": true,
+    "current_raw_observations": [
+      {
+        "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_phys02c_paired_9600_closeout_20261011/raw/THIRD_GRID_LOCAL_20261011_EXEC01/SPECTRUM_fullBED_9600.npz",
+        "bytes": 217754,
+        "sha256": "7ee8c1eff7f58cd7175a9bcd3968a27ef065f0e983f05e609dc875f5f06112cc",
+        "arrays": {
+          "energy_eV": {
+            "shape": [
+              9600
+            ],
+            "dtype": "float64",
+            "raw_C_sha256": "6a76d3539115003b046a5861baca89b0a4ff966564627e04d9f6e8bc86be8292"
+          },
+          "source_vectors": {
+            "shape": [
+              9611,
+              2
+            ],
+            "dtype": "float64",
+            "raw_C_sha256": "07dd0fa81154f5aecaf262b00c2adfada21ebc9b2a2dba59703e03e3f5dab609"
+          },
+          "physical_energy_scale_eV_m3": {
+            "shape": [],
+            "dtype": "float64",
+            "raw_C_sha256": "ac06eb133915b70a6abf8f42d0ab30caade46e564c4b12afc8334cb2e5946da1",
+            "value": 1.1242596728743301e-13
+          },
+          "time_s": {
+            "shape": [
+              2
+            ],
+            "dtype": "float64",
+            "raw_C_sha256": "fdb4067a8555e88d1da6b4b92ebbdd6f97c5a3bf953f27469e9028d99c54f9c7",
+            "value": [
+              0.0,
+              10000000000.0
+            ]
+          },
+          "birth_tags": {
+            "shape": [
+              2
+            ],
+            "dtype": "<U13",
+            "raw_C_sha256": "606553008046f970fc672d711d3e045dbf467c420ef1448be78b35d5f098e51e",
+            "value": [
+              "direct_0p1_10",
+              "direct_10_900"
+            ]
+          }
+        },
+        "source_extra_rows_9600_to_9610": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            4.579701473759296e-07,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            4.579701473759296e-06,
+            0.0
+          ],
+          [
+            0.0,
+            2.785842106789342e-05
+          ],
+          [
+            0.0,
+            2.785842106789342e-06
+          ]
+        ]
+      },
+      {
+        "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_phys02c_paired_9600_closeout_20261011/raw/THIRD_GRID_LOCAL_20261011_EXEC01/SPECTRUM_legacy_9600.npz",
+        "bytes": 217716,
+        "sha256": "a3f81dbbd86c1d0521f962db8a2ee2ed158f613f3f7a069caccbda9c964acda6",
+        "arrays": {
+          "energy_eV": {
+            "shape": [
+              9600
+            ],
+            "dtype": "float64",
+            "raw_C_sha256": "6a76d3539115003b046a5861baca89b0a4ff966564627e04d9f6e8bc86be8292"
+          },
+          "source_vectors": {
+            "shape": [
+              9611,
+              2
+            ],
+            "dtype": "float64",
+            "raw_C_sha256": "07dd0fa81154f5aecaf262b00c2adfada21ebc9b2a2dba59703e03e3f5dab609"
+          },
+          "physical_energy_scale_eV_m3": {
+            "shape": [],
+            "dtype": "float64",
+            "raw_C_sha256": "ac06eb133915b70a6abf8f42d0ab30caade46e564c4b12afc8334cb2e5946da1",
+            "value": 1.1242596728743301e-13
+          },
+          "time_s": {
+            "shape": [
+              2
+            ],
+            "dtype": "float64",
+            "raw_C_sha256": "fdb4067a8555e88d1da6b4b92ebbdd6f97c5a3bf953f27469e9028d99c54f9c7",
+            "value": [
+              0.0,
+              10000000000.0
+            ]
+          },
+          "birth_tags": {
+            "shape": [
+              2
+            ],
+            "dtype": "<U13",
+            "raw_C_sha256": "606553008046f970fc672d711d3e045dbf467c420ef1448be78b35d5f098e51e",
+            "value": [
+              "direct_0p1_10",
+              "direct_10_900"
+            ]
+          }
+        },
+        "source_extra_rows_9600_to_9610": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            4.579701473759296e-07,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            4.579701473759296e-06,
+            0.0
+          ],
+          [
+            0.0,
+            2.785842106789342e-05
+          ],
+          [
+            0.0,
+            2.785842106789342e-06
+          ]
+        ]
+      }
+    ]
+  },
+  "linkage_admission": {
+    "PR107_HeIII_RR": "GATED_SOURCE_RECIPIENT_STATE_MISMATCH",
+    "PHYS02_T_K": "100",
+    "PR107_T_K": "10000",
+    "PHYS02_nHeIII": "0",
+    "PR107_nHeIII_cm3": "0.01",
+    "finite_time_integrated_RR_return": null,
+    "actual_injection_history_does_not_time_label_old_all_time_RR": true,
+    "direct_native25": "GATED_EXPLICIT_SAME_STATE_NB_MISSING",
+    "PHYS02_saved_stopping_or_caloric_outputs_adopted_as_heating": false
+  },
+  "parallel_owner_observation": {
+    "url": "https://github.com/cosmosapjw-quantum/bass_cr/pull/108",
+    "head_observed": "2776752de6952f60d8d690a128f33fec4df2c57b",
+    "branch": "research/cr-rr-causal-clock-20261027",
+    "observed_stage": "C08/18of20",
+    "scope": "finite-age and finite-bin RR on saved PR107 pulses via Erlang clocks; actual continuous history/nb null",
+    "reused_as_final_admission": false,
+    "avoid_duplicate_execution": true
+  },
+  "preserved": {
+    "central_completed": 27,
+    "central_total": 88,
+    "node_count_effect": 0,
+    "L4": false,
+    "global_physical_completion": null,
+    "global_physical_error": null,
+    "budget_remaining": null,
+    "old_science_replay": 0,
+    "source_quadrature_replay": 0,
+    "projection_replay": 0,
+    "provider_run": 0,
+    "native_simulation": 0
+  },
+  "survey_limits": [
+    "selected current pinned files and relevant PRs only; not all repo contents",
+    "personal conversation full search unavailable retained",
+    "Drive partial inventory retained; no new exhaustive Drive inventory claim"
+  ],
+  "discrete_source_semantics": {
+    "representation": "actual stored finite count/energy-preserving projected source, not raw continuum spectrum and not reconstructed from moments",
+    "T_s": "10000000000",
+    "Ustar_eV_m3": "1.1242596728743301e-13",
+    "active_energy_rows": "0:9600",
+    "active_energy_grid": "energy_eV",
+    "active_source_energy_coefficient": "A_E_i=(Ustar/T^2)*source_vectors[i,tag] eV m^-3 s^-2",
+    "active_source_number_coefficient": "A_N_i=(Ustar/T^2)*source_vectors[i,tag]/energy_eV[i] m^-3 s^-2",
+    "active_Qe_number": "Q_i(t)=t*A_N_i; integrates to (b^2-a^2)/2*A_N_i for a,b in admitted history",
+    "extra_indices": {
+      "heat": 9600,
+      "binding_HI": 9601,
+      "binding_HeI": 9602,
+      "excitation_HI": 9603,
+      "excitation_HeI": 9604,
+      "cutoff_energy": 9605,
+      "ionizations_HI": 9606,
+      "ionizations_HeI": 9607,
+      "cutoff_number": 9608,
+      "low_cross_energy": 9609,
+      "low_cross_number": 9610
+    },
+    "cutoff_source": "Keep b[9605,tag] energy and b[9608,tag] count independently; multiplying by Ustar gives eV/m3 and /m3 respectively before time integration. Native ghost cutoff0.1eV, numerical active grid starts0.10309375000000001eV.",
+    "energy_functional": "sum(active b)+heat+binding_HI+binding_HeI+excitation_HI+excitation_HeI+cutoff_energy; all first5 source ledgers are0 for actual source",
+    "number_functional": "sum(active b_i/E_i)+cutoff_number-ionizations_HI-ionizations_HeI; source ionization ledger rows are0",
+    "crossing_ledgers": "low_cross_energy/number are diagnostic duplicates, including source high-tag projection at10eV boundary; never add to external injection N/E",
+    "projections_unchanged": true,
+    "no_array_sums_or_new_scientific_functions_executed_by_this_agent": true
+  }
+}
