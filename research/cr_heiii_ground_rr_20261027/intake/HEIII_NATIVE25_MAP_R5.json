@@ -1,0 +1,168 @@
+{
+  "schema": "CR_HEIII_NATIVE25_EVENT_MAP_R5_V1",
+  "stage": "R5 independent constructive support",
+  "status": "DERIVED_FROM_PINNED_STATE_AND_EVENT_CONTRACTS; NOT_EXECUTED",
+  "fixed_local_cr_head": "b11b2e9255f2b10fb5582376412e045bd1e9151c",
+  "native21_order": [
+    "n",
+    "H1I",
+    "H1II",
+    "DI",
+    "DII",
+    "TI",
+    "TII",
+    "He3I",
+    "He3II",
+    "He3III",
+    "He4I",
+    "He4II",
+    "He4III",
+    "Li6I",
+    "Li6II",
+    "Li6III",
+    "Li6IV",
+    "Li7I",
+    "Li7II",
+    "Li7III",
+    "Li7IV"
+  ],
+  "basis": {
+    "Y": [
+      0,
+      20
+    ],
+    "zeta": 21,
+    "w_nt": 22,
+    "w_ext": 23,
+    "logT": 24
+  },
+  "units": {
+    "Y": "count per baryon",
+    "zeta": "nonthermal-electron count per baryon",
+    "w_nt": "J per baryon",
+    "u_nt": "J m^-3; equals n_b*w_nt",
+    "w_ext": "signed external photon transfer J per baryon",
+    "logT": "log(T/1K)",
+    "finite_extent_a": "events per baryon",
+    "event_rate_R": "events m^-3 proper_s^-1",
+    "rate_r": "R/n_b; events per baryon proper_s^-1"
+  },
+  "channel": {
+    "parent": "He4III",
+    "parent_index": 12,
+    "parent_external_label": "He4:2",
+    "daughter": "He4II",
+    "daughter_index": 11,
+    "daughter_external_label": "He4:1",
+    "daughter_state": "1s ground",
+    "electron_pool": "e:fast",
+    "electron_stoichiometry": -1,
+    "photon_stoichiometry": 1,
+    "thermal_electron_stoichiometry": 0,
+    "threshold_eV": 54.42,
+    "mass_model": "stationary_heavy_target_zero_recoil",
+    "angular_scope": "scalar isotropic ensemble only",
+    "isotope_policy": "new supplier mapping must preserve original conditional elemental HeII -> He4 assignment"
+  },
+  "delta_Z_per_extent": {
+    "Y11": 1,
+    "Y12": -1,
+    "zeta": -1,
+    "w_nt": "-E*EV_J",
+    "w_ext": 0,
+    "logT": 0
+  },
+  "separate_retained_photon_port_per_extent": {
+    "number": 1,
+    "energy_J": "(E+54.42)*EV_J"
+  },
+  "analytic_invariants": {
+    "d_heavy_count": 0,
+    "d_He4_nuclei": 0,
+    "d_baryons": 0,
+    "d_ionic_charge": -1,
+    "d_free_electron": -1,
+    "d_thermal_electron": 0,
+    "d_thermal_particle_count": 0,
+    "energy_sum": "-I_J-E_J+(I_J+E_J)=0",
+    "thermal_energy_source": 0,
+    "logT_source": 0
+  },
+  "photon_ownership": {
+    "external_ledger_unchanged": true,
+    "retained_photon_separate_port": true,
+    "reuse_w_ext_as_retained_photon": false,
+    "full_transport_implemented": false
+  },
+  "finite_domain": {
+    "extent": "0<=a<=min(Y12,zeta)",
+    "energy": "a E_J<=w_nt necessary for monoenergy; energy-resolved positive measure still required",
+    "normalization": "A dot Y=1,n_b>0,T>0,0<=zeta<=q dot Y,chi_th>0"
+  },
+  "external_engine": {
+    "path": "research/cr_external_interfaces_20261025/contracts.py",
+    "sha256": "431fc4b54174bcf2fe3bcacba063d0b52810a2e274cdb22429a0d787ef97e07e",
+    "reuse": [
+      "Species",
+      "Event.validate",
+      "EventBook.append",
+      "EventBook.energy_rates",
+      "CaloricDerivative.temperature_rate",
+      "require_physical_provider"
+    ],
+    "frozen_energy_rtol": 2e-13,
+    "implemented_native25_projection": false,
+    "implemented_specific_heiii_stoichiometry_guard": false
+  },
+  "source_pins": [
+    {
+      "kind": "native operator",
+      "path": "research/rei_expanded_event_consumer/coupled_source_20261027/implementation/coupled_photo_source.py",
+      "sha256": "457b3a2a64669776b6984f3ea56b7485f0d7f69e2d73f4a4b8a2535172bac4f0"
+    },
+    {
+      "kind": "native contract",
+      "path": "research/rei_expanded_event_consumer/coupled_source_20261027/theory/CONTRACT.md",
+      "sha256": "59d44a0ff3103a9f02d4c39793aeac15c75ce8c19949757ec0e58e655a55c14e"
+    },
+    {
+      "kind": "native21 basis",
+      "path": "research/rei_expanded_event_consumer/blocker_closure_20261026/intake/rec119/code/atomic_network.py",
+      "sha256": "baecce07aded483fa60006cc576feff67d068c0d70394f7095abacc6d47eaa80"
+    },
+    {
+      "kind": "native provider",
+      "path": "research/rei_expanded_event_consumer/blocker_closure_20261026/implementation/pw19_rec_callback.py",
+      "sha256": "5cb2601b98639345bca4f6f1a39536ed8924b1c6ad37cb109e974267a4705000"
+    },
+    {
+      "kind": "existing external label map",
+      "path": "research/cr_external_interfaces_20261025/consume_saved.py",
+      "sha256": "3e648f7e72e5478d4491facd4d2e5db3d4a0f8b73481f280d855f368d8205ee4"
+    }
+  ],
+  "scope_limits": [
+    "Not a new provider rate calculation",
+    "Not probability-to-rate conversion",
+    "Not thermal assimilation",
+    "Not coupled IVP",
+    "Not photon transport or backreaction",
+    "Not a new source-matched equivalence of CR bath and REI donor snapshot"
+  ],
+  "execution": {
+    "new_scientific_runs": 0,
+    "old_suite_replays": 0,
+    "remote_mutations": 0,
+    "code_edits": 0,
+    "mechanical_read_hash_CPU": "UNMEASURED_NOT_ZERO",
+    "inherited_budget_transferred": false
+  },
+  "skill_context_used": {
+    "skill": "physmath-research-loop",
+    "version": "current callable1.3.0 plus user supplied1.0 constructive/reuse constraints",
+    "stage": "R5 only",
+    "definition": "Perform actual derivation; preserve exact assumptions and obligations; no forced later stages",
+    "independence": "parallel agent source-grounded construction; separate R6 review not performed"
+  },
+  "next": "Root incorporates separate retained-photon port and explicit finite-extent/rate distinction in frozen implementation contract; independent R6 agent reviews root derivation."
+}
