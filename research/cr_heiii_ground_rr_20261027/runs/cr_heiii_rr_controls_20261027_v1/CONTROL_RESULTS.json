@@ -1,0 +1,307 @@
+{
+  "schema": "CR_HEIII_CHANGED_CONTROLS_V1",
+  "checks": [
+    {
+      "name": "worker_runtime_resource_readback",
+      "pass_scoped": true,
+      "detail": {
+        "schema": "CR_HEIII_WORKER_RUNTIME_RESOURCE_READBACK_V1",
+        "status": "PASS",
+        "affinity": [
+          0
+        ],
+        "RLIMIT_AS_soft_hard_bytes": [
+          536870912,
+          536870912
+        ],
+        "native_thread_environment": {
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "NUMEXPR_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1",
+          "BLIS_NUM_THREADS": "1"
+        },
+        "openmp_controls": {
+          "OMP_DYNAMIC": "FALSE",
+          "OMP_NESTED": "FALSE",
+          "OMP_MAX_ACTIVE_LEVELS": "1"
+        },
+        "threadpool_info": [
+          {
+            "user_api": "blas",
+            "internal_api": "openblas",
+            "num_threads": 1,
+            "prefix": "libscipy_openblas",
+            "filepath": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy.libs/libscipy_openblas64_-fdde5778.so",
+            "version": "0.3.30",
+            "threading_layer": "pthreads",
+            "architecture": "SkylakeX"
+          },
+          {
+            "user_api": "blas",
+            "internal_api": "openblas",
+            "num_threads": 1,
+            "prefix": "libscipy_openblas",
+            "filepath": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/scipy.libs/libscipy_openblas-6cdc3b4a.so",
+            "version": "0.3.30",
+            "threading_layer": "pthreads",
+            "architecture": "SkylakeX"
+          }
+        ],
+        "process_memory": {
+          "pid": 5,
+          "source": "/proc/self/status",
+          "VmPeak_bytes": 231133184,
+          "VmSize_bytes": 229416960,
+          "VmHWM_bytes": 55107584,
+          "VmRSS_bytes": 53694464
+        },
+        "checks": {
+          "worker_affinity_is_CPU0": true,
+          "address_limits_are_512MiB": true,
+          "all_native_thread_env_are_one": true,
+          "openmp_dynamic_and_nested_disabled": true,
+          "threadpools_observed_after_numpy_scipy_import": true,
+          "all_observed_threadpools_are_one": true
+        },
+        "science_started_before_this_readback": false
+      }
+    },
+    {
+      "name": "native_HeII_row_and_positive_points",
+      "pass_scoped": true,
+      "detail": "PASS"
+    },
+    {
+      "name": "capturing_HeIII_density_not_electron_density",
+      "pass_scoped": true,
+      "detail": "FROZEN_HEIII_CONTRACT_MISMATCH:n_HeIII_cm3"
+    },
+    {
+      "name": "HeII_d1_statistical_convention",
+      "pass_scoped": true,
+      "detail": "FROZEN_HEIII_CONTRACT_MISMATCH:d_HeII"
+    },
+    {
+      "name": "new_hazard_density_linear",
+      "pass_scoped": true,
+      "detail": "PASS"
+    },
+    {
+      "name": "zero_target_hazard_and_null_conditionals",
+      "pass_scoped": true,
+      "detail": {
+        "capture_count": 0.0,
+        "conditional": null
+      }
+    },
+    {
+      "name": "missing_boolean_signed_nonfinite_density_rejected",
+      "pass_scoped": true,
+      "detail": [
+        "FINITE_EXPLICIT_TARGET_DENSITY_REQUIRED",
+        "FINITE_EXPLICIT_TARGET_DENSITY_REQUIRED",
+        "FINITE_EXPLICIT_TARGET_DENSITY_REQUIRED",
+        "FINITE_EXPLICIT_TARGET_DENSITY_REQUIRED",
+        "FINITE_EXPLICIT_TARGET_DENSITY_REQUIRED"
+      ]
+    },
+    {
+      "name": "invalid_kinetic_domains_rejected",
+      "pass_scoped": true,
+      "detail": [
+        "POSITIVE_FINITE_KINETIC_ENERGY_REQUIRED",
+        "POSITIVE_FINITE_KINETIC_ENERGY_REQUIRED",
+        "POSITIVE_FINITE_KINETIC_ENERGY_REQUIRED",
+        "POSITIVE_FINITE_KINETIC_ENERGY_REQUIRED",
+        "REAL_NONBOOLEAN_ENERGY_REQUIRED",
+        "REAL_NONBOOLEAN_ENERGY_REQUIRED",
+        "POSITIVE_FINITE_KINETIC_ENERGY_REQUIRED",
+        "POSITIVE_FINITE_KINETIC_ENERGY_REQUIRED",
+        "REAL_NONBOOLEAN_ENERGY_REQUIRED"
+      ]
+    },
+    {
+      "name": "native_PI_support_not_extended",
+      "pass_scoped": true,
+      "detail": "FINITE_PI_SUPPORT_REQUIRED"
+    },
+    {
+      "name": "physical18_insertion_and_bath_slice",
+      "pass_scoped": true,
+      "detail": "PASS"
+    },
+    {
+      "name": "conditional5_uses_shared_new_probabilities",
+      "pass_scoped": true,
+      "detail": "PASS"
+    },
+    {
+      "name": "stable4_uses_exact_stored_HeI_columns",
+      "pass_scoped": true,
+      "detail": "PASS"
+    },
+    {
+      "name": "three_RR_share_one_competing_operator",
+      "pass_scoped": true,
+      "detail": {
+        "probabilities": [
+          0.02183406113537118,
+          0.017467248908296942,
+          0.3056768558951965
+        ],
+        "shared_denominator": 2.29
+      }
+    },
+    {
+      "name": "disjoint_RR_probability_sum_is_detectably_wrong",
+      "pass_scoped": true,
+      "detail": "PASS"
+    },
+    {
+      "name": "four_stored_column_responses_nonpositive",
+      "pass_scoped": true,
+      "detail": "PASS"
+    },
+    {
+      "name": "single_added_hazard_two_sided_bound",
+      "pass_scoped": true,
+      "detail": "PASS"
+    },
+    {
+      "name": "strict_positive_Thomas_pivot_rejection",
+      "pass_scoped": true,
+      "detail": "STRICT_POSITIVE_THOMAS_PIVOT_REQUIRED"
+    },
+    {
+      "name": "Z_matrix_sign_rejection",
+      "pass_scoped": true,
+      "detail": "VALID_Z_MATRIX_REQUIRED"
+    },
+    {
+      "name": "backward_residual_each_column_own_scale",
+      "pass_scoped": true,
+      "detail": {
+        "own_column_scaled_backward": [
+          4.145360906445334e-17,
+          0.0
+        ],
+        "column_scale_ratio": 1e+120
+      }
+    },
+    {
+      "name": "three_binding_energies_and_final_reward_ownership",
+      "pass_scoped": true,
+      "detail": "PASS"
+    },
+    {
+      "name": "SI_and_native25_explicit_positive_nb",
+      "pass_scoped": true,
+      "detail": {
+        "energy_residual_J_m3": 4.0389678347315804e-28,
+        "charge_residual": 0.0,
+        "He4_nuclei_residual": 0.0,
+        "thermal_count_delta": 0.0,
+        "energy_rtol": 2e-13
+      }
+    },
+    {
+      "name": "no_implicit_nb_rate_or_heating",
+      "pass_scoped": true,
+      "detail": "PASS"
+    },
+    {
+      "name": "zero_integrated_counterpart_is_explicit",
+      "pass_scoped": true,
+      "detail": "PASS"
+    },
+    {
+      "name": "signed_nonfinite_integrated_moments_rejected",
+      "pass_scoped": true,
+      "detail": [
+        "integrated count cm^-3: FINITE_DOMAIN_REQUIRED",
+        "integrated count cm^-3: EXPLICIT_REAL_REQUIRED",
+        "integrated count cm^-3: FINITE_DOMAIN_REQUIRED",
+        "integrated count cm^-3: FINITE_DOMAIN_REQUIRED"
+      ]
+    },
+    {
+      "name": "integrated_duplicate_event_id_rejected",
+      "pass_scoped": true,
+      "detail": "DUPLICATE_CANONICAL_INTEGRATED_EVENT"
+    },
+    {
+      "name": "integrated_cross_frame_rejected",
+      "pass_scoped": true,
+      "detail": "INTEGRATED_BOOK_FRAME_MISMATCH"
+    },
+    {
+      "name": "source_provider_pin_mismatch_rejected",
+      "pass_scoped": true,
+      "detail": "SOURCE_QUALIFICATION_MISMATCH"
+    },
+    {
+      "name": "missing_theory_review_pin_rejected",
+      "pass_scoped": true,
+      "detail": "SOURCE_REVIEW_PIN_REQUIRED:review_sha256"
+    },
+    {
+      "name": "retained_photon_not_native_w_ext",
+      "pass_scoped": true,
+      "detail": "NATIVE25_INTEGRATED_PROJECTION"
+    },
+    {
+      "name": "integrated_energy_mismatch_rejected",
+      "pass_scoped": true,
+      "detail": "integrated validation: ENERGY_CLOSURE"
+    },
+    {
+      "name": "pulse_count_not_event_rate",
+      "pass_scoped": true,
+      "detail": "INTEGRATED_NOT_RATE_OR_HEATING:event_rate_m3_s"
+    },
+    {
+      "name": "invalid_explicit_nb_rejected",
+      "pass_scoped": true,
+      "detail": [
+        "explicit nb_m3: FINITE_DOMAIN_REQUIRED",
+        "explicit nb_m3: FINITE_DOMAIN_REQUIRED",
+        "explicit nb_m3: EXPLICIT_REAL_REQUIRED",
+        "explicit nb_m3: FINITE_DOMAIN_REQUIRED",
+        "explicit nb_m3: FINITE_DOMAIN_REQUIRED"
+      ]
+    },
+    {
+      "name": "nonzero_energy_with_zero_count_rejected",
+      "pass_scoped": true,
+      "detail": "ZERO_COUNTERPART_REQUIRED"
+    },
+    {
+      "name": "prior_attempt_missing_receipt_is_unknown",
+      "pass_scoped": true,
+      "detail": "UNKNOWN_PRIOR_ATTEMPT_BUDGET:attempt"
+    },
+    {
+      "name": "prior_attempt_boolean_negative_nonfinite_cost_is_unknown",
+      "pass_scoped": true,
+      "detail": [
+        "UNKNOWN_PRIOR_ATTEMPT_BUDGET:attempt",
+        "UNKNOWN_PRIOR_ATTEMPT_BUDGET:attempt",
+        "UNKNOWN_PRIOR_ATTEMPT_BUDGET:attempt",
+        "UNKNOWN_PRIOR_ATTEMPT_BUDGET:attempt",
+        "UNKNOWN_PRIOR_ATTEMPT_BUDGET:attempt"
+      ]
+    },
+    {
+      "name": "task_lease_is_create_only",
+      "pass_scoped": true,
+      "detail": "[Errno 17] File exists: '/workspace/scratch/5fcfe17050d5/bass_cr/research/cr_heiii_ground_rr_20261027/runs/cr_heiii_rr_controls_20261027_v1/control_owned_lease'"
+    }
+  ],
+  "historical_31_controls_replayed": 0,
+  "new_toy_consume_RHS_attempted": 56,
+  "additional_tiny_analytic_RHS_solved": 5,
+  "invalid_operator_solve_requests_rejected": 2,
+  "positive_nb_evidence": "NATIVE25_POSITIVE_NB_CONTROL.json"
+}

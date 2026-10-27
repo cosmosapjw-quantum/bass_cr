@@ -1,0 +1,63 @@
+{
+  "schema": "CR_HEIII_WORKER_RUNTIME_RESOURCE_READBACK_V1",
+  "status": "PASS",
+  "affinity": [
+    0
+  ],
+  "RLIMIT_AS_soft_hard_bytes": [
+    536870912,
+    536870912
+  ],
+  "native_thread_environment": {
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "VECLIB_MAXIMUM_THREADS": "1",
+    "BLIS_NUM_THREADS": "1"
+  },
+  "openmp_controls": {
+    "OMP_DYNAMIC": "FALSE",
+    "OMP_NESTED": "FALSE",
+    "OMP_MAX_ACTIVE_LEVELS": "1"
+  },
+  "threadpool_info": [
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "num_threads": 1,
+      "prefix": "libscipy_openblas",
+      "filepath": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy.libs/libscipy_openblas64_-fdde5778.so",
+      "version": "0.3.30",
+      "threading_layer": "pthreads",
+      "architecture": "SkylakeX"
+    },
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "num_threads": 1,
+      "prefix": "libscipy_openblas",
+      "filepath": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/scipy.libs/libscipy_openblas-6cdc3b4a.so",
+      "version": "0.3.30",
+      "threading_layer": "pthreads",
+      "architecture": "SkylakeX"
+    }
+  ],
+  "process_memory": {
+    "pid": 5,
+    "source": "/proc/self/status",
+    "VmPeak_bytes": 231133184,
+    "VmSize_bytes": 229416960,
+    "VmHWM_bytes": 55107584,
+    "VmRSS_bytes": 53694464
+  },
+  "checks": {
+    "worker_affinity_is_CPU0": true,
+    "address_limits_are_512MiB": true,
+    "all_native_thread_env_are_one": true,
+    "openmp_dynamic_and_nested_disabled": true,
+    "threadpools_observed_after_numpy_scipy_import": true,
+    "all_observed_threadpools_are_one": true
+  },
+  "science_started_before_this_readback": false
+}
