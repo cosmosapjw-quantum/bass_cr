@@ -1,0 +1,89 @@
+{
+  "schema": "CR_NEXT_WOLFRAM_SYMBOLIC_CANDIDATES_V1",
+  "status": "NOT_RUN_ROOT_R7_DISPATCH_REQUIRED",
+  "author": "/root/theory_review",
+  "purpose": "Bounded checks of newly derived finite-window, baryon/thermal bookkeeping and positive uniformization identities. No old operator, source array, rate table or transport campaign is evaluated.",
+  "context_before_first_call": {
+    "tool": "mcp__codex_apps__wolfram_wolframcontext",
+    "input": {
+      "context": "We are developing a bounded finite proper-time source-response contract for a fixed 100K H1/He4 bath. Actual old source q(t)=tA is reused, but no old scientific solver is to be rerun. Need only small symbolic checks: same-inventory baryon normalization, RR versus cutoff thermal-electron bookkeeping, finite-window exponential convolution for a ramp with absolute time origin, and positive Poisson uniformization weights with unnormalized finite-n truncation. Symbolic checks do not validate cross sections, the physical bath model, or floating-point interval enclosures. All proposed queries below are still unexecuted."
+    }
+  },
+  "queries": [
+    {
+      "id": "W01_INVENTORY_AND_THERMAL_BOOKKEEPING",
+      "tool": "mcp__codex_apps__wolfram_wolframlanguageevaluator",
+      "input": {
+        "timeConstraint": 8,
+        "code": "ClearAll[nb,rh,rhe,nc,cv,kb,t0,qc,uc]; inv={Together[140+4*(1085/94)],Together[(140+1085/94)/100],Together[((140+1085/94)/100)/(140+4*(1085/94))]}; rr=Together[-(rh+rhe)/nb-(-(rh+rhe)/nb)]; cut=Together[0-(-nc/nb)-nc/nb]; dtemp=(qc+uc-3*kb*t0*nc/2)/(cv+3*kb*nc/2); therm=Together[(cv+3*kb*nc/2)*(t0+dtemp)-(cv*t0+qc+uc)]; {inv,rr,cut,therm}"
+      },
+      "manual_expected": [
+        [
+          "8750/47",
+          "2849/1880",
+          "407/50000"
+        ],
+        0,
+        0,
+        0
+      ],
+      "claim_scope": "Exact nominal H1/He4 inventory and event-local algebra only. Does not supply missing source parent chemistry or a coupled thermal history."
+    },
+    {
+      "id": "W02_ABSOLUTE_SOURCE_TIME_AND_RR_ONLY_LIMIT",
+      "tool": "mcp__codex_apps__wolfram_wolframlanguageevaluator",
+      "input": {
+        "timeConstraint": 8,
+        "code": "ClearAll[aa,dd,rr,lam,v,z,amp,t,p1,p2]; p1[z_]:=(Exp[z]-1)/z; p2[z_]:=(Exp[z]-1-z)/z^2; rhs=Exp[-lam*rr]*(aa*dd*p1[-lam*dd]+dd^2*p2[-lam*dd]); integ=Integrate[Exp[-lam*(rr+dd-v)]*(aa+v),{v,0,dd},Assumptions->aa>=0&&dd>0&&rr>=0&&lam>0]; window=FullSimplify[integ-rhs,Assumptions->aa>=0&&dd>0&&rr>=0&&lam>0]; zero=FullSimplify[Limit[rhs,lam->0]-(aa*dd+dd^2/2),Assumptions->aa>=0&&dd>0&&rr>=0]; surv=amp*(t/lam-(1-Exp[-lam*t])/lam^2); cap=amp*t^2/2-surv; {window,zero,FullSimplify[D[cap,t]-lam*surv],FullSimplify[cap+surv-amp*t^2/2],FullSimplify[Limit[cap,lam->0]]}; occ=amp*(t^2/(2*lam)-t/lam^2+(1-Exp[-lam*t])/lam^3); {window,zero,FullSimplify[D[cap,t]-lam*surv],FullSimplify[cap+surv-amp*t^2/2],FullSimplify[Limit[cap,lam->0]],FullSimplify[D[occ,t]-surv],FullSimplify[lam*occ-cap],FullSimplify[Limit[occ,lam->0]-amp*t^3/6]}"
+      },
+      "manual_expected": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "claim_scope": "Scalar analytic convolution and zero-rate limits. Matrix formula follows from the entire power series; no assertion of actual RR rates or full-transport approximation error. Actual finite occupancy integral and endpoint capture rate are checked, not conditional mean lifetime."
+    },
+    {
+      "id": "W03_POISSON_WEIGHT_IDENTITIES",
+      "tool": "mcp__codex_apps__wolfram_wolframlanguageevaluator",
+      "input": {
+        "timeConstraint": 8,
+        "code": "ClearAll[n,k,x,v,j,p]; p[n_]:=Exp[-x]*x^n/Factorial[n]; tri=FullSimplify[Sum[n-k-1,{k,0,n-2}]-n*(n-1)/2,Assumptions->Element[n,Integers]&&n>=2]; factorial=FullSimplify[n*(n-1)*p[n]-x^2*p[n-2],Assumptions->x>0&&Element[n,Integers]&&n>=2]; fixed=Table[FullSimplify[Integrate[(1-v)*Exp[-x*v]*(x*v)^k/Factorial[k],{v,0,1},Assumptions->x>0]-(x*(1-Exp[-x]*Sum[x^j/Factorial[j],{j,0,k}])-(k+1)*(1-Exp[-x]*Sum[x^j/Factorial[j],{j,0,k+1}]))/x^2,Assumptions->x>0],{k,0,2}]; {tri,factorial,fixed}; third=FullSimplify[Sum[k*(n-k-1),{k,0,n-2}]-n*(n-1)*(n-2)/6,Assumptions->Element[n,Integers]&&n>=2]; thirdfact=FullSimplify[n*(n-1)*(n-2)*p[n]-x^3*p[n-3],Assumptions->x>0&&Element[n,Integers]&&n>=3]; hockey=FullSimplify[Sum[(n-k-1)*(n-k-2)/2,{k,0,n-3}]-n*(n-1)*(n-2)/6,Assumptions->Element[n,Integers]&&n>=3]; {tri,factorial,fixed,third,thirdfact,hockey}"
+      },
+      "manual_expected": [
+        0,
+        0,
+        [
+          0,
+          0,
+          0
+        ],
+        0,
+        0,
+        0
+      ],
+      "claim_scope": "General finite-n mass proof uses first two identities plus direct nonnegative-series/Beta-integral derivation. k=0,1,2 checks are limited scalar examples, not a replacement for the general derivation. No normalized truncated weights, actual solver or outward interval result is evaluated. Third-factorial identities support the actual-occupancy and tinyRR tail index M-2."
+    }
+  ],
+  "numerical_workers_executed": 0,
+  "symbolic_calls_executed": 0,
+  "expected_values_status": "Manually derived targets, not observed Wolfram outputs and not PASS evidence.",
+  "provider_CPU_s": null,
+  "time_limit_note": "Each proposed evaluator request is at most8s provider wall time; actual providerCPU remains unknown unless measured. Limits do not transfer or consume an assumed remaining old project budget. Root freezes execution scope before dispatch.",
+  "preflight_dependencies": [
+    "Root-selected unit CR_PHYS02_LOW_BIRTH_CAUSAL_RR_V1; exact actual direct_0p1_10 tag, fourprefixes/fourbins",
+    "Final same-state H1/He4 inventory and density recipe",
+    "New independent unit budget; tentative40CPU is not frozen here"
+  ],
+  "source_input_history_mutated": false,
+  "unit_id": "CR_PHYS02_LOW_BIRTH_CAUSAL_RR_V1",
+  "budget_note": "Separate40CPU direction from root; execution admission/ledger owned by root. These symbolic requests remain unexecuted with providerCPU unknown.",
+  "frozen_contract_sha256": "0766fa66e643de2b50d797fa94838cb989e69c8d3aaa47fe8c31673764757210",
+  "root_authorized_max_requests": 3,
+  "root_authorized_max_timeConstraint_s_per_request": 8
+}
