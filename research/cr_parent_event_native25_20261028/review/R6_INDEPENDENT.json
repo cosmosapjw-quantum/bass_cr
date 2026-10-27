@@ -1,0 +1,387 @@
+{
+  "schema": "CR_PARENT_R6_INDEPENDENT_THEORY_REVIEW_V1",
+  "unit": "CR_PHYS02_PARENT_EVENT_NATIVE25_V1",
+  "reviewed_utc": "2026-10-27T16:24:46.457060+00:00",
+  "reviewer": "/root/source_qualification",
+  "verdict": "PASS_SCOPED_THEORY",
+  "decision_scope": "Independent manual mathematical/source-contract review of the bounded conditional parent-event construction; not numerical recovery, implementation or physical full-state activation.",
+  "independence": {
+    "main_theory_author": false,
+    "production_code_author": false,
+    "numerical_reference_author": false,
+    "prior_role": "Source/provider qualification and metadata evidence; reviewer suggested only the three bounded documentation corrections, applied by root.",
+    "same_author_self_review": false
+  },
+  "identities": {
+    "R5_commit": "8ac0a56475e06c02e3e3e3a11417ef893fdcb4ce",
+    "R5_published_theory_sha256": "2b74ce08e992961e64306bdb7157f788e94ac838742480acdafc5ddd72ebf591",
+    "reviewed_corrected_theory_sha256": "1a35e091aed4e2db58f4db1d355cf88ccb79a9041a57330a76bf5ff2a5857652",
+    "corrected_theory_publication_at_review": "PENDING_R6_PUBLICATION",
+    "contract_sha256": "01cc2d2835e3ad61c49cd0b68b8c413ebd7e0b8fb5228877804159c4e3f71162",
+    "prior_S": "2eed7ef835c55ee17e4ce96e0eda7fe8d82dc47c",
+    "prior_D": "616b166fa0108ca35defece3f8c9d99fc79895cb",
+    "prior_M": "42cc3a909688d670200ba09c500e2ca83a94fa10"
+  },
+  "blocking_findings": [],
+  "open_blocking_findings": [],
+  "open_bounded_correction_requests": [],
+  "resolved_findings": [
+    {
+      "id": "R6-D01",
+      "kind": "coefficient-name ambiguity",
+      "initial": "Theory theta_He0/theta_He1 and contract theta_He1/theta_He2 used a shared suffix for different bases.",
+      "resolution": "Root added explicit theory-to-contract aliases and fixed contract coefficient order after Eq2; the frozen contract was not changed.",
+      "status": "RESOLVED_RECHECKED"
+    },
+    {
+      "id": "R6-D02",
+      "kind": "evidence-path precision",
+      "initial": "Theory section0 named paths that were not the actual current unit paths.",
+      "resolution": "Root replaced them with inputs/SOURCE_LINEAGE_MANIFEST.json, inputs/INPUT_MANIFEST.json and literature/LITERATURE_MAP_KO.md.",
+      "status": "RESOLVED_RECHECKED"
+    },
+    {
+      "id": "R6-D03",
+      "kind": "closed-endpoint inequality",
+      "initial": "The strict positive lower remainder bound in Eq7 excluded z=0 despite the declared a=b endpoint.",
+      "resolution": "Root changed the lower bound to 0<=; the positive-series formula and all tolerances are unchanged.",
+      "status": "RESOLVED_RECHECKED"
+    }
+  ],
+  "checked_claims": [
+    {
+      "id": "R6-T01",
+      "topic": "three-basis independence and actual H ratio",
+      "equations": [
+        "1",
+        "2"
+      ],
+      "assessment": "SUPPORTED_WITH_DECLARED_LIMITS",
+      "reason": "The distinct non-cancelled H pole forces its coefficient to zero in a rational identity; the remaining He numerator is affine and forces both He coefficients to zero. Actual rudd_factors uses 7/(3v^2),1/v^2. Separate binary64 dot products are correctly treated as a consistency issue, not exact stored coefficient identity.",
+      "limit": "Functional independence does not establish the selected finite moment matrix condition or actual fit acceptance."
+    },
+    {
+      "id": "R6-T02",
+      "topic": "finite matrix scaling and componentwise sensitivity",
+      "equations": [
+        "9",
+        "10",
+        "11",
+        "12"
+      ],
+      "assessment": "SUPPORTED_WITH_NUMERIC_GATES_PENDING",
+      "reason": "With nominal R,c,M fixed, B dz=R db and |db_i|<=eta b_i imply |dz|<=eta |B^-1|1. The positive diagonal coefficient scale preserves componentwise relative bounds. Frozen rcond, sensitivity and positive-envelope tests must be evaluated on the actual saved moments.",
+      "limit": "No numerical rcond, solution, interval certification or physical uncertainty certificate is asserted by this review."
+    },
+    {
+      "id": "R6-T03",
+      "topic": "positive moment primitives and series remainder",
+      "equations": [
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "assessment": "SUPPORTED",
+      "reason": "Substitution W=a+(I+a)u gives the stated nonnegative moments; v=u/(1+u) gives F2=sum(z^k/k,k>=3). The omitted series is bounded by its first omitted numerator times a geometric series. The corrected non-strict lower bound includes z=0; a=b explicitly returns zero. E0=I*N1 and the independent primitive derivatives agree dimensionally and algebraically.",
+      "limit": "Ordinary high precision and the analytic remainder bound do not certify all floating arithmetic outwardly."
+    },
+    {
+      "id": "R6-T04",
+      "topic": "original Gauss8 projection and canonical source ownership",
+      "equations": [
+        "13",
+        "14",
+        "15",
+        "16"
+      ],
+      "assessment": "SUPPORTED_BY_ACTUAL_SOURCE_TEXT",
+      "reason": "Actual source_vectors uses eight-point cell quadrature, divides by selected_A_energy and calls number-linear project. The latter stores E times active counts and sends the first lower weight to the E=0.1 cutoff ghost. Eq16 cancels the original real normalization and has the proper number-coordinate units.",
+      "limit": "The new target projection must pass unchanged atom/aggregate tolerances against canonical saved bytes; pointwise target fractions and renormalization are not permitted."
+    },
+    {
+      "id": "R6-T05",
+      "topic": "finite absolute history and observation bins",
+      "equations": [
+        "17",
+        "18",
+        "19",
+        "20"
+      ],
+      "assessment": "SUPPORTED",
+      "reason": "Integrating q=tA on [a,b] gives (b-a)(b+a)A/2 once. Saved observation-bin captures include survivors from earlier births; the theory keeps them distinct from the source birth interval and uses saved active-state changes. Prefixes remain nonadditive.",
+      "limit": "No continuation or zero source after T, conditional-mean-time exposure, worldtube total or fresh RR propagation is supplied."
+    },
+    {
+      "id": "R6-T06",
+      "topic": "inclusive helium marginal and necessary event family",
+      "equations": [
+        "21",
+        "22"
+      ],
+      "assessment": "SUPPORTED_AS_NECESSARY_CONDITIONAL_FAMILY",
+      "reason": "Counting selected electrons in single, mixed double and doubly selected events gives s+p+2d=N_He. The He I/II/III coefficients follow from residual charges and nuclei conservation. The domain p,d>=0,p+2d<=N_He is explicitly necessary, not a sufficient global energy-resolved joint kernel.",
+      "limit": "Actual s,p,d, partner spectrum/history/response and residual He+ excitation remain null; p=d=0 is only a declared fixture/intercept."
+    },
+    {
+      "id": "R6-T07",
+      "topic": "parent chemistry, RR target and native25",
+      "equations": [
+        "23",
+        "24",
+        "25",
+        "26",
+        "27"
+      ],
+      "assessment": "SUPPORTED_AS_PARTIAL_OR_CLOSED_FIXTURE",
+      "reason": "The species increments conserve H/He nuclei and conditional baryon density; charge gives J_H+N_He+p-C_H-C_He. Source-parent target and RR capture target need not coincide. Dividing proper-density increments by the same-state nb once gives the declared native coefficients. Selected fast-electron accounting leaves p unresolved rather than silently thermalizing it.",
+      "limit": "External proton injection is not closed, and absent partner/branch closure actual full physical native25 stays null. Source attribution and saved response residuals remain separate."
+    },
+    {
+      "id": "R6-T08",
+      "topic": "kinetic/photon/chemical energy sidecars",
+      "equations": [
+        "28",
+        "29",
+        "30",
+        "31",
+        "32",
+        "33",
+        "34",
+        "35"
+      ],
+      "assessment": "SUPPORTED",
+      "reason": "Expansion of recipient chemical inventory with Eq23 yields Eq30. Substituting the saved kinetic identity and actual RR binding atoms gives Rconst-Bbranch in Eq33. A mixed double needs one additional I2_src; a doubly selected double needs I2_src-I1_src beyond two electron-equivalent I1_src charges. Eq35 is precisely the branch convention difference.",
+      "limit": "The source-selected functional is not an actual exclusive projectile debit. I2_src, partner kinetic energy and excitation are not manufactured from recipient thresholds. These sidecars and retained photons are not heat or w_ext."
+    },
+    {
+      "id": "R6-T09",
+      "topic": "conditional caloric EOS and bin baseline",
+      "equations": [
+        "36",
+        "37"
+      ],
+      "assessment": "SUPPORTED_WITH_EXPLICIT_CLOSURE",
+      "reason": "For U_th=cv*n_part*T, finite energy/count increments give Eq36. Using preceding-bin Ua,Da gives Tb/Ta=(Ua+q)Da/[Ua(Da+n)] and the stated stable delta/log1p form. Prefix and bin baseline ownership is correct, and positivity of species, particle count and temperature is required.",
+      "limit": "Only an explicitly closed partner/cutoff/EOS fixture may evaluate it. This is frozen100K postprocessing, not coupled thermal evolution or physical heating completion."
+    },
+    {
+      "id": "R6-T10",
+      "topic": "tiny increments and rare RR term preservation",
+      "equations": [
+        "23",
+        "28",
+        "31",
+        "section11"
+      ],
+      "assessment": "SUPPORTED_IMPLEMENTATION_OBLIGATION",
+      "reason": "Baseline+delta avoids loss when the endpoint rounds to the baseline, while a separate event-term ledger preserves source and rare RR contributions at their own scales. Deriving C_H by subtracting a large combined delta from J_H is correctly forbidden.",
+      "limit": "Actual implementation and independent saved-output tests remain required; the theory alone is not evidence that those fields are preserved."
+    },
+    {
+      "id": "R6-T11",
+      "topic": "once-only factors and support/state gates",
+      "equations": [
+        "sections1",
+        "5",
+        "6",
+        "12"
+      ],
+      "assessment": "SUPPORTED_BY_SOURCE_AND_CONTRACT",
+      "reason": "Actual q_proper already contains the proper-volume conversion; DirectElectronSource already folds projectile speed and neutral target density into A, and the scalar source is angle integrated. Finite time, eV-to-J and per-baryon factors have distinct single owners. Birth-tag support and projection ghosts are not transport support extensions.",
+      "limit": "No implicit absolute volume, foreign T/nb, isotope remapping, mixed frame or duplicate aggregate/RR-only adoption is authorized."
+    },
+    {
+      "id": "R6-T12",
+      "topic": "scope, evidence reuse, budget and completion boundary",
+      "equations": [
+        "section13"
+      ],
+      "assessment": "SUPPORTED_SCOPED_ONLY",
+      "reason": "Current theory leaves new fit and code acceptance pending, reuses immutable prior response without replay, preserves old failures/budgets and keeps a separate prospective40CPU unit envelope. Central28/88 and CR effect0 remain explicit.",
+      "limit": "This R6 decision does not complete R7-C10, publish a return, add central completion or authorize a successor scientific unit."
+    }
+  ],
+  "checked_claims_are_manual_topics_not_numeric_test_count": true,
+  "reviewed_files": [
+    {
+      "path": "research/cr_parent_event_native25_20261028/THEORY_KO.md",
+      "bytes": 31893,
+      "sha256": "1a35e091aed4e2db58f4db1d355cf88ccb79a9041a57330a76bf5ff2a5857652",
+      "read_scope": "complete manual review; root documentation delta independently compared"
+    },
+    {
+      "path": "research/cr_parent_event_native25_20261028/CONTRACT.json",
+      "bytes": 10683,
+      "sha256": "01cc2d2835e3ad61c49cd0b68b8c413ebd7e0b8fb5228877804159c4e3f71162",
+      "read_scope": "complete frozen contract and tolerance/state/null gates"
+    },
+    {
+      "path": "research/cr_parent_event_native25_20261028/inputs/CONDITIONING_DEFINITION.json",
+      "bytes": 1210,
+      "sha256": "90f0b4e049ab289fbf0a7dd205f4dbc720dbf32547f99f3444a3d3a83b4059bc",
+      "read_scope": "complete scaling and perturbation definition"
+    },
+    {
+      "path": "research/cr_parent_event_native25_20261028/evidence/R3_CLAIM_MAP.json",
+      "bytes": 11153,
+      "sha256": "1a6533f60194b41240ad174f5b0583492073b6e6fc55a8f9ff3274567bbbebb9",
+      "read_scope": "complete claim map"
+    },
+    {
+      "path": "research/cr_parent_event_native25_20261028/evidence/R4_REPRESENTATION_KO.md",
+      "bytes": 4261,
+      "sha256": "de73d628d1a8c3e32147fb225d2c3d5265905ace43de652359360a0338bc75eb",
+      "read_scope": "complete representation decision"
+    },
+    {
+      "path": "research/cr_parent_event_native25_20261028/inputs/INPUT_MANIFEST.json",
+      "bytes": 4247,
+      "sha256": "2273f08ac1716d233097d17c73818d39a9337da34712290a4b4171430d24f9b3",
+      "read_scope": "complete input byte pins and source reuse scope"
+    },
+    {
+      "path": "research/cr_parent_event_native25_20261028/inputs/SOURCE_LINEAGE_MANIFEST.json",
+      "bytes": 18511,
+      "sha256": "a584732402d37afca22d473845db8c20fd0cd2ff9f40e5ba4d7c400cf74d0f44",
+      "read_scope": "relevant source identity and role entries"
+    },
+    {
+      "path": "research/cr_parent_event_native25_20261028/intake/preflight/R06.json",
+      "bytes": 167404,
+      "sha256": "2156b5a2ef2845325e40301cc78b83deb003d4272f8fa9bdd98d406fa32c20da",
+      "read_scope": "stage/HEAD/policy/source-pin/backup/count guards; not a new provider survey"
+    },
+    {
+      "path": "research/cr_parent_event_native25_20261028/publication/R05_RECEIPT.json",
+      "bytes": 2135,
+      "sha256": "04529aed736695163a3cab7a43fa89767c809b500e4bc1bce0459f294e848a20",
+      "read_scope": "actual R5 publication and dual R2 receipt"
+    },
+    {
+      "path": "research/cr_parent_event_native25_20261028/review/R6_CORRECTION_LOG.json",
+      "bytes": 762,
+      "sha256": "ef3a291f7a805366d1d9b88f93be6131b66c046e2ca38e5664b3c349ef867035",
+      "read_scope": "complete bounded root correction log"
+    },
+    {
+      "path": "research/cr_parent_event_native25_20261028/intake/consumer/CONSUMER_FEASIBILITY_KO.md",
+      "bytes": 18593,
+      "sha256": "471c0f0217db9113202d761ac66db16a69b44caf8b377e243ae54cdfcdf31408",
+      "read_scope": "native order/units/thresholds, consumer scopes, branch and caloric gates"
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 20814,
+      "sha256": "bf1b921550473363df97f75bbbfc2e839120990f89a330b35da66867695f17b5",
+      "read_scope": "current priority and preserved applicable policy; historical blocks not treated as current science"
+    },
+    {
+      "path": "research/cr_source_binding_20261012/inputs/source_lineage/sources/research/cr_phys01_20261010/src/injection.py",
+      "bytes": 16626,
+      "sha256": "c5eda0e60302339af1bbdd0603ae1cd8a8921d9e6489c22d954e0bc92968c27d",
+      "read_scope": "actual proper normalization and angle-integrated source definitions"
+    },
+    {
+      "path": "research/cr_source_binding_20261012/inputs/source_lineage/sources/research/cr_phys01_20261010/src/rudd.py",
+      "bytes": 6584,
+      "sha256": "757e4c8b33618ad6ef88f422919fe813654454c836f0942cf9792be133e8eac2",
+      "read_scope": "complete actual source kernel text; no import"
+    },
+    {
+      "path": "research/cr_source_binding_20261012/inputs/source_lineage/sources/research/cr_phys02a_20261010/src/causal_subthreshold.py",
+      "bytes": 11785,
+      "sha256": "2259506b74c16027fda69b479cb1039b0888e19c5f8dcf400273892aba6f39f9",
+      "read_scope": "actual DirectElectronSource and finite-clock/state definitions; no import"
+    },
+    {
+      "path": "research/cr_source_binding_20261012/inputs/source_lineage/sources/research/cr_phys02b_20261010/src/causal_cascade.py",
+      "bytes": 19115,
+      "sha256": "d87a9cc122125b2d37b47f261f57eab698baa59e07a6b21723860f39313c7b72",
+      "read_scope": "actual ElectronSource, grid, Cascade.project and source_vectors text; no constructor or import"
+    },
+    {
+      "path": "research/cr_low_birth_causal_rr_20261027/runs/primary_v1/RESULT.json",
+      "bytes": 81358,
+      "sha256": "ae8452f25958c47349d313926ef14e7ab7d78691ba6bb3b8395dc399aa49b0ce",
+      "read_scope": "saved prefix/bin/retained-photon/native schema only; no resums or scientific replay"
+    }
+  ],
+  "source_pin_evidence": {
+    "source": "intake/preflight/R06.json#/actual_source_pins_checked",
+    "count": 17,
+    "source_and_previous_backup_receipt_check": "PASS",
+    "reuse_of_existing_actual_backup_evidence": true,
+    "new_provider_backup_GET": false
+  },
+  "publication_context": {
+    "latest_completed_stage": "R05",
+    "completed_stages_at_review": 5,
+    "total_loop_stages": 20,
+    "R5_Git_ref_readback": true,
+    "R5_Dropbox_tier": "R2",
+    "R5_Drive_tier": "R2",
+    "R5_new_archive_full_GET": false,
+    "R6_publication_by_reviewer": false
+  },
+  "central": {
+    "head": "7de02b3e05705ead4eeb313c8487a21d4e6876a6",
+    "completed": 28,
+    "total": 88,
+    "nodes": 88,
+    "integration_edges": 17,
+    "this_unit_count_effect": 0,
+    "counts_inferred_from_status_strings": false,
+    "PR236_32_added": false,
+    "parallel_working_33_added": false
+  },
+  "unresolved_physical_gates": {
+    "actual_He_branch": null,
+    "partner_history_energy_response": null,
+    "residual_He_excitation": null,
+    "actual_external_work": null,
+    "actual_proton_debit": null,
+    "actual_full_low_source_physical_native25": null,
+    "full9600_native25": null,
+    "absolute_worldtube_totals": null,
+    "physical_heating_complete": false,
+    "global_physical_completion": null,
+    "global_error": null,
+    "global_budget_remaining": null,
+    "global_currency": null,
+    "L4": false,
+    "N4": "PARTIAL_OPEN",
+    "N5": "PARTIAL_OPEN",
+    "N6": "PREDECESSOR_GATED",
+    "N7": "PREDECESSOR_GATED"
+  },
+  "remaining_acceptance_obligations": [
+    "Bounded R7 symbolic checks if admitted by root; they do not replace this manual review.",
+    "Actual3x3 recovery/conditioning, held-out moments and original projection/canonical comparisons under the frozen tolerances.",
+    "Implementation controls and independently authored numerical reference for the new attribution/consumer only.",
+    "Actual budget/resource admission and accounting; no inherited remaining-budget transfer.",
+    "Stage publication, canonical source/dual backups/R3 and owner-return gates remain root-owned later tasks."
+  ],
+  "execution": {
+    "scientific_runs": 0,
+    "scientific_imports": 0,
+    "CAS_calls": 0,
+    "old_source_quadrature_replays": 0,
+    "old_G_RR_replays": 0,
+    "old_G9600_replays": 0,
+    "new_literature_searches": 0,
+    "provider_resurvey": 0,
+    "scientific_or_budget_CPU_claim": null,
+    "new_metadata_outputs_only": true
+  },
+  "read_failure_preserved": {
+    "operation": "read-only git diff against R5",
+    "outcome": "Promisor blob retrieval failed because local browser-proxy connection was unavailable; no science ran.",
+    "bounded_recovery": "Compared the already preserved local original theory draft with SHA equal to the R5-published theory against corrected THEORY_KO.md. Exact diff consisted only of the three documented corrections.",
+    "no_additional_remote_fetch_attempt": true
+  },
+  "AUTO_NEXT_NODE": false,
+  "single_current_scientific_unit_only": true
+}

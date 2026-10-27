@@ -10,7 +10,7 @@ CONDITIONING_DEFINITION.json의 SHA256은 **90f0b4e049ab289fbf0a7dd205f4dbc720db
 작성자는 이론/입력 식별 제안자이며 이전 PR110 theory/reference 저자다. 현재 문서를 독립심사라고 부르지 않는다.
 수식은 수동으로 유도했다. 새 물리 runtime, CAS, scientific import, compile, test, 기존 source/proton quadrature/G/RR 실행은 모두0이다.
 실제 코드로 DirectElectronSource, Rudd port, source_vectors, number-linear project와 PR110 saved-result schema를 읽었다.
-필요한 원문·바이트·source pin은 INPUT_SOURCE_MANIFEST.json에, primary 문헌 대조는 LITERATURE_MAP_KO.md에 결속돼 있다.
+필요한 원문·바이트·source pin은 `inputs/SOURCE_LINEAGE_MANIFEST.json`과 `inputs/INPUT_MANIFEST.json`에, primary 문헌 대조는 `literature/LITERATURE_MAP_KO.md`에 결속돼 있다.
 
 선행 response identity는 S2eed7ef835c55ee17e4ce96e0eda7fe8d82dc47c, D616b166fa0108ca35defece3f8c9d99fc79895cb,
 M42cc3a909688d670200ba09c500e2ca83a94fa10이다. 원 canonical source JSON SHA8fca44c378844029a72253179e557dfa97f6cca8e0f9d6e677d67919ca3797cf를 바꾸지 않는다.
@@ -64,6 +64,8 @@ A(W)&=\theta_H g_H(W)+\theta_{He0}g_{He0}(W)+\theta_{He1}g_{He1}(W).
 \end{split}
 \tag{2}
 \]
+
+이 본문의 수학기호는 0-based He basis를 사용한다. 고정 계약·코드의 coefficient order는 `(theta_H, theta_He1, theta_He2)`이며, 명시적 대응은 `theta_He0_theory = theta_He1_contract` 및 `theta_He1_theory = theta_He2_contract`이다. 따라서 두 문서의 접미사만으로 열을 정렬하지 않고 이 대응표로 결속한다. 계수는 세 개이며 물리적 의미나 frozen CONTRACT를 변경하지 않는다.
 
 모든 theta의 단위는 A와 같다. 이미 적분된 원 proton source/target normalization이 이 세 scalar 안에 포함된다.
 원 64-point proton quadrature의 node나 flux를 다시 평가할 필요가 없다.
@@ -134,7 +136,7 @@ f1이 아닌 f0의 H 조합에는 N_H=(7/3)N0_H+N1_H, E_H=(7/3)E0_H+E1_H를 사�
 작은 z에는 positive series를 사용한다. m≥3까지 더했다면
 
 \[
-0< F_2-\sum_{k=3}^{m}z^k/k
+0\le F_2-\sum_{k=3}^{m}z^k/k
 \le \frac{z^{m+1}}{(m+1)(1-z)}.
 \tag{7}
 \]
