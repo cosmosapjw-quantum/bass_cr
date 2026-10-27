@@ -1,0 +1,95 @@
+{
+  "schema": "CR_PARENT_EVENT_EXECUTION_BUDGET_V1",
+  "unit": "CR_PHYS02_PARENT_EVENT_NATIVE25_V1",
+  "budget_id": "CR_PARENT_EVENT_20261028_NEW40",
+  "status": "DRAFT_NOT_C4_ADMITTED",
+  "local_science_cpu_cap_s": 40,
+  "historical_allowance_transferred": false,
+  "parallel_project_budget_transferred": false,
+  "preparation_reserve_cpu_s": 4,
+  "spent_before_C4_admission": null,
+  "preparation_measured_CPU_s": null,
+  "preparation_conservative_tail_CPU_s": null,
+  "preparation_cost_manifest": "evidence/C04_PREPARATION_LEDGER.json",
+  "preparation_cost_manifest_sha256": null,
+  "contract": "CONTRACT.json",
+  "contract_sha256": "01cc2d2835e3ad61c49cd0b68b8c413ebd7e0b8fb5228877804159c4e3f71162",
+  "input_manifest": "inputs/INPUT_MANIFEST.json",
+  "input_manifest_sha256": "2273f08ac1716d233097d17c73818d39a9337da34712290a4b4171430d24f9b3",
+  "source_input_file_count": 17,
+  "AGENTS_sha256": "bf1b921550473363df97f75bbbfc2e839120990f89a330b35da66867695f17b5",
+  "host_admission": "evidence/C04_HOST_ADMISSION.json",
+  "host_admission_sha256": null,
+  "code_manifest": "evidence/C04_CODE_MANIFEST.json",
+  "code_manifest_sha256": null,
+  "native_threads": 1,
+  "worker_memory_bytes": 536870912,
+  "minimum_host_memory_reserve_bytes": 1073741824,
+  "memory_admission_policy": "CAPPED_CLEAN_FILE_LRU25_V2",
+  "cgroup_v2_path": null,
+  "process_cgroup_membership_sha256": null,
+  "coordinator_reserve_per_attempt_s": 2.05,
+  "coordinator_receipt_tail_reserve_s": 0.05,
+  "wall_per_attempt_s": 60,
+  "aggregate_worker_monitor_poll_s": 0.02,
+  "aggregate_worker_stop_margin_s": 0.05,
+  "run_allocations": [
+    {
+      "run_id": "prepare_v1",
+      "role": "prepare",
+      "worker_cpu_reservation_s": 3,
+      "coordinator_cpu_reservation_s": 2.05,
+      "selected_memory_limit_bytes": 268435456
+    },
+    {
+      "run_id": "controls_v1",
+      "role": "controls",
+      "worker_cpu_reservation_s": 3,
+      "coordinator_cpu_reservation_s": 2.05,
+      "selected_memory_limit_bytes": 268435456
+    },
+    {
+      "run_id": "primary_v1",
+      "role": "primary",
+      "worker_cpu_reservation_s": 4,
+      "coordinator_cpu_reservation_s": 2.05,
+      "selected_memory_limit_bytes": 268435456
+    },
+    {
+      "run_id": "independent_v1",
+      "role": "independent",
+      "worker_cpu_reservation_s": 6,
+      "coordinator_cpu_reservation_s": 2.05,
+      "selected_memory_limit_bytes": 268435456
+    },
+    {
+      "run_id": "plot_saved_v1",
+      "role": "plot_saved",
+      "worker_cpu_reservation_s": 6,
+      "coordinator_cpu_reservation_s": 2.05,
+      "selected_memory_limit_bytes": 268435456
+    }
+  ],
+  "prospective_total_reserved_cpu_s": 36.25,
+  "unallocated_contingency_cpu_s": 3.75,
+  "preventive_aggregate_kernel_hard_cap_proof": false,
+  "publication_and_metadata_CPU_s": null,
+  "stage_authority": {
+    "R1_commit": "fbc039ff5c357571cbbf2ff61d96fde8b3ce8594",
+    "R1_PR": 111,
+    "R02_preflight_sha256": "604fdaf185ab0f5b0aa6bd7568e8736f7aa5924dbd0f568ddc02c8585a1fb520",
+    "current_unit_only": true,
+    "automatic_next_unit": false
+  },
+  "template_only": true,
+  "notes": [
+    "All null actual pins/costs require actual evidence. Setting status alone does not admit this template.",
+    "No worker may run from this runtime_draft directory.",
+    "Unique named recovery allocations require an explicit reviewed budget revision; a charged run_id cannot be reused.",
+    "Explicit separately reviewed current-unit memory-policy V2 after actual c4_v1 refusal; preserve and sum both preparation attempt charges. All fixed physics and resource caps unchanged."
+  ],
+  "memory_reclaim_credit_fraction": 0.25,
+  "memory_reclaim_credit_cap_bytes": 1073741824,
+  "memory_policy": "coding/C04_MEMORY_POLICY_V2.json",
+  "memory_policy_sha256": "c04aebb84e9772409a032cac9eab8b853f712882a9fea7e6e1baa6cfc647f12c"
+}

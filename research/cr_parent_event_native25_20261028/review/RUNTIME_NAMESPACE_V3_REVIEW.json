@@ -1,0 +1,148 @@
+{
+  "schema": "CR_PARENT_EVENT_RUNTIME_NAMESPACE_V3_STATIC_REVIEW_V1",
+  "unit": "CR_PHYS02_PARENT_EVENT_NATIVE25_V1",
+  "reviewer": "/root/theory_review",
+  "verdict": "PASS_SCOPED_STATIC_NO_EXECUTION",
+  "reviewed_source": {
+    "path": "implementation/run_bounded.py",
+    "bytes": 67578,
+    "sha256": "4f81bdd26ce9bc6f95238fdab3d3b0f7cf9f6f6dfb7273d126089487aea0c4f2"
+  },
+  "reviewed_helper": {
+    "path": "ops/admit_c4_v3.py",
+    "bytes": 26785,
+    "sha256": "16917cda43b6a88f51a1fac71a58bdda4759b4ea23c8d8d5b0ce08b8ce218448"
+  },
+  "retained_exact_comparison_source": {
+    "path": "intake/runtime_v2/run_bounded.py",
+    "bytes": 66996,
+    "sha256": "79230144dca1df8104f63e278dd392fc080cb8e4f826d7a3e4f6452ff3903c58"
+  },
+  "retained_helper_comparison": {
+    "path": "ops/admit_c4_v2.py",
+    "sha256": "a516fdd95e01cf0feb57104e22d537684ed33da4477cb5e44ce8e955f3417261"
+  },
+  "scope": "Only the exact coordinator self-PID/procfs guard, its receipt field, unique v3 helper names/preflight/review binding, and mapping of the actual bounded diagnostic receipts. No whole-runner or scientific review was repeated.",
+  "findings": [
+    {
+      "id": "PREWORKER_NAMESPACE_GUARD",
+      "status": "PASS_STATIC",
+      "observed": "load_budget now reads the first PID field of /proc/self/stat, compares it to os.getpid(), records both values and fails on inequality. execute_attempt calls load_budget before worker_launch_attempted or Popen. The guard neither translates numeric PIDs nor searches unrelated processes. Existing child parent/group/session/start-time checks remain necessary and unchanged."
+    },
+    {
+      "id": "ADMISSION_HELPER_GUARD_AND_IDENTITY",
+      "status": "PASS_STATIC",
+      "observed": "The v3 helper performs the same self-identity guard before the owned PID probe Popen. Once the child identity read succeeds, it records STARTED_PENDING_VALIDATION with the actual Popen PID/start identity before checking parent/group/liveness. Validation failure remains failed; the existing owned-child cleanup and cumulative debit finalizer remain in place."
+    },
+    {
+      "id": "UNIQUE_ATTEMPT_AND_BINDING",
+      "status": "PASS_STATIC",
+      "observed": "The helper accepts only c4_v3, uses create-only v3 intent/host/amendment/UNKNOWN namespaces, requires C04_V3 preflight, and checks this independent review against the actual new runner bytes/SHA. It retains all earlier receipts and the same memory-policy V2 and CPU/memory caps."
+    },
+    {
+      "id": "ACTUAL_DIAGNOSTIC_MAPPING",
+      "status": "PASS_SCOPED_EVIDENCE_READ",
+      "observed": "The default diagnostic receipt records a pre-child FileNotFoundError for /proc/2/stat. The separately executed consistent-context receipt records parent os PID478390 equal to both proc self/numeric PID, child Popen PID478391 equal to proc child and child stdout, parent478390, group/session478391, matching start identity, exit0 and completed cleanup. This supports the explicit context selection for the next attempt without fabricating a PID translation."
+    }
+  ],
+  "blocking_findings": [],
+  "actual_diagnostic_receipts": [
+    {
+      "path": "evidence/C04_HOST_ADMISSION_c4_v2.json",
+      "sha256": "c8adb4b4b54994657129d0b33018c2e1443334be682e87f9e04e1876ea1e650b",
+      "attempt": "c4_v2",
+      "status": "failed",
+      "memory_gate": "PASS",
+      "failure": "KNOWN_LIVE_OWNED_PID_OBSERVATION_FAILED",
+      "nested_probe_status_as_saved": "NOT_RUN",
+      "nested_status_interpretation": "Preserved stale initialization; the actual traceback follows Popen and is not evidence that no metadata probe was started",
+      "measured_preparation_CPU_s": 0.13837299999999997,
+      "conservative_tail_CPU_s": 0.05,
+      "charged_preparation_CPU_s": 0.18837299999999996,
+      "scientific_worker_started": false
+    },
+    {
+      "path": "evidence/C04_HOST_ADMISSION_c4_pid_diagnostic_v1.json",
+      "sha256": "cfdf7a70453cdfbc1f67d2058a0da37bfdd5b8e22537bc239a1c4ad3669305fa",
+      "attempt": "c4_pid_diagnostic_v1",
+      "status": "failed",
+      "failure": "FileNotFoundError: /proc/2/stat",
+      "measured_preparation_CPU_s": 0.150783,
+      "conservative_tail_CPU_s": 0.05,
+      "charged_preparation_CPU_s": 0.200783,
+      "scientific_worker_started": false
+    },
+    {
+      "path": "evidence/C04_HOST_ADMISSION_c4_pid_diagnostic_v2.json",
+      "sha256": "4555c6374f52f0905d41067c72bbc27520842851f7590126cbde4fe9fa704a10",
+      "attempt": "c4_pid_diagnostic_v2",
+      "status": "completed",
+      "observed_parent_os_and_proc_PID": 478390,
+      "observed_child_Popen_proc_and_self_report_PID": 478391,
+      "observed_child_parent_PID": 478390,
+      "observed_child_group_and_session": 478391,
+      "observed_child_start_ticks": 6649953,
+      "child_exit_code": 0,
+      "cleanup_complete": true,
+      "measured_preparation_CPU_s": 0.10181399999999999,
+      "conservative_tail_CPU_s": 0.05,
+      "charged_preparation_CPU_s": 0.151814,
+      "scientific_worker_started": false
+    }
+  ],
+  "preserved_earlier_v1_cost_CPU_s": 0.189732,
+  "recorded_preparation_total_before_v3_CPU_s": 0.730702,
+  "total_note": "Displayed subtotal from the root diagnosis; immutable per-attempt binary64 amounts remain authoritative and the unchanged preparation ledger recomputes their maximum-per-attempt sum. No earlier cost or failure is erased or charged twice.",
+  "diagnosis_record": {
+    "path": "coding/C04_NAMESPACE_DIAGNOSIS.json",
+    "bytes": 1700,
+    "sha256": "7428b045a91960fbde06a56033bf0ee6785559924d0b281df5b0f6d910241c0f"
+  },
+  "actual_fresh_preflight": {
+    "path": "intake/preflight/C04_V3.json",
+    "bytes": 167222,
+    "sha256": "a44c6dc978dbead8dfe5eae78317713de125516afaa607fb1f4b63540d573b39",
+    "stage": "C04_V3",
+    "observed_utc": "2026-10-27T17:00:08.198959+00:00",
+    "local_HEAD": "6c993c2e1ab806bd0110cf487c7ae6b306bbbf9f",
+    "own_local_remote_expected_match": true,
+    "central_head_and_DAG_qualified": true,
+    "source_and_previous_backup_receipt_check": "PASS",
+    "source_input_files": 17,
+    "central_HEAD": "b99a9468abd53de77ddae36d93180e60072885bc",
+    "central_completed": 28,
+    "central_total": 88,
+    "this_unit_count_effect": 0
+  },
+  "unchanged_memory_policy": {
+    "path": "coding/C04_MEMORY_POLICY_V2.json",
+    "sha256": "c04aebb84e9772409a032cac9eab8b853f712882a9fea7e6e1baa6cfc647f12c",
+    "selected_worker_bytes": 268435456,
+    "upper_worker_bytes": 536870912,
+    "reserve_bytes": 1073741824,
+    "unit_CPU_cap_s": 40,
+    "preparation_reserve_CPU_s": 4
+  },
+  "reviewer_roles": {
+    "namespace_fix_or_runtime_or_helper_author": false,
+    "theory_and_independent_numeric_reference_author": true,
+    "production_parent_event_or_controls_author": false
+  },
+  "limits": {
+    "execution_context": "The root's already-authorized require_escalated context with the observed consistent PID/procfs namespace; this static review does not add permissions or alter access controls",
+    "default_context_automatically_accepted": false,
+    "guessed_PID_translation": false,
+    "unrelated_process_cleanup": false,
+    "new_V3_execution_import_compile_or_test": false,
+    "scientific_execution_or_old_replay_by_reviewer": 0,
+    "guard_is_proof_of_all_future_procfs_reads": false,
+    "future_child_identity_and_cleanup_still_required": true,
+    "future_memory_admission_or_worker_success_claim": false,
+    "preventive_hard_aggregate_CPU_proof": false,
+    "all_runtime_attempts_pass": false,
+    "metadata_CPU_s": null,
+    "actual_V3_admission_or_stage_publication_claim": false,
+    "global_physical_completion": null,
+    "global_budget_remaining": null
+  }
+}

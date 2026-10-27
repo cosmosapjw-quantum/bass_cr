@@ -1,0 +1,216 @@
+{
+  "schema": "CR_PARENT_EVENT_C4_HOST_ADMISSION_V1",
+  "unit": "CR_PHYS02_PARENT_EVENT_NATIVE25_V1",
+  "attempt": "c4_v1",
+  "observed_utc": "2026-10-27T16:51:08.726754+00:00",
+  "status": "failed",
+  "memory_gate": "REFUSED",
+  "memory_admission_policy": "RAW_HEADROOM_ONLY_V1",
+  "owned_PID_observation_probe": {
+    "status": "NOT_RUN"
+  },
+  "source": {
+    "path": "ops/admit_c4.py",
+    "bytes": 24086,
+    "sha256": "9823aed1b4ff5be5fa7e9075b58c416360f5ba6e55d1558f9e042827f08ec894"
+  },
+  "old_budget_transferred": false,
+  "parallel_project_budget_transferred": false,
+  "template_only": false,
+  "scientific_worker_started": false,
+  "model_imports": 0,
+  "CPU_accounting_scope": "whole preparation process RUSAGE_SELF plus its actual children; tail separate",
+  "self_CPU_soft_hard_limits_s": [
+    3,
+    4
+  ],
+  "preventive_hard_aggregate_CPU_bound_proven": false,
+  "owner_head": "6c993c2e1ab806bd0110cf487c7ae6b306bbbf9f",
+  "preflight": {
+    "path": "intake/preflight/C04.json",
+    "bytes": 167334,
+    "sha256": "50ce070e74881d92ea33ff22d2cefed5082c293052f417cfe055a738b55700d1"
+  },
+  "source_and_previous_backup_receipts_rechecked": true,
+  "independent_static_review_sha256": "9c9a01435bd63d960f0faaeb98f5cf60f9a2eef8d420825d67ab148cf9aa51d2",
+  "independent_static_review_record": {
+    "schema": "CR_PARENT_EVENT_RUNTIME_TARGETED_STATIC_REVIEW_V1",
+    "unit": "CR_PHYS02_PARENT_EVENT_NATIVE25_V1",
+    "reviewer": "/root/theory_review",
+    "verdict": "PASS_SCOPED_STATIC_NO_EXECUTION",
+    "reviewed_source": {
+      "path": "next_intake_20261028/consumer/runtime_draft/run_bounded.py",
+      "bytes": 65033,
+      "sha256": "40949ef638b9cc5f2f079c8a6afb5368bd899b13d31dc56328589dab30246c29",
+      "actual_local_sha256_read": true
+    },
+    "requested_scope": [
+      "Known Popen PID plus kernel start-time binding, live-unobservable failure and owned-process cleanup",
+      "Invocation lease and unresolved prior attempt UNKNOWN_NO_ACK admission gate",
+      "Pure measured preparation/worker/coordinator costs separated from conservative tails",
+      "Same-unit actual C4 PID probe and preparation receipt binding"
+    ],
+    "findings": [
+      {
+        "id": "PID_BINDING",
+        "status": "PASS_STATIC",
+        "observed": "capture_owned_worker_identity binds Popen.pid, parent PID, process group, session and start_ticks. owned_cpu_estimate explicitly seeds that Popen PID in addition to child enumeration. A live unobservable root worker raises an error. Cleanup discovers only this coordinator's descendants and uses recorded or freshly observed PID/start identities."
+      },
+      {
+        "id": "INVOCATION_LEASE",
+        "status": "PASS_STATIC",
+        "observed": "A create-only invocation lease precedes execute_attempt. Reconciliation excludes only its explicitly active attempt and otherwise requires a same-attempt terminal debit; unresolved lease or saved reservation closes admission as UNKNOWN_NO_ACK. No automatic stale lease deletion is present."
+      },
+      {
+        "id": "MEASURED_TAIL_ACCOUNTING",
+        "status": "PASS_STATIC",
+        "observed": "Preparation charged baseline is checked against separately recorded measured plus tail components. Reconciliation retains the maximum cumulative charged receipt per attempt identity and sums pure measured preparation, worker and coordinator separately from all conservative tails. Receipt amendments and failures remain durable."
+      },
+      {
+        "id": "ACTUAL_C4_BINDING",
+        "status": "PASS_STATIC",
+        "observed": "load_budget requires pinned actual host evidence including a positive Popen PID, start identity, live observation, completed cleanup and finite probe CPU. The exact host receipt must also occur in this unit's verified preparation manifest."
+      }
+    ],
+    "blocking_findings": [],
+    "reviewer_roles": {
+      "runtime_production_author": false,
+      "current_theory_and_independent_numeric_reference_author": true,
+      "production_parent_event_or_control_author": false
+    },
+    "limits": {
+      "whole_inherited_runner_reaudit": false,
+      "code_execution_import_compile_or_test": false,
+      "scientific_workers_started_by_reviewer": 0,
+      "actual_C4_PID_observation_adopted_here": false,
+      "actual_runtime_success_or_peak_memory_proven": false,
+      "preventive_hard_aggregate_CPU_cap_proven": false,
+      "polling": "Non-atomic estimate; final reaped RUSAGE_CHILDREN debit remains the measured accounting authority",
+      "finalization_tail": "Conservative reserve and cumulative amendment accounting, not a mathematical upper bound on every possible future bookkeeping cost",
+      "metadata_CPU_s": null,
+      "old_science_replay": 0,
+      "stage_publication_or_C4_admission_claim": false
+    }
+  },
+  "actual_reviewed_runtime": {
+    "path": "implementation/run_bounded.py",
+    "bytes": 65033,
+    "sha256": "40949ef638b9cc5f2f079c8a6afb5368bd899b13d31dc56328589dab30246c29"
+  },
+  "memory_admission": {
+    "estimator_version": "RAW_HEADROOM_ONLY_V1",
+    "admission_pass": false,
+    "host_MemAvailable_bytes": 8608743424,
+    "cgroup_memory_max_bytes": 8589934592,
+    "cgroup_memory_current_bytes": 7926816768,
+    "cgroup_raw_headroom_bytes": 663117824,
+    "memory_stat_counters": {
+      "anon": 985817088,
+      "file": 6121648128,
+      "kernel": 818073600,
+      "kernel_stack": 4702208,
+      "pagetables": 35381248,
+      "sec_pagetables": 0,
+      "percpu": 10428,
+      "sock": 0,
+      "vmalloc": 4096,
+      "shmem": 0,
+      "file_mapped": 1929216,
+      "file_dirty": 3387392,
+      "file_writeback": 0,
+      "swapcached": 0,
+      "anon_thp": 0,
+      "file_thp": 507510784,
+      "shmem_thp": 0,
+      "inactive_anon": 985440256,
+      "active_anon": 151552,
+      "inactive_file": 1308983296,
+      "active_file": 4812664832,
+      "unevictable": 0,
+      "slab_reclaimable": 770310544,
+      "slab_unreclaimable": 5029464,
+      "slab": 775340008,
+      "workingset_refault_anon": 0,
+      "workingset_refault_file": 3202713,
+      "workingset_activate_anon": 0,
+      "workingset_activate_file": 1460024,
+      "workingset_restore_anon": 0,
+      "workingset_restore_file": 303450,
+      "workingset_nodereclaim": 0,
+      "pgdemote_kswapd": 0,
+      "pgdemote_direct": 0,
+      "pgdemote_khugepaged": 0,
+      "pgdemote_proactive": 0,
+      "pgscan": 14126148,
+      "pgsteal": 14094665,
+      "pswpin": 0,
+      "pswpout": 0,
+      "pgscan_kswapd": 0,
+      "pgscan_direct": 14126148,
+      "pgscan_khugepaged": 0,
+      "pgscan_proactive": 0,
+      "pgsteal_kswapd": 0,
+      "pgsteal_direct": 14094665,
+      "pgsteal_khugepaged": 0,
+      "pgsteal_proactive": 0,
+      "pgfault": 621942003,
+      "pgmajfault": 3232,
+      "pgrefill": 2912906,
+      "pgactivate": 6133067,
+      "pgdeactivate": 2897978,
+      "pglazyfree": 5287,
+      "pglazyfreed": 0,
+      "swpin_zero": 0,
+      "swpout_zero": 0,
+      "thp_fault_alloc": 130,
+      "thp_collapse_alloc": 0,
+      "thp_swpout": 0,
+      "thp_swpout_fallback": 0
+    },
+    "credited_reclaim_bytes": 0,
+    "prior_file_LRU_policy_imported": false,
+    "host_capped_available_estimate_bytes": 663117824,
+    "required_worker_plus_reserve_bytes": 1342177280,
+    "selected_worker_memory_limit_bytes": 268435456,
+    "frozen_worker_memory_upper_cap_bytes": 536870912,
+    "minimum_host_memory_reserve_bytes": 1073741824,
+    "cgroup_v2_path": "/sys/fs/cgroup",
+    "process_cgroup_membership": "0::/\n",
+    "process_cgroup_membership_sha256": "e57fd7b21104f091de366ace1464596378a498b0a5e63f1b21147a8998c20107",
+    "visible_cgroup_views": [
+      {
+        "path": "/sys/fs/cgroup",
+        "memory_max": "8589934592",
+        "memory_current": 7926816768,
+        "raw_headroom": 663117824
+      }
+    ],
+    "unreviewed_tighter_ancestor_views": [],
+    "non_atomic_counter_snapshot": true,
+    "admission_estimate_not_guarantee": true,
+    "lower_bound_certificate": false,
+    "OS_settings_changed": false
+  },
+  "failures": [
+    {
+      "type": "RuntimeError",
+      "message": "FRESH_RAW_MEMORY_OR_EFFECTIVE_VIEW_ADMISSION_REFUSED",
+      "context": "admission_or_probe",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/ops/admit_c4.py\", line 293, in main\n    raise RuntimeError(\"FRESH_RAW_MEMORY_OR_EFFECTIVE_VIEW_ADMISSION_REFUSED\")\nRuntimeError: FRESH_RAW_MEMORY_OR_EFFECTIVE_VIEW_ADMISSION_REFUSED\n"
+    }
+  ],
+  "failure": {
+    "type": "RuntimeError",
+    "message": "FRESH_RAW_MEMORY_OR_EFFECTIVE_VIEW_ADMISSION_REFUSED",
+    "context": "admission_or_probe",
+    "traceback": "Traceback (most recent call last):\n  File \"/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/ops/admit_c4.py\", line 293, in main\n    raise RuntimeError(\"FRESH_RAW_MEMORY_OR_EFFECTIVE_VIEW_ADMISSION_REFUSED\")\nRuntimeError: FRESH_RAW_MEMORY_OR_EFFECTIVE_VIEW_ADMISSION_REFUSED\n"
+  },
+  "terminal_debit": true,
+  "cpu_accounting_complete": true,
+  "cleanup_complete": true,
+  "debit_kind": "CUMULATIVE_SAME_ATTEMPT",
+  "debit_sequence": 0,
+  "measured_preparation_CPU_s": 0.139732,
+  "conservative_tail_CPU_s": 0.05,
+  "charged_preparation_CPU_s": 0.189732
+}

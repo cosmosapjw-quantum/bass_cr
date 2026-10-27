@@ -240,6 +240,12 @@ def remember_error(state, error, stage=None):
 def load_budget(state):
     need(UNIT.name == EXPECTED_UNIT_DIRECTORY and UNIT.parent.name == "research",
          "INSTALL_DRAFT_IN_EXACT_NEW_UNIT_BEFORE_EXECUTION")
+    # An executor PID namespace with an outer procfs view cannot establish
+    # ownership using numeric PIDs. Refuse before starting any worker.
+    proc_self_pid = int(pathlib.Path("/proc/self/stat").read_text().split(" ", 1)[0])
+    state["executor_procfs_namespace"] = {"os_pid": os.getpid(), "proc_self_pid": proc_self_pid,
+                                         "same_namespace": proc_self_pid == os.getpid()}
+    need(proc_self_pid == os.getpid(), "EXECUTOR_AND_PROCFS_PID_NAMESPACE_MUST_MATCH")
     raw = (UNIT / "EXECUTION_BUDGET.json").read_bytes()
     budget = json.loads(raw)
     need(budget.get("unit") == UNIT_ID, "EXACT_UNIT_BUDGET_REQUIRED")
@@ -269,9 +275,15 @@ def load_budget(state):
          "EXACT_2P05_COORDINATOR_INCLUDING_0P05_TAIL_REQUIRED")
     need(budget.get("preparation_reserve_cpu_s") == 4.,
          "EXACT_4_SECOND_PREPARATION_RESERVE_REQUIRED")
-    need(budget.get("memory_admission_policy") == "RAW_HEADROOM_ONLY_V1"
-         and budget.get("memory_reclaim_credit_bytes") == 0,
-         "FRESH_RAW_HEADROOM_POLICY_REQUIRED_NO_INHERITED_FILE_LRU_CREDIT")
+    need(budget.get("memory_admission_policy") == "CAPPED_CLEAN_FILE_LRU25_V2"
+         and budget.get("memory_reclaim_credit_fraction") == .25
+         and budget.get("memory_reclaim_credit_cap_bytes") == 1073741824,
+         "EXPLICIT_REVIEWED_CAPPED_MEMORY_POLICY_V2_REQUIRED")
+    policy = pinned_unit_json(budget.get("memory_policy"), budget.get("memory_policy_sha256"),
+                              "FROZEN_MEMORY_POLICY_V2")
+    need(policy.get("policy") == "CAPPED_CLEAN_FILE_LRU25_V2"
+         and policy.get("credit_fraction") == .25
+         and policy.get("credit_cap_bytes") == 1073741824, "MEMORY_POLICY_V2_PARAMETERS_CHANGED")
     need(type(budget.get("run_allocations")) is list and budget["run_allocations"],
          "FROZEN_NAMED_RUN_ALLOCATIONS_REQUIRED")
     names = set()
@@ -327,12 +339,16 @@ def load_budget(state):
          "ACTUAL_KNOWN_PID_AND_START_IDENTITY_OBSERVATION_PROBE_REQUIRED")
     finite_nonnegative(probe.get("CPU_s"), "actual_C4_owned_PID_probe_CPU_s")
     host_memory = host.get("memory_admission", {})
-    need(host_memory.get("estimator_version") == "RAW_HEADROOM_ONLY_V1"
+    need(host_memory.get("estimator_version") == "CAPPED_CLEAN_FILE_LRU25_V2"
          and host_memory.get("admission_pass") is True
          and host_memory.get("selected_worker_memory_limit_bytes") == 268435456
          and host_memory.get("minimum_host_memory_reserve_bytes") == 1073741824
-         and host_memory.get("credited_reclaim_bytes") == 0,
-         "EXACT_NEW_UNIT_C4_RAW_MEMORY_EVIDENCE_REQUIRED")
+         and host_memory.get("raw_worker_headroom_pass") is True
+         and host_memory.get("credit_fraction") == .25
+         and host_memory.get("credit_cap_bytes") == 1073741824
+         and type(host_memory.get("credited_reclaim_bytes")) is int
+         and 0 <= host_memory["credited_reclaim_bytes"] <= 1073741824,
+         "EXACT_NEW_UNIT_C4_MEMORY_V2_EVIDENCE_REQUIRED")
     need(host_memory.get("cgroup_v2_path") == budget.get("cgroup_v2_path")
          and isinstance(budget.get("process_cgroup_membership_sha256"), str)
          and re.fullmatch(r"[0-9a-f]{64}", budget["process_cgroup_membership_sha256"])
@@ -526,49 +542,60 @@ def verify_code_manifest(state):
     state["code_manifest"] = manifest
 
 
-def memory_estimate_raw(*, host_available_bytes, cgroup_limit_bytes, cgroup_current_bytes,
-                        counters, selected_worker_memory_bytes,
-                        frozen_worker_memory_upper_cap_bytes,
-                        minimum_host_memory_reserve_bytes):
-    """Fresh unit policy: current raw headroom only, with zero reclaim credit.
+def memory_estimate_v2(*, host_available_bytes, cgroup_limit_bytes, cgroup_current_bytes,
+                       counters, protection_min_bytes, protection_low_bytes,
+                       selected_worker_memory_bytes,
+                       frozen_worker_memory_upper_cap_bytes,
+                       minimum_host_memory_reserve_bytes):
+    """Explicit capped cache estimate after the preserved raw-memory refusal.
 
-    These non-atomic host/cgroup snapshots are admission observations rather
-    than a kernel guarantee or an outward lower-bound certificate.
+    This is an owner-reviewed admission heuristic, not a kernel lower bound.
+    The immediate worker still must fit in raw headroom. Protected, mapped,
+    dirty/writeback, shmem and unevictable memory receive no credit.
     """
     required_keys = {"file", "shmem", "active_file", "inactive_file", "file_mapped",
                      "file_dirty", "file_writeback", "unevictable"}
     need(type(counters) is dict and required_keys <= set(counters)
          and all(isinstance(k, str) and type(v) is int and v >= 0
                  for k, v in counters.items()), "EXPLICIT_NONNEGATIVE_MEMORY_COUNTERS_REQUIRED")
-    need(type(host_available_bytes) is int and host_available_bytes >= 0
-         and type(cgroup_current_bytes) is int and cgroup_current_bytes >= 0,
-         "NONNEGATIVE_INTEGER_MEMORY_TOTALS_REQUIRED")
+    need(all(type(v) is int and v >= 0 for v in
+             (host_available_bytes, cgroup_current_bytes, protection_min_bytes, protection_low_bytes)),
+         "NONNEGATIVE_INTEGER_MEMORY_TOTALS_AND_PROTECTION_REQUIRED")
     need(cgroup_limit_bytes is None or type(cgroup_limit_bytes) is int
          and cgroup_limit_bytes > 0, "VALID_CGROUP_MEMORY_LIMIT_REQUIRED")
-    selected = selected_worker_memory_bytes
-    upper = frozen_worker_memory_upper_cap_bytes
-    reserve = minimum_host_memory_reserve_bytes
+    selected, upper, reserve = (selected_worker_memory_bytes,
+                               frozen_worker_memory_upper_cap_bytes,
+                               minimum_host_memory_reserve_bytes)
     need(type(upper) is int and upper == 536870912
          and type(selected) is int and selected == 268435456,
          "FROZEN_256_MIB_SELECTED_AND_512_MIB_UPPER_REQUIRED")
     need(type(reserve) is int and reserve == 1073741824, "FROZEN_1_GIB_HOST_RESERVE_REQUIRED")
-    raw_headroom = None if cgroup_limit_bytes is None else cgroup_limit_bytes - cgroup_current_bytes
-    available = host_available_bytes if raw_headroom is None else min(host_available_bytes, max(0, raw_headroom))
-    required = selected + reserve
+    raw = None if cgroup_limit_bytes is None else cgroup_limit_bytes-cgroup_current_bytes
+    candidate = min(counters["file"], counters["active_file"]+counters["inactive_file"])
+    excluded = sum(counters[k] for k in ("shmem", "file_mapped", "file_dirty", "file_writeback", "unevictable"))
+    eligible = max(0, candidate-excluded)
+    protection_clear = protection_min_bytes == 0 and protection_low_bytes == 0
+    credit = min(eligible//4, 1073741824) if raw is not None and protection_clear else 0
+    available = host_available_bytes if raw is None else min(host_available_bytes, max(0, raw+credit))
+    raw_pass = raw is None or raw >= selected
+    required = selected+reserve
     return {
-        "estimator_version": "RAW_HEADROOM_ONLY_V1",
-        "estimate_status": "FRESH_NONATOMIC_RAW_HEADROOM_ADMISSION_OBSERVATION",
+        "estimator_version": "CAPPED_CLEAN_FILE_LRU25_V2",
+        "estimate_status": "EXPLICIT_REVIEWED_NONATOMIC_ADMISSION_HEURISTIC",
         "host_MemAvailable_bytes": host_available_bytes,
         "cgroup_memory_max_bytes": cgroup_limit_bytes,
         "cgroup_memory_current_bytes": cgroup_current_bytes,
-        "cgroup_raw_headroom_bytes": raw_headroom,
-        "memory_stat_counters": dict(counters),
-        "credited_reclaim_bytes": 0,
+        "cgroup_raw_headroom_bytes": raw, "memory_stat_counters": dict(counters),
+        "candidate_file_LRU_bytes": candidate, "excluded_counter_sum_bytes": excluded,
+        "eligible_file_estimate_bytes": eligible, "credit_fraction": .25,
+        "credit_cap_bytes": 1073741824, "credited_reclaim_bytes": credit,
+        "memory_min_bytes": protection_min_bytes, "memory_low_bytes": protection_low_bytes,
+        "credit_protection_gate": protection_clear, "raw_worker_headroom_pass": raw_pass,
         "prior_file_LRU_policy_imported": False,
         "host_capped_available_estimate_bytes": available,
         "required_worker_plus_reserve_bytes": required,
-        "admission_pass": available >= required,
-        "estimate_formula": "min(host_MemAvailable,max(0,limit-current)); unlimited cgroup uses host only",
+        "admission_pass": raw_pass and available >= required,
+        "estimate_formula": "min(host,max(0,signed_raw+min(eligible//4,1GiB))); finite raw>=worker required",
         "non_atomic_counter_snapshot": True, "admission_estimate_not_guarantee": True,
         "lower_bound_certificate": False, "OS_settings_changed": False,
         "frozen_worker_memory_upper_cap_bytes": upper,
@@ -578,9 +605,10 @@ def memory_estimate_raw(*, host_available_bytes, cgroup_limit_bytes, cgroup_curr
 
 
 def memory_capacity(budget, worker_memory_bytes=None):
-    """Read fresh counters under the explicit new unit raw-headroom policy."""
-    need(budget.get("memory_admission_policy") == "RAW_HEADROOM_ONLY_V1"
-         and budget.get("memory_reclaim_credit_bytes") == 0,
+    """Read fresh counters under the explicit reviewed C4 memory policy V2."""
+    need(budget.get("memory_admission_policy") == "CAPPED_CLEAN_FILE_LRU25_V2"
+         and budget.get("memory_reclaim_credit_fraction") == .25
+         and budget.get("memory_reclaim_credit_cap_bytes") == 1073741824,
          "NO_INHERITED_OR_UNREVIEWED_RECLAIM_CREDIT")
     selected = budget["worker_memory_bytes"] if worker_memory_bytes is None else worker_memory_bytes
     meminfo = dict(line.split(":", 1) for line in pathlib.Path("/proc/meminfo").read_text().splitlines())
@@ -595,7 +623,9 @@ def memory_capacity(budget, worker_memory_bytes=None):
     current = int((root / "memory.current").read_text().strip())
     counters = {key: int(value) for key, value in
                 (line.split() for line in (root / "memory.stat").read_text().splitlines())}
-    estimate = memory_estimate_raw(host_available_bytes=host_available,
+    estimate = memory_estimate_v2(host_available_bytes=host_available,
+        protection_min_bytes=int((root / "memory.min").read_text().strip()),
+        protection_low_bytes=int((root / "memory.low").read_text().strip()),
         cgroup_limit_bytes=None if limit_raw == "max" else int(limit_raw),
         cgroup_current_bytes=current, counters=counters,
         selected_worker_memory_bytes=selected,
@@ -1004,6 +1034,7 @@ def make_receipt(state, tail):
         "known_owned_worker_pid": state.get("known_owned_worker_pid"),
         "known_owned_worker_start_ticks": state.get("known_owned_worker_start_ticks"),
         "known_owned_worker_pid_observed": state.get("known_owned_worker_pid_observed", False),
+        "executor_procfs_namespace": state.get("executor_procfs_namespace"),
         "worker_exited_before_identity_observation": state.get("worker_exited_before_identity_observation", False),
         "timed_out": state["timed_out"], "last_stage": state["stage"],
         "aggregate_worker_cpu_peak_estimate_s": state.get("aggregate_worker_cpu_peak_estimate_s"),

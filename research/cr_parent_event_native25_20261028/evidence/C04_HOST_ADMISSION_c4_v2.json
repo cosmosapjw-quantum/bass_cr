@@ -1,0 +1,349 @@
+{
+  "schema": "CR_PARENT_EVENT_C4_HOST_ADMISSION_V1",
+  "unit": "CR_PHYS02_PARENT_EVENT_NATIVE25_V1",
+  "attempt": "c4_v2",
+  "observed_utc": "2026-10-27T16:57:03.471848+00:00",
+  "status": "failed",
+  "memory_gate": "PASS",
+  "memory_admission_policy": "CAPPED_CLEAN_FILE_LRU25_V2",
+  "owned_PID_observation_probe": {
+    "status": "NOT_RUN"
+  },
+  "source": {
+    "path": "ops/admit_c4_v2.py",
+    "bytes": 26136,
+    "sha256": "a516fdd95e01cf0feb57104e22d537684ed33da4477cb5e44ce8e955f3417261"
+  },
+  "old_budget_transferred": false,
+  "parallel_project_budget_transferred": false,
+  "template_only": false,
+  "scientific_worker_started": false,
+  "model_imports": 0,
+  "CPU_accounting_scope": "whole preparation process RUSAGE_SELF plus its actual children; tail separate",
+  "self_CPU_soft_hard_limits_s": [
+    3,
+    4
+  ],
+  "preventive_hard_aggregate_CPU_bound_proven": false,
+  "owner_head": "6c993c2e1ab806bd0110cf487c7ae6b306bbbf9f",
+  "preflight": {
+    "path": "intake/preflight/C04_V2.json",
+    "bytes": 167222,
+    "sha256": "c8163fb12b15d9c7f5013b88c2cfe724e62cbbc2030a219090860a3a37905ed8"
+  },
+  "source_and_previous_backup_receipts_rechecked": true,
+  "independent_static_review_sha256": "093db0ee22225f61e339afef756f6397d563bf372951d612296a7e92d37637e0",
+  "independent_static_review_record": {
+    "schema": "CR_PARENT_EVENT_RUNTIME_MEMORY_V2_STATIC_REVIEW_V1",
+    "unit": "CR_PHYS02_PARENT_EVENT_NATIVE25_V1",
+    "reviewer": "/root/theory_review",
+    "verdict": "PASS_SCOPED_STATIC_NO_EXECUTION",
+    "reviewed_source": {
+      "path": "implementation/run_bounded.py",
+      "bytes": 66996,
+      "sha256": "79230144dca1df8104f63e278dd392fc080cb8e4f826d7a3e4f6452ff3903c58"
+    },
+    "reviewed_helper": {
+      "path": "ops/admit_c4_v2.py",
+      "bytes": 26136,
+      "sha256": "a516fdd95e01cf0feb57104e22d537684ed33da4477cb5e44ce8e955f3417261"
+    },
+    "reviewed_policy": {
+      "path": "coding/C04_MEMORY_POLICY_V2.json",
+      "bytes": 2927,
+      "sha256": "c04aebb84e9772409a032cac9eab8b853f712882a9fea7e6e1baa6cfc647f12c",
+      "observed_adoption_status": "PROPOSED_PENDING_SCOPE_MATCHED_STATIC_REVIEW"
+    },
+    "reviewed_budget_template": {
+      "path": "intake/runtime_draft/EXECUTION_BUDGET_TEMPLATE_V2.json",
+      "bytes": 3832,
+      "sha256": "b7aac95aafbe8b1692143fc097ce3a5843db4c074ad0b19c204d0fb10234dfdd",
+      "template_is_actual_admission": false
+    },
+    "preserved_baselines": [
+      {
+        "path": "intake/runtime_v1/run_bounded.py",
+        "bytes": 65033,
+        "sha256": "40949ef638b9cc5f2f079c8a6afb5368bd899b13d31dc56328589dab30246c29"
+      },
+      {
+        "path": "ops/admit_c4.py",
+        "bytes": 24086,
+        "sha256": "9823aed1b4ff5be5fa7e9075b58c416360f5ba6e55d1558f9e042827f08ec894"
+      }
+    ],
+    "requested_scope": [
+      "Exact memory-only runner diff against retained 40949ef6 source",
+      "V2 admission helper diff and shared estimator semantics",
+      "Frozen limits, explicit policy pin and fresh preflight gate",
+      "Known c4_v1 refusal cost and cumulative same-attempt preparation reconciliation",
+      "Science source identities unchanged by the memory-policy amendment"
+    ],
+    "findings": [
+      {
+        "id": "MEMORY_FORMULA",
+        "status": "PASS_STATIC",
+        "observed": "Runner and admission helper both form min(file,active_file+inactive_file), deduct shmem/mapped/dirty/writeback/unevictable with a nonnegative clamp, and credit min(eligible//4,1GiB). Overlapping exclusions reduce the estimate intentionally. Credit is zero for an unlimited cgroup or a nonzero observed memory.min/memory.low. The finite-limit raw headroom must separately fit the selected 256MiB worker. Host MemAvailable caps the estimate and the worker-plus-1GiB-reserve gate remains mandatory."
+      },
+      {
+        "id": "FIXED_LIMITS_AND_FRESH_READS",
+        "status": "PASS_STATIC",
+        "observed": "The selected worker remains 268435456 bytes, upper cap 536870912 bytes, reserve 1073741824 bytes, one native thread, fresh unit CPU cap40 and preparation reserve4. The runner calls the same V2 estimator for initial and final prelaunch memory admissions, validates the effective cgroup path/membership pin, and keeps existing known-PID and owned-cleanup machinery unchanged. The helper retains rejection of a separately visible tighter ancestor view."
+      },
+      {
+        "id": "REVIEW_POLICY_AND_PREFLIGHT_BINDING",
+        "status": "PASS_STATIC",
+        "observed": "The V2 helper requires this unit's independent PASS verdict with no blockers and exact actual runner bytes/SHA. It requires the fresh C04_V2 stage, local/remote ownership agreement, qualified central state and source/backup PASS. The budget template pins the exact policy bytes; the runner verifies that pin and the explicit quarter-credit and1GiB-cap parameters. Actual V2 admission is still a separate unexecuted action at review time."
+      },
+      {
+        "id": "PRESERVED_V1_AND_CUMULATIVE_COST",
+        "status": "PASS_STATIC",
+        "observed": "The helper verifies the original refusal receipt SHA before proceeding. preparation_ledger includes all C04 host receipts, retains all cumulative records, selects each attempt's maximum charged debit once, checks measured+tail=charged, refuses unresolved UNKNOWN records or intents, and enforces the shared4CPU preparation reserve. Successful V2 budget creation uses this cumulative ledger, so c4_v1 cannot become zero or disappear. Failed finalization preserves an amendment and removes only the budget created by that attempt; unresolved cleanup/accounting is not admitted."
+      },
+      {
+        "id": "SCIENCE_UNCHANGED",
+        "status": "PASS_STATIC",
+        "observed": "Current parent_event.py, controls.py and independent_reference.py hashes match the actual C02 code-source pins. The exact runner diff changes only memory-policy validation, estimator/counter reads and host-evidence checks. No physical equations, tolerances, source normalization, native25 gates, coefficient fit, source atoms or saved RR response are changed by this amendment."
+      }
+    ],
+    "blocking_findings": [],
+    "actual_fresh_preflight": {
+      "path": "intake/preflight/C04_V2.json",
+      "bytes": 167222,
+      "sha256": "c8163fb12b15d9c7f5013b88c2cfe724e62cbbc2030a219090860a3a37905ed8",
+      "stage": "C04_V2",
+      "observed_utc": "2026-10-27T16:54:26.111142+00:00",
+      "local_and_CR_remote_HEAD": "6c993c2e1ab806bd0110cf487c7ae6b306bbbf9f",
+      "own_local_remote_expected_match": true,
+      "central_head_and_DAG_qualified": true,
+      "central_HEAD": "b99a9468abd53de77ddae36d93180e60072885bc",
+      "central_completed": 28,
+      "central_total": 88,
+      "this_unit_count_effect": 0,
+      "source_input_files_in_actual_preflight": 17,
+      "source_and_previous_backup_receipt_check": "PASS",
+      "previous_stage": "C03",
+      "completed_loop_stages_at_that_receipt": 13,
+      "total_loop_stages": 20,
+      "historical_readback_reused": true,
+      "new_original_archive_GET_by_this_review": 0,
+      "initial_static_scan_before_file_creation": "C04_V2 was absent; subsequently read the actual freshly created file above"
+    },
+    "actual_v1_refusal": {
+      "path": "evidence/C04_HOST_ADMISSION_c4_v1.json",
+      "sha256": "200e8d9d5dbb342b501583f916ba0de113f26d5716a9ac7b848bb7ab4dce2824",
+      "attempt": "c4_v1",
+      "status": "failed",
+      "memory_gate": "REFUSED",
+      "scientific_worker_started": false,
+      "owned_PID_probe_status": "NOT_RUN",
+      "raw_headroom_bytes": 663117824,
+      "required_worker_plus_reserve_bytes": 1342177280,
+      "measured_preparation_CPU_s": 0.139732,
+      "conservative_tail_CPU_s": 0.05,
+      "charged_preparation_CPU_s": 0.189732,
+      "terminal_debit": true,
+      "cpu_accounting_complete": true,
+      "reclassified_as_success": false
+    },
+    "unchanged_science_sources": [
+      {
+        "path": "implementation/parent_event.py",
+        "sha256": "69e7068573401db41f8c37797b47e455b684979b4094424d2156c05a126bcc81"
+      },
+      {
+        "path": "implementation/controls.py",
+        "sha256": "6be8624af061a5711063c471e3ea6317ff2dd5e51a805f4358b71d56ccd679dc"
+      },
+      {
+        "path": "implementation/independent_reference.py",
+        "sha256": "52511cdb8762b4a33b125bbeb72e46adfdeb7acc6c793d20622785ad1f786f55"
+      }
+    ],
+    "primary_documentation_crosscheck": [
+      {
+        "url": "https://docs.kernel.org/admin-guide/cgroup-v2.html",
+        "sections": [
+          "Memory Interface Files",
+          "memory.stat",
+          "Reclaim Protection"
+        ],
+        "actually_opened_and_relevant_sections_read_by_reviewer": true,
+        "supported_scope": "The file counter is type-based; active/inactive lists are reclaim-state counters and need not sum to that type total. Mapped, dirty, writeback and shared-memory counters overlap. Effective protection is hierarchical. These facts permit a cautious owner policy, but do not derive a fixed reclaimable percentage."
+      },
+      {
+        "url": "https://docs.kernel.org/filesystems/proc.html",
+        "section": "meminfo / MemAvailable",
+        "actually_opened_and_relevant_sections_read_by_reviewer": true,
+        "supported_scope": "MemAvailable is a host estimate that accounts for file LRU lists and operating reserves. Active pages are not categorically unevictable. It is not a cgroup-specific guaranteed lower bound."
+      }
+    ],
+    "reviewer_independence": {
+      "new_memory_policy_or_helper_author": false,
+      "runtime_production_author": false,
+      "current_theory_and_independent_numeric_reference_author": true,
+      "current_parent_event_production_or_controls_author": false
+    },
+    "limits": {
+      "new_V2_execution_import_compile_test": false,
+      "scientific_worker_execution_by_reviewer": 0,
+      "old_source_or_RR_replay": 0,
+      "OS_settings_or_cache_pressure_changed": false,
+      "quarter_credit_is_kernel_formula": false,
+      "prior_50_percent_policy_automatically_reused": false,
+      "actual_reclaim_or_working_set_guarantee": false,
+      "lower_bound_certificate": false,
+      "preventive_hard_aggregate_CPU_cap_proof": false,
+      "actual_future_peak_RSS_or_no_OOM_claim": false,
+      "protection_caveat": "The zero-credit protection gate concerns the observed effective-view memory.min/low files. It does not prove every hidden ancestor or descendant page is reclaimable. Non-atomic counters and concurrent workloads remain limitations of this explicitly heuristic estimate.",
+      "numeric_counter_control_runs": 0,
+      "whole_inherited_runner_reaudit": false,
+      "metadata_and_primary_documentation_CPU_s": null,
+      "actual_V2_admission_or_stage_publication_claim": false,
+      "all_runtime_attempts_pass": false,
+      "global_physical_completion": null,
+      "global_budget_remaining": null
+    }
+  },
+  "actual_reviewed_runtime": {
+    "path": "implementation/run_bounded.py",
+    "bytes": 66996,
+    "sha256": "79230144dca1df8104f63e278dd392fc080cb8e4f826d7a3e4f6452ff3903c58"
+  },
+  "memory_policy": {
+    "path": "coding/C04_MEMORY_POLICY_V2.json",
+    "bytes": 2927,
+    "sha256": "c04aebb84e9772409a032cac9eab8b853f712882a9fea7e6e1baa6cfc647f12c"
+  },
+  "previous_failed_attempt_preserved": {
+    "path": "evidence/C04_HOST_ADMISSION_c4_v1.json",
+    "sha256": "200e8d9d5dbb342b501583f916ba0de113f26d5716a9ac7b848bb7ab4dce2824",
+    "charged_CPU_s": 0.189732,
+    "erased_or_reclassified": false
+  },
+  "memory_admission": {
+    "estimator_version": "CAPPED_CLEAN_FILE_LRU25_V2",
+    "admission_pass": true,
+    "host_MemAvailable_bytes": 8689455104,
+    "cgroup_memory_max_bytes": 8589934592,
+    "cgroup_memory_current_bytes": 8318668800,
+    "cgroup_raw_headroom_bytes": 271265792,
+    "memory_stat_counters": {
+      "anon": 938065920,
+      "file": 6557773824,
+      "kernel": 821334016,
+      "kernel_stack": 4685824,
+      "pagetables": 33050624,
+      "sec_pagetables": 0,
+      "percpu": 13948,
+      "sock": 0,
+      "vmalloc": 4096,
+      "shmem": 0,
+      "file_mapped": 1929216,
+      "file_dirty": 1409024,
+      "file_writeback": 0,
+      "swapcached": 0,
+      "anon_thp": 0,
+      "file_thp": 507510784,
+      "shmem_thp": 0,
+      "inactive_anon": 937668608,
+      "active_anon": 155648,
+      "inactive_file": 1743712256,
+      "active_file": 4814061568,
+      "unevictable": 0,
+      "slab_reclaimable": 776006344,
+      "slab_unreclaimable": 4909128,
+      "slab": 780915472,
+      "workingset_refault_anon": 0,
+      "workingset_refault_file": 3202713,
+      "workingset_activate_anon": 0,
+      "workingset_activate_file": 1460024,
+      "workingset_restore_anon": 0,
+      "workingset_restore_file": 303450,
+      "workingset_nodereclaim": 0,
+      "pgdemote_kswapd": 0,
+      "pgdemote_direct": 0,
+      "pgdemote_khugepaged": 0,
+      "pgdemote_proactive": 0,
+      "pgscan": 14126148,
+      "pgsteal": 14094665,
+      "pswpin": 0,
+      "pswpout": 0,
+      "pgscan_kswapd": 0,
+      "pgscan_direct": 14126148,
+      "pgscan_khugepaged": 0,
+      "pgscan_proactive": 0,
+      "pgsteal_kswapd": 0,
+      "pgsteal_direct": 14094665,
+      "pgsteal_khugepaged": 0,
+      "pgsteal_proactive": 0,
+      "pgfault": 623711320,
+      "pgmajfault": 3232,
+      "pgrefill": 2912906,
+      "pgactivate": 6133615,
+      "pgdeactivate": 2897978,
+      "pglazyfree": 5327,
+      "pglazyfreed": 0,
+      "swpin_zero": 0,
+      "swpout_zero": 0,
+      "thp_fault_alloc": 130,
+      "thp_collapse_alloc": 0,
+      "thp_swpout": 0,
+      "thp_swpout_fallback": 0
+    },
+    "credited_reclaim_bytes": 1073741824,
+    "prior_file_LRU_policy_imported": false,
+    "candidate_file_LRU_bytes": 6557773824,
+    "excluded_counter_sum_bytes": 3338240,
+    "eligible_file_estimate_bytes": 6554435584,
+    "credit_fraction": 0.25,
+    "credit_cap_bytes": 1073741824,
+    "memory_min_bytes": 0,
+    "memory_low_bytes": 0,
+    "credit_protection_gate": true,
+    "raw_worker_headroom_pass": true,
+    "host_capped_available_estimate_bytes": 1345007616,
+    "required_worker_plus_reserve_bytes": 1342177280,
+    "selected_worker_memory_limit_bytes": 268435456,
+    "frozen_worker_memory_upper_cap_bytes": 536870912,
+    "minimum_host_memory_reserve_bytes": 1073741824,
+    "cgroup_v2_path": "/sys/fs/cgroup",
+    "process_cgroup_membership": "0::/\n",
+    "process_cgroup_membership_sha256": "e57fd7b21104f091de366ace1464596378a498b0a5e63f1b21147a8998c20107",
+    "visible_cgroup_views": [
+      {
+        "path": "/sys/fs/cgroup",
+        "memory_max": "8589934592",
+        "memory_current": 8318668800,
+        "raw_headroom": 271265792
+      }
+    ],
+    "unreviewed_tighter_ancestor_views": [],
+    "non_atomic_counter_snapshot": true,
+    "admission_estimate_not_guarantee": true,
+    "lower_bound_certificate": false,
+    "OS_settings_changed": false
+  },
+  "failures": [
+    {
+      "type": "RuntimeError",
+      "message": "KNOWN_LIVE_OWNED_PID_OBSERVATION_FAILED",
+      "context": "admission_or_probe",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/ops/admit_c4_v2.py\", line 328, in main\n    raise RuntimeError(\"KNOWN_LIVE_OWNED_PID_OBSERVATION_FAILED\")\nRuntimeError: KNOWN_LIVE_OWNED_PID_OBSERVATION_FAILED\n"
+    }
+  ],
+  "failure": {
+    "type": "RuntimeError",
+    "message": "KNOWN_LIVE_OWNED_PID_OBSERVATION_FAILED",
+    "context": "admission_or_probe",
+    "traceback": "Traceback (most recent call last):\n  File \"/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/ops/admit_c4_v2.py\", line 328, in main\n    raise RuntimeError(\"KNOWN_LIVE_OWNED_PID_OBSERVATION_FAILED\")\nRuntimeError: KNOWN_LIVE_OWNED_PID_OBSERVATION_FAILED\n"
+  },
+  "terminal_debit": true,
+  "cpu_accounting_complete": true,
+  "cleanup_complete": true,
+  "debit_kind": "CUMULATIVE_SAME_ATTEMPT",
+  "debit_sequence": 0,
+  "measured_preparation_CPU_s": 0.13837299999999997,
+  "conservative_tail_CPU_s": 0.05,
+  "charged_preparation_CPU_s": 0.18837299999999996
+}
