@@ -1,21 +1,31 @@
 # HeIII ground RR on the saved H1 + HeI chain
 
-This unit implements the source-qualified conditional channel
-He4++ + tagged e -> He4+(1s) + spontaneous retained photon. The exact stored
-PR106 HeI K_diag is the numerical baseline. All earlier operators, source
-projections and completed runs are reused. The current work adds one competing
-hazard and exports its shared number/energy event to the existing interface.
+Scoped admission: PASS_SCOPED_SOURCE_QUALIFIED_CONSUMER_AND_INTEGRATED_RETURN.
+Read REPORT_KO.md, HANDOFF_KO.md, ADMISSION.json and NEXT_DAG.json.
+Science S: 4e72c89b714431eb4c6ae07def777bbf72a5ae4c.
+The C10 document commit is D. Its own hash and subsequent central M/closeout
+receipts are bound outside their preimages in the final closeout archive and PR107:
+https://github.com/cosmosapjw-quantum/bass_cr/pull/107
 
-The current user selected a complete theory R1–R10 and coding C1–C10 cycle,
-with publication and dual backup at each stage. Progress and actual receipts are
-recorded in LOOP_LEDGER.json and publication/. A stage checkpoint is preservation,
-not evidence of a later scientific test.
+The new channel is He4III + tagged fast electron -> He4II(1s) + spontaneous
+retained photon, conditional elemental-He mapping, fixed bath/zero recoil.
+Exact saved H1/HeI/C23E/source evidence is reused; old science replay is zero.
+Actual new work: 8 cases,224 primary RHS,24 integrated exports,36 controls,
+252 grid/domain comparisons,56 independent Decimal70 RHS,754 checks.
+Known charged new science/preparation/coordinator CPU:6.988054525/30 seconds.
+Source ZIP263 members and Git209 public blobs, Dropbox and Drive copies have
+actual raw R3 verification; see publication/SOURCE_RELEASE_RECEIPT.json.
 
-Central baseline: rei_bianchi a5db4bac9dafadae29685bbea3cec7f43ab990b2,
-27/88 using its declared scoped-deliverable counting rule (literal COMPLETE*:18).
-Unmerged PR236 ee94bef85b56d879dc38f184856a5c613575e9e1 separately reports32/88.
-This child belongs under CR_N5_ATOMIC_ISOTOPE_COVERAGE and does not change the
-original88 denominator or promote N5/N6/N7. Global physical completion is null.
+Central latest baseline at C10 is12f6007a83a40d76f80574e41a5402676e81fc7a:
+27/88 using the existing scoped-deliverable rule (18 literal COMPLETE* plus9).
+The new child is1/1 with original88 count effect0. N4/N5 remain PARTIAL_OPEN,
+N6/N7 PREDECESSOR_GATED, global physical completion/error/remaining null and
+L4 false. Unmerged PR236 independently reports32/88 and is not imported.
+Integrated count is not a rate; retained photons use a separate port; caloric
+partition is not promoted to physical heating.
 
-Start with stages/R01.md, then the frozen theory/coding contract as it is completed.
-The source and closure archive IDs are added to the final handoff after actual ACK.
+LOOP_LEDGER.json/stages/ contain R1–R10/C1–C10 stage outputs. Each immutable
+checkpoint has an expected-SHA non-force Git publication and dual backup;
+its receipt is created after its own commit and archived in the next checkpoint
+or final closeout. Final central owner-return and transport completion are
+reported by the actual post-publication closeout authority.
