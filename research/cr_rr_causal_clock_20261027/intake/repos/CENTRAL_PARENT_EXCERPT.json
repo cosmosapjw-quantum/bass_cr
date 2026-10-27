@@ -1,0 +1,447 @@
+{
+  "central_commit": "5abe0d19df95db730e3e33bae0373c81ba37ce89",
+  "parent_index": 15,
+  "node": {
+    "id": "CR_ALL_EXTERNAL_PHOTON_BARYON_SOURCE_INTERFACE",
+    "lead_repo": "cosmosapjw-quantum/bass_cr",
+    "source_file": "authority/atomic/EXPANDED_NODE_CONTRACTS.json",
+    "json_pointer": "/nodes/15",
+    "contract": {
+      "id": "CR_ALL_EXTERNAL_PHOTON_BARYON_SOURCE_INTERFACE",
+      "owner_repository": "bass_cr",
+      "status": "PROPOSED_EXPANDED_SCOPE",
+      "depends_on": [
+        "WU_ALL_TARGET_SPECIES_REACTION_REGISTRY",
+        "REI-CHEM-LEDGER-01"
+      ],
+      "equations": [
+        "Q_s(p,tau)=dN_s/(dVproper*dtau*dPi)",
+        "dN invariant; E=gamma*(Eprime+beta*c*pprime*mu)",
+        "energy_balance=external_injection-escape-expansion_work-shear_work"
+      ],
+      "units": {
+        "number_density": "m^-3 internal; cm^-3 accepted only with declared conversion1cm^-3=1e6m^-3",
+        "energy": "J internal; source-native eV kept,1eV=1.602176634e-19J",
+        "cross_section": "m^2;1cm^2=1e-4m^2;1barn=1e-28m^2",
+        "two_body_rate": "m^3 s^-1",
+        "one_body_rate": "s^-1",
+        "volumetric_event_rate": "m^-3 s^-1",
+        "energy_source": "J m^-3 s^-1",
+        "clock": "declared proper seconds, coordinate conversion explicit",
+        "temperature": "K"
+      },
+      "inputs": [
+        "all configured stellar/AGN/thermal/nonthermal photon emissivities and histories",
+        "external fast electron/ion/nucleus/neutron and decay products",
+        "emitter/absorber population,normalframe,clock,proper/comoving volume,p_measure"
+      ],
+      "outputs": [
+        "typed normalized phase-space source with exact eventcount",
+        "paired absorbed/emitted radiation and photoelectron/baryon energy records",
+        "owner map toWU/HE/REC/REI and explicit unsupported domains"
+      ],
+      "domain": "All configured target species with per-source admitted energy,temperature,density,frame and state domain; no extrapolation",
+      "admission_gate": [
+        "Number and total energy/momentum transform coherently;source densities/volume/clock applied once",
+        "Source support and redshift interpolation require separate admission",
+        "Every emission/absorption branch one microscopic owner and one transportconsumer",
+        "Missing intensity/density/isotope is null not zero"
+      ],
+      "pass_next": "Bind existing C23B/C23Esource as one admitted instance; enumerate additional source families without launching trajectories.",
+      "fail_next": "Record exact missing source/identity and continue independent registry/theory obligations.",
+      "pr_boundary": "Additive scoped source/contract child; preserve active owner branches and no main merge",
+      "budget": {
+        "new_scientific_run_authorized_by_this_audit": false,
+        "heavy_launch": false,
+        "global_remaining": null,
+        "currency": null,
+        "unknown_is_zero": false,
+        "PHYS91_remaining": 0,
+        "CR105_known_lineage_CPU_s": "39.097868524",
+        "CR105_new_CPU_s": "4.86342341",
+        "C23E_separate_lineage_CPU_s": "15.493261114",
+        "sum_lineages_without_overlap_proof": false,
+        "new_unit_limit": "UNBOUND until existing authority budget and actual resource lease are pinned",
+        "completed_identity_replay": false
+      },
+      "claim_ceiling": "Expanded responsibility; physical coverage remains cell-specific",
+      "execution_this_audit": "NOT_RUN",
+      "readiness_policy": "conditional on selected model, source domain and actual consumer; do not AND every future catalog channel",
+      "independent_review": "fresh scientific reviewer checks exact changed contracts/source/raw results at proposed claim scope; reuse unchanged prior independent review"
+    },
+    "dependencies": [
+      {
+        "type": "internal",
+        "id": "WU_ALL_TARGET_SPECIES_REACTION_REGISTRY",
+        "source_file": "authority/atomic/EXPANDED_NODE_CONTRACTS.json",
+        "source_field": "depends_on"
+      },
+      {
+        "type": "internal",
+        "id": "REI-CHEM-LEDGER-01",
+        "source_file": "authority/atomic/EXPANDED_NODE_CONTRACTS.json",
+        "source_field": "depends_on"
+      }
+    ],
+    "conditional_dependencies": [],
+    "external_prerequisites": [],
+    "current_status": "IMPLEMENTATION_VERIFIED_SCOPED_SOURCE_AND_EVENT_CONSUMER",
+    "claim_gate": [
+      "Number and total energy/momentum transform coherently;source densities/volume/clock applied once",
+      "Source support and redshift interpolation require separate admission",
+      "Every emission/absorption branch one microscopic owner and one transportconsumer",
+      "Missing intensity/density/isotope is null not zero",
+      "Current owner return: typed scalar source and shared-event interfaces consume pinned C23B (32592 atoms / 9 cases) and C23E (18 points / 90 events) with inherited scope and isotope mapping.",
+      "26 focused controls and independent interface review PASS; final runner budget-only delta has separate targeted verification and independent supplement.",
+      "Caloric partition is not physical heating; scalar isotropic ensemble energy/charge closure does not supply individual-event angular momentum or finite recoil."
+    ],
+    "pass_next_action": "Use the tested source/event interfaces to bind one evaluated external spectrum/history or a source-qualified cascade/stopping provider. Keep missing beta Q/spectrum/branch/clock, angular/finite-mass laws and heating/assimilation as explicit dependencies; preserve N6/N7 gates and reuse saved science without replay.",
+    "budget_status": {
+      "new_scientific_run_authorized_by_this_audit": false,
+      "heavy_launch": false,
+      "global_remaining": null,
+      "currency": null,
+      "unknown_is_zero": false,
+      "PHYS91_remaining": 0,
+      "CR105_known_lineage_CPU_s": "39.097868524",
+      "CR105_new_CPU_s": "4.86342341",
+      "C23E_separate_lineage_CPU_s": "15.493261114",
+      "sum_lineages_without_overlap_proof": false,
+      "new_unit_limit": "UNBOUND until existing authority budget and actual resource lease are pinned",
+      "completed_identity_replay": false
+    },
+    "change_class": [
+      "scope_expansion"
+    ],
+    "historical_contract_id": null,
+    "source_fields": {
+      "lead_repo": "owner_repository",
+      "current_status": "status",
+      "claim_gate": "admission_gate",
+      "pass_next_action": "pass_next",
+      "budget_status": "budget"
+    },
+    "pr_plan": {
+      "inputs": {
+        "value": [
+          "all configured stellar/AGN/thermal/nonthermal photon emissivities and histories",
+          "external fast electron/ion/nucleus/neutron and decay products",
+          "emitter/absorber population,normalframe,clock,proper/comoving volume,p_measure"
+        ],
+        "source_file": "authority/atomic/EXPANDED_NODE_CONTRACTS.json",
+        "json_pointer": "/nodes/15/inputs",
+        "qualification": "SOURCE_DECLARED"
+      },
+      "equations": {
+        "value": [
+          "Q_s(p,tau)=dN_s/(dVproper*dtau*dPi)",
+          "dN invariant; E=gamma*(Eprime+beta*c*pprime*mu)",
+          "energy_balance=external_injection-escape-expansion_work-shear_work"
+        ],
+        "source_file": "authority/atomic/EXPANDED_NODE_CONTRACTS.json",
+        "json_pointer": "/nodes/15/equations",
+        "qualification": "SOURCE_DECLARED"
+      },
+      "units": {
+        "value": {
+          "number_density": "m^-3 internal; cm^-3 accepted only with declared conversion1cm^-3=1e6m^-3",
+          "energy": "J internal; source-native eV kept,1eV=1.602176634e-19J",
+          "cross_section": "m^2;1cm^2=1e-4m^2;1barn=1e-28m^2",
+          "two_body_rate": "m^3 s^-1",
+          "one_body_rate": "s^-1",
+          "volumetric_event_rate": "m^-3 s^-1",
+          "energy_source": "J m^-3 s^-1",
+          "clock": "declared proper seconds, coordinate conversion explicit",
+          "temperature": "K"
+        },
+        "source_file": "authority/atomic/EXPANDED_NODE_CONTRACTS.json",
+        "json_pointer": "/nodes/15/units",
+        "qualification": "SOURCE_DECLARED"
+      },
+      "domain": {
+        "value": "All configured target species with per-source admitted energy,temperature,density,frame and state domain; no extrapolation",
+        "source_file": "authority/atomic/EXPANDED_NODE_CONTRACTS.json",
+        "json_pointer": "/nodes/15/domain",
+        "qualification": "SOURCE_DECLARED"
+      },
+      "outputs": {
+        "value": [
+          "typed normalized phase-space source with exact eventcount",
+          "paired absorbed/emitted radiation and photoelectron/baryon energy records",
+          "owner map toWU/HE/REC/REI and explicit unsupported domains"
+        ],
+        "source_file": "authority/atomic/EXPANDED_NODE_CONTRACTS.json",
+        "json_pointer": "/nodes/15/outputs",
+        "qualification": "SOURCE_DECLARED"
+      },
+      "positive_acceptance": {
+        "value": [
+          "Number and total energy/momentum transform coherently;source densities/volume/clock applied once",
+          "Source support and redshift interpolation require separate admission",
+          "Every emission/absorption branch one microscopic owner and one transportconsumer",
+          "Missing intensity/density/isotope is null not zero"
+        ],
+        "source_file": "authority/atomic/EXPANDED_NODE_CONTRACTS.json",
+        "json_pointer": "/nodes/15/admission_gate",
+        "qualification": "SOURCE_DECLARED"
+      },
+      "failure_disposition": {
+        "value": "Record exact missing source/identity and continue independent registry/theory obligations.",
+        "source_file": "authority/atomic/EXPANDED_NODE_CONTRACTS.json",
+        "json_pointer": "/nodes/15/fail_next",
+        "qualification": "SOURCE_DECLARED"
+      },
+      "independent_review": {
+        "value": "fresh scientific reviewer checks exact changed contracts/source/raw results at proposed claim scope; reuse unchanged prior independent review",
+        "source_file": "authority/atomic/EXPANDED_NODE_CONTRACTS.json",
+        "json_pointer": "/nodes/15/independent_review",
+        "qualification": "SOURCE_DECLARED"
+      },
+      "PR_boundary": {
+        "value": "Additive scoped source/contract child; preserve active owner branches and no main merge",
+        "source_file": "authority/atomic/EXPANDED_NODE_CONTRACTS.json",
+        "json_pointer": "/nodes/15/pr_boundary",
+        "qualification": "SOURCE_DECLARED"
+      }
+    },
+    "owner_return_20261025": {
+      "schema": "BASS_CR_SCOPED_OWNER_RETURN_V1",
+      "date_kst": "2026-10-25",
+      "node_id": "CR_ALL_EXTERNAL_PHOTON_BARYON_SOURCE_INTERFACE",
+      "owner_repository": "cosmosapjw-quantum/bass_cr",
+      "central_expected_parent": "17198db46dc80d27684d3b3975ace0a7e07960ac",
+      "science_commit_S": "4caf4273eefd51f2c605a8667c3533d8489dd0f5",
+      "documents_commit_D": "b11b2e9255f2b10fb5582376412e045bd1e9151c",
+      "source_scope": "Finite scalar measure/normalization/event consumption; additional physical beta/cascade/stopping sources remain input-dependent.",
+      "current_gate": "IMPLEMENTATION_VERIFIED_SCOPED_SOURCE_AND_EVENT_CONSUMER",
+      "source_evidence": [
+        {
+          "path": "research/cr_external_interfaces_20261025/INTERFACE_CONTRACT.json",
+          "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4caf4273eefd51f2c605a8667c3533d8489dd0f5/research/cr_external_interfaces_20261025/INTERFACE_CONTRACT.json"
+        },
+        {
+          "path": "research/cr_external_interfaces_20261025/PROVIDER_REGISTRY.json",
+          "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4caf4273eefd51f2c605a8667c3533d8489dd0f5/research/cr_external_interfaces_20261025/PROVIDER_REGISTRY.json"
+        },
+        {
+          "path": "research/cr_external_interfaces_20261025/runs/external_interfaces_v1/RESULT.json",
+          "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4caf4273eefd51f2c605a8667c3533d8489dd0f5/research/cr_external_interfaces_20261025/runs/external_interfaces_v1/RESULT.json"
+        },
+        {
+          "path": "research/cr_external_interfaces_20261025/review/C9_EXTERNAL_INTERFACE.json",
+          "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4caf4273eefd51f2c605a8667c3533d8489dd0f5/research/cr_external_interfaces_20261025/review/C9_EXTERNAL_INTERFACE.json"
+        },
+        {
+          "path": "research/cr_external_interfaces_20261025/review/C9_RUNNER_BUDGET_SUPPLEMENT.json",
+          "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4caf4273eefd51f2c605a8667c3533d8489dd0f5/research/cr_external_interfaces_20261025/review/C9_RUNNER_BUDGET_SUPPLEMENT.json"
+        },
+        {
+          "path": "research/cr_external_interfaces_20261025/runs/runner_budget_guard_v1/RECEIPT.json",
+          "url": "https://github.com/cosmosapjw-quantum/bass_cr/blob/4caf4273eefd51f2c605a8667c3533d8489dd0f5/research/cr_external_interfaces_20261025/runs/runner_budget_guard_v1/RECEIPT.json"
+        }
+      ],
+      "canonical_backup_receipt": {
+        "schema": "CR_HE4_EXTERNAL_CANONICAL_BACKUP_RECEIPTS_V1",
+        "recorded_utc": "2026-10-25T13:35:07.309Z",
+        "readback_selected": "R3",
+        "trigger": "canonical release",
+        "canonical": {
+          "schema": "BASS_CR_HE4_EXTERNAL_CANONICAL_SOURCE_ZIP_RECEIPT_V1",
+          "status": "PASS_LOCAL_SOURCE_CLOSURE_SIZE_SHA_CRC_ALL_MEMBERS",
+          "archive_path": "/workspace/scratch/5fcfe17050d5/artifacts/BASS_CR_HE4_EXTERNAL_SOURCE_20261025T131931428504Z_4caf4273eefd.zip",
+          "receipt_path": "/workspace/scratch/5fcfe17050d5/artifacts/BASS_CR_HE4_EXTERNAL_SOURCE_20261025T131931428504Z_4caf4273eefd.receipt.json",
+          "filename": "BASS_CR_HE4_EXTERNAL_SOURCE_20261025T131931428504Z_4caf4273eefd.zip",
+          "bytes": 29763489,
+          "sha256": "7e39930b862a0af5f87e5d3e4dd9d9fa4b37694dda496221e6e311957a087aaa",
+          "md5": "93ae776242f432bd021ebca5c945996d",
+          "dropbox_content_hash": "a18556edac0f51dd074996db55c098f978f99aa29952a6b735ca138b8cca3402",
+          "hash_provenance": "Locally computed archive digests; provider-returned digests not asserted",
+          "source_commit_S": "4caf4273eefd51f2c605a8667c3533d8489dd0f5",
+          "source_tree_S": "361b8e3222687f03ddedc0b4045d5cdc903db3cd",
+          "base_commit": "8d0a5c375589fbddadc2bb90c8117311c80bad09",
+          "zip_members": 199,
+          "manifest_payloads": 198,
+          "manifest_sha256": "7717016781da0a7888b0fded14ce947856a14758130b1def9fe3b25cf3cec183",
+          "private_reused_inputs": 21,
+          "new_primary_npz": 8,
+          "independent_dense_decimal_csv": 2,
+          "external_source_closure_files": 9,
+          "input_manifest_checks": [
+            {
+              "path": "research/cr_external_interfaces_20261025/runs/external_interfaces_v1/INPUT_MANIFEST.json",
+              "entries_verified": 3,
+              "status": "PASS"
+            },
+            {
+              "path": "research/cr_he4_ground_rr_20261025/inputs/INPUT_MANIFEST.json",
+              "entries_verified": 21,
+              "status": "PASS"
+            },
+            {
+              "path": "research/cr_he4_ground_rr_20261025/runs/cr_he4_rr_c9_20261025_v1/EXECUTED_SOURCE/INPUT_MANIFEST.json",
+              "entries_verified": 21,
+              "status": "PASS"
+            },
+            {
+              "path": "research/cr_he4_ground_rr_20261025/runs/cr_he4_rr_controls_20261025_v2/EXECUTED_SOURCE/INPUT_MANIFEST.json",
+              "entries_verified": 21,
+              "status": "PASS"
+            },
+            {
+              "path": "research/cr_he4_ground_rr_20261025/runs/cr_he4_rr_plot_20261025_v1/EXECUTED_SOURCE/INPUT_MANIFEST.json",
+              "entries_verified": 21,
+              "status": "PASS"
+            },
+            {
+              "path": "research/cr_he4_ground_rr_20261025/runs/cr_he4_rr_primary_20261025_v1/EXECUTED_SOURCE/INPUT_MANIFEST.json",
+              "entries_verified": 21,
+              "status": "PASS"
+            }
+          ],
+          "public_manifest_entries_verified": 147,
+          "zip_crc": "PASS",
+          "all_member_size_sha_verification": "PASS",
+          "verified_member_count": 199,
+          "public_bytes_from_S": true,
+          "later_D_bytes_substituted": false,
+          "create_only_archive": true,
+          "new_scientific_runs": 0,
+          "old_scientific_replays": 0,
+          "mechanical_wall_s": 2.2702925159974257,
+          "provider_uploads": "ROOT_OWNED_NOT_PERFORMED_BY_THIS_HELPER"
+        },
+        "providers": {
+          "Library": {
+            "status": "SUCCESS_ACK",
+            "library_file_id": "libfile_181838c1e8f081918832f8eddfdf1ac1",
+            "file_id": "file_00000000dd2c81fa8d70da89700b0e78",
+            "file_name": "BASS_CR_HE4_EXTERNAL_SOURCE_20261025T131931428504Z_4caf4273eefd.zip",
+            "version": 0,
+            "size_bytes": 29763489,
+            "tier": "R3",
+            "actual_whole_materialization": true,
+            "size_sha256_crc_all_payloads": "PASS",
+            "local_identity_metadata": "APPLIED",
+            "provider_sha256": "UNAVAILABLE"
+          },
+          "Dropbox": {
+            "status": "COMPLETED_ACK",
+            "id": "id:BSpOijBcT10AAAAAAEAbFw",
+            "path_display": "/BASS_DERIVATION_DOSSIERS_20260912/bass_cr/BASS_CR_HE4_EXTERNAL_SOURCE_20261025T131931428504Z_4caf4273eefd.zip",
+            "rev": "65eaa1471fc350af03d47",
+            "server_modified": "2026-10-25T13:20:40Z",
+            "size_bytes": 29763489,
+            "provider_content_hash": "a18556edac0f51dd074996db55c098f978f99aa29952a6b735ca138b8cca3402",
+            "matching_local_dropbox_content_hash": "a18556edac0f51dd074996db55c098f978f99aa29952a6b735ca138b8cca3402",
+            "hash_comparison": "EXACT_EQUAL_SAME_ALGORITHM",
+            "provider_sha256": "UNAVAILABLE",
+            "tier": "R3",
+            "actual_whole_GET": true,
+            "size_sha256_crc_all_payloads": "PASS"
+          },
+          "Drive": {
+            "status": "SUCCESS_ACK",
+            "id": "1OZ8LmMbUlbR2VHSxWXp35yjIAL7MPHMK",
+            "url": "https://drive.google.com/file/d/1OZ8LmMbUlbR2VHSxWXp35yjIAL7MPHMK/view?usp=drivesdk",
+            "parent_id": "1V4ZQza59dWVC7apeRz9P1TL66eaVYyJy",
+            "size_bytes": 29763489,
+            "upload_attempts": 1,
+            "exact_prequery_results": 0,
+            "await_elapsed_ms": 662403,
+            "provider_md5": "UNAVAILABLE_IN_TOOL_RESPONSE",
+            "provider_sha256": "UNAVAILABLE_IN_TOOL_RESPONSE",
+            "tier": "R3",
+            "actual_raw_fetch_and_transfer": true,
+            "size_sha256_crc_all_payloads": "PASS"
+          }
+        },
+        "dual_Dropbox_Drive": "R3_PASS_BOTH",
+        "library_copy": "R3_PASS",
+        "content_readback_evidence": "CANONICAL_R3_READBACK.json",
+        "historical_states_unchanged": {
+          "H1_canonical_Drive": "UNKNOWN_NO_ACK",
+          "H1_terminal_Drive": "NOT_ATTEMPTED",
+          "PR104_lost_blocked_terminal": "NOT_RECONSTRUCTED_OR_UPLOADED"
+        },
+        "science_replays_for_backup": 0,
+        "terminal_closeout": "S is frozen in canonical; later D/M publication will be bound in a separate finite closeout artifact"
+      },
+      "publication": {
+        "repository": "cosmosapjw-quantum/bass_cr",
+        "branch": "research/program-expansion-20261025",
+        "PR": "https://github.com/cosmosapjw-quantum/bass_cr/pull/106",
+        "S": {
+          "sha": "4caf4273eefd51f2c605a8667c3533d8489dd0f5",
+          "provider_success": true,
+          "git_ls_remote_match": true,
+          "force": false,
+          "tier": "R1"
+        },
+        "D": {
+          "sha": "b11b2e9255f2b10fb5582376412e045bd1e9151c",
+          "provider_success": true,
+          "git_ls_remote_match": true,
+          "force": false,
+          "tier": "R1"
+        },
+        "parallel_central_change_preserved": {
+          "previous_observed": "78f7ac5864d5817ceb79b48cb5e298cc30006510",
+          "actual_expected_parent": "fc2c6044b5e9eb08e0e0486c17d1987c7099df9c",
+          "changed_unowned_nodes": [
+            "HE-EXCHANGE",
+            "HE-RESERVOIR",
+            "HE-CLOSURE",
+            "HE-EXP-PAIR",
+            "HE-EXP-CLOSURE"
+          ],
+          "meaning": "HE implementation observation only; no physical provider admission; AGENTS unchanged"
+        }
+      },
+      "historical_contract_source_fields_and_budgets": "PRESERVED_UNCHANGED; current wrapper is superseded only by this dated owner return",
+      "budget_accounting": "New execution cost is in the pinned unit receipt; historical PR105 and C23E lineages are not summed without overlap proof; exhausted and unknown allotments retained.",
+      "parent_gates": {
+        "N4": "PARTIAL_OPEN",
+        "N5": "PARTIAL_OPEN",
+        "N6": "PREDECESSOR_GATED",
+        "N7": "PREDECESSOR_GATED"
+      },
+      "caloric_partition_promoted_to_heating": false,
+      "global_error_bound": null,
+      "global_physical_completion": null,
+      "L4_ready": false,
+      "next_executable_action": "Use the tested source/event interfaces to bind one evaluated external spectrum/history or a source-qualified cascade/stopping provider. Keep missing beta Q/spectrum/branch/clock, angular/finite-mass laws and heating/assimilation as explicit dependencies; preserve N6/N7 gates and reuse saved science without replay.",
+      "reviewed_central_parent": "fc2c6044b5e9eb08e0e0486c17d1987c7099df9c",
+      "publication_rebase": {
+        "class": "PUBLICATION_METADATA_ONLY",
+        "from_reviewed_parent": "fc2c6044b5e9eb08e0e0486c17d1987c7099df9c",
+        "onto_actual_parent": "17198db46dc80d27684d3b3975ace0a7e07960ac",
+        "source_S_D_claims_budgets_evidence_unchanged": true,
+        "new_upstream_GRID044_node_preserved": true
+      }
+    }
+  },
+  "status_row": {
+    "id": "CR_ALL_EXTERNAL_PHOTON_BARYON_SOURCE_INTERFACE",
+    "lead_repo": "cosmosapjw-quantum/bass_cr",
+    "current_status": "IMPLEMENTATION_VERIFIED_SCOPED_SOURCE_AND_EVENT_CONSUMER",
+    "change_class": [
+      "scope_expansion"
+    ],
+    "source_file": "authority/atomic/EXPANDED_NODE_CONTRACTS.json",
+    "json_pointer": "/nodes/15",
+    "observation": {
+      "kind": "BASS_CR_SCOPED_OWNER_RETURN_MIRROR",
+      "date_kst": "2026-10-25",
+      "central_observed_parent": "17198db46dc80d27684d3b3975ace0a7e07960ac",
+      "science_commit_S": "4caf4273eefd51f2c605a8667c3533d8489dd0f5",
+      "documents_commit_D": "b11b2e9255f2b10fb5582376412e045bd1e9151c",
+      "scope": "Finite scalar measure/normalization/event consumption; additional physical beta/cascade/stopping sources remain input-dependent.",
+      "current_owner_return": "contracts/CR_ALL_EXTERNAL_PHOTON_BARYON_SOURCE_INTERFACE.json#/owner_return_20261025",
+      "canonical_backup_receipt": "contracts/CR_ALL_EXTERNAL_PHOTON_BARYON_SOURCE_INTERFACE.json#/owner_return_20261025/canonical_backup_receipt",
+      "scoped_note": "Current status mirrors the independently reviewed scoped owner return. Historical source fields and budgets are retained; N4/N5 remain PARTIAL_OPEN and N6/N7 remain PREDECESSOR_GATED. Caloric partition is not promoted to physical heating; global completion remains null and L4_ready false.",
+      "next_executable_action": "Use the tested source/event interfaces to bind one evaluated external spectrum/history or a source-qualified cascade/stopping provider. Keep missing beta Q/spectrum/branch/clock, angular/finite-mass laws and heating/assimilation as explicit dependencies; preserve N6/N7 gates and reuse saved science without replay.",
+      "reviewed_parent": "fc2c6044b5e9eb08e0e0486c17d1987c7099df9c"
+    }
+  },
+  "generated_by": "read-only projection from exact pinned central DAG/status; no scientific recomputation"
+}

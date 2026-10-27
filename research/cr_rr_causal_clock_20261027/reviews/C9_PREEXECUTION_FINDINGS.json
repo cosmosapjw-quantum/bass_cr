@@ -1,0 +1,52 @@
+{
+  "schema": "CR_CLOCK_C9_PREEXECUTION_FINDINGS_V1",
+  "independent_reviewer": "latest_repo_survey",
+  "findings": [
+    {
+      "id": "C9-F01",
+      "class": "arithmetic_certificate",
+      "target": "native positive umul/udiv underflow",
+      "evidence": "For n1,d=2^1023,r=gamma=2^-1074,h=w=1,m8, positive exact last recurrence can underflow LD error propagation to0. Old up(0)=0 did not guarantee positive upper.",
+      "impact": "General API arithmetic certificate unsound at extreme range; not an observed failure of the frozen physical grid.",
+      "correction": "Positive-input product/quotient rounded0 gets nextafterl(0,+infinity); exactzero operand branch remains0.",
+      "fixed_native_sha256": "0629567c34be30c4ade93755a1c77d62e5737cfbe5c45c185636b01dda4721a9",
+      "static_review": "repair confirmed by independent reviewer",
+      "targeted_execution": "C6 positive_error_underflow_upper_survives pending"
+    },
+    {
+      "id": "C9-M01",
+      "class": "diagnostic_metadata",
+      "target": "primary minimum_nominal initialized0",
+      "impact": "Reported0 for allpositive solutions though gate behavior correct",
+      "correction": "Initialize +infinity and take actual minima before recording",
+      "numerical_formula_changed": false
+    }
+  ],
+  "root_static_repairs": [
+    {
+      "target": "engine scalar validation",
+      "change": "Reject Boolean/non-numeric/rounded integer times before actualworker",
+      "scope": "input contract"
+    },
+    {
+      "target": "event book method",
+      "change": "Use actual append API",
+      "scope": "wiring"
+    },
+    {
+      "target": "independent wrapper",
+      "change": "stdlib-only before runpy; no production imports",
+      "scope": "review independence"
+    }
+  ],
+  "science_runs_before_repairs": 0,
+  "original_R6_math_theorem_changed": false,
+  "C6_actual_closure": {
+    "run_id": "cr_clock_controls_20261027_v2",
+    "control": "positive_error_underflow_upper_survives",
+    "pass": true,
+    "other_controls_pass": true,
+    "native_abi_pass": true,
+    "C9_full_reference_still_pending": true
+  }
+}

@@ -1,0 +1,332 @@
+{
+  "schema": "CR_CLOCK_C6_ACTUAL_CLOSURE_REVIEW_V1",
+  "decision": "PASS_SCOPED_C6_CONTROLS_AND_REFERENCE_INPUT_BINDING",
+  "reviewer": "latest_repo_survey_independent",
+  "reviewed_utc": "2026-10-27T08:07:04.423212+00:00",
+  "preflight": {
+    "remote_branch": "research/cr-rr-causal-clock-20261027",
+    "remote_head_observed": "6fbdead8504fc5ed77a9463ab7a900b30c6e1dd4",
+    "remote_AGENTS_matches_local_bytes": true,
+    "AGENTS_sha256": "8d62d9758fe173263eb3820c7b00ca569193bb7f912fc3d95d145e73d4a40970",
+    "local_git_HEAD": "ec463db0c7e5c7fb5070796071c926caa4db6445",
+    "parallel_work": "root C6 publication/backup and next C7; candidate written only outside unit"
+  },
+  "checks_passed": 57,
+  "checks_total": 57,
+  "F01_positive_underflow": {
+    "status": "CLOSED_BY_ACTUAL_TARGETED_CONTROL",
+    "control": "positive_error_underflow_upper_survives",
+    "native_sha256": "0629567c34be30c4ade93755a1c77d62e5737cfbe5c45c185636b01dda4721a9"
+  },
+  "F02_minimum_metadata": {
+    "status": "STATIC_FIXED_PRIMARY_ACTUAL_EVIDENCE_PENDING_C7",
+    "primary_sha256": "cffc760e37634cf1c5066bfcf586d8b1fd0b3230745f82717efd5ff83e4b1a73"
+  },
+  "runtime_pid_binding": {
+    "status": "CLOSED_BY_ACTUAL_C6_V2",
+    "dispatch_sha256": "f8d9e1446f1a229ff48c196eb813b3135326b2356c8437c4c10a9f5236170c00",
+    "actual_identity": {
+      "namespace_pid": 6,
+      "proc_pid": 147044,
+      "starttime_ticks": 3438146,
+      "lease_nonce": "36957940c1a8d7ad2aa034763b9715f5",
+      "binding": "child_preexec_actual_proc_self"
+    },
+    "child_reaped": true,
+    "worker_cpu_s": 0.332836,
+    "coordinator_cpu_s": 0.151952666,
+    "failed_v1_preserved_in_prior_accounting": {
+      "worker_cpu_s": 0.0021130000000000003,
+      "coordinator_cpu_s": 0.112583694,
+      "stage_worker_cpu_s": 0.0021130000000000003,
+      "total_cpu_s": 0.114696694
+    },
+    "cumulative_worker_plus_coordinator_cpu_s_after_c6": 0.59948536
+  },
+  "source_snapshot_identity_checked_files": 12,
+  "qualification_metadata_and_header_checks": [
+    {
+      "case": "chi1.5_R80_N2048",
+      "clock_label": "minus",
+      "T_s": 100000.0,
+      "m": 4,
+      "delta": 0.5,
+      "gamma_hex": "0x1.f75104d551d69p-15",
+      "headers": {
+        "z_steps": {
+          "shape": [
+            4,
+            2479,
+            2
+          ],
+          "dtype": "<f8",
+          "fortran_order": false
+        },
+        "h": {
+          "shape": [
+            2479
+          ],
+          "dtype": "<f8",
+          "fortran_order": false
+        },
+        "epsilon_steps": {
+          "shape": [
+            4,
+            2
+          ],
+          "dtype": "<f8",
+          "fortran_order": false
+        },
+        "step_radius": {
+          "shape": [
+            4,
+            2479,
+            2
+          ],
+          "dtype": "<f8",
+          "fortran_order": false
+        },
+        "cumulative": {
+          "shape": [
+            2479,
+            2
+          ],
+          "dtype": "<f8",
+          "fortran_order": false
+        },
+        "cumulative_radius": {
+          "shape": [
+            2479,
+            2
+          ],
+          "dtype": "<f8",
+          "fortran_order": false
+        }
+      },
+      "numeric_science_execution": false
+    },
+    {
+      "case": "chi1.5_R80_N2048",
+      "clock_label": "plus",
+      "T_s": 100000.0,
+      "m": 4,
+      "delta": 0.5,
+      "gamma_hex": "0x1.4f8b588e368f1p-16",
+      "headers": {
+        "z_steps": {
+          "shape": [
+            4,
+            2479,
+            2
+          ],
+          "dtype": "<f8",
+          "fortran_order": false
+        },
+        "h": {
+          "shape": [
+            2479
+          ],
+          "dtype": "<f8",
+          "fortran_order": false
+        },
+        "epsilon_steps": {
+          "shape": [
+            4,
+            2
+          ],
+          "dtype": "<f8",
+          "fortran_order": false
+        },
+        "step_radius": {
+          "shape": [
+            4,
+            2479,
+            2
+          ],
+          "dtype": "<f8",
+          "fortran_order": false
+        },
+        "cumulative": {
+          "shape": [
+            2479,
+            2
+          ],
+          "dtype": "<f8",
+          "fortran_order": false
+        },
+        "cumulative_radius": {
+          "shape": [
+            2479,
+            2
+          ],
+          "dtype": "<f8",
+          "fortran_order": false
+        }
+      },
+      "numeric_science_execution": false
+    },
+    {
+      "case": "chi3_R80_N2048",
+      "clock_label": "minus",
+      "T_s": 1000000.0,
+      "m": 4,
+      "delta": 0.5,
+      "gamma_hex": "0x1.92a737110e454p-18",
+      "headers": {
+        "z_steps": {
+          "shape": [
+            4,
+            2479,
+            2
+          ],
+          "dtype": "<f8",
+          "fortran_order": false
+        },
+        "h": {
+          "shape": [
+            2479
+          ],
+          "dtype": "<f8",
+          "fortran_order": false
+        },
+        "epsilon_steps": {
+          "shape": [
+            4,
+            2
+          ],
+          "dtype": "<f8",
+          "fortran_order": false
+        },
+        "step_radius": {
+          "shape": [
+            4,
+            2479,
+            2
+          ],
+          "dtype": "<f8",
+          "fortran_order": false
+        },
+        "cumulative": {
+          "shape": [
+            2479,
+            2
+          ],
+          "dtype": "<f8",
+          "fortran_order": false
+        },
+        "cumulative_radius": {
+          "shape": [
+            2479,
+            2
+          ],
+          "dtype": "<f8",
+          "fortran_order": false
+        }
+      },
+      "numeric_science_execution": false
+    },
+    {
+      "case": "chi3_R80_N2048",
+      "clock_label": "plus",
+      "T_s": 1000000.0,
+      "m": 4,
+      "delta": 0.5,
+      "gamma_hex": "0x1.0c6f7a0b5ed8dp-19",
+      "headers": {
+        "z_steps": {
+          "shape": [
+            4,
+            2479,
+            2
+          ],
+          "dtype": "<f8",
+          "fortran_order": false
+        },
+        "h": {
+          "shape": [
+            2479
+          ],
+          "dtype": "<f8",
+          "fortran_order": false
+        },
+        "epsilon_steps": {
+          "shape": [
+            4,
+            2
+          ],
+          "dtype": "<f8",
+          "fortran_order": false
+        },
+        "step_radius": {
+          "shape": [
+            4,
+            2479,
+            2
+          ],
+          "dtype": "<f8",
+          "fortran_order": false
+        },
+        "cumulative": {
+          "shape": [
+            2479,
+            2
+          ],
+          "dtype": "<f8",
+          "fortran_order": false
+        },
+        "cumulative_radius": {
+          "shape": [
+            2479,
+            2
+          ],
+          "dtype": "<f8",
+          "fortran_order": false
+        }
+      },
+      "numeric_science_execution": false
+    }
+  ],
+  "evidence": [
+    {
+      "path": "runs/cr_clock_controls_20261027_v2/payload/RESULT.json",
+      "bytes": 4934,
+      "sha256": "32455add800ad9606d89564a3584823d27013436d8dd6f2764d3218c20e3b179"
+    },
+    {
+      "path": "runs/cr_clock_controls_20261027_v2/payload/QUALIFICATION_INDEX.json",
+      "bytes": 2335,
+      "sha256": "5b9d0a1ce569c4acf1c36898f67a697caf056a414b70eb4bb15d7ae9574759cb"
+    },
+    {
+      "path": "runs/cr_clock_controls_20261027_v2/DISPATCH_RECEIPT.json",
+      "bytes": 2509,
+      "sha256": "3502b85fa9bbc48415cd52a305531cb4d8c75ab39a24b31565bb6aa54aeb071e"
+    },
+    {
+      "path": "runs/cr_clock_controls_20261027_v2/OWNED_WORKER_IDENTITY.json",
+      "bytes": 177,
+      "sha256": "2e5fe379ec621fcb666ff852dfea845e6c6aa4e63f2c3909573de1c151a04e7a"
+    },
+    {
+      "path": "runs/cr_clock_controls_20261027_v2/PRE_EXECUTION.json",
+      "bytes": 11580,
+      "sha256": "dac695f7889041ed93ad758841dc70bfeab2f36c94374c6adc0ed10035c4f376"
+    },
+    {
+      "path": "runs/cr_clock_controls_20261027_v2/EXECUTED_SOURCE/_admission/SOURCE_PINS.json",
+      "bytes": 6492,
+      "sha256": "9e9b1b1d610ebbf4304149491cb1e3f525ddf8b7d8399c7f4a4e721f843a057c"
+    },
+    {
+      "path": "runs/cr_clock_controls_20261027_v1/DISPATCH_RECEIPT.json",
+      "bytes": 2565,
+      "sha256": "be0c0b5eb83494b3012612f5617951e031f00ded7bcbbbd0fe2b1c78ad6523e5"
+    }
+  ],
+  "numeric_science_executed_by_reviewer": false,
+  "final_C9_decision": "PENDING_ACTUAL_REFERENCE_AND_PRIMARY_RESULTS",
+  "central_completed": 27,
+  "central_total": 88,
+  "count_effect": 0,
+  "metadata_preparation_CPU_s_before_serialization": 0.018757460000000004
+}

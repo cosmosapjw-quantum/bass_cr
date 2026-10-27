@@ -1,0 +1,172 @@
+{
+  "schema": "CR_RR_CAUSAL_CLOCK_R6_INDEPENDENT_REVIEW_V1",
+  "unit": "CR_RR_CAUSAL_ERLANG_CLOCK_V1",
+  "reviewed_utc": "2026-10-27T06:17:54.922162+00:00",
+  "stage": "R6",
+  "decision": "PASS_SCOPED_CONDITIONAL_ON_STATED_PREMISES",
+  "admitted_scope": "Independent analytic finite-M-matrix Erlang resolvent, deterministic-time bracket, residual certification theorem and source/energy interface design; implementation and actual stored-matrix certificate not yet admitted",
+  "reviewer": {
+    "agent": "/root/latest_repo_survey",
+    "independent_from_candidate_R5_author": true,
+    "implemented_new_solver": false,
+    "executed_new_science": false,
+    "previous_participation": "R1 repository metadata inventory only",
+    "model_instrumentally_observed": "UNOBSERVED",
+    "skill": "physmath-research-loop user1.0 THEORY_LOOP R6"
+  },
+  "input_files": [
+    {
+      "path": "theory_candidate/THEORY_KO.md",
+      "bytes": 21837,
+      "sha256": "c736e9ab4377bc3bbbdcacd7c7a86c3a3a65dfd7c0c6700d60eb298025d07c6a",
+      "read_in_full": true
+    },
+    {
+      "path": "theory_candidate/FORMULA_CONTRACT.json",
+      "bytes": 13315,
+      "sha256": "73d06e1d244768490afa9df4a2a9c78246e3ed06bfd499f0a168a83e8d82ec07",
+      "read_in_full": true
+    }
+  ],
+  "independent_derivation": {
+    "created_before_candidate_read": true,
+    "record": "review_theory/INDEPENDENT_DERIVATION_RECORD.json",
+    "method": [
+      "analytic positivity and matrix-Laplace derivation",
+      "independent Chernoff tilt and inequality-direction derivation",
+      "exact residual/error recurrence derivation",
+      "closed-form scalar resolvent check",
+      "nonnormal two-by-two M-matrix non-probability example",
+      "source transpose, dimensional, endpoint, time-bin and signed energy checks"
+    ]
+  },
+  "preflight": {
+    "record": "review_theory/R6_START_PREFLIGHT.json",
+    "own_branch": "research/cr-heiii-ground-rr-20261027",
+    "own_HEAD": "ec463db0c7e5c7fb5070796071c926caa4db6445",
+    "central_HEAD": "5abe0d19df95db730e3e33bae0373c81ba37ce89",
+    "own_AGENTS_sha256": "8d62d9758fe173263eb3820c7b00ca569193bb7f912fc3d95d145e73d4a40970",
+    "central_AGENTS_sha256": "ab29a05cac922bd393dc04f7f280a0d4e1d7289ae6ea24291f48fd7cf7b2e8eb",
+    "AGENTS_bytes_unchanged_from_R1": true,
+    "parallel_refs_cutoff": "2026-10-27T06:02:31Z",
+    "new_publication_branch_preflight_owner": "root"
+  },
+  "findings": [],
+  "required_corrections": 0,
+  "checks": [
+    {
+      "claim": "positive semigroup and finite reward",
+      "candidate": "THEORY sections2-3; F01-F02",
+      "result": "PASS_ANALYTIC_CONDITIONAL",
+      "note": "Z plus positive witness proves M-matrix; substochasticity and P<=1 not used"
+    },
+    {
+      "claim": "Erlang resolvent and recurrence",
+      "candidate": "THEORY section4; F03-F05",
+      "result": "PASS_ANALYTIC",
+      "note": "Tonelli and matrix Laplace integral; gamma powers and m terms confirmed by scalar exact form"
+    },
+    {
+      "claim": "Chernoff tail directions and deterministic bracket",
+      "candidate": "THEORY section5; F06-F10",
+      "result": "PASS_ANALYTIC",
+      "note": "Actual encoded gamma a=gamma*T/m retained; lower and upper tails correctly assigned"
+    },
+    {
+      "claim": "endpoint and m-order convergence",
+      "candidate": "THEORY section5.3; F24-F25",
+      "result": "PASS_ANALYTIC",
+      "note": "fixed delta does not collapse to T; delta->0 and m delta^2->infinity sufficient"
+    },
+    {
+      "claim": "residual certification",
+      "candidate": "THEORY section6; F11-F15",
+      "result": "PASS_DESIGN_CONDITIONAL",
+      "note": "Previous error propagation, exact target shift, all-time approximate reuse and scalar rounding included"
+    },
+    {
+      "claim": "time-bin and signed energy maps",
+      "candidate": "THEORY section7; F16-F20",
+      "result": "PASS_ANALYTIC",
+      "note": "Common N,E correlation explicitly retained; signs and SI units verified"
+    },
+    {
+      "claim": "forward transpose and source convolution",
+      "candidate": "THEORY section8; F21-F23",
+      "result": "PASS_ANALYTIC_CONDITIONAL",
+      "note": "K transpose in forward population; fixed shape distinguished from arbitrary vector history"
+    },
+    {
+      "claim": "old source and physical scope",
+      "candidate": "THEORY sections1,7-9; output_scope",
+      "result": "PASS_SCOPE",
+      "note": "Exact stored rewards/projection, p[0] boundary, isotope/bath mapping and null actual history/nb preserved"
+    }
+  ],
+  "remaining_execution_obligations": [
+    "Pin actual selected NPZ and source array identities without rebuilding providers.",
+    "Check exact stored K sign/shape and obtain rigorous positive witness or equivalent certificate; witness beta for residual bound.",
+    "Execute declared shifted recurrence within its own frozen budget and certify residuals against exact target shift and RHS.",
+    "Certify all-time cap from saved approximate columns and scalar dot-product error.",
+    "Enclose actual encoded-gamma tail values upward and final endpoints outward, and report actual widths.",
+    "Check coded time-bin correlated energy export and conditional pulse-vs-actual-history labels at implementation review."
+  ],
+  "not_admitted": [
+    "actual numerical witness or result before C6",
+    "new actual continuous injection history",
+    "source-matched donor/recipient baryon normalization",
+    "pointwise physical/native25 RHS",
+    "full photon-electron-baryon cascade or physical heating",
+    "global physical error bound or completion"
+  ],
+  "preserved_state": {
+    "central_declared_completed": 27,
+    "central_original_nodes": 88,
+    "count_effect": 0,
+    "N4_N5": "PARTIAL_OPEN",
+    "N6_N7": "PREDECESSOR_GATED",
+    "global_physical_completion": null,
+    "global_error_bound": null,
+    "L4_ready": false,
+    "caloric_partition_promoted_to_heating": false,
+    "UNKNOWN_NO_ACK": "preserved",
+    "historical_budget_reset": false
+  },
+  "execution": {
+    "scientific_runs": 0,
+    "old_science_replays": 0,
+    "remote_mutations": 0,
+    "new_external_symbolic_tool_calls": 0,
+    "metadata_cpu_s": null,
+    "metadata_overhead": "unmeasured; not zero",
+    "publication_owner": "root"
+  },
+  "artifacts": [
+    {
+      "path": "review_theory/INDEPENDENT_DERIVATION.md",
+      "bytes": 9793,
+      "sha256": "138c6030dafcd166181a1a3c043a2c8a6eacdbfd8036f7effb8039dc01f14e2c"
+    },
+    {
+      "path": "review_theory/ANALYTIC_EDGE_CASES.md",
+      "bytes": 1452,
+      "sha256": "2e499250c2d042dafc69499af1477ca848d340025816bac6fecfaad1b6246617"
+    },
+    {
+      "path": "review_theory/R6_REVIEW_KO.md",
+      "bytes": 10707,
+      "sha256": "f447663d666f4d6988ca275e3eac15dd875b71e7bd6696958cc4de20cd0296f4"
+    },
+    {
+      "path": "review_theory/R6_START_PREFLIGHT.json",
+      "bytes": 76473,
+      "sha256": "db3587d9278c5fa91ad6dc97969af9243101a36e482983f3fccaa7d02e596a5b"
+    },
+    {
+      "path": "review_theory/OLD_CONTRACT_READ.json",
+      "bytes": 944,
+      "sha256": "dd18148e8aff85ba6d409a3bea5dc5779ef1e1299ab0fea395e76c63af7c9ca0"
+    }
+  ],
+  "fresh_review_trigger": "Changed theorem premise/formula/normalization/exact numerical target; unchanged closed proof reuses this review."
+}

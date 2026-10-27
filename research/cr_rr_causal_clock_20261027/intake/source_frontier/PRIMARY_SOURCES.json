@@ -1,0 +1,204 @@
+{
+  "schema": "CR_EXTERNAL_TIME_SOURCE_PRIMARY_EVIDENCE_V1",
+  "date": "2026-10-27",
+  "role": "R1/R2 source feasibility; no scientific solver execution",
+  "selected_basis": {
+    "repository": "cosmosapjw-quantum/bass_cr",
+    "branch": "research/cr-heiii-ground-rr-20261027",
+    "observed_head": "ec463db0c7e5c7fb5070796071c926caa4db6445",
+    "science_source": "4e72c89b714431eb4c6ae07def777bbf72a5ae4c",
+    "head_rechecked_utc": "2026-10-27 06:03 UTC",
+    "latest_parallel_survey": "Parent and latest_repo_survey; direct local reread of selected REI237 ADMISSION and REC source-synthesis CODING_CONTRACT"
+  },
+  "skill": {
+    "package": "e1/skill-6aa0657100b08191b7d67482d1f97c1d",
+    "version": "1.0.0",
+    "read": [
+      "SKILL.md",
+      "references/RESEARCH_POLICY.md",
+      "references/THEORY_LOOP.md"
+    ],
+    "applied_stages": [
+      "R1",
+      "R2"
+    ],
+    "skill_use_scope": "Reuse actual source evidence; propose one constructive next scientific unit; missing actual time history is not a no-go."
+  },
+  "searches": [
+    {
+      "provider": "Exa",
+      "operation": "web_search_exa",
+      "query": "Primary research paper on continuous-time Markov chain reward response to time-dependent injection, killed semigroup Laplace resolvent, matrix exponential action and uniformization with stiff generators",
+      "objective": "Find primary research or author-hosted papers deriving transient cumulative rewards and Laplace resolvents for finite absorbing continuous-time Markov chains. Prefer numerical linear algebra methods relevant to stiff tridiagonal generators; exclude blogs and general summaries.",
+      "num_results_requested": 6,
+      "status": "completed"
+    },
+    {
+      "provider": "SciSpace",
+      "operation": "search_papers",
+      "search_question": "How can transient cumulative rewards and convolution responses to time-dependent injection in absorbing continuous-time Markov chains be computed using matrix exponentials, uniformization, or Laplace resolvents for stiff generators?",
+      "status": "completed",
+      "reported_candidate_count": 10
+    },
+    {
+      "provider": "Exa",
+      "operation": "web_fetch_exa",
+      "urls": [
+        "https://arxiv.org/abs/1905.04605",
+        "https://www-id.imag.fr/Laboratoire/Membres/Sbeity_Ihab/Sure-Paths/publi_general/BMNS-MAM4.pdf"
+      ],
+      "max_characters_requested": 18000,
+      "status": "both_primary_text_segments_returned",
+      "scope": "Approximately 18000 characters per source; partial text, not full papers."
+    }
+  ],
+  "primary_literature": [
+    {
+      "id": "P1",
+      "authors": [
+        "Mogens Bladt",
+        "Beatrice Meini",
+        "Marcel F. Neuts",
+        "Bruno Sericola"
+      ],
+      "title": "Distributions of reward functions on continuous-time Markov chains",
+      "year": 2002,
+      "doi": "10.1142/9789812777164_0003",
+      "primary_url": "https://www-id.imag.fr/Laboratoire/Membres/Sbeity_Ihab/Sure-Paths/publi_general/BMNS-MAM4.pdf",
+      "read_scope": "Primary author-hosted PDF extracted text: title, abstract, introduction, transform/moment and uniformization sections; extraction truncated near page 10.",
+      "supports": [
+        "Finite continuous-time Markov reward formulations",
+        "Laplace-Stieltjes reward transforms",
+        "Uniformization and convolution methods have different time/stiffness costs"
+      ],
+      "does_not_establish": [
+        "Current CR source qualification",
+        "A new physical injection history",
+        "The candidate deterministic-horizon Erlang-tail bracket in this report"
+      ]
+    },
+    {
+      "id": "P2",
+      "authors": [
+        "Edmundo de Souza e Silva",
+        "Rosa M. M. Leão",
+        "Raymond Marie"
+      ],
+      "title": "Efficient Transient Analysis of Markovian Models Using a Block Reduction Approach",
+      "journal": "INFORMS Journal on Computing",
+      "volume": 25,
+      "issue": 4,
+      "pages": "743-757",
+      "year": 2013,
+      "published_online": "2013-01-17",
+      "doi": "10.1287/ijoc.1120.0537",
+      "primary_url": "https://pubsonline.informs.org/doi/abs/10.1287/ijoc.1120.0537",
+      "read_scope": "Official publisher abstract and bibliographic metadata only; SciSpace discovery; full paper not read.",
+      "supports": [
+        "Erlang random-time approximation for transient and cumulative rewards",
+        "Stiff-model motivation",
+        "Preserving sparse or banded structure in computational methods"
+      ],
+      "does_not_establish": [
+        "Exact candidate error bracket",
+        "Interval-certified floating-point solves",
+        "Physical correctness of any CR input"
+      ],
+      "other_attempt": {
+        "url": "https://hal.inria.fr/hal-00758039",
+        "status": "tool could not open; not used as read full text"
+      },
+      "web_reference": "turn13view1"
+    },
+    {
+      "id": "P3",
+      "authors": [
+        "Mogens Bladt",
+        "Søren Asmussen",
+        "Mogens Steffensen"
+      ],
+      "title": "Matrix calculations for inhomogeneous Markov reward processes, with applications to life insurance and point processes",
+      "year": 2019,
+      "arxiv_id": "1905.04605",
+      "primary_url": "https://arxiv.org/abs/1905.04605",
+      "read_scope": "Primary arXiv extracted text: abstract, introduction, matrix-product background and beginning of general model; approximately 18000 characters.",
+      "supports": [
+        "Matrix representation of inhomogeneous Markov rewards",
+        "Product integrals and homogeneous matrix exponentials",
+        "Moment and Laplace-transform methods"
+      ],
+      "does_not_establish": [
+        "Actual CR proper-time source history",
+        "Candidate novelty",
+        "Current CR numerical certification"
+      ]
+    }
+  ],
+  "evidence_status": {
+    "actual_source_history_exists_elsewhere": true,
+    "archived_Qe_equals_tA_source": {
+      "path": "research/cr_source_binding_20261012/inputs/source_lineage/SOURCE_FINDINGS_KO.md",
+      "history_basis": "actual launcher/code hash and source-array trace",
+      "proper_clock": true,
+      "proper_volume": true,
+      "bath_temperature_K": 100,
+      "nH_m3": 140,
+      "source_horizon_s": 10000000000,
+      "compatible_with_current_HeIII_bath": false,
+      "limitation": "Leading local proton-stock approximation; not exact collisionless Bianchi history and not transplantable to current frozen bath."
+    },
+    "current_HeIII_three_pulse_alternatives": {
+      "redshifts": [
+        2.316,
+        2.479,
+        2.649
+      ],
+      "source_atoms_each": 384,
+      "energy_window_eV": [
+        0,
+        10
+      ],
+      "source_weight_field": "pulse_count_cm3",
+      "source_time_history": null,
+      "exposure_s": null,
+      "continuous_event_rate_m3_s": null,
+      "donor_recipient_baryon_normalization": null
+    },
+    "REI237": {
+      "commit": "ee6746ab172f862dddfdec63b59e5e3707b59eaa",
+      "path": "research/rei_expanded_event_consumer/thermal_assimilation_20261027/ADMISSION.json",
+      "source_matched_history": false,
+      "background_T_K": 14919.863839279506,
+      "background_nb_m3": 10.669321142818111,
+      "prescribed_nu_s_inverse": 8.160348695705333e-18,
+      "physical_nu_s_inverse": null,
+      "physical_provider_qualified": false
+    },
+    "REC_source_synthesis": {
+      "commit": "eb3b390eb59a4c48b5aa2d3bec928465b9c35f2e",
+      "path": "research/rec_source_synthesis_20261027/CODING_CONTRACT.json",
+      "native_history_queries": 313,
+      "prefix": 5127,
+      "physical_coverage": "0/313",
+      "compatible_current_CR_injection_history": false
+    }
+  },
+  "candidate": {
+    "name": "Current-HeIII causal finite-age RR response using Erlang clocks and deterministic-horizon brackets",
+    "new_observable": "Finite-age and time-bin RR count, kinetic energy, and retained-photon return for each already saved pulse, using declared proper-second observation horizons.",
+    "reuses": [
+      "Stored exact represented K",
+      "Saved raw source projections including separate boundary-entry mass",
+      "Existing all-time RR count/energy rewards",
+      "H1/HeI/HeIII source and isotope qualification",
+      "Old M0 and M1/M2 convolution arguments"
+    ],
+    "source_history_invented": false,
+    "actual_continuous_rate": null,
+    "pointwise_instantaneous_return_rate": null,
+    "conditional_bin_average_return": "May be derived from a nonzero declared time-bin width; must be labeled conditional pulse response and kept distinct from actual continuous injection rate.",
+    "analytic_status": "Construction proposed for parent R5 proof and independent review; not numerical admission.",
+    "compute_status": "No scientific computation performed by this child."
+  },
+  "public_copy_policy": "Only repository-owned public text snapshots and concise literature metadata/paraphrases; no full external copyrighted papers copied."
+}

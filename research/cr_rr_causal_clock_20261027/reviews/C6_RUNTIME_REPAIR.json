@@ -1,0 +1,42 @@
+{
+  "schema": "CR_CLOCK_RUNTIME_REPAIR_V1",
+  "failure_run": "runs/cr_clock_controls_20261027_v1",
+  "failure": "OWNED_WORKER_CPU_GUARD",
+  "actual_worker_cpu_s": 0.0021130000000000003,
+  "actual_coordinator_cpu_s": 0.112583694,
+  "stdout_bytes": 0,
+  "stderr_bytes": 0,
+  "diagnosis": {
+    "os_getpid": 5,
+    "proc_self_pid": 145967,
+    "proc_self_process_time_s": 0.038002426,
+    "numeric_proc5_comm": "sync_share.sh",
+    "numeric_proc5_cpu_s": 11.54,
+    "cause": "PID namespace differs from mounted procfs; numeric namespace child PID addressed another process in procfs"
+  },
+  "repair": {
+    "dispatch": {
+      "bytes": 28207,
+      "sha256": "f8d9e1446f1a229ff48c196eb813b3135326b2356c8437c4c10a9f5236170c00"
+    },
+    "method": "Child preexec writes create-only identity from actual proc/self stat PID+starttime with namespace PID+lease nonce; parent validates namespace PID and nonce; all live CPU reads require same proc PID+starttime",
+    "unrelated_process_signals": false,
+    "existing_worker_RLIMIT_CPU": "UNCHANGED",
+    "worker_self_process_time_guard": "UNCHANGED",
+    "stage_caps": "UNCHANGED",
+    "old_failed_attempt": "RETAINED_AND_COUNTED",
+    "next_attempt": "cr_clock_controls_20261027_v2"
+  },
+  "science_replay": 0,
+  "syntax_cpu_s": 0.010333353000000003,
+  "independent_runtime_review": {
+    "decision": "PASS_SCOPED_RUNTIME_BINDING",
+    "reviewer": "/root/latest_repo_survey",
+    "source_sha256": "f8d9e1446f1a229ff48c196eb813b3135326b2356c8437c4c10a9f5236170c00",
+    "source_bytes": 28207,
+    "blocking_findings": 0,
+    "actual_code_read": true,
+    "science_executed": false,
+    "details": "Child /proc/self identity with starttime is bound to namespace Popen PID and lease nonce; every CPU sample checks proc PID+starttime; namespace group signals remain owned. Missing proc entry handles exit race; RLIMIT and worker internal guard retained."
+  }
+}

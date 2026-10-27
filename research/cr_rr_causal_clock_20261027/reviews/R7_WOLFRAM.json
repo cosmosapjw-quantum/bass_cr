@@ -1,0 +1,18 @@
+{
+  "schema": "CR_CLOCK_WOLFRAM_CHECK_V1",
+  "code": "Clear[k,g,m,r,t,km,w,rv,f,a,tail,tests];\nscalar = FullSimplify[Sum[g^j*r/(k+g)^(j+1),{j,0,m-1}] == r/k*(1-(g/(k+g))^m), Assumptions -> k>0 && g>0 && r>0 && Element[m,Integers] && m>=1];\nkm={{2,-1},{-1,3}}; w={2,1};rv={1,2};\nf[t_]:=w.LinearSolve[km,(IdentityMatrix[2]-MatrixExp[-km*t]).rv];\na[m_,g_]:=Sum[g^j*w.MatrixPower[Inverse[km+g IdentityMatrix[2]],j+1].rv,{j,0,m-1}];\npinfty=w.LinearSolve[km,rv];\ntests=Flatten[Table[Module[{gm=m (1+d)/tt,gp=m (1-d)/tt,qm,qp,lo,hi,ff},qm=Exp[m (Log[1+d]-d)];qp=Exp[m (Log[1-d]+d)];lo=Max[0,(a[m,gm]-pinfty*qm)/(1-qm)];hi=Min[pinfty,a[m,gp]/(1-qp)];ff=f[tt];TrueQ[N[lo-ff,50]<=0&&N[hi-ff,50]>=0]],{m,{2,8,32}},{d,{1/2,1/4}},{tt,{1/10,1,10}}]];\nsign=Simplify[-ee-ii*nn+(ee+ii*nn)]===0;\nextra={scalar,TrueQ[Simplify[f[0]]==0],TrueQ[pinfty==4],TrueQ[Min[Eigenvalues[km]]>0],sign,TrueQ[{1,0}.Inverse[{{1,-2},{0,1}}].{0,1}==2]};\n<|\"scalar_identity\"->scalar,\"matrix_bracket_count\"->Length[tests],\"matrix_brackets_all_pass\"->And@@tests,\"additional_checks\"->extra,\"total_checks\"->(Length[tests]+Length[extra]),\"all_pass\"->And@@Join[tests,extra],\"matrix_all_time\"->pinfty,\"scope\"->\"Exact scalar algebra and 50-digit 2x2 toy checks only; no CR science run; provider CPU unavailable\"|>",
+  "time_constraint_s": 20,
+  "provider_cpu_s": null,
+  "requested_at_utc": "2026-10-27T07:25:47.176Z",
+  "actual_tool_response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "SetSystemOptions::sysname: -- Message text not found -- (\"UseNestedRoots\")\nSetSystemOptions::sysname: -- Message text not found -- (\"UseNestedRoots\")\nSetSystemOptions::sysname: -- Message text not found -- (\"UseNestedRoots\")\nSetSystemOptions::sysname: -- Message text not found -- (\"UseNestedRoots\")\nSetSystemOptions::sysname: -- Message text not found -- (\"UseNestedRoots\")\nSetSystemOptions::sysname: -- Message text not found -- (\"UseNestedRoots\")\nSetSystemOptions::sysname: -- Message text not found -- (\"UseNestedRoots\")\nSetSystemOptions::sysname: -- Message text not found -- (\"UseNestedRoots\")\nSetSystemOptions::sysname: -- Message text not found -- (\"UseNestedRoots\")\nSetSystemOptions::sysname: -- Message text not found -- (\"UseNestedRoots\")\nSetSystemOptions::sysname: -- Message text not found -- (\"UseNestedRoots\")\nGeneral::messages: Messages were generated which may indicate errors.\n\nOut[1]= <|\"scalar_identity\" -> True, \"matrix_bracket_count\" -> 18, \"matrix_brackets_all_pass\" -> True, \"additional_checks\" -> {True, True, False, True, True, True}, \"total_checks\" -> 24, \"all_pass\" -> False, \"matrix_all_time\" -> 3, \"scope\" -> \"Exact scalar algebra and 50-digit 2x2 toy checks only; no CR science run; provider CPU unavailable\"|>"
+      }
+    ],
+    "structuredContent": null,
+    "isError": false
+  },
+  "local_science_replays": 0
+}

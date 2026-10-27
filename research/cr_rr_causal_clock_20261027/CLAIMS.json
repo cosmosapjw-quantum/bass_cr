@@ -1,0 +1,82 @@
+{
+  "schema": "CR_CLOCK_CLAIMS_V1",
+  "scope": "exact represented saved finite operator and admitted pulse; physical source and isotope scope inherited",
+  "definitions": {
+    "K": "exact real matrix encoded by saved K_diag/K_lower/K_upper",
+    "reward": "saved count/kinetic RHS, not recalculated lambda*E",
+    "source": "stored absolute pulse weights, active[1:], boundary[0] RR=0",
+    "clock": "declared proper-second observation after pulse; not exposure",
+    "gamma": "exact value encoded by actual chosen binary64 positive rate"
+  },
+  "claims": [
+    {
+      "id": "CLK1",
+      "statement": "Nonnegative finite-age cumulative reward and finite all-time upper",
+      "premises": [
+        "Z-matrix",
+        "positive witness h and beta>0 with K h>=beta h",
+        "w,r>=0"
+      ],
+      "status": "derived_conditional",
+      "physical_probability_cap_one": false,
+      "evidence": "THEORY_KO.md"
+    },
+    {
+      "id": "CLK2",
+      "statement": "Erlang expectation equals positive shifted resolvent recurrence",
+      "premises": [
+        "CLK1",
+        "m positive integer",
+        "gamma>0"
+      ],
+      "status": "derived_conditional",
+      "evidence": "THEORY_KO.md"
+    },
+    {
+      "id": "CLK3",
+      "statement": "Two clock tails bound deterministic horizon and positive bin difference",
+      "premises": [
+        "CLK2",
+        "actual gamma tail upper bounds<1"
+      ],
+      "status": "derived_conditional",
+      "evidence": "THEORY_KO.md"
+    },
+    {
+      "id": "CLK4",
+      "statement": "Witness-scaled residuals including all inherited recurrence error bound exact stored-K floating solve error",
+      "premises": [
+        "outward/exact residual norm",
+        "outward scalar contraction/sum",
+        "all-time saved-solution residual"
+      ],
+      "status": "derived_conditional",
+      "evidence": "THEORY_KO.md"
+    },
+    {
+      "id": "CLK5",
+      "statement": "Shared count/kinetic intervals produce correlated signed event-energy map",
+      "premises": [
+        "source qualification retained",
+        "SI conversion once",
+        "He4III12 to He4II11"
+      ],
+      "status": "derived_conditional",
+      "evidence": "THEORY_KO.md"
+    }
+  ],
+  "unresolved": {
+    "actual_continuous_history": null,
+    "exposure_s": null,
+    "nb_m3": null,
+    "pointwise_physical_rate": null,
+    "physical_stopping_provider": null,
+    "photon_cascade": null,
+    "global_error_bound": null,
+    "physical_heating_completion": null
+  },
+  "strong_no_go": {
+    "status": "not_claimed",
+    "reason": "Missing compatible source history is an input dependency, not physical impossibility."
+  }
+}

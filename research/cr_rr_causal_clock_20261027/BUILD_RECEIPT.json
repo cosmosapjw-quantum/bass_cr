@@ -1,0 +1,32 @@
+{
+  "schema": "CR_CLOCK_STRICT_NATIVE_BUILD_V1",
+  "command": [
+    "c++",
+    "-std=c++17",
+    "-O2",
+    "-shared",
+    "-fPIC",
+    "-fno-fast-math",
+    "-ffp-contract=off",
+    "-frounding-math",
+    "-DCR_STRICT_BUILD=1",
+    "-DCR_LAPACK_LP64=1",
+    "/workspace/scratch/5fcfe17050d5/bass_cr/research/cr_rr_causal_clock_20261027/implementation/clock_kernel.cpp",
+    "-o",
+    "implementation/libclock_kernel.so",
+    "-llapack",
+    "-lblas"
+  ],
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "/usr/bin/ld: cannot find -llapack: No such file or directory\n/usr/bin/ld: cannot find -lblas: No such file or directory\ncollect2: error: ld returned 1 exit status\n",
+  "source_sha256": "0629567c34be30c4ade93755a1c77d62e5737cfbe5c45c185636b01dda4721a9",
+  "compiler_cpu_s": 1.696841,
+  "coordinator_cpu_s": 0.054931713,
+  "wall_s": 1.7019141189957736,
+  "compiler_peak_RSS_KiB": 94452,
+  "build_scope": "CODE_PREPARATION; no scientific inputs loaded, no native entry called",
+  "scientific_execution": false,
+  "fast_math": false,
+  "FMA_contraction": false
+}

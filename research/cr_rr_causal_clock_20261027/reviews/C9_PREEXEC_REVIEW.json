@@ -1,0 +1,146 @@
+{
+  "schema": "CR_RR_CLOCK_C9_PREEXEC_STATIC_REVIEW_V1",
+  "reviewed_utc": "2026-10-27T07:52:12.843461+00:00",
+  "decision": "PASS_STATIC_AFTER_TARGETED_REPAIR_PENDING_EXECUTION",
+  "reviewer": "/root/latest_repo_survey",
+  "scope": "Native certificate, Python tail/endpoints, pure finite-bin exporter and new pipeline; final C9 awaits executed reference/results/budget receipts",
+  "production_authored_by_reviewer": false,
+  "independent_reference_authored_by_reviewer": true,
+  "reviewed_files": [
+    {
+      "path": "implementation/clock_kernel.cpp",
+      "bytes": 18172,
+      "sha256": "0629567c34be30c4ade93755a1c77d62e5737cfbe5c45c185636b01dda4721a9"
+    },
+    {
+      "path": "implementation/clock_engine.py",
+      "bytes": 16678,
+      "sha256": "8285c73f0d0e38df2d23d95e259cc94e53aeac531e936da45e1fdd88c51f046a"
+    },
+    {
+      "path": "implementation/export_adapter.py",
+      "bytes": 22015,
+      "sha256": "9c29468f0b0adbefc891c1df00d5757148f9cdbcf00ba1aa830fd026e25d13d1"
+    },
+    {
+      "path": "implementation/runner_common.py",
+      "bytes": 6571,
+      "sha256": "660fc3af3a786b7a1727892b90499f2a3f219c704c50bb7521adebacc1ba4db1"
+    },
+    {
+      "path": "implementation/primary_runner.py",
+      "bytes": 7873,
+      "sha256": "cffc760e37634cf1c5066bfcf586d8b1fd0b3230745f82717efd5ff83e4b1a73"
+    },
+    {
+      "path": "implementation/controls.py",
+      "bytes": 10102,
+      "sha256": "38b04da6c7c25f890a8a54d0bcdc8fab2bff4a94c735e8319a90820f79ae4a9d"
+    },
+    {
+      "path": "implementation/reference_runner.py",
+      "bytes": 960,
+      "sha256": "ee4693cc9619c8afc2160c04206e5933ed98246f2ada1625508ba54e9cbf298a"
+    },
+    {
+      "path": "implementation/independent_reference.py",
+      "bytes": 30004,
+      "sha256": "4d1bbb8cbb9f12cbc25fd4847f48239d793ac70e96196c09f2c10eab33c5f7e1"
+    }
+  ],
+  "findings": [
+    {
+      "id": "C9-F01",
+      "severity": "ARITHMETIC_SOUNDNESS",
+      "target": "clock_kernel.cpp umul/udiv",
+      "old_sha256": "ec8999265aead913369b05bb9130349f15b4de6c1a764357bddebd8d4037faf8",
+      "issue": "Positive exact bound product/quotient could round to LD zero and return zero through up(0).",
+      "analytic_counterexample": {
+        "n": 1,
+        "d": "2^1023",
+        "r": "2^-1074",
+        "gamma": "2^-1074",
+        "h": 1,
+        "w": 1,
+        "m": 8,
+        "true_last_step": "gamma^7*r/(d+gamma)^8 > 0, approximately 2^-16776",
+        "old_capture_radius": "can be zero",
+        "actual_frozen_grid_failure_observed": false,
+        "counterexample_executed_by_reviewer": false
+      },
+      "repair": "Retain exact-zero operand branches; for positive operands whose rounded result is zero return nextafterl(0,+infinity).",
+      "repaired_sha256": "0629567c34be30c4ade93755a1c77d62e5737cfbe5c45c185636b01dda4721a9",
+      "status": "STATIC_REPAIR_VERIFIED_RUNTIME_CONTROL_PENDING",
+      "targeted_control": "controls.py positive_error_underflow_upper_survives; exact Fraction last value inside captured radius; not yet run at review time"
+    },
+    {
+      "id": "C9-F02",
+      "severity": "METADATA_ACCURACY",
+      "target": "primary_runner.py minimum_nominal initialization",
+      "issue": "Zero initial minimum suppressed the actual positive minimum in the report.",
+      "repair": "Initialize to positive infinity; same negative-value gate.",
+      "repaired_sha256": "cffc760e37634cf1c5066bfcf586d8b1fd0b3230745f82717efd5ff83e4b1a73",
+      "status": "CLOSED_STATIC"
+    }
+  ],
+  "static_checks": {
+    "native_environment": "binary64/x87extended64/nearest/noFTZ/noDAZ checked each entry and afterLAPACK; strictcompilerflags retained",
+    "short_residual": "maximum9roundingoperations; gamma9/sumabs inflation covered by G64LEPS and finalpositive inflation",
+    "positive_bound_underflow": "corrected helpers inspected and copied unit hash confirmed",
+    "target": "K*x and gamma*x separate; recurrent RHS exact gamma*previous; rounded factor diagonal not used as target",
+    "witness_and_all_time": "strict positive beta with downward conversion; saved all-time approximation residual enclosed",
+    "recurrence_and_capture": "inherited epsilon, sum epsilon, accumulation, contraction and FP64serialization errors included; layoutcorrect",
+    "tail": "actual rational a; Decimal80 directed a/operations and ln/exp next_plus; final qbinary64upper nonzero<1",
+    "horizon_endpoints": "exact Fraction bracket then outward float",
+    "event_export": "commonN/E exactrationalmaps; correlatedenergy/signs/SIconversion/native25null boundaries preserved",
+    "pipeline": "samebytes relocated inputs, rawlevel preservation, monotonic intersections, disjoint bins, no production import in reference wrapper"
+  },
+  "python_link_only_delta": {
+    "from_sha256": "6cb9625a010e205aed97e4899bd8ad175df4a68320a72219239b4b96415e774c",
+    "to_sha256": "8285c73f0d0e38df2d23d95e259cc94e53aeac531e936da45e1fdd88c51f046a",
+    "change": "-llapack/-lblas -> -l:liblapack.so.3/-l:libblas.so.3",
+    "actual_diff_read": true,
+    "algorithm_unchanged": true
+  },
+  "runtime_documentation_read": {
+    "python": "3.12.14",
+    "decimal": "1.70",
+    "libmpdec": "4.0.0",
+    "ln_exp_correct_rounding_and_next_plus_docstrings_read": true,
+    "official_reference": "https://docs.python.org/3/library/decimal.html",
+    "numeric_function_execution": false
+  },
+  "start_preflight": {
+    "branch": "research/cr-rr-causal-clock-20261027",
+    "remote_HEAD": "b15c91f9d36682861614cf9b397422131db60dff",
+    "AGENTS_unchanged": true,
+    "AGENTS_sha256": "8d62d9758fe173263eb3820c7b00ca569193bb7f912fc3d95d145e73d4a40970",
+    "parallel_scope": "root C5 source integration and source-author F01 repair; no remote writes by reviewer"
+  },
+  "pending": [
+    "C6 actualABI/scalar2x2/inputcontrols/F01targetedcontrol",
+    "actualstoredmatrixwitnessandprimarywidth/grid/domainresults",
+    "32RHS independently enclosed reference results",
+    "executedsource/nativebinarypins and actualexportcheck",
+    "actualstage/aggregate/failedattemptcostreceipts"
+  ],
+  "accounting": {
+    "scientific_runs": 0,
+    "old_science_replays": 0,
+    "remote_mutations": 0,
+    "metadata_cpu_s": null,
+    "metadata_zero_claimed": false
+  },
+  "preservation": {
+    "central_completed": 27,
+    "central_total": 88,
+    "count_effect": 0,
+    "N4_N5": "PARTIAL_OPEN",
+    "N6_N7": "PREDECESSOR_GATED",
+    "physical_heating_complete": false,
+    "global_physical_error_bound": null,
+    "L4_ready": false,
+    "UNKNOWN_NO_ACK": "preserved",
+    "historical_budget_reset": false
+  }
+}
