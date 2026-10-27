@@ -1,0 +1,742 @@
+{
+  "schema": "CR_PARENT_EVENT_IMPLEMENTATION_SPEC_DRAFT_V1",
+  "unit": "CR_PHYS02_PARENT_EVENT_NATIVE25_V1",
+  "status": "DRAFT_FOR_R9_NO_SCIENTIFIC_EXECUTION",
+  "governing_contract": {
+    "path": "research/cr_parent_event_native25_20261028/CONTRACT.json",
+    "sha256": "01cc2d2835e3ad61c49cd0b68b8c413ebd7e0b8fb5228877804159c4e3f71162",
+    "R1_publication": "fbc039ff5c357571cbbf2ff61d96fde8b3ce8594",
+    "conditioning_definition_sha256": "90f0b4e049ab289fbf0a7dd205f4dbc720dbf32547f99f3444a3d3a83b4059bc",
+    "derivation_draft_sha256": "2b74ce08e992961e64306bdb7157f788e94ac838742480acdafc5ddd72ebf591",
+    "frozen_contract_or_tolerances_modified": false
+  },
+  "authorship": {
+    "role": "theory/input-identification/spec author; not production implementation author or independent R6 reviewer",
+    "science_runtime": 0,
+    "CAS_calls": 0,
+    "scientific_imports": 0,
+    "compile_or_tests": 0,
+    "old_science_replay": 0
+  },
+  "inputs": {
+    "manifest": "next_intake_20261028/theory/INPUT_SOURCE_MANIFEST.json",
+    "manifest_sha256": "a584732402d37afca22d473845db8c20fd0cd2ff9f40e5ba4d7c400cf74d0f44",
+    "canonical_source": {
+      "path": "research/cr_proper_injection_20261027/runs/actual_v1/ACTUAL_SOURCE_RECORDS.json",
+      "sha256": "8fca44c378844029a72253179e557dfa97f6cca8e0f9d6e677d67919ca3797cf",
+      "bytes": 4394309,
+      "tag": "direct_0p1_10",
+      "active_atoms": 3200,
+      "cutoff_atom": 1,
+      "archive_only": true,
+      "mutation_allowed": false
+    },
+    "moment_input": {
+      "manifest_id": "ARES",
+      "json_pointer": "/details/direct_electron_source_bands",
+      "sha256": "4e210fb042c8b4d92fd8577b30af78686500de8d7b7ea89be5baeea6564ee1f8",
+      "use": "exact existing retained binary64 energy coefficients; never call DirectElectronSource"
+    },
+    "source_model": {
+      "manifest_ids": [
+        "INJ",
+        "RUDD",
+        "A",
+        "B",
+        "C",
+        "CRUN",
+        "C9600LAUNCH",
+        "CR001",
+        "C9600RESULT"
+      ],
+      "use": "read/check code identity and original projection semantics only; no imports"
+    },
+    "old_source_npz": {
+      "manifest_id": "C9600FULL",
+      "use": "optional ancestry hash only; no original source normalization sum"
+    },
+    "saved_response": {
+      "result_path": "research/cr_low_birth_causal_rr_20261027/runs/primary_v1/RESULT.json",
+      "result_sha256": "ae8452f25958c47349d313926ef14e7ab7d78691ba6bb3b8395dc399aa49b0ce",
+      "arrays_path": "research/cr_low_birth_causal_rr_20261027/runs/primary_v1/ARRAYS.npz",
+      "arrays_sha256": "2c3624e4ca6d087436f79360497e75b0c84fb2c8ea6b83bb855a9a0cd0005c1d",
+      "reuse": "read four saved prefixes/four bins and explicit capture atoms; no hazards/occupancy/propagation recomputation"
+    },
+    "native_basis": {
+      "manifest": "next_intake_20261028/consumer/SOURCE_MANIFEST.json",
+      "revision": "d91de6299e614520949c5873a9378000ceb1f85c",
+      "foreign_state_or_rates_adopted": false
+    },
+    "input_integrity": "Verify actual bytes,SHA,tag,grid indices,cutoff label,history,state,frame,nb and source-family/birth-partition pins before calculations."
+  },
+  "missing_or_invalid_binding": {
+    "missing_actual_history": {
+      "derived_rate": null,
+      "exposure": null,
+      "finite_event_N_E": null,
+      "native25": null,
+      "status": "UNBOUND_HISTORY_NO_INFERENCE"
+    },
+    "missing_same_state_nb_or_recipient_state": {
+      "per_baryon_values": null,
+      "native25": null,
+      "derived_consumer_rate_or_exposure": null,
+      "proper_density_source_N_E": "Retain only if independently supplied proper history/frame/density are already bound; missing nb is never filled from another bath."
+    },
+    "wrong_or_mixed_metadata": "Reject mismatched revision/hash/state/frame/isotope/clock/target factor/support rather than relabel as an absent value.",
+    "current_primary": "The pinned actual source supplies finite proper history and the newly explicit same-state nb, so its scoped density N/E and partial per-baryon projection may be evaluated after C4.",
+    "immutable_input_tampering": "Removing a field from the pinned canonical source changes its hash and is rejected; generic missing-input controls use separately declared incomplete fixtures.",
+    "forbidden_substitutes": [
+      "conditional mean time as exposure",
+      "another provider's T or nb",
+      "photon moments as time history or spectrum",
+      "zero as a missing actual input"
+    ]
+  },
+  "scope": {
+    "T_s": "10000000000",
+    "birth_support_eV": [
+      "0.1",
+      "10"
+    ],
+    "identification_support_eV": [
+      "0",
+      "1000"
+    ],
+    "minimum_common_endpoint_eV": "2154.927725029828",
+    "source_history": "q_j(t)=t*A_j on [0,T]; no continuation/shutoff outside this interval",
+    "density_basis": "per fixed proper m^3",
+    "absolute_proper_volume": null,
+    "frame": "prescribed gas-rest scalar",
+    "isotope_mapping": "conditional H->H1 and He->He4",
+    "nH_total_m3": "140",
+    "nHe_total_m3": "1085/94",
+    "ne_initial_m3": "2849/1880",
+    "nb_m3": "8750/47",
+    "T_initial_K": "100",
+    "state_id": "same fixed100K/total-nuclei inventory, .01 HII and HeII, zero HeIII",
+    "source_neutral_density_factor": "0.99 already applied",
+    "proper_factor": "729 already applied",
+    "angle_integration": "already applied",
+    "source_proton_quadrature_replay": false,
+    "full_G_recovery": false,
+    "RR_response_replay": false,
+    "actual_exclusive_He_branch": null,
+    "actual_partner_energy_history_response": null,
+    "actual_external_work": null
+  },
+  "basis": {
+    "coefficient_order": [
+      "theta_H",
+      "theta_He1",
+      "theta_He2"
+    ],
+    "coefficient_meaning": {
+      "theta_H": "source c2_H; c1_H=(7/3)c2_H in real model",
+      "theta_He1": "source c1_He",
+      "theta_He2": "source c2_He"
+    },
+    "draft_notation_mapping": {
+      "theta_He0_in_equations": "CONTRACT theta_He1",
+      "theta_He1_in_equations": "CONTRACT theta_He2",
+      "reason": "draft uses0-based f0/f1 notation; no fourth coefficient"
+    },
+    "I_H_source_eV_lexeme": "13.605693122994",
+    "I_He_source_eV_lexeme": "24.59",
+    "f0": "1/(1+W/I)^3",
+    "f1": "(W/I)/(1+W/I)^3",
+    "g": [
+      "(7/3)*f0(I_H,W)+f1(I_H,W)",
+      "f0(I_He,W)",
+      "f1(I_He,W)"
+    ],
+    "new_coefficient_status": "MODEL_IDENTIFIED_FROM_PINNED_MOMENTS_NOT_ORIGINAL_COEFFICIENT_BYTES",
+    "original_binary64_relation_residual": "checked through holdout/projection; do not silently refit4parameters"
+  },
+  "high_precision_moments": {
+    "working_decimal_digits_min": 80,
+    "numeric_input_policy": "Preserve raw JSON lexemes and original binary64 round-trip values; lift original binary64 numerical inputs exactly to high precision, e.g.Decimal.from_float. Record source constant/edge representation. Preserve separate declared decimal energy-convention lexemes.",
+    "domain": "I>0,0<=a<=b<=1000; confirm common source support before use",
+    "definitions": {
+      "K": "I+a",
+      "h": "(b-a)/K",
+      "z": "(b-a)/(I+b)",
+      "F0": "z*(1-z/2)",
+      "F1": "z*z/2",
+      "F2": "-log1p(-z)-z-z*z/2 = sum_{k=3}^infinity z^k/k"
+    },
+    "stable_F2": {
+      "z_zero": "exact0",
+      "z_at_most_half": "positive series k>=3; bound remainder by z^(m+1)/((m+1)*(1-z)); stop when bound<=1e-70*positive_partial_sum",
+      "z_above_half": ">=80digit log((I+b)/(I+a))-z-z*z/2; no small-z cancellation",
+      "iteration_failure": "record failure; no silent low-precision fallback"
+    },
+    "integrals": {
+      "N0": "I^3/K^2*F0",
+      "N1": "I^2/K^2*(a*F0+K*F1)",
+      "E0": "I*N1",
+      "E1": "I^2/K^2*(a*a*F0+2*a*K*F1+K*K*F2)"
+    },
+    "equal_endpoints": "return exact zero for all four moments",
+    "H_combination": {
+      "number": "(7/3)*N0_H+N1_H",
+      "energy": "(7/3)*E0_H+E1_H"
+    },
+    "precision_scope": "ordinary highprecision arithmetic; not outward intervals, physical-accuracy certification or replacement of old source constants"
+  },
+  "recover_coefficients": {
+    "recovery_bands_eV": [
+      [
+        "0",
+        "0.1"
+      ],
+      [
+        "3",
+        "10"
+      ],
+      [
+        "100",
+        "1000"
+      ]
+    ],
+    "holdout_bands_eV": [
+      [
+        "0.1",
+        "1"
+      ],
+      [
+        "1",
+        "3"
+      ],
+      [
+        "10",
+        "100"
+      ]
+    ],
+    "matrix": "M_ij=integral over recovery band i of W*g_j(W)dW",
+    "scaling": {
+      "R": "diag(1/b_i)",
+      "c_j": "1/max_i(abs((R*M)_ij))",
+      "B": "R*M*diag(c_j)",
+      "rhs": "[1,1,1]"
+    },
+    "solve": "small3x3 >=80digit pivoted solve/inverse; record pivot/precision/residual; theta=diag(c)*z",
+    "inverse_metrics": {
+      "rcond_inf": "1/(norm_inf(B)*norm_inf(B_inverse))",
+      "sensitivity_vector": "eta*abs(B_inverse)*ones/abs(z)",
+      "positive_lower": "z-eta*abs(B_inverse)*ones"
+    },
+    "gates": {
+      "b_and_column_scales_positive_finite": true,
+      "rcond_inf_min": "1e-6",
+      "eta": "2e-12",
+      "max_component_relative_sensitivity": "1e-8",
+      "all_positive_lower": true
+    },
+    "holdout": "evaluate all3unused band moments without altering coefficients; each positive saved moment is its own comparison scale",
+    "failure_result": "MODEL_IDENTIFICATION_UNRESOLVED; retain diagnostics and null coefficient adoption; do not replay original64-node proton source, expand support, renormalize, widen tolerance or add a fourth coefficient"
+  },
+  "project_basis": {
+    "purpose": "new target attribution kernel using originalQ8/projector, not regeneration/replacement of canonical total source",
+    "grid_input": "canonical low-tag actual binary64 energies; prepend exact recorded cutoff .1; validate3200active andstored_node_index0..3199 pluscutoff_boundary",
+    "grid_regeneration_forbidden": true,
+    "quadrature": "same8-point Gauss-Legendre rule on every original low cell; record actual new rule/output identity; do not instantiate old Cascade or DirectElectronSource",
+    "cell_nodes": "W=(lo+hi)/2+(hi-lo)*xi_l/2 using the original operation convention",
+    "cell_weights": "omega=(hi-lo)*w_l/2",
+    "barycentric": "alpha=(W-lo)/(hi-lo); require0<=alpha<=1 without clipping",
+    "up": "add omega*g_r(W)*alpha to upper node",
+    "down": "add omega*g_r(W)*(1-alpha) to lower node; first lower node is separate cutoff ghost",
+    "basis_arrays": "K shape[3201,3], number coefficients; row0cutoff or separately serializedcutoff plus3200active",
+    "target_arrays": {
+      "H": "theta_H*K_H",
+      "He": "theta_He1*K_He0+theta_He2*K_He1"
+    },
+    "float_bridge": "record highprecision theta strings and actual binary64 values used for basis projection",
+    "no_extra_normalization": "physical coefficients already have source normalization; do not divide again by selected_A_energy or multiply proper/target factors. Old energy-coordinate cancellation is an identity check only.",
+    "forbidden_shortcut": "canonical_A_j*target_spectrum(E_j)/total_spectrum(E_j)",
+    "no_repair": "output reconstruction residual per atom; never force target sum to equal canonical by renormalization or residual reassignment",
+    "projection_invariants": "each quadrature weight preserves count and kinetic energy with ghost; originalQ8 is not replaced by an exact continuous piecewise-projector integral",
+    "canonical_comparison": "predicted target sum vs original atom, each original positive atom own scale; exactzero requires exactzero",
+    "target_totals": "sum projected number/energy separately perH/He, including ghost; compare analytic same-support moments independently"
+  },
+  "window_semantics": {
+    "times_s": [
+      "2500000000",
+      "5000000000",
+      "7500000000",
+      "10000000000"
+    ],
+    "prefixes": "[0,t_k], nonadditive diagnostics",
+    "observation_bins": "[t_(k-1),t_k], disjoint measure intervals with continuous source; endpoint conventions do not duplicate discrete event claims",
+    "source_factor": "(b-a)*(b+a)/2; zero-width exact0",
+    "source_N": "factor*A_target_number_disc",
+    "source_E": "factor*A_target_energy_disc",
+    "endpoint_source_rates": "t*A_target coefficients; atT markknown-history left limit",
+    "out_of_history": "reject; no inferred continuation or shutoff",
+    "saved_active_fields": {
+      "prefix": [
+        "active_number_m3",
+        "active_energy_eV_m3"
+      ],
+      "bin": [
+        "active_number_change_m3",
+        "active_energy_change_eV_m3"
+      ]
+    },
+    "saved_bin_response": "includes survivors born before left endpoint; never reset at bin start",
+    "target_source_totals_role": "newmodelidentified attribution; canonical savedtotal remainsauthoritative",
+    "split_residuals": {
+      "epsilon_N": "J_H+N_eHe-saved_injected_number",
+      "epsilon_E": "U_H+U_He-saved_injected_energy"
+    },
+    "residual_policy": "retain andvalidate; never classify as thermal count/heat or repair canonical inputs"
+  },
+  "helium_affine_family": {
+    "symbols_units": {
+      "s": "proper m^-3 selectedsingle events",
+      "p": "proper m^-3 double events with1selected+1outside",
+      "d": "proper m^-3 double events with2selected"
+    },
+    "actual_parameter_values": {
+      "s": null,
+      "p": null,
+      "d": null
+    },
+    "constraint": "s+p+2*d=N_eHe;s,p,d>=0",
+    "parameter_domain": "p>=0,d>=0,p+2*d<=N_eHe; necessary selected marginal constraints, not full joint-spectrum physical sufficiency",
+    "source_deltas": {
+      "HeI": "-(N_eHe-d)",
+      "HeII": "N_eHe-p-2*d",
+      "HeIII": "p+d",
+      "total_electron_charge": "N_eHe+p"
+    },
+    "time_consistency": "prefix p/d measures are sums of disjoint-bin p/d measures ifprovided; do not invent actual branch rate/history",
+    "required_unknown_ports": [
+      "outside_partner_count",
+      "outside_partner_energy",
+      "outside_partner_support",
+      "outside_partner_proper_history",
+      "outside_partner_pool",
+      "outside_partner_later_response",
+      "residual_HeII_excitation"
+    ],
+    "p0_status": "conditional closed-selected-support fixture only",
+    "d0_status": "conditional single-electron/effective branch fixture only",
+    "intercept_is_actual_branch": false,
+    "actual_joint_pairing_generated": false,
+    "limit": "same direct free-electron ejection model only; no new charge-exchange/projectile-state branch or universal no-go claim"
+  },
+  "native_projection": {
+    "native_order": "21species,Y;zeta21,w_nt22,w_ext23,logT24",
+    "indices": {
+      "H1I": 1,
+      "H1II": 2,
+      "He4I": 10,
+      "He4II": 11,
+      "He4III": 12,
+      "zeta": 21,
+      "w_nt": 22,
+      "w_ext": 23,
+      "logT": 24
+    },
+    "delta_nb": "exact0 for selecteddirect events; not full externalproton injection",
+    "delta_density_intercept": {
+      "H1I": "-J_H+C_H",
+      "H1II": "J_H-C_H",
+      "He4I": "-N_eHe+C_He",
+      "He4II": "N_eHe-C_He",
+      "He4III": "0"
+    },
+    "coefficient_p_density": {
+      "He4II": "-1",
+      "He4III": "1"
+    },
+    "coefficient_d_density": {
+      "He4I": "1",
+      "He4II": "-2",
+      "He4III": "1"
+    },
+    "normalization": "divide density intercept and p/dcoefficients by nb once; allother nuclear increments0",
+    "selected_zeta_retention": "(saved_dNactive+saved_Ncut)/nb",
+    "selected_wnt_retention_J_per_baryon": "(saved_dUactive+saved_Ucut)*eV_J/nb",
+    "selected_zeta_assimilation": "saved_dNactive/nb",
+    "selected_wnt_assimilation_J_per_baryon": "saved_dUactive*eV_J/nb",
+    "charge_guard": "q.deltaY-selected_deltaZeta contains unresolvedp plus actualsplit/saved-count residual; do not treatp or numericalresidual as thermal",
+    "actual_full_native25": null,
+    "actual_partner_addendum": null,
+    "scoped_projected_w_ext": 0,
+    "actual_external_work": null,
+    "default_logT_update": null,
+    "actual_full9600_native25": null,
+    "baseline": "exactconditional H1/He4 inventory andsame100K; initialselected cohort0. Scoped externaloffset0 isreferenceprojection only,notactualdonor reservoir.",
+    "authoritative_representation": "baseline + independent delta + affinep/dcoefficients + individualeventterms; roundedendpointdiagnostic only",
+    "species_domain": "check nonnegativebaseline+delta in highprecision/two-part foranyexplicitfixture; do notlose tinyincrements beforechecking",
+    "partner_response_rule": "fullendpointrequires partnerpool,chemistry,energy/clockresponse; birthcountaloneis insufficient"
+  },
+  "event_term_ledger": {
+    "required": [
+      "J_H",
+      "N_eHe",
+      "C_H",
+      "C_He",
+      "K_H",
+      "K_He",
+      "source_binding_H",
+      "source_binding_He_electron_equivalent",
+      "RR_binding_H",
+      "RR_binding_He",
+      "retained_photon_H",
+      "retained_photon_He",
+      "cutoff_direct_N",
+      "cutoff_drift_N",
+      "cutoff_U",
+      "Coulomb_Q",
+      "literal_convention_terms",
+      "symbolic_branch_lift_terms"
+    ],
+    "preservation": "copy savedrareRRscalar identity/precision andlineage separately fromnewsource contribution",
+    "aggregation": "highprecision orcompensated sum; storeterms plusaggregate",
+    "forbidden": "recoverC_H byJ_H-(J_H-C_H),or recoverrareRRenergy fromlarge source-energy differences",
+    "reference_policy": "verifyrareRRterms on their ownvalues/identities; newparent fiterror is notoldRRerror",
+    "baseline_ulp": "never recoverdelta bysubtracting roundedendpoint andbaseline"
+  },
+  "energy_ledger": {
+    "eV_J_exact": "1.602176634e-19",
+    "I_H_source_declared": "13.605693122994",
+    "I_He1_source_declared": "24.59",
+    "I_H_RR": "13.60",
+    "I_He_RR": "24.59",
+    "native_I_H_star": "13.6",
+    "native_I_He1_star": "24.59",
+    "native_I_He2_star": "54.42",
+    "actual_I_He2_source": null,
+    "H_literal_difference_eV": "0.005693122994",
+    "L0": "saved_Uinj + I_H_src*J_H + I_He1_src*N_eHe",
+    "L0_status": "canonical_kinetic_plus_model_identified_electron_equivalent_binding_functional; notactualprotondebit",
+    "chemical_increment": "I_H_star*(J_H-C_H)+I1_star*(N_eHe-C_He)+I2_star*p+(I2_star-I1_star)*d",
+    "literal_convention_residual": "(I_H_src-I_H_star)*J_H+(I1_src-I1_star)*N_eHe+(I_H_star-I_H_RR)*C_H+(I1_star-I_He_RR)*C_He",
+    "branch_chemical_lift": "I2_star*p+(I2_star-I1_star)*d",
+    "selected_balance": "L0-(saved_dUactive+saved_QC+saved_Ucut+saved_Ugamma+chemical_increment)=literal_residual-branch_lift, with saved numericalresidual retained",
+    "required_donor_work": "L0+U_partner+I2_src*p+(I2_src-I1_src)*d+residual_excitation, plusanyseparatelyadmittedrecoil/projectile-state term",
+    "branch_convention_residual": "(I2_src-I2_star)*p+((I2_src-I1_src)-(I2_star-I1_star))*d",
+    "unknowns_never_default_zero": [
+      "p",
+      "d",
+      "I2_src",
+      "U_partner",
+      "residual_excitation",
+      "actual_proton_depletion"
+    ],
+    "forbidden_transfers": [
+      "literal_residual_to_heat",
+      "branch_lift_to_heat",
+      "partner_energy_to_heat_withoutcontract",
+      "retained_photon_to_heat_or_wext"
+    ],
+    "actual_debit": null,
+    "retained_photon_wext_contribution": 0,
+    "scoped_projection_wext": 0,
+    "actual_total_external_work": null
+  },
+  "retained_photons": {
+    "kind": "reference toexact savedexplicitdiscretecapture atoms, notmoments inversion",
+    "arrays_descriptor": {
+      "energy_member": "E_eV",
+      "H_prefix_count_member": "capture_H_prefix_m3",
+      "He_prefix_count_member": "capture_He_prefix_m3",
+      "H_bin_count_member": "capture_H_bins_m3",
+      "He_bin_count_member": "capture_He_bins_m3",
+      "energy_offsets_eV": {
+        "H": "13.60",
+        "He": "24.59"
+      }
+    },
+    "count_weights": "unchanged sourcearrays; refs andhashes retained",
+    "energy": "stored E plusfrozenRRthreshold definesoriginalatom energy",
+    "support": "nativebirth.1-10eV; retainedphotonE+threshold; neverextend50000eV cap",
+    "history": "savedfinitebin descriptor; continuous_time_spectrum remainsnull",
+    "escape_or_absorption": null,
+    "physical_heating": null,
+    "absolute_worldtube_count": null,
+    "consumer_ownership": "separate port; no automaticnativewext/thermal adoption"
+  },
+  "caloric": {
+    "default_mode": "retain_cutoff; actualtemperaturepoint nullwithout explicitclosure",
+    "optional_modes": [
+      "conditional_retention_EOS",
+      "conditional_instant_cutoff_assimilation_EOS"
+    ],
+    "requirements": [
+      "explicitmonatomictranslationalEOS",
+      "same100Kinitialinventory",
+      "explicitpartnerthermal/energyclosure orp0conditionalfixture",
+      "hiddenexcitationnotdepositedasheat",
+      "validpositiveparticlecountandtemperature",
+      "frozenresponse,no ratefeedback"
+    ],
+    "kB_J_K_exact": "1.380649e-23",
+    "cv": "3*kB/2",
+    "initial_npart": "nH+nHe+ne0",
+    "retention": {
+      "Q_J_m3": "saved_QC*eV_J",
+      "thermal_count_increment": "0",
+      "cutoff_N_E": "retained nonthermal sidecar"
+    },
+    "assimilation": {
+      "Q_J_m3": "(saved_QC+saved_Ucut)*eV_J",
+      "thermal_count_increment": "saved_Ncut",
+      "cutoff_N_E": "removedfromselectednonthermal andadded tothermal,once"
+    },
+    "partner_addendum": "onlysupplied/explicitlyclosed partnerQ,Nthermal/native response; unknownnotzero",
+    "prefix": {
+      "T_ratio_delta": "[Q/(cv*T0)-DeltaNthermal]/[npart0+DeltaNthermal]",
+      "delta_logT": "log1p(T_ratio_delta)",
+      "baseline": "sameoriginT0,npart0 forallprefixes"
+    },
+    "bin": {
+      "Ua": "Uth0+Qprefix(a)",
+      "Da": "npart0+Nthermalprefix(a)",
+      "q": "Qbin(a,b)",
+      "n": "Nthermalbin(a,b)",
+      "T_ratio_delta": "(q*Da-Ua*n)/(Ua*(Da+n))",
+      "delta_logT": "log1p(T_ratio_delta)",
+      "baseline": "actualconditionalendpoint ata, storedtwo-part/highprecision; do notresetto100K"
+    },
+    "equivalent_bin_formula": "[Qbin/(cv*T_a)-Nthermalbin]/[npart(a)+Nthermalbin]",
+    "validation": "four disjoint-bin Q,Nthermal addtolastprefix; stablelog increments telescope withinledger tolerance; nobaseline cancellation",
+    "output_labels": {
+      "conditional": true,
+      "physical_heating_complete": false,
+      "coupled_thermal_history_solved": false,
+      "rate_feedback_recomputed": false
+    },
+    "actual_full_temperature_point": null
+  },
+  "ownership": {
+    "source_claim_key": [
+      "physical_source_family",
+      "native_birth_partition",
+      "proper_birth_interval",
+      "consumer_recipient_identity"
+    ],
+    "response_claim_key": [
+      "source_family",
+      "selected_response_identity",
+      "RR_channel_or_cutoff",
+      "observation_bin",
+      "recipient_identity"
+    ],
+    "aliases": "producer revision aliases do notcreate newphysicalevent",
+    "prefix_adoption": "reject cumulativeprefix as additiveclaim",
+    "aggregate_semantics": "includes priorRR-onlyreturn; rejectdoubleconsumptionofaggregate anditsRRcomponent",
+    "conditional_fixture_claims": "neverregister asactualphysicalfamilyadoptions",
+    "once_only_factor_owners": {
+      "neutral_target_density": "originalsource",
+      "proper729": "originalsource",
+      "angle_integration": "originalsource",
+      "source_time_factor": "newfinitebirthintegrationonce",
+      "nb": "newnativeprojectiononce",
+      "eV_J": "outputunitconversiononce",
+      "absolute_volume": "unprovided; neverassume1m3"
+    },
+    "state_rejections": [
+      "differentnb",
+      "total-vs-neutraldensityconfusion",
+      "differenttemperatureorionfractions",
+      "wrongisotope",
+      "wrongframe",
+      "supportextension",
+      "differentclock",
+      "sourcefamilyoverlap",
+      "priorRRduplication"
+    ]
+  },
+  "acceptance": {
+    "exact_identity": "allpinnedsource/response bytes andSHAunchanged",
+    "rcond_inf_min": "1e-6",
+    "eta": "2e-12",
+    "max_sensitivity": "1e-8",
+    "positive_lower_required": true,
+    "unused_moment_relative": "2e-12",
+    "canonical_positive_atom_relative": "2e-11",
+    "canonical_zero_atom": "predictedexact0",
+    "new_split_total_N_E_relative": "2e-11",
+    "independent_target_N_E_relative": "1e-9",
+    "native_incremental_ledger_relative": "1e-11",
+    "relative_definitions": {
+      "canonical_positive": "abs(pred-canonical)/abs(canonical)",
+      "independent_target_positive": "abs(prod-ref)/max(abs(prod),abs(ref))",
+      "both_zero": "exactzero",
+      "incremental_identity": "abs(sum signedterms)/sum(abs(individual nonzero incrementalterms)); exactzero symbolicidentities separately"
+    },
+    "rare_channel_rule": "store/verifyoriginalrareRRterms directly; do notuse hugebaseline orsource toobscureownscale",
+    "adoption": "allapplicablefrozencriteria; failurekeepsidentity,nulls andactualfailurehistory",
+    "no_physical_error_certificate": true
+  },
+  "independent_reference": {
+    "author": "differentfromproduction",
+    "production_imports": [],
+    "input_source": "samepinnedactualsavedmoments/source/response,notproductionpreparedtheta",
+    "coefficient_method": "independent>=80digitrawMsolve with separate antiderivative Eq8 orindependenthighprecisionintegration; notproductionmomenthelper",
+    "target_reference": "analyticlow-supportN/E pertarget; originalQ8targettotalmustagreewithin1e-9; optionalindependentQ8peratomusingthesameoriginalrule",
+    "projection_warning": "exactpiecewisecontinuousprojection isnot theoriginalQ8operator andcannotreplacecanonicalatomoracle",
+    "native_reference": "independentrational/highprecisionstoichiometry,energyaffinecoefficients andstableprefix/binEOS",
+    "saved_RR_policy": "reuseidentity-bound eventterms; nooldpropagation/rates/source recalculation",
+    "scope_checks": "independentcheck count determinedfromactualexecutedledger,notinventednow"
+  },
+  "meaningful_new_controls": [
+    "Missing actual history yields null rate/exposure/finite return/native25 without a fabricated history.",
+    "Missing same-state nb yields null per-baryon/native25 fields; independently bound proper-density quantities remain separate.",
+    "Correct T with wrong composition or ion fractions is rejected.",
+    "Selected birth tag cannot be replaced by current-energy filtering.",
+    "Source hash and model revision mismatches are independently rejected.",
+    "Negative p/d or p+2*d greater than the selected He marginal is rejected.",
+    "Actual activation is rejected when partner pool/response is unknown, including a syntactically valid affine parameter domain.",
+    "missingorchangedsourcehash/tag/grid/clock/state拒否",
+    "double target/proper/nb/energy-unitfactor拒否",
+    "nonfinite/negativeI,invalidband oroutsidecommon support拒否",
+    "zero-widthmoment andfinitewindow exactlyzero",
+    "positiveprimitive vsindependenthighprecisionantiderivative",
+    "recoverygates reject illconditioning/nonpositiveenvelope withoutfallback",
+    "holdout notusedforfit",
+    "originalghost andGauss8projector preserve count/energy; pointwisefraction shortcutdisagreeswhereexpected",
+    "He s,p,d baryon/charge/partner identities",
+    "p>0withmissingpartnerpool refusesfullnativepoint; noautomaticthermalp",
+    "unknownbranch/excitation/workneverdefaultzero",
+    "sourceparenttarget isnotRRcapturetarget",
+    "defaultcutoffretained;assimilationrequires explicitclosure",
+    "prefix/binactivechangesincludepriorbirthsurvivors",
+    "stabletwo-partcaloricbin usesbaselineata andtelescopes",
+    "tinyincrementandsmallRRindividualterms survive serialization",
+    "literalenergyresidualnotheat/wext;branchwork separate",
+    "prefix/overlap/alias/RRcomponentdoubleadoption拒否",
+    "retainedphotonatompointerpreserved; nomomentinversion",
+    "conditionalfixturesnotpresentedasactualbranchpoints"
+  ],
+  "suggested_output_schema": {
+    "top_level": [
+      "schema",
+      "unit",
+      "input_identity",
+      "scope",
+      "coefficient_identification",
+      "projection_validation",
+      "prefixes",
+      "observation_bins",
+      "event_terms",
+      "acceptance",
+      "unresolved_inputs",
+      "resource_receipt_reference"
+    ],
+    "coefficient_identification": [
+      "theta_decimal",
+      "theta_float64",
+      "input_representation",
+      "M",
+      "B",
+      "inverse",
+      "rcond",
+      "sensitivity",
+      "positive_lower",
+      "holdout_results",
+      "status"
+    ],
+    "per_window": [
+      "interval_s",
+      "role",
+      "source_H_N_E",
+      "source_He_electron_N_E",
+      "canonical_source_N_E",
+      "split_residuals",
+      "saved_response_reference",
+      "event_terms",
+      "native_affine_Y",
+      "selected_nonthermal_component",
+      "energy_sidecars",
+      "retained_photon_reference",
+      "conditional_caloric_if_requested",
+      "actual_full_native25_null"
+    ],
+    "native_affine_Y": [
+      "intercept",
+      "coefficient_p",
+      "coefficient_d",
+      "parameter_units",
+      "actual_parameters_null",
+      "intercept_is_not_actual_branch",
+      "unknown_partner_addendum"
+    ],
+    "two_part": [
+      "baseline",
+      "increment",
+      "individual_event_terms",
+      "rounded_endpoint_diagnostic"
+    ],
+    "optional_arrays": [
+      "actual_original_E",
+      "identified_A_H",
+      "identified_A_He",
+      "reconstruction_residual",
+      "separatecutoffcoefficients"
+    ],
+    "forbidden_output_claims": [
+      "originalsourcecoefficientbytesrecovered",
+      "newfull9600G",
+      "allratesphysicallyclosed",
+      "actualHebranchpoint",
+      "actualprotonwork",
+      "physicalheatingcomplete",
+      "oldbudgetrollover",
+      "allruntimeattemptsPASSwithoutactualreceipts"
+    ],
+    "numbers": "retainauthoritativehighprecisionnewscalarstrings andoriginalsavedscalaridentity; tagbinary64diagnostics clearly"
+  },
+  "implementation_sequence": [
+    "ReadexactpinsandfreshC4contextbeforeallowedworker; nooldmodulesimport",
+    "Loadonlysavedmoment/source/response inputs andvalidateidentity",
+    "Buildsmallhighprecisionmoments/scaledrecovery; stopadoptiononfailedgates",
+    "Validateholdouts thenapplynewfixedbasisQ8projection tosavedlowgrid",
+    "Recordeachatomandtargettotalresidualwithoutsourcechanges",
+    "Buildfourprefix/fourbinparentattributionusingabsolutehistory",
+    "ComposepartialaffineY/eventterms andretainunknownpartner/workports",
+    "Referenceoriginalretainedphotoncaptureatoms",
+    "EvaluateonlyexplicitconditionalEOSfixturesusingcorrectbinbaseline",
+    "Writecreate-onlyresultswithactualchecksandbudgetreceipt",
+    "Runseparatelyauthoredreference underrootfrozenallocation; nooldRRreplay"
+  ],
+  "runtime_policy": {
+    "fresh_unit_CPU_cap_s": 40,
+    "old_remainder_transfer": false,
+    "C4_admission_required": true,
+    "preparation_worker_coordinator_failures_tails_included": true,
+    "max_native_threads": 1,
+    "selected_memory_bytes": 268435456,
+    "upper_memory_bytes": 536870912,
+    "host_reserve_bytes": 1073741824,
+    "current_document_performs_execution": false,
+    "preventive_hard_aggregate_cap_proof": false,
+    "symbolic_calls": "rootonlyafterR7scope; atmost3/each8s asfrozen; noneissuedbythisdraft"
+  },
+  "outstanding_actual_nulls": [
+    "exclusiveHeeventpoint",
+    "Heplusresidualstate",
+    "partnerenergy/history/response",
+    "actualprotondebit",
+    "actualfullphysicalnative25",
+    "full9600native25",
+    "absoluteworldtubetotals",
+    "globalcompletion/error/budget/currency"
+  ],
+  "central": {
+    "completed": 28,
+    "total": 88,
+    "nodes": 88,
+    "edges": 17,
+    "unit_count_effect": 0,
+    "N4": "PARTIAL_OPEN",
+    "N5": "PARTIAL_OPEN",
+    "N6": "PREDECESSOR_GATED",
+    "N7": "PREDECESSOR_GATED",
+    "L4": false
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "schema": "CR_PARENT_EVENT_REFERENCE_ORACLE_REPAIR_REVIEW_V1",
+  "unit": "CR_PHYS02_PARENT_EVENT_NATIVE25_V1",
+  "observed_utc": "2026-10-27T17:30:46.486348+00:00",
+  "reviewer": "/root/source_qualification",
+  "verdict": "PASS_SCOPED_EXACT_HALF_ORACLE_REPAIR",
+  "blocking_findings": [],
+  "open_blocking_findings": [],
+  "independence": {
+    "recovery_author": "/root/theory_review",
+    "reviewer_authored_recovery": false,
+    "reviewer_authored_original_reference": false,
+    "reviewer_authored_production_science": false,
+    "disclosed_other_roles": [
+      "source/provider qualification",
+      "independent R6 and production-boundary repair review",
+      "limited metadata helper repairs"
+    ]
+  },
+  "reviewed_files": [
+    {
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/implementation/independent_half_boundary_recovery.py",
+      "bytes": 17783,
+      "sha256": "8ceffd8520c73ba165a0b7c532dab9e4c515b8143126eacf2742f30713631b22"
+    },
+    {
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/review/C08_REFERENCE_RECOVERY_SPEC_KO.md",
+      "bytes": 7373,
+      "sha256": "6ecceaf8c1ca38fef17da36c7ae56ec854e9371dad983c58193bb054cc9a5f6f"
+    },
+    {
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/implementation/independent_reference.py",
+      "bytes": 61964,
+      "sha256": "52511cdb8762b4a33b125bbeb72e46adfdeb7acc6c793d20622785ad1f786f55"
+    },
+    {
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/runs/independent_v1/EXECUTED_SOURCE/implementation_independent_reference.py",
+      "bytes": 61964,
+      "sha256": "52511cdb8762b4a33b125bbeb72e46adfdeb7acc6c793d20622785ad1f786f55"
+    },
+    {
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/runs/independent_v1/EXECUTED_SOURCE_MANIFEST.json",
+      "bytes": 1036,
+      "sha256": "98785041f04fe422ad4068b7457259a2f4b0a1b41032662124a8fa7464b59641"
+    },
+    {
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/runs/independent_v1/RESULT.json",
+      "bytes": 1651412,
+      "sha256": "fedc2a34a857f5de7c8035db580bdc746319366914efa9094a36a71e6923f8c9"
+    },
+    {
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/runs/independent_v1/RECEIPT.json",
+      "bytes": 12103,
+      "sha256": "8b033baf8c39fd45ec75eadd5ae478c108f34144f1e8f54838224d16e25cf756"
+    },
+    {
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/runs/primary_v2/RESULT.json",
+      "bytes": 399835,
+      "sha256": "efbd18ba864982ca6436345b1d25d75ad084b3c5f77db6e3bb40186db07b4901"
+    },
+    {
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/implementation/parent_event.py",
+      "bytes": 80244,
+      "sha256": "16dd17116cab6c60da3881995350ba7f42ad62a35acc6a3f1904ee5bf6a5d037"
+    },
+    {
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/implementation/controls.py",
+      "bytes": 24563,
+      "sha256": "322b68270d4e27d9c970a8452644e552ee584bd7b330f9035fd3ab8e6edc9e2a"
+    },
+    {
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/review/C08_REFERENCE_ORACLE_FAILURE_STATIC.json",
+      "bytes": 15964,
+      "sha256": "74a7e1a36d1d5ef89c5a264528801095f9bc8bed279305b8ff7502519b8dcd84"
+    }
+  ],
+  "original_reference_sha256": "52511cdb8762b4a33b125bbeb72e46adfdeb7acc6c793d20622785ad1f786f55",
+  "recovery_source_sha256": "8ceffd8520c73ba165a0b7c532dab9e4c515b8143126eacf2742f30713631b22",
+  "primary_sha256": "efbd18ba864982ca6436345b1d25d75ad084b3c5f77db6e3bb40186db07b4901",
+  "targeted_check_ids": [
+    "prefixes.0.fixture.2.s_m3",
+    "prefixes.2.fixture.2.s_m3",
+    "prefixes.3.fixture.2.s_m3",
+    "observation_bins.0.fixture.2.s_m3"
+  ],
+  "checked_claims": [
+    {
+      "id": "OR01",
+      "result": "PASS_STATIC",
+      "claim": "Actual original FAILED reference contains exactly 3450 unique IDs, 3446 PASS and four declared conditional_family half-fixture s_m3 failures. Production observed s is 0; old expected is -1E-107 or +1E-106. These original results, failed receipt and executed reference code are immutable pinned inputs."
+    },
+    {
+      "id": "OR02",
+      "result": "PASS_STATIC",
+      "claim": "The original 90-digit expression d=N*f then s=N-2*d can introduce intermediate rounding. In the declared p=0,f=1/2 fixture, s=N*(1-2*f)-p=0 is an exact algebraic identity. Evaluating that identity as Fraction repairs the oracle; it does not select an actual He physical branch or alter production."
+    },
+    {
+      "id": "OR03",
+      "result": "PASS_STATIC",
+      "claim": "The new source takes N from the original independent window_reference decimal string, requires N>0, f exactly1/2 and p exactly0, checks the exact conditional/not-measured/actual-null fixture label and interval, and does not use production fitted coefficients or rounded d to construct its expectation."
+    },
+    {
+      "id": "OR04",
+      "result": "PASS_STATIC",
+      "claim": "Saved Decimal construction is exact parsing only; Fraction performs the four identity evaluations. Expected zero compared with any nonzero observed produces own-scale relative error1, so the unchanged1e-11 criterion cannot accept a nonzero s. No absolute floor, clipping, tolerance change or global precision change was introduced."
+    },
+    {
+      "id": "OR05",
+      "result": "PASS_STATIC",
+      "claim": "Selection is exactly the four actual failed IDs. The original actual failure set, check identity uniqueness, source manifest/code and primary bytes are pinned. The 3446 successful rows are copied as unchanged JSON values and are not scientifically reevaluated."
+    },
+    {
+      "id": "OR06",
+      "result": "PASS_STATIC",
+      "claim": "ACCEPTED_REFERENCE.json is created only after all four actual new checks pass; it preserves original order, 3450 distinct accepted IDs and explicit3454-evaluation history if successful, including the four original failed evaluations. Original FAILED result and receipt remain referenced; the composite has no misleading newly executed3450 field."
+    },
+    {
+      "id": "OR07",
+      "result": "PASS_STATIC",
+      "claim": "The new run is restricted to unique independent_v2 with actual bounded environment/reservation and same-unit revised40-second budget, independent worker6/coordinator2.05/256MiB/one-thread allocation. Actual code-manifest and root budget admission remain required before dispatch; no runtime success is inferred by this review."
+    },
+    {
+      "id": "OR08",
+      "result": "PASS_STATIC",
+      "claim": "Original pins are reread before outputs. Create-only targeted RESULT and composite keep guards/fatal failures separate from successful science. Source/fit/Q8/moment/RR and complete-reference replay remain absent. Full physical native25, actual He branch/partner/work/heating/global completion remain null or false."
+    }
+  ],
+  "unchanged": {
+    "original_reference_code": true,
+    "production_parent_event_code": true,
+    "production_controls_code": true,
+    "scientific_tolerances": true,
+    "actual_primary_result": true,
+    "old_source_fit_projection_RR": true
+  },
+  "original_failed_cost_as_saved": {
+    "attempt_id": "attempt_ed0663e9b58f4d1ebaff7a186993772a",
+    "worker_cpu_s": 0.317903,
+    "coordinator_cpu_through_receipt_s": 0.180326,
+    "receipt_tail_reserve_s": 0.05,
+    "charged_cpu_s": 0.548229,
+    "original_status": "failed",
+    "future_maximum_cumulative_debit_remains_authoritative": true
+  },
+  "remaining_gates": [
+    "Root actual revised budget and six-file source manifest pinning the reviewed recovery source",
+    "Fresh same-unit owner/source/backup preflight",
+    "Actual independent_v2 terminal receipt and both generated output files",
+    "C09 independent review of actual primary, reused controls, original and targeted reference evidence, final budget and report",
+    "Central-builder composite interface delta and actual candidate separately reviewed"
+  ],
+  "actual_targeted_execution_outcome": null,
+  "future_composite_outcome": null,
+  "future_success_counts_not_asserted": true,
+  "reviewer_scientific_execution_count": 0,
+  "reviewer_scientific_import_or_compile_count": 0,
+  "reviewer_numerical_recalculation_count": 0,
+  "old_science_replays": 0,
+  "modifications_to_reviewed_sources": 0,
+  "external_writes_or_GET": 0,
+  "current_unit_only": true,
+  "automatic_next_node": false,
+  "central_completed_total": "28/88",
+  "CR_count_effect": 0
+}

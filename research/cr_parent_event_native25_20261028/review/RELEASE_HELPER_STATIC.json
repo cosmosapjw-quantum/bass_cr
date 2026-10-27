@@ -1,0 +1,255 @@
+{
+  "schema": "CR_PARENT_RELEASE_HELPER_TARGETED_STATIC_REVIEW_V1",
+  "unit_id": "CR_PHYS02_PARENT_EVENT_NATIVE25_V1",
+  "reviewer": "/root/source_qualification",
+  "reviewed_utc": "2026-10-27T17:06:52.967023+00:00",
+  "verdict": "STATIC_REVIEW_TWO_REPAIRS_READY_ROOT_ACCEPTANCE_AND_CLOSEOUT_SEAL_DECISION_REQUIRED",
+  "scope": [
+    "Current-unit source inventory and frozen17inputs",
+    "Truthful Git-S versus archive-only classification",
+    "Canonical SOURCE seal immutability",
+    "Actual original-provider full GET and all-member SHA/CRC R3",
+    "Separate CLOSEOUT S/D/M provenance"
+  ],
+  "independence": {
+    "original_helper_author": "/root/implementation",
+    "reviewer_authored_original_helper": false,
+    "reviewer_authored_current_production_math_or_numerical_reference": false,
+    "reviewer_authored_authorized_narrow_repair": true,
+    "repair_functions": [
+      "public_bytes",
+      "git"
+    ],
+    "self_authored_repair_not_claimed_independently_accepted": true,
+    "root_final_read_required": true,
+    "earlier_C4_metadata_helper_patch_role_disclosed": true
+  },
+  "reviewed_files": [
+    {
+      "path": "/workspace/scratch/865c84d871b7/parent_ops/release_parent.py",
+      "bytes": 51033,
+      "sha256": "a33486cdb990ccb0a61461c39c679b1e409336b7d2a836e28bc707a0e13a4d2c"
+    },
+    {
+      "path": "/workspace/scratch/865c84d871b7/parent_ops/RELEASE_PARENT_KO.md",
+      "bytes": 18477,
+      "sha256": "76736bf1bd4154a682fff09d8593c26da0c4721b7e23b55d1f0adcb67e78762b"
+    },
+    {
+      "path": "/workspace/scratch/865c84d871b7/parent_ops/dual_backup.js",
+      "bytes": 2892,
+      "sha256": "a08029e6f5560cc1c08a6a67d5f1543de072d8ee95f5064b10d03571f9c022a9"
+    },
+    {
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/inputs/INPUT_MANIFEST.json",
+      "bytes": 4247,
+      "sha256": "2273f08ac1716d233097d17c73818d39a9337da34712290a4b4171430d24f9b3"
+    },
+    {
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/AGENTS.md",
+      "bytes": 20814,
+      "sha256": "bf1b921550473363df97f75bbbfc2e839120990f89a330b35da66867695f17b5"
+    },
+    {
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/docs/READBACK_POLICY.md",
+      "bytes": 4380,
+      "sha256": "8d30839c0a99732754b82f3d0eeef195770b928a9dde8bafe1c17dff4b20afdc"
+    }
+  ],
+  "original_helper": {
+    "bytes": 48148,
+    "sha256": "691e46f158b9be5260b36e66bae70f71a2c5ad8e2a532152093ad7d6aeaa17c3"
+  },
+  "findings": [
+    {
+      "id": "REL01",
+      "severity": "BLOCKER_BEFORE_REPAIR",
+      "status": "MINIMAL_REPAIR_AUTHORED_AWAIT_ROOT_READ",
+      "location": "public_bytes / PRIVATE_BYTES",
+      "finding": "Original guard rejects all HTTPS download_url values, including8actual immutable public GitHub contents-API source files selected by the unit inventory. Source-plan would refuse these valid originals.",
+      "evidence": [
+        {
+          "path": "research/cr_parent_event_native25_20261028/intake/central/R07_b99a9468abd5_DIRECTORY_ROOT.json",
+          "bytes": 24223,
+          "sha256": "955f4f6095f22aaeb870bed0f5611a93012ece129018348a736e76773120d50d",
+          "less_than_verifier_CHUNK": true
+        },
+        {
+          "path": "research/cr_parent_event_native25_20261028/intake/central/R07_b99a9468abd5_DIRECTORY_RETURNS.json",
+          "bytes": 15219,
+          "sha256": "e914de547f2f14a946e3b28bb9d60d7793976591a4595b19b55d371909373736",
+          "less_than_verifier_CHUNK": true
+        },
+        {
+          "path": "research/cr_parent_event_native25_20261028/intake/central/R07_b99a9468abd5_DIRECTORY_STATUS.json",
+          "bytes": 17091,
+          "sha256": "2f9d65f9c37c0eeebed9b866da1ed57ec920a49d1466833cdf7e4f3e70f1cbc9",
+          "less_than_verifier_CHUNK": true
+        },
+        {
+          "path": "research/cr_parent_event_native25_20261028/intake/providers/pre_c9_raw/BASS_ENDPOINT_DIRECTORY.json",
+          "bytes": 34113,
+          "sha256": "50e592d22b91e5d2711c02fa270114382a345aa2ca6732b352e647863486ea59",
+          "less_than_verifier_CHUNK": true
+        },
+        {
+          "path": "research/cr_parent_event_native25_20261028/intake/providers/pre_c9_raw/BASS_KM2B_DIRECTORY.json",
+          "bytes": 9893,
+          "sha256": "d9250b943e23fc8e0354cd9e446bc7cbe8646d47c4ee68b5534b3ef695791ccb",
+          "less_than_verifier_CHUNK": true
+        },
+        {
+          "path": "research/cr_parent_event_native25_20261028/intake/providers/pre_c9_raw/REC_STAGE_RECEIPTS_DIRECTORY.json",
+          "bytes": 18949,
+          "sha256": "03aacc2d1019b5f8187ab790abfeb1cc55bad475a9a164cfbcdcbfc47fec8859",
+          "less_than_verifier_CHUNK": true
+        },
+        {
+          "path": "research/cr_parent_event_native25_20261028/intake/providers/pre_c9_raw/REC_DIRECTORY.json",
+          "bytes": 14070,
+          "sha256": "c25ce7b14a01ef8df1cc64dc8e84342a3f8be4d0c073c47400701dc2618d383f",
+          "less_than_verifier_CHUNK": true
+        },
+        {
+          "path": "research/cr_parent_event_native25_20261028/intake/providers/pre_c9_raw/REC_DELIVERY_DIRECTORY.json",
+          "bytes": 22469,
+          "sha256": "0a0f6ef8f99cee8a63b834c1ccff709a47403156423f18046e9776c8a23f4087",
+          "less_than_verifier_CHUNK": true
+        }
+      ],
+      "minimal_repair": "Allow only download_url in an actual file contents record whose https raw.githubusercontent.com/cosmosapjw-quantum/repo/40hex/path agrees with record path,name,size,sha and GitHub API contents-ref/blob endpoints; no query,fragment or credentials. A temporary inspection copy masks only that field; original raw bytes remain untouched. Signed URL keys and token/signature patterns remain refused.",
+      "changed_physics_or_source_bytes": false
+    },
+    {
+      "id": "REL02",
+      "severity": "BLOCKER_TO_NO_AUTOMATIC_FETCH_CONTRACT_BEFORE_REPAIR",
+      "status": "MINIMAL_REPAIR_AUTHORED_AWAIT_ROOT_READ",
+      "location": "git",
+      "finding": "Git cat-file in a partial clone can lazily fetch missing objects. The original subprocess environment did not enforce its stated local-only/no automatic fetch boundary.",
+      "minimal_repair": "Preserve process environment and set GIT_NO_LAZY_FETCH=1 explicitly on every helper Git subprocess. Missing objects require a separate root-authorized read-only prefetch before actual source-plan.",
+      "actual_missing_object_observation": {
+        "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/review/RELEASE_LOCAL_OBJECT_OBSERVATION.json",
+        "bytes": 26867,
+        "sha256": "49501c932e86831f0b40ec063f58ddd9dab3ef635abbf0b1e86779d312b15b38"
+      }
+    },
+    {
+      "id": "REL03",
+      "severity": "CANONICAL_CLOSEOUT_SEAL_GAP",
+      "status": "ROOT_DECISION_REQUIRED_NOT_MODIFIED",
+      "location": "closeout versus source_build seal registry",
+      "finding": "SOURCE creates a fixed per-S claim/SEALED registry, but CLOSEOUT only creates its ZIP in the fresh attempt directory. A second fresh attempt with the same D/M can therefore produce the same canonical basename with changed explicit payloads. The code does not enforce the documented no-rebuild promise for CLOSEOUT across namespaces.",
+      "impact": "No present archive or identity has been generated by this reviewer. Root can keep actual execution single-shot; automatic cross-attempt canonical immutability is not established for CLOSEOUT.",
+      "minimal_options": [
+        "Root explicitly records and enforces one canonical CLOSEOUT per actual S/D/M, with existing archive reused and later receipts external.",
+        "If helper-level enforcement is intended, add a create-only fixed D/M claim and successful seal receipt analogous to SOURCE, retaining failed claims for explicit recovery."
+      ],
+      "other_functions_modified_by_reviewer": false
+    }
+  ],
+  "checked_claims": [
+    {
+      "id": "INVENTORY",
+      "assessment": "STATIC_STRUCTURE_ACCEPTABLE_WITH_REL01_REPAIR",
+      "evidence": "source_plan selects all exact-S current-unit tree paths plus explicit published paths, all non-cache/non-private local unit files,17hashed source inputs and explicit extras/state/helper; exact local published-byte comparison prevents silent replacement. All included origins are pinned."
+    },
+    {
+      "id": "GIT_ARCHIVE_CLASSIFICATION",
+      "assessment": "STATIC_STRUCTURE_ACCEPTABLE",
+      "evidence": "local_row compares actual blob hash of archived bytes to exactS tree row. Presence of a path alone is insufficient. Recheck repeats byte/hash/tree class. git-r3 rejects archive-only paths before network and uses sealed manifest as expected byte basis."
+    },
+    {
+      "id": "FREEZE",
+      "assessment": "STATIC_STRUCTURE_ACCEPTABLE",
+      "evidence": "source-build pins plan SHA and all controls, checks19stage chain, local HEAD=S, inventory, all planned bytes before/after packaging. A newly created unit failure/debit invalidates the source plan rather than disappearing."
+    },
+    {
+      "id": "SOURCE_SEAL",
+      "assessment": "STATIC_STRUCTURE_ACCEPTABLE",
+      "evidence": "One fixed repo-parent parent_release_source/seal_registry/S directory is create-only; CLAIM precedes packaging; SEALED follows verified receipt. Failure or unknown claim is not removed or retried automatically. Later receipt identity belongs outside sourceZIP."
+    },
+    {
+      "id": "PROVIDER_R3",
+      "assessment": "STATIC_STRUCTURE_ACCEPTABLE_NO_ACTUAL_R3_RUN",
+      "evidence": "Actual upload/R2 IDs and size plus root raw acquisition pin are required. Both explicit providers GET unencoded fullHTTP200 body with noRange or HEAD; exact size/SHA then ZIP manifest order/all payloadSHA/size/CRC/testzip are checked. Individual failures are preserved and combined PASS requires both."
+    },
+    {
+      "id": "R3_PROVENANCE",
+      "assessment": "STATIC_BOUNDARY_EXPLICIT",
+      "evidence": "Provider link acquisition is root-recorded request/raw-response provenance, not retroactively authenticated by helper. Dropbox responseID and Drive actual canonical requestID bind to upload IDs; signed URLs are not printed into public receipts."
+    },
+    {
+      "id": "CLOSEOUT_IDENTITY",
+      "assessment": "STATIC_STRUCTURE_ACCEPTABLE_SUBJECT_TO_REL03",
+      "evidence": "20stage actual receipt chain binds C09=S/C10=D; source receipt and dualR3 bindS; actual nonforce central receipt bindsS/D/M,88nodes17edges/count_effect0; two M raw-blob receipts bind actual DAG+provided owner-return bytes. Explicit closeout roles are included; SOURCEZIP is not reembedded/rebuilt, future selfhash/IDs remain null."
+    },
+    {
+      "id": "CLAIM_LIMITS",
+      "assessment": "PRESERVED",
+      "evidence": "No hardcoded sciencePASS/CPU, no source/RR computations, no Git/provider writes, no global completion promotion or foreign budget carry. metadataCPU remains null. Current node only."
+    }
+  ],
+  "local_object_precondition": {
+    "observed_HEAD": "c5bb50f76215d6b2f4e7b618c225ec108a41174f",
+    "future_S_not_invented": true,
+    "required_missing_local_blobs_count": 104,
+    "exact_required_paths_in": {
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/review/RELEASE_LOCAL_OBJECT_OBSERVATION.json",
+      "bytes": 26867,
+      "sha256": "49501c932e86831f0b40ec063f58ddd9dab3ef635abbf0b1e86779d312b15b38"
+    },
+    "first_required_missing": {
+      "path": "research/cr_parent_event_native25_20261028/COMPUTATIONAL_CONTRACT.json",
+      "blob": "39692e41cea71f33d42ea03b39edbcefa19ec791",
+      "Git_blob_bytes_needed_by_source_plan": true,
+      "local_file_exists": true
+    },
+    "external_hash_only_missing_not_a_required_fetch": [
+      {
+        "path": "research/cr_low_birth_causal_rr_20261027/CONTRACT.md",
+        "blob": "f54d11e71b09681af2ec5003879207964f49ac11",
+        "Git_blob_bytes_needed_by_source_plan": false,
+        "local_file_exists": true
+      }
+    ],
+    "root_action": "At actual futureS, verify/fetch only missing selected current-unit/published blobs explicitly before source-plan. This static review did not fetch them or substitute local bytes for claimed Git origins."
+  },
+  "repair_evidence": {
+    "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/review/RELEASE_HELPER_STATIC_PATCH.diff",
+    "bytes": 3687,
+    "sha256": "daa0fb4884bc690920ba472f47daaea953da989babadafd45129fcd79f2fc496"
+  },
+  "metadata_observation_addendum": {
+    "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/review/RELEASE_LOCAL_OBJECT_OBSERVATION_ADDENDUM.json",
+    "bytes": 3035,
+    "sha256": "dcc4055f491102f443ec47f1a1bc749ee50a71b84fa4e6e308085ace8897e876"
+  },
+  "preserved_metadata_failure": {
+    "phase": "post-write stdout summary only",
+    "error": "ValueError: max() iterable argument is empty",
+    "cause": "Literal-space-only download_url scan missed compact JSON; required local-Git blob list was already correctly saved.",
+    "invalid_field_not_adopted": "current_public_contents_record_files empty list",
+    "scientific_execution": 0,
+    "helper_execution": 0,
+    "GET": 0,
+    "measured_metadata_CPU_s": null,
+    "unknown_cost_is_zero": false
+  },
+  "execution": {
+    "helper_commands": 0,
+    "helper_imports": 0,
+    "compile_or_AST_execution": 0,
+    "scientific_runs": 0,
+    "scientific_replays": 0,
+    "CAS_calls": 0,
+    "network_GET": 0,
+    "provider_backup_GET": 0,
+    "Git_mutations": 0,
+    "archive_builds": 0,
+    "metadata_only_local_Git_object_identity_reads": true,
+    "metadata_CPU_s": null,
+    "unknown_cost_is_zero": false
+  },
+  "remaining_acceptance": "Root must read the two authored repairs and choose the one-shot CLOSEOUT seal policy. Actual S/D/M/source ZIP/provider R3 are not yet established by this static report.",
+  "AUTO_NEXT_NODE": false
+}

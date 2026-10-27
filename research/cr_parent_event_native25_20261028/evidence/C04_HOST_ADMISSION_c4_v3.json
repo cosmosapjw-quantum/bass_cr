@@ -1,0 +1,330 @@
+{
+  "schema": "CR_PARENT_EVENT_C4_HOST_ADMISSION_V1",
+  "unit": "CR_PHYS02_PARENT_EVENT_NATIVE25_V1",
+  "attempt": "c4_v3",
+  "observed_utc": "2026-10-27T17:02:41.895396+00:00",
+  "status": "completed",
+  "memory_gate": "PASS",
+  "memory_admission_policy": "CAPPED_CLEAN_FILE_LRU25_V2",
+  "owned_PID_observation_probe": {
+    "status": "PASS",
+    "known_Popen_PID": 478851,
+    "start_ticks": 6671688,
+    "live_PID_observed": true,
+    "child_cleanup_complete": true,
+    "observed_identity": {
+      "pid": 478851,
+      "state": "R",
+      "ppid": 478850,
+      "pgrp": 478851,
+      "session": 478851,
+      "start_ticks": 6671688
+    },
+    "CPU_s": 0.023367000000000013,
+    "cost_already_in_total_preparation": true
+  },
+  "source": {
+    "path": "ops/admit_c4_v3.py",
+    "bytes": 26785,
+    "sha256": "16917cda43b6a88f51a1fac71a58bdda4759b4ea23c8d8d5b0ce08b8ce218448"
+  },
+  "old_budget_transferred": false,
+  "parallel_project_budget_transferred": false,
+  "template_only": false,
+  "scientific_worker_started": false,
+  "model_imports": 0,
+  "CPU_accounting_scope": "whole preparation process RUSAGE_SELF plus its actual children; tail separate",
+  "self_CPU_soft_hard_limits_s": [
+    3,
+    4
+  ],
+  "preventive_hard_aggregate_CPU_bound_proven": false,
+  "owner_head": "6c993c2e1ab806bd0110cf487c7ae6b306bbbf9f",
+  "preflight": {
+    "path": "intake/preflight/C04_V3.json",
+    "bytes": 167222,
+    "sha256": "a44c6dc978dbead8dfe5eae78317713de125516afaa607fb1f4b63540d573b39"
+  },
+  "source_and_previous_backup_receipts_rechecked": true,
+  "independent_static_review_sha256": "ccd4da6622e8388eb93e3268e9ce09fe68b07e2c6c0888cd50dc31bf40c8e02a",
+  "independent_static_review_record": {
+    "schema": "CR_PARENT_EVENT_RUNTIME_NAMESPACE_V3_STATIC_REVIEW_V1",
+    "unit": "CR_PHYS02_PARENT_EVENT_NATIVE25_V1",
+    "reviewer": "/root/theory_review",
+    "verdict": "PASS_SCOPED_STATIC_NO_EXECUTION",
+    "reviewed_source": {
+      "path": "implementation/run_bounded.py",
+      "bytes": 67578,
+      "sha256": "4f81bdd26ce9bc6f95238fdab3d3b0f7cf9f6f6dfb7273d126089487aea0c4f2"
+    },
+    "reviewed_helper": {
+      "path": "ops/admit_c4_v3.py",
+      "bytes": 26785,
+      "sha256": "16917cda43b6a88f51a1fac71a58bdda4759b4ea23c8d8d5b0ce08b8ce218448"
+    },
+    "retained_exact_comparison_source": {
+      "path": "intake/runtime_v2/run_bounded.py",
+      "bytes": 66996,
+      "sha256": "79230144dca1df8104f63e278dd392fc080cb8e4f826d7a3e4f6452ff3903c58"
+    },
+    "retained_helper_comparison": {
+      "path": "ops/admit_c4_v2.py",
+      "sha256": "a516fdd95e01cf0feb57104e22d537684ed33da4477cb5e44ce8e955f3417261"
+    },
+    "scope": "Only the exact coordinator self-PID/procfs guard, its receipt field, unique v3 helper names/preflight/review binding, and mapping of the actual bounded diagnostic receipts. No whole-runner or scientific review was repeated.",
+    "findings": [
+      {
+        "id": "PREWORKER_NAMESPACE_GUARD",
+        "status": "PASS_STATIC",
+        "observed": "load_budget now reads the first PID field of /proc/self/stat, compares it to os.getpid(), records both values and fails on inequality. execute_attempt calls load_budget before worker_launch_attempted or Popen. The guard neither translates numeric PIDs nor searches unrelated processes. Existing child parent/group/session/start-time checks remain necessary and unchanged."
+      },
+      {
+        "id": "ADMISSION_HELPER_GUARD_AND_IDENTITY",
+        "status": "PASS_STATIC",
+        "observed": "The v3 helper performs the same self-identity guard before the owned PID probe Popen. Once the child identity read succeeds, it records STARTED_PENDING_VALIDATION with the actual Popen PID/start identity before checking parent/group/liveness. Validation failure remains failed; the existing owned-child cleanup and cumulative debit finalizer remain in place."
+      },
+      {
+        "id": "UNIQUE_ATTEMPT_AND_BINDING",
+        "status": "PASS_STATIC",
+        "observed": "The helper accepts only c4_v3, uses create-only v3 intent/host/amendment/UNKNOWN namespaces, requires C04_V3 preflight, and checks this independent review against the actual new runner bytes/SHA. It retains all earlier receipts and the same memory-policy V2 and CPU/memory caps."
+      },
+      {
+        "id": "ACTUAL_DIAGNOSTIC_MAPPING",
+        "status": "PASS_SCOPED_EVIDENCE_READ",
+        "observed": "The default diagnostic receipt records a pre-child FileNotFoundError for /proc/2/stat. The separately executed consistent-context receipt records parent os PID478390 equal to both proc self/numeric PID, child Popen PID478391 equal to proc child and child stdout, parent478390, group/session478391, matching start identity, exit0 and completed cleanup. This supports the explicit context selection for the next attempt without fabricating a PID translation."
+      }
+    ],
+    "blocking_findings": [],
+    "actual_diagnostic_receipts": [
+      {
+        "path": "evidence/C04_HOST_ADMISSION_c4_v2.json",
+        "sha256": "c8adb4b4b54994657129d0b33018c2e1443334be682e87f9e04e1876ea1e650b",
+        "attempt": "c4_v2",
+        "status": "failed",
+        "memory_gate": "PASS",
+        "failure": "KNOWN_LIVE_OWNED_PID_OBSERVATION_FAILED",
+        "nested_probe_status_as_saved": "NOT_RUN",
+        "nested_status_interpretation": "Preserved stale initialization; the actual traceback follows Popen and is not evidence that no metadata probe was started",
+        "measured_preparation_CPU_s": 0.13837299999999997,
+        "conservative_tail_CPU_s": 0.05,
+        "charged_preparation_CPU_s": 0.18837299999999996,
+        "scientific_worker_started": false
+      },
+      {
+        "path": "evidence/C04_HOST_ADMISSION_c4_pid_diagnostic_v1.json",
+        "sha256": "cfdf7a70453cdfbc1f67d2058a0da37bfdd5b8e22537bc239a1c4ad3669305fa",
+        "attempt": "c4_pid_diagnostic_v1",
+        "status": "failed",
+        "failure": "FileNotFoundError: /proc/2/stat",
+        "measured_preparation_CPU_s": 0.150783,
+        "conservative_tail_CPU_s": 0.05,
+        "charged_preparation_CPU_s": 0.200783,
+        "scientific_worker_started": false
+      },
+      {
+        "path": "evidence/C04_HOST_ADMISSION_c4_pid_diagnostic_v2.json",
+        "sha256": "4555c6374f52f0905d41067c72bbc27520842851f7590126cbde4fe9fa704a10",
+        "attempt": "c4_pid_diagnostic_v2",
+        "status": "completed",
+        "observed_parent_os_and_proc_PID": 478390,
+        "observed_child_Popen_proc_and_self_report_PID": 478391,
+        "observed_child_parent_PID": 478390,
+        "observed_child_group_and_session": 478391,
+        "observed_child_start_ticks": 6649953,
+        "child_exit_code": 0,
+        "cleanup_complete": true,
+        "measured_preparation_CPU_s": 0.10181399999999999,
+        "conservative_tail_CPU_s": 0.05,
+        "charged_preparation_CPU_s": 0.151814,
+        "scientific_worker_started": false
+      }
+    ],
+    "preserved_earlier_v1_cost_CPU_s": 0.189732,
+    "recorded_preparation_total_before_v3_CPU_s": 0.730702,
+    "total_note": "Displayed subtotal from the root diagnosis; immutable per-attempt binary64 amounts remain authoritative and the unchanged preparation ledger recomputes their maximum-per-attempt sum. No earlier cost or failure is erased or charged twice.",
+    "diagnosis_record": {
+      "path": "coding/C04_NAMESPACE_DIAGNOSIS.json",
+      "bytes": 1700,
+      "sha256": "7428b045a91960fbde06a56033bf0ee6785559924d0b281df5b0f6d910241c0f"
+    },
+    "actual_fresh_preflight": {
+      "path": "intake/preflight/C04_V3.json",
+      "bytes": 167222,
+      "sha256": "a44c6dc978dbead8dfe5eae78317713de125516afaa607fb1f4b63540d573b39",
+      "stage": "C04_V3",
+      "observed_utc": "2026-10-27T17:00:08.198959+00:00",
+      "local_HEAD": "6c993c2e1ab806bd0110cf487c7ae6b306bbbf9f",
+      "own_local_remote_expected_match": true,
+      "central_head_and_DAG_qualified": true,
+      "source_and_previous_backup_receipt_check": "PASS",
+      "source_input_files": 17,
+      "central_HEAD": "b99a9468abd53de77ddae36d93180e60072885bc",
+      "central_completed": 28,
+      "central_total": 88,
+      "this_unit_count_effect": 0
+    },
+    "unchanged_memory_policy": {
+      "path": "coding/C04_MEMORY_POLICY_V2.json",
+      "sha256": "c04aebb84e9772409a032cac9eab8b853f712882a9fea7e6e1baa6cfc647f12c",
+      "selected_worker_bytes": 268435456,
+      "upper_worker_bytes": 536870912,
+      "reserve_bytes": 1073741824,
+      "unit_CPU_cap_s": 40,
+      "preparation_reserve_CPU_s": 4
+    },
+    "reviewer_roles": {
+      "namespace_fix_or_runtime_or_helper_author": false,
+      "theory_and_independent_numeric_reference_author": true,
+      "production_parent_event_or_controls_author": false
+    },
+    "limits": {
+      "execution_context": "The root's already-authorized require_escalated context with the observed consistent PID/procfs namespace; this static review does not add permissions or alter access controls",
+      "default_context_automatically_accepted": false,
+      "guessed_PID_translation": false,
+      "unrelated_process_cleanup": false,
+      "new_V3_execution_import_compile_or_test": false,
+      "scientific_execution_or_old_replay_by_reviewer": 0,
+      "guard_is_proof_of_all_future_procfs_reads": false,
+      "future_child_identity_and_cleanup_still_required": true,
+      "future_memory_admission_or_worker_success_claim": false,
+      "preventive_hard_aggregate_CPU_proof": false,
+      "all_runtime_attempts_pass": false,
+      "metadata_CPU_s": null,
+      "actual_V3_admission_or_stage_publication_claim": false,
+      "global_physical_completion": null,
+      "global_budget_remaining": null
+    }
+  },
+  "actual_reviewed_runtime": {
+    "path": "implementation/run_bounded.py",
+    "bytes": 67578,
+    "sha256": "4f81bdd26ce9bc6f95238fdab3d3b0f7cf9f6f6dfb7273d126089487aea0c4f2"
+  },
+  "memory_policy": {
+    "path": "coding/C04_MEMORY_POLICY_V2.json",
+    "bytes": 2927,
+    "sha256": "c04aebb84e9772409a032cac9eab8b853f712882a9fea7e6e1baa6cfc647f12c"
+  },
+  "previous_failed_attempt_preserved": {
+    "path": "evidence/C04_HOST_ADMISSION_c4_v1.json",
+    "sha256": "200e8d9d5dbb342b501583f916ba0de113f26d5716a9ac7b848bb7ab4dce2824",
+    "charged_CPU_s": 0.189732,
+    "erased_or_reclassified": false
+  },
+  "memory_admission": {
+    "estimator_version": "CAPPED_CLEAN_FILE_LRU25_V2",
+    "admission_pass": true,
+    "host_MemAvailable_bytes": 8678998016,
+    "cgroup_memory_max_bytes": 8589934592,
+    "cgroup_memory_current_bytes": 8312463360,
+    "cgroup_raw_headroom_bytes": 277471232,
+    "memory_stat_counters": {
+      "anon": 932245504,
+      "file": 6558261248,
+      "kernel": 820301824,
+      "kernel_stack": 4620288,
+      "pagetables": 32288768,
+      "sec_pagetables": 0,
+      "percpu": 5984,
+      "sock": 0,
+      "vmalloc": 0,
+      "shmem": 0,
+      "file_mapped": 1929216,
+      "file_dirty": 1597440,
+      "file_writeback": 0,
+      "swapcached": 0,
+      "anon_thp": 0,
+      "file_thp": 507510784,
+      "shmem_thp": 0,
+      "inactive_anon": 931926016,
+      "active_anon": 135168,
+      "inactive_file": 1743298560,
+      "active_file": 4814962688,
+      "unevictable": 0,
+      "slab_reclaimable": 775969272,
+      "slab_unreclaimable": 4768824,
+      "slab": 780738096,
+      "workingset_refault_anon": 0,
+      "workingset_refault_file": 3202730,
+      "workingset_activate_anon": 0,
+      "workingset_activate_file": 1460026,
+      "workingset_restore_anon": 0,
+      "workingset_restore_file": 303450,
+      "workingset_nodereclaim": 0,
+      "pgdemote_kswapd": 0,
+      "pgdemote_direct": 0,
+      "pgdemote_khugepaged": 0,
+      "pgdemote_proactive": 0,
+      "pgscan": 14126148,
+      "pgsteal": 14094665,
+      "pswpin": 0,
+      "pswpout": 0,
+      "pgscan_kswapd": 0,
+      "pgscan_direct": 14126148,
+      "pgscan_khugepaged": 0,
+      "pgscan_proactive": 0,
+      "pgsteal_kswapd": 0,
+      "pgsteal_direct": 14094665,
+      "pgsteal_khugepaged": 0,
+      "pgsteal_proactive": 0,
+      "pgfault": 624672110,
+      "pgmajfault": 3232,
+      "pgrefill": 2912906,
+      "pgactivate": 6134052,
+      "pgdeactivate": 2897978,
+      "pglazyfree": 5328,
+      "pglazyfreed": 0,
+      "swpin_zero": 0,
+      "swpout_zero": 0,
+      "thp_fault_alloc": 130,
+      "thp_collapse_alloc": 0,
+      "thp_swpout": 0,
+      "thp_swpout_fallback": 0
+    },
+    "credited_reclaim_bytes": 1073741824,
+    "prior_file_LRU_policy_imported": false,
+    "candidate_file_LRU_bytes": 6558261248,
+    "excluded_counter_sum_bytes": 3526656,
+    "eligible_file_estimate_bytes": 6554734592,
+    "credit_fraction": 0.25,
+    "credit_cap_bytes": 1073741824,
+    "memory_min_bytes": 0,
+    "memory_low_bytes": 0,
+    "credit_protection_gate": true,
+    "raw_worker_headroom_pass": true,
+    "host_capped_available_estimate_bytes": 1351213056,
+    "required_worker_plus_reserve_bytes": 1342177280,
+    "selected_worker_memory_limit_bytes": 268435456,
+    "frozen_worker_memory_upper_cap_bytes": 536870912,
+    "minimum_host_memory_reserve_bytes": 1073741824,
+    "cgroup_v2_path": "/sys/fs/cgroup",
+    "process_cgroup_membership": "0::/\n",
+    "process_cgroup_membership_sha256": "e57fd7b21104f091de366ace1464596378a498b0a5e63f1b21147a8998c20107",
+    "visible_cgroup_views": [
+      {
+        "path": "/sys/fs/cgroup",
+        "memory_max": "8589934592",
+        "memory_current": 8312463360,
+        "raw_headroom": 277471232
+      }
+    ],
+    "unreviewed_tighter_ancestor_views": [],
+    "non_atomic_counter_snapshot": true,
+    "admission_estimate_not_guarantee": true,
+    "lower_bound_certificate": false,
+    "OS_settings_changed": false
+  },
+  "executor_procfs_namespace": {
+    "os_pid": 478850,
+    "proc_self_pid": 478850,
+    "same_namespace": true
+  },
+  "terminal_debit": true,
+  "cpu_accounting_complete": true,
+  "cleanup_complete": true,
+  "debit_kind": "CUMULATIVE_SAME_ATTEMPT",
+  "debit_sequence": 0,
+  "measured_preparation_CPU_s": 0.147815,
+  "conservative_tail_CPU_s": 0.05,
+  "charged_preparation_CPU_s": 0.19781500000000002
+}

@@ -1,0 +1,38 @@
+--- release_parent.py_before_closeout_seal
++++ release_parent.py_after_closeout_seal
+@@ -719,12 +719,29 @@
+         need(archive_metadata(absolute(source["path"]))["sha256"] == source["sha256"], "SEALED_SOURCE_CHANGED")
+         for row in rows:
+             planned_raw(row)
+-    return package(args, f"BASS_CR_PARENT_EVENT_CLOSEOUT_20261028_{D[:12]}_{M[:12]}.zip",
+-                   {"schema": "CR_PARENT_EVENT_CLOSEOUT_MANIFEST_V1", "kind": "CLOSEOUT",
+-                    "identity": final_identity, "role_pins": role_pins,
+-                    "explicit_input_list_sha256": file_pin(args.inputs)["sha256"],
+-                    "self_reference_note": "Actual post-archive hash, provider IDs, Library ID and R3 belong to later receipts; this ZIP and SOURCE remain sealed."},
+-                   rows, recheck=recheck)
++    # Fixed beside this root-owned parent_ops helper, not beneath the caller's
++    # fresh attempt directory. A new namespace cannot rebuild the same D/M.
++    # As for SOURCE, a failed claim remains for explicit owner recovery.
++    registry = (Path(__file__).absolute().parent.parent / "parent_release_closeout"
++                / "seal_registry" / (D + "_" + M))
++    absolute(registry).mkdir(parents=True, exist_ok=False)
++    write_json(registry / "CLAIM.json", {"unit": UNIT, "S": S, "D": D, "M": M,
++               "source_archive_sha256": source["sha256"],
++               "explicit_input_list_sha256": original_controls["inputs"]["sha256"],
++               "control_pins": original_controls, "attempt_dir": str(args.attempt_dir),
++               "claimed_utc": now(), "missing_sealed_receipt_status": "UNKNOWN_NO_ACK_OR_FAILED",
++               "automatic_retry_or_rebuild": False})
++    result = package(args, f"BASS_CR_PARENT_EVENT_CLOSEOUT_20261028_{D[:12]}_{M[:12]}.zip",
++                     {"schema": "CR_PARENT_EVENT_CLOSEOUT_MANIFEST_V1", "kind": "CLOSEOUT",
++                      "identity": final_identity, "role_pins": role_pins,
++                      "explicit_input_list_sha256": original_controls["inputs"]["sha256"],
++                      "self_reference_note": "Actual post-archive hash, provider IDs, Library ID and R3 belong to later receipts; this ZIP and SOURCE remain sealed."},
++                     rows, recheck=recheck)
++    write_json(registry / "SEALED.json", {"unit": UNIT, "S": S, "D": D, "M": M,
++               **result, "source_archive_sha256": source["sha256"],
++               "explicit_input_list_sha256": original_controls["inputs"]["sha256"],
++               "sealed_utc": now()})
++    return result
+ 
+ 
+ def pointer(value, path):

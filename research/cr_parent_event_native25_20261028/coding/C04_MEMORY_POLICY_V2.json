@@ -1,0 +1,64 @@
+{
+  "schema": "CR_PARENT_EVENT_MEMORY_POLICY_V2",
+  "unit": "CR_PHYS02_PARENT_EVENT_NATIVE25_V1",
+  "policy": "CAPPED_CLEAN_FILE_LRU25_V2",
+  "adoption_status": "PROPOSED_PENDING_SCOPE_MATCHED_STATIC_REVIEW",
+  "reason": "Actual c4_v1 raw-memory refusal with worker not started. Current cgroup has large filesystem page cache; distinguish used cached data from an unavailable working set.",
+  "previous_attempt": {
+    "path": "evidence/C04_HOST_ADMISSION_c4_v1.json",
+    "sha256": "200e8d9d5dbb342b501583f916ba0de113f26d5716a9ac7b848bb7ab4dce2824",
+    "charged_CPU_s": 0.189732,
+    "erased_or_reclassified": false
+  },
+  "formula": {
+    "candidate_bytes": "min(file, active_file+inactive_file)",
+    "excluded_bytes": "shmem+file_mapped+file_dirty+file_writeback+unevictable; overlapping classes intentionally deducted conservatively",
+    "eligible_bytes": "max(0,candidate-excluded)",
+    "credited_bytes": "min(eligible//4,1073741824)",
+    "signed_raw_headroom": "memory.max-memory.current",
+    "available_estimate": "min(host MemAvailable,max(0,signed_raw_headroom+credited_bytes))",
+    "additional_raw_gate": "signed_raw_headroom>=selected_worker_memory_bytes for finite cgroup limit",
+    "admission": "raw gate AND available_estimate>=selected_worker_memory_bytes+1073741824",
+    "unlimited_cgroup": "host MemAvailable only, reclaim credit0",
+    "protection_gate": "credit=0 unless both observed memory.min and memory.low are exactly zero"
+  },
+  "choices_are_owner_inference_not_kernel_formula": true,
+  "credit_fraction": 0.25,
+  "credit_cap_bytes": 1073741824,
+  "old_50_percent_policy_automatically_imported": false,
+  "working_limits_unchanged": {
+    "selected_worker_bytes": 268435456,
+    "upper_worker_bytes": 536870912,
+    "host_reserve_bytes": 1073741824,
+    "native_threads": 1,
+    "CPU_unit_cap_s": 40,
+    "preparation_reserve_s": 4
+  },
+  "primary_sources": [
+    {
+      "url": "https://docs.kernel.org/admin-guide/cgroup-v2.html",
+      "sections": [
+        "memory.stat:file/shmem/file_mapped/file_dirty/file_writeback",
+        "inactive_file/active_file/unevictable",
+        "memory.max"
+      ],
+      "read_via": [
+        "primary web open/find",
+        "Exa search/fetch"
+      ],
+      "meaning": "Counter types and reclaim-list states differ; cache and mapping/writeback counters are not disjoint. Their subtraction is a heuristic safeguard, not an outward reclaim certificate."
+    },
+    {
+      "url": "https://docs.kernel.org/filesystems/proc.html",
+      "section": "MemAvailable",
+      "meaning": "Host-side available memory is itself an estimate and caps the user-space policy."
+    }
+  ],
+  "no_OS_setting_or_cache_pressure_mutation": true,
+  "non_atomic_snapshot": true,
+  "lower_bound_certificate": false,
+  "kernel_memory_guarantee": false,
+  "new_attempt_required": "c4_v2",
+  "actual_v2_execution": "NOT_RUN",
+  "created_utc": "2026-10-27T16:52:39.181884+00:00"
+}

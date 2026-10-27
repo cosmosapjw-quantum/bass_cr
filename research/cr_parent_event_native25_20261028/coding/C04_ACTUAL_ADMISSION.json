@@ -1,0 +1,192 @@
+{
+  "schema": "CR_PARENT_EVENT_C4_ACTUAL_ADMISSION_V1",
+  "unit": "CR_PHYS02_PARENT_EVENT_NATIVE25_V1",
+  "decision": "ADMITTED_FOR_FIVE_BOUNDED_CURRENT_UNIT_WORKERS",
+  "budget": {
+    "path": "EXECUTION_BUDGET.json",
+    "sha256": "79e7befb18d6c988dbf776a72c0d0d3448c29302088c7d0f93ec4c5a6b5f95f3"
+  },
+  "actual_host_receipt": "evidence/C04_HOST_ADMISSION_c4_v3.json",
+  "preparation_ledger": "evidence/C04_PREPARATION_LEDGER.json",
+  "measured_preparation_CPU_s": 0.6785169999999999,
+  "conservative_preparation_tail_CPU_s": 0.25,
+  "charged_preparation_CPU_s": 0.928517,
+  "preparation_cap_CPU_s": 4,
+  "fresh_total_cap_CPU_s": 40,
+  "old_or_foreign_transfer": false,
+  "preparation_attempts": [
+    {
+      "attempt": "c4_pid_diagnostic_v1",
+      "status": "failed",
+      "charged_CPU_s": 0.200783
+    },
+    {
+      "attempt": "c4_pid_diagnostic_v2",
+      "status": "completed",
+      "charged_CPU_s": 0.151814
+    },
+    {
+      "attempt": "c4_v1",
+      "status": "failed",
+      "charged_CPU_s": 0.189732
+    },
+    {
+      "attempt": "c4_v2",
+      "status": "failed",
+      "charged_CPU_s": 0.18837299999999996
+    },
+    {
+      "attempt": "c4_v3",
+      "status": "completed",
+      "charged_CPU_s": 0.19781500000000002
+    }
+  ],
+  "all_runtime_attempts_pass": false,
+  "scientific_worker_started": false,
+  "old_science_replay": 0,
+  "code_manifest_files": 5,
+  "memory_policy": "CAPPED_CLEAN_FILE_LRU25_V2",
+  "actual_memory": {
+    "estimator_version": "CAPPED_CLEAN_FILE_LRU25_V2",
+    "admission_pass": true,
+    "host_MemAvailable_bytes": 8678998016,
+    "cgroup_memory_max_bytes": 8589934592,
+    "cgroup_memory_current_bytes": 8312463360,
+    "cgroup_raw_headroom_bytes": 277471232,
+    "memory_stat_counters": {
+      "anon": 932245504,
+      "file": 6558261248,
+      "kernel": 820301824,
+      "kernel_stack": 4620288,
+      "pagetables": 32288768,
+      "sec_pagetables": 0,
+      "percpu": 5984,
+      "sock": 0,
+      "vmalloc": 0,
+      "shmem": 0,
+      "file_mapped": 1929216,
+      "file_dirty": 1597440,
+      "file_writeback": 0,
+      "swapcached": 0,
+      "anon_thp": 0,
+      "file_thp": 507510784,
+      "shmem_thp": 0,
+      "inactive_anon": 931926016,
+      "active_anon": 135168,
+      "inactive_file": 1743298560,
+      "active_file": 4814962688,
+      "unevictable": 0,
+      "slab_reclaimable": 775969272,
+      "slab_unreclaimable": 4768824,
+      "slab": 780738096,
+      "workingset_refault_anon": 0,
+      "workingset_refault_file": 3202730,
+      "workingset_activate_anon": 0,
+      "workingset_activate_file": 1460026,
+      "workingset_restore_anon": 0,
+      "workingset_restore_file": 303450,
+      "workingset_nodereclaim": 0,
+      "pgdemote_kswapd": 0,
+      "pgdemote_direct": 0,
+      "pgdemote_khugepaged": 0,
+      "pgdemote_proactive": 0,
+      "pgscan": 14126148,
+      "pgsteal": 14094665,
+      "pswpin": 0,
+      "pswpout": 0,
+      "pgscan_kswapd": 0,
+      "pgscan_direct": 14126148,
+      "pgscan_khugepaged": 0,
+      "pgscan_proactive": 0,
+      "pgsteal_kswapd": 0,
+      "pgsteal_direct": 14094665,
+      "pgsteal_khugepaged": 0,
+      "pgsteal_proactive": 0,
+      "pgfault": 624672110,
+      "pgmajfault": 3232,
+      "pgrefill": 2912906,
+      "pgactivate": 6134052,
+      "pgdeactivate": 2897978,
+      "pglazyfree": 5328,
+      "pglazyfreed": 0,
+      "swpin_zero": 0,
+      "swpout_zero": 0,
+      "thp_fault_alloc": 130,
+      "thp_collapse_alloc": 0,
+      "thp_swpout": 0,
+      "thp_swpout_fallback": 0
+    },
+    "credited_reclaim_bytes": 1073741824,
+    "prior_file_LRU_policy_imported": false,
+    "candidate_file_LRU_bytes": 6558261248,
+    "excluded_counter_sum_bytes": 3526656,
+    "eligible_file_estimate_bytes": 6554734592,
+    "credit_fraction": 0.25,
+    "credit_cap_bytes": 1073741824,
+    "memory_min_bytes": 0,
+    "memory_low_bytes": 0,
+    "credit_protection_gate": true,
+    "raw_worker_headroom_pass": true,
+    "host_capped_available_estimate_bytes": 1351213056,
+    "required_worker_plus_reserve_bytes": 1342177280,
+    "selected_worker_memory_limit_bytes": 268435456,
+    "frozen_worker_memory_upper_cap_bytes": 536870912,
+    "minimum_host_memory_reserve_bytes": 1073741824,
+    "cgroup_v2_path": "/sys/fs/cgroup",
+    "process_cgroup_membership": "0::/\n",
+    "process_cgroup_membership_sha256": "e57fd7b21104f091de366ace1464596378a498b0a5e63f1b21147a8998c20107",
+    "visible_cgroup_views": [
+      {
+        "path": "/sys/fs/cgroup",
+        "memory_max": "8589934592",
+        "memory_current": 8312463360,
+        "raw_headroom": 277471232
+      }
+    ],
+    "unreviewed_tighter_ancestor_views": [],
+    "non_atomic_counter_snapshot": true,
+    "admission_estimate_not_guarantee": true,
+    "lower_bound_certificate": false,
+    "OS_settings_changed": false
+  },
+  "actual_PID_probe": {
+    "status": "PASS",
+    "known_Popen_PID": 478851,
+    "start_ticks": 6671688,
+    "live_PID_observed": true,
+    "child_cleanup_complete": true,
+    "observed_identity": {
+      "pid": 478851,
+      "state": "R",
+      "ppid": 478850,
+      "pgrp": 478851,
+      "session": 478851,
+      "start_ticks": 6671688
+    },
+    "CPU_s": 0.023367000000000013,
+    "cost_already_in_total_preparation": true
+  },
+  "actual_PID_namespace": {
+    "os_pid": 478850,
+    "proc_self_pid": 478850,
+    "same_namespace": true
+  },
+  "postwrite_cost_observed_covered": true,
+  "execution_context": "require_escalated with procfs/executor equality and frozen resource controls",
+  "preventive_hard_aggregate_CPU_proof": false,
+  "dispatches": {
+    "C05": "prepare_v1:3 CPU s",
+    "C06": "controls_v1:3 CPU s",
+    "C07": "primary_v1:4 CPU s",
+    "C08": [
+      "independent_v1:6 CPU s",
+      "plot_saved_v1:6 CPU s"
+    ]
+  },
+  "central": {
+    "completed": 28,
+    "total": 88,
+    "unit_effect": 0
+  },
+  "automatic_next_node": false
+}

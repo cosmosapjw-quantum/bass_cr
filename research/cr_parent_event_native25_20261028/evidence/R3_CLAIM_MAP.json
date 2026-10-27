@@ -1,0 +1,289 @@
+{
+  "schema": "CR_PARENT_EVENT_R3_CLAIM_MAP_INTAKE_V1",
+  "unit": "CR_PHYS02_PARENT_EVENT_NATIVE25_V1",
+  "stage_status": "CLAIMS_FROZEN_FOR_ROOT_R03_REVIEW",
+  "author_role": "theory_and_input_identification_author_not_independent_reviewer",
+  "new_scientific_executions": 0,
+  "new_Wolfram_calls": 0,
+  "old_science_replays": 0,
+  "claims": [
+    {
+      "id": "C01",
+      "claim": "The retained source factors are neutral .99 times total nH/nHe; proper729 and target densities are already inside A.",
+      "basis": [
+        "INPUT_SOURCE_MANIFEST:INJ",
+        "INPUT_SOURCE_MANIFEST:A",
+        "INPUT_SOURCE_MANIFEST:B"
+      ],
+      "status": "ACTUAL_SOURCE_READ",
+      "new_work": "Validate once-only factors without original source replay.",
+      "testable_failure": "Applying density,.99,729,4pi or clock conversion twice."
+    },
+    {
+      "id": "C02",
+      "claim": "Below all retained proton ejection endpoints the mathematical source lies in three fixed rational functions using H c1=(7/3)c2.",
+      "basis": [
+        "INPUT_SOURCE_MANIFEST:RUDD",
+        "INPUT_SOURCE_MANIFEST:A",
+        "INPUT_SOURCE_MANIFEST:CR001"
+      ],
+      "status": "ANALYTIC_RECIPE_DERIVATION_PENDING_R6",
+      "proof": "The H basis has a third-order pole at -I_H with nonzero numerator; He bases have their only pole at distinct -I_He. A rational identity on an open interval forces the H coefficient and then the two He numerator coefficients to vanish.",
+      "limit": "Functional independence does not guarantee conditioning of the finite moment matrix. Binary64 separate accumulations need validation."
+    },
+    {
+      "id": "C03",
+      "claim": "Three pinned band moments identify model coefficients only after frozen conditioning,sensitivity,positivity and unused-anchor checks.",
+      "basis": [
+        "INPUT_SOURCE_MANIFEST:ARES",
+        "R1_SCOPE_PACKET_KO.md"
+      ],
+      "status": "NEW_NUMERIC_WORK_NOT_RUN",
+      "recovery_bands_eV": [
+        [
+          0,
+          0.1
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          100,
+          1000
+        ]
+      ],
+      "unused_bands_eV": [
+        [
+          0.1,
+          1
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          10,
+          100
+        ]
+      ],
+      "output_semantics": "MODEL_IDENTIFIED_FROM_PINNED_MOMENTS_NOT_ORIGINAL_COEFFICIENT_BYTES",
+      "unresolved_behavior": "No hidden fourth parameter,renormalization,old quadrature replay or tolerance widening."
+    },
+    {
+      "id": "C04",
+      "claim": "Target fractions use a_sj=P_j[A_s] with original linear projector P; a_j=P_j[A_H+A_He].",
+      "basis": [
+        "INPUT_SOURCE_MANIFEST:B",
+        "INPUT_SOURCE_MANIFEST:CANONICAL_ATOMIC_SOURCE"
+      ],
+      "status": "ACTUAL_PROJECTOR_READ_AND_NEW_DERIVATION",
+      "counterexample_scope": "Cell/quadrature averaging makes a pointwise fraction at E_j generally unequal to the projected fraction.",
+      "limit": "Canonical A/E bytes authoritative; new attribution residual explicit."
+    },
+    {
+      "id": "C05",
+      "claim": "Selected H-origin electron count is the direct atomic-H single-ionization extent in the source channel and conditional H1 mapping.",
+      "basis": [
+        "INPUT_SOURCE_MANIFEST:RUDD",
+        "LITERATURE_MAP_KO.md:P1"
+      ],
+      "status": "SCOPED_PARENT_IDENTIFICATION_AFTER_C03",
+      "limit": "No charge-exchange,nuclear,all-W/full-CR-loss or exact isotope-threshold claim.",
+      "future_quantity": "J_H(a,b)=(b^2-a^2)*A_H_number/2; no new actual number asserted during intake."
+    },
+    {
+      "id": "C06",
+      "claim": "He electron marginal does not supply exclusive single/double pairing or residual ion state.",
+      "basis": [
+        "LITERATURE_MAP_KO.md:P1",
+        "LITERATURE_MAP_KO.md:P3",
+        "INPUT_SOURCE_MANIFEST:RUDD"
+      ],
+      "status": "PRIMARY_DEFINITION_AND_BOUNDED_SEARCH_QUALIFIED",
+      "not_a_strong_no_go": true,
+      "actual_unresolved_fields": [
+        "s",
+        "p",
+        "d",
+        "He_plus_excitation",
+        "joint_electron_spectrum"
+      ],
+      "scope": "Observed source and bounded search only; exclusive owner data could close it."
+    },
+    {
+      "id": "C07",
+      "claim": "For events touching selected W,s+p+2d=N_He with nonnegative extents; deltaHeI=-(N_He-d),deltaHeII=N_He-p-2d,deltaHeIII=p+d; extra partner count is p.",
+      "basis": [
+        "C06",
+        "new stoichiometric derivation"
+      ],
+      "status": "NEW_THEORY_PENDING_R6",
+      "parameter_domain": "p>=0,d>=0,p+2d<=N_He",
+      "conditional_subfamilies": [
+        "p=0 closed-selected support only",
+        "p=d=0 effective one-electron ground fixture only"
+      ],
+      "actual_branch_point": null,
+      "history_requirement": "Branch finite-window measures must be additive and consistent with marginal; no actual branch history invented."
+    },
+    {
+      "id": "C08",
+      "claim": "Partner port requires energy,support,proper history and subsequent population/response ownership, not birth count alone.",
+      "basis": [
+        "C07",
+        "native charge-minus-fast semantics"
+      ],
+      "status": "NEW_CONSUMER_REQUIREMENT",
+      "risk": "Parent charge with only selected zeta falsely creates p thermal electrons; unspecified partner RR/escape can alter endpoint species.",
+      "required_ports": [
+        "partner_birth_count",
+        "partner_energy",
+        "partner_history",
+        "partner_nonthermal_thermal_escape_pool",
+        "partner_response"
+      ],
+      "actual_values": null
+    },
+    {
+      "id": "C09",
+      "claim": "Saved selected RR composes with parent contributions without identifying the parent of each captured electron.",
+      "basis": [
+        "INPUT_SOURCE_MANIFEST:PR110_SAVED_RESULT",
+        "INPUT_SOURCE_MANIFEST:PR110_SAVED_ARRAYS",
+        "new inventory composition"
+      ],
+      "status": "REUSE_WITH_NEW_COMPOSITION",
+      "formula": "deltaHII=J_H-C_H;deltaHeII=N_He-p-2d-C_He;deltaHeIII=p+d;neutrals from nuclei conservation",
+      "limit": "Selected-response component plus parent family, not full partner-inclusive endpoint. Birth and capture target differ."
+    },
+    {
+      "id": "C10",
+      "claim": "Source selected model loss L0=Uinj+I_H_src*J_H+I1_src*N_He is identifiable but actual exclusive-He projectile debit is unestablished.",
+      "basis": [
+        "LITERATURE_MAP_KO.md:P2 Eq23",
+        "INPUT_SOURCE_MANIFEST:RUDD"
+      ],
+      "status": "MODEL_FUNCTIONAL_IDENTIFIED_ACTUAL_DEBIT_NULL",
+      "actual_proton_depletion": null,
+      "actual_external_work": null,
+      "required_exclusive_work": "L0+U_partner+I2_src*p+(I2_src-I1_src)*d+excitation+admitted_recoil; I2_src not borrowed from prior RR."
+    },
+    {
+      "id": "C11",
+      "claim": "Literal energy-convention residual is separate from missing branch work.",
+      "basis": [
+        "C07",
+        "C09",
+        "C10",
+        "native chemical basis"
+      ],
+      "status": "NEW_THEORY_PENDING_R6",
+      "formulas": {
+        "chemical_increment": "I_H_star*(J_H-C_H)+I1_star*(N_He-C_He)+I2_star*p+(I2_star-I1_star)*d",
+        "literal_constant_residual": "(I_H_src-I_H_star)*J_H+(I1_src-I1_star)*N_He+(I_H_star-I_H_RR)*C_H+(I1_star-I_He_RR)*C_He",
+        "missing_branch_chemical_lift": "I2_star*p+(I2_star-I1_star)*d",
+        "H_literal_difference_eV": "0.005693122994"
+      },
+      "forbidden": "Do not rename branch work,partner energy or threshold difference as physical heat/w_ext."
+    },
+    {
+      "id": "C12",
+      "claim": "Cutoff retention is default; direct cutoff is E=.1 projection ghost, not new below-.1 births.",
+      "basis": [
+        "INPUT_SOURCE_MANIFEST:B",
+        "INPUT_SOURCE_MANIFEST:PR110_SAVED_RESULT"
+      ],
+      "status": "ACTUAL_SOURCE_SEMANTICS_AND_NEW_DEFAULT",
+      "selected_component": {
+        "zeta_increment": "(deltaNactive+Ncut_bin)/nb",
+        "w_nt_increment": "(deltaUactive+Ucut_bin)*eV_J/nb"
+      },
+      "actual_total_native25": null,
+      "limit": "Partner contribution separate; retained cutoff is not propagated below-cutoff spectrum."
+    },
+    {
+      "id": "C13",
+      "claim": "Explicit assimilation and partner closure permit deltaT/T0=[Q/(1.5*kB*T0)-Ncut]/(npart0+Ncut),deltaLogT=log1p(deltaT/T0).",
+      "basis": [
+        "native g=q.Y-zeta",
+        "new finite caloric derivation",
+        "INPUT_SOURCE_MANIFEST:PR110_SAVED_RESULT"
+      ],
+      "status": "CONDITIONAL_NEW_THEORY_NO_NUMERIC_RESULT",
+      "Q_semantics": "(Q_C+Ucut)*eV_J once; photons and convention residual excluded",
+      "domain": [
+        "nb>0",
+        "npart0+Ncut>0",
+        "1+deltaT/T0>0",
+        "baseline+delta species nonnegative",
+        "explicit partner thermal/energy closure"
+      ],
+      "limit": "Fixed-response postprocessing,no new ODE/T feedback/global heating promotion."
+    },
+    {
+      "id": "C14",
+      "claim": "Baseline+increment is authoritative when tiny changes are below baseline ulp.",
+      "basis": [
+        "new numerical representation requirement"
+      ],
+      "status": "NEW_CODE_REQUIREMENT",
+      "tests": [
+        "delta retained despite unchanged rounded endpoint",
+        "own-scale conservation",
+        "log1p vs independent high-precision oracle"
+      ],
+      "limit": "Rounded endpoint diagnostic only; do not subtract rounded endpoints to recover increment."
+    },
+    {
+      "id": "C15",
+      "claim": "Parent births and saved observation responses are owned once; retained photons have a separate port.",
+      "basis": [
+        "prior source-family/return-registry contracts",
+        "new composition contract"
+      ],
+      "status": "NEW_INTEGRATION_REQUIREMENT",
+      "keys": [
+        "source family",
+        "native birth partition",
+        "proper birth interval",
+        "observation interval",
+        "return channel",
+        "aggregate alias"
+      ],
+      "rejections": [
+        "overlap/duplicate",
+        "sum of prefixes",
+        "RR-only double adoption after aggregate",
+        "mixed frame/state/isotope/support",
+        "same T without same inventory"
+      ],
+      "retained_photon_wext_contribution": 0,
+      "actual_total_wext": null
+    },
+    {
+      "id": "C16",
+      "claim": "Scoped attribution/affine-consumer completion is compatible with actual full physical native25 remaining null.",
+      "basis": [
+        "C03-C15",
+        "R1_SCOPE_PACKET_KO.md",
+        "prior NEXT_UNIT_CONTRACT.json"
+      ],
+      "status": "CONSTRUCTIVE_SCOPE_NOT_GLOBAL_NO_GO",
+      "remain_null": [
+        "exclusive He branch",
+        "partner history/energy/response",
+        "proton debit",
+        "full low-source physical native25 point",
+        "full9600/global native25",
+        "absolute worldtube totals",
+        "physical heating completion",
+        "global completion/error/budget/currency"
+      ],
+      "central_count_effect": 0
+    }
+  ],
+  "intake_original_sha256": "e148d6bb1bba173c44a14ee02b0ba933b93b9c6e2bed3512c81d3f8954f607e9",
+  "claim_statuses_retained": true,
+  "activation_before_numeric_and_independent_review": false
+}
