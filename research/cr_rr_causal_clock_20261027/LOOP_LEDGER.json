@@ -175,8 +175,13 @@
     },
     {
       "id": "C07",
-      "status": "pending",
-      "evidence_refs": []
+      "status": "complete",
+      "evidence_refs": [
+        "runs/cr_clock_primary_20261027_v1/payload/RESULT.json",
+        "runs/cr_clock_primary_20261027_v1/DISPATCH_RECEIPT.json",
+        "runs/cr_clock_primary_20261027_v1/PRE_EXECUTION.json",
+        "runs/cr_clock_primary_20261027_v1/EXECUTED_SOURCE"
+      ]
     },
     {
       "id": "C08",
@@ -195,7 +200,13 @@
     }
   ],
   "claims": [],
-  "checks": [],
+  "checks": [
+    {
+      "stage": "C07",
+      "result": "22/22_PASS",
+      "evidence": "runs/cr_clock_primary_20261027_v1/payload/RESULT.json"
+    }
+  ],
   "executions": [
     {
       "run_id": "cr_clock_controls_20261027_v1",
@@ -212,6 +223,14 @@
       "worker_cpu_s": 0.332836,
       "coordinator_cpu_s": 0.151952666,
       "evidence": "runs/cr_clock_controls_20261027_v2/DISPATCH_RECEIPT.json"
+    },
+    {
+      "run_id": "cr_clock_primary_20261027_v1",
+      "mode": "primary",
+      "status": "PASS",
+      "worker_cpu_s": 12.625027,
+      "coordinator_cpu_s": 0.35828115,
+      "evidence": "runs/cr_clock_primary_20261027_v1/DISPATCH_RECEIPT.json"
     }
   ],
   "failures": [
@@ -244,7 +263,7 @@
     }
   ],
   "old_science_replay": 0,
-  "new_science_cpu_s": 0.5994853600000001,
+  "new_science_cpu_s": 13.582793509999998,
   "new_science_cpu_cap_s": 60,
   "gates": {
     "N4": "PARTIAL_OPEN",
@@ -255,5 +274,5 @@
     "global_physical_completion": null,
     "global_error_bound": null
   },
-  "completed_stages": 16
+  "completed_stages": 17
 }

@@ -1,0 +1,224 @@
+{
+  "schema": "CR_CLOCK_FROZEN_CODING_CONTRACT_V1",
+  "unit": "CR_RR_CAUSAL_ERLANG_CLOCK_V1",
+  "exact_problem": {
+    "K": "stored HeIII K arrays as exact reals encoded by binary64",
+    "rewards_columns": [
+      10,
+      11
+    ],
+    "all_time_columns": [
+      10,
+      11
+    ],
+    "sources": [
+      "2.316",
+      "2.479",
+      "2.649"
+    ],
+    "source": "matching PR104 source_z[1:], no renormalization or re-projection",
+    "boundary_mass": "source_z[0] preserved; RR reward0",
+    "witness_candidate": "stored t=solution_physical18[:,3], must pass rigorous Kh>=beta h>0"
+  },
+  "cases": [
+    {
+      "chi": 1.5,
+      "R": 80,
+      "N": 2048,
+      "levels": [
+        [
+          64,
+          0.5
+        ],
+        [
+          256,
+          0.25
+        ],
+        [
+          1024,
+          0.125
+        ]
+      ]
+    },
+    {
+      "chi": 1.5,
+      "R": 80,
+      "N": 1024,
+      "levels": [
+        [
+          1024,
+          0.125
+        ]
+      ]
+    },
+    {
+      "chi": 1.5,
+      "R": 40,
+      "N": 2048,
+      "levels": [
+        [
+          1024,
+          0.125
+        ]
+      ]
+    },
+    {
+      "chi": 3,
+      "R": 80,
+      "N": 2048,
+      "levels": [
+        [
+          64,
+          0.5
+        ],
+        [
+          256,
+          0.25
+        ],
+        [
+          1024,
+          0.125
+        ]
+      ]
+    },
+    {
+      "chi": 3,
+      "R": 80,
+      "N": 1024,
+      "levels": [
+        [
+          1024,
+          0.125
+        ]
+      ]
+    },
+    {
+      "chi": 3,
+      "R": 40,
+      "N": 2048,
+      "levels": [
+        [
+          1024,
+          0.125
+        ]
+      ]
+    }
+  ],
+  "observation_horizons_s": [
+    0,
+    1000,
+    10000,
+    100000,
+    300000,
+    1000000,
+    10000000
+  ],
+  "clock_choice": "Each positive horizon and level uses two encoded binary64 gamma=m*(1±delta)/T; tails computed for actual rational gamma*T/m; zero horizon exactlyzero",
+  "arithmetic": {
+    "production": "FP64 positive tridiagonal solves; exact target residual enclosed by verified native long-double bounded dot and outward scalar arithmetic",
+    "coefficient_rebuild": false,
+    "all_time": "reuse saved approximations; residual enclosure provides upper and lower",
+    "tail": "Decimal/rational outward upper, no nominal underflow0",
+    "intervals": "intersect valid levels and tighten monotonic horizons; preserve raw levels; report empty intersections as failure",
+    "energy": "common count/kinetic basis with exact rational signed map; no independent endpoint energy conservation claim"
+  },
+  "acceptance": {
+    "finite_nonnegative_bounds": true,
+    "strict_positive_witness": true,
+    "interval_order": true,
+    "actual_gamma_tail_direction": true,
+    "clock_tail_upper_lt_one": true,
+    "finest_clock_width_over_alltime_upper_max": 0.3,
+    "arithmetic_scalar_radius_over_alltime_upper_max": 0.0001,
+    "grid_endpoint_difference_over_finest_alltime_upper_max": 0.005,
+    "domain_endpoint_difference_over_R80_alltime_upper_max": 0.00001,
+    "independent_own_column_relative_max": 5e-10,
+    "independent_exact_solution_inside_computed_radius": true,
+    "event_linear_energy_exact": true,
+    "actual_export_nb_null": true
+  },
+  "independent": {
+    "precision_decimal_digits": 70,
+    "cases": [
+      {
+        "chi": 1.5,
+        "R": 80,
+        "N": 2048,
+        "T_s": 100000
+      },
+      {
+        "chi": 3,
+        "R": 80,
+        "N": 2048,
+        "T_s": 1000000
+      }
+    ],
+    "m": 4,
+    "delta": 0.5,
+    "clocks": [
+      "minus",
+      "plus"
+    ],
+    "RHS": 2,
+    "factorizations": 4,
+    "total_rhs": 32,
+    "source_contractions": 24,
+    "compare": "all4step vectors, cumulative vectors, residual radii and24scalar intervals; no production module imports"
+  },
+  "resources": {
+    "aggregate_cpu_s": 60,
+    "reservations_cpu_s": {
+      "R7_local_unused": 3,
+      "controls": 5,
+      "primary": 30,
+      "independent": 15,
+      "plot": 5,
+      "coordinator": 2
+    },
+    "wall_per_invocation_s": 60,
+    "worker_address_space_MiB": 512,
+    "minimum_memory_reserve_GiB": 1,
+    "native_threads": 1,
+    "NCP": false,
+    "failed_attempts_charged": true,
+    "scientific_prior_replay": 0,
+    "Wolfram_calls": [
+      {
+        "time_constraint_s": 20,
+        "actual_provider_cpu_s": null
+      },
+      {
+        "time_constraint_s": 5,
+        "actual_provider_cpu_s": null
+      }
+    ]
+  },
+  "export": {
+    "reaction": "He4III + fast e -> He4II(1s) + retained photon",
+    "I_eV": "54.42",
+    "native21_parent": 12,
+    "native21_daughter": 11,
+    "kinetic_loss": "-E",
+    "internal": "-54.42N",
+    "photon": "E+54.42N",
+    "native25_when_nb_supplied": "DeltaY11=a,DeltaY12=-a,Deltazeta=-a,Deltaw_nt=-Ue/nb,Deltaw_ext=DeltaLogT=0; separate photon port",
+    "actual_nb_m3": null,
+    "source_time_history": null,
+    "physical_rate": null,
+    "exposure_s": null,
+    "instantaneous_RHS": null,
+    "bin_rate_semantics": "conditional pulse bin-average only",
+    "actual_frozen_background_coupled_update": false
+  },
+  "failure_policy": "Preserve attempts, exact inputs and original thresholds. Diagnose only affected dependency and repair within aggregate reservation; no automatic broad rerun. Wider intervals are reported, not narrowed without evidence.",
+  "global": {
+    "central_completed": 27,
+    "central_total": 88,
+    "count_effect": 0,
+    "global_error_bound": null,
+    "physical_heating_complete": null,
+    "L4": false,
+    "N6": "PREDECESSOR_GATED",
+    "N7": "PREDECESSOR_GATED"
+  }
+}
