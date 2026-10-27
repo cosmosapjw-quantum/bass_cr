@@ -1,0 +1,51 @@
+{
+  "schema": "CR_PARENT_RECOVERY_CONDITIONING_DEFINITION_PROPOSAL_V1",
+  "unit": "CR_PHYS02_PARENT_EVENT_NATIVE25_V1",
+  "formulas": {
+    "M_ij": "integral over fixed recovery band i of W*f_j(W) dW",
+    "b_i": "positive pinned actual saved energy coefficient for band i",
+    "R": "diag(1/b_i)",
+    "c_j": "1/max_i(abs((R M)_ij))",
+    "B": "R M diag(c)",
+    "rhs": "ones(3)",
+    "solution": "B z=ones; theta=diag(c) z",
+    "rcond_inf": "1/(norm_inf(B)*norm_inf(inverse(B)))",
+    "coefficient_sensitivity": "eta*abs(inverse(B))*ones / abs(z)",
+    "coefficient_positive_envelope": "z - eta*abs(inverse(B))*ones > 0"
+  },
+  "thresholds": {
+    "rcond_inf_min": "1e-6",
+    "eta": "2e-12",
+    "maximum_componentwise_sensitivity": "1e-8"
+  },
+  "semantics": "eta is frozen consistency perturbation envelope of retained moments, not physical model uncertainty or certified outward arithmetic",
+  "recovery_bands_eV": [
+    [
+      "0",
+      "0.1"
+    ],
+    [
+      "3",
+      "10"
+    ],
+    [
+      "100",
+      "1000"
+    ]
+  ],
+  "holdout_bands_eV": [
+    [
+      "0.1",
+      "1"
+    ],
+    [
+      "1",
+      "3"
+    ],
+    [
+      "10",
+      "100"
+    ]
+  ],
+  "no_new_numeric_execution": true
+}
