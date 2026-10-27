@@ -1,0 +1,534 @@
+{
+  "schema": "CR_PARENT_EVENT_BUDGET_CLOSEOUT_V1",
+  "unit": "CR_PHYS02_PARENT_EVENT_NATIVE25_V1",
+  "cap_s": 40,
+  "charged_cpu_s": 10.45384,
+  "measured_cpu_s": 9.80384,
+  "conservative_tail_cpu_s": 0.65,
+  "remaining_not_transferable": 29.54616,
+  "remaining_status": "NONTRANSFERABLE",
+  "all_runtime_attempts_pass": false,
+  "all_preparation_attempts_pass": false,
+  "all_worker_and_preworker_attempts_pass": false,
+  "old_science_replays": 0,
+  "global_budget_remaining": null,
+  "global_physical_completion": null,
+  "global_physical_error": null,
+  "currency": null,
+  "closed": true,
+  "automatic_next_node": false,
+  "further_scientific_execution_planned": false,
+  "historical_allowance_transferred": false,
+  "parallel_project_budget_transferred": false,
+  "unused_allowance_auto_carried_to_next_unit": false,
+  "historical_and_parallel_UNKNOWN_NO_ACK_erased": false,
+  "hard_preventive_aggregate_cap_proof": false,
+  "publication_and_metadata_CPU_s": null,
+  "accounting_scope": "Actual same-unit preparation + bounded workers + bounded coordinators + conservative receipt tails. Publication/metadata CPU remains unmeasured, not zero, as declared in the frozen execution budget.",
+  "measured_CPU_includes_conservative_tail": false,
+  "breakdown": {
+    "preparation": {
+      "unique_attempts": 5,
+      "completed_attempts": 2,
+      "failed_attempts": 3,
+      "charged_cpu_s": 0.928517,
+      "measured_cpu_s": 0.6785169999999999,
+      "conservative_tail_cpu_s": 0.25
+    },
+    "bounded_attempts": {
+      "unique_attempts": 8,
+      "completed_attempts": 6,
+      "failed_attempts": 2,
+      "worker_measured_cpu_s": 7.2488209999999995,
+      "coordinator_measured_cpu_s": 1.876502,
+      "conservative_tail_cpu_s": 0.4,
+      "charged_cpu_s": 9.525323
+    }
+  },
+  "deduplication": {
+    "key": "unit + attempt identity",
+    "rule": "maximum cumulative terminal charged debit per attempt; receipt mirrors and canonical-ledger copies are not additional costs",
+    "immutable_attempt_debit_files": 8,
+    "actual_runtime_receipt_files": 8,
+    "byte_identical_debit_receipt_pairs": 8,
+    "unique_runtime_attempts": 8,
+    "preparation_cumulative_records": 5,
+    "unique_preparation_attempts": 5,
+    "preparation_amendment_records": 0,
+    "runtime_amendment_records": 0,
+    "all_observed_terminal_debits_accounting_complete": true,
+    "canonical_ledger_contains_all_eight_actual_attempts": true,
+    "preparation_records_equal_all_observed_cumulative_records": true
+  },
+  "preserved_failures": {
+    "preparation": [
+      {
+        "attempt": "c4_pid_diagnostic_v1",
+        "status": "failed",
+        "charged_cpu_s": 0.200783,
+        "receipt": "evidence/C04_HOST_ADMISSION_c4_pid_diagnostic_v1.json"
+      },
+      {
+        "attempt": "c4_v1",
+        "status": "failed",
+        "charged_cpu_s": 0.189732,
+        "receipt": "evidence/C04_HOST_ADMISSION_c4_v1.json"
+      },
+      {
+        "attempt": "c4_v2",
+        "status": "failed",
+        "charged_cpu_s": 0.18837299999999996,
+        "receipt": "evidence/C04_HOST_ADMISSION_c4_v2.json"
+      }
+    ],
+    "bounded_attempts": [
+      {
+        "attempt_id": "attempt_3893c01828d945b2a59b46e5fa60894b",
+        "run_id": "primary_v1",
+        "status": "failed",
+        "charged_cpu_s": 0.347925,
+        "worker_exit_code": 1,
+        "worker_reservation_exceeded": false,
+        "coordinator_reservation_exceeded": false,
+        "receipt": "runs/primary_v1/RECEIPT.json",
+        "subsequent_separate_run": "primary_v2",
+        "original_failure_erased": false
+      },
+      {
+        "attempt_id": "attempt_ed0663e9b58f4d1ebaff7a186993772a",
+        "run_id": "independent_v1",
+        "status": "failed",
+        "charged_cpu_s": 0.548229,
+        "worker_exit_code": 1,
+        "worker_reservation_exceeded": false,
+        "coordinator_reservation_exceeded": false,
+        "receipt": "runs/independent_v1/RECEIPT.json",
+        "subsequent_separate_run": "independent_v2",
+        "original_failure_erased": false
+      }
+    ],
+    "failed_costs_omitted": false,
+    "failed_attempts_relabelled_PASS": false,
+    "scope_note": "Later scoped numerical acceptance does not turn the earlier preparation or worker attempts into successful runtime attempts. The original failure files and their charged costs remain authoritative history."
+  },
+  "preparation_attempts": [
+    {
+      "attempt": "c4_pid_diagnostic_v1",
+      "status": "failed",
+      "measured_cpu_s": 0.150783,
+      "conservative_tail_cpu_s": 0.05,
+      "charged_cpu_s": 0.200783,
+      "receipt": "evidence/C04_HOST_ADMISSION_c4_pid_diagnostic_v1.json",
+      "terminal_debit": true,
+      "cpu_accounting_complete": true,
+      "selected_cumulative_debit_count": 1
+    },
+    {
+      "attempt": "c4_pid_diagnostic_v2",
+      "status": "completed",
+      "measured_cpu_s": 0.10181399999999999,
+      "conservative_tail_cpu_s": 0.05,
+      "charged_cpu_s": 0.151814,
+      "receipt": "evidence/C04_HOST_ADMISSION_c4_pid_diagnostic_v2.json",
+      "terminal_debit": true,
+      "cpu_accounting_complete": true,
+      "selected_cumulative_debit_count": 1
+    },
+    {
+      "attempt": "c4_v1",
+      "status": "failed",
+      "measured_cpu_s": 0.139732,
+      "conservative_tail_cpu_s": 0.05,
+      "charged_cpu_s": 0.189732,
+      "receipt": "evidence/C04_HOST_ADMISSION_c4_v1.json",
+      "terminal_debit": true,
+      "cpu_accounting_complete": true,
+      "selected_cumulative_debit_count": 1
+    },
+    {
+      "attempt": "c4_v2",
+      "status": "failed",
+      "measured_cpu_s": 0.13837299999999997,
+      "conservative_tail_cpu_s": 0.05,
+      "charged_cpu_s": 0.18837299999999996,
+      "receipt": "evidence/C04_HOST_ADMISSION_c4_v2.json",
+      "terminal_debit": true,
+      "cpu_accounting_complete": true,
+      "selected_cumulative_debit_count": 1
+    },
+    {
+      "attempt": "c4_v3",
+      "status": "completed",
+      "measured_cpu_s": 0.147815,
+      "conservative_tail_cpu_s": 0.05,
+      "charged_cpu_s": 0.19781500000000002,
+      "receipt": "evidence/C04_HOST_ADMISSION_c4_v3.json",
+      "terminal_debit": true,
+      "cpu_accounting_complete": true,
+      "selected_cumulative_debit_count": 1
+    }
+  ],
+  "attempts": [
+    {
+      "attempt_id": "attempt_003bf2f3c5534ea5bda5ec4114e5a377",
+      "run_id": "plot_saved_v1",
+      "status": "completed",
+      "worker_cpu_s": 4.950508,
+      "coordinator_cpu_s": 0.675384,
+      "measured_cpu_s": 5.625892,
+      "conservative_tail_cpu_s": 0.05,
+      "charged_cpu_s": 5.675892,
+      "worker_exit_code": 0,
+      "worker_reservation_exceeded": false,
+      "coordinator_reservation_exceeded": false,
+      "terminal_debit": true,
+      "cpu_accounting_complete": true,
+      "canonical_immutable_debit": "evidence/ATTEMPT_DEBITS/attempt_003bf2f3c5534ea5bda5ec4114e5a377.json",
+      "runtime_receipt": "runs/plot_saved_v1/RECEIPT.json",
+      "debit_and_runtime_receipt_byte_identical": true,
+      "receipt_copies_counted_as_two_attempts": false,
+      "selected_cumulative_debit_count": 1
+    },
+    {
+      "attempt_id": "attempt_341e9c17e6b840e3a15b4cd847c2d40c",
+      "run_id": "controls_v2",
+      "status": "completed",
+      "worker_cpu_s": 0.11769199999999999,
+      "coordinator_cpu_s": 0.11563599999999999,
+      "measured_cpu_s": 0.23332799999999998,
+      "conservative_tail_cpu_s": 0.05,
+      "charged_cpu_s": 0.28332799999999997,
+      "worker_exit_code": 0,
+      "worker_reservation_exceeded": false,
+      "coordinator_reservation_exceeded": false,
+      "terminal_debit": true,
+      "cpu_accounting_complete": true,
+      "canonical_immutable_debit": "evidence/ATTEMPT_DEBITS/attempt_341e9c17e6b840e3a15b4cd847c2d40c.json",
+      "runtime_receipt": "runs/controls_v2/RECEIPT.json",
+      "debit_and_runtime_receipt_byte_identical": true,
+      "receipt_copies_counted_as_two_attempts": false,
+      "selected_cumulative_debit_count": 1
+    },
+    {
+      "attempt_id": "attempt_3893c01828d945b2a59b46e5fa60894b",
+      "run_id": "primary_v1",
+      "status": "failed",
+      "worker_cpu_s": 0.154997,
+      "coordinator_cpu_s": 0.142928,
+      "measured_cpu_s": 0.297925,
+      "conservative_tail_cpu_s": 0.05,
+      "charged_cpu_s": 0.347925,
+      "worker_exit_code": 1,
+      "worker_reservation_exceeded": false,
+      "coordinator_reservation_exceeded": false,
+      "terminal_debit": true,
+      "cpu_accounting_complete": true,
+      "canonical_immutable_debit": "evidence/ATTEMPT_DEBITS/attempt_3893c01828d945b2a59b46e5fa60894b.json",
+      "runtime_receipt": "runs/primary_v1/RECEIPT.json",
+      "debit_and_runtime_receipt_byte_identical": true,
+      "receipt_copies_counted_as_two_attempts": false,
+      "selected_cumulative_debit_count": 1
+    },
+    {
+      "attempt_id": "attempt_ac6d45dc306e4fd3954aaf5e82bcfcc0",
+      "run_id": "primary_v2",
+      "status": "completed",
+      "worker_cpu_s": 0.20549199999999998,
+      "coordinator_cpu_s": 0.116558,
+      "measured_cpu_s": 0.32204999999999995,
+      "conservative_tail_cpu_s": 0.05,
+      "charged_cpu_s": 0.37205,
+      "worker_exit_code": 0,
+      "worker_reservation_exceeded": false,
+      "coordinator_reservation_exceeded": false,
+      "terminal_debit": true,
+      "cpu_accounting_complete": true,
+      "canonical_immutable_debit": "evidence/ATTEMPT_DEBITS/attempt_ac6d45dc306e4fd3954aaf5e82bcfcc0.json",
+      "runtime_receipt": "runs/primary_v2/RECEIPT.json",
+      "debit_and_runtime_receipt_byte_identical": true,
+      "receipt_copies_counted_as_two_attempts": false,
+      "selected_cumulative_debit_count": 1
+    },
+    {
+      "attempt_id": "attempt_e57c32eaaac147bfbce36865cd817be6",
+      "run_id": "independent_v2",
+      "status": "completed",
+      "worker_cpu_s": 0.306077,
+      "coordinator_cpu_s": 0.185795,
+      "measured_cpu_s": 0.491872,
+      "conservative_tail_cpu_s": 0.05,
+      "charged_cpu_s": 0.541872,
+      "worker_exit_code": 0,
+      "worker_reservation_exceeded": false,
+      "coordinator_reservation_exceeded": false,
+      "terminal_debit": true,
+      "cpu_accounting_complete": true,
+      "canonical_immutable_debit": "evidence/ATTEMPT_DEBITS/attempt_e57c32eaaac147bfbce36865cd817be6.json",
+      "runtime_receipt": "runs/independent_v2/RECEIPT.json",
+      "debit_and_runtime_receipt_byte_identical": true,
+      "receipt_copies_counted_as_two_attempts": false,
+      "selected_cumulative_debit_count": 1
+    },
+    {
+      "attempt_id": "attempt_ed0663e9b58f4d1ebaff7a186993772a",
+      "run_id": "independent_v1",
+      "status": "failed",
+      "worker_cpu_s": 0.317903,
+      "coordinator_cpu_s": 0.180326,
+      "measured_cpu_s": 0.498229,
+      "conservative_tail_cpu_s": 0.05,
+      "charged_cpu_s": 0.548229,
+      "worker_exit_code": 1,
+      "worker_reservation_exceeded": false,
+      "coordinator_reservation_exceeded": false,
+      "terminal_debit": true,
+      "cpu_accounting_complete": true,
+      "canonical_immutable_debit": "evidence/ATTEMPT_DEBITS/attempt_ed0663e9b58f4d1ebaff7a186993772a.json",
+      "runtime_receipt": "runs/independent_v1/RECEIPT.json",
+      "debit_and_runtime_receipt_byte_identical": true,
+      "receipt_copies_counted_as_two_attempts": false,
+      "selected_cumulative_debit_count": 1
+    },
+    {
+      "attempt_id": "attempt_f50af4951f6d45aca26bb65efa05644e",
+      "run_id": "controls_v1",
+      "status": "completed",
+      "worker_cpu_s": 0.8487499999999999,
+      "coordinator_cpu_s": 0.281809,
+      "measured_cpu_s": 1.1305589999999999,
+      "conservative_tail_cpu_s": 0.05,
+      "charged_cpu_s": 1.180559,
+      "worker_exit_code": 0,
+      "worker_reservation_exceeded": false,
+      "coordinator_reservation_exceeded": false,
+      "terminal_debit": true,
+      "cpu_accounting_complete": true,
+      "canonical_immutable_debit": "evidence/ATTEMPT_DEBITS/attempt_f50af4951f6d45aca26bb65efa05644e.json",
+      "runtime_receipt": "runs/controls_v1/RECEIPT.json",
+      "debit_and_runtime_receipt_byte_identical": true,
+      "receipt_copies_counted_as_two_attempts": false,
+      "selected_cumulative_debit_count": 1
+    },
+    {
+      "attempt_id": "attempt_ff928b53aeb94050889f1213373c25e3",
+      "run_id": "prepare_v1",
+      "status": "completed",
+      "worker_cpu_s": 0.347402,
+      "coordinator_cpu_s": 0.178066,
+      "measured_cpu_s": 0.525468,
+      "conservative_tail_cpu_s": 0.05,
+      "charged_cpu_s": 0.575468,
+      "worker_exit_code": 0,
+      "worker_reservation_exceeded": false,
+      "coordinator_reservation_exceeded": false,
+      "terminal_debit": true,
+      "cpu_accounting_complete": true,
+      "canonical_immutable_debit": "evidence/ATTEMPT_DEBITS/attempt_ff928b53aeb94050889f1213373c25e3.json",
+      "runtime_receipt": "runs/prepare_v1/RECEIPT.json",
+      "debit_and_runtime_receipt_byte_identical": true,
+      "receipt_copies_counted_as_two_attempts": false,
+      "selected_cumulative_debit_count": 1
+    }
+  ],
+  "reconciliation": {
+    "status": "PASS_METADATA_RECONCILIATION",
+    "method": "Read actual ledger/preparation/debit/receipt files; compare exact file bytes/SHA and same-attempt recorded fields; add only recorded CPU counters using integer-scaled decimal metadata arithmetic.",
+    "accounting_absolute_tolerance_CPU_s": "1e-12",
+    "maximum_recorded_decimal_sum_discrepancy_CPU_s": "0.00000000000000037",
+    "top_level_totals_source": "Copied from the actual final canonical ledger after comparison; detailed recorded float values and their exact evidence bytes are retained.",
+    "exact_decimal_sums_of_read_recorded_numbers": {
+      "preparation_charged_cpu_s": "0.92851699999999998",
+      "preparation_measured_cpu_s": "0.67851699999999996",
+      "preparation_tail_cpu_s": "0.25",
+      "worker_cpu_s": "7.24882099999999987",
+      "coordinator_cpu_s": "1.87650199999999999",
+      "attempt_tail_cpu_s": "0.4",
+      "attempt_charged_cpu_s": "9.52532299999999997",
+      "charged_cpu_s": "10.45383999999999995",
+      "measured_cpu_s": "9.80383999999999982",
+      "conservative_tail_cpu_s": "0.65"
+    },
+    "scientific_tolerances_changed": false,
+    "scientific_evaluations_recomputed": 0,
+    "source_quadrature_or_RR_replay": 0,
+    "Python_scientific_execution": 0,
+    "compile_or_import_of_scientific_code": 0
+  },
+  "evidence_files": [
+    {
+      "role": "canonical_execution_ledger",
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/evidence/EXECUTION_LEDGER.json",
+      "unit_relative_path": "evidence/EXECUTION_LEDGER.json",
+      "bytes": 111328,
+      "sha256": "7b65b5cd4375277392a9fc3ebdf466e8a02870230600875b9e8d25ea4897dff4"
+    },
+    {
+      "role": "canonical_preparation_ledger",
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/evidence/C04_PREPARATION_LEDGER.json",
+      "unit_relative_path": "evidence/C04_PREPARATION_LEDGER.json",
+      "bytes": 4498,
+      "sha256": "c23e668af578a0456b2dc1a5d05c2b1f244ac5faf564a3b67370e835610fd75c"
+    },
+    {
+      "role": "final_frozen_execution_budget",
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/EXECUTION_BUDGET.json",
+      "unit_relative_path": "EXECUTION_BUDGET.json",
+      "bytes": 6331,
+      "sha256": "332c8fedf8cd3f2e11a5a66e12e417ee0b0dc1918991105507b7d3d786c2887e"
+    },
+    {
+      "role": "immutable_attempt_debit",
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/evidence/ATTEMPT_DEBITS/attempt_003bf2f3c5534ea5bda5ec4114e5a377.json",
+      "unit_relative_path": "evidence/ATTEMPT_DEBITS/attempt_003bf2f3c5534ea5bda5ec4114e5a377.json",
+      "bytes": 12047,
+      "sha256": "84b97bb93a23cec8ff277d2c62f50bb435da5a145144dc9d5aec080b6503c34f"
+    },
+    {
+      "role": "immutable_attempt_debit",
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/evidence/ATTEMPT_DEBITS/attempt_341e9c17e6b840e3a15b4cd847c2d40c.json",
+      "unit_relative_path": "evidence/ATTEMPT_DEBITS/attempt_341e9c17e6b840e3a15b4cd847c2d40c.json",
+      "bytes": 12212,
+      "sha256": "62f7e7a693b3a3834a260467e0668895556471ff0dcf7781e0dfde1945463d25"
+    },
+    {
+      "role": "immutable_attempt_debit",
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/evidence/ATTEMPT_DEBITS/attempt_3893c01828d945b2a59b46e5fa60894b.json",
+      "unit_relative_path": "evidence/ATTEMPT_DEBITS/attempt_3893c01828d945b2a59b46e5fa60894b.json",
+      "bytes": 12080,
+      "sha256": "46d92e51fc3c9d4efa338ed63cd2e4ae7758aeb74af6e152207f101e37d5f988"
+    },
+    {
+      "role": "immutable_attempt_debit",
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/evidence/ATTEMPT_DEBITS/attempt_ac6d45dc306e4fd3954aaf5e82bcfcc0.json",
+      "unit_relative_path": "evidence/ATTEMPT_DEBITS/attempt_ac6d45dc306e4fd3954aaf5e82bcfcc0.json",
+      "bytes": 12067,
+      "sha256": "14b299512a70b60a3a9b943c94332e655965343a953d66f71d31a6755bc01798"
+    },
+    {
+      "role": "immutable_attempt_debit",
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/evidence/ATTEMPT_DEBITS/attempt_e57c32eaaac147bfbce36865cd817be6.json",
+      "unit_relative_path": "evidence/ATTEMPT_DEBITS/attempt_e57c32eaaac147bfbce36865cd817be6.json",
+      "bytes": 12145,
+      "sha256": "c7ae85bd3906509244f79fd0f42543ffc29efc5df2f83fb624672f9c7e90ac26"
+    },
+    {
+      "role": "immutable_attempt_debit",
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/evidence/ATTEMPT_DEBITS/attempt_ed0663e9b58f4d1ebaff7a186993772a.json",
+      "unit_relative_path": "evidence/ATTEMPT_DEBITS/attempt_ed0663e9b58f4d1ebaff7a186993772a.json",
+      "bytes": 12103,
+      "sha256": "8b033baf8c39fd45ec75eadd5ae478c108f34144f1e8f54838224d16e25cf756"
+    },
+    {
+      "role": "immutable_attempt_debit",
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/evidence/ATTEMPT_DEBITS/attempt_f50af4951f6d45aca26bb65efa05644e.json",
+      "unit_relative_path": "evidence/ATTEMPT_DEBITS/attempt_f50af4951f6d45aca26bb65efa05644e.json",
+      "bytes": 12060,
+      "sha256": "ddfcb13dc73bc754b845278ea84adc162e44fbe78a1a78c578d55d39ed9ba80b"
+    },
+    {
+      "role": "immutable_attempt_debit",
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/evidence/ATTEMPT_DEBITS/attempt_ff928b53aeb94050889f1213373c25e3.json",
+      "unit_relative_path": "evidence/ATTEMPT_DEBITS/attempt_ff928b53aeb94050889f1213373c25e3.json",
+      "bytes": 12006,
+      "sha256": "8131556c011fa8e9d9696b88d62dd16974da2e5906a753bbf2ff9e4406b846e6"
+    },
+    {
+      "role": "actual_runtime_receipt",
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/runs/controls_v1/RECEIPT.json",
+      "unit_relative_path": "runs/controls_v1/RECEIPT.json",
+      "bytes": 12060,
+      "sha256": "ddfcb13dc73bc754b845278ea84adc162e44fbe78a1a78c578d55d39ed9ba80b"
+    },
+    {
+      "role": "actual_runtime_receipt",
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/runs/controls_v2/RECEIPT.json",
+      "unit_relative_path": "runs/controls_v2/RECEIPT.json",
+      "bytes": 12212,
+      "sha256": "62f7e7a693b3a3834a260467e0668895556471ff0dcf7781e0dfde1945463d25"
+    },
+    {
+      "role": "actual_runtime_receipt",
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/runs/independent_v1/RECEIPT.json",
+      "unit_relative_path": "runs/independent_v1/RECEIPT.json",
+      "bytes": 12103,
+      "sha256": "8b033baf8c39fd45ec75eadd5ae478c108f34144f1e8f54838224d16e25cf756"
+    },
+    {
+      "role": "actual_runtime_receipt",
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/runs/independent_v2/RECEIPT.json",
+      "unit_relative_path": "runs/independent_v2/RECEIPT.json",
+      "bytes": 12145,
+      "sha256": "c7ae85bd3906509244f79fd0f42543ffc29efc5df2f83fb624672f9c7e90ac26"
+    },
+    {
+      "role": "actual_runtime_receipt",
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/runs/plot_saved_v1/RECEIPT.json",
+      "unit_relative_path": "runs/plot_saved_v1/RECEIPT.json",
+      "bytes": 12047,
+      "sha256": "84b97bb93a23cec8ff277d2c62f50bb435da5a145144dc9d5aec080b6503c34f"
+    },
+    {
+      "role": "actual_runtime_receipt",
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/runs/prepare_v1/RECEIPT.json",
+      "unit_relative_path": "runs/prepare_v1/RECEIPT.json",
+      "bytes": 12006,
+      "sha256": "8131556c011fa8e9d9696b88d62dd16974da2e5906a753bbf2ff9e4406b846e6"
+    },
+    {
+      "role": "actual_runtime_receipt",
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/runs/primary_v1/RECEIPT.json",
+      "unit_relative_path": "runs/primary_v1/RECEIPT.json",
+      "bytes": 12080,
+      "sha256": "46d92e51fc3c9d4efa338ed63cd2e4ae7758aeb74af6e152207f101e37d5f988"
+    },
+    {
+      "role": "actual_runtime_receipt",
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/runs/primary_v2/RECEIPT.json",
+      "unit_relative_path": "runs/primary_v2/RECEIPT.json",
+      "bytes": 12067,
+      "sha256": "14b299512a70b60a3a9b943c94332e655965343a953d66f71d31a6755bc01798"
+    },
+    {
+      "role": "actual_preparation_receipt",
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/evidence/C04_HOST_ADMISSION_c4_pid_diagnostic_v1.json",
+      "unit_relative_path": "evidence/C04_HOST_ADMISSION_c4_pid_diagnostic_v1.json",
+      "bytes": 1056,
+      "sha256": "cfdf7a70453cdfbc1f67d2058a0da37bfdd5b8e22537bc239a1c4ad3669305fa"
+    },
+    {
+      "role": "actual_preparation_receipt",
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/evidence/C04_HOST_ADMISSION_c4_pid_diagnostic_v2.json",
+      "unit_relative_path": "evidence/C04_HOST_ADMISSION_c4_pid_diagnostic_v2.json",
+      "bytes": 1841,
+      "sha256": "4555c6374f52f0905d41067c72bbc27520842851f7590126cbde4fe9fa704a10"
+    },
+    {
+      "role": "actual_preparation_receipt",
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/evidence/C04_HOST_ADMISSION_c4_v1.json",
+      "unit_relative_path": "evidence/C04_HOST_ADMISSION_c4_v1.json",
+      "bytes": 9267,
+      "sha256": "200e8d9d5dbb342b501583f916ba0de113f26d5716a9ac7b848bb7ab4dce2824"
+    },
+    {
+      "role": "actual_preparation_receipt",
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/evidence/C04_HOST_ADMISSION_c4_v2.json",
+      "unit_relative_path": "evidence/C04_HOST_ADMISSION_c4_v2.json",
+      "bytes": 16094,
+      "sha256": "c8adb4b4b54994657129d0b33018c2e1443334be682e87f9e04e1876ea1e650b"
+    },
+    {
+      "role": "actual_preparation_receipt",
+      "path": "/workspace/scratch/865c84d871b7/bass_cr/research/cr_parent_event_native25_20261028/evidence/C04_HOST_ADMISSION_c4_v3.json",
+      "unit_relative_path": "evidence/C04_HOST_ADMISSION_c4_v3.json",
+      "bytes": 13989,
+      "sha256": "6dc9b596059d797a2d87cdf66b5696e7619df305e27c050f79384609da96d4b9"
+    }
+  ],
+  "author": {
+    "agent": "/root/theory_review",
+    "role": "metadata closeout author; original theory/reference author, not production author",
+    "independent_C9_review_claimed_by_this_file": false,
+    "root_review_status": "PENDING_ACTUAL_ROOT_REVIEW",
+    "metadata_assembly_CPU_s": null
+  }
+}

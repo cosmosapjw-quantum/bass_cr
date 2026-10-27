@@ -1,0 +1,75 @@
+--- release_parent.py_before_static_review
++++ release_parent.py_after_bounded_repair
+@@ -96,7 +96,61 @@
+ 
+ 
+ def public_bytes(raw):
+-    need(PRIVATE_BYTES.search(raw) is None, "SIGNED_TRANSPORT_CONTENT_REFUSED")
++    if PRIVATE_BYTES.search(raw) is None:
++        return
++
++    def immutable_contents_record(value):
++        # A public contents-API record is source evidence, not a signed link.
++        # Require its path/revision/blob endpoints to agree; no arbitrary URL
++        # or other download_url-shaped object receives this narrow exception.
++        if not isinstance(value, dict) or value.get("type") != "file":
++            return False
++        url, path, blob = (value.get(k) for k in ("download_url", "path", "sha"))
++        if not all(isinstance(v, str) for v in (url, path, blob)):
++            return False
++        parsed = urllib.parse.urlsplit(url)
++        parts = parsed.path.split("/", 4)
++        if (parsed.scheme != "https" or parsed.netloc != "raw.githubusercontent.com"
++                or parsed.query or parsed.fragment or len(parts) != 5
++                or parts[1] != "cosmosapjw-quantum"
++                or re.fullmatch(r"[A-Za-z0-9_.-]+", parts[2]) is None
++                or re.fullmatch(r"[0-9a-f]{40}", parts[3]) is None
++                or re.fullmatch(r"[0-9a-f]{40}", blob) is None):
++            return False
++        repo, revision = parts[2:4]
++        if (not path or urllib.parse.unquote(parts[4]) != path
++                or any(p in ("", ".", "..") for p in path.split("/"))
++                or "\\" in path or any(ord(c) < 32 or ord(c) == 127 for c in path)
++                or value.get("name") != path.rsplit("/", 1)[-1]
++                or type(value.get("size")) is not int or value["size"] < 0):
++            return False
++        api_url = value.get("url")
++        if not isinstance(api_url, str):
++            return False
++        api = urllib.parse.urlsplit(api_url)
++        return (api.scheme == "https" and api.netloc == "api.github.com"
++                and urllib.parse.unquote(api.path)
++                == f"/repos/cosmosapjw-quantum/{repo}/contents/{path}"
++                and api.query == "ref=" + revision and not api.fragment
++                and value.get("git_url")
++                == f"https://api.github.com/repos/cosmosapjw-quantum/{repo}/git/blobs/{blob}")
++
++    def inspection_copy(value):
++        if isinstance(value, list):
++            return [inspection_copy(v) for v in value]
++        if isinstance(value, dict):
++            allowed = immutable_contents_record(value)
++            return {k: None if k == "download_url" and allowed else inspection_copy(v)
++                    for k, v in value.items()}
++        return value
++
++    try:
++        inspected = encode(inspection_copy(decode(raw)))
++    except (ValueError, TypeError, UnicodeError):
++        raise Refusal("SIGNED_TRANSPORT_CONTENT_REFUSED") from None
++    # Inspection uses a temporary copy only; callers retain the exact original
++    # raw bytes. Signed URL keys and token/signature patterns remain forbidden.
++    need(PRIVATE_BYTES.search(inspected) is None, "SIGNED_TRANSPORT_CONTENT_REFUSED")
+ 
+ 
+ def safe_name(name):
+@@ -191,7 +245,8 @@
+ def git(repo, *args):
+     # Read-only local object operations only; never fetch missing objects.
+     result = subprocess.run(["git", "-C", str(absolute(repo)), *args],
+-                            capture_output=True, check=False)
++                            capture_output=True, check=False,
++                            env={**os.environ, "GIT_NO_LAZY_FETCH": "1"})
+     need(result.returncode == 0, "LOCAL_GIT_OBJECT_UNAVAILABLE_OR_READ_FAILED")
+     return result.stdout
+ 
