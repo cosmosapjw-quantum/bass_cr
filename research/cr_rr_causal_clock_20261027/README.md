@@ -1,5 +1,5 @@
 # CR causal RR clock
 
-Central **27/88**, this loop **3/20** through R03.
+Central **27/88**, this loop **4/20** through R04.
 
 See [RESEARCH_CONTRACT.md](RESEARCH_CONTRACT.md), [LOOP_LEDGER.json](LOOP_LEDGER.json) and stage-specific actual [publication receipts](publication). Source-qualified HeIII pulse response on the exact saved operator; old science replay0; heating and N6/N7 gates unchanged.
