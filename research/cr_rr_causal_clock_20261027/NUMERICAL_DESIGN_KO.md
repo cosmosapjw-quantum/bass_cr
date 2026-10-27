@@ -51,7 +51,7 @@ LAPACK은 FP64 근사해만 생산한다. 인증은 실제 반환된 finite vect
 로 계산한다. 양의 최종 연산은 최대 4회이며
 \((1-u)^4(1+G)>1\)이므로 마지막 inflation은 그 연산이 아래로 반올림한 경우까지 덮는다. 따라서 \(\widehat b_i\ge|\rho_i|/h_i\). row마다 nextafterl을 여러 번 호출하지 않아도 되는 이유다. G는 경험적 tolerance가 아니라 위 roundoff inequality에 여유를 둔 상수다.
 
-0<S인 경우 필요한 내부 값은 normal long double이어야 한다. binary64 operands의 product exponent는 넓은 extended exponent 범위 안에 있고, n<=20000, m<=8192, supported exponent limits와 양의 binary64 beta/gamma에서 모든 certificate intermediates도 범위 안에 든다. 실제 nonfinite/invalid bound는 fail한다. FP64 solver의 underflow 효과는 exact-target residual에 포함되며 양의 small tail을 0으로 인증하지 않는다.
+0<S인 short residual row bound는 normal long double이어야 한다. 그 primitive의 binary64 operand products와 reciprocal-witness scaling은 넓은 extended exponent 범위에서 평가하며 실제 비정상 range는 fail한다. 그러나 반복되는 epsilon error certificate는 m이 커지면 LD underflow에 이를 수 있다. 따라서 positive operands의 umul/udiv 결과가 rounded0이면 nextafterl(0,+infinity)를 upper로 반환한다. 정확히 0인 입력의 분기만 0을 유지한다. 0이 아닌 subnormal 결과에도 다음 representable upper를 취한다. FP64 solver의 underflow 효과는 exact-target residual에 포함되며 양의 small tail을 0으로 인증하지 않는다.
 
 Witness \(Kh\)와 generic dot products에는 nominal sum ± explicit error를 만든 뒤 scalar nextafterl을 적용한다. n-term dot의 absolute bound 계수는 \(4(n+1)\varepsilon\), m-term accumulated vector의 계수는 \(4(m+1)\varepsilon\)다. 이 계수들은 \(\gamma_{2n}/(1-\gamma_{2n})\), \(\gamma_m/(1-\gamma_m)\)보다 크며 이 workload에서 \(n\varepsilon,m\varepsilon\ll1\)이다. 이 두 계수와 short-dot G의 구별을 코드에 유지한다.
 
@@ -96,4 +96,16 @@ horizon lower/upper는 native A/P bounds와 q_upper binary64를 **exact Fraction
 이며 각 단계는 2 RHS다. 모든 행 수를 2479로 잡은 단순 upper planning estimate는 약 \(4.04\times10^8\) row/RHS residual evaluations다. 실제 case 행 수는 C4 input metadata로 확인해야 한다. 이 수치는 성능 측정이 아니며 primary30 CPU-second 적합성은 아직 입증하지 않았다. native loop, inverse-witness precompute, clock 끝 source contraction은 이 비용을 줄이기 위한 실제 설계다. Parent runner가 reservation·wall guard를 적용하며 workload 변경은 실행 전 계약에서만 한다.
 
 C4 이후 필요한 검증은 LP64 scalar solve control, native arithmetic guard, invalid signs/shape, zero reward, exact scalar Erlang identity, finite matrix controls, saved witness 실제 통과, 선택 m4 Decimal70 recurrence 비교다. 실제 primary certified width가 넓으면 넓은 결과를 남긴다. H1/HeI replay, new source history, physical heating/cascade 완료 또는 전역 오차는 주장하지 않는다.
+
+## 8. 동결 계약과 준비 검증
+
+부모의 R9 CODING_CONTRACT.json을 실제로 읽었다. finest clock width/all-time upper <=0.30, arithmetic scalar radius/all-time upper <=1e-4, grid endpoint difference <=0.005, domain endpoint difference <=1e-5, independent own-column relative <=5e-10 및 exact reference inclusion 기준은 그대로다. 엔진이 임의 tolerance로 결과를 좁히거나 기준을 바꾸지 않는다. 여러 level interval의 교차와 시간 monotonic tightening은 raw source_rows를 받아 부모 runner가 수행한다.
+
+후보 생성 뒤 C++를 strict flags의 -fsyntax-only로 검사했고 exit0, build CPU 1.11162 s, wall 1.117081884 s, compiler max RSS 70,260 KiB를 관측했다. Python은 AST parse만 수행했고 metadata CPU 0.018992557 s, 문법 검사가 통과했다. Python import/native load/link/수치 검사 또는 실제 NPZ 입력 실행을 수행한 것은 아니다. 이 준비 CPU를 과학 실행 0회와 혼동하지 않는다. 생산 library build와 ABI control은 C4 이후의 별도 실제 영수증을 필요로 한다.
+
+Exporter 호환 clock metadata는 time_units=proper_s, gamma_units=s^-1 및 records를 사용한다. a_numerator/a_denominator는 Python 정수이며, exact a_fraction 문자열도 보존한다. C9 metadata는 root가 case/T_s/clock_label/delta를 붙이고 source_id를 z로 대응한다. qualification arrays는 이미 합의한 축 순서로 반환한다.
+
+C5 전 static 검토에 따라 scalar 입력은 Python/NumPy 정수·실수만 받으며 bool/np.bool_, 문자열, 일반 변환 가능 객체를 거부한다. 정수는 변환 뒤 exact Fraction 동등성을 확인해 binary64 표현에서 시간·rate 값이 조용히 바뀌지 않도록 한다. 표준 변환 오류도 ClockError로 통일한다. 수식·허용오차·native kernel에는 변화가 없다.
+
+C9 static finding F1은 positive epsilon 곱·나눗셈의 LD rounded0을 exact0처럼 처리하던 경우다. umul/udiv만 위와 같이 보강했고 threshold는 유지했다. C6의 새 표적 control은 n=1, d=2^1023, r=gamma=2^-1074, h=w=1, m=8이며 마지막 epsilon/radius가 양의 upper로 남는지 확인한다. 이 문서 수정 시점에는 해당 control 또는 다른 과학 입력을 실행하지 않았다. 앞 scalar 입력 hardening과 구분되는 native 범위 수정이다.
 
