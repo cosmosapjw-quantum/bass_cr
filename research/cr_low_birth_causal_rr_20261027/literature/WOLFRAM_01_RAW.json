@@ -1,0 +1,37 @@
+{
+  "query": {
+    "id": "W01_INVENTORY_AND_THERMAL_BOOKKEEPING",
+    "tool": "mcp__codex_apps__wolfram_wolframlanguageevaluator",
+    "input": {
+      "timeConstraint": 8,
+      "code": "ClearAll[nb,rh,rhe,nc,cv,kb,t0,qc,uc]; inv={Together[140+4*(1085/94)],Together[(140+1085/94)/100],Together[((140+1085/94)/100)/(140+4*(1085/94))]}; rr=Together[-(rh+rhe)/nb-(-(rh+rhe)/nb)]; cut=Together[0-(-nc/nb)-nc/nb]; dtemp=(qc+uc-3*kb*t0*nc/2)/(cv+3*kb*nc/2); therm=Together[(cv+3*kb*nc/2)*(t0+dtemp)-(cv*t0+qc+uc)]; {inv,rr,cut,therm}"
+    },
+    "manual_expected": [
+      [
+        "8750/47",
+        "2849/1880",
+        "407/50000"
+      ],
+      0,
+      0,
+      0
+    ],
+    "claim_scope": "Exact nominal H1/He4 inventory and event-local algebra only. Does not supply missing source parent chemistry or a coupled thermal history."
+  },
+  "actual_result": {
+    "status": "fulfilled",
+    "value": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Out[1]= {{8750/47, 2849/1880, 407/50000}, 0, 0, 0}"
+        }
+      ],
+      "structuredContent": null,
+      "isError": false
+    }
+  },
+  "provider_CPU_s": null,
+  "prior_checks_replayed": false
+}
+

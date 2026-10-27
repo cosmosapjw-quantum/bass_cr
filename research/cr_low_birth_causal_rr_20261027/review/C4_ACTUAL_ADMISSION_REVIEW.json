@@ -1,0 +1,292 @@
+{
+  "schema": "CR_LOW_BIRTH_C4_ACTUAL_ADMISSION_INDEPENDENT_REVIEW_V1",
+  "unit": "CR_PHYS02_LOW_BIRTH_CAUSAL_RR_V1",
+  "reviewer": "/root/theory_review",
+  "verdict": "PASS_ACTUAL_C4_V2_METADATA_AND_ACCOUNTING",
+  "scope": "Read-only byte/schema/accounting verification of saved admission; no scientific execution or production imports",
+  "reviewer_authorship": "theory_and_reference_author_not_runner_or_production_author",
+  "checked_files": {
+    "budget": {
+      "path": "EXECUTION_BUDGET.json",
+      "bytes": 2938,
+      "sha256": "a3d227314d734abbaed459193c727588f6e5784aae5ae38bc5d75352f33382c5"
+    },
+    "host_admission": {
+      "path": "evidence/C04_HOST_ADMISSION_V2.json",
+      "bytes": 5858,
+      "sha256": "15b2c3cdf5acc6d89188bdccef596b5ce8618de9d44eaf999ec96135d8dda477"
+    },
+    "code_manifest": {
+      "path": "evidence/C04_CODE_MANIFEST_V2.json",
+      "bytes": 1529,
+      "sha256": "bcb4ed4d163d12b469693250fc9b07435bbaac80ab79639140e3c1c2faa9bd69"
+    },
+    "preparation_ledger": {
+      "path": "evidence/C04_PREPARATION_LEDGER_V2.json",
+      "bytes": 1355,
+      "sha256": "400e3768d6134d00a026835b2c5bc54b8b55489ebde6bd7beb31fcef85b4cac1"
+    }
+  },
+  "checks": [
+    {
+      "check": "budget_exact_requested_SHA",
+      "pass": true,
+      "detail": {
+        "path": "EXECUTION_BUDGET.json",
+        "bytes": 2938,
+        "sha256": "a3d227314d734abbaed459193c727588f6e5784aae5ae38bc5d75352f33382c5"
+      }
+    },
+    {
+      "check": "unit_status_and_host_schema",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "budget_host_code_PREP_pins",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "all_frozen_scientific_code_bytes_and_coverage",
+      "pass": true,
+      "detail": {
+        "members": 9
+      }
+    },
+    {
+      "check": "reviewed_runner_controls_reference_identity",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "source_payload_and_provider_pins",
+      "pass": true,
+      "detail": [
+        {
+          "path": "research/cr_proper_injection_20261027/runs/actual_v1/ACTUAL_SOURCE_RECORDS.json",
+          "sha256": "8fca44c378844029a72253179e557dfa97f6cca8e0f9d6e677d67919ca3797cf",
+          "match": true
+        },
+        {
+          "path": "research/cr_low_birth_causal_rr_20261027/inputs/reused/c23b/data/verner_photo.dat",
+          "sha256": "a53e73b0af4cc6b801aef67b84bd964e3ed8c9c4992f214e4a69dc7e4443f389",
+          "match": true
+        },
+        {
+          "path": "research/cr_low_birth_causal_rr_20261027/inputs/reused/c23b/spectral_photo_source.py",
+          "sha256": "71b7e3a6b6f1c68ec15bcb19b98014bc025ef595f53df29703f11e25f36f4a8d",
+          "match": true
+        }
+      ]
+    },
+    {
+      "check": "actual_admission_script_pin",
+      "pass": true,
+      "detail": "10065a1634f4197213ee2b3a243bbc342aaa64d3f81e7a88a845f5cda15aca87"
+    },
+    {
+      "check": "five_unique_actual_PREP_receipts_once",
+      "pass": true,
+      "detail": {
+        "count": 5,
+        "sum_s": 1.936505
+      }
+    },
+    {
+      "check": "PREP_total_and_budget_baseline",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "v1_failed_host_original_preserved",
+      "pass": true,
+      "detail": {
+        "v1_cost_s": 0.251963,
+        "original_live_path_still_valid": true
+      }
+    },
+    {
+      "check": "v2_saved_counter_formula_arithmetic",
+      "pass": true,
+      "detail": {
+        "candidate_bytes": 6130843648,
+        "half_credit_bytes": 3065421824,
+        "available_estimate_bytes": 3320475648,
+        "old_estimate_same_counters_bytes": 878891008
+      }
+    },
+    {
+      "check": "actual_memory_gate_and_unchanged_limits",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "estimate_not_guarantee_and_no_setting_change",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "same_unit_failure_inclusive_nominal_budget",
+      "pass": true,
+      "detail": {
+        "nominal_worker_s": 33.0,
+        "nominal_coordinator_s": 4.0,
+        "actual_PREP_s": 1.936505,
+        "nominal_inclusive_s": 38.936505,
+        "unallocated_nominal_s": 1.0634950000000032
+      }
+    },
+    {
+      "check": "no_science_claim_promoted",
+      "pass": true,
+      "detail": null
+    }
+  ],
+  "passed_checks": 15,
+  "total_checks": 15,
+  "code_rows": [
+    {
+      "path": "implementation/controls.py",
+      "sha256": "7a85e0549f1a0a8a529c2bd17d6ca242de2495f208710057b5190723fed08894",
+      "bytes": 20721,
+      "match": true
+    },
+    {
+      "path": "implementation/model.py",
+      "sha256": "096359f2547d2c7a9ed23da94f3257821658a69e917c38d16fe3f786ab5b6ab5",
+      "bytes": 13143,
+      "match": true
+    },
+    {
+      "path": "implementation/plot_saved.py",
+      "sha256": "2dbffa12daae2ed084d31501e001f3963569f282e903f34b43abf3abaeca7501",
+      "bytes": 5022,
+      "match": true
+    },
+    {
+      "path": "implementation/ports.py",
+      "sha256": "3c11c5fe215f2c18d231b31cee270154dbbe238aad66affc85417f06a1779dac",
+      "bytes": 10155,
+      "match": true
+    },
+    {
+      "path": "implementation/prepare.py",
+      "sha256": "a440e67b577734e91455da5d3529087720678ad67429b5a6859164bdb5b0873d",
+      "bytes": 3895,
+      "match": true
+    },
+    {
+      "path": "implementation/primary.py",
+      "sha256": "eebeb9ce02cf9ab63e4bc9d33a56627fcee04366ecd663f34198eb3e50e83042",
+      "bytes": 14946,
+      "match": true
+    },
+    {
+      "path": "implementation/run_bounded.py",
+      "sha256": "629d14ab8dd93fe0b23fb6394038f061f4a3fc0642922d110788d67922e05d9f",
+      "bytes": 50219,
+      "match": true
+    },
+    {
+      "path": "implementation/uniformization.py",
+      "sha256": "065ce3ad523a7acfeca792fa06863ef4dfb4574db6aa42524f3c6b013d552d5e",
+      "bytes": 9763,
+      "match": true
+    },
+    {
+      "path": "review/independent_reference.py",
+      "sha256": "b02b30515d24a21722475ca522ad79b94609fd2fdc9575ef4978cad076f41db4",
+      "bytes": 33201,
+      "match": true
+    }
+  ],
+  "actual_preparation_receipts": [
+    {
+      "path": "evidence/C04_HOST_ADMISSION.json",
+      "bytes": 3044,
+      "sha256": "984ca86fd5540a6ef04b8e198c60aafdf174457b231127d59520d5dd53838519",
+      "charged_CPU_s": 0.251963,
+      "unique": true,
+      "byte_cost_unit_match": true,
+      "measured_plus_tail_match": true,
+      "actual_measured_field": "preparation_process_CPU_through_receipt_s",
+      "actual_measured_process_CPU_s": 0.201963,
+      "actual_receipt_tail_s": 0.05
+    },
+    {
+      "path": "evidence/C04_OWNED_CACHE_RECLAIM_V1.json",
+      "bytes": 1489,
+      "sha256": "ffb30038d77a5fc7027f45757ca99e477ff51ed9173a3de0af9de54c224d7efd",
+      "charged_CPU_s": 0.198262,
+      "unique": true,
+      "byte_cost_unit_match": true,
+      "measured_plus_tail_match": true,
+      "actual_measured_field": "measured_process_CPU_through_receipt_s",
+      "actual_measured_process_CPU_s": 0.148262,
+      "actual_receipt_tail_s": 0.05
+    },
+    {
+      "path": "evidence/C04_RUNTIME_CACHE_RECLAIM_V2.json",
+      "bytes": 1239,
+      "sha256": "3575467864e8fe65e639c6d3b4c1768744e9879261d57121810971cc9923b619",
+      "charged_CPU_s": 1.119878,
+      "unique": true,
+      "byte_cost_unit_match": true,
+      "measured_plus_tail_match": true,
+      "actual_measured_field": "measured_process_CPU_through_receipt_s",
+      "actual_measured_process_CPU_s": 1.0698779999999999,
+      "actual_receipt_tail_s": 0.05
+    },
+    {
+      "path": "evidence/C04_CONTAINER_CACHE_RECLAIM_V3.json",
+      "bytes": 1063,
+      "sha256": "037ff07556649385b1659f89e65094faa4b3edc035a21b3b770ab80263447ce8",
+      "charged_CPU_s": 0.14433200000000002,
+      "unique": true,
+      "byte_cost_unit_match": true,
+      "measured_plus_tail_match": true,
+      "actual_measured_field": "process_CPU_through_receipt_s",
+      "actual_measured_process_CPU_s": 0.094332,
+      "actual_receipt_tail_s": 0.05
+    },
+    {
+      "path": "evidence/C04_HOST_ADMISSION_V2.json",
+      "bytes": 5858,
+      "sha256": "15b2c3cdf5acc6d89188bdccef596b5ce8618de9d44eaf999ec96135d8dda477",
+      "charged_CPU_s": 0.22207,
+      "unique": true,
+      "byte_cost_unit_match": true,
+      "measured_plus_tail_match": true,
+      "actual_measured_field": "preparation_process_CPU_through_receipt_s",
+      "actual_measured_process_CPU_s": 0.17207,
+      "actual_receipt_tail_s": 0.05
+    }
+  ],
+  "actual_charged_preparation_CPU_s": 1.936505,
+  "v2_admission_CPU_s": 0.22207,
+  "old_failed_context_preserved": true,
+  "all_resource_attempts_pass": false,
+  "scientific_code_or_manifest_edits": 0,
+  "scientific_code_execution_import_compile": 0,
+  "fresh_live_memory_probe_by_reviewer": false,
+  "actual_worker_peak_RSS": null,
+  "numerical_science_acceptance": null,
+  "remaining_limitations": [
+    "C4 memoryPASS is the versioned non-atomic policy estimate, not guaranteed reclaim or memory safety.",
+    "Actual scientific/control/reference/plot receipts and finalC9 remain separate.",
+    "No old allowance carry or hard aggregate CPU proof; failures remain retained.",
+    "Metadata/research-tool CPU is not measured as zero and is outside local scientific/dispatcher CPU accounting."
+  ],
+  "central_completed": 27,
+  "central_total": 88,
+  "central_count_effect": 0,
+  "global_remaining": null,
+  "review_only_schema_read_correction": {
+    "initial_record_path": "review/C4_ACTUAL_ADMISSION_REVIEW_INITIAL_SCHEMA_READ.json",
+    "initial_record_sha256": "b96da07106b76a3d4ab3fe27a09da1012575c464ac0cd877006648e7b79fea60",
+    "reason": "Reviewer metadata checker initially omitted measured_process_CPU_through_receipt_s alias used by two cache-hint schemas; actual raw measured+tail arithmetic is consistent. Original review preserved and only reviewer field mapping corrected.",
+    "underlying_input_budget_manifest_or_science_changed": false,
+    "scientific_failure_or_rerun": false
+  }
+}

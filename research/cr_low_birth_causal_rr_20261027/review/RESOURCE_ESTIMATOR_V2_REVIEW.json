@@ -1,0 +1,177 @@
+{
+  "schema": "CR_LOW_BIRTH_RESOURCE_ESTIMATOR_INDEPENDENT_REVIEW_V2",
+  "unit": "CR_PHYS02_LOW_BIRTH_CAUSAL_RR_V1",
+  "reviewer": "/root/theory_review",
+  "observed_date_utc": "2026-10-27",
+  "verdict": "ADMISSIBLE_AS_VERSIONED_RESOURCE_ESTIMATOR_NOT_A_RECLAIM_GUARANTEE",
+  "code_static_review_status": "PASS_SCOPED_STATIC_PENDING_LIVE_C4_AND_RUNTIME",
+  "blocking_static_findings_remaining": 0,
+  "fresh_C4_v2_host_admission": null,
+  "actual_worker_peak_RSS": null,
+  "scientific_workers_executed_by_reviewer": 0,
+  "code_import_compile_or_control_execution_by_reviewer": 0,
+  "system_resource_settings_changed_by_reviewer": false,
+  "scope": "Read-only primary-source assessment and static review; no code mutation, launch, cache pressure experiment, cgroup write or process signalling",
+  "author_roles": {
+    "reviewer_authored_theory_and_independent_reference": true,
+    "reviewer_authored_production_math_or_runner": false,
+    "implementation_author": "/root/implementation",
+    "root_owns_new_context_freeze_and_live_admission": true
+  },
+  "final_code_static_review": {
+    "runner": {
+      "path": "implementation/run_bounded.py",
+      "bytes": 50219,
+      "sha256": "629d14ab8dd93fe0b23fb6394038f061f4a3fc0642922d110788d67922e05d9f"
+    },
+    "controls": {
+      "path": "implementation/controls.py",
+      "bytes": 20721,
+      "sha256": "7a85e0549f1a0a8a529c2bd17d6ca242de2495f208710057b5190723fed08894"
+    },
+    "preserved_v1_runner_sha256": "07c6c78d274654c29910d5be3e91954ee01db2072981147377873478e663ce56",
+    "method": "Read complete bounded diff against preservedv1; inspect pure helper, receipt pinning and six new control fixtures; hash unchanged scientific files without importing or running them",
+    "checks": [
+      "Pure memory_estimate_v2 contains no OS I/O and implements the exact frozen min/exclusion/half-credit formula with integer floor.",
+      "Required counters must be present, integer and nonnegative; invalid data fails closed. Signed raw headroom, raw counters and the old estimate remain in output.",
+      "Host-cap and unlimited-cgroup cases do not double-add cache credit. Required worker plus reserve is unchanged and counter output expressly denies a lower-bound certificate.",
+      "Six targeted synthetic fixtures cover zero and negative headroom, odd half-credit floor, exclusions and raw-counter retention, host cap/unlimited case, exact256MiB+1GiB boundary and missing counter/shmem clamp. They are source-only, not executed PASS evidence.",
+      "The same-unit preparation baseline now requires a pinned manifest with exact receipt bytes/SHA, unique resolved unit-local regular paths, exact unit and actual charged_preparation_CPU_s fields. Foreign/old-transfer flags are refused and fsum must agree with manifest total and budget baseline within1e-12.",
+      "Preparation manifest validation occurs at initial and final admission; verified manifest identity and rows enter receipts. Existing immutable attempt max-debit reconciliation and fixed baseline consistency are unchanged.",
+      "Model, uniformization, ports, primary, prepare, plot_saved and independent_reference hashes all equal their preservedv1 bytes. No physics or numerical criterion change was observed."
+    ],
+    "cost_manifest_assembly_note": "If the live C04_HOST_ADMISSION.json path is used forv2, the old0.251963 receipt must be pinned at its preservedv1 path rather than the overwritten live path. Actual new manifest and fresh host admission remain root-owned and unexecuted at this static verdict.",
+    "actual_counter_controls_executed": 0,
+    "actual_new_memory_admission_result": null,
+    "hard_memory_or_aggregate_CPU_proof": false
+  },
+  "recommended_estimator": {
+    "version": "C4_FILE_LRU_ESTIMATOR_V2",
+    "file_lru_bytes": "active_file + inactive_file",
+    "non_shmem_file_cap_bytes": "max(0, file - shmem)",
+    "candidate_clean_unmapped_file_bytes": "C = max(0, min(max(0, file-shmem), active_file+inactive_file) - file_mapped - file_dirty - file_writeback - unevictable)",
+    "credited_reclaim_bytes": "C // 2",
+    "finite_cgroup_available_estimate_bytes": "max(0, memory.max-memory.current + credited_reclaim_bytes)",
+    "admissible_available_estimate_bytes": "min(host_MemAvailable, finite_cgroup_available_estimate_bytes)",
+    "unlimited_cgroup_rule": "Use host_MemAvailable only when memory.max=max; do not add cache credit to it",
+    "required_worker_plus_reserve_bytes": 1342177280,
+    "selected_worker_memory_bytes": 268435456,
+    "fixed_worker_upper_cap_bytes": 536870912,
+    "fixed_host_reserve_bytes": 1073741824,
+    "local_failure_inclusive_CPU_cap_s": 40,
+    "signed_raw_headroom_preserved": true,
+    "old_clean_inactive_only_estimate_preserved": true,
+    "all_raw_counters_and_formula_version_recorded": true,
+    "missing_or_invalid_required_counters": "Fail closed; do not replace unknown counters with zero",
+    "half_credit_status": "Prospective policy haircut fixed before any scientific worker; not a kernel guarantee, fitted probability or proven lower bound"
+  },
+  "reasoning": [
+    "Active and unevictable are different LRU classifications. Primary documentation and kernel source allow eligible active file folios to be deactivated and reclaimed; inactive-only counting can omit usable clean file cache.",
+    "The type-based file counter includes shmem while file LRU counters classify pages differently. Taking the minimum with non-shmem file avoids treating shmem or unrelated file accounting as an additional reclaim credit.",
+    "Subtracting mapped, dirty, writeback and unevictable amounts excludes or conservatively over-excludes categories with additional reclaim obstacles. These counters can overlap; the subtraction is an intentionally pessimistic estimate, not an exact disjoint-set decomposition.",
+    "The fixed50percent haircut leaves half of the estimated candidate cache uncredited. It is an explicit resource policy margin independent of the amount needed to pass today's threshold.",
+    "The host MemAvailable cap is another estimate and prevents adding cgroup cache credit to a host-level figure that already contains cache availability. Signed cgroup headroom must be added before the final zero clamp.",
+    "The estimate does not establish that any specified bytes will actually be freed, immediately or before allocation pressure. Fresh admission, worker RLIMIT_AS, actual receipts and failure preservation remain necessary."
+  ],
+  "limitations": [
+    "Clean unmapped active file cache may still have transient references, pins, filesystem constraints or hot working-set demand. The counters do not identify every obstacle.",
+    "Unevictable documentation explicitly allows some not-yet-culled unevictable folios to remain temporarily on ordinary active/inactive lists; subtracting the unevictable counter cannot prove their absence.",
+    "Counters are not an atomic snapshot; parallel allocations, writeback and LRU transitions may change the situation after admission.",
+    "Reclaim may cause refaults, CPU or I/O latency. No kernel background CPU or reclaim-time bound is inferred.",
+    "The host version string matches the fetched stable tag, but running kernel build configuration, custom patches and enabled reclaim path are not independently identified.",
+    "A50percent policy allowance is not an outward lower bound on immediately allocatable memory. No hard memory or aggregate CPU safety proof is claimed.",
+    "The old failed memory gate is not retroactively converted to PASS; only a separately frozenv2 context may be evaluated."
+  ],
+  "preserved_actual_evidence": {
+    "v1_host_admission": {
+      "path": "evidence/C04_ADMISSION_V1_PRESERVED/evidence_C04_HOST_ADMISSION.json",
+      "original_path": "evidence/C04_HOST_ADMISSION.json",
+      "sha256": "984ca86fd5540a6ef04b8e198c60aafdf174457b231127d59520d5dd53838519",
+      "memory_gate": "FAIL",
+      "old_estimated_available_bytes": 838250496,
+      "required_bytes": 1342177280,
+      "charged_preparation_CPU_s": 0.251963,
+      "scientific_workers_before_admission": 0,
+      "observed_kernel_platform": "Linux-6.18.55-x86_64-with-glibc2.39"
+    },
+    "resource_cost_manifest": {
+      "path": "evidence/PREWORKER_RESOURCE_COSTS.json",
+      "actual_charged_total_CPU_s_at_review": 1.714435,
+      "all_resource_attempts_pass": false,
+      "old_budgets_transferred": false,
+      "metadata_discovery_and_research_tool_CPU": "NOT_MEASURED_NOT_ZERO; outside local scientific/dispatcher CPU accounting"
+    },
+    "container_reclaim_attempt": {
+      "path": "evidence/C04_CONTAINER_CACHE_RECLAIM_V3.json",
+      "sha256": "037ff07556649385b1659f89e65094faa4b3edc035a21b3b770ab80263447ce8",
+      "error": "EROFS on memory.reclaim",
+      "charged_preparation_CPU_s": 0.14433200000000002,
+      "persistent_resource_limits_changed": false,
+      "processes_signalled": 0,
+      "kernel_background_CPU_s": null
+    },
+    "v1_source_and_admission_snapshot": "evidence/C04_ADMISSION_V1_PRESERVED/PRESERVATION_MANIFEST.json",
+    "new_scientific_numerical_failure": false
+  },
+  "primary_source_acquisition_receipt": {
+    "acquisition_completed_utc": "2026-10-27 13:31:24 UTC",
+    "original_kernel_source_redistributed": false,
+    "sources": [
+      {
+        "url": "https://docs.kernel.org/admin-guide/cgroup-v2.html",
+        "retrieval": "web_run open and find; actual parsed primary text read",
+        "raw_original_byte_sha256": null,
+        "loci": ["memory.stat file/shmem/file_mapped/file_dirty/file_writeback and LRU counters", "memory.max and memory.reclaim"],
+        "supports": "Type versus list-based counters, reclaim on memory.max pressure, and no fixed successful byte amount guaranteed by proactive reclaim"
+      },
+      {
+        "url": "https://docs.kernel.org/mm/unevictable-lru.html",
+        "retrieval": "web_run open and find; actual parsed primary text read",
+        "raw_original_byte_sha256": null,
+        "loci": ["Unevictable LRU folio list", "Memory Control Group Interaction", "Page Reclaim in shrink_*_list"],
+        "supports": "Active versus unevictable distinction and possibility of temporarily uncullled unevictable folios on ordinary LRU lists"
+      },
+      {
+        "url": "https://docs.kernel.org/filesystems/proc.html",
+        "retrieval": "web_run open and find; actual parsed primary text read",
+        "raw_original_byte_sha256": null,
+        "loci": ["meminfo: MemAvailable, Active, Inactive, Unevictable"],
+        "supports": "MemAvailable is an estimate using file LRU lists; active memory is ordinarily retained unless necessary, not categorically unreclaimable"
+      },
+      {
+        "url": "https://github.com/gregkh/linux/blob/v6.18.55/mm/vmscan.c",
+        "repository": "gregkh/linux",
+        "ref": "v6.18.55",
+        "path": "mm/vmscan.c",
+        "git_blob_sha1_returned_by_provider": "2c66fbcd6e84504d308e8f36be01cf5c5c60cb8f",
+        "retrieval": "GitHub fetch_file connector; full UTF-8 source returned and relevant functions inspected",
+        "returned_character_count": 224349,
+        "independently_recomputed_raw_SHA256": null,
+        "loci": ["shrink_active_list, source lines2132-2224", "shrink_list active/inactive dispatch"],
+        "supports": "Eligible active folios are deactivated to the inactive list; unevictable folios are diverted. This is mechanism evidence, not proof of this workload's reclaim success."
+      },
+      {
+        "url": "https://github.com/torvalds/linux/blob/v6.12/mm/vmscan.c",
+        "repository": "torvalds/linux",
+        "ref": "v6.12",
+        "git_blob_sha1_returned_by_provider": "28ba2b06fc7dc25c2b34402ba9c7128607dc8506",
+        "retrieval": "GitHub fetch_file connector; full UTF-8 source returned; earlier corroboration superseded for version matching byv6.18.55",
+        "returned_character_count": 215152,
+        "loci": ["shrink_active_list, source lines2034-2128"]
+      }
+    ],
+    "failed_or_unused_acquisitions_preserved": [
+      "web_run raw.githubusercontent.com/torvalds/linux/v6.12/mm/vmscan.c returned DisabledError",
+      "web_run github.com/torvalds/linux/blob/v6.12/mm/vmscan.c returned DisabledError; service-specific GitHub connector then succeeded",
+      "web_run git.kernel.org v6.12 vmscan tree URL was inaccessible",
+      "GitHub v6.12 mm/page_alloc.c was read to locate si_mem_available; symbol was absent and that file was not used as mechanism evidence"
+    ]
+  },
+  "no_goalpost_shift_conditions": [
+    "R1 worker upper bound, named256MiB limit,1GiB reserve,40CPU cap and physical numerical acceptance remain unchanged.",
+    "Version and freeze the new estimator/runner/code manifest and fresh host receipt before any scientific worker; do not alter v1 receipts or archived source.",
+    "The changed element is a resource-availability proxy whose inactive-only form was not frozen byR1; the proxy's inferential limits must remain explicit.",
+    "The same-unit1.714435 resource cost and new admission costs must enter a pinned preparation ledger exactly once. This is current-unit spent work, not transferred old allowance.",
+    "No cgroup limits, read-only mount, access control, numerical tolerance, source or bath identity is changed; no unrelated process is killed."
+  ]
+}

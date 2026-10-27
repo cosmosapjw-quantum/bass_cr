@@ -1,0 +1,290 @@
+{
+  "schema": "CR_LOW_BIRTH_PREEXECUTION_MATH_PORTS_STATIC_REVIEW_V1",
+  "unit": "CR_PHYS02_LOW_BIRTH_CAUSAL_RR_V1",
+  "observed_utc": "2026-10-27T13:12:47.729124+00:00",
+  "reviewer": "/root/source_qualification",
+  "verdict": "PASS_SCOPED_STATIC",
+  "independence": {
+    "production_code_author": false,
+    "independent_numerical_reference_author": false,
+    "main_theory_derivation_author": false,
+    "prior_roles": [
+      "source qualification",
+      "literature acquisition and qualification",
+      "R6 independent theory review"
+    ],
+    "disclosure": "Not a blind review: prior source/literature qualification and R6 theory review are disclosed. Production and numerical reference remain independently authored by other agents."
+  },
+  "scope": "Read-only static physics/math, units, source selection, finite history, ownership and RR/photon port review before C6.",
+  "method": [
+    "textual algebra and units comparison with frozen contract/theory",
+    "control-flow and output-semantic inspection",
+    "source/provider/implementation byte identities",
+    "review of authored controls as test plan, without execution"
+  ],
+  "reviewed_files": [
+    {
+      "path": "CONTRACT.md",
+      "bytes": 7761,
+      "sha256": "0766fa66e643de2b50d797fa94838cb989e69c8d3aaa47fe8c31673764757210",
+      "reviewed_as": "text only"
+    },
+    {
+      "path": "THEORY_KO.md",
+      "bytes": 40012,
+      "sha256": "d42d88d8adefa0a08f847f7a38440b038b5383ee68f3bfadb9cc5d5ddb18d026",
+      "reviewed_as": "text only"
+    },
+    {
+      "path": "THEORY_TO_CODE_KO.md",
+      "bytes": 8694,
+      "sha256": "7d3f696cb9b183220a32694b73936a5a0ffabc9f45650eb99c6bf56a8f679133",
+      "reviewed_as": "text only"
+    },
+    {
+      "path": "implementation/model.py",
+      "bytes": 13143,
+      "sha256": "096359f2547d2c7a9ed23da94f3257821658a69e917c38d16fe3f786ab5b6ab5",
+      "reviewed_as": "text only"
+    },
+    {
+      "path": "implementation/uniformization.py",
+      "bytes": 9763,
+      "sha256": "065ce3ad523a7acfeca792fa06863ef4dfb4574db6aa42524f3c6b013d552d5e",
+      "reviewed_as": "text only"
+    },
+    {
+      "path": "implementation/prepare.py",
+      "bytes": 3895,
+      "sha256": "a440e67b577734e91455da5d3529087720678ad67429b5a6859164bdb5b0873d",
+      "reviewed_as": "text only"
+    },
+    {
+      "path": "implementation/ports.py",
+      "bytes": 10155,
+      "sha256": "3c11c5fe215f2c18d231b31cee270154dbbe238aad66affc85417f06a1779dac",
+      "reviewed_as": "text only"
+    },
+    {
+      "path": "implementation/primary.py",
+      "bytes": 14946,
+      "sha256": "eebeb9ce02cf9ab63e4bc9d33a56627fcee04366ecd663f34198eb3e50e83042",
+      "reviewed_as": "text only"
+    },
+    {
+      "path": "implementation/controls.py",
+      "bytes": 14789,
+      "sha256": "e3ca8921bc76f8905d68d634e3e41a0d477d51bce83bebcf2892c57de05bf18d",
+      "reviewed_as": "text only"
+    },
+    {
+      "path": "implementation/OUTPUT_SCHEMA.md",
+      "bytes": 4536,
+      "sha256": "bb70e0ee941540f951ac92673c343c0ceb0be915ebc23f826c6d13d83a4fc130",
+      "reviewed_as": "text only"
+    }
+  ],
+  "source_evidence": [
+    {
+      "repository_path": "research/cr_proper_injection_20261027/runs/actual_v1/ACTUAL_SOURCE_RECORDS.json",
+      "bytes": 4394309,
+      "sha256": "8fca44c378844029a72253179e557dfa97f6cca8e0f9d6e677d67919ca3797cf",
+      "numerical_evaluation_performed": false
+    },
+    {
+      "repository_path": "research/cr_source_binding_20261012/inputs/source_lineage/sources/research/cr_phys02b_20261010/src/causal_cascade.py",
+      "bytes": 19115,
+      "sha256": "d87a9cc122125b2d37b47f261f57eab698baa59e07a6b21723860f39313c7b72",
+      "numerical_evaluation_performed": false
+    },
+    {
+      "repository_path": "research/cr_low_birth_causal_rr_20261027/inputs/reused/c23b/spectral_photo_source.py",
+      "bytes": 10712,
+      "sha256": "71b7e3a6b6f1c68ec15bcb19b98014bc025ef595f53df29703f11e25f36f4a8d",
+      "numerical_evaluation_performed": false
+    },
+    {
+      "repository_path": "research/cr_low_birth_causal_rr_20261027/inputs/reused/c23b/data/verner_photo.dat",
+      "bytes": 17760,
+      "sha256": "a53e73b0af4cc6b801aef67b84bd964e3ed8c9c4992f214e4a69dc7e4443f389",
+      "numerical_evaluation_performed": false
+    }
+  ],
+  "analytic_checks": [
+    {
+      "id": "S01",
+      "topic": "Exact native birth source",
+      "locus": "model.source_arrays / validate_actual_source",
+      "result": "PASS_SCOPED_STATIC",
+      "reason": "Whole-file SHA/length, exact direct_0p1_10 tag, 3200 stored active atoms plus one separate cutoff atom, original family/partition and exact history are required. No current-energy subset of selected_total and no low_cross source is used."
+    },
+    {
+      "id": "S02",
+      "topic": "Count source and once-only normalization",
+      "locus": "model.validate_actual_source; model.source_arrays; prepare.main",
+      "result": "PASS_SCOPED_STATIC",
+      "reason": "Stored number coefficients [0,A_j] are used as number-density ramp amplitudes; source A is not divided by E. Proper-time/proper-volume Jacobians remain one, preincluded source target density is not multiplied again, and no additional angular/proper729 factor is applied."
+    },
+    {
+      "id": "S03",
+      "topic": "New same-state conditional inventory",
+      "locus": "model.inventory; ports.context_record / validate_context",
+      "result": "PASS_SCOPED_STATIC",
+      "reason": "New T=100 K H1/He4-only conditional inventory uses the frozen nH/nHe/ne/nb recipe. Donor and recipient inventory/frame/mapping must match. This does not rewrite PR109 nb=null or claim discovery of a complete physical baryon inventory."
+    },
+    {
+      "id": "S04",
+      "topic": "Coulomb prescription and constants",
+      "locus": "model.coefficient_arrays / constants_record",
+      "result": "PASS_SCOPED_STATIC",
+      "reason": "New CODATA2022 constants are consistently used. b=4*pi*kappa^2*ne/(me*v*eV_J)*min(log[v*E*eV_J/(kappa*omega)],log[2*E*eV_J/(hbar*omega)]) matches the retained quantum_constant=0 prescription. Positive Coulomb logs are required; this is a prescribed stopping model, not full thermal collision physics."
+    },
+    {
+      "id": "S05",
+      "topic": "Verner/Milne hazards and native support",
+      "locus": "model.photo_cm2 / coefficient_arrays; ports.CHANNELS",
+      "result": "PASS_SCOPED_STATIC",
+      "reason": "Native fit thresholds 13.60/24.59 and <=50000 eV are unchanged; H/He d factors are 1/4. Lambda uses ion density in m^-3, velocity in m/s and exactly one 1e-4 conversion from sigma_cm2 to m2. Thermal electron density is not an extra RR target factor. HeI residual-ion ground-channel qualification remains conditional."
+    },
+    {
+      "id": "S06",
+      "topic": "Downward generator and positive P",
+      "locus": "uniformization.uniformization_rate / propagate",
+      "result": "PASS_SCOPED_STATIC",
+      "reason": "d_j=b_j/(E_j-E_previous) with cutoff as predecessor of the first state. P diagonal is 1-(d+lambdaH+lambdaHe)/nu; successor[:-1]+=d[1:]/nu*power[1:] has the required column-oriented downward transition. Nu is nextafter(max exit,+infinity), and negativity/finiteness guards reject invalid chains."
+    },
+    {
+      "id": "S07",
+      "topic": "Positive ramp and occupancy weights",
+      "locus": "uniformization.ramp_occupancy_weights",
+      "result": "PASS_SCOPED_STATIC",
+      "reason": "Three backward positive cumulants produce w_k=sum_(n=k+2..M)(n-k-1)p_n/x^2 and v_k=sum_(n=k+3..M)choose(n-k-1,2)p_n/x^3. The last occupancy weight is zero-padded. Production uses t^2*w and t^3*v with the same M and no renormalization."
+    },
+    {
+      "id": "S08",
+      "topic": "Truncation and rare-channel bounds",
+      "locus": "uniformization.choose_cutoff / positive_tail / ramp_occupancy_weights; primary.prefix_tail / sum_tail",
+      "result": "PASS_SCOPED_STATIC",
+      "reason": "M-1 count and M-2 occupancy tail thresholds are correct. After F01 repair, reported fractions include the geometric positive remainder. Channel capture uses min(count bound,lambda_max*occupancy bound); kinetic/photon bounds use Emax and Emax+I. Direct-cutoff injection is excluded from the active-source tail. Bin bounds sum endpoint bounds. Ordinary floating-point evaluation is explicitly not an outward enclosure."
+    },
+    {
+      "id": "S09",
+      "topic": "Zero-generator and zero-source limits",
+      "locus": "uniformization.ramp_occupancy_weights / propagate; controls.main",
+      "result": "PASS_SCOPED_STATIC",
+      "reason": "The nu=0 branch requires zero rates and returns t^2*A/2 and t^3*A/6; no division by nu occurs. Zero source, one-channel, competing-channel and drift-only synthetic controls are authored. This is a static path inspection, not a claim those controls ran."
+    },
+    {
+      "id": "S10",
+      "topic": "Absolute clock and finite observation bins",
+      "locus": "primary.main / row_summary",
+      "result": "PASS_SCOPED_STATIC",
+      "reason": "All four prefixes use the same absolute source q(t)=t*A from zero. Bins use differences of actual prefix occupancy and active states, preserving prior survivors. Source integrals use (t1^2-t0^2)/2, not a reset local ramp. T endpoint is labelled known-history left limit; outside [0,T] remains unknown."
+    },
+    {
+      "id": "S11",
+      "topic": "Direct-cutoff versus drift-cutoff ownership",
+      "locus": "model.source_arrays; primary.row_summary",
+      "result": "PASS_SCOPED_STATIC",
+      "reason": "A_cutoff is not appended to the active RR state. Direct cutoff is analytic A_cutoff*(t1^2-t0^2)/2; drift cutoff is d_0*O_0. Both carry cutoff energy 0.1 eV. Coulomb reward sum b_j*O_j equals drift step-energy losses for the discrete model."
+    },
+    {
+      "id": "S12",
+      "topic": "Capture, photon and energy ledgers",
+      "locus": "primary.row_summary; ports.retained_port",
+      "result": "PASS_SCOPED_STATIC",
+      "reason": "Per-atom capture lambda_cj*O_j yields N, captured kinetic E_j*N_j, retained photon (E_j+I_c)*N_j and binding change -I_c*N. Count, kinetic and total energy closures include active changes, both cutoff sources and Coulomb caloric reward. Actual atom arrays are exported; photons are not inferred from only aggregate moments."
+    },
+    {
+      "id": "S13",
+      "topic": "Finite-event ownership",
+      "locus": "ports.claim_birth / claim_return; primary.main",
+      "result": "PASS_SCOPED_STATIC",
+      "reason": "One source birth claim and disjoint channel/bin claims use the physical source family, birth support and time intervals. Cumulative prefixes are nonadditive and cannot claim returns. Same-family overlapping birth/return intervals are rejected independently of producer revision. This specialized registry presumes the frozen admitted history/context and is not a universal merge of unrelated source histories."
+    },
+    {
+      "id": "S14",
+      "topic": "RR-only native25",
+      "locus": "ports.native25_rr; primary.row_summary",
+      "result": "PASS_SCOPED_STATIC",
+      "reason": "H1I/H1II indices 1/2 and He4I/He4II 10/11 receive opposite capture/nb; zeta21=-(CH+CHe)/nb, w_nt22=-(KH+KHe)*eV_J/nb, w_ext23=0 and logT24=0 frozen diagnostic. Delta nb=0 for these captures and q.DeltaY-Delta zeta=0. Source parent-ion chemistry, full_source_native25 and coupled state update remain null."
+    },
+    {
+      "id": "S15",
+      "topic": "Acceptance thresholds and truthful scope",
+      "locus": "primary.check_row / main; OUTPUT_SCHEMA.md",
+      "result": "PASS_SCOPED_STATIC",
+      "reason": "Closure and native thermal-electron residual targets are 1e-11; source-tail targets 1e-13; positive channel N/K/photon tail targets 1e-12 relative to each channel value. Independent reference target is 1e-9 and remains pending. No outward rounding, continuous-energy/model error bound, physical heating or global completion is asserted."
+    },
+    {
+      "id": "S16",
+      "topic": "Prepared identity and immutable scientific output",
+      "locus": "prepare.require_runner / main; primary.read_prepared / main",
+      "result": "PASS_SCOPED_STATIC",
+      "reason": "Preparation pins the frozen contract and provider/source identities; primary pins the actual PREPARATION digest, NPZ digest and member identities. New outputs are create-only. Entry points require the bounded runner reservation. Detailed aggregate runtime enforcement is separately reviewed by theory_review; this report does not grant C4 or execute C6."
+    }
+  ],
+  "analytic_check_count_is_not_executed_test_count": true,
+  "findings": [
+    {
+      "id": "F01",
+      "title": "Include unadded positive Poisson-tail remainder in bound fields",
+      "severity": "NONBLOCKING_CONSERVATIVE_ACCOUNTING",
+      "status": "RESOLVED_BEFORE_EXECUTION",
+      "original_file_sha256": "686a0d7618007c0900ee9d09085a63788c039a2e7c9d7d2331daedecd4509546",
+      "repaired_file_sha256": "065ce3ad523a7acfeca792fa06863ef4dfb4574db6aa42524f3c6b013d552d5e",
+      "finding": "positive_tail returned a subtotal tc/to and separate geometric upper remainder rc/ro; old tail fraction fields consumed only the subtotal while calling it an analytic upper bound.",
+      "impact": "By the authored stop rule the omitted positive remainder is <=1e-65 times the subtotal. No numerical failure or effect on the frozen tolerances has been measured; the issue was the precise upper-bound accounting.",
+      "repair": "Bound fields now use tc+rc and to+ro, while new poisson_tail_subtotal_*_decimal fields retain tc/to for phi mass-identity diagnostics. Existing remainder records, no-renormalization behavior, and ordinary-float/non-outward warning remain.",
+      "verification": "Author change inspected as text and final file SHA checked; no import, compile, numerical run or extra test."
+    }
+  ],
+  "open_blocking_findings": 0,
+  "open_nonblocking_findings": 0,
+  "execution": {
+    "scientific_imports": 0,
+    "compile_runs": 0,
+    "scientific_calculations": 0,
+    "tests_run": 0,
+    "CAS_calls": 0,
+    "old_science_replay": 0,
+    "numerical_pass_claim": false
+  },
+  "pending": [
+    "Fresh root-owned preflight, C4 budget/admission and runner gate",
+    "Changed coefficient preparation and primary finite-time execution",
+    "Actual controls and independent augmented-exponential numerical comparison",
+    "Actual CPU/failed-attempt accounting and C9 integration assessment",
+    "Root-owned stage publication, backups and final release verification"
+  ],
+  "preflight_context": {
+    "root_latest_read_path": "intake/preflight/R07.json",
+    "sha256": "4383045c6d08daef4220a399bf219cf73c220a87e68a8ec1ccab9405901d4edd",
+    "observed_utc": "2026-10-27T13:08:19.824631+00:00",
+    "root_AGENTS_sha256": "929ca5596e5bd5c84176ca82be80030cfabd08e81848e4ba40ef48a3c2529c45",
+    "local_HEAD_at_review_write": "e8ba946d8d9a0223ac4f918ad7a6f1eafc44e9b5",
+    "owner_refs_and_backup_receipts": "Read from root-owned R07 preflight; no fresh remote GET or independent remote HEAD claim by this static review.",
+    "central_completed": 27,
+    "central_total": 88,
+    "central_count_effect": 0,
+    "stage_backup_readback_tier": "R06 receipt read as dual R2 ACK/metadata; historical canonical R3 reuse remains separately recorded."
+  },
+  "preserved_limits": {
+    "prior_PR109_nb_null_modified": false,
+    "prior_PR109_native25_null_modified": false,
+    "old_budget_carried": false,
+    "full_source_native25": null,
+    "source_parent_ion_chemistry": null,
+    "physical_heating_completed": false,
+    "absolute_worldtube_totals": null,
+    "outward_arithmetic_enclosure": false,
+    "global_physical_completion": null,
+    "global_physical_error": null,
+    "global_budget_remaining": null,
+    "global_currency": null,
+    "L4": false,
+    "PR236_32_over_88_merged": false,
+    "private_full_conversation_search": "unavailable",
+    "Drive_inventory": "partial preserved"
+  }
+}

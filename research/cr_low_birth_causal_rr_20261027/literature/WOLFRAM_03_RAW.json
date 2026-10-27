@@ -1,0 +1,39 @@
+{
+  "query": {
+    "id": "W03_POISSON_WEIGHT_IDENTITIES",
+    "tool": "mcp__codex_apps__wolfram_wolframlanguageevaluator",
+    "input": {
+      "timeConstraint": 8,
+      "code": "ClearAll[n,k,x,v,j,p]; p[n_]:=Exp[-x]*x^n/Factorial[n]; tri=FullSimplify[Sum[n-k-1,{k,0,n-2}]-n*(n-1)/2,Assumptions->Element[n,Integers]&&n>=2]; factorial=FullSimplify[n*(n-1)*p[n]-x^2*p[n-2],Assumptions->x>0&&Element[n,Integers]&&n>=2]; fixed=Table[FullSimplify[Integrate[(1-v)*Exp[-x*v]*(x*v)^k/Factorial[k],{v,0,1},Assumptions->x>0]-(x*(1-Exp[-x]*Sum[x^j/Factorial[j],{j,0,k}])-(k+1)*(1-Exp[-x]*Sum[x^j/Factorial[j],{j,0,k+1}]))/x^2,Assumptions->x>0],{k,0,2}]; {tri,factorial,fixed}; third=FullSimplify[Sum[k*(n-k-1),{k,0,n-2}]-n*(n-1)*(n-2)/6,Assumptions->Element[n,Integers]&&n>=2]; thirdfact=FullSimplify[n*(n-1)*(n-2)*p[n]-x^3*p[n-3],Assumptions->x>0&&Element[n,Integers]&&n>=3]; hockey=FullSimplify[Sum[(n-k-1)*(n-k-2)/2,{k,0,n-3}]-n*(n-1)*(n-2)/6,Assumptions->Element[n,Integers]&&n>=3]; {tri,factorial,fixed,third,thirdfact,hockey}"
+    },
+    "manual_expected": [
+      0,
+      0,
+      [
+        0,
+        0,
+        0
+      ],
+      0,
+      0,
+      0
+    ],
+    "claim_scope": "General finite-n mass proof uses first two identities plus direct nonnegative-series/Beta-integral derivation. k=0,1,2 checks are limited scalar examples, not a replacement for the general derivation. No normalized truncated weights, actual solver or outward interval result is evaluated. Third-factorial identities support the actual-occupancy and tinyRR tail index M-2."
+  },
+  "actual_result": {
+    "status": "fulfilled",
+    "value": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Out[1]= {0, 0, {0, 0, 0}, 0, 0, 0}"
+        }
+      ],
+      "structuredContent": null,
+      "isError": false
+    }
+  },
+  "provider_CPU_s": null,
+  "prior_checks_replayed": false
+}
+

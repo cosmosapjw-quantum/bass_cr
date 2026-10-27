@@ -1,0 +1,124 @@
+{
+  "schema": "CR_LOW_BIRTH_C6_INDEPENDENT_CONTROL_ORACLE_DIAGNOSIS_V1",
+  "unit": "CR_PHYS02_LOW_BIRTH_CAUSAL_RR_V1",
+  "reviewer": "/root/theory_review",
+  "verdict": "FIXTURE_ORACLE_REASSOCIATION_ERROR_IDENTIFIED_FROM_SAVED_SOURCE_AND_RESULT",
+  "repaired_source_static_review": {
+    "verdict": "PASS_NARROW_ORACLE_AND_SELECTIVE_DISPATCH_REPAIR_PENDING_EXECUTION",
+    "path": "implementation/controls.py",
+    "bytes": 21816,
+    "sha256": "edee3395a229bdd7453fc52c24e78129c08d909e1c4b1d2857c533a509978e6d",
+    "comparison_source_sha256": "7a85e0549f1a0a8a529c2bd17d6ca242de2495f208710057b5190723fed08894",
+    "review_method": "Read complete text diff against actual controls_v1 executed snapshot; inspect selector control flow and exact rational oracle. No execution, import or compilation.",
+    "blocking_findings": 0,
+    "static_checks": [
+      "Fraction.from_float on represented acut andt computes exact integrated count; multiplication by Fraction.from_float(.1) computes represented-input energy. Each expected quantity is converted to float only once.",
+      "The exact n[0,0]==occ[0,0]==0 requirement is unchanged. Count and energy comparisons retain tolerance0; no scientific acceptance threshold is relaxed.",
+      "Only the failed direct_cutoff action body changed. The other45 control action bodies and all production coefficient/solver functions are unchanged by this diff.",
+      "--only is matched before calling each action. Nonselected actions return immediately; duplicate control names and unknown requested names fail rather than generating an empty all-PASS result.",
+      "RESULT records execution_scope, only_requested, available_control_count and omitted_control_actions. A selected1-control run cannot be presented as46 newly executed passing controls."
+    ],
+    "authorized_next_scope_owned_by_root": "Unique controls_v2 with --only direct_cutoff_has_no_active_RR under amended pinned code/budget; reuse45 unchanged prior PASS controls.",
+    "actual_repaired_control_result": null
+  },
+  "method": "Read saved RESULT, RECEIPT, exact executed source and manifest; analyze IEEE754 expressions symbolically without executing solver, fixture, Fraction calculation or scientific code",
+  "reviewer_scientific_execution_import_compile": 0,
+  "reviewer_production_source_edits": 0,
+  "evidence": [
+    {
+      "path": "runs/controls_v1/RESULT.json",
+      "bytes": 8742,
+      "sha256": "8dc1e07cba69b7a9e125d83ca2939cf7d1994af411bc37d3db054a8f06ac7741"
+    },
+    {
+      "path": "runs/controls_v1/RECEIPT.json",
+      "bytes": 11650,
+      "sha256": "c1f56191a8143370e9135b575183638b7eb0a3ae9ebc6beaf6432e10c3437bd7"
+    },
+    {
+      "path": "runs/controls_v1/EXECUTED_SOURCE_MANIFEST.json",
+      "bytes": 1798,
+      "sha256": "097549c3ac84817350dc0b660dd8c7dd6f9fc1ae6c4c28517b7fd3f3e5c3b2ad"
+    },
+    {
+      "path": "runs/controls_v1/EXECUTED_SOURCE/implementation_controls.py",
+      "bytes": 20721,
+      "sha256": "7a85e0549f1a0a8a529c2bd17d6ca242de2495f208710057b5190723fed08894"
+    }
+  ],
+  "actual_failed_attempt": {
+    "run_id": "controls_v1",
+    "attempt_id": "attempt_fe910da57d2f4ab69c318621ff6074ef",
+    "raw_count": 46,
+    "raw_passed": 45,
+    "raw_all_pass": false,
+    "failed_control": "direct_cutoff_has_no_active_RR",
+    "saved_error": "ValueError:ANALYTIC_OR_CONSERVATION_DISAGREEMENT",
+    "worker_exit_code": 1,
+    "receipt_status": "failed",
+    "worker_CPU_s": 0.48550399999999994,
+    "coordinator_CPU_s": 0.10542399999999999,
+    "receipt_tail_s": 0.05,
+    "charged_CPU_s": 0.6409279999999999,
+    "cpu_accounting_complete": true,
+    "worker_reservation_exceeded": false,
+    "coordinator_reservation_exceeded": false,
+    "failure_reclassified_as_PASS": false
+  },
+  "diagnosis": {
+    "executed_fixture": "t=3.; acut=2.; direct=acut*t*t/2; n,occ=solve([0.],[1.],[2.],[3.],[t]); require n[0,0]==occ[0,0]==0; close(.1*direct,.1*acut*t*t/2,0.)",
+    "exact_zero_active_check": "Passed before the failing close call: otherwise its distinct DIRECT_CUTOFF_IS_NOT_ACTIVE error would have been recorded.",
+    "count_math": "For exactly represented acut2 andt3, integrated direct count is9 exactly.",
+    "error": "The zero-tolerance energy comparison treats reassociation of floating point multiplication as an exact identity. The left side multiplies0.1 by the exact count9 once; the right side rounds successive products0.1*2, then*3, then*3 before/2.",
+    "binary64_derivation": {
+      "input_0p1_exact_fraction": "3602879701896397 / 2^55",
+      "left_rounding_units_at_spacing_2powminus53": "Exact product is8106479329266893.25 units, rounding to8106479329266893.",
+      "right_rounding_units_at_spacing_2powminus53": "After0.2*3, the half-way result rounds to even5404319552844596 units at2^-53; multiplying by3 and dividing by2 gives8106479329266894 units at2^-53.",
+      "implied_absolute_difference": "2^-53",
+      "usual_decimal_spellings": ["0.9", "0.9000000000000001"],
+      "epistemic_status": "Manual IEEE754 reasoning about saved expressions; these scalar values were not logged by the worker and were not reexecuted by reviewer."
+    },
+    "physical_claim": "This failure does not show an active RR event created by a direct-cutoff atom. The actual exact-zero n/occupancy condition passed. The failed fixture still remains an actual failed control attempt.",
+    "prepared_coefficients_changed": false,
+    "scientific_tolerances_changed": false
+  },
+  "recommended_narrow_repair": {
+    "oracle": "expected_count = Fraction.from_float(acut) * Fraction.from_float(t)**2 / 2; expected_energy = Fraction.from_float(0.1) * expected_count",
+    "comparison": "Compare direct against float(expected_count) and0.1*direct against float(expected_energy), each converted once and with existing zero tolerance.",
+    "why_independent": "Exact rational integration/multiplication of represented fixture inputs supplies a correctly rounded target without duplicating sequential floating rounding on the expected side.",
+    "preserve_exact_checks": ["n[0,0] == 0", "occ[0,0] == 0", "zero-tolerance direct count", "zero-tolerance correctly rounded direct energy"],
+    "do_not_change": ["actual source atoms or history", "prepared coefficients/operator", "production n/O/RR formulas", "count/energy1e-11 criterion", "positive channel reference1e-9 criterion", "Poisson tail budgets", "40CPU cap"],
+    "selective_recovery": "Root proposes unique controls_v2 with --only direct_cutoff_has_no_active_RR; reuse45 existing passing controls by exact identity, do not rerun them merely to obtain an all-green new attempt.",
+    "required_selector_guard": "Unknown or empty selected-name matches must fail; one selected control must actually execute and be reported. Preserve selected_names/count provenance."
+  },
+  "prepared_science_reuse": {
+    "preparation_record": {
+      "path": "runs/prepare_v1/PREPARATION.json",
+      "bytes": 16983,
+      "sha256": "e0161b76449e59c99295df216298dd22143f5f87a571de47759bfcb19037c656"
+    },
+    "prepared_arrays": {
+      "path": "runs/prepare_v1/PREPARED.npz",
+      "bytes": 598676,
+      "sha256": "5efaf7890ff632bd33850520f9ce5662ed7acff78b957c089822d0592afae670"
+    },
+    "preparation_receipt": {
+      "path": "runs/prepare_v1/RECEIPT.json",
+      "bytes": 11586,
+      "sha256": "f8a46dca4fbb2e259d92cbf928627093151263dc66015aff6e4b78dce05a716b"
+    },
+    "new_preparation_or_old_science_reexecution_by_reviewer": 0
+  },
+  "separate_runtime_observation_for_C9": {
+    "same_receipt_worker_started": true,
+    "aggregate_monitor_polls": 23,
+    "maximum_observed_owned_processes": 0,
+    "aggregate_worker_cpu_peak_estimate_s": 0.0,
+    "final_RUSAGE_CHILDREN_worker_CPU_s": 0.48550399999999994,
+    "interpretation": "This attempt's /proc descendant monitor did not observe the running worker despite final measured child CPU. Preserve as a limitation of runtime monitor evidence; it is distinct from the control oracle failure.",
+    "cause_identified": false,
+    "new_host_probe_performed": false,
+    "hard_aggregate_preventive_CPU_proof": false,
+    "final_failure_inclusive_CPU_charge_preserved": true
+  }
+}

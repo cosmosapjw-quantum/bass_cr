@@ -1,0 +1,17 @@
+# R2 — evidence reuse and current survey
+
+The prior PR109 body was read from GitHub and exactly matches the actual saved final publication. Its canonical S has40hex digits:022c163726b814885805bd9a7ab988fe963cda4a. The shorter prior chat transcription is corrected without changing source bytes, ZIPs, or scientific results. Canonical prior archives were byte-hashed locally and their existing actual dual full-GET R3 receipts are reused. Current Dropbox inventory confirms actual file IDs/sizes.
+
+Accessible owner inventory reached an empty terminal repository page:51repositories,35public/16private. All35public repositories yielded1873branch SHA refs and35HEAD refs. Private branch search yielded483names over34pages with terminal empty pages; the tool returned no private SHA identities, so no such identity claim is made. Relevant current code and handoffs, including non-HEAD backup candidates, were inspected. This is completed inventory traversal, not a claim to have rederived every archived project result.
+
+Dropbox's requested research directory recursively terminated at5060entries in9pages. Drive returned144files in the requested folder view; global completeness remains unverified. Actual personal_context returned unavailable, and no whole-conversation search is claimed. Raw private inventories are not published; only these relevant aggregate results and public scientific provenance are exposed.
+
+Current central152b82cac23fedcb75a9effe0c159bae3d800c01 changes B3h return only relative to priorM; original27/88 and88nodes/17edges remain. CR PR1082776752de6952f60d8d690a128f33fec4df2c57b has a separate bath/budget. Central causalprefix fbb55bcd0c77990b62470862a9f4a70647d0c5c9 newtests NOT_RUN_BUDGET_HOLD are not PASS.
+
+WU7168ad4807dd1e02aef852bcf428df75b222f0de progressed to18/20 and13/28, with new scoped primary/reference/CAS evidence; physical density, consumer and GL destruction stay null, and its run allowances remain0/0/0. REC newer directHD gate7/8FAIL and physical0/313 remain separate. HE programmeac604 remains remote; new photon05 S251c6baa6c3359b1d6997dbce51cea65500b53d6/D4db5ce7297a7ded4624b93721873aacc9b4ebf30 were discovered in original Dropbox ZIPs and are LOCAL UNPUBLISHED. Photon05 plot FAIL and missingflux/time/nb/heating remain. The two HE ZIPs were newly full-GET verified from Dropbox only, not dualR3.
+
+Reusable evidence: actual lowbirth source payload and history; original PHYS02 density/grid/Coulomb recipe; Verner fit and Milne/H/He degeneracy qualifications; native25 basis and exact fixed-nb event map; existing metadata/backup methods. New work: explicit same-state H1/He4 inventory, CODATA2022 coefficient evaluation, finite-history Coulomb+groundRR response, channelwise capture/exposure/photon distributions, causal return ownership, independent numerical check. Full9600 rawG not recovered within surveyed records; fingerprints do not supply matrix values. No old calculation or review is rerun merely for a new label.
+
+New numerical-method evidence uses actual SciSpace+Exa discovery and original Al-Mohy/Higham2011 and Fox/Glynn1988 papers. Their scope differs: polynomial forcing/augmentation supports the reference representation; normalized Poisson truncation does not replace the newly derived unnormalized ramp weights. Ordinary floating-point evaluation is not outward interval certification. New source/state values are taken from pinned retained project data, not those papers.
+
+Current unit loopR2/20; central27/88, effect0. New scientific execution beforeC4=0.

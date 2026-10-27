@@ -1,0 +1,152 @@
+{
+  "schema": "CR_LOW_BIRTH_C08_STATIC_PLOT_RECOVERY_REVIEW_V1",
+  "unit": "CR_PHYS02_LOW_BIRTH_CAUSAL_RR_V1",
+  "reviewer": "/root/source_qualification",
+  "observed_utc": "2026-10-27T14:01:19.117715+00:00",
+  "verdict": "PASS_SCOPED_STATIC_PLOT_RECOVERY_BUDGET",
+  "blocking_findings": 0,
+  "open_blocking_findings": [],
+  "method": "Read exact budget/context, saved code and receipts; hash byte identity and Decimal budget-accounting equality only. No plotting, scientific execution, import, compilation or numerical recomputation.",
+  "role_disclosure": "Reviewer is production/plot/runner and independent-reference nonauthor; earlier source-intake, R6 and static math/metadata reviewer.",
+  "reviewed_files": [
+    {
+      "path": "EXECUTION_BUDGET.json",
+      "bytes": 3930,
+      "sha256": "dbe257d6f11070e344deb226a5d6febea663a5dc6aafe3e3b08bb6bc463ff386"
+    },
+    {
+      "path": "evidence/C08_PLOT_RECOVERY_CONTEXT.json",
+      "bytes": 1450,
+      "sha256": "09037fe799eb79bec0051d5e711c1a1d58bc6e45f50ac366a8cab396f6254553"
+    },
+    {
+      "path": "evidence/C08_PLOT_V1_CONTEXT_PRESERVED/EXECUTION_BUDGET.json",
+      "bytes": 3667,
+      "sha256": "67ffc19b6dc8f1be279c055967bd0e5e25db2914130dce2d9b3ff61a6f0fd657"
+    },
+    {
+      "path": "evidence/C08_PLOT_V1_CONTEXT_PRESERVED/evidence_EXECUTION_LEDGER.json",
+      "bytes": 81111,
+      "sha256": "855aa7fb77dc52009e289bcc7e4f9f8651f5e4c653885f0fc157989be8ef80aa"
+    },
+    {
+      "path": "evidence/C08_PLOT_V1_CONTEXT_PRESERVED/implementation_run_bounded.py",
+      "bytes": 50219,
+      "sha256": "629d14ab8dd93fe0b23fb6394038f061f4a3fc0642922d110788d67922e05d9f"
+    },
+    {
+      "path": "evidence/C08_PLOT_V1_CONTEXT_PRESERVED/implementation_plot_saved.py",
+      "bytes": 5022,
+      "sha256": "2dbffa12daae2ed084d31501e001f3963569f282e903f34b43abf3abaeca7501"
+    },
+    {
+      "path": "evidence/C08_PLOT_V1_CONTEXT_PRESERVED/intake_preflight_C08.json",
+      "bytes": 108184,
+      "sha256": "0ef32c613728c1ad170a9cd7f32fc59f182dbce4ee2cdb4dd449ef564d3814d2"
+    },
+    {
+      "path": "evidence/C08_PLOT_V1_CONTEXT_PRESERVED/PRESERVATION_MANIFEST.json",
+      "bytes": 1316,
+      "sha256": "1c036345e6e441953aabfde4d269abc4ea56ba0c80d29857cfebee58c2d4cb75"
+    },
+    {
+      "path": "evidence/C06_CODE_MANIFEST_V3.json",
+      "bytes": 1529,
+      "sha256": "bb0074dcb0415dbcfb4e9daadab9292362cd545ffb6260c349188239fad08b95"
+    },
+    {
+      "path": "implementation/plot_saved.py",
+      "bytes": 5022,
+      "sha256": "2dbffa12daae2ed084d31501e001f3963569f282e903f34b43abf3abaeca7501"
+    },
+    {
+      "path": "implementation/run_bounded.py",
+      "bytes": 50219,
+      "sha256": "629d14ab8dd93fe0b23fb6394038f061f4a3fc0642922d110788d67922e05d9f"
+    },
+    {
+      "path": "runs/primary_v1/RESULT.json",
+      "bytes": 81358,
+      "sha256": "ae8452f25958c47349d313926ef14e7ab7d78691ba6bb3b8395dc399aa49b0ce"
+    },
+    {
+      "path": "runs/plot_v1/RECEIPT.json",
+      "bytes": 11945,
+      "sha256": "86a8cba3611766b87571a8eb6ccf144e110cdcfe84b031237e6e45cefbf801e8"
+    },
+    {
+      "path": "evidence/ATTEMPT_DEBITS/attempt_c9fc5572aaf24e6bb0811ac7d8047da5_amendment_1.json",
+      "bytes": 11959,
+      "sha256": "ec9ef964015e9e2aea70213063334800cb565eedccd55f1d8817dbd31b77b226"
+    },
+    {
+      "path": "evidence/ATTEMPT_DEBITS/attempt_c9fc5572aaf24e6bb0811ac7d8047da5_amendment_2.json",
+      "bytes": 11938,
+      "sha256": "6b86797416cfb420bb5d548481c9b2a6f1c982aa47dfe5c31e3b36d2ba15d4e6"
+    },
+    {
+      "path": "evidence/EXECUTION_LEDGER.json",
+      "bytes": 81111,
+      "sha256": "855aa7fb77dc52009e289bcc7e4f9f8651f5e4c653885f0fc157989be8ef80aa"
+    }
+  ],
+  "checks": [
+    {
+      "id": "PLOT-R01",
+      "pass": true,
+      "finding": "Actual plot_v1 produced no PNG, SVG or RESULT. The new plot_v2 is a unique missing-artifact recovery; old attempt remains failed."
+    },
+    {
+      "id": "PLOT-R02",
+      "pass": true,
+      "finding": "Plot source and primary RESULT retain exact pinned SHA256. Plot source only reads accepted saved JSON, forms display ratios and renders; it calls no source, coefficient or propagation solver."
+    },
+    {
+      "id": "PLOT-R03",
+      "pass": true,
+      "finding": "Original plot receipt3.106334 and both cumulative amendments remain. The authoritative same-attempt maximum debit10.145070, including conservative tail4.575038, is preserved in prior unit debit16.974041."
+    },
+    {
+      "id": "PLOT-R04",
+      "pass": true,
+      "finding": "Same unit40CPU cap and prior preparation1.936505 remain. New unique worker6 plus coordinator10 gives prospective total32.974041 and remaining unallocated7.025959; no old/parallel allowance is imported."
+    },
+    {
+      "id": "PLOT-R05",
+      "pass": true,
+      "finding": "Tail reserve5 is inside coordinator reservation10. Unchanged runner reserves max(10, measured coordinator so far plus5), and repeats locked actual-ledger CPU admission and host memory admission before launch; larger actual startup reserve can still refuse launch."
+    },
+    {
+      "id": "PLOT-R06",
+      "pass": true,
+      "finding": "Memory policy,256MiB selected worker limit, frozen512MiB upper bound, one thread,60s wall cap and exact code manifest v3 remain unchanged. All9 code manifest byte/SHA pins match."
+    },
+    {
+      "id": "PLOT-R07",
+      "pass": true,
+      "finding": "Five prior context files are preserved with original hashes, including old budget67ffc19b... and ledger855aa7fb.... Old run allocations are unchanged; only plot_v2 is appended."
+    },
+    {
+      "id": "PLOT-R08",
+      "pass": true,
+      "finding": "Reservation change applies prospectively. Old plot reservation overrun, resource refusal, failed control, monitor owned-process limitation, and all_runtime_attempts_pass=false are not relabeled."
+    }
+  ],
+  "actual_recovery_run": "NOT_RUN_AT_REVIEW",
+  "allowed_next_scope": "Root may launch only the separately named plot_v2 with exact saved RESULT/plot hashes after fresh owner/HEAD/policy preflight and unchanged runner admission.",
+  "limits": {
+    "guaranteed_runtime_success": false,
+    "hard_preventive_aggregate_cap_proof": false,
+    "proc_owned_descendant_monitor_validated": false,
+    "scientific_tolerances_changed": false,
+    "source_or_solver_replays_by_reviewer": 0,
+    "review_is_runtime_PASS": false,
+    "tail_reserve_is_measured_CPU": false
+  },
+  "central_observation": {
+    "completed": 28,
+    "total": 88,
+    "CR_count_effect": 0,
+    "historical27_preserved": true
+  }
+}

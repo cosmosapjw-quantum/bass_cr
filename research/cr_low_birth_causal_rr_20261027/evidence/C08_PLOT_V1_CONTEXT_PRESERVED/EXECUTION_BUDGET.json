@@ -1,0 +1,89 @@
+{
+  "schema": "CR_LOW_BIRTH_RESOURCE_PROPOSAL_V1",
+  "unit": "CR_PHYS02_LOW_BIRTH_CAUSAL_RR_V1",
+  "status": "FROZEN_C4_ADMITTED",
+  "local_science_cpu_cap_s": 40,
+  "spent_before_C4_admission": 1.936505,
+  "historical_allowance_transferred": false,
+  "parallel_PR108_budget_transferred": false,
+  "native_threads": 1,
+  "worker_memory_bytes": 536870912,
+  "minimum_host_memory_reserve_bytes": 1073741824,
+  "wall_per_attempt_s": 60,
+  "coordinator_reserve_per_attempt_s": 0.8,
+  "coordinator_receipt_tail_reserve_s": 0.05,
+  "aggregate_worker_monitor_poll_s": 0.02,
+  "aggregate_worker_stop_margin_s": 0.1,
+  "per_process_CPU_limit_is_aggregate_hard_proof": false,
+  "host_admission": "evidence/C04_HOST_ADMISSION_V2.json",
+  "host_admission_sha256": "15b2c3cdf5acc6d89188bdccef596b5ce8618de9d44eaf999ec96135d8dda477",
+  "code_manifest": "evidence/C06_CODE_MANIFEST_V3.json",
+  "code_manifest_sha256": "bb0074dcb0415dbcfb4e9daadab9292362cd545ffb6260c349188239fad08b95",
+  "run_allocations": [
+    {
+      "run_id": "prepare_v1",
+      "worker_cpu_reservation_s": 3,
+      "selected_memory_limit_bytes": 268435456
+    },
+    {
+      "run_id": "controls_v1",
+      "worker_cpu_reservation_s": 4,
+      "selected_memory_limit_bytes": 268435456
+    },
+    {
+      "run_id": "primary_v1",
+      "worker_cpu_reservation_s": 10,
+      "selected_memory_limit_bytes": 268435456
+    },
+    {
+      "run_id": "independent_v1",
+      "worker_cpu_reservation_s": 10,
+      "selected_memory_limit_bytes": 268435456
+    },
+    {
+      "run_id": "plot_v1",
+      "worker_cpu_reservation_s": 6,
+      "selected_memory_limit_bytes": 268435456
+    },
+    {
+      "run_id": "controls_v2",
+      "worker_cpu_reservation_s": 2,
+      "selected_memory_limit_bytes": 268435456,
+      "scope": "only direct_cutoff_has_no_active_RR; 45 accepted prior controls reused"
+    }
+  ],
+  "nominal_worker_sum_s": 28.0,
+  "nominal_coordinator_reservations_s": 3.2,
+  "unallocated_failure_and_repair_reserve_s": 4.616028000000003,
+  "old_plot_failure_preserved": {
+    "unit": "CR_PROPER_INJECTION_RETURN_V1",
+    "run_id": "plot_v1",
+    "status": "FAILED_RESERVATION",
+    "worker_cpu_s": 2.764225,
+    "coordinator_and_tail_cpu_s": 0.307125,
+    "charged_cpu_s": 3.07135,
+    "old_unit_charged_cpu_s": 10.238419,
+    "old_unit_cap_s": 20,
+    "remaining_transferred": false
+  },
+  "notes": [
+    "Preparation is a charged changed-operator calculation, not an uncharged probe.",
+    "Root freezes this proposal only after live host admission and exact code manifest.",
+    "All failures, preworker attempts and owned descendants remain debited.",
+    "No old source/operator/science replay; no inherited20/30/parallel60 CPU allowance.",
+    "Aggregate polling is a protective estimate with overshoot risk, not a strict kernel-enforced CPU ceiling."
+  ],
+  "preparation_cost_manifest": "evidence/C04_PREPARATION_LEDGER_V2.json",
+  "preparation_cost_manifest_sha256": "400e3768d6134d00a026835b2c5bc54b8b55489ebde6bd7beb31fcef85b4cac1",
+  "memory_estimator_version": "C4_FILE_LRU_ESTIMATOR_V2",
+  "preserved_initial_failed_budget": "evidence/C04_ADMISSION_V1_PRESERVED/EXECUTION_BUDGET.json",
+  "original_C4_nominal_plan": {
+    "nominal_worker_sum_s": 33,
+    "nominal_coordinator_reservations_s": 4,
+    "unallocated_failure_and_repair_reserve_s": 1.0634950000000032
+  },
+  "nominal_accounting_basis": "remaining named attempts after immutable actual prepare_v1 and failed controls_v1 debits",
+  "already_charged_at_C6_repair_s": 4.183972,
+  "repair_context": "C06_TARGETED_EXACT_CUTOFF_ORACLE_V2",
+  "preserved_previous_budget": "evidence/C06_FIRST_CONTROL_CONTEXT_PRESERVED/EXECUTION_BUDGET.json"
+}

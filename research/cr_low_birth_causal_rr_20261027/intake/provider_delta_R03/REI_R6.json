@@ -1,0 +1,49 @@
+{
+  "schema": "REI_FINITE_COHORT_R6_INDEPENDENT_REVIEW_V1",
+  "reviewer": "/root/survey_wu_rec",
+  "implementation_participation": false,
+  "method": "Direct measure/LP proof,plateau perturbation proof,hand analytic examples;read prior exact theorems",
+  "status": "PASS_SCOPED_ANALYTIC_AFTER_TWO_EXPLICIT_CLARIFICATIONS",
+  "blocking_core_errors": 0,
+  "findings": [
+    {
+      "id": "shared_atom",
+      "object": "combined-window sharp bounds",
+      "observation": "One cumulative chain does not fix cell-internal atomposition",
+      "impact": "Summing separatelyoptimized cellcosts losesjointsharpness",
+      "repair": "Formcombinedkernelbeforecellmin/max",
+      "closed_in": "CONTRACT_KO.md;THEORY_KO.md sections7-8;combined_cohort_bounds"
+    },
+    {
+      "id": "attainment",
+      "object": "originalF-space endpoints",
+      "observation": "Cellleftboundaryexcluded;lowerinfimumcanalsobenonattained",
+      "impact": "LPwitnesscannotautomaticallybecalledattainingF",
+      "repair": "INFIMUM/SUPREMUM andclosurelocationflags",
+      "closed_in": "THEORY_KO.md sections3,8;BoundsResult semantics"
+    }
+  ],
+  "prior_read": [
+    {
+      "commit": "fbb55bcd0c77990b62470862a9f4a70647d0c5c9",
+      "blob": "b7a9e67c8a5f43c85379cd6eebc9f57f54951850"
+    },
+    {
+      "commit": "a70d19b0a79c200d1e0b6a18ff69f856e8fef4c7",
+      "blob": "c1c3c3f0c23a893f73620228e927f026f4df1213"
+    }
+  ],
+  "scope_checks": [
+    "Tonelli/Fubini withfinitepositivemeasure",
+    "everycellatomsequencepreservesexactgridchain",
+    "vertexfinitelevels",
+    "prefixDP inclusivey<=v",
+    "rationalpiecewisequadraticstationarypoints",
+    "baselineaffinereduction",
+    "zero/singleton/terminalcap",
+    "units and actualprovider separation"
+  ],
+  "science_executions": 0,
+  "CAS_executions": 0,
+  "scope": "Interval-monotonicity selected finite-cohort theorem;notphysicalprovideradmission"
+}
