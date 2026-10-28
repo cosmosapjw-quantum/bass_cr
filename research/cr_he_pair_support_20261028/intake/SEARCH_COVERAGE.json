@@ -1,0 +1,89 @@
+{
+  "schema": "CR_R2_LITERATURE_INTAKE_V1",
+  "observed_date_local": "2026-10-28",
+  "timezone": "Etc/UTC",
+  "agent": "/root/literature_intake",
+  "skill_context_used": [
+    {
+      "version": "physmath-research-loop1.0.0/user-selected",
+      "paths": [
+        "next_work/policy/RESEARCH_POLICY.md",
+        "next_work/policy/THEORY_LOOP.md"
+      ],
+      "selected_stage": "R2 intake only"
+    },
+    {
+      "version": "physmath-research-loop1.3.0/native delegation",
+      "paths": [
+        "next_work/policy/SUBAGENT_MODE.md"
+      ]
+    },
+    {
+      "skill": "Exa Search",
+      "resources": [
+        "c4/Search/references/searching.md",
+        "c4/Search/references/patterns-papers.md"
+      ]
+    }
+  ],
+  "scope": "Primary-source discovery/read for native1–4MeV proton-induced He electron marginal,0.1–10eV selected support; no new science execution.",
+  "executed_tools": {
+    "exa_search_calls": 8,
+    "exa_requested_result_slots": 65,
+    "scispace_search_calls": 2,
+    "scispace_returned_paper_entries": 20,
+    "exa_fetch_calls": 4,
+    "exa_fetch_URL_requests": 12,
+    "exa_fetch_failed_URLs": 1
+  },
+  "coverage_meaning": "Requested Exa slots are not unique papers or full-text reads. SciSpace is discovery metadata. Only individually listed primary sections were read. No exhaustive-world-literature or same-source dataset absence claim.",
+  "raw_capture": {
+    "exact_tool_result_JSON_saved": [
+      "exa_joint_raw.json",
+      "exa_branching_raw.json",
+      "exa_recent_raw.json",
+      "exa_data_raw.json",
+      "exa_total_native_raw.json",
+      "exa_joint_native_raw.json",
+      "exa_math_raw.json",
+      "exa_fetch1_raw.json",
+      "exa_fetch2_raw.json",
+      "exa_fetch3_raw.json",
+      "exa_fetch_thesis_raw.json",
+      "scispace_joint_raw.json",
+      "scispace_sameenergy_raw.json"
+    ],
+    "raw_serialization": "Actual returned tool objects serialized as JSON, not HTTP wire bytes.",
+    "first_math_discovery": "One5-result search was read in tool transcript but not saved as a raw object; its observed URLs and query are preserved in MATH_DISCOVERY_OBSERVED.json. Later math search and full primary fetch are saved independently."
+  },
+  "fresh_native_exclusive_joint_bytes_adopted": false,
+  "actual_C": null,
+  "actual_D": null,
+  "actual_outside_partner_response": null,
+  "science_executions": 0,
+  "metadata_CPU_s": null,
+  "search_failure": {
+    "class": "SERVICE_ERROR",
+    "operation": "Exa fetch2026thesis landing page",
+    "result": "CRAWL_TIMEOUT",
+    "url": "https://scholarsmine.mst.edu/doctoral_dissertations/3463",
+    "retry": false,
+    "scientific_consequence": "Discovery-only record; no thesis body or new kernel admitted."
+  },
+  "date_corrections": [
+    {
+      "source": "Spicer2025 DOI10.1103/czd2-865z",
+      "index_date": "2025-08-21",
+      "index_date_meaning": "accepted",
+      "publisher_publication_date": "2025-09-12"
+    },
+    {
+      "source": "Ambrosio2017 DOI10.1140/epjd/e2017-70713-x",
+      "index_date": "2016-11-15",
+      "index_date_meaning": "received",
+      "publisher_publication_date": "2017-05-25"
+    }
+  ],
+  "proposal": "Conditional graph-constrained event-marginal bounds with exact primal/dual witnesses, optional fixed total selected-internal double mass, sparse atomwise lift and existing same-state partial consumer. Root must fix chosen scope and independent budget.",
+  "completion_claim": "R2 intake subtask completed; no R1/R3–R10/C-stage completion claimed."
+}
