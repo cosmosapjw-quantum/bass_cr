@@ -1,0 +1,36 @@
+{
+  "schema": "CR_HE_ENERGY_CROSS_DAG_V1",
+  "nodes": [
+    {
+      "id": "CR_PHYS02_HE_ENERGY_CROSS_V1",
+      "status": "COMPLETE_SCOPED",
+      "science_decision": "PASS_SCOPED_EXACT_CROSS_ENVELOPE",
+      "physical_activation": false
+    }
+  ],
+  "edges": [],
+  "completed": 1,
+  "total": 1,
+  "central_qualified_snapshot": {
+    "head": "66ef9a0147a0573b77e74e151dc280ba2bd4b64c",
+    "completed": 28,
+    "total": 88,
+    "nodes": 88,
+    "edges": 17,
+    "basis": "Exact same current central HEAD as pinned PR114 C08 preflight; no changed dependency or central mutation"
+  },
+  "central_count_effect": 0,
+  "next": [
+    {
+      "id": "CR_ACTUAL_EXCLUSIVE_HE_INPUT",
+      "status": "INPUT_REQUIRED",
+      "action": "Bind a source-specific exclusive event kernel or physically justified pair constraints, keeping state/history/support fixed."
+    },
+    {
+      "id": "CR_ENERGY_CROSS_FIXED_D_REGION",
+      "status": "SEPARATE_OPTIONAL_UNIT",
+      "action": "If joint parent chemistry and cross correction are required, solve the projection in (d,C); keep separate budget."
+    }
+  ],
+  "automatic_next_node": false
+}
