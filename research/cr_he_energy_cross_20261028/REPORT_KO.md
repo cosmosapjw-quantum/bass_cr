@@ -110,3 +110,13 @@ K20에서는 완전 cross support를 먼저 검사하고 직접 half-shift 구�
 R1–R10/C1–C10의 단계별 근거를20개 stage에 대응시켰다. 이번 재개에서는 실행과 독립 검증을 먼저 마친 뒤 stage-labelled checkpoint를 게시한다. 이를 실행 전마다 순차 게시한 기록으로 서술하지 않는다. 실제 성공한 commit/backup/R3 상태는 publication 영수증이 권위다.
 
 다음 연구는 실제 exclusive He event 입력 또는 source에서 정당화되는 pair 제약을 같은 state/history에 결속하는 일이다. 전체 source chemistry와 cross correction을 함께 제한하려면 (d,C) joint feasible region을 별도 scope·예산에서 다룬다. Actual K,exclusive kernel,C/D,outside partner,donor work,EOS/T,absolute volume,full physical native25는null로 유지한다.
+
+## 검증된 배포와 재개 위치
+
+초안 PR: https://github.com/cosmosapjw-quantum/bass_cr/pull/115
+
+과학 S=9ec654379074b731ce20f0b7dbae05077ddf4d4b. 실제 문서 D와 최종 closeout 상태는 publication/FINAL_DELIVERY.json 및 C10_RECEIPT.json으로 결속한다.
+
+SOURCE는 BASS_CR_HE_ENERGY_CROSS_SOURCE_20261028_9ec654379074.zip,1553470bytes,SHA256 e606aea543f2dbf66832a549f4010ecb5cb51f642b45d6293ce1fd1b077f2a11이다. Dropbox와 Drive의 실제 원본 전체 GET에서 전체 SHA256,179개 payload SHA256 및 ZIP CRC가 모두 일치했다. SOURCE를 나중 영수증으로 다시 만들지 않는다.
+
+PR114의 후속 head3d9818b4b91d00beef946aa88540d73c33e51dac까지 바뀐43개 파일은 모두 cr_he_energy_sum 경로이며 이번 경로와 겹치지 않는다. 중앙 HEAD도 같은66ef9a0147a0573b77e74e151dc280ba2bd4b64c임을 다시 확인했다.

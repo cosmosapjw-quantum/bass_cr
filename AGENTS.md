@@ -1,3 +1,33 @@
+# Current energy-constrained cross-envelope science closed; delivery only (2026-10-28)
+
+Read research/cr_he_energy_cross_20261028/ADMISSION.json, SCIENTIFIC_SUMMARY.json,
+review/C09_FINAL.json, BUDGET_CLOSEOUT.json, REPORT_KO.md and publication/FINAL_DELIVERY.json.
+Unit CR_PHYS02_HE_ENERGY_CROSS_V1 is PASS_SCOPED_EXACT_CROSS_ENVELOPE.
+Actual scientific S=9ec654379074b731ce20f0b7dbae05077ddf4d4b; draft PR115 is the
+delivery location. Actual D and final release receipts are postcommit bindings.
+The fixed finite marginal with every different-bin Ei+Ej<=K edge has an exact
+two-threshold deficiency bound Cmax=(N-Delta)/2 and constructive attainment.
+Nine native dual cases and explicit K0/3/20 primals are separately identified.
+
+Science is closed:28.653943/40 CPU-s, remaining11.346057 NONTRANSFERABLE,
+additional_science_allowance_cpu_s=0, automatic_next_node=false. Preserve both
+scientific failures, partial native checkpoints and targeted direct recovery.
+Metadata/provider CPU is unmeasured. Do not repeat unchanged accepted science.
+
+Canonical SOURCE BASS_CR_HE_ENERGY_CROSS_SOURCE_20261028_9ec654379074.zip is
+1553470 bytes, SHA256 e606aea543f2dbf66832a549f4010ecb5cb51f642b45d6293ce1fd1b077f2a11.
+Dropbox and Drive original full GET, whole SHA256,179 payload SHA256 and ZIP CRC
+are R3 PASS. SOURCE is immutable; do not rebuild it with later D/closeout receipts.
+Stage checkpoints were assembled during closeout, not before each calculation.
+
+PR113 and PR114 are separately owned and were not modified. Base snapshot is
+c87c50208a7585ff1713bd54303e1a1e29c962cf. Central66ef9a0147a0573b77e74e151dc280ba2bd4b64c
+remains qualified28/88,88nodes17edges; this scoped child1/1 has count effect0.
+No central mutation or main merge. Actual K/exclusive kernel/C/D/outside partner/
+donor work/EOS/T/absolute volume/full physical native25 remain null.
+
+## Preserved predecessor unit instructions
+
 # Current authorized atomwise He pair-energy support unit (2026-10-28)
 
 The current user requested one next full R1-R10 and C1-C10 after latest repositories/branches/backups/context survey, with per-stage publication and dual backups. Apply research/cr_he_energy_sum_20261028/CONTRACT.json. CR_PHYS02_HE_ENERGY_SUM_V1 has its own40 CPU-s cap including preparation,worker,coordinator,failures andplots. PR112 remains closed; activePR113 pair-support remains separately owned and is not modified or charged.

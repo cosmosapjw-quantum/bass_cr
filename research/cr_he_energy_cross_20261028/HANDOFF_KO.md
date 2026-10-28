@@ -53,3 +53,13 @@ extra bin masks are separate units. Do not transfer the remaining allowance.
 
 These stage evidence checkpoints are published during closeout.
 Adopt only actual successful commit/backup/R3 receipts, and preserve failures.
+
+## 검증된 배포와 재개 위치
+
+초안 PR: https://github.com/cosmosapjw-quantum/bass_cr/pull/115
+
+과학 S=9ec654379074b731ce20f0b7dbae05077ddf4d4b. 실제 문서 D와 최종 closeout 상태는 publication/FINAL_DELIVERY.json 및 C10_RECEIPT.json으로 결속한다.
+
+SOURCE는 BASS_CR_HE_ENERGY_CROSS_SOURCE_20261028_9ec654379074.zip,1553470bytes,SHA256 e606aea543f2dbf66832a549f4010ecb5cb51f642b45d6293ce1fd1b077f2a11이다. Dropbox와 Drive의 실제 원본 전체 GET에서 전체 SHA256,179개 payload SHA256 및 ZIP CRC가 모두 일치했다. SOURCE를 나중 영수증으로 다시 만들지 않는다.
+
+PR114의 후속 head3d9818b4b91d00beef946aa88540d73c33e51dac까지 바뀐43개 파일은 모두 cr_he_energy_sum 경로이며 이번 경로와 겹치지 않는다. 중앙 HEAD도 같은66ef9a0147a0573b77e74e151dc280ba2bd4b64c임을 다시 확인했다.
