@@ -1,0 +1,24 @@
+{
+  "schema": "CR_HE_ENERGY_SUM_METADATA_READ_FAILURE_V1",
+  "unit": "CR_PHYS02_HE_ENERGY_SUM_V1",
+  "operation": "Read actual complete recursive S tree",
+  "S": "3230790ebeb2657c3a222a2bdc1d043b7d745492",
+  "tree": "b08945a5705f709e4ce2285ae454fd0cb2e4e6cf",
+  "attempt": 1,
+  "observed": "codex_apps/github.fetch tool call failed: Transport closed",
+  "kind": "READ_ONLY_TRANSPORT_FAILURE",
+  "science_execution": 0,
+  "metadata_CPU_s": null,
+  "utc": "2026-10-28T09:43:18.509Z",
+  "attempts_observed": 2,
+  "second_attempt": {
+    "observed": "Same fixed recursive S-tree GET returned Transport closed",
+    "raw_evidence_path": "energy_sum_ops/release/SOURCE_TREE_SECOND_FAILURE_RAW.json"
+  },
+  "subsequent_small_ref_readback": {
+    "actual_sha": "3230790ebeb2657c3a222a2bdc1d043b7d745492",
+    "status": "PASS",
+    "inference": "The fixed branch ref remained S; failure cause of recursive tree request is not established."
+  },
+  "resolution": "Bounded selected-subtree readback proof requested; whole-tree completeness will not be invented."
+}
