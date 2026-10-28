@@ -1,0 +1,108 @@
+{
+  "schema": "BASS_CR_LITERATURE_INTAKE_V1",
+  "role": "R2_INPUT_ONLY_NO_SCIENCE_EXECUTION",
+  "observed_utc": "2026-10-28 06:45:31 UTC",
+  "client_date": "2026-10-28",
+  "client_timezone": "Asia/Seoul",
+  "scope": "Primary literature for retained PHYS02 atomwise He event support and energy acceptance; not a new scientific unit",
+  "retained_source_revision": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+  "predecessor_science_S": "406783036c26e71f3b85568adcfb5e163b012ab1",
+  "tools_actually_used": [
+    "SciSpace search_papers",
+    "Exa web_search_exa",
+    "Exa web_fetch_exa"
+  ],
+  "exa_search_calls": [
+    {
+      "key": "exa_pair",
+      "numResults": 10,
+      "query": "category:research paper proton impact helium double ionization fully differential cross sections joint two electron energy distributions Ambrosio 2015 2017 700 keV 6 MeV",
+      "returned_url_entries": 10,
+      "raw": "exa_pair.json"
+    },
+    {
+      "key": "exa_transport",
+      "numResults": 10,
+      "query": "category:research paper prescribed marginals support constraints finite measures linear programming sharp bounds coupling fractional matching dual certificate",
+      "returned_url_entries": 10,
+      "raw": "exa_transport.json"
+    },
+    {
+      "key": "exa_current",
+      "numResults": 10,
+      "query": "category:research paper proton helium double ionization two ejected electrons joint differential cross section data published 2024 2025 2026",
+      "returned_url_entries": 10,
+      "raw": "exa_current.json"
+    },
+    {
+      "key": "exa_ambrosio_manuscript",
+      "numResults": 5,
+      "query": "Ambrosio Mitnik Ancarani Gasaneo Gaggioli 2015 042704 full text pdf proton helium double ionization",
+      "returned_url_entries": 5,
+      "raw": "exa_ambrosio_manuscript.json"
+    },
+    {
+      "key": "exa_data",
+      "numResults": 10,
+      "query": "proton impact helium double ionization experimental numerical data files cross section two electron energy grid Fischer Guan Bartschat Ambrosio dataset",
+      "returned_url_entries": 10,
+      "raw": "exa_data.json"
+    },
+    {
+      "key": "exa_moments",
+      "numResults": 5,
+      "query": "Bertsimas Popescu 2005 Optimal inequalities in probability theory a convex optimization approach moment bounds primary paper pdf",
+      "returned_url_entries": 5,
+      "raw": "exa_moments.json"
+    }
+  ],
+  "exa_requested_results_sum": 50,
+  "exa_returned_url_entries": 50,
+  "exa_unique_exact_urls": 44,
+  "scispace": [
+    {
+      "raw": "scispace_pair.json",
+      "returned_papers": 10
+    },
+    {
+      "raw": "scispace_refined.json",
+      "returned_papers": 10
+    }
+  ],
+  "fetch_calls": 4,
+  "fetch_url_attempts": 9,
+  "known_fetch_failure": {
+    "url": "https://doi.org/10.1103/PhysRevA.92.042704",
+    "failure": "CRAWL_LIVECRAWL_TIMEOUT",
+    "recovery": "institutional author-proof PDF; extracted pages 1–4 only"
+  },
+  "source_acquisition_limits": [
+    "No same-source normalized exclusive He kernel or downloadable numerical joint array was obtained",
+    "Source PDF hashes are not claimed; raw response hashes describe retrieved text/metadata only",
+    "Ambrosio2015 institutional extraction ends on proof page4, although manuscript says10pages",
+    "Guan arxiv HTML/PDF fetch initially returned metadata/abstract; ar5iv fetch subsequently returned full text",
+    "Literature search is not an exhaustive corpus proof"
+  ],
+  "overlap_decision": "Parent observed parallel CR_HE_PAIR_SUPPORT covering full-Cartesian-bin graph LP, fixed double count and L1 sensitivity; do not duplicate it",
+  "candidate_relation": "atomwise E_a+E_b<=K intersects each birth bin non-Cartesianly and separately constrains diagonal doubles; K remains conditional, actual_K=null",
+  "actual_K": null,
+  "actual_exclusive_kernel": null,
+  "actual_C": null,
+  "actual_full_source_native25": null,
+  "science_or_CAS_executed": false,
+  "external_mutations": false,
+  "publication_safe_files": [
+    "LITERATURE_INTAKE_KO.md",
+    "SEARCH_LEDGER.json",
+    "SOURCE_CATALOGUE.json",
+    "LOCAL_RESPONSE_HASHES.json"
+  ],
+  "raw_text_handling": "Raw search/fetch outputs remain internal intake evidence. Publish own summaries, source URLs and digests rather than reproducing copyrighted full text.",
+  "context_read": [
+    "User-provided physmath-research-loop1.0 RESEARCH_POLICY",
+    "THEORY_LOOP R2",
+    "Exa Search SKILL.md",
+    "references/searching.md",
+    "references/patterns-papers.md"
+  ]
+}

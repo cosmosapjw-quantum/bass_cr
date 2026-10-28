@@ -1,0 +1,503 @@
+{
+  "schema": "CR_R02_OWNER_DELTA_QUALIFICATION_V1",
+  "classification": "READ_ONLY_METADATA_INTAKE",
+  "created_utc": "2026-10-28T08:18:24.899553+00:00",
+  "decision": "PASS_FIXED_CR_ENERGY_SUM_SCOPE_UNCHANGED",
+  "checks": {
+    "REI_direct_parent_b77": true,
+    "REI_only_expected_document_changed": true,
+    "WU_compare_is_two_commits_ahead": true,
+    "WU_contract_parent_matches_prior": true,
+    "WU_40_inherited_nodes_exactly_unchanged": true,
+    "WU_inherited_order_preserved": true,
+    "WU_only_two_new_OPEN_nodes": true,
+    "WU_complete_total_25_42": true,
+    "WU_workflow_4_20": true,
+    "WU_new_primary_reference_CAS_not_run": true,
+    "WU_prior_allowances_zero": true,
+    "WU_physical_inputs_still_pending": true,
+    "WU_L4_false_delta0": true,
+    "WU_S01_actual_receipt_only_in_S02_source": true
+  },
+  "REI": {
+    "repository": "cosmosapjw-quantum/rei_bianchi",
+    "branch": "research/rei-causal-prefix-consumer-20261027",
+    "old_head": "b77c7b8d45c48a7e4722e733309430d5ba668b0d",
+    "head": "7adeeb3635b3454d204d2ea23893d662c836a39f",
+    "commit_url": "https://github.com/cosmosapjw-quantum/rei_bianchi/commit/7adeeb3635b3454d204d2ea23893d662c836a39f",
+    "changed_paths": [
+      "research/rei_expanded_event_consumer/finite_thermal_endpoint_20261028/review/R6_SOURCE_BATH_RECONCILIATION_20261028.md"
+    ],
+    "patch": "@@ -69,9 +69,13 @@ This proves the prospective positive bias for B>0. No numerical bias or actual e\n \n ## 4. Source energy encoding and the three different temperatures\n \n-native.py reconstructs Tm_eV=kBoltz_src*Tm_K. With the source EV conversion,\n+native.py reconstructs Tm_eV=kBoltz_src*Tm_K in the unrounded model. Let theta, k and t denote the separately decoded represented values of Tm_eV, kBoltz_src and Tm_K, respectively, and define rho_theta=theta-k*t. With the source EV conversion, the represented bridge is\n \n-T_a^E/Tm_K = kBoltz_src*EV/k_B^SI.\n+T_a^E/t = k*EV/k_B^SI + rho_theta*EV/(k_B^SI*t).\n+\n+The unrounded-model relation T_a^E/t = k*EV/k_B^SI holds conditionally on rho_theta=0.\n+\n+Correction provenance (2026-10-28): actual distinct-author native review, review/native_blind_20261028/PHASE1_PRE_EVIDENCE.md finding F1 (actual reviewer task /root/finite_thermal_blind_reviewer), identified the missing separately decoded binary64 multiplication residual; preserved C7 raw temperature_bridge records supply its represented value. This paragraph corrects the displayed bridge only; the production implementation already retains this residual.\n \n Even when this is close to one, its exact represented equality cannot be assumed. Preserve the original binary64 lift, stored decimal lexemes and any convention discrepancy. The already-SI Q, W and U must not be multiplied by EV a second time. The source helium mass ratio3.97153 is not a baryon-count multiplier for an unprovided native25 normalization.\n ",
+    "change": "Documentation correction to represented temperature-energy bridge; theta,k,t retain separately decoded values and rho_theta=theta-k*t.",
+    "corrected_bridge": "T_a^E/t = k*EV/k_B^SI + rho_theta*EV/(k_B^SI*t). The shortened unrounded model relation holds only if rho_theta=0.",
+    "source_document_states_production_already_preserves_residual": true,
+    "production_code_changes_in_delta": 0,
+    "new_distinct_author_review_claim": "Changed source paragraph cites native review PHASE1_PRE_EVIDENCE.md F1 and actual task /root/finite_thermal_blind_reviewer.",
+    "review_source_resolution": {
+      "path": "research/rei_expanded_event_consumer/finite_thermal_endpoint_20261028/review/native_blind_20261028/PHASE1_PRE_EVIDENCE.md",
+      "at_head": "7adeeb3635b3454d204d2ea23893d662c836a39f",
+      "status": "MISSING_OR_INACCESSIBLE",
+      "http_status": 404,
+      "meaning": "The citation is a source-document claim; this intake did not obtain its native-review original and does not certify independent R6/C9 admission."
+    },
+    "retained_published_handoff": {
+      "workflow_complete": 13,
+      "workflow_total": 20,
+      "theory": 5,
+      "coding": 8,
+      "R6_C9": "PENDING_IN_PUBLISHED_HANDOFF",
+      "working_DAG": "33/88",
+      "central_DAG": "28/88",
+      "actual_REI_bath": null,
+      "actual_temperature": null,
+      "native25": null,
+      "physical_radii": null,
+      "L4_ready": false,
+      "global_physical_completion": null
+    },
+    "state_caution": "Historical R6 document contains earlier9/20 and NOT_RUN prose, while changed paragraph now cites a native review. Later published delivery handoff remains13/20. A single documentation patch is not a new complete workflow/admission result.",
+    "impact_on_CR": "No source/event changes, actual EOS/T or physical consumer supplied; preserve same-state/clock/normalization binding and represented residuals. Current CR does not evaluate temperature."
+  },
+  "WU": {
+    "repository": "cosmosapjw-quantum/WU088_HH",
+    "branch": "research/provider-registry-20261025",
+    "old_head": "fa42ec5e35d68452685ce447906401cf7a14d1b3",
+    "head": "a17c9655ad2a7089327444647b650897c55cff07",
+    "commit_url": "https://github.com/cosmosapjw-quantum/WU088_HH/commit/a17c9655ad2a7089327444647b650897c55cff07",
+    "commits": [
+      {
+        "sha": "ab18d0a13a837ce0aadc3956cecdc42e1570b1ac",
+        "message": "research(R13): register affine-forcing proof and code contract [S01 R1/C1, DAG 25/42]"
+      },
+      {
+        "sha": "a17c9655ad2a7089327444647b650897c55cff07",
+        "message": "research(R13): S02 paired theory/code checkpoint"
+      }
+    ],
+    "changed_paths": [
+      "AGENTS.md",
+      "research/provider_registry_molecular_r13_20261028/CONTRACT.json",
+      "research/provider_registry_molecular_r13_20261028/DAG.json",
+      "research/provider_registry_molecular_r13_20261028/EXECUTION_LEDGER.json",
+      "research/provider_registry_molecular_r13_20261028/HANDOFF_KO.md",
+      "research/provider_registry_molecular_r13_20261028/POLICY_DELTA.json",
+      "research/provider_registry_molecular_r13_20261028/REPORT_KO.md",
+      "research/provider_registry_molecular_r13_20261028/WORKFLOW_RECORD.json",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/SYNTHESIS_KO.md",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/backups/ATTACHMENT_SCOPE.json",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/backups/BACKUP_CONTEXT_CENSUS.json",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/backups/BACKUP_OBJECTS_R11_R12_RECONCILIATION.json",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/backups/CENSUS_REPORT_KO.md",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/backups/LOCAL_RAW_RESPONSE_MANIFEST.json",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/github/ARTIFACT_MANIFEST.json",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/github/CHANGED_REF_LOCATORS.json",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/github/PUBLIC_CENSUS.json",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/github/PUBLIC_HEAD_DELTA.json",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/github/SEVEN_REF_AND_CENTRAL_DELTA.json",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/github/SOURCE_READ_IDENTITIES.json",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/github/SYNTHESIS_KO.md",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/github/WU_LATEST_OBSERVATION.json",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/github/sources/00_rec_bianchi_STATUS.json",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/github/sources/01_bass_README_KO.md",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/github/sources/02_bass_HANDOFF_KO.md",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/github/sources/03_bass_HANDOFF_KO.md",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/github/sources/04_bass_HANDOFF_KO.md",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/github/sources/05_bass_README.md",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/github/sources/06_vigilode_REPORT_KO.md",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/github/sources/07_vigilode_ADMISSION.json",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/github/sources/08_vigilode_PREREGISTRATION.md",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/github/sources/09_bass_cr_C04.json",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/github/sources/10_BASS_HE_SOURCE_HANDOFF_SNAPSHOT_KO.md",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/github/sources/11_BASS_HE_SOURCE_HANDOFF_SNAPSHOT_KO.md",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/github/sources/12_rec_bianchi_RESULT.md",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/github/sources/13_rec_bianchi_ROOT_DECISION.json",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/github/sources/14_rei_bianchi_CURRENT_STATUS.json",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/github/sources/15_rei_bianchi_HE_EXP_QUARTIC12_20261028.json",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/github/sources/16_rei_bianchi_vigilode_v8_source_chemical_jacobian_remainder_20261028.json",
+      "research/provider_registry_molecular_r13_20261028/authority/intake/github/sources/17_htt_base_PUBLICATION_STATUS.json",
+      "research/provider_registry_molecular_r13_20261028/authority/literature/LITERATURE.json",
+      "research/provider_registry_molecular_r13_20261028/authority/literature/WOLFRAM_CONTEXT_USE.json",
+      "research/provider_registry_molecular_r13_20261028/delivery/PUBLICATION_INDEX.json",
+      "research/provider_registry_molecular_r13_20261028/inputs/R12_DAG.json",
+      "research/provider_registry_molecular_r13_20261028/stages/S01_KO.md",
+      "research/provider_registry_molecular_r13_20261028/stages/S02_KO.md",
+      "research/provider_registry_molecular_r13_20261028/theory/EQUATION_CODE_MAP_KO.md",
+      "research/provider_registry_molecular_r13_20261028/theory/PROOF_KO.md",
+      "research/provider_registry_molecular_r13_20261028/verification/REFERENCE_AUTHORING_RECORD.json",
+      "research/provider_registry_molecular_r13_20261028/verification/run_reference.py"
+    ],
+    "AGENTS_git_blob": "76be2c0690fd1a9015ffb9d3bdbcd8a5f053a240",
+    "AGENTS_change": "New R13 current-priority section prepended; prior R12 and earlier policy/result history retained.",
+    "unit": "WU_AFFINE_FORCING_R13",
+    "objective": "Extend the adopted all-starts full-A step-kernel comparison to nonnegative piecewise-affine whole-domain forcing on exact nonaligned clocks; implement exact overlap moments, quadratic vertex refinement, positive signed exponential Bernstein2 propagation, and closed-cell bounds.",
+    "scope": "One conditional theory node and one finite code node; no new physical source or consumer is assumed.",
+    "premises": {
+      "generator": "H=pi*d^T-diag(d), A=K+wH with fixed K/pi/destruction, whole certified w box, all start times, zero-mass residual and nonexpansive Markov remainders. R11 full-A q/tau certificate is a premise; no nominal K rho transplantation.",
+      "kernel": "h(age)=q^floor(age/tau), 0<=q<=1, tau>0, h0=1 including q=0.",
+      "forcing": "g_r and g_e nonnegative affine functions on each exact rational source cell, supplied by two nonnegative one-sided endpoint bounds. Whole fine/coarse-state-domain validity is an explicit source premise, not established by interpolating samples.",
+      "scalar": "E=abs(eta); fixed c>=0 and signed d_c over whole horizon; coarse l1=4E. R memory remains global.",
+      "clock": "Exact rational t0/source/observation, closed-cell upper bounds, one-sided initial-term jumps.",
+      "caps": "No new generic physical cap adapter. Inherited source/state/clock/closed-cell cap premises remain unchanged. New affine inputs do not acquire old saved cap identity."
+    },
+    "workflow": {
+      "complete": 4,
+      "total": 20
+    },
+    "local_DAG": {
+      "complete": 25,
+      "total": 42
+    },
+    "inherited_nodes_exactly_preserved": 40,
+    "new_node_statuses": {
+      "WU_HD_AFFINE_FORCING_CODE_R13": "OPEN",
+      "WU_HD_AFFINE_FORCING_THEORY_R13": "OPEN"
+    },
+    "science_state": "Primary, independent reference and CAS all NOT_RUN in pinned a17c ledger. Candidate proof and separate reference source exist; no executed R13 result/admission is inferred.",
+    "foreign_resource_contract": {
+      "primary": {
+        "runs": 1,
+        "CPU_s": 60,
+        "wall_s": 90
+      },
+      "reference": {
+        "runs": 1,
+        "CPU_s": 60,
+        "wall_s": 90
+      },
+      "CAS": {
+        "runs": 1,
+        "wall_s": 30
+      },
+      "old_R12_R11_R10_R9_R8_R7_R6_PHYS91_allowance_increase": 0,
+      "global_remaining": null,
+      "full_historical_CPU_s": null,
+      "new_ODE_runs": 0,
+      "old_science_replay": 0,
+      "postprocessing": "Saved outputs only; no solver calls."
+    },
+    "foreign_execution_ledger": {
+      "schema": "WU_R13_EXECUTION_LEDGER_V1",
+      "unit": "WU_AFFINE_FORCING_R13",
+      "created_utc": "2026-10-28T07:02:46.765135+00:00",
+      "primary": {
+        "allowed": 1,
+        "consumed": 0,
+        "remaining": 1,
+        "status": "NOT_RUN",
+        "runs": 1,
+        "CPU_s": 60,
+        "wall_s": 90
+      },
+      "reference": {
+        "allowed": 1,
+        "consumed": 0,
+        "remaining": 1,
+        "status": "NOT_RUN",
+        "runs": 1,
+        "CPU_s": 60,
+        "wall_s": 90
+      },
+      "CAS": {
+        "allowed": 1,
+        "consumed": 0,
+        "remaining": 1,
+        "status": "NOT_RUN",
+        "runs": 1,
+        "wall_s": 30
+      },
+      "old_remaining": {
+        "R12": [
+          0,
+          0,
+          0
+        ],
+        "R11": [
+          0,
+          0,
+          0
+        ],
+        "R10": [
+          0,
+          0,
+          0
+        ],
+        "R9": [
+          0,
+          0,
+          0
+        ],
+        "R8": [
+          0,
+          0,
+          0
+        ],
+        "R7": [
+          0,
+          0,
+          0
+        ],
+        "R6": [
+          0,
+          0,
+          0
+        ],
+        "PHYS91": [
+          0,
+          0,
+          0
+        ]
+      },
+      "global_remaining": null,
+      "full_historical_CPU_s": null,
+      "old_science_replay": 0,
+      "new_ODE_runs": 0,
+      "failures": [],
+      "historical_failures_preserved": {
+        "R8": "726/727PASS+1FAIL; separateexactphi24/24",
+        "R10": "175/469/9860/0.511886s/frozen14; initialIDfailure/DOC01/META02; originalsample4.0013206434938575e-12 andfixedtolerance; originalGETNOT_RUN",
+        "R11": "214/900/19195/1.477435s/frozen18; F01/F02/firstPNGbytescauseunknown/S08temporary/S09deletion; qualifiedCAS; strictsamplefalse349",
+        "R12": "531/317/133502/4.202434s/frozen30; qualified24CASzeros+messagescauseunknown; displayrepairhistory; provideroriginalGETNOT_RUN"
+      }
+    },
+    "budget_transfer_to_CR": false,
+    "physical_status": {
+      "actual_HD_reactive_array": "INPUT_PENDING",
+      "named_consumer_density_clock": "INPUT_PENDING",
+      "HH_R10": "OFF",
+      "production": "NOT_ISSUED",
+      "L4_ready": false,
+      "central_delta": 0,
+      "physical_delta": 0,
+      "native_v": "UNSPECIFIED",
+      "missingness": "MISSING_NOT_ZERO",
+      "TIQM_SQM": "DISTINCT"
+    },
+    "delivery_snapshot": {
+      "published_stage_source": "S02",
+      "workflow": "4/20",
+      "retained_backup_receipts": [
+        {
+          "stage": "S01",
+          "source_commit": "ab18d0a13a837ce0aadc3956cecdc42e1570b1ac",
+          "source_tree": "28611d444b5c5ddc424904422dd1ef02d6216837",
+          "archive_name": "WU_MOLECULAR_R13_S01_SOURCE_20261028_ab18d0a13a83.zip",
+          "archive_path": "/workspace/scratch/42de23091886/r13_work/delivery/WU_MOLECULAR_R13_S01_SOURCE_20261028_ab18d0a13a83.zip",
+          "archive_bytes": 47275,
+          "archive_sha256": "9693ee4acad2bb9aec82f37cc16538cb22e8af10cad6a228e5cc8ab78e50bf10",
+          "source_files": 11,
+          "zip_members": 12,
+          "verification": {
+            "local_ZIP_CRC": "PASS",
+            "all_member_SHA256": "MATCH",
+            "provider_original_GET": "NOT_RUN"
+          },
+          "workflow": "2/20",
+          "scientific_DAG": "25/42",
+          "Drive": {
+            "status": "SUCCESS",
+            "file_id": "1x3f3YhHMeApKmN77TegViH6bSW0umOjy",
+            "url": "https://drive.google.com/file/d/1x3f3YhHMeApKmN77TegViH6bSW0umOjy/view?usp=drivesdk",
+            "size": 47275
+          },
+          "Dropbox": {
+            "status": "COMPLETED",
+            "file_id": "id:BSpOijBcT10AAAAAAEDgEQ",
+            "path_display": "/BASS_DERIVATION_DOSSIERS_20260912/WU088_HH_R31S_NCP_REDESIGN_20260928/WU_MOLECULAR_R13_S01_SOURCE_20261028_ab18d0a13a83.zip",
+            "size": 47275
+          },
+          "provider_ACKs": 2,
+          "expected_parent": "fa42ec5e35d68452685ce447906401cf7a14d1b3",
+          "force": false
+        }
+      ],
+      "completed_stage_dual_backups_in_source": 1,
+      "provider_original_GET": "NOT_RUN",
+      "interpretation": "S02 source carries actual S01 receipt. S02 own receipt is external by owner convention; this snapshot alone does not establish S02 backup completion or failure."
+    },
+    "stale_handoff_notice": "HANDOFF_KO.md still says S01/workflow2/20; current WORKFLOW_RECORD and new AGENTS explicitly say4/20. Preserve both creation-time records.",
+    "impact_on_CR": "Conditional HD affine forcing/comparison method is a different owner and mathematical obligation. It delivers no actual atomic He pair-support cap/kernel, CR parent-event measure, actual C, physical consumer or density clock. WU K denotes its retained generator matrix, not this CR conditional pair energy cap."
+  },
+  "CR_fixed_contract_impact": {
+    "scope": "Conditional atomwise support Ea+Eb<=K, diagonal only2Ea<=K, finite retained atom marginals and same-state partial consumer.",
+    "actual_K": null,
+    "actual_exclusive_He_kernel": null,
+    "actual_C": null,
+    "actual_EOS_T": null,
+    "full_source_physical_native25": null,
+    "predecessor_source_identity_unchanged": true,
+    "same_state_consumer_inputs_changed_by_these_commits": false,
+    "scope_change_required": false,
+    "budget_change_required": false,
+    "foreign_budget_transfer": false,
+    "central_accounting_reused": "28/88 at already-qualified immutable central7937ed4a842eb1ef6cec562a4224fb0add63d0d6; this owner-delta subtask did not poll/rewrite central HEAD.",
+    "publication_gate_advice": "These pinned owner deltas do not block R02 scope. Root retains final mutable-ref/expected-parent checks before its authorized publication."
+  },
+  "coverage": {
+    "owner_commit_deltas_read": 2,
+    "WU_intermediate_commits_enumerated": 2,
+    "WU_changed_paths_enumerated": 50,
+    "REI_changed_paths_read": 1,
+    "full_changed_branch_body_read": false,
+    "personal_conversation_search": "NOT_PERFORMED",
+    "backup_original_GET": "NOT_PERFORMED"
+  },
+  "metadata_failures": [
+    {
+      "operation": "Fetch REI cited native-blind PHASE1_PRE_EVIDENCE.md at fixed7ade",
+      "result": "404 NOT_FOUND",
+      "classification": "SOURCE_PROVENANCE_UNAVAILABLE",
+      "science_failure": false
+    }
+  ],
+  "science_executions": 0,
+  "external_mutations": 0,
+  "ops_baseline_mutations": 0,
+  "metadata_CPU_s": null,
+  "evidence_files": [
+    {
+      "file": "/workspace/scratch/db96a47a0549/newloop_intake/git/R02_REI_7ade_HANDOFF.response.json",
+      "bytes": 7239,
+      "sha256": "800b6ace9c82c30a3854bb4f5ddb64459ae2ef53a0a93162a451b1ca814b293a",
+      "isError": false,
+      "source_git_blob": "a2008061929fa84beb50e9ffa6ea5a71d7c7c8e4",
+      "source_content_bytes": 6639,
+      "source_content_sha256": "1d2ba7c9ca02d2cf03b8159ec17edce61c6d3805bda98b0d5334dcb07a87d5a3"
+    },
+    {
+      "file": "/workspace/scratch/db96a47a0549/newloop_intake/git/R02_REI_7ade_NATIVE_PRE_EVIDENCE.response.json",
+      "bytes": 668,
+      "sha256": "541962a04b1743a860cec249747b9ed93465c096bb802b5305968775ae7577df",
+      "isError": true,
+      "source_git_blob": null,
+      "source_content_bytes": null,
+      "source_content_sha256": null
+    },
+    {
+      "file": "/workspace/scratch/db96a47a0549/newloop_intake/git/R02_REI_7ade_R6_RECONCILIATION.response.json",
+      "bytes": 19502,
+      "sha256": "25eabb9869e1e697f8a2126a8b61a31916cb506e122718e5c03ff78036dcbe48",
+      "isError": false,
+      "source_git_blob": "2f68770386767302ee79fb3e4fe7ae14d4c4a43d",
+      "source_content_bytes": 18794,
+      "source_content_sha256": "f97420be2426467fb7cf902e6fdd0b2fbae5cc3fa4e8acd718ce0a00e0e86be6"
+    },
+    {
+      "file": "/workspace/scratch/db96a47a0549/newloop_intake/git/R02_REI_7ade_commit.response.json",
+      "bytes": 14002,
+      "sha256": "7270dcca3e083aaaa33e300467469b79e3301804668beb5845ffc90609deb0c7",
+      "isError": false,
+      "source_git_blob": null,
+      "source_content_bytes": 6292,
+      "source_content_sha256": "c663c224763311e16c2c0cbddee4328322c406739efc77f7841e3687786ebc7d"
+    },
+    {
+      "file": "/workspace/scratch/db96a47a0549/newloop_intake/git/R02_WU_a17c_AGENTS.response.json",
+      "bytes": 76666,
+      "sha256": "3d51ee853f949b1dc1479f213de7ac6bed0fd13a56617357bd8f5e7e728278bc",
+      "isError": false,
+      "source_git_blob": "76be2c0690fd1a9015ffb9d3bdbcd8a5f053a240",
+      "source_content_bytes": 75862,
+      "source_content_sha256": "ec4e726ca11a163648cf179daf9b7ec9d63648078d00df90eb299eb816950bdb"
+    },
+    {
+      "file": "/workspace/scratch/db96a47a0549/newloop_intake/git/R02_WU_a17c_CONTRACT.json.response.json",
+      "bytes": 6220,
+      "sha256": "3c4b82c80ca3f2b6a869b7320fccab1005f413a73008b6c6b82cbc21b497547a",
+      "isError": false,
+      "source_git_blob": "66c508d24beb4ca8572ee8ccf6f5054f9d2d0e5e",
+      "source_content_bytes": 5383,
+      "source_content_sha256": "ffeb45a838ab2cb12bf16b4826bb8e086f32f32c0b102f32cb154ea181c6d67f"
+    },
+    {
+      "file": "/workspace/scratch/db96a47a0549/newloop_intake/git/R02_WU_a17c_DAG.json.response.json",
+      "bytes": 45339,
+      "sha256": "5c03b591a60cfd6844d109fae923df614a9bf8d8a43f6e958487a78427f1ebb0",
+      "isError": false,
+      "source_git_blob": "c16135d011ec2950efdf0e7d9cee1705d81b4193",
+      "source_content_bytes": 41657,
+      "source_content_sha256": "d2510434e0d57a36b21ecc41ac7a1950d68002d452561c2acf8aabe97f9ff664"
+    },
+    {
+      "file": "/workspace/scratch/db96a47a0549/newloop_intake/git/R02_WU_a17c_EXECUTION_LEDGER.json.response.json",
+      "bytes": 2283,
+      "sha256": "acf6768bab0f8afdd8058870b4aff5be4badf30a7f9167f1645d88782a00f867",
+      "isError": false,
+      "source_git_blob": "a182be7b4494c3ab02e8bd4d0093e51fe746d221",
+      "source_content_bytes": 1617,
+      "source_content_sha256": "521598de25b745c75376719c9ebc6f9d31254388d1986a6251a8430e75e75859"
+    },
+    {
+      "file": "/workspace/scratch/db96a47a0549/newloop_intake/git/R02_WU_a17c_HANDOFF.response.json",
+      "bytes": 633,
+      "sha256": "b6deb2a485d8456c968e5c7f7951ea6496f94db8f63309fab8f0ee1d32f73a8f",
+      "isError": false,
+      "source_git_blob": "4aeeb44b9c2688e1f50f1d877e876d0da8dbfa39",
+      "source_content_bytes": 174,
+      "source_content_sha256": "270ed83a4ae8c14878aed1e6b899f92fdad6360dae729295edc4c63bceedfa68"
+    },
+    {
+      "file": "/workspace/scratch/db96a47a0549/newloop_intake/git/R02_WU_a17c_POLICY_DELTA.json.response.json",
+      "bytes": 1818,
+      "sha256": "c20fd58e676fd3c753162c896d265d196c62373c97ca9a4133abd1a4761987d1",
+      "isError": false,
+      "source_git_blob": "a44e2c1123a5cfea7e9b18eea2e76035f3f23225",
+      "source_content_bytes": 1284,
+      "source_content_sha256": "d7b718b919a28bc66b57ba0014a7fd9021d879031b8b8a986f7049ae39384bfd"
+    },
+    {
+      "file": "/workspace/scratch/db96a47a0549/newloop_intake/git/R02_WU_a17c_PROOF.response.json",
+      "bytes": 11736,
+      "sha256": "ab1482ed801cc1788dc82be6fa86dfbd9a576b80782ae1a711b1c1ea2a62e9d3",
+      "isError": false,
+      "source_git_blob": "1d58ab6e55d59ee713492ce842fd2d99b41a0579",
+      "source_content_bytes": 11148,
+      "source_content_sha256": "2704f3aa4a70807845810c6dac75da10a953df69e94eb99faa36f1d2716c007b"
+    },
+    {
+      "file": "/workspace/scratch/db96a47a0549/newloop_intake/git/R02_WU_a17c_WORKFLOW_RECORD.json.response.json",
+      "bytes": 4443,
+      "sha256": "afcebce7d59e3363f580d44c6f83025dcd5b3f73e6b8a75e9dae81e2465ed3bf",
+      "isError": false,
+      "source_git_blob": "17b771564095d832ac5469e2cf5066b051eca7e1",
+      "source_content_bytes": 3474,
+      "source_content_sha256": "4a2cb49674444b0070dddfc3e62f4aa01a1ef47631fd9edc3b57621b748ac160"
+    },
+    {
+      "file": "/workspace/scratch/db96a47a0549/newloop_intake/git/R02_WU_a17c_commit.response.json",
+      "bytes": 1386857,
+      "sha256": "478f3a0deced0803bc022c92d77bf782882d2f06b044d3aea07916175ea3bc1f",
+      "isError": false,
+      "source_git_blob": null,
+      "source_content_bytes": 635915,
+      "source_content_sha256": "9c37409009dd700b65824117cd3894bdd0179ed32a8add1f79dcbdc46748b51a"
+    },
+    {
+      "file": "/workspace/scratch/db96a47a0549/newloop_intake/git/R02_WU_a17c_delivery_PUBLICATION_INDEX.json.response.json",
+      "bytes": 2284,
+      "sha256": "8160dd7a7cf27ac53c1552b67429a289269db58eaadd14e8ace883deff16d92d",
+      "isError": false,
+      "source_git_blob": "1960da61242c8614427c013ca066e7ba1617a31f",
+      "source_content_bytes": 1654,
+      "source_content_sha256": "b8a504175ab7a944985c62221689cfbdfe7b7d83db7ec3d298c8d4cd025fa911"
+    },
+    {
+      "file": "/workspace/scratch/db96a47a0549/newloop_intake/git/R02_WU_fa42_R12_DAG.response.json",
+      "bytes": 44661,
+      "sha256": "83e224b122a99c0e8e20af8d7754673ad7497291f7cb684841d3ba91fe27a4ba",
+      "isError": false,
+      "source_git_blob": "88f45eb05ec96ad8ec7081a614096944b0da2827",
+      "source_content_bytes": 41033,
+      "source_content_sha256": "cec30becf3472ef08028486f602455ed43edbf49a0ba3d14b8a022c5ec54b0b0"
+    },
+    {
+      "file": "/workspace/scratch/db96a47a0549/newloop_intake/git/R02_WU_fa42_a17c_compare.response.json",
+      "bytes": 1661505,
+      "sha256": "83d907c2f0b890b5f73f119ada4250f52ca0959276253789dc99eb489a6f014d",
+      "isError": false,
+      "source_git_blob": null,
+      "source_content_bytes": 759450,
+      "source_content_sha256": "9290e1d7c07fdd05f08dfac655336ffb6f035a68c505d01e4f3b3e25218519a9"
+    }
+  ]
+}
