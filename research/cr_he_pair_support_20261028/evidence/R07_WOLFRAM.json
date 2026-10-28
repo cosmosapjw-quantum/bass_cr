@@ -1,0 +1,28 @@
+{
+  "schema": "CR_HE_PAIR_SUPPORT_CAS_V1",
+  "tool": "wolfram.wolframlanguageevaluator",
+  "timeConstraint_s": 8,
+  "actual_calls": 1,
+  "code": "ClearAll[n,d,c,w,s,p,x,y,z,a,b]; $HistoryLength=0; checks=<|\"ResidualLegIdentity\"->Expand[(n-2c)-2(d-c)-(n-2d)],\"ParentIdentity\"->Expand[(n-2d)+d-(n-d)],\"WindowHomogeneity\"->Expand[w*(x+y+z)-(w*x+w*y+w*z)],\"ChargeCorrection\"->Expand[(0*c+1*0+2*(-c))-(-2c)],\"ChemicalCorrection\"->Expand[(a*0+(a+b)*(-c))-(-(a+b)*c)],\"SelectedLegCorrection\"->Expand[(2*c)-(c+c)]|>; tri=Maximize[{x+y+z,x>=0&&y>=0&&z>=0&&x+y<=1&&x+z<=1&&y+z<=1},{x,y,z},Reals][[1]]; star=Maximize[{x+y+z,x>=0&&y>=0&&z>=0&&x+y+z<=1&&x<=2&&y<=4&&z<=8},{x,y,z},Reals][[1]]; cut=And@@(Function[v,If[v[[1]]+v[[4]]>=1&&v[[2]]+v[[3]]>=1,(v[[1]]+v[[3]]+v[[2]]+v[[4]])/2>=1,True]]/@Tuples[{0,1},4]); fixed=FullSimplify[(2(d-c)<=n-2c)==(2d<=n),Element[{n,d,c},Reals]]; ExportString[<|\"IdentityResiduals\"->checks,\"TriangleExact\"->ToString[tri,InputForm],\"StarExact\"->ToString[star,InputForm],\"CutIndicatorImplication\"->cut,\"FixedDLegInequalityEquivalence\"->fixed,\"PASS\"->(And@@Thread[Values[checks]==0]&&tri===3/2&&star===1&&cut===True&&fixed===True)|>,\"RawJSON\"]",
+  "actual_result": {
+    "identity_residuals": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "triangle_exact": "3/2",
+    "star_exact": "1",
+    "cut_indicator_implication": true,
+    "fixed_d_leg_inequality_equivalence": true,
+    "PASS": true
+  },
+  "groups": 10,
+  "cut_boolean_configurations": 16,
+  "proof_role": "Discriminating examples and identities; full proof in THEOREM.md",
+  "CPU_s": null,
+  "local_budget_charge": "Remote provider CPU unmeasured; not represented as zero or charged to local measured CPU",
+  "actual_exclusive_kernel": null
+}
