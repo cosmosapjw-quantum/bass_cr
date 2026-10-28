@@ -1,0 +1,15 @@
+# Postarchive handoff, 2026-10-29
+
+Active repository: cosmosapjw-quantum/bass_cr; Draft PR118: https://github.com/cosmosapjw-quantum/bass_cr/pull/118, branch research/cr-native-samebin-capacity-20261029. Do not conflate with REI UVB thread.
+
+CR_NATIVE_SAME_BIN_CAPACITY_NEXT, fixed conditional K3 eV saved PHYS02 He 3201 atoms. Original PR116 source NPZ SHA256 1c974c306b50f3deb86df712844f753b4402fb25e5dbc41c9a1de0254bf3ff47; atom digest 2cfca578701a2355fa6f1f3f1f8a27c211e81b9b488f65cef1e1a89e4dbc7690. Native S=323478918562118325/3064991081731777716716694054300618367237478244367204352, S/N=0.06643458477237846, M/N=0.17746562514878358. 315 primal pair events, 3201 independent capacity checks, 315 support checks, exact Hall mincut gap=0. Corrected necessary outer bound 2d-C<=L+S; at d=D, necessary C/N>=0.11103104037640514. This is NOT the full feasible joint polygon, not an actual exclusive He kernel and not physically identified K.
+
+First native attempt failed ATOM_SOURCE_BUNDLE_REQUIRED due duplicate module load, retained. One-loader repair succeeded. New direct-Atom float-guard RED then 11/11 GREEN; 460 prior independent exact-flow fixtures. Four Git source blobs match executed local bytes. Native calculation itself was before strict-constructor guard patch; no full native reexecution of patched code.
+
+**Formal gate HOLD**: New 20 CPU-s budget has >=20.45 recorded CPU-s, controller/metadata UNKNOWN_NOT_ZERO, so RESOURCE_BUDGET_FAIL. Independent-author R6 and C9 NOT_RUN, only same-author separate-algorithm checks. Work artifacts 18/20, canonical central DAG28/88, delta0, scoped node not formally admitted, physical activation false, L4/production not promoted. Science closed, additional allowance0, auto-next OFF. Prior PR115/116 budgets not transferred, source fit/RR/native25/IVP not repeated.
+
+Immutable SOURCE 380428 B, 41 members, sha256 311b1a17df99c81cf973006e8c5222430e2a1d66e27d63c9e7e7b2bd9ec3ccd4: Drive https://drive.google.com/file/d/1c3apzlFmkgAFGFr9K1LRRiKRhb7Mbx2J/view, Dropbox id:BSpOijBcT10AAAAAAEGpjA.
+Immutable CLOSEOUT 388514 B, 8 members, sha256 13f9b45bc9455886d8cb29e77b460787be1a4bfd6a79aa6427a4b6b4a66566a2: Drive https://drive.google.com/file/d/12Q59FD4UwK2rUEvd9m7_tNDPoq2r5idR/view, Dropbox id:BSpOijBcT10AAAAAAEGpiw.
+Both provider uploads COMPLETED. Drive SOURCE/CLOSEOUT original full GET, whole SHA, member SHA, CRC all R3 PASS. Dropbox metadata size and Dropbox provider content_hash equal local originals for both. Dropbox original GET failed due DNS; do NOT call that R3. Earlier stage-by-stage dual backups were not verified and must not be invented. ZIPs were not regenerated after the uploads. See publication/POST_CLOSEOUT_DUAL_ACK.json for final receipts.
+
+Resume only after checking latest PR118/parent PR117/central refs and AGENTS. First obtain actually independent R6/C9 review of the frozen source/logic/results; seek new separately frozen resource budget with aggregate guard before scientific reruns. No new kernel, rates, heating, EOS or physical native25 assumed.
