@@ -1,0 +1,9 @@
+# C8 Saved-result figure and actual visual inspection
+
+The bounded plot_v1 read only the saved primary_v2 SUMMARY and independent_v1 RESULT at their exact hashes. It imported neither the production solver nor the NPZ loader, and recorded scientific_replays0. Its three input/value/export checks passed. The PNG is2720x1160,253510bytes,SHA2562984353ee34751a43e018801a4397812b168345bac77e86f4d4c8782f6eb56d2; the companion SVG is57944bytes,SHA256f6cf3e51b7adde6a8db30046d636b3a3e614428cf73e409842e1409b10839515.
+
+Root opened the actual PNG and recorded PASS_VISUAL_QA in review/C08_VISUAL_QA.json. All3 panels, units, annotations and footnotes are readable without clipping. The figure uses9 saved cap samples without interpolation, shows the normalized feasible parent coefficient intervals and explicitly leaves the inventory gate separate. A categorical cutoff panel separates decimal K=1/5 from exact K=2E0, labels its ghost-half-mass vertical normalization and gives the exact cap gap1/90071992547409920eV. Near-equal marker overlap in the first panel is disclosed and resolved by the third panel. Actual physical K and the exclusive kernel remain unresolved in the figure itself.
+
+The plotting execution charged1.943221CPU-s, comprising measured1.893221 and tail0.05. The complete own-unit ledger is now13.861533/40CPU-s, measured13.561532000000001 plus tails0.30000099999999974, including the preserved failed primary_v1. Remaining26.138467 cannot transfer to another unit. The historical plot RESULT retains its initial visual_QA=PENDING_ROOT_PNG_INSPECTION; the later root inspection receipt supplies the actual decision without rewriting that execution record.
+
+PNG and executed-source snapshots are archive-only. SVG, RESULT, commands, manifests, receipts and root visual QA are published. C9 final review/admission remains the next gate. Central28/88, effect0; scoped child0/1 until admission. No additional scientific run is selected.
