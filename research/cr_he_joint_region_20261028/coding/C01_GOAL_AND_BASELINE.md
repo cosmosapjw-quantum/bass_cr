@@ -1,0 +1,13 @@
+# C1 — Goal, baseline and completion criterion
+
+Implement the admitted conditional joint event region and its marginal-preserving witnesses, then verify the original source-parent consumer. The theory is THEOREM.md at the completed R10 checkpoint 0db1d72042d39aec6fe77430e4ab0bbbe2d488f3. Draft PR116 is the additive delivery branch; its base is the closed PR115 final b457bb58d74cc9b64f7c760ffc690eda7a51ef9a.
+
+The actual checkout is the existing bass_cr directory on research/cr-he-joint-region-20261028. At C1 its local Git HEAD remains b457bb58 because the ten new commits were published by expected-SHA API, while current working files contain the new unit. Actual git status shows only modified root AGENTS and the new unit directory. No other owner checkout is modified. Remote publication receipts, source byte hashes and local working content are kept distinct; local index synchronization will be guarded at closeout.
+
+The baseline source is the exact stored binary64 NPZ (3200 active atoms plus cutoff ghost), with the original loader/consumer, proper q=tA interval[0,1e10]s, conditional100K H1/He4 inventory and nb8750/47. Source fits, projections and RR are not rerun. Identity-preserving selections recover PR114 dmax/max_events and PR115 Cmax/K20 primal. Their hashes and source-origin pins are in intake/RECOVERY_RECEIPT. The old failure records and closed budgets remain untouched.
+
+C01_BASELINE_IDENTITY records actual file SHA/bytes and runtime metadata. The observed compiler is g++ (Ubuntu13.3.0-6ubuntu2~24.04)13.3.0; Python3.12.14, NumPy2.3.5 and Matplotlib3.10.8 are installed. These were metadata probes, not a compile or scientific benchmark. New scientific preparation, compilation, workers, failures and plots must enter the new bounded local ledger.
+
+Acceptance is exact rational, with no floating relaxation: actual domain predicate; atomwise nonnegative/support-valid vertex and interior witnesses; complete marginal equality; exact (d,C); independent small full-event oracle; original consumer agreement including source ions, parent count, chemical correction and once-only normalization. Validate native allowed caps0,1/5,twice-binary-ghost,2,6,20 and reject1,3,10 with concrete atom pairs. Native K6 primal is new, whereas prior scalar optima and selected witnesses are reused.
+
+The implementation is complete only when these obligations, saved-result visualization, reproducibility and independent review are closed, followed by actual stage publications and immutable SOURCE/CLOSEOUT dual original-readback R3. Mathematical/scoped completion does not fill actual physical K, exclusive kernel or physical native25. Central remains qualified28/88 and this whole node remains0/1 until C9 admission.
