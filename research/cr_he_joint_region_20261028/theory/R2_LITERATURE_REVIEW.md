@@ -18,7 +18,7 @@ m_i=s_i+2p_{ii}+\sum_{j\ne i}p_{ij}.
 Behrend 좌표로 옮길 때 physical loop는 \(x_{ii}=2p_{ii}\), off-diagonal은 \(x_{ij}=p_{ij}\)다. Singles는 별도 slack 변수로 구분한다(그래프로 구현하면 별도 loop). 그러면
 \[
 d=\sum_{i<j}x_{ij}+\tfrac12\sum_i x_{ii}^{\rm physical},
-\qquad C=\sum_{\substack{i<j\\b_i\ne b_j}}x_{ij}.
+\qquad C=\sum_{\substack{i<j\\\operatorname{bin}(i)\ne\operatorname{bin}(j)}}x_{ij}.
 \]
 Physical loop의 허용조건 \(2E_i\le K\)와 항상 허용되는 single slack을 합쳐서는 안 된다. 이는 **incidence 변환**이며 joint polygon의 증명이 아니다.
 
