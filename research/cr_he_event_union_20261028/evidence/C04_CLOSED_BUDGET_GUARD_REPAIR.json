@@ -1,0 +1,59 @@
+{
+  "schema": "CR_HE_EVENT_UNION_COORDINATION_REPAIR_V1",
+  "unit": "CR_PHYS02_HE_EVENT_UNION_V1",
+  "id": "C04_CLOSED_BUDGET_GUARD",
+  "decision": "MINIMAL_PRE_FIRST_RUN_COORDINATION_REPAIR",
+  "authority": "Explicit root instruction: enforce the final science-closed/zero-additional-allowance boundary without changing source or algebra.",
+  "finding": "A closed unit could previously admit a new worker using residual cap because closure fields were not checked.",
+  "change": {
+    "location": "immediately after budget read and unit/cap validation",
+    "inserted_guard": "assert budget.get('science_closed', False) is False and budget.get('additional_science_allowance_cpu_s') != 0, 'UNIT_SCIENCE_CLOSED'",
+    "files": [
+      "next_work/drafts/run_bounded.py",
+      "research/cr_he_event_union_20261028/implementation/run_bounded.py"
+    ],
+    "only_source_change": "one identical guard line in draft and canonical runner"
+  },
+  "source_before": {
+    "bytes": 5269,
+    "sha256": "4c6930e8faff4043975be28f71c42761080bd276f0d0b012d2e7e3c3d6e1def2",
+    "executed": false,
+    "status": "UNEXECUTED_PRE_FIRST_RUN"
+  },
+  "source_after": {
+    "bytes": 5406,
+    "sha256": "7835e0bb9ab02772c47952987c58c0af42d820a18e828a7b786d7581ee0286a0",
+    "executed": false,
+    "draft_canonical_byte_identity": true
+  },
+  "validation": {
+    "syntax": "AST_PARSE_PASS",
+    "scientific_execution": "NOT_RUN",
+    "probe_execution": "NOT_RUN",
+    "plot_execution": "NOT_RUN",
+    "runtime_guard_test": "NOT_RUN",
+    "new_review": "NOT_RUN"
+  },
+  "budget": {
+    "modified": false,
+    "observed_sha256": "f16ae27a4b3254e673d64abf168ed28f5fa0ddb210c1f382060b0a657ad69624",
+    "observed_attempt_count": 0,
+    "future_root_closeout_fields": {
+      "science_closed": true,
+      "additional_science_allowance_cpu_s": 0,
+      "unused_status": "NONTRANSFERABLE"
+    }
+  },
+  "implementation_manifest": {
+    "path": "IMPLEMENTATION_MANIFEST.json",
+    "before_bytes": 3392,
+    "before_sha256": "dbc410c1c2f59bc60b60bac2870b606fed1a3b384f43d78fee30769aa7f39cc5",
+    "after_bytes": 3820,
+    "after_sha256": "d3ba43eab49563a0c7183e43212d5c6c56f58dfd81b4ffec8b2ce9db9a0ae4c9"
+  },
+  "scientific_algebra_changed": false,
+  "source_input_pins_changed": false,
+  "contract_changed": false,
+  "R02_R06_modified": false,
+  "claim_boundary": "Syntax and exact edit verified; no runtime guard pass or new science result is claimed."
+}
