@@ -1,0 +1,81 @@
+{
+  "schema": "CR_HE_PAIR_SUPPORT_R06_INDEPENDENT_V1",
+  "unit": "CR_PHYS02_HE_PAIR_SUPPORT_V1",
+  "stage": "R06",
+  "reviewer_task": "/root/repo_census",
+  "reviewed_utc": "2026-10-28T05:37:51Z",
+  "decision": "PASS_SCOPED_THEOREM_REVIEW",
+  "method": "Independent manual derivation from frozen contract before reading author theorem, then proof comparison, degeneracy analysis, alternate complete-graph dual derivation and static inspection of unchanged source-bound consumer. No production solver or scientific code execution.",
+  "reviewed_files": [
+    {"path": "CONTRACT.json", "sha256": "b7dd9f7ecd6d1bb2db5c7051344e264f2481efbfcfbbe8cff42a527af1e91d58"},
+    {"path": "theory/R03_CLAIMS_KO.md", "sha256": "4dad802bc0bf053c110316295a59843fc7ff92f3e2912650517c950549df7a33"},
+    {"path": "theory/R04_REPRESENTATION_KO.md", "sha256": "6fdfbb98fad281f727afc3f7eab767eeb2735d8bbd0cc8390595190308f0fb3d"},
+    {"path": "theory/THEOREM.md", "sha256": "7a005c8e322d64db1ebbe0ae3cc74cf86138d6b40e6b805f019dfa8451a5b05a", "scope": "Includes inventory clarification Eq.(8)."},
+    {"path": "theory/R05_DERIVATION_KO.md", "sha256": "ee9b7c5b4148479df32662f22904a6c511ad8870027e06cbfcd9768ced8da535"},
+    {"path": "../cr_he_event_union_20261028/implementation/event_union.py", "sha256": "6b1813ccca95cf3843a217132933db373590b9580d7b1160964468e0351b286d", "relation": "STATIC_READ_BYTE_IDENTITY_WITH_INPUT_MANIFEST"}
+  ],
+  "review_obligations": [
+    {"id": "R6-01", "subject": "Finite compact primal and weak dual inequality", "status": "PASS_MANUAL_PROOF"},
+    {"id": "R6-02", "subject": "Both graph-to-flow and asymmetric-flow-to-graph directions; rho=F/2", "status": "PASS_MANUAL_PROOF"},
+    {"id": "R6-03", "subject": "2N middle capacity, min-cut half-integral dual and objective equality", "status": "PASS_MANUAL_PROOF"},
+    {"id": "R6-04", "subject": "N=0, empty graph, zero/isolated bins and odd triangle boundary", "status": "PASS_MANUAL_PROOF"},
+    {"id": "R6-05", "subject": "All cross masses in [0,rho] attained by scaling", "status": "PASS_MANUAL_PROOF"},
+    {"id": "R6-06", "subject": "Fixed d interval [0,min(d,rho)] and endpoints", "status": "PASS_MANUAL_PROOF"},
+    {"id": "R6-07", "subject": "Full-rectangle sparse atom lift; exact marginal; two diagonal legs", "status": "PASS_MANUAL_PROOF"},
+    {"id": "R6-08", "subject": "Complete-graph reduction via independent half-integral dual argument", "status": "PASS_MANUAL_PROOF"},
+    {"id": "R6-09", "subject": "Monotonicity, homogeneity and L1 capacity sensitivity", "status": "PASS_MANUAL_PROOF"},
+    {"id": "R6-10", "subject": "Proper-window scaling, coefficient/density units and retained cutoff identity", "status": "PASS_STATIC_CONVENTION_CHECK"},
+    {"id": "R6-11", "subject": "Species/charge/chemical correction signs and same-source once-only obligations", "status": "PASS_STATIC_CONVENTION_CHECK"},
+    {"id": "R6-12", "subject": "Consumer inventory gate separated from formal feasible interval", "status": "PASS_AFTER_R6_F1_PATCH"}
+  ],
+  "findings": [
+    {
+      "id": "R6-F1",
+      "status": "CLOSED",
+      "object": "Initial THEOREM.md section6 consumer-admission scope",
+      "evidence": "Inherited consume_event_union explicitly checks parents <= (1085/94)*(99/100); matching feasibility alone does not imply this for arbitrary capacities/windows.",
+      "consequence": "Constructed parent coefficient is A_tot-d_coeff, so W*(A_tot-d_coeff)<=Hcap is a separate consumer gate. For omitted d, d_coeff=C_coeff gives lower gate max(0,A_tot-Hcap/W)<=C_coeff.",
+      "correction": "Author added THEOREM section6 Eq.(8) and formal-feasible versus consumer-admitted distinction, and recorded it in R05_DERIVATION_KO.md.",
+      "verification": "Reviewer read the added paragraph and R05; patched file hashes above. Mathematical graph interval and source values unchanged.",
+      "scientific_rerun_required_for_patch": false
+    }
+  ],
+  "open_mathematical_blockers": 0,
+  "closed_findings": 1,
+  "scope": {
+    "finite_simple_undirected_graph": true,
+    "full_cartesian_edge_rectangles": true,
+    "singles_allowed": true,
+    "atomic_diagonal_doubles_allowed": true,
+    "exact_rational_implementation_of_real_theorem": true,
+    "global_novelty_claim": false,
+    "actual_physical_pair_graph": null,
+    "actual_exclusive_He_kernel": null,
+    "actual_C_D": null,
+    "outside_partner_response": null,
+    "projectile_donor_work": null,
+    "actual_EOS_T": null,
+    "full_source_physical_native25": null
+  },
+  "remaining_coding_obligations": [
+    "Actual exact primal/dual certificate execution and independent dual-oracle comparisons",
+    "Actual all3201 atom-marginal and conditional graph-support verification",
+    "Actual retained-source inventory/window/state/nb and once-only consumer tests",
+    "Independent C9 code/result review"
+  ],
+  "resource_accounting": {
+    "scientific_execution_count": 0,
+    "production_solver_executions": 0,
+    "CAS_calls": 0,
+    "foreign_scientific_code_executions": 0,
+    "metadata_CPU_s": null,
+    "provider_writes": 0,
+    "recursive_delegations": 0
+  },
+  "skill_context_used": [
+    {"path": "next_work/policy/RESEARCH_POLICY.md", "version": "1.0.0", "application": "Concrete constructive proof, scoped result, explicit finding and minimal correction, no novelty/no-go inflation."},
+    {"path": "next_work/policy/THEORY_LOOP.md", "application": "R6 independent proof, boundaries, signs, units and exact dependency review."},
+    {"path": "next_work/policy/SUBAGENT_MODE.md", "application": "One bounded independent review lane, shared write ownership respected, no recursive agents or provider writes."}
+  ],
+  "central_snapshot": {"qualified_completed": 28, "total_nodes": 88, "integration_edges": 17, "count_effect": 0, "global_physical_completion": null, "L4_ready": false}
+}

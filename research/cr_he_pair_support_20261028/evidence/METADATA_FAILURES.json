@@ -1,0 +1,35 @@
+{
+  "science_job_failures": 0,
+  "metadata_CPU_s": null,
+  "events": [
+    {
+      "operation": "git ls-remote default proxy",
+      "classification": "EXECUTION_FAILED",
+      "observed": "browser-proxy8889 connection unavailable",
+      "science_execution": false
+    },
+    {
+      "operation": "git ls-remote with explicit empty http.proxy",
+      "classification": "EXECUTION_FAILED",
+      "observed": "github.com DNS unresolved",
+      "disposition": "GitHub connector exact-base API staging; local Git checkout unavailable, no runtime-blocked inference",
+      "science_execution": false
+    },
+    {
+      "operation": "read .codex/readback-policy.json at PR112D",
+      "observed": "GitHub404",
+      "disposition": "read authoritative docs/READBACK_POLICY.md and AGENTS; no tolerance or scientific policy change"
+    },
+    {
+      "operation": "metadata output shape",
+      "observed": "large raw JSON output truncated; bounded structural extraction substituted",
+      "science_execution": false
+    }
+  ],
+  "R01_argument_transport": {
+    "error": "Argument list too long before child process creation",
+    "repair": "Persist exact JSON request to file and use stdin redirection",
+    "science_executions": 0,
+    "metadata_CPU_s": null
+  }
+}

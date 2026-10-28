@@ -1,0 +1,133 @@
+{
+  "schema": "CR_HE_PAIR_SUPPORT_CONTRACT_V1",
+  "unit": "CR_PHYS02_HE_PAIR_SUPPORT_V1",
+  "path": "research/cr_he_pair_support_20261028",
+  "status": "FROZEN_NEW_UNIT",
+  "frozen_utc": "2026-10-28T05:15:15.326507+00:00",
+  "authorization": "Current user explicitly requested the next full R1-R10 and C1-C10 after current-source survey, with per-stage publication and dual backups. This is a separate unit; PR112 remains closed.",
+  "base_revision": "729cb95164697d8122b0a85ae6e403b57392e724",
+  "branch": "research/cr-he-pair-support-20261028",
+  "research_question": "Construct and certify the sharp conditional cross-event range under an explicit four-bin pair-support graph, then lift a feasible graph witness to unchanged PHYS02 atoms and consume its union once.",
+  "theorem_domain": {
+    "finite_graph": "Undirected simple graph on finite bins. Every allowed edge permits the full Cartesian rectangle of its two atom bins. Singles and atomic diagonal doubles remain permitted.",
+    "implementation_bins": 4,
+    "capacities": "Nonnegative exact rational electron-leg masses; stored binary64 inputs are lifted exactly, without new fit or projection.",
+    "pair_graph_status": "Caller-supplied CONDITIONAL graph with nonempty provenance; no physical graph adopted. All 64 four-bin masks are algebraic support fixtures.",
+    "requested_C": "Exact rational coefficient in [0,rho_G(n)]; time density obtained once by (b^2-a^2)/2.",
+    "fixed_d": "Optional exact selected-internal double-event coefficient in [0,N/2]; requested_C<=d. Without d, construction chooses d=C.",
+    "outside_partner": "No selected-outside events are fabricated. Their physical response remains null."
+  },
+  "target_equations": [
+    "rho_G(n)=max_{x>=0,Bx<=n} sum_e x_e=min_{y>=0,y_i+y_j>=1} n dot y",
+    "rho_G(n)=one_half_max_flow_of_symmetric_bipartite_double_cover",
+    "attainable C=[0,rho_G(n)]; fixed internal d gives [0,min(d,rho_G(n))]",
+    "exact atomwise marginal mu=S+2*pi_1(D); diagonal event consumes two legs",
+    "once-only partition-union correction=(C,0,-C), ionic charge=-2C, chemical energy=-(24.59+54.42)C"
+  ],
+  "retained": {
+    "PHYS02_revision": "4ca5a90de79c8fb82a25fd9e83615bec0dfa870b",
+    "state_id": "CR_LOW_BIRTH_100K_CONDITIONAL_H1_HE4_FIXED_INVENTORY_V1",
+    "temperature_K": 100,
+    "temperature_status": "CONDITIONAL_FROZEN_INVENTORY",
+    "nb_m3": "8750/47",
+    "frame": "prescribed_gas_rest_frame_scalar",
+    "proper_volume_mode": "fixed",
+    "absolute_proper_volume_m3": null,
+    "proper_history_s": [
+      0,
+      10000000000
+    ],
+    "history": "q_j(t)=t*A_j; outside interval unknown",
+    "support_eV": [
+      0.1,
+      10
+    ],
+    "active_atoms": 3200,
+    "cutoff_ghost": "distinct retained atom; support unchanged",
+    "RR": "saved result, separate once-only port; no recomputation",
+    "retained_photon": "separate once-only port"
+  },
+  "input_manifest_sha256": "2845e69096d07a951c7951e229cea4f1ef8f93d5485abce7c73e854289b839b1",
+  "acceptance": {
+    "algorithm": "Exact primal/dual certificate with zero rational residual; no solver status-only acceptance.",
+    "independence": "Separate half-integral dual enumeration for all64 graphs x81 integer capacity vectors; production uses max flow.",
+    "physical_atom_witness": "Verify all3201 atom marginals, graph support, chosen C/d, native correction and once-only guards for selected graph/window cases.",
+    "complete_graph": "Exact reduction to prior min(N/2,N-max_i n_i).",
+    "boundaries": "Zero capacities, empty graph, isolated bins, odd cycle half-integrality, bad domain/source/graph/state/window/nb and mutation tests.",
+    "numerical": "Exact rational core; display float is presentation only; input-model/physical errors remain null.",
+    "review": "Independent theorem review R6 and independent code/result review C9; targeted repair only for concrete findings.",
+    "plot": "One stored-result diagnostic figure with actual visual inspection.",
+    "publication": "20 ordered Git expected-SHA force=false stages, each actual Dropbox+Drive R2; immutable SOURCE/CLOSEOUT each dual original full-GET SHA/all-payload CRC R3; additive central owner return and saved final report/handoff/receipt."
+  },
+  "new_budget": {
+    "cap_cpu_s": 40,
+    "includes": [
+      "preparation",
+      "worker",
+      "coordinator",
+      "failed attempts",
+      "plot generation"
+    ],
+    "source": "new separately frozen unit allowance",
+    "old_budget_transfer": 0,
+    "single_native_thread": true,
+    "worker_memory_limit_bytes": 536870912,
+    "wall_limit_s_per_job": 50,
+    "remote_CAS_max_time_s": 8,
+    "remote_CAS_calls_initial": 1,
+    "remote_CAS_CPU_s": null,
+    "metadata_provider_publication_CPU_s": null,
+    "unspent_policy": "NONTRANSFERABLE",
+    "after_close_additional_allowance_cpu_s": 0,
+    "automatic_next_node": false
+  },
+  "central": {
+    "head": "df806909aee8f25efcfa4faeefca77a5271f546c",
+    "qualified_completed": 28,
+    "total": 88,
+    "nodes": 88,
+    "edges": 17,
+    "this_unit_count_effect": 0,
+    "N4": "PARTIAL_OPEN",
+    "N5": "PARTIAL_OPEN",
+    "N6": "PREDECESSOR_GATED",
+    "N7": "PREDECESSOR_GATED",
+    "L4_ready": false,
+    "global_physical_completion": null,
+    "global_physical_error": null,
+    "global_budget_remaining": null,
+    "global_budget_currency": null
+  },
+  "actual_physical_nulls": [
+    "exclusive_He_kernel",
+    "pair_support_graph",
+    "C",
+    "D",
+    "outside_partner_response",
+    "projectile_donor_work",
+    "EOS_T",
+    "absolute_volume",
+    "full_source_physical_native25"
+  ],
+  "runtime": {
+    "local_mode": "api_only",
+    "python_probe": "PASS_Python3.12.14",
+    "git_transport": "default proxy failed, diagnosed direct DNS failed; actual GitHub API available",
+    "no_local_git_HEAD_claim": true
+  },
+  "policy_resolution": [
+    {
+      "old": "Closed PR112 additional science allowance0 and automatic_next_node=false",
+      "basis": "Later explicit user request for a next full research unit",
+      "replacement": "Separate scope and fresh40CPU-s; old unit stays closed with untouched budget and receipts",
+      "impact": "Only this new unit is authorized"
+    },
+    {
+      "old": "Legacy stage templates demand repeated broad audits or reruns",
+      "basis": "Selected physmath-research-loop1.0.0 plus compatible1.3.0 finite evidence reuse policy",
+      "replacement": "One concrete R6 proof review, C9 independent code review and one meaningful figure audit; targeted reruns only for actual new findings",
+      "impact": "No tolerance or scientific target relaxation"
+    }
+  ],
+  "prior_units": "PR112/111/110/109/107/108 identities, budgets and failures remain separately preserved in inherited receipt and AGENTS; no source-fit/projection/RR replay."
+}
