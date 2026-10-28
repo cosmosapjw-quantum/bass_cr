@@ -2,7 +2,7 @@
 
 현재 bass_cr source는 미PR 브랜치 `research/cr-crossbudget-frontier-20261029`의 bdc7bf6f4e9cc94d68c32e1752c62de5f809b0bf다. 세 파일의 이론/코드/테스트가 있었고 단계별 실행·게시 근거는 없었다. 이를 별도 child `research/cr-crossbudget-closeout-20261029`에서 마감한다. PR118 source 0fb1551b26cff387b947d4c5cf46e684b2453b2e는 보존한다. PR118은 기존 계산 ≥20.45/20 CPU-s 및 검토 HOLD로 유지한다. 원래 native 과학 실행을 반복하지 않는다.
 
-관련 저장소 조사 agent `related_state_survey`가 5 repo의 1,078 branch refs, 14페이지, 최신 갱신 PR 35개와 필요한 원문을 읽었다. REI302, BASS322, HE119, REC172, WU163 refs다. root는 bass_cr 2페이지 100+80 refs 및 빈 3페이지, 최신 PR15개, 실제 local source와 AGENTS를 확인했다. 전체 branch 목록의 전수 확인이며 모든 파일/PR 역사/비공개 대화의 전수 열람은 아니다.
+관련 저장소 조사 agent `related_state_survey`가 5 repo의 1,078 branch refs, 14페이지, 최신 갱신 PR 35개와 필요한 원문을 읽었다. REI302, BASS322, HE119, REC172, WU163 refs다. root는 bass_cr 2페이지 100+97=197 refs 및 빈 3페이지, 최신 PR15개, 실제 local source와 AGENTS를 확인했다. R02 문서의 page2 개수80은 저장된 실제 응답97로 교정했다. 전체6repo의1,275 branch 목록 확인이며 모든 파일/PR 역사/비공개 대화의 전수 열람은 아니다.
 
 | 대상 | 최신 조사 identity | 이번 연구와의 관계 |
 |---|---|---|
