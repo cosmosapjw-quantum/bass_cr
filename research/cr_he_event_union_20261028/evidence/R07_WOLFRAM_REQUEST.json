@@ -1,0 +1,7 @@
+{
+  "tool": "wolframlanguageevaluator",
+  "timeConstraint": 8,
+  "code": "TimeConstrained[Module[{ss,pp,dd,cc,j1,j2,nb,aa,bb,t0,t1,t2,t3,t4,al,un,parts,corr,checks,flat},\nun={-ss-pp-dd,ss,pp+dd};\nparts={-ss-pp-dd-cc,ss,pp+dd+cc};\ncorr=Expand[un-parts];\nchecks=<|\n\"species_correction\"->Expand[corr-{cc,0,-cc}],\n\"nuclear_number\"->Expand[Total[corr]],\n\"baryon_number\"->Expand[4 Total[corr]],\n\"ionic_charge\"->Expand[{0,1,2}.corr+2 cc],\n\"chemical_storage\"->Expand[{0,j1,j1+j2}.corr+(j1+j2)cc],\n\"selected_marginal\"->Expand[ss+(pp+2cc)+2(dd-cc)-(ss+pp+2dd)],\n\"parent_union\"->Expand[(ss+pp+dd+cc)-cc-(ss+pp+dd)],\n\"double_union\"->Expand[(pp+dd+cc)-cc-(pp+dd)],\n\"native_species\"->Simplify[corr/nb-{cc/nb,0,-cc/nb},Assumptions->nb>0],\n\"proper_factorization\"->Expand[(bb^2-aa^2)/2-(bb-aa)(bb+aa)/2],\n\"four_bin_telescoping\"->Expand[((t1^2-t0^2)+(t2^2-t1^2)+(t3^2-t2^2)+(t4^2-t3^2))/2-(t4^2-t0^2)/2],\n\"convex_marginal\"->Expand[al ss+(1-al)(ss+2dd)+2al dd-(ss+2dd)]\n|>;\nflat=Flatten[Values[checks]];\nExportString[<|\"schema\"->\"CR_HE_EVENT_UNION_LIMITED_IDENTITIES_V1\",\"identity_groups\"->Length[checks],\"scalar_components\"->Length[flat],\"residuals\"->checks,\"all_zero\"->And@@(#===0&/@flat),\"scope\"->\"Formal algebra for finite event bookkeeping; nb>0; no sharp-bound proof or physical kernel inference\"|>,\"RawJSON\"]\n],8,\"TIMEOUT\"]",
+  "remote_CAS_CPU_s": null,
+  "earlier_context_response": "Context retrieval only, irrelevant automatic expansion not adopted; no prior evaluator result reused"
+}
