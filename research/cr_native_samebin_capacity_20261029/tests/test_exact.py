@@ -69,6 +69,9 @@ class Tests(unittest.TestCase):
         self.assertEqual(solve(a,5)['S'],1)
     def test_float_refusal(self):
         with self.assertRaises(TypeError):Atom.parse(dict(key='x',energy_eV=1.0,coefficient='1',partition=0))
+    def test_direct_constructor_exact_guard(self):
+        with self.assertRaises(TypeError):Atom('x',0.25,F(1),0)
+        with self.assertRaises(TypeError):Atom('x',F(1),0.25,0)
     def test_duplicate_refusal(self):
         a=[self.row('same',0,1,0),self.row('same',4,1,0)]
         with self.assertRaises(ValueError):solve(a,5)
