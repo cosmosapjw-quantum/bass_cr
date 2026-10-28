@@ -1,0 +1,92 @@
+{
+  "science_failures": [
+    {
+      "run_id": "primary_v1",
+      "kind": "WORKER_PRECASE_FIXTURE_ID_GUARD_FAILURE",
+      "charged_cpu_s": 0.13804,
+      "evidence": "runs/primary_v1/RECEIPT.json",
+      "repair_evidence": "coding/C06_TARGETED_REPAIR.json",
+      "retry_run": "primary_v2",
+      "retry_status_at_entry": "PENDING",
+      "resolution_actual_run": "primary_v2",
+      "resolution_status": "PASS_SCOPED_ENERGY_SUM",
+      "resolution_receipt": "runs/primary_v2/RECEIPT.json"
+    }
+  ],
+  "metadata_failures": [
+    {
+      "class": "EXECUTION_FAILED",
+      "operation": "git ls-remote exactPR112branch",
+      "exit_code": 128,
+      "observed": "Failedto connectbrowser-proxyport8889",
+      "recovery": "Use supportedGitHubAPI; no localclone claim",
+      "CPU_s": null
+    },
+    {
+      "class": "INPUT_DEPENDENCY",
+      "operation": ".codex/readback-policy.json atD",
+      "observed": "HTTP404",
+      "recovery": "Actual docs/READBACK_POLICY.md andAGENTS read; no invented machine policy",
+      "CPU_s": null
+    },
+    {
+      "class": "METADATA_IMPLEMENTATION",
+      "operation": "R01 preflight subprocess argument transport",
+      "observed": "exec-server Argument list too long, OS7",
+      "cause": "Full owner AGENTS input exceeded shell command argument limit",
+      "repair": "Write metadata JSON to bounded-chunk file, feed stdin by redirection; no science execution",
+      "CPU_s": null
+    },
+    {
+      "class": "EXPECTED_STALE_CENTRAL_GUARD",
+      "operation": "R01 preflight",
+      "observed": "Centralhead advanced8d6to7937; preflightblocked",
+      "repair": "Read exactnewblob and changedHEQUARTIC observations; preserve28/88,allcurrentstatuses/edges andCR gates",
+      "CPU_s": null
+    },
+    {
+      "class": "EXPECTED_STALE_CENTRAL_GUARD",
+      "operation": "R07 preflight",
+      "observed": "CENTRAL_HEAD_CHANGED_REQUIRES_QUALIFICATION:7937->3ec9",
+      "repair": "Fetch original full Git blob and qualify additive REC owner return before changing ops baseline. No science replay.",
+      "CPU_s": null
+    },
+    {
+      "class": "PROVIDER_UPLOAD_FAILED",
+      "operation": "R05 Dropbox archive upload",
+      "attempts": 2,
+      "observed": "FETCH_FAILED; target path NOT_FOUND after each attempt",
+      "repair": "Identical bytes at fresh transfer-copy path, successful actual Dropbox+Drive R2; see publication/R05_PROVIDER_FAILURE.json",
+      "CPU_s": null
+    },
+    {
+      "class": "PROVIDER_READ_FAILED",
+      "operation": "R09 REC current-ref lookup",
+      "observed": "RemoteProtocolError: Server disconnected without sending a response",
+      "recovery": "Actual subsequent current-owner preflight PASS; original failure preserved in R09_PREFLIGHT_TRANSPORT_FAILURE.json",
+      "CPU_s": null
+    },
+    {
+      "class": "EXPECTED_STALE_CENTRAL_GUARD",
+      "operation": "C05 preflight",
+      "observed": "CENTRAL_HEAD_CHANGED_REQUIRES_QUALIFICATION:3ec9c8c6b3a0367aa3d8d8f203e72793d33457cb->66ef9a0147a0573b77e74e151dc280ba2bd4b64c",
+      "resolution": "Read actual original full Git blob and independently qualify HE observations and numeric lexical changes; qualification is separate evidence. No science replay.",
+      "CPU_s": null
+    },
+    {
+      "class": "PROVIDER_UPLOAD_FAILED",
+      "operation": "R10 Dropbox archive upload",
+      "attempts": 3,
+      "observed": "FETCH_FAILED with actual target NOT_FOUND; known previous failures preserved",
+      "recovery": "Official saved-file transfer of identical sealed bytes and whole-byte materialization succeeded; actual Dropbox+Drive R2 completed. See publication/R10_PROVIDER_FAILURE.json.",
+      "CPU_s": null
+    }
+  ],
+  "prior_failures": "Preserved in exactpredecessorreceipt; siblingbudgets separate",
+  "review_guards": {
+    "R02": "newREI/WUdelta read beforepublish",
+    "R03": "newREI/WUdelta read beforepublish",
+    "R05": "newWUdelta read beforepublish",
+    "R06": "newWUdelta read beforepublish"
+  }
+}

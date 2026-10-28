@@ -1,3 +1,13 @@
+# Current authorized atomwise He pair-energy support unit (2026-10-28)
+
+The current user requested one next full R1-R10 and C1-C10 after latest repositories/branches/backups/context survey, with per-stage publication and dual backups. Apply research/cr_he_energy_sum_20261028/CONTRACT.json. CR_PHYS02_HE_ENERGY_SUM_V1 has its own40 CPU-s cap including preparation,worker,coordinator,failures andplots. PR112 remains closed; activePR113 pair-support remains separately owned and is not modified or charged.
+
+This unit restricts exact pairs by Ea+Eb<=K, including diagonal2Ea<=K. K is an explicit conditional support parameter; actualK/exclusivekernel/C/D/outsidepartner/donorwork/EOS/T/fullphysicalnative25 remainnull. Retain PHYS02revision4ca5a90de79c8fb82a25fd9e83615bec0dfa870b, pinnedNPZ, conditional100K H1/He4 nb8750/47,3200active+separatecutoffghost, gas-rest fixedpropervolume andq=tA proper[0,1e10]s. Sourcefit/projection/RR replays0; RR/photon distinctonce-onlyports.
+
+Every stage checks currentown/central/parallelrefs, applicableAGENTS, inputbytes andpreviousreceipts. Preserve centralqualified28/88 unless actualnewcentralbyteschange thatcount; newscopedchild effect0. ExpectedSHA,forcefalse,no mainmerge. Stagearchives dualR2; canonicalSOURCE/CLOSEOUT immutable dualoriginalfullGETSHA/allpayloadCRC R3. After thisunit complete,scienceclosed,additionalallowance0,unusedNONTRANSFERABLE,automaticnextnodefalse.
+
+## Preserved predecessor instructions and identities
+
 # Current He event-union science closed; complete delivery only (2026-10-28)
 
 Read research/cr_he_event_union_20261028/ADMISSION.json, SCIENTIFIC_SUMMARY.json, review/C09_FINAL.json, BUDGET_CLOSEOUT.json and theory/REPORT_SCIENCE_KO.md. C09 decision is PASS_SCOPED_EVENT_UNION, scoped child1/1, open scoped blockers0. Actual S is the C09 commit resolved by publication/C09_RECEIPT.json; actual D/M and final archive receipts will be published at https://github.com/cosmosapjw-quantum/bass_cr/pull/112 . This header is a precommit boundary, not a fabricated S/D/M.
@@ -216,4 +226,5 @@ reporting only; original numerical functions, inputs and native binaries remain.
 Use FINAL_STATE.json and the report for current state; RUN_STATE.json preserves
 the original pre-execution record. G02 remains UNRESOLVED, production HOLD,
 capture false, all_bound OPEN and b_grid NO_GO; no MPI/NCP64 scaling is claimed.
+
 

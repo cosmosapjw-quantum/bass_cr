@@ -1,0 +1,13 @@
+# C4 Fixed runtime and resource contract
+
+Use `implementation/run_bounded.py RUN_ID MODE RESERVATION_CPU_S`. Every run ID and output directory is create-only. The runner locks the own-unit ledger, refuses unresolved reservations or closed science, and checks the40CPU-s unit cap before reserving. It snapshots every implementation/reference Python file and rescans the complete set after execution. Scientific imports, preparation, worker time, coordinator time, output writing and failures are measured in the same owned attempt. Each charge rounds measured CPU upward to microseconds and includes an explicit0.05s tail. The preventive aggregate hard-cap proof flag remains false.
+
+Worker settings: one process group, native threads1,512MiB address space,50s wall timeout, integer CPU hard limit floor(reservation−0.5). Limits and complete command are recorded in each run directory. No concurrent science workers are allowed. Metadata/provider/publication and remote CAS CPU remain unmeasured/null and are not called measured zero.
+
+Predetermined jobs: `probe_v1` reservation2s, `primary_v1` reservation16s, `controls_v1` reservation12s, `independent_v1` reservation8s, `plot_v1` reservation6s. Reservations are checked against the actual remaining balance when each job starts and are not simultaneous allocations. Actual measured charge, rather than unused reservation, remains in the ledger. If a concrete failure needs repair, preserve the original run and code bytes, use a new run ID only within the actual remaining balance, and document the targeted scope. No automatic extra run is selected.
+
+The C4 runtime result is the actual `runs/probe_v1/PROBE.json` and its own bounded receipt, when present. Its NumPy import is charged to this new unit. A successful C4 probe does not itself validate the science code. C5 freezes the production and independent source identities; C6/C7/C8 supply actual execution. After C9 admission the remaining allowance becomes nontransferable and additional science0. No prior unit or owner allowance is imported.
+
+## Actual C4 observation
+
+`probe_v1` exited0 at2026-10-28T09:09:48.086443+00:00. Python3.12.14 and NumPy2.3.5 imported successfully. Measured worker+coordinator CPU was0.12045399999999999s; the charged amount including explicit tail was0.170454s. The own-unit remaining balance is39.829546s before later jobs. Source snapshots remained unchanged. This is an environment PASS with scientific_status=null; it does not stand in for C6/C7 results. The actual receipt preserves preventive_aggregate_hard_cap_proof=false and remote/metadata CPU=null. Central28/88, scoped child0/1 pending execution/admission.
