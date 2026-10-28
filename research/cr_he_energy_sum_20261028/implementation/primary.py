@@ -53,7 +53,7 @@ def main():
     from generic_dual import deterministic_fixtures
 
     fixtures = deterministic_fixtures()  # Fixed input data and scalar parsing only.
-    es.require(len(fixtures) == 48 and [row["id"] for row in fixtures]
+    es.require(len(fixtures) == 48 and [row["id"].split("_", 1)[0] for row in fixtures]
                == [f"F{i:03d}" for i in range(1, 49)], "EXACT_48_FIXTURE_ORDER_REQUIRED")
     checks, small_cases, small_summary = [], [], []
     solve_calls = {"small_optimum": 0, "small_selected_target": 0,

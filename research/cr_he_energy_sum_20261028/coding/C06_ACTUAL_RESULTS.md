@@ -1,0 +1,15 @@
+# C6 Actual finite primary and controls
+
+The admitted C6 executions are `primary_v2` and `controls_v1`; this is not final C9 admission. Primary passed123/123 logical checks across48 unchanged named reference fixtures,9 conditional native cap cases and5 original once-only consumer calls. The primary imported only fixed fixture data from the reference: it did not run the oracle or independent verifier. The actual3201-atom source contains3200 active atoms and a separate cutoff ghost. Its NPZ was loaded once in this primary; source fit, transport, RR and photon recomputation remained0.
+
+The9 saved caps are0,1/5, exact twice the stored cutoff,1,2,3,6,10 and20eV. The K=3 selected target is half its certified optimum; all other native targets are their respective maxima. The exact decimal1/5 cap rejects every double, while twice the stored binary cutoff admits the ghost loop. At K=20 all pairs are available and dmax=N/2. These are conditional samples, with actual physical K=null. Cross-duplicate C belongs to each explicit witness and has not been maximized.
+
+Controls passed80/80:75 exact expected rejections and5 accepted controls. They cover exact scalar domains, event/dual/source/cap identities, state/window/frame/clock/volume/nb, no support extension, history and replay. The inventory-exhaustion refusal uses a labelled synthetic fixture; it does not claim actual native-source depletion. The5 consumer calls preserve exact marginal/parent/species/chemical/nb identities and adjacent-window additivity.
+
+## Preserved failure and targeted repair
+
+`primary_v1` exited1 before the first case solver because its fixture ID assertion expected bare F001..F048 while the frozen reference provides descriptive suffixes. Its complete source snapshot, stderr, command, manifest and receipt remain immutable. Charge0.138040CPU-s remains in the own-unit ledger. C06_TARGETED_REPAIR.json freezes the exact3-line correction: numbered-prefix assertion and two saved-input defaults pointing to create-only primary_v2. Reference, production mathematics, controls, runner, input values, counts and tolerances are unchanged. C05_SOURCE_MANIFEST.json remains the original freeze.
+
+Actual primary_v2 charge5.847505CPU-s and controls_v1 charge3.840236CPU-s bring total charge to9.996235/40; measured9.796234 plus recorded tails0.2000009999999997. Remaining30.003765 is own-unit only. all_runtime_attempts_pass=false preserves the failed first attempt. Remote CAS and metadata/provider/publication CPU remain null. The runner does not claim preventive aggregate hard-cap proof.
+
+Full PRIMARY_CERTIFICATES.json is archive-only; compact RESULT/SUMMARY, exact run manifests and receipts are published. Independent saved-certificate evaluation is C7; plot/visual QA is C8; final scoped admission is C9. Central28/88, count effect0, scoped child0/1 pending those gates. Physical activation=false; actual K/kernel/C/D/outside partner/donor/EOS/T/absolutevolume/fullphysicalnative25 and globalphysical/error/budget/currency remain null.

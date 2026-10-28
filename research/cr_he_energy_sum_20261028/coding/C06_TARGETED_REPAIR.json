@@ -1,0 +1,84 @@
+{
+  "schema": "CR_HE_ENERGY_SUM_C06_TARGETED_REPAIR_V1",
+  "unit": "CR_PHYS02_HE_ENERGY_SUM_V1",
+  "frozen_utc": "2026-10-28T09:26:38.853882+00:00",
+  "failed_run": "primary_v1",
+  "failure": "EXACT_48_FIXTURE_ORDER_REQUIRED",
+  "failed_run_charge_cpu_s": 0.13804,
+  "actual_failure_receipt": "runs/primary_v1/RECEIPT.json",
+  "cause": "Primary expected bare sequential IDs while frozen reference has descriptive suffixes. Failure occurred before first case solver.",
+  "repair_scope": "Preserve full canonical IDs; check their numbered prefix. Point two existing saved-input defaults to create-only primary_v2.",
+  "changes": [
+    {
+      "path": "implementation/primary.py",
+      "old_bytes": 17017,
+      "old_sha256": "2e6f25700611ab62b37f522d094eef9eeb1f6a5ad60abae04e98587ad3b795df",
+      "new_bytes": 17034,
+      "new_sha256": "50b704acecfc1c94220f0a2443d40f47670a4b5ab4df2186dadd1a8d1a5081b6",
+      "exact_diff": "--- C05/implementation/primary.py\n+++ C06/implementation/primary.py\n@@ -53,7 +53,7 @@\n     from generic_dual import deterministic_fixtures\n \n     fixtures = deterministic_fixtures()  # Fixed input data and scalar parsing only.\n-    es.require(len(fixtures) == 48 and [row[\"id\"] for row in fixtures]\n+    es.require(len(fixtures) == 48 and [row[\"id\"].split(\"_\", 1)[0] for row in fixtures]\n                == [f\"F{i:03d}\" for i in range(1, 49)], \"EXACT_48_FIXTURE_ORDER_REQUIRED\")\n     checks, small_cases, small_summary = [], [], []\n     solve_calls = {\"small_optimum\": 0, \"small_selected_target\": 0,\n"
+    },
+    {
+      "path": "implementation/independent.py",
+      "old_bytes": 17244,
+      "old_sha256": "99280c5ee8f795b9712db8a3cfffd68f857b9e230d8158e865c43c6965c43744",
+      "new_bytes": 17244,
+      "new_sha256": "5907ee8dd142e659e7dc695eaaae1d2cf7ec1bc1ad343339ca0a758b702686fa",
+      "exact_diff": "--- C05/implementation/independent.py\n+++ C06/implementation/independent.py\n@@ -412,7 +412,7 @@\n     )\n     parser.add_argument(\n         \"--input\", type=Path,\n-        default=unit_root / \"runs\" / \"primary_v1\" / \"PRIMARY_CERTIFICATES.json\",\n+        default=unit_root / \"runs\" / \"primary_v2\" / \"PRIMARY_CERTIFICATES.json\",\n     )\n     args = parser.parse_args(argv)\n     result = run(args.input, unit_root / \"reference\" / \"generic_dual.py\")\n"
+    },
+    {
+      "path": "implementation/plot.py",
+      "old_bytes": 20537,
+      "old_sha256": "d4f278180f200ac960e0b0726d32a74d6ce465a28180580128801eae7509c04b",
+      "new_bytes": 20537,
+      "new_sha256": "f5a11e56bb96c3539758cc505805bcef95bf34ca561dcc3ddff59daec6904151",
+      "exact_diff": "--- C05/implementation/plot.py\n+++ C06/implementation/plot.py\n@@ -396,7 +396,7 @@\n     unit_root = Path(__file__).resolve().parents[1]\n     parser = argparse.ArgumentParser(description=__doc__)\n     parser.add_argument(\"outdir\", nargs=\"?\", type=Path, default=unit_root / \"runs\" / \"plot_v1\")\n-    parser.add_argument(\"--summary\", type=Path, default=unit_root / \"runs\" / \"primary_v1\" / \"SUMMARY.json\")\n+    parser.add_argument(\"--summary\", type=Path, default=unit_root / \"runs\" / \"primary_v2\" / \"SUMMARY.json\")\n     parser.add_argument(\"--independent\", type=Path, default=unit_root / \"runs\" / \"independent_v1\" / \"RESULT.json\")\n     args = parser.parse_args(argv)\n     args.outdir.mkdir(parents=True, exist_ok=True)\n"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "implementation/controls.py",
+      "bytes": 17574,
+      "sha256": "e098e1ea8f383304c4f3c02fab3a526077209d5a5b078fea3d8fe041b2641fec"
+    },
+    {
+      "path": "implementation/energy_sum.py",
+      "bytes": 17424,
+      "sha256": "6cacfa7ba046ea21740beb91b9fd20797f8c06fa43ea525f0c9a555e933d981a"
+    },
+    {
+      "path": "implementation/independent.py",
+      "bytes": 17244,
+      "sha256": "5907ee8dd142e659e7dc695eaaae1d2cf7ec1bc1ad343339ca0a758b702686fa"
+    },
+    {
+      "path": "implementation/plot.py",
+      "bytes": 20537,
+      "sha256": "f5a11e56bb96c3539758cc505805bcef95bf34ca561dcc3ddff59daec6904151"
+    },
+    {
+      "path": "implementation/primary.py",
+      "bytes": 17034,
+      "sha256": "50b704acecfc1c94220f0a2443d40f47670a4b5ab4df2186dadd1a8d1a5081b6"
+    },
+    {
+      "path": "implementation/run_bounded.py",
+      "bytes": 10496,
+      "sha256": "4dd11accdbe2f1d032e4af4df27777c3ccb42038ee79acc26d08b7c895ee20df"
+    },
+    {
+      "path": "reference/generic_dual.py",
+      "bytes": 20863,
+      "sha256": "58ede1228866a8ca29cce838b7fbfb473c872ea9ef20ec0faf69066df276983b"
+    }
+  ],
+  "reference_changed": false,
+  "production_math_core_changed": false,
+  "runner_changed": false,
+  "input_cases_or_tolerances_changed": false,
+  "old_C05_manifest_and_failed_snapshot_preserved": true,
+  "new_run_id": "primary_v2",
+  "new_run_status": "NOT_RUN_AT_REPAIR_FREEZE",
+  "independent_algorithm_changed": false,
+  "metadata_CPU_s": null,
+  "additional_science_charged_by_this_metadata_step": false
+}

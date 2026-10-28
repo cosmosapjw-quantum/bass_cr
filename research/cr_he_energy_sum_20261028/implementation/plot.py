@@ -396,7 +396,7 @@ def main(argv=None):
     unit_root = Path(__file__).resolve().parents[1]
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("outdir", nargs="?", type=Path, default=unit_root / "runs" / "plot_v1")
-    parser.add_argument("--summary", type=Path, default=unit_root / "runs" / "primary_v1" / "SUMMARY.json")
+    parser.add_argument("--summary", type=Path, default=unit_root / "runs" / "primary_v2" / "SUMMARY.json")
     parser.add_argument("--independent", type=Path, default=unit_root / "runs" / "independent_v1" / "RESULT.json")
     args = parser.parse_args(argv)
     args.outdir.mkdir(parents=True, exist_ok=True)

@@ -412,7 +412,7 @@ def main(argv=None):
     )
     parser.add_argument(
         "--input", type=Path,
-        default=unit_root / "runs" / "primary_v1" / "PRIMARY_CERTIFICATES.json",
+        default=unit_root / "runs" / "primary_v2" / "PRIMARY_CERTIFICATES.json",
     )
     args = parser.parse_args(argv)
     result = run(args.input, unit_root / "reference" / "generic_dual.py")
