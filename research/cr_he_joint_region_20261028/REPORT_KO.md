@@ -2,7 +2,7 @@
 
 **단위:** `CR_PHYS02_HE_JOINT_REGION_V1` · **날짜:** 2026-10-28 · **게시 위치:** [bass_cr PR116](https://github.com/cosmosapjw-quantum/bass_cr/pull/116)
 
-이 보고서는 R1–R10의 이론 연구와 C1–C9의 구현·검증 결과를 종합한다. 과학 판정과 최종 전달의 실제 상태는 각각 `ADMISSION.json`, `WORKFLOW.json`, `publication/FINAL_DELIVERY.json`을 기준으로 읽는다. 이 C9 문서가 만들어지는 시점에 C10의 실제 게시·백업은 아직 수행 전이며, 이후 영수증은 별도 실제 커밋에 연결된다.
+**R1–R10 및 C1–C10을 모두 완료했다.** 이번 scoped DAG는 **1/1**, 절차는 **20/20**, 최신 중앙 DAG는 **28/88**이다. 과학 스냅샷 S는 `98174c29b98439f70f4cf14c8510f88c6a538c4f`, C10 문서 스냅샷 D는 `f16ef83b43654f2ba510178a9697c8d8a0645063`다. SOURCE와 CLOSEOUT 양쪽 원본 전체 GET·payload SHA256·CRC R3가 통과했다. 실제20단계와 object IDs는 `publication/PUBLICATION_INDEX.md`, 전체 전달 기록은 `publication/FINAL_DELIVERY.json`, 복사 가능한 인계는 `HANDOFF_KO.md`에 있다. F는 이 사후 기록을 게시하는 metadata commit으로, 실제 hash는 PR116 최종 body에서 확인한다.
 
 ## 1. 이번에 해결한 문제
 
@@ -193,8 +193,8 @@ Controls/native 실행에는 source/input/dependency pin과 build 결과의 bina
 
 ## 10. 채택 범위와 다음 인계
 
-이번 scoped 연구 노드는 1/1로 채택할 수 있다. 중앙 DAG의 효과는 0이며 최신 재확인한 중앙 진행률은 **28/88**다. N4/N5는 PARTIAL_OPEN, N6/N7은 PREDECESSOR_GATED, L4_ready=false와 global physical completion=null을 유지한다. Actual K, actual exclusive He kernel, 실제 d/C, outside-partner response, projectile donor work, EOS/T, absolute volume, full-source physical native25는 여전히 null이다.
+이번 scoped 연구 노드를 1/1로 채택했다. 중앙 DAG의 효과는 0이며 최신 재확인한 중앙 진행률은 **28/88**다. N4/N5는 PARTIAL_OPEN, N6/N7은 PREDECESSOR_GATED, L4_ready=false와 global physical completion=null을 유지한다. Actual K, actual exclusive He kernel, 실제 d/C, outside-partner response, projectile donor work, EOS/T, absolute volume, full-source physical native25는 여전히 null이다.
 
 Local science budget은 C9에서 닫고 남은 **16.551345 CPU-s는 NONTRANSFERABLE**, 추가 과학 allowance0, automatic next node=false로 둔다. 다음 연구 후보는 같은 bin의 허용 HL 쌍이 있는 일반 영역, 특히 현재 domain 밖인 native K1/3/10의 정확한 공동 투영이다. 새로운 실제 exclusive source가 들어오면 그 kernel과 같은 상태·history를 binding하는 연구도 가능하다. 두 후보 모두 이번 결과를 자동으로 넓혀 채택하지 않으며, 다음 명시적 요청에서 별도 범위·근거·예산을 고정한다.
 
-매 단계 실제 Git와 양쪽 R2 checkpoint를 먼저 완료한 뒤 다음 단계로 진행했다. SOURCE/CLOSEOUT은 create-only로 한 번만 만들고 양쪽 원본 전체 GET, 전체 SHA256, 모든 payload SHA256와 ZIP CRC의 R3를 수행하는 전달 계약이다. 실제 완료 여부, object IDs, S/D/F commit과 최종 20단계 게시표는 `publication/FINAL_DELIVERY.json`, `publication/PUBLICATION_INDEX.md`, `HANDOFF_KO.md`에서 확인한다. 이 문서 작성 시점의 미래 게시를 이미 완료한 것으로 해석하지 않는다.
+매 단계 실제 Git와 양쪽 R2 checkpoint를 먼저 완료한 뒤 다음 단계로 진행했다. SOURCE/CLOSEOUT은 create-only로 한 번만 만들고 양쪽 원본 전체 GET, 전체 SHA256, 모든 payload SHA256와 ZIP CRC의 R3를 수행하는 전달 계약이다. 실제 완료 여부, object IDs, S/D/F commit과 최종 20단계 게시표는 `publication/FINAL_DELIVERY.json`, `publication/PUBLICATION_INDEX.md`, `HANDOFF_KO.md`에서 확인한다. 두 archive는 실제 원본 readback까지 완료했으며 이후 acknowledgment를 넣어 재작성하지 않았다. Git metadata F의 실제 hash는 PR116 최종 body가 사후에 연결한다.

@@ -1,3 +1,13 @@
+# Joint He event-region unit completed (2026-10-28)
+
+CR_PHYS02_HE_JOINT_REGION_V1 is PASS_SCOPED. Actual theoryR1-R10 and codingC1-C10 publication/checkpoint receipts20/20; scoped child1/1; latest qualified central08364a6ef6f4880c9c4fff87335d167fbff9b440 remains28/88,88nodes17edges, count effect0. ScientificS=98174c29b98439f70f4cf14c8510f88c6a538c4f; deliveryD=f16ef83b43654f2ba510178a9697c8d8a0645063. The actual final metadata F is bound by the final PR116 body and postcommit handoff. Read research/cr_he_joint_region_20261028/HANDOFF_KO.md and publication/FINAL_DELIVERY.json first.
+
+Immutable SOURCE BASS_CR_HE_JOINT_REGION_SOURCE_20261028_98174c29b984.zip is4690891bytes,265payloads,SHA25687ddb7718d37895c3842b710a2af4f6419ffbc8ea38d0a55e0b1093217876311. Immutable CLOSEOUT BASS_CR_HE_JOINT_REGION_CLOSEOUT_20261028_f16ef83b4365.zip is4717987bytes,275payloads,SHA256975beeb642c58af5043466e24c17fb8abe41369d36ea4c4cca1a84ceee0f4e8a. Both providers for both archives passed originalfullGET wholeSHA256/allpayloadSHA256/ZIPCRC R3. Do not rebuild either archive to add future acknowledgments. Git membership257/267 is R2 tree metadata plus local blob identity, not all-Git-body R3.
+
+Science remains CLOSED23.448655/40CPU-s; unused16.551345 NONTRANSFERABLE, additionalallowance0, automaticnextnodeOFF. Preserve firstbuild watchdog failure, all prior failures and C9 metadata corrections. No unchanged accepted-science rerun. Future science requires a new explicit scope and independent budget. ActualphysicalK/exclusivekernel/d/C/outsidepartner/donorwork/EOS/T/absolutevolume/fullphysicalnative25 remainnull. This completed conditional mathematics/implementation does not change central physical gates.
+
+## Preserved C09 scientific closure and entry contracts
+
 # Current joint He event-region science closed; complete authorized delivery (2026-10-28)
 
 Read research/cr_he_joint_region_20261028/ADMISSION.json, SCIENTIFIC_SUMMARY.json, review/C09_FINAL.json, BUDGET_CLOSEOUT.json and REPORT_KO.md. Unit CR_PHYS02_HE_JOINT_REGION_V1 is PASS_SCOPED, child1/1, scientific blockers0. The actual scientific S is the C09 publication receipt; do not invent a future commit. Draft PR116 is the delivery location.

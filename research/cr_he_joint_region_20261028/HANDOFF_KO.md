@@ -10,10 +10,10 @@ branch: research/cr-he-joint-region-20261028
 PR: https://github.com/cosmosapjw-quantum/bass_cr/pull/116
 base: b457bb58d74cc9b64f7c760ffc690eda7a51ef9a (PR115)
 S (actual scientific C09): 98174c29b98439f70f4cf14c8510f88c6a538c4f
-D (actual C10): PENDING_ACTUAL_C10_PUBLICATION
+D (actual C10): f16ef83b43654f2ba510178a9697c8d8a0645063
 F (final metadata): resolve the actual hash from final PR116 body / postcommit conversation handoff; not predeclared in its own file.
 
-판정: PASS_SCOPED. 이번 DAG1/1, 실제 게시 receipt19/20.
+판정: PASS_SCOPED. 이번 DAG1/1, 실제 게시 receipt20/20.
 central: cosmosapjw-quantum/rei_bianchi / research/orchestration-sandbox-20261022
 central head: 08364a6ef6f4880c9c4fff87335d167fbff9b440
 central DAG SHA256: cf0488d50b087884004c2b2395df32243b788c84e456ed8db132fe1d5142c8c8
@@ -52,7 +52,10 @@ SOURCE:BASS_CR_HE_JOINT_REGION_SOURCE_20261028_98174c29b984.zip
 SOURCE bytes:4690891; SHA256:87ddb7718d37895c3842b710a2af4f6419ffbc8ea38d0a55e0b1093217876311
 SOURCE Dropbox:id:BSpOijBcT10AAAAAAEGnkA; Drive:17x4Q25DQQSQTI_D16l9-3NIjUj3J8rYd
 SOURCE 양쪽originalGET wholeSHA/payloadSHA/CRC R3 PASS,265payloads.
-CLOSEOUT: PENDING_ACTUAL_C10_COMMIT_AND_DUAL_R3; 미래 객체를 완료로 읽지 않는다.
+CLOSEOUT:BASS_CR_HE_JOINT_REGION_CLOSEOUT_20261028_f16ef83b4365.zip
+CLOSEOUT bytes:4717987; SHA256:975beeb642c58af5043466e24c17fb8abe41369d36ea4c4cca1a84ceee0f4e8a
+CLOSEOUT Dropbox:id:BSpOijBcT10AAAAAAEGnlw; Drive:1rAHqnCIN3d4u7IVgFbjrfRvdjFJuH0ji
+CLOSEOUT 양쪽originalGET wholeSHA/payloadSHA/CRC R3 PASS,275payloads.
 SOURCE/CLOSEOUT는 immutable. Git bound commit의 파일과 archive-only/postcommit payload를 구분한다.
 
 조사:51accessible repos, 관련public10repo1757branches terminal확인, 기존CR115PR 전체,7repo385행/384distinctPR, 선택100commit rows.

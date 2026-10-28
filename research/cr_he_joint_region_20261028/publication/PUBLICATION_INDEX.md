@@ -1,6 +1,6 @@
 # 실제 단계 게시·백업 인덱스
 
-현재 실제 receipt **19/20**, scoped node **1/1**, 중앙 **28/88** (`08364a6ef6f4880c9c4fff87335d167fbff9b440`). Git는 expected-SHA/force=false 후 원격 ref 확인 R1, 단계 ZIP은 양쪽 provider ID/크기와 manifest 대조 R2다. R2를 원격 본문 R3로 표기하지 않는다.
+현재 실제 receipt **20/20**, scoped node **1/1**, 중앙 **28/88** (`08364a6ef6f4880c9c4fff87335d167fbff9b440`). Git는 expected-SHA/force=false 후 원격 ref 확인 R1, 단계 ZIP은 양쪽 provider ID/크기와 manifest 대조 R2다. R2를 원격 본문 R3로 표기하지 않는다.
 
 | 단계 | 실제 Git commit | 절차 | scoped | 양쪽 checkpoint | archive bytes |
 |---|---|---|---|---|---:|
@@ -23,7 +23,7 @@
 | C07 | [949d58cf38d7](https://github.com/cosmosapjw-quantum/bass_cr/commit/949d58cf38d72a019094eccd2fec143675a53edc) | 17/20 | 0/1 | R2 PASS / R2 PASS | 4,193,897 |
 | C08 | [527840221887](https://github.com/cosmosapjw-quantum/bass_cr/commit/527840221887e9777031f2a6f281d48cb1ac42ef) | 18/20 | 0/1 | R2 PASS / R2 PASS | 4,375,007 |
 | C09 | [98174c29b984](https://github.com/cosmosapjw-quantum/bass_cr/commit/98174c29b98439f70f4cf14c8510f88c6a538c4f) | 19/20 | 1/1 | R2 PASS / R2 PASS | 4,671,844 |
-| C10 | PENDING ACTUAL PUBLICATION | 20/20 content only | 1/1 | PENDING | — |
+| C10 | [f16ef83b4365](https://github.com/cosmosapjw-quantum/bass_cr/commit/f16ef83b43654f2ba510178a9697c8d8a0645063) | 20/20 | 1/1 | R2 PASS / R2 PASS | 4,698,337 |
 
 ## Provider object identities
 
@@ -50,10 +50,11 @@
 | C07 | `id:BSpOijBcT10AAAAAAEGngg` | [1CKy4Aa7WvnGzmmTAlU9FSGncHR4un3tv](https://drive.google.com/file/d/1CKy4Aa7WvnGzmmTAlU9FSGncHR4un3tv/view?usp=drivesdk) |
 | C08 | `id:BSpOijBcT10AAAAAAEGnhg` | [1p3cI1b2LVoEGszmdcQ63iESTrpGYrjBO](https://drive.google.com/file/d/1p3cI1b2LVoEGszmdcQ63iESTrpGYrjBO/view?usp=drivesdk) |
 | C09 | `id:BSpOijBcT10AAAAAAEGnjw` | [1nqE1bynL52cwfMVn4vdkfKj0oMUVKTcl](https://drive.google.com/file/d/1nqE1bynL52cwfMVn4vdkfKj0oMUVKTcl/view?usp=drivesdk) |
+| C10 | `id:BSpOijBcT10AAAAAAEGnlA` | [1QMqy1s6iyHNmP8-Cca9jpVEjxAhMmIsA](https://drive.google.com/file/d/1QMqy1s6iyHNmP8-Cca9jpVEjxAhMmIsA/view?usp=drivesdk) |
 
 ## Canonical immutable archives
 
 - **SOURCE:** `BASS_CR_HE_JOINT_REGION_SOURCE_20261028_98174c29b984.zip`, 4,690,891 bytes, 265 payloads. SHA256 `87ddb7718d37895c3842b710a2af4f6419ffbc8ea38d0a55e0b1093217876311`. Dropbox `id:BSpOijBcT10AAAAAAEGnkA`, Drive `17x4Q25DQQSQTI_D16l9-3NIjUj3J8rYd`. 양쪽 original full GET·전체 SHA256·모든 payload SHA256·ZIP CRC **R3 PASS**.
-- **CLOSEOUT:** 아직 실제 생성 전. 미래 hash/ID를 채우지 않는다.
+- **CLOSEOUT:** `BASS_CR_HE_JOINT_REGION_CLOSEOUT_20261028_f16ef83b4365.zip`, 4,717,987 bytes, 275 payloads. SHA256 `975beeb642c58af5043466e24c17fb8abe41369d36ea4c4cca1a84ceee0f4e8a`. Dropbox `id:BSpOijBcT10AAAAAAEGnlw`, Drive `1rAHqnCIN3d4u7IVgFbjrfRvdjFJuH0ji`. 양쪽 original full GET·전체 SHA256·모든 payload SHA256·ZIP CRC **R3 PASS**.
 
 SOURCE는 C09 과학 스냅샷 S에, CLOSEOUT은 실제 C10 문서 스냅샷 D에 연결한다. SOURCE를 이후 영수증으로 재작성하지 않는다. 각 archive MANIFEST는 bound-commit Git membership와 archive-only/postcommit payload를 구분한다. 최종 Git F는 이 실제 결과의 metadata acknowledgment이며 21번째 연구 단계가 아니다. F의 실제 hash는 PR116 최종 body 및 대화의 postcommit handoff에서 식별한다.
