@@ -1,0 +1,11 @@
+# C7 Actual independent saved-certificate evaluation
+
+`independent_v1` completed with PASS_SCOPED_ENERGY_SUM. Its223 explicit worker groups comprise192 fresh PASS and31 PASS_REUSED_IDENTICAL_ARGUMENTS, failed0, not_run0. Reused groups identify the same atom set, cap, dual and exact event records with target=dmax; they are not counted as additional reference evaluations. The actual input is the15,160,355-byte PRIMARY_CERTIFICATES.json from primary_v2, SHA2564f3cad59cb65f901b72674ce99749878efe6ca84ff3e0e337e38540b0c06540e.
+
+All48 unchanged named fixtures were checked against the separately authored all-pair generic dual oracle. All9 native cases retain3201 atoms and were checked through every explicit event marginal and every allowed pair/loop constraint using sorted eligible-prefix minimum dual values. Every maximum certificate has exact primal-dual gap0 and marginal residual0. The selected K=3 half-maximum target has a positive target gap against the same upper certificate; its separately checked maximum witness proves the bound is attained. A nonmaximal target is not relabelled optimal.
+
+The reference SHA remains58ede1228866a8ca29cce838b7fbfb473c872ea9ef20ec0faf69066df276983b. Reference and independent worker were first authored/frozen before their author read the production core. The C6 correction changed only the worker's default saved-input path to primary_v2; it did not change its checking algorithm or oracle. Actual worker scope records production imports0, NPZ loads0 and source-fit replays0. It checks the saved atom/event data rather than regenerating the original source.
+
+Actual worker+coordinator CPU1.872077s plus0.05s tail gives charge1.922077s. The ledger now totals11.918312/40CPU-s, measured11.668311000000001 and tails0.2500009999999997, remaining28.081688. The first failed primary attempt stays charged and all_runtime_attempts_pass remains false. Source snapshots were unchanged; metadata/provider/CAS CPU remains null.
+
+C7 is independent finite certificate validation, with actual physical K/kernel/C/D/fullnative25 null and activationfalse. C8 visual inspection and C9 final scoped review remain pending at this stage. Central28/88, effect0; scoped child0/1 until C9 admission.
