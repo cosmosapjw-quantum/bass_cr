@@ -23,6 +23,8 @@ class Atom:
     def __post_init__(self):
         if not isinstance(self.key,str) or not self.key or type(self.partition) is not int or self.partition<0:
             raise ValueError('invalid key or partition')
+        if type(self.energy_eV) is not F or type(self.coefficient) is not F:
+            raise TypeError('Atom requires Fraction fields; use Atom.parse for integers and strings')
         if self.energy_eV<0 or self.coefficient<0:
             raise ValueError('nonnegative energy and mass required')
     @classmethod
