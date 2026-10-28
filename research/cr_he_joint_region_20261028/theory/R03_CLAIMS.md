@@ -4,7 +4,7 @@
 
 For a finite set I, each atom has a distinct key, nonnegative rational mass a_i, nonnegative rational energy E_i and integer birth-bin label b_i. K is a nonnegative rational parameter, not an inferred physical input. Positive-mass atoms define the effective graph. Zero-mass atoms remain harmless entries in the marginal vector.
 
-An event measure consists of single coefficients s_i and unordered double coefficients p_ij (i<=j), all nonnegative. Off-diagonal p_ij is permitted precisely when E_i+E_j<=K; a diagonal p_ii requires 2E_i<=K. Every such pair is available; no additional masking, integer-particle indivisibility or exclusion rule is imposed. The exact marginal equations are
+An event measure consists of single coefficients s_i and unordered double coefficients p_ij (i<=j), all nonnegative real numbers for the polytope statement. Rational construction and implementation realize its rational points. Off-diagonal p_ij is permitted precisely when E_i+E_j<=K; a diagonal p_ii requires 2E_i<=K. Every such pair is available; no additional masking, integer-particle indivisibility or exclusion rule is imposed. The exact marginal equations are
 
     a_i = s_i + 2 p_ii + sum_{j != i} p_min(i,j),max(i,j).
 
@@ -43,6 +43,6 @@ Here I1=24.59 eV, I2=54.42 eV are the pinned consumer constants. The correction 
 
 For q_i(t)=t*a_i on the bound proper-time interval, W=integral t dt is applied once. Densities equal coefficient expressions times W, native abundance changes equal those densities divided once by nb=8750/47 m^-3. Energies E_i and K are eV, a_i are m^-3 s^-2, and W has s^2. Per-volume recipient chemical return is therefore eV m^-3. No absolute volume is required or inferred.
 
-The neutral-He source inventory requires W*(N-d)<=n_He0, hence d>=max(0,N-n_He0/W) for W>0. This can intersect the mathematical polygon as a horizontal half-space, with emptiness when the lower bound exceeds D. The original source consumer performs its own same-state inventory check. W=0 is handled without division. Kinetic source energy is W*sum E_i*a_i and is unchanged by pairing. Saved RR and retained-photon contributions attach once according to their own contracts.
+The neutral-He source inventory requires W*(N-d)<=n_He0, hence d>=max(0,N-n_He0/W) for W>0. Intersect the mathematical polygon with this d>=d_min half-space; the intersection is empty when the lower bound exceeds D. The original source consumer performs its own same-state inventory check. W=0 is handled without division. Kinetic source energy is W*sum E_i*a_i and is unchanged by pairing. Saved RR and retained-photon contributions attach once according to their own contracts.
 
 The general partial-selection formula contains I2*p in addition to I1*N+(I2-I1)*d, where selected N=s+p+2d, and its ionic charge is N+p. Its correction uses only cross events with both legs selected. Applying the p=0 expression or the global C to a partial selection would be a scientific error. The consumer's inventory check is per call; previous_windows prevents overlap but is not a cumulative inventory-depletion solver. This unit uses the single bound full window. Actual K, exclusive He kernel, outside partners, donor work, EOS/temperature and physical native25 remain open inputs and are not promoted by these coefficient identities.

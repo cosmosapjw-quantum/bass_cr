@@ -20,7 +20,7 @@ For every 0<=C<=X,
 d_{\min}(C)=C,\qquad d_{\max}(C)=\min\{D,(L+C)/2\}.
 \]
 
-Every rational point in this region admits a finite rational event measure with the original atom marginals. The proof supplies an explicit convex construction; it does not merely assert scalar feasibility.
+Event coefficients in the real polytope statement are nonnegative real numbers; atom inputs remain rational. Every rational point in this region admits a finite rational event measure with the original atom marginals. If event coefficients are required to be rational, the exact projection is P intersect Q^2. The proof supplies an explicit convex construction; it does not merely assert scalar feasibility.
 
 ## Definitions and existence
 
