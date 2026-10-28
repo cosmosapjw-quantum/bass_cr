@@ -116,6 +116,19 @@ def main():
             shutil.copyfile(REPO / name, dest)
         inputs = {str(p.relative_to(UNIT)): sha(p) for p in sorted((UNIT / "inputs").glob("*")) if p.is_file()}
         write(out / "INPUT_MANIFEST.json", inputs)
+        executable_identity = None
+        if args.mode != "compile":
+            builds = [a for a in budget["attempts"] if a.get("mode") == "compile" and a.get("status") == "PASS"]
+            if not builds:
+                raise SystemExit("SUCCESSFUL_BUILD_RECEIPT_REQUIRED")
+            build_id = builds[-1]["run_id"]
+            build_result = json.loads((UNIT / "runs" / build_id / "RESULT.json").read_text())
+            executable_hash = sha(UNIT / "bin/integer_flow")
+            if executable_hash != build_result["cpp_executable_sha256"]:
+                raise SystemExit("BUILT_EXECUTABLE_BYTE_IDENTITY_MISMATCH")
+            executable_identity = {"build_run_id": build_id, "sha256": executable_hash,
+                                   "will_execute_cpp": args.mode in ("controls", "native")}
+            write(out / "EXECUTABLE_IDENTITY.json", executable_identity)
         command = [sys.executable, str(UNIT / "implementation/worker.py"), args.mode, str(out)]
         cpu_limit = max(1, math.floor(args.reservation - 0.25))
         write(out / "COMMAND.json", {"argv": command, "reservation_cpu_s": args.reservation,
@@ -197,6 +210,7 @@ def main():
             "procfs_pid_mapping": "NSpid mapping from actual procfs parent; never use a foreign-namespace PID directly",
             "source_unchanged": final == manifest, "inputs_unchanged": final_inputs == inputs,
             "reused_dependencies_unchanged": final_dependencies == dependency_manifest,
+            "executable_identity": executable_identity,
             "utc": datetime.now(timezone.utc).isoformat(), "preventive_aggregate_hard_cap_proof": False,
             "guard_scope": "Serial reservation, per-process limits and sampled process-tree watchdog; sampling is not an atomic aggregate hard-cap proof"}
         write(out / "RECEIPT.json", receipt)
