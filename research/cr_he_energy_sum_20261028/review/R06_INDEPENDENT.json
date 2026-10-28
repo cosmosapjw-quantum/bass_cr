@@ -1,0 +1,384 @@
+{
+  "schema": "CR_HE_ENERGY_SUM_INDEPENDENT_THEORY_REVIEW_V1",
+  "schema_version": 1,
+  "workflow_version": "1.0.0",
+  "task": "research",
+  "unit_id": "CR_PHYS02_HE_ENERGY_SUM_V1",
+  "reviewer": "/root/energy_theory_audit",
+  "objective": "Independently derive exact finite energy-sum constrained double/parent envelope and statically audit original consumer mapping.",
+  "status": "complete_scoped_independent_derivation",
+  "theorem_verdict": "PASS_SCOPED_ENERGY_SUM_THEOREM",
+  "evidence_status": [
+    "derived"
+  ],
+  "mathematical_obligations_open": [],
+  "scope": {
+    "atoms": "Finite nonnegative exact divisible masses at nonnegative exact energies.",
+    "K": "Explicit nonnegative exact conditional cap in eV.",
+    "singles": "Always allowed.",
+    "doubles": "Ea+Eb<=K; diagonal consumes two legs and requires2Ea<=K.",
+    "p0_return": "Full selected-support witness only.",
+    "inventory": "Per-return frozen conditional neutral He inventory gate retained.",
+    "actual_K": null,
+    "actual_kernel": null,
+    "actual_C": null,
+    "actual_D": null,
+    "actual_donor_work": null,
+    "actual_outside_partner_response": null,
+    "actual_EOS_T": null,
+    "full_source_physical_native25": null,
+    "full_physical_consumer_activation": false,
+    "PR113_dependency": false
+  },
+  "dependencies": [
+    {
+      "id": "contract",
+      "identity": "d0d4e5db908bc990d12136cde1b299609f4032d5141e2c380a45a55811e68cd2",
+      "description": "Direct SHA256 of read frozen CONTRACT.json"
+    },
+    {
+      "id": "manifest",
+      "identity": "f5317d1b19f721ba1d85ebfd90dbe89338e18da6dfa30134f96deee4881fb6b3",
+      "description": "Direct SHA256 of read INPUT_MANIFEST.json"
+    },
+    {
+      "id": "event_union",
+      "identity": "6b1813ccca95cf3843a217132933db373590b9580d7b1160964468e0351b286d",
+      "description": "Static source read; SHA256 checked against manifest."
+    },
+    {
+      "id": "pinned_npz",
+      "identity": "1c974c306b50f3deb86df712844f753b4402fb25e5dbc41c9a1de0254bf3ff47",
+      "description": "233050bytes in reused manifest; arrays not loaded in this review."
+    },
+    {
+      "id": "actual_source",
+      "identity": "8fca44c378844029a72253179e557dfa97f6cca8e0f9d6e677d67919ca3797cf",
+      "description": "4394309bytes in reused manifest; no refit/reintegration."
+    },
+    {
+      "id": "workflow",
+      "identity": "physmath-research-loop user1.0.0",
+      "description": "Read RESEARCH_POLICY.md, THEORY_LOOP.md, EVIDENCE_AND_HANDOFF.md."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "primal_definition",
+      "kind": "derivation",
+      "locator": "R06_INDEPENDENT.md section2",
+      "scope": "Divisible double-leg packing with diagonal factor2.",
+      "dependency_ids": [
+        "contract"
+      ]
+    },
+    {
+      "id": "tail_upper",
+      "kind": "derivation",
+      "locator": "R06_INDEPENDENT.md section3",
+      "scope": "Every feasible event measure satisfies2d<=N-delta.",
+      "dependency_ids": [
+        "contract"
+      ]
+    },
+    {
+      "id": "greedy_attainment",
+      "kind": "derivation",
+      "locator": "R06_INDEPENDENT.md section4",
+      "scope": "Nested-neighbor recurrence proves mLH=H-delta and sharp dmax.",
+      "dependency_ids": [
+        "contract"
+      ]
+    },
+    {
+      "id": "dual_certificate",
+      "kind": "derivation",
+      "locator": "R06_INDEPENDENT.md section5",
+      "scope": "Every allowed edge/loop constraint and weighted objective.",
+      "dependency_ids": [
+        "contract"
+      ]
+    },
+    {
+      "id": "interval_sparse",
+      "kind": "derivation",
+      "locator": "R06_INDEPENDENT.md section6",
+      "scope": "All target d, zero optimum branch, npositive/2npositive event bounds.",
+      "dependency_ids": [
+        "contract"
+      ]
+    },
+    {
+      "id": "boundaries",
+      "kind": "derivation",
+      "locator": "R06_INDEPENDENT.md section7",
+      "scope": "Ties, K=2E, zero masses, emptylow/high, stored cutoff versus decimal cap.",
+      "dependency_ids": [
+        "contract",
+        "event_union"
+      ]
+    },
+    {
+      "id": "physical_mapping",
+      "kind": "static_source_review_and_derivation",
+      "locator": "R06_INDEPENDENT.md section8",
+      "scope": "Wonce, p0 species/chemical, general p correction, inventory interval, nbonce.",
+      "dependency_ids": [
+        "contract",
+        "event_union",
+        "manifest"
+      ]
+    },
+    {
+      "id": "C_d_counterexample",
+      "kind": "exact_constructive_example",
+      "locator": "R06_INDEPENDENT.md section9",
+      "scope": "Same maximal d has different C on native support.",
+      "dependency_ids": [
+        "event_union"
+      ]
+    },
+    {
+      "id": "half_integral_oracle_basis",
+      "kind": "derivation",
+      "locator": "R06_INDEPENDENT.md section11",
+      "scope": "Generic fractional dual with loops admits an optimum in{0,1/2,1}.",
+      "dependency_ids": [
+        "contract"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "sharp_dmax",
+      "statement": "delta=max(0,max_h[B(h)-A(h)]),mLH=H-delta,dmax=(N-delta)/2.",
+      "scope": "Finite nonnegative divisible measures with exact pair-energy support.",
+      "basis": [
+        "derived"
+      ],
+      "evidence_refs": [
+        "tail_upper",
+        "greedy_attainment",
+        "dual_certificate"
+      ],
+      "obligations": []
+    },
+    {
+      "id": "full_interval",
+      "statement": "Every d in[0,dmax] has feasible exact marginal witness; parents=N-d.",
+      "scope": "Algebraic measure attainability before consumer inventory.",
+      "basis": [
+        "derived"
+      ],
+      "evidence_refs": [
+        "primal_definition",
+        "interval_sparse"
+      ],
+      "obligations": []
+    },
+    {
+      "id": "recipient_interval",
+      "statement": "For W>0, native targets intersect[0,dmax] with d>=N-Hneutral/W.",
+      "scope": "Existing per-return conditional neutral He inventory.",
+      "basis": [
+        "derived"
+      ],
+      "evidence_refs": [
+        "physical_mapping"
+      ],
+      "obligations": [
+        "Carry explicit intersection into R5/R9 and return semantics."
+      ]
+    },
+    {
+      "id": "p0_mapping",
+      "statement": "Fullsupport ion=W(-N+d,N-2d,d),chemical=W[I1N+(I2-I1)d]; selected electrons and kinetic invariant.",
+      "scope": "Full selected-support source-parent witness with Wonce.",
+      "basis": [
+        "derived"
+      ],
+      "evidence_refs": [
+        "physical_mapping"
+      ],
+      "obligations": [
+        "Use general p formula for partial selection."
+      ]
+    },
+    {
+      "id": "C_separation",
+      "statement": "Cross-C is distinct from total d and is not determined by dmax.",
+      "scope": "Witness evaluation and labels.",
+      "basis": [
+        "derived"
+      ],
+      "evidence_refs": [
+        "C_d_counterexample"
+      ],
+      "obligations": []
+    }
+  ],
+  "checks": [
+    {
+      "id": "primal_dual_equality",
+      "domain": "math",
+      "result": "pass_scoped",
+      "evidence_refs": [
+        "tail_upper",
+        "greedy_attainment",
+        "dual_certificate"
+      ],
+      "reason": "Independent upper bound, exact construction and feasible dual agree.",
+      "execution_ref": null
+    },
+    {
+      "id": "boundaries_exact",
+      "domain": "math",
+      "result": "pass_scoped",
+      "evidence_refs": [
+        "boundaries",
+        "interval_sparse"
+      ],
+      "reason": "Symbolic edge cases handled without tolerance.",
+      "execution_ref": null
+    },
+    {
+      "id": "physical_dimensions_signs",
+      "domain": "physics",
+      "result": "pass_scoped",
+      "evidence_refs": [
+        "physical_mapping"
+      ],
+      "reason": "W converts coefficient to density; species/baryons conserve; charge and chemical derived.",
+      "execution_ref": null
+    },
+    {
+      "id": "production_execution",
+      "domain": "implementation",
+      "result": "not_run",
+      "evidence_refs": [],
+      "reason": "Static source only before C4.",
+      "execution_ref": "scientific_runtime"
+    },
+    {
+      "id": "numeric_source_results",
+      "domain": "numerics",
+      "result": "not_run",
+      "evidence_refs": [],
+      "reason": "No NPZ arrays or numerical programs executed.",
+      "execution_ref": "scientific_runtime"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "object": "Algebraic interval versus inventory.",
+      "evidence_refs": [
+        "physical_mapping"
+      ],
+      "impact": "Some targets/windows rejected by retained consumer.",
+      "minimal_fix": "State recipient interval[max(0,N-Hneutral/W),dmax], possibly empty; retain gate.",
+      "status": "resolved_in_independent_formulation",
+      "downstream": "R5/R9 and return contract."
+    },
+    {
+      "id": "F02",
+      "object": "p0 species/chemical.",
+      "evidence_refs": [
+        "physical_mapping"
+      ],
+      "impact": "Partial selection can produce p and I2p term.",
+      "minimal_fix": "Fullsupport scope for p0; preserve general consumer formula.",
+      "status": "resolved_in_independent_formulation",
+      "downstream": "Output scope."
+    },
+    {
+      "id": "F03",
+      "object": "Ghost cutoff equality.",
+      "evidence_refs": [
+        "boundaries"
+      ],
+      "impact": "K=1/5 excludes ghost loop; K=2*Fraction.from_float(.1) includes.",
+      "minimal_fix": "Exact comparison and distinct boundary tests.",
+      "status": "covered_by_frozen_acceptance",
+      "downstream": "C-stage actual execution."
+    },
+    {
+      "id": "F04",
+      "object": "Cross-C interpretation.",
+      "evidence_refs": [
+        "C_d_counterexample"
+      ],
+      "impact": "Maximal d permits different C.",
+      "minimal_fix": "C is witness-specific; optimized objective is dmax.",
+      "status": "resolved_in_independent_formulation",
+      "downstream": "Output labels."
+    },
+    {
+      "id": "F05",
+      "object": "General theorem versus native atom API.",
+      "evidence_refs": [
+        "boundaries"
+      ],
+      "impact": "E=0 general fixture fails inherited native input domain.",
+      "minimal_fix": "Specify general core or native subset adapter.",
+      "status": "resolved_by_domain_separation",
+      "downstream": "C1/API contract."
+    },
+    {
+      "id": "F06",
+      "object": "Zero optimum and zero events.",
+      "evidence_refs": [
+        "interval_sparse",
+        "boundaries"
+      ],
+      "impact": "0/0 or invalid zero events.",
+      "minimal_fix": "Direct singles branch for dmax0; omit zero event weights.",
+      "status": "resolved_in_independent_construction",
+      "downstream": "C-stage implementation."
+    }
+  ],
+  "executions": [
+    {
+      "id": "scientific_runtime",
+      "status": "not_run",
+      "command": null,
+      "environment": "Pre-C4 independent theory review; science/CAS explicitly excluded.",
+      "evidence_refs": [],
+      "exit_code": null,
+      "reason": "Proof and static source inspection only."
+    }
+  ],
+  "resources": {
+    "scientific_cpu_s": null,
+    "metadata_cpu_s": null,
+    "provider_cpu_s": null,
+    "actual_CAS_cpu_s": null,
+    "external_writes": 0,
+    "source_scientific_replays": 0,
+    "PR113_budget_transfer": 0
+  },
+  "adoption": {
+    "primary_R5_document_read": false,
+    "reason": "Independent derivation from candidate and frozen contract completed before primary R5 document existed.",
+    "parent_action": "Compare actual R5 with this review and incorporate F01-F06, then attach at R6.",
+    "full_R1_R10_or_C1_C10_completion_claim": false
+  },
+  "decisions": [
+    "Adopt the sharp finite-measure theorem under exact stated hypotheses.",
+    "Preserve fixed source support/history, explicit nb, native inventory and physical nulls.",
+    "No new global no-go/novelty claim, duplicate audit tree, scientific replay or external publication."
+  ],
+  "overrides": [],
+  "failures": [
+    {
+      "class": "artifact_edit",
+      "evidence_refs": [],
+      "description": "Initial apply_patch failed before file creation due to one missing added-line prefix; corrected by constructing all prefixes programmatically.",
+      "next_action": "Completed corrected artifact write; no scientific result affected."
+    }
+  ],
+  "next_actions": [
+    "Parent aligns R5 and adopts this independent derivation at R6.",
+    "Execute independent oracle, certificate evaluator, negative cases and pinned-source integration in authorized C stage."
+  ]
+}
