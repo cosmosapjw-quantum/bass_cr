@@ -30,7 +30,28 @@
       "observed": "Centralhead advanced8d6to7937; preflightblocked",
       "repair": "Read exactnewblob and changedHEQUARTIC observations; preserve28/88,allcurrentstatuses/edges andCR gates",
       "CPU_s": null
+    },
+    {
+      "class": "EXPECTED_STALE_CENTRAL_GUARD",
+      "operation": "R07 preflight",
+      "observed": "CENTRAL_HEAD_CHANGED_REQUIRES_QUALIFICATION:7937->3ec9",
+      "repair": "Fetch original full Git blob and qualify additive REC owner return before changing ops baseline. No science replay.",
+      "CPU_s": null
+    },
+    {
+      "class": "PROVIDER_UPLOAD_FAILED",
+      "operation": "R05 Dropbox archive upload",
+      "attempts": 2,
+      "observed": "FETCH_FAILED; target path NOT_FOUND after each attempt",
+      "repair": "Identical bytes at fresh transfer-copy path, successful actual Dropbox+Drive R2; see publication/R05_PROVIDER_FAILURE.json",
+      "CPU_s": null
     }
   ],
-  "prior_failures": "Preserved in exactpredecessorreceipt; siblingbudgets separate"
+  "prior_failures": "Preserved in exactpredecessorreceipt; siblingbudgets separate",
+  "review_guards": {
+    "R02": "newREI/WUdelta read beforepublish",
+    "R03": "newREI/WUdelta read beforepublish",
+    "R05": "newWUdelta read beforepublish",
+    "R06": "newWUdelta read beforepublish"
+  }
 }
