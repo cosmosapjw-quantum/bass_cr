@@ -2,10 +2,58 @@
   "schema": "CR_HE_JOINT_REGION_BUDGET_V1",
   "unit": "CR_PHYS02_HE_JOINT_REGION_V1",
   "cap_cpu_s": 40,
-  "charge_cpu_s": 0,
-  "remaining_cpu_s": 40,
+  "charge_cpu_s": 1.536131,
+  "remaining_cpu_s": 38.463869,
   "science_closed": false,
-  "attempts": [],
+  "attempts": [
+    {
+      "run_id": "build_v1",
+      "mode": "compile",
+      "status": "FAIL",
+      "failure": "AGGREGATE_CPU_WATCHDOG",
+      "exit_code": -9,
+      "reservation_cpu_s": 4.0,
+      "worker_and_waited_descendants_cpu_s": 0.0021170000000000004,
+      "coordinator_including_preparation_cpu_s": 0.077509,
+      "measured_cpu_s": 0.07962599999999999,
+      "charged_cpu_s": 0.179626,
+      "tail_cpu_s": 0.10000000000000002,
+      "wall_s": 0.03637806600454496,
+      "max_child_rss_kib": 10616,
+      "peak_sampled_descendant_rss_bytes": 1966080,
+      "source_unchanged": true,
+      "inputs_unchanged": true,
+      "reused_dependencies_unchanged": true,
+      "utc": "2026-10-28T12:27:38.465466+00:00",
+      "preventive_aggregate_hard_cap_proof": false,
+      "guard_scope": "Serial reservation, per-process limits and sampled process-tree watchdog; sampling is not an atomic aggregate hard-cap proof"
+    },
+    {
+      "run_id": "build_v2",
+      "mode": "compile",
+      "status": "PASS",
+      "failure": null,
+      "exit_code": 0,
+      "reservation_cpu_s": 4.0,
+      "worker_and_waited_descendants_cpu_s": 0.849698,
+      "coordinator_including_preparation_cpu_s": 0.10680699999999999,
+      "measured_cpu_s": 0.9565049999999999,
+      "charged_cpu_s": 1.056505,
+      "tail_cpu_s": 0.10000000000000009,
+      "wall_s": 0.9246613620052813,
+      "max_child_rss_kib": 87708,
+      "peak_sampled_descendant_rss_bytes": 104624128,
+      "sampled_procfs_pid": 520782,
+      "maximum_sampled_descendant_cpu_s": 0.83,
+      "procfs_pid_mapping": "NSpid mapping from actual procfs parent; never use a foreign-namespace PID directly",
+      "source_unchanged": true,
+      "inputs_unchanged": true,
+      "reused_dependencies_unchanged": true,
+      "utc": "2026-10-28T12:30:33.381874+00:00",
+      "preventive_aggregate_hard_cap_proof": false,
+      "guard_scope": "Serial reservation, per-process limits and sampled process-tree watchdog; sampling is not an atomic aggregate hard-cap proof"
+    }
+  ],
   "old_or_foreign_budget_transfer_cpu_s": 0,
   "metadata_provider_publication_cpu_s": null,
   "remote_CAS_cpu_s": null,
@@ -23,5 +71,21 @@
       "scope": "Exact small algebraic fixture; no native source"
     }
   ],
-  "scope_of_cpu_cap": "Measured local scientific execution and conservative local tails; remote CAS CPU is unavailable and separately recorded, not included as zero in an aggregate proof"
+  "scope_of_cpu_cap": "Measured local scientific execution and conservative local tails; remote CAS CPU is unavailable and separately recorded, not included as zero in an aggregate proof",
+  "controller_preparation_charges": [
+    {
+      "id": "controller_diagnostics_v1",
+      "scope": "Three short OS metadata probes after false watchdog termination; no native/scientific model computation",
+      "measured_cpu_s": null,
+      "charged_cpu_s": 0.3,
+      "charge_basis": "Conservative0.10CPU-s charge per short metadata probe, including the initial failed children-path read; not an observed CPU measurement",
+      "probe_errors": [
+        "Initial metadata probe FileNotFoundError on absent procfs task children interface"
+      ],
+      "evidence": [
+        "coding/C05_PID_NAMESPACE_DIAGNOSIS.json",
+        "coding/C05_PROCFS_DIAGNOSIS.json"
+      ]
+    }
+  ]
 }

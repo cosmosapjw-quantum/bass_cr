@@ -15,6 +15,7 @@ import sys
 import time
 
 UNIT = Path(__file__).resolve().parents[1]
+REPO = UNIT.parents[1]
 MEMORY = 536870912
 TAIL = 0.10
 
@@ -32,21 +33,48 @@ def self_cpu():
     return r.ru_utime + r.ru_stime
 
 
-def tree_usage(root_pid):
-    """Live own CPU plus waited child CPU; sample is conservative, not atomic."""
-    stack, seen, ticks, rss = [root_pid], set(), 0, 0
-    while stack:
-        pid = stack.pop()
-        if pid in seen:
+def procfs_child_pid(namespace_pid):
+    """Map Popen's PID to the procfs mount's namespace before sampling."""
+    parent = int(Path("/proc/self/stat").read_text().split(" ", 1)[0])
+    if parent == os.getpid():
+        return namespace_pid
+    # This kernel exposes NSpid but not task/<tid>/children.  Match an
+    # actual direct child in procfs, never an unrelated host numeric PID.
+    for entry in Path("/proc").iterdir():
+        if not entry.name.isdigit():
             continue
-        seen.add(pid)
         try:
-            raw = Path(f"/proc/{pid}/stat").read_text()
+            raw = (entry / "stat").read_text()
             fields = raw[raw.rfind(")") + 2:].split()
+            if int(fields[1]) != parent:
+                continue
+            status = (entry / "status").read_text().splitlines()
+            ids = next((line.split()[1:] for line in status if line.startswith("NSpid:")), [])
+            if ids and int(ids[-1]) == namespace_pid:
+                return int(entry.name)
+        except (FileNotFoundError, ProcessLookupError, PermissionError):
+            pass
+    return None
+
+
+def tree_usage(root_pid):
+    """CPU/RSS of the worker's inherited process group, in procfs IDs.
+
+    Workers/compiler/backend do not detach from this group. Waited child
+    CPU is included; the sample is conservative and not atomic.
+    """
+    ticks, rss = 0, 0
+    for entry in Path("/proc").iterdir():
+        if not entry.name.isdigit():
+            continue
+        try:
+            raw = (entry / "stat").read_text()
+            fields = raw[raw.rfind(")") + 2:].split()
+            if int(fields[2]) != root_pid:
+                continue
             ticks += sum(int(fields[i]) for i in (11, 12, 13, 14))
             rss += max(0, int(fields[21])) * os.sysconf("SC_PAGE_SIZE")
-            stack.extend(map(int, Path(f"/proc/{pid}/task/{pid}/children").read_text().split()))
-        except (FileNotFoundError, ProcessLookupError):
+        except (FileNotFoundError, ProcessLookupError, PermissionError):
             pass
     return ticks / os.sysconf("SC_CLK_TCK"), rss
 
@@ -74,6 +102,18 @@ def main():
             dest = out / "SOURCE_SNAPSHOT" / name
             dest.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(UNIT / name, dest)
+        dependencies = [
+            "research/cr_he_event_union_20261028/implementation/event_union.py",
+            "research/cr_he_energy_cross_20261028/implementation/cross_flow.py",
+            "research/cr_he_energy_cross_20261028/implementation/cross_envelope.py",
+            "research/cr_he_energy_sum_20261028/implementation/energy_sum.py",
+        ]
+        dependency_manifest = {name: sha(REPO / name) for name in dependencies}
+        write(out / "DEPENDENCY_MANIFEST.json", dependency_manifest)
+        for name in dependencies:
+            dest = out / "SOURCE_SNAPSHOT/REUSED_DEPENDENCIES" / name
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(REPO / name, dest)
         inputs = {str(p.relative_to(UNIT)): sha(p) for p in sorted((UNIT / "inputs").glob("*")) if p.is_file()}
         write(out / "INPUT_MANIFEST.json", inputs)
         command = [sys.executable, str(UNIT / "implementation/worker.py"), args.mode, str(out)]
@@ -91,13 +131,21 @@ def main():
                 os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
         before = resource.getrusage(resource.RUSAGE_CHILDREN)
         failure, code, peak_sampled_rss = None, None, 0
+        sampled_procfs_pid, maximum_sampled_cpu = None, 0.0
         launch = time.monotonic()
         with (out / "stdout.txt").open("w") as stdout, (out / "stderr.txt").open("w") as stderr:
             try:
                 proc = subprocess.Popen(command, stdout=stdout, stderr=stderr, env=env,
                                         preexec_fn=limits, start_new_session=True)
                 while proc.poll() is None:
-                    child_cpu, rss = tree_usage(proc.pid)
+                    if sampled_procfs_pid is None:
+                        sampled_procfs_pid = procfs_child_pid(proc.pid)
+                    if sampled_procfs_pid is None:
+                        if proc.poll() is not None:
+                            break
+                        raise RuntimeError("PROCFS_CHILD_NAMESPACE_MAPPING_UNAVAILABLE")
+                    child_cpu, rss = tree_usage(sampled_procfs_pid)
+                    maximum_sampled_cpu = max(maximum_sampled_cpu, child_cpu)
                     peak_sampled_rss = max(peak_sampled_rss, rss)
                     if child_cpu + self_cpu() >= args.reservation - 0.20:
                         failure = "AGGREGATE_CPU_WATCHDOG"
@@ -130,7 +178,8 @@ def main():
             failure = failure or f"MISSING_OR_INVALID_RESULT:{type(exc).__name__}"
         final = {str(p.relative_to(UNIT)): sha(p) for p in files}
         final_inputs = {name: sha(UNIT / name) for name in inputs}
-        if final != manifest or final_inputs != inputs:
+        final_dependencies = {name: sha(REPO / name) for name in dependencies}
+        if final != manifest or final_inputs != inputs or final_dependencies != dependency_manifest:
             failure = failure or "SOURCE_OR_INPUT_CHANGED_DURING_EXECUTION"
         write(out / "FINAL_SOURCE_MANIFEST.json", final)
         coordinator = self_cpu()  # Includes interpreter startup and all preparation in this runner.
@@ -144,7 +193,10 @@ def main():
             "measured_cpu_s": measured, "charged_cpu_s": charge, "tail_cpu_s": charge-measured,
             "wall_s": time.monotonic()-wall_start, "max_child_rss_kib": after.ru_maxrss,
             "peak_sampled_descendant_rss_bytes": peak_sampled_rss,
+            "sampled_procfs_pid": sampled_procfs_pid, "maximum_sampled_descendant_cpu_s": maximum_sampled_cpu,
+            "procfs_pid_mapping": "NSpid mapping from actual procfs parent; never use a foreign-namespace PID directly",
             "source_unchanged": final == manifest, "inputs_unchanged": final_inputs == inputs,
+            "reused_dependencies_unchanged": final_dependencies == dependency_manifest,
             "utc": datetime.now(timezone.utc).isoformat(), "preventive_aggregate_hard_cap_proof": False,
             "guard_scope": "Serial reservation, per-process limits and sampled process-tree watchdog; sampling is not an atomic aggregate hard-cap proof"}
         write(out / "RECEIPT.json", receipt)
