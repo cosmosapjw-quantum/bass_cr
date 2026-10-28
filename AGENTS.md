@@ -1,3 +1,13 @@
+# Current authorized He pair-support graph unit (2026-10-28)
+
+The current user explicitly requests the next full R1-R10 and C1-C10 after an accessible latest-source census, with every-stage Git/Dropbox/Drive publication, qualified central count and handoff. Apply research/cr_he_pair_support_20261028/CONTRACT.json. This new unit CR_PHYS02_HE_PAIR_SUPPORT_V1 has its own40CPU-s including preparation, workers, coordinators, failures and plots. PR112 remains science_closed with allowance0 and NONTRANSFERABLE remainder; no prior or foreign budget is transferred.
+
+Implement only the explicit conditional four-bin pair-support graph envelope, exact primal/dual certificate and sparse atomwise witness linked to the unchanged prior event-union consumer. Keep frozen100K H1/He4, nb8750/47, gas-rest scalar, fixed proper-volume density, finite q=tA history,3200active atoms plus separate cutoff ghost. Actual physical graph, exclusive kernel,C,D,outside partner response,donor work,EOS/T,absolutevolume and fullphysicalnative25 remainnull. Source-fit/projection/RR replay0. Photon/RR stay separate once-only ports.
+
+Before every stage publication read actual current refs/AGENTS/owners and verify source/receipt bytes; use expectedSHA forcefalse, no main merge. Central baseline df806909aee8f25efcfa4faeefca77a5271f546c is qualified28/88,88nodes17edges,delta0; qualify any later central change. Preserve other owner scope/budget/failures. Final SOURCE/CLOSEOUT are create-only with actual dual original fullGET SHA/allpayloadSHA/CRC R3. After this new unit close science, preserve remaining as NONTRANSFERABLE and automatic_next_node=false.
+
+## Preserved completed predecessor and earlier instructions
+
 # Current He event-union science closed; complete delivery only (2026-10-28)
 
 Read research/cr_he_event_union_20261028/ADMISSION.json, SCIENTIFIC_SUMMARY.json, review/C09_FINAL.json, BUDGET_CLOSEOUT.json and theory/REPORT_SCIENCE_KO.md. C09 decision is PASS_SCOPED_EVENT_UNION, scoped child1/1, open scoped blockers0. Actual S is the C09 commit resolved by publication/C09_RECEIPT.json; actual D/M and final archive receipts will be published at https://github.com/cosmosapjw-quantum/bass_cr/pull/112 . This header is a precommit boundary, not a fabricated S/D/M.
