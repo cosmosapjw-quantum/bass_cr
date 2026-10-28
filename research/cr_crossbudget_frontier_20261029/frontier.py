@@ -102,8 +102,9 @@ def verify_certificate(atoms, cap, cross_budget, result):
         prices[key]=nonnegative(value)
     check(set(prices)==set(by_key),'dual price coverage')
     lam=nonnegative(result['budget_multiplier'])
-    for h in high.values():
-        for l in low.values():
+    # Zero-capacity vertices still belong to the original dual graph.
+    for h in (a for a in A if 2*a.energy>K):
+        for l in (a for a in A if 2*a.energy<=K):
             if h.energy+l.energy<=K:
                 check(prices[h.key]+prices[l.key]+(lam if h.bin!=l.bin else 0)>=1,
                       'dual edge inequality')
@@ -135,7 +136,7 @@ def solve(atoms, cap, cross_budget, max_atoms=12, max_edges=48):
         result={'M_budget':Fraction(0),'d_max':L/2,'cross_used':Fraction(0),
                 'primal':(), 'low_diagonal':tuple((a.key,a.mass/2) for a in low),
                 'singles':tuple((a.key,a.mass) for a in high),
-                'dual_prices':tuple((a.key,Fraction(0)) for a in A),
+                'dual_prices':tuple((a.key,Fraction(1 if a.mass==0 else 0)) for a in A),
                 'budget_multiplier':Fraction(0),
                 'dual_value':Fraction(0),'gap':Fraction(0),'L':L,
                 'scope':'SMALL_FINITE_EXACT_LP_NO_PHYSICAL_KERNEL'}
@@ -167,7 +168,7 @@ def solve(atoms, cap, cross_budget, max_atoms=12, max_edges=48):
     result={'M_budget':M,'d_max':(L+M)/2,'cross_used':Cu,'primal':primal,
             'low_diagonal':tuple((k,r/2) for k,r in residuals.items() if r>0),
             'singles':tuple((k,r) for k,r in singles if r>0),
-            'dual_prices':tuple((a.key,atom_prices.get(a.key,Fraction(0))) for a in A),
+            'dual_prices':tuple((a.key,atom_prices[a.key] if a.mass>0 else Fraction(1)) for a in A),
             'budget_multiplier':_frac(dp.get(lam,Rational(0))),
             'dual_value':dv,'gap':dv-M,'L':L,
             'scope':'SMALL_FINITE_EXACT_LP_NO_PHYSICAL_KERNEL'}

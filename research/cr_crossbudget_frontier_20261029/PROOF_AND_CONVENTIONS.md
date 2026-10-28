@@ -10,6 +10,8 @@ With vertex-capacity dual prices p_i>=0 and budget multiplier lambda>=0, the edg
 
 The feasible sets grow with c, so M is nondecreasing. Mixing optimizers at c1,c2 gives a feasible flow at theta c1+(1-theta)c2 with objective theta M(c1)+(1-theta)M(c2), proving concavity. Finite parametric LP yields a piecewise affine value. Partition any HL flow into same-bin and different-bin edges. The same-bin subflow is feasible at c0, so m<=S+c, S=M(0); also m<=M_infinity. The old inequality2d-C<=L+S follows, but need not attain this new frontier.
 
+Zero-mass vertices can be omitted by the primal optimizer. To extend its dual to every energy-eligible edge of the original graph, set each omitted vertex price to1. Every edge incident on an omitted vertex then satisfies its dual inequality, and its contribution w_i p_i is0. The verifier checks the full original graph. This extension changes no optimal value.
+
 At fixed prescribed C=c the diagonal completion construction may use a smaller C, so the theorem describes the upper frontier of C<=c rather than every vertical section C=c. The four-atom example separates the old necessary bound from the exact frontier.
 
 Conditional history q_i(t)=t w_i on proper t in[0,1e10]s gives W=integral t dt=5e19 s^2. Its integrated double-event density is W d. With the separate specified source bookkeeping U_chem=W[I1 N+(I2-I1)d], I2>I1, substituting dmax gives an upper bound in eV m^-3. Multiplication by the eV-to-J conversion gives SI energy density. Temperature/heating require the actual kernel, donor/partner work and thermodynamic state and are not computed here.

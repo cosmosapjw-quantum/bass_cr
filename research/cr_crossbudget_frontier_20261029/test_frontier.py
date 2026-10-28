@@ -73,6 +73,14 @@ class FullEventIndependentOracle(unittest.TestCase):
 
 
 class CertificateTests(unittest.TestCase):
+    def test_zero_mass_full_graph_dual(self):
+        atoms=[Atom.parse('zero_low',0,0,0),Atom.parse('high',3,1,0)]
+        out=solve(atoms,4,0)
+        prices=dict(out['dual_prices'])
+        self.assertGreaterEqual(prices['zero_low']+prices['high'],1)
+        bad=dict(out);bad['dual_prices']=(('zero_low',Q(0)),('high',Q(0)))
+        with self.assertRaises(ValueError):verify_certificate(atoms,4,0,bad)
+
     def test_uniform_empty_zero_and_unmatched_schema(self):
         expected=set(solve(example_atoms(),4,1))
         for atoms in ([],[Atom.parse('zero',0,0,0)],
