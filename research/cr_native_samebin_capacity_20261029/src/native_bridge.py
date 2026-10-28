@@ -27,6 +27,7 @@ def native_run(repo_root,source_npz,K='3'):
     repo=Path(repo_root);source_npz=Path(source_npz)
     if not source_npz.is_file():raise FileNotFoundError('PINNED_NATIVE_SOURCE_NOT_PRESENT')
     if hashlib.sha256(source_npz.read_bytes()).hexdigest()!=PIN_NPZ:raise ValueError('SOURCE_BYTES_MISMATCH')
+    sys.path.insert(0,str(repo/'research/cr_he_energy_cross_20261028/implementation'))
     eu=_load(repo/'research/cr_he_event_union_20261028/implementation/event_union.py','cr_parent_event_union')
     ce=_load(repo/'research/cr_he_energy_cross_20261028/implementation/cross_envelope.py','cr_cross_envelope')
     s=eu.load_pinned_source(source_npz)
