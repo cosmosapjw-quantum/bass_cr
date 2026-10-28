@@ -1,5 +1,5 @@
-"""Independent Edmonds-Karp oracle for bounded rational fixtures.
-The oracle does not reuse the production greedy matcher or Hall certificate.
+"""Independent Edmonds-Karp oracle + adversarial threshold fixtures.
+The oracle has no imports of the production capacity solver inside its flow routine.
 """
 import sys,unittest,random
 from pathlib import Path
@@ -10,9 +10,11 @@ sys.path.insert(0,str(ROOT/'src'))
 from samebin_capacity import Atom,solve,bounds
 
 def independent_flow(rows,cap,within_same_bin=True):
+    # Build the entire positive-mass bipartite network with no Ferrers logic.
+    # Node labels deliberately do not share production grouping or ordering.
     lows=[(i,a) for i,a in enumerate(rows) if a.coefficient>0 and 2*a.energy_eV<=cap]
     highs=[(i,a) for i,a in enumerate(rows) if a.coefficient>0 and 2*a.energy_eV>cap]
-    graph=defaultdict(dict);src='s';sink='t'
+    graph=defaultdict(dict); src='s';sink='t'
     def edge(u,v,c):
         graph[u][v]=graph[u].get(v,F(0))+c
         graph[v].setdefault(u,F(0))
@@ -22,21 +24,22 @@ def independent_flow(rows,cap,within_same_bin=True):
         for j,l in lows:
             if h.energy_eV+l.energy_eV<=cap and (not within_same_bin or h.partition==l.partition):
                 edge(u,('l',j),infinity)
-    for j,l in lows:edge(('l',j),sink,l.coefficient)
+    for j,l in lows:edge(('l',j),l.coefficient)
     total=F(0)
     while True:
         par={src:None};q=deque([src])
         while q and sink not in par:
             u=q.popleft()
             for v,c in graph[u].items():
-                if c>0 and v not in par:par[v]=u;q.append(v)
+                if c>0 and v not in par:
+                    par[v]=u;q.append(v)
         if sink not in par:break
         v=sink;step=None
         while v!=src:
-            u=par[v];step=graph[u][v] if step is None else min(step,graph[u][v]);v=u
+            u=par[v]; step=graph[u][v] if step is None else min(step,graph[u][v]);v=u
         v=sink
         while v!=src:
-            u=par[v];graph[u][v]-=step;graph[v][u]+=step;v=u
+            u=par[v];graph[u][v]-=step;graph[v][u]+=step
         total+=step
     return total
 
@@ -44,7 +47,8 @@ class Tests(unittest.TestCase):
     def row(self,k,e,c,b):return Atom(str(k),F(e),F(c),b)
     def test_same_bin_counterexample(self):
         a=[self.row('low',0,1,0),self.row('high',3,1,0)]
-        self.assertEqual(solve(a,4)['S'],1)
+        t=solve(a,4)
+        self.assertEqual(t['S'],1)
         self.assertEqual(bounds(a,4,0)['d_max_necessary'],1)
         self.assertEqual(2*1-0,1+1)
     def test_cross_only_old_S_zero(self):
@@ -83,19 +87,22 @@ class Tests(unittest.TestCase):
         a=[self.row('l',0,0,0),self.row('h',3,0,0)]
         self.assertEqual(solve(a,4)['S'],0)
     def test_random_flow_oracle(self):
-        rg=random.Random(20261029);seen=0;nonzero=0;different=0
+        rg=random.Random(20261029)
+        seen=0;nonzero=0;different=0
         for n in range(1,11):
             for t in range(23):
-                a=[self.row('atom%02d'%i,F(rg.randint(0,16),2),
-                   F(rg.randint(0,7),rg.randint(1,9)),rg.randrange(3)) for i in range(n)]
+                a=[self.row('atom%02d'%i,F(rg.randint(0,16),2),F(rg.randint(0,7),rg.randint(1,9)),rg.randrange(3)) for i in range(n)]
                 K=F(rg.randint(0,20),2)
                 for within in (True,False):
-                    got=solve(a,K,within);ref=independent_flow(a,K,within)
+                    got=solve(a,K,within)
+                    ref=independent_flow(a,K,within)
                     self.assertEqual((got['S'],got['dual']),(ref,ref),msg=(n,t,within))
                     self.assertEqual(sum((v for _,_,v in got['pairs']),F(0)),ref)
-                    seen+=1;nonzero+=int(ref>0)
+                    seen+=1
+                    nonzero+=int(ref>0)
                 if solve(a,K,False)['S']!=solve(a,K,True)['S']:different+=1
         self.assertEqual(seen,460)
-        self.assertGreater(nonzero,0);self.assertGreater(different,0)
+        self.assertGreater(nonzero,0)
+        self.assertGreater(different,0)
 
 if __name__=='__main__':unittest.main(verbosity=2)
