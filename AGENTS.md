@@ -1,3 +1,13 @@
+# Current He event-union science closed; complete delivery only (2026-10-28)
+
+Read research/cr_he_event_union_20261028/ADMISSION.json, SCIENTIFIC_SUMMARY.json, review/C09_FINAL.json, BUDGET_CLOSEOUT.json and theory/REPORT_SCIENCE_KO.md. C09 decision is PASS_SCOPED_EVENT_UNION, scoped child1/1, open scoped blockers0. Actual S is the C09 commit resolved by publication/C09_RECEIPT.json; actual D/M and final archive receipts will be published at https://github.com/cosmosapjw-quantum/bass_cr/pull/112 . This header is a precommit boundary, not a fabricated S/D/M.
+
+Primary39/39 plus9603 exact atom comparisons, controls42/42, independent3696/3696 with81 graph cases, limited CAS12groups/16zeros and saved-result plot passed. Five bounded science jobs charged4.710179/40CPU-s, including measured4.460178000000001+tails0.2500009999999997. Remaining35.289821 is NONTRANSFERABLE; science_closed=true and additional_science_allowance_cpu_s=0. Do not launch more science in this closed unit. Complete authorized C10 publication, immutable SOURCE/CLOSEOUT dual backups and actual original fullGET SHA/CRC R3, central scoped owner-return and final handoff. Afterward automatic_next_node=false.
+
+Same-state100K H1/He4 inventory and nb8750/47 remain conditional. Actual exclusive He kernel, C, outside partner response, projectile donor debit, full-source physical native25, EOS/T and absolute volume remain null. The exact cross bound and once-only species correction do not activate physical completion. Preserve separate RR/photon ports and all old failures/budgets; source-fit/projection/RR replay0. Central qualified28/88,88nodes17edges,CRdelta0; N4/N5PARTIAL_OPEN,N6/N7PREDECESSOR_GATED,L4false,globalnull. Every publication starts current AGENTS/HEAD/owners/source/receipts and expectedSHA forcefalse; no main merge.
+
+## Preserved unit entry and earlier instructions
+
 # Current authorized He event-union unit (2026-10-28)
 
 The current user explicitly selected the next full theory R1-R10 and coding C1-C10 with per-stage Git publication, dual backups, central completed/total, and handoff. Apply research/cr_he_event_union_20261028/CONTRACT.json. Unit CR_PHYS02_HE_EVENT_UNION_V1 has its own40 CPU-s cap including preparation, worker, coordinator, failures and plots; no predecessor/foreign budget transfer. Prior PR111 stop rules remain historical for that closed unit.

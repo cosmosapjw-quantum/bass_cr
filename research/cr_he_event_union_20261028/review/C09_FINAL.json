@@ -1,0 +1,94 @@
+{
+  "schema": "CR_HE_EVENT_UNION_C09_FINAL_V1",
+  "unit": "CR_PHYS02_HE_EVENT_UNION_V1",
+  "decision": "PASS_SCOPED_EVENT_UNION",
+  "review_owner": "root",
+  "open_blockers": 0,
+  "scope": "Finite atomic event union, sharp conditional cross-duplicate envelope, same-state partial source consumer; physical full native25 remains input gated",
+  "independent_evidence": "One prior fresh-context independent static/reference-authoring pass, unchanged reviewed code plus actual independently authored reference execution; parent closes pending findings. No additional recursive review claimed.",
+  "static_review_receipt": {
+    "path": "evidence/R06_INDEPENDENT_STATIC_OBSERVATION.json",
+    "bytes": 4887,
+    "sha256": "3bb0597c87ccacb39674cdf624b0d90902a1caf961b9e3d79773173a5050e574"
+  },
+  "reviewed_unchanged_source": [
+    {
+      "path": "implementation/event_union.py",
+      "bytes": 18732,
+      "sha256": "6b1813ccca95cf3843a217132933db373590b9580d7b1160964468e0351b286d"
+    },
+    {
+      "path": "implementation/primary.py",
+      "bytes": 8960,
+      "sha256": "da0a62061fdb763a80a498e62a5cd0e65904be1361b9723681e58657370d57ed"
+    },
+    {
+      "path": "implementation/controls.py",
+      "bytes": 9370,
+      "sha256": "7d21f0888ed94365c931a9ce67b50e45ada36e6cc78f96e1ecbc9f223e1d4a54"
+    },
+    {
+      "path": "implementation/independent.py",
+      "bytes": 21800,
+      "sha256": "4d7c9eec44dff274a8e93a4a4dd7fb29afae142168e1c05c8909712267aa8960"
+    }
+  ],
+  "actual_reference": {
+    "path": "runs/independent_v1/RESULT.json",
+    "bytes": 287767,
+    "sha256": "2d9ba38665741542a8792c289bc78e31d24f1176c50fd22860274b8b9b48ff3f"
+  },
+  "actual_control": {
+    "path": "runs/controls_v1/RESULT.json",
+    "bytes": 7126,
+    "sha256": "cd81c39886c95c145976e87e613606b13b2a8151d3edc9c8d4c7511ca8f5d5aa"
+  },
+  "actual_primary": {
+    "path": "runs/primary_v1/RESULT.json",
+    "bytes": 41508,
+    "sha256": "f5d53163e1df83ff7c24a2c55e6a47d4e3567f51606d515a84122a50730b4750"
+  },
+  "actual_plot": {
+    "path": "runs/plot_v1/RESULT.json",
+    "bytes": 2500,
+    "sha256": "bb39c4ba43311a419c9fd3e4417fefb792b4d2173860b1d55118e2d4718c0fe2"
+  },
+  "findings": [
+    {
+      "id": "F01",
+      "decision": "CLOSED_TARGETED_PASS",
+      "evidence": "Exact3201 marginal per witness; control F01_changed_source_marginal; independent source reconstruction"
+    },
+    {
+      "id": "F02",
+      "decision": "CLOSED_TARGETED_PASS",
+      "evidence": "Incident-claim completeness and electron/energy additivity; control F02_incomplete_cross_claim"
+    },
+    {
+      "id": "F03",
+      "decision": "CLOSED_TARGETED_PASS",
+      "evidence": "Pinned actual loader, exact atom digest, fixture/actual forgeries rejected; independent input bytes reread"
+    },
+    {
+      "id": "F04",
+      "decision": "CLOSED_SCOPE_CORRECTION",
+      "evidence": "Theorem and implementation restricted to finite atomic measures; no arbitrary-measure quantile claim"
+    }
+  ],
+  "actual_numerical_counts": {
+    "primary_logical": 39,
+    "atomwise": 9603,
+    "controls_unique": 42,
+    "independent_unique": 3696,
+    "graph_cases": 81,
+    "CAS_groups": 12,
+    "CAS_scalar_zero": 16
+  },
+  "visual_QA": "Actual PNG viewed; legible and consistent; no repeat render",
+  "tolerances_relaxed": false,
+  "new_strong_no_go_admitted": false,
+  "actual_full_native25": null,
+  "physical_activation": false,
+  "metadata_CPU_s": null,
+  "utc": "2026-10-28T00:54:17.674259+00:00"
+}
