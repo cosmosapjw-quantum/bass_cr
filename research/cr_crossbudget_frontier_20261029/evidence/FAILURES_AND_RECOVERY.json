@@ -1,0 +1,10 @@
+{
+  "failures": [
+    {"id":"ORCHESTRATION_EVAL","class":"environment","detail":"first publisher eval was not inside async function; syntax error before mutation","repair":"async IIFE"},
+    {"id":"CHECKPOINT_JSON_TRUNCATION","class":"environment","detail":"R04 checkpoint created locally, full payload exceeded tool output cap before remote mutation","repair":"reuse immutable R04 ZIP and publish only files changed from prior checkpoint"},
+    {"id":"SYMPY_PROBE","class":"environment","status":"PACKAGE_MISSING","detail":"python3 import sympy failed in current turn","repair":"installed pinned SymPy1.14.0/mpmath1.3.0 in isolated scratch target; subsequent import PYTHON_PASS"},
+    {"id":"R05_DROPBOX_INITIAL","class":"environment","detail":"async upload source FETCH_FAILED; no completed ACK","repair":"same immutable source/destination retried successfully after source transfer failure","timing":"R05 successful Dropbox ACK occurred after R06; do not claim backup before next stage"}
+  ],
+  "preserved_predecessor":"PR118 budget failure and missing reviews remain historical and unpromoted",
+  "mathematical_failure":null
+}

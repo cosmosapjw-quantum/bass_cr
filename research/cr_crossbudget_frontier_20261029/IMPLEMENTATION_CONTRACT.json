@@ -1,0 +1,13 @@
+{
+  "formula": "d_max(c)=(L+M(c))/2",
+  "definition": "THEORY.md and PROOF_AND_CONVENTIONS.md",
+  "inputs": "Atom(key, exact Fraction energy, exact Fraction mass, nonnegative integer bin); exact rational K,c>=0",
+  "hard_limits": {"atoms": 12, "HL_edges": 48},
+  "outputs": ["M_budget", "d_max", "cross_used", "primal", "low_diagonal", "singles", "dual_prices", "budget_multiplier", "dual_value", "gap", "L", "scope"],
+  "verification": "explicit exceptions, rational nonnegativity, admissible pair support, all marginal equalities, cross budget, each dual edge inequality, exact primal=dual and d formula",
+  "boundary_cases": ["empty", "zero masses", "no HL edges", "K=0", "2E=K", "E_i+E_j=K", "zero cross budget", "saturated budget", "lambda atom name"],
+  "checks": ["original full-event formulation 16 fixed-seed cases", "independent Wolfram full-event LP on five budgets", "tampered certificate rejection with python -O", "direct unittest runner discovers independent class"],
+  "reproducibility": {"Python": "3.12.14", "SymPy": "1.14.0", "mpmath": "1.3.0", "random_seed": 20261029},
+  "native_replays": 0,
+  "actual_physical_inputs": null
+}

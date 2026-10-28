@@ -1,6 +1,6 @@
 import unittest
 from fractions import Fraction as Q
-from frontier import Atom,solve,example_atoms
+from frontier import Atom,solve,example_atoms,verify_certificate
 
 class FrontierTests(unittest.TestCase):
     def test_counterexample_exact(self):
@@ -15,9 +15,12 @@ class FrontierTests(unittest.TestCase):
         z=solve(example_atoms(),4,5)
         self.assertEqual(z['d_max'],2)
     def test_no_edges(self):
-        z=solve([Atom.parse('low',0,3,0)],4,0)
+        atoms=[Atom.parse('low',0,3,0)]
+        z=solve(atoms,4,0)
         self.assertEqual(z['d_max'],Q(3,2))
         self.assertEqual(z['M_budget'],0)
+        self.assertEqual(z['low_diagonal'],(('low',Q(3,2)),))
+        self.assertTrue(verify_certificate(atoms,4,0,z))
     def test_cross_only(self):
         a=[Atom.parse('low',0,1,0),Atom.parse('high',3,1,1)]
         self.assertEqual(solve(a,4,0)['d_max'],Q(1,2))
@@ -35,8 +38,6 @@ class FrontierTests(unittest.TestCase):
         a=[Atom.parse('half',2,2,0),Atom.parse('high',3,1,0)]
         self.assertEqual(solve(a,4,0)['M_budget'],0)
         self.assertEqual(solve(a,5,0)['M_budget'],1)
-
-if __name__=='__main__':unittest.main()
 
 class FullEventIndependentOracle(unittest.TestCase):
     """A different LP: all low-low loops and cross-bin low-low pairs included."""
@@ -69,3 +70,57 @@ class FullEventIndependentOracle(unittest.TestCase):
                 self.assertEqual(out['d_max'],self.reference(atoms,K,c), (n,t,K,c))
                 cases+=1
         self.assertEqual(cases,16)
+
+
+class CertificateTests(unittest.TestCase):
+    def test_zero_mass_full_graph_dual(self):
+        atoms=[Atom.parse('zero_low',0,0,0),Atom.parse('high',3,1,0)]
+        out=solve(atoms,4,0)
+        prices=dict(out['dual_prices'])
+        self.assertGreaterEqual(prices['zero_low']+prices['high'],1)
+        bad=dict(out);bad['dual_prices']=(('zero_low',Q(0)),('high',Q(0)))
+        with self.assertRaises(ValueError):verify_certificate(atoms,4,0,bad)
+
+    def test_uniform_empty_zero_and_unmatched_schema(self):
+        expected=set(solve(example_atoms(),4,1))
+        for atoms in ([],[Atom.parse('zero',0,0,0)],
+                      [Atom.parse('high',5,2,1)],
+                      [Atom.parse('low',0,3,0),Atom.parse('high',5,2,1)]):
+            result=solve(atoms,4,0)
+            self.assertEqual(set(result),expected)
+            self.assertTrue(verify_certificate(atoms,4,0,result))
+    def test_type_precedes_attribute_access(self):
+        with self.assertRaises(TypeError):solve([object()],4,0)
+        with self.assertRaises(ValueError):solve([Atom.parse('x',0,1,0)]*2,4,0)
+    def test_dual_namespace(self):
+        atoms=[Atom.parse('lambda',0,1,0),Atom.parse('high',3,1,1)]
+        out=solve(atoms,4,1)
+        self.assertEqual(set(dict(out['dual_prices'])),{'lambda','high'})
+        self.assertIsInstance(out['budget_multiplier'],Q)
+        self.assertTrue(verify_certificate(atoms,4,1,out))
+    def test_caller_cannot_raise_size_guards(self):
+        for kwargs in ({'max_atoms':13},{'max_edges':49},{'max_atoms':True}):
+            with self.assertRaises(ValueError):solve([],4,0,**kwargs)
+    def test_budget_curve_shape_and_scale(self):
+        points=[solve(example_atoms(),4,c)['d_max'] for c in (0,1,2,3)]
+        slopes=[b-a for a,b in zip(points,points[1:])]
+        self.assertTrue(all(x>=0 for x in slopes))
+        self.assertTrue(all(a>=b for a,b in zip(slopes,slopes[1:])))
+        atoms=[Atom.parse(a.key,a.energy,3*a.mass,a.bin) for a in example_atoms()]
+        self.assertEqual(solve(atoms,4,3)['d_max'],3*Q(7,4))
+    def test_tampered_certificates_rejected(self):
+        import copy
+        atoms=example_atoms();out=solve(atoms,4,1)
+        wrong=[]
+        for key,value in [('d_max',Q(2)),('gap',Q(1)),('cross_used',Q(0)),
+                          ('budget_multiplier',Q(-1))]:
+            z=copy.deepcopy(out);z[key]=value;wrong.append(z)
+        z=copy.deepcopy(out);z['primal']=tuple((h,l,-v) for h,l,v in z['primal']);wrong.append(z)
+        z=copy.deepcopy(out);z['singles']=();wrong.append(z)
+        z=copy.deepcopy(out);z['dual_prices']=();wrong.append(z)
+        z=copy.deepcopy(out);del z['low_diagonal'];wrong.append(z)
+        for z in wrong:
+            with self.assertRaises(ValueError):verify_certificate(atoms,4,1,z)
+
+
+if __name__=='__main__':unittest.main()
