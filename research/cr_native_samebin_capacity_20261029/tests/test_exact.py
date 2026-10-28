@@ -24,7 +24,7 @@ def independent_flow(rows,cap,within_same_bin=True):
         for j,l in lows:
             if h.energy_eV+l.energy_eV<=cap and (not within_same_bin or h.partition==l.partition):
                 edge(u,('l',j),infinity)
-    for j,l in lows:edge(('l',j),l.coefficient)
+    for j,l in lows:edge(('l',j),sink,l.coefficient)
     total=F(0)
     while True:
         par={src:None};q=deque([src])
@@ -39,7 +39,7 @@ def independent_flow(rows,cap,within_same_bin=True):
             u=par[v]; step=graph[u][v] if step is None else min(step,graph[u][v]);v=u
         v=sink
         while v!=src:
-            u=par[v];graph[u][v]-=step;graph[v][u]+=step
+            u=par[v];graph[u][v]-=step;graph[v][u]+=step;v=u
         total+=step
     return total
 
