@@ -1,3 +1,13 @@
+# Current authorized joint He event region unit (2026-10-28)
+
+The user explicitly requests the next full theoryR1-R10 and codingC1-C10 after a latest-source survey, with actual per-stage Git publication/dual backups, central completed/total and copyable handoff. Apply research/cr_he_joint_region_20261028/CONTRACT.json. CR_PHYS02_HE_JOINT_REGION_V1 has a fresh40CPU-s budget; no predecessor or foreign allowance transfer. Preserve PR115 closed28.653943/40 and all failures.
+
+Derive and implement the exact joint(d,C) polygon in the declared domain: every allowed positive-mass low-high pair is cross-bin, lows2E<=K, all permitted pairs Ei+Ej<=K including low diagonals. NativeK2/K6/K20 and degenerate boundary cases are planned. Verify domain from atoms; do not adopt a general arbitrary-bin energy-cap polygon. The same pinned100K H1/He4 source/history/nb and original consumer remain. ActualK/exclusivekernel/C/D/outsidepartner/donorwork/EOS/T/fullphysicalnative25 remainnull.
+
+Complete each stage's actual expectedSHA/forcefalse Git publication and dualR2 checkpoint before proceeding. SOURCE/CLOSEOUT immutable dualoriginalfullGETSHA/allpayloadSHA/CRC R3. Recheck central and active ownerrefs at eachstage. Current qualifiedcentral03202f9230fdf0d631b1d8673221ae86c54edc04 is28/88,88nodes17edges; scopedchildcountdelta0. No foreignbranch mutation, centralwrite ormainmerge.
+
+## Preserved closed predecessor instructions
+
 # Current energy-constrained cross-envelope science closed; delivery only (2026-10-28)
 
 Read research/cr_he_energy_cross_20261028/ADMISSION.json, SCIENTIFIC_SUMMARY.json,
