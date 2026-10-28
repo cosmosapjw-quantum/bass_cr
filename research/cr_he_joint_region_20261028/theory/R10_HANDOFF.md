@@ -1,0 +1,15 @@
+# R10 — Theory checkpoint and authorized coding continuation
+
+The R1–R10 theory loop closes with PASS_SCOPED_THEOREM for CR_PHYS02_HE_JOINT_REGION_V1. The next action is the already requested C1–C10 coding loop in this same unit and branch. Draft PR116 is https://github.com/cosmosapjw-quantum/bass_cr/pull/116, stacked on the immutable completed PR115 branch head b457bb58d74cc9b64f7c760ffc690eda7a51ef9a.
+
+The result is the exact polygon 0<=d<=D,0<=C<=X,C<=d,2d-C<=L, under the declared all-allowed-HL-cross domain. The constructive proof, all degeneracies, source-observable corollaries and the code acceptance contract are in THEOREM.md and R09_OBSERVABLES_AND_CODE.md. R6 independently reviewed the proof and evidence, and R7's actual Wolfram exact run passed the nondegenerate five-vertex fixture. Two R6 wording/quantifier findings are closed. No mathematical blocker remains for the stated theorem.
+
+Reuse the original NPZ, unchanged event_union consumer, PR114 selected max_events and PR115 saved bounds/K20 witness using intake/RECOVERY_RECEIPT and CONTRACT hashes. PR114's recovered original archive passed whole SHA, all284 payload SHA/bytes and CRC. Do not replay the closed PR114/115 optimization. Native K6 explicit cross primal was not executed by PR115 and remains genuinely new work here.
+
+C1 must bind actual checkout/source identities and completion criteria; C2 maps the formulas to dependencies; C3 defines exact algorithms and source guards; C4 fixes bounded execution resources. C5 implements, C6 verifies implementation with an independent exact small oracle, C7 validates actual native measures and the unchanged consumer, C8 records reproducibility and inspects a plot from saved results, C9 independently reviews and admits the scoped node, and C10 closes deliverables and immutable dual-R3 archives. Each stage must actually finish Git+dualR2 before the next starts.
+
+Current central qualified identity is rei_bianchi research/orchestration-sandbox-20261022 at03202f9230fdf0d631b1d8673221ae86c54edc04,28/88. This unit's whole theory+code node remains0/1 and central delta0. Native targets0,1/5,twice-binary-ghost,2,6,20 and domain rejections1,3,10 still require new actual source checks. Actual physical K/kernel/d/C and coupled physical native25 remain open.
+
+The new local40 CPU-s budget has no local science charge yet; one remote Wolfram call used requested5s limit with unreported CPU. Old PR115 charge28.653943/40 and its two failures remain closed and nontransferable. The user explicitly authorized this new unit, publication, dual backup and the full theory+code continuation. Beyond this unit, automatic next-node execution stays OFF.
+
+The survey covers all1757 public branch heads in the named10repo scope and all115 pre-existing bass_cr PRs, plus selected current commits and backup listings. Personal-context service was unavailable; full prior-conversation inspection is not claimed. Drive parent results were capped and continuation was not exposed. Preserve those limits in the final handoff.

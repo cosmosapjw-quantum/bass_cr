@@ -1,0 +1,18 @@
+{
+  "start": "2026-10-28T11:56:53.800Z",
+  "finish": "2026-10-28T11:57:02.566Z",
+  "requested_time_constraint_s": 5,
+  "code": "vars={aa,bb,ab,ah,bh};\ncon=aa>=0&&bb>=0&&ab>=0&&ah>=0&&bh>=0&&2aa+ab+ah<=3&&2bb+ab+bh<=1&&ah+bh<=1;\ndd=aa+bb+ab+ah+bh;cc=ab+ah+bh;\nobjectives={dd,cc,2dd-cc,cc-dd,-dd,-cc};\nmaxima=Table[First[Maximize[{obj,con},vars,Reals]],{obj,objectives}];\nvv={{0,0,0,0,0},{3/2,1/2,0,0,0},{1,1/2,0,1,0},{1/2,0,1,1,0},{0,0,1,1,0}};\ncoords=({dd,cc}/.Thread[vars->#])&/@vv;\nvalid=And@@(TrueQ[con/.Thread[vars->#]]&/@vv);\n<|\"maxima\"->maxima,\"expectedMaxima\"->{5/2,2,4,0,0,0},\"maximaPass\"->(maxima=={5/2,2,4,0,0,0}),\"vertexCoordinates\"->coords,\"allVertexFeasible\"->valid,\"outsideSameBinFacet\"->(2*1-0<=1),\"method\"->\"Exact rational linear optimization; nonnegative singleton slack eliminated\"|>",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Out[1]= <|\"maxima\" -> {5/2, 2, 4, 0, 0, 0}, \"expectedMaxima\" -> {5/2, 2, 4, 0, 0, 0}, \"maximaPass\" -> True, \"vertexCoordinates\" -> {{0, 0}, {2, 0}, {5/2, 1}, {5/2, 2}, {2, 2}}, \"allVertexFeasible\" -> True, \"outsideSameBinFacet\" -> False, \"method\" -> \"Exact rational linear optimization; nonnegative singleton slack eliminated\"|>"
+      }
+    ],
+    "structuredContent": null,
+    "isError": false
+  },
+  "remote_CPU_s": null,
+  "local_scientific_CPU_s": 0
+}

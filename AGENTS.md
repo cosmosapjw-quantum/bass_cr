@@ -1,3 +1,37 @@
+# Joint He event-region unit completed (2026-10-28)
+
+CR_PHYS02_HE_JOINT_REGION_V1 is PASS_SCOPED. Actual theoryR1-R10 and codingC1-C10 publication/checkpoint receipts20/20; scoped child1/1; latest qualified central08364a6ef6f4880c9c4fff87335d167fbff9b440 remains28/88,88nodes17edges, count effect0. ScientificS=98174c29b98439f70f4cf14c8510f88c6a538c4f; deliveryD=f16ef83b43654f2ba510178a9697c8d8a0645063. The actual final metadata F is bound by the final PR116 body and postcommit handoff. Read research/cr_he_joint_region_20261028/HANDOFF_KO.md and publication/FINAL_DELIVERY.json first.
+
+Immutable SOURCE BASS_CR_HE_JOINT_REGION_SOURCE_20261028_98174c29b984.zip is4690891bytes,265payloads,SHA25687ddb7718d37895c3842b710a2af4f6419ffbc8ea38d0a55e0b1093217876311. Immutable CLOSEOUT BASS_CR_HE_JOINT_REGION_CLOSEOUT_20261028_f16ef83b4365.zip is4717987bytes,275payloads,SHA256975beeb642c58af5043466e24c17fb8abe41369d36ea4c4cca1a84ceee0f4e8a. Both providers for both archives passed originalfullGET wholeSHA256/allpayloadSHA256/ZIPCRC R3. Do not rebuild either archive to add future acknowledgments. Git membership257/267 is R2 tree metadata plus local blob identity, not all-Git-body R3.
+
+Science remains CLOSED23.448655/40CPU-s; unused16.551345 NONTRANSFERABLE, additionalallowance0, automaticnextnodeOFF. Preserve firstbuild watchdog failure, all prior failures and C9 metadata corrections. No unchanged accepted-science rerun. Future science requires a new explicit scope and independent budget. ActualphysicalK/exclusivekernel/d/C/outsidepartner/donorwork/EOS/T/absolutevolume/fullphysicalnative25 remainnull. This completed conditional mathematics/implementation does not change central physical gates.
+
+## Preserved C09 scientific closure and entry contracts
+
+# Current joint He event-region science closed; complete authorized delivery (2026-10-28)
+
+Read research/cr_he_joint_region_20261028/ADMISSION.json, SCIENTIFIC_SUMMARY.json, review/C09_FINAL.json, BUDGET_CLOSEOUT.json and REPORT_KO.md. Unit CR_PHYS02_HE_JOINT_REGION_V1 is PASS_SCOPED, child1/1, scientific blockers0. The actual scientific S is the C09 publication receipt; do not invent a future commit. Draft PR116 is the delivery location.
+
+The declared domain requires every permitted positive-mass low-high pair to be cross-bin. The exact joint region is0<=d<=D,0<=C<=X,C<=d,2d-C<=L withD=(L+M)/2 and common witness(D,X). Complete rational vertex/interior measures preserve every original marginal. Native six caps and20 witnesses,117 controls/12 fixtures/479 candidate bases,64020 independent marginal checks are scoped accepted; K1/3/10 are domain rejections. K6 has a new explicit cross-flow primal; prior D/X scalar evidence is reused. PhysicalK/exclusivekernel/d/C/outsidepartner/donor/EOS/T/absolutevolume/fullphysicalnative25 remainnull.
+
+Science is CLOSED at23.448655/40CPU-s. Remaining16.551345 is NONTRANSFERABLE, additional_science_allowance_cpu_s=0, automatic_next_node=false. Preserve failed build_v1 and all diagnostics, snapshots and receipts. Remote CAS and metadata/provider CPU are unknown, not zero. No new scientific run under this closed allowance.
+
+C9 requalified actual central08364a6ef6f4880c9c4fff87335d167fbff9b440 at28/88,88nodes17edges, DAG SHA256cf0488d50b087884004c2b2395df32243b788c84e456ed8db132fe1d5142c8c8. C05-C08 honestly observed the drift from03202; historical receipts and frozen contract remain. This child has central count effect0; no centralwrite/otherownerbranch mutation/mainmerge. Future publication must stop and qualify a changed central identity.
+
+Finish C09/C10 actual per-stage Git expectedSHA forcefalse and dualR2 before proceeding. Seal SOURCE and CLOSEOUT once, then verify each provider by originalfullGET wholeSHA256/allpayloadSHA/ZIPCRC R3. Keep postcommit receipts separate; a source archive is not rebuilt with future acknowledgments. Complete final copyable handoff and then stop.
+
+## Preserved entry contract for this now-closed unit
+
+# Current authorized joint He event region unit (2026-10-28)
+
+The user explicitly requests the next full theoryR1-R10 and codingC1-C10 after a latest-source survey, with actual per-stage Git publication/dual backups, central completed/total and copyable handoff. Apply research/cr_he_joint_region_20261028/CONTRACT.json. CR_PHYS02_HE_JOINT_REGION_V1 has a fresh40CPU-s budget; no predecessor or foreign allowance transfer. Preserve PR115 closed28.653943/40 and all failures.
+
+Derive and implement the exact joint(d,C) polygon in the declared domain: every allowed positive-mass low-high pair is cross-bin, lows2E<=K, all permitted pairs Ei+Ej<=K including low diagonals. NativeK2/K6/K20 and degenerate boundary cases are planned. Verify domain from atoms; do not adopt a general arbitrary-bin energy-cap polygon. The same pinned100K H1/He4 source/history/nb and original consumer remain. ActualK/exclusivekernel/C/D/outsidepartner/donorwork/EOS/T/fullphysicalnative25 remainnull.
+
+Complete each stage's actual expectedSHA/forcefalse Git publication and dualR2 checkpoint before proceeding. SOURCE/CLOSEOUT immutable dualoriginalfullGETSHA/allpayloadSHA/CRC R3. Recheck central and active ownerrefs at eachstage. Current qualifiedcentral03202f9230fdf0d631b1d8673221ae86c54edc04 is28/88,88nodes17edges; scopedchildcountdelta0. No foreignbranch mutation, centralwrite ormainmerge.
+
+## Preserved closed predecessor instructions
+
 # Current energy-constrained cross-envelope science closed; delivery only (2026-10-28)
 
 Read research/cr_he_energy_cross_20261028/ADMISSION.json, SCIENTIFIC_SUMMARY.json,

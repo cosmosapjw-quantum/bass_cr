@@ -1,0 +1,7 @@
+# R8 — Result decision
+
+The constructive theorem is admitted within the declared finite support domain. It closes the mathematical missing step between PR114's d maximum and PR115's C maximum: the two maxima admit a common event measure, and their exact joint boundary is the intersection of four explicit upper/coupling inequalities with nonnegativity. The proof includes all marginal-preserving vertices, rational interpolation and degeneracies. R6 independent review found no mathematical blocker; two wording/quantifier clarifications are closed in R06_DECISION. R7 exact algebra independently verifies a nondegenerate pentagon example.
+
+The next work is implementation of this established statement. It must check the actual support predicate, produce and independently validate the native K6 primal which PR115 did not execute, bind the result to the pinned same-state source consumer, and close the new budget. Consequently the whole theory+coding DAG node remains 0/1 here. Central qualified progress remains 28/88 with no owner-count increment.
+
+The equal-bin counterexample is retained as a domain guard fixture. It is not admitted as a scientific strong no-go, and no claim of worldwide novelty follows from the bounded literature search. Physical K and the exclusive He measure remain unspecified; the mathematical region is conditional on the stated energy cap and full pair availability.
