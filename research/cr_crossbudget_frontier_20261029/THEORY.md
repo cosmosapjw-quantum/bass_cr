@@ -8,7 +8,9 @@ A finite set of atoms has nonnegative rational marginals \(w_i\) in \(\mathrm{m^
 
 For high-low events \(x_{hl}\ge 0\), low-low events \(y_{ll'}\ge 0\), and cross-bin double-event coefficient \(C=\sum_{b_i\ne b_j} \mathrm{event}_{ij}\), define \(d=\sum x+\sum y\) and the budgeted upper frontier \(d_{\max}(c)=\max\{d:C\le c\}\). This is not a characterization of the joint region at exactly fixed C.
 
-## Theorem (derived)
+## Theorem (derived; independently reviewed on 2026-10-29)
+
+Assume c>=0. The value theorem also holds for nonnegative real marginals and budgets; the exact API and rational certificate assertions below restrict w_i, E_i, K and c to rationals. The finite HL polytope is nonempty (zero flow) and compact, so its optimum exists. No extra regularity or continuum closure is used.
 
 Let \(L=\sum_l w_l\) and let
 \[
@@ -37,10 +39,10 @@ Fix K=4 eV, all four marginals 1: L0 (bin0,E0), L1 (bin1,E1), H0 (bin0,E5/2), H1
 \[
 M(c)=1+c/2,\quad d_{\max}(c)=3/2+c/4\quad(0\le c\le2),
 \]
-and for c≥2 the maximum is 2. At c=1, previous necessary outer bound permits d=2 whereas **exact optimum is 7/4**, a strict gap 1/4. Wolfram exact MaxValue verifies c=0,1/2,1,3/2,2 with dmax=3/2,13/8,7/4,15/8,2. The new Python small-instance LP verifies primal-dual gap zero, and 16 random finite independent full-event LP fixtures agree.
+and for c≥2 the maximum is 2. At c=1, previous necessary outer bound permits d=2 whereas **exact optimum is 7/4**, a strict gap 1/4. This is an explicit counterexample to sufficiency of the old outer facets, not a new universal no-go theorem. Current CAS and implementation results are recorded in evidence/ and RESULTS.json only after actual execution. The predecessor's unlogged numerical claims are not used as execution evidence.
 
 ## Scientific interface, limits and reproducibility
 
 Under only the historical conditional source history \(q_i(t)=t w_i\), proper 0≤t≤10^10 s, \(W=\int t\,dt=5\times10^{19}\,\mathrm{s^2}\); W times event coefficient has units m^-3. If the selected source bookkeeping \(\varepsilon_{\rm chem}=W[I_1N+(I_2-I_1)d]\) applies and \(I_2>I_1\), then replacing d with dmax(c) is a *conditional upper bound*. Retained photons, radiative redistribution, external partner/donor, stopping, electron thermalization, feedback and actual K remain unbound. No physical heating or native25 calculation is licensed.
 
-Use Python 3.13.5 + SymPy 1.14, run python -m unittest -v test_frontier.py; pure rational small-LP backend limits 12 atoms and 48 edges, not a 3201-atom implementation. The prior PR118 resource failure ≥20.45/20 CPU seconds is unchanged; no old budget transferred. Different-author R6/C9 not performed. Source GitHub refs: PR116–118. Literature: classical fractional matching LP duality (Ahn & Guha 2013, arXiv:1307.4355); Switzer & Hirata, Phys Rev D 77, 083006 (2008); Chluba & Sunyaev, MNRAS 402, 1221 (2010). This is a concrete specialized frontier, not a novelty claim for LP duality.
+Current runtime is Python3.12.14 with pinned SymPy1.14.0/mpmath1.3.0 installed after an observed PACKAGE_MISSING probe. The exact command and actual environment are in evidence/. The API is limited to12 atoms/48 HL edges. The prior PR118 resource failure ≥20.45/20 CPU seconds is unchanged; no old budget is transferred. Separate theory/code agent reviews are in review/. Source GitHub refs: PR116–118 and the unfinished parent bdc7bf6. LITERATURE.md records primary-source comparisons. The contribution is a specialized constructive frontier and corrected certificate implementation, without a claim of novelty for LP duality.
