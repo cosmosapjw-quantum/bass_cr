@@ -1,12 +1,13 @@
-"""Native source bridge. No execution without PR116's exact NPZ byte digest.
-Reuses pinned event-union source loader and cross-envelope native atom projection.
-No source fit, recombination, transport or cosmological IVP is rerun.
+"""No native run without an exact pinned PR116 source NPZ.
+
+Reuses the preexisting source loader and cross-envelope atom projection. No fit, RR,
+transport or cosmology history is rerun. Never constructs a source from catalog.
 """
 from __future__ import annotations
 import hashlib,importlib.util,sys,argparse,json
 from pathlib import Path
 from fractions import Fraction as F
-from samebin_capacity import Atom,solve
+from samebin_capacity import Atom, solve
 
 PIN_NPZ='1c974c306b50f3deb86df712844f753b4402fb25e5dbc41c9a1de0254bf3ff47'
 PIN_DIGEST='2cfca578701a2355fa6f1f3f1f8a27c211e81b9b488f65cef1e1a89e4dbc7690'
@@ -29,7 +30,7 @@ def native_run(repo_root,source_npz,K='3'):
     if hashlib.sha256(source_npz.read_bytes()).hexdigest()!=PIN_NPZ:raise ValueError('SOURCE_BYTES_MISMATCH')
     sys.path.insert(0,str(repo/'research/cr_he_energy_cross_20261028/implementation'))
     ce=_load(repo/'research/cr_he_energy_cross_20261028/implementation/cross_envelope.py','cr_cross_envelope')
-    eu=ce.native_module()  # preserve the exact consumer module identity used by ce.native_atoms
+    eu=ce.native_module()  # same exact type owner used by ce.native_atoms
     s=eu.load_pinned_source(source_npz)
     if s.atom_content_sha256!=PIN_DIGEST:raise ValueError('ATOM_CONTENT_DIGEST_MISMATCH')
     raw=ce.native_atoms(s)
