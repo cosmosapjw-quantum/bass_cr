@@ -1,0 +1,63 @@
+{
+  "schema": "CR_PHYS02_RR_IONIZING_PHOTON_V1",
+  "scope": "original PR110 proper-time source derived downstream physical emissions",
+  "parent_PR": 124,
+  "parent_head": "a6b49b352fed31587955d55b1cad30c0b55a81eb",
+  "PR110_science": "2eed7ef835c55ee17e4ce96e0eda7fe8d82dc47c",
+  "PR110_documents": "616b166fa0108ca35defece3f8c9d99fc79895cb",
+  "source_zip_sha256": "5392bc1bf159d0b23d7530a541f894e201231c3df874d6c547474b7517654c58",
+  "inputs": {
+    "source_json_sha256": "8fca44c378844029a72253179e557dfa97f6cca8e0f9d6e677d67919ca3797cf",
+    "fullBED_NPZ_lineage_sha256": "7ee8c1eff7f58cd7175a9bcd3968a27ef065f0e983f05e609dc875f5f06112cc",
+    "source_arrays_sha256": "2c3624e4ca6d087436f79360497e75b0c84fb2c8ea6b83bb855a9a0cd0005c1d",
+    "source_result_sha256": "ae8452f25958c47349d313926ef14e7ab7d78691ba6bb3b8395dc399aa49b0ce"
+  },
+  "physical_model": {
+    "absolute_volume_m3": null,
+    "birth_tag": "direct_0p1_10",
+    "conditional_frozen_100K_model": true,
+    "fixed_proper_volume_density": true,
+    "full_exclusive_He_double_event_kernel": false,
+    "gas_rest_frame": true,
+    "ground_RR_only": true,
+    "isotropic_ground_state_zero_recoil": true,
+    "observed_sky": false,
+    "photon_transport": false,
+    "physical_data": true,
+    "proper_seconds_0_to_T": true,
+    "this_is_derived_from_PR110_photon_event_atoms": true
+  },
+  "units": {
+    "time": "proper seconds",
+    "number": "m^-3",
+    "energy": "J m^-3",
+    "photon_E": "eV",
+    "frequency": "Hz"
+  },
+  "outputs": [
+    "results/PHOTON_RESULT.json",
+    "results/PHOTON_SPECTRUM.csv",
+    "results/PHOTON_ATOMWISE.npz",
+    "results/INDEPENDENT_DECIMAL80.json",
+    "results/RR_PHOTON_SOURCE.png",
+    "results/RR_PHOTON_SOURCE.svg"
+  ],
+  "hard_gates": {
+    "L4": false,
+    "actual_exclusive_He_K": null,
+    "case_A_B_transport": false,
+    "full_parent_ion_chemistry": false,
+    "intervening_absorption": false,
+    "photon_escapes": null,
+    "physical_full_native25": false,
+    "production": false,
+    "real_He_exclusive_joint_kernel": null
+  },
+  "admission": "SCOPED_DERIVED_PHYSICAL_SOURCE_DATA_REVIEW_HOLD",
+  "tests": {
+    "python": "12/12 PASS",
+    "python_O": "12/12 PASS",
+    "separate_Decimal80": "8/8 PASS"
+  },
+  "not_simulated": "All output numbers are derived from actual retained PR110 source bytes; no new random/synthetic physics model"
+}
