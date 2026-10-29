@@ -1,0 +1,169 @@
+{
+  "schema": "CR_GENERIC_BATCH_PARAMETRIC_V1_RESULT",
+  "run_utc": "2026-10-29T07:15:20.115721+00:00",
+  "parent_pr": 122,
+  "parent_head": "f152e28fd4e9a727b23e068603c0359c5e0d1303",
+  "source_npz_sha256": "1c974c306b50f3deb86df712844f753b4402fb25e5dbc41c9a1de0254bf3ff47",
+  "original_batch": {
+    "original_npz_sha256": "1c974c306b50f3deb86df712844f753b4402fb25e5dbc41c9a1de0254bf3ff47",
+    "atoms": 3201,
+    "budget_count": 3,
+    "wall_seconds": 16.33788296199998,
+    "python_cpu_seconds": 15.174365993999999,
+    "child_peak_rss_kb": 114696,
+    "results": [
+      {
+        "case": 0,
+        "budget": "0",
+        "M": "323478918562118325/3064991081731777716716694054300618367237478244367204352",
+        "d_max": "661674653896239223/3064991081731777716716694054300618367237478244367204352",
+        "cost": "0",
+        "dual_gap": "0",
+        "lambda": "1",
+        "state": "PARTIAL",
+        "checked_edges": 102831,
+        "positive_pairs": 337,
+        "cumulative_cpp_stats": [
+          797,
+          2556790,
+          2555992,
+          2587,
+          102831
+        ]
+      },
+      {
+        "case": 1,
+        "budget": "2162500209241577489/12259964326927110866866776217202473468949912977468817408",
+        "M": "3456415883490050789/12259964326927110866866776217202473468949912977468817408",
+        "d_max": "7455897440411491273/24519928653854221733733552434404946937899825954937634816",
+        "cost": "2162500209241577489/12259964326927110866866776217202473468949912977468817408",
+        "dual_gap": "0",
+        "lambda": "1",
+        "state": "PARTIAL",
+        "checked_edges": 102831,
+        "positive_pairs": 874,
+        "cumulative_cpp_stats": [
+          1818,
+          5827053,
+          5825234,
+          7761,
+          102831
+        ]
+      },
+      {
+        "case": 2,
+        "budget": "2162500209241577489/24519928653854221733733552434404946937899825954937634816",
+        "M": "4750331557738524089/24519928653854221733733552434404946937899825954937634816",
+        "d_max": "12749294671581405057/49039857307708443467467104868809893875799651909875269632",
+        "cost": "2162500209241577489/24519928653854221733733552434404946937899825954937634816",
+        "dual_gap": "0",
+        "lambda": "1",
+        "state": "PARTIAL",
+        "checked_edges": 102831,
+        "positive_pairs": 596,
+        "cumulative_cpp_stats": [
+          1055,
+          3383164,
+          3382108,
+          5174,
+          102831
+        ]
+      }
+    ]
+  },
+  "matched_synthetic": {
+    "contract": "same 120 synthetic atoms, 5 bins, 8 budgets, exact Python certificates, i128 C++ O2, same host",
+    "seed": 20261029,
+    "measurements": [
+      {
+        "trial": 0,
+        "batch_s": 0.0490909320000128,
+        "repeated_s": 0.1829012780000312,
+        "ratio": 3.725765035383388,
+        "batch_augmentations": 84,
+        "sum_repeated_augmentations": 610,
+        "dual_edges_per_budget": 1502
+      },
+      {
+        "trial": 1,
+        "batch_s": 0.04934160899995277,
+        "repeated_s": 0.17663721999997506,
+        "ratio": 3.579883663707524,
+        "batch_augmentations": 84,
+        "sum_repeated_augmentations": 610,
+        "dual_edges_per_budget": 1502
+      },
+      {
+        "trial": 2,
+        "batch_s": 0.048802920999946764,
+        "repeated_s": 0.18825064300006034,
+        "ratio": 3.8573642549032194,
+        "batch_augmentations": 84,
+        "sum_repeated_augmentations": 610,
+        "dual_edges_per_budget": 1502
+      }
+    ],
+    "median_batch_s": 0.0490909320000128,
+    "median_repeated_s": 0.1829012780000312,
+    "ratio_of_medians": 3.725765035383388,
+    "peak_rss_child_kb": 96924
+  },
+  "test_evidence": {
+    "normal_unittest": "6/6_PASS",
+    "python_optimized_unittest": "6/6_PASS",
+    "seeded_exact_lp_cases": 75,
+    "wolfram_exact_18edge_cases": 7,
+    "ubsan_exact_10atom_7budgets": "PASS",
+    "reproduce_sh_exit": 0
+  },
+  "no_matched_native3201_speedup_claim": true,
+  "parent_baseline_timeout": "EXECUTION_FAILED_TIMEOUT_NO_VALID_COMPLETE_LOG",
+  "review": {
+    "R06": "NOT_RUN_DISTINCT_AUTHOR",
+    "C09": "NOT_RUN_DISTINCT_AUTHOR",
+    "native_subagents": "NOT_EXPOSED"
+  },
+  "dag": {
+    "central": {
+      "completed": 28,
+      "total": 88,
+      "delta": 0,
+      "authority": "PR122/parent qualified; no independent recount of all 88 nodes"
+    },
+    "extension": {
+      "completed": 0,
+      "total": 3,
+      "first": "PARTIAL"
+    },
+    "previous_small_reference": {
+      "completed": 1,
+      "total": 1,
+      "scope": "PR121"
+    },
+    "previous_scalable_reference": {
+      "completed": 1,
+      "total": 1,
+      "scope": "PR122"
+    },
+    "new_scoped_auxiliary": {
+      "completed": 1,
+      "total": 1,
+      "scope": "batch 3201 three-budget exact witnesses, independent-author HOLD"
+    },
+    "workflow": {
+      "R": "9/10",
+      "C": "9/10",
+      "total": "18/20",
+      "R06": "NOT_RUN_DISTINCT_AUTHOR",
+      "C09": "NOT_RUN_DISTINCT_AUTHOR"
+    },
+    "physical_native25": false,
+    "L4": false,
+    "production": false
+  },
+  "resource": {
+    "full_aggregate_cpu_budget": "NOT_CERTIFIED",
+    "previous_PR118_FAIL": "PRESERVED",
+    "historical_closed_cpu_budgets": "NOT_TRANSFERRED"
+  }
+}
