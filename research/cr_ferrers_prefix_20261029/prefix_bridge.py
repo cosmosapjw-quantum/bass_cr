@@ -11,12 +11,15 @@ from bisect import bisect_right
 from math import lcm
 from pathlib import Path
 import subprocess
+from prefix_dual_oracle import DualPrefixOracle
 
 DEFAULT_EXE = Path(__file__).with_name('prefix_ssp')
 MAX_BITS=105
 
 
-def run_prefix(atoms,K,budgets,*,executable=DEFAULT_EXE,timeout=90):
+def run_prefix(atoms,K,budgets,*,executable=DEFAULT_EXE,timeout=90,dual_check='explicit'):
+    if dual_check not in ('explicit','prefix_exact'):
+        raise ValueError('INVALID_DUAL_CHECK_MODE')
     atoms=tuple(atoms); budgets=tuple(budgets)
     if type(K) not in (int,F):raise TypeError('EXACT_K_REQUIRED')
     if F(K)<0:raise ValueError('NEGATIVE_K')
@@ -59,7 +62,9 @@ def run_prefix(atoms,K,budgets,*,executable=DEFAULT_EXE,timeout=90):
             blocks.append(cur);cur=[]
         else:cur.append(row.split())
     if cur or len(blocks)!=len(budgets):raise AssertionError('BAD_RESULT_COUNT')
-    valid_original_edges=[(h,l) for h in atoms if 2*h.energy>K for l in atoms if 2*l.energy<=K and h.energy+l.energy<=K]
+    valid_original_edges=([(h,l) for h in atoms if 2*h.energy>K for l in atoms if 2*l.energy<=K and h.energy+l.energy<=K]
+                          if dual_check=='explicit' else None)
+    dual_oracle=DualPrefixOracle(atoms,K) if dual_check=='prefix_exact' else None
     Ltot=sum((a.mass for a in atoms if 2*a.energy<=K),F(0))
     results=[None]*len(budgets)
     for rows in blocks:
@@ -97,16 +102,22 @@ def run_prefix(atoms,K,budgets,*,executable=DEFAULT_EXE,timeout=90):
         if any(used[a.key]>a.mass for a in atoms) or mm!=m or cc!=c_used or c_used>budgets[idx]:
             raise AssertionError('PRIMAL_CONSERVATION_FAIL')
         if any(p<0 for p in prices.values()) or lam<0:raise AssertionError('DUAL_NEGATIVE')
-        for h,l in valid_original_edges:
-            if prices[h.key]+prices[l.key]+lam*int(h.bin!=l.bin)<1:
-                raise AssertionError(('UNCOMPRESSED_DUAL_EDGE_FAIL',h.key,l.key))
+        if dual_check=='explicit':
+            for h,l in valid_original_edges:
+                if prices[h.key]+prices[l.key]+lam*int(h.bin!=l.bin)<1:
+                    raise AssertionError(('UNCOMPRESSED_DUAL_EDGE_FAIL',h.key,l.key))
+            logical_checked=len(valid_original_edges)
+            grouped_checked=None
+        else:
+            logical_checked,grouped_checked=dual_oracle.verify(prices,lam)
         obj=sum((a.mass*prices[a.key] for a in atoms),F(0))+lam*budgets[idx]
         if obj!=m:raise AssertionError(('PRIMAL_DUAL_GAP',obj,m))
         stats=list(map(int,props['STATS']))
         if len(stats)!=7:raise AssertionError('BAD_STATS')
         results[idx]={'budget':budgets[idx],'M':m,'C':c_used,'d_max':(Ltot+m)/2,
                       'lambda_dual':lam,'gap':obj-m,'flow':originalflow,'prices':prices,
-                      'checked_edges':len(valid_original_edges),'positive_pairs':len(originalflow),
+                      'checked_edges':logical_checked,'dual_check_mode':dual_check,
+                      'grouped_dual_constraints':grouped_checked,'positive_pairs':len(originalflow),
                       'pruned_high':len(isolated),'active_high':len(H),'active_low':len(L),
                       'cpp_stats':stats,'source_scale':scale}
     if any(v is None for v in results):raise AssertionError('MISSING_RESULT')
