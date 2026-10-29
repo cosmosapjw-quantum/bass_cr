@@ -1,0 +1,142 @@
+{
+  "program": "BASS-CR",
+  "unit": "CR_FERRERS_PREFIX_EXACT_V1",
+  "parent": {
+    "pr": 123,
+    "head": "9f520c5e4042cb15bbd55da14ef946d6d9960d97"
+  },
+  "source": {
+    "original_npz_sha256": "1c974c306b50f3deb86df712844f753b4402fb25e5dbc41c9a1de0254bf3ff47",
+    "atoms": 3201,
+    "high": 2748,
+    "low": 453,
+    "high_pruned": 2295,
+    "high_active": 453,
+    "original_admissible_HL_edges": 102831,
+    "compressed_forward_arcs": 4307,
+    "compressed_network_vertices": 1358
+  },
+  "exact": {
+    "normal_unit_tests": "6/6_PASS",
+    "python_optimized": "6/6_PASS",
+    "UBSan_unit_tests": "6/6_PASS",
+    "full_event_random_lp": "75/75_PASS",
+    "Wolfram_18edge_7budget": "7/7_PASS",
+    "original_3201_3budget": "3/3_EXACT_M_D_ZERO_GAP_102831_EDGES_EACH",
+    "synthetic_3201_5bins": "3/3_EXACT_DUAL_ZERO_GAP"
+  },
+  "paired": {
+    "parent_wall": [
+      18.839130255999976,
+      20.689542381000024,
+      18.844990985000095
+    ],
+    "prefix_wall": [
+      16.471989080999947,
+      15.707066570000052,
+      16.976012629000024
+    ],
+    "parent_median": 18.844990985000095,
+    "prefix_median": 16.471989080999947,
+    "ratio_of_medians": 1.1440628628595528,
+    "parent_last_stats": [
+      1818,
+      5827053,
+      5825234,
+      7761,
+      102831
+    ],
+    "prefix_last_stats": [
+      1027,
+      1396409,
+      1395381,
+      876,
+      102831,
+      4307,
+      1358
+    ],
+    "claim_scope": "same-source 3201 atoms, c0/R2/R, exact original HL certificates, 3 paired trials; not general/production"
+  },
+  "adversarial_bins": {
+    "scope": "synthetic-bin-relabel-original-energy-mass-unchanged",
+    "bin_rule": "(7*i+int(E_i*10))%5",
+    "source_sha256": "1c974c306b50f3deb86df712844f753b4402fb25e5dbc41c9a1de0254bf3ff47",
+    "wall": 16.730737806000207,
+    "cpu": 16.72129,
+    "child_rss_kb": 99096,
+    "queries": [
+      {
+        "c": "0",
+        "M": "3442187216428402405/12259964326927110866866776217202473468949912977468817408",
+        "C": "0",
+        "d": "7441668773349842889/24519928653854221733733552434404946937899825954937634816",
+        "gap": "0",
+        "lambda": "1",
+        "checked_edges": 102831,
+        "positive_pairs": 798,
+        "stats": [
+          955,
+          1659472,
+          1658516,
+          5,
+          102831,
+          9774,
+          1356
+        ]
+      },
+      {
+        "c": "2162500209241577489/24519928653854221733733552434404946937899825954937634816",
+        "M": "3456415883490050789/12259964326927110866866776217202473468949912977468817408",
+        "C": "15333922531774129/6129982163463555433433388108601236734474956488734408704",
+        "d": "7455897440411491273/24519928653854221733733552434404946937899825954937634816",
+        "gap": "0",
+        "lambda": "0",
+        "checked_edges": 102831,
+        "positive_pairs": 803,
+        "stats": [
+          970,
+          1682881,
+          1681910,
+          5,
+          102831,
+          9774,
+          1356
+        ]
+      },
+      {
+        "c": "2162500209241577489/12259964326927110866866776217202473468949912977468817408",
+        "M": "3456415883490050789/12259964326927110866866776217202473468949912977468817408",
+        "C": "15333922531774129/6129982163463555433433388108601236734474956488734408704",
+        "d": "7455897440411491273/24519928653854221733733552434404946937899825954937634816",
+        "gap": "0",
+        "lambda": "0",
+        "checked_edges": 102831,
+        "positive_pairs": 803,
+        "stats": [
+          970,
+          1682881,
+          1681910,
+          5,
+          102831,
+          9774,
+          1356
+        ]
+      }
+    ]
+  },
+  "known_failures": [
+    "initial type error mismatch corrected",
+    "predecessor small SymPy dual fails for one 19 atom test; disabled predecessor dual only with own exact original dual retained",
+    "paired wrapper timed out after parent trial2; both data measurements subsequently obtained separately"
+  ],
+  "DAG": {
+    "central": "28/88",
+    "extension": "0/3",
+    "auxiliary_new": "1/1_scoped_review_HOLD",
+    "workflow": "18/20",
+    "R06": "NOT_RUN_DISTINCT_AUTHOR",
+    "C09": "NOT_RUN_DISTINCT_AUTHOR"
+  },
+  "physical_activation": false,
+  "new_backend_production": false
+}
