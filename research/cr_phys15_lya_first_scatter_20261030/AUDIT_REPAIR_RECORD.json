@@ -1,0 +1,32 @@
+{
+  "Voigt_area": 0.9999999999999997,
+  "distinct_author_R06_C09": "NOT_RUN",
+  "final_referee_max_rel": 2.5675630166412804e-16,
+  "finding": {
+    "corrected_raw_line_center_first_scatter_m3": 3.3153328914571752e-31,
+    "initial_raw_line_center_first_scatter_m3": 3.3157218717534793e-31,
+    "kind": "NUMERICAL_QUADRATURE_BOUNDARY_LAYER",
+    "minimal_repair": "source-owned event-time density integrated by GL160 for q*d<=200, otherwise Laguerre64 for exponentially narrow survival layer and N_sc=N_exc-N_unsc",
+    "original_alg": "Gauss-Legendre64 directly over 0..T for q*T>200 underresolves last-scatter endpoint layer",
+    "relative_overestimate": 0.00011732767388349512,
+    "severity": "MATERIAL_FIX_BEFORE_PUBLICATION",
+    "tests": "independent scalar SciPy QUADPACK 32 source/frequency comparisons (8 first-scatter x=0 byte comparisons); Voigt area QAG and parent 27/27 exact"
+  },
+  "not_released": "first attempted GL64 results; retained only in failure record",
+  "residual_risks": [
+    "unknown electron recoil emission frequency PDF",
+    "unknown Lyalpha repeated resonant scattering redistribution",
+    "no evolving cosmological radiation/gas field",
+    "no actual electron stopping/K"
+  ],
+  "review_type": "SAME_AUTHOR",
+  "scope_findings": [
+    "x is a conditioned emitted Ly-alpha frequency; it is NOT derived from electron-H excitation recoil or emission-line PDF",
+    "First scatter on uniform static 100K gas only; multiple scattering, redistribution and escape NOT modeled",
+    "Finite 2p lifetime A=6.2649e8 modeled by a rigorous delay bound; density output prompt scattering only within declared bound",
+    "Original NIST 1s->2p BE-scaled model and Shah measurements only in their common energy support; other inelastic channels NOT included",
+    "The n=2 shell-averaged A=4.699e8 is NOT the specific 2p->1s A and must not be substituted",
+    "Absolute earliest/latest source birth policies do not establish global physical extrema"
+  ],
+  "unit": "PHYS15_PRODUCTION_VERIFICATION_AND_ONCE_HOSTILE_REVIEW"
+}
