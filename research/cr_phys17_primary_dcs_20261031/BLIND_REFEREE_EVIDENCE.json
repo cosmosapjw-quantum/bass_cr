@@ -1,0 +1,64 @@
+{
+  "distinct_C09": "NOT_RUN",
+  "distinct_R06": "NOT_RUN",
+  "findings": [
+    {
+      "id": "R6_F1",
+      "impact": "false attribution of theory as stronger 2p scattering amplitude",
+      "minimal_repair": "typed input KFB_UB2P, use CC Table7 total/figure separately without masquerading as table",
+      "object": "Kingston paper printed p613 Table5",
+      "observed": "previous handoff treated KFB near-threshold DCS as potential close-coupling original numerical input; Table5 itself explicitly unitarized Born",
+      "status": "CLOSED_SOURCE_RECLASSIFIED"
+    },
+    {
+      "id": "R6_F2",
+      "impact": "measured n2 data cannot be inserted into model as 2p angular photon source",
+      "minimal_repair": "comparison only with KFB UB 2s+2p sum; preserve physical 2p density matrix UNBOUND",
+      "object": "Williams printed p1526 Table1",
+      "observed": "measured table has n=2 combined (2s+2p) only; 2p-resolved E1 state cannot be derived",
+      "status": "CLOSED_CONFLATION_AVOIDED"
+    },
+    {
+      "id": "R6_F3",
+      "impact": "tables consistent at 1.31% when positive log-PCHIP interpolation used",
+      "minimal_repair": "source table anchor and total comparison tests passed; keep interpolation systematic unresolved",
+      "object": "KFB Table5/4 angular transcription",
+      "observed": "integrated DCS at 3 anchors differs max 0.013108 relative from Table7/6 UB totals",
+      "status": "SCOPED_NUMERICALLY_CHECKED"
+    },
+    {
+      "id": "R6_F4",
+      "impact": "UB model angular shape cannot be designated empirically unique physical 2p DCS",
+      "minimal_repair": "label explicitly as low-energy UB conditional closure; do not reweight NIST total from n2 data or fabricate covariance",
+      "object": "Williams measured DCS residual",
+      "observed": "RMS quoted-error-scaled residual 3.63,4.12,4.53 across energies 13.87,16.46,19.58 eV; 19.58 eV UB 2p-only theory exceeds measured n2 at 6 angles, 5 above pointwise 1sigma",
+      "status": "UNRESOLVED_PHYSICAL_MODEL_NOT_REVIEW_BLOCKER"
+    },
+    {
+      "id": "C9_F1",
+      "impact": "source identities not silently changed",
+      "minimal_repair": "immutable sha checks and per-atom parity tests",
+      "object": "PHYS16 source state",
+      "observed": "same-order original 2066 He-RR atoms, PHYS15 original x0 and 2p total, parent PHYS16 third closure reused exact bytes",
+      "status": "SCOPED_CHECKED"
+    },
+    {
+      "id": "R6_F5",
+      "impact": "E1 emission orientation closure not experimentally fixed",
+      "minimal_repair": "request complex 2p resolved T-matrix/experimental electron-photon coincidence data",
+      "object": "new 2p recoil photon source",
+      "observed": "KFB table supplies spin-summed DCS but no 2p m_j density matrix/angular photon correlations",
+      "status": "CURRENT_SCIENCE_OPEN"
+    },
+    {
+      "id": "R6_F6",
+      "impact": "central DAG cannot be promoted",
+      "minimal_repair": "keep 28/88 and 0/3, conditional auxiliary 1/1",
+      "object": "scientific claim/gate",
+      "observed": "No common evolving radiation/gas/clock, global He exclusive nor physical K",
+      "status": "HOLD_EXPECTED"
+    }
+  ],
+  "independence": "same_author_source_read_and_independent_in_code_checks_not_distinct_author",
+  "native_subagent": "NOT_RUN_NO_NATIVE_DISPATCH_TOOL"
+}
