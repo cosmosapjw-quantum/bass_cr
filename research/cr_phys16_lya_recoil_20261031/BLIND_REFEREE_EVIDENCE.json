@@ -1,0 +1,45 @@
+{
+  "reviewer": "SAME_AUTHOR_ADVERSARIAL_NO_NATIVE_SUBAGENT",
+  "independence_level": "IN_CODE_TESTS_AND_WOLFRAM_SYMBOLIC_NOT_DISTINCT_AUTHOR",
+  "findings": [
+    {
+      "id": "R6F1",
+      "observed_defect": "assumed symmetric out-variance under x_in sign reversal despite scattering recoil term",
+      "consequence": "incorrect test assertion / wrong physics parity",
+      "minimum_correction": "derive ΔVar=1.6 E[u|x] η_sc, test verified at x=±3",
+      "status": "CLOSED_SAME_AUTHOR_TEST"
+    },
+    {
+      "id": "R6F2",
+      "observed_defect": "treated f=0.41641 from NIST and hydrogenic oscillator f computed with parent 10.1988eV as algebraically identical to better than 0.1%",
+      "consequence": "unphysical provenance collapse and false threshold test",
+      "minimum_correction": "separate exact theoretical 3/8-Hartree f=0.41619671798, parent-model 10.1988eV f=0.41597362212, NIST f=0.41641; no new atomic source identity conflation",
+      "status": "CLOSED_SAME_AUTHOR_TEST"
+    },
+    {
+      "id": "C9F1",
+      "observed_defect": "point-sampled outgoing redistribution PDF trapezoid integrated to ~1.001 due to narrow resonance structure",
+      "consequence": "probability nonconservation if interpreted as finite-volume transition",
+      "minimum_correction": "integrate each outgoing bin with Gaussian normal CDF then perform physical-velocity quadrature; row mass now within 1.4e-12",
+      "status": "CLOSED_SAME_AUTHOR_NUMERICAL"
+    },
+    {
+      "id": "R6OPEN1",
+      "observed_defect": "Born angular closure is uncontrolled at 14.6–21 eV; no source-owned DCS",
+      "consequence": "cannot admit physical true Lyα emitter recoil PDF, only conditional model",
+      "minimum_correction": "retrieve Kingston-Fon-Burke 1976 differential 1s2p table and Williams 1976 data, compare model on matched angular grid and if needed change source owner with new provenance",
+      "status": "CURRENT_SCIENCE_BLOCKER"
+    },
+    {
+      "id": "R6OPEN2",
+      "observed_defect": "static one-scatter operator not microscopic detailed-balance corrected and no multiple scattering",
+      "consequence": "not equivalent to physical global redistribution transport",
+      "minimum_correction": "read Hummer1962 / Rybicki2006 to derive detailed-balance complete kernel and coupled transport per common evolved state",
+      "status": "CURRENT_SCIENCE_BLOCKER"
+    }
+  ],
+  "scoped_tests": "clean tempfile bash REPRODUCE.sh exit 0; Python normal 35/35 PASS and -O 35/35 PASS; 10/10 new numerical and figure files SHA256 byte-exact; parent immutable verified",
+  "R06_DISTINCT_AUTHOR": "NOT_RUN",
+  "C09_DISTINCT_AUTHOR": "NOT_RUN",
+  "NG1_NG7": "NO_STRONG_NOGO_CLAIM"
+}
