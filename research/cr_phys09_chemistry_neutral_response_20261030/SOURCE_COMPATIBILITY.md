@@ -1,0 +1,8 @@
+# Source and cross-repository compatibility, PHYS09
+
+- ORIGINAL: PR133 HEAD `7386c9e707405438f1b2f69ad13c5900a575f99e`, immutable full ZIP SHA256 `16d0b7c9e2540777ea0e360511e502303e6ea887ae0ecd658282d14d79923ae4`. Complete PHYS08 original exists in Library/Drive, despite Git PR133 partial 11/43 file posting.
+- PHYS09 uses that **binary source only**, and checks all 45 file-level SHA-256 plus original nested PHYS07 ZIP before constructing 6400 original RR source atoms. Source historical source ownership and time/energy conventions unchanged.
+- PR133 remains DRAFT/PARTIAL; 32 source/code/CSV/stage files absent in Git are not presumed published. New PR is a standalone child that embeds a **self-contained source ZIP** in external backup, and publishes fresh new code + data only in a separate path.
+- Latest `rei_bianchi` #281 BASS21→17 chemistry, `vigilode` #127 BASS21 25x193 trajectories, `bass` #271 angular K4, BASS_HE #122, rec_bianchi #168, WU088_HH #171 are distinct owners/models. No numerical cross-owner mixing, no invented common photon bath/clock/proper-time/grain.
+- Original finite e-impact He exclusive double event remains missing even if H/He photon first absorption is fully measured in the frozen-source model. Literature on He (e,3e) supplies candidate event-level observables but no native dataset integrated here. No physical K / double-event kernel has been promoted.
+- Selected future physical admission: source-owner binds a common time-evolving H/He neutral history and actual emission/bath/geometry, or supplies physical exclusive He event kernel with two-ejected-electron coincidence, double-ionization branching, partner/donor work, physical K and stopping law. Only after that is a coupled calculation warranted.
