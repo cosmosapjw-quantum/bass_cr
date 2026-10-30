@@ -1,0 +1,9 @@
+# Primary references and source licensing boundary
+
+1. Yong-Ki Kim, “Compact Fitting Formulas for Electron-Impact Cross Sections,” Journal of Research of the National Institute of Standards and Technology **97** (1992) 689–692, DOI https://doi.org/10.6028/jres.097.032. Exact Eq. (2) and H Table 1: I=13.61eV A=0.7576 B=-5.521 C=+5.867 D=2.948; A,B,C scaled 1e-16 cm², D dimensionless. Primary numerical authority for PHYS12 model, NOT a measured-point dataset.
+2. M. B. Shah, D. S. Elliott, H. B. Gilbody, “Pulsed crossed-beam study of the ionisation of atomic hydrogen by electron impact,” Journal of Physics B: Atomic and Molecular Physics **20** (1987) 3501–3514, DOI https://doi.org/10.1088/0022-3700/20/14/022. Original measured e-impact H ionization, incident energies 14.6–4000 eV; raw pointwise table NOT fetched or claimed.
+3. J. G. Childers et al., “Electron-impact ionization of atomic hydrogen at incident electron energies of 15.6, 17.6, 25, and 40 eV,” Physical Review A **68** (2003), 030702(R), DOI https://doi.org/10.1103/PhysRevA.68.030702. Absolute doubly differential experimental measurements, not silently integrated into total rate.
+4. I. Bray, A. W. Bray, D. V. Fursa, A. S. Kadyrov, “Near-Threshold Cross Sections for Electron and Positron Impact Ionization of Atomic Hydrogen,” Physical Review Letters **121** (2018), 203401, DOI https://doi.org/10.1103/PhysRevLett.121.203401. Near-threshold model and Wannier exponent; not numerically used in PHYS12.
+5. NIST Electron-Impact Cross Sections for Ionization and Excitation, SRD107, DOI https://doi.org/10.18434/T4KK5C (BEB model). An alternative independent model for sensitivity, not a raw measured dataset nor full physical transport owner.
+
+No source paper fulltext is redistributed in the package; only citation, published fitting coefficients and generated numeric results.
