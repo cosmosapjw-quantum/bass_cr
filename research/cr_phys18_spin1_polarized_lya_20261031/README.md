@@ -1,0 +1,7 @@
+# CR PHYS18 | actual source-owned 2p angular recoil / E1 Stokes source
+
+Conditioned on one common electron-incident axis k_e=z. 2,066 original He-RR→H absorption→first e-H(1s→2p) source event weights remain exactly PHYS17 (NIST BE-scaled total, Shah EII competition). The 1976 Kingston unitarized-Born pure-2p DCS angular shape is used only as a conditional orientation model, and the **new** 2p spin-1 density-matrix PSD family rho_xi=(1-xi)I/3+xi qhat qhat^T is NEVER claimed to be experimentally extracted. Produces Stokes I/Q directional source and frequency spectra, U=V=0 in this reflection-symmetric family. Original experimental λ,R,I at 16.5eV (Williams 1998 DOI 10.1071/P98023) newly identified but FIG6/7 values NOT numerically ingested. Isotropic electron-axis orientation averages polarization to zero.
+
+Restoring the complete archive requires Python numpy scipy matplotlib pandas and the exact nested source `sources/PR142_PHYS17_SOURCE.zip`. Run `bash REPRODUCE.sh` on extraction; full source/source event identity, 38 normal tests, 38 `-O` tests and 8 output/figure hashes are checked. A `NO_MERGE`, `NO_FORCE_PUSH`, `AUTO_NEXT_NODE=false` science HOLD is maintained. 28/88 canonical, 0/3 extension, both Δ0. Auxiliary 1/1 CONDITIONAL_REVIEW_HOLD.
+
+New data: 2066 source moment rows, 104 angular Stokes rows and 1458 frequency Stokes rows = 3628. Four distinct scientific figures, exact PHYS17 parent ZIP byte checksum. The original user-provided copyrighted 1976 source PDFs are not included in this public derived artifact.

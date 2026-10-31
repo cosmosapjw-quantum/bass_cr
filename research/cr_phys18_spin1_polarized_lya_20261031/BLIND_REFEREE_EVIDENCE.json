@@ -1,0 +1,13 @@
+{
+  "scope":"SAME_AUTHOR_ADVERSARIAL_ONE_PASS_NOT_DISTINCT_AUTHOR",
+  "findings":[
+    {"id":"R6_S1","object":"source-owned 2p rho","defect":"KFB spin-summed 2p DCS does not determine arbitrary magnetic-sublevel coherences, and Williams 1998 16.5eV Fig7 was only discovered not numerically ingested","impact":"do not claim measured unique Lyalpha polarization","resolution":"explicit PSD rho_xi family and typed source status","status":"SCOPED_MODEL_ONLY"},
+    {"id":"R6_S2","object":"incident electron axis","defect":"parent RR photon/electron source has energies and weights but no shared laboratory electron direction distribution","impact":"global astrophysical Q/U/V not licensed","resolution":"fixed incident-z observer model, isotropic-axis averaging yields Q/U/V=0","status":"SCOPED_MODEL_ONLY"},
+    {"id":"R6_S3","object":"natural Voigt tails and photon-centre moments","defect":"would be false to claim finite full spectral variance","impact":"avoid treating pre-natural-line moments as Voigt spectral variance","resolution":"report centre mean/variance only before Lorentz convolution","status":"REPAIRED_CLAIM"},
+    {"id":"C9_S1","object":"plot_phys18.py","defect":"Python nonraw LaTeX string \\xi parsed as invalid unicode escape","impact":"plot generation syntax error, no physics data alteration","resolution":"raw-string title; rerun plots","status":"REPAIRED_CODE"},
+    {"id":"C9_S2","object":"frequency quadrature","defect":"azimuth discretization could violate spectral Stokes cone or photon normalization","impact":"false polarization in frequency bins","resolution":"Q<=I per bin, 16-vs-32 azimuth convergence at 16.5eV, finite x12 mass >0.9995","status":"NUMERICALLY_CHECKED"}
+  ],
+  "independence":"same author; separate algebra plus numeric tests; no native distinct-author review",
+  "native_subagent":"NOT_RUN_NO_DISPATCH_TOOL",
+  "R06_distinct_author":"NOT_RUN","C09_distinct_author":"NOT_RUN"
+}

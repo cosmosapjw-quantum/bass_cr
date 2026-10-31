@@ -1,0 +1,42 @@
+# BASS_CR PHYS18 | 다음 스레드 인계
+
+```text
+PROJECT=cosmosapjw-quantum/bass_cr
+PARENT_PR=142
+IMMUTABLE_PARENT_HEAD=b64d3a0e1895e004e89ea3ffc92ceb6aadd5c55c
+PARENT_FULL_SOURCE_SHA256=5fc70cfa638f6b6fffbc61f05f46d28a9be1eefef43851a75bb175383d87666d
+UNIT=CR_PHYS18_SPIN1_PSD_SOURCE_DIRECTIONAL_LYA_STOKES
+ORIGINAL_RR_PHOTON_ATOMS=6400
+QUALIFIED_2P_EVENTS=2066
+NEW_SOURCE_MOMENT_ROWS=2066
+NEW_DIRECTIONAL_STOKES_ROWS=104
+NEW_FREQUENCY_STOKES_ROWS=1458
+NEW_TOTAL_SCIENCE_CSV_ROWS=3628
+PHYSICAL_ALIGNMENT=UNBOUND
+MODEL_ALIGNMENT=PSD_3x3_XI_RANGE_MINUS_HALF_TO_ONE
+ELECTRON_INCIDENT_AXIS=FIXED_Z_CONDITIONAL_NOT_SOURCE_OWNED
+KFB1976=PURE_2P_UNITARIZED_BORN_DCS_MODEL
+WILLIAMS1998_16P5EV=MEASURED_2P_DCS_AND_LAMBDA_R_I_FIGURES_AVAILABLE_NOT_NUMERICALLY_INGESTED
+BRAY1991=COMPUTED_LAMBDA_R_I_AT_13P87_16P46_19P58EV_NOT_INGESTED
+CENTRAL_DAG=28/88_DELTA0
+EXTENSION_DAG=0/3_DELTA0
+PHYS18_AUXILIARY=1/1_CONDITIONAL_REVIEW_HOLD
+R06_DISTINCT_AUTHOR=NOT_RUN
+C09_DISTINCT_AUTHOR=NOT_RUN
+NATIVE_SUBAGENT=NOT_RUN
+PHYSICAL_K=UNBOUND
+GLOBAL_HE_EXCLUSIVE=UNBOUND
+FULL_RII_DETAILED_BALANCE=UNBOUND
+COMMON_EVOLVING_GAS_RADIATION_CLOCK_GEOMETRY=UNBOUND
+PRODUCTION=HOLD
+NATIVE25=HOLD
+L4=HOLD
+NO_MERGE=true
+NO_FORCE_PUSH=true
+AUTO_NEXT_NODE=false
+NEXT_CANDIDATE_ONLY=WILLIAMS1998_MEASURED_16P5EV_2P_DCS_AND_LAMBDA_R_I_FIGURE_DIGITIZATION_WITH_ERROR_BUDGET_AND_THEORY_CROSSWALK
+```
+
+이번 계승은 실제 원본 2,066개 event의 proper-time excitation number density를 보존하고 fixed-axis beam model에 대해서만 directional density matrix와 emission Stokes Q/I, pre-Voigt recoil center shift를 생성한다. **직접 16.5eV 실험 수치 array는 이번 루프에 포함되지 않았다.** 원전 접근 https://www.publish.csiro.au/ph/pdf/p98023 (Fig 6/7); DOI 10.1071/P98023. 보다 강한 2p alignment 주장을 하려면 Fig7 측정된 λ,R,I 각도별 values+errors 또는 저자 원자료, 그리고 실제 electron-axis distribution이 필요하다. 1991 Bray/Konovalov/McCarthy DOI 10.1103/PhysRevA.44.5586은 계산 λ,R,I, 1994 Wang/Callaway/Unnikrishnan DOI 10.1103/PhysRevA.49.1854는 16/20eV close-coupling alternative. 이들이 정확히 어떤 T-matrix/ρ를 제공하는지 원전에서 검증 전에는 source owner 전환 금지.
+
+입력 검증: ROOT의 immutable `sources/PR142_PHYS17_SOURCE.zip` byte exact; 전사 각도 2p vs measured inclusive n2를 다시 혼동하지 말 것. `bash REPRODUCE.sh`로 전체 처음부터 2,066개 source angular/frequency Stokes를 새 디렉터리에서 생성하고 38 normal + 38 optimized 및 8 output checks, manifest 검증. 진입 SHA는 현재 PR/체크포인트에 새로 기록될 예정이며 이 문서 작성 시에는 새 PR identity를 예상으로 채우지 않았다.
