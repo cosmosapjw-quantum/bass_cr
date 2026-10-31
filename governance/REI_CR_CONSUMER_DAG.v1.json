@@ -1,0 +1,161 @@
+{
+  "schema": "bass_cr_rei_consumer_dag_v1",
+  "date": "2026-11-01",
+  "status": "PROPOSED_READ_ONLY_PROJECTION_NOT_REI_DAG_MUTATION",
+  "authority": {
+    "owner": "cosmosapjw-quantum/rei_bianchi",
+    "goal": "source-backed FLRW/Bianchi-I IGM H/He thermochemistry and photon history -> BASS tau/visibility",
+    "plan": "REI_ATOMIC_REUSE_PLAN_20261012.md PROPOSED_NOT_EXECUTED",
+    "central": "28/88",
+    "working": "33/88",
+    "extension": "0/3",
+    "canonical_delta": 0,
+    "receipt": null,
+    "working_is_not_additive": true
+  },
+  "owners": {
+    "reionization": "rei_bianchi",
+    "primordial_recombination": "rec_bianchi",
+    "background_photon_tau": "bass",
+    "atomic_He": "BASS_HE",
+    "optional_CR": "bass_cr"
+  },
+  "baseline": {
+    "CR": "OFF",
+    "production": "HOLD",
+    "auto_next": false,
+    "no_merge": true,
+    "no_force_push": true,
+    "source_blob": "d7034188ca5a02dc37db24aaf8f7d550624567bd",
+    "PHYS25_PR": 151,
+    "PHYS25_HEAD": "0ac0ec433b01697c7e3787d0ddfa1565fab6cc15",
+    "PHYS25_claim": "SOURCE_CONDITIONAL_AUXILIARY_REVIEW_HOLD"
+  },
+  "external": [
+    "REI:RUX02",
+    "REI:RUX03",
+    "REI:RUX04",
+    "REI:RUX05",
+    "REI:RUX07",
+    "REI:RUX09",
+    "REI:RUX10",
+    "REI:RUX11",
+    "REI:RUX13"
+  ],
+  "nodes": [
+    {
+      "id": "BCR-00",
+      "title": "source/owner/domain map",
+      "deps": [],
+      "requires": [],
+      "status": "PROPOSED",
+      "optional": true,
+      "output": "source owner identity and CR consumer mapping"
+    },
+    {
+      "id": "BCR-01",
+      "title": "physically supported CR adapter",
+      "deps": [
+        "BCR-00"
+      ],
+      "requires": [
+        "REI:RUX02",
+        "REI:RUX03",
+        "REI:RUX04"
+      ],
+      "status": "PENDING_SOURCE",
+      "optional": true,
+      "output": "rate/energy/charge/clock and original source provenance"
+    },
+    {
+      "id": "BCR-02",
+      "title": "CR-OFF source-backed REI reference",
+      "deps": [],
+      "requires": [
+        "REI:RUX05",
+        "REI:RUX07"
+      ],
+      "status": "PENDING_REI_INTERVAL",
+      "optional": true,
+      "output": "unmodified CR-OFF REI reference; no CR adapter dependency"
+    },
+    {
+      "id": "BCR-03",
+      "title": "CR materiality vs observable uncertainty",
+      "deps": [
+        "BCR-01",
+        "BCR-02"
+      ],
+      "requires": [
+        "REI:RUX09",
+        "REI:RUX10",
+        "REI:RUX11"
+      ],
+      "status": "PENDING_REI_OBSERVABLE",
+      "optional": true,
+      "output": "bounded effect on x_HI,x_HeII,T_g,photon inventory,tau"
+    },
+    {
+      "id": "BCR-04",
+      "title": "if material, matched CR-ON/OFF physical interval",
+      "deps": [
+        "BCR-03"
+      ],
+      "requires": [
+        "REI:RUX13"
+      ],
+      "status": "CONDITIONAL_NOT_SCHEDULED",
+      "optional": true,
+      "output": "same-source paired physical state and energy history"
+    },
+    {
+      "id": "BCR-05",
+      "title": "REI scientific import decision",
+      "deps": [
+        "BCR-04"
+      ],
+      "requires": [
+        "REI:RUX13"
+      ],
+      "status": "CONDITIONAL_NOT_SCHEDULED",
+      "optional": true,
+      "output": "REI-owned physical claim and import decision"
+    }
+  ],
+  "routing": {
+    "primary": [
+      "REI:RUX02",
+      "REI:RUX03",
+      "REI:RUX04",
+      "REI:RUX05",
+      "REI:RUX07",
+      "REI:RUX09",
+      "REI:RUX10",
+      "REI:RUX11"
+    ],
+    "CR_after": "REI:RUX11",
+    "next": "physical-input and source owner admission RUX02/RUX03",
+    "optional_throttle": "two consecutive optional-only zero-REI-impact autonomous units -> next autonomous work must return to physical critical path or stop on exact blocker; explicit user-selected exploratory tasks permitted",
+    "not_new_science_gate": true
+  },
+  "facts": {
+    "PR_range": "127-151",
+    "PRs_checked": 25,
+    "all_report_central": "28/88",
+    "PRs_draft_open": 25,
+    "PHYS23_duplicate_evidence_PRs": [
+      148,
+      149
+    ]
+  },
+  "report_fields": [
+    "source_owner",
+    "source_identity",
+    "REI_node_closed_or_NONE",
+    "observable_effect_or_NOT_COMPUTED",
+    "central_and_extension_counts",
+    "tests_executed",
+    "backup_status",
+    "next_action"
+  ]
+}
