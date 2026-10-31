@@ -1,0 +1,68 @@
+{
+  "actual_commands": [
+    {
+      "command": "python phys24.py",
+      "exit_code": 0,
+      "result_file": "results/RESULT.json",
+      "row_count": 387823,
+      "status": "PASS"
+    },
+    {
+      "command": "python -m unittest test_phys24.py -q",
+      "exit_code": 0,
+      "raw_log": "TEST_NORMAL.log",
+      "status": "PASS",
+      "tests": "18/18"
+    },
+    {
+      "command": "python -O -m unittest test_phys24.py -q",
+      "exit_code": 0,
+      "raw_log": "TEST_OPT.log",
+      "status": "PASS",
+      "tests": "18/18"
+    },
+    {
+      "command": "python plot_science.py",
+      "exit_code": 0,
+      "figures": "4 PNG",
+      "status": "PASS"
+    },
+    {
+      "cases": "3 background x 3 emission times x 6 angles x 4 frequency offsets",
+      "command": "python - <<PY ... compare optical_depth nq=20 versus nq=64 ... PY",
+      "exit_code": 0,
+      "max_scaled_tau_discrepancy_upper_bound": 3.5e-11,
+      "status": "PASS"
+    }
+  ],
+  "central_DAG": "28/88_DELTA0",
+  "date": "2026-10-31 Asia/Seoul",
+  "distinct_author_C09": "NOT_RUN",
+  "distinct_author_R06": "NOT_RUN",
+  "extension_DAG": "0/3_DELTA0",
+  "initial_test_problems": [
+    {
+      "kind": "unit_test_float_roundoff",
+      "observed": "vector norm residual 8.88e-16, threshold 5e-16",
+      "resolution": "test threshold 2e-15 preserving independent momentum test",
+      "science_code_changed": false
+    },
+    {
+      "kind": "numerical_test_quadrature_coordinates",
+      "observed": "direct x integration missed Voigt center displaced ~4666 units for r=.98",
+      "resolution": "integrate in source-centered variable y with exact observer x(y) Jacobian",
+      "science_code_changed": false
+    }
+  ],
+  "max_Einstein_Hamiltonian_rel": 7.274786906705678e-16,
+  "max_output_gram_error": 1.9984014443252818e-15,
+  "max_output_relative_photon_count_error": 3.552713678800501e-15,
+  "native_CI": "NOT_VERIFIED no statuses for PR149 head; PHYS24 has no CI run",
+  "native_subagent": "NOT_RUN no native delegate host tool",
+  "negative_source_byte_drift_test": "PASS source() raises ValueError SOURCE_BYTE_IDENTITY_FAILURE",
+  "numpy": "2.3.5",
+  "production": "HOLD",
+  "python": "3.13.5",
+  "scipy": "1.17.0",
+  "source_compatible_metric": "NOT_PROVEN_EXACT_BIANCHI_DUST_IS_CONDITIONAL"
+}
