@@ -1,0 +1,21 @@
+# PHYS21 | Bray 1991 original 35/40 eV 2p source-owned full-energy collision-plane calculation
+
+Immutable predecessor PR #145 HEAD `ba83d91f241cf80fe6234f30ee0b19379bf05480`; original 2066 He-origin first H(1s->2p) events from PR #143 SHA1 Git blob `d7034188ca5a02dc37db24aaf8f7d550624567bd`. Original earliest/latest event totals 3.3158906934521573e-31 and 9.85567761064524e-32 m^-3 are unchanged. NO_MERGE / NO_FORCE_PUSH / AUTO_NEXT_NODE=false.
+
+**New primary-source science**: 48 original paper printed 35eV/40eV x 24-angle H(1s->2p) 6CCO DCS, lambda, R, Icorr from Bray, Konovalov & McCarthy (1991), Phys Rev A 44 5586 Tables III (p5591), IV/V (p5593), VI (p5595), DOI 10.1103/PhysRevA.44.5586. Reuse parent PHYS20 72 states at 13.87,16.46,19.58eV, forming 120 theory angular states. Original 1998 Williams 16.5eV FIG6/7 experimentally measured 29 approximately digitized points remain observational cross-check and are not overwritten. Wang, Callaway, Unnikrishnan (1994) PRA49 1854 is independent 17-state theoretical comparison, not numeric 35eV anchor. Curtin CCC database https://atom.curtin.edu.au/CCC-WWW/index.html is primary distributor for independent integrated e-H CCC data, **not** polarimetric DCS; IAEA CollisionDB D109688 B61 DOI provenance mismatch should not be treated as primary polarimetric source.
+
+**Theoretical interpolation**: for E between printed anchors, log DCS interpolated linearly in E; 2x2 reduced coherency B(E) linearly in E (PSD convex). Within each electron scattering angle interval, PCHIP(log DCS(theta)) and linear B(theta) preserve positive DCS and PSD. Integrate bins using composite Simpson with theta step0.25deg and native 24-bin boundaries halfway between 24 printed angles. Exact nonrel recoil kinematics from original PHYS16 yields quadrupole. This is a CONDITIONAL observer normal to each collision plane, not a global sky Stokes signal.
+
+**Actual research products published on this branch**:
+- 48 original 35/40eV printed numerical rows.
+- 2066 original event-specific HIGH_ORDER recoil A2 and reduced local P1/P2/P3 at two upper 6CCO anchors, 2×1033 CSV.
+- 456 former-out-of-domain events now BRACKETED by published 19.58 and 35eV, 456x24=10944 HIGH_ORDER electron-angle-bin physical rows, split 6×1824 CSV.
+- earliest/latest × 35/40eV upper choice × 24 electron bins = 96 source-weighted LOCAL Stokes rows.
+- 2066×24×2=99168 actual electron-angle / upper-anchor evaluations, all 2066 source event IDs/weights preserved.
+- An initial 24-node linear-in-mu integration was found to overestimate 35/40eV original total DCS by +5.62/+6.92%; the initial CSVs remain as historical SUPERSEDED. The current-use results are ONLY files containing HIGH_ORDER. PCHIP+Simpson corrected σ/(πa0²)35=.695919856 vs paper .697 (−.155%), 40=.711938230 vs .716 (−.567%).
+- Independent GitHub readback checked 2066 unique source IDs, 456×24 tail bins, 96 atlas rows, max tail bin mass residual 8.88e-16, zero PSD or cone failures. Earlier source weighted A2 KFB earliest=.662630296, latest=.662336543; new 6CCO earliest=.654801038, latest=.654502712. Max exact nonrel recoil energy residual 6.71e-16.
+- Locally generated science package: 30/30 normal Python tests and 30/30 python -O, full reproduce script EXIT0; GitHub-native CI for GitHub-specific reproduction script NOT_RUN; no true distinct-author R06/C09, native subagent NOT_RUN.
+- 19.58-to-35 vs19.58-to40 anchor model difference max local source A2 0.00091950085, P component max0.00406129, at E20.99 DCS original-node comparison max1.35%; these are model variations, NOT statistical uncertainty.
+- Canonical central DAG28/88 Δ0, extension0/3 Δ0; PHYS21 scoped auxiliary 1/1 CONSTRUCTED REVIEW HOLD; production/native25/L4 HOLD; no global electron incidence direction owner, full 2p fine-structure rho, physical K, detailed balance RII, He exclusive or global Bianchi Lyα closure.
+
+**Execution from repository checkout**: `python research/cr_phys21_full_energy_20261031/reproduce_phys21_from_git.py --out /tmp/phys21_replay`. Source-owner invariant guards Git blob SHA1, He event count/rates and 120 original printed theory states. Local standalone analytical ZIP also has 30+30 unit tests, science figures, reports; raw copyrighted PDFs not republished.
