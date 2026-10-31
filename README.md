@@ -1,3 +1,5 @@
+> **REI Bianchi IGM research routing (2026-11-01):** BASS-CR's CR research is **optional** downstream physics, not the source-backed EoR project's canonical path. The [process audit](docs/REI_IGM_PROCESS_META_AUDIT_20261101.md), [development policy](docs/REI_ALIGNED_DEVELOPMENT_POLICY.md) and [read-only consumer DAG](governance/REI_CR_CONSUMER_DAG.v1.json) define CR-OFF priority and prohibit counting conditional PRs toward REI's 28/88. The original independent p+H R3M10 project and claim policy below remain unchanged.
+
 # BASS cosmic-ray charge exchange
 
 출판된 H⁺ + H(1s) → H(bound) + H⁺ 문제의 독립적인 paper-based 구현과 결과 감사입니다. Nichols 비공개 코드 또는 raw data의 재현을 주장하지 않습니다.
