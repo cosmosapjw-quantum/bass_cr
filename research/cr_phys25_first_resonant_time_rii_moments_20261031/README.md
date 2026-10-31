@@ -1,0 +1,14 @@
+# CR PHYS25 | first HI resonance time distribution + Hummer-II scalar moments
+**Research provenance:** `cosmosapjw-quantum/bass_cr`. Immutable immediate parent PR #150 HEAD `c7c8b5fe498fca8a998f1619bc4f27d534f63060`. Original 2066-event source Git blob `d7034188ca5a02dc37db24aaf8f7d550624567bd`.
+
+New source-conditional numerical physics: 5,832 first-event geodesic/time rows, 17,496 thermal absorber/recoil moment rows, 116,640 pre-scatter source-weighted Stokes rows, 14,580 source/time/frequency first-event atlas rows, 16 inherited PHYS15 interval crosswalks. Total **154,564 mixed-grain rows** plus four scientific PNG figures. Runs on conditional exact Einstein-dust Bianchi I; original CR source-compatible Einstein IVP and event-correlated angle/time remain UNBOUND.
+
+**Full evidence ZIP:** `BASS_CR_PHYS25_FIRST_RESONANT_RII_MOMENTS_20261031_FULL.zip`, 5,759,964 bytes, SHA-256 `5d51ae1e9c0def6707e11307c370e1b7d57635272abd7273da0e78121c09d22d`. Git stores exact ZIP binary in 12 immutable file parts of 480,000 bytes (last 479,964), each checked against independently computed Git blob SHA-1. Restore using `python RESTORE_PHYS25_GIT_ZIP.py --output /tmp/PHYS25_FULL.zip`. The script checks every part, full ZIP size/hash, every member SHA-256/size and ZIP CRC. Unzip then `bash REPRODUCE.sh` from package.
+
+Independent **external provider** Google Drive copy: https://drive.google.com/file/d/1knH-bttx5axm3qxbwnj62vFKxx6WDBn0/view . Source PHYS15 ZIP `48cda47e966bb0e9309753d4cbb089977218d6f1a364f67a8331fec0f19ba316`, PHYS23 ZIP `22d97f477199e71e2250b83ceb8fb10914457c343125456d981c0f9f34024111`, PHYS24 ZIP `906556e9c4f1e2f926736a26175e8a5689a1cdf91071957fd10d8a9ac2c13f9f`.
+
+**Tests:** Python 18/18 normal + 18/18 -O, parent PHYS24 parity 14,580/14,580, clean replay six CSV/JSON and four figures 10/10 byte-exact. Numerical hazard GL48/GL64 absolute max difference `9.025724612143904e-12`, metric integral parity `8.19612800380818e-14`, first event vs parent `9.62093012965362e-12` relative to incident Stokes.
+
+**Do not overclaim:** the Hummer-II longitudinal absorber velocity law and first moments do not constitute a complete angle-frequency polarized RII redistribution matrix with detailed balance. Stokes at first event are **incoming** Stokes; no post-scatter polarization or distant re-observation. R06/C09 distinct-author NOT_RUN; native subagent NOT_RUN; GitHub CI NOT_VERIFIED. Production / Native25 / L4 HOLD. Central DAG **28/88 +0**; extension **0/3 +0**; scoped PHYS25 auxiliary 1/1 CONSTRUCTED_SOURCE_CONDITIONAL_REVIEW_HOLD. No merge; no force push; no auto-next.
+
+Full R01-R10/C01-C10 evidence JSON records are included in the ZIP as one executed scientific research unit; stage checkpoint notes do not imply independent runs. See `HANDOFF_NEXT_THREAD_KO.md` and `BLIND_REFEREE_SAME_AUTHOR.md` inside the archive.
