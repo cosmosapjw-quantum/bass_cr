@@ -46,3 +46,5 @@ DAG stage R1-R10 end **REI CENTRAL 28/88 REPORTED, REI working 33/88, CR EXTENSI
 
 ### Final live central dependency snapshot
 At final cross-repo GitHub readback, REI original F05 theory Draft PR #355 HEAD `98a940ed7d506a55e3089a4de50d024e8d251e5e` was published on immutable PR354 HEAD `6574db945a1b96fa5e0b55923e36781b5db0b03b`. The reported PR355 scope is four ionizing photon groups, three shared H/He absorber moments, and a conditional continuum Volterra remainder; the observed published progress is **R1 theory checkpoint, R2–R10 pending**, not a new accepted full coupled F05 step. REI original tick160/131072 remains the accepted last tick. This optional BASS-CR material-line science must not be used to change REI source admission or to assume a Lyα photon radiation owner.
+
+Further REI live readback: PR355 progressed to R9 original four-group/three-shared-moment continuous residual computation, commit 1a9ce263d73c32d884689d174ac7c5e860e74c97. This does not change F05 tick161 acceptance or BASS-CR physics; re-query REI live before using a latest status claim.
