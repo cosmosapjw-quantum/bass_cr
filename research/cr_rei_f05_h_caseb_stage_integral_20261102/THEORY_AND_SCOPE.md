@@ -1,0 +1,37 @@
+# REI F05 accepted original H Case-B recombination, causal SDIRK source integral (R1–R10)
+
+2026-11-02 KST. BASS-CR only, immutable parent PR #164 HEAD `264ad0c1fd62f7ec799af14f273d9902a24ca6aa`. REI project-owner and source, old V1 gate, three accepted original states, other PRs, production and CR-OFF untouched. Central REI 28/88, working 33/88, Fast 4/7, BASS-CR optional extension 0/3, all Δ0. No new canonical DAG admission.
+
+## R1–R3: Exact new question and provenance
+
+Previous BASS-CR #160 produced original tick160 instantaneous H Case-B event rates, #164 a *conditional endpoint-based minimum* over accepted ticks 0,64,128,160. Their rate is not the actual time integral over the previously accepted interval. Original REI #367 now evaluates four accepted-epoch thermochemical RHSs; these endpoint rates alone cannot be substituted into a certified integral (a published trapezoid mismatch was identified). BASS_HE #151 separately computed the *He II* 40.81332-eV OTS source escape by native two-half SDIRK2 stages. REC #196 evaluated two intervals of original OTS stages but did not publish an integrated H Case-B reaction count. This unit directly executes the original **H II→H I** recombination flux of the 26-event MPRK22(1)+Alexander SDIRK2 original source on the full three HISTORICALLY ACCEPTED 46,080-cell intervals and constructs a source-native, numerical **time-quadrature reaction count**. It is not an added cooling fit, stochastic photon table or reionization state.
+
+Sources: source-owner REI #355 immutable HEAD `70bb906fcfd6b7c5b0f4c356f44c03ad7164ff00`; original 26-event kernel SHA256 `579df3cc99987dcce9205166752570bdaf4c7cb3640c525be6da260d94b8e644`, source TAR SHA256 `a861278201313c55e08ba6323b5c1d2ad97bf5765f429807b4eba0a1c2465d0b`; REC #195 original accepted source ZIP SHA256 `ed08c131cb61b8cb5c5a52a8dadeb4fc7350945eefc5c2e1c1bf12c1a2052657` preserves original PRIMARY REIADP1 state bytes at ticks 64 `aae4607ec1f0eff6669f1c1cb716ec6d6a4af8b789bba14abcd17f1733f83425`,128 `bbb349102194c86fb39a720a6695d9cb5845782b154da3448a433959fcc7f6a6`,160 `74c7cbb784c3a6fe25e53307f678ef23ab87263f56b314fbaa3ef696433d05f6`. All remain PRIVATE. Original proper time microtick 4.87184874916828e9 s, actual source first interval parameter and forcing unchanged.
+
+Source-owned `event.flux[:,dest,source]` is extensive cell reaction rate, s^-1, with original conservation convention, not a probability or photon energy. Original source `event_uncertainty_operator.py` uses `_add(flux,0,1,r_hb)` with `r_hb=N_HII n_e α_B,H(T)≥0`. Likewise `event.flux[:,1,0]` aggregates **positive H ionization**, including He-mediated OTS ionizations. Preserve original 14 photon/nuclear/energy ledgers and original `[full,half1,half2]` three-map certification and original local-error <2e-4 / width <2e-3 acceptance for the *historically accepted intervals*.
+
+## R4–R5: actual time-quadrature source count and constructive discriminator
+
+Let `g=1-1/sqrt(2)`. In a native original source step over proper duration `h`, with actual SDIRK two source events `F_{stage}` and `F_{final}`, define for each original cell
+`Q_h[F] = h[(1-g)F_stage + g F_final]`.
+Do not replace native stage events by original accepted endpoint rates. The original accepted map is the **two-half path**, so
+`Q_{[a,b]}[R] = Q_{[a,m]}[F_{0,1}] + Q_{[m,b]}[F_{0,1}]`,
+`Q_{[a,b]}[I] = Q_{[a,m]}[F_{1,0}] + Q_{[m,b]}[F_{1,0}]`,
+where m=(a+b)/2 is the original two-half time, not an invented accepted tick. R≥0 and I≥0, Q are nonnegative source reaction **numbers** (not count/s), and each numerical enclosure preserves native source interval uncertainties.
+
+For the original historical accepted endpoint state `N_HII(b)-N_HII(a)`, compare `ΔN_HII` with Q[I]-Q[R]. Such a stage quadrature should be recorded as a **diagnostic**, not treated as an exact PDS implicit-map identity without verification: the source's MPRK flux may be weighted differently by positivity-conserving update. The interval boxes are original discrete enclosures, not rigorous continuous IVP enclosures. A separately computed PR #164 conditional lower bound is `Rmin_j=max(0,L_HII,a-U_HII,b)`. Check whether `Q[R]` numerically encloses Rmin. If it does not, record the specific signed residual and do not claim source-equivalent time-integrated physical reaction count.
+
+Gross recombination chemical binding-release surrogate `E_rec=χ_H Q[R]` with `χ_H=13.598434599702 eV`, `1 eV=1.602176634e-12 erg`; this is a **gross reaction-channel chemical-energy count**, not observed escaping Lyα, not net ΔB, and not an additive heat source. Actual intrinsic H Lyα production depends on Case-B cascade branching, 2s two-photon channel, electron collisional redistribution and time-dependent level population and escape. Original source does not define H 2p anisotropic emissivity. No H photon count from this unit.
+
+## R6–R9: hostile referee and minimum validation
+
+- Case B H recombination flux is the *single* original PDS HII→HI entry `flux[:,0,1]`. Verify the original code identity and no other HII→HI channels; independent check via actual source temperature, HII, electron density, volume and recombination coefficient, not a hardcoded synthetic two-level system. Hummer & Storey 1987 (doi:10.1093/mnras/224.3.801) and Storey & Hummer 1995 (doi:10.1093/mnras/272.1.41) emphasize density/temperature/escape-dependent validity of Case B. Do not claim all H recombinations yield Lyα.
+- Positive source interval enclosures are not a statistical confidence interval. No global continuous-time integration error unless independently controlled; full-step vs two-half difference is a **diagnostic**, not a certified error bound.
+- Endpoint-only H minimum from PR164 and actual source stage flux quadrature are **different objects**. Test sign and compare to accepted parent original HII endpoints. If Q[R] does not dominate the conditional endpoint lower due to discretization/closure, preserve that physical/numerical discrepancy rather than claiming false agreement.
+- Never mix He II Lyα energy source BASS_HE #151 with H Case B: photons, wavelength, proper rate and escape are distinct. Never replace original OTS unresolved energy or pre-existing H excitation cooling.
+- Source TAR and all three REC195 original private REIADP1 state bytes SHA checked; original native stage three-map and 14-ledger audit on each interval; no new original REI tick161 acceptance.
+- Output source-free three-interval numeric summary and optional small source-derived physical witness, no source-private 46,080 raw stage arrays published. Backup before/after expensive original run and create *one* Draft PR only if tests/physics pass.
+
+## R10: handoff boundary
+
+This theory checkpoint expresses a constructive source-owned target; preliminary exact values remain pending actual native stage computation. Preserve all previous original scientific results. If stage flux cannot be sourced or physical countercheck fails, record BLOCKED with evidence and checkpoint without fabricating data. If source equal and diagnostics pass, release scoped result `NUMERICALLY_CHECKED_NATIVE_DISCRETE_SOURCE_QUADRATURE`, central 28/88, working 33/88, Fast 4/7, BASS-CR 0/3, all Δ0, production HOLD, CR-OFF. Next central track is separately developing the original REI versioned V2 worker to officially accept [160,161] and causal RUX02/RUX03 Bianchi photon transport; this BASS-CR unit is supplier-only. No automatic next optional atlas.
